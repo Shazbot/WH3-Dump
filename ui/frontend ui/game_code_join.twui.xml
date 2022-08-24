@@ -1,0 +1,833 @@
+<?xml version="1.0"?>
+<layout
+	version="137"
+	comment=""
+	precache_condition="">
+	<hierarchy>
+		<root this="6A40EB1A-7CFF-42C1-A0AD7F13B866D485">
+			<game_code_join this="E9D071A6-075B-0BD8-1ACE8A0126A46102">
+				<main_panel this="21FF7F1B-0391-08B4-64CB39EDF18A650F">
+					<label_tx this="C3AFB154-18FE-4BB7-BF88A6AB4CD5CEC2"/>
+					<label_description this="B57BE405-14CD-4108-923C334A793EEA5C"/>
+					<text_input_game_code this="CE704A47-B213-4628-839CCCD1A215CE07">
+						<highlight this="CCB9B817-0636-0C44-39BA093D91DBC40F"/>
+					</text_input_game_code>
+					<list this="3E6A16CE-B16E-4487-B3A94C83231D35C0">
+						<button_ok this="8859244A-243D-43A5-9473AAF6BAD635CF"/>
+						<button_cancel this="C9CB1659-1318-4B45-9086AC73FA46B2A1"/>
+					</list>
+					<button_paste_code this="D9404982-AEC3-4712-A52FDAA17DBC089C">
+						<button_flame this="2C774C29-D73A-4BCE-ABB8FD16B45A1E1A"/>
+						<button_txt this="CFED3B3F-1244-4387-AA828B82CD9EBE96"/>
+					</button_paste_code>
+				</main_panel>
+				<popup_joining this="6EC0AAD1-1FFE-46DA-8130FB0F396F21E1">
+					<tx_waiting this="13873F0B-4794-4C94-85A3F38BD49175B4"/>
+					<refreshing_icon this="47F7619E-FE5D-440D-ACDC3D96D63151C7"/>
+				</popup_joining>
+			</game_code_join>
+		</root>
+	</hierarchy>
+	<components>
+		<root
+			this="6A40EB1A-7CFF-42C1-A0AD7F13B866D485"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="6A40EB1A-7CFF-42C1-A0AD7F13B866D485"
+			currentstate="B33C9D5F-D117-4EAC-8AD6EF0279A53CE5">
+			<componentimages>
+				<component_image
+					this="826C69CE-0120-47C2-AC3F972AB4D3DCED"
+					uniqueguid="826C69CE-0120-47C2-AC3F972AB4D3DCED"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="B33C9D5F-D117-4EAC-8AD6EF0279A53CE5"
+					name="NewState"
+					width="1600"
+					height="900"
+					interactive="true"
+					uniqueguid="B33C9D5F-D117-4EAC-8AD6EF0279A53CE5">
+					<imagemetrics>
+						<image
+							this="4B9FC4D3-5E0C-4B7D-B6A3AEF22DB85318"
+							uniqueguid="4B9FC4D3-5E0C-4B7D-B6A3AEF22DB85318"
+							componentimage="826C69CE-0120-47C2-AC3F972AB4D3DCED"
+							width="1280"
+							height="1024"
+							colour="#7F7F7FFF"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</root>
+		<button_cancel
+			this="C9CB1659-1318-4B45-9086AC73FA46B2A1"
+			id="button_cancel"
+			template_id="round_medium_button"
+			part_of_template="true"
+			uniqueguid="C9CB1659-1318-4B45-9086AC73FA46B2A1"
+			dimensions="56.00,56.00"
+			priority="200"
+			sound_category="UI_GBL_HUD_Generic_Cancel_Decline">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="C8392244-24B3-4A62-95B2F72025545333"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="AE202337-5216-4B8C-BC42CC273310FCE7"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="33681619-519C-4801-ABBBCA344E55A039"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="5D497E4F-8C93-453D-A6874E55C312205B"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="8E200A21-80F8-473F-A71A60D4F0471A96"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui\skins\default\icon_cross.png"
+					uniqueguid="77B81761-8FBE-4CB0-845F9E1B684BC60D"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_medium_pressed.png"
+					uniqueguid="E8FB39F2-47EE-433B-8CEE49761335193F"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_medium_hover.png"
+					uniqueguid="95837738-6ACA-409F-B72F882291639D6C"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_medium_active.png"
+					uniqueguid="762C8442-E4AE-4613-AB1B59851C97ADE9"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_medium_inactive.png"
+					uniqueguid="AED1DF40-7836-499D-824F8B5B06A36ABA"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_medium_underlay.png"
+					uniqueguid="0EA40095-9CC9-4172-92447184578B563E"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="Button"/>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>				
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="resizable"/>
+				<property
+					name="disable_override0"
+					value="CallbackAnimTrigger"/>
+				<property
+					name="disable_override1"
+					value="ContextOpacitySetter"/>
+				<property
+					name="dynamic_image"
+					value="0"/>
+				<property
+					name="override_sound"
+					value=""/>
+			</user_properties>
+			<localised_texts>
+				<localised_text tooltip_label="_button_cancel_Tooltip_1f006a"/>
+				<localised_text state="active"/>
+				<localised_text state="down"/>
+				<localised_text state="down_off"/>
+				<localised_text state="hover"/>
+				<localised_text state="inactive"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui\skins\default\icon_cross.png"/>
+				<element value="ui/skins/default/button_round_medium_pressed.png"/>
+				<element value="ui/skins/default/button_round_medium_hover.png"/>
+				<element value="ui/skins/default/button_round_medium_active.png"/>
+				<element value="ui/skins/default/button_round_medium_inactive.png"/>
+				<element value="ui/skins/default/button_round_medium_underlay.png"/>
+				<element value=""/>
+			</override_images>
+		</button_cancel>
+		<button_ok
+			this="8859244A-243D-43A5-9473AAF6BAD635CF"
+			id="button_ok"
+			template_id="round_medium_button"
+			part_of_template="true"
+			uniqueguid="8859244A-243D-43A5-9473AAF6BAD635CF"
+			dimensions="56.00,56.00"
+			priority="60"
+			sound_category="UI_GBL_HUD_Generic_Accept_Confirm">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="D76BC0D1-77ED-4F52-92FD94BC94BBE667"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="A052D359-F2DD-4B3F-B27CE939F9AD4396"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="12515442-658A-402C-956590F9AA594018"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="BD9F15F5-F9BB-4E59-923009A7C03D636A"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="1F5CABF7-FC21-4873-BE7A71E56F94DD7B"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui\skins\default\icon_check.png"
+					uniqueguid="1BCC16B4-1E3A-4824-A20412E965108AB9"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_medium_pressed.png"
+					uniqueguid="C7133030-017A-4C12-B4CAAAAF1E442BC5"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_medium_hover.png"
+					uniqueguid="3C5664E9-5328-41AB-B87F27F2EB788281"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_medium_active.png"
+					uniqueguid="CCE64CD9-E6B3-41BF-8E5429D81AF9AE3C"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_medium_inactive.png"
+					uniqueguid="3C8086A3-BEB8-4A84-98DCA14E898099E9"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_medium_underlay.png"
+					uniqueguid="B5DBAA8D-0D7C-4C28-9E070F0E7F6495D4"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="Button"/>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>				
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="resizable"/>
+				<property
+					name="disable_override0"
+					value="CallbackAnimTrigger"/>
+				<property
+					name="disable_override1"
+					value="ContextOpacitySetter"/>
+				<property
+					name="dynamic_image"
+					value="0"/>
+				<property
+					name="override_sound"
+					value=""/>
+			</user_properties>
+			<localised_texts>
+				<localised_text
+					tooltip_label="button_ok_Tooltip_b0007"
+					tooltip_text="Join game"/>
+				<localised_text state="active"/>
+				<localised_text state="down"/>
+				<localised_text state="down_off"/>
+				<localised_text state="hover"/>
+				<localised_text state="inactive"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui\skins\default\icon_check.png"/>
+				<element value="ui/skins/default/button_round_medium_pressed.png"/>
+				<element value="ui/skins/default/button_round_medium_hover.png"/>
+				<element value="ui/skins/default/button_round_medium_active.png"/>
+				<element value="ui/skins/default/button_round_medium_inactive.png"/>
+				<element value="ui/skins/default/button_round_medium_underlay.png"/>
+				<element value=""/>
+			</override_images>
+		</button_ok>
+		<button_paste_code
+			this="D9404982-AEC3-4712-A52FDAA17DBC089C"
+			id="button_paste_code"
+			template_id="square_large_text_button"
+			part_of_template="true"
+			uniqueguid="D9404982-AEC3-4712-A52FDAA17DBC089C"
+			dimensions="339.00,51.00"
+			dock_point="Top Center"
+			offset="0.00,202.00"
+			sound_category="UI_GBL_TMP_Square_Large_Text_Button">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="16995CEE-6F87-4143-9B1467485BE7363D"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="E457C08A-7F2C-4336-9E453075395820C2"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="743BC13F-A7B8-46BC-BE110364669A9A83"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="F66CD76E-E417-476D-BC9EEED2F1A17245"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="030C0891-C354-4B64-88A2ACAA0BB8B8F0"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_square_large_text_pressed.png"
+					uniqueguid="D98F6DC9-1CB1-4C29-AA9B9CA4448FE7AB"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_square_large_text_active.png"
+					uniqueguid="6F099E13-F423-4AA9-96C412EAEEC5D14A"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_square_large_text_hover.png"
+					uniqueguid="4A94EDE0-C835-4AEB-A4B536BBBEED5BF0"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_square_large_text_inactive.png"
+					uniqueguid="57CE62A3-0F61-48B3-84E8AC0B5A88CA0F"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_square_large_text_underlay.png"
+					uniqueguid="7A59E21D-86D5-4728-A48A84631BC8C6E3"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="TextButton"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text state="active"/>
+				<localised_text state="down"/>
+				<localised_text state="down_off"/>
+				<localised_text state="hover"/>
+				<localised_text state="inactive"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/button_square_large_text_pressed.png"/>
+				<element value="ui/skins/default/button_square_large_text_active.png"/>
+				<element value="ui/skins/default/button_square_large_text_hover.png"/>
+				<element value="ui/skins/default/button_square_large_text_inactive.png"/>
+				<element value="ui/skins/default/button_square_large_text_underlay.png"/>
+			</override_images>
+		</button_paste_code>
+		<button_flame
+			this="2C774C29-D73A-4BCE-ABB8FD16B45A1E1A"
+			id="button_flame"
+			part_of_template="true"
+			uniqueguid="2C774C29-D73A-4BCE-ABB8FD16B45A1E1A"
+			dimensions="276.00,28.00"
+			dock_point="Center"
+			offset="0.00,-1.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="9C8211ED-AC23-4D93-B11DDB300C5B1461"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoStaticObject"
+					context_function_id="self.ParentContext.IsMouseOver &amp;&amp; self.ParentContext.IsDisabled == false">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="callbacks"/>
+				<property
+					name="disable_override1"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+			</override_images>
+		</button_flame>
+		<button_txt
+			this="CFED3B3F-1244-4387-AA828B82CD9EBE96"
+			id="button_txt"
+			part_of_template="true"
+			uniqueguid="CFED3B3F-1244-4387-AA828B82CD9EBE96"
+			dimensions="264.00,51.00"
+			dock_point="Center">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="93B1D900-A64C-4B7B-89EDE116CE420D12"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="B9F65DBE-CB83-485E-9793149182626B6A"/>
+			</state_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					text="Paste"
+					text_label="button_txt_active_Text_150046"/>
+				<localised_text state="inactive"/>
+			</localised_texts>
+		</button_txt>
+		<game_code_join
+			this="E9D071A6-075B-0BD8-1ACE8A0126A46102"
+			id="game_code_join"
+			offset="596.00,334.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="200"
+			tooltipslocalised="true"
+			uniqueguid="E9D071A6-075B-0BD8-1ACE8A0126A46102"
+			currentstate="6CFECF08-3610-4709-9F8881674469C562"
+			defaultstate="6CFECF08-3610-4709-9F8881674469C562">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="GameCodeJoinPopup"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="6CFECF08-3610-4709-9F8881674469C562"
+					name="NewState"
+					width="408"
+					height="232"
+					texthbehaviour="Never split"
+					interactive="true"
+					uniqueguid="6CFECF08-3610-4709-9F8881674469C562"/>
+			</states>
+		</game_code_join>
+		<highlight
+			this="CCB9B817-0636-0C44-39BA093D91DBC40F"
+			id="highlight"
+			offset="3.00,3.00"
+			priority="200"
+			tooltipslocalised="true"
+			uniqueguid="CCB9B817-0636-0C44-39BA093D91DBC40F"
+			currentstate="547BF61D-1D72-48A1-BE54158BDD82C70F">
+			<componentimages>
+				<component_image
+					this="77834A57-06E2-4922-B228355D06D6EA90"
+					uniqueguid="77834A57-06E2-4922-B228355D06D6EA90"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="547BF61D-1D72-48A1-BE54158BDD82C70F"
+					name="NewState"
+					width="28"
+					height="25"
+					font_m_font_name="la_gioconda_uppercase"
+					font_m_size="16"
+					font_m_colour="#000000FF"
+					font_m_leading="4"
+					fontcat_name="fe_button_text"
+					uniqueguid="547BF61D-1D72-48A1-BE54158BDD82C70F">
+					<imagemetrics>
+						<image
+							this="33E0253F-0F44-4EE8-A55FCBA7DA686E03"
+							uniqueguid="33E0253F-0F44-4EE8-A55FCBA7DA686E03"
+							componentimage="77834A57-06E2-4922-B228355D06D6EA90"
+							width="28"
+							height="25"
+							colour="#FFBF0080"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</highlight>
+		<label_description
+			this="B57BE405-14CD-4108-923C334A793EEA5C"
+			id="label_description"
+			offset="19.00,56.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Top Center"
+			dock_offset="0.00,56.00"
+			component_anchor_point="0.50,0.00"
+			priority="200"
+			tooltipslocalised="true"
+			uniqueguid="B57BE405-14CD-4108-923C334A793EEA5C"
+			currentstate="37DA6CBB-F194-4866-BD4128D021072CED"
+			defaultstate="37DA6CBB-F194-4866-BD4128D021072CED">
+			<states>
+				<newstate
+					this="37DA6CBB-F194-4866-BD4128D021072CED"
+					name="NewState"
+					width="370"
+					height="77"
+					text="Game codes can be generated using the Invite Player buttons in the Game Lobby and Matchmaking screens."
+					textvalign="Center"
+					texthalign="Center"
+					texthbehaviour="Slip by character"
+					textlocalised="true"
+					textlabel="label_description_NewState_Text_2d007d"
+					font_m_size="12"
+					font_m_colour="#A99989FF"
+					font_m_leading="3"
+					fontcat_name="ingame_text_faded_warhammer3"
+					uniqueguid="37DA6CBB-F194-4866-BD4128D021072CED"/>
+			</states>
+		</label_description>
+		<label_tx
+			this="C3AFB154-18FE-4BB7-BF88A6AB4CD5CEC2"
+			id="label_tx"
+			offset="43.00,23.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Top Center"
+			dock_offset="0.00,23.00"
+			component_anchor_point="0.50,0.00"
+			priority="200"
+			tooltipslocalised="true"
+			uniqueguid="C3AFB154-18FE-4BB7-BF88A6AB4CD5CEC2"
+			currentstate="E3970E5D-BDE8-4E10-866E6422592F5F20">
+			<states>
+				<newstate
+					this="E3970E5D-BDE8-4E10-866E6422592F5F20"
+					name="NewState"
+					width="321"
+					text="Enter game code"
+					textvalign="Center"
+					texthalign="Center"
+					textyoffset="2.00,0.00"
+					texthbehaviour="Never split"
+					textlocalised="true"
+					textlabel="label_tx_NewState_Text_280063"
+					font_m_font_name="brand_header"
+					font_m_size="18"
+					font_m_colour="#FFFFE0FF"
+					font_m_leading="4"
+					fontcat_name="ingame_section_heading_warhammer3"
+					uniqueguid="E3970E5D-BDE8-4E10-866E6422592F5F20"/>
+			</states>
+		</label_tx>
+		<list
+			this="3E6A16CE-B16E-4487-B3A94C83231D35C0"
+			id="list"
+			offset="148.00,263.00"
+			allowverticalresize="false"
+			docking="Bottom Center"
+			dock_offset="0.00,-15.00"
+			component_anchor_point="0.50,1.00"
+			priority="200"
+			tooltipslocalised="true"
+			uniqueguid="3E6A16CE-B16E-4487-B3A94C83231D35C0"
+			currentstate="F80B918D-F845-40A3-A0D5613FF932662F"
+			defaultstate="F80B918D-F845-40A3-A0D5613FF932662F">
+			<states>
+				<newstate
+					this="F80B918D-F845-40A3-A0D5613FF932662F"
+					name="NewState"
+					width="112"
+					height="51"
+					texthbehaviour="Never split"
+					interactive="true"
+					uniqueguid="F80B918D-F845-40A3-A0D5613FF932662F"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"/>
+		</list>
+		<main_panel
+			this="21FF7F1B-0391-08B4-64CB39EDF18A650F"
+			id="main_panel"
+			offset="0.00,-48.00"
+			allowhorizontalresize="false"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="200"
+			tooltipslocalised="true"
+			soundcategory="UI_FE_POPUP_Generic"
+			uniqueguid="21FF7F1B-0391-08B4-64CB39EDF18A650F"
+			currentstate="3AF74E53-20C2-4789-AA25E596F7F505F6">
+			<componentimages>
+				<component_image
+					this="1F6F81CD-F969-49BC-9678DEA0F9FE0B87"
+					uniqueguid="1F6F81CD-F969-49BC-9678DEA0F9FE0B87"
+					imagepath="ui/skins/default/panel_back_tile.png"/>
+				<component_image
+					this="163DBB4C-7223-4942-A08155AFFCCF18D6"
+					uniqueguid="163DBB4C-7223-4942-A08155AFFCCF18D6"
+					imagepath="ui/skins/default/panel_back_border.png"/>
+				<component_image
+					this="A64B1A47-1039-48BC-BDD8FA4BAF0FA151"
+					uniqueguid="A64B1A47-1039-48BC-BDD8FA4BAF0FA151"
+					imagepath="ui/skins/default/panel_back_bottom.png"/>
+				<component_image
+					this="D3E8D991-07F5-4A5F-82C9FC1DF2A9330C"
+					uniqueguid="D3E8D991-07F5-4A5F-82C9FC1DF2A9330C"
+					imagepath="ui/skins/default/parchment_texture.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="3AF74E53-20C2-4789-AA25E596F7F505F6"
+					name="NewState"
+					width="408"
+					height="329"
+					textvalign="Center"
+					texthalign="Center"
+					uniqueguid="3AF74E53-20C2-4789-AA25E596F7F505F6">
+					<imagemetrics>
+						<image
+							this="AAF505F6-D5E4-4F6A-A862AF272B80A51E"
+							uniqueguid="AAF505F6-D5E4-4F6A-A862AF272B80A51E"
+							componentimage="1F6F81CD-F969-49BC-9678DEA0F9FE0B87"
+							width="408"
+							height="329"
+							tile="true"
+							dockpoint="Center"
+							margin="5.00,5.00,5.00,5.00"/>
+						<image
+							this="8E0E740B-44C1-4C2A-BB6F2BDFC723BF8C"
+							uniqueguid="8E0E740B-44C1-4C2A-BB6F2BDFC723BF8C"
+							componentimage="163DBB4C-7223-4942-A08155AFFCCF18D6"
+							width="408"
+							height="329"
+							tile="true"
+							margin="30.00,30.00,30.00,30.00"/>
+						<image
+							this="49ECC274-D389-4498-9B9C9F189F7FF0BA"
+							uniqueguid="49ECC274-D389-4498-9B9C9F189F7FF0BA"
+							componentimage="A64B1A47-1039-48BC-BDD8FA4BAF0FA151"
+							offset="0.00,251.00"
+							width="408"
+							height="78"
+							tile="true"
+							dockpoint="Bottom Center"
+							canresizeheight="false"
+							margin="30.00,40.00,30.00,40.00"/>
+						<image
+							this="FE5F04F5-B135-4C6C-953DF2075256611C"
+							uniqueguid="FE5F04F5-B135-4C6C-953DF2075256611C"
+							componentimage="D3E8D991-07F5-4A5F-82C9FC1DF2A9330C"
+							offset="11.00,11.00"
+							width="386"
+							height="180"
+							tile="true"
+							dockpoint="Top Center"
+							dock_offset="0.00,11.00"
+							canresizewidth="false"
+							margin="50.00,50.00,50.00,50.00"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</main_panel>
+		<popup_joining
+			this="6EC0AAD1-1FFE-46DA-8130FB0F396F21E1"
+			id="popup_joining"
+			offset="60.00,32.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="200"
+			tooltipslocalised="true"
+			uniqueguid="6EC0AAD1-1FFE-46DA-8130FB0F396F21E1"
+			currentstate="30A4CD82-B4B4-4217-B1AF9CCBAEE7A7E9"
+			defaultstate="30A4CD82-B4B4-4217-B1AF9CCBAEE7A7E9">
+			<componentimages>
+				<component_image
+					this="1F7BD85A-6640-4C22-A67891E612E35BF9"
+					uniqueguid="1F7BD85A-6640-4C22-A67891E612E35BF9"
+					imagepath="ui/skins/default/panel_back_tile.png"/>
+				<component_image
+					this="83441968-9555-4721-93862942D4BB9681"
+					uniqueguid="83441968-9555-4721-93862942D4BB9681"
+					imagepath="ui/skins/default/panel_back_border.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="30A4CD82-B4B4-4217-B1AF9CCBAEE7A7E9"
+					name="NewState"
+					width="288"
+					height="168"
+					interactive="true"
+					uniqueguid="30A4CD82-B4B4-4217-B1AF9CCBAEE7A7E9">
+					<imagemetrics>
+						<image
+							this="38A362BC-36EC-40E6-B5BF5B5F751C77F9"
+							uniqueguid="38A362BC-36EC-40E6-B5BF5B5F751C77F9"
+							componentimage="1F7BD85A-6640-4C22-A67891E612E35BF9"
+							width="288"
+							height="168"
+							tile="true"
+							dockpoint="Center"
+							margin="5.00,5.00,5.00,5.00"/>
+						<image
+							this="4CD6F08D-A141-4219-93C662AE74CE66F3"
+							uniqueguid="4CD6F08D-A141-4219-93C662AE74CE66F3"
+							componentimage="83441968-9555-4721-93862942D4BB9681"
+							width="288"
+							height="168"
+							tile="true"
+							margin="30.00,30.00,30.00,30.00"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</popup_joining>
+		<refreshing_icon
+			this="47F7619E-FE5D-440D-ACDC3D96D63151C7"
+			id="refreshing_icon"
+			offset="124.00,74.00"
+			docking="Center"
+			dock_offset="0.00,10.00"
+			component_anchor_point="0.50,0.50"
+			priority="200"
+			tooltipslocalised="true"
+			uniqueguid="47F7619E-FE5D-440D-ACDC3D96D63151C7"
+			currentstate="43E2A3B2-3A7F-4CEC-A5A9849B52D128E2"
+			defaultstate="43E2A3B2-3A7F-4CEC-A5A9849B52D128E2">
+			<componentimages>
+				<component_image
+					this="54C6342C-F17A-40A5-B634DCFDCC459F2E"
+					uniqueguid="54C6342C-F17A-40A5-B634DCFDCC459F2E"
+					imagepath="ui/skins/default/spinner.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="43E2A3B2-3A7F-4CEC-A5A9849B52D128E2"
+					name="NewState"
+					width="40"
+					height="40"
+					interactive="true"
+					uniqueguid="43E2A3B2-3A7F-4CEC-A5A9849B52D128E2">
+					<imagemetrics>
+						<image
+							this="8C0E1199-2C25-44FB-B960E3A0FE83555A"
+							uniqueguid="8C0E1199-2C25-44FB-B960E3A0FE83555A"
+							componentimage="54C6342C-F17A-40A5-B634DCFDCC459F2E"
+							width="40"
+							height="40"
+							x_flipped="true"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+			<animations>
+				<refreshing id="refreshing">
+					<frames>
+						<frame
+							interpolationtime="0"
+							interpolationpropertymask="16"
+							targetmetrics_m_height="40"
+							targetmetrics_m_width="40"/>
+						<frame
+							interpolationtime="750"
+							interpolationpropertymask="16"
+							targetmetrics_m_height="40"
+							targetmetrics_m_width="40"
+							targetmetrics_m_rotation_angle="6.28318501">
+							<triggers>
+								<trigger
+									trigger_component="47F7619E-FE5D-440D-ACDC3D96D63151C7"
+									trigger_animation="refreshing"/>
+							</triggers>
+						</frame>
+					</frames>
+				</refreshing>
+				<oncreate id="OnCreate">
+					<frames>
+						<frame
+							interpolationpropertymask="16"
+							targetmetrics_m_height="40"
+							targetmetrics_m_width="40"/>
+						<frame
+							interpolationtime="750"
+							interpolationpropertymask="16"
+							targetmetrics_m_height="40"
+							targetmetrics_m_width="40"
+							targetmetrics_m_rotation_angle="6.28318501">
+							<triggers>
+								<trigger
+									trigger_component="47F7619E-FE5D-440D-ACDC3D96D63151C7"
+									trigger_animation="OnCreate"/>
+							</triggers>
+						</frame>
+					</frames>
+				</oncreate>
+			</animations>
+		</refreshing_icon>
+		<text_input_game_code
+			this="CE704A47-B213-4628-839CCCD1A215CE07"
+			id="text_input_game_code"
+			offset="42.00,136.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Top Center"
+			dock_offset="0.00,136.00"
+			component_anchor_point="0.50,0.00"
+			priority="200"
+			tooltipslocalised="true"
+			uniqueguid="CE704A47-B213-4628-839CCCD1A215CE07"
+			currentstate="54C96D15-A82D-4A76-A2A7C05DF49266F8">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="TextInput"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="TabOrder"
+					value=""/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="52543D40-1671-4949-A31A1E9AAD873B7A"
+					uniqueguid="52543D40-1671-4949-A31A1E9AAD873B7A"
+					imagepath="ui/skins/default/frame_text.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="54C96D15-A82D-4A76-A2A7C05DF49266F8"
+					name="NewState"
+					width="324"
+					text="..."
+					textvalign="Center"
+					texthalign="Center"
+					textxoffset="6.00,0.00"
+					texthbehaviour="Never split"
+					font_m_size="12"
+					font_m_colour="#FFF8D7FF"
+					font_m_leading="1"
+					fontcat_name="fe_input_text"
+					interactive="true"
+					uniqueguid="54C96D15-A82D-4A76-A2A7C05DF49266F8">
+					<imagemetrics>
+						<image
+							this="8CFCCF58-9608-4260-9F9F24FAC474C43C"
+							uniqueguid="8CFCCF58-9608-4260-9F9F24FAC474C43C"
+							componentimage="52543D40-1671-4949-A31A1E9AAD873B7A"
+							width="324"
+							tile="true"
+							margin="4.00,4.00,4.00,4.00"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</text_input_game_code>
+		<tx_waiting
+			this="13873F0B-4794-4C94-85A3F38BD49175B4"
+			id="tx_waiting"
+			offset="8.00,15.00"
+			priority="200"
+			tooltipslocalised="true"
+			uniqueguid="13873F0B-4794-4C94-85A3F38BD49175B4"
+			currentstate="5E364DDF-EAD5-4A0F-82DDA4A8027FAC21"
+			defaultstate="5E364DDF-EAD5-4A0F-82DDA4A8027FAC21">
+			<states>
+				<joining_game
+					this="5E364DDF-EAD5-4A0F-82DDA4A8027FAC21"
+					name="joining_game"
+					width="275"
+					height="40"
+					text="Joining game..."
+					textvalign="Center"
+					texthalign="Center"
+					texthbehaviour="Never split"
+					textlocalised="true"
+					textlabel="tx_waiting_joining_game_Text_650027"
+					font_m_font_name="brand_header"
+					font_m_size="16"
+					font_m_colour="#FFF8D7FF"
+					font_m_leading="1"
+					fontcat_name="fe_paragraph_heading"
+					interactive="true"
+					uniqueguid="5E364DDF-EAD5-4A0F-82DDA4A8027FAC21"/>
+			</states>
+		</tx_waiting>
+	</components>
+</layout>

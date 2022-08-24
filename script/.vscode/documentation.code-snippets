@@ -1,0 +1,31 @@
+{
+	"lua_keywords:function": {
+		"scope": "lua",
+		"prefix": "--- @function",
+		"description": "Create the name and description of a function's doc-gen. Single-line text in your clipboard will be used as the function name.\n",
+		"body": [
+			"--- @function ${CLIPBOARD/^(.*\\r\\n.*)+$/FUNCTION_NAME/}",
+			"--- @desc ${1:FUNCTION_DESCRIPTION}",
+			"--- @p${2| OPTIONALITY , , [opt=DEFAULT_VALUE] |}${3|PARAM TYPE,@string,@number,@boolean,@table,SOMETHING_ELSE|} ${4:PARAM_NAME}, ${5:PARAM_DESCRIPTION}",
+			"--- @r ${6|RETURN_TYPE,@string,@number,@boolean,@table|} ${7:RETURN_DESCRIPTION}"
+		],
+	},
+	"lua_keywords:function_parameter": {
+		"scope": "lua",
+		"prefix": "--- @p",
+		"description": "Create the doc-gen for a function's parameter. Single-line text in your clipboard will be used as the parameter's name.\n",
+		"body": [
+			"--- @p${1| OPTIONALITY , , [opt=DEFAULT_VALUE] |}${2|PARAM_TYPE,@string,@number,@boolean,@table,@function,SOMETHING_ELSE|} ${CLIPBOARD/^(.*\\r\\n.*)+$/FUNCTION_NAME/}, ${3:PARAM_DESCRIPTION}",
+		],
+	},
+	"lua_keywords:script_example": {
+		"scope": "lua",
+		"prefix": "--- @example",
+		"description": "Create an example doc-gen code segment. Selected text is turned into the example body.\n",
+		"body": [
+			"--- @new_example",
+			"--- @desc ${1:EXAMPLE_DESCRIPTION}",
+			"${TM_SELECTED_TEXT/^(.+)$/--- @example $1/gm}",
+		],
+	},
+}

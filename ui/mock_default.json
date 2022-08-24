@@ -1,0 +1,29 @@
+{
+    
+    "default":{
+        "bool":true,
+        "int":1,
+        "float":1,
+        "string":"string"
+    },
+    
+    "CcoCampaignCharacter":{
+        "Level" : 1,
+        "Name" : "@any(Karl, Grimgor, Vlad)",
+        "Skills" : "@list(4, CcoCampaignCharacterSkill)",
+        "Skill" : "@CcoCampaignCharacterSkill:sk2"
+    },
+
+    "CcoCampaignCharacterSkill":{
+        "Level" : "@random(1,15)",
+        "Name" : "@any(Fire2, Water2, Thunder2)",
+        "Overrides": {
+            "sk1":{
+                "Name" : "Fira"
+            },
+            "sk2":{
+                "Name" : "Firaga"
+            }
+        }
+    }
+}
