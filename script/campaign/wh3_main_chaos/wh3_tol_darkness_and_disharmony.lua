@@ -486,29 +486,29 @@ end;
 --Outputs score in debug text
 function update_victory_points(apply_pending)
 	--Calculate all scores
-	local scores = {};
-	local human_factions = cm:get_human_factions(true);
-	local main_objectives_string = "Main Victory Regions: ";
-	local second_objectives_string = "Minor Victory Regions: ";
+	local scores = {}
+	local human_factions = cm:get_human_factions(true)
 	
 	for i = 1, #human_factions do
-		local faction = human_factions[i];
-		local pending_score = calculate_pending_victory_points(faction)
-		local score = cm:get_saved_value("ToL_score_"..faction) or 0;
+		local faction = human_factions[i]
 		
-		out.design("Updating VPs for: "..faction);
-		if apply_pending then
-			score = score + pending_score
-		end
+		if not cm:get_faction(faction):is_idle_human() then
+			local pending_score = calculate_pending_victory_points(faction)
+			local score = cm:get_saved_value("ToL_score_" .. faction) or 0
+			
+			out.design("Updating VPs for: " .. faction)
+			if apply_pending then
+				score = score + pending_score
+			end
 
-		scores[faction] = score;
-		cm:set_saved_value("ToL_score_"..faction, score)
-		cm:set_script_state("ToL_score_" .. faction, score);
-		
-	end;
+			scores[faction] = score
+			cm:set_saved_value("ToL_score_" .. faction, score)
+			cm:set_script_state("ToL_score_" .. faction, score)
+		end
+	end
 	
-	return(scores);
-end;
+	return(scores)
+end
 
 
 function calculate_pending_victory_points(faction_key)

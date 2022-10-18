@@ -658,6 +658,10 @@ Worldroots.encounters = {
 		spawn_incident = "wh2_dlc16_incident_wef_new_confed_encounter_available",
 		region = "wh3_main_combi_region_oreons_camp",
 		setup = function()
+			if cm:get_faction("wh2_main_wef_bowmen_of_oreon"):is_dead() then
+				return false
+			end
+			
 			Worldroots:set_up_generic_encounter_marker("heart_of_the_jungle_bowmen_v_dinosaurs_me", "wh2_dlc16_dilemma_wef_encounter_heart_of_the_jungle_bowmen_v_dinosaurs", 631, 209, "heart_of_the_jungle")
 			
 			cm:make_region_seen_in_shroud(Worldroots.primary_player_key, "wh3_main_combi_region_oreons_camp")

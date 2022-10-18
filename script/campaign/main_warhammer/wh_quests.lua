@@ -220,7 +220,7 @@ function q_setup()
 		},
 		["wh2_dlc10_hef_alarielle"] = {
 			{"mission", "wh2_dlc10_anc_talisman_shieldstone_of_isha", "wh3_main_ie_qb_hef_alarielle_shieldstone_of_isha", 7},
-			{"mission", "wh2_dlc10_anc_enchanted_item_star_of_avelorn", "wh3_main_ie_qb_hef_alarielle_star_of_avelorn", 12, nil, "war.camp.advice.quests.001", 246, 593},
+			{"mission", "wh2_dlc10_anc_enchanted_item_star_of_avelorn", "wh3_main_ie_qb_hef_alarielle_star_of_avelorn", 12, nil, "war.camp.advice.quests.001", 260, 601},
 		},
 		["wh2_dlc10_hef_alith_anar"] = {
 			{"mission", "wh2_dlc10_anc_enchanted_item_the_shadow_crown", "wh3_main_ie_qb_hef_alith_anar_the_shadow_crown", 4},

@@ -130,15 +130,15 @@ function end_deployment_phase()
 	-- Voiceover and Subtitles --
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 3000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc10_qb_hef_alarielle_star_of_avelorn_stage_5_intro_01", "subtitle_with_frame", 13) end, 3500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc10_qb_hef_alarielle_star_of_avelorn_stage_5_intro_01", "subtitle_with_frame", 0.1) end, 3500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 17000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 17500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc10_qb_hef_alarielle_star_of_avelorn_stage_5_intro_02", "subtitle_with_frame", 16) end, 17500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc10_qb_hef_alarielle_star_of_avelorn_stage_5_intro_02", "subtitle_with_frame", 0.1) end, 17500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 34000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_03) end, 29500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc10_qb_hef_alarielle_star_of_avelorn_stage_5_intro_03", "subtitle_with_frame", 5.5) end, 34500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc10_qb_hef_alarielle_star_of_avelorn_stage_5_intro_03", "subtitle_with_frame", 0.1) end, 34500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 41000);
 	
 	cutscene_intro:start();

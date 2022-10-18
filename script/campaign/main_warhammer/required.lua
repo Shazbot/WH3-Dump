@@ -52,6 +52,8 @@ require("wh3_campaign_missions")
 require("wh2_campaign_generated_constants")
 require("wh3_campaign_character_upgrading")
 require("wh3_campaign_recruited_unit_health")
+require("wh3_campaign_scripted_occupation_options")
+
 ---- faction and race features
 require("wh_grudges")
 require("wh2_campaign_blessed_spawnings")

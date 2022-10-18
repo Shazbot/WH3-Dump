@@ -31,6 +31,8 @@ function great_game_start()
 		if cm:get_campaign_name() == "main_warhammer" then
 			-- belakor starts with a rift open
 			cm:teleportation_network_open_node("wh3_main_combi_province_albion");
+			cm:teleportation_network_open_node("wh3_main_combi_province_the_southern_wastes");
+			cm:teleportation_network_open_node("wh3_main_combi_province_gryphon_wood");
 		end;
 	end;
 	

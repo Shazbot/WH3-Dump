@@ -128,16 +128,7 @@ function setup_campaign_help_pages()
 		"offices",
 		function()
 			local faction = cm:get_faction(local_faction);
-			return faction and faction:culture() == "wh_dlc05_wef_wood_elves" and faction:has_faction_leader() and faction:faction_leader():get_forename() ~= "names_name_2147352813";
-		end
-	);
-	
-	hpm:register_help_page_to_info_button_mapping(
-		"script_link_campaign_gathering_of_the_ancients", 
-		"offices",
-		function()
-			local faction = cm:get_faction(local_faction);
-			return faction and faction:culture() == "wh_dlc05_wef_wood_elves" and faction:has_faction_leader() and faction:faction_leader():get_forename() == "names_name_2147352813";
+			return faction and faction:culture() == "wh_dlc05_wef_wood_elves";
 		end
 	);
 	

@@ -411,23 +411,27 @@ function waaagh:add_waaagh_listeners()
 			return context:ritual():ritual_key() == self.ritual_key
 		end,
 		function(context)
-			local comp_scene;
 			local faction_key = context:performing_faction():name()
 			local region_key = self.factions[faction_key].ritual_region_key
-			if context:performing_faction():is_human() then
-				comp_scene = "waaagh_"..region_key;
-			else
-				comp_scene = "waaagh_ai_"..region_key;
+			
+			if region_key then
+				local comp_scene;
+				
+				if context:performing_faction():is_human() then
+					comp_scene = "waaagh_"..region_key;
+				else
+					comp_scene = "waaagh_ai_"..region_key;
+				end
+				
+				cm:remove_scripted_composite_scene(comp_scene);
+				out.design("### WAAAGH! ended removing VFX "..comp_scene)
 			end
+			
 			self.factions[faction_key].ritual_region_key = nil;
 			self.factions[faction_key].active_waaagh = false
-			cm:remove_scripted_composite_scene(comp_scene);
-			out.design("### WAAAGH! ended removing VFX "..comp_scene)
 		end,
 		true
 	);
-
-	
 end
 
 function waaagh.trigger_confederate_dilemma(victorious_fm, defeated_fm)

@@ -92,16 +92,16 @@ function end_deployment_phase()
 	);	
 	
 	-- Voiceover and Subtitles --
-	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 3000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc09_qb_tmb_khatep_the_liche_staff_stage_5_pits_of_zardok_part_01", "subtitle_with_frame", 16) end, 4000);	
-	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 20500);
+	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 1000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc09_qb_tmb_khatep_the_liche_staff_stage_5_pits_of_zardok_part_01", "subtitle_with_frame", 0.1) end, 1500);	
+	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 18000);
 	
-	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 21000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc09_qb_tmb_khatep_the_liche_staff_stage_5_pits_of_zardok_part_02", "subtitle_with_frame", 8)	end, 21500);	
-	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 30000);
+	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 19000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc09_qb_tmb_khatep_the_liche_staff_stage_5_pits_of_zardok_part_02", "subtitle_with_frame", 0.1)	end, 19500);	
+	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 28000);
 	
-	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_03) end, 30500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc09_qb_tmb_khatep_the_liche_staff_stage_5_pits_of_zardok_part_03", "subtitle_with_frame", 16) end, 31000);	
+	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_03) end, 28500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc09_qb_tmb_khatep_the_liche_staff_stage_5_pits_of_zardok_part_03", "subtitle_with_frame", 0.1) end, 29000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 48000);
 
 	cutscene_intro:start();

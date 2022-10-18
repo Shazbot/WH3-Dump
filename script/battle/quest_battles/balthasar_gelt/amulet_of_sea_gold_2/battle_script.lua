@@ -8,10 +8,10 @@ local gc = generated_cutscene:new(true, true);
 
 --generated_cutscene:add_element(sfx_name, subtitle, camera, min_length, wait_for_vo, wait_for_camera, loop_camera)
 gc:add_element(nil, nil, "qb_estalian_tomb_01", 4000, false, false, false);
-gc:add_element("EMP_Gelt_GS_Qbattle_sea_gold_amulet2_pt_01", "wh_main_qb_emp_balthasar_gelt_amulet_of_sea_gold_stage_4.2_pt_01", nil, 2000, true, false, false);
-gc:add_element("EMP_Gelt_GS_Qbattle_sea_gold_amulet2_pt_02", "wh_main_qb_emp_balthasar_gelt_amulet_of_sea_gold_stage_4.2_pt_02", "qb_estalian_tomb_02", 15000, false, false, false);
-gc:add_element("EMP_Gelt_GS_Qbattle_sea_gold_amulet2_pt_03", "wh_main_qb_emp_balthasar_gelt_amulet_of_sea_gold_stage_4.2_pt_03", nil, 7000, true, false, false);
-gc:add_element("EMP_Gelt_GS_Qbattle_sea_gold_amulet2_pt_04", "wh_main_qb_emp_balthasar_gelt_amulet_of_sea_gold_stage_4.2_pt_04", "qb_estalian_tomb_03", 12000, true, false, false);
+gc:add_element("EMP_Gelt_GS_Qbattle_sea_gold_amulet2_pt_01", "wh_main_qb_emp_balthasar_gelt_amulet_of_sea_gold_stage_4_1_pt_01", nil, 2000, true, false, false);
+gc:add_element("EMP_Gelt_GS_Qbattle_sea_gold_amulet2_pt_02", "wh_main_qb_emp_balthasar_gelt_amulet_of_sea_gold_stage_4_1_pt_02", "qb_estalian_tomb_02", 15000, false, false, false);
+gc:add_element("EMP_Gelt_GS_Qbattle_sea_gold_amulet2_pt_03", "wh_main_qb_emp_balthasar_gelt_amulet_of_sea_gold_stage_4_1_pt_03", nil, 7000, true, false, false);
+gc:add_element("EMP_Gelt_GS_Qbattle_sea_gold_amulet2_pt_04", "wh_main_qb_emp_balthasar_gelt_amulet_of_sea_gold_stage_4_1_pt_04", "qb_estalian_tomb_03", 12000, true, false, false);
 
 -------BATTLE SETUP--------
 

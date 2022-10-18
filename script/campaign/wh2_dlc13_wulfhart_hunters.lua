@@ -308,11 +308,11 @@ function wulfhart_missions_updated(mission_key)
 	elseif mission_key == "wh2_dlc13_wulfhart_rodrik_languille_stage_2" then
 		cm:callback(function() cm:remove_effect_bundle("wh2_dlc13_payload_hunter_dilemma", wulfhart_faction) end, 0.5)
 	elseif mission_key == "wh2_dlc13_wulfhart_rodrik_languille_stage_3" then
-		incident_key = "wh2_dlc13_wulfhart_rodrik_languille_3_incident"
+		incident_key = "wh2_dlc13_wulfhart_rodrik_languille_stage_3_incident"
 	elseif mission_key == "wh2_dlc13_wulfhart_rodrik_languille_stage_4" then
 		cm:callback(function() cm:remove_effect_bundle("wh2_dlc13_payload_hunter_dilemma", wulfhart_faction) end, 0.5)
 	elseif mission_key == "wh2_dlc13_wulfhart_rodrik_languille_stage_5" then
-		incident_key = "wh2_dlc13_wulfhart_rodrik_languille_5_incident"
+		incident_key = "wh2_dlc13_wulfhart_rodrik_languille_stage_5_incident"
 		cm:set_saved_value("hunter_rodrik_complete", true)
 		core:trigger_event("ScriptEventHunterStoryCompleted")
 	end

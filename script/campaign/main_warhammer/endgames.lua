@@ -10,7 +10,18 @@ endgame = {
 	settings = {},
 
 	victory_type = "wh_main_long_victory",
-	triggered = false
+	triggered = false,
+
+	-- Used when the endgame triggers to show points of interest that turn. 
+	-- Handled by the manager after scenarios finish triggering so we can support multiple scenarios, since each scenarios resets the shroud
+	revealed_regions = {},
+
+	-- Used by the ultimate crisis for checking victory and mission triggers
+	ultimate_crisis_data = {},
+
+	-- Used by the RAM to save army lists when spawning multiple armies. Purely used for optimising army generation speed.
+	random_army_manager = {}
+
 }
 
 -- Initialise the endgame
@@ -129,6 +140,10 @@ cm:add_first_tick_callback(
 		if cm:get_saved_value("endgame_scenario_data") then
 			endgame:add_early_warning_listener(cm:get_saved_value("endgame_scenario_data"))
 		end
+
+		if cm:get_saved_value("endgame_ultimate_crisis_data") then
+			endgame:add_ultimate_crisis_victory_listeners()
+		end
 	
 	end
 )
@@ -155,6 +170,7 @@ function endgame:update_campaign_settings()
 		self.settings.victory_trigger = true
 		self.settings.delay = 10
 		self.settings.difficulty_mod = 1
+		self.settings.all_scenarios = false
 	else
 		-- Determines whether endgame scenarios will trigger from a player hitting a certain turn (range)
 		self.settings.turn_trigger = ssm:get_state_as_bool_value("endgame_turn_trigger")
@@ -171,6 +187,9 @@ function endgame:update_campaign_settings()
 		-- Recommended usage: modifying faction potential modifiers or spawned army counts.
 		-- This number is 100x higher in the shared state manager as it only supports integers but we want a float
 		self.settings.difficulty_mod = ssm:get_state_as_float_value("endgame_difficulty_mod")/100
+
+		-- Tweaker that causes all endgame scenarios to fire at the same time. Why did you do this to yourself?
+		self.settings.all_scenarios = ssm:get_state_as_bool_value("endgame_all_scenarios")
 	end
 
 end
@@ -181,38 +200,56 @@ function endgame:choose_scenario()
 		out("Tried to generate an endgame, but there's no valid endgames loaded!")
 		return
 	else
-		local scenario = self.scenarios[cm:random_number(#self.scenarios)]
-		self:trigger_early_warning(scenario)
+		if self.settings.all_scenarios then
+			local no_bundle = false
+			for i = 1, #self.scenarios do
+				local scenario = self.scenarios[i]
+				self:trigger_early_warning(scenario, no_bundle)
+				no_bundle = true
+			end
+			cm:activate_music_trigger("ScriptedEvent_Negative", "wh_main_sc_chs_chaos")
+			if self.settings.delay == 0 then
+				self:add_ultimate_crisis_victory_listeners()
+			end
+		else
+			local scenario = self.scenarios[cm:random_number(#self.scenarios)]
+			self:trigger_early_warning(scenario)
+		end
 	end
 end
 
 -- Look for an early warning event and delay the scenario if we find one
 -- The default delay can be overridden by setting <scenario_name>.delay as a different value in the scenario file
 -- e.g. endgame_pyramid_of_nagash.delay = 2 
-function endgame:trigger_early_warning(scenario)
+function endgame:trigger_early_warning(scenario, no_bundle)
 	local env = core:get_env()
 	local scenario_env = env[scenario]
 	-- Only do the early warning event if one actually exists, otherwise fire the scenario immediately
-	if scenario_env.early_warning_event then
-		local delay = scenario_env.delay or self.settings.delay
-		local scenario_data = {
-			scenario = scenario, 
-			turn = cm:turn_number() + delay
-		}
-		cm:set_saved_value("endgame_scenario_data", scenario_data)
+	local delay = scenario_env.delay or self.settings.delay
+	if scenario_env.early_warning_event and delay > 0 then		
+		if not no_bundle then
+			local scenario_data = {
+					scenario = scenario, 
+					turn = cm:turn_number() + delay
+			}
+			cm:set_saved_value("endgame_scenario_data", scenario_data)
+			self:add_early_warning_listener(scenario_data)
+		end
 		local human_factions = cm:get_human_factions()
-		self:add_early_warning_listener(scenario_data)
 		for i = 1, #human_factions do
 			local incident_builder = cm:create_incident_builder(scenario_env.early_warning_event)
-			local payload = cm:create_new_custom_effect_bundle("wh3_main_ie_scripted_endgame_early_warning")
-			payload:set_duration(delay)
-			local payload_builder = cm:create_payload()
-			payload_builder:effect_bundle_to_faction(payload)
-			incident_builder:set_payload(payload_builder)
+			if not no_bundle then
+				local payload = cm:create_new_custom_effect_bundle("wh3_main_ie_scripted_endgame_early_warning")
+				payload:set_duration(delay)
+				local payload_builder = cm:create_payload()
+				payload_builder:effect_bundle_to_faction(payload)
+				incident_builder:set_payload(payload_builder)
+			end
 			cm:launch_custom_incident_from_builder(incident_builder, cm:get_faction(human_factions[i]))
 		end
 	else
 		endgame:generate_endgame(scenario)
+		self:reveal_regions()
 	end
 end
 
@@ -224,9 +261,19 @@ function endgame:add_early_warning_listener(scenario_data)
 			return cm:turn_number() >= scenario_data.turn
 		end,
 		function()
-			endgame:generate_endgame(scenario_data.scenario)
+			if self.settings.all_scenarios then
+				for i = 1, #self.scenarios do
+					local scenario = self.scenarios[i]
+					self:generate_endgame(scenario)
+				end
+				cm:activate_music_trigger("ScriptedEvent_Negative", "wh_main_sc_chs_chaos")
+				self:add_ultimate_crisis_victory_listeners()
+			else
+				self:generate_endgame(scenario_data.scenario)
+			end
 			cm:set_saved_value("endgame_scenario_data", false)
 			core:remove_listener("endgame_early_warning_listener")
+			self:reveal_regions()
 		end,
 		true
 	)
@@ -242,8 +289,85 @@ function endgame:add_victory_condition_listener(faction_key, incident_key, objec
 			return context:dilemma() == incident_key and context:faction():name() == faction_key
 		end,
 		function()
-			endgame:create_victory_condition(faction_key, objectives)
+			if not self.settings.all_scenarios then
+				endgame:create_victory_condition(faction_key, objectives)
+			end
 			core:remove_listener("endgame_victory_condition_mission_listener"..faction_key)
+		end,
+		true
+	)
+end
+
+-- Create new listeners to track the ultimate crisis objective, which is handled entirely by script
+-- Since we don't know what scenarios the player will have active, this objective is a generic mission to resolve all current wars
+-- The mission triggers the turn after scenarios otherwise it can trigger before the scenarios generate, causing instant victory
+function endgame:add_ultimate_crisis_victory_listeners()
+	if not cm:get_saved_value("endgame_ultimate_crisis_data") then
+		self.ultimate_crisis_data = {
+			turn_trigger = cm:turn_number() + 1,
+			pending_mission = true
+		}
+		cm:set_saved_value("endgame_ultimate_crisis_data", self.ultimate_crisis_data)
+	end
+
+	self.ultimate_crisis_data = cm:get_saved_value("endgame_ultimate_crisis_data")
+	if self.ultimate_crisis_data.pending_mission then
+		core:add_listener(
+			"endgame_ultimate_crisis_mission_listener",
+			"WorldStartRound",
+			function()
+				return cm:turn_number() >= self.ultimate_crisis_data.turn_trigger 
+			end,
+			function()
+				local objectives = {
+					{
+						type = "SCRIPTED",
+						conditions = {
+							"script_key achieve_ultimate_victory",
+							"override_text mission_text_text_endgame_ultimate_crisis_objective_no_wars"
+						}
+					}
+				}
+				local human_factions = cm:get_human_factions()
+				for i = 1, #human_factions do
+					local faction_key = human_factions[i]
+					endgame:create_victory_condition(faction_key, objectives)
+					self.ultimate_crisis_data[faction_key] = true
+				end
+				self.ultimate_crisis_data.pending_mission = false
+				cm:set_saved_value("endgame_ultimate_crisis_data", self.ultimate_crisis_data)
+				core:remove_listener("endgame_ultimate_crisis_mission_listener")
+			end,
+			true
+		)
+	end
+	core:add_listener(
+		"endgame_ultimate_crisis_victory_start_turn_listener",
+		"FactionTurnStart",
+		function(context)
+			local faction = context:faction()
+			return not not self.ultimate_crisis_data[faction:name()] and not faction:at_war()
+		end,
+		function(context)
+			local faction_key = context:faction():name()
+			self.ultimate_crisis_data[faction_key] = false
+			cm:set_saved_value("endgame_ultimate_crisis_data", self.ultimate_crisis_data)
+			cm:complete_scripted_mission_objective(faction_key, "wh_main_ultimate_victory", "achieve_ultimate_victory", true)
+		end,
+		true
+	)
+	core:add_listener(
+		"endgame_ultimate_crisis_victory_end_turn_listener",
+		"FactionTurnEnd",
+		function(context)
+			local faction = context:faction()
+			return not not self.ultimate_crisis_data[faction:name()] and not faction:at_war()
+		end,
+		function(context)
+			local faction_key = context:faction():name()
+			self.ultimate_crisis_data[faction_key] = false
+			cm:set_saved_value("endgame_ultimate_crisis_data", self.ultimate_crisis_data)
+			cm:complete_scripted_mission_objective(faction_key, "wh_main_ultimate_victory", "achieve_ultimate_victory", true)
 		end,
 		true
 	)
@@ -294,7 +418,7 @@ end
 -- Spawned scenario forces are always given free upkeep so the AI doesn't immediately disband them
 -- Army template is a table containing all desired templates, e.g. {chaos = true, empire = true}
 -- declare_war if set to true will declare war on the region owner if it's owned by someone else
-function endgame:create_scenario_force(faction_key, region_key, army_template, unit_count, declare_war, total_armies)
+function endgame:create_scenario_force(faction_key, region_key, army_template, unit_list, declare_war, total_armies)
 
 	-- total_armies shouldn't be nil, but if it is assume we want a single army
 	if total_armies == nil then
@@ -303,7 +427,7 @@ function endgame:create_scenario_force(faction_key, region_key, army_template, u
 
 	for i = 1, total_armies do
 		local pos_x, pos_y = cm:find_valid_spawn_location_for_character_from_settlement(faction_key, region_key, false, true, 10)
-		local unit_list = self:generate_random_army(army_template, unit_count)
+		local unit_list = self:generate_random_army(army_template, unit_list)
 
 		cm:create_force(
 			faction_key,
@@ -332,13 +456,16 @@ function endgame:create_scenario_force(faction_key, region_key, army_template, u
 end
 
 function endgame:declare_war(attacker_key, defender_key)
+	if defender_key == "rebels" then
+		return
+	end
 	local defender_faction = cm:get_faction(defender_key)
 	if defender_faction:is_null_interface() == false then
 		if defender_faction:is_vassal() then
 			defender_faction = defender_faction:master()
 			defender_key = defender_faction:name()
 		end
-		if defender_key ~= "rebels" and attacker_key ~= defender_key and cm:get_faction(attacker_key):at_war_with(defender_faction) == false then
+		if attacker_key ~= defender_key and cm:get_faction(attacker_key):at_war_with(defender_faction) == false then
 			out("ENDGAME: Declaring war between "..attacker_key.." and "..defender_key)
 			cm:force_declare_war(attacker_key, defender_key, false, false)
 		end
@@ -359,255 +486,45 @@ function endgame:no_peace_no_confederation_only_war(hostile_faction_key)
 end
 
 function endgame:declare_war_on_adjacent_region_owners(faction, region)
-	local adjacent_regions = region:adjacent_region_list()
-			
-	for i = 0, adjacent_regions:num_items() - 1 do
-		local region = adjacent_regions:item_at(i)
-		if region:is_abandoned() == false then
-			local adjacent_region_owner = region:owning_faction()
-			if adjacent_region_owner:is_null_interface() == false then
-				endgame:declare_war(faction:name(), adjacent_region_owner:name())
+	if region:is_null_interface() == false then
+		local adjacent_regions = region:adjacent_region_list()
+				
+		for i = 0, adjacent_regions:num_items() - 1 do
+			local region = adjacent_regions:item_at(i)
+			if region:is_abandoned() == false then
+				local adjacent_region_owner = region:owning_faction()
+				if adjacent_region_owner:is_null_interface() == false then
+					endgame:declare_war(faction:name(), adjacent_region_owner:name())
+				end
 			end
 		end
 	end
 end
 
--- Note here that unlike other random_army_managers, army_template is a table rather than a string
--- Army templates for the endgame aren't mutually exclusive, therefore we need to independently check each culture here
--- For example, the endgame army generator fully supports spawning an army containing Wood Elves, Empire, *and* Chaos units.
-function endgame:generate_random_army(army_template, unit_count)
+function endgame:reveal_regions()
+	local human_factions = cm:get_human_factions()
+	for i = 1, #human_factions do
+		for i2 = 1, #self.revealed_regions do 
+			cm:make_region_visible_in_shroud(human_factions[i], self.revealed_regions[i2]);
+		end 
+	end
+end
+
+-- The random army manager generates new random army lists using unit_lists from scenarios
+-- This is setup to only create a new random army if the army_template hasn't been used before
+-- Each scenario should use its own army template key in order to not have conflicts
+function endgame:generate_random_army(army_template, unit_list)
 	local ram = random_army_manager
-	ram:remove_force("endgame_army")
-	ram:new_force("endgame_army")
-
-	if army_template.vampires then
-
-		--Infantry
-		ram:add_unit("endgame_army", "wh_main_vmp_inf_skeleton_warriors_1", 2)
-		ram:add_unit("endgame_army", "wh_main_vmp_inf_crypt_ghouls", 4)
-		ram:add_unit("endgame_army", "wh_main_vmp_inf_cairn_wraiths", 4)
-		ram:add_unit("endgame_army", "wh_main_vmp_inf_grave_guard_0", 8)
-		ram:add_unit("endgame_army", "wh_main_vmp_inf_grave_guard_1", 8)
-
-		--Cavalry
-		ram:add_unit("endgame_army", "wh_main_vmp_cav_black_knights_3", 2)
-		ram:add_unit("endgame_army", "wh_main_vmp_cav_hexwraiths", 1)
-		ram:add_unit("endgame_army", "wh_dlc02_vmp_cav_blood_knights_0", 2)
-
-		--Monsters
-		ram:add_unit("endgame_army", "wh_main_vmp_mon_fell_bats", 1)
-		ram:add_unit("endgame_army", "wh_main_vmp_mon_dire_wolves", 1)
-		ram:add_unit("endgame_army", "wh_main_vmp_mon_crypt_horrors", 4)
-		ram:add_unit("endgame_army", "wh_main_vmp_mon_vargheists", 4)
-		ram:add_unit("endgame_army", "wh_main_vmp_mon_varghulf", 2)
-		ram:add_unit("endgame_army", "wh_main_vmp_mon_terrorgheist", 2)
-
-		--Vehicles
-		ram:add_unit("endgame_army", "wh_dlc04_vmp_veh_corpse_cart_1", 1)
-		ram:add_unit("endgame_army", "wh_dlc04_vmp_veh_corpse_cart_2", 1)
-		ram:add_unit("endgame_army", "wh_main_vmp_veh_black_coach", 1)
-		ram:add_unit("endgame_army", "wh_dlc04_vmp_veh_mortis_engine_0", 1)
-
-	end
-	
-	if army_template.greenskins then
-	
-		--Infantry
-		ram:add_unit("endgame_army", "wh_dlc06_grn_inf_nasty_skulkers_0", 2)
-		ram:add_unit("endgame_army", "wh_main_grn_inf_night_goblins", 2)
-		ram:add_unit("endgame_army", "wh_main_grn_inf_night_goblin_fanatics", 2)
-		ram:add_unit("endgame_army", "wh_main_grn_inf_night_goblin_fanatics_1", 2)
-		ram:add_unit("endgame_army", "wh_main_grn_inf_orc_boyz", 2)
-		ram:add_unit("endgame_army", "wh_main_grn_inf_orc_big_uns", 8)
-		ram:add_unit("endgame_army", "wh_main_grn_inf_savage_orcs", 3)
-		ram:add_unit("endgame_army", "wh_main_grn_inf_savage_orc_big_uns", 8)
-		ram:add_unit("endgame_army", "wh_main_grn_inf_black_orcs", 8)
-		ram:add_unit("endgame_army", "wh_main_grn_inf_night_goblin_archers", 2)
-		ram:add_unit("endgame_army", "wh_main_grn_inf_orc_arrer_boyz", 4)
-		ram:add_unit("endgame_army", "wh_main_grn_inf_savage_orc_arrer_boyz", 8)
-		
-		--Cavalry
-		ram:add_unit("endgame_army", "wh_main_grn_cav_goblin_wolf_riders_0", 2)
-		ram:add_unit("endgame_army", "wh_main_grn_cav_goblin_wolf_riders_1", 4)
-		ram:add_unit("endgame_army", "wh_main_grn_cav_goblin_wolf_chariot", 3)
-		ram:add_unit("endgame_army", "wh_main_grn_cav_forest_goblin_spider_riders_0", 2)
-		ram:add_unit("endgame_army", "wh_main_grn_cav_forest_goblin_spider_riders_1", 2)
-		ram:add_unit("endgame_army", "wh_dlc06_grn_cav_squig_hoppers_0", 1)
-		ram:add_unit("endgame_army", "wh_main_grn_cav_orc_boar_boyz", 1)
-		ram:add_unit("endgame_army", "wh_main_grn_cav_orc_boar_boy_big_uns", 5)
-		ram:add_unit("endgame_army", "wh_main_grn_cav_orc_boar_chariot", 1)
-		ram:add_unit("endgame_army", "wh_main_grn_cav_savage_orc_boar_boyz", 2)
-		ram:add_unit("endgame_army", "wh_main_grn_cav_savage_orc_boar_boy_big_uns", 3)
-		
-		--Monsters
-		ram:add_unit("endgame_army", "wh_dlc06_grn_inf_squig_herd_0", 2)
-		ram:add_unit("endgame_army", "wh_main_grn_mon_trolls", 3)
-		ram:add_unit("endgame_army", "wh_main_grn_mon_giant", 2)
-		ram:add_unit("endgame_army", "wh_main_grn_mon_arachnarok_spider_0", 2)
-		
-		--Artillery
-		ram:add_unit("endgame_army", "wh_main_grn_art_goblin_rock_lobber", 2)
-		ram:add_unit("endgame_army", "wh_main_grn_art_doom_diver_catapult", 4)
-
+	local army_string = "endgame_random_army_"..army_template
+	if self.random_army_manager[army_string] == nil then
+		self.random_army_manager[army_string] = true
+		ram:new_force(army_string)
+		for key, value in pairs(unit_list) do
+			ram:add_unit(army_string, key, value)
+		end;
 	end
 
-	if army_template.tomb_kings then
-		--Infantry
-		ram:add_unit("endgame_army", "wh2_dlc09_tmb_inf_skeleton_warriors_0", 2)
-		ram:add_unit("endgame_army", "wh2_dlc09_tmb_inf_skeleton_spearmen_0", 2)
-		ram:add_unit("endgame_army", "wh2_dlc09_tmb_inf_tomb_guard_0", 6)
-		ram:add_unit("endgame_army", "wh2_dlc09_tmb_inf_tomb_guard_1", 8)
-		ram:add_unit("endgame_army", "wh2_dlc09_tmb_inf_nehekhara_warriors_0", 8)
-		ram:add_unit("endgame_army", "wh2_dlc09_tmb_inf_skeleton_archers_0", 4)
-		
-		--Cavalry
-		ram:add_unit("endgame_army", "wh2_dlc09_tmb_cav_skeleton_horsemen_0", 4)
-		ram:add_unit("endgame_army", "wh2_dlc09_tmb_cav_nehekhara_horsemen_0", 2)
-		ram:add_unit("endgame_army", "wh2_dlc09_tmb_veh_skeleton_chariot_0", 2)
-		ram:add_unit("endgame_army", "wh2_dlc09_tmb_veh_skeleton_archer_chariot_0", 3)
-		ram:add_unit("endgame_army", "wh2_dlc09_tmb_cav_skeleton_horsemen_archers_0", 6)
-		ram:add_unit("endgame_army", "wh2_dlc09_tmb_mon_sepulchral_stalkers_0", 3)
-		ram:add_unit("endgame_army", "wh2_dlc09_tmb_cav_necropolis_knights_0", 1)
-		ram:add_unit("endgame_army", "wh2_dlc09_tmb_cav_necropolis_knights_1", 2)
-		
-		--Monsters
-		ram:add_unit("endgame_army", "wh2_dlc09_tmb_mon_carrion_0", 4)
-		ram:add_unit("endgame_army", "wh2_dlc09_tmb_mon_ushabti_0", 2)
-		ram:add_unit("endgame_army", "wh2_dlc09_tmb_mon_ushabti_1", 4)
-		ram:add_unit("endgame_army", "wh2_dlc09_tmb_veh_khemrian_warsphinx_0", 2)
-		ram:add_unit("endgame_army", "wh2_dlc09_tmb_mon_tomb_scorpion_0", 4)
-		ram:add_unit("endgame_army", "wh2_dlc09_tmb_mon_heirotitan_0", 2)
-		ram:add_unit("endgame_army", "wh2_dlc09_tmb_mon_necrosphinx_0", 2)
-		ram:add_unit("endgame_army", "wh2_pro06_tmb_mon_bone_giant_0", 4)
-		
-		--Artillery
-		ram:add_unit("endgame_army", "wh2_dlc09_tmb_art_screaming_skull_catapult_0", 2)
-		ram:add_unit("endgame_army", "wh2_dlc09_tmb_art_casket_of_souls_0", 3)
-	
-	end
-	
-	if army_template.chaos then
-		--Infantry
-		ram:add_unit("endgame_army", "wh_main_chs_inf_chaos_warriors_1", 2)
-		ram:add_unit("endgame_army", "wh_dlc01_chs_inf_chaos_warriors_2", 2)
-		ram:add_unit("endgame_army", "wh_dlc01_chs_inf_forsaken_0", 4)
-		ram:add_unit("endgame_army", "wh_main_chs_inf_chosen_0", 8)
-		ram:add_unit("endgame_army", "wh_main_chs_inf_chosen_1", 6)
-		ram:add_unit("endgame_army", "wh_dlc01_chs_inf_chosen_2", 6)
-		
-		--Cavalry
-		ram:add_unit("endgame_army", "wh_dlc06_chs_cav_marauder_horsemasters_0", 2)
-		ram:add_unit("endgame_army", "wh_main_chs_cav_chaos_chariot", 2)
-		ram:add_unit("endgame_army", "wh_dlc01_chs_cav_gorebeast_chariot", 1)
-		ram:add_unit("endgame_army", "wh_main_chs_cav_chaos_knights_0", 1)
-		ram:add_unit("endgame_army", "wh_main_chs_cav_chaos_knights_1", 2)
-		
-		--Monsters
-		ram:add_unit("endgame_army", "wh_dlc06_chs_inf_aspiring_champions_0", 2) -- They're not really monsters but they're a low entity unit like monsters
-		ram:add_unit("endgame_army", "wh_main_chs_mon_chaos_warhounds_1", 2)
-		ram:add_unit("endgame_army", "wh_main_chs_mon_trolls", 3)
-		ram:add_unit("endgame_army", "wh_dlc01_chs_mon_trolls_1", 2)
-		ram:add_unit("endgame_army", "wh_main_chs_mon_chaos_spawn", 2)
-		ram:add_unit("endgame_army", "wh_dlc06_chs_feral_manticore", 2)
-		ram:add_unit("endgame_army", "wh_main_chs_mon_giant", 2)
-		ram:add_unit("endgame_army", "wh_dlc01_chs_mon_dragon_ogre", 2)
-		ram:add_unit("endgame_army", "wh_dlc01_chs_mon_dragon_ogre_shaggoth", 2)
-		
-		--Artillery
-		ram:add_unit("endgame_army", "wh_main_chs_art_hellcannon", 1)
-
-		--Vehicles
-		ram:add_unit("endgame_army", "wh3_dlc20_chs_mon_warshrine", 1)
-		
-
-	end
-
-	if army_template.empire then
-
-		--Infantry
-		ram:add_unit("endgame_army", "wh_main_emp_inf_swordsmen", 5)
-		ram:add_unit("endgame_army", "wh_main_emp_inf_halberdiers", 5)
-		ram:add_unit("endgame_army", "wh_main_emp_inf_greatswords", 5)
-		ram:add_unit("endgame_army", "wh_main_emp_inf_crossbowmen", 2)
-		ram:add_unit("endgame_army", "wh_dlc04_emp_inf_free_company_militia_0", 1)
-		ram:add_unit("endgame_army", "wh_main_emp_inf_handgunners", 3)
-		
-		--Cavalry
-		ram:add_unit("endgame_army", "wh_main_emp_cav_empire_knights", 4)
-		ram:add_unit("endgame_army", "wh_main_emp_cav_reiksguard", 1)
-		ram:add_unit("endgame_army", "wh_main_emp_cav_pistoliers_1", 2)
-		ram:add_unit("endgame_army", "wh_main_emp_cav_outriders_0", 1)
-		ram:add_unit("endgame_army", "wh_main_emp_cav_outriders_1", 2)
-		ram:add_unit("endgame_army", "wh_dlc04_emp_cav_knights_blazing_sun_0", 1)
-		ram:add_unit("endgame_army", "wh_main_emp_cav_demigryph_knights_0", 2)
-		ram:add_unit("endgame_army", "wh_main_emp_cav_demigryph_knights_1", 2)
-		
-		--Artillery
-		ram:add_unit("endgame_army", "wh_main_emp_art_mortar", 1)
-		ram:add_unit("endgame_army", "wh_main_emp_art_great_cannon", 1)
-		ram:add_unit("endgame_army", "wh_main_emp_art_helblaster_volley_gun", 1)
-		ram:add_unit("endgame_army", "wh_main_emp_art_helstorm_rocket_battery", 1)
-	
-	end
-
-	if army_template.wood_elves then
-
-		--Infantry
-		ram:add_unit("endgame_army", "wh_dlc05_wef_inf_eternal_guard_0", 8)
-		ram:add_unit("endgame_army", "wh_dlc05_wef_inf_eternal_guard_1", 12)
-		ram:add_unit("endgame_army", "wh_dlc05_wef_inf_dryads_0", 4)
-		ram:add_unit("endgame_army", "wh_dlc05_wef_inf_wardancers_1", 8)
-		ram:add_unit("endgame_army", "wh_dlc05_wef_inf_wildwood_rangers_0", 4)
-		ram:add_unit("endgame_army", "wh_dlc05_wef_inf_glade_guard_2", 12)
-		ram:add_unit("endgame_army", "wh_dlc05_wef_inf_deepwood_scouts_1", 8)
-		ram:add_unit("endgame_army", "wh_dlc05_wef_inf_waywatchers_0", 6)
-
-		--Cavalry
-		ram:add_unit("endgame_army", "wh_dlc05_wef_cav_wild_riders_1", 6)
-		ram:add_unit("endgame_army", "wh_dlc05_wef_cav_glade_riders_0", 6)
-		ram:add_unit("endgame_army", "wh_dlc05_wef_cav_glade_riders_1", 2)
-		ram:add_unit("endgame_army", "wh_dlc05_wef_cav_hawk_riders_0", 1)
-		ram:add_unit("endgame_army", "wh_dlc05_wef_cav_sisters_thorn_0", 1)
-
-		--Monsters
-		ram:add_unit("endgame_army", "wh_dlc05_wef_mon_treekin_0", 4)
-		ram:add_unit("endgame_army", "wh_dlc05_wef_mon_treeman_0", 4)
-		ram:add_unit("endgame_army", "wh_dlc05_wef_mon_great_eagle_0", 1)
-		ram:add_unit("endgame_army", "wh_dlc05_wef_forest_dragon_0", 2)
-
-	end
-
-	if army_template.dwarfs then
-		--Infantry
-		ram:add_unit("endgame_army", "wh_main_dwf_inf_miners_1", 6)
-		ram:add_unit("endgame_army", "wh_main_dwf_inf_hammerers", 8)
-		ram:add_unit("endgame_army", "wh_main_dwf_inf_ironbreakers", 8)
-		ram:add_unit("endgame_army", "wh_main_dwf_inf_longbeards", 4)
-		ram:add_unit("endgame_army", "wh_main_dwf_inf_longbeards_1", 8)
-		ram:add_unit("endgame_army", "wh_main_dwf_inf_slayers", 6)
-		ram:add_unit("endgame_army", "wh2_dlc10_dwf_inf_giant_slayers", 4)
-		ram:add_unit("endgame_army", "wh_main_dwf_inf_thunderers_0", 8)
-		ram:add_unit("endgame_army", "wh_main_dwf_inf_irondrakes_0", 4)
-		ram:add_unit("endgame_army", "wh_main_dwf_inf_irondrakes_2", 6)
-		ram:add_unit("endgame_army", "wh_dlc06_dwf_inf_rangers_0", 2)
-		ram:add_unit("endgame_army", "wh_dlc06_dwf_inf_rangers_1", 4)
-		ram:add_unit("endgame_army", "wh_dlc06_dwf_inf_bugmans_rangers_0", 2)
-		
-		--Artillery
-		ram:add_unit("endgame_army", "wh_main_dwf_art_grudge_thrower", 1)
-		ram:add_unit("endgame_army", "wh_main_dwf_art_cannon", 4)
-		ram:add_unit("endgame_army", "wh_main_dwf_art_organ_gun", 4)
-		ram:add_unit("endgame_army", "wh_main_dwf_art_flame_cannon", 2)
-		
-		--Vehicles
-		ram:add_unit("endgame_army", "wh_main_dwf_veh_gyrocopter_0", 1)
-		ram:add_unit("endgame_army", "wh_main_dwf_veh_gyrocopter_1", 1)
-		ram:add_unit("endgame_army", "wh_main_dwf_veh_gyrobomber", 1)
-		
-	end
-
-	return ram:generate_force("endgame_army", unit_count, false)
-
+	return ram:generate_force(army_string, 19, false)
 end
 
 --------------------------------------------------------------

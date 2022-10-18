@@ -42,19 +42,8 @@ local hostility_level_resource_factors = {
 	["decrease_major"] =				{"lords_lost",						-10},
 	["decrease_minor"] =				{"inactivity",						-0.1},
 	["increase_kill_army"] =			{"armies_attacked_and_defeated",	3},
-	["increase_kill_scripted_army"] =	{"armies_attacked_and_defeated",	0},
 	["increase_event"] =				{"events",							10},
 	["reset"] =							{"hostility_level_reset",			-60}
-}
-local hostility_level_intervals = {
-	["increase_major"] = 7,
-	["increase_minor"] = 2,
-	["decrease_major"] = -10,
-	["decrease_minor"] = -0.1, 
-	["increase_kill_army"] = 3,
-	["increase_kill_scripted_army"] = 0,
-	["increase_event"] = 10,
-	["reset"] = -60
 }
 local hostility_level_thresholds = {10, 20, 30, 40, 50, 60}
 local hostility_level_scripted_army_size = {5, 5, 10, 14, 14, 18}
@@ -100,8 +89,6 @@ local hostility_level_scripted_army_spawn_loc = {
 	["wh3_main_combi_region_bordeleaux"]			= {404, 588}
 }
 
-local hostility_level_scripted_army_expire_counter_default = 5
-local hostility_level_scripted_army_expire_counter = hostility_level_scripted_army_expire_counter_default
 local hostility_level_decay_counter_default = 5
 local hostility_level_decay_counter = hostility_level_decay_counter_default
 local hostility_level_5_lock_counter_default = 5
@@ -121,8 +108,6 @@ local hostility_level_enemy_buffs = {
 	"wh2_dlc13_wanted_level_enemy_buff_5"
 }
 
-local hostility_level_scripted_army_counter = 0
-local hostility_level_scripted_army_list = {}
 local hostility_level_scripted_army_faction = "wh2_dlc13_lzd_avengers"
 
 local queued_hostility_level_army_spawn = {
@@ -400,14 +385,15 @@ function add_wulfhart_imperial_supply_listeners()
 		"dilemma_choice_made_distribute_imperial_supply",
 		"DilemmaChoiceMadeEvent",
 		function(context)
-			return context:dilemma():starts_with(imperial_guard_strength_dilemma)
+			return context:dilemma():starts_with("wh2_dlc13_wulfhart_")
 		end,
 		function(context)
 			local faction = context:faction()
 			local faction_name = context:faction():name()
+			local dilemma = context:dilemma()
 			
-			if cm:get_factions_bonus_value(faction, "imperial_supply_extra") > 0 then
-				cm:trigger_incident(faction_name, context:dilemma():gsub(imperial_guard_strength_dilemma, imperial_guard_extra_unit_incident), true)
+			if dilemma:starts_with(imperial_guard_strength_dilemma) and cm:get_factions_bonus_value(faction, "imperial_supply_extra") > 0 then
+				cm:trigger_incident(faction_name, dilemma:gsub(imperial_guard_strength_dilemma, imperial_guard_extra_unit_incident), true)
 				
 				if faction:has_effect_bundle("wh2_dlc13_wulfhart_stronger_imperial_supply") then
 					cm:remove_effect_bundle("wh2_dlc13_wulfhart_stronger_imperial_supply", faction_name)
@@ -536,10 +522,6 @@ function add_wulfhart_imperial_supply_listeners()
 					if not defender_is_scripted_army and not defender_is_rebel then
 						-- player won the battle against a regular army
 						update_hostility_bar("increase_kill_army")
-					else
-						-- player won the battle against a scripted or rebel army
-						update_hostility_bar("increase_kill_scripted_army")
-						hostility_level_scripted_army_expire_counter = hostility_level_scripted_army_expire_counter_default
 					end
 				elseif num_attackers_wounded > 0 then
 					-- player lost the battle and at least one character was wounded
@@ -589,12 +571,7 @@ function add_wulfhart_imperial_supply_listeners()
 			hostility_level_increased = 0
 			update_hostility_bar()
 			update_acclaim_bar()
-			update_scripted_army_list()
 			update_queued_spawn()
-			
-			if hostility_level_scripted_army_expire_counter > 0 then
-				hostility_level_scripted_army_expire_counter = hostility_level_scripted_army_expire_counter - 1
-			end
 			
 			-- elector count dilemmas and counters
 			if elector_count_details["counter"] > 0 then
@@ -781,12 +758,17 @@ function spawn_hostility_army(army_template, size, loc)
 	
 	loc[1], loc[2] = cm:find_valid_spawn_location_for_character_from_position(hostility_level_scripted_army_faction, loc[1], loc[2], true, 3)
 	
-	update_scripted_army_list()
+	local invasion_faction_has_armies = false
 	
-	if #hostility_level_scripted_army_list == 0 and hostility_level_scripted_army_expire_counter == 0 then
-		local scripted_army_wanted = invasion_manager:new_invasion("wanted_bar_army" .. tostring(hostility_level_scripted_army_counter), hostility_level_scripted_army_faction, random_army_manager:generate_force(army_template, size), loc)
-		hostility_level_scripted_army_expire_counter = hostility_level_scripted_army_expire_counter_default
-		hostility_level_scripted_army_counter = hostility_level_scripted_army_counter + 1
+	for _, current_mf in model_pairs(cm:get_faction(hostility_level_scripted_army_faction):military_force_list()) do
+		if not current_mf:is_armed_citizenry() then
+			invasion_faction_has_armies = true
+			break
+		end
+	end
+	
+	if not invasion_faction_has_armies then
+		local scripted_army_wanted = invasion_manager:new_invasion("wanted_bar_army_" .. tostring(cm:model():turn_number()), hostility_level_scripted_army_faction, random_army_manager:generate_force(army_template, size), loc)
 		scripted_army_wanted.target = wulfhart_faction
 		scripted_army_wanted.human = false
 		scripted_army_wanted:apply_effect("wh2_dlc13_elector_invasion_enemy", 0)
@@ -799,7 +781,6 @@ function spawn_hostility_army(army_template, size, loc)
 				end
 				
 				cm:force_declare_war(hostility_level_scripted_army_faction, wulfhart_faction, false, false)
-				update_scripted_army_list(force_leader:military_force():command_queue_index())
 				
 				cm:trigger_incident_with_targets(cm:get_faction(wulfhart_faction):command_queue_index(), "wh2_dlc13_incident_hostility_invasion", 0, 0, force_leader:command_queue_index(), 0, 0, 0)
 			end,
@@ -807,26 +788,6 @@ function spawn_hostility_army(army_template, size, loc)
 			false,
 			false
 		)
-	end
-end
-
-function update_scripted_army_list(cqi)
-	local cqis_to_remove = {}
-	
-	for i = 1, #hostility_level_scripted_army_list do
-		local mf = cm:get_military_force_by_cqi(hostility_level_scripted_army_list[i])
-		
-		if not mf or mf:is_null_interface() then
-			table.insert(cqis_to_remove, hostility_level_scripted_army_list[i])
-		end
-	end
-	
-	for i = 1, #cqis_to_remove do
-		table.remove(hostility_level_scripted_army_list, cqis_to_remove[i])
-	end
-	
-	if cqi then
-		table.insert(hostility_level_scripted_army_list, cqi)
 	end
 end
 
@@ -1012,12 +973,9 @@ end
 
 cm:add_saving_game_callback(
 	function(context)
-		cm:save_named_value("hostility_level_scripted_army_list", hostility_level_scripted_army_list, context)
-		cm:save_named_value("hostility_level_scripted_army_counter", hostility_level_scripted_army_counter, context)
 		cm:save_named_value("imperial_guard_meter", imperial_guard_meter, context)
 		cm:save_named_value("hostility_level_increased", hostility_level_increased, context)
 		cm:save_named_value("hostility_level_current", hostility_level_current, context)
-		cm:save_named_value("hostility_level_scripted_army_expire_counter", hostility_level_scripted_army_expire_counter, context)
 		cm:save_named_value("hostility_level_decay_counter", hostility_level_decay_counter, context)
 		cm:save_named_value("elector_count_details", elector_count_details, context)
 		cm:save_named_value("elector_count_reward_queued", elector_count_reward_queued, context)
@@ -1031,12 +989,9 @@ cm:add_saving_game_callback(
 cm:add_loading_game_callback(
 	function(context)
 		if not cm:is_new_game() then
-			hostility_level_scripted_army_list = cm:load_named_value("hostility_level_scripted_army_list", hostility_level_scripted_army_list, context)
-			hostility_level_scripted_army_counter = cm:load_named_value("hostility_level_scripted_army_counter", hostility_level_scripted_army_counter, context)
 			imperial_guard_meter = cm:load_named_value("imperial_guard_meter", imperial_guard_meter, context)
 			hostility_level_increased = cm:load_named_value("hostility_level_increased", hostility_level_increased, context)
 			hostility_level_current = cm:load_named_value("hostility_level_current", hostility_level_current, context)
-			hostility_level_scripted_army_expire_counter = cm:load_named_value("hostility_level_scripted_army_expire_counter", hostility_level_scripted_army_expire_counter, context)
 			hostility_level_decay_counter = cm:load_named_value("hostility_level_decay_counter", hostility_level_decay_counter_default, context)
 			elector_count_details = cm:load_named_value("elector_count_details", elector_count_details, context)
 			elector_count_reward_queued = cm:load_named_value("elector_count_reward_queued", elector_count_reward_queued, context)

@@ -62,6 +62,7 @@ function add_vow_progress(character, trait, ai, agents)
 	out.design("\tMax Points - " .. max_trait_points)
 	local incident = "wh_dlc07_incident_brt_vow_gained"
 	local incident_uc = incident
+	local trait_uc = trait
 	
 	if character:character_details():character_subtype_has_female_name() and not character:character_subtype("wh2_dlc14_brt_repanse") then
 		out.design("\tFemale Character")
@@ -107,7 +108,7 @@ function add_vow_progress(character, trait, ai, agents)
 	
 	-- Do all Paladins in this characters army
 	if agents and character:has_military_force() then
-		trait = event_key .. "_agent"
+		trait = trait_uc .. "_agent"
 		local force_characters = character:military_force():character_list()
 		local force_character_count = force_characters:num_items()
 		out.design("Checking agents (" .. force_character_count .. ")...")

@@ -569,19 +569,11 @@ victory_objectives_ie = {
 			alignment = "chaos",
 			objectives = {
 				{
-					-- Eliminate the other Chaos factions
+					-- Eliminate Tzeentch
 					type = "DESTROY_FACTION",
 					conditions = {
-						"faction wh3_main_sla_seducers_of_slaanesh",
-						"faction wh3_main_kho_exiles_of_khorne",
 						"faction wh3_main_tze_oracles_of_tzeentch",
-						"faction wh3_main_dae_daemon_prince",
-						"faction wh_main_chs_chaos",
-						"faction wh3_dlc20_chs_kholek",
-						"faction wh3_dlc20_chs_sigvald",
-						"faction wh3_dlc20_chs_vilitch",
-						"faction wh3_dlc20_chs_azazel",
-						"faction wh3_dlc20_chs_valkia",
+						"faction wh3_main_tze_flaming_scribes",
 						"confederation_valid"
 					}
 				}
@@ -591,20 +583,25 @@ victory_objectives_ie = {
 			alignment = "chaos",
 			objectives = {
 				{
-					-- Eliminate the other Chaos factions
-					type = "DESTROY_FACTION",
+					-- N'kari controls Ulthuan, including regular Vassals and Allies or via seduction
+					type = "CONTROL_N_PROVINCES_INCLUDING",
 					conditions = {
-						"faction wh3_main_nur_poxmakers_of_nurgle",
-						"faction wh3_main_kho_exiles_of_khorne",
-						"faction wh3_main_tze_oracles_of_tzeentch",
-						"faction wh3_main_dae_daemon_prince",
-						"faction wh_main_chs_chaos",
-						"faction wh3_dlc20_chs_kholek",
-						"faction wh3_dlc20_chs_sigvald",
-						"faction wh3_dlc20_chs_vilitch",
-						"faction wh3_dlc20_chs_festus",
-						"faction wh3_dlc20_chs_valkia",
-						"confederation_valid"
+						"total 15",
+						"province wh3_main_combi_province_eataine",
+						"province wh3_main_combi_province_caledor",
+						"province wh3_main_combi_province_tiranoc",
+						"province wh3_main_combi_province_ellyrion",
+						"province wh3_main_combi_province_nagarythe",
+						"province wh3_main_combi_province_avelorn",
+						"province wh3_main_combi_province_chrace",
+						"province wh3_main_combi_province_cothique",
+						"province wh3_main_combi_province_saphery",
+						"province wh3_main_combi_province_northern_yvresse",
+						"province wh3_main_combi_province_southern_yvresse",
+						"province wh3_main_combi_province_eagle_gate",
+						"province wh3_main_combi_province_griffon_gate",
+						"province wh3_main_combi_province_unicorn_gate",
+						"province wh3_main_combi_province_phoenix_gate"
 					}
 				}
 			}
@@ -613,19 +610,10 @@ victory_objectives_ie = {
 			alignment = "chaos",
 			objectives = {
 				{
-					-- Eliminate the other Chaos factions
+					-- Eliminate Slaanesh
 					type = "DESTROY_FACTION",
 					conditions = {
 						"faction wh3_main_sla_seducers_of_slaanesh",
-						"faction wh3_main_nur_poxmakers_of_nurgle",
-						"faction wh3_main_tze_oracles_of_tzeentch",
-						"faction wh3_main_dae_daemon_prince",
-						"faction wh_main_chs_chaos",
-						"faction wh3_dlc20_chs_kholek",
-						"faction wh3_dlc20_chs_sigvald",
-						"faction wh3_dlc20_chs_vilitch",
-						"faction wh3_dlc20_chs_azazel",
-						"faction wh3_dlc20_chs_festus",
 						"confederation_valid"
 					}
 				}
@@ -635,19 +623,11 @@ victory_objectives_ie = {
 			alignment = "chaos",
 			objectives = {
 				{
-					-- Eliminate the other Chaos factions
+					-- Eliminate Nurgle
 					type = "DESTROY_FACTION",
 					conditions = {
-						"faction wh3_main_sla_seducers_of_slaanesh",
-						"faction wh3_main_kho_exiles_of_khorne",
 						"faction wh3_main_nur_poxmakers_of_nurgle",
-						"faction wh3_main_dae_daemon_prince",
-						"faction wh_main_chs_chaos",
-						"faction wh3_dlc20_chs_kholek",
-						"faction wh3_dlc20_chs_sigvald",
-						"faction wh3_dlc20_chs_festus",
-						"faction wh3_dlc20_chs_azazel",
-						"faction wh3_dlc20_chs_valkia",
+						"faction wh3_main_nur_bubonic_swarm",
 						"confederation_valid"
 					}
 				}
@@ -657,20 +637,14 @@ victory_objectives_ie = {
 			alignment = "chaos",
 			objectives = {
 				{
-					-- Eliminate the other Chaos factions
+					-- Eliminate the other nearby Chaos factions
 					type = "DESTROY_FACTION",
 					conditions = {
-						"faction wh3_main_sla_seducers_of_slaanesh",
-						"faction wh3_main_kho_exiles_of_khorne",
-						"faction wh3_main_tze_oracles_of_tzeentch",
-						"faction wh3_main_nur_poxmakers_of_nurgle",
-						"faction wh_main_chs_chaos",
+						"faction wh_main_chs_chaos", 
 						"faction wh3_dlc20_chs_kholek",
 						"faction wh3_dlc20_chs_sigvald",
-						"faction wh3_dlc20_chs_vilitch",
 						"faction wh3_dlc20_chs_azazel",
 						"faction wh3_dlc20_chs_valkia",
-						"faction wh3_dlc20_chs_festus",
 						"confederation_valid"
 					}
 				}
@@ -680,18 +654,45 @@ victory_objectives_ie = {
 			alignment = "chaos",
 			objectives = {
 				{
-					-- Eliminate the primary lords of each playable order subculture
-					type = "DESTROY_FACTION",
+					-- Capture X of the Dark Fortress regions
+					type = "CONTROL_N_REGIONS_FROM",
 					conditions = {
-						"faction wh_main_emp_empire",
-						"faction wh_main_dwf_dwarfs",
-						"faction wh_main_brt_bretonnia",
-						"faction wh_dlc05_wef_wood_elves",
-						"faction wh2_main_lzd_hexoatl",
-						"faction wh2_main_hef_eataine",
-						"faction wh3_main_cth_the_northern_provinces",
-						"faction wh3_main_ksl_the_ice_court",
-						"confederation_valid"
+						"total 13",
+						"region wh3_main_combi_region_ancient_city_of_quintex",
+						"region wh3_main_combi_region_altar_of_the_crimson_harvest",
+						"region wh3_main_combi_region_black_rock",
+						"region wh3_main_combi_region_black_fortress",
+						"region wh3_main_combi_region_brass_keep",
+						"region wh3_main_combi_region_bloodwind_keep",
+						"region wh3_main_combi_region_daemons_gate",
+						"region wh3_main_combi_region_dagraks_end",
+						"region wh3_main_combi_region_doomkeep",
+						"region wh3_main_combi_region_fortress_of_the_damned",
+						"region wh3_main_combi_region_karak_dum",
+						"region wh3_main_combi_region_karak_vlag",
+						"region wh3_main_combi_region_konquata",
+						"region wh3_main_combi_region_middenheim",
+						"region wh3_main_combi_region_monolith_of_borkill_the_bloody_handed",
+						"region wh3_main_combi_region_nuln",
+						"region wh3_main_combi_region_okkams_forever_maze",
+						"region wh3_main_combi_region_praag",
+						"region wh3_main_combi_region_red_fortress",
+						"region wh3_main_combi_region_tower_of_gorgoth",
+						"region wh3_main_combi_region_zanbaijin",
+						"region wh3_main_combi_region_the_challenge_stone",
+						"region wh3_main_combi_region_the_crystal_spires",
+						"region wh3_main_combi_region_the_godless_crater",
+						"region wh3_main_combi_region_the_forbidden_citadel",
+						"region wh3_main_combi_region_the_frozen_city",
+						"region wh3_main_combi_region_the_howling_citadel",
+						"region wh3_main_combi_region_the_lost_palace",
+						"region wh3_main_combi_region_the_monolith_of_katam",
+						"region wh3_main_combi_region_the_palace_of_ruin",
+						"region wh3_main_combi_region_the_silvered_tower_of_sorcerers",
+						"region wh3_main_combi_region_the_tower_of_khrakk",
+						"region wh3_main_combi_region_the_twisted_towers",
+						"region wh3_main_combi_region_the_writhing_fortress",
+						"override_text mission_text_text_mis_activity_control_n_regions_satrapy_including_at_least_n"
 					}
 				}
 			}
@@ -2095,10 +2096,10 @@ victory_objectives_ie = {
 					}
 				},
 				{
-					-- Capture 6 of the 10 nearby dark fortresses
+					-- Capture 4 of the 10 nearby dark fortresses
 					type = "CONTROL_N_REGIONS_FROM",
 					conditions = {
-						"total 6",
+						"total 4",
 						"region wh3_main_combi_region_konquata",
 						"region wh3_main_combi_region_fortress_of_the_damned",
 						"region wh3_main_combi_region_monolith_of_borkill_the_bloody_handed",
@@ -2194,40 +2195,17 @@ victory_objectives_ie = {
 			}
 		},
 
-		-- Festus
+		-- Festus the Leechlord
 		wh3_dlc20_chs_festus = {
 			objectives = {
 				{
-					-- Capture at least half of the dark fortresses
+					-- Hold nearby Dark Fortresses and the Ice Court's capital
 					type = "CONTROL_N_REGIONS_FROM",
 					conditions = {
-						"total 13",
-						"region wh3_main_combi_region_black_rock",
-						"region wh3_main_combi_region_bloodwind_keep",
-						"region wh3_main_combi_region_daemons_gate",
-						"region wh3_main_combi_region_doomkeep",
-						"region wh3_main_combi_region_fortress_of_the_damned",
-						"region wh3_main_combi_region_ironfrost",
-						"region wh3_main_combi_region_karak_dum",
-						"region wh3_main_combi_region_karak_vlag",
-						"region wh3_main_combi_region_monolith_of_borkill_the_bloody_handed",
-						"region wh3_main_combi_region_mount_athull",
-						"region wh3_main_combi_region_okkams_forever_maze",
-						"region wh3_main_combi_region_zanbaijin",
-						"region wh3_main_combi_region_red_fortress",
-						"region wh3_main_combi_region_temple_of_heimkel",
-						"region wh3_main_combi_region_the_challenge_stone",
-						"region wh3_main_combi_region_the_crystal_spires",
-						"region wh3_main_combi_region_the_forbidden_citadel",
-						"region wh3_main_combi_region_the_frozen_city",
-						"region wh3_main_combi_region_the_howling_citadel",
-						"region wh3_main_combi_region_the_lost_palace",
-						"region wh3_main_combi_region_the_monolith_of_katam",
-						"region wh3_main_combi_region_the_silvered_tower_of_sorcerers",
-						"region wh3_main_combi_region_the_tower_of_khrakk",
-						"region wh3_main_combi_region_the_twisted_towers",
-						"region wh3_main_combi_region_the_writhing_fortress",
-						"override_text mission_text_text_mis_activity_control_n_regions_satrapy_including_at_least_n"
+						"total 3",
+						"region wh3_main_combi_region_middenheim",
+						"region wh3_main_combi_region_praag",
+						"region wh3_main_combi_region_kislev",
 					}
 				}
 			}
@@ -2237,114 +2215,57 @@ victory_objectives_ie = {
 		wh3_dlc20_chs_azazel = {
 			objectives = {
 				{
-					-- Capture at least half of the dark fortresses
-					type = "CONTROL_N_REGIONS_FROM",
+					-- Hold the Norscan mountains
+					type = "CONTROL_N_PROVINCES_INCLUDING",
 					conditions = {
-						"total 13",
-						"region wh3_main_combi_region_black_rock",
-						"region wh3_main_combi_region_bloodwind_keep",
-						"region wh3_main_combi_region_daemons_gate",
-						"region wh3_main_combi_region_doomkeep",
-						"region wh3_main_combi_region_fortress_of_the_damned",
-						"region wh3_main_combi_region_ironfrost",
-						"region wh3_main_combi_region_karak_dum",
-						"region wh3_main_combi_region_karak_vlag",
-						"region wh3_main_combi_region_monolith_of_borkill_the_bloody_handed",
-						"region wh3_main_combi_region_mount_athull",
-						"region wh3_main_combi_region_okkams_forever_maze",
-						"region wh3_main_combi_region_zanbaijin",
-						"region wh3_main_combi_region_red_fortress",
-						"region wh3_main_combi_region_temple_of_heimkel",
-						"region wh3_main_combi_region_the_challenge_stone",
-						"region wh3_main_combi_region_the_crystal_spires",
-						"region wh3_main_combi_region_the_forbidden_citadel",
-						"region wh3_main_combi_region_the_frozen_city",
-						"region wh3_main_combi_region_the_howling_citadel",
-						"region wh3_main_combi_region_the_lost_palace",
-						"region wh3_main_combi_region_the_monolith_of_katam",
-						"region wh3_main_combi_region_the_silvered_tower_of_sorcerers",
-						"region wh3_main_combi_region_the_tower_of_khrakk",
-						"region wh3_main_combi_region_the_twisted_towers",
-						"region wh3_main_combi_region_the_writhing_fortress",
-						"override_text mission_text_text_mis_activity_control_n_regions_satrapy_including_at_least_n"
+						"total 5",
+						"province wh3_main_combi_province_trollheim_mountains",
+						"province wh3_main_combi_province_gianthome_mountains",
+						"province wh3_main_combi_province_mountains_of_hel",
+						"province wh3_main_combi_province_vanaheim_mountains",
+						"province wh3_main_combi_province_mountains_of_naglfari",
 					}
-				}
+				},
 			}
 		},
 
-		-- Valkia
+		-- Valkia the Bloody   
 		wh3_dlc20_chs_valkia = {
 			objectives = {
 				{
-					-- Capture at least half of the dark fortresses
+					-- Hold key Dark Elf provinces nearby
+					type = "CONTROL_N_PROVINCES_INCLUDING",
+					conditions = {
+						"total 2",
+						"province wh3_main_combi_province_spiteful_peaks",
+						"province wh3_main_combi_province_iron_foothills",
+					}
+				},
+				{
+					-- Hold nearby Dark Fortresses
 					type = "CONTROL_N_REGIONS_FROM",
 					conditions = {
-						"total 13",
-						"region wh3_main_combi_region_black_rock",
-						"region wh3_main_combi_region_bloodwind_keep",
-						"region wh3_main_combi_region_daemons_gate",
-						"region wh3_main_combi_region_doomkeep",
-						"region wh3_main_combi_region_fortress_of_the_damned",
-						"region wh3_main_combi_region_ironfrost",
-						"region wh3_main_combi_region_karak_dum",
-						"region wh3_main_combi_region_karak_vlag",
-						"region wh3_main_combi_region_monolith_of_borkill_the_bloody_handed",
-						"region wh3_main_combi_region_mount_athull",
-						"region wh3_main_combi_region_okkams_forever_maze",
-						"region wh3_main_combi_region_zanbaijin",
-						"region wh3_main_combi_region_red_fortress",
-						"region wh3_main_combi_region_temple_of_heimkel",
-						"region wh3_main_combi_region_the_challenge_stone",
-						"region wh3_main_combi_region_the_crystal_spires",
-						"region wh3_main_combi_region_the_forbidden_citadel",
+						"total 2",
+						"region wh3_main_combi_region_the_palace_of_ruin",
 						"region wh3_main_combi_region_the_frozen_city",
-						"region wh3_main_combi_region_the_howling_citadel",
-						"region wh3_main_combi_region_the_lost_palace",
-						"region wh3_main_combi_region_the_monolith_of_katam",
-						"region wh3_main_combi_region_the_silvered_tower_of_sorcerers",
-						"region wh3_main_combi_region_the_tower_of_khrakk",
-						"region wh3_main_combi_region_the_twisted_towers",
-						"region wh3_main_combi_region_the_writhing_fortress",
-						"override_text mission_text_text_mis_activity_control_n_regions_satrapy_including_at_least_n"
 					}
 				}
 			}
 		},
 
-		-- Vilitch
+		-- Vilitch the Curseling
 		wh3_dlc20_chs_vilitch = {
 			objectives = {
 				{
-					-- Capture at least half of the dark fortresses
+					-- Hold nearby Dark Fortresses
 					type = "CONTROL_N_REGIONS_FROM",
 					conditions = {
-						"total 13",
-						"region wh3_main_combi_region_black_rock",
-						"region wh3_main_combi_region_bloodwind_keep",
-						"region wh3_main_combi_region_daemons_gate",
-						"region wh3_main_combi_region_doomkeep",
-						"region wh3_main_combi_region_fortress_of_the_damned",
-						"region wh3_main_combi_region_ironfrost",
-						"region wh3_main_combi_region_karak_dum",
-						"region wh3_main_combi_region_karak_vlag",
-						"region wh3_main_combi_region_monolith_of_borkill_the_bloody_handed",
-						"region wh3_main_combi_region_mount_athull",
-						"region wh3_main_combi_region_okkams_forever_maze",
-						"region wh3_main_combi_region_zanbaijin",
+						"total 5",
 						"region wh3_main_combi_region_red_fortress",
-						"region wh3_main_combi_region_temple_of_heimkel",
-						"region wh3_main_combi_region_the_challenge_stone",
-						"region wh3_main_combi_region_the_crystal_spires",
-						"region wh3_main_combi_region_the_forbidden_citadel",
-						"region wh3_main_combi_region_the_frozen_city",
-						"region wh3_main_combi_region_the_howling_citadel",
-						"region wh3_main_combi_region_the_lost_palace",
-						"region wh3_main_combi_region_the_monolith_of_katam",
-						"region wh3_main_combi_region_the_silvered_tower_of_sorcerers",
-						"region wh3_main_combi_region_the_tower_of_khrakk",
-						"region wh3_main_combi_region_the_twisted_towers",
-						"region wh3_main_combi_region_the_writhing_fortress",
-						"override_text mission_text_text_mis_activity_control_n_regions_satrapy_including_at_least_n"
+						"region wh3_main_combi_region_bloodwind_keep",
+						"region wh3_main_combi_region_fortress_of_eyes",
+						"region wh3_main_combi_region_wei_jin",
+						"region wh3_main_combi_region_nan_gau",
 					}
 				}
 			}
@@ -2569,18 +2490,50 @@ cm:add_first_tick_callback_new(
 	end
 )
 
+-- Trigger an incident after completing victory to let the player know they did it, and the reward for doing it
+function victory_objectives_ie:trigger_victory_incident(faction, mission_key, incident_key)
+	local faction_subculture_key = faction:subculture()
+	local faction_alignment = self.alignments.default
+	if self.subcultures[faction_subculture_key] then
+		faction_alignment = self.subcultures[faction_subculture_key].alignment
+	end
+	local bundle = self.alignments[faction_alignment][mission_key].payload_bundle
+	local incident_builder = cm:create_incident_builder(incident_key)
+	local payload = cm:create_new_custom_effect_bundle(bundle)
+	payload:set_duration(0)
+	local payload_builder = cm:create_payload()
+	payload_builder:effect_bundle_to_faction(payload)
+	incident_builder:set_payload(payload_builder)
+	cm:launch_custom_incident_from_builder(incident_builder, cm:get_faction(faction:name()))
+end
+
 -- Listeners for scripted faction-specific objectives
 function victory_objectives_ie:add_scripted_victory_listeners()
 
-	-- Mark faction victory as complete for the cultural victory objective
-	core:add_listener(
-		"IEVictoryConditionFactionVictoryAttained",
+	-- Mark faction victory as complete for the cultural victory objective and fire an incident informing the player they beat the mission
+		core:add_listener(
+		"IEVictoryConditionShortVictoryAttained",
 		"MissionSucceeded",
 		function(context)
 			return context:mission():mission_record_key() == "wh_main_short_victory"
 		end,
 		function(context)
-			cm:complete_scripted_mission_objective(context:faction():name(), "wh_main_long_victory", "complete_faction_victory", true)
+			local faction = context:faction()
+			cm:complete_scripted_mission_objective(faction:name(), "wh_main_long_victory", "complete_faction_victory", true)
+			self:trigger_victory_incident(faction, "wh_main_short_victory", "wh3_main_ie_victory_short")
+		end,
+		true
+	)
+
+	-- Let the player know they beat the long victory, since the event is suppressed
+	core:add_listener(
+		"IEVictoryConditionLongVictoryAttained",
+		"MissionSucceeded",
+		function(context)
+			return context:mission():mission_record_key() == "wh_main_long_victory"
+		end,
+		function(context)
+			self:trigger_victory_incident(context:faction(), "wh_main_long_victory", "wh3_main_ie_victory_long")
 		end,
 		true
 	)

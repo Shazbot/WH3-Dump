@@ -97,23 +97,23 @@ bm:out("\tend_deployment_phase() called");
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_start) end, 0);
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 1000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_twa03_Rakarth_QB_Whip_Of_Agony_pt_01", "subtitle_with_frame", 4) end, 1500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_twa03_Rakarth_QB_Whip_Of_Agony_pt_01", "subtitle_with_frame", 0.1) end, 1500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 10500);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 10750);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_twa03_Rakarth_QB_Whip_Of_Agony_pt_02", "subtitle_with_frame", 4) end, 11250);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_twa03_Rakarth_QB_Whip_Of_Agony_pt_02", "subtitle_with_frame", 0.1) end, 11250);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 19000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_03) end, 19250);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_twa03_Rakarth_QB_Whip_Of_Agony_pt_03", "subtitle_with_frame", 2) end, 19750);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_twa03_Rakarth_QB_Whip_Of_Agony_pt_03", "subtitle_with_frame", 0.1) end, 19750);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 24000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_04) end, 24500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_twa03_Rakarth_QB_Whip_Of_Agony_pt_04", "subtitle_with_frame", 3) end, 25000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_twa03_Rakarth_QB_Whip_Of_Agony_pt_04", "subtitle_with_frame", 0.1) end, 25000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 31000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_05) end, 31500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_twa03_Rakarth_QB_Whip_Of_Agony_pt_05", "subtitle_with_frame", 4) end, 32500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_twa03_Rakarth_QB_Whip_Of_Agony_pt_05", "subtitle_with_frame", 0.1) end, 32500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 41000);
 	
 	cutscene_intro:start();

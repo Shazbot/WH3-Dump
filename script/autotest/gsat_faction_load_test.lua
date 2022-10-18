@@ -15,8 +15,8 @@ g_faction_load_test_csv_path = os.getenv("APPDATA").."\\CA_Autotest\\WH3\\factio
 variables.skip_intro = cv_skip_intro or true
 variables.save_load_check = cv_save_load_check or false
 
-variables.lord = cv_lord or nil
-variables.campaign_type = cv_campaign_type
+variables.lord = cv_lord or "Random"
+variables.campaign_type = cv_campaign_type or "The Realm of Chaos"
 variables.fight_starting_battle = cv_fight_starting_battle or false
 variables.database_checking = cv_database_check or false
 variables.race_choice = cv_race or "None"

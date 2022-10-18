@@ -104,19 +104,19 @@ function end_deployment_phase()
 	-- Voiceover and Subtitles --
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 3000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_def_morathi_heartrender_and_the_darksword_stage_6_arnheim_pt_01", "subtitle_with_frame", 5.5) end, 3100);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_def_morathi_heartrender_and_the_darksword_stage_6_arnheim_pt_01", "subtitle_with_frame", 0.1) end, 3100);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 9500);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 10000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_def_morathi_heartrender_and_the_darksword_stage_6_arnheim_pt_02", "subtitle_with_frame", 6.5) end, 10100);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_def_morathi_heartrender_and_the_darksword_stage_6_arnheim_pt_02", "subtitle_with_frame", 0.1) end, 10100);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 17200);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_03) end, 18000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_def_morathi_heartrender_and_the_darksword_stage_6_arnheim_pt_03", "subtitle_with_frame", 6.5) end, 18100);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_def_morathi_heartrender_and_the_darksword_stage_6_arnheim_pt_03", "subtitle_with_frame", 0.1) end, 18100);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 26000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_04) end, 26800);
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_def_morathi_heartrender_and_the_darksword_stage_6_arnheim_pt_04", "subtitle_with_frame", 7) end, 26900);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_def_morathi_heartrender_and_the_darksword_stage_6_arnheim_pt_04", "subtitle_with_frame", 0.1) end, 26900);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 35900);
 	
 

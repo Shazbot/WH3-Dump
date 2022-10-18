@@ -101,11 +101,11 @@ function end_deployment_phase()
 	-- Voiceover and Subtitles --
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 3000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc10_qb_def_hellebron_deathsword_and_the_cursed_blade_stage_4_intro_01", "subtitle_with_frame", 12) end, 3500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc10_qb_def_hellebron_deathsword_and_the_cursed_blade_stage_4_intro_01", "subtitle_with_frame", 0.1) end, 3500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 16500);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 18500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc10_qb_def_hellebron_deathsword_and_the_cursed_blade_stage_4_intro_02", "subtitle_with_frame", 9) end, 19000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc10_qb_def_hellebron_deathsword_and_the_cursed_blade_stage_4_intro_02", "subtitle_with_frame", 0.1) end, 19000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 29500);
 	
 	cutscene_intro:start();

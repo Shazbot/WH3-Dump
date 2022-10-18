@@ -41,7 +41,7 @@ function start_khorne_skull_listeners()
 		function()
 			local pb = cm:model():pending_battle();
 			local region = cm:get_region(pb:region_data():key());
-			if not region  then
+			if not region then
 				return false
 			end
 
@@ -87,7 +87,18 @@ function start_khorne_skull_listeners()
 			local id = "skull_pile_" .. winner_cqi .. "_" .. cm:model():turn_number();
 			
 			if not skull_piles[id] then
-				pos_x, pos_y = cm:find_valid_spawn_location_for_character_from_position(winner_faction, pos_x, pos_y, true, 5);
+				local distance = 5;
+				
+				-- ensure the skull pile doesn't spawn inside the settlement's zoc
+				if pb:siege_battle() then
+					local settlement = pb:region_data():region():settlement();
+					
+					pos_x = settlement:logical_position_x();
+					pos_y = settlement:logical_position_y();
+					distance = 10;
+				end;
+				
+				pos_x, pos_y = cm:find_valid_spawn_location_for_character_from_position(winner_faction, pos_x, pos_y, true, distance);
 				
 				if pos_x > 0 then
 					local region = cm:get_region(pb:region_data():key());

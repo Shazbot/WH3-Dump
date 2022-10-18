@@ -53,7 +53,7 @@ local m_script_context_chosen = "cai_faction_script_context_alpha" --Default to 
 
 local function update_reforge_icons()
     -- Items need to be cleared each time, then sorted based on remaining cooldown so they display in a consistent order.
-    if cm:get_faction(m_sisters_faction_key):is_human() == true then --This is to prevent UI errors flooding the console when the AI uses the feature
+    if cm:get_faction(m_sisters_faction_key):is_human() == true and cm:get_local_faction(true) == m_sisters_faction_key then --This is to prevent UI errors flooding the console when the AI uses the feature
 		local temp = {}
 		
 		for k, v in ipairs(m_forge_items) do

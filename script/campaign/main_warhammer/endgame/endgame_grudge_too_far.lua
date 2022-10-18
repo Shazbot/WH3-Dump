@@ -1,16 +1,39 @@
 endgame_grudge_too_far = {
-	army_template = {
-		dwarfs = true
+	army_template = "endgame_grudge_too_far",
+	unit_list = {
+		--Infantry
+		wh_main_dwf_inf_miners_1 = 6,
+		wh_main_dwf_inf_hammerers = 8,
+		wh_main_dwf_inf_ironbreakers = 8,
+		wh_main_dwf_inf_longbeards = 4,
+		wh_main_dwf_inf_longbeards_1 = 8,
+		wh_main_dwf_inf_slayers = 6,
+		wh2_dlc10_dwf_inf_giant_slayers = 4,
+		wh_main_dwf_inf_thunderers_0 = 8,
+		wh_main_dwf_inf_irondrakes_0 = 4,
+		wh_main_dwf_inf_irondrakes_2 = 6,
+		wh_dlc06_dwf_inf_rangers_0 = 2,
+		wh_dlc06_dwf_inf_rangers_1 = 4,
+		wh_dlc06_dwf_inf_bugmans_rangers_0 = 2,
+			
+			--Artillery
+		wh_main_dwf_art_grudge_thrower = 1,
+		wh_main_dwf_art_cannon = 4,
+		wh_main_dwf_art_organ_gun = 4,
+		wh_main_dwf_art_flame_cannon = 2,
+			
+			--Vehicles
+		wh_main_dwf_veh_gyrocopter_0 = 1,
+		wh_main_dwf_veh_gyrocopter_1 = 1,
+		wh_main_dwf_veh_gyrobomber = 1,
 	},
 	major_army_count = 4, -- Number of armies that spawn for the major playables
 	minor_army_count = 2, -- Number of armies that spawn for the minor dwarves
-	unit_count = 19,
 	early_warning_event = "wh3_main_ie_incident_endgame_grudge_too_far_early_warning",
 	ai_personality = "wh3_combi_dwarf_endgame"
 }
 
 function endgame_grudge_too_far:trigger()
-	cm:activate_music_trigger("ScriptedEvent_Negative", "wh_main_sc_emp_empire")
 	local potential_dwarfs = {
 		wh2_dlc17_dwf_thorek_ironbrow = "wh3_main_combi_region_karak_zorn",
 		wh_main_dwf_karak_izor = "wh3_main_combi_region_zarakzil",
@@ -43,10 +66,10 @@ function endgame_grudge_too_far:trigger()
 			if army_count < 1 then
 				army_count = 1
 			end
-			endgame:create_scenario_force(faction_key, region_key, self.army_template, self.unit_count, true, army_count)
+			endgame:create_scenario_force(faction_key, region_key, self.army_template, self.unit_list, true, army_count)
 			if faction_key == "wh_main_dwf_karak_izor" then
 				if not invasion_faction:is_dead() and cm:get_region("wh3_main_combi_region_karak_eight_peaks"):owning_faction():name() == faction_key then
-					endgame:create_scenario_force(faction_key, "wh3_main_combi_region_karak_eight_peaks", self.army_template, self.unit_count, true, army_count)
+					endgame:create_scenario_force(faction_key, "wh3_main_combi_region_karak_eight_peaks", self.army_template, self.unit_list, true, army_count)
 				end
 			end
 
@@ -63,6 +86,7 @@ function endgame_grudge_too_far:trigger()
 			endgame:declare_war_on_adjacent_region_owners(invasion_faction, region)
 
 			cm:apply_effect_bundle("wh3_main_ie_scripted_endgame_grudge_too_far", faction_key, 0)
+			table.insert(endgame.revealed_regions, region_key)
 		end
 	end
 
@@ -73,6 +97,7 @@ function endgame_grudge_too_far:trigger()
 			type = "CONTROL_N_REGIONS_FROM",
 			conditions = {
 				"total "..region_count_halved,
+				"override_text mission_text_text_mis_activity_control_n_regions_satrapy_including_at_least_n"
 			}
 		}
 	}
@@ -82,6 +107,13 @@ function endgame_grudge_too_far:trigger()
 	end
 
 	local incident_key = "wh3_main_ie_incident_endgame_grudge_too_far"
+	if #dwarf_regions == 0 then
+		-- We somehow don't have any targets - silently exit the scenario
+		return
+	end
+
+	cm:activate_music_trigger("ScriptedEvent_Negative", "wh_main_sc_emp_empire")
+	
 	for i = 1, #human_factions do
 		endgame:add_victory_condition_listener(human_factions[i], incident_key, objectives)
 		cm:trigger_incident_with_targets(

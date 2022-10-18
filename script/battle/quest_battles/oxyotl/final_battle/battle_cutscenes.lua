@@ -111,23 +111,23 @@ cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx) end, 0)
 	--wh2_dlc17_lzd_oxyotl_final_battle_phase_1_pt_05 - 13s
 
 	cutscene_intro:action(function() cutscene_intro:play_sound(oxyotl_intro_01) end, 2000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_final_battle_phase_1_pt_01", "subtitle_with_frame", 9, true) end, 2000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_final_battle_phase_1_pt_01", "subtitle_with_frame", 0.1, true) end, 2000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 14000);
 
 	cutscene_intro:action(function() cutscene_intro:play_sound(oxyotl_intro_02) end, 14500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_final_battle_phase_1_pt_02", "subtitle_with_frame", 9, true) end, 14500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_final_battle_phase_1_pt_02", "subtitle_with_frame", 0.1, true) end, 14500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 27500);
 
 	cutscene_intro:action(function() cutscene_intro:play_sound(oxyotl_intro_03) end, 28000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_final_battle_phase_1_pt_03", "subtitle_with_frame", 8, true) end, 28000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_final_battle_phase_1_pt_03", "subtitle_with_frame", 0.1, true) end, 28000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 37000);
 
 	cutscene_intro:action(function() cutscene_intro:play_sound(oxyotl_intro_04) end, 37500);
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_final_battle_phase_1_pt_04", "subtitle_with_frame", 9, true) end, 37500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_final_battle_phase_1_pt_04", "subtitle_with_frame", 0.1, true) end, 37500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 48500);
 
 	cutscene_intro:action(function() cutscene_intro:play_sound(oxyotl_intro_05) end, 49000);
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_final_battle_phase_1_pt_05", "subtitle_with_frame", 9, true) end, 49000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_final_battle_phase_1_pt_05", "subtitle_with_frame", 0.1, true) end, 49000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 62000);
 
 	cutscene_intro:start();
@@ -233,11 +233,11 @@ function play_cutscene_doombull_dead()
 	cutscene_doombull_dead:action(function() cutscene_doombull_dead:play_sound(wh2_middlebattle1_sfx) end, 0);
 
 	cutscene_doombull_dead:action(function() cutscene_doombull_dead:play_sound(oxyotl_igc1) end, 3000);
-	cutscene_doombull_dead:action(function() cutscene_doombull_dead:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_final_battle_phase_2a", "subtitle_with_frame", 5, true) end, 3000);	
+	cutscene_doombull_dead:action(function() cutscene_doombull_dead:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_final_battle_phase_2a", "subtitle_with_frame", 0.1, true) end, 3000);	
 	cutscene_doombull_dead:action(function() cutscene_doombull_dead:hide_custom_cutscene_subtitles() end, 9000);
 
 	cutscene_doombull_dead:action(function() cutscene_doombull_dead:play_sound(oxyotl_igc2) end, 10000);
-	cutscene_doombull_dead:action(function() cutscene_doombull_dead:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_final_battle_phase_2b", "subtitle_with_frame", 7, true) end, 10000);	
+	cutscene_doombull_dead:action(function() cutscene_doombull_dead:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_final_battle_phase_2b", "subtitle_with_frame", 0.1, true) end, 10000);	
 	cutscene_doombull_dead:action(function() cutscene_doombull_dead:hide_custom_cutscene_subtitles() end, 20000);
 
 	enqueue_cutscene(cutscene_doombull_dead);
@@ -297,7 +297,7 @@ function play_cutscene_doombull_dead_lite()
 	);
 
 	cutscene_doombull_dead_lite:action(function() cutscene_doombull_dead_lite:play_sound(oxyotl_igc1) end, 3000);
-	cutscene_doombull_dead_lite:action(function() cutscene_doombull_dead_lite:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_final_battle_phase_2a", "subtitle_with_frame", 5, true) end, 3000);	
+	cutscene_doombull_dead_lite:action(function() cutscene_doombull_dead_lite:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_final_battle_phase_2a", "subtitle_with_frame", 0.1, true) end, 3000);	
 	cutscene_doombull_dead_lite:action(function() cutscene_doombull_dead_lite:hide_custom_cutscene_subtitles() end, 9000);
 
 	enqueue_cutscene(cutscene_doombull_dead_lite);
@@ -365,7 +365,7 @@ function play_cutscene_brays_move()
 	cutscene_brays_move:action(function() cutscene_brays_move:play_sound(wh2_middlebattle2_sfx) end, 0);
 
 	cutscene_brays_move:action(function() cutscene_brays_move:play_sound(oxyotl_igc2) end, 1000);
-	cutscene_brays_move:action(function() cutscene_brays_move:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_final_battle_phase_2b", "subtitle_with_frame", 7, true) end, 1000);	
+	cutscene_brays_move:action(function() cutscene_brays_move:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_final_battle_phase_2b", "subtitle_with_frame", 0.1, true) end, 1000);	
 	cutscene_brays_move:action(function() cutscene_brays_move:hide_custom_cutscene_subtitles() end, 11000);
 
 	enqueue_cutscene(cutscene_brays_move);
@@ -465,15 +465,15 @@ function play_cutscene_ritual_complete()
 	cutscene_ritual_complete:action(function() cutscene_ritual_complete:play_sound(wh2_middlebattle3_sfx) end, 0);
 
 	cutscene_ritual_complete:action(function() cutscene_ritual_complete:play_sound(oxyotl_igc3_01) end, 1000);
-	cutscene_ritual_complete:action(function() cutscene_ritual_complete:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_final_battle_phase_3d", "subtitle_with_frame", 7, true) end, 1000);	
+	cutscene_ritual_complete:action(function() cutscene_ritual_complete:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_final_battle_phase_3d", "subtitle_with_frame", 0.1, true) end, 1000);	
 	cutscene_ritual_complete:action(function() cutscene_ritual_complete:hide_custom_cutscene_subtitles() end, 10000);
 
 	cutscene_ritual_complete:action(function() cutscene_ritual_complete:play_sound(oxyotl_igc3_02) end, 11000);
-	cutscene_ritual_complete:action(function() cutscene_ritual_complete:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_the_golden_blowpipe_of_ptoohee_pt_01", "subtitle_with_frame", 9, true) end, 11000);	
+	cutscene_ritual_complete:action(function() cutscene_ritual_complete:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_the_golden_blowpipe_of_ptoohee_pt_01", "subtitle_with_frame", 0.1, true) end, 11000);	
 	cutscene_ritual_complete:action(function() cutscene_ritual_complete:hide_custom_cutscene_subtitles() end, 23000);
 
 	cutscene_ritual_complete:action(function() cutscene_ritual_complete:play_sound(oxyotl_igc3_03) end, 26000);
-	cutscene_ritual_complete:action(function() cutscene_ritual_complete:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_final_battle_phase_3a", "subtitle_with_frame", 5, true) end, 26000);	
+	cutscene_ritual_complete:action(function() cutscene_ritual_complete:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_final_battle_phase_3a", "subtitle_with_frame", 0.1, true) end, 26000);	
 	cutscene_ritual_complete:action(function() cutscene_ritual_complete:hide_custom_cutscene_subtitles() end, 32000);
 
 	enqueue_cutscene(cutscene_ritual_complete);

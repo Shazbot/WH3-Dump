@@ -177,6 +177,8 @@ function start_game_all_factions()
 
 	CUS:initialise()
 
+	scripted_occupation_options:initialise()
+
 	out("==== Custom Starts ====");
 	custom_starts:add_campaign_custom_start_listeners();
 	

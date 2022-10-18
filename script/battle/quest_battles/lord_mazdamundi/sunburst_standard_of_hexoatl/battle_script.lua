@@ -104,19 +104,19 @@ function end_deployment_phase()
 	-- Voiceover and Subtitles --
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 3000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_lzd_mazdamundi_sunburst_standard_of_hexoatl_stage_4_fallen_gates_pt_01", "subtitle_with_frame", 7, true)	end, 3500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_lzd_mazdamundi_sunburst_standard_of_hexoatl_stage_4_fallen_gates_pt_01", "subtitle_with_frame", 0.1, true)	end, 3500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 11800);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 12300);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_lzd_mazdamundi_sunburst_standard_of_hexoatl_stage_4_fallen_gates_pt_02", "subtitle_with_frame", 10, true)	end, 12800);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_lzd_mazdamundi_sunburst_standard_of_hexoatl_stage_4_fallen_gates_pt_02", "subtitle_with_frame", 0.1, true)	end, 12800);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 23800);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_03) end, 24300);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_lzd_mazdamundi_sunburst_standard_of_hexoatl_stage_4_fallen_gates_pt_03", "subtitle_with_frame", 5.5, true)	end, 24800);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_lzd_mazdamundi_sunburst_standard_of_hexoatl_stage_4_fallen_gates_pt_03", "subtitle_with_frame", 0.1, true)	end, 24800);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 30800);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_04) end, 31300);
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_lzd_mazdamundi_sunburst_standard_of_hexoatl_stage_4_fallen_gates_pt_04", "subtitle_with_frame", 5.5, true)	end, 31800);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_lzd_mazdamundi_sunburst_standard_of_hexoatl_stage_4_fallen_gates_pt_04", "subtitle_with_frame", 0.1, true)	end, 31800);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 37500);
 
 	

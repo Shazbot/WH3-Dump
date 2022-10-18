@@ -373,7 +373,7 @@ function sword_of_khaine:level_up()
 end;
 
 function sword_of_khaine:is_character_valid_to_equip_sword(character)
-	return not character:is_null_interface() and cm:char_is_general_with_army(character) and not character:military_force():is_armed_citizenry() and character:character_subtype_key() ~= "wh2_main_def_black_ark";
+	return not character:is_null_interface() and cm:char_is_general_with_army(character) and not character:military_force():is_armed_citizenry() and not character:character_subtype("wh2_main_def_black_ark") and not character:character_subtype("wh3_main_dae_daemon_prince");
 end;
 
 function sword_of_khaine:find_candidate_for_faction(faction)

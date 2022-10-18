@@ -124,23 +124,23 @@ function end_deployment_phase()
 	-- Voiceover and Subtitles --
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 2000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc14_Repanse_de_Lyonese_final_battle_vanquisher_pt_01", "subtitle_with_frame", 4, true) end, 2000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc14_Repanse_de_Lyonese_final_battle_vanquisher_pt_01", "subtitle_with_frame", 0.1, true) end, 2000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 15000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 15500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc14_Repanse_de_Lyonese_final_battle_vanquisher_pt_02", "subtitle_with_frame", 4, true) end, 15500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc14_Repanse_de_Lyonese_final_battle_vanquisher_pt_02", "subtitle_with_frame", 0.1, true) end, 15500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 26500);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_03) end, 26500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc14_Repanse_de_Lyonese_final_battle_pt_03", "subtitle_with_frame", 4, true) end, 26500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc14_Repanse_de_Lyonese_final_battle_pt_03", "subtitle_with_frame", 0.1, true) end, 26500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 35500);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_04) end, 36000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc14_Repanse_de_Lyonese_final_battle_pt_04", "subtitle_with_frame", 4, true) end, 36000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc14_Repanse_de_Lyonese_final_battle_pt_04", "subtitle_with_frame", 0.1, true) end, 36000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 44000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_05) end, 45500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc14_Repanse_de_Lyonese_final_battle_pt_05", "subtitle_with_frame", 2, true) end, 45500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc14_Repanse_de_Lyonese_final_battle_pt_05", "subtitle_with_frame", 0.1, true) end, 45500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 49000);
 
 	cutscene_intro:start();

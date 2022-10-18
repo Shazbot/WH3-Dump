@@ -110,19 +110,19 @@ function end_deployment_phase()
 	
 	-- Voiceover and Subtitles --
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 3000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc09_tmb_arkhan_qb_final_battle_01", "subtitle_with_frame", 5.5)	end, 3000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc09_tmb_arkhan_qb_final_battle_01", "subtitle_with_frame", 0.1)	end, 3000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 9700);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 9800);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc09_tmb_arkhan_qb_final_battle_02", "subtitle_with_frame", 6.5)	end, 9800);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc09_tmb_arkhan_qb_final_battle_02", "subtitle_with_frame", 0.1)	end, 9800);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 22400);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_03) end, 22500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc09_tmb_arkhan_qb_final_battle_03", "subtitle_with_frame", 6.5)	end, 22500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc09_tmb_arkhan_qb_final_battle_03", "subtitle_with_frame", 0.1)	end, 22500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 31500);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_04) end, 31600);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc09_tmb_arkhan_qb_final_battle_04", "subtitle_with_frame", 6.5)	end, 31600);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc09_tmb_arkhan_qb_final_battle_04", "subtitle_with_frame", 0.1)	end, 31600);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 42700);
 	
 	cutscene_intro:start();

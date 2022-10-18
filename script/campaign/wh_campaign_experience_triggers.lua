@@ -393,7 +393,7 @@ function calculate_battle_result_experience(context, is_general, is_secondary_ge
 		end;
 		
 		-- add the ambush bonus if it's an ambush battle
-		if is_general and is_attacker and pb:ambush_battle() then
+		if is_general and is_attacker and character:has_military_force() and character:military_force():active_stance() ~= "MILITARY_FORCE_ACTIVE_STANCE_TYPE_DEFAULT" and pb:ambush_battle() then
 			value = value * xp_battle_victory_ambush;
 		end;
 	-- don't award losing XP if it's a quest battle

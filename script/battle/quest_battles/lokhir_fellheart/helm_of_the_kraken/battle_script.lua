@@ -92,15 +92,15 @@ bm:out("\tend_deployment_phase() called");
 	-- Voiceover and Subtitles --
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 3500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc11_Lokhir_Fellheart_QB_Helm_Of_Kraken_pt_01", "subtitle_with_frame", 10) end, 4000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc11_Lokhir_Fellheart_QB_Helm_Of_Kraken_pt_01", "subtitle_with_frame", 0.1) end, 4000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 14500);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 15500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc11_Lokhir_Fellheart_QB_Helm_Of_Kraken_pt_02", "subtitle_with_frame", 6) end, 16000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc11_Lokhir_Fellheart_QB_Helm_Of_Kraken_pt_02", "subtitle_with_frame", 0.1) end, 16000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 23500);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_03) end, 24000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc11_Lokhir_Fellheart_QB_Helm_Of_Kraken_pt_03", "subtitle_with_frame", 9) end, 24500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc11_Lokhir_Fellheart_QB_Helm_Of_Kraken_pt_03", "subtitle_with_frame", 0.1) end, 24500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 34000);
 	
 	cutscene_intro:start();

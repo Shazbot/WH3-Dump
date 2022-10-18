@@ -3833,6 +3833,8 @@ function intervention:play_advice_for_intervention_action(advice_key, infotext, 
 
 			mm:trigger();
 			self:whitelist_events();
+		elseif self:is_another_intervention_queued() then
+			delay = 1;
 		end;
 
 		cm:callback(

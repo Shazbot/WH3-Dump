@@ -636,46 +636,56 @@ end;
 
 ----------------------------------------------------------------------------
 --- @section End Turn Warnings
+--- @desc The @campaign_ui_manager:suppress_end_turn_warning function can be used to suppress the following end turn warnings - not all of them may be supported by each project:
 ----------------------------------------------------------------------------
 
 
+-- end turn warnings
+campaign_ui_manager.end_turn_warnings = {
+	["none"] = 0,			--- @desc <ul><li>"none" - None</li>
+	["bankrupt"] = 1,		--- @desc <li>"bankrupt" - Low funds</li>
+	["tech"] = 2,			--- @desc <li>"tech" - Research available</li>
+	["edict"] = 4,			--- @desc <li>"edict" - Commandment available</li>
+	["character"] = 8,		--- @desc <li>"character" - Character upgrade available</li>
+	["settlement"] = 16,	--- @desc <li>"settlement" - Settlement upgrade available</li>
+	["vortex_ritual"] = 32,	--- @desc <li>"vortex_ritual" - Vortex ritual available</li>
+	["siege"] = 64,			--- @desc <li>"siege" - Siege construction available</li>
+	["army_morale"] = 128,	--- @desc <li>"army_morale" - Low fightiness</li>
+	["repair"] = 256,		--- @desc <li>"repair" - Damaged building</li>
+	["construction"] = 512,	--- @desc <li>"construction" - Building available</li>
+	["office"] = 1024,		--- @desc <li>"office" - Office slot available</li>
+	["army_ap"] = 2048,		--- @desc <li>"army_ap" - Army ap available</li>
+	["hero_ap"] = 4096,		--- @desc <li>"hero_ap" - Hero ap available</li>
+	["rebellion"] = 8192,	--- @desc <li>"rebellion" - Imminent rebellion</li>
+	["garrison_ap"] = 16384	--- @desc <li>"garrison_ap" - Garrison army ap available</li></ul>
+};
+
 --- @function suppress_end_turn_warning
---- @desc Activates or deactivates a suppression on a specified end-turn warning. If an end-turn warning is suppressed it is prevented from appearing. End-turn warnings are specified by a numeric enumerator. Enumerators to use may be looked up in the table below:
---- @desc <table id="simple"><tr><th>warning id</th><th>description</th></tr>
---- @desc <tr><td><code>0</code></td><td>None</td></tr>
---- @desc <tr><td><code>1</code></td><td>Low funds</td></tr>
---- @desc <tr><td><code>2</code></td><td>Research available</td></tr>
---- @desc <tr><td><code>4</code></td><td>Commandment available</td></tr>
---- @desc <tr><td><code>8</code></td><td>Character upgrade available</td></tr>
---- @desc <tr><td><code>16</code></td><td>Settlement upgrade available</td></tr>
---- @desc <tr><td><code>32</code></td><td>Vortex ritual available</td></tr>
---- @desc <tr><td><code>64</code></td><td>Siege construction available</td></tr>
---- @desc <tr><td><code>128</code></td><td>Low fightiness</td></tr>
---- @desc <tr><td><code>256</code></td><td>Damaged building</td></tr>
---- @desc <tr><td><code>512</code></td><td>Building available</td></tr>
---- @desc <tr><td><code>1024</code></td><td>Office slot available</td></tr>
---- @desc <tr><td><code>2048</code></td><td>Army ap available</td></tr>
---- @desc <tr><td><code>4096</code></td><td>Hero ap available</td></tr>
---- @desc <tr><td><code>8192</code></td><td>Imminent rebellion</td></tr>
---- @desc <tr><td><code>16384</code></td><td>Garrison army ap available</td></tr></table>
---- @p @number warning, Warning to suppress - should be a number from the table above.
+--- @desc Activates or deactivates a suppression on a specified end-turn warning. If an end-turn warning is suppressed it is prevented from appearing.
+--- @p @string type, Warning to suppress. See the documentation for the @"campaign_ui_manager:End Turn Warnings" section for available end turn warnings.
 --- @p @boolean suppress, Activate suppression.
 function campaign_ui_manager:suppress_end_turn_warning(warning, should_suppress)
-
-	if not is_number(warning) then
-		script_error("ERROR: suppress_end_turn_warning() called but supplied warning enumerator [" .. tostring(warning) .. "] is not a number");
+	if not is_string(warning) then
+		script_error("ERROR: suppress_end_turn_warning() called but supplied warning [" .. tostring(warning) .. "] is not a string");
+		return false;
+	end;
+	
+	local warning_id = self.end_turn_warnings[warning];
+	
+	if not is_number(warning_id) then
+		script_error("ERROR: suppress_end_turn_warning() called but supplied warning [" .. tostring(warning) .. "] could not be looked up from the end_turn_warnings table in the campaign ui manager");
 		return false;
 	end;
 	
 	-- cast should_suppress to either true or nil
 	if should_suppress then
 		should_suppress = true;
-		self:suppress_end_turn_warning_action(warning);
+		self:suppress_end_turn_warning_action(warning_id);
 	else
 		should_suppress = nil;
 	end;
 	
-	self.end_turn_warnings_to_suppress[warning] = should_suppress;
+	self.end_turn_warnings_to_suppress[warning_id] = should_suppress;
 	
 	if not self.end_turn_warning_suppression_system_started then
 		-- End turn warning reset monitor is not already started, so start it.
@@ -1972,10 +1982,10 @@ function campaign_ui_manager:display_first_turn_ui(value)
 	self:suppress_end_turn_warning("tech", should_suppress);
 	self:suppress_end_turn_warning("edict", should_suppress);
 	self:suppress_end_turn_warning("character", should_suppress);
-	self:suppress_end_turn_warning("army", should_suppress);
-	self:suppress_end_turn_warning("politics", should_suppress);
+	self:suppress_end_turn_warning("army_ap", should_suppress);
+	self:suppress_end_turn_warning("office", should_suppress);
 	self:suppress_end_turn_warning("siege", should_suppress);
-	self:suppress_end_turn_warning("morale", should_suppress);
+	self:suppress_end_turn_warning("army_morale", should_suppress);
 	
 	cm:enable_all_diplomacy(value);
 	

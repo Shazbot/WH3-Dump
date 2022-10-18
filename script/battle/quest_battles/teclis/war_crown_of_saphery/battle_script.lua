@@ -88,25 +88,25 @@ function end_deployment_phase()
 	-- Voiceover and Subtitles --
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 3000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_hef_teclis_war_crown_of_saphery_stage_3_caverns_of_the_great_bat_pt_01", "subtitle_with_frame", 2) end, 3100);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_hef_teclis_war_crown_of_saphery_stage_3_caverns_of_the_great_bat_pt_01", "subtitle_with_frame", 0.1) end, 3100);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 16300);
 	
 	cutscene_intro:action(function() cutscene_intro:wait_for_vo() end, 16300);	
 
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 16800);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_hef_teclis_war_crown_of_saphery_stage_3_caverns_of_the_great_bat_pt_02", "subtitle_with_frame", 2) end, 16900);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_hef_teclis_war_crown_of_saphery_stage_3_caverns_of_the_great_bat_pt_02", "subtitle_with_frame", 0.1) end, 16900);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 23800);
 
 	cutscene_intro:action(function() cutscene_intro:wait_for_vo() end, 24100);		
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_03) end, 24300);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_hef_teclis_war_crown_of_saphery_stage_3_caverns_of_the_great_bat_pt_03", "subtitle_with_frame", 2) end, 24400);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_hef_teclis_war_crown_of_saphery_stage_3_caverns_of_the_great_bat_pt_03", "subtitle_with_frame", 0.1) end, 24400);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 35000);
 
 	cutscene_intro:action(function() cutscene_intro:wait_for_vo() end, 35300);	
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_04) end, 35500);
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_hef_teclis_war_crown_of_saphery_stage_3_caverns_of_the_great_bat_pt_04", "subtitle_with_frame", 2) end, 35600);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_hef_teclis_war_crown_of_saphery_stage_3_caverns_of_the_great_bat_pt_04", "subtitle_with_frame", 0.1) end, 35600);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 43300);
 
 	cutscene_intro:action(function() cutscene_intro:wait_for_vo() end, 43400);	

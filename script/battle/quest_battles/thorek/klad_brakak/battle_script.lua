@@ -128,23 +128,23 @@ function end_deployment_phase()
 	-- Voiceover and Subtitles -- 
 	--VO LENGTHS: 7, 8, 9, 6, 6
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 2000);
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_dwf_thorek_ironbrow_klad_brakak_pt_01", "subtitle_with_frame", 7, true) end, 2000);
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_dwf_thorek_ironbrow_klad_brakak_pt_01", "subtitle_with_frame", 0.1, true) end, 2000);
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 10000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 11000);
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_dwf_thorek_ironbrow_klad_brakak_pt_02", "subtitle_with_frame", 8, true) end, 11000);
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_dwf_thorek_ironbrow_klad_brakak_pt_02", "subtitle_with_frame", 0.1, true) end, 11000);
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 20000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_03) end, 21000);
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_dwf_thorek_ironbrow_klad_brakak_pt_03", "subtitle_with_frame", 9, true) end, 21000);
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_dwf_thorek_ironbrow_klad_brakak_pt_03", "subtitle_with_frame", 0.1, true) end, 21000);
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 31000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_04) end, 32000);
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_dwf_thorek_ironbrow_klad_brakak_pt_04", "subtitle_with_frame", 6, true) end, 32000);
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_dwf_thorek_ironbrow_klad_brakak_pt_04", "subtitle_with_frame", 0.1, true) end, 32000);
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 39000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_05) end, 40000);
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_dwf_thorek_ironbrow_klad_brakak_pt_05", "subtitle_with_frame", 6, true) end, 40000);
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_dwf_thorek_ironbrow_klad_brakak_pt_05", "subtitle_with_frame", 0.1, true) end, 40000);
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 47000);
 
 	cutscene_intro:start();

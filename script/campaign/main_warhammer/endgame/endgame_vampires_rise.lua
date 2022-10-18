@@ -1,15 +1,37 @@
 endgame_vampires_rise = {
-	army_template = {
-		vampires = true
+	army_template = "endgame_vampires_rise",
+	unit_list = {
+		wh_main_vmp_inf_skeleton_warriors_1 = 2,
+		wh_main_vmp_inf_crypt_ghouls = 4,
+		wh_main_vmp_inf_cairn_wraiths = 4,
+		wh_main_vmp_inf_grave_guard_0 = 8,
+		wh_main_vmp_inf_grave_guard_1 = 8,
+		
+			--Cavalry
+		wh_main_vmp_cav_black_knights_3 = 2,
+		wh_main_vmp_cav_hexwraiths = 1,
+		wh_dlc02_vmp_cav_blood_knights_0 = 2,
+		
+			--Monsters
+		wh_main_vmp_mon_fell_bats = 1,
+		wh_main_vmp_mon_dire_wolves = 1,
+		wh_main_vmp_mon_crypt_horrors = 4,
+		wh_main_vmp_mon_vargheists = 4,
+		wh_main_vmp_mon_varghulf = 2,
+		wh_main_vmp_mon_terrorgheist = 2,
+		
+			--Vehicles
+		wh_dlc04_vmp_veh_corpse_cart_1 = 1,
+		wh_dlc04_vmp_veh_corpse_cart_2 = 1,
+		wh_main_vmp_veh_black_coach = 1,
+		wh_dlc04_vmp_veh_mortis_engine_0 = 1
 	},
 	base_army_count = 4, -- Number of armies that spawn in each vampire homeland when the event fires.
-	unit_count = 19,
 	early_warning_event = "wh3_main_ie_incident_endgame_vampires_rise_early_warning",
 	ai_personality = "wh3_combi_vampire_endgame"
 }
 
 function endgame_vampires_rise:trigger()
-	cm:activate_music_trigger("ScriptedEvent_Negative", "wh_main_sc_vmp_vampire_counts")
 	local potential_vampires = {
 		wh_main_vmp_schwartzhafen = "wh3_main_combi_region_castle_drakenhof",
 		wh_main_vmp_vampire_counts = "wh3_main_combi_region_ka_sabar",
@@ -17,34 +39,41 @@ function endgame_vampires_rise:trigger()
 		wh3_main_vmp_caravan_of_blue_roses = "wh3_main_combi_region_the_haunted_forest",
 		wh_main_vmp_mousillon = "wh3_main_combi_region_mousillon"
 	}
-	local vampire_regions = {}
-	local vampire_faction = nil
+	local vampire_factions = {}
 	
 	for faction_key, region_key in pairs(potential_vampires) do
 		local faction = cm:get_faction(faction_key)
 		if not faction:is_human() and not faction:was_confederated() then
-			if vampire_faction == nil then
-				vampire_faction = faction_key
-			end
-			table.insert(vampire_regions, region_key)
-			endgame:create_scenario_force(faction_key, region_key, self.army_template, self.unit_count, true, math.floor(self.base_army_count*endgame.settings.difficulty_mod))
+			table.insert(vampire_factions, faction_key)
+			endgame:create_scenario_force(faction_key, region_key, self.army_template, self.unit_list, true, math.floor(self.base_army_count*endgame.settings.difficulty_mod))
 			endgame:no_peace_no_confederation_only_war(faction_key)
 			cm:apply_effect_bundle("wh3_main_ie_scripted_endgame_vampires_rise", faction_key, 0)
 			cm:force_change_cai_faction_personality(faction_key, self.ai_personality)
+			local region = cm:get_region(region_key)
+			endgame:declare_war_on_adjacent_region_owners(faction, region)
+			table.insert(endgame.revealed_regions, region_key)
 		end
 	end
 
 	local human_factions = cm:get_human_factions()
 	local objectives = {
 		{
-			type = "CONTROL_N_REGIONS_FROM",
+			type = "DESTROY_FACTION",
 			conditions = {
-				"total "..#vampire_regions,
+				"confederation_valid"
 			}
 		}
 	}
-	for i = 1, #vampire_regions do 
-		table.insert(objectives[1].conditions, "region "..vampire_regions[i])
+
+	if #vampire_factions == 0 then
+		-- We somehow don't have any targets - silently exit the scenario
+		return
+	end
+	
+	cm:activate_music_trigger("ScriptedEvent_Negative", "wh_main_sc_vmp_vampire_counts")
+	
+	for i = 1, #vampire_factions do 
+		table.insert(objectives[1].conditions, "faction "..vampire_factions[i])
 	end
 
 	local incident_key = "wh3_main_ie_incident_endgame_vampires_rise"
@@ -53,7 +82,7 @@ function endgame_vampires_rise:trigger()
 		cm:trigger_incident_with_targets(
 			cm:get_faction(human_factions[i]):command_queue_index(),
 			incident_key,
-			cm:get_faction(vampire_faction):command_queue_index(),
+			cm:get_faction(vampire_factions[1]):command_queue_index(),
 			0,
 			0,
 			0,
@@ -61,5 +90,4 @@ function endgame_vampires_rise:trigger()
 			0
 		)
 	end
-
 end

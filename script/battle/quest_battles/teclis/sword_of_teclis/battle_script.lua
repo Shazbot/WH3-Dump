@@ -105,23 +105,23 @@ function end_deployment_phase()
 	-- Voiceover and Subtitles --
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 3000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_hef_teclis_sword_of_teclis_stage_vauls_anvil_3_pt_01", "subtitle_with_frame", 4) end, 3100);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_hef_teclis_sword_of_teclis_stage_vauls_anvil_3_pt_01", "subtitle_with_frame", 0.1) end, 3100);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 8300);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 8800);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_hef_teclis_sword_of_teclis_stage_vauls_anvil_3_pt_02", "subtitle_with_frame", 9) end, 8900);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_hef_teclis_sword_of_teclis_stage_vauls_anvil_3_pt_02", "subtitle_with_frame", 0.1) end, 8900);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 18800);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_03) end, 19000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_hef_teclis_sword_of_teclis_stage_vauls_anvil_3_pt_03", "subtitle_with_frame", 3) end, 19100);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_hef_teclis_sword_of_teclis_stage_vauls_anvil_3_pt_03", "subtitle_with_frame", 0.1) end, 19100);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 22800);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_04) end, 23300);
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_hef_teclis_sword_of_teclis_stage_vauls_anvil_3_pt_04", "subtitle_with_frame", 5) end, 23500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_hef_teclis_sword_of_teclis_stage_vauls_anvil_3_pt_04", "subtitle_with_frame", 0.1) end, 23500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 28800);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_05) end, 29300);
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_hef_teclis_sword_of_teclis_stage_vauls_anvil_3_pt_05", "subtitle_with_frame", 4.5) end, 29400);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_hef_teclis_sword_of_teclis_stage_vauls_anvil_3_pt_05", "subtitle_with_frame", 0.1) end, 29400);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 35000);
 	
 	cutscene_intro:start();

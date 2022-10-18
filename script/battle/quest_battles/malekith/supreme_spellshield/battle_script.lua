@@ -92,19 +92,19 @@ function end_deployment_phase()
 	-- Voiceover and Subtitles --
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 3000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_def_malekith_supreme_spellshield_stage_3_mosquito_swamps_pt_01", "subtitle_with_frame", 7) end, 3100);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_def_malekith_supreme_spellshield_stage_3_mosquito_swamps_pt_01", "subtitle_with_frame", 0.1) end, 3100);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 11300);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 11500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_def_malekith_supreme_spellshield_stage_3_mosquito_swamps_pt_02", "subtitle_with_frame", 4.5) end, 11600);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_def_malekith_supreme_spellshield_stage_3_mosquito_swamps_pt_02", "subtitle_with_frame", 0.1) end, 11600);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 16300);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_03) end, 16500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_def_malekith_supreme_spellshield_stage_3_mosquito_swamps_pt_03", "subtitle_with_frame", 10) end, 16600);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_def_malekith_supreme_spellshield_stage_3_mosquito_swamps_pt_03", "subtitle_with_frame", 0.1) end, 16600);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 27300);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_04) end, 27500);
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_def_malekith_supreme_spellshield_stage_3_mosquito_swamps_pt_04", "subtitle_with_frame", 8) end, 27600);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_def_malekith_supreme_spellshield_stage_3_mosquito_swamps_pt_04", "subtitle_with_frame", 0.1) end, 27600);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 36500);
 	
 	cutscene_intro:start();

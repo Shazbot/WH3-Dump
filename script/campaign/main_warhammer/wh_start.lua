@@ -362,6 +362,8 @@ function start_game_all_factions()
 	belakor_daemon_prince_creation:start();
 	add_volkmar_elector_count_units_listener();
 	victory_objectives_ie:add_scripted_victory_listeners()
+	scripted_occupation_options:initialise()
+
 
 	---Champions of Chaos
 	CUS:initialise()

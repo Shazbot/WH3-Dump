@@ -22,7 +22,7 @@ gb = generated_battle:new(
 );
 
 --preload stuttering fix
-intro_cinematic_file = "script/battle/quest_battles/_cutscene/managers/lbb.CindySceneManager";
+intro_cinematic_file = "script\\battle\\quest_battles\\_cutscene\\managers\\lbb.CindySceneManager";
 bm:cindy_preload(intro_cinematic_file);
 -------------------------------------------------------------------------------------------------
 ---------------------------------------- INTRO VO & SUBS ----------------------------------------
@@ -60,7 +60,7 @@ function end_deployment_phase()
 	subtitles:set_alignment("bottom_centre");
 	subtitles:clear();
 	
-	cutscene_intro:set_is_ambush();
+	--cutscene_intro:set_is_ambush();
 	
 	-- skip callback
 	cutscene_intro:set_skippable(
@@ -77,7 +77,7 @@ function end_deployment_phase()
 	-- set up actions on cutscene
 	cutscene_intro:action(function() cam:fade(false, 1) end, 1000);	
 
-	cutscene_intro:action(function() bm:cindy_playback("script/battle/quest_battles/_cutscene/managers/lbb.CindySceneManager", true) end, 0);	
+	cutscene_intro:action(function() bm:cindy_playback("script\\battle\\quest_battles\\_cutscene\\managers\\lbb.CindySceneManager", true) end, 0);	
 	
 	cutscene_intro:action(
 		function()
@@ -90,19 +90,19 @@ function end_deployment_phase()
 	-- Voiceover and Subtitles --
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 3000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_skv_skrolk_the_liber_bubonicus_stage_3_mortuary_of_tzulaqua_pt_01", "subtitle_with_frame", 1) end, 3500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_skv_skrolk_the_liber_bubonicus_stage_3_mortuary_of_tzulaqua_pt_01", "subtitle_with_frame", 0.1) end, 3500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 5000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 5500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_skv_skrolk_the_liber_bubonicus_stage_3_mortuary_of_tzulaqua_pt_02", "subtitle_with_frame", 5) end, 6000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_skv_skrolk_the_liber_bubonicus_stage_3_mortuary_of_tzulaqua_pt_02", "subtitle_with_frame", 0.1) end, 6000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 11500);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_03) end, 12000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_skv_skrolk_the_liber_bubonicus_stage_3_mortuary_of_tzulaqua_pt_03", "subtitle_with_frame", 9.5) end, 12500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_skv_skrolk_the_liber_bubonicus_stage_3_mortuary_of_tzulaqua_pt_03", "subtitle_with_frame", 0.1) end, 12500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 22500);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_04) end, 23000);
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_skv_skrolk_the_liber_bubonicus_stage_3_mortuary_of_tzulaqua_pt_04", "subtitle_with_frame", 4) end, 23500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_skv_skrolk_the_liber_bubonicus_stage_3_mortuary_of_tzulaqua_pt_04", "subtitle_with_frame", 0.1) end, 23500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 29500);
 	
 	cutscene_intro:start();

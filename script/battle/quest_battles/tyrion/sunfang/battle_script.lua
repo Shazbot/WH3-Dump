@@ -100,19 +100,19 @@ function end_deployment_phase()
 	-- Voiceover and Subtitles --
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 3000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_hef_tyrion_sunfang_stage_4_tower_of_hoeth_pt_01", "subtitle_with_frame", 8.5) end, 3100);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_hef_tyrion_sunfang_stage_4_tower_of_hoeth_pt_01", "subtitle_with_frame", 0.1) end, 3100);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 12700);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 13200);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_hef_tyrion_sunfang_stage_4_tower_of_hoeth_pt_02", "subtitle_with_frame", 6.5) end, 13300);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_hef_tyrion_sunfang_stage_4_tower_of_hoeth_pt_02", "subtitle_with_frame", 0.1) end, 13300);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 20000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_03) end, 20500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_hef_tyrion_sunfang_stage_4_tower_of_hoeth_pt_03", "subtitle_with_frame", 8.5) end, 20600);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_hef_tyrion_sunfang_stage_4_tower_of_hoeth_pt_03", "subtitle_with_frame", 0.1) end, 20600);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 30300);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_04) end, 30800);
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_hef_tyrion_sunfang_stage_4_tower_of_hoeth_pt_04", "subtitle_with_frame", 10) end, 30900);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_hef_tyrion_sunfang_stage_4_tower_of_hoeth_pt_04", "subtitle_with_frame", 0.1) end, 30900);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 41900);
 	
 	cutscene_intro:start();

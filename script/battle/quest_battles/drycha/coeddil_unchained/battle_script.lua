@@ -305,19 +305,19 @@ function end_deployment_phase()
 --wh2_dlc16_Drycha_quest_battle_pt_04 - 5.6
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 3000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Drycha_Coeddil_Unchained_pt_01", "subtitle_with_frame", 7.1) end, 3000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Drycha_Coeddil_Unchained_pt_01", "subtitle_with_frame", 0.1) end, 3000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 12100);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 13100);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Drycha_Coeddil_Unchained_pt_02", "subtitle_with_frame", 7.6) end, 13100);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Drycha_Coeddil_Unchained_pt_02", "subtitle_with_frame", 0.1) end, 13100);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 22700);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_03) end, 23700);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Drycha_Coeddil_Unchained_pt_03", "subtitle_with_frame", 8.5) end, 23700);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Drycha_Coeddil_Unchained_pt_03", "subtitle_with_frame", 0.1) end, 23700);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 34200);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_04) end, 35200);
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Drycha_Coeddil_Unchained_pt_04", "subtitle_with_frame", 5.6) end, 35200);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Drycha_Coeddil_Unchained_pt_04", "subtitle_with_frame", 0.1) end, 35200);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 41800);
 
 	cutscene_intro:start();
@@ -1034,9 +1034,9 @@ function play_cutscene_modryn_reinforcements()
 	cutscene_modryn_reinforcements:action(function() cutscene_modryn_reinforcements:play_sound(wh2_drycha_igc01_sfx_01) end, 1000);
 	cutscene_modryn_reinforcements:action(function() cutscene_modryn_reinforcements:play_sound(wh2_drycha_igc01_sfx_02) end, 3500);
 	cutscene_modryn_reinforcements:action(function() cutscene_modryn_reinforcements:play_sound(wh2_drycha_igc01_sfx_03) end, 11000);
-	cutscene_modryn_reinforcements:action(function() cutscene_modryn_reinforcements:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Drycha_Coeddil_Unchained_IGC01_01", "subtitle_with_frame", 5) end, 1000);	
+	cutscene_modryn_reinforcements:action(function() cutscene_modryn_reinforcements:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Drycha_Coeddil_Unchained_IGC01_01", "subtitle_with_frame", 0.1) end, 1000);	
 	cutscene_modryn_reinforcements:action(function() cutscene_modryn_reinforcements:hide_custom_cutscene_subtitles() end, 8000);
-	cutscene_modryn_reinforcements:action(function() cutscene_modryn_reinforcements:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Drycha_Coeddil_Unchained_IGC01_02", "subtitle_with_frame", 9) end, 11000);
+	cutscene_modryn_reinforcements:action(function() cutscene_modryn_reinforcements:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Drycha_Coeddil_Unchained_IGC01_02", "subtitle_with_frame", 0.1) end, 11000);
 	cutscene_modryn_reinforcements:action(function() cutscene_modryn_reinforcements:hide_custom_cutscene_subtitles() end, 22000);
 
 	enqueue_cutscene(cutscene_modryn_reinforcements);
@@ -1161,9 +1161,9 @@ function play_cutscene_anmyr_reinforcements()
 	cutscene_anmyr_reinforcements:action(function() cutscene_anmyr_reinforcements:play_sound(wh2_drycha_igc02_sfx_02) end, 3000);
 	cutscene_anmyr_reinforcements:action(function() cutscene_anmyr_reinforcements:play_sound(wh2_drycha_igc02_sfx_03) end, 11000);
 	cutscene_anmyr_reinforcements:action(function() cutscene_anmyr_reinforcements:play_sound(wh2_drycha_igc02_sfx_04) end, 14000);
-	cutscene_anmyr_reinforcements:action(function() cutscene_anmyr_reinforcements:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Drycha_Coeddil_Unchained_IGC02_01", "subtitle_with_frame", 4) end, 1000);	
+	cutscene_anmyr_reinforcements:action(function() cutscene_anmyr_reinforcements:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Drycha_Coeddil_Unchained_IGC02_01", "subtitle_with_frame", 0.1) end, 1000);	
 	cutscene_anmyr_reinforcements:action(function() cutscene_anmyr_reinforcements:hide_custom_cutscene_subtitles() end, 8000);
-	cutscene_anmyr_reinforcements:action(function() cutscene_anmyr_reinforcements:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Drycha_Coeddil_Unchained_IGC02_02", "subtitle_with_frame", 6) end, 11000);
+	cutscene_anmyr_reinforcements:action(function() cutscene_anmyr_reinforcements:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Drycha_Coeddil_Unchained_IGC02_02", "subtitle_with_frame", 0.1) end, 11000);
 	cutscene_anmyr_reinforcements:action(function() cutscene_anmyr_reinforcements:hide_custom_cutscene_subtitles() end, 22000);
 
 
@@ -1308,15 +1308,15 @@ function play_cutscene_coeddil_unchained()
 	cutscene_coeddil_unchained:action(function() cutscene_coeddil_unchained:play_sound(wh2_drycha_igc03_sfx_04) end, 20500);
 	cutscene_coeddil_unchained:action(function() cutscene_coeddil_unchained:play_sound(wh2_drycha_igc03_sfx_05) end, 23500);
 	cutscene_coeddil_unchained:action(function() cutscene_coeddil_unchained:play_sound(wh2_drycha_igc03_sfx_06) end, 26500);
-	cutscene_coeddil_unchained:action(function() cutscene_coeddil_unchained:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Drycha_Coeddil_Unchained_IGC03_01", "subtitle_with_frame", 5) end, 1000);	
+	cutscene_coeddil_unchained:action(function() cutscene_coeddil_unchained:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Drycha_Coeddil_Unchained_IGC03_01", "subtitle_with_frame", 0.1) end, 1000);	
 	cutscene_coeddil_unchained:action(function() cutscene_coeddil_unchained:hide_custom_cutscene_subtitles() end, 9000);
-	cutscene_coeddil_unchained:action(function() cutscene_coeddil_unchained:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Drycha_Coeddil_Unchained_IGC03_02", "subtitle_with_frame", 10) end, 9000);
+	cutscene_coeddil_unchained:action(function() cutscene_coeddil_unchained:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Drycha_Coeddil_Unchained_IGC03_02", "subtitle_with_frame", 0.1) end, 9000);
 	cutscene_coeddil_unchained:action(function() cutscene_coeddil_unchained:hide_custom_cutscene_subtitles() end, 20000);
-	cutscene_coeddil_unchained:action(function() cutscene_coeddil_unchained:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Drycha_Coeddil_Unchained_IGC03_03", "subtitle_with_frame", 1) end, 20500);
+	cutscene_coeddil_unchained:action(function() cutscene_coeddil_unchained:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Drycha_Coeddil_Unchained_IGC03_03", "subtitle_with_frame", 0.1) end, 20500);
 	cutscene_coeddil_unchained:action(function() cutscene_coeddil_unchained:hide_custom_cutscene_subtitles() end, 23000);
-	cutscene_coeddil_unchained:action(function() cutscene_coeddil_unchained:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Drycha_Coeddil_Unchained_IGC03_04", "subtitle_with_frame", 1) end, 23500);
+	cutscene_coeddil_unchained:action(function() cutscene_coeddil_unchained:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Drycha_Coeddil_Unchained_IGC03_04", "subtitle_with_frame", 0.1) end, 23500);
 	cutscene_coeddil_unchained:action(function() cutscene_coeddil_unchained:hide_custom_cutscene_subtitles() end, 26000);
-	cutscene_coeddil_unchained:action(function() cutscene_coeddil_unchained:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Drycha_Coeddil_Unchained_IGC03_05", "subtitle_with_frame", 1) end, 26500);
+	cutscene_coeddil_unchained:action(function() cutscene_coeddil_unchained:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Drycha_Coeddil_Unchained_IGC03_05", "subtitle_with_frame", 0.1) end, 26500);
 	cutscene_coeddil_unchained:action(function() cutscene_coeddil_unchained:hide_custom_cutscene_subtitles() end, 30000);
 
 	enqueue_cutscene(cutscene_coeddil_unchained);

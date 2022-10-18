@@ -485,7 +485,7 @@ function add_flesh_lab_listeners()
 		"growth_vat_monster",
 		"RitualCompletedEvent", 
 		function(context)
-			return context:performing_faction():name() == throt_faction_name and context:ritual():ritual_key() == flesh_lab_growth_monster_key
+			return context:performing_faction():name() == throt_faction_name and (context:ritual():ritual_key() == "wh2_dlc16_throt_flesh_lab_monster" or context:ritual():ritual_key() == "wh2_dlc16_throt_flesh_lab_monster_2")
 		end,
 		function(context)
 			local faction = context:performing_faction()

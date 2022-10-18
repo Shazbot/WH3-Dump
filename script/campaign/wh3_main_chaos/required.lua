@@ -65,6 +65,8 @@ require("wh3_dlc20_campaign_norscan_vassal_personality")
 require("wh3_dlc20_campaign_chs_eye_of_the_gods")
 require("wh3_dlc20_campaign_chs_vassal_dilemmas")
 require("wh3_campaign_reveal_chaos_realm_mission_areas")
+require("wh3_campaign_scripted_occupation_options")
+
 
 require("realms/wh3_realm_common");
 require("realms/wh3_realm_khorne");

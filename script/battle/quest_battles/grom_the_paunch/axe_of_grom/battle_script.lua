@@ -132,23 +132,23 @@ function end_deployment_phase()
 	-- Voiceover and Subtitles --\
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 2000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc15_GOB_Grom_Axe_of_Grom_pt_01", "subtitle_with_frame", 9, true) end, 2500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc15_GOB_Grom_Axe_of_Grom_pt_01", "subtitle_with_frame", 0.1, true) end, 2500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 11500);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 12500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc15_GOB_Grom_Axe_of_Grom_pt_02", "subtitle_with_frame", 9, true) end, 12500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc15_GOB_Grom_Axe_of_Grom_pt_02", "subtitle_with_frame", 0.1, true) end, 12500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 22000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_03) end, 23000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc15_GOB_Grom_Axe_of_Grom_pt_03", "subtitle_with_frame", 6, true) end, 23000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc15_GOB_Grom_Axe_of_Grom_pt_03", "subtitle_with_frame", 0.1, true) end, 23000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 30000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_04) end, 31000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc15_GOB_Grom_Axe_of_Grom_pt_04", "subtitle_with_frame", 8, true) end, 31000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc15_GOB_Grom_Axe_of_Grom_pt_04", "subtitle_with_frame", 0.1, true) end, 31000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 40000);
 
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_05) end, 41000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc15_GOB_Grom_Axe_of_Grom_pt_05", "subtitle_with_frame", 7, true) end, 41000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc15_GOB_Grom_Axe_of_Grom_pt_05", "subtitle_with_frame", 0.1, true) end, 41000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 49000);
 
 	cutscene_intro:start();

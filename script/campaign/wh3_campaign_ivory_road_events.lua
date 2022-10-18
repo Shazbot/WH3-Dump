@@ -1198,69 +1198,55 @@ core:add_listener(
 core:add_listener(
 	"caravan_finished",
 	"CaravanCompleted",
-	function(context)
-		return context:faction():is_human()
-	end,
+	true,
 	function(context)
 		-- store a total value of goods moved for this faction and then trigger an onwards event, narrative scripts use this
-		local region_name = context:complete_position():node():region_key()
-		local region_owner = context:complete_position():node():region_data():region():owning_faction();
+		local node = context:complete_position():node()
+		local region_name = node:region_key()
+		local region_owner = node:region_data():region():owning_faction();
 		
 		out.design("Caravan (player) arrived in: "..region_name)
 		
-		local faction_key = context:faction():name();
+		local faction = context:faction()
+		local faction_key = faction:name();
 		local prev_total_goods_moved = cm:get_saved_value("caravan_goods_moved_" .. faction_key) or 0;
 		local num_caravans_completed = cm:get_saved_value("caravans_completed_" .. faction_key) or 0;
 		cm:set_saved_value("caravan_goods_moved_" .. faction_key, prev_total_goods_moved + context:cargo());
 		cm:set_saved_value("caravans_completed_" .. faction_key, num_caravans_completed + 1);
 		core:trigger_event("ScriptEventCaravanCompleted", context);
 		
-		reward_item_check(
-			context:faction(),
-			region_name,
-			context:caravan_master()
-			)
+		if faction:is_human() then
+			reward_item_check(faction, region_name,	context:caravan_master())
+		end
 			
-		if region_owner:is_human() and (region_owner:subculture() == "wh3_main_sc_ksl_kislev" or 
-										region_owner:subculture() == "wh3_main_sc_cth_cathay" ) then
+		if not region_owner:is_null_interface() then
 			
-			cm:trigger_incident_with_targets(
-				region_owner:command_queue_index(),
-				"wh3_main_cth_caravan_completed_received",
-				0,
-				0,
-				caravan_master:character():command_queue_index(),
-				0,
-				0,
-				0
+			local region_owner_key = region_owner:name()
+			out.design("Inserting a diplomatic event for caravan arriving. Factions: "..region_owner_key..", "..faction_key)
+			cm:cai_insert_caravan_diplomatic_event(region_owner_key,faction_key)
+
+			if region_owner:is_human() and faction_key ~= region_owner_key then
+				cm:trigger_incident_with_targets(
+					region_owner:command_queue_index(),
+					"wh3_main_cth_caravan_completed_received",
+					0,
+					0,
+					context:caravan_master():character():command_queue_index(),
+					0,
+					0,
+					0
 				)
+			end
+		
 		end
 		
 		--Reduce demand
-		local cargo = context:caravan():cargo()
 		local cargo = context:caravan():cargo()
 		local value = math.floor(-cargo/18);
 		out.design("Reduce "..region_name)
 		
 		cm:callback(function()adjust_end_node_value(region_name, value, "add") end, 5);
-		
-		--[[
-		--only trigger after player has recieved money
-		core:add_listener(
-			"caravans_decrease_demand_"..context:caravan_master():command_queue_index(),
-			"WorldStartRound",
-			true,
-			function(context)
-				adjust_end_node_value(region_name, value, "add");
-			end,
-			false
-			);
-		]]
-			
-		if not region_owner:is_null_interface() then
-			out.design("Inserting a diplomatic event for caravan arriving. Factions: "..region_owner:name()..", "..faction_key)
-			cm:cai_insert_caravan_diplomatic_event(region_owner:name(),faction_key)
-		end
+					
 	end,
 	true
 );

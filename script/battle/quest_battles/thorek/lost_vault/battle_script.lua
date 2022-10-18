@@ -126,23 +126,23 @@ function end_deployment_phase()
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx) end, 0);	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 2000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_dwf_thorek_ironbrow_final_battle_pt_01", "subtitle_with_frame", 8, true) end, 2000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_dwf_thorek_ironbrow_final_battle_pt_01", "subtitle_with_frame", 0.1, true) end, 2000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 10000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 14000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_dwf_thorek_ironbrow_final_battle_pt_02", "subtitle_with_frame", 9, true) end, 14000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_dwf_thorek_ironbrow_final_battle_pt_02", "subtitle_with_frame", 0.1, true) end, 14000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 24000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_03) end, 25000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_dwf_thorek_ironbrow_final_battle_pt_03", "subtitle_with_frame", 7, true) end, 25000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_dwf_thorek_ironbrow_final_battle_pt_03", "subtitle_with_frame", 0.1, true) end, 25000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 33000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_04) end, 34000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_dwf_thorek_ironbrow_final_battle_pt_04", "subtitle_with_frame", 8, true) end, 34000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_dwf_thorek_ironbrow_final_battle_pt_04", "subtitle_with_frame", 0.1, true) end, 34000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 43000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_05) end, 44000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_dwf_thorek_ironbrow_final_battle_pt_05", "subtitle_with_frame", 7, true) end, 44000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_dwf_thorek_ironbrow_final_battle_pt_05", "subtitle_with_frame", 0.1, true) end, 44000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 52000);
 
 	cutscene_intro:start();
@@ -297,15 +297,15 @@ end;
 	--VO lengths 5, 9, 8
 	cutscene_mid:action(function() cutscene_mid:play_sound(wh2_main_sfx_mid) end, 0);
 	cutscene_mid:action(function() cutscene_mid:play_sound(wh2_main_sfx_06) end, 2000);	
-	cutscene_mid:action(function() cutscene_mid:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_dwf_thorek_ironbrow_final_battle_pt_06", "subtitle_with_frame", 5, true) end, 2000);	
+	cutscene_mid:action(function() cutscene_mid:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_dwf_thorek_ironbrow_final_battle_pt_06", "subtitle_with_frame", 0.1, true) end, 2000);	
 	cutscene_mid:action(function() cutscene_mid:hide_custom_cutscene_subtitles() end, 8000);
 	
 	cutscene_mid:action(function() cutscene_mid:play_sound(wh2_main_sfx_07) end, 9000);	
-	cutscene_mid:action(function() cutscene_mid:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_dwf_thorek_ironbrow_final_battle_pt_07", "subtitle_with_frame", 9, true) end, 9000);	
+	cutscene_mid:action(function() cutscene_mid:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_dwf_thorek_ironbrow_final_battle_pt_07", "subtitle_with_frame", 0.1, true) end, 9000);	
 	cutscene_mid:action(function() cutscene_mid:hide_custom_cutscene_subtitles() end, 19000);
 	
 	cutscene_mid:action(function() cutscene_mid:play_sound(wh2_main_sfx_08) end, 20000);	
-	cutscene_mid:action(function() cutscene_mid:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_dwf_thorek_ironbrow_final_battle_pt_08", "subtitle_with_frame", 8, true) end, 20000);	
+	cutscene_mid:action(function() cutscene_mid:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_dwf_thorek_ironbrow_final_battle_pt_08", "subtitle_with_frame", 0.1, true) end, 20000);	
 	cutscene_mid:action(function() cutscene_mid:hide_custom_cutscene_subtitles() end, 29000);
 	
 	cutscene_mid:action(function() cutscene_mid:hide_custom_cutscene_subtitles() end, 30000);
