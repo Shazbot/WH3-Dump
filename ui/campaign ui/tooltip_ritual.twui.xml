@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="137"
+	version="138"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -302,8 +302,8 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextList"
-					context_object_id="CcoCampaignRitual"
-					context_function_id="ResourceTransactionContext(StoredContextFromParent(&quot;CcoCampaignFaction&quot;)).PooledResourceTransactionList.Filter(Value &lt; 0)">
+					context_object_id="CcoCampaignResourceTransaction"
+					context_function_id="PooledResourceTransactionList.Filter(Value &lt; 0)">
 					<child_m_user_properties>
 						<property
 							name="refresh_when_same"
@@ -313,7 +313,26 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignRitual"
-					context_function_id="IsActive == false &amp;&amp; ResourceTransactionContext(StoredContextFromParent(&quot;CcoCampaignFaction&quot;)).PooledResourceTransactionList.Filter(Value &lt; 0).Size &gt; 0 &amp;&amp; (IsAvailable || RitualContext.Category != &quot;ASCENSION_RITUAL&quot;) &amp;&amp; RitualContext.Category.StartsWith(&quot;GREAT_GAME&quot;) == false"/>
+					context_function_id="IsActive == false &amp;&amp; ResourceTransactionContext(GetIfElse(IsContextValid( StoredContextFromParent(&quot;CcoCampaignFaction&quot;)), StoredContextFromParent(&quot;CcoCampaignFaction&quot;), StoredContextFromParent(&quot;CcoCampaignSettlement&quot;) )).PooledResourceTransactionList.Filter(Value &lt; 0).Size &gt; 0 &amp;&amp; (IsAvailable || RitualContext.Category != &quot;ASCENSION_RITUAL&quot;) &amp;&amp; RitualContext.Category.StartsWith(&quot;GREAT_GAME&quot;) == false">
+					<child_m_user_properties>
+						<property
+							name="object_store_events"
+							value="^2"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignRitual"
+					context_function_id="ResourceTransactionContext(GetIfElse(IsContextValid( StoredContextFromParent(&quot;CcoCampaignFaction&quot;)), StoredContextFromParent(&quot;CcoCampaignFaction&quot;), SelectedSettlement ))">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignSettlementSelectedAny"/>
+						<property
+							name="object_store_events"
+							value="^2"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -354,8 +373,8 @@
 					context_function_id="AbsoluteValue"/>
 				<callback_with_context
 					callback_id="ContextInactiveStateSetter"
-					context_object_id="CcoCampaignRitual"
-					context_function_id="PlayersFaction.PooledResourceManagerContext.CanAfford(ResourceTransactionContext(StoredContextFromParent(&quot;CcoCampaignFaction&quot;)))"/>
+					context_object_id="CcoCampaignResourceTransaction"
+					context_function_id="PlayersFaction.PooledResourceManagerContext.CanAfford(this)"/>
 			</callbackwithcontextlist>
 			<states>
 				<active
@@ -407,8 +426,8 @@
 					context_function_id="Format(Loc(&quot;pooled_cost&quot;), Name)"/>
 				<callback_with_context
 					callback_id="ContextInactiveStateSetter"
-					context_object_id="CcoCampaignRitual"
-					context_function_id="PlayersFaction.PooledResourceManagerContext.CanAfford(ResourceTransactionContext(StoredContextFromParent(&quot;CcoCampaignFaction&quot;)))"/>
+					context_object_id="CcoCampaignResourceTransaction"
+					context_function_id="PlayersFaction.PooledResourceManagerContext.CanAfford(this)"/>
 			</callbackwithcontextlist>
 			<states>
 				<active
@@ -694,7 +713,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignRitual"
-					context_function_id="IsScriptLocked(StoredContextFromParent(&quot;CcoCampaignFaction&quot;)) &amp;&amp; ScriptLockedReason.IsEmpty == false"/>
+					context_function_id="IsScriptLocked(GetIfElse(IsContextValid( StoredContextFromParent(&quot;CcoCampaignFaction&quot;)), StoredContextFromParent(&quot;CcoCampaignFaction&quot;), SelectedSettlement )) &amp;&amp; ScriptLockedReason.IsEmpty == false"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate

@@ -135,6 +135,9 @@
 					<battle_orders_pane this="74448EA3-75F3-4443-AF11A1D90DDB58DF">
 						<card_panel_docker this="191FA228-E08C-43E7-B45A0A25B53602EE">
 							<cards_panel this="CCAB91F2-982D-418E-9789242AD063719E">
+								<smoke_holder this="4D020EA7-FEB3-4857-A046364A1EE354B5">
+									<panel_smoke_t this="E8D99AEA-BCB3-4868-A63B20B9204EFFCA"/>
+								</smoke_holder>
 								<card_filters this="822B7301-C757-4BDB-8A541D3477E78476">
 									<cf_land this="2ECAD406-6F30-4BA4-979E6CA60CEF7FDF"/>
 									<cf_toggleable_barricades this="8B1F636D-3577-4EF0-B2900285A4634693"/>
@@ -14398,10 +14401,6 @@
 					uniqueguid="8E3F64B1-DAAC-4C19-B7250D291D6F6D22"
 					imagepath="ui/skins/default/panel_back_tile.png"/>
 				<component_image
-					this="A1A99ABB-DF04-45E4-8131F8350F8F28C2"
-					uniqueguid="A1A99ABB-DF04-45E4-8131F8350F8F28C2"
-					imagepath="ui/skins/default/panel_back_tile_smoke.png"/>
-				<component_image
 					this="61BA5A67-326D-4D65-993E981E9CA90071"
 					uniqueguid="61BA5A67-326D-4D65-993E981E9CA90071"
 					imagepath="ui/skins/warhammer3/panel_teeth_v.png"/>
@@ -14427,16 +14426,6 @@
 							this="97D8A575-5BDA-46B6-B766ED13CC3FEFC2"
 							uniqueguid="97D8A575-5BDA-46B6-B766ED13CC3FEFC2"
 							componentimage="8E3F64B1-DAAC-4C19-B7250D291D6F6D22"
-							offset="0.00,13.00"
-							width="837"
-							height="218"
-							tile="true"
-							dockpoint="Bottom Center"
-							margin="5.00,5.00,5.00,5.00"/>
-						<image
-							this="894802F7-8128-4131-9576D31C95C1AC7A"
-							uniqueguid="894802F7-8128-4131-9576D31C95C1AC7A"
-							componentimage="A1A99ABB-DF04-45E4-8131F8350F8F28C2"
 							offset="0.00,13.00"
 							width="837"
 							height="218"
@@ -15020,7 +15009,7 @@
 		<docked_holder
 			this="C1D066C0-EAE1-4B68-875EFD1E1BD20C80"
 			id="docked_holder"
-			offset="-366.00,12.00"
+			offset="-382.00,12.00"
 			allowverticalresize="false"
 			docking="Top Center"
 			dock_offset="0.00,12.00"
@@ -15050,7 +15039,7 @@
 				<newstate
 					this="7C824D16-A629-439E-A96618A02A5E70F7"
 					name="NewState"
-					width="1175"
+					width="1208"
 					height="29"
 					pixelcollision="true"
 					uniqueguid="7C824D16-A629-439E-A96618A02A5E70F7">
@@ -15060,7 +15049,7 @@
 							uniqueguid="A17DEBB5-57FD-4945-89218B0D6301DF1C"
 							componentimage="265B3BA1-AAFA-4A9B-920CD942091893F8"
 							offset="0.00,-14.00"
-							width="1175"
+							width="1208"
 							height="67"
 							tile="true"
 							dockpoint="Top Center"
@@ -24872,7 +24861,7 @@
 		<realm_of_souls_parent
 			this="5C95C349-49E9-402E-AF3D7BF280E4D5F8"
 			id="realm_of_souls_parent"
-			offset="673.00,0.00"
+			offset="410.00,0.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			priority="30"
@@ -25513,7 +25502,7 @@
 		<supplies_display
 			this="F905A797-93B2-4633-831F275C145E8B9A"
 			id="supplies_display"
-			offset="673.00,-3.00"
+			offset="706.00,-3.00"
 			allowverticalresize="false"
 			dock_offset="0.00,-3.00"
 			componentleveltooltip="{{tt:ui/battle ui/tooltip_battle_currency}}"
@@ -30945,7 +30934,7 @@
 		<survival_waves
 			this="6BF9D185-4A93-4523-B5339CFD19A392A4"
 			id="survival_waves"
-			offset="782.00,-9.00"
+			offset="815.00,-9.00"
 			clipimagestocomponent="true"
 			dock_offset="0.00,-9.00"
 			componentleveltooltip="{{tt:ui/battle ui/tooltip_survival_wave}}"
@@ -36281,6 +36270,9 @@
 			uniqueguid="E754D0FA-F014-4B33-95547E80A8C75629"
 			currentstate="907FAB72-842D-4F26-919F6175D1F07314"
 			defaultstate="907FAB72-842D-4F26-919F6175D1F07314">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="ResizeToFitParent"/>
+			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
 					this="8D8CF750-745B-4D5F-948D91D8E3B20275"
@@ -48596,8 +48588,8 @@
 		<label_waiting_for_gift
 			this="909D283F-A463-4558-B3CA522C157B71EF"
 			id="label_waiting_for_gift"
-			offset="227.00,59.00"
-			allowhorizontalresize="false"
+			offset="227.00,45.00"
+			allowverticalresize="false"
 			visible="false"
 			docking="Center"
 			dock_offset="0.00,-35.00"
@@ -48606,6 +48598,14 @@
 			uniqueguid="909D283F-A463-4558-B3CA522C157B71EF"
 			currentstate="1487EBBC-7122-46D5-A80B5019279B1EAA"
 			defaultstate="1487EBBC-7122-46D5-A80B5019279B1EAA">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="ResizeToFitParent"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="max_width"
+					value="400"/>
+			</userproperties>
 			<componentimages>
 				<component_image
 					this="63D23239-98CC-4421-87B0281A42B2329E"
@@ -48617,11 +48617,11 @@
 					this="1487EBBC-7122-46D5-A80B5019279B1EAA"
 					name="default"
 					width="382"
-					height="43"
+					height="70"
 					text="Other players can assign units for you to control via the Gift Unit button"
-					textvalign="Center"
+					textvalign="Bottom"
 					texthalign="Center"
-					texthbehaviour="Resize"
+					textxoffset="15.00,15.00"
 					textlocalised="true"
 					textlabel="StateText_33c1975a"
 					font_m_font_name="brand_header"
@@ -48635,7 +48635,7 @@
 							this="F6FE6F4C-68CC-48ED-95F35E5CCB4E3AD1"
 							uniqueguid="F6FE6F4C-68CC-48ED-95F35E5CCB4E3AD1"
 							componentimage="63D23239-98CC-4421-87B0281A42B2329E"
-							offset="172.00,43.00"
+							offset="172.00,70.00"
 							width="38"
 							height="38"
 							dockpoint="Bottom Center External"
@@ -48939,5 +48939,187 @@
 				</_1>
 			</states>
 		</icon>
+		<panel_smoke_t
+			this="E8D99AEA-BCB3-4868-A63B20B9204EFFCA"
+			id="panel_smoke_t"
+			offset="8.00,8.00"
+			allowverticalresize="false"
+			docking="Top Center"
+			dock_offset="1.00,8.00"
+			component_anchor_point="0.50,0.00"
+			priority="46"
+			tooltipslocalised="true"
+			uniqueguid="E8D99AEA-BCB3-4868-A63B20B9204EFFCA"
+			isrelativeresize="true"
+			currentstate="E9D31D34-8AD9-40B3-9BC959BEA2023C40"
+			defaultstate="E9D31D34-8AD9-40B3-9BC959BEA2023C40">
+			<componentimages>
+				<component_image
+					this="66F55934-6FC5-43EB-B631A1ACFE650714"
+					uniqueguid="66F55934-6FC5-43EB-B631A1ACFE650714"/>
+			</componentimages>
+			<states>
+				<default
+					this="E9D31D34-8AD9-40B3-9BC959BEA2023C40"
+					name="default"
+					width="809"
+					height="216"
+					texthbehaviour="Never split"
+					material_name="ui/effects/materials/magic_flame.xml.material"
+					uniqueguid="E9D31D34-8AD9-40B3-9BC959BEA2023C40">
+					<imagemetrics>
+						<image
+							this="6C89F5A2-1E83-45A5-8008A064C5AA8252"
+							uniqueguid="6C89F5A2-1E83-45A5-8008A064C5AA8252"
+							componentimage="66F55934-6FC5-43EB-B631A1ACFE650714"
+							width="809"
+							height="216"/>
+					</imagemetrics>
+					<material_m_parameter_overrides>
+						<property
+							name="distortion_strength"
+							x="0.200000003"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="true"/>
+						<property
+							name="flow_speed"
+							x="-0.00999999978"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="true"/>
+						<property
+							name="sparkle_distortion"
+							x="0.100000001"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="false"/>
+						<property
+							name="sparkle_ro"
+							x="0"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="false"/>
+						<property
+							name="sparkle_speed1"
+							x="0.150000006"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="false"/>
+						<property
+							name="sparkle_speed2"
+							x="0.100000001"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="false"/>
+						<property
+							name="sparkle_strength"
+							x="0"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="true"/>
+						<property
+							name="sparkle_tiling"
+							x="2"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="false"/>
+						<property
+							name="uv_distortion_pan"
+							x="0.100000001"
+							y="0.100000001"
+							z="0"
+							w="0"
+							is_override_of_default="true"/>
+						<property
+							name="u_tiling"
+							x="8"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="false"/>
+						<property
+							name="v_tiling"
+							x="5"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="false"/>
+						<property
+							name="heat_percent"
+							x="1"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="false"/>
+					</material_m_parameter_overrides>
+					<material_m_texture_overrides>
+						<property
+							slot_id="t_xml_effect_colours"
+							filepath="ui\effects\textures\effect_panel_smoke.dds"
+							is_override_of_default="true"/>
+						<property
+							slot_id="t_xml_heat_mask"
+							filepath="ui\effects\textures\panel_smoke_heat_DU.dds"
+							is_override_of_default="true"/>
+						<property
+							slot_id="t_xml_shape_flow"
+							filepath="ui\effects\textures\magic_flame_flow_UD.dds"
+							is_override_of_default="true"/>
+						<property
+							slot_id="t_xml_uv_distortion"
+							filepath="commontextures\cloud_shadow_02.dds"
+							is_override_of_default="false"/>
+						<property
+							slot_id="t_xml_uv_element"
+							filepath="commontextures\default_noise1.dds"
+							is_override_of_default="false"/>
+						<property
+							slot_id="t_xml_general_mask"
+							filepath="commontextures\default_white.dds"
+							is_override_of_default="false"/>
+						<property
+							slot_id="t_xml_sparkle1"
+							filepath="commontextures\volumetric_noise.dds"
+							is_override_of_default="false"/>
+					</material_m_texture_overrides>
+				</default>
+			</states>
+		</panel_smoke_t>
+		<smoke_holder
+			this="4D020EA7-FEB3-4857-A046364A1EE354B5"
+			id="smoke_holder"
+			offset="6.00,14.00"
+			allowverticalresize="false"
+			docking="Top Center"
+			dock_offset="0.00,14.00"
+			component_anchor_point="0.50,0.00"
+			priority="46"
+			tooltipslocalised="true"
+			uniqueguid="4D020EA7-FEB3-4857-A046364A1EE354B5"
+			isrelativeresize="true"
+			currentstate="14A0B5AB-F40F-4E6F-851072B796E80D4C"
+			defaultstate="14A0B5AB-F40F-4E6F-851072B796E80D4C">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="ResizeToFitParent"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="14A0B5AB-F40F-4E6F-851072B796E80D4C"
+					name="default"
+					width="824"
+					height="216"
+					texthbehaviour="Never split"
+					uniqueguid="14A0B5AB-F40F-4E6F-851072B796E80D4C"/>
+			</states>
+		</smoke_holder>
 	</components>
 </layout>

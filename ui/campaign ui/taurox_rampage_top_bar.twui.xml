@@ -35,7 +35,7 @@
 							<tx_header this="581FEFA0-8BB9-4B1E-93DF5F64262B3BEF"/>
 						</title_plaque>
 						<button_info_holder this="158629E2-FE0D-4025-98574B37D0D8BEA7">
-							<round_small_button this="03B52D24-BAFE-4C9F-85200C6BD8765E00"/>
+							<button_info this="C6E16F7B-759E-44D3-AAB6059255EF8381"/>
 						</button_info_holder>
 						<dev_button_add_rampage this="9C48C1F7-9591-4DE7-AF7BE8DA258DEDA2">
 							<button_txt this="752C0988-0ABA-41B9-8FBB5FB491BA91DF"/>
@@ -187,6 +187,94 @@
 					is_text_localised="false"/>
 			</localised_texts>
 		</button_txt>
+		<button_info
+			this="C6E16F7B-759E-44D3-AAB6059255EF8381"
+			id="button_info"
+			template_id="round_small_button"
+			part_of_template="true"
+			uniqueguid_in_template="82F58892-7F49-4844-B36443AED497BEEF"
+			uniqueguid="C6E16F7B-759E-44D3-AAB6059255EF8381"
+			dimensions="38.00,38.00"
+			priority="50"
+			sound_category="UI_GBL_TMP_Round_Small_Button">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="546C0099-F93B-406A-BEF762891F5324B0"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="38D56CFB-0B61-43A8-8C61E247A0B685D2"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="B620B196-255E-4BF8-A54EE6B2F178671F"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="ADFDC2E4-7307-420B-AA2C1D6DAC18E059"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="E8E15076-C660-4649-940D3686DFC9E01A"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/icon_question_mark.png"
+					uniqueguid="0C162DB3-25FA-4153-A8988A301F6AC7EC"/>
+				<component_image_uniqueguid
+					name="ui\skins\default\button_round_small_pressed.png"
+					uniqueguid="D8CA98AC-58EE-4591-BB3F2F2604BCFC90"/>
+				<component_image_uniqueguid
+					name="ui\skins\default\button_round_small_hover.png"
+					uniqueguid="EED18788-26CB-467F-ADF813A8EFF1680C"/>
+				<component_image_uniqueguid
+					name="ui\skins\default\button_round_small_active.png"
+					uniqueguid="8B48C1AB-86CA-4AE9-A812EFE6DA17406F"/>
+				<component_image_uniqueguid
+					name="ui\skins\default\button_round_small_inactive.png"
+					uniqueguid="BD82D13F-2FCD-4C23-A7892589AACBCF4A"/>
+				<component_image_uniqueguid
+					name="ui\skins\default\button_round_small_underlay.png"
+					uniqueguid="F2587E7B-A7A1-4B2A-B76D50C56246AA55"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="Button"/>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="resizable"/>
+				<property
+					name="disable_override0"
+					value="CallbackAnimTrigger"/>
+				<property
+					name="dynamic_image"
+					value="0"/>
+				<property
+					name="starts_showing"
+					value=""/>
+				<property
+					name="toggle_panel"
+					value=""/>
+			</user_properties>
+			<localised_texts>
+				<localised_text
+					tooltip_label="ComponentTooltip_4b12340d"
+					tooltip_text="{{tr:help_pages}}"/>
+				<localised_text state="active"/>
+				<localised_text state="down"/>
+				<localised_text state="down_off"/>
+				<localised_text state="hover"/>
+				<localised_text state="inactive"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/icon_question_mark.png"/>
+				<element value="ui\skins\default\button_round_small_pressed.png"/>
+				<element value="ui\skins\default\button_round_small_hover.png"/>
+				<element value="ui\skins\default\button_round_small_active.png"/>
+				<element value="ui\skins\default\button_round_small_inactive.png"/>
+				<element value="ui\skins\default\button_round_small_underlay.png"/>
+				<element value=""/>
+			</override_images>
+		</button_info>
 		<dev_button_add_momentum
 			this="C47AED6A-4D5E-4C20-84044CAB22981A57"
 			id="dev_button_add_momentum"
@@ -406,7 +494,7 @@
 			dimensions="56.00,56.00"
 			dock_point="Center Right"
 			offset="-1.00,11.50"
-			sound_category="UI_CAM_CLICK_DLC17_Taurox_Rampage_Panel_Close">
+			sound_category="UI_GBL_TMP_Round_Small_Button">
 			<state_uniqueguids>
 				<state_uniqueguid
 					name="active"
@@ -459,11 +547,15 @@
 							value="ToggleRampagePanel"/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
 					name="disable_override"
-					value=""/>
+					value="resizable"/>
+				<property
+					name="disable_override0"
+					value="CallbackAnimTrigger"/>
 				<property
 					name="dynamic_image"
 					value="0"/>
@@ -613,95 +705,6 @@
 			</localised_texts>
 			<override_images>
 				<element value="ui\skins\default\bst_taurox_rampage_button_icon.png"/>
-				<element value="ui\skins\default\button_round_small_pressed.png"/>
-				<element value="ui\skins\default\button_round_small_hover.png"/>
-				<element value="ui\skins\default\button_round_small_active.png"/>
-				<element value="ui\skins\default\button_round_small_inactive.png"/>
-				<element value="ui\skins\default\button_round_small_underlay.png"/>
-				<element value=""/>
-			</override_images>
-		</round_small_button>
-		<round_small_button
-			this="03B52D24-BAFE-4C9F-85200C6BD8765E00"
-			id="round_small_button"
-			template_id="round_small_button"
-			part_of_template="true"
-			uniqueguid_in_template="82F58892-7F49-4844-B36443AED497BEEF"
-			uniqueguid="03B52D24-BAFE-4C9F-85200C6BD8765E00"
-			dimensions="38.00,38.00"
-			sound_category="UI_GBL_TMP_Round_Small_Button">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="C0C0D1A3-438B-44D9-9A2457B16566A228"/>
-				<state_uniqueguid
-					name="down"
-					uniqueguid="7B5548AE-EF9A-46E1-9EAC507D140B8B82"/>
-				<state_uniqueguid
-					name="down_off"
-					uniqueguid="58E95448-6259-481D-82D9093460088381"/>
-				<state_uniqueguid
-					name="hover"
-					uniqueguid="45A334B3-9E19-496C-B99DCDF39B93DD07"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="C051FC98-530A-4027-B56A701B1A62A47F"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui\skins\default\icon_question_mark.png"
-					uniqueguid="D300019D-0C3A-4A0E-B7246B3F7C988DB9"/>
-				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_pressed.png"
-					uniqueguid="6881AA63-E778-4398-A2E3FD2034D6D9EC"/>
-				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_hover.png"
-					uniqueguid="1C90532F-6A44-433A-A27E25CA238FDE5E"/>
-				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_active.png"
-					uniqueguid="55E0D05E-01EE-4BFB-9977E59233B19E62"/>
-				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_inactive.png"
-					uniqueguid="67834E63-FB8E-4BF2-BF4CA7BB58DD23DC"/>
-				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_underlay.png"
-					uniqueguid="4C22534B-1BD9-4207-BBADE6709BD53A55"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context callback_id="Button"/>
-				<callback_with_context callback_id="CallbackAnimTrigger"/>
-			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="disable_override"
-					value="resizable"/>
-				<property
-					name="disable_override0"
-					value="CallbackAnimTrigger"/>
-				<property
-					name="dynamic_image"
-					value="0"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="down"
-					is_text_localised="false"/>
-				<localised_text
-					state="down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui\skins\default\icon_question_mark.png"/>
 				<element value="ui\skins\default\button_round_small_pressed.png"/>
 				<element value="ui\skins\default\button_round_small_hover.png"/>
 				<element value="ui\skins\default\button_round_small_active.png"/>
@@ -1535,7 +1538,7 @@
 			component_anchor_point="0.50,0.50"
 			tooltipslocalised="true"
 			componentleveltooltip="Click to zoom to province capital."
-			tooltiplabel="ComponentTooltip_986ff611"
+			tooltiplabel="ComponentTooltip_640dcb99"
 			uniqueguid="C21B8C3E-E884-4413-A78EB4D21864A0C7"
 			isrelativeresize="true"
 			currentstate="509DD3FD-641D-4505-AD8AD0E9E97E754F"
@@ -3278,7 +3281,7 @@
 		<tx_header
 			this="581FEFA0-8BB9-4B1E-93DF5F64262B3BEF"
 			id="tx_header"
-			offset="198.00,14.00"
+			offset="200.00,14.00"
 			allowverticalresize="false"
 			docking="Center"
 			component_anchor_point="0.50,0.50"
@@ -3299,7 +3302,7 @@
 				<text
 					this="A7A2A4B7-56FE-4268-ADE2782F8D1D4FAA"
 					name="text"
-					width="240"
+					width="236"
 					height="30"
 					text="Taurox's Rampage"
 					textvalign="Center"
@@ -3308,7 +3311,7 @@
 					texthbehaviour="Resize"
 					textlocalised="true"
 					textlabel="tx_header_text_Text_23003f"
-					font_m_font_name="brand_header"
+					font_m_font_name="la_gioconda_uppercase"
 					font_m_size="18"
 					font_m_colour="#FFF8D7FF"
 					font_m_leading="1"
@@ -4873,7 +4876,7 @@
 			component_anchor_point="0.50,0.50"
 			tooltipslocalised="true"
 			componentleveltooltip="Click to zoom to province capital."
-			tooltiplabel="ComponentTooltip_986ff611"
+			tooltiplabel="ComponentTooltip_640dcb99"
 			uniqueguid="77F0ACA9-05C2-44C7-8E0712EA77E977F1"
 			isrelativeresize="true"
 			currentstate="40C31519-673B-487F-AFD6D52C1898C606"
@@ -4941,7 +4944,7 @@
 			component_anchor_point="0.50,0.50"
 			tooltipslocalised="true"
 			componentleveltooltip="Click to zoom to province capital."
-			tooltiplabel="ComponentTooltip_986ff611"
+			tooltiplabel="ComponentTooltip_640dcb99"
 			uniqueguid="53ABA32D-A718-4ECC-98F9647769E0162E"
 			isrelativeresize="true"
 			currentstate="2E0D2EC7-BD0C-4ABA-9CA69269A0D87116"

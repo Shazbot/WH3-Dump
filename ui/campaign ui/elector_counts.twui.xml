@@ -32,7 +32,11 @@
 											<horde_icon this="55EA37F6-0A49-4BB2-A93B77F863471491"/>
 										</name>
 										<icon_player this="EAAA716D-95D1-4631-AEEE9EA3E7E22344"/>
-										<button_portrait this="D9006578-CDB9-4478-9A10C28F6E2E290C"/>
+										<button_portrait this="D9006578-CDB9-4478-9A10C28F6E2E290C">
+											<portrait_mask this="F548A9D6-5884-4D86-B7729D3C06525138">
+												<portrait_image this="91837F1F-9A62-4738-B7528DDB4B84C971"/>
+											</portrait_mask>
+										</button_portrait>
 										<empty_portrait this="EDB86A82-AED4-4850-96ADD16E52A63815"/>
 										<icon_faction this="99E90DDA-867A-4991-86535331F88EBC49"/>
 										<icon_loyalty_holder this="344B82B0-9A67-45F9-86083453F4676C4C">
@@ -68,7 +72,11 @@
 											<horde_icon this="CBFCDD63-8353-4346-9486869511EA109D"/>
 										</name>
 										<icon_player this="C94D59D8-C04D-4B1E-B3E22C0837A9FD2D"/>
-										<button_portrait this="68BB314C-5111-4990-B49F782996D419A6"/>
+										<button_portrait this="68BB314C-5111-4990-B49F782996D419A6">
+											<portrait_mask this="33E61C06-820D-429A-98EC72B889722908">
+												<portrait_image this="09BC85FB-4D66-4A13-80A4825A6216F6C4"/>
+											</portrait_mask>
+										</button_portrait>
 										<empty_portrait this="7281BCF2-5F46-44A4-BFFD48F530FEEDC4"/>
 										<icon_faction this="9DC29D6C-F398-42F7-B93DB4C8516C33BD"/>
 										<icon_loyalty_holder this="1B4868D3-39BA-4FDA-A4EF778C7FEF6088">
@@ -1828,12 +1836,16 @@
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
-					callback_id="ContextUnitCardImageSetter"
-					context_object_id="CcoCampaignCharacter"/>
-				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignCharacter"
 					context_function_id="IsValidContext"/>
+				<callback_with_context callback_id="StatePropagatorCallback">
+					<child_m_user_properties>
+						<property
+							name="target_id"
+							value="portrait_image"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -1862,10 +1874,6 @@
 					value=""/>
 			</userproperties>
 			<componentimages>
-				<component_image
-					this="23425748-008D-408B-86F7AA56348D96FA"
-					uniqueguid="23425748-008D-408B-86F7AA56348D96FA"
-					imagepath="ui/portraits/portholes/wh_main_grn_greenskins/grn_ch_azhag_0.png"/>
 				<component_image
 					this="F35AD963-BCF6-4884-844B4BDF4CB761E8"
 					uniqueguid="F35AD963-BCF6-4884-844B4BDF4CB761E8"
@@ -1911,16 +1919,6 @@
 							componentimage="0A838639-6DBB-44E9-AB0CC84CCF325C6D"
 							width="72"
 							height="74"/>
-						<image
-							this="DD5AA426-241F-4025-B5988BC1DE91B7D2"
-							uniqueguid="DD5AA426-241F-4025-B5988BC1DE91B7D2"
-							componentimage="23425748-008D-408B-86F7AA56348D96FA"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"
-							shader_name="brighten_t0"/>
 						<image
 							this="7FD8FB7C-139B-4580-9074CC4C5EF62C51"
 							uniqueguid="7FD8FB7C-139B-4580-9074CC4C5EF62C51"
@@ -1984,16 +1982,6 @@
 							height="74"
 							shader_name="multiply"/>
 						<image
-							this="E5B8B981-D8FC-401D-8D0DFFEFAD12D6A4"
-							uniqueguid="E5B8B981-D8FC-401D-8D0DFFEFAD12D6A4"
-							componentimage="23425748-008D-408B-86F7AA56348D96FA"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							colour="#6E6E6EFF"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"/>
-						<image
 							this="4F48F1EF-85CE-465E-B351EE4B8031C245"
 							uniqueguid="4F48F1EF-85CE-465E-B351EE4B8031C245"
 							componentimage="AC151544-9147-4E7B-9AC9BF5C49622750"
@@ -2052,15 +2040,6 @@
 							componentimage="0A838639-6DBB-44E9-AB0CC84CCF325C6D"
 							width="72"
 							height="74"/>
-						<image
-							this="BCD43023-1491-4477-AB769ABAD3F2D179"
-							uniqueguid="BCD43023-1491-4477-AB769ABAD3F2D179"
-							componentimage="23425748-008D-408B-86F7AA56348D96FA"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"/>
 						<image
 							this="3F5152CD-1B8E-4C18-8BFD8E4B510FE0D8"
 							uniqueguid="3F5152CD-1B8E-4C18-8BFD8E4B510FE0D8"
@@ -2131,28 +2110,6 @@
 							shadertechnique_vars="2.00,0.00,0.00,0.00"
 							shader_name="brighten_t0"/>
 						<image
-							this="80868CBA-10BB-48A9-A11E4E82FF5AA382"
-							uniqueguid="80868CBA-10BB-48A9-A11E4E82FF5AA382"
-							componentimage="23425748-008D-408B-86F7AA56348D96FA"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							colour="#FFFFFF00"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"
-							shader_name="brighten_t0"/>
-						<image
-							this="F4EA3DCD-DE1B-446B-A8C0F06B9FD2EE5C"
-							uniqueguid="F4EA3DCD-DE1B-446B-A8C0F06B9FD2EE5C"
-							componentimage="23425748-008D-408B-86F7AA56348D96FA"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"
-							shadertechnique_vars="1.00,0.00,0.00,0.00"
-							shader_name="brighten_t0"/>
-						<image
 							this="CF43CB40-85AD-4139-8E85843754DB4A85"
 							uniqueguid="CF43CB40-85AD-4139-8E85843754DB4A85"
 							componentimage="AC151544-9147-4E7B-9AC9BF5C49622750"
@@ -2216,16 +2173,6 @@
 							height="74"
 							shadertechnique_vars="0.70,1.00,0.00,0.00"
 							shader_name="set_greyscale_t0"/>
-						<image
-							this="7DD615E8-6782-4731-AC2A6BAB3DD8A73D"
-							uniqueguid="7DD615E8-6782-4731-AC2A6BAB3DD8A73D"
-							componentimage="23425748-008D-408B-86F7AA56348D96FA"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							colour="#FFFFFF46"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"/>
 						<image
 							this="2D8041F1-04B5-4D6C-ACCDFE9B765B6CA3"
 							uniqueguid="2D8041F1-04B5-4D6C-ACCDFE9B765B6CA3"
@@ -2309,40 +2256,6 @@
 							shadertechnique_vars="2.00,0.00,0.00,0.00"
 							shader_name="brighten_t0"/>
 						<image
-							this="2CBC92BC-21CC-4ECA-A77826A1B208B88F"
-							uniqueguid="2CBC92BC-21CC-4ECA-A77826A1B208B88F"
-							componentimage="23425748-008D-408B-86F7AA56348D96FA"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"
-							shadertechnique_vars="1.00,0.00,0.00,0.00"
-							shader_name="brighten_t0"/>
-						<image
-							this="B4DA6460-828E-4C7B-9970F9BC4CC9E9A4"
-							uniqueguid="B4DA6460-828E-4C7B-9970F9BC4CC9E9A4"
-							componentimage="23425748-008D-408B-86F7AA56348D96FA"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"
-							shadertechnique_vars="1.00,0.00,0.00,0.00"
-							shader_name="brighten_t0"/>
-						<image
-							this="D4FECA5E-96D8-48EC-B01355985E5DDF95"
-							uniqueguid="D4FECA5E-96D8-48EC-B01355985E5DDF95"
-							componentimage="23425748-008D-408B-86F7AA56348D96FA"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							colour="#FFFFFF00"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"
-							shadertechnique_vars="2.00,0.00,0.00,0.00"
-							shader_name="brighten_t0"/>
-						<image
 							this="D95EB79D-CAD1-42DB-8C98EBEFA521488C"
 							uniqueguid="D95EB79D-CAD1-42DB-8C98EBEFA521488C"
 							componentimage="AC151544-9147-4E7B-9AC9BF5C49622750"
@@ -2413,16 +2326,6 @@
 							width="72"
 							height="74"/>
 						<image
-							this="EFFF1181-6D8B-4FF2-8B7D7AC0741C29CB"
-							uniqueguid="EFFF1181-6D8B-4FF2-8B7D7AC0741C29CB"
-							componentimage="23425748-008D-408B-86F7AA56348D96FA"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							colour="#808080FF"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"/>
-						<image
 							this="04E51B5E-06F1-4B3D-805F682ACF5A1FEC"
 							uniqueguid="04E51B5E-06F1-4B3D-805F682ACF5A1FEC"
 							componentimage="AC151544-9147-4E7B-9AC9BF5C49622750"
@@ -2481,17 +2384,6 @@
 							componentimage="0A838639-6DBB-44E9-AB0CC84CCF325C6D"
 							width="72"
 							height="74"/>
-						<image
-							this="8D70393A-E0DC-48CC-9F901E567BCDC674"
-							uniqueguid="8D70393A-E0DC-48CC-9F901E567BCDC674"
-							componentimage="23425748-008D-408B-86F7AA56348D96FA"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"
-							shadertechnique_vars="1.00,0.00,0.00,0.00"
-							shader_name="brighten_t0"/>
 						<image
 							this="A4B98C91-51A5-4A9E-A5C314B1BD9EB4BE"
 							uniqueguid="A4B98C91-51A5-4A9E-A5C314B1BD9EB4BE"
@@ -2580,40 +2472,6 @@
 							shadertechnique_vars="2.00,0.00,0.00,0.00"
 							shader_name="brighten_t0"/>
 						<image
-							this="AA66C81C-5929-47F5-BE9CF0CE25208114"
-							uniqueguid="AA66C81C-5929-47F5-BE9CF0CE25208114"
-							componentimage="23425748-008D-408B-86F7AA56348D96FA"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"
-							shadertechnique_vars="1.00,0.00,0.00,0.00"
-							shader_name="brighten_t0"/>
-						<image
-							this="8F7C2F5C-3F19-4834-A331576603099390"
-							uniqueguid="8F7C2F5C-3F19-4834-A331576603099390"
-							componentimage="23425748-008D-408B-86F7AA56348D96FA"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							colour="#FFFFFF00"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"
-							shadertechnique_vars="1.00,0.00,0.00,0.00"
-							shader_name="brighten_t0"/>
-						<image
-							this="669D7E0F-B867-4BA2-9EAD69032E882BE4"
-							uniqueguid="669D7E0F-B867-4BA2-9EAD69032E882BE4"
-							componentimage="23425748-008D-408B-86F7AA56348D96FA"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"
-							shadertechnique_vars="2.00,0.00,0.00,0.00"
-							shader_name="brighten_t0"/>
-						<image
 							this="B7437345-74E2-4AAD-A22CEE1A98BFB18D"
 							uniqueguid="B7437345-74E2-4AAD-A22CEE1A98BFB18D"
 							componentimage="AC151544-9147-4E7B-9AC9BF5C49622750"
@@ -2690,18 +2548,6 @@
 							height="74"
 							shadertechnique_vars="0.70,1.00,0.00,0.00"
 							shader_name="set_greyscale_t0"/>
-						<image
-							this="D745EFE0-1CFC-4A87-90813F3655423494"
-							uniqueguid="D745EFE0-1CFC-4A87-90813F3655423494"
-							componentimage="23425748-008D-408B-86F7AA56348D96FA"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							colour="#FFFFFF46"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"
-							shadertechnique_vars="1.00,0.00,0.00,0.00"
-							shader_name="brighten_t0"/>
 						<image
 							this="79321ECF-C453-41F3-B5056D94AC0BF125"
 							uniqueguid="79321ECF-C453-41F3-B5056D94AC0BF125"
@@ -3244,12 +3090,16 @@
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
-					callback_id="ContextUnitCardImageSetter"
-					context_object_id="CcoCampaignCharacter"/>
-				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignCharacter"
 					context_function_id="IsValidContext"/>
+				<callback_with_context callback_id="StatePropagatorCallback">
+					<child_m_user_properties>
+						<property
+							name="target_id"
+							value="portrait_image"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -3278,10 +3128,6 @@
 					value=""/>
 			</userproperties>
 			<componentimages>
-				<component_image
-					this="E8075A82-B060-4BD6-82244FA308A4D67D"
-					uniqueguid="E8075A82-B060-4BD6-82244FA308A4D67D"
-					imagepath="ui/portraits/portholes/wh_main_grn_greenskins/grn_ch_azhag_0.png"/>
 				<component_image
 					this="A50D7447-C6D5-4F68-9FC5BB0F2AC17160"
 					uniqueguid="A50D7447-C6D5-4F68-9FC5BB0F2AC17160"
@@ -3328,21 +3174,11 @@
 							width="72"
 							height="74"/>
 						<image
-							this="4B954D5D-BA25-4EFB-B99C019BCBB4C219"
-							uniqueguid="4B954D5D-BA25-4EFB-B99C019BCBB4C219"
-							componentimage="E8075A82-B060-4BD6-82244FA308A4D67D"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"
-							shader_name="brighten_t0"/>
-						<image
 							this="087AF3D6-5E19-475E-A5C8E93A53410A97"
 							uniqueguid="087AF3D6-5E19-475E-A5C8E93A53410A97"
 							componentimage="BA0ECE35-72AE-4863-A10D13A391681F10"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -3350,8 +3186,8 @@
 							this="C8A974EA-0FDC-4B87-81A021CA6FA9F0BA"
 							uniqueguid="C8A974EA-0FDC-4B87-81A021CA6FA9F0BA"
 							componentimage="77274D78-879A-4F83-9D3E73E23015BBDC"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -3359,8 +3195,8 @@
 							this="104A41A7-3FED-445F-986785814D43F5B1"
 							uniqueguid="104A41A7-3FED-445F-986785814D43F5B1"
 							componentimage="C2CD3570-323B-425A-816E7811315DCE80"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -3400,21 +3236,11 @@
 							height="74"
 							shader_name="multiply"/>
 						<image
-							this="4FECE4DE-E137-4FEE-ABD4FCACEE4E7AEB"
-							uniqueguid="4FECE4DE-E137-4FEE-ABD4FCACEE4E7AEB"
-							componentimage="E8075A82-B060-4BD6-82244FA308A4D67D"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							colour="#6E6E6EFF"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"/>
-						<image
 							this="4976B5D0-518A-43ED-B6421A6B78E6E592"
 							uniqueguid="4976B5D0-518A-43ED-B6421A6B78E6E592"
 							componentimage="BA0ECE35-72AE-4863-A10D13A391681F10"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -3422,8 +3248,8 @@
 							this="DB1375D6-4761-4BD5-B3E1A759A30FBE02"
 							uniqueguid="DB1375D6-4761-4BD5-B3E1A759A30FBE02"
 							componentimage="77274D78-879A-4F83-9D3E73E23015BBDC"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -3431,8 +3257,8 @@
 							this="C065B3DA-97BC-4129-9B56992A6E2DE219"
 							uniqueguid="C065B3DA-97BC-4129-9B56992A6E2DE219"
 							componentimage="C2CD3570-323B-425A-816E7811315DCE80"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -3469,20 +3295,11 @@
 							width="72"
 							height="74"/>
 						<image
-							this="71183A60-0380-4158-81C5BD4834547FC8"
-							uniqueguid="71183A60-0380-4158-81C5BD4834547FC8"
-							componentimage="E8075A82-B060-4BD6-82244FA308A4D67D"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"/>
-						<image
 							this="3DF657DC-7133-448F-9B346F674BC58739"
 							uniqueguid="3DF657DC-7133-448F-9B346F674BC58739"
 							componentimage="BA0ECE35-72AE-4863-A10D13A391681F10"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -3490,8 +3307,8 @@
 							this="D14CAFBB-C7E1-42D0-988B1069FE6AE263"
 							uniqueguid="D14CAFBB-C7E1-42D0-988B1069FE6AE263"
 							componentimage="77274D78-879A-4F83-9D3E73E23015BBDC"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -3499,8 +3316,8 @@
 							this="EA94872C-C157-4C4C-AA5F5BADD5A3CFC7"
 							uniqueguid="EA94872C-C157-4C4C-AA5F5BADD5A3CFC7"
 							componentimage="C2CD3570-323B-425A-816E7811315DCE80"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -3547,33 +3364,11 @@
 							shadertechnique_vars="2.00,0.00,0.00,0.00"
 							shader_name="brighten_t0"/>
 						<image
-							this="E0FA15EE-EAEB-4B16-A939234EBB0292B1"
-							uniqueguid="E0FA15EE-EAEB-4B16-A939234EBB0292B1"
-							componentimage="E8075A82-B060-4BD6-82244FA308A4D67D"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							colour="#FFFFFF00"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"
-							shader_name="brighten_t0"/>
-						<image
-							this="12EE2B67-EBC7-41C4-99392895F251D0D6"
-							uniqueguid="12EE2B67-EBC7-41C4-99392895F251D0D6"
-							componentimage="E8075A82-B060-4BD6-82244FA308A4D67D"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"
-							shadertechnique_vars="1.00,0.00,0.00,0.00"
-							shader_name="brighten_t0"/>
-						<image
 							this="17701B4E-443A-45C1-8FC17261FA97D18E"
 							uniqueguid="17701B4E-443A-45C1-8FC17261FA97D18E"
 							componentimage="BA0ECE35-72AE-4863-A10D13A391681F10"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -3581,8 +3376,8 @@
 							this="33C98567-3CD0-41CD-B6951885744C9369"
 							uniqueguid="33C98567-3CD0-41CD-B6951885744C9369"
 							componentimage="77274D78-879A-4F83-9D3E73E23015BBDC"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -3590,8 +3385,8 @@
 							this="6A800AEA-49BD-4833-BBD811F1118AAEF3"
 							uniqueguid="6A800AEA-49BD-4833-BBD811F1118AAEF3"
 							componentimage="C2CD3570-323B-425A-816E7811315DCE80"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -3633,21 +3428,11 @@
 							shadertechnique_vars="0.70,1.00,0.00,0.00"
 							shader_name="set_greyscale_t0"/>
 						<image
-							this="0B1788CB-4DCB-4CC5-AB969C8FB706D79A"
-							uniqueguid="0B1788CB-4DCB-4CC5-AB969C8FB706D79A"
-							componentimage="E8075A82-B060-4BD6-82244FA308A4D67D"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							colour="#FFFFFF46"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"/>
-						<image
 							this="F55FFC1F-F801-429A-BE5965BB85CC5530"
 							uniqueguid="F55FFC1F-F801-429A-BE5965BB85CC5530"
 							componentimage="BA0ECE35-72AE-4863-A10D13A391681F10"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -3655,8 +3440,8 @@
 							this="CFCBB617-1B06-4220-A9C8FEF1212D9734"
 							uniqueguid="CFCBB617-1B06-4220-A9C8FEF1212D9734"
 							componentimage="77274D78-879A-4F83-9D3E73E23015BBDC"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -3664,8 +3449,8 @@
 							this="D2CD1F02-C313-45AB-BE85F3BB04741DD0"
 							uniqueguid="D2CD1F02-C313-45AB-BE85F3BB04741DD0"
 							componentimage="C2CD3570-323B-425A-816E7811315DCE80"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -3725,45 +3510,11 @@
 							shadertechnique_vars="2.00,0.00,0.00,0.00"
 							shader_name="brighten_t0"/>
 						<image
-							this="28930E0A-E28E-4BFA-900946E7A3401131"
-							uniqueguid="28930E0A-E28E-4BFA-900946E7A3401131"
-							componentimage="E8075A82-B060-4BD6-82244FA308A4D67D"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"
-							shadertechnique_vars="1.00,0.00,0.00,0.00"
-							shader_name="brighten_t0"/>
-						<image
-							this="8E3E9C94-D474-49E2-B8BE453DCA7BA489"
-							uniqueguid="8E3E9C94-D474-49E2-B8BE453DCA7BA489"
-							componentimage="E8075A82-B060-4BD6-82244FA308A4D67D"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"
-							shadertechnique_vars="1.00,0.00,0.00,0.00"
-							shader_name="brighten_t0"/>
-						<image
-							this="489D78B9-23F0-45B9-988B0BF07F35E03E"
-							uniqueguid="489D78B9-23F0-45B9-988B0BF07F35E03E"
-							componentimage="E8075A82-B060-4BD6-82244FA308A4D67D"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							colour="#FFFFFF00"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"
-							shadertechnique_vars="2.00,0.00,0.00,0.00"
-							shader_name="brighten_t0"/>
-						<image
 							this="95330A98-1253-404B-88B17296CEF2AC71"
 							uniqueguid="95330A98-1253-404B-88B17296CEF2AC71"
 							componentimage="BA0ECE35-72AE-4863-A10D13A391681F10"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -3771,8 +3522,8 @@
 							this="FF2A8864-B50D-4061-A6D8FF9507CE2DB8"
 							uniqueguid="FF2A8864-B50D-4061-A6D8FF9507CE2DB8"
 							componentimage="77274D78-879A-4F83-9D3E73E23015BBDC"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -3780,8 +3531,8 @@
 							this="74063C15-704F-4A30-8F1C3E4F345C1AF7"
 							uniqueguid="74063C15-704F-4A30-8F1C3E4F345C1AF7"
 							componentimage="C2CD3570-323B-425A-816E7811315DCE80"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -3829,21 +3580,11 @@
 							width="72"
 							height="74"/>
 						<image
-							this="280422F4-8E5E-43CD-8CAF35D4AAA85B2E"
-							uniqueguid="280422F4-8E5E-43CD-8CAF35D4AAA85B2E"
-							componentimage="E8075A82-B060-4BD6-82244FA308A4D67D"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							colour="#808080FF"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"/>
-						<image
 							this="60E69ABE-A4CD-480B-85661F9375C60493"
 							uniqueguid="60E69ABE-A4CD-480B-85661F9375C60493"
 							componentimage="BA0ECE35-72AE-4863-A10D13A391681F10"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -3851,8 +3592,8 @@
 							this="662A2B02-728A-4A3B-A3DD60A4E8AA8AFF"
 							uniqueguid="662A2B02-728A-4A3B-A3DD60A4E8AA8AFF"
 							componentimage="77274D78-879A-4F83-9D3E73E23015BBDC"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -3860,8 +3601,8 @@
 							this="65A1AB1E-2B0F-4B2F-958E5767CD0E0CF7"
 							uniqueguid="65A1AB1E-2B0F-4B2F-958E5767CD0E0CF7"
 							componentimage="C2CD3570-323B-425A-816E7811315DCE80"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -3898,22 +3639,11 @@
 							width="72"
 							height="74"/>
 						<image
-							this="4F776E88-7587-4F6E-80E830221482DA3D"
-							uniqueguid="4F776E88-7587-4F6E-80E830221482DA3D"
-							componentimage="E8075A82-B060-4BD6-82244FA308A4D67D"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"
-							shadertechnique_vars="1.00,0.00,0.00,0.00"
-							shader_name="brighten_t0"/>
-						<image
 							this="6E05D389-DD85-4884-81CB639EAE0F3410"
 							uniqueguid="6E05D389-DD85-4884-81CB639EAE0F3410"
 							componentimage="BA0ECE35-72AE-4863-A10D13A391681F10"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -3921,8 +3651,8 @@
 							this="D238BAB8-B14C-493C-B77C0952B0DF07CC"
 							uniqueguid="D238BAB8-B14C-493C-B77C0952B0DF07CC"
 							componentimage="77274D78-879A-4F83-9D3E73E23015BBDC"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -3930,8 +3660,8 @@
 							this="A9BFE1C1-3B01-423A-82E36E93CF66CB3A"
 							uniqueguid="A9BFE1C1-3B01-423A-82E36E93CF66CB3A"
 							componentimage="C2CD3570-323B-425A-816E7811315DCE80"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -3996,45 +3726,11 @@
 							shadertechnique_vars="2.00,0.00,0.00,0.00"
 							shader_name="brighten_t0"/>
 						<image
-							this="4F2EC922-1E56-4740-A2878F47CCE5AC9B"
-							uniqueguid="4F2EC922-1E56-4740-A2878F47CCE5AC9B"
-							componentimage="E8075A82-B060-4BD6-82244FA308A4D67D"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"
-							shadertechnique_vars="1.00,0.00,0.00,0.00"
-							shader_name="brighten_t0"/>
-						<image
-							this="7ACD57CA-06E7-4E38-BB0DED8808FC70DF"
-							uniqueguid="7ACD57CA-06E7-4E38-BB0DED8808FC70DF"
-							componentimage="E8075A82-B060-4BD6-82244FA308A4D67D"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							colour="#FFFFFF00"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"
-							shadertechnique_vars="1.00,0.00,0.00,0.00"
-							shader_name="brighten_t0"/>
-						<image
-							this="88AADA3B-208B-4950-8A4967D653960D15"
-							uniqueguid="88AADA3B-208B-4950-8A4967D653960D15"
-							componentimage="E8075A82-B060-4BD6-82244FA308A4D67D"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"
-							shadertechnique_vars="2.00,0.00,0.00,0.00"
-							shader_name="brighten_t0"/>
-						<image
 							this="5FCB44A8-7BD7-43C7-A7E4565A346F4AAF"
 							uniqueguid="5FCB44A8-7BD7-43C7-A7E4565A346F4AAF"
 							componentimage="BA0ECE35-72AE-4863-A10D13A391681F10"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -4042,8 +3738,8 @@
 							this="E778A281-521A-4233-B7B670054790DCF3"
 							uniqueguid="E778A281-521A-4233-B7B670054790DCF3"
 							componentimage="77274D78-879A-4F83-9D3E73E23015BBDC"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -4051,8 +3747,8 @@
 							this="C38CED0A-795A-492E-81D2C40FDB743419"
 							uniqueguid="C38CED0A-795A-492E-81D2C40FDB743419"
 							componentimage="C2CD3570-323B-425A-816E7811315DCE80"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -4107,23 +3803,11 @@
 							shadertechnique_vars="0.70,1.00,0.00,0.00"
 							shader_name="set_greyscale_t0"/>
 						<image
-							this="CC5CC93B-3FD5-45B2-9FDE53BACB93ED3B"
-							uniqueguid="CC5CC93B-3FD5-45B2-9FDE53BACB93ED3B"
-							componentimage="E8075A82-B060-4BD6-82244FA308A4D67D"
-							offset="11.00,13.00"
-							width="55"
-							height="55"
-							colour="#FFFFFF46"
-							dockpoint="Center"
-							dock_offset="3.00,4.00"
-							shadertechnique_vars="1.00,0.00,0.00,0.00"
-							shader_name="brighten_t0"/>
-						<image
 							this="4FA463DF-B16E-4C4C-A18C60A6827CA469"
 							uniqueguid="4FA463DF-B16E-4C4C-A18C60A6827CA469"
 							componentimage="BA0ECE35-72AE-4863-A10D13A391681F10"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -4131,8 +3815,8 @@
 							this="FAF370A3-595E-4B9B-A73831A56A632778"
 							uniqueguid="FAF370A3-595E-4B9B-A73831A56A632778"
 							componentimage="77274D78-879A-4F83-9D3E73E23015BBDC"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -4140,8 +3824,8 @@
 							this="9DEF7955-74D9-4E16-810A5A8424FEB847"
 							uniqueguid="9DEF7955-74D9-4E16-810A5A8424FEB847"
 							componentimage="C2CD3570-323B-425A-816E7811315DCE80"
-							offset="11.00,13.00"
-							width="55"
+							offset="-11.00,13.00"
+							width="101"
 							height="55"
 							dockpoint="Center"
 							dock_offset="3.00,4.00"/>
@@ -4866,7 +4550,7 @@
 					texthbehaviour="Never split"
 					textlocalised="true"
 					textlabel="dy_faction_NewState_Text_320064"
-					font_m_font_name="brand_header"
+					font_m_font_name="la_gioconda_uppercase"
 					font_m_size="18"
 					font_m_colour="#FFF8D7FF"
 					font_m_leading="1"
@@ -14201,5 +13885,1513 @@
 				</default>
 			</states>
 		</panel_smoke_t>
+		<portrait_image
+			this="91837F1F-9A62-4738-B7528DDB4B84C971"
+			id="portrait_image"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="56"
+			componentleveltooltip="{{tt:ui/campaign ui/tooltip_elector_seat}}"
+			tooltiplabel="ComponentTooltip_b97bf86b"
+			soundcategory="UI_CAM_HUD_Generic_Click"
+			uniqueguid="91837F1F-9A62-4738-B7528DDB4B84C971"
+			currentstate="848D8C50-2D49-463C-B304FEA304A135D9"
+			defaultstate="848D8C50-2D49-463C-B304FEA304A135D9">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextUnitCardImageSetter"
+					context_object_id="CcoCampaignCharacter"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_image"
+					value="0"/>
+				<property
+					name="hide_if_invalid"
+					value=""/>
+				<property
+					name="main_mask"
+					value="4"/>
+				<property
+					name="override_sound"
+					value=""/>
+				<property
+					name="secondary_mask"
+					value="5"/>
+				<property
+					name="third_mask"
+					value="6"/>
+				<property
+					name="use_porthole_image"
+					value=""/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="691CC4A1-D319-4E9E-9C277A9296F89867"
+					uniqueguid="691CC4A1-D319-4E9E-9C277A9296F89867"
+					imagepath="ui/portraits/portholes/wh_main_grn_greenskins/grn_black_orc_big_boss_campaign_01_0.png"/>
+				<component_image
+					this="B6585C67-CEC8-4032-9D0E679106A80958"
+					uniqueguid="B6585C67-CEC8-4032-9D0E679106A80958"
+					imagepath="ui/skins/default/main_mask.png"/>
+				<component_image
+					this="73947022-0414-440B-85531D7DCEAFAB39"
+					uniqueguid="73947022-0414-440B-85531D7DCEAFAB39"
+					imagepath="ui/skins/default/secondary_mask.png"/>
+				<component_image
+					this="0233FB12-2A5C-418B-94FEED962DCCC7CC"
+					uniqueguid="0233FB12-2A5C-418B-94FEED962DCCC7CC"
+					imagepath="ui/skins/default/third_mask.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="848D8C50-2D49-463C-B304FEA304A135D9"
+					name="active"
+					width="72"
+					height="74"
+					font_m_size="12"
+					font_m_colour="#FFFFE0FF"
+					font_m_leading="1"
+					fontcat_name="ingame_tooltip_italic_warhammer3"
+					uniqueguid="848D8C50-2D49-463C-B304FEA304A135D9"
+					stateeditordisplaypos="40.00,24.00">
+					<imagemetrics>
+						<image
+							this="BA811B18-98F6-4307-A8F012D067C13677"
+							uniqueguid="BA811B18-98F6-4307-A8F012D067C13677"
+							componentimage="691CC4A1-D319-4E9E-9C277A9296F89867"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"
+							shader_name="brighten_t0"/>
+						<image
+							this="92996027-0762-4F13-8ECA2F4356B3BBA2"
+							uniqueguid="92996027-0762-4F13-8ECA2F4356B3BBA2"
+							componentimage="B6585C67-CEC8-4032-9D0E679106A80958"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="74C12E44-2F13-4291-9900BD672F291352"
+							uniqueguid="74C12E44-2F13-4291-9900BD672F291352"
+							componentimage="73947022-0414-440B-85531D7DCEAFAB39"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="7B8BC3B4-17A7-4EB2-9A01DE06D9A65D0C"
+							uniqueguid="7B8BC3B4-17A7-4EB2-9A01DE06D9A65D0C"
+							componentimage="0233FB12-2A5C-418B-94FEED962DCCC7CC"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							transition_m_target_state="52CCD99A-B60B-4B16-8A8B1F6B6F50A3A9"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+					</transitionmap>
+				</active>
+				<down
+					this="E350600B-FF8F-4E0C-87FB2ABD348175EE"
+					name="down"
+					width="72"
+					height="74"
+					font_m_size="12"
+					font_m_colour="#FFFFE0FF"
+					font_m_leading="1"
+					fontcat_name="ingame_tooltip_italic_warhammer3"
+					textshadervars="0.30,0.00,0.00,0.00"
+					uniqueguid="E350600B-FF8F-4E0C-87FB2ABD348175EE"
+					stateeditordisplaypos="145.00,219.00">
+					<imagemetrics>
+						<image
+							this="7BCB149F-273E-4EF4-ADD8BFB7F38EBD23"
+							uniqueguid="7BCB149F-273E-4EF4-ADD8BFB7F38EBD23"
+							componentimage="691CC4A1-D319-4E9E-9C277A9296F89867"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							colour="#6E6E6EFF"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="D00617F7-EFFC-4D04-9602C3A388EFAB1B"
+							uniqueguid="D00617F7-EFFC-4D04-9602C3A388EFAB1B"
+							componentimage="B6585C67-CEC8-4032-9D0E679106A80958"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="45B8EB85-D51D-4711-B5D64F579349A1FD"
+							uniqueguid="45B8EB85-D51D-4711-B5D64F579349A1FD"
+							componentimage="73947022-0414-440B-85531D7DCEAFAB39"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="071C9CA4-DD3A-4C06-A4B06A7BCB050BB5"
+							uniqueguid="071C9CA4-DD3A-4C06-A4B06A7BCB050BB5"
+							componentimage="0233FB12-2A5C-418B-94FEED962DCCC7CC"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="BCA4E5C4-AEBB-4AD5-B1500216D9385FDD"/>
+					</transitionmap>
+				</down>
+				<down_off
+					this="BCA4E5C4-AEBB-4AD5-B1500216D9385FDD"
+					name="down_off"
+					width="72"
+					height="74"
+					font_m_size="12"
+					font_m_colour="#FFFFE0FF"
+					font_m_leading="1"
+					fontcat_name="ingame_tooltip_italic_warhammer3"
+					uniqueguid="BCA4E5C4-AEBB-4AD5-B1500216D9385FDD"
+					stateeditordisplaypos="40.00,319.00">
+					<imagemetrics>
+						<image
+							this="EEA29865-9F8B-4DAE-8629BFEDF0D1BEE7"
+							uniqueguid="EEA29865-9F8B-4DAE-8629BFEDF0D1BEE7"
+							componentimage="691CC4A1-D319-4E9E-9C277A9296F89867"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="4874A146-0247-4F8E-BF73E1A8F9684586"
+							uniqueguid="4874A146-0247-4F8E-BF73E1A8F9684586"
+							componentimage="B6585C67-CEC8-4032-9D0E679106A80958"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="5DD6C1C4-636C-4BF8-B81191168A790AC5"
+							uniqueguid="5DD6C1C4-636C-4BF8-B81191168A790AC5"
+							componentimage="73947022-0414-440B-85531D7DCEAFAB39"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="207265CE-FABD-40CC-84E6418620D28B9E"
+							uniqueguid="207265CE-FABD-40CC-84E6418620D28B9E"
+							componentimage="0233FB12-2A5C-418B-94FEED962DCCC7CC"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition transition_m_target_state="E350600B-FF8F-4E0C-87FB2ABD348175EE"/>
+						<transition
+							index="8"
+							transition_m_target_state="848D8C50-2D49-463C-B304FEA304A135D9"/>
+					</transitionmap>
+				</down_off>
+				<hover
+					this="52CCD99A-B60B-4B16-8A8B1F6B6F50A3A9"
+					name="hover"
+					width="72"
+					height="74"
+					font_m_size="12"
+					font_m_colour="#FFFFE0FF"
+					font_m_leading="1"
+					fontcat_name="ingame_tooltip_italic_warhammer3"
+					textshadervars="0.30,0.00,0.00,0.00"
+					uniqueguid="52CCD99A-B60B-4B16-8A8B1F6B6F50A3A9"
+					stateeditordisplaypos="139.00,126.00">
+					<imagemetrics>
+						<image
+							this="7C3C70FB-7D77-4EC9-9C5138E3EE419FD1"
+							uniqueguid="7C3C70FB-7D77-4EC9-9C5138E3EE419FD1"
+							componentimage="691CC4A1-D319-4E9E-9C277A9296F89867"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							colour="#FFFFFF00"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"
+							shader_name="brighten_t0"/>
+						<image
+							this="B5A4D910-36E6-4A94-88A1B505B7A29287"
+							uniqueguid="B5A4D910-36E6-4A94-88A1B505B7A29287"
+							componentimage="691CC4A1-D319-4E9E-9C277A9296F89867"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"
+							shadertechnique_vars="1.00,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+						<image
+							this="DC42770A-C2EC-4F5C-93F84437258B743F"
+							uniqueguid="DC42770A-C2EC-4F5C-93F84437258B743F"
+							componentimage="B6585C67-CEC8-4032-9D0E679106A80958"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="C6922C84-00E7-4420-89F503DCC0A5F9D2"
+							uniqueguid="C6922C84-00E7-4420-89F503DCC0A5F9D2"
+							componentimage="73947022-0414-440B-85531D7DCEAFAB39"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="953F996D-5F7D-4268-978B061A8990B526"
+							uniqueguid="953F996D-5F7D-4268-978B061A8990B526"
+							componentimage="0233FB12-2A5C-418B-94FEED962DCCC7CC"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="848D8C50-2D49-463C-B304FEA304A135D9"/>
+						<transition
+							index="2"
+							transition_m_target_state="E350600B-FF8F-4E0C-87FB2ABD348175EE"/>
+					</transitionmap>
+				</hover>
+				<inactive
+					this="E441569A-8281-4900-9CD11051E0C02F1E"
+					name="inactive"
+					width="72"
+					height="74"
+					font_m_size="12"
+					font_m_colour="#FFFFE0FF"
+					font_m_leading="1"
+					fontcat_name="ingame_tooltip_italic_warhammer3"
+					uniqueguid="E441569A-8281-4900-9CD11051E0C02F1E">
+					<imagemetrics>
+						<image
+							this="2562AABC-3D63-4AF1-B192AE9F9E7C4502"
+							uniqueguid="2562AABC-3D63-4AF1-B192AE9F9E7C4502"
+							componentimage="691CC4A1-D319-4E9E-9C277A9296F89867"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							colour="#FFFFFF46"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="BF99A623-F066-43C3-80EE4F244C1E123D"
+							uniqueguid="BF99A623-F066-43C3-80EE4F244C1E123D"
+							componentimage="B6585C67-CEC8-4032-9D0E679106A80958"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="83769A2B-C723-4ABC-B23B14525FD34194"
+							uniqueguid="83769A2B-C723-4ABC-B23B14525FD34194"
+							componentimage="73947022-0414-440B-85531D7DCEAFAB39"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="14837CD5-52BC-4A11-AD3CAAE8EE03D0AA"
+							uniqueguid="14837CD5-52BC-4A11-AD3CAAE8EE03D0AA"
+							componentimage="0233FB12-2A5C-418B-94FEED962DCCC7CC"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+					</imagemetrics>
+				</inactive>
+				<selected
+					this="A79428F0-8404-40F1-93A8EBBC208593CD"
+					name="selected"
+					width="72"
+					height="74"
+					font_m_size="12"
+					font_m_colour="#FFFFE0FF"
+					font_m_leading="1"
+					fontcat_name="ingame_tooltip_italic_warhammer3"
+					uniqueguid="A79428F0-8404-40F1-93A8EBBC208593CD"
+					stateeditordisplaypos="401.00,333.00">
+					<imagemetrics>
+						<image
+							this="0FE468EB-3B15-4DF2-8109675053954046"
+							uniqueguid="0FE468EB-3B15-4DF2-8109675053954046"
+							componentimage="691CC4A1-D319-4E9E-9C277A9296F89867"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"
+							shadertechnique_vars="1.00,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+						<image
+							this="E2BD9DDD-1110-4C22-A8D791C9BF5BA0D6"
+							uniqueguid="E2BD9DDD-1110-4C22-A8D791C9BF5BA0D6"
+							componentimage="691CC4A1-D319-4E9E-9C277A9296F89867"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"
+							shadertechnique_vars="1.00,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+						<image
+							this="7AFBC2BF-57DA-4DDC-A9816EEE01685364"
+							uniqueguid="7AFBC2BF-57DA-4DDC-A9816EEE01685364"
+							componentimage="691CC4A1-D319-4E9E-9C277A9296F89867"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							colour="#FFFFFF00"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"
+							shadertechnique_vars="2.00,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+						<image
+							this="64C31162-868F-4F20-962789B4D576A76B"
+							uniqueguid="64C31162-868F-4F20-962789B4D576A76B"
+							componentimage="B6585C67-CEC8-4032-9D0E679106A80958"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="A93CD0BA-0E8E-4286-B69761E92C3FAD86"
+							uniqueguid="A93CD0BA-0E8E-4286-B69761E92C3FAD86"
+							componentimage="73947022-0414-440B-85531D7DCEAFAB39"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="99E7BFBC-BC8E-4F8C-8BC63EEE52DA02DE"
+							uniqueguid="99E7BFBC-BC8E-4F8C-8BC63EEE52DA02DE"
+							componentimage="0233FB12-2A5C-418B-94FEED962DCCC7CC"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							transition_m_target_state="D661CA81-DAB2-48E0-80806BBFAAE7F58A"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+					</transitionmap>
+				</selected>
+				<selected_down
+					this="D2C2D259-B812-4C22-AC36FEE97176BA1D"
+					name="selected_down"
+					width="72"
+					height="74"
+					font_m_size="12"
+					font_m_colour="#FFFFE0FF"
+					font_m_leading="1"
+					fontcat_name="ingame_tooltip_italic_warhammer3"
+					textshadervars="0.30,0.00,0.00,0.00"
+					uniqueguid="D2C2D259-B812-4C22-AC36FEE97176BA1D"
+					stateeditordisplaypos="268.00,120.00">
+					<imagemetrics>
+						<image
+							this="6EC357ED-C824-46AF-9AA2C75E6A301353"
+							uniqueguid="6EC357ED-C824-46AF-9AA2C75E6A301353"
+							componentimage="691CC4A1-D319-4E9E-9C277A9296F89867"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							colour="#808080FF"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="486808F6-8B4A-4E16-9308CE1067003EBC"
+							uniqueguid="486808F6-8B4A-4E16-9308CE1067003EBC"
+							componentimage="B6585C67-CEC8-4032-9D0E679106A80958"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="5A2B5277-90E1-44D9-B3737A9E7A9AA6E1"
+							uniqueguid="5A2B5277-90E1-44D9-B3737A9E7A9AA6E1"
+							componentimage="73947022-0414-440B-85531D7DCEAFAB39"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="1F6B3F2D-716F-46C7-863E3C13D32597EA"
+							uniqueguid="1F6B3F2D-716F-46C7-863E3C13D32597EA"
+							componentimage="0233FB12-2A5C-418B-94FEED962DCCC7CC"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="5E15E072-2BA5-4253-82EF710D51E762F4"/>
+					</transitionmap>
+				</selected_down>
+				<selected_down_off
+					this="5E15E072-2BA5-4253-82EF710D51E762F4"
+					name="selected_down_off"
+					width="72"
+					height="74"
+					font_m_size="12"
+					font_m_colour="#FFFFE0FF"
+					font_m_leading="1"
+					fontcat_name="ingame_tooltip_italic_warhammer3"
+					uniqueguid="5E15E072-2BA5-4253-82EF710D51E762F4"
+					stateeditordisplaypos="384.00,21.00">
+					<imagemetrics>
+						<image
+							this="9396A7E0-797E-42AC-A4AEF6BEDA3E0C17"
+							uniqueguid="9396A7E0-797E-42AC-A4AEF6BEDA3E0C17"
+							componentimage="691CC4A1-D319-4E9E-9C277A9296F89867"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"
+							shadertechnique_vars="1.00,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+						<image
+							this="C7856FEB-729B-4BCF-9C1404410BDB3EB6"
+							uniqueguid="C7856FEB-729B-4BCF-9C1404410BDB3EB6"
+							componentimage="B6585C67-CEC8-4032-9D0E679106A80958"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="A02CB585-ECF9-4075-A16A5DFAABDD71F3"
+							uniqueguid="A02CB585-ECF9-4075-A16A5DFAABDD71F3"
+							componentimage="73947022-0414-440B-85531D7DCEAFAB39"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="78D0D1F5-7997-4493-AE3BD0BF76442D01"
+							uniqueguid="78D0D1F5-7997-4493-AE3BD0BF76442D01"
+							componentimage="0233FB12-2A5C-418B-94FEED962DCCC7CC"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition transition_m_target_state="D2C2D259-B812-4C22-AC36FEE97176BA1D"/>
+						<transition
+							index="8"
+							transition_m_target_state="A79428F0-8404-40F1-93A8EBBC208593CD"/>
+					</transitionmap>
+				</selected_down_off>
+				<selected_hover
+					this="D661CA81-DAB2-48E0-80806BBFAAE7F58A"
+					name="selected_hover"
+					width="72"
+					height="74"
+					font_m_size="12"
+					font_m_colour="#FFFFE0FF"
+					font_m_leading="1"
+					fontcat_name="ingame_tooltip_italic_warhammer3"
+					textshadervars="0.30,0.00,0.00,0.00"
+					uniqueguid="D661CA81-DAB2-48E0-80806BBFAAE7F58A"
+					stateeditordisplaypos="269.00,216.00">
+					<imagemetrics>
+						<image
+							this="AA2470C0-A4AA-46A1-B8D4261B06BE71C7"
+							uniqueguid="AA2470C0-A4AA-46A1-B8D4261B06BE71C7"
+							componentimage="691CC4A1-D319-4E9E-9C277A9296F89867"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"
+							shadertechnique_vars="1.00,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+						<image
+							this="69158386-7DFE-4D91-A2367FE362B3C63A"
+							uniqueguid="69158386-7DFE-4D91-A2367FE362B3C63A"
+							componentimage="691CC4A1-D319-4E9E-9C277A9296F89867"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							colour="#FFFFFF00"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"
+							shadertechnique_vars="1.00,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+						<image
+							this="D4306096-7CEE-4FB2-A025B4B9DFAAC14E"
+							uniqueguid="D4306096-7CEE-4FB2-A025B4B9DFAAC14E"
+							componentimage="691CC4A1-D319-4E9E-9C277A9296F89867"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"
+							shadertechnique_vars="2.00,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+						<image
+							this="D4361FA4-9CF7-4DBB-A9C03FF03AFD2F1E"
+							uniqueguid="D4361FA4-9CF7-4DBB-A9C03FF03AFD2F1E"
+							componentimage="B6585C67-CEC8-4032-9D0E679106A80958"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="DA6A8AA1-1878-4141-B22DFA33390054EF"
+							uniqueguid="DA6A8AA1-1878-4141-B22DFA33390054EF"
+							componentimage="73947022-0414-440B-85531D7DCEAFAB39"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="A3C59A52-0257-4A85-A61DC682A404E596"
+							uniqueguid="A3C59A52-0257-4A85-A61DC682A404E596"
+							componentimage="0233FB12-2A5C-418B-94FEED962DCCC7CC"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="A79428F0-8404-40F1-93A8EBBC208593CD"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+						<transition
+							index="2"
+							transition_m_target_state="D2C2D259-B812-4C22-AC36FEE97176BA1D"/>
+					</transitionmap>
+				</selected_hover>
+				<selected_inactive
+					this="8F4E8882-57A8-4B80-A352A823D541F75A"
+					name="selected_inactive"
+					width="72"
+					height="74"
+					font_m_size="12"
+					font_m_colour="#FFFFE0FF"
+					font_m_leading="1"
+					fontcat_name="ingame_tooltip_italic_warhammer3"
+					uniqueguid="8F4E8882-57A8-4B80-A352A823D541F75A">
+					<imagemetrics>
+						<image
+							this="C55B9F30-DD9C-445C-A45307D841A8B566"
+							uniqueguid="C55B9F30-DD9C-445C-A45307D841A8B566"
+							componentimage="691CC4A1-D319-4E9E-9C277A9296F89867"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							colour="#FFFFFF46"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"
+							shadertechnique_vars="1.00,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+						<image
+							this="AF674D1A-3D4B-4A3B-9C20A31E7036D745"
+							uniqueguid="AF674D1A-3D4B-4A3B-9C20A31E7036D745"
+							componentimage="B6585C67-CEC8-4032-9D0E679106A80958"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="25CDE765-CF78-4D70-B661735C01C6B995"
+							uniqueguid="25CDE765-CF78-4D70-B661735C01C6B995"
+							componentimage="73947022-0414-440B-85531D7DCEAFAB39"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="04003E36-7450-4B48-808427C11256F1C1"
+							uniqueguid="04003E36-7450-4B48-808427C11256F1C1"
+							componentimage="0233FB12-2A5C-418B-94FEED962DCCC7CC"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+					</imagemetrics>
+				</selected_inactive>
+			</states>
+		</portrait_image>
+		<portrait_mask
+			this="F548A9D6-5884-4D86-B7729D3C06525138"
+			id="portrait_mask"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			clipimagestocomponent="true"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="56"
+			soundcategory="UI_CAM_HUD_Generic_Click"
+			uniqueguid="F548A9D6-5884-4D86-B7729D3C06525138"
+			maskimage="68F57A08-2DA8-4C7D-8C971B3318F67E53"
+			currentstate="2D902DE2-6D55-40BC-A22C85D5D54A1517"
+			defaultstate="2D902DE2-6D55-40BC-A22C85D5D54A1517">
+			<userproperties>
+				<property
+					name="dynamic_image"
+					value="0"/>
+				<property
+					name="hide_if_invalid"
+					value=""/>
+				<property
+					name="main_mask"
+					value="4"/>
+				<property
+					name="override_sound"
+					value=""/>
+				<property
+					name="parent_id"
+					value="ElectorSeatEntityIcon"/>
+				<property
+					name="secondary_mask"
+					value="5"/>
+				<property
+					name="third_mask"
+					value="6"/>
+				<property
+					name="use_porthole_image"
+					value=""/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="68F57A08-2DA8-4C7D-8C971B3318F67E53"
+					uniqueguid="68F57A08-2DA8-4C7D-8C971B3318F67E53"
+					imagepath="ui/skins/default/faction_icon_frame_mask_ec.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="2D902DE2-6D55-40BC-A22C85D5D54A1517"
+					name="default"
+					width="72"
+					height="74"
+					font_m_size="12"
+					font_m_colour="#FFFFE0FF"
+					font_m_leading="1"
+					fontcat_name="ingame_tooltip_italic_warhammer3"
+					uniqueguid="2D902DE2-6D55-40BC-A22C85D5D54A1517"
+					stateeditordisplaypos="40.00,24.00">
+					<imagemetrics>
+						<image
+							this="7BCB90C1-1510-42E3-9B5435678986148D"
+							uniqueguid="7BCB90C1-1510-42E3-9B5435678986148D"
+							componentimage="68F57A08-2DA8-4C7D-8C971B3318F67E53"
+							width="72"
+							height="74"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</portrait_mask>
+		<portrait_image
+			this="09BC85FB-4D66-4A13-80A4825A6216F6C4"
+			id="portrait_image"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="56"
+			soundcategory="UI_CAM_HUD_Generic_Click"
+			uniqueguid="09BC85FB-4D66-4A13-80A4825A6216F6C4"
+			currentstate="FD96C375-A721-4E30-86E8B9F215C5FFBA"
+			defaultstate="FD96C375-A721-4E30-86E8B9F215C5FFBA">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextUnitCardImageSetter"
+					context_object_id="CcoCampaignCharacter"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_image"
+					value="0"/>
+				<property
+					name="hide_if_invalid"
+					value=""/>
+				<property
+					name="main_mask"
+					value="4"/>
+				<property
+					name="override_sound"
+					value=""/>
+				<property
+					name="secondary_mask"
+					value="5"/>
+				<property
+					name="third_mask"
+					value="6"/>
+				<property
+					name="use_porthole_image"
+					value=""/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="90B25527-AE8F-43DC-B6E78C0E09B70183"
+					uniqueguid="90B25527-AE8F-43DC-B6E78C0E09B70183"
+					imagepath="ui/portraits/portholes/wh_main_grn_greenskins/grn_ch_skarsnik_0.png"/>
+				<component_image
+					this="75704855-F27A-430D-9D6CE4384FACCFE5"
+					uniqueguid="75704855-F27A-430D-9D6CE4384FACCFE5"
+					imagepath="ui/skins/default/main_mask.png"/>
+				<component_image
+					this="5D2A60F0-5517-4783-B836AD58F4A90A9E"
+					uniqueguid="5D2A60F0-5517-4783-B836AD58F4A90A9E"
+					imagepath="ui/skins/default/secondary_mask.png"/>
+				<component_image
+					this="61FF2E00-0ABC-40B5-A922A2734735DED2"
+					uniqueguid="61FF2E00-0ABC-40B5-A922A2734735DED2"
+					imagepath="ui/skins/default/third_mask.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="FD96C375-A721-4E30-86E8B9F215C5FFBA"
+					name="active"
+					width="72"
+					height="74"
+					font_m_size="12"
+					font_m_colour="#FFFFE0FF"
+					font_m_leading="1"
+					fontcat_name="ingame_tooltip_italic_warhammer3"
+					uniqueguid="FD96C375-A721-4E30-86E8B9F215C5FFBA"
+					stateeditordisplaypos="40.00,24.00">
+					<imagemetrics>
+						<image
+							this="E08A1C89-3FFB-4871-84CF9F59C4C841C6"
+							uniqueguid="E08A1C89-3FFB-4871-84CF9F59C4C841C6"
+							componentimage="90B25527-AE8F-43DC-B6E78C0E09B70183"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"
+							shader_name="brighten_t0"/>
+						<image
+							this="B90C1FE2-9E3F-44DA-B800B081B7BD4C63"
+							uniqueguid="B90C1FE2-9E3F-44DA-B800B081B7BD4C63"
+							componentimage="75704855-F27A-430D-9D6CE4384FACCFE5"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="3D6238F5-DD4C-4DD9-90DCC2E29ECCDDA3"
+							uniqueguid="3D6238F5-DD4C-4DD9-90DCC2E29ECCDDA3"
+							componentimage="5D2A60F0-5517-4783-B836AD58F4A90A9E"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="E81B58AB-3C36-4120-AA952E46A6C94F2D"
+							uniqueguid="E81B58AB-3C36-4120-AA952E46A6C94F2D"
+							componentimage="61FF2E00-0ABC-40B5-A922A2734735DED2"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							transition_m_target_state="DA23AF8F-2C00-4485-A3B2E11E8CDC38B9"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+					</transitionmap>
+				</active>
+				<down
+					this="1DD79265-3948-410D-87D6C82B93587438"
+					name="down"
+					width="72"
+					height="74"
+					font_m_size="12"
+					font_m_colour="#FFFFE0FF"
+					font_m_leading="1"
+					fontcat_name="ingame_tooltip_italic_warhammer3"
+					textshadervars="0.30,0.00,0.00,0.00"
+					uniqueguid="1DD79265-3948-410D-87D6C82B93587438"
+					stateeditordisplaypos="145.00,219.00">
+					<imagemetrics>
+						<image
+							this="BE296695-E75B-4B70-B4288F07191BDBAE"
+							uniqueguid="BE296695-E75B-4B70-B4288F07191BDBAE"
+							componentimage="90B25527-AE8F-43DC-B6E78C0E09B70183"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							colour="#6E6E6EFF"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="50FEC357-4707-481E-95F6EDD995A3911B"
+							uniqueguid="50FEC357-4707-481E-95F6EDD995A3911B"
+							componentimage="75704855-F27A-430D-9D6CE4384FACCFE5"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="557CED3D-08BE-4DAE-87045E112A664412"
+							uniqueguid="557CED3D-08BE-4DAE-87045E112A664412"
+							componentimage="5D2A60F0-5517-4783-B836AD58F4A90A9E"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="CA8EBF86-2198-4815-82DF17BD2D12EBAE"
+							uniqueguid="CA8EBF86-2198-4815-82DF17BD2D12EBAE"
+							componentimage="61FF2E00-0ABC-40B5-A922A2734735DED2"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="0640A96D-FC45-4712-A640CDD0E4BD58EA"/>
+					</transitionmap>
+				</down>
+				<down_off
+					this="0640A96D-FC45-4712-A640CDD0E4BD58EA"
+					name="down_off"
+					width="72"
+					height="74"
+					font_m_size="12"
+					font_m_colour="#FFFFE0FF"
+					font_m_leading="1"
+					fontcat_name="ingame_tooltip_italic_warhammer3"
+					uniqueguid="0640A96D-FC45-4712-A640CDD0E4BD58EA"
+					stateeditordisplaypos="40.00,319.00">
+					<imagemetrics>
+						<image
+							this="09266927-2864-4B92-A067CEAD96EFF0A1"
+							uniqueguid="09266927-2864-4B92-A067CEAD96EFF0A1"
+							componentimage="90B25527-AE8F-43DC-B6E78C0E09B70183"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="1AE07B52-ACDD-46B3-A4233E3FAD3DDFB1"
+							uniqueguid="1AE07B52-ACDD-46B3-A4233E3FAD3DDFB1"
+							componentimage="75704855-F27A-430D-9D6CE4384FACCFE5"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="CB55ABDD-17D3-458C-AC99DDFF2C086A65"
+							uniqueguid="CB55ABDD-17D3-458C-AC99DDFF2C086A65"
+							componentimage="5D2A60F0-5517-4783-B836AD58F4A90A9E"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="EDB01F48-F2A4-42A5-947E5B2D011889F9"
+							uniqueguid="EDB01F48-F2A4-42A5-947E5B2D011889F9"
+							componentimage="61FF2E00-0ABC-40B5-A922A2734735DED2"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition transition_m_target_state="1DD79265-3948-410D-87D6C82B93587438"/>
+						<transition
+							index="8"
+							transition_m_target_state="FD96C375-A721-4E30-86E8B9F215C5FFBA"/>
+					</transitionmap>
+				</down_off>
+				<hover
+					this="DA23AF8F-2C00-4485-A3B2E11E8CDC38B9"
+					name="hover"
+					width="72"
+					height="74"
+					font_m_size="12"
+					font_m_colour="#FFFFE0FF"
+					font_m_leading="1"
+					fontcat_name="ingame_tooltip_italic_warhammer3"
+					textshadervars="0.30,0.00,0.00,0.00"
+					uniqueguid="DA23AF8F-2C00-4485-A3B2E11E8CDC38B9"
+					stateeditordisplaypos="139.00,126.00">
+					<imagemetrics>
+						<image
+							this="7BD33165-8F1C-4990-BAD5BD27D68F9AA3"
+							uniqueguid="7BD33165-8F1C-4990-BAD5BD27D68F9AA3"
+							componentimage="90B25527-AE8F-43DC-B6E78C0E09B70183"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							colour="#FFFFFF00"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"
+							shader_name="brighten_t0"/>
+						<image
+							this="9531877B-810B-4D11-9C0695ABD35FC098"
+							uniqueguid="9531877B-810B-4D11-9C0695ABD35FC098"
+							componentimage="90B25527-AE8F-43DC-B6E78C0E09B70183"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"
+							shadertechnique_vars="1.00,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+						<image
+							this="53B4D629-C79C-4E89-83D3AA32570FD561"
+							uniqueguid="53B4D629-C79C-4E89-83D3AA32570FD561"
+							componentimage="75704855-F27A-430D-9D6CE4384FACCFE5"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="8C1505A5-5924-4792-AC41A4878B4B0B7E"
+							uniqueguid="8C1505A5-5924-4792-AC41A4878B4B0B7E"
+							componentimage="5D2A60F0-5517-4783-B836AD58F4A90A9E"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="35975FBF-A932-4E1A-98B9E14E59AAD7B9"
+							uniqueguid="35975FBF-A932-4E1A-98B9E14E59AAD7B9"
+							componentimage="61FF2E00-0ABC-40B5-A922A2734735DED2"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="FD96C375-A721-4E30-86E8B9F215C5FFBA"/>
+						<transition
+							index="2"
+							transition_m_target_state="1DD79265-3948-410D-87D6C82B93587438"/>
+					</transitionmap>
+				</hover>
+				<inactive
+					this="3E1A1E97-737B-43B6-9C5B7BB949BF5136"
+					name="inactive"
+					width="72"
+					height="74"
+					font_m_size="12"
+					font_m_colour="#FFFFE0FF"
+					font_m_leading="1"
+					fontcat_name="ingame_tooltip_italic_warhammer3"
+					uniqueguid="3E1A1E97-737B-43B6-9C5B7BB949BF5136">
+					<imagemetrics>
+						<image
+							this="A2FDF6EB-A66E-4853-9CD40A793302A84C"
+							uniqueguid="A2FDF6EB-A66E-4853-9CD40A793302A84C"
+							componentimage="90B25527-AE8F-43DC-B6E78C0E09B70183"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							colour="#FFFFFF46"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="9BBAFAF3-8DE6-4EFA-BA0E5EE387FFDF61"
+							uniqueguid="9BBAFAF3-8DE6-4EFA-BA0E5EE387FFDF61"
+							componentimage="75704855-F27A-430D-9D6CE4384FACCFE5"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="B1006D75-20C9-421A-854DE9E0F2B3E830"
+							uniqueguid="B1006D75-20C9-421A-854DE9E0F2B3E830"
+							componentimage="5D2A60F0-5517-4783-B836AD58F4A90A9E"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="B6800DB6-A947-4638-AA86FA8F615D2EB7"
+							uniqueguid="B6800DB6-A947-4638-AA86FA8F615D2EB7"
+							componentimage="61FF2E00-0ABC-40B5-A922A2734735DED2"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+					</imagemetrics>
+				</inactive>
+				<selected
+					this="A0A987D6-DC60-4A31-A6E4491901DB8B2B"
+					name="selected"
+					width="72"
+					height="74"
+					font_m_size="12"
+					font_m_colour="#FFFFE0FF"
+					font_m_leading="1"
+					fontcat_name="ingame_tooltip_italic_warhammer3"
+					uniqueguid="A0A987D6-DC60-4A31-A6E4491901DB8B2B"
+					stateeditordisplaypos="401.00,333.00">
+					<imagemetrics>
+						<image
+							this="BE96D3EC-8ECD-4E1A-A6ACE0F6D91C3341"
+							uniqueguid="BE96D3EC-8ECD-4E1A-A6ACE0F6D91C3341"
+							componentimage="90B25527-AE8F-43DC-B6E78C0E09B70183"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"
+							shadertechnique_vars="1.00,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+						<image
+							this="9D62A541-4B62-4D80-98BFD08EFE9D475F"
+							uniqueguid="9D62A541-4B62-4D80-98BFD08EFE9D475F"
+							componentimage="90B25527-AE8F-43DC-B6E78C0E09B70183"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"
+							shadertechnique_vars="1.00,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+						<image
+							this="B994033C-8221-44E0-AD120369D422358B"
+							uniqueguid="B994033C-8221-44E0-AD120369D422358B"
+							componentimage="90B25527-AE8F-43DC-B6E78C0E09B70183"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							colour="#FFFFFF00"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"
+							shadertechnique_vars="2.00,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+						<image
+							this="2CF755D5-E67C-4EEE-80B1BFEBBB865A36"
+							uniqueguid="2CF755D5-E67C-4EEE-80B1BFEBBB865A36"
+							componentimage="75704855-F27A-430D-9D6CE4384FACCFE5"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="232C6B6D-221E-411A-8F7D26B3540B4A3A"
+							uniqueguid="232C6B6D-221E-411A-8F7D26B3540B4A3A"
+							componentimage="5D2A60F0-5517-4783-B836AD58F4A90A9E"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="99595B98-DD34-405A-89545747677C459A"
+							uniqueguid="99595B98-DD34-405A-89545747677C459A"
+							componentimage="61FF2E00-0ABC-40B5-A922A2734735DED2"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							transition_m_target_state="A6BB3930-0344-4BCA-84303F91FD271E17"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+					</transitionmap>
+				</selected>
+				<selected_down
+					this="5E737851-8CF2-49BF-BCAAD66951A7D458"
+					name="selected_down"
+					width="72"
+					height="74"
+					font_m_size="12"
+					font_m_colour="#FFFFE0FF"
+					font_m_leading="1"
+					fontcat_name="ingame_tooltip_italic_warhammer3"
+					textshadervars="0.30,0.00,0.00,0.00"
+					uniqueguid="5E737851-8CF2-49BF-BCAAD66951A7D458"
+					stateeditordisplaypos="268.00,120.00">
+					<imagemetrics>
+						<image
+							this="84451D59-29C4-485D-8DA505C08FD4282F"
+							uniqueguid="84451D59-29C4-485D-8DA505C08FD4282F"
+							componentimage="90B25527-AE8F-43DC-B6E78C0E09B70183"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							colour="#808080FF"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="9B70730A-78CA-4FE0-93402D0D36D9ADE1"
+							uniqueguid="9B70730A-78CA-4FE0-93402D0D36D9ADE1"
+							componentimage="75704855-F27A-430D-9D6CE4384FACCFE5"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="242EBFDF-FAB0-45FC-9B4A69CB6E6BE7D3"
+							uniqueguid="242EBFDF-FAB0-45FC-9B4A69CB6E6BE7D3"
+							componentimage="5D2A60F0-5517-4783-B836AD58F4A90A9E"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="F85A428D-34A1-453D-BB146A307FC29B5E"
+							uniqueguid="F85A428D-34A1-453D-BB146A307FC29B5E"
+							componentimage="61FF2E00-0ABC-40B5-A922A2734735DED2"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="4DDE9831-5C61-4548-88A78EDF81DC7114"/>
+					</transitionmap>
+				</selected_down>
+				<selected_down_off
+					this="4DDE9831-5C61-4548-88A78EDF81DC7114"
+					name="selected_down_off"
+					width="72"
+					height="74"
+					font_m_size="12"
+					font_m_colour="#FFFFE0FF"
+					font_m_leading="1"
+					fontcat_name="ingame_tooltip_italic_warhammer3"
+					uniqueguid="4DDE9831-5C61-4548-88A78EDF81DC7114"
+					stateeditordisplaypos="384.00,21.00">
+					<imagemetrics>
+						<image
+							this="63A65220-27A4-47F9-A52921B76E0101E6"
+							uniqueguid="63A65220-27A4-47F9-A52921B76E0101E6"
+							componentimage="90B25527-AE8F-43DC-B6E78C0E09B70183"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"
+							shadertechnique_vars="1.00,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+						<image
+							this="786D8187-9A8C-4000-928C5F75A8AD3156"
+							uniqueguid="786D8187-9A8C-4000-928C5F75A8AD3156"
+							componentimage="75704855-F27A-430D-9D6CE4384FACCFE5"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="85917C95-ED58-449E-911CEBC05B2C260D"
+							uniqueguid="85917C95-ED58-449E-911CEBC05B2C260D"
+							componentimage="5D2A60F0-5517-4783-B836AD58F4A90A9E"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="0930ACD0-2149-4089-802248C2C8CF1580"
+							uniqueguid="0930ACD0-2149-4089-802248C2C8CF1580"
+							componentimage="61FF2E00-0ABC-40B5-A922A2734735DED2"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition transition_m_target_state="5E737851-8CF2-49BF-BCAAD66951A7D458"/>
+						<transition
+							index="8"
+							transition_m_target_state="A0A987D6-DC60-4A31-A6E4491901DB8B2B"/>
+					</transitionmap>
+				</selected_down_off>
+				<selected_hover
+					this="A6BB3930-0344-4BCA-84303F91FD271E17"
+					name="selected_hover"
+					width="72"
+					height="74"
+					font_m_size="12"
+					font_m_colour="#FFFFE0FF"
+					font_m_leading="1"
+					fontcat_name="ingame_tooltip_italic_warhammer3"
+					textshadervars="0.30,0.00,0.00,0.00"
+					uniqueguid="A6BB3930-0344-4BCA-84303F91FD271E17"
+					stateeditordisplaypos="269.00,216.00">
+					<imagemetrics>
+						<image
+							this="B0522A01-C5AD-44A4-821F2F44C2C9C21C"
+							uniqueguid="B0522A01-C5AD-44A4-821F2F44C2C9C21C"
+							componentimage="90B25527-AE8F-43DC-B6E78C0E09B70183"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"
+							shadertechnique_vars="1.00,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+						<image
+							this="AC79E026-6D82-484D-8FA1B75B2FE274DB"
+							uniqueguid="AC79E026-6D82-484D-8FA1B75B2FE274DB"
+							componentimage="90B25527-AE8F-43DC-B6E78C0E09B70183"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							colour="#FFFFFF00"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"
+							shadertechnique_vars="1.00,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+						<image
+							this="FC57C431-469F-4E90-8CDD424E8592FDE0"
+							uniqueguid="FC57C431-469F-4E90-8CDD424E8592FDE0"
+							componentimage="90B25527-AE8F-43DC-B6E78C0E09B70183"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"
+							shadertechnique_vars="2.00,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+						<image
+							this="7BD7C5A4-79D0-45F3-AA9D811E2C81DA46"
+							uniqueguid="7BD7C5A4-79D0-45F3-AA9D811E2C81DA46"
+							componentimage="75704855-F27A-430D-9D6CE4384FACCFE5"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="70EA7CA1-7223-4CB0-B6B88197E14B344A"
+							uniqueguid="70EA7CA1-7223-4CB0-B6B88197E14B344A"
+							componentimage="5D2A60F0-5517-4783-B836AD58F4A90A9E"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="CC019A59-5A93-408D-9E6437491C78E393"
+							uniqueguid="CC019A59-5A93-408D-9E6437491C78E393"
+							componentimage="61FF2E00-0ABC-40B5-A922A2734735DED2"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="A0A987D6-DC60-4A31-A6E4491901DB8B2B"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+						<transition
+							index="2"
+							transition_m_target_state="5E737851-8CF2-49BF-BCAAD66951A7D458"/>
+					</transitionmap>
+				</selected_hover>
+				<selected_inactive
+					this="FE3DD64E-CDB3-4ABB-A01201A9A5B10FF6"
+					name="selected_inactive"
+					width="72"
+					height="74"
+					font_m_size="12"
+					font_m_colour="#FFFFE0FF"
+					font_m_leading="1"
+					fontcat_name="ingame_tooltip_italic_warhammer3"
+					uniqueguid="FE3DD64E-CDB3-4ABB-A01201A9A5B10FF6">
+					<imagemetrics>
+						<image
+							this="CCDD559B-DA7B-4F6F-835EB600FA2CB684"
+							uniqueguid="CCDD559B-DA7B-4F6F-835EB600FA2CB684"
+							componentimage="90B25527-AE8F-43DC-B6E78C0E09B70183"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							colour="#FFFFFF46"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"
+							shadertechnique_vars="1.00,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+						<image
+							this="0DEBEA89-1FBF-4CAF-9116B19144902B51"
+							uniqueguid="0DEBEA89-1FBF-4CAF-9116B19144902B51"
+							componentimage="75704855-F27A-430D-9D6CE4384FACCFE5"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="F7E7F42E-46BE-4278-8504D001458EECC1"
+							uniqueguid="F7E7F42E-46BE-4278-8504D001458EECC1"
+							componentimage="5D2A60F0-5517-4783-B836AD58F4A90A9E"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+						<image
+							this="B23A1A31-B877-48E5-97950FC7FFE63C86"
+							uniqueguid="B23A1A31-B877-48E5-97950FC7FFE63C86"
+							componentimage="61FF2E00-0ABC-40B5-A922A2734735DED2"
+							offset="-11.00,13.00"
+							width="101"
+							height="55"
+							dockpoint="Center"
+							dock_offset="3.00,4.00"/>
+					</imagemetrics>
+				</selected_inactive>
+			</states>
+		</portrait_image>
+		<portrait_mask
+			this="33E61C06-820D-429A-98EC72B889722908"
+			id="portrait_mask"
+			clipimagestocomponent="true"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="56"
+			soundcategory="UI_CAM_HUD_Generic_Click"
+			uniqueguid="33E61C06-820D-429A-98EC72B889722908"
+			maskimage="5DFC0D59-86D2-4C80-8BF93E222847906C"
+			currentstate="3DDE4E2D-9D57-41AE-A68FA028F6606B02"
+			defaultstate="3DDE4E2D-9D57-41AE-A68FA028F6606B02">
+			<userproperties>
+				<property
+					name="dynamic_image"
+					value="0"/>
+				<property
+					name="hide_if_invalid"
+					value=""/>
+				<property
+					name="main_mask"
+					value="4"/>
+				<property
+					name="override_sound"
+					value=""/>
+				<property
+					name="parent_id"
+					value="ElectorSeatEntityIcon"/>
+				<property
+					name="secondary_mask"
+					value="5"/>
+				<property
+					name="third_mask"
+					value="6"/>
+				<property
+					name="use_porthole_image"
+					value=""/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="5DFC0D59-86D2-4C80-8BF93E222847906C"
+					uniqueguid="5DFC0D59-86D2-4C80-8BF93E222847906C"
+					imagepath="ui/skins/default/faction_icon_frame_mask_ec.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="3DDE4E2D-9D57-41AE-A68FA028F6606B02"
+					name="default"
+					width="72"
+					height="74"
+					font_m_size="12"
+					font_m_colour="#FFFFE0FF"
+					font_m_leading="1"
+					fontcat_name="ingame_tooltip_italic_warhammer3"
+					uniqueguid="3DDE4E2D-9D57-41AE-A68FA028F6606B02"
+					stateeditordisplaypos="40.00,24.00">
+					<imagemetrics>
+						<image
+							this="6574CBA1-0BFF-4E4E-818A764CCAFDB094"
+							uniqueguid="6574CBA1-0BFF-4E4E-818A764CCAFDB094"
+							componentimage="5DFC0D59-86D2-4C80-8BF93E222847906C"
+							width="72"
+							height="74"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</portrait_mask>
 	</components>
 </layout>

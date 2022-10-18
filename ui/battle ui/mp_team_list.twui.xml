@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <layout
-	version="137"
+	version="138"
 	comment=""
-	precache_condition="BattleRoot.IsMultiplayer">
+	precache_condition="BattleRoot.IsMultiplayer || BattleRoot.IsReplay">
 	<hierarchy>
 		<root this="4DEC40EC-0BFC-49E3-99958C13F0671433">
 			<mp_team_list this="4CAE4558-C3B2-4B69-82C26AF039CD1943">
@@ -33,7 +33,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoStaticObject"
-					context_function_id="MultiplayerRootContext.PlayerList.Filter(IsSpectating == false).Sort(SortId, true)"/>
+					context_function_id="GetIfElse(BattleRoot.IsReplay, BattleRoot.ArmyList,  MultiplayerRootContext.PlayerList.Filter(IsSpectating == false).Sort(SortId, true))"/>
 				<callback_with_context callback_id="SettingVisibilitySetter">
 					<child_m_user_properties>
 						<property
@@ -107,8 +107,8 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextColourSetter"
-					context_object_id="CcoNetworkPlayer"
-					context_function_id="AllianceColour"/>
+					context_object_id="CcoBattleArmy"
+					context_function_id="GetIfElse(IsContextValid(StoredContext(&quot;CcoNetworkPlayer&quot;)), StoredContext(&quot;CcoNetworkPlayer&quot;).AllianceColour, AllianceColour)"/>
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoNetworkPlayer"
@@ -117,6 +117,9 @@
 					callback_id="ContextStateSetter"
 					context_object_id="CcoNetworkPlayer"
 					context_function_id="IsLocalPlayer"/>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoNetworkPlayer"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -293,8 +296,17 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextTextLabel"
-					context_object_id="CcoNetworkPlayer"
-					context_function_id="Name"/>
+					context_object_id="CcoBattleArmy"
+					context_function_id="GetIfElse(IsContextValid(StoredContextFromParent(&quot;CcoNetworkPlayer&quot;)), StoredContextFromParent(&quot;CcoNetworkPlayer&quot;).Name, PlayerName)">
+					<child_m_user_properties>
+						<property
+							name="object_store_events"
+							value="^1"/>
+						<property
+							name="suppress_localise_asserts"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextStateSetter"
 					context_object_id="CcoBattleArmy"
@@ -449,7 +461,7 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoBattleArmy"
-					context_function_id="(BattleRoot.IsSpectator || this.AllianceContext.Id == BattleRoot.PlayerAllianceContext.Id) | this.Ceiling(this.BattleRoot.BattleCurrencyManagerContext.GetArmyCurrencyForType(this, &quot;supplies_currency&quot;)) | &quot;-&quot;">
+					context_function_id="(BattleRoot.IsReplay || BattleRoot.IsSpectator || this.AllianceContext.Id == BattleRoot.PlayerAllianceContext.Id) | this.Ceiling(this.BattleRoot.BattleCurrencyManagerContext.GetArmyCurrencyForType(this, &quot;supplies_currency&quot;)) | &quot;-&quot;">
 					<child_m_user_properties>
 						<property
 							name="event0"

@@ -1185,6 +1185,7 @@
 	"CcoAncillariesSubcategoryRecord" : 
 	{
 		"area" : "Record",
+		"doc" : "Context wrapper for a ANCILLARIES_SUBCATEGORY_RECORD",
 		"is_persistent" : true,
 		"is_temporary" : false,
 		"name" : "CcoAncillariesSubcategoryRecord",
@@ -1192,32 +1193,46 @@
 		[
 			
 			{
+				"doc" : "Returns true if this subcategory is a rune",
+				"name" : "IsRune",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "Bool"
+				}
+			},
+			
+			{
+				"doc" : "Returns the localised name of the subcategory",
 				"name" : "OnscreenName",
 				"return_type" : 
 				{
 					"is_container" : false,
 					"is_optional" : false,
-					"type" : "Void"
+					"type" : "UniString"
 				}
 			},
 			
 			{
+				"doc" : "Returns a list of all subcategories in the database",
 				"name" : "RecordList",
 				"return_type" : 
 				{
-					"is_container" : false,
+					"is_container" : true,
 					"is_optional" : false,
-					"type" : "Void"
+					"type" : "CcoAncillariesSubcategoryRecord"
 				}
 			},
 			
 			{
+				"doc" : "Returns the subcategory string/key",
 				"name" : "Subcategory",
 				"return_type" : 
 				{
 					"is_container" : false,
 					"is_optional" : false,
-					"type" : "Void"
+					"type" : "String"
 				}
 			}
 		]
@@ -4257,6 +4272,17 @@
 			},
 			
 			{
+				"doc" : "Returns if the current owner of the capture point is allowed to build",
+				"name" : "CanCurrentOwnerBuild",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "Bool"
+				}
+			},
+			
+			{
 				"name" : "CaptureBuilding",
 				"return_type" : 
 				{
@@ -5345,6 +5371,122 @@
 		"name" : "CcoBattleEntity",
 		"symbols" : 
 		[
+			
+			{
+				"arguments" : 
+				[
+					
+					{
+						"is_container" : false,
+						"is_optional" : false,
+						"type" : "Float"
+					}
+				],
+				"doc" : "Dev command to set collision height on entity",
+				"name" : "DevSetCollisionHeight",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "Void"
+				},
+				"tags" : [ "debug", "hide_in_uied" ]
+			},
+			
+			{
+				"arguments" : 
+				[
+					
+					{
+						"is_container" : false,
+						"is_optional" : false,
+						"type" : "Float"
+					}
+				],
+				"doc" : "Dev command to set radii ratio of collision on entity",
+				"name" : "DevSetCollisionRadii",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "Void"
+				},
+				"tags" : [ "debug", "hide_in_uied" ]
+			},
+			
+			{
+				"arguments" : 
+				[
+					
+					{
+						"is_container" : false,
+						"is_optional" : false,
+						"type" : "Float"
+					}
+				],
+				"doc" : "Dev command to set radius of collision on entity",
+				"name" : "DevSetCollisionRadius",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "Void"
+				},
+				"tags" : [ "debug", "hide_in_uied" ]
+			},
+			
+			{
+				"arguments" : 
+				[
+					
+					{
+						"is_container" : false,
+						"is_optional" : false,
+						"type" : "String"
+					}
+				],
+				"doc" : "Zooms camera to look at this entity",
+				"name" : "DevSetCollisionShape",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "Void"
+				},
+				"tags" : [ "debug", "hide_in_uied" ]
+			},
+			
+			{
+				"arguments" : 
+				[
+					
+					{
+						"is_container" : false,
+						"is_optional" : false,
+						"type" : "Float"
+					}
+				],
+				"doc" : "Dev command to set collision z offset on entity",
+				"name" : "DevSetCollisionZOffset",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "Void"
+				},
+				"tags" : [ "debug", "hide_in_uied" ]
+			},
+			
+			{
+				"doc" : "Returns the CcoBattleEntityRecord context",
+				"name" : "EntityRecordContext",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "CcoBattleEntityRecord"
+				}
+			},
 			
 			{
 				"doc" : "Returns true if entity still alive",
@@ -8312,6 +8454,17 @@
 			},
 			
 			{
+				"doc" : "Returns true if the current battle has legendary mode enabled",
+				"name" : "IsLegendaryMode",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "Bool"
+				}
+			},
+			
+			{
 				"doc" : "Returns true if current battle is multiplayer",
 				"name" : "IsMultiplayer",
 				"return_type" : 
@@ -10201,6 +10354,17 @@
 			},
 			
 			{
+				"doc" : "Returns path to flags for the faction",
+				"name" : "FlagDir",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "String"
+				}
+			},
+			
+			{
 				"doc" : "Returns the list of units in this setup army",
 				"name" : "UnitList",
 				"return_type" : 
@@ -10368,6 +10532,16 @@
 			
 			{
 				"name" : "Name",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "Void"
+				}
+			},
+			
+			{
+				"name" : "UnitDetailsContext",
 				"return_type" : 
 				{
 					"is_container" : false,
@@ -13311,6 +13485,17 @@
 			},
 			
 			{
+				"doc" : "Returns the list of CcoBattleEntity just for man entities",
+				"name" : "ManList",
+				"return_type" : 
+				{
+					"is_container" : true,
+					"is_optional" : false,
+					"type" : "CcoBattleEntity"
+				}
+			},
+			
+			{
 				"doc" : "Returns the max health percent that can be replenished by abilities",
 				"name" : "MaxHealthPercentCanReplenish",
 				"return_type" : 
@@ -13385,6 +13570,17 @@
 					"is_container" : false,
 					"is_optional" : false,
 					"type" : "Int"
+				}
+			},
+			
+			{
+				"doc" : "Returns the list of CcoBattleEntity just for mount entities",
+				"name" : "MountList",
+				"return_type" : 
+				{
+					"is_container" : true,
+					"is_optional" : false,
+					"type" : "CcoBattleEntity"
 				}
 			},
 			
@@ -15754,7 +15950,7 @@
 					{
 						"is_container" : false,
 						"is_optional" : false,
-						"type" : "CcoComponent"
+						"type" : "ExpressionState"
 					},
 					
 					{
@@ -22266,6 +22462,16 @@
 					"is_optional" : false,
 					"type" : "Void"
 				}
+			},
+			
+			{
+				"name" : "ShouldShowElectorCountTitle",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "Void"
+				}
 			}
 		]
 	},
@@ -25596,6 +25802,26 @@
 			},
 			
 			{
+				"arguments" : 
+				[
+					
+					{
+						"is_container" : false,
+						"is_optional" : false,
+						"type" : "String"
+					}
+				],
+				"doc" : "Returns the number of ancillaries that can be equipped into this category per category for a (optionally provided) faction, e.g. 3 for runes",
+				"name" : "NumAncillariesAllowedPerCharacterForFaction",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "Int"
+				}
+			},
+			
+			{
 				"doc" : "Starts negotiation with this faction",
 				"name" : "OpenDiplomacyWith",
 				"return_type" : 
@@ -28511,6 +28737,17 @@
 			},
 			
 			{
+				"doc" : "Returns the list of CcoOwnershipProductRecord required to be owned for this campaign",
+				"name" : "OwnershipProductRecordList",
+				"return_type" : 
+				{
+					"is_container" : true,
+					"is_optional" : false,
+					"type" : "CcoOwnershipProductRecord"
+				}
+			},
+			
+			{
 				"doc" : "Returns the radar image for map preview",
 				"name" : "RadarImagePath",
 				"return_type" : 
@@ -30660,6 +30897,17 @@
 					"is_container" : false,
 					"is_optional" : false,
 					"type" : "Void"
+				}
+			},
+			
+			{
+				"doc" : "Returns the target character if any (if character part of objectives like to kill character)",
+				"name" : "TargetCharacterContext",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "CcoCampaignCharacter"
 				}
 			},
 			
@@ -38268,6 +38516,17 @@
 					"is_optional" : false,
 					"type" : "Int"
 				}
+			},
+			
+			{
+				"doc" : "Returns the name of the public order skaven corruption factor",
+				"name" : "PublicOrderFactorName",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "UniString"
+				}
 			}
 		]
 	},
@@ -38627,6 +38886,12 @@
 						"is_container" : false,
 						"is_optional" : false,
 						"type" : "CcoFactionRecord"
+					},
+					
+					{
+						"is_container" : false,
+						"is_optional" : false,
+						"type" : "Int"
 					}
 				],
 				"doc" : "Returns a CcoFrontendFactionLeader for the specified CcoFactionRecord if one exists",
@@ -39070,6 +39335,17 @@
 					"is_container" : false,
 					"is_optional" : false,
 					"type" : "Bool"
+				}
+			},
+			
+			{
+				"doc" : "Returns the list of CcoCharacterTraitLevelRecord provided by this tech",
+				"name" : "CharacterTraitList",
+				"return_type" : 
+				{
+					"is_container" : true,
+					"is_optional" : false,
+					"type" : "CcoCharacterTraitLevelRecord"
 				}
 			},
 			
@@ -51924,6 +52200,15 @@
 			},
 			
 			{
+				"arguments" : 
+				[
+					
+					{
+						"is_container" : false,
+						"is_optional" : false,
+						"type" : "CcoCampaignMapPlayableAreaRecord"
+					}
+				],
 				"doc" : "Returns the a localised description of why cant start campaign with this lord currently. Empty if nothing stopping starting the campaign",
 				"events" : [ "FrontendGeneralNameChanged", "FrontEndNameRandomised" ],
 				"name" : "LockedReasonText",
@@ -52152,6 +52437,16 @@
 			
 			{
 				"name" : "SkillEffectList",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "Void"
+				}
+			},
+			
+			{
+				"name" : "StartPosDescription",
 				"return_type" : 
 				{
 					"is_container" : false,
@@ -52714,6 +53009,16 @@
 		"name" : "CcoIncidentRecord",
 		"symbols" : 
 		[
+			
+			{
+				"name" : "AdditionalSoundEvent",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "Void"
+				}
+			},
 			
 			{
 				"name" : "ButtonText",
@@ -53643,6 +53948,7 @@
 	"CcoLobbyPlayer" : 
 	{
 		"area" : "Misc",
+		"doc" : "Wrapper for a lobby player slot",
 		"is_persistent" : true,
 		"is_temporary" : false,
 		"name" : "CcoLobbyPlayer",
@@ -53650,96 +53956,115 @@
 		[
 			
 			{
+				"doc" : "Returns the name of the current battle difficulty",
 				"name" : "BattleDifficultyName",
 				"return_type" : 
 				{
 					"is_container" : false,
 					"is_optional" : false,
-					"type" : "Void"
+					"type" : "UniString"
 				}
 			},
 			
 			{
+				"doc" : "Returns the name of the current campaign difficulty",
 				"name" : "CampaignDifficultyName",
 				"return_type" : 
 				{
 					"is_container" : false,
 					"is_optional" : false,
-					"type" : "Void"
+					"type" : "UniString"
 				}
 			},
 			
 			{
+				"doc" : "Returns true if this player can be kicked from the lobby",
 				"name" : "CanKick",
 				"return_type" : 
 				{
 					"is_container" : false,
 					"is_optional" : false,
-					"type" : "Void"
+					"type" : "Bool"
 				}
 			},
 			
 			{
+				"arguments" : 
+				[
+					
+					{
+						"is_container" : false,
+						"is_optional" : false,
+						"type" : "CcoFactionRecord"
+					}
+				],
+				"doc" : "Returns true if the passed in faction is valid to be set for this player",
 				"name" : "CanSetFaction",
 				"return_type" : 
 				{
 					"is_container" : false,
 					"is_optional" : false,
-					"type" : "Void"
+					"type" : "Bool"
 				}
 			},
 			
 			{
+				"doc" : "Returns the currently chosen faction",
 				"name" : "CurrentFactionContext",
 				"return_type" : 
 				{
 					"is_container" : false,
 					"is_optional" : false,
-					"type" : "Void"
+					"type" : "CcoFactionRecord"
 				}
 			},
 			
 			{
-				"name" : "CurrentLord",
+				"doc" : "Returns the currently chosen lord",
+				"name" : "CurrentLordContext",
 				"return_type" : 
 				{
 					"is_container" : false,
 					"is_optional" : false,
-					"type" : "Void"
+					"type" : "CcoFrontendFactionLeader"
 				}
 			},
 			
 			{
+				"doc" : "Returns the current state of the player (ready/not ready)",
 				"name" : "GetCurrentState",
 				"return_type" : 
 				{
 					"is_container" : false,
 					"is_optional" : false,
-					"type" : "Void"
+					"type" : "String"
 				}
 			},
 			
 			{
+				"doc" : "Returns true if this player is the host of the lobby",
 				"name" : "IsHost",
 				"return_type" : 
 				{
 					"is_container" : false,
 					"is_optional" : false,
-					"type" : "Void"
+					"type" : "Bool"
 				}
 			},
 			
 			{
+				"doc" : "Returns true if this player is the local player",
 				"name" : "IsLocalPlayer",
 				"return_type" : 
 				{
 					"is_container" : false,
 					"is_optional" : false,
-					"type" : "Void"
+					"type" : "Bool"
 				}
 			},
 			
 			{
+				"doc" : "Kicks this player out of the lobby",
 				"name" : "KickPlayer",
 				"return_type" : 
 				{
@@ -53750,36 +54075,49 @@
 			},
 			
 			{
+				"doc" : "Returns the name of the player",
 				"name" : "Name",
 				"return_type" : 
 				{
 					"is_container" : false,
 					"is_optional" : false,
-					"type" : "Void"
+					"type" : "UniString"
 				}
 			},
 			
 			{
+				"doc" : "Returns the context of the network player",
 				"name" : "NetworkPlayerContext",
 				"return_type" : 
 				{
 					"is_container" : false,
 					"is_optional" : false,
-					"type" : "Void"
+					"type" : "CcoNetworkPlayer"
 				}
 			},
 			
 			{
+				"doc" : "Returns the id of the player",
 				"name" : "PlayerID",
 				"return_type" : 
 				{
 					"is_container" : false,
 					"is_optional" : false,
-					"type" : "Void"
+					"type" : "Int"
 				}
 			},
 			
 			{
+				"arguments" : 
+				[
+					
+					{
+						"is_container" : false,
+						"is_optional" : false,
+						"type" : "CcoCultureRecord"
+					}
+				],
+				"doc" : "Sets the culture to the passed in one",
 				"name" : "SetCulture",
 				"return_type" : 
 				{
@@ -53790,6 +54128,16 @@
 			},
 			
 			{
+				"arguments" : 
+				[
+					
+					{
+						"is_container" : false,
+						"is_optional" : false,
+						"type" : "CcoFactionRecord"
+					}
+				],
+				"doc" : "Sets the faction to the passed in one",
 				"name" : "SetFaction",
 				"return_type" : 
 				{
@@ -53800,6 +54148,16 @@
 			},
 			
 			{
+				"arguments" : 
+				[
+					
+					{
+						"is_container" : false,
+						"is_optional" : false,
+						"type" : "CcoFrontendFactionLeader"
+					}
+				],
+				"doc" : "Sets the lord to the passed in one",
 				"name" : "SetLord",
 				"return_type" : 
 				{
@@ -53810,22 +54168,24 @@
 			},
 			
 			{
+				"doc" : "Returns the starting general custom name",
 				"name" : "StartingGeneralCustomName",
 				"return_type" : 
 				{
 					"is_container" : false,
 					"is_optional" : false,
-					"type" : "Void"
+					"type" : "UniString"
 				}
 			},
 			
 			{
+				"doc" : "Returns the team id of the player",
 				"name" : "TeamID",
 				"return_type" : 
 				{
 					"is_container" : false,
 					"is_optional" : false,
-					"type" : "Void"
+					"type" : "Int"
 				}
 			}
 		]
@@ -54115,7 +54475,7 @@
 			},
 			
 			{
-				"name" : "PlayerForFactionContext",
+				"name" : "PlayerForFactionLeaderContext",
 				"return_type" : 
 				{
 					"is_container" : false,
@@ -54803,6 +55163,12 @@
 						"is_container" : false,
 						"is_optional" : false,
 						"type" : "CcoCampaignUnit"
+					},
+					
+					{
+						"is_container" : false,
+						"is_optional" : true,
+						"type" : "Int"
 					}
 				],
 				"doc" : "Returns a context to the unit details the provided unit would have if upgraded to this unit record",
@@ -61699,6 +62065,25 @@
 			},
 			
 			{
+				"arguments" : 
+				[
+					
+					{
+						"is_container" : false,
+						"is_optional" : true,
+						"type" : "CcoSymbolTest"
+					}
+				],
+				"name" : "IsOptionalEmpty",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "Bool"
+				}
+			},
+			
+			{
 				"name" : "SameName",
 				"return_type" : 
 				{
@@ -62875,6 +63260,17 @@
 			{
 				"doc" : "Returns the colour for the main theme",
 				"name" : "Colour",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "Colour"
+				}
+			},
+			
+			{
+				"doc" : "Returns the colour used by fullscreen background images for the main theme",
+				"name" : "FullscreenBackgroundColour",
 				"return_type" : 
 				{
 					"is_container" : false,
@@ -66231,6 +66627,16 @@
 			},
 			
 			{
+				"name" : "HasCustomBattleUpgrades",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "Void"
+				}
+			},
+			
+			{
 				"name" : "IconPath",
 				"return_type" : 
 				{
@@ -66405,6 +66811,16 @@
 			},
 			
 			{
+				"name" : "Colour",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "Colour"
+				}
+			},
+			
+			{
 				"name" : "LocalisedDescription",
 				"return_type" : 
 				{
@@ -66431,6 +66847,16 @@
 					"is_container" : false,
 					"is_optional" : false,
 					"type" : "CcoUnitsCustomBattleTypeRecord"
+				}
+			},
+			
+			{
+				"name" : "SortOrder",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "Int"
 				}
 			},
 			
@@ -66761,6 +67187,16 @@
 					"is_container" : false,
 					"is_optional" : false,
 					"type" : "Bool"
+				}
+			},
+			
+			{
+				"name" : "AnySelected",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "Void"
 				}
 			},
 			
@@ -70123,6 +70559,26 @@
 						"type" : "ExpressionState"
 					}
 				],
+				"doc" : "Returns the background theme colour, used in fullscreen panels, of the main theme skin",
+				"name" : "MainThemeBackgroundColour",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "Colour"
+				}
+			},
+			
+			{
+				"arguments" : 
+				[
+					
+					{
+						"is_container" : false,
+						"is_optional" : false,
+						"type" : "ExpressionState"
+					}
+				],
 				"doc" : "Returns the colour of the main theme skin",
 				"name" : "MainThemeColour",
 				"return_type" : 
@@ -71693,6 +72149,16 @@
 			},
 			
 			{
+				"name" : "SelectPanelButton",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "Void"
+				}
+			},
+			
+			{
 				"doc" : "Return the selected character if any",
 				"events" : [ "CampaignSelectionChanged" ],
 				"name" : "SelectedCharacter",
@@ -71793,6 +72259,26 @@
 			
 			{
 				"name" : "SetExpanded",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "Void"
+				}
+			},
+			
+			{
+				"name" : "SetMaxRangeValue",
+				"return_type" : 
+				{
+					"is_container" : false,
+					"is_optional" : false,
+					"type" : "Void"
+				}
+			},
+			
+			{
+				"name" : "SetMinRangeValue",
 				"return_type" : 
 				{
 					"is_container" : false,

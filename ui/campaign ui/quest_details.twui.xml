@@ -2333,7 +2333,7 @@
 					this="E157E681-404E-4FAE-81E7F3B679E23E12"
 					name="standard"
 					width="380"
-					height="1090"
+					height="1233"
 					interactive="true"
 					uniqueguid="E157E681-404E-4FAE-81E7F3B679E23E12"/>
 			</states>
@@ -2415,7 +2415,7 @@
 		<button_set_holder
 			this="72BAD262-9723-4061-9AB243017B61260C"
 			id="button_set_holder"
-			offset="0.00,1038.00"
+			offset="0.00,1181.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			component_anchor_point="0.50,1.00"
@@ -3269,7 +3269,7 @@
 					this="1E1FD2C3-FC44-478D-9BB201E9600C6534"
 					name="issued"
 					width="380"
-					height="1039"
+					height="1182"
 					interactive="true"
 					uniqueguid="1E1FD2C3-FC44-478D-9BB201E9600C6534">
 					<imagemetrics>
@@ -3278,7 +3278,7 @@
 							uniqueguid="63F10A6F-0571-4FF0-8A5C65ABF5CB7FA3"
 							componentimage="B584BB47-3E85-4DC1-99D7F14E92EA294F"
 							width="380"
-							height="1039"
+							height="1182"
 							tile="true"
 							margin="50.00,50.00,50.00,50.00"/>
 						<image
@@ -3295,7 +3295,7 @@
 							this="6C545B2F-ED84-4F04-8C5481841918D16E"
 							uniqueguid="6C545B2F-ED84-4F04-8C5481841918D16E"
 							componentimage="16C8D159-A402-45D3-A683116BA1FC358B"
-							offset="-8.00,1021.00"
+							offset="-8.00,1164.00"
 							width="396"
 							height="25"
 							dockpoint="Bottom Center"
@@ -3424,7 +3424,7 @@
 		<tabgroup
 			this="C1FCD733-55A6-4023-986C8E7BC8C4D747"
 			id="TabGroup"
-			offset="0.00,186.00"
+			offset="0.00,329.00"
 			allowhorizontalresize="false"
 			priority="50"
 			tooltipslocalised="true"
@@ -3512,7 +3512,7 @@
 		<tab_details_child
 			this="9616F657-39A7-4A74-8445A12349405E2C"
 			id="tab_details_child"
-			offset="0.00,225.00"
+			offset="0.00,368.00"
 			allowhorizontalresize="false"
 			priority="50"
 			tooltipslocalised="true"
@@ -4842,7 +4842,6 @@
 			offset="0.00,186.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
-			visible="false"
 			priority="50"
 			tooltipslocalised="true"
 			uniqueguid="277CE6B2-16C1-48FF-8BD6D4FE794451AD"
@@ -5009,9 +5008,10 @@
 		<stamp_complete
 			this="55E10D4D-6139-48F5-A8661B88D634D95D"
 			id="stamp_complete"
-			offset="0.00,1032.00"
+			offset="0.00,1175.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
+			visible="false"
 			priority="50"
 			tooltipslocalised="true"
 			uniqueguid="55E10D4D-6139-48F5-A8661B88D634D95D"
@@ -5036,10 +5036,9 @@
 		<stamp_failed
 			this="E5878B0F-01C8-4845-88E32B8FFAD7FB33"
 			id="stamp_failed"
-			offset="0.00,849.00"
+			offset="0.00,1175.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
-			visible="false"
 			priority="50"
 			tooltipslocalised="true"
 			uniqueguid="E5878B0F-01C8-4845-88E32B8FFAD7FB33"
@@ -5103,6 +5102,10 @@
 					callback_id="ContextTextLabel"
 					context_object_id="CcoCampaignMission"
 					context_function_id="MissionIssuerContext.Name"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignMission"
+					context_function_id="MissionIssuerContext.Name != &quot;&quot;"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -5307,17 +5310,13 @@
 					uniqueguid="A1504C5C-60FD-4C2D-BF62D374A5B3DBC5">
 					<imagemetrics>
 						<image
-							this="835F1840-0679-4E08-9CCE03E2B6270C4B"
-							uniqueguid="835F1840-0679-4E08-9CCE03E2B6270C4B"
-							componentimage="66D6D453-2529-4C73-A8325EB048D06D4C"
-							width="170"
-							height="159"/>
-						<image
 							this="96E829E0-E928-40E0-87A8F0F9EFC0C995"
 							uniqueguid="96E829E0-E928-40E0-87A8F0F9EFC0C995"
 							componentimage="66D6D453-2529-4C73-A8325EB048D06D4C"
 							width="170"
-							height="159"/>
+							height="159"
+							colour="#C63118FF"
+							ui_colour_preset_type_key="dip_attitude_0"/>
 					</imagemetrics>
 				</newstate>
 			</states>
@@ -6598,12 +6597,11 @@
 				<newstate
 					this="C233180C-B738-48AD-A76562DF0EAD3B2B"
 					name="NewState"
-					width="380"
+					width="360"
 					height="50"
 					text="dy_text"
 					textvalign="Center"
 					textxoffset="35.00,0.00"
-					texthbehaviour="Never split"
 					textlabel="template_unit_NewState_Text_75002a"
 					font_m_size="12"
 					font_m_colour="#A99989FF"
@@ -6847,7 +6845,7 @@
 			allowhorizontalresize="false"
 			priority="50"
 			uniqueguid="871FE04A-9BD7-4CF5-91F25A12F2DB46A1"
-			currentstate="B26433FC-7AE8-46B4-8368280AC79AC9D9"
+			currentstate="DA6BC0B6-C129-47ED-B5E1C3F70934684A"
 			defaultstate="B26433FC-7AE8-46B4-8368280AC79AC9D9">
 			<callbackwithcontextlist>
 				<callback_with_context
@@ -7611,7 +7609,7 @@
 		<footer
 			this="C2D4F548-36F2-4F75-B7E56631455E90C1"
 			id="footer"
-			offset="0.00,1038.00"
+			offset="0.00,1181.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			priority="50"

@@ -6,27 +6,28 @@
 	<hierarchy>
 		<root this="70D6B440-34AE-4F4A-A73BD59D3D40B8A3">
 			<building_information this="0E01576E-AE13-44C3-AF280B837461E85C">
-				<building_information_holder this="31DFFFEF-F638-411A-B79B161C99C4A678">
-					<smoke_holder this="BF69F81D-686F-4585-A1E1C5C2BA6F86D4">
-						<panel_smoke_t this="B8363D08-BF89-46BB-ACB134E2CC5A6D45"/>
-					</smoke_holder>
-					<dy_title this="90761965-2CF5-4FF2-B630890D77310002">
-						<hbar this="AD306EA0-1FE4-474B-8487ADD37A740F47"/>
-					</dy_title>
-					<building_image this="07544E9F-C3D3-460B-98401AA5F4F2F743">
-						<category_frame this="8F3D411F-D3BB-45F8-B8DDEDFFAE50F78A">
-							<secondary_category_frame this="1A7198C1-28D5-4094-87F5A864BF189568"/>
-						</category_frame>
-						<building_level this="45C5024E-9B4C-4E53-B535951355D72DBC"/>
-					</building_image>
-					<dy_secondary_title this="946DB158-1D47-4DCB-87905F37BF3C5DAD"/>
-					<food_cost_entry this="BEDD9113-71BC-4D1E-AF59B65DFA7A1BAB"/>
-					<description_window this="C1AE8170-1F9F-4320-BEBF797096C9914C"/>
-					<effects_list this="73246BD4-02E6-4C7A-A5DA552947DAA3D6"/>
-					<bottom_padding this="3484385D-AAA6-41E0-8CB861FACE8EF51E"/>
-				</building_information_holder>
-				<ability_tooltip_docker this="D5F7ECA6-2E30-4D7B-AABEE411EAEDBF12"/>
-				<instruction_window this="029E2F21-CCCF-4585-8CE1AF981A9583D0"/>
+				<building_info_instruction_list this="EB4D7EEB-1DA7-4B6A-B1C3DBED0928B79B">
+					<building_information_holder this="31DFFFEF-F638-411A-B79B161C99C4A678">
+						<smoke_holder this="BF69F81D-686F-4585-A1E1C5C2BA6F86D4">
+							<panel_smoke_t this="B8363D08-BF89-46BB-ACB134E2CC5A6D45"/>
+						</smoke_holder>
+						<dy_title this="90761965-2CF5-4FF2-B630890D77310002">
+							<hbar this="AD306EA0-1FE4-474B-8487ADD37A740F47"/>
+						</dy_title>
+						<building_image this="07544E9F-C3D3-460B-98401AA5F4F2F743">
+							<category_frame this="8F3D411F-D3BB-45F8-B8DDEDFFAE50F78A">
+								<secondary_category_frame this="1A7198C1-28D5-4094-87F5A864BF189568"/>
+							</category_frame>
+							<building_level this="45C5024E-9B4C-4E53-B535951355D72DBC"/>
+						</building_image>
+						<dy_secondary_title this="946DB158-1D47-4DCB-87905F37BF3C5DAD"/>
+						<food_cost_entry this="BEDD9113-71BC-4D1E-AF59B65DFA7A1BAB"/>
+						<description_window this="C1AE8170-1F9F-4320-BEBF797096C9914C"/>
+						<effects_list this="73246BD4-02E6-4C7A-A5DA552947DAA3D6"/>
+						<bottom_padding this="3484385D-AAA6-41E0-8CB861FACE8EF51E"/>
+					</building_information_holder>
+					<instruction_window this="029E2F21-CCCF-4585-8CE1AF981A9583D0"/>
+				</building_info_instruction_list>
 			</building_information>
 		</root>
 	</hierarchy>
@@ -66,7 +67,6 @@
 			this="0E01576E-AE13-44C3-AF280B837461E85C"
 			id="building_information"
 			offset="0.00,695.00"
-			allowhorizontalresize="false"
 			priority="70"
 			tooltipslocalised="true"
 			uniqueguid="0E01576E-AE13-44C3-AF280B837461E85C"
@@ -74,14 +74,20 @@
 			defaultstate="3F32B744-93DE-4C8E-B4C474F22127CF5B">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="CampaignEffectsListTooltip"/>
+				<callback_with_context callback_id="HorizontalListScreenFitter">
+					<child_m_user_properties>
+						<property
+							name="offset_y"
+							value="100"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<states>
 				<default
 					this="3F32B744-93DE-4C8E-B4C474F22127CF5B"
 					name="default"
 					width="400"
-					height="213"
-					interactive="true"
+					height="228"
 					uniqueguid="3F32B744-93DE-4C8E-B4C474F22127CF5B"/>
 			</states>
 			<animations>
@@ -123,13 +129,9 @@
 				</fade_in>
 			</animations>
 			<LayoutEngine
-				type="List"
-				spacing="0.00,-8.00"
-				sizetocontent="true">
-				<columnwidths>
-					<column width="254"/>
-				</columnwidths>
-			</LayoutEngine>
+				type="HorizontalList"
+				itemsperrow="3"
+				sizetocontent="true"/>
 		</building_information>
 		<bottom_padding
 			this="3484385D-AAA6-41E0-8CB861FACE8EF51E"
@@ -883,7 +885,7 @@
 		<instruction_window
 			this="029E2F21-CCCF-4585-8CE1AF981A9583D0"
 			id="instruction_window"
-			offset="0.00,154.00"
+			offset="0.00,169.00"
 			allowhorizontalresize="false"
 			clipchildren="true"
 			priority="255"
@@ -935,31 +937,30 @@
 				</newstate>
 			</states>
 		</instruction_window>
-		<ability_tooltip_docker
-			this="D5F7ECA6-2E30-4D7B-AABEE411EAEDBF12"
-			id="ability_tooltip_docker"
-			offset="0.00,161.00"
-			priority="255"
+		<building_info_instruction_list
+			this="EB4D7EEB-1DA7-4B6A-B1C3DBED0928B79B"
+			id="building_info_instruction_list"
+			priority="70"
 			tooltipslocalised="true"
-			uniqueguid="D5F7ECA6-2E30-4D7B-AABEE411EAEDBF12"
-			currentstate="DF619CBB-08E2-4FB6-B0B2749608649395"
-			defaultstate="DF619CBB-08E2-4FB6-B0B2749608649395">
+			uniqueguid="EB4D7EEB-1DA7-4B6A-B1C3DBED0928B79B"
+			currentstate="CC494F22-CCE6-47F3-807BCBD97006501B"
+			defaultstate="CC494F22-CCE6-47F3-807BCBD97006501B">
 			<states>
-				<newstate
-					this="DF619CBB-08E2-4FB6-B0B2749608649395"
-					name="NewState"
-					width="1"
-					height="1"
+				<default
+					this="CC494F22-CCE6-47F3-807BCBD97006501B"
+					name="default"
+					width="400"
+					height="228"
 					texthbehaviour="Never split"
-					uniqueguid="DF619CBB-08E2-4FB6-B0B2749608649395"/>
+					uniqueguid="CC494F22-CCE6-47F3-807BCBD97006501B"/>
 			</states>
 			<LayoutEngine
 				type="List"
 				sizetocontent="true">
 				<columnwidths>
-					<column width="1"/>
+					<column width="408"/>
 				</columnwidths>
 			</LayoutEngine>
-		</ability_tooltip_docker>
+		</building_info_instruction_list>
 	</components>
 </layout>
