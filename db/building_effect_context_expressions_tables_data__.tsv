@@ -1,8 +1,9 @@
 key	expression	display_only_active_effects
 #building_effect_context_expressions_tables;1;db/building_effect_context_expressions_tables/data__		
 DEFSlavesGreaterThan100	Owner.ModelPooledResourceContext("def_slaves").Total >= 100	false
+DEFSlavesGreaterThan1000	Owner.ModelPooledResourceContext("def_slaves").Total >= 1000	false
 DEFSlavesGreaterThan150	Owner.ModelPooledResourceContext("def_slaves").Total >= 150	false
-DEFSlavesGreaterThan50	Owner.ModelPooledResourceContext("def_slaves").Total >= 50	false
+DEFSlavesGreaterThan200	Owner.ModelPooledResourceContext("def_slaves").Total >= 200	false
 FactionIsSeducible	Region.Owner.IsInFactionSet("slaanesh_seducible_factions")	false
 FavouredCorruptionKhorne	Owner.IsInFactionSet("FavouredCorruptionKhorne") == true	true
 FavouredCorruptionNone	Owner.IsInFactionSet("FavouredCorruptionNone") == true	true
@@ -18,6 +19,7 @@ GrowthGreaterThan200DPare5	Region.Growth >= 200 || Region.DevelopmentPoints >= 5
 GrowthPerTurnGreaterThan200	Region.GrowthPerTurn >= 200	false
 HasAzazelUpgradeTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_sla_azazel_buildings")	true
 HasFestusUpgradeTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_nur_festus_buildings")	true
+HasFinalOgreCampTech	Owner.IsTechnologyResearched("wh3_main_tech_ogr_2_11_0")	false
 HasKhoCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_kho_shared_gift_upgrade_corruption")	true
 HasMarkedHeroesTech	 Owner.IsTechnologyResearched("wh3_dlc20_chs_kho_valkia_heroes_lords") ||  Owner.IsTechnologyResearched("wh3_dlc20_chs_nur_festus_heroes_lords")  || Owner.IsTechnologyResearched("wh3_dlc20_chs_sla_azazel_heroes_lords") || Owner.IsTechnologyResearched("wh3_dlc20_chs_tze_vilitch_heroes_lords")	true
 HasNurCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_nur_shared_gift_upgrade_corruption")	true
@@ -32,9 +34,11 @@ IsBretonnia	Owner.CultureKey == "wh_main_brt_bretonnia"	true
 IsChampionsFaction	Owner.IsInFactionSet("champions_factions")	true
 IsChaosCampaign	CampaignModelRoot.CampaignKey == "wh3_main_chaos"	true
 IsFactionAzazel	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_azazel")	true
+IsFactionAzazelOrSigvald	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_azazel", "wh3_dlc20_chs_sigvald")	true
 IsFactionFestus	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_festus")	true
 IsFactionMalus	Owner.RecordKeyIsOneOf("wh2_main_def_hag_graef")	true
 IsFactionMorathi	Owner.RecordKeyIsOneOf("wh2_main_def_cult_of_pleasure")	true
+IsFactionNotDrycha	Owner.RecordKeyIsOneOf("wh2_dlc16_wef_drycha") == false	true
 IsFactionNotMorathi	Owner.RecordKeyIsOneOf("wh2_main_def_cult_of_pleasure") == false	true
 IsFactionRogueChaos	Owner.RecordKeyIsOneOf("wh2_dlc09_rogue_dwellers_of_zardok", "wh2_main_rogue_abominations", "wh2_dlc11_cst_rogue_the_churning_gulf_raiders", "wh2_main_rogue_hung_warband", "wh3_main_rogue_shadow_legion", "wh3_main_rogue_kurgan_warband", "wh3_main_rogue_the_challenge_stone_pact")	true
 IsFactionRogueKhorne	Owner.RecordKeyIsOneOf("wh3_main_rogue_doombreeds_followers", "wh3_main_rogue_legion_of_gorehath", "wh3_main_rogue_the_bloody_harvest")	true
@@ -52,8 +56,11 @@ IsGeneralPresentOwn	Region.IsOwnMilitaryForcePresent	false
 IsKholek	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_kholek")	true
 IsKroqGar	Owner.RecordKeyIsOneOf("wh2_main_lzd_last_defenders")	true
 IsNotChampionsFaction	Owner.IsInFactionSet("champions_factions") == false	true
+IsNotChampionsOrSigvaldFaction	Owner.IsInFactionSet("champions_factions") == false && Owner.RecordKeyIsOneOf("wh3_dlc20_chs_sigvald") == false	true
 IsNotFactionFestus	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_festus") == false	true
+IsRegionBeastmen	Region.Owner.CultureKey == "wh_dlc03_bst_beastmen"	true
 IsRegionNorsca	Region.Owner.CultureKey == "wh_dlc08_nor_norsca"	false
+IsRegionTombKing	Region.Owner.CultureKey == "wh2_dlc09_tmb_tomb_kings"	true
 NotDwarf	Owner.CultureKey != "wh_main_dwf_dwarfs"	false
 PublicOrder100	Region.PublicOrder > 99	false
 PublicOrderGreaterThan0	Region.PublicOrder > 0	false
