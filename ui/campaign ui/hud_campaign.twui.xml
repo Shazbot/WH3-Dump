@@ -45,6 +45,7 @@
 								<button_header this="8DCDDF17-3095-4F01-A7D3E2CB696D4741"/>
 								<dy_header this="9F691397-9D3A-4C3B-95ED13D1E99B19AF"/>
 								<button_show_objectives this="F5C40E23-1FAC-4428-BCD76409A515A30C"/>
+								<button_show_grudges this="E83AD37A-06FC-4620-A4EA7B017E16664F"/>
 							</flyer_holder>
 							<teleport_holder this="ED3673D8-5D8F-43D0-9A7768CA082CFAE5">
 								<button_teleport this="92E5B9A9-2350-40F8-BF58DABF50B9396F"/>
@@ -8272,7 +8273,7 @@
 			</user_properties>
 			<localised_texts>
 				<localised_text
-					tooltip_label="button_movie_viewer_Tooltip_4a0008"
+					tooltip_label="ComponentTooltip_89d3c886"
 					tooltip_text="Movie Viewer"/>
 				<localised_text
 					state="active"
@@ -10622,6 +10623,116 @@
 				<element value=""/>
 			</override_images>
 		</button_show_garrison>
+		<button_show_grudges
+			this="E83AD37A-06FC-4620-A4EA7B017E16664F"
+			id="button_show_grudges"
+			template_id="round_small_button"
+			part_of_template="true"
+			uniqueguid_in_template="82F58892-7F49-4844-B36443AED497BEEF"
+			uniqueguid="E83AD37A-06FC-4620-A4EA7B017E16664F"
+			dimensions="38.00,38.00"
+			dock_point="Center Right"
+			sound_category="UI_GBL_TMP_Round_Small_Button">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="2ADA6D6A-BBC9-464D-81E77DCC60B7982A"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="FA436746-796F-4F4F-A682339BA041B240"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="209C2790-80E6-46B6-9A6770DD6B725C39"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="6788FCD2-1F7F-42CF-9DE049637E3A7749"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="C32F1DB3-FAC7-4545-B618BD21AE374B0C"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui\skins\default\icon_book_grudges.png"
+					uniqueguid="7F6D64D8-4A03-401A-9B6232FE43D11343"/>
+				<component_image_uniqueguid
+					name="ui\skins\default\button_round_small_pressed.png"
+					uniqueguid="83AAD7F4-79A8-4FB0-8274C5D9722F3824"/>
+				<component_image_uniqueguid
+					name="ui\skins\default\button_round_small_hover.png"
+					uniqueguid="DEE80437-65EB-4087-85A3DA8E4B489AB4"/>
+				<component_image_uniqueguid
+					name="ui\skins\default\button_round_small_active.png"
+					uniqueguid="CF9B6AD5-576C-43C0-A3DC018419302D63"/>
+				<component_image_uniqueguid
+					name="ui\skins\default\button_round_small_inactive.png"
+					uniqueguid="EAED9E24-1B65-459D-A4AA2593AE659172"/>
+				<component_image_uniqueguid
+					name="ui\skins\default\button_round_small_underlay.png"
+					uniqueguid="DE6B44D8-EBC7-4E0A-BEF6F0309058EFD7"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoCampaignMission"
+					context_function_id="ShowObjectivePanel"/>
+				<callback_with_context callback_id="StatePropagatorCallback">
+					<child_m_user_properties>
+						<property
+							name="use_transitions"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>
+				<callback_with_context
+					callback_id="ContextInactiveStateSetter"
+					context_object_id="CcoStaticObject"
+					context_function_id="IsScriptLockActive(&quot;hide_missions_button&quot;) == false"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignMission"
+					context_function_id="MissionRecordContext.EventCategoryContext.CategoryKey == &quot;Grudges&quot;"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="resizable"/>
+				<property
+					name="disable_override0"
+					value="CallbackAnimTrigger"/>
+				<property
+					name="dynamic_image"
+					value="0"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text
+					tooltip_label="ComponentTooltip_cf28493f"
+					tooltip_text="View in the Great Book of Grudges"/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui\skins\default\icon_book_grudges.png"/>
+				<element value="ui\skins\default\button_round_small_pressed.png"/>
+				<element value="ui\skins\default\button_round_small_hover.png"/>
+				<element value="ui\skins\default\button_round_small_active.png"/>
+				<element value="ui\skins\default\button_round_small_inactive.png"/>
+				<element value="ui\skins\default\button_round_small_underlay.png"/>
+				<element value=""/>
+			</override_images>
+		</button_show_grudges>
 		<button_show_horde_buildings
 			this="86AB4D99-D50B-4A48-B8570720E45A7D04"
 			id="button_show_horde_buildings"
@@ -10835,6 +10946,10 @@
 					callback_id="ContextInactiveStateSetter"
 					context_object_id="CcoStaticObject"
 					context_function_id="IsScriptLockActive(&quot;hide_missions_button&quot;) == false"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignMission"
+					context_function_id="MissionRecordContext.EventCategoryContext.CategoryKey != &quot;Grudges&quot;"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -17762,7 +17877,7 @@
 				<component_image
 					this="EF69A737-ED74-421E-B65FD9A52CF46E47"
 					uniqueguid="EF69A737-ED74-421E-B65FD9A52CF46E47"
-					imagepath="ui/skins/wh3_main_ogr_ogre_kingdoms/bar_top_right.png"/>
+					imagepath="ui/skins/default/bar_top_right.png"/>
 				<component_image
 					this="935CD78D-BC5B-4A1E-BCD1C21F23988965"
 					uniqueguid="935CD78D-BC5B-4A1E-BCD1C21F23988965"
@@ -20112,7 +20227,7 @@
 				<component_image
 					this="26413E1F-5EC3-408A-8A0CE9B123589CDB"
 					uniqueguid="26413E1F-5EC3-408A-8A0CE9B123589CDB"
-					imagepath="ui/skins/wh3_main_ogr_ogre_kingdoms/bar_small_buttons.png"/>
+					imagepath="ui/skins/default/bar_small_buttons.png"/>
 			</componentimages>
 			<states>
 				<newstate
@@ -22747,7 +22862,7 @@
 				<component_image
 					this="7657C9D0-EF1A-48EC-9440E62876EB6F83"
 					uniqueguid="7657C9D0-EF1A-48EC-9440E62876EB6F83"
-					imagepath="ui/skins/wh3_main_ogr_ogre_kingdoms/bar_small_central_left.png"/>
+					imagepath="ui/skins/default/bar_small_central_left.png"/>
 				<component_image
 					this="7D659472-0C8E-4A2E-AAC3ECF5B056FE37"
 					uniqueguid="7D659472-0C8E-4A2E-AAC3ECF5B056FE37"
@@ -24363,7 +24478,7 @@
 					texthalign="Center"
 					texthbehaviour="Never split"
 					textlocalised="true"
-					textlabel="StateText_71798abd"
+					textlabel="StateText_1226aac3"
 					font_m_colour="#FFF8D7FF"
 					font_m_leading="1"
 					fontcat_name="fe_text_small"
@@ -28127,7 +28242,7 @@
 					textvalign="Center"
 					texthalign="Center"
 					texthbehaviour="Never split"
-					font_m_font_name="brand_header"
+					font_m_font_name="la_gioconda_uppercase"
 					font_m_size="18"
 					font_m_colour="#FFF8D7FF"
 					font_m_leading="1"
@@ -28160,7 +28275,7 @@
 					textvalign="Center"
 					texthalign="Center"
 					texthbehaviour="Never split"
-					font_m_font_name="brand_header"
+					font_m_font_name="la_gioconda_uppercase"
 					font_m_size="18"
 					font_m_colour="#FFF8D7FF"
 					font_m_leading="1"
@@ -28193,7 +28308,7 @@
 					textvalign="Center"
 					texthalign="Center"
 					texthbehaviour="Never split"
-					font_m_font_name="brand_header"
+					font_m_font_name="la_gioconda_uppercase"
 					font_m_size="18"
 					font_m_colour="#FFF8D7FF"
 					font_m_leading="1"
@@ -28226,7 +28341,7 @@
 					textvalign="Center"
 					texthalign="Center"
 					texthbehaviour="Never split"
-					font_m_font_name="brand_header"
+					font_m_font_name="la_gioconda_uppercase"
 					font_m_size="18"
 					font_m_colour="#FFF8D7FF"
 					font_m_leading="1"
@@ -28344,7 +28459,7 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoCampaignFaction"
-					context_function_id="Filter(ActiveMissionList, Component(&quot;03864E19-EAB8-49E8-8A2EC45D3D4CAE01&quot;).ShouldShowMission).Size">
+					context_function_id="Filter(ActiveMissionList, Component(&quot;03864E19-EAB8-49E8-8A2EC45D3D4CAE01&quot;).ShouldShowMission &amp;&amp; MissionRecordContext.EventCategoryContext.CategoryKey != &quot;Grudges&quot;).Size">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -30894,7 +31009,7 @@
 					texthalign="Center"
 					texthbehaviour="Never split"
 					textlocalised="true"
-					textlabel="StateText_71798abd"
+					textlabel="StateText_1226aac3"
 					font_m_colour="#FFF8D7FF"
 					font_m_leading="1"
 					fontcat_name="fe_text_small"
@@ -31651,7 +31766,7 @@
 			dock_offset="21.00,-29.00"
 			component_anchor_point="0.50,0.50"
 			tooltipslocalised="true"
-			componentleveltooltip="number of Chaos missions to stomp"
+			componentleveltooltip="Number of active Visions"
 			tooltiplabel="ComponentTooltip_29b62244"
 			uniqueguid="18A789D9-82ED-474E-93DF22C2E10FB99A"
 			currentstate="36BE08BD-4A6C-4A91-93EFEAB0903FE4D1"
@@ -32045,7 +32160,7 @@
 					texthalign="Center"
 					texthbehaviour="Never split"
 					textlocalised="true"
-					textlabel="StateText_71798abd"
+					textlabel="StateText_1226aac3"
 					font_m_colour="#FFF8D7FF"
 					font_m_leading="1"
 					fontcat_name="fe_text_small"
@@ -32828,7 +32943,7 @@
 			offset="-86.00,-3.00"
 			priority="1"
 			tooltipslocalised="true"
-			componentleveltooltip="LUA has failed since last campaign load - many features are likely to be broken until the campaign is reloaded!&#10;&#10;These warnings can be disabled by deactivating the &quot;Enable Context Viewer&quot; setting in the options menu."
+			componentleveltooltip="LUA has failed since last campaign load – many features are likely to be broken until the campaign is reloaded! These warnings can be disabled by deactivating the Enable Context Viewer setting in the Options menu."
 			tooltiplabel="ComponentTooltip_befb1452f"
 			uniqueguid="3ADD5098-0735-40CE-9CAC1DA998EAB4B5"
 			isaspectratiolocked="true"

@@ -6332,7 +6332,7 @@
 					<material_m_texture_overrides>
 						<property
 							slot_id="t_xml_effect_colours"
-							filepath="ui\effects\textures\effect_fire.dds"
+							filepath="ui/effects/textures/effect_fire_winstreak.dds"
 							is_override_of_default="true"/>
 						<property
 							slot_id="t_xml_heat_mask"
@@ -9563,7 +9563,10 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignPooledResource"
-					context_function_id="IsValidContext &amp;&amp; StoredContext(&quot;CcoCampaignCharacter&quot;).IsPlayerCharacter"/>
+					context_function_id="IsContextValid(this) &amp;&amp; StoredContext(&quot;CcoCampaignCharacter&quot;).IsPlayerCharacter"/>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoCampaignPooledResource"/>
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoCampaignMilitaryForce"
@@ -9574,9 +9577,6 @@
 							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
-					context_object_id="CcoCampaignPooledResource"/>
 			</callbackwithcontextlist>
 			<states>
 				<_0
@@ -9640,7 +9640,10 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignPooledResource"
-					context_function_id="IsValidContext &amp;&amp; StoredContext(&quot;CcoCampaignCharacter&quot;).IsPlayerCharacter"/>
+					context_function_id="IsContextValid(this) &amp;&amp; StoredContext(&quot;CcoCampaignCharacter&quot;).IsPlayerCharacter"/>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoCampaignPooledResource"/>
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoCampaignMilitaryForce"
@@ -9651,9 +9654,6 @@
 							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
-					context_object_id="CcoCampaignPooledResource"/>
 			</callbackwithcontextlist>
 			<states>
 				<_0
@@ -9687,14 +9687,20 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignPooledResource"
-					context_function_id="IsValidContext &amp;&amp; StoredContext(&quot;CcoCampaignCharacter&quot;).IsPlayerCharacter"/>
+					context_function_id="IsContextValid(this) &amp;&amp; StoredContext(&quot;CcoCampaignCharacter&quot;).IsPlayerCharacter"/>
 				<callback_with_context
 					callback_id="ContextCustomTooltipStore"
 					context_object_id="CcoCampaignPooledResource"/>
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoCampaignMilitaryForce"
-					context_function_id="PooledResourceContext(&quot;wh3_dlc20_chs_authority_slaanesh&quot;)"/>
+					context_function_id="PooledResourceContext(&quot;wh3_dlc20_chs_authority_slaanesh&quot;)">
+					<child_m_user_properties>
+						<property
+							name="clear_on_empty"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<states>
 				<_0
@@ -9728,7 +9734,10 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignPooledResource"
-					context_function_id="IsValidContext &amp;&amp; StoredContext(&quot;CcoCampaignCharacter&quot;).IsPlayerCharacter"/>
+					context_function_id="IsContextValid(this) &amp;&amp; StoredContext(&quot;CcoCampaignCharacter&quot;).IsPlayerCharacter"/>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoCampaignPooledResource"/>
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoCampaignMilitaryForce"
@@ -9739,9 +9748,6 @@
 							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
-					context_object_id="CcoCampaignPooledResource"/>
 			</callbackwithcontextlist>
 			<states>
 				<_0
