@@ -226,8 +226,6 @@ end;
 
 --- @variable unit @battle_unit object representing the subject unit.
 --- @variable uc @battle_unitcontroller unitcontroller object that controls the unit.
---- @variable army_index @number index of army that the unit belongs to.
---- @variable alliance_index @number index of alliance that the unit belongs to.
 
 
 --- @function army

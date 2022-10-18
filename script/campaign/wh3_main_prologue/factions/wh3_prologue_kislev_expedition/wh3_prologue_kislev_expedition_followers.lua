@@ -287,7 +287,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:won_battle() and char_army_has_unit(character, {"wh3_main_pro_ksl_inf_tzar_guard_0"});
+				return character:won_battle() and cm:char_army_has_unit(character, {"wh3_main_pro_ksl_inf_tzar_guard_0"});
 			end,
 		["chance"] = 10
 	},
@@ -319,7 +319,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:won_battle() and (count_char_army_has_unit_category(character, "cavalry") > 3 or count_char_army_has_unit_category(character, "war_beast") > 3);
+				return character:won_battle() and (cm:count_char_army_has_unit_category(character, "cavalry") > 3 or cm:count_char_army_has_unit_category(character, "war_beast") > 3);
 			end,
 		["chance"] = 30
 	},
@@ -398,7 +398,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:won_battle() and (count_char_army_has_unit_category(character, "inf_melee") + count_char_army_has_unit_category(character, "inf_ranged")) > 7;
+				return character:won_battle() and (cm:count_char_army_has_unit_category(character, "inf_melee") + cm:count_char_army_has_unit_category(character, "inf_ranged")) > 7;
 			end,
 		["chance"] = 20
 	}

@@ -144,17 +144,17 @@ core:add_listener(
 
 		if cm:char_is_general_with_army(context:character()) and context:character():faction():culture() == "wh_main_brt_bretonnia" then
 			if context:character():won_battle() and is_attacker(context:character()) then
-				Give_Trait(context:character(), "wh_dlc07_trait_brt_lord_good_attacker", 1, 100);
+				campaign_traits:give_trait(context:character(), "wh_dlc07_trait_brt_lord_good_attacker", 1, 100);
 			elseif context:character():won_battle()==false and is_attacker(context:character()) then
-				Give_Trait(context:character(), "wh_dlc07_trait_brt_lord_bad_attacker", 2, 100);
+				campaign_traits:give_trait(context:character(), "wh_dlc07_trait_brt_lord_bad_attacker", 2, 100);
 			end
 		end	
 		
 		if cm:char_is_general_with_army(context:character()) and context:character():faction():culture() == "wh_main_brt_bretonnia" then
 			if context:character():won_battle() and is_defender(context:character()) then
-				Give_Trait(context:character(), "wh_dlc07_trait_brt_lord_good_defender", 1, 100);
+				campaign_traits:give_trait(context:character(), "wh_dlc07_trait_brt_lord_good_defender", 1, 100);
 			elseif context:character():won_battle()==false and is_defender(context:character()) then
-				Give_Trait(context:character(), "wh_dlc07_trait_brt_lord_bad_defender", 2, 100);
+				campaign_traits:give_trait(context:character(), "wh_dlc07_trait_brt_lord_bad_defender", 2, 100);
 			end
 		end	
 	end,
@@ -219,7 +219,7 @@ core:add_listener(
 			if (is_attacker(context:character()) and context:pending_battle():defender():faction():culture() == "wh_main_brt_bretonnia") or
 			(is_defender(context:character()) and context:pending_battle():attacker():faction():culture() == "wh_main_brt_bretonnia") then
 			
-				Give_Trait(context:character(), "wh_dlc07_trait_brt_lord_bad_villain", 1, 100);
+				campaign_traits:give_trait(context:character(), "wh_dlc07_trait_brt_lord_bad_villain", 1, 100);
 			end
 		end
 	end,
@@ -237,7 +237,7 @@ core:add_listener(
 			if (is_attacker(context:character()) and context:pending_battle():defender():faction():culture() == "wh_main_emp_empire" and (not context:pending_battle():defender():faction():name()=="wh_main_teb_estalia") and (not context:pending_battle():defender():faction():name()=="wh_main_teb_tilea")) or
 			(is_defender(context:character()) and context:pending_battle():attacker():faction():culture() == "wh_main_emp_empire" and (not context:pending_battle():attacker():faction():name()=="wh_main_teb_estalia") and (not context:pending_battle():attacker():faction():name()=="wh_main_teb_tilea")) then
 			
-				Give_Trait(context:character(), "wh_dlc07_trait_brt_lord_bad_renegade", 1, 100);
+				campaign_traits:give_trait(context:character(), "wh_dlc07_trait_brt_lord_bad_renegade", 1, 100);
 			end
 		end
 	end,
@@ -252,7 +252,7 @@ core:add_listener(
 	true,
 	function(context)
 		if cm:char_is_general_with_army(context:character()) and context:character():faction():culture() == "wh_main_brt_bretonnia" and context:character():won_battle() and is_peasant_army(context:character()) and (not context:character():has_trait("wh_dlc07_trait_brt_lord_good_knightly")) then
-			Give_Trait(context:character(), "wh_dlc07_trait_brt_lord_good_peasants", 1, 100);
+			campaign_traits:give_trait(context:character(), "wh_dlc07_trait_brt_lord_good_peasants", 1, 100);
 		end
 	end,
 	true
@@ -266,7 +266,7 @@ core:add_listener(
 	true,
 	function(context)
 		if cm:char_is_general_with_army(context:character()) and context:character():faction():culture() == "wh_main_brt_bretonnia" and context:character():won_battle() and is_knightly_army(context:character()) and (not context:character():has_trait("wh_dlc07_trait_brt_lord_good_peasants")) then
-			Give_Trait(context:character(), "wh_dlc07_trait_brt_lord_good_knightly", 1, 100);
+			campaign_traits:give_trait(context:character(), "wh_dlc07_trait_brt_lord_good_knightly", 1, 100);
 		end
 	end,
 	true
@@ -313,7 +313,7 @@ core:add_listener(
 		local louen_present, LL_role = is_LL_in_enemy(context:character(), LOUEN_SUBTYPE);
 		
 		if cm:char_is_general_with_army(context:character()) and context:character():faction():culture() == "wh_main_brt_bretonnia" and (louen_present == true and LL_role == "defender") then
-			Give_Trait(context:character(), "wh_dlc07_trait_brt_lord_bad_traitor", 1, 100);
+			campaign_traits:give_trait(context:character(), "wh_dlc07_trait_brt_lord_bad_traitor", 1, 100);
 		end
 	end,
 	true
@@ -332,7 +332,7 @@ core:add_listener(
 			out("Bretonnia battle distance: "..distance);
 			
 			if distance >= 100000 then 
-				Give_Trait(context:character(), "wh_dlc07_trait_brt_lord_good_far_from_capital", 1, 100);
+				campaign_traits:give_trait(context:character(), "wh_dlc07_trait_brt_lord_good_far_from_capital", 1, 100);
 			end
 		end
 	end,
@@ -347,7 +347,7 @@ core:add_listener(
 	true,
 	function(context)
 		if cm:char_is_general_with_army(context:character()) and context:character():faction():culture() == "wh_main_brt_bretonnia" and context:character():routed_in_battle() and context:character():won_battle() == false then
-			Give_Trait(context:character(), "wh_dlc07_trait_brt_lord_bad_coward", 1, 100);
+			campaign_traits:give_trait(context:character(), "wh_dlc07_trait_brt_lord_bad_coward", 1, 100);
 		end
 	end,
 	true
@@ -361,7 +361,7 @@ core:add_listener(
 	true,
 	function(context)
 		if context:get_outcome_key() == "release" and cm:char_is_general_with_army(context:character()) and context:character():faction():culture() == "wh_main_brt_bretonnia" then
-			Give_Trait(context:character(), "wh_dlc07_trait_brt_lord_bad_abducter", 1, 100);
+			campaign_traits:give_trait(context:character(), "wh_dlc07_trait_brt_lord_bad_abducter", 1, 100);
 		end
 	end,
 	true
@@ -375,7 +375,7 @@ core:add_listener(
 	true,
 	function (context)
 		if context:get_outcome_key() == "kill" and cm:char_is_general_with_army(context:character()) and context:character():faction():culture() == "wh_main_brt_bretonnia" then
-			Give_Trait(context:character(), "wh_dlc07_trait_brt_lord_good_executing", 1, 100);
+			campaign_traits:give_trait(context:character(), "wh_dlc07_trait_brt_lord_good_executing", 1, 100);
 		end
 	end,
 	true
@@ -389,7 +389,7 @@ core:add_listener(
 	true,
 	function (context)
 		if cm:char_is_general_with_army(context:character()) and context:character():faction():culture() == "wh_main_brt_bretonnia" then
-			Give_Trait(context:character(), "wh_dlc07_trait_brt_lord_bad_sacking", 1, 100);
+			campaign_traits:give_trait(context:character(), "wh_dlc07_trait_brt_lord_bad_sacking", 1, 100);
 		end
 	end,
 	true
@@ -404,7 +404,7 @@ core:add_listener(
 	function (context)
 		if cm:char_is_general_with_army(context:character()) and context:character():faction():culture() == "wh_main_brt_bretonnia" then
 			if context:character():has_military_force() and context:character():military_force():active_stance() == "MILITARY_FORCE_ACTIVE_STANCE_TYPE_LAND_RAID" then
-				Give_Trait(context:character(), "wh_dlc07_trait_brt_lord_bad_raider", 1, 100);
+				campaign_traits:give_trait(context:character(), "wh_dlc07_trait_brt_lord_bad_raider", 1, 100);
 			end
 		end
 	end,
@@ -420,7 +420,7 @@ core:add_listener(
 	function (context)
 		if cm:char_is_general_with_army(context:character()) and context:character():faction():culture() == "wh_main_brt_bretonnia" and context:character():has_region() then
 			if context:character():in_settlement() and context:character():region():building_exists("wh_main_brt_tavern_4") then
-				Give_Trait(context:character(), "wh_dlc07_trait_brt_lord_bad_perverted", 1, 100);
+				campaign_traits:give_trait(context:character(), "wh_dlc07_trait_brt_lord_bad_perverted", 1, 100);
 			end
 		end
 	end,
@@ -435,7 +435,7 @@ core:add_listener(
 	true,
 	function(context)
 		if cm:char_is_general_with_army(context:character()) and context:character():has_region() and context:character():faction():culture() == "wh_main_brt_bretonnia" and context:character():region():public_order() <= -50 then
-			Give_Trait(context:character(), "wh_dlc07_trait_brt_lord_good_public_order", 1, 100);
+			campaign_traits:give_trait(context:character(), "wh_dlc07_trait_brt_lord_good_public_order", 1, 100);
 		end
 	end,
 	true
@@ -449,10 +449,10 @@ core:add_listener(
 	true,
 	function(context)
 		if cm:char_is_general_with_army(context:character()) and context:character():faction():culture() == "wh_main_brt_bretonnia" and context:character():has_region() and context:character():turns_in_enemy_regions() >= 20 and context:character():model():turn_number() > 1 then
-			Give_Trait(context:character(), "wh_dlc07_trait_brt_lord_good_lone_wolf", 1, 100);
+			campaign_traits:give_trait(context:character(), "wh_dlc07_trait_brt_lord_good_lone_wolf", 1, 100);
 		elseif cm:char_is_general_with_army(context:character()) and context:character():faction():culture() == "wh_main_brt_bretonnia" and context:character():has_region() and context:character():turns_in_enemy_regions() >= 10 and context:character():model():turn_number() > 1 then
 			if context:character():has_trait("wh_dlc07_trait_brt_lord_good_lone_wolf") == false then
-				Give_Trait(context:character(), "wh_dlc07_trait_brt_lord_good_lone_wolf", 1, 100);
+				campaign_traits:give_trait(context:character(), "wh_dlc07_trait_brt_lord_good_lone_wolf", 1, 100);
 			end
 		end
 	end,
@@ -538,7 +538,7 @@ core:add_listener(
 				end
 				
 				if char_turns_praying >= 5 and context:character():has_trait("wh_dlc07_trait_brt_lord_good_praying") == false then
-					Give_Trait(context:character(), "wh_dlc07_trait_brt_lord_good_praying", 1, 100);
+					campaign_traits:give_trait(context:character(), "wh_dlc07_trait_brt_lord_good_praying", 1, 100);
 					BRET_LORDS_RECORDS[char_cqi] = nil; -- Reset
 				else
 					BRET_LORDS_RECORDS[char_cqi] = char_turns_praying;

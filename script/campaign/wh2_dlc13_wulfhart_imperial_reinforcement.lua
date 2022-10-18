@@ -48,45 +48,18 @@ local hostility_level_resource_factors = {
 local hostility_level_thresholds = {10, 20, 30, 40, 50, 60}
 local hostility_level_scripted_army_size = {5, 5, 10, 14, 14, 18}
 
--- regions that can have armies spawn in them - they must be owned by wulfhart's faction
+-- regions that can have armies spawn in them - they must NOT be owned by wulfhart's faction or his allies. 
+-- will choose the region with the highest priority. If none are available, no army will spawn.
 local hostility_level_scripted_army_spawn_loc = {
-	["wh3_main_combi_region_tlaxtlan"]				= {181, 316},
-	["wh3_main_combi_region_chaqua"]				= {164, 285},
-	["wh3_main_combi_region_hualotal"]				= {118, 305},
-	["wh3_main_combi_region_axlotl"]				= {210, 242},
-	["wh3_main_combi_region_sentinels_of_xeti"]		= { 76, 258},
-	["wh3_main_combi_region_temple_of_kara"]		= {128, 370},
-	["wh3_main_combi_region_floating_pyramid"]		= { 82, 391},
-	["wh3_main_combi_region_monument_of_the_moon"]	= {126, 439},
-	["wh3_main_combi_region_fallen_gates"]			= { 40, 516},
-	["wh3_main_combi_region_ziggurat_of_dawn"]		= {107, 512},
-	["wh3_main_combi_region_hag_hall"]				= {122, 648},
-	["wh3_main_combi_region_temple_of_addaioth"]	= { 83, 686},
-	["wh3_main_combi_region_xlanhuapec"]			= {232, 269},
-	["wh3_main_combi_region_macu_peaks"]			= { 47, 468},
-	["wh3_main_combi_region_the_awakening"]			= {262, 257},
-	["wh3_main_combi_region_the_star_tower"]		= {265, 216},
-	["wh3_main_combi_region_itza"]					= {171, 251},
-	["wh3_main_combi_region_the_high_sentinel"]		= {101, 406},
-	["wh3_main_combi_region_hexoatl"]				= { 79, 494},
-	["wh3_main_combi_region_bleak_hold_fortress"]	= {107, 619},
-	["wh3_main_combi_region_vauls_anvil_naggaroth"]	= {122, 660},
-	["wh3_main_combi_region_lothern"]				= {242, 520},
-	["wh3_main_combi_region_vauls_anvil_ulthuan"]	= {221, 509},
-	["wh3_main_combi_region_tor_anroc"]				= {183, 607},
-	["wh3_main_combi_region_tor_anlec"]				= {230, 634},
-	["wh3_main_combi_region_tor_koruali"]			= {329, 595},
-	["wh3_main_combi_region_magritta"]				= {423, 438},
-	["wh3_main_combi_region_miragliano"]			= {509, 468},
-	["wh3_main_combi_region_sartosa"]				= {507, 382},
-	["wh3_main_combi_region_myrmidens"]				= {582, 445},
-	["wh3_main_combi_region_castle_carcassonne"]	= {457, 496},
-	["wh3_main_combi_region_castle_bastonne"]		= {431, 593},
-	["wh3_main_combi_region_marienburg"]			= {439, 664},
-	["wh3_main_combi_region_altdorf"]				= {518, 632},
-	["wh3_main_combi_region_averheim"]				= {624, 596},
-	["wh3_main_combi_region_middenheim"]			= {554, 700},
-	["wh3_main_combi_region_bordeleaux"]			= {404, 588}
+	["wh3_main_combi_region_tlaxtlan"]				= {coords = {181, 316}, priority = 9},
+	["wh3_main_combi_region_hualotal"]				= {coords = {118, 305}, priority = 8},
+	["wh3_main_combi_region_chaqua"]				= {coords ={164, 285}, priority = 7},
+	["wh3_main_combi_region_the_high_sentinel"]		= {coords ={101, 406}, priority = 6},
+	["wh3_main_combi_region_axlotl"]				= {coords ={210, 242}, priority = 5},
+	["wh3_main_combi_region_pahuax"]				= {coords ={100, 419}, priority = 4},
+	["wh3_main_combi_region_itza"]					= {coords ={171, 251}, priority = 3},
+	["wh3_main_combi_region_xlanhuapec"]			= {coords ={232, 269}, priority = 2},
+	["wh3_main_combi_region_hexoatl"]				= {coords ={ 79, 494}, priority = 1},
 }
 
 local hostility_level_decay_counter_default = 5
@@ -630,26 +603,27 @@ function add_wulfhart_imperial_supply_listeners()
 	)
 end
 
-function get_spawnable_region_owned_by_wulfhart()
-	local regions_owned_by_wulfhart = {}
-	
-	for region_key, v in pairs(hostility_level_scripted_army_spawn_loc) do
+function get_spawnable_region_not_owned_by_wulfhart()
+	local current_top_region = false
+	local current_choice_priority = 0
+
+	for region_key, details in pairs(hostility_level_scripted_army_spawn_loc) do
 		local region = cm:get_region(region_key)
-		
-		if not region:is_abandoned() and region:owning_faction():name() == wulfhart_faction then
-			table.insert(regions_owned_by_wulfhart, region_key)
+		if region:is_abandoned() or not faction_is_wulfhart_or_ally(region:owning_faction()) then
+			if details.priority > current_choice_priority then
+				current_top_region = region_key
+				current_choice_priority = details.priority
+			end
 		end
 	end
 	
-	-- if he doesn't own any, just use his former capital
-	if #regions_owned_by_wulfhart == 0 then
-		return "wh3_main_combi_region_temple_of_kara"
-	end
-	
-	regions_owned_by_wulfhart = cm:random_sort(regions_owned_by_wulfhart)
-	
-	return regions_owned_by_wulfhart[1]
+	return current_top_region
 end
+
+function faction_is_wulfhart_or_ally(faction_interface)
+	return faction_interface:name() == wulfhart_faction or faction_interface:allied_with(cm:get_faction(wulfhart_faction))
+end
+
 
 function setup_hostility_spawnable_army_compositions()
 	-- low strength
@@ -753,7 +727,11 @@ end
 
 function spawn_hostility_army(army_template, size, loc)
 	if not loc then
-		loc = hostility_level_scripted_army_spawn_loc[get_spawnable_region_owned_by_wulfhart()]
+		loc = hostility_level_scripted_army_spawn_loc[get_spawnable_region_not_owned_by_wulfhart()].coords
+	end
+
+	if not loc then
+		return false
 	end
 	
 	loc[1], loc[2] = cm:find_valid_spawn_location_for_character_from_position(hostility_level_scripted_army_faction, loc[1], loc[2], true, 3)
@@ -836,30 +814,34 @@ function update_hostility_bar(factor)
 		cm:trigger_incident(wulfhart_faction, hostility_level_change_events["increase"][hostility_level_current + 1], true)
 		
 		if hostility_level_current == 5 then
-			local location_key = get_spawnable_region_owned_by_wulfhart()
-			local location_num = hostility_level_scripted_army_spawn_loc[location_key]
-			queued_hostility_level_army_spawn["loc"][1] = location_key
-			queued_hostility_level_army_spawn["loc"][2] = location_num
+			local location_key = get_spawnable_region_not_owned_by_wulfhart()
+
+			if location_key then 
+				local location_num = hostility_level_scripted_army_spawn_loc[location_key].coords
+				queued_hostility_level_army_spawn["loc"][1] = location_key
+				queued_hostility_level_army_spawn["loc"][2] = location_num
 			
-			local strength_level = false
-			local resource_value = cm:get_faction(wulfhart_faction):pooled_resource_manager():resource(acclaim_resource_key):value()
-			
-			for i = 1, #acclaim_thresholds do
-				if resource_value < acclaim_thresholds[i] then
-					strength_level = acclaim_enemy_strength[i]
-					break
-				elseif resource_value == 100 then
-					strength_level = acclaim_enemy_strength[#acclaim_enemy_strength]
-					break
+				local strength_level = false
+				local resource_value = cm:get_faction(wulfhart_faction):pooled_resource_manager():resource(acclaim_resource_key):value()
+				
+				for i = 1, #acclaim_thresholds do
+					if resource_value < acclaim_thresholds[i] then
+						strength_level = acclaim_enemy_strength[i]
+						break
+					elseif resource_value == 100 then
+						strength_level = acclaim_enemy_strength[#acclaim_enemy_strength]
+						break
+					end
 				end
+				
+				queued_hostility_level_army_spawn["strength_level"] = strength_level
+				
+				queued_hostility_level_army_spawn["counter"] = 3
+				queued_hostility_level_army_spawn["valid"] = true
+				update_queued_spawn()
+
 			end
-			
-			queued_hostility_level_army_spawn["strength_level"] = strength_level
-			
-			queued_hostility_level_army_spawn["counter"] = 3
-			queued_hostility_level_army_spawn["valid"] = true
-			update_queued_spawn()
-			
+
 			trigger_imperial_reinforcements_event()
 			hostility_level_5_lock_counter = hostility_level_5_lock_counter_default
 		end

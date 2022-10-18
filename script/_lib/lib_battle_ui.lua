@@ -379,6 +379,7 @@ function battle_ui_manager:highlight_army_abilities(value, pulse_strength, force
 		end;
 		
 		if value then
+			self:highlight_army_abilities_meter(value, pulse_strength, force_highlight);
 			table.insert(self.unhighlight_action_list, function() self:highlight_army_abilities(false, pulse_strength, force_highlight) end);
 		end;
 		return true;
@@ -414,7 +415,7 @@ function battle_ui_manager:highlight_army_abilities_meter(value, pulse_strength,
 		end;
 
 		if value then
-			table.insert(self.unhighlight_action_list, function() self:highlight_army_abilities(false, pulse_strength, force_highlight) end);
+			table.insert(self.unhighlight_action_list, function() self:highlight_army_abilities_meter(false, pulse_strength, force_highlight) end);
 		end;
 		return true;
 	end;
@@ -982,8 +983,8 @@ function battle_ui_manager:highlight_unit_cards(value, pulse_strength, force_hig
 	local uic_parent = find_uicomponent(core:get_ui_root(), "battle_orders", "cards_panel", "review_DY");
 	
 	if uic_parent and uic_parent:Visible() then
-		card_pulse_strength = pulse_strength or self.panel_pulse_strength;
-		icon_pulse_strength = pulse_strength or self.button_pulse_strength;
+		card_pulse_strength = pulse_strength or self.panel_pulse_strength;		-- less intense (unless overridden), since the whole of each unit card is being highlighted
+		icon_pulse_strength = pulse_strength or self.button_pulse_strength;		-- more intense (unless overridden), since only a very small part of the card is being highlighted
 	
 		for i = 0, uic_parent:ChildCount() - 1 do
 			local uic_card = UIComponent(uic_parent:Find(i));
@@ -1013,25 +1014,29 @@ function battle_ui_manager:highlight_unit_cards(value, pulse_strength, force_hig
 				end;
 			else
 				-- highlight whole card
-				-- pulse_uicomponent(uic_card, value, self.panel_pulse_strength, true);
+				local uic_card_image = find_uicomponent(uic_card, "card_image_holder"); 
+				if uic_card_image then
+					pulse_uicomponent(uic_card_image, value, card_pulse_strength);
+				end;
+
 				local uic_cat_frame = find_uicomponent(uic_card, "unit_cat_frame");
 				if uic_cat_frame and uic_cat_frame:Visible() then
-					pulse_uicomponent(uic_cat_frame, value, pulse_strength, true);
+					pulse_uicomponent(uic_cat_frame, value, card_pulse_strength, true);
 				end;
 
 				local uic_ammunition = find_uicomponent(uic_card, "Ammunition");
 				if uic_ammunition and uic_ammunition:Visible() then
-					pulse_uicomponent(uic_ammunition, value, pulse_strength, true);
+					pulse_uicomponent(uic_ammunition, value, card_pulse_strength, true);
 				end;
 
 				local uic_health = find_uicomponent(uic_card, "health_frame");
 				if uic_health and uic_health:Visible() then
-					pulse_uicomponent(uic_health, value, pulse_strength, true);
+					pulse_uicomponent(uic_health, value, card_pulse_strength, true);
 				end;
 
 				local uic_battle = find_uicomponent(uic_card, "battle");
 				if uic_battle and uic_battle:Visible() then
-					pulse_uicomponent(uic_battle, value, pulse_strength, true);
+					pulse_uicomponent(uic_battle, value, card_pulse_strength, true);
 				end;
 			end;
 		end;
@@ -1209,6 +1214,11 @@ function battle_ui_manager:highlight_winds_of_magic_panel(value, pulse_strength,
 		local uic_frame = find_uicomponent(uic_winds_of_magic, "frame");
 		if uic_frame then
 			pulse_uicomponent(uic_frame, value, pulse_strength or self.panel_pulse_strength);
+
+			local uic_frame_lid = find_uicomponent(uic_frame, "lid");
+			if uic_frame_lid then
+				pulse_uicomponent(uic_frame_lid, value, pulse_strength or self.panel_pulse_strength);
+			end;
 		end;
 		
 		if value then

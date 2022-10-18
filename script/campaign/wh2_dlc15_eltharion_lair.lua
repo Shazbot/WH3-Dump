@@ -147,19 +147,16 @@ function add_eltharion_lair_listeners()
 			local character = context:character();
 			local faction = character:faction();
 			
-			return faction:name() == yvresse_faction_key and faction:is_human() and not character:is_faction_leader();
+			return faction:name() == yvresse_faction_key and faction:is_human() and not character:is_faction_leader() and not character:character_details():is_unique() and character:rank() >= lair_mistwalker_level;
 		end,
 		function(context)
 			local character = context:character();
+			local trait_level = character:trait_points("wh2_dlc15_trait_mistwalker_sentinel");
+			trait_level = trait_level + character:trait_points("wh2_dlc15_trait_mistwalker_shadow");
+			trait_level = trait_level + character:trait_points("wh2_dlc15_trait_mistwalker_watcher");
 			
-			if character:rank() >= lair_mistwalker_level then
-				local trait_level = character:trait_points("wh2_dlc15_trait_mistwalker_sentinel");
-				trait_level = trait_level + character:trait_points("wh2_dlc15_trait_mistwalker_shadow");
-				trait_level = trait_level + character:trait_points("wh2_dlc15_trait_mistwalker_watcher");
-				
-				if trait_level < 1 then
-					cm:trigger_dilemma_with_targets(character:faction():command_queue_index(), "wh2_dlc15_hef_mistwalker_recruitment", 0, 0, character:command_queue_index(), 0, 0, 0);
-				end
+			if trait_level < 1 then
+				cm:trigger_dilemma_with_targets(character:faction():command_queue_index(), "wh2_dlc15_hef_mistwalker_recruitment", 0, 0, character:command_queue_index(), 0, 0, 0);
 			end
 		end,
 		true

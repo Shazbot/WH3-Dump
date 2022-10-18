@@ -77,6 +77,8 @@ prologue_mission_raid_region:add_payload("money 3000");
 -- STORY PANEL 1 - TROUBLE AT THE BEACON
 function PrologueTroubleDilemma()
 
+	skip_all_scripted_tours();
+
 	core:add_listener(
 		"DilemmaIssued_Storypanel",
 		"DilemmaIssuedEvent",

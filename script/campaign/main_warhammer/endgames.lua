@@ -20,7 +20,10 @@ endgame = {
 	ultimate_crisis_data = {},
 
 	-- Used by the RAM to save army lists when spawning multiple armies. Purely used for optimising army generation speed.
-	random_army_manager = {}
+	random_army_manager = {},
+
+	-- How many turns before the ultimate crisis mission fires. Saved as a global here in case any scenarios trigger later (e.g. vermintide) and need to override it
+	ultimate_mission_delay = 1
 
 }
 
@@ -169,8 +172,9 @@ function endgame:update_campaign_settings()
 		self.settings.turn_max = 150
 		self.settings.victory_trigger = true
 		self.settings.delay = 10
-		self.settings.difficulty_mod = 1
+		self.settings.difficulty_mod = 1 -- Make sure this number is /100. E.g. for 200% scaling set this to 2
 		self.settings.all_scenarios = false
+		self.settings.endgame_diplomacy_enabled = false
 	else
 		-- Determines whether endgame scenarios will trigger from a player hitting a certain turn (range)
 		self.settings.turn_trigger = ssm:get_state_as_bool_value("endgame_turn_trigger")
@@ -190,6 +194,9 @@ function endgame:update_campaign_settings()
 
 		-- Tweaker that causes all endgame scenarios to fire at the same time. Why did you do this to yourself?
 		self.settings.all_scenarios = ssm:get_state_as_bool_value("endgame_all_scenarios")
+
+		-- When set to true, this allows endgame scenario factions to still do regular diplomacy and make peace
+		self.settings.endgame_diplomacy_enabled = ssm:get_state_as_bool_value("endgame_diplomacy_enabled")
 	end
 
 end
@@ -207,7 +214,7 @@ function endgame:choose_scenario()
 				self:trigger_early_warning(scenario, no_bundle)
 				no_bundle = true
 			end
-			cm:activate_music_trigger("ScriptedEvent_Negative", "wh_main_sc_chs_chaos")
+			cm:activate_music_trigger("ScriptedEvent_Negative", "wh3_ultimateCrisis")
 			if self.settings.delay == 0 then
 				self:add_ultimate_crisis_victory_listeners()
 			end
@@ -249,7 +256,7 @@ function endgame:trigger_early_warning(scenario, no_bundle)
 		end
 	else
 		endgame:generate_endgame(scenario)
-		self:reveal_regions()
+		self:reveal_regions(self.revealed_regions)
 	end
 end
 
@@ -266,14 +273,14 @@ function endgame:add_early_warning_listener(scenario_data)
 					local scenario = self.scenarios[i]
 					self:generate_endgame(scenario)
 				end
-				cm:activate_music_trigger("ScriptedEvent_Negative", "wh_main_sc_chs_chaos")
+				cm:activate_music_trigger("ScriptedEvent_Negative", "wh3_ultimateCrisis")
 				self:add_ultimate_crisis_victory_listeners()
 			else
 				self:generate_endgame(scenario_data.scenario)
 			end
 			cm:set_saved_value("endgame_scenario_data", false)
 			core:remove_listener("endgame_early_warning_listener")
-			self:reveal_regions()
+			self:reveal_regions(self.revealed_regions)
 		end,
 		true
 	)
@@ -304,7 +311,7 @@ end
 function endgame:add_ultimate_crisis_victory_listeners()
 	if not cm:get_saved_value("endgame_ultimate_crisis_data") then
 		self.ultimate_crisis_data = {
-			turn_trigger = cm:turn_number() + 1,
+			turn_trigger = cm:turn_number() + self.ultimate_mission_delay,
 			pending_mission = true
 		}
 		cm:set_saved_value("endgame_ultimate_crisis_data", self.ultimate_crisis_data)
@@ -346,7 +353,7 @@ function endgame:add_ultimate_crisis_victory_listeners()
 		"FactionTurnStart",
 		function(context)
 			local faction = context:faction()
-			return not not self.ultimate_crisis_data[faction:name()] and not faction:at_war()
+			return not not self.ultimate_crisis_data[faction:name()] and not self:check_at_war(faction)
 		end,
 		function(context)
 			local faction_key = context:faction():name()
@@ -361,7 +368,7 @@ function endgame:add_ultimate_crisis_victory_listeners()
 		"FactionTurnEnd",
 		function(context)
 			local faction = context:faction()
-			return not not self.ultimate_crisis_data[faction:name()] and not faction:at_war()
+			return not not self.ultimate_crisis_data[faction:name()] and not self:check_at_war(faction)
 		end,
 		function(context)
 			local faction_key = context:faction():name()
@@ -371,6 +378,23 @@ function endgame:add_ultimate_crisis_victory_listeners()
 		end,
 		true
 	)
+end
+
+-- Returns if a faction is at war or not. Handled this way as rebels are technically at war with the player, and we don't want them to count
+function endgame:check_at_war(faction)
+	if not faction:at_war() then
+		return false
+	else
+		local faction_war_list = faction:factions_at_war_with()
+		for i = 0, faction_war_list:num_items() - 1 do
+			local war_faction = faction_war_list:item_at(i)
+			if war_faction:is_null_interface() == false and not war_faction:is_dead() and war_faction:name() ~= "rebels" then
+				out("We are at war with: "..war_faction:name())
+				return true
+			end
+		end
+		return false
+	end
 end
 
 -- This fires after the delay expires, so this is the moment the scenario actually occurs
@@ -421,29 +445,34 @@ end
 function endgame:create_scenario_force(faction_key, region_key, army_template, unit_list, declare_war, total_armies)
 
 	-- total_armies shouldn't be nil, but if it is assume we want a single army
-	if total_armies == nil then
+	if total_armies == nil or total_armies < 1 then
 		total_armies = 1
 	end
 
+	total_armies = math.floor(total_armies)
+
 	for i = 1, total_armies do
 		local pos_x, pos_y = cm:find_valid_spawn_location_for_character_from_settlement(faction_key, region_key, false, true, 10)
-		local unit_list = self:generate_random_army(army_template, unit_list)
+		if pos_x > 0 and pos_y > 0 then
+			
+			local generated_unit_list = self:generate_random_army(army_template, unit_list)
 
-		cm:create_force(
-			faction_key,
-			unit_list,
-			region_key,
-			pos_x,
-			pos_y,
-			false,
-			function(cqi)
-				local character = cm:char_lookup_str(cqi)
-				cm:apply_effect_bundle_to_characters_force("wh_main_bundle_military_upkeep_free_force", cqi, 0)
-				cm:apply_effect_bundle_to_characters_force("wh3_main_ie_scripted_endgame_force_immune_to_regionless_attrition", cqi, 5)
-				cm:add_agent_experience(character, cm:random_number(25, 15), true)
-				cm:add_experience_to_units_commanded_by_character(character, cm:random_number(7, 3))
-			end
-		)
+			cm:create_force(
+				faction_key,
+				generated_unit_list,
+				region_key,
+				pos_x,
+				pos_y,
+				false,
+				function(cqi)
+					local character = cm:char_lookup_str(cqi)
+					cm:apply_effect_bundle_to_characters_force("wh_main_bundle_military_upkeep_free_force_endgame", cqi, 0)
+					cm:apply_effect_bundle_to_characters_force("wh3_main_ie_scripted_endgame_force_immune_to_regionless_attrition", cqi, 5)
+					cm:add_agent_experience(character, cm:random_number(25, 15), true)
+					cm:add_experience_to_units_commanded_by_character(character, cm:random_number(7, 3))
+				end
+			)
+		end
 	end
 
 	if declare_war then
@@ -476,16 +505,18 @@ end
 -- They also declar war on all the human factions
 -- We generally always want to do this with endgame scenario factions, but it's defined separately here so it's optional (especially for modding)
 function endgame:no_peace_no_confederation_only_war(hostile_faction_key)
-	local human_factions = cm:get_human_factions()
-	for i = 1, #human_factions do
-		endgame:declare_war(hostile_faction_key, cm:get_faction(human_factions[i]):name())
+		local human_factions = cm:get_human_factions()
+		for i = 1, #human_factions do
+			endgame:declare_war(hostile_faction_key, cm:get_faction(human_factions[i]):name())
+		end
+	if self.settings.endgame_diplomacy_enabled == false then
+		cm:force_diplomacy("faction:" .. hostile_faction_key, "all", "form confederation", false, false, true)
+		cm:force_diplomacy("faction:" .. hostile_faction_key, "all", "peace", false, false, true)
 	end
-
-	cm:force_diplomacy("faction:" .. hostile_faction_key, "all", "form confederation", false, false, true)
-	cm:force_diplomacy("faction:" .. hostile_faction_key, "all", "peace", false, false, true)
 end
 
-function endgame:declare_war_on_adjacent_region_owners(faction, region)
+-- opt: subculture_to_exclude - Prevent this function from declaring war on a specific subculture, so (for example) we don't turn Athel Loren into a Wood Elf graveyard
+function endgame:declare_war_on_adjacent_region_owners(faction, region, subculture_to_exclude)
 	if region:is_null_interface() == false then
 		local adjacent_regions = region:adjacent_region_list()
 				
@@ -493,7 +524,10 @@ function endgame:declare_war_on_adjacent_region_owners(faction, region)
 			local region = adjacent_regions:item_at(i)
 			if region:is_abandoned() == false then
 				local adjacent_region_owner = region:owning_faction()
-				if adjacent_region_owner:is_null_interface() == false then
+				if subculture_to_exclude == nil then 
+					subculture_to_exclude = ""
+				end
+				if adjacent_region_owner:is_null_interface() == false and adjacent_region_owner:subculture() ~= subculture_to_exclude then
 					endgame:declare_war(faction:name(), adjacent_region_owner:name())
 				end
 			end
@@ -501,13 +535,19 @@ function endgame:declare_war_on_adjacent_region_owners(faction, region)
 	end
 end
 
-function endgame:reveal_regions()
+function endgame:reveal_regions(region_list)
 	local human_factions = cm:get_human_factions()
 	for i = 1, #human_factions do
-		for i2 = 1, #self.revealed_regions do 
-			cm:make_region_visible_in_shroud(human_factions[i], self.revealed_regions[i2]);
+		for i2 = 1, #region_list do 
+			cm:make_region_visible_in_shroud(human_factions[i], region_list[i2]);
 		end 
 	end
+end
+
+-- A lot of endgame functionality needs AI factions that haven't be confederated
+-- can_be_dead is an optional setting, since some behaviour revives the factions (e.g. spawning armies for non-confederated factions)
+function endgame:check_faction_is_valid(faction, can_be_dead)
+	return faction ~= nil and faction:is_null_interface() == false and faction:is_human() == false and faction:was_confederated() == false and faction:name() ~= "rebels" and (can_be_dead == true or faction:is_dead() == false)
 end
 
 -- The random army manager generates new random army lists using unit_lists from scenarios

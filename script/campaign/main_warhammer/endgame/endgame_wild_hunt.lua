@@ -26,7 +26,8 @@ endgame_wild_hunt = {
 	},
 	base_army_count = 4, -- Number of armies that spawn in each forest glade when the event fires.
 	early_warning_event = "wh3_main_ie_incident_endgame_wild_hunt_early_warning",
-	ai_personality = "wh3_combi_woodelf_endgame"
+	ai_personality = "wh3_combi_woodelf_endgame",
+	subculture = "wh_dlc05_sc_wef_wood_elves"
 }
 
 function endgame_wild_hunt:trigger()
@@ -55,6 +56,7 @@ function endgame_wild_hunt:trigger()
 				endgame:create_scenario_force(faction_key, "wh3_main_combi_region_the_oak_of_ages", self.army_template, self.unit_list, true, math.floor(self.base_army_count*endgame.settings.difficulty_mod))
 			end
 
+			cm:instantly_research_all_technologies(faction_key)
 			endgame:no_peace_no_confederation_only_war(faction_key)
 			
 			local region = cm:get_region(region_key)
@@ -66,7 +68,7 @@ function endgame_wild_hunt:trigger()
 				cm:transfer_region_to_faction(region_key, faction_key)
 			end
 			
-			endgame:declare_war_on_adjacent_region_owners(faction, region)
+			endgame:declare_war_on_adjacent_region_owners(faction, region, self.subculture)
 
 			cm:apply_effect_bundle("wh3_main_ie_scripted_endgame_wild_hunt", faction_key, 0)
 			table.insert(endgame.revealed_regions, region_key)
@@ -86,7 +88,8 @@ function endgame_wild_hunt:trigger()
 		{
 			type = "DESTROY_FACTION",
 			conditions = {
-				"confederation_valid"
+				"confederation_valid",
+				"vassalization_valid"
 			}
 		}
 	}
@@ -105,7 +108,7 @@ function endgame_wild_hunt:trigger()
 		return
 	end
 
-	cm:activate_music_trigger("ScriptedEvent_Negative", "wh_dlc05_sc_wef_wood_elves")
+	cm:activate_music_trigger("ScriptedEvent_Negative", self.subculture)
 	
 	for i = 1, #human_factions do
 		endgame:add_victory_condition_listener(human_factions[i], incident_key, objectives)

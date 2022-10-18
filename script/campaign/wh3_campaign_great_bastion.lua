@@ -282,6 +282,7 @@ function Bastion:great_bastion_start()
 		Bastion.cathay_bastion_regions = Bastion.cathay_bastion_regions_combi
 		Bastion.snake_gate = Bastion.snake_gate_combi
 		Bastion.invasion_spawn_region = Bastion.invasion_spawn_region_combi
+		Bastion.dragon_emperors_wrath_region_list = Bastion.dragon_emperors_wrath_region_list_combi
 	end
 	
 	-- Disable Public Order for the Bastion Gatehouses
@@ -506,7 +507,7 @@ function Bastion:great_bastion_start()
 				CampaignUI.ClosePanel("cathay_compass")
 				cuim:start_scripted_sequence()
 				
-				cm:scroll_camera_with_cutscene_to_settlement(3, function() cuim:stop_scripted_sequence() end, "wh3_main_chaos_region_snake_gate")
+				cm:scroll_camera_with_cutscene_to_settlement(3, function() cuim:stop_scripted_sequence() end, self.dragon_emperors_wrath_region_list[1])
 			end
 		end,
 		true

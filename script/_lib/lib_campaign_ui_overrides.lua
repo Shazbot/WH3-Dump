@@ -3779,6 +3779,19 @@ function campaign_ui_manager:load_ui_overrides()
 			cm:override_ui("hide_campaign_flags_strength_bars", false);
 		end
 	)
+
+	------------------------------
+	-- disable_help_pages_panel_button
+	-------------------------------
+	ui_overrides.disable_help_pages_panel_button = ui_override:new(
+		"disable_help_pages_panel_button",
+		function()
+			cm:override_ui("disable_help_pages", true);
+		end,
+		function()
+			cm:override_ui("disable_help_pages", false);
+		end
+	)
 	
 	-- load in the contents of the ui_overrides table that we've just declared
 	for override_name, override in pairs(ui_overrides) do

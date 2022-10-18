@@ -314,7 +314,10 @@ end
 function chivalry:ModifyChivalry(faction_key, factor, value)
 	out("\tChanging chivalry for "..faction_key..": "..value.." from "..factor.."!");
 	cm:faction_add_pooled_resource(faction_key, self.pooled_resource, factor, value);
-	Check_Chivalry_Win_Condition(cm:get_faction(faction_key))
+	local faction = cm:get_faction(faction_key);
+	if faction:is_human() then
+		Check_Chivalry_Win_Condition(faction);
+	end
 end
 
 

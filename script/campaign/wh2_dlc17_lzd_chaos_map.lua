@@ -65,9 +65,9 @@ local m_chaos_force_details = {
 }
 
 local m_force_difficulty_values = {
-	easy = {strength_min = 500000, strength_max = 1500000, force_size = {min = 7, max = 10}, force_power = {min = 1, max = 5}, can_be_leader = true},
-	medium = {strength_min = 1500001, strength_max = 30000000, force_size = {min = 12, max = 16}, force_power = {min = 6, max = 11}, can_be_leader = true},
-	hard = {strength_min = 30000001, strength_max = nil, force_size = {min = 18, max = 20}, force_power = {min = 12, max = 18}, can_be_leader = true}
+	easy = {strength_min = 500000, strength_max = 1500000, force_size = {min = 7, max = 10}, force_power = {min = 1, max = 3}, can_be_leader = true},
+	medium = {strength_min = 1500001, strength_max = 30000000, force_size = {min = 12, max = 16}, force_power = {min = 4, max = 6}, can_be_leader = true},
+	hard = {strength_min = 30000001, strength_max = nil, force_size = {min = 18, max = 20}, force_power = {min = 5, max = 10}, can_be_leader = true}
 }
 
 local m_active_mission_details = {}
@@ -324,13 +324,15 @@ local m_mission_config = {
 			["wh3_main_kho_khorne"] = "mission_text_text_wh3_main_threat_map_title_daemon_region_1",
 			["wh3_main_nur_nurgle"] = "mission_text_text_wh3_main_threat_map_title_daemon_region_2",
 			["wh3_main_sla_slaanesh"] = "mission_text_text_wh3_main_threat_map_title_daemon_region_3",
-			["wh3_main_tze_tzeentch"] = "mission_text_text_wh3_main_threat_map_title_daemon_region_4"
+			["wh3_main_tze_tzeentch"] = "mission_text_text_wh3_main_threat_map_title_daemon_region_4",
+			["wh3_main_dae_daemons"] = "mission_text_text_wh3_main_threat_map_title_daemon_region_5"
 		},
 		description = {
 			["wh3_main_kho_khorne"] = "mission_text_text_wh3_main_threat_map_description_daemon_region_1",
 			["wh3_main_nur_nurgle"] = "mission_text_text_wh3_main_threat_map_description_daemon_region_2",
 			["wh3_main_sla_slaanesh"] = "mission_text_text_wh3_main_threat_map_description_daemon_region_3",
-			["wh3_main_tze_tzeentch"] = "mission_text_text_wh3_main_threat_map_description_daemon_region_4"
+			["wh3_main_tze_tzeentch"] = "mission_text_text_wh3_main_threat_map_description_daemon_region_4",
+			["wh3_main_dae_daemons"] = "mission_text_text_wh3_main_threat_map_description_daemon_region_5"
 		},
 		failure_payloads = {
 			keys = {
@@ -564,13 +566,15 @@ local m_mission_config = {
 			["wh3_main_kho_khorne"] = "mission_text_text_wh3_main_threat_map_title_daemon_army_1",
 			["wh3_main_nur_nurgle"] = "mission_text_text_wh3_main_threat_map_title_daemon_army_2",
 			["wh3_main_sla_slaanesh"] = "mission_text_text_wh3_main_threat_map_title_daemon_army_3",
-			["wh3_main_tze_tzeentch"] = "mission_text_text_wh3_main_threat_map_title_daemon_army_4"
+			["wh3_main_tze_tzeentch"] = "mission_text_text_wh3_main_threat_map_title_daemon_army_4",
+			["wh3_main_dae_daemons"] = "mission_text_text_wh2_dlc17_threat_map_title_chaos_army_1"
 		},
 		description = {
 			["wh3_main_kho_khorne"] = "mission_text_text_wh3_main_threat_map_description_daemon_army_1",
 			["wh3_main_nur_nurgle"] = "mission_text_text_wh3_main_threat_map_description_daemon_army_2",
 			["wh3_main_sla_slaanesh"] = "mission_text_text_wh3_main_threat_map_description_daemon_army_3",
-			["wh3_main_tze_tzeentch"] = "mission_text_text_wh3_main_threat_map_description_daemon_army_4"
+			["wh3_main_tze_tzeentch"] = "mission_text_text_wh3_main_threat_map_description_daemon_army_4",
+			["wh3_main_dae_daemons"] = "mission_text_text_wh2_dlc17_threat_map_description_chaos_army_1"
 		},
 		failure_payloads = {
 			keys = {
@@ -803,17 +807,6 @@ local m_mission_config = {
 			}
 		}
 	}
-}
-
-local m_enemy_army_buffs = {
-	-- these keys should match the effect keys from the chaos/corrupted army failure payloads.
-	["wh2_dlc17_threat_map_consequence_kill_army_1"] = "wh_main_effect_force_unit_stat_melee_attack",
-	["wh2_dlc17_threat_map_consequence_kill_army_2"] = "wh_main_effect_force_unit_stat_melee_defence",
-	["wh2_dlc17_threat_map_consequence_kill_army_3"] = "wh2_dlc17_effect_weapon_str_for_all",
-	["wh2_dlc17_threat_map_consequence_kill_army_4"] = "wh_main_effect_force_unit_stat_morale",
-	["wh2_dlc17_threat_map_consequence_kill_army_5"] = "wh_main_effect_force_army_battle_movement_speed",
-	["wh2_dlc17_threat_map_consequence_kill_army_6"] = "wh_main_effect_unit_stat_mod_ward_save",
-	["wh2_dlc17_threat_map_consequence_kill_army_7"] = "wh_main_effect_force_unit_stat_fatigue_resistance_medium"
 }
 
 local m_starting_mission_config = {
@@ -1298,7 +1291,7 @@ local function log_army_mission_consequence(mission_key, force_cqi)
 	if(m_latest_failure_payload_key ~= nil and m_latest_failure_payload_key ~= "") then
 		m_active_mission_consequences[mission_key].army = {
 				force_cqi = force_cqi,
-				effect_key = m_enemy_army_buffs[m_latest_failure_payload_key]
+				effect_bundle = m_latest_failure_payload_key
 			}
 	end
 

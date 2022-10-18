@@ -1579,8 +1579,12 @@ function text_pointer:show(force_display)
 	core:add_listener(
 		self.full_name,
 		"ScriptEventHideTextPointers",
-		function() return self.ignore_hide_all_tp == false end,
-		function(context) self:hide(context.bool, true) end,
+		function()
+			return self.ignore_hide_all_tp == false;
+		end,
+		function(context) 
+			self:hide(context.bool, true); 
+		end,
 		false
 	);
 end;
@@ -1776,6 +1780,8 @@ function text_pointer:hide(immediately, suppress_event)
 	self.showing = false;
 	core:remove_listener(self.full_name);
 	core:get_tm():remove_callback(self.full_name);
+
+	core:remove_listener(self.full_name .. "_close_button_clicked");
 
 	if not self.stop_release_escape_key then 
 		-- un-steal the escape key

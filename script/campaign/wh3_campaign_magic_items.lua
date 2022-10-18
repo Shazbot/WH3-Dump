@@ -643,7 +643,7 @@ function attempt_to_award_random_magical_item(context)
 		local character = context:character();
 		local faction = character:faction();
 		
-		if character:is_caster() or general_has_caster_embedded_in_army(character) then
+		if character:is_caster() or cm:general_has_caster_embedded_in_army(character) then
 			index = cm:random_number(7); -- this will weigh slightly towards arcane items when the character is a caster (6 or higher)
 		else
 			index = cm:random_number(5); -- don't drop arcane items if the character involved is not a caster

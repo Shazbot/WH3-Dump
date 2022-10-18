@@ -174,6 +174,8 @@ function start_game_all_factions()
 	greater_daemons:setup_greater_daemons();
 	
 	setup_campaign_ai();
+	
+	scripted_technology_tree:start_technology_listeners();
 
 	CUS:initialise()
 

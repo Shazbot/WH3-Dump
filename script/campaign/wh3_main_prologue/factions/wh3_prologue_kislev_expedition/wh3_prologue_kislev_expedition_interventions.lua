@@ -840,6 +840,7 @@ function prologue_items_intervention()
 
 			prologue_intervention_items:complete()
 			cm:contextual_vo_enabled(true);
+			uim:override("disable_help_pages_panel_button"):set_allowed(true);
 		end
 	)
 

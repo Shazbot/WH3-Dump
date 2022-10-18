@@ -31,6 +31,7 @@
 ----------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------
 
+local ACTIVE_TEXT_POINTER_COMPONENT_MOVEMENT_THRESHOLD = 4;
 
 active_pointer = {
 	name = false,												-- String name for this active pointer. This has to be unique if the pointer is recording itself in the advice history.
@@ -273,7 +274,7 @@ function active_pointer:new(name, orientation, uic_specifier, localised_text_key
 						end;
 
 						-- if the uic being pointed at has not moved, and is still visible, then don't hide it
-						if not should_hide and (math.abs(current_x - cached_x) > 4 or math.abs(current_y - cached_y) > 4 or not uic:Visible(true)) then
+						if not should_hide and (math.abs(current_x - cached_x) > ACTIVE_TEXT_POINTER_COMPONENT_MOVEMENT_THRESHOLD or math.abs(current_y - cached_y) > ACTIVE_TEXT_POINTER_COMPONENT_MOVEMENT_THRESHOLD or not uic:Visible(true)) then
 							should_hide = true;
 						end;	
 					end;

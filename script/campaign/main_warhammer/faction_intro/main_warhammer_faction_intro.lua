@@ -168,8 +168,8 @@ data.faction_intros = {
 
 	wh2_main_hef_nagarythe = faction_intro_data:new{
 		preset = data.intro_presets.standard,
-		cam_cutscene_start = {x = 175.648483, y = 614.257141,	d = 29.625549, b = 0.0,	h = 66.128632,},
-		cam_gameplay_start = {x = 175.648483, y = 603.937317,	d = 7.662231, b = 0, h = 5.733928,},
+		cam_cutscene_start = {x = 145.563339, y = 588.410889,	d = 29.625549, b = 0.0,	h = 66.128632,},
+		cam_gameplay_start = {x = 145.563339, y = 588.410889,	d = 7.662231, b = 0, h = 5.733928,},
 		advice_line = "wh3_dlc21_ie_camp_hef_alith_anar_intro_01",
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},
@@ -505,8 +505,8 @@ data.faction_intros = {
 
 	wh3_main_ogr_disciples_of_the_maw = faction_intro_data:new{
 		preset = data.intro_presets.standard,
-		cam_cutscene_start = {x = 371.261688, y = 330.831757, d = 22.167816, b = 0.0,	h = 66.498634,},
-		cam_gameplay_start = {x = 371.261688, y = 332.968292, d = 8.717041, b = 0, h = 10.132499,},
+		cam_cutscene_start = {x = 427.641541, y = 403.10611, d = 22.167816, b = 0.0,	h = 66.498634,},
+		cam_gameplay_start = {x = 427.641541, y = 403.10611, d = 8.717041, b = 0, h = 10.132499,},
 		advice_line = "wh3_dlc21_ie_camp_ogr_skragg_intro_01",
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},
@@ -705,16 +705,16 @@ data.faction_intros = {
 	--------------------
 	wh2_main_hef_order_of_loremasters = faction_intro_data:new{
 		preset = data.intro_presets.standard,
-		cam_cutscene_start = {x = 468.472137, y = 117.039833, d = 22.235764, b = 0.0,	h = 66.824684,},
-		cam_gameplay_start = {x = 468.472137, y = 114.783974, d = 10.297729, b = 0.0,	h = 12.249597,},
+		cam_cutscene_start = {x = 394.142914, y = 67.169632,	d = 29.414574, b = 0.0,	h = 67.004333,},
+		cam_gameplay_start = {x = 393.39859, y = 55.529987,	d = 9.271904, b = 0, h = 6.993069,},
 		advice_line = "wh3_dlc21_ie_camp_hef_teclis_intro_01",
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},
 
 	wh3_main_tze_oracles_of_tzeentch = faction_intro_data:new{
 		preset = data.intro_presets.standard,
-		cam_cutscene_start = {x = 394.142914, y = 67.169632,	d = 29.414574, b = 0.0,	h = 67.004333,},
-		cam_gameplay_start = {x = 393.39859, y = 55.529987,	d = 9.271904, b = 0, h = 6.993069,},
+		cam_cutscene_start = {x = 378.39859, y = 20.529987,	d = 22.414574, b = 0.0,	h = 67.004333,},
+		cam_gameplay_start = {x = 378.39859, y = 20.529987,	d = 11.573801, b = 0, h = 6.993069,},
 		advice_line = "wh3_dlc21_ie_camp_tze_kairos_intro_01",
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},

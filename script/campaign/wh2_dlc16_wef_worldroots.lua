@@ -1247,7 +1247,7 @@ function Worldroots:add_worldroots_listeners()
 		"MissionSucceededDrychaQuest",
 		"MissionSucceeded",
 		function(context)
-			return context:mission():mission_record_key():starts_with("wh2_dlc16_wef_drycha_coeddil_unchained_stage_4")
+			return context:mission():mission_record_key():starts_with("wh3_main_ie_qb_wef_drycha_coeddil_unchained")
 		end,
 		function(context)
 			cm:spawn_unique_agent(context:faction():command_queue_index(), "wh2_dlc16_wef_coeddil", true)

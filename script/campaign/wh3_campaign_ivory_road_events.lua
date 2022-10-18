@@ -946,10 +946,10 @@ local event_table = {
 	{function(world_conditions)
 		
 		local eventname = "giftFromInd".."?";
-		
-		local probability = 1 + math.floor(cm:model():turn_number() / 100);
-		
 		local turn_number = cm:turn_number();
+		
+		local probability = 1 + math.floor(turn_number / 100);
+		
 		if turn_number < 25 then
 			probability = 0;
 		end
@@ -992,7 +992,11 @@ local event_table = {
 		
 		--SECOND trait and free units
 		payload_builder:character_trait_change(caravan_handle:caravan_master():character_details():character(),"wh3_main_trait_blessed_by_ind_blades",false)
-		payload_builder:add_unit(caravan_handle:caravan_force(), "wh3_main_cth_inf_dragon_guard_0", 3, 9);
+		local num_units = caravan_handle:caravan_force():unit_list():num_items()
+		
+		if num_units < 20 then
+			payload_builder:add_unit(caravan_handle:caravan_force(), "wh3_main_cth_inf_dragon_guard_0", math.min(3, 20 - num_units), 9);
+		end
 		
 		dilemma_builder:add_choice_payload("SECOND", payload_builder);
 		

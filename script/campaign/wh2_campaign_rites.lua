@@ -1120,7 +1120,7 @@ function rite_unlock_listeners()
 		local current_faction = cm:get_faction(human_factions[i])
 		for j = 1, #rite_templates do
 			local current_rite_template = rite_templates[j];
-			if current_faction:culture() == current_rite_template.culture then
+			if current_faction:culture() == current_rite_template.culture and not current_faction:rituals():ritual_status(current_rite_template.rite_name):disabled() then
 				cm:lock_ritual(current_faction, current_rite_template.rite_name)
 				local rite = rite_unlock:new(
 					current_rite_template.rite_name,
@@ -1168,20 +1168,12 @@ end;
 
 function rite_unlock:start(human_faction_name)
 	local cm = self.cm;
-	local ritual_status = cm:get_faction(human_faction_name):rituals():ritual_status(self.rite_key);
-
-	if ritual_status == nil or ritual_status:is_null_interface() then
-		script_error(string.format("ERROR: No status returned for ritual of key '%s'", self.rite_key));
-	end
 	
 	if common.tweaker_value("UNLOCK_MINOR_RITUALS") ~= "0" then
 		unlock_rite(human_faction_name, self.rite_key);
 	elseif cm:get_saved_value(self.rite_key .. "_" .. human_faction_name .. "_unlocked") then
 		out.design("Rites -- Not starting listener for rite with key [" .. self.rite_key .. "] for faction [" .. human_faction_name .. "] as they have already been unlocked");
 		unlock_rite(human_faction_name, self.rite_key);
-		return false;
-	elseif ritual_status:disabled() then --Peter E Note: I have *no* idea why this was checking for 1024 explicitly. That would only be valid if you didn't have enough slaves, and if that was the *ONLY* flag.
-		out.design("Rites -- Not starting listener for rite with key [" .. self.rite_key .. "] for faction [" .. human_faction_name .. "] as the rite is not available to them");
 		return false;
 	else
 		out.design("Rites -- Starting listener for rite with key [" .. self.rite_key .. "] for faction [" .. human_faction_name .. "]");

@@ -10,6 +10,7 @@ function prologue_start_of_dialogue(value, first_dialogue_function, ignore_save_
 	ignore_end_turn_lock = ignore_end_turn_lock or false
 
 	cm:contextual_vo_enabled(false);
+	uim:override("disable_help_pages_panel_button"):set_allowed(false);
 
 	if value then
 		if value == true then
@@ -26,7 +27,6 @@ function prologue_start_of_dialogue(value, first_dialogue_function, ignore_save_
 	end
 
 	cm:callback(function () DialogueAddListenerIfPanelOpen(first_dialogue_function, ignore_save_lock) end, 0.5)
-
 end
 
 function prologue_end_of_dialogue(save_load_check, objective, value, keep_saving_disabled, ignore_save_lock)
@@ -70,6 +70,8 @@ function prologue_end_of_dialogue(save_load_check, objective, value, keep_saving
 			cm:disable_saving_game(false)
 		end
 	end
+
+	uim:override("disable_help_pages_panel_button"):set_allowed(true);
 end
 
 function DialogueAddListenerIfPanelOpen(first_dialogue_function, ignore_save_lock)
@@ -85,6 +87,8 @@ function DialogueAddListenerIfPanelOpen(first_dialogue_function, ignore_save_loc
 		dialogue_in_progress = true;
 		prologue_dialogue_about_to_start = false
 	end
+
+	skip_all_scripted_tours();
 end
 
 function trigger_campaign_vo_prologue(sound_event, character_lookup, delay)
@@ -391,6 +395,8 @@ end
 
 function prologue_advice_turn_two_unlock_objectives()
 	cm:dismiss_advice();
+	uim:override("disable_help_pages_panel_button"):set_allowed(true);
+
 	local new_player = cm:model():shared_states_manager():get_state_as_bool_value("prologue_tutorial_on");
 	if new_player then
 		core:trigger_event("ScriptEventPrologueMissions");
@@ -1047,6 +1053,8 @@ function prologue_advice_trouble_at_beacon_end()
 		function(context)
 			if context:faction():name() == prologue_player_faction then
 
+				uim:override("disable_help_pages_panel_button"):set_allowed(false);
+
 				--Metric check (step_number, step_name, skippable)
 				cm:trigger_prologue_step_metrics_hit(24, "ended_trouble_dilemma_turn", false);
 
@@ -1093,6 +1101,7 @@ function prologue_advice_trouble_at_beacon_end()
 						core:remove_listener("FactionTurnStart_Prologue_before_attack");
 					end
 					core:remove_listener("PanelClosedCampaign_TroubleMission")
+					
 				end
 			end
 		end,
@@ -1332,6 +1341,8 @@ function prologue_advice_post_battle_end()
 	prologue_end_of_dialogue("first_post_battle", "", false, false, true)
 	out("START INTERVENTION")
 
+	uim:override("disable_help_pages_panel_button"):set_allowed(false);
+	
 	cm:dismiss_advice();
 	local new_player = cm:model():shared_states_manager():get_state_as_bool_value("prologue_tutorial_on");
 	if new_player then
@@ -1664,6 +1675,8 @@ end
 
 function prologue_advice_pre_battle_two_002_end()
 	prologue_end_of_dialogue(false, "", false, false, true)
+
+	uim:override("disable_help_pages_panel_button"):set_allowed(false);
 end
 
 function prologue_advice_pre_battle_two_003()
@@ -1678,6 +1691,8 @@ end
 
 function prologue_advice_pre_battle_two_end()
 	prologue_end_of_dialogue(false, false, false, true, false);
+
+	--uim:override("disable_help_pages_panel_button"):set_allowed(false);
 end
 
 
@@ -1778,6 +1793,7 @@ function prologue_advice_after_second_battle_skills_show_objective()
 	-- start the intevention about skills
 	local new_player = cm:model():shared_states_manager():get_state_as_bool_value("prologue_tutorial_on");
 	if new_player then
+		uim:override("disable_help_pages_panel_button"):set_allowed(false);
 		core:trigger_event("ScriptEventPrologueSkills");
 	else
 		uim:disable_character_selection_whitelist()
@@ -2360,6 +2376,7 @@ function prologue_advice_leave_dervingard_mission_complete()
 					end,
 					function()
 						if new_player then
+							cm:stop_campaign_advisor_vo();
 							core:trigger_event("ScriptEventVictoryConditionFulfilled");
 						else
 							prologue_advice_leave_dervingard_004();

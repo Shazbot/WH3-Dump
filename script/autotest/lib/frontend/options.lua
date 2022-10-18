@@ -197,34 +197,40 @@ function Lib.Frontend.Options.navigate_to_options_set_preset_and_texture_quality
 end
 
 -- pass it a custom percentange value without the % sign, example custom_value = 150
-function Lib.Frontend.Options.set_UI_scale_to_custom_value(custom_value)
+function Lib.Frontend.Options.set_UI_scale_to_custom_value(custom_value, count)
     callback(function()
-        custom_value = custom_value or nil
-        local ui_scale_text = Lib.Components.Helpers.current_ui_scale()
-        local current_ui_scale = string.match(ui_scale_text:GetStateText(), "%d+")
-        if (custom_value ~= nil) then
-            local current_resolution = Lib.Components.Helpers.current_resolution():GetStateText()
-            local w, h = string.match(current_resolution, "%d+"), string.match(current_resolution, "%d+$")
-            -- UI scale this only works for 2560x1440 and above resolutions
-            -- w & h are the width and height of thew resolution. For example, 1920 is the width and 1080 is the height
-            if(tonumber(w) >= 2560 and tonumber(h) >= 1440) then
-                if(custom_value == current_ui_scale) then
-                    Lib.Frontend.Clicks.graphics_apply_ui_scale()
-                    Lib.Frontend.Clicks.apply_graphics()
-                else
-                    if(tonumber(custom_value) < tonumber(current_ui_scale)) then
-                        Lib.Frontend.Clicks.graphics_decrease_ui_scale()
-                        Lib.Frontend.Options.set_UI_scale_to_custom_value(custom_value)
+        count = count or 0
+        if count > 15 then
+            Utilities.print("The UI scale has been modified to it's lowest or highest value already. Breaking out of the loop in case the game doesn't support the value passed to the function.")
+            return
+        else
+            custom_value = custom_value or nil
+            local ui_scale_text = Lib.Components.Helpers.current_ui_scale()
+            local current_ui_scale = string.match(ui_scale_text:GetStateText(), "%d+")
+            if (custom_value ~= nil) then
+                local current_resolution = Lib.Components.Helpers.current_resolution():GetStateText()
+                local w, h = string.match(current_resolution, "%d+"), string.match(current_resolution, "%d+$")
+                -- UI scale this only works for 2560x1440 and above resolutions
+                -- w & h are the width and height of thew resolution. For example, 1920 is the width and 1080 is the height
+                if(tonumber(w) >= 2560 and tonumber(h) >= 1440) then
+                    if(custom_value == current_ui_scale) then
+                        Lib.Frontend.Clicks.graphics_apply_ui_scale()
+                        Lib.Frontend.Clicks.apply_graphics()
                     else
-                        Lib.Frontend.Clicks.graphics_increase_ui_scale()
-                        Lib.Frontend.Options.set_UI_scale_to_custom_value(custom_value)
+                        if(tonumber(custom_value) < tonumber(current_ui_scale)) then
+                            Lib.Frontend.Clicks.graphics_decrease_ui_scale()
+                            Lib.Frontend.Options.set_UI_scale_to_custom_value(custom_value, count)
+                        else
+                            Lib.Frontend.Clicks.graphics_increase_ui_scale()
+                            Lib.Frontend.Options.set_UI_scale_to_custom_value(custom_value, count)
+                        end
                     end
+                else
+                    Utilities.print("Current resolution is "..w.."x"..h.." and UI Scale cannot be changed if the resolution is below 2560x1440")
                 end
             else
-                Utilities.print("Current resolution is "..w.."x"..h.." and UI Scale cannot be changed if the resolution is below 2560x1440")
+                Utilities.print("No UI Scale specified")
             end
-        else
-            Utilities.print("No UI Scale specified")
         end
     end)
 end

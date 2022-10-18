@@ -98,7 +98,7 @@ function endgame_pyramid_of_nagash:trigger()
 	end
 
 	endgame:create_scenario_force(data.faction_key, self.region_key, self.army_template, data.unit_list, true, math.floor(self.base_army_count*endgame.settings.difficulty_mod))
-
+	cm:instantly_research_all_technologies(data.faction_key)
 	cm:activate_music_trigger("ScriptedEvent_Negative", data.music)
 	cm:apply_effect_bundle(data.faction_bundle, data.faction_key, 0)
 	cm:apply_effect_bundle_to_region(data.region_bundle, self.region_key, 0)
@@ -109,13 +109,17 @@ function endgame_pyramid_of_nagash:trigger()
 	endgame:declare_war_on_adjacent_region_owners(invasion_faction, region)
 	table.insert(endgame.revealed_regions, self.region_key)
 
+	-- Make the Black Pyramid fly!
+	cm:override_building_chain_display("wh2_dlc09_special_settlement_pyramid_of_nagash_tmb", "wh2_dlc09_special_settlement_pyramid_of_nagash_floating")
+
 	local human_factions = cm:get_human_factions()
 	local objectives = {
 		{
 			type = "DESTROY_FACTION",
 			conditions = {
 				"faction "..data.faction_key,
-				"confederation_valid"
+				"confederation_valid",
+				"vassalization_valid"
 			}
 		},
 		{

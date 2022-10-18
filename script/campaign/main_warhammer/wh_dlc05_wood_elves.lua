@@ -1,6 +1,7 @@
-local wild_hunt_next_turn = 10;
+local wild_hunt_next_turn = 1;
 local wild_hunt_end_turn = -1;
-local wild_hunt_duration = 10;
+local wild_hunt_duration = 5;
+local wild_hunt_cooldown_between_hunts = 5
 local wef_ai_personality_duration = 60;
 local wef_ai_personality_key_current = "wh3_combi_woodelf_orion";
 local wef_ministerial_position_bundles = {
@@ -113,7 +114,7 @@ function Add_Wood_Elves_Listeners()
 				
 				cm:trigger_incident(faction_name, "wh2_dlc16_incident_wef_wild_hunt_begins", true);
 				
-				wild_hunt_next_turn = turn_number + 20;
+				wild_hunt_next_turn = turn_number + wild_hunt_duration + wild_hunt_cooldown_between_hunts;
 				wild_hunt_end_turn = turn_number + wild_hunt_duration;
 			end
 			

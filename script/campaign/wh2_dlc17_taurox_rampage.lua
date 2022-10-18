@@ -44,7 +44,8 @@ RiverOfBlood ={
 
 --this table keeps track of every value that can affect the momentum value of Taurox's rampage
 local momentum_matrix = {
-	["rampage_base"] 			= 	{factor = "wh2_dlc17_taurox_bst_momentum_gained_base", 				amount = 1},
+	["rampage_base"] 			= 	{factor = "wh2_dlc17_taurox_bst_momentum_gained_base", 				amount = 3},
+	["battle_won_first_of_turn"] = 	{factor = "wh2_dlc17_taurox_bst_momentum_gained_battle_won", 		amount = 2},
 	["battle_won"] 				= 	{factor = "wh2_dlc17_taurox_bst_momentum_gained_battle_won", 		amount = 1},
 	["battle_lost"] 			= 	{factor = "wh2_dlc17_taurox_bst_momentum_lost_battle_lost", 		amount = -2},
 	["battle_retreat"] 			= 	{factor = "wh2_dlc17_taurox_bst_momentum_lost_battle_retreat", 		amount = -1},
@@ -93,7 +94,7 @@ function add_taurox_rampage_listeners()
 			end,
 			function(context)
 				--if not the first turn of the campaign
-				if cm:turn_number() >= 2 then
+				if cm:turn_number() >= 2 and cm:get_saved_value("taurox_rampage_active") then
 					TauroxRampage_MomentumUpdate(momentum_matrix["end_turn"])
 				end
 			end,
@@ -163,6 +164,7 @@ function add_taurox_rampage_listeners()
 				function(context)
 					--Reset Taurox battle victory counter
 					consecutive_battles_won_this_turn = 0;
+					cm:set_saved_value("taurox_battle_fought_this_turn", false)
 				end,
 				true
 			);
@@ -342,7 +344,12 @@ function TauroxRampage_BattleCompleted(context)
 			cm:faction_add_pooled_resource(taurox_faction_key, "bst_rampage", "wh2_dlc17_taurox_bst_rampage_gain_battles", total_rampage_value);
 
 			--we increase the momentum counter of Taurox
-			TauroxRampage_MomentumUpdate(momentum_matrix["battle_won"]);
+			local battle_type = "battle_won"
+			if not cm:get_saved_value("taurox_battle_fought_this_turn") then
+				battle_type = "battle_won_first_of_turn"
+				cm:set_saved_value("taurox_battle_fought_this_turn", true)
+			end
+			TauroxRampage_MomentumUpdate(momentum_matrix[battle_type]);
 		end
 
 		--Apply River of Blood effects
@@ -363,6 +370,9 @@ end
 
 --Updates the momentum pooled resource amount with the passed integer argument
 function TauroxRampage_MomentumUpdate(momentum_entry)
+	if not cm:get_saved_value("taurox_rampage_active") then
+		cm:set_saved_value("taurox_rampage_active", true)
+	end
 
 	local taurox_faction = cm:get_faction(taurox_faction_key);
 	local current_momentum = taurox_faction:pooled_resource_manager():resource("bst_momentum"):value();
@@ -553,6 +563,8 @@ function TauroxRampage_RampageRestart(victory)
 	completed_rampage_rituals["tier_1"].completed = false;
 	completed_rampage_rituals["tier_2"].completed = false;
 	completed_rampage_rituals["tier_3"].completed = false;
+
+	cm:set_saved_value("taurox_rampage_active", false)
 	
 	--fire event for rampage over advice
 	core:trigger_event("ScriptEventTauroxRampageOver");

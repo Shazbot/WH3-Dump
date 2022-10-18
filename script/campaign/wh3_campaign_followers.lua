@@ -95,7 +95,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return char_army_has_unit(character, {"wh2_dlc09_tmb_mon_ushabti_0", "wh2_dlc09_tmb_mon_ushabti_1"}) and not character:has_ancillary("wh2_dlc09_anc_follower_tmb_ushabti_bodyguard");
+				return cm:char_army_has_unit(character, {"wh2_dlc09_tmb_mon_ushabti_0", "wh2_dlc09_tmb_mon_ushabti_1"}) and not character:has_ancillary("wh2_dlc09_anc_follower_tmb_ushabti_bodyguard");
 			end,
 		["chance"] = 10
 	},
@@ -109,7 +109,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_hef_port") and cm:model():turn_number() % 5 == 0;
+				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_hef_port") and cm:model():turn_number() % 5 == 0;
 			end,
 		["chance"] = 25
 	},
@@ -133,10 +133,10 @@ local followers = {
 	},
 	{
 		["follower"] = "wh2_main_anc_follower_hef_beard_weaver",
-		["event"] = "CharacterCompletedBattle",
+		["event"] = "HeroCharacterParticipatedInBattle",
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), "wh_main_dwf_dwarfs");
+				return cm:character_won_battle_against_culture(context:character(), "wh_main_dwf_dwarfs");
 			end,
 		["chance"] = 50
 	},
@@ -146,7 +146,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_hef_court") and cm:model():turn_number() % 5 == 0;
+				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_hef_court") and cm:model():turn_number() % 5 == 0;
 			end,
 		["chance"] = 25
 	},
@@ -166,7 +166,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_hef_dragons") and cm:model():turn_number() % 5 == 0;
+				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_hef_dragons") and cm:model():turn_number() % 5 == 0;
 			end,
 		["chance"] = 25
 	},
@@ -176,7 +176,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_hef_dragons") and cm:model():turn_number() % 5 == 0;
+				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_hef_dragons") and cm:model():turn_number() % 5 == 0;
 			end,
 		["chance"] = 25
 	},
@@ -196,7 +196,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_special_ellyrian_stables") and cm:model():turn_number() % 5 == 0;
+				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_special_ellyrian_stables") and cm:model():turn_number() % 5 == 0;
 			end,
 		["chance"] = 25
 	},
@@ -206,7 +206,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_special_tower_of_hoeth") and cm:model():turn_number() % 5 == 0;
+				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_special_tower_of_hoeth") and cm:model():turn_number() % 5 == 0;
 			end,
 		["chance"] = 25
 	},
@@ -216,7 +216,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_hef_order") and cm:model():turn_number() % 5 == 0;
+				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_hef_order") and cm:model():turn_number() % 5 == 0;
 			end,
 		["chance"] = 25
 	},
@@ -226,7 +226,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_hef_mages") and cm:model():turn_number() % 5 == 0;
+				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_hef_mages") and cm:model():turn_number() % 5 == 0;
 			end,
 		["chance"] = 25
 	},
@@ -236,7 +236,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_special_hall_of_dragons") and cm:model():turn_number() % 5 == 0;
+				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_special_hall_of_dragons") and cm:model():turn_number() % 5 == 0;
 			end,
 		["chance"] = 25
 	},
@@ -246,7 +246,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_special_everqueen_court") and cm:model():turn_number() % 5 == 0;
+				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_special_everqueen_court") and cm:model():turn_number() % 5 == 0;
 			end,
 		["chance"] = 25
 	},
@@ -274,7 +274,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_hef_worship") and cm:model():turn_number() % 5 == 0;
+				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_hef_worship") and cm:model():turn_number() % 5 == 0;
 			end,
 		["chance"] = 25
 	},
@@ -284,7 +284,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_hef_mages") and cm:model():turn_number() % 5 == 0;
+				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_hef_mages") and cm:model():turn_number() % 5 == 0;
 			end,
 		["chance"] = 25
 	},
@@ -308,7 +308,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:has_region() and character:turns_in_own_regions() >= 2 and region_has_chain_or_superchain(character:region(), "wh2_main_sch_support2_worship");
+				return character:has_region() and character:turns_in_own_regions() >= 2 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_sch_support2_worship");
 			end,
 		["chance"] = 1
 	},
@@ -318,7 +318,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:faction():has_technology("wh2_main_tech_lzd_4_4") and character:has_region() and character:turns_in_own_regions() >= 1 and (region_has_chain_or_superchain(character:region(), "wh_main_sch_settlement_major") or (region_has_chain_or_superchain(character:region(), "wh_main_sch_settlement_major_coast")));
+				return character:faction():has_technology("wh2_main_tech_lzd_4_4") and character:has_region() and character:turns_in_own_regions() >= 1 and (cm:region_has_chain_or_superchain(character:region(), "wh_main_sch_settlement_major") or (cm:region_has_chain_or_superchain(character:region(), "wh_main_sch_settlement_major_coast")));
 			end,
 		["chance"] = 10
 	},
@@ -356,7 +356,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_lzd_worship_oldones") and cm:model():turn_number() % 5 == 0;
+				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_lzd_worship_oldones") and cm:model():turn_number() % 5 == 0;
 			end,
 		["chance"] = 25
 	},
@@ -376,7 +376,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:faction():has_technology("wh2_main_tech_lzd_1_6") and character:has_region() and character:turns_in_own_regions() >= 1 and (region_has_chain_or_superchain(character:region(), "wh2_main_sch_military2_stables") or region_has_chain_or_superchain(character:region(), "wh2_main_sch_military1_barracks"));
+				return character:faction():has_technology("wh2_main_tech_lzd_1_6") and character:has_region() and character:turns_in_own_regions() >= 1 and (cm:region_has_chain_or_superchain(character:region(), "wh2_main_sch_military2_stables") or cm:region_has_chain_or_superchain(character:region(), "wh2_main_sch_military1_barracks"));
 			end,
 		["chance"] = 10
 	},
@@ -395,7 +395,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_sch_defence_major_lzd");
+				return character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_sch_defence_major_lzd");
 			end,
 		["chance"] = 10
 	},
@@ -414,7 +414,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_sch_defence_major_lzd");
+				return character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_sch_defence_major_lzd");
 			end,
 		["chance"] = 10
 	},
@@ -424,7 +424,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:faction():has_technology("wh2_main_tech_lzd_4_6") and character:has_region() and character:turns_in_own_regions() >= 1 and (region_has_chain_or_superchain(character:region(), "wh_main_sch_settlement_major") or region_has_chain_or_superchain(character:region(), "wh_main_sch_settlement_major_coast"));
+				return character:faction():has_technology("wh2_main_tech_lzd_4_6") and character:has_region() and character:turns_in_own_regions() >= 1 and (cm:region_has_chain_or_superchain(character:region(), "wh_main_sch_settlement_major") or cm:region_has_chain_or_superchain(character:region(), "wh_main_sch_settlement_major_coast"));
 			end,
 		["chance"] = 10
 	},
@@ -433,7 +433,7 @@ local followers = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), {"wh_main_emp_empire", "wh_main_brt_bretonnia", "wh3_main_ksl_kislev", "wh3_main_cth_cathay"});
+				return cm:character_won_battle_against_culture(context:character(), {"wh_main_emp_empire", "wh_main_brt_bretonnia", "wh3_main_ksl_kislev", "wh3_main_cth_cathay"});
 			end,
 		["chance"] = 50
 	},
@@ -442,7 +442,7 @@ local followers = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), "wh2_main_skv_skaven");
+				return cm:character_won_battle_against_culture(context:character(), "wh2_main_skv_skaven");
 			end,
 		["chance"] = 11
 	},
@@ -452,7 +452,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_lzd_worship_sotek") and cm:model():turn_number() % 5 == 0;
+				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_lzd_worship_sotek") and cm:model():turn_number() % 5 == 0;
 			end,
 		["chance"] = 25
 	},
@@ -462,7 +462,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:has_region() and character:turns_in_own_regions() > 1 and region_has_chain_or_superchain(character:region(), "wh2_main_sch_defence_minor");
+				return character:has_region() and character:turns_in_own_regions() > 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_sch_defence_minor");
 			end,
 		["chance"] = 1
 	},
@@ -494,7 +494,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_skv_order") and cm:model():turn_number() % 5 == 0;
+				return character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_skv_order") and cm:model():turn_number() % 5 == 0;
 			end,
 		["chance"] = 25
 	},
@@ -540,7 +540,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_skv_farm") and cm:model():turn_number() % 5 == 0;
+				return character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_skv_farm") and cm:model():turn_number() % 5 == 0;
 			end,
 		["chance"] = 25
 	},
@@ -597,7 +597,7 @@ local followers = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), "wh_main_dwf_dwarfs");
+				return cm:character_won_battle_against_culture(context:character(), "wh_main_dwf_dwarfs");
 			end,
 		["chance"] = 11
 	},
@@ -606,7 +606,7 @@ local followers = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), "wh2_main_lzd_lizardmen");
+				return cm:character_won_battle_against_culture(context:character(), "wh2_main_lzd_lizardmen");
 			end,
 		["chance"] = 11
 	},
@@ -634,7 +634,7 @@ local followers = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), {"wh_main_emp_empire", "wh_main_brt_bretonnia", "wh3_main_ksl_kislev", "wh3_main_cth_cathay"});
+				return cm:character_won_battle_against_culture(context:character(), {"wh_main_emp_empire", "wh_main_brt_bretonnia", "wh3_main_ksl_kislev", "wh3_main_cth_cathay"});
 			end,
 		["chance"] = 33
 	},
@@ -653,7 +653,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:has_region() and character:turns_in_own_regions() >= 1 and (region_has_chain_or_superchain(character:region(), "wh2_main_skv_assassins") or region_has_chain_or_superchain(character:region(), "wh2_main_skv_assassins_eshin")) and cm:model():turn_number() % 5 == 0;
+				return character:has_region() and character:turns_in_own_regions() >= 1 and (cm:region_has_chain_or_superchain(character:region(), "wh2_main_skv_assassins") or cm:region_has_chain_or_superchain(character:region(), "wh2_main_skv_assassins_eshin")) and cm:model():turn_number() % 5 == 0;
 			end,
 		["chance"] = 25
 	},
@@ -676,7 +676,7 @@ local followers = {
 		["event"] = "CharacterRankUp",
 		["condition"] =
 			function(context)
-				return char_army_has_unit(context:character(), "wh_main_chs_mon_chaos_warhounds_0");
+				return cm:char_army_has_unit(context:character(), "wh_main_chs_mon_chaos_warhounds_0");
 			end,
 		["chance"] = 5
 	},
@@ -813,7 +813,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return not character:won_battle() and char_army_has_unit(character, {"wh_dlc03_bst_inf_chaos_warhounds_1", "wh_dlc03_bst_inf_chaos_warhounds_0"});
+				return not character:won_battle() and cm:char_army_has_unit(character, {"wh_dlc03_bst_inf_chaos_warhounds_1", "wh_dlc03_bst_inf_chaos_warhounds_0"});
 			end,
 		["chance"] = 35
 	},
@@ -860,7 +860,7 @@ local followers = {
 		["event"] = "HeroCharacterParticipatedInBattle",
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), {"wh_main_emp_empire", "wh_main_brt_bretonnia", "wh3_main_ksl_kislev", "wh3_main_cth_cathay"});
+				return cm:character_won_battle_against_culture(context:character(), {"wh_main_emp_empire", "wh_main_brt_bretonnia", "wh3_main_ksl_kislev", "wh3_main_cth_cathay"});
 			end,
 		["chance"] = 8
 	},
@@ -878,7 +878,7 @@ local followers = {
 		["event"] = "CharacterRankUp",
 		["condition"] =
 			function(context)
-				return char_can_recruit_unit(context:character(), "wh_dlc03_bst_mon_chaos_spawn_0");
+				return cm:char_can_recruit_unit(context:character(), "wh_dlc03_bst_mon_chaos_spawn_0");
 			end,
 		["chance"] = 8
 	},
@@ -1005,7 +1005,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return (char_can_recruit_unit(character, "wh_dlc08_nor_mon_skinwolves_0") or char_can_recruit_unit(character, "wh_dlc08_nor_mon_skinwolves_1"));
+				return (cm:char_can_recruit_unit(character, "wh_dlc08_nor_mon_skinwolves_0") or cm:char_can_recruit_unit(character, "wh_dlc08_nor_mon_skinwolves_1"));
 			end,
 		["chance"] = 10
 	},
@@ -1112,7 +1112,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return char_can_recruit_unit(character, "wh_dlc08_nor_mon_war_mammoth_0") or char_can_recruit_unit(character, "wh_dlc08_nor_mon_war_mammoth_1") or char_can_recruit_unit(character, "wh_dlc08_nor_mon_war_mammoth_2") or char_can_recruit_unit(character, "wh_main_nor_mon_chaos_warhounds_0") or char_can_recruit_unit(character, "wh_main_nor_mon_chaos_warhounds_1");
+				return cm:char_can_recruit_unit(character, "wh_dlc08_nor_mon_war_mammoth_0") or cm:char_can_recruit_unit(character, "wh_dlc08_nor_mon_war_mammoth_1") or cm:char_can_recruit_unit(character, "wh_dlc08_nor_mon_war_mammoth_2") or cm:char_can_recruit_unit(character, "wh_main_nor_mon_chaos_warhounds_0") or cm:char_can_recruit_unit(character, "wh_main_nor_mon_chaos_warhounds_1");
 			end,
 		["chance"] = 10
 	},
@@ -1249,7 +1249,7 @@ local followers = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), {"wh_main_emp_empire", "wh_main_brt_bretonnia", "wh3_main_ksl_kislev", "wh3_main_cth_cathay"});
+				return cm:character_won_battle_against_culture(context:character(), {"wh_main_emp_empire", "wh_main_brt_bretonnia", "wh3_main_ksl_kislev", "wh3_main_cth_cathay"});
 			end,
 		["chance"] = 13
 	},
@@ -1413,7 +1413,7 @@ local followers = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), {"wh_main_emp_empire", "wh_main_brt_bretonnia", "wh3_main_ksl_kislev", "wh3_main_cth_cathay"});
+				return cm:character_won_battle_against_culture(context:character(), {"wh_main_emp_empire", "wh_main_brt_bretonnia", "wh3_main_ksl_kislev", "wh3_main_cth_cathay"});
 			end,
 		["chance"] = 8
 	},
@@ -1553,7 +1553,7 @@ local followers = {
 		["event"] = "CharacterRankUp",
 		["condition"] =
 			function(context)
-				return char_can_recruit_unit(context:character(), "wh_main_dwf_art_cannon");
+				return cm:char_can_recruit_unit(context:character(), "wh_main_dwf_art_cannon");
 			end,
 		["chance"] = 8
 	},
@@ -1571,7 +1571,7 @@ local followers = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), {"wh_main_emp_empire", "wh_main_brt_bretonnia", "wh3_main_ksl_kislev", "wh3_main_cth_cathay"});
+				return cm:character_won_battle_against_culture(context:character(), {"wh_main_emp_empire", "wh_main_brt_bretonnia", "wh3_main_ksl_kislev", "wh3_main_cth_cathay"});
 			end,
 		["chance"] = 10
 	},
@@ -1629,7 +1629,7 @@ local followers = {
 		["event"] = "CharacterRankUp",
 		["condition"] =
 			function(context)
-				return char_army_has_unit(context:character(), "wh_main_dwf_inf_slayers");
+				return cm:char_army_has_unit(context:character(), "wh_main_dwf_inf_slayers");
 			end,
 		["chance"] = 10
 	},
@@ -2036,7 +2036,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return char_army_has_unit(character, {"wh_main_grn_inf_savage_orcs", "wh_main_grn_inf_savage_orc_arrer_boyz", "wh_main_grn_cav_savage_orc_boar_boyz"});
+				return cm:char_army_has_unit(character, {"wh_main_grn_inf_savage_orcs", "wh_main_grn_inf_savage_orc_arrer_boyz", "wh_main_grn_cav_savage_orc_boar_boyz"});
 			end,
 		["chance"] = 20
 	},
@@ -2065,7 +2065,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return char_army_has_unit(character, {"wh_main_grn_inf_night_goblins", "wh_main_grn_inf_night_goblin_archers"});
+				return cm:char_army_has_unit(character, {"wh_main_grn_inf_night_goblins", "wh_main_grn_inf_night_goblin_archers"});
 			end,
 		["chance"] = 10
 	},
@@ -2150,7 +2150,7 @@ local followers = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return char_army_has_unit(context:character(), "wh_main_grn_mon_trolls");
+				return cm:char_army_has_unit(context:character(), "wh_main_grn_mon_trolls");
 			end,
 		["chance"] = 10
 	},
@@ -2240,7 +2240,7 @@ local followers = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), {"wh_main_emp_empire", "wh_main_brt_bretonnia", "wh3_main_ksl_kislev", "wh3_main_cth_cathay"});
+				return cm:character_won_battle_against_culture(context:character(), {"wh_main_emp_empire", "wh_main_brt_bretonnia", "wh3_main_ksl_kislev", "wh3_main_cth_cathay"});
 			end,
 		["chance"] = 13
 	},
@@ -2310,7 +2310,7 @@ local followers = {
 		["event"] = "HeroCharacterParticipatedInBattle",
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), {"wh_main_emp_empire", "wh_main_brt_bretonnia", "wh3_main_ksl_kislev", "wh3_main_cth_cathay"});
+				return cm:character_won_battle_against_culture(context:character(), {"wh_main_emp_empire", "wh_main_brt_bretonnia", "wh3_main_ksl_kislev", "wh3_main_cth_cathay"});
 			end,
 		["chance"] = 15
 	},
@@ -2319,7 +2319,7 @@ local followers = {
 		["event"] = "HeroCharacterParticipatedInBattle",
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), {"wh_main_emp_empire", "wh_main_brt_bretonnia", "wh3_main_ksl_kislev", "wh3_main_cth_cathay"});
+				return cm:character_won_battle_against_culture(context:character(), {"wh_main_emp_empire", "wh_main_brt_bretonnia", "wh3_main_ksl_kislev", "wh3_main_cth_cathay"});
 			end,
 		["chance"] = 15
 	},
@@ -2352,7 +2352,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return not character:character_type("colonel") and character:faction():has_technology("wh2_main_tech_def_2_3_3") and character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_def_murder") and cm:model():turn_number() % 5 == 0;
+				return not character:character_type("colonel") and character:faction():has_technology("wh2_main_tech_def_2_3_3") and character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_def_murder") and cm:model():turn_number() % 5 == 0;
 			end,
 		["chance"] = 25
 	},
@@ -2362,7 +2362,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_def_beasts") and cm:model():turn_number() % 5 == 0;
+				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_def_beasts") and cm:model():turn_number() % 5 == 0;
 			end,
 		["chance"] = 25
 	},
@@ -2382,7 +2382,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_def_pleasure_cult") and cm:model():turn_number() % 5 == 0;
+				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_def_pleasure_cult") and cm:model():turn_number() % 5 == 0;
 			end,
 		["chance"] = 25
 	},
@@ -2392,7 +2392,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_def_pleasure_cult") and cm:model():turn_number() % 5 == 0;
+				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_def_pleasure_cult") and cm:model():turn_number() % 5 == 0;
 			end,
 		["chance"] = 25
 	},
@@ -2422,7 +2422,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_def_worship");
+				return character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_def_worship");
 			end,
 		["chance"] = 10
 	},
@@ -2450,7 +2450,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_def_pleasure_cult");
+				return character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_def_pleasure_cult");
 			end,
 		["chance"] = 10
 	},
@@ -2460,7 +2460,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_def_pleasure_cult");
+				return character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_def_pleasure_cult");
 			end,
 		["chance"] = 10
 	},
@@ -2481,7 +2481,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_def_farm") and cm:model():turn_number() % 5 == 0;
+				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_def_farm") and cm:model():turn_number() % 5 == 0;
 			end,
 		["chance"] = 25
 	},
@@ -2491,7 +2491,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_def_order") and cm:model():turn_number() % 5 == 0;
+				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_def_order") and cm:model():turn_number() % 5 == 0;
 			end,
 		["chance"] = 25
 	},
@@ -2501,7 +2501,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_def_pleasure_cult") and cm:model():turn_number() % 5 == 0;
+				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_def_pleasure_cult") and cm:model():turn_number() % 5 == 0;
 			end,
 		["chance"] = 25
 	},
@@ -2533,7 +2533,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and region_has_chain_or_superchain(character:region(), "wh2_main_def_worship") and cm:model():turn_number() % 5 == 0;
+				return not character:character_type("colonel") and character:has_region() and character:turns_in_own_regions() >= 1 and cm:region_has_chain_or_superchain(character:region(), "wh2_main_def_worship") and cm:model():turn_number() % 5 == 0;
 			end,
 		["chance"] = 25
 	},
@@ -2630,7 +2630,7 @@ local followers = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return char_army_has_unit(context:character(), "wh3_main_kho_inf_flesh_hounds_of_khorne_0");
+				return cm:char_army_has_unit(context:character(), "wh3_main_kho_inf_flesh_hounds_of_khorne_0");
 			end,
 		["chance"] = 8
 	},
@@ -2648,7 +2648,7 @@ local followers = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return character_reinforced_alongside_culture(context:character(), "wh3_main_kho_khorne");
+				return cm:character_reinforced_alongside_culture(context:character(), "wh3_main_kho_khorne");
 			end,
 		["chance"] = 30
 	},
@@ -2667,7 +2667,7 @@ local followers = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), "wh_dlc08_nor_norsca");
+				return cm:character_won_battle_against_culture(context:character(), "wh_dlc08_nor_norsca");
 			end,
 		["chance"] = 25
 	},
@@ -2676,7 +2676,7 @@ local followers = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return character_reinforced_alongside_culture(context:character(), "wh_dlc08_nor_norsca");
+				return cm:character_reinforced_alongside_culture(context:character(), "wh_dlc08_nor_norsca");
 			end,
 		["chance"] = 30
 	},
@@ -2759,7 +2759,7 @@ local followers = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), {"wh_main_emp_empire", "wh_main_brt_bretonnia", "wh3_main_ksl_kislev", "wh3_main_cth_cathay"});
+				return cm:character_won_battle_against_culture(context:character(), {"wh_main_emp_empire", "wh_main_brt_bretonnia", "wh3_main_ksl_kislev", "wh3_main_cth_cathay"});
 			end,
 		["chance"] = 25
 	},
@@ -2768,7 +2768,7 @@ local followers = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), {"wh3_main_dae_daemons", "wh3_main_kho_khorne", "wh3_main_nur_nurgle", "wh3_main_sla_slaanesh", "wh3_main_tze_tzeentch"});
+				return cm:character_won_battle_against_culture(context:character(), {"wh3_main_dae_daemons", "wh3_main_kho_khorne", "wh3_main_nur_nurgle", "wh3_main_sla_slaanesh", "wh3_main_tze_tzeentch"});
 			end,
 		["chance"] = 25
 	},
@@ -2809,7 +2809,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:won_battle() and char_army_has_unit(character, {"wh3_main_sla_inf_marauders_0", "wh3_main_sla_inf_marauders_1", "wh3_main_sla_inf_marauders_2"});
+				return character:won_battle() and cm:char_army_has_unit(character, {"wh3_main_sla_inf_marauders_0", "wh3_main_sla_inf_marauders_1", "wh3_main_sla_inf_marauders_2"});
 			end,
 		["chance"] = 10
 	},
@@ -2846,7 +2846,7 @@ local followers = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return character_reinforced_alongside_culture(context:character(), "wh3_main_sla_slaanesh");
+				return cm:character_reinforced_alongside_culture(context:character(), "wh3_main_sla_slaanesh");
 			end,
 		["chance"] = 30
 	},
@@ -2889,7 +2889,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:won_battle() and count_char_army_has_unit(character, "wh3_main_nur_inf_nurglings_0") > 7;
+				return character:won_battle() and cm:count_char_army_has_unit(character, "wh3_main_nur_inf_nurglings_0") > 7;
 			end,
 		["chance"] = 10
 	},
@@ -2938,7 +2938,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:won_battle() and char_army_has_unit(character, {"wh3_main_nur_inf_plaguebearers_0", "wh3_main_nur_inf_plaguebearers_1"});
+				return character:won_battle() and cm:char_army_has_unit(character, {"wh3_main_nur_inf_plaguebearers_0", "wh3_main_nur_inf_plaguebearers_1"});
 			end,
 		["chance"] = 10
 	},
@@ -2966,7 +2966,7 @@ local followers = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return character_reinforced_alongside_culture(context:character(), "wh3_main_nur_nurgle");
+				return cm:character_reinforced_alongside_culture(context:character(), "wh3_main_nur_nurgle");
 			end,
 		["chance"] = 30
 	},
@@ -2985,7 +2985,7 @@ local followers = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), {"wh_main_emp_empire", "wh_main_brt_bretonnia", "wh3_main_ksl_kislev", "wh3_main_cth_cathay"});
+				return cm:character_won_battle_against_culture(context:character(), {"wh_main_emp_empire", "wh_main_brt_bretonnia", "wh3_main_ksl_kislev", "wh3_main_cth_cathay"});
 			end,
 		["chance"] = 25
 	},
@@ -3013,7 +3013,7 @@ local followers = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), "wh3_main_nur_nurgle");
+				return cm:character_won_battle_against_culture(context:character(), "wh3_main_nur_nurgle");
 			end,
 		["chance"] = 30
 	},
@@ -3086,7 +3086,7 @@ local followers = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), {"wh3_main_dae_daemons", "wh3_main_kho_khorne", "wh3_main_nur_nurgle", "wh3_main_sla_slaanesh", "wh3_main_tze_tzeentch"});
+				return cm:character_won_battle_against_culture(context:character(), {"wh3_main_dae_daemons", "wh3_main_kho_khorne", "wh3_main_nur_nurgle", "wh3_main_sla_slaanesh", "wh3_main_tze_tzeentch"});
 			end,
 		["chance"] = 25
 	},
@@ -3155,7 +3155,7 @@ local followers = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return character_reinforced_alongside_culture(context:character(), "wh3_main_tze_tzeentch");
+				return cm:character_reinforced_alongside_culture(context:character(), "wh3_main_tze_tzeentch");
 			end,
 		["chance"] = 30
 	},
@@ -3217,7 +3217,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:won_battle() and char_army_has_unit(character, {"wh3_main_ksl_inf_tzar_guard_0", "wh3_main_ksl_inf_tzar_guard_1"});
+				return character:won_battle() and cm:char_army_has_unit(character, {"wh3_main_ksl_inf_tzar_guard_0", "wh3_main_ksl_inf_tzar_guard_1"});
 			end,
 		["chance"] = 10
 	},
@@ -3247,7 +3247,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:won_battle() and (count_char_army_has_unit_category(character, "cavalry") > 3 or count_char_army_has_unit_category(character, "war_beast") > 3);
+				return character:won_battle() and (cm:count_char_army_has_unit_category(character, "cavalry") > 3 or cm:count_char_army_has_unit_category(character, "war_beast") > 3);
 			end,
 		["chance"] = 30
 	},
@@ -3275,7 +3275,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return not character:has_ancillary("wh3_main_anc_follower_ksl_priest_of_taal") and character_won_battle_against_culture(character, {"wh_main_chs_chaos", "wh_dlc08_nor_norsca", "wh_dlc03_bst_beastmen", "wh3_main_dae_daemons", "wh3_main_kho_khorne", "wh3_main_nur_nurgle", "wh3_main_sla_slaanesh", "wh3_main_tze_tzeentch"});
+				return not character:has_ancillary("wh3_main_anc_follower_ksl_priest_of_taal") and cm:character_won_battle_against_culture(character, {"wh_main_chs_chaos", "wh_dlc08_nor_norsca", "wh_dlc03_bst_beastmen", "wh3_main_dae_daemons", "wh3_main_kho_khorne", "wh3_main_nur_nurgle", "wh3_main_sla_slaanesh", "wh3_main_tze_tzeentch"});
 			end,
 		["chance"] = 5
 	},
@@ -3328,7 +3328,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:won_battle() and (count_char_army_has_unit_category(character, "inf_melee") + count_char_army_has_unit_category(character, "inf_ranged")) > 7;
+				return character:won_battle() and (cm:count_char_army_has_unit_category(character, "inf_melee") + cm:count_char_army_has_unit_category(character, "inf_ranged")) > 7;
 			end,
 		["chance"] = 20
 	},
@@ -3355,7 +3355,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:won_battle() and char_army_has_unit(character, "wh3_main_ogr_inf_leadbelchers_0");
+				return character:won_battle() and cm:char_army_has_unit(character, "wh3_main_ogr_inf_leadbelchers_0");
 			end,
 		["chance"] = 10
 	},
@@ -3410,7 +3410,7 @@ local followers = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return character_reinforced_alongside_culture(context:character(), "wh3_main_cth_cathay");
+				return cm:character_reinforced_alongside_culture(context:character(), "wh3_main_cth_cathay");
 			end,
 		["chance"] = 50
 	},
@@ -3433,7 +3433,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:won_battle() and char_army_has_unit(character, {"wh3_main_ogr_inf_gnoblars_0", "wh3_main_ogr_inf_gnoblars_1"});
+				return character:won_battle() and cm:char_army_has_unit(character, {"wh3_main_ogr_inf_gnoblars_0", "wh3_main_ogr_inf_gnoblars_1"});
 			end,
 		["chance"] = 10
 	},
@@ -3492,7 +3492,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:won_battle() and char_army_has_unit(character, {"wh3_main_ogr_cav_crushers_0", "wh3_main_ogr_cav_crushers_1"});
+				return character:won_battle() and cm:char_army_has_unit(character, {"wh3_main_ogr_cav_crushers_0", "wh3_main_ogr_cav_crushers_1"});
 			end,
 		["chance"] = 10
 	},
@@ -3501,7 +3501,7 @@ local followers = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return character_won_battle_against_unit(context:character(), {"wh_dlc06_grn_mon_spider_hatchlings_0_summoned", "wh_dlc06_grn_mon_spider_hatchlings_0", "wh_dlc08_grn_mon_arachnarok_spider_boss", "wh_main_grn_cav_forest_goblin_spider_riders_0", "wh_main_grn_cav_forest_goblin_spider_riders_1", "wh_main_grn_mon_arachnarok_spider_0"});
+				return cm:character_won_battle_against_unit(context:character(), {"wh_dlc06_grn_mon_spider_hatchlings_0_summoned", "wh_dlc06_grn_mon_spider_hatchlings_0", "wh_dlc08_grn_mon_arachnarok_spider_boss", "wh_main_grn_cav_forest_goblin_spider_riders_0", "wh_main_grn_cav_forest_goblin_spider_riders_1", "wh_main_grn_mon_arachnarok_spider_0"});
 			end,
 		["chance"] = 40
 	},
@@ -3566,7 +3566,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:won_battle() and count_char_army_has_unit_category(character, "cavalry") > 3;
+				return character:won_battle() and cm:count_char_army_has_unit_category(character, "cavalry") > 3;
 			end,
 		["chance"] = 30
 	},
@@ -3584,7 +3584,7 @@ local followers = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return character_won_battle_against_unit(context:character(), {"wh3_main_cth_inf_jade_warriors_0", "wh3_main_cth_inf_jade_warriors_1"});
+				return cm:character_won_battle_against_unit(context:character(), {"wh3_main_cth_inf_jade_warriors_0", "wh3_main_cth_inf_jade_warriors_1"});
 			end,
 		["chance"] = 40
 	},
@@ -3593,7 +3593,7 @@ local followers = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return character_reinforced_alongside_culture(context:character(), "wh_main_emp_empire");
+				return cm:character_reinforced_alongside_culture(context:character(), "wh_main_emp_empire");
 			end,
 		["chance"] = 50
 	},
@@ -3638,7 +3638,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:won_battle() and char_army_has_unit(character, "wh3_main_cth_mon_terracotta_sentinel_0");
+				return character:won_battle() and cm:char_army_has_unit(character, "wh3_main_cth_mon_terracotta_sentinel_0");
 			end,
 		["chance"] = 10
 	},
@@ -3658,7 +3658,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:won_battle() and char_army_has_unit(character, {"wh3_main_cth_inf_jade_warriors_0", "wh3_main_cth_inf_jade_warriors_1"});
+				return character:won_battle() and cm:char_army_has_unit(character, {"wh3_main_cth_inf_jade_warriors_0", "wh3_main_cth_inf_jade_warriors_1"});
 			end,
 		["chance"] = 10
 	},

@@ -41,11 +41,9 @@ cm:set_use_cinematic_borders_for_automated_cutscenes(false);
 cm:add_pre_first_tick_callback(
 	function()
 		cm:set_script_state("SCRIPT_FAILED_THIS_SESSION", false)
-
-		cm:load_exported_files("export_helpers");
 		
 		-- load the experience triggers
-		setup_experience_triggers();
+		campaign_experience_triggers:setup_experience_triggers();
 	end
 );
 
@@ -109,6 +107,9 @@ function setup_wh_campaign(generic_battle_script_path_override)
 	-- apply effect bundle when human beastmen make positive diplomatic treaty
 	beastmen_positive_diplomatic_event_listener();
 
+	---prevent factions from declaring war on vassals
+	vassal_diplomacy_lock_listeners()
+
 	if not cm:model():campaign_name("wh3_main_prologue") then
 		GeneratedConstants:generate_constants()
 	end;
@@ -167,6 +168,9 @@ function setup_wh_campaign(generic_battle_script_path_override)
 		cm:override_ui("disable_settlement_labels", false);
 	end;
 	
+	---if a quest associated with a unique item is cancelled, give the item anyway.
+	setup_cancelled_quest_listener()
+
 	out.dec_tab();
 end;
 
@@ -721,8 +725,22 @@ function start_confederation_listeners()
 			local faction_human = faction:is_human();
 			local confederation_timeout = 5;
 			
-			-- exclude Empire, Wood Elves, Beastmen, Norsca, Greenskins, Bretonnia (excluding Chevs de Leonesse), Kislev - they can confederate as often as they like but only if they aren't AI
-			if faction_human == false or (faction_subculture ~= "wh_main_sc_emp_empire" and faction_culture ~= "wh_dlc03_bst_beastmen" and faction_culture ~= "wh_dlc05_wef_wood_elves" and (faction_culture ~= "wh_main_brt_bretonnia" or faction_name == "wh2_dlc14_brt_chevaliers_de_lyonesse") and faction_subculture ~= "wh_dlc08_sc_nor_norsca" and faction_subculture ~= "wh_main_sc_grn_greenskins" and faction_subculture ~= "wh3_main_sc_ksl_kislev") then
+			local not_limited_confederation_factions = {
+				--cultures or subcultures which are not limited when the player
+				wh_dlc03_bst_beastmen = true,
+				wh_dlc05_wef_wood_elves = true,
+				wh_main_brt_bretonnia = true,
+				wh_dlc08_sc_nor_norsca = true,
+				wh_main_sc_grn_greenskins = true,
+				wh3_main_sc_ksl_kislev = true,
+				
+				--Specific factions within a subculture that are limited
+				wh2_dlc14_brt_chevaliers_de_lyonesse = false,
+			}
+			
+			-- excludes Wood Elves, Beastmen, Norsca, Greenskins, Bretonnia (excluding Chevs de Leonesse), Kislev - they can confederate as often as they like but only if they aren't AI
+			if faction_human == false or ((not_limited_confederation_factions[faction_subculture] ~= true and not_limited_confederation_factions[faction_culture] ~= true) or
+			not_limited_confederation_factions[faction_name] == false) then
 				if faction_human == false then
 					confederation_timeout = 10;
 				end
@@ -850,10 +868,115 @@ function start_confederation_listeners()
 end;
 
 
+---Listen for creation/breakage of vassal agreements and prevent people from declaring war on player's vassals directly.
+--- Also force discovery of vassal masters upon meeting the vassal so that the AI always has the option to declare war on the master
+function vassal_diplomacy_lock_listeners()
+
+	if cm:is_new_game() then 
+		cm:set_saved_value("human_vassals", {})
+	end
+
+	core:add_listener(
+		"FactionBecomesVassalDiplomacyLock",
+		"FactionBecomesVassal",
+		true,
+		function(context)
+			local vassal = context:vassal()
+			local master = vassal:master()
+
+			--- only lock war declaration against player vassals to minimise knock-ons
+			if master:is_human() then
+				disable_wars_against_human_vassal(vassal:name(), true)
+			end
+	
+			--loop through factions the vassal knows and introduce them to the master
+			local factions_met = vassal:factions_met()
+			local master_key = master:name()
+
+			if not factions_met:is_empty() then
+				for _, met_faction in model_pairs(factions_met) do
+					local met_faction_key = met_faction:name()
+					if not met_faction_key == master_key then
+						cm:make_diplomacy_available(met_faction_key, master_key)
+					end
+				end
+			end
+		end,
+		true
+	);
+
+	core:add_listener(
+		"NegativeDiplomaticEventVassalageBroken",
+		"NegativeDiplomaticEvent",
+		function(context)
+			return context:was_vassalage()
+		end,
+		function(context)
+			local vassal = context:recipient()
+
+			if context:proposer_was_vassal()then
+				 vassal = context:proposer()
+			end
+
+			local vassal_key = vassal:name()
+			local human_vassals = cm:get_saved_value("human_vassals")
+
+			if human_vassals and human_vassals[vassal_key] then
+				disable_wars_against_human_vassal(vassal_key, false)
+			end
+		end,
+		true
+	);
 
 
+	core:add_listener(
+		"FactionEncountersOtherFactionIntroduceMaster",
+		"FactionEncountersOtherFaction",
+		function(context)
+			return context:other_faction():is_vassal()
+		end,
+		function(context)
+			cm:make_diplomacy_available(context:faction():name(), context:other_faction():master():name())		
+		end,
+		true
+	);
 
 
+	---check at world start round just in case a faction has escaped vassalage (e.g. because master died) but hasn't been picked up by other listener
+	core:add_listener(
+		"WorldStartRoundVassalCheck",
+		"WorldStartRound",
+		true,
+		function(context)
+			local human_vassals = cm:get_saved_value("human_vassals")
+			if human_vassals then
+				for key, is_vassal in pairs(human_vassals) do
+					if not cm:get_faction(key):is_vassal() then
+						out.design("Faction in the human vassals register is no longer a vassal, disabling diplomatic restrictions")
+						disable_wars_against_human_vassal(key, false)
+					end
+				end
+			end
+		end,
+		true
+	);
+end
+
+
+--- disables declarations of war against a specific faction and adds it to the register of human vassals
+function disable_wars_against_human_vassal(faction_key, is_disable)
+	cm:force_diplomacy("all", "faction:"..faction_key, "war", not is_disable, not is_disable)
+
+	local human_vassals = cm:get_saved_value("human_vassals")
+	
+	if is_disable then 
+		human_vassals[faction_key] = true
+	else
+		human_vassals[faction_key] = nil
+	end
+
+	cm:set_saved_value("human_vassals", human_vassals)
+end
 
 -- increase upkeep for each additional army the player recruits or obtains via confederation
 function player_army_count_listener()
@@ -937,7 +1060,7 @@ local leader_subtype_upkeep_exclusions = {
 
 local forcetype_upkeep_exclusions = {
 	SEA_LOCKED_HORDE = true,
-	DISCIPLINE_ARMY = true,
+	DISCIPLE_ARMY = true,
 	OGRE_CAMP = true,
 	CARAVAN = true,
 	SUPPORT_ARMY = true,
@@ -994,17 +1117,8 @@ function apply_upkeep_penalty(faction)
 			cm:remove_effect_bundle_from_force(upkeep_penalty_effect_bundle_key, current_mf:command_queue_index());
 		end
 		
-		if not current_mf:is_armed_citizenry()
-			and current_mf:has_general()
-			and not current_mf:is_set_piece_battle_army()
-			and not forcetype_upkeep_exclusions[force_type] then
-
-			local general = current_mf:general_character();
-			local character_subtype_key = general:character_subtype_key();
-
-			if leader_subtype_upkeep_exclusions[character_subtype_key] == nil then
-				table.insert(army_list, current_mf);
-			end
+		if not current_mf:is_armed_citizenry() and current_mf:has_general() and not current_mf:is_set_piece_battle_army() and not forcetype_upkeep_exclusions[force_type] and leader_subtype_upkeep_exclusions[current_mf:general_character():character_subtype_key()] == nil then
+			table.insert(army_list, current_mf);
 		end
 	end
 	
@@ -1119,31 +1233,48 @@ end;
 function blood_pack_incidents_listener()
 	if cm:is_dlc_flag_enabled_by_everyone("TW_WH3_BLOODPACK") then
 		local incidents = {
-			"wh_dlc02_incident_all_charge_carnage",
-			"wh_dlc02_incident_all_magic_carnage",
-			"wh_dlc02_incident_all_weapon_carnage"
+			{incident = "wh_dlc02_incident_all_charge_carnage", payload = "wh_dlc02_payload_all_charge_carnage"},
+			{incident = "wh_dlc02_incident_all_magic_carnage", payload = "wh_dlc02_payload_all_magic_carnage"},
+			{incident = "wh_dlc02_incident_all_weapon_carnage", payload = "wh_dlc02_payload_all_weapon_carnage"}
 		}
 		
 		core:add_listener(
 			"trigger_blood_event",
 			"WorldStartRound",
 			function()
-				return cm:model():turn_number() >= 10 and cm:random_number(100) <= 20
+				return cm:model():turn_number() >= 10 and cm:random_number(100) <= 10 and not cm:get_saved_value("global_blood_cooldown")
 			end,
 			function()
 				local chosen_incident = incidents[cm:random_number(#incidents)]
+				local incident_key = chosen_incident.incident
+				local payload_key = chosen_incident.payload
 				
-				if cm:get_saved_value(chosen_incident) then
+				if cm:get_saved_value(incident_key) then
 					return
 				end
 				
-				cm:set_saved_value(chosen_incident, true)
-				cm:add_round_turn_countdown_event(30, "ScriptEventBloodEventExpires", chosen_incident);
+				cm:set_saved_value(incident_key, true)
+				cm:set_saved_value("global_blood_cooldown", true)
+
+				cm:add_round_turn_countdown_event(30, "ScriptEventBloodEventExpires", incident_key)
+				cm:add_round_turn_countdown_event(15, "ScriptEventBloodEventExpires", "global_blood_cooldown")
 				
 				local human_factions = cm:get_human_factions()
 				
 				for i = 1, #human_factions do
-					cm:trigger_incident(human_factions[i], chosen_incident)
+					cm:trigger_incident(human_factions[i], incident_key)
+				end
+
+				local faction_list = cm:model():world():faction_list()
+				
+				for i = 0, faction_list:num_items() - 1 do
+					local faction = faction_list:item_at(i)
+					
+					if not faction:is_human() and not faction:is_dead() then
+						local custom_payload = cm:create_payload()
+						custom_payload:components_from_record(payload_key, faction, faction)
+						cm:apply_payload(custom_payload, faction)
+					end
 				end
 			end,
 			true
@@ -1159,35 +1290,6 @@ function blood_pack_incidents_listener()
 			true
 		)
 		
-		core:add_listener(
-			"carnage_event_listener",
-			"IncidentOccuredEvent",
-			function(context)
-				local incident = context:dilemma()
-				return incident:starts_with("wh_dlc02_incident_all_")
-			end,
-			function(context)
-				local incident = context:dilemma()
-				local effect_to_apply = "wh_dlc02_payload_all_charge_carnage"
-				
-				if incident == "wh_dlc02_incident_all_magic_carnage" then
-					effect_to_apply = "wh_dlc02_payload_all_magic_carnage"
-				elseif incident == "wh_dlc02_incident_all_weapon_carnage" then
-					effect_to_apply = "wh_dlc02_payload_all_weapon_carnage"
-				end
-				
-				local faction_list = cm:model():world():faction_list()
-				
-				for i = 0, faction_list:num_items() - 1 do
-					local faction = faction_list:item_at(i)
-					
-					if not faction:is_human() and not faction:is_dead() then
-						cm:apply_effect_bundle(effect_to_apply, faction:name(), 10)
-					end
-				end
-			end,
-			true
-		)
 	end
 end
 
@@ -1292,8 +1394,11 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 		if faction_name == "wh_main_grn_greenskins" then
 			secondary_detail = "event_feed_strings_text_wh_main_event_feed_string_scripted_event_intro_greenskins_secondary_detail";
 			pic = 593;
-		elseif faction_name == "wh_main_vmp_vampire_counts" or faction_name == "wh2_dlc11_vmp_the_barrow_legion" or faction_name == "wh3_main_vmp_caravan_of_blue_roses" then
+		elseif faction_name == "wh2_dlc11_vmp_the_barrow_legion" or faction_name == "wh3_main_vmp_caravan_of_blue_roses" then
 			secondary_detail = "event_feed_strings_text_wh_main_event_feed_string_scripted_event_intro_vampires_secondary_detail";
+			pic = 594;
+		elseif faction_name == "wh_main_vmp_vampire_counts" then
+			secondary_detail = "event_feed_strings_text_wh_main_event_feed_string_scripted_event_intro_drakenhof_secondary_detail";
 			pic = 594;
 		elseif faction_name == "wh_main_dwf_dwarfs" or faction_name == "wh3_main_dwf_the_ancestral_throng" then
 			secondary_detail = "event_feed_strings_text_wh_main_event_feed_string_scripted_event_intro_dwarfs_secondary_detail";
@@ -1701,9 +1806,9 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 		if cm:get_campaign_name() == "main_warhammer" then
 			cm:show_message_event(
 				faction_name,
-				"ui_text_replacements_localised_text_ie_beta_event_title",
-				"",
-				"ui_text_replacements_localised_text_ie_beta_event",
+				title,
+				primary_detail,
+				secondary_detail,
 				true,
 				pic,
 				end_callback,
@@ -1770,6 +1875,35 @@ function add_rank_up_character_turn_start_listener(character_subtype, rank_requi
 end;
 
 
+--- When we create quest listeners, we also generate a lookup table to allow us to quickly check cancelled missions and grant the ancillary
+--- Format is mission_key = {subtype, ancillary}
+local quest_cancellation_data = {}
+
+function setup_cancelled_quest_listener()
+	core:add_listener(
+		"quest_item_mission_cancelled_listener",
+		"MissionCancelled",
+		function(context)
+			return quest_cancellation_data[context:mission():mission_record_key()]
+		end,
+		function(context) 
+			local cancelled_quest = quest_cancellation_data[context:mission():mission_record_key()]
+			add_ancillary_to_agent_of_subtype_in_faction(cancelled_quest[2], cancelled_quest[1], context:faction()) 
+		end,
+		true	
+	);
+end
+
+function add_ancillary_to_agent_of_subtype_in_faction(subtype_key, ancillary_key, faction_interface) 
+	local character_list = faction_interface:character_list();
+	for _, character in model_pairs(character_list) do
+		if character:character_subtype_key() == subtype_key then
+			cm:force_add_ancillary(character, ancillary_key, true, false);
+			return true;
+		end
+	end
+end
+
 -- trigger quests (data is set up in the respective campaign folder)
 function set_up_rank_up_listener(quests, subtype, infotext)
 	for i = 1, #quests do
@@ -1787,6 +1921,11 @@ function set_up_rank_up_listener(quests, subtype, infotext)
 		local current_region_key = current_quest_record[9];
 		local current_intervention_name = false;
 		local current_saved_name = false;
+
+		---quest battles can't be cancelled, so don't bother storing info for them.
+		if not current_x and current_mission_key then
+			quest_cancellation_data[current_mission_key] = {current_ancillary_key, subtype}
+		end
 		
 		if current_mission_key then
 			current_intervention_name = "in_" .. current_mission_key;
@@ -2560,12 +2699,19 @@ function apply_default_diplomacy()
 	for i = 1, #human_player_keys do
 		local current_faction = cm:get_faction(human_player_keys[i]);
 		
-		-- enable payments between multiplayer team mates
+		-- enable payments and add a trade agreement between multiplayer team mates
 		if is_multiplayer then
 			local team_mates = current_faction:team_mates();
 			
 			for j = 0, team_mates:num_items() - 1 do
-				cm:force_diplomacy("faction:" .. human_player_keys[i], "faction:" .. team_mates:item_at(j):name(), "payments", true, true, true);
+				local current_team_mate = team_mates:item_at(j);
+				local current_team_mate_name = current_team_mate:name();
+				
+				cm:force_diplomacy("faction:" .. human_player_keys[i], "faction:" .. current_team_mate_name, "payments", true, true, true);
+				
+				if not current_faction:trade_agreement_with(current_team_mate) then
+					cm:force_make_trade_agreement(human_player_keys[i], current_team_mate_name);
+				end;
 			end;
 		end;
 	end;

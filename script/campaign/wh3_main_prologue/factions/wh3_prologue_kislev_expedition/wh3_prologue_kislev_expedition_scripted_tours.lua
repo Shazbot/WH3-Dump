@@ -8,13 +8,15 @@
 function start_scripted_tour_prologue (tour, sequence_name, steal_user_input, steal_escape_key, stop_hotkeys)
 	out ("Starting scripted tour!")
 
-	cm:trigger_scripted_tour_metrics_start(tour.name);
-	cm:disable_saving_game(true)
-	if steal_user_input then cm:steal_user_input(true) end
-	if steal_escape_key then cm:steal_escape_key(true) end
-	if stop_hotkeys then allow_hotkeys(false) end
+	--if dialogue_in_progress == false then 
+		cm:trigger_scripted_tour_metrics_start(tour.name);
+		cm:disable_saving_game(true)
+		if steal_user_input then cm:steal_user_input(true) end
+		if steal_escape_key then cm:steal_escape_key(true) end
+		if stop_hotkeys then allow_hotkeys(false) end
 
-	tour:start(sequence_name)
+		tour:start(sequence_name)
+	--end
 end
 
 function end_scripted_tour_prologue (tour, block_saving, release_user_input, release_escape_key, release_hotkeys)
@@ -30,6 +32,13 @@ function end_scripted_tour_prologue (tour, block_saving, release_user_input, rel
 	if release_hotkeys then allow_hotkeys(true) end
 	
 	tour:complete()
+end
+
+function skip_all_scripted_tours()
+	core:trigger_event("ScriptEventSkipAllScriptedTours");
+	core:hide_fullscreen_highlight();
+	cm:steal_user_input(false);
+	out("TRYING TO SKIP!")
 end
 
 ----------------------------
@@ -61,7 +70,7 @@ function PrologueScriptedTourSkillPoint()
 			local uic_button_skills_2 = find_uicomponent(core:get_ui_root(), "character_details_panel", "dy_pts");
 			
 			local tour_test_2 = scripted_tour:new(
-				"test2_tour",
+				"tour_skill_point",
 				function() uic_button_help:SetDisabled(false); out("FINISHED TOUR 2") end
 			);
 			
@@ -71,8 +80,13 @@ function PrologueScriptedTourSkillPoint()
 			--this isn't working at the moment
 			tour_test_2:add_fullscreen_highlight("character_details_panel", "tx_skill");
 			tour_test_2:add_fullscreen_highlight("character_details_panel", "dy_pts");
-			
+			tour_test_2:set_should_dismiss_advice_on_completion(false);
 			tour_test_2:set_show_skip_button(false);
+			tour_test_2:add_skip_action(
+				function()
+					CampaignUI.ClosePanel("character_details_panel");	
+				end
+			);
 					
 			tour_test_2:action(
 				function() 
@@ -170,6 +184,7 @@ function PrologueScriptedTourSettlementPanel()
 			end
 
 			tour_settlement_panel:set_show_skip_button(false);
+			tour_settlement_panel:set_should_dismiss_advice_on_completion(false);
 					
 			tour_settlement_panel:action(
 				function() 
@@ -206,12 +221,28 @@ function PrologueScriptedTourSettlementPanel()
 								cm:steal_user_input(true)
 								text_pointer_test_2:hide();
 								core:hide_fullscreen_highlight()
-								cm:callback(function() tour_settlement_panel:start("show_second_text_pointer") end, 0.5)
+								cm:callback(function() tour_settlement_panel:start("show_second_text_pointer") end, 0.5, "overview_button_delay")
+
+								--Clean up if the scripted tour is skipped
+								tour_settlement_panel:add_skip_action(
+									function()
+										cm:remove_callback("overview_button_delay");
+										cm:steal_user_input(false);
+									end
+								);
 							end,
 							false
 						);
+
+						--Clean up if the scripted tour is skipped
+						tour_settlement_panel:add_skip_action(
+							function()
+								core:remove_listener("overview_button_listener");
+							end
+						);
 					end
-					text_pointer_test_2:show();					
+					text_pointer_test_2:show();			
+							
 				end,
 				0
 			);
@@ -219,7 +250,6 @@ function PrologueScriptedTourSettlementPanel()
 			tour_settlement_panel:action(
 				function() 
 					out("STARTING AN ACTION 2 IN TOUR 1") 
-					--text_pointer_test_2:hide();
 
 					local uic_parent = find_uicomponent("settlement_panel", "settlement_list")
 					local uic_child = UIComponent(uic_parent:Find(1))
@@ -228,7 +258,6 @@ function PrologueScriptedTourSettlementPanel()
 					
 					pulse_uicomponent(uic_settlement_panel, false);
 					tour_settlement_panel:show_fullscreen_highlight(false);
-					--tour_test_2:add_fullscreen_highlight("character_details_panel", "skills_subpanel");
 					core:show_fullscreen_highlight_around_components(0, false, true, uic_building_slot);
 
 					local text_pointer_test_3 = text_pointer:new_from_component(
@@ -246,7 +275,7 @@ function PrologueScriptedTourSettlementPanel()
 					text_pointer_test_3:set_close_button_callback(function() tour_settlement_panel:start("show_third_text_pointer") end);
 					text_pointer_test_3:set_highlight_close_button(2);
 					text_pointer_test_3:show();
-					
+							
 				end,
 				0,
 				"show_second_text_pointer"
@@ -255,15 +284,13 @@ function PrologueScriptedTourSettlementPanel()
 			tour_settlement_panel:action(
 				function() 
 					out("STARTING AN ACTION 3 IN TOUR 1") 
-					--text_pointer_test_2:hide();
-					--tour_test_2:show_fullscreen_highlight(false);
 					core:hide_fullscreen_highlight();
 					
 					local uic_parent = find_uicomponent("settlement_panel", "settlement_list")
 					local uic_child = UIComponent(uic_parent:Find(1))
 					local default_slots_list = find_uicomponent(uic_child, "default_slots_list")
 					local uic_building_slot = UIComponent(default_slots_list:Find(2))
-					--tour_test_2:add_fullscreen_highlight("character_details_panel", "skills_subpanel");
+	
 					core:show_fullscreen_highlight_around_components(0, false, true, uic_building_slot);
 
 					local text_pointer_test_4 = text_pointer:new_from_component(
@@ -302,11 +329,9 @@ function PrologueScriptedTourSettlementPanel()
 					if prologue_tutorial_passed["province_info_panel"] == false then
 						cm:callback(function() tour_settlement_panel:start("show_fifth_text_pointer") end, 0.5)
 					end
-					--text_pointer_test_2:hide();
-					--tour_test_2:show_fullscreen_highlight(false);
+
 					core:hide_fullscreen_highlight();
 					
-					--tour_test_2:add_fullscreen_highlight("character_details_panel", "skills_subpanel");
 					core:show_fullscreen_highlight_around_components(0, false, true, uic_settlement_info_panel);
 
 					local text_pointer_test_5 = text_pointer:new_from_component(
@@ -484,12 +509,10 @@ function PrologueScriptedTourPreBattleScreen()
 			local tour_pre_battle_screen = scripted_tour:new(
 				"test_tour_pre_battle_screen",
 				function() uic_button_help:SetDisabled(false); out("FINISHED Pre Battle screen tour") end
-			);
-			
-			--tour_pre_battle_screen:add_fullscreen_highlight("popup_pre_battle");
-			
+			);		
 			
 			tour_pre_battle_screen:set_show_skip_button(false);
+			tour_pre_battle_screen:set_should_dismiss_advice_on_completion(false);
 					
 			tour_pre_battle_screen:action(
 				function() 
@@ -509,11 +532,9 @@ function PrologueScriptedTourPreBattleScreen()
 					text_pointer_test_2:add_component_text("text", "ui_text_replacements_localised_text_prologue_scripted_tour_pre_battle_screen_1_1");
 					text_pointer_test_2:set_style("semitransparent");
 					text_pointer_test_2:set_topmost(true);
-					--text_pointer_test_2:set_label_offset(-100, 0);
 					text_pointer_test_2:set_close_button_callback(function() cm:callback(function() tour_pre_battle_screen:start("show_fourth_text_pointer") end, 0.5) end);
 					text_pointer_test_2:set_highlight_close_button(2);
 					text_pointer_test_2:show();
-					--pulse_uicomponent(uic_pre_battle_screen_allies, 2, 6);
 					
 				end,
 				0
@@ -523,11 +544,9 @@ function PrologueScriptedTourPreBattleScreen()
 			tour_pre_battle_screen:action(
 				function() 
 					out("STARTING AN ACTION 4 IN TOUR 1") 
-					--text_pointer_test_2:hide();
-					--tour_test_2:show_fullscreen_highlight(false);
+
 					core:hide_fullscreen_highlight();
 					
-					--tour_test_2:add_fullscreen_highlight("character_details_panel", "skills_subpanel");
 					core:show_fullscreen_highlight_around_components(0, false, true, uic_enemy_panel);
 
 					local text_pointer_test_5 = text_pointer:new_from_component(
@@ -542,7 +561,6 @@ function PrologueScriptedTourPreBattleScreen()
 					text_pointer_test_5:add_component_text("text", "ui_text_replacements_localised_text_prologue_scripted_tour_pre_battle_screen_1_3");
 					text_pointer_test_5:set_style("semitransparent");
 					text_pointer_test_5:set_topmost(true);
-					--text_pointer_test_5:set_label_offset(100, 0);
 					text_pointer_test_5:set_close_button_callback(function() core:hide_fullscreen_highlight(); cm:callback(function() tour_pre_battle_screen:start("show_seventh_text_pointer") end, 0.5) end)
 					text_pointer_test_5:set_highlight_close_button(2);
 					text_pointer_test_5:show();
@@ -766,12 +784,25 @@ function PrologueScriptedTourUnitsPanel()
 			
 			local tour_units_panel = scripted_tour:new(
 				"test_tour_units_panel",
-				function() uic_button_help:SetDisabled(false); out("FINISHED Units panel tour") end
+				function() uic_button_help:SetDisabled(false); out("FINISHED Units panel tour") core:remove_listener("Cancelling_Units_panel_tour"); end
 			);
 			
 			tour_units_panel:add_fullscreen_highlight("main_units_panel");
-			
+			tour_units_panel:set_should_dismiss_advice_on_completion(false);
 			tour_units_panel:set_show_skip_button(false);
+
+			core:add_listener(
+				"Cancelling_Units_panel_tour",
+				"PanelClosedCampaign",
+				function(context) 
+					return context.string == "units_panel" 
+				end,
+				function()
+					skip_all_scripted_tours();
+				end,
+				false
+			);
+			
 					
 			tour_units_panel:action(
 				function() 
@@ -812,11 +843,9 @@ function PrologueScriptedTourUnitsPanel()
 			tour_units_panel:action(
 				function() 
 					out("STARTING AN ACTION 2 IN TOUR 1") 
-					--text_pointer_test_2:hide();
-					
+			
 					pulse_uicomponent(uic_units_panel, false);
 					tour_units_panel:show_fullscreen_highlight(false);
-					--tour_test_2:add_fullscreen_highlight("character_details_panel", "skills_subpanel");
 					core:show_fullscreen_highlight_around_components(0, false, true, uic_units_panel_upkeep);
 
 					text_pointer_test_3:add_component_text("text", "ui_text_replacements_localised_text_prologue_scripted_tour_units_panel_1_2");
@@ -904,7 +933,7 @@ function PrologueScriptedTourUnitRecruitment()
 			);
 			
 			tour_unit_recruitment:add_fullscreen_highlight("recruitment_options");
-			
+			tour_unit_recruitment:set_should_dismiss_advice_on_completion(false);
 			tour_unit_recruitment:set_show_skip_button(false);
 					
 			tour_unit_recruitment:action(
@@ -937,11 +966,10 @@ function PrologueScriptedTourUnitRecruitment()
 			tour_unit_recruitment:action(
 				function() 
 					out("STARTING AN ACTION 2 IN TOUR 1") 
-					--text_pointer_test_2:hide();
 					
 					pulse_uicomponent(uic_unit_recruitment, false);
 					tour_unit_recruitment:show_fullscreen_highlight(false);
-					--tour_test_2:add_fullscreen_highlight("character_details_panel", "skills_subpanel");
+
 					core:show_fullscreen_highlight_around_components(0, false, true, uic_first_unit);
 
 					local text_pointer_test_3 = text_pointer:new_from_component(
@@ -1094,6 +1122,12 @@ function PrologueScriptedTourGeneralDetails()
 			
 			
 			tour_items_banners:set_show_skip_button(false);
+			tour_items_banners:set_should_dismiss_advice_on_completion(false);
+			tour_items_banners:add_skip_action(
+				function()
+					CampaignUI.ClosePanel("character_details_panel");	
+				end
+			);
 
 			local text_pointer_test_1 = text_pointer:new_from_component(
 				"test1_text_pointer",
@@ -1198,6 +1232,7 @@ function PrologueScriptedTourMissionPanel()
 
 			completely_lock_input(true)
 			allow_hotkeys(false)
+			local skip = false;
 
 			local uic_button_help = find_uicomponent(core:get_ui_root(), "objectives_screen", "button_info")
 			uic_button_help:SetDisabled(true);
@@ -1209,27 +1244,37 @@ function PrologueScriptedTourMissionPanel()
 				"test_tour_missions_panel",
 				function() 
 					local uic_button_close = find_uicomponent(core:get_ui_root(), "hud_campaign", "hud_center_docker", "hud_center", "small_bar", "button_close_holder", "button_close")
-					uic_button_close:Highlight(true, false, 0)
-					pulse_uicomponent(uic_button_help, false, 0, false);
-					
-					core:add_listener(
-						"PanelClosedCampaignStopHighlightCloseButton",
-						"PanelClosedCampaign",
-						function(context) return context.string == "objectives_screen" end,
-						function() uic_button_close:Highlight(false, false, 0); pulse_uicomponent(uic_button_help, false, 3, false); end,
-						true
-					)
 
-					uic_button_help:SetDisabled(false);
-					cm:disable_shortcut("button_missions", "show_objectives", false)
+					if skip == false then
+						uic_button_close:Highlight(true, false, 0)
+						pulse_uicomponent(uic_button_help, false, 0, false);
+						
+						core:add_listener(
+							"PanelClosedCampaignStopHighlightCloseButton",
+							"PanelClosedCampaign",
+							function(context) return context.string == "objectives_screen" end,
+							function() uic_button_close:Highlight(false, false, 0); pulse_uicomponent(uic_button_help, false, 3, false); end,
+							true
+						)
 
-					out("FINISHED mission panel tour") 
+						uic_button_help:SetDisabled(false);
+						cm:disable_shortcut("button_missions", "show_objectives", false)
+
+						out("FINISHED mission panel tour") 
+					else
+						uic_button_help:SetDisabled(false);
+						CampaignUI.ClosePanel("objectives_screen");
+						pulse_uicomponent(uic_button_help, false, 3, false);
+						pulse_uicomponent(uic_missions_panel, false);
+						core:remove_listener("PanelClosedCampaignStopHighlightCloseButton");
+						cm:steal_user_input(false);
+					end
 				end
 			);
 			
 			tour_missions_panel:add_fullscreen_highlight("objectives_screen");
 			tour_missions_panel:set_allow_fullscreen_highlight_window_interaction(false);
-			
+			tour_missions_panel:set_should_dismiss_advice_on_completion(false);
 			tour_missions_panel:set_show_skip_button(false);
 					
 			tour_missions_panel:action(
@@ -1253,11 +1298,22 @@ function PrologueScriptedTourMissionPanel()
 					text_pointer_test_2:add_component_text("text", "ui_text_replacements_localised_text_prologue_scripted_tour_missions_panel_1_1");
 					text_pointer_test_2:set_style("semitransparent");
 					text_pointer_test_2:set_topmost(true);
-					--text_pointer_test_2:set_label_offset(-100, 0);
-					text_pointer_test_2:set_close_button_callback(function() tour_missions_panel:start("show_second_text_pointer") end);
+					text_pointer_test_2:set_close_button_callback(function() 
+						if find_uicomponent(core:get_ui_root(), "hud_campaign", "mission_list") then
+							tour_missions_panel:start("show_second_text_pointer") 
+						else
+							core:hide_fullscreen_highlight(); end_scripted_tour_prologue(tour_missions_panel, false, true, true, true);
+						end
+					end);
 					text_pointer_test_2:set_highlight_close_button(2);
 					text_pointer_test_2:show();
 					pulse_uicomponent(uic_missions_panel, 2, 6);
+
+					tour_missions_panel:add_skip_action(
+						function()
+							skip = true;
+						end
+					);
 					
 				end,
 				0
@@ -1277,7 +1333,6 @@ function PrologueScriptedTourMissionPanel()
 			tour_missions_panel:action(
 				function() 
 					out("STARTING AN ACTION 2 IN TOUR 1") 
-					--text_pointer_test_2:hide();
 					local uic_events_button = find_uicomponent(core:get_ui_root(), "tab_events");
 
 					if uic_events_button and uic_events_button:CurrentState() == "selected" then
@@ -1295,6 +1350,12 @@ function PrologueScriptedTourMissionPanel()
 					text_pointer_test_3:set_close_button_callback(function() core:hide_fullscreen_highlight(); end_scripted_tour_prologue(tour_missions_panel, false, true, true, true)  end);
 					text_pointer_test_3:set_highlight_close_button(2);
 					text_pointer_test_3:show();
+
+					tour_missions_panel:add_skip_action(
+						function()
+							skip = true;
+						end
+					);
 					
 				end,
 				0,
@@ -1322,11 +1383,12 @@ function PrologueScriptedTourLordRecruit()
 			local uic_lord_recruit_panel = find_uicomponent(core:get_ui_root(), "character_panel");
 			
 			local tour_lord_recruit = scripted_tour:new(
-				"test2_tour",
+				"tour_lord_recruit",
 				function() uic_button_help:SetDisabled(false); out("FINISHED LORD RECRUITMENT TOUR") end
 			);
 			
 			tour_lord_recruit:set_show_skip_button(false);
+			tour_lord_recruit:set_should_dismiss_advice_on_completion(false);
 			core:show_fullscreen_highlight_around_components(0, false, true, uic_lord_recruit_panel);
 					
 			tour_lord_recruit:action(
@@ -1344,11 +1406,9 @@ function PrologueScriptedTourLordRecruit()
 					text_pointer_test_2:add_component_text("text", "ui_text_replacements_localised_text_prologue_scripted_tour_lord_recruitment_panel_1_1");
 					text_pointer_test_2:set_style("semitransparent");
 					text_pointer_test_2:set_topmost(true);
-					--text_pointer_test_2:set_label_offset(-100, 0);
 					text_pointer_test_2:set_close_button_callback(function() tour_lord_recruit:start("show_second_text_pointer") end);
 					text_pointer_test_2:set_highlight_close_button(2);
 					text_pointer_test_2:show();
-					--pulse_uicomponent(uic_lord_recruit_panel, 2, 6);
 					
 				end,
 				0
@@ -1370,11 +1430,8 @@ function PrologueScriptedTourLordRecruit()
 			tour_lord_recruit:action(
 				function() 
 					out("STARTING AN ACTION 2 IN TOUR 1") 
-					--text_pointer_test_2:hide();
 					core:hide_fullscreen_highlight();
-					--pulse_uicomponent(uic_missions_panel, false);
 					tour_lord_recruit:show_fullscreen_highlight(false);
-					--tour_test_2:add_fullscreen_highlight("character_details_panel", "skills_subpanel");
 					core:show_fullscreen_highlight_around_components(0, false, true, uic_general);
 
 					text_pointer_test_3:add_component_text("text", "ui_text_replacements_localised_text_prologue_scripted_tour_lord_recruitment_panel_1_2");
@@ -1416,6 +1473,7 @@ function PrologueScriptedTourTechnologyPanel()
 			);
 			
 			tour_technology_panel:set_show_skip_button(false);
+			tour_technology_panel:set_should_dismiss_advice_on_completion(false);
 			tour_technology_panel:add_fullscreen_highlight("technology_panel");
 			tour_technology_panel:action(
 				function() 
@@ -1440,8 +1498,7 @@ function PrologueScriptedTourTechnologyPanel()
 						local uic_technology_time = find_uicomponent(core:get_ui_root(), "technology_panel", "tree_parent", "wh3_main_tech_ksl_1_1_prologue", "dy_time");
 						if uic_technology_time == false then
 							tour_technology_panel:start("show_fourth_text_pointer"); 
-						else
-							--text_pointer_test_2:hide(); 
+						else 
 							text_pointer_test_3:hide(); 
 							tour_technology_panel:start("show_third_text_pointer"); 
 						end
@@ -1536,6 +1593,8 @@ function PrologueScriptedTourAgents()
 			local uic_embedded_effects
 			local tour_agents = scripted_tour:new("tour_agents", function() completely_lock_input(false); allow_hotkeys(true) end)
 		
+			tour_agents:set_should_dismiss_advice_on_completion(false);
+
 			tour_agents:action(
 				function()
 					out("STARTING_SCRIPTED_TOUR_I_AGENTS_1")
@@ -1666,7 +1725,7 @@ function PrologueScriptedTourDiplomacy()
 			local uic_faction_panel
 			local uic_offers_panel
 			local st = scripted_tour:new("st", function() completely_lock_input(false); allow_hotkeys(true) end)
-			
+			st:set_should_dismiss_advice_on_completion(false);
 			st:action(
 				function()
 					out("STARTING_SCRIPTED_TOUR_I_DIPLOMACY_1")

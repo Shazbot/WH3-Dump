@@ -36,14 +36,12 @@ function setup_campaign_help_pages()
 	-- Supply an optional third parameter - this should be a function that returns true or false
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_province_overview_panel", "settlement_panel");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_war_coordination", "war_coordination_panel");		-- needs to be above "diplomacy_dropdown"
-	hpm:register_help_page_to_info_button_mapping("script_link_campaign_diplomacy_screen", "diplomacy_dropdown");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_faction_summary_screen", "clan");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_treasury_panel", "finance_screen");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_missions", "objectives_screen");	
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_pre_battle_panel", "battle_information_panel");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_siege_panel", "siege_information_panel");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_post_battle_panel", "battle_results");
-	hpm:register_help_page_to_info_button_mapping("script_link_campaign_intrigue_at_the_court", "intrigue_panel");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_slaves", "slaves_panel");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_the_menace_below", "ability_charge_panel");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_banners_and_marks", "ancillary_banners_background");
@@ -63,6 +61,7 @@ function setup_campaign_help_pages()
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_public_order", "key_region_happiness");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_diplomacy", "key_diplomacy_status");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_diplomacy", "key_diplomacy_attitude_faction");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_diplomacy_screen", "diplomacy_dropdown");			-- needs to come after key_*
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_rituals", "chain_ritual_details");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_intervention_armies", "interrupt_options");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_books_of_nagash", "books_of_nagash");
@@ -78,7 +77,7 @@ function setup_campaign_help_pages()
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_flesh_lab", "augment_panel");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_forge_of_daith", "forge_of_daith_panel");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_rampage", "rampage_panel");
-	hpm:register_help_page_to_info_button_mapping("script_link_campaign_beastmen", "beastmen_panel");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_dread", "beastmen_panel");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_oxyotl_visions", "threat_map_panel");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_changing_of_the_ways", "tzeentch_changing_of_ways");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_daemonic_glory", "daemonic_progression");
@@ -95,6 +94,25 @@ function setup_campaign_help_pages()
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_unholy_manifestations", "great_game_rituals");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_rites", "rituals_panel");				-- needs to come after unholy_manifestations
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_sea_lanes", "sea_lanes_panel");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_grudges", "book_of_grudges");
+	
+	hpm:register_help_page_to_info_button_mapping(
+		"script_link_campaign_intrigue_at_the_court",
+		"intrigue_panel",
+		function()
+			local faction = cm:get_faction(local_faction);
+			return faction and faction:culture() == "wh2_main_hef_high_elves";
+		end
+	);
+	
+	hpm:register_help_page_to_info_button_mapping(
+		"script_link_campaign_imperial_authority",
+		"intrigue_panel",
+		function()
+			local faction = cm:get_faction(local_faction);
+			return faction and faction:culture() == "wh_main_emp_empire";
+		end
+	);
 
 	hpm:register_help_page_to_info_button_mapping(
 		"script_link_campaign_meat", 
@@ -156,14 +174,9 @@ function setup_campaign_help_pages()
 		"script_link_campaign_unit_recruitment",
 		"recruitment_options",
 		function()
-			local local_faction_culture = cm:get_local_faction_culture(true);
-			if local_faction_culture == "wh3_main_nur_nurgle" then
-				return;
-			end;
-			local uic_raise_dead = find_uicomponent(ui_root, "main_units_panel", "button_raise_dead");
-			local uic_monster_pens = find_uicomponent(ui_root, "main_units_panel", "button_hire_monster_pen");
-			local uic_regiments_of_renown = find_uicomponent(ui_root, "main_units_panel", "button_hire_renown");
-			return uic_raise_dead and uic_regiments_of_renown and not uic_regiments_of_renown:Visible(true) and not uic_raise_dead:Visible(true) and not uic_monster_pens:Visible(true);
+			local uic_recruitment = find_uicomponent(ui_root, "hud_center", "button_group_army", "button_recruitment");
+			
+			return cm:get_local_faction_culture(true) ~= "wh3_main_nur_nurgle" and uic_recruitment and uic_recruitment:CurrentState() == "selected";
 		end
 	);
 
@@ -179,8 +192,49 @@ function setup_campaign_help_pages()
 		"script_link_campaign_raising_dead",
 		"recruitment_options",
 		function()
-			local uic_raise_dead = find_uicomponent(ui_root, "main_units_panel", "button_raise_dead");
-			return uic_raise_dead and uic_raise_dead:Visible(true);
+			local uic_raise_dead = find_uicomponent(ui_root, "hud_center", "button_group_army", "button_mercenary_recruit_raise_dead");
+			
+			return uic_raise_dead and uic_raise_dead:CurrentState() == "selected";
+		end
+	);
+	
+	hpm:register_help_page_to_info_button_mapping(
+		"script_link_campaign_summon_elector_counts",
+		"recruitment_options",
+		function()
+			local uic_imperial_supply = find_uicomponent(ui_root, "hud_center", "button_group_army", "button_mercenary_recruit_imperial_supply");
+			local faction = cm:get_faction(local_faction);
+			return faction and faction:name() ~= "wh2_dlc13_emp_the_huntmarshals_expedition" and uic_imperial_supply and uic_imperial_supply:CurrentState() == "selected";
+		end
+	);
+	
+	hpm:register_help_page_to_info_button_mapping(
+		"script_link_campaign_emperors_mandate",
+		"recruitment_options",
+		function()
+			local uic_imperial_supply = find_uicomponent(ui_root, "hud_center", "button_group_army", "button_mercenary_recruit_imperial_supply");
+			local faction = cm:get_faction(local_faction);
+			return faction and faction:name() == "wh2_dlc13_emp_the_huntmarshals_expedition" and uic_imperial_supply and uic_imperial_supply:CurrentState() == "selected";
+		end
+	);
+	
+	hpm:register_help_page_to_info_button_mapping(
+		"script_link_campaign_blessed_spawnings",
+		"recruitment_options",
+		function()
+			local uic_blessed_spawning = find_uicomponent(ui_root, "hud_center", "button_group_army", "button_mercenary_recruit_blessed_spawning");
+			
+			return uic_blessed_spawning and uic_blessed_spawning:CurrentState() == "selected";
+		end
+	);
+	
+	hpm:register_help_page_to_info_button_mapping(
+		"script_link_campaign_flesh_lab",
+		"recruitment_options",
+		function()
+			local uic_flesh_lab = find_uicomponent(ui_root, "hud_center", "button_group_army", "button_mercenary_recruit_flesh_lab");
+			
+			return uic_flesh_lab and uic_flesh_lab:CurrentState() == "selected";
 		end
 	);
 	
@@ -188,12 +242,9 @@ function setup_campaign_help_pages()
 		"script_link_campaign_regiments_of_renown",
 		"recruitment_options",
 		function()
-			local local_faction_culture = cm:get_local_faction_culture(true);
-			if local_faction_culture == "wh3_main_nur_nurgle" then
-				return;
-			end;
-			local uic_regiments_of_renown = find_uicomponent(ui_root, "main_units_panel", "button_hire_renown");
-			return uic_regiments_of_renown and uic_regiments_of_renown:Visible(true);
+			local uic_regiments_of_renown = find_uicomponent(ui_root, "hud_center", "button_group_army", "button_mercenary_recruit_renown");
+			
+			return uic_regiments_of_renown and uic_regiments_of_renown:CurrentState() == "selected";
 		end
 	);
 
@@ -201,8 +252,9 @@ function setup_campaign_help_pages()
 		"script_link_campaign_monster_pens",
 		"recruitment_options",
 		function()
-			local uic_monster_pens = find_uicomponent(ui_root, "main_units_panel", "button_hire_monster_pen");
-			return uic_monster_pens and uic_monster_pens:Visible(true);
+			local uic_monster_pens = find_uicomponent(ui_root, "hud_center", "button_group_army", "button_mercenary_recruit_monster_pen");
+			
+			return uic_monster_pens and uic_monster_pens:CurrentState() == "selected";
 		end
 	);
 
@@ -210,8 +262,19 @@ function setup_campaign_help_pages()
 		"script_link_campaign_nurgle",
 		"recruitment_options",
 		function()
-			local local_faction_culture = cm:get_local_faction_culture(true);
-			return local_faction_culture == "wh3_main_nur_nurgle";
+			local uic_recruitment = find_uicomponent(ui_root, "hud_center", "button_group_army", "button_recruitment");
+			
+			return cm:get_local_faction_culture(true) == "wh3_main_nur_nurgle" and uic_recruitment and uic_recruitment:CurrentState() == "selected";
+		end
+	);
+
+	hpm:register_help_page_to_info_button_mapping(
+		"script_link_campaign_ogre_camps",
+		"recruitment_options",
+		function()
+			local uic_mercenaries = find_uicomponent(ui_root, "hud_center", "button_group_army", "button_mercenary_recruit_mercenary_recruitment");
+			
+			return uic_mercenaries and uic_mercenaries:CurrentState() == "selected";
 		end
 	);
 	
@@ -503,7 +566,7 @@ function setup_campaign_help_pages()
 		hpr_title("war.camp.hp.contents.010", "campaign_game"),
 		hpr_image("war.camp.hp.contents.011", "UI/help_images/campaign_game.png", "campaign_game"),
 		hpr_normal("war.camp.hp.contents.012", "campaign_game"),
-		hpr_section_index("campaign_game", "campaign_map"),
+		hpr_section_index("campaign_game", "campaign_campaign_map"),
 
 		hpr_section("realm_of_chaos"),
 		hpr_title("war.camp.hp.contents.020", "realm_of_chaos"),
@@ -836,10 +899,7 @@ function setup_campaign_help_pages()
 		hpr_title("war.camp.hp.wood_elves_ariel.001"),
 		hpr_leader("war.camp.hp.wood_elves_ariel.002"),
 		hpr_normal("war.camp.hp.wood_elves_ariel.003"),
-		hpr_normal("war.camp.hp.wood_elves_ariel.004"),
-		hpr_normal("war.camp.hp.wood_elves_ariel.005"),
-		hpr_normal("war.camp.hp.wood_elves_ariel.006"),
-		hpr_normal("war.camp.hp.wood_elves_ariel.007")
+		hpr_normal("war.camp.hp.wood_elves_ariel.004")
 	);
 	parser:add_record("campaign_ariel", "script_link_campaign_ariel", "tooltip_campaign_ariel");
 	tp_ariel = tooltip_patcher:new("tooltip_campaign_ariel");
@@ -919,7 +979,11 @@ function setup_campaign_help_pages()
 
 		hpr_section("encounters"),
 		hpr_normal_unfaded("war.camp.hp.armies_at_sea.008", "encounters"),
-		hpr_normal("war.camp.hp.armies_at_sea.009", "encounters")
+		hpr_normal("war.camp.hp.armies_at_sea.009", "encounters"),
+
+		hpr_section("sea_lanes"),
+		hpr_normal_unfaded("war.camp.hp.armies_at_sea.010", "sea_lanes"),
+		hpr_normal("war.camp.hp.armies_at_sea.011", "sea_lanes")
 	);
 	parser:add_record("campaign_armies_at_sea", "script_link_campaign_armies_at_sea", "tooltip_campaign_armies_at_sea");
 	tp_armies_at_sea = tooltip_patcher:new("tooltip_campaign_armies_at_sea");
@@ -1643,8 +1707,7 @@ function setup_campaign_help_pages()
 		hpr_leader("war.camp.hp.blood_voyage.002"),
 		hpr_normal("war.camp.hp.blood_voyage.003"),
 		hpr_normal("war.camp.hp.blood_voyage.004"),
-		hpr_normal("war.camp.hp.blood_voyage.005"),
-		hpr_normal("war.camp.hp.blood_voyage.006")
+		hpr_normal("war.camp.hp.blood_voyage.005")
 	);
 	parser:add_record("campaign_blood_voyage", "script_link_campaign_blood_voyage", "tooltip_campaign_blood_voyage");
 	tp_blood_voyage = tooltip_patcher:new("tooltip_campaign_blood_voyage");
@@ -1867,7 +1930,7 @@ function setup_campaign_help_pages()
 		"script_link_campaign_bretonnian_vows",
 		hpr_title("war.camp.hp.bretonnian_vows.001"),
 		hpr_leader("war.camp.hp.bretonnian_vows.002"),
-		hpr_leader("war.camp.hp.bretonnian_vows.003"),
+		hpr_normal("war.camp.hp.bretonnian_vows.003"),
 		hpr_normal("war.camp.hp.bretonnian_vows.004"),
 		hpr_normal("war.camp.hp.bretonnian_vows.005"),
 		hpr_normal("war.camp.hp.bretonnian_vows.006"),
@@ -3579,6 +3642,15 @@ function setup_campaign_help_pages()
 	tp_dedication = tooltip_patcher:new("tooltip_campaign_dedication");
 	tp_dedication:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_dedication", "ui_text_replacements_localised_text_hp_campaign_description_dedication");
 	
+	tl_daemonic_gifts = tooltip_listener:new(
+		"tooltip_campaign_dedication", 
+		function() 
+			uim:highlight_daemonic_glory_panel(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
 
 
 	--
@@ -3612,8 +3684,7 @@ function setup_campaign_help_pages()
 		hpr_normal("war.camp.hp.lizardmen_defence_great_plan.004"),
 		hpr_normal("war.camp.hp.lizardmen_defence_great_plan.005"),
 		hpr_normal("war.camp.hp.lizardmen_defence_great_plan.006"),
-		hpr_normal("war.camp.hp.lizardmen_defence_great_plan.007"),
-		hpr_normal("war.camp.hp.lizardmen_defence_great_plan.008")
+		hpr_normal("war.camp.hp.lizardmen_defence_great_plan.007")
 	);
 	parser:add_record("campaign_defence_great_plan", "script_link_campaign_defence_great_plan", "tooltip_campaign_defence_great_plan");
 	tp_defence_great_plan = tooltip_patcher:new("tooltip_campaign_defence_great_plan");
@@ -4270,7 +4341,9 @@ function setup_campaign_help_pages()
 	hp_elven_halls = help_page:new(
 		"script_link_campaign_elven_halls",
 		hpr_title("war.camp.hp.elven_halls.001"),
-		hpr_leader("war.camp.hp.elven_halls.002")
+		hpr_leader("war.camp.hp.elven_halls.002"),
+		hpr_normal("war.camp.hp.elven_halls.003"),
+		hpr_normal("war.camp.hp.elven_halls.004")
 	);
 	parser:add_record("campaign_elven_halls", "script_link_campaign_elven_halls", "tooltip_campaign_elven_halls");
 	tp_elven_halls = tooltip_patcher:new("tooltip_campaign_elven_halls");
@@ -4762,7 +4835,7 @@ function setup_campaign_help_pages()
 	tl_forbidden_workshop = tooltip_listener:new(
 		"tooltip_campaign_forbidden_workshop", 
 		function()
-			script_error("WARNING: forbidden_workshop help page link tooltip shown but no highlight script created for it");
+			-- script_error("WARNING: forbidden_workshop help page link tooltip shown but no highlight script created for it");
 			-- uim:highlight_forbidden_workshop_button(true);
 		end,
 		function() 
@@ -5339,8 +5412,7 @@ function setup_campaign_help_pages()
 		hpr_normal("war.camp.hp.gods.003"),
 		hpr_normal("war.camp.hp.gods.004"),
 		hpr_normal("war.camp.hp.gods.005"),
-		hpr_normal("war.camp.hp.gods.006"),
-		hpr_normal("war.camp.hp.gods.007")
+		hpr_normal("war.camp.hp.gods.006")
 	);
 	parser:add_record("campaign_gods", "script_link_campaign_gods", "tooltip_campaign_gods");
 	tp_gods = tooltip_patcher:new("tooltip_campaign_gods");
@@ -5414,7 +5486,16 @@ function setup_campaign_help_pages()
 	tp_great_bastion = tooltip_patcher:new("tooltip_campaign_great_bastion");
 	tp_great_bastion:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_great_bastion", "ui_text_replacements_localised_text_hp_campaign_description_great_bastion");
 
-
+	tl_great_bastion = tooltip_listener:new(
+		"tooltip_campaign_great_bastion", 
+		function() 
+			uim:highlight_great_bastion(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+	
 
 	--
 	-- great_bastion_link
@@ -6344,6 +6425,16 @@ function setup_campaign_help_pages()
 	tp_influence = tooltip_patcher:new("tooltip_campaign_influence");
 	tp_influence:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_influence", "ui_text_replacements_localised_text_hp_campaign_description_influence");
 	
+	tl_influence = tooltip_listener:new(
+		"tooltip_campaign_influence", 
+		function() 
+			uim:highlight_influence(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+	
 	
 	
 	--
@@ -6421,6 +6512,16 @@ function setup_campaign_help_pages()
 	parser:add_record("campaign_intrigue_at_the_court", "script_link_campaign_intrigue_at_the_court", "tooltip_campaign_intrigue_at_the_court");
 	tp_intrigue_at_the_court = tooltip_patcher:new("tooltip_campaign_intrigue_at_the_court");
 	tp_intrigue_at_the_court:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_intrigue_at_the_court", "ui_text_replacements_localised_text_hp_campaign_description_intrigue_at_the_court");
+	
+	intrigue_at_the_court = tooltip_listener:new(
+		"tooltip_campaign_intrigue_at_the_court",
+		function()
+			uim:highlight_intrigue_at_the_court_button(true);
+		end,
+		function()
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
 	
 	
 	
@@ -6558,8 +6659,7 @@ function setup_campaign_help_pages()
 		hpr_title("war.camp.hp.lizardmen_jungle_nexus.001"),
 		hpr_leader("war.camp.hp.lizardmen_jungle_nexus.002"),
 		hpr_normal("war.camp.hp.lizardmen_jungle_nexus.003"),
-		hpr_normal("war.camp.hp.lizardmen_jungle_nexus.004"),
-		hpr_normal("war.camp.hp.lizardmen_jungle_nexus.005")
+		hpr_normal("war.camp.hp.lizardmen_jungle_nexus.004")
 	);
 	parser:add_record("campaign_jungle_nexus", "script_link_campaign_jungle_nexus", "tooltip_campaign_jungle_nexus");
 	tp_jungle_nexus = tooltip_patcher:new("tooltip_campaign_jungle_nexus");
@@ -6730,7 +6830,10 @@ function setup_campaign_help_pages()
 		hpr_normal("war.camp.hp.lizardmen_lord_kroak.003"),
 		hpr_normal("war.camp.hp.lizardmen_lord_kroak.004"),
 		hpr_normal("war.camp.hp.lizardmen_lord_kroak.005"),
-		hpr_normal("war.camp.hp.lizardmen_lord_kroak.006")
+
+		hpr_section("gor_rok"),
+		hpr_normal_unfaded("war.camp.hp.lizardmen_lord_kroak.006", "gor_rok"),
+		hpr_normal("war.camp.hp.lizardmen_lord_kroak.007", "gor_rok")
 	);
 	parser:add_record("campaign_lord_kroak", "script_link_campaign_lord_kroak", "tooltip_campaign_lord_kroak");
 	tp_lord_kroak = tooltip_patcher:new("tooltip_campaign_lord_kroak");
@@ -6979,8 +7082,7 @@ function setup_campaign_help_pages()
 		hpr_normal("war.camp.hp.monsters.003"),
 		hpr_normal("war.camp.hp.monsters.004"),
 		hpr_normal("war.camp.hp.monsters.005"),
-		hpr_normal("war.camp.hp.monsters.006"),
-		hpr_normal("war.camp.hp.monsters.007")
+		hpr_normal("war.camp.hp.monsters.006")
 	);
 	parser:add_record("campaign_monsters", "script_link_campaign_monsters", "tooltip_campaign_monsters");
 	tp_monsters = tooltip_patcher:new("tooltip_campaign_monsters");
@@ -7359,7 +7461,8 @@ function setup_campaign_help_pages()
 	hp_oak_of_ages = help_page:new(
 		"script_link_campaign_oak_of_ages",
 		hpr_title("war.camp.hp.oak_of_ages.001"),
-		hpr_leader("war.camp.hp.oak_of_ages.002")
+		hpr_leader("war.camp.hp.oak_of_ages.002"),
+		hpr_normal("war.camp.hp.oak_of_ages.003")
 	);
 	parser:add_record("campaign_oak_of_ages", "script_link_campaign_oak_of_ages", "tooltip_campaign_oak_of_ages");
 	tp_oak_of_ages = tooltip_patcher:new("tooltip_campaign_oak_of_ages");
@@ -9123,7 +9226,7 @@ function setup_campaign_help_pages()
 	hp_resources = help_page:new(
 		"script_link_campaign_resources",
 		hpr_title("war.camp.hp.resources.001"),
-		hpr_normal("war.camp.hp.resources.002"),
+		hpr_leader("war.camp.hp.resources.002"),
 		hpr_normal("war.camp.hp.resources.003"),
 		hpr_normal("war.camp.hp.resources.004"),
 		hpr_normal("war.camp.hp.resources.005"),
@@ -9192,7 +9295,7 @@ function setup_campaign_help_pages()
 	tp_rites_button:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_campaign_description_rites_button");
 	
 	tl_rites_button = tooltip_listener:new(
-		"tooltip_campaign_rites_button",
+		"tooltip_campaign_rites",
 		function()
 			uim:highlight_rites_button(true);
 		end,
@@ -9442,7 +9545,7 @@ function setup_campaign_help_pages()
 	tl_sacrifice_to_sotek = tooltip_listener:new(
 		"tooltip_campaign_sacrifice_to_sotek", 
 		function()
-			script_error("WARNING: sacrifice_to_sotek help page link tooltip shown but no highlight script created for it");
+			-- script_error("WARNING: sacrifice_to_sotek help page link tooltip shown but no highlight script created for it");
 			-- uim:highlight_sacrifice_to_sotek_button(true) 
 		end,
 		function() 
@@ -9461,7 +9564,7 @@ function setup_campaign_help_pages()
 	tl_sacrifice_to_sotek_panel = tooltip_listener:new(
 		"tooltip_campaign_sacrifice_to_sotek_panel",
 		function()
-			uim:highlight_sacrifice_to_sotek_panel(true);
+			-- uim:highlight_sacrifice_to_sotek_panel(true);
 		end,
 		function()
 			uim:unhighlight_all_for_tooltips();
@@ -9518,7 +9621,8 @@ function setup_campaign_help_pages()
 		hpr_normal("war.camp.hp.sea.004"),
 		hpr_normal("war.camp.hp.sea.005"),
 		hpr_normal("war.camp.hp.sea.006"),
-		hpr_normal("war.camp.hp.sea.007")
+		hpr_normal("war.camp.hp.sea.007"),
+		hpr_normal("war.camp.hp.sea.008")
 	);
 	parser:add_record("campaign_sea", "script_link_campaign_sea", "tooltip_campaign_sea");
 	tp_sea = tooltip_patcher:new("tooltip_campaign_sea");
@@ -9526,14 +9630,15 @@ function setup_campaign_help_pages()
 	
 	
 	--
-	-- sea lane
+	-- sea lanes
 	--
 
 	hp_sea_lane = help_page:new(
 		"script_link_campaign_sea_lanes",
 		hpr_title("war.camp.hp.sea_lane.001"),
 		hpr_leader("war.camp.hp.sea_lane.002"),
-		hpr_normal("war.camp.hp.sea_lane.003")
+		hpr_normal("war.camp.hp.sea_lane.003"),
+		hpr_normal("war.camp.hp.sea_lane.004")
 	);
 	parser:add_record("campaign_sea_lanes", "script_link_campaign_sea_lanes", "tooltip_campaign_sea_lanes");
 	tp_sea_lane = tooltip_patcher:new("tooltip_campaign_sea_lanes");
@@ -9833,8 +9938,11 @@ function setup_campaign_help_pages()
 		hpr_normal("war.camp.hp.shadowy_dealings.003"),
 		hpr_normal("war.camp.hp.shadowy_dealings.004"),
 		hpr_normal("war.camp.hp.shadowy_dealings.005"),
-		hpr_normal("war.camp.hp.shadowy_dealings.006"),
-		hpr_normal("war.camp.hp.shadowy_dealings.007")
+
+		hpr_section("contracts"),
+		hpr_normal_unfaded("war.camp.hp.shadowy_dealings.006", "contracts"),
+		hpr_normal("war.camp.hp.shadowy_dealings.007", "contracts"),
+		hpr_normal("war.camp.hp.shadowy_dealings.008", "contracts")
 	);
 	parser:add_record("campaign_skaven_shadowy_dealings", "script_link_campaign_skaven_shadowy_dealings", "tooltip_campaign_skaven_shadowy_dealings");
 	tp_shadowy_dealings = tooltip_patcher:new("tooltip_campaign_skaven_shadowy_dealings");
@@ -10775,7 +10883,6 @@ function setup_campaign_help_pages()
 		"script_link_campaign_teleport_stance",
 		hpr_title("war.camp.hp.teleport_stance.001"),
 		hpr_leader("war.camp.hp.teleport_stance.002"),
-		hpr_normal("war.camp.hp.teleport_stance.003"),
 		hpr_normal("war.camp.hp.teleport_stance.004"),
 		hpr_normal("war.camp.hp.teleport_stance.005"),
 		hpr_normal("war.camp.hp.teleport_stance.006")
@@ -10898,7 +11005,6 @@ function setup_campaign_help_pages()
 		hpr_normal("war.camp.hp.trade.004"),
 		hpr_normal("war.camp.hp.trade.005"),
 		hpr_normal("war.camp.hp.trade.006"),
-		hpr_normal("war.camp.hp.trade.007"),
 		hpr_normal("war.camp.hp.trade.009")
 	);
 	parser:add_record("campaign_trade", "script_link_campaign_trade", "tooltip_campaign_trade");
@@ -11132,7 +11238,8 @@ function setup_campaign_help_pages()
 		"script_link_campaign_tribal_confederation",
 		hpr_title("war.camp.hp.tribal_confederation.001"),
 		hpr_leader("war.camp.hp.tribal_confederation.002"),
-		hpr_normal("war.camp.hp.tribal_confederation.003")
+		hpr_normal("war.camp.hp.tribal_confederation.003"),
+		hpr_normal("war.camp.hp.tribal_confederation.004")
 	);
 	parser:add_record("campaign_tribal_confederation", "script_link_campaign_tribal_confederation", "tooltip_campaign_tribal_confederation");
 	tp_tribal_confederation = tooltip_patcher:new("tooltip_campaign_tribal_confederation");
@@ -11902,7 +12009,8 @@ function setup_campaign_help_pages()
 		hpr_normal("war.camp.hp.waaagh.003"),
 		hpr_normal("war.camp.hp.waaagh.004"),
 		hpr_normal("war.camp.hp.waaagh.005"),
-		hpr_normal("war.camp.hp.waaagh.006")
+		hpr_normal("war.camp.hp.waaagh.006"),
+		hpr_normal("war.camp.hp.waaagh.007")
 	);
 	parser:add_record("campaign_waaagh", "script_link_campaign_waaagh", "tooltip_campaign_waaagh");
 	tp_waaagh = tooltip_patcher:new("tooltip_campaign_waaagh");
@@ -11934,8 +12042,7 @@ function setup_campaign_help_pages()
 		hpr_title("war.camp.hp.lizardmen_warmblood_invaders.001"),
 		hpr_leader("war.camp.hp.lizardmen_warmblood_invaders.002"),
 		hpr_normal("war.camp.hp.lizardmen_warmblood_invaders.003"),
-		hpr_normal("war.camp.hp.lizardmen_warmblood_invaders.004"),
-		hpr_normal("war.camp.hp.lizardmen_warmblood_invaders.005")
+		hpr_normal("war.camp.hp.lizardmen_warmblood_invaders.004")
 	);
 	parser:add_record("campaign_warmblood_invaders", "script_link_campaign_warmblood_invaders", "tooltip_campaign_warmblood_invaders");
 	tp_warmblood_invaders = tooltip_patcher:new("tooltip_campaign_warmblood_invaders");
@@ -12361,11 +12468,11 @@ function setup_campaign_help_pages()
 	
 	
 	--
-	-- worldroots NEW
+	-- worldroots [NEW]
 	--
 
 	hp_worldroots = help_page:new(
-		"script_link_campaign_new_worldroots",
+		"script_link_campaign_worldroots",
 		hpr_title("war.camp.hp.wood_elves_new_worldroots.001"),
 		hpr_leader("war.camp.hp.wood_elves_new_worldroots.002"),
 		hpr_normal("war.camp.hp.wood_elves_new_worldroots.003"),
@@ -12374,9 +12481,9 @@ function setup_campaign_help_pages()
 		hpr_normal("war.camp.hp.wood_elves_new_worldroots.006"),
 		hpr_normal("war.camp.hp.wood_elves_new_worldroots.007")
 	);
-	parser:add_record("campaign_new_worldroots", "script_link_campaign_new_worldroots", "tooltip_campaign_new_worldroots");
-	tp_new_worldroots = tooltip_patcher:new("tooltip_campaign_new_worldroots");
-	tp_new_worldroots:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_wood_elves_new_worldroots", "ui_text_replacements_localised_text_hp_campaign_description_wood_elves_new_worldroots");
+	parser:add_record("campaign_worldroots", "script_link_campaign_worldroots", "tooltip_campaign_worldroots");
+	tp_worldroots = tooltip_patcher:new("tooltip_campaign_worldroots");
+	tp_worldroots:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_wood_elves_new_worldroots", "ui_text_replacements_localised_text_hp_campaign_description_wood_elves_new_worldroots");
 	
 	
 
@@ -12389,9 +12496,7 @@ function setup_campaign_help_pages()
 		hpr_title("war.camp.hp.empire_wulfharts_hunters.001"),
 		hpr_leader("war.camp.hp.empire_wulfharts_hunters.002"),
 		hpr_normal("war.camp.hp.empire_wulfharts_hunters.003"),
-		hpr_normal("war.camp.hp.empire_wulfharts_hunters.004"),
-		hpr_normal("war.camp.hp.empire_wulfharts_hunters.005"),
-		hpr_normal("war.camp.hp.empire_wulfharts_hunters.006")
+		hpr_normal("war.camp.hp.empire_wulfharts_hunters.004")
 	);
 	parser:add_record("campaign_wulfharts_hunters", "script_link_campaign_wulfharts_hunters", "tooltip_campaign_wulfharts_hunters");
 	tp_wulfharts_hunters = tooltip_patcher:new("tooltip_campaign_wulfharts_hunters");

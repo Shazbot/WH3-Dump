@@ -104,23 +104,23 @@ function end_deployment_phase()
 --wh2_dlc17_bst_taurox_final_battle_pt_05 - 15s
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(taurox_intro_01) end, 2000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_bst_taurox_final_battle_pt_01", "subtitle_with_frame", 9, true) end, 2000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_bst_taurox_final_battle_pt_01", "subtitle_with_frame", 0.1, true) end, 2000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 11000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(taurox_intro_02) end, 11500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_bst_taurox_final_battle_pt_02", "subtitle_with_frame", 10, true) end, 11500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_bst_taurox_final_battle_pt_02", "subtitle_with_frame", 0.1, true) end, 11500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 21500);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(taurox_intro_03) end, 22000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_bst_taurox_final_battle_pt_03", "subtitle_with_frame", 10, true) end, 22000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_bst_taurox_final_battle_pt_03", "subtitle_with_frame", 0.1, true) end, 22000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 35000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(taurox_intro_04) end, 35500);
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_bst_taurox_final_battle_pt_04", "subtitle_with_frame", 10, true) end, 35500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_bst_taurox_final_battle_pt_04", "subtitle_with_frame", 0.1, true) end, 35500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 47500);
 
 	cutscene_intro:action(function() cutscene_intro:play_sound(taurox_intro_05) end, 48000);
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_bst_taurox_final_battle_pt_05", "subtitle_with_frame", 10) end, 48000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_bst_taurox_final_battle_pt_05", "subtitle_with_frame", 0.1) end, 48000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 61500);
 	
 	cutscene_intro:start();
@@ -332,15 +332,15 @@ function play_cutscene_morghur_dead()
 	--wh2_dlc17_bst_taurox_final_battle_phase_3_pt_02 - 6s
 	
 	cutscene_morghur_dead:action(function() cutscene_morghur_dead:play_sound(taurox_igc1_01) end, 5000);
-	cutscene_morghur_dead:action(function() cutscene_morghur_dead:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_bst_taurox_final_battle_phase_2a", "subtitle_with_frame", 5, true) end, 5000);	
+	cutscene_morghur_dead:action(function() cutscene_morghur_dead:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_bst_taurox_final_battle_phase_2a", "subtitle_with_frame", 0.1, true) end, 5000);	
 	cutscene_morghur_dead:action(function() cutscene_morghur_dead:hide_custom_cutscene_subtitles() end, 14000);
 
 	cutscene_morghur_dead:action(function() cutscene_morghur_dead:play_sound(taurox_igc1_02) end, 18000);
-	cutscene_morghur_dead:action(function() cutscene_morghur_dead:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_bst_taurox_final_battle_phase_2b", "subtitle_with_frame", 5, true) end, 18000);	
+	cutscene_morghur_dead:action(function() cutscene_morghur_dead:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_bst_taurox_final_battle_phase_2b", "subtitle_with_frame", 0.1, true) end, 18000);	
 	cutscene_morghur_dead:action(function() cutscene_morghur_dead:hide_custom_cutscene_subtitles() end, 28000);
 
 	cutscene_morghur_dead:action(function() cutscene_morghur_dead:play_sound(taurox_igc1_03) end, 33000);
-	cutscene_morghur_dead:action(function() cutscene_morghur_dead:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_bst_taurox_final_battle_phase_3b", "subtitle_with_frame", 5, true) end, 33000);	
+	cutscene_morghur_dead:action(function() cutscene_morghur_dead:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_bst_taurox_final_battle_phase_3b", "subtitle_with_frame", 0.1, true) end, 33000);	
 	cutscene_morghur_dead:action(function() cutscene_morghur_dead:hide_custom_cutscene_subtitles() end, 39000);
 
 
@@ -502,11 +502,11 @@ function play_cutscene_ritual_complete()
 	cutscene_ritual_complete:action(function() cutscene_ritual_complete:play_sound(wh2_middlebattle2_sfx) end, 0);	
 
 	cutscene_ritual_complete:action(function() cutscene_morghur_dead:play_sound(taurox_igc2_01) end, 11000);
-	cutscene_ritual_complete:action(function() cutscene_ritual_complete:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_bst_taurox_final_battle_phase_3a", "subtitle_with_frame", 5) end, 11000);	
+	cutscene_ritual_complete:action(function() cutscene_ritual_complete:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_bst_taurox_final_battle_phase_3a", "subtitle_with_frame", 0.1) end, 11000);	
 	cutscene_ritual_complete:action(function() cutscene_ritual_complete:hide_custom_cutscene_subtitles() end, 22000);
 
 	cutscene_ritual_complete:action(function() cutscene_morghur_dead:play_sound(taurox_igc2_02) end, 27000);
-	cutscene_ritual_complete:action(function() cutscene_ritual_complete:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_bst_taurox_final_battle_phase_3c", "subtitle_with_frame", 5) end, 27000);	
+	cutscene_ritual_complete:action(function() cutscene_ritual_complete:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_bst_taurox_final_battle_phase_3c", "subtitle_with_frame", 0.1) end, 27000);	
 	cutscene_ritual_complete:action(function() cutscene_ritual_complete:hide_custom_cutscene_subtitles() end, 33000);
 
 	enqueue_cutscene(cutscene_ritual_complete);

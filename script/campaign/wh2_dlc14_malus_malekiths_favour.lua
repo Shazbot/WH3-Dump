@@ -4,7 +4,6 @@ malus_favour = {
 	hag_graef_region_key = "wh3_main_combi_region_hag_graef",
 	start_dilemma_key = "wh2_dlc14_malus_start_dilemma",
 	character_development_key = "wh_event_subcategory_character_development",
-	rite_character_spawned = false,
 	witch_king_dilemma_key = "wh2_dlc14_def_witch_king_agent_select",
 	agent_data = {
 		death_hag = {type = "dignitary", key = "wh2_main_def_death_hag"},
@@ -174,7 +173,7 @@ function malus_favour:add_malus_malekiths_favour_listeners()
 		function(context)
 			local faction = context:character():faction():name();
 
-			return faction == self.faction_key and self.rite_character_spawned == true;
+			return faction == self.faction_key and rite_character_spawned == true;
 		end,
 		function(context)
 			local character = context:character();
@@ -182,18 +181,13 @@ function malus_favour:add_malus_malekiths_favour_listeners()
 			local rank = 0;
 
 			if malekith_interface:is_null_interface() == false then
-				rank = malekith_interface:region_list():num_items() + 1;
+				rank = malekith_interface:region_list():num_items();
 			end
 
 			if rank > 0 then
-				-- be careful if its above rank 40 it explodes
-				if rank > 39 then
-					cm:add_agent_experience(cm:char_lookup_str(character), 40, true);
-				else
-					cm:add_agent_experience(cm:char_lookup_str(character), rank, true);
-				end
+				cm:add_agent_experience(cm:char_lookup_str(character), math.min(rank, 50), true);
 			end
-			self.rite_character_spawned = false;
+			rite_character_spawned = false;
 		end,
 		true
 	);

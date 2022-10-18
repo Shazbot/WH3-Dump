@@ -11,18 +11,18 @@
 function q_setup()
 	local quests = {
 		["wh3_main_ksl_katarin"] = {
-			{"reward", "wh3_main_anc_weapon_frost_fang", nil, 7},
+			{"mission", "wh3_main_anc_weapon_frost_fang", "wh3_main_ie_qb_ksl_katarin_frost_fang", 7},
 			{"mission", "wh3_main_anc_armour_the_crystal_cloak", "wh3_main_qb_ksl_katarin_crystal_cloak", 10, nil, "wh3_main_camp_quest_katarin_the_crystal_cloak_001", 245, 291}
 		},
 		["wh3_main_ksl_kostaltyn"] = {
 			{"mission", "wh3_main_anc_weapon_the_burning_brazier", "wh3_main_qb_ksl_kostaltyn_burning_brazier", 10, nil, "wh3_main_camp_quest_kostaltyn_burning_brazier_001", 153, 162}
 		},
 		["wh3_main_ksl_boris"] = {
-			{"reward", "wh3_main_anc_weapon_shard_blade", nil, 7},
-			{"reward", "wh3_main_anc_armour_armour_of_ursun", nil, 10}
+			{"mission", "wh3_main_anc_weapon_shard_blade", "wh3_main_ie_qb_ksl_boris_shard_blade", 7},
+			{"mission", "wh3_main_anc_armour_armour_of_ursun", "wh3_main_ie_qb_ksl_boris_armour_of_ursun", 10}
 		},
 		["wh3_main_ogr_greasus_goldtooth"] = {
-			{"reward", "wh3_main_anc_weapon_sceptre_of_titans", nil, 7},
+			{"mission", "wh3_main_anc_weapon_sceptre_of_titans", "wh3_main_ie_qb_ogr_greasus_sceptre_of_titans", 7},
 			{"mission", "wh3_main_anc_talisman_overtyrants_crown", "wh3_main_qb_ogr_greasus_overtyrants_crown", 10, nil, "wh3_main_camp_quest_greasus_overtyrants_crown_001", 591, 240}
 		},
 		["wh3_main_ogr_skrag_the_slaughterer"] = {

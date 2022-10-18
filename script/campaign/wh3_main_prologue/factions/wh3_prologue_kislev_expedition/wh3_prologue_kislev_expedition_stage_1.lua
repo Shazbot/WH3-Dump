@@ -725,6 +725,9 @@ if prologue_check_progression["occupied_settlement"] == false then
 			return context.string == "settlement_captured" 
 		end,
 		function()
+
+			skip_all_scripted_tours();
+
 			local uic_settlement_captured_panel = find_uicomponent(core:get_ui_root(), "settlement_captured", "button_parent");
 			local uic_settlement_captured_child1 = UIComponent(uic_settlement_captured_panel:Find(0))
 			local uic_settlement_captured_child2 = UIComponent(uic_settlement_captured_panel:Find(1))
@@ -782,6 +785,7 @@ core:add_listener(
 	"PanelOpenedCampaign",
 	function(context) return context.string == "popup_pre_battle" end,
 	function()
+		
 		uim:override("campaign_flags"):set_allowed(false);
 
 		PrologueSetPreBattleScreen("battle_1_title");
@@ -1257,101 +1261,98 @@ end
 
 function PrologueCheckSiegeBattleArea(context)
 	if context:area_key() == "siege_marker" then
+		skip_all_scripted_tours();
+	
+		cm:remove_area_trigger("siege_marker");
+
+		-- Remove Feast Hall objective in case the player went here before finising that mission
+		cm:remove_objective(prologue_current_objective);
+		cm:remove_objective("wh3_prologue_objective_turn_005_01");
+		cm:remove_objective("wh3_prologue_objective_turn_005_02");
+		prologue_current_objective = "";
+
+		core:remove_listener("CharacterFinishedMovingEvent_Prologue2");
+		core:remove_listener("FactionTurnStart_Prologue_before_attack");
+
+		CampaignUI.ClearSelection(); 
+
+		--Metric check (step_number, step_name, skippable)
+		cm:trigger_prologue_step_metrics_hit(26, "found_the_beacon", false);
 		
-		if prologue_check_progression["occupied_settlement"] == true then
-			cm:remove_area_trigger("siege_marker");
-
-			-- Remove Feast Hall objective in case the player went here before finising that mission
-			cm:remove_objective(prologue_current_objective);
-			cm:remove_objective("wh3_prologue_objective_turn_005_01");
-			cm:remove_objective("wh3_prologue_objective_turn_005_02");
-			prologue_current_objective = "";
-
-			core:remove_listener("CharacterFinishedMovingEvent_Prologue2");
-			core:remove_listener("FactionTurnStart_Prologue_before_attack");
-
-			CampaignUI.ClearSelection(); 
-
-			--Metric check (step_number, step_name, skippable)
-			cm:trigger_prologue_step_metrics_hit(26, "found_the_beacon", false);
-			
-			local cutscene_intro = campaign_cutscene:new_from_cindyscene(
-				"prologue_intro_3",
-				function() 
-					cm:is_character_moving(
-						prologue_player_cqi, 
-						function() 
-							cm:notify_on_character_halt(
-								prologue_player_cqi, 
-								function() 
-									CampaignUI.ClearSelection();  
-									cm:replenish_action_points("faction:"..prologue_player_faction..",forename:1643960929", 1)
-									common.call_context_command("CcoCampaignCharacter", prologue_player_cqi, "SelectAndZoom(false)");
-								end
-							)
-						end, 
-						function() 
-							CampaignUI.ClearSelection();  
-							cm:replenish_action_points("faction:"..prologue_player_faction..",forename:1643960929", 1)
-							common.call_context_command("CcoCampaignCharacter", prologue_player_cqi, "SelectAndZoom(false)");
-						end
-					)
-					cm:disable_pathfinding_restriction(2);
-					
-					-- update progression variables
-					prologue_check_progression["second_settlement_revealed"] = true;
-					
-					-- force alliance with the survivor faction
-					cm:force_alliance(prologue_player_faction, "wh3_prologue_dervingard_garrison", true);
-					cm:force_declare_war(prologue_player_faction, enemy_faction_name, false, false);
-
-					uim:override("campaign_flags"):set_allowed(true);
-
-					core:add_listener(
-						"prologue_open_pre_battle",
-						"PanelOpenedCampaign",
-						function(context) return context.string == "popup_pre_battle" end,
-						function()
-							PrologueRemoveObjective();
-						end,
-						false
-					);
-
-				end,
-				"prologue_intro_3",
-				--"script/campaign/wh3_main_prologue/factions/"..prologue_player_faction.."/_cutscene/managers/petrenko_siege_01.CindySceneManager", 
-				0, 
-				1
-			);
-					
-			cutscene_intro:set_disable_settlement_labels(true);
-			cutscene_intro:set_dismiss_advice_on_end(false);
-					
-			cutscene_intro:action(
-				function()
-					uim:override("campaign_flags"):set_allowed(false);
-					cm:trigger_2d_ui_sound("UI_CAM_PRO_Story_Stinger", 0);
-					prologue_advice_beacon_revealed_001();
-					
-				end,
-				0
-			);
+		local cutscene_intro = campaign_cutscene:new_from_cindyscene(
+			"prologue_intro_3",
+			function() 
+				cm:is_character_moving(
+					prologue_player_cqi, 
+					function() 
+						cm:notify_on_character_halt(
+							prologue_player_cqi, 
+							function() 
+								CampaignUI.ClearSelection();  
+								cm:replenish_action_points("faction:"..prologue_player_faction..",forename:1643960929", 1)
+								common.call_context_command("CcoCampaignCharacter", prologue_player_cqi, "SelectAndZoom(false)");
+							end
+						)
+					end, 
+					function() 
+						CampaignUI.ClearSelection();  
+						cm:replenish_action_points("faction:"..prologue_player_faction..",forename:1643960929", 1)
+						common.call_context_command("CcoCampaignCharacter", prologue_player_cqi, "SelectAndZoom(false)");
+					end
+				)
+				cm:disable_pathfinding_restriction(2);
 				
-			cutscene_intro:action(
-				function()
-					
-				end,
-				1
-			);
+				-- update progression variables
+				prologue_check_progression["second_settlement_revealed"] = true;
+				
+				-- force alliance with the survivor faction
+				cm:force_alliance(prologue_player_faction, "wh3_prologue_dervingard_garrison", true);
+				cm:force_declare_war(prologue_player_faction, enemy_faction_name, false, false);
+
+				uim:override("campaign_flags"):set_allowed(true);
+
+				core:add_listener(
+					"prologue_open_pre_battle",
+					"PanelOpenedCampaign",
+					function(context) return context.string == "popup_pre_battle" end,
+					function()
+						PrologueRemoveObjective();
+					end,
+					false
+				);
+
+			end,
+			"prologue_intro_3",
+			--"script/campaign/wh3_main_prologue/factions/"..prologue_player_faction.."/_cutscene/managers/petrenko_siege_01.CindySceneManager", 
+			0, 
+			1
+		);
+				
+		cutscene_intro:set_disable_settlement_labels(true);
+		cutscene_intro:set_dismiss_advice_on_end(false);
+				
+		cutscene_intro:action(
+			function()
+				uim:override("campaign_flags"):set_allowed(false);
+				cm:trigger_2d_ui_sound("UI_CAM_PRO_Story_Stinger", 0);
+				prologue_advice_beacon_revealed_001();
+				
+			end,
+			0
+		);
 			
-			cutscene_intro:start();
-		else
-			-- Advisor text: We need shelter and rest. Occupy the camp.  
-			cm:callback(function() prologue_advice_028() end, prologue_audio_timing["wh3_prologue_narrative_03_7"]);
-		end
+		cutscene_intro:action(
+			function()
+				
+			end,
+			1
+		);
+		
+		cutscene_intro:start();
 	
 	elseif context:area_key() == "settlement_marker" and prologue_check_progression["st_income_complete"] == false then
-		
+		skip_all_scripted_tours();
+
 		--dismiss advice
 		cm:dismiss_advice();
 
@@ -1846,6 +1847,7 @@ core:add_listener(
 						out("STARTING TOUR")
 						core:remove_listener("FactionTurnStart_Prologue_item_scripted_tour");
 						
+						uim:override("disable_help_pages_panel_button"):set_allowed(false);
 
 						if prologue_check_progression["item_scripted_tour"] == false then
 							core:add_listener(

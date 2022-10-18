@@ -101,16 +101,16 @@ function end_deployment_phase()
 	
 	-- Voiceover and Subtitles --
 	
-	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 3000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc09_qb_tmb_arkhan_the_staff_of_nagash_stage_5_staff_of_nagash_part_01", "subtitle_with_frame", 0.1)	end, 3500);	
-	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 12000);
+	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 2000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc09_qb_tmb_arkhan_the_staff_of_nagash_stage_5_staff_of_nagash_part_01", "subtitle_with_frame", 0.1)	end, 2500);	
+	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 11000);
 	
-	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 12500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc09_qb_tmb_arkhan_the_staff_of_nagash_stage_5_staff_of_nagash_part_02", "subtitle_with_frame", 0.1)	end, 13000);	
-	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 21500);
+	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 11500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc09_qb_tmb_arkhan_the_staff_of_nagash_stage_5_staff_of_nagash_part_02", "subtitle_with_frame", 0.1)	end, 12000);	
+	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 20500);
 	
-	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_03) end, 22500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc09_qb_tmb_arkhan_the_staff_of_nagash_stage_5_staff_of_nagash_part_03", "subtitle_with_frame", 0.1)	end, 22500);	
+	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_03) end, 21000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc09_qb_tmb_arkhan_the_staff_of_nagash_stage_5_staff_of_nagash_part_03", "subtitle_with_frame", 0.1)	end, 21500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 33000);
 	
 	cutscene_intro:start();

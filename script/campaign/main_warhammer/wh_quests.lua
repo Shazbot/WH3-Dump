@@ -80,7 +80,7 @@ function q_setup()
 			{"mission", "wh_main_anc_weapon_slaggas_slashas", "wh3_main_ie_qb_grn_azhag_the_slaughterer_slaggas_slashas", 17, nil, nil, 416, 253},
 		},
 		["wh_main_grn_grimgor_ironhide"] = {			
-			{"mission", "wh_main_anc_armour_blood", "wh3_main_ie_qb_grn_grimgor_ironhide_blood_forged_armour", 12, nil, nil, 542, 593},
+			{"mission", "wh_main_anc_armour_blood-forged_armour", "wh3_main_ie_qb_grn_grimgor_ironhide_blood_forged_armour", 12, nil, nil, 542, 593},
 			{"mission", "wh_main_anc_weapon_gitsnik", "wh3_main_ie_qb_grn_grimgor_ironhide_gitsnik", 7, nil, "war.camp.advice.quests.001", 450, 420},
 		},
 

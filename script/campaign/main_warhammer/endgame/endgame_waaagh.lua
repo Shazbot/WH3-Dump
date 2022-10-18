@@ -88,6 +88,7 @@ function endgame_waaagh:trigger()
 				local region_owner = region:owning_faction()
 				table.insert(greenskin_factions, faction_key)
 				endgame:create_scenario_force(faction_key, region_key, self.army_template, self.unit_list, true, math.floor(self.base_army_count*endgame.settings.difficulty_mod))
+				cm:instantly_research_all_technologies(faction_key)
 				if region_owner:is_null_interface() or (not region_owner:name() == faction_key and not region_owner:is_human()) then
 					cm:transfer_region_to_faction(region_key, faction_key)
 				end
@@ -107,7 +108,8 @@ function endgame_waaagh:trigger()
 		{
 			type = "DESTROY_FACTION",
 			conditions = {
-				"confederation_valid"
+				"confederation_valid",
+				"vassalization_valid"
 			}
 		}
 	}

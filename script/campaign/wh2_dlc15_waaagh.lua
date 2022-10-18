@@ -559,13 +559,6 @@ function waaagh:waaagh_started(context)
 			reward_culture = key
 			break
 		end
-	end	
-
-	local uic_waaagh_top_bar = find_uicomponent("waaaagh_holder", "waaagh_top_bar")
-
-	if not uic_waaagh_top_bar then
-		script_error("ERROR: uic_waaagh_top_bar could not be found")
-		return
 	end
 
 	local reward_value = cm:model():world():faction_strength_rank(ritual_region_owner);
@@ -596,7 +589,8 @@ function waaagh:waaagh_started(context)
 end
 
 function waaagh:waaagh_ended_human(context)
-	local faction_key = context:performing_faction():name()
+	local faction = context:performing_faction()
+	local faction_key = faction:name()
 	local region_key = self.factions[faction_key].ritual_region_key
 	local region = cm:get_region(region_key)
 	
@@ -627,14 +621,14 @@ function waaagh:waaagh_ended_human(context)
 		self.factions[faction_key].previous_reward_level = reward_level;
 		self.factions[faction_key].previous_reward_culture = reward_culture;
 
-		-- Xiao request for elf trophy
+		-- trigger event for grom's food unlocking
 		if reward_culture == "elves" then
-			core:trigger_event("PlayerGainedWaghElfTrophy");
+			core:trigger_event("PlayerGainedWaghElfTrophy", faction);
 		end
 
 		-- trigger successful WAAAGH event
 		cm:trigger_incident(faction_key, "wh_main_incident_grn_waaagh_success", true)
-		core:trigger_event("PlayerWaghEndedSuccessful");
+		core:trigger_event("PlayerWaghEndedSuccessful", faction);
 
 		out.design("#### Waaagh ended! Reward for culture: "..reward_culture.."! Level: "..reward_level)
 
@@ -642,13 +636,13 @@ function waaagh:waaagh_ended_human(context)
 		self:modify_pooled_resource(faction_key, self.rs_waagh_success, self.successful_waaagh_boost*reward_level)
 		out.design("### Adding Waaagh units to mercenary pool")
 		for i = 1, #self.units["level_"..reward_level] do
-			cm:add_units_to_faction_mercenary_pool(context:performing_faction():command_queue_index(), self.units["level_"..reward_level][i], 1);
+			cm:add_units_to_faction_mercenary_pool(faction:command_queue_index(), self.units["level_"..reward_level][i], 1);
 		end
 		self.factions[faction_key].success = false;
 	else
 		-- trigger fail WAAAGH event
 		cm:trigger_incident(faction_key,"wh_main_incident_grn_waaagh_failed", true)
-		core:trigger_event("PlayerWaghEndedUnsuccessful");		
+		core:trigger_event("PlayerWaghEndedUnsuccessful", faction);		
 
 		self.factions[faction_key].previous_reward_level = nil;
 		self.factions[faction_key].previous_reward_culture = nil;
@@ -804,37 +798,36 @@ function waaagh:waaagh_started_ai(faction)
 
 		out.design("### WAAAGH! started adding VFX "..comp_scene)
 		cm:add_scripted_composite_scene_to_settlement(comp_scene, scene_type, region, 0, 0, false, true, true);
-
 	end
 end
 
 function waaagh:waaagh_ended_ai(context)
-	local human_factions = cm:get_human_factions();
-	local faction_key = context:performing_faction():name()
+	local human_factions = cm:get_human_factions()
+	local performing_faction = context:performing_faction()
+	local faction_key = performing_faction:name()
 	local region = cm:get_region(self.factions[faction_key].ritual_region_key)
-	local waaagh_success = region:is_abandoned() or region:owning_faction():name() == faction_key
+	local incident_key = "wh_main_incident_grn_waaagh_ai_failed"
 
 	-- Set Waaagh to 0
 	self:modify_pooled_resource(faction_key, self.rs_waagh_triggered, self.waaagh_ended)
+	
+	if region:is_abandoned() or region:owning_faction():name() == faction_key then
+		self:modify_pooled_resource(faction_key, self.rs_waagh_success, 50)
+		incident_key = "wh_main_incident_grn_waaagh_ai_success"
+	end
 
-	for i = 1, #human_factions do
-		if waaagh_success then
-			-- trigger successful WAAAGH event
-			cm:trigger_incident(human_factions[i],"wh_main_incident_grn_waaagh_ai_success", true)
-			self:modify_pooled_resource(faction_key, self.rs_waagh_success, 50)
-		else
-			-- trigger fail WAAAGH event
-			cm:trigger_incident(human_factions[i],"wh_main_incident_grn_waaagh_ai_failed", true)
+	for _, current_faction_met in model_pairs(performing_faction:factions_met()) do
+		if current_faction_met:is_human() then
+			cm:trigger_incident_with_targets(current_faction_met:command_queue_index(), incident_key, performing_faction:command_queue_index(), 0, 0, 0, 0, 0)
 		end
-	end;
+	end
 
 	-- Remove Waaagh VFX for AI
 	local comp_scene = "waaagh_ai_"..region:name()
 	out.design("### WAAAGH! ended removing VFX "..comp_scene)
-	cm:remove_scripted_composite_scene(comp_scene);
-	self.factions[faction_key].ritual_region_key = nil;
+	cm:remove_scripted_composite_scene(comp_scene)
+	self.factions[faction_key].ritual_region_key = nil
 end
-
 
 function waaagh:battle_completed()
 	local inactive_waaagh_faction = false;

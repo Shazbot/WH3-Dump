@@ -333,6 +333,8 @@ end
 
 function PrologueAddIceMaiden()
 
+	uim:override("disable_help_pages_panel_button"):set_allowed(false);
+
 	local player_army_list = cm:model():world():faction_by_key(prologue_player_faction):military_force_list();
 	local found_yuri = false
 
@@ -750,6 +752,7 @@ function UnlockPatriarch()
 				if prologue_tutorial_passed["lords_with_button_hidden"] == false then
 					local new_player = cm:model():shared_states_manager():get_state_as_bool_value("prologue_tutorial_on");
 					if new_player then
+						skip_all_scripted_tours();
 						core:trigger_event("ScriptEventPrologueCharacters")
 					else
 						prologue_tutorial_passed["lords_with_button_hidden"] = true;
@@ -1967,6 +1970,8 @@ function add_stances_listeners()
 			function() uim:override("stances_with_button_hidden"):set_allowed(true) end,
 			true
 		)
+		
+		skip_all_scripted_tours();
 
 		local new_player = cm:model():shared_states_manager():get_state_as_bool_value("prologue_tutorial_on");
 		if new_player then
@@ -2719,6 +2724,7 @@ core:add_listener(
 	"PanelOpenedCampaign",
 	function(context) return context.string == "popup_pre_battle" end,
 	function()
+		skip_all_scripted_tours();
 		if common.get_context_value("CampaignBattleContext.IsQuestBattle") == false and prologue_check_progression["open_world"] and prologue_check_progression["fought_first_open_battle"] == false then
 			local new_player = cm:model():shared_states_manager():get_state_as_bool_value("prologue_tutorial_on");
 			if new_player then

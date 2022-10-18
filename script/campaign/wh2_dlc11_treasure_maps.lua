@@ -61,7 +61,6 @@ local treasure_map_payload_mapping = {
 		["wh2_dlc11_cst_treasure_map_animal_treasure_me_6_level_2"] = true,
 		["wh2_dlc11_cst_treasure_map_structure_treasure_me_2_level_2"] = true,
 		["wh2_dlc11_cst_treasure_map_island_treasure_me_4_level_2"] = true,
-		["wh2_dlc11_cst_treasure_map_island_treasure_me_4_level_2"] = true,
 		["wh2_dlc11_cst_treasure_map_symbols_treasure_me_5_level_2"] = true,
 		["wh2_dlc11_cst_treasure_map_lake_treasure_me_4_level_2"] = true,
 		["wh2_dlc11_cst_treasure_map_lake_treasure_me_6_level_2"] = true,

@@ -6,12 +6,12 @@ initiative_unlock = {
 	condition = false
 };
 
-local initiative_cultures = {
+initiative_cultures = {
 	wh3_main_ogr_ogre_kingdoms = true,
 	wh_main_chs_chaos = true
 }
 
-local initiative_templates = {
+initiative_templates = {
 
 	--- OGRE BIG NAMES----
 	-- gatecrasher (greasus)
@@ -29,7 +29,7 @@ local initiative_templates = {
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), "wh3_main_ogr_ogre_kingdoms");
+				return cm:character_won_battle_against_culture(context:character(), "wh3_main_ogr_ogre_kingdoms");
 			end
 	},
 	-- shockingly obese (greasus)
@@ -134,7 +134,7 @@ local initiative_templates = {
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), "wh_dlc03_bst_beastmen");
+				return cm:character_won_battle_against_culture(context:character(), "wh_dlc03_bst_beastmen");
 			end
 	},
 	-- beastrider
@@ -196,7 +196,7 @@ local initiative_templates = {
 			function(context)
 				local character = context:character();
 				
-				return character:won_battle() and char_army_has_unit(character, "wh3_main_ogr_inf_leadbelchers_0");
+				return character:won_battle() and cm:char_army_has_unit(character, "wh3_main_ogr_inf_leadbelchers_0");
 			end
 	},
 	-- brawlerguts
@@ -238,7 +238,7 @@ local initiative_templates = {
 			function(context)
 				local character = context:character();
 				
-				return character_won_battle_against_culture(character, {"wh3_main_kho_khorne", "wh3_main_nur_nurgle", "wh3_main_tze_tzeentch", "wh3_main_sla_slaanesh", "wh3_main_dae_daemons"})
+				return cm:character_won_battle_against_culture(character, {"wh3_main_kho_khorne", "wh3_main_nur_nurgle", "wh3_main_tze_tzeentch", "wh3_main_sla_slaanesh", "wh3_main_dae_daemons"})
 			end
 	},
 	-- deathcheater
@@ -256,7 +256,7 @@ local initiative_templates = {
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), "wh_main_dwf_dwarfs");
+				return cm:character_won_battle_against_culture(context:character(), "wh_main_dwf_dwarfs");
 			end
 	},
 	-- elfmulcher
@@ -265,7 +265,7 @@ local initiative_templates = {
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)				
-				return character_won_battle_against_culture(context:character(), {"wh2_main_hef_high_elves", "wh_dlc05_wef_wood_elves", "wh2_main_def_dark_elves"});
+				return cm:character_won_battle_against_culture(context:character(), {"wh2_main_hef_high_elves", "wh_dlc05_wef_wood_elves", "wh2_main_def_dark_elves"});
 			end
 	},
 	-- giantbreaker
@@ -274,7 +274,7 @@ local initiative_templates = {
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return character_won_battle_against_unit(context:character(), {"wh3_main_ogr_mon_giant_0", "wh_dlc03_bst_mon_giant_0", "wh_dlc08_nor_mon_norscan_giant_0", "wh_main_chs_mon_giant", "wh_main_grn_mon_giant"});
+				return cm:character_won_battle_against_unit(context:character(), {"wh3_main_ogr_mon_giant_0", "wh_dlc03_bst_mon_giant_0", "wh_dlc08_nor_mon_norscan_giant_0", "wh_main_chs_mon_giant", "wh_main_grn_mon_giant"});
 			end
 	},
 	-- gnoblarkicker
@@ -285,7 +285,7 @@ local initiative_templates = {
 			function(context)
 				local character = context:character();
 				
-				return character:won_battle() and count_char_army_has_unit(character, {"wh3_main_ogr_inf_gnoblars_0", "wh3_main_ogr_inf_gnoblars_1"}) > 4;
+				return character:won_battle() and cm:count_char_army_has_unit(character, {"wh3_main_ogr_inf_gnoblars_0", "wh3_main_ogr_inf_gnoblars_1"}) > 4;
 			end
 	},
 	-- goldhoarder
@@ -312,7 +312,7 @@ local initiative_templates = {
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), "wh3_main_cth_cathay");
+				return cm:character_won_battle_against_culture(context:character(), "wh3_main_cth_cathay");
 			end
 	},
 	-- gutcrusher
@@ -367,7 +367,7 @@ local initiative_templates = {
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), "wh2_main_lzd_lizardmen");
+				return cm:character_won_battle_against_culture(context:character(), "wh2_main_lzd_lizardmen");
 			end
 	},
 	-- longstrider
@@ -408,7 +408,7 @@ local initiative_templates = {
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), {"wh_main_emp_empire", "wh_main_brt_bretonnia"});
+				return cm:character_won_battle_against_culture(context:character(), {"wh_main_emp_empire", "wh_main_brt_bretonnia"});
 			end
 	},
 	-- mawseeker
@@ -450,7 +450,7 @@ local initiative_templates = {
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), "wh3_main_ogr_ogre_kingdoms");
+				return cm:character_won_battle_against_culture(context:character(), "wh3_main_ogr_ogre_kingdoms");
 			end
 	},
 	-- orcsplitter
@@ -459,7 +459,7 @@ local initiative_templates = {
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), "wh_main_grn_greenskins");
+				return cm:character_won_battle_against_culture(context:character(), "wh_main_grn_greenskins");
 			end
 	},
 	-- ratkiller
@@ -468,7 +468,7 @@ local initiative_templates = {
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), "wh2_main_skv_skaven");
+				return cm:character_won_battle_against_culture(context:character(), "wh2_main_skv_skaven");
 			end
 	},
 	-- staydeader
@@ -477,7 +477,7 @@ local initiative_templates = {
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), {"wh_main_vmp_vampire_counts", "wh2_dlc09_tmb_tomb_kings", "wh2_dlc11_cst_vampire_coast"});
+				return cm:character_won_battle_against_culture(context:character(), {"wh_main_vmp_vampire_counts", "wh2_dlc09_tmb_tomb_kings", "wh2_dlc11_cst_vampire_coast"});
 			end
 	},
 	-- wallcrusher
@@ -635,7 +635,7 @@ local initiative_templates = {
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), "wh3_main_nur_nurgle");
+				return cm:character_won_battle_against_culture(context:character(), "wh3_main_nur_nurgle");
 			end,
 		["grant_immediately"] = true
 	},
@@ -649,7 +649,7 @@ local initiative_templates = {
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), "wh3_main_sla_slaanesh");
+				return cm:character_won_battle_against_culture(context:character(), "wh3_main_sla_slaanesh");
 			end,
 		["grant_immediately"] = true
 	},
@@ -663,7 +663,7 @@ local initiative_templates = {
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return character_won_battle_against_culture(context:character(), "wh3_main_tze_tzeentch");
+				return cm:character_won_battle_against_culture(context:character(), "wh3_main_tze_tzeentch");
 			end,
 		["grant_immediately"] = true
 	},
@@ -683,7 +683,7 @@ local initiative_templates = {
 			function(context)
 				local character = context:character();
 				
-				return character_won_battle_against_culture(character, {"wh3_main_kho_khorne", "wh3_main_nur_nurgle", "wh3_main_tze_tzeentch", "wh3_main_sla_slaanesh", "wh3_main_dae_daemons"})
+				return cm:character_won_battle_against_culture(character, {"wh3_main_kho_khorne", "wh3_main_nur_nurgle", "wh3_main_tze_tzeentch", "wh3_main_sla_slaanesh", "wh3_main_dae_daemons"})
 			end,
 		["grant_immediately"] = true
 	},
@@ -901,7 +901,7 @@ local initiative_templates = {
 					"wh3_dlc20_chs_cav_chaos_knights_msla", "wh3_dlc20_chs_cav_chaos_knights_msla_lances",
 					"wh3_main_tze_cav_chaos_knights_0", "wh3_dlc20_chs_cav_chaos_knights_mtze_lances",
 				}
-				return character:won_battle() and count_char_army_has_unit(character, chaos_knights) > 1;
+				return character:won_battle() and cm:count_char_army_has_unit(character, chaos_knights) > 1;
 			end,
 		["grant_immediately"] = true
 	},
@@ -913,7 +913,7 @@ local initiative_templates = {
 			function(context)
 				local character = context:character();
 
-				return character:won_battle() and count_char_army_has_unit(character, {"wh3_main_sla_cav_hellstriders_0", "wh3_main_sla_cav_hellstriders_1"}) > 1
+				return character:won_battle() and cm:count_char_army_has_unit(character, {"wh3_main_sla_cav_hellstriders_0", "wh3_main_sla_cav_hellstriders_1"}) > 1
 			end,
 		["grant_immediately"] = true
 	},
@@ -934,7 +934,7 @@ local initiative_templates = {
 					"wh3_dlc20_chs_inf_chosen_msla", "wh3_dlc20_chs_inf_chosen_msla_hellscourges",
 					"wh3_dlc20_chs_inf_chosen_mtze", "wh3_dlc20_chs_inf_chosen_mtze_halberds",
 				}
-				return character:won_battle() and count_char_army_has_unit(character, chosen) > 2;
+				return character:won_battle() and cm:count_char_army_has_unit(character, chosen) > 2;
 			end,
 		["grant_immediately"] = true
 	},
@@ -949,7 +949,7 @@ local initiative_templates = {
 			function(context)
 				local character = context:character();
 				
-				return character:won_battle() and char_army_has_unit(character, {"wh_dlc06_chs_inf_aspiring_champions_0","wh3_dlc20_chs_inf_aspiring_champions_mtze_ror"})
+				return character:won_battle() and cm:char_army_has_unit(character, {"wh_dlc06_chs_inf_aspiring_champions_0","wh3_dlc20_chs_inf_aspiring_champions_mtze_ror"})
 			end,
 		["grant_immediately"] = true
 	},
@@ -964,7 +964,7 @@ local initiative_templates = {
 			function(context)
 				local character = context:character();
 				
-				return character:won_battle() and char_army_has_unit(character, {"wh3_main_kho_cav_skullcrushers_0","wh3_dlc20_kho_cav_skullcrushers_mkho_ror"})
+				return character:won_battle() and cm:char_army_has_unit(character, {"wh3_main_kho_cav_skullcrushers_0","wh3_dlc20_kho_cav_skullcrushers_mkho_ror"})
 			end,
 		["grant_immediately"] = true
 	},
@@ -979,7 +979,7 @@ local initiative_templates = {
 			function(context)
 				local character = context:character();
 				
-				return character:won_battle() and char_army_has_unit(character, "wh3_main_sla_mon_fiends_of_slaanesh_0")
+				return character:won_battle() and cm:char_army_has_unit(character, "wh3_main_sla_mon_fiends_of_slaanesh_0")
 			end,
 		["grant_immediately"] = true
 	},
@@ -993,22 +993,48 @@ local initiative_templates = {
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				local character = context:character();
+				local character = context:character()
 				
 				if character:won_battle() then
-					local character_faction_name = character:faction():name();
-					local pb = cm:model():pending_battle();
+					local defender_char_cqi, defender_mf_cqi, defender_faction_name = cm:pending_battle_cache_get_defender(1)
+					local attacker_char_cqi, attacker_mf_cqi, attacker_faction_name = cm:pending_battle_cache_get_attacker(1)
+					local character_faction_name = character:faction():name()
+					local is_attacker = attacker_faction_name == character_faction_name
+					local is_defender = defender_faction_name == character_faction_name
 					
-					local defender_char_cqi, defender_mf_cqi, defender_faction_name = cm:pending_battle_cache_get_defender(1);
-					local attacker_char_cqi, attacker_mf_cqi, attacker_faction_name = cm:pending_battle_cache_get_attacker(1);
-					
-					if defender_faction_name == character_faction_name and pb:has_attacker() then
-						return character:won_battle() and count_char_army_has_unit_category(pb:attacker(), unit_category) > 4;
-					elseif attacker_faction_name == character_faction_name and pb:has_defender() then
-						return character:won_battle() and count_char_army_has_unit_category(pb:defender(), unit_category) > 4;
-					end;
-				end;
-
+					if is_attacker or is_defender then
+						local unit_class_localised = common.get_localised_string("unit_class_onscreen_inf_mis")
+						local num_participants = 0
+						
+						if is_attacker then
+							num_participants = cm:pending_battle_cache_num_defenders()
+						else
+							num_participants = cm:pending_battle_cache_num_attackers()
+						end
+						
+						local count = 0
+						
+						for i = 1, num_participants do
+							local units = {}
+							
+							if is_attacker then
+								units = cm:pending_battle_cache_get_defender_units(i)
+							else
+								units = cm:pending_battle_cache_get_attacker_units(i)
+							end
+							
+							for j = 1, #units do
+								if common.get_context_value("CcoMainUnitRecord", units[j].unit_key, "ClassName") == unit_class_localised then
+									count = count + 1
+									
+									if count > 4 then
+										return true
+									end
+								end
+							end
+						end
+					end
+				end
 			end,
 		["grant_immediately"] = true
 	},

@@ -97,6 +97,8 @@ core:add_listener(
 
 			PrologueAfterSecondBattle();
 
+			uim:override("disable_help_pages_panel_button"):set_allowed(false);
+
 			if core:svr_load_bool("sbool_prologue_second_battle_loaded_in") then
 				--Metric check (step_number, step_name, skippable)
 				cm:trigger_prologue_step_metrics_hit(47, "second_battle_loaded_in", false);
@@ -170,6 +172,7 @@ core:add_listener(
 		if context:area_key() == "dervingard_marker" then
 			-- Found Dervingard
 			if cm:model():is_player_turn() then
+				skip_all_scripted_tours();
 				prologue_advice_dervingard_revealed_001();
 			end
 		end
@@ -427,6 +430,8 @@ function PrologueAfterSecondBattle()
 		true,
 		function(context)
 			if context:faction():name() == prologue_player_faction then
+
+				uim:override("disable_help_pages_panel_button"):set_allowed(false);
 				
 				cm:disable_saving_game(true)
 				--Enable exp

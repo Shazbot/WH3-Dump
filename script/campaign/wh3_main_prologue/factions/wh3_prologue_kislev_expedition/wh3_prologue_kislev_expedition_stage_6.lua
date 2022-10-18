@@ -53,6 +53,8 @@ if prologue_check_progression["brazen_altar_battle_complete"] == false then
 
 			out("MADE IT TO STAGE 6")
 
+			uim:override("disable_help_pages_panel_button"):set_allowed(false);
+
 			-- Mark victory condition
 			cm:complete_scripted_mission_objective("wh3_prologue_kislev_expedition", "wh_main_long_victory", "complete_brazen_altar", true)
 
@@ -155,7 +157,7 @@ core:add_listener(
 			if context:area_key() == "kill_gerik" and prologue_check_progression["killed_gerik"] == false then
 				
 				if cm:model():is_player_turn() then
-				
+					skip_all_scripted_tours();
 					cm:remove_scripted_composite_scene("kill_gerik_marker")
 					cm:remove_area_trigger("kill_gerik")
 					cm:toggle_dilemma_generation(false);

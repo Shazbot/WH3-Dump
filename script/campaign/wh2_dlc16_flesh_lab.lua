@@ -585,7 +585,7 @@ function add_flesh_lab_listeners()
 			if not unit:is_null_interface() then
 				local unit_key = unit:unit_key()
 				local faction = unit:faction()
-				return (unit_key:find("skavenslaves_0") or unit_key:find("skavenslave_spearmen")) and faction:name() == throt_faction_name and faction:is_human() and flesh_lab_upgrade_purchased["wh2_dlc16_throt_flesh_lab_upgrade_2"]
+				return unit_key:find("skavenslave") and faction:name() == throt_faction_name and faction:is_human() and flesh_lab_upgrade_purchased["wh2_dlc16_throt_flesh_lab_upgrade_2"]
 			end
 		end,
 		function(context)
@@ -655,7 +655,7 @@ function add_flesh_lab_listeners()
 		"RitualCompletedEvent",
 		function(context)
 			local faction = context:performing_faction()
-			return faction:name() == throt_faction_name and faction:is_human() and flesh_lab_upgrade_purchased[context:ritual():ritual_key()]
+			return faction:name() == throt_faction_name and faction:is_human() and flesh_lab_upgrade_purchased[context:ritual():ritual_key()] ~= nil
 		end,
 		function(context)
 			flesh_lab_upgrade_purchased[context:ritual():ritual_key()] = true
@@ -703,7 +703,7 @@ function add_flesh_lab_listeners()
 					-- check if unit is a Skavenslaves or skavenslave spears unit
 					local unit_key = unit:unit_key()
 					
-					if flesh_lab_upgrade_purchased["wh2_dlc16_throt_flesh_lab_upgrade_2"] and unit_key:find("skavenslaves_0") or unit_key:find("skavenslave_spearmen") then
+					if flesh_lab_upgrade_purchased["wh2_dlc16_throt_flesh_lab_upgrade_2"] and unit_key:find("skavenslave") then
 						-- apply the augment to make the units no longer provide Growth Juice when Recycled
 						local all_possible_augments = unit:get_unit_purchasable_effects()
 						

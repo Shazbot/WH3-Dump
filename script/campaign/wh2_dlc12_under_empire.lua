@@ -42,7 +42,7 @@ function add_under_empire_listeners()
 		"underempire_CharacterGarrisonTargetAction",
 		"CharacterGarrisonTargetAction",
 		function(context)
-			return (context:mission_result_critial_success() or context:mission_result_success()) and context:agent_action_key():starts_with("wh2_dlc12_agent_action_hinder_settlement_success_expand_underempire")
+			return (context:mission_result_critial_success() or context:mission_result_success()) and context:agent_action_key():find("expand_underempire");
 		end,
 		function(context)
 			local faction = context:character():faction();

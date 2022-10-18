@@ -1461,6 +1461,8 @@ function flesh_lab_tour_lock_ui(value)
 		"sword_of_khaine"
 	};
 	
+	cm:override_ui("disable_fullscreen_panel_closing", value);
+	
 	if value then
 		for i = 1, #overrides_to_lock do
 			uim:override(overrides_to_lock[i]):lock();
@@ -1624,7 +1626,7 @@ function flesh_lab_scripted_tour_tabs_advice(uic_panel)
 	end;
 
 	-- show fullscreen highlight over the tabs
-	core:show_fullscreen_highlight_around_components(25, false, uic_flesh_lab_tabs);
+	core:show_fullscreen_highlight_around_components(25, false, false, uic_flesh_lab_tabs);
 	
 	-- pulse each of the augment tabs
 	pulse_uicomponent(uic_augment_inf_button, true, 5, true);
@@ -1691,7 +1693,7 @@ function flesh_lab_scripted_tour_augment_hex_advice(uic_panel)
 	uic_inf_augment_3:SimulateLClick();
 
 	-- show fullscreen highlight over the map
-	core:show_fullscreen_highlight_around_components(25, false, uic_augments_hex);
+	core:show_fullscreen_highlight_around_components(25, false, false, uic_augments_hex);
 	
 	-- pulse the hex grid
 	pulse_uicomponent(uic_augments_hex, true, 5, true);
@@ -1742,7 +1744,7 @@ function flesh_lab_scripted_tour_augment_effects_advice(uic_panel)
 	end;
 	
 	-- show fullscreen highlight over the map
-	core:show_fullscreen_highlight_around_components(25, false, uic_augments_effects);
+	core:show_fullscreen_highlight_around_components(25, false, false, uic_augments_effects);
 	
 	-- pulse the augment effects holder
 	pulse_uicomponent(uic_augments_effects, true, 5, true);
@@ -1797,7 +1799,7 @@ function flesh_lab_scripted_tour_units_holder_advice(uic_panel)
 	end;
 	
 	-- show fullscreen highlight over the map
-	core:show_fullscreen_highlight_around_components(25, false, uic_units);
+	core:show_fullscreen_highlight_around_components(25, false, false, uic_units);
 	
 	-- set up text pointer
 	local uic_units_size_x, uic_units_size_y = uic_units:Dimensions();
@@ -1844,7 +1846,7 @@ function flesh_lab_scripted_tour_growth_vat_advice(uic_panel)
 	end;
 	
 	-- show fullscreen highlight over the map
-	core:show_fullscreen_highlight_around_components(40, false, uic_growth_vat);
+	core:show_fullscreen_highlight_around_components(40, false, false, uic_growth_vat);
 	
 	-- pulse the growth vat
 	pulse_uicomponent(uic_growth_vat, true, 5, true);
@@ -1892,7 +1894,7 @@ function flesh_lab_scripted_tour_lab_upgrades_advice(uic_panel)
 	end;
 
 	-- show fullscreen highlight over the map
-	core:show_fullscreen_highlight_around_components(25, false, uic_augment_lab_button);
+	core:show_fullscreen_highlight_around_components(25, false, false, uic_augment_lab_button);
 
 	--this was declared earlier, pulse highlight the lab upgrade tab
 	pulse_uicomponent(uic_augment_lab_button, true, 5, true);
@@ -1976,7 +1978,7 @@ function flesh_lab_scripted_tour_upgrades_holder_advice(uic_panel)
 	end;
 	
 	-- show fullscreen highlight over the map
-	core:show_fullscreen_highlight_around_components(25, false, uic_upgrades_holder);
+	core:show_fullscreen_highlight_around_components(25, false, false, uic_upgrades_holder);
 	
 	-- pulse the growth vat
 	pulse_uicomponent(uic_upgrades_holder, true, 5, true);

@@ -285,11 +285,11 @@ function RakarthBeastHunts:setup_quest_chain_completion_listener()
 		"Rakarth_QuestChainCompleted",
 		"MissionSucceeded",
 		function(context)
-			return context:mission():mission_record_key():find("whip_of_agony_stage_2")
+			return context:mission():mission_record_key() == "wh3_main_ie_qb_def_rakarth_whip_of_agony"
 		end,
 		function(context)
 			--Grant Black Ark reward to pool
-			cm:spawn_character_to_pool(self.rakarth_faction_key, "names_name_1602715018", "", "names_name_1270751732", "", 18, true, "general", "wh2_main_def_black_ark", false, "wh2_main_art_set_def_black_ark")
+			cm:spawn_character_to_pool(self.rakarth_faction_key, "names_name_2010781226", "", "names_name_1270751732", "", 18, true, "general", "wh2_main_def_black_ark", false, "wh2_main_art_set_def_black_ark")
 		end,
 		true
 	)

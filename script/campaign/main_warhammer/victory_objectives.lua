@@ -117,7 +117,55 @@ victory_objectives_ie = {
 				},
 				payload_bundle = "wh3_main_ie_victory_objective_chaos_long"	
 			}
-		}
+		},
+		dark_elves = {
+			wh_main_short_victory = {
+				objectives = {
+					{
+						type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
+						conditions = {
+							"total 30"
+						}
+					}
+				},
+				payload_bundle = "wh3_main_ie_victory_objective_destruction_short"            
+			},
+			wh_main_long_victory = {
+				objectives = {
+					{
+						type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
+						conditions = {
+							"total 75"
+						}
+					}
+				},
+				payload_bundle = "wh3_main_ie_victory_objective_def_long"   
+			}
+		},
+		khorne = {
+			wh_main_short_victory = {
+				objectives = {
+					{
+						type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
+						conditions = {
+							"total 35"
+						}
+					}
+				},
+				payload_ancillary = "wh3_main_anc_weapon_chainsword"	
+			},
+			wh_main_long_victory = {
+				objectives = {
+					{
+						type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
+						conditions = {
+							"total 80"
+						}
+					}
+				},
+				payload_bundle = "wh3_main_ie_victory_objective_chaos_long"	
+			}
+		},
 	},
 
 	-- Ideally every playable subculture should be in this table, but it isn't required
@@ -459,7 +507,7 @@ victory_objectives_ie = {
 			}
 		},
 		wh2_main_sc_def_dark_elves = {
-			alignment = "destruction",
+			alignment = "dark_elves",
 			objectives = {
 				{
 					-- Capture the Shrine of Khaine
@@ -607,7 +655,7 @@ victory_objectives_ie = {
 			}
 		},
 		wh3_main_sc_kho_khorne = {
-			alignment = "chaos",
+			alignment = "khorne",
 			objectives = {
 				{
 					-- Eliminate Slaanesh
@@ -713,7 +761,8 @@ victory_objectives_ie = {
 					conditions = {
 						"faction wh_main_emp_empire_separatists",
 						"faction wh2_dlc11_vmp_the_barrow_legion",
-						"faction wh_main_vmp_schwartzhafen"
+						"faction wh_main_vmp_schwartzhafen",
+						"confederation_valid"
 					}
 				}
 			}
@@ -757,7 +806,37 @@ victory_objectives_ie = {
 						"confederation_valid",
 					}
 				}
-			}
+			},
+			long_objectives = {
+				{
+					-- Markus + allies control the lustriabowl
+					type = "CONTROL_N_PROVINCES_INCLUDING",
+					conditions = {	
+						"total 19",
+						"override_text mission_text_text_wh_main_objective_override_mazdamundi_control",
+						"province wh3_main_combi_province_culchan_plains",
+						"province wh3_main_combi_province_headhunters_jungle",
+						"province wh3_main_combi_province_spine_of_sotek",
+						"province wh3_main_combi_province_the_lost_valley",
+						"province wh3_main_combi_province_river_qurveza",
+						"province wh3_main_combi_province_mosquito_swamps",
+						"province wh3_main_combi_province_the_gwangee_valley",
+						"province wh3_main_combi_province_the_turtle_isles",
+						"province wh3_main_combi_province_scorpion_coast",
+						"province wh3_main_combi_province_the_creeping_jungle",
+						"province wh3_main_combi_province_jungles_of_green_mist",
+						"province wh3_main_combi_province_aymara_swamps",
+						"province wh3_main_combi_province_jungles_of_pahualaxa",
+						"province wh3_main_combi_province_the_isthmus_coast",
+						"province wh3_main_combi_province_isthmus_of_lustria",
+						"province wh3_main_combi_province_copper_desert",
+						"province wh3_main_combi_province_the_night_forest_road",
+						"province wh3_main_combi_province_the_capes",
+						"province wh3_main_combi_province_volcanic_islands"
+					}
+				}
+			},
+			no_subculture_objective = true
 		},
 
 		-- Balthasar Gelt
@@ -857,13 +936,34 @@ victory_objectives_ie = {
 					-- Mount an offensive on the bordering Southern Chaos factions
 					type = "DESTROY_FACTION",
 					conditions = {
+						"faction wh3_main_tze_sarthoraels_watchers",
+						"faction wh3_main_skv_clan_morbidus",
 						"faction wh3_main_tze_oracles_of_tzeentch",
-						"faction wh3_main_sla_rapturous_excess",
 						"faction wh3_main_nur_bubonic_swarm",
 						"confederation_valid"
 					}
 				}
-			}
+			},
+			long_objectives = {
+				{
+					-- Control at least 6 of the Elven Colony ports
+					type = "CONTROL_N_REGIONS_FROM",
+					conditions = {
+						"total 6",
+						"region wh3_main_combi_region_fortress_of_dawn",
+						"region wh3_main_combi_region_tower_of_the_sun",
+						"region wh3_main_combi_region_tower_of_the_stars",
+						"region wh3_main_combi_region_tor_elasor",
+						"region wh3_main_combi_region_gronti_mingol",
+						"region wh3_main_combi_region_citadel_of_dusk",
+						"region wh3_main_combi_region_the_star_tower",
+						"region wh3_main_combi_region_great_turtle_isle",
+						"region wh3_main_combi_region_arnheim",
+						"override_text mission_text_text_mis_activity_control_n_regions_satrapy_including_at_least_n"
+					}
+				}
+			},
+			no_subculture_objective = true
 		},
 
 		-- Alarielle the Radiant
@@ -908,14 +1008,57 @@ victory_objectives_ie = {
 		wh2_main_hef_yvresse = {
 			objectives = {
 				{
-					-- Max level Tor Yvresse 
-					type = "CONSTRUCT_N_BUILDINGS_INCLUDING",
+					-- Upgrade Athel Tamarha
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_mis_upgrade_athel_tamarha_victory",
+						"script_key athel_tamarha_upgrades_attained"
+					}
+				},
+				{
+					-- Destroy surrounding Greenskins and Chaos
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh_main_grn_top_knotz", 
+						"faction wh_main_grn_teef_snatchaz",
+						"faction wh_main_grn_orcs_of_the_bloody_hand",
+						"faction wh3_main_kho_exiles_of_khorne",
+						"confederation_valid"
+					}
+				},
+			},
+			long_objectives = {
+				{
+					-- Max out Athel Tamarha
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_mis_upgrade_max_athel_tamarha_victory",
+						"script_key athel_tamarha_max_upgrades_attained"
+					}
+				},
+				{
+					-- Destroy key threats, including key rival Grom the Paunch
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh_main_grn_necksnappers",
+						"faction wh_main_grn_scabby_eye",
+						"faction wh2_main_skv_clan_mors",
+						"faction wh2_main_skv_clan_skryre",
+						"faction wh2_dlc15_grn_broken_axe",
+						"confederation_valid"
+					}
+				},
+				{
+					-- Maintain control of your namesake, Tor Yvresse
+					type = "CONTROL_N_REGIONS_FROM",
 					conditions = {
 						"total 1",
-						"building_level wh2_dlc15_special_settlement_tor_yvresse_eltharion_5"
+						"region wh3_main_combi_region_tor_yvresse",
+						"override_text mission_text_text_mis_upgrade_tor_yvresse_safe"
 					}
 				}
-			}
+			},
+			no_subculture_objective = true
 		},
 
 		-- Imrik
@@ -938,7 +1081,28 @@ victory_objectives_ie = {
 						"override_text mission_text_text_mis_activity_encounter_special_dragons"
 					}
 				},
-			}
+			},
+			long_objectives = {
+				{
+					-- Eliminate the chaos and destruction threats in the west
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh2_main_skv_clan_mors",
+						"faction wh_main_grn_orcs_of_the_bloody_hand",
+						"faction wh3_main_kho_exiles_of_khorne",
+						"confederation_valid"
+					}
+				},
+				{
+					-- Encounter even more special Dragons with Imrik
+					type = "SCRIPTED",
+					conditions = {
+						"script_key dragon_encounters_all",
+						"override_text  mission_text_text_mis_activity_encounter_special_dragons_all"
+					}
+				}
+			},
+			no_subculture_objective = true
 		},
 		
 		-- Belegar Ironhammer
@@ -1033,7 +1197,7 @@ victory_objectives_ie = {
 
 		-- Louen Leoncoeur
 		wh_main_brt_bretonnia = {
-            objectives = {
+			objectives = {
 				{
 					type = "DESTROY_FACTION",
 					conditions = {
@@ -1042,39 +1206,40 @@ victory_objectives_ie = {
 						"confederation_valid"
 					}
 				}
-            }
-        },
-         -- Alberic de Bordeleaux
-         wh_main_brt_bordeleaux = {
-            objectives = {
-                {
-                    -- Complete Alberic's Grail Vow
-                    type = "SCRIPTED",
-                    conditions = {
-                        "override_text mission_text_text_mis_activity_complete_grail_vow_alberic",
-                        "script_key alberic_grail_vow_success"
-                    }
-                }
-            }
-        },
-        
-         -- Fay Enchantress
-         wh_main_brt_carcassonne = {
-            objectives = {
-                {
-                    -- Complete Fay Enchantress' Trothe of Virtue
-                    type = "SCRIPTED",
-                    conditions = {
-                        "override_text mission_text_text_mis_activity_complete_troth_of_virute_vow_enchantress",
-                        "script_key enchantress_virtue_success"
-                    }
-                }
-            }
-        },
+			}
+		},
 
-		 -- Repanse de Lyonesse
-         wh2_dlc14_brt_chevaliers_de_lyonesse = {
-            objectives = {
+		-- Alberic de Bordeleaux
+		wh_main_brt_bordeleaux = {
+			objectives = {
+				{
+					-- Complete Alberic's Grail Vow
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_mis_activity_complete_grail_vow_alberic",
+						"script_key alberic_grail_vow_success"
+					}
+				}
+			}
+		},
+
+		-- Fay Enchantress
+		wh_main_brt_carcassonne = {
+			objectives = {
+				{
+					-- Complete Fay Enchantress' Trothe of Virtue
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_mis_activity_complete_troth_of_virute_vow_enchantress",
+						"script_key enchantress_virtue_success"
+					}
+				}
+			}
+		},
+
+		-- Repanse de Lyonesse
+		wh2_dlc14_brt_chevaliers_de_lyonesse = {
+			objectives = {
 				{
 					type = "DESTROY_FACTION",
 					conditions = {
@@ -1084,8 +1249,8 @@ victory_objectives_ie = {
 						"confederation_valid"
 					}
 				}
-            }
-        },
+			}
+		},
 
 		-- Mazdamundi
 		wh2_main_lzd_hexoatl = {
@@ -1102,23 +1267,58 @@ victory_objectives_ie = {
 			}
 		},
 
-			-- Kroq Gar
-			wh2_main_lzd_last_defenders = {
-				objectives = {
-					{
-						type = "DESTROY_FACTION",
-						conditions = {
-							-- beat up nearby skaven and chaos
-							"faction wh3_main_skv_clan_morbidus",
-							"faction wh3_main_tze_oracles_of_tzeentch",
-							"confederation_valid"
-						}
+		-- Kroq Gar
+		wh2_main_lzd_last_defenders = {
+			objectives = {
+				{
+					type = "DESTROY_FACTION",
+					conditions = {
+						-- beat up nearby Skaven, Vampires and Greenskins
+						"faction wh3_main_skv_clan_morbidus",
+						"faction wh2_main_skv_clan_mordkin",
+						"faction wh2_main_vmp_the_silver_host",
+						"faction wh_main_vmp_vampire_counts", 
+						"faction wh2_dlc12_grn_leaf_cutterz_tribe",
+						"confederation_valid"
 					}
-				}
+				},
 			},
+			long_objectives = {
+				{
+					type = "DESTROY_FACTION",
+					conditions = {
+						-- Destroy nearby destruction/chaos factions
+						"faction wh_main_vmp_vampire_counts",
+						"faction wh3_main_kho_exiles_of_khorne",
+						"faction wh2_main_skv_clan_mors",
+						"faction wh_main_grn_orcs_of_the_bloody_hand",
+						"faction wh2_dlc17_bst_malagor",
+						"faction wh3_main_nur_poxmakers_of_nurgle",
+						"faction wh3_main_tze_oracles_of_tzeentch",
+						"confederation_valid"
+					}
+				},
+				{
+					type = "CONTROL_N_PROVINCES_INCLUDING",
+					conditions = {
+						-- Ensure at least 5 of the 7 Southern jungles provinces are in safe hands
+						"total 5",
+						"province wh3_main_combi_province_the_golden_pass",
+						"province wh3_main_combi_province_central_jungles",
+						"province wh3_main_combi_province_western_jungles",
+						"province wh3_main_combi_province_southern_jungles",
+						"province wh3_main_combi_province_the_jungles_of_the_gods",
+						"province wh3_main_combi_province_kingdom_of_beasts",
+						"province wh3_main_combi_province_the_dragon_isles",
+						"override_text mission_text_text_mis_activity_control_n_southern_jungle_provinces"
+					}
+				},
+			},
+			no_subculture_objective = true
+		},
 
-			-- Tiktaq'to
-			wh2_main_lzd_tlaqua = {
+		-- Tiktaq'to
+		wh2_main_lzd_tlaqua = {
 			objectives = {
 				{
 					type = "CONTROL_N_PROVINCES_INCLUDING",
@@ -1194,7 +1394,25 @@ victory_objectives_ie = {
 						"confederation_valid"
 					}
 				}
-			}
+			},
+			long_objectives = {
+				{
+					type = "DESTROY_FACTION",
+					conditions = {
+						-- Destroy more servants of darkness - if Pestilens is alive, scripted dilemma will trigger
+						"faction wh2_dlc11_def_the_blessed_dread",
+						"faction wh3_dlc21_cst_dead_flag_fleet",
+						"faction wh3_dlc21_vmp_jiangshi_rebels",
+						"faction wh2_main_skv_clan_eshin",
+						"faction wh3_dlc20_chs_vilitch",
+						"faction wh3_main_vmp_caravan_of_blue_roses",
+						"faction wh3_main_nur_poxmakers_of_nurgle",
+						"faction wh2_main_skv_clan_pestilens",
+						"confederation_valid"
+					}
+				}
+			},
+			no_subculture_objective = true
 		},
 
 		-- Oxylotl
@@ -1206,10 +1424,22 @@ victory_objectives_ie = {
 					conditions = {
 						"event_category Chaos_Map_Medium",
 						"event_category Chaos_Map_Hard",
+						"total 6"
+					}
+				}
+			},
+			long_objectives = {
+				{
+					-- Beat up chaos
+					type = "COMPLETE_N_MISSIONS_OF_CATEGORY",
+					conditions = {
+						"event_category Chaos_Map_Medium",
+						"event_category Chaos_Map_Hard",
 						"total 25"
 					}
 				}
-			}
+			},
+			no_subculture_objective = true
 		},
 
 		-- Tzarina Katarin
@@ -1404,15 +1634,28 @@ victory_objectives_ie = {
 		wh2_dlc09_tmb_lybaras = {
 			objectives = {
 				{
-					-- Eliminate the other Tomb Kings
+					-- Eliminate nearby Vampires
 					type = "DESTROY_FACTION",
 					conditions = {
-						"faction wh2_dlc09_tmb_followers_of_nagash",
-						"faction wh2_dlc09_tmb_khemri",
+						"faction wh2_main_vmp_the_silver_host",
+						"faction wh2_main_vmp_necrarch_brotherhood",
+						"faction wh_main_vmp_vampire_counts",
+						"faction wh3_main_ie_vmp_sires_of_mourkain",
 						"confederation_valid"
 					}
 				}
-			}
+			},
+			long_objectives = {
+				{
+					type = "DESTROY_FACTION",
+					conditions = {
+						-- Destroy the Followers of Nagash
+						"faction wh2_dlc09_tmb_followers_of_nagash",
+						"confederation_valid"
+					}
+				}
+			},
+			no_subculture_objective = false
 		},
 
 		--Greasus Goldtooth
@@ -1502,7 +1745,7 @@ victory_objectives_ie = {
 					-- Control X nearby capital regions belonging to strong Legendary Lords
 					type = "CONTROL_N_REGIONS_FROM",
 					conditions = {
-						"total 6",
+						"total 5",
 						"region wh3_main_combi_region_great_hall_of_greasus",
 						"region wh3_main_combi_region_black_crag",
 						"region wh3_main_combi_region_crookback_mountain",
@@ -1514,7 +1757,10 @@ victory_objectives_ie = {
 						"region wh3_main_combi_region_hell_pit",
 						"region wh3_main_combi_region_khazid_irkulaz",
 						"region wh3_main_combi_region_hanyu_port",
-						"region wh3_main_combi_region_the_fortress_of_vorag"
+						"region wh3_main_combi_region_the_fortress_of_vorag",
+						"region wh3_main_combi_region_the_tower_of_torment",  
+						"region wh3_main_combi_region_the_challenge_stone",
+						"override_text mission_text_text_mis_activity_control_n_regions_satrapy_including_at_least_n"
 					}
 				}
 			}
@@ -1843,28 +2089,28 @@ victory_objectives_ie = {
 		},
 		
 		-- Deathmaster Snikch
-        wh2_main_skv_clan_eshin = {
-            objectives = {
+		wh2_main_skv_clan_eshin = {
+			objectives = {
 				{
-                    -- Complete 8 Eshin Actions
-                    type = "SCRIPTED",
-                    conditions = {
-                        "override_text mission_text_text_mis_activity_perform_eshin_actions",
-                        "script_key snikch_eshin_actions_complete"
-                    }
-                },
-                {
-                    -- Destroy nearby hostile Greenskins and push towards Cathay
-                    type = "DESTROY_FACTION",
-                    conditions = {
-                        "faction wh3_main_grn_dimned_sun",  
+					-- Complete 8 Eshin Actions
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_mis_activity_perform_eshin_actions",
+						"script_key snikch_eshin_actions_complete"
+					}
+				},
+				{
+					-- Destroy nearby hostile Greenskins and push towards Cathay
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh3_main_grn_dimned_sun",  
 						"faction wh3_main_cth_celestial_loyalists",
 						"faction wh3_main_cth_the_northern_provinces",
 						"confederation_valid"
-                    }
-                }
-            }
-        },
+					}
+				}
+			}
+		},
 
 		-- Throt the Unclean
 		wh2_main_skv_clan_moulder = {
@@ -1873,7 +2119,7 @@ victory_objectives_ie = {
 					-- Destroy the big Kislev factions nearby
 					type = "DESTROY_FACTION",
 					conditions = {
-						"faction wh3_main_ksl_the_great_orthodoxy",  
+						"faction wh3_main_ksl_the_great_orthodoxy",
 						"faction wh3_main_ksl_the_ice_court",
 						"confederation_valid"
 					}
@@ -2015,11 +2261,12 @@ victory_objectives_ie = {
 		wh_main_chs_chaos = {
 			objectives = {
 				{
-					-- Destroy the Ice Court
+					-- Destroy or Vassalise the Ice Court
 					type = "DESTROY_FACTION",
 					conditions = {
 						"faction wh3_main_ksl_the_ice_court",
-						"confederation_valid"
+						"confederation_valid",
+						"vassalization_valid"
 					}
 				},
 				{
@@ -2043,7 +2290,8 @@ victory_objectives_ie = {
 					conditions = {
 						"faction wh3_main_cth_imperial_wardens",
 						"faction wh3_main_cth_the_northern_provinces",
-						"confederation_valid"
+						"confederation_valid",
+						"vassalization_valid"
 					}
 				},
 				{
@@ -2086,13 +2334,14 @@ victory_objectives_ie = {
 		wh3_main_chs_shadow_legion = {
 			objectives = {
 				{
-					-- Destroy N'kari, Sigvald and the Sightless
+					-- Destroy or Vassalise N'kari, Sigvald and the Sightless
 					type = "DESTROY_FACTION",
 					conditions = {
 						"faction wh3_main_sla_seducers_of_slaanesh",
 						"faction wh3_dlc20_chs_sigvald",
 						"faction wh3_dlc20_tze_the_sightless",
-						"confederation_valid"
+						"confederation_valid",
+						"vassalization_valid"
 					}
 				},
 				{
@@ -2137,13 +2386,14 @@ victory_objectives_ie = {
 		wh3_main_sla_seducers_of_slaanesh = {
 			objectives = {
 				{
-					-- Destroy Tyrion, Alarielle, Eltharion
+					-- Destroy or Vassalise Tyrion, Alarielle, Eltharion
 					type = "DESTROY_FACTION",
 					conditions = {
 						"faction wh2_main_hef_avelorn",
 						"faction wh2_main_hef_eataine",
 						"faction wh2_main_hef_yvresse",
-						"confederation_valid"
+						"confederation_valid",
+						"vassalization_valid"
 					}
 				},
 				{
@@ -2295,7 +2545,7 @@ function victory_objectives_ie:initialise_victory_missions(faction_key, multipla
 	self:create_faction_mission(faction_key, faction_alignment)
 
 	-- Cultural victory
-	self:create_cultural_mission(faction_key, faction_subculture_key, faction_alignment)
+	self:create_long_mission(faction_key, faction_subculture_key, faction_alignment)
 
 	-- Domation victory
 	self:create_domination_mission(faction_key)
@@ -2326,10 +2576,10 @@ function victory_objectives_ie:create_faction_mission(faction_key, faction_align
 	self:trigger_mission(mm, self.victory_type.faction, mission_key, faction_alignment)
 end
 
--- Cultural victory combines the faction unique objectives (if any) with the subculture objective
+-- Long victory combines the faction unique objectives (if any) with the subculture objective
 -- We also add the long version of the alignment objective
 -- This ensures all factions have an objective, even if they are somehow missing both a faction and subculture objective
-function victory_objectives_ie:create_cultural_mission(faction_key, faction_subculture_key, faction_alignment)
+function victory_objectives_ie:create_long_mission(faction_key, faction_subculture_key, faction_alignment)
 	local mission_key = "wh_main_long_victory"
 	local mm = mission_manager:new(faction_key, mission_key)
 
@@ -2338,9 +2588,9 @@ function victory_objectives_ie:create_cultural_mission(faction_key, faction_subc
 	mm:add_condition("script_key complete_faction_victory")
 	mm:add_condition("override_text mission_text_text_ie_attain_faction_victory")
 
-	-- Populate the mission with the remaining alignment/cultural objectives
+	-- Populate the mission with the remaining alignment/long objectives
 	self:create_alignment_objective(mm, faction_alignment, mission_key, faction_key)
-	self:create_cultural_objective(mm, faction_subculture_key, faction_key)
+	self:create_long_objective(mm, faction_subculture_key, faction_key)
 
 	self:trigger_mission(mm, self.victory_type.subculture, mission_key, faction_alignment)
 end
@@ -2367,11 +2617,16 @@ function victory_objectives_ie:trigger_mission(mm, victory_type, mission_key, fa
 		if bundle ~= nil then
 			mm:add_payload("effect_bundle{bundle_key " .. bundle .. ";turns 0;}")
 		end
+
+		ancillary = self.alignments[faction_alignment][mission_key].payload_ancillary
+		if ancillary ~= nil then
+			mm:add_payload("add_ancillary_to_faction_pool{ancillary_key wh3_main_anc_weapon_chainsword;}")
+		end
 	end
 
 	-- Only add game victory if it's not multiplayer or the short victory. 
-	-- If the bundle has failed for whatever reason we forcibly add victory, otherwise the mission will fail to generate
-	if bundle == nil or victory_type == self.victory_type.multiplayer or victory_type == self.victory_type.domination then 
+	-- If all payloads have failed for whatever reason we forcibly add victory, otherwise the mission will fail to generate
+	if (bundle == nil and ancillary == nil) or victory_type == self.victory_type.multiplayer or victory_type == self.victory_type.domination then 
 		mm:add_payload("text_display dummy_wh3_main_survival_forge_of_souls")
 		mm:add_payload("game_victory")
 	end
@@ -2424,18 +2679,26 @@ function victory_objectives_ie:create_alignment_objective(mm, faction_alignment,
 
 end
 
-function victory_objectives_ie:create_cultural_objective(mm, faction_subculture_key, faction_key)
+function victory_objectives_ie:create_long_objective(mm, faction_subculture_key, faction_key)
 
-	if self.subcultures[faction_subculture_key] then
-	
-		local objectives = self.subcultures[faction_subculture_key].objectives
+	local objectives = {}
 
-		if objectives ~= nil then
-		
-			self:add_objectives(mm, objectives, faction_key)
-		
+	if self.factions[faction_key].long_objectives then
+		for _,objective in pairs(self.factions[faction_key].long_objectives) do 
+			table.insert(objectives,objective)
 		end
+	end
 
+	if self.subcultures[faction_subculture_key] and self.factions[faction_key].no_subculture_objective ~= true then
+		 for _,objective in pairs(self.subcultures[faction_subculture_key].objectives) do 
+			table.insert(objectives,objective)
+		end
+	end
+
+	if #objectives > 0 then
+		
+		self:add_objectives(mm, objectives, faction_key)
+	
 	end
 		
 end
@@ -2538,88 +2801,88 @@ function victory_objectives_ie:add_scripted_victory_listeners()
 		true
 	)
 
-    -- Thorgrim resolves one of his main Grudge missions
-	if cm:get_faction("wh_main_dwf_dwarfs"):is_human() then
+	-- Thorgrim resolves one of his main Grudge missions
+	local thorgrim_faction_key = "wh_main_dwf_dwarfs"
+	if cm:get_faction(thorgrim_faction_key):is_human() then
 		core:add_listener(
 			"IEVictoryConditionThorgrimFirstGrudge",
 			"MissionSucceeded",
 			function(context)
-				local faction = context:faction()
-				return faction:name() == "wh_main_dwf_dwarfs" and (context:mission():mission_record_key() == "wh2_dlc17_grudge_legendary_enemy_skarsnik" or context:mission():mission_record_key() == "wh2_dlc17_grudge_legendary_enemy_queek" or context:mission():mission_record_key() == "wh2_dlc17_grudge_legendary_settlement_black_crag" or context:mission():mission_record_key() == "wh2_dlc17_grudge_legendary_settlement_karak_azgal")
+				return context:faction():name() == thorgrim_faction_key and (context:mission():mission_record_key() == "wh2_dlc17_grudge_legendary_enemy_skarsnik" or context:mission():mission_record_key() == "wh2_dlc17_grudge_legendary_enemy_queek" or context:mission():mission_record_key() == "wh2_dlc17_grudge_legendary_settlement_black_crag" or context:mission():mission_record_key() == "wh2_dlc17_grudge_legendary_settlement_karak_azgal")
 			end,
-			function(context)
-				cm:complete_scripted_mission_objective(context:faction():name(), "wh_main_short_victory", "thorgrim_one_grudge_short_victory", true)
+			function()
+				cm:complete_scripted_mission_objective(thorgrim_faction_key, "wh_main_short_victory", "thorgrim_one_grudge_short_victory", true)
 			end,
 			true
 		)
 	end
 
 	-- Alberic's Grail Vow
-	if cm:get_faction("wh_main_brt_bordeleaux"):is_human() then
+	local alberic_faction_key = "wh_main_brt_bordeleaux"
+	if cm:get_faction(alberic_faction_key):is_human() then
 		core:add_listener(
 			"IEVictoryConditionAlbericGrailVowCompleted",
 			"ScriptEventBretonniaGrailVowCompleted",
 			function(context)
-				local character = context:character();
-				return character:character_subtype("wh_dlc07_brt_alberic") 
+				return context:character():character_subtype("wh_dlc07_brt_alberic") 
 			end,
-			function(context)
-				cm:complete_scripted_mission_objective(context:character():faction():name(), "wh_main_short_victory", "alberic_grail_vow_success", true)
+			function()
+				cm:complete_scripted_mission_objective(alberic_faction_key, "wh_main_short_victory", "alberic_grail_vow_success", true)
 			end,
 			true
 		)
 	end
 
-	 -- Fay Enchantress completes her Trothe of Virtue. 
-	if cm:get_faction("wh_main_brt_carcassonne"):is_human() then
+	-- Fay Enchantress completes her Trothe of Virtue. 
+	local fay_enchantress_faction_key = "wh_main_brt_carcassonne"
+	if cm:get_faction(fay_enchantress_faction_key):is_human() then
 		core:add_listener(
 			"IEVictoryConditionFayEnchantressTrotheCompleted",
 			"ScriptEventBretonniaVirtueTrothCompleted",
 			function(context)
-				local character = context:character();
-				return character:character_subtype("wh_dlc07_brt_fay_enchantress")  
+				return context:character():character_subtype("wh_dlc07_brt_fay_enchantress")  
 			end,
-			function(context)
-				cm:complete_scripted_mission_objective(context:character():faction():name(), "wh_main_short_victory", "enchantress_virtue_success", true)
+			function()
+				cm:complete_scripted_mission_objective(fay_enchantress_faction_key, "wh_main_short_victory", "enchantress_virtue_success", true)
 			end,
 			true
 		)
 	end
 
 	-- Daemon Prince ascends to any of the 5 paths
-	if cm:get_faction("wh3_main_dae_daemon_prince"):is_human() then
+	local daemon_prince_faction_key = "wh3_main_dae_daemon_prince"
+	if cm:get_faction(daemon_prince_faction_key):is_human() then
 		core:add_listener(
 			"IEVictoryConditionDaemonPrinceAscendRitualListener",
 			"RitualCompletedEvent",
 			function(context)
-				local ritual_key = context:ritual():ritual_key();
-				local faction = context:performing_faction();
-				return faction:is_human() and faction:name() == "wh3_main_dae_daemon_prince" and (ritual_key == "wh3_main_ritual_dae_ascend_khorne" or ritual_key == "wh3_main_ritual_dae_ascend_nurgle" or ritual_key == "wh3_main_ritual_dae_ascend_slaanesh" or ritual_key == "wh3_main_ritual_dae_ascend_tzeentch" or ritual_key == "wh3_main_ritual_dae_ascend_undivided")
+				local ritual_key = context:ritual():ritual_key()
+				return context:performing_faction():name() == daemon_prince_faction_key and (ritual_key == "wh3_main_ritual_dae_ascend_khorne" or ritual_key == "wh3_main_ritual_dae_ascend_nurgle" or ritual_key == "wh3_main_ritual_dae_ascend_slaanesh" or ritual_key == "wh3_main_ritual_dae_ascend_tzeentch" or ritual_key == "wh3_main_ritual_dae_ascend_undivided")
 			end,
-			function(context)
-				cm:complete_scripted_mission_objective(context:performing_faction():name(), "wh_main_short_victory", "daemon_prince_ascend_ritual", true)
+			function()
+				cm:complete_scripted_mission_objective(daemon_prince_faction_key, "wh_main_short_victory", "daemon_prince_ascend_ritual", true)
 			end,
 			true
 		)
 	end
 
 	-- Khatep awakens all four Legions of Legend via the Mortuary Cult.
-	if cm:get_faction("wh2_dlc09_tmb_exiles_of_nehek"):is_human() then
+	local khatep_faction_key = "wh2_dlc09_tmb_exiles_of_nehek"
+	if cm:get_faction(khatep_faction_key):is_human() then
 		core:add_listener(
 			"IEVictoryConditionKhatepAwakenLegionsofLegendAll",
 			"RitualCompletedEvent",
 			function(context)
-				local ritual_key = context:ritual():ritual_key();
-				local faction = context:performing_faction();	
-				return faction:is_human() and faction:name() == "wh2_dlc09_tmb_exiles_of_nehek" and (ritual_key == "wh2_dlc09_ritual_crafting_tmb_carrion" or ritual_key == "wh2_dlc09_ritual_crafting_tmb_nehekhara_warriors" or ritual_key == "wh2_dlc09_ritual_crafting_tmb_necropolis_knights" or ritual_key == "wh2_dlc09_ritual_crafting_tmb_nehekhara_horsemen")
+				local ritual_key = context:ritual():ritual_key()
+				return context:performing_faction():name() == khatep_faction_key and (ritual_key == "wh2_dlc09_ritual_crafting_tmb_carrion" or ritual_key == "wh2_dlc09_ritual_crafting_tmb_nehekhara_warriors" or ritual_key == "wh2_dlc09_ritual_crafting_tmb_necropolis_knights" or ritual_key == "wh2_dlc09_ritual_crafting_tmb_nehekhara_horsemen")
 			end,
-			function(context)
+			function()
 				-- add the saved value from awakened legions
 				local awakened_ritual_count = cm:get_saved_value("khatep_short_victory_count") or 0
 				awakened_ritual_count = awakened_ritual_count +1
 				cm:set_saved_value("khatep_short_victory_count", awakened_ritual_count)
-					if 	awakened_ritual_count >= 4 then
-						cm:complete_scripted_mission_objective(context:performing_faction():name(), "wh_main_short_victory", "mortuary_cult_all_victory", true)
+					if awakened_ritual_count == 4 then
+						cm:complete_scripted_mission_objective(khatep_faction_key, "wh_main_short_victory", "mortuary_cult_all_victory", true)
 					end
 			end,
 			true
@@ -2627,186 +2890,283 @@ function victory_objectives_ie:add_scripted_victory_listeners()
 	end
 
 	-- Cylostra obtains the first sea shanty
-	if cm:get_faction("wh2_dlc11_cst_the_drowned"):is_human() then
+	local cylostra_faction_key = "wh2_dlc11_cst_the_drowned"
+	if cm:get_faction(cylostra_faction_key):is_human() then
 		core:add_listener(
 			"IEVictoryConditionCylostraVerseOneObtained",
 			"MissionSucceeded",
 			function(context)
-				return context:faction():name() == "wh2_dlc11_cst_the_drowned" and (context:mission():mission_record_key() == "wh2_dlc11_mission_sea_shanty_1" or context:mission():mission_record_key() == "wh2_dlc11_mission_sea_shanty_player_1") 
+				return context:faction():name() == cylostra_faction_key and (context:mission():mission_record_key() == "wh2_dlc11_mission_sea_shanty_1" or context:mission():mission_record_key() == "wh2_dlc11_mission_sea_shanty_player_1") 
 			end,
-			function(context)
-				cm:complete_scripted_mission_objective(context:faction():name(), "wh_main_short_victory", "shanty_one_obtained", true)
+			function()
+				cm:complete_scripted_mission_objective(cylostra_faction_key, "wh_main_short_victory", "shanty_one_obtained", true)
 			end,
 			true
 		)
 	end
 
 	-- Skrag obtains the Cauldron of the Great Maw
-	if cm:get_faction("wh3_main_ogr_disciples_of_the_maw"):is_human() then
+	local skrag_faction_key = "wh3_main_ogr_disciples_of_the_maw"
+	if cm:get_faction(skrag_faction_key):is_human() then
 		core:add_listener(
 			"IEVictoryConditionSkragCauldronOfMaw",
 			"MissionSucceeded",
 			function(context)
-				return context:faction():name() == "wh3_main_ogr_disciples_of_the_maw" and context:mission():mission_record_key() == "wh3_main_ie_qb_ogr_skrag_cauldron_of_the_great_maw"
+				return context:faction():name() == skrag_faction_key and context:mission():mission_record_key() == "wh3_main_ie_qb_ogr_skrag_cauldron_of_the_great_maw"
 			end,
-			function(context)
-				cm:complete_scripted_mission_objective(context:faction():name(), "wh_main_short_victory", "cauldron_of_maw_obtained", true)
+			function()
+				cm:complete_scripted_mission_objective(skrag_faction_key, "wh_main_short_victory", "cauldron_of_maw_obtained", true)
 			end,
 			true
 		)
 	end
 
-	-- Wuurzag obtains any of his three unique items
-	if cm:get_faction("wh_main_grn_orcs_of_the_bloody_hand"):is_human() then
+	-- Wurrzag obtains any of his three unique items
+	local wurrzag_faction_key = "wh_main_grn_orcs_of_the_bloody_hand"
+	if cm:get_faction(wurrzag_faction_key):is_human() then
 		core:add_listener(
 			"IEVictoryConditionWuurzagBalefulSquigglyBonewood",
 			"MissionSucceeded",
 			function(context)
 				local mission_key = context:mission():mission_record_key()
-				return context:faction():name() == "wh_main_grn_orcs_of_the_bloody_hand" and (mission_key == "wh3_main_ie_qb_grn_wurrzag_da_great_green_prophet_baleful_mask" or mission_key == "wh3_main_ie_qb_grn_wurrzag_da_great_green_prophet_bonewood_staff" or mission_key == "wh3_main_ie_qb_grn_wurrzag_da_great_green_prophet_squiggly_beast")
+				return context:faction():name() == wurrzag_faction_key and (mission_key == "wh3_main_ie_qb_grn_wurrzag_da_great_green_prophet_baleful_mask" or mission_key == "wh3_main_ie_qb_grn_wurrzag_da_great_green_prophet_bonewood_staff" or mission_key == "wh3_main_ie_qb_grn_wurrzag_da_great_green_prophet_squiggly_beast")
 			end,
-			function(context)
-				cm:complete_scripted_mission_objective(context:faction():name(), "wh_main_short_victory", "baleful_squiggly_bonewood_obtained", true)
+			function()
+				cm:complete_scripted_mission_objective(wurrzag_faction_key, "wh_main_short_victory", "baleful_squiggly_bonewood_obtained", true)
 			end,
 			true
 		)
 	end
 
 	-- Rakarth obtains the Whip of Agony
-	if cm:get_faction("wh2_twa03_def_rakarth"):is_human() then
+	local rakarth_faction_key = "wh2_twa03_def_rakarth"
+	if cm:get_faction(rakarth_faction_key):is_human() then
 		core:add_listener(
 			"IEVictoryConditionRakarthWhipOfAgony",
 			"MissionSucceeded",
 			function(context)
-				return context:faction():name() == "wh2_twa03_def_rakarth" and context:mission():mission_record_key() == "wh3_main_ie_qb_def_rakarth_whip_of_agony"
+				return context:faction():name() == rakarth_faction_key and context:mission():mission_record_key() == "wh3_main_ie_qb_def_rakarth_whip_of_agony"
 			end,
-			function(context)
-				cm:complete_scripted_mission_objective(context:faction():name(), "wh_main_short_victory", "whip_of_agony_obtained", true)
+			function()
+				cm:complete_scripted_mission_objective(rakarth_faction_key, "wh_main_short_victory", "whip_of_agony_obtained", true)
 			end,
 			true
 		)
 	end
 
 	-- Skarbrand obtains the Slaughter and Carnage
-	if cm:get_faction("wh3_main_kho_exiles_of_khorne"):is_human() then
+	local skarbrand_faction_key = "wh3_main_kho_exiles_of_khorne"
+	if cm:get_faction(skarbrand_faction_key):is_human() then
 		core:add_listener(
 			"IEVictoryConditionSkarbrandObtainsCarnage",
 			"MissionSucceeded",
 			function(context)
-				return context:faction():name() == "wh3_main_kho_exiles_of_khorne" and context:mission():mission_record_key() == "wh3_main_ie_qb_kho_skarbrand_slaughter_and_carnage"
+				return context:faction():name() == skarbrand_faction_key and context:mission():mission_record_key() == "wh3_main_ie_qb_kho_skarbrand_slaughter_and_carnage"
 			end,
-			function(context)
-				cm:complete_scripted_mission_objective(context:faction():name(), "wh_main_short_victory", "slaughter_carnage_obtained", true)
+			function()
+				cm:complete_scripted_mission_objective(skarbrand_faction_key, "wh_main_short_victory", "slaughter_carnage_obtained", true)
 			end,
 			true
 		)
 	end
 
 	-- Sigvald obtains the Sliverslash
-	if cm:get_faction("wh3_dlc20_chs_sigvald"):is_human() then
+	local sigvald_faction_key = "wh3_dlc20_chs_sigvald"
+	if cm:get_faction(sigvald_faction_key):is_human() then
 		core:add_listener(
 			"IEVictoryConditionSkarbrandObtainsCarnage",
 			"MissionSucceeded",
 			function(context)
-				return context:faction():name() == "wh3_dlc20_chs_sigvald" and context:mission():mission_record_key() == "wh3_main_ie_qb_chs_prince_sigvald_sliverslash"
+				return context:faction():name() == sigvald_faction_key and context:mission():mission_record_key() == "wh3_main_ie_qb_chs_prince_sigvald_sliverslash"
 			end,
-			function(context)
-				cm:complete_scripted_mission_objective(context:faction():name(), "wh_main_short_victory", "sliverslash_obtained", true)
+			function()
+				cm:complete_scripted_mission_objective(sigvald_faction_key, "wh_main_short_victory", "sliverslash_obtained", true)
 			end,
 			true
 		)
 	end
 
 	-- Ikit Claw has levelled up the Forbidden Workshop to rank three
-	if cm:get_faction("wh2_main_skv_clan_skryre"):is_human() then
+	local ikit_claw_faction_key = "wh2_main_skv_clan_skryre"
+	if cm:get_faction(ikit_claw_faction_key):is_human() then
 		core:add_listener(
 			"Ikit_Claw_Incident_Workshop_3",
 			"IncidentOccuredEvent",
 			function(context)
-				local incident = context:dilemma()
-				local faction = context:faction()   
-				return faction:is_human() and faction:name() == "wh2_main_skv_clan_skryre" and incident == "wh2_dlc12_incident_skv_workshop_upgrade_3"
+				return context:faction():name() == ikit_claw_faction_key and context:dilemma() == "wh2_dlc12_incident_skv_workshop_upgrade_3"
 			end,
-			function(context)
-				cm:complete_scripted_mission_objective(context:faction():name(), "wh_main_short_victory", "workshop_rank_3_victory", true)
+			function()
+				cm:complete_scripted_mission_objective(ikit_claw_faction_key, "wh_main_short_victory", "workshop_rank_3_victory", true)
 			end,
 		true
-		);
+		)
 	end
 
 	-- Imrik encounters special Dragons
-	if cm:get_faction("wh2_dlc15_hef_imrik"):is_human() then
+	local imrik_faction_key = "wh2_dlc15_hef_imrik"
+	if cm:get_faction(imrik_faction_key):is_human() then
 		core:add_listener(
 			"IEVictoryConditionImrikDragonEncounterDilemmaIssued",
 			"DilemmaIssuedEvent",
 			function(context)
-				local faction = context:faction()   
-				return faction:is_human() and faction:name() == "wh2_dlc15_hef_imrik" and context:dilemma():starts_with("wh2_dlc15_dilemma_dragon_encounter_special_")
+				return context:faction():name() == imrik_faction_key and context:dilemma():starts_with("wh2_dlc15_dilemma_dragon_encounter_special_")
 			end,
-			function(context)
+			function()
 				-- Count Imrik's dragon dilemma encounters
 				local dragon_encounter_count = cm:get_saved_value("imrik_short_victory_count") or 0
 				dragon_encounter_count = dragon_encounter_count +1
 				cm:set_saved_value("imrik_short_victory_count", dragon_encounter_count)
-					if  dragon_encounter_count >= 2 then
-						cm:complete_scripted_mission_objective(context:faction():name(), "wh_main_short_victory", "dragon_encounters", true)
-					end
+				if dragon_encounter_count == 5 then
+					cm:complete_scripted_mission_objective(imrik_faction_key, "wh_main_long_victory", "dragon_encounters_all", true)
+				elseif dragon_encounter_count == 2 then
+					cm:complete_scripted_mission_objective(imrik_faction_key, "wh_main_short_victory", "dragon_encounters", true)
+				end
 			end,
 		true
-	);
+	)
 	end
 
 	-- Tehenhauin completes the first stage of the Prophecy of Sotek and any second stage missions are issued
-	if cm:get_faction("wh2_dlc12_lzd_cult_of_sotek"):is_human() then
+	local tehenhauin_faction_key = "wh2_dlc12_lzd_cult_of_sotek"
+	if cm:get_faction(tehenhauin_faction_key):is_human() then
 		core:add_listener(
 			"IEVictoryConditionTehenhauinProphecyCompleted",
 			"MissionIssued",
 			function(context)
-				return context:faction():name() == "wh2_dlc12_lzd_cult_of_sotek" and context:mission():mission_record_key():starts_with("wh2_dlc12_prophecy_of_sotek_2_")
+				return context:faction():name() == tehenhauin_faction_key and context:mission():mission_record_key():starts_with("wh2_dlc12_prophecy_of_sotek_2_")
 			end,
-			function(context)
-				cm:complete_scripted_mission_objective(context:faction():name(), "wh_main_short_victory", "prophecy_of_sotek_one", true)
+			function()
+				cm:complete_scripted_mission_objective(tehenhauin_faction_key, "wh_main_short_victory", "prophecy_of_sotek_one", true)
 			end,
 			true
 		)
 	end
 
 	-- Malus obtains the Warpsword of Khaine
-    if cm:get_faction("wh2_main_def_hag_graef"):is_human() then
-        core:add_listener(
-            "IEVictoryConditionMalusWarpswordOfKhaine",
-            "MissionSucceeded",
-            function(context)
-                return context:faction():name() == "wh2_main_def_hag_graef" and context:mission():mission_record_key() == "wh3_main_ie_qb_def_malus_warpsword_of_khaine"
-            end,
-            function(context)
-                cm:complete_scripted_mission_objective(context:faction():name(), "wh_main_short_victory", "warpsword_of_khaine_obtained", true)
-            end,
-            true
-        )
-    end
-
-	-- Snikch performs any 8 Clan Eshin Actions
-	if cm:get_faction("wh2_main_skv_clan_eshin"):is_human() then
+	local malus_faction_key = "wh2_main_def_hag_graef"
+	if cm:get_faction(malus_faction_key):is_human() then
 		core:add_listener(
-			"IEVictoryConditionSnikchEshinActionsr",
-			"RitualCompletedEvent",
+			"IEVictoryConditionMalusWarpswordOfKhaine",
+			"MissionSucceeded",
 			function(context)
-				local ritual_key = context:ritual():ritual_key();
-				local faction = context:performing_faction();
-				return faction:is_human() and faction:name() == "wh2_main_skv_clan_eshin" and ritual_key:starts_with("wh2_dlc14_eshin_actions_")
+				return context:faction():name() == malus_faction_key and context:mission():mission_record_key() == "wh3_main_ie_qb_def_malus_warpsword_of_khaine"
 			end,
-			function(context)
-				-- Count the Eshin Actions performed by Snikch
-				local performed_clan_ritual_count = cm:get_saved_value("snikch_short_victory_count") or 0
-                performed_clan_ritual_count = performed_clan_ritual_count +1
-                cm:set_saved_value("snikch_short_victory_count", performed_clan_ritual_count)
-                    if  performed_clan_ritual_count >= 8 then
-						cm:complete_scripted_mission_objective(context:performing_faction():name(), "wh_main_short_victory", "snikch_eshin_actions_complete", true)
-                    end
+			function()
+				cm:complete_scripted_mission_objective(malus_faction_key, "wh_main_short_victory", "warpsword_of_khaine_obtained", true)
 			end,
 			true
 		)
 	end
 
+	-- Snikch performs any 8 Clan Eshin Actions
+	local snikch_faction_key = "wh2_main_skv_clan_eshin"
+	if cm:get_faction(snikch_faction_key):is_human() then
+		core:add_listener(
+			"IEVictoryConditionSnikchEshinActionsr",
+			"RitualCompletedEvent",
+			function(context)
+				return context:performing_faction():name() == snikch_faction_key and context:ritual():ritual_key():starts_with("wh2_dlc14_eshin_actions_")
+			end,
+			function()
+				-- Count the Eshin Actions performed by Snikch
+				local performed_clan_ritual_count = cm:get_saved_value("snikch_short_victory_count") or 0
+				performed_clan_ritual_count = performed_clan_ritual_count +1
+				cm:set_saved_value("snikch_short_victory_count", performed_clan_ritual_count)
+				if performed_clan_ritual_count >= 8 then
+					cm:complete_scripted_mission_objective(snikch_faction_key, "wh_main_short_victory", "snikch_eshin_actions_complete", true)
+				end
+			end,
+			true
+		)
+	end
+
+	-- Eltharion upgrades Athel Tamarha
+	local eltharion_faction_key = "wh2_main_hef_yvresse"
+	if cm:get_faction(eltharion_faction_key):is_human() then
+		core:add_listener(
+			"IEVictoryConditionEltharionTamarhaUpgrade",
+			"RitualCompletedEvent",
+			function(context)
+				return context:ritual():ritual_category() == "ATHEL_TAMARHA_RITUAL" 
+			end,
+			function()
+				-- Count the upgrade number within the facility for short and long victories. Note: Player facing condition is 5 for short and 15 for long, but +8 is added to each counter to accomadate for eight the rank 1 'ruined' rituals that are completed on campaign start
+				local athel_tamarha_upgrade_count = cm:get_saved_value("eltharion_upgrade_short_victory_count") or 0
+				athel_tamarha_upgrade_count = athel_tamarha_upgrade_count +1
+				cm:set_saved_value("eltharion_upgrade_short_victory_count", athel_tamarha_upgrade_count)
+				if  athel_tamarha_upgrade_count >= 23 then
+					cm:complete_scripted_mission_objective(eltharion_faction_key, "wh_main_long_victory", "athel_tamarha_max_upgrades_attained", true)
+				elseif athel_tamarha_upgrade_count == 13 then
+					cm:complete_scripted_mission_objective(eltharion_faction_key, "wh_main_short_victory", "athel_tamarha_upgrades_attained", true)
+				end
+			end,
+			true
+		)
+	end
+
+	--Trigger dilemma for Nakai if he completes his short objective and Skrolk is still alive 
+	local nakai_faction_key = "wh2_dlc13_lzd_spirits_of_the_jungle"
+	local pestilens_faction_key = "wh2_main_skv_clan_pestilens"
+	if cm:get_faction("wh2_dlc13_lzd_spirits_of_the_jungle"):is_human() then
+		core:add_listener(
+			"IEVictoryConditionNakaiShortVictoryDilemma",
+			"MissionSucceeded",
+			function(context)
+				return context:faction():name() == nakai_faction_key and (context:mission():mission_record_key() == "wh_main_short_victory")
+			end,
+			function()
+				if cm:get_faction(pestilens_faction_key):is_dead() == false then
+					cm:trigger_dilemma(nakai_faction_key, "wh3_dlc21_lzd_lingering_pestilence_dilemma_nakai")
+				end
+			end,
+			true
+		)
+	end
+
+	-- Nakai chooses the dilemma option to spawn an army
+	if cm:get_faction(nakai_faction_key):is_human() then
+		core:add_listener(
+			"IEVictoryConditionNakaiDilemmaChoiceMadeEvent",
+			"DilemmaChoiceMadeEvent",
+			function(context)
+				return context:dilemma() == "wh3_dlc21_lzd_lingering_pestilence_dilemma_nakai" 
+			end,
+			function(context)
+				local choice = context:choice()
+				if choice == 0 then
+					local units = "wh2_main_lzd_inf_saurus_spearmen_1,wh2_main_lzd_inf_saurus_spearmen_1,wh2_main_lzd_mon_kroxigors,wh2_main_lzd_mon_kroxigors,wh2_main_lzd_inf_saurus_warriors_1,wh2_main_lzd_inf_saurus_warriors_0,wh2_main_lzd_inf_saurus_warriors_0,wh2_main_lzd_inf_skink_cohort_1,wh2_main_lzd_inf_skink_cohort_1,wh2_main_lzd_mon_stegadon_1,wh2_main_lzd_mon_carnosaur_0,wh2_main_lzd_mon_bastiladon_2"
+					local agents = {
+						wh2_main_lzd_saurus_scar_veteran = "champion",
+						wh2_main_lzd_skink_chief = "spy",
+						wh2_main_lzd_skink_priest_heavens = "wizard",
+					}
+					if cm:get_faction(nakai_faction_key):at_war_with(cm:get_faction(pestilens_faction_key)) == false then
+						cm:force_declare_war(nakai_faction_key, pestilens_faction_key, false, false)
+					end
+					local pos_x, pos_y = cm:find_valid_spawn_location_for_character_from_settlement(nakai_faction_key, "wh3_main_combi_region_itza", false, true, 10)
+					cm:create_force(
+						nakai_faction_key,
+						units,
+						"wh3_main_combi_region_itza",
+						pos_x,
+						pos_y,
+						false,
+						function(cqi)
+							local force = cm:get_character_by_cqi(cqi):military_force()
+							for subtype, type in pairs(agents) do
+								local agent_x, agent_y = cm:find_valid_spawn_location_for_character_from_settlement(nakai_faction_key, "wh3_main_combi_region_itza", false, true, 10)
+								local agent = cm:create_agent(nakai_faction_key, type, subtype, agent_x, agent_y)
+								cm:add_agent_experience(cm:char_lookup_str(agent:command_queue_index()), cm:random_number(16, 10), true)
+								cm:embed_agent_in_force(agent, force)
+							end
+							local character = cm:char_lookup_str(cqi)
+							cm:apply_effect_bundle_to_characters_force("wh_main_bundle_military_upkeep_free_force_endgame", cqi, 8)
+							cm:add_experience_to_units_commanded_by_character(character, 7)
+						end
+					)
+				end
+			end,
+			true
+		)
+	end
 end

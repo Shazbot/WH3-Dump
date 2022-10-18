@@ -445,6 +445,22 @@ local help_panel_position_overrides_campaign = {
 		["x"] = -5,
 		["y"] = -5
 	},
+	oxyotl_threat_map = {
+		["x"] = -5,
+		["y"] = -5
+	},
+	nakai_temples_panel = {
+		["x"] = -5,
+		["y"] = -5
+	},
+	geomantic_web = {
+		["x"] = 5,
+		["y"] = -5
+	},
+	groms_cauldron = {
+		["x"] = -5,
+		["y"] = -5
+	},
 
 	-- WH3
 	kislev_ice_court = {
@@ -683,10 +699,20 @@ function help_page_manager:new()
 		function(context) if not cm:model():campaign_name("wh3_main_prologue") then hm:info_button_clicked(UIComponent(context.component)) end end,
 		true
 	);
+	
+	core:add_listener(
+		"help_page_manager_first_tick_listener",
+		"ScriptEventFirstTickAfterWorldCreated",
+		true,
+		function()
+			-- Listen for cinematic ui being opened/closed
+			hm:start_cinematic_ui_listeners();
 
-
-	-- Listen for cinematic ui being opened/closed
-	hm:start_cinematic_ui_listeners();
+			-- Listen for bespoke conditions that trigger panel open/panel close events
+			hm:start_additional_panel_listeners();
+		end,
+		false
+	);
 		
 	-- Establish a listener for panels being opened and closed
 	local panel_opened_event;
@@ -867,18 +893,7 @@ function help_page_manager:set_close_on_game_menu_opened(value)
 end;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+-- Listen for the cinematic UI being enabled or disabled
 function help_page_manager:start_cinematic_ui_listeners()
 	core:add_listener(
 		"help_panel_cinematic_listener",
@@ -892,7 +907,6 @@ function help_page_manager:start_cinematic_ui_listeners()
 		end,
 		true
 	);
-
 
 	core:add_listener(
 		"help_panel_cinematic_listener",
@@ -909,6 +923,42 @@ function help_page_manager:start_cinematic_ui_listeners()
 end;
 
 
+-- Put bespoke panel open/panel close listeners here, for when simply listening for a panel open/panel close event won't quite cut it. These listeners should probably fire a panel open/panel close event.
+function help_page_manager:start_additional_panel_listeners()
+
+	if core:is_campaign() then
+		-- Campaign listeners here
+
+		local local_faction_culture = cm:get_local_faction_culture(true);
+
+		if local_faction_culture == "wh2_main_lzd_lizardmen" then
+
+			-- Geomantic Web
+			core:add_listener(
+				"geomantic_web_help_page_listener",
+				"ComponentLClickUp",
+				true,
+				function(context)
+					if context.string == "button_geomantic_web" then
+						
+						local uic_geomantic_web_panel = find_uicomponent("hud_campaign", "custom_overlay_keys", "key_geomantic_web");
+						if uic_geomantic_web_panel and uic_geomantic_web_panel:Visible(true) then
+							-- Geomantic web panel is visible, so trigger a ScriptEventPanelOpenedCampaign message
+							core:trigger_event("ScriptEventPanelOpenedCampaign", "geomantic_web", context.component);
+						else
+							-- Geomantic web panel is not created or not visible, so trigger a ScriptEventPanelClosedCampaign message
+							core:trigger_event("ScriptEventPanelClosedCampaign", "geomantic_web", context.component);
+						end;
+					end;
+				end,
+				true
+			);
+		end;
+	
+	elseif core:is_battle() then
+		-- Battle listeners here
+	end;
+end;
 
 
 

@@ -675,9 +675,23 @@ core:add_listener(
 				local x, y = cm:find_valid_spawn_location_for_character_from_character(faction_name, cm:char_lookup_str(character:command_queue_index()), true, 4);
 				
 				if x > 0 then
+					local corruption = 0;
+					
+					if character:has_region() then
+						corruption = cm:get_corruption_value_in_region(character:region(), slaanesh_corruption_string);
+					end;
+					
+					local units = "wh3_main_sla_inf_marauders_0,wh3_main_sla_veh_seeker_chariot_0,wh3_main_sla_cav_seekers_of_slaanesh_0";
+					
+					if corruption >= 66 then
+						units = "wh3_main_sla_inf_marauders_2,wh3_main_sla_inf_marauders_1,wh3_main_sla_inf_marauders_1,wh3_main_sla_inf_marauders_1,wh3_main_sla_inf_marauders_1,wh3_main_sla_inf_marauders_1,wh3_main_sla_inf_marauders_0,wh3_main_sla_inf_marauders_0,wh3_main_sla_inf_marauders_0,wh3_main_sla_inf_marauders_0,wh3_main_sla_veh_seeker_chariot_0,wh3_main_sla_veh_seeker_chariot_0,wh3_main_sla_veh_seeker_chariot_0,wh3_main_sla_cav_seekers_of_slaanesh_0,wh3_main_sla_cav_seekers_of_slaanesh_0";
+					elseif corruption >= 33 then
+						units = "wh3_main_sla_inf_marauders_1,wh3_main_sla_inf_marauders_1,wh3_main_sla_inf_marauders_0,wh3_main_sla_inf_marauders_0,wh3_main_sla_inf_marauders_0,wh3_main_sla_veh_seeker_chariot_0,wh3_main_sla_veh_seeker_chariot_0,wh3_main_sla_cav_seekers_of_slaanesh_0,wh3_main_sla_cav_seekers_of_slaanesh_0";
+					end;
+					
 					cm:create_force_with_general(
 						faction_name,
-						"wh3_main_sla_inf_marauders_0,wh3_main_sla_inf_marauders_0,wh3_main_sla_inf_marauders_0,wh3_main_sla_inf_daemonette_0,wh3_main_sla_inf_daemonette_0",
+						units,
 						character:region_data():key(),
 						x,
 						y,

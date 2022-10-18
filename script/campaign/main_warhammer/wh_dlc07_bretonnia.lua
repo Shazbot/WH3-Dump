@@ -125,15 +125,6 @@ function Add_Bretonnia_Listeners()
 		function(context) Bret_RepanseSupplies(context:character(), false) end,
 		true
 	)
-
-	if cm:is_new_game() then
-		local kemmler = cm:get_faction("wh2_dlc11_vmp_the_barrow_legion")
-		
-		if kemmler and not kemmler:is_human() then
-			cm:apply_effect_bundle("wh2_main_ai_kemmler", "wh2_dlc11_vmp_the_barrow_legion", 50)
-			cm:teleport_to(cm:char_lookup_str(kemmler:faction_leader()), 462, 621)
-		end
-	end
 end
 	
 function Check_Chivalry_Win_Condition(faction)

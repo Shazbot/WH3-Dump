@@ -297,6 +297,7 @@ function sword_of_khaine:set_sword_owner(cqi, limited_to_elven)
 	
 	if not character or character:is_null_interface() or (limited_to_elven and not self:faction_is_elven(character:faction())) or character:faction():name() == "rebels" then
 		-- The character cqi isn't valid, or the sword is limited to elves and we're not elven, or the character is a rebel
+		out("Sword of Khaine - Unable to transfer the sword to new character. Sword is returned to shrine")
 		self:return_sword_to_shrine();
 	else 
 		-- If we're here we have a valid character interface,
@@ -387,7 +388,7 @@ function sword_of_khaine:find_candidate_for_faction(faction)
 end;
 
 function sword_of_khaine:transfer_sword_after_battle(target_character)
-	if target_character and target_character:won_battle() and self:is_character_valid_to_equip_sword(target_character) then
+	if target_character and self:is_character_valid_to_equip_sword(target_character) then
 		local cqi = target_character:command_queue_index();
 		local faction = target_character:faction();
 		
@@ -614,12 +615,13 @@ function sword_of_khaine:add_listeners()
 		"BattleCompleted",
 		true,
 		function(context)
-			local is_night_battle = cm:model():pending_battle():night_battle();
+			local pending_battle = cm:model():pending_battle()
+			local is_night_battle = pending_battle:night_battle();
 				
 			-- Check the sword owning faction exists and is in the battle, and that they're on the losing side
-			if self.owner.faction ~= nil then
+			if self.owner.faction ~= nil and pending_battle:has_been_fought() then
 
-				if cm:pending_battle_cache_num_attackers() >= 1 then
+				if cm:pending_battle_cache_defender_victory() and cm:pending_battle_cache_num_attackers() >= 1 then
 					for i = 1, cm:pending_battle_cache_num_attackers() do
 						if is_night_battle and i == 2 then
 							break;
@@ -628,14 +630,15 @@ function sword_of_khaine:add_listeners()
 						local attacker_fm_cqi = cm:pending_battle_cache_get_attacker_fm_cqi(i)
 						local attacker_fm = cm:get_family_member_by_cqi(attacker_fm_cqi)
 						if attacker_fm and not attacker_fm:character_details():is_null_interface() then
+							local attacker_details = attacker_fm:character_details()
 
-							local attacker_faction = attacker_fm:character_details():faction()
-							for i = 1, #self.key_index do
-								
-								if attacker_faction:ancillary_exists(self.key_index[i]) and attacker_fm:character_details():has_ancillary(self.key_index[i]) then
+							for i2 = 1, #self.key_index do
+								local ancillary = self.key_index[i2]
+								local faction = attacker_details:faction()
+								if attacker_fm:character_details():has_ancillary(ancillary) or self:ancillary_unequipped_check(faction, ancillary) then
 									local defender_char_cqi, mf_cqi, faction_name = cm:pending_battle_cache_get_defender(1);
 									
-									out("Sword of Khaine: The previous owner has been defeated in battle, so we'll check to see if "..faction_name.." can steal the sword, and if not return it to the shrine")
+									out("Sword of Khaine: The previous owner has been defeated in battle, so we'll check to see if "..faction_name.." can steal the sword")
 									
 									self:transfer_sword_after_battle(cm:get_character_by_cqi(defender_char_cqi));
 									break;
@@ -646,7 +649,7 @@ function sword_of_khaine:add_listeners()
 				end;
 
 				
-				if cm:pending_battle_cache_num_defenders() >= 1 then
+				if cm:pending_battle_cache_attacker_victory() and cm:pending_battle_cache_num_defenders() >= 1 then
 					for i = 1, cm:pending_battle_cache_num_defenders() do
 						if is_night_battle and i == 2 then
 							break;
@@ -655,14 +658,15 @@ function sword_of_khaine:add_listeners()
 						local defender_fm_cqi = cm:pending_battle_cache_get_defender_fm_cqi(i)
 						local defender_fm = cm:get_family_member_by_cqi(defender_fm_cqi)
 						if defender_fm and not defender_fm:character_details():is_null_interface() then
+							local defender_details = defender_fm:character_details()
 
-							local defender_faction = defender_fm:character_details():faction()
-							for i = 1, #self.key_index do
-								
-								if defender_faction:ancillary_exists(self.key_index[i]) and defender_fm:character_details():has_ancillary(self.key_index[i]) then
+							for i2 = 1, #self.key_index do
+								local ancillary = self.key_index[i2]
+								local faction = defender_details:faction()
+								if defender_details:has_ancillary(ancillary) or self:ancillary_unequipped_check(faction, ancillary) then
 									local attacker_char_cqi, mf_cqi, faction_name = cm:pending_battle_cache_get_attacker(1);
 									
-									out("Sword of Khaine: The previous owner has been defeated in battle, so we'll check to see if "..faction_name.." can steal the sword, and if not return it to the shrine")
+									out("Sword of Khaine: The previous owner has been defeated in battle, so we'll check to see if "..faction_name.." can steal the sword")
 									
 									self:transfer_sword_after_battle(cm:get_character_by_cqi(attacker_char_cqi));
 									break;
@@ -788,6 +792,22 @@ function sword_of_khaine:add_listeners()
 		true
 	);
 
+end
+
+-- Sometimes the sword can get unequipped (e.g. post battle after the wielder dies)
+-- This checks to see if it's sitting idle in the faction
+function sword_of_khaine:ancillary_unequipped_check(faction, ancillary)
+	if faction:ancillary_exists(ancillary) then
+		local character_list = faction:character_list()
+		for i = 0, character_list:num_items() - 1 do
+			local character = character_list:item_at(i)
+			if character:has_ancillary(ancillary) then
+				return false
+			end
+		end
+		return true
+	end
+	return false
 end
 
 --------------------------------------------------------------

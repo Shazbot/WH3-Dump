@@ -1,4 +1,4 @@
-local REGIMENTS_OF_RENOWN = {
+regiments_of_renown = {
 	----------------
 	---- EMPIRE ----
 	----------------
@@ -253,7 +253,7 @@ function Add_ROR_Locks()
 	local human_factions = cm:get_human_factions();
 	local faction_list = cm:model():world():faction_list();
 	
-	for subculture, units in pairs(REGIMENTS_OF_RENOWN) do
+	for subculture, units in pairs(regiments_of_renown) do
 		output_ror("Checking for subculture: "..subculture);
 		local human_player = false;
 		
@@ -319,12 +319,12 @@ function Lock_Units_In_Subculture_For_Everyone_But(subculture, faction)
 		local fac_name = current_faction:name();
 		local fac_subculture = current_faction:subculture();
 		
-		if not current_faction:is_human() and not current_faction:is_quest_battle_faction() and fac_name ~= faction and fac_subculture == subculture and REGIMENTS_OF_RENOWN[subculture] ~= nil then
-			output_ror("Locking "..#REGIMENTS_OF_RENOWN[subculture].." ROR units for "..fac_name);
+		if not current_faction:is_human() and not current_faction:is_quest_battle_faction() and fac_name ~= faction and fac_subculture == subculture and regiments_of_renown[subculture] ~= nil then
+			output_ror("Locking "..#regiments_of_renown[subculture].." ROR units for "..fac_name);
 			
-			for j = 1, #REGIMENTS_OF_RENOWN[subculture] do
-				output_ror("\tLocking Unit: "..REGIMENTS_OF_RENOWN[subculture][j]);
-				cm:add_event_restricted_unit_record_for_faction(REGIMENTS_OF_RENOWN[subculture][j], fac_name);
+			for j = 1, #regiments_of_renown[subculture] do
+				output_ror("\tLocking Unit: "..regiments_of_renown[subculture][j]);
+				cm:add_event_restricted_unit_record_for_faction(regiments_of_renown[subculture][j], fac_name);
 			end
 		end
 	end

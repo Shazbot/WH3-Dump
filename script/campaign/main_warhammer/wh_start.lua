@@ -14,9 +14,7 @@
 -------------------------------------------------------
 cm:add_pre_first_tick_callback(
 	function()
-		-- load the legendary lord and rite unlock listeners when the ui is loaded
-		ll_setup();
-		
+		-- load the rite unlock listeners when the ui is loaded
 		rite_unlock_listeners();
 		
 		initiative_unlock_listeners();
@@ -188,20 +186,6 @@ function start_game_all_factions()
 
 		add_starting_corruption();
 	end
-	
-	-- unlock starting generals for AI
-	if not cm:get_saved_value("ci_starting_generals_unlocked_ai") then
-		core:add_listener(
-			"unlock_ai_generals",
-			"FactionTurnStart",
-			function() return cm:model():turn_number() == 30 end,
-			function()
-				unlock_ai_starting_generals();
-				cm:set_saved_value("ci_starting_generals_unlocked_ai", true);
-			end,
-			false
-		);
-	end;
 
 	-- Corruption Swing
 	out("==== Corruption Swing ====")
@@ -253,7 +237,6 @@ function start_game_all_factions()
 	Add_Norsca_Listeners();
 	Add_Norscan_Gods_Listeners();
 	Add_Nurgle_Plague_Listeners();
-	norsca_tech:add_region_change_listener();
 	
 	-- DLC09 Tomb Kings Features
 	out("==== Tomb Kings ====");
@@ -363,6 +346,7 @@ function start_game_all_factions()
 	add_volkmar_elector_count_units_listener();
 	victory_objectives_ie:add_scripted_victory_listeners()
 	scripted_occupation_options:initialise()
+	scripted_technology_tree:start_technology_listeners();
 
 
 	---Champions of Chaos

@@ -31,11 +31,15 @@ function setup_battle_help_pages(bm)
 	]]
 
 
+	local local_player_army = bm:get_player_army();
+	local local_player_faction_key = local_player_army:faction_key();
+	local local_player_subculture_key = local_player_army:subculture_key();
+
+
+
 	-- battle index page
 	hpm:register_hyperlink_click_listener("script_link_battle_index", function() hpm:show_index() end);
 	parser:add_record("battle_index", "script_link_battle_index", "tooltip_battle_index");
-
-	local script_feature_name = "";
 
 	-------------------------------------------------------------------------------------------------------------------------
 	--
@@ -441,7 +445,9 @@ function setup_battle_help_pages(bm)
 	tp_blood_for_the_blood_god = tooltip_listener:new(
 		"tooltip_battle_blood_for_the_blood_god",
 		function()
-			buim:highlight_army_abilities(true);
+			if local_player_subculture_key == "wh3_main_sc_kho_khorne" then
+				buim:highlight_army_abilities(true);
+			end;
 		end,
 		function()
 			buim:unhighlight_all_for_tooltips();
@@ -452,15 +458,16 @@ function setup_battle_help_pages(bm)
 	--
 	-- blood_for_the_blood_god_link
 	--
-	script_feature_name = "blood_for_the_blood_god";
-	parser:add_record("battle_"..script_feature_name.."_link", "script_link_battle_"..script_feature_name.."_link", "tooltip_battle_"..script_feature_name.."_link");
-	tp_blood_for_the_blood_god_link = tooltip_patcher:new("tooltip_battle_"..script_feature_name.."_link");
-	tp_blood_for_the_blood_god_link:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_battle_title_"..script_feature_name.."_link");
+	parser:add_record("battle_blood_for_the_blood_god_link", "script_link_battle_blood_for_the_blood_god_link", "tooltip_battle_blood_for_the_blood_god_link");
+	tp_blood_for_the_blood_god_link = tooltip_patcher:new("tooltip_battle_blood_for_the_blood_god_link");
+	tp_blood_for_the_blood_god_link:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_battle_title_blood_for_the_blood_god_link");
 
 	tl_blood_for_the_blood_god_link = tooltip_listener:new(
-		"tooltip_battle_"..script_feature_name.."_link",
+		"tooltip_battle_blood_for_the_blood_god_link",
 		function() 
-			buim:highlight_army_abilities(true);
+			if local_player_subculture_key == "wh3_main_sc_kho_khorne" then
+				buim:highlight_army_abilities(true);
+			end;
 		end,
 		function() 
 			buim:unhighlight_all_for_tooltips();
@@ -479,7 +486,9 @@ function setup_battle_help_pages(bm)
 	tp_blood_for_the_blood_god_meter = tooltip_listener:new(
 		"tooltip_battle_blood_for_the_blood_god_meter",
 		function()
-			buim:highlight_army_abilities_meter(true);
+			if local_player_subculture_key == "wh3_main_sc_kho_khorne" then
+				buim:highlight_army_abilities_meter(true);
+			end;
 		end,
 		function()
 			buim:unhighlight_all_for_tooltips();
@@ -565,13 +574,12 @@ function setup_battle_help_pages(bm)
 	--
 	-- capture_locations_link
 	--
-	script_feature_name = "capture_locations";
-	parser:add_record("battle_"..script_feature_name.."_link", "script_link_battle_"..script_feature_name.."_link", "tooltip_battle_"..script_feature_name.."_link");
-	tp_capture_locations_link = tooltip_patcher:new("tooltip_battle_"..script_feature_name.."_link");
-	tp_capture_locations_link:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_battle_title_"..script_feature_name.."_link");
+	parser:add_record("battle_capture_locations_link", "script_link_battle_capture_locations_link", "tooltip_battle_capture_locations_link");
+	tp_capture_locations_link = tooltip_patcher:new("tooltip_battle_capture_locations_link");
+	tp_capture_locations_link:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_battle_title_capture_locations_link");
 
 	tl_capture_locations_link = tooltip_listener:new(
-		"tooltip_battle_"..script_feature_name.."_link",
+		"tooltip_battle_capture_locations_link",
 		function()
 			buim:highlight_victory_locations(true);
 		end,
@@ -720,7 +728,9 @@ function setup_battle_help_pages(bm)
 	tp_eye_of_tzeentch = tooltip_listener:new(
 		"tooltip_battle_eye_of_tzeentch", 
 		function()
-			buim:highlight_army_abilities(true);
+			if local_player_subculture_key == "wh3_main_sc_tze_tzeentch" then
+				buim:highlight_army_abilities(true);
+			end;
 		end,
 		function()
 			buim:unhighlight_all_for_tooltips();
@@ -732,15 +742,16 @@ function setup_battle_help_pages(bm)
 	--
 	-- eye_of_tzeentch_link
 	--
-	script_feature_name = "eye_of_tzeentch";
-	parser:add_record("battle_"..script_feature_name.."_link", "script_link_battle_"..script_feature_name.."_link", "tooltip_battle_"..script_feature_name.."_link");
-	tp_eye_of_tzeentch_link = tooltip_patcher:new("tooltip_battle_"..script_feature_name.."_link");
-	tp_eye_of_tzeentch_link:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_battle_title_"..script_feature_name.."_link");
+	parser:add_record("battle_eye_of_tzeentch_link", "script_link_battle_eye_of_tzeentch_link", "tooltip_battle_eye_of_tzeentch_link");
+	tp_eye_of_tzeentch_link = tooltip_patcher:new("tooltip_battle_eye_of_tzeentch_link");
+	tp_eye_of_tzeentch_link:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_battle_title_eye_of_tzeentch_link");
 
 	tl_eye_of_tzeentch_link = tooltip_listener:new(
-		"tooltip_battle_"..script_feature_name.."_link",
+		"tooltip_battle_eye_of_tzeentch_link",
 		function()
-			buim:highlight_army_abilities(true);
+			if local_player_subculture_key == "wh3_main_sc_tze_tzeentch" then
+				buim:highlight_army_abilities(true);
+			end;
 		end,
 		function()
 			buim:unhighlight_all_for_tooltips();
@@ -758,8 +769,10 @@ function setup_battle_help_pages(bm)
 
 	tp_eye_of_tzeentch_meter = tooltip_listener:new(
 		"tooltip_battle_eye_of_tzeentch_meter", 
-		function() 
-			buim:highlight_army_abilities_meter(true);
+		function()
+			if local_player_subculture_key == "wh3_main_sc_tze_tzeentch" then
+				buim:highlight_army_abilities_meter(true);
+			end;
 		end,
 		function() 
 			buim:unhighlight_all_for_tooltips();
@@ -1353,7 +1366,9 @@ function setup_battle_help_pages(bm)
 	tp_plague_lords_blessings = tooltip_listener:new(
 		"tooltip_battle_plague_lords_blessings",
 		function()
-			buim:highlight_army_abilities(true);
+			if local_player_subculture_key == "wh3_main_sc_nur_nurgle" then
+				buim:highlight_army_abilities(true);
+			end;
 		end,
 		function()
 			buim:unhighlight_all_for_tooltips();
@@ -1365,15 +1380,16 @@ function setup_battle_help_pages(bm)
 	--
 	-- plague_lords_blessings_link
 	--
-	script_feature_name = "plague_lords_blessings";
-	parser:add_record("battle_"..script_feature_name.."_link", "script_link_battle_"..script_feature_name.."_link", "tooltip_battle_"..script_feature_name.."_link");
-	tp_plague_lords_blessings_link = tooltip_patcher:new("tooltip_battle_"..script_feature_name.."_link");
-	tp_plague_lords_blessings_link:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_battle_title_"..script_feature_name.."_link");
+	parser:add_record("battle_plague_lords_blessings_link", "script_link_battle_plague_lords_blessings_link", "tooltip_battle_plague_lords_blessings_link");
+	tp_plague_lords_blessings_link = tooltip_patcher:new("tooltip_battle_plague_lords_blessings_link");
+	tp_plague_lords_blessings_link:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_battle_title_plague_lords_blessings_link");
 
 	tl_plague_lords_blessings_link = tooltip_listener:new(
-		"tooltip_battle_"..script_feature_name.."_link",
+		"tooltip_battle_plague_lords_blessings_link",
 		function()
-			script_error("mouse cursor placed over "..script_feature_name.." link but no highlight function has been created - todo");
+			if local_player_subculture_key == "wh3_main_sc_nur_nurgle" then
+				buim:highlight_army_abilities(true);
+			end;
 		end,
 		function()
 			buim:unhighlight_all_for_tooltips();
@@ -1392,8 +1408,10 @@ function setup_battle_help_pages(bm)
 
 	tp_plague_lords_blessings_meter = tooltip_listener:new(
 		"tooltip_battle_plague_lords_blessings_meter", 
-		function() 
-			buim:highlight_army_abilities_meter(true);
+		function()
+			if local_player_subculture_key == "wh3_main_sc_nur_nurgle" then
+				buim:highlight_army_abilities_meter(true);
+			end;
 		end,
 		function() 
 			buim:unhighlight_all_for_tooltips();
@@ -1540,8 +1558,10 @@ function setup_battle_help_pages(bm)
 
 	tp_reign_of_chaos = tooltip_listener:new(
 		"tooltip_battle_reign_of_chaos", 
-		function() 
-			buim:highlight_army_abilities(true);
+		function()
+			if local_player_subculture_key == "wh3_main_sc_dae_daemons" then
+				buim:highlight_army_abilities(true);
+			end;
 		end,
 		function() 
 			buim:unhighlight_all_for_tooltips();
@@ -1553,15 +1573,17 @@ function setup_battle_help_pages(bm)
 	--
 	-- reign_of_chaos_link
 	--
-	script_feature_name = "reign_of_chaos";
-	parser:add_record("battle_"..script_feature_name.."_link", "script_link_battle_"..script_feature_name.."_link", "tooltip_battle_"..script_feature_name.."_link");
-	tp_reign_of_chaos_link = tooltip_patcher:new("tooltip_battle_"..script_feature_name.."_link");
-	tp_reign_of_chaos_link:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_battle_title_"..script_feature_name.."_link");
+
+	parser:add_record("battle_reign_of_chaos_link", "script_link_battle_reign_of_chaos_link", "tooltip_battle_reign_of_chaos_link");
+	tp_reign_of_chaos_link = tooltip_patcher:new("tooltip_battle_reign_of_chaos_link");
+	tp_reign_of_chaos_link:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_battle_title_reign_of_chaos_link");
 
 	tl_reign_of_chaos_link = tooltip_listener:new(
-		"tooltip_battle_"..script_feature_name.."_link",
+		"tooltip_battle_reign_of_chaos_link",
 		function()
-			buim:highlight_army_abilities(true);
+			if local_player_subculture_key == "wh3_main_sc_dae_daemons" then
+				buim:highlight_army_abilities(true);
+			end;
 		end,
 		function()
 			buim:unhighlight_all_for_tooltips();
@@ -1582,7 +1604,9 @@ function setup_battle_help_pages(bm)
 	tp_reign_of_chaos_meter = tooltip_listener:new(
 		"tooltip_battle_reign_of_chaos_meter",
 		function() 
-			buim:highlight_army_abilities_meter(true);
+			if local_player_subculture_key == "wh3_main_sc_dae_daemons" then
+				buim:highlight_army_abilities_meter(true);
+			end;
 		end,
 		function() 
 			buim:unhighlight_all_for_tooltips();
@@ -1625,8 +1649,10 @@ function setup_battle_help_pages(bm)
 	
 	tp_sensuous_seductions = tooltip_listener:new(
 		"tooltip_battle_sensuous_seductions", 
-		function() 
-			buim:highlight_army_abilities(true);
+		function()
+			if local_player_subculture_key == "wh3_main_sc_sla_slaanesh" then
+				buim:highlight_army_abilities(true);
+			end;
 		end,
 		function() 
 			buim:unhighlight_all_for_tooltips();
@@ -1638,15 +1664,17 @@ function setup_battle_help_pages(bm)
 	--
 	-- sensuous_seductions_link
 	--
-	script_feature_name = "sensuous_seductions";
-	parser:add_record("battle_"..script_feature_name.."_link", "script_link_battle_"..script_feature_name.."_link", "tooltip_battle_"..script_feature_name.."_link");
-	tp_sensuous_seductions_link = tooltip_patcher:new("tooltip_battle_"..script_feature_name.."_link");
-	tp_sensuous_seductions_link:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_battle_title_"..script_feature_name.."_link");
+
+	parser:add_record("battle_sensuous_seductions_link", "script_link_battle_sensuous_seductions_link", "tooltip_battle_sensuous_seductions_link");
+	tp_sensuous_seductions_link = tooltip_patcher:new("tooltip_battle_sensuous_seductions_link");
+	tp_sensuous_seductions_link:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_battle_title_sensuous_seductions_link");
 
 	tl_sensuous_seductions_link = tooltip_listener:new(
-		"tooltip_battle_"..script_feature_name.."_link",
+		"tooltip_battle_sensuous_seductions_link",
 		function()
-			buim:highlight_army_abilities(true);
+			if local_player_subculture_key == "wh3_main_sc_sla_slaanesh" then
+				buim:highlight_army_abilities(true);
+			end;
 		end,
 		function()
 			buim:unhighlight_all_for_tooltips();
@@ -1665,7 +1693,9 @@ function setup_battle_help_pages(bm)
 	tp_sensuous_seductions_meter = tooltip_listener:new(
 		"tooltip_battle_sensuous_seductions_meter", 
 		function() 
-			buim:highlight_army_abilities_meter(true);
+			if local_player_subculture_key == "wh3_main_sc_sla_slaanesh" then
+				buim:highlight_army_abilities_meter(true);
+			end;
 		end,
 		function() 
 			buim:unhighlight_all_for_tooltips();

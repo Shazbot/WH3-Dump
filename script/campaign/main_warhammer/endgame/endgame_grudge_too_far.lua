@@ -30,7 +30,8 @@ endgame_grudge_too_far = {
 	major_army_count = 4, -- Number of armies that spawn for the major playables
 	minor_army_count = 2, -- Number of armies that spawn for the minor dwarves
 	early_warning_event = "wh3_main_ie_incident_endgame_grudge_too_far_early_warning",
-	ai_personality = "wh3_combi_dwarf_endgame"
+	ai_personality = "wh3_combi_dwarf_endgame",
+	subculture = "wh_main_sc_dwf_dwarfs"
 }
 
 function endgame_grudge_too_far:trigger()
@@ -63,9 +64,6 @@ function endgame_grudge_too_far:trigger()
 			else
 				army_count = math.floor(self.minor_army_count*endgame.settings.difficulty_mod)
 			end
-			if army_count < 1 then
-				army_count = 1
-			end
 			endgame:create_scenario_force(faction_key, region_key, self.army_template, self.unit_list, true, army_count)
 			if faction_key == "wh_main_dwf_karak_izor" then
 				if not invasion_faction:is_dead() and cm:get_region("wh3_main_combi_region_karak_eight_peaks"):owning_faction():name() == faction_key then
@@ -73,6 +71,7 @@ function endgame_grudge_too_far:trigger()
 				end
 			end
 
+			cm:instantly_research_all_technologies(faction_key)
 			cm:force_change_cai_faction_personality(faction_key, self.ai_personality)
 
 			-- Give the invasion region to the invader if it isn't owned by them or a human
@@ -83,7 +82,7 @@ function endgame_grudge_too_far:trigger()
 			end
 
 			endgame:no_peace_no_confederation_only_war(faction_key)
-			endgame:declare_war_on_adjacent_region_owners(invasion_faction, region)
+			endgame:declare_war_on_adjacent_region_owners(invasion_faction, region, self.subculture)
 
 			cm:apply_effect_bundle("wh3_main_ie_scripted_endgame_grudge_too_far", faction_key, 0)
 			table.insert(endgame.revealed_regions, region_key)

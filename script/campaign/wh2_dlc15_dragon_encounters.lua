@@ -149,6 +149,7 @@ function add_dragon_encounters_listeners()
 						
 						-- setup marker and UI
 						cm:add_interactable_campaign_marker(key, "dragon_marker", pos_x, pos_y, 2, imrik_faction, "");
+						position = {pos_x, pos_y};
 						
 						local region_key_spawned_in = cm:model():world():region_data_at_position(pos_x, pos_y):key();
 						

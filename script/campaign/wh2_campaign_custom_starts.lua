@@ -149,31 +149,7 @@ custom_starts.start_data.me_custom_start_factions = {
 		}
 	},
 
-	--------------------
-	------- KAIROS -----
-	--------------------
-	{
-		if_human = "wh3_main_tze_oracles_of_tzeentch",
-		if_ai = nil,
-		changes = {
-			{"region_change", "wh3_main_combi_region_tor_surpindar", "wh2_main_hef_fortress_of_dawn"},
-			{"abandon_region", "wh3_main_combi_region_yuatek"},
-			{"teleport_character", "wh3_main_skv_clan_morbidus", 638, 85, 662, 103, true}
-		}
-	},
 
-
-	---------------------------
-	--------- TECLIS ----------
-	---------------------------
-	{
-		if_human = "wh2_main_hef_order_of_loremasters",
-		if_ai = "wh3_main_tze_oracles_of_tzeentch",
-		changes = {
-			{"region_change", "wh3_main_combi_region_dawns_light", "wh3_main_tze_oracles_of_tzeentch"}
-		}
-	},
-	
 
 	---------------------------
 	-------- ELTHARION --------
@@ -184,13 +160,16 @@ custom_starts.start_data.me_custom_start_factions = {
 		changes = {
 			{"teleport_character", "wh2_main_hef_yvresse", 328, 570, 573, 407, true},
 			{"teleport_character", "wh2_main_hef_yvresse", 327, 569, 569, 407, false},
+			{"teleport_character", "wh2_main_hef_yvresse", 316, 574, 327, 569, true},
 			{"force_diplomacy", "wh2_main_hef_yvresse", "wh_main_grn_top_knotz", "war"},
-			{"create_army", "wh2_main_hef_yvresse", "wh2_main_hef_inf_spearmen_0,wh2_main_hef_inf_spearmen_0,,wh2_main_hef_inf_archers_0,,wh2_main_hef_inf_archers_0", 
-				"wh3_main_combi_region_tor_yvresse", 327, 569, "wh2_main_hef_princess", false
-			}	
 		}
 	},
-
+	{ --Remove the units in the extra army from AI Eltharion to stop him curbstopping N'kari
+		if_ai = "wh2_main_hef_yvresse",
+		changes = {
+			{"modify_units_in_army", "wh2_main_hef_yvresse", 316, 574, {}, {"wh2_main_hef_cav_ellyrian_reavers_0","wh2_dlc15_hef_inf_mistwalkers_spireguard_0","wh2_main_hef_inf_archers_0","wh2_main_hef_inf_archers_0"}, nil, nil }
+		}
+	},
 
 	-----------------------
 	------ KARL FRANZ -----

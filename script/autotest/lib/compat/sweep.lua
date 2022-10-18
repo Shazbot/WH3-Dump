@@ -3,7 +3,6 @@ local m_sweep_log_location = "c:\\compat_sweep"
 local m_previous_resolutions = {} -- this table is needed to ensure we don't use the same resolution multiple times during a single compat sweep
 local m_ui_scale_tests = {"min", "max", "default"}
 local m_hardware_info = {} -- all the logged hardware information is now added to this table
-local m_graphics_reset_count
 
 --#################################
 --## Compat Sweep Main Functions ##
@@ -21,7 +20,6 @@ function Lib.Compat.Sweep.set_sweep_log_details(log_name, pc_index, sweep_tag)
             m_sweep_log_name = log_name
         end
         m_hardware_info["PC Index/Name"] = m_pc_index
-        m_graphics_reset_count = 0
     end)
 end
 
@@ -55,15 +53,15 @@ function Lib.Compat.Sweep.campaign_sweep(campaign_type)
         callback(function()
             Functions.write_to_document("Campaign Lord,Passed,"..g_lord, m_sweep_log_location, m_sweep_log_name, ".csv", false)
         end, wait.standard)
-        Lib.Compat.Sweep.ingame_reset_to_ootb_settings()
+        Lib.Compat.Sweep.ingame_reset_to_ootb_settings(false, "1")
         Lib.Compat.Sweep.ingame_display_mode_test("windowed")
         Lib.Compat.Sweep.ingame_display_mode_test("fullscreen")
         Lib.Compat.Sweep.change_ingame_resolution("max_resolution")
         Lib.Compat.Sweep.ingame_ui_scale_tests()
-        Lib.Compat.Sweep.ingame_reset_to_ootb_settings(true)
+        Lib.Compat.Sweep.ingame_reset_to_ootb_settings(true, "2")
         Lib.Compat.Sweep.alt_tab_test(true, 5)
         Lib.Compat.Sweep.ingame_graphics_preset_and_resolution_sweep()
-        Lib.Compat.Sweep.ingame_reset_to_ootb_settings(true)
+        Lib.Compat.Sweep.ingame_reset_to_ootb_settings(true, "3")
         Lib.Campaign.Actions.attack_nearest_target(15)
         callback(function()
             local file_name = m_sweep_tag.."_"..m_pc_index.."_"..m_game_mode.."_battle"
@@ -84,15 +82,15 @@ function Lib.Compat.Sweep.custom_battle_sweep()
             Lib.Frontend.Loaders.load_custom_battle()
         end, wait.standard)
         Lib.Compat.Sweep.record_custom_battle_details()
-        Lib.Compat.Sweep.ingame_reset_to_ootb_settings()
+        Lib.Compat.Sweep.ingame_reset_to_ootb_settings(false, "4")
         Lib.Compat.Sweep.ingame_display_mode_test("windowed")
         Lib.Compat.Sweep.ingame_display_mode_test("fullscreen")
         Lib.Compat.Sweep.change_ingame_resolution("max_resolution")
         Lib.Compat.Sweep.ingame_ui_scale_tests()
-        Lib.Compat.Sweep.ingame_reset_to_ootb_settings(true)
+        Lib.Compat.Sweep.ingame_reset_to_ootb_settings(true, "5")
         Lib.Compat.Sweep.alt_tab_test(true, 5)
         Lib.Compat.Sweep.ingame_graphics_preset_and_resolution_sweep()
-        Lib.Compat.Sweep.ingame_reset_to_ootb_settings(true)
+        Lib.Compat.Sweep.ingame_reset_to_ootb_settings(true, "6")
         callback(function()
             local file_name = m_sweep_tag.."_"..m_pc_index.."_sweep_finished"
             Common_Actions.take_screenshot(file_name, ".tga")
@@ -279,22 +277,19 @@ end
 
 -- ootb means out of the box settings aka default;
 -- doesn't work in frontend, for that check reset_graphics_quality in options
-function Lib.Compat.Sweep.ingame_reset_to_ootb_settings(take_screenshot)
+function Lib.Compat.Sweep.ingame_reset_to_ootb_settings(take_screenshot, reset_number)
     take_screenshot = take_screenshot or false
     callback(function()
-        if m_graphics_reset_count == nil then m_graphics_reset_count = 0 end
         Lib.Menu.Misc.open_menu_without_fail()
         Lib.Helpers.Clicks.select_ingame_graphics_options()
         Lib.Frontend.Options.reset_graphics_quality()
         Lib.Compat.Sweep.change_ingame_resolution("default")
         Lib.Menu.Misc.close_menu_without_fail()
-        m_graphics_reset_count = m_graphics_reset_count + 1
-        callback(function() core:svr_save_registry_string("ootb_reset_count", tostring(m_graphics_reset_count)) end)
         if take_screenshot then
             local file_name = m_sweep_tag.."_"..m_pc_index.."_Reset_to_OOTB"
             Common_Actions.take_screenshot(file_name, ".tga")
         end
-        Functions.write_to_document("Reset to OOTB Settings - "..m_graphics_reset_count..",Passed" , m_sweep_log_location, m_sweep_log_name, ".csv", false)
+        Functions.write_to_document("Reset to OOTB Settings - "..reset_number..",Passed" , m_sweep_log_location, m_sweep_log_name, ".csv", false)
     end)
 end
 
@@ -370,10 +365,14 @@ function Lib.Compat.Sweep.record_custom_battle_details()
         Functions.write_to_document("Unit Scale,Passed,"..g_battle_settings["Unit Scale"], m_sweep_log_location, m_sweep_log_name, ".csv", false)
         if(g_battle_settings["Large Armies"] ~= nil) then
             Functions.write_to_document("Large Armies,Passed,"..g_battle_settings["Large Armies"], m_sweep_log_location, m_sweep_log_name, ".csv", false)
+        else
+            Functions.write_to_document("Large Armies,N/A,N/A", m_sweep_log_location, m_sweep_log_name, ".csv", false)
         end
         Functions.write_to_document("No of Players,Passed,"..g_battle_settings["TEAMS"], m_sweep_log_location, m_sweep_log_name, ".csv", false)
         if(g_battle_settings["Map Type"] == "Siege Battle") then
             Functions.write_to_document("Settlement Level,Passed,"..g_battle_settings["Tower Level"], m_sweep_log_location, m_sweep_log_name, ".csv", false)
+        else
+            Functions.write_to_document("Settlement Level,N/A,N/A", m_sweep_log_location, m_sweep_log_name, ".csv", false)
         end
     end)
 end
@@ -394,7 +393,7 @@ function Lib.Compat.Sweep.alt_tab_test(log_info, wait_time)
         if log_info then
             file_name = m_sweep_tag.."_"..m_pc_index.."_"..m_game_mode.."_after_alt_tab"
             Common_Actions.take_screenshot(file_name, ".tga")
-            Functions.write_to_document("Alt-Tab Check,Passed", m_sweep_log_location, m_sweep_log_name, ".csv", false)
+            Functions.write_to_document("Alt-Tab Check - "..m_game_mode..",Passed", m_sweep_log_location, m_sweep_log_name, ".csv", false)
         end
     end)
 end

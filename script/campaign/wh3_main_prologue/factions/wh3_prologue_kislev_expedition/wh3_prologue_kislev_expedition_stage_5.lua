@@ -62,6 +62,8 @@ if prologue_check_progression["lucent_maze_complete"] == false then
 
 			out("MADE IT TO STAGE 5")
 
+			uim:override("disable_help_pages_panel_button"):set_allowed(false);
+
 			--Metric check (step_number, step_name, skippable)
 			cm:trigger_prologue_step_metrics_hit(93, "lucent_maze_quest_battle_won", false);
 
@@ -221,6 +223,7 @@ core:add_listener(
 			
 			if context:area_key() == "norsca_1_diplomacy" or context:area_key() == "norsca_2_diplomacy" or context:area_key() == "norsca_3_diplomacy" then
 				if cm:model():is_player_turn() then
+					skip_all_scripted_tours();
 					cm:contextual_vo_enabled(false);
 					prologue_check_progression["triggered_diplomacy"] = true;
 					cm:remove_area_trigger("norsca_1_diplomacy");

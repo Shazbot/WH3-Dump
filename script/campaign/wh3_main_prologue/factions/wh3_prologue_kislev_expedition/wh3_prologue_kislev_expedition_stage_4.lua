@@ -341,6 +341,7 @@ core:add_listener(
 			end
 			if context:area_key() == "norse_flavour_1" or context:area_key() == "tzeentch_flavour_1" then
 				if  cm:model():is_player_turn() then
+					skip_all_scripted_tours();
 					cm:contextual_vo_enabled(false);
 					cm:remove_area_trigger("tzeentch_flavour_1");
 					cm:remove_area_trigger("norse_flavour_1");
@@ -379,6 +380,7 @@ core:add_listener(
 						"FactionTurnStart",
 						true,
 						function()
+							skip_all_scripted_tours();
 							cm:toggle_dilemma_generation(false);
 							cm:contextual_vo_enabled(false);
 							PrologueRuinsDilemma()

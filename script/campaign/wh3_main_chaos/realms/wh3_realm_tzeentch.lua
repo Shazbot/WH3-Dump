@@ -803,6 +803,9 @@ function handle_revealing_sigils(single_sigil_only, faction_name, location)
 	local sigil_reveal_to_faction = cm:get_saved_value("sigil_reveal_to_faction");
 	local sigils_revealed = cm:get_saved_value("sigils_revealed_per_faction") or {};
 	local total_sigils_available = #sigil_reveal_to_faction[faction_name];
+	
+	if total_sigils_available == 0 then return end;
+	
 	local sigil_index = 0;
 	
 	if location then

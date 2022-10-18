@@ -20,6 +20,24 @@ local empire_politics_events = {
 	}
 };
 
+local reinstate_decisions = { -- numerical ids for occupation options that count as "reinstating"
+	["512551807"] = true,
+}
+
+local elector_treaties_to_disable = {
+	"form confederation",
+	"military alliance",
+	"defensive alliance",
+	"break soft military access",
+	"break defensive alliance",
+	"break vassal",
+	"break client state",
+	"break trade",
+	"break alliance"
+}
+
+local reinforcement_bundle = "wh3_main_bundle_instant_reinforcements_no_move_cost";
+
 local empire_political_invasion = {};
 local empire_political_invasion_min_loyalty = 1;
 local empire_political_invasion_max_loyalty = 9;
@@ -37,6 +55,7 @@ local empire_demand_return_queue = {};
 local empire_demand_return_details = {};
 local empire_same_turn_dilemmas = false;
 local empire_confederation_cooldown = 20;
+local empire_global_confederation_cooldown = 0
 local empire_loyalty_war_loss = -4;
 local empire_at_peace_war_chance_boost = 10;
 local empire_max_loyalty_increase_per_turn = 2;
@@ -45,20 +64,19 @@ local empire_authority_elector_war = -4;
 local empire_authority_elector_died = -2;
 local empire_authority_elector_died_buffer = 1; -- minused from the total of all empire authority penalties from electors dying
 local empire_authority_elector_revived = 1;
-local empire_authority_region_razed_buffer = 1; -- amount of province capitals that can be razed before penalties start kicking in
+local empire_authority_region_occupied_buffer = 2; -- amount of province capitals that can be occupied by non-Empire cultures before penalties start kicking in
 local empire_authority_region_returned = 1;
 
 local empire_prestige_gain_per_building_level = 5;
 local empire_prestige_gain_per_region = 5;
-local empire_prestige_kill_income_mod = 0.2;
-local empire_prestige_kill_income_cap = 1000;
-local empire_prestige_kill_value_mod = 0.2;
 
 local political_event_count = 20; -- The total number of 'politics' events there are. i.e. how many events are named 'wh2_dlc13_emp_elector_politics_[X]'? These should be named with incremental numbers, starting at 1.
 local empire_political_debug_fire_dilemmas = false;
 
 function add_empire_politics_listeners()
 	out("#### Adding Empire Politics Listeners ####");
+	
+	generate_elector_region_list()
 
 	local player_faction_name = cm:get_local_faction_name(true);
 	
@@ -98,7 +116,9 @@ function add_empire_politics_listeners()
 	core:add_listener(
 		"emp_CharacterPerformsSettlementOccupationDecision",
 		"CharacterPerformsSettlementOccupationDecision",
-		true,
+		function(context)
+			return ELECTOR_REGIONS_ALL[context:garrison_residence():region():name()]
+		end,
 		function(context) empire_occupation_decision(context) end,
 		true
 	);
@@ -121,7 +141,6 @@ function add_empire_politics_listeners()
 		"BattleCompleted",
 		true,
 		function(context)
-			empire_prestige_battle_reward(context);
 			empire_kill_invasion_armies();
 		end,
 		true
@@ -187,9 +206,9 @@ function add_empire_politics_listeners()
 			for i = 0, region_list:num_items() - 1 do
 				local region = region_list:item_at(i);
 				local region_key = region:name();
-				local region_elector = EMPIRE_REGION_TO_ELECTOR_KEY[region_key];
+				local region_elector = get_elector_faction_from_region(region)
 
-				if region_elector ~= nil then
+				if region_elector then
 					if region_key == EMPIRE_ELECTOR_COUNTS[region_elector].capital and EMPIRE_ELECTOR_COUNTS[region_elector].faction ~= faction:name() then
 						core:trigger_event("ScriptEventElectorCapitalTaken");
 					end
@@ -245,6 +264,17 @@ function empire_political_setup_debug_dilemmas()
 			end,
 			false);
 end
+
+function generate_elector_region_list()
+	ELECTOR_REGIONS_ALL = {}
+	for i = 1, #ELECTOR_REGION_GROUPS do
+		local elector_regions = cm:model():world():lookup_regions_from_region_group(ELECTOR_REGION_GROUPS[i])
+		for _, region in model_pairs(elector_regions) do
+			ELECTOR_REGIONS_ALL[region:name()] = true
+		end
+	end
+end
+
 
 function empire_new_game_setup()
 	empire_politics_events["wh2_dlc13_emp_golden_order"] = empire_politics_events["wh_main_emp_empire"];
@@ -302,26 +332,10 @@ function empire_new_game_setup()
 				if faction:pooled_resource_manager():resource("emp_loyalty"):is_null_interface() == false then
 					empire_modify_elector_loyalty(empire_politics_factions[i].elector, "base_fealty", 5);
 				end
-				
 				-- Make all of the Empire seen
-				for region_key, value in pairs(EMPIRE_REGION_TO_ELECTOR_KEY) do
+				for region_key, _ in pairs(ELECTOR_REGIONS_ALL) do
 					cm:make_region_seen_in_shroud(faction_key, region_key);
 				end
-				cm:make_region_seen_in_shroud(faction_key, "wh3_main_combi_region_pfeildorf");
-				cm:make_region_seen_in_shroud(faction_key, "wh3_main_combi_region_steingart");
-				cm:make_region_seen_in_shroud(faction_key, "wh3_main_combi_region_fort_bergbres");
-				cm:make_region_seen_in_shroud(faction_key, "wh3_main_combi_region_fort_helmgart");
-				cm:make_region_seen_in_shroud(faction_key, "wh3_main_combi_region_fort_soll");
-				
-				cm:make_region_seen_in_shroud(faction_key, "wh3_main_combi_region_aarnau");
-				cm:make_region_seen_in_shroud(faction_key, "wh3_main_combi_region_gorssel");
-				cm:make_region_seen_in_shroud(faction_key, "wh3_main_combi_region_marienburg");
-				cm:make_region_seen_in_shroud(faction_key, "wh3_main_combi_region_castle_drakenhof");
-				cm:make_region_seen_in_shroud(faction_key, "wh3_main_combi_region_eschen");
-				cm:make_region_seen_in_shroud(faction_key, "wh3_main_combi_region_waldenhof");
-				cm:make_region_seen_in_shroud(faction_key, "wh3_main_combi_region_castle_templehof");
-				cm:make_region_seen_in_shroud(faction_key, "wh3_main_combi_region_fort_oberstyre");
-				cm:make_region_seen_in_shroud(faction_key, "wh3_main_combi_region_schwartzhafen");
 
 				-- Make diplomacy available to all Electors
 				cm:make_diplomacy_available(faction_key, "wh_main_emp_averland");
@@ -407,6 +421,7 @@ function empire_new_game_setup()
 	end
 end
 
+
 function empire_turn_start(context)
 	local faction = context:faction();
 	local faction_key = faction:name();
@@ -417,11 +432,14 @@ function empire_turn_start(context)
 				-- Give per region prestige
 				empire_award_region_prestige(faction);
 
+				-- Reduce global confederation cooldown
+				empire_global_confederation_cooldown = empire_global_confederation_cooldown - 1
+				
 				-- Deal with the events for this faction
 				empire_process_faction(faction);
 				
-				-- recount razed regions just in case the value is not up to date
-				empire_handle_razed_regions();
+				-- recount occupied regions just in case the value is not up to date
+				empire_handle_occupied_regions();
 
 				-- Imperial authority gives a chance of loyalty per turn for other Electors
 				local fealty_change = 0;
@@ -494,24 +512,16 @@ function empire_turn_start(context)
 end
 
 function empire_disable_diplomacy(faction_key, is_human)
-	cm:force_diplomacy("faction:"..faction_key, "subculture:wh_main_sc_emp_empire", "form confederation", false, false, false);
-	cm:force_diplomacy("faction:"..faction_key, "subculture:wh_main_sc_emp_empire", "military alliance", false, false, false);
-	cm:force_diplomacy("faction:"..faction_key, "subculture:wh_main_sc_emp_empire", "defensive alliance", false, false, false);
-	cm:force_diplomacy("faction:"..faction_key, "subculture:wh_main_sc_emp_empire", "join war", false, false, false);
-	
-	cm:force_diplomacy("faction:"..faction_key, "subculture:wh_main_sc_emp_empire", "break soft military access", false, false, false);
-	cm:force_diplomacy("faction:"..faction_key, "subculture:wh_main_sc_emp_empire", "break defensive alliance", false, false, false);
-	cm:force_diplomacy("faction:"..faction_key, "subculture:wh_main_sc_emp_empire", "break vassal", false, false, false);
-	cm:force_diplomacy("faction:"..faction_key, "subculture:wh_main_sc_emp_empire", "break client state", false, false, false);
-	cm:force_diplomacy("faction:"..faction_key, "subculture:wh_main_sc_emp_empire", "break trade", false, false, false);
-	cm:force_diplomacy("faction:"..faction_key, "subculture:wh_main_sc_emp_empire", "break alliance", false, false, false);
+	for i = 1, #elector_treaties_to_disable do
+		cm:force_diplomacy("faction:"..faction_key, "subculture:wh_main_sc_emp_empire", elector_treaties_to_disable[i], false, false, false)
+		cm:force_diplomacy("faction:"..faction_key, "faction:wh_main_emp_marienburg", elector_treaties_to_disable[i], true, true, false)
+		cm:force_diplomacy("faction:"..faction_key, "faction:wh2_dlc13_emp_the_huntmarshals_expedition", elector_treaties_to_disable[i], true, true, false)
+		cm:force_diplomacy("faction:"..faction_key, "faction:wh3_main_emp_cult_of_sigmar", elector_treaties_to_disable[i], true, true, false)
+	end
 
 	if is_human == false then
 		cm:force_diplomacy("faction:"..faction_key, "subculture:wh_main_sc_emp_empire", "war", false, false, false);
 		cm:force_diplomacy("faction:"..faction_key, "subculture:wh_main_sc_emp_empire", "break non aggression pact", false, false, false);
-	else
-		cm:force_diplomacy("faction:"..faction_key, "faction:wh2_dlc13_emp_the_huntmarshals_expedition", "form confederation", true, true, false);
-		cm:force_diplomacy("faction:"..faction_key, "faction:wh2_main_emp_sudenburg", "form confederation", true, true, false);
 	end
 end
 
@@ -886,7 +896,7 @@ function empire_attempt_confederation_offer(faction)
 		if empire_politics_factions[i].confederation_cooldown == 0 then
 			local elector_faction = cm:model():world():faction_by_key(empire_politics_factions[i].faction);
 
-			if elector_faction:is_null_interface() == false and elector_faction:is_dead() == false then
+			if elector_faction:is_null_interface() == false and elector_faction:is_dead() == false and empire_global_confederation_cooldown <= 0 then
 				if elector_faction:is_human() == false and elector_faction:pooled_resource_manager():resource("emp_loyalty"):is_null_interface() == false then
 					local elector_cqi = elector_faction:command_queue_index();
 					local loyalty = elector_faction:pooled_resource_manager():resource("emp_loyalty"):value();
@@ -1299,6 +1309,8 @@ function empire_trigger_invasion_dilemma(faction, elector_override, enemy_overri
 				empire_political_invasion.enemy_char = 0;
 
 				empire_spawn_human_defender_for_invasion();
+
+				cm:apply_effect_bundle(reinforcement_bundle, elector_key, 1);
 				
 				cm:create_force(
 					enemy_faction,
@@ -1600,7 +1612,7 @@ function empire_region_occupied(context)
 	empire_remove_from_return_queue(region_key);
 
 	-- Handle region razing penalties
-	empire_handle_razed_regions(region);
+	empire_handle_occupied_regions(region);
 	
 	if reason ~= "abandoned" and reason ~= "abandoned to rebels" then
 		-- Make sure an Empire faction took the region
@@ -1609,11 +1621,11 @@ function empire_region_occupied(context)
 			out.design("\tReason: "..reason);
 			out.design("\tRegion: "..region_key);
 			
-			local elector_key = EMPIRE_REGION_TO_ELECTOR_KEY[region_key];
+			local elector_key = get_elector_faction_from_region(region)
 			out.design("\tElector Key: "..tostring(elector_key));
 			
 			-- If this region has an associated elector key, then we know it should belong to an Elector
-			if elector_key ~= nil then
+			if elector_key then
 				local elector_faction_key = EMPIRE_ELECTOR_COUNTS[elector_key].faction_key;
 				local elector_faction = cm:model():world():faction_by_key(elector_faction_key);
 				local conquerer_key = conquerer:name();
@@ -1651,16 +1663,17 @@ function empire_region_occupied(context)
 	end
 end
 
-function empire_handle_razed_regions(cur_region)
-	if cur_region == nil or (cur_region:is_province_capital() and EMPIRE_REGION_TO_ELECTOR_KEY[cur_region:name()]) then
-		local razed_region_count = 0;
+function empire_handle_occupied_regions(cur_region)
+	if cur_region == nil or (cur_region:is_province_capital() and get_elector_faction_from_region(cur_region)) then
+		local occupied_region_count = 0;
 
-		for region_key, value in pairs(EMPIRE_REGION_TO_ELECTOR_KEY) do
-			local region = cm:model():world():region_manager():region_by_key(region_key);
 
-			if region:is_null_interface() == false then
-				if region:is_abandoned() == true and region:is_province_capital() == true then
-					razed_region_count = razed_region_count + 1;
+		for elector, elector_info in pairs(EMPIRE_ELECTOR_COUNTS) do
+			local region_interface = cm:get_region(elector_info.capital)
+
+			if region_interface and not region_interface:is_null_interface() then
+				if region_interface:is_abandoned() == true or region_interface:owning_faction():subculture() ~= "wh_main_sc_emp_empire" then
+					occupied_region_count = occupied_region_count + 1;
 				end
 			end
 		end
@@ -1670,7 +1683,7 @@ function empire_handle_razed_regions(cur_region)
 			local faction = cm:model():world():faction_by_key(faction_key);
 
 			if faction:is_null_interface() == false and faction:is_human() == true and faction:pooled_resource_manager():resource("emp_imperial_authority"):is_null_interface() == false then
-				local razed_imperial_authority = 0;
+				local occupied_imperial_authority = 0;
 				local factors = faction:pooled_resource_manager():resource("emp_imperial_authority"):factors();
 				local factor_count = factors:num_items();
 	
@@ -1679,12 +1692,12 @@ function empire_handle_razed_regions(cur_region)
 					local min = factor:minimum_value();
 	
 					if min == -500 then
-						razed_imperial_authority = factor:value();
+						occupied_imperial_authority = factor:value();
 						break;
 					end
 				end
 
-				local amount_change = -razed_imperial_authority - (razed_region_count - empire_authority_region_razed_buffer);
+				local amount_change = -occupied_imperial_authority - (occupied_region_count - empire_authority_region_occupied_buffer);
 
 				if amount_change ~= 0 then
 					cm:faction_add_pooled_resource(faction_key, "emp_imperial_authority", "imperial_province_capitals_razed", amount_change);
@@ -1739,7 +1752,8 @@ function empire_dilemma_choice(context)
 		if confederation_faction:is_null_interface() == false and confederation_faction:is_dead() == false then
 			if choice == 0 then
 				cm:force_confederation(faction_key, confederation_faction_key);
-
+				empire_global_confederation_cooldown = 5
+				
 				for i = 1, #empire_politics_factions do
 					if empire_politics_factions[i].faction == confederation_faction_key then
 						empire_politics_factions[i].confederated = true;
@@ -1825,6 +1839,8 @@ end
 
 function empire_kill_invasion_armies()
 	if empire_political_invasion ~= nil and empire_political_invasion.active == true then
+		cm:remove_effect_bundle(reinforcement_bundle, empire_political_invasion.target_key);
+
 		cm:disable_event_feed_events(true, "wh_event_category_character", "", "");
 
 		if empire_political_invasion.friendly ~= nil and empire_political_invasion.friendly > 0 then
@@ -1837,6 +1853,7 @@ function empire_kill_invasion_armies()
 		if enemy_faction:has_home_region() then
 			cm:set_region_abandoned(enemy_faction:home_region():name());
 		end
+		
 		empire_political_invasion.active = false;
 
 		cm:callback(function() cm:disable_event_feed_events(false, "wh_event_category_character", "", "") end, 0.2);
@@ -1846,16 +1863,18 @@ function empire_kill_invasion_armies()
 end
 
 function empire_occupation_decision(context)
-	local decision = context:occupation_decision();
+	local decision = context:occupation_decision()
+	local decision_type = context:occupation_decision_type();
 	local faction_key = context:character():faction():name();
 	local region = context:garrison_residence():region();
 	local region_key = region:name();
+
 	
-	if decision == "512551807" then
+	if reinstate_decisions[decision] then
 		-- REINSTATE ELECTOR
-		local region_elector = EMPIRE_REGION_TO_ELECTOR_KEY[region_key];
+		local region_elector = get_elector_faction_from_region(region);
 		
-		if region_elector ~= nil then
+		if region_elector then
 			empire_modify_elector_loyalty(region_elector, "reinstated_elector_count", 2);
 			cm:faction_add_pooled_resource(faction_key, "emp_imperial_authority", "elector_counts_reinstated", empire_authority_elector_revived);
 		end
@@ -1871,11 +1890,11 @@ function empire_occupation_decision(context)
 			end,
 			0.2
 		);
-	elseif decision == "469931029" then
+	elseif decision_type == "occupation_decision_gift_to_another_faction" then
 		-- RETURN TO ELECTOR
-		local region_elector = EMPIRE_REGION_TO_ELECTOR_KEY[region_key];
+		local region_elector = get_elector_faction_from_region(region);
 		
-		if region_elector ~= nil then
+		if region_elector then
 			empire_modify_elector_loyalty(region_elector, "returned_settlements", 1);
 		end
 		cm:callback(
@@ -1890,10 +1909,10 @@ function empire_occupation_decision(context)
 			end,
 			0.2
 		);
-	elseif decision == "662" then
-		local region_elector = EMPIRE_REGION_TO_ELECTOR_KEY[region_key];
+	elseif decision_type == "occupation_decision_occupy" or decision_type == "occupation_decision_colonise" then
+		local region_elector = get_elector_faction_from_region(region);
 
-		if region_elector ~= nil then
+		if region_elector then
 			if region_key == EMPIRE_ELECTOR_COUNTS[region_elector].capital then
 				core:trigger_event("ScriptEventElectorCapitalTaken");
 			end
@@ -1945,89 +1964,6 @@ function empire_war_declared(context)
 	end
 end
 
-function empire_prestige_battle_reward(context)
-	if cm:model():pending_battle():has_been_fought() == true then
-		local attacker_result = cm:model():pending_battle():attacker_battle_result();
-		local defender_result = cm:model():pending_battle():defender_battle_result();
-		local attacker_won = (attacker_result == "heroic_victory") or (attacker_result == "decisive_victory") or (attacker_result == "close_victory") or (attacker_result == "pyrrhic_victory");
-		local defender_won = (defender_result == "heroic_victory") or (defender_result == "decisive_victory") or (defender_result == "close_victory") or (defender_result == "pyrrhic_victory");
-		local attacker_value = cm:pending_battle_cache_attacker_value();
-		local defender_value = cm:pending_battle_cache_defender_value();
-		local already_awarded = {};
-		
-		-- Give any attackers who won their Prestige
-		if attacker_won == true then
-			local attacker_multiplier = defender_value / attacker_value;
-			attacker_multiplier = math.clamp(attacker_multiplier, 0.5, 1.5);
-			local attacker_prestige = (defender_value * empire_prestige_kill_value_mod) * attacker_multiplier;
-			local kill_ratio = cm:model():pending_battle():percentage_of_defender_killed();
-			attacker_prestige = attacker_prestige * kill_ratio;
-			
-			for i = 1, cm:pending_battle_cache_num_attackers() do
-				local attacker_cqi, attacker_force_cqi, attacker_name = cm:pending_battle_cache_get_attacker(i);
-				
-				if already_awarded[attacker_name] == nil then
-					local attacker = cm:model():world():faction_by_key(attacker_name);
-			
-					if attacker:is_null_interface() == false and attacker:pooled_resource_manager():resource("emp_prestige"):is_null_interface() == false then
-						local prestige_reward = attacker_prestige * empire_prestige_kill_income_mod;
-						if prestige_reward > empire_prestige_kill_income_cap then
-							prestige_reward = empire_prestige_kill_income_cap;
-						end
-						prestige_reward = math.ceilTo(prestige_reward, 10);
-						cm:faction_add_pooled_resource(attacker_name, "emp_prestige", "battles_won", prestige_reward);
-						core:trigger_event("ScriptEventPrestigeGained", attacker);
-						already_awarded[attacker_name] = true;
-						PrestigePrintBattle(attacker_name, attacker_prestige, attacker_value, defender_value, attacker_multiplier, kill_ratio);
-					end
-				end
-			end
-		-- Give any defenders who won their Prestige
-		elseif defender_won == true then
-			local defender_multiplier = attacker_value / defender_value;
-			defender_multiplier = math.clamp(defender_multiplier, 0.5, 1.5);
-			local defender_prestige = (attacker_value * empire_prestige_kill_value_mod) * defender_multiplier;
-			local kill_ratio = cm:model():pending_battle():percentage_of_attacker_killed();
-			defender_prestige = defender_prestige * kill_ratio;
-			
-			for i = 1, cm:pending_battle_cache_num_defenders() do
-				local defender_cqi, defender_force_cqi, defender_name = cm:pending_battle_cache_get_defender(i);
-				
-				if already_awarded[defender_name] == nil then
-					local defender = cm:model():world():faction_by_key(defender_name);
-			
-					if defender:is_null_interface() == false and defender:pooled_resource_manager():resource("emp_prestige"):is_null_interface() == false then
-						local prestige_reward = defender_prestige * empire_prestige_kill_income_mod;
-						if prestige_reward > empire_prestige_kill_income_cap then
-							prestige_reward = empire_prestige_kill_income_cap;
-						end
-						prestige_reward = math.ceilTo(prestige_reward, 10);
-						cm:faction_add_pooled_resource(defender_name, "emp_prestige", "battles_won", prestige_reward);
-						core:trigger_event("ScriptEventPrestigeGained", defender);
-						already_awarded[defender_name] = true;
-						PrestigePrintBattle(defender_name, defender_prestige, attacker_value, defender_value, defender_multiplier, kill_ratio);
-					end
-				end
-			end
-		end
-	end
-end
-
-function PrestigePrintBattle(faction, prestige_amount, aval, dval, bonus_mult, kill_ratio)
-	prestige_amount = tonumber(string.format("%.0f", prestige_amount));
-	out.design("--------------------------------------------");
-	out.design("Prestige Battle Fought");
-	out.design("\tWinner: "..faction);
-	out.design("\tPrestige: "..prestige_amount);
-	out.design("\t\tAttacker Value: "..aval);
-	out.design("\t\tDefender Value: "..dval);
-	out.design("\t\tValue Modifier: "..empire_prestige_kill_value_mod);
-	out.design("\t\tStrength Ratio: "..bonus_mult);
-	out.design("\t\tKill Ratio: "..kill_ratio);
-	out.design("\t\tKill Modifier: "..empire_prestige_kill_income_mod);
-	out.design("\t\tReward Cap: "..empire_prestige_kill_income_cap);
-	out.design("--------------------------------------------");
-end
 
 function empire_remove_from_return_queue(region_key, faction_key)
 	local index = 1;
@@ -2113,43 +2049,56 @@ function empire_setup_invasion_armies()
 	random_army_manager:add_mandatory_unit("electors_empire_minor_1", "wh_main_emp_inf_swordsmen", 2);
 	random_army_manager:add_mandatory_unit("electors_empire_minor_1", "wh_main_emp_inf_handgunners", 1);
 	random_army_manager:add_mandatory_unit("electors_empire_minor_1", "wh_main_emp_cav_empire_knights", 1);
+	random_army_manager:add_mandatory_unit("electors_empire_minor_1", "wh_main_emp_cav_pistoliers_1", 2);
 
 	random_army_manager:new_force("electors_empire_minor_2");
 	random_army_manager:add_mandatory_unit("electors_empire_minor_2", "wh_main_emp_inf_swordsmen", 2);
 	random_army_manager:add_mandatory_unit("electors_empire_minor_2", "wh_main_emp_inf_handgunners", 1);
 	random_army_manager:add_mandatory_unit("electors_empire_minor_2", "wh_main_emp_cav_empire_knights", 1);
-	
+	random_army_manager:add_mandatory_unit("electors_empire_minor_2", "wh_main_emp_cav_outriders_0", 2);
+
 	random_army_manager:new_force("electors_empire_minor_3");
 	random_army_manager:add_mandatory_unit("electors_empire_minor_3", "wh_main_emp_inf_swordsmen", 2);
 	random_army_manager:add_mandatory_unit("electors_empire_minor_3", "wh_main_emp_inf_handgunners", 1);
-	random_army_manager:add_mandatory_unit("electors_empire_minor_3", "wh_main_emp_cav_empire_knights", 2);
+	random_army_manager:add_mandatory_unit("electors_empire_minor_3", "wh_main_emp_cav_reiksguard", 1);
+	random_army_manager:add_mandatory_unit("electors_empire_minor_3", "wh_main_emp_cav_outriders_1", 1);
+	random_army_manager:add_mandatory_unit("electors_empire_minor_3", "wh_main_emp_cav_outriders_0", 1);
 
 	random_army_manager:new_force("electors_empire_major_1");
 	random_army_manager:add_mandatory_unit("electors_empire_major_1", "wh_main_emp_inf_swordsmen", 2);
 	random_army_manager:add_mandatory_unit("electors_empire_major_1", "wh_main_emp_inf_spearmen_0", 1);
 	random_army_manager:add_mandatory_unit("electors_empire_major_1", "wh_main_emp_inf_handgunners", 1);
+	random_army_manager:add_mandatory_unit("electors_empire_major_1", "wh_main_emp_cav_outriders_0", 2);
+	random_army_manager:add_mandatory_unit("electors_empire_major_1", "wh_main_emp_cav_empire_knights", 1);
 
 	random_army_manager:new_force("electors_empire_major_2");
 	random_army_manager:add_mandatory_unit("electors_empire_major_2", "wh_main_emp_inf_swordsmen", 2);
 	random_army_manager:add_mandatory_unit("electors_empire_major_2", "wh_main_emp_inf_spearmen_1", 1);
 	random_army_manager:add_mandatory_unit("electors_empire_major_2", "wh_main_emp_inf_handgunners", 1);
+	random_army_manager:add_mandatory_unit("electors_empire_major_2", "wh_main_emp_cav_outriders_1", 2);
+	random_army_manager:add_mandatory_unit("electors_empire_major_2", "wh_main_emp_cav_empire_knights", 1);
 
 	random_army_manager:new_force("electors_empire_major_3");
 	random_army_manager:add_mandatory_unit("electors_empire_major_3", "wh_main_emp_inf_swordsmen", 2);
 	random_army_manager:add_mandatory_unit("electors_empire_major_3", "wh_main_emp_inf_spearmen_1", 2);
 	random_army_manager:add_mandatory_unit("electors_empire_major_3", "wh_main_emp_inf_handgunners", 2);
+	random_army_manager:add_mandatory_unit("electors_empire_major_3", "wh_main_emp_cav_outriders_1", 2);
+	random_army_manager:add_mandatory_unit("electors_empire_major_3", "wh_main_emp_cav_reiksguard", 1);
 
 	random_army_manager:new_force("electors_empire_major_4");
 	random_army_manager:add_mandatory_unit("electors_empire_major_4", "wh_main_emp_inf_greatswords", 1);
-	random_army_manager:add_mandatory_unit("electors_empire_major_4", "wh_main_emp_inf_swordsmen", 2);
+	random_army_manager:add_mandatory_unit("electors_empire_major_4", "wh_main_emp_inf_swordsmen", 1);
 	random_army_manager:add_mandatory_unit("electors_empire_major_4", "wh_main_emp_inf_halberdiers", 2);
 	random_army_manager:add_mandatory_unit("electors_empire_major_4", "wh_main_emp_inf_handgunners", 2);
+	random_army_manager:add_mandatory_unit("electors_empire_major_4", "wh_main_emp_cav_outriders_1", 2);
+	random_army_manager:add_mandatory_unit("electors_empire_major_4", "wh_main_emp_cav_reiksguard", 1);
 
 	random_army_manager:new_force("electors_empire_major_5");
 	random_army_manager:add_mandatory_unit("electors_empire_major_5", "wh_main_emp_inf_greatswords", 2);
-	random_army_manager:add_mandatory_unit("electors_empire_major_5", "wh_main_emp_inf_swordsmen", 2);
 	random_army_manager:add_mandatory_unit("electors_empire_major_5", "wh_main_emp_inf_halberdiers", 2);
 	random_army_manager:add_mandatory_unit("electors_empire_major_5", "wh_main_emp_inf_handgunners", 2);
+	random_army_manager:add_mandatory_unit("electors_empire_major_5", "wh_main_emp_cav_outriders_1", 2);
+	random_army_manager:add_mandatory_unit("electors_empire_major_5", "wh_main_emp_cav_demigryph_knights_0", 1);
 	
 	-- BEASTMEN
 	random_army_manager:new_force("electors_beastmen_minor_1");
@@ -2420,6 +2369,17 @@ function empire_event(event_type, event_data_1, event_data_2, event_data_3)
 	return false;
 end
 
+function get_elector_faction_from_region(region_interface)
+	for i =1, #ELECTOR_REGION_GROUPS do
+		local region_group = ELECTOR_REGION_GROUPS[i]
+		if region_interface:is_contained_in_region_group(region_group) then
+			return string.gsub(region_group, "elector_region_", "")
+		end
+	end
+
+	return false
+end
+
 --------------------------------------------------------------
 ----------------------- SAVING / LOADING ---------------------
 --------------------------------------------------------------
@@ -2467,38 +2427,18 @@ EMPIRE_ELECTOR_COUNTS = {
 	["golden"] = {capital = "", faction_key = "wh2_dlc13_emp_golden_order"}
 };
 
-EMPIRE_REGION_TO_ELECTOR_KEY = {
-	["wh3_main_combi_region_averheim"] = "averland",
-	["wh3_main_combi_region_grenzstadt"] = "averland",
-	["wh3_main_combi_region_brass_keep"] = "hochland",
-	["wh3_main_combi_region_hergig"] = "hochland",
-	["wh3_main_combi_region_carroburg"] = "middenland",
-	["wh3_main_combi_region_middenheim"] = "middenland",
-	["wh3_main_combi_region_middenstag"] = "middenland",
-	["wh3_main_combi_region_weismund"] = "middenland",
-	["wh3_main_combi_region_dietershafen"] = "nordland",
-	["wh3_main_combi_region_salzenmund"] = "nordland",
-	["wh3_main_combi_region_bechafen"] = "ostermark",
-	["wh3_main_combi_region_essen"] = "ostermark",
-	["wh3_main_combi_region_mordheim"] = "ostermark",
-	["wh3_main_combi_region_nagenhof"] = "ostermark",
-	["wh3_main_combi_region_castle_von_rauken"] = "ostland",
-	["wh3_main_combi_region_norden"] = "ostland",
-	["wh3_main_combi_region_wolfenburg"] = "ostland",
-	["wh3_main_combi_region_altdorf"] = "reikland",
-	["wh3_main_combi_region_eilhart"] = "reikland",
-	["wh3_main_combi_region_grunburg"] = "reikland",
-	["wh3_main_combi_region_helmgart"] = "reikland",
-	["wh3_main_combi_region_flensburg"] = "stirland",
-	["wh3_main_combi_region_niedling"] = "stirland",
-	["wh3_main_combi_region_wurtbad"] = "stirland",
-	["wh3_main_combi_region_kappelburg"] = "talabecland",
-	["wh3_main_combi_region_kemperbad"] = "talabecland",
-	["wh3_main_combi_region_krugenheim"] = "talabecland",
-	["wh3_main_combi_region_talabheim"] = "talabecland",
-	["wh3_main_combi_region_nuln"] = "wissenland",
-	["wh3_main_combi_region_pfeildorf"] = "wissenland",
-	["wh3_main_combi_region_wissenburg"] = "wissenland"
+--- these are set up as region_groups in the db
+ELECTOR_REGION_GROUPS = {
+	"elector_region_golden",
+	"elector_region_averland",
+	"elector_region_reikland",
+	"elector_region_hochland",
+	"elector_region_middenland",
+	"elector_region_nordland",
+	"elector_region_ostermark",
+	"elector_region_stirland",
+	"elector_region_talabecland",
+	"elector_region_wissenland"
 };
 
 EMPIRE_CONFEDERATION_DILEMMAS = {

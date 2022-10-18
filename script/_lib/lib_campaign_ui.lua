@@ -67,6 +67,7 @@ local panels_blocking = {
 	"hunters_panel",
 	"temples_of_the_old_ones",
 	"grom_cauldron_panel",
+	"groms_cauldron",
 	"athel_tamarha_dungeon",
 	"dungeon_of_athel_tamarha",
 	"forge_of_daith_panel",
@@ -106,7 +107,8 @@ local panels_not_blocking = {
 	"units_panel",
 	"recruitment_options",
 	"waiting_for_players",
-	"malus_quest_details"
+	"malus_quest_details",
+	"sea_lanes"
 };
 
 
@@ -1126,7 +1128,7 @@ end;
 --- @desc Removes a character from the character whitelist by cqi.
 --- @p number character cqi
 function campaign_ui_manager:remove_character_selection_whitelist(cqi)
-	local entry_to_remove = find_character_selection_whitelist(cqi);
+	local entry_to_remove = self:find_character_selection_whitelist(cqi);
 	
 	if not entry_to_remove then
 		return;

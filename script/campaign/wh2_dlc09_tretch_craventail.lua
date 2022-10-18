@@ -43,17 +43,17 @@ function remove_tretch_retreat_bundle(character)
 	end;
 end;
 
--- apply an effect bundle to tretch's faction when breaking a diplomatic treaty
+-- apply an effect bundle to tretch's faction when declaring war
 core:add_listener(
 	"apply_tretch_diplomatic_bundle",
 	"NegativeDiplomaticEvent",
 	function(context)
-		local proposer = context:proposer();
+		local proposer = context:proposer()
 		
-		return proposer:is_human() and proposer:name() == tretch_faction_name and (context:was_alliance() or context:was_military_alliance() or context:was_defensive_alliance() or context:was_military_access() or context:was_trade_agreement() or context:was_non_aggression_pact());
+		return proposer:is_human() and proposer:name() == tretch_faction_name and context:is_war()
 	end,
 	function(context)
-		cm:apply_effect_bundle("wh2_dlc09_bundle_tretch_treaty_broken", tretch_faction_name, 5);
+		cm:apply_effect_bundle("wh2_dlc09_bundle_tretch_treaty_broken", tretch_faction_name, 3)
 	end,
 	true
-);
+)
