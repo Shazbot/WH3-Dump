@@ -1,0 +1,1021 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Navigable Tours script class</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#e2edff" id="main">
+
+			<div style="background-color:#e2edff" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Battle Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#c1e6ff">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search battle only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#c1e6ff">Game Areas</h2>
+				<ul>
+					<li><a href="../campaign/campaign_index.html">Campaign Index</a></li>
+					<li><strong> > Battle Index</strong></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:navigable_tour">Navigable Tours</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:navigable_tour:Navigable Tours and Scripted Tours">Navigable Tours and Scripted Tours</a></li>
+						<li>&emsp;&emsp;<a href="#section:navigable_tour:At A Glance">At A Glance</a></li>
+						<li>&emsp;&emsp;<a href="#section:navigable_tour:Creation">Creation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:navigable_tour:new">new</a></li>
+						<li>&emsp;&emsp;<a href="#section:navigable_tour:Usage">Usage</a></li>
+						<li>&emsp;&emsp;<a href="#section:navigable_tour:Configuration">Configuration</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:navigable_tour:set_tour_controls_above_infotext">set_tour_controls_above_infotext</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:navigable_tour:set_interval_before_tour_controls_visible">set_interval_before_tour_controls_visible</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:navigable_tour:set_start_first_section_automatically">set_start_first_section_automatically</a></li>
+						<li>&emsp;&emsp;<a href="#section:navigable_tour:Start and End Actions">Start and End Actions</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:navigable_tour:start_action">start_action</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:navigable_tour:end_action">end_action</a></li>
+						<li>&emsp;&emsp;<a href="#section:navigable_tour:Main Construction">Main Construction</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:navigable_tour:add_navigable_section">add_navigable_section</a></li>
+						<li>&emsp;&emsp;<a href="#section:navigable_tour:Starting">Starting</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:navigable_tour:start">start</a></li>
+						<li>&emsp;&emsp;<a href="#section:navigable_tour:Playback">Playback</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:navigable_tour:start_next_section">start_next_section</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:navigable_tour:start_previous_section">start_previous_section</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:navigable_tour:get_scripted_tour_controls_uicomponent">get_scripted_tour_controls_uicomponent</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:navigable_tour:cache_and_set_scripted_tour_controls_priority">cache_and_set_scripted_tour_controls_priority</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:navigable_tour:restore_scripted_tour_controls_priority">restore_scripted_tour_controls_priority</a></li>
+					</ul>
+					<li><a href="#class:navigable_tour_section">Navigable Tour Section</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:navigable_tour_section:Creation">Creation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:navigable_tour_section:new">new</a></li>
+						<li>&emsp;&emsp;<a href="#section:navigable_tour_section:Configuration">Configuration</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:navigable_tour_section:add_precondition">add_precondition</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:navigable_tour_section:action">action</a></li>
+						<li>&emsp;&emsp;<a href="#section:navigable_tour_section:Playback Controls">Playback Controls</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:navigable_tour_section:add_skip_action">add_skip_action</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:navigable_tour_section:remove_skip_action">remove_skip_action</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:navigable_tour_section:activate_tour_controls">activate_tour_controls</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:navigable_tour_section:highlight_next_button">highlight_next_button</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:navigable_tour_section:is_playing">is_playing</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#e2edff" id="navigation_right">				<h2 style="background-color:#c1e6ff">Battle Topics</h2>
+				<ul>
+					<li><a href="battle_index.html">Battle Index</a></li>
+					<li><a href="battle_hierarchy.html">Battle Hierarchy</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="battle.html">Battle</a></li>
+					<li><a href="battle_alliances.html">Alliances</a></li>
+					<li><a href="battle_alliance.html">Alliance</a></li>
+					<li><a href="battle_armies.html">Armies</a></li>
+					<li><a href="battle_army.html">Army</a></li>
+					<li><a href="battle_units.html">Units</a></li>
+					<li><a href="battle_unit.html">Unit</a></li>
+					<li><a href="battle_unitcontroller.html">Unitcontroller</a></li>
+					<li><a href="ai_planner.html">AI Planners</a></li>
+					<li><a href="battle_assault_equipment.html">Assault Equipment</a></li>
+					<li><a href="battle_building.html">Building</a></li>
+					<li><a href="battle_buildings.html">Buildings</a></li>
+					<li><a href="battle_camera.html">Camera</a></li>
+					<li><a href="battle_capture_location.html">Capture Location</a></li>
+					<li><a href="battle_composite_scenes_system.html">Composite Scenes System</a></li>
+					<li><a href="battle_debug_drawing.html">Debug Drawing</a></li>
+					<li><a href="battle_reinforcements.html">reinforcements Reinforcements</a></li>
+					<li><a href="battle_sound_effect.html">Sound Effects</a></li>
+					<li><a href="battle_subtitles.html">Subtitles</a></li>
+					<li><a href="battle_toggle_system.html">Toggle System</a></li>
+					<li><a href="battle_vector.html">Vector</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Script Interfaces</h2>
+				<ul>
+					<li><a href="battle_manager.html">Battle Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="advice_manager.html">Advice Manager</a></li>
+					<li><a href="battle_ui_manager.html">Battle UI Manager</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="cutscene.html">Battle Cutscenes</a></li>
+					<li><a href="generated_battle.html">Generated Battle</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><strong> > Navigable Tours</strong></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="script_ai_planner.html">Script AI Planner</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="script_unit.html">Script Unit</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Data Interfaces</h2>
+				<ul>
+					<li><a href="st_helper.html">Scripted Tour Helpers</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:navigable_tour"><h1 class="content_header">Navigable Tours</h1></a>
+				<p>A navigable tour is a particular type of <code><a href="scripted_tour.html#class:scripted_tour">scripted_tour</a></code> which provides a control panel to the player, allowing them to rewind back and forth between tour sections. The player may also exit the tour at any time from the control panel provided.</p>
+				<p>Navigable tours are built on top of the functionality that scripted tours provide, and extend and wrap the scripted tour interface. One crucial difference is that actions are associated with a navigable tour through an intermediate <code><a href="#class:navigable_tour_section">navigable_tour_section</a></code> objects. Once created, actions are added to <code><a href="#class:navigable_tour_section">navigable_tour_section</a></code> objects and then they are registered with the parent navigable tour with <code><a href="#function:navigable_tour:add_navigable_section">navigable_tour:add_navigable_section</a></code>. Actions cannot be directly added to a navigable tour, asides from start and end actions.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:navigable_tour:Navigable Tours and Scripted Tours"><h2 class="section_header">Navigable Tours and Scripted Tours</h2></a>
+				</div>
+				<p>When created, a navigable tour creates a <code><a href="scripted_tour.html#class:scripted_tour">scripted_tour</a></code> object and stores it internally. Calls made to the navigable tour object that the navigable tour interface does not provide are automatically passed through to the internal scripted tour object. An exception to this is <code><a href="scripted_tour.html#function:scripted_tour:action">scripted_tour:action</a></code> - this is explicitly overridden by the navigable tour interface and will throw a script error if called.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:navigable_tour:At A Glance"><h2 class="section_header">At A Glance</h2></a>
+				</div>
+				<p>A navigable tour is declared with <code><a href="#function:navigable_tour:new">navigable_tour:new</a></code>. A name and a function to call when the tour ends (or is skipped) must be specified here, as well as an optional tour name as a full localisation key.</p>
+				<p>Once the tour is created, separately-created <code><a href="#class:navigable_tour_section">navigable_tour_section</a></code> objects may be assigned to it with <code><a href="#function:navigable_tour:add_navigable_section">navigable_tour:add_navigable_section</a></code>. These objects contain the underlying actions that are ultimately played - much of the complexity of setting up a narrative tour comes from setting up the sections.</p>
+				<p>Startup and finishing actions may be added to the navigable tour with <code><a href="#function:navigable_tour:start_action">navigable_tour:start_action</a></code> and <code><a href="#function:navigable_tour:end_action">navigable_tour:end_action</a></code>. These are played when the tour starts or ends.</p>
+				<p>Once configured with sections, a tour may be started with <code><a href="#function:navigable_tour:start">navigable_tour:start</a></code>.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:navigable_tour:Creation"><h2 class="section_header">Creation</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:navigable_tour:new"><h3 class="function_name"><strong><code>navigable_tour:new(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">name</i><code><strong>, [<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">end callback</i><code><strong>], [<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">tour title</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and returns a navigable tour object. Each navigable tour must be given a unique string name and, optionally, an end callback which will be called when the scripted tour ends or is skipped.<br />
+							An optional tour title may also be supplied as a full <code>[table]_[field]_[key]</code>-style localised key. If supplied, the title of the navigable tour control panel will be set to the localised text specified by the key.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name for the scripted tour.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>End callback.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Full localisation key to use for navigable tour title.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:navigable_tour">navigable_tour</a></code></code> navigable tour</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_scripted_tours.lua, line 1181</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:navigable_tour:Usage"><h2 class="section_header">Usage</h2></a>
+				</div>
+				<p>Once a <code>navigable_tour</code> object has been created with <code><a href="#function:navigable_tour:new">navigable_tour:new</a></code>, functions on it may be called in the form showed below. Any functions that are not recognised on the navigable tour are passed through to the <code><a href="scripted_tour.html#class:scripted_tour">scripted_tour</a></code> object created internally.</p>
+
+				<h4>Example - Specification:</h4>
+				<div id="example_code"><code>
+					 <i>&lt;scripted_tour_object&gt;</i>:<i>&lt;function_name&gt;</i>(<i>&lt;args&gt;</i>)<br />
+				</code></div>
+
+				<h4>Example - Creation and Usage:</h4>
+				<div id="example_code"><code>
+					 local nt_siege_defence = navigable_tour:new(<br />
+					 &emsp;&emsp;&emsp;&emsp;"siege_battle_defence",&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- unique name<br />
+					 &emsp;&emsp;&emsp;&emsp;end_siege_battle_defence_tour,&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- end callback<br />
+					&emsp;&emsp;&emsp;&emsp;"ui_text_replacements_localised_text_wh3_main_battle_scripted_tour_siege_defence_name"&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- title<br />
+					 );<br />
+					 <br />
+					 -- calling a function on the object once created<br />
+					 nt_siege_defence:set_allow_camera_movement(true);<br />
+					 <br />
+					 -- calling a function on the underlying scripted tour<br />
+					 -- (the function call is passed through automatically)<br />
+					 nt_siege_defence:add_validation_rule(<br />
+					 &emsp;&emsp;&emsp;&emsp;function()<br />
+					 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return core:is_battle()<br />
+					 &emsp;&emsp;&emsp;&emsp;end,<br />
+					 &emsp;&emsp;&emsp;&emsp;"random_localisation_strings_string_scripted_tour_invalid_not_battle"<br />
+					 );<br />
+				</code></div>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:navigable_tour:Configuration"><h2 class="section_header">Configuration</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:navigable_tour:set_tour_controls_above_infotext"><h3 class="function_name"><strong><code>navigable_tour:set_tour_controls_above_infotext([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">tour controls above infotext</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the tour controls to appear above the infotext panel in the top-left of the screen. The tour controls panel will also be stretched horizontally to be the same width as the infotext panel.<br />
+							If <code>false</code> is supplied as an argument then the tour controls revert back to being underneath the infotext panel.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>tour controls above infotext</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_scripted_tours.lua, line 1270</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:navigable_tour:set_interval_before_tour_controls_visible"><h3 class="function_name"><strong><code>navigable_tour:set_interval_before_tour_controls_visible(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">interval</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the interval at the start of the tour before the tour controls are animated to visible. By default this value is set to 1 second. This value should be set in seconds in campaign, and milliseconds elsewhere.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>interval</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_scripted_tours.lua, line 1345</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:navigable_tour:set_start_first_section_automatically"><h3 class="function_name"><strong><code>navigable_tour:set_start_first_section_automatically([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">should start automatically</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the scripted tour to start the first section automatically or not. By default, the first section is started automatically. Disable this behaviour with this function if the start action sequence is not of a predetermined length, such as a cutscene that must be dismissed.<br />
+							If the first section is not started automatically then it must be started manually with <code><a href="#function:navigable_tour:start_next_section">navigable_tour:start_next_section</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>should start automatically</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_scripted_tours.lua, line 1357</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:navigable_tour:Start and End Actions"><h2 class="section_header">Start and End Actions</h2></a>
+				</div>
+				<p>Navigable tours contain start and end sequences, to which action callbacks may be added using the functions in this section. These sequences can be zero-length and don't have to contain any actions.</p>
+				<p>The starting sequence is played as the tour is started, and can be used to set up the tour or play a one-time intro sequence. The main tour sequences will start when the start action with the longest interval is called.</p>
+				<p>The end sequence is played as the tour is exited and can be used to play an outro or clean up after the tour. The tour will fully exit when the end action with the longest interval is called.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:navigable_tour:start_action"><h3 class="function_name"><strong><code>navigable_tour:start_action(<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">action</i><code><strong>, [<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">action time</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds an action to the navigable tour's starting sequence.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>Action callback.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>Interval after the start of the tour at which to trigger the action. This should be given in seconds in campaign, and milliseconds otherwise.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_scripted_tours.lua, line 1387</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:navigable_tour:end_action"><h3 class="function_name"><strong><code>navigable_tour:end_action(<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">action</i><code><strong>, <code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">action time</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds an action to the navigable tour's ending sequence.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>Action callback.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>Interval after the start of the tour at which to trigger the action. This should be given in seconds in campaign, and milliseconds otherwise.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_scripted_tours.lua, line 1421</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:navigable_tour:Main Construction"><h2 class="section_header">Main Construction</h2></a>
+				</div>
+				<p>The <code><a href="#function:navigable_tour:add_navigable_section">navigable_tour:add_navigable_section</a></code> function can be used to add <code><a href="#class:navigable_tour_section">navigable_tour_section</a></code> objects to the navigable tour. This is the intended method for building a navigable tour - actions are added to a section, and sections are added to a tour. When the navigable tour is started, the navigable tour sections are added as segments to the underlying <code><a href="scripted_tour.html#class:scripted_tour">scripted_tour</a></code> object, should their preconditions pass.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:navigable_tour:add_navigable_section"><h3 class="function_name"><strong><code>navigable_tour:add_navigable_section(<code><a href="#class:navigable_tour_section">navigable_tour_section</a></code> </strong></code><i class="parameter">navigable tour section</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a <code><a href="#class:navigable_tour_section">navigable_tour_section</a></code> to the navigable tour. Navigable tour sections should be added in the order in which they should be shown in game.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:navigable_tour_section">navigable_tour_section</a></code></code></p>
+									</td>
+									<td>
+										<p>navigable tour section</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_scripted_tours.lua, line 1476</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:navigable_tour:Starting"><h2 class="section_header">Starting</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:navigable_tour:start"><h3 class="function_name"><strong><code>navigable_tour:start()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Starts the navigable tour.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_scripted_tours.lua, line 1574</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:navigable_tour:Playback"><h2 class="section_header">Playback</h2></a>
+				</div>
+				<p>The functions in this section are for use while the tour is playing.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:navigable_tour:start_next_section"><h3 class="function_name"><strong><code>navigable_tour:start_next_section()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Cause the navigable tour to skip to the next section. If the start actions are being played then the first section of the tour is started.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_scripted_tours.lua, line 1818</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:navigable_tour:start_previous_section"><h3 class="function_name"><strong><code>navigable_tour:start_previous_section()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Cause the navigable tour to skip to the previous section.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_scripted_tours.lua, line 1850</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:navigable_tour:get_scripted_tour_controls_uicomponent"><h3 class="function_name"><strong><code>navigable_tour:get_scripted_tour_controls_uicomponent([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">do not create</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Gets the scripted tour controls panel, creating it if it doesn't already exist. This is mainly for internal use but could feasibly be called externally.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Do not create - if set to <code>true</code>, the tour controls are not created if they do not already exist.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="uicomponent.html#class:uicomponent">uicomponent</a></code></code> tour controls</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_scripted_tours.lua, line 1895</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:navigable_tour:cache_and_set_scripted_tour_controls_priority"><h3 class="function_name"><strong><code>navigable_tour:cache_and_set_scripted_tour_controls_priority()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the priority to the supplied value, and caches the value previously set. The scripted tour controls priority can later be restored with <code>restore_scripted_tour_controls_priority</code>.<br />
+							The register_topmost flag can also be set to force the scripted tour controls to topmost.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_scripted_tours.lua, line 2108</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:navigable_tour:restore_scripted_tour_controls_priority"><h3 class="function_name"><strong><code>navigable_tour:restore_scripted_tour_controls_priority()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Restores the scripted tour controls priority to a value previously cached with <code>cache_and_set_scripted_tour_controls_priority</code>.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_scripted_tours.lua, line 2134</p>
+						</dd>
+					</dl>
+				</div>
+
+				<hr class="superblock_divider" />
+
+
+				<a name="class:navigable_tour_section"><h1 class="content_header">Navigable Tour Section</h1></a>
+				<p>A navigable tour section is a container for action callbacks that occur during a section of a <code><a href="#class:navigable_tour">navigable_tour</a></code>. A navigable tour is wrapper for a <code><a href="scripted_tour.html#class:scripted_tour">scripted_tour</a></code>, and a navigable tour section represents a scripted tour segment. Declaring navigable tour sections, loading them with actions, and then adding them to a navigable tour is the route by which actions get added to a navigable tour.</p>
+				<p>Navigable tour sections can be reused between different navigable tours.</p>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:navigable_tour_section:Creation"><h2 class="section_header">Creation</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:navigable_tour_section:new"><h3 class="function_name"><strong><code>navigable_tour_section:new(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">name</i><code><strong>, [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">activate controls</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and returns a new navigable tour section.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Activate scripted tour controls on start of this navigable tour section. Setting this to <code>true</code> means that the tour next/prev buttons will be active as soon as this tour section starts. In this case <code><a href="#function:navigable_tour_section:activate_tour_controls">navigable_tour_section:activate_tour_controls</a></code> does not need to be called within a tour action.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:navigable_tour_section">navigable_tour_section</a></code></code> navigable tour section</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_scripted_tours.lua, line 2221</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:navigable_tour_section:Configuration"><h2 class="section_header">Configuration</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:navigable_tour_section:add_precondition"><h3 class="function_name"><strong><code>navigable_tour_section:add_precondition(<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">callback</i><code><strong>, [opt=nil </strong></code><i class="parameter"><code><a href="lua.html#class:string">string</a></code> error message</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a precondition check to be called when the navigable tour is started. The supplied function will be called and, should it return <code>nil</code> or <code>false</code>, the section will <strong>not</strong> be added to the navigable tour.<br />
+							If an optional error message string is added with the precondition then a script error displaying that message will be triggered should the precondition not pass.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>Precondition callback. </p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>[opt=nil</code></p>
+									</td>
+									<td>
+										<p>Error message to display should the precondition fail. If no error message is supplied then no error is triggered.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_scripted_tours.lua, line 2260</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:navigable_tour_section:action"><h3 class="function_name"><strong><code>navigable_tour_section:action(function </strong></code><i class="parameter">callback</i><code><strong>, number </strong></code><i class="parameter">interval</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds an action to be triggered while the navigable tour section is playing. Actions are added with an interval, which is the time after the start of the section that the action should occur.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p>Callback function to call.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>Interval after the navigable tour section starts at which the specified action should be triggered. This should be given in seconds in campaign, and in ms in battle and the frontend.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_scripted_tours.lua, line 2298</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:navigable_tour_section:Playback Controls"><h2 class="section_header">Playback Controls</h2></a>
+				</div>
+				<p>The functions in this section should only be called from within a callback registered to <code><a href="#function:navigable_tour_section:action">navigable_tour_section:action</a></code>, so that they are only called while the navigable tour section is actively playing.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:navigable_tour_section:add_skip_action"><h3 class="function_name"><strong><code>navigable_tour_section:add_skip_action(<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">skip action</i><code><strong>, [<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">action name</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a skip action for this navigable tour section. Navigable tour sections should use skip callbacks to clean up after themselves. The skip action will be called when this section of the tour is skipped by the player during playback, either by navigating forwards or backwards to other tour sections or by closing the tour. Two <code><a href="lua.html#class:boolean">boolean</a></code> argument will be passed to the skip action function - the first, if <code>true</code>, indicates that the entire tour is ending, and the second, if <code>true</code> indicates that the tour is being skipped backwards rather than forwards.<br />
+							Skip actions may be added with an optional name, by which they be later removed.<br />
+							This function should only be called from within an action when the tour section is running.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>skip action</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>action name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_scripted_tours.lua, line 2365</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:navigable_tour_section:remove_skip_action"><h3 class="function_name"><strong><code>navigable_tour_section:remove_skip_action(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">action name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Immediately removes any skip actions from this navigable tour section with the supplied name. This should only be called during an action within the tour section.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>action name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_scripted_tours.lua, line 2397</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:navigable_tour_section:activate_tour_controls"><h3 class="function_name"><strong><code>navigable_tour_section:activate_tour_controls()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Activates the tour control panel during playback of the navigable tour section. This should only be called during an action within the tour section.<br />
+							If the activate-controls flag is not set when <code><a href="#function:navigable_tour_section:new">navigable_tour_section:new</a></code> is called, as is the default behaviour, then the tour controls will remain inactive until this function is called during playback. If the last action in the tour section is called and the controls are still not active then this function will be called automatically. This failsafe behaviour prevents a situation where a section is playing and the tour controls never become active, but it should probably be avoided by either calling this function directly during an action within the section or setting the appropriate flag when calling <code><a href="#function:navigable_tour_section:new">navigable_tour_section:new</a></code>.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_scripted_tours.lua, line 2420</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:navigable_tour_section:highlight_next_button"><h3 class="function_name"><strong><code>navigable_tour_section:highlight_next_button()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Highlights the next (or finish) button on the navigable tour controls during playback. This should only be called during an action within the tour section.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_scripted_tours.lua, line 2433</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:navigable_tour_section:is_playing"><h3 class="function_name"><strong><code>navigable_tour_section:is_playing()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Is this navigable tour section playing right now.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is playing</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_scripted_tours.lua, line 2451</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:59</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "battle"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

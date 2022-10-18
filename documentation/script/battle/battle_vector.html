@@ -1,0 +1,638 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Vector</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#e2edff" id="main">
+
+			<div style="background-color:#e2edff" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Battle Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#c1e6ff">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search battle only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#c1e6ff">Game Areas</h2>
+				<ul>
+					<li><a href="../campaign/campaign_index.html">Campaign Index</a></li>
+					<li><strong> > Battle Index</strong></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:battle_vector">Vector</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:battle_vector:Creation">Creation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_vector:new">new</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_vector:Vector Arithmetic">Vector Arithmetic</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_vector:Querying">Querying</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_vector:get_x">get_x</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_vector:get_y">get_y</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_vector:get_z">get_z</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_vector:length">length</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_vector:length_xz">length_xz</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_vector:set">set</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_vector:set_x">set_x</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_vector:set_y">set_y</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_vector:set_z">set_z</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_vector:distance">distance</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_vector:distance_xz">distance_xz</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#e2edff" id="navigation_right">				<h2 style="background-color:#c1e6ff">Battle Topics</h2>
+				<ul>
+					<li><a href="battle_index.html">Battle Index</a></li>
+					<li><a href="battle_hierarchy.html">Battle Hierarchy</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="battle.html">Battle</a></li>
+					<li><a href="battle_alliances.html">Alliances</a></li>
+					<li><a href="battle_alliance.html">Alliance</a></li>
+					<li><a href="battle_armies.html">Armies</a></li>
+					<li><a href="battle_army.html">Army</a></li>
+					<li><a href="battle_units.html">Units</a></li>
+					<li><a href="battle_unit.html">Unit</a></li>
+					<li><a href="battle_unitcontroller.html">Unitcontroller</a></li>
+					<li><a href="ai_planner.html">AI Planners</a></li>
+					<li><a href="battle_assault_equipment.html">Assault Equipment</a></li>
+					<li><a href="battle_building.html">Building</a></li>
+					<li><a href="battle_buildings.html">Buildings</a></li>
+					<li><a href="battle_camera.html">Camera</a></li>
+					<li><a href="battle_capture_location.html">Capture Location</a></li>
+					<li><a href="battle_composite_scenes_system.html">Composite Scenes System</a></li>
+					<li><a href="battle_debug_drawing.html">Debug Drawing</a></li>
+					<li><a href="battle_reinforcements.html">reinforcements Reinforcements</a></li>
+					<li><a href="battle_sound_effect.html">Sound Effects</a></li>
+					<li><a href="battle_subtitles.html">Subtitles</a></li>
+					<li><a href="battle_toggle_system.html">Toggle System</a></li>
+					<li><strong> > Vector</strong></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Script Interfaces</h2>
+				<ul>
+					<li><a href="battle_manager.html">Battle Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="advice_manager.html">Advice Manager</a></li>
+					<li><a href="battle_ui_manager.html">Battle UI Manager</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="cutscene.html">Battle Cutscenes</a></li>
+					<li><a href="generated_battle.html">Generated Battle</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="script_ai_planner.html">Script AI Planner</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="script_unit.html">Script Unit</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Data Interfaces</h2>
+				<ul>
+					<li><a href="st_helper.html">Scripted Tour Helpers</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:battle_vector"><h1 class="content_header">Vector</h1></a>
+				<p>A battle vector is an object representing a 2D or 3D position on the battlefield. Once created, battle vectors can be passed as arguments to certain functions in order to specify movement or attack positions.</p>
+				<p>In battle vector terminology the x co-ordinate represents east to west on the battlefield, the y co-ordinate represents the height from the ground plane, and the z co-ordinate represents north to south. A 2D vector represents an x/z position, whereas a 3D vector's co-ordinates are stored x/y/z - note that the height component is in the middle. A position of 0, 0, 0 would represent the centre of the battlefield at a height of 0 above the water plane. </p>
+				<p>All battle co-ordinates and distances are specified in metres.</p>
+				<p>A number of helper functions related to vectors may be found in the <code><a href="global.html#section:global:Vector Manipulation">Vector Manipulation</a></code> section of this documentation.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_vector:Creation"><h2 class="section_header">Creation</h2></a>
+				</div>
+				<p>Call <code><a href="#function:battle_vector:new">battle_vector:new</a></code> to create a new vector. Preferably, use the shorthand function <code><a href="global.html#function:global:v">v</a></code> provided by the script libraries.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_vector:new"><h3 class="function_name"><strong><code>battle_vector:new([number </strong></code><i class="parameter">x</i><code><strong>], [number </strong></code><i class="parameter">y</i><code><strong>], [number </strong></code><i class="parameter">z</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a new battle_vector object. Initial co-ordinates may optionally be specified.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>x</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>y</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>z</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:battle_vector">battle_vector</a></code></code> vector</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 my_vector = battle_vector:new(100, 0, 100)<br />
+							</code></div>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptUtilities.cpp, line 157</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_vector:Vector Arithmetic"><h2 class="section_header">Vector Arithmetic</h2></a>
+				</div>
+				<p>Battle vectors can be added, subtracted, multiplied or divided. An equality test can also be performed between vectors.</p>
+
+				<h4>Example:</h4>
+				<div id="example_code"><code>
+					 vec_a = battle_vector:new(50, 50)<br />
+					 vec_b = battle_vector:new(100, 100)<br />
+					 vec_c = vec_a + vec_b &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- [150, 0, 150]<br />
+					 if vec_a == vec_c then<br />
+					 &emsp;&emsp;&emsp;&emsp;print("Impossible!")<br />
+					 end<br />
+				</code></div>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_vector:Querying"><h2 class="section_header">Querying</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_vector:get_x"><h3 class="function_name"><strong><code>battle_vector:get_x()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the x co-ordinate stored by the vector. This is the east-west position.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>number</code> x co-ordinate</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptUtilities.cpp, line 221</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_vector:get_y"><h3 class="function_name"><strong><code>battle_vector:get_y()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the y co-ordinate stored by the vector. This is the height of the vector position from the water plane.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>number</code> y co-ordinate</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptUtilities.cpp, line 235</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_vector:get_z"><h3 class="function_name"><strong><code>battle_vector:get_z()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the z co-ordinate stored by the vector. This is the north-south position.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>number</code> z co-ordinate</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptUtilities.cpp, line 249</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_vector:length"><h3 class="function_name"><strong><code>battle_vector:length()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the distance from the origin [0, 0, 0] to the position of this vector in metres.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>number</code> length</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptUtilities.cpp, line 263</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_vector:length_xz"><h3 class="function_name"><strong><code>battle_vector:length_xz()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the distance from the origin [0, 0] to the position of this vector in metres, disregarding any height differences.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>number</code> 2D length</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptUtilities.cpp, line 277</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_vector:set"><h3 class="function_name"><strong><code>battle_vector:set(obj </strong></code><i class="parameter">vector or x</i><code><strong>, number </strong></code><i class="parameter">y</i><code><strong>, number </strong></code><i class="parameter">z</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a new position for the vector. The new position may be specified as a single vector argument or as three numeric co-ordinate arguments.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>obj</code></p>
+									</td>
+									<td>
+										<p>Either a vector specifying the new position, or a number specifying the new x co-ordinate.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>A number specifying the new y co-ordinate. This is not needed if a vector was supplied as the first argument.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>A number specifying the new z co-ordinate. This is not needed if a vector was supplied as the first argument.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 vec_a:set(vec_b)<br />
+								 vec_b:set(100, 0, 100)<br />
+							</code></div>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptUtilities.cpp, line 293</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_vector:set_x"><h3 class="function_name"><strong><code>battle_vector:set_x(number </strong></code><i class="parameter">x</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a new x co-ordinate for the vector.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>x co-ordinate in metres.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 vec_a:set_x(100)<br />
+							</code></div>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptUtilities.cpp, line 335</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_vector:set_y"><h3 class="function_name"><strong><code>battle_vector:set_y(number </strong></code><i class="parameter">y</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a new y co-ordinate for the vector. This is the height of the position from the water plane.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>y co-ordinate in metres.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 vec_a:set_y(35)<br />
+							</code></div>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptUtilities.cpp, line 351</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_vector:set_z"><h3 class="function_name"><strong><code>battle_vector:set_z(number </strong></code><i class="parameter">z</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a new z co-ordinate for the vector. This is the height of the position from the water plane.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>z co-ordinate in metres.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 vec_a:set_z(-400)<br />
+							</code></div>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptUtilities.cpp, line 367</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_vector:distance"><h3 class="function_name"><strong><code>battle_vector:distance(battle_vector </strong></code><i class="parameter">vector</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the distance from a supplied vector to the subject vector in metres.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>battle_vector</code></p>
+									</td>
+									<td>
+										<p>vector</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>distance</code> in m</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 vec_a = battle_vector:new(0, 100, 0)<br />
+								 vec_b = battle_vector:new(0, 200, 0)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- 100m above vec_a<br />
+								 print(vec_a:distance(vec_b))<br />
+							</code></div>
+							<div id="example_result"><code>
+								100<br />
+							</code></div>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptUtilities.cpp, line 383</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_vector:distance_xz"><h3 class="function_name"><strong><code>battle_vector:distance_xz(battle_vector </strong></code><i class="parameter">vector</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the distance from a supplied vector to the subject vector in metres, but disregarding any height difference.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>battle_vector</code></p>
+									</td>
+									<td>
+										<p>vector</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>distance</code> in m</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 vec_a = battle_vector:new(0, 100, 0)<br />
+								 vec_b = battle_vector:new(0, 200, 0)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- 100m above vec_a<br />
+								 print(vec_a:distance_xz(vec_b))<br />
+							</code></div>
+							<div id="example_result"><code>
+								0<br />
+							</code></div>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptUtilities.cpp, line 409</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:59</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "battle"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

@@ -1,0 +1,781 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Narrative</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#fff7cc" id="main">
+
+			<div style="background-color:#fff7cc" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Campaign Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#ffed8c">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search campaign only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#ffed8c">Game Areas</h2>
+				<ul>
+					<li><strong> > Campaign Index</strong></li>
+					<li><a href="../battle/battle_index.html">Battle Index</a></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#ffed8c">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:narrative">Narrative</a><img alt="Loaded in Campaign" style="float:right; margin-right:1em;" src="../images/loaded_in_campaign.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:narrative:At A Glance">At A Glance</a></li>
+						<li>&emsp;&emsp;<a href="#section:narrative:Data Setup Callbacks">Data Setup Callbacks</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:narrative:add_data_setup_callback">add_data_setup_callback</a></li>
+						<li>&emsp;&emsp;<a href="#section:narrative:Adding Data">Adding Data</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:narrative:add_playable_faction">add_playable_faction</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:narrative:add_exception_faction">add_exception_faction</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:narrative:add_data_for_faction">add_data_for_faction</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:narrative:add_data_for_campaign">add_data_for_campaign</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:narrative:add_loader">add_loader</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:narrative:add_loader_for_faction">add_loader_for_faction</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:narrative:add_loader_for_culture">add_loader_for_culture</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:narrative:add_loader_for_subculture">add_loader_for_subculture</a></li>
+						<li>&emsp;&emsp;<a href="#section:narrative:Starting">Starting</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:narrative:start">start</a></li>
+						<li>&emsp;&emsp;<a href="#section:narrative:Data Retrieval">Data Retrieval</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:narrative:get">get</a></li>
+						<li>&emsp;&emsp;<a href="#section:narrative:Output">Output</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:narrative:output_chain_header">output_chain_header</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:narrative:output_chain_footer">output_chain_footer</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:narrative:unimplemented_output">unimplemented_output</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:narrative:todo_output">todo_output</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#fff7cc" id="navigation_right">				<h2 style="background-color:#ffed8c">Campaign Topics</h2>
+				<ul>
+					<li><a href="campaign_index.html">Campaign Index</a></li>
+					<li><a href="campaign_script_structure.html">Campaign Script Structure</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="narrative_system.html">Narrative System</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="campaignui.html">CampaignUI</a></li>
+					<li><a href="cinematics.html">Cinematics</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="episodic_scripting.html">Episodic Scripting</a></li>
+					<li><a href="model_hierarchy.html">Model Hierarchy</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Script Interfaces</h2>
+				<ul>
+					<li><a href="campaign_manager.html">Campaign Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="campaign_cutscene.html">Campaign Cutscenes</a></li>
+					<li><a href="campaign_ui_manager.html">Campaign UI Manager</a></li>
+					<li><a href="chapter_mission.html">Chapter Missions</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="intervention.html">Interventions</a></li>
+					<li><a href="invasion_manager.html">Invasion Manager</a></li>
+					<li><a href="mission_manager.html">Mission Managers</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="narrative_event.html">Narrative Events</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="payload.html">Payload String Constructor</a></li>
+					<li><a href="random_army_manager.html">Random Army Manager</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="unique_table.html">Unique Table</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Data Interfaces</h2>
+				<ul>
+					<li><a href="custom_starts.html">Campaign Custom Starts</a></li>
+					<li><a href="faction_intro.html">Faction Intro</a></li>
+					<li><strong> > Narrative</strong></li>
+					<li><a href="narrative_events.html">Narrative Event Templates</a></li>
+					<li><a href="narrative_queries.html">Narrative Query Templates</a></li>
+					<li><a href="narrative_triggers.html">Narrative Trigger Templates</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:narrative"><h1 class="content_header">Narrative</h1></a>
+				<p>The narrative table contains data and functions that help drive the narrative system.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:narrative:At A Glance"><h2 class="section_header">At A Glance</h2></a>
+				</div>
+				<p><ol><li>The narrative table is created when this file is loaded.</li></p>
+				<p><li>Data setup callbacks are added to the narrative system as scripts are loaded using calls to <code><a href="#function:narrative:add_data_setup_callback">narrative.add_data_setup_callback</a></code>.</li></p>
+				<p><li>These data setup callbacks contain calls to functions that set up narrative override data, such as <code><a href="#function:narrative:add_playable_faction">narrative.add_playable_faction</a></code>, <code><a href="#function:narrative:add_data_for_faction">narrative.add_data_for_faction</a></code> and <code><a href="#function:narrative:add_data_for_campaign">narrative.add_data_for_campaign</a></code>.</li></p>
+				<p><li>These data setup callbacks contain calls to functions that set up narrative override data, such as <code><a href="#function:narrative:add_playable_faction">narrative.add_playable_faction</a></code>, <code><a href="#function:narrative:add_data_for_faction">narrative.add_data_for_faction</a></code> and <code><a href="#function:narrative:add_data_for_campaign">narrative.add_data_for_campaign</a></code>.</li></p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:narrative:Data Setup Callbacks"><h2 class="section_header">Data Setup Callbacks</h2></a>
+				</div>
+				<p>Data setup callbacks for the narrative system may be added with <code><a href="#function:narrative:add_data_setup_callback">narrative.add_data_setup_callback</a></code>. Callbacks added with this function are not called until <code><a href="#function:narrative:start">narrative.start</a></code> is called, which doesn't happen until the first tick. This structure allows narrative data to be added as scripts are loaded (potentially before the model is loaded) and only quer</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:narrative:add_data_setup_callback"><h3 class="function_name"><strong><code>narrative.add_data_setup_callback(<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">callback</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a callback which sets up data for the narrative system. The callback can make calls to functions such as <code><a href="#function:narrative:add_playable_faction">narrative.add_playable_faction</a></code> and <code><a href="#function:narrative:add_data_for_faction">narrative.add_data_for_faction</a></code> to set up narrative override data.<br />
+							Callbacks added here will be called when <code><a href="#function:narrative:start">narrative.start</a></code> is called.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>callback</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_system.lua, line 62</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:narrative:Adding Data"><h2 class="section_header">Adding Data</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:narrative:add_playable_faction"><h3 class="function_name"><strong><code>narrative.add_playable_faction(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a playable faction, by key, to the narrative data. Calls to this function should be made within setup functions that are passed to <code><a href="#function:narrative:add_data_setup_callback">narrative.add_data_setup_callback</a></code>.<br />
+							Factions will need to be added to the narrative data with this function before any data can be added for them with <code><a href="#function:narrative:add_data_for_faction">narrative.add_data_for_faction</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>faction key</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_system.lua, line 86</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative:add_exception_faction"><h3 class="function_name"><strong><code>narrative.add_exception_faction(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a playable faction, by key, to the narrative exception faction list data. Calls to this function should be made within setup functions that are passed to <code><a href="#function:narrative:add_data_setup_callback">narrative.add_data_setup_callback</a></code>.<br />
+							Factions will need to be added to the exception list to skip some elements of the narrative data.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>faction key</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_system.lua, line 95</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative:add_data_for_faction"><h3 class="function_name"><strong><code>narrative.add_data_for_faction(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">data key</i><code><strong>, value </strong></code><i class="parameter">data</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a data override for a faction within the narrative system. Factions must have been added with <code><a href="#function:narrative:add_playable_faction">narrative.add_playable_faction</a></code> before data overrides can be added for them.<br />
+							If <code><a href="#function:narrative:get">narrative.get</a></code> is later called and the faction and data keys supplied to it match a data override, then the data associated with that override is returned. This can be used to override data keys for specific factions.<br />
+							Calls to <code><a href="#function:narrative:get">narrative.get</a></code> should be made within the narrative event declarations.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>faction key</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>data key</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>data</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_system.lua, line 104</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative:add_data_for_campaign"><h3 class="function_name"><strong><code>narrative.add_data_for_campaign()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a data override for a particular data key to the narrative system. This override is for all playable factions in the campaign, rather than any specific faction.<br />
+							If <code><a href="#function:narrative:get">narrative.get</a></code> is later called and the data key supplied to it matches the campaign data override, then the data associated with that override is returned by <code><a href="#function:narrative:get">narrative.get</a></code>. Note that faction data overrides added with <code><a href="#function:narrative:add_data_for_faction">narrative.add_data_for_faction</a></code> are checked before campaign-wide overrides.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_system.lua, line 135</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative:add_loader"><h3 class="function_name"><strong><code>narrative.add_loader(<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">loader</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a narrative event loader callback. When the narrative system is started with <code><a href="#function:narrative:start">narrative.start</a></code>, each loader function is called for each human-controlled faction in the campaign, with the faction key supplied to that function as a single argument. In a multiplayer game, each loader function will be called multiple times.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>loader</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_system.lua, line 159</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative:add_loader_for_faction"><h3 class="function_name"><strong><code>narrative.add_loader_for_faction(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">loader</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a narrative event loader callback for a specific faction. If the subject faction is controlled by a human when the narrative system is started with <code><a href="#function:narrative:start">narrative.start</a></code> this loader function will be called with the faction key supplied as a single argument.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>faction key</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>loader</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_system.lua, line 172</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative:add_loader_for_culture"><h3 class="function_name"><strong><code>narrative.add_loader_for_culture(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">culture key</i><code><strong>, <code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">loader</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a narrative event loader callback for a specific culture. When the narrative system is started with <code><a href="#function:narrative:start">narrative.start</a></code>, for each human-controlled faction that matches the supplied culture, this loader function will be called with the faction key supplied as a single argument.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>culture key</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>loader</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_system.lua, line 194</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative:add_loader_for_subculture"><h3 class="function_name"><strong><code>narrative.add_loader_for_subculture(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">subculture key</i><code><strong>, <code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">loader</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a narrative event loader callback for a specific subculture. When the narrative system is started with <code><a href="#function:narrative:start">narrative.start</a></code>, for each human-controlled faction that matches the supplied subculture, this loader function will be called with the faction key supplied as a single argument.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>subculture key</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>loader</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_system.lua, line 216</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:narrative:Starting"><h2 class="section_header">Starting</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:narrative:start"><h3 class="function_name"><strong><code>narrative.start()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Calls all setup and loader functions associated with the narrative system, setting up all data.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_system.lua, line 250</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:narrative:Data Retrieval"><h2 class="section_header">Data Retrieval</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:narrative:get"><h3 class="function_name"><strong><code>narrative.get(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">data key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Gets a data override for the specified faction key and data key, if one exists. Faction data registered with <code><a href="#function:narrative:add_data_for_faction">narrative.add_data_for_faction</a></code> will be checked first, then campaign data registered with <code><a href="#function:narrative:add_data_for_campaign">narrative.add_data_for_campaign</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>faction key</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>data key</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>value</code> data</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_system.lua, line 367</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:narrative:Output"><h2 class="section_header">Output</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:narrative:output_chain_header"><h3 class="function_name"><strong><code>narrative.output_chain_header(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">chain name</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Helper function which produces header output for a narrative chain when it's loaded.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>chain name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>faction key</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_system.lua, line 388</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative:output_chain_footer"><h3 class="function_name"><strong><code>narrative.output_chain_footer()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Helper function which produces footer output for a narrative chain when it's loaded.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_system.lua, line 399</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative:unimplemented_output"><h3 class="function_name"><strong><code>narrative.unimplemented_output(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">message</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Helper function which prints output about unimplemented narrative chains.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>message</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_system.lua, line 407</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative:todo_output"><h3 class="function_name"><strong><code>narrative.todo_output(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">message</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Helper function which prints output about narrative improvements to do.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>message</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_system.lua, line 419</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:58</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "campaign"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

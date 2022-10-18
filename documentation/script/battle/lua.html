@@ -1,0 +1,4569 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Lua Language</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#e2edff" id="main">
+
+			<div style="background-color:#e2edff" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Battle Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#c1e6ff">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search battle only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#c1e6ff">Game Areas</h2>
+				<ul>
+					<li><a href="../campaign/campaign_index.html">Campaign Index</a></li>
+					<li><strong> > Battle Index</strong></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:lua">Lua Language</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:lua:More Information">More Information</a></li>
+						<li>&emsp;&emsp;<a href="#section:lua:Lua Data Types">Lua Data Types</a></li>
+						<li>&emsp;&emsp;<a href="#section:lua:Local and Global Variables">Local and Global Variables</a></li>
+						<li>&emsp;&emsp;<a href="#section:lua:if statements">if statements</a></li>
+						<li>&emsp;&emsp;<a href="#section:lua:Conditional Operators">Conditional Operators</a></li>
+						<li>&emsp;&emsp;<a href="#section:lua:Standard Functions">Standard Functions</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:lua:print">print</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:lua:type">type</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:lua:tostring">tostring</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:lua:tonumber">tonumber</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:lua:loadstring">loadstring</a></li>
+					</ul>
+					<li><a href="#class:nil">Nil</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+					</ul>
+					<li><a href="#class:boolean">Booleans</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+					</ul>
+					<li><a href="#class:number">Numbers</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+					</ul>
+					<li><a href="#class:string">Strings</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:string:String Patterns">String Patterns</a></li>
+						<li>&emsp;&emsp;<a href="#section:string:String Library">String Library</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:string:byte">byte</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:string:char">char</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:string:dump">dump</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:string:ends_with">ends_with</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:string:find">find</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:string:find_lua">find_lua</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:string:format">format</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:string:gmatch">gmatch</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:string:gsub">gsub</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:string:len">len</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:string:len_lua">len_lua</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:string:lower">lower</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:string:match">match</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:string:rep">rep</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:string:reverse">reverse</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:string:starts_with">starts_with</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:string:sub">sub</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:string:sub_lua">sub_lua</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:string:split">split</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:string:upper">upper</a></li>
+					</ul>
+					<li><a href="#class:function">Functions</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:function:Varargs">Varargs</a></li>
+					</ul>
+					<li><a href="#class:table">Tables</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:table:Creation">Creation</a></li>
+						<li>&emsp;&emsp;<a href="#section:table:Standard Traversal">Standard Traversal</a></li>
+						<li>&emsp;&emsp;<a href="#section:table:Traversal Using Iterators">Traversal Using Iterators</a></li>
+						<li>&emsp;&emsp;<a href="#section:table:Table Library">Table Library</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:table:concat">concat</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:table:insert">insert</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:table:maxn">maxn</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:table:remove">remove</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:table:sort">sort</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:table:tostring">tostring</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:table:contains">contains</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:table:is_empty">is_empty</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:table:copy">copy</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:table:mem_address">mem_address</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:table:indexed_to_lookup">indexed_to_lookup</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:table:compile_tables">compile_tables</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:table:merge_tables">merge_tables</a></li>
+					</ul>
+					<li><a href="#class:userdata">Userdata</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+					</ul>
+					<li><a href="#class:math">Math</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:math:Values">Values</a></li>
+						<li>&emsp;&emsp;<a href="#section:math:Functions">Functions</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:abs">abs</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:acos">acos</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:asin">asin</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:atan">atan</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:atan2">atan2</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:ceil">ceil</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:cos">cos</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:cosh">cosh</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:deg">deg</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:exp">exp</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:floor">floor</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:fmod">fmod</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:frexp">frexp</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:ldexp">ldexp</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:log">log</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:log10">log10</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:max">max</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:min">min</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:modf">modf</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:normalize">normalize</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:pow">pow</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:rad">rad</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:random">random</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:randomseed">randomseed</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:sin">sin</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:sinh">sinh</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:sqrt">sqrt</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:tan">tan</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:math:tanh">tanh</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#e2edff" id="navigation_right">				<h2 style="background-color:#c1e6ff">Battle Topics</h2>
+				<ul>
+					<li><a href="battle_index.html">Battle Index</a></li>
+					<li><a href="battle_hierarchy.html">Battle Hierarchy</a></li>
+					<li><strong> > Lua Language</strong></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="battle.html">Battle</a></li>
+					<li><a href="battle_alliances.html">Alliances</a></li>
+					<li><a href="battle_alliance.html">Alliance</a></li>
+					<li><a href="battle_armies.html">Armies</a></li>
+					<li><a href="battle_army.html">Army</a></li>
+					<li><a href="battle_units.html">Units</a></li>
+					<li><a href="battle_unit.html">Unit</a></li>
+					<li><a href="battle_unitcontroller.html">Unitcontroller</a></li>
+					<li><a href="ai_planner.html">AI Planners</a></li>
+					<li><a href="battle_assault_equipment.html">Assault Equipment</a></li>
+					<li><a href="battle_building.html">Building</a></li>
+					<li><a href="battle_buildings.html">Buildings</a></li>
+					<li><a href="battle_camera.html">Camera</a></li>
+					<li><a href="battle_capture_location.html">Capture Location</a></li>
+					<li><a href="battle_composite_scenes_system.html">Composite Scenes System</a></li>
+					<li><a href="battle_debug_drawing.html">Debug Drawing</a></li>
+					<li><a href="battle_reinforcements.html">reinforcements Reinforcements</a></li>
+					<li><a href="battle_sound_effect.html">Sound Effects</a></li>
+					<li><a href="battle_subtitles.html">Subtitles</a></li>
+					<li><a href="battle_toggle_system.html">Toggle System</a></li>
+					<li><a href="battle_vector.html">Vector</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Script Interfaces</h2>
+				<ul>
+					<li><a href="battle_manager.html">Battle Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="advice_manager.html">Advice Manager</a></li>
+					<li><a href="battle_ui_manager.html">Battle UI Manager</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="cutscene.html">Battle Cutscenes</a></li>
+					<li><a href="generated_battle.html">Generated Battle</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="script_ai_planner.html">Script AI Planner</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="script_unit.html">Script Unit</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Data Interfaces</h2>
+				<ul>
+					<li><a href="st_helper.html">Scripted Tour Helpers</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:lua"><h1 class="content_header">Lua Language</h1></a>
+				<p>Lua is an interpreted language that is used for scripting in Total War. It's lightweight, fast, and easy to use.</p>
+				<p>Lua instructions are written in a text file, which is generally given a <code>.lua</code> file extension. The game looks to load certain script files when loading, and may be configured to load specific scripts when loading a particular campaign or battle.</p>
+				<p>Version 5.1 of lua is used in Total War scripting - the latest at time of writing is version 5.3.5.</p>
+				<p>Whitespace in lua is ignored, so scripts can be spaced out according to the scripters preference. Lua statements may optionally be terminated with a semicolon. Individual lines may be commented with <code>--</code> - this causes the rest of the line to be ignored. Blocks of script of any size may be commented with <code>--[[ script ]]</code>. These blocks may not be nested, however.</p>
+				<p>Lua is case-sensitive, so variables named <code>value</code>, <code>Value</code> and <code>VALUE</code> are all different. This is a common source of bugs.</p>
+
+				<h4>Example:</h4>
+				<div id="example_code"><code>
+					 -- this line is commented<br />
+					 --[[<br />
+					 this line is also commented<br />
+					 ]]<br />
+					 value = 6<br />
+					 print(value);&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- semicolon optional<br />
+					 print(Value)<br />
+				</code></div>
+				<div id="example_result"><code>
+					6<br />
+					nil<br />
+</code></div>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Relevant in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Relevant in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Relevant in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:lua:More Information"><h2 class="section_header">More Information</h2></a>
+				</div>
+				<p>More information about lua can be found on the following sites:</p>
+				<p><table class="simple"><tr><td><a href="https://www.lua.org">https://www.lua.org</a></td><td>Lua homepage.</td></tr></p>
+				<p><tr><td><a href="https://www.lua.org/demo.html">https://www.lua.org/demo.html</a></td><td>Lua demo site - allows snippets of script to be tested outside of the game (very useful).</td></tr></p>
+				<p><tr><td><a href="https://www.lua.org/manual/5.1/">https://www.lua.org/manual/5.1/</a></td><td>The lua manual.</td></tr></p>
+				<p><tr><td><a href="http://lua-users.org/wiki/">http://lua-users.org/wiki/</a></td><td>Lua wiki - contains useful information about supplied libraries.</td></tr></p>
+				<p><tr><td><a href="https://www.tutorialspoint.com/lua/">https://www.tutorialspoint.com/lua/</a></td><td>Lua tutorial - others are available.</td></tr></table></p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:lua:Lua Data Types"><h2 class="section_header">Lua Data Types</h2></a>
+				</div>
+				<p>Lua supports only eight data types, six of which are documented further down this page:</p>
+				<p><table class="simple"><tr><th>Data Type</th><th>Description</th></tr></p>
+				<p><tr><td><code><a href="#class:nil">nil</a></code></td><td>The absence of a value.</td></tr></p>
+				<p><tr><td><code><a href="#class:boolean">boolean</a></code></td><td><code>true</code>/<code>false</code> values.</td></tr></p>
+				<p><tr><td><code><a href="#class:number">number</a></code></td><td>Floating-point numeric values.</td></tr></p>
+				<p><tr><td><code><a href="#class:string">string</a></code></td><td>Text values.</td></tr></p>
+				<p><tr><td><code><a href="#class:function">function</a></code></td><td>Executable chunks of script.</td></tr></p>
+				<p><tr><td><code><a href="#class:table">table</a></code></td><td>Dynamically-sized key/value lists, may be used to build complex data structures.</td></tr></p>
+				<p><tr><td><code><a href="#class:userdata">userdata</a></code></td><td>Objects provided by the host program to lua, with an interface on which script may make function calls.</td></tr></p>
+				<p><tr><td><code>thread</code></td><td>Represents independent threads of execution - not supported in Total War scripting.</td></tr></table></p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:lua:Local and Global Variables"><h2 class="section_header">Local and Global Variables</h2></a>
+				</div>
+				<p>Variables created in lua are global by default, which means they are accessible across the entire scope of the script. Variables can optionally be declared with local scope, whereby they only persist for the lifetime of the block in which they are declared. It is strongly encouraged to declare variables with local scope unless there is a compelling reason to do otherwise, as it lessens the risk of them being accessed or overwritten by accident.</p>
+
+				<h4>Example:</h4>
+				<div id="example_code"><code>
+					 -- global and local variable declarations<br />
+					 g_var_one = 10<br />
+					 local l_var_one = 20<br />
+					 <br />
+					 -- declarations within a block<br />
+					 if g_var_one then<br />
+					 &emsp;&emsp;&emsp;&emsp;g_var_two = 20<br />
+					 &emsp;&emsp;&emsp;&emsp;local l_var_two = 30&emsp;&emsp;&emsp;&emsp;-- will fall out of scope as the block ends<br />
+					 end<br />
+					 <br />
+					 print("g_var_one: " .. tostring(g_var_one))<br />
+					 print("l_var_one: " .. tostring(l_var_one))<br />
+					 print("g_var_two: " .. tostring(g_var_two))<br />
+					 print("l_var_two: " .. tostring(l_var_two))<br />
+				</code></div>
+				<div id="example_result"><code>
+					g_var_one: 10<br />
+					l_var_one: 20<br />
+					g_var_two: 20<br />
+					l_var_two: nil<br />
+				</code></div>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:lua:if statements"><h2 class="section_header">if statements</h2></a>
+				</div>
+				<p>An <code>if</code> statement may be used to perform a logical test and, based on the boolean result of that test, execute different blocks of instruction. An <code>if</code> statement will execute a block of script specified by a mandatory <code>then</code> operator if the logical test evaluates to <code>true</code>, or a second optional block specified by an <code>else</code> operator if it doesn't. Each <code>if</code> statement must be terminated by the keyword <code>end</code>.</p>
+				<p>An <code>else</code> operator following another <code>if</code> statement may be combined into an <code>elseif</code> operator. Converting nested <code>if</code> statements to <code>elseif</code> operators in this way saves on having to terminate each <code>if</code> statement with <code>end</code> - see the example below.</p>
+
+				<h4>Example:</h4>
+				<div id="example_code"><code>
+					 t = true<br />
+					 f = false<br />
+					 <br />
+					 if t == true then<br />
+					 &emsp;&emsp;&emsp;&emsp;print("t is true")<br />
+					 end<br />
+					 <br />
+					 if f == true then<br />
+					 &emsp;&emsp;&emsp;&emsp;print("f is true")<br />
+					 else<br />
+					 &emsp;&emsp;&emsp;&emsp;print("f is false")<br />
+					 end<br />
+					 <br />
+					 n = 28<br />
+					 <br />
+					 if n < 5 then<br />
+					 &emsp;&emsp;&emsp;&emsp;print("n is less than 5")<br />
+					 elseif n < 10 then<br />
+					 &emsp;&emsp;&emsp;&emsp;print("n is less than 10")<br />
+					 elseif n < 15 then<br />
+					 &emsp;&emsp;&emsp;&emsp;print("n is less than 15")<br />
+					 elseif n < 20 then<br />
+					 &emsp;&emsp;&emsp;&emsp;print("n is less than 20")<br />
+					 else<br />
+					 &emsp;&emsp;&emsp;&emsp;print("n is greater than or equal to 20")<br />
+					 end<br />
+				</code></div>
+				<div id="example_result"><code>
+					t is true<br />
+					f is false<br />
+					n is greater than or equal to 20<br />
+				</code></div>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:lua:Conditional Operators"><h2 class="section_header">Conditional Operators</h2></a>
+				</div>
+				<p>Conditional tests may be performed by structures such as <code>if</code> statements, <code>while</code> loops and <code>repeat</code> loops to make decisions about what scripts to execute. Any values can be evaluated in a conditional test - non-boolean values may be evaluated in a boolean manner as follows:<ul></p>
+				<p><li><code>false</code> boolean values, and <code>nil</code> values, evaluate to <code>false</code>.</li></p>
+				<p><li>Any other value evaluates to <code>true</code> (including the number 0, which evaluates to <code>false</code> in C).</li></ul></p>
+				<p>The logical operator <code>not</code> may be used to negate the result of a boolean - if passed a <code>true</code> value it returns <code>false</code>, and if passed a <code>false</code> value it returns <code>true</code>. The value returned by the <code>not</code> operator is always boolean, even if the value supplied was not. The statement <code>x = not not x</code> converts x to a boolean value, therefore.</p>
+				<p>The logical operators <code>and</code> and <code>or</code> may be used to assess multiple boolean conditions together. The <code>and</code> operator returns <code>true</code> if both of the expressions passed to it evaluate to <code>true</code> themselves. The <code>or</code> operator returns the second value passed to it if the first evaluates to <code>false</code>, otherwise the first value is returned. Unlike <code>and</code>, <code>not</code> and other comparison operators, therefore, <code>or</code> can return something other than a boolean value. This can be useful for setting default values for a variable - see the example below.</p>
+				<p>The lua interpreter reads forward when performing conditional tests, and will not evaluate expressions that it doesn't need to. For example, if the first expression passed to an <code>and</code> operator evaluates to <code>false</code> then the second is never evaluated. Likewise, if the first expression passed to an <code>or</code> operator evaluates to <code>true</code> then the second expression is never evaluated (and the first is returned). These constructs can both be useful in different ways - see the examples below.</p>
+				<p>The <code>not</code> operator has precedence (meaning it gets evaluated first), followed by the <code>and</code> operator and finally the <code>or</code> operator. Parenthesis <code>()</code> can be used to override the natural order of precedence.</p>
+
+				<h4>Example - Relying on conversion to boolean to test existence of value:</h4>
+				<div id="example_code"><code>
+					 num_value = 10<br />
+					 <br />
+					 -- A number of any value evaluates to true.<br />
+					 -- This is akin to saying "if num_value has been set.."<br />
+					 if num_value then<br />
+					 &emsp;&emsp;&emsp;&emsp;print("num_value evaluates to true")<br />
+					 end<br />
+				</code></div>
+				<div id="example_result"><code>
+					num_value evaluates to true<br />
+				</code></div>
+
+				<h4>Example - Using 'not' to convert to boolean:</h4>
+				<div id="example_code"><code>
+					 num_value = 10<br />
+					 <br />
+					 print("not num_value: " .. not num_value)<br />
+					 print("not not num_value: " .. not not num_value)<br />
+				</code></div>
+				<div id="example_result"><code>
+					not num_value: false<br />
+					not not num_value: true<br />
+				</code></div>
+
+				<h4>Example - and/or operator examples:</h4>
+				<div id="example_code"><code>
+					 t = true<br />
+					 f = false<br />
+					 <br />
+					 if t and f then<br />
+					 &emsp;&emsp;&emsp;&emsp;print("this should never get printed")<br />
+					 end<br />
+					 <br />
+					 if t and not f then&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- "not f" evaluates to true<br />
+					 &emsp;&emsp;&emsp;&emsp;print("this should get printed")<br />
+					 end<br />
+					 <br />
+					 if t or f then<br />
+					 &emsp;&emsp;&emsp;&emsp;print("either t or f is true")<br />
+					 end<br />
+				</code></div>
+				<div id="example_result"><code>
+					this should get printed<br />
+					either t or f is true<br />
+				</code></div>
+
+				<h4>Example - Compound logical test of greater length, with parenthesis:</h4>
+				<div id="example_code"><code>
+					 t = true<br />
+					 f = false<br />
+					 <br />
+					 if not (t and (not f or not t)) then<br />
+					 &emsp;&emsp;&emsp;&emsp;print("???")<br />
+					 else<br />
+					 &emsp;&emsp;&emsp;&emsp;print("wha?")<br />
+					 end<br />
+				</code></div>
+				<div id="example_result"><code>
+					wha?<br />
+				</code></div>
+
+				<h4>Example - Using 'or' to set a default value during an assignment operation:</h4>
+				<div id="example_code"><code>
+					 function returns_nothing()<br />
+					 &emsp;&emsp;&emsp;&emsp;-- do nothing<br />
+					 end<br />
+					 <br />
+					 -- returns_nothing() evaluates to nil/false,<br />
+					 -- so 'or' will return the second value here<br />
+					 value = returns_nothing() or 1<br />
+					 print("value is " .. tostring(value))<br />
+				</code></div>
+				<div id="example_result"><code>
+					value is 1<br />
+				</code></div>
+
+				<h4>Example - Using 'and' to test existence or type before value of variable, to prevent errors :</h4>
+					This example shows how the 'and' operator can be used in a serial to guard operations on values that might otherwise fail and cause script errors. Performing a numeric comparison such as > on a non-numeric value is illegal and would cause a script failure. This is prevented by the first expression which tests whether <code>value</code> is a number. If <code>value</code> is not a number, and the <code><a href="#function:lua:type">type</a></code> check returns <code>false</code>, lua will not proceed on to evaluate the second expression (containing the numeric comparison) as the interpreter is smart enough to realise that it can't affect the final result.
+				<div id="example_code"><code>
+					 function test_value(value)<br />
+					 &emsp;&emsp;&emsp;&emsp;if type(value) == "number" and value > 10 then<br />
+					 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;print("value " .. tostring(value) .. " is a number > 10")<br />
+					 &emsp;&emsp;&emsp;&emsp;else<br />
+					 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;print("value " .. tostring(value) .. " is not a number or a number <= 10")<br />
+					 &emsp;&emsp;&emsp;&emsp;end<br />
+					 end<br />
+					 <br />
+					 test_value(20)<br />
+					 test_value("hello")<br />
+					 test_value(false)<br />
+				</code></div>
+				<div id="example_result"><code>
+					value 20 is a number > 10<br />
+					value hello is not a number or a number <= 10<br />
+					value false is not a number or a number <= 10<br />
+				</code></div>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:lua:Standard Functions"><h2 class="section_header">Standard Functions</h2></a>
+				</div>
+				<p>Lua provides a number of standard functions for various puposes, some of which are documented below.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:lua:print"><h3 class="function_name"><strong><code>print(... </strong></code><i class="parameter">values to print</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Prints one or more supplied values to the standard output. In Total War games, the standard output is the game console, and optionally also a text file. Non-string values passed to the function are cast to string before printing.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>...</code></p>
+									</td>
+									<td>
+										<p>values to print</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print("hello")&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- string<br />
+								 print(5, 3)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- two numbers<br />
+								 print({})&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- a table<br />
+							</code></div>
+							<div id="example_result"><code>
+								hello<br />
+								5&emsp;&emsp;&emsp;&emsp;3<br />
+								table: 0xb805do<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 192</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:lua:type"><h3 class="function_name"><strong><code>type(variable </strong></code><i class="parameter">variable</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the type of a specified value as a string.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>variable</code></p>
+									</td>
+									<td>
+										<p>variable</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:string">string</a></code></code> type</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(type(not_defined))<br />
+								 print(type("hello"))<br />
+								 print(type(5))<br />
+								 print(type({}))<br />
+							</code></div>
+							<div id="example_result"><code>
+								nil<br />
+								string<br />
+								number<br />
+								table<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 203</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:lua:tostring"><h3 class="function_name"><strong><code>tostring(variable </strong></code><i class="parameter">variable</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the specified value cast to a string. The specified value is unaffected.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>variable</code></p>
+									</td>
+									<td>
+										<p>variable</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:string">string</a></code></code> variable cast to string</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 value = 6<br />
+								 value_as_string = tostring(value)<br />
+								 print(value, type(value))<br />
+								 print(value_as_string, type(value_as_string))<br />
+							</code></div>
+							<div id="example_result"><code>
+								6&emsp;&emsp;&emsp;&emsp;number<br />
+								6&emsp;&emsp;&emsp;&emsp;string<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 217</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:lua:tonumber"><h3 class="function_name"><strong><code>tonumber(variable </strong></code><i class="parameter">variable</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the specified string value cast to a number. This only works for string values that contain numeric characters (e.g. "65"). If the supplied value is a string that does not contain numeric characters, or is any other value other than a number then <code><a href="#class:nil">nil</a></code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>variable</code></p>
+									</td>
+									<td>
+										<p>variable</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> variable cast to number</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 numeric_str_value = "26"<br />
+								 non_numeric_str_value = "hello"<br />
+								 number_value = 18<br />
+								 boolean_value = true<br />
+								 table_value = {}<br />
+								 print(tonumber(numeric_str_value), tonumber(non_numeric_str_value), tonumber(number_value), tonumber(boolean_value), tonumber(table_value))<br />
+							</code></div>
+							<div id="example_result"><code>
+								26&emsp;&emsp;&emsp;&emsp;nil&emsp;&emsp;&emsp;&emsp;18&emsp;&emsp;&emsp;&emsp;nil&emsp;&emsp;&emsp;&emsp;nil<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 229</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:lua:loadstring"><h3 class="function_name"><strong><code>loadstring(<code><a href="#class:string">string</a></code> </strong></code><i class="parameter">lua string</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns an executable function created from a string. This string may be constructed manually, or generated by another function such as <code><a href="#function:string:dump">string.dump</a></code>. When the returned function is executed the lua script contained within the specified string is run.<br />
+							Use this function sparingly. See external documentation for more information.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>lua string</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:function">function</a></code></code> lua function</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 function test_func()<br />
+								 &emsp;&emsp;&emsp;&emsp;print("hello");<br />
+								 end;<br />
+								 <br />
+								 local str_a = string.dump(test_func);<br />
+								 local str_b = "print(\"123\")";<br />
+								 <br />
+								 func_a = loadstring(str_a);<br />
+								 func_b = loadstring(str_b);<br />
+								 <br />
+								 func_a()<br />
+								 func_b()<br />
+							</code></div>
+							<div id="example_result"><code>
+								hello<br />
+								123<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 242</p>
+						</dd>
+					</dl>
+				</div>
+
+				<hr class="superblock_divider" />
+
+
+				<a name="class:nil"><h1 class="content_header">Nil</h1></a>
+				<p>The data type <code>nil</code> represents the absence of a value in lua. <code>nil</code> is both the name of the type and also the only value that a variable of that type can take. All variables contain the value <code>nil</code>, and are of type <code>nil</code>, before they are declared. Assigning <code>nil</code> to a variable is the same as deleting it.</p>
+				<p><code>nil</code> values resolve to <code>false</code> when considered in a logical expression.</p>
+
+				<h4>Example:</h4>
+				<div id="example_code"><code>
+					 print("no_value has a value of " .. tostring(no_value) .. " and is of type " .. type(no_value))<br />
+					  <br />
+					 some_value = 6<br />
+					 some_value = nil &emsp;&emsp;&emsp;&emsp;-- deleting<br />
+					 if not some_value then<br />
+					 &emsp;&emsp;&emsp;&emsp;print("some_value is false or nil")<br />
+					 end<br />
+				</code></div>
+				<div id="example_result"><code>
+					no_value has a value of nil and is of type nil<br />
+					some_value is false or nil<br />
+</code></div>
+				<hr class="superblock_divider" />
+
+
+				<a name="class:boolean"><h1 class="content_header">Booleans</h1></a>
+				<p>Boolean values may be either <code>true</code> or <code>false</code>. Boolean values are of most use when evaluated by language structures such as <code>if</code> statements and <code>while</code> loops that perform logical tests and take action based on the result. The logical operators <code>and</code>, <code>or</code> and <code>not</code> can be used to evaluate booleans.</p>
+				<p>See the section on <code><a href="#section:lua:Conditional Operators">Conditional Operators</a></code> for more information.</p>
+
+				<h4>Example:</h4>
+				<div id="example_code"><code>
+					 t = true<br />
+					 <br />
+					 -- must use tostring as the .. concatenation operator wont work with booleans<br />
+					 print("t is " .. tostring(t) .. " and of type " .. type(t))<br />
+					 <br />
+					 f = 6 > 7&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- logical expression evaluates to false<br />
+					 <br />
+					 print("f is " .. tostring(f))<br />
+					 print("not f is " .. tostring(not f))<br />
+					 print("f and t is " .. tostring(f or t))<br />
+					 if f or t then<br />
+					 &emsp;&emsp;&emsp;&emsp;print("f or t must be true!")<br />
+					 end<br />
+				</code></div>
+				<div id="example_result"><code>
+					t is true and of type boolean<br />
+					f is false<br />
+					not f is true<br />
+					f and t is true<br />
+					f or t must be true!<br />
+</code></div>
+				<hr class="superblock_divider" />
+
+
+				<a name="class:number"><h1 class="content_header">Numbers</h1></a>
+				<p>Numeric values in lua are real, so they may contain decimal places. There is no integer numeric type. The default lua language specification sets numbers to be stored as double-precision floats. At time of writing, however, numbers in Total War's implementation of lua are stored as single-precision floats, which offer only about 7 digits of precision. Scripters should be aware of this limitation when planning scripts that may potentially have to deal with very large or precise numbers.</p>
+				<p>Number values can be added, subtracted, multiplied and divided with the +, -, * and / operators respectively. Exponents may be expressed with the ^ operator.</p>
+
+				<h4>Example:</h4>
+				<div id="example_code"><code>
+					 a = 5<br />
+					 b = a + 10<br />
+					 c = b * 2<br />
+					 d = c / 10<br />
+					 e = a ^ d<br />
+					 print(a, b, c, d, e)<br />
+				</code></div>
+				<div id="example_result"><code>
+					5&emsp;&emsp;&emsp;&emsp;15&emsp;&emsp;&emsp;&emsp;30&emsp;&emsp;&emsp;&emsp;3.0&emsp;&emsp;&emsp;&emsp;125.0<br />
+</code></div>
+				<hr class="superblock_divider" />
+
+
+				<a name="class:string"><h1 class="content_header">Strings</h1></a>
+				<p>Strings are variables containing representations of text. A string may be specified by enclosing a value in matching single or double quotes. A string can be zero, one or more characters long, with no upper limit beyond the amount of memory available.</p>
+				<p>Strings may be joined together using the concatenation operator, <code>..</code>.</p>
+
+				<h4>Example:</h4>
+				<div id="example_code"><code>
+					 str_a = "hello"<br />
+					 str_b = "world"<br />
+					 print(str_a .. " " .. str_b)<br />
+				</code></div>
+				<div id="example_result"><code>
+					hello world<br />
+</code></div>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:string:String Patterns"><h2 class="section_header">String Patterns</h2></a>
+				</div>
+				<p>Some of the string functions described in the next section make use of string patterns, a method of matching sequences of characters akin to regular expressions. More information about lua string patterns may be found on <code>lua-users.org</code> <a href="http://lua-users.org/wiki/PatternsTutorial">here</a>.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:string:String Library"><h2 class="section_header">String Library</h2></a>
+				</div>
+				<p>Lua provides a number of operations that can be performed on strings, listed below. More detailed information about these functions may be found on the dedicated page on <code>lua-users.org</code> <a href="http://lua-users.org/wiki/StringLibraryTutorial">here</a>.</p>
+				<p>The functions may be called in the form <code>string.&lt;function&gt;(&lt;string&gt;, &lt;arguments&gt;)</code>, or <code>&lt;string&gt;:&lt;function&gt;(&lt;arguments&gt;)</code> where appropriate.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:string:byte"><h3 class="function_name"><strong><code>string.byte([<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">first char</i><code><strong>], [<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">last char</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the numerical code corresponding to the characters of a specified portion of the string. The portion of the string is specified by index positions of the start and end characters.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=1</i></p>
+										<p>Position of first character in the substring. If this is not a valid character index for this string then <code><a href="#class:nil">nil</a></code> is returned.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=1</i></p>
+										<p>Position of last character in the substring. If the first character position is specified and this is not, then this is set to the value of the first character position (so that only one character is returned).</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>...</code> <code><a href="#class:number">number</a></code> character value(s)</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(string.byte("hello"))&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- prints first character by default<br />
+								 print(string.byte("hello", 4))&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- print single character<br />
+								 print(string.byte("hello", 1, 3))&emsp;&emsp;&emsp;&emsp;-- prints range of characters<br />
+							</code></div>
+							<div id="example_result"><code>
+								104<br />
+								108<br />
+								104&emsp;&emsp;&emsp;&emsp;101&emsp;&emsp;&emsp;&emsp;108<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 383</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:string:char"><h3 class="function_name"><strong><code>string.char(... </strong></code><i class="parameter">character values</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a string constructed from the specified numeric character values. Number character values can be obtained with <code><a href="#function:string:byte">string.byte</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>...</code></p>
+									</td>
+									<td>
+										<p>Vararg of <code><a href="#class:number">number</a></code> character values.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(string.char(104, 101, 108, 108, 111))<br />
+							</code></div>
+							<div id="example_result"><code>
+								hello<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 396</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:string:dump"><h3 class="function_name"><strong><code>string.dump(<code><a href="#class:function">function</a></code> </strong></code><i class="parameter">function</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a string representation of a supplied function, which can later be passed to the <code><a href="#function:lua:loadstring">loadstring</a></code> function to be reconstituted as an executable function.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>function</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:string">string</a></code></code> string representation</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 403</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:string:ends_with"><h3 class="function_name"><strong><code>string.ends_with(<code><a href="#class:string">string</a></code> </strong></code><i class="parameter">subject string</i><code><strong>, <code><a href="#class:string">string</a></code> </strong></code><i class="parameter">substring</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns <code>true</code> if the subject string ends with the supplied substring, or <code>false</code> othewise.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>subject string</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>substring</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 409</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:string:find"><h3 class="function_name"><strong><code>string.find(<code><a href="#class:string">string</a></code> </strong></code><i class="parameter">string</i><code><strong>, <code><a href="#class:string">string</a></code> </strong></code><i class="parameter">substring</i><code><strong>, [<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">start index</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the position of the first occurrence of a supplied substring in the subject string. If the supplied substring is found within the subject string then the start and end character positions of the substring are returned. <code><a href="#class:nil">nil</a></code> is returned if the substring is not found.<br />
+							This implementation of <code>len</code> is provided by our game code to support utf8 strings. It does not support pattern matching - see <code><a href="#function:string:find_lua">string.find_lua</a></code> for the original language implementation which does.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Subject string.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>String pattern to search for.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=1</i></p>
+										<p>Position of character at which to start the search. Supply a negative number to specify a character from the end of the string, counting back.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> first character index</li>
+								<li><code><code><a href="#class:number">number</a></code></code> last character index</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 local str = "This is a test string"<br />
+								 print(string.find(str, "test"))<br />
+							</code></div>
+							<div id="example_result"><code>
+								11&emsp;&emsp;&emsp;&emsp;14<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 418</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:string:find_lua"><h3 class="function_name"><strong><code>string.find_lua(<code><a href="#class:string">string</a></code> </strong></code><i class="parameter">string</i><code><strong>, <code><a href="#class:string">string</a></code> </strong></code><i class="parameter">substring</i><code><strong>, [<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">start index</i><code><strong>], [<code><a href="#class:boolean">boolean</a></code> </strong></code><i class="parameter">disable pattern matching</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the position of the first occurrence of a supplied substring in the subject string. If the supplied substring is found within the subject string then the start and end character positions of the substring are returned. <code><a href="#class:nil">nil</a></code> is returned if the substring is not found.<br />
+							This is the original lua language implementation of <code>len</code>, which does not support utf8 strings but which does support pattern matching. See the lua wiki for more information about lua patterns.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Subject string.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>String pattern to search for.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=1</i></p>
+										<p>Position of character at which to start the search. Supply a negative number to specify a character from the end of the string, counting back.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Disables pattern matching if set to <code>true</code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> first character index</li>
+								<li><code><code><a href="#class:number">number</a></code></code> last character index</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 local str = "this is a test string"<br />
+								 print(string.find_lua(str, "%s"));&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- find first space<br />
+							</code></div>
+							<div id="example_result"><code>
+								5&emsp;&emsp;&emsp;&emsp;5<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 431</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:string:format"><h3 class="function_name"><strong><code>string.format(<code><a href="#class:string">string</a></code> </strong></code><i class="parameter">container string</i><code><strong>, ... </strong></code><i class="parameter">values to insert</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a formatted string from the formatting string and then arguments provided, in a similar style to the C function <code>printf</code>. The formatting string may contain the following special characters:<br />
+							<table class="simple"><tr><th>Character</th><th>Data Type</th><th>Description</th></tr><br />
+							<tr><td><code>%c</code></td><td><code><a href="#class:number">number</a></code> (character code)</td><td>The supplied numerical character code (see <code><a href="#function:string:byte">string.byte</a></code>) will be converted into its string representation.</td></tr>
+
+							<tr><td><code>%d</code></td><td><code><a href="#class:number">number</a></code> (integer)</td><td>The supplied integer, to be preceded by up to up to seven leading zeroes, the number of which may optionally be specified alongside the special character e.g. <code>%04d</code>. If no number is specified then the integer is included in the returned string as it was given.</td></tr>
+
+							<tr><td><code>%e</code></td><td><code><a href="#class:number">number</a></code></td><td>The supplied number will be formatted as an exponent, with the output in lower-case.</td></tr>
+
+							<tr><td><code>%E</code></td><td><code><a href="#class:number">number</a></code></td><td>The supplied number will be formatted as an exponent, with the output in upper-case.</td></tr>
+
+							<tr><td><code>%f</code></td><td><code><a href="#class:number">number</a></code></td><td>The specified number will be formated as a floating-point value. A specific format for the number may optionally be specified alongside the special character e.g. %4.1f would specify that the floating point number should be formatted with four digits preceding the decimal point and one digit following it.</td></tr>
+
+							<tr><td><code>%g</code></td><td><code><a href="#class:number">number</a></code></td><td>The specified number will be formated as a compact floating-point value, or as an exponent (if too many digits) in lower-case.</td></tr>
+
+							<tr><td><code>%G</code></td><td><code><a href="#class:number">number</a></code></td><td>The specified number will be formated as a compact floating-point value, or as an exponent (if too many digits) in upper-case.</td></tr>
+
+							<tr><td><code>%i</code></td><td><code><a href="#class:number">number</a></code> (integer)</td><td>The supplied integer value will be formatted as a signed integer.</td></tr>
+
+							<tr><td><code>%o</code></td><td><code><a href="#class:number">number</a></code> (integer)</td><td>The supplied integer value will be formatted as an octal value.</td></tr>
+
+							<tr><td><code>%q</code></td><td><code><a href="#class:string">string</a></code></td><td>The supplied string will be enclosed in strings (as a quotation) when returned.</td></tr>
+
+							<tr><td><code>%s</code></td><td><code><a href="#class:string">string</a></code></td><td>A string value.</td></tr>
+
+							<tr><td><code>%u</code></td><td><code><a href="#class:number">number</a></code> (integer)</td><td>The supplied value will be formatted as an unsigned integer.</td></tr>
+
+							<tr><td><code>%x</code></td><td><code><a href="#class:number">number</a></code> (integer)</td><td>The supplied value will be formatted as a hexadecimal integer in lower-case.</td></tr>
+
+							<tr><td><code>%X</code></td><td><code><a href="#class:number">number</a></code> (integer)</td><td>The supplied value will be formatted as a hexadecimal integer in upper-case.</td></tr></table>
+
+							The function will throw an error if it's unable to convert the number specified into an integer value (should one be expected).
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>String containing special characters to insert values into.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>...</code></p>
+									</td>
+									<td>
+										<p>One or more values to insert into the container string, in the order that the special characters are found.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:string">string</a></code></code> result</li>
+							</ol>
+
+							<h4>Example - Inserting character codes with %c:</h4>
+							<div id="example_code"><code>
+								 local str = string.format("hello %c %c %c, pleased to meet you", 65, 66, 67)<br />
+								 print(str)<br />
+							</code></div>
+							<div id="example_result"><code>
+								hello A B C, pleased to meet you<br />
+							</code></div>
+
+							<h4>Example - Specifying the string length of an integer with %d:</h4>
+							<div id="example_code"><code>
+								 local str = string.format("These integers will be displayed with at least 5 digits: %05d %05d %05d", 12, 1234, 123456)<br />
+								 print(str)<br />
+							</code></div>
+							<div id="example_result"><code>
+								These integers will be displayed with at least 5 digits: 00012 01234 123456<br />
+							</code></div>
+
+							<h4>Example - Lower/Upper-case exponents with %e and %E:</h4>
+							<div id="example_code"><code>
+								 local str = string.format("Exponents: %e %E", 1234.56, 1234.56)<br />
+								 print(str)<br />
+							</code></div>
+							<div id="example_result"><code>
+								Exponents: 1.234560e+03 1.234560E+03<br />
+							</code></div>
+
+							<h4>Example - Floating point values with %f:</h4>
+							<div id="example_code"><code>
+								 local str = string.format("Floating point values: %f %3.1f", 123456.78, 123456.78)<br />
+								 print(str)<br />
+							</code></div>
+							<div id="example_result"><code>
+								Floating point values: 123456.780000 123456.8<br />
+							</code></div>
+
+							<h4>Example - Compact floating point values with %g and %G:</h4>
+							<div id="example_code"><code>
+								 local str = string.format("Compact floating point values: %g %g %G", 123456, 12345678, 12345678)<br />
+								 print(str)<br />
+							</code></div>
+							<div id="example_result"><code>
+								Compact floating point values: 123456 1.23457e+07 1.23457E+07<br />
+							</code></div>
+
+							<h4>Example - Signed, Unsigned, Octal and Hexadecimal integers:</h4>
+							<div id="example_code"><code>
+								 local str = string.format("Signed: %i, Unsigned: %u, Octal: %o, Hex: %x", -100, -100, -100, -100)<br />
+								 print(str)<br />
+							</code></div>
+							<div id="example_result"><code>
+								Signed: -100, Unsigned: 4294967196, Octal: 37777777634, Hex: ffffff9c<br />
+							</code></div>
+
+							<h4>Example - Strings:</h4>
+							<div id="example_code"><code>
+								 local str = string.format("Unquoted: %s, quoted: %q", "test", "test")<br />
+								 print(str)<br />
+							</code></div>
+							<div id="example_result"><code>
+								Unquoted: test, quoted: "test"<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 445</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:string:gmatch"><h3 class="function_name"><strong><code>string.gmatch(<code><a href="#class:string">string</a></code> </strong></code><i class="parameter">subject string</i><code><strong>, <code><a href="#class:string">string</a></code> </strong></code><i class="parameter">pattern</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a pattern-finding iterator. More information about iterators and lua string patterns may be found externally - see <code><a href="#section:lua:String Patterns">String Patterns</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>subject string</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>pattern</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>iterator</code> </li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 local str = "This is a test string"<br />
+								 local wordcount = 0<br />
+								 for word in string.gmatch(str, "%a+") do<br />
+								   wordcount = wordcount + 1<br />
+								 end<br />
+								 print(string.format("%q contains %d words", str, wordcount))<br />
+							</code></div>
+							<div id="example_result"><code>
+								"This is a test string" contains 5 words<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 496</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:string:gsub"><h3 class="function_name"><strong><code>string.gsub(<code><a href="#class:string">string</a></code> </strong></code><i class="parameter">subject</i><code><strong>, <code><a href="#class:string">string</a></code> </strong></code><i class="parameter">pattern</i><code><strong>, <code><a href="#class:string">string</a></code> </strong></code><i class="parameter">replacement</i><code><strong>, [<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">count</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							This function takes a subject string, a pattern string and a replacement string, and performs a search based on the pattern string within the subject string. Should any parts of the pattern match, those parts of the subject string are replaced with the replacement string. The resulting string is then returned. An optional count argument may also be specified to limit the number of pattern replacements that may be performed.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Subject string.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Pattern string. More information about lua patterns may be found here: <code><a href="#section:lua:String Patterns">String Patterns</a></code></p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Replacement string.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Maximum number of times the replacement can be performed. If left unset, then no maximum is applied.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:string">string</a></code></code> result</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 -- replace all spaces with underscores<br />
+								 result = string.gsub("this is a test string", " ", "_")<br />
+								 print(result)<br />
+							</code></div>
+							<div id="example_result"><code>
+								this_is_a_test_string<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 510</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:string:len"><h3 class="function_name"><strong><code>string.len(<code><a href="#class:string">string</a></code> </strong></code><i class="parameter">input</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the number of characters in the supplied string. This implementation of <code>len</code> is provided by our game code, see <code><a href="#function:string:len_lua">string.len_lua</a></code> for the original language implementation.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>input</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> length</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 str = "hello"<br />
+								 print(str:len())<br />
+							</code></div>
+							<div id="example_result"><code>
+								5<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 523</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:string:len_lua"><h3 class="function_name"><strong><code>string.len_lua(<code><a href="#class:string">string</a></code> </strong></code><i class="parameter">input</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the number of characters in the supplied string. This is the original lua language implementation of <code>len</code>, which does not support utf8 strings.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>input</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> length</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 str = "hello"<br />
+								 print(str:len_lua())<br />
+							</code></div>
+							<div id="example_result"><code>
+								5<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 532</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:string:lower"><h3 class="function_name"><strong><code>string.lower(<code><a href="#class:string">string</a></code> </strong></code><i class="parameter">input</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the supplied string, converted to lowercase.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>input</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:string">string</a></code></code> converted string</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 str = "A Test String"<br />
+								 print(string.lower(str))<br />
+							</code></div>
+							<div id="example_result"><code>
+								a test string<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 541</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:string:match"><h3 class="function_name"><strong><code>string.match(<code><a href="#class:string">string</a></code> </strong></code><i class="parameter">subject</i><code><strong>, <code><a href="#class:string">string</a></code> </strong></code><i class="parameter">pattern</i><code><strong>, [<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">start character</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a substring of the supplied string, by a supplied pattern. An optional index may also be used to specify a character at which the search should be started.<br />
+							More information about patterns may be found here: <code><a href="#section:lua:String Patterns">String Patterns</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Subject string to search.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Search pattern.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=1</i></p>
+										<p>Start character within the subject string.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:string">string</a></code></code> matching string</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 str = "THIS WORD here IS LOWERCASE"<br />
+								 print(string.match(str, "%l+"))<br />
+							</code></div>
+							<div id="example_result"><code>
+								here<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 550</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:string:rep"><h3 class="function_name"><strong><code>string.rep(<code><a href="#class:string">string</a></code> </strong></code><i class="parameter">source</i><code><strong>, <code><a href="#class:number">number</a></code> </strong></code><i class="parameter">count</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Generates and returns a string which is a supplied number of copies of the supplied string, all concatenated together.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>source</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>count</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:string">string</a></code></code> result</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(string.rep("test", 3))<br />
+							</code></div>
+							<div id="example_result"><code>
+								testtesttest<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 562</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:string:reverse"><h3 class="function_name"><strong><code>string.reverse(<code><a href="#class:string">string</a></code> </strong></code><i class="parameter">input</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the supplied string with the character order reversed.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>input</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:string">string</a></code></code> reversed string</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(string.reverse("forward"))<br />
+							</code></div>
+							<div id="example_result"><code>
+								drawrof<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 571</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:string:starts_with"><h3 class="function_name"><strong><code>string.starts_with(<code><a href="#class:string">string</a></code> </strong></code><i class="parameter">subject string</i><code><strong>, <code><a href="#class:string">string</a></code> </strong></code><i class="parameter">substring</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns <code>true</code> if the subject string starts with the supplied substring, or <code>false</code> othewise.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>subject string</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>substring</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 579</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:string:sub"><h3 class="function_name"><strong><code>string.sub(<code><a href="#class:string">string</a></code> </strong></code><i class="parameter">input</i><code><strong>, <code><a href="#class:number">number</a></code> </strong></code><i class="parameter">start index</i><code><strong>, [<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">end index</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a section of the supplied string, specified by start and (optionally) end character positions. The substring will include the characters specified by the start and end positions.<br />
+							This implementation of <code>sub</code> is provided by our game code, see <code><a href="#function:string:sub_lua">string.sub_lua</a></code> for the original language implementation.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Subject string.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Position of the starting character of the substring. If a negative number is specified then the function counts back from the end of the string.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Position of the end character of the desired substring. If omitted, then the end of the supplied string is used as the end of the substring. If a negative number is specified then the function counts back from the end of the string to find this character.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example - From character 11 until the end:</h4>
+							<div id="example_code"><code>
+								 str = "this is a test string"<br />
+								 print(string.sub(str, 11))<br />
+							</code></div>
+							<div id="example_result"><code>
+								test string<br />
+							</code></div>
+
+							<h4>Example - From characters 11 through to 14 :</h4>
+							<div id="example_code"><code>
+								 str = "this is a test string"<br />
+								 print(string.sub(str, 11, 14))<br />
+							</code></div>
+							<div id="example_result"><code>
+								test<br />
+							</code></div>
+
+							<h4>Example - From 13 characters from the end, onwards:</h4>
+							<div id="example_code"><code>
+								 str = "this is a test string"<br />
+								 print(string.sub(str, -13))<br />
+							</code></div>
+							<div id="example_result"><code>
+								a test string<br />
+							</code></div>
+
+							<h4>Example - From 13 characters from the end until 9 from the start:</h4>
+							<div id="example_code"><code>
+								 str = "this is a test string"<br />
+								 print(string.sub(str, -13, 9))<br />
+							</code></div>
+							<div id="example_result"><code>
+								a<br />
+							</code></div>
+
+							<h4>Example - From 13 characters from the end until 8 from the end:</h4>
+							<div id="example_code"><code>
+								 str = "this is a test string"<br />
+								 print(string.sub(str, -13, -8))<br />
+							</code></div>
+							<div id="example_result"><code>
+								a test<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 588</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:string:sub_lua"><h3 class="function_name"><strong><code>string.sub_lua(<code><a href="#class:string">string</a></code> </strong></code><i class="parameter">input</i><code><strong>, <code><a href="#class:number">number</a></code> </strong></code><i class="parameter">start index</i><code><strong>, [<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">end index</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a section of the supplied string, specified by start and (optionally) end character positions. The substring will include the characters specified by the start and end positions.<br />
+							This is the original lua language implementation of <code>sub</code>, which does not support utf8 strings.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Subject string.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Position of the starting character of the substring. If a negative number is specified then the function counts back from the end of the string.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Position of the end character of the desired substring. If omitted, then the end of the supplied string is used as the end of the substring. If a negative number is specified then the function counts back from the end of the string to find this character.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example - From character 11 until the end:</h4>
+							<div id="example_code"><code>
+								 str = "this is a test string"<br />
+								 print(string.sub_lua(str, 11))<br />
+							</code></div>
+							<div id="example_result"><code>
+								test string<br />
+							</code></div>
+
+							<h4>Example - From characters 11 through to 14 :</h4>
+							<div id="example_code"><code>
+								 str = "this is a test string"<br />
+								 print(string.sub_lua(str, 11, 14))<br />
+							</code></div>
+							<div id="example_result"><code>
+								test<br />
+							</code></div>
+
+							<h4>Example - From 13 characters from the end, onwards:</h4>
+							<div id="example_code"><code>
+								 str = "this is a test string"<br />
+								 print(string.sub_lua(str, -13))<br />
+							</code></div>
+							<div id="example_result"><code>
+								a test string<br />
+							</code></div>
+
+							<h4>Example - From 13 characters from the end until 9 from the start:</h4>
+							<div id="example_code"><code>
+								 str = "this is a test string"<br />
+								 print(string.sub_lua(str, -13, 9))<br />
+							</code></div>
+							<div id="example_result"><code>
+								a<br />
+							</code></div>
+
+							<h4>Example - From 13 characters from the end until 8 from the end:</h4>
+							<div id="example_code"><code>
+								 str = "this is a test string"<br />
+								 print(string.sub_lua(str, -13, -8))<br />
+							</code></div>
+							<div id="example_result"><code>
+								a test<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 616</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:string:split"><h3 class="function_name"><strong><code>string.split(<code><a href="#class:string">string</a></code> </strong></code><i class="parameter">subject_str</i><code><strong>, <code><a href="#class:string">string</a></code> </strong></code><i class="parameter">split_str</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a list representing the specified subject_str split up by occurances of split_str, not including those occurances.<br />
+							An empty table is returned if no occurances of split_str are found.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The string to be split.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The character or string to split the subject string at.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example - Splitting a string by spaces:</h4>
+							<div id="example_code"><code>
+								 string.split("The quick brown fox", ' ')<br />
+							</code></div>
+							<div id="example_result"><code>
+								{ "The", "quick", "brown", "fox" }<br />
+							</code></div>
+
+							<h4>Example - Splitting a string with another string (note that the pattern matches at its earliest possible location):</h4>
+							<div id="example_result"><code>
+								{ "Bananas: Price ", "-- £150" }<br />
+							</code></div>
+
+							<h4>Example - Trimming the start and end occurances of spaces:</h4>
+							<div id="example_code"><code>
+								 string.split("NoSpacesHere", ' ')<br />
+							</code></div>
+							<div id="example_result"><code>
+								{ "NoSpacesHere" }<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 644</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:string:upper"><h3 class="function_name"><strong><code>string.upper(<code><a href="#class:string">string</a></code> </strong></code><i class="parameter">input</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the supplied string, converted to uppercase.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>input</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:string">string</a></code></code> converted string</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 str = "A Test String"<br />
+								 print(string.upper(str))<br />
+							</code></div>
+							<div id="example_result"><code>
+								A TEST STRING<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 677</p>
+						</dd>
+					</dl>
+				</div>
+
+				<hr class="superblock_divider" />
+
+
+				<a name="class:function"><h1 class="content_header">Functions</h1></a>
+				<p>Functions are chunks of script that, when executed, perform one or more operations and then return control to the script that called them. Function declarations begin with the <code>function</code> keyword, and end with a corresponding <code>end</code> keyword. They are useful for encapsulating tasks that need to be performed repeatedly.</p>
+				<p>Functions can optionally take one or more argument values from the calling script. This allows a single function to produce different results when run repeatedly, based on its input values. Functions may also optionally return one or more values to the script that called them.</p>
+				<p>Functions in lua are <code>first-class values</code>, which means that they may be assigned and re-assigned to variables in exactly the same manner as <code><a href="#class:number">number</a></code> values, <code><a href="#class:string">string</a></code> values and so on. As with other variables types in lua it's possible for functions to be anonymous, where they are created without a name.</p>
+				<p>Once declared, a function can be called and executed in script by appending open and close parenthesis characters to its name in the form <code>&lt;function_name&gt;(arg1, arg2)</code>. See the examples below.</p>
+
+				<h4>Example - Simple function declaration and execution:</h4>
+				<div id="example_code"><code>
+					 -- declare a function variable called test_function that takes no arguments<br />
+					 function test_function()<br />
+					 &emsp;&emsp;&emsp;&emsp;print("test_function() called");<br />
+					 end<br />
+					 <br />
+					 -- call test_function, after it has been declared<br />
+					 test_function()<br />
+				</code></div>
+				<div id="example_result"><code>
+					test_function() called<br />
+</code></div>
+
+				<h4>Example - Alternative form of function declaration:</h4>
+					This alternative form of function declaration is identical to the previous example. It better illustrates the nature of functions as just another type of variable, created by assignment like a string or number.
+				<div id="example_code"><code>
+					 -- declare a function variable called test_function that takes no arguments<br />
+					 test_function = function()<br />
+					 &emsp;&emsp;&emsp;&emsp;print("test_function() called");<br />
+					 end<br />
+					 <br />
+					 -- call test_function, after it has been declared<br />
+					 test_function()<br />
+				</code></div>
+				<div id="example_result"><code>
+					test_function() called<br />
+</code></div>
+
+				<h4>Example - Function taking two arguments:</h4>
+					Arguments can be specified in the function specification as follows. The arguments will be accessible as local variables throughout the lifetime of the function.
+				<div id="example_code"><code>
+					 -- declare a function that takes two arguments called 'first' and 'second'<br />
+					 f = function(first, second)<br />
+					 &emsp;&emsp;&emsp;&emsp;print("f() called");<br />
+					 &emsp;&emsp;&emsp;&emsp;print("\tfirst is " .. tostring(first));<br />
+					 &emsp;&emsp;&emsp;&emsp;print("\tsecond is " .. tostring(second));<br />
+					 end<br />
+					 <br />
+					 -- call f<br />
+					 f("hello", "goodbye")<br />
+					 f("lonely")&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- deliberately not supplying a second arg<br />
+					 f(nil, "lonely")&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- deliberately not supplying a first arg<br />
+				</code></div>
+				<div id="example_result"><code>
+					f() called<br />
+					&emsp;&emsp;&emsp;&emsp;first is hello<br />
+					&emsp;&emsp;&emsp;&emsp;second is goodbye<br />
+					f() called<br />
+					&emsp;&emsp;&emsp;&emsp;first is lonely<br />
+					&emsp;&emsp;&emsp;&emsp;second is nil&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- value of unsupplied arguments is nil<br />
+					f() called<br />
+					&emsp;&emsp;&emsp;&emsp;first is nil<br />
+					&emsp;&emsp;&emsp;&emsp;second is lonely<br />
+</code></div>
+
+				<h4>Example - Function returning two values:</h4>
+				<div id="example_code"><code>
+					 function get_1080p_screen_resolution()<br />
+					 &emsp;&emsp;&emsp;&emsp;return 1920, 1080;<br />
+					 end<br />
+					 <br />
+					 local x, y = get_1080p_screen_resolution()<br />
+					 print("1080p screen resolution is [" .. x .. ", " .. y .. "]") <br />
+				</code></div>
+				<div id="example_result"><code>
+					1080p screen resolution is [1920, 1080]<br />
+</code></div>
+
+				<h4>Example - Example of passing functions as arguments to another function:</h4>
+					This includes an example of an anonymous function.
+				<div id="example_code"><code>
+					 -- this function takes an argument and prints whether it's a function or not<br />
+					 function is_function(name, obj)<br />
+					 &emsp;&emsp;&emsp;&emsp;if type(obj) == "function" then<br />
+					 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;print(name .. " is a function");<br />
+					 &emsp;&emsp;&emsp;&emsp;else<br />
+					 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;print(name .. " is not a function");<br />
+					 &emsp;&emsp;&emsp;&emsp;end<br />
+					 end<br />
+					<br />
+					 a_number = 5<br />
+					 a_function = function() print("hello!") end<br />
+					 <br />
+					 -- make calls to is_function. First arg is string name, second arg is value to test<br />
+					 is_function("a_number", a_number)<br />
+					 is_function("a_function", a_function)<br />
+					 <br />
+					 -- pass through an anonymous function<br />
+					 is_function("anonymous_function", function() print("this is an anonymous function!") end)<br />
+					 <br />
+					 -- pass is_function itself into is_function...<br />
+					 is_function("is_function", is_function)<br />
+				</code></div>
+				<div id="example_result"><code>
+					a_number is not a function<br />
+					a_function is a function<br />
+					anonymous_function is a function<br />
+					is_function is a function<br />
+</code></div>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:function:Varargs"><h2 class="section_header">Varargs</h2></a>
+				</div>
+				<p>A function can also take a variable number of arguments in a <code>vararg</code> structure. Using varargs, an unlimited number of arguments can be supplied to a function, which accesses them as elements in a <code><a href="#class:table">table</a></code> created within the function block called <code>arg</code>. The number of arguments can be accessed at the special element <code>n</code> within the <code>arg</code> table. See the examples below.</p>
+
+				<h4>Example:</h4>
+				<div id="example_code"><code>
+					 -- the ... argument in the function declaration specifies that the function takes a vararg<br />
+					 function print_all(...)<br />
+					 &emsp;&emsp;&emsp;&emsp;for i = 1, arg.n do<br />
+					 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;print("arg " .. i .. " is " .. tostring(arg[i]))<br />
+					 &emsp;&emsp;&emsp;&emsp;end<br />
+					 end<br />
+					 <br />
+					 -- call print_all() with as many arguments as we like<br />
+					 print_all("hello", "goodbye", 1, 2, 3)<br />
+				</code></div>
+				<div id="example_result"><code>
+					arg 1 is hello<br />
+					arg 2 is goodbye<br />
+					arg 3 is 1<br />
+					arg 4 is 2<br />
+					arg 5 is 3<br />
+				</code></div>
+				<div class="section_body">
+				</div>
+
+				<hr class="superblock_divider" />
+
+
+				<a name="class:table"><h1 class="content_header">Tables</h1></a>
+				<p>Tables are the sole container type in lua, and as such are the mechanism available for building complex data structures. They are associative arrays, which means they store sets of key/value pairs. A <code>value</code> in a table is stored in a record corresponding to a <code>key</code>, and that value may later accessed or modified using that same key. Keys are most commonly <code><a href="#class:number">number</a></code> or <code><a href="#class:string">string</a></code> values, but may be of any type other than <code><a href="#class:nil">nil</a></code>. Values stored against keys can be of any type, including <code><a href="#class:function">function</a></code> or <code><a href="#class:table">table</a></code> (allowing tables to be nested), although a value of <code><a href="#class:nil">nil</a></code> is the same as the value/record not existing.</p>
+				<p>Elements in a table may be accessed using <code>[]</code> square brackets, or by using the <code>.</code> accessor if the key is a string, as shown in the examples below:</p>
+
+				<h4>Example:</h4>
+				<div id="example_code"><code>
+					 -- assign a string value to table t at a numeric key<br />
+					 t[5] = "hello"<br />
+					 <br />
+					 -- assign a number value at a string key<br />
+					 t["age"] = 25<br />
+					<br />
+					 -- assign a value to a key, but where we evaluate the key from another variable<br />
+					 key_name = "hair_colour"<br />
+					 t[key_name] = "brown"<br />
+					 <br />
+					 -- alternative method for assigning to a string key within a table<br />
+					 t.name = "Peter"<br />
+					 <br />
+					 -- access elements in the table (using a variety of methods)<br />
+					 print(t[name] .. " is " .. t[age] .. " years old, his hair colour is " .. t.hair_colour)<br />
+				</code></div>
+				<div id="example_result"><code>
+					Peter is 25 years old, his hair colour is brown<br />
+</code></div>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:table:Creation"><h2 class="section_header">Creation</h2></a>
+				</div>
+				<p>Before a table can be used it must be created with a table constructor, which is a pair of <code>{}</code> braces. Values, or key/value pairs, can be included within the constructor so that they are stored in the table from creation. See the examples below:</p>
+
+				<h4>Example - Create an empty table:</h4>
+				<div id="example_code"><code>
+					 t = {}<br />
+				</code></div>
+
+				<h4>Example - Create a table containing a list of values:</h4>
+					Each new value is inserted into the table at the first available integer key, starting at 1.
+				<div id="example_code"><code>
+					 -- The value "first" is stored with a key of 1 <br />
+					 -- The value "second" is stored with a key of 2 <br />
+					 -- .. and so on <br />
+					 t = { "first", "second", "third", "fourth" }<br />
+				</code></div>
+
+				<h4>Example - Create a table with key/values:</h4>
+				<div id="example_code"><code>
+					 t = { [10] = "ten", [20] = "twenty", [30] = "thirty" }<br />
+				</code></div>
+
+				<h4>Example - Create a table with key/values, but where the key is evaluated:</h4>
+				<div id="example_code"><code>
+					 key_name = "title"<br />
+					 t = { [key_name] = "doctor" }<br />
+					 print(t.title)<br />
+				</code></div>
+				<div id="example_result"><code>
+					doctor<br />
+				</code></div>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:table:Standard Traversal"><h2 class="section_header">Standard Traversal</h2></a>
+				</div>
+				<p>Tables can be traversed by numeric sequence if their keys are arranged accordingly. The size of a table where values are assigned at ascending numeric integer keys can be accessed with the <code>#</code> operator. This reports the first integer key <code>n</code> for which no value is stored at key <code>n + 1</code>.</p>
+
+				<h4>Example - Examples of #t:</h4>
+				<div id="example_code"><code>
+					 t1 = { "yes", "no", "maybe", "sometimes", "rarely" } &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- values are stored at ascending keys<br />
+					 t2 = { [1] = "hello", [2] = "bonjour", [3] = "gutentag", [5] = "salut" } &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- missing value stored at key 4<br />
+					 print("size of t1: " .. #t1)<br />
+					 print("size of t2: " .. #t2)<br />
+				</code></div>
+				<div id="example_result"><code>
+					size of t1: 5<br />
+					size of t2: 3<br />
+				</code></div>
+
+				<h4>Example - Traversal by numeric sequence:</h4>
+				<div id="example_code"><code>
+					 t = { "my", "enormous", "green", "boots", "dont", "fit" }<br />
+					 for i = 1, #t do<br />
+					 &emsp;&emsp;&emsp;&emsp;print("\tkey: " .. i .. ", value: " .. t[i])<br />
+					 end<br />
+				</code></div>
+				<div id="example_result"><code>
+					key: 1, value: my<br />
+					key: 2, value: enormous<br />
+					key: 3, value: green<br />
+					key: 4, value: boots<br />
+					key: 5, value: dont<br />
+					key: 6, value: fit<br />
+				</code></div>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:table:Traversal Using Iterators"><h2 class="section_header">Traversal Using Iterators</h2></a>
+				</div>
+				<p>The iterator functions <code>ipairs</code> and <code>pairs</code> are available for iterating over tables where standard traversal may not be possible or desirable.</p>
+				<p>The <code>ipairs</code> iterator behaves much the same as traversing over a table in numeric sequence. The main difference is that local variables for the key and optionally the value are automatically created. The <code>ipairs</code> iterator stops at the first integer key to which a value is not assigned.</p>
+				<p>Unlike <code>ipairs</code> and numeric traversal, the <code>pairs</code> iterator allows traversal over all elements in a table, regardless of key type or any "gaps" in the data. The main caveat to usage is that the order of traversal is not defined, and can change between iteration instances. As such, the <code>pairs</code> iterator is unsafe to use in multiplayer scripts as two different machines will traverse the same table in different orders.</p>
+
+				<h4>Example - ipairs example:</h4>
+				<div id="example_code"><code>
+					 t = { [1] = "first", [2] = "second", [3] = "third", [5] = "fifth" } &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- gap at 4<br />
+					 for key, value in ipairs(t) do<br />
+					 &emsp;&emsp;&emsp;&emsp;-- local variables called 'key' and 'value' are automatically created each loop cycle<br />
+					 &emsp;&emsp;&emsp;&emsp;print("key: " .. key .. ", value: " .. value);<br />
+					 end<br />
+				</code></div>
+				<div id="example_result"><code>
+					key: 1, value: first<br />
+					key: 2, value: second<br />
+					key: 3, value: third<br />
+				</code></div>
+
+				<h4>Example - pairs example:</h4>
+					Note how the order of the output is arbitrary.
+				<div id="example_code"><code>
+					 -- table with keys of lots of different types - impossible to traverse with #t or ipairs<br />
+					 t = {<br />
+					 &emsp;&emsp;&emsp;&emsp;[1] = "first",<br />
+					&emsp;&emsp;&emsp;&emsp;["greeting"] = "hello", <br />
+					&emsp;&emsp;&emsp;&emsp;[5] = "fifth", <br />
+					&emsp;&emsp;&emsp;&emsp;[10] = "tenth", <br />
+					&emsp;&emsp;&emsp;&emsp;[true] = "this has a boolean key", <br />
+					 &emsp;&emsp;&emsp;&emsp;[function() print("hello") end] = "This has a function key! Weird but possible"<br />
+					 }<br />
+					 for key, value in pairs(t) do<br />
+					 &emsp;&emsp;&emsp;&emsp;print("key: " .. tostring(key) .. ", value: " .. tostring(value));<br />
+					 end<br />
+				</code></div>
+				<div id="example_result"><code>
+					key: 1, value: first<br />
+					key: greeting, value: hello<br />
+					key: function: 0x2194d10, value: This has a function key! Weird but possible<br />
+					key: 5, value: fifth<br />
+					key: true, value: this has a boolean key<br />
+					key: 10, value: tenth<br />
+				</code></div>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:table:Table Library"><h2 class="section_header">Table Library</h2></a>
+				</div>
+				<p>Lua provides a library of operations that can be performed on tables, listed below. More detailed information about these functions may be found on the dedicated page on <code>lua-users.org</code> <a href="http://lua-users.org/wiki/TablesTutorial">here</a>.</p>
+				<p>The functions may be called in the form <code>table.&lt;function&gt;(&lt;t&gt;, &lt;arguments&gt;)</code>.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:table:concat"><h3 class="function_name"><strong><code>table:concat(<code><a href="#class:table">table</a></code> </strong></code><i class="parameter">table</i><code><strong>, [<code><a href="#class:string">string</a></code> </strong></code><i class="parameter">separator</i><code><strong>], [<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">start element</i><code><strong>], [<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">end element</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Concatenates the values in the supplied table into a <code><a href="#class:string">string</a></code>, with optional separator characters, and returns that string. This can be a memory-efficient way of concatenating large amounts of strings together.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p>Table to concatenate.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=""</i></p>
+										<p>Separator string to insert between elements from the table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=1</i></p>
+										<p>Table element at which to start concatenating.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=&lt;table_size&gt;</i></p>
+										<p>Table element at which to finish concatenating.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 t = {"first", "second", "third", "fourth", "fifth"}<br />
+								 print(table.concat(t))<br />
+								 print(table.concat(t, " ", 2, 4))<br />
+							</code></div>
+							<div id="example_result"><code>
+								firstsecondthirdfourthfifth<br />
+								second third fourth<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 923</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:table:insert"><h3 class="function_name"><strong><code>table:insert(<code><a href="#class:table">table</a></code> </strong></code><i class="parameter">table</i><code><strong>, [<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">position</i><code><strong>], obj </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Inserts a value into the supplied table. The index at which to insert the value may optionally be specified - note that this can change the sequence of arguments.<br />
+							If no position argument is specified then the first available integer key in ascending order is chosen, starting from <code>1</code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p>Table to insert element in to.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=&lt;table_size&gt;</i></p>
+										<p>Position at which to insert value. Note that this may be omitted, in which case the value to insert should be specified as the second argument. In this case the first available integer key is chosen, ascending from <code>1</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>obj</code></p>
+									</td>
+									<td>
+										<p>Value to insert. If a third argument is omitted, the second is taken as the value to insert.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 t = {1, 2, 3}<br />
+								 table.insert(t, "hello")&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- insert "hello" as the last element in the table<br />
+								 table.insert(t, 3, "goodbye")&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- insert "goodbye" as the third element in the table<br />
+								 print(table.concat(t, " "))<br />
+							</code></div>
+							<div id="example_result"><code>
+								1 2 goodbye 3 hello<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 936</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:table:maxn"><h3 class="function_name"><strong><code>table:maxn(<code><a href="#class:table">table</a></code> </strong></code><i class="parameter">table</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the largest positive numeric index within the supplied table at which a value is assigned. Unlike the <code>#</code> operator, this will not stop counting if a gap in the integer sequence is found.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p>table</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> highest index</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 t = {}<br />
+								 t[1] = "goodbye"<br />
+								 t[2] = "adios"<br />
+								 t[4] = "auf"<br />
+								 -- no t[5]<br />
+								 t[6] = "la revedere"<br />
+								 t["8"] = "au revoir"&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- not counted as the key is a string<br />
+								 print("table.maxn(t) is " .. table.maxn(t))<br />
+								 print("#t is " .. #t)<br />
+							</code></div>
+							<div id="example_result"><code>
+								table.maxn(t) is 6<br />
+								#t is 4<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 949</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:table:remove"><h3 class="function_name"><strong><code>table:remove(<code><a href="#class:table">table</a></code> </strong></code><i class="parameter">table</i><code><strong>, [<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">position</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Removes the element from the supplied table at the supplied numeric index.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p>Table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=&lt;table_size&gt;</i></p>
+										<p>Position within table of element to remove.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 t = {1, 2, 3, 4, 5}<br />
+								 table.remove(t)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- remove element at the end of the table<br />
+								 table.remove(t, 2)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- remove second element from the table<br />
+								 print(table.concat(t))<br />
+							</code></div>
+							<div id="example_result"><code>
+								134<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 966</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:table:sort"><h3 class="function_name"><strong><code>table:sort(<code><a href="#class:table">table</a></code> </strong></code><i class="parameter">table</i><code><strong>, [<code><a href="#class:function">function</a></code> </strong></code><i class="parameter">comparison</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sorts the elements in the supplied table into a new order. A comparison function may be supplied, which should take two table elements as arguments and return <code>true</code> if the first of these elements should appear in the final sorted order before the second, or <code>false</code> if the opposite is desired. The table is sorted into ascending numerical order by default, which is the equivalent of supplying the sort function <code>function(a, b) return a < b end</code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p>Table to sort.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=&lt;ascending_sort_order&gt;</i></p>
+										<p>Comparison function.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example - Default ascending sort order:</h4>
+							<div id="example_code"><code>
+								 t = {4, 5, 3, 1, 8, 10}<br />
+								 table.sort(t)<br />
+								 print(table.concat(t, " "))<br />
+							</code></div>
+							<div id="example_result"><code>
+								1 3 4 5 8 10<br />
+							</code></div>
+
+							<h4>Example - Reverse sort order:</h4>
+							<div id="example_code"><code>
+								 t = {4, 5, 3, 1, 8, 10}<br />
+								 table.sort(t, function(a, b) return a > b end)<br />
+								 print(table.concat(t, " "))<br />
+							</code></div>
+							<div id="example_result"><code>
+								10 8 5 4 3 1<br />
+							</code></div>
+
+							<h4>Example - Sorting a table of strings into length order:</h4>
+							<div id="example_code"><code>
+								 t = {"very_long", "short", "longer", "really_really_long"}<br />
+								 table.sort(t, function(a, b) return string.len(a) < string.len(b) end)<br />
+								 print(table.concat(t, "..."))<br />
+							</code></div>
+							<div id="example_result"><code>
+								short...longer...very_long...really_really_long<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 977</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:table:tostring"><h3 class="function_name"><strong><code>table:tostring(<code><a href="#class:table">table</a></code> </strong></code><i class="parameter">table</i><code><strong>, <code><a href="#class:boolean">boolean</a></code> </strong></code><i class="parameter">for campaign savegame</i><code><strong>, [<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">max depth</i><code><strong>], [<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">tab level</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Converts a table into a <code><a href="#class:string">string</a></code> representation of that table for debug output. Note that this function is not provided with lua but is provided by Total War's script libraries.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p>Subject table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>Set to <code>true</code if the string is intended for saving into a campaign savegame. This discards values that are not boolean, number, strings or tables.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=3</i></p>
+										<p>Maximum depth. This is the maximum depth of tables-within-tables to which the function will descend. Supply <code>-1</code> to set no maximum depth, which makes an infinite loop a possibility.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>Starting tab level. This number of tabs will be prepended to the start of each new line in the output.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:string">string</a></code></code> table to string</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1001</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:table:contains"><h3 class="function_name"><strong><code>table:contains(<code><a href="#class:table">table</a></code> </strong></code><i class="parameter">table</i><code><strong>, value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Reports if the supplied table contains the supplied value. If the table does contain the supplied value, the corresponding key at which it may be found is returned, otherwise <code>false</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p>table</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>value</code> key corresponding to value</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1107</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:table:is_empty"><h3 class="function_name"><strong><code>table:is_empty(<code><a href="#class:table">table</a></code> </strong></code><i class="parameter">table</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the supplied table is empty.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p>Subject table.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:boolean">boolean</a></code></code> is empty</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1126</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:table:copy"><h3 class="function_name"><strong><code>table:copy(<code><a href="#class:table">table</a></code> </strong></code><i class="parameter">table</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a deep copy of the supplied table. All subtables are copied. Metatables are not copied. Cyclical references are preserved.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p>Subject table</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:table">table</a></code></code> copy</li>
+							</ol>
+
+							<h4>Example - Loading faction script:</h4>
+								This script snippet requires the path to the campaign faction folder, then loads the "faction_script_loader" script file, when the game is created.
+							<div id="example_code"><code>
+								 my_table = { fruit = "apple", topping = { flavour = "cinnamon" } }<br />
+								 copied_table = table.copy(my_table)<br />
+								 copied_table.fruit = "banana"<br />
+								 copied_table.topping.flavour = "chocolate"<br />
+								 print(my_table.fruit .. " topped with " .. my_table.topping.flavour)<br />
+								 print(copied_table.fruit .. " topped with " .. copied_table.topping.flavour)<br />
+							</code></div>
+							<div id="example_result"><code>
+								apple topped with cinnamon<br />
+								banana topped with chocolate<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1139</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:table:mem_address"><h3 class="function_name"><strong><code>table:mem_address(<code><a href="#class:table">table</a></code> </strong></code><i class="parameter">object</i><code><strong>, [<code><a href="#class:boolean">boolean</a></code> </strong></code><i class="parameter">leave punctuation</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the memory address portion of the result of calling tostring() with a table argument. The function will fail if the supplied table has a metatable that's write-protected.<br />
+							If the leave punctuation flag is set then the memory address is supplied back still with its leading colon and space characters.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p>object</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>leave punctuation</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:string">string</a></code></code> address string</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1185</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:table:indexed_to_lookup"><h3 class="function_name"><strong><code>table:indexed_to_lookup(<code><a href="#class:table">table</a></code> </strong></code><i class="parameter">indexed table</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns another table containing all records in the supplied indexed table, except with the values set to keys. The values in the returned table will be <code>true</code> for all records.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p>indexed table</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:table">table</a></code></code> lookup table</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 indexed_t = {"oranges", "apples", "strawberries"}<br />
+								 lookup_t = table.indexed_to_lookup(indexed_t)<br />
+								 for key, value in pairs(lookup_t) do<br />
+								   print(key, value)<br />
+								 end<br />
+							</code></div>
+							<div id="example_result"><code>
+								strawberries&emsp;&emsp;&emsp;&emsp;true<br />
+								oranges&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;true<br />
+								apples&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;true<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1226</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:table:compile_tables"><h3 class="function_name"><strong><code>table:compile_tables(<code><a href="#class:table">table</a></code> </strong></code><i class="parameter">table_list</i><code><strong>, [rules </strong></code><i class="parameter">(fully recursive</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Given a list of tables, sorts all tables by an optional <code>load_order</code> and then merges each one onto the previous successively. Can be used to merge and override data tables for mod compatibility.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p>The list of tables to be merged, indexed numerically.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>rules</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=default rules (fully recursive, allow overrides)</i></p>
+										<p>allow overrides)] <code><a href="#class:table">table</a></code> merge_rules, A table describing the rules for merging, including <code>recursion_levels</code> and <code>allow_overrides</code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:table">table</a></code></code> Returns the fully compiled table (a new table reference).</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1291</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:table:merge_tables"><h3 class="function_name"><strong><code>table:merge_tables(<code><a href="#class:table">table</a></code> </strong></code><i class="parameter">merge_to</i><code><strong>, <code><a href="#class:table">table</a></code> </strong></code><i class="parameter">merge_from</i><code><strong>, <code><a href="#class:table">table</a></code> </strong></code><i class="parameter">merge_rules</i><code><strong>, [<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">recursion_level</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Merge two tables given a set of merge rules, implanting the data from <code>merge_from</code> into <code>merge_to</code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p>The table to which data will be merged. The return value is this table, following the merge.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p>The table from which data will be merged.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p>A table describing the rules for merging, including <code>recursion_levels</code> and <code>allow_overrides</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=1</i></p>
+										<p>The number of recursions this function call is at, i.e. the number of table layers into the original table that the merge has reached. If unspecified, this begins at 1.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:table">table</a></code></code> Returns the original merge_to table, but with the contents of merge_from incoorporated into it.</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1320</p>
+						</dd>
+					</dl>
+				</div>
+
+				<hr class="superblock_divider" />
+
+
+				<a name="class:userdata"><h1 class="content_header">Userdata</h1></a>
+				<p>Userdata is an area of memory accessible to lua but created by the host program. In our case, the host program is the game executable. It allows the host program to package up code functionality in a black box that can be used in fixed ways script.</p>
+				<p>The interface objects supplied to script by the game in campaign and battle are typically <code>userdata</code>. It's not possible for script to meaningfully modify or query userdata objects in ways that weren't specifically set up by the creating code.</p>
+				<hr class="superblock_divider" />
+
+
+				<a name="class:math"><h1 class="content_header">Math</h1></a>
+				<p>The <code>math</code> library provides mathematical functions and values in a <code><a href="#class:table">table</a></code> that be called from within lua.</p>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:math:Values"><h2 class="section_header">Values</h2></a>
+				</div>
+				<p>The math libraries provides the following constants that can be looked up:</p>
+				<div class="section_body">
+
+					<h3 class "variable_list">Variables in this section:</h3>
+					<p>These variables may be accessed via <code>&lt;interface&gt;.&lt;variable_name&gt;</code>:</p>
+					<table class="variable_list">
+						<tr>
+							<td class="variable_name">
+								<a name="variable:math:pi"><strong>pi</strong></a>
+							</td>
+							<td class="variable_type">
+								number
+							</td>
+							<td class="description">
+								Value of Pi.
+							</td>
+						</tr>
+						<tr>
+							<td class="variable_name">
+								<a name="variable:math:huge"><strong>huge</strong></a>
+							</td>
+							<td class="variable_type">
+								number
+							</td>
+							<td class="description">
+								The value HUGE_VAL, a value equal to or larger than any other numerical value.
+							</td>
+						</tr>
+					</table>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:math:Functions"><h2 class="section_header">Functions</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:math:abs"><h3 class="function_name"><strong><code>math.abs(<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the absolute of the supplied value, converting it to a positive value if negative.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> absolute value</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(math.abs(-4))<br />
+							</code></div>
+							<div id="example_result"><code>
+								4<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1402</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:acos"><h3 class="function_name"><strong><code>math.acos(<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the arc cosine of the supplied value, in radians. The supplied value should be between -1 and 1.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> acos value in radians</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(math.acos(0.5))<br />
+							</code></div>
+							<div id="example_result"><code>
+								1.0471975511966<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1410</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:asin"><h3 class="function_name"><strong><code>math.asin(<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the arc sine of the supplied value, in radians. The supplied value should be between -1 and 1.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> asin value in radians</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(math.asin(0.5))<br />
+							</code></div>
+							<div id="example_result"><code>
+								0.5235987755983<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1418</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:atan"><h3 class="function_name"><strong><code>math.atan(<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the arc tangent of the supplied value, in radians.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> atan value in radians</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(math.atan2(1))<br />
+							</code></div>
+							<div id="example_result"><code>
+								0.64350110879328<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1426</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:atan2"><h3 class="function_name"><strong><code>math.atan2(<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">opposite</i><code><strong>, <code><a href="#class:number">number</a></code> </strong></code><i class="parameter">adjacent</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the arc tangent of the supplied opposite value divided by the supplied adjacent value, in radians. The sign of both arguments is used to find the quadrant of the result.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>opposite</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>adjacent</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> atan value in radians</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(math.atan2(5, 5))<br />
+								 print(math.atan2(-5, 5))<br />
+							</code></div>
+							<div id="example_result"><code>
+								0.78539816339745<br />
+								-0.78539816339745<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1434</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:ceil"><h3 class="function_name"><strong><code>math.ceil(<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the smallest integer that is larger than or equal to the supplied value.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> ceil value</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(math.ceil(2.2))<br />
+							</code></div>
+							<div id="example_result"><code>
+								3<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1445</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:cos"><h3 class="function_name"><strong><code>math.cos(<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the cosine of the supplied radian value.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> cosine value</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(math.cos(1.0471975511966))<br />
+							</code></div>
+							<div id="example_result"><code>
+								0.5<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1453</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:cosh"><h3 class="function_name"><strong><code>math.cosh(<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the hyperbolic cosine of the supplied value.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> hyperbolic cosine value</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(math.cosh(1))<br />
+							</code></div>
+							<div id="example_result"><code>
+								1.5430806348152<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1461</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:deg"><h3 class="function_name"><strong><code>math.deg(<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">radian value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Converts the supplied radian value into an angle in degrees. See also <code><a href="#function:math:rad">math.rad</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>radian value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> value in degrees</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(math.deg(math.pi))<br />
+							</code></div>
+							<div id="example_result"><code>
+								180.0<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1469</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:exp"><h3 class="function_name"><strong><code>math.exp(<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">exponent</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the numerical constant <code>e</code> to the power of the supplied value. Supply a value of <code>1</code> to just return <code>e</code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>exponent</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> e ^ exponent</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(math.exp(1))<br />
+							</code></div>
+							<div id="example_result"><code>
+								2.718281828459<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1477</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:floor"><h3 class="function_name"><strong><code>math.floor(<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the largest integer that is smaller than or equal to the supplied value.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> floor value</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(math.floor(2.2))<br />
+							</code></div>
+							<div id="example_result"><code>
+								2<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1485</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:fmod"><h3 class="function_name"><strong><code>math.fmod(<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">dividend</i><code><strong>, <code><a href="#class:number">number</a></code> </strong></code><i class="parameter">divisor</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns remainder of the division of the first supplied value by the second supplied value.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>dividend</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>divisor</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> floor value</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 -- 5 * 4 is 20, leaving a remainder of 3 to reach 23<br />
+								 print(math.fmod(23, 5))<br />
+							</code></div>
+							<div id="example_result"><code>
+								3<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1493</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:frexp"><h3 class="function_name"><strong><code>math.frexp(<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">x value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the values of <code>m</code> and <code>exp</code> in the expression <code>x = m * 2 ^ exp</code>, where <code>x</code> is the value supplied to the function. <code>exp</code> is an integer and the absolute value of the mantissa <code>m</code> is in the range 0.5 - 1 (or zero when <code>x</code> is zero).
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>x value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> mantissa m value</li>
+								<li><code><code><a href="#class:number">number</a></code></code> exponent e value</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(math.frexp(10)))<br />
+							</code></div>
+							<div id="example_result"><code>
+								0.625&emsp;&emsp;&emsp;&emsp;4<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1503</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:ldexp"><h3 class="function_name"><strong><code>math.ldexp(<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">m</i><code><strong>, <code><a href="#class:number">number</a></code> </strong></code><i class="parameter">exp</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns <code>m * 2 ^ exp</code>, where the mantissa <code>m</code> and exponent <code>exp</code> are values supplied to the function. <code>exp</code> should be an integer value.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>m</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>exp</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> m * 2 ^ exp</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(math.ldexp(2, 4))<br />
+							</code></div>
+							<div id="example_result"><code>
+								32.0<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1512</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:log"><h3 class="function_name"><strong><code>math.log(<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the natural logarithm of the supplied value.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> log value</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(math.log(10))<br />
+							</code></div>
+							<div id="example_result"><code>
+								2.302585092994<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1521</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:log10"><h3 class="function_name"><strong><code>math.log10(<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the base-10 logarithm of the supplied value.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> log value</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(math.log(10))<br />
+							</code></div>
+							<div id="example_result"><code>
+								1.0<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1529</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:max"><h3 class="function_name"><strong><code>math.max(... </strong></code><i class="parameter">values</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the maximum numeric value amongst the arguments given.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>...</code></p>
+									</td>
+									<td>
+										<p><code><a href="#section:lua:Varargs">Varargs</a></code> of <code><a href="#class:number">number</a></code> values</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> max value</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(math.max(12, 10, 14, 3, 8, 13))<br />
+							</code></div>
+							<div id="example_result"><code>
+								14<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1537</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:min"><h3 class="function_name"><strong><code>math.min(... </strong></code><i class="parameter">values</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the minimum numeric value amongst the arguments given.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>...</code></p>
+									</td>
+									<td>
+										<p><code><a href="#section:lua:Varargs">Varargs</a></code> of <code><a href="#class:number">number</a></code> values</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> min value</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(math.min(12, 10, 14, 3, 8, 13))<br />
+							</code></div>
+							<div id="example_result"><code>
+								3<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1545</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:modf"><h3 class="function_name"><strong><code>math.modf(<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">input value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the integral part of the supplied value and the fractional part of the supplied value.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>input value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> integral value</li>
+								<li><code><code><a href="#class:number">number</a></code></code> fractional value</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(math.modf(5))<br />
+								 print(math.modf(5.4))<br />
+							</code></div>
+							<div id="example_result"><code>
+								5&emsp;&emsp;&emsp;&emsp;0.0<br />
+								5&emsp;&emsp;&emsp;&emsp;0.4<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1553</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:normalize"><h3 class="function_name"><strong><code>math.normalize(<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">value</i><code><strong>, [<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">minimum</i><code><strong>], [<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">maximum</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Scales a supplied value to between supplied minimum and maximum values.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>minimum</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=1</i></p>
+										<p>maximum</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> normalized value</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1564</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:pow"><h3 class="function_name"><strong><code>math.pow(<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">x</i><code><strong>, <code><a href="#class:number">number</a></code> </strong></code><i class="parameter">y</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the first supplied number value to the power of the second supplied number value.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>x</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>y</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> x ^ y</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(math.pow(2, 4))<br />
+							</code></div>
+							<div id="example_result"><code>
+								16.0<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1577</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:rad"><h3 class="function_name"><strong><code>math.rad(<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">degree value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Converts the supplied angle in degrees into an angle in radians. See also <code><a href="#function:math:deg">math.deg</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>degree value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> value in radians</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(math.rad(180))<br />
+							</code></div>
+							<div id="example_result"><code>
+								3.1415926535898<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1586</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:random"><h3 class="function_name"><strong><code>math.random([<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">first limit</i><code><strong>], [<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">second limit</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Provides an interface to the pseudo-random number generator provided by ANSI C. This function returns a random number between two optionally-supplied limits. If no arguments are supplied, those limits are <code>0</code> and <code>1</code>. If one argument <code>a</code> is supplied, those limits are <code>1</code> and <code>a</code>. If two arguments <code>a</code> and <code>b</code> are supplied then those limits are <code>a</code> and <code>b</code>.<br />
+							If no arguments are supplied the returned value is real, whereas if any arguments are supplied the returned value is an integer.<br />
+							Note that use of this function is discouraged, as it will generate different results on different clients in a multiplayer game. Acting upon the result of this function in multiplayer scripts will likely cause desyncs.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>first limit</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>second limit</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> random number</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(math.random())&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- returned value will be 0..1<br />
+								 print(math.random(10))&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- returned value will be 1..10<br />
+								 print(math.random(5, 10))&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- returned value will be 5..10<br />
+							</code></div>
+							<div id="example_result"><code>
+								0.84018771676347<br />
+								4<br />
+								9<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1594</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:randomseed"><h3 class="function_name"><strong><code>math.randomseed(<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">seed</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the supplied value as the seed for the random number system.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>seed</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 math.randomseed(os.clock()))&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- use os clock as random seed<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1609</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:sin"><h3 class="function_name"><strong><code>math.sin(<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the sine of the supplied radian value.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> sine value</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(math.sin(0.5235987755983))<br />
+							</code></div>
+							<div id="example_result"><code>
+								0.5<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1615</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:sinh"><h3 class="function_name"><strong><code>math.sinh(<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the hyperbolic sine of the supplied value.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> hyperbolic sine value</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(math.sinh(0.5235987755983))<br />
+							</code></div>
+							<div id="example_result"><code>
+								0.54785347388804<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1623</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:sqrt"><h3 class="function_name"><strong><code>math.sqrt(<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the square root of the supplied value.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> square root value</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(math.sqrt(4))<br />
+							</code></div>
+							<div id="example_result"><code>
+								2.0<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1631</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:tan"><h3 class="function_name"><strong><code>math.tan(<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the tangent of the supplied radian value.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> tan value</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(math.tan(0.64350110879328))<br />
+							</code></div>
+							<div id="example_result"><code>
+								0.74999999999999<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1639</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:math:tanh"><h3 class="function_name"><strong><code>math.tanh(<code><a href="#class:number">number</a></code> </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the hyperbolic tangent of the supplied value.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:number">number</a></code></code> hyperbolic tan value</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 print(math.tanh(0.64350110879328))<br />
+							</code></div>
+							<div id="example_result"><code>
+								0.56727870240097<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_lua_extensions.lua, line 1647</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:math:Other Functionality"><h2 class="section_header">Other Functionality</h2></a>
+				</div>
+				<div class="section_body">
+
+					<h3 class "variable_list">Variables in this section:</h3>
+					<p>These variables may be accessed via <code>&lt;interface&gt;.&lt;variable_name&gt;</code>:</p>
+					<table class="variable_list">
+						<tr>
+							<td class="variable_name">
+								<a name="variable:math:pi"><strong>pi</strong></a>
+							</td>
+							<td class="variable_type">
+								number
+							</td>
+							<td class="description">
+								Value of Pi.
+							</td>
+						</tr>
+						<tr>
+							<td class="variable_name">
+								<a name="variable:math:huge"><strong>huge</strong></a>
+							</td>
+							<td class="variable_type">
+								number
+							</td>
+							<td class="description">
+								The value HUGE_VAL, a value equal to or larger than any other numerical value.
+							</td>
+						</tr>
+					</table>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:59</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "battle"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

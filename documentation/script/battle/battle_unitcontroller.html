@@ -1,0 +1,3130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Unitcontroller</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#e2edff" id="main">
+
+			<div style="background-color:#e2edff" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Battle Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#c1e6ff">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search battle only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#c1e6ff">Game Areas</h2>
+				<ul>
+					<li><a href="../campaign/campaign_index.html">Campaign Index</a></li>
+					<li><strong> > Battle Index</strong></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:battle_unitcontroller">Unitcontroller</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:battle_unitcontroller:Creation">Creation</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_unitcontroller:Usage">Usage</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_unitcontroller:Adding and Removing Units">Adding and Removing Units</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:clear_all">clear_all</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:add_all_units">add_all_units</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:add_units">add_units</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:add_group">add_group</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_unitcontroller:Taking and Releasing Control">Taking and Releasing Control</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:take_control">take_control</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:release_control">release_control</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_unitcontroller:Morale and Invincibility">Morale and Invincibility</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:morale_behavior_default">morale_behavior_default</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:morale_behavior_fearless">morale_behavior_fearless</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:hide_unbreakable_in_ui">hide_unbreakable_in_ui</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:morale_behavior_rout">morale_behavior_rout</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:set_invincible">set_invincible</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_unitcontroller:Visibility and Fatigue">Visibility and Fatigue</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:set_invisible_to_all">set_invisible_to_all</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:set_always_visible_to_all">set_always_visible_to_all</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:set_always_visible_no_hidden_to_all">set_always_visible_no_hidden_to_all</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:set_always_visible_no_leave_battle_to_all">set_always_visible_no_leave_battle_to_all</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:set_always_visible_no_hidden_no_leave_battle_to_all"><div class="tooltip_container">set_always_visible_no_hidden_no_leave_battle_to_...<span style="background-color:#e2edff"  class="tooltip_text">set_always_visible_no_hidden_no_leave_battle_to_all</span></div></a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:change_enabled">change_enabled</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:set_contributes_to_army_strength">set_contributes_to_army_strength</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:update_card_existance_on_HUD">update_card_existance_on_HUD</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:hide_unit_card">hide_unit_card</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:change_fatigue_amount">change_fatigue_amount</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_unitcontroller:Abilities and Behaviours">Abilities and Behaviours</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:perform_special_ability">perform_special_ability</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:perform_special_ability_q">perform_special_ability_q</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:perform_special_ability_ground">perform_special_ability_ground</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:reset_ability_cooldown">reset_ability_cooldown</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:reset_ability_number_of_uses">reset_ability_number_of_uses</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:change_shot_type">change_shot_type</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:change_shot_type_q">change_shot_type_q</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:change_behaviour_active">change_behaviour_active</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:melee">melee</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:fire_at_will">fire_at_will</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_unitcontroller:Movement">Movement</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:halt">halt</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:withdraw">withdraw</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:withdraw_q">withdraw_q</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:step_forward">step_forward</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:step_backwards">step_backwards</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:increment_formation_width">increment_formation_width</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:decrement_formation_width">decrement_formation_width</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:change_move_speed">change_move_speed</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:change_group_formation">change_group_formation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:change_group_formation_q">change_group_formation_q</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:goto_location">goto_location</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:goto_location_q">goto_location_q</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:goto_location_angle_width">goto_location_angle_width</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:goto_location_angle_width_q">goto_location_angle_width_q</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:teleport_to_location">teleport_to_location</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:occupy_vehicle">occupy_vehicle</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:occupy_vehicle_q">occupy_vehicle_q</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:occupy_zone">occupy_zone</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:occupy_zone_q">occupy_zone_q</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:rotate">rotate</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:rotate_q">rotate_q</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_unitcontroller:Attacking">Attacking</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:attack_unit">attack_unit</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:attack_unit_q">attack_unit_q</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:attack_building">attack_building</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:attack_building_q">attack_building_q</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:interact_with_deployable">interact_with_deployable</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:interact_with_deployable_q">interact_with_deployable_q</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:besiege_building">besiege_building</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:besiege_building_q">besiege_building_q</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:defend_building">defend_building</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:defend_building_q">defend_building_q</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:leave_building">leave_building</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:attack_location">attack_location</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:attack_location_q">attack_location_q</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:attack_line">attack_line</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:attack_line_q">attack_line_q</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_unitcontroller:Miscellaneous">Miscellaneous</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:set_matched_combat_chance">set_matched_combat_chance</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:start_celebrating">start_celebrating</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:start_taunting">start_taunting</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:trigger_sound_vo">trigger_sound_vo</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:kill">kill</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:highlight">highlight</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:add_animated_selection_proxy">add_animated_selection_proxy</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:remove_animated_selection_proxy">remove_animated_selection_proxy</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unitcontroller:change_current_walk_speed">change_current_walk_speed</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#e2edff" id="navigation_right">				<h2 style="background-color:#c1e6ff">Battle Topics</h2>
+				<ul>
+					<li><a href="battle_index.html">Battle Index</a></li>
+					<li><a href="battle_hierarchy.html">Battle Hierarchy</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="battle.html">Battle</a></li>
+					<li><a href="battle_alliances.html">Alliances</a></li>
+					<li><a href="battle_alliance.html">Alliance</a></li>
+					<li><a href="battle_armies.html">Armies</a></li>
+					<li><a href="battle_army.html">Army</a></li>
+					<li><a href="battle_units.html">Units</a></li>
+					<li><a href="battle_unit.html">Unit</a></li>
+					<li><strong> > Unitcontroller</strong></li>
+					<li><a href="ai_planner.html">AI Planners</a></li>
+					<li><a href="battle_assault_equipment.html">Assault Equipment</a></li>
+					<li><a href="battle_building.html">Building</a></li>
+					<li><a href="battle_buildings.html">Buildings</a></li>
+					<li><a href="battle_camera.html">Camera</a></li>
+					<li><a href="battle_capture_location.html">Capture Location</a></li>
+					<li><a href="battle_composite_scenes_system.html">Composite Scenes System</a></li>
+					<li><a href="battle_debug_drawing.html">Debug Drawing</a></li>
+					<li><a href="battle_reinforcements.html">reinforcements Reinforcements</a></li>
+					<li><a href="battle_sound_effect.html">Sound Effects</a></li>
+					<li><a href="battle_subtitles.html">Subtitles</a></li>
+					<li><a href="battle_toggle_system.html">Toggle System</a></li>
+					<li><a href="battle_vector.html">Vector</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Script Interfaces</h2>
+				<ul>
+					<li><a href="battle_manager.html">Battle Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="advice_manager.html">Advice Manager</a></li>
+					<li><a href="battle_ui_manager.html">Battle UI Manager</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="cutscene.html">Battle Cutscenes</a></li>
+					<li><a href="generated_battle.html">Generated Battle</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="script_ai_planner.html">Script AI Planner</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="script_unit.html">Script Unit</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Data Interfaces</h2>
+				<ul>
+					<li><a href="st_helper.html">Scripted Tour Helpers</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:battle_unitcontroller"><h1 class="content_header">Unitcontroller</h1></a>
+				<p>Unitcontrollers are the interface through which orders may be issued to units. A unitcontroller is created and then one or more <code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> objects are attached to it. The unitcontroller can then take control of these units from other controlling entities (such as the player, or the AI) and issue orders for the units to follow. A unitcontroller implicitly takes control of units to which it is assigned if an order is issued, or control may be taken explicitly with <code><a href="#function:battle_unitcontroller:take_control">unitcontroller:take_control</a></code>. Should a unitcontroller take control of a player unit then the player will not be able to issue commands to it (the card belonging to the unit will appear greyed-out). </p>
+				<p>A unitcontroller manages one or more unit groups and a list of individual units. Each group of units that the controller manages moves together, organising themselves into a specific formation. The individual units under control all move autonomously.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_unitcontroller:Creation"><h2 class="section_header">Creation</h2></a>
+				</div>
+				<p>A unitcontroller may be created manually with the <code><a href="battle_army.html#function:battle_army:create_unit_controller">army:create_unit_controller</a></code> method provided by the <code><a href="battle_army.html#class:battle_army">battle_army</a></code> interface. However, the script libraries provide a number of shorthand methods for creating unitcontrollers, such as <code><a href="global.html#function:global:create_unitcontroller">create_unitcontroller</a></code> and <code><a href="global.html#function:global:unitcontroller_from_army">unitcontroller_from_army</a></code>. Of greater significance is the <code><a href="script_unit.html#class:script_unit">script_unit</a></code> interface, which provides easy creation of both a <code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> and <code><a href="#class:battle_unitcontroller">battle_unitcontroller</a></code> packaged together. When a script unit is created, the unitcontroller it contains may be accessed at <code>&lt;script_unit&gt;.uc</code>.</p>
+				<p>Furthermore, use of the <code><a href="generated_battle.html#class:generated_battle">generated_battle</a></code> framework negates the need to create (or even use) unitcontrollers.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_unitcontroller:Usage"><h2 class="section_header">Usage</h2></a>
+				</div>
+				<p>Once a handle to a unitcontroller object is obtained, functions may be called on it to query or modify its state in the following form.</p>
+
+				<h4>Example - Specification:</h4>
+				<div id="example_code"><code>
+					 <i>&lt;object_name&gt;</i>:<i>&lt;function_name&gt;</i>(<i>&lt;args&gt;</i>)<br />
+				</code></div>
+
+				<h4>Example - Creation and Usage:</h4>
+				<div id="example_code"><code>
+					 local uc_player_01 = army_player:create_unit_controller()<br />
+					 uc_player_01:take_control()&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- calling a function on the object once created<br />
+				</code></div>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_unitcontroller:Adding and Removing Units"><h2 class="section_header">Adding and Removing Units</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:clear_all"><h3 class="function_name"><strong><code>unitcontroller:clear_all()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Removes all units from the unitcontroller. Units that were under script control are still left in this state unless explicitly released with <code><a href="#function:battle_unitcontroller:release_control">unitcontroller:release_control</a></code>.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 5377</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:add_all_units"><h3 class="function_name"><strong><code>unitcontroller:add_all_units()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds all units in the <code><a href="battle_army.html#class:battle_army">battle_army</a></code> that this unitcontroller is assocated with, as a group.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 5454</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:add_units"><h3 class="function_name"><strong><code>unitcontroller:add_units(... </strong></code><i class="parameter">units</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds one or more units to the unitcontroller. Multiple <code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> objects may be specified as individual arguments.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>...</code></p>
+									</td>
+									<td>
+										<p>One or more <code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> objects.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 5511</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:add_group"><h3 class="function_name"><strong><code>unitcontroller:add_group(... </strong></code><i class="parameter">units</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds one or more units to the unitcontroller as a group. Multiple <code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> objects may be specified as individual arguments. Grouped units will move together.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>...</code></p>
+									</td>
+									<td>
+										<p>One or more <code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> objects.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 5580</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_unitcontroller:Taking and Releasing Control"><h2 class="section_header">Taking and Releasing Control</h2></a>
+				</div>
+				<p>Script control of the units in a unitcontroller is automatically taken when an order is issued to them. Control can be explicitly taken or released using the commands in this section, however.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:take_control"><h3 class="function_name"><strong><code>unitcontroller:take_control()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Explicitly takes control of the assigned units. This removes them from player or AI control.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 5749</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:release_control"><h3 class="function_name"><strong><code>unitcontroller:release_control()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Releases control of all units controlled by this unitcontroller to either the player or the AI.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 5773</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_unitcontroller:Morale and Invincibility"><h2 class="section_header">Morale and Invincibility</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:morale_behavior_default"><h3 class="function_name"><strong><code>unitcontroller:morale_behavior_default()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Releases the morale value of the units associated with this unitcontroller to be set by the game. Use this function after calling either <code><a href="#function:battle_unitcontroller:morale_behavior_fearless">unitcontroller:morale_behavior_fearless</a></code> or <code><a href="#function:battle_unitcontroller:morale_behavior_rout">unitcontroller:morale_behavior_rout</a></code> to reset the morale to game control.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 5798</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:morale_behavior_fearless"><h3 class="function_name"><strong><code>unitcontroller:morale_behavior_fearless()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the units associated with this unitcontroller to be fearless, meaning they can never rout.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 5820</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:hide_unbreakable_in_ui"><h3 class="function_name"><strong><code>unitcontroller:hide_unbreakable_in_ui(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">hide_in_ui</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Allows/Disables the UI to show that a unit is fearless/unbreakable.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>If true the UI will ignore that the unit is fearless/unbreakable.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 5851</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:morale_behavior_rout"><h3 class="function_name"><strong><code>unitcontroller:morale_behavior_rout()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the units associated with this unitcontroller to immediately rout.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 5885</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:set_invincible"><h3 class="function_name"><strong><code>unitcontroller:set_invincible([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">is invincible</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the units associated with this unitcontroller to be invincible or not. Invincible units do not take damage.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>is invincible</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 5915</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_unitcontroller:Visibility and Fatigue"><h2 class="section_header">Visibility and Fatigue</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:set_invisible_to_all"><h3 class="function_name"><strong><code>unitcontroller:set_invisible_to_all(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">set invisible</i><code><strong>, [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">update ui</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Makes all units associated with this unitcontroller invisible or not. Supply <code>true</code> as an argument to make units invisible, and <code>false</code> to make them visible again. Invisible units are still able to take part in the battle, unless also disabled with <code><a href="#function:battle_unitcontroller:change_enabled">unitcontroller:change_enabled</a></code>.<br />
+							The <code><a href="script_unit.html#function:script_unit:set_enabled">script_unit:set_enabled</a></code> command on the <code><a href="script_unit.html#class:script_unit">script_unit</a></code> interface sets invisibility and enables/disables the unit in one function call, so consider calling that function instead of this.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>Set invisible.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>Update UI with invisibility change. Supply <code>false</code> to not update the UI with this visibility change. This should only be done in very specific circumstances - hiding and showing unit cards can potentially re-order them, so set this flag to <code>false</code> to suppress this behaviour if desired.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 5941</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:set_always_visible_to_all"><h3 class="function_name"><strong><code>unitcontroller:set_always_visible_to_all(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">set always visible</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the units associated with this unitcontroller to be exempt or not from the terrain visibility test.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>set always visible</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6017</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:set_always_visible_no_hidden_to_all"><h3 class="function_name"><strong><code>unitcontroller:set_always_visible_no_hidden_to_all(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">set always visible</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the units associated with this unitcontroller to be exempt or not from the terrain visibility test. If set to be visible the unit will still be able to hide in forests and vegetation.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>set always visible</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6041</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:set_always_visible_no_leave_battle_to_all"><h3 class="function_name"><strong><code>unitcontroller:set_always_visible_no_leave_battle_to_all(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">set always visible</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the units associated with this unitcontroller to be exempt or not from the terrain visibility test. If set to be visible the unit will still be able to hide when leaving battle
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>set always visible</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6065</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:set_always_visible_no_hidden_no_leave_battle_to_all"><h3 class="function_name"><strong><code>unitcontroller:set_always_visible_no_hidden_no_leave_battle_to_all(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">set always visible</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the units associated with this unitcontroller to be exempt or not from the terrain visibility test. If set to be visible the unit will still be able to hide in forests and vegetation and when leaving battle.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>set always visible</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6089</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:change_enabled"><h3 class="function_name"><strong><code>unitcontroller:change_enabled(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">enabled</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Enables or disables the units associated with this unitcontroller. Disabled units will not take any part in the battle. However they will still be visible on the UI, unless also set to be invisible with <code><a href="#function:battle_unitcontroller:set_invisible_to_all">unitcontroller:set_invisible_to_all</a></code>.<br />
+							The <code><a href="script_unit.html#function:script_unit:set_enabled">script_unit:set_enabled</a></code> command on the <code><a href="script_unit.html#class:script_unit">script_unit</a></code> interface sets invisibility and enables/disables the unit in one function call, so consider calling that function instead of this.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>enabled</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6132</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:set_contributes_to_army_strength"><h3 class="function_name"><strong><code>unitcontroller:set_contributes_to_army_strength(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">contributes</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the unit to contribute to the strength of its army for balance-of-power calculations. Note that the underlying setting this function changes is also changed whenever <code><a href="#function:battle_unitcontroller:change_enabled">unitcontroller:change_enabled</a></code> is called - enabled units will contribute to army strength, whereas disabled units will not. This function may be called after calling <code><a href="#function:battle_unitcontroller:change_enabled">unitcontroller:change_enabled</a></code> to change this behaviour.&emsp;&emsp;&emsp;&emsp;
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>contributes</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6172</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:update_card_existance_on_HUD"><h3 class="function_name"><strong><code>unitcontroller:update_card_existance_on_HUD()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Tells the UI to add or remove the units associated with this unitcontroller to or from the HUD based on the current invisibility flag. This is only for use in specific scripted circumstances.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6211</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:hide_unit_card"><h3 class="function_name"><strong><code>unitcontroller:hide_unit_card()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Tells the UI to hide the units cards associated with this unitcontroller.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6228</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:change_fatigue_amount"><h3 class="function_name"><strong><code>unitcontroller:change_fatigue_amount(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">fatigue level</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Changes the fatigue level of the units associated with this unitcontroller to the supplied unary value, relative to their current level. For example, supplying 0.5 as an argument would half their fatigue level (making them fresher). Do not supply 0 to this function as this would cause a divide by zero error in the code - 0.01 or some equivalent will suffice.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Relative unary fatigue level.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6245</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_unitcontroller:Abilities and Behaviours"><h2 class="section_header">Abilities and Behaviours</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:perform_special_ability"><h3 class="function_name"><strong><code>unitcontroller:perform_special_ability(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">ability key</i><code><strong>, [<code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> </strong></code><i class="parameter">target unit</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues an order to the units associated with this unitcontroller to perform the supplied special ability. Special abilities are listed in the <code>unit_special_abilities</code> table. An optional unit target may be specified.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>ability key</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>target unit</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6362</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:perform_special_ability_q"><h3 class="function_name"><strong><code>unitcontroller:perform_special_ability_q(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">ability key</i><code><strong>, [<code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> </strong></code><i class="parameter">target unit</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues a queued order to the units associated with this unitcontroller to perform the supplied special ability. Special abilities are listed in the <code>unit_special_abilities</code> table. Queued orders start when the current order completes.<br />
+							An optional unit target may be specified with the second argument.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>ability key</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>target unit</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6372</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:perform_special_ability_ground"><h3 class="function_name"><strong><code>unitcontroller:perform_special_ability_ground(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">ability key</i><code><strong>, <br />&emsp;&emsp;<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">position</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">orientation in degrees</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">width in m</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues an order to the units associated with this unitcontroller to perform the supplied special ability on a specified position (can support orientation and width). Special abilities are listed in the <code>unit_special_abilities</code> table.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>ability key</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>position</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>orientation in degrees</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>width in m</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6462</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:reset_ability_cooldown"><h3 class="function_name"><strong><code>unitcontroller:reset_ability_cooldown(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">ability key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues an order to the units associated with this unitcontroller to reset ability cooldown. Special abilities are listed in the <code>unit_special_abilities</code> table.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>ability key</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6541</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:reset_ability_number_of_uses"><h3 class="function_name"><strong><code>unitcontroller:reset_ability_number_of_uses(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">ability key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues an order to the units associated with this unitcontroller to reset ability number of uses. Special abilities are listed in the <code>unit_special_abilities</code> table.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>ability key</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6580</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:change_shot_type"><h3 class="function_name"><strong><code>unitcontroller:change_shot_type(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">shot type</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues an order to the units associated with this unitcontroller to change shot type to the supplied value. Shot types are listed in the <code>projectile_shot_type_enum</code> table - the key from an entry in that table should be supplied to this function.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>shot type</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6619</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:change_shot_type_q"><h3 class="function_name"><strong><code>unitcontroller:change_shot_type_q(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">shot type</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues a queued order to the units associated with this unitcontroller to change shot type to the supplied value. Shot types are listed in the <code>projectile_shot_type_enum</code> table - the key from an entry in that table should be supplied to this function.<br />
+							Queued orders start when the current order completes.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>shot type</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6628</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:change_behaviour_active"><h3 class="function_name"><strong><code>unitcontroller:change_behaviour_active(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">behaviour key</i><code><strong>, <code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">is active</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the supplied behaviour active or not for the units associated with this unitcontroller. Valid behaviours are as follows: <code>defend</code>, <code>drop_siege_equipment</code>, <code>abandon_artillery_engines</code>, <code>change_formation_spacing</code>, <code>dismantle_artillery_piece</code>, <code>dismount</code>, <code>fire_at_will</code>, <code>skirmish</code>, <code>release_animals</code>, <code>unlimber</code>, <code>board_ship</code>, and <code>formed_attack</code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>behaviour key</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>is active</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6684</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:melee"><h3 class="function_name"><strong><code>unitcontroller:melee(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">enable melee mode</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Enables or disables melee mode for the units associated with this unitcontroller.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>enable melee mode</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6705</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:fire_at_will"><h3 class="function_name"><strong><code>unitcontroller:fire_at_will(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">enable</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Enables or disables fire-at-will behaviour for the units associated with this unitcontroller.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>enable</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6727</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_unitcontroller:Movement"><h2 class="section_header">Movement</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:halt"><h3 class="function_name"><strong><code>unitcontroller:halt()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the units associated with this unitcontroller to halt.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6751</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:withdraw"><h3 class="function_name"><strong><code>unitcontroller:withdraw()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues a withdraw order to the units associated with this unitcontroller, instructing them to leave the battlefield.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6767</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:withdraw_q"><h3 class="function_name"><strong><code>unitcontroller:withdraw_q()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues a queued withdraw order to the units associated with this unitcontroller, instructing them to leave the battlefield. Queued orders start when the current order completes.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6775</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:step_forward"><h3 class="function_name"><strong><code>unitcontroller:step_forward()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the units associated with this unitcontroller to take a step forwards.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6803</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:step_backwards"><h3 class="function_name"><strong><code>unitcontroller:step_backwards()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the units associated with this unitcontroller to take a step backwards.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6820</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:increment_formation_width"><h3 class="function_name"><strong><code>unitcontroller:increment_formation_width()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the units associated with this unitcontroller to increase their formation width.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6837</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:decrement_formation_width"><h3 class="function_name"><strong><code>unitcontroller:decrement_formation_width()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the units associated with this unitcontroller to decrease their formation width.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6854</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:change_move_speed"><h3 class="function_name"><strong><code>unitcontroller:change_move_speed(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">move fast</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the units associated with this unitcontroller to move fast or slow. Supply <code>true</code> as a single argument to instruct the units to move quickly, or <code>false</code> to instruct them to move slowly.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>move fast</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6871</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:change_group_formation"><h3 class="function_name"><strong><code>unitcontroller:change_group_formation(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">formation name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues an order to the units associated with this unitcontroller to adopt a new formation. Valid formations are set in the <code>formations</code> table.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>formation name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6893</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:change_group_formation_q"><h3 class="function_name"><strong><code>unitcontroller:change_group_formation_q(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">formation name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues a queued order to the units associated with this unitcontroller to adopt a new formation. Valid formations are set in the <code>formations</code> table.<br />
+							Queued orders start when the current order completes.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>formation name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6902</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:goto_location"><h3 class="function_name"><strong><code>unitcontroller:goto_location(<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">position</i><code><strong>, [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">move fast</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues an order to the units associated with this unitcontroller to move to a supplied location. No facing or width is specified.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>position</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>move fast</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6951</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:goto_location_q"><h3 class="function_name"><strong><code>unitcontroller:goto_location_q(<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">position</i><code><strong>, [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">move fast</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues a queued order to the units associated with this unitcontroller to move to a supplied location. No facing or width is specified. Queued orders start when the current order completes.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>position</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>move fast</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 6961</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:goto_location_angle_width"><h3 class="function_name"><strong><code>unitcontroller:goto_location_angle_width(<br />&emsp;&emsp;<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">position</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">facing in degrees</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">width in m</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">move fast</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues an order to the units associated with this unitcontroller to move to a supplied location and assume a position there facing a specified angle with a specified width.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>position</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>facing in degrees</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>width in m</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>move fast</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7004</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:goto_location_angle_width_q"><h3 class="function_name"><strong><code>unitcontroller:goto_location_angle_width_q(<br />&emsp;&emsp;<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">position</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">facing in degrees</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">width in m</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">move fast</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues a queued order to the units associated with this unitcontroller to move to a supplied location and assume a position there facing a specified angle with a specified width. Queued orders start when the current order completes.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>position</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>facing in degrees</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>width in m</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>move fast</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7016</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:teleport_to_location"><h3 class="function_name"><strong><code>unitcontroller:teleport_to_location(<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">position</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">facing in degrees</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">width in m</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Immediately teleports units associated with this unitcontroller to a supplied location/angle/width.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>position</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>facing in degrees</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>width in m</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7067</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:occupy_vehicle"><h3 class="function_name"><strong><code>unitcontroller:occupy_vehicle(<code><a href="battle_assault_equipment.html#class:battle_vehicle">battle_vehicle</a></code> </strong></code><i class="parameter">target</i><code><strong>, [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">move fast</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues an order to the units associated with this unitcontroller to occupy a vehicle.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_assault_equipment.html#class:battle_vehicle">battle_vehicle</a></code></code></p>
+									</td>
+									<td>
+										<p>Target vehicle.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Move fast to building.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7098</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:occupy_vehicle_q"><h3 class="function_name"><strong><code>unitcontroller:occupy_vehicle_q(<code><a href="battle_assault_equipment.html#class:battle_vehicle">battle_vehicle</a></code> </strong></code><i class="parameter">target</i><code><strong>, [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">move fast</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues a queued order to the units associated with this unitcontroller to occupy a vehicle. Queued orders start when the current order completes.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_assault_equipment.html#class:battle_vehicle">battle_vehicle</a></code></code></p>
+									</td>
+									<td>
+										<p>Target vehicle.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Move fast to building.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7108</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:occupy_zone"><h3 class="function_name"><strong><code>unitcontroller:occupy_zone(<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">target</i><code><strong>, [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">move fast</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues an order to the units associated with this unitcontroller to occupy a battlefield zone. Battlefield zones tend to be defensive positions associated with a building, most commonly on settlement walls.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>Target position.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Move fast to position.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7154</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:occupy_zone_q"><h3 class="function_name"><strong><code>unitcontroller:occupy_zone_q(<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">target</i><code><strong>, [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">move fast</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues a queued order to the units associated with this unitcontroller to occupy a battlefield zone. Battlefield zones tend to be defensive positions associated with a building, most commonly on settlement walls.<br />
+							Queued orders start when the current order completes.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>Target position.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Move fast to position.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7164</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:rotate"><h3 class="function_name"><strong><code>unitcontroller:rotate(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">heading change</i><code><strong>, <code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">move fast</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues an order to the units associated with this unitcontroller to rotate about their current heading by the supplied number of degrees.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Heading change in degrees.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>Move quickly.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7208</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:rotate_q"><h3 class="function_name"><strong><code>unitcontroller:rotate_q(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">heading change</i><code><strong>, <code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">move fast</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues a queued order to the units associated with this unitcontroller to rotate about their current heading by the supplied number of degrees. Queued orders start when the current order completes.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Heading change in degrees.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>Move quickly.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7218</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_unitcontroller:Attacking"><h2 class="section_header">Attacking</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:attack_unit"><h3 class="function_name"><strong><code>unitcontroller:attack_unit(<code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> </strong></code><i class="parameter">target unit</i><code><strong>, [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">use primary attack</i><code><strong>], [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">move fast</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues an order to the units associated with this unitcontroller to attack an enemy unit.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code></code></p>
+									</td>
+									<td>
+										<p>Target unit to attack. This must be an enemy unit.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>Use primary attack. Some units have more than one method of attacking - this flag allows the command to specify which to use.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Move fast/charge when attacking.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7264</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:attack_unit_q"><h3 class="function_name"><strong><code>unitcontroller:attack_unit_q(<code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> </strong></code><i class="parameter">target unit</i><code><strong>, [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">use primary attack</i><code><strong>], [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">move fast</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues a queued order to the units associated with this unitcontroller to attack an enemy unit. Queued orders start when the current order completes.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code></code></p>
+									</td>
+									<td>
+										<p>Target unit to attack. This must be an enemy unit.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>Use primary attack. Some units have more than one method of attacking - this flag allows the command to specify which to use.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Move fast/charge when attacking.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7275</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:attack_building"><h3 class="function_name"><strong><code>unitcontroller:attack_building(<code><a href="battle_building.html#class:battle_building">battle_building</a></code> </strong></code><i class="parameter">target</i><code><strong>, [<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">piece index</i><code><strong>], [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">move fast</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues an order to the units associated with this unitcontroller to attack a specified building.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_building.html#class:battle_building">battle_building</a></code></code></p>
+									</td>
+									<td>
+										<p>Target building.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=1</i></p>
+										<p>Index for building piece to target. The default value (1) targets the building as a whole.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Move fast/charge when attacking.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7332</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:attack_building_q"><h3 class="function_name"><strong><code>unitcontroller:attack_building_q(<code><a href="battle_building.html#class:battle_building">battle_building</a></code> </strong></code><i class="parameter">target</i><code><strong>, [<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">piece index</i><code><strong>], [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">move fast</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues a queued order to the units associated with this unitcontroller to attack a specified building. Queued orders start when the current order completes.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_building.html#class:battle_building">battle_building</a></code></code></p>
+									</td>
+									<td>
+										<p>Target building.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=1</i></p>
+										<p>Index for building piece to target. The default value (1) targets the building as a whole.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Move fast/charge when attacking.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7343</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:interact_with_deployable"><h3 class="function_name"><strong><code>unitcontroller:interact_with_deployable(<br />&emsp;&emsp;<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">deployable position</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">move fast</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">melee attack</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues an order to the units associated with this unitcontroller to interact with a deployable object on the battlefield.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>Position of deployable object.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Move fast to position.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Attack in melee or not.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7402</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:interact_with_deployable_q"><h3 class="function_name"><strong><code>unitcontroller:interact_with_deployable_q(<br />&emsp;&emsp;<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">deployable position</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">move fast</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">melee attack</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues an order to the units associated with this unitcontroller to interact with a deployable object on the battlefield. Queued orders start when the current order completes.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>Position of deployable object.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Move fast to position.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Attack in melee or not.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7413</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:besiege_building"><h3 class="function_name"><strong><code>unitcontroller:besiege_building(<code><a href="battle_building.html#class:battle_building">battle_building</a></code> </strong></code><i class="parameter">target</i><code><strong>, [<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">piece index</i><code><strong>], [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">move fast</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues an order to the units associated with this unitcontroller to besiege a building.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_building.html#class:battle_building">battle_building</a></code></code></p>
+									</td>
+									<td>
+										<p>Target building.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=1</i></p>
+										<p>Index for building piece to target. The default value (1) targets the building as a whole.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Move fast/charge when attacking.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7460</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:besiege_building_q"><h3 class="function_name"><strong><code>unitcontroller:besiege_building_q(<code><a href="battle_building.html#class:battle_building">battle_building</a></code> </strong></code><i class="parameter">target</i><code><strong>, [<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">piece index</i><code><strong>], [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">move fast</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues a queued order to the units associated with this unitcontroller to besiege a building. Queued orders start when the current order completes.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_building.html#class:battle_building">battle_building</a></code></code></p>
+									</td>
+									<td>
+										<p>Target building.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=1</i></p>
+										<p>Index for building piece to target. The default value (1) targets the building as a whole.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Move fast/charge when attacking.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7471</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:defend_building"><h3 class="function_name"><strong><code>unitcontroller:defend_building(<code><a href="battle_building.html#class:battle_building">battle_building</a></code> </strong></code><i class="parameter">target</i><code><strong>, [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">move fast</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues an order to the units associated with this unitcontroller to defend a building.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_building.html#class:battle_building">battle_building</a></code></code></p>
+									</td>
+									<td>
+										<p>Target building.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Move fast/charge when defending.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7530</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:defend_building_q"><h3 class="function_name"><strong><code>unitcontroller:defend_building_q(<code><a href="battle_building.html#class:battle_building">battle_building</a></code> </strong></code><i class="parameter">target</i><code><strong>, [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">move fast</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues an order to the units associated with this unitcontroller to defend a building. Queued orders start when the current order completes.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_building.html#class:battle_building">battle_building</a></code></code></p>
+									</td>
+									<td>
+										<p>Target building.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Move fast/charge when defending.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7540</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:leave_building"><h3 class="function_name"><strong><code>unitcontroller:leave_building()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues an order to the units associated with this unitcontroller to leave the building they're in.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7586</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:attack_location"><h3 class="function_name"><strong><code>unitcontroller:attack_location(<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">position</i><code><strong>, <code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">move fast</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues an order to the units associated with this unitcontroller to attack a location.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>position</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>move fast</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7604</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:attack_location_q"><h3 class="function_name"><strong><code>unitcontroller:attack_location_q(<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">position</i><code><strong>, <code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">move fast</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues a queued order to the units associated with this unitcontroller to attack a location. Queued orders start when the current order completes.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>position</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>move fast</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7614</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:attack_line"><h3 class="function_name"><strong><code>unitcontroller:attack_line(<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">position a</i><code><strong>, <code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">position b</i><code><strong>, <code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">move fast</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues an order to the units associated with this unitcontroller to attack a line across the battlefield. The line is drawn between two supplied <code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> positions.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>position a</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>position b</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>move fast</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7657</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:attack_line_q"><h3 class="function_name"><strong><code>unitcontroller:attack_line_q(<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">position a</i><code><strong>, <code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">position b</i><code><strong>, <code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">move fast</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Issues a queued order to the units associated with this unitcontroller to attack a line across the battlefield. The line is drawn between two supplied <code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> positions.<br />
+							Queued orders start when the current order completes.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>position a</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>position b</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>move fast</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7668</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_unitcontroller:Miscellaneous"><h2 class="section_header">Miscellaneous</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:set_matched_combat_chance"><h3 class="function_name"><strong><code>unitcontroller:set_matched_combat_chance(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">chance</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the chance of units associated with this unitcontroller performing matched combat when attacking. The chance should be supplied as a percentage, between 0 and 100. Specify a negative number to st the chance back to default.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>chance</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7722</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:start_celebrating"><h3 class="function_name"><strong><code>unitcontroller:start_celebrating()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the units associated with this unitcontroller to start celebrating.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7745</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:start_taunting"><h3 class="function_name"><strong><code>unitcontroller:start_taunting()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the units associated with this unitcontroller to start taunting.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7759</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:trigger_sound_vo"><h3 class="function_name"><strong><code>unitcontroller:trigger_sound_vo()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Triggers a VO sound for units associated with this unitcontroller.<br />
+							<code><a href="lua.html#class:string">string</a></code> sound event name
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7773</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:kill"><h3 class="function_name"><strong><code>unitcontroller:kill()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Kills all the units associated with this unitcontroller.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7798</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:highlight"><h3 class="function_name"><strong><code>unitcontroller:highlight()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Activates or deactivates a highlights on the units associated with this unitcontroller by showing tracker chevrons under their feet.<br />
+							[opt=true] <code><a href="lua.html#class:boolean">boolean</a></code> highlight
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7814</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:add_animated_selection_proxy"><h3 class="function_name"><strong><code>unitcontroller:add_animated_selection_proxy(<br />&emsp;&emsp;<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">top left position</i><code><strong>, <br />&emsp;&emsp;<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">top right position</i><code><strong>, <br />&emsp;&emsp;<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">time</i><code><strong>, <br />&emsp;&emsp;<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">remain time</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">loop</i><code><strong><br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a static or animated selection proxy for the current unitcontroller. This draws out the formation on the terrain as if the player was right-clicking and dragging. If three arguments are supplied then a static proxy is drawn, whereas if five arguments are supplied an animated proxy is drawn.<br />
+							The function returns a numeric id for the proxy effect, by which it may be later cancelled with <code><a href="#function:battle_unitcontroller:remove_animated_selection_proxy">unitcontroller:remove_animated_selection_proxy</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>Top-left position of the selection proxy.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>Top-right position of the selection proxy.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>Time to animate if five arguments supplied, or time to remain if three arguments are supplied. Both time values should be supplied in seconds.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>Time to remain in seconds after animation is completed. This should not be supplied if a static proxy is desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>Loop the animated proxy. This should not be supplied if a static proxy is desired.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> proxy id</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7834</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:remove_animated_selection_proxy"><h3 class="function_name"><strong><code>unitcontroller:remove_animated_selection_proxy(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">proxy id</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Removes a static or animated selection proxy previously added with <code><a href="#function:battle_unitcontroller:add_animated_selection_proxy">unitcontroller:add_animated_selection_proxy</a></code>, by numeric id.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>proxy id</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7910</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unitcontroller:change_current_walk_speed"><h3 class="function_name"><strong><code>unitcontroller:change_current_walk_speed(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">speed scalar</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Changes the walk speed for the units associated with this unitcontroller. This is only for use in cutscenes where the movement of units must match a certain speed for cinematic reasons and should not be used during live gameplay. Any speed set here will be reset to default when another order is issued. As such, a movement command and then this command should be issued in order to apply the movement speed modification.<br />
+							The walk speed is specified as a scalar which is applied to the default walk speed. Therefore, supplying <code>2</code> as an argument would make the units walk twice as quickly as before. Beware of setting extreme values, as walk animations will quickly look unnatural if played too quickly or too slowly.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>speed scalar</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 7928</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:59</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "battle"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

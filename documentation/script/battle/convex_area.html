@@ -1,0 +1,559 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Convex Areas script class</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#e2edff" id="main">
+
+			<div style="background-color:#e2edff" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Battle Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#c1e6ff">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search battle only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#c1e6ff">Game Areas</h2>
+				<ul>
+					<li><a href="../campaign/campaign_index.html">Campaign Index</a></li>
+					<li><strong> > Battle Index</strong></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:convex_area">Convex Areas</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:convex_area:Creation">Creation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:convex_area:new">new</a></li>
+						<li>&emsp;&emsp;<a href="#section:convex_area:Usage">Usage</a></li>
+						<li>&emsp;&emsp;<a href="#section:convex_area:Querying">Querying</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:convex_area:item">item</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:convex_area:count">count</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:convex_area:is_in_area">is_in_area</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:convex_area:standing_is_in_area">standing_is_in_area</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:convex_area:not_in_area">not_in_area</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:convex_area:standing_not_in_area">standing_not_in_area</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:convex_area:number_in_area">number_in_area</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:convex_area:standing_number_in_area">standing_number_in_area</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#e2edff" id="navigation_right">				<h2 style="background-color:#c1e6ff">Battle Topics</h2>
+				<ul>
+					<li><a href="battle_index.html">Battle Index</a></li>
+					<li><a href="battle_hierarchy.html">Battle Hierarchy</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="battle.html">Battle</a></li>
+					<li><a href="battle_alliances.html">Alliances</a></li>
+					<li><a href="battle_alliance.html">Alliance</a></li>
+					<li><a href="battle_armies.html">Armies</a></li>
+					<li><a href="battle_army.html">Army</a></li>
+					<li><a href="battle_units.html">Units</a></li>
+					<li><a href="battle_unit.html">Unit</a></li>
+					<li><a href="battle_unitcontroller.html">Unitcontroller</a></li>
+					<li><a href="ai_planner.html">AI Planners</a></li>
+					<li><a href="battle_assault_equipment.html">Assault Equipment</a></li>
+					<li><a href="battle_building.html">Building</a></li>
+					<li><a href="battle_buildings.html">Buildings</a></li>
+					<li><a href="battle_camera.html">Camera</a></li>
+					<li><a href="battle_capture_location.html">Capture Location</a></li>
+					<li><a href="battle_composite_scenes_system.html">Composite Scenes System</a></li>
+					<li><a href="battle_debug_drawing.html">Debug Drawing</a></li>
+					<li><a href="battle_reinforcements.html">reinforcements Reinforcements</a></li>
+					<li><a href="battle_sound_effect.html">Sound Effects</a></li>
+					<li><a href="battle_subtitles.html">Subtitles</a></li>
+					<li><a href="battle_toggle_system.html">Toggle System</a></li>
+					<li><a href="battle_vector.html">Vector</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Script Interfaces</h2>
+				<ul>
+					<li><a href="battle_manager.html">Battle Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="advice_manager.html">Advice Manager</a></li>
+					<li><a href="battle_ui_manager.html">Battle UI Manager</a></li>
+					<li><strong> > Convex Areas</strong></li>
+					<li><a href="cutscene.html">Battle Cutscenes</a></li>
+					<li><a href="generated_battle.html">Generated Battle</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="script_ai_planner.html">Script AI Planner</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="script_unit.html">Script Unit</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Data Interfaces</h2>
+				<ul>
+					<li><a href="st_helper.html">Scripted Tour Helpers</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:convex_area"><h1 class="content_header">Convex Areas</h1></a>
+				<p>By creating a convex area, client scripts may define a convex hull shape on the battlefield or campaign map through a series of vectors, and then perform tests with it, such as seeing if a given position/unit is within the described shape.</p>
+				<p>Convex areas are most useful for battle scripts, but may also be used in campaign.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:convex_area:Creation"><h2 class="section_header">Creation</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:convex_area:new"><h3 class="function_name"><strong><code>convex_area:new(table </strong></code><i class="parameter">positions</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a convex area from a supplied table of vectors. The supplied table must contain a minimum of three vector positions, and these must describe a convex hull shape. The points must declared in a clockwise orientation around the hull shape.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>table</code></p>
+									</td>
+									<td>
+										<p>Table of vector positions</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>convex_area</code> </li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_convex_area.lua, line 675</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:convex_area:Usage"><h2 class="section_header">Usage</h2></a>
+				</div>
+				<p>Once a <code>convex_area</code> object has been created with <code><a href="#function:convex_area:new">convex_area:new</a></code>, functions on it may be called in the form showed below.</p>
+
+				<h4>Example - Specification:</h4>
+				<div id="example_code"><code>
+					 <i>&lt;convex_area_object&gt;</i>:<i>&lt;function_name&gt;</i>(<i>&lt;args&gt;</i>)<br />
+				</code></div>
+
+				<h4>Example - Creation and Usage:</h4>
+				<div id="example_code"><code>
+					 local test_position = v(150, 150)<br />
+					 local area_01 = convex_area:new({v(0, 0), v(0, 300), v(300, 300), v(300, 0)})<br />
+					 if area_01:is_in_area(test_position) then<br />
+					 &emsp;&emsp;&emsp;&emsp;out("test position is in area_01")<br />
+					 end<br />
+				</code></div>
+				<div id="example_result"><code>
+					test position is in area_01<br />
+				</code></div>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:convex_area:Querying"><h2 class="section_header">Querying</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:convex_area:item"><h3 class="function_name"><strong><code>convex_area:item(integer </strong></code><i class="parameter">index</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Retrieves the nth vector in the convex area. Returns false if no vector exists at this index.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>integer</code></p>
+									</td>
+									<td>
+										<p>index</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>vector</code> </li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_convex_area.lua, line 779</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:convex_area:count"><h3 class="function_name"><strong><code>convex_area:count()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the number of vector positions that make up this convex area shape
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>integer</code> number of positions</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_convex_area.lua, line 792</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:convex_area:is_in_area"><h3 class="function_name"><strong><code>convex_area:is_in_area(object </strong></code><i class="parameter">collection</i><code><strong>, [boolean </strong></code><i class="parameter">standing only</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns true if any element of the supplied object or collection is in the convex area, false otherwise.<br />
+							The second boolean flag, if set to true, instructs <code>is_in_area</code> to disregard any routing or dead units in the collection.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>object</code></p>
+									</td>
+									<td>
+										<p>Object or collection to test. Supported object/collection types are vector, unit, scriptunit, scriptunits, units, army, armies, alliance and table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Disregard routing or dead units.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> any are in area</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_convex_area.lua, line 800</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:convex_area:standing_is_in_area"><h3 class="function_name"><strong><code>convex_area:standing_is_in_area(object </strong></code><i class="parameter">object or collection to test</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Alias for <code>is_in_area(obj, <strong>true</strong>)</code>. Returns true if any element of the supplied object or collection is in the convex area, false otherwise. Supported object/collection types are vector, unit, scriptunit, scriptunits, units, army, armies, alliance and table. Disregards routing or dead units.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>object</code></p>
+									</td>
+									<td>
+										<p>object or collection to test</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> any are in area</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_convex_area.lua, line 889</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:convex_area:not_in_area"><h3 class="function_name"><strong><code>convex_area:not_in_area(object </strong></code><i class="parameter">collection</i><code><strong>, [boolean </strong></code><i class="parameter">standing only</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns true if any element of the supplied object or collection is NOT in the convex area, false otherwise.<br />
+							The second boolean flag, if set to true, instructs <code>not_in_area</code> to disregard any routing or dead units in the collection.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>object</code></p>
+									</td>
+									<td>
+										<p>Object or collection to test. Supported object/collection types are vector, unit, scriptunit, scriptunits, units, army, armies, alliance and table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Disregard routing or dead units.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> any are not in area</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_convex_area.lua, line 898</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:convex_area:standing_not_in_area"><h3 class="function_name"><strong><code>convex_area:standing_not_in_area(object </strong></code><i class="parameter">collection</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Alias for <code>not_in_area(obj, <strong>true</strong>)</code>. Returns true if any element of the supplied object or collection is NOT in the convex area, false otherwise.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>object</code></p>
+									</td>
+									<td>
+										<p>Object or collection to test. Supported object/collection types are vector, unit, scriptunit, scriptunits, units, army, armies, alliance and table. Disregards routing or dead units.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> any are not in area</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_convex_area.lua, line 976</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:convex_area:number_in_area"><h3 class="function_name"><strong><code>convex_area:number_in_area(object </strong></code><i class="parameter">collection</i><code><strong>, [boolean </strong></code><i class="parameter">standing only</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the number of elements in the target collection that fall in the convex area.<br />
+							The second boolean flag, if set to true, instructs <code>number_in_area</code> to disregard any routing or dead units in the collection.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>object</code></p>
+									</td>
+									<td>
+										<p>Object or collection to test. Supported object types are unit, units, scriptunit, scriptunits, army, armies, alliance and table. </p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Disregard routing or dead units.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>integer</code> number in area</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_convex_area.lua, line 985</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:convex_area:standing_number_in_area"><h3 class="function_name"><strong><code>convex_area:standing_number_in_area(object </strong></code><i class="parameter">collection</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Alias for <code>standing_number_in_area(obj, <strong>true</strong>)</code>. Returns the number of elements in the target collection that fall in the convex area. 
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>object</code></p>
+									</td>
+									<td>
+										<p>Object or collection to test. Supported object types are unit, units, scriptunit, scriptunits, army, armies, alliance and table. isregards routing or dead units.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>integer</code> number in area</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_convex_area.lua, line 1056</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:58</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "battle"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

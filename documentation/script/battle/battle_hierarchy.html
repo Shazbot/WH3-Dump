@@ -1,0 +1,342 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Battle Hierarchy</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#e2edff" id="main">
+
+			<div style="background-color:#e2edff" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Battle Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#c1e6ff">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search battle only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#c1e6ff">Game Areas</h2>
+				<ul>
+					<li><a href="../campaign/campaign_index.html">Campaign Index</a></li>
+					<li><strong> > Battle Index</strong></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:battle_hierarchy">Battle Hierarchy</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:battle_hierarchy:A Note on Practical Use">A Note on Practical Use</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_hierarchy:A First Look">A First Look</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_hierarchy:Example Scripts">Example Scripts</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_hierarchy:Container Interfaces">Container Interfaces</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_hierarchy:Units and Unitcontrollers">Units and Unitcontrollers</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_hierarchy:Using Scriptunits">Using Scriptunits</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_hierarchy:Setting Up a Generated Battle">Setting Up a Generated Battle</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#e2edff" id="navigation_right">				<h2 style="background-color:#c1e6ff">Battle Topics</h2>
+				<ul>
+					<li><a href="battle_index.html">Battle Index</a></li>
+					<li><strong> > Battle Hierarchy</strong></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="battle.html">Battle</a></li>
+					<li><a href="battle_alliances.html">Alliances</a></li>
+					<li><a href="battle_alliance.html">Alliance</a></li>
+					<li><a href="battle_armies.html">Armies</a></li>
+					<li><a href="battle_army.html">Army</a></li>
+					<li><a href="battle_units.html">Units</a></li>
+					<li><a href="battle_unit.html">Unit</a></li>
+					<li><a href="battle_unitcontroller.html">Unitcontroller</a></li>
+					<li><a href="ai_planner.html">AI Planners</a></li>
+					<li><a href="battle_assault_equipment.html">Assault Equipment</a></li>
+					<li><a href="battle_building.html">Building</a></li>
+					<li><a href="battle_buildings.html">Buildings</a></li>
+					<li><a href="battle_camera.html">Camera</a></li>
+					<li><a href="battle_capture_location.html">Capture Location</a></li>
+					<li><a href="battle_composite_scenes_system.html">Composite Scenes System</a></li>
+					<li><a href="battle_debug_drawing.html">Debug Drawing</a></li>
+					<li><a href="battle_reinforcements.html">reinforcements Reinforcements</a></li>
+					<li><a href="battle_sound_effect.html">Sound Effects</a></li>
+					<li><a href="battle_subtitles.html">Subtitles</a></li>
+					<li><a href="battle_toggle_system.html">Toggle System</a></li>
+					<li><a href="battle_vector.html">Vector</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Script Interfaces</h2>
+				<ul>
+					<li><a href="battle_manager.html">Battle Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="advice_manager.html">Advice Manager</a></li>
+					<li><a href="battle_ui_manager.html">Battle UI Manager</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="cutscene.html">Battle Cutscenes</a></li>
+					<li><a href="generated_battle.html">Generated Battle</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="script_ai_planner.html">Script AI Planner</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="script_unit.html">Script Unit</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Data Interfaces</h2>
+				<ul>
+					<li><a href="st_helper.html">Scripted Tour Helpers</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:battle_hierarchy"><h1 class="content_header">Battle Hierarchy</h1></a>
+				<p>References must be obtained to objects in battle - chiefly <code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> objects - in order to query and direct the course of events in a scripted battle. These script references are obtained through a hierarchy, accessed from the <code><a href="battle.html#class:battle">battle</a></code>/<code><a href="battle_manager.html#class:battle_manager">battle_manager</a></code> objects.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Relevant in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Relevant in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Relevant in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_hierarchy:A Note on Practical Use"><h2 class="section_header">A Note on Practical Use</h2></a>
+				</div>
+				<p>In practise, the objects in the hierarchy described on this page are rarely created or used directly in battle scripts. Use of the frameworks provided by the <code><a href="script_unit.html#class:script_unit">script_unit</a></code> and <code><a href="generated_battle.html#class:generated_battle">generated_battle</a></code> libraries means that minimal direct references to the objects described on this page need to be created in battle scripts. Nevertheless, it is important to know about the battle object hierarchy and how it is laid out as it underpins all the script systems built on top of it.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_hierarchy:A First Look"><h2 class="section_header">A First Look</h2></a>
+				</div>
+				<p>The table below shows the list of object types found within the hierarchy, and how they are sourced from the <code><a href="battle.html#class:battle">battle</a></code> object and then from one another:</p>
+				<p><table class="simple"></p>
+				<p><tr><td>Object</td><td width="30%">Sample Script</td><td>Comments</td></tr></p>
+				<p><tr><td><code><code><a href="battle_alliances.html#class:battle_alliances">battle_alliances</a></code></code></td><td><code>alliances = bm:alliances()</code></td><td>The <code><a href="battle_alliances.html#class:battle_alliances">battle_alliances</a></code> object is a list of all the alliances present on the battlefield. An alliance is one or more armies on the battlefield that are fighting together. The <code><a href="battle_alliances.html#class:battle_alliances">battle_alliances</a></code> object may be retrieved by calling <code><a href="battle.html#function:battle:alliances">battle:alliances</a></code>.</td></tr></p>
+				<p><tr><td><code><code><a href="battle_alliance.html#class:battle_alliance">battle_alliance</a></code></code></td><td><code>alliance = alliances:item(1)</code></td><td>Each <code><a href="battle_alliance.html#class:battle_alliance">battle_alliance</a></code> object represents an alliance participating in the battle. Individual <code>alliance</code> objects are retrieved from an <code><a href="battle_alliances.html#class:battle_alliances">battle_alliances</a></code> object with the <code><a href="battle_alliances.html#function:battle_alliances:item">alliances:item</a></code> method. The index of an <code><a href="battle.html#function:battle:alliances">battle:alliances</a></code> object is 1-based, so supplying <code>1</code> as an argument to <code><a href="battle_alliances.html#function:battle_alliances:item">alliances:item</a></code> would return the first alliance, which is always the attacker in the battle.<br />In all circumstances (at time of writing) there are exactly two <code><a href="battle_alliance.html#class:battle_alliance">battle_alliance</a></code> objects in the <code><a href="battle_alliances.html#class:battle_alliances">battle_alliances</a></code> list.</td></tr></p>
+				<p><tr><td><code><code><a href="battle_armies.html#class:battle_armies">battle_armies</a></code></code></td><td><code>armies = alliance:armies()</code></td><td>An <code><a href="battle_armies.html#class:battle_armies">battle_armies</a></code> object is a list of individual <code><a href="battle_army.html#class:battle_army">battle_army</a></code> objects that belong to a particular alliance.</td></tr></p>
+				<p><tr><td><code><code><a href="battle_army.html#class:battle_army">battle_army</a></code></code></td><td><code>army = armies:item(1)</code></td><td>An <code><a href="battle_army.html#class:battle_army">battle_army</a></code> object represents a logical army on the battlefield, which is a collection of units of the same faction fighting together under the same controlling entity (either the player or the AI). A <code><a href="battle_army.html#class:battle_army">battle_army</a></code> object is retrieved from an <code><a href="battle_armies.html#class:battle_armies">battle_armies</a></code> list object by calling <code><a href="battle_armies.html#function:battle_armies:item">armies:item</a></code>.</td></tr></p>
+				<p><tr><td><code><code><a href="battle_units.html#class:battle_units">battle_units</a></code></code></td><td><code>units = army:units()</code></td><td>A <code><a href="battle_units.html#class:battle_units">battle_units</a></code> object is a list of individual <code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> objects that belong to a specific army in the battle. It may be retrieved by calling <code><a href="battle_army.html#function:battle_army:units">army:units</a></code>.</td></tr></p>
+				<p><tr><td><code><code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code></code></td><td><code>unit = units:item(1)</code></td><td>Each <code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> object represents an individual unit on the battlefield. Unit objects may be retrieved from a <code><a href="battle_units.html#class:battle_units">battle_units</a></code> list object by calling <code><a href="battle_units.html#function:battle_units:item">units:item</a></code>.</td></tr></p>
+				<p></table></p>
+				<p>This diagram shows the setup above in pictoral form:</p>
+				<p><img alt="battle hierarchy" width=1000px" src="../images/battle_hierarchy.png" \></p>
+				<p>Traditional scripted battles tend to be directed at the unit level, so the interfaces to each <code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> object (and the associated <code><a href="battle_unitcontroller.html#class:battle_unitcontroller">battle_unitcontroller</a></code> objects - see further down this page) are the most useful interfaces of those in the hierarchy given above.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_hierarchy:Example Scripts"><h2 class="section_header">Example Scripts</h2></a>
+				</div>
+				<p>The partial example given below shows script creating handles to battle objects in a battle with two armies in each alliance. The two alliances are named <code>alliance_a</code> and <code>alliance_b</code>:</p>
+				<p><div id="example_code"><code>bm = battle_manager:new() -- this is automatically called when the script libraries are loaded<br /></p>
+				<p>alliances = bm:alliances()<br /></p>
+				<p><br />-- set up alliance_a objects</p>
+				<p>alliance_a = alliances:item(1)<br /></p>
+				<p>armies_a = alliance_a:armies()<br /></p>
+				<p><br />-- set up alliance_b objects</p>
+				<p>alliance_b = alliances:item(2)<br /></p>
+				<p>armies_b = alliance_b:armies()<br /></p>
+				<p><br />-- set up alliance_a army objects<br /></p>
+				<p>army_a1 = armies_a:item(1)<br /></p>
+				<p>units_a1 = army_a1:units()<br /></p>
+				<p>army_a2 = armies_a:item(2)<br /></p>
+				<p>units_a2 = army_a2:units()<br /></p>
+				<p><br />-- set up alliance b army objects<br /></p>
+				<p>army_b1 = armies_b:item(1)<br /></p>
+				<p>units_b1 = army_b1:units()<br /></p>
+				<p>army_b2 = armies_b:item(2)<br /></p>
+				<p>units_b2 = army_b2:units()<br /></p>
+				<p><br />-- set up army a1 units<br /></p>
+				<p>unit_a1_1 = units_a1:item(1)<br /></p>
+				<p>unit_a1_2 = units_a1:item(2)<br /></p>
+				<p>unit_a1_3 = units_a1:item(3)<br /></p>
+				<p>-- etc<br /></p>
+				<p><br />-- set up army a2 units<br /></p>
+				<p>-- set up army b1 units<br /></p>
+				<p>-- set up army b2 units<br /></code></div></p>
+				<p>It is not often necessary to get and retain handles to all objects in the hierarchy. The partial example given below is the same as the first but without handles created to list objects:</p>
+				<p><div id="example_code"><code>bm = battle_manager:new()  -- this is automatically called when the script libraries are loaded<br /></p>
+				<p>alliances = bm:alliances()<br /></p>
+				<p><br />-- set up alliance objects</p>
+				<p>alliance_a = bm:alliances():item(1)<br /></p>
+				<p>alliance_b = bm:alliances():item(2)<br /></p>
+				<p><br />-- set up army objects<br /></p>
+				<p>army_a1 = alliance_a:armies():item(1)<br /></p>
+				<p>army_a2 = alliance_a:armies():item(2)<br /></p>
+				<p>army_b1 = alliance_b:armies():item(1)<br /></p>
+				<p>army_b2 = alliance_b:armies():item(2)<br /></p>
+				<p><br />-- set up army a1 units<br /></p>
+				<p>unit_a1_1 = army_a1:units():item(1)<br /></p>
+				<p>unit_a1_2 = army_a1:units():item(2)<br /></p>
+				<p>unit_a1_3 = army_a1:units():item(3)<br /></p>
+				<p>-- etc<br /></p>
+				<p><br />-- set up army a2 units<br /></p>
+				<p>-- set up army b1 units<br /></p>
+				<p>-- set up army b2 units<br /></code></div></p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_hierarchy:Container Interfaces"><h2 class="section_header">Container Interfaces</h2></a>
+				</div>
+				<p>Each container object type provided by the battle hierarchy - <code><a href="battle_alliances.html#class:battle_alliances">battle_alliances</a></code>, <code><a href="battle_armies.html#class:battle_armies">battle_armies</a></code> and <code><a href="battle_units.html#class:battle_units">battle_units</a></code> - provides the same interface and operates in the same way.</p>
+				<p><ol><li>Each contains a list of elements that belong to the parent object - <code><a href="battle_alliance.html#class:battle_alliance">battle_alliance</a></code>, <code><a href="battle_army.html#class:battle_army">battle_army</a></code> and <code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> objects respectively.</li></p>
+				<p><li>Elements may be retrieved in each case by calling the member function <code>item()</code> and supplying a numeric index value as a single argument. This index in each case is 1-based - the first element is retrieved with an index value of 1.<br /></p>
+				<p><div id="example_code"><code>second_army = armies:army(2)</code></div></li></p>
+				<p><li>The number of elements in a container object is returned by the <code>count()</code> member function.<br /></p>
+				<p><div id="example_code"><code>num_units = units:count()</code></div></li></ol></p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_hierarchy:Units and Unitcontrollers"><h2 class="section_header">Units and Unitcontrollers</h2></a>
+				</div>
+				<p><code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> objects provide a variety of methods that may be called to determine information about the unit they represent. To modify the state of a unit, however - to give it orders - a <code><a href="battle_unitcontroller.html#class:battle_unitcontroller">battle_unitcontroller</a></code> must be created that acts upon the unit.</p>
+				<p>The <code><a href="battle_army.html#class:battle_army">battle_army</a></code> code interface provides the <code><a href="battle_army.html#function:battle_army:create_unit_controller">army:create_unit_controller</a></code> for creating a unitcontroller and then attaching it to a unit:</p>
+				<p><div id="example_code"><code>uc_a1_1 = army_a1:create_unit_controller()<br />uc_a1_1:add_units(unit_a1_1)</code></div></p>
+				<p>The script libraries provide some helper functions for <code><a href="global.html#section:global:Unitcontroller Creation">Unitcontroller Creation</a></code>. Furthermore, use of the <code><a href="script_unit.html#class:script_unit">script_unit</a></code> or <code><a href="generated_battle.html#class:generated_battle">generated_battle</a></code> frameworks negate the need for explicit unitcontroller creation - it is strongly recommended that these are used.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_hierarchy:Using Scriptunits"><h2 class="section_header">Using Scriptunits</h2></a>
+				</div>
+				<p>In practice, the full battle hierarchy and the traditional method of creating a unitcontroller are seldom used in the forms given above. A shorthand method of creating <code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> and <code><a href="battle_unitcontroller.html#class:battle_unitcontroller">battle_unitcontroller</a></code> objects together is supplied by the <code><a href="script_unit.html#class:script_unit">script_unit</a></code> library. In a full scripted battle it is highly recommended to set up handles to <code><a href="script_unit.html#class:script_unit">script_unit</a></code> objects instead of manually creating <code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> and <code><a href="battle_unitcontroller.html#class:battle_unitcontroller">battle_unitcontroller</a></code> objects. The partial example script given below is the same as those shown above, but with <code><a href="script_unit.html#class:script_unit">script_unit</a></code> objects declared in place of <code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> objects.</p>
+				<p><div id="example_code"><code>bm = battle_manager:new()&emsp;&emsp;&emsp;&emsp; -- this is automatically called when the script libraries are loaded<br /></p>
+				<p>alliances = bm:alliances()<br /></p>
+				<p><br />-- set up alliance objects</p>
+				<p>alliance_a = bm:alliances():item(1)<br /></p>
+				<p>alliance_b = bm:alliances():item(2)<br /></p>
+				<p><br />-- set up army objects<br /></p>
+				<p>army_a1 = alliance_a:armies():item(1)<br /></p>
+				<p>army_a2 = alliance_a:armies():item(2)<br /></p>
+				<p>army_b1 = alliance_b:armies():item(1)<br /></p>
+				<p>army_b2 = alliance_b:armies():item(2)<br /></p>
+				<p><br />-- set up army a1 units<br /></p>
+				<p>sunit_a1_1 = scriptunit:new(army_a1, 1)<br /></p>
+				<p>sunit_a1_2 = scriptunit:new(army_a1, 2)<br /></p>
+				<p>sunit_a1_3 = scriptunit:new(army_a1, 3)<br /></p>
+				<p>-- etc<br /></p>
+				<p><br />-- set up army a2 units<br /></p>
+				<p>-- set up army b1 units<br /></p>
+				<p>-- set up army b2 units<br /></code></div></p>
+				<p>Each <code><a href="script_unit.html#class:script_unit">script_unit</a></code> object contains a reference to a <code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> object, as well as a <code><a href="battle_unitcontroller.html#class:battle_unitcontroller">battle_unitcontroller</a></code> object set up to act upon that unit. These may be accessed at the <code>unit</code> and <code>uc</code> elements within the scriptunit (which is a lua <code><a href="lua.html#class:table">table</a></code>) as follows:</p>
+				<p><div id="example_code"><code>unit_a1_1 = sunit_a1_1.unit<br />uc_a1_1 = sunit_a1_1.uc</code></div></p>
+				<p>The <code><a href="script_unit.html#class:script_unit">script_unit</a></code> packages a <code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> and <code><a href="battle_unitcontroller.html#class:battle_unitcontroller">battle_unitcontroller</a></code> together, as well as providing a suite of other functionality - see the <code><a href="script_unit.html#class:script_unit">script_unit</a></code> page for more information.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_hierarchy:Setting Up a Generated Battle"><h2 class="section_header">Setting Up a Generated Battle</h2></a>
+				</div>
+				<p>The <code><a href="generated_battle.html#class:generated_battle">generated_battle</a></code> system, if used, automatically sets up handles for armies and units in a battle. The partial example given below is the same as those shown above but set up using the <code><a href="generated_battle.html#class:generated_battle">generated_battle</a></code> system. No handles to individual <code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> or <code><a href="script_unit.html#class:script_unit">script_unit</a></code> objects are explicitly created in this case as battles are co-ordinated and orders are given at the army level. This makes generated battle scripts easier to create and work with, at the expense of the fine unit-level control offered when creating a fully-scripted battle.</p>
+				<p><div id="example_code"><code>bm = battle_manager:new()&emsp;&emsp;&emsp;&emsp; -- this is automatically called when the script libraries are loaded<br /></p>
+				<p><br />-- set up generated battle object<br /></p>
+				<p>gb = generated_battle:new()<br /><br /></p>
+				<p>ga_a1 = gb:get_army(1, 1)<br /></p>
+				<p>ga_a2 = gb:get_army(1, 2)<br /></p>
+				<p>ga_b1 = gb:get_army(2, 1)<br /></p>
+				<p>ga_b2 = gb:get_army(2, 2)<br /></code></div></p>
+				<p>Note that it is still possible to get handles to individual units in the generated battle system, but if this is necessary it may be worth considering creating a full scripted battle instead.</p>
+				<div class="section_body">
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:58</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "battle"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

@@ -1,0 +1,804 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>ScriptedValueRegistry</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#e2edff" id="main">
+
+			<div style="background-color:#e2edff" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Battle Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#c1e6ff">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search battle only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#c1e6ff">Game Areas</h2>
+				<ul>
+					<li><a href="../campaign/campaign_index.html">Campaign Index</a></li>
+					<li><strong> > Battle Index</strong></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:scriptedvalueregistry">ScriptedValueRegistry</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:scriptedvalueregistry:Creation">Creation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:scriptedvalueregistry:new">new</a></li>
+						<li>&emsp;&emsp;<a href="#section:scriptedvalueregistry:Usage">Usage</a></li>
+						<li>&emsp;&emsp;<a href="#section:scriptedvalueregistry:Game Session Registry">Game Session Registry</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:scriptedvalueregistry:SaveBool">SaveBool</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:scriptedvalueregistry:LoadBool">LoadBool</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:scriptedvalueregistry:SaveString">SaveString</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:scriptedvalueregistry:LoadString">LoadString</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:scriptedvalueregistry:SavePersistentBool">SavePersistentBool</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:scriptedvalueregistry:LoadPersistentBool">LoadPersistentBool</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:scriptedvalueregistry:SavePersistentString">SavePersistentString</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:scriptedvalueregistry:LoadPersistentString">LoadPersistentString</a></li>
+						<li>&emsp;&emsp;<a href="#section:scriptedvalueregistry:Operating System Registry">Operating System Registry</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:scriptedvalueregistry:SaveRegistryBool">SaveRegistryBool</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:scriptedvalueregistry:LoadRegistryBool">LoadRegistryBool</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:scriptedvalueregistry:SaveRegistryString">SaveRegistryString</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:scriptedvalueregistry:LoadRegistryString">LoadRegistryString</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:scriptedvalueregistry:SaveRegistryTimestamp">SaveRegistryTimestamp</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:scriptedvalueregistry:CompareRegistryTimestamp">CompareRegistryTimestamp</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#e2edff" id="navigation_right">				<h2 style="background-color:#c1e6ff">Battle Topics</h2>
+				<ul>
+					<li><a href="battle_index.html">Battle Index</a></li>
+					<li><a href="battle_hierarchy.html">Battle Hierarchy</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="battle.html">Battle</a></li>
+					<li><a href="battle_alliances.html">Alliances</a></li>
+					<li><a href="battle_alliance.html">Alliance</a></li>
+					<li><a href="battle_armies.html">Armies</a></li>
+					<li><a href="battle_army.html">Army</a></li>
+					<li><a href="battle_units.html">Units</a></li>
+					<li><a href="battle_unit.html">Unit</a></li>
+					<li><a href="battle_unitcontroller.html">Unitcontroller</a></li>
+					<li><a href="ai_planner.html">AI Planners</a></li>
+					<li><a href="battle_assault_equipment.html">Assault Equipment</a></li>
+					<li><a href="battle_building.html">Building</a></li>
+					<li><a href="battle_buildings.html">Buildings</a></li>
+					<li><a href="battle_camera.html">Camera</a></li>
+					<li><a href="battle_capture_location.html">Capture Location</a></li>
+					<li><a href="battle_composite_scenes_system.html">Composite Scenes System</a></li>
+					<li><a href="battle_debug_drawing.html">Debug Drawing</a></li>
+					<li><a href="battle_reinforcements.html">reinforcements Reinforcements</a></li>
+					<li><a href="battle_sound_effect.html">Sound Effects</a></li>
+					<li><a href="battle_subtitles.html">Subtitles</a></li>
+					<li><a href="battle_toggle_system.html">Toggle System</a></li>
+					<li><a href="battle_vector.html">Vector</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><strong> > ScriptedValueRegistry</strong></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Script Interfaces</h2>
+				<ul>
+					<li><a href="battle_manager.html">Battle Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="advice_manager.html">Advice Manager</a></li>
+					<li><a href="battle_ui_manager.html">Battle UI Manager</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="cutscene.html">Battle Cutscenes</a></li>
+					<li><a href="generated_battle.html">Generated Battle</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="script_ai_planner.html">Script AI Planner</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="script_unit.html">Script Unit</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Data Interfaces</h2>
+				<ul>
+					<li><a href="st_helper.html">Scripted Tour Helpers</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:scriptedvalueregistry"><h1 class="content_header">ScriptedValueRegistry</h1></a>
+				<p>The scriped value registry is an object that may be used by scripts to store persistent values across game environments. Using the scripted value registry, campaign and battle scripts can pass simple messages between one another which is otherwise difficult to achieve. The values stored in the scripted value registry are cleared whenever loading into the frontend, however, unless they've been saved as persistent.</p>
+				<p>The scriped value registry also provides functions that allow script to save boolean values into the operating system registry, which can be queried later to determine if a particular event has ever occurred, for example.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:scriptedvalueregistry:Creation"><h2 class="section_header">Creation</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:scriptedvalueregistry:new"><h3 class="function_name"><strong><code>ScriptedValueRegistry:new()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and returns a handle to the scripted value registry.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:scriptedvalueregistry">scriptedvalueregistry</a></code></code> svr</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireUtility/Source/EmpireLuaEnv.cpp, line 1196</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:scriptedvalueregistry:Usage"><h2 class="section_header">Usage</h2></a>
+				</div>
+				<p>Once a scripted value registry has been created, functions may be called on it in the following form.</p>
+
+				<h4>Example - Specification:</h4>
+				<div id="example_code"><code>
+					 <i>&lt;object_name&gt;</i>:<i>&lt;function_name&gt;</i>(<i>&lt;args&gt;</i>)<br />
+				</code></div>
+
+				<h4>Example - Creation and Usage:</h4>
+				<div id="example_code"><code>
+					 svr = ScriptedValueRegistry:new()<br />
+					 svr:SaveBool("test_value", true)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- calling a function on the object once created<br />
+				</code></div>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:scriptedvalueregistry:Game Session Registry"><h2 class="section_header">Game Session Registry</h2></a>
+				</div>
+				<p>The functions in this section can be used to save values into the scripted value registry that may be read by scripts in other environments. The values are not saved into the operating system registry, however, so will be cleared when the game is shut down and restarted.</p>
+				<p>Values saved with <code><a href="#function:scriptedvalueregistry:SaveBool">ScriptedValueRegistry:SaveBool</a></code> or <code><a href="#function:scriptedvalueregistry:SaveString">ScriptedValueRegistry:SaveString</a></code> will be cleared if the game loads back into the frontend. Values may be saved as persistent to avoid them being cleared in this way with the functions <code><a href="#function:scriptedvalueregistry:SavePersistentBool">ScriptedValueRegistry:SavePersistentBool</a></code> and <code><a href="#function:scriptedvalueregistry:SavePersistentString">ScriptedValueRegistry:SavePersistentString</a></code>. These values may be read later with <code><a href="#function:scriptedvalueregistry:LoadPersistentBool">ScriptedValueRegistry:LoadPersistentBool</a></code> and <code><a href="#function:scriptedvalueregistry:LoadPersistentString">ScriptedValueRegistry:LoadPersistentString</a></code>.</p>
+				<p>The internal mapping used for persistent and non-persistent values are different, so a value saved with <code><a href="#function:scriptedvalueregistry:SavePersistentString">ScriptedValueRegistry:SavePersistentString</a></code> cannot be loaded with <code><a href="#function:scriptedvalueregistry:LoadString">ScriptedValueRegistry:LoadString</a></code>, for example.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:scriptedvalueregistry:SaveBool"><h3 class="function_name"><strong><code>ScriptedValueRegistry:SaveBool(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">value name</i><code><strong>, <code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Saves a boolean value with a string name into the scripted value registry.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>value name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireUtility/Source/EmpireLuaEnv.cpp, line 1236</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:scriptedvalueregistry:LoadBool"><h3 class="function_name"><strong><code>ScriptedValueRegistry:LoadBool(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">value name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a boolean value corresponding to a supplied string name from the scripted value registry. If no value with the supplied name is found then <code>false</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>value name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireUtility/Source/EmpireLuaEnv.cpp, line 1279</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:scriptedvalueregistry:SaveString"><h3 class="function_name"><strong><code>ScriptedValueRegistry:SaveString(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">value name</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Saves a string value with a string name into the scripted value registry.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>value name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireUtility/Source/EmpireLuaEnv.cpp, line 1319</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:scriptedvalueregistry:LoadString"><h3 class="function_name"><strong><code>ScriptedValueRegistry:LoadString(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">value name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a string value corresponding to a supplied string name from the scripted value registry. If no value with the supplied name is found then an empty string is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>value name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> value</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireUtility/Source/EmpireLuaEnv.cpp, line 1359</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:scriptedvalueregistry:SavePersistentBool"><h3 class="function_name"><strong><code>ScriptedValueRegistry:SavePersistentBool(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">value name</i><code><strong>, <code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Saves a persistent boolean value with a string name into the scripted value registry. Persistent values are not cleared between game environments.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>value name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireUtility/Source/EmpireLuaEnv.cpp, line 1399</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:scriptedvalueregistry:LoadPersistentBool"><h3 class="function_name"><strong><code>ScriptedValueRegistry:LoadPersistentBool(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">value name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a persistent boolean value corresponding to a supplied string name from the scripted value registry. If no persistent value with the supplied name is found then <code>false</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>value name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireUtility/Source/EmpireLuaEnv.cpp, line 1442</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:scriptedvalueregistry:SavePersistentString"><h3 class="function_name"><strong><code>ScriptedValueRegistry:SavePersistentString(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">value name</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Saves a persistent string value with a string name into the scripted value registry. Persistent values are not cleared between game environments.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>value name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireUtility/Source/EmpireLuaEnv.cpp, line 1482</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:scriptedvalueregistry:LoadPersistentString"><h3 class="function_name"><strong><code>ScriptedValueRegistry:LoadPersistentString(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">value name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a persistent string value corresponding to a supplied string name from the scripted value registry. If no persistent value with the supplied name is found then an empty string is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>value name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> value</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireUtility/Source/EmpireLuaEnv.cpp, line 1522</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:scriptedvalueregistry:Operating System Registry"><h2 class="section_header">Operating System Registry</h2></a>
+				</div>
+				<p>The functions in this section can be used to store and retrieve values from the operating system registry, which is persistent between game loads. No path within the registry may be specified.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:scriptedvalueregistry:SaveRegistryBool"><h3 class="function_name"><strong><code>ScriptedValueRegistry:SaveRegistryBool(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">value name</i><code><strong>, <code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Saves a boolean value with a string name into the operating system registry.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>value name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireUtility/Source/EmpireLuaEnv.cpp, line 1575</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:scriptedvalueregistry:LoadRegistryBool"><h3 class="function_name"><strong><code>ScriptedValueRegistry:LoadRegistryBool(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">value name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a boolean value corresponding to a supplied string name from the operating system registry. If no value with the supplied name is found then <code>false</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>value name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireUtility/Source/EmpireLuaEnv.cpp, line 1611</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:scriptedvalueregistry:SaveRegistryString"><h3 class="function_name"><strong><code>ScriptedValueRegistry:SaveRegistryString(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">value name</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Saves a string value with a string name into the operating system registry.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>value name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireUtility/Source/EmpireLuaEnv.cpp, line 1649</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:scriptedvalueregistry:LoadRegistryString"><h3 class="function_name"><strong><code>ScriptedValueRegistry:LoadRegistryString(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">value name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a string value corresponding to a supplied string name from the operating system registry. If no value with the supplied name is found then a blank string is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>value name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> value</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireUtility/Source/EmpireLuaEnv.cpp, line 1685</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:scriptedvalueregistry:SaveRegistryTimestamp"><h3 class="function_name"><strong><code>ScriptedValueRegistry:SaveRegistryTimestamp(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">timestamp name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Saves a timestamp with the supplied string name into the registry. This can later be looked up with <code><a href="#function:scriptedvalueregistry:CompareRegistryTimestamp">ScriptedValueRegistry:CompareRegistryTimestamp</a></code> which returns the elapsed time in seconds from when the value was saved to when it was later compared.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>timestamp name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireUtility/Source/EmpireLuaEnv.cpp, line 1736</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:scriptedvalueregistry:CompareRegistryTimestamp"><h3 class="function_name"><strong><code>ScriptedValueRegistry:CompareRegistryTimestamp(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">timestamp name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Looks up a timestamp saved into the registry with the supplied name, and returns the elapsed time in seconds since that timestamp was last made. This includes time when the game was not running. If no timestamp with the supplied name has previously been saved then <code>-1</code> is returned.<br />
+							Timestamps can be saved by calling <code><a href="#function:scriptedvalueregistry:SaveRegistryTimestamp">ScriptedValueRegistry:SaveRegistryTimestamp</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>timestamp name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> elapsed seconds</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireUtility/Source/EmpireLuaEnv.cpp, line 1772</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:59</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "battle"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

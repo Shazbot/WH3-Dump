@@ -1,0 +1,323 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Units</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#e2edff" id="main">
+
+			<div style="background-color:#e2edff" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Battle Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#c1e6ff">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search battle only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#c1e6ff">Game Areas</h2>
+				<ul>
+					<li><a href="../campaign/campaign_index.html">Campaign Index</a></li>
+					<li><strong> > Battle Index</strong></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:battle_units">Units</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:battle_units:Creation">Creation</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_units:Usage">Usage</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_units:Methods">Methods</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_units:item">item</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_units:count">count</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_units:mountable_artillery_item">mountable_artillery_item</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_units:kill_commander">kill_commander</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#e2edff" id="navigation_right">				<h2 style="background-color:#c1e6ff">Battle Topics</h2>
+				<ul>
+					<li><a href="battle_index.html">Battle Index</a></li>
+					<li><a href="battle_hierarchy.html">Battle Hierarchy</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="battle.html">Battle</a></li>
+					<li><a href="battle_alliances.html">Alliances</a></li>
+					<li><a href="battle_alliance.html">Alliance</a></li>
+					<li><a href="battle_armies.html">Armies</a></li>
+					<li><a href="battle_army.html">Army</a></li>
+					<li><strong> > Units</strong></li>
+					<li><a href="battle_unit.html">Unit</a></li>
+					<li><a href="battle_unitcontroller.html">Unitcontroller</a></li>
+					<li><a href="ai_planner.html">AI Planners</a></li>
+					<li><a href="battle_assault_equipment.html">Assault Equipment</a></li>
+					<li><a href="battle_building.html">Building</a></li>
+					<li><a href="battle_buildings.html">Buildings</a></li>
+					<li><a href="battle_camera.html">Camera</a></li>
+					<li><a href="battle_capture_location.html">Capture Location</a></li>
+					<li><a href="battle_composite_scenes_system.html">Composite Scenes System</a></li>
+					<li><a href="battle_debug_drawing.html">Debug Drawing</a></li>
+					<li><a href="battle_reinforcements.html">reinforcements Reinforcements</a></li>
+					<li><a href="battle_sound_effect.html">Sound Effects</a></li>
+					<li><a href="battle_subtitles.html">Subtitles</a></li>
+					<li><a href="battle_toggle_system.html">Toggle System</a></li>
+					<li><a href="battle_vector.html">Vector</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Script Interfaces</h2>
+				<ul>
+					<li><a href="battle_manager.html">Battle Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="advice_manager.html">Advice Manager</a></li>
+					<li><a href="battle_ui_manager.html">Battle UI Manager</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="cutscene.html">Battle Cutscenes</a></li>
+					<li><a href="generated_battle.html">Generated Battle</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="script_ai_planner.html">Script AI Planner</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="script_unit.html">Script Unit</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Data Interfaces</h2>
+				<ul>
+					<li><a href="st_helper.html">Scripted Tour Helpers</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:battle_units"><h1 class="content_header">Units</h1></a>
+				<p>A <code>units</code> object is a collection of <code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> objects. Like the other battle collection objects (<code><a href="battle_alliances.html#class:battle_alliances">battle_alliances</a></code> and <code><a href="battle_armies.html#class:battle_armies">battle_armies</a></code>), <code><a href="#function:battle_units:count">units:count</a></code> returns the number of objects and <code><a href="#function:battle_units:item">units:item</a></code> returns individual items in the collection.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_units:Creation"><h2 class="section_header">Creation</h2></a>
+				</div>
+				<p>Units objects are derived from <code><a href="battle_army.html#class:battle_army">battle_army</a></code> objects in the <code><a href="battle_hierarchy.html#class:battle_hierarchy">battle_hierarchy</a></code> - see the <code><a href="battle_hierarchy.html#class:battle_hierarchy">battle_hierarchy</a></code> page for more information. Preferably, use the <code><a href="script_unit.html#class:script_unit">script_unit</a></code> or <code><a href="generated_battle.html#class:generated_battle">generated_battle</a></code> frameworks provided by the script libraries to negate the need to explicitly create <code>units</code> objects.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_units:Usage"><h2 class="section_header">Usage</h2></a>
+				</div>
+				<p>Once a handle to a units object is obtained, functions may be called on it to query or modify its state in the following form.</p>
+
+				<h4>Example - Specification:</h4>
+				<div id="example_code"><code>
+					 <i>&lt;object_name&gt;</i>:<i>&lt;function_name&gt;</i>(<i>&lt;args&gt;</i>)<br />
+				</code></div>
+
+				<h4>Example - Creation and Usage:</h4>
+				<div id="example_code"><code>
+					 local units_player = bm:alliances():item(1):armies():item(1):units()<br />
+					 out("number of player units: " .. units_player:count())&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- calling a function on the object once created<br />
+				</code></div>
+				<div id="example_result"><code>
+					number of player units: 7<br />
+				</code></div>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_units:Methods"><h2 class="section_header">Methods</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_units:item"><h3 class="function_name"><strong><code>units:item(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">index</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the <code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> at the specified index in the units list. The list is 1-based, so supplying <code>1</code> as an argument will return the first unit in the army.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>index</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code></code> unit</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 5111</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_units:count"><h3 class="function_name"><strong><code>units:count()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the size of the units list.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> size of list</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 5132</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_units:mountable_artillery_item"><h3 class="function_name"><strong><code>units:mountable_artillery_item(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">index</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the <code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> at the specified index in the mountable artillery list. The list is also 1-based.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>index</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code></code> unit</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 5149</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_units:kill_commander"><h3 class="function_name"><strong><code>units:kill_commander()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Kills the commander of the army.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 5170</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:59</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "battle"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

@@ -1,0 +1,1883 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Movie Overlays script class</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#fff7cc" id="main">
+
+			<div style="background-color:#fff7cc" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Campaign Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#ffed8c">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search campaign only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#ffed8c">Game Areas</h2>
+				<ul>
+					<li><strong> > Campaign Index</strong></li>
+					<li><a href="../battle/battle_index.html">Battle Index</a></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#ffed8c">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:movie_overlay">Movie Overlays</a><img alt="Loaded in Campaign" style="float:right; margin-right:1em;" src="../images/loaded_in_campaign.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:movie_overlay:Creation">Creation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:new">new</a></li>
+						<li>&emsp;&emsp;<a href="#section:movie_overlay:Usage">Usage</a></li>
+						<li>&emsp;&emsp;<a href="#section:movie_overlay:Configuration">Configuration</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:move_to">move_to</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:resize">resize</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:set_skippable">set_skippable</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:set_end_callback">set_end_callback</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:set_skip_callback">set_skip_callback</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:set_destroy_callback">set_destroy_callback</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:set_hide_on_end">set_hide_on_end</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:set_should_loop">set_should_loop</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:set_play_movie_audio">set_play_movie_audio</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:set_freeze_game_rendering">set_freeze_game_rendering</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:set_steal_user_input">set_steal_user_input</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:set_stop_game_audio">set_stop_game_audio</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:set_resize_uicomponent_to_fit">set_resize_uicomponent_to_fit</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:force_movie_track">force_movie_track</a></li>
+						<li>&emsp;&emsp;<a href="#section:movie_overlay:Frame Callbacks">Frame Callbacks</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:add_frame_callback">add_frame_callback</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:add_timestamp_callback">add_timestamp_callback</a></li>
+						<li>&emsp;&emsp;<a href="#section:movie_overlay:Animations">Animations</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:set_show_animation">set_show_animation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:set_hide_animation">set_hide_animation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:set_skip_animation">set_skip_animation</a></li>
+						<li>&emsp;&emsp;<a href="#section:movie_overlay:Mask Images">Mask Images</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:set_mask_image">set_mask_image</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:set_opaque_mask_image">set_opaque_mask_image</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:set_top_left_mask_image">set_top_left_mask_image</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:set_top_right_mask_image">set_top_right_mask_image</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:set_bottom_left_mask_image">set_bottom_left_mask_image</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:set_bottom_right_mask_image">set_bottom_right_mask_image</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:set_centre_mask_image">set_centre_mask_image</a></li>
+						<li>&emsp;&emsp;<a href="#section:movie_overlay:Styles">Styles</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:set_style">set_style</a></li>
+						<li>&emsp;&emsp;<a href="#section:movie_overlay:Starting and Stopping">Starting and Stopping</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:start">start</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:is_playing">is_playing</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:movie_overlay:skip">skip</a></li>
+					</ul>
+					<li><a href="#class:windowed_movie_player">Windowed Movie Player</a><img alt="Loaded in Campaign" style="float:right; margin-right:1em;" src="../images/loaded_in_campaign.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:windowed_movie_player:Creation">Creation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:windowed_movie_player:new">new</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:windowed_movie_player:new_from_advisor">new_from_advisor</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:windowed_movie_player:new_centred">new_centred</a></li>
+						<li>&emsp;&emsp;<a href="#section:windowed_movie_player:Usage">Usage</a></li>
+						<li>&emsp;&emsp;<a href="#section:windowed_movie_player:Configuration">Configuration</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:windowed_movie_player:set_width">set_width</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:windowed_movie_player:set_docking_point">set_docking_point</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:windowed_movie_player:set_show_animation">set_show_animation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:windowed_movie_player:set_hide_animation">set_hide_animation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:windowed_movie_player:set_hide_animation_slides_off_screen_left">set_hide_animation_slides_off_screen_left</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:windowed_movie_player:set_close_callback">set_close_callback</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:windowed_movie_player:set_show_close_button">set_show_close_button</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:windowed_movie_player:set_panel_hidden_callback">set_panel_hidden_callback</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:windowed_movie_player:set_should_steal_esc_key_focus">set_should_steal_esc_key_focus</a></li>
+						<li>&emsp;&emsp;<a href="#section:windowed_movie_player:Showing and Hiding">Showing and Hiding</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:windowed_movie_player:show">show</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:windowed_movie_player:hide">hide</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#fff7cc" id="navigation_right">				<h2 style="background-color:#ffed8c">Campaign Topics</h2>
+				<ul>
+					<li><a href="campaign_index.html">Campaign Index</a></li>
+					<li><a href="campaign_script_structure.html">Campaign Script Structure</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="narrative_system.html">Narrative System</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="campaignui.html">CampaignUI</a></li>
+					<li><a href="cinematics.html">Cinematics</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="episodic_scripting.html">Episodic Scripting</a></li>
+					<li><a href="model_hierarchy.html">Model Hierarchy</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Script Interfaces</h2>
+				<ul>
+					<li><a href="campaign_manager.html">Campaign Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="campaign_cutscene.html">Campaign Cutscenes</a></li>
+					<li><a href="campaign_ui_manager.html">Campaign UI Manager</a></li>
+					<li><a href="chapter_mission.html">Chapter Missions</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="intervention.html">Interventions</a></li>
+					<li><a href="invasion_manager.html">Invasion Manager</a></li>
+					<li><a href="mission_manager.html">Mission Managers</a></li>
+					<li><strong> > Movie Overlays</strong></li>
+					<li><a href="narrative_event.html">Narrative Events</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="payload.html">Payload String Constructor</a></li>
+					<li><a href="random_army_manager.html">Random Army Manager</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="unique_table.html">Unique Table</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Data Interfaces</h2>
+				<ul>
+					<li><a href="custom_starts.html">Campaign Custom Starts</a></li>
+					<li><a href="faction_intro.html">Faction Intro</a></li>
+					<li><a href="narrative.html">Narrative</a></li>
+					<li><a href="narrative_events.html">Narrative Event Templates</a></li>
+					<li><a href="narrative_queries.html">Narrative Query Templates</a></li>
+					<li><a href="narrative_triggers.html">Narrative Trigger Templates</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:movie_overlay"><h1 class="content_header">Movie Overlays</h1></a>
+				<p>The movie overlay player provides an interface for scripts to play movies in a created uicomponent. The player functionality allows scripts to specify properties of the uicomponent player and the movie itself, allowing fine control over playback. Through this interface the script can control the size and position of the movie on-screen, how the movie fades in and out and what to do when the movie completes or is skipped, for example. The script may also set a mask image, which can be used to blend the edges of the movie to transparent during playback for a pleasing visual effect.</p>
+				<p>A movie overlay player may be created with <code><a href="#function:movie_overlay:new">movie_overlay:new</a></code>, and then optionally configured with the function calls listed in this documentation. Once configured, movie playback may be started by calling <code><a href="#function:movie_overlay:start">movie_overlay:start</a></code>.</p>
+				<p>The movie overlay interface provides some functions for configuring the player, however other configuration calls may be made to it beyond those listed here. If any call is made to the player which it doesn not recognise then those are passed through to the underlying player uicomponent. This means that any function call provided by the <code><a href="uicomponent.html#class:uicomponent">uicomponent</a></code> library may be made to a movie overlay object.</p>
+				<p>The player uicomponent is created the first time a call is made which is to be passed through to it, or when <code><a href="#function:movie_overlay:start">movie_overlay:start</a></code> is called. If there is a delay between the creation/configuration of the player and the start of playback then be aware that the uicomponent will exist. It is set to be invisible and non-interactive so it should not affect the game.</p>
+				<p>If a movie_overlay is not configured before playback is started then the default style is applied using <code><a href="#function:movie_overlay:set_style">movie_overlay:set_style</a></code>, setting the movie to be fullscreen.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:movie_overlay:Creation"><h2 class="section_header">Creation</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:new"><h3 class="function_name"><strong><code>movie_overlay:new(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">name</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">movie path</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and returns a new movie overlay player object. 
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name for this movie overlay object</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Path to movie file, starting from the Movies folder in working data. The file extension should be omitted.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:movie_overlay">movie_overlay</a></code></code> movie overlay object</li>
+							</ol>
+
+							<h4>Example - Play the Warhammer intro movie, filename data/Movies/startup_movie_03.ca_vp8:</h4>
+							<div id="example_code"><code>
+								 mo_wh_intro = movie_overlay:new("warhammer_intro", "startup_movie_03");&emsp;&emsp;&emsp;&emsp;-- path starts from Movies<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 72</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:movie_overlay:Usage"><h2 class="section_header">Usage</h2></a>
+				</div>
+				<p>Once a handle to a movie_overlay object is obtained then functions may be called on it to query or modify its state in the following form.</p>
+
+				<h4>Example - Specification:</h4>
+				<div id="example_code"><code>
+					 <code>&lt;object_name&gt;:&lt;function_name&gt;(&lt;args&gt;)</code><br />
+				</code></div>
+
+				<h4>Example - Creation and Usage:</h4>
+				<div id="example_code"><code>
+					 local mo_chaos_invasion = movie_overlay:new("warhammer_intro", "warhammer/chs_invasion");<br />
+					 mo_chaos_invasion:set_centre_mask_image();<br />
+					 mo_chaos_invasion:PropagatePriority(500);&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- function provided by uicomponent interface<br />
+				</code></div>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:movie_overlay:Configuration"><h2 class="section_header">Configuration</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:move_to"><h3 class="function_name"><strong><code>movie_overlay:move_to(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">x</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">y</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the position of the uicomponent by calling <code><a href="uicomponent.html#function:uicomponent:MoveTo">uicomponent:MoveTo</a></code>, setting the uicomponent to be unmoveable afterwards. The uicomponent is created at this point if it doesn't already exist.<br />
+							If a movie_overlay is not configured before playback is started then the default style is applied using <code><a href="#function:movie_overlay:set_style">movie_overlay:set_style</a></code>, setting the movie to be fullscreen.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>X screen co-ordinate in pixels.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Y screen co-ordinate in pixels.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 192</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:resize"><h3 class="function_name"><strong><code>movie_overlay:resize(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">width</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">height</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Resizes the uicomponent, by calling <code><a href="uicomponent.html#function:uicomponent:Resize">uicomponent:Resize</a></code>. The uicomponent is created at this point if it doesn't already exist.<br />
+							If a movie_overlay is not configured before playback is started then the default style is applied using <code><a href="#function:movie_overlay:set_style">movie_overlay:set_style</a></code>, setting the movie to be fullscreen.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Width in pixels.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Height in pixels.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 215</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:set_skippable"><h3 class="function_name"><strong><code>movie_overlay:set_skippable([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">skippable</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether this movie should be skippable with the ESC key. Movies are skippable by default - use this function to disable this behaviour.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>skippable</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 243</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:set_end_callback"><h3 class="function_name"><strong><code>movie_overlay:set_end_callback(<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">callback</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a callback to be called when the movie ends or is skipped. If a hide animation is set, this callback gets called as the hide animation starts. To set a callback when the hide animation completes, use <code><a href="#function:movie_overlay:set_destroy_callback">movie_overlay:set_destroy_callback</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>callback</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 255</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:set_skip_callback"><h3 class="function_name"><strong><code>movie_overlay:set_skip_callback(<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">callback</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a callback to be called when the movie is skipped. If a hide animation is set, this callback gets called as the hide animation starts, before the end callback if one has been set with <code><a href="#function:movie_overlay:set_end_callback">movie_overlay:set_end_callback</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>callback</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 268</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:set_destroy_callback"><h3 class="function_name"><strong><code>movie_overlay:set_destroy_callback(<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">callback</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a callback to call when the player uicomponent is destroyed. This will only get called if this movie overlay player destroys itself, not if something else destroys it.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>callback</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 281</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:set_hide_on_end"><h3 class="function_name"><strong><code>movie_overlay:set_hide_on_end(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">destroy on end</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether the overlay should try and hide or destroy itself when it ends. Set this to <code>false</code> if some other process will destroy it.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>destroy on end</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 294</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:set_should_loop"><h3 class="function_name"><strong><code>movie_overlay:set_should_loop([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">loop</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the movie to loop. By default, the movie plays only once.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>loop</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 306</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:set_play_movie_audio"><h3 class="function_name"><strong><code>movie_overlay:set_play_movie_audio([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">play audio</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether the movie audio should play or not. Movie audio plays by default - use this function to disable it.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>play audio</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 318</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:set_freeze_game_rendering"><h3 class="function_name"><strong><code>movie_overlay:set_freeze_game_rendering([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">should freeze</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether the game should continue to render while the movie is being played. Game rendering stops during movie playback by default - use this function to enable it.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>should freeze</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 330</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:set_steal_user_input"><h3 class="function_name"><strong><code>movie_overlay:set_steal_user_input([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">should steal</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether user input should be stolen by script while the movie is being played. The script establishes an ESC key listener to handle movie skipping if this is set.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>should steal</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 342</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:set_stop_game_audio"><h3 class="function_name"><strong><code>movie_overlay:set_stop_game_audio([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">stop audio</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether the game audio should stop playing while the movie is being played. By default game audio is stopped/disabled during movie playback - use this function to enable it.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>stop audio</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 354</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:set_resize_uicomponent_to_fit"><h3 class="function_name"><strong><code>movie_overlay:set_resize_uicomponent_to_fit([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">should freeze</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether the uicomponent should resize itself to match the dimensions of the movie. This behaviour is disabled by default - use this function to enable it.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>should freeze</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 366</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:force_movie_track"><h3 class="function_name"><strong><code>movie_overlay:force_movie_track(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">movie track</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Forces the movie overlay to use a particular track. If this track is already occupied the previous video will be stopped. Supported track values are 0-3. If no movie track is forced, the system will pick track 2 or 3, depending on which is currently free.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>movie track</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 378</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:movie_overlay:Frame Callbacks"><h2 class="section_header">Frame Callbacks</h2></a>
+				</div>
+				<p>Callbacks can be registered to be called on certain frames or timestamps during the movie playback using the functions in this section. </p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:add_frame_callback"><h3 class="function_name"><strong><code>movie_overlay:add_frame_callback(<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">callback</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">frame number</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a callback to be called when the movie reaches a specified frame. The frame can be specified as a positive number or as a negative number, in which case that number of frames from the end of the movie is considered the trigger frame.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>callback</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>frame number</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 407</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:add_timestamp_callback"><h3 class="function_name"><strong><code>movie_overlay:add_timestamp_callback(<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">callback</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">timestamp</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a callback to be called when the movie reaches a specified timestamp, in seconds. The time can be specified as a positive number or as a negative number, in which case the timestamp is counted backwards from the end of the movie.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>callback</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>timestamp</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 425</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:movie_overlay:Animations"><h2 class="section_header">Animations</h2></a>
+				</div>
+				<p>The functions described in this section can be used to set custom show and hide animations for the player uicomponent. The animations should also be added to the movie overlay uicomponent in the UI editor.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:set_show_animation"><h3 class="function_name"><strong><code>movie_overlay:set_show_animation(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">animation name</i><code><strong>, [<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">duration override</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the uicomponent animation that should be triggered when the movie starts playing. By default an animation called "show" is triggered - use this function to set a different animation. A blank string may be supplied to play no animation as the movie starts.<br />
+							An optional animation duration in seconds may also be supplied. If set, this causes the player to set the frame time of the last frame of the animation to the supplied duration.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>animation name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>duration override</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 453</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:set_hide_animation"><h3 class="function_name"><strong><code>movie_overlay:set_hide_animation(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">animation name</i><code><strong>, [<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">duration override</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the uicomponent animation that should be triggered when the movie ends. This animation is played when the movie ends naturally, either because playback has finished or the specified movie duration has elapsed. It is also played if the movie is skipped and no skip animation has been set. By default this animation is called "hide" - use this function to set a different animation. A blank string may be supplied to play no animation.<br />
+							An optional animation duration in seconds may also be supplied. If set, this causes the player to set the frame time of the last frame of the animation to the supplied duration.<br />
+							Any new hide animation should also be set to destroy the overlay uicomponent on completion.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>animation name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>duration override</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 478</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:set_skip_animation"><h3 class="function_name"><strong><code>movie_overlay:set_skip_animation(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">animation name</i><code><strong>, [<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">duration override</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the uicomponent that should be triggered when the movie is skipped. By default this animation is called "hide" - use this function to set a different animation. A blank string may be supplied to play no animation.<br />
+							An optional animation duration in seconds may also be supplied. If set, this causes the player to set the frame time of the last frame of the animation to the supplied duration.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>animation name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>duration override</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 504</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:movie_overlay:Mask Images"><h2 class="section_header">Mask Images</h2></a>
+				</div>
+				<p>The functions described in this section each set a mask image for the movie overlay. The transparency value of each pixel in this image is mapped onto the movie, allowing control over the opacity of each movie pixel during playback. This allows the edges of the movie to be blended to transparent, for example.</p>
+				<p>Several pre-defined mask images have already been created, or another mask image may be specified. By default, a fully-opaque mask image is used so no blending/transparency is seen during playback.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:set_mask_image"><h3 class="function_name"><strong><code>movie_overlay:set_mask_image(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">mask image path</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a path to a mask image for the movie overlay. This image should be in png format. The path is specified from the working data folder.<br />
+							Calling this function creates the movie player uicomponent if it has not already been created.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>mask image path</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 541</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:set_opaque_mask_image"><h3 class="function_name"><strong><code>movie_overlay:set_opaque_mask_image()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a mask image of ui/skins/default/mask_movie_unmasked.png. This mask image is fully opaque.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 563</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:set_top_left_mask_image"><h3 class="function_name"><strong><code>movie_overlay:set_top_left_mask_image()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a mask image of ui/skins/default/mask_movie_top_left.png. This mask image is intended to be used on movies shown in the top-left corner of the screen, blending to transparent to the bottom and right.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 570</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:set_top_right_mask_image"><h3 class="function_name"><strong><code>movie_overlay:set_top_right_mask_image()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a mask image of ui/skins/default/mask_movie_top_right.png. This mask image is intended to be used on movies shown in the top-right corner of the screen, blending to transparent to the bottom and left.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 577</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:set_bottom_left_mask_image"><h3 class="function_name"><strong><code>movie_overlay:set_bottom_left_mask_image()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a mask image of ui/skins/default/mask_movie_bottom_left.png. This mask image is intended to be used on movies shown in the bottom-left corner of the screen, blending to transparent to the top and right.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 584</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:set_bottom_right_mask_image"><h3 class="function_name"><strong><code>movie_overlay:set_bottom_right_mask_image()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a mask image of ui/skins/default/mask_movie_bottom_right.png. This mask image is intended to be used on movies shown in the bottom-right corner of the screen, blending to transparent to the top and left.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 591</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:set_centre_mask_image"><h3 class="function_name"><strong><code>movie_overlay:set_centre_mask_image()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a mask image of ui/skins/default/mask_movie_centre.png. This mask image is intended to be used in a central position on the screen, blending to transparent along all four edges.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 598</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:movie_overlay:Styles"><h2 class="section_header">Styles</h2></a>
+				</div>
+				<p>Movie overlay styles combine multiple settings into one function call. If it's desired to play multiple movies in the same manner it may be sensible to set up a style to avoid configuring each movie overlay object the same way.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:set_style"><h3 class="function_name"><strong><code>movie_overlay:set_style(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">style name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a style. Currently recognised styles:<table class="simple"><tr><th>Style Name</th><th>Description</th></tr><br />
+							<tr><td><code>fullscreen</code></td><td>Sets the movie to be fullscreen and to block rendering update.</td></tr>
+
+							<tr><td><code>default</code></td><td>The default style sets the movie to be fullscreen.</td></tr>
+
+							</table>
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>style name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 618</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:movie_overlay:Starting and Stopping"><h2 class="section_header">Starting and Stopping</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:start"><h3 class="function_name"><strong><code>movie_overlay:start()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Starts playback of the movie
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 734</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:is_playing"><h3 class="function_name"><strong><code>movie_overlay:is_playing()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether this movie is currently playing.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 963</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:movie_overlay:skip"><h3 class="function_name"><strong><code>movie_overlay:skip()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Causes this movie to skip during playback. This is mainly for internal use but can be called externally.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 970</p>
+						</dd>
+					</dl>
+				</div>
+
+				<hr class="superblock_divider" />
+
+
+				<a name="class:windowed_movie_player"><h1 class="content_header">Windowed Movie Player</h1></a>
+				<p>The windowed movie player provides a shorthand interface for playing movies in a window, with a close button. It is of most use for playing movies underneath the advisor, for which the constructor <code><a href="#function:windowed_movie_player:new_from_advisor">windowed_movie_player:new_from_advisor</a></code> should be used. However, it may be used in other contexts, for which the more general purpose constructor <code><a href="#function:windowed_movie_player:new">windowed_movie_player:new</a></code> is used.</p>
+				<p>The windowed movie player makes heavy use of the <code><a href="#class:movie_overlay">movie_overlay</a></code> system for movie playback.</p>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:windowed_movie_player:Creation"><h2 class="section_header">Creation</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:windowed_movie_player:new"><h3 class="function_name"><strong><code>windowed_movie_player:new(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">name</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">movie path</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">aspect ratio</i><code><strong>, [<code><a href="uicomponent.html#class:uicomponent">uicomponent</a></code> </strong></code><i class="parameter">ui_root</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and returns a new windowed movie player object. If creating a windowed movie player docked underneath the advisor, the constructor <code><a href="#function:windowed_movie_player:new_from_advisor">windowed_movie_player:new_from_advisor</a></code> should be used instead.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name for this windowed movie object</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Path to movie file, starting from the Movies folder in working data. The file extension should be omitted.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Movie aspect ratio. This should be the width divided by the height.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="uicomponent.html#class:uicomponent">uicomponent</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=ui_root</i></p>
+										<p>Parent uicomponent, to which the windowed movie player should be attached.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:windowed_movie_player">windowed_movie_player</a></code></code> windowed movie player object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 1131</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:windowed_movie_player:new_from_advisor"><h3 class="function_name"><strong><code>windowed_movie_player:new_from_advisor(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">name</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">movie path</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">aspect ratio</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and returns a new windowed movie player object, set up to play underneath the advisor. This sets the <code>advisor_movie_docker</code> uicomponent to be the panel parent, and also calls <code><a href="#function:windowed_movie_player:set_hide_animation_slides_off_screen_left">windowed_movie_player:set_hide_animation_slides_off_screen_left</a></code> to set custom hide animation behaviour that is appropriate for this display mode.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name for this windowed movie object.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Path to movie file, starting from the Movies folder in working data. The file extension should be omitted.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Movie aspect ratio. This should be the width divided by the height.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:windowed_movie_player">windowed_movie_player</a></code></code> windowed movie player object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 1178</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:windowed_movie_player:new_centred"><h3 class="function_name"><strong><code>windowed_movie_player:new_centred(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">name</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">movie path</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">aspect ratio</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and returns a new windowed movie player object, set up to play in the centre of the screen.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name for this windowed movie object.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Path to movie file, starting from the Movies folder in working data. The file extension should be omitted.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Movie aspect ratio. This should be the width divided by the height.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:windowed_movie_player">windowed_movie_player</a></code></code> windowed movie player object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 1200</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:windowed_movie_player:Usage"><h2 class="section_header">Usage</h2></a>
+				</div>
+				<p>Once a handle to a windowed_movie_player object is obtained then functions may be called on it to query or modify its state in the following form.</p>
+
+				<h4>Example - Specification:</h4>
+				<div id="example_code"><code>
+					 <code>&lt;object_name&gt;:&lt;function_name&gt;(&lt;args&gt;)</code><br />
+				</code></div>
+
+				<h4>Example - Creation and Usage:</h4>
+				<div id="example_code"><code>
+					 local wmp_drag_and_select = windowed_movie_player:new_from_advisor("wmp_test", "wh3_drag_and_select", 16/9);<br />
+					 wmp_drag_and_select:set_should_steal_esc_key_focus(true)<br />
+					 wmp_drag_and_select:start()<br />
+				</code></div>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:windowed_movie_player:Configuration"><h2 class="section_header">Configuration</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:windowed_movie_player:set_width"><h3 class="function_name"><strong><code>windowed_movie_player:set_width(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">panel width in pixels</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the intended panel width. By default, the panel will use the panel width set in the ui layout. The height will also be scaled, based on the aspect ratio supplied to <code><a href="#function:windowed_movie_player:new">windowed_movie_player:new</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>panel width in pixels</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 1245</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:windowed_movie_player:set_docking_point"><h3 class="function_name"><strong><code>windowed_movie_player:set_docking_point(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">docking point</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the panel docking point, which determines how the panel is docked to its parent uicomponent. Docking points are specified as integer values - a list is available in the <code><a href="uicomponent.html#section:uicomponent:Docking">Docking</a></code> section of this documentation.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>docking point</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 1263</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:windowed_movie_player:set_show_animation"><h3 class="function_name"><strong><code>windowed_movie_player:set_show_animation(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">animation name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets an animation to play on the panel when it is showed. By default no animation is triggered. The animation must be present on the panel uicomponent.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>animation name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 1275</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:windowed_movie_player:set_hide_animation"><h3 class="function_name"><strong><code>windowed_movie_player:set_hide_animation(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">animation name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets an animation to play on the panel when it is hidden. By default, an animation called "hide" is triggered. The animation must be present on the panel uicomponent.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>animation name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 1293</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:windowed_movie_player:set_hide_animation_slides_off_screen_left"><h3 class="function_name"><strong><code>windowed_movie_player:set_hide_animation_slides_off_screen_left(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">hide animation slides left</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a special flag which adjusts the horizontal movement of the hide animation to match the panel width, so the animation moves the panel fully off-screen regardless of width.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>hide animation slides left</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 1306</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:windowed_movie_player:set_close_callback"><h3 class="function_name"><strong><code>windowed_movie_player:set_close_callback(<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">callback</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a callback to call if this windowed movie player is closed. The callback is triggered at the point of closure, when the panel has yet to animate off-screen.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>callback</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 1318</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:windowed_movie_player:set_show_close_button"><h3 class="function_name"><strong><code>windowed_movie_player:set_show_close_button([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">show close button</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether the close button is shown on the windowed movie player. By default the close button is displayed, use this function to not show it if needs be.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>show close button</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 1331</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:windowed_movie_player:set_panel_hidden_callback"><h3 class="function_name"><strong><code>windowed_movie_player:set_panel_hidden_callback(<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">callback</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a callback to call when the windowed movie player is fully hidden after being closed. The supplied callback is triggered immediately prior to the panel being destroyed.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>callback</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 1343</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:windowed_movie_player:set_should_steal_esc_key_focus"><h3 class="function_name"><strong><code>windowed_movie_player:set_should_steal_esc_key_focus(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">steal esc key focus</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether the panel should steal escape key focus and therefore close itself when the ESC key is pressed. By default the panel does respond to ESC key presses, use this function to disable this behaviour.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>steal esc key focus</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 1356</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:windowed_movie_player:Showing and Hiding"><h2 class="section_header">Showing and Hiding</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:windowed_movie_player:show"><h3 class="function_name"><strong><code>windowed_movie_player:show()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and shows the panel and starts movie playback.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 1382</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:windowed_movie_player:hide"><h3 class="function_name"><strong><code>windowed_movie_player:hide()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Hides and then destroys the windowed movie player if it is showing, playing an animation to do so if one has been set. This is called internally if the close button is clicked, or if the ESC key is pressed when stolen.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_movie_overlay.lua, line 1499</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:58</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "campaign"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

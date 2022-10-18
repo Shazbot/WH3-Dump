@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Scripted Events</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#ffece2" id="main">
+
+			<div style="background-color:#ffece2" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Frontend Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#ffc8a8">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search frontend only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#ffc8a8">Game Areas</h2>
+				<ul>
+					<li><a href="../campaign/campaign_index.html">Campaign Index</a></li>
+					<li><a href="../battle/battle_index.html">Battle Index</a></li>
+					<li><strong> > Frontend Index</strong></li>
+				</ul>
+
+				<h2 style="background-color:#ffc8a8">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:scripted_events">Scripted Events</a><img alt="Loaded in Frontend" style="float:right; margin-right:1em;" src="../images/loaded_in_frontend.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:scripted_events:Listening for Events">Listening for Events</a></li>
+						<li>&emsp;&emsp;<a href="#section:scripted_events:Game Areas">Game Areas</a></li>
+						<li>&emsp;&emsp;<a href="#section:scripted_events:In More Detail">In More Detail</a></li>
+						<li>&emsp;&emsp;<a href="#section:scripted_events:Adding New Events">Adding New Events</a></li>
+						<li>&emsp;&emsp;<a href="#section:scripted_events:Script-Generated Events">Script-Generated Events</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#ffece2" id="navigation_right">				<h2 style="background-color:#ffc8a8">Frontend Topics</h2>
+				<ul>
+					<li><a href="frontend_index.html">Frontend Index</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><strong> > Scripted Events</strong></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffc8a8">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="frontend.html">Frontend</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffc8a8">Script Interfaces</h2>
+				<ul>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:scripted_events"><h1 class="content_header">Scripted Events</h1></a>
+				<p>Script events provide a mechanism for the game to notify running scripts when a noteworthy change in the game or UI state has occurred. Scripts can listen for events by adding lua functions to be called when a particular event occurs. When the event occurs the game calls each registered listener function in sequence, giving each an opportunity to respond to the change in the state of the game.</p>
+				<p>Examples of available events include <code>FactionTurnStart</code>, <code>PanelOpenedCampaign</code>, <code>CharacterCreated</code> and <code>ComponentLClickUp</code>. Listener functions registered for the <code>FactionTurnStart</code> event would be called whenever a faction starts its turn, listeners for the <code>ComponentLClickUp</code> event would be called whenever the user left-clicks on the interface, and so on.</p>
+				<p>Additionally, the game provides a context object to each listener function it calls. The context object encapsulates information about the state change that has occured, and may be queried in script to find out more information about the event.</p>
+				<p>A list of supported script events*, and the information that each provides via its context object, is given in the external model hierarchy documentation here: <a href="../scripting_doc.html">Model Hierarchy</a></p>
+				<p><i>*not all available events are listed</i></p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Relevant in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Relevant in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Relevant in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:scripted_events:Listening for Events"><h2 class="section_header">Listening for Events</h2></a>
+				</div>
+				<p>The script may register a listener for an event with the <code><a href="core.html#function:core:add_listener">core:add_listener</a></code> function. Once registered, listeners may be later removed with <code><a href="core.html#function:core:remove_listener">core:remove_listener</a></code> if required.</p>
+				<p>The example below shows a <code>FactionTurnEnd</code> listener. Two callbacks are provided as part of the listener - a conditional check as the third argument and a target function as the fourth. Each callback is provided a context object which is generated by the triggering code. The methods that can be called on this context object vary from event to event, but are listed in the external model hierarchy documentation: <a href="../scripting_doc.html">Model Hierarchy</a></p>
+				<p>If a conditional check is specified, it is called each time the <code>FactionTurnEnd</code> event is triggered, and must return <code>true</code> (or a value that equates to <code>true</code> when evaluated as a boolean - i.e. any value other than <code><a href="lua.html#class:nil">nil</a></code> or <code>false</code>) for the conditional check to pass. Alternatively, the boolean value <code>true</code> may be supplied in place of a conditional function, in which case the condition always passes.</p>
+				<p>If the conditional check passes (or <code>true</code> was supplied in place of a conditional check), then the target function is called.</p>
+				<p>The fifth argument, if set to <code>false</code>, causes this listener to shut down and remove itself after the target function is called the first time. If set to <code>true</code>, the listener will persist until it is removed with <code><a href="core.html#function:core:remove_listener">core:remove_listener</a></code>.</p>
+
+				<h4>Example - FactionTurnEnd listener:</h4>
+					Listen for a FactionTurnEnd event for a specific faction.
+				<div id="example_code"><code>
+					 core:add_listener(<br />
+					 &emsp;&emsp;&emsp;&emsp;"faction_turn_end_listener",&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- Listener name, by which the listener may be later cancelled if necessary<br />
+					 &emsp;&emsp;&emsp;&emsp;"FactionTurnEnd",&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- Script event to listen for.<br />
+					 &emsp;&emsp;&emsp;&emsp;function(context)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- Optional conditional check.<br />
+					 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return context:faction():name() == "wh_main_emp_empire"<br />
+					 &emsp;&emsp;&emsp;&emsp;end,<br />
+					 &emsp;&emsp;&emsp;&emsp;function(context)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- Target function.<br />
+					 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;empire_ending_turn(context:faction())<br />
+					 &emsp;&emsp;&emsp;&emsp;end,<br />
+					 &emsp;&emsp;&emsp;&emsp;false&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- Should the listener persist after the target function has been called the first time?<br />
+					 );<br />
+				</code></div>
+
+				<h4>Example - Persistent left-click listener:</h4>
+				<div id="example_code"><code>
+					 core:add_listener(<br />
+					 &emsp;&emsp;&emsp;&emsp;"example_click_listener",<br />
+					 &emsp;&emsp;&emsp;&emsp;"ComponentLClickUp",<br />
+					 &emsp;&emsp;&emsp;&emsp;true,&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- This listener performs no conditional check, always calling the target function<br />
+					 &emsp;&emsp;&emsp;&emsp;function(context),<br />
+					 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;handle_left_click(context.string, UIComponent(context.component))<br />
+					 &emsp;&emsp;&emsp;&emsp;end,<br />
+					 &emsp;&emsp;&emsp;&emsp;true&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- This listener persists and doesn't shut down after the target callback is called the first time<br />
+					 );<br />
+				</code></div>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:scripted_events:Game Areas"><h2 class="section_header">Game Areas</h2></a>
+				</div>
+				<p>Script events are used extensively in campaign and by the user interface to notify script of state changes. They are not used so prominently in battle, though. Battle scripts rely more on polling and on bespoke handler mechanisms - see the <code><a href="../battle/battle.html#section:battle:Handlers">Handlers</a></code> section of this documentation.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:scripted_events:In More Detail"><h2 class="section_header">In More Detail</h2></a>
+				</div>
+				<p>The events system is underpinned by a global lua <code><a href="lua.html#class:table">table</a></code> called <code>events</code> which is created each time the script loads. This table contains many subtables, one for each event which may be triggered by the game.</p>
+				<p>The events table and related subtables may be seen in the <code>events.lua</code> file which lives in script folder.</p>
+				<p>A listener for an event is "registered" by adding a function to the subtable related to the event. When the game code triggers an event, it looks for the subtable in the events table that matches that event’s name, and calls each element within that subtable with the generated event context object as a single argument. Removal of a listener means removing the appropriate function entry from the event subtable.</p>
+				<p>The listener functionality provided by the <code><a href="core.html#class:core">core</a></code> object adds another layer on top of this functionality. See the functions listed in the <code><a href="core.html#section:core:Event Handling">Event Handling</a></code> section of this documentation. While listeners may be added directly to the <code>events</code> table, it is strongly recommended to use the listener functionality provided by <code><a href="core.html#class:core">core</a></code>.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:scripted_events:Adding New Events"><h2 class="section_header">Adding New Events</h2></a>
+				</div>
+				<p>When a new event type is added, a subtable with the same name must also be added in <code>events.lua</code>. Without it the game will not be able to trigger the event. In this case, an error message will be printed to the <code>Lua</code> console spool.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:scripted_events:Script-Generated Events"><h2 class="section_header">Script-Generated Events</h2></a>
+				</div>
+				<p>The script may also generate events of its own with the functions <code><a href="core.html#function:core:trigger_event">core:trigger_event</a></code> and <code><a href="core.html#function:core:trigger_custom_event">core:trigger_custom_event</a></code>. A script event being triggered doesn't need to be present in the <code>events</code> table, the triggering functions will add it if not found.</p>
+				<div class="section_body">
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:59</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "frontend"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

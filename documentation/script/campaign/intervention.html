@@ -1,0 +1,2019 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Interventions script class</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#fff7cc" id="main">
+
+			<div style="background-color:#fff7cc" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Campaign Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#ffed8c">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search campaign only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#ffed8c">Game Areas</h2>
+				<ul>
+					<li><strong> > Campaign Index</strong></li>
+					<li><a href="../battle/battle_index.html">Battle Index</a></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#ffed8c">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:intervention">Interventions</a><img alt="Loaded in Campaign" style="float:right; margin-right:1em;" src="../images/loaded_in_campaign.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:intervention:Usage">Usage</a></li>
+						<li>&emsp;&emsp;<a href="#section:intervention:Configuration and Starting">Configuration and Starting</a></li>
+						<li>&emsp;&emsp;<a href="#section:intervention:Transient Interventions">Transient Interventions</a></li>
+						<li>&emsp;&emsp;<a href="#section:intervention:Output">Output</a></li>
+						<li>&emsp;&emsp;<a href="#section:intervention:Creation">Creation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:new">new</a></li>
+						<li>&emsp;&emsp;<a href="#section:intervention:Trigger Callback">Trigger Callback</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:set_callback">set_callback</a></li>
+						<li>&emsp;&emsp;<a href="#section:intervention:Preconditions">Preconditions</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:add_precondition">add_precondition</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:add_advice_key_precondition">add_advice_key_precondition</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:add_precondition_unvisited_page">add_precondition_unvisited_page</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:add_player_faction_precondition">add_player_faction_precondition</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:add_player_not_faction_precondition">add_player_not_faction_precondition</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:add_player_subculture_precondition">add_player_subculture_precondition</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:add_player_not_subculture_precondition">add_player_not_subculture_precondition</a></li>
+						<li>&emsp;&emsp;<a href="#section:intervention:Trigger Conditions">Trigger Conditions</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:add_trigger_condition">add_trigger_condition</a></li>
+						<li>&emsp;&emsp;<a href="#section:intervention:Configuration">Configuration</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:set_must_trigger">set_must_trigger</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:set_should_lock_ui">set_should_lock_ui</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:set_should_prevent_saving_game">set_should_prevent_saving_game</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:set_reduce_pause_before_triggering">set_reduce_pause_before_triggering</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:set_allow_when_advice_disabled">set_allow_when_advice_disabled</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:set_min_advice_level">set_min_advice_level</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:set_player_turn_only">set_player_turn_only</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:set_min_turn">set_min_turn</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:get_min_turn">get_min_turn</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:set_wait_for_battle_complete">set_wait_for_battle_complete</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:set_wait_for_dilemma">set_wait_for_dilemma</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:set_wait_for_fullscreen_panel_dismissed">set_wait_for_fullscreen_panel_dismissed</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:add_whitelist_event_type">add_whitelist_event_type</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:set_completion_callback">set_completion_callback</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:add_cleanup_callback">add_cleanup_callback</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:get_turn_last_triggered">get_turn_last_triggered</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:has_ever_triggered">has_ever_triggered</a></li>
+						<li>&emsp;&emsp;<a href="#section:intervention:Restart Callback">Restart Callback</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:add_restart_callback">add_restart_callback</a></li>
+						<li>&emsp;&emsp;<a href="#section:intervention:Restart on Turn Countdown">Restart on Turn Countdown</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:set_turn_countdown_restart">set_turn_countdown_restart</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:register_shared_turn_countdown_intervention">register_shared_turn_countdown_intervention</a></li>
+						<li>&emsp;&emsp;<a href="#section:intervention:Taking and Ceding Priority">Taking and Ceding Priority</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:take_priority_over_intervention">take_priority_over_intervention</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:give_priority_to_intervention">give_priority_to_intervention</a></li>
+						<li>&emsp;&emsp;<a href="#section:intervention:Starting">Starting</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:start">start</a></li>
+						<li>&emsp;&emsp;<a href="#section:intervention:Whitelisting Events">Whitelisting Events</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:whitelist_events">whitelist_events</a></li>
+						<li>&emsp;&emsp;<a href="#section:intervention:Completion">Completion</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:complete">complete</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:cancel">cancel</a></li>
+						<li>&emsp;&emsp;<a href="#section:intervention:Intervention Behaviour Wrappers">Intervention Behaviour Wrappers</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:scroll_camera_to_character_for_intervention">scroll_camera_to_character_for_intervention</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:scroll_camera_to_settlement_for_intervention">scroll_camera_to_settlement_for_intervention</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:scroll_camera_for_intervention">scroll_camera_for_intervention</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:intervention:play_advice_for_intervention">play_advice_for_intervention</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#fff7cc" id="navigation_right">				<h2 style="background-color:#ffed8c">Campaign Topics</h2>
+				<ul>
+					<li><a href="campaign_index.html">Campaign Index</a></li>
+					<li><a href="campaign_script_structure.html">Campaign Script Structure</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="narrative_system.html">Narrative System</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="campaignui.html">CampaignUI</a></li>
+					<li><a href="cinematics.html">Cinematics</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="episodic_scripting.html">Episodic Scripting</a></li>
+					<li><a href="model_hierarchy.html">Model Hierarchy</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Script Interfaces</h2>
+				<ul>
+					<li><a href="campaign_manager.html">Campaign Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="campaign_cutscene.html">Campaign Cutscenes</a></li>
+					<li><a href="campaign_ui_manager.html">Campaign UI Manager</a></li>
+					<li><a href="chapter_mission.html">Chapter Missions</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><strong> > Interventions</strong></li>
+					<li><a href="invasion_manager.html">Invasion Manager</a></li>
+					<li><a href="mission_manager.html">Mission Managers</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="narrative_event.html">Narrative Events</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="payload.html">Payload String Constructor</a></li>
+					<li><a href="random_army_manager.html">Random Army Manager</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="unique_table.html">Unique Table</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Data Interfaces</h2>
+				<ul>
+					<li><a href="custom_starts.html">Campaign Custom Starts</a></li>
+					<li><a href="faction_intro.html">Faction Intro</a></li>
+					<li><a href="narrative.html">Narrative</a></li>
+					<li><a href="narrative_events.html">Narrative Event Templates</a></li>
+					<li><a href="narrative_queries.html">Narrative Query Templates</a></li>
+					<li><a href="narrative_triggers.html">Narrative Trigger Templates</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:intervention"><h1 class="content_header">Interventions</h1></a>
+				<p>Campaign interventions offer a mechanism for script to lock the UI and the progression of the game while the player is shown or taken through a sequence of scripted events. This sequence can be as short as a few seconds to trigger some advice, or as long as a cinematic or a scripted tour of a feature. If one intervention has control of the game, no other intervention may gain control until that intervention completes.</p>
+				<p>An intervention is constructed with a unique name, a trigger function (what it calls when triggered) and a priority cost. Once constructed, one or more conditions must be added to the intervention that tell it when to trigger. The intervention starts monitoring for these conditions when <code><a href="#function:intervention:start">intervention:start</a></code> is called. Should one of these conditions be met, the intervention is enqueued for triggering, and its priority cost is considered alongside that of any other interventions that also wish to trigger at this time. The intervention that is highest priority gets to trigger first - its cost is added to a cumulative cost counter, and other interventions are queued up behind it. Once the first intervention has finished the second is started, and so on, until the list of interventions that wish to trigger is exhausted or the cumulative cost exceeds a certain value (100). The trigger monitors of any interventions that didn't get to trigger are restarted so they can trigger again in future.</p>
+				<p>By default, the state of declared interventions is saved into the savegame. The system also supports transient interventions which are not saved in to the savegame - see <code><a href="#section:intervention:Transient Interventions">Transient Interventions</a></code>.</p>
+				<p>Interventions are useful for delivering advice or other scripted events which demand focus, such as mid-game narrative cutscenes. Without the intervention system, there would be a risk that two such pieces of script would trigger at the same time and play simultaneously.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:intervention:Usage"><h2 class="section_header">Usage</h2></a>
+				</div>
+				<p>An intervention may be created with <code><a href="#function:intervention:new">intervention:new</a></code>, after which functions on it may be called in the form showed below.</p>
+
+				<h4>Example - Specification:</h4>
+				<div id="example_code"><code>
+					 <i>&lt;intervention_object&gt;</i>:<i>&lt;function_name&gt;</i>(<i>&lt;args&gt;</i>)<br />
+				</code></div>
+
+				<h4>Example - Creation and Usage:</h4>
+				<div id="example_code"><code>
+					 local intervention_example = intervention:new(<br />
+					 &emsp;&emsp;&emsp;&emsp;"example",<br />
+					 &emsp;&emsp;&emsp;&emsp;60,<br />
+					 &emsp;&emsp;&emsp;&emsp;function() trigger_example_intervention() end,<br />
+					 &emsp;&emsp;&emsp;&emsp;true<br />
+					 )<br />
+					 intervention_example:set_min_advice_level(2)<br />
+				</code></div>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:intervention:Configuration and Starting"><h2 class="section_header">Configuration and Starting</h2></a>
+				</div>
+				<p>Once created, an intervention may optionally configured with a variety of settings (see <code><a href="#section:intervention:Configuration">Configuration</a></code>). One or more trigger conditions can be added with <code><a href="#function:intervention:add_trigger_condition">intervention:add_trigger_condition</a></code>. Preconditions, which are tests an intervention must pass before it's allowed to start may also be added to an intervention with <code><a href="#function:intervention:add_precondition">intervention:add_precondition</a></code>. Preconditions are checked again prior to an intervention triggering.</p>
+				<p>When set up, an intervention may be started with <code><a href="#function:intervention:start">intervention:start</a></code>. This only needs to happen once during the life-cycle of a campaign game, for an intervention that was previously started will be restarted should the script save and load. This includes interventions that have triggered and shut down, so the preconditions of each intervention must be set up to ensure that it doesn't start back up on script load unless that is desired.</p>
+				<p>Once an intervention triggers, it is <strong>imperative</strong> that it finishes, which happens when <code><a href="#function:intervention:complete">intervention:complete</a></code> or <code><a href="#function:intervention:cancel">intervention:cancel</a></code> are called. Until one of these function is called an intervention will lock the UI and the progress of the game. However, some functions are made available that wrap common intervention templates - see the functions list in the <code><a href="#section:intervention:Intervention Behaviour Wrappers">Intervention Behaviour Wrappers</a></code> section. These will automatically end the intervention at the appropriate time.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:intervention:Transient Interventions"><h2 class="section_header">Transient Interventions</h2></a>
+				</div>
+				<p>Interventions are persistent by default, which means that their details are saved into the savegame and that they are automatically re-established when the game is reloaded. Transient interventions are also supported, which are not saved into the savegame. These are intended for use for narrative events that have to pay heed to the intervention system but that are triggered in an inline fashion from other scripts.</p>
+				<p>Transient interventions can be created by setting the transient flag on the constructor function <code><a href="#function:intervention:new">intervention:new</a></code>. The <code><a href="campaign_manager.html#class:campaign_manager">campaign_manager</a></code> also provides a fire-and-forget wrapper for creating transient interventions - see <code><a href="campaign_manager.html#function:campaign_manager:trigger_transient_intervention">campaign_manager:trigger_transient_intervention</a></code>.</p>
+				<p>Transient interventions, unlike persistent interventions, can share the same name (although this should be avoided if possible). Some advanced intervention functionality is not available to transient interventions, such as <code><a href="#function:intervention:take_priority_over_intervention">intervention:take_priority_over_intervention</a></code>, <code><a href="#function:intervention:set_turn_countdown_restart">intervention:set_turn_countdown_restart</a></code> and other related functions.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:intervention:Output"><h2 class="section_header">Output</h2></a>
+				</div>
+				<p>The intervention system outputs extensive amount of information to the <code>Lua - Interventions</code> console spool.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:intervention:Creation"><h2 class="section_header">Creation</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:new"><h3 class="function_name"><strong><code>intervention:new(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">name</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">cost</i><code><strong>, <code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">callback</i><code><strong>, [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">debug mode</i><code><strong>], [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">is transient</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a intervention object. This should happen in the root of the script somewhere, so that the object is declared and set up by the time the first tick happens so that it can be properly restarted from a savegame.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name for the intervention.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Priority cost for the intervention. When an intervention triggers, all interventions that wish to trigger at the same time will be sorted by cost, and triggered in that order (with the cheapest first). Once the total cost of all interventions triggered in a sequence exceeds a certain value (100) no more interventions can trigger. This mechanism prevents the player from being overly spammed with advice.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>Callback to call when the intervention gets to trigger.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Activates debug mode for this intervention, causing it to output more.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Sets this intervention to be transient. The details of transient interventions are not saved into the savegame.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 1936</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:intervention:Trigger Callback"><h2 class="section_header">Trigger Callback</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:set_callback"><h3 class="function_name"><strong><code>intervention:set_callback(<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">callback</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets or resets the trigger callback that gets called when the intervention is triggered. This must be set before <code><a href="#function:intervention:start">intervention:start</a></code>() is called, otherwise the intervention will fail to start.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>callback</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2016</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:intervention:Preconditions"><h2 class="section_header">Preconditions</h2></a>
+				</div>
+				<p>If preconditions are added to an intervention, it will check these when it attempts to either start or trigger. If any of its preconditions return false, the intervention shuts down and will not trigger.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:add_precondition"><h3 class="function_name"><strong><code>intervention:add_precondition(function </strong></code><i class="parameter">precondition</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a precondition function to the intervention. This function will be called by the intervention from time to time and should return <code>true</code> if the intervention is allowed to start or trigger, <code>false</code> otherwise. Should the precondition return <code>false</code> when the intervention calls it the intervention will shut down.<br />
+							Multiple preconditions may be added to an intervention.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p>precondition</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2043</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:add_advice_key_precondition"><h3 class="function_name"><strong><code>intervention:add_advice_key_precondition(string </strong></code><i class="parameter">advice key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Precondition wrapper function that adds a precondition to the intervention that a particular advice key must not have been triggered. The intervention won't be able to start or trigger if the advice history reveals that the advice key has been triggered before. This is useful for interventions that trigger advice - by using this function to specify a precondition, an advice intervention may prevent itself from starting or triggering if the advice it intends to deliver has been heard before.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>advice key</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2057</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:add_precondition_unvisited_page"><h3 class="function_name"><strong><code>intervention:add_precondition_unvisited_page(string </strong></code><i class="parameter">help page name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Precondition wrapper function that adds a precondition to the intervention that a particular help page must be unvisited. The intervention won't be able to start or trigger if the advice history reveals that the specified help page has been visited. This may be useful for low-priority advice scripts that don't wish to trigger if the help page on the advice topic has been seen.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>help page name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2074</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:add_player_faction_precondition"><h3 class="function_name"><strong><code>intervention:add_player_faction_precondition(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a precondition to the intervention that the player's faction key must match the supplied string to be able to start or trigger.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Faction key, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2091</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:add_player_not_faction_precondition"><h3 class="function_name"><strong><code>intervention:add_player_not_faction_precondition(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a precondition to the intervention that the player's faction key must not match the supplied string to be able to start or trigger.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Faction key, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2110</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:add_player_subculture_precondition"><h3 class="function_name"><strong><code>intervention:add_player_subculture_precondition(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">subculture key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a precondition to the intervention that the player's faction must be the supplied subculture to be able to start or trigger. The subculture is supplied by key.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Subculture key, from the <code>cultures_subcultures</code> database table.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2129</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:add_player_not_subculture_precondition"><h3 class="function_name"><strong><code>intervention:add_player_not_subculture_precondition(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">subculture key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a precondition to the intervention that the player's faction must <strong>not</strong> be the supplied subculture to be able to start or trigger. The subculture is supplied by key.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Subculture key, from the <code>cultures_subcultures</code> database table.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2148</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:intervention:Trigger Conditions"><h2 class="section_header">Trigger Conditions</h2></a>
+				</div>
+				<p>At least one trigger condition must have been added to an intervention with <code><a href="#function:intervention:add_trigger_condition">intervention:add_trigger_condition</a></code> before it's started, otherwise it will never be able to trigger.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:add_trigger_condition"><h3 class="function_name"><strong><code>intervention:add_trigger_condition(string </strong></code><i class="parameter">event name</i><code><strong>, function </strong></code><i class="parameter">condition check</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a trigger event and condition to the intervention. The supplied event is listened for and, when received, the supplied condition function is called, with the context of the received event as a single parameter. Should the condition function return true the trigger is satisfied and the intervention is enqueued for triggering.<br />
+							Alternatively the value <code>true</code> may be specified in place of a condition function - in this case, the intervention is enqueued for triggering as soon as the specified event is received.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Event name to listen for.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p>Condition check to call when the event is received. Alternatively, <code>true</code> may be specified.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 in_mission_advice:add_trigger_condition(<br />
+								 &emsp;&emsp;&emsp;&emsp;"ScriptEventFirstAttackEnemyMissionIssued",<br />
+								 &emsp;&emsp;&emsp;&emsp;true<br />
+								 );<br />
+							</code></div>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 in_money:add_trigger_condition(<br />
+								 &emsp;&emsp;&emsp;&emsp;"ScriptEventPlayerFactionTurnStart",<br />
+								 &emsp;&emsp;&emsp;&emsp;function(context)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br />
+								 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return context:faction():treasury() < 4000;<br />
+								 &emsp;&emsp;&emsp;&emsp;end<br />
+								 );<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2183</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:intervention:Configuration"><h2 class="section_header">Configuration</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:set_must_trigger"><h3 class="function_name"><strong><code>intervention:set_must_trigger([boolean </strong></code><i class="parameter">must trigger</i><code><strong>], [boolean </strong></code><i class="parameter">must trigger immediately</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Set this intervention to trigger regardless of cost. This means that, assuming this intervention doesn't fail its precondition it is guaranteed to trigger when its trigger conditions are met. Interventions that must trigger will trigger ahead of other interventions, even if the former's assigned cost is more than the latter's. Its cost is still counted towards the maximum cost per-session, however, so if an intervention that must trigger and costs 80 points triggers, and another that costs 30 points and is not set to must trigger is queued up behind it, the second will not be able to fire as the maximum cost is exceeded.<br />
+							If triggered at the same time as another intervention which is also set to disregard cost then they will trigger in order of cost priority. Both will always trigger, though, even if their combined cost is more than the maximum session allowance.<br />
+							If the must trigger immediately flag is also set to true then this intervention will trigger the instant its trigger conditions pass, assuming that another intervention is not currently playing. This suppresses the grace period that normally happens when an intervention passes its trigger conditions to allow other interventions to be tested that are potentially more important. Only set this to true for interventions that convey essential narrative events.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>must trigger</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>must trigger immediately</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2247</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:set_should_lock_ui"><h3 class="function_name"><strong><code>intervention:set_should_lock_ui([boolean </strong></code><i class="parameter">diregard cost</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Set this intervention to lock the ui whilst triggering, or not. Interventions set to not lock the ui will be sent to the back of the queue when they come to trigger. When the intervention triggers, it will not attempt to lock army movement, army attacking or the end turn button. Should the player move, attack or end the turn while an intervention is active, the queued of interventions queued up behind it will be cleared and any interventions it contained will be restarted. Interventions set to not lock the ui are therefore more liable to be cancelled and restarted than interventions that do lock the ui.<br />
+							By default, interventions do not lock the ui whilst triggering. Use this function to change this behaviour.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>diregard cost</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2269</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:set_should_prevent_saving_game"><h3 class="function_name"><strong><code>intervention:set_should_prevent_saving_game([boolean </strong></code><i class="parameter">diregard cost</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Set this intervention to prevent the player saving the game while it's active.<br />
+							By default, interventions do not lock the ui whilst triggering. Use this function to change this behaviour. Interventions set to lock the ui will also prevent the game from being saved.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>diregard cost</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2282</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:set_reduce_pause_before_triggering"><h3 class="function_name"><strong><code>intervention:set_reduce_pause_before_triggering([boolean </strong></code><i class="parameter">suppress pause</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							By default, interventions wait for a short period before triggering. Use this function to suppress this wait behaviour.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>suppress pause</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2295</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:set_allow_when_advice_disabled"><h3 class="function_name"><strong><code>intervention:set_allow_when_advice_disabled([boolean </strong></code><i class="parameter">allow intervention</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							If advice has been disabled with <code><a href="campaign_manager.html#function:campaign_manager:set_advice_enabled">campaign_manager:set_advice_enabled</a></code> then by default interventions won't attempt to play. Use this function to modify this behaviour for this intervention if required.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>allow intervention</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2307</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:set_min_advice_level"><h3 class="function_name"><strong><code>intervention:set_min_advice_level(number </strong></code><i class="parameter">min advice level</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the minimum player advice level setting at which this intervention will be allowed to trigger. By default this value is 0, so the intervention will trigger regardless of advice level. Valid minimum advice levels are:<br />
+							<table class="simple"><tr><td><strong>0</strong></td><td>Minimal advice - will trigger when advice level is set to minimal, low or high</td></tr><tr><td><strong>1</strong></td><td>Low advice - will trigger when advice level is set to low or high</td></tr><tr><td><strong>2</strong></td><td>High advice - will only trigger when the advice level is set to high</td></tr></table>
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>min advice level</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2319</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:set_player_turn_only"><h3 class="function_name"><strong><code>intervention:set_player_turn_only([boolean </strong></code><i class="parameter">player turn only</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether or not this intervention can only happen on the player's turn. By default, interventions can only trigger if it's the player's turn. Use this function to allow interventions to trigger in the end-turn sequence, which is useful for advice triggering over diplomacy or battles.<br />
+							If an intervention is set to trigger on just the player's turn and it is trigger during the end-turn sequence, it will cancel itself and then trigger again when the player's turn starts.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>player turn only</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2332</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:set_min_turn"><h3 class="function_name"><strong><code>intervention:set_min_turn(number </strong></code><i class="parameter">minimum turn</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the minimum number of turns since either the start of the campaign or when the advice history was last reset before this intervention is eligible to trigger. This is useful for ensuring non-essential advice is spaced out at the start of the campaign.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>minimum turn</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2345</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:get_min_turn"><h3 class="function_name"><strong><code>intervention:get_min_turn()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the set minimum turn value.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>number</code> minimum turn</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2358</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:set_wait_for_battle_complete"><h3 class="function_name"><strong><code>intervention:set_wait_for_battle_complete([boolean </strong></code><i class="parameter">wait for battle</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							By default, interventions will wait for a battle sequence to complete before triggering. A battle sequence is from when the pre-battle panel opens, to when the camera returns to its gameplay position after any battle panels have closed. Use this function to allow interventions to trigger during battle sequences if required. This is useful for delivering pre-battle or post-battle advice.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>wait for battle</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2367</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:set_wait_for_dilemma"><h3 class="function_name"><strong><code>intervention:set_wait_for_dilemma([boolean </strong></code><i class="parameter">wait for dilemmas</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							By default, interventions will wait for open dilemmas to be dismissed before triggering. Use this function to suppress this behaviour, if necessary. This should only be used in very specific circumstances.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>wait for dilemmas</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2379</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:set_wait_for_fullscreen_panel_dismissed"><h3 class="function_name"><strong><code>intervention:set_wait_for_fullscreen_panel_dismissed([boolean </strong></code><i class="parameter">wait for panels</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							By default, interventions will wait for any open blocking panels (technology, diplomacy, recruitment etc) to be dismissed before triggering. Use this function to suppress this behaviour, if necessary.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>wait for panels</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2392</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:add_whitelist_event_type"><h3 class="function_name"><strong><code>intervention:add_whitelist_event_type(string </strong></code><i class="parameter">event type</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds an event type to be whitelisted if <code><a href="#function:intervention:whitelist_events">intervention:whitelist_events</a></code> is called.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>event type</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2404</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:set_completion_callback"><h3 class="function_name"><strong><code>intervention:set_completion_callback(function </strong></code><i class="parameter">callback</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a callback to call when the intervention has completed.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p>callback</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2417</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:add_cleanup_callback"><h3 class="function_name"><strong><code>intervention:add_cleanup_callback(function </strong></code><i class="parameter">callback</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a function to be called when the intervention completes or is cancelled. If the context changes while this intervention is active it is not set to lock the ui then the intervention manager will complete the intervention while it's running. In this case, the intervention itself needs to know how to clean itself up - adding cleanup functions using this mechanism permits this.<br />
+							Multiple cleanup callbacks may be added to any given intervention.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p>callback</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2425</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:get_turn_last_triggered"><h3 class="function_name"><strong><code>intervention:get_turn_last_triggered()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the turn number of which this intervention last triggered in this campaign. If this intervention has never triggered then <code>-1</code> is returned.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>number</code> turn last triggered</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2439</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:has_ever_triggered"><h3 class="function_name"><strong><code>intervention:has_ever_triggered()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether this intervention has ever triggered in this campaign.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> has ever triggered</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2447</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:intervention:Restart Callback"><h2 class="section_header">Restart Callback</h2></a>
+				</div>
+				<p>Restart events and checks are listened for if the intervention isn't running, assuming it has previously been started. If a restart callback event is received and the check returns true, then the intervention is restarted. Multiple restart callbacks may be added to one intervention.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:add_restart_callback"><h3 class="function_name"><strong><code>intervention:add_restart_callback(string </strong></code><i class="parameter">event name</i><code><strong>, function </strong></code><i class="parameter">check</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a restart event and conditional check. Should the event be received and the conditional check return true, then the intervention will restart. Transient interventions may not have restart callbacks added.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Event name to listen for.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p>Conditional check to test when event is received. This should be a function that returns a boolean value, and it will be passed the context of the event listened for as a single parameter. Alternatively, <code>true</code> may be specified in place of a function, in which case the intervention is restarted as soon as the event is received.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2469</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:intervention:Restart on Turn Countdown"><h2 class="section_header">Restart on Turn Countdown</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:set_turn_countdown_restart"><h3 class="function_name"><strong><code>intervention:set_turn_countdown_restart(number </strong></code><i class="parameter">turns</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							If a turn countdown restart number is set, the intervention will attempt to restart the given number of turns after stopping. This countdown also applies if the intervention fails to start. Transient interventions do not support turn countdown restarts.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>turns</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2517</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:register_shared_turn_countdown_intervention"><h3 class="function_name"><strong><code>intervention:register_shared_turn_countdown_intervention(string </strong></code><i class="parameter">intervention name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Registers that this intervention shares a turn countdown with another. If this is set on an intervention then when it restarts its turn countdown it will instruct the other intervention to restart its turn countdown also. This can be useful for advice interventions that share a common purpose.<br />
+							Note that interventions that take or cede priority to another (see <code><a href="#section:intervention:Taking and Ceding Priority">Taking and Ceding Priority</a></code>) cannot share turn countdowns with other interventions.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Name of intervention that this intervention shares its turn countdown with. This only needs to be called on one of the two interventions.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2542</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:intervention:Taking and Ceding Priority"><h2 class="section_header">Taking and Ceding Priority</h2></a>
+				</div>
+				<p>Interventions can set to explicitly take or cede priority to another. This allows client scripts to ensure that one intervention must stop or cannot run when another is started, and for the second to notify the first when it stops so that the first can eventually start.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:take_priority_over_intervention"><h3 class="function_name"><strong><code>intervention:take_priority_over_intervention(string </strong></code><i class="parameter">intervention name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Registers that this intervention takes priority over another intervention with the supplied name, so that they cannot run at the same time. If the supplied intervention attempts to start and this intervention is already started, the supplied intervention will fail to start. If this intervention starts and the supplied intervention has already started, the supplied intervention will be stopped.<br />
+							Furthermore, when this intervention stops it will notify the supplied intervention, which will then start.<br />
+							Only persistent interventions can take priority over another. Transient interventions do not support this mechanism.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Name of intervention to take priority over.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2580</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:give_priority_to_intervention"><h3 class="function_name"><strong><code>intervention:give_priority_to_intervention(string </strong></code><i class="parameter">intervention name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Registers that this intervention cedes priority to another intervention with the supplied name, so that they cannot run at the same time. This is the reverse of <code><a href="#function:intervention:take_priority_over_intervention">intervention:take_priority_over_intervention</a></code>. If the supplied intervention starts and this intervention is already started, this intervention will be stopped. If this intervention starts and the supplied intervention has already started, this intervention will not start.<br />
+							Furthermore, when the supplied intervention stops it will notify this intervention, which will then start.<br />
+							Only persistent interventions can take priority over another. Transient interventions do not support this mechanism.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Name of intervention to give priority to.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2611</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:intervention:Starting"><h2 class="section_header">Starting</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:start"><h3 class="function_name"><strong><code>intervention:start()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Starts the intervention. An intervention must be started in order to trigger. This only needs to be called once per-intervention through the lifetime of a campaign - if an intervention is started, and the campaign is saved and loaded, the intervention will automatically be restarted from the savegame, even if it's triggered and stopped.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2649</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:intervention:Whitelisting Events"><h2 class="section_header">Whitelisting Events</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:whitelist_events"><h3 class="function_name"><strong><code>intervention:whitelist_events()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Perform the whitelisting of event types that have been registered with <code><a href="#function:intervention:add_whitelist_event_type">intervention:add_whitelist_event_type</a></code>. This is intended to be called while the intervention is actually running to make pending events display suddenly.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 2868</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:intervention:Completion"><h2 class="section_header">Completion</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:complete"><h3 class="function_name"><strong><code>intervention:complete()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Completes the intervention when it's running. This function (or <code><a href="#function:intervention:cancel">intervention:cancel</a></code>) <b>must</b> be called at some point after the intervention has been triggered, as they are the only way the intervention will end and relinquish control of the game. The wrapper functions <code><a href="#function:intervention:play_advice_for_intervention">intervention:play_advice_for_intervention</a></code>, <code><a href="#function:intervention:scroll_camera_to_character_for_intervention">intervention:scroll_camera_to_character_for_intervention</a></code> and <code><a href="#function:intervention:scroll_camera_to_settlement_for_intervention">intervention:scroll_camera_to_settlement_for_intervention</a></code> all call this function internally so if using one of those to control the behaviour of the intervention when triggered then this function does not need to be called.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 3098</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:cancel"><h3 class="function_name"><strong><code>intervention:cancel()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Completes the intervention without stopping its listeners. This is useful if an intervention decides it doesn't want to trigger after all after <code><a href="#function:intervention:start">intervention:start</a></code> has been called.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 3128</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:intervention:Intervention Behaviour Wrappers"><h2 class="section_header">Intervention Behaviour Wrappers</h2></a>
+				</div>
+				<p>Call one of the functions in this section when an intervention is triggered to have it behave in a standardised manner, showing advice, infotext, a mission, optionally scrolling to a target and completing where appropriate.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:scroll_camera_to_character_for_intervention"><h3 class="function_name"><strong><code>intervention:scroll_camera_to_character_for_intervention(<br />&emsp;&emsp;number </strong></code><i class="parameter">cqi</i><code><strong>, <br />&emsp;&emsp;string </strong></code><i class="parameter">advice key</i><code><strong>, <br />&emsp;&emsp;[table </strong></code><i class="parameter">infotext</i><code><strong>], <br />&emsp;&emsp;[mission_manager </strong></code><i class="parameter">mission</i><code><strong>], <br />&emsp;&emsp;[number </strong></code><i class="parameter">duration</i><code><strong>], <br />&emsp;&emsp;[function </strong></code><i class="parameter">scroll callback</i><code><strong>], <br />&emsp;&emsp;[function </strong></code><i class="parameter">continuation callback</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Scrolls the camera to a character during an intervention, showing advice and optionally showing infotext and a mission. This should only be called while this intervention is actually running after having been triggered.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>Character cqi.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Advice key.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>table</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Table of string infotext keys.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code>mission_manager</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Mission manager of mission to trigger, if any.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Duration of camera scroll in seconds. If no duration is specified then <code><a href="campaignui.html#function:campaignui:ZoomToSmooth">CampaignUI.ZoomToSmooth</a></code> is used for the camera movement, which produces a smoother movement than <code><a href="campaign_manager.html#function:campaign_manager:scroll_camera_with_direction">campaign_manager:scroll_camera_with_direction</a></code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Callback to call when the camera movement is complete.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>If supplied, this callback will be called when the intervention would usually complete. It will be passed this intervention object as a single argument, and takes on the responsibility for calling <code><a href="#function:intervention:complete">intervention:complete</a></code> to relinquish control.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 3303</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:scroll_camera_to_settlement_for_intervention"><h3 class="function_name"><strong><code>intervention:scroll_camera_to_settlement_for_intervention(<br />&emsp;&emsp;string </strong></code><i class="parameter">region key</i><code><strong>, <br />&emsp;&emsp;string </strong></code><i class="parameter">advice key</i><code><strong>, <br />&emsp;&emsp;[table </strong></code><i class="parameter">infotext</i><code><strong>], <br />&emsp;&emsp;[mission_manager </strong></code><i class="parameter">mission</i><code><strong>], <br />&emsp;&emsp;[number </strong></code><i class="parameter">duration</i><code><strong>], <br />&emsp;&emsp;[function </strong></code><i class="parameter">scroll callback</i><code><strong>], <br />&emsp;&emsp;[function </strong></code><i class="parameter">continuation callback</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Scrolls the camera to a settlement during an intervention, showing advice and optionally showing infotext and a mission. This should only be called while this intervention is actually running after having been triggered.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Region key.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Advice key.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>table</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Table of string infotext keys.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code>mission_manager</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Mission manager of mission to trigger, if any.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Duration of camera scroll in seconds. If no duration is specified then <code><a href="campaignui.html#function:campaignui:ZoomToSmooth">CampaignUI.ZoomToSmooth</a></code> is used for the camera movement, which produces a smoother movement than <code><a href="campaign_manager.html#function:campaign_manager:scroll_camera_with_direction">campaign_manager:scroll_camera_with_direction</a></code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Callback to call when the camera movement is complete.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>If supplied, this callback will be called when the intervention would usually complete. It will be passed this intervention object as a single argument, and takes on the responsibility for calling <code><a href="#function:intervention:complete">intervention:complete</a></code> to relinquish control.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 3351</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:scroll_camera_for_intervention"><h3 class="function_name"><strong><code>intervention:scroll_camera_for_intervention(<br />&emsp;&emsp;[string </strong></code><i class="parameter">region key</i><code><strong>], <br />&emsp;&emsp;number </strong></code><i class="parameter">x</i><code><strong>, <br />&emsp;&emsp;number </strong></code><i class="parameter">y</i><code><strong>, <br />&emsp;&emsp;string </strong></code><i class="parameter">advice key</i><code><strong>, <br />&emsp;&emsp;[table </strong></code><i class="parameter">infotext</i><code><strong>], <br />&emsp;&emsp;[mission_manager </strong></code><i class="parameter">mission</i><code><strong>], <br />&emsp;&emsp;[number </strong></code><i class="parameter">duration</i><code><strong>], <br />&emsp;&emsp;[function </strong></code><i class="parameter">scroll callback</i><code><strong>], <br />&emsp;&emsp;[function </strong></code><i class="parameter">continuation callback</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Scrolls the camera to a supplied position on the campaign map during an intervention, showing advice and optionally showing infotext and a mission. This should only be called while this intervention is actually running after having been triggered.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Target region key. If a region is supplied here the shroud over it will be lifted while the intervention is playing.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>Display x co-ordinate of position to scroll to.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>Display y co-ordinate of position to scroll to.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Advice key.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code>table</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Table of string infotext keys.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code>mission_manager</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Mission manager of mission to trigger, if any.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Duration of camera scroll in seconds. If no duration is specified then <code><a href="campaignui.html#function:campaignui:ZoomToSmooth">CampaignUI.ZoomToSmooth</a></code> is used for the camera movement, which produces a smoother movement than <code><a href="campaign_manager.html#function:campaign_manager:scroll_camera_with_direction">campaign_manager:scroll_camera_with_direction</a></code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>8</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Callback to call when the camera movement is complete.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>9</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>If supplied, this callback will be called when the intervention would usually complete. It will be passed this intervention object as a single argument, and takes on the responsibility for calling <code><a href="#function:intervention:complete">intervention:complete</a></code> to relinquish control.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 3389</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:intervention:play_advice_for_intervention"><h3 class="function_name"><strong><code>intervention:play_advice_for_intervention(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">advice key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:table">table</a></code> </strong></code><i class="parameter">infotext</i><code><strong>], <br />&emsp;&emsp;[<code><a href="mission_manager.html#class:mission_manager">mission_manager</a></code> </strong></code><i class="parameter">mission</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">mission delay</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">continuation callback</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Shows advice and optionally some infotext and a mission. This should only be called while this intervention is actually running after having been triggered.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Advice key.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Table of string infotext keys.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="mission_manager.html#class:mission_manager">mission_manager</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Mission manager of mission to trigger, if any.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=2</i></p>
+										<p>Delay in seconds after triggering intervention before triggering mission.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>If supplied, this callback will be called when the intervention would usually complete. It will be passed this intervention object as a single argument, and takes on the responsibility for calling <code><a href="#function:intervention:complete">intervention:complete</a></code> to relinquish control.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_intervention.lua, line 3735</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:57</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "campaign"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

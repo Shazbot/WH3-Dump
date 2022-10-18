@@ -1,0 +1,1024 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>CampaignUI</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#fff7cc" id="main">
+
+			<div style="background-color:#fff7cc" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Campaign Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#ffed8c">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search campaign only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#ffed8c">Game Areas</h2>
+				<ul>
+					<li><strong> > Campaign Index</strong></li>
+					<li><a href="../battle/battle_index.html">Battle Index</a></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#ffed8c">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:campaignui">CampaignUI</a><img alt="Loaded in Campaign" style="float:right; margin-right:1em;" src="../images/loaded_in_campaign.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:campaignui:Camera Movement">Camera Movement</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:campaignui:ZoomToSmooth">ZoomToSmooth</a></li>
+						<li>&emsp;&emsp;<a href="#section:campaignui:Miscellaneous">Miscellaneous</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:campaignui:ClosePanel">ClosePanel</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:campaignui:ToggleScreenCover">ToggleScreenCover</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:campaignui:ToggleCinematicBorders">ToggleCinematicBorders</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:campaignui:ShowVictoryScreen">ShowVictoryScreen</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:campaignui:ClearSelection">ClearSelection</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:campaignui:UpdateSettlementEffectIcons">UpdateSettlementEffectIcons</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:campaignui:QuitToWindows">QuitToWindows</a></li>
+						<li>&emsp;&emsp;<a href="#section:campaignui:Campaign Map Overlay">Campaign Map Overlay</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:campaignui:SetOverlayVisible">SetOverlayVisible</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:campaignui:SetOverlayMode">SetOverlayMode</a></li>
+						<li>&emsp;&emsp;<a href="#section:campaignui:Events and Suppression">Events and Suppression</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:campaignui:SuppressAllEventTypesInUI">SuppressAllEventTypesInUI</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:campaignui:WhiteListEventTypeInUI">WhiteListEventTypeInUI</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:campaignui:DoesEventTypeExist">DoesEventTypeExist</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:campaignui:DoesEventTypeRequireResponse">DoesEventTypeRequireResponse</a></li>
+						<li>&emsp;&emsp;<a href="#section:campaignui:Multiplayer UI Events">Multiplayer UI Events</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:campaignui:TriggerIncident">TriggerIncident</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:campaignui:TriggerCampaignScriptEvent">TriggerCampaignScriptEvent</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:campaignui:AddBuildingChainToWhitelist">AddBuildingChainToWhitelist</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:campaignui:ClearBuildingChainWhitelist">ClearBuildingChainWhitelist</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:campaignui:AddUnitToBlacklist">AddUnitToBlacklist</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:campaignui:ClearUnitBlacklist">ClearUnitBlacklist</a></li>
+						<li>&emsp;&emsp;<a href="#section:campaignui:Minimal View">Minimal View</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:campaignui:IsMinimalViewModeEnabled">IsMinimalViewModeEnabled</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#fff7cc" id="navigation_right">				<h2 style="background-color:#ffed8c">Campaign Topics</h2>
+				<ul>
+					<li><a href="campaign_index.html">Campaign Index</a></li>
+					<li><a href="campaign_script_structure.html">Campaign Script Structure</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="narrative_system.html">Narrative System</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Game Code Interfaces</h2>
+				<ul>
+					<li><strong> > CampaignUI</strong></li>
+					<li><a href="cinematics.html">Cinematics</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="episodic_scripting.html">Episodic Scripting</a></li>
+					<li><a href="model_hierarchy.html">Model Hierarchy</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Script Interfaces</h2>
+				<ul>
+					<li><a href="campaign_manager.html">Campaign Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="campaign_cutscene.html">Campaign Cutscenes</a></li>
+					<li><a href="campaign_ui_manager.html">Campaign UI Manager</a></li>
+					<li><a href="chapter_mission.html">Chapter Missions</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="intervention.html">Interventions</a></li>
+					<li><a href="invasion_manager.html">Invasion Manager</a></li>
+					<li><a href="mission_manager.html">Mission Managers</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="narrative_event.html">Narrative Events</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="payload.html">Payload String Constructor</a></li>
+					<li><a href="random_army_manager.html">Random Army Manager</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="unique_table.html">Unique Table</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Data Interfaces</h2>
+				<ul>
+					<li><a href="custom_starts.html">Campaign Custom Starts</a></li>
+					<li><a href="faction_intro.html">Faction Intro</a></li>
+					<li><a href="narrative.html">Narrative</a></li>
+					<li><a href="narrative_events.html">Narrative Event Templates</a></li>
+					<li><a href="narrative_queries.html">Narrative Query Templates</a></li>
+					<li><a href="narrative_triggers.html">Narrative Trigger Templates</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:campaignui"><h1 class="content_header">CampaignUI</h1></a>
+				<p>The <code>CampaignUI</code> script object is created automatically when the campaign UI loads, and offers a suite a functions that allow scripts to query and customise bits of the UI. It does not need to be created by script, and the functions it provides may be called directly on the object in the following form.</p>
+
+				<h4>Example:</h4>
+				<div id="example_code"><code>
+					 CampaignUI.<i>&lt;function_name&gt;</i>(<i>&lt;args&gt;</i>)<br />
+				</code></div>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:campaignui:Camera Movement"><h2 class="section_header">Camera Movement</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:campaignui:ZoomToSmooth"><h3 class="function_name"><strong><code>CampaignUI.ZoomToSmooth(<br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">x</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">y</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">horizontal distance</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">bearing</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">vertical distance</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Zooms the game camera to the specified display co-ordinates using smooth movement. x and y must be provided. If no bearing and distance values are provided then the current camera bearing and distance values are used.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>x display position.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>y display position.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Horizontal distance from camera to camera target.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Bearing in radians from camera to camera target.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Vertical distance from camera to camera target.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Campaign/CampaignUIScriptInterface.cpp, line 342</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:campaignui:Miscellaneous"><h2 class="section_header">Miscellaneous</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:campaignui:ClosePanel"><h3 class="function_name"><strong><code>CampaignUI.ClosePanel(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">panel name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Closes an open UI panel by name.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>panel name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Campaign/CampaignUIScriptInterface.cpp, line 385</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:campaignui:ToggleScreenCover"><h3 class="function_name"><strong><code>CampaignUI.ToggleScreenCover(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">enable cover</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates or destroys a black screen cover (when not eyefinity).
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>enable cover</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Campaign/CampaignUIScriptInterface.cpp, line 400</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:campaignui:ToggleCinematicBorders"><h3 class="function_name"><strong><code>CampaignUI.ToggleCinematicBorders(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">enable borders</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates or destroys top and bottom cinematic borders.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>enable borders</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Campaign/CampaignUIScriptInterface.cpp, line 439</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:campaignui:ShowVictoryScreen"><h3 class="function_name"><strong><code>CampaignUI.ShowVictoryScreen([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">is victory</i><code><strong>], [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">can continue</i><code><strong>], [<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">mission key</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Shows the campaign victory screen, optionally corresponding to a specified mission. All three arguments must be specified, or none can be specified.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=<code><a href="lua.html#class:nil">nil</a></code></i></p>
+										<p>is victory</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=<code><a href="lua.html#class:nil">nil</a></code></i></p>
+										<p>can continue</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=<code><a href="lua.html#class:nil">nil</a></code></i></p>
+										<p>mission key</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Campaign/CampaignUIScriptInterface.cpp, line 454</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:campaignui:ClearSelection"><h3 class="function_name"><strong><code>CampaignUI.ClearSelection()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Clears the current ui selection, ensuring that no settlements or characters are selected by the player.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Campaign/CampaignUIScriptInterface.cpp, line 486</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:campaignui:UpdateSettlementEffectIcons"><h3 class="function_name"><strong><code>CampaignUI.UpdateSettlementEffectIcons()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Updates any settlement effect icons on the campaign interface. This should be called after the script does anything that might modify settlement effects.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Campaign/CampaignUIScriptInterface.cpp, line 495</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:campaignui:QuitToWindows"><h3 class="function_name"><strong><code>CampaignUI.QuitToWindows()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Exits the game. This is used for autotesting.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Campaign/CampaignUIScriptInterface.cpp, line 510</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:campaignui:Campaign Map Overlay"><h2 class="section_header">Campaign Map Overlay</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:campaignui:SetOverlayVisible"><h3 class="function_name"><strong><code>CampaignUI.SetOverlayVisible(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">activate overlay</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the campaign overlay to be visible or not. The campaign overlay colourises regions on the campaign map display for various purposes (it is used by the tactical map, for example). The overlay mode to display, and what regions to display it on, should be set with <code><a href="#function:campaignui:SetOverlayMode">CampaignUI.SetOverlayMode</a></code> before activating the overlay with this function.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>activate overlay</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Campaign/CampaignUIScriptInterface.cpp, line 530</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:campaignui:SetOverlayMode"><h3 class="function_name"><strong><code>CampaignUI.SetOverlayMode(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">overlay mode</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">overlay mode mask</i><code><strong>, ... </strong></code><i class="parameter">region(s)</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the overlay mode to display by numeric id with a mode mask, and one or more regions to display it across by region key. Multiple region keys may be specified with separate arguments. Calling this function has no effect until the overlay is subsequently enabled with <code><a href="#function:campaignui:SetOverlayVisible">CampaignUI.SetOverlayVisible</a></code>.<br />
+							Valid overlay mode ids:<br />
+							<table class="simple"><tr><th>overlay mode id</th><th>description</th></tr><br />
+							<tr><td><code>0</code></td><td><code>DIPLOMACY_STATUS</code></td></tr>
+
+							<tr><td><code>1</code></td><td><code>DIPLOMACY_ATTITUDE_FACTION</code></td></tr>
+
+							<tr><td><code>2</code></td><td><code>DIPLOMACY_ATTITUDE_OWNER</code></td></tr>
+
+							<tr><td><code>3</code></td><td><code>RADAR</code></td></tr>
+
+							<tr><td><code>4</code></td><td><code>HISTORICAL_OWNERSHIP</code></td></tr>
+
+							<tr><td><code>5</code></td><td><code>REGION_GROWTH</code></td></tr>
+
+							<tr><td><code>6</code></td><td><code>REGION_HAPPINESS</code></td></tr>
+
+							<tr><td><code>7</code></td><td><code>REGION_SLAVES</code></td></tr>
+
+							<tr><td><code>8</code></td><td><code>REGION_FOOD</code></td></tr>
+
+							<tr><td><code>9</code></td><td><code>REGION_CORRUPTION</code></td></tr>
+
+							<tr><td><code>10</code></td><td><code>WINDS_OF_MAGIC</code></td></tr>
+
+							<tr><td><code>11</code></td><td><code>CLIMATE_SUITABILITY</code></td></tr>
+
+							<tr><td><code>12</code></td><td><code>GEOMATIC_WEB</code></td></tr>
+
+							<tr><td><code>13</code></td><td><code>TUTORIAL_REGION_HIGHLIGHT</code></td></tr>
+
+							<tr><td><code>14</code></td><td><code>ATTRITION_FOR_SELECTED_CHARACTER</code></td></tr></table>
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Overlay mode (see lookup table above).</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>The mode mask, which can specify additional information about the overlay mode in certain circumstances. Where no special mode mask is required (i.e. most circumstances) the value <code>0</code> should be supplied here.</p>
+										<p>When showing the corruption overlay, this value specifies a corruption type (in order within the <code>corruption_types</code> table). When showing the happiness overlay, supplying a value other than 0 shows happiness trending rather than current happiness.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>...</code></p>
+									</td>
+									<td>
+										<p>One or more <code><a href="lua.html#class:string">string</a></code> region keys</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 CampaignUI.SetOverlayMode(5, 0, lothern_region_str, glittering_tower_region_str, tower_of_lysean_region_str)<br />
+								 CampaignUI.SetOverlayVisible(true)<br />
+							</code></div>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Campaign/CampaignUIScriptInterface.cpp, line 549</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:campaignui:Events and Suppression"><h2 class="section_header">Events and Suppression</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:campaignui:SuppressAllEventTypesInUI"><h3 class="function_name"><strong><code>CampaignUI.SuppressAllEventTypesInUI(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">enable suppression</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Enables or disables a suppression lock that prevents any event messages being shown on the UI. Once the lock is enabled, individual event types may be whitelisted for display with <code><a href="#function:campaignui:WhiteListEventTypeInUI">CampaignUI.WhiteListEventTypeInUI</a></code>, at which point they will bypass the suppression.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>enable suppression</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Campaign/CampaignUIScriptInterface.cpp, line 626</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:campaignui:WhiteListEventTypeInUI"><h3 class="function_name"><strong><code>CampaignUI.WhiteListEventTypeInUI(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">event type</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Whitelists an event type to bypass suppression activated by <code><a href="#function:campaignui:SuppressAllEventTypesInUI">CampaignUI.SuppressAllEventTypesInUI</a></code>. Event types to be whitelisted are specified by a compound key from the <code>event_feed_targeted_events</code> table - the key must be specified by concatenating the <code>event</code> and <code>target></code> field values for a given record from that table. Currently valid examples might include <code>"faction_event_mission_issuedevent_feed_target_mission_faction"</code> or <code>"scripted_persistent_located_eventevent_feed_target_faction"</code>. Whitelisting an event type has no effect if suppression has not been enabled.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>event type</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Campaign/CampaignUIScriptInterface.cpp, line 645</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:campaignui:DoesEventTypeExist"><h3 class="function_name"><strong><code>CampaignUI.DoesEventTypeExist(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">event type</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether or not an event of the specified type exists in the display queue (i.e. is being displayed or is pending to be displayed). Event types are specified by a compound key from the <code>event_feed_targeted_events</code> table - the key must be specified by concatenating the <code>event</code> and <code>target></code> field values for a given record from that table.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>event type</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> event type exists</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Campaign/CampaignUIScriptInterface.cpp, line 666</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:campaignui:DoesEventTypeRequireResponse"><h3 class="function_name"><strong><code>CampaignUI.DoesEventTypeRequireResponse(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">event type</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether or not an event of the specified type exists in the display queue (i.e. is being displayed or is pending to be displayed) and requires a response. Event types are specified by a compound key from the <code>event_feed_targeted_events</code> table - the key must be specified by concatenating the <code>event</code> and <code>target></code> field values for a given record from that table.<br />
+							This is of most use for testing if a dilemma is currently active.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>event type</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> event type requires response</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 if CampaignUI.DoesEventTypeRequireResponse("faction_event_dilemmaevent_feed_target_dilemma_faction") then<br />
+								 &emsp;&emsp;&emsp;&emsp;out("dilemma is open")<br />
+								 end<br />
+							</code></div>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Campaign/CampaignUIScriptInterface.cpp, line 688</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:campaignui:Multiplayer UI Events"><h2 class="section_header">Multiplayer UI Events</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:campaignui:TriggerIncident"><h3 class="function_name"><strong><code>CampaignUI.TriggerIncident(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">incident key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Triggers an incident for the local player, specified by incident key. If called on one machine in a multiplayer game this will trigger the incident on all machines - as such, it can be called in script that is triggered from a UI event in a multiplayer game.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>incident key</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Campaign/CampaignUIScriptInterface.cpp, line 717</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:campaignui:TriggerCampaignScriptEvent"><h3 class="function_name"><strong><code>CampaignUI.TriggerCampaignScriptEvent([<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">faction cqi</i><code><strong>], [<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">event id</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Allows the script running on one machine in a multiplayer game to cause a scripted event, <code>UITrigger</code>, to be triggered on all machines in that game. By listening for this event, scripts on all machines in a multiplayer game can therefore respond to a UI event occuring on just one of those machines.<br />
+							An optional string event id and number faction cqi may be specified. If specified, these values are passed from the triggering script through to all listening scripts, using the context objects supplied with the events. The event id may be accessed by listening scripts by calling <code>&lt;context&gt;:trigger()</code> on the supplied context object, and can be used to identify the script event being triggered. The faction cqi may be accessed by calling <code>&lt;context&gt;:faction_cqi()</code> on the context object, and can be used to identify a faction associated with the event. Both must be specified, or neither. 
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>faction cqi</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>event id</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 core:add_listener(<br />
+								 &emsp;&emsp;&emsp;&emsp;"test",<br />
+								 &emsp;&emsp;&emsp;&emsp;"UITrigger",<br />
+								 &emsp;&emsp;&emsp;&emsp;true,<br />
+								 &emsp;&emsp;&emsp;&emsp;function(context)<br />
+								 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;out("* UITrigger received, id: " .. tostring(context:trigger()) .. ", faction cqi: " .. tostring(context:faction_cqi()))<br />
+								 &emsp;&emsp;&emsp;&emsp;end,<br />
+								 &emsp;&emsp;&emsp;&emsp;true<br />
+								 )<br />
+								 <br />
+								 // later, perhaps on a different machine:<br />
+								 CampaignUI.TriggerCampaignScriptEvent(123, "test_event")<br />
+							</code></div>
+							<div id="example_result"><code>
+								* UITrigger received, id: test_event, faction cqi: 123&emsp;&emsp;&emsp;&emsp;<br />
+							</code></div>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Campaign/CampaignUIScriptInterface.cpp, line 741</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:campaignui:AddBuildingChainToWhitelist"><h3 class="function_name"><strong><code>CampaignUI.AddBuildingChainToWhitelist(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">building chain key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds building chains to whitelist.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>building chain key</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Campaign/CampaignUIScriptInterface.cpp, line 783</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:campaignui:ClearBuildingChainWhitelist"><h3 class="function_name"><strong><code>CampaignUI.ClearBuildingChainWhitelist()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Clears the building chain whitelist.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Campaign/CampaignUIScriptInterface.cpp, line 802</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:campaignui:AddUnitToBlacklist"><h3 class="function_name"><strong><code>CampaignUI.AddUnitToBlacklist(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">main unit record key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a unit to the blacklist
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>main unit record key</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Campaign/CampaignUIScriptInterface.cpp, line 816</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:campaignui:ClearUnitBlacklist"><h3 class="function_name"><strong><code>CampaignUI.ClearUnitBlacklist()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Clears the unit blacklist.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Campaign/CampaignUIScriptInterface.cpp, line 835</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:campaignui:Minimal View"><h2 class="section_header">Minimal View</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:campaignui:IsMinimalViewModeEnabled"><h3 class="function_name"><strong><code>CampaignUI.IsMinimalViewModeEnabled()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns true if campaign_minimal_view_mode enabled (set in userscript to speed up campaign loading)
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is_campaign_minimal_view_mode_enabled</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Campaign/EmpireCampaignUI.cpp, line 802</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:58</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "campaign"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

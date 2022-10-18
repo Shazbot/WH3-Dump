@@ -1,0 +1,3194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Narrative Trigger Templates</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#fff7cc" id="main">
+
+			<div style="background-color:#fff7cc" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Campaign Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#ffed8c">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search campaign only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#ffed8c">Game Areas</h2>
+				<ul>
+					<li><strong> > Campaign Index</strong></li>
+					<li><a href="../battle/battle_index.html">Battle Index</a></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#ffed8c">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:narrative_triggers">Narrative Trigger Templates</a><img alt="Loaded in Campaign" style="float:right; margin-right:1em;" src="../images/loaded_in_campaign.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:generic">generic</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:message">message</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:turn_start">turn_start</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:dilemma_choice_made">dilemma_choice_made</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:turn_countdown">turn_countdown</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:faction_switch">faction_switch</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:growth_point_gained">growth_point_gained</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:building_construction_issued">building_construction_issued</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:technology_building_construction_issued">technology_building_construction_issued</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:general_created">general_created</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:agent_created">agent_created</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:hero_action_performed">hero_action_performed</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:any_general_won_x_battles">any_general_won_x_battles</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:any_hero_won_x_battles">any_hero_won_x_battles</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:pooled_resource_gained">pooled_resource_gained</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:faction_pooled_resource_gained">faction_pooled_resource_gained</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:skulls_gained">skulls_gained</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:devotion_gained">devotion_gained</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:can_reach_faction">can_reach_faction</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:can_reach_settlement">can_reach_settlement</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:corruption_in_adjacent_region">corruption_in_adjacent_region</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:foreign_slot_established">foreign_slot_established</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:ritual_performed">ritual_performed</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:character_action">character_action</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:technology_research_started">technology_research_started</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:technology_research_completed">technology_research_completed</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:net_income">net_income</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:controls_provinces">controls_provinces</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_triggers:highest_level_settlement">highest_level_settlement</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#fff7cc" id="navigation_right">				<h2 style="background-color:#ffed8c">Campaign Topics</h2>
+				<ul>
+					<li><a href="campaign_index.html">Campaign Index</a></li>
+					<li><a href="campaign_script_structure.html">Campaign Script Structure</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="narrative_system.html">Narrative System</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="campaignui.html">CampaignUI</a></li>
+					<li><a href="cinematics.html">Cinematics</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="episodic_scripting.html">Episodic Scripting</a></li>
+					<li><a href="model_hierarchy.html">Model Hierarchy</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Script Interfaces</h2>
+				<ul>
+					<li><a href="campaign_manager.html">Campaign Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="campaign_cutscene.html">Campaign Cutscenes</a></li>
+					<li><a href="campaign_ui_manager.html">Campaign UI Manager</a></li>
+					<li><a href="chapter_mission.html">Chapter Missions</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="intervention.html">Interventions</a></li>
+					<li><a href="invasion_manager.html">Invasion Manager</a></li>
+					<li><a href="mission_manager.html">Mission Managers</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="narrative_event.html">Narrative Events</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="payload.html">Payload String Constructor</a></li>
+					<li><a href="random_army_manager.html">Random Army Manager</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="unique_table.html">Unique Table</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Data Interfaces</h2>
+				<ul>
+					<li><a href="custom_starts.html">Campaign Custom Starts</a></li>
+					<li><a href="faction_intro.html">Faction Intro</a></li>
+					<li><a href="narrative.html">Narrative</a></li>
+					<li><a href="narrative_events.html">Narrative Event Templates</a></li>
+					<li><a href="narrative_queries.html">Narrative Query Templates</a></li>
+					<li><strong> > Narrative Trigger Templates</strong></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:narrative_triggers"><h1 class="content_header">Narrative Trigger Templates</h1></a>
+				<p>The <code>narrative_triggers</code> table contains a list of narrative trigger templates that campaign scripts can use to create narrative triggers. See the page on <code><a href="narrative.html#class:narrative">narrative</a></code> for an overview of the narrative event framework. See also the <code><a href="narrative_event.html#class:narrative_trigger">narrative_trigger</a></code> documentation for detailed information about the <code>narrative_trigger</code> object interface.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:narrative_triggers:Functionality"><h2 class="section_header">Functionality</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:generic"><h3 class="function_name"><strong><code>narrative_triggers.generic(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">event name</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">condition</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">Immediate</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that attempts to trigger when a specified event is received. An optional condition function may also be supplied, which must be passed for the narrative trigger to fire its target events. If supplied, the condition function will be called when the specified event is received, and will be passed the event context and the narrative trigger object as separate arguments. It must return a value that evaluates to <code>true</code> for the condition to pass. If no condition function is supplied then the condition always passes.<br />
+							If the immediate flag is set, or if it is a multiplayer game, then the narrative trigger will immediately trigger the target messages when the event is received and condition passes. If the flag is not set and it's a singleplayer game the narrative will instead create an <code><a href="intervention.html#class:intervention">intervention</a></code> which will fire the target messages when it gets to trigger.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should start its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. If no start messages are specified, then the trigger will start its main listeners when it is started.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Event name to listen for.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Condition function to call when the event is received. The event context and narrative trigger objects are provided to the function as arguments. If no condition function is supplied then the condition always passes.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>8</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>Trigger the target message(s) immediately when the event is received and the optional condition is met.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 77</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:message"><h3 class="function_name"><strong><code>narrative_triggers.message(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">trigger message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Triggers a message when a different message is received for the specified faction. Instead of using this, it is encouraged to make the narrative entity triggering the incoming message to instead just trigger the target message as well/instead, making this intermediate narrative trigger redundant. However, there are circumstances which can make the creation of an intermediate trigger desirable.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative trigger should trigger. If multiple trigger messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 139</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:turn_start"><h3 class="function_name"><strong><code>narrative_triggers.turn_start(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">condition</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction starting turn</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">Immediate</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that attempts to trigger on start of turn for the specified faction. An optional condition function may also be supplied, which must be passed for the narrative trigger to fire its target events. If supplied, the condition function will be called when the faction starts its turn and will be passed the context of the <code>FactionTurnStart</code> event and the narrative trigger object as separate arguments. It must return a value that evaluates to <code>true</code> for the condition to pass. If no condition function is supplied then the condition always passes.<br />
+							If the immediate flag is set, or if it is a multiplayer game, then the narrative trigger will immediately trigger the target messages when the turn start event is received. If the flag is not set and it's a singleplayer game the narrative will instead create an <code><a href="intervention.html#class:intervention">intervention</a></code> which will fire the target messages when it gets to trigger.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should start its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. If no start messages are specified, then the trigger will start its main listeners when it is started.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Condition function which must be passed for the trigger to fire. This function will be passed the context object from the <code>FactionTurnStart</code> event and the narrative trigger as two separate arguments. It must return a value that evaluates to <code>true</code> for the condition to pass.</p>
+										<p>If no condition function is supplied here then the condition always passes.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Key of the faction whose turn start we should listen for. If <code><a href="lua.html#class:nil">nil</a></code> is supplied here then the key of the faction to which this narrative trigger applies is used.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>8</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>Trigger the target message(s) immediately when the event is received and the optional condition is met.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 222</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:dilemma_choice_made"><h3 class="function_name"><strong><code>narrative_triggers.dilemma_choice_made(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">dilemma key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">choice value</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that fires when a dilemma choice is made.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should start its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. If no start messages are specified, then the trigger will start its main listeners when it is started.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of dilemma to listen for, from the <code>dilemmas</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Integer choice value.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 292</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:turn_countdown"><h3 class="function_name"><strong><code>narrative_triggers.turn_countdown(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">turns</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">Immediate</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that listens for a message from another narrative object, and then waits a specified number of turns (for the specified faction) before sending one or more target messages.<br />
+							The target messages are always triggered immediately, with no intervention being created in singleplayer mode.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative trigger should start its turn countdown. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. This message/these messages will be associated with the specified target faction rather than the source faction.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Number of turns to wait.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>Trigger the target message(s) immediately when the event is received and the optional condition is met.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 388</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:faction_switch"><h3 class="function_name"><strong><code>narrative_triggers.faction_switch(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target faction key</i><code><strong><br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that listens for a start message from another narrative object associated with one faction, and then sends one or more target messages associated with another faction. This can be useful if a desired narrative sequence flows over the player changing faction.<br />
+							The target messages are always triggered immediately, with no intervention being created in singleplayer mode.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table. This should be the originator faction.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative trigger should initiate the faction switch process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target message or messages to trigger when this narrative trigger fires. These target message(s) will be associated with the target faction. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. This message/these messages will be associated with the specified target faction rather than the source faction.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the target faction, to which the outgoing target message(s) will be associated.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 483</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:growth_point_gained"><h3 class="function_name"><strong><code>narrative_triggers.growth_point_gained(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">upgrade available only</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">province key</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that fires when the specified faction has gained a growth point in a specified province, or any controlled territory if no province is specified.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should start its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. If no start messages are specified, then the trigger will start its main listeners when it is started.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>The narrative trigger should only fire when a growth point is earned in a player-controlled region and an upgrade of the main settlement chain is available.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Key of province in which the growth point must be earned. This can also be a <code><a href="lua.html#class:table">table</a></code> of string province keys. If left blank, then any growth point earned by the specified faction is counted.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 570</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:building_construction_issued"><h3 class="function_name"><strong><code>narrative_triggers.building_construction_issued(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that fires when the specified faction starts construction on a building. An optional condition function may be specified which is passed the context object supplied by the underlying <code>BuildingConstructionIssuedByPlayer</code> script event.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should start its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. If no start messages are specified, then the trigger will start its main listeners when it is started.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Condition function which, if supplied, must be passed in order for the trigger to fire. The condition function is passed the context object supplied by the underlying <code>BuildingConstructionIssuedByPlayer</code> script event as well as the narrative trigger object as separate arguments, and should return a value that evaluates to a <code><a href="lua.html#class:boolean">boolean</a></code>.</p>
+										<p>The condition function may also return a second <code><a href="lua.html#class:boolean">boolean</a></code> return value, which suppresses downstream output. This can be set if the condition function handles output itself.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 653</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:technology_building_construction_issued"><h3 class="function_name"><strong><code>narrative_triggers.technology_building_construction_issued(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that fires when the specified faction starts construction on a building that unlocks a technology. An additional optional condition function may be specified which is passed the context object supplied by the underlying <code>BuildingConstructionIssuedByPlayer</code> script event.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should start its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. If no start messages are specified, then the trigger will start its main listeners when it is started.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Condition function which, if supplied, must be passed in order for the trigger to fire. The condition function is passed the context object supplied by the underlying <code>BuildingConstructionIssuedByPlayer</code> script event as well as the narrative trigger object as separate arguments, and should return a value that evaluates to a <code><a href="lua.html#class:boolean">boolean</a></code>.</p>
+										<p>The condition function may also return a second <code><a href="lua.html#class:boolean">boolean</a></code> return value, which suppresses downstream output. This can be set if the condition function handles output itself.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 671</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:general_created"><h3 class="function_name"><strong><code>narrative_triggers.general_created(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that fires when a general/lord character is created for the specified faction. An optional condition function may also be specified which is passed the context object supplied by the underlying <code>CharacterCreated</code> script event.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should start its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. If no start messages are specified, then the trigger will start its main listeners when it is started.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Condition function which, if supplied, must be passed in order for the trigger to fire. The condition function is passed the context object supplied by the underlying <code>BuildingConstructionIssuedByPlayer</code> script event as well as the narrative trigger object as separate arguments, and should return a value that evaluates to a <code><a href="lua.html#class:boolean">boolean</a></code>.</p>
+										<p>The condition function may also return a second <code><a href="lua.html#class:boolean">boolean</a></code> return value, which suppresses downstream output. This can be set if the condition function handles output itself.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 795</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:agent_created"><h3 class="function_name"><strong><code>narrative_triggers.agent_created(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that fires when an agent/hero character is created for the specified faction. An optional condition function may also be specified which is passed the context object supplied by the underlying <code>CharacterCreated</code> script event.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should start its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. If no start messages are specified, then the trigger will start its main listeners when it is started.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Condition function which, if supplied, must be passed in order for the trigger to fire. The condition function is passed the context object supplied by the underlying <code>BuildingConstructionIssuedByPlayer</code> script event as well as the narrative trigger object as separate arguments, and should return a value that evaluates to a <code><a href="lua.html#class:boolean">boolean</a></code>.</p>
+										<p>The condition function may also return a second <code><a href="lua.html#class:boolean">boolean</a></code> return value, which suppresses downstream output. This can be set if the condition function handles output itself.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 813</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:hero_action_performed"><h3 class="function_name"><strong><code>narrative_triggers.hero_action_performed(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that fires when a hero character performs a successful action for the specified faction. An optional condition function may also be specified which is passed the context object supplied by the underlying <code>CharacterCharacterTargetAction</code> script event.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should start its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. If no start messages are specified, then the trigger will start its main listeners when it is started.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Condition function which, if supplied, must be passed in order for the trigger to fire. The condition function is passed the context object supplied by the underlying <code>BuildingConstructionIssuedByPlayer</code> script event as well as the narrative trigger object as separate arguments, and should return a value that evaluates to a <code><a href="lua.html#class:boolean">boolean</a></code>.</p>
+										<p>The condition function may also return a second <code><a href="lua.html#class:boolean">boolean</a></code> return value, which suppresses downstream output. This can be set if the condition function handles output itself.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 899</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:any_general_won_x_battles"><h3 class="function_name"><strong><code>narrative_triggers.any_general_won_x_battles(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">victories</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that fires when a lord in the specified faction has participated in a certain number of battle victories. An optional condition function may also be specified which is passed the context object supplied by the underlying <code>CharacterCompletedBattle</code> script event.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should start its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. If no start messages are specified, then the trigger will start its main listeners when it is started.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=1</i></p>
+										<p>Threshold number of victories.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Condition function which, if supplied, must be passed in order for the trigger to fire. The condition function is passed the context object supplied by the underlying <code>BuildingConstructionIssuedByPlayer</code> script event as well as the narrative trigger object as separate arguments, and should return a value that evaluates to a <code><a href="lua.html#class:boolean">boolean</a></code>.</p>
+										<p>The condition function may also return a second <code><a href="lua.html#class:boolean">boolean</a></code> return value, which suppresses downstream output. This can be set if the condition function handles output itself.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 988</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:any_hero_won_x_battles"><h3 class="function_name"><strong><code>narrative_triggers.any_hero_won_x_battles(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">victories</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that fires when a hero character in the specified faction has participated in a certain number of battle victories. An optional condition function may also be specified which is passed the context object supplied by the underlying <code>CharacterCompletedBattle</code> script event.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should start its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. If no start messages are specified, then the trigger will start its main listeners when it is started.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=1</i></p>
+										<p>Threshold number of victories.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Condition function which, if supplied, must be passed in order for the trigger to fire. The condition function is passed the context object supplied by the underlying <code>BuildingConstructionIssuedByPlayer</code> script event as well as the narrative trigger object as separate arguments, and should return a value that evaluates to a <code><a href="lua.html#class:boolean">boolean</a></code>.</p>
+										<p>The condition function may also return a second <code><a href="lua.html#class:boolean">boolean</a></code> return value, which suppresses downstream output. This can be set if the condition function handles output itself.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 1007</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:pooled_resource_gained"><h3 class="function_name"><strong><code>narrative_triggers.pooled_resource_gained(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">pooled resource key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">threshold value</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">less than</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that fires when the specified faction has an amount of a specified pooled resource equal to or greater than a specified threshold.<br />
+							An optional flag makes the narrative trigger instead fire when the pooled resource is less than or equal to the threshold.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should start its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. If no start messages are specified, then the trigger will start its main listeners when it is started.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the pooled resource to monitor, from the <code>pooled_resources</code> database table. this can also be a <code><a href="lua.html#class:table">table</a></code> of multiple pooled resource keys.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Threshold value that the pooled resoure must meet or exceed for subject faction for trigger to fire.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>8</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Trigger when the pooled resource is less than or equal to the threshold value, rather than greater than.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 1130</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:faction_pooled_resource_gained"><h3 class="function_name"><strong><code>narrative_triggers.faction_pooled_resource_gained(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">pooled resource faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">pooled resource key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">threshold value</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">less than</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that fires when the specified faction has an amount of a specified pooled resource equal to or greater than a specified threshold. This differs from <code><a href="#function:narrative_triggers:pooled_resource_gained">narrative_triggers.pooled_resource_gained</a></code> as it allows the faction which is being monitored to be different from the faction with which the triggered messages are associated with.<br />
+							An optional flag makes the narrative trigger instead fire when the pooled resource is less than or equal to the threshold.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction with which the triggered messages are associated with, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should start its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. If no start messages are specified, then the trigger will start its main listeners when it is started.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction whose pooled resources are being monitored, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the pooled resource to monitor, from the <code>pooled_resources</code> database table. this can also be a <code><a href="lua.html#class:table">table</a></code> of multiple pooled resource keys.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>8</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Threshold value that the pooled resoure must meet or exceed for subject faction for trigger to fire.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>9</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Trigger when the pooled resource is less than or equal to the threshold value, rather than greater than.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 1150</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:skulls_gained"><h3 class="function_name"><strong><code>narrative_triggers.skulls_gained(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">threshold value</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">less than</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that fires when the specified faction has an amount of the skulls pooled resource equal to or greater than a specified threshold.<br />
+							An optional flag makes the narrative trigger instead fire when the pooled resource is less than or equal to the threshold.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should start its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. If no start messages are specified, then the trigger will start its main listeners when it is started.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Threshold value that the pooled resoure must meet or exceed for subject faction for trigger to fire.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Trigger when the pooled resource is less than or equal to the threshold value, rather than greater than.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 1171</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:devotion_gained"><h3 class="function_name"><strong><code>narrative_triggers.devotion_gained(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">threshold value</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">less than</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that fires when the specified faction has an amount of the devotion pooled resource equal to or greater than a specified threshold.<br />
+							An optional flag makes the narrative trigger instead fire when the pooled resource is less than or equal to the threshold.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should start its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. If no start messages are specified, then the trigger will start its main listeners when it is started.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Threshold value that the pooled resoure must meet or exceed for subject faction for trigger to fire.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Trigger when the pooled resource is less than or equal to the threshold value, rather than greater than.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 1190</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:can_reach_faction"><h3 class="function_name"><strong><code>narrative_triggers.can_reach_faction(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">include armies</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that fires when the specified faction starts a turn and any of its military forces can reach any of the settlements of a specified target faction to attack this turn. An optional flag also includes the target faction's armies in this assessment.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should start its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. If no start messages are specified, then the trigger will start its main listeners when it is started.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the target faction, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Includes the target faction's roving armies in the can-reach check, as well as their settlements.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 1265</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:can_reach_settlement"><h3 class="function_name"><strong><code>narrative_triggers.can_reach_settlement(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target settlements</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">include agents</i><code><strong><br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that fires when the specified faction starts a turn and any of its military forces can reach any of the specified settlements to attack this turn. An optional flag also includes the subject faction's agents in this assessment, as well as military forces.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should start its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. If no start messages are specified, then the trigger will start its main listeners when it is started.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the region containing the target settlement, from the <code>campaign_map_regions</code> database table. If multiple target settlements are desired then a <code><a href="lua.html#class:table">table</a></code> containing multiple string keys may be supplied here.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>Include the source faction's agents/heroes in the can-reach assessment.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 1351</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:corruption_in_adjacent_region"><h3 class="function_name"><strong><code>narrative_triggers.corruption_in_adjacent_region(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">corruption type</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">threshold value</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">culture key</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that fires when the amount of corruption in any adjacent region to the specified faction reaches a specified threshold.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should start its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. If no start messages are specified, then the trigger will start its main listeners when it is started.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Corruption type, from the <code>pooled_resources</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Threshold value which the corruption must meet or exceed in an adjacent region for the trigger condition to be met.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>8</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Culture key of region owner to exclude. If an eligible region has a faction owner with this culture, the region will not be included.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 1445</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:foreign_slot_established"><h3 class="function_name"><strong><code>narrative_triggers.foreign_slot_established(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">should be allied</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that fires when the specified faction establishes a foreign slot. Whether the foreign slot should be allied to the region it's embedded in or not may optionally be specified.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should start its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. If no start messages are specified, then the trigger will start its main listeners when it is started.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Should the foreign slot be allied to the region its embedded in or not. If <code><a href="lua.html#class:nil">nil</a></code> (or no value) is supplied here then the trigger fires in either case.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 1511</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:ritual_performed"><h3 class="function_name"><strong><code>narrative_triggers.ritual_performed(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">ritual keys</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">ritual categories</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target faction keys</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that fires when the specified faction performs a ritual. One or more optional ritual keys, ritual categories and target faction keys may be specified which the ritual performed must satisfy. Where a list of ritual keys/ritual categories/target faction keys is given, the ritual performed must match one of those in the list to qualify.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should start its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. If no start messages are specified, then the trigger will start its main listeners when it is started.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Key(s) of ritual(s), from the <code>rituals</code> database table. This can be a <code><a href="lua.html#class:string">string</a></code> ritual key or a <code><a href="lua.html#class:table">table</a></code> of strings. If no ritual keys are specified then any rituals match.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Key(s) of ritual category/categories, from the <code>ritual_categories</code> database table. This can be a <code><a href="lua.html#class:string">string</a></code> category key or a <code><a href="lua.html#class:table">table</a></code> of strings. If no categories are specified then any rituals match.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>8</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Key(s) of any target factions, from the <code>factions</code> database table. This can be a <code><a href="lua.html#class:string">string</a></code> faction key or a <code><a href="lua.html#class:table">table</a></code> of strings. If no target factions are specified then any targets match.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 1648</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:character_action"><h3 class="function_name"><strong><code>narrative_triggers.character_action(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">ability key(s)</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target faction keys</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">char subtypes</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">must be success</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that fires when a character in the specified faction performs a character action (hero action). One or more optional action keys, performing character subtypes and/or target faction keys may be specified which the action performed must satisfy. It may also be specified whether the action must have succeeded to qualify.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should start its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. If no start messages are specified, then the trigger will start its main listeners when it is started.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Key(s) of character ability/abilities, from the <code>abilities</code> database table. This can be a <code><a href="lua.html#class:string">string</a></code> ability key or a <code><a href="lua.html#class:table">table</a></code> of strings. If no ability keys are specified then any abilities match.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Key(s) of any target factions, from the <code>factions</code> database table. This can be a <code><a href="lua.html#class:string">string</a></code> faction key or a <code><a href="lua.html#class:table">table</a></code> of strings. If no target factions are specified then any targets match.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>8</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Key(s) of character subtypes of the performing character, from the <code>agent_subtypes</code> database table. This can be a <code><a href="lua.html#class:string">string</a></code> subtype key or a <code><a href="lua.html#class:table">table</a></code> of strings. If no subtypes are specified then any performing characters match.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>9</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Specifies whether only successful character actions qualify.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 1794</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:technology_research_started"><h3 class="function_name"><strong><code>narrative_triggers.technology_research_started(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">technology key</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that fires when the specified faction starts researching a technology. A list of zero or more technology keys can be supplied which the technology must be in. Additionally, a condition function may be supplied which must be passed if the trigger is to fire.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should start its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. If no start messages are specified, then the trigger will start its main listeners when it is started.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Technology key, from the <code>technologies</code> database table, which the subject technology must match for the trigger to fire. A <code><a href="lua.html#class:table">table</a></code> of <code><a href="lua.html#class:string">string</a></code> technology keys may be supplied here, in which case the trigger will fire if the subject technology is in the list. Additionally, <code><a href="lua.html#class:nil">nil</a></code> may be specified, in which case any technology matches.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>An additional condition function which, if supplied, must be passed for the trigger to fire. The condition function will be passed the context object from the <code>ResearchStarted</code> event and the narrative trigger as two separate arguments, and should return <code>true</code> if the trigger is allowed to fire.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 1889</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:technology_research_completed"><h3 class="function_name"><strong><code>narrative_triggers.technology_research_completed(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">technology key</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that fires when the specified faction completes the research of a technology. A list of zero or more technology keys can be supplied which the technology must be in. Additionally, a condition function may be supplied which must be passed if the trigger is to fire.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should start its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. If no start messages are specified, then the trigger will start its main listeners when it is started.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Technology key, from the <code>technologies</code> database table, which the subject technology must match for the trigger to fire. A <code><a href="lua.html#class:table">table</a></code> of <code><a href="lua.html#class:string">string</a></code> technology keys may be supplied here, in which case the trigger will fire if the subject technology is in the list. Additionally, <code><a href="lua.html#class:nil">nil</a></code> may be specified, in which case any technology matches.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>An additional condition function which, if supplied, must be passed for the trigger to fire. The condition function will be passed the context object from the <code>ResearchCompleted</code> event and the narrative trigger as two separate arguments, and should return <code>true</code> if the trigger is allowed to fire.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 1907</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:net_income"><h3 class="function_name"><strong><code>narrative_triggers.net_income(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">threshold</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">trigger when lower</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that fires when the specified faction starts a turn with a net income greater than or equal to, or less than or equal to, a specified value.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should start its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. If no start messages are specified, then the trigger will start its main listeners when it is started.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Net income threshold.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>If set to <code>true</code>, the narrative trigger fires when the net income is less than or equal to the specified threshold instead of greater than or equal to.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 1976</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:controls_provinces"><h3 class="function_name"><strong><code>narrative_triggers.controls_provinces(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">threshold</i><code><strong><br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that fires when the number of provinces the specified faction fully controls is greater than or equal to the supplied threshold.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should start its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. If no start messages are specified, then the trigger will start its main listeners when it is started.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Provinces threshold.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 2047</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_triggers:highest_level_settlement"><h3 class="function_name"><strong><code>narrative_triggers.highest_level_settlement(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">start message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cancel message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">threshold</i><code><strong><br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and starts a narrative trigger that fires when the specified faction controls a settlement or camp where the level of the main settlement building is greater than or equal to a specified value.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative triggers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative trigger applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should start its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead. If no start messages are specified, then the trigger will start its main listeners when it is started.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target messages to trigger when this narrative trigger fires. If multiple target messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message on which this narrative trigger should cancel its main listening process. If multiple messages are required then a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Settlement building level threshold.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_trigger_templates.lua, line 2124</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:58</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "campaign"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

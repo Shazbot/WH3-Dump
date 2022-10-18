@@ -1,0 +1,1164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Script AI Planner script class</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#e2edff" id="main">
+
+			<div style="background-color:#e2edff" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Battle Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#c1e6ff">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search battle only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#c1e6ff">Game Areas</h2>
+				<ul>
+					<li><a href="../campaign/campaign_index.html">Campaign Index</a></li>
+					<li><strong> > Battle Index</strong></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:script_ai_planner">Script AI Planner</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:script_ai_planner:Creation">Creation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:script_ai_planner:new">new</a></li>
+						<li>&emsp;&emsp;<a href="#section:script_ai_planner:Debug mode">Debug mode</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:script_ai_planner:set_debug">set_debug</a></li>
+						<li>&emsp;&emsp;<a href="#section:script_ai_planner:Adding and removing Scriptunits">Adding and removing Scriptunits</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:script_ai_planner:add_sunits">add_sunits</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:script_ai_planner:remove_sunits">remove_sunits</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:script_ai_planner:count">count</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:script_ai_planner:release">release</a></li>
+						<li>&emsp;&emsp;<a href="#section:script_ai_planner:Tests">Tests</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:script_ai_planner:any_controlled_sunit_standing">any_controlled_sunit_standing</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:script_ai_planner:get_centre_point">get_centre_point</a></li>
+						<li>&emsp;&emsp;<a href="#section:script_ai_planner:Moving">Moving</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:script_ai_planner:move_to_position">move_to_position</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:script_ai_planner:move_to_position_of_sunit">move_to_position_of_sunit</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:script_ai_planner:move_to_force">move_to_force</a></li>
+						<li>&emsp;&emsp;<a href="#section:script_ai_planner:Defending">Defending</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:script_ai_planner:defend_position">defend_position</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:script_ai_planner:defend_position_of_sunit">defend_position_of_sunit</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:script_ai_planner:defend_force">defend_force</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:script_ai_planner:set_should_reorder">set_should_reorder</a></li>
+						<li>&emsp;&emsp;<a href="#section:script_ai_planner:Attacking">Attacking</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:script_ai_planner:attack_unit">attack_unit</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:script_ai_planner:rush_unit">rush_unit</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:script_ai_planner:attack_force">attack_force</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:script_ai_planner:rush_force">rush_force</a></li>
+						<li>&emsp;&emsp;<a href="#section:script_ai_planner:Merging">Merging</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:script_ai_planner:merge_into">merge_into</a></li>
+						<li>&emsp;&emsp;<a href="#section:script_ai_planner:Patrolling">Patrolling</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:script_ai_planner:patrol">patrol</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:script_ai_planner:set_patrol_defend_radius">set_patrol_defend_radius</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:script_ai_planner:set_patrol_enemy_distance">set_patrol_enemy_distance</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:script_ai_planner:set_patrol_waypoint_distance">set_patrol_waypoint_distance</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:script_ai_planner:set_perform_patrol_prox_test">set_perform_patrol_prox_test</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#e2edff" id="navigation_right">				<h2 style="background-color:#c1e6ff">Battle Topics</h2>
+				<ul>
+					<li><a href="battle_index.html">Battle Index</a></li>
+					<li><a href="battle_hierarchy.html">Battle Hierarchy</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="battle.html">Battle</a></li>
+					<li><a href="battle_alliances.html">Alliances</a></li>
+					<li><a href="battle_alliance.html">Alliance</a></li>
+					<li><a href="battle_armies.html">Armies</a></li>
+					<li><a href="battle_army.html">Army</a></li>
+					<li><a href="battle_units.html">Units</a></li>
+					<li><a href="battle_unit.html">Unit</a></li>
+					<li><a href="battle_unitcontroller.html">Unitcontroller</a></li>
+					<li><a href="ai_planner.html">AI Planners</a></li>
+					<li><a href="battle_assault_equipment.html">Assault Equipment</a></li>
+					<li><a href="battle_building.html">Building</a></li>
+					<li><a href="battle_buildings.html">Buildings</a></li>
+					<li><a href="battle_camera.html">Camera</a></li>
+					<li><a href="battle_capture_location.html">Capture Location</a></li>
+					<li><a href="battle_composite_scenes_system.html">Composite Scenes System</a></li>
+					<li><a href="battle_debug_drawing.html">Debug Drawing</a></li>
+					<li><a href="battle_reinforcements.html">reinforcements Reinforcements</a></li>
+					<li><a href="battle_sound_effect.html">Sound Effects</a></li>
+					<li><a href="battle_subtitles.html">Subtitles</a></li>
+					<li><a href="battle_toggle_system.html">Toggle System</a></li>
+					<li><a href="battle_vector.html">Vector</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Script Interfaces</h2>
+				<ul>
+					<li><a href="battle_manager.html">Battle Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="advice_manager.html">Advice Manager</a></li>
+					<li><a href="battle_ui_manager.html">Battle UI Manager</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="cutscene.html">Battle Cutscenes</a></li>
+					<li><a href="generated_battle.html">Generated Battle</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><strong> > Script AI Planner</strong></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="script_unit.html">Script Unit</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Data Interfaces</h2>
+				<ul>
+					<li><a href="st_helper.html">Scripted Tour Helpers</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:script_ai_planner"><h1 class="content_header">Script AI Planner</h1></a>
+				<p>The underlying battle scripting system provides support for the creation of ai planners, which are groups of units that are given high-level orders (e.g. defend this position/attack that unit) and left to carry it out in a semi-autonomous fashion. This functionality has also been exposed to the player in the past, allowing them to farm off control of their own units to the AI.</p>
+				<p>The script ai planner is a wrapper interface for this system. It allows a scripted ai group to be created, units to be added to it, and for that group to be given high-level orders, many of which are script-level constructs (e.g. multiple "move-to-position" commands being daisychained into a "patrol" command).</p>
+				<p>As the units in the script ai planner carry out their orders they do so under AI control, so they may decide to respond to live threats and opportunities.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:script_ai_planner:Creation"><h2 class="section_header">Creation</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:script_ai_planner:new"><h3 class="function_name"><strong><code>script_ai_planner:new(string </strong></code><i class="parameter">name</i><code><strong>, object </strong></code><i class="parameter">units</i><code><strong>, [boolean </strong></code><i class="parameter">debug mode</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a script_ai_planner object. A script ai planner must be given a string name and at least one unit in either a <code><a href="script_unit.html#class:script_units">script_units</a></code>, <code><a href="script_unit.html#class:script_unit">script_unit</a></code> or table argument. This unit/these units will be placed under the control of the script_ai_planner being created.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Name for script ai planner.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>object</code></p>
+									</td>
+									<td>
+										<p>Unit(s) to be controlled by the script ai planner. Supported types are <code><a href="script_unit.html#class:script_unit">script_unit</a></code>, <code><a href="script_unit.html#class:script_units">script_units</a></code>, or a numerically-index table of script units. Units may be added or removed at a later time.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Activate debug mode, for more output.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>script_ai_planner</code> </li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_script_ai_planner.lua, line 79</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:script_ai_planner:Debug mode"><h2 class="section_header">Debug mode</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:script_ai_planner:set_debug"><h3 class="function_name"><strong><code>script_ai_planner:set_debug(boolean </strong></code><i class="parameter">debug mode</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets debug mode on this script_ai_planner.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>debug mode</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_script_ai_planner.lua, line 148</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:script_ai_planner:Adding and removing Scriptunits"><h2 class="section_header">Adding and removing Scriptunits</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:script_ai_planner:add_sunits"><h3 class="function_name"><strong><code>script_ai_planner:add_sunits(object </strong></code><i class="parameter">scriptunits to add</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds one or more <code><a href="script_unit.html#class:script_unit">script_unit</a></code> objects to the script_ai_planner. Each <code><a href="script_unit.html#class:script_unit">script_unit</a></code> added must be in the same alliance as those already in the script_ai_planner.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>object</code></p>
+									</td>
+									<td>
+										<p>Scriptunits to add. Supported argument types are a single <code><a href="script_unit.html#class:script_unit">script_unit</a></code>, <code><a href="script_unit.html#class:script_units">script_units</a></code> or a table of <code><a href="script_unit.html#class:script_unit">script_unit</a></code> objects.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_script_ai_planner.lua, line 174</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:script_ai_planner:remove_sunits"><h3 class="function_name"><strong><code>script_ai_planner:remove_sunits(object </strong></code><i class="parameter">scriptunits to remove</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Removes one or more <code><a href="script_unit.html#class:script_unit">script_unit</a></code> objects from the script_ai_planner.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>object</code></p>
+									</td>
+									<td>
+										<p>Scriptunits to remove. Supported argument types are a single <code><a href="script_unit.html#class:script_unit">script_unit</a></code>, <code><a href="script_unit.html#class:script_units">script_units</a></code> or a table of <code><a href="script_unit.html#class:script_unit">script_unit</a></code> objects.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_script_ai_planner.lua, line 273</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:script_ai_planner:count"><h3 class="function_name"><strong><code>script_ai_planner:count()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the number of units currently belonging to this ai planner
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>number</code> count</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_script_ai_planner.lua, line 354</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:script_ai_planner:release"><h3 class="function_name"><strong><code>script_ai_planner:release()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Removes all units and releases control of them to the ai/player.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_script_ai_planner.lua, line 363</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:script_ai_planner:Tests"><h2 class="section_header">Tests</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:script_ai_planner:any_controlled_sunit_standing"><h3 class="function_name"><strong><code>script_ai_planner:any_controlled_sunit_standing()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns true if any controlled unit is still alive/not-routed, false otherwise.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> any standing</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_script_ai_planner.lua, line 393</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:script_ai_planner:get_centre_point"><h3 class="function_name"><strong><code>script_ai_planner:get_centre_point()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a vector position of the mean centre of all units this script_ai_planner controls.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>vector</code> centre position</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_script_ai_planner.lua, line 408</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:script_ai_planner:Moving"><h2 class="section_header">Moving</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:script_ai_planner:move_to_position"><h3 class="function_name"><strong><code>script_ai_planner:move_to_position(vector </strong></code><i class="parameter">position</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the script_ai_planner to move its units to a position. This will supercede any previously-issued order.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>vector</code></p>
+									</td>
+									<td>
+										<p>position</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_script_ai_planner.lua, line 481</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:script_ai_planner:move_to_position_of_sunit"><h3 class="function_name"><strong><code>script_ai_planner:move_to_position_of_sunit(script_unit </strong></code><i class="parameter">target sunit</i><code><strong>, function </strong></code><i class="parameter">rout callback</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the script_ai_planner to move its units to the position of a supplied <code><a href="script_unit.html#class:script_unit">script_unit</a></code>, tracking the target as it moves. The supplied script_unit may be allied with or enemies of the units controlled by this script_ai_planner.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>script_unit</code></p>
+									</td>
+									<td>
+										<p>Target <code><a href="script_unit.html#class:script_unit">script_unit</a></code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p>Function callback to call if the target <code><a href="script_unit.html#class:script_unit">script_unit</a></code> routs or dies, or if the target unit's position is reached.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_script_ai_planner.lua, line 535</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:script_ai_planner:move_to_force"><h3 class="function_name"><strong><code>script_ai_planner:move_to_force(object </strong></code><i class="parameter">target force</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the script_ai_planner to move its units to the position of a supplied force, tracking the target as it moves. The supplied force may be allied with or enemies of the units controlled by this script_ai_planner.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>object</code></p>
+									</td>
+									<td>
+										<p>Target force. May be a <code><a href="script_unit.html#class:script_units">script_units</a></code> collection or a table of <code><a href="script_unit.html#class:script_unit">script_unit</a></code> objects.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_script_ai_planner.lua, line 612</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:script_ai_planner:Defending"><h2 class="section_header">Defending</h2></a>
+				</div>
+				<p>A script_ai_planner may be instructed to defend a position, much as it can be instructed to move. Defend orders result in different formation postures being adopted and may result in the order being carried out with a different sense of urgency, compared to move orders.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:script_ai_planner:defend_position"><h3 class="function_name"><strong><code>script_ai_planner:defend_position(vector </strong></code><i class="parameter">position to defend</i><code><strong>, radius </strong></code><i class="parameter">radius in m</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the script_ai_planner to defend a position on the battlefield. Alongside a vector position a radius must be supplied, which sets how tightly bound to the position the controlled units are.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>vector</code></p>
+									</td>
+									<td>
+										<p>position to defend</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>radius</code></p>
+									</td>
+									<td>
+										<p>radius in m</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_script_ai_planner.lua, line 751</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:script_ai_planner:defend_position_of_sunit"><h3 class="function_name"><strong><code>script_ai_planner:defend_position_of_sunit(script_unit </strong></code><i class="parameter">sunit</i><code><strong>, radius </strong></code><i class="parameter">radius</i><code><strong>, function </strong></code><i class="parameter">callback</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the script_ai_planner to defend the position of a target <code><a href="script_unit.html#class:script_unit">script_unit</a></code>, tracking this target as it moves. Alongside a target <code><a href="script_unit.html#class:script_unit">script_unit</a></code> a radius must be supplied, which sets how tightly bound to the position the controlled units are.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>script_unit</code></p>
+									</td>
+									<td>
+										<p>Scriptunit to defend.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>radius</code></p>
+									</td>
+									<td>
+										<p>Radius in m.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p>Function to call if position of target <code><a href="script_unit.html#class:script_unit">script_unit</a></code> is reached, or if it routs or dies.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_script_ai_planner.lua, line 814</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:script_ai_planner:defend_force"><h3 class="function_name"><strong><code>script_ai_planner:defend_force(script_unit </strong></code><i class="parameter">sunit</i><code><strong>, radius </strong></code><i class="parameter">radius</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the script_ai_planner to defend the position of a target military force, tracking this target as it moves. Alongside a target <code><a href="script_unit.html#class:script_unit">script_unit</a></code> a radius must be supplied, which sets how tightly bound to the computed position the controlled units are.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>script_unit</code></p>
+									</td>
+									<td>
+										<p>Scriptunit to defend.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>radius</code></p>
+									</td>
+									<td>
+										<p>Radius in m.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_script_ai_planner.lua, line 892</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:script_ai_planner:set_should_reorder"><h3 class="function_name"><strong><code>script_ai_planner:set_should_reorder([boolean </strong></code><i class="parameter">should reorder</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the script_ai_planner to reissue defend and movement orders every 30 seconds. By default, this behaviour is enabled. Supply <code>false</code> as a single argument to disable it.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>should reorder</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_script_ai_planner.lua, line 906</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:script_ai_planner:Attacking"><h2 class="section_header">Attacking</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:script_ai_planner:attack_unit"><h3 class="function_name"><strong><code>script_ai_planner:attack_unit(unit </strong></code><i class="parameter">target unit</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the script_ai_planner to attack a target unit. The target unit must be an enemy of those controlled by the script_ai_planner.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>unit</code></p>
+									</td>
+									<td>
+										<p>target unit</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_script_ai_planner.lua, line 930</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:script_ai_planner:rush_unit"><h3 class="function_name"><strong><code>script_ai_planner:rush_unit(unit </strong></code><i class="parameter">target unit</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the script_ai_planner to rush a target unit. The target unit must be an enemy of those controlled by the script_ai_planner.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>unit</code></p>
+									</td>
+									<td>
+										<p>target unit</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_script_ai_planner.lua, line 958</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:script_ai_planner:attack_force"><h3 class="function_name"><strong><code>script_ai_planner:attack_force(object </strong></code><i class="parameter">enemy force</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the script_ai_planner to attack a target force. The target force is supplied as a <code><a href="script_unit.html#class:script_units">script_units</a></code> collection, or as a table of <code><a href="script_unit.html#class:script_unit">script_unit</a></code> objects. Each of these must be an enemy of the units controlled by the script_ai_planner.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>object</code></p>
+									</td>
+									<td>
+										<p>Enemy force. Must be a <code><a href="script_unit.html#class:script_units">script_units</a></code> collection or a table of <code><a href="script_unit.html#class:script_unit">script_unit</a></code> objects.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_script_ai_planner.lua, line 985</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:script_ai_planner:rush_force"><h3 class="function_name"><strong><code>script_ai_planner:rush_force(object </strong></code><i class="parameter">enemy force</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the script_ai_planner to rush a target force. The target force is supplied as a <code><a href="script_unit.html#class:script_units">script_units</a></code> collection, or as a table of <code><a href="script_unit.html#class:script_unit">script_unit</a></code> objects. Each of these must be an enemy of the units controlled by the script_ai_planner.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>object</code></p>
+									</td>
+									<td>
+										<p>Enemy force. Must be a <code><a href="script_unit.html#class:script_units">script_units</a></code> collection or a table of <code><a href="script_unit.html#class:script_unit">script_unit</a></code> objects.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_script_ai_planner.lua, line 997</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:script_ai_planner:Merging"><h2 class="section_header">Merging</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:script_ai_planner:merge_into"><h3 class="function_name"><strong><code>script_ai_planner:merge_into(script_ai_planner </strong></code><i class="parameter">target ai planner</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the script_ai_planner to merge into another. This script_ai_planner instructs its units to move towards those controlled by the target planner, and when it gets close it removes units from itself and gives them to the target planner. The threshold distance is 120m.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>script_ai_planner</code></p>
+									</td>
+									<td>
+										<p>target ai planner</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_script_ai_planner.lua, line 1153</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:script_ai_planner:Patrolling"><h2 class="section_header">Patrolling</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:script_ai_planner:patrol"><h3 class="function_name"><strong><code>script_ai_planner:patrol(table </strong></code><i class="parameter">waypoint list</i><code><strong>, object </strong></code><i class="parameter">enemy force</i><code><strong>, [function </strong></code><i class="parameter">completion callback</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the script_ai_planner to send its units on a patrol path along a series of waypoint positions. The units will move from point to point along the path, and move to engage any of the specified enemy units they find along the path. Should the enemy units retreat far enough from the path then the subject units will resume their patrol.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>table</code></p>
+									</td>
+									<td>
+										<p>Numerically-indexed table of vector waypoint positions.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>object</code></p>
+									</td>
+									<td>
+										<p>Enemy force to engage. This can be a <code><a href="script_unit.html#class:script_units">script_units</a></code> object or a table of <code><a href="script_unit.html#class:script_unit">script_unit</a></code> objects.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Function to call when the patrol is completed.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_script_ai_planner.lua, line 1244</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:script_ai_planner:set_patrol_defend_radius"><h3 class="function_name"><strong><code>script_ai_planner:set_patrol_defend_radius(number </strong></code><i class="parameter">radius in m</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the radius at which a script_ai_planner patrol will defend each waypoint along its patrol path. This influences how tightly bound the script ai planner arranges its defensive position at each destination, which is likely to influence how it moves. The default value is 100m.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>radius in m</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_script_ai_planner.lua, line 1340</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:script_ai_planner:set_patrol_enemy_distance"><h3 class="function_name"><strong><code>script_ai_planner:set_patrol_enemy_distance(number </strong></code><i class="parameter">radius in m</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the distance at which a patrol will intercept an enemy it finds on its path. The distance will be the closest distance in m between any two units in the opposing forces. Set a higher number here to make the script_ai_planner more prone to intercept enemies at a greater distance. Note that this is the distance at which the script will instruct the script_ai_planner to intercept the enemy - the AI may have already responded of its own volition. The default value is 100m.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>radius in m</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_script_ai_planner.lua, line 1353</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:script_ai_planner:set_patrol_waypoint_distance"><h3 class="function_name"><strong><code>script_ai_planner:set_patrol_waypoint_distance(number </strong></code><i class="parameter">radius in m</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the distance between the controlled units and a patrol waypoint at the patrol will considered to have arrived at the waypoint. Set a lower number here to bind the patrol more tightly to its waypoints. The default value is 75.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>radius in m</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_script_ai_planner.lua, line 1367</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:script_ai_planner:set_perform_patrol_prox_test"><h3 class="function_name"><strong><code>script_ai_planner:set_perform_patrol_prox_test([boolean </strong></code><i class="parameter">perform proximity test</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the script_ai_planner whether to perform its enemy proximity test when on a patrol. Be default it does, and it is this that causes the script_ai_planner to engage enemies. Disable the proximity test by supplying <code>false</code> as an argument to this function.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>perform proximity test</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_script_ai_planner.lua, line 1380</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:58</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "battle"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

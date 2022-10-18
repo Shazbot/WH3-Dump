@@ -1,0 +1,644 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Random Army Manager script class</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#fff7cc" id="main">
+
+			<div style="background-color:#fff7cc" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Campaign Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#ffed8c">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search campaign only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#ffed8c">Game Areas</h2>
+				<ul>
+					<li><strong> > Campaign Index</strong></li>
+					<li><a href="../battle/battle_index.html">Battle Index</a></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#ffed8c">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:random_army_manager">Random Army Manager</a><img alt="Loaded in Campaign" style="float:right; margin-right:1em;" src="../images/loaded_in_campaign.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:random_army_manager:Random Army Manager Functions">Random Army Manager Functions</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:random_army_manager:new_force">new_force</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:random_army_manager:clone_force">clone_force</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:random_army_manager:combine_forces">combine_forces</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:random_army_manager:add_unit">add_unit</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:random_army_manager:add_mandatory_unit">add_mandatory_unit</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:random_army_manager:set_faction">set_faction</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:random_army_manager:generate_force">generate_force</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:random_army_manager:remove_force">remove_force</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:random_army_manager:mandatory_unit_count">mandatory_unit_count</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:random_army_manager:get_force_by_key">get_force_by_key</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#fff7cc" id="navigation_right">				<h2 style="background-color:#ffed8c">Campaign Topics</h2>
+				<ul>
+					<li><a href="campaign_index.html">Campaign Index</a></li>
+					<li><a href="campaign_script_structure.html">Campaign Script Structure</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="narrative_system.html">Narrative System</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="campaignui.html">CampaignUI</a></li>
+					<li><a href="cinematics.html">Cinematics</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="episodic_scripting.html">Episodic Scripting</a></li>
+					<li><a href="model_hierarchy.html">Model Hierarchy</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Script Interfaces</h2>
+				<ul>
+					<li><a href="campaign_manager.html">Campaign Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="campaign_cutscene.html">Campaign Cutscenes</a></li>
+					<li><a href="campaign_ui_manager.html">Campaign UI Manager</a></li>
+					<li><a href="chapter_mission.html">Chapter Missions</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="intervention.html">Interventions</a></li>
+					<li><a href="invasion_manager.html">Invasion Manager</a></li>
+					<li><a href="mission_manager.html">Mission Managers</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="narrative_event.html">Narrative Events</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="payload.html">Payload String Constructor</a></li>
+					<li><strong> > Random Army Manager</strong></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="unique_table.html">Unique Table</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Data Interfaces</h2>
+				<ul>
+					<li><a href="custom_starts.html">Campaign Custom Starts</a></li>
+					<li><a href="faction_intro.html">Faction Intro</a></li>
+					<li><a href="narrative.html">Narrative</a></li>
+					<li><a href="narrative_events.html">Narrative Event Templates</a></li>
+					<li><a href="narrative_queries.html">Narrative Query Templates</a></li>
+					<li><a href="narrative_triggers.html">Narrative Trigger Templates</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:random_army_manager"><h1 class="content_header">Random Army Manager</h1></a>
+				<p>Used to create and manage multiple random or semi-random army templates that can be generated at any time throughout the campaign.</p>
+				<p>Example Usage:</p>
+				<p>1) Create an army template</p>
+				<p><code>random_army_manager:new_force("my_template");</code></p>
+				<p>2) Add 4 units to this army that will always be used when generating this template</p>
+				<p><code>random_army_manager:add_mandatory_unit("my_template", "unit_key1", 4);</code></p>
+				<p>3) Add units to the template that can be randomly generated, with their weighting (that is their chance of being picked, this is not how many will be picked)</p>
+				<p><code>random_army_manager:add_unit("my_template", "unit_key1", 1);</code></p>
+				<p><code>random_army_manager:add_unit("my_template", "unit_key2", 1);</code></p>
+				<p><code>random_army_manager:add_unit("my_template", "unit_key3", 2);</code></p>
+				<p>4) Generate a random army of 6 units from this template</p>
+				<p><code>local force = ram:generate_force("my_template", 6, false);</code></p>
+				<p><code>Output: "unit_key1,unit_key1,unit_key1,unit_key1,unit_key2,unit_key3"</code></p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:random_army_manager:Random Army Manager Functions"><h2 class="section_header">Random Army Manager Functions</h2></a>
+				</div>
+				<p>Functions relating to the Manager and its control over the various defined forces</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:random_army_manager:new_force"><h3 class="function_name"><strong><code>random_army_manager:new_force(string </strong></code><i class="parameter">force key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a new force to the random army manager
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>a unique key for this new force</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> Returns true if the force was created successfully</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_random_army.lua, line 44</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:random_army_manager:clone_force"><h3 class="function_name"><strong><code>random_army_manager:clone_force(string </strong></code><i class="parameter">old force key</i><code><strong>, string </strong></code><i class="parameter">new force key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Clones an existing force to the random army manager
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>the key of the force to be cloned</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>a unique key for this new force</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> Returns true if the force was cloned successfully</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_random_army.lua, line 77</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:random_army_manager:combine_forces"><h3 class="function_name"><strong><code>random_army_manager:combine_forces(string </strong></code><i class="parameter">new force key</i><code><strong>, ... </strong></code><i class="parameter">old force keys</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Combines existing forces to the random army manager. If all specified forces have the same faction, then that faction is given to the new force. Otherwise, the faction of the new force is left blank.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>a unique key for this new force</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>...</code></p>
+									</td>
+									<td>
+										<p>One or more existing force keys</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> Returns true if the forces were combined successfully</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_random_army.lua, line 97</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:random_army_manager:add_unit"><h3 class="function_name"><strong><code>random_army_manager:add_unit(string </strong></code><i class="parameter">key of the force</i><code><strong>, string </strong></code><i class="parameter">key of the unit</i><code><strong>, number </strong></code><i class="parameter">weight value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a unit to a force, making it available for random selection if this force is generated. The weight value is an arbitrary figure that should be relative to other units in the force
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>key of the force</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>key of the unit</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>weight value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_random_army.lua, line 145</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:random_army_manager:add_mandatory_unit"><h3 class="function_name"><strong><code>random_army_manager:add_mandatory_unit(<br />&emsp;&emsp;string </strong></code><i class="parameter">key of the force</i><code><strong>, <br />&emsp;&emsp;string </strong></code><i class="parameter">key of the unit</i><code><strong>, <br />&emsp;&emsp;number </strong></code><i class="parameter">amount of these units</i><code><strong><br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a mandatory unit to a force composition, making it so that if this force is generated this unit will always be part of it
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>key of the force</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>key of the unit</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>amount of these units</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_random_army.lua, line 166</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:random_army_manager:set_faction"><h3 class="function_name"><strong><code>random_army_manager:set_faction(string </strong></code><i class="parameter">key of the force</i><code><strong>, string </strong></code><i class="parameter">key of the faction</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the faction key associated with this force - Allows you to store the faction key used to spawn the army from the force
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>key of the force</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>key of the faction</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_random_army.lua, line 187</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:random_army_manager:generate_force"><h3 class="function_name"><strong><code>random_army_manager:generate_force(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">Key of the force.</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">Number of units to spawn</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">Return as table</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							This generates a force randomly, first taking into account the mandatory unit and then making random selection of units based on weighting. Returns an array of unit keys or a comma separated string for use in the create_force function if the last boolean value is passed as true
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the force.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>If you have no non-mandatory units specified, this must equal the sum of all mandatory units (since no optional units are available for generating additional units). If unspecified, only the sum of your mandatory units will be spawned.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Pass <code>true</code> to return the force as a table, <code>false</code> to get a comma separated string.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>object</code> Either a table containing the unit keys, or a comma separated string of units</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_random_army.lua, line 202</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:random_army_manager:remove_force"><h3 class="function_name"><strong><code>random_army_manager:remove_force(string </strong></code><i class="parameter">key of the force</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Remove an existing force from the force list
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>key of the force</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_random_army.lua, line 249</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:random_army_manager:mandatory_unit_count"><h3 class="function_name"><strong><code>random_army_manager:mandatory_unit_count(string </strong></code><i class="parameter">key of the force</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the amount of mandatory units specified in this force
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>key of the force</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_random_army.lua, line 263</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:random_army_manager:get_force_by_key"><h3 class="function_name"><strong><code>random_army_manager:get_force_by_key(string </strong></code><i class="parameter">key of the force</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the force of the specified key, false if it's not found
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>key of the force</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>table</code> Returns the force</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_random_army.lua, line 275</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:57</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "campaign"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

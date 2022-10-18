@@ -1,0 +1,2600 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Text Pointers script class</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#fff7cc" id="main">
+
+			<div style="background-color:#fff7cc" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Campaign Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#ffed8c">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search campaign only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#ffed8c">Game Areas</h2>
+				<ul>
+					<li><strong> > Campaign Index</strong></li>
+					<li><a href="../battle/battle_index.html">Battle Index</a></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#ffed8c">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:text_pointer">Text Pointers</a><img alt="Loaded in Campaign" style="float:right; margin-right:1em;" src="../images/loaded_in_campaign.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:text_pointer:Creation">Creation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:new">new</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:new_from_component">new_from_component</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:new_from_position_offset_to_text_pointer">new_from_position_offset_to_text_pointer</a></li>
+						<li>&emsp;&emsp;<a href="#section:text_pointer:Usage">Usage</a></li>
+						<li>&emsp;&emsp;<a href="#section:text_pointer:Layout Configuration">Layout Configuration</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_layout_path">set_layout_path</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_layout">set_layout</a></li>
+						<li>&emsp;&emsp;<a href="#section:text_pointer:Display Dimensions and Position">Display Dimensions and Position</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:get_text_label">get_text_label</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_pointer_width">set_pointer_width</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_panel_width">set_panel_width</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_panel_width_to_screen">set_panel_width_to_screen</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_worldspace_display_height">set_worldspace_display_height</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_label_offset">set_label_offset</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_show_pointer_end_without_line">set_show_pointer_end_without_line</a></li>
+						<li>&emsp;&emsp;<a href="#section:text_pointer:Component Priority and Topmost">Component Priority and Topmost</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_priority">set_priority</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_topmost">set_topmost</a></li>
+						<li>&emsp;&emsp;<a href="#section:text_pointer:Pulse Highlighting">Pulse Highlighting</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_should_pulse">set_should_pulse</a></li>
+						<li>&emsp;&emsp;<a href="#section:text_pointer:Streaming">Streaming</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_stream_by_char">set_stream_by_char</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_stream_duration">set_stream_duration</a></li>
+						<li>&emsp;&emsp;<a href="#section:text_pointer:Show and Hide Animations">Show and Hide Animations</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_panel_show_animation">set_panel_show_animation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_panel_hide_animation">set_panel_hide_animation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_text_show_animation">set_text_show_animation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_text_hide_animation">set_text_hide_animation</a></li>
+						<li>&emsp;&emsp;<a href="#section:text_pointer:State Overrides">State Overrides</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_panel_state_override">set_panel_state_override</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_text_state_override">set_text_state_override</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_line_end_state_override">set_line_end_state_override</a></li>
+						<li>&emsp;&emsp;<a href="#section:text_pointer:Close Button">Close Button</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_show_close_button">set_show_close_button</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_hide_on_close_button_clicked">set_hide_on_close_button_clicked</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_close_button_callback">set_close_button_callback</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:add_hide_callback">add_hide_callback</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_close_button_component">set_close_button_component</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_highlight_close_button">set_highlight_close_button</a></li>
+						<li>&emsp;&emsp;<a href="#section:text_pointer:Subtitle Mode">Subtitle Mode</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_position_as_subtitle">set_position_as_subtitle</a></li>
+						<li>&emsp;&emsp;<a href="#section:text_pointer:Setting Component Text">Setting Component Text</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:add_component_text">add_component_text</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:add_show_callback">add_show_callback</a></li>
+						<li>&emsp;&emsp;<a href="#section:text_pointer:Showing and Hiding">Showing and Hiding</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:show">show</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:hide">hide</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:is_showing">is_showing</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:has_ever_been_shown">has_ever_been_shown</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:ignore_hide_all_text_pointers">ignore_hide_all_text_pointers</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:do_not_release_escape_key">do_not_release_escape_key</a></li>
+						<li>&emsp;&emsp;<a href="#section:text_pointer:Styles">Styles</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:text_pointer:set_style">set_style</a></li>
+					</ul>
+					<li><a href="#class:active_pointer">Active Text Pointers</a><img alt="Loaded in Campaign" style="float:right; margin-right:1em;" src="../images/loaded_in_campaign.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:active_pointer:Active Pointer Display Methods">Active Pointer Display Methods</a></li>
+						<li>&emsp;&emsp;<a href="#section:active_pointer:Storing in Advice History">Storing in Advice History</a></li>
+						<li>&emsp;&emsp;<a href="#section:active_pointer:Creation">Creation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:active_pointer:new">new</a></li>
+						<li>&emsp;&emsp;<a href="#section:active_pointer:Usage">Usage</a></li>
+						<li>&emsp;&emsp;<a href="#section:active_pointer:Configuration">Configuration</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:active_pointer:set_default_delay">set_default_delay</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:active_pointer:set_default_timeout">set_default_timeout</a></li>
+						<li>&emsp;&emsp;<a href="#section:active_pointer:Hide on Event">Hide on Event</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:active_pointer:add_hide_on_event_record">add_hide_on_event_record</a></li>
+						<li>&emsp;&emsp;<a href="#section:active_pointer:Direct Triggering">Direct Triggering</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:active_pointer:show">show</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:active_pointer:show_when_ready">show_when_ready</a></li>
+						<li>&emsp;&emsp;<a href="#section:active_pointer:Managed Triggering">Managed Triggering</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:active_pointer:wait_for_active_pointer">wait_for_active_pointer</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:active_pointer:show_after_active_pointer">show_after_active_pointer</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:active_pointer:show_on_event">show_on_event</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#fff7cc" id="navigation_right">				<h2 style="background-color:#ffed8c">Campaign Topics</h2>
+				<ul>
+					<li><a href="campaign_index.html">Campaign Index</a></li>
+					<li><a href="campaign_script_structure.html">Campaign Script Structure</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="narrative_system.html">Narrative System</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="campaignui.html">CampaignUI</a></li>
+					<li><a href="cinematics.html">Cinematics</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="episodic_scripting.html">Episodic Scripting</a></li>
+					<li><a href="model_hierarchy.html">Model Hierarchy</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Script Interfaces</h2>
+				<ul>
+					<li><a href="campaign_manager.html">Campaign Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="campaign_cutscene.html">Campaign Cutscenes</a></li>
+					<li><a href="campaign_ui_manager.html">Campaign UI Manager</a></li>
+					<li><a href="chapter_mission.html">Chapter Missions</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="intervention.html">Interventions</a></li>
+					<li><a href="invasion_manager.html">Invasion Manager</a></li>
+					<li><a href="mission_manager.html">Mission Managers</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="narrative_event.html">Narrative Events</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="payload.html">Payload String Constructor</a></li>
+					<li><a href="random_army_manager.html">Random Army Manager</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><strong> > Text Pointers</strong></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="unique_table.html">Unique Table</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Data Interfaces</h2>
+				<ul>
+					<li><a href="custom_starts.html">Campaign Custom Starts</a></li>
+					<li><a href="faction_intro.html">Faction Intro</a></li>
+					<li><a href="narrative.html">Narrative</a></li>
+					<li><a href="narrative_events.html">Narrative Event Templates</a></li>
+					<li><a href="narrative_queries.html">Narrative Query Templates</a></li>
+					<li><a href="narrative_triggers.html">Narrative Trigger Templates</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:text_pointer"><h1 class="content_header">Text Pointers</h1></a>
+				<p>Text pointers are floating labels with optional attached arrows and close buttons that point to items on screen, drawing the player's attention there. They are primarily intended for use in tutorial scripts. They have been extended to show streaming text in cutscenes in battle, using <code><a href="../battle/cutscene.html#function:cutscene:show_custom_cutscene_subtitle">cutscene:show_custom_cutscene_subtitle</a></code>.</p>
+				<p>Text pointer objects are created with <code><a href="#function:text_pointer:new">text_pointer:new</a></code>, configured, and then visually shown with <code><a href="#function:text_pointer:show">text_pointer:show</a></code>. Once shown, a text pointer may be hidden again by calling <code><a href="#function:text_pointer:hide">text_pointer:hide</a></code>. Alternatively, the core object provides the function <code><a href="core.html#function:core:hide_all_text_pointers">core:hide_all_text_pointers</a></code> to hide all visible text pointers.</p>
+				<p>A great many configuration options exist for text pointers. To simplify configuration as much as possible a number of syles have been provided, each of which sets a range of configuration options automatically. Styles can be set with <code><a href="#function:text_pointer:set_style">text_pointer:set_style</a></code>.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:text_pointer:Creation"><h2 class="section_header">Creation</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:new"><h3 class="function_name"><strong><code>text_pointer:new(string </strong></code><i class="parameter">name</i><code><strong>, [string </strong></code><i class="parameter">display mode</i><code><strong>], [number </strong></code><i class="parameter">length</i><code><strong>], [number </strong></code><i class="parameter">x position</i><code><strong>], [number </strong></code><i class="parameter">y position</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a text_pointer object pointing to a supplied position on the screen.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Name for the text pointer. Must be unique amongst text pointers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value="bottom"</i></p>
+										<p>Pointer display mode. Determines in what direction the arrow pointer appears relative to the pointer label. Supported values:</p>
+										<p><ul><li>"top", the pointer line is drawn above the text label, pointing upwards.</li></p>
+										<p><li>"bottom", the pointer line is drawn below the text label, pointing downwards.</li></p>
+										<p><li>"left", the pointer line is drawn to the left of the text label, pointing to the left.</li></p>
+										<p><li>"right", the pointer line is drawn to the right of the text label, pointing to the right.</li></p>
+										<p><li>"worldspace", a special mode, whereby the text pointer appears in 3D space rather than 2D. In this case the pointer line appears below the text label.</li></p>
+										<p><li>"subtitle", a special mode, whereby the text pointer appears and behaves as a cutscene subtitle in the lower cinematic bar. x/y positions are disregarded in this case.</li></ul></p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>Length of the attached arrow pointer and line. Can be zero.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>X position. This is either the absolute position on-screen, or the position in 3D space if the pointer display mode is set to worldspace. </p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>Y position. This is either the absolute position on-screen, or the position in 3D space if the pointer display mode is set to worldspace.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:text_pointer">text_pointer</a></code></code> text pointer</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 95</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:new_from_component"><h3 class="function_name"><strong><code>text_pointer:new_from_component(<br />&emsp;&emsp;string </strong></code><i class="parameter">name</i><code><strong>, <br />&emsp;&emsp;[string </strong></code><i class="parameter">display mode</i><code><strong>], <br />&emsp;&emsp;[number </strong></code><i class="parameter">length</i><code><strong>], <br />&emsp;&emsp;object </strong></code><i class="parameter">ui component</i><code><strong>, <br />&emsp;&emsp;[number </strong></code><i class="parameter">x proportion</i><code><strong>], <br />&emsp;&emsp;[number </strong></code><i class="parameter">y proportion</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a text_pointer object pointing to a supplied uicomponent. The uicomponent may either be supplied directly or as a function that returns a uicomponent.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Name for the text pointer. Must be unique amongst text pointers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value="bottom"</i></p>
+										<p>Pointer display mode. Determines in what direction the arrow pointer appears relative to the pointer label. Supported values:</p>
+										<p><ul><li>"top", the pointer line is drawn above the text label, pointing upwards.</li></p>
+										<p><li>"bottom", the pointer line is drawn below the text label, pointing downwards.</li></p>
+										<p><li>"left", the pointer line is drawn to the left of the text label, pointing to the left.</li></p>
+										<p><li>"right", the pointer line is drawn to the right of the text label, pointing to the right.</li></p>
+										<p><li>"worldspace", a special mode, whereby the text pointer appears in 3D space rather than 2D. In this case the pointer line appears below the text label.</li></p>
+										<p><li>"subtitle", a special mode, whereby the text pointer appears and behaves as a cutscene subtitle in the lower cinematic bar. x/y positions are disregarded in this case.</li></ul></p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>Length of the attached arrow pointer and line. Can be zero.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code>object</code></p>
+									</td>
+									<td>
+										<p>UI component to point at. This can be supplied as either a uicomponent or a function that returns a uicomponent. By default the pointer will point to the middle of the component - use the offset parameters to change this.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0.5</i></p>
+										<p>Unary x proportion specifying a pointed position relative to the dimensions of the specified component. Supply zero to point at the left edge of the component, one to point at the right edge of the component, or 0.5 to point at the middle of the component, for example. Values less than zero or greater than one are valid.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0.5</i></p>
+										<p>Unary y proportion specifying a pointed position relative to the dimensions of the specified component. Supply zero to point at the top edge of the component, one to point at the bottom edge of the component, or 0.5 to point at the middle of the component, for example. Values less than zero or greater than one are valid.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:text_pointer">text_pointer</a></code></code> text pointer</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 134</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:new_from_position_offset_to_text_pointer"><h3 class="function_name"><strong><code>text_pointer:new_from_position_offset_to_text_pointer(<br />&emsp;&emsp;string </strong></code><i class="parameter">name</i><code><strong>, <br />&emsp;&emsp;text_pointer </strong></code><i class="parameter">text pointer</i><code><strong>, <br />&emsp;&emsp;number </strong></code><i class="parameter">x offset</i><code><strong>, <br />&emsp;&emsp;number </strong></code><i class="parameter">y offset</i><code><strong><br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a text_pointer object with a position relative to another text pointer. This can be used to make text pointers appear in a sequence on the screen.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Name for the text pointer. Must be unique amongst text pointers.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>text_pointer</code></p>
+									</td>
+									<td>
+										<p>Text pointer object to display relative to.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>x offset in pixels from the other text pointer. This takes into account the other text pointer's size, so the two text pointers cannot overlap.</p>
+										<p>Supplying a value of 10 would mean a gap of 10 pixels between the two text pointers, with this text pointer on the right of the other, while a value of -10 would mean a gap of 10 pixels with this text pointer on the left.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>y offset in pixels from the other text pointer. This takes into account the other text pointer's size, so the two text pointers cannot overlap.</p>
+										<p>Supplying a value of 10 would mean a gap of 10 pixels between the two text pointers, with this text pointer below the other (as a higher value of y means a position further down the screen), while a value of -10 would mean a gap of 10 pixels with this text pointer above the other.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:text_pointer">text_pointer</a></code></code> text pointer</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 211</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:text_pointer:Usage"><h2 class="section_header">Usage</h2></a>
+				</div>
+				<p>Once an <code>text_pointer</code> object has been created with <code><a href="#function:text_pointer:new">text_pointer:new</a></code>, functions on it may be called in the form showed below.</p>
+
+				<h4>Example - Specification:</h4>
+				<div id="example_code"><code>
+					 <i>&lt;text_pointer_object&gt;</i>:<i>&lt;function_name&gt;</i>(<i>&lt;args&gt;</i>)<br />
+				</code></div>
+
+				<h4>Example - Creation and Usage:</h4>
+				<div id="example_code"><code>
+					 local tp_test = text_pointer:new(<br />
+					 &emsp;&emsp;&emsp;&emsp;"test_pointer",<br />
+					 &emsp;&emsp;&emsp;&emsp;400,<br />
+					 &emsp;&emsp;&emsp;&emsp;300<br />
+					 )<br />
+					 tp_test:set_panel_width(400)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- calling a function on the object once created<br />
+				</code></div>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:text_pointer:Layout Configuration"><h2 class="section_header">Layout Configuration</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_layout_path"><h3 class="function_name"><strong><code>text_pointer:set_layout_path(string </strong></code><i class="parameter">path</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the path to the folder that contains the component layout file. Default value is "UI/Common UI/".
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>path</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 361</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_layout"><h3 class="function_name"><strong><code>text_pointer:set_layout(string </strong></code><i class="parameter">path</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the name of the layout to use for this text pointer. Default value is "text_pointer_text_only".
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>path</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 374</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:text_pointer:Display Dimensions and Position"><h2 class="section_header">Display Dimensions and Position</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:get_text_label"><h3 class="function_name"><strong><code>text_pointer:get_text_label()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the text label uicomponent
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>uicomponent</code> text label</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 399</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_pointer_width"><h3 class="function_name"><strong><code>text_pointer:set_pointer_width(number </strong></code><i class="parameter">pointer width</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the width of the pointer line. Default width is 5 pixels.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>pointer width</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 407</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_panel_width"><h3 class="function_name"><strong><code>text_pointer:set_panel_width(number </strong></code><i class="parameter">panel width</i><code><strong>, [boolean </strong></code><i class="parameter">shrink horizontally</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the width of the text panel on-screen. The default width is set by the component layout.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>Width of panel on-screen in pixels.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Shrink text horizontally if on one line.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 420</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_panel_width_to_screen"><h3 class="function_name"><strong><code>text_pointer:set_panel_width_to_screen(number </strong></code><i class="parameter">difference</i><code><strong>, [boolean </strong></code><i class="parameter">shrink horizontally</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the width of the text panel on-screen to be the screen width minus a supplied numeric value.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>Width of panel on-screen will be the screen width minus this value, in pixels.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Shrink text horizontally if on one line.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 435</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_worldspace_display_height"><h3 class="function_name"><strong><code>text_pointer:set_worldspace_display_height(number </strong></code><i class="parameter">display height</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the height in campaign, or height offset in battle, of the pointed position if the pointer is displayed in worldspace mode. This is important to set in campaign as the script has no way of determining the height of the terrain at a position in worldspace, so it must be supplied here. In battle, where the script can find the height of the terrain at a point, this sets the vertical offset from the ground.<br />
+							Without setting a height in campaign, a worldspace pointer will appear pointing to a height of 0 which will likely be beneath the terrain being pointed at.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>display height</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 450</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_label_offset"><h3 class="function_name"><strong><code>text_pointer:set_label_offset(number </strong></code><i class="parameter">x offset</i><code><strong>, number </strong></code><i class="parameter">y offset</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Without setting a label offset, the text label with be centred to the position being pointed at e.g. centred directly above it if the display mode is set to "bottom", centred to the left if the display mode is set to "right" etc. Set a label offset to move the label relative to this position.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>x offset</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>y offset</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 464</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_show_pointer_end_without_line"><h3 class="function_name"><strong><code>text_pointer:set_show_pointer_end_without_line(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">show line end without line</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether the line end should be drawn without the line.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>show line end without line</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 484</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:text_pointer:Component Priority and Topmost"><h2 class="section_header">Component Priority and Topmost</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_priority"><h3 class="function_name"><strong><code>text_pointer:set_priority(number </strong></code><i class="parameter">priority</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the component priority of the text pointer. This determines what components the text pointer is drawn on top of, and what components it is drawn underneath.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>priority</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 510</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_topmost"><h3 class="function_name"><strong><code>text_pointer:set_topmost([boolean </strong></code><i class="parameter">topmost</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the text pointer components to be topmost in the UI heirarchy.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>topmost</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 523</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:text_pointer:Pulse Highlighting"><h2 class="section_header">Pulse Highlighting</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_should_pulse"><h3 class="function_name"><strong><code>text_pointer:set_should_pulse([boolean </strong></code><i class="parameter">pulse</i><code><strong>], [number </strong></code><i class="parameter">pulse strength</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the text pointer to pulse-highlight when it shows.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>Set to <code>true</code> to enable pulsing.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Pulse strength override. Supply a positive number here to modify the strength of the pulse. Default value is 5.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 550</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:text_pointer:Streaming"><h2 class="section_header">Streaming</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_stream_by_char"><h3 class="function_name"><strong><code>text_pointer:set_stream_by_char(boolean </strong></code><i class="parameter">should stream</i><code><strong>, [number </strong></code><i class="parameter">stream duration</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the text pointer to stream its text, and optionally sets the duration over which the text is to be streamed.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>should stream</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>stream duration</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 585</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_stream_duration"><h3 class="function_name"><strong><code>text_pointer:set_stream_duration(number </strong></code><i class="parameter">stream duration</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets just the duration over which the text is to be streamed.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>stream duration</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 607</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:text_pointer:Show and Hide Animations"><h2 class="section_header">Show and Hide Animations</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_panel_show_animation"><h3 class="function_name"><strong><code>text_pointer:set_panel_show_animation(string </strong></code><i class="parameter">animation name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a different panel show animation. Any animation set here must be present on the panel component in the text pointer layout. Default is "show".
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>animation name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 633</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_panel_hide_animation"><h3 class="function_name"><strong><code>text_pointer:set_panel_hide_animation(string </strong></code><i class="parameter">animation name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a different panel hide animation. Any animation set here must be present on the panel component in the text pointer layout. Default is "hide".
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>animation name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 646</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_text_show_animation"><h3 class="function_name"><strong><code>text_pointer:set_text_show_animation(string </strong></code><i class="parameter">animation name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a text show animation. Any animation set here must be present on the line component in the text pointer layout.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>animation name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 659</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_text_hide_animation"><h3 class="function_name"><strong><code>text_pointer:set_text_hide_animation(string </strong></code><i class="parameter">animation name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a text hide animation. Any animation set here must be present on the line component in the text pointer layout.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>animation name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 672</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:text_pointer:State Overrides"><h2 class="section_header">State Overrides</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_panel_state_override"><h3 class="function_name"><strong><code>text_pointer:set_panel_state_override(string </strong></code><i class="parameter">state name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a different state for the text pointer panel. Any state set here must be present on the <code>panel</code> component in the text pointer layout.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>state name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 701</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_text_state_override"><h3 class="function_name"><strong><code>text_pointer:set_text_state_override(string </strong></code><i class="parameter">state name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a different state for each line of text pointer panel. Any state set here must be present on the <code>line</code> component in the text pointer layout.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>state name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 714</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_line_end_state_override"><h3 class="function_name"><strong><code>text_pointer:set_line_end_state_override(string </strong></code><i class="parameter">state name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a different state for the line end uicomponent. Any state set here must be present on the <code>line_end</code> component in the <code>text_pointer_line_parent</code> layout.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>state name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 727</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:text_pointer:Close Button"><h2 class="section_header">Close Button</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_show_close_button"><h3 class="function_name"><strong><code>text_pointer:set_show_close_button([boolean </strong></code><i class="parameter">show button</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Shows a close button on the text pointer. By default a close button is not shown.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>show button</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 752</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_hide_on_close_button_clicked"><h3 class="function_name"><strong><code>text_pointer:set_hide_on_close_button_clicked([boolean </strong></code><i class="parameter">close on click</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Hides the text pointer when the close button is clicked. By default, this is enabled, so the panel closes when the button is clicked.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>close on click</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 764</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_close_button_callback"><h3 class="function_name"><strong><code>text_pointer:set_close_button_callback(function </strong></code><i class="parameter">callback</i><code><strong>, [number </strong></code><i class="parameter">delay</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Set a callback to call when the close button is clicked. An optional delay may also be set. Calling this also sets the close button to show.<br />
+							A callback set using this function will not be called if the text pointer is hidden by external script - use <code><a href="#function:text_pointer:add_hide_callback">text_pointer:add_hide_callback</a></code> to set a callback that would be called in this case.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p>Callback</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>Delay before calling callback, in s (campaign) or ms (battle/frontend)</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 776</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:add_hide_callback"><h3 class="function_name"><strong><code>text_pointer:add_hide_callback(<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">callback</i><code><strong>, [<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">delay</i><code><strong>], [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">show close button</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Set a callback to call when the text pointer is hidden. An optional delay may also be set. A further optional flag sets the close button to show.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>Callback</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>Delay before calling callback, in s (campaign) or ms (battle/frontend)</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Sets the close button to show on the text pointer. If no value is specified then the current behaviour remains untouched.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 799</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_close_button_component"><h3 class="function_name"><strong><code>text_pointer:set_close_button_component(string </strong></code><i class="parameter">component name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Overrides the component to use as the close button, by name.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>component name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 830</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_highlight_close_button"><h3 class="function_name"><strong><code>text_pointer:set_highlight_close_button([<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">delay</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the text pointer to highlight the close button when it shows, with an optional delay between the time of showing and the time the close button is highlighted. Immediately highlights the close button if the text pointer is already showing.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>Period the text pointer should wait after being shown before the button highlight begins. This is specified in s in campaign, ms in battle or the frontend.</p>
+										<p>This is disregarded if the text pointer is already showing at the time this function is called.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 843</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:text_pointer:Subtitle Mode"><h2 class="section_header">Subtitle Mode</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_position_as_subtitle"><h3 class="function_name"><strong><code>text_pointer:set_position_as_subtitle([position </strong></code><i class="parameter">as subtitle</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the text pointer to position itself/behave as a cutscene subtitle, in the lower cinematic bar. This is akin to setting the pointer display mode to "subtitle" in <code><a href="#function:text_pointer:new">text_pointer:new</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>position</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>as subtitle</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 880</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:text_pointer:Setting Component Text"><h2 class="section_header">Setting Component Text</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:add_component_text"><h3 class="function_name"><strong><code>text_pointer:add_component_text(string </strong></code><i class="parameter">component name</i><code><strong>, string </strong></code><i class="parameter">localised text</i><code><strong>, [exempt </strong></code><i class="parameter">from streaming</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the text displayed by a specified child uicomponent of the text pointer to a localised value. Use this method to show customised text on the text pointer.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Name of text component on the text pointer.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Full database key of localised text, in the form [table]_[localised_field]_[record_key].</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>exempt</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Exempts this text from being streamed, if the text pointer is set to stream text.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 906</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:add_show_callback"><h3 class="function_name"><strong><code>text_pointer:add_show_callback(<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">callback</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a callback to call when the text pointer is shown with <code><a href="#function:text_pointer:show">text_pointer:show</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>callback</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 939</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:text_pointer:Showing and Hiding"><h2 class="section_header">Showing and Hiding</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:show"><h3 class="function_name"><strong><code>text_pointer:show([force </strong></code><i class="parameter">display</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Makes the text pointer visible.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>force</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Forces the text pointer to display. This flag is only considered if the text pointer has been set to behave as a subtitle with <code><a href="#function:text_pointer:set_position_as_subtitle">text_pointer:set_position_as_subtitle</a></code>, and if set to <code>true</code> causes the text pointer to override the player's subtitles preferences.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 959</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:hide"><h3 class="function_name"><strong><code>text_pointer:hide([hide </strong></code><i class="parameter">immediately</i><code><strong>], [suppress </strong></code><i class="parameter">event</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Hides the text pointer. Supply <code>true</code> as a single argument to hide it immediately and prevent it from animating.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>hide</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Hide the text pointer immediately without any animation.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>suppress</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Suppress the scripted event that triggers - this is for internal use.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 1748</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:is_showing"><h3 class="function_name"><strong><code>text_pointer:is_showing()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the text pointer is currently showing.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> is showing</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 1892</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:has_ever_been_shown"><h3 class="function_name"><strong><code>text_pointer:has_ever_been_shown()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the text pointer has ever been shown.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> ever shown</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 1900</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:ignore_hide_all_text_pointers"><h3 class="function_name"><strong><code>text_pointer:ignore_hide_all_text_pointers(boolean </strong></code><i class="parameter">should ignore</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Set whether to ignore <code><a href="core.html#function:core:hide_all_text_pointers">core:hide_all_text_pointers</a></code>() when it's called.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>should ignore</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 1907</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:do_not_release_escape_key"><h3 class="function_name"><strong><code>text_pointer:do_not_release_escape_key(boolean </strong></code><i class="parameter">should stop release</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Set whether the escape key will be release when ignore <code><a href="#function:text_pointer:hide">text_pointer:hide</a></code>() is called.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>should stop release</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 1914</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:text_pointer:Styles"><h2 class="section_header">Styles</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:text_pointer:set_style"><h3 class="function_name"><strong><code>text_pointer:set_style(string </strong></code><i class="parameter">style</i><code><strong>, ... </strong></code><i class="parameter">additional args</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the style of this text pointer. Setting a style automatically sets a range of configuration options common to that style - inspect the script function to find out what exactly gets set or to add more styles.<br />
+							Multiple styles may be set on a given text pointer if the configuration options do not overlap (if they do then the later settings will overwrite the earlier settings).<br />
+							Currently-supported styles are:<br />
+							<table class="simple"><tr><td><code>title_and_text</code></td><td>Sets the layout of the text pointer to "text_pointer_title_and_text". When setting this style the calling script must also supply two strings specifying the text db key of the title and the text to display.</td></tr>
+
+							<tr><td><code>text_only</code></td><td>Sets the layout of the text pointer to "text_pointer_text_only". When setting this style the calling script must also supply a string specifying the text db key of the text to display.</td></tr>
+
+							<tr><td><code>topmost</code></td><td>Sets the pointer to be topmost and with a component priority of 1500.</td></tr>
+
+							<tr><td><code>semitransparent</code></td><td>Sets the "topmost" style and the panel state to "semitransparent".</td></tr>
+
+							<tr><td><code>semitransparent_highlight</code></td><td>Sets the "semitransparent" style and sets the close button to highlight two seconds after it is shown.</td></tr>
+
+							<tr><td><code>semitransparent_highlight_dont_close</code></td><td>Sets the "semitransparent_highlight" style. The text pointer will not close when the close button is clicked, however.</td></tr>
+
+							<tr><td><code>subtitle_with_frame</code></td><td>Sets the pointer into subtitle mode with a frame.</td></tr>
+
+							<tr><td><code>active</code></td><td>Sets the "topmost" style, and sets the panel into the appropriate visual style for the active text pointer interface.</td></tr>
+
+							<tr><td><code>minimalist</code></td><td>Sets the "minimalist" style but without a close button.</td></tr>
+
+							</table>
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>style</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>...</code></p>
+									</td>
+									<td>
+										<p>additional args</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers.lua, line 1928</p>
+						</dd>
+					</dl>
+				</div>
+
+				<hr class="superblock_divider" />
+
+
+				<a name="class:active_pointer"><h1 class="content_header">Active Text Pointers</h1></a>
+				<p>Active pointers are a particular style of <code><a href="#class:text_pointer">text_pointer</a></code>, declared as a separate class with a cut-down interface. Visually, an active pointer appears as a text box with a close button and an enlarged pointer arrow with no connecting line. The pointer arrow appears in one of the four corners of the panel.</p>
+				<p>Active pointers are always associated with a <code><a href="uicomponent.html#class:uicomponent">uicomponent</a></code> at which they visually point. While showing, the active pointer repeatedly polls the properties of this <code><a href="uicomponent.html#class:uicomponent">uicomponent</a></code>. Should the uicomponent move on-screen, become invisible, or be destroyed, the active pointer will automatically dismiss itself. From an implementation perspective active pointers are intended to be relatively 'fire and forget', requiring a minimum of manual setup in script.</p>
+				<p>An active pointer will automatically immediately hide itself if any parent/ancestor of it, back to the ui root, is seen to play an animation called "hide". This generally occurs when the host panel (e.g. diplomacy panel) is closing.</p>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:active_pointer:Active Pointer Display Methods"><h2 class="section_header">Active Pointer Display Methods</h2></a>
+				</div>
+				<p>Once declared, an active pointer may be shown directly with <code><a href="#function:active_pointer:show">active_pointer:show</a></code>. Alternatively, <code><a href="#function:active_pointer:show_when_ready">active_pointer:show_when_ready</a></code> may be used to show the pointer, which waits until the target uicomponent has stopped moving and become visible before the pointer is shown. <code><a href="#function:active_pointer:show_when_ready">active_pointer:show_when_ready</a></code> may optionally take a delay value, which imposes a grace period before the text pointer is shown, and a timeout period after which the function will stop trying to show the pointer. Default values for both of these can be set on the active pointer with <code><a href="#function:active_pointer:set_default_delay">active_pointer:set_default_delay</a></code> and <code><a href="#function:active_pointer:set_default_timeout">active_pointer:set_default_timeout</a></code>.</p>
+				<p>The active pointer interface also provides functionality to allow the pointer itself to manage being shown. <code><a href="#function:active_pointer:show_on_event">active_pointer:show_on_event</a></code> may be used to specify a script event and condition on which the active pointer should attempt to display. Furthermore, <code><a href="#function:active_pointer:wait_for_active_pointer">active_pointer:wait_for_active_pointer</a></code> allows this active pointer to be enqueued behind another, so that the foreign active pointer must be shown before this one will attempt to display. One active pointer can wait for multiple other active pointers, which may themselves wait upon other active pointers and so-on.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:active_pointer:Storing in Advice History"><h2 class="section_header">Storing in Advice History</h2></a>
+				</div>
+				<p>By default, active pointers store a record when they are displayed in the advice history, and will not display if that record is present when <code><a href="#function:active_pointer:show">active_pointer:show</a></code> is called again. This behaviour, which is enabled by default, requires that the active pointer name is unique amongst active pointers, as the name of the advice history flag is derived from the pointer name.</p>
+				<p>This functionality can be disabled when calling <code><a href="#function:active_pointer:new">active_pointer:new</a></code> by setting the suppress-record boolean argument to <code>true</code>. When this is set to <code>false</code> the active pointer need not have a unique name, but advanced functionality like <code><a href="#function:active_pointer:show_on_event">active_pointer:show_on_event</a></code> and <code><a href="#function:active_pointer:wait_for_active_pointer">active_pointer:wait_for_active_pointer</a></code> will not be available.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:active_pointer:Creation"><h2 class="section_header">Creation</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:active_pointer:new"><h3 class="function_name"><strong><code>active_pointer:new(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">orientation</i><code><strong>, <br />&emsp;&emsp;<code><a href="uicomponent.html#class:uicomponent">uicomponent</a></code>/<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">uicomponent specifier</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">text key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">x proportion</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">y proportion</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">width</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">suppress record</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and returns a new active text pointer object.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Name for this text pointer. If this pointer is storing a record in the advice history (which is the default behaviour, and must be opted-out of by setting this suppress record in advice argument to <code>true</code> on this function) then the supplied name must be unique.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Orientation of the pointer arrow that is drawn. Supported values are <code>"topleft"</code>, <code>"topright"</code>, <code>"bottomleft"</code> and <code>"bottomright"</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="uicomponent.html#class:uicomponent">uicomponent</a></code>/<code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>Specifier of uicomponent to point at. This can either be a <code><a href="uicomponent.html#class:uicomponent">uicomponent</a></code> object or a <code><a href="lua.html#class:function">function</a></code> that returns a uicomponent. It's strongly recommended that if the text pointer is not being displayed immediately after being created that a function is used.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Localised text key to display, in <code>[table]_[field]_[key]</code> format.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0.5</i></p>
+										<p>Unary x proportion specifying a pointed position relative to the dimensions of the specified component. Supply <code>0</code> to point at the left edge of the component, <code>1</code> to point at the right edge of the component, or 0.5 to point at the middle of the component, for example. Values less than zero or greater than one are valid.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0.5</i></p>
+										<p>Unary y proportion specifying a pointed position relative to the dimensions of the specified component. Supply <code>0</code> to point at the top edge of the component, <code>1</code> to point at the bottom edge of the component, or <code>0.5</code> to point at the middle of the component, for example. Values less than zero or greater than one are valid.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=250</i></p>
+										<p>Width of the text pointer panel in pixels.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>8</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Sets this active pointer to not record a record of whether it's been triggered in advice history. If this is set to <code>true</code> then the active pointer is not registered with the script core, and it doesn't need to have a unique name. However, the active pointer will not be able to automatically listen for events.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:active_pointer">active_pointer</a></code></code> active text pointer</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers_active.lua, line 116</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:active_pointer:Usage"><h2 class="section_header">Usage</h2></a>
+				</div>
+				<p>Once a <code>active_pointer</code> object has been created with <code><a href="#function:active_pointer:new">active_pointer:new</a></code>, functions on it may be called in the form showed below. Active text pointers inherit from text pointers, so all functions provided by the <code><a href="#class:text_pointer">text_pointer</a></code> interface may be called on a active_pointer.</p>
+
+				<h4>Example - Specification:</h4>
+				<div id="example_code"><code>
+					 <i>&lt;text_pointer_object&gt;</i>:<i>&lt;function_name&gt;</i>(<i>&lt;args&gt;</i>)<br />
+				</code></div>
+
+				<h4>Example - Creation and Usage:</h4>
+				<div id="example_code"><code>
+					 local ap_example = active_pointer:new(<br />
+					 &emsp;&emsp;&emsp;&emsp;"example",<br />
+					 &emsp;&emsp;&emsp;&emsp;"bottomright",<br />
+					 &emsp;&emsp;&emsp;&emsp;"ui_text_replacements_localised_text_example_text_pointer_str",<br />
+					 &emsp;&emsp;&emsp;&emsp;function()<br />
+					 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- function that should return a uicomponent<br />
+					 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return find_uicomponent(core:get_ui_root(), "diplomacy_dropdown", "main_button_bar", "menu_buttons", "button_quick_deal");<br />
+					 &emsp;&emsp;&emsp;&emsp;end,<br />
+					 &emsp;&emsp;&emsp;&emsp;-- point at top-right of uicomponent<br />
+					 &emsp;&emsp;&emsp;&emsp;0.25,<br />
+					 &emsp;&emsp;&emsp;&emsp;0.75<br />
+					 )<br />
+					 <br />
+					 -- calling a function on the object once created<br />
+					 ap_example:show_when_ready()<br />
+				</code></div>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:active_pointer:Configuration"><h2 class="section_header">Configuration</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:active_pointer:set_default_delay"><h3 class="function_name"><strong><code>active_pointer:set_default_delay(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">delay</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a default delay period for this active pointer, which is the period between when <code><a href="#function:active_pointer:show_when_ready">active_pointer:show_when_ready</a></code> has detected that the pointer is ready to be shown and when the pointer is actually shown. Any default set here may be overridden when <code><a href="#function:active_pointer:show_when_ready">active_pointer:show_when_ready</a></code>, <code><a href="#function:active_pointer:show_after_active_pointer">active_pointer:show_after_active_pointer</a></code> or <code><a href="#function:active_pointer:show_on_event">active_pointer:show_on_event</a></code> are called.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Delay value. This should be set in seconds in campaign, and milliseconds in battle or in the frontend.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers_active.lua, line 449</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:active_pointer:set_default_timeout"><h3 class="function_name"><strong><code>active_pointer:set_default_timeout(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">timeout</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a default timeout period for this active pointer, which is the period over which <code><a href="#function:active_pointer:show_when_ready">active_pointer:show_when_ready</a></code> will poll the target uicomponent to see if it becomes visible and stops moving. If the timeout period elapses then the attempt to show the text pointer is stopped. By default this is 5 seconds in campaign, or 5000ms in battle or the frontend.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Default timeout value. This should be set in seconds in campaign, and milliseconds in battle or in the frontend.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers_active.lua, line 462</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:active_pointer:Hide on Event"><h2 class="section_header">Hide on Event</h2></a>
+				</div>
+				<p>While being displayed, the active pointer polls its target uicomponent and will automatically hide itself once the target uicomponent moves or becomes invisible. Due to the inherent delay when polling with a model timer, in certain circumstances there is a visible delay before the text pointer hides. <code><a href="#function:active_pointer:add_hide_on_event_record">active_pointer:add_hide_on_event_record</a></code> can be used to make the active pointer directly respond to script events and hide itself before its poll picks up on a ui state change.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:active_pointer:add_hide_on_event_record"><h3 class="function_name"><strong><code>active_pointer:add_hide_on_event_record(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">event name</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code>/<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">condition</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">hide immediately</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a hide-on-event record for this active pointer. If the event is received while the active pointer is being shown, and the optional conditional check passes, then the active pointer is hidden. An optional flag specifies whether this hide should happen immediately, without any fade animation.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Script event name.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code>/<code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>Conditional check. This can be a function that returns a boolean, or <code>true</code> to always pass when the supplied event is received.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>Hide the text pointer immediately, without a fade animation.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers_active.lua, line 533</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:active_pointer:Direct Triggering"><h2 class="section_header">Direct Triggering</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:active_pointer:show"><h3 class="function_name"><strong><code>active_pointer:show()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Immediately shows the text pointer, unless it's been set to pay attention to advice history (and has already been shown).
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers_active.lua, line 580</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:active_pointer:show_when_ready"><h3 class="function_name"><strong><code>active_pointer:show_when_ready([<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">delay override</i><code><strong>], [<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">timeout override</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Shows the active text pointer when the target uicomponent that was specified when the active pointer was created is not moving, is visible, and is fully onscreen. If this does not happen within the timeout period (default 5 seconds) then the process is cancelled.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>Delay between the uicomponent stopping moving/becoming visible and the text pointer actually being shown. This should be supplied in seconds in campaign, and in milliseconds in battle and the frontend. The default value is 1 second, or 1000ms, or whatever has been set with <code><a href="#function:active_pointer:set_default_delay">active_pointer:set_default_delay</a></code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>Timeout period override. The timeout is the elapsed period after which the show_when_ready process will halt if the target uicomponent has not stopped moving or become visible. In campaign this should be supplied in seconds, and defaults to either 5 or whatever value has been set with <code><a href="#function:active_pointer:set_default_timeout">active_pointer:set_default_timeout</a></code>. In battle and the frontend, the timeout period is set in milliseconds and defaults to 5000.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers_active.lua, line 607</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:active_pointer:Managed Triggering"><h2 class="section_header">Managed Triggering</h2></a>
+				</div>
+				<p>These functions are only supported when the active pointer is set to store its use in the advice history - see the <code><a href="#section:text_pointer:Storing in Advice History">Storing in Advice History</a></code> section for more information.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:active_pointer:wait_for_active_pointer"><h3 class="function_name"><strong><code>active_pointer:wait_for_active_pointer(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">active pointer name</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">delay override</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">timeout override</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Prevents this active pointer from being shown before another active pointer has been shown. An active pointer may wait for multiple other active pointers, each wait being registered with a call to this function. Should multiple waits be set up for an active pointer, it will fail to display until all active pointers being waited for have finished showing.<br />
+							This function sets up an <code><a href="#function:active_pointer:show_after_active_pointer">active_pointer:show_after_active_pointer</a></code> process automatically, which attempts to show this pointer once the active pointer being waited for is dismissed.<br />
+							This active pointer must have registered itself in the advice history for this function to work.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Name of active pointer to wait for. The active pointer being waited for must have registered itself in the advice history.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>Delay override, which will be supplied to <code><a href="#function:active_pointer:show_when_ready">active_pointer:show_when_ready</a></code> if this monitor tries to show the pointer. This is the delay between the uicomponent stopping moving/becoming visible and the text pointer actually being shown. This should be supplied in seconds in campaign, and in milliseconds in battle and the frontend. The default value is 1 second, or 1000ms, or whatever has been set with <code><a href="#function:active_pointer:set_default_delay">active_pointer:set_default_delay</a></code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>Timeout period override, which will be supplied to <code><a href="#function:active_pointer:show_when_ready">active_pointer:show_when_ready</a></code> if this monitor tries to show the pointer. The timeout is the elapsed period after which the show_when_ready process will halt if the target uicomponent has not stopped moving or become visible. In campaign this should be supplied in seconds, and defaults to either 5 or whatever value has been set with <code><a href="#function:active_pointer:set_default_timeout">active_pointer:set_default_timeout</a></code>. In battle and the frontend, the timeout period is set in milliseconds and defaults to 5000.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers_active.lua, line 742</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:active_pointer:show_after_active_pointer"><h3 class="function_name"><strong><code>active_pointer:show_after_active_pointer(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">active pointer name</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">delay override</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">timeout override</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets up a listener that attempts to show this active pointer once the specified active pointer closes. Unlike <code><a href="#function:active_pointer:wait_for_active_pointer">active_pointer:wait_for_active_pointer</a></code> this doesn't demand that the specified active pointer must have first been shown before this active pointer can be shown - this active pointer could trigger before the specified active pointer (from a different event, for example).<br />
+							This active pointer must have registered itself in the advice history for this function to work.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Name of active pointer to wait for. The active pointer being waited for must have registered itself in the advice history.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>Delay override, which will be supplied to <code><a href="#function:active_pointer:show_when_ready">active_pointer:show_when_ready</a></code> if this monitor tries to show the pointer. This is the delay between the uicomponent stopping moving/becoming visible and the text pointer actually being shown. This should be supplied in seconds in campaign, and in milliseconds in battle and the frontend. The default value is 1 second, or 1000ms, or whatever has been set with <code><a href="#function:active_pointer:set_default_delay">active_pointer:set_default_delay</a></code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>Timeout period override, which will be supplied to <code><a href="#function:active_pointer:show_when_ready">active_pointer:show_when_ready</a></code> if this monitor tries to show the pointer. The timeout is the elapsed period after which the show_when_ready process will halt if the target uicomponent has not stopped moving or become visible. In campaign this should be supplied in seconds, and defaults to either 5 or whatever value has been set with <code><a href="#function:active_pointer:set_default_timeout">active_pointer:set_default_timeout</a></code>. In battle and the frontend, the timeout period is set in milliseconds and defaults to 5000.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers_active.lua, line 768</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:active_pointer:show_on_event"><h3 class="function_name"><strong><code>active_pointer:show_on_event(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">event</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code>/<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">condition</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">delay override</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">timeout override</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the active pointer to trigger when a script event is received, with an optional conditional check that must be passed.<br />
+							This active pointer must have registered itself in the advice history for this function to work.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Event name.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code>/<code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>Conditional check. This may be omitted, or <code>true</code> may be supplied to always trigger whenever the supplied event is received.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>Delay override, which will be supplied to <code><a href="#function:active_pointer:show_when_ready">active_pointer:show_when_ready</a></code> if this monitor tries to show the pointer. This is the delay between the uicomponent stopping moving/becoming visible and the text pointer actually being shown. This should be supplied in seconds in campaign, and in milliseconds in battle and the frontend. The default value is 1 second, or 1000ms, or whatever has been set with <code><a href="#function:active_pointer:set_default_delay">active_pointer:set_default_delay</a></code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>Timeout period override, which will be supplied to <code><a href="#function:active_pointer:show_when_ready">active_pointer:show_when_ready</a></code> if this monitor tries to show the pointer. The timeout is the elapsed period after which the show_when_ready process will halt if the target uicomponent has not stopped moving or become visible. In campaign this should be supplied in seconds, and defaults to either 5 or whatever value has been set with <code><a href="#function:active_pointer:set_default_timeout">active_pointer:set_default_timeout</a></code>. In battle and the frontend, the timeout period is set in milliseconds and defaults to 5000.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_text_pointers_active.lua, line 825</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:58</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "campaign"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

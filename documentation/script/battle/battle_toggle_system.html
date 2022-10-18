@@ -1,0 +1,849 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Toggle System</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#e2edff" id="main">
+
+			<div style="background-color:#e2edff" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Battle Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#c1e6ff">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search battle only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#c1e6ff">Game Areas</h2>
+				<ul>
+					<li><a href="../campaign/campaign_index.html">Campaign Index</a></li>
+					<li><strong> > Battle Index</strong></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:battle_toggle_system">Toggle System</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#function:battle_toggle_system:toggle_slot">toggle_slot</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_toggle_system:toggle_slot_script_id">toggle_slot_script_id</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_toggle_system:toggle_slot_count">toggle_slot_count</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_toggle_system:map_barrier">map_barrier</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_toggle_system:map_barrier_script_id">map_barrier_script_id</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_toggle_system:map_barrier_count">map_barrier_count</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_toggle_system:allow_army_interaction">allow_army_interaction</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_toggle_system:disable_and_refund_all_buildings">disable_and_refund_all_buildings</a></li>
+					</ul>
+					<li><a href="#class:battle_map_barrier">Map Barrier</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#function:battle_map_barrier:enabled">enabled</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_map_barrier:highlight">highlight</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_map_barrier:enable">enable</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_map_barrier:disable">disable</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_map_barrier:position">position</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_map_barrier:record_key">record_key</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_map_barrier:composite_scenes">composite_scenes</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_map_barrier:has_toggle_slot">has_toggle_slot</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_map_barrier:toggle_slot">toggle_slot</a></li>
+					</ul>
+					<li><a href="#class:battle_toggle_slot">Toggle Slot</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#function:battle_toggle_slot:is_held_by_alliance">is_held_by_alliance</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_toggle_slot:holding_alliance">holding_alliance</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_toggle_slot:has_map_barrier">has_map_barrier</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_toggle_slot:map_barrier">map_barrier</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_toggle_slot:unique_ui_id">unique_ui_id</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_toggle_slot:unique_id">unique_id</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_toggle_slot:script_id">script_id</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_toggle_slot:highlight">highlight</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_toggle_slot:position">position</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_toggle_slot:slot_type">slot_type</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#e2edff" id="navigation_right">				<h2 style="background-color:#c1e6ff">Battle Topics</h2>
+				<ul>
+					<li><a href="battle_index.html">Battle Index</a></li>
+					<li><a href="battle_hierarchy.html">Battle Hierarchy</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="battle.html">Battle</a></li>
+					<li><a href="battle_alliances.html">Alliances</a></li>
+					<li><a href="battle_alliance.html">Alliance</a></li>
+					<li><a href="battle_armies.html">Armies</a></li>
+					<li><a href="battle_army.html">Army</a></li>
+					<li><a href="battle_units.html">Units</a></li>
+					<li><a href="battle_unit.html">Unit</a></li>
+					<li><a href="battle_unitcontroller.html">Unitcontroller</a></li>
+					<li><a href="ai_planner.html">AI Planners</a></li>
+					<li><a href="battle_assault_equipment.html">Assault Equipment</a></li>
+					<li><a href="battle_building.html">Building</a></li>
+					<li><a href="battle_buildings.html">Buildings</a></li>
+					<li><a href="battle_camera.html">Camera</a></li>
+					<li><a href="battle_capture_location.html">Capture Location</a></li>
+					<li><a href="battle_composite_scenes_system.html">Composite Scenes System</a></li>
+					<li><a href="battle_debug_drawing.html">Debug Drawing</a></li>
+					<li><a href="battle_reinforcements.html">reinforcements Reinforcements</a></li>
+					<li><a href="battle_sound_effect.html">Sound Effects</a></li>
+					<li><a href="battle_subtitles.html">Subtitles</a></li>
+					<li><strong> > Toggle System</strong></li>
+					<li><a href="battle_vector.html">Vector</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Script Interfaces</h2>
+				<ul>
+					<li><a href="battle_manager.html">Battle Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="advice_manager.html">Advice Manager</a></li>
+					<li><a href="battle_ui_manager.html">Battle UI Manager</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="cutscene.html">Battle Cutscenes</a></li>
+					<li><a href="generated_battle.html">Generated Battle</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="script_ai_planner.html">Script AI Planner</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="script_unit.html">Script Unit</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Data Interfaces</h2>
+				<ul>
+					<li><a href="st_helper.html">Scripted Tour Helpers</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:battle_toggle_system"><h1 class="content_header">Toggle System</h1></a>
+				<p>The <code>Toggle System</code> collection object provides access to other objects related to the toggle system. These are objects on the battlefield that can be turned on and off, such as barricades and map barriers. The <code>toggle_system</code> object provides access to a list of individual <code><a href="#class:battle_toggle_slot">battle_toggle_slot</a></code> objects from an internal numbered list. The function <code><a href="#function:battle_toggle_system:toggle_slot">toggle_system:toggle_slot</a></code> provides access to an individual toggle slot by index, while <code><a href="#function:battle_toggle_system:toggle_slot_count">toggle_system:toggle_slot_count</a></code> returns the size of the list.</p>
+				<p>A handle to the toggle system object may be obtained by calling <code><a href="battle.html#function:battle:toggle_system">battle:toggle_system</a></code>.</p>
+
+				<h4>Example:</h4>
+				<div id="example_code"><code>
+					 toggle_system = bm:toggle_system()<br />
+				</code></div>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_toggle_system:Functionality"><h2 class="section_header">Functionality</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_toggle_system:toggle_slot"><h3 class="function_name"><strong><code>toggle_system:toggle_slot(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">index</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the toggle slot at the specified index value in the collection. The list is 1-based, the toggle slot at index <code>1</code> is the first toggle slot in the list.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>index</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:battle_toggle_slot">battle_toggle_slot</a></code></code> toggle_slot</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 544</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_toggle_system:toggle_slot_script_id"><h3 class="function_name"><strong><code>toggle_system:toggle_slot_script_id(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">index</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the toggle slot with the specified script_id.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>index</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:battle_toggle_slot">battle_toggle_slot</a></code></code> toggle_slot</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 564</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_toggle_system:toggle_slot_count"><h3 class="function_name"><strong><code>toggle_system:toggle_slot_count()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the size of the toggle slot list.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> count</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 584</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_toggle_system:map_barrier"><h3 class="function_name"><strong><code>toggle_system:map_barrier(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">index</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the map barrier at the specified index value in the collection. The list is 1-based, the map barrier at index <code>1</code> is the first map barrier in the list.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>index</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:battle_map_barrier">battle_map_barrier</a></code></code> map_barrier</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 601</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_toggle_system:map_barrier_script_id"><h3 class="function_name"><strong><code>toggle_system:map_barrier_script_id(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">script id</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the map barrier with the specified script id.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>script id</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:battle_map_barrier">battle_map_barrier</a></code></code> toggle slot</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 622</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_toggle_system:map_barrier_count"><h3 class="function_name"><strong><code>toggle_system:map_barrier_count()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the size of the map barrier list.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> count</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 642</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_toggle_system:allow_army_interaction"><h3 class="function_name"><strong><code>toggle_system:allow_army_interaction(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">allow/forbids use of toggleables</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Allows/Stops all armies to interact with toggleables
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>allow/forbids use of toggleables</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 659</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_toggle_system:disable_and_refund_all_buildings"><h3 class="function_name"><strong><code>toggle_system:disable_and_refund_all_buildings()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Disable and refunds all built buildings
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 681</p>
+						</dd>
+					</dl>
+				</div>
+
+				<hr class="superblock_divider" />
+
+
+				<a name="class:battle_map_barrier"><h1 class="content_header">Map Barrier</h1></a>
+				<p><code>Map Barrier</code> objects represent map barriers on the battlefield. Map barriers are a special type of toggleable object that represent large barriers that block pathfinding on the battle map. They are distinct from barricades which are constructed within settlements. The visual style of a map barrier is often unique to its particular map.</p>
+				<p>Handles to map barrier objects may be obtained through the <code><a href="#class:battle_toggle_system">battle_toggle_system</a></code> and <code><a href="#class:battle_toggle_slot">battle_toggle_slot</a></code> interfaces.</p>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_map_barrier:Functionality"><h2 class="section_header">Functionality</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_map_barrier:enabled"><h3 class="function_name"><strong><code>map_barrier:enabled()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns if the map barrier is enabled
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> true/false</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 90</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_map_barrier:highlight"><h3 class="function_name"><strong><code>map_barrier:highlight([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">show highlight</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Activates or deactivates a map barrier highlight.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>show highlight</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 106</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_map_barrier:enable"><h3 class="function_name"><strong><code>map_barrier:enable(<code><a href="battle_army.html#class:battle_army">battle_army</a></code> </strong></code><i class="parameter">army</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Enables the map barrier. The army that is enabling the barrier must be specified.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_army.html#class:battle_army">battle_army</a></code></code></p>
+									</td>
+									<td>
+										<p>army</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 119</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_map_barrier:disable"><h3 class="function_name"><strong><code>map_barrier:disable(<code><a href="battle_army.html#class:battle_army">battle_army</a></code> </strong></code><i class="parameter">army</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Disables the map barrier. The army that is disabling the barrier must be specified.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_army.html#class:battle_army">battle_army</a></code></code></p>
+									</td>
+									<td>
+										<p>army</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 138</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_map_barrier:position"><h3 class="function_name"><strong><code>map_barrier:position(<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">position</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the position of the map barrier.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>position</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 157</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_map_barrier:record_key"><h3 class="function_name"><strong><code>map_barrier:record_key()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the record key of the map barrier.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> record_key</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 178</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_map_barrier:composite_scenes"><h3 class="function_name"><strong><code>map_barrier:composite_scenes()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the composite_scenes of the map barrier.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="battle_composite_scenes_system.html#class:battle_composite_scenes_list">battle_composite_scenes_list</a></code></code> composite_scenes_list</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 198</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_map_barrier:has_toggle_slot"><h3 class="function_name"><strong><code>map_barrier:has_toggle_slot()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the map barrier is linked to a toggle slot.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is linked to toggle slot</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 214</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_map_barrier:toggle_slot"><h3 class="function_name"><strong><code>map_barrier:toggle_slot()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the toggle slot linked with the barrier. If no toggleable is linked then nothing is returned.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:battle_toggle_slot">battle_toggle_slot</a></code></code> toggle slot</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 236</p>
+						</dd>
+					</dl>
+				</div>
+
+				<hr class="superblock_divider" />
+
+
+				<a name="class:battle_toggle_slot"><h1 class="content_header">Toggle Slot</h1></a>
+				<p><code>Toggle Slot</code> objects represent toggle slots on the battlefield. They are abstract objects, linked to other object types like <code><a href="#class:battle_map_barrier">battle_map_barrier</a></code> that represent physical objects on the battlefield. It is through the <code>battle_toggle_slot</code> interface that these objects can be activated and deactivated.</p>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_toggle_slot:Functionality"><h2 class="section_header">Functionality</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_toggle_slot:is_held_by_alliance"><h3 class="function_name"><strong><code>toggle_slot:is_held_by_alliance()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the toggle slot is currently held by an alliance.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is held by alliance</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 310</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_toggle_slot:holding_alliance"><h3 class="function_name"><strong><code>toggle_slot:holding_alliance()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a handle to the holding alliance. If no alliance holds the toggleable slot then nothing is returned.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="battle_alliance.html#class:battle_alliance">battle_alliance</a></code></code> holding alliance</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 327</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_toggle_slot:has_map_barrier"><h3 class="function_name"><strong><code>toggle_slot:has_map_barrier()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the toggle slot is linked to a map barrier.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is linked to map barrier</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 349</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_toggle_slot:map_barrier"><h3 class="function_name"><strong><code>toggle_slot:map_barrier()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the map barrier linked with the toggle slot. If no map barrier is linked then nothing is returned.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:battle_map_barrier">battle_map_barrier</a></code></code> map barrier</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 371</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_toggle_slot:unique_ui_id"><h3 class="function_name"><strong><code>toggle_slot:unique_ui_id()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the unique id for this toggle slot that the UI system uses.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> ui id</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 395</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_toggle_slot:unique_id"><h3 class="function_name"><strong><code>toggle_slot:unique_id()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the unique id for this toggle slot.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> id</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 413</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_toggle_slot:script_id"><h3 class="function_name"><strong><code>toggle_slot:script_id()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the script id of the toggle slot. If no script id has been set in the map data then a blank string is returned.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> script id</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 431</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_toggle_slot:highlight"><h3 class="function_name"><strong><code>toggle_slot:highlight([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">show highlight</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Activates or deactivates a highlight on a slot building place.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>show highlight</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 451</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_toggle_slot:position"><h3 class="function_name"><strong><code>toggle_slot:position()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the position
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code> position</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 464</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_toggle_slot:slot_type"><h3 class="function_name"><strong><code>toggle_slot:slot_type()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the slot type of the toggle slot as a string. Slot types are listed in the <code>toggle_system_types</code> database table.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> slot type</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptToggleSystem.cpp, line 481</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:59</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "battle"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

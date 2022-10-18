@@ -1,0 +1,1087 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Advice Manager script class</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#e2edff" id="main">
+
+			<div style="background-color:#e2edff" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Battle Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#c1e6ff">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search battle only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#c1e6ff">Game Areas</h2>
+				<ul>
+					<li><a href="../campaign/campaign_index.html">Campaign Index</a></li>
+					<li><strong> > Battle Index</strong></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:advice_manager">Advice Manager</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:advice_manager:Creation">Creation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:advice_manager:new">new</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:advice_manager:set_debug">set_debug</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:advice_manager:lock_advice">lock_advice</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:advice_manager:unlock_advice">unlock_advice</a></li>
+					</ul>
+					<li><a href="#class:advice_monitor">Advice Monitor</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:advice_monitor:Creation">Creation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:advice_monitor:new">new</a></li>
+						<li>&emsp;&emsp;<a href="#section:advice_monitor:Configuration">Configuration</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:advice_monitor:set_advice_level">set_advice_level</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:advice_monitor:set_can_interrupt_other_advice">set_can_interrupt_other_advice</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:advice_monitor:set_delay_before_triggering">set_delay_before_triggering</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:advice_monitor:set_duration">set_duration</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:advice_monitor:set_trigger_callback">set_trigger_callback</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:advice_monitor:set_halt_callback">set_halt_callback</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:advice_monitor:set_halt_advice_on_battle_end">set_halt_advice_on_battle_end</a></li>
+						<li>&emsp;&emsp;<a href="#section:advice_monitor:Ignore Advice History Conditions">Ignore Advice History Conditions</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:advice_monitor:add_ignore_advice_history_condition">add_ignore_advice_history_condition</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:advice_monitor:add_ignore_advice_history_tweaker">add_ignore_advice_history_tweaker</a></li>
+						<li>&emsp;&emsp;<a href="#section:advice_monitor:Start Conditions">Start Conditions</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:advice_monitor:add_start_condition">add_start_condition</a></li>
+						<li>&emsp;&emsp;<a href="#section:advice_monitor:Trigger Conditions">Trigger Conditions</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:advice_monitor:add_trigger_condition">add_trigger_condition</a></li>
+						<li>&emsp;&emsp;<a href="#section:advice_monitor:Halt Conditions">Halt Conditions</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:advice_monitor:add_halt_condition">add_halt_condition</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:advice_monitor:add_halt_on_advice_monitor_triggering">add_halt_on_advice_monitor_triggering</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:advice_monitor:add_halt_advice_monitor_on_trigger">add_halt_advice_monitor_on_trigger</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#e2edff" id="navigation_right">				<h2 style="background-color:#c1e6ff">Battle Topics</h2>
+				<ul>
+					<li><a href="battle_index.html">Battle Index</a></li>
+					<li><a href="battle_hierarchy.html">Battle Hierarchy</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="battle.html">Battle</a></li>
+					<li><a href="battle_alliances.html">Alliances</a></li>
+					<li><a href="battle_alliance.html">Alliance</a></li>
+					<li><a href="battle_armies.html">Armies</a></li>
+					<li><a href="battle_army.html">Army</a></li>
+					<li><a href="battle_units.html">Units</a></li>
+					<li><a href="battle_unit.html">Unit</a></li>
+					<li><a href="battle_unitcontroller.html">Unitcontroller</a></li>
+					<li><a href="ai_planner.html">AI Planners</a></li>
+					<li><a href="battle_assault_equipment.html">Assault Equipment</a></li>
+					<li><a href="battle_building.html">Building</a></li>
+					<li><a href="battle_buildings.html">Buildings</a></li>
+					<li><a href="battle_camera.html">Camera</a></li>
+					<li><a href="battle_capture_location.html">Capture Location</a></li>
+					<li><a href="battle_composite_scenes_system.html">Composite Scenes System</a></li>
+					<li><a href="battle_debug_drawing.html">Debug Drawing</a></li>
+					<li><a href="battle_reinforcements.html">reinforcements Reinforcements</a></li>
+					<li><a href="battle_sound_effect.html">Sound Effects</a></li>
+					<li><a href="battle_subtitles.html">Subtitles</a></li>
+					<li><a href="battle_toggle_system.html">Toggle System</a></li>
+					<li><a href="battle_vector.html">Vector</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Script Interfaces</h2>
+				<ul>
+					<li><a href="battle_manager.html">Battle Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><strong> > Advice Manager</strong></li>
+					<li><a href="battle_ui_manager.html">Battle UI Manager</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="cutscene.html">Battle Cutscenes</a></li>
+					<li><a href="generated_battle.html">Generated Battle</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="script_ai_planner.html">Script AI Planner</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="script_unit.html">Script Unit</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Data Interfaces</h2>
+				<ul>
+					<li><a href="st_helper.html">Scripted Tour Helpers</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:advice_manager"><h1 class="content_header">Advice Manager</h1></a>
+				<p>The battle advice manager provides a framework for managing the delivery of general advice by the advisor in battle. Client scripts create <code><a href="#class:advice_monitor">advice_monitor</a></code> objects for each item of advice they may wish to deliver. Each advice monitor is then set up to listen for certain in-game events or conditions becoming true, at which point the advice may be triggered. Advice monitors are also assigned a priority to allow higher-priority advice to supercede lower-priority advice.</p>
+				<p>Advice monitors create and use an <code><a href="#class:advice_manager">advice_manager</a></code> object to help manage the process of advice delivery. Client scripts do not need to create the <code><a href="#class:advice_manager">advice_manager</a></code> themselves, but by doing so they will be able to set it into debug mode for more output with <code><a href="#function:advice_manager:set_debug">advice_manager:set_debug</a></code>, or disable advice with <code><a href="#function:advice_manager:lock_advice">advice_manager:lock_advice</a></code>.</p>
+				<p>The advice manager triggers the <code>ScriptEventDeploymentPhaseBegins</code> when deployment phase begins. Advice monitors should listen for this if they want to trigger during deployment rather than another event.</p>
+				<p>The battle advice system outputs debug information to the <code>Lua - Interventions</code> console spool.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:advice_manager:Creation"><h2 class="section_header">Creation</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:advice_manager:new"><h3 class="function_name"><strong><code>advice_manager:new([boolean </strong></code><i class="parameter">debug mode</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and returns a new advice manager. Client scripts do not need to call this, however by doing so they will be able to set it into debug mode for more output with <code><a href="#function:advice_manager:set_debug">advice_manager:set_debug</a></code>, or disable advice with <code><a href="#function:advice_manager:lock_advice">advice_manager:lock_advice</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>debug mode</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>advice_manager</code> advice manager</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 -- create an advice manager with debug output<br />
+								 am = advice_manager:new(true);<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_advice.lua, line 47</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:advice_manager:set_debug"><h3 class="function_name"><strong><code>advice_manager:set_debug([boolean </strong></code><i class="parameter">debug mode</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets debug mode on the advice manager for more output
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>debug mode</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_advice.lua, line 164</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:advice_manager:lock_advice"><h3 class="function_name"><strong><code>advice_manager:lock_advice()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds an advice lock level to the advice manager, preventing the advice manager from triggering any advice. No advice monitors will trigger if any advice lock is active, and advice only unlocked when all advice locks are removed with <code><a href="#function:advice_manager:unlock_advice">advice_manager:unlock_advice</a></code>.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_advice.lua, line 176</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:advice_manager:unlock_advice"><h3 class="function_name"><strong><code>advice_manager:unlock_advice()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Removes an advice lock level to the advice manager, potentially allowing the advice manager to trigger advice again. Advice locks are added with <code><a href="#function:advice_manager:lock_advice">advice_manager:lock_advice</a></code>. No advice monitors will trigger if any advice lock is active, and advice only unlocked when all advice locks are removed with <code><a href="#function:advice_manager:unlock_advice">advice_manager:unlock_advice</a></code>.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_advice.lua, line 183</p>
+						</dd>
+					</dl>
+				</div>
+
+				<hr class="superblock_divider" />
+
+
+				<a name="class:advice_monitor"><h1 class="content_header">Advice Monitor</h1></a>
+				<p>Advice monitors provide a mechanism for the detection of trigger conditions of an individual item of advice, and for deciding whether to then trigger it. One advice monitor encapsulates the triggering conditions for one line of generic advice, so it's common to create multiple such objects. Each advice monitor attempts to create an <code><a href="#class:advice_manager">advice_manager</a></code> (should one not exist already) which provides backbone services to all running advice monitors.</p>
+				<p>Advice monitor trigger conditions may be specified as an event, a event with a condition, or just a condition. In the latter case the condition is repeatedly polled until it becomes true. Advice monitors also support the declaration of start conditions, which define when an advice monitor should start listening/polling for the trigger conditions, and halt conditions, which define when the monitor should stop. Like trigger conditions, start conditions and halt conditions may be specified as events, events with conditions, or just conditions. Multiple start/trigger/halt conditions may be specified for each advice monitor.</p>
+				<p>Advice monitors also support the calling of a trigger function as well as, or instead of, playing the advice itself. Use <code><a href="#function:advice_monitor:set_trigger_callback">advice_monitor:set_trigger_callback</a></code> to set such a function.</p>
+				<p>Should the advice associated with the advice monitor have been played before, the advice monitor shuts down on startup.</p>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:advice_monitor:Creation"><h2 class="section_header">Creation</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:advice_monitor:new"><h3 class="function_name"><strong><code>advice_monitor:new(string </strong></code><i class="parameter">name</i><code><strong>, number </strong></code><i class="parameter">priority</i><code><strong>, string </strong></code><i class="parameter">advice key</i><code><strong>, [table </strong></code><i class="parameter">infotext</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and returns a new advice monitor.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Name for the advice monitor. Must be unique amongst advice monitors.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>Priority of the advice. When two items of advice wish to trigger at the same time, the advice with the higher priority is triggered.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Key of the advice to trigger. The history of this advice thread is also checked when monitor is started - if it has been heard before then the monitor does not start.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code>table</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Table of infotext keys to show alongside the advice.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>advice_monitor</code> advice monitor</li>
+							</ol>
+
+							<h4>Example - Deployment advice:</h4>
+							<div id="example_code"><code>
+								 advice_deployment = advice_monitor:new(<br />
+								 &emsp;&emsp;&emsp;&emsp;"deployment",<br />
+								 &emsp;&emsp;&emsp;&emsp;50,<br />
+								 &emsp;&emsp;&emsp;&emsp;"war.battle.advice.deployment.001",<br />
+								 &emsp;&emsp;&emsp;&emsp;{<br />
+								 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"war.battle.advice.deployment.info_001",<br />
+								 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"war.battle.advice.deployment.info_002",<br />
+								 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"war.battle.advice.deployment.info_003",<br />
+								 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"war.battle.advice.deployment.info_004"<br />
+								 &emsp;&emsp;&emsp;&emsp;}<br />
+								 );<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_advice.lua, line 608</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:advice_monitor:Configuration"><h2 class="section_header">Configuration</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:advice_monitor:set_advice_level"><h3 class="function_name"><strong><code>advice_monitor:set_advice_level(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">advice level</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the minimum advice level at which the advice may be allowed to trigger. If the advice level is set to less than that required by the advice monitor when the advice monitor is started, then the monitor will immediately terminate. By default, advice monitors allow their advice to trigger if the advice level is set to low or high.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Minimum advice level. Valid values are 0 (minimul advice), 1 (low advice) and 2 (high advice).</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_advice.lua, line 700</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:advice_monitor:set_can_interrupt_other_advice"><h3 class="function_name"><strong><code>advice_monitor:set_can_interrupt_other_advice([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">can interrupt</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether this advice can interrupt other advice. By default this is disabled.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>can interrupt</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_advice.lua, line 712</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:advice_monitor:set_delay_before_triggering"><h3 class="function_name"><strong><code>advice_monitor:set_delay_before_triggering(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">delay in ms</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a delay period before the advice is actually triggered. This is 1000ms by default.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>delay in ms</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_advice.lua, line 724</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:advice_monitor:set_duration"><h3 class="function_name"><strong><code>advice_monitor:set_duration(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">duration in ms</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the duration for which this advice monitor blocks other non-interrupting advice for. By default this is 60000ms.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>duration in ms</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_advice.lua, line 734</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:advice_monitor:set_trigger_callback"><h3 class="function_name"><strong><code>advice_monitor:set_trigger_callback(<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">callback</i><code><strong>, [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">dont trigger advice</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a callback for the advice monitor to call at the point the advice is triggered (i.e. after any delay set with <code><a href="#function:advice_monitor:set_delay_before_triggering">advice_monitor:set_delay_before_triggering</a></code>).
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>Callback to call.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>If set to <code>true</code>, this monitor will trigger the callback but will not trigger the supplied advice or infotext itself. Set this to <code>true</code> if the callback takes care of triggering the advice itself.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_advice.lua, line 746</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:advice_monitor:set_halt_callback"><h3 class="function_name"><strong><code>advice_monitor:set_halt_callback(<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">callback</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a callback for the advice monitor to call at the point the advice is halted.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>Callback to call.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_advice.lua, line 760</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:advice_monitor:set_halt_advice_on_battle_end"><h3 class="function_name"><strong><code>advice_monitor:set_halt_advice_on_battle_end([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">halt on end</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the advice monitor to automatically halt or not when the battle ends. Advice monitors do halt when the battle ends by default - use this function to suppress this behaviour.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>halt on end</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_advice.lua, line 773</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:advice_monitor:Ignore Advice History Conditions"><h2 class="section_header">Ignore Advice History Conditions</h2></a>
+				</div>
+				<p>By default, advice monitors will not start or trigger if the advice key supplied to <code><a href="#function:advice_monitor:new">advice_monitor:new</a></code> is present in the advice history, which is to say that it has been triggered before. This behaviour can be overridden by setting an ignore advice history condition with <code><a href="#function:advice_monitor:add_ignore_advice_history_condition">advice_monitor:add_ignore_advice_history_condition</a></code>. If any condition added with this function returns <code>true</code> when the advice monitor starts then the advice monitor will disregard advice history when deciding to trigger. This can be used to set certain conditions that force advice to trigger even if it's been heard before, such as time elapsed since a timestamp last recorded (e.g. player hasn't done X for a certain period of time, so let's remind them how it works) or tweaker settings (to force a certain bit of advice to trigger for development purposes).</p>
+				<p>Note that ignore advice history conditions will not override other considerations that may prevent a certain advice monitor from triggering, such as advice level settings.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:advice_monitor:add_ignore_advice_history_condition"><h3 class="function_name"><strong><code>advice_monitor:add_ignore_advice_history_condition(<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">condition</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds an ignore advice history condition callback. Advice history conditions are queried when the advice monitor is started and, if any return <code>true</code> or a value that evaluates to true then advice history for this advice monitor will be disregarded when it decides whenther to start.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>condition</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_advice.lua, line 802</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:advice_monitor:add_ignore_advice_history_tweaker"><h3 class="function_name"><strong><code>advice_monitor:add_ignore_advice_history_tweaker(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">tweaker name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds an ignore advice history condition for a tweaker. If the supplied tweaker is set, then the advice monitor will ignore its advice history condition. Tweakers are used during development and the game should not be released with any tweakers active. Therefore, a script error will be thrown if the tweaker is set to remind developers to unset it at some point.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>tweaker name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_advice.lua, line 814</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:advice_monitor:Start Conditions"><h2 class="section_header">Start Conditions</h2></a>
+				</div>
+				<p>By default, advice monitors start monitoring for their trigger conditions when the deployment phase of the battle begins. This can be changed by adding one or more start conditions with <code><a href="#function:advice_monitor:add_start_condition">advice_monitor:add_start_condition</a></code>.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:advice_monitor:add_start_condition"><h3 class="function_name"><strong><code>advice_monitor:add_start_condition(function </strong></code><i class="parameter">condition</i><code><strong>, [string </strong></code><i class="parameter">event</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a start condition for the advice monitor, which determines when the advice monitor will begin monitoring its trigger conditions. Supply one of the following combination of arguments:<br />
+							<ul><li>A condition function that returns a boolean value. In this case, the condition will be repeatedly called until it returns <code>true</code>. Once this happens the advice monitor will begin monitoring for the trigger condition.</li><br />
+							<li>A condition function that returns a boolean value, and an event. In this case, the event will be listened for and, when received, the condition function called. Should it return <code>true</code> the advice monitor will begin monitoring for the trigger condition.</li><br />
+							<li><code>true</code> in place of a condition function, and an event. In this case, the advice monitor will begin monitoring for the trigger condition as soon as the event is received, with no conditional check.</li></ul>
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p>Conditional function. Supply a function that returns a boolean value, or <code>true</code> (if also supplying an event).</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Event to test.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example:</h4>
+								This advice monitor starts monitoring its trigger conditions when a player unit routs.
+							<div id="example_code"><code>
+								 advice_player_rallies:add_start_condition(<br />
+								 &emsp;&emsp;&emsp;&emsp;function() <br />
+								&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return num_units_routing(player_army) > 0<br />
+								&emsp;&emsp;&emsp;&emsp;end<br />
+								 );<br />
+							</code></div>
+
+							<h4>Example:</h4>
+								This advice monitor starts monitoring its trigger conditions when a unit attacks the walls.
+							<div id="example_code"><code>
+								 advice_siege_capture:add_start_condition(<br />
+								 &emsp;&emsp;&emsp;&emsp;true,<br />
+								 &emsp;&emsp;&emsp;&emsp;"BattleUnitAttacksWalls"<br />
+								 );<br />
+							</code></div>
+
+							<h4>Example:</h4>
+								This advice monitor starts at the beginning of conflict phase, if the player has one or more artillery pieces.
+							<div id="example_code"><code>
+								 advice_player_artillery:add_start_condition(<br />
+								 &emsp;&emsp;&emsp;&emsp;function()&emsp;&emsp;&emsp;&emsp;<br />
+								 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;local player_artillery = num_units_passing_test(<br />
+								 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;bm:get_player_army(), <br />
+								 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;function(unit)<br />
+								 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return unit:unit_class() == "art_fld";<br />
+								 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;end<br />
+								 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;);<br />
+								 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return player_artillery > 0;<br />
+								 &emsp;&emsp;&emsp;&emsp;end,<br />
+								 &emsp;&emsp;&emsp;&emsp;"ScriptEventConflictPhaseBegins"<br />
+								 );<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_advice.lua, line 849</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:advice_monitor:Trigger Conditions"><h2 class="section_header">Trigger Conditions</h2></a>
+				</div>
+				<p>Trigger conditions tell advice monitors when to try and play advice. Once started (either when deployment phase begins or when a condition registered with <code><a href="#function:advice_monitor:add_start_condition">advice_monitor:add_start_condition</a></code> passes), an advice monitor begins monitoring for one of its trigger conditions to pass. Once a trigger condition passes the advice monitor stops its trigger monitors, and sends the advice to the <code><a href="#class:advice_manager">advice_manager</a></code>. This waits a short period for other advice to also trigger, then picks the highest-priority advice from the available selection. The unsuccessful advice monitors are restarted when the successful advice finishes, and may be triggered again.</p>
+				<p>Each advice monitor must have at least one trigger condition registered, otherwise it won't be able to fire its advice at all.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:advice_monitor:add_trigger_condition"><h3 class="function_name"><strong><code>advice_monitor:add_trigger_condition(function </strong></code><i class="parameter">condition</i><code><strong>, [string </strong></code><i class="parameter">event</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a trigger condition for the advice monitor. Supply one of the following combination of arguments:<br />
+							<ul><li>A condition function that returns a boolean value. In this case, the condition will be polled until it passes, at which point the advice will be considered for playing.</li><br />
+							<li>A condition function that returns a boolean value, and an event. In this case, the event will be listened for and, when received, the condition checked. Should it pass, the advice will be considered for playing.</li><br />
+							<li><code>true</code> in place of a condition function, and an event. In this case, the advice will be considered for playback when the event is received.</li></ul>
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p>Conditional function. Supply a function that returns a boolean value, or <code>true</code> (if also supplying an event).</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Event to test.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example:</h4>
+								Trigger advice when a player unit rallies.
+							<div id="example_code"><code>
+								 advice_player_unit_rallies:add_trigger_condition(<br />
+								 &emsp;&emsp;&emsp;&emsp;true,<br />
+								&emsp;&emsp;&emsp;&emsp;"ScriptEventPlayerUnitRallies"<br />
+								 );<br />
+							</code></div>
+
+							<h4>Example:</h4>
+								Trigger advice when one of the player's giants becomes visible to the enemy.
+							<div id="example_code"><code>
+								 advice_player_giant:add_trigger_condition(<br />
+								 &emsp;&emsp;&emsp;&emsp;function()<br />
+								 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;local enemy_alliance = advice_player_giant.enemy_alliance;<br />
+								 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;local player_giants = advice_player_giant.player_giants;<br />
+								 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;local num_visible_player_giants = num_units_passing_test(<br />
+								 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;player_giants,<br />
+								 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;function(unit)<br />
+								 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return unit:is_visible_to_alliance(enemy_alliance);<br />
+								 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;end<br />
+								 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;);<br />
+								 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return num_visible_player_giants > 0;<br />
+								 &emsp;&emsp;&emsp;&emsp;end<br />
+								 );<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_advice.lua, line 916</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:advice_monitor:Halt Conditions"><h2 class="section_header">Halt Conditions</h2></a>
+				</div>
+				<p>Halt conditions tell advice monitors when to stop monitoring. For example, advice about preparing an ambush would be inappropriate for playback when the two armies engage, so such an advice monitor could be halted. Like start and trigger conditions, halt conditions can be supplied as events, conditions, or events and conditions.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:advice_monitor:add_halt_condition"><h3 class="function_name"><strong><code>advice_monitor:add_halt_condition(function </strong></code><i class="parameter">condition</i><code><strong>, [string </strong></code><i class="parameter">event</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a halt condition for the advice monitor. Supply one of the following combination of arguments:<br />
+							<uo><li>A condition function that returns a boolean value. In this case, the condition will be polled until it passes, at which point the monitor halts.</li><br />
+							<li>A condition function that returns a boolean value, and an event. In this case, the event will be listened for and, when received, the condition checked. Should it pass, the advice monitor will halt.</li><br />
+							<li><code>true</code> in place of a condition function, and an event. In this case, the advice monitor will halt when the event is received.</li></ul>
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p>Conditional function. Supply a function that returns a boolean value, or <code>true</code> (if also supplying an event).</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Event to test.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example:</h4>
+								Halt when the "enemy victory point captured" aide-de-camp message is shown.
+							<div id="example_code"><code>
+								 advice_player_captures_victory_point:add_trigger_condition(<br />
+								 &emsp;&emsp;&emsp;&emsp;function(context)<br />
+								 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return context.string == "adc_enemy_point_captured"<br />
+								 &emsp;&emsp;&emsp;&emsp;end,<br />
+								 &emsp;&emsp;&emsp;&emsp;"BattleAideDeCampEvent"<br />
+								 );<br />
+							</code></div>
+
+							<h4>Example:</h4>
+								Halt when the <code>ScriptEventPlayerApproachingVictoryPoint</code> event is received.
+							<div id="example_code"><code>
+								 advice_player_approaches_victory_point:add_trigger_condition(<br />
+								 &emsp;&emsp;&emsp;&emsp;true,<br />
+								 &emsp;&emsp;&emsp;&emsp;"ScriptEventPlayerApproachingVictoryPoint"<br />
+								 );<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_advice.lua, line 978</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:advice_monitor:add_halt_on_advice_monitor_triggering"><h3 class="function_name"><strong><code>advice_monitor:add_halt_on_advice_monitor_triggering(string </strong></code><i class="parameter">name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Halts this advice monitor when another advice monitor successfully triggers its advice. The other advice monitor is specified by its name.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Name of advice monitor to halt on.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_advice.lua, line 1018</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:advice_monitor:add_halt_advice_monitor_on_trigger"><h3 class="function_name"><strong><code>advice_monitor:add_halt_advice_monitor_on_trigger(string </strong></code><i class="parameter">name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Halts another advice monitor when this monitor successfully triggers. The other advice monitor is specified by its name.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Name of advice monitor to halt when this monitor triggers.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_advice.lua, line 1031</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:58</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "battle"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

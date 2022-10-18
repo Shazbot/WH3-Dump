@@ -1,0 +1,1 @@
+Files in this folder are intended for any documentation we want to make easily accessible for modders, and that are also read/written to by the game.  They are not packed into pack files for this reason (to make easier to see).

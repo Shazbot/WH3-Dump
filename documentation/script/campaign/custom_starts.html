@@ -1,0 +1,1445 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Campaign Custom Starts</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#fff7cc" id="main">
+
+			<div style="background-color:#fff7cc" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Campaign Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#ffed8c">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search campaign only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#ffed8c">Game Areas</h2>
+				<ul>
+					<li><strong> > Campaign Index</strong></li>
+					<li><a href="../battle/battle_index.html">Battle Index</a></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#ffed8c">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:custom_starts">Campaign Custom Starts</a><img alt="Loaded in Campaign" style="float:right; margin-right:1em;" src="../images/loaded_in_campaign.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:custom_starts:How to Use">How to Use</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:custom_starts:region_change">region_change</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:custom_starts:absorb_other_faction">absorb_other_faction</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:custom_starts:primary_slot_change">primary_slot_change</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:custom_starts:port_slot_change">port_slot_change</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:custom_starts:secondary_slot_change">secondary_slot_change</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:custom_starts:create_army">create_army</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:custom_starts:create_army_for_faction_leader">create_army_for_faction_leader</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:custom_starts:teleport_character">teleport_character</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:custom_starts:teleport_character_faction_leader">teleport_character_faction_leader</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:custom_starts:hide_faction_leader">hide_faction_leader</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:custom_starts:modify_units_in_army">modify_units_in_army</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:custom_starts:add_xp_to_units">add_xp_to_units</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:custom_starts:force_diplomacy_change">force_diplomacy_change</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:custom_starts:block_diplomacy">block_diplomacy</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:custom_starts:abandon_region">abandon_region</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:custom_starts:kill_faction">kill_faction</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:custom_starts:apply_effect_bundle_character">apply_effect_bundle_character</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:custom_starts:force_change_faction_cai_personality">force_change_faction_cai_personality</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:custom_starts:add_pooled_resource_to_faction">add_pooled_resource_to_faction</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:custom_starts:generate_random_army">generate_random_army</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#fff7cc" id="navigation_right">				<h2 style="background-color:#ffed8c">Campaign Topics</h2>
+				<ul>
+					<li><a href="campaign_index.html">Campaign Index</a></li>
+					<li><a href="campaign_script_structure.html">Campaign Script Structure</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="narrative_system.html">Narrative System</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="campaignui.html">CampaignUI</a></li>
+					<li><a href="cinematics.html">Cinematics</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="episodic_scripting.html">Episodic Scripting</a></li>
+					<li><a href="model_hierarchy.html">Model Hierarchy</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Script Interfaces</h2>
+				<ul>
+					<li><a href="campaign_manager.html">Campaign Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="campaign_cutscene.html">Campaign Cutscenes</a></li>
+					<li><a href="campaign_ui_manager.html">Campaign UI Manager</a></li>
+					<li><a href="chapter_mission.html">Chapter Missions</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="intervention.html">Interventions</a></li>
+					<li><a href="invasion_manager.html">Invasion Manager</a></li>
+					<li><a href="mission_manager.html">Mission Managers</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="narrative_event.html">Narrative Events</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="payload.html">Payload String Constructor</a></li>
+					<li><a href="random_army_manager.html">Random Army Manager</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="unique_table.html">Unique Table</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Data Interfaces</h2>
+				<ul>
+					<li><strong> > Campaign Custom Starts</strong></li>
+					<li><a href="faction_intro.html">Faction Intro</a></li>
+					<li><a href="narrative.html">Narrative</a></li>
+					<li><a href="narrative_events.html">Narrative Event Templates</a></li>
+					<li><a href="narrative_queries.html">Narrative Query Templates</a></li>
+					<li><a href="narrative_triggers.html">Narrative Trigger Templates</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:custom_starts"><h1 class="content_header">Campaign Custom Starts</h1></a>
+				<p>Allows tweaks to be made to a faction's starting circumstances based on other conditions.</p>
+				<p>This script is to be used when creating a custom start that differs from the start_pos.</p>
+				<p>Please use this instead of editing a faction's unique start/prelude scripts - editing that file with start pos changes can only be done in SP as MP changes cause desync issues.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:custom_starts:How to Use"><h2 class="section_header">How to Use</h2></a>
+				</div>
+				<p>To use the custom start functions you need to declare a set of changes to enact in the <code>custom_start</code> table.</p>
+				<p>Within a custom start, a set of changes to the campaign map can be specified. For example, <code>region_change</code> can give a region to a particular faction.</p>
+				<p>The conditions under which a certain custom start executes can be defined with the <code>is_human</code> and <code>is_ai</code> values. These may be a faction string, or a list of faction strings, and ALL factions must be human, or AI, for <code>is_human</code> and <code>is_ai</code> respectively.</p>
+
+				<h4>Example - Custom Start:</h4>
+					For Cult of Sotek, if Pestilens is AI then start war between Sotek and Pestilens, and give Pestilens the Shrine of Sotek. If Itza and Cult of Sotek are AI, they cannot declare war.
+				<div id="example_code"><code>
+					 {<br />
+					 &emsp;&emsp;&emsp;&emsp;if_human = "wh2_dlc12_lzd_cult_of_sotek",<br />
+					 &emsp;&emsp;&emsp;&emsp;if_ai = "wh2_main_skv_clan_pestilens",<br />
+					 &emsp;&emsp;&emsp;&emsp;changes = {<br />
+					 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{"region_change", "wh3_main_combi_region_shrine_of_sotek", "wh2_main_skv_clan_pestilens"},<br />
+					 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{"force_diplomacy", "wh2_dlc12_lzd_cult_of_sotek", "wh2_main_skv_clan_pestilens", "war"},<br />
+					 &emsp;&emsp;&emsp;&emsp;}<br />
+					 }<br />
+					 {<br />
+					 &emsp;&emsp;&emsp;&emsp;if_ai = { "wh2_dlc12_lzd_cult_of_sotek", "wh2_main_lzd_itza" }<br />
+					 &emsp;&emsp;&emsp;&emsp;changes = {<br />
+					 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{"block_diplomacy", "wh2_dlc12_lzd_cult_of_sotek", "wh2_main_lzd_itza", "war", false, false},<br />
+					 &emsp;&emsp;&emsp;&emsp;}<br />
+					 }<br />
+				</code></div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:custom_starts:region_change"><h3 class="function_name"><strong><code>custom_starts:region_change(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">region key</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction_name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Give a region to the specified faction.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The key of the region to be transferred.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The key of the faction to receive the region.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/wh2_campaign_custom_starts.lua, line 348</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_starts:absorb_other_faction"><h3 class="function_name"><strong><code>custom_starts:absorb_other_faction(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">absorbing faction key</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">absorbed_faction_key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Give all regions of the absorbed faction to the absorbing faction, and kill all absorbed faction's characters.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The key of the faction to absorb the other faction.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The key of the faction to be absorbed.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/wh2_campaign_custom_starts.lua, line 373</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_starts:primary_slot_change"><h3 class="function_name"><strong><code>custom_starts:primary_slot_change(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">region</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">building</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Change the primary building at the specified region to the specified building.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The region at which the building should be changed.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The building to set the primary slot of the region to.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> Returns <code>true</code> of the primary slot successfully changed to the specified building key, otherwise returns <code>false</code>.</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/wh2_campaign_custom_starts.lua, line 400</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_starts:port_slot_change"><h3 class="function_name"><strong><code>custom_starts:port_slot_change(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">region</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">building</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Change the port slot at the specified region to the specified building.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The key of the region at which the port slot will change.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The key of the building to change the slot to.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> Returns <code>true</code> of the primary slot successfully changed to the specified building key, otherwise returns <code>false</code>.</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/wh2_campaign_custom_starts.lua, line 430</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_starts:secondary_slot_change"><h3 class="function_name"><strong><code>custom_starts:secondary_slot_change(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">region</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">slot_index</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">building</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Change the secondary slot at the given index of a specified region to a building.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The key of the region at which to change the building.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>The zero-based index of the secondary slot at which to change the building.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The key of the building to which the slot should change.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> Returns <code>true</code> of the primary slot successfully changed to the specified building key, otherwise returns <code>false</code>.</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/wh2_campaign_custom_starts.lua, line 466</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_starts:create_army"><h3 class="function_name"><strong><code>custom_starts:create_army(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction_name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">or <code><a href="lua.html#class:string">string</a></code> unit_list</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">region_name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">x_pos</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">y_pos</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">agent_subtype</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">is_leader</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:table">table</a></code> </strong></code><i class="parameter">name_table</i><code><strong><br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Spawn an army on the map for a certain faction using either a quantity of units, or a random army template key.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The key of the faction the army will belong to.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>The quantity of units to be spawned (in which case random units are created) or the key of the random army template to be used.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The key of the region the army will spawn in.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>The x coordinate the army will spawn at.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>The y coordinate the army will spawn at.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Character subtype of character at the head of the army.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>Make the spawned character the faction leader.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>8</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p>An array of 4 names, corresponding to the forename, clan name, family name, and other name of the general. Unfilled names must be empty strings. These should be given in the localised text lookup format i.e. a key from the <code>names</code> table with "names_name_" prepended.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/wh2_campaign_custom_starts.lua, line 509</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_starts:create_army_for_faction_leader"><h3 class="function_name"><strong><code>custom_starts:create_army_for_faction_leader(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction_name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">region_name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">x_pos</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">y_pos</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">or <code><a href="lua.html#class:string">string</a></code> unit_list</i><code><strong><br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Create an army for the leader of the specified faction.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The key of the faction whose leader gets an army.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The key of the region the army will spawn in.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>The x coordinate at which the army will spawn.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>The y coordinate at which the army will spawn.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>The quantity of units to be spawned (in which case random units are created) or the key of the random army template to be used.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/wh2_campaign_custom_starts.lua, line 597</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_starts:teleport_character"><h3 class="function_name"><strong><code>custom_starts:teleport_character(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction_name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">start_x</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">start_y</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">end_x</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">end_y</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">is_general</i><code><strong><br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Teleport a character of a given faction, whichever character is closest to the provided start coordinates.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The key of the faction the teleported character belongs to.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>The starting x coordinate - the closest character of the given faction to this position will be teleported.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>The starting y coordinate - the closest character of the given faction to this position will be teleported.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>The teleport x coordinate.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>The teleport y coordinate.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>Whether or not the target character is a general. This informs which character nearest the starting coord is selected.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/wh2_campaign_custom_starts.lua, line 651</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_starts:teleport_character_faction_leader"><h3 class="function_name"><strong><code>custom_starts:teleport_character_faction_leader(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction_key</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">target_x</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">target_y</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Teleport the leader of the specified faction to these coordinates.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The name of the faction whose leader is to be teleported.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>The x coordinate to teleport to.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>The y coordinate to teleport to.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/wh2_campaign_custom_starts.lua, line 703</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_starts:hide_faction_leader"><h3 class="function_name"><strong><code>custom_starts:hide_faction_leader(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction_key</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">startpos_ID</i><code><strong>, <code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">kill_army</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Hide the leader of the faction by killing them and restricting their recruitment.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The key of the faction whose leader will be hidden.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>The startpos ID of the general to have their recruitment locked. This ought to match the leader of the specified faction.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>Kill the faction leader's entire army, if true.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/wh2_campaign_custom_starts.lua, line 717</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_starts:modify_units_in_army"><h3 class="function_name"><strong><code>custom_starts:modify_units_in_army(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction_name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">pos_x</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">pos_y</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:table">table</a></code> </strong></code><i class="parameter">add_units_table</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:table">table</a></code> </strong></code><i class="parameter">remove_units_table</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">general_forename</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">general_surname</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Add and remove the provided lists of units (removals occur per-instance, so three consecutive unit keys results in the removal of 3 units), to the factions' army found closest to the provided coordinate.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The key of the faction for which armies close to the coordinates will be considered.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>The x coordinate close to the target army.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>The y coordinate close to the target army.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p>A list of unit keys to be added. Provide an empty table if no units wanted.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p>A list of unit keys to be removed, per-instance of that unit. Provide an empty table if no units wanted.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>The forename of the general whose army will be adjusted. Can be used to handle different starting generals for the same faction receiving different starting units. Otherwise can be left blank.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>The surname of the general whose army will be adjusted.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/wh2_campaign_custom_starts.lua, line 735</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_starts:add_xp_to_units"><h3 class="function_name"><strong><code>custom_starts:add_xp_to_units(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction_name</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unit_key</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">experience</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Add XP to each instance of the given unit key in all of a faction's armies.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The faction for which all units of a type will receive XP.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The key of the unit type to receive XP.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>The amount of XP given to each unit.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/wh2_campaign_custom_starts.lua, line 806</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_starts:force_diplomacy_change"><h3 class="function_name"><strong><code>custom_starts:force_diplomacy_change(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">s_faction</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">t_faction</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">d_type</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Force a change in diplomacy between the two factions.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The source faction.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The target faction.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The type of diplomacy to enforce. This is currently limited to 'peace' or 'war'. Allies are not invited to war.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/wh2_campaign_custom_starts.lua, line 845</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_starts:block_diplomacy"><h3 class="function_name"><strong><code>custom_starts:block_diplomacy(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">s_faction</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">t_faction</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">diplomacy</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">can_offer</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">can_offer</i><code><strong><br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Restricts or unrestricts diplomacy types between two factions, using the diplomacy types available in <code>campaign_manager:force_diplomacy</code>. Groups of factions may be specified with the strings <code>"all"</code>, <code>"faction:faction_key"</code>, <code>"subculture:subculture_key"</code> or <code>"culture:culture_key"</code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The source faction.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The target faction.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The diplomacy type being restricted or allowed, as specified in <code>campaign_manager:force_diplomacy</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>If the source faction can offer this diplomatic relationship to the target.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>If the source faction can accept this diplomatic relationship to the target.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/wh2_campaign_custom_starts.lua, line 878</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_starts:abandon_region"><h3 class="function_name"><strong><code>custom_starts:abandon_region(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">region_key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Abandon the specified region key, turning it to ruins.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The key of the region to be abandoned.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/wh2_campaign_custom_starts.lua, line 919</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_starts:kill_faction"><h3 class="function_name"><strong><code>custom_starts:kill_faction(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction_key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Kills the specified faction key, abandoning all its regions and killing all armies.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The key of the faction to be killed.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/wh2_campaign_custom_starts.lua, line 936</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_starts:apply_effect_bundle_character"><h3 class="function_name"><strong><code>custom_starts:apply_effect_bundle_character(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction_name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">x_pos</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">y_pos</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">bundle</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">duration</i><code><strong><br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Apply an effect bundle to the character of the specified faction nearest the provided location.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The key name of the faction for which characters will be considered.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>The x coordinate from which the target character is searched.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>The y coordinate from which the target character is searched.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>The key of the bundle to apply.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>The turn duration the bundle will last for, 0 being infinite turns.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/wh2_campaign_custom_starts.lua, line 990</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_starts:force_change_faction_cai_personality"><h3 class="function_name"><strong><code>custom_starts:force_change_faction_cai_personality(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction_key</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">personality_key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Force the specified faction to adopt the specified AI personality.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Faction key</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Personality key</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/wh2_campaign_custom_starts.lua, line 1035</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_starts:add_pooled_resource_to_faction"><h3 class="function_name"><strong><code>custom_starts:add_pooled_resource_to_faction(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction_name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">pooled_resource_key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">pooled_resource_factor_key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code>, </strong></code><i class="parameter">the amount to adjust by</i><code><strong><br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adjusts specified pooled resource to target faction.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The faction name to adjust the specified pooled resource for.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The pooled resource to adjust values for.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The factor through which the resource is adjusted for the faction</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code>,</code></p>
+									</td>
+									<td>
+										<p>the amount to adjust by</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/wh2_campaign_custom_starts.lua, line 1045</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_starts:generate_random_army"><h3 class="function_name"><strong><code>custom_starts:generate_random_army(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">subculture</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">num_units</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Generate a random army using pre-defined army sets per subculture.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>The subculture of the army to be generated: each subculture has a particular 'standard' army template in this function.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>The size of the army to be generated.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> Returns a table of unit keys representing the army that was generated.</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/wh2_campaign_custom_starts.lua, line 1068</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:58</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "campaign"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>AI Planners</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#e2edff" id="main">
+
+			<div style="background-color:#e2edff" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Battle Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#c1e6ff">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search battle only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#c1e6ff">Game Areas</h2>
+				<ul>
+					<li><a href="../campaign/campaign_index.html">Campaign Index</a></li>
+					<li><strong> > Battle Index</strong></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:ai_planner">AI Planners</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:ai_planner:Creation">Creation</a></li>
+						<li>&emsp;&emsp;<a href="#section:ai_planner:Adding and Removing Units">Adding and Removing Units</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:ai_planner:add_units">add_units</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:ai_planner:remove_units">remove_units</a></li>
+						<li>&emsp;&emsp;<a href="#section:ai_planner:Orders">Orders</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:ai_planner:defend_position">defend_position</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:ai_planner:attack_unit">attack_unit</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:ai_planner:rush_unit">rush_unit</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:ai_planner:move_to_position">move_to_position</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:ai_planner:clear_objective">clear_objective</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#e2edff" id="navigation_right">				<h2 style="background-color:#c1e6ff">Battle Topics</h2>
+				<ul>
+					<li><a href="battle_index.html">Battle Index</a></li>
+					<li><a href="battle_hierarchy.html">Battle Hierarchy</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="battle.html">Battle</a></li>
+					<li><a href="battle_alliances.html">Alliances</a></li>
+					<li><a href="battle_alliance.html">Alliance</a></li>
+					<li><a href="battle_armies.html">Armies</a></li>
+					<li><a href="battle_army.html">Army</a></li>
+					<li><a href="battle_units.html">Units</a></li>
+					<li><a href="battle_unit.html">Unit</a></li>
+					<li><a href="battle_unitcontroller.html">Unitcontroller</a></li>
+					<li><strong> > AI Planners</strong></li>
+					<li><a href="battle_assault_equipment.html">Assault Equipment</a></li>
+					<li><a href="battle_building.html">Building</a></li>
+					<li><a href="battle_buildings.html">Buildings</a></li>
+					<li><a href="battle_camera.html">Camera</a></li>
+					<li><a href="battle_capture_location.html">Capture Location</a></li>
+					<li><a href="battle_composite_scenes_system.html">Composite Scenes System</a></li>
+					<li><a href="battle_debug_drawing.html">Debug Drawing</a></li>
+					<li><a href="battle_reinforcements.html">reinforcements Reinforcements</a></li>
+					<li><a href="battle_sound_effect.html">Sound Effects</a></li>
+					<li><a href="battle_subtitles.html">Subtitles</a></li>
+					<li><a href="battle_toggle_system.html">Toggle System</a></li>
+					<li><a href="battle_vector.html">Vector</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Script Interfaces</h2>
+				<ul>
+					<li><a href="battle_manager.html">Battle Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="advice_manager.html">Advice Manager</a></li>
+					<li><a href="battle_ui_manager.html">Battle UI Manager</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="cutscene.html">Battle Cutscenes</a></li>
+					<li><a href="generated_battle.html">Generated Battle</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="script_ai_planner.html">Script AI Planner</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="script_unit.html">Script Unit</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Data Interfaces</h2>
+				<ul>
+					<li><a href="st_helper.html">Scripted Tour Helpers</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:ai_planner"><h1 class="content_header">AI Planners</h1></a>
+				<p>AI planners give battle scripts the ability to group units together under AI control, and to give that group high-level orders such as <code><a href="#function:ai_planner:defend_position">ai_planner:defend_position</a></code> or <code><a href="#function:ai_planner:attack_unit">ai_planner:attack_unit</a></code> and have those units work together to intelligently carry out the order.</p>
+				<p>This code interface is wrapped in script by the <code><a href="script_ai_planner.html#class:script_ai_planner">script_ai_planner</a></code> interface, and it is recommended that client scripts use that interface rather than this one as it provides some ease-of-use improvements and additional wrapped behaviours.&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</p>
+				<p>It is not recommended to try and use ai planners during siege battles, as the siege battle ai system has a tendency to override unit behaviour - see a battle ai programmer for more details.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:ai_planner:Creation"><h2 class="section_header">Creation</h2></a>
+				</div>
+				<p>AI planners are created with the <code><a href="battle_alliance.html#function:battle_alliance:create_ai_unit_planner">alliance:create_ai_unit_planner</a></code> function call on the <code><a href="battle_alliance.html#class:battle_alliance">battle_alliance</a></code> interface. Once one is created and returned, units belonging to that alliance may be added to it and orders issued to them with the functions below.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:ai_planner:Adding and Removing Units"><h2 class="section_header">Adding and Removing Units</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:ai_planner:add_units"><h3 class="function_name"><strong><code>ai_planner:add_units(... </strong></code><i class="parameter">units</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds units to the ai planner. One or more <code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> objects may be specified as arguments. Each unit specified must belong to the <code><a href="battle_alliance.html#class:battle_alliance">battle_alliance</a></code> from which the planner was created. If units are added to the planner after an order has been issued then those units will start following that order automatically.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>...</code></p>
+									</td>
+									<td>
+										<p>One or more <code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> objects.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptAIObjective.cpp, line 142</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:ai_planner:remove_units"><h3 class="function_name"><strong><code>ai_planner:remove_units(... </strong></code><i class="parameter">units</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Removes units from the ai planner. One or more <code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> objects may be specified as arguments. Each unit specified must have previously been added to the planner with <code><a href="#function:ai_planner:add_units">ai_planner:add_units</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>...</code></p>
+									</td>
+									<td>
+										<p>One or more <code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> objects.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptAIObjective.cpp, line 181</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:ai_planner:Orders"><h2 class="section_header">Orders</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:ai_planner:defend_position"><h3 class="function_name"><strong><code>ai_planner:defend_position(<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">position</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">radius</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs units in the ai planner to adopt a defensive formation, then move to and defend a specified position from any enemies, staying within a specified radius.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>Position which the units will defend.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Radius in m around the position in which the units will roam.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptAIObjective.cpp, line 217</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:ai_planner:attack_unit"><h3 class="function_name"><strong><code>ai_planner:attack_unit(<code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> </strong></code><i class="parameter">target</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs units in the ai planner to adopt an offensive formation and then attack a specified unit and any other nearby enemies. Other enemies encountered along the way will be intelligently reacted to.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code></code></p>
+									</td>
+									<td>
+										<p>target</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptAIObjective.cpp, line 250</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:ai_planner:rush_unit"><h3 class="function_name"><strong><code>ai_planner:rush_unit(<code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code> </strong></code><i class="parameter">target</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs units in the ai planner to attack a specified unit and any other nearby enemies, without too much reforming. Other enemies encountered along the way will be intelligently reacted to.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_unit.html#class:battle_unit">battle_unit</a></code></code></p>
+									</td>
+									<td>
+										<p>target</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptAIObjective.cpp, line 277</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:ai_planner:move_to_position"><h3 class="function_name"><strong><code>ai_planner:move_to_position(<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">position</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs units in the ai planner to adopt an movement formation and then move to a specified position.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>position</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptAIObjective.cpp, line 304</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:ai_planner:clear_objective"><h3 class="function_name"><strong><code>ai_planner:clear_objective()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Clears the current order of the ai planner.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptAIObjective.cpp, line 334</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:59</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "battle"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

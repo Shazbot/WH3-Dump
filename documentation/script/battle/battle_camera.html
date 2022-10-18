@@ -1,0 +1,986 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Camera</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#e2edff" id="main">
+
+			<div style="background-color:#e2edff" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Battle Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#c1e6ff">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search battle only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#c1e6ff">Game Areas</h2>
+				<ul>
+					<li><a href="../campaign/campaign_index.html">Campaign Index</a></li>
+					<li><strong> > Battle Index</strong></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:battle_camera">Camera</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:battle_camera:Creation">Creation</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_camera:Usage">Usage</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_camera:Ambushes">Ambushes</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_camera:is_ambush_controller_executing">is_ambush_controller_executing</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_camera:allow_user_to_skip_ambush_intro">allow_user_to_skip_ambush_intro</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_camera:teleport_defender_when_ambush_intro_skipped">teleport_defender_when_ambush_intro_skipped</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_camera:Camera Movement Files">Camera Movement Files</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_camera:play">play</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_camera:stop">stop</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_camera:is_playing">is_playing</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_camera:Camera Position and Movement">Camera Position and Movement</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_camera:look_at">look_at</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_camera:move_to">move_to</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_camera:position">position</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_camera:target">target</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_camera:Disabling Camera Functionality">Disabling Camera Functionality</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_camera:enable_functionality">enable_functionality</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_camera:Miscellaneous">Miscellaneous</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_camera:change_depth_of_field">change_depth_of_field</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_camera:fade">fade</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_camera:change_height_range">change_height_range</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_camera:enable_shake">enable_shake</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_camera:disable_shake">disable_shake</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_camera:enable_anchor_to_army">enable_anchor_to_army</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_camera:disable_anchor_to_army">disable_anchor_to_army</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#e2edff" id="navigation_right">				<h2 style="background-color:#c1e6ff">Battle Topics</h2>
+				<ul>
+					<li><a href="battle_index.html">Battle Index</a></li>
+					<li><a href="battle_hierarchy.html">Battle Hierarchy</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="battle.html">Battle</a></li>
+					<li><a href="battle_alliances.html">Alliances</a></li>
+					<li><a href="battle_alliance.html">Alliance</a></li>
+					<li><a href="battle_armies.html">Armies</a></li>
+					<li><a href="battle_army.html">Army</a></li>
+					<li><a href="battle_units.html">Units</a></li>
+					<li><a href="battle_unit.html">Unit</a></li>
+					<li><a href="battle_unitcontroller.html">Unitcontroller</a></li>
+					<li><a href="ai_planner.html">AI Planners</a></li>
+					<li><a href="battle_assault_equipment.html">Assault Equipment</a></li>
+					<li><a href="battle_building.html">Building</a></li>
+					<li><a href="battle_buildings.html">Buildings</a></li>
+					<li><strong> > Camera</strong></li>
+					<li><a href="battle_capture_location.html">Capture Location</a></li>
+					<li><a href="battle_composite_scenes_system.html">Composite Scenes System</a></li>
+					<li><a href="battle_debug_drawing.html">Debug Drawing</a></li>
+					<li><a href="battle_reinforcements.html">reinforcements Reinforcements</a></li>
+					<li><a href="battle_sound_effect.html">Sound Effects</a></li>
+					<li><a href="battle_subtitles.html">Subtitles</a></li>
+					<li><a href="battle_toggle_system.html">Toggle System</a></li>
+					<li><a href="battle_vector.html">Vector</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Script Interfaces</h2>
+				<ul>
+					<li><a href="battle_manager.html">Battle Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="advice_manager.html">Advice Manager</a></li>
+					<li><a href="battle_ui_manager.html">Battle UI Manager</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="cutscene.html">Battle Cutscenes</a></li>
+					<li><a href="generated_battle.html">Generated Battle</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="script_ai_planner.html">Script AI Planner</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="script_unit.html">Script Unit</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Data Interfaces</h2>
+				<ul>
+					<li><a href="st_helper.html">Scripted Tour Helpers</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:battle_camera"><h1 class="content_header">Camera</h1></a>
+				<p>The camera object provided by the battle model provides an interface to query and move the camera. The camera interface also provides functions to query the state of an ambush controller, should the current battle be an ambush battle.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_camera:Creation"><h2 class="section_header">Creation</h2></a>
+				</div>
+				<p>A handle to the camera can be created by calling the <code><a href="battle.html#function:battle:camera">battle:camera</a></code> function on the <code><a href="battle.html#class:battle">battle</a></code> interface. This function returns a handle to the battle camera.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_camera:Usage"><h2 class="section_header">Usage</h2></a>
+				</div>
+				<p>Once a handle to a camera object is obtained, functions may be called on it to query or modify its state in the following form.</p>
+
+				<h4>Example - Specification:</h4>
+				<div id="example_code"><code>
+					 <i>&lt;object_name&gt;</i>:<i>&lt;function_name&gt;</i>(<i>&lt;args&gt;</i>)<br />
+				</code></div>
+
+				<h4>Example - Creation and Usage:</h4>
+				<div id="example_code"><code>
+					 local cam = bm:camera()<br />
+					 cam:look_at(v(0, 0, 0))&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- calling a function on the object once created<br />
+				</code></div>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_camera:Ambushes"><h2 class="section_header">Ambushes</h2></a>
+				</div>
+				<p>The battle camera provides a number of functions for querying and modifying ambush controllers. Use of these function should allow for querying and control of ambush battles.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_camera:is_ambush_controller_executing"><h3 class="function_name"><strong><code>camera:is_ambush_controller_executing()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether an ambush controller is currently executing. This will return <code>true</code> in an ambush battle, prior to the ambushing army launching their attack.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> is ambush controller active</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 1100</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_camera:allow_user_to_skip_ambush_intro"><h3 class="function_name"><strong><code>camera:allow_user_to_skip_ambush_intro(boolean </strong></code><i class="parameter">user can skip</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether the player can skip the ambush intro with the ESC key. By default this is disabled, but it may be desirable to enable this in certain scripted circumstances.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>user can skip</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 1121</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_camera:teleport_defender_when_ambush_intro_skipped"><h3 class="function_name"><strong><code>camera:teleport_defender_when_ambush_intro_skipped(boolean </strong></code><i class="parameter">teleport defender</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether the ambush defender is teleported to the end of their movement path when the ambush intro is skipped. By default this is disabled, but it may be desirable to enable this in certain scripted circumstances.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>teleport defender</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 1145</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_camera:Camera Movement Files"><h2 class="section_header">Camera Movement Files</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_camera:play"><h3 class="function_name"><strong><code>camera:play(string </strong></code><i class="parameter">file path</i><code><strong>, boolean </strong></code><i class="parameter">loop</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Plays a specified camera file. These are files that specify camera positions in a specific format. Only for use in specific circumstances.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>file path</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>loop</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 1172</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_camera:stop"><h3 class="function_name"><strong><code>camera:stop([boolean </strong></code><i class="parameter">stop instantly</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Stops a playing camera file that was started with <code><a href="#function:battle_camera:play">camera:play</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>stop instantly</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 1203</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_camera:is_playing"><h3 class="function_name"><strong><code>camera:is_playing()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether a scripted camera started with <code><a href="#function:battle_camera:play">camera:play</a></code> is currently playing.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> camera is playing</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 1227</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_camera:Camera Position and Movement"><h2 class="section_header">Camera Position and Movement</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_camera:look_at"><h3 class="function_name"><strong><code>camera:look_at(<br />&emsp;&emsp;<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">target</i><code><strong>, <br />&emsp;&emsp;number </strong></code><i class="parameter">transition time</i><code><strong>, <br />&emsp;&emsp;[number </strong></code><i class="parameter">starting angle</i><code><strong>], <br />&emsp;&emsp;[boolean </strong></code><i class="parameter">linear movement</i><code><strong>], <br />&emsp;&emsp;[number </strong></code><i class="parameter">target fov</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Turns the camera to face a specified <code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> position over a specified time. A starting camera bearing, a transition mode and a target field of view may optionally be specified.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>Look-at target position.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>Transition time in seconds. Supply a negative number to have the function determine an appropriate transition time.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Starting angle. If no angle is specified the camera's current facing is used instead (this is recommended).</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Linear movement style. If enabled the camera will turn with a constantly velocity. If disabled the rate of camera rotation will accelerate and then decelerate.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>Field of view at the end of the transition. If set to 0 the default field of view will be used, and if set to negative the current field of view will be kept.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 1250</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_camera:move_to"><h3 class="function_name"><strong><code>camera:move_to(<br />&emsp;&emsp;<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">position</i><code><strong>, <br />&emsp;&emsp;<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">target</i><code><strong>, <br />&emsp;&emsp;number </strong></code><i class="parameter">transition time</i><code><strong>, <br />&emsp;&emsp;[boolean </strong></code><i class="parameter">linear movement</i><code><strong>], <br />&emsp;&emsp;[number </strong></code><i class="parameter">target fov</i><code><strong>], <br />&emsp;&emsp;[boolean </strong></code><i class="parameter">use command queue</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Moves the camera to a specified position, facing a specified target, over a specified time. Both positions are supplied as <code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> objects. A starting camera bearing, a transition mode and a target field of view may optionally be specified.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>end position of camera after transition.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>Look-at target of camera after transition.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>Transition time in seconds. Supply a negative number to have the function determine an appropriate transition time.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Linear movement style. If enabled the camera will move with a constantly velocity. If disabled the camera will accelerate and then decelerate.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>Field of view at the end of the transition. If set to 0 the default field of view will be used, and if set to negative the current field of view will be kept.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>Setting this to <code>false</code> allows the camera to start moving when the game is paused, but the camera movement will not appear in replays. </p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 1307</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_camera:position"><h3 class="function_name"><strong><code>camera:position()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the current position of the camera.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code> position</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 1370</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_camera:target"><h3 class="function_name"><strong><code>camera:target()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the current look-at target of the camera.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code> target</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 1379</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_camera:Disabling Camera Functionality"><h2 class="section_header">Disabling Camera Functionality</h2></a>
+				</div>
+				<p>Certain aspects of camera functionality can be disabled and re-enabled using the functions in this section. All functionality is enabled by default. The functionality to enable or disable is specified as one of the following strings.</p>
+				<p>Keys:<ul></p>
+				<p><li>KEYS_HEIGHT_UP_DOWN</li></p>
+				<p><li>KEYS_PAN_LEFT_RIGHT</li></p>
+				<p><li>KEYS_PITCH_UP_DOWN</li></p>
+				<p><li>KEYS_FORWARD_BACKWARDS</li></p>
+				<p><li>KEYS_STRAFE_LEFT_RIGHT</li></p>
+				<p><li>KEYS_FOLLOW_CAMERA</li></p>
+				<p><li>KEYS_ZOOM_CAMERA</li></p>
+				<p><li>KEYS_CONTEXT_CAMERA</li></p>
+				<p><li>KEYS_ALL_FUNCTIONS</li></p>
+				<p></ul>Mouse:<ul></p>
+				<p><li>MOUSE_HEIGHT_UP_DOWN</li></p>
+				<p><li>MOUSE_PAN_LEFT_RIGHT</li></p>
+				<p><li>MOUSE_PITCH_UP_DOWN</li></p>
+				<p><li>MOUSE_FORWARD_BACKWARDS</li></p>
+				<p><li>MOUSE_STRAFE_LEFT_RIGHT</li></p>
+				<p><li>MOUSE_FOLLOW_CAMERA</li></p>
+				<p><li>MOUSE_ZOOM_CAMERA</li></p>
+				<p><li>MOUSE_CONTEXT_CAMERA</li></p>
+				<p><li>MOUSE_ALL_FUNCTIONS</li></p>
+				<p></ul>Edge:<ul></p>
+				<p><li>EDGE_HEIGHT_UP_DOWN</li></p>
+				<p><li>EDGE_PAN_LEFT_RIGHT</li></p>
+				<p><li>EDGE_PITCH_UP_DOWN</li></p>
+				<p><li>EDGE_FORWARD_BACKWARDS</li></p>
+				<p><li>EDGE_STRAFE_LEFT_RIGHT</li></p>
+				<p><li>EDGE_FOLLOW_CAMERA</li></p>
+				<p><li>EDGE_ZOOM_CAMERA</li></p>
+				<p><li>EDGE_CONTEXT_CAMERA</li></p>
+				<p><li>EDGE_ALL_FUNCTIONS</li></p>
+				<p></ul>UI:<ul></p>
+				<p><li>UI_HEIGHT_UP_DOWN</li></p>
+				<p><li>UI_PAN_LEFT_RIGHT</li></p>
+				<p><li>UI_PITCH_UP_DOWN</li></p>
+				<p><li>UI_FORWARD_BACKWARDS</li></p>
+				<p><li>UI_STRAFE_LEFT_RIGHT</li></p>
+				<p><li>UI_FOLLOW_CAMERA</li></p>
+				<p><li>UI_ZOOM_CAMERA</li></p>
+				<p><li>UI_CONTEXT_CAMERA</li></p>
+				<p><li>UI_ALL_FUNCTIONS</li></p>
+				<p><li>CAMERA_ALL_FUNCTIONS</li></p>
+				<p></ul></p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_camera:enable_functionality"><h3 class="function_name"><strong><code>camera:enable_functionality(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">functionality</i><code><strong>, <code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">enable</i><code><strong>, [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">bypass command queue</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Enables or disables some functionality of the camera.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Functionality to enable - see the list of valid functionality strings given above.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>Enables the functionality. Supply <code>false</code> to disable the the functionality instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Bypasses the command queue. If this is set to <code>true</code> the command is processed immediately, including when paused, but the command will not be reproduced in multiplayer or in a battle replay.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 1455</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_camera:Miscellaneous"><h2 class="section_header">Miscellaneous</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_camera:change_depth_of_field"><h3 class="function_name"><strong><code>camera:change_depth_of_field(<br />&emsp;&emsp;number </strong></code><i class="parameter">transition duration</i><code><strong>, <br />&emsp;&emsp;[number </strong></code><i class="parameter">focal depth</i><code><strong>], <br />&emsp;&emsp;[number </strong></code><i class="parameter">focal width</i><code><strong>], <br />&emsp;&emsp;[number </strong></code><i class="parameter">blur size</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Changes the depth of field of the camera.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>Transition duration in seconds.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Focus distance.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Focal length.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Blur size.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 1517</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_camera:fade"><h3 class="function_name"><strong><code>camera:fade(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">to black</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">transition duration</i><code><strong>, [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">bypass command queue</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Fades the camera over a supplied duration from picture to black, or from black to picture.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>Fade to black. The screen will fade from picture to black if this is set to <code>true</code>, and from black to picture if it's set to <code>false</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Transition duration in seconds.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Bypass the command queue, initiating the fade immediately.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 1548</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_camera:change_height_range"><h3 class="function_name"><strong><code>camera:change_height_range(number </strong></code><i class="parameter">min height</i><code><strong>, number </strong></code><i class="parameter">max height</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Changes the minimum/maximum permitted altitude of the camera above the ground. If negative values are supplied the game default values are used.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>Minimum altitude in metres.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>Maximum altitude in metres.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 1585</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_camera:enable_shake"><h3 class="function_name"><strong><code>camera:enable_shake()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Enables camera shaking.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 1604</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_camera:disable_shake"><h3 class="function_name"><strong><code>camera:disable_shake()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Disables camera shaking.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 1614</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_camera:enable_anchor_to_army"><h3 class="function_name"><strong><code>camera:enable_anchor_to_army()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Enables the anchor which prevents the camera from being moved too far away from the players forces.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 1624</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_camera:disable_anchor_to_army"><h3 class="function_name"><strong><code>camera:disable_anchor_to_army()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Disables the anchor which prevents the camera from being moved too far away from the players forces.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 1639</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:59</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "battle"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

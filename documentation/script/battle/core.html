@@ -1,0 +1,4222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Core script class</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#e2edff" id="main">
+
+			<div style="background-color:#e2edff" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Battle Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#c1e6ff">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search battle only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#c1e6ff">Game Areas</h2>
+				<ul>
+					<li><a href="../campaign/campaign_index.html">Campaign Index</a></li>
+					<li><strong> > Battle Index</strong></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:core">Core</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:core:Creation">Creation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:new">new</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:Usage">Usage</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:UI Root">UI Root</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:get_ui_root">get_ui_root</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:set_ui_root">set_ui_root</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:is_ui_created">is_ui_created</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:UI Creation and Destruction">UI Creation and Destruction</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:add_ui_created_callback">add_ui_created_callback</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:add_ui_destroyed_callback">add_ui_destroyed_callback</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:Game Configuration">Game Configuration</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:is_debug_config">is_debug_config</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:is_tweaker_set">is_tweaker_set</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:get_screen_resolution">get_screen_resolution</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:Game Mode">Game Mode</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:is_campaign">is_campaign</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:is_battle">is_battle</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:is_frontend">is_frontend</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:Script Environment">Script Environment</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:get_env">get_env</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:Timer Manager">Timer Manager</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:get_tm">get_tm</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:File Loading">File Loading</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:get_scripts_in_directory">get_scripts_in_directory</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:Filesystem">Filesystem</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:get_filepaths_from_folder">get_filepaths_from_folder</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:load_global_script">load_global_script</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:Mod Loading">Mod Loading</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:load_mods">load_mods</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:execute_mods">execute_mods</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:is_mod_loaded">is_mod_loaded</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:Advice Level">Advice Level</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:get_advice_level">get_advice_level</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:is_advice_level_minimal">is_advice_level_minimal</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:is_advice_level_low">is_advice_level_low</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:is_advice_level_high">is_advice_level_high</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:Scripted Value Registry">Scripted Value Registry</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:get_svr">get_svr</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:svr_save_bool">svr_save_bool</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:svr_load_bool">svr_load_bool</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:svr_save_string">svr_save_string</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:svr_load_string">svr_load_string</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:svr_save_registry_bool">svr_save_registry_bool</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:svr_load_registry_bool">svr_load_registry_bool</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:svr_save_registry_string">svr_save_registry_string</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:svr_load_registry_string">svr_load_registry_string</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:svr_save_timestamp">svr_save_timestamp</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:svr_time_since_timestamp">svr_time_since_timestamp</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:Preferences">Preferences</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:get_boolean_preference">get_boolean_preference</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:set_boolean_preference">set_boolean_preference</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:cache_boolean_preference">cache_boolean_preference</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:cache_and_set_boolean_preference">cache_and_set_boolean_preference</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:restore_boolean_preference">restore_boolean_preference</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:get_integer_preference">get_integer_preference</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:set_integer_preference">set_integer_preference</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:cache_integer_preference">cache_integer_preference</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:cache_and_set_integer_preference">cache_and_set_integer_preference</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:restore_integer_preference">restore_integer_preference</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:get_float_preference">get_float_preference</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:set_float_preference">set_float_preference</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:cache_float_preference">cache_float_preference</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:cache_and_set_float_preference">cache_and_set_float_preference</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:restore_float_preference">restore_float_preference</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:Lookup Listeners">Lookup Listeners</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:declare_lookup_listener">declare_lookup_listener</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:add_lookup_listener_callback">add_lookup_listener_callback</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:remove_lookup_listener_callback">remove_lookup_listener_callback</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:Fullscreen Highlighting">Fullscreen Highlighting</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:show_fullscreen_highlight_around_components">show_fullscreen_highlight_around_components</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:hide_fullscreen_highlight">hide_fullscreen_highlight</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:set_fullscreen_highlight_interactive">set_fullscreen_highlight_interactive</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:set_fullscreen_highlight_window_interactive">set_fullscreen_highlight_window_interactive</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:Advisor Priority Cache">Advisor Priority Cache</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:cache_and_set_advisor_priority">cache_and_set_advisor_priority</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:restore_advisor_priority">restore_advisor_priority</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:UIComponent Creation">UIComponent Creation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:get_or_create_component">get_or_create_component</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:Event Handling">Event Handling</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:add_listener">add_listener</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:remove_listener">remove_listener</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:trigger_event">trigger_event</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:trigger_custom_event">trigger_custom_event</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:Custom Event Generator">Custom Event Generator</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:start_custom_event_generator">start_custom_event_generator</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:stop_custom_event_generator">stop_custom_event_generator</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:Performance Monitoring">Performance Monitoring</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:monitor_performance">monitor_performance</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:Limited Callbacks">Limited Callbacks</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:call_limited">call_limited</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:call_once">call_once</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:Text and Active Pointers">Text and Active Pointers</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:is_text_pointer_name_registered">is_text_pointer_name_registered</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:register_text_pointer_name">register_text_pointer_name</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:register_active_pointer">register_active_pointer</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:get_active_pointer">get_active_pointer</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:is_any_active_pointer_showing">is_any_active_pointer_showing</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:hide_all_text_pointers">hide_all_text_pointers</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:Autonumbers">Autonumbers</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:get_unique_counter">get_unique_counter</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:Loading Screens/UI Event Progression">Loading Screens/UI Event Progression</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:get_loading_screen">get_loading_screen</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:is_loading_screen_visible">is_loading_screen_visible</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:progress_on_loading_screen_dismissed">progress_on_loading_screen_dismissed</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:progress_on_uicomponent_animation_finished">progress_on_uicomponent_animation_finished</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:progress_on_uicomponent_animation">progress_on_uicomponent_animation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:cancel_progress_on_uicomponent_animation">cancel_progress_on_uicomponent_animation</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:Caching/Restoring UIComponent Tooltips">Caching/Restoring UIComponent Tooltips</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:cache_and_set_tooltip_for_component_state">cache_and_set_tooltip_for_component_state</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:restore_tooltip_for_component_state">restore_tooltip_for_component_state</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:Localised Text Tags">Localised Text Tags</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:strip_tags_from_localised_text">strip_tags_from_localised_text</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:Bit Checking">Bit Checking</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:check_bit">check_bit</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:Static Object Registry">Static Object Registry</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:add_static_object">add_static_object</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:get_static_object">get_static_object</a></li>
+						<li>&emsp;&emsp;<a href="#section:core:Windowed Movie Players">Windowed Movie Players</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:stop_all_windowed_movie_players">stop_all_windowed_movie_players</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:register_windowed_movie_player">register_windowed_movie_player</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:core:unregister_windowed_movie_player">unregister_windowed_movie_player</a></li>
+					</ul>
+					<li><a href="#class:custom_context">Custom Context</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#function:custom_context:new">new</a></li>
+						<li>&emsp;&emsp;<a href="#function:custom_context:add_data">add_data</a></li>
+						<li>&emsp;&emsp;<a href="#function:custom_context:add_data_with_key">add_data_with_key</a></li>
+						<li>&emsp;&emsp;<a href="#function:custom_context:table_data">table_data</a></li>
+						<li>&emsp;&emsp;<a href="#function:custom_context:region">region</a></li>
+						<li>&emsp;&emsp;<a href="#function:custom_context:character">character</a></li>
+						<li>&emsp;&emsp;<a href="#function:custom_context:target_character">target_character</a></li>
+						<li>&emsp;&emsp;<a href="#function:custom_context:faction">faction</a></li>
+						<li>&emsp;&emsp;<a href="#function:custom_context:component">component</a></li>
+						<li>&emsp;&emsp;<a href="#function:custom_context:military_force">military_force</a></li>
+						<li>&emsp;&emsp;<a href="#function:custom_context:pending_battle">pending_battle</a></li>
+						<li>&emsp;&emsp;<a href="#function:custom_context:garrison_residence">garrison_residence</a></li>
+						<li>&emsp;&emsp;<a href="#function:custom_context:building">building</a></li>
+						<li>&emsp;&emsp;<a href="#function:custom_context:vector">vector</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#e2edff" id="navigation_right">				<h2 style="background-color:#c1e6ff">Battle Topics</h2>
+				<ul>
+					<li><a href="battle_index.html">Battle Index</a></li>
+					<li><a href="battle_hierarchy.html">Battle Hierarchy</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="battle.html">Battle</a></li>
+					<li><a href="battle_alliances.html">Alliances</a></li>
+					<li><a href="battle_alliance.html">Alliance</a></li>
+					<li><a href="battle_armies.html">Armies</a></li>
+					<li><a href="battle_army.html">Army</a></li>
+					<li><a href="battle_units.html">Units</a></li>
+					<li><a href="battle_unit.html">Unit</a></li>
+					<li><a href="battle_unitcontroller.html">Unitcontroller</a></li>
+					<li><a href="ai_planner.html">AI Planners</a></li>
+					<li><a href="battle_assault_equipment.html">Assault Equipment</a></li>
+					<li><a href="battle_building.html">Building</a></li>
+					<li><a href="battle_buildings.html">Buildings</a></li>
+					<li><a href="battle_camera.html">Camera</a></li>
+					<li><a href="battle_capture_location.html">Capture Location</a></li>
+					<li><a href="battle_composite_scenes_system.html">Composite Scenes System</a></li>
+					<li><a href="battle_debug_drawing.html">Debug Drawing</a></li>
+					<li><a href="battle_reinforcements.html">reinforcements Reinforcements</a></li>
+					<li><a href="battle_sound_effect.html">Sound Effects</a></li>
+					<li><a href="battle_subtitles.html">Subtitles</a></li>
+					<li><a href="battle_toggle_system.html">Toggle System</a></li>
+					<li><a href="battle_vector.html">Vector</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Script Interfaces</h2>
+				<ul>
+					<li><a href="battle_manager.html">Battle Manager</a></li>
+					<li><strong> > Core</strong></li>
+					<li><a href="advice_manager.html">Advice Manager</a></li>
+					<li><a href="battle_ui_manager.html">Battle UI Manager</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="cutscene.html">Battle Cutscenes</a></li>
+					<li><a href="generated_battle.html">Generated Battle</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="script_ai_planner.html">Script AI Planner</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="script_unit.html">Script Unit</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Data Interfaces</h2>
+				<ul>
+					<li><a href="st_helper.html">Scripted Tour Helpers</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:core"><h1 class="content_header">Core</h1></a>
+				<p>The core object provides a varied suite of functionality that is sensible to provide in all the various game modes (campaign/battle/frontend). When the script libraries are loaded, a core_object is automatically created. It is called 'core' and the functions it provides can be called with a double colon e.g. <code>core:get_ui_root()</code></p>
+				<p>Examples of the kind of functionality provided by the core object are event listening and triggering, ui access, and saving and loading values to the scripted value registry.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:Creation"><h2 class="section_header">Creation</h2></a>
+				</div>
+				<p>A core object is automatically created when the script libraries are loaded so there should be no need for client scripts to call <code><a href="#function:core:new">core:new</a></code> themselves.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:new"><h3 class="function_name"><strong><code>core:new()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a core object. There is no need for client scripts to call this, as a core object is created automatically by the script libraries when they are loaded.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>core_object</code> </li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 114</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:Usage"><h2 class="section_header">Usage</h2></a>
+				</div>
+				<p>Once created (which happens automatically within the declaration of the script libraries), functions on the core object may be called in the form showed below.</p>
+
+				<h4>Example - Specification:</h4>
+				<div id="example_code"><code>
+					 core:<i>&lt;function_name&gt;</i>(<i>&lt;args&gt;</i>)<br />
+				</code></div>
+
+				<h4>Example - Creation and Usage:</h4>
+				<div id="example_code"><code>
+					 core = core_object:new()&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- object called 'core' is automatically set up<br />
+					 <br />
+					 -- later, after UI creation<br />
+					 local x, y = core:get_screen_resolution()<br />
+					 out("Screen resolution is [" .. x .. ", " .. y .. "]")<br />
+				</code></div>
+				<div id="example_result"><code>
+					Screen resolution is [1600, 900]<br />
+				</code></div>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:UI Root"><h2 class="section_header">UI Root</h2></a>
+				</div>
+				<p>Functions concerning the UI root.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:get_ui_root"><h3 class="function_name"><strong><code>core:get_ui_root()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Gets a handle to the ui root object. A script_error is thrown if this is called before the ui has been created.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>uicomponent</code> ui root</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 238</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:set_ui_root"><h3 class="function_name"><strong><code>core:set_ui_root(uicomponent </strong></code><i class="parameter">ui root</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							sets the ui root object that the core stores. Not to be called outside of the script libraries.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>uicomponent</code></p>
+									</td>
+									<td>
+										<p>ui root</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 251</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:is_ui_created"><h3 class="function_name"><strong><code>core:is_ui_created()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the ui has been created or not. Useful if clients scripts are running so early in the load sequence that the ui may not have been set up yet.<br />
+							Once this function returns true, client scripts should be okay to start asking questions of the game and model.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> is ui created</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 265</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:UI Creation and Destruction"><h2 class="section_header">UI Creation and Destruction</h2></a>
+				</div>
+				<p>The core object listens for the UI being created and destroyed. Client scripts can register callbacks with the core object to get notified when the UI is set up or destroyed. </p>
+				<p>It is strongly advised that client scripts use this functionality rather than listen for the UICreated and UIDestroyed events directly, because the core object sets up the UI root before sending out notifications about the ui being created.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:add_ui_created_callback"><h3 class="function_name"><strong><code>core:add_ui_created_callback(<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">callback</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a callback to be called when the UI is created.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>callback</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 286</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:add_ui_destroyed_callback"><h3 class="function_name"><strong><code>core:add_ui_destroyed_callback(function </strong></code><i class="parameter">callback</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a callback to be called when the UI is destroyed.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p>callback</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 322</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:Game Configuration"><h2 class="section_header">Game Configuration</h2></a>
+				</div>
+				<p>Functions that return information about the game.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:is_debug_config"><h3 class="function_name"><strong><code>core:is_debug_config()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns true if the game is not running in final release or intel configurations, false if the game is running in debug or profile configuration
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> is debug config</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 366</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:is_tweaker_set"><h3 class="function_name"><strong><code>core:is_tweaker_set(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">tweaker name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether a boolean tweaker with the supplied name is set. If the tweaker is set to <code>true</code> or <code>false</code> then that value is returned, otherwise <code><a href="lua.html#class:nil">nil</a></code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>tweaker name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> tweaker value (or <code><a href="lua.html#class:nil">nil</a></code> if not set)</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 374</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:get_screen_resolution"><h3 class="function_name"><strong><code>core:get_screen_resolution()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the current screen resolution
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>integer</code> screen x dimension</li>
+								<li><code>integer</code> screen y dimension</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 388</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:Game Mode"><h2 class="section_header">Game Mode</h2></a>
+				</div>
+				<p>Functions that return the mode the game is currently running in.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:is_campaign"><h3 class="function_name"><strong><code>core:is_campaign()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the game is currently in campaign mode
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> is campaign</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 405</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:is_battle"><h3 class="function_name"><strong><code>core:is_battle()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the game is currently in battle mode
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> is battle</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 413</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:is_frontend"><h3 class="function_name"><strong><code>core:is_frontend()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the game is currently in the frontend
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> is battle</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 421</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:Script Environment"><h2 class="section_header">Script Environment</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:get_env"><h3 class="function_name"><strong><code>core:get_env()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the current global lua function environment. This can be used to force other functions to have global scope.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:table">table</a></code></code> environment</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 439</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:Timer Manager"><h2 class="section_header">Timer Manager</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:get_tm"><h3 class="function_name"><strong><code>core:get_tm()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a handle to the timer manager created for the current environment.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="timer_manager.html#class:timer_manager">timer_manager</a></code></code> timer manager</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 459</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:File Loading"><h2 class="section_header">File Loading</h2></a>
+				</div>
+				<p>Functions for file loading.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:get_scripts_in_directory"><h3 class="function_name"><strong><code>core:get_scripts_in_directory(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">directory</i><code><strong>, [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">include_file_extension</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Get a list of all lua files in the specified folder (relative from the working_data folder)
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Directory to search under, relative to working_data. e.g. /script/campaign/</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Whether or not to include the script file extension in the returned strings.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:table">table</a></code></code> List of the names of lua files found in this folder (including file expensions). Returns empty table if none were found.</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 479</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:Filesystem"><h2 class="section_header">Filesystem</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:get_filepaths_from_folder"><h3 class="function_name"><strong><code>core:get_filepaths_from_folder(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">folder path</i><code><strong>, [<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">filter</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a list of all files in a specified folder, conforming to an optional filter. The list is returned as an indexed <code><a href="lua.html#class:table">table</a></code> of string file paths.<br />
+							The folder path should be given from the working data folder. If no filter is supplied, then all files are searched for.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Folder path, from the working data folder.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value="*"</i></p>
+										<p>File filter.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:table">table</a></code></code> indexed table of file paths</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 local file_paths = core:get_filepaths_from_folder("/script/", "*scripted.lua")<br />
+								 for i = 1, #file_paths do<br />
+								 &emsp;&emsp;&emsp;&emsp;out(file_paths[i])<br />
+								 end<br />
+							</code></div>
+							<div id="example_result"><code>
+								script\all_scripted.lua<br />
+								script\battle_scripted.lua<br />
+								script\campaign_scripted.lua<br />
+								script\frontend_scripted.lua<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 515</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:load_global_script"><h3 class="function_name"><strong><code>core:load_global_script(string </strong></code><i class="parameter">script name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							This function attempts to load a lua script from all folders currently on the path, and, when loaded, sets the environment of the loaded file to match the global environment. This is used when loading scripts within a block (within if statement that is testing for the file's existence, for example) - loading the file with <code>require</code> would not give it access to the global environment.<br />
+							If the script file fails to load cleanly, a script error will be thrown.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>script name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 553</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:Mod Loading"><h2 class="section_header">Mod Loading</h2></a>
+				</div>
+				<p>Functions for loading and, in campaign, executing mod scripts. Note that <code><a href="global.html#function:global:ModLog">ModLog</a></code> can be used by mods for output.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:load_mods"><h3 class="function_name"><strong><code>core:load_mods(... </strong></code><i class="parameter">paths</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Loads all mod scripts found on each of the supplied paths, setting the environment of every loaded mod to the global environment.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>...</code></p>
+									</td>
+									<td>
+										<p>List of <code><a href="lua.html#class:string">string</a></code> paths from which to load mods from. The terminating <code>/</code> character must be included.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> All mods loaded correctly</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 core:load_mods("/script/_lib/mod/", "/script/battle/mod/");<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 613</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:execute_mods"><h3 class="function_name"><strong><code>core:execute_mods(... </strong></code><i class="parameter">arguments</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Attempts to execute a function of the same name as the filename of each mod that has previously been loaded by <code><a href="#function:core:load_mods">core:load_mods</a></code>. For example, if mods have been loaded from <code>mod_a.lua</code>, <code>mod_b.lua</code> and <code>mod_c.lua</code>, the functions <code>mod_a()</code>, <code>mod_b()</code> and <code>mod_c()</code> will be called, if they exist. This can be used to start the execution of mod scripts at an appropriate time, particularly during campaign script startup.<br />
+							One or more arguments can be passed to <code>execute_mods</code>, which are in-turn passed to the mod functions being executed.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>...</code></p>
+									</td>
+									<td>
+										<p>Arguments to be passed to mod function(s).</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> No errors reported</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 746</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:is_mod_loaded"><h3 class="function_name"><strong><code>core:is_mod_loaded(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">mod name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether a mod with the supplied name is loaded. The path may be omitted.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>mod name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> mod is loaded</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 791</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:Advice Level"><h2 class="section_header">Advice Level</h2></a>
+				</div>
+				<p>Functions concerning the advice level setting, which defaults to 'high' but can be changed by the player.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:get_advice_level"><h3 class="function_name"><strong><code>core:get_advice_level()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the current advice level value. A returned value of 0 corresponds to 'minimal', 1 corresponds to 'low', and 2 corresponds to 'high'.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>integer</code> advice level</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 822</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:is_advice_level_minimal"><h3 class="function_name"><strong><code>core:is_advice_level_minimal()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the advice level is currently set to minimal.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> is advice level minimal</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 830</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:is_advice_level_low"><h3 class="function_name"><strong><code>core:is_advice_level_low()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the advice level is currently set to low.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> is advice level low</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 838</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:is_advice_level_high"><h3 class="function_name"><strong><code>core:is_advice_level_high()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the advice level is currently set to high.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> is advice level high</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 846</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:Scripted Value Registry"><h2 class="section_header">Scripted Value Registry</h2></a>
+				</div>
+				<p>The scripted value registry is an object supplied by the game to script which can be used to set values that persist over lua sessions. As lua sessions are destroyed/recreated when the game loads from one mode to another (campaign to battle, frontend to campaign etc) the svr makes it possible for scripts to store information for scripts in future sessions to retrieve.</p>
+				<p>This information is cleared when the game as a whole is closed and re-opened, but the scripted value registry also allows boolean values to be saved in the registry. Such values will persist, even between reloads of the game client.</p>
+				<p>The core object automatically creates a handle to the scripted value registry and an interface to it. The following functions can be called to interact with the scripted value registry.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:get_svr"><h3 class="function_name"><strong><code>core:get_svr()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a handle to the scripted value registry object. It shouldn't be necessary to call this, as the core object provides access to all its functionality through its wrapper functions.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>scripted_value_registry</code> svr</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 866</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:svr_save_bool"><h3 class="function_name"><strong><code>core:svr_save_bool(string </strong></code><i class="parameter">value name</i><code><strong>, boolean </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Saves a boolean value to the svr. This will persist as the game loads between modes (campaign/battle/frontend) but will be destroyed if the game is restarted.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>value name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 874</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:svr_load_bool"><h3 class="function_name"><strong><code>core:svr_load_bool(string </strong></code><i class="parameter">value name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Retrieves a boolean value from the svr.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>value name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> value</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 893</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:svr_save_string"><h3 class="function_name"><strong><code>core:svr_save_string(string </strong></code><i class="parameter">value name</i><code><strong>, string </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Saves a string value to the svr. This will persist as the game loads between modes (campaign/battle/frontend) but will be destroyed if the game is restarted.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>value name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 902</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:svr_load_string"><h3 class="function_name"><strong><code>core:svr_load_string(string </strong></code><i class="parameter">value name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Retrieves a string value from the svr.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>value name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>string</code> value</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 921</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:svr_save_registry_bool"><h3 class="function_name"><strong><code>core:svr_save_registry_bool(string </strong></code><i class="parameter">value name</i><code><strong>, boolean </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Saves a boolean value to the registry. This will persist, even if the game is reloaded.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>value name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 930</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:svr_load_registry_bool"><h3 class="function_name"><strong><code>core:svr_load_registry_bool(string </strong></code><i class="parameter">value name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Loads a boolean value from the registry.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>value name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> value</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 949</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:svr_save_registry_string"><h3 class="function_name"><strong><code>core:svr_save_registry_string(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">value name</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Saves a string value to the registry. This will persist, even if the game is reloaded.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>value name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 958</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:svr_load_registry_string"><h3 class="function_name"><strong><code>core:svr_load_registry_string(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">value name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Loads a string value from the registry.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>value name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> value</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 977</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:svr_save_timestamp"><h3 class="function_name"><strong><code>core:svr_save_timestamp(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">timestamp name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Records a timestamp with the supplied name. This can be compared to a later timestamp with <code><a href="#function:core:svr_time_since_timestamp">core:svr_time_since_timestamp</a></code> to see how much time has elapsed between two game events. This value is saved into the registry so will survive between game sessions.<br />
+							This can be used to trigger advice if the player has not performed a certain action in game for a given period (e.g. not loaded a campaign in three months), for example.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>timestamp name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 986</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:svr_time_since_timestamp"><h3 class="function_name"><strong><code>core:svr_time_since_timestamp(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">timestamp name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the number of seconds since a timestamp with the supplied name was last recorded with <code><a href="#function:core:svr_save_timestamp">core:svr_save_timestamp</a></code>. If the timestamp has never been recorded then <code><a href="lua.html#class:nil">nil</a></code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>timestamp name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> seconds since timestamp last recorded</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 999</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:Preferences"><h2 class="section_header">Preferences</h2></a>
+				</div>
+				<p>User preferences are stored and listed in <code>%appdata%\The Creative Assembly\&lt;game&gt;\scripts\preferences.script.txt</code>. They may be read and written with the functions below. Different functions must be used for different value types. Preference names and the type of each preference value are shown in the <code>preferences.script.txt</code> file.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:get_boolean_preference"><h3 class="function_name"><strong><code>core:get_boolean_preference(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">preference name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a boolean preference value. The value is looked up by a string preference name.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>preference name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> preference value</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 1022</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:set_boolean_preference"><h3 class="function_name"><strong><code>core:set_boolean_preference(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">preference name</i><code><strong>, <code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">preference value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a boolean preference value, by string preference name.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>preference name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>preference value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 1035</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:cache_boolean_preference"><h3 class="function_name"><strong><code>core:cache_boolean_preference(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">preference name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Looks up a boolean preference value by name, stores it in an internal cache, and returns the value. The cached value may be later restored with <code><a href="#function:core:restore_boolean_preference">core:restore_boolean_preference</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>preference name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> preference value</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 1048</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:cache_and_set_boolean_preference"><h3 class="function_name"><strong><code>core:cache_and_set_boolean_preference(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">preference name</i><code><strong>, <code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">new value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Caches and then sets a boolean preference value. Equivalent to calling <code><a href="#function:core:cache_boolean_preference">core:cache_boolean_preference</a></code> and then <code><a href="#function:core:set_boolean_preference">core:set_boolean_preference</a></code>. The value cached by <code><a href="#function:core:cache_boolean_preference">core:cache_boolean_preference</a></code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>preference name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>new value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> existing preference value</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 1062</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:restore_boolean_preference"><h3 class="function_name"><strong><code>core:restore_boolean_preference(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">preference name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Looks up a boolean preference value by name from the internal cache and sets the preference to the looked-up value. The value retrieved from the cache is also returned by the function. The preference value must have been written to the cache with <code><a href="#function:core:cache_boolean_preference">core:cache_boolean_preference</a></code> beforehand - if no cached value could be found then the preference is not set and <code><a href="lua.html#class:nil">nil</a></code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>preference name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> restored preference value</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 1079</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:get_integer_preference"><h3 class="function_name"><strong><code>core:get_integer_preference(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">preference name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns an integer preference value. The value is looked up by a string preference name.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>preference name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> integer preference value</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 1093</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:set_integer_preference"><h3 class="function_name"><strong><code>core:set_integer_preference(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">preference name</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">preference value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets an integer preference value, by string preference name.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>preference name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>preference value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 1106</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:cache_integer_preference"><h3 class="function_name"><strong><code>core:cache_integer_preference(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">preference name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Looks up an integer preference value by name, stores it in an internal cache, and returns the value. The cached value may be later restored with <code><a href="#function:core:restore_integer_preference">core:restore_integer_preference</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>preference name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> preference value</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 1119</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:cache_and_set_integer_preference"><h3 class="function_name"><strong><code>core:cache_and_set_integer_preference(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">preference name</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">new value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Caches and then sets an integer preference value. Equivalent to calling <code><a href="#function:core:cache_integer_preference">core:cache_integer_preference</a></code> and then <code><a href="#function:core:set_integer_preference">core:set_integer_preference</a></code>. The value cached by <code><a href="#function:core:cache_integer_preference">core:cache_integer_preference</a></code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>preference name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>new value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> existing preference value</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 1133</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:restore_integer_preference"><h3 class="function_name"><strong><code>core:restore_integer_preference(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">preference name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Looks up an integer preference value by name from the internal cache and sets the preference to the looked-up value. The value retrieved from the cache is also returned by the function. The preference value must have been written to the cache with <code><a href="#function:core:cache_integer_preference">core:cache_integer_preference</a></code> beforehand - if no cached value could be found then the preference is not set and <code><a href="lua.html#class:nil">nil</a></code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>preference name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> restored preference value</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 1150</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:get_float_preference"><h3 class="function_name"><strong><code>core:get_float_preference(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">preference name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns an float preference value. The value is looked up by a string preference name.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>preference name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> float preference value</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 1164</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:set_float_preference"><h3 class="function_name"><strong><code>core:set_float_preference(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">preference name</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">preference value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets an float preference value, by string preference name.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>preference name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>preference value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 1177</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:cache_float_preference"><h3 class="function_name"><strong><code>core:cache_float_preference(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">preference name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Looks up an float preference value by name, stores it in an internal cache, and returns the value. The cached value may be later restored with <code><a href="#function:core:restore_float_preference">core:restore_float_preference</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>preference name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> preference value</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 1190</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:cache_and_set_float_preference"><h3 class="function_name"><strong><code>core:cache_and_set_float_preference(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">preference name</i><code><strong>, [<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">new value</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Caches and then sets a float preference value. Equivalent to calling <code><a href="#function:core:cache_float_preference">core:cache_float_preference</a></code> and then <code><a href="#function:core:set_float_preference">core:set_float_preference</a></code>. The value cached by <code><a href="#function:core:cache_float_preference">core:cache_float_preference</a></code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>preference name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>new value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> existing preference value</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 1204</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:restore_float_preference"><h3 class="function_name"><strong><code>core:restore_float_preference(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">preference name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Looks up an float preference value by name from the internal cache and sets the preference to the looked-up value. The value retrieved from the cache is also returned by the function. The preference value must have been written to the cache with <code><a href="#function:core:cache_float_preference">core:cache_float_preference</a></code> beforehand - if no cached value could be found then the preference is not set and <code><a href="lua.html#class:nil">nil</a></code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>preference name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> restored preference value</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 1221</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:Lookup Listeners"><h2 class="section_header">Lookup Listeners</h2></a>
+				</div>
+				<p>For script events which are triggered often and in which many client scripts might be interested in listening for, such as <code>FactionTurnStart</code> in campaign or <code>ComponentLClickUp</code> across the game, it's common for client scripts to test the context of that event against a known value (e.g. does the faction have this string key or does the component have this string name) and to only proceed if there's a match. With many listeners all listening for the same common event, these tests can become more and more expensive.</p>
+				<p>The lookup listener system is designed to alleviate this. It allows for downstream systems such as the <code><a href="../campaign/campaign_manager.html#class:campaign_manager">campaign_manager</a></code> to declare lookup listeners for events like <code>FactionTurnStart</code>, which listen for that event, query the faction name or any other static value and then look up and trigger listeners that have subscribed to that event and lookup key combination. This is much more computationally efficient than having many listeners all running their own individual tests each time the event is triggered.</p>
+				<p>Such a listener system may be set up by calling <code><a href="#function:core:declare_lookup_listener">core:declare_lookup_listener</a></code>. Client scripts can then register a callback with <code><a href="#function:core:add_lookup_listener_callback">core:add_lookup_listener_callback</a></code>, although it may be beneficial to set up wrappers for this functionality (see <code><a href="../campaign/campaign_manager.html#function:campaign_manager:add_faction_turn_start_listener_by_name">campaign_manager:add_faction_turn_start_listener_by_name</a></code> for an example). <code><a href="#function:core:remove_lookup_listener_callback">core:remove_lookup_listener_callback</a></code> can be called to remove listeners by name.</p>
+
+				<h4>Example - Declares a lookup listener that triggers listeners by faction name:</h4>
+				<div id="example_code"><code>
+					 core:declare_lookup_listener(<br />
+					 &emsp;&emsp;&emsp;&emsp;"faction_turn_start_faction_name",<br />
+					 &emsp;&emsp;&emsp;&emsp;"FactionTurnStart",<br />
+					 &emsp;&emsp;&emsp;&emsp;function(context) return context:faction():name() end<br />
+					 );<br />
+					 <br />
+					 -- adds a listener entry to the declared lookup listener<br />
+					 -- to trigger when wh_main_emp_empire starts a turn<br />
+					 core:add_lookup_listener_callback(<br />
+					 &emsp;&emsp;&emsp;&emsp;"faction_turn_start_faction_name",<br />
+					 &emsp;&emsp;&emsp;&emsp;"test",<br />
+					 &emsp;&emsp;&emsp;&emsp;"wh_main_emp_empire",<br />
+					 &emsp;&emsp;&emsp;&emsp;function() out("Empire are starting a turn") end,<br />
+					 &emsp;&emsp;&emsp;&emsp;true<br />
+					 );<br />
+				</code></div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:declare_lookup_listener"><h3 class="function_name"><strong><code>core:declare_lookup_listener(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">list name</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">event name</i><code><strong>, <code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">test</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Declares a new lookup listener, which listens for the supplied event and then calls listener records based on the key generated by the supplied test function. The test function will be called when the event is received and will be passed the event context. It should return a value which can be used to look up listeners added with <code><a href="#function:core:add_lookup_listener_callback">core:add_lookup_listener_callback</a></code>.<br />
+							See the section documentation <code><a href="#section:core:Lookup Listeners">Lookup Listeners</a></code> for an example of usage.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique list name.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Script event to listen for.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>Conditional test to perform on the function context. This must return a value.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 1327</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:add_lookup_listener_callback"><h3 class="function_name"><strong><code>core:add_lookup_listener_callback(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">list name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">listener name</i><code><strong>, <br />&emsp;&emsp;value </strong></code><i class="parameter">lookup value</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">callback</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">persistent</i><code><strong><br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a listener entry to a lookup listener previously declared with <code><a href="#function:core:declare_lookup_listener">core:declare_lookup_listener</a></code>. This specifies a lookup value which, should it match the value produced by the test specified when the lookup listener was declared, will cause the supplied callback to be called.<br />
+							See the section documentation <code><a href="#section:core:Lookup Listeners">Lookup Listeners</a></code> for an example of usage.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Lookup listener to add this listener entry to. This should match the name passed to <code><a href="#function:core:declare_lookup_listener">core:declare_lookup_listener</a></code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Listener name, by which this listener entry may later be removed with <code><a href="#function:core:remove_lookup_listener_callback">core:remove_lookup_listener_callback</a></code> if desired. It is valid to have multiple listeners with the same name.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>Lookup value. If, when the test function supplied to <code><a href="#function:core:declare_lookup_listener">core:declare_lookup_listener</a></code> is called it returns this value, then the callback for this listener will be called. The value given here can be any type.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>Callback to call if the lookup value is matched.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>Is this a persistent listener. If <code>false</code> is specified here the listener will stop the first time the callback is triggered. If <code>true</code>, the listener will continue until cancelled with <code><a href="#function:core:remove_lookup_listener_callback">core:remove_lookup_listener_callback</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 1375</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:remove_lookup_listener_callback"><h3 class="function_name"><strong><code>core:remove_lookup_listener_callback(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">list name</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">listener name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Removes any listener entries from the specified lookup listener that match the supplied name.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Lookup listener to remove listener entries from.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Name of listener to remove. This corresponds with the listener name specified when <code><a href="#function:core:add_lookup_listener_callback">core:add_lookup_listener_callback</a></code> is called.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 1449</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:Fullscreen Highlighting"><h2 class="section_header">Fullscreen Highlighting</h2></a>
+				</div>
+				<p>A fullscreen highlight is an effect where the screen is masked out with a semi-opaque layer on top, save for a window cut out through which the game interface can be seen. This can be used by tutorial scripts to draw the player's attention to a particular part of the screen. The fullscreen highlight prevents the player from clicking on those portions of the screen that are masked off.</p>
+				<p>A fullscreen highlight effect may be established around a supplied set of components with <code>show_fullscreen_highlight_around_components()</code>. Once established, a fullscreen highlight effect must be destroyed with <code>hide_fullscreen_highlight()</code>.</p>
+				<p>This fullscreen highlight functionality wraps the FullscreenHighlight functionality provided by the underlying UI code. It's recommended to use this wrapper rather than calling the code functions directly.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:show_fullscreen_highlight_around_components"><h3 class="function_name"><strong><code>core:show_fullscreen_highlight_around_components(<br />&emsp;&emsp;number </strong></code><i class="parameter">padding</i><code><strong>, <br />&emsp;&emsp;[string </strong></code><i class="parameter">highlight text</i><code><strong>], <br />&emsp;&emsp;[boolean </strong></code><i class="parameter">allow interaction</i><code><strong>], <br />&emsp;&emsp;... </strong></code><i class="parameter">uicomponent list</i><code><strong><br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Shows a fullscreen highlight around a supplied component list. Once established, this highlight must later be destroyed with <code>hide_fullscreen_highlight()</code>.<br />
+							An integer padding value must be supplied, which specifies how much visual padding to give the components. The higher the supplied value, the more space is given around the supplied components visually.<br />
+							The underlying FullscreenHighlight functionality supports showing text on the fullscreen highlight itself. If you wish to specify some text to be shown, it may be supplied using the second parameter in the common localised text format <code>[table]_[field_of_text]_[key_from_table]</code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>Padding value, must be 0 or greater</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Highlight text key, may be nil.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Allows the components in the central window to be interacted with.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code>...</code></p>
+									</td>
+									<td>
+										<p>uicomponent list</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 1528</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:hide_fullscreen_highlight"><h3 class="function_name"><strong><code>core:hide_fullscreen_highlight()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Hides/destroys the active fullscreen highlight.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 1658</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:set_fullscreen_highlight_interactive"><h3 class="function_name"><strong><code>core:set_fullscreen_highlight_interactive([boolean </strong></code><i class="parameter">value</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the active fullscreen highlight to be interactive. An interactive fullscreen highlight will respond to clicks. By default fullscreen highlights are non-interactive, but the functionality to make them interactive is provided here in case it's needed.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 1685</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:set_fullscreen_highlight_window_interactive"><h3 class="function_name"><strong><code>core:set_fullscreen_highlight_window_interactive([boolean </strong></code><i class="parameter">value</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the active fullscreen highlight to be interactive. An interactive fullscreen highlight will respond to clicks. By default fullscreen highlights are non-interactive, but the functionality to make them interactive is provided here in case it's needed.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 1705</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:Advisor Priority Cache"><h2 class="section_header">Advisor Priority Cache</h2></a>
+				</div>
+				<p>Functionality to set and reset the advisor UI priority, which determines at what level the advisor is displayed (i.e. on top of/underneath other components). This is useful during tutorial scripting when the ui priority of other elements on the screen (particularly fullscreen highlighting) has been modified, or is otherwise interfering with the visibility of the advisor.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:cache_and_set_advisor_priority"><h3 class="function_name"><strong><code>core:cache_and_set_advisor_priority()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the advisor priority to the supplied value, and caches the value previously set. The advisor priority can later be restored with <code>restore_advisor_priority</code>.<br />
+							The register_topmost flag can also be set to force the advisor to topmost.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 1742</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:restore_advisor_priority"><h3 class="function_name"><strong><code>core:restore_advisor_priority()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Restores the advisor priority to a value previously cached with <code>cache_and_set_advisor_priority</code>.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 1778</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:UIComponent Creation"><h2 class="section_header">UIComponent Creation</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:get_or_create_component"><h3 class="function_name"><strong><code>core:get_or_create_component(string </strong></code><i class="parameter">name</i><code><strong>, string </strong></code><i class="parameter">file path</i><code><strong>, [uicomponent </strong></code><i class="parameter">parent</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a UI component with the supplied name, or retrieves it if it's already been created.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Name to give uicomponent.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>File path to uicomponent layout, from the working data folder.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>uicomponent</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=ui_root</i></p>
+										<p>Parent uicomponent.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>uicomponent</code> created or retrieved uicomponent</li>
+								<li><code>boolean</code> uicomponent was created</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 uic_skip_button = core:get_or_create_component("scripted_tour_skip_button", "UI/Common UI/scripted_tour_skip_button.twui.xml")<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 1817</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:Event Handling"><h2 class="section_header">Event Handling</h2></a>
+				</div>
+				<p>The core object provides a wrapper interface for client scripts to listen for events triggered by the game code, which is the main mechanism by which the game sends messages to script.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:add_listener"><h3 class="function_name"><strong><code>core:add_listener(<br />&emsp;&emsp;string </strong></code><i class="parameter">listener name</i><code><strong>, <br />&emsp;&emsp;string </strong></code><i class="parameter">event name</i><code><strong>, <br />&emsp;&emsp;function </strong></code><i class="parameter">conditional test</i><code><strong>, <br />&emsp;&emsp;function </strong></code><i class="parameter">target callback</i><code><strong>, <br />&emsp;&emsp;boolean </strong></code><i class="parameter">listener persists after target callback called</i><code><strong><br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a listener for an event. When the code triggers this event, and should the optional supplied conditional test pass, the core object will call the supplied target callback with the event context as a single argument.<br />
+							A name must be specified for the listener which may be used to cancel it at any time. Names do not have to be unique between listeners.<br />
+							The conditional test should be a function that returns a boolean value. This conditional test callback is called when the event is triggered, and the listener only goes on to trigger the supplied target callback if the conditional test returns true. Alternatively, a boolean <code>true</code> value may be given in place of a conditional callback, in which case the listener will always go on to call the target callback if the event is triggered.<br />
+							Once a listener has called its callback it then shuts down unless the persistent flag is set to true, in which case it may only be stopped by being cancelled by name.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>listener name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>event name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p>Conditional test, or <code>true</code> to always pass</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p>target callback</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>listener persists after target callback called</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 1866</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:remove_listener"><h3 class="function_name"><strong><code>core:remove_listener(string </strong></code><i class="parameter">listener name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Removes and stops any event listeners with the specified name.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>listener name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 2071</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:trigger_event"><h3 class="function_name"><strong><code>core:trigger_event(string </strong></code><i class="parameter">event name</i><code><strong>, ... </strong></code><i class="parameter">context data items</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Triggers an event from script, to which event listeners will respond. An event name must be specified, as well as zero or more items of data to package up in a custom event context. See <code><a href="#class:custom_context">custom_context</a></code> documentation for information about what types of data may be supplied with a custom context. A limitation of the implementation means that only one data item of each supported type may be specified.<br />
+							By convention, the names of events triggered from script are prepended with "ScriptEvent" e.g. "ScriptEventPlayerFactionTurnStart".
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>event name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>...</code></p>
+									</td>
+									<td>
+										<p>context data items</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 2112</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:trigger_custom_event"><h3 class="function_name"><strong><code>core:trigger_custom_event(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">event name</i><code><strong>, <code><a href="lua.html#class:table">table</a></code> </strong></code><i class="parameter">data items</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Triggers an event from script with a context object constructed from custom data. An event name must be specified, as well as a table containing context data at key/value pairs. For keys that are strings, the value corresponding to the key will be added to the <code><a href="#class:custom_context">custom_context</a></code> generated, and will be available to listening scripts through a function with the same name as the key value. An example might be a hypothetical event <code>ScriptEventCharacterInfected</code>, with a key <code>disease</code> and a value which is the name of the disease. This would be accessible to listeners of this event that call <code>context:disease()</code>.<br />
+							Should the key not be a string then the data is added to the context as normal, as if supplied to <code><a href="#function:custom_context:add_data">custom_context:add_data</a></code>.<br />
+							By convention, the names of events triggered from script are prepended with "ScriptEvent" e.g. "ScriptEventPlayerFactionTurnStart".
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>event name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p>data items</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 2150</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:Custom Event Generator"><h2 class="section_header">Custom Event Generator</h2></a>
+				</div>
+				<p>A custom event generator is a simple listener that listens for event, tests a condition, and if the condition passes triggers a target event with some optional context data. Performance and code re-use can be improved by setting up a custom event generator rather than having lots of instances of client scripts all listening for the same event and performing the same conditional test as one another.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:start_custom_event_generator"><h3 class="function_name"><strong><code>core:start_custom_event_generator(<br />&emsp;&emsp;string </strong></code><i class="parameter">source event</i><code><strong>, <br />&emsp;&emsp;function </strong></code><i class="parameter">condition</i><code><strong>, <br />&emsp;&emsp;string </strong></code><i class="parameter">target event</i><code><strong>, <br />&emsp;&emsp;[function </strong></code><i class="parameter">context generator</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a custom event generator. 
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Source event to listen for.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p>Conditional test to perform. This test will be passed the context of the source event just triggered as a single argument, and should return a boolean value. If the condition returns <code>true</code>, or a value that evaluates to <code>true</code>, the target event will be triggered.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Target event to fire if the source event is received and the condition passes. By convention, events triggered from script begin with <code>"ScriptEvent"</code></p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Function that returns an object to be placed on the context of the target event</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example - ScriptEventPlayerBesieged:</h4>
+								This script fires a <code>"ScriptEventPlayerBesieged"</code> event, with the besieged region attached to the context, when a player settlement is besieged in campaign.
+							<div id="example_code"><code>
+								 core:start_custom_event_generator(<br />
+								 &emsp;&emsp;&emsp;&emsp;"CharacterBesiegesSettlement",<br />
+								 &emsp;&emsp;&emsp;&emsp;function(context) return context:region():owning_faction():name() == cm:get_local_faction_name() end,<br />
+								 &emsp;&emsp;&emsp;&emsp;"ScriptEventPlayerBesieged",<br />
+								 &emsp;&emsp;&emsp;&emsp;function(context) return context:region() end<br />
+								 )<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 2212</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:stop_custom_event_generator"><h3 class="function_name"><strong><code>core:stop_custom_event_generator()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Stops a custom event generator, by the name of the target event. If multiple custom generators produce the same target event they will all be stopped.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 2265</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:Performance Monitoring"><h2 class="section_header">Performance Monitoring</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:monitor_performance"><h3 class="function_name"><strong><code>core:monitor_performance(function </strong></code><i class="parameter">function to call</i><code><strong>, number </strong></code><i class="parameter">time limit in s</i><code><strong>, string </strong></code><i class="parameter">name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Immediately calls a supplied function, and monitors how long it takes to complete. If this duration is longer than a supplied time limit a script error is thrown. A string name must also be specified for the function, for output purposes.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p>function to call</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>time limit in s</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> passed perfomance check</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 2282</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:Limited Callbacks"><h2 class="section_header">Limited Callbacks</h2></a>
+				</div>
+				<p>The utility functions described in this section can be useful for script that goes round a loop of an indeterminate number of cycles (e.g. some script monitoring player interaction where they can click back and forth as many times as they like) which wishes to call an external function only on the first time, or the first x number of times, around the loop. Using these utility functions means those scripts do not have to maintain a counter of how many times the function has been called themselves.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:call_limited"><h3 class="function_name"><strong><code>core:call_limited(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">name</i><code><strong>, <code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">callback</i><code><strong>, [<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">quantity</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Calls the supplied function if the number of previously function calls with the supplied name is less than the supplied limit. Only function calls handled by <code>call_limited</code> (or <code><a href="#function:core:call_once">core:call_once</a></code>) are counted. If the function is called then the internal counter associated with the name given is incremented.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Name of the callback record to check.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>Callback to call.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=1</i></p>
+										<p>Maximum number of times a callback with this name can be called. If the internal counter of the number of callbacks related to the supplied name is less than this supplied quantity then the callback will be called.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> callback was called</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 -- This will be called, as no callback with the name test_callback has been previously called<br />
+								 core:call_limited("test_callback", function() out("This is a test") end, 1)<br />
+								 -- This will not be called, as the number of callbacks with the supplied<br />
+								 -- name is not less than the supplied quantity (1)<br />
+								 core:call_limited("test_callback", function() out("This is a test") end, 1)<br />
+								 -- This will be called, as the quantity has been increased.<br />
+								 -- The callback being different doesn't matter as the name is the same.<br />
+								 core:call_limited("test_callback", function() out("A different callback") end, 2)<br />
+							</code></div>
+							<div id="example_result"><code>
+								This is a test<br />
+								A different callback<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 2325</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:call_once"><h3 class="function_name"><strong><code>core:call_once(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">name</i><code><strong>, <code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">callback</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Calls the supplied function if no function with the supplied name has previously been called by <code>call_once</code> or <code><a href="#function:core:call_limited">core:call_limited</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Name of the callback record to check.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>Callback to call.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 2378</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:Text and Active Pointers"><h2 class="section_header">Text and Active Pointers</h2></a>
+				</div>
+				<p>Functionality to help prevent text pointers with duplicate names.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:is_text_pointer_name_registered"><h3 class="function_name"><strong><code>core:is_text_pointer_name_registered(string </strong></code><i class="parameter">text pointer name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns true if a text pointer with the supplied name has already been registered, false otherwise.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>text pointer name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> has been registered</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 2399</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:register_text_pointer_name"><h3 class="function_name"><strong><code>core:register_text_pointer_name(string </strong></code><i class="parameter">text pointer name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Registers a text pointer with the supplied name.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>text pointer name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 2412</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:register_active_pointer"><h3 class="function_name"><strong><code>core:register_active_pointer(<code><a href="text_pointer.html#class:active_pointer">active_pointer</a></code> </strong></code><i class="parameter">active pointer</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Registers an active pointer. This is called automatically when an active pointer is set to save a record of itself into the advice history. It should not be called externally.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="text_pointer.html#class:active_pointer">active_pointer</a></code></code></p>
+									</td>
+									<td>
+										<p>active pointer</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> registration successful</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 2433</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:get_active_pointer"><h3 class="function_name"><strong><code>core:get_active_pointer(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Gets a previously-registered active pointer by name.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="text_pointer.html#class:active_pointer">active_pointer</a></code></code> active pointer</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 2454</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:is_any_active_pointer_showing"><h3 class="function_name"><strong><code>core:is_any_active_pointer_showing()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether any active pointer is currently being displayed, as well as the active pointer being displayed if one is found.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> active pointer is showing</li>
+								<li><code><code><a href="text_pointer.html#class:active_pointer">active_pointer</a></code></code> active pointer being shown</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 2463</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:hide_all_text_pointers"><h3 class="function_name"><strong><code>core:hide_all_text_pointers([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">hide immediately</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Hide any <code><a href="text_pointer.html#class:text_pointer">text_pointer</a></code>'s current visible.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>hide immediately</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 2480</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:Autonumbers"><h2 class="section_header">Autonumbers</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:get_unique_counter"><h3 class="function_name"><strong><code>core:get_unique_counter()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Retrieves a unique integer number. Each number is 1 higher than the previous unique number. Useful for scripts that need to generate unique identifiers.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>integer</code> unique number</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 2497</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:Loading Screens/UI Event Progression"><h2 class="section_header">Loading Screens/UI Event Progression</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:get_loading_screen"><h3 class="function_name"><strong><code>core:get_loading_screen()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the name and uicomponent of any detected loading screen, or <code>false</code> if one is not currently resident in the ui hierarchy (which would indicate that loading has finished).
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>string</code> loading screen name</li>
+								<li><code>uicomponent</code> loading screen uicomponent</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 2514</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:is_loading_screen_visible"><h3 class="function_name"><strong><code>core:is_loading_screen_visible()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the name and uicomponent of any visible loading screen, or <code>false</code> otherwise.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>string</code> loading screen name</li>
+								<li><code>uicomponent</code> loading screen uicomponent</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 2552</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:progress_on_loading_screen_dismissed"><h3 class="function_name"><strong><code>core:progress_on_loading_screen_dismissed(function </strong></code><i class="parameter">callback</i><code><strong>, [boolean </strong></code><i class="parameter">suppress wait</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Calls the supplied callback once the loading screen has been dismissed. If no loading screen is currently visible the function throws a script error and calls the callback immediately.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p>Callback to call.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Suppress wait for loading screen to animate offscreen.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 2572</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:progress_on_uicomponent_animation_finished"><h3 class="function_name"><strong><code>core:progress_on_uicomponent_animation_finished(uicomponent </strong></code><i class="parameter">uicomponent</i><code><strong>, function </strong></code><i class="parameter">callback</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Calls the supplied callback once the supplied component has finished animating. This function polls the animation state every 1/10th of a second, so there may be a slight unavoidable delay between the animation finishing and the supplied callback being called.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>uicomponent</code></p>
+									</td>
+									<td>
+										<p>uicomponent</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p>callback</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 2676</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:progress_on_uicomponent_animation"><h3 class="function_name"><strong><code>core:progress_on_uicomponent_animation(<br />&emsp;&emsp;string </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;uicomponent </strong></code><i class="parameter">uicomponent</i><code><strong>, <br />&emsp;&emsp;function </strong></code><i class="parameter">callback</i><code><strong>, <br />&emsp;&emsp;[number </strong></code><i class="parameter">callback delay</i><code><strong>], <br />&emsp;&emsp;[string </strong></code><i class="parameter">animation name</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Calls the supplied callback when the active animation on the supplied uicomponent returns a certain string. By default this string is empty, which means this function would progress when the target uicomponent is not animating. However, an alternative animation name can be supplied, which makes this function progress when that animation plays instead.<br />
+							Note that this script has to repeatedly poll the supplied uicomponent, so because of model tick resolution it's not possible to guarantee that the callback will be called the instant the animation changes to the desired state.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Unique name for this monitor (multiple such monitors may be active at once).</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>uicomponent</code></p>
+									</td>
+									<td>
+										<p>Target uicomponent.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p>Callback to call.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>Time in seconds to wait after the animation finishes before calling the supplied callback.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=""</i></p>
+										<p>Animation name which, when seen to be playing on the supplied uicomponent, causes the monitor to fire. The default animation name "" implies no animation playing.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 2698</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:cancel_progress_on_uicomponent_animation"><h3 class="function_name"><strong><code>core:cancel_progress_on_uicomponent_animation(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Cancels a monitor started with <code><a href="#function:core:progress_on_uicomponent_animation">core:progress_on_uicomponent_animation</a></code> by name.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name for the monitor to cancel (multiple such monitors may be active at once).</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 2764</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:Caching/Restoring UIComponent Tooltips"><h2 class="section_header">Caching/Restoring UIComponent Tooltips</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:cache_and_set_tooltip_for_component_state"><h3 class="function_name"><strong><code>core:cache_and_set_tooltip_for_component_state(<br />&emsp;&emsp;<code><a href="uicomponent.html#class:uicomponent">uicomponent</a></code> </strong></code><i class="parameter">subject uicomponent</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">state name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">text key</i><code><strong><br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Caches and sets the tooltip for a particular state of a component. Once cached, the tooltip may be restored with <code>restore_tooltip_for_component_state</code>. This is used by tutorial scripts that overwrite the tooltip state of certain UIComponents.<br />
+							The tooltip text key should be supplied in the common localised text format <code>[table]_[field_of_text]_[key_from_table]</code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="uicomponent.html#class:uicomponent">uicomponent</a></code></code></p>
+									</td>
+									<td>
+										<p>subject uicomponent</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>state name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>text key</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 2789</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:restore_tooltip_for_component_state"><h3 class="function_name"><strong><code>core:restore_tooltip_for_component_state(uicomponent </strong></code><i class="parameter">subject uicomponent</i><code><strong>, string </strong></code><i class="parameter">state name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Restores a tooltip for a uicomponent state that's been previously modified with <code>cache_and_set_tooltip_for_component_state</code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>uicomponent</code></p>
+									</td>
+									<td>
+										<p>subject uicomponent</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>state name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 2837</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:Localised Text Tags"><h2 class="section_header">Localised Text Tags</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:strip_tags_from_localised_text"><h3 class="function_name"><strong><code>core:strip_tags_from_localised_text(string </strong></code><i class="parameter">text</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Strips any tags out of a localised text string. Tags stripped are "[[ .. ]]" and "{{ .. }}".
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>text</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>string</code> stripped text</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 2900</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:Bit Checking"><h2 class="section_header">Bit Checking</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:check_bit"><h3 class="function_name"><strong><code>core:check_bit(number </strong></code><i class="parameter">subject value</i><code><strong>, integer </strong></code><i class="parameter">bit position</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Takes a number value and a numeric bit position. Returns true if the bit at the numeric bit position would be a '1' were the number value converted to binary, false otherwise.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>subject value</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>integer</code></p>
+									</td>
+									<td>
+										<p>bit position</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> bit value</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 2950</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:Static Object Registry"><h2 class="section_header">Static Object Registry</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:add_static_object"><h3 class="function_name"><strong><code>core:add_static_object(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">object name</i><code><strong>, <br />&emsp;&emsp;object </strong></code><i class="parameter">object to register</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">classification</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">overwrite</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">silent</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Registers a static object by a string name, which can be retrieved later with <code><a href="#function:core:get_static_object">core:get_static_object</a></code>. This is intended for use as a registry of global static objects (objects of which there should only be one copy) such as <code><a href="battle_manager.html#class:battle_manager">battle_manager</a></code>, <code><a href="../campaign/campaign_manager.html#class:campaign_manager">campaign_manager</a></code>, <code><a href="timer_manager.html#class:timer_manager">timer_manager</a></code>, <code><a href="script_messager.html#class:script_messager">script_messager</a></code>, <code><a href="generated_battle.html#class:generated_battle">generated_battle</a></code> and so-on. Scripts that intended to create one of these objects can query the static object registry to see if they've been created before and, if not, can register it.<br />
+							An optional classification string may be supplied to specify a grouping for the object. Static objects in different classifications may share the same name. This functionality can be used to register static objects of a particular type, e.g. a particular mission manager, and to ensure that names are unique amongst those objects.<br />
+							If a static object with the supplied name and classification already exists then this function produces a script error unless the overwrite flag is set.<br />
+							The static object registry is not saved into the campaign savegame or saved between game sessions.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Object name.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>object</code></p>
+									</td>
+									<td>
+										<p>Object to register.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Object classification.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Should overwrite if an object already exists with this name.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Do not generate a script error if the object couldn't be added.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> object added successfully</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 3018</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:get_static_object"><h3 class="function_name"><strong><code>core:get_static_object(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">object name</i><code><strong>, [<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">classification</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the static object previously registered with the supplied string name and optional classification using <code><a href="#function:core:add_static_object">core:add_static_object</a></code>, if any such object has been registered, or nil if no object was found.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>object name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>classification</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>object</code> object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 3067</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:core:Windowed Movie Players"><h2 class="section_header">Windowed Movie Players</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:core:stop_all_windowed_movie_players"><h3 class="function_name"><strong><code>core:stop_all_windowed_movie_players()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Stops any windowed movie players currently playing.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 3106</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:register_windowed_movie_player"><h3 class="function_name"><strong><code>core:register_windowed_movie_player(<code><a href="movie_overlay.html#class:windowed_movie_player">windowed_movie_player</a></code> </strong></code><i class="parameter">player</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Registers a <code><a href="movie_overlay.html#class:windowed_movie_player">windowed_movie_player</a></code> with the core object so that it may be stopped if <code><a href="#function:core:stop_all_windowed_movie_players">core:stop_all_windowed_movie_players</a></code> is called. This is only intended to be called internally by windowed movie players.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="movie_overlay.html#class:windowed_movie_player">windowed_movie_player</a></code></code></p>
+									</td>
+									<td>
+										<p>player</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 3117</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:core:unregister_windowed_movie_player"><h3 class="function_name"><strong><code>core:unregister_windowed_movie_player(<code><a href="movie_overlay.html#class:windowed_movie_player">windowed_movie_player</a></code> </strong></code><i class="parameter">player</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Unregisters a <code><a href="movie_overlay.html#class:windowed_movie_player">windowed_movie_player</a></code> with the core object so that won't be stopped if <code><a href="#function:core:stop_all_windowed_movie_players">core:stop_all_windowed_movie_players</a></code> is called. This is only intended to be called internally by windowed movie players.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="movie_overlay.html#class:windowed_movie_player">windowed_movie_player</a></code></code></p>
+									</td>
+									<td>
+										<p>player</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_core.lua, line 3129</p>
+						</dd>
+					</dl>
+				</div>
+
+				<hr class="superblock_divider" />
+
+
+				<a name="class:custom_context"><h1 class="content_header">Custom Context</h1></a>
+				<p>A custom context is created when the core object is compelled to trigger an event with <code><a href="#function:core:trigger_event">core:trigger_event</a></code> or <code><a href="#function:core:trigger_custom_event">core:trigger_custom_event</a></code>. Data items supplied to <code><a href="#function:core:trigger_event">core:trigger_event</a></code> or <code><a href="#function:core:trigger_custom_event">core:trigger_custom_event</a></code> are added to the custom context, which is then sent to any script listening for the event being triggered.</p>
+				<p>The receiving script should then be able to interrogate the custom context it receives as if it were a context issued from the game code.</p>
+				<p>No script outside of <code>trigger_event</code> should need to create a custom context, but it's documented here in order to list the data types it supports.</p>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:custom_context:Functionality"><h2 class="section_header">Functionality</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:custom_context:new"><h3 class="function_name"><strong><code>custom_context:new()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a custom context object.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>custom_context</code> </li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_custom_context.lua, line 25</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_context:add_data"><h3 class="function_name"><strong><code>custom_context:add_data(object </strong></code><i class="parameter">context data</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds data to the custom context object. Supported data types:<br />
+							<ul><li>boolean: will be accessible to the receiving script as <code>context.bool</code></li><br />
+							<ul><li>string: will be accessible to the receiving script as <code>context.string</code>.</li><br />
+							<ul><li>number: will be accessible to the receiving script as <code>context.number</code>.</li><br />
+							<li>table: will be accessible to the receiving script using <code><a href="#function:custom_context:table_data">custom_context:table_data</a></code>.</li><br />
+							<li>region: will be accessible to the receiving script using <code><a href="#function:custom_context:region">custom_context:region</a></code>.</li><br />
+							<li>character: will be accessible to the receiving script using <code><a href="#function:custom_context:character">custom_context:character</a></code>. A second character, if added, is accessible to the receiving script using <code><a href="#function:custom_context:target_character">custom_context:target_character</a></code>.</li><br />
+							<li>faction: will be accessible to the receiving script using <code><a href="#function:custom_context:faction">custom_context:faction</a></code>.</li><br />
+							<li>component: will be accessible to the receiving script using <code><a href="#function:custom_context:component">custom_context:component</a></code>.</li><br />
+							<li>military_force: will be accessible to the receiving script using <code><a href="#function:custom_context:military_force">custom_context:military_force</a></code>.</li><br />
+							<li>pending_battle: will be accessible to the receiving script using <code><a href="#function:custom_context:pending_battle">custom_context:pending_battle</a></code>.</li><br />
+							<li>garrison_residence: will be accessible to the receiving script using <code><a href="#function:custom_context:garrison_residence">custom_context:garrison_residence</a></code>.</li><br />
+							<li>building: will be accessible to the receiving script using <code><a href="#function:custom_context:building">custom_context:building</a></code>.</li><br />
+							<li>vector: will be accessible to the receiving script using <code><a href="#function:custom_context:vector">custom_context:vector</a></code>.</li></ul><br />
+							A limitation of the implementation is that only one object of each type may be placed on the custom context (except for characters, currently).
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>object</code></p>
+									</td>
+									<td>
+										<p>Data object to add</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_custom_context.lua, line 37</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_context:add_data_with_key"><h3 class="function_name"><strong><code>custom_context:add_data_with_key(value </strong></code><i class="parameter">value</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">function name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds data to the custom context which will be made accessible at the supplied function name. The function name is supplied by string key.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>Value to add to custom context. Any value may be supplied.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Name of function at which the value may be retrieved, if called on the custom context.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_custom_context.lua, line 96</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_context:table_data"><h3 class="function_name"><strong><code>custom_context:table_data()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Called by the receiving script to retrieve the table placed on the custom context, were one specified by the script that created it.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>table</code> of user defined values</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_custom_context.lua, line 113</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_context:region"><h3 class="function_name"><strong><code>custom_context:region()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Called by the receiving script to retrieve the region object placed on the custom context, were one specified by the script that created it.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>region</code> region object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_custom_context.lua, line 121</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_context:character"><h3 class="function_name"><strong><code>custom_context:character()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Called by the receiving script to retrieve the character object placed on the custom context, were one specified by the script that created it.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>character</code> character object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_custom_context.lua, line 129</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_context:target_character"><h3 class="function_name"><strong><code>custom_context:target_character()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Called by the receiving script to retrieve the target character object placed on the custom context, were one specified by the script that created it. The target character is the second character added to the context.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>character</code> target character object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_custom_context.lua, line 137</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_context:faction"><h3 class="function_name"><strong><code>custom_context:faction()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Called by the receiving script to retrieve the faction object placed on the custom context, were one specified by the script that created it.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>faction</code> faction object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_custom_context.lua, line 145</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_context:component"><h3 class="function_name"><strong><code>custom_context:component()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Called by the receiving script to retrieve the component object placed on the custom context, were one specified by the script that created it.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>component</code> component object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_custom_context.lua, line 153</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_context:military_force"><h3 class="function_name"><strong><code>custom_context:military_force()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Called by the receiving script to retrieve the military force object placed on the custom context, were one specified by the script that created it.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>military_force</code> military force object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_custom_context.lua, line 161</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_context:pending_battle"><h3 class="function_name"><strong><code>custom_context:pending_battle()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Called by the receiving script to retrieve the pending battle object placed on the custom context, were one specified by the script that created it.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>pending_battle</code> pending battle object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_custom_context.lua, line 169</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_context:garrison_residence"><h3 class="function_name"><strong><code>custom_context:garrison_residence()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Called by the receiving script to retrieve the garrison residence object placed on the custom context, were one specified by the script that created it.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>garrison_residence</code> garrison residence object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_custom_context.lua, line 177</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_context:building"><h3 class="function_name"><strong><code>custom_context:building()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Called by the receiving script to retrieve the building object placed on the custom context, were one specified by the script that created it.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>building</code> building object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_custom_context.lua, line 185</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:custom_context:vector"><h3 class="function_name"><strong><code>custom_context:vector()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Called by the receiving script to retrieve the vector object placed on the custom context, were one specified by the script that created it.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>vector</code> vector object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_custom_context.lua, line 193</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:58</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "battle"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

@@ -1,0 +1,851 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Debug Drawing</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#e2edff" id="main">
+
+			<div style="background-color:#e2edff" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Battle Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#c1e6ff">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search battle only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#c1e6ff">Game Areas</h2>
+				<ul>
+					<li><a href="../campaign/campaign_index.html">Campaign Index</a></li>
+					<li><strong> > Battle Index</strong></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:battle_debug_drawing">Debug Drawing</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#function:battle_debug_drawing:draw_white_circle_on_terrain">draw_white_circle_on_terrain</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_debug_drawing:draw_white_line_on_terrain">draw_white_line_on_terrain</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_debug_drawing:draw_white_peg_on_terrain">draw_white_peg_on_terrain</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_debug_drawing:draw_circle_on_terrain">draw_circle_on_terrain</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_debug_drawing:draw_line_on_terrain">draw_line_on_terrain</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_debug_drawing:draw_peg_on_terrain">draw_peg_on_terrain</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_debug_drawing:draw_obb_on_terrain">draw_obb_on_terrain</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_debug_drawing:draw_2d_text">draw_2d_text</a></li>
+						<li>&emsp;&emsp;<a href="#function:battle_debug_drawing:draw_3d_text">draw_3d_text</a></li>
+					</ul>
+					<li><a href="#class:battle_colour">Colour</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:battle_colour:Creation">Creation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_colour:new">new</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#e2edff" id="navigation_right">				<h2 style="background-color:#c1e6ff">Battle Topics</h2>
+				<ul>
+					<li><a href="battle_index.html">Battle Index</a></li>
+					<li><a href="battle_hierarchy.html">Battle Hierarchy</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="battle.html">Battle</a></li>
+					<li><a href="battle_alliances.html">Alliances</a></li>
+					<li><a href="battle_alliance.html">Alliance</a></li>
+					<li><a href="battle_armies.html">Armies</a></li>
+					<li><a href="battle_army.html">Army</a></li>
+					<li><a href="battle_units.html">Units</a></li>
+					<li><a href="battle_unit.html">Unit</a></li>
+					<li><a href="battle_unitcontroller.html">Unitcontroller</a></li>
+					<li><a href="ai_planner.html">AI Planners</a></li>
+					<li><a href="battle_assault_equipment.html">Assault Equipment</a></li>
+					<li><a href="battle_building.html">Building</a></li>
+					<li><a href="battle_buildings.html">Buildings</a></li>
+					<li><a href="battle_camera.html">Camera</a></li>
+					<li><a href="battle_capture_location.html">Capture Location</a></li>
+					<li><a href="battle_composite_scenes_system.html">Composite Scenes System</a></li>
+					<li><strong> > Debug Drawing</strong></li>
+					<li><a href="battle_reinforcements.html">reinforcements Reinforcements</a></li>
+					<li><a href="battle_sound_effect.html">Sound Effects</a></li>
+					<li><a href="battle_subtitles.html">Subtitles</a></li>
+					<li><a href="battle_toggle_system.html">Toggle System</a></li>
+					<li><a href="battle_vector.html">Vector</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Script Interfaces</h2>
+				<ul>
+					<li><a href="battle_manager.html">Battle Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="advice_manager.html">Advice Manager</a></li>
+					<li><a href="battle_ui_manager.html">Battle UI Manager</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="cutscene.html">Battle Cutscenes</a></li>
+					<li><a href="generated_battle.html">Generated Battle</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="script_ai_planner.html">Script AI Planner</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="script_unit.html">Script Unit</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Data Interfaces</h2>
+				<ul>
+					<li><a href="st_helper.html">Scripted Tour Helpers</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:battle_debug_drawing"><h1 class="content_header">Debug Drawing</h1></a>
+				<p>The <code>debug_drawing</code> interface allows the drawing of debug lines on the battlefield by script. A <code>debug_drawing</code> object may be retrieved from the <code><a href="battle.html#class:battle">battle</a></code> object with <code><a href="battle.html#function:battle:debug_drawing">battle:debug_drawing</a></code>.</p>
+				<p>Note that debug lines must be enabled for these lines to display.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_debug_drawing:Functionality"><h2 class="section_header">Functionality</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_debug_drawing:draw_white_circle_on_terrain"><h3 class="function_name"><strong><code>debug_drawing:draw_white_circle_on_terrain(<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">position</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">radius</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">duration</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Draws a white circle on the terrain.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>Centre position.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Radius of circle in m.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Duration for which to display the circle, in seconds.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptDebugDrawing.cpp, line 94</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_debug_drawing:draw_white_line_on_terrain"><h3 class="function_name"><strong><code>debug_drawing:draw_white_line_on_terrain(<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">position</i><code><strong>, <code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">position</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">duration</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Draws a white line on the terrain.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>Start position.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>End position.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Duration for which to display the line, in seconds.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptDebugDrawing.cpp, line 117</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_debug_drawing:draw_white_peg_on_terrain"><h3 class="function_name"><strong><code>debug_drawing:draw_white_peg_on_terrain(<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">position</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">duration</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Draws a vertical white line on the terrain.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>Position.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Duration for which to display the peg, in seconds.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptDebugDrawing.cpp, line 139</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_debug_drawing:draw_circle_on_terrain"><h3 class="function_name"><strong><code>debug_drawing:draw_circle_on_terrain(<br />&emsp;&emsp;<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">position</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">radius</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">duration</i><code><strong>, <br />&emsp;&emsp;<code><a href="#class:battle_colour">battle_colour</a></code> </strong></code><i class="parameter">colour</i><code><strong><br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Draws a circle on the terrain in a supplied colour.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>Centre position.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Radius of circle in m.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Duration for which to display the circle, in seconds.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:battle_colour">battle_colour</a></code></code></p>
+									</td>
+									<td>
+										<p>Line colour.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptDebugDrawing.cpp, line 158</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_debug_drawing:draw_line_on_terrain"><h3 class="function_name"><strong><code>debug_drawing:draw_line_on_terrain(<br />&emsp;&emsp;<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">position</i><code><strong>, <br />&emsp;&emsp;<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">position</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">duration</i><code><strong>, <br />&emsp;&emsp;<code><a href="#class:battle_colour">battle_colour</a></code> </strong></code><i class="parameter">colour</i><code><strong><br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Draws a line on the terrain in a supplied colour.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>Start position.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>End position.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Duration for which to display the line, in seconds.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:battle_colour">battle_colour</a></code></code></p>
+									</td>
+									<td>
+										<p>Line colour.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptDebugDrawing.cpp, line 183</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_debug_drawing:draw_peg_on_terrain"><h3 class="function_name"><strong><code>debug_drawing:draw_peg_on_terrain(<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">position</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">duration</i><code><strong>, <code><a href="#class:battle_colour">battle_colour</a></code> </strong></code><i class="parameter">colour</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Draws a vertical line on the terrain in a supplied colour.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>Position.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Duration for which to display the peg, in seconds.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:battle_colour">battle_colour</a></code></code></p>
+									</td>
+									<td>
+										<p>Line colour.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptDebugDrawing.cpp, line 205</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_debug_drawing:draw_obb_on_terrain"><h3 class="function_name"><strong><code>debug_drawing:draw_obb_on_terrain(<br />&emsp;&emsp;<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">position</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">width</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">height</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">orientation</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">duration</i><code><strong>, <br />&emsp;&emsp;<code><a href="#class:battle_colour">battle_colour</a></code> </strong></code><i class="parameter">colour</i><code><strong><br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Draws a debug rectangle shape on the terrain in a supplied colour.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>Position.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Width in metres.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Height in metres.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Orientation in radians.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Duration for which to display the shape, in seconds.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:battle_colour">battle_colour</a></code></code></p>
+									</td>
+									<td>
+										<p>Line colour.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptDebugDrawing.cpp, line 226</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_debug_drawing:draw_2d_text"><h3 class="function_name"><strong><code>debug_drawing:draw_2d_text(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">text</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">duration</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">x</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">y</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Draws some 2D debug text.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Text to display.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Duration for which to display the text, in seconds.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>x position.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>y position.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptDebugDrawing.cpp, line 257</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_debug_drawing:draw_3d_text"><h3 class="function_name"><strong><code>debug_drawing:draw_3d_text(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">text</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">duration</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">x</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">y</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">z</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Draws some 3D debug text.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Text to display.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Duration for which to display the text, in seconds.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>x position.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>y position.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>z position.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptDebugDrawing.cpp, line 281</p>
+						</dd>
+					</dl>
+				</div>
+
+				<hr class="superblock_divider" />
+
+
+				<a name="class:battle_colour"><h1 class="content_header">Colour</h1></a>
+				<p>A colour object can be set up to represent a certain rgb colour. Once set up, a colour object can be passed to certain functions on the <code><a href="#class:battle_debug_drawing">battle_debug_drawing</a></code> interface to draw debug lines of that colour.</p>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_colour:Creation"><h2 class="section_header">Creation</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_colour:new"><h3 class="function_name"><strong><code>battle_colour:new(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">red</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">green</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">blue</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates and returns a new <code>battle_colour</code> object.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Red colour value (0 - 255).</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Green colour value (0 - 255).</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Blue colour value (0 - 255).</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:battle_colour">battle_colour</a></code></code> </li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptUtilities.cpp, line 505</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:59</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "battle"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

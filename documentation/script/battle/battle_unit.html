@@ -1,0 +1,2737 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Unit</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#e2edff" id="main">
+
+			<div style="background-color:#e2edff" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Battle Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#c1e6ff">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search battle only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#c1e6ff">Game Areas</h2>
+				<ul>
+					<li><a href="../campaign/campaign_index.html">Campaign Index</a></li>
+					<li><strong> > Battle Index</strong></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:battle_unit">Unit</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:battle_unit:Creation">Creation</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_unit:Usage">Usage</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_unit:Scriptunits and Generated Battles">Scriptunits and Generated Battles</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_unit:Identification">Identification</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:name">name</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:unique_ui_id">unique_ui_id</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:type">type</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:army">army</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:alliance_index">alliance_index</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:army_index">army_index</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:unit_class">unit_class</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_commanding_unit">is_commanding_unit</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_infantry">is_infantry</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_pikemen">is_pikemen</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_anti_cavalry_infantry">is_anti_cavalry_infantry</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_cavalry">is_cavalry</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_lancers">is_lancers</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_dismounted_cavalry">is_dismounted_cavalry</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_chariot">is_chariot</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_camels">is_camels</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_elephants">is_elephants</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_war_beasts">is_war_beasts</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_artillery">is_artillery</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_unlimbered_artillery">is_unlimbered_artillery</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_limbered_artillery">is_limbered_artillery</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_fixed_artillery">is_fixed_artillery</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_war_machine">is_war_machine</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:can_fly">can_fly</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_currently_flying">is_currently_flying</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:has_ships">has_ships</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_dismounted_ships">is_dismounted_ships</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_unit:Location and Movement">Location and Movement</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:position">position</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:ordered_position">ordered_position</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:can_reach_position">can_reach_position</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:bearing">bearing</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:ordered_bearing">ordered_bearing</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:ordered_width">ordered_width</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:position_of_officer">position_of_officer</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_ai_controlled">is_ai_controlled</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_script_controlled">is_script_controlled</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_player_controlled">is_player_controlled</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:unit_in_range">unit_in_range</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:unit_distance">unit_distance</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:strategic_value">strategic_value</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_moving">is_moving</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_moving_fast">is_moving_fast</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:slow_speed">slow_speed</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:fast_speed">fast_speed</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_idle">is_idle</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_leaving_battle">is_leaving_battle</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_valid_for_deployment">is_valid_for_deployment</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_valid_target">is_valid_target</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_currently_garrisoned">is_currently_garrisoned</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_unit:Visibility">Visibility</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_hidden">is_hidden</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_visible_to_alliance">is_visible_to_alliance</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_unit:Combat">Combat</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_under_missile_attack">is_under_missile_attack</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_in_melee">is_in_melee</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:number_of_enemies_killed">number_of_enemies_killed</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_unit:Unit Strength">Unit Strength</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:initial_number_of_men">initial_number_of_men</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:number_of_men_alive">number_of_men_alive</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:unary_of_men_alive">unary_of_men_alive</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:kill_number_of_men">kill_number_of_men</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:reduce_hitpoints_unary">reduce_hitpoints_unary</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:heal_hitpoints_unary">heal_hitpoints_unary</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:respawn">respawn</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:unary_hitpoints">unary_hitpoints</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_unit:Morale and Fatigue">Morale and Fatigue</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_wavering">is_wavering</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_routing">is_routing</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_invulnerable">is_invulnerable</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_rampaging">is_rampaging</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_shattered">is_shattered</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_crumbling">is_crumbling</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_unstable">is_unstable</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_left_flank_threatened">is_left_flank_threatened</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_right_flank_threatened">is_right_flank_threatened</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_rear_flank_threatened">is_rear_flank_threatened</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:left_flank_threat">left_flank_threat</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:right_flank_threat">right_flank_threat</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:rear_threat">rear_threat</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:current_target">current_target</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_on_top_of_platform">is_on_top_of_platform</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_controllable">is_controllable</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_deploying">is_deploying</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_deployed">is_deployed</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:fatigue_state">fatigue_state</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_unit:Ammunition and Range">Ammunition and Range</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:ammo_left">ammo_left</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:starting_ammo">starting_ammo</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:set_current_ammo_unary">set_current_ammo_unary</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:missile_range">missile_range</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_unit:Special Abilities">Special Abilities</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:can_perform_special_ability">can_perform_special_ability</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:disable_passive_special_abilities">disable_passive_special_abilities</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:disable_non_passive_special_abilities">disable_non_passive_special_abilities</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:disable_special_ability">disable_special_ability</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:owned_passive_special_abilities">owned_passive_special_abilities</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:owned_non_passive_special_abilities">owned_non_passive_special_abilities</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:owned_special_abilities">owned_special_abilities</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:num_special_abilities">num_special_abilities</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:can_use_magic">can_use_magic</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_unit:Special Ability Flags">Special Ability Flags</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:set_special_abilities_flags">set_special_abilities_flags</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_unit:Unit Behaviours">Unit Behaviours</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:can_use_behaviour">can_use_behaviour</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_behaviour_active">is_behaviour_active</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_unit:Unit Attributes">Unit Attributes</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:set_stat_attribute">set_stat_attribute</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:has_attribute">has_attribute</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_unit:Sounds">Sounds</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:trigger_sound_charge">trigger_sound_charge</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:trigger_sound_taunt">trigger_sound_taunt</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_unit:Miscellaneous">Miscellaneous</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:play_anim_for_captain">play_anim_for_captain</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:deploy_reinforcement">deploy_reinforcement</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:select_in_ui">select_in_ui</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:highlight">highlight</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:mark_as_ally">mark_as_ally</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#e2edff" id="navigation_right">				<h2 style="background-color:#c1e6ff">Battle Topics</h2>
+				<ul>
+					<li><a href="battle_index.html">Battle Index</a></li>
+					<li><a href="battle_hierarchy.html">Battle Hierarchy</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="battle.html">Battle</a></li>
+					<li><a href="battle_alliances.html">Alliances</a></li>
+					<li><a href="battle_alliance.html">Alliance</a></li>
+					<li><a href="battle_armies.html">Armies</a></li>
+					<li><a href="battle_army.html">Army</a></li>
+					<li><a href="battle_units.html">Units</a></li>
+					<li><strong> > Unit</strong></li>
+					<li><a href="battle_unitcontroller.html">Unitcontroller</a></li>
+					<li><a href="ai_planner.html">AI Planners</a></li>
+					<li><a href="battle_assault_equipment.html">Assault Equipment</a></li>
+					<li><a href="battle_building.html">Building</a></li>
+					<li><a href="battle_buildings.html">Buildings</a></li>
+					<li><a href="battle_camera.html">Camera</a></li>
+					<li><a href="battle_capture_location.html">Capture Location</a></li>
+					<li><a href="battle_composite_scenes_system.html">Composite Scenes System</a></li>
+					<li><a href="battle_debug_drawing.html">Debug Drawing</a></li>
+					<li><a href="battle_reinforcements.html">reinforcements Reinforcements</a></li>
+					<li><a href="battle_sound_effect.html">Sound Effects</a></li>
+					<li><a href="battle_subtitles.html">Subtitles</a></li>
+					<li><a href="battle_toggle_system.html">Toggle System</a></li>
+					<li><a href="battle_vector.html">Vector</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Script Interfaces</h2>
+				<ul>
+					<li><a href="battle_manager.html">Battle Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="advice_manager.html">Advice Manager</a></li>
+					<li><a href="battle_ui_manager.html">Battle UI Manager</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="cutscene.html">Battle Cutscenes</a></li>
+					<li><a href="generated_battle.html">Generated Battle</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="script_ai_planner.html">Script AI Planner</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="script_unit.html">Script Unit</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Data Interfaces</h2>
+				<ul>
+					<li><a href="st_helper.html">Scripted Tour Helpers</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:battle_unit"><h1 class="content_header">Unit</h1></a>
+				<p>A <code>unit</code> object may be created in script to represent a logical unit of soldiers taking part in the battle. The unit object interface permits querying of the state of the unit - to issue orders to the unit a <code><a href="battle_unitcontroller.html#class:battle_unitcontroller">battle_unitcontroller</a></code> object must be created to which the unit object may then be associated.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_unit:Creation"><h2 class="section_header">Creation</h2></a>
+				</div>
+				<p>Unit objects are created from the <code><a href="battle_hierarchy.html#class:battle_hierarchy">battle_hierarchy</a></code>. They appear at the bottom of this hierarchy - see the <code><a href="battle_hierarchy.html#class:battle_hierarchy">battle_hierarchy</a></code> page for more information on how <code>unit</code> objects relate to (and are created from) armies and alliances. Alternatively, and preferably, see the section on scriptunits below for a shorthand method of unit object creation.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_unit:Usage"><h2 class="section_header">Usage</h2></a>
+				</div>
+				<p>Once a handle to a sound effect object is obtained, functions may be called on it to query or modify its state in the following form.</p>
+
+				<h4>Example - Specification:</h4>
+				<div id="example_code"><code>
+					 <i>&lt;object_name&gt;</i>:<i>&lt;function_name&gt;</i>(<i>&lt;args&gt;</i>)<br />
+				</code></div>
+
+				<h4>Example - Creation and Usage:</h4>
+				<div id="example_code"><code>
+					 local sfx_01 = battle_sound_effect:new()<br />
+					 sfx_01:load("test_sound_event")&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- calling a function on the object once created<br />
+				</code></div>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_unit:Scriptunits and Generated Battles"><h2 class="section_header">Scriptunits and Generated Battles</h2></a>
+				</div>
+				<p>It is highly recommended for client scripts to work with <code><a href="script_unit.html#class:script_unit">script_unit</a></code> objects through the interface provided by the script libraries rather than attempting to manage <code>unit</code> objects individually. By creating a <code><a href="script_unit.html#class:script_unit">script_unit</a></code> object, a <code>unit</code> object is automatically created and can be accessed at <code>&lt;script_unit&gt;.unit</code>. See the <code><a href="script_unit.html#class:script_unit">script_unit</a></code> documentation for more information.</p>
+				<p>Alternatively the <code><a href="generated_battle.html#class:generated_battle">generated_battle</a></code> script framework can be used. This automatically creates <code><a href="script_unit.html#class:script_unit">script_unit</a></code> objects (with associated unit objects) and negates the need to set up references to anything more granular than an army.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_unit:Identification"><h2 class="section_header">Identification</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:name"><h3 class="function_name"><strong><code>unit:name()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the script name for the unit, if any has been set. A script name for the unit may be set in the battle setup, either in the battle xml or on the appropriate record in the <code>battle_set_piece_armies_units_junctions</code> table if setting up a set-piece/quest battle. It is valid for multiple units in a given army to have the same script name.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> script name</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 2596</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:unique_ui_id"><h3 class="function_name"><strong><code>unit:unique_ui_id()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the unique ui id for the unit, which should match the name of the corresponding unit card.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> ui ud</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 2632</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:type"><h3 class="function_name"><strong><code>unit:type()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the unit type of the unit, from the <code>land_units</code> table.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> unit type</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 2647</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:army"><h3 class="function_name"><strong><code>unit:army()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the army object to which the unit currently belongs.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="battle_army.html#class:battle_army">battle_army</a></code></code> parent army</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 2665</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:alliance_index"><h3 class="function_name"><strong><code>unit:alliance_index()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the index number of the alliance the unit belongs to, allowing its <code><a href="battle_alliance.html#class:battle_alliance">battle_alliance</a></code> to be determined or looked up from a <code><a href="battle_alliances.html#class:battle_alliances">battle_alliances</a></code> object.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> alliance index</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 2680</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:army_index"><h3 class="function_name"><strong><code>unit:army_index()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the index number of the army the unit belongs to, allowing its <code><a href="battle_army.html#class:battle_army">battle_army</a></code> to be determined or looked up from a <code><a href="battle_armies.html#class:battle_armies">battle_armies</a></code> object (which itself can be determined from the value returned by <code><a href="#function:battle_unit:alliance_index">unit:alliance_index</a></code>).
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> army index</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 2699</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:unit_class"><h3 class="function_name"><strong><code>unit:unit_class()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the class of the unit, from the <code>land_units</code> table.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> unit class</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 2717</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_commanding_unit"><h3 class="function_name"><strong><code>unit:is_commanding_unit()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether this is the commanding unit of the army.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is commanding</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 2737</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_infantry"><h3 class="function_name"><strong><code>unit:is_infantry()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether this is a unit of infantry.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is infantry</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 2757</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_pikemen"><h3 class="function_name"><strong><code>unit:is_pikemen()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether this is a unit of pikemen.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is pikemen</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 2777</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_anti_cavalry_infantry"><h3 class="function_name"><strong><code>unit:is_anti_cavalry_infantry()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether this is a unit of anti-cavalry infantry.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is anti-cavalry infantry</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 2797</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_cavalry"><h3 class="function_name"><strong><code>unit:is_cavalry()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is cavalry.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is cavalry</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 2817</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_lancers"><h3 class="function_name"><strong><code>unit:is_lancers()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether this is a unit of lancers.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is lancers</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 2834</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_dismounted_cavalry"><h3 class="function_name"><strong><code>unit:is_dismounted_cavalry()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether this is a dismounted cavalry unit.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is dismounted cavalry</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 2854</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_chariot"><h3 class="function_name"><strong><code>unit:is_chariot()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether this is a chariot unit.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is chariot</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 2874</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_camels"><h3 class="function_name"><strong><code>unit:is_camels()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether this unit fights on camels.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is camels</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 2894</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_elephants"><h3 class="function_name"><strong><code>unit:is_elephants()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether this is a unit of elephants.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is elephants</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 2914</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_war_beasts"><h3 class="function_name"><strong><code>unit:is_war_beasts()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether this is a unit of war beasts.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is war beasts</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 2934</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_artillery"><h3 class="function_name"><strong><code>unit:is_artillery()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is artillery.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is artillery</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 2954</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_unlimbered_artillery"><h3 class="function_name"><strong><code>unit:is_unlimbered_artillery()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is artillery in an unlimbered state (it can fire, but not move).
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is unlimbered artillery</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 2971</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_limbered_artillery"><h3 class="function_name"><strong><code>unit:is_limbered_artillery()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is artillery in a limbered state (i.e. it can move but not fire).
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is limbered artillery</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 2991</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_fixed_artillery"><h3 class="function_name"><strong><code>unit:is_fixed_artillery()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is fixed artillery. Fixed artillery can never move.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is fixed artillery</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3008</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_war_machine"><h3 class="function_name"><strong><code>unit:is_war_machine()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is a war machine.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is war machine</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3028</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:can_fly"><h3 class="function_name"><strong><code>unit:can_fly()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit can fly.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> can fly</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3048</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_currently_flying"><h3 class="function_name"><strong><code>unit:is_currently_flying()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit can fly and is currently flying.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is flying</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3068</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:has_ships"><h3 class="function_name"><strong><code>unit:has_ships()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is currently on a ship.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is on a ship</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3088</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_dismounted_ships"><h3 class="function_name"><strong><code>unit:is_dismounted_ships()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit has a ship but is not currently on it.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> dismounted from ship</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3108</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_unit:Location and Movement"><h2 class="section_header">Location and Movement</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:position"><h3 class="function_name"><strong><code>unit:position()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the centre position of the main squad of the unit.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code> position</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3132</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:ordered_position"><h3 class="function_name"><strong><code>unit:ordered_position()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the position to which the unit has been ordered to move to. Note that if the unit is attacking, as opposed to moving, then this will return the current position of the unit.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code> ordered position</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3150</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:can_reach_position"><h3 class="function_name"><strong><code>unit:can_reach_position(<code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code> </strong></code><i class="parameter">position</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit can reach the supplied position.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code></p>
+									</td>
+									<td>
+										<p>position</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> can reach</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3168</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:bearing"><h3 class="function_name"><strong><code>unit:bearing()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the current orientation of the main squad of the unit in degrees.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> orientation</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3199</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:ordered_bearing"><h3 class="function_name"><strong><code>unit:ordered_bearing()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the orientation of the position to which the unit has been ordered in degrees.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> orientation</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3218</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:ordered_width"><h3 class="function_name"><strong><code>unit:ordered_width()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the width of the position to which the unit has been ordered in metres.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> width</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3237</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:position_of_officer"><h3 class="function_name"><strong><code>unit:position_of_officer()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the position of the commanding officer of the unit.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code> officer position</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3254</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_ai_controlled"><h3 class="function_name"><strong><code>unit:is_ai_controlled()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the supplied unit is currently under AI control.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> controlled by AI</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3282</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_script_controlled"><h3 class="function_name"><strong><code>unit:is_script_controlled()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the supplied unit is currently under script control.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> controlled by script</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3299</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_player_controlled"><h3 class="function_name"><strong><code>unit:is_player_controlled()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the supplied unit is currently under script control.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> controlled by script</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3316</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:unit_in_range"><h3 class="function_name"><strong><code>unit:unit_in_range(<code><a href="#class:battle_unit">battle_unit</a></code> </strong></code><i class="parameter">target unit</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the supplied unit is in missile range of this unit.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:battle_unit">battle_unit</a></code></code></p>
+									</td>
+									<td>
+										<p>target unit</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is in range</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3333</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:unit_distance"><h3 class="function_name"><strong><code>unit:unit_distance(<code><a href="#class:battle_unit">battle_unit</a></code> </strong></code><i class="parameter">target unit</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the shortest distance in metres between this unit and a supplied unit, taking into account their bounding box rather than just working out the centre-to-centre distance.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:battle_unit">battle_unit</a></code></code></p>
+									</td>
+									<td>
+										<p>target unit</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> shortest distance</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3358</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:strategic_value"><h3 class="function_name"><strong><code>unit:strategic_value()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns an arbitrary numeric indicator of this unit's current strength. Better units, or units in a better current condition, will return higher values that less capable units.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> strategic value</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3383</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_moving"><h3 class="function_name"><strong><code>unit:is_moving()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is moving.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is moving</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3401</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_moving_fast"><h3 class="function_name"><strong><code>unit:is_moving_fast()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is moving fast (running/charging).
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is moving fast</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3419</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:slow_speed"><h3 class="function_name"><strong><code>unit:slow_speed()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the unit's slow/walking movement speed in m/s.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> movement speed</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3437</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:fast_speed"><h3 class="function_name"><strong><code>unit:fast_speed()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the unit's fast/running movement speed in m/s.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> movement speed</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3455</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_idle"><h3 class="function_name"><strong><code>unit:is_idle()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is currently idle.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is idle</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3473</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_leaving_battle"><h3 class="function_name"><strong><code>unit:is_leaving_battle()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is currently leaving the battlefield.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is leaving battle</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3490</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_valid_for_deployment"><h3 class="function_name"><strong><code>unit:is_valid_for_deployment()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether this unit is currently valid for deployment, that means if the unit is not in a playable state or if its being deployed by the reinforcement system
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is valid for deployment</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3507</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_valid_target"><h3 class="function_name"><strong><code>unit:is_valid_target()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether this unit is currently a valid target for enemies to attack. A unit might be invalid if they are entering or leaving the battlefield, hidden, or dead.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is valid target</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3527</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_currently_garrisoned"><h3 class="function_name"><strong><code>unit:is_currently_garrisoned()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is currently garrisoned in a building.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is garrisoned</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3544</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_unit:Visibility"><h2 class="section_header">Visibility</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_hidden"><h3 class="function_name"><strong><code>unit:is_hidden()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is currently hidden in tall grass/trees. Note that this is a separate test from the unit being obscured from the enemy behind hills or other terrain features.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is hidden</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3565</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_visible_to_alliance"><h3 class="function_name"><strong><code>unit:is_visible_to_alliance(<code><a href="battle_alliance.html#class:battle_alliance">battle_alliance</a></code> </strong></code><i class="parameter">alliance</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is visible to a supplied alliance. This returns the last calculated result of the line-of-sight test that determines whether a unit is obscured from its enemy by terrain features.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_alliance.html#class:battle_alliance">battle_alliance</a></code></code></p>
+									</td>
+									<td>
+										<p>alliance</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is visible to alliance</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3583</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_unit:Combat"><h2 class="section_header">Combat</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_under_missile_attack"><h3 class="function_name"><strong><code>unit:is_under_missile_attack()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is currently taking fire.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> taking fire</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3616</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_in_melee"><h3 class="function_name"><strong><code>unit:is_in_melee()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is currently in melee combat.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> in melee</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3634</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:number_of_enemies_killed"><h3 class="function_name"><strong><code>unit:number_of_enemies_killed()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the number of enemy combatants this unit has killed in this battle.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> number killed</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3652</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_unit:Unit Strength"><h2 class="section_header">Unit Strength</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:initial_number_of_men"><h3 class="function_name"><strong><code>unit:initial_number_of_men()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the number of soldiers the unit started the battle with.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> initial unit size</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3672</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:number_of_men_alive"><h3 class="function_name"><strong><code>unit:number_of_men_alive()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the number of soldiers currently alive in the unit.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> current unit size</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3689</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:unary_of_men_alive"><h3 class="function_name"><strong><code>unit:unary_of_men_alive()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the number of soldiers currently alive in the unit, expressed as a unary fraction of the the initial size of the unit. A returned value of 0.75 would indicate that 25% of the soldiers in the unit that started the battle have died.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> unary proportion</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3706</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:kill_number_of_men"><h3 class="function_name"><strong><code>unit:kill_number_of_men(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">soldiers to kill</i><code><strong>, [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">hide bodies</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Kills a specified number of soldiers in the unit. The optional second argument allows their bodies to be hidden - this is useful if it's desired that the unit 'disappear'.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>soldiers to kill</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>hide bodies</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3724</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:reduce_hitpoints_unary"><h3 class="function_name"><strong><code>unit:reduce_hitpoints_unary(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">unary hitpoints</i><code><strong>, [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">hide bodies</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Reduces hitpoints of the unit. The optional second argument allows their bodies to be hidden - this is useful if it's desired that the unit 'disappear'.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>percentage of full hit points of unit to reduce</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>hide bodies</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3745</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:heal_hitpoints_unary"><h3 class="function_name"><strong><code>unit:heal_hitpoints_unary(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">unary hitpoints</i><code><strong>, [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">allow resurrection</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Heals the unit to the specified unary proportion of full strength i.e. 1.0 = full strength. If the allow-resurrection flag is set then dead entities may be resurrected, otherwise the function heals where it can. The function does not work in all circumstances, healing animals + handlers are not currently supported.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>percentage of full hit points to heal to.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>Allow resurrection of dead entities.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3777</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:respawn"><h3 class="function_name"><strong><code>unit:respawn()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Respawns the unit in a supplied position on the battlefield.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3808</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:unary_hitpoints"><h3 class="function_name"><strong><code>unit:unary_hitpoints()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the hitpoint strength of all soldiers in the unit, expressed as a unary fraction of the the initial hitpoint strength of the unit. A returned value of 0.75 would indicate that the unit has lost 25% of the hitpoints it started the battle with.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> unary proportion</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3839</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_unit:Morale and Fatigue"><h2 class="section_header">Morale and Fatigue</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_wavering"><h3 class="function_name"><strong><code>unit:is_wavering()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the morale of the unit is currently wavering.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is wavering</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3862</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_routing"><h3 class="function_name"><strong><code>unit:is_routing()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is currently routing.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is routing</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3879</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_invulnerable"><h3 class="function_name"><strong><code>unit:is_invulnerable()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is currently invulnerable.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is invulnerable</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3895</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_rampaging"><h3 class="function_name"><strong><code>unit:is_rampaging()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is currently rampaging.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is rampaging</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3911</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_shattered"><h3 class="function_name"><strong><code>unit:is_shattered()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is currently shattered (routing without possibility of return).
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is shattered</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3928</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_crumbling"><h3 class="function_name"><strong><code>unit:is_crumbling()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is currently crumbling (undead's equivalent of routing).
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is crumbling</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3945</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_unstable"><h3 class="function_name"><strong><code>unit:is_unstable()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is currently daemonically unstable (daemonic equivalent of routing).
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is unstable</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3962</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_left_flank_threatened"><h3 class="function_name"><strong><code>unit:is_left_flank_threatened()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the left flank of the unit is currently threatened by the enemy.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> left flank threatened</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3979</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_right_flank_threatened"><h3 class="function_name"><strong><code>unit:is_right_flank_threatened()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the right flank of the unit is currently threatened by the enemy.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> left right threatened</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 3997</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_rear_flank_threatened"><h3 class="function_name"><strong><code>unit:is_rear_flank_threatened()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the rear of the unit is currently threatened by the enemy.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> rear threatened</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4015</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:left_flank_threat"><h3 class="function_name"><strong><code>unit:left_flank_threat()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the <code><a href="#class:battle_unit">battle_unit</a></code> threatening this unit's left flank. If no such unit is threatening then no value is returned.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:battle_unit">battle_unit</a></code></code> threatening unit</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4033</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:right_flank_threat"><h3 class="function_name"><strong><code>unit:right_flank_threat()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the <code><a href="#class:battle_unit">battle_unit</a></code> threatening this unit's right flank. If no such unit is threatening then no value is returned.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:battle_unit">battle_unit</a></code></code> threatening unit</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4053</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:rear_threat"><h3 class="function_name"><strong><code>unit:rear_threat()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the <code><a href="#class:battle_unit">battle_unit</a></code> threatening this unit's rear. If no such unit is threatening then no value is returned.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:battle_unit">battle_unit</a></code></code> threatening unit</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4073</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:current_target"><h3 class="function_name"><strong><code>unit:current_target()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the <code><a href="#class:battle_unit">battle_unit</a></code> this unit is targeting. If no unit is being targeted then no value is returned.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:battle_unit">battle_unit</a></code></code> target unit</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4093</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_on_top_of_platform"><h3 class="function_name"><strong><code>unit:is_on_top_of_platform()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is currently on the top of a platform, such as a wall.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is on platform</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4113</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_controllable"><h3 class="function_name"><strong><code>unit:is_controllable()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is currently controllable.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is controllable</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4130</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_deploying"><h3 class="function_name"><strong><code>unit:is_deploying()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is deploying or waiting to be
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is deployed.</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4146</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_deployed"><h3 class="function_name"><strong><code>unit:is_deployed()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit has been deployed
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is deployed.</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4164</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:fatigue_state"><h3 class="function_name"><strong><code>unit:fatigue_state()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the fatigue state of the unit as a string. Possible values are <code>threshold_fresh</code>, <code>threshold_active</code>, <code>threshold_winded</code>, <code>threshold_tired</code>, <code>threshold_very_tired</code> and <code>threshold_exhausted</code>.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> fatigue state</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4182</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_unit:Ammunition and Range"><h2 class="section_header">Ammunition and Range</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:ammo_left"><h3 class="function_name"><strong><code>unit:ammo_left()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the remaining ammunition count of this unit.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> current ammunition</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4206</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:starting_ammo"><h3 class="function_name"><strong><code>unit:starting_ammo()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the amount of ammunition the unit started the battle with.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> starting ammunition</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4223</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:set_current_ammo_unary"><h3 class="function_name"><strong><code>unit:set_current_ammo_unary(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">unary ammunition level</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the current ammunition level of the unit to the supplied unary value. Setting a value of 0 would mean the unit would have no ammunition, whereas setting a value of 1 would mean the unit would have the amount of ammunition they started the battle with. It is permitted to set a value greater than 1, but the unit will appear to have full ammunition on the UI until its ammunition level drops back below 100%.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>unary ammunition level</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4240</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:missile_range"><h3 class="function_name"><strong><code>unit:missile_range()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the missile range of this unit in metres.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> missile range</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4269</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_unit:Special Abilities"><h2 class="section_header">Special Abilities</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:can_perform_special_ability"><h3 class="function_name"><strong><code>unit:can_perform_special_ability(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">special ability key </i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit can perform the specified special ability. Valid special abilities are defined in the <code>unit_special_abilities</code> database table.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>special ability key </p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> can perform ability</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4290</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:disable_passive_special_abilities"><h3 class="function_name"><strong><code>unit:disable_passive_special_abilities([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">disable</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Disables or re-enables all passive special abilities of this unit. It only affects abilities owned by the unit.  Abilities specify if they are passive in the <code>unit_special_abilities</code> database table. Passive abilities are mostly buffs or infinite effects. This function works independently from <code><a href="#function:battle_unit:disable_special_ability">unit:disable_special_ability</a></code> so it will not re-enable abilities affected by it.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>Disables or re-enables the ability (<code>true</code> for disabling it)</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4332</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:disable_non_passive_special_abilities"><h3 class="function_name"><strong><code>unit:disable_non_passive_special_abilities([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">disable</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Disables or re-enables all non_passive special abilities of this unit. It only affects abilities owned by the unit.  Abilities specify if they are passive in the unit_special_abilities<code>unit_special_abilities</code> database table. Non-passive abilities are mostly direct damage spells or abilities. This function works independently from <code><a href="#function:battle_unit:disable_special_ability">unit:disable_special_ability</a></code> so it will not re-enable abilities affected by it.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>Disables or re-enables the ability (<code>true</code> for disabling it)</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4341</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:disable_special_ability"><h3 class="function_name"><strong><code>unit:disable_special_ability(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">ability_key</i><code><strong>, [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">disable</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Disables the specified special ability from this unit. It only affects the ability instance currently owned by the unit. This function works independently from <code><a href="#function:battle_unit:disable_passive_special_abilities">unit:disable_passive_special_abilities</a></code> and <code><a href="#function:battle_unit:disable_non_passive_special_abilities">unit:disable_non_passive_special_abilities</a></code> so it will not re-enable abilities affected by it.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>ability_key</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>Disables or re-enables the ability (<code>true</code> for disabling it)</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4350</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:owned_passive_special_abilities"><h3 class="function_name"><strong><code>unit:owned_passive_special_abilities()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a lua table of passive special abilities owned by this unit. Abilities specify if they are passive in the table unit_special_abilities. Passive abilities are mostly buffs or infinite effects - they are abilities activated automatically, not by the player.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:table">table</a></code></code> owned abilities, Table of strings containing the key of the corresponding special abilities</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4405</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:owned_non_passive_special_abilities"><h3 class="function_name"><strong><code>unit:owned_non_passive_special_abilities()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a lua table of non-passive special abilities owned by this unit. Abilities specify if they are passive in the table unit_special_abilities. Non-passive abilities are abilities activated by the player, mostly direct damage abilities and spells.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:table">table</a></code></code> owned abilities, Table of strings containing the key of the corresponding special abilities</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4413</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:owned_special_abilities"><h3 class="function_name"><strong><code>unit:owned_special_abilities()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns all special abilities owned by an unit. Valid special abilities are defined in the <code>special_abilities</code> table.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:table">table</a></code></code> owned abilities, Table of strings containing the key of the corresponding special abilities</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4421</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:num_special_abilities"><h3 class="function_name"><strong><code>unit:num_special_abilities()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the number of special abilities this unit has.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> number of special abilities</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4435</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:can_use_magic"><h3 class="function_name"><strong><code>unit:can_use_magic()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit can use any special abilities that cost magic.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> can use magic</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4450</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_unit:Special Ability Flags"><h2 class="section_header">Special Ability Flags</h2></a>
+				</div>
+				<p><code><a href="#section:battle_unit:Special Abilities">Special Abilities</a></code> are associated with special ability flags, and are activated and deactivated depending upon what special ability flags are currently active, either globally or on a particular unit. Supported special ability flags on a given unit are found in the <code>special_ability_invalid_usage_flags</code> table and are also listed below. Special ability flags may be activated or deactivated per-unit with <code><a href="#function:battle_unit:set_special_abilities_flags">unit:set_special_abilities_flags</a></code> and also globally with <code><a href="battle.html#function:battle:set_special_abilities_flags">battle:set_special_abilities_flags</a></code>.</p>
+				<p><ul><li><code>army_is_full</code></li></p>
+				<p><li><code>other_abilities_none_on_wind_up</code></li></p>
+				<p><li><code>other_abilities_at_least_one_on_wind_up</code></li></p>
+				<p><li><code>other_abilities_just_activated_after_wind_up</code></li></p>
+				<p><li><code>cannot_perform_missile_attack</code></li></p>
+				<p><li><code>cannot_find_enemies_in_intercept_range</code></li></p>
+				<p><li><code>enemies_in_intercept_range</code></li></p>
+				<p><li><code>enemies_in_intercept_range_commander_class</code></li></p>
+				<p><li><code>no_enemies_in_intercept_range_commander_class</code></li></p>
+				<p><li><code>enemies_in_intercept_range_large</code></li></p>
+				<p><li><code>no_enemies_in_intercept_range_large</code></li></p>
+				<p><li><code>climbing</code></li></p>
+				<p><li><code>climbing_manning_eq_on_platform</code></li></p>
+				<p><li><code>not_climbing_manning_eq_on_platform</code></li></p>
+				<p><li><code>disembarked_from_a_ship</code></li></p>
+				<p><li><code>embarked_on_a_ship</code></li></p>
+				<p><li><code>defending_a_zone</code></li></p>
+				<p><li><code>dismounted</code></li></p>
+				<p><li><code>enraged</code></li></p>
+				<p><li><code>engaged_in_melee</code></li></p>
+				<p><li><code>engaged_in_melee_anything</code></li></p>
+				<p><li><code>flying_currently</code></li></p>
+				<p><li><code>flying_unit</code></li></p>
+				<p><li><code>ground_unit</code></li></p>
+				<p><li><code>grounded</code></li></p>
+				<p><li><code>has_casting_ability</code></li></p>
+				<p><li><code>hasnt_casting_ability</code></li></p>
+				<p><li><code>health_above_10%</code></li></p>
+				<p><li><code>health_above_20%</code></li></p>
+				<p><li><code>health_above_25%</code></li></p>
+				<p><li><code>health_above_50%</code></li></p>
+				<p><li><code>health_above_75%</code></li></p>
+				<p><li><code>health_below_25%</code></li></p>
+				<p><li><code>health_below_50%</code></li></p>
+				<p><li><code>health_below_75%</code></li></p>
+				<p><li><code>health_above_50%_base</code></li></p>
+				<p><li><code>health_below_50%_base</code></li></p>
+				<p><li><code>mana_above_50%</code></li></p>
+				<p><li><code>mana_below_50%</code></li></p>
+				<p><li><code>mana_equal_or_above_value_15</code></li></p>
+				<p><li><code>mana_below_value_15</code></li></p>
+				<p><li><code>winning_melee_combat</code></li></p>
+				<p><li><code>losing_melee_combat</code></li></p>
+				<p><li><code>manning_equipment</code></li></p>
+				<p><li><code>morale_is_higher_than_broken</code></li></p>
+				<p><li><code>morale_is_higher_than_shattered</code></li></p>
+				<p><li><code>morale_is_higher_than_wavering</code></li></p>
+				<p><li><code>morale_is_broken_or_lower</code></li></p>
+				<p><li><code>morale_is_wavering_or_lower</code></li></p>
+				<p><li><code>morale_is_higher_than_half_of_base_morale</code></li></p>
+				<p><li><code>morale_is_lower_than_half_of_base_morale</code></li></p>
+				<p><li><code>fatigue_is_below_active</code></li></p>
+				<p><li><code>fatigue_is_below_winded</code></li></p>
+				<p><li><code>fatigue_is_below_tired</code></li></p>
+				<p><li><code>fatigue_is_below_very_tired</code></li></p>
+				<p><li><code>fatigue_is_below_exhausted</code></li></p>
+				<p><li><code>moving</code></li></p>
+				<p><li><code>not_yet_enraged</code></li></p>
+				<p><li><code>officer_dead</code></li></p>
+				<p><li><code>on_a_platform</code></li></p>
+				<p><li><code>not_on_a_platform</code></li></p>
+				<p><li><code>docked</code></li></p>
+				<p><li><code>not_docked</code></li></p>
+				<p><li><code>out_of_melee</code></li></p>
+				<p><li><code>out_of_melee_anything</code></li></p>
+				<p><li><code>phase_is_deployment</code></li></p>
+				<p><li><code>phase_is_the_end_phase</code></li></p>
+				<p><li><code>have_ammo_left</code></li></p>
+				<p><li><code>have_max_ammo</code></li></p>
+				<p><li><code>have_ammo_below_threshold</code></li></p>
+				<p><li><code>hp_replenish_cap_reached</code></li></p>
+				<p><li><code>unit_alive</code></li></p>
+				<p><li><code>unit_dead</code></li></p>
+				<p><li><code>unit_is_commander_class</code></li></p>
+				<p><li><code>unit_is_not_commander_class</code></li></p>
+				<p><li><code>ground_type_is_not_forest</code></li></p>
+				<p><li><code>unit_in_forest</code></li></p>
+				<p><li><code>unit_is_not_in_forest</code></li></p>
+				<p><li><code>unit_has_murderous_prowess</code></li></p>
+				<p><li><code>unit_is_not_pre_murderous_prowess</code></li></p>
+				<p><li><code>unit_does_not_have_murderous_prowess</code></li></p>
+				<p><li><code>unit_is_in_fort</code></li></p>
+				<p><li><code>unit_is_out_fort</code></li></p>
+				<p><li><code>unit_is_in_withdraw</code></li></p>
+				<p><li><code>unit_is_not_in_withdraw</code></li></p>
+				<p><li><code>unit_is_in_melee_breakoff</code></li></p>
+				<p><li><code>unit_is_not_in_melee_breakoff</code></li></p>
+				<p><li><code>unit_is_fearless</code></li></p>
+				<p><li><code>unit_is_not_fearless</code></li></p>
+				<p><li><code>has_realm_of_souls_tier_1</code></li></p>
+				<p><li><code>has_realm_of_souls_tier_2</code></li></p>
+				<p><li><code>has_realm_of_souls_tier_3</code></li></p>
+				<p><li><code>hasnt_realm_of_souls_tier_1</code></li></p>
+				<p><li><code>hasnt_realm_of_souls_tier_2</code></li></p>
+				<p><li><code>hasnt_realm_of_souls_tier_3</code></li></p>
+				<p><li><code>unit_is_not_construct</code></li></p>
+				<p><li><code>unit_is_not_single_entity</code></li></p>
+				<p><li><code>is_not_missile_unit</code></li></p>
+				<p><li><code>unit_is_not_shielded</code></li></p>
+				<p><li><code>unit_tier1_kills</code></li></p>
+				<p><li><code>unit_tier2_kills</code></li></p>
+				<p><li><code>unit_tier3_kills</code></li></p>
+				<p><li><code>cannot_find_allies_in_intercept_range</code></li></p>
+				<p><li><code>allies_in_intercept_range</code></li></p>
+				<p><li><code>commander_died_within_range</code></li></p>
+				<p><li><code>enemy_unit_died_within_range</code></li></p>
+				<p><li><code>no_enemy_unit_died_within_range</code></li></p>
+				<p><li><code>flying_over_platform</code></li></p>
+				<p><li><code>flying_over_invalid_location</code></li></p>
+				<p><li><code>unit_is_not_charging</code></li></p>
+				<p><li><code>unit_is_not_large</code></li></p>
+				<p><li><code>unit_is_large</code></li></p>
+				<p><li><code>friendly_battle_leader_killed_or_routed</code></li></p>
+				<p><li><code>friendly_battle_leader_not_killed_or_routed</code></li></p>
+				<p><li><code>no_harmony_yin_in_proximity</code></li></p>
+				<p><li><code>no_harmony_yang_in_proximity</code></li></p>
+				<p><li><code>unit_broken_within_range</code></li></p>
+				<p><li><code>is_rampaging</code></li></p>
+				<p><li><code>is_not_rampaging</code></li></p>
+				<p><li><code>living_unit</code></li></p>
+				<p><li><code>undead_unit</code></li></p>
+				<p><li><code>unit_is_not_a_lizard_unit</code></li></p>
+				<p><li><code>unit_is_skaven</code></li></p>
+				<p><li><code>unit_is_not_skaven</code></li></p>
+				<p><li><code>unit_is_gorger</code></li></p>
+				<p><li><code>unit_is_not_gorger</code></li></p>
+				<p><li><code>daemonic_unit</code></li></p>
+				<p><li><code>not_daemonic_unit</code></li></p>
+				<p><li><code>unit_is_moulder_monster</code></li></p>
+				<p><li><code>unit_is_nurgling</code></li></p>
+				<p><li><code>unit_is_not_nurgling</code></li></p>
+				<p><li><code>has_khorne_mark</code></li></p>
+				<p><li><code>hasnt_khorne_mark</code></li></p>
+				<p><li><code>has_nurgle_mark</code></li></p>
+				<p><li><code>hasnt_nurgle_mark</code></li></p>
+				<p><li><code>has_slaanesh_mark</code></li></p>
+				<p><li><code>hasnt_slaanesh_mark</code></li></p>
+				<p><li><code>has_tzeentch_mark</code></li></p>
+				<p><li><code>hasnt_tzeentch_mark</code></li></ul></p>
+				<p>Not all flags will be supported by each game.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:set_special_abilities_flags"><h3 class="function_name"><strong><code>unit:set_special_abilities_flags(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">flag key</i><code><strong>, <code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">enable/disable</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Activates or deactivates a special ability usage flag on the unit. Valid flags are listed at the top of this section.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>flag key</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>enable/disable</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4629</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_unit:Unit Behaviours"><h2 class="section_header">Unit Behaviours</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:can_use_behaviour"><h3 class="function_name"><strong><code>unit:can_use_behaviour(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">behaviour</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit can use a particular behaviour this battle. Valid behaviours are currently as follows: <code>defend</code>, <code>drop_siege_equipment</code>, <code>abandon_artillery_engines</code>, <code>change_formation_spacing</code>, <code>dismantle_artillery_piece</code>, <code>dismount</code>, <code>fire_at_will</code>, <code>skirmish</code>, <code>release_animals</code>, <code>unlimber</code>, <code>board_ship</code>, and <code>formed_attack</code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>behaviour</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> behaviour can be used</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4661</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_behaviour_active"><h3 class="function_name"><strong><code>unit:is_behaviour_active(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">behaviour</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether a particular behaviour is currently active. Valid behaviours are currently as follows: <code>defend</code>, <code>drop_siege_equipment</code>, <code>abandon_artillery_engines</code>, <code>change_formation_spacing</code>, <code>dismantle_artillery_piece</code>, <code>dismount</code>, <code>fire_at_will</code>, <code>skirmish</code>, <code>release_animals</code>, <code>unlimber</code>, <code>board_ship</code>, and <code>formed_attack</code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>behaviour</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> behaviour is active</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4680</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_unit:Unit Attributes"><h2 class="section_header">Unit Attributes</h2></a>
+				</div>
+				<p>Unit attributes define certain intrinsic properties of a unit in battle. Attributes are generally assigned to a unit type in the game database, but may be enabled or disabled per-unit in script using the <code><a href="#function:battle_unit:set_stat_attribute">unit:set_stat_attribute</a></code> function. Valid attribute keys are shown in the following list:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</p>
+				<p><table class="simple"><tr><th>Attribute Key</th><th>Description</th></tr></p>
+				<p><tr><td><code>all_ranks_fire</code></td><td>All ranks can fire if using a weapon that only allows one rank.</td></tr></p>
+				<p><tr><td><code>berserk</code></td><td>This unit will occasionally go berserk.</td></tr></p>
+				<p><tr><td><code>cant_run</code></td><td>This unit cannot run - generally for limbered artillery.</td></tr></p>
+				<p><tr><td><code>campaign_stealth</code></td><td>This unit is able to move around the campaign map without being seen.</td></tr></p>
+				<p><tr><td><code>causes_fear</code></td><td>This unit frightens all enemy units, reducing their morale when nearby. It is also immune to fear.</td></tr></p>
+				<p><tr><td><code>causes_terror</code></td><td>The unit can cause terror, making enemies rout for a short time but without morale penalties. It is also immune to terror and fear.</td></tr></p>
+				<p><tr><td><code>charge_defense</code></td><td>Defense bonus agains charges by all units.</td></tr></p>
+				<p><tr><td><code>charge_defense_vs_large</code></td><td>Defense bonus agains charges by large units.</td></tr></p>
+				<p><tr><td><code>commander_hunter</code></td><td>This unit is changed in various ways to make them better at killing commanders.</td></tr></p>
+				<p><tr><td><code>disciplined</code></td><td>This unit doesn't suffer morale penalty from general's death.</td></tr></p>
+				<p><tr><td><code>encourages</code></td><td>This unit provides a morale bonus to nearby allies.</td></tr></p>
+				<p><tr><td><code>fatigue_res</code></td><td>Fatigue doesn't have as much of an effect.</td></tr></p>
+				<p><tr><td><code>fatigue_immune</code></td><td>Fatigue doesn't affect this unit.</td></tr></p>
+				<p><tr><td><code>fire_while_moving</code></td><td>This infantry unit can fire while moving.</td></tr></p>
+				<p><tr><td><code>formed_attack</code></td><td>This unit will try to stay in formation when in melee.</td></tr></p>
+				<p><tr><td><code>guerrilla_deploy</code></td><td>Can deploy outside deployment zone (vanguard deployment).</td></tr></p>
+				<p><tr><td><code>hide_forest</code></td><td>Can hide in forest.</td></tr></p>
+				<p><tr><td><code>hide_grass</code></td><td>Can hide in grass.</td></tr></p>
+				<p><tr><td><code>hide_scrub_and_forest</code></td><td>Can hide in scrubland.</td></tr></p>
+				<p><tr><td><code>hide_building</code></td><td>Can hide in buildings.</td></tr></p>
+				<p><tr><td><code>ignore_ground_move_mod</code></td><td>Doesn't get slowed down by terrain.</td></tr></p>
+				<p><tr><td><code>strider</code></td><td>Strider attribute.</td></tr></p>
+				<p><tr><td><code>immune_to_psychology</code></td><td>The unit is immune to psychological attacks (fear and terror).</td></tr></p>
+				<p><tr><td><code>impetuous</code></td><td>The unit gains an extra morale bonus when eager.</td></tr></p>
+				<p><tr><td><code>invincible</code></td><td>The unit cannot be damaged.</td></tr></p>
+				<p><tr><td><code>mounted_fire</code></td><td>The unit can fire while on a mount.</td></tr></p>
+				<p><tr><td><code>mounted_fire_move</code></td><td>The unit can fire while on a moving mount.</td></tr></p>
+				<p><tr><td><code>mounted_fire_parthian</code></td><td>The unit can fire while on a moving mount in a Parthian fashion.</td></tr></p>
+				<p><tr><td><code>rampage</code></td><td>This unit may rampage if put under pressure.</td></tr></p>
+				<p><tr><td><code>resist_cold</code></td><td>This unit doesn't take extra casualties from cold climates in campaign.</td></tr></p>
+				<p><tr><td><code>resist_heat</code></td><td>This unit doesn't take extra casualties from hot climates in campaign.</td></tr></p>
+				<p><tr><td><code>run_amok</code></td><td>This unit may run amok if put under pressure.</td></tr></p>
+				<p><tr><td><code>scare_horse</code></td><td>This unit scares horses.</td></tr></p>
+				<p><tr><td><code>scare_immune</code></td><td>This unit is immune to fear effects.</td></tr></p>
+				<p><tr><td><code>snipe</code></td><td>The unit remains hidden while firing.</td></tr></p>
+				<p><tr><td><code>stalk</code></td><td>This unit can remain hidden while moving.</td></tr></p>
+				<p><tr><td><code>unbreakable</code></td><td>This unit's morale cannot be broken.</td></tr></p>
+				<p><tr><td><code>undead</code></td><td>The unit is undead (does not rout, immune to terror, receives crumble damage when morale is low).</td></tr></p>
+				<p><tr><td><code>unspottable</code></td><td>If this unit is able to hide in its current location, it will not be spotted by enemies until they are very close.</td></tr></p>
+				<p><tr><td><code>expendable</code></td><td>A normal (non-expendable) unit's morale does not suffer from witnessing an expendable unit routing.</td></tr></p>
+				<p><tr><td><code>construct</code></td><td>The unit is a statue.</td></tr></p>
+				<p><tr><td><code>gorger</code></td><td>The unit is a statue.</td></tr></p>
+				<p><tr><td><code>wallbreaker</code></td><td>The unit can attack walls physically.</td></tr></p>
+				<p><tr><td><code>devastating_flanker</code></td><td>The unit can attack walls physically.</td></tr></p>
+				<p><tr><td><code>daemonic</code></td><td>The unit is daemonic.</td></tr></p>
+				<p><tr><td><code>flying</code></td><td>The unit is flying.</td></tr></p>
+				<p><tr><td><code>always_flying</code></td><td>The unit is always flying.</td></tr></p>
+				<p><tr><td><code>ignore_trees</code></td><td>The unit ignores trees.</td></tr></p>
+				<p><tr><td><code>moulder_monster</code></td><td>The unit is a moulder monster that can be targeted by Throt's abilities.</td></tr></p>
+				<p><tr><td><code>yin</code></td><td>Cathay unit is affiliated with yin.</td></tr></p>
+				<p><tr><td><code>yang</code></td><td>Cathay unit is affiliated with yang.</td></tr></p>
+				<p><tr><td>spell_mastery</code></td><td>The unit has spell mastery (mastery of elemental winds).</td></tr></p>
+				<p><tr><td><code>charge_reflection</code></td><td>Unit can reflect charges.</td></tr></p>
+				<p><tr><td><code>ogre_charge</code></td><td>The unit has ogre charge.</td></tr></p>
+				<p><tr><td>shoot_disabled</code></td><td>Missile attacks disabled.</td></tr></p>
+				<p><tr><td>melee_disabled</code></td><td>Melee attacks disabled.</td></tr></p>
+				<p><tr><td>mark_khorne</code></td><td>Unit has the mark of Khorne. Used for ability targeting.</td></tr></p>
+				<p><tr><td>mark_nurgle</code></td><td>Unit has the mark of Nurgle. Used for ability targeting.</td></tr></p>
+				<p><tr><td>mark_slaanesh</code></td><td>Unit has the mark of Slaanesh. Used for ability targeting.</td></tr></p>
+				<p><tr><td>mark_tzeentch</code></td><td>Unit has the mark of Tzeentch. Used for ability targeting.</td></tr></p>
+				<p><tr><td>invulnerable_to_effects_ally</code></td><td>Invulnerable to damage from an allied effect.</td></tr></p>
+				<p><tr><td>invulnerable_to_effects_enemy</code></td><td>Invulnerable to damage from allied effects.</td></tr></p>
+				<p></table></p>
+				<p>Not all attributes will be supported by each game.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:set_stat_attribute"><h3 class="function_name"><strong><code>unit:set_stat_attribute(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">attribute key</i><code><strong>, <code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">enable/disable</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Enables or disables a global attribute on the unit. Attribute keys are listed above, in the <code><a href="#section:battle_unit:Unit Attributes">Unit Attributes</a></code> section description.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>attribute key</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>enable/disable</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4770</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:has_attribute"><h3 class="function_name"><strong><code>unit:has_attribute(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">attribute key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether a unit currently has an attribute. Attribute keys are listed above, in the <code><a href="#section:battle_unit:Unit Attributes">Unit Attributes</a></code> section description.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>attribute key</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> has attribute</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4793</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_unit:Sounds"><h2 class="section_header">Sounds</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:trigger_sound_charge"><h3 class="function_name"><strong><code>unit:trigger_sound_charge()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Compels the unit to make a charge sound effect.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4823</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:trigger_sound_taunt"><h3 class="function_name"><strong><code>unit:trigger_sound_taunt()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Compels the unit to make a taunt sound effect.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4835</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_unit:Miscellaneous"><h2 class="section_header">Miscellaneous</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:play_anim_for_captain"><h3 class="function_name"><strong><code>unit:play_anim_for_captain(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">animation key</i><code><strong>, <code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">loop animation</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Compels the unit leader to play an animation.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>animation key</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>loop animation</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4850</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:deploy_reinforcement"><h3 class="function_name"><strong><code>unit:deploy_reinforcement(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">enable</i><code><strong>, [<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">spawn zone index</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Prevents or allows the unit to deploy as a reinforcement from a specific spawn zone if provided. If set to <code>false</code>, and the unit has not yet entered the battlefield, then the unit will not be able to deploy until the function is called again with an argument of <code>true</code>.<br />
+							Calling this command has no effect if the unit is not part of a reinforcement army.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>Enable reinforcement.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Index of spawn zone to use, if coming on as a reinforcement.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4896</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:select_in_ui"><h3 class="function_name"><strong><code>unit:select_in_ui()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Selects the unit in the user interface.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4934</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:highlight"><h3 class="function_name"><strong><code>unit:highlight([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">highlight</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Activates or deactivates a highlight on the unit.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>highlight</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4943</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:mark_as_ally"><h3 class="function_name"><strong><code>unit:mark_as_ally(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">mark as ally</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Makes a player unit look like it is allied, rather than part of the controlled army. This is useful for specific scripted situations where it's intended to grant allied units to player control.<br />
+							Call this function with <code>true</code> as a single argument to mark the controlled unit as an ally, and then again supplying <code>false</code> to mark the unit as part of the player's army again.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>mark as ally</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleEditorScriptInterface.cpp, line 4955</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:59</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "battle"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

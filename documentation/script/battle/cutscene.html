@@ -1,0 +1,2042 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Battle Cutscenes script class</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#e2edff" id="main">
+
+			<div style="background-color:#e2edff" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Battle Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#c1e6ff">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search battle only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#c1e6ff">Game Areas</h2>
+				<ul>
+					<li><a href="../campaign/campaign_index.html">Campaign Index</a></li>
+					<li><strong> > Battle Index</strong></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:cutscene">Battle Cutscenes</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:cutscene:Creation">Creation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:new">new</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:new_from_cindyscene">new_from_cindyscene</a></li>
+						<li>&emsp;&emsp;<a href="#section:cutscene:Debug">Debug</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:set_debug">set_debug</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:enable_debug_timestamps">enable_debug_timestamps</a></li>
+						<li>&emsp;&emsp;<a href="#section:cutscene:Cinematic Triggers">Cinematic Triggers</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:add_cinematic_trigger_listener">add_cinematic_trigger_listener</a></li>
+						<li>&emsp;&emsp;<a href="#section:cutscene:Enqueuing Actions">Enqueuing Actions</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:action">action</a></li>
+						<li>&emsp;&emsp;<a href="#section:cutscene:Playing/Waiting for Sounds">Playing/Waiting for Sounds</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:play_sound">play_sound</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:play_vo">play_vo</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:wait_for_advisor">wait_for_advisor</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:wait_for_vo">wait_for_vo</a></li>
+						<li>&emsp;&emsp;<a href="#section:cutscene:Querying">Querying</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:subtitles">subtitles</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:camera">camera</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:length">length</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:is_playing_sound">is_playing_sound</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:is_playing_camera">is_playing_camera</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:is_any_cutscene_running">is_any_cutscene_running</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:is_active">is_active</a></li>
+						<li>&emsp;&emsp;<a href="#section:cutscene:Skipping Parameters">Skipping Parameters</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:set_skippable">set_skippable</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:set_skip_camera">set_skip_camera</a></li>
+						<li>&emsp;&emsp;<a href="#section:cutscene:Restore Camera">Restore Camera</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:set_restore_cam">set_restore_cam</a></li>
+						<li>&emsp;&emsp;<a href="#section:cutscene:Post Cutscene Fade Time">Post Cutscene Fade Time</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:set_post_cutscene_fade_time">set_post_cutscene_fade_time</a></li>
+						<li>&emsp;&emsp;<a href="#section:cutscene:Music">Music</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:set_music">set_music</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:set_music_resume_auto_playback">set_music_resume_auto_playback</a></li>
+						<li>&emsp;&emsp;<a href="#section:cutscene:Relative Mode">Relative Mode</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:set_relative_mode">set_relative_mode</a></li>
+						<li>&emsp;&emsp;<a href="#section:cutscene:Ambush Mode">Ambush Mode</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:set_is_ambush">set_is_ambush</a></li>
+						<li>&emsp;&emsp;<a href="#section:cutscene:Miscellaneous Setup">Miscellaneous Setup</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:set_battle_speed">set_battle_speed</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:set_should_restore_battle_speed">set_should_restore_battle_speed</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:set_should_disable_unit_ids">set_should_disable_unit_ids</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:suppress_unit_voices">suppress_unit_voices</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:set_should_enable_cinematic_camera">set_should_enable_cinematic_camera</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:set_wait_for_advisor_on_end">set_wait_for_advisor_on_end</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:set_wait_for_vo_on_end">set_wait_for_vo_on_end</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:set_close_advisor_on_end">set_close_advisor_on_end</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:set_close_advisor_on_start">set_close_advisor_on_start</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:enable_ui_on_end">enable_ui_on_end</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:set_end_callback">set_end_callback</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:set_call_end_callback_when_skipped">set_call_end_callback_when_skipped</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:set_should_release_players_army">set_should_release_players_army</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:set_show_cinematic_bars">set_show_cinematic_bars</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:set_should_hide_ui">set_should_hide_ui</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:set_should_restore_ui_hiding_on_end">set_should_restore_ui_hiding_on_end</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:set_steal_input_focus">set_steal_input_focus</a></li>
+						<li>&emsp;&emsp;<a href="#section:cutscene:Starting">Starting</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:start">start</a></li>
+						<li>&emsp;&emsp;<a href="#section:cutscene:Subtitles">Subtitles</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:show_custom_cutscene_subtitle">show_custom_cutscene_subtitle</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:hide_custom_cutscene_subtitles">hide_custom_cutscene_subtitles</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:show_esc_prompt">show_esc_prompt</a></li>
+						<li>&emsp;&emsp;<a href="#section:cutscene:Skipping">Skipping</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:cutscene:skip">skip</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#e2edff" id="navigation_right">				<h2 style="background-color:#c1e6ff">Battle Topics</h2>
+				<ul>
+					<li><a href="battle_index.html">Battle Index</a></li>
+					<li><a href="battle_hierarchy.html">Battle Hierarchy</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="battle.html">Battle</a></li>
+					<li><a href="battle_alliances.html">Alliances</a></li>
+					<li><a href="battle_alliance.html">Alliance</a></li>
+					<li><a href="battle_armies.html">Armies</a></li>
+					<li><a href="battle_army.html">Army</a></li>
+					<li><a href="battle_units.html">Units</a></li>
+					<li><a href="battle_unit.html">Unit</a></li>
+					<li><a href="battle_unitcontroller.html">Unitcontroller</a></li>
+					<li><a href="ai_planner.html">AI Planners</a></li>
+					<li><a href="battle_assault_equipment.html">Assault Equipment</a></li>
+					<li><a href="battle_building.html">Building</a></li>
+					<li><a href="battle_buildings.html">Buildings</a></li>
+					<li><a href="battle_camera.html">Camera</a></li>
+					<li><a href="battle_capture_location.html">Capture Location</a></li>
+					<li><a href="battle_composite_scenes_system.html">Composite Scenes System</a></li>
+					<li><a href="battle_debug_drawing.html">Debug Drawing</a></li>
+					<li><a href="battle_reinforcements.html">reinforcements Reinforcements</a></li>
+					<li><a href="battle_sound_effect.html">Sound Effects</a></li>
+					<li><a href="battle_subtitles.html">Subtitles</a></li>
+					<li><a href="battle_toggle_system.html">Toggle System</a></li>
+					<li><a href="battle_vector.html">Vector</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Script Interfaces</h2>
+				<ul>
+					<li><a href="battle_manager.html">Battle Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="advice_manager.html">Advice Manager</a></li>
+					<li><a href="battle_ui_manager.html">Battle UI Manager</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><strong> > Battle Cutscenes</strong></li>
+					<li><a href="generated_battle.html">Generated Battle</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="script_ai_planner.html">Script AI Planner</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="script_unit.html">Script Unit</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Data Interfaces</h2>
+				<ul>
+					<li><a href="st_helper.html">Scripted Tour Helpers</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:cutscene"><h1 class="content_header">Battle Cutscenes</h1></a>
+				<p>The battle cutscene library provides an interface for the relatively easy creation and setup of scripted cutscenes in battle. A cutscene object is first declared with <code><a href="#function:cutscene:new">cutscene:new</a></code>, configured with the variety of configuration commands available, loaded with actions (things that happen within the cutscene) using repeated calls to <code><a href="#function:cutscene:action">cutscene:action</a></code>, and finally started with <code><a href="#function:cutscene:start">cutscene:start</a></code> to start the visual cutscene itself. Each battle cutscene object represents an individual cutscene.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:cutscene:Creation"><h2 class="section_header">Creation</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:new"><h3 class="function_name"><strong><code>cutscene:new(string </strong></code><i class="parameter">name</i><code><strong>, object </strong></code><i class="parameter">unit controller</i><code><strong>, [<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">duration</i><code><strong>], [function </strong></code><i class="parameter">end callback</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a cutscene object. A cutscene must be given a string name, an object granting control over the player's army (to allow it to be taken away during the cutscene), a length, and, optionally, a function to call when the cutscene finishes.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Name for cutscene.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>object</code></p>
+									</td>
+									<td>
+										<p>Either a unitcontroller with control over the player's army, or a <code><a href="script_unit.html#class:script_units">script_units</a></code> collection containing all of the player's units.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Cutscene duration in milliseconds. If nil or 0 is specified then the cutscene will be set to not end, and will only finish when skipped by the player or ended by an external process</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>End callback. A callback is usually specified here, although not always.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>cutscene</code> cutscene object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 105</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:new_from_cindyscene"><h3 class="function_name"><strong><code>cutscene:new_from_cindyscene(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">name</i><code><strong>, <br />&emsp;&emsp;object </strong></code><i class="parameter">unit controller</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">end callback</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cindy scene</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">blend in</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">blend out</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a cutscene object that is bound to a cindyscene. When started, the scripted cutscene will automatically start the cindyscene, and will terminate when the cindyscene ends.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name for the cutscene.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>object</code></p>
+									</td>
+									<td>
+										<p>Either a <code><a href="battle_unitcontroller.html#class:battle_unitcontroller">battle_unitcontroller</a></code> with control over the player's army, or a <code><a href="script_unit.html#class:script_units">script_units</a></code> collection containing all of the player's units.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>End callback.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Cindy scene path.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>Blend in time, in seconds.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=10</i></p>
+										<p>Blend out time, in seconds.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>cutscene</code> cutscene object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 161</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:cutscene:Debug"><h2 class="section_header">Debug</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:set_debug"><h3 class="function_name"><strong><code>cutscene:set_debug([boolean </strong></code><i class="parameter">set debug</i><code><strong>], [boolean </strong></code><i class="parameter">Hide UI in debug mode.</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the cutscene into debug mode for more output. Setting debug mode on a cutscene also allows the camera to be moved during cutscene playback, and keeps the UI visible.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>Set cutscene into debug mode.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Hide UI in debug mode.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 229</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:enable_debug_timestamps"><h3 class="function_name"><strong><code>cutscene:enable_debug_timestamps([boolean </strong></code><i class="parameter">enable timestamps</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the cutscene to print a debug timestamp every model tick. This can be useful when trying to set up timings for cutscene events.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>enable timestamps</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 244</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:cutscene:Cinematic Triggers"><h2 class="section_header">Cinematic Triggers</h2></a>
+				</div>
+				<p>A cindy scene can be configured to send events to script, for which listeners may be established that call script functions. The function <code><a href="#function:cutscene:add_cinematic_trigger_listener">cutscene:add_cinematic_trigger_listener</a></code> may be used to establish such a listener. This mechanism allows cinematic artists to more tightly control the timing of events in the cindy scene.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:add_cinematic_trigger_listener"><h3 class="function_name"><strong><code>cutscene:add_cinematic_trigger_listener(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">id</i><code><strong>, function </strong></code><i class="parameter">callback</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Registers a new cinematic trigger listener. When the cindy scene triggers a script event with the supplied id in script, the supplied function is called.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Cinematic trigger id. This should match the an id of a cinematic event triggered from a cindy scene played during this cutscene.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p>Callback to call.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 268</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:cutscene:Enqueuing Actions"><h2 class="section_header">Enqueuing Actions</h2></a>
+				</div>
+				<p>By adding actions to a cutscene it is instructed to perform operations at certain times after the cutscene is started. It is through cutscene actions that the narrative events in the cutscene are brought into being.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:action"><h3 class="function_name"><strong><code>cutscene:action(function </strong></code><i class="parameter">action callback</i><code><strong>, number </strong></code><i class="parameter">action time</i><code><strong>, [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">is terminator</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds an action to the cutscene. Specify a function callback to be called, and a time after the start of the cutscene to call it in ms. If relative mode has been set with <code><a href="#function:cutscene:set_relative_mode">cutscene:set_relative_mode</a></code> then the specified time should instead be relative to the previously-enqueued action.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p>Action callback.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>Action time in ms. This can be 0, but cannot be greater than the length of the cutscene.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>If true, no actions will be called after this one.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 301</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:cutscene:Playing/Waiting for Sounds"><h2 class="section_header">Playing/Waiting for Sounds</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:play_sound"><h3 class="function_name"><strong><code>cutscene:play_sound(battle_sound_effect </strong></code><i class="parameter">sound</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the cutscene to play a sound. This sound is registered to the cutscene, so that it can query its status later and also stop it if the cutscene is skipped.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>battle_sound_effect</code></p>
+									</td>
+									<td>
+										<p>sound</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 372</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:play_vo"><h3 class="function_name"><strong><code>cutscene:play_vo(battle_sound_effect </strong></code><i class="parameter">sound</i><code><strong>, script_unit </strong></code><i class="parameter">target sunit</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the cutscene to play a sound at a specified <code><a href="script_unit.html#class:script_unit">script_unit</a></code> in 3D space. This sound is registered to the cutscene, so that it can query its status later and also stop it if the cutscene is skipped.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>battle_sound_effect</code></p>
+									</td>
+									<td>
+										<p>sound</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>script_unit</code></p>
+									</td>
+									<td>
+										<p>target sunit</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 387</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:wait_for_advisor"><h3 class="function_name"><strong><code>cutscene:wait_for_advisor()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs a running cutscene to stall its progress until the advisor has finished speaking. This is designed to be called during a cutscene action to prevent one item of advice from colliding with another piece of advice, sound, or other event that it shouldn't overlap with. Since the length of an item of advice varies from language to language, it's sensible to insert wait_for_advisor calls into a cutscene script before starting subsequent advice.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 404</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:wait_for_vo"><h3 class="function_name"><strong><code>cutscene:wait_for_vo()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs a running cutscene to stall its progress until any sounds started with <code><a href="#function:cutscene:play_sound">cutscene:play_sound</a></code> or <code><a href="#function:cutscene:play_vo">cutscene:play_vo</a></code> have finished. This is designed to be called during a cutscene action to prevent one sound from colliding with another sound or event that it shouldn't overlap with. Since the length of a localised sound varies from language to language, it's sensible to insert wait_for_vo calls into a cutscene script before starting subsequent sounds.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 411</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:cutscene:Querying"><h2 class="section_header">Querying</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:subtitles"><h3 class="function_name"><strong><code>cutscene:subtitles()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a subtitles object stored internally by the cutscene.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>subtitles</code> </li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 430</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:camera"><h3 class="function_name"><strong><code>cutscene:camera()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a camera object stored internally by the cutscene.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>camera</code> </li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 438</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:length"><h3 class="function_name"><strong><code>cutscene:length()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the cutscene length in ms
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>number</code> length in ms</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 446</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:is_playing_sound"><h3 class="function_name"><strong><code>cutscene:is_playing_sound()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns true if any of the sounds the cutscene has been told to play with <code><a href="#function:cutscene:play_sound">cutscene:play_sound</a></code> or <code><a href="#function:cutscene:play_vo">cutscene:play_vo</a></code> are still playing, false otherwise.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> is playing sound</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 454</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:is_playing_camera"><h3 class="function_name"><strong><code>cutscene:is_playing_camera()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns true if a scripted camera movement is currently happening, false otherwise.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> camera moving</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 470</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:is_any_cutscene_running"><h3 class="function_name"><strong><code>cutscene:is_any_cutscene_running()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns true if this or any other scripted cutscene is currently running, false otherwise.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> any cutscene running</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 478</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:is_active"><h3 class="function_name"><strong><code>cutscene:is_active()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns true if this cutscene is currently running, false otherwise.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> this cutscene running</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 486</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:cutscene:Skipping Parameters"><h2 class="section_header">Skipping Parameters</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:set_skippable"><h3 class="function_name"><strong><code>cutscene:set_skippable(boolean </strong></code><i class="parameter">skippable</i><code><strong>, [function </strong></code><i class="parameter">skip callback</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the cutscene to be skippable, and optionally also sets a function to be called when the player skips the cutscene.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p></p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>skip callback</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 507</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:set_skip_camera"><h3 class="function_name"><strong><code>cutscene:set_skip_camera(vector </strong></code><i class="parameter">camera position</i><code><strong>, vector </strong></code><i class="parameter">camera target</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a position/target to immediately reposition the camera at if the cutscene is skipped. This supercedes any <code><a href="#section:cutscene:Restore Camera">Restore Camera</a></code> if set.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>vector</code></p>
+									</td>
+									<td>
+										<p>camera position</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>vector</code></p>
+									</td>
+									<td>
+										<p>camera target</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 526</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:cutscene:Restore Camera"><h2 class="section_header">Restore Camera</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:set_restore_cam"><h3 class="function_name"><strong><code>cutscene:set_restore_cam(number </strong></code><i class="parameter">move time</i><code><strong>, [vector </strong></code><i class="parameter">override position</i><code><strong>], [vector </strong></code><i class="parameter">override target</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Instructs the cutscene to restore the camera to either the position it occupied when the cutscene started, or a different position/target entirely. Note that if a skip camera/target has been set with <code><a href="#function:cutscene:set_skip_camera">cutscene:set_skip_camera</a></code> and the cutscene is skipped, those positions will supercede these.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>Time over which to restore the camera in ms. Setting 0 would result in the camera cutting, setting 1000 would result in the camera panning over 1 second, and so on.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>vector</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override camera position. Supply a position here to set a specific restore camera position, or leave blank to use the position of the camera at the start of the cutscene.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>vector</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override camera target. Must be specified if a camera position is specified.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 566</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:cutscene:Post Cutscene Fade Time"><h2 class="section_header">Post Cutscene Fade Time</h2></a>
+				</div>
+				<p>The post-cutscene fade time instructs the cutscene to fade the camera from black to picture after it ends or is skipped. This is used to achieve a smooth transition back to picture if the cutscene faded to black as it ended.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:set_post_cutscene_fade_time"><h3 class="function_name"><strong><code>cutscene:set_post_cutscene_fade_time(number </strong></code><i class="parameter">duration</i><code><strong>, [number </strong></code><i class="parameter">duration</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a duration for the post-cutscene fade time, in seconds.<br />
+							If a negative fade time is specified, then the cutscene will fade to black when it ends/is skipped and will never fade back to picture. This is useful for outro cutscenes where no fade back to picture is desired. Battle scripts can later fade back to picture themselves if desired.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>New post-cutscene fade-time. Note that unlike the majority of battle durations, camera durations (such as this) are specified in seconds.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=0</i></p>
+										<p>New post-cutscene fade-time delay. If specified, this delays the fade-in effect. Unlike the first parameter it is set in ms.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 617</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:cutscene:Music"><h2 class="section_header">Music</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:set_music"><h3 class="function_name"><strong><code>cutscene:set_music(string </strong></code><i class="parameter">music event</i><code><strong>, number </strong></code><i class="parameter">fade in</i><code><strong>, number </strong></code><i class="parameter">fade out</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a music sound event to play during the cutscene.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Music event name.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>Fade in time in ms.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>Fade out time in ms.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 652</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:set_music_resume_auto_playback"><h3 class="function_name"><strong><code>cutscene:set_music_resume_auto_playback(boolean </strong></code><i class="parameter">set auto playback</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the sound system to return to automatically selecting music events after the cutscene ends. Only takes effect if a custom music track has been set with <code><a href="#function:cutscene:set_music">cutscene:set_music</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>set auto playback</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 688</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:cutscene:Relative Mode"><h2 class="section_header">Relative Mode</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:set_relative_mode"><h3 class="function_name"><strong><code>cutscene:set_relative_mode()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets relative mode for enqueuing actions on the cutscene. With relative mode enabled, the time specified for each action is relative to the previously-added action, rather than absolute from the start of the cutscene. Relative mode is disabled by default.<br />
+							Relative mode must be set before any actions are enqueued with <code><a href="#function:cutscene:action">cutscene:action</a></code>.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 715</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:cutscene:Ambush Mode"><h2 class="section_header">Ambush Mode</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:set_is_ambush"><h3 class="function_name"><strong><code>cutscene:set_is_ambush([boolean </strong></code><i class="parameter">is ambush</i><code><strong>], [boolean </strong></code><i class="parameter">teleport units on end</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets up the cutscene as an intro cutscene of an ambush battle. This must be set if the cutscene is being shown over an ambush scene.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>Set to true to enable ambush behaviour.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Set to true to teleport the ambushed units to the end of their ambush path once the cutscene ends.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 742</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:cutscene:Miscellaneous Setup"><h2 class="section_header">Miscellaneous Setup</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:set_battle_speed"><h3 class="function_name"><strong><code>cutscene:set_battle_speed(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">battle speed</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the battle speed to use while the cutscene is running. By default this value is <code>1</code>, so the cutscene plays at normal battle speed.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>battle speed</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 782</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:set_should_restore_battle_speed"><h3 class="function_name"><strong><code>cutscene:set_should_restore_battle_speed([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">should restore</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether the cutscene should restore battle speed to that set prior to the cutscene starting. By default this behaviour is enabled.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>should restore</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 795</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:set_should_disable_unit_ids"><h3 class="function_name"><strong><code>cutscene:set_should_disable_unit_ids([boolean </strong></code><i class="parameter">disable unit ids</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether unit ID uicomponents should be disabled during the cutscene. By default they are disabled, but by supplying <code>false</code> as an argument this function can be used to make them display.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>disable unit ids</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 807</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:suppress_unit_voices"><h3 class="function_name"><strong><code>cutscene:suppress_unit_voices([boolean </strong></code><i class="parameter">suppress voices</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether to suppress unit voices during the cutscene duration. By default they are disabled - enabling them (by supplying <code>false</code> as an argument) will cause units to audibly respond to orders given during the cutscene.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>suppress voices</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 819</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:set_should_enable_cinematic_camera"><h3 class="function_name"><strong><code>cutscene:set_should_enable_cinematic_camera([boolean </strong></code><i class="parameter">enable cinematic camera</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether to enable the cinematic camera during the cutscene. By default it is enabled, but it can be disabled by supplying <code>false</code> as an argument to this function. The cinematic camera allows the camera to clip through terrain, so disable cinematic camera in circumstances where the path of the camera cannot be guaranteed (e.g. panning from a position relative to a unit to a fixed position, if there's a risk there'll be a hill in the way).
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>enable cinematic camera</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 836</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:set_wait_for_advisor_on_end"><h3 class="function_name"><strong><code>cutscene:set_wait_for_advisor_on_end([boolean </strong></code><i class="parameter">wait for advisor</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether to wait for the advisor to finish before ending the cutscene. This is akin to calling <code><a href="#function:cutscene:wait_for_advisor">cutscene:wait_for_advisor</a></code> at the end of the cutscene - the termination of the cutscene is delayed until the advisor has finished speaking. By default, cutscenes do not wait for the advisor to finish before ending.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>wait for advisor</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 848</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:set_wait_for_vo_on_end"><h3 class="function_name"><strong><code>cutscene:set_wait_for_vo_on_end([boolean </strong></code><i class="parameter">wait for sounds</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether to wait for any sounds registered with <code><a href="#function:cutscene:play_sound">cutscene:play_sound</a></code> or <code><a href="#function:cutscene:play_vo">cutscene:play_vo</a></code> to finish before ending the cutscene. This is akin to calling <code><a href="#function:cutscene:wait_for_vo">cutscene:wait_for_vo</a></code> at the end of the cutscene - the termination of the cutscene is delayed until all registered sounds have finished playing. By default, cutscenes do not wait for registered sounds to finish before ending.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>wait for sounds</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 860</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:set_close_advisor_on_end"><h3 class="function_name"><strong><code>cutscene:set_close_advisor_on_end([boolean </strong></code><i class="parameter">should close advisor</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether to close the advisor at the end of the cutscene. By default this behaviour is enabled (so the advisor closes), supply <code>false</code> as an argument to disable it.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>should close advisor</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 872</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:set_close_advisor_on_start"><h3 class="function_name"><strong><code>cutscene:set_close_advisor_on_start([boolean </strong></code><i class="parameter">should close advisor</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether to close the advisor when the cutscene begins. By default this behaviour is enabled, supply <code>false</code> as an argument to disable it.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>should close advisor</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 884</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:enable_ui_on_end"><h3 class="function_name"><strong><code>cutscene:enable_ui_on_end([boolean </strong></code><i class="parameter">should enable ui</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether the cutscene should re-enable the UI when it finishes. By default the cutscene re-enables the UI - supply <code>false</code> as an argument to prevent it from doing so. This can be useful for scripts which have turned off the UI and don't want cutscenes re-enabling it.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>should enable ui</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 896</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:set_end_callback"><h3 class="function_name"><strong><code>cutscene:set_end_callback(<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">end callback</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets or changes the callback that is called when the cutscene is ended.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>end callback</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 908</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:set_call_end_callback_when_skipped"><h3 class="function_name"><strong><code>cutscene:set_call_end_callback_when_skipped([boolean </strong></code><i class="parameter">should call callback</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether the cutscene should call the end callback (supplied when the cutscene is created with <code><a href="#function:cutscene:new">cutscene:new</a></code>) when skipped. By default the cutscene does call this callback - supply <code>false</code> as an argument to prevent it from doing so.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>should call callback</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 921</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:set_should_release_players_army"><h3 class="function_name"><strong><code>cutscene:set_should_release_players_army([boolean </strong></code><i class="parameter">should call callback</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether the cutscene should release script control of the player's army when finishing. By default the cutscene does release this control - supply <code>false</code> as an argument to prevent it from doing so. This is useful for scripts that may want to restrict the player's control of their army and don't want cutscenes un-restricting it.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>should call callback</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 933</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:set_show_cinematic_bars"><h3 class="function_name"><strong><code>cutscene:set_show_cinematic_bars([boolean </strong></code><i class="parameter">show bars</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether the cutscene should show cinematic bars while playing. By default the cutscene does show cinematic bars - supply <code>false</code> as an argument to prevent it from doing so.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>show bars</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 945</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:set_should_hide_ui"><h3 class="function_name"><strong><code>cutscene:set_should_hide_ui([boolean </strong></code><i class="parameter">hide UI</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether the cutscene should show hide the UI while playing. By default the cutscene does hide the UI - supply <code>false</code> as an argument to prevent it from doing so.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>hide UI</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 957</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:set_should_restore_ui_hiding_on_end"><h3 class="function_name"><strong><code>cutscene:set_should_restore_ui_hiding_on_end([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">restore hiding</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether cutscene should restore any pre-existing scripted ui hiding state when the cutscene ends. By default this state is restored - supply <code>false</code> as an argument to prevent it from doing so.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>restore hiding</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 969</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:set_steal_input_focus"><h3 class="function_name"><strong><code>cutscene:set_steal_input_focus([boolean </strong></code><i class="parameter">steal input</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets whether the cutscene should steal input focus while playing, preventing player input. By default the cutscene does steal input - supply <code>false</code> as an argument to prevent it from doing so.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>steal input</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 981</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:cutscene:Starting"><h2 class="section_header">Starting</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:start"><h3 class="function_name"><strong><code>cutscene:start()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Starts the cutscene. After this point it cannot be configured further.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 1028</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:cutscene:Subtitles"><h2 class="section_header">Subtitles</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:show_custom_cutscene_subtitle"><h3 class="function_name"><strong><code>cutscene:show_custom_cutscene_subtitle(string </strong></code><i class="parameter">subtitle key</i><code><strong>, string </strong></code><i class="parameter">style</i><code><strong>, number </strong></code><i class="parameter">duration</i><code><strong>, [boolean </strong></code><i class="parameter">force</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Streams a line of subtitles. Use this method of subtitle display within an <code><a href="#function:cutscene:action">cutscene:action</a></code> to animate the appearance of the supplied text over a supplied duration. Once a subtitle is shown with this function, it can later be hidden with <code><a href="#function:cutscene:hide_custom_cutscene_subtitles">cutscene:hide_custom_cutscene_subtitles</a></code> (which is also called automatically when this function is called, to hide any subtitles already visible).<br />
+							This functionality is provided by an extension to the <code><a href="text_pointer.html#class:text_pointer">text_pointer</a></code> system. As this behaviour is controlled by script, which only updates every 1/10th second, blocks of characters may appear at the same time instead of each character individually. This system should probably be moved into code at some point.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Subtitle key, from the scripted_subtitles table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Text pointer style, from the valid entries in <code><a href="text_pointer.html#function:text_pointer:set_style">text_pointer:set_style</a></code>. "subtitle_with_frame" is in use by existing quest battles but more styles may be available.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>Time the text takes to stream on-screen in ms.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Force display of the subtitles. Setting this to true overrides the user's subtitle preference.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 1382</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:hide_custom_cutscene_subtitles"><h3 class="function_name"><strong><code>cutscene:hide_custom_cutscene_subtitles([boolean </strong></code><i class="parameter">hide immediately</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Hides any visible custom cutscene subtitles. The hide effect will be animated, unless <code>true</code> is passed in as a single argument which hides the subtitles immediately.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>hide immediately</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 1429</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:show_esc_prompt"><h3 class="function_name"><strong><code>cutscene:show_esc_prompt([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">should show</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Shows or hides a "Press ESC to continue" subtitle prompt. It is intended that this should be called during an <code><a href="#function:cutscene:action">cutscene:action</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>should show</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 1441</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:cutscene:Skipping"><h2 class="section_header">Skipping</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:cutscene:skip"><h3 class="function_name"><strong><code>cutscene:skip()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Causes the cutscene to skip. This function is called internally when the ESC key is pressed, but it may also be called externally while the cutscene is running.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_cutscene.lua, line 1477</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:58</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "battle"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

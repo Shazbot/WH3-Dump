@@ -1,0 +1,3932 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Validate script class</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#ffece2" id="main">
+
+			<div style="background-color:#ffece2" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Frontend Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#ffc8a8">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search frontend only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#ffc8a8">Game Areas</h2>
+				<ul>
+					<li><a href="../campaign/campaign_index.html">Campaign Index</a></li>
+					<li><a href="../battle/battle_index.html">Battle Index</a></li>
+					<li><strong> > Frontend Index</strong></li>
+				</ul>
+
+				<h2 style="background-color:#ffc8a8">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:validate">Validate</a><img alt="Loaded in Frontend" style="float:right; margin-right:1em;" src="../images/loaded_in_frontend.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:validate:Lua Type Checking">Lua Type Checking</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_nil">is_nil</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_number">is_number</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_function">is_function</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_string">is_string</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_boolean">is_boolean</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_boolean_or_nil">is_boolean_or_nil</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_table">is_table</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_userdata">is_userdata</a></li>
+						<li>&emsp;&emsp;<a href="#section:validate:Complex Lua Type Checking">Complex Lua Type Checking</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_integer">is_integer</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_positive_number">is_positive_number</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_non_negative_number">is_non_negative_number</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_non_empty_table">is_non_empty_table</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_non_empty_table_indexed">is_non_empty_table_indexed</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_table_of_strings">is_table_of_strings</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_string_or_table_of_strings">is_string_or_table_of_strings</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_table_of_strings_allow_empty">is_table_of_strings_allow_empty</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_condition">is_condition</a></li>
+						<li>&emsp;&emsp;<a href="#section:validate:Common Type Checking">Common Type Checking</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_eventcontext">is_eventcontext</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_uicomponent">is_uicomponent</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_component">is_component</a></li>
+						<li>&emsp;&emsp;<a href="#section:validate:Campaign Code Type Checking">Campaign Code Type Checking</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_null">is_null</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_model">is_model</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_world">is_world</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_faction">is_faction</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_factionlist">is_factionlist</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_character">is_character</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_familymember">is_familymember</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_characterlist">is_characterlist</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_regionmanager">is_regionmanager</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_region">is_region</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_regiondata">is_regiondata</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_province">is_province</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_factionprovince">is_factionprovince</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_regionlist">is_regionlist</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_garrisonresidence">is_garrisonresidence</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_settlement">is_settlement</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_slot">is_slot</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_slotlist">is_slotlist</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_militaryforce">is_militaryforce</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_militaryforcelist">is_militaryforcelist</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_unit">is_unit</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_unitlist">is_unitlist</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_pendingbattle">is_pendingbattle</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_campaignmission">is_campaignmission</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_campaignai">is_campaignai</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_buildinglist">is_buildinglist</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_building">is_building</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_foreignslotmanager">is_foreignslotmanager</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_foreignslot">is_foreignslot</a></li>
+						<li>&emsp;&emsp;<a href="#section:validate:Battle Code Type Checking">Battle Code Type Checking</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_battlesoundeffect">is_battlesoundeffect</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_battle">is_battle</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_alliances">is_alliances</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_alliance">is_alliance</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_armies">is_armies</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_army">is_army</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_units">is_units</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_unitcontroller">is_unitcontroller</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_vector">is_vector</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_buildings">is_buildings</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_subtitles">is_subtitles</a></li>
+						<li>&emsp;&emsp;<a href="#section:validate:Common Script Type Checking">Common Script Type Checking</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_core">is_core</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_timermanager">is_timermanager</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_scriptmessager">is_scriptmessager</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_customcontext">is_customcontext</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_objectivesmanager">is_objectivesmanager</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_infotextmanager">is_infotextmanager</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_linkparser">is_linkparser</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_tooltiplistener">is_tooltiplistener</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_tooltippatcher">is_tooltippatcher</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_helppagemanager">is_helppagemanager</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_helppage">is_helppage</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_textpointer">is_textpointer</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_activepointer">is_activepointer</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_scriptedtour">is_scriptedtour</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_navigabletour">is_navigabletour</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_navigabletoursection">is_navigabletoursection</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_movieoverlay">is_movieoverlay</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_windowedmovieplayer">is_windowedmovieplayer</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_topicleader">is_topicleader</a></li>
+						<li>&emsp;&emsp;<a href="#section:validate:Campaign Script Type Checking">Campaign Script Type Checking</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_campaignmanager">is_campaignmanager</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_campaigncutscene">is_campaigncutscene</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_uioverride">is_uioverride</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_campaignuimanager">is_campaignuimanager</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_missionmanager">is_missionmanager</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_chaptermission">is_chaptermission</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_intervention">is_intervention</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_interventionmanager">is_interventionmanager</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_invasionmanager">is_invasionmanager</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_randomarmy">is_randomarmy</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_narrativeevent">is_narrativeevent</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_narrativequery">is_narrativequery</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_narrativetrigger">is_narrativetrigger</a></li>
+						<li>&emsp;&emsp;<a href="#section:validate:Battle Script Type Checking">Battle Script Type Checking</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_battlemanager">is_battlemanager</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_cutscene">is_cutscene</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_convexarea">is_convexarea</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_scriptunit">is_scriptunit</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_scriptunits">is_scriptunits</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_patrolmanager">is_patrolmanager</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_waypoint">is_waypoint</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_scriptaiplanner">is_scriptaiplanner</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_generatedbattle">is_generatedbattle</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_generatedarmy">is_generatedarmy</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_generatedcutscene">is_generatedcutscene</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_advicemanager">is_advicemanager</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_advicemonitor">is_advicemonitor</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:validate:is_attacklanemanager">is_attacklanemanager</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#ffece2" id="navigation_right">				<h2 style="background-color:#ffc8a8">Frontend Topics</h2>
+				<ul>
+					<li><a href="frontend_index.html">Frontend Index</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffc8a8">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="frontend.html">Frontend</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffc8a8">Script Interfaces</h2>
+				<ul>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><strong> > Validate</strong></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:validate"><h1 class="content_header">Validate</h1></a>
+				<p>The validation table contains a suite of functions that can provide input validation for other scripts. A validation function, when provided with a value, checks that value and returns <code>true</code> if it passes the check. If the value does not pass the check then the validation function throws a <code><a href="global.html#function:global:script_error">script_error</a></code> containing a descriptive error message and return <code>false</code>.</p>
+				<p>The diference between calling a validation function and calling one of the global <code><a href="global.html#section:global:Lua Type Checking">Lua Type Checking</a></code> functions is that the validation function will automatically throw a script error if the validation fails.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:validate:Lua Type Checking"><h2 class="section_header">Lua Type Checking</h2></a>
+				</div>
+				<p>The functions in this section can be used to check whether variables are a built-in type.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_nil"><h3 class="function_name"><strong><code>validate.is_nil(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not <code><a href="lua.html#class:nil">nil</a></code>. If the supplied value is nil then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is nil</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 1866</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_number"><h3 class="function_name"><strong><code>validate.is_number(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a <code><a href="lua.html#class:number">number</a></code>. If the supplied value is a number then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a number</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 1873</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_function"><h3 class="function_name"><strong><code>validate.is_function(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a <code><a href="lua.html#class:function">function</a></code>. If the supplied value is a function then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a function</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 1880</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_string"><h3 class="function_name"><strong><code>validate.is_string(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a <code><a href="lua.html#class:string">string</a></code>. If the supplied value is a string then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a string</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 1887</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_boolean"><h3 class="function_name"><strong><code>validate.is_boolean(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a <code><a href="lua.html#class:boolean">boolean</a></code>. If the supplied value is a boolean then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a boolean</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 1894</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_boolean_or_nil"><h3 class="function_name"><strong><code>validate.is_boolean_or_nil(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a <code><a href="lua.html#class:boolean">boolean</a></code> or <code><a href="lua.html#class:nil">nil</a></code>. If the supplied value is a boolean or nil then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a boolean</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 1901</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_table"><h3 class="function_name"><strong><code>validate.is_table(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a <code><a href="lua.html#class:table">table</a></code>. If the supplied value is a table then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a table</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 1915</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_userdata"><h3 class="function_name"><strong><code>validate.is_userdata(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not <code><a href="lua.html#class:userdata">userdata</a></code>. If the supplied value is userdata then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is userdata</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 1922</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:validate:Complex Lua Type Checking"><h2 class="section_header">Complex Lua Type Checking</h2></a>
+				</div>
+				<p>The functions in this section can be used to check whether variables are specific arrangements of built-in types.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_integer"><h3 class="function_name"><strong><code>validate.is_integer(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not an integer value. If the supplied value is an integer then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is an integer</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 1944</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_positive_number"><h3 class="function_name"><strong><code>validate.is_positive_number(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a number greater than zero. If the supplied value is a positive number then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a positive number</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 1951</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_non_negative_number"><h3 class="function_name"><strong><code>validate.is_non_negative_number(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a number greater than or equal to zero. If the supplied value is a non-negative number then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a non-negative number</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 1958</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_non_empty_table"><h3 class="function_name"><strong><code>validate.is_non_empty_table(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a non-empty table. If the supplied value is considered to be a non-empty indexed table then <code>true</code> is returned. See also <code><a href="#function:validate:is_non_empty_table_indexed">validate.is_non_empty_table_indexed</a></code> which should be used for numerically-indexed tables in place of this function.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a non-empty table</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 1965</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_non_empty_table_indexed"><h3 class="function_name"><strong><code>validate.is_non_empty_table_indexed(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a non-empty indexed table. An indexed table contains values stored in elements with keys which are ascending integer numbers, starting at 1. Values stored at keys that are not ascending integers are not queried by this test, so a table that contains only values stored in elements with string keys will not count as a "non empty table indexed". If the supplied value is considered to be a non-empty indexed table then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a non-empty indexed table</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 1980</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_table_of_strings"><h3 class="function_name"><strong><code>validate.is_table_of_strings(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a numerically-indexed table of strings. If the supplied value is a table of strings then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a table of strings</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 1994</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_string_or_table_of_strings"><h3 class="function_name"><strong><code>validate.is_string_or_table_of_strings(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a string, or a numerically-indexed table of strings. If the supplied value is either of these value types then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a string/table of strings</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2008</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_table_of_strings_allow_empty"><h3 class="function_name"><strong><code>validate.is_table_of_strings_allow_empty(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not an empty table or a numerically-indexed table of strings. If the supplied value is either of these value types then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a string/table of strings</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2022</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_condition"><h3 class="function_name"><strong><code>validate.is_condition(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a function or the boolean value <code>true</code>. Event conditions in the scripting library commonly adhere to this format, where an event is received and the condition must either be a function that returns a result, or be the boolean value true. If the supplied value is a condition then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a function or true</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2036</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:validate:Common Type Checking"><h2 class="section_header">Common Type Checking</h2></a>
+				</div>
+				<p>The functions in this section can be used to check whether variables are of a code type that is not built-in to Lua but common across all our game environments.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_eventcontext"><h3 class="function_name"><strong><code>validate.is_eventcontext(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not an event context. If the supplied value is an event context then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is an event context</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2053</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_uicomponent"><h3 class="function_name"><strong><code>validate.is_uicomponent(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a uicomponent. If the supplied value is a uicomponent then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is an event context</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2060</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_component"><h3 class="function_name"><strong><code>validate.is_component(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a component memory address. If the supplied value is a component memory address then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a component memory address</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2067</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:validate:Campaign Code Type Checking"><h2 class="section_header">Campaign Code Type Checking</h2></a>
+				</div>
+				<p>The functions in this section can be used to check whether variables are of a userdata code type that is provided in the campaign environment. In certain cases the function also works in battle.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_null"><h3 class="function_name"><strong><code>validate.is_null(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign null script interface. If the supplied value is a null script interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a null script interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2089</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_model"><h3 class="function_name"><strong><code>validate.is_model(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign model interface. If the supplied value is a model interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a model interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2096</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_world"><h3 class="function_name"><strong><code>validate.is_world(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign world interface. If the supplied value is a world interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a world interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2103</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_faction"><h3 class="function_name"><strong><code>validate.is_faction(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign faction interface. If the supplied value is a faction interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a faction interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2110</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_factionlist"><h3 class="function_name"><strong><code>validate.is_factionlist(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign faction list interface. If the supplied value is a faction list interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a faction list interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2117</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_character"><h3 class="function_name"><strong><code>validate.is_character(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign character interface. If the supplied value is a character interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a character interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2124</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_familymember"><h3 class="function_name"><strong><code>validate.is_familymember(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign family member interface. If the supplied value is a family member interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a family member interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2131</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_characterlist"><h3 class="function_name"><strong><code>validate.is_characterlist(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign character list interface. If the supplied value is a character list interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a character list interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2138</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_regionmanager"><h3 class="function_name"><strong><code>validate.is_regionmanager(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign region manager interface. If the supplied value is a region manager interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a region manager interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2145</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_region"><h3 class="function_name"><strong><code>validate.is_region(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign region interface. If the supplied value is a region interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a region interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2152</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_regiondata"><h3 class="function_name"><strong><code>validate.is_regiondata(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign region data interface. If the supplied value is a region data interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a region data interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2159</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_province"><h3 class="function_name"><strong><code>validate.is_province(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign province interface. If the supplied value is a province interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a province interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2166</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_factionprovince"><h3 class="function_name"><strong><code>validate.is_factionprovince(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign faction province interface. If the supplied value is a faction province interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a faction province interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2173</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_regionlist"><h3 class="function_name"><strong><code>validate.is_regionlist(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign region list interface. If the supplied value is a region list interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a region list interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2180</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_garrisonresidence"><h3 class="function_name"><strong><code>validate.is_garrisonresidence(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign garrison residence interface. If the supplied value is a garrison residence interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a garrison residence interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2187</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_settlement"><h3 class="function_name"><strong><code>validate.is_settlement(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign settlement interface. If the supplied value is a settlement interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a settlement interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2194</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_slot"><h3 class="function_name"><strong><code>validate.is_slot(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign slot interface. If the supplied value is a slot interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a slot interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2201</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_slotlist"><h3 class="function_name"><strong><code>validate.is_slotlist(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign slot list interface. If the supplied value is a slot list interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a slot list interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2208</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_militaryforce"><h3 class="function_name"><strong><code>validate.is_militaryforce(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign military force interface. If the supplied value is a military force interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a military force interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2215</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_militaryforcelist"><h3 class="function_name"><strong><code>validate.is_militaryforcelist(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign military force list interface. If the supplied value is a military force list interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a military force list interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2222</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_unit"><h3 class="function_name"><strong><code>validate.is_unit(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a unit interface. If the supplied value is a unit interface then <code>true</code> is returned. This works in both campaign and battle on their respective unit object types.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a unit interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2229</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_unitlist"><h3 class="function_name"><strong><code>validate.is_unitlist(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign unit list interface. If the supplied value is a unit list interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a unit list interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2236</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_pendingbattle"><h3 class="function_name"><strong><code>validate.is_pendingbattle(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign pending battle interface. If the supplied value is a pending battle interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a pending battle interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2243</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_campaignmission"><h3 class="function_name"><strong><code>validate.is_campaignmission(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign mission interface. If the supplied value is a mission interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a mission interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2250</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_campaignai"><h3 class="function_name"><strong><code>validate.is_campaignai(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign ai interface. If the supplied value is a campaign ai interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a campaign ai interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2257</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_buildinglist"><h3 class="function_name"><strong><code>validate.is_buildinglist(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign building list interface. If the supplied value is a building list interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a building list interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2264</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_building"><h3 class="function_name"><strong><code>validate.is_building(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a building interface. If the supplied value is a building interface then <code>true</code> is returned. This works in both campaign and battle on their respective object types.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a building interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2271</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_foreignslotmanager"><h3 class="function_name"><strong><code>validate.is_foreignslotmanager(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a foreign slot manager interface. If the supplied value is a foreign slot manager interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a foreign slot manager interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2278</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_foreignslot"><h3 class="function_name"><strong><code>validate.is_foreignslot(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a foreign slot interface. If the supplied value is a foreign slot interface then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a foreign slot interface</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2285</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:validate:Battle Code Type Checking"><h2 class="section_header">Battle Code Type Checking</h2></a>
+				</div>
+				<p>The functions in this section can be used to check whether variables are of a userdata code type that is provided in the battle environment. In certain cases functions are shared with campaign, in which case they are listed with the campaign type-checking functions.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_battlesoundeffect"><h3 class="function_name"><strong><code>validate.is_battlesoundeffect(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a battle sound effect. If the supplied value is a battle sound effect then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a battle sound effect</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2306</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_battle"><h3 class="function_name"><strong><code>validate.is_battle(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a battle object. If the supplied value is a battle object then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a battle object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2313</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_alliances"><h3 class="function_name"><strong><code>validate.is_alliances(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not an alliances collection object. If the supplied value is an alliances object then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is an alliances object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2320</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_alliance"><h3 class="function_name"><strong><code>validate.is_alliance(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not an alliance object. If the supplied value is an alliance object then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is an alliance object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2327</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_armies"><h3 class="function_name"><strong><code>validate.is_armies(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not an armies collection object. If the supplied value is an armies object then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is an armies object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2334</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_army"><h3 class="function_name"><strong><code>validate.is_army(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not an army object. If the supplied value is an army object then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is an army object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2341</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_units"><h3 class="function_name"><strong><code>validate.is_units(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a units collection object. If the supplied value is a units object then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a units object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2348</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_unitcontroller"><h3 class="function_name"><strong><code>validate.is_unitcontroller(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a unitcontroller object. If the supplied value is a unitcontroller object then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a unitcontroller object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2355</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_vector"><h3 class="function_name"><strong><code>validate.is_vector(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a battle vector object. If the supplied value is a vector object then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a battle vector object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2362</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_buildings"><h3 class="function_name"><strong><code>validate.is_buildings(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a buildings collection object. If the supplied value is a buildings collection object then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a buildings collection object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2369</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_subtitles"><h3 class="function_name"><strong><code>validate.is_subtitles(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a subtitles object. If the supplied value is a subtitles object then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a subtitles object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2376</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:validate:Common Script Type Checking"><h2 class="section_header">Common Script Type Checking</h2></a>
+				</div>
+				<p>The functions in this section can be used to check whether variables are of a script data type that is provided in multiple game environments.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_core"><h3 class="function_name"><strong><code>validate.is_core(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a core script object. If the supplied value is a core object then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a core object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2400</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_timermanager"><h3 class="function_name"><strong><code>validate.is_timermanager(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a timer manager script object. If the supplied value is a timer manager then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a timer manager object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2407</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_scriptmessager"><h3 class="function_name"><strong><code>validate.is_scriptmessager(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a script messager object. If the supplied value is a script messager then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a script messager object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2414</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_customcontext"><h3 class="function_name"><strong><code>validate.is_customcontext(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a custom event context object. If the supplied value is a custom context then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a script messager object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2421</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_objectivesmanager"><h3 class="function_name"><strong><code>validate.is_objectivesmanager(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not an objectives manager script object. If the supplied value is an objectives manager then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is an objectives manager object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2428</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_infotextmanager"><h3 class="function_name"><strong><code>validate.is_infotextmanager(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not an infotext manager script object. If the supplied value is an infotext manager then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is an infotext manager object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2435</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_linkparser"><h3 class="function_name"><strong><code>validate.is_linkparser(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a link parser script object. If the supplied value is a link parser then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a link parser object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2442</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_tooltiplistener"><h3 class="function_name"><strong><code>validate.is_tooltiplistener(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a tooltip listener script object. If the supplied value is a tooltip listener then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a tooltip listener object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2449</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_tooltippatcher"><h3 class="function_name"><strong><code>validate.is_tooltippatcher(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a tooltip patcher script object. If the supplied value is a tooltip patcher then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a tooltip patcher object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2456</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_helppagemanager"><h3 class="function_name"><strong><code>validate.is_helppagemanager(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a help page manager script object. If the supplied value is a help page manager then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a help page manager object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2463</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_helppage"><h3 class="function_name"><strong><code>validate.is_helppage(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a help page script object. If the supplied value is a help page then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a help page object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2470</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_textpointer"><h3 class="function_name"><strong><code>validate.is_textpointer(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a text pointer script object. If the supplied value is a text pointer then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a help page object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2477</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_activepointer"><h3 class="function_name"><strong><code>validate.is_activepointer(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not an active pointer script object. If the supplied value is an active pointer then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is an active pointer object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2484</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_scriptedtour"><h3 class="function_name"><strong><code>validate.is_scriptedtour(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a scripted tour object. If the supplied value is a scripted tour then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a scripted tour object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2491</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_navigabletour"><h3 class="function_name"><strong><code>validate.is_navigabletour(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a navigable tour object. If the supplied value is a navigable tour then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a navigable tour object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2498</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_navigabletoursection"><h3 class="function_name"><strong><code>validate.is_navigabletoursection(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a navigable tour section object. If the supplied value is a navigable tour section then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a navigable tour section object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2505</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_movieoverlay"><h3 class="function_name"><strong><code>validate.is_movieoverlay(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a movie overlay script object. If the supplied value is a movie overlay then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a movie overlay object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2512</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_windowedmovieplayer"><h3 class="function_name"><strong><code>validate.is_windowedmovieplayer(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a windowed movie player script object. If the supplied value is a windowed movie player then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a windowed movie player object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2519</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_topicleader"><h3 class="function_name"><strong><code>validate.is_topicleader(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a topic leader script object. If the supplied value is a topic leader then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a topic leader object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2526</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:validate:Campaign Script Type Checking"><h2 class="section_header">Campaign Script Type Checking</h2></a>
+				</div>
+				<p>The functions in this section can be used to check whether variables are of a script data type that is provided in campaign.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_campaignmanager"><h3 class="function_name"><strong><code>validate.is_campaignmanager(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign manager script object. If the supplied value is a campaign manager then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a campaign manager script object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2550</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_campaigncutscene"><h3 class="function_name"><strong><code>validate.is_campaigncutscene(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign cutscene script object. If the supplied value is a campaign cutscene then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a campaign cutscene script object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2557</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_uioverride"><h3 class="function_name"><strong><code>validate.is_uioverride(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a ui override script object. If the supplied value is a ui override then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a ui override script object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2564</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_campaignuimanager"><h3 class="function_name"><strong><code>validate.is_campaignuimanager(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign ui manager script object. If the supplied value is a campaign ui manager then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a campaign ui manager script object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2571</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_missionmanager"><h3 class="function_name"><strong><code>validate.is_missionmanager(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign mission manager script object. If the supplied value is a campaign mission manager then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a campaign mission manager script object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2578</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_chaptermission"><h3 class="function_name"><strong><code>validate.is_chaptermission(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign chapter mission script object. If the supplied value is a chapter mission then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a campaign chapter mission script object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2585</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_intervention"><h3 class="function_name"><strong><code>validate.is_intervention(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign intervention script object. If the supplied value is an intervention then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a campaign intervention script object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2592</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_interventionmanager"><h3 class="function_name"><strong><code>validate.is_interventionmanager(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign intervention manager script object. If the supplied value is an intervention manager then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a campaign intervention manager script object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2599</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_invasionmanager"><h3 class="function_name"><strong><code>validate.is_invasionmanager(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign invasion manager script object. If the supplied value is an invasion manager then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a campaign intervention manager script object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2606</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_randomarmy"><h3 class="function_name"><strong><code>validate.is_randomarmy(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign random army manager script object. If the supplied value is a random army manager then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a campaign random army manager script object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2613</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_narrativeevent"><h3 class="function_name"><strong><code>validate.is_narrativeevent(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign narrative event script object. If the supplied value is a narrative event then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a campaign narrative event script object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2620</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_narrativequery"><h3 class="function_name"><strong><code>validate.is_narrativequery(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign narrative query script object. If the supplied value is a narrative query then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a campaign narrative query script object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2627</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_narrativetrigger"><h3 class="function_name"><strong><code>validate.is_narrativetrigger(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a campaign narrative trigger script object. If the supplied value is a narrative trigger then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a campaign narrative trigger script object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2634</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:validate:Battle Script Type Checking"><h2 class="section_header">Battle Script Type Checking</h2></a>
+				</div>
+				<p>The functions in this section can be used to check whether variables are of a script data type that is provided in battle.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_battlemanager"><h3 class="function_name"><strong><code>validate.is_battlemanager(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a battle manager script object. If the supplied value is a battle manager then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a battle manager script object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2659</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_cutscene"><h3 class="function_name"><strong><code>validate.is_cutscene(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a battle cutscene script object. If the supplied value is a battle cutscene then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a battle cutscene script object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2666</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_convexarea"><h3 class="function_name"><strong><code>validate.is_convexarea(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a battle convex area script object. If the supplied value is a battle convex area then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a battle convex area script object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2673</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_scriptunit"><h3 class="function_name"><strong><code>validate.is_scriptunit(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a battle scriptunit object. If the supplied value is a scriptunit object then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a battle scriptunit object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2680</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_scriptunits"><h3 class="function_name"><strong><code>validate.is_scriptunits(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a battle scriptunits collection object. If the supplied value is a scriptunits collection object then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a battle scriptunits collection object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2687</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_patrolmanager"><h3 class="function_name"><strong><code>validate.is_patrolmanager(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a battle patrol manager object. If the supplied value is a patrol manager collection object then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a battle scriptunits collection object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2694</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_waypoint"><h3 class="function_name"><strong><code>validate.is_waypoint(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a battle waypoint script object. If the supplied value is a waypoint object then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a battle scriptunits collection object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2701</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_scriptaiplanner"><h3 class="function_name"><strong><code>validate.is_scriptaiplanner(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a battle script ai planner object. If the supplied value is a script ai planner then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a battle script ai planner object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2708</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_generatedbattle"><h3 class="function_name"><strong><code>validate.is_generatedbattle(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a generated battle script object. If the supplied value is a generated battle object then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a generated battle object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2715</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_generatedarmy"><h3 class="function_name"><strong><code>validate.is_generatedarmy(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a generated army script object. If the supplied value is a generated army object then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a generated army object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2722</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_generatedcutscene"><h3 class="function_name"><strong><code>validate.is_generatedcutscene(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not a generated cutscene script object. If the supplied value is a generated cutscene object then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is a generated cutscene object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2729</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_advicemanager"><h3 class="function_name"><strong><code>validate.is_advicemanager(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not an advice manager script object. If the supplied value is an advice manager object then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is an advice manager script object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2736</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_advicemonitor"><h3 class="function_name"><strong><code>validate.is_advicemonitor(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not an advice monitor script object. If the supplied value is an advice monitor object then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is an advice monitor script object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2743</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:validate:is_attacklanemanager"><h3 class="function_name"><strong><code>validate.is_attacklanemanager(value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Throws a <code><a href="global.html#function:global:script_error">script_error</a></code> and returns <code>false</code> if the supplied value is not an attack lane manager script object. If the supplied value is an attack lane manager object then <code>true</code> is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> value is an attack lane manager script object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_types.lua, line 2750</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:59</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "frontend"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

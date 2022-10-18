@@ -1,0 +1,1793 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Mission Managers script class</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#fff7cc" id="main">
+
+			<div style="background-color:#fff7cc" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Campaign Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#ffed8c">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search campaign only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#ffed8c">Game Areas</h2>
+				<ul>
+					<li><strong> > Campaign Index</strong></li>
+					<li><a href="../battle/battle_index.html">Battle Index</a></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#ffed8c">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:mission_manager">Mission Managers</a><img alt="Loaded in Campaign" style="float:right; margin-right:1em;" src="../images/loaded_in_campaign.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:mission_manager:Different Methods of Specifying Objectives">Different Methods of Specifying Objectives</a></li>
+						<li>&emsp;&emsp;<a href="#section:mission_manager:Persistence">Persistence</a></li>
+						<li>&emsp;&emsp;<a href="#section:mission_manager:Creation">Creation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:new">new</a></li>
+						<li>&emsp;&emsp;<a href="#section:mission_manager:Usage">Usage</a></li>
+						<li>&emsp;&emsp;<a href="#section:mission_manager:Global Configuration Options">Global Configuration Options</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:set_should_cancel_before_issuing">set_should_cancel_before_issuing</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:set_should_whitelist">set_should_whitelist</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:set_show_mission">set_show_mission</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:set_victory_mission">set_victory_mission</a></li>
+						<li>&emsp;&emsp;<a href="#section:mission_manager:Startup Callbacks">Startup Callbacks</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:add_first_time_trigger_callback">add_first_time_trigger_callback</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:add_each_time_trigger_callback">add_each_time_trigger_callback</a></li>
+						<li>&emsp;&emsp;<a href="#section:mission_manager:Constructing From Strings">Constructing From Strings</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:add_new_objective">add_new_objective</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:add_condition">add_condition</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:add_payload">add_payload</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:add_payload_from_mission_manager">add_payload_from_mission_manager</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:add_failure_payload">add_failure_payload</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:add_heading">add_heading</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:add_description">add_description</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:set_turn_limit">set_turn_limit</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:set_chapter">set_chapter</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:set_mission_issuer">set_mission_issuer</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:set_position">set_position</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:set_victory_type">set_victory_type</a></li>
+						<li>&emsp;&emsp;<a href="#section:mission_manager:Scripted Objectives">Scripted Objectives</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:add_new_scripted_objective">add_new_scripted_objective</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:add_scripted_objective_success_condition">add_scripted_objective_success_condition</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:add_scripted_objective_failure_condition">add_scripted_objective_failure_condition</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:force_scripted_objective_success">force_scripted_objective_success</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:force_scripted_objective_failure">force_scripted_objective_failure</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:update_scripted_objective_text">update_scripted_objective_text</a></li>
+						<li>&emsp;&emsp;<a href="#section:mission_manager:Persistent Values">Persistent Values</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:set_persistent_value">set_persistent_value</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:get_persistent_value">get_persistent_value</a></li>
+						<li>&emsp;&emsp;<a href="#section:mission_manager:Sourcing Objectives from Database">Sourcing Objectives from Database</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:set_is_mission_in_db">set_is_mission_in_db</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:set_is_incident_in_db">set_is_incident_in_db</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:set_is_dilemma_in_db">set_is_dilemma_in_db</a></li>
+						<li>&emsp;&emsp;<a href="#section:mission_manager:Querying">Querying</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:has_been_triggered">has_been_triggered</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:is_active">is_active</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:is_completed">is_completed</a></li>
+						<li>&emsp;&emsp;<a href="#section:mission_manager:Resetting">Resetting</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:reset">reset</a></li>
+						<li>&emsp;&emsp;<a href="#section:mission_manager:Triggering">Triggering</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:trigger">trigger</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:cancel_dismiss_callback_listeners">cancel_dismiss_callback_listeners</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#fff7cc" id="navigation_right">				<h2 style="background-color:#ffed8c">Campaign Topics</h2>
+				<ul>
+					<li><a href="campaign_index.html">Campaign Index</a></li>
+					<li><a href="campaign_script_structure.html">Campaign Script Structure</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="narrative_system.html">Narrative System</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="campaignui.html">CampaignUI</a></li>
+					<li><a href="cinematics.html">Cinematics</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="episodic_scripting.html">Episodic Scripting</a></li>
+					<li><a href="model_hierarchy.html">Model Hierarchy</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Script Interfaces</h2>
+				<ul>
+					<li><a href="campaign_manager.html">Campaign Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="campaign_cutscene.html">Campaign Cutscenes</a></li>
+					<li><a href="campaign_ui_manager.html">Campaign UI Manager</a></li>
+					<li><a href="chapter_mission.html">Chapter Missions</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="intervention.html">Interventions</a></li>
+					<li><a href="invasion_manager.html">Invasion Manager</a></li>
+					<li><strong> > Mission Managers</strong></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="narrative_event.html">Narrative Events</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="payload.html">Payload String Constructor</a></li>
+					<li><a href="random_army_manager.html">Random Army Manager</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="unique_table.html">Unique Table</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Data Interfaces</h2>
+				<ul>
+					<li><a href="custom_starts.html">Campaign Custom Starts</a></li>
+					<li><a href="faction_intro.html">Faction Intro</a></li>
+					<li><a href="narrative.html">Narrative</a></li>
+					<li><a href="narrative_events.html">Narrative Event Templates</a></li>
+					<li><a href="narrative_queries.html">Narrative Query Templates</a></li>
+					<li><a href="narrative_triggers.html">Narrative Trigger Templates</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:mission_manager"><h1 class="content_header">Mission Managers</h1></a>
+				<p>Mission managers can be used to set up and manage scripted missions issued to the player. It isn't necessary to set up a mission manager in order to trigger a scripted mission, but they provide certain benefits:</p>
+				<p><ul><li>Success, failure, cancellation and nearing-expiry callbacks may be registered with the mission manager, which calls these when the mission reaches a certain state.</li></p>
+				<p><li>Missions in the game may be triggered from a mission string - the mission manager offers easy methods to construct such a string.</li></p>
+				<p><li>Missions may be set up with scripted objectives - success and/or fail conditions that are triggered by script, allowing mission completion conditions to be implemented of arbitrary complexity, or that aren't supported natively by the game. Mission managers provide a framework for allowing this to be set up relatively easily.</li></p>
+				<p><li>Mission managers may be set up with first time and each time startup callbacks (see <code><a href="#function:mission_manager:add_first_time_trigger_callback">mission_manager:add_first_time_trigger_callback</a></code> and <code><a href="#function:mission_manager:add_each_time_trigger_callback">mission_manager:add_each_time_trigger_callback</a></code> for more details) allowing other scripts to be started while the mission is running.</li></ul></p>
+				<p>Mission managers can also be used to trigger incidents and dilemmas.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:mission_manager:Different Methods of Specifying Objectives"><h2 class="section_header">Different Methods of Specifying Objectives</h2></a>
+				</div>
+				<p>Most missions are only composed of one individual objective, but more than one is supported (chapter missions tend to have more). The objectives that make up a mission may be specified in one of three ways:</p>
+				<p><ul><li>A mission may be constructed from a mission string. Refer to the section on <code><a href="#section:mission_manager:Constructing From Strings">Constructing From Strings</a></code> to see how to do this.</p>
+				<p><ul><li>Mission objectives may be scripted, which means that it is the responsibility of script to monitor completion/failure conditions and notify the game. Scripted objectives may be set up using the functions in the <code><a href="#section:mission_manager:Scripted Objectives">Scripted Objectives</a></code> section. Scripted objectives are constructed internally from a mission string and as such can't be combined with mission records from the database or missions.txt file (see following points).</li></ul></li></p>
+				<p><li>A mission may build its objectives from records in the database (see the <code>cdir_events_mission_option_junctions</code> table). To set a mission to build its objectives from the database set it to trigger from the database with <code><a href="#function:mission_manager:set_is_mission_in_db">mission_manager:set_is_mission_in_db</a></code>, <code><a href="#function:mission_manager:set_is_incident_in_db">mission_manager:set_is_incident_in_db</a></code> or <code><a href="#function:mission_manager:set_is_dilemma_in_db">mission_manager:set_is_dilemma_in_db</a></code> and do not add any text objectives (see <code><a href="#function:mission_manager:add_new_objective">mission_manager:add_new_objective</a></code>).</li></p>
+				<p><li>Mission strings may also be baked into the missions.txt file that accompanies each campaign. This is the default option, but arguably the least desirable and flexible.</li></ul></p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:mission_manager:Persistence"><h2 class="section_header">Persistence</h2></a>
+				</div>
+				<p>If a mission manager has been set up to use certain features then it is classified as persistent. Persistent mission managers have script values that are saved into the savegame so the mission manager can know whether to start certain listeners when a saved game is loaded. As such, persistent mission managers must be declared and set up prior to the first tick.</p>
+				<p>Features that set a mission manager to be persistent are:</p>
+				<p><ul><li>Any success, failure, cancellation or nearing-expiry callbacks.</li></p>
+				<p><li>Any <code><a href="#section:mission_manager:Scripted Objectives">Scripted Objectives</a></code>.</li></p>
+				<p><li>Any <code><a href="#section:mission_manager:Persistent Values">Persistent Values</a></code>.</li></p>
+				<p><li>One or more each-time startup callbacks added with <code><a href="#function:mission_manager:add_each_time_trigger_callback">mission_manager:add_each_time_trigger_callback</a></code>.</li></ul></p>
+				<p>Mission managers that are not persistent are "fire and forget", meaning they can be discarded once triggered. The underlying campaign model will remember that a mission has been triggered, the script mission manager does not need to be re-established if the game is reloaded.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:mission_manager:Creation"><h2 class="section_header">Creation</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:new"><h3 class="function_name"><strong><code>mission_manager:new(<br />&emsp;&emsp;string </strong></code><i class="parameter">faction name</i><code><strong>, <br />&emsp;&emsp;string </strong></code><i class="parameter">mission key</i><code><strong>, <br />&emsp;&emsp;[function </strong></code><i class="parameter">success callback</i><code><strong>], <br />&emsp;&emsp;[function </strong></code><i class="parameter">failure callback</i><code><strong>], <br />&emsp;&emsp;[function </strong></code><i class="parameter">cancellation callback</i><code><strong>], <br />&emsp;&emsp;[function </strong></code><i class="parameter">nearing-expiry callback</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a mission manager object. A faction name for the mission recipient and a mission key must be specified at the very least. The mission key must match a record in the <code>missions</code> table, which must be present in all cases.<br />
+							A mission success callback, a mission failure callback, a mission cancellation callback and a mission nearing-expiry callback may optionally also be specified. Setting any of these also sets the mission to be persistent, which creates extra requirements for how the mission manager is declared - see the section above on <code><a href="#section:mission_manager:Persistence">Persistence</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Name of faction that will be receiving this mission.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Key corresponding to a record in the <code>missions</code> table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Callback to call if the mission is successfully completed. Setting this makes the mission manager persistent.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Callback to call if the mission is failed. Setting this makes the mission manager persistent.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Callback to call if the mission is cancelled. Setting this makes the mission manager persistent.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Callback to call if the mission is nearing expiry. Setting this makes the mission manager persistent.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>mission_manager</code> Mission manager object</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 110</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:mission_manager:Usage"><h2 class="section_header">Usage</h2></a>
+				</div>
+				<p>Once a <code>mission_manager</code> object has been created with <code><a href="#function:mission_manager:new">mission_manager:new</a></code>, functions on it may be called in the form showed below.</p>
+
+				<h4>Example - Specification:</h4>
+				<div id="example_code"><code>
+					 <i>&lt;mission_manager_object&gt;</i>:<i>&lt;function_name&gt;</i>(<i>&lt;args&gt;</i>)<br />
+				</code></div>
+
+				<h4>Example - Creation and Usage:</h4>
+				<div id="example_code"><code>
+					 local mm_emp_05 = mission_manager:new("wh_main_emp_empire", "wh_empire_mission_05");<br />
+					 <br />
+					 -- calling a function on the object once created<br />
+					 mm_emp_05:add_first_time_trigger_callback(function() out("mm_emp_05 starting") end)<br />
+				</code></div>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:mission_manager:Global Configuration Options"><h2 class="section_header">Global Configuration Options</h2></a>
+				</div>
+				<p>The functions in this section apply changes to the behaviour of the mission manager regardless of the type of mission being triggered.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:set_should_cancel_before_issuing"><h3 class="function_name"><strong><code>mission_manager:set_should_cancel_before_issuing([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">cancel before issuing</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							When it goes to trigger the mission manager will, if the mission is persistent (see <code><a href="#section:mission_manager:Persistence">Persistence</a></code>), issue a call to cancel any mission with the key specified in <code><a href="#function:mission_manager:new">mission_manager:new</a></code> before issuing its mission. This behaviour can be disabled, or enabled for non-persistent missions, by calling this function.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>cancel before issuing</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 236</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:set_should_whitelist"><h3 class="function_name"><strong><code>mission_manager:set_should_whitelist([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">should whitelist</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							When it goes to trigger the mission manager will, by default, add the relevant mission/dilemma/incident type to the event whitelist so that it triggers even if event messages are currently suppressed (see <code><a href="campaign_manager.html#function:campaign_manager:suppress_all_event_feed_messages">campaign_manager:suppress_all_event_feed_messages</a></code>). Events are commonly suppressed when an <code><a href="intervention.html#class:intervention">intervention</a></code> is triggering, for example. Use this function to disable this behaviour, if required, so that the triggered event is not whitelisted and does not show.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>should whitelist</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 248</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:set_show_mission"><h3 class="function_name"><strong><code>mission_manager:set_show_mission([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">show event</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Activates/deactivates the showing of the mission event as it is triggered. By default, the event message is shown - this function may be used to disable this behaviour. When this setting is disabled, the mission manager will use <code><a href="episodic_scripting.html#function:episodic_scripting:disable_event_feed_events">cm:disable_event_feed_events</a></code> to suppress the mission subcategory prior to triggering, and then again to unsuppress mission event once triggered.<br />
+							This setting only takes effect if the mission manager is triggering a mission. It has no effect if the mission manager has been set to trigger an incident or dilemma with <code><a href="#function:mission_manager:set_is_incident_in_db">mission_manager:set_is_incident_in_db</a></code> or <code><a href="#function:mission_manager:set_is_dilemma_in_db">mission_manager:set_is_dilemma_in_db</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>show event</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 260</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:set_victory_mission"><h3 class="function_name"><strong><code>mission_manager:set_victory_mission([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">show event</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Specifies that this mission is a victory condition. These missions have different string formatting, so use their own function for constructing the strings.<br />
+							This setting only takes effect if the mission manager is triggering a mission via string. It has no effect if the mission manager has been set to trigger an incident or dilemma with <code><a href="#function:mission_manager:set_is_incident_in_db">mission_manager:set_is_incident_in_db</a></code> or <code><a href="#function:mission_manager:set_is_dilemma_in_db">mission_manager:set_is_dilemma_in_db</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>show event</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 273</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:mission_manager:Startup Callbacks"><h2 class="section_header">Startup Callbacks</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:add_first_time_trigger_callback"><h3 class="function_name"><strong><code>mission_manager:add_first_time_trigger_callback(<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">callback</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Specifies a callback to call, one time, when the mission is first triggered. This can be used to set up other scripts or game objects for this mission.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>callback</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 292</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:add_each_time_trigger_callback"><h3 class="function_name"><strong><code>mission_manager:add_each_time_trigger_callback(<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">callback</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a callback to call each time the mission is triggered, either for the first time or subsequently from a savegame. This can be used to set up other scripts or game objects for this mission each time the script is loaded, or to set up the mission manager itself with <code><a href="#section:mission_manager:Persistent Values">Persistent Values</a></code>. Each-time callbacks are called after any first-time callbacks added with <code><a href="#function:mission_manager:add_each_time_trigger_callback">mission_manager:add_each_time_trigger_callback</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p>callback</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 305</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:mission_manager:Constructing From Strings"><h2 class="section_header">Constructing From Strings</h2></a>
+				</div>
+				<p>Mission managers provide a mode where the mission being triggered is constructed from a <code><a href="lua.html#class:string">string</a></code>. Example of such strings can be found in the <code>missions.txt</code> found in <code>data/campaigns/&lt;campaign_name&gt;/</code> for some campaigns. The main advantage of constructing missions from strings is that their initial setup may be dynamically constructed depending on game conditions at the time.</p>
+				<p>If new objectives are added with <code><a href="#function:mission_manager:add_new_objective">mission_manager:add_new_objective</a></code> then the mission manager will be set to construct its mission with a string. It will subsequently attempt to construct the mission specification string when the mission is later triggered, with only the properties set in the <code>missions</code> table remaining immutable. The functions in this section are used to tell the mission manager what to put in the mission construction string.</p>
+				<p><code><a href="#function:mission_manager:add_new_objective">mission_manager:add_new_objective</a></code> is called to add a new objective to the mission. The first objective added is the primary objective; any further objectives added are treated as secondary/bonus objectives. Objective configuration functions such as <code><a href="#function:mission_manager:add_condition">mission_manager:add_condition</a></code> and <code><a href="#function:mission_manager:add_payload">mission_manager:add_payload</a></code> act on the most recently-added objective, so the ordering of these setup functions is important. At the very least at least one objective and one payload should be set using the functions below before the mission manager is triggered.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:add_new_objective"><h3 class="function_name"><strong><code>mission_manager:add_new_objective(string </strong></code><i class="parameter">objective type</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a new objective type to the mission specification, and also sets the mission manager to construct its mission from a string.<br />
+							Multiple objectives may be added to a mission with this function. The first shall be the primary objective of the mission, while subsequent additions shall be set up as secondary objectives.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>objective type</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 mm:add_new_objective("CONSTRUCT_N_BUILDINGS_FROM")<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 354</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:add_condition"><h3 class="function_name"><strong><code>mission_manager:add_condition(string </strong></code><i class="parameter">condition</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a condition to the objective last added with <code><a href="#function:mission_manager:add_new_objective">mission_manager:add_new_objective</a></code>. Multiple conditions are commonly added - each objective type has different mandatory and optional conditions.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>condition</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 mm:add_condition("total 1")<br />
+								 mm:add_condition("building_level wh_main_emp_port_2")<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 377</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:add_payload"><h3 class="function_name"><strong><code>mission_manager:add_payload(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">payload</i><code><strong>, [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">enable payload combining</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a payload (reward) to the objective last added with <code><a href="#function:mission_manager:add_new_objective">mission_manager:add_new_objective</a></code>. Many different payload types exists: <code>faction_pooled_resource_transaction, add_mercenary_to_faction_pool, adjust_loyalty_for_faction, province_slaves_change, faction_slaves_change, money, influence, honour, grant_unit, grant_agent, ancillary, effect_bundle, rebellion, demolish_chain, damage_buildings, damage_character, building_restriction, unit_restriction, issue_mission,</code> and <code>game_victory</code>. Each has a different parameter requirement - see existing examples or a programmer for more information.<br />
+							The function will optionally attempt to combine this payload reward with others of the same type if they are found, if the <code>enable combining</code> parameter is set to <code>true</code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>payload</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>enable payload combining</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example - Adding money as a mission reward:</h4>
+							<div id="example_code"><code>
+								 mm:add_payload("money 1000")<br />
+							</code></div>
+
+							<h4>Example - Adding a pooled resource as a mission reward:</h4>
+							<div id="example_code"><code>
+								 mm:add_payload("faction_pooled_resource_transaction{resource dwf_oathgold;factor grudges;amount 10;context absolute;}")<br />
+							</code></div>
+
+							<h4>Example - Adding influence as a mission reward:</h4>
+							<div id="example_code"><code>
+								 mm:add_payload("influence 5")<br />
+							</code></div>
+
+							<h4>Example - Adding effect bundle as a mission reward:</h4>
+							<div id="example_code"><code>
+								 mm:add_payload("effect_bundle{bundle_key wh_dlc06_bundle_eight_peaks_recapture;turns 0;}")<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 420</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:add_payload_from_mission_manager"><h3 class="function_name"><strong><code>mission_manager:add_payload_from_mission_manager(<code><a href="#class:mission_manager">mission_manager</a></code> </strong></code><i class="parameter">mm</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds the mission payloads from another mission manager to this mission manager.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:mission_manager">mission_manager</a></code></code></p>
+									</td>
+									<td>
+										<p>mm</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> payloads successfully added</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 470</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:add_failure_payload"><h3 class="function_name"><strong><code>mission_manager:add_failure_payload(string </strong></code><i class="parameter">payload</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a payload (on mission faiure) to the objective last added with <code><a href="#function:mission_manager:add_new_objective">mission_manager:add_new_objective</a></code>. Many different payload types exists - the following list is pulled from code: <code>faction_pooled_resource_transaction, add_mercenary_to_faction_pool, adjust_loyalty_for_faction, province_slaves_change, faction_slaves_change, money, influence, honour, grant_unit, grant_agent, effect_bundle, rebellion, demolish_chain, damage_buildings, damage_character, building_restriction, unit_restriction, issue_mission,</code> and <code>game_victory</code>. Each has a different parameter requirement - see existing examples or a programmer for more information.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>payload</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example - Taking away money as a mission failure:</h4>
+							<div id="example_code"><code>
+								 mm:add_failure_payload("money -1000")<br />
+							</code></div>
+
+							<h4>Example - Taking away a pooled resource as a mission failure:</h4>
+							<div id="example_code"><code>
+								 mm:add_failure_payload("faction_pooled_resource_transaction{resource dwf_oathgold;factor wh2_main_resource_factor_missions;amount -10;}")<br />
+							</code></div>
+
+							<h4>Example - Decreasing influence as a mission failure:</h4>
+							<div id="example_code"><code>
+								 mm:add_failure_payload("influence -5")<br />
+							</code></div>
+
+							<h4>Example - Adding effect bundle as a mission failure:</h4>
+							<div id="example_code"><code>
+								 mm:add_failure_payload("effect_bundle{bundle_key wh_dlc06_bundle_eight_peaks_recapture;turns 0;}")<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 495</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:add_heading"><h3 class="function_name"><strong><code>mission_manager:add_heading(string </strong></code><i class="parameter">heading key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a heading key override for the objective last added with <code><a href="#function:mission_manager:add_new_objective">mission_manager:add_new_objective</a></code>. This should be supplied as a string in the full localised text format <code>[table]_[field]_[record]</code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>heading key</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 520</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:add_description"><h3 class="function_name"><strong><code>mission_manager:add_description(string </strong></code><i class="parameter">description key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a description key override for the objective last added with <code><a href="#function:mission_manager:add_new_objective">mission_manager:add_new_objective</a></code>. This should be supplied as a string in the full localised text format <code>[table]_[field]_[record]</code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>description key</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 538</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:set_turn_limit"><h3 class="function_name"><strong><code>mission_manager:set_turn_limit(number </strong></code><i class="parameter">turn limit</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a turn limit for the entire mission. This is optional.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>turn limit</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example - Mission expires in 5 turns:</h4>
+							<div id="example_code"><code>
+								 mm:set_turn_limit(5)<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 556</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:set_chapter"><h3 class="function_name"><strong><code>mission_manager:set_chapter(number </strong></code><i class="parameter">chapter number</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets this mission to be a particular chapter mission, which affects how it is displayed and categorised on the UI.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p>chapter number</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example - Mission is first chapter mission:</h4>
+							<div id="example_code"><code>
+								 mm:set_chapter(1)<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 571</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:set_mission_issuer"><h3 class="function_name"><strong><code>mission_manager:set_mission_issuer(string </strong></code><i class="parameter">mission issuer</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets an issuer for this mission, which determines some aspects of the mission's presentation. By default this is set to "CLAN_ELDERS", but use this function to change this. A list of valid mission issuers can be found in the <code>mission_issuers</code> table.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>mission issuer</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 586</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:set_position"><h3 class="function_name"><strong><code>mission_manager:set_position(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">x</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">y</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a position for this mission, which is used to zoom to a location.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Logical x co-ordinate</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Logical y co-ordinate</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 599</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:set_victory_type"><h3 class="function_name"><strong><code>mission_manager:set_victory_type(string </strong></code><i class="parameter">victory type</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a victory type for this mission, which is used for victory conditions only. A list of valid victory types can be found in the <code>victory_types</code> table.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>victory type</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 613</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:mission_manager:Scripted Objectives"><h2 class="section_header">Scripted Objectives</h2></a>
+				</div>
+				<p>Missions may contain scripted objectives, where the script is responsible for their monitoring and completion. Scripted objectives are constructed from strings, and set the mission manager into a mode where it will construct all its objectives in this way. As such they cannot be used in combination with objectives from the database or from the missions.txt file.</p>
+				<p>A scripted objective may be added to the mission manager with <code><a href="#function:mission_manager:add_new_scripted_objective">mission_manager:add_new_scripted_objective</a></code>, which sets some display text and an initial success monitor - some script which determines when the mission has been succeeded. Once a scripted objective has been added, additional success or failure monitors may be added with <code><a href="#function:mission_manager:add_scripted_objective_success_condition">mission_manager:add_scripted_objective_success_condition</a></code> and <code><a href="#function:mission_manager:add_scripted_objective_failure_condition">mission_manager:add_scripted_objective_failure_condition</a></code>.</p>
+				<p>Scripted objectives may also be forceably succeeded or failed by external scripts calling <code><a href="#function:mission_manager:force_scripted_objective_success">mission_manager:force_scripted_objective_success</a></code> or <code><a href="#function:mission_manager:force_scripted_objective_failure">mission_manager:force_scripted_objective_failure</a></code>, and their displayed text may be updated with <code><a href="#function:mission_manager:update_scripted_objective_text">mission_manager:update_scripted_objective_text</a></code>.</p>
+				<p>If multiple scripted objectives are to be added they may optionally be individually named by giving them a script key. This allows individual target objectives to be specified when calling <code><a href="#function:mission_manager:add_scripted_objective_success_condition">mission_manager:add_scripted_objective_success_condition</a></code>, <code><a href="#function:mission_manager:add_scripted_objective_failure_condition">mission_manager:add_scripted_objective_failure_condition</a></code>, <code><a href="#function:mission_manager:force_scripted_objective_success">mission_manager:force_scripted_objective_success</a></code> or <code><a href="#function:mission_manager:force_scripted_objective_failure">mission_manager:force_scripted_objective_failure</a></code>, which will otherwise just target the first scripted objective in the mission.</p>
+				<p>As mentioned in the section on <code><a href="#section:mission_manager:Persistence">Persistence</a></code>, setting a scripted objective forces the mission manager to be persistent, which means it must have a unique key and must be set up somewhere in the root of the script so that it's declared by the time the first tick happens after loading.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:add_new_scripted_objective"><h3 class="function_name"><strong><code>mission_manager:add_new_scripted_objective(<br />&emsp;&emsp;string </strong></code><i class="parameter">display text</i><code><strong>, <br />&emsp;&emsp;string </strong></code><i class="parameter">event</i><code><strong>, <br />&emsp;&emsp;function </strong></code><i class="parameter">condition</i><code><strong>, <br />&emsp;&emsp;[string </strong></code><i class="parameter">script name</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a new scripted objective, along with some text to display, a completion event and condition to monitor. An optional script name for this objective may also be specified, which can be useful if there is more than one objective.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Display text for this objective. This should be supplied as a full localisation key, i.e. <code>[table]_[field]_[key]</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Script event name of mission success condition.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p>A function that returns a boolean value when called. The function will be passed the context of the event specified in the second parameter. Alternatively, if no conditional test needs to be performed then <code>true</code> may be supplied in place of a function block.</p>
+										<p>While the mission is active the mission manager listens for the event specified in the second parameter. When it is received, the condition specified here is called. If it returns <code>true</code>, or if <code>true</code> was specified in place of a condition function, the mission objective is marked as being successfully completed.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Script name for this objective. If specified, this allows calls to <code><a href="#function:mission_manager:add_scripted_objective_success_condition">mission_manager:add_scripted_objective_success_condition</a></code>, <code><a href="#function:mission_manager:add_scripted_objective_failure_condition">mission_manager:add_scripted_objective_failure_condition</a></code>, <code><a href="#function:mission_manager:force_scripted_objective_success">mission_manager:force_scripted_objective_success</a></code> or <code><a href="#function:mission_manager:force_scripted_objective_failure">mission_manager:force_scripted_objective_failure</a></code> to target this objective (they target the first objective by default).</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> script name of the new scripted objective</li>
+							</ol>
+
+							<h4>Example:</h4>
+								An example scripted objective that is completed when the player researches a technology.
+							<div id="example_code"><code>
+								 mm:add_new_scripted_objective(<br />
+								 &emsp;&emsp;&emsp;&emsp;"mission_text_text_research_technology_mission_objective",<br />
+								 &emsp;&emsp;&emsp;&emsp;"ResearchCompleted",<br />
+								 &emsp;&emsp;&emsp;&emsp;function(context)<br />
+								 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return context:faction():name() == cm:get_local_faction_name();<br />
+								 &emsp;&emsp;&emsp;&emsp;end;<br />
+								 );<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 644</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:add_scripted_objective_success_condition"><h3 class="function_name"><strong><code>mission_manager:add_scripted_objective_success_condition(<br />&emsp;&emsp;string </strong></code><i class="parameter">event</i><code><strong>, <br />&emsp;&emsp;function </strong></code><i class="parameter">condition</i><code><strong>, <br />&emsp;&emsp;[string </strong></code><i class="parameter">script name</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a new success condition to a scripted objective. scripted objective. If a script key is specified the success condition is added to the objective with this key (assuming it exists), otherwise the success condition is added to the first scripted objective.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Script event name of mission success condition.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p>A function that returns a boolean value when called. The function will be passed the context of the event specified in the second parameter. Alternatively, if no conditional test needs to be performed then <code>true</code> may be supplied in place of a function block.</p>
+										<p>While the mission is active the mission manager listens for the event specified in the second parameter. When it is received, the condition specified here is called. If it returns <code>true</code>, or if <code>true</code> was specified in place of a condition function, the mission objective is marked as being successfully completed.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Script name of the scripted objective to append this success condition to.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 716</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:add_scripted_objective_failure_condition"><h3 class="function_name"><strong><code>mission_manager:add_scripted_objective_failure_condition(<br />&emsp;&emsp;string </strong></code><i class="parameter">event</i><code><strong>, <br />&emsp;&emsp;function </strong></code><i class="parameter">condition</i><code><strong>, <br />&emsp;&emsp;[string </strong></code><i class="parameter">script name</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Adds a new failure condition to a scripted objective. scripted objective. If a script key is specified the failure condition is added to the objective with this key (assuming it exists), otherwise the failure condition is added to the first scripted objective.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p>Script event name of mission failure condition.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p>A function that returns a boolean value when called. The function will be passed the context of the event specified in the second parameter. Alternatively, if no conditional test needs to be performed then <code>true</code> may be supplied in place of a function block.</p>
+										<p>While the mission is active the mission manager listens for the event specified in the second parameter. When it is received, the condition specified here is called. If it returns <code>true</code>, or if <code>true</code> was specified in place of a condition function, the mission objective is marked as being failed.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Script name of the scripted objective to append this failure condition to.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 727</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:force_scripted_objective_success"><h3 class="function_name"><strong><code>mission_manager:force_scripted_objective_success([string </strong></code><i class="parameter">script name</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Immediately forces the success of a scripted objective. A particular scripted objective may be specified by supplying a script key, otherwise this function will target the first scripted objective in the mission manager.<br />
+							This should only be called after the mission manager has been triggered.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Script name of the scripted objective to force the success of.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 807</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:force_scripted_objective_failure"><h3 class="function_name"><strong><code>mission_manager:force_scripted_objective_failure([string </strong></code><i class="parameter">script name</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Immediately forces the failure of a scripted objective. A particular scripted objective may be specified by supplying a script key, otherwise this function will target the first scripted objective in the mission manager.<br />
+							This should only be called after the mission manager has been triggered.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>string</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Script name of the scripted objective to force the failure of.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 816</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:update_scripted_objective_text"><h3 class="function_name"><strong><code>mission_manager:update_scripted_objective_text(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">display text</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">count</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">total</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">script name</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Updates the displayed objective text of a scripted objective. This can be useful if some counter needs to be updated as progress towards an objective is made, and optional count and total numerical values may be specified which are formatted in to the displayed text. A particular scripted objective may be specified by supplying a script key, otherwise this function will target the first scripted objective in the mission manager.<br />
+							This should only be called after the mission manager has been triggered.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Display text for this objective. This should be supplied as a full localisation key, i.e. <code>[table]_[field]_[key]</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Numeric count value to display. This is an optional first number formatted in to the display text, to allow a count value to be shown (e.g. "Current progress towards goal: %n")</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Numeric total value to display. This is an optional second number formatted in to the display text, to allow a count and total value to be shown (e.g. "Current progress towards goal: %n of %n")</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Script name of the scripted objective to update the key of.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 851</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:mission_manager:Persistent Values"><h2 class="section_header">Persistent Values</h2></a>
+				</div>
+				<p>Persistent values may be stored and retrieved on a persistent mission manager. The mission manager will save those to the savegame and keep them available for client scripts to query even after the game has been reloaded. This can be useful if values important to the mission manager's working are only determined at the time that the mission manager is triggered, and can't be known when the mission manager is declared. For example, a <code><a href="#section:mission_manager:Scripted Objectives">Scripted Objectives</a></code> mission to build x number of temples, where x is the number of temples held by a rival faction at the time the mission is issued, would need to store x in the savegame in order to re-establish the mission manager with the correct success conditions.</p>
+				<p>For example, a mission manager may establish its scripted conditions within a callback passed to <code><a href="#function:mission_manager:add_each_time_trigger_callback">mission_manager:add_each_time_trigger_callback</a></code> which uses persistent values that are first generated when the mission is first triggered.o</p>
+
+				<h4>Example:</h4>
+				<div id="example_code"><code>
+					 local mm = mission_manager:new(cm:get_local_faction_name(), "test_mission_key");<br />
+					 <br />
+					 -- Call this setup function each time the mission manager is triggered<br />
+					 mm:add_each_time_trigger_callback(<br />
+					&emsp;&emsp;&emsp;&emsp;function()<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- Mission is triggering - if persistent values have not been set<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- (i.e. we are triggering for the first time) then set them<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;if not mm:get_persistent_value("total_buildings") then<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;mm:set_persistent_value("current_buildings", 0);<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- Threshold value will be a random number 1-3, decided at the point the mission is first triggered<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;mm:set_persistent_value("total_buildings", cm:random_number(3))<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;end;<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;mm:add_new_scripted_objective(<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"mission_text_text_test_mission_construct_random_num_buildings",<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"BuildingCompleted",&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- event<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;function(context)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- condition to test<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;if context:building():faction():name() == cm:get_local_faction_name() then<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- Local faction has constructed a building, increment our current<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- building counter and return true if we've hit the threshold value<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;mm:set_persistent_value("current_buildings", mm:get_persistent_value("current_buildings") + 1);<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;if mm:get_persistent_value("current_buildings") >= mm:get_persistent_value("total_buildings") then<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return true;<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;end;<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;end;<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;end<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;);<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- This has to be added after scripted objectives<br />
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;mm:add_payload("money 1000");<br />
+					&emsp;&emsp;&emsp;&emsp;end<br />
+					 );<br />
+					 <br />
+					 -- ...Later<br />
+					 mm:trigger();<br />
+				</code></div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:set_persistent_value"><h3 class="function_name"><strong><code>mission_manager:set_persistent_value(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">name</i><code><strong>, value </strong></code><i class="parameter">value</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a persistent value on the mission manager with a supplied <code><a href="lua.html#class:string">string</a></code> name. The value can be a <code><a href="lua.html#class:boolean">boolean</a></code>, <code><a href="lua.html#class:number">number</a></code>, <code><a href="lua.html#class:string">string</a></code> or <code><a href="lua.html#class:table">table</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>value</code></p>
+									</td>
+									<td>
+										<p>value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 953</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:get_persistent_value"><h3 class="function_name"><strong><code>mission_manager:get_persistent_value()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a persistent value previously saved with <code><a href="#function:mission_manager:set_persistent_value">mission_manager:set_persistent_value</a></code>. If no persistent value has been saved on this mission manager with the supplied name.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 973</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:mission_manager:Sourcing Objectives from Database"><h2 class="section_header">Sourcing Objectives from Database</h2></a>
+				</div>
+				<p>If the mission manager is not set to generate its objectives from strings then it will fall back to one of two sources - from the missions.txt file which accompanies the campaign data or from database records. By default, the missions.txt file is used as the source of the mission - use <code><a href="#function:mission_manager:set_is_mission_in_db">mission_manager:set_is_mission_in_db</a></code>, <code><a href="#function:mission_manager:set_is_incident_in_db">mission_manager:set_is_incident_in_db</a></code> or <code><a href="#function:mission_manager:set_is_dilemma_in_db">mission_manager:set_is_dilemma_in_db</a></code> to have the mission manager construct its mission objectives from the database instead. Doing this will require that records are present in various tables such as <code>cdir_events_mission_option_junctions</code> to allow the mission to fire (different but equivalent tables are used if the mission is actually an incident or a dilemma).</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:set_is_mission_in_db"><h3 class="function_name"><strong><code>mission_manager:set_is_mission_in_db()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets that the mission objectives should be constructed from records in the game database.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 994</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:set_is_incident_in_db"><h3 class="function_name"><strong><code>mission_manager:set_is_incident_in_db()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets that the mission objectives should be constructed from records in the game database, and that the mission is actually an incident.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1005</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:set_is_dilemma_in_db"><h3 class="function_name"><strong><code>mission_manager:set_is_dilemma_in_db([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">is intervention</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets that the mission objectives should be constructed from records in the game database, and that the mission is actually a dilemma.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Is a dilemma in an intervention. If this is set to <code>true</code>, the dilemma will be triggered directly using <code><a href="campaign_manager.html#function:campaign_manager:trigger_dilemma_raw">campaign_manager:trigger_dilemma_raw</a></code>, which can cause softlocks when triggered from outside of an intervention. If set to <code>false</code> or left blank then the dilemma will be triggered in <code><a href="campaign_manager.html#function:campaign_manager:trigger_dilemma">campaign_manager:trigger_dilemma</a></code> which attempts to package the dilemma in an intervention.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1016</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:mission_manager:Querying"><h2 class="section_header">Querying</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:has_been_triggered"><h3 class="function_name"><strong><code>mission_manager:has_been_triggered()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns <code>true</code> if the mission manager has been triggered in the past, <code>false</code> otherwise. If triggered it might not still be running, as the mission could have been completed.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is triggered</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1047</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:is_active"><h3 class="function_name"><strong><code>mission_manager:is_active()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns <code>true</code> if the mission manager has been triggered but not yet completed.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is active</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1055</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:is_completed"><h3 class="function_name"><strong><code>mission_manager:is_completed()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns <code>true</code> if the mission has been completed, <code>false</code> otherwise. Success, failure or cancellation all count as completion.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is completed</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1063</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:mission_manager:Resetting"><h2 class="section_header">Resetting</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:reset"><h3 class="function_name"><strong><code>mission_manager:reset()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Resets a running mission manager, so that it is ready to be triggered again.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1090</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:mission_manager:Triggering"><h2 class="section_header">Triggering</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:trigger"><h3 class="function_name"><strong><code>mission_manager:trigger([<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">dismiss callback</i><code><strong>], [<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">callback delay</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Triggers the mission, causing it to be issued.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Dismiss callback. If specified, this is called when the event panel is dismissed.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Dismiss callback delay, in seconds. If specified this introduces a delay between the event panel being dismissed and the dismiss callback being called.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1113</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:cancel_dismiss_callback_listeners"><h3 class="function_name"><strong><code>mission_manager:cancel_dismiss_callback_listeners()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Cancels any dismiss callback listeners started by mission_manager:trigger. This can be useful in certain circumstances if the mission has failed to trigger.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1636</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:57</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "campaign"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

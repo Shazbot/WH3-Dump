@@ -1,0 +1,396 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Frontend</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#ffece2" id="main">
+
+			<div style="background-color:#ffece2" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Frontend Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#ffc8a8">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search frontend only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#ffc8a8">Game Areas</h2>
+				<ul>
+					<li><a href="../campaign/campaign_index.html">Campaign Index</a></li>
+					<li><a href="../battle/battle_index.html">Battle Index</a></li>
+					<li><strong> > Frontend Index</strong></li>
+				</ul>
+
+				<h2 style="background-color:#ffc8a8">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:frontend">Frontend</a><img alt="Loaded in Frontend" style="float:right; margin-right:1em;" src="../images/loaded_in_frontend.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#function:frontend:start_named_battle">start_named_battle</a></li>
+						<li>&emsp;&emsp;<a href="#function:frontend:start_campaign">start_campaign</a></li>
+						<li>&emsp;&emsp;<a href="#function:frontend:load_campaign">load_campaign</a></li>
+						<li>&emsp;&emsp;<a href="#function:frontend:continue_campaign">continue_campaign</a></li>
+						<li>&emsp;&emsp;<a href="#function:frontend:campaign_saves_exist">campaign_saves_exist</a></li>
+						<li>&emsp;&emsp;<a href="#function:frontend:campaign_saves_exist_mp">campaign_saves_exist_mp</a></li>
+						<li>&emsp;&emsp;<a href="#function:frontend:register_scripted_startup_movie">register_scripted_startup_movie</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#ffece2" id="navigation_right">				<h2 style="background-color:#ffc8a8">Frontend Topics</h2>
+				<ul>
+					<li><a href="frontend_index.html">Frontend Index</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffc8a8">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="common.html">Common</a></li>
+					<li><strong> > Frontend</strong></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffc8a8">Script Interfaces</h2>
+				<ul>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:frontend"><h1 class="content_header">Frontend</h1></a>
+				<p>The <code>frontend</code> object is automatically provided by the frontend game environment to script, and provides functionality specific to the frontend. The functions it provides may be called directly on the object in the following form. This interface is part of the UI - as such, the functions it provides may be called after the <code>UICreated</code> event is received.</p>
+
+				<h4>Example:</h4>
+				<div id="example_code"><code>
+					 frontend.<i>&lt;function_name&gt;</i>(<i>&lt;args&gt;</i>)<br />
+				</code></div>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:frontend:Functionality"><h2 class="section_header">Functionality</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:frontend:start_named_battle"><h3 class="function_name"><strong><code>frontend.start_named_battle(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Starts a named battle specified by key from the <code>battles</code> table.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>key</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/FrontEnd/FrontendUIScriptInterface.cpp, line 179</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:frontend:start_campaign"><h3 class="function_name"><strong><code>frontend.start_campaign(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">campaign key</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">political party key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Starts the specified campaign, by string key from the <code>campaigns</code> table. A faction key from the <code>factions</code> table and a political party key from <code>political_parties</code> table.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>campaign key</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>faction key</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>political party key</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/FrontEnd/FrontendUIScriptInterface.cpp, line 197</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:frontend:load_campaign"><h3 class="function_name"><strong><code>frontend.load_campaign(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">file path</i><code><strong>, [<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">from cloud</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Loads a campaign save file by name.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>file path</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>from cloud</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/FrontEnd/FrontendUIScriptInterface.cpp, line 220</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:frontend:continue_campaign"><h3 class="function_name"><strong><code>frontend.continue_campaign([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">from cloud</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Loads the most recently saved campaign game.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>from cloud</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/FrontEnd/FrontendUIScriptInterface.cpp, line 246</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:frontend:campaign_saves_exist"><h3 class="function_name"><strong><code>frontend.campaign_saves_exist()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether any singleplayer campaign save files exists.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> saves exist</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/FrontEnd/FrontendUIScriptInterface.cpp, line 269</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:frontend:campaign_saves_exist_mp"><h3 class="function_name"><strong><code>frontend.campaign_saves_exist_mp()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether any multiplayer campaign save files exists.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> saves exist</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/FrontEnd/FrontendUIScriptInterface.cpp, line 283</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:frontend:register_scripted_startup_movie"><h3 class="function_name"><strong><code>frontend.register_scripted_startup_movie(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">movie key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Registers a startup movie to be played prior to the main menu being displayed. Any movie/movies registered using this command will be shown after the corporate movies.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Path/key of movie to play. This should be the path to the movie file from data/movies, minus the <code>.ca_vp8</code> file extension, and an entry for the specified movie should exist in the <code>videos</code> table.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/FrontEnd/FrontendUIScriptInterface.cpp, line 297</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:59</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "frontend"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

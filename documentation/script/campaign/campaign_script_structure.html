@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Campaign Script Structure</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#fff7cc" id="main">
+
+			<div style="background-color:#fff7cc" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Campaign Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#ffed8c">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search campaign only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#ffed8c">Game Areas</h2>
+				<ul>
+					<li><strong> > Campaign Index</strong></li>
+					<li><a href="../battle/battle_index.html">Battle Index</a></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#ffed8c">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:campaign_script_structure">Campaign Script Structure</a><img alt="Loaded in Campaign" style="float:right; margin-right:1em;" src="../images/loaded_in_campaign.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:campaign_script_structure:Script File Location Overview">Script File Location Overview</a></li>
+						<li>&emsp;&emsp;<a href="#section:campaign_script_structure:Script Start - scripting.lua">Script Start - scripting.lua</a></li>
+						<li>&emsp;&emsp;<a href="#section:campaign_script_structure:Loading Campaign Files - required.lua">Loading Campaign Files - required.lua</a></li>
+						<li>&emsp;&emsp;<a href="#section:campaign_script_structure:xx_start.lua">xx_start.lua</a></li>
+						<li>&emsp;&emsp;<a href="#section:campaign_script_structure:Scripts During Loading">Scripts During Loading</a></li>
+						<li>&emsp;&emsp;<a href="#section:campaign_script_structure:Shared Campaign Files">Shared Campaign Files</a></li>
+						<li>&emsp;&emsp;<a href="#section:campaign_script_structure:Faction-Specific Files">Faction-Specific Files</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#fff7cc" id="navigation_right">				<h2 style="background-color:#ffed8c">Campaign Topics</h2>
+				<ul>
+					<li><a href="campaign_index.html">Campaign Index</a></li>
+					<li><strong> > Campaign Script Structure</strong></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="narrative_system.html">Narrative System</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="campaignui.html">CampaignUI</a></li>
+					<li><a href="cinematics.html">Cinematics</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="episodic_scripting.html">Episodic Scripting</a></li>
+					<li><a href="model_hierarchy.html">Model Hierarchy</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Script Interfaces</h2>
+				<ul>
+					<li><a href="campaign_manager.html">Campaign Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="campaign_cutscene.html">Campaign Cutscenes</a></li>
+					<li><a href="campaign_ui_manager.html">Campaign UI Manager</a></li>
+					<li><a href="chapter_mission.html">Chapter Missions</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="intervention.html">Interventions</a></li>
+					<li><a href="invasion_manager.html">Invasion Manager</a></li>
+					<li><a href="mission_manager.html">Mission Managers</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="narrative_event.html">Narrative Events</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="payload.html">Payload String Constructor</a></li>
+					<li><a href="random_army_manager.html">Random Army Manager</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="unique_table.html">Unique Table</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Data Interfaces</h2>
+				<ul>
+					<li><a href="custom_starts.html">Campaign Custom Starts</a></li>
+					<li><a href="faction_intro.html">Faction Intro</a></li>
+					<li><a href="narrative.html">Narrative</a></li>
+					<li><a href="narrative_events.html">Narrative Event Templates</a></li>
+					<li><a href="narrative_queries.html">Narrative Query Templates</a></li>
+					<li><a href="narrative_triggers.html">Narrative Trigger Templates</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:campaign_script_structure"><h1 class="content_header">Campaign Script Structure</h1></a>
+				<p>By convention, the scripts for each campaign are laid out in standardised structure. This page describes that standardised structure. It is intended to be useful for understanding how campaign scripts are put together or for getting scripts working for a new campaign for the first time.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Relevant in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Relevant in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Relevant in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:campaign_script_structure:Script File Location Overview"><h2 class="section_header">Script File Location Overview</h2></a>
+				</div>
+				<p>From Warhammer onwards, all campaign scripts can be found in <code>data\script\campaign\</code> (as well as <code>data\script\_lib\</code>, for library scripts related to campaign). This <code>data\script\campaign\</code> folder contains a number of subfolders, all of which may contain script files. Script files in those folders should contain functionality related to their location in the folder structure:</p>
+				<p><table class="simple"><tr><td>Folder Path</td><td>Comment</td></tr><tr><td><code>script\campaign\</code></td><td>Scripts potentially related to all campaigns in this project.</td></tr><tr><td><code>script\campaign\%campaign_name%\</code></td><td>Scripts related to a particular campaign.</td></tr><tr><td><code>script\campaign\%campaign_name%\factions\%faction_name%\</code></td><td>Scripts related to a particular faction in a particular campaign.</td></tr></table></p>
+				<p>Only those scripts required for the current faction and campaign are loaded, by convention.</p>
+				<p>Prior to Warhammer, campaign scripts were found in the <code>data\campaigns\%campaign_name%\</code> folder.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:campaign_script_structure:Script Start - scripting.lua"><h2 class="section_header">Script Start - scripting.lua</h2></a>
+				</div>
+				<p>In projects prior to Warhammer the campaign automatically executes a script file with the path <code>data\campaigns\%campaign_name%\scripting.lua</code>, should it exist. From Warhammer onwards, however, the first script that is run when a particular campaign loads can be customised in the relevant record in the <code>campaigns</code> table, in the <code>script_path</code> field. The file specified in this field is <code>data\script\campaigns\%campaign_name%\scripting.lua</code>, by convention. </p>
+				<p>By convention the script in <code>scripting.lua</code> loads the script libraries, uses <code><a href="global.html#function:global:get_folder_name_and_shortform">get_folder_name_and_shortform</a></code> to automatically determine the campaign name, sets this name on the <code><a href="campaign_manager.html#class:campaign_manager">campaign_manager</a></code> with <code><a href="campaign_manager.html#function:campaign_manager:set_campaign_name">campaign_manager:set_campaign_name</a></code>, adds the campaign folder to the <code>require</code> file path and then loads <code>required.lua</code>. If this convention is followed then the <code>scripting.lua</code> file can be identical from campaign to campaign.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:campaign_script_structure:Loading Campaign Files - required.lua"><h2 class="section_header">Loading Campaign Files - required.lua</h2></a>
+				</div>
+				<p>The <code>scripting.lua</code> file loads the <code>required.lua</code> file. The purpose of this file is to load in other files from both the <code>data\script\campaign\</code> and the <code>data\script\campaign\%campaign_name%\</code> folders. Files in <code>data\script\campaign\%campaign_name%\factions\%faction_name%\</code> are not loaded at this stage.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:campaign_script_structure:xx_start.lua"><h2 class="section_header">xx_start.lua</h2></a>
+				</div>
+				<p>By convention, a script file called xx_start.lua is created in <code>data\script\campaign\%campaign_name%\</code> for each campaign, where xx is a shorthand prefix for the campaign or project in question. This file is the start of the custom scripted behaviour for this campaign. It is responsible for loading faction-specific files when the game is created - see the <code><a href="campaign_manager.html#section:campaign_manager:Loading Campaign Script Files">Loading Campaign Script Files</a></code> section of the campaign manager documentation for more information.</p>
+				<p>The <code>xx_start.lua</code> file is also responsible for registering functions to be called when the game is created or when the first tick occurs - see the <code><a href="campaign_manager.html#section:campaign_manager:First Tick">First Tick</a></code> section of the campaign manager documentation for more information about this.</p>
+				<p>It is common to add lots of additional functions to this file that start listeners and other processes when the campaign script loads up.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:campaign_script_structure:Scripts During Loading"><h2 class="section_header">Scripts During Loading</h2></a>
+				</div>
+				<p>Unlike in battle, campaign scripts begin to load near to the start of the loading sequence. This is to allow scripts to be present while the save file (or startpos file) are loaded - the scripts can save values into the savegame when the game is saved and it is during the loading sequence that these values are read back out. Being loaded at such an early stage presents some complications, however, as the game model is not initialised until much later in the load sequence. If the script attempts to access or interrogate the game model before it's created then the game will crash. Care must be taken to ensure that this doesn't happen.</p>
+				<p>The standard script architecture put in place for each campaign attempts to ameliorate this issue by providing loading sequence processes with which callbacks to be registered. These registered callbacks will then be called at key points during the loading sequence when certain new elements of functionality become available.</p>
+				<p>Use <code><a href="campaign_manager.html#function:campaign_manager:add_loading_game_callback">campaign_manager:add_loading_game_callback</a></code> to register a function to be called when the <code>LoadingGame</code> event is triggered. This happens early in the load sequence, before the model is created. Scripts may load values in from the savegame at this point but may not access the model. Other methods of loading information from the savegame exist - see the <code><a href="campaign_manager.html#section:campaign_manager:Loading Game">Loading Game</a></code> section in the campaign manager documentation.</p>
+				<p>Use <code><a href="campaign_manager.html#function:campaign_manager:add_pre_first_tick_callback">campaign_manager:add_pre_first_tick_callback</a></code> to register a function to be called when the game and ui have been created. The campaign model may be queried after this point in the loading sequence. It is only at this point that the local faction can be identified and any faction-specific scripts loaded in.</p>
+				<p>Use <code><a href="campaign_manager.html#function:campaign_manager:add_first_tick_callback">campaign_manager:add_first_tick_callback</a></code> or a related function (see the list available in the <code><a href="campaign_manager.html#section:campaign_manager:First Tick">First Tick</a></code> section) to register a function to be called when time in the game first starts ticking. This event is triggered once loading is finished and the game becomes interactive.</p>
+				<p>The campaign model (and hence the campaign scripts) completely shut down when the game loads from campaign into battle. From the perspective of campaign script the load back into campaign after a battle is (nearly) indistinguishable from being loaded from a savegame.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:campaign_script_structure:Shared Campaign Files"><h2 class="section_header">Shared Campaign Files</h2></a>
+				</div>
+				<p>The following script files live in the root of the campaign folder at <code>data\script\campaign\</code>. They are loaded by all campaigns, by convention.</p>
+				<p><table class="simple"><tr><td>Script filename</td><td>Comment</td></tr><tr><td><code>xx_campaign_setup.lua</code></td><td>This file contains scripts and function that set scripts up across all campaigns. Traits, ancillaries and experience triggers are loaded in this file using the command <code><a href="campaign_manager.html#function:campaign_manager:load_exported_files">campaign_manager:load_exported_files</a></code>.</td></tr><tr><td><code>xx_campaign_interventions.lua</code></td><td>This file contains advice intervention declarations by convention.</td></tr><tr><td><code>xx_campaign_help_pages.lua</code></td><td>This file contains data related to the setup of campaign help pages</td></tr></table></p>
+				<p>Many additional files that define custom behaviour for a particular project are typically added to this folder alongside the files above.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:campaign_script_structure:Faction-Specific Files"><h2 class="section_header">Faction-Specific Files</h2></a>
+				</div>
+				<p>The folder <code>script\campaign\%campaign_name%\factions\%faction_name%\</code> contains files related to the local player's faction. Only the set of faction-specific files related to the local player's faction should be loaded, by convention - other script files in <code>script\campaign\%campaign_name%\factions\</code> are not loaded.</p>
+				<p>The <code>%faction_name%_start.lua</code> is loaded first, by default, with the command <code><a href="campaign_manager.html#function:campaign_manager:load_local_faction_script">campaign_manager:load_local_faction_script</a></code>. It contains the bulk of the faction-specific script such as any intro camera pans. Other files in the faction folder may be loaded by this file using <code><a href="campaign_manager.html#function:campaign_manager:load_global_script">campaign_manager:load_global_script</a></code>.</p>
+				<div class="section_body">
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:57</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "campaign"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

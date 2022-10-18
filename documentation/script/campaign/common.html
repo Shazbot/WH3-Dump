@@ -1,0 +1,2440 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Common</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#fff7cc" id="main">
+
+			<div style="background-color:#fff7cc" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Campaign Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#ffed8c">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search campaign only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#ffed8c">Game Areas</h2>
+				<ul>
+					<li><strong> > Campaign Index</strong></li>
+					<li><a href="../battle/battle_index.html">Battle Index</a></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#ffed8c">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:common">Common</a><img alt="Loaded in Campaign" style="float:right; margin-right:1em;" src="../images/loaded_in_campaign.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:common:Campaign">Campaign</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:ancillary">ancillary</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:trait">trait</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:OpenBrowser">OpenBrowser</a></li>
+						<li>&emsp;&emsp;<a href="#section:common:Advice and Audio">Advice and Audio</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:suspend_contextual_advice">suspend_contextual_advice</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:advice">advice</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:advance_scripted_advice_thread">advance_scripted_advice_thread</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:advance_scripted_advice_thread_located">advance_scripted_advice_thread_located</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:get_advice_thread_score">get_advice_thread_score</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:increment_advice_thread_score">increment_advice_thread_score</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:set_advice_history_string_seen">set_advice_history_string_seen</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:get_advice_history_string_seen">get_advice_history_string_seen</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:get_advice_level">get_advice_level</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:clear_advice_session_history">clear_advice_session_history</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:advance_contextual_advice_thread">advance_contextual_advice_thread</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:is_advice_audio_playing">is_advice_audio_playing</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:set_volume">set_volume</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:get_volume">get_volume</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:fade_volume">fade_volume</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:trigger_soundevent">trigger_soundevent</a></li>
+						<li>&emsp;&emsp;<a href="#section:common:UI Events">UI Events</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:trigger_shortcut">trigger_shortcut</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:key_press">key_press</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:key_down">key_down</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:key_up">key_up</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:mouse_event">mouse_event</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:force_report_of_all_ui_script_events">force_report_of_all_ui_script_events</a></li>
+						<li>&emsp;&emsp;<a href="#section:common:Preferences and Tweakers">Preferences and Tweakers</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:pref_as_bool">pref_as_bool</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:pref_as_float">pref_as_float</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:pref_as_integer">pref_as_integer</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:tweaker_value">tweaker_value</a></li>
+						<li>&emsp;&emsp;<a href="#section:common:Game Version">Game Version</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:game_version">game_version</a></li>
+						<li>&emsp;&emsp;<a href="#section:common:Autotest">Autotest</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:is_autotest">is_autotest</a></li>
+						<li>&emsp;&emsp;<a href="#section:common:Filesystem">Filesystem</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:vfs_exists">vfs_exists</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:vfs_working_directory">vfs_working_directory</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:filesystem_lookup">filesystem_lookup</a></li>
+						<li>&emsp;&emsp;<a href="#section:common:Command Line Commands">Command Line Commands</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:execute_cli_command">execute_cli_command</a></li>
+						<li>&emsp;&emsp;<a href="#section:common:Screenshots">Screenshots</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:take_screenshot">take_screenshot</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:get_appdata_screenshots_path">get_appdata_screenshots_path</a></li>
+						<li>&emsp;&emsp;<a href="#section:common:VTune Profiling">VTune Profiling</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:VTune_pause_resume">VTune_pause_resume</a></li>
+						<li>&emsp;&emsp;<a href="#section:common:Battle Ping Icons">Battle Ping Icons</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:PingIconPath">PingIconPath</a></li>
+						<li>&emsp;&emsp;<a href="#section:common:Localised Strings">Localised Strings</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:get_localised_string">get_localised_string</a></li>
+						<li>&emsp;&emsp;<a href="#section:common:Subtitles">Subtitles</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:subtitles_enabled">subtitles_enabled</a></li>
+						<li>&emsp;&emsp;<a href="#section:common:Movies">Movies</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:num_movies_that_can_play_in_parallel">num_movies_that_can_play_in_parallel</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:is_movie_playing_on_track">is_movie_playing_on_track</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:is_any_movie_playing">is_any_movie_playing</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:stop_all_movies">stop_all_movies</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:get_movie_current_frame_num">get_movie_current_frame_num</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:get_movie_total_frames">get_movie_total_frames</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:get_movie_duration">get_movie_duration</a></li>
+						<li>&emsp;&emsp;<a href="#section:common:Shortcuts">Shortcuts</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:enable_shortcut">enable_shortcut</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:enable_all_shortcuts">enable_all_shortcuts</a></li>
+						<li>&emsp;&emsp;<a href="#section:common:Custom Loading Screen">Custom Loading Screen</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:set_custom_loading_screen_text">set_custom_loading_screen_text</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:set_custom_loading_screen_key">set_custom_loading_screen_key</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:setup_dynamic_loading_screen">setup_dynamic_loading_screen</a></li>
+						<li>&emsp;&emsp;<a href="#section:common:Context System">Context System</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:set_context_value">set_context_value</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:get_context_value">get_context_value</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:call_context_command">call_context_command</a></li>
+						<li>&emsp;&emsp;<a href="#section:common:Error Messages">Error Messages</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:show_error_with_callstack">show_error_with_callstack</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:common:show_error">show_error</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#fff7cc" id="navigation_right">				<h2 style="background-color:#ffed8c">Campaign Topics</h2>
+				<ul>
+					<li><a href="campaign_index.html">Campaign Index</a></li>
+					<li><a href="campaign_script_structure.html">Campaign Script Structure</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="narrative_system.html">Narrative System</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="campaignui.html">CampaignUI</a></li>
+					<li><a href="cinematics.html">Cinematics</a></li>
+					<li><strong> > Common</strong></li>
+					<li><a href="episodic_scripting.html">Episodic Scripting</a></li>
+					<li><a href="model_hierarchy.html">Model Hierarchy</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Script Interfaces</h2>
+				<ul>
+					<li><a href="campaign_manager.html">Campaign Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="campaign_cutscene.html">Campaign Cutscenes</a></li>
+					<li><a href="campaign_ui_manager.html">Campaign UI Manager</a></li>
+					<li><a href="chapter_mission.html">Chapter Missions</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="intervention.html">Interventions</a></li>
+					<li><a href="invasion_manager.html">Invasion Manager</a></li>
+					<li><a href="mission_manager.html">Mission Managers</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="narrative_event.html">Narrative Events</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="payload.html">Payload String Constructor</a></li>
+					<li><a href="random_army_manager.html">Random Army Manager</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="unique_table.html">Unique Table</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Data Interfaces</h2>
+				<ul>
+					<li><a href="custom_starts.html">Campaign Custom Starts</a></li>
+					<li><a href="faction_intro.html">Faction Intro</a></li>
+					<li><a href="narrative.html">Narrative</a></li>
+					<li><a href="narrative_events.html">Narrative Event Templates</a></li>
+					<li><a href="narrative_queries.html">Narrative Query Templates</a></li>
+					<li><a href="narrative_triggers.html">Narrative Trigger Templates</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:common"><h1 class="content_header">Common</h1></a>
+				<p>The common interface (formerly the <code>effect</code> interface) is created automatically by code whenever a script environment is set up. It provides functionality that can be useful in all environments i.e. campaign, battle and frontend. It does not need to be created by script, and the functions it provides may be called directly on the object in the following form.</p>
+
+				<h4>Example:</h4>
+				<div id="example_code"><code>
+					 common.<i>&lt;function_name&gt;</i>(<i>&lt;args&gt;</i>)<br />
+				</code></div>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:common:Campaign"><h2 class="section_header">Campaign</h2></a>
+				</div>
+				<p>The following function calls are available in a campaign script environment. <strong>They will not work in other environments</strong>. </p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:common:ancillary"><h3 class="function_name"><strong><code>common.ancillary(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">ancillary key</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">chance</i><code><strong>, <code><a href="lua.html#class:userdata">userdata</a></code> </strong></code><i class="parameter">context</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Potentially adds the supplied ancillary to the character in the supplied context. When called, the function generates a random number between 0-100, and if this number is less than or equal to the supplied chance value, then the ancillary is added. The character to add the ancillary to is specified in the supplied context object, which must be a context object created by a character event (e.g. CharacterCompletedBattle, CharacterCreated).<br />
+							This function is somewhat archaic and should only be used in exported ancillary scripts. For general script usage <code>force_add_ancillary</code> is greatly preferred.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Ancillary key, from the <code>ancillaries</code> table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Percentage chance that the ancillary will actually be added.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:userdata">userdata</a></code></code></p>
+									</td>
+									<td>
+										<p>Context object, provided by a character event.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/docgen/content/campaign/docgen_campaign_common.lua, line 23</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:trait"><h3 class="function_name"><strong><code>common.trait(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">trait key</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">applicable to</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">points</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">chance</i><code><strong>, <code><a href="lua.html#class:userdata">userdata</a></code> </strong></code><i class="parameter">context</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Potentially adds the supplied trait points to the trait-recipient in the supplied context. When called, the function generates a random number between 0-100, and if this number is less than or equal to the supplied chance value then the trait points are added. The trait recipient is specified in the supplied context object, and the type of recipient must also be specified by a supplied string.<br />
+							This function is somewhat archaic and should only be used in exported trait scripts. For adding traits to characters in general scripts <code>force_add_trait</code> is greatly preferred.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Trait key, from the <code>traits</code> table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Specifies the type of object to apply the trait to. Valid strings here are <code>agent</code> (for all characters), <code>region</code> and <code>unit</code>. Not all recipient types may currently be supported.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Number of trait points to add, if successful.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Percentage chance that the trait will actually be added.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:userdata">userdata</a></code></code></p>
+									</td>
+									<td>
+										<p>Context object, provided by an event.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/docgen/content/campaign/docgen_campaign_common.lua, line 32</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:OpenBrowser"><h3 class="function_name"><strong><code>common.OpenBrowser(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">encyclopedia url</i><code><strong>, <code><a href="lua.html#class:userdata">userdata</a></code> </strong></code><i class="parameter">context</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Opens the in-game web browser with the supplied encyclopedia url.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>encyclopedia url</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:userdata">userdata</a></code></code></p>
+									</td>
+									<td>
+										<p>Context object, provided by an event.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 common.OpenBrowser("how_to_play/045b_enc_manual_ui_character.html", context)<br />
+							</code></div>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/docgen/content/campaign/docgen_campaign_common.lua, line 42</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:common:Advice and Audio"><h2 class="section_header">Advice and Audio</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:common:suspend_contextual_advice"><h3 class="function_name"><strong><code>common.suspend_contextual_advice(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">should suspend</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Prevents advice from being triggered with <code><a href="#function:common:advance_contextual_advice_thread">common.advance_contextual_advice_thread</a></code>. This can be useful for tutorials, but is not used by modern advice systems.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>should suspend</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireUtility/Source/Advice.cpp, line 1305</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:advice"><h3 class="function_name"><strong><code>common.advice(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">text</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Directs the advisor to display the supplied advice string. This should only be used for debugging since localisation is bypassed.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>text</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireUtility/Source/Advice.cpp, line 1323</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:advance_scripted_advice_thread"><h3 class="function_name"><strong><code>common.advance_scripted_advice_thread(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">advice key</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">score increase</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Directs the advisor to advance the specified thread by the supplied score increase. If any advice on that thread subsequently becomes eligible to be issued, then that advice is issued.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Advice key, from the <code>advice_threads</code> table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Score to increase the advice thread by.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireUtility/Source/Advice.cpp, line 1342</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:advance_scripted_advice_thread_located"><h3 class="function_name"><strong><code>common.advance_scripted_advice_thread_located(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">advice key</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">score increase</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">x</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">y</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Advice key, from the <code>advice_threads</code> table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Score to increase the advice thread by.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>X display co-ordinate to associate the advice with.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Y display co-ordinate to associate the advice with.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireUtility/Source/Advice.cpp, line 1364</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:get_advice_thread_score"><h3 class="function_name"><strong><code>common.get_advice_thread_score(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">thread key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the advice thread score. This can indicate whether advice on this thread has already been played.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Advice thread key, from the <code>advice_threads</code> table.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> score</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireUtility/Source/Advice.cpp, line 1407</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:increment_advice_thread_score"><h3 class="function_name"><strong><code>common.increment_advice_thread_score(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">thread key</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">score</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Increments the advice thread score by the supplied amount, without playing any advice.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Advice thread key, from the <code>advice_threads</code> table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>score</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireUtility/Source/Advice.cpp, line 1437</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:set_advice_history_string_seen"><h3 class="function_name"><strong><code>common.set_advice_history_string_seen(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Stores a key in the advice history, which can subsequently be tested with <code><a href="#function:common:get_advice_history_string_seen">common.get_advice_history_string_seen</a></code>. This allows scripts to test whether the player has ever encountered certain conditions in their playing history (e.g. "has ever started game"). The flag will be reset if the player resets their advice history.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>key</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireUtility/Source/Advice.cpp, line 1460</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:get_advice_history_string_seen"><h3 class="function_name"><strong><code>common.get_advice_history_string_seen(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether a key has ever been set in the advice history with <code><a href="#function:common:set_advice_history_string_seen">common.set_advice_history_string_seen</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>key</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> has been set</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireUtility/Source/Advice.cpp, line 1479</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:get_advice_level"><h3 class="function_name"><strong><code>common.get_advice_level()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the current advice level setting. The following table indicates potential returned values:<br />
+							<table id="simple"><tr><th>Returned Value</th><th>Advice Level</th></tr><br />
+							<tr><td><code>0</code></td><td>Minimal</td></tr>
+
+							<tr><td><code>1</code></td><td>Low</td></tr>
+
+							<tr><td><code>2</code></td><td>High</td></tr></table>
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> advice level</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireUtility/Source/Advice.cpp, line 1499</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:clear_advice_session_history"><h3 class="function_name"><strong><code>common.clear_advice_session_history()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Clears out the advice session history. This is the list of advice shown in this particular game session, accessed by the next/previous buttons on the advisor panel.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireUtility/Source/Advice.cpp, line 1519</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:advance_contextual_advice_thread"><h3 class="function_name"><strong><code>common.advance_contextual_advice_thread(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">advice thread</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">points</i><code><strong>, <code><a href="lua.html#class:userdata">userdata</a></code> </strong></code><i class="parameter">context</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Directs the advisor to consider issuing advice on the supplied advice thread. The supplied number of points are added to the thread - if a record from the <code>advice_levels</code> table subsequently becomes eligible to be issued, then that advice is issued.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Advice thread key.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Points to add to thread.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:userdata">userdata</a></code></code></p>
+									</td>
+									<td>
+										<p>context object supplied by game event.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/Empire/Source/Empire.cpp, line 3129</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:is_advice_audio_playing"><h3 class="function_name"><strong><code>common.is_advice_audio_playing()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether audio for any advice is currently playing.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> advice is playing</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/Empire/Source/Empire.cpp, line 3159</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:set_volume"><h3 class="function_name"><strong><code>common.set_volume(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">volume type</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">volume level</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets the volume level of a specific volume type. Valid volume types are given in the <code><a href="global.html#section:global:Volume Types">Volume Types</a></code> section of this documentation. The volume level should be set as a number between 0 (inaudible) and 100 (full volume).
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>volume type</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>volume level</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/Empire/Source/Empire.cpp, line 3182</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:get_volume"><h3 class="function_name"><strong><code>common.get_volume(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">volume type</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Gets the volume level of a specific volume type. Valid volume types are given in the <code><a href="global.html#section:global:Volume Types">Volume Types</a></code> section of this documentation. The volume level will be returned as a number between 0 (inaudible) and 100 (full volume).
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>volume type</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> volume level</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/Empire/Source/Empire.cpp, line 3206</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:fade_volume"><h3 class="function_name"><strong><code>common.fade_volume(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">volume type</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">target level</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">fade time</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Gradually fades the volume level of a specified volume type to a specified value over a specified interval. Valid volume types are given in the <code><a href="global.html#section:global:Volume Types">Volume Types</a></code> section of this documentation. The volume level should be set as a number between 0 (inaudible) and 100 (full volume).
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Volume type.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Target volume level.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Fade time in seconds.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/Empire/Source/Empire.cpp, line 3236</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:trigger_soundevent"><h3 class="function_name"><strong><code>common.trigger_soundevent(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">sound event name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Oneshot triggers a sound event with the sound engine with no position information. This is not suitable for long running events or looping events.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>sound event name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/Empire/Source/Empire.cpp, line 3264</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:common:UI Events"><h2 class="section_header">UI Events</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:common:trigger_shortcut"><h3 class="function_name"><strong><code>common.trigger_shortcut(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">shortcut name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Triggers a keyboard shortcut event. Valid shortcut events are defined in <code>data\text\default_keys.xml</code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>shortcut name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireUtility/Source/KeyboardShortcuts/KeyboardShortcutHandler.cpp, line 1969</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:key_press"><h3 class="function_name"><strong><code>common.key_press(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">event</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Simulates a key down followed by a key up key event. Valid key events are listed here: <code><a href="uicomponent.html#section:uicomponent:Simulating Keyboard Events">Simulating Keyboard Events</a></code>
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>event</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/Empire/Source/Empire.cpp, line 3294</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:key_down"><h3 class="function_name"><strong><code>common.key_down(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">event</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Triggers a key down key event. Note that the game will think the key is held down until a key up event is received. Valid key events are listed here: <code><a href="uicomponent.html#section:uicomponent:Simulating Keyboard Events">Simulating Keyboard Events</a></code>
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>event</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/Empire/Source/Empire.cpp, line 3317</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:key_up"><h3 class="function_name"><strong><code>common.key_up(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">event</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Triggers a key up event. Valid key events are listed here: <code><a href="uicomponent.html#section:uicomponent:Simulating Keyboard Events">Simulating Keyboard Events</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>event</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/Empire/Source/Empire.cpp, line 3339</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:mouse_event"><h3 class="function_name"><strong><code>common.mouse_event(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">event</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">screen pos x</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">screen pos y</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Triggers a mouse event at a specified position. Valid mouse events are listed in the <code>cursor_mouse_events</code> table.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>event</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>screen pos x</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>screen pos y</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/Empire/Source/Empire.cpp, line 3361</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:force_report_of_all_ui_script_events"><h3 class="function_name"><strong><code>common.force_report_of_all_ui_script_events(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">force reporting</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Compels all uicomponents to fires UI script events such as <code>ComponentMouseOn</code> and <code>ComponentAnimationFinished</code>, regardless of whether they have a ScriptEventReporter callback set on them. This should only be used by modders since they can't modify ui layouts easily in order to add ScriptEventReporter callbacks. The game will throw an error if this is called in a configuration other than final release.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>Force reporting of script events on or off. Reporting is off by default, except when running an autotest.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Common/EmpireCommonUI.cpp, line 557</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:common:Preferences and Tweakers"><h2 class="section_header">Preferences and Tweakers</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:common:pref_as_bool"><h3 class="function_name"><strong><code>common.pref_as_bool(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">preference key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the specified boolean user preference setting is true or not.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>preference key</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> preference value</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/Empire/Source/Empire.cpp, line 3396</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:pref_as_float"><h3 class="function_name"><strong><code>common.pref_as_float(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">preference key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the numeric value of the specified floating point user preference. Floating point number values will be marked with &lt;float&gt; in the preferences file.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>preference key</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> preference value</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/Empire/Source/Empire.cpp, line 3417</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:pref_as_integer"><h3 class="function_name"><strong><code>common.pref_as_integer(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">preference key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the numeric value of the specified integer user preference. Integer values will be marked with &lt;int&gt; in the preferences file.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>preference key</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> preference value</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/Empire/Source/Empire.cpp, line 3438</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:tweaker_value"><h3 class="function_name"><strong><code>common.tweaker_value(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">tweaker name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the value of the specified tweaker as a string. Tweakers are game settings that may be easily set and changed during development, through methods such as startup scripts or the game console.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>tweaker name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> tweaker value</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/Empire/Source/Empire.cpp, line 3459</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:common:Game Version"><h2 class="section_header">Game Version</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:common:game_version"><h3 class="function_name"><strong><code>common.game_version()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the game version string.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> game version</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/Empire/Source/Empire.cpp, line 3493</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:common:Autotest"><h2 class="section_header">Autotest</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:common:is_autotest"><h3 class="function_name"><strong><code>common.is_autotest()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the game is currently running in autotest mode.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is autotest</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/Empire/Source/Empire.cpp, line 3513</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:common:Filesystem"><h2 class="section_header">Filesystem</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:common:vfs_exists"><h3 class="function_name"><strong><code>common.vfs_exists(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">path</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Performs a VFS lookup of the supplied file and path, and returns whether the file exists in the virtual file system. The path should be specified from the working data folder.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Path from data/ in which to look.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> file exists</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 common.vfs_exists("script/all_scripted.lua")<br />
+							</code></div>
+							<p class="file_comment">defined in ../../common/Empire/Source/Empire.cpp, line 3533</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:vfs_working_directory"><h3 class="function_name"><strong><code>common.vfs_working_directory()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the absolute file path of the game's working data directory.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> file path</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 local absolute_path = common.vfs_working_directory()<br />
+							</code></div>
+							<p class="file_comment">defined in ../../common/Empire/Source/Empire.cpp, line 3556</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:filesystem_lookup"><h3 class="function_name"><strong><code>common.filesystem_lookup(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">path</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">pattern</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Performs a VFS lookup in the specified relative path (root is data/) for files matching the supplied pattern. Returns a comma-delimited list of files found.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Path from data/ in which to look.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Search pattern.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> file list</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 common.filesystem_lookup("/script/_lib/", "*.lua")<br />
+							</code></div>
+							<p class="file_comment">defined in ../../common/Empire/Source/Empire.cpp, line 3574</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:common:Command Line Commands"><h2 class="section_header">Command Line Commands</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:common:execute_cli_command"><h3 class="function_name"><strong><code>common.execute_cli_command(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">cli command</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Calls a command line command as if it were typed in to the game console.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>cli command</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/Empire/Source/Empire.cpp, line 3663</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:common:Screenshots"><h2 class="section_header">Screenshots</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:common:take_screenshot"><h3 class="function_name"><strong><code>common.take_screenshot(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">screenshot filename</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Takes a screenshot and writes a tga file with the supplied filename. If no path is specified with the filename then the screenshot file is written into the binaries folder. The file path to the screenshots folder in appdata may be retrieved with <code><a href="#function:common:get_appdata_screenshots_path">common.get_appdata_screenshots_path</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>screenshot filename</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 common.take_screenshot(common.get_appdata_screenshots_path() .. "my_screenshot.tga")<br />
+							</code></div>
+							<p class="file_comment">defined in ../../common/Empire/Source/Empire.cpp, line 3690</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:get_appdata_screenshots_path"><h3 class="function_name"><strong><code>common.get_appdata_screenshots_path()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the full path to the screenshots directory in appdata.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> screenshots path</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/Empire/Source/Empire.cpp, line 3719</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:common:VTune Profiling"><h2 class="section_header">VTune Profiling</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:common:VTune_pause_resume"><h3 class="function_name"><strong><code>common.VTune_pause_resume(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">pause</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pauses or resumes VTune profiler. Supply <code>true</code> to pause or <code>false</code> to resume.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>pause</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/Empire/Source/Empire.cpp, line 3737</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:common:Battle Ping Icons"><h2 class="section_header">Battle Ping Icons</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:common:PingIconPath"><h3 class="function_name"><strong><code>common.PingIconPath(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">ping type</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the icon path for the supplied ping icon type, specified by a numeric index. This allows script to create its own pings that don't go through the ping system (like ping icons attached to units - see <code><a href="../battle/script_unit.html#function:script_unit:add_ping_icon">script_unit:add_ping_icon</a></code>). This function works in battle only.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>ping type</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> icon path</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Battle/ComponentCallbacks/OffscreenIndicator.cpp, line 111</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:common:Localised Strings"><h2 class="section_header">Localised Strings</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:common:get_localised_string"><h3 class="function_name"><strong><code>common.get_localised_string(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">localisation key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Retrieves a localised string from the database by its full localisation key. This is in the form [table]_[field]_[record_key]. If the lookup fails, an empty string is returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>localisation key</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> localised string</li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 out(effect.get_localised_string("random_localisation_strings_string_shakespeare_quote"))<br />
+							</code></div>
+							<div id="example_result"><code>
+								Alas, Poor Yoric..<br />
+							</code></div>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Common/EmpireCommonUI.cpp, line 320</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:common:Subtitles"><h2 class="section_header">Subtitles</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:common:subtitles_enabled"><h3 class="function_name"><strong><code>common.subtitles_enabled()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether subtitles are enabled or not in the player's preferences.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> subtitles enabled</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Common/EmpireCommonUI.cpp, line 363</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:common:Movies"><h2 class="section_header">Movies</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:common:num_movies_that_can_play_in_parallel"><h3 class="function_name"><strong><code>common.num_movies_that_can_play_in_parallel()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the number of movies that can be played in parallel.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> number of movies that can be played</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Common/EmpireCommonUI.cpp, line 385</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:is_movie_playing_on_track"><h3 class="function_name"><strong><code>common.is_movie_playing_on_track()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether a movie is currently playing on a specified track.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is movie playing</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Common/EmpireCommonUI.cpp, line 409</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:is_any_movie_playing"><h3 class="function_name"><strong><code>common.is_any_movie_playing()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether any movie is currently playing.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is movie playing</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Common/EmpireCommonUI.cpp, line 436</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:stop_all_movies"><h3 class="function_name"><strong><code>common.stop_all_movies()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Stops any currently playing movies.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Common/EmpireCommonUI.cpp, line 456</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:get_movie_current_frame_num"><h3 class="function_name"><strong><code>common.get_movie_current_frame_num()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the current frame number for the movie playing on the specified movie track. <code>0</code> is returned if no movie is playing.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> current frame number</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Common/EmpireCommonUI.cpp, line 474</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:get_movie_total_frames"><h3 class="function_name"><strong><code>common.get_movie_total_frames()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the total number of frames in the movie playing on the specified movie track. <code>0</code> is returned if no movie is playing.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> the frame number movie currently on</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Common/EmpireCommonUI.cpp, line 499</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:get_movie_duration"><h3 class="function_name"><strong><code>common.get_movie_duration()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the duration in seconds of the movie playing on the specified movie track. <code>0</code> is returned if no movie is playing.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> movie duration</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Common/EmpireCommonUI.cpp, line 524</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:common:Shortcuts"><h2 class="section_header">Shortcuts</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:common:enable_shortcut"><h3 class="function_name"><strong><code>common.enable_shortcut(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">shortcut key (see (see working_data/text/default_keys.xml)</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">true to enable</i><code><strong><br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pass a shortcut key (see working_data/text/default_keys.xml) and a bool for enabling/disabling the shortcut
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>shortcut key (see (see working_data/text/default_keys.xml)</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>false to disable</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Common/EmpireCommonUI.cpp, line 581</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:enable_all_shortcuts"><h3 class="function_name"><strong><code>common.enable_all_shortcuts(<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">true to enable</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pass a bool for enabling/disabling all shortcuts
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>false to disable</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Common/EmpireCommonUI.cpp, line 607</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:common:Custom Loading Screen"><h2 class="section_header">Custom Loading Screen</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:common:set_custom_loading_screen_text"><h3 class="function_name"><strong><code>common.set_custom_loading_screen_text(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a custom text entry for display on the next loading screen. The text must be specified by a key corresponding to a record in the <code>scripted_objectives</code> table.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>key</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Common/LoadingScreenUI.cpp, line 382</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:set_custom_loading_screen_key"><h3 class="function_name"><strong><code>common.set_custom_loading_screen_key(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Sets a record from the <code>custom_loading_screens</code> table to use for the next loading screen. The record is specified by string key.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>key</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Common/LoadingScreenUI.cpp, line 408</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:setup_dynamic_loading_screen"><h3 class="function_name"><strong><code>common.setup_dynamic_loading_screen(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">json filename</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">layout name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Specifies a layout from the working <code>data/ui/loading_ui/</code> folder and a json data-file from the working <code>data/ui/loading_ui/dynamic_loading_screen_data</code> folder which drive a sequence of context-driven events throughout the next loading sequence.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>JSON filename, from the <code>data/ui/loading_ui/dynamic_loading_screen_data</code> folder.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Layout name, from the <code>data/ui/loading_ui/</code> folder.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Common/LoadingScreenUI.cpp, line 427</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:common:Context System"><h2 class="section_header">Context System</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:common:set_context_value"><h3 class="function_name"><strong><code>common.set_context_value(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique_id</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">or <code><a href="lua.html#class:number">number</a></code></i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Will create a CcoScriptObject to context cache with specified value (or update existing objects value), and send notification of change so ContextInitScriptObject can refresh display of self and children
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>the unique id for the value so can set and get the value</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Can pass either a string or numeric value</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example - Setting a string value:</h4>
+							<div id="example_code"><code>
+								 effect.set_context_value("example_id", "example_string_value"))<br />
+							</code></div>
+
+							<h4>Example - Setting a numeric value:</h4>
+							<div id="example_code"><code>
+								 effect.set_context_value("example_id", 1.5))<br />
+							</code></div>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Common/ComponentContexts/CcoScriptObject.cpp, line 159</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:get_context_value"><h3 class="function_name"><strong><code>common.get_context_value([<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">object id</i><code><strong>], <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">function id</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Will look up the context object from the context cache or construct one with the type "context_object_typename" and the data (usually a CQI) from "construction_data", call the context function specified by context_function_id and return the value.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value="CcoScriptObject"</i></p>
+										<p>Context object id on which to call the function. If omitted, the function is called on the CcoScriptObject object.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Function id on the context object to call. This can also be an expression, but the result must return a context id.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>variable</code> return value of the function, type will be based on function called</li>
+							</ol>
+
+							<h4>Example - Query campaign character with cqi 123 for the context id of the associated military force:</h4>
+							<div id="example_code"><code>
+								 local cco_military_force = common.get_context_value("CcoCharacter", "1", "MilitaryForceContext")<br />
+							</code></div>
+
+							<h4>Example - Query without needing context object id (calling global functions):</h4>
+							<div id="example_code"><code>
+								 local root_object_id = effect.get_context_value("CampaignRoot")<br />
+							</code></div>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Common/ComponentContexts/CcoScriptObject.cpp, line 262</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:call_context_command"><h3 class="function_name"><strong><code>common.call_context_command([<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">object id</i><code><strong>], <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">function id</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Calls a specified function on a specified context object that makes changes to the game. This allows script to use the context system to modify the state of the game.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value="CcoScriptObject"</i></p>
+										<p>Context object id on which to call the function. If omitted, the function is called on the CcoScriptObject object.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Function id on the context object to call. This can be expression.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example - Toggles cinematics mode through the context system:</h4>
+							<div id="example_code"><code>
+								 effect.call_context_command("CcoBattleUnit", "1001", "ZoomTo")<br />
+							</code></div>
+
+							<h4>Example - Query without needing context object id (calling global functions):</h4>
+							<div id="example_code"><code>
+								 effect.call_context_command("BattleRoot.ToggleCinematicMode")<br />
+							</code></div>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Common/ComponentContexts/CcoScriptObject.cpp, line 336</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:common:Error Messages"><h2 class="section_header">Error Messages</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:common:show_error_with_callstack"><h3 class="function_name"><strong><code>common.show_error_with_callstack(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">error_msg</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Triggers an error dialog which contains callstack of calling lua, useful for debugging.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>error_msg</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 common.show_error_with_callstack("this is an error")<br />
+							</code></div>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Common/ComponentContexts/CcoScriptObject.cpp, line 363</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:common:show_error"><h3 class="function_name"><strong><code>common.show_error(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">error_msg</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Triggers an error dialog without any callstack.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>error_msg</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+
+							<h4>Example:</h4>
+							<div id="example_code"><code>
+								 common.show_error("this is an error")<br />
+							</code></div>
+							<p class="file_comment">defined in ../../common/UIDll/Source/Common/ComponentContexts/CcoScriptObject.cpp, line 384</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:58</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "campaign"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

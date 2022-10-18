@@ -1,0 +1,2604 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Narrative Query Templates</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#fff7cc" id="main">
+
+			<div style="background-color:#fff7cc" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Campaign Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#ffed8c">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search campaign only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#ffed8c">Game Areas</h2>
+				<ul>
+					<li><strong> > Campaign Index</strong></li>
+					<li><a href="../battle/battle_index.html">Battle Index</a></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#ffed8c">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:narrative_queries">Narrative Query Templates</a><img alt="Loaded in Campaign" style="float:right; margin-right:1em;" src="../images/loaded_in_campaign.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#function:narrative_queries:savegame_value_exists">savegame_value_exists</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_queries:narrative_event_has_triggered">narrative_event_has_triggered</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_queries:advice_history">advice_history</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_queries:advice_history_for_narrative_chain">advice_history_for_narrative_chain</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_queries:one_settlement_from_completing_province">one_settlement_from_completing_province</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_queries:controls_x_provinces">controls_x_provinces</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_queries:highest_level_settlement_for_faction">highest_level_settlement_for_faction</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_queries:is_researching">is_researching</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_queries:has_available_technologies">has_available_technologies</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_queries:has_income">has_income</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_queries:can_capture_territory">can_capture_territory</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_queries:can_recruit_any_hero">can_recruit_any_hero</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_queries:can_recruit_hero_of_type">can_recruit_hero_of_type</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_queries:contains_any_hero">contains_any_hero</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_queries:contains_any_hero_of_type">contains_any_hero_of_type</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_queries:corruption_in_adjacent_region">corruption_in_adjacent_region</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_queries:has_concocted_plagues">has_concocted_plagues</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_queries:has_non_aggression_pact">has_non_aggression_pact</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_queries:has_trade_agreement">has_trade_agreement</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_queries:has_defensive_alliance">has_defensive_alliance</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_queries:has_military_alliance">has_military_alliance</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_queries:has_pooled_resource">has_pooled_resource</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#fff7cc" id="navigation_right">				<h2 style="background-color:#ffed8c">Campaign Topics</h2>
+				<ul>
+					<li><a href="campaign_index.html">Campaign Index</a></li>
+					<li><a href="campaign_script_structure.html">Campaign Script Structure</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="narrative_system.html">Narrative System</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="campaignui.html">CampaignUI</a></li>
+					<li><a href="cinematics.html">Cinematics</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="episodic_scripting.html">Episodic Scripting</a></li>
+					<li><a href="model_hierarchy.html">Model Hierarchy</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Script Interfaces</h2>
+				<ul>
+					<li><a href="campaign_manager.html">Campaign Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="campaign_cutscene.html">Campaign Cutscenes</a></li>
+					<li><a href="campaign_ui_manager.html">Campaign UI Manager</a></li>
+					<li><a href="chapter_mission.html">Chapter Missions</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="intervention.html">Interventions</a></li>
+					<li><a href="invasion_manager.html">Invasion Manager</a></li>
+					<li><a href="mission_manager.html">Mission Managers</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="narrative_event.html">Narrative Events</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="payload.html">Payload String Constructor</a></li>
+					<li><a href="random_army_manager.html">Random Army Manager</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="unique_table.html">Unique Table</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Data Interfaces</h2>
+				<ul>
+					<li><a href="custom_starts.html">Campaign Custom Starts</a></li>
+					<li><a href="faction_intro.html">Faction Intro</a></li>
+					<li><a href="narrative.html">Narrative</a></li>
+					<li><a href="narrative_events.html">Narrative Event Templates</a></li>
+					<li><strong> > Narrative Query Templates</strong></li>
+					<li><a href="narrative_triggers.html">Narrative Trigger Templates</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:narrative_queries"><h1 class="content_header">Narrative Query Templates</h1></a>
+				<p>The <code>narrative_queries</code> table contains a list of narrative query templates that campaign scripts can use to create narrative queries. See the page on <code><a href="narrative.html#class:narrative">narrative</a></code> for an overview of the narrative event framework. See also the <code><a href="narrative_event.html#class:narrative_query">narrative_query</a></code> documentation for detailed information about the <code>narrative_query</code> object interface.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:narrative_queries:Functionality"><h2 class="section_header">Functionality</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_queries:savegame_value_exists"><h3 class="function_name"><strong><code>narrative_queries.savegame_value_exists(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">trigger message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">positive trigger message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">negative trigger message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">value key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">additional condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a narrative query that queries a value in the savegame, looked up by the supplied key, and acts upon the result. If the value exists then the positive trigger message(s) are fired, otherwise the negative trigger message(s) are fired, if any were supplied.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative queries.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative query applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative query should trigger. If multiple trigger messages are required a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Positive trigger message to fire if the saved value exists. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Negative trigger message to fire if the saved value does not exist. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of value to look up from the savegame. This is passed to <code><a href="campaign_manager.html#function:campaign_manager:get_saved_value">campaign_manager:get_saved_value</a></code> to retrieve the value.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Additional condition function which can force a positive or negative result. If supplied, the function is called with the context and narrative query objects passed in as separate functions. If it returns <code>true</code> then a positive result is forced, if <code>false</code> then a negative result is forced. If it returns any other value then no result is forced.</p>
+										<p>The condition function may also return a string as a second return value, which will be used for output.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 87</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_queries:narrative_event_has_triggered"><h3 class="function_name"><strong><code>narrative_queries.narrative_event_has_triggered(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">trigger message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">positive trigger message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">negative trigger message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">narrative event name</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">pass on all</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">additional condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a narrative query that queries whether a narrative event with the supplied name for the supplied faction has triggered in this savegame, and acts upon the result. If the narrative event has triggered then the positive trigger message(s) are fired, otherwise the negative trigger message(s) are fired, if any were supplied.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative queries.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative query applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative query should trigger. If multiple trigger messages are required a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Positive trigger message to fire if the saved value exists. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Negative trigger message to fire if the saved value does not exist. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Name of narrative event to query. This may also be a <code><a href="lua.html#class:table">table</a></code> of strings if multiple narrative events are to be queried.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Trigger the positive message if all specified narrative events have fired. If <code>false</code> or <code>nil</code> is supplied here then the positive message will be triggered if any of the specified narrative events have fired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>8</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Additional condition function which can force a positive or negative result. If supplied, the function is called with the context and narrative query objects passed in as separate functions. If it returns <code>true</code> then a positive result is forced, if <code>false</code> then a negative result is forced. If it returns any other value then no result is forced.</p>
+										<p>The condition function may also return a string as a second return value, which will be used for output.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 188</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_queries:advice_history"><h3 class="function_name"><strong><code>narrative_queries.advice_history(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">trigger message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">experienced message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">not experienced message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:table">table</a></code> </strong></code><i class="parameter">any advice strings</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:table">table</a></code> </strong></code><i class="parameter">all advice strings</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:table">table</a></code> </strong></code><i class="parameter">any advice keys</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:table">table</a></code> </strong></code><i class="parameter">all advice keys</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">additional condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a narrative query that queries the player's advice history against a supplied set of advice strings and advice keys when triggered.<br />
+							Up to four sets of data can be passed to the function, representing any advice strings, all advice strings, any advice keys and all advice keys. When the narrative query is triggered the data collections are checked in this order. Where they are present, their contents are checked and the advice-experienced message may be triggered.<br />
+							If all four collections are checked and the advice-experienced message has not been triggered, then the advice-not-experienced message is triggered (if one has been supplied).<br />
+							If triggered in multiplayer mode the narrative query always behaves as if the advice has been experienced, as the advice history will be different on different machines in a multiplayer game so it would not be safe to do otherwise.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative queries.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative query applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative query should trigger. If multiple trigger messages are required a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message to trigger if the player has experienced the supplied advice. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message to trigger if the player has not experienced the supplied advice. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Any advice strings table. When triggered, the narrative trigger will check the history of advice strings supplied in this table using the function <code><a href="common.html#function:common:get_advice_history_string_seen">common.get_advice_history_string_seen</a></code>. If any advice strings in this table have been experienced by the local player then the advice-experienced message is triggered.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>All advice strings table. When triggered, the narrative trigger will check the history of all advice keys supplied in this table using the function <code><a href="common.html#function:common:get_advice_history_string_seen">common.get_advice_history_string_seen</a></code>. If all advice strings in this table have been experienced by the local player then the advice-experienced message is triggered.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>8</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Any advice keys table. When triggered, the narrative trigger will check the history of advice keys supplied in this table using the function <code><a href="common.html#function:common:get_advice_thread_score">common.get_advice_thread_score</a></code>. If any advice items represented by keys in this table have been experienced by the local player then the advice-experienced message is triggered.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>9</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>All advice keys table. When triggered, the narrative trigger will check the history of all advice keys supplied in this table using the function <code><a href="common.html#function:common:get_advice_thread_score">common.get_advice_thread_score</a></code>. If all advice items represented by keys in this table have been experienced by the local player then the advice-experienced message is triggered.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>10</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Additional condition function which can force a positive or negative result. If supplied, the function is called with the context and narrative query objects passed in as separate functions. If it returns <code>true</code> then a positive result is forced, if <code>false</code> then a negative result is forced. If it returns any other value then no result is forced.</p>
+										<p>The condition function may also return a string as a second return value, which will be used for output.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 328</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_queries:advice_history_for_narrative_chain"><h3 class="function_name"><strong><code>narrative_queries.advice_history_for_narrative_chain(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">trigger message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">experienced message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">not experienced message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:table">table</a></code> </strong></code><i class="parameter">all advice strings</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">additional condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a narrative query that interrogates the player's advice history for a narrative chain. If all of the supplied set of advice keys or any of the supplied set of advice strings are in the advice history, or it's a multiplayer game, or the campaign difficulty is very hard or above, then the positive target message(s) are triggered. Otherwise, the negative target message(s) are triggered, if any have been supplied.<br />
+							If triggered in multiplayer mode the narrative query always behaves as if the advice has been experienced, as the advice history will be different on different machines in a multiplayer game so it would not be safe to do otherwise.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative queries.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative query applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative query should trigger. If multiple trigger messages are required a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Target message to trigger if the player has experienced the supplied advice. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Target message to trigger if the player has not experienced the supplied advice. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>All advice strings table. When triggered, the narrative trigger will check the history of advice strings supplied in this table using the function <code><a href="common.html#function:common:get_advice_history_string_seen">common.get_advice_history_string_seen</a></code>. If all advice strings in this table have been experienced by the local player then the advice-experienced message is triggered.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Additional condition function which can force a positive or negative result. If supplied, the function is called with the context and narrative query objects passed in as separate functions. If it returns <code>true</code> then a positive result is forced, if <code>false</code> then a negative result is forced. If it returns any other value then no result is forced.</p>
+										<p>The condition function may also return a string as a second return value, which will be used for output.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 356</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_queries:one_settlement_from_completing_province"><h3 class="function_name"><strong><code>narrative_queries.one_settlement_from_completing_province(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">trigger message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">positive message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">negative message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">additional condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a narrative query that queries the specified faction's territorial holdings and acts upon the result. Should the faction be exactly one settlement away from complete control of any province the positive message(s) are fired. Otherwise, the negative message(s) are fired, if any were supplied.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative queries.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative query applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative query should trigger. If multiple trigger messages are required a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message to trigger if the faction is one settlement from completing a province. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message to trigger if the faction is not one settlement from completing a province. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Additional condition function which can force a positive or negative result. If supplied, the function is called with the context and narrative query objects passed in as separate functions. If it returns <code>true</code> then a positive result is forced, if <code>false</code> then a negative result is forced. If it returns any other value then no result is forced.</p>
+										<p>The condition function may also return a string as a second return value, which will be used for output.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 490</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_queries:controls_x_provinces"><h3 class="function_name"><strong><code>narrative_queries.controls_x_provinces(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">trigger message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">positive message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">negative message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">provinces</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">additional condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a narrative query that queries the specified faction's territorial holdings and acts upon the result. Should the faction already fully control at least the supplied number of provinces then the positive message(s) are fired. Otherwise, the negative message(s) are fired, if any were supplied.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative queries.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative query applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative query should trigger. If multiple trigger messages are required a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message to trigger if the faction is one settlement from completing a province. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message to trigger if the faction is not one settlement from completing a province. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Number of provinces the faction has to fully control for the positive message to be forced.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Additional condition function which can force a positive or negative result. If supplied, the function is called with the context and narrative query objects passed in as separate functions. If it returns <code>true</code> then a positive result is forced, if <code>false</code> then a negative result is forced. If it returns any other value then no result is forced.</p>
+										<p>The condition function may also return a string as a second return value, which will be used for output.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 579</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_queries:highest_level_settlement_for_faction"><h3 class="function_name"><strong><code>narrative_queries.highest_level_settlement_for_faction(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">trigger message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">positive message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">negative message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">query level</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">additional condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a narrative query that queries the specified faction's highest-level settlement and acts on the result. Should the level of the highest-level settlement be equal to or greater than the supplied query level then the positive message(s) are fired. Otherwise, the negative message(s) are fired, if any were supplied.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative queries.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative query applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative query should trigger. If multiple trigger messages are required a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message to trigger if the faction has a settlement at or above the query level. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message to trigger if the faction does not have a settlement at or above the query level. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Minimum level the highest-level settlement of the faction must be in order to trigger the positive result message(s).</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Additional condition function which can force a positive or negative result. If supplied, the function is called with the context and narrative query objects passed in as separate functions. If it returns <code>true</code> then a positive result is forced, if <code>false</code> then a negative result is forced. If it returns any other value then no result is forced.</p>
+										<p>The condition function may also return a string as a second return value, which will be used for output.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 673</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_queries:is_researching"><h3 class="function_name"><strong><code>narrative_queries.is_researching(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">trigger message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">positive message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">negative message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">additional condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a narrative query that queries whether the specified faction is currently researching a technology and acts on the result.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative queries.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative query applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative query should trigger. If multiple trigger messages are required a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message to trigger if the faction is currently researching a technology. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message to trigger if the faction is not currently researching a technology. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Additional condition function which can force a positive or negative result. If supplied, the function is called with the context and narrative query objects passed in as separate functions. If it returns <code>true</code> then a positive result is forced, if <code>false</code> then a negative result is forced. If it returns any other value then no result is forced.</p>
+										<p>The condition function may also return a string as a second return value, which will be used for output.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 748</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_queries:has_available_technologies"><h3 class="function_name"><strong><code>narrative_queries.has_available_technologies(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">trigger message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">positive message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">negative message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">additional condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a narrative query that queries whether the specified faction currently has technologies available for research and acts on the result.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative queries.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative query applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative query should trigger. If multiple trigger messages are required a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message to trigger if the faction has technologies available. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message to trigger if the faction does not have technologies available. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Additional condition function which can force a positive or negative result. If supplied, the function is called with the context and narrative query objects passed in as separate functions. If it returns <code>true</code> then a positive result is forced, if <code>false</code> then a negative result is forced. If it returns any other value then no result is forced.</p>
+										<p>The condition function may also return a string as a second return value, which will be used for output.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 819</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_queries:has_income"><h3 class="function_name"><strong><code>narrative_queries.has_income(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">trigger message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">positive message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">negative message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">income</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">additional condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a narrative query that queries whether the specified faction currently has an income level above the specified amount and acts on the result.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative queries.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative query applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative query should trigger. If multiple trigger messages are required a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message to trigger if the faction has the required income. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message to trigger if the faction does not have the required income. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Income amount.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Additional condition function which can force a positive or negative result. If supplied, the function is called with the context and narrative query objects passed in as separate functions. If it returns <code>true</code> then a positive result is forced, if <code>false</code> then a negative result is forced. If it returns any other value then no result is forced.</p>
+										<p>The condition function may also return a string as a second return value, which will be used for output.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 894</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_queries:can_capture_territory"><h3 class="function_name"><strong><code>narrative_queries.can_capture_territory(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">trigger message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">positive message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">negative message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">additional condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a narrative query that queries whether the specified faction can capture territory, and acts on the result. If the faction cannot capture territory they are presumably a horde faction. If the faction can capture territory then the positive trigger message(s) are fired, otherwise the negative trigger message(s) are fired.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative queries.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative query applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative query should trigger. If multiple trigger messages are required a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message to trigger if the faction can capture territory. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message to trigger if the faction cannot capture territory. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Additional condition function which can force a positive or negative result. If supplied, the function is called with the context and narrative query objects passed in as separate functions. If it returns <code>true</code> then a positive result is forced, if <code>false</code> then a negative result is forced. If it returns any other value then no result is forced.</p>
+										<p>The condition function may also return a string as a second return value, which will be used for output.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 968</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_queries:can_recruit_any_hero"><h3 class="function_name"><strong><code>narrative_queries.can_recruit_any_hero(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">trigger message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">positive message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">negative message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">additional condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a narrative query that queries whether the specified faction can recruit any hero and acts on the result. If the faction can recruit a hero then the positive trigger message(s) are fired, otherwise the negative trigger message(s) are fired.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative queries.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative query applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative query should trigger. If multiple trigger messages are required a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message to trigger if the faction can recruit a hero. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message to trigger if the faction cannot recruit a hero. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Additional condition function which can force a positive or negative result. If supplied, the function is called with the context and narrative query objects passed in as separate functions. If it returns <code>true</code> then a positive result is forced, if <code>false</code> then a negative result is forced. If it returns any other value then no result is forced.</p>
+										<p>The condition function may also return a string as a second return value, which will be used for output.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1048</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_queries:can_recruit_hero_of_type"><h3 class="function_name"><strong><code>narrative_queries.can_recruit_hero_of_type(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">trigger message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">positive message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">negative message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:table">table</a></code> </strong></code><i class="parameter">hero types</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">additional condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a narrative query that queries whether the specified faction can recruit a hero of the supplied list of types, and acts on the result. If the faction can recruit a hero then the positive trigger message(s) are fired, otherwise the negative trigger message(s) are fired.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative queries.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative query applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative query should trigger. If multiple trigger messages are required a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message to trigger if the faction can recruit a hero. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message to trigger if the faction cannot recruit a hero. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Indexed table of string hero types. If no table is supplied then all hero types are matched.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Additional condition function which can force a positive or negative result. If supplied, the function is called with the context and narrative query objects passed in as separate functions. If it returns <code>true</code> then a positive result is forced, if <code>false</code> then a negative result is forced. If it returns any other value then no result is forced.</p>
+										<p>The condition function may also return a string as a second return value, which will be used for output.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1066</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_queries:contains_any_hero"><h3 class="function_name"><strong><code>narrative_queries.contains_any_hero(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">trigger message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">positive message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">negative message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">additional condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a narrative query that queries whether the specified faction contains any hero, and acts on the result. If the faction contains any heroes then the positive trigger message(s) are fired, otherwise the negative trigger message(s) are fired.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative queries.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative query applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative query should trigger. If multiple trigger messages are required a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message to trigger if the faction can recruit a hero. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message to trigger if the faction cannot recruit a hero. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Additional condition function which can force a positive or negative result. If supplied, the function is called with the context and narrative query objects passed in as separate functions. If it returns <code>true</code> then a positive result is forced, if <code>false</code> then a negative result is forced. If it returns any other value then no result is forced.</p>
+										<p>The condition function may also return a string as a second return value, which will be used for output.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1145</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_queries:contains_any_hero_of_type"><h3 class="function_name"><strong><code>narrative_queries.contains_any_hero_of_type(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">trigger message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">positive message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">negative message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:table">table</a></code> </strong></code><i class="parameter">hero types</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">additional condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a narrative query that queries whether the specified faction contains heroes of the specified type(s), and acts on the result. If the faction contains any matching heroes then the positive trigger message(s) are fired, otherwise the negative trigger message(s) are fired.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative queries.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative query applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative query should trigger. If multiple trigger messages are required a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message to trigger if the faction can recruit a hero. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message to trigger if the faction cannot recruit a hero. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:table">table</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Indexed table of string character types to test against. If the specified faction contains any heroes matching any of the supplied types then a positive result is returned.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Additional condition function which can force a positive or negative result. If supplied, the function is called with the context and narrative query objects passed in as separate functions. If it returns <code>true</code> then a positive result is forced, if <code>false</code> then a negative result is forced. If it returns any other value then no result is forced.</p>
+										<p>The condition function may also return a string as a second return value, which will be used for output.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1163</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_queries:corruption_in_adjacent_region"><h3 class="function_name"><strong><code>narrative_queries.corruption_in_adjacent_region(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">trigger message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">positive message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">negative message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">corruption key</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">culture key</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">corruption type</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">threshold value</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">additional condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a narrative query that queries whether any regions adjacent to the specified faction contain corruption of the specified type equal to or above the supplied threshold, and acts on the result. If any adjacent region meets the corruption threshold then the positive trigger message(s) are fired, otherwise the negative trigger message(s) are fired.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative queries.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative query applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative query should trigger. If multiple trigger messages are required a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message to trigger if the faction can recruit a hero. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message to trigger if the faction cannot recruit a hero. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message to trigger if the faction cannot recruit a hero. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Culture key of region owner to exclude. If an eligible region has a faction owner with this culture, the region will not be included.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>8</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Corruption type, from the <code>pooled_resources</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>9</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Threshold value which the corruption must meet or exceed in an adjacent region for the query to pass.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>10</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Additional condition function which can force a positive or negative result. If supplied, the function is called with the context and narrative query objects passed in as separate functions. If it returns <code>true</code> then a positive result is forced, if <code>false</code> then a negative result is forced. If it returns any other value then no result is forced.</p>
+										<p>The condition function may also return a string as a second return value, which will be used for output.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1266</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_queries:has_concocted_plagues"><h3 class="function_name"><strong><code>narrative_queries.has_concocted_plagues(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">trigger message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">positive message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">negative message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">plagues</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">additional condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a narrative query that queries whether the specified faction has concocted a threshold number of Nurgle plagues, and acts on the result.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative queries.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative query applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative query should trigger. If multiple trigger messages are required a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message to trigger if the faction can capture territory. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message to trigger if the faction cannot capture territory. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=1</i></p>
+										<p>THreshold number of plagues.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Additional condition function which can force a positive or negative result. If supplied, the function is called with the context and narrative query objects passed in as separate functions. If it returns <code>true</code> then a positive result is forced, if <code>false</code> then a negative result is forced. If it returns any other value then no result is forced.</p>
+										<p>The condition function may also return a string as a second return value, which will be used for output.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1342</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_queries:has_non_aggression_pact"><h3 class="function_name"><strong><code>narrative_queries.has_non_aggression_pact(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">trigger message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">positive message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">negative message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target faction</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target culture</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target subculture</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">additional condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a narrative query that queries whether the specified faction has a non-aggression pact. Zero or more faction keys, faction culture keys or faction subculture keys may be specified. Should the subject faction have a non-aggression pact with any of the specified factions/cultures/subcultures, or should they have a non-aggression pact with any faction if no filters are specified, then the query will return a positive result.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative queries.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative query applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative query should trigger. If multiple trigger messages are required a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message to trigger if the faction can capture territory. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message to trigger if the faction cannot capture territory. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Faction key of a target faction which the subject should have an agreement with, from the <code>factions</code> database table. A <code><a href="lua.html#class:table">table</a></code> of string faction keys may be specified if more than one target faction is desired. In this case, the query passes if an agreement exists with any of the target factions in the list.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Culture key of a target faction which the subject should have an agreement with, from the <code>cultures</code> database table. A <code><a href="lua.html#class:table">table</a></code> of string culture keys may be specified if more than one target culture is desired. In this case, the query passes if an agreement exists with a faction of any of the target cultures in the list.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>8</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Subculture key of a target faction which the subject should have an agreement with, from the <code>cultures_subcultures</code> database table. A <code><a href="lua.html#class:table">table</a></code> of string subculture keys may be specified if more than one target subculture is desired. In this case, the query passes if an agreement exists with a faction of any of the target subcultures in the list.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>9</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Additional condition function which can force a positive or negative result. If supplied, the function is called with the context and narrative query objects passed in as separate functions. If it returns <code>true</code> then a positive result is forced, if <code>false</code> then a negative result is forced. If it returns any other value then no result is forced.</p>
+										<p>The condition function may also return a string as a second return value, which will be used for output.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1511</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_queries:has_trade_agreement"><h3 class="function_name"><strong><code>narrative_queries.has_trade_agreement(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">trigger message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">positive message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">negative message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target faction</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target culture</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target subculture</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">additional condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a narrative query that queries whether the specified faction has a trade agreement. Zero or more faction keys, faction culture keys or faction subculture keys may be specified. Should the subject faction have a trade agreement with any of the specified factions/cultures/subcultures, or should they have a trade agreement with any faction if no filters are specified, then the query will return a positive result.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative queries.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative query applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative query should trigger. If multiple trigger messages are required a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message to trigger if the faction can capture territory. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message to trigger if the faction cannot capture territory. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Faction key of a target faction which the subject should have an agreement with, from the <code>factions</code> database table. A <code><a href="lua.html#class:table">table</a></code> of string faction keys may be specified if more than one target faction is desired. In this case, the query passes if an agreement exists with any of the target factions in the list.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Culture key of a target faction which the subject should have an agreement with, from the <code>cultures</code> database table. A <code><a href="lua.html#class:table">table</a></code> of string culture keys may be specified if more than one target culture is desired. In this case, the query passes if an agreement exists with a faction of any of the target cultures in the list.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>8</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Subculture key of a target faction which the subject should have an agreement with, from the <code>cultures_subcultures</code> database table. A <code><a href="lua.html#class:table">table</a></code> of string subculture keys may be specified if more than one target subculture is desired. In this case, the query passes if an agreement exists with a faction of any of the target subcultures in the list.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>9</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Additional condition function which can force a positive or negative result. If supplied, the function is called with the context and narrative query objects passed in as separate functions. If it returns <code>true</code> then a positive result is forced, if <code>false</code> then a negative result is forced. If it returns any other value then no result is forced.</p>
+										<p>The condition function may also return a string as a second return value, which will be used for output.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1620</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_queries:has_defensive_alliance"><h3 class="function_name"><strong><code>narrative_queries.has_defensive_alliance(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">trigger message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">positive message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">negative message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target faction</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target culture</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target subculture</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">additional condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a narrative query that queries whether the specified faction has a defensive alliance. Zero or more faction keys, faction culture keys or faction subculture keys may be specified. Should the subject faction have a defensive alliance with any of the specified factions/cultures/subcultures, or should they have a defensive alliance with any faction if no filters are specified, then the query will return a positive result.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative queries.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative query applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative query should trigger. If multiple trigger messages are required a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message to trigger if the faction can capture territory. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message to trigger if the faction cannot capture territory. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Faction key of a target faction which the subject should have an agreement with, from the <code>factions</code> database table. A <code><a href="lua.html#class:table">table</a></code> of string faction keys may be specified if more than one target faction is desired. In this case, the query passes if an agreement exists with any of the target factions in the list.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Culture key of a target faction which the subject should have an agreement with, from the <code>cultures</code> database table. A <code><a href="lua.html#class:table">table</a></code> of string culture keys may be specified if more than one target culture is desired. In this case, the query passes if an agreement exists with a faction of any of the target cultures in the list.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>8</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Subculture key of a target faction which the subject should have an agreement with, from the <code>cultures_subcultures</code> database table. A <code><a href="lua.html#class:table">table</a></code> of string subculture keys may be specified if more than one target subculture is desired. In this case, the query passes if an agreement exists with a faction of any of the target subcultures in the list.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>9</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Additional condition function which can force a positive or negative result. If supplied, the function is called with the context and narrative query objects passed in as separate functions. If it returns <code>true</code> then a positive result is forced, if <code>false</code> then a negative result is forced. If it returns any other value then no result is forced.</p>
+										<p>The condition function may also return a string as a second return value, which will be used for output.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1729</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_queries:has_military_alliance"><h3 class="function_name"><strong><code>narrative_queries.has_military_alliance(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">trigger message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">positive message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">negative message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target faction</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target culture</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target subculture</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">additional condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a narrative query that queries whether the specified faction has a military alliance. Zero or more faction keys, faction culture keys or faction subculture keys may be specified. Should the subject faction have a military alliance with any of the specified factions/cultures/subcultures, or should they have a military alliance with any faction if no filters are specified, then the query will return a positive result.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative queries.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative query applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative query should trigger. If multiple trigger messages are required a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message to trigger if the faction can capture territory. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message to trigger if the faction cannot capture territory. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Faction key of a target faction which the subject should have an agreement with, from the <code>factions</code> database table. A <code><a href="lua.html#class:table">table</a></code> of string faction keys may be specified if more than one target faction is desired. In this case, the query passes if an agreement exists with any of the target factions in the list.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Culture key of a target faction which the subject should have an agreement with, from the <code>cultures</code> database table. A <code><a href="lua.html#class:table">table</a></code> of string culture keys may be specified if more than one target culture is desired. In this case, the query passes if an agreement exists with a faction of any of the target cultures in the list.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>8</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Subculture key of a target faction which the subject should have an agreement with, from the <code>cultures_subcultures</code> database table. A <code><a href="lua.html#class:table">table</a></code> of string subculture keys may be specified if more than one target subculture is desired. In this case, the query passes if an agreement exists with a faction of any of the target subcultures in the list.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>9</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Additional condition function which can force a positive or negative result. If supplied, the function is called with the context and narrative query objects passed in as separate functions. If it returns <code>true</code> then a positive result is forced, if <code>false</code> then a negative result is forced. If it returns any other value then no result is forced.</p>
+										<p>The condition function may also return a string as a second return value, which will be used for output.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1838</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_queries:has_pooled_resource"><h3 class="function_name"><strong><code>narrative_queries.has_pooled_resource(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">trigger message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">positive message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">negative message</i><code><strong>], <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">pooled resource key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">threshold value</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">additional condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a narrative query that queries whether the value of one or more pooled resources for a specified faction is equal to or greater than a specified value. If more than one pooled resource is specified, then the query triggers its positive message if any of the pooled resources meet or exceed the threshold.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative queries.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative query applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative query should trigger. If multiple trigger messages are required a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message to trigger if the faction can capture territory. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message to trigger if the faction cannot capture territory. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Pooled resource key, from the <code>pooled resources</code> database table. If more than one pooled resource is to be queried then a <code><a href="lua.html#class:table">table</a></code> of strings may be specified here.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Threshold value, which the pooled resource should meet or exceed for the positive message to be triggered.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>8</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Additional condition function which can force a positive or negative result. If supplied, the function is called with the context and narrative query objects passed in as separate functions. If it returns <code>true</code> then a positive result is forced, if <code>false</code> then a negative result is forced. If it returns any other value then no result is forced.</p>
+										<p>The condition function may also return a string as a second return value, which will be used for output.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1941</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:58</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "campaign"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

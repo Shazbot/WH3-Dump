@@ -1,0 +1,953 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>reinforcements Reinforcements</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#e2edff" id="main">
+
+			<div style="background-color:#e2edff" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Battle Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#c1e6ff">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search battle only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#c1e6ff">Game Areas</h2>
+				<ul>
+					<li><a href="../campaign/campaign_index.html">Campaign Index</a></li>
+					<li><strong> > Battle Index</strong></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:battle_reinforcements">reinforcements Reinforcements</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:battle_reinforcements:Reinforcement Lines">Reinforcement Lines</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_reinforcements:attacker_reinforcement_line">attacker_reinforcement_line</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_reinforcements:attacker_reinforcement_lines_count">attacker_reinforcement_lines_count</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_reinforcements:defender_reinforcement_line">defender_reinforcement_line</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_reinforcements:defender_reinforcement_lines_count">defender_reinforcement_lines_count</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_reinforcements:Spawn Zones">Spawn Zones</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_reinforcements:spawn_zone">spawn_zone</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_reinforcements:spawn_zone_count">spawn_zone_count</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_reinforcements:Reinforcement Armies">Reinforcement Armies</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_reinforcements:reinforcement_army">reinforcement_army</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_reinforcements:reinforcement_army_count">reinforcement_army_count</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_reinforcements:reinforcement_army_for_army">reinforcement_army_for_army</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_reinforcements:random_spawn_zone">random_spawn_zone</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_reinforcements:Supporting Units">Supporting Units</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_reinforcements:set_cost_based_support_units_event">set_cost_based_support_units_event</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_reinforcements:unlock_support_units_event">unlock_support_units_event</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_reinforcements:lock_support_units_event">lock_support_units_event</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_reinforcements:link_support_units_event_with_capture_point">link_support_units_event_with_capture_point</a></li>
+					</ul>
+					<li><a href="#class:battle_reinforcement_line">Reinforcement Line</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:battle_reinforcement_line:Methods">Methods</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_reinforcement_line:script_id">script_id</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_reinforcement_line:enable_random_deployment_position">enable_random_deployment_position</a></li>
+					</ul>
+					<li><a href="#class:battle_spawn_zone">Spawn Zone</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:battle_spawn_zone:Methods">Methods</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_spawn_zone:unique_id">unique_id</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_spawn_zone:position">position</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_spawn_zone:has_reinforcement_line">has_reinforcement_line</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_spawn_zone:reinforcement_line">reinforcement_line</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_spawn_zone:can_be_used_by_alliance">can_be_used_by_alliance</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_spawn_zone:is_safe_for_alliance">is_safe_for_alliance</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_spawn_zone:highlight">highlight</a></li>
+					</ul>
+					<li><a href="#class:battle_reinforcement_army">Reinforcement Army</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:battle_reinforcement_army:Methods">Methods</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_reinforcement_army:army">army</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_reinforcement_army:target_army">target_army</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_reinforcement_army:assign_spawn_zone">assign_spawn_zone</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#e2edff" id="navigation_right">				<h2 style="background-color:#c1e6ff">Battle Topics</h2>
+				<ul>
+					<li><a href="battle_index.html">Battle Index</a></li>
+					<li><a href="battle_hierarchy.html">Battle Hierarchy</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="battle.html">Battle</a></li>
+					<li><a href="battle_alliances.html">Alliances</a></li>
+					<li><a href="battle_alliance.html">Alliance</a></li>
+					<li><a href="battle_armies.html">Armies</a></li>
+					<li><a href="battle_army.html">Army</a></li>
+					<li><a href="battle_units.html">Units</a></li>
+					<li><a href="battle_unit.html">Unit</a></li>
+					<li><a href="battle_unitcontroller.html">Unitcontroller</a></li>
+					<li><a href="ai_planner.html">AI Planners</a></li>
+					<li><a href="battle_assault_equipment.html">Assault Equipment</a></li>
+					<li><a href="battle_building.html">Building</a></li>
+					<li><a href="battle_buildings.html">Buildings</a></li>
+					<li><a href="battle_camera.html">Camera</a></li>
+					<li><a href="battle_capture_location.html">Capture Location</a></li>
+					<li><a href="battle_composite_scenes_system.html">Composite Scenes System</a></li>
+					<li><a href="battle_debug_drawing.html">Debug Drawing</a></li>
+					<li><strong> > reinforcements Reinforcements</strong></li>
+					<li><a href="battle_sound_effect.html">Sound Effects</a></li>
+					<li><a href="battle_subtitles.html">Subtitles</a></li>
+					<li><a href="battle_toggle_system.html">Toggle System</a></li>
+					<li><a href="battle_vector.html">Vector</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Script Interfaces</h2>
+				<ul>
+					<li><a href="battle_manager.html">Battle Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="advice_manager.html">Advice Manager</a></li>
+					<li><a href="battle_ui_manager.html">Battle UI Manager</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="cutscene.html">Battle Cutscenes</a></li>
+					<li><a href="generated_battle.html">Generated Battle</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="script_ai_planner.html">Script AI Planner</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="script_unit.html">Script Unit</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Data Interfaces</h2>
+				<ul>
+					<li><a href="st_helper.html">Scripted Tour Helpers</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:battle_reinforcements"><h1 class="content_header">reinforcements Reinforcements</h1></a>
+				<p>The <code>Reinforcements</code> collection object is a central interface through which other objects related to reinforcements can be accessed. A handle to the reinforcements object may be obtained by calling <code><a href="battle.html#function:battle:reinforcements">battle:reinforcements</a></code>.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_reinforcements:Reinforcement Lines"><h2 class="section_header">Reinforcement Lines</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_reinforcements:attacker_reinforcement_line"><h3 class="function_name"><strong><code>reinforcements:attacker_reinforcement_line(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">index</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the <code><a href="#class:battle_reinforcement_line">battle_reinforcement_line</a></code> at the specified index value in the attacker reinforcement lines list.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>index</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:battle_reinforcement_line">battle_reinforcement_line</a></code></code> reinforcement line</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptReinforcement.cpp, line 444</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_reinforcements:attacker_reinforcement_lines_count"><h3 class="function_name"><strong><code>reinforcements:attacker_reinforcement_lines_count()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the number of <code><a href="#class:battle_reinforcement_line">battle_reinforcement_line</a></code> objects in the attacker reinforcement lines list. 
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> count</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptReinforcement.cpp, line 462</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_reinforcements:defender_reinforcement_line"><h3 class="function_name"><strong><code>reinforcements:defender_reinforcement_line(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">index</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the <code><a href="#class:battle_reinforcement_line">battle_reinforcement_line</a></code> at the specified index value in the defender reinforcement lines list.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>index</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:battle_reinforcement_line">battle_reinforcement_line</a></code></code> reinforcement line</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptReinforcement.cpp, line 479</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_reinforcements:defender_reinforcement_lines_count"><h3 class="function_name"><strong><code>reinforcements:defender_reinforcement_lines_count()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the number of <code><a href="#class:battle_reinforcement_line">battle_reinforcement_line</a></code> objects in the defender reinforcement lines list.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> count</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptReinforcement.cpp, line 497</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_reinforcements:Spawn Zones"><h2 class="section_header">Spawn Zones</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_reinforcements:spawn_zone"><h3 class="function_name"><strong><code>reinforcements:spawn_zone(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">index</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the <code><a href="#class:battle_spawn_zone">battle_spawn_zone</a></code> at the specified index value in the spawn zone list.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>index</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:battle_spawn_zone">battle_spawn_zone</a></code></code> spawn zone</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptReinforcement.cpp, line 516</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_reinforcements:spawn_zone_count"><h3 class="function_name"><strong><code>reinforcements:spawn_zone_count()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the number of <code><a href="#class:battle_spawn_zone">battle_spawn_zone</a></code> objects in the spawn zone list. 
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> count</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptReinforcement.cpp, line 532</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_reinforcements:Reinforcement Armies"><h2 class="section_header">Reinforcement Armies</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_reinforcements:reinforcement_army"><h3 class="function_name"><strong><code>reinforcements:reinforcement_army(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">index</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the <code><a href="#class:battle_reinforcement_army">battle_reinforcement_army</a></code> at the specified index value in the reinforcement army list.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>index</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:battle_reinforcement_army">battle_reinforcement_army</a></code></code> reinforcement army</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptReinforcement.cpp, line 551</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_reinforcements:reinforcement_army_count"><h3 class="function_name"><strong><code>reinforcements:reinforcement_army_count()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the number of <code><a href="#class:battle_reinforcement_army">battle_reinforcement_army</a></code> objects in the reinforcement army list.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> count</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptReinforcement.cpp, line 567</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_reinforcements:reinforcement_army_for_army"><h3 class="function_name"><strong><code>reinforcements:reinforcement_army_for_army(<code><a href="battle_army.html#class:battle_army">battle_army</a></code> </strong></code><i class="parameter">army</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a <code><a href="#class:battle_reinforcement_army">battle_reinforcement_army</a></code> object associated with the supplied <code><a href="battle_army.html#class:battle_army">battle_army</a></code>. If no <code><a href="#class:battle_reinforcement_army">battle_reinforcement_army</a></code> is associated with the supplied army (e.g. it's not a reinforcing army) then nothing will be returned.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_army.html#class:battle_army">battle_army</a></code></code></p>
+									</td>
+									<td>
+										<p>army</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:battle_reinforcement_army">battle_reinforcement_army</a></code></code> reinforcement army</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptReinforcement.cpp, line 584</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_reinforcements:random_spawn_zone"><h3 class="function_name"><strong><code>reinforcements:random_spawn_zone(... </strong></code><i class="parameter">spawn zones</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Randomly selects and returns a spawn zone among those provided, weighting the selection based on their actual width.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>...</code></p>
+									</td>
+									<td>
+										<p>One or more <code><a href="#class:battle_spawn_zone">battle_spawn_zone</a></code> objects specified as separate arguments.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> spawn zone id</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptReinforcement.cpp, line 605</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_reinforcements:Supporting Units"><h2 class="section_header">Supporting Units</h2></a>
+				</div>
+				<p>In certain battles such as survival battles, reinforcement currency can be spent by the player to bring reinforcements on to the battlefield at a time of their choosing. Reinforcement currency can be added for the player through script using the functions below.</p>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_reinforcements:set_cost_based_support_units_event"><h3 class="function_name"><strong><code>reinforcements:set_cost_based_support_units_event(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">event name</i><code><strong>, <code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">currency</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a event that adds currency that the player can spend on reinforcing units. The event will not actually be applied until <code><a href="#function:battle_reinforcements:unlock_support_units_event">reinforcements:unlock_support_units_event</a></code> is called.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Event name.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>Currency to add when the event is unlocked.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptReinforcement.cpp, line 648</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_reinforcements:unlock_support_units_event"><h3 class="function_name"><strong><code>reinforcements:unlock_support_units_event(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">event name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Applies a supporting-units event with the supplied name, granting the reinforcement currency amount associated with the event to the player. The event should have been previously set up with <code><a href="#function:battle_reinforcements:set_cost_based_support_units_event">reinforcements:set_cost_based_support_units_event</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>event name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptReinforcement.cpp, line 668</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_reinforcements:lock_support_units_event"><h3 class="function_name"><strong><code>reinforcements:lock_support_units_event(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">event name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Locks a supporting-units event with the supplied name, granting the reinforcement currency amount associated with the event to the player. The event should have been previously set up with <code><a href="#function:battle_reinforcements:set_cost_based_support_units_event">reinforcements:set_cost_based_support_units_event</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>event name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptReinforcement.cpp, line 685</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_reinforcements:link_support_units_event_with_capture_point"><h3 class="function_name"><strong><code>reinforcements:link_support_units_event_with_capture_point(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">event_name</i><code><strong>, <br />&emsp;&emsp;<code><a href="battle_capture_location.html#class:battle_capture_location">battle_capture_location</a></code> </strong></code><i class="parameter">capture_location</i><code><strong><br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Links a capture point with an unlocking support units event, that way we can show in the CP tooltip The event should have been previously set up with <code><a href="#function:battle_reinforcements:set_cost_based_support_units_event">reinforcements:set_cost_based_support_units_event</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>event_name</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_capture_location.html#class:battle_capture_location">battle_capture_location</a></code></code></p>
+									</td>
+									<td>
+										<p>capture_location</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptReinforcement.cpp, line 702</p>
+						</dd>
+					</dl>
+				</div>
+
+				<hr class="superblock_divider" />
+
+
+				<a name="class:battle_reinforcement_line"><h1 class="content_header">Reinforcement Line</h1></a>
+				<p>A reinforcement line is a logical line drawn in the map data along which armies reinforce. A reinforcement line is contained within a <code><a href="#class:battle_spawn_zone">battle_spawn_zone</a></code>.</p>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_reinforcement_line:Methods"><h2 class="section_header">Methods</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_reinforcement_line:script_id"><h3 class="function_name"><strong><code>reinforcement_line:script_id()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the script_id of the reinforcement line. This can be set in the map data and facilitates scripted <code><a href="battle_army.html#class:battle_army">battle_army</a></code> objects spawning in particular spawn zones.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> script_id</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptReinforcement.cpp, line 92</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_reinforcement_line:enable_random_deployment_position"><h3 class="function_name"><strong><code>reinforcement_line:enable_random_deployment_position()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Enables random deployment position along the reinforcement line. With this mode enabled on the reinforcement line, units will enter the battlefield at random locations along the line rather than from left to right in a uniform fashion.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptReinforcement.cpp, line 112</p>
+						</dd>
+					</dl>
+				</div>
+
+				<hr class="superblock_divider" />
+
+
+				<a name="class:battle_spawn_zone"><h1 class="content_header">Spawn Zone</h1></a>
+				<p>Spawn Zones are areas in which reinforcing armies may spawn and enter the battlefield. Handles to spawn zones may be attained through the relevant commands on the <code><a href="#class:battle_reinforcements">battle_reinforcements</a></code> object. A reinforcing army may be assigned to a spawn zone with <code><a href="#function:battle_reinforcement_army:assign_spawn_zone">reinforcement_army:assign_spawn_zone</a></code>.</p>
+				<p>Each spawn zone can contain a <code><a href="#class:battle_reinforcement_line">battle_reinforcement_line</a></code>, which is a line within the spawn zone which determines where units line up.</p>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_spawn_zone:Methods"><h2 class="section_header">Methods</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_spawn_zone:unique_id"><h3 class="function_name"><strong><code>spawn_zone:unique_id()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the unique numerical id of the spawn zone.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:number">number</a></code></code> unique id</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptReinforcement.cpp, line 168</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_spawn_zone:position"><h3 class="function_name"><strong><code>spawn_zone:position()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the authored position of the spawn zone.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="battle_vector.html#class:battle_vector">battle_vector</a></code></code> position</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptReinforcement.cpp, line 186</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_spawn_zone:has_reinforcement_line"><h3 class="function_name"><strong><code>spawn_zone:has_reinforcement_line()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns if the spawn zone contains a <code><a href="#class:battle_reinforcement_line">battle_reinforcement_line</a></code>.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> has reinforcement line</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptReinforcement.cpp, line 204</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_spawn_zone:reinforcement_line"><h3 class="function_name"><strong><code>spawn_zone:reinforcement_line()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the <code><a href="#class:battle_reinforcement_line">battle_reinforcement_line</a></code> linked with the spawn zone. If no reinforcement line is linked then nothing is returned.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="#class:battle_reinforcement_line">battle_reinforcement_line</a></code></code> reinforcement line</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptReinforcement.cpp, line 228</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_spawn_zone:can_be_used_by_alliance"><h3 class="function_name"><strong><code>spawn_zone:can_be_used_by_alliance(<code><a href="battle_alliance.html#class:battle_alliance">battle_alliance</a></code> </strong></code><i class="parameter">alliance</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the spawn zone can be used by the supplied <code><a href="battle_alliance.html#class:battle_alliance">battle_alliance</a></code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_alliance.html#class:battle_alliance">battle_alliance</a></code></code></p>
+									</td>
+									<td>
+										<p>alliance</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> can be used</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptReinforcement.cpp, line 254</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_spawn_zone:is_safe_for_alliance"><h3 class="function_name"><strong><code>spawn_zone:is_safe_for_alliance(<code><a href="battle_alliance.html#class:battle_alliance">battle_alliance</a></code> </strong></code><i class="parameter">alliance</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the spawn zone is safe for the <code><a href="battle_alliance.html#class:battle_alliance">battle_alliance</a></code>. A safe spawn zone is one in which forces of that alliance outnumber any enemy.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_alliance.html#class:battle_alliance">battle_alliance</a></code></code></p>
+									</td>
+									<td>
+										<p>alliance</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is safe</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptReinforcement.cpp, line 275</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_spawn_zone:highlight"><h3 class="function_name"><strong><code>spawn_zone:highlight()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Activates or deactivates a highlight on the spawn zone.<br />
+							[opt=true] <code><a href="lua.html#class:boolean">boolean</a></code> show highlight
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptReinforcement.cpp, line 296</p>
+						</dd>
+					</dl>
+				</div>
+
+				<hr class="superblock_divider" />
+
+
+				<a name="class:battle_reinforcement_army"><h1 class="content_header">Reinforcement Army</h1></a>
+				<p>A reinforcement army wraps any <code><a href="battle_army.html#class:battle_army">battle_army</a></code> that is waiting to come on as a reinforcement, and serves as its interface to manage the process of doing so. Armies waiting to come on to the battlefield may be manipulated through this interface. Handles to reinforcement army objects can be sought from the relevant functions on the <code><a href="#class:battle_reinforcements">battle_reinforcements</a></code> interface.</p>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_reinforcement_army:Methods"><h2 class="section_header">Methods</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_reinforcement_army:army"><h3 class="function_name"><strong><code>reinforcement_army:army()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the <code><a href="battle_army.html#class:battle_army">battle_army</a></code> this reinforcement army is associated with. The units within this contained army are waiting to come on as reinforcements.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="battle_army.html#class:battle_army">battle_army</a></code></code> associated army</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptReinforcement.cpp, line 367</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_reinforcement_army:target_army"><h3 class="function_name"><strong><code>reinforcement_army:target_army()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the <code><a href="battle_army.html#class:battle_army">battle_army</a></code> this reinforcement army targets. Units within this reinforcement army will be moved into the target army as they enter the battlefield.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="battle_army.html#class:battle_army">battle_army</a></code></code> target army</li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptReinforcement.cpp, line 379</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_reinforcement_army:assign_spawn_zone"><h3 class="function_name"><strong><code>reinforcement_army:assign_spawn_zone(<code><a href="#class:battle_spawn_zone">battle_spawn_zone</a></code> </strong></code><i class="parameter">spawn zone</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Assigns the reinforcement army to a supplied spawn zone. This controls where the reinforcing units will appear on the battlefield when they reinforce.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="#class:battle_spawn_zone">battle_spawn_zone</a></code></code></p>
+									</td>
+									<td>
+										<p>spawn zone</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../common/EmpireBattle/Source/BattleScript/BattleScriptReinforcement.cpp, line 391</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:59</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "battle"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

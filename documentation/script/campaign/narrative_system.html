@@ -1,0 +1,323 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Narrative System</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#fff7cc" id="main">
+
+			<div style="background-color:#fff7cc" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Campaign Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#ffed8c">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search campaign only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#ffed8c">Game Areas</h2>
+				<ul>
+					<li><strong> > Campaign Index</strong></li>
+					<li><a href="../battle/battle_index.html">Battle Index</a></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#ffed8c">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:narrative_system">Narrative System</a><img alt="Loaded in Campaign" style="float:right; margin-right:1em;" src="../images/loaded_in_campaign.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:narrative_system:Overview">Overview</a></li>
+						<li>&emsp;&emsp;<a href="#section:narrative_system:Script Messages">Script Messages</a></li>
+						<li>&emsp;&emsp;<a href="#section:narrative_system:Framework Structure">Framework Structure</a></li>
+						<li>&emsp;&emsp;<a href="#section:narrative_system:Example Narrative Chain">Example Narrative Chain</a></li>
+						<li>&emsp;&emsp;<a href="#section:narrative_system:Narrative Event Templates">Narrative Event Templates</a></li>
+						<li>&emsp;&emsp;<a href="#section:narrative_system:Overriding Default Data">Overriding Default Data</a></li>
+						<li>&emsp;&emsp;<a href="#section:narrative_system:Multiplayer Considerations">Multiplayer Considerations</a></li>
+						<li>&emsp;&emsp;<a href="#section:narrative_system:Saving and Loading Considerations">Saving and Loading Considerations</a></li>
+						<li>&emsp;&emsp;<a href="#section:narrative_system:Debug Output">Debug Output</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#fff7cc" id="navigation_right">				<h2 style="background-color:#ffed8c">Campaign Topics</h2>
+				<ul>
+					<li><a href="campaign_index.html">Campaign Index</a></li>
+					<li><a href="campaign_script_structure.html">Campaign Script Structure</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><strong> > Narrative System</strong></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="campaignui.html">CampaignUI</a></li>
+					<li><a href="cinematics.html">Cinematics</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="episodic_scripting.html">Episodic Scripting</a></li>
+					<li><a href="model_hierarchy.html">Model Hierarchy</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Script Interfaces</h2>
+				<ul>
+					<li><a href="campaign_manager.html">Campaign Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="campaign_cutscene.html">Campaign Cutscenes</a></li>
+					<li><a href="campaign_ui_manager.html">Campaign UI Manager</a></li>
+					<li><a href="chapter_mission.html">Chapter Missions</a></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="intervention.html">Interventions</a></li>
+					<li><a href="invasion_manager.html">Invasion Manager</a></li>
+					<li><a href="mission_manager.html">Mission Managers</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="narrative_event.html">Narrative Events</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="payload.html">Payload String Constructor</a></li>
+					<li><a href="random_army_manager.html">Random Army Manager</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="unique_table.html">Unique Table</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#ffed8c">Data Interfaces</h2>
+				<ul>
+					<li><a href="custom_starts.html">Campaign Custom Starts</a></li>
+					<li><a href="faction_intro.html">Faction Intro</a></li>
+					<li><a href="narrative.html">Narrative</a></li>
+					<li><a href="narrative_events.html">Narrative Event Templates</a></li>
+					<li><a href="narrative_queries.html">Narrative Query Templates</a></li>
+					<li><a href="narrative_triggers.html">Narrative Trigger Templates</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:narrative_system"><h1 class="content_header">Narrative System</h1></a>
+				<p>This page provides an overview of narrative events and related objects, and how they can assist with the creation of campaign narrative. More information can be found in the documentation for <code><a href="narrative_event.html#class:narrative_event">narrative_event</a></code>, <code><a href="narrative_event.html#class:narrative_query">narrative_query</a></code> and <code><a href="narrative_event.html#class:narrative_trigger">narrative_trigger</a></code> objects.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Relevant in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Relevant in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Relevant in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:narrative_system:Overview"><h2 class="section_header">Overview</h2></a>
+				</div>
+				<p>The narrative event framework is a toolkit for use when producing scripted narrative content in campaign. As a player progresses through a particular campaign playthrough it’s common for them to fulfil game conditions and reach narrative checkpoints where scripted experiences such as cutscenes, fullscreen movies, dilemmas or missions occur. Historic examples include:<ul></p>
+				<p><li>The Mongol Invasion in Medieval.</li></p>
+				<p><li>Realm Divide in Shogun 2.</li></p>
+				<p><li>Climate change in Attile.</li></p>
+				<p><li>The Chaos Invasion in Warhammer.</li></p>
+				<p><li>Vortex narrative events in Warhammer 2.</li></ul></p>
+				<p>Scripts such as these can get complicated to write. The narrative event framework aims to help manage these complexities.</p>
+				<p>The narrative event framework can also be used to produce other content-delivery structures, such as early-game missions and chapter missions. Early-game missions are missions that are delivered towards the start of a particular campaign playthrough, with the twin aim of a) giving the player some optional initial direction, and b) driving the player’s awareness of game features. In general, the framework can be used to help produce content which is delivered to the player mid-campaign, once, when a known set of criteria are met.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:narrative_system:Script Messages"><h2 class="section_header">Script Messages</h2></a>
+				</div>
+				<p>It is intended for components within the narrative event framework to chain from one to another. For example, one mission may issue when another completes, or one mission may issue two turns after a second. The communication between narrative event components is handled with script messages.</p>
+				<p>The script messages that each narrative event listens for and transmits are specified when the narrative structure is set up in campaign scripts, affording them complete customisation of the narrative flow. Chains of narrative events may be set up by using script messages to link one to the next.</p>
+				<p>Script messages are an equivalent mechanism to script events, albeit script-only and hence not cluttered with events triggered by the game. See the <code><a href="script_messager.html#class:script_messager">script_messager</a></code> documentation for more information about script messages. Script events are still used by narrative triggers to start chains of narrative events (see below).</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:narrative_system:Framework Structure"><h2 class="section_header">Framework Structure</h2></a>
+				</div>
+				<p>The narrative event framework contains three major types of component:</p>
+				<p><strong>Narrative Events</strong></p>
+				<p>Narrative events are the action points within a narrative flow where content is delivered to the player, such as a mission being issued, a cutscene being triggered, an invasion event occurring etc. Other miscellaneous objects that help control narrative flow are also classified as narrative events. Examples include narrative events that wait a specified interval in seconds or a specified number of turns before proceeding.</p>
+				<p>Each narrative event is set up to trigger its payload (e.g. mission, cutscene, climate-change event) when a particular script message is received. They may optionally trigger other script messages when they have finished issuing, or when the mission they trigger is completed. Other narrative components may be set up to listen for these script messages being triggered and act accordingly.</p>
+				<p>In singleplayer mode, narrative events issue their content within an <code><a href="intervention.html#class:intervention">intervention</a></code> that the narrative event manages internally. Interventions are not supported in multiplayer so the content is triggered directly in this case.</p>
+				<p>The library that provides the narrative event object interface is documented here: <code><a href="narrative_event.html#class:narrative_event">narrative_event</a></code>.</p>
+				<p><strong>Narrative Queries</strong></p>
+				<p>A narrative query is a decision point within a narrative flow. When a narrative query is triggered from a script message, the game state is queried and further script messages are triggered depending upon the answer.</p>
+				<p>For example, an early-game mission structure for recruiting units of a particular type might trigger a narrative query which asks the game whether the player can currently recruit that type of unit. If they can, then a message which invokes a mission to recruit the units might be issued. If they can’t, then a different message might be issued instead to invoke a mission to construct a building that allows recruitment of that unit.</p>
+				<p>The library that provides the narrative query object interface is documented here: <code><a href="narrative_event.html#class:narrative_query">narrative_query</a></code>.</p>
+				<p><strong>Narrative Triggers</strong></p>
+				<p>A narrative trigger monitors actual game conditions and then triggers messages that invoke other narrative components. Narrative triggers are the start points for flows of narrative events. For example, a mission that starts a narrative chain could be triggered when the player first suffers a rebellion in their territory. This would be handled with a narrative trigger that listens for a rebellion script event, and issues a message that then gets picked up by a narrative event.</p>
+				<p>Individual narrative triggers can be set up to trigger their target message(s) immediately or within an intervention. The latter approach allows narrative triggers to wait if other interventions (e.g. game advice) are currently triggering, potentially reducing the intrusiveness of the narrative event system by spacing out the delivery of content over time.</p>
+				<p>The library that provides the narrative trigger object interface is documented here: <code><a href="narrative_triggers.html#class:narrative_triggers">narrative_triggers</a></code>.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:narrative_system:Example Narrative Chain"><h2 class="section_header">Example Narrative Chain</h2></a>
+				</div>
+				<p>Instances of narrative events, queries and triggers may be assembled into a narrative chain such as that illustrated below. Key:</p>
+				<p><table class="simple"><tr><th>Shape</th><th>Meaning</th></tr></p>
+				<p><tr><td>Orange squares</td><td>Narrative events</td></tr></p>
+				<p><tr><td>Blue diamonds</td><td>Narrative queries</td></tr></p>
+				<p><tr><td>Green background/orange border</td><td>Narrative triggers</td></tr></p>
+				<p></table></p>
+				<p><img alt="narrative chain" src="../images/narrative_chain.png" \></p>
+				<p>The purpose of this framework is to allow a design such as this to map directly to script in a modular fashion.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:narrative_system:Narrative Event Templates"><h2 class="section_header">Narrative Event Templates</h2></a>
+				</div>
+				<p>The intended structure of the script implementation is on three levels:</p>
+				<p><strong>Library Script</strong></p>
+				<p>The library scripts contain the underlying functionality to create <code><a href="narrative_event.html#class:narrative_event">narrative_event</a></code>, <code><a href="narrative_event.html#class:narrative_query">narrative_query</a></code> and <code><a href="narrative_event.html#class:narrative_trigger">narrative_trigger</a></code> objects.</p>
+				<p><strong>Narrative Templates</strong></p>
+				<p>Templates for specific types of narrative events, queries and triggers are created in an intermediate layer in script. These templates are then invoked by client campaign scripts to create actual narrative campaign objects.</p>
+				<p>Examples of narrative templates might include:<ul></p>
+				<p><li>A narrative event that issues a mission with advice to capture any region.</li></p>
+				<p><li>A narrative event that displays a fullscreen movie.</li></p>
+				<p><li>A narrative event that issues a mission to assassinate a particular enemy character.</li></p>
+				<p><li>A narrative query that checks the advice history and acts depending on whether any of a supplied list of advice has been experienced by the player before.</li></p>
+				<p><li>A narrative query that queries the difficulty level and acts accordingly.</li></p>
+				<p><li>A narrative trigger that triggers at the start of a supplied turn.</li></p>
+				<p><li>A narrative trigger that triggers when any player region drops below a supplied public order value.</li></ul></p>
+				<p>Client campaign scripts create narrative events, queries or templates by calling template functions that create narrative objects of the required type. When calling template functions, the client scripts supply a minimum amount of information to complete the configuration of the narrative object being created. Examples of this information include:<ul></p>
+				<p><li>A unique name for the narrative object.</li></p>
+				<p><li>The faction key to which the narrative object applies.</li></p>
+				<p><li>The script message(s) on which to trigger.</li></p>
+				<p><li>The key of the movie to play, if the narrative event is playing a movie.</li></p>
+				<p><li>The mission key to trigger, if the narrative event is issuing a mission.</li></p>
+				<p><li>The key of any advice to issue.</li></p>
+				<p><li>The script message(s) to trigger when the narrative event finishes issuing or the mission completes.</li></p>
+				<p><li>What turn on which to trigger, for a narrative trigger that triggers on turn start.</li></ul></p>
+				<p>The list of available template functions is documented separately from the underlying libraries here:</p>
+				<p><code><a href="narrative_events.html#class:narrative_events">narrative_events</a></code></p>
+				<p><code><a href="narrative_queries.html#class:narrative_queries">narrative_queries</a></code></p>
+				<p><code><a href="narrative_triggers.html#class:narrative_triggers">narrative_triggers</a></code></p>
+				<p> </p>
+				<p><strong>Campaign Scripts</strong></p>
+				<p>The use of template functions allows campaign scripts to create narrative events without ever having to directly configure or even handle narrative event, query, or trigger objects themselves. The campaign scripts that create narrative events resemble a long list of function calls. Arranging the scripts in this manner allows chains of narrative events to be set up in a modular fashion, with relative ease, and with the flow of narrative events being clearly traceable from messages.</p>
+				<p><img alt="chaining narrative messages" width="90%" src="../images/narrative_chains_script_1.png" \></p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:narrative_system:Overriding Default Data"><h2 class="section_header">Overriding Default Data</h2></a>
+				</div>
+				<p>The following image shows the use of override and default values for most arguments passed in to each template function. Doing this allows per-faction overrides to be set up for a particular narrative event, query, or trigger. This can be useful as it’s not uncommon to want to provide customisations for specific factions to cope with their unique mechanics or narrative set up.</p>
+				<p>Any overrides for a particular faction are set in a data table for that faction (<code>faction_data</code> in the image shown).  The call to each template factory function prefers a value from the override table for most arguments. Where these values are not set in the override table then the default is used.</p>
+				<p><img alt="overriding default arguments" src="../images/narrative_chains_script_2.png" \></p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:narrative_system:Multiplayer Considerations"><h2 class="section_header">Multiplayer Considerations</h2></a>
+				</div>
+				<p>The narrative event framework aims to handle most complications arising from a multiplayer game internally.</p>
+				<p>By default, narrative events wrap their content within an intervention in singleplayer mode. As interventions are not supported in multiplayer mode this means that in many cases a degradation of the content being delivered to the player will occur. For example, a mission that is delivered with a camera scroll and some advice in singleplayer mode may be issued without these embellishments in multiplayer mode, as waiting for cutscenes to finish and advice to be dismissed complicates the synchronisation of scripts across multiplayer clients.</p>
+				<p>For narrative to work in a multiplayer game each client must maintain the script state of narrative events for all player factions, including players not on the local machine. For this reason all narrative event data is declared in a central location rather than in the various faction folders, as the scripts in these folders are only loaded when the local player is that faction.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:narrative_system:Saving and Loading Considerations"><h2 class="section_header">Saving and Loading Considerations</h2></a>
+				</div>
+				<p>Narrative objects handle the saving and loading of their own state to and from the savegame. In common with interventions and mission managers they must be declared in the root of the script, however.</p>
+				<div class="section_body">
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:narrative_system:Debug Output"><h2 class="section_header">Debug Output</h2></a>
+				</div>
+				<p>Narrative objects output diagnostic information on the <code>Lua - Narrative</code> console spool.</p>
+				<div class="section_body">
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:57</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "campaign"; const path_to_document_root = "../";</script>
+
+</body>
+</html>

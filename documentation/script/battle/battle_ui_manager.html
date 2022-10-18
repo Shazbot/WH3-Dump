@@ -1,0 +1,2390 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+	<title>Battle UI Manager script class</title>
+	<link rel="stylesheet" href="../stylesheet.css" type="text/css" />
+</head>
+
+<body>
+
+	<a name="top"></a>
+
+	<div id="container">
+
+		<div style="background-color:#e2edff" id="main">
+
+			<div style="background-color:#e2edff" id="navigation_left">
+				<br/>
+				<h1 class="navigation_header"><i>Battle Documentation</i></h1>
+				<a href="../index.html">Scripting Homepage</a>
+				<h2 style="background-color:#c1e6ff">Search</h2>
+				<ul>
+				<form id="search_env_checkbox" class="search_env_checkbox">
+					<label for="search_current_env_only">Search battle only</label>
+					<input type="checkbox" name="search_current_env_only" checked /><br />
+				</form>
+				<form id="search" class="search_form" onsubmit="return false">
+					<input class="search_input" type="text" placeholder="Search.."/><br />
+					<div id="search_dropdown" class="search_dropdown"></div>
+				</form>				<h2 style="background-color:#c1e6ff">Game Areas</h2>
+				<ul>
+					<li><a href="../campaign/campaign_index.html">Campaign Index</a></li>
+					<li><strong> > Battle Index</strong></li>
+					<li><a href="../frontend/frontend_index.html">Frontend Index</a></li>
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">On this page</h2>
+				<ul>
+				<div class="key">
+					<strong>Key</strong>
+					<table class="key">
+						<tr>
+							<td width="75%">Loaded in Campaign</td>
+							<td><img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Battle</td>
+							<td><img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="10" width="10" /></td>
+						</tr>
+						<tr>
+							<td width="75%">Loaded in Frontend</td>
+							<td><img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="10" width="10" /></td>
+						</tr>
+						</table>
+				</div>
+					<li><a href="#class:battle_ui_manager">Battle UI Manager</a><img alt="Loaded in Battle" style="float:right; margin-right:1em;" src="../images/loaded_in_battle.png" height="10" width="10" /></li>
+					<ul>
+						<li>&emsp;&emsp;<a href="#section:battle_ui_manager:Creation">Creation</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:new">new</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_ui_manager:Panel Status">Panel Status</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:is_panel_open">is_panel_open</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:get_open_fullscreen_panel">get_open_fullscreen_panel</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_ui_manager:Pulse Strength Constants">Pulse Strength Constants</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:get_panel_pulse_strength">get_panel_pulse_strength</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:get_button_pulse_strength">get_button_pulse_strength</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_ui_manager:Unhighlighting">Unhighlighting</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:register_unhighlight_callback">register_unhighlight_callback</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:unhighlight_all_for_tooltips">unhighlight_all_for_tooltips</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_ui_manager:Help Page Highlighting Permitted">Help Page Highlighting Permitted</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">set_help_page_link_highlighting_permitted</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:get_help_page_link_highlighting_permitted">get_help_page_link_highlighting_permitted</a></li>
+						<li>&emsp;&emsp;<a href="#section:battle_ui_manager:Specific Component Highlighting">Specific Component Highlighting</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_advice_history_buttons">highlight_advice_history_buttons</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_advisor_button">highlight_advisor_button</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_advisor">highlight_advisor</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_army_abilities">highlight_army_abilities</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_army_abilities_meter">highlight_army_abilities_meter</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_army_panel">highlight_army_panel</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_balance_of_power">highlight_balance_of_power</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_drop_equipment_button">highlight_drop_equipment_button</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_fire_at_will_button">highlight_fire_at_will_button</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_formations_button">highlight_formations_button</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_game_guide_button">highlight_game_guide_button</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_group_button">highlight_group_button</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_guard_button">highlight_guard_button</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_lore_panel">highlight_lore_panel</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_melee_mode_button">highlight_melee_mode_button</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_power_reserve_bar">highlight_power_reserve_bar</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_radar_map">highlight_radar_map</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_realm_of_souls">highlight_realm_of_souls</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_skirmish_button">highlight_skirmish_button</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_spells">highlight_spells</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_supplies">highlight_supplies</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_tactical_map_button">highlight_tactical_map_button</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_time_controls">highlight_time_controls</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_time_limit">highlight_time_limit</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_unit_abilities">highlight_unit_abilities</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_unit_cards">highlight_unit_cards</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_unit_details_button">highlight_unit_details_button</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_unit_details_panel">highlight_unit_details_panel</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_unit_portrait_panel">highlight_unit_portrait_panel</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_victory_locations">highlight_victory_locations</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_victory_tickets">highlight_victory_tickets</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_ui_manager:highlight_winds_of_magic_panel">highlight_winds_of_magic_panel</a></li>
+					</ul>
+
+				</ul>
+			</div>
+
+			<div style="background-color:#e2edff" id="navigation_right">				<h2 style="background-color:#c1e6ff">Battle Topics</h2>
+				<ul>
+					<li><a href="battle_index.html">Battle Index</a></li>
+					<li><a href="battle_hierarchy.html">Battle Hierarchy</a></li>
+					<li><a href="lua.html">Lua Language</a></li>
+					<li><a href="scripted_events.html">Scripted Events</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Game Code Interfaces</h2>
+				<ul>
+					<li><a href="battle.html">Battle</a></li>
+					<li><a href="battle_alliances.html">Alliances</a></li>
+					<li><a href="battle_alliance.html">Alliance</a></li>
+					<li><a href="battle_armies.html">Armies</a></li>
+					<li><a href="battle_army.html">Army</a></li>
+					<li><a href="battle_units.html">Units</a></li>
+					<li><a href="battle_unit.html">Unit</a></li>
+					<li><a href="battle_unitcontroller.html">Unitcontroller</a></li>
+					<li><a href="ai_planner.html">AI Planners</a></li>
+					<li><a href="battle_assault_equipment.html">Assault Equipment</a></li>
+					<li><a href="battle_building.html">Building</a></li>
+					<li><a href="battle_buildings.html">Buildings</a></li>
+					<li><a href="battle_camera.html">Camera</a></li>
+					<li><a href="battle_capture_location.html">Capture Location</a></li>
+					<li><a href="battle_composite_scenes_system.html">Composite Scenes System</a></li>
+					<li><a href="battle_debug_drawing.html">Debug Drawing</a></li>
+					<li><a href="battle_reinforcements.html">reinforcements Reinforcements</a></li>
+					<li><a href="battle_sound_effect.html">Sound Effects</a></li>
+					<li><a href="battle_subtitles.html">Subtitles</a></li>
+					<li><a href="battle_toggle_system.html">Toggle System</a></li>
+					<li><a href="battle_vector.html">Vector</a></li>
+					<li><a href="common.html">Common</a></li>
+					<li><a href="scriptedvalueregistry.html">ScriptedValueRegistry</a></li>
+					<li><a href="uicomponent.html">UIComponents</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Script Interfaces</h2>
+				<ul>
+					<li><a href="battle_manager.html">Battle Manager</a></li>
+					<li><a href="core.html">Core</a></li>
+					<li><a href="advice_manager.html">Advice Manager</a></li>
+					<li><strong> > Battle UI Manager</strong></li>
+					<li><a href="convex_area.html">Convex Areas</a></li>
+					<li><a href="cutscene.html">Battle Cutscenes</a></li>
+					<li><a href="generated_battle.html">Generated Battle</a></li>
+					<li><a href="global.html">Global</a></li>
+					<li><a href="infotext_manager.html">Infotext Manager</a></li>
+					<li><a href="movie_overlay.html">Movie Overlays</a></li>
+					<li><a href="navigable_tour.html">Navigable Tours</a></li>
+					<li><a href="objectives_manager.html">Objectives Manager</a></li>
+					<li><a href="script_ai_planner.html">Script AI Planner</a></li>
+					<li><a href="script_messager.html">Script Messager</a></li>
+					<li><a href="script_unit.html">Script Unit</a></li>
+					<li><a href="scripted_tour.html">Scripted Tours</a></li>
+					<li><a href="text_pointer.html">Text Pointers</a></li>
+					<li><a href="timer_manager.html">Timer Manager</a></li>
+					<li><a href="topic_leader.html">Topic Leader</a></li>
+					<li><a href="validate.html">Validate</a></li>
+
+				</ul>
+
+				<h2 style="background-color:#c1e6ff">Data Interfaces</h2>
+				<ul>
+					<li><a href="st_helper.html">Scripted Tour Helpers</a></li>
+
+				</ul>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<a name="class:battle_ui_manager"><h1 class="content_header">Battle UI Manager</h1></a>
+				<p>The battle ui manager provides helper functions related to the UI for battle scripts. It is primarily of use for help page scripts that wish to highlight bits of the UI with a pulsing effect. In this respect, it performs the same function as the <code><a href="../campaign/campaign_ui_manager.html#class:campaign_ui_manager">campaign_ui_manager</a></code>.</p>
+				<p>By convention, the battle ui manager may be accessed at the global variable <code>buim</code> when in battle.</p>
+							<table class="loaded_in" style="margin-top: 1em;">
+								<tr>
+									<td>
+										Loaded in Campaign
+									</td>
+									<td>
+										<img alt="Loaded in Campaign" style="float:right;" src="../images/loaded_in_campaign.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Battle
+									</td>
+									<td>
+										<img alt="Loaded in Battle" style="float:right;" src="../images/loaded_in_battle.png" height="18" width="18" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Loaded in Frontend
+									</td>
+									<td>
+										<img alt="Loaded in Frontend" style="float:right;" src="../images/loaded_in_frontend.png" height="18" width="18" />
+									</td>
+								</tr>
+							</table>
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_ui_manager:Creation"><h2 class="section_header">Creation</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:new"><h3 class="function_name"><strong><code>battle_ui_manager:new(<code><a href="battle_manager.html#class:battle_manager">battle_manager</a></code> </strong></code><i class="parameter">battle manager</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a battle_ui_manager. It should never be necessary for a client script to need to call this directly, as the <code><a href="battle_manager.html#class:battle_manager">battle_manager</a></code> creates this object and stores it internally. Instead retrieve the battle_ui_manager from the battle_manager with <code><a href="battle_manager.html#function:battle_manager:get_battle_ui_manager">battle_manager:get_battle_ui_manager</a></code>. By convention, the battle ui manager is also found at the global variable <code>buim</code>.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="battle_manager.html#class:battle_manager">battle_manager</a></code></code></p>
+									</td>
+									<td>
+										<p>battle manager</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>battle_ui_manager</code> </li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 49</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_ui_manager:Panel Status"><h2 class="section_header">Panel Status</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:is_panel_open"><h3 class="function_name"><strong><code>battle_ui_manager:is_panel_open(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">panel name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether a ui panel with the supplied name is currently open.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>panel name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is panel open</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 121</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:get_open_fullscreen_panel"><h3 class="function_name"><strong><code>battle_ui_manager:get_open_fullscreen_panel()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the name of a fullscreen panel that's open, or <code>false</code> if no panels are open. If more than one fullscreen panel is open then the name of one is returned at random.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> open fullscreen panel</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 133</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_ui_manager:Pulse Strength Constants"><h2 class="section_header">Pulse Strength Constants</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:get_panel_pulse_strength"><h3 class="function_name"><strong><code>battle_ui_manager:get_panel_pulse_strength()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the panel pulse strength constant the battle_ui_manager stores internally. This value determines the strength of the pulse highlighting effect on large UI elements like panels.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>number</code> </li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 157</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:get_button_pulse_strength"><h3 class="function_name"><strong><code>battle_ui_manager:get_button_pulse_strength()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns the button pulse strength constant the battle_ui_manager stores internally. This value determines the strength of the pulse highlighting effect on small UI elements like buttons.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>number</code> </li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 165</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_ui_manager:Unhighlighting"><h2 class="section_header">Unhighlighting</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:register_unhighlight_callback"><h3 class="function_name"><strong><code>battle_ui_manager:register_unhighlight_callback(function </strong></code><i class="parameter">callback to call</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Allows registration of a function to be called when <code><a href="#function:battle_ui_manager:unhighlight_all_for_tooltips">battle_ui_manager:unhighlight_all_for_tooltips</a></code> is called.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>function</code></p>
+									</td>
+									<td>
+										<p>callback to call</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 183</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:unhighlight_all_for_tooltips"><h3 class="function_name"><strong><code>battle_ui_manager:unhighlight_all_for_tooltips()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Calls all functions currently registered with <code><a href="#function:battle_ui_manager:register_unhighlight_callback">battle_ui_manager:register_unhighlight_callback</a></code>. This is intended to be used to unhighlight all currently-highlighted UI elements, when the mouse cursor is moved off of a help page link.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 197</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_ui_manager:Help Page Highlighting Permitted"><h2 class="section_header">Help Page Highlighting Permitted</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:set_help_page_link_highlighting_permitted"><h3 class="function_name"><strong><code>battle_ui_manager:set_help_page_link_highlighting_permitted([boolean </strong></code><i class="parameter">enable highlighting</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Enables/disables the scripted behaviour which pulses a highlight over various elements of the UI when the mouse cursor is placed over related words on Help Pages.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>enable highlighting</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 218</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:get_help_page_link_highlighting_permitted"><h3 class="function_name"><strong><code>battle_ui_manager:get_help_page_link_highlighting_permitted()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether help page link highlighting is permitted. This is true by default, unless it's been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>boolean</code> highlighting enabled</li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 229</p>
+						</dd>
+					</dl>
+				</div>
+
+
+				<div>
+					<a style="float:right;" href="#top">Back to top</a>
+					<a name="section:battle_ui_manager:Specific Component Highlighting"><h2 class="section_header">Specific Component Highlighting</h2></a>
+				</div>
+				<div class="section_body">
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_advice_history_buttons"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_advice_history_buttons(<br />&emsp;&emsp;boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, <br />&emsp;&emsp;[number </strong></code><i class="parameter">pulse strength</i><code><strong>], <br />&emsp;&emsp;[boolean </strong></code><i class="parameter">force</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the advice history buttons.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 249</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_advisor_button"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_advisor_button(<br />&emsp;&emsp;boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, <br />&emsp;&emsp;[number </strong></code><i class="parameter">pulse strength</i><code><strong>], <br />&emsp;&emsp;[boolean </strong></code><i class="parameter">force</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the advice button.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 283</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_advisor"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_advisor(boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, [number </strong></code><i class="parameter">pulse strength</i><code><strong>], [boolean </strong></code><i class="parameter">force</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the advisor.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 308</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_army_abilities"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_army_abilities(<br />&emsp;&emsp;boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, <br />&emsp;&emsp;[number </strong></code><i class="parameter">pulse strength</i><code><strong>], <br />&emsp;&emsp;[boolean </strong></code><i class="parameter">force</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights any army abilities buttons.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 358</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_army_abilities_meter"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_army_abilities_meter(<br />&emsp;&emsp;boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, <br />&emsp;&emsp;[number </strong></code><i class="parameter">pulse strength</i><code><strong>], <br />&emsp;&emsp;[boolean </strong></code><i class="parameter">force</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights any army abilities buttons.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 391</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_army_panel"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_army_panel(boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, [number </strong></code><i class="parameter">pulse strength</i><code><strong>], [boolean </strong></code><i class="parameter">force</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the army panel.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 426</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_balance_of_power"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_balance_of_power(<br />&emsp;&emsp;boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, <br />&emsp;&emsp;[number </strong></code><i class="parameter">pulse strength</i><code><strong>], <br />&emsp;&emsp;[boolean </strong></code><i class="parameter">force</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the balance of power bar.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 450</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_drop_equipment_button"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_drop_equipment_button(<br />&emsp;&emsp;boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, <br />&emsp;&emsp;[number </strong></code><i class="parameter">pulse strength</i><code><strong>], <br />&emsp;&emsp;[boolean </strong></code><i class="parameter">force</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the drop equipment button.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 474</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_fire_at_will_button"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_fire_at_will_button(<br />&emsp;&emsp;boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, <br />&emsp;&emsp;[number </strong></code><i class="parameter">pulse strength</i><code><strong>], <br />&emsp;&emsp;[boolean </strong></code><i class="parameter">force</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the fire-at-will button.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 506</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_formations_button"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_formations_button(<br />&emsp;&emsp;boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, <br />&emsp;&emsp;[number </strong></code><i class="parameter">pulse strength</i><code><strong>], <br />&emsp;&emsp;[boolean </strong></code><i class="parameter">force</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the formations button.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 538</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_game_guide_button"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_game_guide_button(<br />&emsp;&emsp;boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, <br />&emsp;&emsp;[number </strong></code><i class="parameter">pulse strength</i><code><strong>], <br />&emsp;&emsp;[boolean </strong></code><i class="parameter">force</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the game guide button.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 562</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_group_button"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_group_button(boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, [number </strong></code><i class="parameter">pulse strength</i><code><strong>], [boolean </strong></code><i class="parameter">force</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the group button.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 586</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_guard_button"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_guard_button(boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, [number </strong></code><i class="parameter">pulse strength</i><code><strong>], [boolean </strong></code><i class="parameter">force</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the guard button.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 610</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_lore_panel"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_lore_panel(boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, [number </strong></code><i class="parameter">pulse strength</i><code><strong>], [boolean </strong></code><i class="parameter">force</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the lore panel.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 634</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_melee_mode_button"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_melee_mode_button(<br />&emsp;&emsp;boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, <br />&emsp;&emsp;[number </strong></code><i class="parameter">pulse strength</i><code><strong>], <br />&emsp;&emsp;[boolean </strong></code><i class="parameter">force</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the melee mode button.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 658</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_power_reserve_bar"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_power_reserve_bar(<br />&emsp;&emsp;boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, <br />&emsp;&emsp;[number </strong></code><i class="parameter">pulse strength</i><code><strong>], <br />&emsp;&emsp;[boolean </strong></code><i class="parameter">force</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the power reserve bar.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 682</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_radar_map"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_radar_map(boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, [number </strong></code><i class="parameter">pulse strength</i><code><strong>], [boolean </strong></code><i class="parameter">force</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the radar map.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 706</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_realm_of_souls"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_realm_of_souls(<br />&emsp;&emsp;boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, <br />&emsp;&emsp;[number </strong></code><i class="parameter">pulse strength</i><code><strong>], <br />&emsp;&emsp;[boolean </strong></code><i class="parameter">force</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the realm of souls bar.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 730</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_skirmish_button"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_skirmish_button(<br />&emsp;&emsp;boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, <br />&emsp;&emsp;[number </strong></code><i class="parameter">pulse strength</i><code><strong>], <br />&emsp;&emsp;[boolean </strong></code><i class="parameter">force</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the skirmish button.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 754</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_spells"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_spells(boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, [number </strong></code><i class="parameter">pulse strength</i><code><strong>], [boolean </strong></code><i class="parameter">force</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights any spells buttons.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 786</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_supplies"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_supplies(boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, [number </strong></code><i class="parameter">pulse strength</i><code><strong>], [boolean </strong></code><i class="parameter">force</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the supplies.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 814</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_tactical_map_button"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_tactical_map_button(<br />&emsp;&emsp;boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, <br />&emsp;&emsp;[number </strong></code><i class="parameter">pulse strength</i><code><strong>], <br />&emsp;&emsp;[boolean </strong></code><i class="parameter">force</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the tactical map button.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 839</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_time_controls"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_time_controls(boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, [number </strong></code><i class="parameter">pulse strength</i><code><strong>], [boolean </strong></code><i class="parameter">force</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the time controls buttons.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 862</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_time_limit"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_time_limit(boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, [number </strong></code><i class="parameter">pulse strength</i><code><strong>], [boolean </strong></code><i class="parameter">force</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the time limit.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 912</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_unit_abilities"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_unit_abilities(<br />&emsp;&emsp;boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, <br />&emsp;&emsp;[number </strong></code><i class="parameter">pulse strength</i><code><strong>], <br />&emsp;&emsp;[boolean </strong></code><i class="parameter">force</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights any unit abilities buttons.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 937</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_unit_cards"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_unit_cards(<br />&emsp;&emsp;<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">enable highlight</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">pulse strength</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">force</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">highlight health</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">highlight ammo</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">highlight xp</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">highlight status</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the unit cards.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Only highlight/unhighlight the health bar of unit cards.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Only highlight/unhighlight the ammunition bar of unit cards.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Only highlight/unhighlight the experience icon of unit cards.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>7</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Only highlight/unhighlight the status tab of unit cards.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 968</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_unit_details_button"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_unit_details_button(<br />&emsp;&emsp;boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, <br />&emsp;&emsp;[number </strong></code><i class="parameter">pulse strength</i><code><strong>], <br />&emsp;&emsp;[boolean </strong></code><i class="parameter">force</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the unit details button.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 1049</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_unit_details_panel"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_unit_details_panel(<br />&emsp;&emsp;boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, <br />&emsp;&emsp;[number </strong></code><i class="parameter">pulse strength</i><code><strong>], <br />&emsp;&emsp;[boolean </strong></code><i class="parameter">force</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the unit details panel.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 1074</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_unit_portrait_panel"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_unit_portrait_panel(<br />&emsp;&emsp;boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, <br />&emsp;&emsp;[number </strong></code><i class="parameter">pulse strength</i><code><strong>], <br />&emsp;&emsp;[boolean </strong></code><i class="parameter">force</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the unit portrait panel.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 1102</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_victory_locations"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_victory_locations(<br />&emsp;&emsp;boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, <br />&emsp;&emsp;[number </strong></code><i class="parameter">pulse strength</i><code><strong>], <br />&emsp;&emsp;[boolean </strong></code><i class="parameter">force</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the victory locations.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 1136</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_victory_tickets"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_victory_tickets(<br />&emsp;&emsp;boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, <br />&emsp;&emsp;[number </strong></code><i class="parameter">pulse strength</i><code><strong>], <br />&emsp;&emsp;[boolean </strong></code><i class="parameter">force</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the victory tickets.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 1161</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_ui_manager:highlight_winds_of_magic_panel"><h3 class="function_name"><strong><code>battle_ui_manager:highlight_winds_of_magic_panel(<br />&emsp;&emsp;boolean </strong></code><i class="parameter">enable highlight</i><code><strong>, <br />&emsp;&emsp;[number </strong></code><i class="parameter">pulse strength</i><code><strong>], <br />&emsp;&emsp;[boolean </strong></code><i class="parameter">force</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Pulse-highlights the winds of magic panel.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p>Set to true to enable the highlight, false to disable</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code>number</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Override pulse strength</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code>boolean</code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=false</i></p>
+										<p>Enable the highlight even if highlighting has been disabled with <code><a href="#function:battle_ui_manager:set_help_page_link_highlighting_permitted">battle_ui_manager:set_help_page_link_highlighting_permitted</a></code>.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_battle_ui.lua, line 1186</p>
+						</dd>
+					</dl>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="about">Last updated 12/08/2022 11:56:58</div>
+
+	</div>
+
+	<script src="../searchdata.js"></script>
+	<script src="../search.js"></script>
+	<script>const page_env = "battle"; const path_to_document_root = "../";</script>
+
+</body>
+</html>
