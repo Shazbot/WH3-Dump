@@ -1514,67 +1514,68 @@ function show_rite_expired_event(context_str)
 end;
 
 function rite_agent_spawn(faction_key, type_key, subtype_key)
-	
-	local faction = cm:model():world():faction_by_key(faction_key); 
+	local faction = cm:get_faction(faction_key); 
 	local mf_list = faction:military_force_list();
-	local target_mf = nil;
-
-	--loop through list of all military force if one is faction leader
-	for i = 0, mf_list:num_items() - 1 do
-		local force = mf_list:item_at(i);
-		local character = force:general_character();
-		if character:is_faction_leader() then
-			target_mf = force;
-		end
-	end
-
-	--if faction leader is wounded then find a different force
-	if target_mf == nil then
-		for i = 0, mf_list:num_items() - 1 do
-			local force = mf_list:item_at(i);
-			target_mf = force;
-		end
-		-- if there are still no suitable characters to spawn at, then spawn at region instead
-		if target_mf == nil then
-			local region_list = faction:region_list();
-			for i = 0, region_list:num_items() - 1 do
-				local region = region_list:item_at(i);
-				local garrison = region:garrison_residence();
-				local settlement = region:settlement();
-				if garrison:is_under_siege() == false then
-					rite_character_spawned = true;
-					cm:spawn_agent_at_settlement(faction, settlement, type_key, subtype_key);
-					return;
-				end
-			end
-				--return so we dont hit the spawn agent at military force function
-			return;
-		end
-	end
-
-	rite_character_spawned = true;
+	local target = nil;
 	
-	---set up a listener to replenish the character's AP after they spawn 
-	core:add_listener(
-		"RiteCharacterCreated",
-		"CharacterCreated",
-		function(context)
-			local faction = context:character():faction():name();
-			return faction == faction_key and rite_character_spawned == true;
-		end,
-		function(context)
-			local character_cqi_string = "character_cqi:"..context:character():cqi();
-			cm:callback( ---- we need to wait a tick for this to work, for some reason
-				function()
-					cm:replenish_action_points(character_cqi_string)
-				end,
-			0.5
-			)
-			rite_character_spawned = false;
-		end,
-		false
-	)
-
-	cm:spawn_agent_at_military_force(faction, target_mf, type_key, subtype_key);
-
+	if faction:has_faction_leader() then
+		local faction_leader = faction:faction_leader();
+		if faction_leader:has_military_force() then
+			target = faction_leader:military_force();
+		end
+	end
+	
+	-- if faction leader isn't available then find a different force
+	if not target then
+		for _, force in model_pairs(mf_list) do
+			if not force:is_armed_citizenry() and not (force:has_garrison_residence() and force:garrison_residence():is_under_siege()) then
+				target = force;
+				break;
+			end
+		end
+	end
+	
+	-- if there are still no suitable characters to spawn at, then spawn at region instead
+	if not target then
+		for _, region in model_pairs(faction:region_list()) do
+			if not region:garrison_residence():is_under_siege() then
+				target = region:settlement();
+				break;
+			end
+		end
+	end
+	
+	if target then
+		rite_character_spawned = true;
+		
+		-- set up a listener to replenish the character's AP after they spawn 
+		core:add_listener(
+			"RiteCharacterCreated",
+			"CharacterCreated",
+			function(context)
+				return context:character():faction():name() == faction_key and rite_character_spawned;
+			end,
+			function(context)
+				local character = context:character();
+				cm:callback( -- we need to wait a tick for this to work, for some reason
+					function()
+						cm:replenish_action_points(cm:char_lookup_str(character));
+						
+						if cm:get_local_faction(true) == faction_key then
+							cm:scroll_camera_from_current(false, 1, {character:display_position_x(), character:display_position_y(), 14.7, 0.0, 12.0});
+						end;
+					end,
+					0.2
+				)
+				rite_character_spawned = false;
+			end,
+			false
+		)
+		
+		if is_militaryforce(target) then
+			cm:spawn_agent_at_military_force(faction, target, type_key, subtype_key);
+		else
+			cm:spawn_agent_at_settlement(faction, target, type_key, subtype_key);
+		end
+	end
 end

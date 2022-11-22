@@ -9153,7 +9153,7 @@ in_low_loyalty:add_trigger_condition(
 		for i = 0, character_list:num_items() - 1 do
 			local current_char = character_list:item_at(i);
 			
-			if not current_char:is_faction_leader() and current_char:has_military_force() and current_char:loyalty() <= 3 then
+			if not current_char:character_type("colonel") and not current_char:is_faction_leader() and current_char:has_military_force() and current_char:loyalty() <= 3 then
 				in_low_loyalty.char_cqi = current_char:cqi();
 				return true;
 			end;

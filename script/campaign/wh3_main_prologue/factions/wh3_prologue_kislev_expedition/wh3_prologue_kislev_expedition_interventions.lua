@@ -3676,7 +3676,12 @@ function prologue_resource_bar_intervention()
 				cm:contextual_vo_enabled(true);
 				--Metric check (step_number, step_name, skippable)
 				cm:trigger_prologue_step_metrics_hit(11, "finished_treasury_tutorial", true);
-				PrologueAddTopicLeader("wh3_prologue_objective_turn_001_04", function() uim:override("end_turn"):set_allowed(true); HighlightEndTurnButton() end);
+
+				if prologue_check_progression["first_settlement_revealed"] == true then
+					PrologueSettlementMarker();
+				else
+					PrologueAddTopicLeader("wh3_prologue_objective_turn_001_04", function() uim:override("end_turn"):set_allowed(true); HighlightEndTurnButton() end);
+				end
 			end
 		);
 		

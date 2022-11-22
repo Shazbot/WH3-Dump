@@ -316,7 +316,7 @@ end;
 
 -- Set the values of the dragon-encounter marker. For cases where the local faction is not Imrik's faction, this function does nothing.
 function set_dragon_marker_ui(turns_available, marker_x, marker_y)
-	if cm:get_local_faction_name() == imrik_faction then
+	if cm:get_local_faction_name(true) == imrik_faction then
 		common.set_context_value("dragon_taming_turns_current", turns_available);
 		if marker_x ~= nil then
 			find_uicomponent(core:get_ui_root(), "dragon_taming_icon", "icon"):InterfaceFunction("SetMarkerData", unit_details[current_dilemma], marker_x, marker_y);
@@ -326,7 +326,7 @@ end;
 
 -- Set the timer counting down until the next dragon encounter spawns.
 function set_dragon_countdown_ui(dragon_spawn_timer)
-	if cm:get_local_faction_name() == imrik_faction then
+	if cm:get_local_faction_name(true) == imrik_faction then
 		common.set_context_value("dragon_taming_turns_until_next", dragon_spawn_timer);
 	end;
 end;

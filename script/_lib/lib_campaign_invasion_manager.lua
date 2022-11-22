@@ -687,7 +687,12 @@ function invasion:force_created(general_cqi, declare_war, invite_attacker_allies
 		if this_faction and enemy_faction then
 			if this_faction:at_war_with(enemy_faction) == false then
 				if declare_war == true then
-					cm:force_declare_war(self.faction, self.target_faction, invite_attacker_allies, invite_defender_allies);
+					if this_faction:is_vassal() then
+						cm:force_declare_war(this_faction:master():name(), self.target_faction, invite_attacker_allies, invite_defender_allies);
+					else
+						cm:force_declare_war(self.faction, self.target_faction, invite_attacker_allies, invite_defender_allies);
+					end
+					
 					out.invasions("\t\t\tDeclared war on "..tostring(self.target_faction));
 				end
 			end

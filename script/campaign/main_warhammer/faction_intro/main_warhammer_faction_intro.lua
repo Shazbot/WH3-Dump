@@ -469,8 +469,8 @@ data.faction_intros = {
 
 	wh2_dlc15_grn_broken_axe = faction_intro_data:new{
 		preset = data.intro_presets.standard,
-		cam_cutscene_start = {x = 305.86972, y = 426.89624,	d = 22.129669, b = 0.0,	h = 65.820564,},
-		cam_gameplay_start = {x = 313.215088, y = 422.483307,	d = 7.382202, b = 0, h = 8.567543,},
+		cam_cutscene_start = {x = 290.86972, y = 428.89624,	d = 22.129669, b = 0.0,	h = 65.820564,},
+		cam_gameplay_start = {x = 292.215088, y = 426.483307,	d = 7.382202, b = 0, h = 8.567543,},
 		advice_line = "wh3_dlc21_ie_camp_grn_grom_intro_01",
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},

@@ -66,6 +66,7 @@ function endgame_waaagh:trigger()
 			if region_key ~= nil then
 				table.insert(greenskin_factions, faction_key)
 				endgame:create_scenario_force(faction_key, region_key, self.army_template, self.unit_list, true, math.floor(self.base_army_count*endgame.settings.difficulty_mod))
+				cm:instantly_research_all_technologies(faction_key)
 				cm:apply_effect_bundle("wh3_main_ie_scripted_endgame_waaagh", faction_key, 0)
 				endgame:no_peace_no_confederation_only_war(faction_key)
 				cm:force_change_cai_faction_personality(faction_key, self.ai_personality)

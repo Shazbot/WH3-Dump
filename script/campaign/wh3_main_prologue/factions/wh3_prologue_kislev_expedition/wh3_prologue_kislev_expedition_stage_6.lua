@@ -70,6 +70,7 @@ if prologue_check_progression["brazen_altar_battle_complete"] == false then
 			cm:contextual_vo_enabled(false);
 
 			prologue_check_progression["brazen_altar_battle_complete"] = true;
+
 			--clear the prebattle camera
 			cm:clear_prebattle_display_configuration_override();
 
@@ -140,6 +141,7 @@ core:add_listener(
 					--Metric check (step_number, step_name, skippable)
 					cm:trigger_prologue_step_metrics_hit(107, "close_to_howling_citadel", false);
 				end
+
 			end
 
 			if context:area_key() == "altar_exit_1" or context:area_key() == "altar_exit_2" or context:area_key() == "altar_exit_3" or context:area_key() == "altar_exit_4" then
@@ -307,6 +309,28 @@ core:add_listener(
 			-- Add Yuri movement speed objective.
 			AddIncreaseYuriSpeedListener(true)
 		end
+		
+		if prologue_check_progression["brazen_altar_battle_complete"] == true and prologue_check_progression["killed_gerik"] == false then
+			
+			local found_retribution_mission = false;
+			local reveal_mission_active = false;
+
+			for i = 0, common.get_context_value("CcoCampaignFaction", cm:get_local_faction():command_queue_index(), "ActiveMissionList.Size") - 1 do
+				if common.get_context_value("CcoCampaignFaction", cm:get_local_faction():command_queue_index(), "ActiveMissionList.At("..i..").MissionRecordContext.Key") == "wh3_prologue_mission_retribution" then
+					found_retribution_mission = true;
+				end
+
+				if common.get_context_value("CcoCampaignFaction", cm:get_local_faction():command_queue_index(), "ActiveMissionList.At("..i..").MissionRecordContext.Key") == "wh3_prologue_mission_reveal" then
+					reveal_mission_active = true;
+				end
+			end
+
+			if found_retribution_mission == false and reveal_mission_active == false then
+				prologue_advice_trigger_retribution();
+			end
+
+		end
+
 	end,
 	false
 );

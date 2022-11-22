@@ -212,7 +212,7 @@ end
 
 function scripted_technology_tree:toggle_technology(technologies, region_owner)
 	-- unlock each technology tied to the region for the new owner and allies if needed
-	if region_owner then
+	if region_owner and not region_owner:is_rebel() then
 		local faction_culture = region_owner:culture()
 		-- build a list of allies and vassals
 		local ally_list = {}

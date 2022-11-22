@@ -152,6 +152,7 @@ vampire_bloodlines = {
 	},
 	assassination_actions = {
 		wh2_main_agent_action_champion_hinder_agent_assassinate = true,
+		wh2_main_agent_action_runesmith_hinder_character_assassinate = true,
 		wh2_main_agent_action_spy_hinder_agent_assassinate = true,
 		wh2_main_agent_action_champion_hinder_agent_wound = true,
 		wh2_main_agent_action_dignitary_hinder_agent_wound = true,

@@ -341,6 +341,7 @@ victory_objectives_ie = {
 						"faction wh_main_chs_chaos",
 						"faction wh3_main_dae_daemon_prince",
 						"faction wh3_dlc20_chs_azazel",
+						"faction wh3_dlc20_chs_festus",
 						"confederation_valid"
 					}
 				}
@@ -596,9 +597,9 @@ victory_objectives_ie = {
 			objectives = {
 				{
 					-- Capture the majority of Greenskin or Cathayan capitals
-					type = "OWN_N_REGIONS_INCLUDING",
+					type = "CONTROL_N_REGIONS_FROM",
 					conditions = {
-						"total 6",
+						"total 8",
 						"region wh3_main_combi_region_nan_gau",
 						"region wh3_main_combi_region_wei_jin",
 						"region wh3_main_combi_region_hanyu_port",
@@ -609,6 +610,8 @@ victory_objectives_ie = {
 						"region wh3_main_combi_region_karak_ungor",
 						"region wh3_main_combi_region_massif_orcal",
 						"region wh3_main_combi_region_ekrund",
+						"region wh3_main_combi_region_sabre_mountain",
+						"override_text mission_text_text_mis_activity_control_n_regions_satrapy_including_at_least_n"
 					}
 				}
 			}
@@ -1468,14 +1471,28 @@ victory_objectives_ie = {
 					}
 				},
 				{
-					-- Destroy Throt
+					-- Destroy nearby SKV and Chaos threats
 					type = "DESTROY_FACTION",
 					conditions = {
 						"faction wh2_main_skv_clan_moulder",
+						"faction wh3_dlc20_chs_azazel",
 						"confederation_valid"
 					}
 				}
-			}
+			},
+			long_objectives = {
+			{
+				-- Eliminate the remaining major threats near Kislev
+				type = "DESTROY_FACTION",
+				conditions = {
+					"faction wh_main_chs_chaos",
+					"faction wh3_main_dae_daemon_prince",
+					"faction wh3_dlc20_chs_festus",
+					"confederation_valid"
+					}
+				},
+			},
+			no_subculture_objective = true
 		},
 
 		-- Boris Ursus
@@ -1490,8 +1507,21 @@ victory_objectives_ie = {
 						"confederation_valid"
 					}
 				}
-			}
-		},
+			},
+			long_objectives = {
+				{
+					-- Eliminate surrounding major chaos threats
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh3_main_dae_daemon_prince",
+						"faction wh_dlc08_nor_wintertooth",
+						"faction wh3_dlc20_chs_kholek",
+						"confederation_valid"
+						}
+					},
+				},
+				no_subculture_objective = true
+			},
 
 		-- Mannfred von Carstein
 		wh_main_vmp_vampire_counts = {
@@ -1589,11 +1619,11 @@ victory_objectives_ie = {
 		wh2_dlc09_tmb_khemri = {
 			objectives = {
 				{
-					-- Eliminate Arkhan, Khalida and Mannfred
+					-- Eliminate Arkhan, Volkmar and Mannfred
 					type = "DESTROY_FACTION",
 					conditions = {
 						"faction wh2_dlc09_tmb_followers_of_nagash",
-						"faction wh2_dlc09_tmb_lybaras",
+						"faction wh3_main_emp_cult_of_sigmar",
 						"faction wh_main_vmp_vampire_counts",
 						"confederation_valid"
 					}
@@ -2683,13 +2713,13 @@ function victory_objectives_ie:create_long_objective(mm, faction_subculture_key,
 
 	local objectives = {}
 
-	if self.factions[faction_key].long_objectives then
+	if self.factions[faction_key] and self.factions[faction_key].long_objectives then
 		for _,objective in pairs(self.factions[faction_key].long_objectives) do 
 			table.insert(objectives,objective)
 		end
 	end
 
-	if self.subcultures[faction_subculture_key] and self.factions[faction_key].no_subculture_objective ~= true then
+	if self.subcultures[faction_subculture_key] and (self.factions[faction_key] and self.factions[faction_key].no_subculture_objective ~= true) then
 		 for _,objective in pairs(self.subcultures[faction_subculture_key].objectives) do 
 			table.insert(objectives,objective)
 		end
@@ -3162,6 +3192,13 @@ function victory_objectives_ie:add_scripted_victory_listeners()
 							local character = cm:char_lookup_str(cqi)
 							cm:apply_effect_bundle_to_characters_force("wh_main_bundle_military_upkeep_free_force_endgame", cqi, 8)
 							cm:add_experience_to_units_commanded_by_character(character, 7)
+							cm:add_growth_points_to_horde(force, 8)
+							cm:add_building_to_force(force:command_queue_index(), 
+								{"wh2_dlc13_horde_lizardmen_ziggurat_minor_1",
+								"wh2_dlc13_horde_lizardmen_support_upkeep_1",
+								"wh2_dlc13_horde_lizardmen_portal_quetzl_1" 
+								}
+							)
 						end
 					)
 				end

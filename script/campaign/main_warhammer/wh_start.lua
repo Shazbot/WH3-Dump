@@ -206,14 +206,6 @@ function start_game_all_factions()
 	apply_karak_diplomacy();
 	add_grombrindal_listeners();
 	
-	local wurrzag = cm:get_faction("wh_main_grn_orcs_of_the_bloody_hand");
-	
-	if wurrzag and not wurrzag:is_human() and not wurrzag:has_effect_bundle("wh_dlc06_wurrzag_anti_trait") then
-		-- A.I Wurrzag gets an anti-trait
-		cm:apply_effect_bundle("wh_dlc06_wurrzag_anti_trait", "wh_main_grn_orcs_of_the_bloody_hand", 0);
-		cm:force_add_trait(cm:char_lookup_str(wurrzag:faction_leader():command_queue_index()), "wh_dlc06_wurrzag_anti_trait", true);
-	end;
-	
 	-- DLC05 Wood Elves Features
 	out("==== Wood Elves ====");
 	Add_Wood_Elves_Listeners();
@@ -347,6 +339,7 @@ function start_game_all_factions()
 	victory_objectives_ie:add_scripted_victory_listeners()
 	scripted_occupation_options:initialise()
 	scripted_technology_tree:start_technology_listeners();
+	def_slaves:start_listeners();
 
 
 	---Champions of Chaos

@@ -91,8 +91,8 @@ function endgame_pyramid_of_nagash:trigger()
 			if owning_faction:subculture() == "wh2_dlc09_sc_tmb_tomb_kings" then
 				data.faction_key = owning_faction:name()
 			elseif owning_faction:subculture() == "wh_main_sc_vmp_vampire_counts" then
-				data.faction_key = owning_faction:name()
 				data = self.vampires_data
+				data.faction_key = owning_faction:name()
 			end
 		end
 	end

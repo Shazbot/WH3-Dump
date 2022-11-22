@@ -11,7 +11,7 @@ local contract_ritual_categories = {
 	"ESHIN_PESTILENS_RITUAL",
 	"ESHIN_SKYRE_RITUAL"
 }
-local contract_council_countdown = 3;
+local contract_council_countdown_start = 3;
 local contract_council_countdown_reset = 10; -- The turns between every council meeting
 local contract_per_turn_chance = 5;
 local contract_timeout_after_issue = 10; -- The turns each contract is active for
@@ -22,6 +22,9 @@ local dust_xp_gain = 1200;
 
 function add_clan_contracts_listeners()
 	out("#### Adding Clan Contracts Listeners ####");
+	
+	local contract_council_countdown = cm:get_saved_value("contract_council_countdown") or contract_council_countdown_start;
+	common.set_context_value("contract_council_counter", contract_council_countdown);
 	
 	cm:add_faction_turn_start_listener_by_name(
 		"contract_FactionTurnStart",
@@ -39,6 +42,7 @@ function add_clan_contracts_listeners()
 				contract_council_countdown = contract_council_countdown_reset;
 			end
 			
+			cm:set_saved_value("contract_council_countdown", contract_council_countdown);
 			common.set_context_value("contract_council_counter", contract_council_countdown);
 			
 			for i = 1, #contract_clans do

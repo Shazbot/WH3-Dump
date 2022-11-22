@@ -560,8 +560,12 @@ function prologue_advice_debris_show_objective()
 		if uic_treasury then
 			uic_treasury:SetVisible(true);
 		end
-		cm:replenish_action_points("faction:"..prologue_player_faction..",forename:1643960929", 0)
-		PrologueAddTopicLeader("wh3_prologue_objective_turn_001_04", function() uim:override("end_turn"):set_allowed(true); HighlightEndTurnButton() end);
+
+		if prologue_check_progression["first_settlement_revealed"] == true then
+			PrologueSettlementMarker();
+		else
+			PrologueAddTopicLeader("wh3_prologue_objective_turn_001_04", function() uim:override("end_turn"):set_allowed(true); HighlightEndTurnButton() end);
+		end
 	end
 end
 
@@ -3187,11 +3191,7 @@ function prologue_advice_after_brazen_altar_battle_003()
 	cm:show_advice("wh3_prologue_narrative_29_2_1", true, false, prologue_advice_after_brazen_altar_battle_end, 0, 0.5);
 end
 
-function prologue_advice_after_brazen_altar_battle_end()
-	cm:dismiss_advice();
-
-	prologue_end_of_dialogue("", "", false);
-
+function prologue_advice_trigger_retribution()
 	cm:make_region_visible_in_shroud(prologue_player_faction, "wh3_prologue_region_temp_4");
 
 	cm:add_circle_area_trigger(277, 361, 3, "kill_gerik", "", true, false, false);
@@ -3210,6 +3210,14 @@ function prologue_advice_after_brazen_altar_battle_end()
 	cm:trigger_mission(prologue_player_faction, "wh3_prologue_mission_retribution", true);
 	cm:add_scripted_composite_scene_to_logical_position("kill_gerik_marker", "prologue_quest_sub_goal_marker", 415, 468, 0, 0, false, true, true)
 	
+end
+
+function prologue_advice_after_brazen_altar_battle_end()
+	cm:dismiss_advice();
+
+	prologue_end_of_dialogue("", "", false);
+
+	prologue_advice_trigger_retribution();
 
 	core:add_listener(
 		"Prologue_RetributionMission",
@@ -3225,6 +3233,7 @@ function prologue_advice_after_brazen_altar_battle_end()
 	);
 
 end
+
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 

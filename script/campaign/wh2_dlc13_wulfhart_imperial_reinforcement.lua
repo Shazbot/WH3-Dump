@@ -373,15 +373,15 @@ function add_wulfhart_imperial_supply_listeners()
 				end
 			end
 			
-			if faction:has_effect_bundle("wh2_dlc13_wulfhart_wanted_bar_increase") then
-				cm:callback(
-					function()
+			cm:callback(
+				function()
+					if faction:has_effect_bundle("wh2_dlc13_wulfhart_wanted_bar_increase") then
 						update_hostility_bar("increase_event")
 						cm:remove_effect_bundle("wh2_dlc13_wulfhart_wanted_bar_increase", faction_name)
-					end,
-					0.5
-				)
-			end
+					end
+				end,
+				0.5
+			)
 		end,
 		true
 	)

@@ -74,6 +74,7 @@ require("wh3_campaign_great_bastion")
 require("wh3_campaign_belakor")
 require("endgames")
 require("wh3_main_volkmar_elector_units")
+require("wh3_campaign_def_slaves")
 
 -- Intro Logic (Often best to load this after other functionality has been loaded)
 require("faction_intro")

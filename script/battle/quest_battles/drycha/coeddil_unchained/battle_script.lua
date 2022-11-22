@@ -334,7 +334,7 @@ end;
 
 -- Name of waystone building
 -- (change to suit)
-waystone_building_name = "wef_large_waystone_01_qb";
+waystone_building_name = "wef_large_waystone_02";
 
 
 -- List of positions near to each waystone

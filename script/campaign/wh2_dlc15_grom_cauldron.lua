@@ -418,14 +418,14 @@ local food_challenge_requirements = {
 	["wh2_dlc15_objective_override_grom_food_merchant_2"] = {ingredients = {"wh2_dlc15_boar", "wh2_dlc15_lion"}, recipes = {"wh2_dlc15_food_dish_7"}},
 	["wh2_dlc15_objective_override_grom_food_merchant_3"] = {ingredients = {"wh2_dlc15_pepper", "wh2_dlc15_stinky"}, recipes = {"wh2_dlc15_food_dish_8"}},
 	["wh2_dlc15_objective_override_grom_food_merchant_4"] = {ingredients = {"wh2_dlc15_clams", "wh2_dlc15_gold_fish", "wh2_dlc15_tentacle", "wh2_dlc15_milk"}, recipes = {"wh2_dlc15_food_dish_9"}},
-	["wh2_dlc15_objective_override_grom_food_merchant_7"] = {recipes = {"wh2_dlc15_food_dish_2", "wh2_dlc15_food_special_dish_15"}},
+	["wh2_dlc15_objective_override_grom_food_merchant_7"] = {recipes = {"wh2_dlc15_food_dish_2", "wh2_dlc15_food_special_dish_5"}},
 	["wh2_dlc15_objective_override_grom_food_merchant_8"] = {recipes = {"wh2_dlc15_food_dish_7", "wh2_dlc15_food_dish_9"}},
-	["wh2_dlc15_objective_override_grom_food_merchant_9"] = {recipes = {"wh2_dlc15_food_dish_4", "wh2_dlc15_food_dish_6", "wh2_dlc15_food_special_dish_12", "wh2_dlc15_food_special_dish_13"}},
-	["wh2_dlc15_objective_override_grom_food_merchant_13"] = {recipes = {"wh2_dlc15_food_special_dish_12", "wh2_dlc15_food_special_dish_14"}},
-	["wh2_dlc15_objective_override_grom_food_merchant_14"] = {recipes = {"wh2_dlc15_food_special_dish_11", "wh2_dlc15_food_special_dish_12", "wh2_dlc15_food_special_dish_13", "wh2_dlc15_food_special_dish_15"}},
-	["wh2_dlc15_objective_override_grom_food_merchant_15"] = {recipes = {"wh2_dlc15_food_special_dish_11", "wh2_dlc15_food_special_dish_14"}},
-	["wh2_dlc15_objective_override_grom_food_merchant_16"] = {recipes = {"wh2_dlc15_food_special_dish_11", "wh2_dlc15_food_special_dish_13", "wh2_dlc15_food_special_dish_14", "wh2_dlc15_food_special_dish_15"}},
-	["wh2_dlc15_objective_override_grom_food_merchant_17"] = {recipes = {"wh2_dlc15_food_special_dish_12", "wh2_dlc15_food_special_dish_13", "wh2_dlc15_food_special_dish_15"}}
+	["wh2_dlc15_objective_override_grom_food_merchant_9"] = {recipes = {"wh2_dlc15_food_dish_4", "wh2_dlc15_food_dish_6", "wh2_dlc15_food_special_dish_2", "wh2_dlc15_food_special_dish_3"}},
+	["wh2_dlc15_objective_override_grom_food_merchant_13"] = {recipes = {"wh2_dlc15_food_special_dish_2", "wh2_dlc15_food_special_dish_4"}},
+	["wh2_dlc15_objective_override_grom_food_merchant_14"] = {recipes = {"wh2_dlc15_food_special_dish_1", "wh2_dlc15_food_special_dish_2", "wh2_dlc15_food_special_dish_3", "wh2_dlc15_food_special_dish_5"}},
+	["wh2_dlc15_objective_override_grom_food_merchant_15"] = {recipes = {"wh2_dlc15_food_special_dish_1", "wh2_dlc15_food_special_dish_4"}},
+	["wh2_dlc15_objective_override_grom_food_merchant_16"] = {recipes = {"wh2_dlc15_food_special_dish_1", "wh2_dlc15_food_special_dish_3", "wh2_dlc15_food_special_dish_4", "wh2_dlc15_food_special_dish_5"}},
+	["wh2_dlc15_objective_override_grom_food_merchant_17"] = {recipes = {"wh2_dlc15_food_special_dish_2", "wh2_dlc15_food_special_dish_3", "wh2_dlc15_food_special_dish_5"}}
 }
 
 -- track the active food challenge
@@ -680,11 +680,16 @@ function add_grom_food_listeners()
 		true
 	)
 	
+	local spawned_merchant_this_turn = false
+	
 	core:add_listener(
 		"spawn_food_merchant",
 		"ScriptEventSpawnGromFoodMerchant",
-		true,
 		function()
+			return not spawned_merchant_this_turn
+		end,
+		function()
+			spawned_merchant_this_turn = true
 			spawn_food_merchant()
 		end,
 		true
@@ -890,6 +895,8 @@ function spawn_food_merchant(queue_time)
 			cm:trigger_incident_with_targets(faction:command_queue_index(), "wh2_dlc15_grom_cauldron_food_merchant_visits", 0, 0, 0, 0, cm:get_region(region):cqi(), 0)
 			core:trigger_event("ScriptEventFoodMerchantSpawned")
 		end
+		
+		spawned_merchant_this_turn = false
 	end
 end
 

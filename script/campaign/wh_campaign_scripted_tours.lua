@@ -537,6 +537,8 @@ function character_skill_points_tour_lock_ui(value)
 		"help_panel_button",
 		"spell_browser",
 		"camera_settings",
+		"end_turn",
+		"end_turn_notification",
 		"end_turn_options",
 		"province_overview_panel_help_button",
 		"mortuary_cult",

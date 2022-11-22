@@ -115,7 +115,7 @@ function belakor_daemon_prince_creation:start()
 end
 
 function belakor_daemon_prince_creation:apply_effect_bundle(character)
-	if cm:char_is_general_with_army(character) and character:faction():is_contained_in_faction_set(self.faction_set_key) and not character:character_details():is_unique() and not character:is_faction_leader() then
+	if cm:char_is_general_with_army(character) and character:faction():is_contained_in_faction_set(self.faction_set_key) and not character:character_details():is_unique() and not character:is_faction_leader() and not character:has_effect_bundle(self.effect_bundle_key) then
 		cm:apply_effect_bundle_to_character(self.effect_bundle_key, character, self.effect_bundle_duration)
 		cm:apply_effect_bundle_to_character(self.infinite_effect_bundle_key, character, 0)
 		

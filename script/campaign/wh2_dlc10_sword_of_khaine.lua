@@ -286,13 +286,17 @@ function sword_of_khaine:remove_sword()
 end;
 
 function sword_of_khaine:remove_sword_effect_bundle()
+	local faction = cm:get_faction(self.owner.faction);
+	
 	for i = 1, #self.negative_index do
-		cm:remove_effect_bundle(self.negative_index[i], self.owner.faction);
+		if faction:has_effect_bundle(self.negative_index[i]) then
+			cm:remove_effect_bundle(self.negative_index[i], self.owner.faction);
+		end;
 	end;
 end;
 
 -- set new sword owner and update sword owner cache
-function sword_of_khaine:set_sword_owner(cqi, limited_to_elven)
+function sword_of_khaine:set_sword_owner(cqi, limited_to_elven, awarded_via_dilemma)
 	local character = cm:get_character_by_cqi(cqi); 
 	
 	if not character or character:is_null_interface() or (limited_to_elven and not self:faction_is_elven(character:faction())) or character:faction():name() == "rebels" then
@@ -313,7 +317,9 @@ function sword_of_khaine:set_sword_owner(cqi, limited_to_elven)
 			ready = true
 		};
 		
-		cm:force_add_ancillary(character, self.key_index[self.owner.lv], true, false);
+		if not awarded_via_dilemma then
+			cm:force_add_ancillary(character, self.key_index[self.owner.lv], true, false);
+		end
 		
 		if sword_owner_faction:is_human() then
 			cm:apply_effect_bundle(self.negative_index[self.owner.lv], self.owner.faction, 0);
@@ -347,7 +353,7 @@ function sword_of_khaine:faction_is_elven(faction)
 end;
 
 -- The sword hungersssss
-function sword_of_khaine:level_up()
+function sword_of_khaine:level_up(awarded_via_dilemma)
 	if (self.owner.lv + 1) <= #self.key_index then
 		local character = cm:get_character_by_cqi(self.owner.character_cqi);
 
@@ -365,7 +371,9 @@ function sword_of_khaine:level_up()
 		self.owner.lv = self.owner.lv + 1;
 		self.owner.cd = self.growth_time[self.owner.lv];
 		
-		cm:force_add_ancillary(character, self.key_index[self.owner.lv], true, false);
+		if not awarded_via_dilemma then
+			cm:force_add_ancillary(character, self.key_index[self.owner.lv], true, false);
+		end;
 
 		if sword_owner_faction:is_human() then
 			cm:apply_effect_bundle(self.negative_index[self.owner.lv], self.owner.faction, 0);
@@ -393,7 +401,7 @@ function sword_of_khaine:transfer_sword_after_battle(target_character)
 		local faction = target_character:faction();
 		
 		if faction:is_human() then
-			cm:trigger_dilemma(faction:name(), self.event_index.sword_picking);
+			cm:trigger_dilemma_with_targets(faction:command_queue_index(), self.event_index.sword_picking, 0, 0, cqi, 0, 0, 0);
 			self.owner_cache = cqi;
 		else
 			self:set_sword_owner(cqi, false);
@@ -482,7 +490,6 @@ function sword_of_khaine:add_listeners()
 			self:validate_sword_owner();
 		
 			if self.owner.faction then
-
 				local current_faction_name = self.owner.faction
 				local current_faction = cm:get_faction(current_faction_name)
 
@@ -492,7 +499,7 @@ function sword_of_khaine:add_listeners()
 							if self.owner.cd >= 1 and self.owner.lv <= #self.key_index then
 								self.owner.cd = self.owner.cd - 1;
 							elseif self.owner.cd == 0 and self.owner.lv + 1 <= #self.key_index then
-								cm:trigger_dilemma(current_faction_name, self.event_index.sword_level_dilemma_index[self.owner.lv]);
+								cm:trigger_dilemma_with_targets(current_faction:command_queue_index(), self.event_index.sword_level_dilemma_index[self.owner.lv], 0, 0, self.owner.character_cqi, 0, 0, 0);
 							end;
 						end;
 					-- deal with AI
@@ -582,7 +589,7 @@ function sword_of_khaine:add_listeners()
 				
 				if dilemma == self.event_index.sword_level_dilemma_index[i] then
 					if choice == 0 then
-						self:level_up();
+						self:level_up(true);
 						
 						if i == #self.event_index.sword_level_dilemma_index then
 							cm:trigger_incident(faction_name, self.event_index.sword_stuck, true);
@@ -600,7 +607,7 @@ function sword_of_khaine:add_listeners()
 			
 			if dilemma == self.event_index.sword_picking then
 				if choice == 0 and self.owner_cache > 0 then
-					self:set_sword_owner(self.owner_cache);
+					self:set_sword_owner(self.owner_cache, false, true);
 				elseif choice == 1 then
 					self:return_sword_to_shrine();
 				end;

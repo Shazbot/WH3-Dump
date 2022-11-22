@@ -366,7 +366,7 @@ function Bloodgrounds:create_bloodground(region, is_preview)
 		cm:add_scripted_composite_scene_to_settlement(
 			"settlement_razed",
 			self.raze_settlement_vfx,
-			"settlement:"..bloodground_key,
+			region,
 			0,
 			0,
 			true,
@@ -574,7 +574,7 @@ function Bloodgrounds:unlock_ritual_of_ruin(bloodground)
 		1803
 	)
 
-	cm:add_scripted_composite_scene_to_settlement(herdstone_key.."_ritual_ready_fx",self.ritual_ready_vfx_key,"settlement:"..herdstone_key,1,1,false,true,false)
+	cm:add_scripted_composite_scene_to_settlement(herdstone_key .. "_ritual_ready_fx", self.ritual_ready_vfx_key, region_interface, 1, 1, false, true, false)
 
 	core:trigger_event("ScriptEventRitualofRuinUnlocked")
 	self:ui_update_ritual_state(bloodground)

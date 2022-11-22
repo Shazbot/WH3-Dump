@@ -928,7 +928,6 @@ function vassal_diplomacy_lock_listeners()
 		true
 	);
 
-
 	core:add_listener(
 		"FactionEncountersOtherFactionIntroduceMaster",
 		"FactionEncountersOtherFaction",
@@ -936,11 +935,15 @@ function vassal_diplomacy_lock_listeners()
 			return context:other_faction():is_vassal()
 		end,
 		function(context)
-			cm:make_diplomacy_available(context:faction():name(), context:other_faction():master():name())		
+			local faction = context:faction():name()
+			local other_faction_master = context:other_faction():master():name()
+			
+			if faction ~= other_faction_master then
+				cm:make_diplomacy_available(faction, other_faction_master)
+			end
 		end,
 		true
 	);
-
 
 	---check at world start round just in case a faction has escaped vassalage (e.g. because master died) but hasn't been picked up by other listener
 	core:add_listener(
@@ -965,7 +968,13 @@ end
 
 --- disables declarations of war against a specific faction and adds it to the register of human vassals
 function disable_wars_against_human_vassal(faction_key, is_disable)
-	cm:force_diplomacy("all", "faction:"..faction_key, "war", not is_disable, not is_disable)
+	for _, faction in model_pairs(cm:model():world():faction_list()) do
+		local current_faction_key = faction:name()
+		
+		if current_faction_key ~= faction_key and not faction:is_human() then
+			cm:force_diplomacy("faction:" .. current_faction_key, "faction:" .. faction_key, "war", not is_disable, true)
+		end
+	end
 
 	local human_vassals = cm:get_saved_value("human_vassals")
 	

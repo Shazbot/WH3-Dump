@@ -50,6 +50,41 @@ local empire_political_civil_war = {};
 local empire_political_civil_war_min_loyalty = 0;
 local empire_political_civil_war_max_loyalty = 10;
 
+local empire_demand_return_dilemma_keys = {
+	wh2_dlc13_demand_return_wh3_main_combi_region_altdorf = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_averheim = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_bechafen = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_brass_keep = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_carroburg = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_castle_von_rauken = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_dietershafen = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_eilhart = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_essen = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_flensburg = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_grenzstadt = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_grunburg = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_helmgart = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_hergig = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_kappelburg = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_kemperbad = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_krugenheim = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_middenheim = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_middenstag = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_mordheim = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_nagenhof = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_niedling = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_norden = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_nuln = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_pfeildorf = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_salzenmund = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_talabheim = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_the_moot = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_weismund = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_wissenburg = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_wolfenburg = true,
+	wh2_dlc13_demand_return_wh3_main_combi_region_wurtbad = true
+};
+
 local empire_political_dilemma = {};
 local empire_demand_return_queue = {};
 local empire_demand_return_details = {};
@@ -954,7 +989,7 @@ function empire_trigger_demand_return(player_key, region_key, conquerer_key, ele
 	
 	empire_demand_return_details = {player = player_key, region = region_key, conquerer = conquerer_key, elector = elector_faction_key};
 	
-	if elector_faction:is_dead() == true then
+	if elector_faction:is_dead() == true or not empire_demand_return_dilemma_keys["wh2_dlc13_demand_return_"..region_key] then
 		empire_remove_from_return_queue(region_key, player_key);
 	else
 		cm:trigger_dilemma_with_targets(player_cqi, "wh2_dlc13_demand_return_"..region_key, elector_faction_cqi, conquerer_cqi, 0, 0, region_cqi, 0);
@@ -2393,6 +2428,7 @@ cm:add_saving_game_callback(
 		cm:save_named_value("empire_political_civil_war", empire_political_civil_war, context);
 		cm:save_named_value("empire_demand_return_queue", empire_demand_return_queue, context);
 		cm:save_named_value("empire_demand_return_details", empire_demand_return_details, context);
+		cm:save_named_value("empire_global_confederation_cooldown", empire_global_confederation_cooldown, context);
 	end
 );
 cm:add_loading_game_callback(
@@ -2406,6 +2442,7 @@ cm:add_loading_game_callback(
 			empire_political_civil_war = cm:load_named_value("empire_political_civil_war", empire_political_civil_war, context);
 			empire_demand_return_queue = cm:load_named_value("empire_demand_return_queue", empire_demand_return_queue, context);
 			empire_demand_return_details = cm:load_named_value("empire_demand_return_details", empire_demand_return_details, context);
+			empire_global_confederation_cooldown = cm:load_named_value("empire_global_confederation_cooldown", empire_global_confederation_cooldown, context);
 		end
 	end
 );

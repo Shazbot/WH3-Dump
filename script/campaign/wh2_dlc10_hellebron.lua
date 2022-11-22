@@ -69,7 +69,6 @@ death_night = {
 		gathered_loot_value = 0,
 
 		active = false,
-		human = false,
 		cooldown = 25,
 
 		spawn_pos= {x = 229, y = 816},
@@ -193,8 +192,6 @@ function death_night:blood_voyage_update()
 	local hellebron = faction:faction_leader();
 	local ulthuan_target, ulthuan_target_faction, human_high_elves = self:generate_ulthuan_target();
 	local force_player_blood_voyage = false; -- Debug
-	local garrison_residence_cqi = cm:get_region(self.har_ganeth_key):garrison_residence():command_queue_index();
-	local human = faction:is_human()
 	
 	if turn_number <= 30 then
 		unit_list = random_army_manager:generate_force(self.army_key_1);
@@ -210,39 +207,27 @@ function death_night:blood_voyage_update()
 		spawn = self.spawn_pos;
 	end
 
-	if cm:is_multiplayer() == true or (human == true and ulthuan_target == nil) or force_player_blood_voyage == true  then
-		-- Player Controlled Voyage
-		unit_list = random_army_manager:generate_force(self.army_key_player);
-		blood_voyage_inv = invasion_manager:new_invasion("blood_voyage_inv_"..turn_number, self.faction_key, unit_list, spawn);
-		self.blood_voyage.current_target = "";
-		self.blood_voyage.human = true;
-	else
-		-- AI Controlled Voyage
-		blood_voyage_inv = invasion_manager:new_invasion("blood_voyage_inv_"..turn_number, self.blood_voyage.faction_key, unit_list, spawn);
+	blood_voyage_inv = invasion_manager:new_invasion("blood_voyage_inv_"..turn_number, self.blood_voyage.faction_key, unit_list, spawn);
+	if ulthuan_target then
 		blood_voyage_inv:set_target("REGION", ulthuan_target, ulthuan_target_faction);
 		self.blood_voyage.current_target = ulthuan_target_faction;
-		self.blood_voyage.human = false;
+	end
 
-		if not human then
-			local difficulty = cm:get_difficulty(true);
+	if not faction:is_human() then
+		local difficulty = cm:get_difficulty(true);
 
-			if difficulty == "very hard" then
-				blood_voyage_inv:add_unit_experience(1);
-			elseif difficulty == "legendary" then
-				blood_voyage_inv:add_unit_experience(3);
-			end
-		end		
+		if difficulty == "very hard" then
+			blood_voyage_inv:add_unit_experience(1);
+		elseif difficulty == "legendary" then
+			blood_voyage_inv:add_unit_experience(3);
+		end
 	end
 	
 	if hellebron and hellebron:is_null_interface() == false and hellebron:has_skill("wh2_dlc10_skill_def_crone_unique_blood_queen") == true then
 		blood_voyage_inv:add_unit_experience(3);
 	end
 	
-	if self.blood_voyage.human == true then
-		blood_voyage_inv:apply_effect("wh2_dlc10_bundle_blood_voyage_player", 15);
-	else
-		blood_voyage_inv:apply_effect("wh2_dlc10_bundle_blood_voyage", 0);
-	end
+	blood_voyage_inv:apply_effect("wh2_dlc10_bundle_blood_voyage", 0);
 	
 	blood_voyage_inv:abort_on_target_owner_change(true);
 	blood_voyage_inv:start_invasion(
@@ -267,17 +252,11 @@ function death_night:blood_voyage_update()
 	cm:force_diplomacy("faction:"..self.faction_key, "faction:"..self.blood_voyage.faction_key, "war", false, false, true);
 
 	if (faction:is_null_interface() == false) then
-		local owner = "_";
-		
-		if self.blood_voyage.human == true then
-			owner = "_owner_";
-		end
-		
 		cm:show_message_event_located(
 			faction:name(),
-			"event_feed_strings_text_wh_dlc10_event_feed_string_scripted_event_blood_voyage"..owner.."title",
-			"event_feed_strings_text_wh_dlc10_event_feed_string_scripted_event_blood_voyage"..owner.."primary_detail",
-			"event_feed_strings_text_wh_dlc10_event_feed_string_scripted_event_blood_voyage"..owner.."secondary_detail",
+			"event_feed_strings_text_wh_dlc10_event_feed_string_scripted_event_blood_voyage_title",
+			"event_feed_strings_text_wh_dlc10_event_feed_string_scripted_event_blood_voyage_primary_detail",
+			"event_feed_strings_text_wh_dlc10_event_feed_string_scripted_event_blood_voyage_secondary_detail",
 			spawn.x,
 			spawn.y,
 			true,
@@ -292,7 +271,6 @@ function death_night:blood_voyage_update()
 	end
 	
 	cm:apply_effect_bundle("wh2_dlc10_bundle_blood_voyage_active", self.ulthuan_defender_key, 0);
-	cm:remove_garrison_residence_vfx(garrison_residence_cqi, self.vfx_key);
 end
 
 -- Get the sea location nearest the Hellebron faction's home region (which is probably, but not necessarily, Har Ganeth).
@@ -412,14 +390,17 @@ function death_night:apply_effects(faction)
 	
 	out.design("\tCurrent death night level: "..bar_effect.." ("..tostring(percent * 100)..")");
 	
-	death_night:remove_effects(faction_key);
-	cm:apply_effect_bundle(bar_effect, faction_key, 0);
-end
-
-function death_night:remove_effects(faction_key)
-	for _, effect_bundle in ipairs(self.level_effects) do
-		cm:remove_effect_bundle(effect_bundle, faction_key);
+	if faction:has_effect_bundle(bar_effect) then
+		return;
 	end
+	
+	for _, effect_bundle in ipairs(self.level_effects) do
+		if faction:has_effect_bundle(effect_bundle) then
+			cm:remove_effect_bundle(effect_bundle, faction_key);
+		end
+	end
+	
+	cm:apply_effect_bundle(bar_effect, faction_key, 0);
 end
 
 function death_night:update_ui()
@@ -618,6 +599,8 @@ function death_night:turn_start_updates()
 			if self.triggered_this_turn == true then
 				self.triggered_this_turn = false;
 				
+				cm:remove_garrison_residence_vfx(cm:get_region(self.har_ganeth_key):garrison_residence():command_queue_index(), self.vfx_key);
+				
 				if self.blood_voyage.active == false then
 					death_night:blood_voyage_update()
 				else
@@ -637,28 +620,22 @@ function death_night:turn_start_updates()
 			self:update_ui();
 
 			if self.blood_voyage.active == true then
-				if self.blood_voyage.human == false then					
-					if bv_faction:is_null_interface() == true or bv_faction:is_dead() == true then
-						cm:trigger_custom_incident(self.faction_key, "wh2_dlc10_incident_hef_blood_voyage_ends", true, "payload{money "..self.blood_voyage.gathered_loot_value..";}");
-						core:trigger_event("ScriptEventDeathBloodVoyageDead");
-						out.design("++1++ Blood Voyage Active False!");
-						self.blood_voyage.active = false;
-						self.blood_voyage.current_target = "";
-					elseif self.blood_voyage.current_target ~= "" then
-						local bv_target = cm:get_faction(self.blood_voyage.current_target);
-						
-						if bv_target:is_null_interface() == true or bv_target:is_dead() == true then
-							local ulthuan_target, ulthuan_target_faction, human_high_elves = self:generate_ulthuan_target();
-							
-							if ulthuan_target ~= nil then
-								cm:force_declare_war(self.blood_voyage.faction_key, ulthuan_target_faction, true, true);
-							end
-						end
-					end
-				else
-					out.design("++2++ Blood Voyage Active False!");
+				if bv_faction:is_null_interface() == true or bv_faction:is_dead() == true then
+					cm:trigger_custom_incident(self.faction_key, "wh2_dlc10_incident_hef_blood_voyage_ends", true, "payload{money "..self.blood_voyage.gathered_loot_value..";}");
+					core:trigger_event("ScriptEventDeathBloodVoyageDead");
+					out.design("++1++ Blood Voyage Active False!");
 					self.blood_voyage.active = false;
 					self.blood_voyage.current_target = "";
+				elseif self.blood_voyage.current_target ~= "" then
+					local bv_target = cm:get_faction(self.blood_voyage.current_target);
+					
+					if bv_target:is_null_interface() == true or bv_target:is_dead() == true then
+						local ulthuan_target, ulthuan_target_faction, human_high_elves = self:generate_ulthuan_target();
+						
+						if ulthuan_target ~= nil then
+							cm:force_declare_war(self.blood_voyage.faction_key, ulthuan_target_faction, true, true);
+						end
+					end
 				end
 			end
 			
@@ -678,7 +655,6 @@ function death_night:ai_turn_start_updates()
 			out.design("\tblood_voyage.active: "..tostring(self.blood_voyage.active));
 			out.design("\tblood_voyage.loot: "..tostring(self.blood_voyage.gathered_loot_value));
 			out.design("\tblood_voyage.target: "..tostring(self.blood_voyage.current_target));
-			out.design("\tblood_voyage.human: "..tostring(self.blood_voyage.human));
 			out.design("\tblood_voyage.cooldown: "..tostring(self.blood_voyage.cooldown));
 
 			local har_ganeth = cm:get_region(self.har_ganeth_key);
@@ -702,7 +678,7 @@ function death_night:ai_turn_start_updates()
 						self.blood_voyage.current_target = "";
 						self.blood_voyage.cooldown = 30;
 						cm:remove_effect_bundle("wh2_dlc10_bundle_blood_voyage_active", self.ulthuan_defender_key);
-					elseif self.blood_voyage.human == false and self.blood_voyage.current_target ~= "" then
+					elseif self.blood_voyage.current_target ~= "" then
 						local bv_target = cm:get_faction(self.blood_voyage.current_target);
 						
 						if bv_target:is_null_interface() == true or bv_target:is_dead() == true then
@@ -762,7 +738,6 @@ cm:add_saving_game_callback(
 		cm:save_named_value("death_night.slaves_freed", death_night.slaves_freed, context);
 		cm:save_named_value("death_night.blood_voyage.gathered_loot_value", death_night.blood_voyage.gathered_loot_value, context);
 		cm:save_named_value("death_night.blood_voyage.active", death_night.blood_voyage.active, context);
-		cm:save_named_value("death_night.blood_voyage.human", death_night.blood_voyage.human, context);
 		cm:save_named_value("death_night.blood_voyage.cooldown", death_night.blood_voyage.cooldown, context);
 		cm:save_named_value("death_night.blood_voyage.current_target", death_night.blood_voyage.current_target, context);
 		cm:save_named_value("death_night.blood_voyage.possible_targets", death_night.blood_voyage.possible_targets, context);
@@ -780,7 +755,6 @@ cm:add_loading_game_callback(
 			death_night.slaves_freed = cm:load_named_value("death_night.slaves_freed", death_night.slaves_freed, context);
 			death_night.blood_voyage.gathered_loot_value = cm:load_named_value("death_night.blood_voyage.gathered_loot_value", death_night.blood_voyage.gathered_loot_value, context);
 			death_night.blood_voyage.active = cm:load_named_value("death_night.blood_voyage.active", death_night.blood_voyage.active, context);
-			death_night.blood_voyage.human = cm:load_named_value("death_night.blood_voyage.human", death_night.blood_voyage.human, context);
 			death_night.blood_voyage.cooldown = cm:load_named_value("death_night.blood_voyage.cooldown", death_night.blood_voyage.cooldown, context);
 			death_night.blood_voyage.current_target = cm:load_named_value("death_night.blood_voyage.current_target", death_night.blood_voyage.current_target, context);
 			death_night.blood_voyage.possible_targets = cm:load_named_value("death_night.blood_voyage.possible_targets", death_night.blood_voyage.possible_targets, context);

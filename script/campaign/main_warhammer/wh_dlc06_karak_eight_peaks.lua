@@ -60,7 +60,7 @@ local belegar_characters = {
 	-- Halkenhaf Stonebeard [Thane]
 	{forename = "names_name_2147358982", surname = "names_name_2147358985", start_rank = 5, kill_if_AI = true, start_skills = {"wh_main_skill_all_all_self_blade_master_starter", "wh_main_skill_all_all_self_devastating_charge", "wh_main_skill_all_all_self_hard_to_hit", "wh_main_skill_all_all_self_deadly_blade"}},
 	-- Dramar Hammerfist [Engineer]
-	{forename = "names_name_2147359003", surname = "names_name_2147359010", start_rank = 5, kill_if_AI = true, start_skills = {"wh2_dlc17_skill_dwf_master_engineer_restock","wh2_main_skill_all_hero_assist_army_increase_mobility", "wh_main_skill_dwf_engineer_self_dead_eye", "wh2_main_skill_all_hero_passive_boost_income"}}
+	{forename = "names_name_2147359003", surname = "names_name_2147359010", start_rank = 5, kill_if_AI = true, start_skills = {"wh2_dlc17_skill_dwf_master_engineer_restock","wh2_main_skill_all_hero_assist_army_increase_mobility", "wh2_main_skill_all_hero_hinder_agent_wound", "wh2_main_skill_all_hero_passive_boost_income"}}
 };
 
 function belegar_start_experience()	
@@ -367,13 +367,15 @@ function eight_peaks_check(karak_owner)
 		out("\towner_save_value = " .. tostring(owner_save_value));
 		
 		if not owner_save_value then
+			local settlement = cm:get_region(karak_eight_peaks_region_name):settlement();
+			
 			cm:show_message_event_located(
 				karak_owner,
 				"event_feed_strings_text_wh_dlc06_event_feed_string_scripted_event_captured_karak_eight_peaks_title",
 				"event_feed_strings_text_wh_dlc06_event_feed_string_scripted_event_captured_karak_eight_peaks_primary_detail_" .. karak_owner,
 				"event_feed_strings_text_wh_dlc06_event_feed_string_scripted_event_captured_karak_eight_peaks_secondary_detail_" .. karak_owner,
-				732,
-				270,
+				settlement:logical_position_x(),
+				settlement:logical_position_y(),
 				true,
 				601
 			);

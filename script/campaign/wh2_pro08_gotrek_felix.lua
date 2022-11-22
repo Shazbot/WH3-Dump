@@ -40,12 +40,12 @@ function add_gotrek_felix_listeners()
 	out("#### Adding Gotrek & Felix Listeners ####")
 	
 	if cm:is_new_game() then
-		if cm:get_local_faction(true) and cm:is_dlc_flag_enabled_by_anyone("TW_WH2_GOTREK_FELIX") then
+		if cm:get_local_faction(true) and cm:is_dlc_flag_enabled_by_everyone("TW_WH2_GOTREK_FELIX") then
 			gotrek_details.ai_only = false
 			gotrek_details.state = gotrek_state.building
 			gotrek_details.cooldown = 0
 		else
-			-- we are in an autorun, or single player game where they do not own the content, so switch to ai only mode
+			-- we are in an autorun, or game where they do not own the content, so switch to ai only mode
 			gotrek_details.owner = gotrek_find_available_ai_faction()
 			gotrek_details.ai_only = true
 			gotrek_details.state = gotrek_state.cooldown

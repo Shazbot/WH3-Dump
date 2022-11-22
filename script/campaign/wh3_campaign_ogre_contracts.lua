@@ -200,8 +200,8 @@ function attempt_to_issue_ogre_contracts(faction_key)
 			for j = 0, selected_issuing_faction:factions_met():num_items() - 1 do
 				local current_faction_met = selected_issuing_faction:factions_met():item_at(j);
 				
-				-- filter out any human or dead factions
-				if not current_faction_met:is_human() and not current_faction_met:is_dead() and not current_faction_met:has_effect_bundle("wh3_main_bundle_realm_factions") and not current_faction_met:has_effect_bundle("wh3_main_bundle_rift_factions") then
+				-- filter out any human, dead or vassal/master factions
+				if not current_faction_met:is_human() and not current_faction_met:is_dead() and not current_faction_met:has_effect_bundle("wh3_main_bundle_realm_factions") and not current_faction_met:has_effect_bundle("wh3_main_bundle_rift_factions") and not selected_issuing_faction:is_vassal_of(current_faction_met) and not current_faction_met:is_vassal_of(selected_issuing_faction) then
 					local current_faction_relation = selected_issuing_faction:diplomatic_attitude_towards(current_faction_met:name());
 					
 					if current_faction_relation < lowest_relation then

@@ -815,6 +815,8 @@ function handle_revealing_sigils(single_sigil_only, faction_name, location)
 				break;
 			end
 		end
+		
+		if sigil_index == 0 then return end; -- this sigil has already been revealed
 	else
 		sigil_index = cm:random_number(total_sigils_available);
 	end

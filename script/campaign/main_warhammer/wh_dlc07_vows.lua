@@ -191,25 +191,25 @@ core:add_listener(
 core:add_listener(
 	"Vow_CharacterCreated",
 	"CharacterCreated",
-	true,
 	function(context)
 		local character = context:character()
+		return not context:has_respawned() and cm:char_is_general(character) and not character:is_wounded()
+	end,
+	function(context)
+		local character = context:character()
+		local faction = character:faction()
 		
-		if character:character_type("general") then
-			local faction = context:character():faction()
+		if faction:is_human() and faction:culture() == "wh_main_brt_bretonnia" then
+			local active_effect = faction:pooled_resource_manager():resource("brt_chivalry"):active_effect(0)
 			
-			if faction:is_human() and faction:culture() == "wh_main_brt_bretonnia" then
-				local active_effect = faction:pooled_resource_manager():resource("brt_chivalry"):active_effect(0)
-				
-				if active_effect == "wh_dlc07_bretonnia_chivalry_bar_801_1000" then
-					for i = 1, 6 do
-						add_vow_progress(character, "wh_dlc07_trait_brt_knights_vow_knowledge_pledge", true, false)
-						add_vow_progress(character, "wh_dlc07_trait_brt_questing_vow_protect_pledge", true, false)
-					end
-				elseif active_effect == "wh_dlc07_bretonnia_chivalry_bar_601_800" or active_effect == "wh_dlc07_bretonnia_chivalry_bar_401_600" then
-					for i = 1, 6 do
-						add_vow_progress(character, "wh_dlc07_trait_brt_knights_vow_knowledge_pledge", true, false)
-					end
+			if active_effect == "wh_dlc07_bretonnia_chivalry_bar_801_1000" then
+				for i = 1, 6 do
+					add_vow_progress(character, "wh_dlc07_trait_brt_knights_vow_knowledge_pledge", true, false)
+					add_vow_progress(character, "wh_dlc07_trait_brt_questing_vow_protect_pledge", true, false)
+				end
+			elseif active_effect == "wh_dlc07_bretonnia_chivalry_bar_601_800" or active_effect == "wh_dlc07_bretonnia_chivalry_bar_401_600" then
+				for i = 1, 6 do
+					add_vow_progress(character, "wh_dlc07_trait_brt_knights_vow_knowledge_pledge", true, false)
 				end
 			end
 		end

@@ -76,7 +76,10 @@ function add_eltharion_yvresse_defence_listeners()
 				
 				if should_change then
 					cm:set_saved_value("current_yvresse_cs_level", current_yvresse_cs_level);
-					cm:remove_scripted_composite_scene("yvresse_scenery");
+					
+					if cm:turn_number() > 1 then
+						cm:remove_scripted_composite_scene("yvresse_scenery");
+					end;
 					
 					local cs_name = "hef_tor_yvresse_me_0" .. current_yvresse_cs_level;
 					

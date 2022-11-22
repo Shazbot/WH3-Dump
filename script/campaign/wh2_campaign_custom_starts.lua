@@ -205,9 +205,6 @@ custom_starts.start_data.me_custom_start_factions = {
 			{"force_diplomacy", "wh_dlc05_wef_wood_elves", "wh_dlc03_bst_redhorn", "peace"},
 			{"teleport_character", "wh_dlc05_wef_wood_elves", 503, 518, 471, 517, true},
 			{"teleport_character", "wh_dlc05_wef_wood_elves", 515, 516, 467, 518, false},
-			{"create_army", "wh_main_brt_parravon", "wh_main_brt_inf_spearmen_at_arms,wh_main_brt_inf_spearmen_at_arms,wh_dlc07_brt_inf_men_at_arms_2,wh_dlc07_brt_inf_men_at_arms_2,wh_main_brt_inf_peasant_bowmen,wh_dlc07_brt_cav_knights_errant_0", 
-				"wh3_main_combi_region_castle_carcassonne", 475, 528, "wh_main_brt_lord", false
-			}	
 		}
 	},
 

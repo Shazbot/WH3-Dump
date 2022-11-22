@@ -16,9 +16,6 @@ NORSCAN_REWARDS = {
 			type = NORSCA_REWARD_CHARACTER_TYPES.agent,
 			subtype = "wh_dlc08_nor_kihar",
 			spawn_rank = 25,
-			ancillaries = {
-				"wh_dlc08_anc_mount_nor_kihar_chaos_dragon",
-			}
 		}
 	},
 	tzeentch = {

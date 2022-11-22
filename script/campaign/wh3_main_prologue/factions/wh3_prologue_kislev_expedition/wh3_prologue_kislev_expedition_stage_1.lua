@@ -250,11 +250,11 @@ function moving_listeners_for_first_few_turns()
 
 				-- set objective variable
 				new_objective = true;
-
-				--Metric check (step_number, step_name, skippable)
-				cm:trigger_prologue_step_metrics_hit(5, "selected_Yuri", false);
 			
 			end
+
+			--Metric check (step_number, step_name, skippable)
+			cm:trigger_prologue_step_metrics_hit(5, "selected_Yuri", false);
 		end,
 		true
 	);
@@ -1259,6 +1259,54 @@ end
 -- 	When player reach markers
 ---------------------------------------------------------------
 
+function PrologueSettlementMarker()
+	--dismiss advice
+	cm:dismiss_advice();
+
+	-- Remove the intro listeners
+	core:remove_listener("Intro_FactionTurnStart_Event_Prologue");
+	core:remove_listener("Intro_FactionTurnEnd_Event_Prologue");
+	core:remove_listener("Intro_CharacterSelected_Event_Prologue");
+
+	new_objective = false;
+
+	CampaignUI.ClearSelection();
+	
+	-- Add a cindy scene camera
+	local cutscene_intro = campaign_cutscene:new_from_cindyscene(
+		"prologue_intro_2",
+		function() 
+			PrologueAfterShelterCindy()
+		end,
+		"prologue_intro_2",
+		--"script/campaign/wh3_main_prologue/factions/"..prologue_player_faction.."/_cutscene/scenes/kislev_shelter_sh01.CindyScene",
+		0, 
+		1
+	);
+		
+	cutscene_intro:set_disable_settlement_labels(true);
+	cutscene_intro:set_dismiss_advice_on_end(false);
+	cutscene_intro:set_restore_shroud(false);
+	cutscene_intro:set_skippable(true, function() PrologueAfterShelterCindy() end);
+			
+	cutscene_intro:action(
+		function()
+			uim:override("campaign_flags"):set_allowed(false);
+			cm:trigger_2d_ui_sound("UI_CAM_PRO_Story_Stinger", 0);
+		end,
+		0
+	);
+		
+	cutscene_intro:action(
+		function()
+			prologue_advice_outpost_001();
+		end,
+		0
+	);
+	
+	cutscene_intro:start();
+end
+
 function PrologueCheckSiegeBattleArea(context)
 	if context:area_key() == "siege_marker" then
 		skip_all_scripted_tours();
@@ -1353,54 +1401,12 @@ function PrologueCheckSiegeBattleArea(context)
 	elseif context:area_key() == "settlement_marker" and prologue_check_progression["st_income_complete"] == false then
 		skip_all_scripted_tours();
 
-		--dismiss advice
-		cm:dismiss_advice();
-
-		-- Remove the intro listeners
-		core:remove_listener("Intro_FactionTurnStart_Event_Prologue");
-		core:remove_listener("Intro_FactionTurnEnd_Event_Prologue");
-		core:remove_listener("Intro_CharacterSelected_Event_Prologue");
-
-		new_objective = false;
-
-		CampaignUI.ClearSelection();
-		
 		-- update progression variables
 		prologue_check_progression["first_settlement_revealed"] = true;
-		
-		-- Add a cindy scene camera
-		local cutscene_intro = campaign_cutscene:new_from_cindyscene(
-			"prologue_intro_2",
-			function() 
-				PrologueAfterShelterCindy()
-			end,
-			"prologue_intro_2",
-			--"script/campaign/wh3_main_prologue/factions/"..prologue_player_faction.."/_cutscene/scenes/kislev_shelter_sh01.CindyScene",
-			0, 
-			1
-		);
-			
-		cutscene_intro:set_disable_settlement_labels(true);
-		cutscene_intro:set_dismiss_advice_on_end(false);
-		cutscene_intro:set_restore_shroud(false);
-		cutscene_intro:set_skippable(true, function() PrologueAfterShelterCindy() end);
-				
-		cutscene_intro:action(
-			function()
-				uim:override("campaign_flags"):set_allowed(false);
-				cm:trigger_2d_ui_sound("UI_CAM_PRO_Story_Stinger", 0);
-			end,
-			0
-		);
-			
-		cutscene_intro:action(
-			function()
-				prologue_advice_outpost_001();
-			end,
-			0
-		);
-		
-		cutscene_intro:start();
+
+		if prologue_check_progression["found_debris"] == true then
+			PrologueSettlementMarker();
+		end
 
 	elseif context:area_key() == "trouble_marker" and prologue_check_progression["st_income_complete"] == false then
 		prologue_advice_debris_001();

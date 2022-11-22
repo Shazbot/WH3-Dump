@@ -1970,8 +1970,6 @@ function add_stances_listeners()
 			function() uim:override("stances_with_button_hidden"):set_allowed(true) end,
 			true
 		)
-		
-		skip_all_scripted_tours();
 
 		local new_player = cm:model():shared_states_manager():get_state_as_bool_value("prologue_tutorial_on");
 		if new_player then
@@ -1979,7 +1977,7 @@ function add_stances_listeners()
 				"PanelOpenedCampaignStartStancesTour",
 				"PanelOpenedCampaign",
 				function(context) return context.string == "units_panel" end,
-				function() core:trigger_event("ScriptEventStances") end,
+				function() skip_all_scripted_tours(); core:trigger_event("ScriptEventStances") end,
 				true
 			);
 		else

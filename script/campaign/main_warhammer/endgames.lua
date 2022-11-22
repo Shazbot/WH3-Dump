@@ -427,10 +427,55 @@ end
 
 -- The endgame creates a new, 'ultimate' victory condition that concludes the intended campaign sandbox narrative
 -- The objectives for the Ultimate Victory are determined by the individual scenario scripts
--- Objectives ideally shouldn't target human factions so we can support multiplayer
 function endgame:create_victory_condition(faction_key, objectives)
 	local mm = mission_manager:new(faction_key, "wh_main_ultimate_victory")
 	victory_objectives_ie:add_objectives(mm, objectives, faction_key)
+	-- In multiplayer with multiple teams we need to ensure objectives for teams are mutually exclusive, so generate objectives to attack the opposing team(s)
+	-- Each team also needs to control their own objectives, otherwise they can both win at the same time with a base swap
+	if cm:is_multiplayer() then
+		local human_factions = cm:get_human_factions()
+		local mp_objectives = {}
+		local region_objectives = {}
+		local faction_objectives = {}
+		for i = 1, #human_factions do
+			local human_faction_key = human_factions[i]
+			local human_faction = cm:get_faction(human_faction_key)
+			if human_faction:has_home_region() then
+				table.insert(region_objectives, human_faction:home_region():name())
+			elseif human_faction_key ~= faction_key and not human_faction:is_team_mate(cm:get_faction(faction_key)) then
+				table.insert(faction_objectives, human_faction_key)
+			end
+		end
+		if #region_objectives > 0 then
+			local mp_region_objective = {
+				type = "CONTROL_N_REGIONS_FROM",
+				conditions = {
+					"total "..#region_objectives,
+					"override_text mission_text_text_mis_activity_control_n_regions_satrapy_including_at_least_n"
+				}
+			}
+			for i = 1, #region_objectives do 
+				table.insert(mp_region_objective.conditions, "region "..region_objectives[i])
+			end
+			table.insert(mp_objectives, mp_region_objective)
+		end
+		if #faction_objectives > 0 then
+			local mp_faction_objective = {
+				type = "DESTROY_FACTION",
+				conditions = {
+					"confederation_valid",
+					"vassalization_valid"
+				}
+			}
+			for i = 1, #faction_objectives do 
+				table.insert(mp_faction_objective.conditions, "faction "..faction_objectives[i])
+			end
+			table.insert(mp_objectives, mp_faction_objective)
+		end
+		if #mp_objectives > 0 then
+			victory_objectives_ie:add_objectives(mm, mp_objectives, faction_key)
+		end
+	end
 	mm:add_payload("text_display dummy_wh3_main_survival_forge_of_souls")
 	mm:add_payload("game_victory")
 	mm:set_victory_type("wh3_combi_victory_type_ultimate")
@@ -466,7 +511,9 @@ function endgame:create_scenario_force(faction_key, region_key, army_template, u
 				false,
 				function(cqi)
 					local character = cm:char_lookup_str(cqi)
-					cm:apply_effect_bundle_to_characters_force("wh_main_bundle_military_upkeep_free_force_endgame", cqi, 0)
+					if cm:get_faction(faction_key):subculture() ~= "wh2_dlc09_sc_tmb_tomb_kings" then
+						cm:apply_effect_bundle_to_characters_force("wh_main_bundle_military_upkeep_free_force_endgame", cqi, 0)
+					end
 					cm:apply_effect_bundle_to_characters_force("wh3_main_ie_scripted_endgame_force_immune_to_regionless_attrition", cqi, 5)
 					cm:add_agent_experience(character, cm:random_number(25, 15), true)
 					cm:add_experience_to_units_commanded_by_character(character, cm:random_number(7, 3))
