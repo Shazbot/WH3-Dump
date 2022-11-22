@@ -55,6 +55,7 @@
 										</loyalty>
 										<icon_performing_ritual this="28575A83-A2A6-4089-B2092224E207BB95"/>
 										<icon_hlist this="C6AC6455-18E2-4FD9-90DF065F2DD2879E">
+											<icon_harmony this="82BD5163-AEB6-44CA-B45A6B72EDF7D4C0"/>
 											<dy_meat this="9236F98A-994F-4C0D-B6CFE335E6DC0E05">
 												<meat_arrow_increase this="0A898252-B6AE-4156-9D572FF7B672DA64"/>
 												<meat_arrow_decrease this="879AC97D-A670-4074-83289DD7FC1EFB1B"/>
@@ -1761,7 +1762,7 @@
 					height="26"
 					textvalign="Left"
 					texthalign="Top"
-					font_m_font_name="brand_header"
+					font_m_font_name="la_gioconda_uppercase"
 					font_m_size="18"
 					font_m_colour="#FFF8D7FF"
 					font_m_leading="1"
@@ -1797,7 +1798,7 @@
 					height="26"
 					textvalign="Left"
 					texthalign="Top"
-					font_m_font_name="brand_header"
+					font_m_font_name="la_gioconda_uppercase"
 					font_m_size="18"
 					font_m_colour="#FFF8D7FF"
 					font_m_leading="1"
@@ -1837,7 +1838,7 @@
 					name="down_off"
 					width="26"
 					height="26"
-					font_m_font_name="brand_header"
+					font_m_font_name="la_gioconda_uppercase"
 					font_m_size="18"
 					font_m_colour="#FFF8D7FF"
 					font_m_leading="1"
@@ -1873,7 +1874,7 @@
 					name="hover"
 					width="26"
 					height="26"
-					font_m_font_name="brand_header"
+					font_m_font_name="la_gioconda_uppercase"
 					font_m_size="18"
 					font_m_colour="#FFF8D7FF"
 					font_m_leading="1"
@@ -1911,7 +1912,7 @@
 					name="inactive"
 					width="26"
 					height="26"
-					font_m_font_name="brand_header"
+					font_m_font_name="la_gioconda_uppercase"
 					font_m_size="18"
 					font_m_colour="#FFF8D7FF"
 					font_m_leading="1"
@@ -4532,6 +4533,7 @@
 		<dy_meat
 			this="9236F98A-994F-4C0D-B6CFE335E6DC0E05"
 			id="dy_meat"
+			offset="26.00,0.00"
 			allowverticalresize="false"
 			priority="45"
 			componentleveltooltip="{{tt:ui/campaign ui/tooltip_pooled_resource_breakdown}}"
@@ -4763,7 +4765,7 @@
 		<icon_transport
 			this="E7075CA5-2DB6-4456-A381A16783F4B401"
 			id="icon_transport"
-			offset="140.00,6.00"
+			offset="166.00,6.00"
 			priority="10"
 			uniqueguid="E7075CA5-2DB6-4456-A381A16783F4B401"
 			currentstate="AC9A9835-99F2-4694-A71DE77A5B38D11C"
@@ -4877,7 +4879,7 @@
 		<icon_loan
 			this="99A07E37-C8A0-4CDF-97F2A3D192A2A3FC"
 			id="icon_loan"
-			offset="64.00,0.00"
+			offset="90.00,0.00"
 			allowverticalresize="false"
 			priority="10"
 			tooltipslocalised="true"
@@ -5180,7 +5182,7 @@
 				<default
 					this="8A35BCD4-4344-429F-B1AE7548EC96C659"
 					name="default"
-					width="163"
+					width="189"
 					height="34"
 					texthbehaviour="Never split"
 					uniqueguid="8A35BCD4-4344-429F-B1AE7548EC96C659"/>
@@ -5262,5 +5264,104 @@
 				</normal>
 			</states>
 		</dy_remaining_travel_time>
+		<icon_harmony
+			this="82BD5163-AEB6-44CA-B45A6B72EDF7D4C0"
+			id="icon_harmony"
+			offset="0.00,4.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="10"
+			uniqueguid="82BD5163-AEB6-44CA-B45A6B72EDF7D4C0"
+			currentstate="60A6320D-B48A-4907-8B018FAD54B7CE3D"
+			defaultstate="60A6320D-B48A-4907-8B018FAD54B7CE3D">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="BackgroundSkillContext.EffectList.Any(PooledResourceContext(&quot;wh3_main_cth_harmony&quot;, StoredContext(&quot;CcoCampaignCharacter&quot;).FactionContext))">
+					<child_m_user_properties>
+						<property
+							name="object_store_events"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignCharacter"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="BackgroundSkillContext.EffectList.FirstContext(PooledResourceContext(&quot;wh3_main_cth_harmony&quot;, StoredContext(&quot;CcoCampaignCharacter&quot;).FactionContext))"/>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoEffect"
+					context_function_id="GetIfElse(Value &lt; 0, &quot;yin&quot;, &quot;yang&quot;)"/>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoCampaignPooledResource">
+					<child_m_user_properties>
+						<property
+							name="different_text_per_state"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoEffect"
+					context_function_id="PooledResourceContext(&quot;wh3_main_cth_harmony&quot;, StoredContext(&quot;CcoCampaignCharacter&quot;).FactionContext)"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="CB96FC06-E2BF-48C7-B9ADD59F57C1D82D"
+					uniqueguid="CB96FC06-E2BF-48C7-B9ADD59F57C1D82D"
+					imagepath="ui/skins/default/icon_yin.png"/>
+				<component_image
+					this="85408041-1841-42EE-91C25F02356FCBDA"
+					uniqueguid="85408041-1841-42EE-91C25F02356FCBDA"
+					imagepath="ui/skins/default/icon_yang.png"/>
+			</componentimages>
+			<states>
+				<yang
+					this="60A6320D-B48A-4907-8B018FAD54B7CE3D"
+					name="yang"
+					width="26"
+					height="26"
+					tooltip="{{CcoCampaignPooledResource:PositiveFactorsName}}"
+					texthbehaviour="Never split"
+					tooltiplabel="StateTooltip_f9052f9b"
+					interactive="true"
+					disabled="true"
+					uniqueguid="60A6320D-B48A-4907-8B018FAD54B7CE3D">
+					<imagemetrics>
+						<image
+							this="04147287-DC88-4B1D-920B13EA941C2C46"
+							uniqueguid="04147287-DC88-4B1D-920B13EA941C2C46"
+							componentimage="85408041-1841-42EE-91C25F02356FCBDA"
+							width="26"
+							height="26"/>
+					</imagemetrics>
+				</yang>
+				<yin
+					this="52727C5E-A0D4-4E35-A8310AF1306FE08B"
+					name="yin"
+					width="26"
+					height="26"
+					tooltip="{{CcoCampaignPooledResource:NegativeFactorsName}}"
+					texthbehaviour="Never split"
+					tooltiplabel="StateTooltip_a972ff71"
+					interactive="true"
+					disabled="true"
+					uniqueguid="52727C5E-A0D4-4E35-A8310AF1306FE08B">
+					<imagemetrics>
+						<image
+							this="6EB5BF31-143E-4F05-998B6D851A637C5B"
+							uniqueguid="6EB5BF31-143E-4F05-998B6D851A637C5B"
+							componentimage="CB96FC06-E2BF-48C7-B9ADD59F57C1D82D"
+							width="26"
+							height="26"/>
+					</imagemetrics>
+				</yin>
+			</states>
+		</icon_harmony>
 	</components>
 </layout>

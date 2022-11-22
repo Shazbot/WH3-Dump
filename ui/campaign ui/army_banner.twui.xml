@@ -106,6 +106,7 @@
 							<raid_holder this="274A9485-5124-4B36-A12841EB75490F55">
 								<raid_value this="BA003A7F-357E-41A8-B845F69D8991F0FE"/>
 								<raid_value_food this="738AC9C4-55B0-41EE-B792D160EDB2CC89"/>
+								<raid_value_pooled_resource_slaves this="B0537587-6B1C-4174-A602C0043034345D"/>
 								<raid_value_slaves this="B3CEEAF1-B4C5-4A30-B4888923B29E9B07"/>
 								<raid_value_devotees this="3041A1EE-AFFD-4E92-A8E6E910EC98F40E"/>
 								<raid_value_trade this="D222265C-AC20-442D-85DFA0FB53528D71"/>
@@ -5055,7 +5056,8 @@
 			tooltipslocalised="true"
 			uniqueguid="B3CEEAF1-B4C5-4A30-B4888923B29E9B07"
 			currentstate="8476A8BC-C4C5-4BBF-B1341C2DFFE89D67"
-			defaultstate="8476A8BC-C4C5-4BBF-B1341C2DFFE89D67">
+			defaultstate="8476A8BC-C4C5-4BBF-B1341C2DFFE89D67"
+			locked="true">
 			<componentimages>
 				<component_image
 					this="8CBF8B58-7D54-439B-8340A47B2CDC6C40"
@@ -6921,5 +6923,100 @@
 				</inactive>
 			</states>
 		</mission_icon>
+		<raid_value_pooled_resource_slaves
+			this="B0537587-6B1C-4174-A602C0043034345D"
+			id="raid_value_pooled_resource_slaves"
+			offset="84.00,0.00"
+			allowverticalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="B0537587-6B1C-4174-A602C0043034345D"
+			currentstate="8FEFC53C-227F-4B62-B13004916D45CF3E"
+			defaultstate="8FEFC53C-227F-4B62-B13004916D45CF3E">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoScriptObject"
+					context_function_id="RoundFloat(NumericValue)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="ScriptObjectValueUpdated"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="ScriptObjectContext(Format(&quot;raiding_slaves_value_%d&quot;, MilitaryForceContext.CQI))"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoScriptObject"
+					context_function_id="NumericValue &gt; 0 &amp;&amp; StoredContext(&quot;CcoCampaignCharacter&quot;).MilitaryForceContext.ActiveStanceContext.Key == &quot;MILITARY_FORCE_ACTIVE_STANCE_TYPE_LAND_RAID&quot;">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="ScriptObjectValueUpdated"/>
+						<property
+							name="event1"
+							value="MilitaryForceStanceChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignCharacter"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="7602319D-1AD3-418C-A6A7EEE7A489FF4D"
+					uniqueguid="7602319D-1AD3-418C-A6A7EEE7A489FF4D"
+					imagepath="ui/skins/default/icon_banner.png"/>
+				<component_image
+					this="F6C9194A-5257-4546-9FCB080588C229B7"
+					uniqueguid="F6C9194A-5257-4546-9FCB080588C229B7"
+					imagepath="ui/skins/default/icon_slaves.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="8FEFC53C-227F-4B62-B13004916D45CF3E"
+					name="NewState"
+					width="84"
+					height="34"
+					text="5000"
+					textvalign="Center"
+					textxoffset="18.00,30.00"
+					textyoffset="5.00,0.00"
+					texthbehaviour="Resize"
+					textlabel="StateText_b8c69a24"
+					font_m_size="12"
+					font_m_colour="#FFFFE0FF"
+					font_m_leading="3"
+					fontcat_name="ingame_text_warhammer3"
+					interactive="true"
+					disabled="true"
+					textshadervars="2.00,2.00,1.00,0.00"
+					uniqueguid="8FEFC53C-227F-4B62-B13004916D45CF3E">
+					<imagemetrics>
+						<image
+							this="4FAB5769-323B-466C-972B02CC1C32A3D4"
+							uniqueguid="4FAB5769-323B-466C-972B02CC1C32A3D4"
+							componentimage="7602319D-1AD3-418C-A6A7EEE7A489FF4D"
+							width="84"
+							height="34"
+							tile="true"
+							margin="0.00,40.00,0.00,10.00"/>
+						<image
+							this="C21FEECB-48A4-47AB-8A7716C0164067DA"
+							uniqueguid="C21FEECB-48A4-47AB-8A7716C0164067DA"
+							componentimage="F6C9194A-5257-4546-9FCB080588C229B7"
+							offset="-12.00,4.00"
+							width="26"
+							height="26"
+							dockpoint="Center Left"
+							dock_offset="-12.00,0.00"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</raid_value_pooled_resource_slaves>
 	</components>
 </layout>

@@ -186,7 +186,9 @@
 									<list_clip this="731B1CBD-4D40-4569-B47CDD308EB70D73">
 										<list_box this="18245352-AC6B-4DBE-BA769A155F5A24F6">
 											<games_list_entry this="2F63E2C1-83AA-4A22-9D8A4430C8A0E9F8">
-												<campaign_map this="9CE13BC0-70CE-4FBC-9A635A2D772A2231"/>
+												<campaign_map this="9CE13BC0-70CE-4FBC-9A635A2D772A2231">
+													<end_game_scenarios this="1D7AAB67-3CA2-40D5-9DC2EFB4CEEB09B4"/>
+												</campaign_map>
 												<status this="2FE90D31-D503-455D-AD046D56FAFDB311">
 													<icon_list this="E73C3A0E-08AE-4B9A-994FE3A7B416432D">
 														<status_icon this="F8EAEF1B-CE32-4418-BC62CAB37620C671"/>
@@ -7869,7 +7871,7 @@
 					texthalign="Center"
 					texthbehaviour="Never split"
 					textlocalised="true"
-					textlabel="StateText_b0fc6ba7"
+					textlabel="StateText_163fe12a"
 					font_m_size="12"
 					font_m_colour="#FFF8D7FF"
 					font_m_leading="3"
@@ -8198,7 +8200,7 @@
 					height="44"
 					text="dy_campaign_map"
 					textvalign="Center"
-					textxoffset="4.00,0.00"
+					textxoffset="30.00,0.00"
 					textlabel="map_name_NewState_Text_71002d"
 					font_m_size="12"
 					font_m_colour="#FFFFE0FF"
@@ -9046,7 +9048,7 @@
 					texthbehaviour="Never split"
 					textlocalised="true"
 					textlabel="StateText_9a6b2776"
-					font_m_font_name="brand_header"
+					font_m_font_name="la_gioconda_uppercase"
 					font_m_size="18"
 					font_m_colour="#FFF8D7FF"
 					font_m_leading="1"
@@ -9079,7 +9081,7 @@
 					texthbehaviour="Never split"
 					textlocalised="true"
 					textlabel="heading_tx_NewState_Text_4f000c"
-					font_m_font_name="brand_header"
+					font_m_font_name="la_gioconda_uppercase"
 					font_m_size="18"
 					font_m_colour="#FFF8D7FF"
 					font_m_leading="1"
@@ -9487,6 +9489,7 @@
 			currentstate="2DC7A0A8-8A5E-4220-A63E41CC5F25E002">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="List"/>
+				<callback_with_context callback_id="LayoutStallerCallback"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -10635,7 +10638,7 @@
 			this="E73C3A0E-08AE-4B9A-994FE3A7B416432D"
 			id="icon_list"
 			offset="0.00,1.00"
-			allowhorizontalresize="false"
+			allowverticalresize="false"
 			docking="Center Left"
 			component_anchor_point="0.00,0.50"
 			priority="12"
@@ -10653,12 +10656,9 @@
 					uniqueguid="A80E7EFB-2962-4A60-9FB254627A733377"/>
 			</states>
 			<LayoutEngine
-				type="List"
-				sizetocontent="true">
-				<columnwidths>
-					<column width="54"/>
-				</columnwidths>
-			</LayoutEngine>
+				type="HorizontalList"
+				itemsperrow="2"
+				sizetocontent="true"/>
 		</icon_list>
 		<heading_parent
 			this="25FEC314-60DD-473D-A0576855AE557062"
@@ -11465,5 +11465,48 @@
 					uniqueguid="23FCD7B0-5244-49F7-8C76E2DF6DBEB3C6"/>
 			</states>
 		</button_online_disabled_tooltip>
+		<end_game_scenarios
+			this="1D7AAB67-3CA2-40D5-9DC2EFB4CEEB09B4"
+			id="end_game_scenarios"
+			offset="5.00,12.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center Left"
+			dock_offset="5.00,0.00"
+			component_anchor_point="0.00,0.50"
+			priority="12"
+			tooltipslocalised="true"
+			componentleveltooltip="End game scenarios enabled"
+			tooltiplabel="ComponentTooltip_fc149891"
+			uniqueguid="1D7AAB67-3CA2-40D5-9DC2EFB4CEEB09B4"
+			currentstate="55096E5A-765D-4294-A9961BA783847337"
+			defaultstate="55096E5A-765D-4294-A9961BA783847337">
+			<componentimages>
+				<component_image
+					this="A25CD04E-3ED6-4330-B85B0D56A7EE3718"
+					uniqueguid="A25CD04E-3ED6-4330-B85B0D56A7EE3718"
+					imagepath="ui/skins/default/replenish_icon_attrition_card.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="55096E5A-765D-4294-A9961BA783847337"
+					name="NewState"
+					width="20"
+					height="20"
+					interactive="true"
+					disabled="true"
+					uniqueguid="55096E5A-765D-4294-A9961BA783847337">
+					<imagemetrics>
+						<image
+							this="C1958AD6-ABB7-43DE-82EF87932CF72096"
+							uniqueguid="C1958AD6-ABB7-43DE-82EF87932CF72096"
+							componentimage="A25CD04E-3ED6-4330-B85B0D56A7EE3718"
+							width="20"
+							height="20"
+							dockpoint="Center"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</end_game_scenarios>
 	</components>
 </layout>

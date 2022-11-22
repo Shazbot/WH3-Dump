@@ -23709,6 +23709,9 @@
 						<property
 							name="shortcut4"
 							value="button_group_management_5"/>
+						<property
+							name="shortcut5"
+							value="button_group_management_6"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbackwithcontextlist>
@@ -27548,7 +27551,8 @@
 			soundcategory="UI_CAM_HUD_Tab_Faction"
 			uniqueguid="4F4A4BB7-36A4-4314-A7DDCAAE6CAA6FAB"
 			currentstate="8706D45F-D7FE-4676-BDB66F15879CE22F"
-			defaultstate="8706D45F-D7FE-4676-BDB66F15879CE22F">
+			defaultstate="8706D45F-D7FE-4676-BDB66F15879CE22F"
+			locked="true">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="HudClanButton"/>
 				<callback_with_context callback_id="LordEffectBundleIcon"/>
@@ -31916,7 +31920,7 @@
 				<callback_with_context
 					callback_id="ContextCommandEvent"
 					context_object_id="CcoStaticObject"
-					context_function_id="self.SetVisible(true)">
+					context_function_id="DoIf(CampaignRoot.SettlementList.Any(AlliedForeignSlotList(PlayersFaction).IsEmpty == false || HostileForeignSlotList(PlayersFaction).IsEmpty == false), self.SetVisible(true))">
 					<child_m_user_properties>
 						<property
 							name="event0"
