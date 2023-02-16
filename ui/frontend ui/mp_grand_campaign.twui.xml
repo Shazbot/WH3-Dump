@@ -13139,11 +13139,11 @@
 				<callback_with_context
 					callback_id="ContextLayoutTooltip"
 					context_object_id="CcoFrontendFactionLeader"
-					context_function_id="CcoRTOwnershipList(List :  FactionRecordContext.OwnershipProductRecordList)">
+					context_function_id="CcoRTOwnershipList(List : FactionRecordContext.OwnershipProductRequirementList, Name :  this.Name, IsFree : FactionRecordContext.OwnershipProductRequirementList.Any(OwnershipProductRecordList.All(IsFlc)))">
 					<child_m_user_properties>
 						<property
 							name="layout_path"
-							value="ui/frontend ui/tooltip_free_content"/>
+							value="ui/frontend ui/tooltip_required_content"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbackwithcontextlist>
@@ -13233,7 +13233,7 @@
 				<callback_with_context
 					callback_id="ContextLayoutTooltip"
 					context_object_id="CcoFrontendFactionLeader"
-					context_function_id="CcoRTOwnershipList(List :  FactionRecordContext.OwnershipProductRecordList)">
+					context_function_id="CcoRTOwnershipList(List : FactionRecordContext.OwnershipProductRequirementList, Name :  this.Name, IsFree : FactionRecordContext.OwnershipProductRequirementList.Any(OwnershipProductRecordList.All(IsFlc)))">
 					<child_m_user_properties>
 						<property
 							name="layout_path"
@@ -13322,20 +13322,24 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCultureRecord"
-					context_function_id="StoredContextFromParent(&quot;CcoCampaignStartInfo&quot;).LordListForFaction(this).Any(FactionRecordContext.OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc))"/>
+					context_function_id="StoredContextFromParent(&quot;CcoCampaignStartInfo&quot;).LordListForFaction(this).All(FactionRecordContext.OwnershipProductRequirementList.IsEmpty == false &amp;&amp; FactionRecordContext.OwnershipProductRequirementList.All(OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc)))"/>
 				<callback_with_context
-					callback_id="ContextLayoutTooltip"
+					callback_id="#ContextLayoutTooltip"
 					context_object_id="CcoCultureRecord"
 					context_function_id="CcoRTOwnershipList(List : StoredContextFromParent(&quot;CcoCampaignStartInfo&quot;).LordListForFaction(StoredContextFromParent(&quot;CcoCultureRecord&quot;)).Filter(FactionRecordContext.OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc)).Transform(FactionRecordContext.OwnershipProductRecordList).Distinct.Filter(IsFlc || IsTwa))">
 					<child_m_user_properties>
 						<property
 							name="layout_path"
-							value="ui/frontend ui/tooltip_free_content"/>
+							value="ui/frontend ui/tooltip_required_content"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextObjectStore"
 					context_object_id="ui/frontend ui/tooltip_free_content"/>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoCultureRecord"
+					context_function_id="Loc(&quot;tooltip_content_alert&quot;)"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -13418,9 +13422,9 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCultureRecord"
-					context_function_id="StoredContextFromParent(&quot;CcoCampaignStartInfo&quot;).LordListForFaction(this).All(FactionRecordContext.OwnershipProductRecordList.IsEmpty == false &amp;&amp; FactionRecordContext.OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc == false))"/>
+					context_function_id="StoredContextFromParent(&quot;CcoCampaignStartInfo&quot;).LordListForFaction(this).All(FactionRecordContext.OwnershipProductRequirementList.IsEmpty == false &amp;&amp; FactionRecordContext.OwnershipProductRequirementList.All(OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc == false)))"/>
 				<callback_with_context
-					callback_id="ContextLayoutTooltip"
+					callback_id="#ContextLayoutTooltip"
 					context_object_id="CcoCultureRecord"
 					context_function_id="CcoRTOwnershipList(List : &#10;StoredContextFromParent(&quot;CcoCampaignStartInfo&quot;).LordListForFaction(StoredContextFromParent(&quot;CcoCultureRecord&quot;)).Filter(FactionRecordContext.OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc == false)).Transform(FactionRecordContext.OwnershipProductRecordList).Distinct.Sort(ReleaseOrder, true))">
 					<child_m_user_properties>
@@ -13432,6 +13436,10 @@
 				<callback_with_context
 					callback_id="ContextObjectStore"
 					context_object_id="CcoCultureRecord"/>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoCultureRecord"
+					context_function_id="Loc(&quot;tooltip_content_alert&quot;)"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image

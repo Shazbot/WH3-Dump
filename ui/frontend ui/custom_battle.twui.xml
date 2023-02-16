@@ -217,6 +217,8 @@
 												<list_clip this="E44BF1DB-E2A0-4BC3-B279A3C689F331B9">
 													<list_box this="6E09D89B-9EF2-4F51-B0638A566E7983CD">
 														<template_dropdown_entry this="99D0BC34-72D8-45AF-A1ED0719F00E3DB6">
+															<new_content_icon this="4741541F-46DB-4300-BDE88FA009563C42"/>
+															<free_content_icon this="8502AA0B-2312-4943-964A491E290EC021"/>
 															<label_context_name this="E3133AB1-0D35-4E46-98CFA834B98B0180"/>
 														</template_dropdown_entry>
 													</list_box>
@@ -589,6 +591,8 @@
 																			<custom_battle_upgradeable this="CD4CC42A-6EC5-4D41-B91FEAAF81F5748A">
 																				<unit_category_icon this="376224F5-A296-4FEF-B0F4BB6E62CA20ED"/>
 																			</custom_battle_upgradeable>
+																			<new_content_icon this="1EC37F4C-6383-44FF-823A4CFCA102E127"/>
+																			<free_content_icon this="4510983E-B71E-4732-8DFC9986D7F0A537"/>
 																		</unit_card>
 																		<blocker this="279242DE-9B20-4188-83872B9E5033B200"/>
 																	</template_unit_card>
@@ -15107,12 +15111,6 @@
 						<property
 							name="event0"
 							value="CustomBattleOnPlayerNameChanged"/>
-						<property
-							name="event1"
-							value="CustomBattleOnPlayerJoined"/>
-						<property
-							name="event2"
-							value="CustomBattleOnPlayerLeft"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbacks_with_context>
@@ -18594,7 +18592,7 @@
 				<callback_with_context
 					callback_id="ContextInactiveStateSetter"
 					context_object_id="CcoCustomBattlePlayerSlot"
-					context_function_id="AvailableFactionsForCurrentSubcultureList.Size &gt; 1">
+					context_function_id="AvailableFactionsForCurrentSubcultureList.Filter(IsFactionUnlocked).Size &gt; 1">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -18844,7 +18842,7 @@
 				<callback_with_context
 					callback_id="ContextInactiveStateSetter"
 					context_object_id="CcoCustomBattlePlayerSlot"
-					context_function_id="AvailableFactionsForCurrentSubcultureList.Size &gt; 1">
+					context_function_id="AvailableFactionsForCurrentSubcultureList.Filter(IsFactionUnlocked).Size &gt; 1">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -20106,6 +20104,10 @@
 							value="popup_menu"/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoSubcultureRecord"
+					context_function_id="Culture"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -45100,5 +45102,401 @@
 				</selected_hover>
 			</states>
 		</collapse_button>
+		<free_content_icon
+			this="8502AA0B-2312-4943-964A491E290EC021"
+			id="free_content_icon"
+			offset="154.00,-8.00"
+			visible="false"
+			docking="Bottom Right"
+			dock_offset="4.00,6.00"
+			component_anchor_point="1.00,1.00"
+			priority="65"
+			tooltipslocalised="true"
+			uniqueguid="8502AA0B-2312-4943-964A491E290EC021"
+			updatewhennotvisible="true"
+			isaspectratiolocked="true"
+			currentstate="D4A3A3B0-125E-4938-904B8D75AB3880A6"
+			defaultstate="D4A3A3B0-125E-4938-904B8D75AB3880A6">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCultureRecord"
+					context_function_id="(factions = StoredContextFromParent(&quot;CcoCustomBattlePlayerSlot&quot;).FactionsForCulture(this).Filter(OwnershipProductRequirementList.IsEmpty == false)) =&gt; { factions.IsEmpty == false &amp;&amp; factions.All(OwnershipProductRequirementList.All(OwnershipProductRecordList.All(IsOwned == false &amp;&amp; IsFlc))) }"/>
+				<callback_with_context
+					callback_id="#ContextLayoutTooltip"
+					context_object_id="CcoCultureRecord"
+					context_function_id="CcoRTOwnershipList(List : StoredContextFromParent(&quot;CcoCustomBattlePlayerSlot&quot;).FactionsForCulture(this).Transform(OwnershipProductRequirementList).Distinct)">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/frontend ui/tooltip_free_content"/>
+						<property
+							name="update_when_not_visible"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoCultureRecord"
+					context_function_id="Loc(&quot;tooltip_content_alert&quot;)"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="FFF41DD3-CB45-4A69-9703196F8465BF5E"
+					uniqueguid="FFF41DD3-CB45-4A69-9703196F8465BF5E"
+					imagepath="ui/skins/default/icon_free_content.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="D4A3A3B0-125E-4938-904B8D75AB3880A6"
+					name="active"
+					width="100"
+					height="64"
+					texthbehaviour="Never split"
+					interactive="true"
+					pixelcollision="true"
+					shader_name="brighten_t0"
+					uniqueguid="D4A3A3B0-125E-4938-904B8D75AB3880A6"
+					stateeditordisplaypos="107.00,110.00">
+					<imagemetrics>
+						<image
+							this="3D828FC2-F79A-4703-93B1DA73411F50B7"
+							uniqueguid="3D828FC2-F79A-4703-93B1DA73411F50B7"
+							componentimage="FFF41DD3-CB45-4A69-9703196F8465BF5E"
+							width="100"
+							height="64"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							transition_m_target_state="7E874DA6-3899-440B-A36B31AE0523A50A"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="8"/>
+					</transitionmap>
+				</active>
+				<hover
+					this="7E874DA6-3899-440B-A36B31AE0523A50A"
+					name="hover"
+					width="100"
+					height="64"
+					texthbehaviour="Never split"
+					interactive="true"
+					pixelcollision="true"
+					shader_name="brighten_t0"
+					shadervars="0.30,0.00,0.00,0.00"
+					uniqueguid="7E874DA6-3899-440B-A36B31AE0523A50A"
+					stateeditordisplaypos="275.00,253.00">
+					<imagemetrics>
+						<image
+							this="0323B0AE-C8BC-4D34-B7D3EF0B410982CC"
+							uniqueguid="0323B0AE-C8BC-4D34-B7D3EF0B410982CC"
+							componentimage="FFF41DD3-CB45-4A69-9703196F8465BF5E"
+							width="100"
+							height="64"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="D4A3A3B0-125E-4938-904B8D75AB3880A6"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="8"/>
+					</transitionmap>
+				</hover>
+			</states>
+		</free_content_icon>
+		<new_content_icon
+			this="4741541F-46DB-4300-BDE88FA009563C42"
+			id="new_content_icon"
+			offset="154.00,-8.00"
+			visible="false"
+			docking="Bottom Right"
+			dock_offset="4.00,6.00"
+			component_anchor_point="1.00,1.00"
+			priority="65"
+			tooltipslocalised="true"
+			uniqueguid="4741541F-46DB-4300-BDE88FA009563C42"
+			updatewhennotvisible="true"
+			isaspectratiolocked="true"
+			currentstate="D4F9150F-7949-4771-9A9CC85BCC8B7C58"
+			defaultstate="D4F9150F-7949-4771-9A9CC85BCC8B7C58">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCultureRecord"
+					context_function_id="(factions = StoredContextFromParent(&quot;CcoCustomBattlePlayerSlot&quot;).FactionsForCulture(this).Filter(OwnershipProductRequirementList.IsEmpty == false)) =&gt; { factions.IsEmpty == false &amp;&amp; factions.Any(OwnershipProductRequirementList.All(OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc == false)))}"/>
+				<callback_with_context
+					callback_id="#ContextLayoutTooltip"
+					context_object_id="CcoCultureRecord"
+					context_function_id="CcoRTOwnershipList(List : StoredContextFromParent(&quot;CcoCustomBattlePlayerSlot&quot;).FactionsForCulture(this).Transform(OwnershipProductRequirementList).Distinct)">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/frontend ui/tooltip_required_content"/>
+						<property
+							name="update_when_not_visible"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoCultureRecord"
+					context_function_id="Loc(&quot;tooltip_content_alert&quot;)"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="DF307791-C32A-42BB-A301B7C2EEE4D15B"
+					uniqueguid="DF307791-C32A-42BB-A301B7C2EEE4D15B"
+					imagepath="ui/skins/default/icon_new_content.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="D4F9150F-7949-4771-9A9CC85BCC8B7C58"
+					name="active"
+					width="100"
+					height="64"
+					texthbehaviour="Never split"
+					interactive="true"
+					pixelcollision="true"
+					shader_name="brighten_t0"
+					uniqueguid="D4F9150F-7949-4771-9A9CC85BCC8B7C58"
+					stateeditordisplaypos="138.00,93.00">
+					<imagemetrics>
+						<image
+							this="59DB01FA-3A45-4069-951913EB5AD5B669"
+							uniqueguid="59DB01FA-3A45-4069-951913EB5AD5B669"
+							componentimage="DF307791-C32A-42BB-A301B7C2EEE4D15B"
+							width="100"
+							height="64"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							transition_m_target_state="6BC0AA90-6131-44FA-9DFD80897C820F30"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="8"/>
+					</transitionmap>
+				</active>
+				<hover
+					this="6BC0AA90-6131-44FA-9DFD80897C820F30"
+					name="hover"
+					width="100"
+					height="64"
+					texthbehaviour="Never split"
+					interactive="true"
+					pixelcollision="true"
+					shader_name="brighten_t0"
+					shadervars="0.30,0.00,0.00,0.00"
+					uniqueguid="6BC0AA90-6131-44FA-9DFD80897C820F30"
+					stateeditordisplaypos="302.00,201.00">
+					<imagemetrics>
+						<image
+							this="876250D3-C071-47CF-89ECAF4C03284FFC"
+							uniqueguid="876250D3-C071-47CF-89ECAF4C03284FFC"
+							componentimage="DF307791-C32A-42BB-A301B7C2EEE4D15B"
+							width="100"
+							height="64"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="D4F9150F-7949-4771-9A9CC85BCC8B7C58"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="8"/>
+					</transitionmap>
+				</hover>
+			</states>
+		</new_content_icon>
+		<free_content_icon
+			this="4510983E-B71E-4732-8DFC9986D7F0A537"
+			id="free_content_icon"
+			offset="-3.00,37.00"
+			visible="false"
+			docking="Bottom Right"
+			dock_offset="2.00,4.00"
+			component_anchor_point="1.00,1.00"
+			priority="65"
+			tooltipslocalised="true"
+			uniqueguid="4510983E-B71E-4732-8DFC9986D7F0A537"
+			isaspectratiolocked="true"
+			currentstate="225EC19C-28D9-4341-8583F7420A40F112"
+			defaultstate="225EC19C-28D9-4341-8583F7420A40F112">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoMainUnitRecord"
+					context_function_id="OwnershipProductRequirementList.IsEmpty == false &amp;&amp; OwnershipProductRequirementList.All((ownershiplist = OwnershipProductRecordList.Filter(IsOwned == false)) =&gt; {ownershiplist.IsEmpty == false &amp;&amp; ownershiplist.Any(IsFlc)})"/>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoMainUnitRecord"
+					context_function_id="CcoRTOwnershipList(List : OwnershipProductRequirementList, Name : Name, IsFree : true)">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/frontend ui/tooltip_required_content"/>
+						<property
+							name="offset_x"
+							value="-5"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCultureRecord"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="0DB005D2-3C84-4738-A7F976C43DC4F760"
+					uniqueguid="0DB005D2-3C84-4738-A7F976C43DC4F760"
+					imagepath="ui/skins/default/icon_free_content_small.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="225EC19C-28D9-4341-8583F7420A40F112"
+					name="active"
+					width="50"
+					height="75"
+					texthbehaviour="Never split"
+					interactive="true"
+					shader_name="brighten_t0"
+					uniqueguid="225EC19C-28D9-4341-8583F7420A40F112"
+					stateeditordisplaypos="107.00,110.00">
+					<imagemetrics>
+						<image
+							this="10F62D18-13E8-4019-B78241DA52BDB097"
+							uniqueguid="10F62D18-13E8-4019-B78241DA52BDB097"
+							componentimage="0DB005D2-3C84-4738-A7F976C43DC4F760"
+							width="50"
+							height="75"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							transition_m_target_state="DB699C97-5935-44EC-BAD9B65681A990B2"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="8"/>
+					</transitionmap>
+				</active>
+				<hover
+					this="DB699C97-5935-44EC-BAD9B65681A990B2"
+					name="hover"
+					width="50"
+					height="75"
+					texthbehaviour="Never split"
+					interactive="true"
+					shader_name="brighten_t0"
+					shadervars="0.30,0.00,0.00,0.00"
+					uniqueguid="DB699C97-5935-44EC-BAD9B65681A990B2"
+					stateeditordisplaypos="275.00,253.00">
+					<imagemetrics>
+						<image
+							this="8D42FBA5-12DF-4710-924A6E2E2046A5D5"
+							uniqueguid="8D42FBA5-12DF-4710-924A6E2E2046A5D5"
+							componentimage="0DB005D2-3C84-4738-A7F976C43DC4F760"
+							width="50"
+							height="75"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="225EC19C-28D9-4341-8583F7420A40F112"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="8"/>
+					</transitionmap>
+				</hover>
+			</states>
+		</free_content_icon>
+		<new_content_icon
+			this="1EC37F4C-6383-44FF-823A4CFCA102E127"
+			id="new_content_icon"
+			offset="-3.00,81.00"
+			visible="false"
+			docking="Bottom Right"
+			dock_offset="2.00,4.00"
+			component_anchor_point="1.00,1.00"
+			priority="65"
+			tooltipslocalised="true"
+			uniqueguid="1EC37F4C-6383-44FF-823A4CFCA102E127"
+			isaspectratiolocked="true"
+			currentstate="999AD31D-50B0-4765-A8025F38601005A2"
+			defaultstate="999AD31D-50B0-4765-A8025F38601005A2">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoMainUnitRecord"
+					context_function_id="OwnershipProductRequirementList.IsEmpty == false &amp;&amp; OwnershipProductRequirementList.All((ownershiplist = OwnershipProductRecordList.Filter(IsOwned == false)) =&gt; {ownershiplist.IsEmpty == false &amp;&amp; ownershiplist.All(IsFlc == false)})"/>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoMainUnitRecord"
+					context_function_id="CcoRTOwnershipList(List : OwnershipProductRequirementList, Name : Name, IsFree : false)">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/frontend ui/tooltip_required_content"/>
+						<property
+							name="offset_x"
+							value="-5"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCultureRecord"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="20F45304-E789-4623-9EBB6E44FDAC463A"
+					uniqueguid="20F45304-E789-4623-9EBB6E44FDAC463A"
+					imagepath="ui/skins/default/icon_new_content_small.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="999AD31D-50B0-4765-A8025F38601005A2"
+					name="active"
+					width="50"
+					height="31"
+					texthbehaviour="Never split"
+					interactive="true"
+					shader_name="brighten_t0"
+					uniqueguid="999AD31D-50B0-4765-A8025F38601005A2"
+					stateeditordisplaypos="138.00,93.00">
+					<imagemetrics>
+						<image
+							this="171AE07C-4B40-4300-ADC368725B2A6561"
+							uniqueguid="171AE07C-4B40-4300-ADC368725B2A6561"
+							componentimage="20F45304-E789-4623-9EBB6E44FDAC463A"
+							width="50"
+							height="31"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							transition_m_target_state="198A86A6-CA74-41D2-A283C23B973A7E07"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="8"/>
+					</transitionmap>
+				</active>
+				<hover
+					this="198A86A6-CA74-41D2-A283C23B973A7E07"
+					name="hover"
+					width="50"
+					height="31"
+					texthbehaviour="Never split"
+					interactive="true"
+					shader_name="brighten_t0"
+					shadervars="0.30,0.00,0.00,0.00"
+					uniqueguid="198A86A6-CA74-41D2-A283C23B973A7E07"
+					stateeditordisplaypos="302.00,201.00">
+					<imagemetrics>
+						<image
+							this="64EB17C2-88A0-4E6F-92E019A92D3E5BBC"
+							uniqueguid="64EB17C2-88A0-4E6F-92E019A92D3E5BBC"
+							componentimage="20F45304-E789-4623-9EBB6E44FDAC463A"
+							width="50"
+							height="31"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="999AD31D-50B0-4765-A8025F38601005A2"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="8"/>
+					</transitionmap>
+				</hover>
+			</states>
+		</new_content_icon>
 	</components>
 </layout>

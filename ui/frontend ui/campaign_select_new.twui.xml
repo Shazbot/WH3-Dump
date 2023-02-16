@@ -1494,7 +1494,8 @@
 			<callbacks_with_context>
 				<callback_with_context
 					callback_id="ContextDropdownMenu"
-					context_object_id="CcoCultureRecord"/>
+					context_object_id="CcoCultureRecord"
+					context_function_id="CultureList.FirstContext( (x) =&gt; LordListForFaction(x).Any(FactionRecordContext.IsFactionUnlocked))"/>
 				<callback_with_context callback_id="StatePropagatorCallback">
 					<child_m_user_properties>
 						<property
@@ -10754,7 +10755,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoFrontendFactionLeader"
-					context_function_id="FactionRecordContext.OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc == false) || StoredContext(&quot;CcoCampaignStartInfo&quot;, &quot;button_list&quot;, &quot;campaign_select_new&quot;).CampaignMapPlayableAreaRecordContext.OwnershipProductRecordList.Any(IsOwned == false)"/>
+					context_function_id="FactionRecordContext.OwnershipProductRequirementList.IsEmpty == false &amp;&amp; FactionRecordContext.OwnershipProductRequirementList.All(OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc == false))"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -11602,20 +11603,24 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCultureRecord"
-					context_function_id="StoredContext(&quot;CcoCampaignStartInfo&quot;, &quot;button_list&quot;, &quot;campaign_select_new&quot;).LordListForFaction(StoredContextFromParent(&quot;CcoCultureRecord&quot;)).Any(FactionRecordContext.OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc))"/>
+					context_function_id="StoredContext(&quot;CcoCampaignStartInfo&quot;, &quot;button_list&quot;, &quot;campaign_select_new&quot;).LordListForFaction(StoredContextFromParent(&quot;CcoCultureRecord&quot;)).All(FactionRecordContext.OwnershipProductRequirementList.IsEmpty == false &amp;&amp; FactionRecordContext.OwnershipProductRequirementList.All(OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc)))"/>
 				<callback_with_context
-					callback_id="ContextLayoutTooltip"
+					callback_id="#ContextLayoutTooltip"
 					context_object_id="CcoCultureRecord"
-					context_function_id="CcoRTOwnershipList(List : StoredContext(&quot;CcoCampaignStartInfo&quot;, &quot;button_list&quot;, &quot;campaign_select_new&quot;).LordListForFaction(StoredContextFromParent(&quot;CcoCultureRecord&quot;)).Filter(FactionRecordContext.OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc)).Transform(FactionRecordContext.OwnershipProductRecordList).Distinct.Filter(IsFlc || IsTwa))">
+					context_function_id="CcoRTOwnershipList(List : &#10;StoredContext(&quot;CcoCampaignStartInfo&quot;, &quot;button_list&quot;, &quot;campaign_select_new&quot;).LordListForFaction(StoredContextFromParent(&quot;CcoCultureRecord&quot;)).Transform(FactionRecordContext.OwnershipProductRequirementList).Distinct(RequirementString), Name: Name, IsFree : FactionRecordContext.OwnershipProductRequirementList.Any(OwnershipProductRecordList.All(IsFlc)))">
 					<child_m_user_properties>
 						<property
 							name="layout_path"
-							value="ui/frontend ui/tooltip_free_content"/>
+							value="ui/frontend ui/tooltip_required_content"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextObjectStore"
 					context_object_id="CcoCultureRecord"/>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoCultureRecord"
+					context_function_id="Loc(&quot;tooltip_content_alert&quot;)"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -35622,21 +35627,15 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoFrontendFactionLeader"
-					context_function_id="FactionRecordContext.OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc)"/>
+					context_function_id="FactionRecordContext.OwnershipProductRequirementList.IsEmpty == false &amp;&amp; FactionRecordContext.OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc)"/>
 				<callback_with_context
 					callback_id="ContextLayoutTooltip"
 					context_object_id="CcoFrontendFactionLeader"
-					context_function_id="CcoRTOwnershipList(List : FactionRecordContext.OwnershipProductRecordList)">
+					context_function_id="CcoRTOwnershipList(List : FactionRecordContext.OwnershipProductRequirementList, Name :  this.Name, IsFree : FactionRecordContext.OwnershipProductRequirementList.Any(OwnershipProductRecordList.All(IsFlc)))">
 					<child_m_user_properties>
 						<property
-							name="alternate_parent_dock_point"
-							value="bce"/>
-						<property
 							name="layout_path"
-							value="ui/frontend ui/tooltip_free_content"/>
-						<property
-							name="offset_y"
-							value="-5"/>
+							value="ui/frontend ui/tooltip_required_content"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbackwithcontextlist>
@@ -35909,21 +35908,15 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoFrontendFactionLeader"
-					context_function_id="FactionRecordContext.OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc == false) || StoredContext(&quot;CcoCampaignStartInfo&quot;, &quot;button_list&quot;, &quot;campaign_select_new&quot;).CampaignMapPlayableAreaRecordContext.OwnershipProductRecordList.Any(IsOwned == false)"/>
+					context_function_id="FactionRecordContext.OwnershipProductRequirementList.IsEmpty == false &amp;&amp; FactionRecordContext.OwnershipProductRequirementList.All(OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc == false))"/>
 				<callback_with_context
 					callback_id="ContextLayoutTooltip"
 					context_object_id="CcoFrontendFactionLeader"
-					context_function_id="CcoRTOwnershipList(List : Join(StoredContext(&quot;CcoCampaignStartInfo&quot;, &quot;button_list&quot;, &quot;campaign_select_new&quot;).CampaignMapPlayableAreaRecordContext.OwnershipProductRecordList, FactionRecordContext.OwnershipProductRecordList))">
+					context_function_id="CcoRTOwnershipList(List : FactionRecordContext.OwnershipProductRequirementList, Name :  this.Name, IsFree : FactionRecordContext.OwnershipProductRequirementList.Any(OwnershipProductRecordList.All(IsFlc)))">
 					<child_m_user_properties>
-						<property
-							name="alternate_parent_dock_point"
-							value="bce"/>
 						<property
 							name="layout_path"
 							value="ui/frontend ui/tooltip_required_content"/>
-						<property
-							name="offset_y"
-							value="-5"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbackwithcontextlist>
@@ -36014,20 +36007,24 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCultureRecord"
-					context_function_id="StoredContext(&quot;CcoCampaignStartInfo&quot;, &quot;button_list&quot;, &quot;campaign_select_new&quot;).CampaignMapPlayableAreaRecordContext.OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc == false) || StoredContext(&quot;CcoCampaignStartInfo&quot;, &quot;button_list&quot;, &quot;campaign_select_new&quot;).LordListForFaction(StoredContextFromParent(&quot;CcoCultureRecord&quot;)).All(FactionRecordContext.OwnershipProductRecordList.IsEmpty == false &amp;&amp; FactionRecordContext.OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc == false))"/>
+					context_function_id="StoredContext(&quot;CcoCampaignStartInfo&quot;, &quot;button_list&quot;, &quot;campaign_select_new&quot;).LordListForFaction(StoredContextFromParent(&quot;CcoCultureRecord&quot;)).All(FactionRecordContext.OwnershipProductRequirementList.IsEmpty == false &amp;&amp; FactionRecordContext.OwnershipProductRequirementList.All(OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc == false)))"/>
 				<callback_with_context
-					callback_id="ContextLayoutTooltip"
+					callback_id="#ContextLayoutTooltip"
 					context_object_id="CcoCultureRecord"
-					context_function_id="CcoRTOwnershipList(List : &#10;Join(StoredContext(&quot;CcoCampaignStartInfo&quot;, &quot;button_list&quot;, &quot;campaign_select_new&quot;).CampaignMapPlayableAreaRecordContext.OwnershipProductRecordList, &#10;StoredContext(&quot;CcoCampaignStartInfo&quot;, &quot;button_list&quot;, &quot;campaign_select_new&quot;).LordListForFaction(StoredContextFromParent(&quot;CcoCultureRecord&quot;)).Filter(FactionRecordContext.OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc == false)).Transform(FactionRecordContext.OwnershipProductRecordList)).Distinct.Sort(ReleaseOrder, true))">
+					context_function_id="CcoRTOwnershipList(List : &#10;StoredContext(&quot;CcoCampaignStartInfo&quot;, &quot;button_list&quot;, &quot;campaign_select_new&quot;).LordListForFaction(StoredContextFromParent(&quot;CcoCultureRecord&quot;)).Transform(FactionRecordContext.OwnershipProductRequirementList).Distinct(RequirementString), Name: Name, IsFree : FactionRecordContext.OwnershipProductRequirementList.Any(OwnershipProductRecordList.All(IsFlc)))">
 					<child_m_user_properties>
 						<property
 							name="layout_path"
-							value="ui/frontend ui/tooltip_free_content"/>
+							value="ui/frontend ui/tooltip_required_content"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextObjectStore"
 					context_object_id="CcoCultureRecord"/>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoCultureRecord"
+					context_function_id="Loc(&quot;tooltip_content_alert&quot;)"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -39130,9 +39127,9 @@
 				<newstate
 					this="9AC12D21-31F4-48BE-92A0462123BC8CC5"
 					name="NewState"
-					width="133"
+					width="142"
 					height="24"
-					text="Battle realism mode"
+					text="Battle Realism Mode"
 					textvalign="Center"
 					texthalign="Right"
 					texthbehaviour="Resize"
@@ -39253,7 +39250,7 @@
 					name="NewState"
 					width="250"
 					height="40"
-					text="Time limit"
+					text="Time Limit"
 					textvalign="Center"
 					textlocalised="true"
 					textlabel="StateText_91b34d57"
@@ -41263,6 +41260,7 @@
 			offset="-25.00,-48.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
+			visible="false"
 			docking="Top Left"
 			dock_offset="-25.00,-48.00"
 			tooltipslocalised="true"
@@ -41273,7 +41271,7 @@
 			defaultstate="F380F619-2E4B-4F71-9FFEDE68F017281C">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextVisibilitySetter"
+					callback_id="#ContextVisibilitySetter"
 					context_object_id="CcoCampaignMapPlayableAreaRecord"
 					context_function_id="CampaignKey == &quot;wh3_main_combi&quot;"/>
 			</callbackwithcontextlist>
@@ -41308,6 +41306,7 @@
 			this="5E45C373-80CD-4886-A1620AD91C6DCE66"
 			id="beta_tag"
 			offset="-21.00,-17.00"
+			visible="false"
 			docking="Bottom Left"
 			dock_offset="-21.00,-35.00"
 			component_anchor_point="0.00,1.00"
@@ -41319,7 +41318,7 @@
 			defaultstate="1B876AE1-C19A-4F7C-8014A08E9B411EE4">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextVisibilitySetter"
+					callback_id="#ContextVisibilitySetter"
 					context_object_id="CcoCampaignMapPlayableAreaRecord"
 					context_function_id="CampaignKey == &quot;wh3_main_combi&quot;"/>
 			</callbackwithcontextlist>
@@ -41354,6 +41353,7 @@
 			this="1EB0B303-11EE-47B1-83E1F0D6150A4EEB"
 			id="beta_tag"
 			offset="-16.00,-24.00"
+			visible="false"
 			docking="Bottom Left"
 			dock_offset="-16.00,-108.00"
 			component_anchor_point="0.00,1.00"
@@ -41367,7 +41367,7 @@
 			defaultstate="16523F9A-B64A-4FB2-8C128DB0C700B586">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextVisibilitySetter"
+					callback_id="#ContextVisibilitySetter"
 					context_object_id="CcoCampaignMapPlayableAreaRecord"
 					context_function_id="CampaignKey == &quot;wh3_main_combi&quot;"/>
 			</callbackwithcontextlist>
@@ -41411,10 +41411,11 @@
 			tooltipslocalised="true"
 			uniqueguid="DC219576-FC19-47F6-9BE4DC731BADF4D7"
 			currentstate="0CDE3A68-EACD-49B7-97E1580763777154"
-			defaultstate="0CDE3A68-EACD-49B7-97E1580763777154">
+			defaultstate="0CDE3A68-EACD-49B7-97E1580763777154"
+			marked_for_deletion="true">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextVisibilitySetter"
+					callback_id="#ContextVisibilitySetter"
 					context_object_id="CcoFrontendFactionLeader"
 					context_function_id="FactionRecordContext.OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc)"/>
 				<callback_with_context
@@ -41459,6 +41460,7 @@
 			offset="18.00,13.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
+			visible="false"
 			docking="Center"
 			component_anchor_point="0.50,0.50"
 			priority="65"
@@ -41470,15 +41472,11 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoFrontendFactionLeader"
-					context_function_id="FactionRecordContext.OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc == false) || StoredContextFromParent(&quot;CcoCampaignStartInfo&quot;).CampaignMapPlayableAreaRecordContext.OwnershipProductRecordList.Any(IsOwned == false)"/>
-				<callback_with_context
-					callback_id="ContextCommandLeftClick"
-					context_object_id="CcoFrontendFactionLeader"
-					context_function_id="(x =StoredContextFromParent(&quot;CcoCampaignStartInfo&quot;).CampaignMapPlayableAreaRecordContext.OwnershipProductRecordList) =&gt; DoIfElse(x.Any(IsOwned == false), x.FirstContext(IsOwned == false &amp;&amp; IsFlc == false).OpenStore, FactionRecordContext.OwnershipProductRecordList.FirstContext(IsOwned == false &amp;&amp; IsFlc == false).OpenStore)"/>
+					context_function_id="FactionRecordContext.IsFactionUnlocked == false"/>
 				<callback_with_context
 					callback_id="ContextLayoutTooltip"
 					context_object_id="CcoFrontendFactionLeader"
-					context_function_id="CcoRTOwnershipList(List : Join(StoredContextFromParent(&quot;CcoCampaignStartInfo&quot;).CampaignMapPlayableAreaRecordContext.OwnershipProductRecordList, FactionRecordContext.OwnershipProductRecordList))">
+					context_function_id="CcoRTOwnershipList(List : FactionRecordContext.OwnershipProductRequirementList, Name :  this.Name, IsFree : FactionRecordContext.OwnershipProductRequirementList.Any(OwnershipProductRecordList.All(IsFlc)))">
 					<child_m_user_properties>
 						<property
 							name="alternate_parent_dock_point"
@@ -41600,6 +41598,7 @@
 			uniqueguid_in_template="0EC60E9E-5DF5-47C1-812CBD18C5147B49"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
+			visible="false"
 			docking="Center"
 			component_anchor_point="0.50,0.50"
 			tooltipslocalised="true"
@@ -41610,7 +41609,7 @@
 			defaultstate="D8D09EE2-77C0-4823-98DC019F66DF53CC">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextVisibilitySetter"
+					callback_id="#ContextVisibilitySetter"
 					context_object_id="CcoCampaignMapPlayableAreaRecord"
 					context_function_id="CampaignKey == &quot;wh3_main_combi&quot;"/>
 			</callbackwithcontextlist>
@@ -41637,6 +41636,7 @@
 			this="ACEA2B71-D2CF-4B73-8520B85551AB1193"
 			id="beta_tooltip"
 			uniqueguid_in_template="0EC60E9E-5DF5-47C1-812CBD18C5147B49"
+			visible="false"
 			docking="Center"
 			component_anchor_point="0.50,0.50"
 			priority="100"
@@ -41648,7 +41648,7 @@
 			defaultstate="017AABC3-24CA-4689-B12975791389B737">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextVisibilitySetter"
+					callback_id="#ContextVisibilitySetter"
 					context_object_id="CcoCampaignMapPlayableAreaRecord"
 					context_function_id="CampaignKey == &quot;wh3_main_combi&quot;"/>
 			</callbackwithcontextlist>
@@ -41678,6 +41678,7 @@
 			offset="1.00,1.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
+			visible="false"
 			docking="Center"
 			component_anchor_point="0.50,0.50"
 			priority="100"
@@ -41689,7 +41690,7 @@
 			defaultstate="A89A8B63-776E-4E73-849C9082C86BE63F">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextVisibilitySetter"
+					callback_id="#ContextVisibilitySetter"
 					context_object_id="CcoCampaignMapPlayableAreaRecord"
 					context_function_id="CampaignKey == &quot;wh3_main_combi&quot;"/>
 			</callbackwithcontextlist>
