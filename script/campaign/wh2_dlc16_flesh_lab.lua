@@ -424,6 +424,7 @@ function add_flesh_lab_listeners()
 		end,
 		function(context)
 			local faction = context:faction()
+			local faction_is_human = faction:is_human()
 			local faction_name = faction:name()
 			
 			-- unlock repeatable rituals
@@ -445,7 +446,7 @@ function add_flesh_lab_listeners()
 			local current_value_growth = faction:pooled_resource_manager():resource("skv_growth_vat"):value();
 			
 			-- trigger incident to gift units to merc pool
-			if not flesh_lab_batch_notifier and current_value_growth > flesh_lab_growth_max * flesh_lab_monster_pack_threshold[1] then
+			if faction_is_human and not flesh_lab_batch_notifier and current_value_growth > flesh_lab_growth_max * flesh_lab_monster_pack_threshold[1] then
 				cm:trigger_incident(faction_name, "wh2_dlc16_skv_throt_flesh_lab_batch_available", true)
 				flesh_lab_batch_notifier = true
 			end
@@ -466,7 +467,7 @@ function add_flesh_lab_listeners()
 				end
 				
 				-- trigger incident to gift units to merc pool based on the random event choice from above
-				if not flesh_lab_mutagen_notifier then
+				if faction_is_human and not flesh_lab_mutagen_notifier then
 					cm:trigger_incident(faction_name, "wh2_dlc16_skv_throt_flesh_lab_capacity_reached", true)
 					flesh_lab_mutagen_notifier = true
 				end

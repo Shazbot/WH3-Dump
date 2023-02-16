@@ -202,7 +202,6 @@ function add_eltharion_lair_listeners()
 			local prisoner = context:prisoner_family_member();
 			local prisoner_cqi = 0;
 			local faction_cqi = 0;
-			local is_grom = false;
 			
 			if not prisoner:is_null_interface() then
 				local character = prisoner:character();
@@ -210,7 +209,6 @@ function add_eltharion_lair_listeners()
 				if not character:is_null_interface() then
 					prisoner_cqi = character:command_queue_index();
 					faction_cqi = character:faction():command_queue_index();
-					is_grom = character:character_subtype("wh2_dlc15_grn_grom_the_paunch");
 				end
 			end
 			
@@ -265,10 +263,6 @@ function add_eltharion_lair_listeners()
 							cm:add_agent_experience(cm:char_lookup_str(current_mf:general_character()), 250);
 						end
 					end
-				end
-				
-				if is_grom then
-					cm:apply_effect_bundle("wh2_dlc15_hef_dungeon_mistwalker_upgrade_greenskins_grom", yvresse_faction_key, 0);
 				end
 			end
 			
@@ -495,6 +489,10 @@ function lair_UpdatePrisonerEffects(faction)
 		end
 		
 		if lair_interrogated_prisoner == prisoner:command_queue_index() then
+			if prisoner:character_subtype("wh2_dlc15_grn_grom_the_paunch") then
+				cm:apply_effect_bundle("wh2_dlc15_hef_dungeon_mistwalker_upgrade_greenskins_grom", yvresse_faction_key, 0);
+			end
+			
 			found_interrogated_cqi = true;
 		end
 	end

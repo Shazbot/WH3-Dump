@@ -1268,7 +1268,9 @@ core:add_listener(
 core:add_listener(
 	"caravan_master_heal",
 	"CaravanMoved",
-	true,
+	function(context)
+		return not context:caravan():is_null_interface();
+	end,
 	function(context)
 		--Heal Lord
 		local caravan_force_list = context:caravan_master():character():military_force():unit_list();

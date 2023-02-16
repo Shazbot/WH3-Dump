@@ -111,9 +111,7 @@ local empire_political_debug_fire_dilemmas = false;
 function add_empire_politics_listeners()
 	out("#### Adding Empire Politics Listeners ####");
 	
-	generate_elector_region_list()
-
-	local player_faction_name = cm:get_local_faction_name(true);
+	generate_elector_region_list();
 	
 	-- Check to only disable diplomacy for the Empire when player is an Empire faction
 	local player_factions = cm:get_human_factions();
@@ -258,8 +256,20 @@ function add_empire_politics_listeners()
 		function(context)
 			return context.string == "elector_counts_button";
 		end,
+		function()
+			CampaignUI.TriggerCampaignScriptEvent(cm:get_faction(cm:get_local_faction_name(true)):command_queue_index(), "elector_counts_button_pressed");
+		end,
+		true
+	);
+	core:add_listener(
+		"elector_counts_button_result",
+		"UITrigger",
 		function(context)
-			local player_cqi = cm:get_faction(player_faction_name):command_queue_index();
+			return context:trigger() == "elector_counts_button_pressed";
+		end,
+		function(context)
+			local player_cqi = context:faction_cqi();
+			local player_faction_name = cm:model():faction_for_command_queue_index(player_cqi):name()
 			cm:apply_effect_bundle("wh2_dlc13_elector_counts_bundle_hidden", player_faction_name, 20);
 			cm:faction_add_pooled_resource(player_faction_name, "emp_prestige", "events_negative", -2000);
 			

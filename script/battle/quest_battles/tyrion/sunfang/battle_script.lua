@@ -128,8 +128,8 @@ end;
 ga_attacker_01 = gb:get_army(gb:get_player_alliance_num(), 1);
 
 ga_defender_01 = gb:get_army(gb:get_non_player_alliance_num(), 1, "enemy_army");
-ga_ally_01 = gb:get_army(gb:get_non_player_alliance_num(), 2, "enemy_reinforcements_1");
-ga_ally_02 = gb:get_army(gb:get_non_player_alliance_num(), 3, "enemy_reinforcements_2");
+ga_ally_01 = gb:get_army(gb:get_non_player_alliance_num(), "enemy_reinforcements_1");
+ga_ally_02 = gb:get_army(gb:get_non_player_alliance_num(), "enemy_reinforcements_2");
 
 -------------------------------------------------------------------------------------------------
 -------------------------------------------- ORDERS ---------------------------------------------

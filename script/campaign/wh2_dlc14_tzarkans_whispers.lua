@@ -11,7 +11,7 @@ local tzarkan_mission_types = {
 local tzarkan_mission_rewards = {
 	{
 		key = "money",
-		payload = "money ",
+		payload = "money %s",
 		weight = 2,
 		min_amount = 2000,
 		max_amount = 15000,
@@ -19,7 +19,7 @@ local tzarkan_mission_rewards = {
 	},
 	{
 		key = "slaves",
-		payload = "faction_slaves_change ",
+		payload = "faction_pooled_resource_transaction{resource def_slaves;factor missions;amount %s;context absolute;}",
 		weight = 2,
 		min_amount = 500,
 		max_amount = 2000,
@@ -27,7 +27,7 @@ local tzarkan_mission_rewards = {
 	},
 	{
 		key = "ancillary",
-		payload = "add_ancillary_to_faction_pool{ancillary_key ",
+		payload = "add_ancillary_to_faction_pool{ancillary_key %s;}",
 		weight = 5
 	}
 };
@@ -585,11 +585,11 @@ function tzarkan_generate_reward(harshness)
 	if reward.key == "ancillary" then
 		local rand_anc = cm:random_number(#tzarkan_mission_reward_ancillaries);
 		local anc_key = tzarkan_mission_reward_ancillaries[rand_anc];
-		payload = reward.payload..anc_key..";}";
+		payload = string.format(reward.payload, anc_key);
 		table.remove(tzarkan_mission_reward_ancillaries, rand_anc);
 	else
 		local amount = reward.min_amount + ((reward.max_amount - reward.min_amount) * harshness);
-		payload = reward.payload..tostring(math.ceilTo(amount, reward.roundTo));
+		payload = string.format(reward.payload, tostring(math.ceilTo(amount, reward.roundTo)));
 	end
 	return payload;
 end

@@ -429,7 +429,7 @@ function setup_kislev_devotion()
 		"FactionTurnStart",
 		function(context)
 			local faction = context:faction();
-			return faction:name() == "wh3_main_ksl_the_ice_court" or faction:name() == "wh3_main_ksl_the_great_orthodoxy";
+			return faction:culture() == "wh3_main_ksl_kislev" and faction:can_be_human();
 		end,
 		function(context)
 			local faction = context:faction();
