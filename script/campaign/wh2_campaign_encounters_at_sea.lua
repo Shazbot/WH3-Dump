@@ -244,6 +244,7 @@ function setup_encounters_at_sea_listeners()
 					
 					-- the dilemma is only triggered if the character is in default stance, otherwise a generic event fires and the encounter isn't removed
 					if mf:active_stance() == "MILITARY_FORCE_ACTIVE_STANCE_TYPE_DEFAULT" then
+						cm:cancel_actions_for(character);
 						dilemma_triggered = cm:trigger_dilemma_with_targets(faction_cqi, encounter_events_battle_details[battle_incident][1], faction_cqi, 0, character:command_queue_index(), mf:command_queue_index(), 0, 0);
 					else
 						remove_encounter = false;

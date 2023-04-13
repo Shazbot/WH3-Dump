@@ -79,24 +79,27 @@ function belegar_start_experience()
 			
 			if char_index > 0 then
 				local char_lookup_str = cm:char_lookup_str(current_char);
-				local rank = belegar_characters[char_index].start_rank;
-				
-				if rank > 0 then
-					cm:add_agent_experience(char_lookup_str, rank, true);
-					
-					cm:callback(
-						function()
-							local skills = belegar_characters[char_index].start_skills;
-							for j = 1, #skills do
-								cm:force_add_skill(char_lookup_str, skills[j]);
-							end;
-						end,
-						0.2
-					);
-				end;
 				
 				if not is_human and belegar_characters[char_index].kill_if_AI then
 					cm:kill_character(char_lookup_str, true);
+				else
+					local family_member_cqi = current_char:family_member():command_queue_index();
+					local rank = belegar_characters[char_index].start_rank;
+					
+					if rank > 0 then
+						cm:add_agent_experience(char_lookup_str, rank, true);
+						
+						cm:callback(
+							function()
+								local skills = belegar_characters[char_index].start_skills;
+								local character = cm:get_family_member_by_cqi(family_member_cqi):character();
+								for j = 1, #skills do
+									cm:add_skill(character, skills[j], true, false);
+								end;
+							end,
+							0.2
+						);
+					end;
 				end;
 			end;
 		end;

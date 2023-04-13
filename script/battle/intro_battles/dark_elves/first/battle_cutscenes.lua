@@ -417,7 +417,7 @@ end;
 cutscene_player_cavalry_reinforcements = cutscene:new(
 	"cutscene_player_cavalry_reinforcements", 				-- unique string name for cutscene
 	sunits_player_start, 									-- unitcontroller over player's army
-	NCI_Create_Character									-- duration of cutscene in ms
+	NCI_Create_Character,									-- duration of cutscene in ms
 	nil														-- what to call when cutscene is finished
 );
 

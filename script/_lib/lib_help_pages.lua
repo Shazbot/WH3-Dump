@@ -507,6 +507,22 @@ local help_panel_position_overrides_campaign = {
 	beastmen_panel = {
 		["x"] = 5,
 		["y"] = -5
+	},
+
+	-- WH3 DLC
+	chd_narrative_panel = {
+		["x"] = 5,
+		["y"] = -5
+	},
+
+	hellforge_panel_main = {
+		["x"] = 5,
+		["y"] = -5
+	},
+
+	military_convoys = {
+		["x"] = 5,
+		["y"] = -5
 	}
 };
 

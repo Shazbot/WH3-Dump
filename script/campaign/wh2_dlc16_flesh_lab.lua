@@ -641,7 +641,10 @@ function add_flesh_lab_listeners()
 			return faction:name() == throt_faction_name and faction:is_human() and context:ritual():ritual_key() == "wh2_dlc16_throt_flesh_lab_thrott"
 		end,
 		function(context)
-			local faction_leader = context:performing_faction():faction_leader()
+			local faction = context:performing_faction()
+			local faction_leader = faction:faction_leader()
+			
+			cm:remove_effect_bundle("wh2_dlc16_bundle_throt_flesh_lab_thrott_payload_dummy", faction:name())
 			
 			if faction_leader:has_military_force() then
 				cm:apply_effect_bundle_to_character("wh2_dlc16_bundle_throt_flesh_lab_thrott_payload", faction_leader, 3)

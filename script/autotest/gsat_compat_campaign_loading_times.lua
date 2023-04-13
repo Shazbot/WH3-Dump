@@ -10,7 +10,7 @@ if Functions.check_file_exists(custom_variables_file) then
     package.path = package.path .. ";" ..custom_variables_file
     require "variables"
     local compat_test_type = core:svr_load_registry_string("compat_test_type")
-    if compat_test_type ~= nil then
+    if compat_test_type ~= nil and compat_test_type ~= '' then
         variables = custom_variables[compat_test_type.."_campaign_loading_times_variables"] -- import the variables table specific for that test type
     else
         variables = custom_variables["main_campaign_loading_times_variables"] -- safeguard in case there is no registry string for the test type

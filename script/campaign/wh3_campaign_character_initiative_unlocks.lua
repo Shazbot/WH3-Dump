@@ -1320,9 +1320,9 @@ function initiative_unlock:start(cqi)
 
 					for k, initiative_set in model_pairs(character:character_details():character_initiative_sets()) do
 						if not initiative_set:lookup_initiative_by_key(self.initiative_key[j]):is_null_interface() then
-							cm:toggle_character_initiative_script_locked(initiative_set, self.initiative_key[j], false);
+							cm:toggle_initiative_script_locked(initiative_set, self.initiative_key[j], false);
 							if self.grant_immediately then
-								cm:toggle_character_initiative_active(initiative_set, self.initiative_key[j], true);
+								cm:toggle_initiative_active(initiative_set, self.initiative_key[j], true);
 							end
 						end
 					end

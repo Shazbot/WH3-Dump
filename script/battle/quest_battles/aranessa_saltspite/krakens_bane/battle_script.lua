@@ -50,11 +50,6 @@ ga_attacker_1 = gb:get_army(gb:get_non_player_alliance_num(), 1,"enemy_main");
 ga_attacker_2 = gb:get_army(gb:get_non_player_alliance_num(), 2,"enemy_vanguard");
 ga_attacker_3 = gb:get_army(gb:get_non_player_alliance_num(), 2,"enemy_flankers");
 
-
-
-ga_defender_1:reinforce_on_message("player_hurt", 500);		-- Enter as Reinforcements when the following message is received, reinforcements_arrive
-
-
 -------------------------------------------------------------------------------------------------
 ----------------------------------------- ARMY TELEPORT -----------------------------------------
 -------------------------------------------------------------------------------------------------
@@ -73,7 +68,6 @@ function battle_start_teleport_units()
 --	teleport unit (4) of ga_attacker_3 to [517, -841] with an orientation of 45 degrees and a width of 25m
 	ga_attacker_3.sunits:item(4).uc:teleport_to_location(v(517, -341), 180, 25);
 
-	
 end;
 
 -------------------------------------------------------------------------------------------------
@@ -132,62 +126,58 @@ function end_deployment_phase()
 		200
 	);	
 	
-	
 	-- Voiceover and Subtitles --
-	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 3000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc11_Aranessa_Saltspite_QB_Krakens_Bane_pt_01", "subtitle_with_frame", 4) end, 3250);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc11_Aranessa_Saltspite_QB_Krakens_Bane_pt_01", "subtitle_with_frame", 0.1) end, 3250);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 12000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 12500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc11_Aranessa_Saltspite_QB_Krakens_Bane_pt_02", "subtitle_with_frame", 8) end, 13000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc11_Aranessa_Saltspite_QB_Krakens_Bane_pt_02", "subtitle_with_frame", 0.1) end, 13000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 24500);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_03) end, 26000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc11_Aranessa_Saltspite_QB_Krakens_Bane_pt_03", "subtitle_with_frame", 3) end, 26500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc11_Aranessa_Saltspite_QB_Krakens_Bane_pt_03", "subtitle_with_frame", 0.1) end, 26500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 30000);
 	
 	cutscene_intro:start();
 
-	
 end;
 
 function intro_cutscene_end()
 	gb.sm:trigger_message("01_intro_cutscene_end")
 end;
 
+-------------------------------------------------------------------------------------------------
+------------------------------------------ ORDERS -----------------------------------------------
+-------------------------------------------------------------------------------------------------
 
--------------------------------------------------------------------------------------------------
------------------------------------------- ORDERS -------------------------------------------
--------------------------------------------------------------------------------------------------
 --Stopping player from firing until the cutscene is done
-	ga_player:change_behaviour_active_on_message("battle_started", "fire_at_will", false, false);
-	ga_player:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true);
+ga_player:change_behaviour_active_on_message("battle_started", "fire_at_will", false, false);
+ga_player:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true);
 
 --message on player hurt 30%
-	ga_player:message_on_casualties("player_hurt", 0.3);	
+ga_player:message_on_casualties("player_hurt", 0.3);	
 	
 --message 45 seconds after cutscene end
-	gb:message_on_time_offset("begin_flank", 45000, "01_intro_cutscene_end");
+gb:message_on_time_offset("begin_flank", 45000, "01_intro_cutscene_end");
 	
 --generate attack message for main army after cutscene finishes	
-	ga_attacker_1:attack_on_message("01_intro_cutscene_end", 500);
-	ga_attacker_2:attack_on_message("01_intro_cutscene_end", 500);
+ga_attacker_1:rush_on_message("01_intro_cutscene_end", 500);
+ga_attacker_2:rush_on_message("01_intro_cutscene_end", 500);
 	
 --generate attack message for teleported units after 30 seconds (this will be followed by advice in 5 more seconds)
-	ga_attacker_3:move_to_position_on_message("begin_flank", v(236, 294, -785));
-	
-	ga_attacker_3:release_on_message("begin_flank", 5000);
-	
---generate attack message for reinforcements after they arrive
-	ga_defender_1:release_on_message("player_hurt", 1500);
+ga_attacker_3:move_to_position_on_message("begin_flank", v(236, 294, -785));
+ga_attacker_3:release_on_message("begin_flank", 5000);
 
-if ga_attacker_1.sunits:is_in_melee() then
-	ga_attacker_1.sunits:release_control();
-end;
-if ga_attacker_2.sunits:is_in_melee() then
-	ga_attacker_2.sunits:release_control();
-end;
+--get the army to attack after the units have been released
+gb:message_on_time_offset("rush_flank", 6000, "begin_flank");
+ga_attacker_3:rush_on_message("rush_flank");
+	
+-- Enter as Reinforcements when the following message is received, player_hurt
+ga_defender_1:reinforce_on_message("player_hurt", 500);		
+
+--generate attack message for reinforcements after they arrive
+ga_defender_1:rush_on_message("player_hurt", 1500);
 
 -------------------------------------------------------------------------------------------------
 ------------------------------------------- OBJECTIVES ------------------------------------------
@@ -201,7 +191,7 @@ gb:set_objective_on_message("01_intro_cutscene_end", "wh2_dlc11_cst_aranessa_kra
 
 gb:queue_help_on_message("01_intro_cutscene_end", "wh2_dlc11_cst_aranessa_krakens_bane_stage_5_hints_start_battle");
 gb:queue_help_on_message("begin_flank", "wh2_dlc11_cst_aranessa_krakens_bane_stage_5_hints_flankers");
-gb:queue_help_on_message("reinforcements_arrive", "wh2_dlc11_cst_aranessa_krakens_bane_stage_5_hints_reinforcements");
+gb:queue_help_on_message("player_hurt", "wh2_dlc11_cst_aranessa_krakens_bane_stage_5_hints_reinforcements");
 
 -------------------------------------------------------------------------------------------------
 --------------------------------------------- HINTS ---------------------------------------------

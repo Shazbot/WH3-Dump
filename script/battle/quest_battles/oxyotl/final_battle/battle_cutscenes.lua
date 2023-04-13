@@ -16,10 +16,10 @@ bm:start_terrain_composite_scene(herdstone_idle);
 --------------------------------------- AUDIO TRIGGERS ----------------------------------------
 -------------------------------------------------------------------------------------------------
 
-wh2_main_sfx = new_sfx("Play_Movie_Warhammer2_Heart_of_Dark_Oxyotl_Intro");
+--[[wh2_main_sfx = new_sfx("Play_Movie_Warhammer2_Heart_of_Dark_Oxyotl_Intro");
 wh2_middlebattle1_sfx = new_sfx("Play_Movie_Warhammer2_Heart_of_Dark_Oxyotl_MidBattle1");
 wh2_middlebattle2_sfx = new_sfx("Play_Movie_Warhammer2_Heart_of_Dark_Oxyotl_MidBattle2");
-wh2_middlebattle3_sfx = new_sfx("Play_Movie_Warhammer3_Heart_of_Dark_Oxyotl_MidBattle2");
+wh2_middlebattle3_sfx = new_sfx("Play_Movie_Warhammer3_Heart_of_Dark_Oxyotl_MidBattle2");]]
 
 -------------------------------------------------------------------------------------------------
 ---------------------------------------------- VO -----------------------------------------------
@@ -103,7 +103,7 @@ function end_deployment_phase()
 	10000
 	);
 
-cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx) end, 0);
+	--cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx) end, 0);
 	--wh2_dlc17_lzd_oxyotl_final_battle_phase_1_pt_01 - 12s
 	--wh2_dlc17_lzd_oxyotl_final_battle_phase_1_pt_02 - 13s
 	--wh2_dlc17_lzd_oxyotl_final_battle_phase_1_pt_03 - 9s
@@ -230,7 +230,7 @@ function play_cutscene_doombull_dead()
 		20000
 	);
 
-	cutscene_doombull_dead:action(function() cutscene_doombull_dead:play_sound(wh2_middlebattle1_sfx) end, 0);
+	--cutscene_doombull_dead:action(function() cutscene_doombull_dead:play_sound(wh2_middlebattle1_sfx) end, 0);
 
 	cutscene_doombull_dead:action(function() cutscene_doombull_dead:play_sound(oxyotl_igc1) end, 3000);
 	cutscene_doombull_dead:action(function() cutscene_doombull_dead:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_final_battle_phase_2a", "subtitle_with_frame", 0.1, true) end, 3000);	
@@ -362,7 +362,7 @@ function play_cutscene_brays_move()
 	);
 	
 
-	cutscene_brays_move:action(function() cutscene_brays_move:play_sound(wh2_middlebattle2_sfx) end, 0);
+	--cutscene_brays_move:action(function() cutscene_brays_move:play_sound(wh2_middlebattle2_sfx) end, 0);
 
 	cutscene_brays_move:action(function() cutscene_brays_move:play_sound(oxyotl_igc2) end, 1000);
 	cutscene_brays_move:action(function() cutscene_brays_move:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_final_battle_phase_2b", "subtitle_with_frame", 0.1, true) end, 1000);	
@@ -462,7 +462,7 @@ function play_cutscene_ritual_complete()
 		34000
 	);
 
-	cutscene_ritual_complete:action(function() cutscene_ritual_complete:play_sound(wh2_middlebattle3_sfx) end, 0);
+	--cutscene_ritual_complete:action(function() cutscene_ritual_complete:play_sound(wh2_middlebattle3_sfx) end, 0);
 
 	cutscene_ritual_complete:action(function() cutscene_ritual_complete:play_sound(oxyotl_igc3_01) end, 1000);
 	cutscene_ritual_complete:action(function() cutscene_ritual_complete:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_lzd_oxyotl_final_battle_phase_3d", "subtitle_with_frame", 0.1, true) end, 1000);	

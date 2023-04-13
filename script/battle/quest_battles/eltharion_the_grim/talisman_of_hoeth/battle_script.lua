@@ -122,7 +122,7 @@ function end_deployment_phase()
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_04) end, 46000);
 	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc15_hef_Eltharion_Talisman_of_Hoeth_pt_04", "subtitle_with_frame", 0.1, true) end, 46000);	
-	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 58000);
+	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 59750);
 
 	cutscene_intro:start();
 end;

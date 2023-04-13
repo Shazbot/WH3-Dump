@@ -31,7 +31,7 @@ SCRIPT_AI_PLANNER_DEFEND_FORCE = 10;
 SCRIPT_AI_PLANNER_ATTACK_FORCE = 11;
 SCRIPT_AI_PLANNER_RUSH_UNIT = 12;
 SCRIPT_AI_PLANNER_RUSH_FORCE = 13;
-
+SCRIPT_AI_PLANNER_RUSH_POSITION = 14;
 
 
 script_ai_planner = {
@@ -459,6 +459,8 @@ function script_ai_planner:reissue_current_order()
 		self:attack_force(self.enemy_force, true);
 	elseif current_order == SCRIPT_AI_PLANNER_RUSH_FORCE then
 		self:rush_force(self.enemy_force, true);
+	elseif current_order == SCRIPT_AI_PLANNER_RUSH_POSITION then
+		self:rush_position(self.current_dest, self.current_radius, true);
 	else
 		script_error(self.name .. " WARNING: reissue_current_order() called but couldn't recognise current order [" .. current_order .. "], it probably needs to be added to this function");
 	end;
@@ -900,6 +902,42 @@ function script_ai_planner:defend_force(enemy_force, radius)
 	end;
 
 	self:move_to_force(enemy_force, false, radius);
+end;
+
+
+--- @function rush_position
+--- @desc Instructs the script_ai_planner to move to then defend a position on the battlefield. Alongside a vector position a radius must be supplied, which sets how tightly bound to the position the controlled units are.
+--- @p vector position to defend
+--- @p radius radius in m
+function script_ai_planner:rush_position(pos, radius, reorder)
+	if not is_vector(pos) then
+		script_error(self.name .. " ERROR: rush_position() called but supplied position " .. tostring(pos) .. " is not a vector!");
+		
+		return false;
+	end;
+	
+	if not is_number(radius) then
+		script_error(self.name .. " ERROR: rush_position() called but supplied radius " .. tostring(radius) .. " is not a number!");
+		
+		return false;
+	end;
+	
+	bm:remove_process(self.name);
+	
+	if not reorder and self.is_debug then
+		bm:out(self.name .. ":rush_position() called, position is " .. v_to_s(pos) .. ", radius is " .. tostring(radius));
+	end;
+
+	-- ensure our units are released to the AI
+	self:ensure_units_are_released();
+
+	-- give the order to our units
+	self.planner:rush_position(pos, radius);
+		
+	self.current_order = SCRIPT_AI_PLANNER_RUSH_POSITION;
+	self.current_dest = pos;
+	self.current_radius = radius;
+
 end;
 
 

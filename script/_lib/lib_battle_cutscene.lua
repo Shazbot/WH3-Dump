@@ -1033,6 +1033,22 @@ function cutscene:start()
 		
 		return false;
 	end;
+
+	if buim:is_esc_menu_open() then
+		bm:out("Attempting to start cutscene " .. self.name .. " but the escape menu is open - waiting until it closes");
+		core:add_listener(
+			self.name .. "_wait_for_esc_menu",
+			"ScriptEventPanelClosedCampaign",
+			function(context)
+				return context.string == "esc_menu";
+			end,
+			function()
+				self:start();
+			end,
+			false
+		);
+		return;
+	end;
 	
 	self.start_time = bm:time_elapsed_ms();
 	local effective_cutscene_length = self.cutscene_length or 0; -- Handle cases where cutscene_length is nil (signifying no-end cutscenes)

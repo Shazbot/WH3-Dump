@@ -130,6 +130,14 @@ function battle_ui_manager:is_panel_open(panel)
 end;
 
 
+--- @function is_esc_menu_open
+--- @desc Returns whether the escape menu is currently open.
+--- @r @boolean is esc menu open
+function battle_ui_manager:is_esc_menu_open()
+	return self:is_panel_open("esc_menu");
+end;
+
+
 --- @function get_open_fullscreen_panel
 --- @desc Returns the name of a fullscreen panel that's open, or <code>false</code> if no panels are open. If more than one fullscreen panel is open then the name of one is returned at random.
 --- @r @string open fullscreen panel

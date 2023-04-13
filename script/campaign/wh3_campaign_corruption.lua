@@ -48,6 +48,10 @@ local corruption_province_overrides = {
 	{
 		["vampiric"] = 10,
 	},
+	["wh3_main_combi_province_gnoblar_country"] = 
+	{
+		["vampiric"] = 10,
+	},
 	["wh3_main_combi_province_the_red_wastes"] =
 	{
 		["chaos"] = 30,
@@ -66,7 +70,8 @@ function add_starting_corruption()
 		["wh3_main_kho_khorne"] = "khorne",
 		["wh3_main_nur_nurgle"] = "nurgle",
 		["wh3_main_sla_slaanesh"] = "slaanesh",
-		["wh3_main_tze_tzeentch"] = "tzeentch"
+		["wh3_main_tze_tzeentch"] = "tzeentch",
+		["wh3_dlc23_chd_chaos_dwarfs"] = "chaos"
 	};
 	local province_list = cm:model():world():province_list();
 	

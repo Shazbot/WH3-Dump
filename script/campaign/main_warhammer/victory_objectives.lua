@@ -166,6 +166,34 @@ victory_objectives_ie = {
 				payload_bundle = "wh3_main_ie_victory_objective_chaos_long"	
 			}
 		},
+		chaos_dwarfs = {
+			wh_main_short_victory = {
+				objectives = {
+					{
+						type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
+						conditions = {
+							"total 35"
+						}
+					}
+				},
+				payload_bundle = "wh3_dlc23_ie_victory_objective_chaos_dwarfs_short"	
+			},
+			wh_main_long_victory = {
+				objectives = {
+					{
+						type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
+						conditions = {
+							"total 80"
+						}
+					}
+				},
+				payload_ancillary = {
+					"wh3_dlc23_anc_armour_lesser_relic_of_skavor",
+					"wh3_dlc23_anc_enchanted_item_lesser_relic_of_morgrim",
+					"wh3_dlc23_anc_weapon_lesser_relic_of_smednir"
+				}
+			}
+		},
 	},
 
 	-- Ideally every playable subculture should be in this table, but it isn't required
@@ -688,7 +716,7 @@ victory_objectives_ie = {
 			alignment = "chaos",
 			objectives = {
 				{
-					-- Eliminate the other nearby Chaos factions
+						-- Eliminate the other nearby Chaos factions
 					type = "DESTROY_FACTION",
 					conditions = {
 						"faction wh_main_chs_chaos", 
@@ -744,6 +772,29 @@ victory_objectives_ie = {
 						"region wh3_main_combi_region_the_twisted_towers",
 						"region wh3_main_combi_region_the_writhing_fortress",
 						"override_text mission_text_text_mis_activity_control_n_regions_satrapy_including_at_least_n"
+					}
+				}
+			}
+		},
+		wh3_dlc23_sc_chd_chaos_dwarfs = {
+			alignment = "chaos_dwarfs",
+			objectives = {
+				{
+					-- be the boss of Zharr Naggrund
+					type = "OWN_N_REGIONS_INCLUDING",
+					conditions = {
+						"region wh3_main_combi_region_zharr_naggrund",
+						"total 1"
+					}
+				},
+				{
+					--- Kill the Dwarfs & Grimgor
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh_main_dwf_dwarfs",
+						"faction wh_main_dwf_karak_kadrin",
+						"faction wh_main_grn_greenskins",
+						"confederation_valid"
 					}
 				}
 			}
@@ -1695,9 +1746,10 @@ victory_objectives_ie = {
 					-- Hold the Great Maw & the Mountains of Mourn provinces
 					type = "CONTROL_N_PROVINCES_INCLUDING",
 					conditions = {
-						"total 2",
+						"total 3",
 						"province wh3_main_combi_province_mountains_of_mourn",
-						"province wh3_main_combi_province_the_maw"
+						"province wh3_main_combi_province_ivory_road",
+						"province wh3_main_combi_province_bone_road"
 					}
 				}
 			}
@@ -1790,6 +1842,8 @@ victory_objectives_ie = {
 						"region wh3_main_combi_region_the_fortress_of_vorag",
 						"region wh3_main_combi_region_the_tower_of_torment",  
 						"region wh3_main_combi_region_the_challenge_stone",
+						"region wh3_main_combi_region_uzkulak",
+						"region wh3_main_combi_region_black_fortress",
 						"override_text mission_text_text_mis_activity_control_n_regions_satrapy_including_at_least_n"
 					}
 				}
@@ -2399,13 +2453,12 @@ victory_objectives_ie = {
 		wh3_main_tze_oracles_of_tzeentch = {
 			objectives = {
 				{
-					-- Destroy Teclis, Kroq-gar, Zlatan and the Fortress of Dawn
+					-- Destroy Teclis, Kroq-gar and Zlatan 
 					type = "DESTROY_FACTION",
 					conditions = {
 						"faction wh2_main_lzd_zlatan",
 						"faction wh2_main_hef_order_of_loremasters",
-						"faction wh2_main_lzd_last_defenders",
-						"faction wh2_main_hef_fortress_of_dawn",
+						"faction wh2_main_lzd_last_defenders",						
 						"confederation_valid"
 					}
 				}
@@ -2549,7 +2602,59 @@ victory_objectives_ie = {
 					}
 				}
 			}
-		}
+		},
+
+		-- Drazhoath
+		wh3_dlc23_chd_legion_of_azgorh = {
+			objectives = {
+				{
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh2_dlc09_skv_clan_rictus",
+						"faction wh2_dlc15_hef_imrik",
+						"confederation_valid"
+					}
+				}
+			}
+		},
+
+		-- astragoth
+		wh3_dlc23_chd_astragoth = {
+			objectives = {
+				{
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh3_main_vmp_lahmian_sisterhood",
+						"faction wh_main_dwf_kraka_drak",
+						"confederation_valid"
+					}
+				}
+			}
+		},
+
+		-- Zhatan
+		wh3_dlc23_chd_zhatan = {
+			objectives = {
+				{
+					-- seize the Bastion
+					type = "CONTROL_N_REGIONS_FROM",
+					conditions = {
+						"total 3",
+						"region wh3_main_combi_region_turtle_gate",
+						"region wh3_main_combi_region_dragon_gate",
+						"region wh3_main_combi_region_snake_gate",
+					},
+				},
+				{
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh3_main_cth_the_northern_provinces",
+						"confederation_valid"
+					}
+				}
+			}
+		},
+
 	}
 }
 
@@ -2643,14 +2748,29 @@ function victory_objectives_ie:trigger_mission(mm, victory_type, mission_key, fa
 	local bundle = nil
 	if mission_key ~= nil and faction_alignment ~= nil then
 		bundle = self.alignments[faction_alignment][mission_key].payload_bundle
-
-		if bundle ~= nil then
-			mm:add_payload("effect_bundle{bundle_key " .. bundle .. ";turns 0;}")
+		if is_table(bundle) then
+			for i = 1, #bundle do
+				if bundle[i] ~= nil then
+					mm:add_payload("effect_bundle{bundle_key " .. bundle[i] .. ";turns 0;}")
+				end
+			end
+		else
+			if bundle ~= nil then
+				mm:add_payload("effect_bundle{bundle_key " .. bundle .. ";turns 0;}")
+			end
 		end
 
 		ancillary = self.alignments[faction_alignment][mission_key].payload_ancillary
-		if ancillary ~= nil then
-			mm:add_payload("add_ancillary_to_faction_pool{ancillary_key wh3_main_anc_weapon_chainsword;}")
+		if is_table(ancillary) then
+			for i = 1, #ancillary do
+				if ancillary[i] ~= nil then
+					mm:add_payload("add_ancillary_to_faction_pool{ancillary_key " .. ancillary[i] .. ";}")
+				end
+			end
+		else
+			if ancillary ~= nil then
+				mm:add_payload("add_ancillary_to_faction_pool{ancillary_key " .. ancillary .. ";}")
+			end
 		end
 	end
 

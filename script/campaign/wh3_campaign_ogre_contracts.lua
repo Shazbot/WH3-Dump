@@ -30,6 +30,13 @@ local culture_mapping = {
 	["wh_main_vmp_vampire_counts"] = "vampire_counts"
 };
 
+local military_force_types = {
+	DISCIPLE_ARMY = true,
+	OGRE_CAMP = true,
+	CARAVAN = true,
+	CONVOY = true
+};
+
 function setup_ogre_contracts()
 	local human_ogre_exists = false;
 	local human_factions = cm:get_human_factions(true);
@@ -245,7 +252,7 @@ function attempt_to_issue_ogre_contracts(faction_key)
 				local current_mf = mf_list:item_at(j);
 				local current_mf_force_type = current_mf:force_type():key();
 				
-				if not current_mf:is_armed_citizenry() and current_mf:has_general() and current_mf_force_type ~= "DISCIPLE_ARMY" and current_mf_force_type ~= "OGRE_CAMP" and current_mf_force_type ~= "CARAVAN" then
+				if not current_mf:is_armed_citizenry() and current_mf:has_general() and not military_force_types[current_mf_force_type] then
 					local general_character = current_mf:general_character();
 					
 					if general_character:has_region() then

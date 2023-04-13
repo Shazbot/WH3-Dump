@@ -313,7 +313,13 @@ function add_eltharion_lair_listeners()
 				
 				if prisoners:num_items() < lair_max_prisoners then
 					if cm:pending_battle_cache_faction_is_attacker(yvresse_faction_key) and pending_battle:has_been_fought() and not pending_battle:ended_with_withdraw() and cm:random_number(100) <= lair_autoresolve_capture_chance then
-						for i = 1, cm:pending_battle_cache_num_defenders() do
+						local count = cm:pending_battle_cache_num_defenders();
+						
+						if pending_battle:night_battle() then
+							count = 1;
+						end
+						
+						for i = 1, count do
 							local defender_cqi = cm:pending_battle_cache_get_defender_fm_cqi(i);
 							local enemy = cm:get_character_by_fm_cqi(defender_cqi);
 							if enemy:is_null_interface() == false then

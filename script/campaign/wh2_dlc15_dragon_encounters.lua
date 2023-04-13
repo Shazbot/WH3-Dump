@@ -28,9 +28,9 @@ local dragon_state = 1;
 local incidents_list = {
 	"wh2_dlc15_incident_dragon_encounter_generic_black",
 	"wh2_dlc15_incident_dragon_encounter_generic_forest",
-	"wh2_dlc15_incident_dragon_encounter_generic_moon",
 	"wh2_dlc15_incident_dragon_encounter_generic_star",
-	"wh2_dlc15_incident_dragon_encounter_generic_sun"
+	"wh2_dlc15_incident_dragon_encounter_generic_sun",
+	"wh2_dlc15_incident_dragon_encounter_generic_moon"
 };		
 
 local dragon_factions_list = {
@@ -407,7 +407,7 @@ function setup_dragon_post_battle_listener()
 			
 			local dragon_invasion = invasion_manager:get_invasion("dragon_army");
 			
-			if found_encounter_faction and dragon_invasion then
+			if found_encounter_faction_indx > 0 and dragon_invasion then
 				dragon_invasion:kill();
 			end;
 			

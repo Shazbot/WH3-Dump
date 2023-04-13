@@ -77,14 +77,14 @@ function VolkmarZeal_PooledResourceEffectChangedEvent()
 		cm:add_units_to_faction_mercenary_pool(player_cqi, "wh2_dlc13_emp_cav_outriders_ror_0", 1);
 		cm:add_ancillary_to_faction(volkmar_interface, "wh2_dlc13_anc_weapon_runefang_hochland", false);
 	elseif current_books_destroyed == 5 then
-		cm:remove_event_restricted_unit_record_for_faction("wh2_dlc13_emp_cav_empire_knights_ror_1", volkmar_faction);
+		cm:remove_event_restricted_unit_record_for_faction("wh2_dlc13_emp_cav_empire_knights_ror_0", volkmar_faction);
 		cm:remove_event_restricted_unit_record_for_faction("wh2_dlc13_emp_cav_empire_knights_ror_2", volkmar_faction);
-		cm:add_units_to_faction_mercenary_pool(player_cqi, "wh2_dlc13_emp_cav_empire_knights_ror_1", 1);	
+		cm:add_units_to_faction_mercenary_pool(player_cqi, "wh2_dlc13_emp_cav_empire_knights_ror_0", 1);	
 		cm:add_units_to_faction_mercenary_pool(player_cqi, "wh2_dlc13_emp_cav_empire_knights_ror_2", 1);
 		cm:add_ancillary_to_faction(volkmar_interface, "wh2_dlc13_anc_weapon_runefang_nordland", false);
 	elseif current_books_destroyed == 6 then	
-		cm:remove_event_restricted_unit_record_for_faction("wh2_dlc13_emp_cav_empire_knights_ror_0", volkmar_faction);
-		cm:add_units_to_faction_mercenary_pool(player_cqi, "wh2_dlc13_emp_cav_empire_knights_ror_0", 1);
+		cm:remove_event_restricted_unit_record_for_faction("wh2_dlc13_emp_cav_empire_knights_ror_1", volkmar_faction);
+		cm:add_units_to_faction_mercenary_pool(player_cqi, "wh2_dlc13_emp_cav_empire_knights_ror_1", 1);
 		cm:add_ancillary_to_faction(volkmar_interface, "wh2_dlc13_anc_weapon_runefang_talabecland", false);
 	elseif current_books_destroyed == 7 then	
 		cm:remove_event_restricted_unit_record_for_faction("wh2_dlc13_emp_inf_greatswords_ror_0", volkmar_faction);

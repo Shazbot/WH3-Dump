@@ -214,27 +214,80 @@ regiments_of_renown = {
 	----------------
 	---- NURGLE ----
 	----------------
-	["wh3_main_sc_nur_nurgle"] = {
-		"wh3_twa06_nur_inf_plaguebearers_ror_0"
+	["wh3_main_sc_nur_nurgle"] = {		
+		"wh_pro04_chs_inf_forsaken_ror_0",
+		"wh3_dlc20_chs_mon_giant_mnur_ror",
+		"wh3_twa06_nur_inf_plaguebearers_ror_0",
+		"wh3_twa07_nur_cav_pox_riders_of_nurgle_ror_0",
+		"wh3_twa08_nur_mon_great_unclean_one_0_ror"
 	},
 	-----------------------
 	---- OGRE KINGDOMS ----
 	-----------------------
 	["wh3_main_sc_ogr_ogre_kingdoms"] = {
-		"wh3_twa06_ogr_inf_maneaters_ror_0"
+		"wh3_twa06_ogr_inf_maneaters_ror_0",
+		"wh3_twa07_ogr_cav_crushers_ror_0",
+		"wh3_twa08_ogr_mon_stonehorn_0_ror"
 	},
 	------------------
 	---- SLAANESH ----
 	------------------
-	["wh3_main_sc_sla_slaamesj"] = {
-		"wh3_twa06_sla_inf_daemonette_ror_0"
+	["wh3_main_sc_sla_slaanesh"] = {
+		"wh3_twa06_sla_inf_daemonette_ror_0",
+		"wh3_twa07_sla_cav_heartseekers_of_slaanesh_ror_0",
+		"wh3_twa08_sla_mon_keeper_of_secrets_0_ror",
+		"wh_pro04_chs_inf_chaos_warriors_ror_0",
+		"wh3_dlc20_chs_cav_chaos_chariot_msla_ror"
 	},
 	------------------
 	---- TZEENTCH ----
 	------------------
 	["wh3_main_sc_tze_tzeentch"] = {
-		"wh3_twa06_tze_inf_pink_horrors_ror_0"
+		"wh3_twa06_tze_inf_pink_horrors_ror_0",
+		"wh3_dlc20_chs_inf_aspiring_champions_mtze_ror",
+		"wh_pro04_chs_mon_chaos_spawn_ror_0",
+		"wh3_twa07_tze_cav_doom_knights_ror_0",
+		"wh3_twa08_tze_mon_lord_of_change_0_ror"
+	},	
+	------------------
+	----  KHORNE  ----
+	------------------
+	["wh3_main_sc_kho_khorne"] = {
+		"wh_pro04_nor_inf_marauder_berserkers_ror_0",
+		"wh3_twa06_kho_inf_bloodletters_ror_0",
+		"wh3_twa07_kho_cav_bloodcrushers_ror_0",
+		"wh3_dlc20_kho_cav_skullcrushers_mkho_ror",
+		"wh3_twa08_kho_mon_bloodthirster_0_ror"
+	},	
+	------------------
+	----  KISLEV  ----
+	------------------
+	["wh3_main_sc_ksl_kislev"] = { 
+		"wh3_twa06_ksl_inf_tzar_guard_ror_0",
+		"wh3_twa07_ksl_cav_war_bear_riders_ror_0",
+		"wh3_twa08_ksl_mon_elemental_bear_0_ror"
 	},
+	------------------
+	----  CATHAY  ----
+	------------------
+	["wh3_main_sc_cth_cathay"] = { 
+		"wh3_twa06_cth_inf_dragon_guard_ror_0",
+		"wh3_twa07_cth_cav_jade_longma_riders_ror_0",
+		"wh3_twa08_cth_mon_terracotta_sentinel_0_ror"
+	},
+	------------------
+	----  CHD  ----
+	------------------
+	["wh3_dlc23_sc_chd_chaos_dwarfs"] = {
+		"wh3_dlc23_chd_cav_bull_centaurs_dual_axe_ror",
+		"wh3_dlc23_chd_cav_hobgoblin_wolf_raiders_ror",
+		"wh3_dlc23_chd_inf_chaos_dwarf_blunderbusses_ror",
+		"wh3_dlc23_chd_inf_chaos_dwarf_warriors_ror",
+		"wh3_dlc23_chd_inf_infernal_ironsworn_ror",
+		"wh3_dlc23_chd_veh_iron_daemon_ror",
+		"wh_pro04_chs_art_hellcannon_ror_0" 
+	}
+ 
 };
 
 core:add_listener(
@@ -338,13 +391,16 @@ function tomb_king_ror_locks()
 		local tk_factions = {"wh2_dlc09_tmb_khemri", "wh2_dlc09_tmb_followers_of_nagash", "wh2_dlc09_tmb_lybaras", "wh2_dlc09_tmb_exiles_of_nehek"};
 		
 		for i = 1, #tk_factions do
-			-- Unlocked via Rite
-			cm:add_event_restricted_unit_record_for_faction("wh2_dlc09_tmb_art_casket_of_souls_0", tk_factions[i], "wh2_dlc09_lock_casket_of_souls");
-			-- Unlocked via Crafting
-			cm:add_event_restricted_unit_record_for_faction("wh2_dlc09_tmb_mon_carrion_ror", tk_factions[i], "wh2_dlc09_lock_ror_crafting");
-			cm:add_event_restricted_unit_record_for_faction("wh2_dlc09_tmb_inf_nehekhara_warriors_ror", tk_factions[i], "wh2_dlc09_lock_ror_crafting");
-			cm:add_event_restricted_unit_record_for_faction("wh2_dlc09_tmb_cav_nehekhara_horsemen_ror", tk_factions[i], "wh2_dlc09_lock_ror_crafting");
-			cm:add_event_restricted_unit_record_for_faction("wh2_dlc09_tmb_cav_necropolis_knights_ror", tk_factions[i], "wh2_dlc09_lock_ror_crafting");
+			local faction_exists = cm:get_faction(tk_factions[i])
+			if faction_exists ~= false then 				
+				-- Unlocked via Rite
+				cm:add_event_restricted_unit_record_for_faction("wh2_dlc09_tmb_art_casket_of_souls_0", tk_factions[i], "wh2_dlc09_lock_casket_of_souls");
+				-- Unlocked via Crafting
+				cm:add_event_restricted_unit_record_for_faction("wh2_dlc09_tmb_mon_carrion_ror", tk_factions[i], "wh2_dlc09_lock_ror_crafting");
+				cm:add_event_restricted_unit_record_for_faction("wh2_dlc09_tmb_inf_nehekhara_warriors_ror", tk_factions[i], "wh2_dlc09_lock_ror_crafting");
+				cm:add_event_restricted_unit_record_for_faction("wh2_dlc09_tmb_cav_nehekhara_horsemen_ror", tk_factions[i], "wh2_dlc09_lock_ror_crafting");
+				cm:add_event_restricted_unit_record_for_faction("wh2_dlc09_tmb_cav_necropolis_knights_ror", tk_factions[i], "wh2_dlc09_lock_ror_crafting");
+			end
 		end
 	end
 	
@@ -381,8 +437,11 @@ function vampire_coast_ror_locks()
 		local vc_factions = {"wh2_dlc11_cst_the_drowned", "wh2_dlc11_cst_pirates_of_sartosa", "wh2_dlc11_cst_vampire_coast", "wh2_dlc11_cst_noctilus"};
 		
 		for i = 1, #vc_factions do
-			-- Unlocked via Rite
-			cm:add_event_restricted_unit_record_for_faction("wh2_dlc11_cst_art_queen_bess", vc_factions[i], "wh2_dlc11_lock_queen_bess");
+			local faction_exists = cm:get_faction(vc_factions[i])
+			if faction_exists ~= false then
+				-- Unlocked via Rite
+				cm:add_event_restricted_unit_record_for_faction("wh2_dlc11_cst_art_queen_bess", vc_factions[i], "wh2_dlc11_lock_queen_bess");
+			end
 		end
 	end
 	

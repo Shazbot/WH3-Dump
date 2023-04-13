@@ -91,6 +91,9 @@ function PrologueTroubleDilemma()
 
 			--Metric check (step_number, step_name, skippable)
 			cm:trigger_prologue_step_metrics_hit(21, "triggered_trouble_dilemma", false);
+
+			cm:steal_user_input(false)
+			cm:steal_escape_key(false)
 		end,
 		false
 	);

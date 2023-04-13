@@ -97,7 +97,7 @@ function start_achievement_listeners()
 		function(context)
 			local faction = context:faction();
 			
-			if faction:is_human() then
+			if faction:is_human() and faction:culture() == "wh3_main_cth_cathay" then
 				award_achievement_to_faction(faction:name(), "WH3_ACHIEVEMENT_CATHAY_COMPLETE_CARAVAN");
 			end;
 		end,

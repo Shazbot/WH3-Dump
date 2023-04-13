@@ -711,7 +711,6 @@ end
 
 ---if no vfx key provided, will just clear existing fx
 function Bloodgrounds:apply_vfx(region_key, opt_vfx_key, opt_is_preview)
-	cm:remove_scripted_composite_scene(region_key.."_bloodground_fx")
 
 	if opt_vfx_key then
 		cm:add_scripted_composite_scene_to_settlement(region_key.."_bloodground_fx", opt_vfx_key, cm:get_region(region_key), 1, 1, true, true, true)

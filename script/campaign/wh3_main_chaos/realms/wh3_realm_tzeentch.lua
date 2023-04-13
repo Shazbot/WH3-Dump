@@ -11,7 +11,6 @@ local ai_faction = "ai";
 
 local final_teleportal_dest = {387, 613};
 
-local teleportals = {};
 local marker_teleports = {};
 
 local final_ai_dest = {373, 596};
@@ -137,57 +136,6 @@ function setup_realm_tzeentch(entering_faction)
 		setup_teleportals_listeners(exiting_teleportal);
 		setup_poi_listeners();
 		setup_post_battle_option_listener();
-
-		core:add_listener(
-			"final_teleportal_entered",
-			"AreaEntered",
-			function(context)
-				local character = context:family_member():character();
-				if not character:is_null_interface() then
-					return context:area_key() == "final_teleportal" and not exiting_teleportal and cm:char_is_general_with_army(character);
-				end;
-			end,
-			function(context)
-				local character = context:family_member():character();
-				if character:is_null_interface() then
-					return;
-				end;
-
-				local char_str = cm:char_lookup_str(character:command_queue_index());
-				local faction = character:faction();
-				local faction_name = faction:name();
-
-				exiting_teleportal = true;
-
-				-- when exiting a teleportal, this listener will fire again, so don't allow it for a tick
-				cm:callback(function() exiting_teleportal = false end, 0.2);
-
-				-- teleport the character back to the very first position
-				local x, y = teleportals[1][1][1], teleportals[1][1][2];
-
-				local final_x, final_y = cm:find_valid_spawn_location_for_character_from_position(faction_name, x, y, true);
-
-				out.chaos("\tCalculating teleport destination: " .. x .. ", " .. y .. " -> " .. final_x .. ", " .. final_y);
-
-				if final_x ~= -1 then
-					local display_x, display_y = cm:log_to_dis(final_x, final_y);
-					cm:draw_text("Teleporting...", display_x, display_y, 15, 2, 0, 255, 255);
-
-					out.chaos("Entered teleportal [final_teleportal] - teleporting to " .. final_x .. ", " .. final_y);
-
-					cm:teleport_to(char_str, final_x, final_y);
-					cm:zero_action_points(char_str);
-
-					if faction:is_human() and cm:get_local_faction_name(true) == faction_name then
-						local cached_x, cached_y, cached_d, cached_b, cached_h = cm:get_camera_position();
-						cm:scroll_camera_from_current(false, 1, {display_x, display_y, cached_d, cached_b, cached_h});
-					end;
-				else
-					script_error("Couldn't find position");
-				end;
-			end,
-			true
-		);
 
 		setup_ai_behaviour(
 			function(context)

@@ -87,6 +87,9 @@ custom_loading_screens_no_intro = {
 	["327513622"] = "wh3_dlc20_chs_festus_gc",
 	["1650704357"] = "wh3_dlc20_chs_valkia_gc",
 	["2084980746"] = "wh3_dlc20_chs_vilitch_gc",
+	["518272753"] = "wh3_dlc23_chd_astragoth_gc",
+	["1562550941"] = "wh3_dlc23_chd_legion_of_azgorh_gc",
+	["400068026"] = "wh3_dlc23_chd_zhatan_gc",
 	
 	-- chaos map
 	["780864164"] = "wh3_main_ksl_the_ice_court",
@@ -105,6 +108,9 @@ custom_loading_screens_no_intro = {
 	["1723356641"] = "wh3_dlc20_chs_festus",
 	["1336969227"] = "wh3_dlc20_chs_valkia",
 	["541369644"] = "wh3_dlc20_chs_vilitch",
+	["924617748"] = "wh3_dlc23_chd_astragoth",
+	["1246572927"] = "wh3_dlc23_chd_legion_of_azgorh",
+	["1877417278"] = "wh3_dlc23_chd_zhatan",
 
 	-- prologue
 	["138084536"] = ""--"wh3_main_prologue_initial_load"	--Prologue handled in code so pass an empty string to make use C++ code path

@@ -7509,23 +7509,23 @@ function campaign_manager:force_add_trait(char_str, trait_str, show_msg, points)
 end;
 
 
---- @function force_add_skill
---- @desc Forceably adds a skill to a character. This wraps the @episodic_scripting:force_add_skill function on the underlying episodic scripting interface, but adds validation and output. This output will be shown in the <code>Lua - Traits</code> debug console spool.
---- @p string character string, Character string of the target character, using the standard character string lookup system.
+--- @function add_skill
+--- @desc Adds a skill to a character. This wraps the @episodic_scripting:add_skill function on the underlying episodic scripting interface, but adds validation and output. This output will be shown in the <code>Lua - Traits</code> debug console spool.
+--- @p character character, Character script interface.
 --- @p string skill key, Skill key to add.
-function campaign_manager:force_add_skill(char_str, skill_str)
-	if not is_string(char_str) then
-		script_error("ERROR: force_add_skill() called but supplied character string [" .. tostring(char_str) .. "] is not a string");
+--- @p bool ignore_requirements ignore requirements like the need to unlock other skills first.
+--- @p bool ignore_skill_points ignore skill points, don't decrease the amount which means adding the skill even if the character doesn't have skill points.
+function campaign_manager:add_skill(character, skill_str, ignore_requirements, ignore_skill_points)
+		
+	if not is_string(skill_str) then
+		script_error("ERROR: add_skill() called but supplied skill string [" .. tostring(skill_str) .. "] is not a string");
 		return false;
 	end;
 	
-	if not is_string(skill_str) then
-		script_error("ERROR: force_add_skill() called but supplied skill string [" .. tostring(skill_str) .. "] is not a string");
-		return false;
-	end;
+	local char_str = cm:char_lookup_str(character);
 
-	out.traits("* force_add_skill() is adding skill [" .. tostring(skill_str) .. "] to character [" .. tostring(char_str) .. "]");
-	self.game_interface:force_add_skill(char_str, skill_str);
+	out.traits("* add_skill() is adding skill [" .. tostring(skill_str) .. "] to character [" .. tostring(char_str) .. "]");
+	self.game_interface:add_skill(character, skill_str,ignore_requirements, ignore_skill_points);
 end;
 
 

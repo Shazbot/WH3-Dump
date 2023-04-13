@@ -16,14 +16,6 @@ local armies = {
 		["general_subtype"] =	"wh3_main_ksl_boyar"
 	},
 	{
-		["playable_faction"] =	"wh3_main_ksl_ursun_revivalists",
-		["enemy_faction"] =		"wh3_main_grn_dark_land_orcs",
-		["x_pos"] = 			738,
-		["y_pos"] = 			224,
-		["units"] = 			"wh_main_grn_inf_goblin_spearmen,wh_main_grn_inf_goblin_spearmen,wh_main_grn_inf_goblin_archers",
-		["general_subtype"] =	"wh_main_grn_orc_warboss"
-	},
-	{
 		["playable_faction"] =	"wh3_main_ogr_goldtooth",
 		["enemy_faction"] =		"wh3_main_ogr_crossed_clubs",
 		["x_pos"] = 			960,

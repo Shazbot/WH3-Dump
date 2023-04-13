@@ -1499,13 +1499,17 @@ function prologue_agents_intervention()
 
 	tour_test_agents_1 = scripted_tour:new("tour_agents_1",
 		function() 
-			cm:callback(function() tour_test_agents_3:start("tour_test_agents_3") end, 0.5)
+			cm:callback(function() 
+				tour_test_agents_3:start("tour_test_agents_3") 
+			end, 0.5)
 		end
 	)
 
 	tour_test_agents_3 = scripted_tour:new("tour_agents_3",
 		function() 
-			cm:callback(function() tour_test_agents_4:start("tour_test_agents_4") end, 0.5)
+			cm:callback(function() 
+				tour_test_agents_4:start("tour_test_agents_4") 
+			end, 0.5)
 		end
 	)
 
@@ -1595,15 +1599,15 @@ function prologue_agents_intervention()
 	cm:callback(
 		function ()		
 			local tour_started
-			local uic_button_info_toggle = find_uicomponent(core:get_ui_root(), "hud_campaign", "unit_info_panel_holder_parent", "unit_info_panel_holder", "button_holder", "info_toggle_holder", "button_info_toggle")
+			local uic_button_info_toggle = find_uicomponent(core:get_ui_root(), "unit_info_panel_holder", "button_holder", "info_toggle_holder", "button_info_toggle")
 			local function cancel_agents_intervention ()
 				completely_lock_input(false)
 				prologue_intervention_agents:cancel()
 				cm:contextual_vo_enabled(true);
 			end
 			local function prepare_agents_intervention ()	
-				uic_agent_details = find_uicomponent(core:get_ui_root(), "hud_campaign", "unit_info_panel_holder", "agent_details")
-				uic_targeted_effects = find_uicomponent(core:get_ui_root(), "hud_campaign", "unit_info_panel_holder", "agent_details", "action_list", "wh2_main_agent_action_wizard_hinder_settlement_damage_walls")
+				uic_agent_details = find_uicomponent(core:get_ui_root(), "unit_info_panel_holder", "agent_details")
+				uic_targeted_effects = find_uicomponent(core:get_ui_root(), "unit_info_panel_holder", "agent_details", "action_list", "wh2_main_agent_action_wizard_hinder_settlement_damage_walls")
 				uic_embedded_effects = find_uicomponent(core:get_ui_root(), "units_panel", "main_units_panel", "units", "AgentUnit 0")
 				
 				if uic_agent_details and uic_agent_details:Visible(true) and uic_agent_details and uic_agent_details:Visible(true) and 
@@ -1614,8 +1618,8 @@ function prologue_agents_intervention()
 				end
 				
 				if tour_started then
-					tour_test_agents_1:add_fullscreen_highlight("hud_campaign", "unit_info_panel_holder", "agent_details")
-					tour_test_agents_3:add_fullscreen_highlight("hud_campaign", "unit_info_panel_holder", "agent_details", "action_list", "wh2_main_agent_action_wizard_hinder_settlement_damage_walls")
+					tour_test_agents_1:add_fullscreen_highlight("unit_info_panel_holder", "agent_details")
+					tour_test_agents_3:add_fullscreen_highlight("unit_info_panel_holder", "agent_details", "action_list", "wh2_main_agent_action_wizard_hinder_settlement_damage_walls")
 					tour_test_agents_4:add_fullscreen_highlight("units_panel", "main_units_panel", "units", "AgentUnit 0")
 					tour_test_agents_1:set_show_skip_button(false)
 					tour_test_agents_3:set_show_skip_button(false)

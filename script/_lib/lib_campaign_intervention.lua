@@ -1332,6 +1332,8 @@ function intervention_manager:all_interventions_completed()
 			
 			self:out(separator_str);
 		end;
+		-- unsuppress event feed messages
+		self:suppress_all_event_feed_messages(false);
 		return;
 	end;
 	

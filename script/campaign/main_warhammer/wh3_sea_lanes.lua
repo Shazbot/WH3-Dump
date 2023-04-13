@@ -3,7 +3,8 @@ sea_lanes = {
 		"wh3_main_teleportation_node_template_jade_to_dread",
 		"wh3_main_teleportation_node_template_underworld_sea",
 		"wh3_main_teleportation_node_template_jade_to_far_sea",
-		"wh3_main_teleportation_node_template_jade_to_lustria_gulf"
+		"wh3_main_teleportation_node_template_jade_to_lustria_gulf",
+		"wh3_dlc23_teleportation_node_template_chaos_dwarf_canal"
 	},
 	nodes = {
 		["wh3_main_teleportation_node_template_jade_to_dread"] = {
@@ -21,6 +22,10 @@ sea_lanes = {
 		["wh3_main_teleportation_node_template_underworld_sea"] = {
 			"wh3_main_sea_lane_underworld_sea_1",
 			"wh3_main_sea_lane_underworld_sea_2"
+		},
+		["wh3_dlc23_teleportation_node_template_chaos_dwarf_canal"] = {
+			"wh3_dlc23_sea_lane_chaos_dwarf_canal_north",
+			"wh3_dlc23_sea_lane_chaos_dwarf_canal_south"
 		}
 	},
 	incident_key = "wh3_main_incident_sea_lanes_character_arrived"

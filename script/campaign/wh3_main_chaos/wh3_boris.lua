@@ -31,25 +31,6 @@ function setup_boris()
 		end;
 	end;
 	
-	-- Boris is not human, kill his faction
-	if cm:is_new_game() then
-		local boris_faction = cm:get_faction("wh3_main_ksl_ursun_revivalists");
-		
-		if boris_faction then
-			local region_list = boris_faction:region_list();
-			
-			for i = 0, region_list:num_items() - 1 do
-				cm:transfer_region_to_faction(region_list:item_at(i):name(), "wh3_main_grn_dark_land_orcs");
-			end;
-			
-			local character_list = boris_faction:character_list();
-			
-			for i = 0, character_list:num_items() - 1 do
-				cm:kill_character(character_list:item_at(i):cqi(), true);
-			end;
-		end;
-	end;
-	
 	if kislev_human then
 		if not cm:get_saved_value("boris_mission_issued") then
 			core:add_listener(

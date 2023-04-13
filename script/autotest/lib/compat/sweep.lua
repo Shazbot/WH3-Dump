@@ -13,12 +13,13 @@ function Lib.Compat.Sweep.set_sweep_log_details(log_name, pc_index, sweep_tag)
         Utilities.print("Setting Compat Sweep Details")
         m_pc_index = pc_index or os.getenv("COMPUTERNAME")
         m_sweep_tag = sweep_tag or os.date("%Y-%m-%d")
-        if(log_name == nil) then
+        m_sweep_log_name = log_name or "compat_sweep"
+        --[[if(log_name == nil) then
             Utilities.print("No name specified, defaulting to sweeptag_pcindex_compat_sweep_log")
             m_sweep_log_name = m_sweep_tag.."_"..m_pc_index.."_compat-sweep"
         else
             m_sweep_log_name = log_name
-        end
+        end]]
         m_hardware_info["PC Index/Name"] = m_pc_index
     end)
 end

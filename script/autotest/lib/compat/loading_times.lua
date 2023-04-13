@@ -9,10 +9,24 @@ function Lib.Compat.Loading_Times.create_results_folder()
     end)
 end
 
-function Lib.Compat.Loading_Times.write_loading_times_results_to_file(test_type, battle_type, map, faction, lord, fresh_start)
+-- returns the PC ram amount in GB
+local function get_ram_amount()
+    local pipe = io.popen("wmic computersystem get totalphysicalmemory")
+    local out_data = pipe:read("*a")
+    pipe:close()
+    local ram_amount_bytes = string.match(out_data, "%d+")
+    local ram_amount = math.ceil(tonumber(ram_amount_bytes)/1073741824)
+    return ram_amount
+end
+
+function Lib.Compat.Loading_Times.write_loading_times_results_to_file(test_type, battle_type, map, faction, lord, fresh_start, compat_run)
     callback(function()
-        local results = test_type..","..battle_type..","..map..","..faction..","..lord..","..g_loading_times_data["Campaign Load Time"]..","..g_loading_times_data["Battle Load Time"]..","..g_loading_times_data["Return to Campaign Time"]..","..g_loading_times_data["Return to Frontend Time"]..","..g_build_number..","..g_changelist..","..os.date("%d/%m/%Y")..","..os.date("%H:%M")..","..fresh_start
-        Functions.write_to_document(results, g_battle_timer_directory, g_file_name, ".csv", false)
+        local ram = " " -- non-compat runs don't need RAM amount, but a value is still needed for the write_to_document function
+        if compat_run then ram = get_ram_amount() end
+        for test_name, result in pairs(g_loading_times_data) do
+            local results = test_type..","..battle_type..","..map..","..faction..","..lord..","..test_name..","..result..","..g_build_number..","..g_changelist..","..os.date("%d/%m/%Y")..","..os.date("%H:%M")..","..fresh_start..","..ram
+            Functions.write_to_document(results, g_battle_timer_directory, g_file_name, ".csv", false)
+        end
     end)
 end
 
@@ -21,7 +35,7 @@ function Lib.Compat.Loading_Times.create_loading_times_file()
     callback(function()
         local results_file = g_battle_timer_directory.."\\"..g_file_name..".csv"
         if not Functions.check_file_exists(results_file) then
-            Functions.write_to_document("Test Type,Battle Type,Map,Faction,Lord,Campaign Load Time,Battle Load Time,Return to Campaign Time,Return to Frontend Time,Build,Changelist,Date,Time,Restart", g_battle_timer_directory, g_file_name, ".csv", false)
+            Functions.write_to_document("Test Type,Battle Type,Map,Faction,Lord,Test Case,Time(s),Build,Changelist,Date,Time,Restart,RAM(GB)", g_battle_timer_directory, g_file_name, ".csv", false)
         else
             Utilities.print("File already exists, skipping creating the column headers")
         end
@@ -44,14 +58,21 @@ function Lib.Compat.Loading_Times.campaign_loading_times_loop(variables)
         local count = 1
         if variables.custom_compat_variables then
             count = tonumber(core:svr_load_registry_string("compat_campaign_lord_count"))
-            if count == nil then count = 1 end --safeguard in case there is no registry string with the value.
+            if (count == nil or count =='') then count = 1 end --safeguard in case there is no registry string with the value.
         end
         Lib.Compat.Loading_Times.create_results_folder()
         Lib.Compat.Loading_Times.create_loading_times_file()
+        if variables.lord == 'Random' then -- if lord is set to random, then the 2 sweeps can run with different lords.
+            variables.lord = Lib.Frontend.Campaign.get_random_lord(variables.campaign_type)
+        end
         Lib.Compat.Loading_Times.campaign_loading_times_sweep(variables, count, "Yes")
         Lib.Compat.Loading_Times.campaign_loading_times_sweep(variables, count, "No")
-        if count < Common_Actions.table_length(variables.lord) then
-            callback(function() core:svr_save_registry_string("compat_campaign_lord_count", tostring(count + 1)) end)
+        if type(variables.lord) ~= "string" then -- checks if lord is just a string or a table
+            if count < Common_Actions.table_length(variables.lord) then
+                callback(function() core:svr_save_registry_string("compat_campaign_lord_count", tostring(count + 1)) end)
+            else
+                callback(function() core:svr_save_registry_string("compat_campaign_lord_count", "1") end)
+            end
         else
             callback(function() core:svr_save_registry_string("compat_campaign_lord_count", "1") end)
         end
@@ -60,17 +81,22 @@ end
 
 function Lib.Compat.Loading_Times.campaign_loading_times_sweep(variables, count, fresh_start)
     callback(function()
+        local lord
+        if type(variables.lord) == "string" then -- if lord is just a string, then just use it as it is
+            lord = variables.lord
+        else
+            lord = variables.lord[count]
+        end
         Lib.Frontend.Misc.ensure_frontend_loaded()
-        Lib.Frontend.Loaders.load_chaos_campaign(variables.lord[count], variables.campaign_type)
+        Lib.Frontend.Loaders.load_chaos_campaign(lord, variables.campaign_type)
         Lib.Campaign.Misc.ensure_cutscene_ended()
         Lib.Campaign.Actions.attack_nearest_target(10)
         Lib.Menu.Misc.quit_to_frontend()
         Lib.Frontend.Misc.ensure_frontend_loaded()
         callback(function()
             Lib.Helpers.Timers.end_timer("Return to Frontend Time")
-            local lord = variables.lord[count]
             if lord == '[PH] Daemon Prince' then lord = 'Daemon Prince' end
-            Lib.Compat.Loading_Times.write_loading_times_results_to_file("Campaign - "..variables.campaign_type, g_battle_type_names[g_battle_type_from_cco], string.gsub(tostring(g_battle_name_from_cco), "Battle of ", ""), g_immortal_empires_lord_list[variables.lord[count]][1], lord, fresh_start)
+            Lib.Compat.Loading_Times.write_loading_times_results_to_file("Campaign - "..variables.campaign_type, g_battle_type_names[g_battle_type_from_cco], string.gsub(tostring(g_battle_name_from_cco), "Battle of ", ""), g_race_name, lord, fresh_start, variables.compat_run)
             Lib.Helpers.Misc.wait(5)
             Lib.Compat.Loading_Times.reset_loading_times_data()
             Lib.Campaign.Actions.reset_battle_fought()

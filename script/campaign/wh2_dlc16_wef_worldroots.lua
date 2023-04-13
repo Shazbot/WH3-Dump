@@ -856,30 +856,7 @@ function Worldroots:add_worldroots_listeners()
 	end
 	
 	if not self.primary_player_key then
-		out("No human Wood Elves found")
-		
-		-- if no humans, kick off a listener to spawn ariel around a specified turn
-		if not Worldroots.ariel_unlocked then
-			core:add_listener(
-				"spawn_ariel_for_ai",
-				"WorldStartRound",
-				function()
-					return cm:turn_number() >= Worldroots.ai_ariel_spawn_turn and not Worldroots.ariel_unlocked
-				end,
-				function()
-					local ariel_potential_factions = {"wh2_dlc16_wef_sisters_of_twilight", "wh_dlc05_wef_wood_elves"} -- order matters here, Sisters get 'first shot'
-					
-					for i = 1, #ariel_potential_factions do
-						if not cm:get_faction(ariel_potential_factions[i]):is_dead() and cm:random_number() > Worldroots.ai_ariel_spawn_chance then 
-							Worldroots:spawn_ariel(ariel_potential_factions[i])
-							return
-						end
-					end		
-				end,
-				true
-			)
-		end
-		
+		out("No human Wood Elves found")		
 		return -- Nothing after this point should fire if there aren't any human Wood Elves
 	end
 	
@@ -1708,10 +1685,6 @@ function Worldroots:grant_ritual_rewards(forest, completing_faction_key)
 	
 	if forest.custom_ritual_completion_callback then
 		forest.custom_ritual_completion_callback(completing_faction_key)
-	end
-	
-	if not Worldroots.ariel_unlocked and (cm:faction_has_dlc_or_is_ai("TW_WH2_DLC16_TWILIGHT", completing_faction_key)) then
-		Worldroots:spawn_ariel(completing_faction_key)
 	end
 	
 	for i = 1, #human_factions do

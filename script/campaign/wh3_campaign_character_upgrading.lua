@@ -391,8 +391,10 @@ function CUS:update_new_character(old_char_details, new_char_interface, level_pr
 
 	cm:add_agent_experience(cm:char_lookup_str(new_char_interface:command_queue_index()), math.floor(old_char_details.rank * new_character_level_proportion)+1, true)
 	cm:suppress_immortality(old_char_details.fm_cqi, true)
-	
-	cm:kill_character_and_commanded_unit("family_member_cqi:" .. old_char_details.fm_cqi, true)
+
+	cm:callback(function()
+		cm:kill_character_and_commanded_unit("family_member_cqi:" .. old_char_details.fm_cqi, true)
+	end, 0.5)
 
 	if not old_char_details.parent_force:is_null_interface() then
 		cm:embed_agent_in_force(new_char_interface, old_char_details.parent_force)

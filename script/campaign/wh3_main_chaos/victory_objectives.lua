@@ -70,6 +70,18 @@ victory_objectives = {
 				{type = "SCRIPTED", conditions = {"script_key rifts_requirement", "override_text mission_text_text_mis_activity_complete_rifts_requirement"}},
 				{type = "SCRIPTED", conditions = {"script_key champions_final_battle", "override_text mission_text_text_mis_activity_complete_champions_final_battle"}},
 			}
+		},
+
+		hellshard_drill = {
+			campaign_types = {SP_NORMAL_NO_ROC = true},
+			factions = {wh3_dlc23_chd_astragoth = true, wh3_dlc23_chd_legion_of_azgorh = true, wh3_dlc23_chd_zhatan = true},
+			mission_key = "wh_main_long_victory",
+			victory_type = "wh_dlc03_victory_type_major",
+			objectives = {
+				{type = "SCRIPTED", conditions = {"script_key hellshard_structure_requirement", "override_text mission_text_text_mis_activity_dlc23_complete_hellshard_structure_requirement"}},
+				{type = "SCRIPTED", conditions = {"script_key hellshard_bound_relics_requirement", "override_text mission_text_text_mis_activity_dlc23_complete_hellshard_bound_relics_requirement"}},
+				{type = "SCRIPTED", conditions = {"script_key chaos_dwarf_final_battle", "override_text mission_text_text_mis_activity_dlc23_complete_chaos_dwarf_final_battle"}},
+			}
 		}
 	},
 
@@ -91,6 +103,27 @@ victory_objectives = {
 		"wh3_main_cth_the_western_provinces"
 	}, 
 	domination_faction_targets_overrides = {
+		wh3_dlc23_chd_astragoth = {
+			"wh3_main_ksl_the_great_orthodoxy",
+			"wh3_main_ksl_the_ice_court",
+			"wh3_main_ogr_goldtooth",
+			"wh3_main_cth_the_northern_provinces",
+			"wh3_main_cth_the_western_provinces",
+		},
+		wh3_dlc23_chd_legion_of_azgorh = {
+			"wh3_main_ksl_the_great_orthodoxy",
+			"wh3_main_ksl_the_ice_court",
+			"wh3_main_ogr_goldtooth",
+			"wh3_main_cth_the_northern_provinces",
+			"wh3_main_cth_the_western_provinces",
+		},
+		wh3_dlc23_chd_zhatan = {
+			"wh3_main_ksl_the_great_orthodoxy",
+			"wh3_main_ksl_the_ice_court",
+			"wh3_main_ogr_goldtooth",
+			"wh3_main_cth_the_northern_provinces",
+			"wh3_main_cth_the_western_provinces",
+		},
 		wh3_dlc20_chs_valkia = {
 			"wh3_main_sla_seducers_of_slaanesh",
 			"wh3_main_tze_oracles_of_tzeentch",
@@ -181,7 +214,7 @@ victory_objectives = {
 		wh3_dlc20_chs_valkia = 20,
 		wh3_dlc20_chs_vilitch = 20,
 		wh3_dlc20_chs_azazel = 20,
-		wh3_dlc20_chs_festus = 20
+		wh3_dlc20_chs_festus = 20,
 	},
 
 	----RAZING/SACKING VARIABLES----

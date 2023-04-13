@@ -89,12 +89,14 @@ function setup_campaign_help_pages()
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_meat", "ogre_great_maw");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_compass", "cathay_compass");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_ivory_road", "cathay_caravans");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_military_convoys", "military_convoys");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_chaos_rifts", "rifts_panel");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_chaos_rifts", "teleport_panel");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_unholy_manifestations", "great_game_rituals");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_rites", "rituals_panel");				-- needs to come after unholy_manifestations
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_sea_lanes", "sea_lanes_panel");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_grudges", "book_of_grudges");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_hellforge", "hellforge_panel_main");
 	
 	hpm:register_help_page_to_info_button_mapping(
 		"script_link_campaign_intrigue_at_the_court",
@@ -390,6 +392,20 @@ function setup_campaign_help_pages()
 	);
 
 	hpm:register_help_page_to_info_button_mapping(
+		"script_link_campaign_military_convoys", 
+		"character_panel",
+		function()		
+			local uic_military_convoys_button = find_uicomponent(ui_root, "military_convoys", "header_container", "button_info");
+			
+			if uic_military_convoys_button and uic_military_convoys_button:CurrentState() == "selected" then
+				return true;
+			end;
+			
+			return false;
+		end
+	);
+	
+	hpm:register_help_page_to_info_button_mapping(
 		"script_link_campaign_ivory_road", 
 		"character_panel",
 		function()		
@@ -402,7 +418,7 @@ function setup_campaign_help_pages()
 			return false;
 		end
 	);
-	
+
 	hpm:register_help_page_to_info_button_mapping(
 		"script_link_campaign_mortuary_cult", 
 		"mortuary_cult",
@@ -453,6 +469,16 @@ function setup_campaign_help_pages()
 		function()
 			local uic = find_uicomponent(ui_root, "treasure_hunts", "pieces");
 			return uic and uic:CurrentState() == "selected";
+		end
+	);
+
+	hpm:register_help_page_to_info_button_mapping(
+		"script_link_campaign_drill_of_hashut", 
+		"chd_narrative_panel", 
+		function()
+			local uic = find_uicomponent(ui_root, "chd_narrative_panel");
+			local state = uic:CurrentState();
+			return uic and uic:CurrentState() == "NewState";
 		end
 	);
 
@@ -904,7 +930,6 @@ function setup_campaign_help_pages()
 	parser:add_record("campaign_ariel", "script_link_campaign_ariel", "tooltip_campaign_ariel");
 	tp_ariel = tooltip_patcher:new("tooltip_campaign_ariel");
 	tp_ariel:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_wood_elves_ariel", "ui_text_replacements_localised_text_hp_campaign_description_wood_elves_ariel");
-
 
 
 	--
@@ -2493,6 +2518,41 @@ function setup_campaign_help_pages()
 	tp_chaos_cults = tooltip_patcher:new("tooltip_campaign_chaos_cults");
 	tp_chaos_cults:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_chaos_cults", "ui_text_replacements_localised_text_hp_campaign_description_chaos_cults");
 
+
+	--
+	-- chaos_dwarfs
+	--
+
+	hp_chaos_dwarfs = help_page:new(
+		"script_link_campaign_chaos_dwarfs",
+		hpr_title("war.camp.hp.chaos_dwarfs.001"),
+		hpr_image("war.camp.hp.image", "UI/help_images/chaos_dwarfs.png"),
+		hpr_leader("war.camp.hp.chaos_dwarfs.002"),
+
+		hpr_section("chd_economy"),
+		hpr_normal_unfaded("war.camp.hp.chaos_dwarfs.003", "chd_economy"),
+		hpr_normal("war.camp.hp.chaos_dwarfs.004", "chd_economy"),
+		
+		hpr_section("military_convoys"),
+		hpr_normal_unfaded("war.camp.hp.chaos_dwarfs.005", "military_convoys"),
+		hpr_normal("war.camp.hp.chaos_dwarfs.006", "military_convoys"),
+		
+		hpr_section("tower_of_zharr"),
+		hpr_normal_unfaded("war.camp.hp.chaos_dwarfs.007", "tower_of_zharr"),
+		hpr_normal("war.camp.hp.chaos_dwarfs.008", "tower_of_zharr"),
+
+		hpr_normal("war.camp.hp.chaos_dwarfs.009")
+	);
+	parser:add_record("campaign_chaos_dwarfs", "script_link_campaign_chaos_dwarfs", "tooltip_campaign_chaos_dwarfs");
+	tp_chaos_dwarfs = tooltip_patcher:new("tooltip_campaign_chaos_dwarfs");
+	tp_chaos_dwarfs:set_layout_data(
+		"tooltip_title_text_and_image",
+		"ui_text_replacements_localised_text_hp_campaign_title_chaos_dwarfs",
+		"ui_text_replacements_localised_text_hp_campaign_description_chaos_dwarfs",
+		"UI/help_images/chaos_dwarfs.png"
+	);
+
+
 	--
 	-- chaos gifts
 	--
@@ -3044,6 +3104,15 @@ function setup_campaign_help_pages()
 			uim:unhighlight_all_for_tooltips();
 		end
 	);
+
+
+	--
+	-- conclave_influence_link
+	--
+	script_feature_name = "conclave_influence";
+	parser:add_record("campaign_"..script_feature_name.."_link", "script_link_campaign_"..script_feature_name.."_link", "tooltip_campaign_"..script_feature_name.."_link");
+	tp_conclave_influence = tooltip_patcher:new("tooltip_campaign_"..script_feature_name.."_link");
+	tp_conclave_influence:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_campaign_description_"..script_feature_name.."_link");
 
 
 	--
@@ -4145,6 +4214,48 @@ function setup_campaign_help_pages()
 	parser:add_record("campaign_dread", "script_link_campaign_dread", "tooltip_campaign_dread");
 	tp_dread_panel = tooltip_patcher:new("tooltip_campaign_dread");
 	tp_dread_panel:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_dread_panel", "ui_text_replacements_localised_text_hp_campaign_description_dread_panel");
+
+
+
+	--
+	-- drill_of_hashut
+	--
+	script_feature_name = "drill_of_hashut";
+	hp_drill_of_hashut = help_page:new(
+		"script_link_campaign_"..script_feature_name,
+		hpr_title("war.camp.hp.drill_of_hashut.001"),
+		hpr_leader("war.camp.hp.drill_of_hashut.002"),
+		
+		hpr_section("building_drill_structure"),
+		hpr_normal_unfaded("war.camp.hp.drill_of_hashut.003", "building_drill_structure"),
+		hpr_normal("war.camp.hp.drill_of_hashut.004", "building_drill_structure"),
+
+		hpr_section("gathering_drill_relics"),
+		hpr_normal_unfaded("war.camp.hp.drill_of_hashut.005", "gathering_drill_relics"),
+		hpr_normal("war.camp.hp.drill_of_hashut.006", "gathering_drill_relics")
+	);
+	parser:add_record("campaign_"..script_feature_name, "script_link_campaign_"..script_feature_name, "tooltip_campaign_"..script_feature_name);
+	tp_drill_of_hashut = tooltip_patcher:new("tooltip_campaign_"..script_feature_name);
+	tp_drill_of_hashut:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_"..script_feature_name, "ui_text_replacements_localised_text_hp_campaign_description_"..script_feature_name);
+	
+
+	--
+	-- drill_of_hashut_link
+	--
+	script_feature_name = "drill_of_hashut";
+	parser:add_record("campaign_"..script_feature_name.."_link", "script_link_campaign_"..script_feature_name.."_link", "tooltip_campaign_"..script_feature_name.."_link");
+	tp_drill_of_hashut = tooltip_patcher:new("tooltip_campaign_"..script_feature_name.."_link");
+	tp_drill_of_hashut:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_campaign_title_"..script_feature_name.."_link");
+	
+	tl_drill_of_hashut_link = tooltip_listener:new(
+		"tooltip_campaign_"..script_feature_name.."_link",
+		function()
+			uim:highlight_drill_of_hashut(true);
+		end,
+		function()
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
 
 	
 
@@ -5903,7 +6014,35 @@ function setup_campaign_help_pages()
 			uim:unhighlight_all_for_tooltips();
 		end
 	);
+
+
+
+	--
+	-- hellforge
+	--
+
+	hp_hellforge = help_page:new(
+		"script_link_campaign_hellforge",
+		hpr_title("war.camp.hp.hellforge.001"),
+		hpr_leader("war.camp.hp.hellforge.002"),
+		hpr_normal("war.camp.hp.hellforge.003"),
+		hpr_normal("war.camp.hp.hellforge.004"),
+		hpr_normal("war.camp.hp.hellforge.005")
+	);
+	parser:add_record("campaign_hellforge", "script_link_campaign_hellforge", "tooltip_campaign_hellforge");
+	tp_hellforge = tooltip_patcher:new("tooltip_campaign_hellforge");
+	tp_hellforge:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_hellforge", "ui_text_replacements_localised_text_hp_campaign_description_hellforge");
 	
+	tl_hellforge = tooltip_listener:new(
+		"tooltip_campaign_hellforge", 
+		function() 
+			uim:highlight_hellforge(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
 	
 	
 	--
@@ -6340,7 +6479,43 @@ function setup_campaign_help_pages()
 			uim:unhighlight_all_for_tooltips();
 		end
 	);
+
+	--
+	-- chd_economy
+	--
+
+	hp_chd_economy = help_page:new(
+		"script_link_campaign_chd_economy",
+		hpr_title("war.camp.hp.chd_economy.001"),
+		hpr_leader("war.camp.hp.chd_economy.002"),
+		hpr_normal("war.camp.hp.chd_economy.003"),
+		hpr_normal("war.camp.hp.chd_economy.004"),
+		hpr_normal("war.camp.hp.chd_economy.005"),
+		hpr_normal("war.camp.hp.chd_economy.006"),
+		hpr_normal("war.camp.hp.chd_economy.007")
+	);
+	parser:add_record("campaign_chd_economy", "script_link_campaign_chd_economy", "tooltip_campaign_chd_economy");
+	tp_chd_economy = tooltip_patcher:new("tooltip_campaign_chd_economy");
+	tp_chd_economy:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_chd_economy", "ui_text_replacements_localised_text_hp_campaign_description_chd_economy");
 	
+	
+	--
+	-- labour
+	--
+
+	hp_infamy = help_page:new(
+		"script_link_campaign_labour",
+		hpr_title("war.camp.hp.labour.001"),
+		hpr_leader("war.camp.hp.labour.002"),
+		hpr_normal("war.camp.hp.labour.003"),
+		hpr_normal("war.camp.hp.labour.004"),
+		hpr_normal("war.camp.hp.labour.005"),
+		hpr_normal("war.camp.hp.labour.006"),
+		hpr_normal("war.camp.hp.labour.007")
+	);
+	parser:add_record("campaign_labour", "script_link_campaign_labour", "tooltip_campaign_labour");
+	tp_infamy = tooltip_patcher:new("tooltip_campaign_labour");
+	tp_infamy:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_labour", "ui_text_replacements_localised_text_hp_campaign_description_labour");
 	
 	
 	--
@@ -6740,8 +6915,8 @@ function setup_campaign_help_pages()
 		"ui_text_replacements_localised_text_hp_campaign_description_kislev",
 		"UI/help_images/kislev.png"
 	);
-		
-	
+
+
 	--
 	-- lizardmen
 	--
@@ -6986,6 +7161,34 @@ function setup_campaign_help_pages()
 		"tooltip_campaign_"..script_feature_name.."_link",
 		function()
 			uim:highlight_ogre_meat(true);
+		end,
+		function()
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+
+	--
+	-- military_convoys
+	--
+	script_feature_name = "military_convoys";
+	hp_military_convoys = help_page:new(
+		"script_link_campaign_military_convoys",
+		hpr_title("war.camp.hp.military_convoys.001"),
+		hpr_leader("war.camp.hp.military_convoys.002"),
+		hpr_normal("war.camp.hp.military_convoys.003"),
+		hpr_normal("war.camp.hp.military_convoys.004"),
+		hpr_normal("war.camp.hp.military_convoys.005"),
+		hpr_normal("war.camp.hp.military_convoys.006")
+	);
+	parser:add_record("campaign_military_convoys", "script_link_campaign_military_convoys", "tooltip_campaign_military_convoys");
+	tp_military_convoys = tooltip_patcher:new("tooltip_campaign_military_convoys");
+	tp_military_convoys:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_military_convoys", "ui_text_replacements_localised_text_hp_campaign_description_military_convoys");
+	
+	tl_military_convoys = tooltip_listener:new(
+		"tooltip_campaign_military_convoys",
+		function()
+			uim:highlight_military_convoys(true);
 		end,
 		function()
 			uim:unhighlight_all_for_tooltips();
@@ -8927,7 +9130,6 @@ function setup_campaign_help_pages()
 	tp_rampage = tooltip_patcher:new("tooltip_campaign_rampage");
 	tp_rampage:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_rampage", "ui_text_replacements_localised_text_hp_campaign_description_rampage");
 
-	
 	
 	--
 	-- razing
@@ -10989,6 +11191,36 @@ function setup_campaign_help_pages()
 		"ui_text_replacements_localised_text_hp_campaign_title_tomb_kings",
 		"ui_text_replacements_localised_text_hp_campaign_description_tomb_kings",
 		"UI/help_images/tomb_kings.png"
+	);
+
+
+
+	--
+	-- tower_of_zharr
+	--
+	
+	hp_tower_of_zharr = help_page:new(
+		"script_link_campaign_tower_of_zharr",
+		hpr_title("war.camp.hp.tower_of_zharr.001"),
+		hpr_leader("war.camp.hp.tower_of_zharr.002"),
+		hpr_normal("war.camp.hp.tower_of_zharr.003"),
+		hpr_normal("war.camp.hp.tower_of_zharr.004"),
+		hpr_normal("war.camp.hp.tower_of_zharr.005"),
+		hpr_normal("war.camp.hp.tower_of_zharr.006"),
+		hpr_normal("war.camp.hp.tower_of_zharr.007")
+	);
+	parser:add_record("campaign_tower_of_zharr", "script_link_campaign_tower_of_zharr", "tooltip_campaign_tower_of_zharr");
+	tp_trade = tooltip_patcher:new("tooltip_campaign_tower_of_zharr");
+	tp_trade:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_tower_of_zharr", "ui_text_replacements_localised_text_hp_campaign_description_tower_of_zharr");
+	
+	tl_tower_of_zharr = tooltip_listener:new(
+		"tooltip_campaign_tower_of_zharr",
+		function()
+			uim:highlight_tower_of_zharr(true);
+		end,
+		function()
+			uim:unhighlight_all_for_tooltips();
+		end
 	);
 	
 	

@@ -1005,16 +1005,22 @@ function prologue_advice_fleeing_from_dervingard_incident()
 		true,
 		function(context)
 			if play_once == false then
-				cm:callback(function() PrologueTroubleDilemma(); end, 3);
+				if common.get_context_value("IsFullscreenPanelOpen") == false then
+					IfNoFullScreenTriggerTroubleDilemma();
+				else
+					common.call_context_command("CloseAllPanels");
+					IfNoFullScreenTriggerTroubleDilemma()
+				end
 				play_once = true;
-			end
-			if PrologueGetActionPoints() < 50 then
-				--PrologueAddTopicLeader("wh3_prologue_objective_turn_001_04");
-				--HighlightEndTurnButton()
 			end
 		end, 
 		true
 	);
+end
+
+function IfNoFullScreenTriggerTroubleDilemma()
+	cm:steal_escape_key(true) 
+	PrologueTroubleDilemma(); 
 end
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------

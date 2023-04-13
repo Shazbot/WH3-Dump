@@ -18,6 +18,7 @@ cm:add_pre_first_tick_callback(
 		rite_unlock_listeners();
 		
 		initiative_unlock_listeners();
+		faction_initiatives_unlocker:initiatives_unlocker_listeners()
 		
 		load_followers();
 		
@@ -113,6 +114,9 @@ function start_game_all_factions()
 	-- load the quests script
 	q_setup();
 	
+	-- load the campaign quest battle listners script
+	set_piece_battle_abilities:initialise();
+
 	-- load the Grudges script
 	attempt_to_load_grudges_script();
 	
@@ -261,7 +265,6 @@ function start_game_all_factions()
 	add_under_empire_listeners();
 	initialize_workshop_listeners();
 	cult_of_sotek:add_tehenhauin_listeners();
-	kroak:add_kroak_listeners();
 	
 	-- DLC13 Hunter & Beast Features
 	out("==== Hunter & Beast ====");
@@ -302,7 +305,6 @@ function start_game_all_factions()
 	add_sisters_forge_listeners();
 	add_flesh_lab_listeners();
 	add_drycha_coeddil_unchained_listeners();
-	add_throt_unlock_ghoritch_listeners();
 
 	---TWA03 Rakarth----
 	out("==== Rakarth ====");
@@ -320,6 +322,7 @@ function start_game_all_factions()
 
 	-- WH2
 	blessed_spawnings:setup_blessed_spawnings();
+	def_slaves:start_listeners();
 
 	-- WH3
 	setup_ogre_contracts();
@@ -338,8 +341,10 @@ function start_game_all_factions()
 	add_volkmar_elector_count_units_listener();
 	victory_objectives_ie:add_scripted_victory_listeners()
 	scripted_occupation_options:initialise()
-	scripted_technology_tree:start_technology_listeners();
-	def_slaves:start_listeners();
+	scripted_technology_tree:start_technology_listeners()
+	caravans:initialise()
+	harmony:initialise()
+	campaign_ai_script:setup_listeners()
 
 
 	---Champions of Chaos
@@ -348,6 +353,17 @@ function start_game_all_factions()
 	vassal_dilemmas:initialise()
 	dark_authority:initialise()
 	eye_of_the_gods:initialise()
+
+	-- Chaos Dwarfs
+	chaos_dwarf_labour_loss:labour_loss()
+	chaos_dwarf_efficiency:set_efficiency()
+	tower_of_zharr:initialise()
+	character_unlocking:setup_legendary_hero_unlocking()
+	hellforge:setup_listeners()
+	chaos_dwarf_labour_move:setup_listeners()
+	chd_labour_raid:start_listeners()
+	chaos_dwarf_relics_ie:initialise()
+	
 	
 	out.dec_tab();
 end;

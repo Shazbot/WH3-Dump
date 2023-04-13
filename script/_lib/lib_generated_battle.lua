@@ -2764,6 +2764,23 @@ function generated_army:defend(x, y, radius, no_debug_output)
 end;
 
 
+--- @function defend
+--- @desc Instructs all units in a generated army to defend a position.
+--- @p @number x co-ordinate, x co-ordinate in m
+--- @p @number y co-ordinate, y co-ordinate in m
+--- @p @number radius
+function generated_army:rush_position(x, y, radius, no_debug_output)
+	if self.is_debug and not no_debug_output then
+		bm:out(self.id .. ":rush_position() called, defending position [" .. x .. ", " .. y .. "] with radius " .. radius .. "m");
+	end;
+	
+	-- Ensure script planner is set up
+	self:set_up_script_planner();
+	
+	self:start_sai_behaviour(function() self.script_ai_planner:rush_position(v(x, y), radius) end);
+end;
+
+
 --- @function release
 --- @desc Instructs the generated army to release control of all its units to the player/general ai.
 function generated_army:release(no_debug_output)
@@ -3134,6 +3151,57 @@ function generated_army:defend_on_message(message, x, y, radius, wait_offset)
 				function()
 					bm:out(self.id .. " responding to message message " .. message .. ", being told to defend [" .. tostring(x) .. ", " .. tostring(y) .. "] with radius " .. tostring(radius));
 					self:defend(x, y, radius, true);
+				end,
+				wait_offset
+			);
+		end
+	)
+end;
+
+
+--- @function rush_position_on_message
+--- @desc Orders the units in the generated army to first move to, then defend a specified position upon receipt of a supplied message.
+--- @p @string message, Message.
+--- @p @number x co-ordinate, x co-ordinate in m.
+--- @p @number x co-ordinate, y co-ordinate in m.
+--- @p @number radius, Defence radius.
+--- @p [opt=0] @number wait offset, Time to wait after receipt of the message before issuing the defend order.
+function generated_army:rush_position_on_message(message, x, y, radius, wait_offset)
+	if not is_string(message) then
+		script_error(self.id .. " ERROR: rush_position_on_message() called but supplied message [" .. tostring(message) .. "] is not a string");
+		return false;
+	end;
+	
+	if not is_number(x) then
+		script_error(self.id .. " ERROR: rush_position_on_message() called but supplied x co-ordinate [" .. tostring(x) .. "] is not a number");
+		return false;
+	end;
+	
+	if not is_number(y) then
+		script_error(self.id .. " ERROR: rush_position_on_message() called but supplied y co-ordinate [" .. tostring(y) .. "] is not a number");
+		return false;
+	end;
+	
+	if not is_number(radius) then
+		script_error(self.id .. " ERROR: rush_position_on_message() called but supplied radius [" .. tostring(radius) .. "] is not a number");
+		return false;
+	end;
+	
+	if is_nil(wait_offset) then
+		wait_offset = 0;
+	elseif not is_number(wait_offset) or wait_offset < 0 then
+		script_error(self.id .. " ERROR: rush_position_on_message() called but supplied wait_offset [" .. tostring(wait_offset) .. "] is not a positive number or nil");
+		return false;
+	end;
+	
+	-- set up a listener for this message
+	self.sm:add_listener(
+		message, 
+		function() 
+			bm:callback(
+				function()
+					bm:out(self.id .. " responding to message message " .. message .. ", being told to rush position [" .. tostring(x) .. ", " .. tostring(y) .. "] with radius " .. tostring(radius));
+					self:rush_position(x, y, radius, true);
 				end,
 				wait_offset
 			);

@@ -55,6 +55,51 @@ custom_starts.start_data.chs_custom_start_factions = {
 		}
 	},
 
+		--------------------
+	------ BORIS ------
+	--------------------
+	{
+		if_human = {"wh3_main_ksl_ursun_revivalists", "wh3_dlc23_chd_astragoth"},
+		if_ai = nil,
+		changes = {
+			{"force_diplomacy", "wh3_main_ksl_ursun_revivalists", "wh3_main_skv_clan_gritus", "war"},
+			{"create_army", "wh3_main_skv_clan_gritus", "wh2_main_skv_inf_skavenslaves_0,wh2_main_skv_inf_skavenslaves_0,wh2_main_skv_inf_skavenslave_slingers_0,wh2_main_skv_inf_skavenslave_spearmen_0,wh2_main_skv_inf_clanrats_1,wh2_main_skv_inf_skavenslave_slingers_0", 
+				"wh3_main_chaos_region_kurak_peak", 612, 208, "wh2_main_skv_warlord", false
+			},
+			{"teleport_character", "wh3_main_ksl_ursun_revivalists", 721, 216, 605, 221, true},
+			{"region_change", "wh3_main_chaos_region_karak_vlag", "wh3_main_ksl_ursun_revivalists"},
+			{"region_change", "wh3_main_chaos_region_fort_dorznye_vort", "wh3_main_grn_dark_land_orcs"},
+			{"primary_slot_change", "wh3_main_chaos_region_karak_vlag", "wh3_main_ksl_settlement_major_2"},
+			{"change_camera", "wh3_main_ksl_ursun_revivalists", 410, 166.7, 17.6, -0.9, 17.8},
+			{"change_camera", "wh3_dlc23_chd_astragoth", 488.8, 184.2, 26.1, -1, 28.6},
+		}
+	},
+	{
+		if_human = {"wh3_main_ksl_ursun_revivalists"},
+		if_ai = {"wh3_dlc23_chd_astragoth"},
+		changes = {
+			{"teleport_character", "wh3_dlc23_chd_astragoth", 742, 235, 815, 111, true},
+			{"teleport_character", "wh3_dlc23_chd_astragoth", 748, 238, 820, 121, false},
+			{"replace_faction", "wh3_dlc23_chd_minor_faction", "wh3_dlc23_chd_astragoth"},
+			{"primary_slot_change", "wh3_main_chaos_region_the_tower_of_gorgoth", "wh3_dlc23_chd_settlement_tower_2"},
+			{"region_change", "wh3_main_chaos_region_uzkulak", "wh3_main_grn_dark_land_orcs"},
+			{"region_change", "wh3_main_chaos_region_the_falls_of_doom", "wh3_main_grn_dark_land_orcs"}
+		}
+	},
+	{
+		if_human = nil,
+		if_ai = {"wh3_main_ksl_ursun_revivalists"},
+		changes = {
+			{"replace_faction", "wh3_main_ksl_ursun_revivalists", "wh3_main_grn_dark_land_orcs"},
+		}
+	},
+	{
+		if_human = nil,
+		if_ai = {"wh3_main_tze_oracles_of_tzeentch"},
+		changes = {
+			{"force_diplomacy", "wh3_main_tze_oracles_of_tzeentch", "wh3_main_chs_khazag", "war"},
+		}
+	},
 };
 
 --Immortal Empires Changes
@@ -222,84 +267,94 @@ custom_starts.start_data.me_custom_start_factions = {
 }
 
 function custom_starts:add_campaign_custom_start_listeners()
-	out("#### Add Campaign Custom Start Listeners ####");
+	if cm:tol_campaign_key() == nil then
+		out("#### Add Campaign Custom Start Listeners ####");
 
-	local custom_table = nil;
-		
-	if cm:get_campaign_name() == "main_warhammer" then
-		custom_table = self.start_data.me_custom_start_factions;
-	else
-		custom_table = self.start_data.chs_custom_start_factions;
-	end
-
-	for c = 1, #custom_table do
-		local custom_config = custom_table[c]
-
-		local if_human_list = custom_config.if_human
-		local if_ai_list = custom_config.if_ai
-
-		if custom_config.if_human ~= nil and is_string(custom_config.if_human) then
-			if_human_list = { custom_config.if_human }
-		end
-		if custom_config.if_ai ~= nil and is_string(custom_config.if_ai) then
-			if_ai_list = { custom_config.if_ai }
+		local custom_table = nil;
+			
+		if cm:get_campaign_name() == "main_warhammer" then
+			custom_table = self.start_data.me_custom_start_factions;
+		else
+			custom_table = self.start_data.chs_custom_start_factions;
 		end
 
-		if if_human_list == nil or cm:are_all_factions_human(if_human_list) then
-			if if_ai_list == nil or cm:are_all_factions_ai(if_ai_list) then
-				local custom_changes = custom_config.changes;
-				for l = 1, #custom_changes do
-					local changes = custom_changes[l];
-					if cm:is_new_game() == true then
-						cm:disable_event_feed_events(true,"all","","")
-						if changes[1] == "region_change" then
-							self:region_change(changes[2], changes[3]);
-						elseif changes[1] == "primary_slot_change" then 
-							self:primary_slot_change(changes[2], changes[3]);
-						elseif changes[1] == "port_slot_change" then 
-							self:port_slot_change(changes[2], changes[3]);
-						elseif changes[1] == "secondary_slot_change" then 
-							self:secondary_slot_change(changes[2], changes[3], changes[4]);
-						elseif changes[1] == "create_army" then 
-							self:create_army(changes[2], changes[3], changes[4], changes[5], changes[6], changes[7], changes[8], changes[9]);
-						elseif changes[1] == "create_army_for_leader" then
-							self:create_army_for_faction_leader(changes[2], changes[3], changes[4], changes[5], changes[6]);
-						elseif changes[1] == "teleport_character" then 
-							self:teleport_character(changes[2], changes[3], changes[4], changes[5], changes[6], changes[7]);
-						elseif changes[1] == "teleport_character_faction_leader" then
-							self:teleport_character_faction_leader(changes[2], changes[3], changes[4]);
-						elseif changes[1] == "hide_faction_leader" then
-							self:hide_faction_leader(changes[2], changes[3], changes[4]);
-						elseif changes[1] == "modify_units_in_army" then
-							self:modify_units_in_army(changes[2], changes[3], changes[4], changes[5], changes[6], changes[7], changes[8])
-						elseif changes[1] == "add_xp_to_unit" then
-							self:add_xp_to_units(changes[2], changes[3], changes[4]);
-						elseif changes[1] == "force_diplomacy" then 
-							self:force_diplomacy_change(changes[2], changes[3], changes[4]);
-						elseif changes[1] == "abandon_region" then 
-							self:abandon_region(changes[2]);
-						elseif changes[1] == "kill_faction" then 
-							self:kill_faction(changes[2]);
-						elseif changes[1] == "replace_faction" then 
-							self:replace_faction(changes[2], changes[3]);
-						elseif changes[1] == "char_effect_bundle" then 
-							self:apply_effect_bundle_character(changes[2], changes[3], changes[4], changes[5], changes[6]);
-						elseif changes[1] == "adjust_pooled_resource" then
-							self:adjust_pooled_resource_to_faction(changes[2], changes[3], changes[4], changes[5])
+		for c = 1, #custom_table do
+			local custom_config = custom_table[c]
+
+			local if_human_list = custom_config.if_human
+			local if_ai_list = custom_config.if_ai
+
+			if custom_config.if_human ~= nil and is_string(custom_config.if_human) then
+				if_human_list = { custom_config.if_human }
+			end
+			if custom_config.if_ai ~= nil and is_string(custom_config.if_ai) then
+				if_ai_list = { custom_config.if_ai }
+			end
+
+			if if_human_list == nil or cm:are_all_factions_human(if_human_list) then
+				if if_ai_list == nil or cm:are_all_factions_ai(if_ai_list) then
+					local custom_changes = custom_config.changes;
+					
+
+					for l = 1, #custom_changes do
+						local changes = custom_changes[l];
+						if cm:is_new_game() == true then
+							cm:disable_event_feed_events(true,"all")
+							
+							if changes[1] == "region_change" then
+								self:region_change(changes[2], changes[3]);
+							elseif changes[1] == "primary_slot_change" then 
+								self:primary_slot_change(changes[2], changes[3]);
+							elseif changes[1] == "port_slot_change" then 
+								self:port_slot_change(changes[2], changes[3]);
+							elseif changes[1] == "secondary_slot_change" then 
+								self:secondary_slot_change(changes[2], changes[3], changes[4]);
+							elseif changes[1] == "create_army" then 
+								self:create_army(changes[2], changes[3], changes[4], changes[5], changes[6], changes[7], changes[8], changes[9]);
+							elseif changes[1] == "create_army_for_leader" then
+								self:create_army_for_faction_leader(changes[2], changes[3], changes[4], changes[5], changes[6]);
+							elseif changes[1] == "teleport_character" then 
+								self:teleport_character(changes[2], changes[3], changes[4], changes[5], changes[6], changes[7]);
+							elseif changes[1] == "teleport_character_faction_leader" then
+								self:teleport_character_faction_leader(changes[2], changes[3], changes[4]);
+							elseif changes[1] == "hide_faction_leader" then
+								self:hide_faction_leader(changes[2], changes[3], changes[4]);
+							elseif changes[1] == "modify_units_in_army" then
+								self:modify_units_in_army(changes[2], changes[3], changes[4], changes[5], changes[6], changes[7], changes[8])
+							elseif changes[1] == "add_xp_to_unit" then
+								self:add_xp_to_units(changes[2], changes[3], changes[4]);
+							elseif changes[1] == "force_diplomacy" then 
+								self:force_diplomacy_change(changes[2], changes[3], changes[4]);
+							elseif changes[1] == "abandon_region" then 
+								self:abandon_region(changes[2]);
+							elseif changes[1] == "kill_faction" then 
+								self:kill_faction(changes[2]);
+							elseif changes[1] == "replace_faction" then 
+								self:replace_faction(changes[2], changes[3]);
+							elseif changes[1] == "char_effect_bundle" then 
+								self:apply_effect_bundle_character(changes[2], changes[3], changes[4], changes[5], changes[6]);
+							elseif changes[1] == "adjust_pooled_resource" then
+								self:adjust_pooled_resource_to_faction(changes[2], changes[3], changes[4], changes[5])
+							elseif changes[1] == "change_camera" then
+								self:change_camera_position(changes[2], changes[3], changes[4], changes[5], changes[6], changes[7])
+							end
+
+							cm:callback(function() 
+								cm:disable_event_feed_events(false, "all");
+							end, 0.5);
 						end
-						cm:callback(function() 
-							cm:disable_event_feed_events(false, "all", "", "");
-						end, 0.5);
+						if changes[1] == "block_diplomacy" then 
+							self:block_diplomacy(changes[2], changes[3], changes[4], changes[5], changes[6]);
+						end
 					end
-					if changes[1] == "block_diplomacy" then 
-						self:block_diplomacy(changes[2], changes[3], changes[4], changes[5], changes[6]);
-					end
+
+					
 				end
 			end
 		end
-	end
 
-	self:set_all_non_playable_armies_as_retreated()
+		self:set_all_non_playable_armies_as_retreated()
+	end
 end
 
 
@@ -936,9 +991,6 @@ end
 function custom_starts:replace_faction(faction_key, replace_with_faction_key)
 	local existing_faction = cm:get_faction(faction_key);
 	
-	cm:disable_event_feed_events(true, "wh_event_category_conquest", "", "");
-	cm:disable_event_feed_events(true, "wh_event_category_diplomacy", "", "");
-	
 	local existing_character_list = existing_faction:character_list();
 	local existing_region_list = existing_faction:region_list();
 	
@@ -957,9 +1009,6 @@ function custom_starts:replace_faction(faction_key, replace_with_faction_key)
 			cm:heal_garrison(cm:get_region(region_key):cqi());
 		end, 0.5);
 	end;
-
-	cm:disable_event_feed_events(false, "wh_event_category_conquest", "", "");
-	cm:disable_event_feed_events(false, "wh_event_category_diplomacy", "", "");
 end
 
 --pass the faction(string), x position(number), y position(number), effect bundle key(string), bundle duration(number)
@@ -1039,6 +1088,20 @@ function custom_starts:adjust_pooled_resource_to_faction(faction_name, pooled_re
 	validate.is_number(amount)
 
 	cm:faction_add_pooled_resource(faction_name, pooled_resource, pooled_resource_factor, amount)
+end
+
+--- @function change_camera_position
+--- @desc Move starting camera to a new position
+--- @p @string faction_name, The faction name to adjust the specified pooled resource for.
+--- @p @number Display x co-ordinate of camera target.
+--- @p @number Display y co-ordinate of camera target.
+--- @p @number Horizontal distance from camera to target.
+--- @p @number Horizontal bearing in radians of target from camera.
+--- @p @number Height of camera.
+function custom_starts:change_camera_position(faction_name, x, y, d, b, h)
+	if cm:get_local_faction_name(true) == faction_name then
+		cm:set_camera_position(x, y, d, b, h)
+	end
 end
 
 --- @function generate_random_army

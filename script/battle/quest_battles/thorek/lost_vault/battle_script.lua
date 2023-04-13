@@ -108,7 +108,7 @@ function end_deployment_phase()
 	-- set up actions on cutscene
 	cutscene_intro:action(function() cam:fade(false, 1) end, 1000);
 	
-	cutscene_intro:action(function() cam:move_to(v(-466.958221,300.182526,-169.705276),v(-448.073792,293.935577,-166.715744), 0, false, 30) end, 0);	
+	--cutscene_intro:action(function() cam:move_to(v(-466.958221,300.182526,-169.705276),v(-448.073792,293.935577,-166.715744), 0, false, 30) end, 0);	
 	--cutscene:set_restore_cam(
 	--camera:fade(boolean to black, number transition duration)
 
@@ -238,7 +238,7 @@ teleport_coords = {
 	{coord = v(-0, 0), rot = 90, width = 40},
 };
 
-army_size = ga_playerarmy.sunits.count()
+army_size = ga_playerarmy.sunits:count()
 for i = 1, army_size do
 	local current_teleport_coord = teleport_coords[i];
 	if(#teleport_coords <  i) then

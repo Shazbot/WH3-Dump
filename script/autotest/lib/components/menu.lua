@@ -3,7 +3,7 @@ function Lib.Components.Menu.quit_to_frontend()
 end
 
 function Lib.Components.Menu.popup_confirm()
-    return Functions.find_component("button_tick")
+    return Functions.find_component("db_both_tick")
 end
 
 function Lib.Components.Menu.open_save()

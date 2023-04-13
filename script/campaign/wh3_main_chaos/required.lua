@@ -28,6 +28,7 @@ require("wh2_campaign_encounters_at_sea");
 require("wh2_campaign_random_armies");
 require("wh_quests");
 require("wh_campaign_ror_recruitment");
+require("wh3_campaign_set_piece_battle_abilities")
 
 -- narrative events
 require("wh3_campaign_payload_remapping");
@@ -57,7 +58,9 @@ require("wh3_campaign_followers");
 require("wh3_campaign_corruption");
 require("wh3_campaign_ai");
 require("wh3_campaign_great_bastion");
+require("wh3_campaign_caravans_core")
 require("wh3_campaign_ivory_road_events");
+require("wh3_campaign_chd_convoy_events");
 require("wh3_campaign_character_upgrading");
 require("wh3_dlc20_campaign_chs_dark_authority");
 require("wh3_dlc20_narrative_champions");
@@ -66,7 +69,18 @@ require("wh3_dlc20_campaign_chs_eye_of_the_gods")
 require("wh3_dlc20_campaign_chs_vassal_dilemmas")
 require("wh3_campaign_reveal_chaos_realm_mission_areas")
 require("wh3_campaign_scripted_occupation_options")
+require("wh3_campaign_harmony")
 
+
+-- DLC23 - Chaos Dwarfs
+require("wh3_dlc23_narrative_chaos_dwarfs");
+require("wh3_dlc23_labour_raid")
+require("wh3_dlc23_labour_loss")
+require("wh3_dlc23_efficiency")
+require("wh3_campaign_faction_initiative_unlocks")
+require("wh3_dlc23_campaign_chd_hellforge")
+require("wh3_dlc23_campaign_chd_tower_of_zharr")
+require("wh3_dlc23_labour_move")
 
 require("realms/wh3_realm_common");
 require("realms/wh3_realm_khorne");
@@ -78,6 +92,7 @@ require("realms/wh3_realm_tzeentch_data");
 -- Game systems
 require("victory_objectives");
 require("corruption_swing");
+require("wh3_main_legendary_characters");
 
 require("DEBUG_economy_logging");
 

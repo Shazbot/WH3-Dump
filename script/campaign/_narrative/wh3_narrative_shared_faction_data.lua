@@ -66,6 +66,7 @@ local FACTION_CULTURES_TO_RACIAL_NARRATIVE_EVENTS_FILENAMES_MAP = {
 	wh3_main_tze_tzeentch = 		{"wh3_narrative_tzeentch", "wh3_narrative_great_game", "wh3_narrative_chaos"},
 	wh3_main_dae_daemons = 			{"wh3_narrative_daemon_prince", "wh3_narrative_chaos"},
 	wh3_main_ogr_ogre_kingdoms = 	{"wh3_narrative_ogres"},
+	wh3_dlc23_chd_chaos_dwarfs = 	{"wh3_narrative_chaos_dwarfs"},
 };
 
 

@@ -24,12 +24,20 @@ local champions_participant_factions =
 	"wh3_dlc20_chs_festus"
 }
 
+local chd_gameplay_campaign_type = "SP_NORMAL_NO_ROC"
+local chd_participant_factions =
+{
+	"wh3_dlc23_chd_astragoth",
+	"wh3_dlc23_chd_legion_of_azgorh",
+	"wh3_dlc23_chd_zhatan"
+}
 
 cm:add_pre_first_tick_callback(
 	function()
 		out("**** Campaign Type is: "..cm:model():campaign_type())
 
 		initiative_unlock_listeners();
+		faction_initiatives_unlocker:initiatives_unlocker_listeners()
 		
 		load_followers();
 		
@@ -128,6 +136,7 @@ function start_game_all_factions()
 	
 	out.inc_tab();
 	
+	
 	-- start all scripted behaviours that should apply across all campaigns
 	setup_wh_campaign();
 	
@@ -140,6 +149,9 @@ function start_game_all_factions()
 	corruption_swing:setup();
 	
 	setup_encounters_at_sea_listeners();
+	
+	-- load the campaign quest battle listners script
+	set_piece_battle_abilities:initialise();
 	
 	setup_ogre_contracts();
 	
@@ -173,7 +185,21 @@ function start_game_all_factions()
 	
 	greater_daemons:setup_greater_daemons();
 	
-	setup_campaign_ai();
+	harmony:initialise()
+
+	caravans:initialise()
+
+	-- Chaos Dwarfs
+	chaos_dwarf_labour_loss:labour_loss()
+	chaos_dwarf_efficiency:set_efficiency()
+	tower_of_zharr:initialise()
+	hellforge:setup_listeners()
+	chaos_dwarf_labour_move:setup_listeners()
+	chd_labour_raid:start_listeners()
+
+	-- General
+	character_unlocking:setup_legendary_hero_unlocking();
+	campaign_ai_script:setup_listeners();
 	
 	scripted_technology_tree:start_technology_listeners();
 
@@ -193,12 +219,11 @@ function start_game_all_factions()
 
 		if realm_gameplay_campaign_types[campaign_type] and not realm_gameplay_disabled_override then
 			setup_realms()
-		else
+		elseif cm:are_any_factions_human(champions_participant_factions) and campaign_type == champions_gameplay_campaign_type then
 			setup_ursun_saved()
-		end
-
-		if cm:are_any_factions_human(champions_participant_factions) and campaign_type == champions_gameplay_campaign_type then
 			champions_narrative:initialise()
+		elseif cm:are_any_factions_human(chd_participant_factions) and campaign_type == chd_gameplay_campaign_type then
+			chaos_dwarfs_narrative:initialise()
 		end
 	end;
 	

@@ -789,8 +789,8 @@ data.faction_intros = {
 
 	wh2_dlc09_skv_clan_rictus = faction_intro_data:new{
 		preset = data.intro_presets.standard,
-		cam_cutscene_start = {x = 575.855408, y = 396.463074,	d = 22.564819, b = 0.0,	h = 65.690384,},
-		cam_gameplay_start = {x = 575.855408, y = 397.901672,	d = 9.196472, b = 0, h = 10.772153,},
+		cam_cutscene_start = {x = 556.286682, y = 403.177338,	d = 21.683289, b = 0,	h = 62.642727,},
+		cam_gameplay_start = {x = 556.286682, y = 408.42395,	d = 10.237366, b = 0,	h = 12.305203,},
 		advice_line = "wh3_dlc21_ie_camp_skv_tretch_intro_01",
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},
@@ -803,22 +803,37 @@ data.faction_intros = {
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},
 
+	wh3_dlc23_chd_legion_of_azgorh = faction_intro_data:new{
+		preset = data.intro_presets.standard,
+		cam_cutscene_start = {x = 633.726074, y = 370.075836,	d = 22.588837, b = 0, h = 65.854897,},
+		cam_gameplay_start = {x = 631.343689, y = 378.437561,	d = 9.927307, b = 0, h = 11.699169,},
+		advice_line = "wh3_dlc23_ie_camp_chd_drazhoath_intro_01",
+		cutscene_style = data.cutscene_styles.zoom_in_and_speak
+	},
+
+	wh3_dlc23_chd_astragoth = faction_intro_data:new{
+		preset = data.intro_presets.standard,
+		cam_cutscene_start = {x = 575.663635, y = 553.59668,	d = 22.207275, b = 0.0,	h = 63.392048,},
+		cam_gameplay_start = {x = 570.808533, y = 544.421692,	d = 10.354736, b = 0, h = 12.399276,},
+		advice_line = "wh3_dlc23_ie_camp_chd_astragoth_intro_01",
+		cutscene_style = data.cutscene_styles.zoom_in_and_speak
+	},
 
 	--------------------
 	---MOURN MOUNTAINS--
 	--------------------
 	wh3_main_ogr_goldtooth = faction_intro_data:new{
 		preset = data.intro_presets.standard,
-		cam_cutscene_start = {x = 681.019775, y = 388.347137,	d = 21.301208, b = 0.0,	h = 60.872715,},
-		cam_gameplay_start = {x = 681.019775, y = 381.524506,	d = 4.307526, b = 0, h = 5.278111,},
+		cam_cutscene_start = {x = 695.019775, y = 394.347137,	d = 21.301208, b = 0.0,	h = 60.872715,},
+		cam_gameplay_start = {x = 695.019775, y = 386.524506,	d = 4.307526, b = 0, h = 5.278111,},
 		advice_line = "wh3_dlc21_ie_camp_ogr_greasus_intro_01",
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},
 
 	wh_main_grn_greenskins = faction_intro_data:new{
 		preset = data.intro_presets.standard,
-		cam_cutscene_start = {x = 640.667725, y = 541.834656,	d = 19.848999, b = 0.0,	h = 58.67049,},
-		cam_gameplay_start = {x = 643.252563, y = 542.243774,	d = 4.30719, b = 0, h = 5.194318,},
+		cam_cutscene_start = {x = 652.135742, y = 517.871216,	d = 21.604187, b = 0.0,	h = 61.502235,},
+		cam_gameplay_start = {x = 650.005737, y = 519.96936,	d = 7.357117, b = 0, h = 9.003818,},
 		advice_line = "wh3_dlc21_ie_camp_grn_grimgor_intro_01",
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},
@@ -828,6 +843,14 @@ data.faction_intros = {
 		cam_cutscene_start = {x = 704.805359, y = 332.506256,	d = 22.695648, b = 0.0,	h = 64.956429,},
 		cam_gameplay_start = {x = 704.805359, y = 330.059662,	d = 9.299866, b = 0, h = 10.896576,},
 		advice_line = "wh3_dlc21_ie_camp_vmp_ghorst_intro_01",
+		cutscene_style = data.cutscene_styles.zoom_in_and_speak
+	},
+	
+	wh3_dlc23_chd_zhatan = faction_intro_data:new{
+		preset = data.intro_presets.standard,
+		cam_cutscene_start = {x = 767.19342, y = 540.643677,	d = 22.669464, b = 0.0,	h = 64.90081,},
+		cam_gameplay_start = {x = 767.19342, y = 540.643677,	d = 9.320435, b = 0, h = 10.921711,},
+		advice_line = "wh3_dlc23_ie_camp_chd_zhatan_intro_01",
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},
 
@@ -853,8 +876,8 @@ data.faction_intros = {
 
 	wh2_main_skv_clan_eshin = faction_intro_data:new{
 		preset = data.intro_presets.standard,
-		cam_cutscene_start = {x = 817.896118, y = 433.611542,	d = 22.392303, b = 0.0,	h = 67.477608,},
-		cam_gameplay_start = {x = 817.896118, y = 429.044128,	d = 8.713928, b = 0, h = 10.142816,},
+		cam_cutscene_start = {x = 826.896118, y = 427.611542,	d = 22.392303, b = 0.0,	h = 67.477608,},
+		cam_gameplay_start = {x = 826.896118, y = 423.044128,	d = 8.713928, b = 0, h = 10.142816,},
 		advice_line = "wh3_dlc21_ie_camp_skv_snikch_intro_01",
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},

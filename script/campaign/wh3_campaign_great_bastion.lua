@@ -421,7 +421,7 @@ function Bastion:great_bastion_start()
 						table.insert(gate_spawn_list, cm:get_saved_value("gate_focus"))
 					end
 					
-					for i = 1, (army_vars.army_amount - kurgan_warband:military_force_list():num_items()) do
+					for i = 1, (army_vars.army_amount - kurgan_warband:military_force_list():num_items() - 1) do
 						local position = self:get_random_position_for_gate(gate_spawn_list[i])
 						self:spawn_army(army_vars.army_size, army_vars.invasion_name, position)
 					end

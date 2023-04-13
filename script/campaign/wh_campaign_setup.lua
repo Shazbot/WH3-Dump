@@ -1072,6 +1072,7 @@ local forcetype_upkeep_exclusions = {
 	DISCIPLE_ARMY = true,
 	OGRE_CAMP = true,
 	CARAVAN = true,
+	CONVOY = true,
 	SUPPORT_ARMY = true,
 };
 
@@ -1079,6 +1080,7 @@ local forcetype_upkeep_exclusions = {
 non_standard_army_types = {
 	OGRE_CAMP = true,
 	CARAVAN = true,
+	CONVOY = true,
 };
 
 -- loop through the player's armys and apply
@@ -1803,7 +1805,14 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 		elseif faction_name == "wh3_dlc20_chs_vilitch" then
 			secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_champions_of_chaos_vilitch_secondary_detail";
 			pic = 595;
-		
+
+		------------------------
+		-- Chaos Dwarfs
+		------------------------
+
+		elseif faction_name == "wh3_dlc23_chd_astragoth" or faction_name == "wh3_dlc23_chd_legion_of_azgorh" or faction_name == "wh3_dlc23_chd_zhatan" then
+			secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_chaos_dwarfs_secondary_detail";
+			pic = 597;
 		else
 			script_error("ERROR: show_how_to_play_event() called but couldn't recognise supplied faction name [" .. faction_name .. "]");
 			

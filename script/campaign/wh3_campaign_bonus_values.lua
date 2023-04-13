@@ -608,6 +608,29 @@ core:add_listener(
 	true
 );
 
+-- damages walls when character besieges settlement with this bonus value complete
+core:add_listener(
+	"damage_settlement_wall",
+	"CharacterBesiegesSettlement",
+	function(context)
+		local character = context:region():garrison_residence():besieging_character()
+		return cm:get_characters_bonus_value(character, "damage_wall_when_besieging") ~= 0
+	end,
+	function(context)
+		local region = context:region()
+		local settlement = region:settlement()
+		local character = region:garrison_residence():besieging_character()
+		
+		if settlement:is_walled_settlement() and settlement:number_of_wall_breaches() < 2 then
+			out.design("Character " .. character:get_forename() .. " has besieged " .. context:region():name() .. " damage the walls of this settlement!")	
+			cm:set_settlement_wall_health(settlement, 2)
+		end
+			
+	end,
+	true
+);
+
+
 -- spawn a disciple army when building with this bonus value is complete
 core:add_listener(
 	"create_disciple_army_foreign_slot",

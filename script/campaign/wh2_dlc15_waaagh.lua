@@ -66,7 +66,9 @@ waaagh = {
 		},
 		["dwarfs"] = {
 			culture = {
-				wh_main_dwf_dwarfs = true
+				wh_main_dwf_dwarfs = true,
+				wh3_dlc23_chd_chaos_dwarfs = true
+
 			}
 		},
 		["chaos"] = {

@@ -1242,7 +1242,7 @@ local function construct_narrative_query_corruption_in_adjacent_region(name, fac
 				local region_list_table = cm:get_regions_adjacent_to_faction(faction);
 
 				for i = 1, #region_list_table do
-					local resource = region_list_table[i]:province():pooled_resource_manager():resource(corruption_key, culture_condition);
+					local resource = region_list_table[i]:province():pooled_resource_manager():resource(corruption_key)
 
 					if not resource:is_null_interface() then 
 						local resource_value = resource:value();

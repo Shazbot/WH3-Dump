@@ -186,7 +186,12 @@ core:add_listener(
 		return context:faction():name() == mannfred_faction_key and context:mission():mission_issuer_record_key() == "BOOK_NAGASH"
 	end,
 	function(context)
-		mannfred_malevolant_museum_effect_update()
+		cm:callback(function()
+			-- MissionSucceeded is triggering before rewards are granted, which is resulting in effects not being doubled until the following turn. 
+			-- This second delay ensures new effects granted by the mission are also doubled straight away.
+			mannfred_malevolant_museum_effect_update()
+		end,
+		1)
 	end,
 	true
 )

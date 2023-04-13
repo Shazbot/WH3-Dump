@@ -93,7 +93,12 @@ local panels_blocking = {
 	"war_coordination",
 
 	--WH3 DLC
-	"chaos_gifts"
+	"chaos_gifts",
+	"chd_narrative_panel",
+	"hellforge_panel_main",
+	"tower_of_zharr",
+	"military_convoys",
+	"labour_economy"
 };
 
 -- Panels for which a PanelOpenedCampaign event is sent to script, but the panel should not block interventions or be considered by cm:progress_on_blocking_panel_dismissed()
@@ -378,7 +383,12 @@ function campaign_ui_manager:start_campaign_ui_listeners()
 			end;
 			
 			-- position
-			str = str .. " || position: log [" .. character:logical_position_x() .. ", " .. character:logical_position_y() .. "] dis [" .. character:display_position_x() .. ", " .. character:display_position_y() .. "]"
+			local char_pos = character:position();
+
+			if not char_pos:is_null_interface() then
+				str = str .. " || position: log [" .. character:logical_position_x() .. ", " .. character:logical_position_y() .. "] dis [" .. character:display_position_x() .. ", " .. character:display_position_y() .. "]"
+			end
+
 			if character:has_garrison_residence() then
 				str = str .. " || garrisoned in settlement:" .. character:garrison_residence():region():name() .. ")";
 			end;
@@ -4250,6 +4260,39 @@ function campaign_ui_manager:highlight_diplomacy_screen(value, pulse_strength, f
 end;
 
 
+--- @function highlight_drill_of_hashut
+--- @desc Highlights the Chaos Dwarfs Hell-forge. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
+--- @p [opt=false] boolean show highlight, Show highlight.
+--- @p [opt=nil] number pulse strength override, Pulse Strength Override. Default is 10 for smaller components such as buttons, and 5 for larger components such as panels. Set a higher number for a more pronounced pulsing.
+--- @p [opt=false] boolean force highlight, Forces the highlight to show even if the <code>help_page_link_highlighting</code> ui override is set.
+function campaign_ui_manager:highlight_drill_of_hashut(value, pulse_strength, force_highlight)
+	if not self.help_page_link_highlighting_permitted and not force_highlight then
+		return;
+	end;
+	
+	local ui_root = core:get_ui_root();
+	local pulse_strength_to_use = pulse_strength or self.panel_pulse_strength;
+	
+	local uic_panel = find_uicomponent(ui_root, "chd_narrative_panel");
+	if uic_panel and uic_panel:Visible(true) then
+		pulse_uicomponent(uic_panel, value, pulse_strength_to_use, true);
+		
+		if value then
+			table.insert(self.unhighlight_action_list, function() self:highlight_drill_of_hashut(false, pulse_strength_to_use, force_highlight) end);
+		end;
+	else
+		local uic_button = find_uicomponent(ui_root, "hud_campaign", "resources_bar_holder", "button_chd_narrative_panel");
+		if uic_button and uic_button:Visible(true) then
+			pulse_uicomponent(uic_button, value, pulse_strength_to_use or self.panel_pulse_strength, true);
+			
+			if value then
+				table.insert(self.unhighlight_action_list, function() self:highlight_drill_of_hashut(false) end);
+			end;
+		end;
+	end;
+end;
+
+
 --- @function highlight_drop_down_list_buttons
 --- @desc Highlights the drop-down list buttons. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
 --- @p [opt=false] boolean show highlight, Show highlight.
@@ -5280,6 +5323,39 @@ function campaign_ui_manager:highlight_grudges_button(value, pulse_strength, for
 end;
 
 
+--- @function highlight_hellforge
+--- @desc Highlights the Chaos Dwarfs Hell-forge. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
+--- @p [opt=false] boolean show highlight, Show highlight.
+--- @p [opt=nil] number pulse strength override, Pulse Strength Override. Default is 10 for smaller components such as buttons, and 5 for larger components such as panels. Set a higher number for a more pronounced pulsing.
+--- @p [opt=false] boolean force highlight, Forces the highlight to show even if the <code>help_page_link_highlighting</code> ui override is set.
+function campaign_ui_manager:highlight_hellforge(value, pulse_strength, force_highlight)
+	if not self.help_page_link_highlighting_permitted and not force_highlight then
+		return;
+	end;
+	
+	local ui_root = core:get_ui_root();
+	local pulse_strength_to_use = pulse_strength or self.panel_pulse_strength;
+	
+	local uic_panel = find_uicomponent(ui_root, "hellforge_panel_main");
+	if uic_panel and uic_panel:Visible(true) then
+		pulse_uicomponent(uic_panel, value, pulse_strength_to_use, true);
+		
+		if value then
+			table.insert(self.unhighlight_action_list, function() self:highlight_hellforge(false, pulse_strength_to_use, force_highlight) end);
+		end;
+	else
+		local uic_button = find_uicomponent(ui_root, "hud_campaign", "faction_buttons_docker", "button_hellforge");
+		if uic_button and uic_button:Visible(true) then
+			pulse_uicomponent(uic_button, value, pulse_strength_to_use or self.panel_pulse_strength, true);
+			
+			if value then
+				table.insert(self.unhighlight_action_list, function() self:highlight_hellforge(false) end);
+			end;
+		end;
+	end;
+end;
+
+
 --- @function highlight_help_pages_button
 --- @desc Highlights the help pages button. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
 --- @p [opt=false] boolean show highlight, Show highlight.
@@ -5884,6 +5960,39 @@ function campaign_ui_manager:highlight_lords_pre_battle_screen(value, pulse_stre
 	
 	if value then
 		table.insert(self.unhighlight_action_list, function() self:highlight_lords_pre_battle_screen(false, pulse_strength, force_highlight, reinforcements_only) end);
+	end;
+end;
+
+
+--- @function highlight_military_convoys
+--- @desc Highlights the Chaos Dwarfs Hell-forge. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
+--- @p [opt=false] boolean show highlight, Show highlight.
+--- @p [opt=nil] number pulse strength override, Pulse Strength Override. Default is 10 for smaller components such as buttons, and 5 for larger components such as panels. Set a higher number for a more pronounced pulsing.
+--- @p [opt=false] boolean force highlight, Forces the highlight to show even if the <code>help_page_link_highlighting</code> ui override is set.
+function campaign_ui_manager:highlight_military_convoys(value, pulse_strength, force_highlight)
+	if not self.help_page_link_highlighting_permitted and not force_highlight then
+		return;
+	end;
+	
+	local ui_root = core:get_ui_root();
+	local pulse_strength_to_use = pulse_strength or self.panel_pulse_strength;
+	
+	local uic_panel = find_uicomponent(ui_root, "military_convoys");
+	if uic_panel and uic_panel:Visible(true) then
+		pulse_uicomponent(uic_panel, value, pulse_strength_to_use, true);
+		
+		if value then
+			table.insert(self.unhighlight_action_list, function() self:highlight_military_convoys(false, pulse_strength_to_use, force_highlight) end);
+		end;
+	else
+		local uic_button = find_uicomponent(ui_root, "hud_campaign", "faction_buttons_docker", "button_convoys");
+		if uic_button and uic_button:Visible(true) then
+			pulse_uicomponent(uic_button, value, pulse_strength_to_use or self.panel_pulse_strength, true);
+			
+			if value then
+				table.insert(self.unhighlight_action_list, function() self:highlight_military_convoys(false) end);
+			end;
+		end;
 	end;
 end;
 
@@ -8316,6 +8425,39 @@ function campaign_ui_manager:highlight_technology_panel(value, pulse_strength, f
 	end;
 	
 	return false;
+end;
+
+
+--- @function highlight_tower_of_zharr
+--- @desc Highlights the Chaos Dwarfs Hell-forge. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
+--- @p [opt=false] boolean show highlight, Show highlight.
+--- @p [opt=nil] number pulse strength override, Pulse Strength Override. Default is 10 for smaller components such as buttons, and 5 for larger components such as panels. Set a higher number for a more pronounced pulsing.
+--- @p [opt=false] boolean force highlight, Forces the highlight to show even if the <code>help_page_link_highlighting</code> ui override is set.
+function campaign_ui_manager:highlight_tower_of_zharr(value, pulse_strength, force_highlight)
+	if not self.help_page_link_highlighting_permitted and not force_highlight then
+		return;
+	end;
+	
+	local ui_root = core:get_ui_root();
+	local pulse_strength_to_use = pulse_strength or self.panel_pulse_strength;
+	
+	local uic_panel = find_uicomponent(ui_root, "tower_of_zharr");
+	if uic_panel and uic_panel:Visible(true) then
+		pulse_uicomponent(uic_panel, value, pulse_strength_to_use, true);
+		
+		if value then
+			table.insert(self.unhighlight_action_list, function() self:highlight_tower_of_zharr(false, pulse_strength_to_use, force_highlight) end);
+		end;
+	else
+		local uic_button = find_uicomponent(ui_root, "hud_campaign", "faction_buttons_docker", "button_toz");
+		if uic_button and uic_button:Visible(true) then
+			pulse_uicomponent(uic_button, value, pulse_strength_to_use or self.panel_pulse_strength, true);
+			
+			if value then
+				table.insert(self.unhighlight_action_list, function() self:highlight_tower_of_zharr(false) end);
+			end;
+		end;
+	end;
 end;
 
 

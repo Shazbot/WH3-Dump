@@ -1,5 +1,5 @@
 --[[
-Automatically generated via export from C:/Users/Build/DaVE_local/branches/warhammer3/patch_2_4/warhammer/raw_data/db
+Automatically generated via export from C:/Users/Build/DaVE_local/branches/warhammer3/patch_3_0/warhammer/raw_data/db
 Edit manually at your own risk
 --]]
 

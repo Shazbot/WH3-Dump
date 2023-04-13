@@ -1667,14 +1667,14 @@ function PrologueScriptedTourAgents()
 			cm:callback(
 				function ()		
 					local tour_started
-					local uic_button_info_toggle = find_uicomponent(core:get_ui_root(), "hud_campaign", "unit_info_panel_holder_parent", "unit_info_panel_holder", "button_holder", "info_toggle_holder", "button_info_toggle")
+					local uic_button_info_toggle = find_uicomponent(core:get_ui_root(), "unit_info_panel_holder", "button_holder", "info_toggle_holder", "button_info_toggle")
 					local function cancel_agents_scripted_tour ()
 						completely_lock_input(false)
 						allow_hotkeys(true)
 					end
 					local function prepare_agents_scripted_tour ()	
-						uic_agent_details = find_uicomponent(core:get_ui_root(), "hud_campaign", "unit_info_panel_holder", "agent_details")
-						uic_targeted_effects = find_child_uicomponent_by_index(find_uicomponent(core:get_ui_root(), "hud_campaign", "unit_info_panel_holder", "agent_details", "action_list"), 1)
+						uic_agent_details = find_uicomponent(core:get_ui_root(), "unit_info_panel_holder", "agent_details")
+						uic_targeted_effects = find_child_uicomponent_by_index(find_uicomponent(core:get_ui_root(), "unit_info_panel_holder", "agent_details", "action_list"), 1)
 						uic_embedded_effects = find_uicomponent(core:get_ui_root(), "units_panel", "main_units_panel", "units", "AgentUnit 0")
 						
 						if uic_agent_details and uic_targeted_effects and uic_embedded_effects then

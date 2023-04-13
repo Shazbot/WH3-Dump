@@ -129,6 +129,9 @@ campaign_experience_triggers = {
 			wh2_dlc13_lzd_saurus_old_blood_horde = true,
 			wh2_main_lzd_saurus_old_blood = true,
 			wh2_main_lzd_saurus_scar_veteran = true
+		},
+		chd_convoy = {
+			wh3_dlc23_chd_lord_convoy_overseer = true,
 		}
 	},
 
@@ -144,13 +147,13 @@ campaign_experience_triggers = {
 		saurus = "experience_mod_for_saurus_characters"
 	},
 
----bonus values that add a flat XP amount per turn
+	---bonus values that add a flat XP amount per turn
 	xp_groups_to_xp_add_bonus_values = {
 		def_casters = "experience_for_def_casters",
-		hef_casters = "experience_for_hef_casters"
+		hef_casters = "experience_for_hef_casters",
+		chd_convoy = "experience_for_convoy_masters",
 	}
 }
-
 function campaign_experience_triggers:setup_experience_triggers()
 	core:add_listener(
 		"CharacterTurnStart_experience",

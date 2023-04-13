@@ -27,22 +27,28 @@ gb:set_cutscene_during_deployment(true);
 
 -------GENERALS SPEECH--------
 
-
 -------ARMY SETUP-------
 ga_player_01 = gb:get_army(gb:get_player_alliance_num(), 1);
 ga_ai_01 = gb:get_army(gb:get_non_player_alliance_num(), 1);
 ga_ai_02 = gb:get_army(gb:get_non_player_alliance_num(), 2);
 ga_ai_03 = gb:get_army(gb:get_non_player_alliance_num(), 3);
 
-
 -------OBJECTIVES-------
 gb:set_objective_on_message("deployment_started", "wh_main_qb_objective_defend_defeat_army");
 
 -------HINTS-------
-gb:queue_help_on_message("battle_started", "wh_dlc01_qb_chs_prince_sigvald_auric_armour_stage_3_hint_objective");
+gb:queue_help_on_message("move", "wh_dlc01_qb_chs_prince_sigvald_auric_armour_stage_3_hint_objective");
 
 -------ORDERS-------
+gb:message_on_time_offset("move", 1000);
 
 ga_ai_01:message_on_proximity_to_enemy("oh_heck_he_pretty", 150);
+ga_ai_01:rush_on_message("move");
+
 ga_ai_02:reinforce_on_message ("oh_heck_he_pretty", 14000);
+ga_ai_02:message_on_any_deployed("02_in");
+ga_ai_02:rush_on_message("02_in");
+
 ga_ai_03:reinforce_on_message ("oh_heck_he_pretty", 16000);
+ga_ai_02:message_on_any_deployed("03_in");
+ga_ai_02:rush_on_message("03_in");

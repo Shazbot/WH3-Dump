@@ -97,19 +97,19 @@ function end_deployment_phase()
 	-- Voiceover and Subtitles --
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 2000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc15_HEF_Imrik_Armour_of_Caledor_pt_01", "subtitle_with_frame", 13, true) end, 2000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc15_HEF_Imrik_Armour_of_Caledor_pt_01", "subtitle_with_frame", 0.1, true) end, 2000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 16500);
 
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 17000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc15_HEF_Imrik_Armour_of_Caledor_pt_02", "subtitle_with_frame", 14, true) end, 17000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc15_HEF_Imrik_Armour_of_Caledor_pt_02", "subtitle_with_frame", 0.1, true) end, 17000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 33000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_03) end, 34000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc15_HEF_Imrik_Armour_of_Caledor_pt_03", "subtitle_with_frame", 13, true) end, 34000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc15_HEF_Imrik_Armour_of_Caledor_pt_03", "subtitle_with_frame", 0.1, true) end, 34000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 48000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_04) end, 49000);
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc15_HEF_Imrik_Armour_of_Caledor_pt_04", "subtitle_with_frame", 12, true) end, 49000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc15_HEF_Imrik_Armour_of_Caledor_pt_04", "subtitle_with_frame", 0.1, true) end, 49000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 62000);
 
 	cutscene_intro:start();

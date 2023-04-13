@@ -272,7 +272,21 @@ function unlock_campaign_movies()
 		"dlc20_azazel_win",
 		"dlc20_festus_win",
 		"dlc20_valkia_win",
-		"dlc20_vilitch_win"
+		"dlc20_vilitch_win",
+		"wh3_dlc23_chd_ancestor_hellshard_structure",
+		"wh3_dlc23_story_panel_intro_chd",
+		"wh3_dlc23_story_panel_narrative_petrification_01",
+		"wh3_dlc23_story_panel_narrative_petrification_02",
+		"wh3_dlc23_story_panel_narrative_petrification_03",
+		"wh3_dlc23_story_panel_narrative_petrification_04",
+		"wh3_dlc23_story_panel_narrative_relic_01",
+		"wh3_dlc23_story_panel_narrative_relic_02",
+		"wh3_dlc23_story_panel_narrative_relic_03",
+		"wh3_dlc23_story_panel_narrative_relic_04",
+		"wh3_dlc23_story_panel_narrative_sacrifice_chd",
+		"dlc23_astragoth_win",
+		"dlc23_drazhoath_win",
+		"dlc23_zhatan_win"
 	};
 	
 	for i = 1, #movies_to_unlock do

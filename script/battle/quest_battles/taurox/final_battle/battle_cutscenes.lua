@@ -16,9 +16,9 @@ bm:start_terrain_composite_scene(herdstone_idle);
 --------------------------------------- AUDIO TRIGGERS ----------------------------------------
 -------------------------------------------------------------------------------------------------
 
-wh2_main_sfx = new_sfx("Play_Movie_Warhammer2_Heart_of_Dark_Taurox_Intro");
+--[[wh2_main_sfx = new_sfx("Play_Movie_Warhammer2_Heart_of_Dark_Taurox_Intro");
 wh2_middlebattle1_sfx = new_sfx("Play_Movie_Warhammer2_Heart_of_Dark_Taurox_MidBattle1");
-wh2_middlebattle2_sfx = new_sfx("Play_Movie_Warhammer2_Heart_of_Dark_Taurox_MidBattle2");
+wh2_middlebattle2_sfx = new_sfx("Play_Movie_Warhammer2_Heart_of_Dark_Taurox_MidBattle2");]]
 
 -------------------------------------------------------------------------------------------------
 ---------------------------------------------- VO -----------------------------------------------
@@ -95,7 +95,7 @@ function end_deployment_phase()
 	-- Voiceover and Subtitle Timings --
 
 	
-	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx) end, 0);
+	--cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx) end, 0);
 
 --wh2_dlc17_bst_taurox_final_battle_pt_01 - 11s
 --wh2_dlc17_bst_taurox_final_battle_pt_02 - 10s
@@ -217,7 +217,7 @@ function play_cutscene_morghur_dead()
 				{coord = v(7.30926, 382.179), rot = 180, width = 40}, -- Cygor
 			};
 
-			army_size = ga_taurox.sunits.count()
+			army_size = ga_taurox.sunits:count()
 			for i = 1, army_size do
 				local current_teleport_coord = teleport_coords[i];
 				if(#teleport_coords <  i) then
@@ -325,7 +325,7 @@ function play_cutscene_morghur_dead()
 		41000
 	);
 	
-	cutscene_morghur_dead:action(function() cutscene_morghur_dead:play_sound(wh2_middlebattle1_sfx) end, 0);
+	--cutscene_morghur_dead:action(function() cutscene_morghur_dead:play_sound(wh2_middlebattle1_sfx) end, 0);
 
 	--wh2_dlc17_bst_taurox_final_battle_phase_2_pt_01 - 6s
 	--wh2_dlc17_bst_taurox_final_battle_phase_2_pt_02 - 10s
@@ -499,7 +499,7 @@ function play_cutscene_ritual_complete()
 		end,
 		35000
 	);
-	cutscene_ritual_complete:action(function() cutscene_ritual_complete:play_sound(wh2_middlebattle2_sfx) end, 0);	
+	--cutscene_ritual_complete:action(function() cutscene_ritual_complete:play_sound(wh2_middlebattle2_sfx) end, 0);	
 
 	cutscene_ritual_complete:action(function() cutscene_morghur_dead:play_sound(taurox_igc2_01) end, 11000);
 	cutscene_ritual_complete:action(function() cutscene_ritual_complete:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc17_bst_taurox_final_battle_phase_3a", "subtitle_with_frame", 0.1) end, 11000);	

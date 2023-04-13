@@ -56,9 +56,25 @@ function q_setup()
 		},
 		["wh3_dlc20_tze_vilitch"] = {
 			{"mission", "wh3_dlc20_anc_arcane_item_vessel_of_chaos", "wh3_dlc20_qb_chs_vilitch_vessel_of_chaos", 15, nil, "wh3_dlc20_vilitch_cam_quest_mission_001", 237, 513}
+		},
+		----------------------
+		---- CHAOS DWARFS ----
+		----------------------
+		["wh3_dlc23_chd_drazhoath"] = {
+			{"mission", "wh3_dlc23_anc_weapon_the_graven_sceptre", "wh3_dlc23_chd_drazhoath_the_graven_sceptre", 8},
+			{"mission", "wh3_dlc23_anc_arcane_item_daemonspite_crucible", "wh3_dlc23_chd_drazhoath_daemonspite_crucible", 12},
+			{"mission", "wh3_dlc23_anc_talisman_hellshard_amulet", "wh3_dlc23_chd_drazhoath_hellshard_amulet", 15, nil, "wh3_dlc23_drazhoath_cam_quest_mission_001", 662, 121}
+		},
+		["wh3_dlc23_chd_zhatan"] = {
+			{"mission", "wh3_dlc23_anc_armour_chd_armour_of_gazrakh", "wh3_dlc23_qb_chd_zhatan_armour_of_gazrakh", 8},
+			{"mission", "wh3_dlc23_anc_weapon_chd_the_obsidian_axe", "wh3_dlc23_qb_chd_zhatan_the_obsidian_axe", 12},
+			{"mission", "wh3_dlc23_anc_enchanted_item_chd_chaos_runeshield", "wh3_dlc23_qb_chd_zhatan_chaos_runeshield", 15, nil, "wh3_dlc23_zhatan_cam_quest_mission_001", 527, 136}
+		},
+		["wh3_dlc23_chd_astragoth"] = {
+			{"mission", "wh3_dlc23_anc_talisman_stone_mantle", "wh3_dlc23_roc_chd_astragoth_stone_mantle", 8},
+			{"mission", "wh3_dlc23_anc_weapon_black_hammer_of_hashut", "wh3_dlc23_roc_qb_chd_astragoth_black_hammer_of_hashut", 12, nil, "wh3_dlc23_astragoth_cam_quest_mission_001", 492, 141}
 		}
 	}
-	
 	-- assemble infotext about quests
 	local infotext = {
 		"wh2.camp.advice.quests.info_001",
