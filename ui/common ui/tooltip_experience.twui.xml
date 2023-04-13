@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="137"
+	version="141"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -113,7 +113,6 @@
 					name="default"
 					width="155"
 					height="24"
-					texthbehaviour="Never split"
 					uniqueguid="E84F5F4E-B40B-422E-91B65226DC456AA0"/>
 			</states>
 			<LayoutEngine
@@ -153,17 +152,19 @@
 					name="default"
 					width="89"
 					height="23"
-					text="Unit Rank: 1"
-					textvalign="Center"
-					texthalign="Center"
-					texthbehaviour="Never split"
-					textlocalised="true"
-					textlabel="experience_rank_default_Text_4529104a"
-					font_m_font_name="la_gioconda_uppercase"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					fontcat_name="fe_text_bold"
-					uniqueguid="33D2E16B-C497-4586-A352036A92B2F8AC"/>
+					uniqueguid="33D2E16B-C497-4586-A352036A92B2F8AC">
+					<component_text
+						text="Unit Rank: 1"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="experience_rank_default_Text_4529104a"
+						font_m_font_name="la_gioconda_uppercase"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						fontcat_name="fe_text_bold"/>
+				</default>
 			</states>
 		</experience_rank>
 		<next_rank
@@ -197,16 +198,18 @@
 					name="default"
 					width="247"
 					height="26"
-					text="Experience required for next rank: 0"
-					textvalign="Center"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="next_rank_default_Text_18006f"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
-					uniqueguid="122F717F-2082-4370-BCF25F0ECBEE40BB"/>
+					uniqueguid="122F717F-2082-4370-BCF25F0ECBEE40BB">
+					<component_text
+						text="Experience required for next rank: 0"
+						textvalign="Center"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="next_rank_default_Text_18006f"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
+				</default>
 			</states>
 		</next_rank>
 		<template_stat_effect
@@ -222,11 +225,11 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoStringValue"
-					context_function_id="RemoveTextTags(StringValue)"/>
+					context_function_id="StringValue.RemoveTextTags"/>
 				<callback_with_context
 					callback_id="ContextImageSetter"
 					context_object_id="CcoStringValue"
-					context_function_id="ExtractImageIconFromText(StringValue)"/>
+					context_function_id="StringValue.ExtractImageIconFromText"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -240,16 +243,6 @@
 					name="default"
 					width="155"
 					height="16"
-					text="Melee attack: +5%"
-					textvalign="Center"
-					textxoffset="26.00,0.00"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="template_stat_effect_default_Text_4b0006"
-					font_m_size="12"
-					font_m_colour="#A0FF37FF"
-					font_m_leading="3"
-					fontcat_name="fe_tooltip_green"
 					uniqueguid="3FB5D38F-1152-4E28-9AB1462396757B03">
 					<imagemetrics>
 						<image
@@ -262,6 +255,17 @@
 							canresizeheight="false"
 							canresizewidth="false"/>
 					</imagemetrics>
+					<component_text
+						text="Melee attack: +5%"
+						textvalign="Center"
+						textxoffset="26.00,0.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="template_stat_effect_default_Text_4b0006"
+						font_m_size="12"
+						font_m_colour="#A0FF37FF"
+						font_m_leading="3"
+						fontcat_name="fe_tooltip_green"/>
 				</default>
 			</states>
 		</template_stat_effect>

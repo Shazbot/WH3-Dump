@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="138"
+	version="141"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -74,7 +74,6 @@
 					name="NewState"
 					width="116"
 					height="26"
-					texthbehaviour="Never split"
 					interactive="true"
 					uniqueguid="AA90B519-8413-4148-B6ECBBE7A6DCB5A8">
 					<imagemetrics>
@@ -136,14 +135,16 @@
 					name="NewState"
 					width="90"
 					height="110"
-					texthalign="Center"
-					textyoffset="6.00,0.00"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					interactive="true"
-					uniqueguid="BD3C034F-D239-4F0F-99BD82BA3A1C2857"/>
+					uniqueguid="BD3C034F-D239-4F0F-99BD82BA3A1C2857">
+					<component_text
+						texthalign="Center"
+						textyoffset="6.00,0.00"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
+				</newstate>
 			</states>
 			<animations>
 				<show
@@ -263,12 +264,6 @@
 					name="NewState"
 					width="84"
 					height="84"
-					texthalign="Center"
-					textyoffset="6.00,0.00"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					interactive="true"
 					uniqueguid="3DEFAAB7-8D47-4091-BF1A3D9E9B3A76BD">
 					<imagemetrics>
@@ -301,6 +296,13 @@
 							canresizeheight="false"
 							canresizewidth="false"/>
 					</imagemetrics>
+					<component_text
+						texthalign="Center"
+						textyoffset="6.00,0.00"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -364,7 +366,7 @@
 				<callback_with_context
 					callback_id="ContextImageSetter"
 					context_object_id="CcoBuildingSetRecord"
-					context_function_id="&quot;ui/buildings/icons/&quot; + RemoveFilepathDirectory(Icon)">
+					context_function_id="&quot;ui/buildings/icons/&quot; + Icon.RemoveFilepathDirectory">
 					<child_m_user_properties>
 						<property
 							name="resize_component"

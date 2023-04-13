@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="138"
+	version="141"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -12,6 +12,11 @@
 				<unit_cat_frame this="CF9FD5AB-6FD3-4EF7-80BEA4CF5E2E48DE">
 					<unit_category_icon this="75C4D9DB-9301-480E-82436AF5C6C99EF5"/>
 				</unit_cat_frame>
+				<train_cat_frame this="2F6E1674-9F5F-4879-9D41111945832827">
+					<list_cat_holder this="D10D37B3-3D48-4E1A-851FE965EC754BAC">
+						<template_unit_cat this="C69C8C4B-2B04-452F-A48B9E5F4C39604C"/>
+					</list_cat_holder>
+				</train_cat_frame>
 				<experience this="6049EEAC-6013-41DB-93C2B840A81CFF96"/>
 				<button_toggle_options this="7BC1C0C3-EE61-4351-87781E89157CD484"/>
 				<xp_visibility_parent this="8B95E422-66DF-4B6F-A94FD94E8AF037EB">
@@ -155,6 +160,16 @@
 							value="selected_frame"/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoCustomBattleUnit"
+					context_function_id="GetIf(UnitRecordContext.IsTrain, &quot;UI/skins/default/unit_card_warmachines_recruitment_frame.png&quot;)">
+					<child_m_user_properties>
+						<property
+							name="image_index"
+							value="1"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -236,10 +251,6 @@
 					name="active"
 					width="60"
 					height="130"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
 					interactive="true"
 					uniqueguid="E50710CE-3455-4EDF-ACB3E6486807562F"
 					stateeditordisplaypos="102.00,65.00">
@@ -305,20 +316,20 @@
 							transition_m_target_state="CE85EC0D-372F-46D1-A2C1FDA86CB77920"
 							transition_m_interpolation_property_mask="8"/>
 					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
 				</active>
 				<hover
 					this="CE85EC0D-372F-46D1-A2C1FDA86CB77920"
 					name="hover"
 					width="60"
 					height="130"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
 					interactive="true"
 					shader_name="brighten_t0"
 					shadervars="0.50,0.00,0.00,0.00"
-					textshadervars="0.20,0.00,0.00,0.00"
 					uniqueguid="CE85EC0D-372F-46D1-A2C1FDA86CB77920"
 					stateeditordisplaypos="123.00,272.00">
 					<imagemetrics>
@@ -381,21 +392,22 @@
 							transition_m_target_state="E50710CE-3455-4EDF-ACB3E6486807562F"
 							transition_m_interpolation_property_mask="8"/>
 					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"
+						textshadervars="0.20,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
 					this="934561F6-E0EB-431D-A49A9C4D75333EBB"
 					name="inactive"
 					width="60"
 					height="130"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
 					interactive="true"
 					disabled="true"
 					shader_name="set_greyscale_t0"
 					shadervars="1.00,1.00,0.00,0.00"
-					textshadervars="1.00,0.50,0.00,0.00"
 					uniqueguid="934561F6-E0EB-431D-A49A9C4D75333EBB"
 					stateeditordisplaypos="102.00,65.00">
 					<imagemetrics>
@@ -436,16 +448,18 @@
 							dockpoint="Center"
 							margin="10.00,15.00,60.00,15.00"/>
 					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"
+						textshadervars="1.00,0.50,0.00,0.00"/>
 				</inactive>
 				<not_selected
 					this="D75EE105-1E80-4F75-B0762FCBD967E749"
 					name="not_selected"
 					width="60"
 					height="130"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
 					interactive="true"
 					uniqueguid="D75EE105-1E80-4F75-B0762FCBD967E749"
 					stateeditordisplaypos="40.00,83.00">
@@ -508,16 +522,17 @@
 							transition_m_target_state="3040E3FC-0514-46EA-9779B43C2A164765"
 							transition_m_interpolation_property_mask="8"/>
 					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
 				</not_selected>
 				<not_selected_hover
 					this="3040E3FC-0514-46EA-9779B43C2A164765"
 					name="not_selected_hover"
 					width="60"
 					height="130"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
 					interactive="true"
 					shader_name="brighten_t0"
 					shadervars="-0.30,0.00,0.00,0.00"
@@ -585,20 +600,20 @@
 							transition_m_target_state="D75EE105-1E80-4F75-B0762FCBD967E749"
 							transition_m_interpolation_property_mask="8"/>
 					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
 				</not_selected_hover>
 				<selected
 					this="D0A7124B-454E-47F9-B4E601757233B6FF"
 					name="selected"
 					width="60"
 					height="130"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
 					interactive="true"
 					shader_name="brighten_t0"
 					shadervars="0.60,0.00,0.00,0.00"
-					textshadervars="0.20,0.00,0.00,0.00"
 					uniqueguid="D0A7124B-454E-47F9-B4E601757233B6FF"
 					stateeditordisplaypos="300.00,99.00">
 					<imagemetrics>
@@ -667,19 +682,20 @@
 							transition_m_target_state="E6B30272-574D-4617-8DB5B69031B587BA"
 							transition_m_interpolation_property_mask="8"/>
 					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"
+						textshadervars="0.20,0.00,0.00,0.00"/>
 				</selected>
 				<selected_hover
 					this="E6B30272-574D-4617-8DB5B69031B587BA"
 					name="selected_hover"
 					width="60"
 					height="130"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
 					interactive="true"
 					shadervars="0.20,0.00,0.00,0.00"
-					textshadervars="0.20,0.00,0.00,0.00"
 					uniqueguid="E6B30272-574D-4617-8DB5B69031B587BA"
 					stateeditordisplaypos="349.00,255.00">
 					<imagemetrics>
@@ -750,6 +766,12 @@
 							transition_m_target_state="D0A7124B-454E-47F9-B4E601757233B6FF"
 							transition_m_interpolation_property_mask="8"/>
 					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"
+						textshadervars="0.20,0.00,0.00,0.00"/>
 				</selected_hover>
 			</states>
 		</custom_battle_unit_card>
@@ -782,10 +804,10 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\warhammer3\icon_experience_decrease.png"
+					name="ui/skins/warhammer3/icon_experience_decrease.png"
 					uniqueguid="4A2DED0F-607A-4846-8060BAB488EAC35B"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_square_togle_active.png"
+					name="ui/skins/default/button_square_togle_active.png"
 					uniqueguid="B2C7AEB0-27B1-46B3-908B3A6A18162F61"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -885,8 +907,8 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\warhammer3\icon_experience_decrease.png"/>
-				<element value="ui\skins\default\button_square_togle_active.png"/>
+				<element value="ui/skins/warhammer3/icon_experience_decrease.png"/>
+				<element value="ui/skins/default/button_square_togle_active.png"/>
 			</override_images>
 		</button_downgrade_unit>
 		<button_upgrade_unit
@@ -918,10 +940,10 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\warhammer3\icon_experience_increase.png"
+					name="ui/skins/warhammer3/icon_experience_increase.png"
 					uniqueguid="03C5FB7F-7C5D-4E3C-880F32EB2E888B74"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_square_togle_active.png"
+					name="ui/skins/default/button_square_togle_active.png"
 					uniqueguid="319C2EA3-57D2-495A-92BDE37E2E59B7B9"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -1021,8 +1043,8 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\warhammer3\icon_experience_increase.png"/>
-				<element value="ui\skins\default\button_square_togle_active.png"/>
+				<element value="ui/skins/warhammer3/icon_experience_increase.png"/>
+				<element value="ui/skins/default/button_square_togle_active.png"/>
 			</override_images>
 		</button_upgrade_unit>
 		<button_flame
@@ -1136,7 +1158,7 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\warhammer3\icon_experience_increase.png"
+					name="ui/skins/warhammer3/icon_experience_increase.png"
 					uniqueguid="F04CBC52-E35F-4587-834E38EE2F834BC6"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -1175,7 +1197,7 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\warhammer3\icon_experience_increase.png"/>
+				<element value="ui/skins/warhammer3/icon_experience_increase.png"/>
 			</override_images>
 		</icon>
 		<icon
@@ -1207,7 +1229,7 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\warhammer3\icon_experience_increase.png"
+					name="ui/skins/warhammer3/icon_experience_increase.png"
 					uniqueguid="6E6E4977-478D-49ED-94059180742E43B2"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -1246,7 +1268,7 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\warhammer3\icon_experience_increase.png"/>
+				<element value="ui/skins/warhammer3/icon_experience_increase.png"/>
 			</override_images>
 		</icon>
 		<root
@@ -1267,7 +1289,6 @@
 					name="default"
 					width="1600"
 					height="900"
-					texthbehaviour="Never split"
 					interactive="true"
 					uniqueguid="4D502348-027F-429E-B7764CA3A9A09673">
 					<imagemetrics>
@@ -1350,18 +1371,17 @@
 					name="0"
 					width="24"
 					height="24"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
-					uniqueguid="56BDE8BE-5162-4160-A631D261EEC95A60"/>
+					uniqueguid="56BDE8BE-5162-4160-A631D261EEC95A60">
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
+				</_0>
 				<_1
 					this="3A81A985-4579-43DC-A1D35648A971E2A1"
 					name="1"
 					width="24"
 					height="24"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					interactive="true"
 					disabled="true"
 					shadervars="-0.20,0.00,0.00,0.00"
@@ -1374,27 +1394,30 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
 				</_1>
 				<_10
 					this="A70376B6-96CB-44B6-8DF312E8B3EACB4C"
 					name="10"
 					width="24"
 					height="24"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="ingame_tooltip"
 					interactive="true"
 					disabled="true"
-					uniqueguid="A70376B6-96CB-44B6-8DF312E8B3EACB4C"/>
+					uniqueguid="A70376B6-96CB-44B6-8DF312E8B3EACB4C">
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="ingame_tooltip"/>
+				</_10>
 				<_2
 					this="15D0D402-65D9-4C9F-BF4B5F63726D18C8"
 					name="2"
 					width="24"
 					height="24"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					interactive="true"
 					disabled="true"
 					shadervars="-0.20,0.00,0.00,0.00"
@@ -1407,15 +1430,16 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
 				</_2>
 				<_3
 					this="E2D502E3-09CE-4CDE-87D0674563C0F8EC"
 					name="3"
 					width="24"
 					height="24"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					interactive="true"
 					disabled="true"
 					shadervars="-0.20,0.00,0.00,0.00"
@@ -1428,15 +1452,16 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
 				</_3>
 				<_4
 					this="E04296B6-1375-421E-BCD3B4FA27BB8BCE"
 					name="4"
 					width="24"
 					height="24"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					interactive="true"
 					disabled="true"
 					shadervars="-0.50,0.00,0.00,0.00"
@@ -1449,15 +1474,16 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
 				</_4>
 				<_5
 					this="BE2ACCCE-311C-4496-8BC5D1EBD944D84B"
 					name="5"
 					width="24"
 					height="24"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					interactive="true"
 					disabled="true"
 					shadervars="-0.50,0.00,0.00,0.00"
@@ -1470,15 +1496,16 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
 				</_5>
 				<_6
 					this="E62043CE-4B6A-4FC5-A6AD2149599E4C5C"
 					name="6"
 					width="24"
 					height="24"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					interactive="true"
 					disabled="true"
 					shadervars="-0.50,0.00,0.00,0.00"
@@ -1491,15 +1518,16 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
 				</_6>
 				<_7
 					this="F92AC3A9-52A6-46E5-85B5011ADF396D14"
 					name="7"
 					width="24"
 					height="24"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					interactive="true"
 					disabled="true"
 					shadervars="-0.70,0.00,0.00,0.00"
@@ -1512,15 +1540,16 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
 				</_7>
 				<_8
 					this="3D94BF83-C4AB-4FEE-86DAC219814B1644"
 					name="8"
 					width="24"
 					height="24"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					interactive="true"
 					disabled="true"
 					shadervars="-0.70,0.00,0.00,0.00"
@@ -1533,15 +1562,16 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
 				</_8>
 				<_9
 					this="1F166165-7460-4EDC-9E5C0C06A01A20E8"
 					name="9"
 					width="24"
 					height="24"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					interactive="true"
 					disabled="true"
 					shadervars="-0.70,0.00,0.00,0.00"
@@ -1554,6 +1584,10 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
 				</_9>
 			</states>
 		</experience>
@@ -1618,6 +1652,10 @@
 					callback_id="ContextStateSetter"
 					context_object_id="CcoMainUnitRecord"
 					context_function_id="GetIfElse(StoredContextFromParent(&quot;CcoCustomBattleUnit&quot;).PlayerSlotContext.CanModifyUnits, SpecialCategoryKey, &quot;inactive&quot;)"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoMainUnitRecord"
+					context_function_id="IsTrain == false"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -1801,7 +1839,6 @@
 					name="tech_lab"
 					width="36"
 					height="36"
-					texthbehaviour="Never split"
 					uniqueguid="C257D984-2DA8-4C70-B44A4E69D850444B">
 					<imagemetrics>
 						<image
@@ -1842,17 +1879,19 @@
 					name="active"
 					width="52"
 					height="18"
-					text="9999"
-					texthalign="Center"
-					textyoffset="3.00,0.00"
-					texthbehaviour="Never split"
-					textlabel="label_cost_active_Text_0"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_text_small"
-					text_shader_name="text_outline_t0"
-					textshadervars="0.00,0.00,0.00,1.00"
-					uniqueguid="F5C3086C-6E4B-453C-9A988540BE0AEDB8"/>
+					uniqueguid="F5C3086C-6E4B-453C-9A988540BE0AEDB8">
+					<component_text
+						text="9999"
+						texthalign="Center"
+						textyoffset="3.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="label_cost_active_Text_0"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_text_small"
+						text_shader_name="text_outline_t0"
+						textshadervars="0.00,0.00,0.00,1.00"/>
+				</active>
 			</states>
 		</label_cost>
 		<label_cost_parent
@@ -1878,10 +1917,6 @@
 					name="NewState"
 					width="52"
 					height="18"
-					texthbehaviour="Never split"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_text_small"
 					uniqueguid="8F008D68-43A5-4104-8A49896F593A0A73">
 					<imagemetrics>
 						<image
@@ -1893,6 +1928,11 @@
 							colour="#00000096"
 							ui_colour_preset_type_key="black"/>
 					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_text_small"/>
 				</newstate>
 			</states>
 		</label_cost_parent>
@@ -1978,10 +2018,6 @@
 					name="active"
 					width="64"
 					height="30"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					interactive="true"
 					uniqueguid="5B557A13-167B-4751-BC656016ED0AF52F"
 					stateeditordisplaypos="40.00,24.00">
@@ -2004,18 +2040,18 @@
 					<transitionmap>
 						<transition transition_m_target_state="8754C8DB-569F-497A-98D577E77171EB83"/>
 					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
 				</active>
 				<down
 					this="FC6C76A5-21B0-4885-9FE6CBB1D3B2DDA5"
 					name="down"
 					width="64"
 					height="30"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					interactive="true"
-					textshadervars="0.30,0.00,0.00,0.00"
 					uniqueguid="FC6C76A5-21B0-4885-9FE6CBB1D3B2DDA5"
 					stateeditordisplaypos="145.00,219.00">
 					<imagemetrics>
@@ -2050,16 +2086,18 @@
 							index="1"
 							transition_m_target_state="D1E2507E-FB25-4707-875BF7ED82D37BD0"/>
 					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"
+						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
 					this="D1E2507E-FB25-4707-875BF7ED82D37BD0"
 					name="down_off"
 					width="64"
 					height="30"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					interactive="true"
 					uniqueguid="D1E2507E-FB25-4707-875BF7ED82D37BD0"
 					stateeditordisplaypos="40.00,319.00">
@@ -2085,20 +2123,20 @@
 							index="8"
 							transition_m_target_state="5B557A13-167B-4751-BC656016ED0AF52F"/>
 					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
 				</down_off>
 				<hover
 					this="8754C8DB-569F-497A-98D577E77171EB83"
 					name="hover"
 					width="64"
 					height="30"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					interactive="true"
 					shader_name="brighten_t0"
 					shadervars="1.00,0.00,0.00,0.00"
-					textshadervars="0.30,0.00,0.00,0.00"
 					uniqueguid="8754C8DB-569F-497A-98D577E77171EB83"
 					stateeditordisplaypos="137.00,126.00">
 					<imagemetrics>
@@ -2125,16 +2163,18 @@
 							index="2"
 							transition_m_target_state="FC6C76A5-21B0-4885-9FE6CBB1D3B2DDA5"/>
 					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"
+						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
 					this="28B68884-47B6-4375-A9CB3E5410B84C61"
 					name="inactive"
 					width="64"
 					height="30"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					interactive="true"
 					disabled="true"
 					shader_name="set_greyscale_t0"
@@ -2156,16 +2196,17 @@
 							width="64"
 							height="30"/>
 					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
 				</inactive>
 				<selected
 					this="92B51FB2-D2BE-4AD0-975D99A209688777"
 					name="selected"
 					width="64"
 					height="30"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					interactive="true"
 					uniqueguid="92B51FB2-D2BE-4AD0-975D99A209688777"
 					stateeditordisplaypos="401.00,333.00">
@@ -2188,18 +2229,18 @@
 					<transitionmap>
 						<transition transition_m_target_state="052ED65F-9268-449E-9EE1BC4081FAC503"/>
 					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
 				</selected>
 				<selected_down
 					this="3EC92A27-90C1-4495-974245362E5395AC"
 					name="selected_down"
 					width="64"
 					height="30"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					interactive="true"
-					textshadervars="0.30,0.00,0.00,0.00"
 					uniqueguid="3EC92A27-90C1-4495-974245362E5395AC"
 					stateeditordisplaypos="268.00,120.00">
 					<imagemetrics>
@@ -2226,16 +2267,18 @@
 							index="1"
 							transition_m_target_state="BFD4E691-726D-4BD5-9313633D24BF5ECA"/>
 					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"
+						textshadervars="0.30,0.00,0.00,0.00"/>
 				</selected_down>
 				<selected_down_off
 					this="BFD4E691-726D-4BD5-9313633D24BF5ECA"
 					name="selected_down_off"
 					width="64"
 					height="30"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					interactive="true"
 					uniqueguid="BFD4E691-726D-4BD5-9313633D24BF5ECA"
 					stateeditordisplaypos="384.00,21.00">
@@ -2261,16 +2304,17 @@
 							index="8"
 							transition_m_target_state="92B51FB2-D2BE-4AD0-975D99A209688777"/>
 					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
 				</selected_down_off>
 				<selected_hover
 					this="052ED65F-9268-449E-9EE1BC4081FAC503"
 					name="selected_hover"
 					width="64"
 					height="30"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					interactive="true"
 					shader_name="brighten_t0"
 					shadervars="1.00,0.00,0.00,0.00"
@@ -2300,16 +2344,17 @@
 							index="2"
 							transition_m_target_state="3EC92A27-90C1-4495-974245362E5395AC"/>
 					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
 				</selected_hover>
 				<selected_inactive
 					this="5E289081-A00D-4D13-82C78A4AE1D1D585"
 					name="selected_inactive"
 					width="64"
 					height="30"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					interactive="true"
 					disabled="true"
 					shader_name="set_greyscale_t0"
@@ -2331,6 +2376,11 @@
 							width="64"
 							height="30"/>
 					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
 				</selected_inactive>
 			</states>
 		</button_toggle_options>
@@ -2364,7 +2414,6 @@
 					name="default"
 					width="52"
 					height="25"
-					texthbehaviour="Never split"
 					uniqueguid="C8B5854A-B541-4478-B9307EFE47A0F67C"/>
 			</states>
 			<LayoutEngine
@@ -2418,15 +2467,6 @@
 					name="default"
 					width="91"
 					height="51"
-					text="00::00"
-					textvalign="Center"
-					texthalign="Center"
-					texthbehaviour="Never split"
-					textlabel="label_ready_timer_default_Text_2926439b"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					uniqueguid="481049C9-7F2B-43C1-94B0CEC300C53CBE">
 					<imagemetrics>
 						<image
@@ -2437,6 +2477,16 @@
 							height="51"
 							colour="#00000080"/>
 					</imagemetrics>
+					<component_text
+						text="00::00"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Never split"
+						textlabel="label_ready_timer_default_Text_2926439b"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
 				</default>
 			</states>
 		</label_ready_timer>
@@ -2486,15 +2536,6 @@
 					name="default"
 					width="91"
 					height="51"
-					text="00::00"
-					textvalign="Center"
-					texthalign="Center"
-					texthbehaviour="Never split"
-					textlabel="label_ready_timer_default_Text_2926439b"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					uniqueguid="7AA1B981-EC5F-443D-9A5FF122EF1CC104">
 					<imagemetrics>
 						<image
@@ -2505,6 +2546,16 @@
 							height="51"
 							colour="#00000080"/>
 					</imagemetrics>
+					<component_text
+						text="00::00"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Never split"
+						textlabel="label_ready_timer_default_Text_2926439b"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
 				</default>
 			</states>
 		</label_quick_battle_timer>
@@ -2538,7 +2589,6 @@
 					name="default"
 					width="36"
 					height="36"
-					texthbehaviour="Never split"
 					uniqueguid="9B9C6104-4FF9-469E-AC79FAAD118B6524">
 					<imagemetrics>
 						<image
@@ -2574,56 +2624,48 @@
 					name="active"
 					width="60"
 					height="130"
-					texthbehaviour="Never split"
 					uniqueguid="EC3628F1-4075-4AA3-B3E44D4385C9C2AD"/>
 				<down
 					this="D74BBEC2-8661-4138-9011DF4C7113D96C"
 					name="down"
 					width="60"
 					height="130"
-					texthbehaviour="Never split"
 					uniqueguid="D74BBEC2-8661-4138-9011DF4C7113D96C"/>
 				<down_off
 					this="4429843B-EA7C-4A8F-9FE2CB397BC6CF1B"
 					name="down_off"
 					width="60"
 					height="130"
-					texthbehaviour="Never split"
 					uniqueguid="4429843B-EA7C-4A8F-9FE2CB397BC6CF1B"/>
 				<hover
 					this="E5CAF40D-D210-467F-B843EF0404BD8D36"
 					name="hover"
 					width="60"
 					height="130"
-					texthbehaviour="Never split"
 					uniqueguid="E5CAF40D-D210-467F-B843EF0404BD8D36"/>
 				<inactive
 					this="9AA4A994-615D-4DFB-8CE49A1B384F7CB0"
 					name="inactive"
 					width="60"
 					height="130"
-					texthbehaviour="Never split"
 					uniqueguid="9AA4A994-615D-4DFB-8CE49A1B384F7CB0"/>
 				<not_selected
 					this="0F575282-92B4-40F6-84FCE0EEED0C792A"
 					name="not_selected"
 					width="60"
 					height="130"
-					texthbehaviour="Never split"
 					uniqueguid="0F575282-92B4-40F6-84FCE0EEED0C792A"/>
 				<not_selected_hover
 					this="BE8278D5-6AD6-4E88-91614201ABAB0048"
 					name="not_selected_hover"
 					width="60"
 					height="130"
-					texthbehaviour="Never split"
 					uniqueguid="BE8278D5-6AD6-4E88-91614201ABAB0048"/>
 				<selected
 					this="89CA6501-4887-49CB-88FCCBA790DEE3D1"
 					name="selected"
 					width="60"
 					height="130"
-					texthbehaviour="Never split"
 					uniqueguid="89CA6501-4887-49CB-88FCCBA790DEE3D1">
 					<imagemetrics>
 						<image
@@ -2640,7 +2682,6 @@
 					name="selected_hover"
 					width="60"
 					height="130"
-					texthbehaviour="Never split"
 					uniqueguid="6CF7287A-26E6-4A09-93AB6901C9BC8E3A">
 					<imagemetrics>
 						<image
@@ -2765,5 +2806,204 @@
 				</default>
 			</states>
 		</unit_category_icon>
+		<list_cat_holder
+			this="D10D37B3-3D48-4E1A-851FE965EC754BAC"
+			id="list_cat_holder"
+			offset="18.00,3.00"
+			docking="Bottom Center"
+			component_anchor_point="0.50,1.00"
+			tooltipslocalised="true"
+			uniqueguid="D10D37B3-3D48-4E1A-851FE965EC754BAC"
+			currentstate="B7C88FF2-693B-4FAB-92BC0A903C5B49E1"
+			defaultstate="B7C88FF2-693B-4FAB-92BC0A903C5B49E1">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="#ContextList"
+					context_object_id="CcoMainUnitRecord"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="B7C88FF2-693B-4FAB-92BC0A903C5B49E1"
+					name="default"
+					width="22"
+					height="22"
+					uniqueguid="B7C88FF2-693B-4FAB-92BC0A903C5B49E1"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				spacing="-5.00,0.00"
+				sizetocontent="true"
+				allow_overlap="true"/>
+		</list_cat_holder>
+		<template_unit_cat
+			this="C69C8C4B-2B04-452F-A48B9E5F4C39604C"
+			id="template_unit_cat"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="C69C8C4B-2B04-452F-A48B9E5F4C39604C"
+			currentstate="98F850EE-6280-400F-B49E613D4351434D"
+			defaultstate="98F850EE-6280-400F-B49E613D4351434D">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="CallbackRedirector"/>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoMainUnitRecord"
+					context_function_id="CategoryIcon"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="parent_id"
+					value="UnitCard"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="446977DD-BEC2-48CF-89429B2F99CAD3AA"
+					uniqueguid="446977DD-BEC2-48CF-89429B2F99CAD3AA"
+					imagepath="ui/common ui/unit_category_icons/infantry_sword.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="98F850EE-6280-400F-B49E613D4351434D"
+					name="default"
+					width="22"
+					height="22"
+					disabled="true"
+					pixelcollision="true"
+					uniqueguid="98F850EE-6280-400F-B49E613D4351434D">
+					<imagemetrics>
+						<image
+							this="97D7780C-05DE-47D9-A155D367405FEC15"
+							uniqueguid="97D7780C-05DE-47D9-A155D367405FEC15"
+							componentimage="446977DD-BEC2-48CF-89429B2F99CAD3AA"
+							width="22"
+							height="22"/>
+					</imagemetrics>
+				</default>
+				<raise
+					this="48DDB0BA-6D4C-43E1-BB87107BEA1BA0F8"
+					name="raise"
+					width="22"
+					height="22"
+					disabled="true"
+					pixelcollision="true"
+					shader_name="set_greyscale_t0"
+					shadervars="1.00,1.00,0.00,0.00"
+					uniqueguid="48DDB0BA-6D4C-43E1-BB87107BEA1BA0F8">
+					<imagemetrics>
+						<image
+							this="517812EB-FD89-4BE8-AB1462E2001A2443"
+							uniqueguid="517812EB-FD89-4BE8-AB1462E2001A2443"
+							componentimage="446977DD-BEC2-48CF-89429B2F99CAD3AA"
+							width="22"
+							height="22"/>
+					</imagemetrics>
+				</raise>
+			</states>
+		</template_unit_cat>
+		<train_cat_frame
+			this="2F6E1674-9F5F-4879-9D41111945832827"
+			id="train_cat_frame"
+			offset="0.00,105.00"
+			visible="false"
+			docking="Bottom Center"
+			component_anchor_point="0.50,1.00"
+			tooltipslocalised="true"
+			uniqueguid="2F6E1674-9F5F-4879-9D41111945832827"
+			currentstate="79B06692-0892-4DAC-99A0F8DB80CF3E0E"
+			defaultstate="79B06692-0892-4DAC-99A0F8DB80CF3E0E">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoMainUnitRecord"
+					context_function_id="IsTrain"/>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoMainUnitRecord">
+					<child_m_user_properties>
+						<property
+							name="fallback_state"
+							value="default"/>
+						<property
+							name="renown"
+							value="IsRenown"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="0E09C44E-67B0-41D7-898FF91A25FA11C4"
+					uniqueguid="0E09C44E-67B0-41D7-898FF91A25FA11C4"
+					imagepath="ui/skins/default/unit_card_large_base.png"/>
+				<component_image
+					this="12ADB1BE-9738-4AE7-8112DB60EE81F15D"
+					uniqueguid="12ADB1BE-9738-4AE7-8112DB60EE81F15D"
+					imagepath="ui/skins/default/unit_card_renown_large_base.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="79B06692-0892-4DAC-99A0F8DB80CF3E0E"
+					name="default"
+					width="59"
+					height="25"
+					uniqueguid="79B06692-0892-4DAC-99A0F8DB80CF3E0E">
+					<imagemetrics>
+						<image
+							this="323E3309-9BB3-45A7-A08B06CD4273A955"
+							uniqueguid="323E3309-9BB3-45A7-A08B06CD4273A955"
+							componentimage="0E09C44E-67B0-41D7-898FF91A25FA11C4"
+							offset="0.00,-11.00"
+							width="60"
+							height="36"
+							tile="true"
+							dockpoint="Bottom Center"
+							canresizeheight="false"
+							margin="0.00,12.00,0.00,12.00"/>
+					</imagemetrics>
+				</default>
+				<inactive
+					this="939F9B68-F276-4A34-8937653D89FE7010"
+					name="inactive"
+					width="59"
+					height="25"
+					shader_name="set_greyscale_t0"
+					shadervars="1.00,1.00,0.00,0.00"
+					uniqueguid="939F9B68-F276-4A34-8937653D89FE7010">
+					<imagemetrics>
+						<image
+							this="ED95FFC2-588B-498E-BDC5F362B7A9AE1C"
+							uniqueguid="ED95FFC2-588B-498E-BDC5F362B7A9AE1C"
+							componentimage="0E09C44E-67B0-41D7-898FF91A25FA11C4"
+							offset="0.00,-11.00"
+							width="60"
+							height="36"
+							tile="true"
+							dockpoint="Bottom Center"
+							canresizeheight="false"
+							margin="0.00,12.00,0.00,12.00"/>
+					</imagemetrics>
+				</inactive>
+				<renown
+					this="8D422ED2-EFE4-4479-8F83D382CA02D729"
+					name="renown"
+					width="59"
+					height="25"
+					uniqueguid="8D422ED2-EFE4-4479-8F83D382CA02D729">
+					<imagemetrics>
+						<image
+							this="258A097F-02DD-4DCB-AD38DA9FF86A850A"
+							uniqueguid="258A097F-02DD-4DCB-AD38DA9FF86A850A"
+							componentimage="12ADB1BE-9738-4AE7-8112DB60EE81F15D"
+							offset="0.00,-11.00"
+							width="60"
+							height="36"
+							tile="true"
+							dockpoint="Bottom Center"
+							canresizeheight="false"
+							margin="0.00,12.00,0.00,12.00"/>
+					</imagemetrics>
+				</renown>
+			</states>
+		</train_cat_frame>
 	</components>
 </layout>

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="137"
+	version="141"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -32,7 +32,6 @@
 					name="default"
 					width="1600"
 					height="900"
-					texthbehaviour="Never split"
 					uniqueguid="834E481B-FB85-477F-8D6D4C9B63AB9B45">
 					<imagemetrics>
 						<image
@@ -51,6 +50,7 @@
 			id="button_close"
 			template_id="round_small_button"
 			part_of_template="true"
+			uniqueguid_in_template="82F58892-7F49-4844-B36443AED497BEEF"
 			uniqueguid="E257DE56-455D-4A82-86BBAA026F809253"
 			dimensions="38.00,38.00"
 			dock_point="Top Right"
@@ -75,7 +75,7 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\icon_cross_small.png"
+					name="ui/skins/default/icon_cross_small.png"
 					uniqueguid="321D68E3-415A-4CB5-A9B3DB12DA3A114F"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/button_round_small_pressed.png"
@@ -119,9 +119,6 @@
 					name="disable_override0"
 					value="CallbackAnimTrigger"/>
 				<property
-					name="disable_override1"
-					value="ContextOpacitySetter"/>
-				<property
 					name="dynamic_image"
 					value="0"/>
 			</user_properties>
@@ -144,7 +141,7 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\icon_cross_small.png"/>
+				<element value="ui/skins/default/icon_cross_small.png"/>
 				<element value="ui/skins/default/button_round_small_pressed.png"/>
 				<element value="ui/skins/default/button_round_small_hover.png"/>
 				<element value="ui/skins/default/button_round_small_active.png"/>
@@ -171,6 +168,7 @@
 							value="unit_info_clone"/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context callback_id="TopmostWhenDraggingCallback"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -183,14 +181,6 @@
 					name="default"
 					width="262"
 					height="39"
-					textxoffset="32.00,0.00"
-					textyoffset="6.00,0.00"
-					texthbehaviour="Never split"
-					font_m_font_name="dev_font"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="dev_text"
 					interactive="true"
 					uniqueguid="676D87CA-5269-4DD4-86C50C0E62FC57A0">
 					<imagemetrics>
@@ -202,6 +192,15 @@
 							height="39"
 							colour="#000000FF"/>
 					</imagemetrics>
+					<component_text
+						textxoffset="32.00,0.00"
+						textyoffset="6.00,0.00"
+						texthbehaviour="Never split"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
 				</default>
 			</states>
 			<LayoutEngine
@@ -235,16 +234,6 @@
 					name="default"
 					width="262"
 					height="38"
-					text="Unit info clone"
-					textxoffset="32.00,0.00"
-					textyoffset="6.00,0.00"
-					texthbehaviour="Never split"
-					textlabel="unit_info_clone_default_Text_5dbaf902"
-					font_m_font_name="dev_font"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="dev_text"
 					uniqueguid="2FEA9C4D-5173-40F7-86EF4C0476FBD197">
 					<imagemetrics>
 						<image
@@ -257,6 +246,17 @@
 							canresizeheight="false"
 							canresizewidth="false"/>
 					</imagemetrics>
+					<component_text
+						text="Unit info clone"
+						textxoffset="32.00,0.00"
+						textyoffset="6.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="unit_info_clone_default_Text_5dbaf902"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
 				</default>
 			</states>
 		</header>
@@ -285,16 +285,18 @@
 					name="default"
 					width="1"
 					height="1"
-					textxoffset="32.00,0.00"
-					textyoffset="6.00,0.00"
-					texthbehaviour="Never split"
-					font_m_font_name="dev_font"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="dev_text"
 					interactive="true"
-					uniqueguid="6888FB42-F5D6-417A-823F513856B12C58"/>
+					uniqueguid="6888FB42-F5D6-417A-823F513856B12C58">
+					<component_text
+						textxoffset="32.00,0.00"
+						textyoffset="6.00,0.00"
+						texthbehaviour="Never split"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</default>
 			</states>
 			<LayoutEngine
 				type="List"

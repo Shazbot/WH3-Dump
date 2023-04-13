@@ -1,0 +1,195 @@
+Economy
+{
+  PanelParent (CcoCampaignProvince c)
+  {
+    Component("CcoCampaignProvince" + ContextObjectId(c), "list_labour_provinces")
+  }
+  
+  EfficiencyPercentPredicted (CcoCampaignProvince c)
+  {
+    (Val = 
+	  c
+	  .ExEfficiency
+	  .EffectBundleForPercentList(
+	    MinNumericValue(GetIfElse(c.ExWorkload.Total == 0, 1.0, (c.ExLabour.Total + Economy.WantedLabour(c) + 0.0) / c.ExWorkload.Total), 1.0)
+	  ).FirstContext
+	  .EffectsIncludingHiddenList
+	  .FirstContext
+	  .Value) => { 
+      
+	  GetIfElse(Val == 1, Val, (100 + Val) / 100.0) 
+	  
+    }
+  }
+  
+  WantedLabour (CcoCampaignProvince c) { Floor(ToNumber(PanelParent(c).GetProperty("labour_diff"))) }
+  
+  RawMaterialPreview (CcoCampaignProvince c)
+  {
+	(Output = c.ExRawMaterialOutput) => {
+	  Floor(Output * MinNumericValue((c.TempEfficiencyOutput(c) + (RoundFloat(c.ExRawMaterialEfficiency * 100) - 100)), 1.0))
+	}
+  }
+  
+  OpenDetailsPanel(CcoCampaignProvince c)
+  {
+    Component("8CE42F29-ECE2-4F6B-9CB56BA356F88B14").SelectContext(c)
+  }
+  
+  IncreaseLabour (Int amount, CcoCampaignProvince c)
+  {
+    (total       = Economy.CombinedWantedLabour,
+	 total_after = total - amount,
+	 overflow    = GetIfElse(total_after < 0, Floor(Abs(total_after)), 0),
+   after_mod_value = (Floor(ToNumber(Component("amount").CurrentText)) + amount - overflow),
+   value = GetIfElse(after_mod_value < 0, 0, after_mod_value)) => {
+	
+      Do(Component("amount").SetText(value), UiMsg("LabourChanged"), Economy.OpenDetailsPanel(c))
+   }
+  }
+  
+  AnyLabourChangeWanted
+  {
+    Component("8CE42F29-ECE2-4F6B-9CB56BA356F88B14").ChildList.Any((c) => ToNumber(c.GetProperty("labour_diff")) != 0)
+  } 
+
+    AnyMeaningfulLabourChangeWanted
+  {
+    Component("8CE42F29-ECE2-4F6B-9CB56BA356F88B14").ChildList.Any((c) => c.IsVisible && Economy.LabourChangeWanted(c.StoredContextRequired("CcoCampaignProvince")))
+  }  
+
+  LabourChangeWanted(CcoCampaignProvince c)
+  {
+    (total = Economy.WantedLabour(c)) =>
+    total != 0 && (HasPredictedExcessLabour(c) == false || (total > 0 && c.ExEfficiency.Total != 0) )
+  }
+  
+  CombinedWantedLabour
+  {
+    -Floor(Component("8CE42F29-ECE2-4F6B-9CB56BA356F88B14").ChildList.Sum((c) => ToNumber(c.GetProperty("labour_diff"))))
+  }
+
+  UpdateLabourSort
+  {
+    (c = Component("sort_header", "list_labour_provinces").ChildList.At(PrefAsInt("labour_sort_order"))) => 
+    { c.SetProperty("descending", GetIfElse(PrefAsBool("labour_sort_descending"), 0, 1)) | c.SimulateLClick() }
+  }
+  
+  ProcessLabourChanges
+  {
+    Do(Component("8CE42F29-ECE2-4F6B-9CB56BA356F88B14")
+	  .ChildList.Filter(IsVisible)
+	  .ForEach(
+        (c, a = Floor(ToNumber(c.GetProperty("labour_diff"))), m = c.StoredContextRequired("CcoCampaignProvince").LocalPlayerProvinceManagerContext) =>
+          DoIf(a != 0, 
+		    Do(
+			  m.AddPooledResource(
+			    m.PooledResourceContext("wh3_dlc23_chd_labour"),
+			    GetIfElse(
+			      a < 0, 
+				  "wh3_dlc23_chd_labour_actions",
+				  "captured_in_battle"
+				),
+				a
+			  ),
+			  c.SetProperty("labour_diff", "0")
+			)
+		  )
+    ),
+		UiMsg("LabourUpdate"),
+    UiMsg("LabourClearAll")
+    )
+  }
+  
+  HasExcessLabour(CcoCampaignProvince c)
+  {
+    c.ExLabour.Total > c.ExWorkload.Total
+  }
+  
+  HasPredictedExcessLabour(CcoCampaignProvince c)
+  {
+    c.ExLabour.Total + Economy.WantedLabour(c) > c.ExWorkload.Total
+  }
+  
+  IsAcceptingLabour(CcoCampaignProvince c)
+  {
+    c.LocalPlayerProvinceManagerContext && c.LocalPlayerProvinceManagerContext.PooledResourceDistributorContext.IsDistributionEnabled(c.ExLabourTemp)
+  }
+  
+  IsProvinceSelected(CcoCampaignProvince c)
+  {
+    Component("8CE42F29-ECE2-4F6B-9CB56BA356F88B14").CurrentSelection.SelectedObjectList.Contains(c)
+  }
+  
+  ToggleAcceptingLabour(CcoCampaignProvince c)
+  {
+    c.LocalPlayerProvinceManagerContext.PooledResourceDistributorContext.SetDistributionEnabled(c.ExLabourTemp, !Economy.IsAcceptingLabour(c))
+  }
+
+  TotalMovingLabour
+  {
+    Floor(Component("8CE42F29-ECE2-4F6B-9CB56BA356F88B14").ChildList.Sum((c) => GetIfElse(ToNumber(c.GetProperty("labour_diff")) > 0, ToNumber(c.GetProperty("labour_diff")), 0) ))
+  }
+
+  ExLabourMovementCost
+  {
+    Economy.TotalMovingLabour * 2
+  }
+  
+  LabourChangeMajor { 100 }
+  LabourChangeMinor { 10 }
+}
+
+CcoCampaignProvince
+{
+  ExEfficiency { LocalPlayerProvinceManagerContext.PooledResourceContext("wh3_dlc23_chd_efficiency") }
+  ExWorkload   { LocalPlayerProvinceManagerContext.PooledResourceContext("wh3_dlc23_chd_workload") }
+  ExLabour     { LocalPlayerProvinceManagerContext.PooledResourceContext("wh3_dlc23_chd_labour") }
+  ExLabourTemp { LocalPlayerProvinceManagerContext.FactionContext.PooledResourceContext("wh3_dlc23_chd_labour_global_temp") }
+  
+  ExLabourPublicOrderImpact { -Floor(ExLabour.Total / 100.0)}
+  
+  ExEfficiencyPercent
+  {
+    1.0 - ExEfficiency.PercentageOfCapacity
+  }
+  
+  TempEfficiencyOutput
+  {
+    ExWorkload.Total > 0 | Abs(ExLabour.Total + Economy.WantedLabour(this)) / Abs(ExWorkload.Total) | 0
+  }
+   
+  ExLabourLoss
+  {
+	  (percent = LocalPlayerProvinceManagerContext.PublicOrderContext.ProvidedEffectBundle.EffectList.FirstContext(EffectKey.EndsWith("labour_loss")).Value / 100.0) => {
+	    Floor(MaxNumericValue(ExLabour.Total * percent, 5))
+	  }
+	  
+  }
+  
+  ExRawMaterialOutput
+  {
+    ExCountBuildingEffectValues("wh3_dlc23_pooled_resource_chd_raw_materials_gain")
+  }
+
+  ExArmamentsOutput
+  {
+    ExCountBuildingEffectValues("wh3_dlc23_pooled_resource_chd_armaments_produced_per_turn")
+  }
+  
+  ExRawMaterialEfficiency
+  {
+    (1.0 + (ExCountBuildingEffectValues("wh3_dlc23_pooled_resource_chd_raw_material_efficiency") / 100.0))
+  }
+
+  ExRawMaterialOutputWithBonusValues
+  {
+    RoundFloat((ExRawMaterialOutput * ExRawMaterialEfficiency) * ExEfficiencyPercent)
+  }
+  
+  ExCountBuildingEffectValues(String key)
+  {
+    (effect_list = LocalPlayerProvinceManagerContext.AllEffectsList.Filter(EffectKey == key)) =>
+    RoundFloat(effect_list.IsEmpty == false | effect_list.Sum( Value ) | 0.0)
+  }
+}

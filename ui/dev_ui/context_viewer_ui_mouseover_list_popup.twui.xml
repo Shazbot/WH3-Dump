@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="137"
+	version="141"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -17,6 +17,7 @@
 									<label_mouseover this="13EABAE5-83D0-4A9E-A6B3C007F5449A3A"/>
 									<interactive this="F8E7F664-F978-4129-929F573470BBCEEB"/>
 									<disabled this="0B05420F-76F0-46B7-B92621BF09FBE106"/>
+									<has_placeholder_image this="D31A2F8C-6C80-4C80-98BF250430726B13"/>
 								</template_component_entry>
 							</list_box>
 						</list_clip>
@@ -47,7 +48,6 @@
 					name="default"
 					width="1600"
 					height="900"
-					texthbehaviour="Never split"
 					uniqueguid="225E2E91-18AD-403A-A7F662CBB744A643">
 					<imagemetrics>
 						<image
@@ -175,6 +175,7 @@
 			defaultstate="7E36BDC9-1609-48D2-AB0DAFCA75E361BF">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="VSliderHandle"/>
+				<callback_with_context callback_id="TopmostWhenDraggingCallback"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -200,11 +201,6 @@
 					name="active"
 					width="10"
 					height="20"
-					font_m_font_name="dev_font"
-					font_m_size="18"
-					font_m_colour="#FFFFFFFF"
-					font_m_leading="1"
-					fontcat_name="dev_subheader"
 					interactive="true"
 					uniqueguid="7E36BDC9-1609-48D2-AB0DAFCA75E361BF"
 					stateeditordisplaypos="20.00,24.00">
@@ -234,19 +230,19 @@
 							transition_m_transition_time="200"
 							transition_m_interpolation_property_mask="64"/>
 					</transitionmap>
+					<component_text
+						font_m_font_name="dev_font"
+						font_m_size="18"
+						font_m_colour="#FFFFFFFF"
+						font_m_leading="1"
+						fontcat_name="dev_subheader"/>
 				</active>
 				<down
 					this="45ADA6F2-B9FC-4EA2-89C7A99DD32A86A9"
 					name="down"
 					width="10"
 					height="20"
-					font_m_font_name="dev_font"
-					font_m_size="18"
-					font_m_colour="#FFFFFFFF"
-					font_m_leading="1"
-					fontcat_name="dev_subheader"
 					interactive="true"
-					textshadervars="0.30,0.00,0.00,0.00"
 					uniqueguid="45ADA6F2-B9FC-4EA2-89C7A99DD32A86A9"
 					stateeditordisplaypos="145.00,219.00">
 					<imagemetrics>
@@ -278,17 +274,19 @@
 							index="1"
 							transition_m_target_state="F1BE9A11-548B-45BE-99A70514DCF6BC38"/>
 					</transitionmap>
+					<component_text
+						font_m_font_name="dev_font"
+						font_m_size="18"
+						font_m_colour="#FFFFFFFF"
+						font_m_leading="1"
+						fontcat_name="dev_subheader"
+						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
 					this="F1BE9A11-548B-45BE-99A70514DCF6BC38"
 					name="down_off"
 					width="10"
 					height="20"
-					font_m_font_name="dev_font"
-					font_m_size="18"
-					font_m_colour="#FFFFFFFF"
-					font_m_leading="1"
-					fontcat_name="dev_subheader"
 					interactive="true"
 					uniqueguid="F1BE9A11-548B-45BE-99A70514DCF6BC38"
 					stateeditordisplaypos="29.00,319.00">
@@ -318,19 +316,19 @@
 							index="8"
 							transition_m_target_state="7E36BDC9-1609-48D2-AB0DAFCA75E361BF"/>
 					</transitionmap>
+					<component_text
+						font_m_font_name="dev_font"
+						font_m_size="18"
+						font_m_colour="#FFFFFFFF"
+						font_m_leading="1"
+						fontcat_name="dev_subheader"/>
 				</down_off>
 				<hover
 					this="94A60B58-1C5D-4289-80B8D8C7134B9DC9"
 					name="hover"
 					width="10"
 					height="20"
-					font_m_font_name="dev_font"
-					font_m_size="18"
-					font_m_colour="#FFFFFFFF"
-					font_m_leading="1"
-					fontcat_name="dev_subheader"
 					interactive="true"
-					textshadervars="0.30,0.00,0.00,0.00"
 					uniqueguid="94A60B58-1C5D-4289-80B8D8C7134B9DC9"
 					stateeditordisplaypos="137.00,126.00">
 					<imagemetrics>
@@ -365,6 +363,13 @@
 							index="2"
 							transition_m_target_state="45ADA6F2-B9FC-4EA2-89C7A99DD32A86A9"/>
 					</transitionmap>
+					<component_text
+						font_m_font_name="dev_font"
+						font_m_size="18"
+						font_m_colour="#FFFFFFFF"
+						font_m_leading="1"
+						fontcat_name="dev_subheader"
+						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
 					this="4ED669F7-B8AD-4361-839C79907DB69D5D"
@@ -372,14 +377,16 @@
 					width="10"
 					height="20"
 					soundcategory="UI_GBL_TMP_Square_Small_Button_Locked"
-					font_m_font_name="dev_font"
-					font_m_size="18"
-					font_m_colour="#FFFFFFFF"
-					font_m_leading="1"
-					fontcat_name="dev_subheader"
 					interactive="true"
 					disabled="true"
-					uniqueguid="4ED669F7-B8AD-4361-839C79907DB69D5D"/>
+					uniqueguid="4ED669F7-B8AD-4361-839C79907DB69D5D">
+					<component_text
+						font_m_font_name="dev_font"
+						font_m_size="18"
+						font_m_colour="#FFFFFFFF"
+						font_m_leading="1"
+						fontcat_name="dev_subheader"/>
+				</inactive>
 			</states>
 		</handle>
 		<header_parent
@@ -404,7 +411,6 @@
 					name="default"
 					width="307"
 					height="30"
-					texthbehaviour="Never split"
 					uniqueguid="2C6A8DA0-217C-416B-AEAE9B3A174CA8D1">
 					<imagemetrics>
 						<image
@@ -437,18 +443,20 @@
 					name="NewState"
 					width="275"
 					height="30"
-					text="UI Components under mouse"
-					textvalign="Center"
-					textxoffset="25.00,0.00"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="label_header_NewState_Text_65fe7667"
-					font_m_font_name="dev_font"
-					font_m_size="12"
-					font_m_colour="#5A5A5AFF"
-					font_m_leading="1"
-					fontcat_name="dev_text_dark_grey_on_white"
-					uniqueguid="CFB0F27C-8A64-44DE-A126F4EC1A12FD4A"/>
+					uniqueguid="CFB0F27C-8A64-44DE-A126F4EC1A12FD4A">
+					<component_text
+						text="UI Components under mouse"
+						textvalign="Center"
+						textxoffset="25.00,0.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="label_header_NewState_Text_65fe7667"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#5A5A5AFF"
+						font_m_leading="1"
+						fontcat_name="dev_text_dark_grey_on_white"/>
+				</newstate>
 			</states>
 		</label_header>
 		<list_box
@@ -529,7 +537,6 @@
 					name="default"
 					width="306"
 					height="333"
-					texthbehaviour="Never split"
 					uniqueguid="19CDB73A-54E9-4A49-BBC0F56DF95BF8F4">
 					<imagemetrics>
 						<image
@@ -596,11 +603,6 @@
 					name="NewState"
 					width="4"
 					height="315"
-					font_m_font_name="dev_font"
-					font_m_size="15"
-					font_m_colour="#FFFFFFFF"
-					font_m_leading="1"
-					fontcat_name="dev_item_header"
 					interactive="true"
 					uniqueguid="5870FF1D-96F3-482C-A55E422E3A84630B"
 					stateeditordisplaypos="-842150464.00,-842150464.00">
@@ -615,6 +617,12 @@
 							dockpoint="Top Center"
 							canresizewidth="false"/>
 					</imagemetrics>
+					<component_text
+						font_m_font_name="dev_font"
+						font_m_size="15"
+						font_m_colour="#FFFFFFFF"
+						font_m_leading="1"
+						fontcat_name="dev_item_header"/>
 				</newstate>
 			</states>
 		</vslider>
@@ -681,36 +689,27 @@
 					name="active"
 					width="50"
 					height="20"
-					text="ENTRY"
-					textvalign="Center"
-					textyoffset="4.00,0.00"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="label_default_Text_a545fbf4"
-					font_m_font_name="dev_font"
-					font_m_size="12"
-					font_m_colour="#C0C0C0FF"
-					font_m_leading="1"
-					fontcat_name="dev_text_grey"
 					interactive="true"
 					shader_name="brighten_t0"
-					uniqueguid="A7B92519-2DBB-456A-9E58E0406FAC4DE1"/>
+					uniqueguid="A7B92519-2DBB-456A-9E58E0406FAC4DE1">
+					<component_text
+						text="ENTRY"
+						textvalign="Center"
+						textyoffset="4.00,0.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="label_default_Text_a545fbf4"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#C0C0C0FF"
+						font_m_leading="1"
+						fontcat_name="dev_text_grey"/>
+				</active>
 				<hovered
 					this="36CCB2B5-E813-4B7F-9328ABAF6302162D"
 					name="hovered"
 					width="50"
 					height="20"
-					text="ENTRY"
-					textvalign="Center"
-					textyoffset="4.00,0.00"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="label_default_Text_a545fbf4"
-					font_m_font_name="dev_font"
-					font_m_size="12"
-					font_m_colour="#C0C0C0FF"
-					font_m_leading="1"
-					fontcat_name="dev_text_grey"
 					interactive="true"
 					uniqueguid="36CCB2B5-E813-4B7F-9328ABAF6302162D">
 					<imagemetrics>
@@ -723,23 +722,24 @@
 							height="20"
 							colour="#FFD70055"/>
 					</imagemetrics>
+					<component_text
+						text="ENTRY"
+						textvalign="Center"
+						textyoffset="4.00,0.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="label_default_Text_a545fbf4"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#C0C0C0FF"
+						font_m_leading="1"
+						fontcat_name="dev_text_grey"/>
 				</hovered>
 				<selected
 					this="AA0EDD29-8980-4F1A-9E92C10E09D0E38C"
 					name="selected"
 					width="50"
 					height="20"
-					text="ENTRY"
-					textvalign="Center"
-					textyoffset="4.00,0.00"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="label_default_Text_a545fbf4"
-					font_m_font_name="dev_font"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="dev_text"
 					interactive="true"
 					uniqueguid="AA0EDD29-8980-4F1A-9E92C10E09D0E38C">
 					<imagemetrics>
@@ -753,6 +753,18 @@
 							colour="#FFAD5BA5"
 							margin="0.00,0.00,0.00,16.00"/>
 					</imagemetrics>
+					<component_text
+						text="ENTRY"
+						textvalign="Center"
+						textyoffset="4.00,0.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="label_default_Text_a545fbf4"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
 				</selected>
 			</states>
 		</template_component_entry>
@@ -786,17 +798,19 @@
 					name="default"
 					width="90"
 					height="20"
-					text="Mouseover"
-					textvalign="Center"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="label_mouseover_default_Text_c009381"
-					font_m_font_name="dev_font"
-					font_m_size="12"
-					font_m_colour="#C0C0C0FF"
-					font_m_leading="1"
-					fontcat_name="dev_text_grey"
-					uniqueguid="E10E176D-2AEA-49DD-82C9F1C73CCA5371"/>
+					uniqueguid="E10E176D-2AEA-49DD-82C9F1C73CCA5371">
+					<component_text
+						text="Mouseover"
+						textvalign="Center"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="label_mouseover_default_Text_c009381"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#C0C0C0FF"
+						font_m_leading="1"
+						fontcat_name="dev_text_grey"/>
+				</default>
 			</states>
 		</label_mouseover>
 		<disabled
@@ -832,7 +846,6 @@
 					width="21"
 					height="19"
 					tooltip="Not disabled"
-					texthbehaviour="Never split"
 					tooltiplabel="disabled_false_Tooltip_51785a6d"
 					interactive="true"
 					disabled="true"
@@ -853,7 +866,6 @@
 					width="21"
 					height="19"
 					tooltip="Disabled"
-					texthbehaviour="Never split"
 					tooltiplabel="disabled_true_Tooltip_89a8784a"
 					interactive="true"
 					disabled="true"
@@ -901,7 +913,6 @@
 					width="21"
 					height="19"
 					tooltip="Not interactive"
-					texthbehaviour="Never split"
 					tooltiplabel="interactive_false_Tooltip_b023f42"
 					interactive="true"
 					disabled="true"
@@ -922,7 +933,6 @@
 					width="21"
 					height="19"
 					tooltip="Interactive"
-					texthbehaviour="Never split"
 					tooltiplabel="interactive_true_Tooltip_8783453"
 					interactive="true"
 					disabled="true"
@@ -938,5 +948,54 @@
 				</true>
 			</states>
 		</interactive>
+		<has_placeholder_image
+			this="D31A2F8C-6C80-4C80-98BF250430726B13"
+			id="has_placeholder_image"
+			offset="96.00,0.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center Right External"
+			dock_offset="46.00,0.00"
+			component_anchor_point="-0.00,0.50"
+			priority="999999"
+			componentleveltooltip="This component has a placeholder image"
+			tooltiplabel="ComponentTooltip_3776158f"
+			uniqueguid="D31A2F8C-6C80-4C80-98BF250430726B13"
+			currentstate="304043B1-B8D0-47F2-A540C13178D3FEAB"
+			defaultstate="304043B1-B8D0-47F2-A540C13178D3FEAB">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoComponent"
+					context_function_id="HasPlaceholderImage"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="0696C678-B633-4422-B7BE6BCD02C4CFBC"
+					uniqueguid="0696C678-B633-4422-B7BE6BCD02C4CFBC"
+					imagepath="ui/skins/default/placeholder.png"/>
+			</componentimages>
+			<states>
+				<false
+					this="304043B1-B8D0-47F2-A540C13178D3FEAB"
+					name="false"
+					width="21"
+					height="19"
+					tooltip="Not disabled"
+					tooltiplabel="StateTooltip_f4ef8a85"
+					interactive="true"
+					disabled="true"
+					uniqueguid="304043B1-B8D0-47F2-A540C13178D3FEAB">
+					<imagemetrics>
+						<image
+							this="F04C6293-4751-4D7B-A47B0051604A7413"
+							uniqueguid="F04C6293-4751-4D7B-A47B0051604A7413"
+							componentimage="0696C678-B633-4422-B7BE6BCD02C4CFBC"
+							width="21"
+							height="19"/>
+					</imagemetrics>
+				</false>
+			</states>
+		</has_placeholder_image>
 	</components>
 </layout>

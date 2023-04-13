@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="137"
+	version="141"
 	comment=""
 	precache_condition="BattleRoot.CapturePointList.IsEmpty == false">
 	<hierarchy>
@@ -82,7 +82,6 @@
 					name="default"
 					width="1600"
 					height="900"
-					texthbehaviour="Never split"
 					interactive="true"
 					uniqueguid="FA1C689C-36FC-4591-920E9D0661E0C0A7">
 					<imagemetrics>
@@ -125,11 +124,6 @@
 					name="NewState"
 					width="370"
 					height="224"
-					font_m_font_name="dev_font"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="dev_text"
 					interactive="true"
 					uniqueguid="E1D84B56-FE8B-4EB0-8537621B4DE37236">
 					<imagemetrics>
@@ -142,6 +136,12 @@
 							tile="true"
 							margin="16.00,20.00,16.00,20.00"/>
 					</imagemetrics>
+					<component_text
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
 				</newstate>
 			</states>
 			<animations>
@@ -223,17 +223,19 @@
 					name="default"
 					width="340"
 					height="64"
-					text="Sources:"
-					textyoffset="4.00,0.00"
-					texthbehaviour="Never split"
-					textlocalised="true"
-					textlabel="victory_point_types_list_default_Text_420036"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
 					interactive="true"
-					uniqueguid="6FD207A3-CFD3-4B6D-940B5E981F8590DC"/>
+					uniqueguid="6FD207A3-CFD3-4B6D-940B5E981F8590DC">
+					<component_text
+						text="Sources:"
+						textyoffset="4.00,0.00"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="victory_point_types_list_default_Text_420036"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</default>
 			</states>
 			<LayoutEngine
 				type="List"
@@ -272,18 +274,20 @@
 					this="6DE3A877-C7A5-4D96-ACBC4EAE7FE3A74D"
 					name="default"
 					width="9"
-					text="0"
 					tooltip="+10"
-					textvalign="Center"
-					texthbehaviour="Resize"
-					textlabel="dy_value__Text_758de397"
 					tooltiplabel="dy_value_default_Tooltip_31001b"
-					font_m_size="12"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_warhammer3"
 					interactive="true"
-					uniqueguid="6DE3A877-C7A5-4D96-ACBC4EAE7FE3A74D"/>
+					uniqueguid="6DE3A877-C7A5-4D96-ACBC4EAE7FE3A74D">
+					<component_text
+						text="0"
+						textvalign="Center"
+						texthbehaviour="Resize"
+						textlabel="dy_value__Text_758de397"
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
+				</default>
 			</states>
 		</dy_value>
 		<victory_points_total
@@ -319,50 +323,56 @@
 					this="F1CBF911-C994-4983-90802BA18F66FD45"
 					name="attacking"
 					width="340"
-					text="Attacker victory tickets"
-					textvalign="Center"
-					texthbehaviour="Never split"
-					textlocalised="true"
-					textlabel="victory_points_total_attacking_Text_7e2dcdee"
-					font_m_font_name="brand_header"
-					font_m_size="14"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="FE_header_small"
 					interactive="true"
-					uniqueguid="F1CBF911-C994-4983-90802BA18F66FD45"/>
+					uniqueguid="F1CBF911-C994-4983-90802BA18F66FD45">
+					<component_text
+						text="Attacker victory tickets"
+						textvalign="Center"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="victory_points_total_attacking_Text_7e2dcdee"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="FE_header_small"/>
+				</attacking>
 				<default
 					this="7618AB33-9118-4879-8AAE3202CDDF0380"
 					name="default"
 					width="340"
-					text="Allied victory tickets ({{CcoBattleAlliance:BattleRoot.CaptureLocationManagerContext.TicketsGoal}})"
-					textvalign="Center"
-					texthbehaviour="Never split"
-					textlocalised="true"
-					textlabel="StateText_5fa9e4"
-					font_m_font_name="brand_header"
-					font_m_size="14"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="FE_header_small"
 					interactive="true"
-					uniqueguid="7618AB33-9118-4879-8AAE3202CDDF0380"/>
+					uniqueguid="7618AB33-9118-4879-8AAE3202CDDF0380">
+					<component_text
+						text="Allied victory tickets ({{CcoBattleAlliance:BattleRoot.CaptureLocationManagerContext.TicketsGoal}})"
+						textvalign="Center"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_5fa9e4"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="FE_header_small"/>
+				</default>
 				<defending
 					this="3463B6F4-054C-4367-91F73D8F1C94EBB0"
 					name="defending"
 					width="340"
-					text="Defender victory locations"
-					textvalign="Center"
-					texthbehaviour="Never split"
-					textlocalised="true"
-					textlabel="victory_points_total_defending_Text_207a2372"
-					font_m_font_name="brand_header"
-					font_m_size="14"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="FE_header_small"
 					interactive="true"
-					uniqueguid="3463B6F4-054C-4367-91F73D8F1C94EBB0"/>
+					uniqueguid="3463B6F4-054C-4367-91F73D8F1C94EBB0">
+					<component_text
+						text="Defender victory locations"
+						textvalign="Center"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="victory_points_total_defending_Text_207a2372"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="FE_header_small"/>
+				</defending>
 			</states>
 		</victory_points_total>
 		<enemy_victory_point_types_list
@@ -393,17 +403,19 @@
 					name="default"
 					width="340"
 					height="64"
-					text="Sources:"
-					textyoffset="4.00,0.00"
-					texthbehaviour="Never split"
-					textlocalised="true"
-					textlabel="victory_point_types_list_default_Text_420036"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
 					interactive="true"
-					uniqueguid="7DD841CA-BEC8-47B4-827E90FB9C3B4CF0"/>
+					uniqueguid="7DD841CA-BEC8-47B4-827E90FB9C3B4CF0">
+					<component_text
+						text="Sources:"
+						textyoffset="4.00,0.00"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="victory_point_types_list_default_Text_420036"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</default>
 			</states>
 			<LayoutEngine
 				type="List"
@@ -442,16 +454,18 @@
 					this="2E288F3E-3BCB-45C6-B5B6BF3357B88499"
 					name="default"
 					width="9"
-					text="0"
-					textvalign="Center"
-					texthbehaviour="Resize"
-					textlabel="dy_value_default_Text_758de397"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					interactive="true"
-					uniqueguid="2E288F3E-3BCB-45C6-B5B6BF3357B88499"/>
+					uniqueguid="2E288F3E-3BCB-45C6-B5B6BF3357B88499">
+					<component_text
+						text="0"
+						textvalign="Center"
+						texthbehaviour="Resize"
+						textlabel="dy_value_default_Text_758de397"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
+				</default>
 			</states>
 		</dy_value>
 		<enemy
@@ -470,7 +484,6 @@
 					name="default"
 					width="280"
 					height="96"
-					texthbehaviour="Never split"
 					interactive="true"
 					uniqueguid="3C0F5784-9DE6-4AF0-9CF5D939F44767DB"/>
 			</states>
@@ -497,7 +510,6 @@
 					name="default"
 					width="340"
 					height="96"
-					texthbehaviour="Never split"
 					interactive="true"
 					uniqueguid="C18202E9-1139-42C5-843F179A3339452A"/>
 			</states>
@@ -535,7 +547,6 @@
 					name="default"
 					width="37"
 					height="30"
-					texthbehaviour="Never split"
 					interactive="true"
 					uniqueguid="B7006B3B-A0DC-4AF6-81281E84B0F8D317">
 					<imagemetrics>
@@ -575,7 +586,6 @@
 					name="default"
 					width="37"
 					height="30"
-					texthbehaviour="Never split"
 					interactive="true"
 					uniqueguid="F756E64F-92AA-4E80-A7FDF5B1E9FF1DF1">
 					<imagemetrics>
@@ -840,16 +850,18 @@
 					this="63FAAE4A-BCE8-46DF-B4961120DA8A3684"
 					name="default"
 					width="250"
-					text="dy_name"
-					textvalign="Center"
-					texthbehaviour="Never split"
-					textlabel="dy_name_default_Text_7c480b4c"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					interactive="true"
-					uniqueguid="63FAAE4A-BCE8-46DF-B4961120DA8A3684"/>
+					uniqueguid="63FAAE4A-BCE8-46DF-B4961120DA8A3684">
+					<component_text
+						text="dy_name"
+						textvalign="Center"
+						texthbehaviour="Never split"
+						textlabel="dy_name_default_Text_7c480b4c"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
+				</default>
 			</states>
 		</dy_name>
 		<template_point_category
@@ -872,7 +884,6 @@
 				<default
 					this="73C6FAE4-00F1-4BD9-B985C3B2E69F6AA0"
 					name="default"
-					texthbehaviour="Never split"
 					interactive="true"
 					uniqueguid="73C6FAE4-00F1-4BD9-B985C3B2E69F6AA0"/>
 			</states>
@@ -1143,50 +1154,56 @@
 					this="4AA385FB-202E-4A69-AB7FC37007B84FDD"
 					name="attacking"
 					width="340"
-					text="Attacker victory tickets"
-					textvalign="Center"
-					texthbehaviour="Never split"
-					textlocalised="true"
-					textlabel="victory_points_total_attacking_Text_7e2dcdee"
-					font_m_font_name="brand_header"
-					font_m_size="14"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="FE_header_small"
 					interactive="true"
-					uniqueguid="4AA385FB-202E-4A69-AB7FC37007B84FDD"/>
+					uniqueguid="4AA385FB-202E-4A69-AB7FC37007B84FDD">
+					<component_text
+						text="Attacker victory tickets"
+						textvalign="Center"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="victory_points_total_attacking_Text_7e2dcdee"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="FE_header_small"/>
+				</attacking>
 				<default
 					this="B7A187D5-FB88-4E55-B21C87AAA0F062EC"
 					name="default"
 					width="340"
-					text="Enemy victory tickets ({{CcoBattleAlliance:BattleRoot.CaptureLocationManagerContext.TicketsGoal}})"
-					textvalign="Center"
-					texthbehaviour="Never split"
-					textlocalised="true"
-					textlabel="StateText_dd2ad1c5"
-					font_m_font_name="brand_header"
-					font_m_size="14"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="FE_header_small"
 					interactive="true"
-					uniqueguid="B7A187D5-FB88-4E55-B21C87AAA0F062EC"/>
+					uniqueguid="B7A187D5-FB88-4E55-B21C87AAA0F062EC">
+					<component_text
+						text="Enemy victory tickets ({{CcoBattleAlliance:BattleRoot.CaptureLocationManagerContext.TicketsGoal}})"
+						textvalign="Center"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_dd2ad1c5"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="FE_header_small"/>
+				</default>
 				<defending
 					this="413558BE-14E4-48DB-B31486C33255BAFA"
 					name="defending"
 					width="340"
-					text="Defender victory locations"
-					textvalign="Center"
-					texthbehaviour="Never split"
-					textlocalised="true"
-					textlabel="victory_points_total_defending_Text_207a2372"
-					font_m_font_name="brand_header"
-					font_m_size="14"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="FE_header_small"
 					interactive="true"
-					uniqueguid="413558BE-14E4-48DB-B31486C33255BAFA"/>
+					uniqueguid="413558BE-14E4-48DB-B31486C33255BAFA">
+					<component_text
+						text="Defender victory locations"
+						textvalign="Center"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="victory_points_total_defending_Text_207a2372"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="FE_header_small"/>
+				</defending>
 			</states>
 		</victory_points_total>
 		<capture_point_icon
@@ -1264,11 +1281,6 @@
 					name="0"
 					width="8"
 					height="22"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
 					interactive="true"
 					shader_name="brighten_t0"
 					uniqueguid="F75F8149-42DE-4F8A-8D113AF3A5951ADC">
@@ -1300,17 +1312,18 @@
 							dockpoint="Center"
 							dock_offset="0.00,6.00"/>
 					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
 				</_0>
 				<_1
 					this="FD73F2AC-F89C-4295-A9F3357B58BDD883"
 					name="1"
 					width="8"
 					height="22"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
 					interactive="true"
 					shader_name="brighten_t0"
 					uniqueguid="FD73F2AC-F89C-4295-A9F3357B58BDD883">
@@ -1334,17 +1347,18 @@
 							dockpoint="Center"
 							dock_offset="0.00,3.00"/>
 					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
 				</_1>
 				<_2
 					this="4A73CEA4-4657-4ECA-82227040B65AA9B2"
 					name="2"
 					width="8"
 					height="22"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
 					interactive="true"
 					shader_name="brighten_t0"
 					uniqueguid="4A73CEA4-4657-4ECA-82227040B65AA9B2">
@@ -1358,6 +1372,12 @@
 							height="10"
 							dockpoint="Center"/>
 					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
 				</_2>
 			</states>
 		</contested_arrow_down>
@@ -1415,11 +1435,6 @@
 					name="0"
 					width="8"
 					height="22"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
 					interactive="true"
 					shader_name="brighten_t0"
 					uniqueguid="FB44810E-C221-46D0-B62B22BEF81D9CAA">
@@ -1433,17 +1448,18 @@
 							height="10"
 							dockpoint="Center"/>
 					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
 				</_0>
 				<_1
 					this="F87B42E8-D290-47BD-A5949E5971E5C803"
 					name="1"
 					width="8"
 					height="22"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
 					interactive="true"
 					shader_name="brighten_t0"
 					uniqueguid="F87B42E8-D290-47BD-A5949E5971E5C803">
@@ -1467,17 +1483,18 @@
 							dockpoint="Center"
 							dock_offset="0.00,3.00"/>
 					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
 				</_1>
 				<_2
 					this="D864D0E1-BCB3-4FC7-A3FAF357212E5A61"
 					name="2"
 					width="8"
 					height="22"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
 					interactive="true"
 					shader_name="brighten_t0"
 					uniqueguid="D864D0E1-BCB3-4FC7-A3FAF357212E5A61">
@@ -1509,6 +1526,12 @@
 							dockpoint="Center"
 							dock_offset="0.00,6.00"/>
 					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
 				</_2>
 			</states>
 		</contested_arrow_up>
@@ -1534,16 +1557,18 @@
 					this="2416AAD6-81FE-4250-9A282FE1D8959463"
 					name="default"
 					width="250"
-					text="dy_name"
-					textvalign="Center"
-					texthbehaviour="Never split"
-					textlabel="StateText_71ac6196"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					interactive="true"
-					uniqueguid="2416AAD6-81FE-4250-9A282FE1D8959463"/>
+					uniqueguid="2416AAD6-81FE-4250-9A282FE1D8959463">
+					<component_text
+						text="dy_name"
+						textvalign="Center"
+						texthbehaviour="Never split"
+						textlabel="StateText_71ac6196"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
+				</default>
 			</states>
 		</dy_name>
 		<dy_contested
@@ -1575,8 +1600,6 @@
 					this="C88738E5-4386-4385-B5D5C05FE7D93544"
 					name="contested"
 					width="25"
-					textvalign="Center"
-					texthbehaviour="Never split"
 					interactive="true"
 					uniqueguid="C88738E5-4386-4385-B5D5C05FE7D93544">
 					<imagemetrics>
@@ -1608,7 +1631,6 @@
 					name="default"
 					width="34"
 					height="34"
-					texthbehaviour="Never split"
 					uniqueguid="5DA97125-5C58-47ED-A273D8752208B465"/>
 			</states>
 		</fill_container>
@@ -1673,8 +1695,6 @@
 					name="default"
 					width="34"
 					height="34"
-					textvalign="Center"
-					texthalign="Center"
 					uniqueguid="8FEDB2AF-48BE-496A-A0AA2FEFCB2B8266">
 					<imagemetrics>
 						<image
@@ -1692,8 +1712,6 @@
 					name="glow"
 					width="34"
 					height="34"
-					textvalign="Center"
-					texthalign="Center"
 					shader_name="glow_pulse_t0"
 					uniqueguid="B89635F8-22A1-4262-B23FB5347CEA31E5">
 					<imagemetrics>
@@ -1781,8 +1799,6 @@
 					this="8CDCFA41-F6DD-4864-9325C9476802A5B0"
 					name="default"
 					height="34"
-					textvalign="Center"
-					texthalign="Center"
 					uniqueguid="8CDCFA41-F6DD-4864-9325C9476802A5B0">
 					<imagemetrics>
 						<image
@@ -1803,8 +1819,6 @@
 					this="9A546B4B-A2ED-4C43-97FB5BBF24D151DB"
 					name="glow"
 					height="34"
-					textvalign="Center"
-					texthalign="Center"
 					shader_name="glow_pulse_t0"
 					uniqueguid="9A546B4B-A2ED-4C43-97FB5BBF24D151DB">
 					<imagemetrics>
@@ -1860,7 +1874,6 @@
 					name="default"
 					width="20"
 					height="20"
-					texthbehaviour="Never split"
 					uniqueguid="46A355D8-D98D-4E6C-8F194FB3DE9B7D02">
 					<imagemetrics>
 						<image
@@ -1893,7 +1906,6 @@
 				<default
 					this="4AE94382-1700-4998-A632B28FC2EA20B1"
 					name="default"
-					texthbehaviour="Never split"
 					interactive="true"
 					uniqueguid="4AE94382-1700-4998-A632B28FC2EA20B1"/>
 			</states>
@@ -1935,15 +1947,17 @@
 					this="FD2478BD-9B6B-42C7-A03CB29020A7B227"
 					name="default"
 					width="25"
-					text="dy_rate_mod"
-					textvalign="Center"
-					texthbehaviour="Never split"
-					textlabel="StateText_b8ef36"
-					font_m_colour="#FF2D2DFF"
-					font_m_leading="1"
-					fontcat_name="fe_tooltip_small_red"
 					interactive="true"
-					uniqueguid="FD2478BD-9B6B-42C7-A03CB29020A7B227"/>
+					uniqueguid="FD2478BD-9B6B-42C7-A03CB29020A7B227">
+					<component_text
+						text="dy_rate_mod"
+						textvalign="Center"
+						texthbehaviour="Never split"
+						textlabel="StateText_b8ef36"
+						font_m_colour="#FF2D2DFF"
+						font_m_leading="1"
+						fontcat_name="fe_tooltip_small_red"/>
+				</default>
 			</states>
 		</dy_value>
 		<value_container
@@ -1962,13 +1976,15 @@
 					this="2ADAEF1D-61B2-4A06-89D7D3B35E7B62CB"
 					name="default"
 					width="25"
-					textvalign="Center"
-					texthbehaviour="Never split"
-					font_m_colour="#FF2D2DFF"
-					font_m_leading="1"
-					fontcat_name="fe_tooltip_small_red"
 					interactive="true"
-					uniqueguid="2ADAEF1D-61B2-4A06-89D7D3B35E7B62CB"/>
+					uniqueguid="2ADAEF1D-61B2-4A06-89D7D3B35E7B62CB">
+					<component_text
+						textvalign="Center"
+						texthbehaviour="Never split"
+						font_m_colour="#FF2D2DFF"
+						font_m_leading="1"
+						fontcat_name="fe_tooltip_small_red"/>
+				</default>
 			</states>
 		</value_container>
 		<dy_contested
@@ -2006,8 +2022,6 @@
 					this="12ACB0A7-D9D4-4392-9A77AD4B5FF6E609"
 					name="contested"
 					width="25"
-					textvalign="Center"
-					texthbehaviour="Never split"
 					interactive="true"
 					uniqueguid="12ACB0A7-D9D4-4392-9A77AD4B5FF6E609">
 					<imagemetrics>
@@ -2056,15 +2070,17 @@
 					this="D6E3B954-81BD-4FA9-BFB10DB753451A55"
 					name="default"
 					width="25"
-					text="dy_rate_mod"
-					textvalign="Center"
-					texthbehaviour="Never split"
-					textlabel="StateText_bb6720fc"
-					font_m_colour="#A0FF37FF"
-					font_m_leading="1"
-					fontcat_name="fe_tooltip_small_green"
 					interactive="true"
-					uniqueguid="D6E3B954-81BD-4FA9-BFB10DB753451A55"/>
+					uniqueguid="D6E3B954-81BD-4FA9-BFB10DB753451A55">
+					<component_text
+						text="dy_rate_mod"
+						textvalign="Center"
+						texthbehaviour="Never split"
+						textlabel="StateText_bb6720fc"
+						font_m_colour="#A0FF37FF"
+						font_m_leading="1"
+						fontcat_name="fe_tooltip_small_green"/>
+				</default>
 			</states>
 		</dy_value>
 		<value_container
@@ -2083,13 +2099,15 @@
 					this="47676AFC-4C3C-48ED-94F713F13FEB65B4"
 					name="default"
 					width="25"
-					textvalign="Center"
-					texthbehaviour="Never split"
-					font_m_colour="#FF2D2DFF"
-					font_m_leading="1"
-					fontcat_name="fe_tooltip_small_red"
 					interactive="true"
-					uniqueguid="47676AFC-4C3C-48ED-94F713F13FEB65B4"/>
+					uniqueguid="47676AFC-4C3C-48ED-94F713F13FEB65B4">
+					<component_text
+						textvalign="Center"
+						texthbehaviour="Never split"
+						font_m_colour="#FF2D2DFF"
+						font_m_leading="1"
+						fontcat_name="fe_tooltip_small_red"/>
+				</default>
 			</states>
 		</value_container>
 		<capture_point_icon
@@ -2167,11 +2185,6 @@
 					name="0"
 					width="8"
 					height="22"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
 					interactive="true"
 					shader_name="brighten_t0"
 					uniqueguid="0A2F01DF-C226-416F-81544778BC1EAFC1">
@@ -2203,17 +2216,18 @@
 							dockpoint="Center"
 							dock_offset="0.00,6.00"/>
 					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
 				</_0>
 				<_1
 					this="08208FF9-A419-4210-972F359FCC9301E9"
 					name="1"
 					width="8"
 					height="22"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
 					interactive="true"
 					shader_name="brighten_t0"
 					uniqueguid="08208FF9-A419-4210-972F359FCC9301E9">
@@ -2237,17 +2251,18 @@
 							dockpoint="Center"
 							dock_offset="0.00,3.00"/>
 					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
 				</_1>
 				<_2
 					this="A17E89CB-9BAF-48B1-8B04572E01381B73"
 					name="2"
 					width="8"
 					height="22"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
 					interactive="true"
 					shader_name="brighten_t0"
 					uniqueguid="A17E89CB-9BAF-48B1-8B04572E01381B73">
@@ -2261,6 +2276,12 @@
 							height="10"
 							dockpoint="Center"/>
 					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
 				</_2>
 			</states>
 		</contested_arrow_down>
@@ -2318,11 +2339,6 @@
 					name="0"
 					width="8"
 					height="22"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
 					interactive="true"
 					shader_name="brighten_t0"
 					uniqueguid="5C12F1D1-8D32-4B89-92FD1DCD1C414481">
@@ -2336,17 +2352,18 @@
 							height="10"
 							dockpoint="Center"/>
 					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
 				</_0>
 				<_1
 					this="8F4BE153-54B3-453D-846271CD854DB57C"
 					name="1"
 					width="8"
 					height="22"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
 					interactive="true"
 					shader_name="brighten_t0"
 					uniqueguid="8F4BE153-54B3-453D-846271CD854DB57C">
@@ -2370,17 +2387,18 @@
 							dockpoint="Center"
 							dock_offset="0.00,3.00"/>
 					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
 				</_1>
 				<_2
 					this="072E8D68-F83A-47B0-85350144FA60CDF1"
 					name="2"
 					width="8"
 					height="22"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
 					interactive="true"
 					shader_name="brighten_t0"
 					uniqueguid="072E8D68-F83A-47B0-85350144FA60CDF1">
@@ -2412,6 +2430,12 @@
 							dockpoint="Center"
 							dock_offset="0.00,6.00"/>
 					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
 				</_2>
 			</states>
 		</contested_arrow_up>
@@ -2431,7 +2455,6 @@
 					name="default"
 					width="34"
 					height="34"
-					texthbehaviour="Never split"
 					uniqueguid="FD51290B-6795-43A7-9DF0048BCC23F58C"/>
 			</states>
 		</fill_container>
@@ -2496,8 +2519,6 @@
 					name="default"
 					width="34"
 					height="34"
-					textvalign="Center"
-					texthalign="Center"
 					uniqueguid="73CD90E9-0106-41E5-82A862B319A4A717">
 					<imagemetrics>
 						<image
@@ -2515,8 +2536,6 @@
 					name="glow"
 					width="34"
 					height="34"
-					textvalign="Center"
-					texthalign="Center"
 					shader_name="glow_pulse_t0"
 					uniqueguid="C876A0CC-B23C-465C-A88EB07C6EC19387">
 					<imagemetrics>
@@ -2604,8 +2623,6 @@
 					this="A5D8421F-A827-4122-82B6F183948E819B"
 					name="default"
 					height="34"
-					textvalign="Center"
-					texthalign="Center"
 					uniqueguid="A5D8421F-A827-4122-82B6F183948E819B">
 					<imagemetrics>
 						<image
@@ -2626,8 +2643,6 @@
 					this="99C1FD9E-5305-449C-AB83AB35C09AB3E0"
 					name="glow"
 					height="34"
-					textvalign="Center"
-					texthalign="Center"
 					shader_name="glow_pulse_t0"
 					uniqueguid="99C1FD9E-5305-449C-AB83AB35C09AB3E0">
 					<imagemetrics>
@@ -2683,7 +2698,6 @@
 					name="default"
 					width="20"
 					height="20"
-					texthbehaviour="Never split"
 					uniqueguid="9352D268-CC9C-47BC-97060F601D862E6F">
 					<imagemetrics>
 						<image

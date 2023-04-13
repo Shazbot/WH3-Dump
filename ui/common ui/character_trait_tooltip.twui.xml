@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="138"
+	version="141"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -14,6 +14,18 @@
 						<template_entry this="3E7687D4-DD27-4A3A-804F37DB6E946BA5"/>
 					</effects_list>
 					<custom_battle_disclaimer this="909AE4E2-2BFD-4D86-959014475AB1298E"/>
+					<dy_unit_card_header this="D6D11EA4-7150-4070-8A5C4494BCC64EE4"/>
+					<unit_card_list this="D80E4EC9-13EE-4929-BFAD8404793A93D3">
+						<template_unit_card this="9EE997A8-911F-4206-AAF5C260E80CDC42"/>
+					</unit_card_list>
+					<dev_units_holder this="3A26A60D-B804-46EB-85204BE53AA8853B">
+						<dev_excluded_unit_set_list this="1CDEC3E2-10B3-4BDD-9FDE3B13478B049D">
+							<template_unit_set_text this="D8F70E7B-9256-423E-A5ED1FBACC22ABC9"/>
+						</dev_excluded_unit_set_list>
+						<dev_excluded_unit_list this="7330ADD2-1AE6-4BC5-9AC465EC1166C00B">
+							<template_unit_card this="1E7A70BA-7FC4-4EE4-BFA7599A6145737F"/>
+						</dev_excluded_unit_list>
+					</dev_units_holder>
 				</character_trait_holder>
 				<attribute_entry this="A4DAFD4A-FFF4-4BA9-B75AA2DD692A8DA3">
 					<template_attribute_entry this="533421C3-31BD-4FF5-95947646B91C74A5"/>
@@ -81,14 +93,16 @@
 					this="E9B97496-A563-487E-BDA9C694A25F4FD2"
 					name="NewState"
 					width="340"
-					height="273"
-					textxoffset="8.00,0.00"
-					textyoffset="6.00,0.00"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_tooltip_text"
-					uniqueguid="E9B97496-A563-487E-BDA9C694A25F4FD2"/>
+					height="513"
+					uniqueguid="E9B97496-A563-487E-BDA9C694A25F4FD2">
+					<component_text
+						textxoffset="8.00,0.00"
+						textyoffset="6.00,0.00"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_tooltip_text"/>
+				</newstate>
 			</states>
 			<LayoutEngine
 				type="HorizontalList"
@@ -98,7 +112,7 @@
 		<attribute_entry
 			this="A4DAFD4A-FFF4-4BA9-B75AA2DD692A8DA3"
 			id="attribute_entry"
-			offset="0.00,136.00"
+			offset="0.00,376.00"
 			clipchildren="true"
 			priority="255"
 			tooltipslocalised="true"
@@ -136,12 +150,6 @@
 					name="NewState"
 					width="340"
 					height="46"
-					textxoffset="8.00,0.00"
-					textyoffset="6.00,0.00"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_tooltip_text"
 					uniqueguid="800305DD-61E1-4B55-B43FFAF3A4305894">
 					<imagemetrics>
 						<image
@@ -162,6 +170,13 @@
 							tile="true"
 							margin="16.00,20.00,16.00,20.00"/>
 					</imagemetrics>
+					<component_text
+						textxoffset="8.00,0.00"
+						textyoffset="6.00,0.00"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_tooltip_text"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -192,13 +207,7 @@
 					this="F47D9142-08A9-4128-902572F8092328A7"
 					name="NewState"
 					width="340"
-					height="136"
-					textxoffset="8.00,0.00"
-					textyoffset="6.00,0.00"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_tooltip_text"
+					height="376"
 					uniqueguid="F47D9142-08A9-4128-902572F8092328A7">
 					<imagemetrics>
 						<image
@@ -206,7 +215,7 @@
 							uniqueguid="AEEEA415-5039-440F-B449A3A9DE89A14E"
 							componentimage="2C39AA52-58DA-4032-88A4FBEA7875A9AC"
 							width="340"
-							height="136"
+							height="376"
 							tile="true"
 							margin="16.00,20.00,16.00,20.00"/>
 						<image
@@ -214,11 +223,18 @@
 							uniqueguid="4211C4C0-66AE-410F-8DDCE37EA1CD4778"
 							componentimage="2C39AA52-58DA-4032-88A4FBEA7875A9AC"
 							width="340"
-							height="136"
+							height="376"
 							colour="#FFFFFF80"
 							tile="true"
 							margin="16.00,20.00,16.00,20.00"/>
 					</imagemetrics>
+					<component_text
+						textxoffset="8.00,0.00"
+						textyoffset="6.00,0.00"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_tooltip_text"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -255,16 +271,18 @@
 					name="NewState"
 					width="340"
 					height="26"
-					text="Description"
-					textxoffset="12.00,8.00"
-					textyoffset="5.00,5.00"
-					texthbehaviour="Resize"
-					font_m_font_name="georgia_italic"
-					font_m_size="12"
-					font_m_colour="#A99F89FF"
-					font_m_leading="1"
-					fontcat_name="fe_italic"
-					uniqueguid="7FFF0F39-E427-44FC-98013EA9F9719A08"/>
+					uniqueguid="7FFF0F39-E427-44FC-98013EA9F9719A08">
+					<component_text
+						text="Description"
+						textxoffset="12.00,8.00"
+						textyoffset="5.00,5.00"
+						texthbehaviour="Resize"
+						font_m_font_name="georgia_italic"
+						font_m_size="12"
+						font_m_colour="#A99F89FF"
+						font_m_leading="1"
+						fontcat_name="fe_italic"/>
+				</newstate>
 			</states>
 		</description_window>
 		<dy_explanation
@@ -292,15 +310,17 @@
 					name="NewState"
 					width="340"
 					height="22"
-					text="Instruction"
-					textxoffset="12.00,8.00"
-					textyoffset="2.00,4.00"
-					texthbehaviour="Resize"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_tooltip_text"
-					uniqueguid="53F19C45-D2ED-44BB-A60B58CDD6189FB4"/>
+					uniqueguid="53F19C45-D2ED-44BB-A60B58CDD6189FB4">
+					<component_text
+						text="Instruction"
+						textxoffset="12.00,8.00"
+						textyoffset="2.00,4.00"
+						texthbehaviour="Resize"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_tooltip_text"/>
+				</newstate>
 			</states>
 		</dy_explanation>
 		<dy_title
@@ -327,18 +347,20 @@
 					name="NewState"
 					width="340"
 					height="30"
-					text="dy_title"
-					texthalign="Center"
-					textxoffset="8.00,8.00"
-					textyoffset="8.00,4.00"
-					texthbehaviour="Resize"
-					textlabel="dy_title_NewState_Text_1c003e"
-					font_m_font_name="brand_header"
-					font_m_size="14"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="FE_header_small"
-					uniqueguid="1128B567-098C-4269-902634DA0A0302BF"/>
+					uniqueguid="1128B567-098C-4269-902634DA0A0302BF">
+					<component_text
+						text="dy_title"
+						texthalign="Center"
+						textxoffset="8.00,8.00"
+						textyoffset="8.00,4.00"
+						texthbehaviour="Resize"
+						textlabel="dy_title_NewState_Text_1c003e"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="FE_header_small"/>
+				</newstate>
 			</states>
 		</dy_title>
 		<effects_list
@@ -362,10 +384,12 @@
 					name="NewState"
 					width="340"
 					height="26"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
-					uniqueguid="3F34F24B-FC8A-4A3F-BCB7AC1FC3713F12"/>
+					uniqueguid="3F34F24B-FC8A-4A3F-BCB7AC1FC3713F12">
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
+				</newstate>
 			</states>
 			<animations>
 				<scale id="scale">
@@ -417,15 +441,6 @@
 					name="NewState"
 					width="340"
 					height="26"
-					text="dy_effect"
-					textxoffset="44.00,8.00"
-					textyoffset="5.00,5.00"
-					texthbehaviour="Resize"
-					textlabel="template_entry_NewState_Text_19004c"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					uniqueguid="16DBDCE8-9648-455E-92D9B2692B4526C3">
 					<imagemetrics>
 						<image
@@ -438,6 +453,16 @@
 							canresizeheight="false"
 							canresizewidth="false"/>
 					</imagemetrics>
+					<component_text
+						text="dy_effect"
+						textxoffset="44.00,8.00"
+						textyoffset="5.00,5.00"
+						texthbehaviour="Resize"
+						textlabel="template_entry_NewState_Text_19004c"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
 				</newstate>
 			</states>
 		</template_attribute_entry>
@@ -470,15 +495,6 @@
 					name="NewState"
 					width="340"
 					height="26"
-					text="dy_effect"
-					textxoffset="44.00,8.00"
-					textyoffset="5.00,5.00"
-					texthbehaviour="Resize"
-					textlabel="template_entry_NewState_Text_19004c"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					uniqueguid="2F7ABACF-3160-49B7-80024E7DA0A2EFBE">
 					<imagemetrics>
 						<image
@@ -491,13 +507,23 @@
 							canresizeheight="false"
 							canresizewidth="false"/>
 					</imagemetrics>
+					<component_text
+						text="dy_effect"
+						textxoffset="44.00,8.00"
+						textyoffset="5.00,5.00"
+						texthbehaviour="Resize"
+						textlabel="template_entry_NewState_Text_19004c"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
 				</newstate>
 			</states>
 		</template_entry>
 		<ability_tooltip_creator
 			this="45190352-6632-41B5-AC4A42AED0C99448"
 			id="ability_tooltip_creator"
-			offset="0.00,182.00"
+			offset="0.00,422.00"
 			priority="255"
 			tooltipslocalised="true"
 			uniqueguid="45190352-6632-41B5-AC4A42AED0C99448"
@@ -566,7 +592,6 @@
 					name="default"
 					width="28"
 					height="28"
-					texthbehaviour="Never split"
 					uniqueguid="E77252E8-0DB2-4779-9AAF1AA7E8850305"/>
 			</states>
 			<LayoutEngine
@@ -597,15 +622,17 @@
 					name="default"
 					width="320"
 					height="30"
-					text="[ph] Ability group name"
-					textvalign="Center"
-					texthbehaviour="Never split"
-					textlabel="label_ability_group_name_default_Text_6e006a"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
-					uniqueguid="DF04B18F-1F53-4062-9884F9DB5D81AAD1"/>
+					uniqueguid="DF04B18F-1F53-4062-9884F9DB5D81AAD1">
+					<component_text
+						text="[ph] Ability group name"
+						textvalign="Center"
+						texthbehaviour="Never split"
+						textlabel="label_ability_group_name_default_Text_6e006a"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
+				</default>
 			</states>
 		</label_ability_group_name>
 		<ability_group
@@ -630,12 +657,14 @@
 					name="default"
 					width="340"
 					height="70"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
-					uniqueguid="BF14B125-9978-479A-A84A79565401435A"/>
+					uniqueguid="BF14B125-9978-479A-A84A79565401435A">
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
+				</default>
 			</states>
 			<LayoutEngine
 				type="List"
@@ -688,9 +717,6 @@
 					name="active"
 					width="28"
 					height="28"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					interactive="true"
 					uniqueguid="CD5E4743-E1AD-469F-A9F1ACC24A6CA6AE"
 					stateeditordisplaypos="204.00,44.00">
@@ -712,13 +738,17 @@
 							height="28"
 							dockpoint="Center"/>
 					</imagemetrics>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
 				</active>
 			</states>
 		</template_ability_group_ability>
 		<lore_entry
 			this="4C3C0369-5BC8-4C64-812929B2FA2C8A7B"
 			id="lore_entry"
-			offset="0.00,183.00"
+			offset="0.00,423.00"
 			clipchildren="true"
 			priority="255"
 			tooltipslocalised="true"
@@ -742,12 +772,6 @@
 					name="NewState"
 					width="340"
 					height="90"
-					textxoffset="8.00,0.00"
-					textyoffset="6.00,0.00"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_tooltip_text"
 					uniqueguid="15B0B34C-7013-4880-BA05643D5BE4808A">
 					<imagemetrics>
 						<image
@@ -768,6 +792,13 @@
 							tile="true"
 							margin="16.00,20.00,16.00,20.00"/>
 					</imagemetrics>
+					<component_text
+						textxoffset="8.00,0.00"
+						textyoffset="6.00,0.00"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_tooltip_text"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -800,19 +831,388 @@
 					name="NewState"
 					width="340"
 					height="26"
-					text="This trait has no effects that apply in battle."
-					textxoffset="15.00,8.00"
-					textyoffset="5.00,5.00"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="StateText_7a433a05"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
-					font_colour_override_preset_key="alliance_enemy"
-					uniqueguid="167245D4-1758-467D-9E5DD79F7366D9C4"/>
+					uniqueguid="167245D4-1758-467D-9E5DD79F7366D9C4">
+					<component_text
+						text="This trait has no effects that apply in battle."
+						textxoffset="15.00,8.00"
+						textyoffset="5.00,5.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="StateText_7a433a05"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"
+						font_colour_override_preset_key="alliance_enemy"/>
+				</newstate>
 			</states>
 		</custom_battle_disclaimer>
+		<dev_excluded_unit_list
+			this="7330ADD2-1AE6-4BC5-9AC465EC1166C00B"
+			id="dev_excluded_unit_list"
+			is_dev_only="true"
+			offset="0.00,40.00"
+			priority="255"
+			tooltipslocalised="true"
+			component_level_text="Dev - UI excluded units"
+			text_label="ComponentText_efd67e2"
+			uniqueguid="7330ADD2-1AE6-4BC5-9AC465EC1166C00B"
+			currentstate="4173AA55-E3A5-4F25-BF5042BC01FEA27A"
+			defaultstate="4173AA55-E3A5-4F25-BF5042BC01FEA27A">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoCharacterTraitLevelRecord"
+					context_function_id="EffectList.Transform(DevUnitsFromEffectExcluded).Distinct"/>
+				<callback_with_context callback_id="LayoutStallerCallback"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="4173AA55-E3A5-4F25-BF5042BC01FEA27A"
+					name="default"
+					width="340"
+					height="89"
+					uniqueguid="4173AA55-E3A5-4F25-BF5042BC01FEA27A">
+					<component_text
+						textxoffset="20.00,0.00"
+						texthbehaviour="Never split"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"
+						font_colour_override_preset_key="fabulous_pink"/>
+				</default>
+			</states>
+			<LayoutEngine
+				type="List"
+				spacing="5.00,0.00"
+				itemsperrow="8"
+				sizetocontent="true"
+				secondary_margins="15.00,10.00"
+				min_dimensions="340.00,0.00"
+				margins="20.00,0.00">
+				<columnwidths>
+					<column width="317"/>
+				</columnwidths>
+			</LayoutEngine>
+		</dev_excluded_unit_list>
+		<dev_excluded_unit_set_list
+			this="1CDEC3E2-10B3-4BDD-9FDE3B13478B049D"
+			id="dev_excluded_unit_set_list"
+			is_dev_only="true"
+			priority="255"
+			tooltipslocalised="true"
+			component_level_text="Dev - UI excluded unit sets"
+			text_label="ComponentText_649e5ce4"
+			uniqueguid="1CDEC3E2-10B3-4BDD-9FDE3B13478B049D"
+			currentstate="916C4E1D-063B-4440-BFE821FAE57546C4"
+			defaultstate="916C4E1D-063B-4440-BFE821FAE57546C4">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoCharacterTraitLevelRecord"
+					context_function_id="EffectList.Transform(DevUnitSetStringsFromEffectExcluded)"/>
+				<callback_with_context callback_id="LayoutStallerCallback"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="916C4E1D-063B-4440-BFE821FAE57546C4"
+					name="default"
+					width="340"
+					height="40"
+					uniqueguid="916C4E1D-063B-4440-BFE821FAE57546C4">
+					<component_text
+						textxoffset="20.00,0.00"
+						texthbehaviour="Never split"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"
+						font_colour_override_preset_key="fabulous_pink"/>
+				</default>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true"
+				secondary_margins="40.00,10.00"
+				min_dimensions="340.00,0.00"
+				margins="20.00,0.00">
+				<columnwidths>
+					<column width="311"/>
+				</columnwidths>
+			</LayoutEngine>
+		</dev_excluded_unit_set_list>
+		<dev_units_holder
+			this="3A26A60D-B804-46EB-85204BE53AA8853B"
+			id="dev_units_holder"
+			is_dev_only="true"
+			offset="0.00,241.00"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="3A26A60D-B804-46EB-85204BE53AA8853B"
+			currentstate="D01522BD-8DA6-4A3C-818296E83A1E4CFD"
+			defaultstate="D01522BD-8DA6-4A3C-818296E83A1E4CFD">
+			<states>
+				<default
+					this="D01522BD-8DA6-4A3C-818296E83A1E4CFD"
+					name="default"
+					width="340"
+					height="129"
+					uniqueguid="D01522BD-8DA6-4A3C-818296E83A1E4CFD"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="32"/>
+				</columnwidths>
+			</LayoutEngine>
+		</dev_units_holder>
+		<dy_unit_card_header
+			this="D6D11EA4-7150-4070-8A5C4494BCC64EE4"
+			id="dy_unit_card_header"
+			offset="0.00,130.00"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="D6D11EA4-7150-4070-8A5C4494BCC64EE4"
+			currentstate="C0D8F5AD-789F-4A83-AEB36FE7FD23CD22">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_function_id="Loc(&quot;trait_units_tooltip_header&quot;)"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCharacterTraitLevelRecord"
+					context_function_id="EffectList.Any(UnitsFromEffectNotExcluded.IsEmpty == false)"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="C0D8F5AD-789F-4A83-AEB36FE7FD23CD22"
+					name="NewState"
+					width="340"
+					height="22"
+					uniqueguid="C0D8F5AD-789F-4A83-AEB36FE7FD23CD22">
+					<component_text
+						text="dy_header"
+						textxoffset="12.00,8.00"
+						textyoffset="2.00,4.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_eaeecc41"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_tooltip_text"/>
+				</newstate>
+			</states>
+		</dy_unit_card_header>
+		<template_unit_card
+			this="9EE997A8-911F-4206-AAF5C260E80CDC42"
+			id="template_unit_card"
+			offset="15.00,10.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="9EE997A8-911F-4206-AAF5C260E80CDC42"
+			isaspectratiolocked="true"
+			currentstate="127CF3B8-8162-4FFC-91A8B7449C7B02C6"
+			defaultstate="127CF3B8-8162-4FFC-91A8B7449C7B02C6">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoMainUnitRecord"
+					context_function_id="IconPath">
+					<child_m_user_properties>
+						<property
+							name="image_index"
+							value="1"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="UnitInfoPanelMouseOver"
+					context_object_id="CcoMainUnitRecord"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="0F2FFB9C-AC1B-4DBD-87A20C981F22331D"
+					uniqueguid="0F2FFB9C-AC1B-4DBD-87A20C981F22331D"
+					imagepath="ui/skins/default/unit_card_build_frame.png"/>
+				<component_image
+					this="32E5FBF7-4F87-4333-AC71463991828999"
+					uniqueguid="32E5FBF7-4F87-4333-AC71463991828999"
+					imagepath="ui/skins/default/unit_card_ph.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="127CF3B8-8162-4FFC-91A8B7449C7B02C6"
+					name="default"
+					height="69"
+					interactive="true"
+					uniqueguid="127CF3B8-8162-4FFC-91A8B7449C7B02C6">
+					<imagemetrics>
+						<image
+							this="EBCB6CBB-224E-46B0-96281D49B7E32296"
+							uniqueguid="EBCB6CBB-224E-46B0-96281D49B7E32296"
+							componentimage="32E5FBF7-4F87-4333-AC71463991828999"
+							height="69"/>
+						<image
+							this="DC66F6C6-F02E-4FA7-B6CD8B4AF8D3F484"
+							uniqueguid="DC66F6C6-F02E-4FA7-B6CD8B4AF8D3F484"
+							componentimage="0F2FFB9C-AC1B-4DBD-87A20C981F22331D"
+							height="69"
+							margin="5.00,5.00,5.00,5.00"/>
+					</imagemetrics>
+					<component_text
+						textvalign="Center"
+						textxoffset="26.00,0.00"
+						font_m_size="12"
+						font_m_colour="#A0FF37FF"
+						font_m_leading="3"
+						fontcat_name="fe_tooltip_green"/>
+				</default>
+			</states>
+		</template_unit_card>
+		<template_unit_card
+			this="1E7A70BA-7FC4-4EE4-BFA7599A6145737F"
+			id="template_unit_card"
+			offset="15.00,20.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="1E7A70BA-7FC4-4EE4-BFA7599A6145737F"
+			isaspectratiolocked="true"
+			currentstate="B3F0B30A-3598-48B4-ADC5800293F21B35"
+			defaultstate="B3F0B30A-3598-48B4-ADC5800293F21B35">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoMainUnitRecord"
+					context_function_id="IconPath">
+					<child_m_user_properties>
+						<property
+							name="image_index"
+							value="1"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="325C6795-7009-41FC-A31B4BA5EC34BAD0"
+					uniqueguid="325C6795-7009-41FC-A31B4BA5EC34BAD0"
+					imagepath="ui/skins/default/unit_card_build_frame.png"/>
+				<component_image
+					this="F2A4D6E9-DB71-4826-87A8768057C9AB8B"
+					uniqueguid="F2A4D6E9-DB71-4826-87A8768057C9AB8B"
+					imagepath="ui/skins/default/unit_card_ph.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="B3F0B30A-3598-48B4-ADC5800293F21B35"
+					name="default"
+					height="69"
+					uniqueguid="B3F0B30A-3598-48B4-ADC5800293F21B35">
+					<imagemetrics>
+						<image
+							this="91711AB5-A104-41B0-945EB411AADEB709"
+							uniqueguid="91711AB5-A104-41B0-945EB411AADEB709"
+							componentimage="F2A4D6E9-DB71-4826-87A8768057C9AB8B"
+							height="69"/>
+						<image
+							this="FC115B75-F737-4869-9E1D30C4298C153F"
+							uniqueguid="FC115B75-F737-4869-9E1D30C4298C153F"
+							componentimage="325C6795-7009-41FC-A31B4BA5EC34BAD0"
+							height="69"
+							margin="5.00,5.00,5.00,5.00"/>
+					</imagemetrics>
+					<component_text
+						textvalign="Center"
+						textxoffset="26.00,0.00"
+						font_m_size="12"
+						font_m_colour="#A0FF37FF"
+						font_m_leading="3"
+						fontcat_name="fe_tooltip_green"/>
+				</default>
+			</states>
+		</template_unit_card>
+		<template_unit_set_text
+			this="D8F70E7B-9256-423E-A5ED1FBACC22ABC9"
+			id="template_unit_set_text"
+			offset="40.00,20.00"
+			allowverticalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="D8F70E7B-9256-423E-A5ED1FBACC22ABC9"
+			currentstate="0F770758-09F9-4C08-866EA0B05608E508"
+			defaultstate="0F770758-09F9-4C08-866EA0B05608E508">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoString"
+					context_function_id="Value"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="0F770758-09F9-4C08-866EA0B05608E508"
+					name="default"
+					width="1"
+					height="20"
+					uniqueguid="0F770758-09F9-4C08-866EA0B05608E508">
+					<component_text
+						texthbehaviour="Resize"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"
+						font_colour_override_preset_key="fabulous_pink"/>
+				</default>
+			</states>
+		</template_unit_set_text>
+		<unit_card_list
+			this="D80E4EC9-13EE-4929-BFAD8404793A93D3"
+			id="unit_card_list"
+			offset="0.00,152.00"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="D80E4EC9-13EE-4929-BFAD8404793A93D3"
+			currentstate="B8B2E8D9-611A-40D5-AD7BAF684C4E4919"
+			defaultstate="B8B2E8D9-611A-40D5-AD7BAF684C4E4919">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="LayoutStallerCallback"/>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoCharacterTraitLevelRecord"
+					context_function_id="EffectList.Transform(UnitsFromEffectNotExcluded).Distinct"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="B8B2E8D9-611A-40D5-AD7BAF684C4E4919"
+					name="default"
+					width="57"
+					height="89"
+					uniqueguid="B8B2E8D9-611A-40D5-AD7BAF684C4E4919">
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
+				</default>
+			</states>
+			<LayoutEngine
+				type="List"
+				spacing="5.00,0.00"
+				itemsperrow="8"
+				sizetocontent="true"
+				secondary_margins="15.00,10.00"
+				margins="10.00,10.00">
+				<columnwidths>
+					<column width="317"/>
+				</columnwidths>
+			</LayoutEngine>
+		</unit_card_list>
 	</components>
 </layout>

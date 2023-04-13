@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="138"
+	version="141"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -155,12 +155,6 @@
 					name="NewState"
 					width="446"
 					height="117"
-					textxoffset="8.00,0.00"
-					textyoffset="6.00,0.00"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
 					uniqueguid="9951C670-78C2-431B-A40DD75DCCA90B54">
 					<imagemetrics>
 						<image
@@ -172,6 +166,13 @@
 							tile="true"
 							margin="16.00,20.00,16.00,20.00"/>
 					</imagemetrics>
+					<component_text
+						textxoffset="8.00,0.00"
+						textyoffset="6.00,0.00"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -214,13 +215,6 @@
 					name="NewState"
 					width="50"
 					height="10"
-					textxoffset="44.00,6.00"
-					textyoffset="4.00,6.00"
-					texthbehaviour="Resize"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
 					uniqueguid="E885CC98-F134-4530-84AE8443684CDEB3">
 					<imagemetrics>
 						<image
@@ -233,6 +227,14 @@
 							canresizeheight="false"
 							canresizewidth="false"/>
 					</imagemetrics>
+					<component_text
+						textxoffset="44.00,6.00"
+						textyoffset="4.00,6.00"
+						texthbehaviour="Resize"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
 				</newstate>
 			</states>
 		</icon>
@@ -257,16 +259,18 @@
 					name="NewState"
 					width="300"
 					height="26"
-					text="Example effect"
-					textxoffset="44.00,6.00"
-					textyoffset="4.00,6.00"
-					texthbehaviour="Resize"
-					textlabel="StateText_57d913fd"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
-					uniqueguid="79916451-3D66-43B0-A418B78441615146"/>
+					uniqueguid="79916451-3D66-43B0-A418B78441615146">
+					<component_text
+						text="Example effect"
+						textxoffset="44.00,6.00"
+						textyoffset="4.00,6.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_57d913fd"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
+				</newstate>
 			</states>
 		</template_entry>
 		<tooltip_ancillary_record
@@ -288,13 +292,15 @@
 					name="NewState"
 					width="446"
 					height="118"
-					textxoffset="8.00,0.00"
-					textyoffset="6.00,0.00"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_tooltip_text"
-					uniqueguid="71433F2E-B938-453C-8B737CDF02A1E330"/>
+					uniqueguid="71433F2E-B938-453C-8B737CDF02A1E330">
+					<component_text
+						textxoffset="8.00,0.00"
+						textyoffset="6.00,0.00"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_tooltip_text"/>
+				</newstate>
 			</states>
 			<LayoutEngine
 				type="List"
@@ -327,17 +333,19 @@
 					name="NewState"
 					width="446"
 					height="23"
-					text="dy_text"
-					textxoffset="14.00,14.00"
-					textyoffset="2.00,5.00"
-					texthbehaviour="Resize"
-					textlabel="StateText_eac1fd51"
-					font_m_font_name="georgia_italic"
-					font_m_size="12"
-					font_m_colour="#A99F89FF"
-					font_m_leading="1"
-					fontcat_name="fe_italic"
-					uniqueguid="B302D2D9-FA15-4063-B029466DB40C4E38"/>
+					uniqueguid="B302D2D9-FA15-4063-B029466DB40C4E38">
+					<component_text
+						text="dy_text"
+						textxoffset="14.00,14.00"
+						textyoffset="2.00,5.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_eac1fd51"
+						font_m_font_name="georgia_italic"
+						font_m_size="12"
+						font_m_colour="#A99F89FF"
+						font_m_leading="1"
+						fontcat_name="fe_italic"/>
+				</newstate>
 			</states>
 		</dy_description_textbox>
 		<dy_heading_textbox
@@ -355,7 +363,7 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoAncillaryRecord"
-					context_function_id="OnscreenName"/>
+					context_function_id="OnscreenName + &quot; (&quot; + RarityName.RemoveTextTags + &quot;)&quot;"/>
 				<callback_with_context
 					callback_id="ContextStateSetter"
 					context_object_id="CcoAncillaryRecord"
@@ -395,16 +403,6 @@
 					name="common"
 					width="446"
 					height="35"
-					text="dy_text"
-					textvalign="Center"
-					textxoffset="40.00,0.00"
-					texthbehaviour="Never split"
-					textlabel="StateText_e3be0eb8"
-					font_m_font_name="brand_header"
-					font_m_size="14"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="FE_header_small"
 					uniqueguid="3361076E-DE7A-467B-860D2FEBF63FEAAF">
 					<imagemetrics>
 						<image
@@ -420,22 +418,23 @@
 							canresizewidth="false"
 							margin="0.00,1.00,0.00,32.00"/>
 					</imagemetrics>
+					<component_text
+						text="dy_text"
+						textvalign="Center"
+						textxoffset="40.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="StateText_e3be0eb8"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="FE_header_small"/>
 				</common>
 				<crafted
 					this="B2775CB5-79A1-46B3-BA2B30D712A99804"
 					name="crafted"
 					width="446"
 					height="35"
-					text="dy_text"
-					textvalign="Center"
-					textxoffset="40.00,0.00"
-					texthbehaviour="Never split"
-					textlabel="StateText_c140e395"
-					font_m_font_name="brand_header"
-					font_m_size="14"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="FE_header_small"
 					uniqueguid="B2775CB5-79A1-46B3-BA2B30D712A99804">
 					<imagemetrics>
 						<image
@@ -450,39 +449,42 @@
 							dock_offset="4.00,0.00"
 							margin="0.00,150.00,0.00,50.00"/>
 					</imagemetrics>
+					<component_text
+						text="dy_text"
+						textvalign="Center"
+						textxoffset="40.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="StateText_c140e395"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="FE_header_small"/>
 				</crafted>
 				<default
 					this="875CBF96-653C-4084-B4FC245A07F22411"
 					name="default"
 					width="446"
 					height="35"
-					text="dy_text"
-					textvalign="Center"
-					texthalign="Center"
-					textxoffset="40.00,0.00"
-					texthbehaviour="Never split"
-					textlabel="StateText_dea9d005"
-					font_m_font_name="brand_header"
-					font_m_size="14"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="FE_header_small"
-					uniqueguid="875CBF96-653C-4084-B4FC245A07F22411"/>
+					uniqueguid="875CBF96-653C-4084-B4FC245A07F22411">
+					<component_text
+						text="dy_text"
+						textvalign="Center"
+						texthalign="Center"
+						textxoffset="40.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="StateText_dea9d005"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="FE_header_small"/>
+				</default>
 				<legendary
 					this="85FFA5AA-F916-4B98-B5ACCCC5C5F62673"
 					name="legendary"
 					width="446"
 					height="35"
-					text="dy_text"
-					textvalign="Center"
-					textxoffset="40.00,0.00"
-					texthbehaviour="Never split"
-					textlabel="StateText_b5323181"
-					font_m_font_name="brand_header"
-					font_m_size="14"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="FE_header_small"
 					uniqueguid="85FFA5AA-F916-4B98-B5ACCCC5C5F62673">
 					<imagemetrics>
 						<image
@@ -498,22 +500,23 @@
 							canresizewidth="false"
 							margin="0.00,1.00,0.00,32.00"/>
 					</imagemetrics>
+					<component_text
+						text="dy_text"
+						textvalign="Center"
+						textxoffset="40.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="StateText_b5323181"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="FE_header_small"/>
 				</legendary>
 				<rare
 					this="AA34FC07-87D6-47D1-BD59D12D892027E3"
 					name="rare"
 					width="446"
 					height="35"
-					text="dy_text"
-					textvalign="Center"
-					textxoffset="40.00,0.00"
-					texthbehaviour="Never split"
-					textlabel="StateText_de75968c"
-					font_m_font_name="brand_header"
-					font_m_size="14"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="FE_header_small"
 					uniqueguid="AA34FC07-87D6-47D1-BD59D12D892027E3">
 					<imagemetrics>
 						<image
@@ -529,22 +532,23 @@
 							canresizewidth="false"
 							margin="0.00,1.00,0.00,32.00"/>
 					</imagemetrics>
+					<component_text
+						text="dy_text"
+						textvalign="Center"
+						textxoffset="40.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="StateText_de75968c"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="FE_header_small"/>
 				</rare>
 				<uncommon
 					this="5B3635FA-9F82-418D-BB3106599FA6B90E"
 					name="uncommon"
 					width="446"
 					height="35"
-					text="dy_text"
-					textvalign="Center"
-					textxoffset="40.00,0.00"
-					texthbehaviour="Never split"
-					textlabel="StateText_78a32735"
-					font_m_font_name="brand_header"
-					font_m_size="14"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="FE_header_small"
 					uniqueguid="5B3635FA-9F82-418D-BB3106599FA6B90E">
 					<imagemetrics>
 						<image
@@ -560,6 +564,17 @@
 							canresizewidth="false"
 							margin="0.00,1.00,0.00,32.00"/>
 					</imagemetrics>
+					<component_text
+						text="dy_text"
+						textvalign="Center"
+						textxoffset="40.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="StateText_78a32735"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="FE_header_small"/>
 				</uncommon>
 			</states>
 		</dy_heading_textbox>

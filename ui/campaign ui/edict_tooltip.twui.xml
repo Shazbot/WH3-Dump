@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="138"
+	version="141"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -10,9 +10,13 @@
 					<dy_heading_textbox this="C4618AB7-D896-4924-ADD80EC7BBC1D009"/>
 					<dy_description_textbox this="FAF9AF4D-E604-4FC4-8F2DA19FD2450621"/>
 					<dy_textbox this="69AFFF88-AE4B-42E8-A8F407412F850FB8"/>
+					<ancillary_list this="018312B0-F553-4DE3-A66F372D606E2B0F">
+						<row_ancillary this="C4BFEEC2-0ABF-494F-81056319D5AA6FD0">
+							<dy_icon this="A4E2943B-0DF9-492E-85829085CEB57F0B"/>
+						</row_ancillary>
+					</ancillary_list>
 					<effect_list this="9E4C603E-2D57-439B-A71C5FA042502D7C">
-						<row_effect this="A0FE8BFF-8876-45F9-B9BA6C6284340205">
-							<dy_text this="11CD7951-99B9-434D-98FE4CB2CB8BFB02"/>
+						<row_effect this="11CD7951-99B9-434D-98FE4CB2CB8BFB02">
 							<dy_icon this="05FBB231-21C3-4E28-B4B7245900615B98"/>
 						</row_effect>
 						<template_breakdown_effect this="2DB63791-D289-4F93-9382EB0A472CF1BD">
@@ -20,8 +24,23 @@
 							<value this="DFFBACCC-4794-4EB8-A74E6513B4C1C95C"/>
 						</template_breakdown_effect>
 					</effect_list>
+					<unit_card_list this="C64AF7DD-D6FC-448C-A1187301E438804B">
+						<unit_card_template this="707E19A0-600A-410C-9CE79BCB6311FE0B"/>
+					</unit_card_list>
+					<dev_excluded_card_list this="BD4436CD-BF5D-4166-BF421AF8F3D1841A"/>
+					<dev_excluded_unit_set_list this="CB85BDD8-F94D-442B-962D8DDC63A1DD60">
+						<dev_excluded_unit_set_template this="C53CEF07-C218-4CCC-BFA448811A994E72"/>
+					</dev_excluded_unit_set_list>
 					<line_break this="5013A069-C7D2-4A50-A4E8E3640A2CFC5B"/>
 				</list_parent>
+				<stick_progress_bar this="92E503CD-AFF7-4E7F-9C291A00F20F52F7">
+					<bar_extents_and_pos this="724B5F28-FD35-493C-88C2FDCCC5338600">
+						<auto_resizing_comp this="C0605BFD-19A4-4D83-B08548650DDAB052">
+							<completed_comp this="B572AEAE-DFC8-4955-835815869016979D"/>
+							<in_progress_comp this="2B7865CB-6A2B-4407-9DCDF41AE5E32499"/>
+						</auto_resizing_comp>
+					</bar_extents_and_pos>
+				</stick_progress_bar>
 			</edict_tooltip>
 		</root>
 	</hierarchy>
@@ -58,6 +77,40 @@
 				</newstate>
 			</states>
 		</root>
+		<completed_comp
+			this="B572AEAE-DFC8-4955-835815869016979D"
+			id="completed_comp"
+			part_of_template="true"
+			uniqueguid_in_template="DE8557ED-0386-4BFF-87237559FEB7164F"
+			uniqueguid="B572AEAE-DFC8-4955-835815869016979D"
+			dimensions="381.00,3.00"
+			dock_point="Center">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="A9897990-35C2-4EBE-8B12B3DA3492EA05"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/sticky_bar_fill.png"
+					uniqueguid="827B81FB-1530-483C-B5FAAA18F3E1F7B4"/>
+			</component_image_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+				<element value="ui/skins/default/sticky_bar_fill.png"/>
+			</override_images>
+		</completed_comp>
 		<edict_tooltip
 			this="FDA72F56-3A2F-4794-81AEB1B265FF7A24"
 			id="edict_tooltip"
@@ -67,7 +120,9 @@
 			uniqueguid="FDA72F56-3A2F-4794-81AEB1B265FF7A24"
 			currentstate="A3FFCDD2-41D4-4292-BCE49EC01BF7881F">
 			<callbackwithcontextlist>
-				<callback_with_context callback_id="CampaignEdictsTooltip"/>
+				<callback_with_context
+					callback_id="CampaignEdictsTooltip"
+					context_object_id="any"/>
 				<callback_with_context callback_id="HorizontalListScreenFitter"/>
 			</callbackwithcontextlist>
 			<states>
@@ -75,14 +130,17 @@
 					this="A3FFCDD2-41D4-4292-BCE49EC01BF7881F"
 					name="NewState"
 					width="392"
-					height="95"
-					textxoffset="8.00,0.00"
-					textyoffset="6.00,0.00"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_tooltip_text"
-					uniqueguid="A3FFCDD2-41D4-4292-BCE49EC01BF7881F"/>
+					height="113"
+					interactive="true"
+					uniqueguid="A3FFCDD2-41D4-4292-BCE49EC01BF7881F">
+					<component_text
+						textxoffset="8.00,0.00"
+						textyoffset="6.00,0.00"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_tooltip_text"/>
+				</newstate>
 			</states>
 			<animations>
 				<expand id="expand">
@@ -98,12 +156,108 @@
 			<LayoutEngine
 				type="HorizontalList"
 				itemsperrow="4"
-				sizetocontent="true">
-				<columnwidths>
-					<:anonymous column_width="446"/>
-				</columnwidths>
-			</LayoutEngine>
+				sizetocontent="true"/>
 		</edict_tooltip>
+		<in_progress_comp
+			this="2B7865CB-6A2B-4407-9DCDF41AE5E32499"
+			id="in_progress_comp"
+			part_of_template="true"
+			uniqueguid_in_template="598D2980-2D81-4431-B8372E64160B25BB"
+			uniqueguid="2B7865CB-6A2B-4407-9DCDF41AE5E32499"
+			dimensions="381.00,3.00"
+			dock_point="Center">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="352CFDB3-2869-4649-B3C4AF9FA036EA01"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/sticky_bar_fill.png"
+					uniqueguid="937009C4-4DCA-4314-8BC2924D46A3A73C"/>
+			</component_image_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+				<element value="ui/skins/default/sticky_bar_fill.png"/>
+			</override_images>
+		</in_progress_comp>
+		<stick_progress_bar
+			this="92E503CD-AFF7-4E7F-9C291A00F20F52F7"
+			id="stick_progress_bar"
+			template_id="stick_progress_bar"
+			part_of_template="true"
+			uniqueguid_in_template="B5D91471-862C-459A-9117F067B37F7730"
+			uniqueguid="92E503CD-AFF7-4E7F-9C291A00F20F52F7"
+			dimensions="1.00,1.00"
+			is_visible="false">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="14CA9F71-FE26-4ADC-A62F7CDC0960D4E7"/>
+			</state_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override1"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</stick_progress_bar>
+		<auto_resizing_comp
+			this="C0605BFD-19A4-4D83-B08548650DDAB052"
+			id="auto_resizing_comp"
+			part_of_template="true"
+			uniqueguid_in_template="9F4A9EBE-A605-40E1-AACEB22402830771"
+			uniqueguid="C0605BFD-19A4-4D83-B08548650DDAB052"
+			dimensions="381.00,3.00"
+			dock_point="Center">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="E44AA814-7021-4F2B-8E37BFA4C29B613A"/>
+			</state_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</auto_resizing_comp>
+		<bar_extents_and_pos
+			this="724B5F28-FD35-493C-88C2FDCCC5338600"
+			id="bar_extents_and_pos"
+			part_of_template="true"
+			uniqueguid_in_template="3F331065-E782-467B-804031161278DDBC"
+			uniqueguid="724B5F28-FD35-493C-88C2FDCCC5338600"
+			dimensions="381.00,3.00"
+			offset="5.00,-11.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="8545C523-0867-44EA-973D5011248C7ACF"/>
+			</state_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</bar_extents_and_pos>
 		<dy_description_textbox
 			this="FAF9AF4D-E604-4FC4-8F2DA19FD2450621"
 			id="dy_description_textbox"
@@ -121,17 +275,19 @@
 					name="NewState"
 					width="392"
 					height="23"
-					text="dy_text"
-					textxoffset="12.00,8.00"
-					textyoffset="2.00,5.00"
-					texthbehaviour="Resize"
-					textlabel="dy_header_NewState_Text_150048"
-					font_m_font_name="georgia_italic"
-					font_m_size="12"
-					font_m_colour="#A99F89FF"
-					font_m_leading="1"
-					fontcat_name="fe_italic"
-					uniqueguid="AA5A9C55-F341-4ECF-BC5969CD82BCD80A"/>
+					uniqueguid="AA5A9C55-F341-4ECF-BC5969CD82BCD80A">
+					<component_text
+						text="dy_text"
+						textxoffset="12.00,8.00"
+						textyoffset="2.00,5.00"
+						texthbehaviour="Resize"
+						textlabel="dy_header_NewState_Text_150048"
+						font_m_font_name="georgia_italic"
+						font_m_size="12"
+						font_m_colour="#A99F89FF"
+						font_m_leading="1"
+						fontcat_name="fe_italic"/>
+				</newstate>
 			</states>
 		</dy_description_textbox>
 		<dy_heading_textbox
@@ -173,16 +329,6 @@
 					name="common"
 					width="392"
 					height="35"
-					text="dy_text"
-					textvalign="Center"
-					textxoffset="40.00,0.00"
-					texthbehaviour="Never split"
-					textlabel="dy_heading_textbox_common_Text_75002a"
-					font_m_font_name="brand_header"
-					font_m_size="14"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="FE_header_small"
 					uniqueguid="3BA929EC-BD3E-40D8-99D8E65CF849CE3D">
 					<imagemetrics>
 						<image
@@ -198,22 +344,23 @@
 							canresizewidth="false"
 							margin="0.00,1.00,0.00,32.00"/>
 					</imagemetrics>
+					<component_text
+						text="dy_text"
+						textvalign="Center"
+						textxoffset="40.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="dy_heading_textbox_common_Text_75002a"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="FE_header_small"/>
 				</common>
 				<crafted
 					this="4A919A72-12AC-4FB9-BA077C3A556820C6"
 					name="crafted"
 					width="392"
 					height="35"
-					text="dy_text"
-					textvalign="Center"
-					textxoffset="40.00,0.00"
-					texthbehaviour="Never split"
-					textlabel="dy_heading_textbox_crafted_Text_75002a"
-					font_m_font_name="brand_header"
-					font_m_size="14"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="FE_header_small"
 					uniqueguid="4A919A72-12AC-4FB9-BA077C3A556820C6">
 					<imagemetrics>
 						<image
@@ -228,39 +375,42 @@
 							dock_offset="4.00,0.00"
 							margin="0.00,150.00,0.00,50.00"/>
 					</imagemetrics>
+					<component_text
+						text="dy_text"
+						textvalign="Center"
+						textxoffset="40.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="dy_heading_textbox_crafted_Text_75002a"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="FE_header_small"/>
 				</crafted>
 				<default
 					this="F0CD2AD2-583A-48CE-89612CADD51B3BE4"
 					name="default"
 					width="392"
 					height="35"
-					text="dy_text"
-					textvalign="Center"
-					texthalign="Center"
-					textxoffset="40.00,0.00"
-					texthbehaviour="Never split"
-					textlabel="dy_heading_textbox_rare_Text_75002a"
-					font_m_font_name="brand_header"
-					font_m_size="14"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="FE_header_small"
-					uniqueguid="F0CD2AD2-583A-48CE-89612CADD51B3BE4"/>
+					uniqueguid="F0CD2AD2-583A-48CE-89612CADD51B3BE4">
+					<component_text
+						text="dy_text"
+						textvalign="Center"
+						texthalign="Center"
+						textxoffset="40.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="dy_heading_textbox_rare_Text_75002a"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="FE_header_small"/>
+				</default>
 				<legendary
 					this="275E3BC2-1BE5-4E18-82A2013A79CA7461"
 					name="legendary"
 					width="392"
 					height="35"
-					text="dy_text"
-					textvalign="Center"
-					textxoffset="40.00,0.00"
-					texthbehaviour="Never split"
-					textlabel="dy_heading_textbox_legendary_Text_75002a"
-					font_m_font_name="brand_header"
-					font_m_size="14"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="FE_header_small"
 					uniqueguid="275E3BC2-1BE5-4E18-82A2013A79CA7461">
 					<imagemetrics>
 						<image
@@ -276,22 +426,23 @@
 							canresizewidth="false"
 							margin="0.00,1.00,0.00,32.00"/>
 					</imagemetrics>
+					<component_text
+						text="dy_text"
+						textvalign="Center"
+						textxoffset="40.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="dy_heading_textbox_legendary_Text_75002a"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="FE_header_small"/>
 				</legendary>
 				<rare
 					this="5A297AC8-6148-4F07-8054E8D567909CD3"
 					name="rare"
 					width="392"
 					height="35"
-					text="dy_text"
-					textvalign="Center"
-					textxoffset="40.00,0.00"
-					texthbehaviour="Never split"
-					textlabel="dy_heading_textbox_rare_Text_75002a"
-					font_m_font_name="brand_header"
-					font_m_size="14"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="FE_header_small"
 					uniqueguid="5A297AC8-6148-4F07-8054E8D567909CD3">
 					<imagemetrics>
 						<image
@@ -307,22 +458,23 @@
 							canresizewidth="false"
 							margin="0.00,1.00,0.00,32.00"/>
 					</imagemetrics>
+					<component_text
+						text="dy_text"
+						textvalign="Center"
+						textxoffset="40.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="dy_heading_textbox_rare_Text_75002a"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="FE_header_small"/>
 				</rare>
 				<uncommon
 					this="11CE5315-3EF8-42F2-ABC4366BF3AAF5C6"
 					name="uncommon"
 					width="392"
 					height="35"
-					text="dy_text"
-					textvalign="Center"
-					textxoffset="40.00,0.00"
-					texthbehaviour="Never split"
-					textlabel="dy_heading_textbox_uncommon_Text_75002a"
-					font_m_font_name="brand_header"
-					font_m_size="14"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="FE_header_small"
 					uniqueguid="11CE5315-3EF8-42F2-ABC4366BF3AAF5C6">
 					<imagemetrics>
 						<image
@@ -338,6 +490,17 @@
 							canresizewidth="false"
 							margin="0.00,1.00,0.00,32.00"/>
 					</imagemetrics>
+					<component_text
+						text="dy_text"
+						textvalign="Center"
+						textxoffset="40.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="dy_heading_textbox_uncommon_Text_75002a"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="FE_header_small"/>
 				</uncommon>
 			</states>
 		</dy_heading_textbox>
@@ -379,36 +542,42 @@
 				</newstate>
 			</states>
 		</dy_icon>
-		<dy_text
+		<row_effect
 			this="11CD7951-99B9-434D-98FE4CB2CB8BFB02"
-			id="dy_text"
-			offset="44.00,0.00"
+			id="row_effect"
 			allowhorizontalresize="false"
 			visible="false"
-			docking="Top Left"
-			dock_offset="44.00,0.00"
 			priority="255"
 			tooltipslocalised="true"
 			uniqueguid="11CD7951-99B9-434D-98FE4CB2CB8BFB02"
 			currentstate="CEC8D14E-B14E-446D-9159A8005D83C4C6">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="AbilityEffectIcon"
+					context_object_id="CcoEffect"/>
+			</callbackwithcontextlist>
 			<states>
 				<newstate
 					this="CEC8D14E-B14E-446D-9159A8005D83C4C6"
 					name="NewState"
-					width="339"
+					width="335"
 					height="26"
-					text="dy_effect_text"
-					textxoffset="0.00,12.00"
-					textyoffset="6.00,4.00"
-					texthbehaviour="Resize"
-					textlabel="title_NewState_Text_40051"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
-					uniqueguid="CEC8D14E-B14E-446D-9159A8005D83C4C6"/>
+					interactive="true"
+					disabled="true"
+					uniqueguid="CEC8D14E-B14E-446D-9159A8005D83C4C6">
+					<component_text
+						text="dy_effect_text"
+						textxoffset="44.00,20.00"
+						textyoffset="6.00,4.00"
+						texthbehaviour="Resize"
+						textlabel="title_NewState_Text_40051"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
+				</newstate>
 			</states>
-		</dy_text>
+		</row_effect>
 		<dy_textbox
 			this="69AFFF88-AE4B-42E8-A8F407412F850FB8"
 			id="dy_textbox"
@@ -426,16 +595,18 @@
 					name="NewState"
 					width="392"
 					height="23"
-					text="dy_text"
-					textxoffset="12.00,8.00"
-					textyoffset="2.00,5.00"
-					texthbehaviour="Resize"
-					textlabel="dy_header_NewState_Text_150048"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
-					uniqueguid="A44E0642-904E-484F-B97C6F14B92E824A"/>
+					uniqueguid="A44E0642-904E-484F-B97C6F14B92E824A">
+					<component_text
+						text="dy_text"
+						textxoffset="12.00,8.00"
+						textyoffset="2.00,5.00"
+						texthbehaviour="Resize"
+						textlabel="dy_header_NewState_Text_150048"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
+				</newstate>
 			</states>
 		</dy_textbox>
 		<effect_list
@@ -443,6 +614,7 @@
 			id="effect_list"
 			offset="0.00,85.00"
 			allowhorizontalresize="false"
+			visible="false"
 			priority="255"
 			tooltipslocalised="true"
 			uniqueguid="9E4C603E-2D57-439B-A71C5FA042502D7C"
@@ -456,13 +628,16 @@
 					name="NewState"
 					width="378"
 					height="5"
-					textxoffset="8.00,0.00"
-					textyoffset="6.00,0.00"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
-					uniqueguid="2BA9D959-4ADA-4879-A89AB3FF8BB8B97A"/>
+					disabled="true"
+					uniqueguid="2BA9D959-4ADA-4879-A89AB3FF8BB8B97A">
+					<component_text
+						textxoffset="8.00,0.00"
+						textyoffset="6.00,0.00"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
+				</newstate>
 			</states>
 			<LayoutEngine
 				type="List"
@@ -477,7 +652,7 @@
 		<line_break
 			this="5013A069-C7D2-4A50-A4E8E3640A2CFC5B"
 			id="line_break"
-			offset="0.00,90.00"
+			offset="0.00,96.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			priority="255"
@@ -491,12 +666,14 @@
 					name="NewState"
 					width="386"
 					height="1"
-					font_m_font_name="la_gioconda_uppercase"
-					font_m_size="16"
-					font_m_colour="#000000FF"
-					font_m_leading="4"
-					fontcat_name="fe_button_text"
-					uniqueguid="23F7BE84-A2A8-4E21-955EC1A389D1723E"/>
+					uniqueguid="23F7BE84-A2A8-4E21-955EC1A389D1723E">
+					<component_text
+						font_m_font_name="la_gioconda_uppercase"
+						font_m_size="16"
+						font_m_colour="#000000FF"
+						font_m_leading="4"
+						fontcat_name="fe_button_text"/>
+				</newstate>
 			</states>
 		</line_break>
 		<list_parent
@@ -521,13 +698,7 @@
 					this="3839248E-7EA2-4202-A2B98D6442C536BB"
 					name="NewState"
 					width="392"
-					height="95"
-					textxoffset="8.00,0.00"
-					textyoffset="6.00,0.00"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
+					height="113"
 					uniqueguid="3839248E-7EA2-4202-A2B98D6442C536BB">
 					<imagemetrics>
 						<image
@@ -535,9 +706,16 @@
 							uniqueguid="571E61C1-A56E-4FD6-ADA345BF8328457A"
 							componentimage="B6112DF6-EDE4-4EB7-A399C58C8F60F4B2"
 							width="392"
-							height="95"
+							height="113"
 							margin="16.00,20.00,16.00,20.00"/>
 					</imagemetrics>
+					<component_text
+						textxoffset="8.00,0.00"
+						textyoffset="6.00,0.00"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
 				</newstate>
 			</states>
 			<animations>
@@ -560,32 +738,12 @@
 			<LayoutEngine
 				type="List"
 				sizetocontent="true"
-				margins="4.00,4.00">
+				margins="4.00,16.00">
 				<columnwidths>
 					<column width="346"/>
 				</columnwidths>
 			</LayoutEngine>
 		</list_parent>
-		<row_effect
-			this="A0FE8BFF-8876-45F9-B9BA6C6284340205"
-			id="row_effect"
-			allowhorizontalresize="false"
-			visible="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="A0FE8BFF-8876-45F9-B9BA6C6284340205"
-			updatewhennotvisible="true"
-			currentstate="4BD4867A-D362-4E03-AA9E3D227F9D8D14"
-			defaultstate="4BD4867A-D362-4E03-AA9E3D227F9D8D14">
-			<states>
-				<newstate
-					this="4BD4867A-D362-4E03-AA9E3D227F9D8D14"
-					name="NewState"
-					width="375"
-					height="30"
-					uniqueguid="4BD4867A-D362-4E03-AA9E3D227F9D8D14"/>
-			</states>
-		</row_effect>
 		<template_breakdown_effect
 			this="2DB63791-D289-4F93-9382EB0A472CF1BD"
 			id="template_breakdown_effect"
@@ -601,12 +759,14 @@
 					name="NewState"
 					width="332"
 					height="27"
-					textvalign="Center"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
-					uniqueguid="035E4AB9-1B90-4243-B76FDCCAE6FC9DE3"/>
+					uniqueguid="035E4AB9-1B90-4243-B76FDCCAE6FC9DE3">
+					<component_text
+						textvalign="Center"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
+				</newstate>
 			</states>
 		</template_breakdown_effect>
 		<title
@@ -627,15 +787,17 @@
 					name="NewState"
 					width="293"
 					height="20"
-					text="Effect name"
-					textvalign="Center"
-					textxoffset="12.00,0.00"
-					textlabel="title_NewState_Text_740064"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
-					uniqueguid="CF43D581-77BD-4149-B14442A597220378"/>
+					uniqueguid="CF43D581-77BD-4149-B14442A597220378">
+					<component_text
+						text="Effect name"
+						textvalign="Center"
+						textxoffset="12.00,0.00"
+						textlabel="title_NewState_Text_740064"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
+				</newstate>
 			</states>
 		</title>
 		<value
@@ -656,30 +818,384 @@
 					name="negative"
 					width="39"
 					height="20"
-					text="5"
-					textvalign="Center"
-					texthalign="Center"
-					textlabel="value_negative_Text_35"
-					font_m_size="12"
-					font_m_colour="#FF2D2DFF"
-					font_m_leading="3"
-					fontcat_name="fe_tooltip_red"
-					uniqueguid="2AD35150-A0DE-43EA-A4CA1C4675474FBF"/>
+					uniqueguid="2AD35150-A0DE-43EA-A4CA1C4675474FBF">
+					<component_text
+						text="5"
+						textvalign="Center"
+						texthalign="Center"
+						textlabel="value_negative_Text_35"
+						font_m_size="12"
+						font_m_colour="#FF2D2DFF"
+						font_m_leading="3"
+						fontcat_name="fe_tooltip_red"/>
+				</negative>
 				<positive
 					this="56FC0D86-2A35-45AD-9366ABF157033C2C"
 					name="positive"
 					width="39"
 					height="20"
-					text="5"
-					textvalign="Center"
-					texthalign="Center"
-					textlabel="value_positive_Text_35"
-					font_m_size="12"
-					font_m_colour="#A0FF37FF"
-					font_m_leading="3"
-					fontcat_name="fe_tooltip_green"
-					uniqueguid="56FC0D86-2A35-45AD-9366ABF157033C2C"/>
+					uniqueguid="56FC0D86-2A35-45AD-9366ABF157033C2C">
+					<component_text
+						text="5"
+						textvalign="Center"
+						texthalign="Center"
+						textlabel="value_positive_Text_35"
+						font_m_size="12"
+						font_m_colour="#A0FF37FF"
+						font_m_leading="3"
+						fontcat_name="fe_tooltip_green"/>
+				</positive>
 			</states>
 		</value>
+		<unit_card_list
+			this="C64AF7DD-D6FC-448C-A1187301E438804B"
+			id="unit_card_list"
+			offset="0.00,85.00"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="C64AF7DD-D6FC-448C-A1187301E438804B"
+			currentstate="A632D43D-9DE0-486D-A090627A256E029A"
+			defaultstate="A632D43D-9DE0-486D-A090627A256E029A">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="LayoutStallerCallback"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="A632D43D-9DE0-486D-A090627A256E029A"
+					name="default"
+					width="16"
+					height="11"
+					uniqueguid="A632D43D-9DE0-486D-A090627A256E029A">
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
+				</default>
+			</states>
+			<LayoutEngine
+				type="List"
+				spacing="3.00,3.00"
+				itemsperrow="10"
+				sizetocontent="true"
+				secondary_margins="15.00,15.00"
+				margins="10.00,10.00">
+				<columnwidths>
+					<column width="317"/>
+				</columnwidths>
+			</LayoutEngine>
+		</unit_card_list>
+		<unit_card_template
+			this="707E19A0-600A-410C-9CE79BCB6311FE0B"
+			id="unit_card_template"
+			offset="15.00,10.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="707E19A0-600A-410C-9CE79BCB6311FE0B"
+			isaspectratiolocked="true"
+			currentstate="07AA8FFB-9433-4040-B79ED43CD8998DDC"
+			defaultstate="07AA8FFB-9433-4040-B79ED43CD8998DDC">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoMainUnitRecord"
+					context_function_id="IconPath">
+					<child_m_user_properties>
+						<property
+							name="image_index"
+							value="1"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="UnitInfoPanelMouseOver"
+					context_object_id="CcoMainUnitRecord"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="9B6CA228-B53D-4197-BC0F513E0EEB6E2F"
+					uniqueguid="9B6CA228-B53D-4197-BC0F513E0EEB6E2F"
+					imagepath="ui/skins/default/unit_card_build_frame.png"/>
+				<component_image
+					this="2C416D61-96B8-40B2-8E714D4D3A54207F"
+					uniqueguid="2C416D61-96B8-40B2-8E714D4D3A54207F"
+					imagepath="ui/skins/default/unit_card_ph.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="07AA8FFB-9433-4040-B79ED43CD8998DDC"
+					name="default"
+					height="69"
+					interactive="true"
+					uniqueguid="07AA8FFB-9433-4040-B79ED43CD8998DDC">
+					<imagemetrics>
+						<image
+							this="5E7369BB-93FA-4894-9CAD7BD7ED554249"
+							uniqueguid="5E7369BB-93FA-4894-9CAD7BD7ED554249"
+							componentimage="2C416D61-96B8-40B2-8E714D4D3A54207F"
+							height="69"/>
+						<image
+							this="C75638C4-D95A-4020-8170DAC9DAD11374"
+							uniqueguid="C75638C4-D95A-4020-8170DAC9DAD11374"
+							componentimage="9B6CA228-B53D-4197-BC0F513E0EEB6E2F"
+							height="69"
+							margin="5.00,5.00,5.00,5.00"/>
+					</imagemetrics>
+					<component_text
+						textvalign="Center"
+						textxoffset="26.00,0.00"
+						font_m_size="12"
+						font_m_colour="#A0FF37FF"
+						font_m_leading="3"
+						fontcat_name="fe_tooltip_green"/>
+				</default>
+			</states>
+		</unit_card_template>
+		<dev_excluded_card_list
+			this="BD4436CD-BF5D-4166-BF421AF8F3D1841A"
+			id="dev_excluded_card_list"
+			is_dev_only="true"
+			offset="0.00,96.00"
+			visible="false"
+			priority="255"
+			tooltipslocalised="true"
+			component_level_text="Dev - UI excluded units"
+			text_label="ComponentText_6b558991"
+			uniqueguid="BD4436CD-BF5D-4166-BF421AF8F3D1841A"
+			currentstate="3217A88E-5CD2-40DE-ADBF7FD7D96C197E"
+			defaultstate="3217A88E-5CD2-40DE-ADBF7FD7D96C197E">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="LayoutStallerCallback"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="3217A88E-5CD2-40DE-ADBF7FD7D96C197E"
+					name="default"
+					width="350"
+					height="21"
+					uniqueguid="3217A88E-5CD2-40DE-ADBF7FD7D96C197E">
+					<component_text
+						textxoffset="20.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="StateText_1614c1f5"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"
+						font_colour_override_preset_key="fabulous_pink"/>
+				</default>
+			</states>
+			<LayoutEngine
+				type="List"
+				spacing="5.00,0.00"
+				itemsperrow="8"
+				sizetocontent="true"
+				secondary_margins="15.00,10.00"
+				min_dimensions="350.00,0.00"
+				margins="20.00,20.00">
+				<columnwidths>
+					<column width="317"/>
+				</columnwidths>
+			</LayoutEngine>
+		</dev_excluded_card_list>
+		<dev_excluded_unit_set_list
+			this="CB85BDD8-F94D-442B-962D8DDC63A1DD60"
+			id="dev_excluded_unit_set_list"
+			is_dev_only="true"
+			offset="0.00,96.00"
+			visible="false"
+			priority="255"
+			tooltipslocalised="true"
+			component_level_text="Dev - UI excluded unit sets"
+			text_label="ComponentText_aa3bbda4"
+			uniqueguid="CB85BDD8-F94D-442B-962D8DDC63A1DD60"
+			currentstate="846ADF80-2359-4E52-83FCE8F04797EA5D"
+			defaultstate="846ADF80-2359-4E52-83FCE8F04797EA5D">
+			<states>
+				<default
+					this="846ADF80-2359-4E52-83FCE8F04797EA5D"
+					name="default"
+					width="16"
+					height="11"
+					uniqueguid="846ADF80-2359-4E52-83FCE8F04797EA5D">
+					<component_text
+						textxoffset="20.00,0.00"
+						texthbehaviour="Never split"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"
+						font_colour_override_preset_key="fabulous_pink"/>
+				</default>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true"
+				secondary_margins="0.00,15.00"
+				margins="20.00,10.00">
+				<columnwidths>
+					<column width="32"/>
+				</columnwidths>
+			</LayoutEngine>
+		</dev_excluded_unit_set_list>
+		<dev_excluded_unit_set_template
+			this="C53CEF07-C218-4CCC-BFA448811A994E72"
+			id="dev_excluded_unit_set_template"
+			offset="0.00,20.00"
+			allowverticalresize="false"
+			visible="false"
+			priority="255"
+			tooltipslocalised="true"
+			component_level_text="dy_unit_set_text"
+			text_label="ComponentText_6742db1c"
+			uniqueguid="C53CEF07-C218-4CCC-BFA448811A994E72"
+			currentstate="033A91E2-F063-410E-AA8A17DFF66063A7"
+			defaultstate="033A91E2-F063-410E-AA8A17DFF66063A7">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoString"
+					context_function_id="Value"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="033A91E2-F063-410E-AA8A17DFF66063A7"
+					name="default"
+					width="152"
+					height="16"
+					uniqueguid="033A91E2-F063-410E-AA8A17DFF66063A7">
+					<component_text
+						textxoffset="40.00,0.00"
+						texthbehaviour="Resize"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"
+						font_colour_override_preset_key="fabulous_pink"/>
+				</default>
+			</states>
+		</dev_excluded_unit_set_template>
+		<ancillary_list
+			this="018312B0-F553-4DE3-A66F372D606E2B0F"
+			id="ancillary_list"
+			offset="0.00,85.00"
+			allowhorizontalresize="false"
+			visible="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="018312B0-F553-4DE3-A66F372D606E2B0F"
+			currentstate="CA9038E6-83E8-4464-908E876B677C4FC4">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="LayoutStallerCallback"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="CA9038E6-83E8-4464-908E876B677C4FC4"
+					name="NewState"
+					width="378"
+					height="5"
+					disabled="true"
+					uniqueguid="CA9038E6-83E8-4464-908E876B677C4FC4">
+					<component_text
+						textxoffset="8.00,0.00"
+						textyoffset="6.00,0.00"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
+				</newstate>
+			</states>
+			<LayoutEngine
+				type="List"
+				spacing="0.00,5.00"
+				sizetocontent="true"
+				margins="0.00,4.00">
+				<columnwidths>
+					<column width="340"/>
+				</columnwidths>
+			</LayoutEngine>
+		</ancillary_list>
+		<dy_icon
+			this="A4E2943B-0DF9-492E-85829085CEB57F0B"
+			id="dy_icon"
+			offset="16.00,0.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			docking="Top Left"
+			dock_offset="16.00,0.00"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="A4E2943B-0DF9-492E-85829085CEB57F0B"
+			currentstate="67F159AA-88CC-44A6-97112E217AEACE89"
+			defaultstate="67F159AA-88CC-44A6-97112E217AEACE89">
+			<componentimages>
+				<component_image
+					this="F9EFDF66-EE11-4FAE-A9AA4D497CDB316A"
+					uniqueguid="F9EFDF66-EE11-4FAE-A9AA4D497CDB316A"
+					imagepath="ui/skins/default/technology_positive.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="67F159AA-88CC-44A6-97112E217AEACE89"
+					name="NewState"
+					width="24"
+					height="24"
+					uniqueguid="67F159AA-88CC-44A6-97112E217AEACE89">
+					<imagemetrics>
+						<image
+							this="77C1BBC0-14DB-407F-955EB4B2852359B9"
+							uniqueguid="77C1BBC0-14DB-407F-955EB4B2852359B9"
+							componentimage="F9EFDF66-EE11-4FAE-A9AA4D497CDB316A"
+							width="24"
+							height="24"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</dy_icon>
+		<row_ancillary
+			this="C4BFEEC2-0ABF-494F-81056319D5AA6FD0"
+			id="row_ancillary"
+			allowhorizontalresize="false"
+			visible="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="C4BFEEC2-0ABF-494F-81056319D5AA6FD0"
+			currentstate="2BF81C36-AE34-4DC2-AF4380294C4DD31B">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="AbilityEffectIcon"
+					context_object_id="CcoAncillaryRecord"/>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoAncillaryRecord"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="2BF81C36-AE34-4DC2-AF4380294C4DD31B"
+					name="NewState"
+					width="339"
+					height="26"
+					interactive="true"
+					disabled="true"
+					uniqueguid="2BF81C36-AE34-4DC2-AF4380294C4DD31B">
+					<component_text
+						text="dy_effect_text"
+						textxoffset="44.00,20.00"
+						textyoffset="6.00,4.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_d98d833f"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
+				</newstate>
+			</states>
+		</row_ancillary>
 	</components>
 </layout>

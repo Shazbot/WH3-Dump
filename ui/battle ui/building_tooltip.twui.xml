@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="137"
+	version="141"
 	comment=""
 	precache_condition="BattleRoot.BuildingsList.IsEmpty == false">
 	<hierarchy>
@@ -169,6 +169,7 @@
 			this="747CAAD5-3165-4D29-95966135EE8B0622"
 			id="attribute_list"
 			part_of_template="true"
+			uniqueguid_in_template="ED0CAF71-CF86-47C8-904AC5515C4C627A"
 			uniqueguid="747CAAD5-3165-4D29-95966135EE8B0622"
 			dimensions="360.00,24.00">
 			<state_uniqueguids>
@@ -199,6 +200,7 @@
 			this="7EA60673-7F0E-4749-8B461BA575E52DD0"
 			id="label_cooldown_modifier"
 			part_of_template="true"
+			uniqueguid_in_template="14D1A036-2E04-425B-B2C34DC5249D4774"
 			uniqueguid="7EA60673-7F0E-4749-8B461BA575E52DD0"
 			dimensions="190.00,24.00"
 			priority="255">
@@ -232,6 +234,7 @@
 			this="7396A62F-A784-42D3-913B6939925CDB4E"
 			id="value_damage"
 			part_of_template="true"
+			uniqueguid_in_template="516C85C8-EC63-4998-AB21FFDD06A99398"
 			uniqueguid="7396A62F-A784-42D3-913B6939925CDB4E"
 			dimensions="151.00,24.00"
 			priority="255">
@@ -244,8 +247,13 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoSpecialAbilityPhaseRecord"
-					context_function_id="(x = DamagePerSecond) =&gt; { x | Format(&quot;%d - %d&quot;, RoundFloat(0.5 * x), x) }"/>
+					context_function_id="IntensifiedRangeIntValueText(DamagePerSecond, &quot;%d-%d&quot;, 0.5)"/>
 			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="suppress_localise_asserts"
+					value=""/>
+			</user_properties>
 			<localised_texts>
 				<localised_text/>
 				<localised_text
@@ -259,8 +267,9 @@
 			this="ED6A9421-2FA9-46EB-B084E31D8CE8FC95"
 			id="label_phase_damage_parent"
 			part_of_template="true"
+			uniqueguid_in_template="80001692-BC35-42EA-AB26F5F22B051E82"
 			uniqueguid="ED6A9421-2FA9-46EB-B084E31D8CE8FC95"
-			dimensions="340.00,24.00"
+			dimensions="346.00,24.00"
 			priority="255">
 			<state_uniqueguids>
 				<state_uniqueguid
@@ -284,6 +293,7 @@
 			this="4AAB68B3-D8B4-463C-8AC8154A3F055DBE"
 			id="value_heal"
 			part_of_template="true"
+			uniqueguid_in_template="F1B42246-1652-4945-8F0833F76AE7E43F"
 			uniqueguid="4AAB68B3-D8B4-463C-8AC8154A3F055DBE"
 			dimensions="27.00,24.00"
 			priority="255">
@@ -296,8 +306,13 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoSpecialAbilityPhaseRecord"
-					context_function_id="FormatPercentage(TotalHealPercent*100 / MaxNumericValue(Duration, 1.0))"/>
+					context_function_id="IntensifiedValueText(TotalHealPercent *100 / MaxNumericValue(Duration, 1.0), &quot;%+.2f%%&quot;)"/>
 			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="suppress_localise_asserts"
+					value=""/>
+			</user_properties>
 			<localised_texts>
 				<localised_text/>
 				<localised_text
@@ -311,8 +326,9 @@
 			this="0F597A1A-A5D3-4219-94E7FB174A92B8AF"
 			id="label_phase_heal_parent"
 			part_of_template="true"
+			uniqueguid_in_template="6C71D3E9-B21A-499F-BE595BB26ED6ECFF"
 			uniqueguid="0F597A1A-A5D3-4219-94E7FB174A92B8AF"
-			dimensions="350.00,24.00"
+			dimensions="222.00,24.00"
 			priority="255">
 			<state_uniqueguids>
 				<state_uniqueguid
@@ -336,6 +352,7 @@
 			this="5926B8AC-61E5-4B53-855123ED7A4A6CC0"
 			id="label_recharge_modifier"
 			part_of_template="true"
+			uniqueguid_in_template="3A05E05C-F346-4244-84055E4DAAF1F72B"
 			uniqueguid="5926B8AC-61E5-4B53-855123ED7A4A6CC0"
 			dimensions="340.00,24.00"
 			priority="255">
@@ -364,6 +381,7 @@
 			this="8061C8B2-3C8A-4FB9-A3376842128BE3E5"
 			id="label_recharge_modifier_value"
 			part_of_template="true"
+			uniqueguid_in_template="AEFEF61F-3D6A-4B1D-BEEAE95ECB2AF10E"
 			uniqueguid="8061C8B2-3C8A-4FB9-A3376842128BE3E5"
 			dimensions="29.00,24.00"
 			priority="255">
@@ -379,12 +397,17 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoSpecialAbilityPhaseRecord"
-					context_function_id="Format(&quot;%+d&quot;, RoundFloat(AbilityRechargeChange)) + Loc(&quot;seconds_abbreviated&quot;)"/>
+					context_function_id="IntensifiedIntValueText(RoundFloat(AbilityRechargeChange), &quot;%+d&quot; + Loc(&quot;seconds_abbreviated&quot;))"/>
 				<callback_with_context
 					callback_id="ContextStateSetter"
 					context_object_id="CcoSpecialAbilityPhaseRecord"
 					context_function_id="AbilityRechargeChange &gt; 0"/>
 			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="suppress_localise_asserts"
+					value=""/>
+			</user_properties>
 			<localised_texts>
 				<localised_text/>
 				<localised_text
@@ -404,6 +427,7 @@
 			id="projectile_phase_phase"
 			template_id="phase_effect"
 			part_of_template="true"
+			uniqueguid_in_template="439A25D8-93EF-4237-A6AC5071A3B38702"
 			uniqueguid="70D89683-6890-4351-ACDA4B044AE4B120"
 			dimensions="360.00,362.00">
 			<state_uniqueguids>
@@ -413,6 +437,9 @@
 			</state_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context callback_id="LayoutStallerCallback"/>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoBattleAbility"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -430,6 +457,7 @@
 			this="42CBC267-8880-4280-BA051205EDD2ED08"
 			id="phase_effect_flag_list"
 			part_of_template="true"
+			uniqueguid_in_template="7A4D8CDD-8FE0-4D0D-90BD2EE7D5915634"
 			uniqueguid="42CBC267-8880-4280-BA051205EDD2ED08"
 			dimensions="360.00,24.00">
 			<state_uniqueguids>
@@ -460,6 +488,7 @@
 			this="A0D09DE8-621E-493C-B358A2857D0C3325"
 			id="template_attribute"
 			part_of_template="true"
+			uniqueguid_in_template="1D709596-05F8-424C-B3A540DBB1039322"
 			uniqueguid="A0D09DE8-621E-493C-B358A2857D0C3325"
 			dimensions="345.00,24.00">
 			<state_uniqueguids>
@@ -478,6 +507,7 @@
 			this="599A6FA3-A38F-4759-850C5C63AC5DE315"
 			id="template_effect_flag"
 			part_of_template="true"
+			uniqueguid_in_template="A9332F33-5C82-4252-9CC8082C6FFAA360"
 			uniqueguid="599A6FA3-A38F-4759-850C5C63AC5DE315"
 			dimensions="360.00,24.00">
 			<state_uniqueguids>
@@ -504,6 +534,7 @@
 			this="7A7FF40F-1071-44DB-AE0F3C8DCAE7C07B"
 			id="value_heal_duration_infinite"
 			part_of_template="true"
+			uniqueguid_in_template="D685091B-0C9A-47ED-AEA9009C00454F03"
 			uniqueguid="7A7FF40F-1071-44DB-AE0F3C8DCAE7C07B"
 			dimensions="74.00,24.00"
 			is_visible="false"
@@ -535,6 +566,7 @@
 			this="C0578CFE-9630-4A78-9FB627289A431841"
 			id="label_damage"
 			part_of_template="true"
+			uniqueguid_in_template="71AC2041-F6AE-454C-8278FA2BF6006CCC"
 			uniqueguid="C0578CFE-9630-4A78-9FB627289A431841"
 			dimensions="190.00,24.00"
 			priority="255">
@@ -568,6 +600,7 @@
 			this="A672053A-0E3D-4912-932E30F7845BC067"
 			id="label_heal"
 			part_of_template="true"
+			uniqueguid_in_template="58BCF85D-0FEA-46EE-985E4F6E68E7A056"
 			uniqueguid="A672053A-0E3D-4912-932E30F7845BC067"
 			dimensions="190.00,24.00"
 			priority="255">
@@ -588,6 +621,7 @@
 			this="9F7C89B0-3B47-4DC5-A0CB38CDBB4BCD3B"
 			id="label_mana_depletion"
 			part_of_template="true"
+			uniqueguid_in_template="672FB2C6-9EE7-4D7B-8B0E5A0442F03038"
 			uniqueguid="9F7C89B0-3B47-4DC5-A0CB38CDBB4BCD3B"
 			dimensions="29.00,24.00"
 			priority="255">
@@ -600,8 +634,13 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoSpecialAbilityPhaseRecord"
-					context_function_id="Format(&quot;%+.2f&quot;, ManaMaxDepletionMod)"/>
+					context_function_id="IntensifiedValueText(ManaMaxDepletionMod, &quot;%+.2f&quot;)"/>
 			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="suppress_localise_asserts"
+					value=""/>
+			</user_properties>
 			<localised_texts>
 				<localised_text/>
 				<localised_text
@@ -615,6 +654,7 @@
 			this="7DF220DC-575A-41CC-B9AEFB74446C1D13"
 			id="label_mana_depletion_header"
 			part_of_template="true"
+			uniqueguid_in_template="BD18E2F4-CDC8-4BB1-906C7A3DA9326A4B"
 			uniqueguid="7DF220DC-575A-41CC-B9AEFB74446C1D13"
 			dimensions="190.00,24.00"
 			priority="255">
@@ -635,8 +675,9 @@
 			this="50DB948E-C508-4A4D-ACAF17CEC3E00A6F"
 			id="label_mana_depletion_parent"
 			part_of_template="true"
+			uniqueguid_in_template="EBD323DB-BB15-4159-A6CE2BF275019F78"
 			uniqueguid="50DB948E-C508-4A4D-ACAF17CEC3E00A6F"
-			dimensions="340.00,24.00"
+			dimensions="224.00,24.00"
 			priority="255">
 			<state_uniqueguids>
 				<state_uniqueguid
@@ -660,6 +701,7 @@
 			this="0213EB18-1B16-42A7-BE6278A8ACA4824A"
 			id="label_mana_recharge"
 			part_of_template="true"
+			uniqueguid_in_template="51994602-EDEB-4B5F-8AEDBF742323529B"
 			uniqueguid="0213EB18-1B16-42A7-BE6278A8ACA4824A"
 			dimensions="29.00,24.00"
 			priority="255">
@@ -672,8 +714,13 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoSpecialAbilityPhaseRecord"
-					context_function_id="(regen = ManaRegenMod * 100) =&gt; { regen | regen &gt; 0 =&gt; Format(&quot;+%d%%&quot;, RoundFloat(regen)) | Format(&quot;-%d%%&quot;, RoundFloat(Abs(regen))) }"/>
+					context_function_id="IntensifiedIntValueText(RoundFloat(Abs(ManaRegenMod * 100)), GetIfElse(ManaRegenMod &gt; 0, &quot;+%d%%&quot;, &quot;-%d%%&quot;))"/>
 			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="suppress_localise_asserts"
+					value=""/>
+			</user_properties>
 			<localised_texts>
 				<localised_text/>
 				<localised_text
@@ -687,6 +734,7 @@
 			this="2198BEB9-A6E6-492F-8E35230C9BB17EE9"
 			id="label_mana_recharge_header"
 			part_of_template="true"
+			uniqueguid_in_template="2B6929D7-2998-4B6A-AD7E2B1CCF762B19"
 			uniqueguid="2198BEB9-A6E6-492F-8E35230C9BB17EE9"
 			dimensions="190.00,24.00"
 			priority="255">
@@ -707,6 +755,7 @@
 			this="C150DACE-F31F-4099-B6EBC241F2C23601"
 			id="label_mana_recharge_parent"
 			part_of_template="true"
+			uniqueguid_in_template="0B876DD7-4529-4749-B456B3E01007FA96"
 			uniqueguid="C150DACE-F31F-4099-B6EBC241F2C23601"
 			dimensions="340.00,24.00"
 			priority="255">
@@ -732,6 +781,7 @@
 			this="8B2D5B4E-DEBE-40CD-ABE72AD5BDF04F4B"
 			id="attribute_image"
 			part_of_template="true"
+			uniqueguid_in_template="721860B0-F99D-4929-AC18FFD0B45DF3A6"
 			uniqueguid="8B2D5B4E-DEBE-40CD-ABE72AD5BDF04F4B"
 			dimensions="24.00,24.00"
 			dock_point="Center Right"
@@ -761,6 +811,7 @@
 			this="DB5868CC-85AF-4BE1-AAAFD5BBBCAFE4C8"
 			id="attribute_image_parent"
 			part_of_template="true"
+			uniqueguid_in_template="C8C1E3FA-875C-4ED0-8DDD3D6E91FA7B1A"
 			uniqueguid="DB5868CC-85AF-4BE1-AAAFD5BBBCAFE4C8"
 			dimensions="45.00,24.00">
 			<state_uniqueguids>
@@ -779,6 +830,7 @@
 			this="5E2838F3-3D2E-44E5-A19E2E9DC910D26E"
 			id="attribute_text"
 			part_of_template="true"
+			uniqueguid_in_template="27B8E2F0-7476-48F4-95B1FAC23C88EA53"
 			uniqueguid="5E2838F3-3D2E-44E5-A19E2E9DC910D26E"
 			dimensions="300.00,24.00">
 			<state_uniqueguids>
@@ -811,6 +863,7 @@
 			this="7DF59566-84C2-452F-887E30EB8A8730DC"
 			id="effect_icon"
 			part_of_template="true"
+			uniqueguid_in_template="8710D3F4-8DB5-4610-A6C9290AAE102A36"
 			uniqueguid="7DF59566-84C2-452F-887E30EB8A8730DC"
 			dimensions="24.00,24.00"
 			dock_point="Center Right">
@@ -843,6 +896,7 @@
 			this="46917F3A-C3B1-4CAC-8ED9A7EFC5653393"
 			id="effect_icon_parent"
 			part_of_template="true"
+			uniqueguid_in_template="6C766B26-2ED4-46E5-AE8226F0EC78E92B"
 			uniqueguid="46917F3A-C3B1-4CAC-8ED9A7EFC5653393"
 			dimensions="45.00,24.00">
 			<state_uniqueguids>
@@ -861,8 +915,9 @@
 			this="3EE6ED8A-B105-4DAD-AE28812B6A0F7B16"
 			id="ignition_imbuement_value"
 			part_of_template="true"
+			uniqueguid_in_template="2AAB8F76-BAB8-481A-9341969FDAE21D51"
 			uniqueguid="3EE6ED8A-B105-4DAD-AE28812B6A0F7B16"
-			dimensions="131.00,24.00"
+			dimensions="232.00,16.00"
 			priority="255">
 			<state_uniqueguids>
 				<state_uniqueguid
@@ -902,11 +957,6 @@
 					name="NewState"
 					width="1600"
 					height="900"
-					font_m_font_name="dev_font"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="dev_text"
 					interactive="true"
 					uniqueguid="B11D69AE-D3B6-44C7-A34439979F4BE752">
 					<imagemetrics>
@@ -918,6 +968,12 @@
 							height="960"
 							colour="#7F7F7FFF"/>
 					</imagemetrics>
+					<component_text
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
 				</newstate>
 			</states>
 		</root>
@@ -938,13 +994,15 @@
 					name="NewState"
 					width="415"
 					height="447"
-					font_m_font_name="dev_font"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="dev_text"
 					interactive="true"
-					uniqueguid="A7C950F6-B200-4BE1-AB477B5520CB6BAB"/>
+					uniqueguid="A7C950F6-B200-4BE1-AB477B5520CB6BAB">
+					<component_text
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</newstate>
 			</states>
 			<animations>
 				<fade_out
@@ -1000,6 +1058,7 @@
 			this="5D296E8E-6B3B-478F-9087DDCB8A7A7F9C"
 			id="label_effect"
 			part_of_template="true"
+			uniqueguid_in_template="D56D71AA-8F2C-49DD-9517E9FE73BE4440"
 			uniqueguid="5D296E8E-6B3B-478F-9087DDCB8A7A7F9C"
 			dimensions="315.00,24.00">
 			<state_uniqueguids>
@@ -1038,6 +1097,7 @@
 			this="203ADE7B-9FA9-4EA6-A5A0213BBEC535A4"
 			id="label_ignition_imbument"
 			part_of_template="true"
+			uniqueguid_in_template="A5C56E48-D158-4296-8FA375F707B12C5B"
 			uniqueguid="203ADE7B-9FA9-4EA6-A5A0213BBEC535A4"
 			dimensions="113.00,24.00"
 			priority="255">
@@ -1058,8 +1118,9 @@
 			this="350FD60E-E29B-43EC-9DBADEBC23A57EBE"
 			id="label_ignition_parent"
 			part_of_template="true"
+			uniqueguid_in_template="29CAC083-A0EF-4BC9-A5166B8E08D7424B"
 			uniqueguid="350FD60E-E29B-43EC-9DBADEBC23A57EBE"
-			dimensions="244.00,24.00"
+			dimensions="345.00,24.00"
 			priority="255">
 			<state_uniqueguids>
 				<state_uniqueguid
@@ -1083,6 +1144,7 @@
 			this="96C6152A-8FC3-404A-B9B8DF1C2B0A0248"
 			id="label_imbue_contact_header"
 			part_of_template="true"
+			uniqueguid_in_template="CC7F5C74-8B38-4771-8395F80289767F4A"
 			uniqueguid="96C6152A-8FC3-404A-B9B8DF1C2B0A0248"
 			dimensions="113.00,24.00"
 			priority="255">
@@ -1103,8 +1165,9 @@
 			this="31A23B66-9811-4E2A-AF0C48E276D2C55F"
 			id="label_imbue_contact_name"
 			part_of_template="true"
+			uniqueguid_in_template="28E2A9E6-650B-4048-B00AE382670FC2D2"
 			uniqueguid="31A23B66-9811-4E2A-AF0C48E276D2C55F"
-			dimensions="112.00,24.00"
+			dimensions="232.00,16.00"
 			priority="255">
 			<state_uniqueguids>
 				<state_uniqueguid
@@ -1130,8 +1193,9 @@
 			this="4A3DAC54-A436-4263-85D8C6945BFA95AC"
 			id="label_imbue_contact_parent"
 			part_of_template="true"
+			uniqueguid_in_template="8ED818EF-6616-4980-A965BD2319606390"
 			uniqueguid="4A3DAC54-A436-4263-85D8C6945BFA95AC"
-			dimensions="225.00,24.00"
+			dimensions="345.00,24.00"
 			priority="255">
 			<state_uniqueguids>
 				<state_uniqueguid
@@ -1155,6 +1219,7 @@
 			this="9DBFE41C-CA72-457D-86CD93618398C9F3"
 			id="label_magic_imbument"
 			part_of_template="true"
+			uniqueguid_in_template="74209019-A744-4510-B853CA742F55FE37"
 			uniqueguid="9DBFE41C-CA72-457D-86CD93618398C9F3"
 			dimensions="113.00,24.00"
 			priority="255">
@@ -1175,8 +1240,9 @@
 			this="2A473AD5-D0A3-4C06-A3E81971548F0007"
 			id="label_magic_parent"
 			part_of_template="true"
+			uniqueguid_in_template="603FAF34-F6CC-4393-9A2F424B93E74531"
 			uniqueguid="2A473AD5-D0A3-4C06-A3E81971548F0007"
-			dimensions="244.00,24.00"
+			dimensions="345.00,24.00"
 			priority="255">
 			<state_uniqueguids>
 				<state_uniqueguid
@@ -1200,8 +1266,9 @@
 			this="13133929-922D-45E3-A1CEBC833A4F2278"
 			id="magic_imbuement_value"
 			part_of_template="true"
+			uniqueguid_in_template="68B23E41-FD41-4EE6-A957DC174EFFD5D6"
 			uniqueguid="13133929-922D-45E3-A1CEBC833A4F2278"
-			dimensions="131.00,24.00"
+			dimensions="232.00,16.00"
 			priority="255">
 			<state_uniqueguids>
 				<state_uniqueguid
@@ -1228,6 +1295,7 @@
 			this="DDBD2EAC-559B-4A8E-AB7BFD7AD813F8B8"
 			id="phase_effect_list"
 			part_of_template="true"
+			uniqueguid_in_template="F0CD56EE-FD8E-4C43-B336F95D2C7BA24C"
 			uniqueguid="DDBD2EAC-559B-4A8E-AB7BFD7AD813F8B8"
 			dimensions="360.00,24.00">
 			<state_uniqueguids>
@@ -1261,6 +1329,7 @@
 			this="375A0A2F-757D-48FE-A7106078D31C9FE2"
 			id="template_effect"
 			part_of_template="true"
+			uniqueguid_in_template="6F3EBC19-F288-4F13-9DA763C74430F614"
 			uniqueguid="375A0A2F-757D-48FE-A7106078D31C9FE2"
 			dimensions="360.00,24.00">
 			<state_uniqueguids>
@@ -1285,6 +1354,7 @@
 			this="FC23D183-2A1E-4F5F-9FA3FE53632B1C57"
 			id="spread_label"
 			part_of_template="true"
+			uniqueguid_in_template="1C321CD4-07B2-41DC-B8C9D4A4FFF55E8E"
 			uniqueguid="FC23D183-2A1E-4F5F-9FA3FE53632B1C57"
 			dimensions="190.00,24.00"
 			priority="255">
@@ -1305,6 +1375,7 @@
 			this="8C7D7351-F058-476D-9288C3B436854723"
 			id="spread_parent"
 			part_of_template="true"
+			uniqueguid_in_template="2D50A15E-6DA0-4680-A21D14A1B0A7C24F"
 			uniqueguid="8C7D7351-F058-476D-9288C3B436854723"
 			dimensions="349.00,35.00"
 			priority="255"
@@ -1334,6 +1405,7 @@
 			this="63D79F34-4A40-40F0-BFD1D8A77EFDF8F9"
 			id="spread_value"
 			part_of_template="true"
+			uniqueguid_in_template="B30F747D-61A9-4C7F-813E96ACA1285C53"
 			uniqueguid="63D79F34-4A40-40F0-BFD1D8A77EFDF8F9"
 			dimensions="27.00,24.00"
 			priority="255">
@@ -1361,6 +1433,7 @@
 			this="84A775F7-0B84-4416-BC949C539B6914DE"
 			id="additional_ui_effects_list"
 			part_of_template="true"
+			uniqueguid_in_template="85379469-3AC4-4B02-9C8AF1D01DE5F301"
 			uniqueguid="84A775F7-0B84-4416-BC949C539B6914DE"
 			dimensions="321.00,28.00">
 			<state_uniqueguids>
@@ -1402,6 +1475,7 @@
 			this="F846736F-9B73-4F54-9DB4B3E3D3D539BA"
 			id="icon_effect"
 			part_of_template="true"
+			uniqueguid_in_template="62C83020-F260-47B7-93C6BADE7D3368C1"
 			uniqueguid="F846736F-9B73-4F54-9DB4B3E3D3D539BA"
 			dimensions="18.00,18.00"
 			dock_point="Top Right"
@@ -1472,6 +1546,7 @@
 			this="43D1CC21-03EC-4678-9B5FA9FED5E83D77"
 			id="icon_effect_parent"
 			part_of_template="true"
+			uniqueguid_in_template="8C4E6617-7867-4FAE-9219663A66C13E13"
 			uniqueguid="43D1CC21-03EC-4678-9B5FA9FED5E83D77"
 			dimensions="45.00,24.00">
 			<state_uniqueguids>
@@ -1490,6 +1565,7 @@
 			this="3B2F8CAF-FF18-424B-9132F1F089E70B7E"
 			id="label_additional_effect"
 			part_of_template="true"
+			uniqueguid_in_template="5D3B40B6-E1FE-469A-B5565BD347364756"
 			uniqueguid="3B2F8CAF-FF18-424B-9132F1F089E70B7E"
 			dimensions="305.00,24.00">
 			<state_uniqueguids>
@@ -1548,6 +1624,7 @@
 			this="709DC5C8-8DF5-4F03-93F3312C6516485D"
 			id="template_additional_effect"
 			part_of_template="true"
+			uniqueguid_in_template="401FD0E3-079C-4DA8-910608D102D22E04"
 			uniqueguid="709DC5C8-8DF5-4F03-93F3312C6516485D"
 			dimensions="355.00,24.00">
 			<state_uniqueguids>
@@ -1566,6 +1643,7 @@
 			this="00FD29C7-D6EA-4F21-8E22F334DF7532DE"
 			id="label_barrier"
 			part_of_template="true"
+			uniqueguid_in_template="531E70D9-EA8B-4A65-A579B867898DDB23"
 			uniqueguid="00FD29C7-D6EA-4F21-8E22F334DF7532DE"
 			dimensions="190.00,35.00"
 			priority="255">
@@ -1586,6 +1664,7 @@
 			this="3052DC6A-916C-4B57-AD580A9E5D40EC1F"
 			id="label_phase_barrier_parent"
 			part_of_template="true"
+			uniqueguid_in_template="8BAAE8FC-A9E8-42B8-ABEE90B444D50DCC"
 			uniqueguid="3052DC6A-916C-4B57-AD580A9E5D40EC1F"
 			dimensions="222.00,35.00"
 			priority="255">
@@ -1611,6 +1690,7 @@
 			this="6ED1E1E1-2F2E-4181-88D87B1841533CDA"
 			id="value_barrier"
 			part_of_template="true"
+			uniqueguid_in_template="CCD9FA44-C256-4572-82F09185BAAE33DD"
 			uniqueguid="6ED1E1E1-2F2E-4181-88D87B1841533CDA"
 			dimensions="27.00,24.00"
 			offset="0.00,2.00"
@@ -1624,8 +1704,13 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoSpecialAbilityPhaseRecord"
-					context_function_id="FormatPercentage(TotalBarrierHealPercent*100 / MaxNumericValue(Duration, 1.0))"/>
+					context_function_id="IntensifiedValueText(TotalBarrierHealPercent *100 / MaxNumericValue(Duration, 1.0), &quot;%+.2f%%&quot;)"/>
 			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="suppress_localise_asserts"
+					value=""/>
+			</user_properties>
 			<localised_texts>
 				<localised_text/>
 				<localised_text
@@ -1639,6 +1724,7 @@
 			this="34E48869-4E8E-4397-AB4F4CEF7CB809DB"
 			id="value_barrier_duration_infinite"
 			part_of_template="true"
+			uniqueguid_in_template="6BDC97F2-0683-4BAE-AC597C32C1FB3918"
 			uniqueguid="34E48869-4E8E-4397-AB4F4CEF7CB809DB"
 			dimensions="74.00,24.00"
 			is_visible="false"
@@ -1689,18 +1775,20 @@
 					name="NewState"
 					width="370"
 					height="47"
-					text="Left click to select, double left-click to zoom to location."
-					textxoffset="12.00,12.00"
-					textyoffset="4.00,8.00"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="click_text_NewState_Text_770029rrneq"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
 					interactive="true"
-					uniqueguid="C9A7E6ED-572D-4CFD-BEEAFFBC105269D5"/>
+					uniqueguid="C9A7E6ED-572D-4CFD-BEEAFFBC105269D5">
+					<component_text
+						text="Left click to select, double left-click to zoom to location."
+						textxoffset="12.00,12.00"
+						textyoffset="4.00,8.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="click_text_NewState_Text_770029rrneq"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</newstate>
 			</states>
 		</label_select>
 		<fill_parent
@@ -1724,13 +1812,6 @@
 					name="NewState"
 					width="70"
 					height="10"
-					textvalign="Center"
-					textxoffset="5.00,0.00"
-					font_m_font_name="dev_font"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="dev_text"
 					uniqueguid="58811EDE-3A66-4006-BB7916E2956B3D8B">
 					<imagemetrics>
 						<image
@@ -1744,6 +1825,14 @@
 							dockpoint="Center"
 							ui_colour_preset_type_key="black"/>
 					</imagemetrics>
+					<component_text
+						textvalign="Center"
+						textxoffset="5.00,0.00"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
 				</newstate>
 			</states>
 		</fill_parent>
@@ -1801,18 +1890,20 @@
 					name="NewState"
 					width="370"
 					height="24"
-					text="Indestructable"
-					textvalign="Center"
-					textxoffset="12.00,12.00"
-					textyoffset="4.00,8.00"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="label_indestructable_NewState_Text_790042m"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
-					uniqueguid="B4D4EA67-EE46-4D8F-91FEA2142E5AD4B1"/>
+					uniqueguid="B4D4EA67-EE46-4D8F-91FEA2142E5AD4B1">
+					<component_text
+						text="Indestructible"
+						textvalign="Center"
+						textxoffset="12.00,12.00"
+						textyoffset="4.00,8.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="label_indestructable_NewState_Text_790042m"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</newstate>
 			</states>
 		</label_indestructable>
 		<local_effect
@@ -1841,17 +1932,19 @@
 					name="NewState"
 					width="370"
 					height="28"
-					text="dy_description"
-					textxoffset="12.00,12.00"
-					textyoffset="4.00,8.00"
-					texthbehaviour="Resize"
-					textlabel="local_effect_NewState_Text_4f79a538"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
 					interactive="true"
-					uniqueguid="8C014462-6F99-487E-8443BF3BE7BFDCD7"/>
+					uniqueguid="8C014462-6F99-487E-8443BF3BE7BFDCD7">
+					<component_text
+						text="dy_description"
+						textxoffset="12.00,12.00"
+						textyoffset="4.00,8.00"
+						texthbehaviour="Resize"
+						textlabel="local_effect_NewState_Text_4f79a538"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</newstate>
 			</states>
 		</local_effect>
 		<ownership_info_parent
@@ -1880,13 +1973,15 @@
 					name="NewState"
 					width="212"
 					height="24"
-					font_m_font_name="dev_font"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="dev_text"
 					interactive="true"
-					uniqueguid="A3D3328E-6706-41A6-AC75928185B2672A"/>
+					uniqueguid="A3D3328E-6706-41A6-AC75928185B2672A">
+					<component_text
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</newstate>
 			</states>
 			<LayoutEngine
 				type="HorizontalList"
@@ -1913,13 +2008,15 @@
 					name="NewState"
 					width="293"
 					height="26"
-					textvalign="Center"
-					textxoffset="12.00,0.00"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
-					uniqueguid="C08A790B-8563-4AC5-9DB468E5E4F2E0E0"/>
+					uniqueguid="C08A790B-8563-4AC5-9DB468E5E4F2E0E0">
+					<component_text
+						textvalign="Center"
+						textxoffset="12.00,0.00"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</newstate>
 			</states>
 			<LayoutEngine
 				type="HorizontalList"
@@ -1940,17 +2037,19 @@
 					name="NewState"
 					width="160"
 					height="24"
-					text="Gate health:"
-					textvalign="Center"
-					textxoffset="12.00,0.00"
-					texthbehaviour="Never split"
-					textlocalised="true"
-					textlabel="StateText_125d5df5"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
-					uniqueguid="D596CAB1-0ED4-44A3-A8240B5B96EE0891"/>
+					uniqueguid="D596CAB1-0ED4-44A3-A8240B5B96EE0891">
+					<component_text
+						text="Gate health:"
+						textvalign="Center"
+						textxoffset="12.00,0.00"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_125d5df5"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</newstate>
 			</states>
 		</txt_gate_damage>
 		<txt_gate_description
@@ -1981,33 +2080,37 @@
 					name="active"
 					width="370"
 					height="45"
-					text="This gate is controlled by your alliance. It will open when your units approach."
-					textxoffset="12.00,12.00"
-					textyoffset="4.00,8.00"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="txt_gate_description_active_Text_709f4d5c"
-					font_m_size="12"
-					font_m_colour="#FFD700FF"
-					font_m_leading="1"
-					fontcat_name="fe_text_gold"
-					uniqueguid="52DDFCD2-598A-4188-9E18726BCB896CC9"/>
+					uniqueguid="52DDFCD2-598A-4188-9E18726BCB896CC9">
+					<component_text
+						text="This gate is controlled by your alliance. It will open when your units approach."
+						textxoffset="12.00,12.00"
+						textyoffset="4.00,8.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="txt_gate_description_active_Text_709f4d5c"
+						font_m_size="12"
+						font_m_colour="#FFD700FF"
+						font_m_leading="1"
+						fontcat_name="fe_text_gold"/>
+				</active>
 				<inactive
 					this="9146113E-091B-45E4-BAFAB1818A94607C"
 					name="inactive"
 					width="370"
 					height="47"
-					text="This gate is not controlled by your forces, you must capture or destroy it to gain access."
-					textxoffset="12.00,12.00"
-					textyoffset="4.00,8.00"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="txt_gate_description_attacker_description_Text_310007"
-					font_m_size="12"
-					font_m_colour="#FF2D2DFF"
-					font_m_leading="3"
-					fontcat_name="fe_tooltip_red"
-					uniqueguid="9146113E-091B-45E4-BAFAB1818A94607C"/>
+					uniqueguid="9146113E-091B-45E4-BAFAB1818A94607C">
+					<component_text
+						text="This gate is not controlled by your forces, you must capture or destroy it to gain access."
+						textxoffset="12.00,12.00"
+						textyoffset="4.00,8.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="txt_gate_description_attacker_description_Text_310007"
+						font_m_size="12"
+						font_m_colour="#FF2D2DFF"
+						font_m_leading="3"
+						fontcat_name="fe_tooltip_red"/>
+				</inactive>
 			</states>
 		</txt_gate_description>
 		<label_name
@@ -2031,19 +2134,21 @@
 					name="NewState"
 					width="126"
 					height="30"
-					text="Building Name"
-					textvalign="Center"
-					textxoffset="12.00,12.00"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="txt_name_NewState_Text_140025"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
-					text_shader_name="text_outline_t0"
-					textshadervars="0.00,0.00,0.00,1.00"
-					uniqueguid="04C5D865-0F3F-41C0-BF0FF247BBBF952F"/>
+					uniqueguid="04C5D865-0F3F-41C0-BF0FF247BBBF952F">
+					<component_text
+						text="Building Name"
+						textvalign="Center"
+						textxoffset="12.00,12.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="txt_name_NewState_Text_140025"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"
+						text_shader_name="text_outline_t0"
+						textshadervars="0.00,0.00,0.00,1.00"/>
+				</newstate>
 			</states>
 		</label_name>
 		<label_owner
@@ -2090,15 +2195,17 @@
 					name="default"
 					width="52"
 					height="24"
-					text="Neutral"
-					textvalign="Center"
-					texthbehaviour="Resize"
-					textlabel="txt_allies_ownership_NewState_Text_760048"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
-					uniqueguid="44C62F7C-C67A-4451-9B4946C93D76948D"/>
+					uniqueguid="44C62F7C-C67A-4451-9B4946C93D76948D">
+					<component_text
+						text="Neutral"
+						textvalign="Center"
+						texthbehaviour="Resize"
+						textlabel="txt_allies_ownership_NewState_Text_760048"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
+				</default>
 			</states>
 		</label_owner>
 		<label_owner_header
@@ -2116,17 +2223,19 @@
 					name="Controlled"
 					width="160"
 					height="24"
-					text="Controlled by:"
-					textvalign="Center"
-					textxoffset="12.00,0.00"
-					texthbehaviour="Never split"
-					textlocalised="true"
-					textlabel="txt_ownership_Controlled_Text_24000f"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
-					uniqueguid="FDD111A5-19BC-4E3E-B17EA61E9E8426DE"/>
+					uniqueguid="FDD111A5-19BC-4E3E-B17EA61E9E8426DE">
+					<component_text
+						text="Controlled by:"
+						textvalign="Center"
+						textxoffset="12.00,0.00"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="txt_ownership_Controlled_Text_24000f"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</controlled>
 			</states>
 		</label_owner_header>
 		<label_toggleable
@@ -2151,18 +2260,20 @@
 					name="default"
 					width="370"
 					height="24"
-					text="Left-click to construct"
-					textvalign="Right"
-					textxoffset="12.00,12.00"
-					textyoffset="4.00,4.00"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="label_toggleable_default_Text_29003f"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
-					uniqueguid="0212A48A-C493-4B93-817573B8B66E6A6B"/>
+					uniqueguid="0212A48A-C493-4B93-817573B8B66E6A6B">
+					<component_text
+						text="Left-click to construct"
+						textvalign="Right"
+						textxoffset="12.00,12.00"
+						textyoffset="4.00,4.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="label_toggleable_default_Text_29003f"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</default>
 			</states>
 		</label_toggleable>
 		<label_unbreachable_description
@@ -2188,18 +2299,20 @@
 					name="default"
 					width="370"
 					height="28"
-					text="This wall can be destroyed but not breached."
-					textvalign="Right"
-					textxoffset="12.00,12.00"
-					textyoffset="4.00,8.00"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="txt_unbreachable_description_default_Text_5f0061"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
-					uniqueguid="32DE7BD8-C030-4CF2-A2F321ABF8CC8624"/>
+					uniqueguid="32DE7BD8-C030-4CF2-A2F321ABF8CC8624">
+					<component_text
+						text="This wall can be destroyed but not breached."
+						textvalign="Right"
+						textxoffset="12.00,12.00"
+						textyoffset="4.00,8.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="txt_unbreachable_description_default_Text_5f0061"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</default>
 			</states>
 		</label_unbreachable_description>
 		<fire_damage_label
@@ -2216,17 +2329,19 @@
 					name="NewState"
 					width="160"
 					height="26"
-					text="Fire Damage:"
-					textvalign="Center"
-					textxoffset="12.00,0.00"
-					texthbehaviour="Never split"
-					textlocalised="true"
-					textlabel="fire_damage_parent_NewState_Text_780071"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
-					uniqueguid="C3F27F6C-B03D-4494-BE01F8C683A8084D"/>
+					uniqueguid="C3F27F6C-B03D-4494-BE01F8C683A8084D">
+					<component_text
+						text="Fire Damage:"
+						textvalign="Center"
+						textxoffset="12.00,0.00"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="fire_damage_parent_NewState_Text_780071"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</newstate>
 			</states>
 		</fire_damage_label>
 		<ability_list
@@ -2268,7 +2383,6 @@
 					name="default"
 					width="1"
 					height="1"
-					texthbehaviour="Never split"
 					uniqueguid="85B47CCB-015A-4AD8-BEB6472067D3BC8D"/>
 			</states>
 			<LayoutEngine type="List">
@@ -2303,17 +2417,19 @@
 					name="NewState"
 					width="160"
 					height="26"
-					text="Build Time:"
-					textvalign="Center"
-					textxoffset="12.00,0.00"
-					texthbehaviour="Never split"
-					textlocalised="true"
-					textlabel="build_time_parent_NewState_Text_35004c"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
-					uniqueguid="DCB1B85F-F12F-44C9-808B6D5EAF20733C"/>
+					uniqueguid="DCB1B85F-F12F-44C9-808B6D5EAF20733C">
+					<component_text
+						text="Build Time:"
+						textvalign="Center"
+						textxoffset="12.00,0.00"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="build_time_parent_NewState_Text_35004c"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</newstate>
 			</states>
 		</build_time_parent>
 		<hide_time_parent
@@ -2343,17 +2459,19 @@
 					name="NewState"
 					width="160"
 					height="26"
-					text="Deconstruct Time:"
-					textvalign="Center"
-					textxoffset="12.00,0.00"
-					texthbehaviour="Never split"
-					textlocalised="true"
-					textlabel="hide_time_parent_NewState_Text_44003f"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
-					uniqueguid="CFDA21A9-B60B-46EB-84A4B907B9DFF489"/>
+					uniqueguid="CFDA21A9-B60B-46EB-84A4B907B9DFF489">
+					<component_text
+						text="Deconstruct Time:"
+						textvalign="Center"
+						textxoffset="12.00,0.00"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="hide_time_parent_NewState_Text_44003f"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</newstate>
 			</states>
 		</hide_time_parent>
 		<label_time
@@ -2399,16 +2517,6 @@
 					name="NewState"
 					width="100"
 					height="22"
-					text="0s"
-					textvalign="Center"
-					textxoffset="26.00,0.00"
-					texthbehaviour="Never split"
-					textlocalised="true"
-					textlabel="label_time_NewState_Text_fc2ab050"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
 					uniqueguid="B0D25DAD-54B5-49B8-99220142E75AB054">
 					<imagemetrics>
 						<image
@@ -2421,6 +2529,17 @@
 							canresizeheight="false"
 							canresizewidth="false"/>
 					</imagemetrics>
+					<component_text
+						text="0s"
+						textvalign="Center"
+						textxoffset="26.00,0.00"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="label_time_NewState_Text_fc2ab050"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
 				</newstate>
 			</states>
 		</label_time>
@@ -2468,15 +2587,6 @@
 					name="NewState"
 					width="100"
 					height="22"
-					text="0s"
-					textvalign="Center"
-					textxoffset="26.00,0.00"
-					textlocalised="true"
-					textlabel="label_time_NewState_Text_fc2ab050"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
 					uniqueguid="4F3DE52F-D507-40CD-9E8968F9A82FA90E">
 					<imagemetrics>
 						<image
@@ -2487,6 +2597,16 @@
 							height="22"
 							dockpoint="Center Left"/>
 					</imagemetrics>
+					<component_text
+						text="0s"
+						textvalign="Center"
+						textxoffset="26.00,0.00"
+						textlocalised="true"
+						textlabel="label_time_NewState_Text_fc2ab050"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
 				</newstate>
 			</states>
 		</label_time>
@@ -2504,13 +2624,15 @@
 					name="NewState"
 					width="260"
 					height="54"
-					textvalign="Center"
-					textxoffset="12.00,0.00"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
-					uniqueguid="54CBFD94-9AF5-412F-9D3B66FF523D7F38"/>
+					uniqueguid="54CBFD94-9AF5-412F-9D3B66FF523D7F38">
+					<component_text
+						textvalign="Center"
+						textxoffset="12.00,0.00"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
+				</newstate>
 			</states>
 			<LayoutEngine
 				type="List"
@@ -2548,12 +2670,14 @@
 					name="NewState"
 					width="360"
 					height="362"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
-					uniqueguid="87FD85F1-3934-4B49-81835A2C8BEF28CC"/>
+					uniqueguid="87FD85F1-3934-4B49-81835A2C8BEF28CC">
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
+				</newstate>
 			</states>
 			<LayoutEngine
 				type="List"
@@ -2590,7 +2714,6 @@
 					name="default"
 					width="16"
 					height="16"
-					texthbehaviour="Never split"
 					uniqueguid="962F4EE4-CFE4-416E-991DB25C3F2DD0C1">
 					<imagemetrics>
 						<image
@@ -2630,7 +2753,6 @@
 					name="default"
 					width="16"
 					height="16"
-					texthbehaviour="Never split"
 					uniqueguid="DA8CDCFC-26BD-4629-8B92BC654C1266EE">
 					<imagemetrics>
 						<image
@@ -2670,7 +2792,6 @@
 					name="default"
 					width="16"
 					height="16"
-					texthbehaviour="Never split"
 					uniqueguid="2FBA289B-0482-47E0-8ED4F6029BB2FB1E">
 					<imagemetrics>
 						<image
@@ -2710,7 +2831,6 @@
 					name="default"
 					width="16"
 					height="16"
-					texthbehaviour="Never split"
 					uniqueguid="551C1014-92D1-48E6-B0B2C7E081D53E10">
 					<imagemetrics>
 						<image
@@ -2756,13 +2876,6 @@
 					name="NewState"
 					width="70"
 					height="10"
-					textvalign="Center"
-					textxoffset="5.00,0.00"
-					font_m_font_name="dev_font"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="dev_button_text"
 					shader_name="brighten_t0"
 					shadervars="0.50,0.00,0.00,0.00"
 					uniqueguid="6C063815-0C2E-4977-AFC9BEA434A784C9">
@@ -2777,6 +2890,14 @@
 							tile="true"
 							ui_colour_preset_type_key="green"/>
 					</imagemetrics>
+					<component_text
+						textvalign="Center"
+						textxoffset="5.00,0.00"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_button_text"/>
 				</newstate>
 			</states>
 		</fill_bar>
@@ -2807,7 +2928,6 @@
 					name="default"
 					width="16"
 					height="16"
-					texthbehaviour="Never split"
 					uniqueguid="4CEE7A21-D970-4531-B953A163D9FDD3E7">
 					<imagemetrics>
 						<image
@@ -2842,14 +2962,16 @@
 					name="default"
 					width="332"
 					height="24"
-					textvalign="Center"
-					textxoffset="0.00,2.00"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
-					uniqueguid="D74A7F59-850E-400A-B73B4B95A4673D83"/>
+					uniqueguid="D74A7F59-850E-400A-B73B4B95A4673D83">
+					<component_text
+						textvalign="Center"
+						textxoffset="0.00,2.00"
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
+				</default>
 			</states>
 			<LayoutEngine
 				type="HorizontalList"
@@ -2879,14 +3001,16 @@
 					name="default"
 					width="307"
 					height="24"
-					textvalign="Center"
-					textxoffset="0.00,2.00"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
-					uniqueguid="E8CD4CD9-FEB9-448D-8589E2369291B07E"/>
+					uniqueguid="E8CD4CD9-FEB9-448D-8589E2369291B07E">
+					<component_text
+						textvalign="Center"
+						textxoffset="0.00,2.00"
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
+				</default>
 			</states>
 			<LayoutEngine
 				type="HorizontalList"
@@ -2916,14 +3040,16 @@
 					name="default"
 					width="355"
 					height="24"
-					textvalign="Center"
-					textxoffset="0.00,2.00"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
-					uniqueguid="5BC124D9-0FEA-4A96-8CE9FC386D50637B"/>
+					uniqueguid="5BC124D9-0FEA-4A96-8CE9FC386D50637B">
+					<component_text
+						textvalign="Center"
+						textxoffset="0.00,2.00"
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
+				</default>
 			</states>
 			<LayoutEngine
 				type="HorizontalList"
@@ -2963,16 +3089,18 @@
 					name="default"
 					width="39"
 					height="24"
-					text="(x10)"
-					textvalign="Center"
-					textxoffset="0.00,2.00"
-					texthbehaviour="Resize"
-					textlabel="label_projectile_damage_value_default_Text_480030"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
-					uniqueguid="90D9F21A-E5BD-4870-BDC7FBE39C5CD24C"/>
+					uniqueguid="90D9F21A-E5BD-4870-BDC7FBE39C5CD24C">
+					<component_text
+						text="(x10)"
+						textvalign="Center"
+						textxoffset="0.00,2.00"
+						texthbehaviour="Resize"
+						textlabel="label_projectile_damage_value_default_Text_480030"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</default>
 			</states>
 		</label_projectile_count>
 		<label_projectile_damage
@@ -2997,14 +3125,16 @@
 					name="default"
 					width="272"
 					height="24"
-					textvalign="Center"
-					textxoffset="0.00,2.00"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
-					uniqueguid="FBCF7229-ECF7-4624-90BE2803908166FE"/>
+					uniqueguid="FBCF7229-ECF7-4624-90BE2803908166FE">
+					<component_text
+						textvalign="Center"
+						textxoffset="0.00,2.00"
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
+				</default>
 			</states>
 			<LayoutEngine
 				type="HorizontalList"
@@ -3034,15 +3164,17 @@
 					name="default"
 					width="51"
 					height="24"
-					text="999"
-					textvalign="Center"
-					texthbehaviour="Never split"
-					textlabel="label_cooldown_default_Text_390000"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
-					uniqueguid="F9F21247-5A4A-40DE-8EFB96D49A7385F8"/>
+					uniqueguid="F9F21247-5A4A-40DE-8EFB96D49A7385F8">
+					<component_text
+						text="999"
+						textvalign="Center"
+						texthbehaviour="Never split"
+						textlabel="label_cooldown_default_Text_390000"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
+				</default>
 			</states>
 		</label_projectile_damage_value>
 		<label_projectile_damage_value
@@ -3067,15 +3199,17 @@
 					name="default"
 					width="51"
 					height="24"
-					text="999"
-					textvalign="Center"
-					texthbehaviour="Never split"
-					textlabel="label_cooldown_default_Text_390000"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
-					uniqueguid="A84515C3-8B21-4662-B4DB19EE44F11C93"/>
+					uniqueguid="A84515C3-8B21-4662-B4DB19EE44F11C93">
+					<component_text
+						text="999"
+						textvalign="Center"
+						texthbehaviour="Never split"
+						textlabel="label_cooldown_default_Text_390000"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
+				</default>
 			</states>
 		</label_projectile_damage_value>
 		<label_projectile_damage_value
@@ -3100,15 +3234,17 @@
 					name="default"
 					width="51"
 					height="24"
-					text="999"
-					textvalign="Center"
-					texthbehaviour="Never split"
-					textlabel="label_cooldown_default_Text_390000"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
-					uniqueguid="FDD8365D-2574-4670-BB81EBB4DBAF209F"/>
+					uniqueguid="FDD8365D-2574-4670-BB81EBB4DBAF209F">
+					<component_text
+						text="999"
+						textvalign="Center"
+						texthbehaviour="Never split"
+						textlabel="label_cooldown_default_Text_390000"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
+				</default>
 			</states>
 		</label_projectile_damage_value>
 		<label_projectile_exp_ap_damage_value
@@ -3133,15 +3269,17 @@
 					name="default"
 					width="51"
 					height="24"
-					text="999"
-					textvalign="Center"
-					texthbehaviour="Never split"
-					textlabel="label_cooldown_default_Text_390000"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
-					uniqueguid="AA26441A-D73F-4670-A4143490F68BC3C8"/>
+					uniqueguid="AA26441A-D73F-4670-A4143490F68BC3C8">
+					<component_text
+						text="999"
+						textvalign="Center"
+						texthbehaviour="Never split"
+						textlabel="label_cooldown_default_Text_390000"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
+				</default>
 			</states>
 		</label_projectile_exp_ap_damage_value>
 		<label_projectile_exp_damage_value
@@ -3166,15 +3304,17 @@
 					name="default"
 					width="51"
 					height="24"
-					text="999"
-					textvalign="Center"
-					texthbehaviour="Never split"
-					textlabel="label_cooldown_default_Text_390000"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
-					uniqueguid="2EA56DF1-FC0B-4379-84055482191E4211"/>
+					uniqueguid="2EA56DF1-FC0B-4379-84055482191E4211">
+					<component_text
+						text="999"
+						textvalign="Center"
+						texthbehaviour="Never split"
+						textlabel="label_cooldown_default_Text_390000"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
+				</default>
 			</states>
 		</label_projectile_exp_damage_value>
 		<label_projectile_range
@@ -3199,14 +3339,16 @@
 					name="default"
 					width="119"
 					height="24"
-					textvalign="Center"
-					textxoffset="0.00,2.00"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
-					uniqueguid="9C0FDAE4-BAA8-464C-B2857AB8956CF4E3"/>
+					uniqueguid="9C0FDAE4-BAA8-464C-B2857AB8956CF4E3">
+					<component_text
+						textvalign="Center"
+						textxoffset="0.00,2.00"
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
+				</default>
 			</states>
 			<LayoutEngine
 				type="HorizontalList"
@@ -3236,15 +3378,17 @@
 					name="default"
 					width="51"
 					height="24"
-					text="999"
-					textvalign="Center"
-					texthbehaviour="Never split"
-					textlabel="label_cooldown_default_Text_390000"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
-					uniqueguid="B6B1C03E-FB97-4817-AB4E7DFF703DA514"/>
+					uniqueguid="B6B1C03E-FB97-4817-AB4E7DFF703DA514">
+					<component_text
+						text="999"
+						textvalign="Center"
+						texthbehaviour="Never split"
+						textlabel="label_cooldown_default_Text_390000"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
+				</default>
 			</states>
 		</label_projectile_range_value>
 		<label_projectile_reload
@@ -3269,14 +3413,16 @@
 					name="default"
 					width="163"
 					height="24"
-					textvalign="Center"
-					textxoffset="0.00,2.00"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
-					uniqueguid="B839E275-3D87-493E-B441CF5401FF07FC"/>
+					uniqueguid="B839E275-3D87-493E-B441CF5401FF07FC">
+					<component_text
+						textvalign="Center"
+						textxoffset="0.00,2.00"
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
+				</default>
 			</states>
 			<LayoutEngine
 				type="HorizontalList"
@@ -3300,16 +3446,18 @@
 					name="default"
 					width="237"
 					height="24"
-					text="Missile Damage â Armour-piercing"
-					textvalign="Center"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="projectile_ap_damage_text_default_Text_6d94bfd7"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
-					uniqueguid="67592758-F6A6-4173-B226B0A66F756FE5"/>
+					uniqueguid="67592758-F6A6-4173-B226B0A66F756FE5">
+					<component_text
+						text="Missile Damage – Armour-piercing"
+						textvalign="Center"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="projectile_ap_damage_text_default_Text_6d94bfd7"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</default>
 			</states>
 		</projectile_ap_damage_text>
 		<projectile_damage_text
@@ -3328,16 +3476,18 @@
 					name="default"
 					width="154"
 					height="24"
-					text="Missile Damage â Base"
-					textvalign="Center"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="projectile_damage_text_default_Text_2ef7fc4a"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
-					uniqueguid="25E681FD-DF2F-48BE-BF465D26E3DE179D"/>
+					uniqueguid="25E681FD-DF2F-48BE-BF465D26E3DE179D">
+					<component_text
+						text="Missile Damage – Base"
+						textvalign="Center"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="projectile_damage_text_default_Text_2ef7fc4a"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</default>
 			</states>
 		</projectile_damage_text>
 		<projectile_exp_ap_damage_text
@@ -3356,16 +3506,18 @@
 					name="default"
 					width="214"
 					height="24"
-					text="Missile Damage â Explosive AP"
-					textvalign="Center"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="projectile_exp_ap_damage_text_default_Text_135e1ea3"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
-					uniqueguid="874B951B-1C4A-468F-9A0EA7705FAE5540"/>
+					uniqueguid="874B951B-1C4A-468F-9A0EA7705FAE5540">
+					<component_text
+						text="Missile Damage – Explosive AP"
+						textvalign="Center"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="projectile_exp_ap_damage_text_default_Text_135e1ea3"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</default>
 			</states>
 		</projectile_exp_ap_damage_text>
 		<projectile_exp_damage_text
@@ -3384,16 +3536,18 @@
 					name="default"
 					width="189"
 					height="24"
-					text="Missile Damage â Explosive"
-					textvalign="Center"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="projectile_exp_damage_text_default_Text_d3db34fa"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
-					uniqueguid="58235DDC-43B7-4E0B-A76B43629A956FB3"/>
+					uniqueguid="58235DDC-43B7-4E0B-A76B43629A956FB3">
+					<component_text
+						text="Missile Damage – Explosive"
+						textvalign="Center"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="projectile_exp_damage_text_default_Text_d3db34fa"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</default>
 			</states>
 		</projectile_exp_damage_text>
 		<projectile_parent
@@ -3422,12 +3576,14 @@
 					name="NewState"
 					width="375"
 					height="144"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
-					uniqueguid="D45C51AC-C2D1-4ABA-8C7AF77EC5362AC4"/>
+					uniqueguid="D45C51AC-C2D1-4ABA-8C7AF77EC5362AC4">
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
+				</newstate>
 			</states>
 			<LayoutEngine
 				type="List"
@@ -3454,16 +3610,18 @@
 					name="default"
 					width="44"
 					height="24"
-					text="Range"
-					textvalign="Center"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="projectile_damage_text_default_Text_60059"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
-					uniqueguid="E29A7BD3-010B-438C-82867604E075BACE"/>
+					uniqueguid="E29A7BD3-010B-438C-82867604E075BACE">
+					<component_text
+						text="Range"
+						textvalign="Center"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="projectile_damage_text_default_Text_60059"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</default>
 			</states>
 		</projectile_range_text>
 		<reload_text
@@ -3482,16 +3640,18 @@
 					name="default"
 					width="88"
 					height="24"
-					text="Reload Time"
-					textvalign="Center"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="projectile_damage_text_default_Text_570073"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
-					uniqueguid="D8611B88-98DD-4911-BAAE7A988419B6FE"/>
+					uniqueguid="D8611B88-98DD-4911-BAAE7A988419B6FE">
+					<component_text
+						text="Reload Time"
+						textvalign="Center"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="projectile_damage_text_default_Text_570073"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</default>
 			</states>
 		</reload_text>
 		<fill_bar
@@ -3527,13 +3687,6 @@
 					name="NewState"
 					width="70"
 					height="10"
-					textvalign="Center"
-					textxoffset="5.00,0.00"
-					font_m_font_name="dev_font"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="dev_button_text"
 					shader_name="brighten_t0"
 					shadervars="0.50,0.00,0.00,0.00"
 					uniqueguid="E50D13C4-2D22-4AD6-A44D41AD4DF760F1">
@@ -3548,6 +3701,14 @@
 							tile="true"
 							ui_colour_preset_type_key="green"/>
 					</imagemetrics>
+					<component_text
+						textvalign="Center"
+						textxoffset="5.00,0.00"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_button_text"/>
 				</newstate>
 			</states>
 		</fill_bar>
@@ -3574,13 +3735,6 @@
 					name="NewState"
 					width="70"
 					height="10"
-					textvalign="Center"
-					textxoffset="5.00,0.00"
-					font_m_font_name="dev_font"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="dev_button_text"
 					uniqueguid="C09B2254-4C4A-4291-B5263D4FD29410EB">
 					<imagemetrics>
 						<image
@@ -3594,6 +3748,14 @@
 							dockpoint="Center"
 							ui_colour_preset_type_key="black"/>
 					</imagemetrics>
+					<component_text
+						textvalign="Center"
+						textxoffset="5.00,0.00"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_button_text"/>
 				</newstate>
 			</states>
 		</fill_parent>
@@ -3618,7 +3780,6 @@
 					name="default"
 					width="16"
 					height="16"
-					texthbehaviour="Never split"
 					uniqueguid="F229825B-C4EC-4CC2-85FE94FC4F7FD2B3">
 					<imagemetrics>
 						<image
@@ -3646,7 +3807,6 @@
 					name="default"
 					width="395"
 					height="319"
-					texthbehaviour="Never split"
 					uniqueguid="98E1C053-6CC7-4C7D-B2C0AAB508F8D9A6"/>
 			</states>
 			<LayoutEngine
@@ -3695,7 +3855,6 @@
 					name="default"
 					width="411"
 					height="447"
-					texthbehaviour="Never split"
 					uniqueguid="798BFD4F-CC9D-4A90-89A4EAF44A36A9D2">
 					<imagemetrics>
 						<image
@@ -3745,16 +3904,18 @@
 					name="NewState"
 					width="160"
 					height="26"
-					text="Health:"
-					textvalign="Center"
-					textxoffset="12.00,0.00"
-					textlocalised="true"
-					textlabel="damage_parent_NewState_Text_610067"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
-					uniqueguid="C98B47E7-4AAA-4058-AFC5427087F02CFD"/>
+					uniqueguid="C98B47E7-4AAA-4058-AFC5427087F02CFD">
+					<component_text
+						text="Health:"
+						textvalign="Center"
+						textxoffset="12.00,0.00"
+						textlocalised="true"
+						textlabel="damage_parent_NewState_Text_610067"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</newstate>
 			</states>
 		</damage_label>
 		<fill_bar
@@ -3790,13 +3951,6 @@
 					name="NewState"
 					width="70"
 					height="10"
-					textvalign="Center"
-					textxoffset="5.00,0.00"
-					font_m_font_name="dev_font"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="dev_button_text"
 					shader_name="brighten_t0"
 					shadervars="0.50,0.00,0.00,0.00"
 					uniqueguid="18429C9C-D56E-4A2D-AC04D5E6D8F744B8">
@@ -3810,6 +3964,14 @@
 							colour="#FF6820FF"
 							tile="true"/>
 					</imagemetrics>
+					<component_text
+						textvalign="Center"
+						textxoffset="5.00,0.00"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_button_text"/>
 				</newstate>
 			</states>
 		</fill_bar>
@@ -3834,13 +3996,6 @@
 					name="NewState"
 					width="70"
 					height="10"
-					textvalign="Center"
-					textxoffset="5.00,0.00"
-					font_m_font_name="dev_font"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="dev_button_text"
 					uniqueguid="E4AD3393-FE3B-4724-B5BC3C8A6E4DFBBC">
 					<imagemetrics>
 						<image
@@ -3854,6 +4009,14 @@
 							dockpoint="Center"
 							ui_colour_preset_type_key="black"/>
 					</imagemetrics>
+					<component_text
+						textvalign="Center"
+						textxoffset="5.00,0.00"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_button_text"/>
 				</newstate>
 			</states>
 		</fill_parent>
@@ -3878,14 +4041,16 @@
 					name="NewState"
 					width="230"
 					height="26"
-					textvalign="Center"
-					textxoffset="12.00,0.00"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
-					uniqueguid="EFC39DB1-BD87-4B5B-B7113D2E4EE66E3F"/>
+					uniqueguid="EFC39DB1-BD87-4B5B-B7113D2E4EE66E3F">
+					<component_text
+						textvalign="Center"
+						textxoffset="12.00,0.00"
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</newstate>
 			</states>
 			<LayoutEngine
 				type="HorizontalList"
@@ -3915,7 +4080,6 @@
 					name="default"
 					width="78"
 					height="18"
-					texthbehaviour="Never split"
 					uniqueguid="71FBDE2C-894F-4CD2-AE605819A4DBCA81">
 					<imagemetrics>
 						<image
@@ -3965,7 +4129,6 @@
 					name="default"
 					width="78"
 					height="18"
-					texthbehaviour="Never split"
 					uniqueguid="D9180483-30E2-4331-BC30741E681037F6">
 					<imagemetrics>
 						<image
@@ -4021,17 +4184,19 @@
 					name="default"
 					width="58"
 					height="18"
-					text="100/100"
-					textvalign="Center"
-					texthbehaviour="Resize"
-					textlabel="percent_text_default_Text_1d50a7d8"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
-					text_shader_name="text_outline_t0"
-					textshadervars="0.00,0.00,0.00,1.00"
-					uniqueguid="4E970C1C-2493-4253-871F1B7645BE0F7A"/>
+					uniqueguid="4E970C1C-2493-4253-871F1B7645BE0F7A">
+					<component_text
+						text="100/100"
+						textvalign="Center"
+						texthbehaviour="Resize"
+						textlabel="percent_text_default_Text_1d50a7d8"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"
+						text_shader_name="text_outline_t0"
+						textshadervars="0.00,0.00,0.00,1.00"/>
+				</default>
 			</states>
 		</percent_text>
 		<label_projectile_count
@@ -4066,16 +4231,18 @@
 					name="default"
 					width="39"
 					height="24"
-					text="(x10)"
-					textvalign="Center"
-					textxoffset="0.00,2.00"
-					texthbehaviour="Resize"
-					textlabel="label_projectile_damage_value_default_Text_480030"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
-					uniqueguid="C646573F-0470-4DD0-95D222C743BDE73F"/>
+					uniqueguid="C646573F-0470-4DD0-95D222C743BDE73F">
+					<component_text
+						text="(x10)"
+						textvalign="Center"
+						textxoffset="0.00,2.00"
+						texthbehaviour="Resize"
+						textlabel="label_projectile_damage_value_default_Text_480030"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</default>
 			</states>
 		</label_projectile_count>
 		<label_projectile_count
@@ -4110,16 +4277,18 @@
 					name="default"
 					width="39"
 					height="24"
-					text="(x10)"
-					textvalign="Center"
-					textxoffset="0.00,2.00"
-					texthbehaviour="Resize"
-					textlabel="label_projectile_damage_value_default_Text_480030"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
-					uniqueguid="56CB7F8C-90E3-4930-B0CEDFF2CA118346"/>
+					uniqueguid="56CB7F8C-90E3-4930-B0CEDFF2CA118346">
+					<component_text
+						text="(x10)"
+						textvalign="Center"
+						textxoffset="0.00,2.00"
+						texthbehaviour="Resize"
+						textlabel="label_projectile_damage_value_default_Text_480030"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</default>
 			</states>
 		</label_projectile_count>
 		<label_projectile_count
@@ -4154,16 +4323,18 @@
 					name="default"
 					width="39"
 					height="24"
-					text="(x10)"
-					textvalign="Center"
-					textxoffset="0.00,2.00"
-					texthbehaviour="Resize"
-					textlabel="label_projectile_damage_value_default_Text_480030"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
-					uniqueguid="1320BC44-5DD4-47A1-822AEF7862D50982"/>
+					uniqueguid="1320BC44-5DD4-47A1-822AEF7862D50982">
+					<component_text
+						text="(x10)"
+						textvalign="Center"
+						textxoffset="0.00,2.00"
+						texthbehaviour="Resize"
+						textlabel="label_projectile_damage_value_default_Text_480030"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</default>
 			</states>
 		</label_projectile_count>
 		<frame
@@ -4189,7 +4360,6 @@
 					name="default"
 					width="78"
 					height="18"
-					texthbehaviour="Never split"
 					uniqueguid="2D251DEA-CB05-4613-987C102C8005C325">
 					<imagemetrics>
 						<image
@@ -4247,17 +4417,19 @@
 					name="default"
 					width="58"
 					height="18"
-					text="100/100"
-					textvalign="Center"
-					texthbehaviour="Resize"
-					textlabel="StateText_83e16c09"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
-					text_shader_name="text_outline_t0"
-					textshadervars="0.00,0.00,0.00,1.00"
-					uniqueguid="743F30E2-304E-43F7-8E291932C204A918"/>
+					uniqueguid="743F30E2-304E-43F7-8E291932C204A918">
+					<component_text
+						text="100/100"
+						textvalign="Center"
+						texthbehaviour="Resize"
+						textlabel="StateText_83e16c09"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"
+						text_shader_name="text_outline_t0"
+						textshadervars="0.00,0.00,0.00,1.00"/>
+				</default>
 			</states>
 		</percent_text>
 	</components>

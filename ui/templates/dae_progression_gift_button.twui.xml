@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="137"
+	version="141"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -9,10 +9,10 @@
 				<armory_items_holder this="5F1BB7C2-2A8D-4DE3-80B32942E94BD932">
 					<template_part_icon this="2B88FA44-7125-48A8-B3E0E97EDC8E7D01"/>
 				</armory_items_holder>
-				<locked_chains this="D0DA74C3-FED9-442F-AA0A3D34CAED9B77"/>
 				<padlock this="887A241A-5113-49CB-9853FB246BA53533"/>
 				<cost this="3CF2FF62-B07D-4D45-8E000E4F7A871167"/>
 				<tick this="78929C06-6CC6-466F-890153FB506998E6"/>
+				<tier_requirement this="2DC66D59-8665-49F0-854BAEA826A7AE53"/>
 			</dae_progression_gift_button>
 		</root>
 	</hierarchy>
@@ -20,6 +20,7 @@
 		<root
 			this="771DDF9D-2092-40BE-B94F232761EB2887"
 			id="root"
+			uniqueguid_in_template="771DDF9D-2092-40BE-B94F232761EB2887"
 			tooltipslocalised="true"
 			uniqueguid="771DDF9D-2092-40BE-B94F232761EB2887"
 			currentstate="3ADD6750-BBDB-44E3-A0FD611EE0BC6074"
@@ -35,7 +36,6 @@
 					name="default"
 					width="1600"
 					height="900"
-					texthbehaviour="Never split"
 					uniqueguid="3ADD6750-BBDB-44E3-A0FD611EE0BC6074">
 					<imagemetrics>
 						<image
@@ -52,6 +52,7 @@
 		<dae_progression_gift_button
 			this="71A81BB1-951C-43DB-9D0B4148B26F93D0"
 			id="dae_progression_gift_button"
+			uniqueguid_in_template="71A81BB1-951C-43DB-9D0B4148B26F93D0"
 			offset="768.00,418.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
@@ -62,7 +63,7 @@
 			tooltiplabel="template_effect_bundle_Tooltip_580001"
 			uniqueguid="71A81BB1-951C-43DB-9D0B4148B26F93D0"
 			updatewhennotvisible="true"
-			currentstate="1697FF77-A1A7-480C-A1B3CBCE2FE20D3A"
+			currentstate="92BC060A-6EE5-4961-96C1FDBB4D59FD42"
 			defaultstate="1697FF77-A1A7-480C-A1B3CBCE2FE20D3A">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="StatePropagatorCallback"/>
@@ -76,13 +77,13 @@
 					<child_m_user_properties>
 						<property
 							name="1.selected"
-							value="ActiveOperationSetList(PlayersFaction).Contains(StoredContext(&quot;CcoCampaignOperationSetRecord&quot;))"/>
+							value="IsLockedByAchievement  == false &amp;&amp; ActiveOperationSetList(PlayersFaction).Contains(StoredContext(&quot;CcoCampaignOperationSetRecord&quot;))"/>
 						<property
 							name="2.inactive"
-							value="ActiveOperationSetList(PlayersFaction).IsEmpty == false &amp;&amp; ActiveOperationSetList(PlayersFaction).Contains(StoredContext(&quot;CcoCampaignOperationSetRecord&quot;)) == false"/>
+							value="IsLockedByAchievement == false &amp;&amp; ActiveOperationSetList(PlayersFaction).IsEmpty == false &amp;&amp; ActiveOperationSetList(PlayersFaction).Contains(StoredContext(&quot;CcoCampaignOperationSetRecord&quot;)) == false"/>
 						<property
 							name="3.active"
-							value="PooledResourceList.FirstContext.Total &gt;= LowerBound"/>
+							value="IsLockedByAchievement  == false &amp;&amp; PooledResourceList.FirstContext.Total &gt;= LowerBound"/>
 						<property
 							name="event0"
 							value="PooledResourceTransaction"/>
@@ -147,11 +148,6 @@
 					name="active"
 					width="64"
 					height="64"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					interactive="true"
 					uniqueguid="1697FF77-A1A7-480C-A1B3CBCE2FE20D3A"
 					stateeditordisplaypos="80.00,74.00">
@@ -201,17 +197,18 @@
 							transition_m_transition_time="200"
 							transition_m_interpolation_property_mask="64"/>
 					</transitionmap>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
 				</active>
 				<down
 					this="BD0C595B-80B1-418E-836944077CFAE6C0"
 					name="down"
 					width="64"
 					height="64"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					interactive="true"
 					uniqueguid="BD0C595B-80B1-418E-836944077CFAE6C0"
 					stateeditordisplaypos="303.00,258.00">
@@ -256,17 +253,18 @@
 							index="1"
 							transition_m_target_state="76F6850E-94DB-4D88-88CC92CDE9C4AFDF"/>
 					</transitionmap>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
 				</down>
 				<down_off
 					this="76F6850E-94DB-4D88-88CC92CDE9C4AFDF"
 					name="down_off"
 					width="64"
 					height="64"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					interactive="true"
 					uniqueguid="76F6850E-94DB-4D88-88CC92CDE9C4AFDF"
 					stateeditordisplaypos="139.00,314.00">
@@ -302,17 +300,18 @@
 							index="8"
 							transition_m_target_state="1697FF77-A1A7-480C-A1B3CBCE2FE20D3A"/>
 					</transitionmap>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
 				</down_off>
 				<hover
 					this="1AC17B3D-7ADD-4938-80D5B566792B70A6"
 					name="hover"
 					width="64"
 					height="64"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					interactive="true"
 					uniqueguid="1AC17B3D-7ADD-4938-80D5B566792B70A6"
 					stateeditordisplaypos="189.00,164.00">
@@ -371,17 +370,19 @@
 							index="2"
 							transition_m_target_state="BD0C595B-80B1-418E-836944077CFAE6C0"/>
 					</transitionmap>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
 				</hover>
 				<inactive
 					this="4CEEAA95-ABCF-4B50-A85C5691FA7377C7"
 					name="inactive"
 					width="64"
 					height="64"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
+					soundcategory="UI_GBL_TMP_Selection_Locked_Unavailable_Small"
 					interactive="true"
 					disabled="true"
 					uniqueguid="4CEEAA95-ABCF-4B50-A85C5691FA7377C7"
@@ -413,17 +414,19 @@
 							tile="true"
 							margin="2.00,2.00,2.00,2.00"/>
 					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
 				</inactive>
 				<locked
 					this="92BC060A-6EE5-4961-96C1FDBB4D59FD42"
 					name="locked"
 					width="64"
 					height="64"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
+					soundcategory="UI_GBL_TMP_Selection_Locked_Unavailable_Small"
 					interactive="true"
 					shader_name="set_greyscale_t0"
 					shadervars="1.00,1.00,0.00,0.00"
@@ -468,17 +471,18 @@
 							tile="true"
 							margin="2.00,2.00,2.00,2.00"/>
 					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
 				</locked>
 				<selected
 					this="004E61B9-BE9F-408B-94BA219482A2B952"
 					name="selected"
 					width="64"
 					height="64"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					interactive="true"
 					disabled="true"
 					uniqueguid="004E61B9-BE9F-408B-94BA219482A2B952"
@@ -533,6 +537,12 @@
 							tile="true"
 							margin="3.00,3.00,3.00,3.00"/>
 					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
 				</selected>
 			</states>
 			<animations>
@@ -563,6 +573,7 @@
 		<template_part_icon
 			this="2B88FA44-7125-48A8-B3E0E97EDC8E7D01"
 			id="template_part_icon"
+			uniqueguid_in_template="2B88FA44-7125-48A8-B3E0E97EDC8E7D01"
 			priority="20"
 			uniqueguid="2B88FA44-7125-48A8-B3E0E97EDC8E7D01"
 			updatewhennotvisible="true"
@@ -590,7 +601,7 @@
 							value=""/>
 						<property
 							name="layout_path"
-							value="ui/campaign ui/armory_item_tooltip"/>
+							value="ui/common ui/armory_item_tooltip"/>
 						<property
 							name="offset_x"
 							value="-5"/>
@@ -615,7 +626,6 @@
 				<active
 					this="49B80459-6EB8-4C37-BF0AC8E8008DF76D"
 					name="active"
-					texthbehaviour="Never split"
 					interactive="true"
 					disabled="true"
 					uniqueguid="49B80459-6EB8-4C37-BF0AC8E8008DF76D">
@@ -629,7 +639,6 @@
 				<down
 					this="DBF35454-1FBC-4CDA-85CD5FAC1AAED929"
 					name="down"
-					texthbehaviour="Never split"
 					interactive="true"
 					disabled="true"
 					uniqueguid="DBF35454-1FBC-4CDA-85CD5FAC1AAED929">
@@ -643,7 +652,6 @@
 				<down_off
 					this="D70A1BF8-F94F-49B1-822708995BBA78D8"
 					name="down_off"
-					texthbehaviour="Never split"
 					interactive="true"
 					disabled="true"
 					uniqueguid="D70A1BF8-F94F-49B1-822708995BBA78D8">
@@ -657,7 +665,6 @@
 				<hover
 					this="9388FCBB-0D71-4936-80E160E244FDA12E"
 					name="hover"
-					texthbehaviour="Never split"
 					interactive="true"
 					disabled="true"
 					shader_name="brighten_t0"
@@ -673,7 +680,6 @@
 				<inactive
 					this="AC532006-CBDA-4F03-8C233574D2A3D280"
 					name="inactive"
-					texthbehaviour="Never split"
 					interactive="true"
 					disabled="true"
 					shader_name="set_greyscale_t0"
@@ -689,7 +695,6 @@
 				<locked
 					this="CA73FFA2-CF06-412B-A6D7A3CDCBAEE5B5"
 					name="locked"
-					texthbehaviour="Never split"
 					interactive="true"
 					disabled="true"
 					shader_name="set_greyscale_t0"
@@ -705,7 +710,6 @@
 				<selected
 					this="EE04B4E3-1429-4EFD-BBA86D933FDF2B28"
 					name="selected"
-					texthbehaviour="Never split"
 					interactive="true"
 					disabled="true"
 					shader_name="brighten_t0"
@@ -727,6 +731,7 @@
 		<armory_items_holder
 			this="5F1BB7C2-2A8D-4DE3-80B32942E94BD932"
 			id="armory_items_holder"
+			uniqueguid_in_template="5F1BB7C2-2A8D-4DE3-80B32942E94BD932"
 			offset="16.00,0.00"
 			docking="Top Center"
 			component_anchor_point="0.50,0.00"
@@ -753,7 +758,6 @@
 				<default
 					this="C9091E51-4E77-498C-B3FC2605C7A3F4AF"
 					name="default"
-					texthbehaviour="Never split"
 					uniqueguid="C9091E51-4E77-498C-B3FC2605C7A3F4AF"/>
 			</states>
 			<LayoutEngine
@@ -766,6 +770,7 @@
 		<cost
 			this="3CF2FF62-B07D-4D45-8E000E4F7A871167"
 			id="cost"
+			uniqueguid_in_template="3CF2FF62-B07D-4D45-8E000E4F7A871167"
 			offset="13.00,60.00"
 			allowverticalresize="false"
 			docking="Bottom Left"
@@ -800,7 +805,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoPooledResourceThresholdOperationSetRecord"
-					context_function_id="ActiveOperationSetList(PlayersFaction).IsEmpty &amp;&amp; (PooledResourceList.FirstContext.Total &gt;= LowerBound || self.ParentContext.IsMouseOver || self.ParentContext.IsMouseOverChildren )">
+					context_function_id="ActiveOperationSetList(PlayersFaction).IsEmpty &amp;&amp; ((PooledResourceList.FirstContext.Total &gt;= LowerBound &amp;&amp; IsLockedByAchievement  == false) || self.ParentContext.IsMouseOver || self.ParentContext.IsMouseOverChildren )">
 					<child_m_user_properties>
 						<property
 							name="update_constant"
@@ -825,15 +830,6 @@
 					name="normal"
 					width="72"
 					height="20"
-					text="2000"
-					textxoffset="26.00,10.00"
-					textyoffset="4.00,0.00"
-					texthbehaviour="Resize"
-					textlabel="dy_cost_NewSate_Text_2"
-					font_m_size="12"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_warhammer3"
 					interactive="true"
 					uniqueguid="74CB2BFB-BD8E-4775-A467529F017EAEA7">
 					<imagemetrics>
@@ -848,21 +844,22 @@
 							dockpoint="Center"
 							margin="0.00,15.00,0.00,30.00"/>
 					</imagemetrics>
+					<component_text
+						text="2000"
+						textxoffset="26.00,10.00"
+						textyoffset="4.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="dy_cost_NewSate_Text_2"
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
 				</normal>
 				<red
 					this="897935CA-7E9A-4BB5-8A32C250E5ABD78F"
 					name="red"
 					width="72"
 					height="20"
-					text="2000"
-					textxoffset="26.00,10.00"
-					textyoffset="4.00,0.00"
-					texthbehaviour="Resize"
-					textlabel="dy_cost_NewSate_Text_2"
-					font_m_size="12"
-					font_m_colour="#FF2D2DFF"
-					font_m_leading="7"
-					fontcat_name="fe_text_red_warhammer3"
 					interactive="true"
 					uniqueguid="897935CA-7E9A-4BB5-8A32C250E5ABD78F">
 					<imagemetrics>
@@ -877,12 +874,23 @@
 							dockpoint="Center"
 							margin="0.00,15.00,0.00,30.00"/>
 					</imagemetrics>
+					<component_text
+						text="2000"
+						textxoffset="26.00,10.00"
+						textyoffset="4.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="dy_cost_NewSate_Text_2"
+						font_m_size="12"
+						font_m_colour="#FF2D2DFF"
+						font_m_leading="7"
+						fontcat_name="fe_text_red_warhammer3"/>
 				</red>
 			</states>
 		</cost>
 		<padlock
 			this="887A241A-5113-49CB-9853FB246BA53533"
 			id="padlock"
+			uniqueguid_in_template="887A241A-5113-49CB-9853FB246BA53533"
 			offset="-8.00,32.00"
 			tooltipslocalised="true"
 			uniqueguid="887A241A-5113-49CB-9853FB246BA53533"
@@ -892,7 +900,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoPooledResourceThresholdOperationSetRecord"
-					context_function_id="PooledResourceList.FirstContext.Total &lt; LowerBound">
+					context_function_id="PooledResourceList.FirstContext.Total &lt; LowerBound || IsLockedByAchievement">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -916,7 +924,6 @@
 					this="BA3A259B-99D0-47CF-A60FB3A7A8913D97"
 					name="default"
 					height="40"
-					texthbehaviour="Never split"
 					shader_name="set_greyscale_t0"
 					shadervars="1.00,1.00,0.00,0.00"
 					uniqueguid="BA3A259B-99D0-47CF-A60FB3A7A8913D97">
@@ -930,83 +937,10 @@
 				</default>
 			</states>
 		</padlock>
-		<locked_chains
-			this="D0DA74C3-FED9-442F-AA0A3D34CAED9B77"
-			id="locked_chains"
-			offset="-4.00,-4.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			visible="false"
-			docking="Center"
-			component_anchor_point="0.50,0.50"
-			priority="20"
-			tooltipslocalised="true"
-			uniqueguid="D0DA74C3-FED9-442F-AA0A3D34CAED9B77"
-			currentstate="29D6D238-8B46-4828-B635E434D97926D8"
-			defaultstate="29D6D238-8B46-4828-B635E434D97926D8">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoPooledResourceThresholdOperationSetRecord"
-					context_function_id="PooledResourceList.FirstContext.Total &gt;= LowerBound &amp;&amp; ( (ActiveOperationSetList(PlayersFaction).IsEmpty == false &amp;&amp; ActiveOperationSetList(PlayersFaction).Contains(StoredContextFromParent(&quot;CcoCampaignOperationSetRecord&quot;)) == false) || (ActiveOperationSetList(PlayersFaction).IsEmpty &amp;&amp; CurrentMouseOverComponentContext.StoredContextFromParent(&quot;CcoCampaignOperationSetRecord&quot;) != StoredContextFromParent(&quot;CcoCampaignOperationSetRecord&quot;) &amp;&amp; CurrentMouseOverComponentContext.StoredContextFromParent(&quot;CcoPooledResourceThresholdOperationSetRecord&quot;) == this))">
-					<child_m_user_properties>
-						<property
-							name="update_constant"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="disable_override0"
-					value="all"/>
-			</userproperties>
-			<componentimages>
-				<component_image
-					this="DA1662A1-A3D0-402C-85CB260F6562C9E9"
-					uniqueguid="DA1662A1-A3D0-402C-85CB260F6562C9E9"
-					imagepath="ui/skins/default/dae_gift_locked_chains.png"/>
-			</componentimages>
-			<states>
-				<active
-					this="29D6D238-8B46-4828-B635E434D97926D8"
-					name="active"
-					width="72"
-					height="72"
-					texthbehaviour="Never split"
-					uniqueguid="29D6D238-8B46-4828-B635E434D97926D8">
-					<imagemetrics>
-						<image
-							this="CAED1CAF-219C-4F3B-82E5772FA35050C1"
-							uniqueguid="CAED1CAF-219C-4F3B-82E5772FA35050C1"
-							componentimage="DA1662A1-A3D0-402C-85CB260F6562C9E9"
-							width="72"
-							height="72"/>
-					</imagemetrics>
-				</active>
-				<inactive
-					this="E318E128-2A81-4F1F-BFB6F1E51FD46249"
-					name="inactive"
-					width="72"
-					height="72"
-					texthbehaviour="Never split"
-					shader_name="set_greyscale_t0"
-					shadervars="1.00,1.00,0.00,0.00"
-					uniqueguid="E318E128-2A81-4F1F-BFB6F1E51FD46249">
-					<imagemetrics>
-						<image
-							this="C3A6BD0A-3F48-4231-90AC07D1BFECBDAB"
-							uniqueguid="C3A6BD0A-3F48-4231-90AC07D1BFECBDAB"
-							componentimage="DA1662A1-A3D0-402C-85CB260F6562C9E9"
-							width="72"
-							height="72"/>
-					</imagemetrics>
-				</inactive>
-			</states>
-		</locked_chains>
 		<tick
 			this="78929C06-6CC6-466F-890153FB506998E6"
 			id="tick"
+			uniqueguid_in_template="78929C06-6CC6-466F-890153FB506998E6"
 			offset="50.00,50.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
@@ -1030,14 +964,12 @@
 					name="active"
 					width="22"
 					height="22"
-					texthbehaviour="Never split"
 					uniqueguid="86022C10-2FC1-4675-BD08D3F17F630A13"/>
 				<selected
 					this="61D539EA-BDCB-40EF-8D6780F0B96CE6F7"
 					name="selected"
 					width="22"
 					height="22"
-					texthbehaviour="Never split"
 					uniqueguid="61D539EA-BDCB-40EF-8D6780F0B96CE6F7">
 					<imagemetrics>
 						<image
@@ -1050,5 +982,140 @@
 				</selected>
 			</states>
 		</tick>
+		<tier_requirement
+			this="2DC66D59-8665-49F0-854BAEA826A7AE53"
+			id="tier_requirement"
+			uniqueguid_in_template="2DC66D59-8665-49F0-854BAEA826A7AE53"
+			offset="7.00,-24.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Top Center"
+			dock_offset="0.00,-24.00"
+			component_anchor_point="0.50,0.00"
+			priority="500"
+			uniqueguid="2DC66D59-8665-49F0-854BAEA826A7AE53"
+			currentstate="135F409C-DA75-406C-BF9451158837063E"
+			defaultstate="135F409C-DA75-406C-BF9451158837063E">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoArmoryItemRecord">
+					<child_m_user_properties>
+						<property
+							name="1"
+							value="AchievementUnlockScore == GameCoreContext.TrialManager.TrialBronzeMedalScore"/>
+						<property
+							name="2"
+							value="AchievementUnlockScore == GameCoreContext.TrialManager.TrialSilverMedalScore"/>
+						<property
+							name="3"
+							value="AchievementUnlockScore == GameCoreContext.TrialManager.TrialGoldMedalScore"/>
+						<property
+							name="4"
+							value="AchievementUnlockScore == GameCoreContext.TrialManager.TrialPlatinumMedalScore"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoStaticObject">
+					<child_m_user_properties>
+						<property
+							name="different_text_per_state"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoArmoryItemRecord"
+					context_function_id="AchievementUnlockScore &gt; 0"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignOperationSetRecord"
+					context_function_id="ArmoryItemList.FirstContext"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="5E93A41B-F24F-4DD9-801BB54FEEF84677"
+					uniqueguid="5E93A41B-F24F-4DD9-801BB54FEEF84677"
+					imagepath="ui/skins/default/mirror_of_madness/mom_trials_progress_bar_awards_1_large.png"/>
+				<component_image
+					this="894A2B21-59F5-47D7-B0FAC7CD13B0F844"
+					uniqueguid="894A2B21-59F5-47D7-B0FAC7CD13B0F844"
+					imagepath="ui/skins/default/mirror_of_madness/mom_trials_progress_bar_awards_2_large.png"/>
+				<component_image
+					this="CB795966-127E-4F75-88239574C7FBC807"
+					uniqueguid="CB795966-127E-4F75-88239574C7FBC807"
+					imagepath="ui/skins/default/mirror_of_madness/mom_trials_progress_bar_awards_3_large.png"/>
+			</componentimages>
+			<states>
+				<_1
+					this="135F409C-DA75-406C-BF9451158837063E"
+					name="1"
+					width="50"
+					height="50"
+					tooltip="{{CcoStaticObject: Loc(&quot;trials_bronze_tier_tooltip&quot;) + Loc(&quot;trials_score_needed_for_tier&quot;, GameCoreContext.TrialManager.TrialBronzeMedalScore) }}"
+					tooltiplabel="StateTooltip_6eb16236"
+					interactive="true"
+					disabled="true"
+					uniqueguid="135F409C-DA75-406C-BF9451158837063E">
+					<imagemetrics>
+						<image
+							this="C2C18739-EF72-4162-B4839F3F04E79B9F"
+							uniqueguid="C2C18739-EF72-4162-B4839F3F04E79B9F"
+							componentimage="5E93A41B-F24F-4DD9-801BB54FEEF84677"
+							width="50"
+							height="50"/>
+					</imagemetrics>
+				</_1>
+				<_2
+					this="8192C5BF-01D0-4F9B-9119F9A88C3D3833"
+					name="2"
+					width="50"
+					height="50"
+					tooltip="{{CcoStaticObject: Loc(&quot;trials_silver_tier_tooltip&quot;) + Loc(&quot;trials_score_needed_for_tier&quot;, GameCoreContext.TrialManager.TrialSilverMedalScore) }}"
+					tooltiplabel="StateTooltip_4d3699c7"
+					interactive="true"
+					disabled="true"
+					uniqueguid="8192C5BF-01D0-4F9B-9119F9A88C3D3833">
+					<imagemetrics>
+						<image
+							this="D9DFC0F9-BB0D-44AD-B22A9178B8AA58D6"
+							uniqueguid="D9DFC0F9-BB0D-44AD-B22A9178B8AA58D6"
+							componentimage="894A2B21-59F5-47D7-B0FAC7CD13B0F844"
+							width="50"
+							height="50"/>
+					</imagemetrics>
+				</_2>
+				<_3
+					this="9DEE4AB1-33D3-4A2C-ACAFFA15D56F212B"
+					name="3"
+					width="50"
+					height="50"
+					tooltip="{{CcoStaticObject: Loc(&quot;trials_gold_tier_tooltip&quot;) + Loc(&quot;trials_score_needed_for_tier&quot;, GameCoreContext.TrialManager.TrialGoldMedalScore) }}"
+					tooltiplabel="StateTooltip_5f834206"
+					interactive="true"
+					disabled="true"
+					uniqueguid="9DEE4AB1-33D3-4A2C-ACAFFA15D56F212B">
+					<imagemetrics>
+						<image
+							this="018A9035-B822-4686-8B10A118864623C4"
+							uniqueguid="018A9035-B822-4686-8B10A118864623C4"
+							componentimage="CB795966-127E-4F75-88239574C7FBC807"
+							width="50"
+							height="50"/>
+					</imagemetrics>
+				</_3>
+				<_4
+					this="4A5044E5-A844-4EC1-9FF9D601B889CA83"
+					name="4"
+					width="50"
+					height="50"
+					tooltip="{{CcoStaticObject: Loc(&quot;trials_platinum_tier_tooltip&quot;) + Loc(&quot;trials_score_needed_for_tier&quot;, GameCoreContext.TrialManager.TrialPlatinumMedalScore) }}"
+					tooltiplabel="StateTooltip_1c379015"
+					interactive="true"
+					disabled="true"
+					uniqueguid="4A5044E5-A844-4EC1-9FF9D601B889CA83"/>
+			</states>
+		</tier_requirement>
 	</components>
 </layout>

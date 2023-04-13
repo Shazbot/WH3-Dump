@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="137"
+	version="141"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -104,6 +104,7 @@
 			this="A0975751-DBDD-4317-9D716892183F514C"
 			id="attribute_list"
 			part_of_template="true"
+			uniqueguid_in_template="ED0CAF71-CF86-47C8-904AC5515C4C627A"
 			uniqueguid="A0975751-DBDD-4317-9D716892183F514C"
 			dimensions="360.00,24.00">
 			<state_uniqueguids>
@@ -134,6 +135,7 @@
 			this="3925D669-8720-48AA-A62908D75F2EECCC"
 			id="label_cooldown_modifier"
 			part_of_template="true"
+			uniqueguid_in_template="14D1A036-2E04-425B-B2C34DC5249D4774"
 			uniqueguid="3925D669-8720-48AA-A62908D75F2EECCC"
 			dimensions="190.00,24.00"
 			priority="255">
@@ -167,6 +169,7 @@
 			this="B7391FDF-F88F-4588-AA491FC725D6E4D2"
 			id="value_damage"
 			part_of_template="true"
+			uniqueguid_in_template="516C85C8-EC63-4998-AB21FFDD06A99398"
 			uniqueguid="B7391FDF-F88F-4588-AA491FC725D6E4D2"
 			dimensions="151.00,24.00"
 			priority="255">
@@ -179,8 +182,13 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoSpecialAbilityPhaseRecord"
-					context_function_id="(x = DamagePerSecond) =&gt; { x | Format(&quot;%d - %d&quot;, RoundFloat(0.5 * x), x) }"/>
+					context_function_id="IntensifiedRangeIntValueText(DamagePerSecond, &quot;%d-%d&quot;, 0.5)"/>
 			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="suppress_localise_asserts"
+					value=""/>
+			</user_properties>
 			<localised_texts>
 				<localised_text/>
 				<localised_text
@@ -194,8 +202,9 @@
 			this="8B46343C-2849-458C-9B540D9FBC5147A7"
 			id="label_phase_damage_parent"
 			part_of_template="true"
+			uniqueguid_in_template="80001692-BC35-42EA-AB26F5F22B051E82"
 			uniqueguid="8B46343C-2849-458C-9B540D9FBC5147A7"
-			dimensions="340.00,24.00"
+			dimensions="346.00,24.00"
 			priority="255">
 			<state_uniqueguids>
 				<state_uniqueguid
@@ -219,6 +228,7 @@
 			this="0A518F1A-67E1-4A90-85BE320A47CFD047"
 			id="value_heal"
 			part_of_template="true"
+			uniqueguid_in_template="F1B42246-1652-4945-8F0833F76AE7E43F"
 			uniqueguid="0A518F1A-67E1-4A90-85BE320A47CFD047"
 			dimensions="27.00,24.00"
 			priority="255">
@@ -231,8 +241,13 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoSpecialAbilityPhaseRecord"
-					context_function_id="FormatPercentage(TotalHealPercent*100 / MaxNumericValue(Duration, 1.0))"/>
+					context_function_id="IntensifiedValueText(TotalHealPercent *100 / MaxNumericValue(Duration, 1.0), &quot;%+.2f%%&quot;)"/>
 			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="suppress_localise_asserts"
+					value=""/>
+			</user_properties>
 			<localised_texts>
 				<localised_text/>
 				<localised_text
@@ -246,8 +261,9 @@
 			this="431C26EA-0240-4A3D-80A23309D7C94B16"
 			id="label_phase_heal_parent"
 			part_of_template="true"
+			uniqueguid_in_template="6C71D3E9-B21A-499F-BE595BB26ED6ECFF"
 			uniqueguid="431C26EA-0240-4A3D-80A23309D7C94B16"
-			dimensions="350.00,24.00"
+			dimensions="222.00,24.00"
 			priority="255">
 			<state_uniqueguids>
 				<state_uniqueguid
@@ -271,6 +287,7 @@
 			this="7A8D350D-7C18-4581-8570561F806EC7BC"
 			id="label_recharge_modifier"
 			part_of_template="true"
+			uniqueguid_in_template="3A05E05C-F346-4244-84055E4DAAF1F72B"
 			uniqueguid="7A8D350D-7C18-4581-8570561F806EC7BC"
 			dimensions="340.00,24.00"
 			priority="255">
@@ -299,6 +316,7 @@
 			this="9D5496B4-FCC0-4C1F-80E9E8B9AC5B25F1"
 			id="label_recharge_modifier_value"
 			part_of_template="true"
+			uniqueguid_in_template="AEFEF61F-3D6A-4B1D-BEEAE95ECB2AF10E"
 			uniqueguid="9D5496B4-FCC0-4C1F-80E9E8B9AC5B25F1"
 			dimensions="29.00,24.00"
 			priority="255">
@@ -314,12 +332,17 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoSpecialAbilityPhaseRecord"
-					context_function_id="Format(&quot;%+d&quot;, RoundFloat(AbilityRechargeChange)) + Loc(&quot;seconds_abbreviated&quot;)"/>
+					context_function_id="IntensifiedIntValueText(RoundFloat(AbilityRechargeChange), &quot;%+d&quot; + Loc(&quot;seconds_abbreviated&quot;))"/>
 				<callback_with_context
 					callback_id="ContextStateSetter"
 					context_object_id="CcoSpecialAbilityPhaseRecord"
 					context_function_id="AbilityRechargeChange &gt; 0"/>
 			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="suppress_localise_asserts"
+					value=""/>
+			</user_properties>
 			<localised_texts>
 				<localised_text/>
 				<localised_text
@@ -339,6 +362,7 @@
 			id="phase_effect"
 			template_id="phase_effect"
 			part_of_template="true"
+			uniqueguid_in_template="439A25D8-93EF-4237-A6AC5071A3B38702"
 			uniqueguid="CC44296B-E6D7-46F3-A29AA1F741A185DF"
 			dimensions="360.00,362.00">
 			<state_uniqueguids>
@@ -348,6 +372,9 @@
 			</state_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context callback_id="LayoutStallerCallback"/>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoBattleAbility"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -365,6 +392,7 @@
 			this="77B38877-B355-44D8-B486FE3ED324335B"
 			id="phase_effect_flag_list"
 			part_of_template="true"
+			uniqueguid_in_template="7A4D8CDD-8FE0-4D0D-90BD2EE7D5915634"
 			uniqueguid="77B38877-B355-44D8-B486FE3ED324335B"
 			dimensions="360.00,24.00">
 			<state_uniqueguids>
@@ -428,6 +456,7 @@
 			this="8DC57AA8-7DD8-4411-BE6ED86DB106F46F"
 			id="template_attribute"
 			part_of_template="true"
+			uniqueguid_in_template="1D709596-05F8-424C-B3A540DBB1039322"
 			uniqueguid="8DC57AA8-7DD8-4411-BE6ED86DB106F46F"
 			dimensions="345.00,24.00">
 			<state_uniqueguids>
@@ -446,6 +475,7 @@
 			this="FECB693A-3380-4059-B2611D3745513DD7"
 			id="template_effect_flag"
 			part_of_template="true"
+			uniqueguid_in_template="A9332F33-5C82-4252-9CC8082C6FFAA360"
 			uniqueguid="FECB693A-3380-4059-B2611D3745513DD7"
 			dimensions="360.00,24.00">
 			<state_uniqueguids>
@@ -472,6 +502,7 @@
 			this="B03A151A-E829-43BA-9B99481BB83B6F8C"
 			id="value_heal_duration_infinite"
 			part_of_template="true"
+			uniqueguid_in_template="D685091B-0C9A-47ED-AEA9009C00454F03"
 			uniqueguid="B03A151A-E829-43BA-9B99481BB83B6F8C"
 			dimensions="74.00,24.00"
 			is_visible="false"
@@ -503,6 +534,7 @@
 			this="6AD6FA0E-4AD5-4616-BA6EF281D4E050E3"
 			id="label_damage"
 			part_of_template="true"
+			uniqueguid_in_template="71AC2041-F6AE-454C-8278FA2BF6006CCC"
 			uniqueguid="6AD6FA0E-4AD5-4616-BA6EF281D4E050E3"
 			dimensions="190.00,24.00"
 			priority="255">
@@ -536,6 +568,7 @@
 			this="D7A3F25E-F2E7-4AC7-8628B00BAA47427F"
 			id="label_heal"
 			part_of_template="true"
+			uniqueguid_in_template="58BCF85D-0FEA-46EE-985E4F6E68E7A056"
 			uniqueguid="D7A3F25E-F2E7-4AC7-8628B00BAA47427F"
 			dimensions="190.00,24.00"
 			priority="255">
@@ -556,6 +589,7 @@
 			this="9447CA2E-B8CD-4201-B799AA579BF429D9"
 			id="label_mana_depletion"
 			part_of_template="true"
+			uniqueguid_in_template="672FB2C6-9EE7-4D7B-8B0E5A0442F03038"
 			uniqueguid="9447CA2E-B8CD-4201-B799AA579BF429D9"
 			dimensions="29.00,24.00"
 			priority="255">
@@ -568,8 +602,13 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoSpecialAbilityPhaseRecord"
-					context_function_id="Format(&quot;%+.2f&quot;, ManaMaxDepletionMod)"/>
+					context_function_id="IntensifiedValueText(ManaMaxDepletionMod, &quot;%+.2f&quot;)"/>
 			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="suppress_localise_asserts"
+					value=""/>
+			</user_properties>
 			<localised_texts>
 				<localised_text/>
 				<localised_text
@@ -583,6 +622,7 @@
 			this="7C2EC830-3585-4612-9DE9DA87FD21E2A2"
 			id="label_mana_depletion_header"
 			part_of_template="true"
+			uniqueguid_in_template="BD18E2F4-CDC8-4BB1-906C7A3DA9326A4B"
 			uniqueguid="7C2EC830-3585-4612-9DE9DA87FD21E2A2"
 			dimensions="190.00,24.00"
 			priority="255">
@@ -603,8 +643,9 @@
 			this="2E6DD7D7-8320-423F-9A6A72E252C41F6B"
 			id="label_mana_depletion_parent"
 			part_of_template="true"
+			uniqueguid_in_template="EBD323DB-BB15-4159-A6CE2BF275019F78"
 			uniqueguid="2E6DD7D7-8320-423F-9A6A72E252C41F6B"
-			dimensions="340.00,24.00"
+			dimensions="224.00,24.00"
 			priority="255">
 			<state_uniqueguids>
 				<state_uniqueguid
@@ -628,6 +669,7 @@
 			this="885FEDA1-3243-4F08-B4BE271AC73B14FC"
 			id="label_mana_recharge"
 			part_of_template="true"
+			uniqueguid_in_template="51994602-EDEB-4B5F-8AEDBF742323529B"
 			uniqueguid="885FEDA1-3243-4F08-B4BE271AC73B14FC"
 			dimensions="29.00,24.00"
 			priority="255">
@@ -640,8 +682,13 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoSpecialAbilityPhaseRecord"
-					context_function_id="(regen = ManaRegenMod * 100) =&gt; { regen | regen &gt; 0 =&gt; Format(&quot;+%d%%&quot;, RoundFloat(regen)) | Format(&quot;-%d%%&quot;, RoundFloat(Abs(regen))) }"/>
+					context_function_id="IntensifiedIntValueText(RoundFloat(Abs(ManaRegenMod * 100)), GetIfElse(ManaRegenMod &gt; 0, &quot;+%d%%&quot;, &quot;-%d%%&quot;))"/>
 			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="suppress_localise_asserts"
+					value=""/>
+			</user_properties>
 			<localised_texts>
 				<localised_text/>
 				<localised_text
@@ -655,6 +702,7 @@
 			this="5A19EEB9-BF6E-47B4-9C0E18167DF49398"
 			id="label_mana_recharge_header"
 			part_of_template="true"
+			uniqueguid_in_template="2B6929D7-2998-4B6A-AD7E2B1CCF762B19"
 			uniqueguid="5A19EEB9-BF6E-47B4-9C0E18167DF49398"
 			dimensions="190.00,24.00"
 			priority="255">
@@ -675,6 +723,7 @@
 			this="C298C30A-6F2B-41E2-9CB2BC586D12D6BF"
 			id="label_mana_recharge_parent"
 			part_of_template="true"
+			uniqueguid_in_template="0B876DD7-4529-4749-B456B3E01007FA96"
 			uniqueguid="C298C30A-6F2B-41E2-9CB2BC586D12D6BF"
 			dimensions="340.00,24.00"
 			priority="255">
@@ -700,6 +749,7 @@
 			this="7FF8E90B-AC2E-465F-A6D5D3A64342D838"
 			id="attribute_image"
 			part_of_template="true"
+			uniqueguid_in_template="721860B0-F99D-4929-AC18FFD0B45DF3A6"
 			uniqueguid="7FF8E90B-AC2E-465F-A6D5D3A64342D838"
 			dimensions="24.00,24.00"
 			dock_point="Center Right"
@@ -729,6 +779,7 @@
 			this="88FC73F4-02C6-4894-9F98C4A393254675"
 			id="attribute_image_parent"
 			part_of_template="true"
+			uniqueguid_in_template="C8C1E3FA-875C-4ED0-8DDD3D6E91FA7B1A"
 			uniqueguid="88FC73F4-02C6-4894-9F98C4A393254675"
 			dimensions="45.00,24.00">
 			<state_uniqueguids>
@@ -747,6 +798,7 @@
 			this="419733F2-88EC-4FAA-92A6C0BCF1D627AD"
 			id="attribute_text"
 			part_of_template="true"
+			uniqueguid_in_template="27B8E2F0-7476-48F4-95B1FAC23C88EA53"
 			uniqueguid="419733F2-88EC-4FAA-92A6C0BCF1D627AD"
 			dimensions="300.00,24.00">
 			<state_uniqueguids>
@@ -779,6 +831,7 @@
 			this="7337EE29-DB2A-409C-ADFB625DCB2E473C"
 			id="effect_icon"
 			part_of_template="true"
+			uniqueguid_in_template="8710D3F4-8DB5-4610-A6C9290AAE102A36"
 			uniqueguid="7337EE29-DB2A-409C-ADFB625DCB2E473C"
 			dimensions="24.00,24.00"
 			dock_point="Center Right">
@@ -811,6 +864,7 @@
 			this="534ED039-1B9B-4A72-8FA5022C073C2E4D"
 			id="effect_icon_parent"
 			part_of_template="true"
+			uniqueguid_in_template="6C766B26-2ED4-46E5-AE8226F0EC78E92B"
 			uniqueguid="534ED039-1B9B-4A72-8FA5022C073C2E4D"
 			dimensions="45.00,24.00">
 			<state_uniqueguids>
@@ -829,8 +883,9 @@
 			this="576D2E07-B41E-4B1E-B7F2F825D4FE5A54"
 			id="ignition_imbuement_value"
 			part_of_template="true"
+			uniqueguid_in_template="2AAB8F76-BAB8-481A-9341969FDAE21D51"
 			uniqueguid="576D2E07-B41E-4B1E-B7F2F825D4FE5A54"
-			dimensions="131.00,24.00"
+			dimensions="232.00,16.00"
 			priority="255">
 			<state_uniqueguids>
 				<state_uniqueguid
@@ -857,6 +912,7 @@
 			this="3515D0DA-D8A2-4C14-B9E62658D7C73E2A"
 			id="label_effect"
 			part_of_template="true"
+			uniqueguid_in_template="D56D71AA-8F2C-49DD-9517E9FE73BE4440"
 			uniqueguid="3515D0DA-D8A2-4C14-B9E62658D7C73E2A"
 			dimensions="315.00,24.00">
 			<state_uniqueguids>
@@ -895,6 +951,7 @@
 			this="F1689F8F-CE93-4125-8A9C373C6C56A28B"
 			id="label_ignition_imbument"
 			part_of_template="true"
+			uniqueguid_in_template="A5C56E48-D158-4296-8FA375F707B12C5B"
 			uniqueguid="F1689F8F-CE93-4125-8A9C373C6C56A28B"
 			dimensions="113.00,24.00"
 			priority="255">
@@ -915,8 +972,9 @@
 			this="02547EEE-FA8A-4AFA-9B23DF3B0F24418B"
 			id="label_ignition_parent"
 			part_of_template="true"
+			uniqueguid_in_template="29CAC083-A0EF-4BC9-A5166B8E08D7424B"
 			uniqueguid="02547EEE-FA8A-4AFA-9B23DF3B0F24418B"
-			dimensions="244.00,24.00"
+			dimensions="345.00,24.00"
 			priority="255">
 			<state_uniqueguids>
 				<state_uniqueguid
@@ -940,6 +998,7 @@
 			this="6B44654F-C6A3-41D8-AABF3A9180374A03"
 			id="label_imbue_contact_header"
 			part_of_template="true"
+			uniqueguid_in_template="CC7F5C74-8B38-4771-8395F80289767F4A"
 			uniqueguid="6B44654F-C6A3-41D8-AABF3A9180374A03"
 			dimensions="113.00,24.00"
 			priority="255">
@@ -960,8 +1019,9 @@
 			this="129F2EB3-2185-4D9C-B402344F9E28FFEE"
 			id="label_imbue_contact_name"
 			part_of_template="true"
+			uniqueguid_in_template="28E2A9E6-650B-4048-B00AE382670FC2D2"
 			uniqueguid="129F2EB3-2185-4D9C-B402344F9E28FFEE"
-			dimensions="112.00,24.00"
+			dimensions="232.00,16.00"
 			priority="255">
 			<state_uniqueguids>
 				<state_uniqueguid
@@ -987,8 +1047,9 @@
 			this="A861FB39-A836-453C-AA7D773BA33A2218"
 			id="label_imbue_contact_parent"
 			part_of_template="true"
+			uniqueguid_in_template="8ED818EF-6616-4980-A965BD2319606390"
 			uniqueguid="A861FB39-A836-453C-AA7D773BA33A2218"
-			dimensions="225.00,24.00"
+			dimensions="345.00,24.00"
 			priority="255">
 			<state_uniqueguids>
 				<state_uniqueguid
@@ -1012,6 +1073,7 @@
 			this="05338D21-F0F1-44F9-9CA69E8074E7992C"
 			id="label_magic_imbument"
 			part_of_template="true"
+			uniqueguid_in_template="74209019-A744-4510-B853CA742F55FE37"
 			uniqueguid="05338D21-F0F1-44F9-9CA69E8074E7992C"
 			dimensions="113.00,24.00"
 			priority="255">
@@ -1032,8 +1094,9 @@
 			this="92E7A0D7-7FC6-416D-89A697561A7D0A80"
 			id="label_magic_parent"
 			part_of_template="true"
+			uniqueguid_in_template="603FAF34-F6CC-4393-9A2F424B93E74531"
 			uniqueguid="92E7A0D7-7FC6-416D-89A697561A7D0A80"
-			dimensions="244.00,24.00"
+			dimensions="345.00,24.00"
 			priority="255">
 			<state_uniqueguids>
 				<state_uniqueguid
@@ -1057,8 +1120,9 @@
 			this="5DEE39B3-756F-4AA7-B93155D98853A306"
 			id="magic_imbuement_value"
 			part_of_template="true"
+			uniqueguid_in_template="68B23E41-FD41-4EE6-A957DC174EFFD5D6"
 			uniqueguid="5DEE39B3-756F-4AA7-B93155D98853A306"
-			dimensions="131.00,24.00"
+			dimensions="232.00,16.00"
 			priority="255">
 			<state_uniqueguids>
 				<state_uniqueguid
@@ -1085,6 +1149,7 @@
 			this="479C9211-FC9D-4A05-9C30F0CEBE7397C4"
 			id="phase_effect_list"
 			part_of_template="true"
+			uniqueguid_in_template="F0CD56EE-FD8E-4C43-B336F95D2C7BA24C"
 			uniqueguid="479C9211-FC9D-4A05-9C30F0CEBE7397C4"
 			dimensions="360.00,24.00">
 			<state_uniqueguids>
@@ -1118,6 +1183,7 @@
 			this="980FB0E1-6E53-4BD8-B8403E3D0B977CA8"
 			id="template_effect"
 			part_of_template="true"
+			uniqueguid_in_template="6F3EBC19-F288-4F13-9DA763C74430F614"
 			uniqueguid="980FB0E1-6E53-4BD8-B8403E3D0B977CA8"
 			dimensions="360.00,24.00">
 			<state_uniqueguids>
@@ -1142,6 +1208,7 @@
 			this="B7496B21-7F17-456C-AD6D48C9901D4DA8"
 			id="spread_label"
 			part_of_template="true"
+			uniqueguid_in_template="1C321CD4-07B2-41DC-B8C9D4A4FFF55E8E"
 			uniqueguid="B7496B21-7F17-456C-AD6D48C9901D4DA8"
 			dimensions="190.00,24.00"
 			priority="255">
@@ -1162,6 +1229,7 @@
 			this="7F5364DC-B2CC-45E3-BBA003367FAE6C77"
 			id="spread_parent"
 			part_of_template="true"
+			uniqueguid_in_template="2D50A15E-6DA0-4680-A21D14A1B0A7C24F"
 			uniqueguid="7F5364DC-B2CC-45E3-BBA003367FAE6C77"
 			dimensions="349.00,35.00"
 			priority="255"
@@ -1191,6 +1259,7 @@
 			this="EFE60072-0C93-4361-A904CA5E414F93F6"
 			id="spread_value"
 			part_of_template="true"
+			uniqueguid_in_template="B30F747D-61A9-4C7F-813E96ACA1285C53"
 			uniqueguid="EFE60072-0C93-4361-A904CA5E414F93F6"
 			dimensions="27.00,24.00"
 			priority="255">
@@ -1218,6 +1287,7 @@
 			this="BE491944-F0D6-40F6-AA742C41EA6E6946"
 			id="additional_ui_effects_list"
 			part_of_template="true"
+			uniqueguid_in_template="85379469-3AC4-4B02-9C8AF1D01DE5F301"
 			uniqueguid="BE491944-F0D6-40F6-AA742C41EA6E6946"
 			dimensions="321.00,28.00">
 			<state_uniqueguids>
@@ -1259,6 +1329,7 @@
 			this="3DC31354-7BBA-4A77-ABAE1A70745D9260"
 			id="icon_effect"
 			part_of_template="true"
+			uniqueguid_in_template="62C83020-F260-47B7-93C6BADE7D3368C1"
 			uniqueguid="3DC31354-7BBA-4A77-ABAE1A70745D9260"
 			dimensions="18.00,18.00"
 			dock_point="Top Right"
@@ -1329,6 +1400,7 @@
 			this="4BA8527F-6D87-4A15-B2AE08AD8CEE4F24"
 			id="icon_effect_parent"
 			part_of_template="true"
+			uniqueguid_in_template="8C4E6617-7867-4FAE-9219663A66C13E13"
 			uniqueguid="4BA8527F-6D87-4A15-B2AE08AD8CEE4F24"
 			dimensions="45.00,24.00">
 			<state_uniqueguids>
@@ -1347,6 +1419,7 @@
 			this="15D55835-014C-4C70-8E4B044E816947B1"
 			id="label_additional_effect"
 			part_of_template="true"
+			uniqueguid_in_template="5D3B40B6-E1FE-469A-B5565BD347364756"
 			uniqueguid="15D55835-014C-4C70-8E4B044E816947B1"
 			dimensions="305.00,24.00">
 			<state_uniqueguids>
@@ -1405,6 +1478,7 @@
 			this="E19E07EC-1B7D-44F2-9B185E6E5631F5FB"
 			id="template_additional_effect"
 			part_of_template="true"
+			uniqueguid_in_template="401FD0E3-079C-4DA8-910608D102D22E04"
 			uniqueguid="E19E07EC-1B7D-44F2-9B185E6E5631F5FB"
 			dimensions="355.00,24.00">
 			<state_uniqueguids>
@@ -1423,6 +1497,7 @@
 			this="6CAC78AE-066B-45D1-BEE9D4D8B1EBA663"
 			id="label_barrier"
 			part_of_template="true"
+			uniqueguid_in_template="531E70D9-EA8B-4A65-A579B867898DDB23"
 			uniqueguid="6CAC78AE-066B-45D1-BEE9D4D8B1EBA663"
 			dimensions="190.00,35.00"
 			priority="255">
@@ -1443,6 +1518,7 @@
 			this="6BE235F0-DE18-4FA5-9C5A0A9D95BA6E05"
 			id="label_phase_barrier_parent"
 			part_of_template="true"
+			uniqueguid_in_template="8BAAE8FC-A9E8-42B8-ABEE90B444D50DCC"
 			uniqueguid="6BE235F0-DE18-4FA5-9C5A0A9D95BA6E05"
 			dimensions="222.00,35.00"
 			priority="255">
@@ -1492,6 +1568,7 @@
 			this="96A90077-EDCF-486D-B6549E7A0A9C49A1"
 			id="value_barrier"
 			part_of_template="true"
+			uniqueguid_in_template="CCD9FA44-C256-4572-82F09185BAAE33DD"
 			uniqueguid="96A90077-EDCF-486D-B6549E7A0A9C49A1"
 			dimensions="27.00,24.00"
 			offset="0.00,2.00"
@@ -1505,8 +1582,13 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoSpecialAbilityPhaseRecord"
-					context_function_id="FormatPercentage(TotalBarrierHealPercent*100 / MaxNumericValue(Duration, 1.0))"/>
+					context_function_id="IntensifiedValueText(TotalBarrierHealPercent *100 / MaxNumericValue(Duration, 1.0), &quot;%+.2f%%&quot;)"/>
 			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="suppress_localise_asserts"
+					value=""/>
+			</user_properties>
 			<localised_texts>
 				<localised_text/>
 				<localised_text
@@ -1520,6 +1602,7 @@
 			this="07209E6C-C940-4186-A5E6A086EED6F2E3"
 			id="value_barrier_duration_infinite"
 			part_of_template="true"
+			uniqueguid_in_template="6BDC97F2-0683-4BAE-AC597C32C1FB3918"
 			uniqueguid="07209E6C-C940-4186-A5E6A086EED6F2E3"
 			dimensions="74.00,24.00"
 			is_visible="false"
@@ -1675,7 +1758,6 @@
 					name="NewState"
 					width="360"
 					height="395"
-					texthbehaviour="Never split"
 					uniqueguid="274CB815-F929-479E-B393A5C79108192B"/>
 			</states>
 			<LayoutEngine
@@ -1710,17 +1792,19 @@
 					name="default"
 					width="192"
 					height="24"
-					text="Effect name"
-					textvalign="Center"
-					textxoffset="8.00,8.00"
-					textyoffset="4.00,6.00"
-					texthbehaviour="Resize"
-					textlabel="title_default_Text_cfc8f7e0"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
-					uniqueguid="4963D62F-C4BE-4BA8-B4EBF972DD1713E8"/>
+					uniqueguid="4963D62F-C4BE-4BA8-B4EBF972DD1713E8">
+					<component_text
+						text="Effect name"
+						textvalign="Center"
+						textxoffset="8.00,8.00"
+						textyoffset="4.00,6.00"
+						texthbehaviour="Resize"
+						textlabel="title_default_Text_cfc8f7e0"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
+				</default>
 			</states>
 		</title>
 		<template_ability
@@ -1750,7 +1834,6 @@
 				<newstate
 					this="FA399A55-F9A1-47F7-96062A787FFB6D2A"
 					name="NewState"
-					texthbehaviour="Never split"
 					interactive="true"
 					uniqueguid="FA399A55-F9A1-47F7-96062A787FFB6D2A">
 					<imagemetrics>
@@ -1774,7 +1857,6 @@
 					this="35278EE7-7E37-4707-8AE4531B75E72D4D"
 					name="default"
 					width="223"
-					texthbehaviour="Never split"
 					uniqueguid="35278EE7-7E37-4707-8AE4531B75E72D4D"/>
 			</states>
 			<LayoutEngine
@@ -1802,7 +1884,6 @@
 					name="NewState"
 					width="360"
 					height="362"
-					texthbehaviour="Never split"
 					uniqueguid="3A56FB5B-5C9B-4818-BD3E0460602AA4B5"/>
 			</states>
 			<LayoutEngine
@@ -1835,7 +1916,6 @@
 					name="NewState"
 					width="24"
 					height="24"
-					texthbehaviour="Never split"
 					uniqueguid="DD2457EA-5E3E-4045-AB4E9AC0AE246169"/>
 			</states>
 			<LayoutEngine
@@ -1880,7 +1960,6 @@
 					name="yang"
 					width="24"
 					height="24"
-					texthbehaviour="Never split"
 					interactive="true"
 					uniqueguid="ECB2407C-76BA-4B0B-8FD699F75CA993C3">
 					<imagemetrics>
@@ -1897,7 +1976,6 @@
 					name="yin"
 					width="24"
 					height="24"
-					texthbehaviour="Never split"
 					interactive="true"
 					uniqueguid="CB58C69C-D71D-429C-A09A4E6AF55DD5DD">
 					<imagemetrics>
@@ -1937,16 +2015,18 @@
 					name="default"
 					width="116"
 					height="26"
-					text="EFFECT NAME"
-					textvalign="Center"
-					texthbehaviour="Resize"
-					textlabel="title_default_Text_540064"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
-					font_colour_override_preset_key="green"
-					uniqueguid="92F3F309-B71E-4327-9A989491651D59E2"/>
+					uniqueguid="92F3F309-B71E-4327-9A989491651D59E2">
+					<component_text
+						text="EFFECT NAME"
+						textvalign="Center"
+						texthbehaviour="Resize"
+						textlabel="title_default_Text_540064"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"
+						font_colour_override_preset_key="green"/>
+				</default>
 			</states>
 		</harmony_buff_title>
 		<harmony_title_holder
@@ -1962,7 +2042,6 @@
 					name="default"
 					width="24"
 					height="24"
-					texthbehaviour="Never split"
 					uniqueguid="B9C9D4E4-BA1A-44F1-B13E4B4BD5D25A4B"/>
 			</states>
 			<LayoutEngine

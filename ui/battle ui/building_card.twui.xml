@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="137"
+	version="141"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -27,10 +27,6 @@
 					name="NewState"
 					width="1600"
 					height="900"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="ingame_tooltip"
 					interactive="true"
 					uniqueguid="54096DD1-4A5F-4448-B873B7655CB51A19">
 					<imagemetrics>
@@ -42,6 +38,11 @@
 							height="960"
 							colour="#BBFFBEFF"/>
 					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="ingame_tooltip"/>
 				</newstate>
 			</states>
 		</root>
@@ -57,6 +58,7 @@
 			defaultstate="CB4DEE9C-A8A0-43D5-9C2D1FB7D9BC6780">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="UnitCard"/>
+				<callback_with_context callback_id="TopmostWhenDraggingCallback"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -95,9 +97,6 @@
 					name="active"
 					width="64"
 					height="152"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					interactive="true"
 					shader_name="brighten_t0"
 					uniqueguid="CB4DEE9C-A8A0-43D5-9C2D1FB7D9BC6780"
@@ -143,19 +142,19 @@
 							transition_m_transition_time="200"
 							transition_m_interpolation_property_mask="8"/>
 					</transitionmap>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
 				</active>
 				<hover
 					this="DB51A92C-F589-4852-9DDF69723BDB6202"
 					name="hover"
 					width="64"
 					height="152"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					interactive="true"
 					shader_name="brighten_t0"
 					shadervars="0.50,0.00,0.00,0.00"
-					textshadervars="0.20,0.00,0.00,0.00"
 					uniqueguid="DB51A92C-F589-4852-9DDF69723BDB6202"
 					stateeditordisplaypos="123.00,272.00">
 					<imagemetrics>
@@ -200,20 +199,20 @@
 							transition_m_transition_time="200"
 							transition_m_interpolation_property_mask="8"/>
 					</transitionmap>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"
+						textshadervars="0.20,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
 					this="AC0BA807-7752-4DC1-9D39925D3DF0AE56"
 					name="inactive"
 					width="64"
 					height="152"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_tooltip_text"
 					interactive="true"
 					shader_name="set_greyscale_t0"
 					shadervars="1.00,1.00,0.00,0.00"
-					textshadervars="1.00,0.50,0.00,0.00"
 					uniqueguid="AC0BA807-7752-4DC1-9D39925D3DF0AE56">
 					<imagemetrics>
 						<image
@@ -251,19 +250,21 @@
 							width="64"
 							height="152"/>
 					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_tooltip_text"
+						textshadervars="1.00,0.50,0.00,0.00"/>
 				</inactive>
 				<selected
 					this="EFF89E98-3969-4D76-9CC0FF401ED72B84"
 					name="selected"
 					width="64"
 					height="152"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					interactive="true"
 					shader_name="brighten_t0"
 					shadervars="1.20,0.00,0.00,0.00"
-					textshadervars="0.50,0.00,0.00,0.00"
 					uniqueguid="EFF89E98-3969-4D76-9CC0FF401ED72B84"
 					stateeditordisplaypos="227.00,92.00">
 					<imagemetrics>
@@ -313,19 +314,20 @@
 							transition_m_transition_time="200"
 							transition_m_interpolation_property_mask="8"/>
 					</transitionmap>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"
+						textshadervars="0.50,0.00,0.00,0.00"/>
 				</selected>
 				<selected_hover
 					this="1CADD5B5-7F2E-4BF2-9388AF871E8DD5C8"
 					name="selected_hover"
 					width="64"
 					height="152"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					interactive="true"
 					shader_name="brighten_t0"
 					shadervars="1.40,0.00,0.00,0.00"
-					textshadervars="0.50,0.00,0.00,0.00"
 					uniqueguid="1CADD5B5-7F2E-4BF2-9388AF871E8DD5C8"
 					stateeditordisplaypos="296.00,217.00">
 					<imagemetrics>
@@ -376,6 +378,11 @@
 							transition_m_transition_time="200"
 							transition_m_interpolation_property_mask="8"/>
 					</transitionmap>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"
+						textshadervars="0.50,0.00,0.00,0.00"/>
 				</selected_hover>
 			</states>
 		</building_card>

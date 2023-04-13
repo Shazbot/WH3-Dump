@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="137"
+	version="141"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -108,7 +108,6 @@
 			</states>
 			<LayoutEngine
 				type="List"
-				matchfontsizes="true"
 				margins="5.00,10.00">
 				<columnwidths>
 					<column width="231.999985"/>
@@ -148,18 +147,20 @@
 					name="NewState"
 					width="251"
 					height="27"
-					text="dy_text"
-					textvalign="Center"
-					textxoffset="8.00,0.00"
-					texthbehaviour="Never split"
-					textlabel="row_tx_NewState_Text_75002a"
-					font_m_font_name="dev_font"
-					font_m_size="12"
-					font_m_colour="#C0C0C0FF"
-					font_m_leading="1"
-					fontcat_name="dev_text_grey"
 					focustype="Active"
-					uniqueguid="ABF17E02-79E2-4A4E-8D5E34AC31665DDC"/>
+					uniqueguid="ABF17E02-79E2-4A4E-8D5E34AC31665DDC">
+					<component_text
+						text="dy_text"
+						textvalign="Center"
+						textxoffset="8.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="row_tx_NewState_Text_75002a"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#C0C0C0FF"
+						font_m_leading="1"
+						fontcat_name="dev_text_grey"/>
+				</newstate>
 			</states>
 		</name>
 		<row_example
@@ -304,6 +305,7 @@
 			defaultstate="EB1976C0-FCE4-4458-A9883713B3AE54BE">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="VSliderHandle"/>
+				<callback_with_context callback_id="TopmostWhenDraggingCallback"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -329,11 +331,6 @@
 					name="active"
 					width="10"
 					height="5"
-					font_m_font_name="dev_font"
-					font_m_size="18"
-					font_m_colour="#FFFFFFFF"
-					font_m_leading="1"
-					fontcat_name="dev_subheader"
 					interactive="true"
 					uniqueguid="EB1976C0-FCE4-4458-A9883713B3AE54BE"
 					stateeditordisplaypos="40.00,24.00">
@@ -363,19 +360,19 @@
 							transition_m_transition_time="200"
 							transition_m_interpolation_property_mask="64"/>
 					</transitionmap>
+					<component_text
+						font_m_font_name="dev_font"
+						font_m_size="18"
+						font_m_colour="#FFFFFFFF"
+						font_m_leading="1"
+						fontcat_name="dev_subheader"/>
 				</active>
 				<down
 					this="ABBC4928-D969-45BA-92D461664C4E1B59"
 					name="down"
 					width="10"
 					height="5"
-					font_m_font_name="dev_font"
-					font_m_size="18"
-					font_m_colour="#FFFFFFFF"
-					font_m_leading="1"
-					fontcat_name="dev_subheader"
 					interactive="true"
-					textshadervars="0.30,0.00,0.00,0.00"
 					uniqueguid="ABBC4928-D969-45BA-92D461664C4E1B59"
 					stateeditordisplaypos="145.00,219.00">
 					<imagemetrics>
@@ -407,17 +404,19 @@
 							index="1"
 							transition_m_target_state="A9F93E3D-CFA0-4794-894003951AB15E36"/>
 					</transitionmap>
+					<component_text
+						font_m_font_name="dev_font"
+						font_m_size="18"
+						font_m_colour="#FFFFFFFF"
+						font_m_leading="1"
+						fontcat_name="dev_subheader"
+						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
 					this="A9F93E3D-CFA0-4794-894003951AB15E36"
 					name="down_off"
 					width="10"
 					height="5"
-					font_m_font_name="dev_font"
-					font_m_size="18"
-					font_m_colour="#FFFFFFFF"
-					font_m_leading="1"
-					fontcat_name="dev_subheader"
 					interactive="true"
 					uniqueguid="A9F93E3D-CFA0-4794-894003951AB15E36"
 					stateeditordisplaypos="40.00,319.00">
@@ -447,19 +446,19 @@
 							index="8"
 							transition_m_target_state="EB1976C0-FCE4-4458-A9883713B3AE54BE"/>
 					</transitionmap>
+					<component_text
+						font_m_font_name="dev_font"
+						font_m_size="18"
+						font_m_colour="#FFFFFFFF"
+						font_m_leading="1"
+						fontcat_name="dev_subheader"/>
 				</down_off>
 				<hover
 					this="AE345B47-CF29-4811-B288FA9D93CBAE27"
 					name="hover"
 					width="10"
 					height="5"
-					font_m_font_name="dev_font"
-					font_m_size="18"
-					font_m_colour="#FFFFFFFF"
-					font_m_leading="1"
-					fontcat_name="dev_subheader"
 					interactive="true"
-					textshadervars="0.30,0.00,0.00,0.00"
 					uniqueguid="AE345B47-CF29-4811-B288FA9D93CBAE27"
 					stateeditordisplaypos="137.00,126.00">
 					<imagemetrics>
@@ -494,6 +493,13 @@
 							index="2"
 							transition_m_target_state="ABBC4928-D969-45BA-92D461664C4E1B59"/>
 					</transitionmap>
+					<component_text
+						font_m_font_name="dev_font"
+						font_m_size="18"
+						font_m_colour="#FFFFFFFF"
+						font_m_leading="1"
+						fontcat_name="dev_subheader"
+						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
 					this="FCA8F5F8-C9EB-47F6-85BAEAC0FA1055F2"
@@ -501,14 +507,16 @@
 					width="10"
 					height="5"
 					soundcategory="UI_GBL_TMP_Square_Small_Button_Locked"
-					font_m_font_name="dev_font"
-					font_m_size="18"
-					font_m_colour="#FFFFFFFF"
-					font_m_leading="1"
-					fontcat_name="dev_subheader"
 					interactive="true"
 					disabled="true"
-					uniqueguid="FCA8F5F8-C9EB-47F6-85BAEAC0FA1055F2"/>
+					uniqueguid="FCA8F5F8-C9EB-47F6-85BAEAC0FA1055F2">
+					<component_text
+						font_m_font_name="dev_font"
+						font_m_size="18"
+						font_m_colour="#FFFFFFFF"
+						font_m_leading="1"
+						fontcat_name="dev_subheader"/>
+				</inactive>
 			</states>
 		</handle>
 		<vslider
@@ -554,11 +562,6 @@
 					name="NewState"
 					width="4"
 					height="140"
-					font_m_font_name="dev_font"
-					font_m_size="15"
-					font_m_colour="#FFFFFFFF"
-					font_m_leading="1"
-					fontcat_name="dev_item_header"
 					interactive="true"
 					uniqueguid="087CB399-3653-4C09-AF7BAA83D7BB2918"
 					stateeditordisplaypos="-842150464.00,-842150464.00">
@@ -573,6 +576,12 @@
 							dockpoint="Top Center"
 							canresizewidth="false"/>
 					</imagemetrics>
+					<component_text
+						font_m_font_name="dev_font"
+						font_m_size="15"
+						font_m_colour="#FFFFFFFF"
+						font_m_leading="1"
+						fontcat_name="dev_item_header"/>
 				</newstate>
 			</states>
 		</vslider>

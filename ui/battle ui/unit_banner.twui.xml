@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="138"
+	version="141"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -11,6 +11,10 @@
 						<button_txt this="B0220901-C53B-4B3A-9A09BC604A2AB125"/>
 						<dev_icon this="C385F7E2-11EE-4F89-970A9064AF421F9A"/>
 					</dev_button_kill>
+					<dev_button_respawn this="5CC53264-5531-4C9B-87629DA1254BD345">
+						<button_txt this="3E8614C3-A115-4B16-A7ACC8ADDFA9ACDC"/>
+						<dev_icon this="E785D8F8-6A36-40F0-9B1394DE704BD658"/>
+					</dev_button_respawn>
 					<dev_text_button_toggle this="E5F695DD-CC56-4DCD-BADB33568DE200C7">
 						<button_txt this="394060E5-FB98-44D8-BE91FD9EF0209DE9"/>
 						<dev_icon this="114306DE-3F15-414A-99C822DC3E4B176A"/>
@@ -146,7 +150,6 @@
 			part_of_template="true"
 			uniqueguid_in_template="C5314C5F-DB2A-4917-835E17930F5E2573"
 			uniqueguid="B0220901-C53B-4B3A-9A09BC604A2AB125"
-			uniqueguid_in_template="C5314C5F-DB2A-4917-835E17930F5E2573"
 			dimensions="68.00,29.00"
 			dock_point="Center"
 			offset="0.00,-1.00"
@@ -171,12 +174,40 @@
 			</localised_texts>
 		</button_txt>
 		<button_txt
+			this="3E8614C3-A115-4B16-A7ACC8ADDFA9ACDC"
+			id="button_txt"
+			part_of_template="true"
+			uniqueguid_in_template="C5314C5F-DB2A-4917-835E17930F5E2573"
+			uniqueguid="3E8614C3-A115-4B16-A7ACC8ADDFA9ACDC"
+			dimensions="93.00,29.00"
+			dock_point="Center"
+			offset="0.00,-1.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="1735A7F6-36B0-4E80-BFE04EE44211D5B8"/>
+			</state_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					text="Respawn"
+					text_label="StateText_b867e1d1"
+					is_text_localised="false"/>
+			</localised_texts>
+		</button_txt>
+		<button_txt
 			this="394060E5-FB98-44D8-BE91FD9EF0209DE9"
 			id="button_txt"
 			part_of_template="true"
 			uniqueguid_in_template="D4461AE4-E650-4ACA-964262F821D95036"
 			uniqueguid="394060E5-FB98-44D8-BE91FD9EF0209DE9"
-			uniqueguid_in_template="D4461AE4-E650-4ACA-964262F821D95036"
 			dimensions="156.00,29.00"
 			dock_point="Center"
 			offset="0.00,-1.00"
@@ -207,7 +238,6 @@
 			part_of_template="true"
 			uniqueguid_in_template="715902FD-2442-4210-8831AAF520A41055"
 			uniqueguid="2E8DD003-D247-4195-9FF34D3131DAFBF4"
-			uniqueguid_in_template="715902FD-2442-4210-8831AAF520A41055"
 			dimensions="68.00,29.00"
 			sound_category="UI_GBL_TMP_Square_Large_Text_Button_Toggle">
 			<state_uniqueguids>
@@ -230,10 +260,10 @@
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
 					name="ui/skins/default/dev/button_rectangular_backplate.png"
-					uniqueguid="62F7E591-8173-4E65-8BE0D4A02DC88DD7"/>
+					uniqueguid="F56A05CC-C60E-4F7D-8C33CDFAF84E0465"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/dev/button_square_hover_highlight.png"
-					uniqueguid="66917965-EC75-44AD-AA662B9F177020D2"/>
+					uniqueguid="3EF713AC-F1DE-4F0E-8E5C3C4B9681DE42"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context
@@ -264,6 +294,69 @@
 				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
 			</override_images>
 		</dev_button_kill>
+		<dev_button_respawn
+			this="5CC53264-5531-4C9B-87629DA1254BD345"
+			id="dev_button_respawn"
+			template_id="dev_text_button"
+			part_of_template="true"
+			uniqueguid_in_template="715902FD-2442-4210-8831AAF520A41055"
+			uniqueguid="5CC53264-5531-4C9B-87629DA1254BD345"
+			dimensions="93.00,29.00"
+			sound_category="UI_GBL_TMP_Square_Large_Text_Button_Toggle">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="E5411A7A-BAAA-4653-8E64F0FC480B908D"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="17B3583E-3A59-4F08-94719FA080579B4D"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="7E33E00D-39F9-486C-829211DD99623A21"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="3B2355AB-D6B6-4DD4-BE750CD6804CF619"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="82F33F5F-CE56-4BA9-A2BA2ECFEA8A46E9"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/button_rectangular_backplate.png"
+					uniqueguid="F7FFE971-CA58-459F-8B8AAE1116EFC759"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/button_square_hover_highlight.png"
+					uniqueguid="14FF5911-73DB-413C-B4B6F02DF014E3CB"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoBattleUnit"
+					context_function_id="DevRespawn"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/button_rectangular_backplate.png"/>
+				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
+			</override_images>
+		</dev_button_respawn>
 		<dev_text_button_toggle
 			this="E5F695DD-CC56-4DCD-BADB33568DE200C7"
 			id="dev_text_button_toggle"
@@ -271,7 +364,6 @@
 			part_of_template="true"
 			uniqueguid_in_template="13B7E071-1403-4DEB-8F47DD9BDC280D52"
 			uniqueguid="E5F695DD-CC56-4DCD-BADB33568DE200C7"
-			uniqueguid_in_template="13B7E071-1403-4DEB-8F47DD9BDC280D52"
 			dimensions="156.00,29.00"
 			sound_category="UI_GBL_TMP_Square_Large_Text_Button_Toggle">
 			<state_uniqueguids>
@@ -309,10 +401,10 @@
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
 					name="ui/skins/default/dev/button_rectangular_backplate.png"
-					uniqueguid="693BC413-3AD7-4ACF-B05B53303BC0E3B7"/>
+					uniqueguid="A67A9F04-9440-4DB7-99FF9DBE0BAAF9CC"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/dev/button_square_hover_highlight.png"
-					uniqueguid="C906E5D4-010F-4761-8DCF382D1F7AE429"/>
+					uniqueguid="C707A81F-B992-43AE-BCF32F24A80E834C"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context
@@ -393,7 +485,6 @@
 			part_of_template="true"
 			uniqueguid_in_template="C704F062-EBC5-4AF1-B5A1501B72028639"
 			uniqueguid="974CFBCD-7A0D-4EAA-9AC74F13966D5CD2"
-			uniqueguid_in_template="C704F062-EBC5-4AF1-B5A1501B72028639"
 			dimensions="24.00,24.00"
 			is_visible="false"
 			priority="30">
@@ -411,7 +502,7 @@
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
 					name="ui/skins/default/alert_icon_24px_white.png"
-					uniqueguid="ECD46B60-2CBD-42CD-B37DB09130BAF079"/>
+					uniqueguid="AD5738C5-8DDD-4346-BBADA364404D9339"/>
 			</component_image_uniqueguids>
 			<localised_texts>
 				<localised_text/>
@@ -435,7 +526,6 @@
 			part_of_template="true"
 			uniqueguid_in_template="0F4F9F06-4613-496B-A0F05A2B8B88B70D"
 			uniqueguid="C385F7E2-11EE-4F89-970A9064AF421F9A"
-			uniqueguid_in_template="0F4F9F06-4613-496B-A0F05A2B8B88B70D"
 			dimensions="24.00,24.00"
 			dock_point="Center Left"
 			offset="2.00,0.00"
@@ -448,7 +538,37 @@
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
 					name="ui/skins/default/dev/dev_icon.png"
-					uniqueguid="B4C60633-13B5-4B5D-A4D60454E156C3C2"/>
+					uniqueguid="9CC0BFAD-401A-4FD1-964A53667C81B887"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/dev_icon.png"/>
+			</override_images>
+		</dev_icon>
+		<dev_icon
+			this="E785D8F8-6A36-40F0-9B1394DE704BD658"
+			id="dev_icon"
+			part_of_template="true"
+			uniqueguid_in_template="0F4F9F06-4613-496B-A0F05A2B8B88B70D"
+			uniqueguid="E785D8F8-6A36-40F0-9B1394DE704BD658"
+			dimensions="24.00,24.00"
+			dock_point="Center Left"
+			offset="2.00,0.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="BEDB62E0-2877-47CD-BF5C5F923800A971"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/dev_icon.png"
+					uniqueguid="E327647F-5E7A-4217-B2BEB1EDC8AD3C1C"/>
 			</component_image_uniqueguids>
 			<localised_texts>
 				<localised_text/>
@@ -466,7 +586,6 @@
 			part_of_template="true"
 			uniqueguid_in_template="1FCF2091-04F8-43FC-A0507D3DE1697C1D"
 			uniqueguid="114306DE-3F15-414A-99C822DC3E4B176A"
-			uniqueguid_in_template="1FCF2091-04F8-43FC-A0507D3DE1697C1D"
 			dimensions="24.00,24.00"
 			dock_point="Center Left"
 			offset="2.00,0.00"
@@ -479,7 +598,7 @@
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
 					name="ui/skins/default/dev/dev_icon.png"
-					uniqueguid="7423DF9A-BC46-45A3-B6711975C3B0C075"/>
+					uniqueguid="D6B6181E-F511-47E7-9A1E4D16A98DBB65"/>
 			</component_image_uniqueguids>
 			<localised_texts>
 				<localised_text/>
@@ -517,9 +636,6 @@
 					name="default"
 					width="40"
 					height="10"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					uniqueguid="2338DAFB-06D5-4A40-A52C1249083CE0CE">
 					<imagemetrics>
 						<image
@@ -532,15 +648,16 @@
 							margin="1.00,1.00,1.00,1.00"
 							ui_colour_preset_type_key="alliance_player"/>
 					</imagemetrics>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
 				</default>
 				<wounded
 					this="73CA8CF6-DB79-41F9-8F97716BEDBB456F"
 					name="wounded"
 					width="40"
 					height="10"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					shader_name="glow_pulse_t0"
 					shadervars="1.50,2.50,1.00,0.00"
 					uniqueguid="73CA8CF6-DB79-41F9-8F97716BEDBB456F">
@@ -555,6 +672,10 @@
 							margin="0.00,1.00,0.00,1.00"
 							ui_colour_preset_type_key="alliance_player"/>
 					</imagemetrics>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
 				</wounded>
 			</states>
 		</bar_base>
@@ -885,7 +1006,6 @@
 					name="NewState"
 					width="44"
 					height="35"
-					texthbehaviour="Never split"
 					uniqueguid="56389E55-70AC-4B59-9FB4715A5043F352"/>
 			</states>
 		</cat_docker>
@@ -1001,7 +1121,6 @@
 					name="NewState"
 					width="5"
 					height="14"
-					texthbehaviour="Never split"
 					uniqueguid="302E24A7-843E-4F82-89E59B162C5C55B6">
 					<imagemetrics>
 						<image
@@ -1072,11 +1191,13 @@
 					name="0"
 					width="24"
 					height="24"
-					font_m_size="12"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_warhammer3"
-					uniqueguid="CB012019-7828-4CC2-A6CFAE2D6FD1F2E4"/>
+					uniqueguid="CB012019-7828-4CC2-A6CFAE2D6FD1F2E4">
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
+				</_0>
 				<_1
 					this="8AA1CA46-331D-4A68-A6296162F2A716F4"
 					name="1"
@@ -1084,10 +1205,6 @@
 					height="24"
 					tooltip="Unit rank 1"
 					tooltiplabel="Level_1_Tooltip_4c0043s"
-					font_m_size="12"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_warhammer3"
 					disabled="true"
 					shadervars="-0.20,0.00,0.00,0.00"
 					uniqueguid="8AA1CA46-331D-4A68-A6296162F2A716F4">
@@ -1099,6 +1216,11 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
 				</_1>
 				<_10
 					this="C5C6953C-E29E-486F-8ABFE63240373402"
@@ -1107,12 +1229,14 @@
 					height="24"
 					tooltip="Unit rank 10"
 					tooltiplabel="experience_10_Tooltip_5c0043d"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					disabled="true"
-					uniqueguid="C5C6953C-E29E-486F-8ABFE63240373402"/>
+					uniqueguid="C5C6953C-E29E-486F-8ABFE63240373402">
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
+				</_10>
 				<_2
 					this="FC3DC723-3047-4C31-A33630A613259D60"
 					name="2"
@@ -1120,10 +1244,6 @@
 					height="24"
 					tooltip="Unit rank 2"
 					tooltiplabel="Level_2_Tooltip_6c0040d"
-					font_m_size="12"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_warhammer3"
 					disabled="true"
 					shadervars="-0.20,0.00,0.00,0.00"
 					uniqueguid="FC3DC723-3047-4C31-A33630A613259D60">
@@ -1135,6 +1255,11 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
 				</_2>
 				<_3
 					this="0E01A46C-C1E9-4804-95A242689D5BF1CF"
@@ -1143,10 +1268,6 @@
 					height="24"
 					tooltip="Unit rank 3"
 					tooltiplabel="Level_3_Tooltip_6c0041t"
-					font_m_size="12"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_warhammer3"
 					disabled="true"
 					shadervars="-0.20,0.00,0.00,0.00"
 					uniqueguid="0E01A46C-C1E9-4804-95A242689D5BF1CF">
@@ -1158,6 +1279,11 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
 				</_3>
 				<_4
 					this="3CE9F888-0F61-45A7-8DB7555BD4FB5911"
@@ -1166,10 +1292,6 @@
 					height="24"
 					tooltip="Unit rank 4"
 					tooltiplabel="Level_4_Tooltip_6c0046t"
-					font_m_size="12"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_warhammer3"
 					disabled="true"
 					shadervars="-0.50,0.00,0.00,0.00"
 					uniqueguid="3CE9F888-0F61-45A7-8DB7555BD4FB5911">
@@ -1181,6 +1303,11 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
 				</_4>
 				<_5
 					this="001F12EA-785F-434F-A234FD39A5A52673"
@@ -1189,10 +1316,6 @@
 					height="24"
 					tooltip="Unit rank 5"
 					tooltiplabel="Level_5_Tooltip_6c0047e"
-					font_m_size="12"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_warhammer3"
 					disabled="true"
 					shadervars="-0.50,0.00,0.00,0.00"
 					uniqueguid="001F12EA-785F-434F-A234FD39A5A52673">
@@ -1204,6 +1327,11 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
 				</_5>
 				<_6
 					this="C87D2150-659E-42FB-BFB62852A9165D90"
@@ -1212,10 +1340,6 @@
 					height="24"
 					tooltip="Unit rank 6"
 					tooltiplabel="Level_6_Tooltip_6c0044m"
-					font_m_size="12"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_warhammer3"
 					disabled="true"
 					shadervars="-0.50,0.00,0.00,0.00"
 					uniqueguid="C87D2150-659E-42FB-BFB62852A9165D90">
@@ -1227,6 +1351,11 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
 				</_6>
 				<_7
 					this="EA992E7E-1B2A-48A3-821C5A3A14B4234F"
@@ -1235,10 +1364,6 @@
 					height="24"
 					tooltip="Unit rank 7"
 					tooltiplabel="Level_7_Tooltip_660045g"
-					font_m_size="12"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_warhammer3"
 					disabled="true"
 					shadervars="-0.70,0.00,0.00,0.00"
 					uniqueguid="EA992E7E-1B2A-48A3-821C5A3A14B4234F">
@@ -1250,6 +1375,11 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
 				</_7>
 				<_8
 					this="7025C5B7-5CCC-419B-B68B44B7CC8CA62C"
@@ -1258,10 +1388,6 @@
 					height="24"
 					tooltip="Unit rank 8"
 					tooltiplabel="Level_8_Tooltip_6c004as"
-					font_m_size="12"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_warhammer3"
 					disabled="true"
 					shadervars="-0.70,0.00,0.00,0.00"
 					uniqueguid="7025C5B7-5CCC-419B-B68B44B7CC8CA62C">
@@ -1273,6 +1399,11 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
 				</_8>
 				<_9
 					this="E40428FD-23F8-4322-B455F82ECB17C00A"
@@ -1281,10 +1412,6 @@
 					height="24"
 					tooltip="Unit rank 9"
 					tooltiplabel="Level_9_Tooltip_6c004be"
-					font_m_size="12"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_warhammer3"
 					disabled="true"
 					shadervars="-0.70,0.00,0.00,0.00"
 					uniqueguid="E40428FD-23F8-4322-B455F82ECB17C00A">
@@ -1296,6 +1423,11 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
 				</_9>
 			</states>
 		</experience>
@@ -1436,15 +1568,9 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBattleUnit"
-					context_function_id="MoraleState"/>
+					context_function_id="MoraleState &gt;= 6"/>
 			</callbackwithcontextlist>
 			<userproperties>
-				<property
-					name="condition"
-					value="&gt;="/>
-				<property
-					name="condition_val"
-					value="6"/>
 				<property
 					name="priority"
 					value="100"/>
@@ -1623,7 +1749,6 @@
 					name="NewState"
 					width="18"
 					height="18"
-					texthbehaviour="Never split"
 					interactive="true"
 					disabled="true"
 					pixelcollision="true"
@@ -1658,7 +1783,6 @@
 					name="NewState"
 					width="44"
 					height="179"
-					texthbehaviour="Never split"
 					uniqueguid="CCFC0906-879A-4583-A91B77D36FB6461B"/>
 			</states>
 			<LayoutEngine
@@ -1718,7 +1842,6 @@
 					name="NewState"
 					width="44"
 					height="1"
-					texthbehaviour="Never split"
 					uniqueguid="4198E033-A38B-4681-8FA9B7438CD19A54"/>
 			</states>
 		</script_ping_parent>
@@ -1737,7 +1860,6 @@
 					name="NewState"
 					width="44"
 					height="6"
-					texthbehaviour="Never split"
 					interactive="true"
 					uniqueguid="3DC90316-D069-493D-B37F45CB0094F64C"/>
 			</states>
@@ -1805,13 +1927,7 @@
 					width="18"
 					height="18"
 					tooltip="Taking fire"
-					textlocalised="true"
 					tooltiplabel="StatusIcon_Taking_fire_Tooltip_7b007d"
-					font_m_font_name="brand_header"
-					font_m_size="16"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_paragraph_heading"
 					disabled="true"
 					uniqueguid="9C9FBB8F-F72D-4135-96035A905BD6B814">
 					<imagemetrics>
@@ -1822,31 +1938,34 @@
 							width="18"
 							height="18"/>
 					</imagemetrics>
+					<component_text
+						textlocalised="true"
+						font_m_font_name="brand_header"
+						font_m_size="16"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_paragraph_heading"/>
 				</capturing>
 				<default
 					this="66C534E4-A2B9-4F86-B6D738C7D10560CE"
 					name="Default"
 					width="18"
 					height="18"
-					font_m_font_name="brand_header"
-					font_m_size="16"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_paragraph_heading"
-					uniqueguid="66C534E4-A2B9-4F86-B6D738C7D10560CE"/>
+					uniqueguid="66C534E4-A2B9-4F86-B6D738C7D10560CE">
+					<component_text
+						font_m_font_name="brand_header"
+						font_m_size="16"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_paragraph_heading"/>
+				</default>
 				<firing
 					this="C7F1A578-0704-4E6C-B58D22EB55563B05"
 					name="Firing"
 					width="18"
 					height="18"
 					tooltip="Firing"
-					textlocalised="true"
 					tooltiplabel="StatusIcon_Firing_Tooltip_67005a"
-					font_m_font_name="brand_header"
-					font_m_size="16"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_paragraph_heading"
 					disabled="true"
 					uniqueguid="C7F1A578-0704-4E6C-B58D22EB55563B05">
 					<imagemetrics>
@@ -1857,6 +1976,13 @@
 							width="18"
 							height="18"/>
 					</imagemetrics>
+					<component_text
+						textlocalised="true"
+						font_m_font_name="brand_header"
+						font_m_size="16"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_paragraph_heading"/>
 				</firing>
 				<garrisoned
 					this="AFCAE928-D4F1-4EF6-B033FDF8DE5CE216"
@@ -1864,26 +1990,23 @@
 					width="18"
 					height="18"
 					tooltip="Garrisoned"
-					textlocalised="true"
 					tooltiplabel="StatusIcon_Garrisoned_Tooltip_6a0056"
-					font_m_size="12"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_warhammer3"
 					disabled="true"
-					uniqueguid="AFCAE928-D4F1-4EF6-B033FDF8DE5CE216"/>
+					uniqueguid="AFCAE928-D4F1-4EF6-B033FDF8DE5CE216">
+					<component_text
+						textlocalised="true"
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
+				</garrisoned>
 				<hidden
 					this="212BD2E3-A044-4209-9E68E7966C1D0CD5"
 					name="Hidden"
 					width="18"
 					height="18"
 					tooltip="Hidden"
-					textlocalised="true"
 					tooltiplabel="StatusIcon_Hidden_Tooltip_630049"
-					font_m_size="12"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_warhammer3"
 					disabled="true"
 					uniqueguid="212BD2E3-A044-4209-9E68E7966C1D0CD5">
 					<imagemetrics>
@@ -1894,6 +2017,12 @@
 							width="18"
 							height="18"/>
 					</imagemetrics>
+					<component_text
+						textlocalised="true"
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
 				</hidden>
 				<melee
 					this="9AB96DF4-6751-49F9-B1CC0A5665C495DD"
@@ -1901,13 +2030,7 @@
 					width="18"
 					height="18"
 					tooltip="In melee"
-					textlocalised="true"
 					tooltiplabel="StatusIcon_Melee_Tooltip_a0069"
-					font_m_font_name="brand_header"
-					font_m_size="16"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_paragraph_heading"
 					disabled="true"
 					uniqueguid="9AB96DF4-6751-49F9-B1CC0A5665C495DD">
 					<imagemetrics>
@@ -1918,6 +2041,13 @@
 							width="18"
 							height="18"/>
 					</imagemetrics>
+					<component_text
+						textlocalised="true"
+						font_m_font_name="brand_header"
+						font_m_size="16"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_paragraph_heading"/>
 				</melee>
 				<moving
 					this="D22FD4BB-8CA7-4CD2-870A5F17DBD7C488"
@@ -1925,13 +2055,7 @@
 					width="18"
 					height="18"
 					tooltip="Moving"
-					textlocalised="true"
 					tooltiplabel="StatusIcon_Moving_Tooltip_610055"
-					font_m_font_name="brand_header"
-					font_m_size="16"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_paragraph_heading"
 					disabled="true"
 					uniqueguid="D22FD4BB-8CA7-4CD2-870A5F17DBD7C488">
 					<imagemetrics>
@@ -1942,6 +2066,13 @@
 							width="18"
 							height="18"/>
 					</imagemetrics>
+					<component_text
+						textlocalised="true"
+						font_m_font_name="brand_header"
+						font_m_size="16"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_paragraph_heading"/>
 				</moving>
 				<moving_fast
 					this="23B4024D-0548-49D5-B2AEE2E4F9D1E4A4"
@@ -1949,13 +2080,7 @@
 					width="18"
 					height="18"
 					tooltip="Moving fast"
-					textlocalised="true"
 					tooltiplabel="StatusIcon_Moving_Fast_Tooltip_740060"
-					font_m_font_name="brand_header"
-					font_m_size="16"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_paragraph_heading"
 					disabled="true"
 					uniqueguid="23B4024D-0548-49D5-B2AEE2E4F9D1E4A4">
 					<imagemetrics>
@@ -1967,6 +2092,13 @@
 							width="18"
 							height="18"/>
 					</imagemetrics>
+					<component_text
+						textlocalised="true"
+						font_m_font_name="brand_header"
+						font_m_size="16"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_paragraph_heading"/>
 				</moving_fast>
 				<obstructed
 					this="F44A0BEC-A9BF-474D-9D2E7DE9F7288868"
@@ -1974,13 +2106,7 @@
 					width="18"
 					height="18"
 					tooltip="Obstructed"
-					textlocalised="true"
 					tooltiplabel="StatusIcon_Obstructed_Tooltip_730048"
-					font_m_font_name="brand_header"
-					font_m_size="16"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_paragraph_heading"
 					disabled="true"
 					uniqueguid="F44A0BEC-A9BF-474D-9D2E7DE9F7288868">
 					<imagemetrics>
@@ -1992,6 +2118,13 @@
 							height="18"
 							colour="#FF0000FF"/>
 					</imagemetrics>
+					<component_text
+						textlocalised="true"
+						font_m_font_name="brand_header"
+						font_m_size="16"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_paragraph_heading"/>
 				</obstructed>
 				<routing
 					this="E14A8655-6C11-40B3-BE0BD45C9D316BA5"
@@ -1999,13 +2132,7 @@
 					width="18"
 					height="18"
 					tooltip="Routing"
-					textlocalised="true"
 					tooltiplabel="StatusIcon_Routing_Tooltip_750029"
-					font_m_font_name="brand_header"
-					font_m_size="16"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_paragraph_heading"
 					disabled="true"
 					uniqueguid="E14A8655-6C11-40B3-BE0BD45C9D316BA5">
 					<imagemetrics>
@@ -2016,6 +2143,13 @@
 							width="18"
 							height="18"/>
 					</imagemetrics>
+					<component_text
+						textlocalised="true"
+						font_m_font_name="brand_header"
+						font_m_size="16"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_paragraph_heading"/>
 				</routing>
 				<sinking
 					this="C0066530-6EB3-41B8-BCB6023E53C89B49"
@@ -2023,25 +2157,22 @@
 					width="18"
 					height="18"
 					tooltip="Sinking"
-					textlocalised="true"
 					tooltiplabel="StatusIcon_Sinking_Tooltip_6c0033"
-					font_m_size="12"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_warhammer3"
 					disabled="true"
-					uniqueguid="C0066530-6EB3-41B8-BCB6023E53C89B49"/>
+					uniqueguid="C0066530-6EB3-41B8-BCB6023E53C89B49">
+					<component_text
+						textlocalised="true"
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
+				</sinking>
 				<taking_fire
 					this="E79A5F50-28E0-4AB3-8849CE9082BDC475"
 					name="Taking fire"
 					width="18"
 					height="18"
 					tooltiplabel="StatusIcon_Taking_fire_Tooltip_7b007d"
-					font_m_font_name="brand_header"
-					font_m_size="16"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_paragraph_heading"
 					disabled="true"
 					uniqueguid="E79A5F50-28E0-4AB3-8849CE9082BDC475">
 					<imagemetrics>
@@ -2052,6 +2183,12 @@
 							width="18"
 							height="18"/>
 					</imagemetrics>
+					<component_text
+						font_m_font_name="brand_header"
+						font_m_size="16"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_paragraph_heading"/>
 				</taking_fire>
 				<unorderable
 					this="59A637D7-6748-4DD1-9118FA4D9EF06642"
@@ -2059,31 +2196,35 @@
 					width="18"
 					height="18"
 					tooltip="Out of control"
-					textlocalised="true"
 					tooltiplabel="StatusIcon_Unorderable_Tooltip_53003c"
-					font_m_size="12"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_warhammer3"
 					disabled="true"
-					uniqueguid="59A637D7-6748-4DD1-9118FA4D9EF06642"/>
+					uniqueguid="59A637D7-6748-4DD1-9118FA4D9EF06642">
+					<component_text
+						textlocalised="true"
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
+				</unorderable>
 				<wavering
 					this="F230F32E-B543-472D-A9EB382ED0A690FF"
 					name="Wavering"
 					width="18"
 					height="18"
 					tooltip="Wavering"
-					textlocalised="true"
 					tooltiplabel="StatusIcon_Wavering_Tooltip_a003d"
-					font_m_font_name="brand_header"
-					font_m_size="16"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_paragraph_heading"
 					disabled="true"
 					shadervars="1.00,2.00,1.00,0.00"
-					textshadervars="1.00,2.00,1.00,0.00"
-					uniqueguid="F230F32E-B543-472D-A9EB382ED0A690FF"/>
+					uniqueguid="F230F32E-B543-472D-A9EB382ED0A690FF">
+					<component_text
+						textlocalised="true"
+						font_m_font_name="brand_header"
+						font_m_size="16"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_paragraph_heading"
+						textshadervars="1.00,2.00,1.00,0.00"/>
+				</wavering>
 				<withdraw
 					this="A3280D14-1110-474A-8BA05FA30FFF1F4C"
 					name="Withdraw"
@@ -2120,13 +2261,7 @@
 					width="18"
 					height="18"
 					tooltip="Fighting to the death"
-					textlocalised="true"
 					tooltiplabel="StatusIcon_fight_to_death_Tooltip_4a0019"
-					font_m_font_name="brand_header"
-					font_m_size="16"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_paragraph_heading"
 					disabled="true"
 					uniqueguid="5FE17487-1469-439B-8039DE3C7292FF87">
 					<imagemetrics>
@@ -2138,6 +2273,13 @@
 							height="18"
 							dockpoint="Center"/>
 					</imagemetrics>
+					<component_text
+						textlocalised="true"
+						font_m_font_name="brand_header"
+						font_m_size="16"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_paragraph_heading"/>
 				</fight_to_death>
 				<on_fire
 					this="635D3101-730D-4C09-86ACA838E04067D6"
@@ -2145,28 +2287,24 @@
 					width="18"
 					height="18"
 					tooltip="On fire"
-					textlocalised="true"
 					tooltiplabel="StatusIcon_on_Fire_Tooltip_7a0063"
-					font_m_font_name="brand_header"
-					font_m_size="16"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_paragraph_heading"
 					disabled="true"
-					uniqueguid="635D3101-730D-4C09-86ACA838E04067D6"/>
+					uniqueguid="635D3101-730D-4C09-86ACA838E04067D6">
+					<component_text
+						textlocalised="true"
+						font_m_font_name="brand_header"
+						font_m_size="16"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_paragraph_heading"/>
+				</on_fire>
 				<terrified
 					this="6C6D96EF-5136-42FE-8D307E8B51853E4C"
 					name="terrified"
 					width="18"
 					height="18"
 					tooltip="Terrified"
-					textlocalised="true"
 					tooltiplabel="StatusIcon_terrified_Tooltip_140042"
-					font_m_font_name="brand_header"
-					font_m_size="16"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_paragraph_heading"
 					disabled="true"
 					uniqueguid="6C6D96EF-5136-42FE-8D307E8B51853E4C">
 					<imagemetrics>
@@ -2178,6 +2316,13 @@
 							height="18"
 							dockpoint="Center"/>
 					</imagemetrics>
+					<component_text
+						textlocalised="true"
+						font_m_font_name="brand_header"
+						font_m_size="16"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_paragraph_heading"/>
 				</terrified>
 			</states>
 		</statusicon>
@@ -2333,10 +2478,6 @@
 					name="NewState"
 					width="14"
 					height="14"
-					font_m_size="12"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_warhammer3"
 					uniqueguid="F72BFD27-CFCB-43DB-94620B69B7AEED5C">
 					<imagemetrics>
 						<image
@@ -2347,6 +2488,11 @@
 							height="14"
 							margin="1.00,1.00,1.00,1.00"/>
 					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
 				</newstate>
 			</states>
 		</unlimited_ammo>
@@ -2385,7 +2531,6 @@
 					name="NewState"
 					width="24"
 					height="24"
-					texthbehaviour="Never split"
 					interactive="true"
 					shader_name="glow_pulse_t0"
 					shadervars="1.00,10.00,1.50,0.00"
@@ -2428,7 +2573,6 @@
 					name="NewState"
 					width="42"
 					height="27"
-					texthbehaviour="Never split"
 					uniqueguid="AF1D1C2A-01C4-4BEB-BE9185B1D84F2935">
 					<imagemetrics>
 						<image
@@ -2468,7 +2612,6 @@
 					name="NewState"
 					width="42"
 					height="27"
-					texthbehaviour="Never split"
 					uniqueguid="9C1B4B1F-5F13-4F4A-8FC2DAB708FDF88C">
 					<imagemetrics>
 						<image
@@ -2508,7 +2651,6 @@
 					name="NewState"
 					width="42"
 					height="27"
-					texthbehaviour="Never split"
 					uniqueguid="D5F0241F-999C-4B4C-9B7282DEDA7E491B">
 					<imagemetrics>
 						<image
@@ -2548,7 +2690,6 @@
 					name="NewState"
 					width="42"
 					height="27"
-					texthbehaviour="Never split"
 					uniqueguid="C71E49B5-F725-419E-8593DA0411933FD5">
 					<imagemetrics>
 						<image
@@ -2612,7 +2753,6 @@
 					name="NewState"
 					width="42"
 					height="27"
-					texthbehaviour="Never split"
 					uniqueguid="E5C70557-60A0-4516-B60EAD2790077D04">
 					<imagemetrics>
 						<image
@@ -2664,7 +2804,6 @@
 				<default
 					this="9A066CB0-1E68-408F-912D4396B26CA03D"
 					name="default"
-					texthbehaviour="Never split"
 					uniqueguid="9A066CB0-1E68-408F-912D4396B26CA03D">
 					<imagemetrics>
 						<image
@@ -2690,6 +2829,11 @@
 			uniqueguid="1B3757C8-3C19-4D91-8C4F2046E0D52827"
 			currentstate="8E6A9E11-0450-49A1-A038F32E858683C3"
 			defaultstate="8E6A9E11-0450-49A1-A038F32E858683C3">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="CampaignEffectsBundleIcon"
+					context_object_id="CcoAncillaryRecord"/>
+			</callbackwithcontextlist>
 			<userproperties>
 				<property
 					name="dynamic_image"
@@ -2711,7 +2855,6 @@
 					name="default"
 					width="24"
 					height="24"
-					texthbehaviour="Never split"
 					interactive="true"
 					uniqueguid="8E6A9E11-0450-49A1-A038F32E858683C3">
 					<imagemetrics>
@@ -2759,15 +2902,17 @@
 					name="NewState"
 					width="20"
 					height="20"
-					text="10"
-					textvalign="Center"
-					texthalign="Center"
-					texthbehaviour="Never split"
-					textlabel="dy_level_NewState_Text_34"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_text_small"
-					uniqueguid="AF0D9A3A-B2A5-4BFC-A2325572ED9CE08B"/>
+					uniqueguid="AF0D9A3A-B2A5-4BFC-A2325572ED9CE08B">
+					<component_text
+						text="10"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Never split"
+						textlabel="dy_level_NewState_Text_34"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_text_small"/>
+				</newstate>
 			</states>
 		</dy_rank>
 		<frame
@@ -2797,7 +2942,6 @@
 				<newstate
 					this="74DE200E-960B-4E17-ADBDDDFFAD5243DE"
 					name="NewState"
-					texthbehaviour="Never split"
 					uniqueguid="74DE200E-960B-4E17-ADBDDDFFAD5243DE">
 					<imagemetrics>
 						<image
@@ -2857,7 +3001,6 @@
 				<newstate
 					this="07FDF727-CC2D-4F69-96D6CE83C636DB69"
 					name="NewState"
-					texthbehaviour="Never split"
 					uniqueguid="07FDF727-CC2D-4F69-96D6CE83C636DB69">
 					<imagemetrics>
 						<image
@@ -2928,18 +3071,20 @@
 					name="default"
 					width="28"
 					height="28"
-					text="30"
-					texthalign="Center"
-					textyoffset="8.00,0.00"
-					texthbehaviour="Never split"
-					textlabel="dy_value_default_Text_300033"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
-					text_shader_name="text_outline_t0"
-					textshadervars="0.00,0.00,0.00,1.00"
-					uniqueguid="5E9F1216-F8B6-470F-B427B66AE82482E2"/>
+					uniqueguid="5E9F1216-F8B6-470F-B427B66AE82482E2">
+					<component_text
+						text="30"
+						texthalign="Center"
+						textyoffset="8.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="dy_value_default_Text_300033"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"
+						text_shader_name="text_outline_t0"
+						textshadervars="0.00,0.00,0.00,1.00"/>
+				</default>
 			</states>
 		</dy_value>
 		<frame
@@ -2967,7 +3112,6 @@
 					name="default"
 					width="28"
 					height="28"
-					texthbehaviour="Never split"
 					uniqueguid="CDDBB08D-8C87-41B8-BA95341A4A270A02">
 					<imagemetrics>
 						<image
@@ -3009,6 +3153,7 @@
 				<callback_with_context
 					callback_id="ContextTrashOnCondition"
 					context_function_id="BattleRoot.IsTeleportWithdrawAvailable == false"/>
+				<callback_with_context callback_id="TopmostWhenDraggingCallback"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -3022,11 +3167,9 @@
 					name="NewState"
 					width="26"
 					height="26"
-					texthbehaviour="Never split"
 					interactive="true"
 					disabled="true"
 					shadervars="0.50,0.50,0.00,0.00"
-					textshadervars="0.30,0.60,0.10,0.00"
 					uniqueguid="2B45C317-FC0D-42E8-8C637E218F9AB1F7">
 					<imagemetrics>
 						<image
@@ -3104,7 +3247,6 @@
 					name="NewState"
 					width="42"
 					height="27"
-					texthbehaviour="Never split"
 					uniqueguid="66C2C28A-717F-4EF7-9898FCD4AFD1046D">
 					<imagemetrics>
 						<image
@@ -3173,7 +3315,6 @@
 					name="yang"
 					width="26"
 					height="26"
-					texthbehaviour="Never split"
 					interactive="true"
 					uniqueguid="4126202A-D0EF-4C44-847C89EB6C80E07C">
 					<imagemetrics>
@@ -3190,7 +3331,6 @@
 					name="yang_harmony"
 					width="26"
 					height="26"
-					texthbehaviour="Never split"
 					interactive="true"
 					shader_name="glow_pulse_t0"
 					shadervars="1.00,2.00,3.00,0.00"
@@ -3209,7 +3349,6 @@
 					name="yin"
 					width="26"
 					height="26"
-					texthbehaviour="Never split"
 					interactive="true"
 					uniqueguid="55601688-7034-476B-9B1140CD48BC2F21">
 					<imagemetrics>
@@ -3226,7 +3365,6 @@
 					name="yin_harmony"
 					width="26"
 					height="26"
-					texthbehaviour="Never split"
 					interactive="true"
 					shader_name="glow_pulse_t0"
 					shadervars="1.00,2.00,3.00,0.00"
@@ -3367,7 +3505,7 @@
 			this="85BD63E5-D5BD-4804-832D1A2F20C5C1EA"
 			id="dev_buttons_parent"
 			is_dev_only="true"
-			offset="48.00,8.00"
+			offset="48.00,-6.00"
 			visible="false"
 			docking="Center Right External"
 			component_anchor_point="-0.00,0.50"
@@ -3385,8 +3523,7 @@
 					this="B3D3F2D4-5C96-40E6-A9A1D7B28D2DCF44"
 					name="default"
 					width="156"
-					height="58"
-					texthbehaviour="Never split"
+					height="87"
 					uniqueguid="B3D3F2D4-5C96-40E6-A9A1D7B28D2DCF44"/>
 			</states>
 			<LayoutEngine
@@ -3422,7 +3559,6 @@
 					name="default"
 					width="18"
 					height="18"
-					texthbehaviour="Never split"
 					uniqueguid="9AE3A434-4BEA-4157-BB3426046998E5FA"/>
 			</states>
 			<LayoutEngine
@@ -3463,7 +3599,6 @@
 					name="default"
 					width="18"
 					height="18"
-					texthbehaviour="Never split"
 					uniqueguid="7A85DDE6-5F19-4115-A486E68C29DA8CBD">
 					<imagemetrics>
 						<image
@@ -3490,7 +3625,6 @@
 					name="default"
 					width="18"
 					height="18"
-					texthbehaviour="Never split"
 					uniqueguid="258962D8-A13D-420D-859792ABF066D641"/>
 			</states>
 		</template_upgrade>
@@ -3534,7 +3668,6 @@
 					name="default"
 					width="37"
 					height="37"
-					texthbehaviour="Never split"
 					interactive="true"
 					uniqueguid="263FA405-4BCA-4E0C-A11F29CDC68B2B72">
 					<imagemetrics>
@@ -3572,7 +3705,6 @@
 					name="default"
 					width="40"
 					height="8"
-					texthbehaviour="Never split"
 					uniqueguid="03CD8F21-36B9-4A1A-9A43F457D96E6673">
 					<imagemetrics>
 						<image
@@ -3730,9 +3862,6 @@
 					name="default"
 					width="40"
 					height="10"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					uniqueguid="8DDF048A-E205-4C70-9CA5DAB7521B6CF9">
 					<imagemetrics>
 						<image
@@ -3745,6 +3874,10 @@
 							margin="1.00,1.00,1.00,1.00"
 							ui_colour_preset_type_key="dark_r"/>
 					</imagemetrics>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
 				</default>
 			</states>
 			<animations>
@@ -3795,7 +3928,6 @@
 					name="default"
 					width="10"
 					height="10"
-					texthbehaviour="Never split"
 					uniqueguid="002AB206-33CE-4AA1-B8A84E6EDE9C3C2F">
 					<imagemetrics>
 						<image
@@ -3846,7 +3978,6 @@
 					name="NewState"
 					width="40"
 					height="5"
-					textlabel="StateText_8c462c2e"
 					tooltiplabel="StateTooltip_8c462c2e"
 					shadervars="0.50,0.00,0.00,0.00"
 					uniqueguid="4D7165E0-F989-4157-803254D38713FF92">
@@ -3968,10 +4099,6 @@
 					name="default"
 					width="46"
 					height="46"
-					font_m_size="12"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_warhammer3"
 					interactive="true"
 					disabled="true"
 					pixelcollision="true"
@@ -4018,16 +4145,17 @@
 							width="46"
 							height="46"/>
 					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
 				</default>
 				<wh3
 					this="3855839E-8808-41B8-971091FF619257C4"
 					name="wh3"
 					width="46"
 					height="46"
-					font_m_size="12"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_warhammer3"
 					interactive="true"
 					disabled="true"
 					pixelcollision="true"
@@ -4111,6 +4239,11 @@
 							width="46"
 							height="46"/>
 					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
 				</wh3>
 			</states>
 		</character_portrait>
@@ -4135,7 +4268,6 @@
 					name="default"
 					width="46"
 					height="46"
-					texthbehaviour="Never split"
 					uniqueguid="052C7624-2226-4FF5-9A20300B718CCA46"/>
 			</states>
 		</character_portrait_parent>
@@ -4171,7 +4303,6 @@
 					name="hero"
 					width="46"
 					height="46"
-					texthbehaviour="Never split"
 					uniqueguid="5ED56BB8-4937-4A7D-AF2D2A32064C1462">
 					<imagemetrics>
 						<image
@@ -4187,7 +4318,6 @@
 					name="lord"
 					width="46"
 					height="46"
-					texthbehaviour="Never split"
 					uniqueguid="8F658DB9-0E45-4C5F-A02B6D9E7DAF256D">
 					<imagemetrics>
 						<image

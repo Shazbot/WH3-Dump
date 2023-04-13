@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <layout
-	version="138"
+	version="141"
 	comment=""
 	precache_condition="">
 	<hierarchy>
 		<root this="70D6B440-34AE-4F4A-A73BD59D3D40B8A3">
 			<building_information this="0E01576E-AE13-44C3-AF280B837461E85C">
-				<building_info_instruction_list this="EB4D7EEB-1DA7-4B6A-B1C3DBED0928B79B">
+				<building_info_holder this="76F83B35-CDC3-409E-872A3C94723D4FEC">
 					<building_information_holder this="31DFFFEF-F638-411A-B79B161C99C4A678">
 						<smoke_holder this="BF69F81D-686F-4585-A1E1C5C2BA6F86D4">
 							<panel_smoke_t this="B8363D08-BF89-46BB-ACB134E2CC5A6D45"/>
@@ -25,9 +25,17 @@
 						<description_window this="C1AE8170-1F9F-4320-BEBF797096C9914C"/>
 						<effects_list this="73246BD4-02E6-4C7A-A5DA552947DAA3D6"/>
 						<bottom_padding this="3484385D-AAA6-41E0-8CB861FACE8EF51E"/>
+						<stick_progress_bar this="1CD543C2-8141-41A9-9CAD85ACC53E1619">
+							<bar_extents_and_pos this="C2D7160D-7857-42F6-96ED44F6468C076B">
+								<auto_resizing_comp this="2BC9309E-F012-46FF-9C930D4D7A6F168F">
+									<completed_comp this="1B4285EE-03C4-4575-A7917372B992EE62"/>
+									<in_progress_comp this="D7A6AC91-1046-44CB-9928F450ACD415CF"/>
+								</auto_resizing_comp>
+							</bar_extents_and_pos>
+						</stick_progress_bar>
 					</building_information_holder>
-					<instruction_window this="029E2F21-CCCF-4585-8CE1AF981A9583D0"/>
-				</building_info_instruction_list>
+				</building_info_holder>
+				<instruction_window this="029E2F21-CCCF-4585-8CE1AF981A9583D0"/>
 			</building_information>
 		</root>
 	</hierarchy>
@@ -67,6 +75,7 @@
 			this="0E01576E-AE13-44C3-AF280B837461E85C"
 			id="building_information"
 			offset="0.00,695.00"
+			allowhorizontalresize="false"
 			priority="70"
 			tooltipslocalised="true"
 			uniqueguid="0E01576E-AE13-44C3-AF280B837461E85C"
@@ -74,20 +83,14 @@
 			defaultstate="3F32B744-93DE-4C8E-B4C474F22127CF5B">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="CampaignEffectsListTooltip"/>
-				<callback_with_context callback_id="HorizontalListScreenFitter">
-					<child_m_user_properties>
-						<property
-							name="offset_y"
-							value="100"/>
-					</child_m_user_properties>
-				</callback_with_context>
 			</callbackwithcontextlist>
 			<states>
 				<default
 					this="3F32B744-93DE-4C8E-B4C474F22127CF5B"
 					name="default"
 					width="400"
-					height="228"
+					height="230"
+					interactive="true"
 					uniqueguid="3F32B744-93DE-4C8E-B4C474F22127CF5B"/>
 			</states>
 			<animations>
@@ -100,39 +103,129 @@
 							targetmetrics_m_width="270"/>
 					</frames>
 				</scale>
-				<fade_outt
-					id="fade_outt"
-					propagate="true">
-					<frames>
-						<frame
-							interpolationtime="500"
-							interpolationpropertymask="64"
-							targetmetrics_m_colour="#FFFFFF00"
-							targetmetrics_m_height="30"
-							targetmetrics_m_width="370"
-							targetmetrics_m_offset="0.00,5.00"
-							easing_curve_type="Quadratic Out"/>
-					</frames>
-				</fade_outt>
-				<fade_in
-					id="fade_in"
-					propagate="true">
-					<frames>
-						<frame
-							interpolationtime="500"
-							interpolationpropertymask="64"
-							targetmetrics_m_height="30"
-							targetmetrics_m_width="370"
-							targetmetrics_m_offset="0.00,5.00"
-							easing_curve_type="Quadratic Out"/>
-					</frames>
-				</fade_in>
 			</animations>
 			<LayoutEngine
-				type="HorizontalList"
-				itemsperrow="3"
-				sizetocontent="true"/>
+				type="List"
+				spacing="0.00,-8.00"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="254"/>
+				</columnwidths>
+			</LayoutEngine>
 		</building_information>
+		<completed_comp
+			this="1B4285EE-03C4-4575-A7917372B992EE62"
+			id="completed_comp"
+			part_of_template="true"
+			uniqueguid_in_template="DE8557ED-0386-4BFF-87237559FEB7164F"
+			uniqueguid="1B4285EE-03C4-4575-A7917372B992EE62"
+			dimensions="389.00,3.00"
+			dock_point="Center">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="09E08BF5-E494-4860-B855A109E20E4E3B"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/sticky_bar_fill.png"
+					uniqueguid="B6771479-173A-4EBF-8C3563EF02622F8E"/>
+			</component_image_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+				<element value="ui/skins/default/sticky_bar_fill.png"/>
+			</override_images>
+		</completed_comp>
+		<in_progress_comp
+			this="D7A6AC91-1046-44CB-9928F450ACD415CF"
+			id="in_progress_comp"
+			part_of_template="true"
+			uniqueguid_in_template="598D2980-2D81-4431-B8372E64160B25BB"
+			uniqueguid="D7A6AC91-1046-44CB-9928F450ACD415CF"
+			dimensions="389.00,3.00"
+			dock_point="Center">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="B2CE5A6D-A65C-49F2-8E48D4D08B55243D"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/sticky_bar_fill.png"
+					uniqueguid="6F65A104-A81A-4FB6-8484B7E86132EA08"/>
+			</component_image_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+				<element value="ui/skins/default/sticky_bar_fill.png"/>
+			</override_images>
+		</in_progress_comp>
+		<stick_progress_bar
+			this="1CD543C2-8141-41A9-9CAD85ACC53E1619"
+			id="stick_progress_bar"
+			template_id="stick_progress_bar"
+			part_of_template="true"
+			uniqueguid_in_template="B5D91471-862C-459A-9117F067B37F7730"
+			uniqueguid="1CD543C2-8141-41A9-9CAD85ACC53E1619"
+			dimensions="1.00,10.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="F00B42A3-2F17-4A8F-85DE81710810BE22"/>
+			</state_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override1"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</stick_progress_bar>
+		<auto_resizing_comp
+			this="2BC9309E-F012-46FF-9C930D4D7A6F168F"
+			id="auto_resizing_comp"
+			part_of_template="true"
+			uniqueguid_in_template="9F4A9EBE-A605-40E1-AACEB22402830771"
+			uniqueguid="2BC9309E-F012-46FF-9C930D4D7A6F168F"
+			dimensions="389.00,3.00"
+			dock_point="Center">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="F0A3CCC2-6E30-4CCD-91FDC1695FCE252B"/>
+			</state_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</auto_resizing_comp>
 		<bottom_padding
 			this="3484385D-AAA6-41E0-8CB861FACE8EF51E"
 			id="bottom_padding"
@@ -150,10 +243,29 @@
 					name="NewState"
 					width="100"
 					height="17"
-					texthbehaviour="Never split"
 					uniqueguid="8ACE5306-49FC-47BF-B0FAFF8846272070"/>
 			</states>
 		</bottom_padding>
+		<bar_extents_and_pos
+			this="C2D7160D-7857-42F6-96ED44F6468C076B"
+			id="bar_extents_and_pos"
+			part_of_template="true"
+			uniqueguid_in_template="3F331065-E782-467B-804031161278DDBC"
+			uniqueguid="C2D7160D-7857-42F6-96ED44F6468C076B"
+			dimensions="389.00,3.00"
+			offset="5.00,-1.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="D41A17C7-7E11-468B-BB1B65A5F7424059"/>
+			</state_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</bar_extents_and_pos>
 		<building_image
 			this="07544E9F-C3D3-460B-98401AA5F4F2F743"
 			id="building_image"
@@ -209,8 +321,7 @@
 					this="95F73737-9187-44F9-8D38B519A04D1255"
 					name="wh3"
 					width="400"
-					height="169"
-					texthbehaviour="Never split"
+					height="179"
 					uniqueguid="95F73737-9187-44F9-8D38B519A04D1255">
 					<imagemetrics>
 						<image
@@ -218,7 +329,7 @@
 							uniqueguid="E74C7F60-E014-431D-9B3515826F2BCDCD"
 							componentimage="0E43BCCB-4729-4A1F-88409470C45E6336"
 							width="400"
-							height="169"
+							height="179"
 							tile="true"
 							margin="15.00,15.00,15.00,15.00"/>
 					</imagemetrics>
@@ -467,17 +578,6 @@
 					name="MainState"
 					width="400"
 					height="52"
-					text="dy_description text_dy_description text"
-					texthalign="Center"
-					textxoffset="14.00,14.00"
-					textyoffset="20.00,16.00"
-					texthbehaviour="Resize"
-					textlabel="Text_MainState_Text_11002c"
-					font_m_font_name="georgia_italic"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="parchment italic_warhammer3"
 					interactive="true"
 					uniqueguid="F4E15932-816E-4A44-9AE2BE470F12B39E"
 					stateeditordisplaypos="-842150464.00,-842150464.00">
@@ -494,6 +594,18 @@
 							dockpoint="Center"
 							margin="30.00,30.00,15.00,30.00"/>
 					</imagemetrics>
+					<component_text
+						text="dy_description text_dy_description text"
+						texthalign="Center"
+						textxoffset="14.00,14.00"
+						textyoffset="20.00,16.00"
+						texthbehaviour="Resize"
+						textlabel="Text_MainState_Text_11002c"
+						font_m_font_name="georgia_italic"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="parchment italic_warhammer3"/>
 				</mainstate>
 			</states>
 		</description_window>
@@ -512,19 +624,21 @@
 					name="MainState"
 					width="400"
 					height="30"
-					text="dy_chain"
-					texthalign="Center"
-					textxoffset="8.00,8.00"
-					textyoffset="12.00,2.00"
-					texthbehaviour="Resize"
-					textlabel="Text_MainState_Text_11002c"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_faded_warhammer3"
 					interactive="true"
 					uniqueguid="BED14C36-A6E8-4BA0-9A0B2FF6490A0EFF"
-					stateeditordisplaypos="-842150464.00,-842150464.00"/>
+					stateeditordisplaypos="-842150464.00,-842150464.00">
+					<component_text
+						text="dy_chain"
+						texthalign="Center"
+						textxoffset="8.00,8.00"
+						textyoffset="12.00,2.00"
+						texthbehaviour="Resize"
+						textlabel="Text_MainState_Text_11002c"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_faded_warhammer3"/>
+				</mainstate>
 			</states>
 		</dy_secondary_title>
 		<dy_title
@@ -542,19 +656,21 @@
 					name="NewState"
 					width="400"
 					height="38"
-					text="Governor's Mansion"
-					texthalign="Center"
-					textxoffset="10.00,10.00"
-					textyoffset="12.00,8.00"
-					texthbehaviour="Resize"
-					textlabel="dy_building_title_NewState_Text_410056"
-					font_m_font_name="brand_header"
-					font_m_size="14"
-					font_m_colour="#FFFFE0FF"
-					fontcat_name="parchment_header_small_warhammer3"
 					interactive="true"
-					textshadervars="0.00,1.00,2.00,0.00"
-					uniqueguid="04C417DD-3BF5-4769-BBC742945B50E1A0"/>
+					uniqueguid="04C417DD-3BF5-4769-BBC742945B50E1A0">
+					<component_text
+						text="Governor's Mansion"
+						texthalign="Center"
+						textxoffset="10.00,10.00"
+						textyoffset="12.00,8.00"
+						texthbehaviour="Resize"
+						textlabel="dy_building_title_NewState_Text_410056"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFFFE0FF"
+						fontcat_name="parchment_header_small_warhammer3"
+						textshadervars="0.00,1.00,2.00,0.00"/>
+				</newstate>
 			</states>
 		</dy_title>
 		<effects_list
@@ -572,10 +688,12 @@
 					name="NewState"
 					width="400"
 					height="1"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
-					uniqueguid="9B7FCA8F-8B03-4930-AAD06B0CD96CCE8E"/>
+					uniqueguid="9B7FCA8F-8B03-4930-AAD06B0CD96CCE8E">
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
+				</newstate>
 			</states>
 			<animations>
 				<scale id="scale">
@@ -611,19 +729,21 @@
 					name="MainState"
 					width="400"
 					height="30"
-					text="[PH] This building had an additional cost of 3 [[img:ui/skins/default/icon_treasury.png]]"
-					texthalign="Center"
-					textxoffset="8.00,8.00"
-					textyoffset="12.00,2.00"
-					texthbehaviour="Resize"
-					textlabel="food_cost_entry_MainState_Text_2b000e"
-					font_m_size="12"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_warhammer3"
 					interactive="true"
 					uniqueguid="4DFD76DB-4A57-4389-A393242012925343"
-					stateeditordisplaypos="-842150464.00,-842150464.00"/>
+					stateeditordisplaypos="-842150464.00,-842150464.00">
+					<component_text
+						text="[PH] This building had an additional cost of 3 [[img:ui/skins/default/icon_treasury.png]]"
+						texthalign="Center"
+						textxoffset="8.00,8.00"
+						textyoffset="12.00,2.00"
+						texthbehaviour="Resize"
+						textlabel="food_cost_entry_MainState_Text_2b000e"
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
+				</mainstate>
 			</states>
 		</food_cost_entry>
 		<hbar
@@ -651,7 +771,6 @@
 					name="NewState"
 					width="380"
 					height="14"
-					texthbehaviour="Never split"
 					interactive="true"
 					uniqueguid="095FD2B8-10CF-4572-9EA9F159F6C2A1D1">
 					<imagemetrics>
@@ -692,7 +811,6 @@
 					name="default"
 					width="390"
 					height="216"
-					texthbehaviour="Never split"
 					material_name="ui/effects/materials/magic_flame.xml.material"
 					uniqueguid="1C956CD0-423F-4D55-BDB3BDBB4F4BD534">
 					<imagemetrics>
@@ -877,7 +995,6 @@
 					name="default"
 					width="400"
 					height="1"
-					texthbehaviour="Never split"
 					interactive="true"
 					uniqueguid="AEE252E7-3AE6-4AFB-9EC3E7C505AEE4B6"/>
 			</states>
@@ -885,7 +1002,7 @@
 		<instruction_window
 			this="029E2F21-CCCF-4585-8CE1AF981A9583D0"
 			id="instruction_window"
-			offset="0.00,169.00"
+			offset="0.00,171.00"
 			allowhorizontalresize="false"
 			clipchildren="true"
 			priority="255"
@@ -904,16 +1021,6 @@
 					name="NewState"
 					width="400"
 					height="59"
-					text="[PH] Additional building reason invalid description that resizes based on text"
-					textvalign="Center"
-					textxoffset="13.00,10.00"
-					textyoffset="13.00,10.00"
-					texthbehaviour="Resize"
-					textlabel="additional_building_info_NewState_Text_140033"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_tooltip_text"
 					uniqueguid="4369B823-1EEC-46C2-93994636A7933A3A">
 					<imagemetrics>
 						<image
@@ -934,33 +1041,39 @@
 							tile="true"
 							margin="16.00,20.00,16.00,20.00"/>
 					</imagemetrics>
+					<component_text
+						text="[PH] Additional building reason invalid description that resizes based on text"
+						textvalign="Center"
+						textxoffset="13.00,10.00"
+						textyoffset="13.00,10.00"
+						texthbehaviour="Resize"
+						textlabel="additional_building_info_NewState_Text_140033"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_tooltip_text"/>
 				</newstate>
 			</states>
 		</instruction_window>
-		<building_info_instruction_list
-			this="EB4D7EEB-1DA7-4B6A-B1C3DBED0928B79B"
-			id="building_info_instruction_list"
+		<building_info_holder
+			this="76F83B35-CDC3-409E-872A3C94723D4FEC"
+			id="building_info_holder"
 			priority="70"
 			tooltipslocalised="true"
-			uniqueguid="EB4D7EEB-1DA7-4B6A-B1C3DBED0928B79B"
-			currentstate="CC494F22-CCE6-47F3-807BCBD97006501B"
-			defaultstate="CC494F22-CCE6-47F3-807BCBD97006501B">
+			uniqueguid="76F83B35-CDC3-409E-872A3C94723D4FEC"
+			currentstate="88C2EAA1-3CC3-4E9D-A100851A257BAF6A"
+			defaultstate="88C2EAA1-3CC3-4E9D-A100851A257BAF6A">
 			<states>
 				<default
-					this="CC494F22-CCE6-47F3-807BCBD97006501B"
+					this="88C2EAA1-3CC3-4E9D-A100851A257BAF6A"
 					name="default"
 					width="400"
-					height="228"
-					texthbehaviour="Never split"
-					uniqueguid="CC494F22-CCE6-47F3-807BCBD97006501B"/>
+					height="179"
+					uniqueguid="88C2EAA1-3CC3-4E9D-A100851A257BAF6A"/>
 			</states>
 			<LayoutEngine
-				type="List"
-				sizetocontent="true">
-				<columnwidths>
-					<column width="408"/>
-				</columnwidths>
-			</LayoutEngine>
-		</building_info_instruction_list>
+				type="HorizontalList"
+				sizetocontent="true"/>
+		</building_info_holder>
 	</components>
 </layout>

@@ -1,0 +1,187 @@
+Helforge
+{
+  UpkeepBundle
+  {
+    PlayersFaction
+	  .EffectBundleUnfilteredList
+	  .FirstContext(Key == "wh3_dlc23_bundle_chd_hellforge_upkeep_cost_mods")
+  }
+  
+  UnitCategoriesList
+  {
+    PlayersFaction
+	  .InitiativeSetList
+	  .Transform(InitiativeSetContext.CategoryContext)
+  }
+  
+  UnitsForInitiativeSet(CcoCampaignInitiativeSet set)
+  {
+    set
+	  .InitiativeList
+	  .FirstContext
+	  .InitiativeContext
+	  .EffectList
+	  .FirstContext
+	  .UnitSetsFromAllSourcesList
+	  .Transform(UnitsInSetList)
+	  .Distinct
+  }
+  
+  UnitsForInitiativeSetCategory(CcoInitiativeSetCategoryRecord category)
+  {
+    Helforge
+      .UnitsForInitiativeSet(Helforge.InitiativeSetForCategory(category))
+  }
+  
+  InitiativeSetForCategory(CcoInitiativeSetCategoryRecord category)
+  {
+    PlayersFaction
+	  .InitiativeSetList
+	  .FirstContext(InitiativeSetContext.CategoryContext == category)
+  }
+  
+  InitiativeSetForUnit(CcoMainUnitRecord unit)
+  {
+    PlayersFaction
+	  .InitiativeSetList
+      .FirstContext((set) => Helforge.UnitsForInitiativeSet(set).Contains(unit))
+  }
+  
+  AllInitiativesForUnitByCost(CcoMainUnitRecord unit)
+  {
+    Helforge
+	  .InitiativeSetForUnit(unit)
+	  .InitiativeList
+	  .Sort(RequiredCostContext.PooledResourceTransactionList.FirstContext.AbsoluteValue, true)
+	  .Distinct(RequiredCostContext.PooledResourceTransactionList.FirstContext.AbsoluteValue)
+  }
+  
+  UnitUpkeep(CcoMainUnitRecord unit)
+  {
+    (initiatives = Helforge.InitiativeSetForUnit(unit).InitiativeList) => {
+	    GetIf(
+		  initiatives.Any(IsActive), 
+		  initiatives
+		    .Filter(IsActive)
+		    .Transform(InitiativeContext.UpkeepResourceTransactionContext)
+	        .Reduce((total, cost) => total.Add(cost))
+	        .PooledResourceTransactionList
+	        .FirstContext)
+	  }
+  }
+  
+  UnitUpkeepPredicted(CcoCampaignInitiativeSet set)
+  {
+    GetIf(
+	  Component("6E24E192-CB18-4BC2-88C00EF016E8F2EA")
+	    .CurrentSelection
+		.SelectedObjectList
+		.FirstContext == set,
+	  Component("D4ABC27F-36DE-4E8B-ABD4B44C4E9AF716")
+	    .CurrentSelection
+		.SelectedObjectList
+		.Transform(InitiativeContext.UpkeepResourceTransactionContext)
+		.Reduce((total, cost) => total.Add(cost))
+		.PooledResourceTransactionList
+	    .FirstContext)
+  }
+  
+  NumUnitsRecruited(CcoMainUnitRecord unit)
+  {
+    GetIfElse(
+	  unit.UnitLandRecordContext.EngineRecordContext,
+	  Helforge.NumUnitsRecruitedTrains(unit),
+      PlayersFaction
+	    .ControllableMilitaryForceList
+		.Reduce((acc, force) => acc + force.UnitList.Count(UnitRecordContext == unit), 0))
+  }
+  
+  NumUnitsRecruitedForCategory(CcoInitiativeSetCategoryRecord category)
+  {
+    1 + Helforge
+	  .UpkeepBundle
+	  .EffectsIncludingHiddenList
+	  .FirstContext(
+	    InitiativeSetsList.FirstContext.CategoryContext == category)
+	  .Value / 100
+  }
+  
+  NumUnitsRecruitedTrains(CcoMainUnitRecord unit)
+  {
+   (engine = unit.UnitLandRecordContext.EngineRecordContext) => {
+      GetIf(
+	    engine,
+	    PlayersFaction
+	      .ControllableMilitaryForceList
+	      .Transform(UnitList)
+	      .Reduce((acc, u) => acc + Helforge.TrainUnitEngineList(u.UnitRecordContext).Count((e) => e == engine), 0)
+	  )
+	}
+  }
+  
+  InitiativeSetCategorySortOrder(CcoInitiativeSetCategoryRecord cat)
+  {
+    cat.Key |
+	  "DLC23_CATEGORY_MELEE_INFANTRY_INITIATIVES" => 0 |
+	  "DLC23_CATEGORY_WARMAHINES_INITIATIVES" => 4 |
+	  "DLC23_CATEGORY_MISSILE_INFANTRY_INITIATIVES" => 1 |
+	  "DLC23_CATEGORY_KDAAI_INITIATIVES" => 3 |
+	  "DLC23_CATEGORY_FLYING_BEASTS_INITIATIVES" => 2 |
+	  "DLC23_CATEGORY_BULL_CENTAURS_INITIATIVES" => 5 |
+	  0
+  }
+  
+  RitualCategorySortOrder(CcoRitualCategoryRecord cat)
+  {
+    cat.Id |
+	  "HELLFORGE_CAPS_MELEE_INFANTRY" => 5 |
+	  "HELLFORGE_CAPS_WARMACHINES" => 1 |
+	  "HELLFORGE_CAPS_MISSILE_INFANTRY" => 4 |
+	  "HELLFORGE_CAPS_KDAAI" => 2 |
+	  "HELLFORGE_CAPS_FLYING_BEASTS" => 3 |
+	  "HELLFORGE_CAPS_BULL_CENTAURS" => 0 | 
+	  0
+  }
+  
+  WarmachineUnits
+  {
+    Join(
+      DatabaseRecordContext("CcoMainUnitRecord", "wh3_dlc23_chd_veh_skullcracker"),
+      DatabaseRecordContext("CcoMainUnitRecord", "wh3_dlc23_chd_veh_magma_cannon"),
+      DatabaseRecordContext("CcoMainUnitRecord", "wh3_dlc23_chd_veh_iron_daemon"),
+      DatabaseRecordContext("CcoMainUnitRecord", "wh3_dlc23_chd_veh_dreadquake_mortar"),
+      DatabaseRecordContext("CcoMainUnitRecord", "wh3_dlc23_chd_veh_deathshrieker_rocket_launcher"),
+      DatabaseRecordContext("CcoMainUnitRecord", "wh_main_chs_art_hellcannon"))
+  }
+  
+  TrainTowedEngineToEngine(CcoBattlefieldEngineRecord engine)
+  {
+    DatabaseRecordContext("CcoBattlefieldEngineRecord", engine.Key.Replace("_towed", ""))
+  }
+  
+  TrainUnitEngineList(CcoMainUnitRecord unit)
+  {
+    (land_unit = unit.UnitLandRecordContext) => {
+		Join(
+		  land_unit.EngineRecordContext,
+		  land_unit
+		    .ExtraEnginesList
+			.Transform((e) =>
+		      Helforge.TrainTowedEngineToEngine(e.BattleEngineContext)))
+	}
+  }
+  
+  DisplayUnitsForRitualCategory(CcoRitualCategoryRecord cat, CcoUnitListRecord unit_list)
+  {
+    cat.Id |
+	  "HELLFORGE_CAPS_WARMACHINES" => unit_list.UnitsList.Filter((unit) => Helforge.WarmachineUnits.Contains(unit)) |
+	  unit_list.UnitsList
+  }
+  
+  DisplayUnitsForInitiativeSet(CcoCampaignInitiativeSet set)
+  {
+	set.InitiativeSetContext.CategoryContext.Key |
+	  "DLC23_CATEGORY_WARMAHINES_INITIATIVES" => Helforge.UnitsForInitiativeSet(set).Filter((unit) => Helforge.WarmachineUnits.Contains(unit)) |
+	  Helforge.UnitsForInitiativeSet(set).Filter(IsRenown == false)
+  }
+}

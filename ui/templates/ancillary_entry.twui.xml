@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="138"
+	version="141"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -40,7 +40,6 @@
 					name="default"
 					width="1600"
 					height="900"
-					texthbehaviour="Never split"
 					uniqueguid="7C87B4F0-CF40-448D-B18163798C555E6E">
 					<imagemetrics>
 						<image
@@ -118,11 +117,15 @@
 							value="0"/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context callback_id="TopmostWhenDraggingCallback"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
 					name="disable_override0"
 					value="ContextColourSetter"/>
+				<property
+					name="disable_override1"
+					value="TopmostWhenDraggingCallback"/>
 			</userproperties>
 			<componentimages>
 				<component_image
@@ -293,12 +296,11 @@
 					name="inactive"
 					width="260"
 					height="50"
+					soundcategory="UI_GBL_TMP_Selection_Locked_Unavailable_Medium"
 					interactive="true"
 					disabled="true"
 					shader_name="set_greyscale_t0"
-					text_shader_name="set_greyscale_t0"
 					shadervars="0.80,1.00,0.00,0.00"
-					textshadervars="1.00,1.00,0.00,0.00"
 					uniqueguid="4608BB25-DD2A-4A74-81483392EB341E79">
 					<imagemetrics>
 						<image
@@ -482,16 +484,6 @@
 					name="NewState"
 					width="59"
 					height="34"
-					text="1"
-					textvalign="Center"
-					textxoffset="22.00,28.00"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="Turns_not_queued_Text_320032y"
-					font_m_size="12"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_warhammer3"
 					uniqueguid="2D28B110-EE09-4967-B3B0D9F1E6292DE4">
 					<imagemetrics>
 						<image
@@ -505,6 +497,17 @@
 							canresizeheight="false"
 							margin="0.00,40.00,0.00,30.00"/>
 					</imagemetrics>
+					<component_text
+						text="1"
+						textvalign="Center"
+						textxoffset="22.00,28.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="Turns_not_queued_Text_320032y"
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
 				</newstate>
 			</states>
 		</cooldown>
@@ -597,15 +600,17 @@
 					name="NewState"
 					width="260"
 					height="25"
-					text="dy_type"
-					textvalign="Center"
-					textxoffset="70.00,0.00"
-					texthbehaviour="Never split"
-					textlabel="dy_label_NewState_Text_7d0027"
-					font_m_colour="#A99F89FF"
-					font_m_leading="1"
-					fontcat_name="fe_text_small_faded_warhammer3"
-					uniqueguid="4DD60B90-FE29-430C-9215F22F4BD567A5"/>
+					uniqueguid="4DD60B90-FE29-430C-9215F22F4BD567A5">
+					<component_text
+						text="dy_type"
+						textvalign="Center"
+						textxoffset="70.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="dy_label_NewState_Text_7d0027"
+						font_m_colour="#A99F89FF"
+						font_m_leading="1"
+						fontcat_name="fe_text_small_faded_warhammer3"/>
+				</newstate>
 			</states>
 		</dy_label>
 		<dy_name
@@ -635,29 +640,33 @@
 					name="default"
 					width="231"
 					height="30"
-					text="dy_item"
-					textvalign="Center"
-					textxoffset="70.00,0.00"
-					textlabel="dy_label_NewState_Text_750022"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
-					uniqueguid="BE45EBC1-E897-4FC3-A78A23EB6272CBEC"/>
+					uniqueguid="BE45EBC1-E897-4FC3-A78A23EB6272CBEC">
+					<component_text
+						text="dy_item"
+						textvalign="Center"
+						textxoffset="70.00,0.00"
+						textlabel="dy_label_NewState_Text_750022"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</default>
 				<round
 					this="05878948-2E84-40A1-99B6164D2FC1FD00"
 					name="round"
 					width="231"
 					height="50"
-					text="dy_item"
-					textvalign="Center"
-					textxoffset="70.00,0.00"
-					textlabel="dy_label_NewState_Text_750022"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="fe_text_faded_warhammer3"
-					uniqueguid="05878948-2E84-40A1-99B6164D2FC1FD00"/>
+					uniqueguid="05878948-2E84-40A1-99B6164D2FC1FD00">
+					<component_text
+						text="dy_item"
+						textvalign="Center"
+						textxoffset="70.00,0.00"
+						textlabel="dy_label_NewState_Text_750022"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="fe_text_faded_warhammer3"/>
+				</round>
 			</states>
 		</dy_name>
 		<dy_set_icon
@@ -790,7 +799,6 @@
 					name="common"
 					width="77"
 					height="79"
-					texthbehaviour="Never split"
 					uniqueguid="18B0ADD5-B1A1-4A1A-A73B3BCCB5EB20F6">
 					<imagemetrics>
 						<image
@@ -806,7 +814,6 @@
 					name="crafted"
 					width="77"
 					height="79"
-					texthbehaviour="Never split"
 					uniqueguid="2BA55EE6-2386-4F7C-992F83E04A0CE38F">
 					<imagemetrics>
 						<image
@@ -822,7 +829,6 @@
 					name="default"
 					width="77"
 					height="79"
-					texthbehaviour="Never split"
 					uniqueguid="CE5FF3C1-1F21-4ECE-84374778DDC993EA">
 					<imagemetrics>
 						<image
@@ -839,7 +845,6 @@
 					name="legendary"
 					width="77"
 					height="79"
-					texthbehaviour="Never split"
 					uniqueguid="6413690A-2346-4210-BB4F834B802ABC4C">
 					<imagemetrics>
 						<image
@@ -855,7 +860,6 @@
 					name="rare"
 					width="77"
 					height="79"
-					texthbehaviour="Never split"
 					uniqueguid="87F4318D-04DC-4B1E-AF10D048E63EC1A2">
 					<imagemetrics>
 						<image
@@ -871,7 +875,6 @@
 					name="round"
 					width="77"
 					height="79"
-					texthbehaviour="Never split"
 					uniqueguid="B344EF9E-149C-4608-904823AFAA3918E0">
 					<imagemetrics>
 						<image
@@ -893,7 +896,6 @@
 					name="uncommon"
 					width="77"
 					height="79"
-					texthbehaviour="Never split"
 					uniqueguid="E3FF22AA-8354-4CB4-A6E18ABF737DA629">
 					<imagemetrics>
 						<image
@@ -933,7 +935,6 @@
 					name="default"
 					width="124"
 					height="124"
-					texthbehaviour="Never split"
 					material_name="ui/effects/materials/magic_flame.xml.material"
 					uniqueguid="8E59F672-0BD5-4114-A316617C2989FE47">
 					<imagemetrics>

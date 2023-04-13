@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="137"
+	version="141"
 	comment=""
 	precache_condition="CampaignRoot.IsMultiplayer">
 	<hierarchy>
@@ -60,6 +60,7 @@
 			id="button_zoom"
 			template_id="round_medium_button"
 			part_of_template="true"
+			uniqueguid_in_template="4E08AA99-2BAB-4DB6-AC47ACC0CEBD26BE"
 			uniqueguid="0DBE874E-33B5-4419-A72F305E8EFFDB6E"
 			dimensions="56.00,56.00"
 			dock_point="Center"
@@ -124,9 +125,6 @@
 				<property
 					name="disable_override0"
 					value="CallbackAnimTrigger"/>
-				<property
-					name="disable_override1"
-					value="ContextOpacitySetter"/>
 				<property
 					name="dynamic_image"
 					value="0"/>
@@ -208,6 +206,7 @@
 					callback_id="ContextCommandMouseOff"
 					context_function_id="UnlockCursor"/>
 				<callback_with_context callback_id="CallbackSoundTrigger"/>
+				<callback_with_context callback_id="TopmostWhenDraggingCallback"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -229,8 +228,6 @@
 					name="NewState"
 					width="535"
 					height="339"
-					textvalign="Center"
-					texthalign="Center"
 					focustype="Active"
 					interactive="true"
 					uniqueguid="03CD5C2D-6441-428C-99DE06C3E52930BB">
@@ -309,15 +306,17 @@
 					name="NewState"
 					width="535"
 					height="154"
-					text="dy_text"
-					textvalign="Center"
-					texthalign="Center"
-					textlabel="StateText_33edd9e9"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_faded_warhammer3"
-					uniqueguid="745B8B97-36DF-4C96-850406ADA4A30356"/>
+					uniqueguid="745B8B97-36DF-4C96-850406ADA4A30356">
+					<component_text
+						text="dy_text"
+						textvalign="Center"
+						texthalign="Center"
+						textlabel="StateText_33edd9e9"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_faded_warhammer3"/>
+				</newstate>
 			</states>
 		</dy_text>
 		<involved_faction_list
@@ -347,7 +346,6 @@
 					name="default"
 					width="249"
 					height="29"
-					texthbehaviour="Never split"
 					uniqueguid="DDBA1B2A-D639-44E6-B005CADCD354964D"/>
 			</states>
 			<LayoutEngine
@@ -390,7 +388,6 @@
 					name="default"
 					width="525"
 					height="189"
-					texthbehaviour="Never split"
 					material_name="ui/effects/materials/magic_flame.xml.material"
 					uniqueguid="9042D603-EA60-4728-AF86B25908674B63">
 					<imagemetrics>
@@ -537,7 +534,6 @@
 					name="default"
 					width="60"
 					height="1"
-					texthbehaviour="Never split"
 					uniqueguid="38F0C3F2-9807-48F8-B2D1ECFE5ECA9284"/>
 			</states>
 		</smoke_holder>
@@ -571,15 +567,6 @@
 					name="default"
 					width="249"
 					height="29"
-					text="[ph] Faction name (player name)"
-					textvalign="Center"
-					textxoffset="28.00,0.00"
-					texthbehaviour="Resize"
-					textlabel="StateText_21113bba"
-					font_m_size="12"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_warhammer3"
 					uniqueguid="37DA31B7-4C7E-45D1-B92414483CE5466B">
 					<imagemetrics>
 						<image
@@ -593,6 +580,16 @@
 							canresizeheight="false"
 							canresizewidth="false"/>
 					</imagemetrics>
+					<component_text
+						text="[ph] Faction name (player name)"
+						textvalign="Center"
+						textxoffset="28.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_21113bba"
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
 				</default>
 			</states>
 		</template_faction>
@@ -617,7 +614,6 @@
 					name="default"
 					width="64"
 					height="50"
-					texthbehaviour="Never split"
 					uniqueguid="6FE7D480-C6A9-438E-AB47C8DA85390E3C"/>
 			</states>
 		</timer_holder>
@@ -649,16 +645,18 @@
 					name="default"
 					width="64"
 					height="50"
-					text="999"
-					textvalign="Center"
-					texthalign="Center"
-					texthbehaviour="Never split"
-					textlabel="StateText_8535774c"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_faded_warhammer3"
-					uniqueguid="7C109774-CCBB-4D58-8CF0C4D8503BB358"/>
+					uniqueguid="7C109774-CCBB-4D58-8CF0C4D8503BB358">
+					<component_text
+						text="999"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Never split"
+						textlabel="StateText_8535774c"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_faded_warhammer3"/>
+				</default>
 			</states>
 		</time_left_text>
 		<zoom_parent
@@ -695,7 +693,6 @@
 					name="default"
 					width="420"
 					height="56"
-					texthbehaviour="Never split"
 					uniqueguid="F1FCB33C-53E3-4EC3-A20A44B8EC4D13EC"/>
 			</states>
 		</zoom_parent>
@@ -715,16 +712,18 @@
 					name="default"
 					width="115"
 					height="29"
-					text="Involved players:"
-					textvalign="Center"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="StateText_5c3ba226"
-					font_m_size="12"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_warhammer3"
-					uniqueguid="43FD6F0C-BE3A-4D0C-BC184B3892DC6FD7"/>
+					uniqueguid="43FD6F0C-BE3A-4D0C-BC184B3892DC6FD7">
+					<component_text
+						text="Involved players:"
+						textvalign="Center"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="StateText_5c3ba226"
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
+				</default>
 			</states>
 		</header_involved_factions>
 	</components>

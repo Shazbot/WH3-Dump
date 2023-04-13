@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="138"
+	version="141"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -87,6 +87,7 @@
 					</known_parent>
 					<allied_faction_icon this="FF607521-D0A9-47DB-909A819F02DD3A4C"/>
 				</slot_entry>
+				<button_instant_construction this="6E464E24-67CF-468F-9AC6E6017248720D"/>
 			</settlement_building_slot>
 		</root>
 	</hierarchy>
@@ -109,7 +110,6 @@
 					name="default"
 					width="1600"
 					height="900"
-					texthbehaviour="Never split"
 					uniqueguid="8758B64D-60C0-4AD6-862F44CAF8E064F6">
 					<imagemetrics>
 						<image
@@ -123,6 +123,477 @@
 				</default>
 			</states>
 		</root>
+		<button_instant_construction
+			this="6E464E24-67CF-468F-9AC6E6017248720D"
+			id="button_instant_construction"
+			uniqueguid_in_template="82F58892-7F49-4844-B36443AED497BEEF"
+			offset="41.00,14.00"
+			docking="Center Right"
+			dock_offset="9.00,-2.00"
+			component_anchor_point="1.00,0.50"
+			tooltipslocalised="true"
+			soundcategory="UI_GBL_TMP_Round_Small_Button"
+			uniqueguid="6E464E24-67CF-468F-9AC6E6017248720D"
+			updatewhennotvisible="true"
+			currentstate="AEAFF811-F55F-44FA-9314752C27AC3CE0"
+			defaultstate="AEAFF811-F55F-44FA-9314752C27AC3CE0">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignBuildingSlot"
+					context_function_id="SettlementContext.IsPlayerOwned &amp;&amp; HasInstantUpgradeFeature &amp;&amp; (IsUpgrading||IsBuildingNew) &amp;&amp; ConstructionItemContext.BuildingLevelRecordContext.HasLifecycleState == false">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignBuildingStateChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoCampaignPooledResourceTransaction"
+					context_function_id="Format(GetIfElse(StoredContext(&quot;CcoCampaignBuildingSlot&quot;).CanAffordInstantUpgrade == false, Loc(&quot;instant_building_cannot_afford&quot;), Loc(&quot;instant_building_tooltip&quot;)), Icon, AbsoluteValue) + GetIfElse(StoredContext(&quot;CcoCampaignBuildingSlot&quot;).SettlementContext.IsUnderSiege, Loc(&quot;instant_building_under_siege&quot;), &quot;&quot;)"/>
+				<callback_with_context
+					callback_id="ContextInactiveStateSetter"
+					context_object_id="CcoCampaignBuildingSlot"
+					context_function_id="CanAffordInstantUpgrade &amp;&amp; SettlementContext.IsUnderSiege == false">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="PooledResourceTransaction"/>
+						<property
+							name="event1"
+							value="CampaignBuildingStateChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignBuildingSlot"
+					context_function_id="InstantUpgradeCostContext.PooledResourceTransactionList.FirstContext">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="PooledResourceTransaction"/>
+						<property
+							name="event1"
+							value="CampaignBuildingStateChanged"/>
+						<property
+							name="object_store_events"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoCampaignBuildingSlot"
+					context_function_id="(confirmation = Component(&quot;C471BB49-B4A9-4A84-A78C887C2F7B6A8A&quot;)) =&gt; { DoIf(self.CurrentState != &quot;inactive&quot;, confirmation.PropagateContext(this); confirmation.SetVisible(true))}"/>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignBuildingSlot"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="disable_override0"
+					value="CallbackAnimTrigger"/>
+				<property
+					name="dynamic_image"
+					value="0"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="B75F72A5-5354-45AA-A61E48D7C215FBC8"
+					uniqueguid="B75F72A5-5354-45AA-A61E48D7C215FBC8"
+					imagepath="ui/skins/default/icon_rush_construction.png"/>
+				<component_image
+					this="6CE32B9D-2CA1-454C-BE6B5300121C4C00"
+					uniqueguid="6CE32B9D-2CA1-454C-BE6B5300121C4C00"
+					imagepath="ui/skins/default/button_round_small_pressed.png"/>
+				<component_image
+					this="684D6A23-BAAE-433F-9D97B35F4A734DC7"
+					uniqueguid="684D6A23-BAAE-433F-9D97B35F4A734DC7"
+					imagepath="ui/skins/default/button_round_small_hover.png"/>
+				<component_image
+					this="F6CB3174-2538-4A1F-94699DC42C509601"
+					uniqueguid="F6CB3174-2538-4A1F-94699DC42C509601"
+					imagepath="ui/skins/default/button_round_small_active.png"/>
+				<component_image
+					this="FA14C061-BBB7-401D-AAE4146647C73D38"
+					uniqueguid="FA14C061-BBB7-401D-AAE4146647C73D38"
+					imagepath="ui/skins/default/button_round_small_inactive.png"/>
+				<component_image
+					this="F82EB78A-7721-48FE-B220C60A13420E7C"
+					uniqueguid="F82EB78A-7721-48FE-B220C60A13420E7C"
+					imagepath="ui/skins/default/button_round_small_underlay.png"/>
+				<component_image
+					this="A83E171A-2A3E-4D95-87D167B3A3A9A4C0"
+					uniqueguid="A83E171A-2A3E-4D95-87D167B3A3A9A4C0"/>
+			</componentimages>
+			<states>
+				<active
+					this="AEAFF811-F55F-44FA-9314752C27AC3CE0"
+					name="active"
+					interactive="true"
+					uniqueguid="AEAFF811-F55F-44FA-9314752C27AC3CE0"
+					stateeditordisplaypos="40.00,24.00">
+					<imagemetrics>
+						<image
+							this="CA9D05F6-1874-47BD-916876866E66B1E4"
+							uniqueguid="CA9D05F6-1874-47BD-916876866E66B1E4"
+							componentimage="F82EB78A-7721-48FE-B220C60A13420E7C"/>
+						<image
+							this="36E149FC-E092-43BD-B446641FBDF80EB9"
+							uniqueguid="36E149FC-E092-43BD-B446641FBDF80EB9"
+							componentimage="F6CB3174-2538-4A1F-94699DC42C509601"/>
+						<image
+							this="B9A68E80-825F-48CD-B2E53E4C2537751C"
+							uniqueguid="B9A68E80-825F-48CD-B2E53E4C2537751C"
+							componentimage="684D6A23-BAAE-433F-9D97B35F4A734DC7"
+							colour="#FFFFFF00"/>
+						<image
+							this="064C3E3B-AA04-4CCF-969C4630B37A1115"
+							uniqueguid="064C3E3B-AA04-4CCF-969C4630B37A1115"
+							componentimage="B75F72A5-5354-45AA-A61E48D7C215FBC8"
+							dockpoint="Center"
+							shader_name="brighten_t0"/>
+						<image
+							this="3FBB38BE-14FD-4B65-8481415BCED5FE50"
+							uniqueguid="3FBB38BE-14FD-4B65-8481415BCED5FE50"
+							componentimage="B75F72A5-5354-45AA-A61E48D7C215FBC8"
+							dockpoint="Center"
+							shader_name="brighten_t0"/>
+						<image
+							this="EEF03696-4A08-4339-BBD2CE9A1E62F59A"
+							uniqueguid="EEF03696-4A08-4339-BBD2CE9A1E62F59A"
+							componentimage="B75F72A5-5354-45AA-A61E48D7C215FBC8"
+							colour="#FFFFFF00"
+							dockpoint="Center"
+							shadertechnique_vars="0.50,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							transition_m_target_state="6EA3B406-2F4B-4206-95F45C6704626485"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
+				</active>
+				<down
+					this="40A16308-533D-48B0-89B36DFCDA010D20"
+					name="down"
+					interactive="true"
+					uniqueguid="40A16308-533D-48B0-89B36DFCDA010D20"
+					stateeditordisplaypos="145.00,219.00">
+					<imagemetrics>
+						<image
+							this="ED6FEA23-0F82-4471-97FD5769715D1481"
+							uniqueguid="ED6FEA23-0F82-4471-97FD5769715D1481"
+							componentimage="F82EB78A-7721-48FE-B220C60A13420E7C"/>
+						<image
+							this="F9F1A633-7E8E-43FA-8392BFA691788404"
+							uniqueguid="F9F1A633-7E8E-43FA-8392BFA691788404"
+							componentimage="6CE32B9D-2CA1-454C-BE6B5300121C4C00"/>
+						<image
+							this="9043D4CE-BBCB-4D18-97015A187C102B2F"
+							uniqueguid="9043D4CE-BBCB-4D18-97015A187C102B2F"
+							componentimage="B75F72A5-5354-45AA-A61E48D7C215FBC8"
+							offset="0.00,3.00"
+							colour="#6E6E6EFF"
+							dockpoint="Center"
+							dock_offset="0.00,3.00"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="3"
+							transition_m_target_state="6EA3B406-2F4B-4206-95F45C6704626485"/>
+						<transition
+							index="1"
+							transition_m_target_state="1A4831EB-BF11-4D53-A00D18041BB10182"/>
+					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"
+						textshadervars="0.30,0.00,0.00,0.00"/>
+				</down>
+				<down_off
+					this="1A4831EB-BF11-4D53-A00D18041BB10182"
+					name="down_off"
+					interactive="true"
+					uniqueguid="1A4831EB-BF11-4D53-A00D18041BB10182"
+					stateeditordisplaypos="40.00,319.00">
+					<imagemetrics>
+						<image
+							this="2423D3BF-6C16-4962-86C160137E4D1D0F"
+							uniqueguid="2423D3BF-6C16-4962-86C160137E4D1D0F"
+							componentimage="F82EB78A-7721-48FE-B220C60A13420E7C"/>
+						<image
+							this="72C4C4F8-A701-43AE-A1459BB0E1C3B9FD"
+							uniqueguid="72C4C4F8-A701-43AE-A1459BB0E1C3B9FD"
+							componentimage="F6CB3174-2538-4A1F-94699DC42C509601"/>
+						<image
+							this="31384807-4E1D-42CF-929DB6BE4F777B2D"
+							uniqueguid="31384807-4E1D-42CF-929DB6BE4F777B2D"
+							componentimage="B75F72A5-5354-45AA-A61E48D7C215FBC8"
+							dockpoint="Center"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition transition_m_target_state="40A16308-533D-48B0-89B36DFCDA010D20"/>
+						<transition
+							index="8"
+							transition_m_target_state="AEAFF811-F55F-44FA-9314752C27AC3CE0"/>
+					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
+				</down_off>
+				<hover
+					this="6EA3B406-2F4B-4206-95F45C6704626485"
+					name="hover"
+					interactive="true"
+					uniqueguid="6EA3B406-2F4B-4206-95F45C6704626485"
+					stateeditordisplaypos="137.00,126.00">
+					<imagemetrics>
+						<image
+							this="E62DB524-A41B-455D-ACDEF40D0749D2BC"
+							uniqueguid="E62DB524-A41B-455D-ACDEF40D0749D2BC"
+							componentimage="F82EB78A-7721-48FE-B220C60A13420E7C"/>
+						<image
+							this="B675F96D-ED99-440A-BEFEAFAB076A458B"
+							uniqueguid="B675F96D-ED99-440A-BEFEAFAB076A458B"
+							componentimage="F6CB3174-2538-4A1F-94699DC42C509601"
+							colour="#FFFFFF00"/>
+						<image
+							this="DA4E58E4-0661-4204-9D884E9910976CE0"
+							uniqueguid="DA4E58E4-0661-4204-9D884E9910976CE0"
+							componentimage="684D6A23-BAAE-433F-9D97B35F4A734DC7"/>
+						<image
+							this="DA3AD273-CE5C-42EA-BC56BADD54C4F610"
+							uniqueguid="DA3AD273-CE5C-42EA-BC56BADD54C4F610"
+							componentimage="A83E171A-2A3E-4D95-87D167B3A3A9A4C0"
+							offset="3.00,3.00"
+							width="25"
+							height="25"
+							dockpoint="Center"
+							material_name="ui/effects/materials/magic_flame.xml.material">
+							<material_m_parameter_overrides>
+								<property
+									name="distortion_strength"
+									x="0.200000003"
+									y="0"
+									z="0"
+									w="0"
+									is_override_of_default="false"/>
+								<property
+									name="flow_speed"
+									x="0.5"
+									y="0"
+									z="0"
+									w="0"
+									is_override_of_default="false"/>
+								<property
+									name="heat_percent"
+									x="1"
+									y="0"
+									z="0"
+									w="0"
+									is_override_of_default="false"/>
+								<property
+									name="sparkle_distortion"
+									x="0.100000001"
+									y="0"
+									z="0"
+									w="0"
+									is_override_of_default="false"/>
+								<property
+									name="sparkle_ro"
+									x="0"
+									y="0"
+									z="0"
+									w="0"
+									is_override_of_default="false"/>
+								<property
+									name="sparkle_speed1"
+									x="0.150000006"
+									y="0"
+									z="0"
+									w="0"
+									is_override_of_default="false"/>
+								<property
+									name="sparkle_speed2"
+									x="0.100000001"
+									y="0"
+									z="0"
+									w="0"
+									is_override_of_default="false"/>
+								<property
+									name="sparkle_strength"
+									x="0"
+									y="0"
+									z="0"
+									w="0"
+									is_override_of_default="false"/>
+								<property
+									name="sparkle_tiling"
+									x="2"
+									y="0"
+									z="0"
+									w="0"
+									is_override_of_default="false"/>
+								<property
+									name="u_tiling"
+									x="16"
+									y="0"
+									z="0"
+									w="0"
+									is_override_of_default="false"/>
+								<property
+									name="uv_distortion_pan"
+									x="0.100000001"
+									y="0.200000003"
+									z="0"
+									w="0"
+									is_override_of_default="false"/>
+								<property
+									name="v_tiling"
+									x="5"
+									y="0"
+									z="0"
+									w="0"
+									is_override_of_default="false"/>
+							</material_m_parameter_overrides>
+							<material_m_texture_overrides>
+								<property
+									slot_id="t_xml_effect_colours"
+									filepath="ui\effects\textures\effect_fire.dds"
+									is_override_of_default="false"/>
+								<property
+									slot_id="t_xml_general_mask"
+									filepath="ui/effects/textures/magic_flame_mask_round.dds"
+									is_override_of_default="true"/>
+								<property
+									slot_id="t_xml_heat_mask"
+									filepath="ui\effects\textures\magic_flame_heat_ud.dds"
+									is_override_of_default="false"/>
+								<property
+									slot_id="t_xml_shape_flow"
+									filepath="ui\effects\textures\magic_flame_flow_ud.dds"
+									is_override_of_default="false"/>
+								<property
+									slot_id="t_xml_uv_distortion"
+									filepath="commontextures\cloud_shadow_02.dds"
+									is_override_of_default="false"/>
+								<property
+									slot_id="t_xml_uv_element"
+									filepath="commontextures\default_noise1.dds"
+									is_override_of_default="false"/>
+								<property
+									slot_id="t_xml_sparkle1"
+									filepath="commontextures\volumetric_noise.dds"
+									is_override_of_default="false"/>
+							</material_m_texture_overrides>
+						</image>
+						<image
+							this="E867F66B-BBAB-451F-94723E7C923E2934"
+							uniqueguid="E867F66B-BBAB-451F-94723E7C923E2934"
+							componentimage="B75F72A5-5354-45AA-A61E48D7C215FBC8"
+							dockpoint="Center"
+							shader_name="brighten_t0"/>
+						<image
+							this="8A95A3D5-59BA-48DA-AFD103C935AB8153"
+							uniqueguid="8A95A3D5-59BA-48DA-AFD103C935AB8153"
+							componentimage="B75F72A5-5354-45AA-A61E48D7C215FBC8"
+							colour="#FFFFFF00"
+							dockpoint="Center"
+							shader_name="brighten_t0"/>
+						<image
+							this="5C395076-A858-4F14-8FF445AD8E5F0B00"
+							uniqueguid="5C395076-A858-4F14-8FF445AD8E5F0B00"
+							componentimage="B75F72A5-5354-45AA-A61E48D7C215FBC8"
+							dockpoint="Center"
+							shadertechnique_vars="0.50,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="AEAFF811-F55F-44FA-9314752C27AC3CE0"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+						<transition
+							index="2"
+							transition_m_target_state="40A16308-533D-48B0-89B36DFCDA010D20"/>
+					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"
+						textshadervars="0.30,0.00,0.00,0.00"/>
+				</hover>
+				<inactive
+					this="5B0201B4-597F-4F44-93EACFDD93F9751B"
+					name="inactive"
+					soundcategory="UI_GBL_TMP_Selection_Locked_Unavailable_Small"
+					interactive="true"
+					uniqueguid="5B0201B4-597F-4F44-93EACFDD93F9751B">
+					<imagemetrics>
+						<image
+							this="DAE2CEDC-331E-47DE-8F793DEC1342070B"
+							uniqueguid="DAE2CEDC-331E-47DE-8F793DEC1342070B"
+							componentimage="F82EB78A-7721-48FE-B220C60A13420E7C"/>
+						<image
+							this="7128EE13-36CC-4321-A3BCAF0C4B4C031D"
+							uniqueguid="7128EE13-36CC-4321-A3BCAF0C4B4C031D"
+							componentimage="FA14C061-BBB7-401D-AAE4146647C73D38"/>
+						<image
+							this="9C504FE8-0869-41EA-9C380C735BAAF6FD"
+							uniqueguid="9C504FE8-0869-41EA-9C380C735BAAF6FD"
+							componentimage="B75F72A5-5354-45AA-A61E48D7C215FBC8"
+							colour="#FFFFFF46"
+							dockpoint="Center"/>
+					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
+				</inactive>
+			</states>
+			<animations>
+				<mouseon id="mouseon">
+					<frames>
+						<frame
+							interpolationtime="300"
+							interpolationpropertymask="1064"
+							targetmetrics_m_height="95"
+							targetmetrics_m_width="95"
+							targetmetrics_m_shadervars="0.70,0.00,0.00,0.00"
+							targetmetrics_m_imageindex1="6"
+							targetmetrics_m_imageindex2="6"
+							material_param_id="heat_percent"/>
+					</frames>
+				</mouseon>
+				<mouseoff id="mouseoff">
+					<frames>
+						<frame
+							interpolationtime="300"
+							interpolationpropertymask="1064"
+							targetmetrics_m_height="95"
+							targetmetrics_m_width="95"
+							targetmetrics_m_imageindex1="6"
+							targetmetrics_m_imageindex2="6"
+							material_param_id="heat_percent"/>
+					</frames>
+				</mouseoff>
+			</animations>
+		</button_instant_construction>
 		<slot_entry
 			this="9C206238-278C-424F-86EFB8BF3C2CC6E6"
 			id="slot_entry"
@@ -214,7 +685,7 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\icon_public_order_positive.png"
+					name="ui/skins/default/icon_public_order_positive.png"
 					uniqueguid="E33FC06C-9F28-4795-99FDEC62F24FD5E9"/>
 			</component_image_uniqueguids>
 			<localised_texts>
@@ -224,7 +695,7 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\icon_public_order_positive.png"/>
+				<element value="ui/skins/default/icon_public_order_positive.png"/>
 			</override_images>
 		</template_benefit_icon>
 		<benefit_list
@@ -267,8 +738,14 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\treasury_banner.png"
-					uniqueguid="89D0A3A8-983B-4BB8-AF957B2476D06672"/>
+					name="ui/skins/default/icon_treasury.png"
+					uniqueguid="201C2E5E-8C55-4636-923CB6AC71D9BA88"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/icon_banner_bg.png"
+					uniqueguid="8F2BD578-03F6-4392-8A0807F02A8464C4"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/red_text_banner_shadow.png"
+					uniqueguid="A0C35B0B-C100-40BC-8BA214F2676049A0"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context
@@ -322,7 +799,9 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\treasury_banner.png"/>
+				<element value="ui/skins/default/icon_treasury.png"/>
+				<element value="ui/skins/default/icon_banner_bg.png"/>
+				<element value="ui/skins/default/red_text_banner_shadow.png"/>
 			</override_images>
 		</building_cost>
 		<building_level
@@ -362,19 +841,19 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\settlement_silver_numeral_5.png"
+					name="ui/skins/default/settlement_silver_numeral_5.png"
 					uniqueguid="36F128D5-9B71-44A1-B04A6975DE13F0C0"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\settlement_silver_numeral_4.png"
+					name="ui/skins/default/settlement_silver_numeral_4.png"
 					uniqueguid="2920C9C6-3694-4ECF-B85C401C58ACBC11"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\settlement_silver_numeral_2.png"
+					name="ui/skins/default/settlement_silver_numeral_2.png"
 					uniqueguid="6902E247-2DC6-47DA-BBBC59DCF0028C89"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\settlement_silver_numeral_3.png"
+					name="ui/skins/default/settlement_silver_numeral_3.png"
 					uniqueguid="6E19F1CA-0215-454C-B08452D4168CE45E"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\settlement_silver_numeral_1.png"
+					name="ui/skins/default/settlement_silver_numeral_1.png"
 					uniqueguid="AB7B84A5-FD7B-4A37-A40AA8C4087234E4"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -429,11 +908,11 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\settlement_silver_numeral_5.png"/>
-				<element value="ui\skins\default\settlement_silver_numeral_4.png"/>
-				<element value="ui\skins\default\settlement_silver_numeral_2.png"/>
-				<element value="ui\skins\default\settlement_silver_numeral_3.png"/>
-				<element value="ui\skins\default\settlement_silver_numeral_1.png"/>
+				<element value="ui/skins/default/settlement_silver_numeral_5.png"/>
+				<element value="ui/skins/default/settlement_silver_numeral_4.png"/>
+				<element value="ui/skins/default/settlement_silver_numeral_2.png"/>
+				<element value="ui/skins/default/settlement_silver_numeral_3.png"/>
+				<element value="ui/skins/default/settlement_silver_numeral_1.png"/>
 			</override_images>
 		</building_level>
 		<button_expand_slot
@@ -465,13 +944,13 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\icon_develop_slot.png"
+					name="ui/skins/default/icon_develop_slot.png"
 					uniqueguid="FD8CA3AE-F9C0-493E-984BD0E49EFF477E"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\building_frame.png"
+					name="ui/skins/default/building_frame.png"
 					uniqueguid="644A6E85-71B9-4D21-8C0B295B05AD367C"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\padlock.png"
+					name="ui/skins/default/padlock.png"
 					uniqueguid="83FB7848-4C9D-40AA-A2DCDE9A07EED076"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -528,9 +1007,9 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\icon_develop_slot.png"/>
-				<element value="ui\skins\default\building_frame.png"/>
-				<element value="ui\skins\default\padlock.png"/>
+				<element value="ui/skins/default/icon_develop_slot.png"/>
+				<element value="ui/skins/default/building_frame.png"/>
+				<element value="ui/skins/default/padlock.png"/>
 			</override_images>
 		</button_expand_slot>
 		<category_frame
@@ -549,7 +1028,7 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\building_type_frame.png"
+					name="ui/skins/default/building_type_frame.png"
 					uniqueguid="EEE78856-AAD7-46DA-8E4BEF0005AF65EB"/>
 			</component_image_uniqueguids>
 			<localised_texts>
@@ -559,7 +1038,7 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\building_type_frame.png"/>
+				<element value="ui/skins/default/building_type_frame.png"/>
 			</override_images>
 		</category_frame>
 		<constructing_animation
@@ -614,40 +1093,40 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\constructing_1.png"
+					name="ui/skins/default/constructing_1.png"
 					uniqueguid="4F2599A1-637F-4C01-96C243FDA37B6929"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\constructing_2.png"
+					name="ui/skins/default/constructing_2.png"
 					uniqueguid="649A76B2-5048-40D3-9246948F0B0724A2"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\constructing_3.png"
+					name="ui/skins/default/constructing_3.png"
 					uniqueguid="A4CE14D2-CFD4-4E81-8EDB31EA58181589"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\constructing_4.png"
+					name="ui/skins/default/constructing_4.png"
 					uniqueguid="0BD73023-9A88-4CCB-BB92C9E101F908CE"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\constructing_5.png"
+					name="ui/skins/default/constructing_5.png"
 					uniqueguid="8D2DC886-4101-4F06-AD0B73B1738C3968"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\constructing_6.png"
+					name="ui/skins/default/constructing_6.png"
 					uniqueguid="1212E759-D31E-48AE-96FF362518049B76"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\constructing_7.png"
+					name="ui/skins/default/constructing_7.png"
 					uniqueguid="22F432FF-A485-4D79-B1393CED16ECEA29"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\constructing_8.png"
+					name="ui/skins/default/constructing_8.png"
 					uniqueguid="D1357077-D906-4598-8A3ABC2673876AE4"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\constructing_9.png"
+					name="ui/skins/default/constructing_9.png"
 					uniqueguid="F969375A-90CF-431C-90EB44DF79A1D714"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\constructing_10.png"
+					name="ui/skins/default/constructing_10.png"
 					uniqueguid="D74E22A3-9978-49FC-9F20883D5AFD141E"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\constructing_11.png"
+					name="ui/skins/default/constructing_11.png"
 					uniqueguid="48191D5C-3096-4AA3-9C26E037126CFD5A"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\constructing_12.png"
+					name="ui/skins/default/constructing_12.png"
 					uniqueguid="9957AC21-BFC1-4850-9E40B4028BEA1E13"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -724,18 +1203,18 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\constructing_1.png"/>
-				<element value="ui\skins\default\constructing_2.png"/>
-				<element value="ui\skins\default\constructing_3.png"/>
-				<element value="ui\skins\default\constructing_4.png"/>
-				<element value="ui\skins\default\constructing_5.png"/>
-				<element value="ui\skins\default\constructing_6.png"/>
-				<element value="ui\skins\default\constructing_7.png"/>
-				<element value="ui\skins\default\constructing_8.png"/>
-				<element value="ui\skins\default\constructing_9.png"/>
-				<element value="ui\skins\default\constructing_10.png"/>
-				<element value="ui\skins\default\constructing_11.png"/>
-				<element value="ui\skins\default\constructing_12.png"/>
+				<element value="ui/skins/default/constructing_1.png"/>
+				<element value="ui/skins/default/constructing_2.png"/>
+				<element value="ui/skins/default/constructing_3.png"/>
+				<element value="ui/skins/default/constructing_4.png"/>
+				<element value="ui/skins/default/constructing_5.png"/>
+				<element value="ui/skins/default/constructing_6.png"/>
+				<element value="ui/skins/default/constructing_7.png"/>
+				<element value="ui/skins/default/constructing_8.png"/>
+				<element value="ui/skins/default/constructing_9.png"/>
+				<element value="ui/skins/default/constructing_10.png"/>
+				<element value="ui/skins/default/constructing_11.png"/>
+				<element value="ui/skins/default/constructing_12.png"/>
 			</override_images>
 		</constructing_animation>
 		<culture_icon
@@ -755,7 +1234,7 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\icon_status_alert_high_24px.png"
+					name="ui/skins/default/icon_status_alert_high_24px.png"
 					uniqueguid="74B60CF3-731A-4D35-B1F35BD964E2FEE4"/>
 			</component_image_uniqueguids>
 			<localised_texts>
@@ -767,7 +1246,7 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\icon_status_alert_high_24px.png"/>
+				<element value="ui/skins/default/icon_status_alert_high_24px.png"/>
 			</override_images>
 		</culture_icon>
 		<damaged
@@ -790,10 +1269,10 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\damaged_building.png"
+					name="ui/skins/default/damaged_building.png"
 					uniqueguid="9C1A54ED-98B5-4744-B47D4D10801CEC22"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\damaged_building_circular.png"
+					name="ui/skins/default/damaged_building_circular.png"
 					uniqueguid="D7FC60A5-1010-41B0-92F849A5ED3FD582"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -830,8 +1309,8 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\damaged_building.png"/>
-				<element value="ui\skins\default\damaged_building_circular.png"/>
+				<element value="ui/skins/default/damaged_building.png"/>
+				<element value="ui/skins/default/damaged_building_circular.png"/>
 			</override_images>
 		</damaged>
 		<dev_points
@@ -851,10 +1330,10 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\unit_cat_holder_round_fill.png"
+					name="ui/skins/default/unit_cat_holder_round_fill.png"
 					uniqueguid="5B9D527F-87F4-406C-9917328DED2449F9"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\unit_cat_holder_round.png"
+					name="ui/skins/default/unit_cat_holder_round.png"
 					uniqueguid="E978EBAF-B025-4B47-BB07AC43F66EEE2B"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -875,8 +1354,8 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\unit_cat_holder_round_fill.png"/>
-				<element value="ui\skins\default\unit_cat_holder_round.png"/>
+				<element value="ui/skins/default/unit_cat_holder_round_fill.png"/>
+				<element value="ui/skins/default/unit_cat_holder_round.png"/>
 			</override_images>
 		</dev_points>
 		<dy_growth_pts
@@ -919,7 +1398,7 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\damaged_building_bar_fill.png"
+					name="ui/skins/default/damaged_building_bar_fill.png"
 					uniqueguid="77F95933-85D8-4782-8F79F892082C080A"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -940,7 +1419,7 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\damaged_building_bar_fill.png"/>
+				<element value="ui/skins/default/damaged_building_bar_fill.png"/>
 			</override_images>
 		</fill>
 		<fill_clip
@@ -982,7 +1461,7 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\ap_dropdown_bar_frame.png"
+					name="ui/skins/default/ap_dropdown_bar_frame.png"
 					uniqueguid="785AEE33-176D-4F52-8B699FEA552D7396"/>
 			</component_image_uniqueguids>
 			<localised_texts>
@@ -994,7 +1473,7 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\ap_dropdown_bar_frame.png"/>
+				<element value="ui/skins/default/ap_dropdown_bar_frame.png"/>
 			</override_images>
 		</frame>
 		<frame_expand_slot
@@ -1041,7 +1520,7 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\building_frame_glow.png"
+					name="ui/skins/default/building_frame_glow.png"
 					uniqueguid="482219D5-BFD0-43E4-B9DEFE1A8B557C61"/>
 			</component_image_uniqueguids>
 			<localised_texts>
@@ -1051,7 +1530,7 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\building_frame_glow.png"/>
+				<element value="ui/skins/default/building_frame_glow.png"/>
 			</override_images>
 		</frame_glow>
 		<function_icon
@@ -1077,13 +1556,13 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\icon_income.png"
+					name="ui/skins/default/icon_income.png"
 					uniqueguid="8A040DC3-CE74-45A1-B2B78255AB09CD9B"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\icon_public_order_neutral.png"
+					name="ui/skins/default/icon_public_order_neutral.png"
 					uniqueguid="A451344C-93F8-44B0-B02DD550EF3B25ED"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\icon_development.png"
+					name="ui/skins/default/icon_development.png"
 					uniqueguid="877ECB9F-300B-4EE9-9D6F1347176170D1"/>
 			</component_image_uniqueguids>
 			<localised_texts>
@@ -1099,9 +1578,9 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\icon_income.png"/>
-				<element value="ui\skins\default\icon_public_order_neutral.png"/>
-				<element value="ui\skins\default\icon_development.png"/>
+				<element value="ui/skins/default/icon_income.png"/>
+				<element value="ui/skins/default/icon_public_order_neutral.png"/>
+				<element value="ui/skins/default/icon_development.png"/>
 			</override_images>
 		</function_icon>
 		<glow
@@ -1120,7 +1599,7 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\icon_build_glow.png"
+					name="ui/skins/default/icon_build_glow.png"
 					uniqueguid="863DDA66-973E-4080-BBCDE09C24A22928"/>
 			</component_image_uniqueguids>
 			<localised_texts>
@@ -1132,7 +1611,7 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\icon_build_glow.png"/>
+				<element value="ui/skins/default/icon_build_glow.png"/>
 			</override_images>
 		</glow>
 		<icon
@@ -1151,7 +1630,7 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\icon_build.png"
+					name="ui/skins/default/icon_build.png"
 					uniqueguid="DC748613-6ADB-475E-A303E58624F406D6"/>
 			</component_image_uniqueguids>
 			<localised_texts>
@@ -1163,7 +1642,7 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\icon_build.png"/>
+				<element value="ui/skins/default/icon_build.png"/>
 			</override_images>
 		</icon>
 		<icon_duplicate
@@ -1183,7 +1662,7 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\icon_building_duplicate.png"
+					name="ui/skins/default/icon_building_duplicate.png"
 					uniqueguid="618F6D24-B6F2-439B-BC920EB806EB638F"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -1212,7 +1691,7 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\icon_building_duplicate.png"/>
+				<element value="ui/skins/default/icon_building_duplicate.png"/>
 			</override_images>
 		</icon_duplicate>
 		<icon_horde
@@ -1232,7 +1711,7 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\icon_horde.png"
+					name="ui/skins/default/icon_horde.png"
 					uniqueguid="E3F32CE6-0232-4D40-893C513EB9953F54"/>
 			</component_image_uniqueguids>
 			<localised_texts>
@@ -1242,7 +1721,7 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\icon_horde.png"/>
+				<element value="ui/skins/default/icon_horde.png"/>
 			</override_images>
 		</icon_horde>
 		<mouseover_parent
@@ -1305,7 +1784,7 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\pointer_arrow.png"
+					name="ui/skins/default/pointer_arrow.png"
 					uniqueguid="03B0D888-D493-45F6-B6997EC670D299D0"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -1320,7 +1799,7 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\pointer_arrow.png"/>
+				<element value="ui/skins/default/pointer_arrow.png"/>
 			</override_images>
 		</pointer>
 		<requirement_parent
@@ -1361,7 +1840,7 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\resource_grain_needed.png"
+					name="ui/skins/default/resource_grain_needed.png"
 					uniqueguid="A224395C-F3FB-4D6D-8D9BF18656E0C111"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -1388,7 +1867,7 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\resource_grain_needed.png"/>
+				<element value="ui/skins/default/resource_grain_needed.png"/>
 			</override_images>
 		</resource>
 		<secondary_category_frame
@@ -1407,7 +1886,7 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\building_type_frame_overlay.png"
+					name="ui/skins/default/building_type_frame_overlay.png"
 					uniqueguid="02B3CC34-B3AE-4471-83DE5475E979B846"/>
 			</component_image_uniqueguids>
 			<localised_texts>
@@ -1417,7 +1896,7 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\building_type_frame_overlay.png"/>
+				<element value="ui/skins/default/building_type_frame_overlay.png"/>
 			</override_images>
 		</secondary_category_frame>
 		<smoke_particle_emitter
@@ -1499,7 +1978,7 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\icon_technology_required.png"
+					name="ui/skins/default/icon_technology_required.png"
 					uniqueguid="355BD4DC-352C-400B-BA281157C8294A45"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -1526,7 +2005,7 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\icon_technology_required.png"/>
+				<element value="ui/skins/default/icon_technology_required.png"/>
 			</override_images>
 		</tech>
 		<template_particle
@@ -1544,7 +2023,7 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\particle_line.png"
+					name="ui/skins/default/particle_line.png"
 					uniqueguid="4DABB9B6-FE54-464A-BC5112AFF8A92A03"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -1557,7 +2036,7 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\particle_line.png"/>
+				<element value="ui/skins/default/particle_line.png"/>
 			</override_images>
 		</template_particle>
 		<turns_center
@@ -1583,17 +2062,20 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\icon_pause.png"
+					name="ui/skins/default/icon_pause.png"
 					uniqueguid="87AC0309-B3F0-4F49-9E408F3D8A05E287"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\turns_banner.png"
+					name="ui/skins/default/turns_banner.png"
 					uniqueguid="3B5AB49A-356D-45BD-8D402F74CAC7A087"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\turns_banner_local.png"
-					uniqueguid="FC84780A-66AF-4757-B2C75347D5B9A6DB"/>
-				<component_image_uniqueguid
-					name="ui\skins\default\turns_banner_queued.png"
+					name="ui/skins/default/turns_banner_queued.png"
 					uniqueguid="9BA737C9-C5A5-4F16-A1D34F97E49E5BF3"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/icon_banner.png"
+					uniqueguid="7004727D-FC80-4EDB-9F4BB0777F09C26A"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/icon_demolish_turns.png"
+					uniqueguid="28BFD39F-0E9F-4E7E-BF97130DE969B2DD"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context
@@ -1660,10 +2142,11 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\icon_pause.png"/>
-				<element value="ui\skins\default\turns_banner.png"/>
-				<element value="ui\skins\default\turns_banner_local.png"/>
-				<element value="ui\skins\default\turns_banner_queued.png"/>
+				<element value="ui/skins/default/icon_pause.png"/>
+				<element value="ui/skins/default/turns_banner.png"/>
+				<element value="ui/skins/default/turns_banner_queued.png"/>
+				<element value="ui/skins/default/icon_banner.png"/>
+				<element value="ui/skins/default/icon_demolish_turns.png"/>
 			</override_images>
 		</turns_center>
 		<turns_corner
@@ -1695,13 +2178,13 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\turns_banner.png"
+					name="ui/skins/default/turns_banner.png"
 					uniqueguid="064E5E0C-3110-4E0D-A37169C74B485832"/>
 				<component_image_uniqueguid
-					name="ui\skins\wh3_dae_main_nur_nurgle\lifecycle_turns.png"
+					name="ui/skins/wh3_dae_main_nur_nurgle/lifecycle_turns.png"
 					uniqueguid="AB98E157-E980-4E8E-BA6FC3FC5C443C7E"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\spacebar_bookmark.png"
+					name="ui/skins/default/spacebar_bookmark.png"
 					uniqueguid="B4DC6C4F-D07E-45B2-8B68F5CD56887850"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -1753,8 +2236,8 @@
 					is_text_localised="false"/>
 				<localised_text
 					state="percentage"
-					text="99%"
-					text_label="Turns_percentage_Text_39001c"
+					text="0"
+					text_label="StateText_aa8e1e5"
 					is_text_localised="false"/>
 				<localised_text
 					state="queued"
@@ -1763,9 +2246,9 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\turns_banner.png"/>
-				<element value="ui\skins\wh3_dae_main_nur_nurgle\lifecycle_turns.png"/>
-				<element value="ui\skins\default\spacebar_bookmark.png"/>
+				<element value="ui/skins/default/turns_banner.png"/>
+				<element value="ui/skins/wh3_dae_main_nur_nurgle/lifecycle_turns.png"/>
+				<element value="ui/skins/default/spacebar_bookmark.png"/>
 			</override_images>
 		</turns_corner>
 		<units_list
@@ -1818,7 +2301,7 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\icon_tech.png"
+					name="ui/skins/default/icon_tech.png"
 					uniqueguid="61E0BAAB-C407-43BD-A071CE7451C0FE9F"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -1852,7 +2335,7 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\icon_tech.png"/>
+				<element value="ui/skins/default/icon_tech.png"/>
 			</override_images>
 		</unlocks_tech_icon>
 		<upgradable
@@ -1917,16 +2400,16 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\templates\skins\upgrades_center.png"
+					name="ui/templates/skins/upgrades_center.png"
 					uniqueguid="7A83A590-F68F-4D5E-9F36A7207E7A2504"/>
 				<component_image_uniqueguid
-					name="ui\templates\skins\upgrades_left.png"
+					name="ui/templates/skins/upgrades_left.png"
 					uniqueguid="00174929-070D-4A55-AC723DFAAEA73533"/>
 				<component_image_uniqueguid
-					name="ui\templates\skins\upgrades_right.png"
+					name="ui/templates/skins/upgrades_right.png"
 					uniqueguid="ADF87B9D-B5CB-4D5E-A3CE4A5EACF50BF9"/>
 				<component_image_uniqueguid
-					name="ui\templates\skins\upgrades_one.png"
+					name="ui/templates/skins/upgrades_one.png"
 					uniqueguid="09BD3064-CA5D-4755-8C8195E2BA497093"/>
 			</component_image_uniqueguids>
 			<localised_texts>
@@ -1945,10 +2428,10 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\templates\skins\upgrades_center.png"/>
-				<element value="ui\templates\skins\upgrades_left.png"/>
-				<element value="ui\templates\skins\upgrades_right.png"/>
-				<element value="ui\templates\skins\upgrades_one.png"/>
+				<element value="ui/templates/skins/upgrades_center.png"/>
+				<element value="ui/templates/skins/upgrades_left.png"/>
+				<element value="ui/templates/skins/upgrades_right.png"/>
+				<element value="ui/templates/skins/upgrades_one.png"/>
 			</override_images>
 		</upgrade_box>
 		<dy_num_points_required
@@ -2015,7 +2498,7 @@
 			part_of_template="true"
 			uniqueguid_in_template="FCC65013-1FD1-4489-8B8F753152F1F349"
 			uniqueguid="584C373D-67CF-43A4-9C18AD0E826676A5"
-			dimensions="77.00,26.00"
+			dimensions="65.00,26.00"
 			dock_point="Center Right"
 			priority="70">
 			<state_uniqueguids>
@@ -2028,8 +2511,14 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\wh3_dae_main_kho_khorne\pooled_resource_banner.png"
-					uniqueguid="5D6827DC-7366-46A8-B12E57C94375B41D"/>
+					name="ui/skins/warhammer2/icon_pooled_resource.png"
+					uniqueguid="B60D5180-7C7A-496B-830ED68BA4C1A059"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/icon_banner_bg.png"
+					uniqueguid="5773B96D-4CA9-4BBD-A94CB1C759A472F0"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/red_text_banner_shadow.png"
+					uniqueguid="87395E2F-2DD9-4639-904480E99F474666"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context
@@ -2054,13 +2543,7 @@
 				<callback_with_context
 					callback_id="ContextImageSetter"
 					context_object_id="CcoCampaignPooledResourceTransaction"
-					context_function_id="Icon">
-					<child_m_user_properties>
-						<property
-							name="image_index"
-							value="1"/>
-					</child_m_user_properties>
-				</callback_with_context>
+					context_function_id="Icon"/>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignPooledResourceTransaction"
@@ -2093,6 +2576,9 @@
 				<property
 					name="disable_override5"
 					value="ContextTooltipSetter"/>
+				<property
+					name="disable_override6"
+					value="ContextImageSetter"/>
 			</user_properties>
 			<localised_texts>
 				<localised_text/>
@@ -2108,7 +2594,9 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\wh3_dae_main_kho_khorne\pooled_resource_banner.png"/>
+				<element value="ui/skins/warhammer2/icon_pooled_resource.png"/>
+				<element value="ui/skins/default/icon_banner_bg.png"/>
+				<element value="ui/skins/default/red_text_banner_shadow.png"/>
 			</override_images>
 		</dy_pooled_resource_cost>
 		<cost_list
@@ -2117,7 +2605,7 @@
 			part_of_template="true"
 			uniqueguid_in_template="8E71F5BE-8BDB-4B22-976CED6E5334CB35"
 			uniqueguid="08A354D8-D374-4395-B4AF7F3E01953CC7"
-			dimensions="77.00,46.00"
+			dimensions="72.00,46.00"
 			dock_point="Bottom Right"
 			offset="12.00,6.00"
 			priority="70">
@@ -2387,16 +2875,16 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\unit_card_ph.png"
+					name="ui/skins/default/unit_card_ph.png"
 					uniqueguid="0E49ABCB-8735-41F0-BC513D85BFFCA41A"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\hero_building_card.png"
+					name="ui/skins/default/hero_building_card.png"
 					uniqueguid="89AB3D67-DB21-415F-98414547E3B9477E"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\mask_unit_primary.png"
+					name="ui/skins/default/mask_unit_primary.png"
 					uniqueguid="30613528-38BD-4DCC-AA22B90B8BDF3E15"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\mask_unit_secondary.png"
+					name="ui/skins/default/mask_unit_secondary.png"
 					uniqueguid="403F19E3-3BA4-487A-B2AEFFC485215BF1"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -2429,10 +2917,10 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\unit_card_ph.png"/>
-				<element value="ui\skins\default\hero_building_card.png"/>
-				<element value="ui\skins\default\mask_unit_primary.png"/>
-				<element value="ui\skins\default\mask_unit_secondary.png"/>
+				<element value="ui/skins/default/unit_card_ph.png"/>
+				<element value="ui/skins/default/hero_building_card.png"/>
+				<element value="ui/skins/default/mask_unit_primary.png"/>
+				<element value="ui/skins/default/mask_unit_secondary.png"/>
 			</override_images>
 		</agent_context>
 		<known_parent
@@ -2495,13 +2983,13 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\unit_card_ph.png"
+					name="ui/skins/default/unit_card_ph.png"
 					uniqueguid="F3F31CAF-FF5D-49F9-8580C874E690697F"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\unit_card_build_frame.png"
+					name="ui/skins/default/unit_card_build_frame.png"
 					uniqueguid="44E38FA6-CCD9-4ABB-811CF8312D70FFF2"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\padlock.png"
+					name="ui/skins/default/padlock.png"
 					uniqueguid="B8524851-1F3C-4E4D-9839287CF7199038"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -2540,9 +3028,9 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\unit_card_ph.png"/>
-				<element value="ui\skins\default\unit_card_build_frame.png"/>
-				<element value="ui\skins\default\padlock.png"/>
+				<element value="ui/skins/default/unit_card_ph.png"/>
+				<element value="ui/skins/default/unit_card_build_frame.png"/>
+				<element value="ui/skins/default/padlock.png"/>
 			</override_images>
 		</unit_context>
 		<mercenary_unit_list
@@ -2609,13 +3097,13 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\unit_card_ph.png"
+					name="ui/skins/default/unit_card_ph.png"
 					uniqueguid="BB92B647-AD28-45F9-B2409D27C1877D7B"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\unit_card_build_frame.png"
+					name="ui/skins/default/unit_card_build_frame.png"
 					uniqueguid="B50645E6-C789-4C76-B6FFBBF7E30C5C77"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\padlock.png"
+					name="ui/skins/default/padlock.png"
 					uniqueguid="09363EE7-BD1E-45B9-AE7F2D0FAF7AF7E0"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -2651,119 +3139,11 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\unit_card_ph.png"/>
-				<element value="ui\skins\default\unit_card_build_frame.png"/>
-				<element value="ui\skins\default\padlock.png"/>
+				<element value="ui/skins/default/unit_card_ph.png"/>
+				<element value="ui/skins/default/unit_card_build_frame.png"/>
+				<element value="ui/skins/default/padlock.png"/>
 			</override_images>
 		</merc_context>
-		<settlement_building_slot
-			this="5DFBE30F-B6A1-4630-9EB337F4756AFE14"
-			id="settlement_building_slot"
-			offset="10.00,11.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="5DFBE30F-B6A1-4630-9EB337F4756AFE14"
-			currentstate="7208DEFD-3F4A-4034-87BC88002BA1914F"
-			defaultstate="7208DEFD-3F4A-4034-87BC88002BA1914F">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextComponentInitialiserMouseover"
-					context_object_id="CcoCampaignBuildingSlot">
-					<child_m_user_properties>
-						<property
-							name="close_delay_ms"
-							value="100"/>
-						<property
-							name="include_children"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextCommandGiverOnContextSet"
-					context_object_id="CcoCampaignBuildingSlot"
-					context_function_id="GetIfElse(IsEmpty &amp;&amp; ShouldShowCategoriesPopup, self.SetProperty(&quot;mouseover&quot;, &quot;building_categories_popup&quot;),   GetIfElse(CanShowUpgradeOptions, self.SetProperty(&quot;mouseover&quot;, &quot;building_construction_popup&quot;), self.SetProperty(&quot;mouseover&quot;, &quot;&quot;)))"/>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoCampaignBuildingSlot">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="CampaignBuildingStateChanged"/>
-						<property
-							name="event1"
-							value="CampaignSelectionChanged"/>
-						<property
-							name="event2"
-							value="MissionIssued"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextStateSetterConditional"
-					context_object_id="CcoCampaignBuildingSlot">
-					<child_m_user_properties>
-						<property
-							name="abandoned"
-							value="SettlementContext.IsAbandoned &amp;&amp; ShouldShowSlot == false"/>
-						<property
-							name="building"
-							value="ShouldShowSlot &amp;&amp; ( SettlementContext.IsVisible || IsPlayerFaction)"/>
-						<property
-							name="event0"
-							value="CampaignBuildingStateChanged"/>
-						<property
-							name="fallback_state"
-							value="empty"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextObjectStore"
-					context_object_id="CcoCampaignSettlement"/>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="parent"
-					value="settlement_panel"/>
-			</userproperties>
-			<componentimages>
-				<component_image
-					this="59D166D1-DC87-4374-A0B68A95ABC7CE49"
-					uniqueguid="59D166D1-DC87-4374-A0B68A95ABC7CE49"
-					imagepath="ui/skins/default/build_slot_empty.png"/>
-			</componentimages>
-			<states>
-				<abandoned
-					this="442D0CC5-85BF-4755-BDAA7CC83E98157C"
-					name="abandoned"
-					width="64"
-					height="64"
-					texthbehaviour="Never split"
-					uniqueguid="442D0CC5-85BF-4755-BDAA7CC83E98157C"/>
-				<building
-					this="4FBEB1F6-4E04-4BA6-A0BF9A3FE5BDECC6"
-					name="building"
-					width="64"
-					height="64"
-					texthbehaviour="Never split"
-					uniqueguid="4FBEB1F6-4E04-4BA6-A0BF9A3FE5BDECC6"/>
-				<empty
-					this="7208DEFD-3F4A-4034-87BC88002BA1914F"
-					name="empty"
-					width="64"
-					height="64"
-					uniqueguid="7208DEFD-3F4A-4034-87BC88002BA1914F">
-					<imagemetrics>
-						<image
-							this="E98300B8-EEA6-4FA3-9CE8395E74CE1690"
-							uniqueguid="E98300B8-EEA6-4FA3-9CE8395E74CE1690"
-							componentimage="59D166D1-DC87-4374-A0B68A95ABC7CE49"
-							width="64"
-							height="64"/>
-					</imagemetrics>
-				</empty>
-			</states>
-		</settlement_building_slot>
 		<template_merc_entry_parent
 			this="E0C166EC-E71B-4053-A2AF8209B633969B"
 			id="template_merc_entry_parent"
@@ -2859,10 +3239,10 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\icon_yin.png"
+					name="ui/skins/default/icon_yin.png"
 					uniqueguid="A2C0EBE3-E86B-4268-843973BEB7BF46E5"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\icon_yang.png"
+					name="ui/skins/default/icon_yang.png"
 					uniqueguid="3AA4EBE8-34D7-4B42-BD913782D5E1D8D9"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -2916,8 +3296,8 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\icon_yin.png"/>
-				<element value="ui\skins\default\icon_yang.png"/>
+				<element value="ui/skins/default/icon_yin.png"/>
+				<element value="ui/skins/default/icon_yang.png"/>
 			</override_images>
 		</icon_harmony>
 		<tier_level
@@ -2952,19 +3332,19 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\settlement_silver_numeral_5.png"
+					name="ui/skins/default/settlement_silver_numeral_5.png"
 					uniqueguid="5E2F92C3-62CF-4AF5-9ADB74629944B43E"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\settlement_silver_numeral_4.png"
+					name="ui/skins/default/settlement_silver_numeral_4.png"
 					uniqueguid="0CF5AD1F-A154-49A6-AAEC08F5B224F337"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\settlement_silver_numeral_2.png"
+					name="ui/skins/default/settlement_silver_numeral_2.png"
 					uniqueguid="4B773573-151A-4260-B556ED0632382573"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\settlement_silver_numeral_3.png"
+					name="ui/skins/default/settlement_silver_numeral_3.png"
 					uniqueguid="56BB0500-EE2B-4EA2-92B2CB01BB262366"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\settlement_silver_numeral_1.png"
+					name="ui/skins/default/settlement_silver_numeral_1.png"
 					uniqueguid="F51E2A76-6E29-48CF-A47DF29DD8A69919"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -3006,11 +3386,11 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\settlement_silver_numeral_5.png"/>
-				<element value="ui\skins\default\settlement_silver_numeral_4.png"/>
-				<element value="ui\skins\default\settlement_silver_numeral_2.png"/>
-				<element value="ui\skins\default\settlement_silver_numeral_3.png"/>
-				<element value="ui\skins\default\settlement_silver_numeral_1.png"/>
+				<element value="ui/skins/default/settlement_silver_numeral_5.png"/>
+				<element value="ui/skins/default/settlement_silver_numeral_4.png"/>
+				<element value="ui/skins/default/settlement_silver_numeral_2.png"/>
+				<element value="ui/skins/default/settlement_silver_numeral_3.png"/>
+				<element value="ui/skins/default/settlement_silver_numeral_1.png"/>
 			</override_images>
 		</tier_level>
 		<tier_label
@@ -3031,10 +3411,10 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\building_tier_city_empire.png"
+					name="ui/skins/default/building_tier_city_empire.png"
 					uniqueguid="CEED17E6-E6BE-416B-AD0503DC23D8776A"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\spacebar_bookmark_1.png"
+					name="ui/skins/default/spacebar_bookmark_1.png"
 					uniqueguid="CFA4EEB8-5B17-4DBD-80F04B833460DBC6"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -3082,8 +3462,8 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\building_tier_city_empire.png"/>
-				<element value="ui\skins\default\spacebar_bookmark_1.png"/>
+				<element value="ui/skins/default/building_tier_city_empire.png"/>
+				<element value="ui/skins/default/spacebar_bookmark_1.png"/>
 			</override_images>
 		</tier_label>
 		<circular_building_button
@@ -3142,31 +3522,31 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\1x1_transparent_white.png"
+					name="ui/skins/default/1x1_transparent_white.png"
 					uniqueguid="5356ABF2-B814-41AC-80D62A90C8537F94"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\building_frame_nur.png"
+					name="ui/skins/default/building_frame_nur.png"
 					uniqueguid="E72F4F29-1271-485F-B4B131097B05721F"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\icon_check_green.png"
+					name="ui/skins/default/icon_check_green.png"
 					uniqueguid="05742D58-04FC-45EC-BFF952464654B7C2"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\building_frame_circular.png"
+					name="ui/skins/default/building_frame_circular.png"
 					uniqueguid="101A6898-BDEA-449E-A2A5601E369AFBD1"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\build_frame_cross.png"
+					name="ui/skins/default/build_frame_cross.png"
 					uniqueguid="FCFFD6BD-AC62-46E3-8C894E7FBC55EB30"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\building_frame_selected_circular.png"
+					name="ui/skins/default/building_frame_selected_circular.png"
 					uniqueguid="E4F29193-C343-4AAE-A2E060C88E213F9E"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\building_frame_nur_hover.png"
+					name="ui/skins/default/building_frame_nur_hover.png"
 					uniqueguid="0F73AE0A-34B1-4E02-9B67D5677BCCF54F"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\building_frame_hover_circular.png"
+					name="ui/skins/default/building_frame_hover_circular.png"
 					uniqueguid="E623161F-6222-4FB5-AD20AD0B96A50A70"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\building_card_unknown.png"
+					name="ui/skins/default/building_card_unknown.png"
 					uniqueguid="435B5114-A1CC-4DFF-BECCB152F6F1FBF8"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -3188,7 +3568,22 @@
 					callback_id="ContextCommandLeftClick"
 					context_object_id="CcoBuildingLevelRecord"
 					context_function_id="IssueCommandForBuildingBrowser(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;))"/>
-				<callback_with_context callback_id="BuildingInfoPanelMouseOver"/>
+				<callback_with_context callback_id="BuildingInfoPanelMouseOver">
+					<child_m_user_properties>
+						<property
+							name="flip_when_offscreen"
+							value=""/>
+						<property
+							name="invert_y"
+							value=""/>
+						<property
+							name="offset_x"
+							value="10"/>
+						<property
+							name="offset_y"
+							value="50"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextCommandGiverOnContextSet"
 					context_object_id="CcoBuildingLevelRecord"
@@ -3247,6 +3642,16 @@
 					callback_id="ContextTrashOnCondition"
 					context_object_id="CcoBuildingLevelRecord"
 					context_function_id="HasLifecycleState == false"/>
+				<callback_with_context
+					callback_id="ContextUISFXTrigger"
+					context_object_id="CcoBuildingLevelRecord"
+					context_function_id="slot = StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;) | slot.IsBuildingNew || slot.IsUpgrading =&gt; &quot;UI_CAM_HUD_Construction_Cancel&quot; | &quot;UI_CLICK_Construction_Start&quot;">
+					<child_m_user_properties>
+						<property
+							name="mouse_event0"
+							value="lclick"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -3276,6 +3681,9 @@
 				<property
 					name="disable_override7"
 					value="ContextTrashOnCondition"/>
+				<property
+					name="disable_override8"
+					value="ContextUISFXTrigger"/>
 				<property
 					name="dynamic_image"
 					value="0"/>
@@ -3326,15 +3734,15 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\1x1_transparent_white.png"/>
-				<element value="ui\skins\default\building_frame_nur.png"/>
-				<element value="ui\skins\default\icon_check_green.png"/>
-				<element value="ui\skins\default\building_frame_circular.png"/>
-				<element value="ui\skins\default\build_frame_cross.png"/>
-				<element value="ui\skins\default\building_frame_selected_circular.png"/>
-				<element value="ui\skins\default\building_frame_nur_hover.png"/>
-				<element value="ui\skins\default\building_frame_hover_circular.png"/>
-				<element value="ui\skins\default\building_card_unknown.png"/>
+				<element value="ui/skins/default/1x1_transparent_white.png"/>
+				<element value="ui/skins/default/building_frame_nur.png"/>
+				<element value="ui/skins/default/icon_check_green.png"/>
+				<element value="ui/skins/default/building_frame_circular.png"/>
+				<element value="ui/skins/default/build_frame_cross.png"/>
+				<element value="ui/skins/default/building_frame_selected_circular.png"/>
+				<element value="ui/skins/default/building_frame_nur_hover.png"/>
+				<element value="ui/skins/default/building_frame_hover_circular.png"/>
+				<element value="ui/skins/default/building_card_unknown.png"/>
 			</override_images>
 		</circular_building_button>
 		<square_building_button
@@ -3393,31 +3801,31 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\1x1_transparent_white.png"
+					name="ui/skins/default/1x1_transparent_white.png"
 					uniqueguid="4F310BBD-B472-4F82-A6765DBCF129611B"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\building_frame.png"
+					name="ui/skins/default/building_frame.png"
 					uniqueguid="3BC6BA2F-67E7-46D7-AA7FA826F744527C"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\icon_check_green.png"
+					name="ui/skins/default/icon_check_green.png"
 					uniqueguid="FB418287-716B-42F4-B515477B05293AD4"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\building_frame_plain.png"
+					name="ui/skins/default/building_frame_plain.png"
 					uniqueguid="BF4B8E41-01F3-4C30-B7DD1DD89C3540B7"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\build_frame_cross.png"
+					name="ui/skins/default/build_frame_cross.png"
 					uniqueguid="19D2591A-251D-449B-B872163EE7DDB983"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\building_frame_selected.png"
+					name="ui/skins/default/building_frame_selected.png"
 					uniqueguid="1D078E45-C655-4C73-AE3A656026C57308"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\building_frame_hover.png"
+					name="ui/skins/default/building_frame_hover.png"
 					uniqueguid="F4DF79F4-820A-45E7-A184C1B843B1BB1E"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\building_frame_selected_hover.png"
+					name="ui/skins/default/building_frame_selected_hover.png"
 					uniqueguid="C848E70D-7310-402E-9619EA96C789B089"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\building_card_unknown.png"
+					name="ui/skins/default/building_card_unknown.png"
 					uniqueguid="6F59ECFA-74BC-4926-ADC64AF3484DE9AD"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -3439,7 +3847,22 @@
 					callback_id="ContextCommandLeftClick"
 					context_object_id="CcoBuildingLevelRecord"
 					context_function_id="IssueCommandForBuildingBrowser(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;))"/>
-				<callback_with_context callback_id="BuildingInfoPanelMouseOver"/>
+				<callback_with_context callback_id="BuildingInfoPanelMouseOver">
+					<child_m_user_properties>
+						<property
+							name="flip_y_when_offscreen"
+							value=""/>
+						<property
+							name="invert_y"
+							value=""/>
+						<property
+							name="offset_x"
+							value="10"/>
+						<property
+							name="offset_y"
+							value="30"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextCommandGiverOnContextSet"
 					context_object_id="CcoBuildingLevelRecord"
@@ -3507,7 +3930,7 @@
 				<callback_with_context
 					callback_id="ContextUISFXTrigger"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="GetIf(IsCurrentConstructionItemForSlot( StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;)),&quot;UI_CAM_HUD_Construction_Cancel&quot;)">
+					context_function_id="slot = StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;) | slot.IsRepairing =&gt; &quot;UI_CLICK_Building_Destroy&quot; | slot.IsUpgrading =&gt; &quot;UI_CAM_HUD_Construction_Cancel&quot; | &quot;UI_CLICK_Construction_Start&quot;">
 					<child_m_user_properties>
 						<property
 							name="mouse_event0"
@@ -3600,15 +4023,15 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\1x1_transparent_white.png"/>
-				<element value="ui\skins\default\building_frame.png"/>
-				<element value="ui\skins\default\icon_check_green.png"/>
-				<element value="ui\skins\default\building_frame_plain.png"/>
-				<element value="ui\skins\default\build_frame_cross.png"/>
-				<element value="ui\skins\default\building_frame_selected.png"/>
-				<element value="ui\skins\default\building_frame_hover.png"/>
-				<element value="ui\skins\default\building_frame_selected_hover.png"/>
-				<element value="ui\skins\default\building_card_unknown.png"/>
+				<element value="ui/skins/default/1x1_transparent_white.png"/>
+				<element value="ui/skins/default/building_frame.png"/>
+				<element value="ui/skins/default/icon_check_green.png"/>
+				<element value="ui/skins/default/building_frame_plain.png"/>
+				<element value="ui/skins/default/build_frame_cross.png"/>
+				<element value="ui/skins/default/building_frame_selected.png"/>
+				<element value="ui/skins/default/building_frame_hover.png"/>
+				<element value="ui/skins/default/building_frame_selected_hover.png"/>
+				<element value="ui/skins/default/building_card_unknown.png"/>
 			</override_images>
 		</square_building_button>
 		<lifecycle_turns
@@ -3632,13 +4055,13 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\icon_pause.png"
+					name="ui/skins/default/icon_pause.png"
 					uniqueguid="ACBE9029-70D6-4BE7-B4594E0F0CA03F27"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\spacebar_bookmark.png"
+					name="ui/skins/default/spacebar_bookmark.png"
 					uniqueguid="E48D0229-9F61-45F9-97E99F5137D105E5"/>
 				<component_image_uniqueguid
-					name="ui\skins\wh3_dae_main_nur_nurgle\lifecycle_turns.png"
+					name="ui/skins/wh3_dae_main_nur_nurgle/lifecycle_turns.png"
 					uniqueguid="21FD2368-BEDA-4279-84D79E0A02DEA4E6"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -3707,9 +4130,9 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\icon_pause.png"/>
-				<element value="ui\skins\default\spacebar_bookmark.png"/>
-				<element value="ui\skins\wh3_dae_main_nur_nurgle\lifecycle_turns.png"/>
+				<element value="ui/skins/default/icon_pause.png"/>
+				<element value="ui/skins/default/spacebar_bookmark.png"/>
+				<element value="ui/skins/wh3_dae_main_nur_nurgle/lifecycle_turns.png"/>
 			</override_images>
 		</lifecycle_turns>
 		<constructing_animation_circular
@@ -3764,40 +4187,40 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\constructing_1.png"
+					name="ui/skins/default/constructing_1.png"
 					uniqueguid="E595B27A-D9E6-42C5-9FEECF334D0B8A58"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\constructing_2.png"
+					name="ui/skins/default/constructing_2.png"
 					uniqueguid="979216D6-8B5A-4FCF-BDD7F403C3B24943"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\constructing_3.png"
+					name="ui/skins/default/constructing_3.png"
 					uniqueguid="CE9B0222-DCA6-40EF-88C189059D58D4A3"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\constructing_4.png"
+					name="ui/skins/default/constructing_4.png"
 					uniqueguid="BA5BABB1-FDF2-4FAE-AA3BB709AE463C6B"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\constructing_5.png"
+					name="ui/skins/default/constructing_5.png"
 					uniqueguid="82FD63C4-D7E9-4FE7-98BADEAC4C9CD11F"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\constructing_6.png"
+					name="ui/skins/default/constructing_6.png"
 					uniqueguid="6E7E6E63-2A43-4C27-95AD2E9E26E613EE"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\constructing_7.png"
+					name="ui/skins/default/constructing_7.png"
 					uniqueguid="6B7C0FBB-64A3-451C-95E30B4363425FD7"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\constructing_8.png"
+					name="ui/skins/default/constructing_8.png"
 					uniqueguid="CFB32629-7BCB-499B-8687643514A6B2B4"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\constructing_9.png"
+					name="ui/skins/default/constructing_9.png"
 					uniqueguid="34E22506-857B-4EAB-A49E99CA3EB43D7C"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\constructing_10.png"
+					name="ui/skins/default/constructing_10.png"
 					uniqueguid="AE9D6765-876B-4D8A-A8F0637807E96E6B"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\constructing_11.png"
+					name="ui/skins/default/constructing_11.png"
 					uniqueguid="AF8FE9AC-2321-4E7A-87F87A899AFA13F7"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\constructing_12.png"
+					name="ui/skins/default/constructing_12.png"
 					uniqueguid="2168B498-04F4-4FDF-90EBFFE21958E745"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -3854,18 +4277,18 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\constructing_1.png"/>
-				<element value="ui\skins\default\constructing_2.png"/>
-				<element value="ui\skins\default\constructing_3.png"/>
-				<element value="ui\skins\default\constructing_4.png"/>
-				<element value="ui\skins\default\constructing_5.png"/>
-				<element value="ui\skins\default\constructing_6.png"/>
-				<element value="ui\skins\default\constructing_7.png"/>
-				<element value="ui\skins\default\constructing_8.png"/>
-				<element value="ui\skins\default\constructing_9.png"/>
-				<element value="ui\skins\default\constructing_10.png"/>
-				<element value="ui\skins\default\constructing_11.png"/>
-				<element value="ui\skins\default\constructing_12.png"/>
+				<element value="ui/skins/default/constructing_1.png"/>
+				<element value="ui/skins/default/constructing_2.png"/>
+				<element value="ui/skins/default/constructing_3.png"/>
+				<element value="ui/skins/default/constructing_4.png"/>
+				<element value="ui/skins/default/constructing_5.png"/>
+				<element value="ui/skins/default/constructing_6.png"/>
+				<element value="ui/skins/default/constructing_7.png"/>
+				<element value="ui/skins/default/constructing_8.png"/>
+				<element value="ui/skins/default/constructing_9.png"/>
+				<element value="ui/skins/default/constructing_10.png"/>
+				<element value="ui/skins/default/constructing_11.png"/>
+				<element value="ui/skins/default/constructing_12.png"/>
 			</override_images>
 		</constructing_animation_circular>
 		<constructing_animation_circular_parent
@@ -3885,7 +4308,7 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\building_frame_nur.png"
+					name="ui/skins/default/building_frame_nur.png"
 					uniqueguid="05C534A5-6F39-4C2B-AA84C1E2A23B2D14"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
@@ -3919,9 +4342,115 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\building_frame_nur.png"/>
+				<element value="ui/skins/default/building_frame_nur.png"/>
 			</override_images>
 		</constructing_animation_circular_parent>
+		<settlement_building_slot
+			this="5DFBE30F-B6A1-4630-9EB337F4756AFE14"
+			id="settlement_building_slot"
+			offset="10.00,11.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="5DFBE30F-B6A1-4630-9EB337F4756AFE14"
+			currentstate="7208DEFD-3F4A-4034-87BC88002BA1914F"
+			defaultstate="7208DEFD-3F4A-4034-87BC88002BA1914F">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextComponentInitialiserMouseover"
+					context_object_id="CcoCampaignBuildingSlot">
+					<child_m_user_properties>
+						<property
+							name="close_delay_ms"
+							value="100"/>
+						<property
+							name="include_children"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandGiverOnContextSet"
+					context_object_id="CcoCampaignBuildingSlot"
+					context_function_id="GetIfElse(IsEmpty &amp;&amp; ShouldShowCategoriesPopup, self.SetProperty(&quot;mouseover&quot;, &quot;building_categories_popup&quot;),   GetIfElse(CanShowUpgradeOptions, self.SetProperty(&quot;mouseover&quot;, &quot;building_construction_popup&quot;), self.SetProperty(&quot;mouseover&quot;, &quot;&quot;)))"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignBuildingSlot">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignBuildingStateChanged"/>
+						<property
+							name="event1"
+							value="CampaignSelectionChanged"/>
+						<property
+							name="event2"
+							value="MissionIssued"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoCampaignBuildingSlot">
+					<child_m_user_properties>
+						<property
+							name="abandoned"
+							value="SettlementContext.IsAbandoned &amp;&amp; ShouldShowSlot == false"/>
+						<property
+							name="building"
+							value="ShouldShowSlot &amp;&amp; ( SettlementContext.IsVisible || IsPlayerFaction)"/>
+						<property
+							name="event0"
+							value="CampaignBuildingStateChanged"/>
+						<property
+							name="fallback_state"
+							value="empty"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignSettlement"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="parent"
+					value="settlement_panel"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="59D166D1-DC87-4374-A0B68A95ABC7CE49"
+					uniqueguid="59D166D1-DC87-4374-A0B68A95ABC7CE49"
+					imagepath="ui/skins/default/build_slot_empty.png"/>
+			</componentimages>
+			<states>
+				<abandoned
+					this="442D0CC5-85BF-4755-BDAA7CC83E98157C"
+					name="abandoned"
+					width="64"
+					height="64"
+					uniqueguid="442D0CC5-85BF-4755-BDAA7CC83E98157C"/>
+				<building
+					this="4FBEB1F6-4E04-4BA6-A0BF9A3FE5BDECC6"
+					name="building"
+					width="64"
+					height="64"
+					uniqueguid="4FBEB1F6-4E04-4BA6-A0BF9A3FE5BDECC6"/>
+				<empty
+					this="7208DEFD-3F4A-4034-87BC88002BA1914F"
+					name="empty"
+					width="64"
+					height="64"
+					uniqueguid="7208DEFD-3F4A-4034-87BC88002BA1914F">
+					<imagemetrics>
+						<image
+							this="E98300B8-EEA6-4FA3-9CE8395E74CE1690"
+							uniqueguid="E98300B8-EEA6-4FA3-9CE8395E74CE1690"
+							componentimage="59D166D1-DC87-4374-A0B68A95ABC7CE49"
+							width="64"
+							height="64"/>
+					</imagemetrics>
+				</empty>
+			</states>
+		</settlement_building_slot>
 		<allied_faction_icon
 			this="FF607521-D0A9-47DB-909A819F02DD3A4C"
 			id="allied_faction_icon"
@@ -3972,7 +4501,6 @@
 					width="24"
 					height="23"
 					tooltip="{{CcoCampaignFaction:Name}}'s outpost"
-					texthbehaviour="Never split"
 					tooltiplabel="allied_faction_icon_default_Tooltip_f51ad35f"
 					interactive="true"
 					disabled="true"

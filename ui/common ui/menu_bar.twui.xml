@@ -1,12 +1,13 @@
 <?xml version="1.0"?>
 <layout
-	version="138"
+	version="141"
 	comment=""
 	precache_condition="">
 	<hierarchy>
 		<root this="18966C8E-E129-43DA-8B0E4D2E2E555053">
 			<menu_bar this="7DDF8AD9-7CE9-46DE-BD9158FC6946C1E2">
 				<buttongroup this="CD21E92C-8A08-414D-B291001A7C5DE1F0">
+					<button_overlay_test this="F3DB553E-AD39-4971-AE424AD4D29BE10A"/>
 					<button_menu this="284C836B-052C-43AF-B3387DA2268F5103"/>
 					<button_hud_chat this="FCFE8D28-657F-4B07-9899E93A2019F9F1">
 						<chat_alert_icon this="B23ECABA-C073-409B-94CD008A69CC0615"/>
@@ -18,8 +19,8 @@
 					<button_telestration this="D3340C08-842E-4B09-A4DF7AA24916556F"/>
 					<button_ping this="9246CA8D-83D3-4332-BC0B02D85C5582BC"/>
 					<button_player_list this="DCA8906A-ECF7-44F5-A0EB370D20C5DDA8"/>
+					<button_search_panel this="5CB14028-8467-47E9-8DAC1DEA6770A0C8"/>
 				</buttongroup>
-				<button_overlay_test this="F3DB553E-AD39-4971-AE424AD4D29BE10A"/>
 			</menu_bar>
 		</root>
 	</hierarchy>
@@ -42,10 +43,6 @@
 					name="NewState"
 					width="1600"
 					height="900"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					interactive="true"
 					uniqueguid="15BC591B-A5DE-4860-A6EB13A96ABA3334">
 					<imagemetrics>
@@ -57,6 +54,11 @@
 							height="960"
 							colour="#C0C0C0FF"/>
 					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
 				</newstate>
 			</states>
 		</root>
@@ -91,20 +93,20 @@
 					name="ui/skins/default/icon_question_mark.png"
 					uniqueguid="438D265D-BCFA-4390-809009F93D233134"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_pressed.png"
-					uniqueguid="A3403E09-2A98-4500-B7DD7D51F5F935DE"/>
+					name="ui/skins/default/button_round_small_pressed.png"
+					uniqueguid="1495B557-AA9C-4C05-9C2F06FF1CE6AC9C"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_hover.png"
-					uniqueguid="2905FD19-3A67-42E2-A2FAEFDE945B8155"/>
+					name="ui/skins/default/button_round_small_hover.png"
+					uniqueguid="DD8E522B-C0D2-4489-BE39C53BA4FE3A48"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_active.png"
-					uniqueguid="4915FA53-AA7B-422A-B0A52FA2DB936830"/>
+					name="ui/skins/default/button_round_small_active.png"
+					uniqueguid="7E4D5A41-2D2B-45EC-A78BB242CFAD88D6"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_inactive.png"
-					uniqueguid="57B7C7DF-8EC7-423F-BEA2F10A80555907"/>
+					name="ui/skins/default/button_round_small_inactive.png"
+					uniqueguid="6CE858E0-6F38-4E1F-AF5EA7CAFA2136B1"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_underlay.png"
-					uniqueguid="A7036185-6D33-47B5-B20A064F5875BF9D"/>
+					name="ui/skins/default/button_round_small_underlay.png"
+					uniqueguid="CBEAB11C-9CF4-4AC2-A3037E105BB537A5"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context callback_id="Button"/>
@@ -116,13 +118,6 @@
 						<property
 							name="ui_override"
 							value="hide_help_button"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context callback_id="StatePropagatorCallback">
-					<child_m_user_properties>
-						<property
-							name="use_transitions"
-							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
@@ -171,11 +166,11 @@
 			</localised_texts>
 			<override_images>
 				<element value="ui/skins/default/icon_question_mark.png"/>
-				<element value="ui\skins\default\button_round_small_pressed.png"/>
-				<element value="ui\skins\default\button_round_small_hover.png"/>
-				<element value="ui\skins\default\button_round_small_active.png"/>
-				<element value="ui\skins\default\button_round_small_inactive.png"/>
-				<element value="ui\skins\default\button_round_small_underlay.png"/>
+				<element value="ui/skins/default/button_round_small_pressed.png"/>
+				<element value="ui/skins/default/button_round_small_hover.png"/>
+				<element value="ui/skins/default/button_round_small_active.png"/>
+				<element value="ui/skins/default/button_round_small_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_underlay.png"/>
 				<element value=""/>
 			</override_images>
 		</button_help_panel>
@@ -212,20 +207,20 @@
 					name="ui/skins/default/icon_chat.png"
 					uniqueguid="0FEDACE1-F189-4D3A-BCAE26753CC87D33"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_pressed.png"
-					uniqueguid="400CE096-A109-4A7B-9D8D6DD001311E08"/>
+					name="ui/skins/default/button_round_small_pressed.png"
+					uniqueguid="4380583D-7945-44BD-BE603821EE6AD6E4"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_hover.png"
-					uniqueguid="5FF60225-9279-4857-BCBB7048A44D9611"/>
+					name="ui/skins/default/button_round_small_hover.png"
+					uniqueguid="FCF7F09D-BF1F-45FA-AF1B2E0126AF3EAB"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_active.png"
-					uniqueguid="093EC481-349E-4481-A5CBE6FC182BD98F"/>
+					name="ui/skins/default/button_round_small_active.png"
+					uniqueguid="FD0BC787-6268-4101-8AA8B1CC288280D4"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_inactive.png"
-					uniqueguid="AEE87DC4-C5E1-4A25-A284E69E7326C7AC"/>
+					name="ui/skins/default/button_round_small_inactive.png"
+					uniqueguid="D96E49E3-B6E0-4406-9AC97804ECB456E3"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_underlay.png"
-					uniqueguid="7850F014-9E7D-4B65-A2A02D49D0CBE77D"/>
+					name="ui/skins/default/button_round_small_underlay.png"
+					uniqueguid="1EDA7F6D-0A2D-435A-B3D4C9CB7755DA44"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context callback_id="MultiplayerChatToggleButton"/>
@@ -271,11 +266,11 @@
 			</localised_texts>
 			<override_images>
 				<element value="ui/skins/default/icon_chat.png"/>
-				<element value="ui\skins\default\button_round_small_pressed.png"/>
-				<element value="ui\skins\default\button_round_small_hover.png"/>
-				<element value="ui\skins\default\button_round_small_active.png"/>
-				<element value="ui\skins\default\button_round_small_inactive.png"/>
-				<element value="ui\skins\default\button_round_small_underlay.png"/>
+				<element value="ui/skins/default/button_round_small_pressed.png"/>
+				<element value="ui/skins/default/button_round_small_hover.png"/>
+				<element value="ui/skins/default/button_round_small_active.png"/>
+				<element value="ui/skins/default/button_round_small_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_underlay.png"/>
 				<element value=""/>
 			</override_images>
 		</button_hud_chat>
@@ -311,30 +306,23 @@
 					name="ui/skins/default/icon_menu.png"
 					uniqueguid="19D0100A-E609-407C-A3FB985A0DB4E197"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_pressed.png"
-					uniqueguid="5C229012-09C0-48BB-A5DCB7DDC7718A11"/>
+					name="ui/skins/default/button_round_small_pressed.png"
+					uniqueguid="3F0C700D-11DF-4DA0-B3D259A2A942FB47"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_hover.png"
-					uniqueguid="2DDC20C2-CE8C-4BD0-807CED74AFDA5575"/>
+					name="ui/skins/default/button_round_small_hover.png"
+					uniqueguid="F19E1138-512D-4A9C-828622384D5E6A28"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_active.png"
-					uniqueguid="B6BE2036-AC42-44CD-BF2356630AC276B4"/>
+					name="ui/skins/default/button_round_small_active.png"
+					uniqueguid="4C2C8617-0D5F-4B83-BF3A46D41D391F47"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_inactive.png"
-					uniqueguid="387A9560-5CE5-44A4-9DEBBC5E9F085A9B"/>
+					name="ui/skins/default/button_round_small_inactive.png"
+					uniqueguid="A2C37552-8EE9-4115-B3886D473EDC0BD2"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_underlay.png"
-					uniqueguid="9DF2D7BC-6DCD-46AF-9AF6075821FC3A41"/>
+					name="ui/skins/default/button_round_small_underlay.png"
+					uniqueguid="CFF4328C-1580-4B66-933723B2A3DDD454"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context callback_id="Button"/>
-				<callback_with_context callback_id="StatePropagatorCallback">
-					<child_m_user_properties>
-						<property
-							name="use_transitions"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
 				<callback_with_context callback_id="CallbackAnimTrigger"/>
 			</callbacks_with_context>
 			<user_properties>
@@ -370,11 +358,11 @@
 			</localised_texts>
 			<override_images>
 				<element value="ui/skins/default/icon_menu.png"/>
-				<element value="ui\skins\default\button_round_small_pressed.png"/>
-				<element value="ui\skins\default\button_round_small_hover.png"/>
-				<element value="ui\skins\default\button_round_small_active.png"/>
-				<element value="ui\skins\default\button_round_small_inactive.png"/>
-				<element value="ui\skins\default\button_round_small_underlay.png"/>
+				<element value="ui/skins/default/button_round_small_pressed.png"/>
+				<element value="ui/skins/default/button_round_small_hover.png"/>
+				<element value="ui/skins/default/button_round_small_active.png"/>
+				<element value="ui/skins/default/button_round_small_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_underlay.png"/>
 				<element value=""/>
 			</override_images>
 		</button_menu>
@@ -386,8 +374,7 @@
 			uniqueguid_in_template="5E5903D5-3190-4BE4-A117AA3392596D5C"
 			uniqueguid="F3DB553E-AD39-4971-AE424AD4D29BE10A"
 			dimensions="38.00,38.00"
-			dock_point="Top Left"
-			offset="-400.00,0.00"
+			is_visible="false"
 			sound_category="UI_GBL_TMP_Round_Small_Button">
 			<state_uniqueguids>
 				<state_uniqueguid
@@ -426,48 +413,38 @@
 					name="ui/skins/default/icon_camera_settings.png"
 					uniqueguid="EC4997BE-B5DB-47C2-A54990224B72E439"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_pressed.png"
-					uniqueguid="7C360399-B2CD-47F7-9CB83A24AFF89BCD"/>
+					name="ui/skins/default/button_round_small_pressed.png"
+					uniqueguid="6F102F01-8641-415E-8F3E62B6ECF6A77B"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected_hover.png"
-					uniqueguid="FE6A4D07-7117-4822-B2BFB99AF67154F8"/>
+					name="ui/skins/default/button_round_small_selected_hover.png"
+					uniqueguid="F9323B68-27D7-46AC-BB54CBCF075A325C"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_hover.png"
-					uniqueguid="3CEC9452-F25D-49F6-A9A307110BF26668"/>
+					name="ui/skins/default/button_round_small_hover.png"
+					uniqueguid="4F2084EC-F4E3-478A-979283A597C6E4CA"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_active.png"
-					uniqueguid="D2654E2C-BF01-488F-80FAB268059B3788"/>
+					name="ui/skins/default/button_round_small_active.png"
+					uniqueguid="8516F544-85E8-4319-8CDAB10EBE60D9FB"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_inactive.png"
-					uniqueguid="356BB8E5-BB41-4C7D-ADCEBCD8800A2DB1"/>
+					name="ui/skins/default/button_round_small_inactive.png"
+					uniqueguid="1B5F8A99-DDF7-4002-87194EF229807DDD"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected.png"
-					uniqueguid="B58A12BB-6FB5-4481-AE067B8DA6D10EEB"/>
+					name="ui/skins/default/button_round_small_selected.png"
+					uniqueguid="721911B0-0E0E-4D91-A09403BCABA27883"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_underlay.png"
-					uniqueguid="669D42C2-0AD0-4F53-97A1062869CB1089"/>
+					name="ui/skins/default/button_round_small_underlay.png"
+					uniqueguid="18B469F2-D4D1-46D4-ADBA5A3E90826627"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected_underlay.png"
-					uniqueguid="84F77A0E-60C1-464B-9AD8FFFB6CB125E6"/>
+					name="ui/skins/default/button_round_small_selected_underlay.png"
+					uniqueguid="BE240AC2-A8ED-44EB-BE9771D92A38649F"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected_inactive.png"
-					uniqueguid="860229DF-C7F4-46B5-BBFB911C99A2BB58"/>
+					name="ui/skins/default/button_round_small_selected_inactive.png"
+					uniqueguid="2EBAAA6E-70D9-46F1-8593324C4F6E46FF"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected_pressed.png"
-					uniqueguid="82C62B7A-FE45-4040-A9D4ABDF842A8E54"/>
+					name="ui/skins/default/button_round_small_selected_pressed.png"
+					uniqueguid="8922811D-584C-4A86-B40A820D30A330B1"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
-				<callback_with_context callback_id="CampaignOverlayToggle"/>
-				<callback_with_context callback_id="StatePropagatorCallback">
-					<child_m_user_properties>
-						<property
-							name="target_id"
-							value="icon"/>
-						<property
-							name="use_transitions"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
+				<callback_with_context callback_id="#CampaignOverlayToggle"/>
 				<callback_with_context callback_id="CallbackAnimTrigger"/>
 			</callbacks_with_context>
 			<user_properties>
@@ -516,16 +493,16 @@
 			</localised_texts>
 			<override_images>
 				<element value="ui/skins/default/icon_camera_settings.png"/>
-				<element value="ui\skins\default\button_round_small_pressed.png"/>
-				<element value="ui\skins\default\button_round_small_selected_hover.png"/>
-				<element value="ui\skins\default\button_round_small_hover.png"/>
-				<element value="ui\skins\default\button_round_small_active.png"/>
-				<element value="ui\skins\default\button_round_small_inactive.png"/>
-				<element value="ui\skins\default\button_round_small_selected.png"/>
-				<element value="ui\skins\default\button_round_small_underlay.png"/>
-				<element value="ui\skins\default\button_round_small_selected_underlay.png"/>
-				<element value="ui\skins\default\button_round_small_selected_inactive.png"/>
-				<element value="ui\skins\default\button_round_small_selected_pressed.png"/>
+				<element value="ui/skins/default/button_round_small_pressed.png"/>
+				<element value="ui/skins/default/button_round_small_selected_hover.png"/>
+				<element value="ui/skins/default/button_round_small_hover.png"/>
+				<element value="ui/skins/default/button_round_small_active.png"/>
+				<element value="ui/skins/default/button_round_small_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_selected.png"/>
+				<element value="ui/skins/default/button_round_small_underlay.png"/>
+				<element value="ui/skins/default/button_round_small_selected_underlay.png"/>
+				<element value="ui/skins/default/button_round_small_selected_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_selected_pressed.png"/>
 				<element value=""/>
 			</override_images>
 		</button_overlay_test>
@@ -574,38 +551,38 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\icon_ping_activate.png"
+					name="ui/skins/default/icon_ping_activate.png"
 					uniqueguid="22888532-E65D-4D36-935B8EBD5B3D513B"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_pressed.png"
-					uniqueguid="1F8F9C75-4DA6-4661-9FC574DDD3999B8B"/>
+					name="ui/skins/default/button_round_small_pressed.png"
+					uniqueguid="E3A7C96D-E4CB-4DBE-AD54F124F696EE0C"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected_hover.png"
-					uniqueguid="FF302799-F2B0-4082-820BA0ABF245D4E8"/>
+					name="ui/skins/default/button_round_small_selected_hover.png"
+					uniqueguid="8965E03C-1431-4526-A41D7F544B5B8A34"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_hover.png"
-					uniqueguid="2EC69317-9319-4586-8A5BA9BE8AA5B749"/>
+					name="ui/skins/default/button_round_small_hover.png"
+					uniqueguid="6E272BA6-0837-4BBC-AC5A0C4C7F9F3A51"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_active.png"
-					uniqueguid="52B0B80B-6237-426A-9C98E1D54FD78F8F"/>
+					name="ui/skins/default/button_round_small_active.png"
+					uniqueguid="CAD039F2-17B3-4FBD-A7225FE5051890BD"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_inactive.png"
-					uniqueguid="475B3F65-7AEA-4F47-B5021B997114285A"/>
+					name="ui/skins/default/button_round_small_inactive.png"
+					uniqueguid="40D4FC12-980A-4290-82C1F21B439F7863"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected.png"
-					uniqueguid="CCB28CF7-89D3-47B3-9E94B9388DBFB40C"/>
+					name="ui/skins/default/button_round_small_selected.png"
+					uniqueguid="3116650A-A8BA-4DDA-9A78F4E2D6A659DF"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_underlay.png"
-					uniqueguid="FBB41AC6-1206-48A9-99B918CF2287ECA3"/>
+					name="ui/skins/default/button_round_small_underlay.png"
+					uniqueguid="11BEC5F4-4264-4FBD-BB1924310F248C2F"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected_underlay.png"
-					uniqueguid="2418DD21-51AF-404C-8647ADB9A0637931"/>
+					name="ui/skins/default/button_round_small_selected_underlay.png"
+					uniqueguid="E00AEEB5-A8AB-4740-BF2F3663D9A8BFE7"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected_inactive.png"
-					uniqueguid="18B023E5-64CA-43F3-B3F406E85EE24EC8"/>
+					name="ui/skins/default/button_round_small_selected_inactive.png"
+					uniqueguid="875B2081-6FDE-41AD-BE17FED10BA6D4F6"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected_pressed.png"
-					uniqueguid="B213F93A-D49E-40FB-8AD573250BBBA487"/>
+					name="ui/skins/default/button_round_small_selected_pressed.png"
+					uniqueguid="546E856F-9E62-4F98-921DE052A87A68E8"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context callback_id="Button"/>
@@ -689,17 +666,17 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\icon_ping_activate.png"/>
-				<element value="ui\skins\default\button_round_small_pressed.png"/>
-				<element value="ui\skins\default\button_round_small_selected_hover.png"/>
-				<element value="ui\skins\default\button_round_small_hover.png"/>
-				<element value="ui\skins\default\button_round_small_active.png"/>
-				<element value="ui\skins\default\button_round_small_inactive.png"/>
-				<element value="ui\skins\default\button_round_small_selected.png"/>
-				<element value="ui\skins\default\button_round_small_underlay.png"/>
-				<element value="ui\skins\default\button_round_small_selected_underlay.png"/>
-				<element value="ui\skins\default\button_round_small_selected_inactive.png"/>
-				<element value="ui\skins\default\button_round_small_selected_pressed.png"/>
+				<element value="ui/skins/default/icon_ping_activate.png"/>
+				<element value="ui/skins/default/button_round_small_pressed.png"/>
+				<element value="ui/skins/default/button_round_small_selected_hover.png"/>
+				<element value="ui/skins/default/button_round_small_hover.png"/>
+				<element value="ui/skins/default/button_round_small_active.png"/>
+				<element value="ui/skins/default/button_round_small_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_selected.png"/>
+				<element value="ui/skins/default/button_round_small_underlay.png"/>
+				<element value="ui/skins/default/button_round_small_selected_underlay.png"/>
+				<element value="ui/skins/default/button_round_small_selected_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_selected_pressed.png"/>
 				<element value=""/>
 			</override_images>
 		</button_ping>
@@ -747,51 +724,41 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\icon_player_list.png"
+					name="ui/skins/default/icon_player_list.png"
 					uniqueguid="FCC95CEF-9CBD-48CE-AAC132CAABD74BE2"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_pressed.png"
-					uniqueguid="F005EB55-BBA8-410A-BB12841CA74D12ED"/>
+					name="ui/skins/default/button_round_small_pressed.png"
+					uniqueguid="6E1F74F1-0C54-4D68-B0F8CC335670F0E5"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected_hover.png"
-					uniqueguid="C5123B66-9664-4C1A-BD67B95AD912DE6F"/>
+					name="ui/skins/default/button_round_small_selected_hover.png"
+					uniqueguid="451002D1-0DEE-4A78-8A8C552D9C87AF38"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_hover.png"
-					uniqueguid="1E9FDB2F-7035-4302-A3F2BBFEFDE3AACB"/>
+					name="ui/skins/default/button_round_small_hover.png"
+					uniqueguid="BD3E3E0D-52ED-428C-9A6F4830FD7D87E3"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_active.png"
-					uniqueguid="1913A831-D290-4BBC-AF1EDA7676BAF126"/>
+					name="ui/skins/default/button_round_small_active.png"
+					uniqueguid="906546DB-7189-48EC-AD639FC24A6E0F74"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_inactive.png"
-					uniqueguid="9B26CF0F-7ACE-46D4-A762F2E360561BEA"/>
+					name="ui/skins/default/button_round_small_inactive.png"
+					uniqueguid="644D3DDA-BAE2-4D71-A0A451BDAFBC128D"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected.png"
-					uniqueguid="06749544-D7B7-4A23-B1506747A42A09D5"/>
+					name="ui/skins/default/button_round_small_selected.png"
+					uniqueguid="9183B5FF-35C0-48D6-81F558C0A990B3F0"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_underlay.png"
-					uniqueguid="5611FB35-0B12-4D60-842BB721F500D05C"/>
+					name="ui/skins/default/button_round_small_underlay.png"
+					uniqueguid="C4F33730-5F93-422D-B87C283566307477"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected_underlay.png"
-					uniqueguid="AE7C5442-9EFB-43DB-9C03A06C70554E09"/>
+					name="ui/skins/default/button_round_small_selected_underlay.png"
+					uniqueguid="7E491ACB-212F-4588-9A007B55DB28D4FB"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected_inactive.png"
-					uniqueguid="4BEFD812-E251-425B-96FDB4E9A5B7A834"/>
+					name="ui/skins/default/button_round_small_selected_inactive.png"
+					uniqueguid="826C5004-7025-4E48-B0FBDBAA9AADA5AF"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected_pressed.png"
-					uniqueguid="D5B1637E-69C7-4238-9225F1F5F0032159"/>
+					name="ui/skins/default/button_round_small_selected_pressed.png"
+					uniqueguid="49902882-2067-4A0C-90EA8E9F2275CBE4"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context callback_id="Button"/>
-				<callback_with_context callback_id="StatePropagatorCallback">
-					<child_m_user_properties>
-						<property
-							name="target_id"
-							value="icon"/>
-						<property
-							name="use_transitions"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoStaticObject"
@@ -882,20 +849,170 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\icon_player_list.png"/>
-				<element value="ui\skins\default\button_round_small_pressed.png"/>
-				<element value="ui\skins\default\button_round_small_selected_hover.png"/>
-				<element value="ui\skins\default\button_round_small_hover.png"/>
-				<element value="ui\skins\default\button_round_small_active.png"/>
-				<element value="ui\skins\default\button_round_small_inactive.png"/>
-				<element value="ui\skins\default\button_round_small_selected.png"/>
-				<element value="ui\skins\default\button_round_small_underlay.png"/>
-				<element value="ui\skins\default\button_round_small_selected_underlay.png"/>
-				<element value="ui\skins\default\button_round_small_selected_inactive.png"/>
-				<element value="ui\skins\default\button_round_small_selected_pressed.png"/>
+				<element value="ui/skins/default/icon_player_list.png"/>
+				<element value="ui/skins/default/button_round_small_pressed.png"/>
+				<element value="ui/skins/default/button_round_small_selected_hover.png"/>
+				<element value="ui/skins/default/button_round_small_hover.png"/>
+				<element value="ui/skins/default/button_round_small_active.png"/>
+				<element value="ui/skins/default/button_round_small_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_selected.png"/>
+				<element value="ui/skins/default/button_round_small_underlay.png"/>
+				<element value="ui/skins/default/button_round_small_selected_underlay.png"/>
+				<element value="ui/skins/default/button_round_small_selected_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_selected_pressed.png"/>
 				<element value=""/>
 			</override_images>
 		</button_player_list>
+		<button_search_panel
+			this="5CB14028-8467-47E9-8DAC1DEA6770A0C8"
+			id="button_search_panel"
+			template_id="round_small_button_toggle"
+			part_of_template="true"
+			uniqueguid_in_template="5E5903D5-3190-4BE4-A117AA3392596D5C"
+			uniqueguid="5CB14028-8467-47E9-8DAC1DEA6770A0C8"
+			dimensions="38.00,38.00"
+			priority="60"
+			sound_category="UI_GBL_TMP_Round_Small_Button">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="2FFE0214-05B6-4220-89CE06B741059531"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="E1703812-36BB-48F7-90EB03800DDE7F43"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="797C0E35-3426-4F13-AEE791ED55881ECC"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="088E012A-33CE-4244-BB9E92CF7A5559BA"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="4682F964-DDCF-4563-86E1A70084BF2D2C"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="B25FA29D-087D-434D-AB46DC4A4D0CA8A9"/>
+				<state_uniqueguid
+					name="selected_down"
+					uniqueguid="0BA8425A-4484-42DA-B66C54756EE35BD1"/>
+				<state_uniqueguid
+					name="selected_down_off"
+					uniqueguid="2A245B86-7301-4E15-A874D13982851984"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="808BED7B-222C-46A6-8E61F52290FF2BFF"/>
+				<state_uniqueguid
+					name="selected_inactive"
+					uniqueguid="E42995F1-AC0F-4EAF-BB5E4C4D91F6E6AC"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/icon_details.png"
+					uniqueguid="03B2682C-2B33-4E90-A856E945A688BF85"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_pressed.png"
+					uniqueguid="D8BAF318-B742-45F3-8FB4A5DD8A35D535"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_selected_hover.png"
+					uniqueguid="402555A9-5537-41DC-BD918E56D62DBCE2"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_hover.png"
+					uniqueguid="A4710AF7-3081-4286-834B5CA8826F981F"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_active.png"
+					uniqueguid="01A0B193-3393-40EF-8FAAFA5881218A16"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_inactive.png"
+					uniqueguid="274D360F-778F-45DC-B2E1F886627E6C38"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_selected.png"
+					uniqueguid="F5FCD67B-D39E-4AAA-971FAA936E9D4AEF"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_underlay.png"
+					uniqueguid="41F8950F-323B-4500-9561D787BA3620EC"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_selected_underlay.png"
+					uniqueguid="62345433-5D6C-45E6-AD7BBADCC3901107"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_selected_inactive.png"
+					uniqueguid="0814895E-BCA2-4EC5-B9F86F1DBC7C4F7F"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_selected_pressed.png"
+					uniqueguid="26066D2D-EB86-4B13-8E7123E67AAEE113"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="Button"/>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoStaticObject"
+					context_function_id="Component(&quot;8D54AC72-A4CE-45C7-848D21B0DC174D87&quot;).ToggleVisibility"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoStaticObject"
+					context_function_id="CampaignRoot"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="resizable"/>
+				<property
+					name="disable_override0"
+					value="CallbackAnimTrigger"/>
+				<property
+					name="dynamic_image"
+					value="0"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text
+					tooltip_label="ComponentTooltip_3ff2301d"
+					tooltip_text="Campaign Search"/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/icon_details.png"/>
+				<element value="ui/skins/default/button_round_small_pressed.png"/>
+				<element value="ui/skins/default/button_round_small_selected_hover.png"/>
+				<element value="ui/skins/default/button_round_small_hover.png"/>
+				<element value="ui/skins/default/button_round_small_active.png"/>
+				<element value="ui/skins/default/button_round_small_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_selected.png"/>
+				<element value="ui/skins/default/button_round_small_underlay.png"/>
+				<element value="ui/skins/default/button_round_small_selected_underlay.png"/>
+				<element value="ui/skins/default/button_round_small_selected_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_selected_pressed.png"/>
+				<element value=""/>
+			</override_images>
+		</button_search_panel>
 		<button_settings
 			this="14EA8725-BA34-43C0-97CACB4D50E96C68"
 			id="button_settings"
@@ -943,35 +1060,35 @@
 					name="ui/skins/default/icon_camera_settings.png"
 					uniqueguid="4504985D-013E-45DC-8204D94E2115870C"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_pressed.png"
-					uniqueguid="8FDA7CD7-91F5-40A8-AA59C72DBDBD8CEE"/>
+					name="ui/skins/default/button_round_small_pressed.png"
+					uniqueguid="23A77457-721B-47A1-A7D4F5C9D7BBB748"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected_hover.png"
-					uniqueguid="A28A9DE2-A280-45A5-A24B07538C723E83"/>
+					name="ui/skins/default/button_round_small_selected_hover.png"
+					uniqueguid="E0BD9FA3-BB95-4733-B5A6C2B7E5326F26"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_hover.png"
-					uniqueguid="B8F13F31-571F-4C40-943FD60A39AC2BF9"/>
+					name="ui/skins/default/button_round_small_hover.png"
+					uniqueguid="2F2E8540-96E0-4B3C-8447DA9FF009A091"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_active.png"
-					uniqueguid="D46F35AF-E122-4D28-B7FE564AB8426A15"/>
+					name="ui/skins/default/button_round_small_active.png"
+					uniqueguid="F2F9CD1F-1180-4B8A-AB9887D1EF519DDD"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_inactive.png"
-					uniqueguid="EA4ECCC0-829D-4229-9AB72741B3CE2A55"/>
+					name="ui/skins/default/button_round_small_inactive.png"
+					uniqueguid="AB88A6E1-6F0F-43AA-A41DDE1C7085D540"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected.png"
-					uniqueguid="00E564A9-A29C-473C-985C41074B5CBA53"/>
+					name="ui/skins/default/button_round_small_selected.png"
+					uniqueguid="4790B5EE-6487-4E6E-83413B13555E602D"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_underlay.png"
-					uniqueguid="11A96051-C3C3-451F-BDF0C9DFE24CC125"/>
+					name="ui/skins/default/button_round_small_underlay.png"
+					uniqueguid="0A24378E-EC90-45B0-8A8F25841C33A205"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected_underlay.png"
-					uniqueguid="71D1BAF8-01A0-4E99-B36867528413AAF0"/>
+					name="ui/skins/default/button_round_small_selected_underlay.png"
+					uniqueguid="63F74DB3-CAC7-495D-A917C23C832CA7B2"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected_inactive.png"
-					uniqueguid="2916F200-6AFA-45B3-B00B99D108E73CFF"/>
+					name="ui/skins/default/button_round_small_selected_inactive.png"
+					uniqueguid="F1B19D5A-7724-482A-99F405351FE89E8F"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected_pressed.png"
-					uniqueguid="85D9CD14-61BC-44B3-8209EE98D45E00A7"/>
+					name="ui/skins/default/button_round_small_selected_pressed.png"
+					uniqueguid="630C5B76-076C-4B86-ACF40E4C05296190"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context callback_id="Button"/>
@@ -1035,16 +1152,16 @@
 			</localised_texts>
 			<override_images>
 				<element value="ui/skins/default/icon_camera_settings.png"/>
-				<element value="ui\skins\default\button_round_small_pressed.png"/>
-				<element value="ui\skins\default\button_round_small_selected_hover.png"/>
-				<element value="ui\skins\default\button_round_small_hover.png"/>
-				<element value="ui\skins\default\button_round_small_active.png"/>
-				<element value="ui\skins\default\button_round_small_inactive.png"/>
-				<element value="ui\skins\default\button_round_small_selected.png"/>
-				<element value="ui\skins\default\button_round_small_underlay.png"/>
-				<element value="ui\skins\default\button_round_small_selected_underlay.png"/>
-				<element value="ui\skins\default\button_round_small_selected_inactive.png"/>
-				<element value="ui\skins\default\button_round_small_selected_pressed.png"/>
+				<element value="ui/skins/default/button_round_small_pressed.png"/>
+				<element value="ui/skins/default/button_round_small_selected_hover.png"/>
+				<element value="ui/skins/default/button_round_small_hover.png"/>
+				<element value="ui/skins/default/button_round_small_active.png"/>
+				<element value="ui/skins/default/button_round_small_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_selected.png"/>
+				<element value="ui/skins/default/button_round_small_underlay.png"/>
+				<element value="ui/skins/default/button_round_small_selected_underlay.png"/>
+				<element value="ui/skins/default/button_round_small_selected_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_selected_pressed.png"/>
 				<element value=""/>
 			</override_images>
 		</button_settings>
@@ -1094,35 +1211,35 @@
 					name="ui/skins/default/icon_advisor.png"
 					uniqueguid="9DF4456B-513D-4F12-ABED0138DC557877"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_pressed.png"
-					uniqueguid="176E3991-6619-4BF4-939354FAFFDC7B5A"/>
+					name="ui/skins/default/button_round_small_pressed.png"
+					uniqueguid="EE3AF3DD-A17B-495B-8D312D327EB4039E"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected_hover.png"
-					uniqueguid="64541874-EF19-4B0B-BE97447A72CA703D"/>
+					name="ui/skins/default/button_round_small_selected_hover.png"
+					uniqueguid="452D5A85-FE9A-4826-A51EC631F6EBEF93"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_hover.png"
-					uniqueguid="0F2F0D5D-9868-4986-AB1DDA4C748568BD"/>
+					name="ui/skins/default/button_round_small_hover.png"
+					uniqueguid="F50AD511-8C82-4428-A8C5E2622990D294"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_active.png"
-					uniqueguid="AD82DCE4-2159-494E-8B3819CD3D866032"/>
+					name="ui/skins/default/button_round_small_active.png"
+					uniqueguid="46A12E1C-6202-4A4F-BDBEFE76EAF3D68D"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_inactive.png"
-					uniqueguid="4DEDED42-BBB2-4944-8E225392CDA2BF2D"/>
+					name="ui/skins/default/button_round_small_inactive.png"
+					uniqueguid="23F8E371-1FD4-464D-B5D0E642557880CA"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected.png"
-					uniqueguid="A2FA6F23-6BB8-4A28-9FAD8E415B49D9E1"/>
+					name="ui/skins/default/button_round_small_selected.png"
+					uniqueguid="2A62254E-9160-4963-94061163F0747109"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_underlay.png"
-					uniqueguid="159DC228-D45C-47D0-B856C0C4543F88B4"/>
+					name="ui/skins/default/button_round_small_underlay.png"
+					uniqueguid="17B682EC-30ED-4410-A4271BDF074D0A27"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected_underlay.png"
-					uniqueguid="2699C70C-D5DF-4E43-AD62AB3B92A0DD69"/>
+					name="ui/skins/default/button_round_small_selected_underlay.png"
+					uniqueguid="49D10785-2DA6-441C-AE0F08B80BD67CF8"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected_inactive.png"
-					uniqueguid="AAB3BF5A-38EA-4945-A8459F8220C15EF1"/>
+					name="ui/skins/default/button_round_small_selected_inactive.png"
+					uniqueguid="20B943C5-11E8-4DD4-8092F93839E7F9A1"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected_pressed.png"
-					uniqueguid="8CA0AE04-F02D-4546-AB03924A447D0738"/>
+					name="ui/skins/default/button_round_small_selected_pressed.png"
+					uniqueguid="9232B270-3A6D-43A6-8571EA494CE68B97"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context callback_id="Button"/>
@@ -1134,16 +1251,6 @@
 						<property
 							name="ui_override"
 							value="hide_advice_button"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context callback_id="StatePropagatorCallback">
-					<child_m_user_properties>
-						<property
-							name="target_id"
-							value="icon"/>
-						<property
-							name="use_transitions"
-							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context callback_id="CallbackAnimTrigger"/>
@@ -1196,16 +1303,16 @@
 			</localised_texts>
 			<override_images>
 				<element value="ui/skins/default/icon_advisor.png"/>
-				<element value="ui\skins\default\button_round_small_pressed.png"/>
-				<element value="ui\skins\default\button_round_small_selected_hover.png"/>
-				<element value="ui\skins\default\button_round_small_hover.png"/>
-				<element value="ui\skins\default\button_round_small_active.png"/>
-				<element value="ui\skins\default\button_round_small_inactive.png"/>
-				<element value="ui\skins\default\button_round_small_selected.png"/>
-				<element value="ui\skins\default\button_round_small_underlay.png"/>
-				<element value="ui\skins\default\button_round_small_selected_underlay.png"/>
-				<element value="ui\skins\default\button_round_small_selected_inactive.png"/>
-				<element value="ui\skins\default\button_round_small_selected_pressed.png"/>
+				<element value="ui/skins/default/button_round_small_pressed.png"/>
+				<element value="ui/skins/default/button_round_small_selected_hover.png"/>
+				<element value="ui/skins/default/button_round_small_hover.png"/>
+				<element value="ui/skins/default/button_round_small_active.png"/>
+				<element value="ui/skins/default/button_round_small_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_selected.png"/>
+				<element value="ui/skins/default/button_round_small_underlay.png"/>
+				<element value="ui/skins/default/button_round_small_selected_underlay.png"/>
+				<element value="ui/skins/default/button_round_small_selected_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_selected_pressed.png"/>
 				<element value=""/>
 			</override_images>
 		</button_show_advice>
@@ -1240,20 +1347,20 @@
 					name="ui/skins/default/icon_spell_browser.png"
 					uniqueguid="283B926F-A400-4C16-A23B2451E4E9DDBF"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_pressed.png"
-					uniqueguid="90562CF4-55CA-4A72-AC614B217C8FA32D"/>
+					name="ui/skins/default/button_round_small_pressed.png"
+					uniqueguid="CEC05124-D2B4-4B1F-8FB030FADB903137"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_hover.png"
-					uniqueguid="F046D1DC-B75F-43CA-82EEB6F2B2581B78"/>
+					name="ui/skins/default/button_round_small_hover.png"
+					uniqueguid="D1A68697-7F91-46F1-8EC4CCC195CD2E06"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_active.png"
-					uniqueguid="2DB1F2EE-E7E3-4AB0-A2530ECD116DF349"/>
+					name="ui/skins/default/button_round_small_active.png"
+					uniqueguid="1205AC85-5A9D-486A-A7D694DEB86A3026"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_inactive.png"
-					uniqueguid="D37177A6-D7F9-4D21-8ABB853E090D515B"/>
+					name="ui/skins/default/button_round_small_inactive.png"
+					uniqueguid="34689DDF-9430-4848-B8CBB96E85807AE0"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_underlay.png"
-					uniqueguid="76BC18B6-5C1D-40B6-8A1C8B694E0F03BF"/>
+					name="ui/skins/default/button_round_small_underlay.png"
+					uniqueguid="4E707B10-0DB4-4304-BB6E17A15456055A"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context callback_id="Button"/>
@@ -1265,13 +1372,6 @@
 						<property
 							name="ui_override"
 							value="hide_spell_browser_button"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context callback_id="StatePropagatorCallback">
-					<child_m_user_properties>
-						<property
-							name="use_transitions"
-							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context callback_id="CallbackAnimTrigger"/>
@@ -1312,11 +1412,11 @@
 			</localised_texts>
 			<override_images>
 				<element value="ui/skins/default/icon_spell_browser.png"/>
-				<element value="ui\skins\default\button_round_small_pressed.png"/>
-				<element value="ui\skins\default\button_round_small_hover.png"/>
-				<element value="ui\skins\default\button_round_small_active.png"/>
-				<element value="ui\skins\default\button_round_small_inactive.png"/>
-				<element value="ui\skins\default\button_round_small_underlay.png"/>
+				<element value="ui/skins/default/button_round_small_pressed.png"/>
+				<element value="ui/skins/default/button_round_small_hover.png"/>
+				<element value="ui/skins/default/button_round_small_active.png"/>
+				<element value="ui/skins/default/button_round_small_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_underlay.png"/>
 				<element value=""/>
 			</override_images>
 		</button_spell_browser>
@@ -1365,38 +1465,38 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\icon_telestration.png"
+					name="ui/skins/default/icon_telestration.png"
 					uniqueguid="D7CD111E-18A5-475F-9D26DC92693833C0"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_pressed.png"
-					uniqueguid="44403BCD-D5AB-47DD-970AA45B7D5D3D64"/>
+					name="ui/skins/default/button_round_small_pressed.png"
+					uniqueguid="EAED8314-E1A2-4D5C-BBC09FC852F5316C"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected_hover.png"
-					uniqueguid="E97F5AEA-708F-409F-A290DEE2FD0282DB"/>
+					name="ui/skins/default/button_round_small_selected_hover.png"
+					uniqueguid="9F3F43CC-5C0C-45A4-A22B73A056FFFA32"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_hover.png"
-					uniqueguid="C66C0482-C398-43B5-B40AAB2F2700021E"/>
+					name="ui/skins/default/button_round_small_hover.png"
+					uniqueguid="1DA2C877-1B42-4EE8-BF31A0E199A43488"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_active.png"
-					uniqueguid="CEA34FD8-BEEA-489B-B65B4855C0E6EC37"/>
+					name="ui/skins/default/button_round_small_active.png"
+					uniqueguid="7A9506CD-1EE5-47F7-ABBF339080563E6F"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_inactive.png"
-					uniqueguid="E9987080-BB9E-46E6-A476CC31FB393FFD"/>
+					name="ui/skins/default/button_round_small_inactive.png"
+					uniqueguid="F42D1CDE-470B-4087-90CD220C74068CFE"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected.png"
-					uniqueguid="39D9FA07-40D3-4C90-818B1E072C06B334"/>
+					name="ui/skins/default/button_round_small_selected.png"
+					uniqueguid="2258AF12-9E6F-440A-820F476F38CBF5D6"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_underlay.png"
-					uniqueguid="17D303C5-8D44-450D-A5D7D34D06A67599"/>
+					name="ui/skins/default/button_round_small_underlay.png"
+					uniqueguid="BD0B9338-7422-4377-8E9597E7A3F46319"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected_underlay.png"
-					uniqueguid="28F8E8C7-294D-41CF-B3C7AC60CC96DD1F"/>
+					name="ui/skins/default/button_round_small_selected_underlay.png"
+					uniqueguid="9D1CFD48-3A79-450D-B7A6FD2D1310E235"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected_inactive.png"
-					uniqueguid="4C2C9348-6AF9-481E-B25BECE79FD0FA70"/>
+					name="ui/skins/default/button_round_small_selected_inactive.png"
+					uniqueguid="F0724C45-B735-4071-8349053291478781"/>
 				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_selected_pressed.png"
-					uniqueguid="2A0B48E9-3D35-47E6-AD6B62FFF78F80F7"/>
+					name="ui/skins/default/button_round_small_selected_pressed.png"
+					uniqueguid="F6792538-4F94-40CB-9A5D3CABC1907DE7"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context callback_id="Button"/>
@@ -1463,17 +1563,17 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\icon_telestration.png"/>
-				<element value="ui\skins\default\button_round_small_pressed.png"/>
-				<element value="ui\skins\default\button_round_small_selected_hover.png"/>
-				<element value="ui\skins\default\button_round_small_hover.png"/>
-				<element value="ui\skins\default\button_round_small_active.png"/>
-				<element value="ui\skins\default\button_round_small_inactive.png"/>
-				<element value="ui\skins\default\button_round_small_selected.png"/>
-				<element value="ui\skins\default\button_round_small_underlay.png"/>
-				<element value="ui\skins\default\button_round_small_selected_underlay.png"/>
-				<element value="ui\skins\default\button_round_small_selected_inactive.png"/>
-				<element value="ui\skins\default\button_round_small_selected_pressed.png"/>
+				<element value="ui/skins/default/icon_telestration.png"/>
+				<element value="ui/skins/default/button_round_small_pressed.png"/>
+				<element value="ui/skins/default/button_round_small_selected_hover.png"/>
+				<element value="ui/skins/default/button_round_small_hover.png"/>
+				<element value="ui/skins/default/button_round_small_active.png"/>
+				<element value="ui/skins/default/button_round_small_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_selected.png"/>
+				<element value="ui/skins/default/button_round_small_underlay.png"/>
+				<element value="ui/skins/default/button_round_small_selected_underlay.png"/>
+				<element value="ui/skins/default/button_round_small_selected_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_selected_pressed.png"/>
 				<element value=""/>
 			</override_images>
 		</button_telestration>
@@ -1558,25 +1658,21 @@
 				<newstate
 					this="0ECBCEDA-09DC-432E-844C18D0BCC153A1"
 					name="NewState"
-					width="208"
+					width="246"
 					height="38"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					uniqueguid="0ECBCEDA-09DC-432E-844C18D0BCC153A1">
 					<imagemetrics>
 						<image
 							this="79EBBABC-9BDF-418D-B6FFFC30FD29041C"
 							uniqueguid="79EBBABC-9BDF-418D-B6FFFC30FD29041C"
 							componentimage="4E7621B1-C46C-4525-BC84E708642DCF97"
-							width="208"
+							width="246"
 							height="46"/>
 						<image
 							this="B9D7AB9C-77DD-4EC8-8C8D6DD99C257652"
 							uniqueguid="B9D7AB9C-77DD-4EC8-8C8D6DD99C257652"
 							componentimage="3BF9636D-9BA9-429F-A21B17F7C57ED098"
-							offset="182.00,0.00"
+							offset="220.00,0.00"
 							width="139"
 							height="52"
 							dockpoint="Center Right External"
@@ -1584,6 +1680,11 @@
 							canresizeheight="false"
 							canresizewidth="false"/>
 					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
 				</newstate>
 			</states>
 			<LayoutEngine

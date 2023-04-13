@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="137"
+	version="141"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -36,7 +36,6 @@
 					name="NewState"
 					width="1600"
 					height="900"
-					texthbehaviour="Never split"
 					uniqueguid="D6CD6EEA-0B60-46E6-83D5F28E4A637997"/>
 			</states>
 		</dev_ui_root>
@@ -58,7 +57,6 @@
 					name="NewState"
 					width="1600"
 					height="900"
-					texthbehaviour="Never split"
 					interactive="true"
 					uniqueguid="C0D87FEC-D548-476E-ACCC868C27015AB9">
 					<imagemetrics>
@@ -90,6 +88,7 @@
 							value="dev_ui_root"/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context callback_id="TopmostWhenDraggingCallback"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -106,16 +105,6 @@
 					name="default"
 					width="262"
 					height="66"
-					text="Dev UI Root"
-					textxoffset="32.00,0.00"
-					textyoffset="6.00,0.00"
-					texthbehaviour="Never split"
-					textlabel="button_list_default_Text_31005c"
-					font_m_font_name="dev_font"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="dev_text"
 					interactive="true"
 					uniqueguid="437824FF-1455-4F8F-8D59070AEDC423D3">
 					<imagemetrics>
@@ -136,6 +125,17 @@
 							canresizeheight="false"
 							canresizewidth="false"/>
 					</imagemetrics>
+					<component_text
+						text="Dev UI Root"
+						textxoffset="32.00,0.00"
+						textyoffset="6.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="button_list_default_Text_31005c"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
 				</default>
 			</states>
 			<LayoutEngine
@@ -164,7 +164,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoStaticObject"
-					context_function_id="DirectoryFileList(&quot;ui/dev_ui/custom_dev_ui&quot;, &quot;*.twui.xml&quot;, false)"/>
+					context_function_id="Join(DirectoryFileList(&quot;ui/dev_ui/custom_dev_ui&quot;, &quot;*.twui.xml&quot;, false), DirectoryFileList(&quot;ui/dev_ui/custom_dev_ui/common&quot;, &quot;*.twui.xml&quot;, false), DirectoryFileList(Format(&quot;ui/dev_ui/custom_dev_ui/%S&quot;, GetIfElse(IsContextValid(BattleRoot), &quot;battle&quot;, GetIfElse(IsContextValid(CampaignRoot), &quot;campaign&quot;, &quot;frontend&quot;))), &quot;*.twui.xml&quot;, false)).Sort(RemoveFilepathDirectory.RemoveFilepathDirectory.RemoveFilepathDirectory.RemoveFilepathDirectory, true)"/>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoStaticObject"
@@ -175,6 +175,7 @@
 							value="DevRootMinimised"/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context callback_id="TopmostWhenDraggingCallback"/>
 			</callbackwithcontextlist>
 			<states>
 				<default
@@ -182,16 +183,18 @@
 					name="default"
 					width="262"
 					height="29"
-					textxoffset="32.00,0.00"
-					textyoffset="6.00,0.00"
-					texthbehaviour="Never split"
-					font_m_font_name="dev_font"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="dev_text"
 					interactive="true"
-					uniqueguid="44256C65-B5FD-47C5-AA5DA360FC87AA34"/>
+					uniqueguid="44256C65-B5FD-47C5-AA5DA360FC87AA34">
+					<component_text
+						textxoffset="32.00,0.00"
+						textyoffset="6.00,0.00"
+						texthbehaviour="Never split"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</default>
 			</states>
 			<LayoutEngine
 				type="List"
@@ -231,19 +234,21 @@
 					name="active"
 					width="262"
 					height="29"
-					text="layout name"
-					textvalign="Center"
-					textxoffset="28.00,0.00"
-					texthbehaviour="Never split"
-					textlocalised="true"
-					textlabel="button_txt_active_Text_790044"
-					font_m_font_name="dev_font"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="dev_button_text"
-					textshadervars="0.50,1.00,1.00,0.00"
-					uniqueguid="E15FE10B-4842-4CBA-BEB3C8BCC4491737"/>
+					uniqueguid="E15FE10B-4842-4CBA-BEB3C8BCC4491737">
+					<component_text
+						text="layout name"
+						textvalign="Center"
+						textxoffset="28.00,0.00"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="button_txt_active_Text_790044"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_button_text"
+						textshadervars="0.50,1.00,1.00,0.00"/>
+				</active>
 			</states>
 		</button_txt>
 		<dev_icon
@@ -272,9 +277,7 @@
 					name="default"
 					width="24"
 					height="24"
-					texthbehaviour="Never split"
 					shadervars="0.50,1.00,1.00,0.00"
-					textshadervars="0.00,50.00,0.00,0.00"
 					uniqueguid="F482E639-DA22-48AA-941DDCF16BC1D9B0">
 					<imagemetrics>
 						<image
@@ -329,13 +332,9 @@
 					name="active"
 					width="262"
 					height="29"
-					font_m_size="12"
-					font_m_colour="#000000FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text"
 					interactive="true"
 					uniqueguid="31744D67-E02A-4D3C-94B08986605760DE"
-					stateeditordisplaypos="20.00,24.00">
+					stateeditordisplaypos="40.00,24.00">
 					<imagemetrics>
 						<image
 							this="7346732D-8C27-449A-B45D2D8D85FE5FF8"
@@ -350,18 +349,18 @@
 							transition_m_transition_time="200"
 							transition_m_interpolation_property_mask="64"/>
 					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
 				</active>
 				<down
 					this="5DD7EB64-850B-4AC1-886BED9915363BDC"
 					name="down"
 					width="262"
 					height="29"
-					font_m_size="12"
-					font_m_colour="#000000FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text"
 					interactive="true"
-					textshadervars="0.30,0.00,0.00,0.00"
 					uniqueguid="5DD7EB64-850B-4AC1-886BED9915363BDC"
 					stateeditordisplaypos="145.00,219.00">
 					<imagemetrics>
@@ -386,19 +385,21 @@
 							index="1"
 							transition_m_target_state="49741711-D65C-449A-BDBDD2A2134A431C"/>
 					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"
+						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
 					this="49741711-D65C-449A-BDBDD2A2134A431C"
 					name="down_off"
 					width="262"
 					height="29"
-					font_m_size="12"
-					font_m_colour="#000000FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text"
 					interactive="true"
 					uniqueguid="49741711-D65C-449A-BDBDD2A2134A431C"
-					stateeditordisplaypos="29.00,319.00">
+					stateeditordisplaypos="40.00,319.00">
 					<imagemetrics>
 						<image
 							this="24B4C0CA-490A-4CD7-9BF33E13531BCE6C"
@@ -413,20 +414,20 @@
 							index="8"
 							transition_m_target_state="31744D67-E02A-4D3C-94B08986605760DE"/>
 					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
 				</down_off>
 				<hover
 					this="A922D447-B120-4CF8-95BC77F98D0EEBD8"
 					name="hover"
 					width="262"
 					height="29"
-					font_m_size="12"
-					font_m_colour="#000000FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text"
 					interactive="true"
 					shader_name="brighten_t0"
 					shadervars="1.00,0.00,0.00,0.00"
-					textshadervars="0.30,0.00,0.00,0.00"
 					uniqueguid="A922D447-B120-4CF8-95BC77F98D0EEBD8"
 					stateeditordisplaypos="137.00,126.00">
 					<imagemetrics>
@@ -453,16 +454,18 @@
 							index="2"
 							transition_m_target_state="5DD7EB64-850B-4AC1-886BED9915363BDC"/>
 					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"
+						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
 					this="C744537B-170E-4777-89F8A9945931AE37"
 					name="inactive"
 					width="262"
 					height="29"
-					font_m_size="12"
-					font_m_colour="#000000FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text"
 					interactive="true"
 					disabled="true"
 					uniqueguid="C744537B-170E-4777-89F8A9945931AE37">
@@ -474,16 +477,17 @@
 							width="262"
 							height="29"/>
 					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
 				</inactive>
 				<selected
 					this="60068A2B-761E-4D67-AFBFA4AC66F77FD9"
 					name="selected"
 					width="262"
 					height="29"
-					font_m_size="12"
-					font_m_colour="#000000FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text"
 					interactive="true"
 					uniqueguid="60068A2B-761E-4D67-AFBFA4AC66F77FD9"
 					stateeditordisplaypos="401.00,333.00">
@@ -508,18 +512,18 @@
 							transition_m_transition_time="200"
 							transition_m_interpolation_property_mask="64"/>
 					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
 				</selected>
 				<selected_down
 					this="66415815-8481-4EFD-95FAF5D59BA2F41F"
 					name="selected_down"
 					width="262"
 					height="29"
-					font_m_size="12"
-					font_m_colour="#000000FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text"
 					interactive="true"
-					textshadervars="0.30,0.00,0.00,0.00"
 					uniqueguid="66415815-8481-4EFD-95FAF5D59BA2F41F"
 					stateeditordisplaypos="268.00,120.00">
 					<imagemetrics>
@@ -545,16 +549,18 @@
 							index="1"
 							transition_m_target_state="89410A78-0DFC-4E46-BD4EE7DC84E9201A"/>
 					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"
+						textshadervars="0.30,0.00,0.00,0.00"/>
 				</selected_down>
 				<selected_down_off
 					this="89410A78-0DFC-4E46-BD4EE7DC84E9201A"
 					name="selected_down_off"
 					width="262"
 					height="29"
-					font_m_size="12"
-					font_m_colour="#000000FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text"
 					interactive="true"
 					uniqueguid="89410A78-0DFC-4E46-BD4EE7DC84E9201A"
 					stateeditordisplaypos="384.00,21.00">
@@ -579,20 +585,20 @@
 							index="8"
 							transition_m_target_state="60068A2B-761E-4D67-AFBFA4AC66F77FD9"/>
 					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
 				</selected_down_off>
 				<selected_hover
 					this="D9C2BD5F-D632-4732-BE6728CA184C8B05"
 					name="selected_hover"
 					width="262"
 					height="29"
-					font_m_size="12"
-					font_m_colour="#000000FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text"
 					interactive="true"
 					shader_name="brighten_t0"
 					shadervars="1.00,0.00,0.00,0.00"
-					textshadervars="0.30,0.00,0.00,0.00"
 					uniqueguid="D9C2BD5F-D632-4732-BE6728CA184C8B05"
 					stateeditordisplaypos="269.00,216.00">
 					<imagemetrics>
@@ -620,16 +626,18 @@
 							index="2"
 							transition_m_target_state="66415815-8481-4EFD-95FAF5D59BA2F41F"/>
 					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"
+						textshadervars="0.30,0.00,0.00,0.00"/>
 				</selected_hover>
 				<selected_inactive
 					this="52F58A74-EA5E-478E-9A0A9BFD151ECFDA"
 					name="selected_inactive"
 					width="262"
 					height="29"
-					font_m_size="12"
-					font_m_colour="#000000FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text"
 					interactive="true"
 					disabled="true"
 					uniqueguid="52F58A74-EA5E-478E-9A0A9BFD151ECFDA">
@@ -641,6 +649,11 @@
 							width="262"
 							height="29"/>
 					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
 				</selected_inactive>
 			</states>
 		</template_button_dev_ui>
@@ -708,7 +721,7 @@
 					interactive="true"
 					shader_name="brighten_t0"
 					uniqueguid="A1625C9A-3278-483F-B9F6C824BA8E3039"
-					stateeditordisplaypos="20.00,24.00">
+					stateeditordisplaypos="40.00,24.00">
 					<imagemetrics>
 						<image
 							this="772B9FA8-9840-45AC-8B5CADF510F13067"
@@ -733,7 +746,6 @@
 					name="down"
 					height="37"
 					interactive="true"
-					textshadervars="0.30,0.00,0.00,0.00"
 					uniqueguid="B9B2D1B2-EE3F-4D5F-9D0E4133A9C22BD9"
 					stateeditordisplaypos="145.00,219.00">
 					<imagemetrics>
@@ -765,7 +777,7 @@
 					height="37"
 					interactive="true"
 					uniqueguid="AA0BFEAD-6F70-4C76-8EFEAA1BF6E5B282"
-					stateeditordisplaypos="29.00,319.00">
+					stateeditordisplaypos="40.00,319.00">
 					<imagemetrics>
 						<image
 							this="AF906292-9C59-47F4-8B0A2AAEBDFF2269"
@@ -795,7 +807,6 @@
 					interactive="true"
 					shader_name="brighten_t0"
 					shadervars="0.50,0.00,0.00,0.00"
-					textshadervars="0.30,0.00,0.00,0.00"
 					uniqueguid="71A534A1-467E-4215-BF2AFBA5F8500567"
 					stateeditordisplaypos="137.00,126.00">
 					<imagemetrics>
@@ -881,7 +892,6 @@
 					name="selected_down"
 					height="37"
 					interactive="true"
-					textshadervars="0.30,0.00,0.00,0.00"
 					uniqueguid="D7377622-0D44-4339-B8F73B2ED1BF4BB0"
 					stateeditordisplaypos="268.00,120.00">
 					<imagemetrics>
@@ -943,7 +953,6 @@
 					interactive="true"
 					shader_name="brighten_t0"
 					shadervars="0.50,0.00,0.00,0.00"
-					textshadervars="0.30,0.00,0.00,0.00"
 					uniqueguid="682073B0-AFDE-4F64-96806DB84D6CBA8D"
 					stateeditordisplaypos="269.00,216.00">
 					<imagemetrics>

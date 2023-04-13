@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="137"
+	version="141"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -58,6 +58,7 @@
 			id="button_copy_code"
 			template_id="square_large_text_button"
 			part_of_template="true"
+			uniqueguid_in_template="D8275039-5A3B-40C0-974330DBC4409AFD"
 			uniqueguid="914F24F1-E6F9-4C1F-829A67510978E32B"
 			dimensions="339.00,51.00"
 			dock_point="Top Center"
@@ -122,6 +123,7 @@
 			id="button_ok"
 			template_id="round_medium_button"
 			part_of_template="true"
+			uniqueguid_in_template="4E08AA99-2BAB-4DB6-AC47ACC0CEBD26BE"
 			uniqueguid="A0399EA0-C9C9-4589-82AD2A47643E4312"
 			dimensions="56.00,56.00"
 			priority="200"
@@ -145,7 +147,7 @@
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui\skins\default\icon_check.png"
+					name="ui/skins/default/icon_check.png"
 					uniqueguid="DB4820B6-C86E-47AE-A4D895DDB4BBC84D"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/button_round_medium_pressed.png"
@@ -165,7 +167,7 @@
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context callback_id="Button"/>
-				<callback_with_context callback_id="CallbackAnimTrigger"/>				
+				<callback_with_context callback_id="CallbackAnimTrigger"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -174,9 +176,6 @@
 				<property
 					name="disable_override0"
 					value="CallbackAnimTrigger"/>
-				<property
-					name="disable_override1"
-					value="ContextOpacitySetter"/>
 				<property
 					name="dynamic_image"
 					value="0"/>
@@ -195,7 +194,7 @@
 				<localised_text state="inactive"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui\skins\default\icon_check.png"/>
+				<element value="ui/skins/default/icon_check.png"/>
 				<element value="ui/skins/default/button_round_medium_pressed.png"/>
 				<element value="ui/skins/default/button_round_medium_hover.png"/>
 				<element value="ui/skins/default/button_round_medium_active.png"/>
@@ -208,6 +207,7 @@
 			this="49E0D55A-B6A3-41C8-9FFE5E7239A91295"
 			id="button_flame"
 			part_of_template="true"
+			uniqueguid_in_template="43E521B0-0A25-4C22-82FE029058200FF9"
 			uniqueguid="49E0D55A-B6A3-41C8-9FFE5E7239A91295"
 			dimensions="276.00,28.00"
 			dock_point="Center"
@@ -252,6 +252,7 @@
 			this="C2B3ABA8-3CC8-4EF3-9D1A0328D92235D4"
 			id="button_txt"
 			part_of_template="true"
+			uniqueguid_in_template="BF9E2DF6-9810-4FAE-97B856F2B15FB826"
 			uniqueguid="C2B3ABA8-3CC8-4EF3-9D1A0328D92235D4"
 			dimensions="264.00,51.00"
 			dock_point="Center"
@@ -316,8 +317,6 @@
 					name="NewState"
 					width="408"
 					height="322"
-					textvalign="Center"
-					texthalign="Center"
 					uniqueguid="E866A9AA-756F-4B69-8E0AA7AAD3344B0E">
 					<imagemetrics>
 						<image
@@ -383,11 +382,6 @@
 					name="NewState"
 					width="28"
 					height="25"
-					font_m_font_name="la_gioconda_uppercase"
-					font_m_size="16"
-					font_m_colour="#000000FF"
-					font_m_leading="4"
-					fontcat_name="fe_button_text"
 					uniqueguid="1DAA8591-5809-49AB-A7FC21F295817DAB">
 					<imagemetrics>
 						<image
@@ -398,6 +392,12 @@
 							height="25"
 							colour="#FFBF0080"/>
 					</imagemetrics>
+					<component_text
+						font_m_font_name="la_gioconda_uppercase"
+						font_m_size="16"
+						font_m_colour="#000000FF"
+						font_m_leading="4"
+						fontcat_name="fe_button_text"/>
 				</newstate>
 			</states>
 		</highlight>
@@ -421,17 +421,19 @@
 					name="NewState"
 					width="370"
 					height="77"
-					text="Other players can use this code in the multiplayer games list via the Join with Code button."
-					textvalign="Center"
-					texthalign="Center"
-					texthbehaviour="Slip by character"
-					textlocalised="true"
-					textlabel="label_description_NewState_Text_100079"
-					font_m_size="12"
-					font_m_colour="#A99989FF"
-					font_m_leading="3"
-					fontcat_name="ingame_text_faded_warhammer3"
-					uniqueguid="F3E6DC7E-D25D-4298-922399067C83641E"/>
+					uniqueguid="F3E6DC7E-D25D-4298-922399067C83641E">
+					<component_text
+						text="Other players can use this code in the multiplayer games list via the Join with Code button."
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Slip by character"
+						textlocalised="true"
+						textlabel="label_description_NewState_Text_100079"
+						font_m_size="12"
+						font_m_colour="#A99989FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_faded_warhammer3"/>
+				</newstate>
 			</states>
 		</label_description>
 		<label_tx
@@ -452,19 +454,21 @@
 					this="946DC8F7-5242-4A69-864259F6E5B94254"
 					name="NewState"
 					width="321"
-					text="Share this code"
-					textvalign="Center"
-					texthalign="Center"
-					textyoffset="2.00,0.00"
-					texthbehaviour="Never split"
-					textlocalised="true"
-					textlabel="label_tx_NewState_Text_260060"
-					font_m_font_name="brand_header"
-					font_m_size="18"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="4"
-					fontcat_name="ingame_section_heading_warhammer3"
-					uniqueguid="946DC8F7-5242-4A69-864259F6E5B94254"/>
+					uniqueguid="946DC8F7-5242-4A69-864259F6E5B94254">
+					<component_text
+						text="Share this code"
+						textvalign="Center"
+						texthalign="Center"
+						textyoffset="2.00,0.00"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="label_tx_NewState_Text_260060"
+						font_m_font_name="brand_header"
+						font_m_size="18"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="4"
+						fontcat_name="ingame_section_heading_warhammer3"/>
+				</newstate>
 			</states>
 		</label_tx>
 		<list
@@ -486,7 +490,6 @@
 					name="NewState"
 					width="56"
 					height="51"
-					texthbehaviour="Never split"
 					interactive="true"
 					uniqueguid="263CEC07-9193-4406-966610C09A498804"/>
 			</states>
@@ -526,15 +529,6 @@
 					this="5BC4B663-6267-4388-952BAD2C6CC1B2FC"
 					name="NewState"
 					width="324"
-					text="..."
-					textvalign="Center"
-					texthalign="Center"
-					textxoffset="6.00,0.00"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_input_text"
 					interactive="true"
 					uniqueguid="5BC4B663-6267-4388-952BAD2C6CC1B2FC">
 					<imagemetrics>
@@ -546,6 +540,16 @@
 							tile="true"
 							margin="4.00,4.00,4.00,4.00"/>
 					</imagemetrics>
+					<component_text
+						text="..."
+						textvalign="Center"
+						texthalign="Center"
+						textxoffset="6.00,0.00"
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_input_text"/>
 				</newstate>
 			</states>
 		</text_input_game_code>

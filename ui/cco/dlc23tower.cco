@@ -1,0 +1,21 @@
+CcoCampaignRitual
+{
+	SeatOwnerObjectContext { ScriptObjectContext(RitualContext.Key + "current_owner") }
+	IsSeatClaimed { SeatOwnerObjectContext.StringValue.IsEmpty == false }
+	IsSeatClaimedByPlayer { SeatOwnerObjectContext.StringValue == PlayersFaction.FactionRecordContext.Key }
+	SeatFactionContext { GetIf(IsSeatClaimed, CampaignRoot.FactionList.FirstContext(this.SeatOwnerObjectContext.StringValue == FactionRecordContext.Key)) }
+	UsurptionObjectContext { ScriptObjectContext(RitualContext.Key + "usurped") }
+	WasSeatUsurpedForPlayer { UsurptionObjectContext.StringValue == PlayersFaction.FactionRecordContext.Key }
+}
+
+CcoRitualCategoryRecord
+{
+	IsDistrictComplete { RitualListForManager(PlayersFaction.RitualManagerContext).All(IsSeatClaimed) }
+	DistrictCompletionEffectBundleContext { DatabaseRecordContext("CcoEffectBundle", Format("wh3_dlc23_chd_toz_%s_reward", Id.ToLower )) }
+	IsDistrictLocked { RitualListForManager(PlayersFaction.RitualManagerContext).All(IsAvailable == false) }
+}
+
+CcoRitualCategoryGroupRecord
+{
+	IsTierLocked { CategoryList.All(IsDistrictLocked) }
+}

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="137"
+	version="141"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -44,7 +44,6 @@
 					name="NewState"
 					width="1600"
 					height="900"
-					texthbehaviour="Never split"
 					interactive="true"
 					uniqueguid="E8433684-A077-45DD-81BF9CBDE1A534FA">
 					<imagemetrics>
@@ -80,18 +79,20 @@
 					this="A896500D-74BF-4112-A947A87A20909D94"
 					name="NewState"
 					width="321"
-					text="dy_title"
-					texthalign="Center"
-					textyoffset="8.00,6.00"
-					texthbehaviour="Resize"
-					textlabel="dy_heading_textbox_NewState_Text_1c003e"
-					font_m_font_name="brand_header"
-					font_m_size="14"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="FE_header_small"
 					interactive="true"
-					uniqueguid="A896500D-74BF-4112-A947A87A20909D94"/>
+					uniqueguid="A896500D-74BF-4112-A947A87A20909D94">
+					<component_text
+						text="dy_title"
+						texthalign="Center"
+						textyoffset="8.00,6.00"
+						texthbehaviour="Resize"
+						textlabel="dy_heading_textbox_NewState_Text_1c003e"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="FE_header_small"/>
+				</newstate>
 			</states>
 		</dy_heading_textbox>
 		<dy_value
@@ -110,7 +111,7 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoCampaignPooledResource"
-					context_function_id="&quot;[[col:magic]]&quot; + Total + &quot;[[/col]]&quot; + GetIfElse(Total == Min &amp;&amp; PendingFactorTotal &lt;0, &quot;&quot;, GetIfElse(PendingFactorTotal &lt; 0, &quot;[[col:red]]&quot;, &quot;[[col:green]]&quot;) + &quot; (&quot; + Format(&quot;%+d&quot;, PendingFactorTotal) + &quot;)[[/col]]&quot;)">
+					context_function_id="GetIfElse(Total == Min &amp;&amp; PendingFactorTotal &lt;0, &quot;&quot;, &quot;[[col:magic]]&quot; + Total + &quot;[[/col]] &quot; + GetIfElse(PendingFactorTotal &lt; 0, &quot;[[col:red]]&quot;, &quot;[[col:green]]&quot;) + Format(&quot;(%+d)&quot;, PendingFactorTotal) + &quot;[[/col]]&quot; + &quot;[[col:magic]] / &quot; + Max + &quot;[[/col]]&quot;)">
 					<child_m_user_properties>
 						<property
 							name="suppress_localise_asserts"
@@ -124,18 +125,20 @@
 					name="default"
 					width="18"
 					height="24"
-					text="99"
-					textvalign="Center"
-					texthalign="Right"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="label_amount_NewState_Text_390039"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_tooltip_text"
 					interactive="true"
-					uniqueguid="0E1A2E65-B70D-4A1D-AF2400B243ED9627"/>
+					uniqueguid="0E1A2E65-B70D-4A1D-AF2400B243ED9627">
+					<component_text
+						text="99"
+						textvalign="Center"
+						texthalign="Right"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="label_amount_NewState_Text_390039"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_tooltip_text"/>
+				</default>
 			</states>
 		</dy_value>
 		<dy_value
@@ -178,46 +181,52 @@
 					name="default"
 					width="40"
 					height="24"
-					text="99"
-					textvalign="Center"
-					texthbehaviour="Never split"
-					textlocalised="true"
-					textlabel="label_amount_NewState_Text_390039"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_text_small"
 					interactive="true"
-					uniqueguid="AD6755B7-FFD7-452B-B2003D49E27D2CA9"/>
+					uniqueguid="AD6755B7-FFD7-452B-B2003D49E27D2CA9">
+					<component_text
+						text="99"
+						textvalign="Center"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="label_amount_NewState_Text_390039"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_text_small"/>
+				</default>
 				<negative
 					this="58242B80-FE65-43A7-853D3101964223F5"
 					name="negative"
 					width="40"
 					height="24"
-					text="99"
-					textvalign="Center"
-					texthbehaviour="Never split"
-					textlocalised="true"
-					textlabel="label_amount_NewState_Text_390039"
-					font_m_colour="#FF2D2DFF"
-					font_m_leading="1"
-					fontcat_name="fe_tooltip_small_red"
 					interactive="true"
-					uniqueguid="58242B80-FE65-43A7-853D3101964223F5"/>
+					uniqueguid="58242B80-FE65-43A7-853D3101964223F5">
+					<component_text
+						text="99"
+						textvalign="Center"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="label_amount_NewState_Text_390039"
+						font_m_colour="#FF2D2DFF"
+						font_m_leading="1"
+						fontcat_name="fe_tooltip_small_red"/>
+				</negative>
 				<positive
 					this="C6D80590-A548-4B2D-979CE03265FC23A7"
 					name="positive"
 					width="40"
 					height="24"
-					text="99"
-					textvalign="Center"
-					texthbehaviour="Never split"
-					textlocalised="true"
-					textlabel="label_amount_NewState_Text_390039"
-					font_m_colour="#A0FF37FF"
-					font_m_leading="1"
-					fontcat_name="fe_tooltip_small_green"
 					interactive="true"
-					uniqueguid="C6D80590-A548-4B2D-979CE03265FC23A7"/>
+					uniqueguid="C6D80590-A548-4B2D-979CE03265FC23A7">
+					<component_text
+						text="99"
+						textvalign="Center"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="label_amount_NewState_Text_390039"
+						font_m_colour="#A0FF37FF"
+						font_m_leading="1"
+						fontcat_name="fe_tooltip_small_green"/>
+				</positive>
 			</states>
 		</dy_value>
 		<effect_list
@@ -246,16 +255,18 @@
 					this="C1D38C6F-DA8F-4014-8F53EEF2F66A7A59"
 					name="NewState"
 					width="310"
-					textvalign="Center"
-					textxoffset="12.00,12.00"
-					textyoffset="0.00,4.00"
-					texthbehaviour="Never split"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="ingame_tooltip"
 					interactive="true"
-					uniqueguid="C1D38C6F-DA8F-4014-8F53EEF2F66A7A59"/>
+					uniqueguid="C1D38C6F-DA8F-4014-8F53EEF2F66A7A59">
+					<component_text
+						textvalign="Center"
+						textxoffset="12.00,12.00"
+						textyoffset="0.00,4.00"
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="ingame_tooltip"/>
+				</newstate>
 			</states>
 			<LayoutEngine
 				type="List"
@@ -288,13 +299,15 @@
 					name="NewState"
 					width="310"
 					height="26"
-					textxoffset="8.00,0.00"
-					textyoffset="6.00,0.00"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_default_text"
-					uniqueguid="270D11D0-3168-4A7C-B6E3DD63D6F4038F"/>
+					uniqueguid="270D11D0-3168-4A7C-B6E3DD63D6F4038F">
+					<component_text
+						textxoffset="8.00,0.00"
+						textyoffset="6.00,0.00"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
+				</newstate>
 			</states>
 			<LayoutEngine
 				type="List"
@@ -328,19 +341,21 @@
 					name="NewState"
 					width="328"
 					height="16"
-					text="dy_instructions"
-					textvalign="Center"
-					textxoffset="12.00,12.00"
-					textyoffset="0.00,4.00"
-					texthbehaviour="Resize"
-					textlabel="instructions_NewState_Text_75003c"
-					font_m_font_name="georgia_italic"
-					font_m_size="12"
-					font_m_colour="#A99F89FF"
-					font_m_leading="1"
-					fontcat_name="fe_italic"
 					interactive="true"
-					uniqueguid="D858E0A7-277F-47BE-8B320A6A3FF110EE"/>
+					uniqueguid="D858E0A7-277F-47BE-8B320A6A3FF110EE">
+					<component_text
+						text="dy_instructions"
+						textvalign="Center"
+						textxoffset="12.00,12.00"
+						textyoffset="0.00,4.00"
+						texthbehaviour="Resize"
+						textlabel="instructions_NewState_Text_75003c"
+						font_m_font_name="georgia_italic"
+						font_m_size="12"
+						font_m_colour="#A99F89FF"
+						font_m_leading="1"
+						fontcat_name="fe_italic"/>
+				</newstate>
 			</states>
 		</instructions>
 		<list_parent
@@ -357,13 +372,15 @@
 					name="NewState"
 					width="328"
 					height="146"
-					textxoffset="8.00,0.00"
-					textyoffset="6.00,0.00"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
-					uniqueguid="C049326E-BA26-4950-B8E5945EC38200AF"/>
+					uniqueguid="C049326E-BA26-4950-B8E5945EC38200AF">
+					<component_text
+						textxoffset="8.00,0.00"
+						textyoffset="6.00,0.00"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
+				</newstate>
 			</states>
 			<animations>
 				<expand id="expand">
@@ -409,7 +426,6 @@
 					name="NewState"
 					width="310"
 					height="16"
-					texthbehaviour="Never split"
 					uniqueguid="A087557E-8F58-43EB-8529B2450416290D">
 					<imagemetrics>
 						<image
@@ -458,16 +474,6 @@
 					name="NewState"
 					width="310"
 					height="16"
-					text="dy_effect"
-					textvalign="Center"
-					textxoffset="40.00,12.00"
-					textyoffset="0.00,4.00"
-					texthbehaviour="Resize"
-					textlabel="template_effect_NewState_Text_19004c"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="ingame_tooltip"
 					interactive="true"
 					uniqueguid="49B35634-4DF3-4F0C-A0026D9EFAAB5161">
 					<imagemetrics>
@@ -483,6 +489,17 @@
 							canresizeheight="false"
 							canresizewidth="false"/>
 					</imagemetrics>
+					<component_text
+						text="dy_effect"
+						textvalign="Center"
+						textxoffset="40.00,12.00"
+						textyoffset="0.00,4.00"
+						texthbehaviour="Resize"
+						textlabel="template_effect_NewState_Text_19004c"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="ingame_tooltip"/>
 				</newstate>
 			</states>
 		</template_effect>
@@ -509,18 +526,20 @@
 					name="NewState"
 					width="310"
 					height="24"
-					text="Buildings"
-					textvalign="Center"
-					textxoffset="36.00,12.00"
-					textyoffset="0.00,4.00"
-					texthbehaviour="Never split"
-					textlocalised="true"
-					textlabel="global_factional_pool_NewState_Text_170052"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_text_small"
 					interactive="true"
-					uniqueguid="34FB7F6E-8801-45C9-BDB5D7EAA783DB17"/>
+					uniqueguid="34FB7F6E-8801-45C9-BDB5D7EAA783DB17">
+					<component_text
+						text="Buildings"
+						textvalign="Center"
+						textxoffset="36.00,12.00"
+						textyoffset="0.00,4.00"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="global_factional_pool_NewState_Text_170052"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_text_small"/>
+				</newstate>
 			</states>
 		</template_entry>
 		<tooltip_winds_of_magic
@@ -547,12 +566,6 @@
 					name="NewState"
 					width="328"
 					height="150"
-					textxoffset="8.00,0.00"
-					textyoffset="6.00,0.00"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_tooltip_text"
 					uniqueguid="F5831F17-86B3-4E53-869A34D71F0A1072">
 					<imagemetrics>
 						<image
@@ -564,6 +577,13 @@
 							tile="true"
 							margin="16.00,20.00,16.00,20.00"/>
 					</imagemetrics>
+					<component_text
+						textxoffset="8.00,0.00"
+						textyoffset="6.00,0.00"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_tooltip_text"/>
 				</newstate>
 			</states>
 			<animations>
@@ -604,19 +624,21 @@
 					name="NewState"
 					width="310"
 					height="24"
-					text="Current"
-					textvalign="Center"
-					textxoffset="12.00,12.00"
-					textyoffset="0.00,4.00"
-					texthbehaviour="Never split"
-					textlocalised="true"
-					textlabel="total_NewState_Text_690020"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="ingame_tooltip"
 					interactive="true"
-					uniqueguid="3FC298AF-227D-46CE-A07DB8D0F4564B3F"/>
+					uniqueguid="3FC298AF-227D-46CE-A07DB8D0F4564B3F">
+					<component_text
+						text="Current"
+						textvalign="Center"
+						textxoffset="12.00,12.00"
+						textyoffset="0.00,4.00"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="total_NewState_Text_690020"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="ingame_tooltip"/>
+				</newstate>
 			</states>
 		</total>
 	</components>

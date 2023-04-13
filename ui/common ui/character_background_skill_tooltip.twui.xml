@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="137"
+	version="141"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -11,8 +11,22 @@
 					<description_window this="11BC364A-28FD-4AF6-BC30F39D2BD44659"/>
 					<dy_explanation this="7F7F4E46-E5D6-407B-B67E3BFEBD3919B3"/>
 					<effects_list this="817B5DCF-8A66-4AEF-B21E3876531A155B">
-						<template_entry this="E4B68134-BEBC-4F0A-BC073145DC2E9552"/>
+						<template_entry this="E2652DFB-5FF2-4A17-BE7DCDBD89FC8274">
+							<icon this="483A5D4B-4B4D-412D-8E77426A5B24C9A5"/>
+						</template_entry>
 					</effects_list>
+					<dy_unit_card_header this="9E3664A3-B6E7-4A0E-BDFC974AD688778D"/>
+					<unit_card_list this="6F5078B9-91E0-4486-81CB7ED2D3CC7737">
+						<template_unit_card this="5F2C46EB-878F-4AB5-A2B3180E70AC0931"/>
+					</unit_card_list>
+					<dev_units_holder this="CB194126-0E7C-44CF-A1374C2D58E59514">
+						<dev_excluded_unit_set_list this="B6B4B4D3-5B58-45F2-91BCFA8E01F8C47B">
+							<template_unit_set_text this="E618CD4B-1A69-495F-8DACEA01ACE4C9F4"/>
+						</dev_excluded_unit_set_list>
+						<dev_excluded_unit_list this="A2981217-9A96-46D3-A2024960DAA9D6BB">
+							<template_unit_card this="1EDF3272-6C6B-4508-95C78483647FE060"/>
+						</dev_excluded_unit_list>
+					</dev_units_holder>
 					<spawn_holder this="EAE1ADA9-D1BB-4772-B309D6148B8213D0">
 						<tx_spawn_header this="7D63F892-6958-434F-9584E77ABFA1E773"/>
 						<spawn_unit_list this="E7DD533E-E3EE-4E99-A3314C5196C74C32">
@@ -25,6 +39,14 @@
 						</spawn_unit_list>
 					</spawn_holder>
 					<custom_battle_disclaimer this="CC8D0399-B7F4-4FE4-B4B99A07F7817E3F"/>
+					<stick_progress_bar this="AEA3E1FC-3262-4A63-ADD8FCB9EC468093">
+						<bar_extents_and_pos this="35532233-8D26-4501-95F76A595CCFCCA1">
+							<auto_resizing_comp this="601157E7-CD43-4268-ACBDAD211AAB0BEF">
+								<completed_comp this="A79108AC-3046-47FA-87C087A12C9EB3E7"/>
+								<in_progress_comp this="09564BC5-D500-4D21-9B91D62D264C987B"/>
+							</auto_resizing_comp>
+						</bar_extents_and_pos>
+					</stick_progress_bar>
 				</tooltip_body>
 				<attribute_additional_info this="63B73885-2043-4BB3-9CA92081E6262278">
 					<attribute_info this="566B7CD3-F727-4DC0-9E15256DE87DE349"/>
@@ -75,7 +97,6 @@
 			uniqueguid="BEEA7C7B-AD15-4064-862EE48D86662873"
 			currentstate="2AE00D7D-0615-4FEB-8E8DB7FE9079A130">
 			<callbackwithcontextlist>
-				<callback_with_context callback_id="CustomTooltip"/>
 				<callback_with_context
 					callback_id="ContextComponentInitialiser"
 					context_object_id="CcoCampaignCharacter"
@@ -86,14 +107,17 @@
 					this="2AE00D7D-0615-4FEB-8E8DB7FE9079A130"
 					name="NewState"
 					width="341"
-					height="273"
-					textxoffset="8.00,0.00"
-					textyoffset="6.00,0.00"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_tooltip_text"
-					uniqueguid="2AE00D7D-0615-4FEB-8E8DB7FE9079A130"/>
+					height="513"
+					interactive="true"
+					uniqueguid="2AE00D7D-0615-4FEB-8E8DB7FE9079A130">
+					<component_text
+						textxoffset="8.00,0.00"
+						textyoffset="6.00,0.00"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_tooltip_text"/>
+				</newstate>
 			</states>
 			<LayoutEngine
 				type="List"
@@ -104,6 +128,120 @@
 				</columnwidths>
 			</LayoutEngine>
 		</character_background_skill_tooltip>
+		<completed_comp
+			this="A79108AC-3046-47FA-87C087A12C9EB3E7"
+			id="completed_comp"
+			part_of_template="true"
+			uniqueguid_in_template="DE8557ED-0386-4BFF-87237559FEB7164F"
+			uniqueguid="A79108AC-3046-47FA-87C087A12C9EB3E7"
+			dimensions="329.00,3.00"
+			dock_point="Center">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="7A236C6A-8634-4A87-A3DE96BDF1D3E296"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/sticky_bar_fill.png"
+					uniqueguid="A37B8EE1-F783-4BA8-B563293FC6B58956"/>
+			</component_image_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+				<element value="ui/skins/default/sticky_bar_fill.png"/>
+			</override_images>
+		</completed_comp>
+		<in_progress_comp
+			this="09564BC5-D500-4D21-9B91D62D264C987B"
+			id="in_progress_comp"
+			part_of_template="true"
+			uniqueguid_in_template="598D2980-2D81-4431-B8372E64160B25BB"
+			uniqueguid="09564BC5-D500-4D21-9B91D62D264C987B"
+			dimensions="329.00,3.00"
+			dock_point="Center">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="47083277-7998-4361-A2E009CA2ADEFF59"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/sticky_bar_fill.png"
+					uniqueguid="20A341F9-4866-4349-B701122F37819F79"/>
+			</component_image_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+				<element value="ui/skins/default/sticky_bar_fill.png"/>
+			</override_images>
+		</in_progress_comp>
+		<stick_progress_bar
+			this="AEA3E1FC-3262-4A63-ADD8FCB9EC468093"
+			id="stick_progress_bar"
+			template_id="stick_progress_bar"
+			part_of_template="true"
+			uniqueguid_in_template="B5D91471-862C-459A-9117F067B37F7730"
+			uniqueguid="AEA3E1FC-3262-4A63-ADD8FCB9EC468093"
+			dimensions="1.00,10.00"
+			is_visible="false">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="13F81422-7E92-4ABC-988456AC54E0B1E0"/>
+			</state_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override1"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</stick_progress_bar>
+		<auto_resizing_comp
+			this="601157E7-CD43-4268-ACBDAD211AAB0BEF"
+			id="auto_resizing_comp"
+			part_of_template="true"
+			uniqueguid_in_template="9F4A9EBE-A605-40E1-AACEB22402830771"
+			uniqueguid="601157E7-CD43-4268-ACBDAD211AAB0BEF"
+			dimensions="329.00,3.00"
+			dock_point="Center">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="87186A63-BAF2-4C79-BD9E223EB003C01B"/>
+			</state_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</auto_resizing_comp>
 		<description_window
 			this="11BC364A-28FD-4AF6-BC30F39D2BD44659"
 			id="description_window"
@@ -125,18 +263,40 @@
 					name="NewState"
 					width="340"
 					height="26"
-					text="Description"
-					textxoffset="12.00,8.00"
-					textyoffset="5.00,5.00"
-					texthbehaviour="Resize"
-					font_m_font_name="georgia_italic"
-					font_m_size="12"
-					font_m_colour="#A99F89FF"
-					font_m_leading="1"
-					fontcat_name="fe_italic"
-					uniqueguid="45399A62-5C1D-478F-A037F2C19BB9A4C7"/>
+					uniqueguid="45399A62-5C1D-478F-A037F2C19BB9A4C7">
+					<component_text
+						text="Description"
+						textxoffset="12.00,8.00"
+						textyoffset="5.00,5.00"
+						texthbehaviour="Resize"
+						font_m_font_name="georgia_italic"
+						font_m_size="12"
+						font_m_colour="#A99F89FF"
+						font_m_leading="1"
+						fontcat_name="fe_italic"/>
+				</newstate>
 			</states>
 		</description_window>
+		<bar_extents_and_pos
+			this="35532233-8D26-4501-95F76A595CCFCCA1"
+			id="bar_extents_and_pos"
+			part_of_template="true"
+			uniqueguid_in_template="3F331065-E782-467B-804031161278DDBC"
+			uniqueguid="35532233-8D26-4501-95F76A595CCFCCA1"
+			dimensions="329.00,3.00"
+			offset="6.00,2.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="134F3B41-252A-4962-AD8566C0FBB58462"/>
+			</state_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</bar_extents_and_pos>
 		<dy_title
 			this="544099DB-D90F-4F4C-99D1E21CC24EEAF9"
 			id="dy_title"
@@ -157,18 +317,20 @@
 					name="NewState"
 					width="340"
 					height="30"
-					text="dy_title"
-					texthalign="Center"
-					textxoffset="8.00,8.00"
-					textyoffset="8.00,4.00"
-					texthbehaviour="Resize"
-					textlabel="dy_title_NewState_Text_1c003e"
-					font_m_font_name="brand_header"
-					font_m_size="14"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="FE_header_small"
-					uniqueguid="E6AC6CC0-E7B7-429B-9547D275B46C24C7"/>
+					uniqueguid="E6AC6CC0-E7B7-429B-9547D275B46C24C7">
+					<component_text
+						text="dy_title"
+						texthalign="Center"
+						textxoffset="8.00,8.00"
+						textyoffset="8.00,4.00"
+						texthbehaviour="Resize"
+						textlabel="dy_title_NewState_Text_1c003e"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="FE_header_small"/>
+				</newstate>
 			</states>
 		</dy_title>
 		<effects_list
@@ -191,11 +353,13 @@
 					this="E678D7C3-226D-4E5B-936C3C796C2F9E57"
 					name="NewState"
 					width="340"
-					height="26"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
-					uniqueguid="E678D7C3-226D-4E5B-936C3C796C2F9E57"/>
+					height="31"
+					uniqueguid="E678D7C3-226D-4E5B-936C3C796C2F9E57">
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
+				</newstate>
 			</states>
 			<animations>
 				<scale id="scale">
@@ -211,7 +375,8 @@
 			<LayoutEngine
 				type="List"
 				spacing="4.00,0.00"
-				sizetocontent="true">
+				sizetocontent="true"
+				margins="0.00,5.00">
 				<columnwidths>
 					<column width="340"/>
 				</columnwidths>
@@ -240,70 +405,19 @@
 					name="NewState"
 					width="340"
 					height="22"
-					text="Instruction"
-					textxoffset="12.00,8.00"
-					textyoffset="2.00,4.00"
-					texthbehaviour="Resize"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_tooltip_text"
-					uniqueguid="59D019F4-9FF3-48B3-87ED36C12B21ACAB"/>
-			</states>
-		</dy_explanation>
-		<template_entry
-			this="E4B68134-BEBC-4F0A-BC073145DC2E9552"
-			id="template_entry"
-			allowhorizontalresize="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="E4B68134-BEBC-4F0A-BC073145DC2E9552"
-			currentstate="051E22E6-D57D-4154-AC30BE917A2AD355">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoEffect"
-					context_function_id="LocalisedText"/>
-				<callback_with_context
-					callback_id="ContextImageSetter"
-					context_object_id="CcoEffect"
-					context_function_id="IconPath"/>
-			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="4E7E9D1A-17DD-4C02-99086F2188A9C5BB"
-					uniqueguid="4E7E9D1A-17DD-4C02-99086F2188A9C5BB"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="051E22E6-D57D-4154-AC30BE917A2AD355"
-					name="NewState"
-					width="340"
-					height="26"
-					text="dy_effect"
-					textxoffset="44.00,8.00"
-					textyoffset="5.00,5.00"
-					texthbehaviour="Resize"
-					textlabel="template_entry_NewState_Text_19004c"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
-					uniqueguid="051E22E6-D57D-4154-AC30BE917A2AD355">
-					<imagemetrics>
-						<image
-							this="98C08E78-D6EB-4DD9-8BD176373E7B75D5"
-							uniqueguid="98C08E78-D6EB-4DD9-8BD176373E7B75D5"
-							componentimage="4E7E9D1A-17DD-4C02-99086F2188A9C5BB"
-							offset="14.00,0.00"
-							width="24"
-							height="24"
-							canresizeheight="false"
-							canresizewidth="false"/>
-					</imagemetrics>
+					uniqueguid="59D019F4-9FF3-48B3-87ED36C12B21ACAB">
+					<component_text
+						text="Instruction"
+						textxoffset="12.00,8.00"
+						textyoffset="2.00,4.00"
+						texthbehaviour="Resize"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_tooltip_text"/>
 				</newstate>
 			</states>
-		</template_entry>
+		</dy_explanation>
 		<spawn_unit_list
 			this="E7DD533E-E3EE-4E99-A3314C5196C74C32"
 			id="spawn_unit_list"
@@ -324,7 +438,6 @@
 					name="default"
 					width="57"
 					height="89"
-					texthbehaviour="Never split"
 					uniqueguid="BBEFE55C-E414-4BBC-A9AA3711E769D94C"/>
 			</states>
 			<LayoutEngine
@@ -401,18 +514,17 @@
 					name="0"
 					width="24"
 					height="24"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
-					uniqueguid="718D9CB9-0FCB-486F-BEC19A07E7CB4CFF"/>
+					uniqueguid="718D9CB9-0FCB-486F-BEC19A07E7CB4CFF">
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
+				</_0>
 				<_1
 					this="DE2D0942-8525-4EAC-BC3DBBF0E54BAB55"
 					name="1"
 					width="24"
 					height="24"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					interactive="true"
 					disabled="true"
 					shadervars="-0.20,0.00,0.00,0.00"
@@ -425,27 +537,30 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
 				</_1>
 				<_10
 					this="C7CD511E-06DE-48D9-8D477AEE640DA722"
 					name="10"
 					width="24"
 					height="24"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="ingame_tooltip"
 					interactive="true"
 					disabled="true"
-					uniqueguid="C7CD511E-06DE-48D9-8D477AEE640DA722"/>
+					uniqueguid="C7CD511E-06DE-48D9-8D477AEE640DA722">
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="ingame_tooltip"/>
+				</_10>
 				<_2
 					this="0CC55483-BD09-4155-B4E365AB362BA208"
 					name="2"
 					width="24"
 					height="24"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					interactive="true"
 					disabled="true"
 					shadervars="-0.20,0.00,0.00,0.00"
@@ -458,15 +573,16 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
 				</_2>
 				<_3
 					this="EBCF14BE-1B21-4D66-B478623324343387"
 					name="3"
 					width="24"
 					height="24"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					interactive="true"
 					disabled="true"
 					shadervars="-0.20,0.00,0.00,0.00"
@@ -479,15 +595,16 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
 				</_3>
 				<_4
 					this="B99E6070-F277-453B-AD8B1296FFA3EF80"
 					name="4"
 					width="24"
 					height="24"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					interactive="true"
 					disabled="true"
 					shadervars="-0.50,0.00,0.00,0.00"
@@ -500,15 +617,16 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
 				</_4>
 				<_5
 					this="072A1B27-1212-4045-B604E9100A8DB838"
 					name="5"
 					width="24"
 					height="24"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					interactive="true"
 					disabled="true"
 					shadervars="-0.50,0.00,0.00,0.00"
@@ -521,15 +639,16 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
 				</_5>
 				<_6
 					this="05CA8D8F-0E8E-472A-862F2BD3A1FCA5B5"
 					name="6"
 					width="24"
 					height="24"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					interactive="true"
 					disabled="true"
 					shadervars="-0.50,0.00,0.00,0.00"
@@ -542,15 +661,16 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
 				</_6>
 				<_7
 					this="DEBA6336-844F-4D29-A8D05780AE8F9C35"
 					name="7"
 					width="24"
 					height="24"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					interactive="true"
 					disabled="true"
 					shadervars="-0.70,0.00,0.00,0.00"
@@ -563,15 +683,16 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
 				</_7>
 				<_8
 					this="111EEF54-DB0E-4B8C-8EB9FB46977E5106"
 					name="8"
 					width="24"
 					height="24"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					interactive="true"
 					disabled="true"
 					shadervars="-0.70,0.00,0.00,0.00"
@@ -584,15 +705,16 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
 				</_8>
 				<_9
 					this="4180D946-409D-4F5E-BB43C4CE647362DF"
 					name="9"
 					width="24"
 					height="24"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					interactive="true"
 					disabled="true"
 					shadervars="-0.70,0.00,0.00,0.00"
@@ -605,13 +727,17 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
 				</_9>
 			</states>
 		</experience>
 		<spawn_holder
 			this="EAE1ADA9-D1BB-4772-B309D6148B8213D0"
 			id="spawn_holder"
-			offset="0.00,82.00"
+			offset="0.00,322.00"
 			priority="255"
 			tooltipslocalised="true"
 			uniqueguid="EAE1ADA9-D1BB-4772-B309D6148B8213D0"
@@ -632,7 +758,6 @@
 					name="default"
 					width="340"
 					height="115"
-					texthbehaviour="Never split"
 					uniqueguid="EAAF5D3D-576E-4966-A8ADE4674D8FA79C"/>
 			</states>
 			<LayoutEngine
@@ -657,17 +782,19 @@
 					name="NewState"
 					width="340"
 					height="26"
-					text="This Lord will spawn with the following units:"
-					textxoffset="15.00,8.00"
-					textyoffset="5.00,5.00"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="tx_spawn_header_NewState_Text_62ee7af1"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
-					uniqueguid="200B9FA0-744E-4DE0-A0ED6740255D87B7"/>
+					uniqueguid="200B9FA0-744E-4DE0-A0ED6740255D87B7">
+					<component_text
+						text="This Lord will spawn with the following units:"
+						textxoffset="15.00,8.00"
+						textyoffset="5.00,5.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="tx_spawn_header_NewState_Text_62ee7af1"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
+				</newstate>
 			</states>
 		</tx_spawn_header>
 		<health_bar
@@ -704,9 +831,6 @@
 					name="NewState"
 					width="28"
 					height="6"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					uniqueguid="DB1F207C-213C-4D17-B1A943751B2C7253">
 					<imagemetrics>
 						<image
@@ -717,6 +841,10 @@
 							height="6"
 							colour="#000000FF"/>
 					</imagemetrics>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
 				</newstate>
 			</states>
 		</health_bar>
@@ -758,9 +886,6 @@
 					name="default"
 					width="28"
 					height="6"
-					font_m_colour="#FFFFE0FF"
-					font_m_leading="1"
-					fontcat_name="ingame_text_small_warhammer3"
 					uniqueguid="1761368F-D5E3-4F53-BE2EBEC28DC8B39F">
 					<imagemetrics>
 						<image
@@ -773,6 +898,10 @@
 							dockpoint="Center Left"
 							margin="0.00,1.00,0.00,1.00"/>
 					</imagemetrics>
+					<component_text
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="1"
+						fontcat_name="ingame_text_small_warhammer3"/>
 				</default>
 			</states>
 		</health_fill>
@@ -802,6 +931,9 @@
 					callback_id="ContextPropagator"
 					context_object_id="CcoPair"
 					context_function_id="First"/>
+				<callback_with_context
+					callback_id="UnitInfoPanelMouseOver"
+					context_object_id="CcoMainUnitRecord"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -822,12 +954,7 @@
 					this="103797DA-3C22-423F-B1EC5749043802AD"
 					name="default"
 					height="69"
-					textvalign="Center"
-					textxoffset="26.00,0.00"
-					font_m_size="12"
-					font_m_colour="#A0FF37FF"
-					font_m_leading="3"
-					fontcat_name="fe_tooltip_green"
+					interactive="true"
 					uniqueguid="103797DA-3C22-423F-B1EC5749043802AD">
 					<imagemetrics>
 						<image
@@ -842,17 +969,18 @@
 							height="69"
 							margin="5.00,5.00,5.00,5.00"/>
 					</imagemetrics>
+					<component_text
+						textvalign="Center"
+						textxoffset="26.00,0.00"
+						font_m_size="12"
+						font_m_colour="#A0FF37FF"
+						font_m_leading="3"
+						fontcat_name="fe_tooltip_green"/>
 				</default>
 				<hidden
 					this="D198BFFB-16C4-4AF9-90D86DEEEE00FC58"
 					name="hidden"
 					height="69"
-					textvalign="Center"
-					textxoffset="26.00,0.00"
-					font_m_size="12"
-					font_m_colour="#A0FF37FF"
-					font_m_leading="3"
-					fontcat_name="fe_tooltip_green"
 					uniqueguid="D198BFFB-16C4-4AF9-90D86DEEEE00FC58">
 					<imagemetrics>
 						<image
@@ -867,13 +995,20 @@
 							height="69"
 							margin="5.00,5.00,5.00,5.00"/>
 					</imagemetrics>
+					<component_text
+						textvalign="Center"
+						textxoffset="26.00,0.00"
+						font_m_size="12"
+						font_m_colour="#A0FF37FF"
+						font_m_leading="3"
+						fontcat_name="fe_tooltip_green"/>
 				</hidden>
 			</states>
 		</template_garrison_card>
 		<custom_battle_disclaimer
 			this="CC8D0399-B7F4-4FE4-B4B99A07F7817E3F"
 			id="custom_battle_disclaimer"
-			offset="0.00,197.00"
+			offset="0.00,437.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -891,24 +1026,26 @@
 					name="NewState"
 					width="340"
 					height="26"
-					text="This skill has no effects that apply in battle."
-					textxoffset="15.00,8.00"
-					textyoffset="5.00,5.00"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="StateText_dbc714f3"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
-					font_colour_override_preset_key="alliance_enemy"
-					uniqueguid="966C5046-C76D-41B2-AFA5666C9E252FE8"/>
+					uniqueguid="966C5046-C76D-41B2-AFA5666C9E252FE8">
+					<component_text
+						text="This skill has no effects that apply in battle."
+						textxoffset="15.00,8.00"
+						textyoffset="5.00,5.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="StateText_dbc714f3"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"
+						font_colour_override_preset_key="alliance_enemy"/>
+				</newstate>
 			</states>
 		</custom_battle_disclaimer>
 		<attribute_additional_info
 			this="63B73885-2043-4BB3-9CA92081E6262278"
 			id="attribute_additional_info"
-			offset="0.00,227.00"
+			offset="0.00,467.00"
 			priority="255"
 			tooltipslocalised="true"
 			uniqueguid="63B73885-2043-4BB3-9CA92081E6262278"
@@ -999,15 +1136,6 @@
 					name="NewState"
 					width="341"
 					height="26"
-					text="Example effect"
-					textxoffset="44.00,6.00"
-					textyoffset="4.00,6.00"
-					texthbehaviour="Resize"
-					textlabel="StateText_de6e694b"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="3"
-					fontcat_name="fe_text"
 					uniqueguid="F1A2B1C0-B2E2-4635-B22236EF103D899D">
 					<imagemetrics>
 						<image
@@ -1022,6 +1150,16 @@
 							canresizeheight="false"
 							canresizewidth="false"/>
 					</imagemetrics>
+					<component_text
+						text="Example effect"
+						textxoffset="44.00,6.00"
+						textyoffset="4.00,6.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_de6e694b"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
 				</newstate>
 			</states>
 		</attribute_info>
@@ -1044,13 +1182,7 @@
 					this="A889A15C-A2BA-41E9-8E41B28BAB2F9E12"
 					name="NewState"
 					width="340"
-					height="227"
-					textxoffset="8.00,0.00"
-					textyoffset="6.00,0.00"
-					font_m_size="12"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="fe_tooltip_text"
+					height="467"
 					uniqueguid="A889A15C-A2BA-41E9-8E41B28BAB2F9E12">
 					<imagemetrics>
 						<image
@@ -1058,7 +1190,7 @@
 							uniqueguid="67DBAA40-5CF0-44F3-944835DE3978D23F"
 							componentimage="E78E8B9C-AF95-4FBF-AB1F57C17ACC743C"
 							width="340"
-							height="227"
+							height="467"
 							tile="true"
 							margin="16.00,20.00,16.00,20.00"/>
 						<image
@@ -1066,11 +1198,18 @@
 							uniqueguid="6879A39B-2544-43DB-BDE92A4DACDAAF66"
 							componentimage="E78E8B9C-AF95-4FBF-AB1F57C17ACC743C"
 							width="340"
-							height="227"
+							height="467"
 							colour="#FFFFFF80"
 							tile="true"
 							margin="16.00,20.00,16.00,20.00"/>
 					</imagemetrics>
+					<component_text
+						textxoffset="8.00,0.00"
+						textyoffset="6.00,0.00"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_tooltip_text"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -1082,5 +1221,463 @@
 				</columnwidths>
 			</LayoutEngine>
 		</tooltip_body>
+		<dev_excluded_unit_list
+			this="A2981217-9A96-46D3-A2024960DAA9D6BB"
+			id="dev_excluded_unit_list"
+			is_dev_only="true"
+			offset="0.00,40.00"
+			priority="255"
+			tooltipslocalised="true"
+			component_level_text="Dev - UI excluded units"
+			text_label="ComponentText_64b00e31"
+			uniqueguid="A2981217-9A96-46D3-A2024960DAA9D6BB"
+			currentstate="1D3229E7-6228-4436-9CC1D8BB9885A7B3"
+			defaultstate="1D3229E7-6228-4436-9CC1D8BB9885A7B3">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoCampaignCharacterSkill"
+					context_function_id="EffectList.Transform(DevUnitsFromEffectExcluded).Distinct"/>
+				<callback_with_context callback_id="LayoutStallerCallback"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="1D3229E7-6228-4436-9CC1D8BB9885A7B3"
+					name="default"
+					width="340"
+					height="89"
+					uniqueguid="1D3229E7-6228-4436-9CC1D8BB9885A7B3">
+					<component_text
+						textxoffset="20.00,0.00"
+						texthbehaviour="Never split"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"
+						font_colour_override_preset_key="fabulous_pink"/>
+				</default>
+			</states>
+			<LayoutEngine
+				type="List"
+				spacing="5.00,0.00"
+				itemsperrow="8"
+				sizetocontent="true"
+				secondary_margins="15.00,10.00"
+				min_dimensions="340.00,0.00"
+				margins="20.00,0.00">
+				<columnwidths>
+					<column width="317"/>
+				</columnwidths>
+			</LayoutEngine>
+		</dev_excluded_unit_list>
+		<dev_excluded_unit_set_list
+			this="B6B4B4D3-5B58-45F2-91BCFA8E01F8C47B"
+			id="dev_excluded_unit_set_list"
+			is_dev_only="true"
+			priority="255"
+			tooltipslocalised="true"
+			component_level_text="Dev - UI excluded unit sets"
+			text_label="ComponentText_488b38d6"
+			uniqueguid="B6B4B4D3-5B58-45F2-91BCFA8E01F8C47B"
+			currentstate="2C7AB3FC-B886-4FB4-8B4D44CF5D112AB9"
+			defaultstate="2C7AB3FC-B886-4FB4-8B4D44CF5D112AB9">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoCampaignCharacterSkill"
+					context_function_id="EffectList.Transform(DevUnitSetStringsFromEffectExcluded)"/>
+				<callback_with_context callback_id="LayoutStallerCallback"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="2C7AB3FC-B886-4FB4-8B4D44CF5D112AB9"
+					name="default"
+					width="340"
+					height="40"
+					uniqueguid="2C7AB3FC-B886-4FB4-8B4D44CF5D112AB9">
+					<component_text
+						textxoffset="20.00,0.00"
+						texthbehaviour="Never split"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"
+						font_colour_override_preset_key="fabulous_pink"/>
+				</default>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true"
+				secondary_margins="40.00,10.00"
+				min_dimensions="340.00,0.00"
+				margins="20.00,0.00">
+				<columnwidths>
+					<column width="311"/>
+				</columnwidths>
+			</LayoutEngine>
+		</dev_excluded_unit_set_list>
+		<dev_units_holder
+			this="CB194126-0E7C-44CF-A1374C2D58E59514"
+			id="dev_units_holder"
+			is_dev_only="true"
+			offset="0.00,193.00"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="CB194126-0E7C-44CF-A1374C2D58E59514"
+			currentstate="F419254F-8BB3-411F-BF1572ACA37FCDF0"
+			defaultstate="F419254F-8BB3-411F-BF1572ACA37FCDF0">
+			<states>
+				<default
+					this="F419254F-8BB3-411F-BF1572ACA37FCDF0"
+					name="default"
+					width="340"
+					height="129"
+					uniqueguid="F419254F-8BB3-411F-BF1572ACA37FCDF0"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="32"/>
+				</columnwidths>
+			</LayoutEngine>
+		</dev_units_holder>
+		<dy_unit_card_header
+			this="9E3664A3-B6E7-4A0E-BDFC974AD688778D"
+			id="dy_unit_card_header"
+			offset="0.00,87.00"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="9E3664A3-B6E7-4A0E-BDFC974AD688778D"
+			currentstate="5AB60FDE-7FB8-42F0-9A3E601780356D18">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_function_id="Loc(&quot;trait_units_tooltip_header&quot;)"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignCharacterSkill"
+					context_function_id="EffectList.Any(UnitsFromEffectNotExcluded.IsEmpty == false)"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="5AB60FDE-7FB8-42F0-9A3E601780356D18"
+					name="NewState"
+					width="340"
+					height="22"
+					uniqueguid="5AB60FDE-7FB8-42F0-9A3E601780356D18">
+					<component_text
+						text="dy_header"
+						textxoffset="12.00,8.00"
+						textyoffset="2.00,4.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_68d0b41e"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_tooltip_text"/>
+				</newstate>
+			</states>
+		</dy_unit_card_header>
+		<template_unit_card
+			this="5F2C46EB-878F-4AB5-A2B3180E70AC0931"
+			id="template_unit_card"
+			offset="15.00,5.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="5F2C46EB-878F-4AB5-A2B3180E70AC0931"
+			isaspectratiolocked="true"
+			currentstate="BC9B58C6-F4B8-4148-8D06F5A4BF78269B"
+			defaultstate="BC9B58C6-F4B8-4148-8D06F5A4BF78269B">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoMainUnitRecord"
+					context_function_id="IconPath">
+					<child_m_user_properties>
+						<property
+							name="image_index"
+							value="1"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="UnitInfoPanelMouseOver"
+					context_object_id="CcoMainUnitRecord"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="0AEB3B2F-2D16-4938-86A7350C48302BEF"
+					uniqueguid="0AEB3B2F-2D16-4938-86A7350C48302BEF"
+					imagepath="ui/skins/default/unit_card_build_frame.png"/>
+				<component_image
+					this="DF904D11-52FE-4640-AB46DBF6C0646297"
+					uniqueguid="DF904D11-52FE-4640-AB46DBF6C0646297"
+					imagepath="ui/skins/default/unit_card_ph.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="BC9B58C6-F4B8-4148-8D06F5A4BF78269B"
+					name="default"
+					height="69"
+					interactive="true"
+					uniqueguid="BC9B58C6-F4B8-4148-8D06F5A4BF78269B">
+					<imagemetrics>
+						<image
+							this="D3C8E961-616C-4D31-82933F935FD4E891"
+							uniqueguid="D3C8E961-616C-4D31-82933F935FD4E891"
+							componentimage="DF904D11-52FE-4640-AB46DBF6C0646297"
+							height="69"/>
+						<image
+							this="A09E1016-74BA-4CBA-B218967057866847"
+							uniqueguid="A09E1016-74BA-4CBA-B218967057866847"
+							componentimage="0AEB3B2F-2D16-4938-86A7350C48302BEF"
+							height="69"
+							margin="5.00,5.00,5.00,5.00"/>
+					</imagemetrics>
+					<component_text
+						textvalign="Center"
+						textxoffset="26.00,0.00"
+						font_m_size="12"
+						font_m_colour="#A0FF37FF"
+						font_m_leading="3"
+						fontcat_name="fe_tooltip_green"/>
+				</default>
+			</states>
+		</template_unit_card>
+		<template_unit_card
+			this="1EDF3272-6C6B-4508-95C78483647FE060"
+			id="template_unit_card"
+			offset="15.00,20.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="1EDF3272-6C6B-4508-95C78483647FE060"
+			isaspectratiolocked="true"
+			currentstate="6D11FCAF-C82C-42B0-88FC45AA8DD77421"
+			defaultstate="6D11FCAF-C82C-42B0-88FC45AA8DD77421">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoMainUnitRecord"
+					context_function_id="IconPath">
+					<child_m_user_properties>
+						<property
+							name="image_index"
+							value="1"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="1A1E3F72-2208-4DB0-8D960FA10C73A03F"
+					uniqueguid="1A1E3F72-2208-4DB0-8D960FA10C73A03F"
+					imagepath="ui/skins/default/unit_card_build_frame.png"/>
+				<component_image
+					this="A6981E28-9F86-46C6-AA43DA7441389F3B"
+					uniqueguid="A6981E28-9F86-46C6-AA43DA7441389F3B"
+					imagepath="ui/skins/default/unit_card_ph.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="6D11FCAF-C82C-42B0-88FC45AA8DD77421"
+					name="default"
+					height="69"
+					uniqueguid="6D11FCAF-C82C-42B0-88FC45AA8DD77421">
+					<imagemetrics>
+						<image
+							this="F5025F30-0A23-41D6-AEDA75F2E68B1252"
+							uniqueguid="F5025F30-0A23-41D6-AEDA75F2E68B1252"
+							componentimage="A6981E28-9F86-46C6-AA43DA7441389F3B"
+							height="69"/>
+						<image
+							this="EF525CC2-0E8C-4230-9E1AD726357881BD"
+							uniqueguid="EF525CC2-0E8C-4230-9E1AD726357881BD"
+							componentimage="1A1E3F72-2208-4DB0-8D960FA10C73A03F"
+							height="69"
+							margin="5.00,5.00,5.00,5.00"/>
+					</imagemetrics>
+					<component_text
+						textvalign="Center"
+						textxoffset="26.00,0.00"
+						font_m_size="12"
+						font_m_colour="#A0FF37FF"
+						font_m_leading="3"
+						fontcat_name="fe_tooltip_green"/>
+				</default>
+			</states>
+		</template_unit_card>
+		<template_unit_set_text
+			this="E618CD4B-1A69-495F-8DACEA01ACE4C9F4"
+			id="template_unit_set_text"
+			offset="40.00,20.00"
+			allowverticalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="E618CD4B-1A69-495F-8DACEA01ACE4C9F4"
+			currentstate="160CC192-FADE-4AC4-B14A198D7EF966F2"
+			defaultstate="160CC192-FADE-4AC4-B14A198D7EF966F2">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoString"
+					context_function_id="Value"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="160CC192-FADE-4AC4-B14A198D7EF966F2"
+					name="default"
+					width="1"
+					height="20"
+					uniqueguid="160CC192-FADE-4AC4-B14A198D7EF966F2">
+					<component_text
+						texthbehaviour="Resize"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"
+						font_colour_override_preset_key="fabulous_pink"/>
+				</default>
+			</states>
+		</template_unit_set_text>
+		<unit_card_list
+			this="6F5078B9-91E0-4486-81CB7ED2D3CC7737"
+			id="unit_card_list"
+			offset="0.00,109.00"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="6F5078B9-91E0-4486-81CB7ED2D3CC7737"
+			currentstate="373E6C8D-882A-4BDE-930CAC9ADFA4C4D1"
+			defaultstate="373E6C8D-882A-4BDE-930CAC9ADFA4C4D1">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="LayoutStallerCallback"/>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoCampaignCharacterSkill"
+					context_function_id="EffectList.Transform(UnitsFromEffectNotExcluded).Distinct"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="373E6C8D-882A-4BDE-930CAC9ADFA4C4D1"
+					name="default"
+					width="57"
+					height="84"
+					uniqueguid="373E6C8D-882A-4BDE-930CAC9ADFA4C4D1">
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
+				</default>
+			</states>
+			<LayoutEngine
+				type="List"
+				spacing="5.00,0.00"
+				itemsperrow="8"
+				sizetocontent="true"
+				secondary_margins="15.00,10.00"
+				margins="5.00,10.00">
+				<columnwidths>
+					<column width="317"/>
+				</columnwidths>
+			</LayoutEngine>
+		</unit_card_list>
+		<icon
+			this="483A5D4B-4B4D-412D-8E77426A5B24C9A5"
+			id="icon"
+			offset="14.00,0.00"
+			docking="Top Left"
+			dock_offset="14.00,0.00"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="483A5D4B-4B4D-412D-8E77426A5B24C9A5"
+			currentstate="A324401C-5BD7-40B7-938CDDA483D7D567"
+			defaultstate="A324401C-5BD7-40B7-938CDDA483D7D567">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoEffect"
+					context_function_id="IconPath"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="297A4687-5D5C-4DFC-92528BE318D5D398"
+					uniqueguid="297A4687-5D5C-4DFC-92528BE318D5D398"
+					imagepath="ui/skins/default/army.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="A324401C-5BD7-40B7-938CDDA483D7D567"
+					name="NewState"
+					width="52"
+					height="10"
+					uniqueguid="A324401C-5BD7-40B7-938CDDA483D7D567">
+					<imagemetrics>
+						<image
+							this="B84122CD-4C27-494E-99149D72E3DF13BF"
+							uniqueguid="B84122CD-4C27-494E-99149D72E3DF13BF"
+							componentimage="297A4687-5D5C-4DFC-92528BE318D5D398"
+							width="24"
+							height="24"
+							dockpoint="Top Left"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<component_text
+						textxoffset="44.00,6.00"
+						textyoffset="4.00,6.00"
+						texthbehaviour="Resize"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
+				</newstate>
+			</states>
+		</icon>
+		<template_entry
+			this="E2652DFB-5FF2-4A17-BE7DCDBD89FC8274"
+			id="template_entry"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="E2652DFB-5FF2-4A17-BE7DCDBD89FC8274"
+			currentstate="F907EC7D-C786-4873-BE843DF06B7A34E8"
+			defaultstate="F907EC7D-C786-4873-BE843DF06B7A34E8">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoEffect"
+					context_function_id="LocalisedText"/>
+				<callback_with_context
+					callback_id="AbilityEffectIcon"
+					context_object_id="CcoEffect"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="F907EC7D-C786-4873-BE843DF06B7A34E8"
+					name="default"
+					width="314"
+					height="26"
+					interactive="true"
+					uniqueguid="F907EC7D-C786-4873-BE843DF06B7A34E8">
+					<component_text
+						text="Example effect"
+						textxoffset="44.00,20.00"
+						textyoffset="4.00,6.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_a2c026f1"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
+				</default>
+			</states>
+		</template_entry>
 	</components>
 </layout>
