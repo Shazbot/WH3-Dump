@@ -85,8 +85,8 @@ our_armies_full_stack_full_hp	resource_mobile	our_armies		union	pick_all
 our_armies_high_hp	resource_mobile	our_armies		union	pick_all			
 our_armies_low_hp	resource_mobile	our_armies		union	pick_all			
 our_armies_positions	region	our_armies		union	pick_all			
-our_armies_positions_recruit	region	our_armies		union	pick_all			
-our_armies_recruit	resource_mobile	our_armies	our_armies_at_home_in_recruit_stance	union	pick_all			
+our_armies_positions_recruit	region	our_armies_recruit		union	pick_all			
+our_armies_recruit	resource_mobile	our_armies_at_home_in_recruit_stance		union	pick_all			
 our_armies_with_at_least_14_units	resource_mobile	our_armies		union	pick_all			
 our_armies_with_max_16_units	resource_mobile	our_armies		union	pick_all			
 our_armies_with_max_18_units	resource_mobile	our_armies		union	pick_all			
@@ -130,8 +130,9 @@ our_faction_leader_position_extended_range_3	region	our_faction_leader_position	
 our_faction_no_ports	faction	our_faction		union	pick_all			
 our_faction_past_turn_50_more_than_6_settlements	faction	our_faction		union	pick_all			
 our_faction_provinces	faction_province	our_faction		union	pick_all			
+our_faction_provinces_enemy_agents	faction_province	our_faction_provinces	enemy_agents	intersection	pick_all			
 our_faction_provinces_enemy_army	faction_province	our_faction_provinces	enemy_military_forces	intersection	pick_all			
-our_faction_provinces_recruit	faction_province	our_armies_recruit		union	pick_all			
+our_faction_provinces_recruit	faction_province	our_armies_recruit	our_faction_provinces	intersection	pick_all			
 our_faction_provinces_with_100_public_order	faction_province	our_faction_provinces		union	pick_all			
 our_faction_recruiting	faction	our_faction	our_faction_provinces_recruit	union	pick_all			
 our_faction_turn_0_50	faction	our_faction		union	pick_all			
@@ -145,7 +146,7 @@ our_provinces	province	our_regions		union	pick_all
 our_regions	region	our_faction		union	pick_all			
 our_regions_extended_range_1	region	our_regions		union	pick_all		grow_regions_from_seeds	
 our_regions_extended_range_3	region	our_regions		union	pick_all		grow_regions_from_seeds	wh3_domain_variable_set_region_range_3
-our_regions_own_armies	region	our_armies_positions_recruit		union	pick_all			
+our_regions_own_armies	region	our_armies_positions		union	pick_all			
 our_regions_with_100_public_order	region	our_faction_provinces_with_100_public_order		union	pick_all			
 our_regions_with_high_quality_units_recruitable	region	our_regions		union	pick_all			
 our_regions_with_high_variety_units_recruitable	region	our_regions		union	pick_all			

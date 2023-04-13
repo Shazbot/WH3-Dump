@@ -1,5 +1,10 @@
 key	expression	display_only_active_effects
 #building_effect_context_expressions_tables;1;db/building_effect_context_expressions_tables/data__		
+CHDRawMaterialsGreaterThan125	Owner.ModelPooledResourceContext("wh3_dlc23_chd_raw_materials").Total >= 125	false
+CHDRawMaterialsGreaterThan150	Owner.ModelPooledResourceContext("wh3_dlc23_chd_raw_materials").Total >= 150	false
+CHDRawMaterialsGreaterThan250	Owner.ModelPooledResourceContext("wh3_dlc23_chd_raw_materials").Total >= 250	false
+CHDRawMaterialsGreaterThan50	Owner.ModelPooledResourceContext("wh3_dlc23_chd_raw_materials").Total >= 50	false
+CHDRawMaterialsGreaterThan75	Owner.ModelPooledResourceContext("wh3_dlc23_chd_raw_materials").Total >= 75	false
 DEFSlavesGreaterThan100	Owner.ModelPooledResourceContext("def_slaves").Total >= 100	false
 DEFSlavesGreaterThan1000	Owner.ModelPooledResourceContext("def_slaves").Total >= 1000	false
 DEFSlavesGreaterThan150	Owner.ModelPooledResourceContext("def_slaves").Total >= 150	false
@@ -16,17 +21,29 @@ FavouredCorruptionUndivided	Owner.IsInFactionSet("FavouredCorruptionUndivided") 
 FavouredCorruptionVampiric	Owner.IsInFactionSet("FavouredCorruptionVampiric") == true	true
 GDPGreaterThan300	Region.GDP >= 300	false
 GrowthGreaterThan200	Region.Growth >= 200	false
-GrowthGreaterThan200DPare5	Region.Growth >= 200 || Region.DevelopmentPoints >= 5	false
+GrowthGreaterThan200DPare5	Region.GrowthPerTurn >= 200 || Region.DevelopmentPoints >= 5	false
 GrowthPerTurnGreaterThan200	Region.GrowthPerTurn >= 200	false
 HasAzazelUpgradeTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_sla_azazel_buildings")	true
+HasCHDChaosCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_sorcery_2")	false
+HasCHDHashutInfluenceTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_sorcery_17")	false
+HasCHDLogisticsTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_industry_16")	false
+HasCHDResourceArmamentsTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_industry_17")	false
+HasCHDResourceIncomeTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_industry_18")	false
+HasCHDResourceRawMaterialsTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_industry_9")	false
+HasCHDScavengerIncomeTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_industry_13")	false
+HasCHDTowerInfluenceTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_sorcery_20")	false
 HasFestusUpgradeTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_nur_festus_buildings")	true
 HasFinalOgreCampTech	Owner.IsTechnologyResearched("wh3_main_tech_ogr_2_11_0")	false
 HasKhoCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_kho_shared_gift_upgrade_corruption")	true
 HasMarkedHeroesTech	 Owner.IsTechnologyResearched("wh3_dlc20_chs_kho_valkia_heroes_lords") ||  Owner.IsTechnologyResearched("wh3_dlc20_chs_nur_festus_heroes_lords")  || Owner.IsTechnologyResearched("wh3_dlc20_chs_sla_azazel_heroes_lords") || Owner.IsTechnologyResearched("wh3_dlc20_chs_tze_vilitch_heroes_lords")	true
+HasNotToZFactoryConclaveSeat	Owner.IsEffectBundleActive("wh3_dlc23_ritual_chd_toz_slot_t2_industry_2") == false	true
+HasNotUpgradedMegaMortar	Owner.IsEffectBundleActive("wh3_dlc23_ritual_chd_toz_slot_t2_military_2") == false	true
 HasNurCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_nur_shared_gift_upgrade_corruption")	true
 HasSlaCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_sla_shared_gift_upgrade_corruption")	true
+HasToZFactoryConclaveSeat	Owner.IsEffectBundleActive("wh3_dlc23_ritual_chd_toz_slot_t2_industry_2") == true	true
 HasTzeCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_tze_shared_gift_upgrade_corruption")	true
 HasUndCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_und_shared_corruption")	true
+HasUpgradedMegaMortar	Owner.IsEffectBundleActive("wh3_dlc23_ritual_chd_toz_slot_t2_military_2") == true	true
 HasValkiaUpgradeTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_kho_valkia_buildings")	true
 HasVilitchUpgradeTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_tze_vilitch_buildings")	true
 HasWoCGenBuildingTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_und_shared_building")	false
@@ -34,8 +51,10 @@ IsAgentPresentOwn	Region.IsAnyOwnAgentPresent	false
 IsBretonnia	Owner.CultureKey == "wh_main_brt_bretonnia"	true
 IsChampionsFaction	Owner.IsInFactionSet("champions_factions")	true
 IsChaosCampaign	CampaignModelRoot.CampaignKey == "wh3_main_chaos"	true
+IsFactionAstragoth	Owner.RecordKeyIsOneOf("wh3_dlc23_chd_astragoth")	true
 IsFactionAzazel	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_azazel")	true
 IsFactionAzazelOrSigvald	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_azazel", "wh3_dlc20_chs_sigvald")	true
+IsFactionDrazhoath	Owner.RecordKeyIsOneOf("wh3_dlc23_chd_legion_of_azgorh")	true
 IsFactionFestus	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_festus")	true
 IsFactionMalus	Owner.RecordKeyIsOneOf("wh2_main_def_hag_graef")	true
 IsFactionMorathi	Owner.RecordKeyIsOneOf("wh2_main_def_cult_of_pleasure")	true
@@ -51,19 +70,27 @@ IsFactionRogueVampiric	Owner.RecordKeyIsOneOf("wh2_dlc11_cst_shanty_shark_straig
 IsFactionValkia	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_valkia")	true
 IsFactionVilitch	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_vilitch")	true
 IsFactionYvresse	Owner.RecordKeyIsOneOf("wh2_main_hef_yvresse")	true
+IsFactionZhatan	Owner.RecordKeyIsOneOf("wh3_dlc23_chd_zhatan")	true
 IsGeneralPresentEnemy	Region.IsAnyEnemyMilitaryForcePresent	false
 IsGeneralPresentInProvince	Province.IsAnyMilitaryForcePresent	false
 IsGeneralPresentOwn	Region.IsOwnMilitaryForcePresent	false
+IsImmortalEmpires	CampaignModelRoot.CampaignKey == "wh3_main_combi"	true
 IsKholek	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_kholek")	true
 IsKroqGar	Owner.RecordKeyIsOneOf("wh2_main_lzd_last_defenders")	true
 IsNotChampionsFaction	Owner.IsInFactionSet("champions_factions") == false	true
 IsNotChampionsOrSigvaldFaction	Owner.IsInFactionSet("champions_factions") == false && Owner.RecordKeyIsOneOf("wh3_dlc20_chs_sigvald") == false	true
+IsNotChaosDwarfs	Region.Owner.CultureKey != "wh3_dlc23_chd_chaos_dwarfs"	true
 IsNotFactionFestus	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_festus") == false	true
+IsOwnershipProductGotrekFelixUnlocked	Owner.IsOwnershipProductUnlocked("TW_WH2_GOTREK_FELIX") == true	true
 IsRegionBeastmen	Region.Owner.CultureKey == "wh_dlc03_bst_beastmen"	true
+IsRegionChaosDwarfs	Region.Owner.CultureKey == "wh3_dlc23_chd_chaos_dwarfs"	true
 IsRegionNorsca	Region.Owner.CultureKey == "wh_dlc08_nor_norsca"	false
 IsRegionTombKing	Region.Owner.CultureKey == "wh2_dlc09_tmb_tomb_kings"	true
+IsSPChaosCampaign	CampaignModelRoot.CampaignKey == "wh3_main_chaos" && CampaignModelRoot.IsMultiplayer == false	true
 NotDwarf	Owner.CultureKey != "wh_main_dwf_dwarfs"	false
 PublicOrder100	Region.PublicOrder > 99	false
+PublicOrderGreaterThan-25	Region.PublicOrder >= -25	false
+PublicOrderGreaterThan-50	Region.PublicOrder >= -50	false
 PublicOrderGreaterThan0	Region.PublicOrder > 0	false
 PublicOrderGreaterThan50	Region.PublicOrder > 25	false
 PublicOrderLessThan-50	Region.PublicOrder < -50	false
