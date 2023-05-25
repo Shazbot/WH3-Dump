@@ -101,14 +101,14 @@ function endgame_grudge_too_far:trigger()
 		}
 	}
 
-	for i = 1, #dwarf_regions do 
-		table.insert(objectives[1].conditions, "region "..dwarf_regions[i])
-	end
-
 	local incident_key = "wh3_main_ie_incident_endgame_grudge_too_far"
 	if #dwarf_regions == 0 then
 		-- We somehow don't have any targets - silently exit the scenario
 		return
+	else
+		for i = 1, #dwarf_regions do 
+			table.insert(objectives[1].conditions, "region "..dwarf_regions[i])
+		end
 	end
 
 	cm:activate_music_trigger("ScriptedEvent_Negative", "wh_main_sc_emp_empire")

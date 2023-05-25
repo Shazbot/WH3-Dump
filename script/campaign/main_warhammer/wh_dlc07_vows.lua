@@ -41,7 +41,10 @@ local vow_legendary_lord_cultures = {
 
 local vow_agents = {
 	["wh_main_brt_paladin"] = true,
-	["wh2_dlc14_brt_henri_le_massif"] = true
+	["wh2_dlc14_brt_henri_le_massif"] = true,
+	["wh_main_brt_damsel_heavens"] = true,
+	["wh_dlc07_brt_damsel_beasts"] = true,
+	["wh_dlc07_brt_damsel_life"] = true
 }
 
 function add_vow_progress(character, trait, ai, agents)

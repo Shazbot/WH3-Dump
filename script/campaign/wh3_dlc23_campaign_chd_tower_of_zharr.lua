@@ -544,6 +544,7 @@ function tower_of_zharr:initialise()
 				end
 			end
 
+			local previous_owner = seat.current_owner
 			--set current owner to ritual performing faction
 			seat.current_owner = context:performing_faction():name()
 			common.set_context_value(ritual_key.. "current_owner", seat.current_owner)
@@ -561,6 +562,8 @@ function tower_of_zharr:initialise()
 			else 
 				--check if the owner has specialty affinity with district type
 				self:specialty_district_modifier(district_type, seat.current_owner, true)
+				--check if the previous owner has specialty affinity with district type
+				self:specialty_district_modifier(district_type, previous_owner, false)
 			end
 
 			--call function to handle the scripted ritual payloads
@@ -598,8 +601,8 @@ function tower_of_zharr:initialise()
 		function(context)
 			local faction_name = context:faction():name()
 			local turn = cm:model():turn_number()
-			if turn >= 30 and turn % 15 == 0 then
-				cm:faction_add_pooled_resource(faction_name, "wh3_dlc23_chd_conclave_influence", "wh3_dlc23_chd_conclave_influence_gained_events", 150)
+			if turn > 10 then --Doing this in script because we only want it to happen after turn 10, which the DB doesn't support.
+				cm:faction_add_pooled_resource(faction_name, "wh3_dlc23_chd_conclave_influence", "wh3_dlc23_chd_conclave_influence_gained_events", 7)
 			end
 		end,
 		true
@@ -699,23 +702,7 @@ function tower_of_zharr:specialty_district_ownership(ritual_key, faction_name)
 
 	--check if there is a current owner, if there is remove any specialty bonus current owner has first
 	if specialty_seat.current_owner ~= nil and specialty_seat.current_owner ~= faction_name then
-		
-		for k, s in pairs(seats) do
-			for index, value in pairs(s) do
-				--Set UI States on Load for Seat ownership
-				if index == "current_owner" and value == specialty_seat.current_owner then
-
-					local d_group = districts[s.district_group_key]
-					local d_type = d_group.district_type
-					if d_type == district_key then
-						self:specialty_district_modifier(district_key, specialty_seat.current_owner, false)
-					end
-
-				end
-			end
-		end
-		-- call it one more time to cover that the seat ownership will have already changed prior to this exchange happening which would leave the previous owner faction with a 1 remainder count
-		self:specialty_district_modifier(district_key, specialty_seat.current_owner, false)
+		self:specialty_district_remover(district_key, specialty_seat.current_owner)
 	end
 
 	specialty_seat.current_owner = faction_name
@@ -738,11 +725,22 @@ function tower_of_zharr:specialty_district_ownership(ritual_key, faction_name)
 
 end
 
+function tower_of_zharr:specialty_district_remover(district_key, faction_name)
+	local specialty_seat = self.district_specialties
+	local specialty_district = specialty_seat[district_key]
+	local effect_bundle_prefix = specialty_district.effect_bundle_key
+	
+	if specialty_district ~= nil then
+		cm:remove_effect_bundle(effect_bundle_prefix .. tostring(specialty_district.specialty_seat_counter), faction_name)
+		specialty_district.specialty_seat_counter = 0
+	end
+end
+
 function tower_of_zharr:specialty_district_modifier(district_key, faction_name, modifier_is_addition)
 	
 	local specialty_seat = self.district_specialties
 	local specialty_district = specialty_seat[district_key]
-	if specialty_district ~= nil then
+	if specialty_district ~= nil and specialty_district.current_owner ~= nil then
 		if specialty_district.current_owner == faction_name then
 			
 			local previous_counter = specialty_district.specialty_seat_counter
@@ -754,7 +752,6 @@ function tower_of_zharr:specialty_district_modifier(district_key, faction_name, 
 			end
 
 			local new_counter = specialty_district.specialty_seat_counter
-
 			local effect_bundle_prefix = specialty_district.effect_bundle_key
 
 			if previous_counter > 0 then

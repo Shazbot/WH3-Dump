@@ -1843,7 +1843,7 @@ function prologue_advice_after_second_battle_skills_show_objective()
 				PrologueListenerToJoinGarrison();
 			end
 		);
-
+		
 		core:add_listener(
 			"hide_mission_panel",
 			"PanelClosedCampaign",
@@ -1855,6 +1855,7 @@ function prologue_advice_after_second_battle_skills_show_objective()
 			end,
 			false
 		);
+		
 	end
 end
 

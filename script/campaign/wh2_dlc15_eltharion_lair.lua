@@ -52,7 +52,8 @@ local lair_culture_to_effects = {
 	["wh3_main_sla_slaanesh"] =			"wh2_dlc15_hef_eltharion_dungeon_reward_daemons",
 	["wh3_main_tze_tzeentch"] =			"wh2_dlc15_hef_eltharion_dungeon_reward_daemons",
 	["wh3_main_ogr_ogre_kingdoms"] =	"wh2_dlc15_hef_eltharion_dungeon_reward_ogre_kingdoms",
-	["wh2_main_rogue"] =				"wh2_dlc15_hef_eltharion_dungeon_reward_rogue_armies"
+	["wh2_main_rogue"] =				"wh2_dlc15_hef_eltharion_dungeon_reward_rogue_armies",
+	["wh3_dlc23_chd_chaos_dwarfs"] =	"wh2_dlc15_hef_eltharion_dungeon_reward_chaos_dwarfs"
 };
 local lair_action_effects = {
 	"wh2_dlc15_hef_dungeon_mistwalker_upgrade_wood_elves",
@@ -74,7 +75,8 @@ local lair_action_effects = {
 	"wh2_dlc15_hef_dungeon_mistwalker_upgrade_cathay",
 	"wh2_dlc15_hef_dungeon_mistwalker_upgrade_daemons",
 	"wh2_dlc15_hef_dungeon_mistwalker_upgrade_kislev",
-	"wh2_dlc15_hef_dungeon_mistwalker_upgrade_ogre_kingdoms"
+	"wh2_dlc15_hef_dungeon_mistwalker_upgrade_ogre_kingdoms",
+	"wh2_dlc15_prison_action_interrogate_chaos_dwarfs"
 };
 
 function add_eltharion_lair_listeners()

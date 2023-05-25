@@ -118,9 +118,17 @@ function great_game_start()
 				end;
 			end;
 			
-			table.insert(available_gods, god_with_most_settlements);
-			table.insert(available_gods, god_with_most_armies);
-			table.insert(available_gods, god_with_most_money);
+			if god_with_most_settlements then
+				table.insert(available_gods, god_with_most_settlements);
+			end;
+			
+			if god_with_most_armies then
+				table.insert(available_gods, god_with_most_armies);
+			end;
+
+			if god_with_most_money then
+				table.insert(available_gods, god_with_most_money);
+			end;
 			
 			local chosen_god = available_gods[cm:random_number(#available_gods)];
 			
@@ -168,7 +176,10 @@ function great_game_start()
 					local is_belakor = current_faction_name == belakor_faction_key
 					
 					if not is_belakor then
-						interval_string = tonumber(string.sub(common.get_context_value("CampaignRoot.FactionList.FirstContext(FactionRecordContext.Key==\"" .. current_faction_name .. "\").CorruptionCounterContext.ActiveIntervalList.FirstContext.Key"), -1));
+						local corruption_first_active_interval = common.get_context_value("CampaignRoot.FactionList.FirstContext(FactionRecordContext.Key==\"" .. current_faction_name .. "\").CorruptionCounterContext.ActiveIntervalList.FirstContext.Key");
+						if corruption_first_active_interval then
+							interval_string = tonumber(string.sub(corruption_first_active_interval, -1));
+						end;
 					end;
 					
 					if interval_string or is_belakor then

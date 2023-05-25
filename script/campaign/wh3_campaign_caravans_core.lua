@@ -1288,7 +1288,6 @@ function caravans:attach_battle_to_dilemma(
 				{
 					wh3_dlc23_dilemma_chd_convoy_training_camp = true,
 					wh3_dlc23_dilemma_chd_convoy_portals_part_1 = true,
-					wh3_dlc23_dilemma_chd_convoy_way_of_lava = true,
 					wh3_dlc23_dilemma_chd_convoy_quick_way_down = true
 				};	
 

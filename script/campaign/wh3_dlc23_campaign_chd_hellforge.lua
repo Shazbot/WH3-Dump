@@ -48,6 +48,16 @@ hellforge = {
 		bull_centaurs = {count = 0, required_percentage = 20, script_context_to_apply = "cai_faction_script_context_gamma"},
 		flying_beasts = {count = 0, required_percentage = 20, script_context_to_apply = "cai_faction_script_context_delta"}
 	},
+	ror_cost_exclusion = {
+		wh3_dlc23_chd_cav_bull_centaurs_dual_axe_ror = true,
+		wh3_dlc23_chd_inf_chaos_dwarf_blunderbusses_ror = true,
+		wh3_dlc23_chd_inf_chaos_dwarf_warriors_ror = true,
+		wh3_dlc23_chd_inf_infernal_ironsworn_ror = true,
+		wh3_dlc23_chd_veh_iron_daemon_ror = true,
+		wh3_dlc23_chd_veh_iron_daemon_ror_1dreadquake = true,
+		wh_dlc08_nor_art_hellcannon_battery = true,
+		wh_pro04_chs_art_hellcannon_ror_0 = true
+	},
 
 	warmachine_ritual_keys = {
 		wh3_dlc23_chd_ritual_unit_cap_hellcannon = true,
@@ -459,6 +469,12 @@ function hellforge:get_unit_counts_per_set(faction_interface)
 				if self.warmachine_keys_to_extra_carriage_count[unit_key] ~= nil then
 					unit_set_to_count[unit_set] = unit_set_to_count[unit_set] + self.warmachine_keys_to_extra_carriage_count[unit_key]
 				end
+			end
+
+			-- RoR units excluded from upkeep cost
+			if self.ror_cost_exclusion[unit:unit_key()] then
+				local unit_key = unit:unit_key()
+				unit_set_to_count[unit_set] = unit_set_to_count[unit_set] - 1
 			end
 		end
 	end

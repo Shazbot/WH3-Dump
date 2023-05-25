@@ -92,7 +92,8 @@ character_unlocking.character_list = {
 	"ariel",
 	"coeddil",
 	"gorduz",
-	"ulrika"
+	"ulrika",
+	"harald"
 }
 character_unlocking.character_data = {
 	kroak = {
@@ -321,6 +322,37 @@ character_unlocking.character_data = {
 		},
 		trigger_dilemma_key = "wh3_dlc23_neu_ulrika_choice",
 		alt_reward_dilemma_triggered = false
+	},
+	harald = {
+		-- Warriors of Chaos players will get the chance to unlock Harald Hammerstone once their faction leader reaches rank 15
+		-- If there are no human Warriors of Chaos players the strongest AI WoC faction will get Harald after 25 turns
+
+		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
+		ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.turn,
+		unlock_rank = 15,
+		ai_unlock_turn = 25,
+		has_spawned = false,
+		name = "harald",
+		surname = "1924032272", -- Names table ID
+		subtype = "wh3_pro11_chs_cha_harald_hammerstorm",
+		require_dlc = "TW_WH3_PRO11_HARALD_HAMMERSTORM",
+		allowed_cultures = {
+			"wh_main_chs_chaos"
+		},
+		factions_involved = {},
+		mission_keys = "wh3_pro11_mis_chs_harald_hammerstorm_unlock",
+		ancillaries = {
+			"wh3_pro11_anc_enchanted_item_bane_shield",
+			"wh3_pro11_anc_weapon_hammer_of_harry"
+		},
+		mission_chain_keys = {
+			main_warhammer = {
+				"wh3_pro11_mis_chs_harald_hammerstorm_unlock"
+			},
+			wh3_main_chaos = {
+				"wh3_pro11_mis_chs_harald_hammerstorm_unlock"
+			}
+		},
 	}
 }
 
@@ -335,16 +367,19 @@ function character_unlocking:setup_legendary_hero_unlocking()
 		end
 
 		if character and self:character_has_valid_faction_in_campaign(character) then
+			local has_starting_owner = false
 			if current_character.starting_owner_faction then -- Spawn character at game start if playing as starting owner faction
 				local main_faction = cm:get_faction(current_character.starting_owner_faction)
 				if main_faction then
 					main_faction_human = main_faction:is_human()
 				end
-
+				
 				if cm:is_new_game() and main_faction_human then
 					self:spawn_hero(current_character.starting_owner_faction, character)
+					has_starting_owner = true
 				end
-			else
+			end
+			if has_starting_owner == false then
 				if current_character.condition_to_start_unlock == self.character_unlock_condition_types.rank then
 					self:add_listeners_for_character_rank_unlock(character)
 				elseif current_character.condition_to_start_unlock == self.character_unlock_condition_types.quest then
@@ -495,7 +530,7 @@ function character_unlocking:add_ritual_listener(character)
 
 			core:add_listener(
 				faction_name .. character_ritual_success,
-				"ritualCompletedEvent",
+				"RitualCompletedEvent",
 				function(context)
 					return self:is_match_key_from_list(
 						context:ritual():ritual_key(),

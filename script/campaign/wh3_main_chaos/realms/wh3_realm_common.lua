@@ -957,8 +957,10 @@ function setup_realms()
 												cm:set_camera_position(cam_x, cam_y, 13, 0, 10);
 												
 												local char_lookup_str = cm:char_lookup_str(cqi);
+												local belakor = cm:get_character_by_cqi(cqi)
 												cm:set_character_immortality(char_lookup_str, true);
 												cm:add_agent_experience(char_lookup_str, 20, true);
+												cm:force_add_ancillary(belakor, "wh3_main_anc_weapon_blade_of_shadow", true, true);
 											end
 										);
 									end;
@@ -2165,7 +2167,14 @@ function ursuns_roar_cutscene()
 		21
 	);
 	
-	cm:callback(function() cutscene:start() end, 0.2);
+	cm:callback(
+		function()
+			-- clear selection
+			CampaignUI.ClearSelection();
+			cutscene:start()
+		end,
+		0.2)
+	;
 end;
 
 function open_and_initiate_realm(opened_realm, entering_faction)

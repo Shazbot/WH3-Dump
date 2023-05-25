@@ -1189,6 +1189,121 @@ initiative_templates = {
 				return context:garrison_residence():region():settlement():get_climate() == "climate_chaotic";
 			end
 	},
+	-- Harald Hammerstorm Boons
+	-- Kill Karl Franz
+	{
+		["initiative_key"] = "wh3_pro11_character_initiative_chs_harald_hammerstorm_01",																										-- Hellstrider Leader
+		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
+		["condition"] =
+			function(context)
+				local character = context:character();
+
+				local karl_is_participating = false
+				for i = 0, 4 do
+					local is_character = cm:pending_battle_cache_unit_key_exists("wh_main_emp_cha_karl_franz_" .. i)
+					if is_character then
+						karl_is_participating = true
+						break
+					end
+				end
+				
+				return character:won_battle() and karl_is_participating
+			end,
+		["grant_immediately"] = true
+	},
+	-- Kill Legendary Undead character
+	{
+		["initiative_key"] = "wh3_pro11_character_initiative_chs_harald_hammerstorm_02",																										-- Hellstrider Leader
+		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
+		["condition"] =
+			function(context)
+				local character = context:character();
+
+				local legendary_undead_is_participating = false
+				local undead_character_list = {
+					"wh_main_vmp_cha_mannfred_von_carstein_0",
+					"wh_main_vmp_cha_mannfred_von_carstein_2",
+					"wh_main_vmp_cha_mannfred_von_carstein_3",
+					"wh_main_vmp_cha_mannfred_von_carstein_4",
+					"wh2_dlc11_vmp_cha_heinrich_kemmler_1",
+					"wh_main_vmp_cha_heinrich_kemmler",
+					"wh_dlc04_vmp_cha_vlad_von_carstein_0",
+					"wh_pro02_vmp_cha_isabella_von_carstein_0",
+					"wh_pro02_vmp_cha_isabella_von_carstein_2",
+					"wh_pro02_vmp_cha_isabella_von_carstein_4",
+					"wh_dlc04_vmp_cha_helman_ghorst_0",
+					"wh_dlc04_vmp_cha_helman_ghorst_1",
+					"wh2_dlc09_tmb_cha_settra_0",
+					"wh2_dlc09_tmb_cha_settra_1",
+					"wh2_dlc09_tmb_cha_settra_2",
+					"wh2_dlc09_tmb_cha_settra_3",
+					"wh2_dlc09_tmb_cha_khatep_0",
+					"wh2_dlc09_tmb_cha_khatep_1",
+					"wh2_dlc09_tmb_cha_khatep_2",
+					"wh2_dlc09_tmb_cha_khatep_3",
+					"wh2_dlc09_tmb_cha_khalida_0",
+					"wh2_dlc09_tmb_cha_khalida_1",
+					"wh2_dlc09_tmb_cha_khalida_2",
+					"wh2_dlc09_tmb_cha_arkhan_0",
+					"wh2_dlc09_tmb_cha_arkhan_1",
+					"wh2_dlc09_tmb_cha_arkhan_2",
+					"wh2_dlc11_cst_cha_luthor_harkon_0",
+					"wh2_dlc11_cst_cha_luthor_harkon_1",
+					"wh2_dlc11_cst_cha_count_noctilus_0",
+					"wh2_dlc11_cst_cha_count_noctilus_1",
+					"wh2_dlc11_cst_cha_aranessa_0",
+					"wh2_dlc11_cst_cha_aranessa_1",
+					"wh2_dlc11_cst_cha_cylostra_0",
+					"wh2_dlc11_cst_cha_cylostra_1"
+				}
+				for i = 0, #undead_character_list do
+					local is_character = cm:pending_battle_cache_unit_key_exists(undead_character_list[i])
+					if is_character then
+						legendary_undead_is_participating = true
+						break
+					end
+				end
+				
+				return character:won_battle() and legendary_undead_is_participating
+			end,
+		["grant_immediately"] = true
+	},
+	-- Kill a Greater Daemon lord
+	{
+		["initiative_key"] = "wh3_pro11_character_initiative_chs_harald_hammerstorm_03",																										-- Hellstrider Leader
+		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
+		["condition"] =
+			function(context)
+				local character = context:character();
+
+				local found_character_is_participating = false
+				local exalted_daemon_lord_character_list = {
+					"wh3_main_ie_nor_cha_exalted_great_unclean_one_burplesmirk_spewpit",
+					"wh3_main_kho_cha_exalted_bloodthirster_0",
+					"wh3_main_nur_cha_exalted_great_unclean_one_death_0",
+					"wh3_main_nur_cha_exalted_great_unclean_one_nurgle_0",
+					"wh3_main_sla_cha_exalted_keeper_of_secrets_shadow_0",
+					"wh3_main_sla_cha_exalted_keeper_of_secrets_slaanesh_0",
+					"wh3_main_tze_cha_exalted_lord_of_change_metal_0",
+					"wh3_main_tze_cha_exalted_lord_of_change_tzeentch_0",
+					"wh_dlc08_nor_cha_arzik_0",
+					"wh3_main_kho_cha_skarbrand_0",
+					"wh3_main_nur_cha_ku_gath_plaguefather_0",
+					"wh3_main_sla_cha_nkari_0",
+					"wh3_main_tze_cha_kairos_fateweaver_0"
+				}
+				for i = 0, #exalted_daemon_lord_character_list do
+					local is_character = cm:pending_battle_cache_unit_key_exists(exalted_daemon_lord_character_list[i])
+					if is_character then
+						found_character_is_participating = true
+						break
+					end
+				end
+				
+				return character:won_battle() and found_character_is_participating
+			end,
+		["grant_immediately"] = true
+	},
 	["grant_immediately"] = true
 };
 

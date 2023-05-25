@@ -35,6 +35,7 @@ local ingredients_data = {
 			"wh_dlc03_bst_feral_manticore",
 			"wh_dlc06_chs_feral_manticore",
 			"wh_dlc08_nor_feral_manticore",
+			"wh3_dlc23_chd_mon_lammasu",
 			"wh2_dlc15_hef_cha_alastair_1",
 			"wh2_main_hef_cha_alastair_0",
 			"wh2_main_hef_cha_alastair_3",
@@ -72,7 +73,17 @@ local ingredients_data = {
 			"wh_dlc07_brt_cha_alberic_bordeleaux_3",
 			"wh_main_brt_cha_king_louen_leoncoeur_1",
 			"wh_main_brt_cha_lord_2",
-			"wh2_twa03_def_cha_rakarth_2"
+			"wh2_twa03_def_cha_rakarth_2",
+			"wh3_dlc23_chd_cha_daemonsmith_sorcerer_death_lammasu",
+			"wh3_dlc23_chd_cha_daemonsmith_sorcerer_fire_lammasu",
+			"wh3_dlc23_chd_cha_daemonsmith_sorcerer_hashut_lammasu",
+			"wh3_dlc23_chd_cha_daemonsmith_sorcerer_metal_lammasu",
+			"wh3_dlc23_chd_cha_overseer_lammasu",
+			"wh3_dlc23_chd_cha_sorcerer_prophet_death_lammasu",
+			"wh3_dlc23_chd_cha_sorcerer_prophet_fire_lammasu",
+			"wh3_dlc23_chd_cha_sorcerer_prophet_hashut_lammasu",
+			"wh3_dlc23_chd_cha_sorcerer_prophet_metal_lammasu",
+			"wh3_dlc23_chd_cha_zhatan_the_black_lammasu",
 		}
 	},
 	wh2_dlc15_lizard = {
@@ -136,6 +147,8 @@ local ingredients_data = {
 			"wh_main_dwf_veh_gyrobomber",
 			"wh_main_dwf_veh_gyrocopter_0",
 			"wh_main_dwf_veh_gyrocopter_1",
+			"wh3_dlc23_chd_mon_great_taurus",
+			"wh3_dlc23_chd_mon_bale_taurus",
 			"wh_main_grn_art_doom_diver_catapult",
 			"wh2_dlc12_lzd_cha_tiktaqto_1",	-- mounts
 			"wh2_main_lzd_cha_skink_chief_1",
@@ -143,7 +156,26 @@ local ingredients_data = {
 			"wh2_main_lzd_cha_skink_priest_heavens_1",
 			"wh2_dlc12_lzd_cha_skink_chief_red_crested_2",
 			"wh2_dlc12_lzd_cha_tehenhauin_2",
-			"wh_dlc06_grn_cha_wurrzag_1"
+			"wh_dlc06_grn_cha_wurrzag_1",
+			"wh3_dlc23_chd_cha_daemonsmith_sorcerer_death_bale_taurus",
+			"wh3_dlc23_chd_cha_daemonsmith_sorcerer_death_great_taurus",
+			"wh3_dlc23_chd_cha_daemonsmith_sorcerer_fire_bale_taurus",
+			"wh3_dlc23_chd_cha_daemonsmith_sorcerer_fire_great_taurus",
+			"wh3_dlc23_chd_cha_daemonsmith_sorcerer_hashut_bale_taurus",
+			"wh3_dlc23_chd_cha_daemonsmith_sorcerer_hashut_great_taurus",
+			"wh3_dlc23_chd_cha_daemonsmith_sorcerer_metal_bale_taurus",
+			"wh3_dlc23_chd_cha_daemonsmith_sorcerer_metal_great_taurus",
+			"wh3_dlc23_chd_cha_drazhoath_the_ashen_bale_taurus_cinderbreath",
+			"wh3_dlc23_chd_cha_overseer_great_taurus",
+			"wh3_dlc23_chd_cha_sorcerer_prophet_death_bale_taurus",
+			"wh3_dlc23_chd_cha_sorcerer_prophet_death_great_taurus",
+			"wh3_dlc23_chd_cha_sorcerer_prophet_fire_bale_taurus",
+			"wh3_dlc23_chd_cha_sorcerer_prophet_fire_great_taurus",
+			"wh3_dlc23_chd_cha_sorcerer_prophet_hashut_bale_taurus",
+			"wh3_dlc23_chd_cha_sorcerer_prophet_hashut_great_taurus",
+			"wh3_dlc23_chd_cha_sorcerer_prophet_metal_bale_taurus",
+			"wh3_dlc23_chd_cha_sorcerer_prophet_metal_great_taurus",
+			"wh3_dlc23_chd_cha_zhatan_the_black_great_taurus",
 		}
 	},
 	wh2_dlc15_dragon = {
@@ -348,7 +380,12 @@ local ingredients_data = {
 			"wh3_main_tze_mon_spawn_of_tzeentch_0",
 			"wh2_dlc16_wef_mon_zoats",
 			"wh2_dlc16_wef_mon_zoats_ror_0",
-			"wh2_dlc17_bst_inf_centigors_ror_1"
+			"wh2_dlc17_bst_inf_centigors_ror_1",
+			"wh3_dlc23_chd_cav_bull_centaurs_axe",
+			"wh3_dlc23_chd_cav_bull_centaurs_dual_axe",
+			"wh3_dlc23_chd_cav_bull_centaurs_dual_axe_ror",
+			"wh3_dlc23_chd_cav_bull_centaurs_greatweapons",
+			"wh3_dlc23_chd_cha_bull_centaur_taurruk"
 		}
 	},
 	wh2_dlc15_yolk = {
@@ -606,10 +643,10 @@ function add_grom_food_listeners()
 					"ingredient_units_defeated_" .. ingredient,
 					"BattleCompleted",
 					function()
-						return cm:pending_battle_cache_faction_is_involved(grom_faction_key)
+						return cm:pending_battle_cache_faction_won_battle_against_unit(grom_faction_key, data.units_to_defeat)
 					end,
 					function()
-						return cm:pending_battle_cache_faction_won_battle_against_unit(grom_faction_key, data.units_to_defeat)
+						unlock_ingredient(ingredient)
 					end,
 					false
 				)

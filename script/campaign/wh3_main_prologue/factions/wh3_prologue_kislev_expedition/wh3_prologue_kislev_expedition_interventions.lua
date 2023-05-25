@@ -3903,9 +3903,14 @@ function prologue_skills_intervention()
 		true,
 		function(context)
 			selected_skill = true;
+			PrologueRemoveObjective();
+			
+			CampaignUI.ClosePanel("character_details_panel");	
+			cm:callback(function() prologue_advice_post_battle_move_out_001(); end, 1.5);
 		end,
 		false
 	);
+
 
 	core:add_listener(
 		"PanelOpenedCampaignStopScrolling",
@@ -3945,19 +3950,9 @@ function prologue_skills_intervention()
 				prologue_load_check = "during_skills"; 
 				if selected_skill == false then
 					PrologueAddTopicLeader("wh3_prologue_objective_turn_016_01"); 
+				else
+					PrologueRemoveObjective();
 				end
-
-				core:add_listener(
-					"hide_mission_panel",
-					"PanelClosedCampaign",
-					function(context) 
-						return context.string == "character_details_panel" 
-					end,
-					function()
-						prologue_advice_post_battle_move_out_001();
-					end,
-					false
-				);
 			end
 		);
 		

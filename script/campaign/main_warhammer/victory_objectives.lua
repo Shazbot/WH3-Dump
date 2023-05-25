@@ -2913,7 +2913,10 @@ function victory_objectives_ie:trigger_victory_incident(faction, mission_key, in
 	local bundle = self.alignments[faction_alignment][mission_key].payload_bundle
 	local incident_builder = cm:create_incident_builder(incident_key)
 	local payload = cm:create_new_custom_effect_bundle(bundle)
-	payload:set_duration(0)
+	--if the effect bundle is nil skip duration
+	if bundle ~= nil then
+		payload:set_duration(0)
+	end
 	local payload_builder = cm:create_payload()
 	payload_builder:effect_bundle_to_faction(payload)
 	incident_builder:set_payload(payload_builder)

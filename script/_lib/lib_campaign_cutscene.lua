@@ -932,6 +932,7 @@ function campaign_cutscene:start()
 	
 	if cm:is_any_cutscene_running() then
 		script_error(self.name .. " ERROR: cannot start, another cutscene is running!");
+		self:release();
 		return false;
 	end;
 	

@@ -265,10 +265,13 @@ core:add_listener(
 	"CharacterSkillPointAllocated", 
 	true,
 	function(context)
-		if prologue_check_progression["st_skill_point_complete"] == false then
-			-- complete the mission to use a skill point
-			prologue_check_progression["st_skill_point_complete"] = true;
-			PrologueRemoveObjective()
+		if cm:model():is_player_turn() then
+			if prologue_check_progression["st_skill_point_complete"] == false then
+				-- complete the mission to use a skill point
+				prologue_check_progression["st_skill_point_complete"] = true;
+				--PrologueRemoveObjective()
+				cm:remove_objective("wh3_prologue_objective_turn_016_01");
+			end
 		end
 	end,
 	true

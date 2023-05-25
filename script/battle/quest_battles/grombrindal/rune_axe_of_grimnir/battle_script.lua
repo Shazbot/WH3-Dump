@@ -6,8 +6,8 @@ local gc = generated_cutscene:new(true, true);
 --generated_cutscene:add_element(sfx_name, subtitle, camera, min_length, wait_for_vo, wait_for_camera, loop_camera)
 gc:add_element(nil, nil, "gc_medium_absolute_golden_monolith_01_02", 3000, false, false, false);
 gc:add_element("wh_pro01_DWF_Grom_Qbattle_Quest_Rune_Axe_pt_01", "wh_pro01_qb_dwf_grombrindal_rune_axe_pt_01", nil, 4000, false, false, false);
-gc:add_element("wh_pro01_DWF_Grom_Qbattle_Quest_Rune_Axe_pt_02", "wh_pro01_qb_dwf_grombrindal_rune_axe_pt_02", "gc_orbit_ccw_90_medium_commander_front_right_close_low_01", 4000, false, false, false);
-gc:add_element("wh_pro01_DWF_Grom_Qbattle_Quest_Rune_Axe_pt_03", "wh_pro01_qb_dwf_grombrindal_rune_axe_pt_03", nil, 4000, false, false, false);
+gc:add_element("wh_pro01_DWF_Grom_Qbattle_Quest_Rune_Axe_pt_02", "wh_pro01_qb_dwf_grombrindal_rune_axe_pt_02", "gc_orbit_ccw_90_medium_commander_front_right_close_low_01", 4000, true, false, false);
+gc:add_element("wh_pro01_DWF_Grom_Qbattle_Quest_Rune_Axe_pt_03", "wh_pro01_qb_dwf_grombrindal_rune_axe_pt_03", nil, 4000, true, false, false);
 gc:add_element("wh_pro01_DWF_Grom_Qbattle_Quest_Rune_Axe_pt_04", "wh_pro01_qb_dwf_grombrindal_rune_axe_pt_04", "qb_final_position_short", 4000, true, false, false);
 gc:add_element(nil, nil, "gc_orbit_ccw_90_medium_commander_front_close_low_01", 6000, false, false, false);
 gc:add_element(nil,nil, nil, 3000, true, true, false);

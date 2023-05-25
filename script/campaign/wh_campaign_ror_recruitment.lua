@@ -219,7 +219,8 @@ regiments_of_renown = {
 		"wh3_dlc20_chs_mon_giant_mnur_ror",
 		"wh3_twa06_nur_inf_plaguebearers_ror_0",
 		"wh3_twa07_nur_cav_pox_riders_of_nurgle_ror_0",
-		"wh3_twa08_nur_mon_great_unclean_one_0_ror"
+		"wh3_twa08_nur_mon_great_unclean_one_0_ror",
+		"wh3_twa10_nur_inf_nurglings_ror"
 	},
 	-----------------------
 	---- OGRE KINGDOMS ----
@@ -227,7 +228,8 @@ regiments_of_renown = {
 	["wh3_main_sc_ogr_ogre_kingdoms"] = {
 		"wh3_twa06_ogr_inf_maneaters_ror_0",
 		"wh3_twa07_ogr_cav_crushers_ror_0",
-		"wh3_twa08_ogr_mon_stonehorn_0_ror"
+		"wh3_twa08_ogr_mon_stonehorn_0_ror",
+		"wh3_twa10_ogr_inf_gnoblars_ror"
 	},
 	------------------
 	---- SLAANESH ----
@@ -237,7 +239,8 @@ regiments_of_renown = {
 		"wh3_twa07_sla_cav_heartseekers_of_slaanesh_ror_0",
 		"wh3_twa08_sla_mon_keeper_of_secrets_0_ror",
 		"wh_pro04_chs_inf_chaos_warriors_ror_0",
-		"wh3_dlc20_chs_cav_chaos_chariot_msla_ror"
+		"wh3_dlc20_chs_cav_chaos_chariot_msla_ror",
+		"wh3_twa10_sla_inf_marauders_spears_ror"
 	},
 	------------------
 	---- TZEENTCH ----
@@ -247,7 +250,8 @@ regiments_of_renown = {
 		"wh3_dlc20_chs_inf_aspiring_champions_mtze_ror",
 		"wh_pro04_chs_mon_chaos_spawn_ror_0",
 		"wh3_twa07_tze_cav_doom_knights_ror_0",
-		"wh3_twa08_tze_mon_lord_of_change_0_ror"
+		"wh3_twa08_tze_mon_lord_of_change_0_ror",
+		"wh3_twa10_tze_inf_blue_horrors_ror"
 	},	
 	------------------
 	----  KHORNE  ----
@@ -257,7 +261,8 @@ regiments_of_renown = {
 		"wh3_twa06_kho_inf_bloodletters_ror_0",
 		"wh3_twa07_kho_cav_bloodcrushers_ror_0",
 		"wh3_dlc20_kho_cav_skullcrushers_mkho_ror",
-		"wh3_twa08_kho_mon_bloodthirster_0_ror"
+		"wh3_twa08_kho_mon_bloodthirster_0_ror",
+		"wh3_twa10_kho_inf_flesh_hounds_of_khorne_ror"
 	},	
 	------------------
 	----  KISLEV  ----
@@ -265,7 +270,8 @@ regiments_of_renown = {
 	["wh3_main_sc_ksl_kislev"] = { 
 		"wh3_twa06_ksl_inf_tzar_guard_ror_0",
 		"wh3_twa07_ksl_cav_war_bear_riders_ror_0",
-		"wh3_twa08_ksl_mon_elemental_bear_0_ror"
+		"wh3_twa08_ksl_mon_elemental_bear_0_ror",
+		"wh3_twa10_ksl_inf_armoured_kossars_ror"
 	},
 	------------------
 	----  CATHAY  ----
@@ -273,7 +279,8 @@ regiments_of_renown = {
 	["wh3_main_sc_cth_cathay"] = { 
 		"wh3_twa06_cth_inf_dragon_guard_ror_0",
 		"wh3_twa07_cth_cav_jade_longma_riders_ror_0",
-		"wh3_twa08_cth_mon_terracotta_sentinel_0_ror"
+		"wh3_twa08_cth_mon_terracotta_sentinel_0_ror",
+		"wh3_twa10_cth_inf_peasant_archers_ror"
 	},
 	------------------
 	----  CHD  ----

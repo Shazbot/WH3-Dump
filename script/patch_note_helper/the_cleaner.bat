@@ -1,0 +1,1 @@
+type input.txt | findstr /v "properties changed:" | findstr /v "following changes:" | findstr /v "Attributes changed" | findstr /v "Ability Values:" | findstr /v "Changed:" | findstr /v "wh3_" | findstr /v "wh2_" | findstr /v "wh_" > output.txt 

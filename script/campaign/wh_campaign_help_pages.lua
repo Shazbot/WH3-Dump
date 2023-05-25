@@ -10550,7 +10550,8 @@ function setup_campaign_help_pages()
 		hpr_normal("war.camp.hp.slaves.004"),
 		hpr_normal("war.camp.hp.slaves.005"),
 		hpr_normal("war.camp.hp.slaves.006"),
-		hpr_normal("war.camp.hp.slaves.007")
+		hpr_normal("war.camp.hp.slaves.007"),
+		hpr_normal("war.camp.hp.slaves.008")
 	);
 	parser:add_record("campaign_slaves", "script_link_campaign_slaves", "tooltip_campaign_slaves");
 	tp_slaves = tooltip_patcher:new("tooltip_campaign_slaves");

@@ -113,7 +113,8 @@ local panels_not_blocking = {
 	"recruitment_options",
 	"waiting_for_players",
 	"malus_quest_details",
-	"sea_lanes"
+	"sea_lanes",
+	"chd_end_game_teleport"
 };
 
 

@@ -966,7 +966,7 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 
 			local experience = cm:create_new_custom_effect_bundle("wh3_dlc23_dilemma_chd_convoy_experience");
 			experience:add_effect("wh2_main_effect_captives_unit_xp", "force_to_force_own", 2000);
-			experience:set_duration(0);
+			experience:set_duration(1);
 			
 			payload_builder:effect_bundle_to_force(caravan_handle:caravan_force(), experience);
 			payload_builder:text_display("dummy_convoy_training_camp_first");
@@ -1012,6 +1012,11 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			--Decode the string into arguments-- Need to specify the argument encoding
 			--none to decode
 			
+			function extra_move()
+				--check if more than 1 move from the end
+				cm:move_caravan(caravan_handle);
+			end
+			custom_option = extra_move;
 			
 			caravans:attach_battle_to_dilemma(
 				dilemma_name,
@@ -1021,7 +1026,7 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 				nil,
 				nil,
 				nil,
-				nil);
+				custom_option);
 			
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
 			local payload_builder = cm:create_payload();

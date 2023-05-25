@@ -54,6 +54,31 @@ function chaos_dwarf_efficiency:set_efficiency()
 		end,
 		true
 	)
+
+	core:add_listener(
+		"character_is_confederated_in_realm",
+		"FactionJoinsConfederation",
+		true,
+		function(context)
+			local faction = context:confederation()
+			
+			if faction:culture() == "wh3_dlc23_chd_chaos_dwarfs" then
+				local faction_provinces_list = faction:provinces()
+				local faction_provinces_count = faction_provinces_list:num_items()
+
+				for i = 0, faction_provinces_count - 1 do
+					local province = faction_provinces_list:item_at(i)
+					local resource_manager = province:pooled_resource_manager()
+		
+					cm:apply_regular_reset_income(resource_manager)
+					cm:callback(function()
+						self:update_efficiency(resource_manager)
+					end, 0.5)
+				end
+			end
+		end,
+		true
+	);
 end
 
 function chaos_dwarf_efficiency:update_efficiency(resource_manager)

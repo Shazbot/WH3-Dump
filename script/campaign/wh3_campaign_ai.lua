@@ -57,7 +57,7 @@ function campaign_ai_script:setup_listeners()
 				--Skips the human factions
 				faction = context:faction()
 				if cm:turn_number() == 1 and faction:is_human() == false then 
-					return faction:can_be_human()
+					return faction:is_contained_in_faction_set("all_vanilla_playable_factions")
 				else 
 					return false
 				end
@@ -81,7 +81,7 @@ function campaign_ai_script:setup_listeners()
 				--Skips the human factions
 				faction = context:character():faction()
 				if cm:turn_number() == 1 and faction:is_human() == false then 
-					return faction:can_be_human()
+					return faction:is_contained_in_faction_set("all_vanilla_playable_factions")
 				else 
 					return false
 				end

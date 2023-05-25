@@ -63,9 +63,9 @@ local tazrkan_mission_exclusions = {
 local tzarkan_generate_start_mission_count = 1;
 local tzarkan_generate_start_mission_turn = 2;
 -- Maximum number of turns until a mission is guaranteed to trigger
-local tzarkan_max_turns_until_mission = 20;
+local tzarkan_max_turns_until_mission = 12;
 -- Turns before another mission can be issued after one is triggered
-local tzarkan_mission_cooldown_turns = 10;
+local tzarkan_mission_cooldown_turns = 5;
 -- The amount of Possession given for completing a mission
 local tzarkan_possession_reward = 2;
 

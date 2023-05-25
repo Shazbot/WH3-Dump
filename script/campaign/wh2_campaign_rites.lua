@@ -1169,7 +1169,7 @@ end;
 function rite_unlock:start(human_faction_name)
 	local cm = self.cm;
 	
-	if common.tweaker_value("UNLOCK_MINOR_RITUALS") ~= "0" then
+	if common.tweaker_value("UNLOCK_MINOR_RITUALS") == "1" then
 		unlock_rite(human_faction_name, self.rite_key);
 	elseif cm:get_saved_value(self.rite_key .. "_" .. human_faction_name .. "_unlocked") then
 		out.design("Rites -- Not starting listener for rite with key [" .. self.rite_key .. "] for faction [" .. human_faction_name .. "] as they have already been unlocked");
