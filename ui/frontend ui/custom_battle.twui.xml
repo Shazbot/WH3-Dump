@@ -618,6 +618,8 @@
 																					<dy_name this="8EA43B85-A268-4976-85ACF9479774ED0C"/>
 																					<label_cost this="EB170D5C-0A05-4EB1-A9AF7AC7C6660F61"/>
 																					<radio_button this="4BCAFAF8-C0EB-4E05-AE15E474354D888F"/>
+																					<new_content_icon this="0393BA08-B601-4A82-99F42C1F329B7EA6"/>
+																					<free_content_icon this="0368F2D4-B06D-4CCD-974E750C90DDC498"/>
 																				</template_mount_button>
 																				<remove_mount_entry this="E5792616-CFFB-4248-834C8FA2C10BFE3A">
 																					<button_remove_mount this="23060C98-86E5-4943-92C211F21ACD89DB"/>
@@ -36431,7 +36433,7 @@
 		<header
 			this="B76C2938-050B-45A7-88405518FAB294F9"
 			id="header"
-			offset="0.00,70.00"
+			offset="0.00,47.00"
 			allowverticalresize="false"
 			visible="false"
 			tooltipslocalised="true"
@@ -39292,6 +39294,14 @@
 					this="A3DA3F16-2676-4E6D-927D79D894E85EFD"
 					uniqueguid="A3DA3F16-2676-4E6D-927D79D894E85EFD"
 					imagepath="ui/skins/default/icon_mount_chs_barded_steed.png"/>
+				<component_image
+					this="ABF251E7-0EB9-4F5A-A503E782E5BB82DE"
+					uniqueguid="ABF251E7-0EB9-4F5A-A503E782E5BB82DE"
+					imagepath="ui/skins/default/icon_new_content_paid.png"/>
+				<component_image
+					this="204EFC52-A806-4D5F-A5A25324CF7DA4AA"
+					uniqueguid="204EFC52-A806-4D5F-A5A25324CF7DA4AA"
+					imagepath="ui/skins/default/icon_new_content_all.png"/>
 			</componentimages>
 			<states>
 				<default
@@ -39312,6 +39322,58 @@
 							dock_offset="-4.00,0.00"/>
 					</imagemetrics>
 				</default>
+				<free
+					this="35281EF3-B230-40EC-B05B25F4C280FE12"
+					name="free"
+					width="30"
+					height="30"
+					uniqueguid="35281EF3-B230-40EC-B05B25F4C280FE12">
+					<imagemetrics>
+						<image
+							this="5872E775-8CBF-48DF-97447C700F53C624"
+							uniqueguid="5872E775-8CBF-48DF-97447C700F53C624"
+							componentimage="A3DA3F16-2676-4E6D-927D79D894E85EFD"
+							offset="-9.00,-5.00"
+							width="40"
+							height="40"
+							dockpoint="Center"
+							dock_offset="-4.00,0.00"/>
+						<image
+							this="7C6E16F2-5641-4077-B3B630C0FE9A1F35"
+							uniqueguid="7C6E16F2-5641-4077-B3B630C0FE9A1F35"
+							componentimage="204EFC52-A806-4D5F-A5A25324CF7DA4AA"
+							offset="2.00,2.00"
+							width="25"
+							height="25"
+							dockpoint="Center"/>
+					</imagemetrics>
+				</free>
+				<paid
+					this="65B5ED97-0255-4069-A98C70C6BC12E2B8"
+					name="paid"
+					width="30"
+					height="30"
+					uniqueguid="65B5ED97-0255-4069-A98C70C6BC12E2B8">
+					<imagemetrics>
+						<image
+							this="A1183503-95CA-4F10-8B2B31E2B692D949"
+							uniqueguid="A1183503-95CA-4F10-8B2B31E2B692D949"
+							componentimage="A3DA3F16-2676-4E6D-927D79D894E85EFD"
+							offset="-9.00,-5.00"
+							width="40"
+							height="40"
+							dockpoint="Center"
+							dock_offset="-4.00,0.00"/>
+						<image
+							this="0726778E-97A0-4BA4-977DB55DD5CB7658"
+							uniqueguid="0726778E-97A0-4BA4-977DB55DD5CB7658"
+							componentimage="ABF251E7-0EB9-4F5A-A503E782E5BB82DE"
+							offset="2.00,2.00"
+							width="25"
+							height="25"
+							dockpoint="Center"/>
+					</imagemetrics>
+				</paid>
 			</states>
 		</icon>
 		<items_for_selection_list
@@ -39639,6 +39701,10 @@
 							value="recruitment_parent"/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoUnitsCustomBattleMountRecord"
+					context_function_id="MountedUnitContext.UnitDetailsContext.UnitRecordContext.IsOwned"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -40165,6 +40231,20 @@
 						fontcat_name="ingame_text_warhammer3"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
+				<inactive
+					this="AA856561-9F44-43B6-86A4E0704C15F2E1"
+					name="inactive"
+					width="330"
+					height="30"
+					disabled="true"
+					shader_name="brighten_t0"
+					uniqueguid="AA856561-9F44-43B6-86A4E0704C15F2E1">
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFFFE0FF"
+						font_m_leading="3"
+						fontcat_name="ingame_text_warhammer3"/>
+				</inactive>
 			</states>
 			<LayoutEngine
 				type="HorizontalList"
@@ -51359,10 +51439,11 @@
 		<intel_logo
 			this="7493283F-9C01-4A09-A4DE4DE564C9AC05"
 			id="intel_logo"
-			offset="1214.00,651.00"
+			offset="1189.00,651.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			docking="Bottom Right"
+			dock_offset="-25.00,0.00"
 			component_anchor_point="1.00,1.00"
 			priority="1"
 			tooltipslocalised="true"
@@ -52522,7 +52603,7 @@
 		<new_content_icon
 			this="C26B4840-3CDD-4902-9780ABE191994413"
 			id="new_content_icon"
-			offset="-3.00,81.00"
+			offset="-3.00,37.00"
 			visible="false"
 			docking="Bottom Right"
 			dock_offset="2.00,4.00"
@@ -52537,7 +52618,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoMainUnitRecord"
-					context_function_id="IsOwned == false &amp;&amp; OwnershipProductRequirementList.Any((ownershiplist = OwnershipProductRecordList.Filter(IsOwned == false)) =&gt; {ownershiplist.IsEmpty == false &amp;&amp; ownershiplist.Any(IsFlc == false)})"/>
+					context_function_id="IsOwned == false &amp;&amp; OwnershipProductRequirementList.All((ownershiplist = OwnershipProductRecordList.Filter(IsOwned == false)) =&gt; {ownershiplist.IsEmpty == false &amp;&amp; ownershiplist.Any(IsFlc == false) &amp;&amp; ownershiplist.All(IsFlc) == false})"/>
 				<callback_with_context
 					callback_id="ContextLayoutTooltip"
 					context_object_id="CcoMainUnitRecord"
@@ -52566,7 +52647,7 @@
 					this="DE712D46-5074-42F0-A3E6CB4A81A42743"
 					name="active"
 					width="50"
-					height="31"
+					height="75"
 					interactive="true"
 					shader_name="brighten_t0"
 					uniqueguid="DE712D46-5074-42F0-A3E6CB4A81A42743"
@@ -52577,7 +52658,7 @@
 							uniqueguid="8494E19C-1B44-4D5A-B9A5831F258F3793"
 							componentimage="7B053FD8-8CEF-47F6-A5CE20AF49FDDC1D"
 							width="50"
-							height="31"/>
+							height="75"/>
 					</imagemetrics>
 					<transitionmap>
 						<transition
@@ -52590,7 +52671,7 @@
 					this="88F803D3-1932-4BA1-A79B2215A0AB7250"
 					name="hover"
 					width="50"
-					height="31"
+					height="75"
 					interactive="true"
 					shader_name="brighten_t0"
 					shadervars="0.30,0.00,0.00,0.00"
@@ -52602,7 +52683,7 @@
 							uniqueguid="A0AA2677-E1C9-44F5-AB26DF08F37CCCEB"
 							componentimage="7B053FD8-8CEF-47F6-A5CE20AF49FDDC1D"
 							width="50"
-							height="31"/>
+							height="75"/>
 					</imagemetrics>
 					<transitionmap>
 						<transition
@@ -52612,6 +52693,140 @@
 							transition_m_interpolation_property_mask="8"/>
 					</transitionmap>
 				</hover>
+			</states>
+		</new_content_icon>
+		<free_content_icon
+			this="0368F2D4-B06D-4CCD-974E750C90DDC498"
+			id="free_content_icon"
+			offset="32.00,4.00"
+			visible="false"
+			component_anchor_point="1.00,1.00"
+			priority="65"
+			tooltipslocalised="true"
+			uniqueguid="0368F2D4-B06D-4CCD-974E750C90DDC498"
+			isaspectratiolocked="true"
+			currentstate="9950C91E-B745-484F-9B36B199CE774AE6"
+			defaultstate="9950C91E-B745-484F-9B36B199CE774AE6">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoMainUnitRecord"
+					context_function_id="IsOwned == false &amp;&amp; OwnershipProductRequirementList.Any((ownershiplist = OwnershipProductRecordList.Filter(IsOwned == false)) =&gt; {ownershiplist.IsEmpty == false &amp;&amp; ownershiplist.All(IsFlc)})"/>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoMainUnitRecord"
+					context_function_id="CcoRTOwnershipList(List : OwnershipProductRequirementList, Name : Name, IsFree : true)">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/frontend ui/tooltip_required_content"/>
+						<property
+							name="offset_x"
+							value="-5"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCultureRecord"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoUnitsCustomBattleMountRecord"
+					context_function_id="MountedUnitContext.UnitDetailsContext.UnitRecordContext"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="2F06333B-51C7-4440-99256022A0995025"
+					uniqueguid="2F06333B-51C7-4440-99256022A0995025"
+					imagepath="ui/skins/default/icon_new_content_all.png"/>
+			</componentimages>
+			<states>
+				<free
+					this="9950C91E-B745-484F-9B36B199CE774AE6"
+					name="free"
+					width="26"
+					height="26"
+					interactive="true"
+					disabled="true"
+					uniqueguid="9950C91E-B745-484F-9B36B199CE774AE6">
+					<imagemetrics>
+						<image
+							this="AC3176E6-28F3-4E81-A9A4FF459DADC9E8"
+							uniqueguid="AC3176E6-28F3-4E81-A9A4FF459DADC9E8"
+							componentimage="2F06333B-51C7-4440-99256022A0995025"
+							width="25"
+							height="25"
+							dockpoint="Center"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</free>
+			</states>
+		</free_content_icon>
+		<new_content_icon
+			this="0393BA08-B601-4A82-99F42C1F329B7EA6"
+			id="new_content_icon"
+			offset="330.00,0.00"
+			visible="false"
+			component_anchor_point="1.00,1.00"
+			priority="65"
+			tooltipslocalised="true"
+			uniqueguid="0393BA08-B601-4A82-99F42C1F329B7EA6"
+			isaspectratiolocked="true"
+			currentstate="FB49F588-3575-4A5E-88548EE1F6123B6E"
+			defaultstate="FB49F588-3575-4A5E-88548EE1F6123B6E">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoMainUnitRecord"
+					context_function_id="IsOwned == false &amp;&amp; OwnershipProductRequirementList.All((ownershiplist = OwnershipProductRecordList.Filter(IsOwned == false)) =&gt; {ownershiplist.IsEmpty == false &amp;&amp; ownershiplist.Any(IsFlc == false) &amp;&amp; ownershiplist.All(IsFlc) == false})"/>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoMainUnitRecord"
+					context_function_id="CcoRTOwnershipList(List : OwnershipProductRequirementList, Name : Name, IsFree : false)">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/frontend ui/tooltip_required_content"/>
+						<property
+							name="offset_x"
+							value="-5"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCultureRecord"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoUnitsCustomBattleMountRecord"
+					context_function_id="MountedUnitContext.UnitDetailsContext.UnitRecordContext"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="C7F69C82-74CD-451D-98BE4D4A58B000C6"
+					uniqueguid="C7F69C82-74CD-451D-98BE4D4A58B000C6"
+					imagepath="ui/skins/default/icon_new_content_paid.png"/>
+			</componentimages>
+			<states>
+				<paid
+					this="FB49F588-3575-4A5E-88548EE1F6123B6E"
+					name="paid"
+					width="26"
+					height="26"
+					interactive="true"
+					disabled="true"
+					uniqueguid="FB49F588-3575-4A5E-88548EE1F6123B6E">
+					<imagemetrics>
+						<image
+							this="C8F52990-9802-4EFB-A60EB1B6DC5ECAF5"
+							uniqueguid="C8F52990-9802-4EFB-A60EB1B6DC5ECAF5"
+							componentimage="C7F69C82-74CD-451D-98BE4D4A58B000C6"
+							width="25"
+							height="25"
+							dockpoint="Center"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</paid>
 			</states>
 		</new_content_icon>
 	</components>

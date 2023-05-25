@@ -24,14 +24,16 @@
 									<list_box this="F0495761-EBE4-4BCA-914EE42A6808AE82">
 										<playthrough_entry this="7D5B35CD-1FBA-444B-9EAE596DAF51B3E5">
 											<left this="E55FCF09-594C-4320-B804F17070C863A7">
-												<mon this="3C503202-BD3B-4EC9-BC333F4FBEFE1C03"/>
-												<mp_factions_list this="76522630-BBA9-444A-B505B83AEFEC3F04">
-													<faction_icon this="2833255D-BC26-467D-9C9F00168E98AC15"/>
-													<copy_of_faction_icon this="B570EDA8-BE74-4B21-9FE213A2A66C288D"/>
-													<copy_2_of_faction_icon this="E465B88E-1618-4325-AAF1EF9B96CAB02F"/>
-													<copy_3_of_faction_icon this="FBF16B20-E6AF-4FAF-AB1E321421156394"/>
-													<copy_4_of_faction_icon this="93E7EB1E-4112-4FA5-80011E4E8456095A"/>
-												</mp_factions_list>
+												<icon_holder this="AFB603C4-C365-4116-B679FF409A157AFF">
+													<mon this="3C503202-BD3B-4EC9-BC333F4FBEFE1C03"/>
+													<mp_factions_list this="76522630-BBA9-444A-B505B83AEFEC3F04">
+														<faction_icon this="2833255D-BC26-467D-9C9F00168E98AC15"/>
+														<copy_of_faction_icon this="B570EDA8-BE74-4B21-9FE213A2A66C288D"/>
+														<copy_2_of_faction_icon this="E465B88E-1618-4325-AAF1EF9B96CAB02F"/>
+														<copy_3_of_faction_icon this="FBF16B20-E6AF-4FAF-AB1E321421156394"/>
+														<copy_4_of_faction_icon this="93E7EB1E-4112-4FA5-80011E4E8456095A"/>
+													</mp_factions_list>
+												</icon_holder>
 											</left>
 											<center this="E3F1F400-4C0A-44C9-BDC8961A04E6CB6B">
 												<dy_campaign this="68C78B75-A48D-4813-93B4771EE57E6591"/>
@@ -57,6 +59,7 @@
 									<bottom this="BBAE93A0-DEA5-4A4C-B4D1350726E10A6B"/>
 								</vslider>
 							</playthrough_list>
+							<button_delete_playthrough this="DC9BDACE-7BC7-4ECA-A2AE5E5D08D302EC"/>
 						</playthroughs>
 						<savegames this="A07688CF-FFBD-4335-9175D38C4FEAC680">
 							<map_save_parent this="AEB1A3C7-88D3-4D40-885B22FCD9957112">
@@ -178,6 +181,11 @@
 							</button_cancel>
 						</list>
 					</button_holder>
+					<button_fetch_all_saves this="8B5AFEDB-DAB7-4330-AD8EAF8D2CEE8179">
+						<button_flame this="AE4D9327-848B-4519-9E95078F95648639"/>
+						<button_txt this="E767AE07-5C35-404F-87C31B0D07A4ACB3"/>
+						<warning_text this="6520328A-39D7-4C0A-AE23A2BD29546019"/>
+					</button_fetch_all_saves>
 				</footer>
 			</load_save_game>
 		</root>
@@ -469,6 +477,87 @@
 				<element value="ui/skins/default/button_square_large_text_underlay.png"/>
 			</override_images>
 		</button_confirm_save>
+		<button_fetch_all_saves
+			this="8B5AFEDB-DAB7-4330-AD8EAF8D2CEE8179"
+			id="button_fetch_all_saves"
+			template_id="square_large_text_button"
+			part_of_template="true"
+			uniqueguid_in_template="D8275039-5A3B-40C0-974330DBC4409AFD"
+			uniqueguid="8B5AFEDB-DAB7-4330-AD8EAF8D2CEE8179"
+			dimensions="361.00,51.00"
+			dock_point="Bottom Left"
+			tooltips_localised="false"
+			offset="50.00,0.00"
+			priority="55"
+			sound_category="UI_FE_HUD_Start_Campaign_Battle">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="03AFBBB7-BAAE-4A82-9D26222BECCE3010"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="11637CD0-C806-4870-96D13312213DA80D"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="3E0F8491-4FAA-4CDB-9D3A5382B8C8A18B"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="B37C2099-2B51-449D-AFABC97AFB57F1BB"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="7DB11684-9087-4641-90724BF76568D8C2"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_square_large_text_pressed.png"
+					uniqueguid="1521473C-DCDE-4D9C-AF840E0BD7AE2C66"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_square_large_text_active.png"
+					uniqueguid="AE81730D-E670-4A16-8531AF6287089B66"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_square_large_text_hover.png"
+					uniqueguid="EA2677E2-28D1-42BB-B636E0A74780CD8A"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_square_large_text_inactive.png"
+					uniqueguid="F5735B43-FC72-4B80-BD52120B7EE7E466"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_square_large_text_underlay.png"
+					uniqueguid="A3F5310A-E057-47AC-B30CFF78E99AE3AA"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="TextButton"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="override_sound"
+					value=""/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/button_square_large_text_pressed.png"/>
+				<element value="ui/skins/default/button_square_large_text_active.png"/>
+				<element value="ui/skins/default/button_square_large_text_hover.png"/>
+				<element value="ui/skins/default/button_square_large_text_inactive.png"/>
+				<element value="ui/skins/default/button_square_large_text_underlay.png"/>
+			</override_images>
+		</button_fetch_all_saves>
 		<checkbox_cloud
 			this="67552C02-3927-4B44-9016F67A607D05C8"
 			id="checkbox_cloud"
@@ -1372,7 +1461,7 @@
 			part_of_template="true"
 			uniqueguid_in_template="6C253EE7-62DB-42FC-967ED9468F399339"
 			uniqueguid="22CADED7-B939-4B5C-B14F55120ED8F2C6"
-			dimensions="20.00,640.00"
+			dimensions="20.00,629.00"
 			dock_point="Center Right"
 			offset="-5.00,-20.00"
 			priority="55">
@@ -1954,6 +2043,51 @@
 				<element value=""/>
 			</override_images>
 		</button_flame>
+		<button_flame
+			this="AE4D9327-848B-4519-9E95078F95648639"
+			id="button_flame"
+			part_of_template="true"
+			uniqueguid_in_template="43E521B0-0A25-4C22-82FE029058200FF9"
+			uniqueguid="AE4D9327-848B-4519-9E95078F95648639"
+			dimensions="297.00,28.00"
+			dock_point="Center"
+			offset="0.00,-1.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="EBE5C25D-F759-4BCC-8A779995C9C2EEFF"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoStaticObject"
+					context_function_id="self.ParentContext.IsMouseOver &amp;&amp; self.ParentContext.IsDisabled == false">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="callbacks"/>
+				<property
+					name="disable_override1"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+			</override_images>
+		</button_flame>
 		<smoke
 			this="7926FB35-DA03-46DA-AC347D83D6FFE61F"
 			id="smoke"
@@ -2135,6 +2269,40 @@
 					state="inactive"
 					text="Cancel"
 					text_label="_button_cancel_Tooltip_1f006a"/>
+			</localised_texts>
+		</button_txt>
+		<button_txt
+			this="E767AE07-5C35-404F-87C31B0D07A4ACB3"
+			id="button_txt"
+			part_of_template="true"
+			uniqueguid_in_template="BF9E2DF6-9810-4FAE-97B856F2B15FB826"
+			uniqueguid="E767AE07-5C35-404F-87C31B0D07A4ACB3"
+			dimensions="286.00,51.00"
+			dock_point="Center"
+			priority="55">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="020D0399-0F2B-49DC-B514B5EE9C31CA51"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="7851ACF7-E438-4C0C-BD86B781139DC998"/>
+			</state_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					text="Display All Saves"
+					text_label="StateText_9d35f4b"/>
+				<localised_text
+					state="inactive"
+					text="Display All Saves"
+					text_label="StateText_3e6d13e5"/>
 			</localised_texts>
 		</button_txt>
 		<frame_bottom
@@ -3504,6 +3672,7 @@
 			priority="60"
 			tooltipslocalised="true"
 			uniqueguid="E1CE9EA3-3DF9-438D-B31E0EE8BDFF946E"
+			isrelativeresize="true"
 			currentstate="3C29BA1A-9C7A-4B9A-9FA682EFCA6F2D24">
 			<componentimages>
 				<component_image
@@ -3527,7 +3696,7 @@
 							width="427"
 							height="350"
 							colour="#ECE9D8FF"
-							canresizeheight="false"/>
+							isrelativeresize="true"/>
 					</imagemetrics>
 				</newstate>
 			</states>
@@ -4537,7 +4706,7 @@
 					this="5D24F4DD-9450-45AB-B4A11EFC2BC17A5E"
 					name="NewState"
 					width="400"
-					height="690"
+					height="694"
 					uniqueguid="5D24F4DD-9450-45AB-B4A11EFC2BC17A5E">
 					<component_text
 						font_m_size="12"
@@ -4571,7 +4740,7 @@
 					this="453A408F-B730-498C-917F7DB2D35B6E0B"
 					name="NewState"
 					width="440"
-					height="690"
+					height="701"
 					shadervars="0.00,10.00,0.00,10.00"
 					uniqueguid="453A408F-B730-498C-917F7DB2D35B6E0B">
 					<component_text
@@ -5266,14 +5435,11 @@
 					height="75"
 					uniqueguid="6981688B-536C-4DDD-AF715031B399D340"/>
 			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				vertical_alignment="Center"/>
 		</left>
 		<mp_factions_list
 			this="76522630-BBA9-444A-B505B83AEFEC3F04"
 			id="mp_factions_list"
-			offset="0.00,14.00"
+			offset="96.00,14.00"
 			visible="false"
 			priority="55"
 			tooltipslocalised="true"
@@ -5925,5 +6091,297 @@
 				</columnwidths>
 			</LayoutEngine>
 		</load_panel>
+		<warning_text
+			this="6520328A-39D7-4C0A-AE23A2BD29546019"
+			id="warning_text"
+			offset="-51.00,-65.00"
+			allowhorizontalresize="false"
+			docking="Top Left External"
+			dock_offset="110.00,-20.00"
+			component_anchor_point="1.00,1.00"
+			priority="55"
+			tooltipslocalised="true"
+			tooltiplabel="ComponentText_4cfd18b2f"
+			component_level_text="[[col:red]]Warning[[/col]] having a large amount of saves can cause the game to slow down. Which is why we only display the last 25 saves made when opening this panel. If you want to see all saves select the button below."
+			text_label="ComponentText_4cfd18b2"
+			uniqueguid="6520328A-39D7-4C0A-AE23A2BD29546019"
+			currentstate="EA6EB15B-D359-49A7-A727A7C1A1C9B822"
+			defaultstate="EA6EB15B-D359-49A7-A727A7C1A1C9B822">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="EA6EB15B-D359-49A7-A727A7C1A1C9B822"
+					name="default"
+					width="161"
+					height="45"
+					uniqueguid="EA6EB15B-D359-49A7-A727A7C1A1C9B822">
+					<component_text
+						textxoffset="5.00,5.00"
+						textyoffset="5.00,5.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="ComponentText_4cfd18b2"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"/>
+				</default>
+			</states>
+		</warning_text>
+		<button_delete_playthrough
+			this="DC9BDACE-7BC7-4ECA-A2AE5E5D08D302EC"
+			id="button_delete_playthrough"
+			offset="400.00,700.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Bottom Right"
+			component_anchor_point="1.00,1.00"
+			priority="55"
+			tooltipslocalised="true"
+			componentleveltooltip="Delete all saves related to playthrough, only loaded save games from the selection will be deleted"
+			tooltiplabel="ComponentTooltip_99513755"
+			soundcategory="UI_FE_Army_Clear"
+			uniqueguid="DC9BDACE-7BC7-4ECA-A2AE5E5D08D302EC"
+			isaspectratiolocked="true"
+			currentstate="F7F04F94-82EE-47EA-B352DADE1C246603"
+			defaultstate="F7F04F94-82EE-47EA-B352DADE1C246603">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="Button"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="disable_override"
+					value="resizable"/>
+				<property
+					name="disable_override1"
+					value="position"/>
+				<property
+					name="dynamic_image"
+					value="0"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="9081814F-D069-43B0-AE42A472ADBE4374"
+					uniqueguid="9081814F-D069-43B0-AE42A472ADBE4374"
+					imagepath="ui/skins/default/icon_delete.png"/>
+				<component_image
+					this="15A4A9D4-58B6-4A12-81C48B03CBC3F56B"
+					uniqueguid="15A4A9D4-58B6-4A12-81C48B03CBC3F56B"
+					imagepath="ui/skins/default/button_basic_active.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="F7F04F94-82EE-47EA-B352DADE1C246603"
+					name="active"
+					width="40"
+					height="40"
+					interactive="true"
+					uniqueguid="F7F04F94-82EE-47EA-B352DADE1C246603"
+					stateeditordisplaypos="40.00,24.00">
+					<imagemetrics>
+						<image
+							this="8A17A480-A92C-47FC-AA48B3CB3B975181"
+							uniqueguid="8A17A480-A92C-47FC-AA48B3CB3B975181"
+							componentimage="15A4A9D4-58B6-4A12-81C48B03CBC3F56B"
+							width="40"
+							height="40"/>
+						<image
+							this="65EBAAF9-0302-430E-9C929E371BEFA6BA"
+							uniqueguid="65EBAAF9-0302-430E-9C929E371BEFA6BA"
+							componentimage="9081814F-D069-43B0-AE42A472ADBE4374"
+							width="40"
+							height="40"
+							dockpoint="Center"
+							shader_name="brighten_t0"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							transition_m_target_state="86894825-E3B6-4EEE-A5BAAEA6A1FDFCAB"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
+				</active>
+				<down
+					this="AEA511E4-3B3C-4A37-A170DDF8F35F3FD4"
+					name="down"
+					width="40"
+					height="40"
+					interactive="true"
+					uniqueguid="AEA511E4-3B3C-4A37-A170DDF8F35F3FD4"
+					stateeditordisplaypos="145.00,219.00">
+					<imagemetrics>
+						<image
+							this="17503317-954B-4F19-8C08562D5DD09C03"
+							uniqueguid="17503317-954B-4F19-8C08562D5DD09C03"
+							componentimage="15A4A9D4-58B6-4A12-81C48B03CBC3F56B"
+							width="40"
+							height="40"/>
+						<image
+							this="BE417A4C-35B0-456A-97E3A989C4199E34"
+							uniqueguid="BE417A4C-35B0-456A-97E3A989C4199E34"
+							componentimage="9081814F-D069-43B0-AE42A472ADBE4374"
+							offset="0.00,2.00"
+							width="40"
+							height="40"
+							colour="#C0C0C0FF"
+							dockpoint="Center"
+							dock_offset="0.00,2.00"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="3"
+							transition_m_target_state="86894825-E3B6-4EEE-A5BAAEA6A1FDFCAB"/>
+						<transition
+							index="1"
+							transition_m_target_state="63FC54DA-8BCA-4DA8-89CBE5DE4DFDB242"/>
+					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"
+						textshadervars="0.30,0.00,0.00,0.00"/>
+				</down>
+				<down_off
+					this="63FC54DA-8BCA-4DA8-89CBE5DE4DFDB242"
+					name="down_off"
+					width="40"
+					height="40"
+					interactive="true"
+					uniqueguid="63FC54DA-8BCA-4DA8-89CBE5DE4DFDB242"
+					stateeditordisplaypos="40.00,319.00">
+					<imagemetrics>
+						<image
+							this="9A5A96AD-7344-4D44-A913A8AA65737CCD"
+							uniqueguid="9A5A96AD-7344-4D44-A913A8AA65737CCD"
+							componentimage="15A4A9D4-58B6-4A12-81C48B03CBC3F56B"
+							width="40"
+							height="40"/>
+						<image
+							this="ACA17CC8-F4C7-4926-B39191100ACEFC3E"
+							uniqueguid="ACA17CC8-F4C7-4926-B39191100ACEFC3E"
+							componentimage="9081814F-D069-43B0-AE42A472ADBE4374"
+							width="40"
+							height="40"
+							dockpoint="Center"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition transition_m_target_state="AEA511E4-3B3C-4A37-A170DDF8F35F3FD4"/>
+						<transition
+							index="8"
+							transition_m_target_state="F7F04F94-82EE-47EA-B352DADE1C246603"/>
+					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
+				</down_off>
+				<hover
+					this="86894825-E3B6-4EEE-A5BAAEA6A1FDFCAB"
+					name="hover"
+					width="40"
+					height="40"
+					interactive="true"
+					uniqueguid="86894825-E3B6-4EEE-A5BAAEA6A1FDFCAB"
+					stateeditordisplaypos="137.00,126.00">
+					<imagemetrics>
+						<image
+							this="E18BDB18-E841-4BEF-BBE2611C73F8394F"
+							uniqueguid="E18BDB18-E841-4BEF-BBE2611C73F8394F"
+							componentimage="15A4A9D4-58B6-4A12-81C48B03CBC3F56B"
+							width="40"
+							height="40"/>
+						<image
+							this="94C27141-C462-49C7-8F97A5748B827FED"
+							uniqueguid="94C27141-C462-49C7-8F97A5748B827FED"
+							componentimage="9081814F-D069-43B0-AE42A472ADBE4374"
+							width="40"
+							height="40"
+							dockpoint="Center"
+							shader_name="brighten_t0"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="F7F04F94-82EE-47EA-B352DADE1C246603"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+						<transition
+							index="2"
+							transition_m_target_state="AEA511E4-3B3C-4A37-A170DDF8F35F3FD4"/>
+					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"
+						textshadervars="0.30,0.00,0.00,0.00"/>
+				</hover>
+				<inactive
+					this="4B88FED8-35FB-4C8C-9E4983F8029BA474"
+					name="inactive"
+					width="40"
+					height="40"
+					disabled="true"
+					uniqueguid="4B88FED8-35FB-4C8C-9E4983F8029BA474">
+					<imagemetrics>
+						<image
+							this="2864C205-88F4-420A-B9CE3A5481C0DB1B"
+							uniqueguid="2864C205-88F4-420A-B9CE3A5481C0DB1B"
+							componentimage="15A4A9D4-58B6-4A12-81C48B03CBC3F56B"
+							width="40"
+							height="40"/>
+						<image
+							this="0069319E-68F5-4B78-8B9DE8D0B8C0BDF8"
+							uniqueguid="0069319E-68F5-4B78-8B9DE8D0B8C0BDF8"
+							componentimage="9081814F-D069-43B0-AE42A472ADBE4374"
+							width="40"
+							height="40"
+							colour="#FFFFFF46"
+							dockpoint="Center"/>
+					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"/>
+				</inactive>
+			</states>
+		</button_delete_playthrough>
+		<icon_holder
+			this="AFB603C4-C365-4116-B679FF409A157AFF"
+			id="icon_holder"
+			allowverticalresize="false"
+			priority="55"
+			tooltipslocalised="true"
+			uniqueguid="AFB603C4-C365-4116-B679FF409A157AFF"
+			currentstate="EAC87736-54DD-49E8-BA287180FF06E317"
+			defaultstate="EAC87736-54DD-49E8-BA287180FF06E317">
+			<states>
+				<default
+					this="EAC87736-54DD-49E8-BA287180FF06E317"
+					name="default"
+					width="97"
+					height="75"
+					uniqueguid="EAC87736-54DD-49E8-BA287180FF06E317"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				vertical_alignment="Center">
+				<columnwidths>
+					<:anonymous column_width="97"/>
+				</columnwidths>
+			</LayoutEngine>
+		</icon_holder>
 	</components>
 </layout>

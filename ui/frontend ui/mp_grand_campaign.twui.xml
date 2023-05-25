@@ -412,7 +412,11 @@
 				<callback_with_context
 					callback_id="ContextCommandLeftClick"
 					context_object_id="CcoMPCampaignLobby"
-					context_function_id="(unselected_lords = UnselectedLords.Filter(FrontendFactionLeaderRecordContext.Key != StoredContextFromParent(&quot;CcoLobbyPlayer&quot;).CurrentLordContext.FrontendFactionLeaderRecordContext.Key)) =&gt;{StoredContextFromParent(&quot;CcoLobbyPlayer&quot;).SetLord(unselected_lords[TrueRandomInRange(0, unselected_lords.Size - 1)])}"/>
+					context_function_id="(unselected_lords = UnselectedLords.Filter(FrontendFactionLeaderRecordContext.Key != StoredContextFromParent(&quot;CcoLobbyPlayer&quot;).CurrentLordContext.FrontendFactionLeaderRecordContext.Key)) =&gt;{StoredContextFromParent(&quot;CcoLobbyPlayer&quot;).SetLord(unselected_lords.At(TrueRandomInRange(0, unselected_lords.Size - 1)))}"/>
+				<callback_with_context
+					callback_id="ContextInactiveStateSetter"
+					context_object_id="CcoMPCampaignLobby"
+					context_function_id="IsResumed == false"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -13421,7 +13425,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoFrontendFactionLeader"
-					context_function_id="FactionRecordContext.OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc)"/>
+					context_function_id="FactionRecordContext.OwnershipProductRequirementList.IsEmpty == false &amp;&amp; FactionRecordContext.OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc)"/>
 				<callback_with_context
 					callback_id="ContextLayoutTooltip"
 					context_object_id="CcoFrontendFactionLeader"
@@ -13513,7 +13517,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoFrontendFactionLeader"
-					context_function_id="FactionRecordContext.OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc == false)"/>
+					context_function_id="FactionRecordContext.OwnershipProductRequirementList.IsEmpty == false &amp;&amp; FactionRecordContext.OwnershipProductRequirementList.All(OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc == false))"/>
 				<callback_with_context
 					callback_id="ContextLayoutTooltip"
 					context_object_id="CcoFrontendFactionLeader"

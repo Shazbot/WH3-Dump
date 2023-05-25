@@ -7178,7 +7178,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoComponent"
-					context_function_id="GetIfElse(&#10;  FrontendRoot.IngameMessagingContext.IsReady,&#10;  (begin_index = (this.ChildIndex - 1) * 3, items = FrontendRoot.IngameMessagingContext.FilteredNewsItems) =&gt; &#10;  {&#10;    items[begin_index : GetIfElse(begin_index + 3 &gt; items.Size, items.Size, begin_index + 3)]&#10;  },&#10;  Generate(3))">
+					context_function_id="GetIfElse(&#10;  FrontendRoot.IngameMessagingContext.IsReady,&#10;  (begin_index = (this.ChildIndex - 1) * 3, items = FrontendRoot.IngameMessagingContext.FilteredNewsItems) =&gt; &#10;  {&#10;    items.Skip(begin_index).Take(GetIfElse(begin_index + 3 &gt; items.Size, items.Size, begin_index + 3))&#10;  },&#10;  Generate(3))">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -16522,7 +16522,7 @@
 				<callback_with_context
 					callback_id="ContextCommandLeftClick"
 					context_object_id="CcoStaticObject"
-					context_function_id="(selection_parent = Component(&quot;0953F6E6-AB6E-4F5C-AEABD03605A15298&quot;),&#10; current_selection = selection_parent.CurrentSelection.SelectedObjectList.FirstContext,&#10; current_index = current_selection.ChildIndex) =&gt; {&#10; &#10;  DoIf(&#10;    current_index != current_selection.ParentContext.ChildList.Size - 1,&#10;    selection_parent.SelectContext(current_selection.ParentContext.ChildList[current_index + 1]))&#10;  &#10;}"/>
+					context_function_id="(selection_parent = Component(&quot;0953F6E6-AB6E-4F5C-AEABD03605A15298&quot;),&#10; current_selection = selection_parent.CurrentSelection.SelectedObjectList.FirstContext,&#10; current_index = current_selection.ChildIndex) =&gt; {&#10; &#10;  DoIf(&#10;    current_index != current_selection.ParentContext.ChildList.Size - 1,&#10;    selection_parent.SelectContext(current_selection.ParentContext.ChildList.At(current_index + 1)))&#10;  &#10;}"/>
 				<callback_with_context
 					callback_id="ContextSelectionPropagator"
 					context_object_id="CcoComponent">
@@ -16782,7 +16782,7 @@
 				<callback_with_context
 					callback_id="ContextCommandLeftClick"
 					context_object_id="CcoStaticObject"
-					context_function_id="(selection_parent = Component(&quot;0953F6E6-AB6E-4F5C-AEABD03605A15298&quot;),&#10; current_selection = selection_parent.CurrentSelection.SelectedObjectList.FirstContext,&#10; current_index = current_selection.ChildIndex) =&gt; {&#10; &#10;  DoIf(&#10;    current_index != 1,&#10;    selection_parent.SelectContext(current_selection.ParentContext.ChildList[current_index - 1]))&#10;  &#10;}"/>
+					context_function_id="(selection_parent = Component(&quot;0953F6E6-AB6E-4F5C-AEABD03605A15298&quot;),&#10; current_selection = selection_parent.CurrentSelection.SelectedObjectList.FirstContext,&#10; current_index = current_selection.ChildIndex) =&gt; {&#10; &#10;  DoIf(&#10;    current_index != 1,&#10;    selection_parent.SelectContext(current_selection.ParentContext.ChildList.At(current_index - 1)))&#10;  &#10;}"/>
 				<callback_with_context
 					callback_id="ContextStateSetterConditional"
 					context_object_id="CcoComponent">

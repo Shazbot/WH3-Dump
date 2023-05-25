@@ -1097,7 +1097,7 @@
 				<callback_with_context
 					callback_id="ContextCommandLeftClick"
 					context_object_id="CcoCampaignStartInfo"
-					context_function_id="Do((permitted_cultures = OwnedCultureList.Filter(Key != StoredContext(&quot;CcoCultureRecord&quot;, &quot;list_box&quot;, &quot;lord_select_list&quot;).Key)) =&gt; { DoIf(permitted_cultures.IsEmpty == false, Component(&quot;culture_list&quot;).SelectContext(permitted_cultures[TrueRandomInRange(0, permitted_cultures.Size - 1)]))  }, (lords = OwnedLordListForFaction(StoredContext(&quot;CcoCultureRecord&quot;, &quot;list_box&quot;, &quot;lord_select_list&quot;))) =&gt; { DoIf(lords.IsEmpty == false, Component(&quot;list_box&quot;, &quot;lord_select_list&quot;).SelectContext(lords[TrueRandomInRange(0, lords.Size - 1)])) })"/>
+					context_function_id="Do((permitted_cultures = OwnedCultureList.Filter(Key != StoredContext(&quot;CcoCultureRecord&quot;, &quot;list_box&quot;, &quot;lord_select_list&quot;).Key)) =&gt; { DoIf(permitted_cultures.IsEmpty == false, Component(&quot;culture_list&quot;).SelectContext(permitted_cultures.At(TrueRandomInRange(0, permitted_cultures.Size - 1))))  }, (lords = OwnedLordListForFaction(StoredContext(&quot;CcoCultureRecord&quot;, &quot;list_box&quot;, &quot;lord_select_list&quot;))) =&gt; { DoIf(lords.IsEmpty == false, Component(&quot;list_box&quot;, &quot;lord_select_list&quot;).SelectContext(lords.At(TrueRandomInRange(0, lords.Size - 1)))) })"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -1511,6 +1511,10 @@
 							value="frame"/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandGiverOnVisibilityChanged"
+					context_object_id="CcoStaticObject"
+					context_function_id="self.SimulateLClick"/>
 			</callbacks_with_context>
 			<localised_texts>
 				<localised_text/>
@@ -12478,7 +12482,7 @@
 				<callback_with_context
 					callback_id="ContextButtonGroupButtonSelector"
 					context_object_id="CcoCultureRecord"
-					context_function_id="(x = StoredContext(&quot;CcoCampaignStartInfo&quot;, &quot;button_list&quot;, &quot;side_panel_holder&quot;).LordListForFaction(this),&#10; preselect_lord = Component(&quot;29DFE441-5B64-4758-844CE8F6FB4090FE&quot;).StoredContext(&quot;CcoFrontendFactionLeaderRecord&quot;)) =&gt; {&#10;  GetIfElse(&#10;    preselect_lord &amp;&amp; x.Any(preselect_lord == FrontendFactionLeaderRecordContext),&#10;	x.FirstContext(preselect_lord == FrontendFactionLeaderRecordContext),&#10;    GetIfElse(&#10;      x.Any(FrontendFactionLeaderRecordContext.Difficulty == &quot;easy&quot;),&#10;	  x.FirstContext(FrontendFactionLeaderRecordContext.Difficulty == &quot;easy&quot;),&#10;	  x.FirstContext))&#10;}">
+					context_function_id="(x = StoredContext(&quot;CcoCampaignStartInfo&quot;, &quot;button_list&quot;, &quot;side_panel_holder&quot;).LordListForFaction(this),&#10; preselect_lord = Component(&quot;29DFE441-5B64-4758-844CE8F6FB4090FE&quot;).StoredContext(&quot;CcoFrontendFactionLeaderRecord&quot;)) =&gt; {&#10;  GetIfElse(&#10;    preselect_lord &amp;&amp; x.Any(preselect_lord == FrontendFactionLeaderRecordContext),&#10; x.FirstContext(preselect_lord == FrontendFactionLeaderRecordContext),&#10;    GetIfElse(&#10;      x.Any(FrontendFactionLeaderRecordContext.Difficulty == &quot;easy&quot;),&#10;   x.FirstContext(FrontendFactionLeaderRecordContext.Difficulty == &quot;easy&quot;),&#10;   x.FirstContext))&#10;}">
 					<child_m_user_properties>
 						<property
 							name="force_simulate_click"
@@ -13455,7 +13459,6 @@
 			tooltipslocalised="true"
 			uniqueguid="EF0A77C4-7C0E-4DF2-AB029738D0B3653F"
 			updatewhennotvisible="true"
-			isaspectratiolocked="true"
 			currentstate="B6A25622-F659-45BA-BA837BEA301761CF"
 			defaultstate="B6A25622-F659-45BA-BA837BEA301761CF">
 			<callbackwithcontextlist>
@@ -13644,7 +13647,6 @@
 			id="movie_holder"
 			tooltipslocalised="true"
 			uniqueguid="D8745C8C-064B-46FE-BAC2FBA1A49A6E83"
-			isaspectratiolocked="true"
 			maskimage="E04B08D2-D38E-47AE-B83898FF79BC5AAC"
 			currentstate="6D96884C-DD30-4AEF-B6FD3237302001C4"
 			defaultstate="6D96884C-DD30-4AEF-B6FD3237302001C4">
@@ -13668,8 +13670,7 @@
 							componentimage="E04B08D2-D38E-47AE-B83898FF79BC5AAC"
 							width="519"
 							height="708"
-							dockpoint="Center Left"
-							isaspectratiolocked="true"/>
+							dockpoint="Center Left"/>
 					</imagemetrics>
 				</default>
 			</states>
@@ -13962,7 +13963,6 @@
 		<tab_campaign
 			this="7F46F3E3-8A5A-436E-AF305AFD7B3B685D"
 			id="tab_campaign"
-			visible="false"
 			docking="Top Right"
 			component_anchor_point="1.00,0.00"
 			tooltipslocalised="true"
@@ -20436,6 +20436,7 @@
 		<tab_settings
 			this="0EF6B0B5-550C-463C-AA52211608F9B8D7"
 			id="tab_settings"
+			visible="false"
 			docking="Top Right"
 			component_anchor_point="1.00,0.00"
 			tooltipslocalised="true"

@@ -176,6 +176,16 @@ CcoCampaignProvince
   {
     ExCountBuildingEffectValues("wh3_dlc23_pooled_resource_chd_armaments_produced_per_turn")
   }
+
+  ExArmamentsOutputWithBonusValues
+  {
+    RoundFloat((ExArmamentsOutput * ExArmamentsEfficiency))
+  }
+
+  ExArmamentsEfficiency
+  {
+    (1.0 + (ExCountBuildingEffectValues("wh3_dlc23_pooled_resource_chd_armaments_modifier") / 100.0))
+  }
   
   ExRawMaterialEfficiency
   {

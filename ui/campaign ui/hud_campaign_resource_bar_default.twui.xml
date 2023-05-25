@@ -404,6 +404,11 @@
 						</slaves_icon>
 						<slaves_text this="64828078-844C-4011-AF013938D2C8A1E8"/>
 					</slaves_list>
+					<slave_change_holder this="A1201A19-9D0E-48B7-9190811DBBDDEA47">
+						<tx_ this="ECB66CEE-9E40-4F82-93DAD61382C6956A"/>
+						<dy_income this="A790FE32-13B8-4257-969A80C98A66B06B"/>
+						<tx_ this="A2E0D8FA-0410-4DC7-9FF815333500213C"/>
+					</slave_change_holder>
 				</slave_holder>
 				<malus_holder this="C48B2387-C3D1-456E-9AF804515064ACBC"/>
 				<warden_supply_holder this="34A4A02F-E1A5-493D-9263A603B2FA0C1B">
@@ -11107,7 +11112,7 @@
 		<hud_campaign_resource_bar_default
 			this="B889BC11-EB7D-4C49-91E7FBB3A9185DA5"
 			id="hud_campaign_resource_bar_default"
-			offset="-187.00,-4.00"
+			offset="-216.00,-4.00"
 			allowverticalresize="false"
 			docking="Top Center"
 			dock_offset="-20.00,-4.00"
@@ -11152,7 +11157,7 @@
 				<alt
 					this="B2CAF4B7-4848-45EB-BA7043AB0A01F370"
 					name="alt"
-					width="1935"
+					width="1992"
 					height="67"
 					interactive="true"
 					pixelcollision="true"
@@ -11162,8 +11167,8 @@
 							this="0A7A6EC4-FD16-4592-B3D6B9B8C07D38D2"
 							uniqueguid="0A7A6EC4-FD16-4592-B3D6B9B8C07D38D2"
 							componentimage="3A455397-5FD3-400F-8BB2885ADB8A2C86"
-							offset="46.00,0.00"
-							width="1843"
+							offset="47.00,0.00"
+							width="1897"
 							height="67"
 							tile="true"
 							dockpoint="Top Center"
@@ -11174,7 +11179,7 @@
 				<default
 					this="FA98244F-AAE7-4931-8AED652E15B46861"
 					name="default"
-					width="1935"
+					width="1992"
 					height="67"
 					interactive="true"
 					pixelcollision="true"
@@ -11184,8 +11189,8 @@
 							this="8C5F422A-FF74-459C-87F13AEEF5E148EC"
 							uniqueguid="8C5F422A-FF74-459C-87F13AEEF5E148EC"
 							componentimage="3A455397-5FD3-400F-8BB2885ADB8A2C86"
-							offset="46.00,0.00"
-							width="1843"
+							offset="47.00,0.00"
+							width="1897"
 							height="67"
 							tile="true"
 							dockpoint="Top Center"
@@ -16997,7 +17002,7 @@
 		<right_spacer_bretonnia
 			this="A369E0C8-26AF-4486-B485A5D40E1B4B57"
 			id="right spacer_bretonnia"
-			offset="1528.00,0.00"
+			offset="1585.00,0.00"
 			allowverticalresize="false"
 			priority="1"
 			tooltipslocalised="true"
@@ -17131,7 +17136,7 @@
 		<right_spacer_tomb_kings
 			this="10F287C6-8EB6-4E88-8D139902466EDF3D"
 			id="right_spacer_tomb_kings"
-			offset="1242.00,0.00"
+			offset="1299.00,0.00"
 			allowverticalresize="false"
 			priority="1"
 			tooltipslocalised="true"
@@ -20926,7 +20931,7 @@
 		<grom_dish_effect_holder
 			this="732BB448-721F-4ED0-8FA2E0795A82577A"
 			id="grom_dish_effect_holder"
-			offset="1015.00,0.00"
+			offset="1072.00,0.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			priority="1"
@@ -21733,7 +21738,7 @@
 		<forge_of_daith_holder
 			this="339A92F1-DA01-4FB6-AC9BE367E8F883BE"
 			id="forge_of_daith_holder"
-			offset="334.00,0.00"
+			offset="1299.00,0.00"
 			allowverticalresize="false"
 			visible="false"
 			priority="1"
@@ -21743,14 +21748,15 @@
 			currentstate="88035950-88BF-45CB-8C4B9685DA3DE08D"
 			defaultstate="88035950-88BF-45CB-8C4B9685DA3DE08D">
 			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTrashOnCondition"
+					context_object_id="CcoStaticObject"
+					context_function_id="CanUseUiFeature(&quot;FORGE_OF_DAITH&quot;) == false"/>
 				<callback_with_context callback_id="ComponentCreator"/>
-				<callback_with_context callback_id="FactionSpecificVisibilitySetter">
-					<child_m_user_properties>
-						<property
-							name="faction_key"
-							value="wh2_dlc16_wef_sisters_of_twilight"/>
-					</child_m_user_properties>
-				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoStaticObject"
+					context_function_id="true"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -22754,7 +22760,7 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoCampaignPooledResource"
-					context_function_id="Total + &quot;/&quot; + Max"/>
+					context_function_id="Total"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -22839,7 +22845,7 @@
 				<positive
 					this="FA1CC990-6FF6-4BD8-889BE30FB0E1BD6D"
 					name="positive"
-					width="65"
+					width="122"
 					height="37"
 					interactive="true"
 					uniqueguid="FA1CC990-6FF6-4BD8-889BE30FB0E1BD6D">
@@ -23534,7 +23540,7 @@
 		<chd_narrative_button_holder
 			this="25719437-57A7-4953-BD9B1F8D7FAD4039"
 			id="chd_narrative_button_holder"
-			offset="1644.00,0.00"
+			offset="1701.00,0.00"
 			allowverticalresize="false"
 			priority="1"
 			tooltipslocalised="true"
@@ -23814,5 +23820,167 @@
 					uniqueguid="9BDB0C83-B8A4-4DF4-9FDFDFF45C892BB9"/>
 			</states>
 		</template_segment>
+		<dy_income
+			this="A790FE32-13B8-4257-969A80C98A66B06B"
+			id="dy_income"
+			offset="5.00,1.00"
+			allowverticalresize="false"
+			dock_offset="0.00,1.00"
+			priority="1"
+			component_level_text="+5000"
+			text_label="ComponentText_6e5152b"
+			uniqueguid="A790FE32-13B8-4257-969A80C98A66B06B"
+			currentstate="267319DF-9BC4-4EBB-831C60B202314FE7"
+			defaultstate="267319DF-9BC4-4EBB-831C60B202314FE7">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="(total = PendingFactorTotal) =&gt; {&#10;  GetIf(total &gt; 0, &quot;+&quot;) + total&#10;}"/>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoCampaignPooledResource">
+					<child_m_user_properties>
+						<property
+							name="fallback_state"
+							value="negative"/>
+						<property
+							name="positive"
+							value="PendingFactorTotal &gt;= 0"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<states>
+				<negative
+					this="4D75459D-A8C4-4E1D-96D67D0BD3B7BEB2"
+					name="negative"
+					width="45"
+					height="18"
+					disabled="true"
+					uniqueguid="4D75459D-A8C4-4E1D-96D67D0BD3B7BEB2">
+					<component_text
+						texthbehaviour="Resize"
+						font_m_size="12"
+						font_m_colour="#FF2D2DFF"
+						font_m_leading="3"
+						fontcat_name="fe_tooltip_red"
+						text_shader_name="drop_shadow_t0"
+						textshadervars="-1.00,-1.00,1.00,0.00"/>
+				</negative>
+				<positive
+					this="267319DF-9BC4-4EBB-831C60B202314FE7"
+					name="positive"
+					width="45"
+					height="18"
+					disabled="true"
+					uniqueguid="267319DF-9BC4-4EBB-831C60B202314FE7">
+					<component_text
+						texthbehaviour="Resize"
+						font_m_size="12"
+						font_m_colour="#A0FF37FF"
+						font_m_leading="3"
+						fontcat_name="fe_tooltip_green"
+						text_shader_name="drop_shadow_t0"
+						textshadervars="-1.00,-1.00,1.00,0.00"/>
+				</positive>
+			</states>
+		</dy_income>
+		<slave_change_holder
+			this="A1201A19-9D0E-48B7-9190811DBBDDEA47"
+			id="slave_change_holder"
+			offset="67.00,16.00"
+			dock_offset="2.00,16.00"
+			priority="1"
+			componentleveltooltip="{{tt:ui/campaign ui/tooltip_pooled_resource_breakdown}}"
+			tooltiplabel="ComponentTooltip_91ef695a"
+			uniqueguid="A1201A19-9D0E-48B7-9190811DBBDDEA47"
+			currentstate="52635E2B-A6F5-4507-824BBE216705C5C0"
+			defaultstate="52635E2B-A6F5-4507-824BBE216705C5C0">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignFaction"
+					context_function_id="PooledResourceContext(&quot;def_slaves&quot;)"/>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoCampaignPooledResource"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="52635E2B-A6F5-4507-824BBE216705C5C0"
+					name="default"
+					width="55"
+					height="19"
+					interactive="true"
+					disabled="true"
+					uniqueguid="52635E2B-A6F5-4507-824BBE216705C5C0"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"/>
+		</slave_change_holder>
+		<tx_
+			this="ECB66CEE-9E40-4F82-93DAD61382C6956A"
+			id="tx_("
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="1"
+			tooltipslocalised="true"
+			uniqueguid="ECB66CEE-9E40-4F82-93DAD61382C6956A"
+			currentstate="EE31396D-1060-4420-80DD43608F18E3A9"
+			defaultstate="EE31396D-1060-4420-80DD43608F18E3A9">
+			<states>
+				<newstate
+					this="EE31396D-1060-4420-80DD43608F18E3A9"
+					name="NewState"
+					width="5"
+					height="18"
+					disabled="true"
+					uniqueguid="EE31396D-1060-4420-80DD43608F18E3A9">
+					<component_text
+						text="("
+						texthbehaviour="Never split"
+						textlabel="StateText_16cbcac"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="fe_text"
+						text_shader_name="drop_shadow_t0"
+						textshadervars="0.00,1.00,2.00,0.00"/>
+				</newstate>
+			</states>
+		</tx_>
+		<tx_
+			this="A2E0D8FA-0410-4DC7-9FF815333500213C"
+			id="tx_)"
+			offset="50.00,0.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="1"
+			tooltipslocalised="true"
+			uniqueguid="A2E0D8FA-0410-4DC7-9FF815333500213C"
+			currentstate="CC962A40-9CF7-4FE1-B0A14A29B00B52C6"
+			defaultstate="CC962A40-9CF7-4FE1-B0A14A29B00B52C6">
+			<states>
+				<newstate
+					this="CC962A40-9CF7-4FE1-B0A14A29B00B52C6"
+					name="NewState"
+					width="5"
+					height="18"
+					disabled="true"
+					uniqueguid="CC962A40-9CF7-4FE1-B0A14A29B00B52C6">
+					<component_text
+						text=")"
+						texthbehaviour="Never split"
+						textlabel="StateText_6742b6dd"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="fe_default_text"
+						text_shader_name="drop_shadow_t0"
+						textshadervars="0.00,1.00,2.00,0.00"/>
+				</newstate>
+			</states>
+		</tx_>
 	</components>
 </layout>
