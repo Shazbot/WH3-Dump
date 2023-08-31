@@ -9,7 +9,6 @@ DEFSlavesGreaterThan100	Owner.ModelPooledResourceContext("def_slaves").Total >= 
 DEFSlavesGreaterThan1000	Owner.ModelPooledResourceContext("def_slaves").Total >= 1000	false
 DEFSlavesGreaterThan150	Owner.ModelPooledResourceContext("def_slaves").Total >= 150	false
 DEFSlavesGreaterThan200	Owner.ModelPooledResourceContext("def_slaves").Total >= 200	false
-DEFSlavesGreaterThanWorkload	Owner.IsEffectBundleActive("wh3_main_def_workload_requirements_met") == true	false
 DevPointGreatThan5	Region.DevelopmentPoints >= 5	false
 FactionIsSeducible	Region.Owner.IsInFactionSet("slaanesh_seducible_factions")	false
 FavouredCorruptionKhorne	Owner.IsInFactionSet("FavouredCorruptionKhorne") == true	true
@@ -56,9 +55,12 @@ IsFactionAstragoth	Owner.RecordKeyIsOneOf("wh3_dlc23_chd_astragoth")	true
 IsFactionAzazel	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_azazel")	true
 IsFactionAzazelOrSigvald	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_azazel", "wh3_dlc20_chs_sigvald")	true
 IsFactionDrazhoath	Owner.RecordKeyIsOneOf("wh3_dlc23_chd_legion_of_azgorh")	true
+IsFactionDrycha	Owner.RecordKeyIsOneOf("wh2_dlc16_wef_drycha")	true
 IsFactionFestus	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_festus")	true
+IsFactionJadeDragon	Owner.RecordKeyIsOneOf("wh3_dlc24_cth_the_celestial_court")	true
 IsFactionMalus	Owner.RecordKeyIsOneOf("wh2_main_def_hag_graef")	true
 IsFactionMorathi	Owner.RecordKeyIsOneOf("wh2_main_def_cult_of_pleasure")	true
+IsFactionMotherOstankya	Owner.RecordKeyIsOneOf("wh3_dlc24_ksl_daughters_of_the_forest")	true
 IsFactionNotDrycha	Owner.RecordKeyIsOneOf("wh2_dlc16_wef_drycha") == false	true
 IsFactionNotMorathi	Owner.RecordKeyIsOneOf("wh2_main_def_cult_of_pleasure") == false	true
 IsFactionRogueChaos	Owner.RecordKeyIsOneOf("wh2_dlc09_rogue_dwellers_of_zardok", "wh2_main_rogue_abominations", "wh2_dlc11_cst_rogue_the_churning_gulf_raiders", "wh2_main_rogue_hung_warband", "wh3_main_rogue_shadow_legion", "wh3_main_rogue_kurgan_warband", "wh3_main_rogue_the_challenge_stone_pact")	true
@@ -76,6 +78,8 @@ IsGeneralPresentEnemy	Region.IsAnyEnemyMilitaryForcePresent	false
 IsGeneralPresentInProvince	Province.IsAnyMilitaryForcePresent	false
 IsGeneralPresentOwn	Region.IsOwnMilitaryForcePresent	false
 IsImmortalEmpires	CampaignModelRoot.CampaignKey == "wh3_main_combi"	true
+IsJadeDragonCommercialDistrict	Region.IsEffectBundleActive("wh3_dlc24_ritual_cth_mos_steel_settlement_type_switch_commercial") == true	true
+IsJadeDragonFortressCity	Region.IsEffectBundleActive("wh3_dlc24_ritual_cth_mos_stone_settlement_type_switch_fortress") == true	true
 IsKholek	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_kholek")	true
 IsKroqGar	Owner.RecordKeyIsOneOf("wh2_main_lzd_last_defenders")	true
 IsNotChampionsFaction	Owner.IsInFactionSet("champions_factions") == false	true
@@ -86,8 +90,12 @@ IsOwnershipProductGotrekFelixUnlocked	Owner.IsOwnershipProductUnlocked("TW_WH2_G
 IsRegionBeastmen	Region.Owner.CultureKey == "wh_dlc03_bst_beastmen"	true
 IsRegionChaosDwarfs	Region.Owner.CultureKey == "wh3_dlc23_chd_chaos_dwarfs"	true
 IsRegionNorsca	Region.Owner.CultureKey == "wh_dlc08_nor_norsca"	false
+IsRegionNotAbandoned	Region.IsAbandoned == false	true
 IsRegionTombKing	Region.Owner.CultureKey == "wh2_dlc09_tmb_tomb_kings"	true
+IsRegionVampireCounts	Region.Owner.CultureKey == "wh_main_vmp_vampire_counts"	true
 IsSPChaosCampaign	CampaignModelRoot.CampaignKey == "wh3_main_chaos" && CampaignModelRoot.IsMultiplayer == false	true
+KSLHasDevotion	Owner.ModelPooledResourceContext("wh3_main_ksl_devotion")	true
+KSLHasSupporters	Owner.ModelPooledResourceContext("wh3_main_ksl_followers")	true
 NotDwarf	Owner.CultureKey != "wh_main_dwf_dwarfs"	false
 PublicOrder100	Region.PublicOrder > 99	false
 PublicOrderGreaterThan-25	Region.PublicOrder >= -25	false
