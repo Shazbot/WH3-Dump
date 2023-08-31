@@ -13,7 +13,16 @@ local vow_to_troth = {
 	["wh_dlc07_trait_brt_questing_vow_protect_pledge"] = "wh_dlc07_trait_brt_wisdom_troth_protect_pledge",
 	["wh_dlc07_trait_brt_grail_vow_untaint_pledge"] = "wh_dlc07_trait_brt_virtue_troth_untaint_pledge",
 	["wh_dlc07_trait_brt_grail_vow_valour_pledge"] = "wh_dlc07_trait_brt_virtue_troth_valour_pledge",
-	["wh_dlc07_trait_brt_grail_vow_destroy_pledge"] = "wh_dlc07_trait_brt_virtue_troth_destroy_pledge"
+	["wh_dlc07_trait_brt_grail_vow_destroy_pledge"] = "wh_dlc07_trait_brt_virtue_troth_destroy_pledge",
+	["wh_dlc07_trait_brt_knights_vow_knowledge_pledge_agent"] = "wh_dlc07_trait_brt_protection_troth_knowledge_pledge_agent",
+	["wh_dlc07_trait_brt_knights_vow_order_pledge_agent"] = "wh_dlc07_trait_brt_protection_troth_order_pledge_agent",
+	["wh_dlc07_trait_brt_knights_vow_chivalry_pledge_agent"] = "wh_dlc07_trait_brt_protection_troth_chivalry_pledge_agent",
+	["wh_dlc07_trait_brt_questing_vow_campaign_pledge_agent"] = "wh_dlc07_trait_brt_wisdom_troth_campaign_pledge_agent",
+	["wh_dlc07_trait_brt_questing_vow_heroism_pledge_agent"] = "wh_dlc07_trait_brt_wisdom_troth_heroism_pledge_agent",
+	["wh_dlc07_trait_brt_questing_vow_protect_pledge_agent"] = "wh_dlc07_trait_brt_wisdom_troth_protect_pledge_agent",
+	["wh_dlc07_trait_brt_grail_vow_untaint_pledge_agent"] = "wh_dlc07_trait_brt_virtue_troth_untaint_pledge_agent",
+	["wh_dlc07_trait_brt_grail_vow_valour_pledge_agent"] = "wh_dlc07_trait_brt_virtue_troth_valour_pledge_agent",
+	["wh_dlc07_trait_brt_grail_vow_destroy_pledge_agent"] = "wh_dlc07_trait_brt_virtue_troth_destroy_pledge_agent"
 }
 
 local vow_max_points = {
@@ -39,6 +48,55 @@ local vow_legendary_lord_cultures = {
 	["wh3_main_ogr_ogre_kingdoms"] = "wh_dlc07_trait_brt_questing_vow_protect_pledge"
 }
 
+local all_knights_vows = 
+{
+	"wh_dlc07_trait_brt_knights_vow_knowledge_pledge", 
+	"wh_dlc07_trait_brt_knights_vow_order_pledge",
+	"wh_dlc07_trait_brt_knights_vow_chivalry_pledge",
+	"wh_dlc07_trait_brt_protection_troth_knowledge_pledge",
+	"wh_dlc07_trait_brt_protection_troth_order_pledge",
+	"wh_dlc07_trait_brt_protection_troth_chivalry_pledge",
+	"wh_dlc07_trait_brt_knights_vow_knowledge_pledge_agent", 
+    "wh_dlc07_trait_brt_knights_vow_order_pledge_agent",
+    "wh_dlc07_trait_brt_knights_vow_chivalry_pledge_agent",
+	"wh_dlc07_trait_brt_protection_troth_knowledge_pledge_agent",
+	"wh_dlc07_trait_brt_protection_troth_order_pledge_agent",
+	"wh_dlc07_trait_brt_protection_troth_chivalry_pledge_agent"
+}
+local all_questing_vows = 
+{
+	"wh_dlc07_trait_brt_questing_vow_campaign_pledge",
+	"wh_dlc07_trait_brt_questing_vow_heroism_pledge",
+	"wh_dlc07_trait_brt_questing_vow_protect_pledge",
+	"wh_dlc07_trait_brt_wisdom_troth_campaign_pledge",
+	"wh_dlc07_trait_brt_wisdom_troth_heroism_pledge",
+	"wh_dlc07_trait_brt_wisdom_troth_protect_pledge",
+	"wh_dlc07_trait_brt_questing_vow_campaign_pledge_agent",
+    "wh_dlc07_trait_brt_questing_vow_heroism_pledge_agent",
+    "wh_dlc07_trait_brt_questing_vow_protect_pledge_agent",
+	"wh_dlc07_trait_brt_wisdom_troth_protect_pledge_agent",
+	"wh_dlc07_trait_brt_wisdom_troth_heroism_pledge_agent",
+	"wh_dlc07_trait_brt_wisdom_troth_campaign_pledge_agent"
+}
+local all_grail_vows = 
+{
+	"wh_dlc07_trait_brt_grail_vow_untaint_pledge",
+	"wh_dlc07_trait_brt_grail_vow_valour_pledge",
+	"wh_dlc07_trait_brt_grail_vow_destroy_pledge",
+	"wh_dlc07_trait_brt_virtue_troth_untaint_pledge",
+	"wh_dlc07_trait_brt_virtue_troth_valour_pledge",
+	"wh_dlc07_trait_brt_virtue_troth_destroy_pledge",
+	"wh_dlc07_trait_brt_grail_vow_untaint_pledge_agent",
+    "wh_dlc07_trait_brt_grail_vow_valour_pledge_agent",
+    "wh_dlc07_trait_brt_grail_vow_destroy_pledge_agent",
+	"wh_dlc07_trait_brt_virtue_troth_destroy_pledge_fay",
+	"wh_dlc07_trait_brt_virtue_troth_untaint_pledge_fay",
+	"wh_dlc07_trait_brt_virtue_troth_valour_pledge_fay",
+	"wh_dlc07_trait_brt_virtue_troth_destroy_pledge_agent",
+	"wh_dlc07_trait_brt_virtue_troth_valour_pledge_agent",
+	"wh_dlc07_trait_brt_virtue_troth_untaint_pledge_agent"
+}
+
 local vow_agents = {
 	["wh_main_brt_paladin"] = true,
 	["wh2_dlc14_brt_henri_le_massif"] = true,
@@ -46,6 +104,10 @@ local vow_agents = {
 	["wh_dlc07_brt_damsel_beasts"] = true,
 	["wh_dlc07_brt_damsel_life"] = true
 }
+
+local function is_female(character)
+	return character:character_details():character_subtype_has_female_name() and not character:character_subtype("wh2_dlc14_brt_repanse")
+end
 
 function add_vow_progress(character, trait, ai, agents)
 	if character:is_null_interface() then
@@ -67,7 +129,7 @@ function add_vow_progress(character, trait, ai, agents)
 	local incident_uc = incident
 	local trait_uc = trait
 	
-	if character:character_details():character_subtype_has_female_name() and not character:character_subtype("wh2_dlc14_brt_repanse") then
+	if is_female(character) then
 		out.design("\tFemale Character")
 		trait = vow_to_troth[trait]
 		out.design("\tTrait - " .. trait)
@@ -85,33 +147,30 @@ function add_vow_progress(character, trait, ai, agents)
 	local points = character:trait_points(trait)
 	out.design("\tPoints: " .. points)
 	
-	if points > 0 or ai == true then
-		if points < max_trait_points then
-			out.design("\tAdding trait - " .. trait)
-			cm:force_add_trait(cm:char_lookup_str(character), trait, false, 1)
-			points = points + 1
-			out.design("\tNew Points: " .. points)
+	if (points > 0 or ai == true) and points < max_trait_points then
+		out.design("\tAdding trait - " .. trait)
+		cm:force_add_trait(cm:char_lookup_str(character), trait, false, 1)
+		points = points + 1
+		out.design("\tNew Points: " .. points)
+		
+		if points == max_trait_points and ai == false then
+			out.design("\tTriggering event: " .. char_cqi)
+			cm:trigger_incident_with_targets(faction_cqi, incident, 0, 0, char_cqi, 0, 0, 0)
 			
-			if points == max_trait_points and ai == false then
-				out.design("\tTriggering event: " .. char_cqi)
-				cm:trigger_incident_with_targets(faction_cqi, incident, 0, 0, char_cqi, 0, 0, 0)
-				
-				if event_key:starts_with("wh_dlc07_trait_brt_knights_vow") then 
-					core:trigger_event("ScriptEventBretonniaKnightsVowCompleted", character)
-				elseif event_key:starts_with("wh_dlc07_trait_brt_questing_vow") then
-					core:trigger_event("ScriptEventBretonniaQuestingVowCompleted", character)
-				elseif event_key:starts_with("wh_dlc07_trait_brt_grail_vow") then
-					core:trigger_event("ScriptEventBretonniaGrailVowCompleted", character)
-				elseif event_key:starts_with("wh_dlc07_trait_brt_virtue_troth") then
-					core:trigger_event("ScriptEventBretonniaVirtueTrothCompleted", character) 
-				end
+			if event_key:starts_with("wh_dlc07_trait_brt_knights_vow") then 
+				core:trigger_event("ScriptEventBretonniaKnightsVowCompleted", character)
+			elseif event_key:starts_with("wh_dlc07_trait_brt_questing_vow") then
+				core:trigger_event("ScriptEventBretonniaQuestingVowCompleted", character)
+			elseif event_key:starts_with("wh_dlc07_trait_brt_grail_vow") then
+				core:trigger_event("ScriptEventBretonniaGrailVowCompleted", character)
+			elseif event_key:starts_with("wh_dlc07_trait_brt_virtue_troth") then
+				core:trigger_event("ScriptEventBretonniaVirtueTrothCompleted", character) 
 			end
 		end
 	end
 	
-	-- Do all Paladins in this characters army
+	-- Do all heroes in this characters army
 	if agents and character:has_military_force() then
-		trait = trait_uc .. "_agent"
 		local force_characters = character:military_force():character_list()
 		local force_character_count = force_characters:num_items()
 		out.design("Checking agents (" .. force_character_count .. ")...")
@@ -119,20 +178,25 @@ function add_vow_progress(character, trait, ai, agents)
 		for i = 0, force_character_count - 1 do
 			local current_char = force_characters:item_at(i)
 			local subtype_key = current_char:character_subtype_key()
+			if is_female(current_char) then
+				trait = vow_to_troth[trait_uc] .. "_agent"
+			else
+				trait = trait_uc .. "_agent"
+			end
 			out.design("\t\tCharacter: " .. subtype_key)
 			
 			if vow_agents[subtype_key] then
 				local agent_points = current_char:trait_points(trait)
 				out.design("\t\t\tPoints: " .. agent_points)
 				
-				if agent_points > 0 and agent_points < max_trait_points then
+				if (agent_points > 0 or ai == true) and agent_points < max_trait_points then
 					out.design("\t\t\tAdding agent trait - " .. trait)
 					char_cqi = current_char:command_queue_index()
 					cm:force_add_trait(cm:char_lookup_str(current_char), trait, false, 1)
 					agent_points = agent_points + 1
 					out.design("\t\t\tNew Points: " .. agent_points)
 					
-					if agent_points == max_trait_points then
+					if agent_points == max_trait_points and ai == false then
 						out.design("\t\t\tTriggering event: " .. char_cqi)
 						cm:trigger_incident_with_targets(faction_cqi, incident_uc, 0, 0, char_cqi, 0, 0, 0)
 					end
@@ -160,6 +224,16 @@ function add_starting_vows()
 	end
 end
 
+--This will return true even if the pledge is not completed
+local function ai_has_vow(character,possible_pledges)
+	for i = 1, #possible_pledges do
+		if character:has_trait(possible_pledges[i]) then 
+			return true
+		end
+	end  
+	return false
+end
+
 -- AI characters get the Vows per level
 core:add_listener(
 	"character_rank_up_vows_per_level_ai",
@@ -172,17 +246,33 @@ core:add_listener(
 		if not faction:is_human() and faction:culture() == "wh_main_brt_bretonnia" and character:character_type("general") then
 			local rank = character:rank()
 			
-			if rank == 2 then
+			if rank >= 2 and not ai_has_vow(character, all_knights_vows) then
 				for i = 1, 6 do
 					add_vow_progress(character, "wh_dlc07_trait_brt_knights_vow_knowledge_pledge", true, false)
 				end
-			elseif rank == 5 then
+			elseif rank >= 5 and not ai_has_vow(character, all_questing_vows) then
 				for i = 1, 6 do
 					add_vow_progress(character, "wh_dlc07_trait_brt_questing_vow_protect_pledge", true, false)
 				end
-			elseif rank == 10 then
+			elseif rank >= 10 and not ai_has_vow(character, all_grail_vows) then
 				for i = 1, 6 do
 					add_vow_progress(character, "wh_dlc07_trait_brt_grail_vow_valour_pledge", true, false)
+				end
+			end
+		elseif not faction:is_human() and faction:culture() == "wh_main_brt_bretonnia" and vow_agents[character:character_subtype_key()] then
+			local rank = character:rank()
+	
+			if rank >= 2 and not ai_has_vow(character, all_knights_vows) then
+				for i = 1, 6 do
+					add_vow_progress(character, "wh_dlc07_trait_brt_knights_vow_knowledge_pledge_agent", true, false) 
+				end
+			elseif rank >= 5 and not ai_has_vow(character, all_questing_vows) then
+				for i = 1, 6 do
+					add_vow_progress(character, "wh_dlc07_trait_brt_questing_vow_protect_pledge_agent", true, false)
+				end
+			elseif rank >= 10 and not ai_has_vow(character, all_grail_vows) then
+				for i = 1, 6 do
+					add_vow_progress(character, "wh_dlc07_trait_brt_grail_vow_valour_pledge_agent", true, false)
 				end
 			end
 		end
@@ -295,6 +385,10 @@ core:add_listener(
 		elseif vow_agents[character:character_subtype_key()] then
 			local trait = "wh_dlc07_trait_brt_knights_vow_chivalry_pledge_agent"
 			
+			if is_female(character) then
+				trait = vow_to_troth[trait]
+			end
+			
 			if character:trait_points(trait) > 0 then
 				for i = 1, ranks_gained do
 					cm:force_add_trait(cm:char_lookup_str(character), trait, false)
@@ -307,9 +401,15 @@ core:add_listener(
 
 -- Pledge to Knowledge (Agent)
 local function add_pledge_to_knowledge_trait(context)
-	if context:mission_result_critial_success() or context:mission_result_success() then
-		local character = context:character()
+	local character = context:character()
+	local faction = character:faction()
+	
+	if faction:is_human() and faction:culture() == "wh_main_brt_bretonnia" and (context:mission_result_critial_success() or context:mission_result_success()) then
 		local trait = "wh_dlc07_trait_brt_knights_vow_knowledge_pledge_agent"
+		
+		if is_female(character) then
+			trait = vow_to_troth[trait]
+		end
 		
 		if vow_agents[character:character_subtype_key()] and character:trait_points(trait) > 0 then
 			cm:force_add_trait(cm:char_lookup_str(character), trait, false)
@@ -320,7 +420,9 @@ end
 core:add_listener(
 	"character_character_target_action_pledge_to_knowledge",
 	"CharacterCharacterTargetAction",
-	true,
+	function(context)
+		return context:ability() ~= "assist_army"
+	end,
 	function(context)
 		add_pledge_to_knowledge_trait(context)
 	end,

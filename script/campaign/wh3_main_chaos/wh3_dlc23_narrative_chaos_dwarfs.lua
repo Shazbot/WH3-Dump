@@ -277,7 +277,7 @@ function chaos_dwarfs_narrative:initialise()
 
 			cm:callback(
 				function()
-					if mission_key == "wh3_dlc23_chd_ancestor_relic_of_gazul" and morgrim_relic_army ~= nil then
+					if mission_key == "wh3_dlc23_chd_ancestor_relic_of_morgrim" and morgrim_relic_army ~= nil then
 						cm:kill_character(morgrim_relic_army, true);
 					elseif mission_key == "wh3_dlc23_chd_ancestor_relic_of_skavor" and tepok_relic_army ~= nil then
 						cm:kill_character(tepok_relic_army, true);

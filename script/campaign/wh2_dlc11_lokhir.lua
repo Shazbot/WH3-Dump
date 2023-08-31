@@ -187,6 +187,10 @@ function lohkir_arks:major_port_count(context, faction)
 	local output = tostring(port_counter);
 	out.design("############ Number of ports is " .. output ..". ###########");
 
+	if faction:is_human() == false then --If Lokhir is AI then we pretend he has fewer ports than he actually does. Remove this when we get a better fix for the Black Ark spam. 
+		port_counter = math.floor(port_counter/3)
+	end 
+
 	if not (self.current_maj_port_count == port_counter) then
 		self.current_maj_port_count = port_counter;
 	end;

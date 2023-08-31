@@ -100,7 +100,7 @@ function end_deployment_phase()
 	function()
 		ga_oxyotl.sunits:item(1).uc:teleport_to_location(v(264.496, -388.576), 345, 2);
 	end, 
-	10000
+	12000
 	);
 
 	--cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx) end, 0);

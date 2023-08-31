@@ -159,8 +159,8 @@ ga_enemy:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_wi
 gb:message_on_time_offset("reinforce", 90000,"01_intro_cutscene_end");
 gb:message_on_time_offset("reinforcement_release", 100000,"01_intro_cutscene_end");
 
-gb:message_on_time_offset("enemy_release", 60000,"01_intro_cutscene_end");
-ga_enemy:release_on_message("enemy_release");
+gb:message_on_time_offset("enemy_release", 45000,"01_intro_cutscene_end");
+ga_enemy:attack_on_message("enemy_release");
 
 ga_enemy_reinforcements:reinforce_on_message("reinforce", 10);
 ga_enemy_reinforcements:release_on_message("reinforcement_release");

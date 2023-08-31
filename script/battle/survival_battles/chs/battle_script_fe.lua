@@ -89,6 +89,10 @@ ga_ai_att_03_1:get_army():suppress_reinforcement_adc(1);
 ga_ai_att_03_2:get_army():suppress_reinforcement_adc(1);
 ga_ai_att_04:get_army():suppress_reinforcement_adc(1);
 
+ga_ai_def_01.sunits:take_control();
+ga_ai_def_02.sunits:take_control();
+ga_ai_def_03.sunits:take_control();
+
 ga_ai_def_02.sunits:set_enabled(false);
 ga_ai_def_03.sunits:set_enabled(false);
 ga_ai_att_04.sunits:set_enabled(false);
@@ -688,6 +692,15 @@ gb.sm:add_listener("prepare_outro", function() prepare_for_outro_cutscene() end)
 -------------------------------------------------------------------------------------------------
 ----------------------------------------------SETUP----------------------------------------------
 -------------------------------------------------------------------------------------------------
+
+gb:add_listener(
+	"battle_start",
+	function()
+		ga_ai_def_01.sunits:release_control();
+		ga_ai_def_02.sunits:release_control();
+		ga_ai_def_03.sunits:release_control();
+	end
+);
 
 gb:message_on_time_offset("battle_start", 10);
 

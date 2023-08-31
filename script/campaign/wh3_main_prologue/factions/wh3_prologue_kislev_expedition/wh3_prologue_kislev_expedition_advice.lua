@@ -227,14 +227,10 @@ function prologue_advice_start_006()
 	if uic_treasury then
 		uic_treasury:SetVisible(false);
 	end
-	
-	cm:steal_escape_key_with_callback("DismissPushNorthAdvice", function ()  prologue_advice_show_text_pointer(); core:remove_listener("first_help_button_listener") end)
 
 end
 
 function prologue_advice_show_text_pointer()
-	cm:release_escape_key_with_callback("DismissPushNorthAdvice")
-
 	cm:dismiss_advice();
 
 	core:remove_listener("first_help_button_listener") 

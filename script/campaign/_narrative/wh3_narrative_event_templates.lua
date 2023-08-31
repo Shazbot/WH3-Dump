@@ -1580,6 +1580,111 @@ end;
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
 --
+--	Consume Pooled Resource
+--
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+local function construct_narrative_event_consume_pooled_resource(unique_name, faction_key, advice_key, mission_key, mission_text, pooled_resource, value_to_consume, factor_keys, mission_issuer, mission_rewards, trigger_messages, on_issued_messages, on_completed_messages, inherit_list)
+	
+	if not validate.is_string(pooled_resource) then
+		return false;
+	end;
+
+	if not validate.is_number(value_to_consume) then
+		return false;
+	end;
+
+	local full_mission_text = "mission_text_text_" .. mission_text;
+
+	local ne = construct_narrative_event_with_mission(unique_name, faction_key, advice_key, mission_key, mission_issuer, trigger_messages, on_issued_messages, on_completed_messages, inherit_list, force_advice);
+
+	if ne then
+		-- Ensure that a pooled resource tracker is started for this faction
+		cm:start_pooled_resource_tracker_for_faction(faction_key);
+		
+		local mm = ne:get_mission_manager();
+
+		mm:add_new_scripted_objective(
+			full_mission_text,
+			"ScriptEventTrackedPooledResourceChanged",
+			function(context)
+				if not context:has_faction() or context:faction():name() ~= faction_key then
+					return false;
+				end;
+				
+				local resource_value = 0;
+				
+				if factor_keys then
+					for i = 1, #factor_keys do
+						resource_value = resource_value + cm:get_total_pooled_resource_spent_for_faction(faction_key, pooled_resource, factor_keys[i]);
+					end
+				else
+					resource_value = cm:get_total_pooled_resource_spent_for_faction(faction_key, pooled_resource);
+				end;
+
+				-- Update count on mission display
+				mm:update_scripted_objective_text(full_mission_text, resource_value, value_to_consume);
+				
+				if resource_value >= value_to_consume then
+					ne:out("mission completing as pooled resource [" .. pooled_resource .. "] for faction [" .. faction_key .. "] has a spent value of [" .. resource_value .. "] which is greater or equal to required value [" .. value_to_consume .. "]");
+					
+					return true;
+				end;
+			end
+		);
+
+		mm:add_first_time_trigger_callback(
+			function()
+				mm:update_scripted_objective_text(full_mission_text, 0, value_to_consume);
+			end
+		);
+
+		-- set up mission rewards
+		add_narrative_event_mission_rewards(ne, mission_rewards);
+
+		return ne;
+	end;
+end;
+
+
+--- @function consume_pooled_resource
+--- @desc Creates and starts a narrative event that issues a mission for the specified faction to consume a specified amount of a specified pooled resource.
+--- @desc As it is a scripted mission, mission objective text must be supplied. Advice may optionally be supplied to be issued with the mission.
+--- @p @string unique name, Unique name amongst other declared narrative events.
+--- @p @string faction key, Key of the faction to which this narrative event applies, from the <code>factions</code> database table.
+--- @p [opt=nil] @string advice key, Key of advice to issue with this mission, if any, from the <code>advice_threads</code> database table.
+--- @p @string mission key, Key of mission to issue, from the <code>missions</code> database table.
+--- @p @string mission text, Key of mission text to display, from the mission_text database table. This must be set up for scripted missions such as this.
+--- @p @string pooled resource key, Key of the pooled resource to monitor, from the <code>pooled_resources</code> database table.
+--- @p @number value to consume, Amount of the pooled resource that is required to be consumed for the mission to complete.
+--- @p [opt=nil] @table factor keys, Keys of specific factors to track.
+--- @p [opt="clan_elders"] @string mission issuer, Key of mission issuer, from the <code>mission_issuers</code> database table.
+--- @p @table mission rewards, Rewards to add to the mission. This should be a table of strings. See the documentation for @mission_manager:add_payload for more information on the string formatting and available options.
+--- @p @string trigger message, Script message on which the narrative event should trigger. This can also be a @table of strings if multiple trigger messages are desired.
+--- @p [opt=nil] @string on-issued message, Message to trigger when the narrative event has finished issuing. This can be a @table of strings if multiple on-issued messages are desired.
+--- @p [opt=nil] @string on-completed message, Message to trigger when the mission has completed. This can be a @table of strings if multiple on-completed messages are desired.
+--- @p [opt=nil] @table inherit list, Table of string names of other narrative events to inherit the rewards from. If this narrative event triggers before another that it's set to inherit from, this narrative event will add the mission rewards from the other to its own mission rewards, and prevent the other narrative event from triggering.
+function narrative_events.consume_pooled_resource(unique_name, faction_key, advice_key, mission_key, mission_text, pooled_resource, value_to_consume, factor_keys, mission_issuer, mission_rewards, trigger_messages, on_issued_messages, on_completed_messages, inherit_list)
+	local ne = construct_narrative_event_consume_pooled_resource(unique_name, faction_key, advice_key, mission_key, mission_text, pooled_resource, value_to_consume, factor_keys, mission_issuer, mission_rewards, trigger_messages, on_issued_messages, on_completed_messages, inherit_list);
+
+	if ne then
+		ne:start();
+	end;
+end;
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+--
 --	Gain Pooled Resources
 --
 -----------------------------------------------------------------------------------
@@ -2375,10 +2480,20 @@ local function construct_narrative_event_destroy_faction(unique_name, faction_ke
 				-- If we have just one target faction, then try and return the closest general from it
 				if #target_faction_keys == 1 then
 					local player_faction = cm:get_faction(faction_key);
-					local player_faction_leader = player_faction:faction_leader();
+					local player_character = player_faction:faction_leader()
+					if not player_character:has_military_force() then
+						local character_list = faction:character_list()
+						for i = 0, character_list:num_items() -1 do
+							local secondary_character = character_list:item_at(i)
+							if secondary_character:has_military_force() and not secondary_character:military_force():is_armed_citizenry() then
+								player_character = secondary_character
+								break
+							end
+						end
+					end
 
-					if not player_faction_leader:is_wounded() then
-						local x, y = cm:char_logical_pos(player_faction_leader);
+					if not player_character:is_wounded() then
+						local x, y = cm:char_logical_pos(player_character);
 						
 						local char = cm:get_closest_general_to_position_from_faction(
 							target_faction_keys[1],
@@ -3439,6 +3554,7 @@ local function construct_narrative_event_win_battles_with_hero(unique_name, fact
 			function(context)
 				local pb = context:model():pending_battle();
 				local most_battles_won = 0;
+				local update_text = false;
 
 				-- Check attackers in battle
 				if pb:attacker_won() then
@@ -3451,6 +3567,7 @@ local function construct_narrative_event_win_battles_with_hero(unique_name, fact
 								mm:update_scripted_objective_text(full_mission_text, battles_won);
 								return true;
 							else
+								update_text = true;
 								most_battles_won = battles_won;
 							end;
 						end;
@@ -3467,16 +3584,17 @@ local function construct_narrative_event_win_battles_with_hero(unique_name, fact
 							if threshold_reached then
 								mm:update_scripted_objective_text(full_mission_text, battles_won);
 								return true;
-							else
-								if battles_won > most_battles_won then
-									most_battles_won = battles_won;
-								end;
+							elseif battles_won > most_battles_won then
+								update_text = true;
+								most_battles_won = battles_won;
 							end;
 						end;
 					end;
 				end;
 
-				mm:update_scripted_objective_text(full_mission_text, most_battles_won);
+				if update_text then
+					mm:update_scripted_objective_text(full_mission_text, most_battles_won);
+				end;
 				return false;
 			end
 		);
@@ -3488,7 +3606,7 @@ local function construct_narrative_event_win_battles_with_hero(unique_name, fact
 				local faction = cm:get_faction(faction_key);
 				local mf_list = faction:military_force_list();
 
-				for mf in model_pairs(mf_list) do
+				for _, mf in model_pairs(mf_list) do
 					if not mf:is_armed_citizenry() then
 						local threshold_reached, battles_won = military_force_check(mf);
 

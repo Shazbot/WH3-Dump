@@ -26,11 +26,6 @@ Worldroots = {
 	debug_ignore_marker_cooldown = false, -- set to true to cause a marker to spawn every turn, ignorning first-turn restrictions
 	avelorn_invasion_turn = 45,
 	avelorn_invasion_duration = 5, -- after this many turns the game will release control of the spawned Avelorn invasion and re-allow CAI targeting of the ruins
-	debug_ariel_unlock = false, -- set to true to spawn Ariel/Coeddil on turn 1 for easy testing
-	ariel_unlocked = false,
-	ariel_spawn_pending_faction = "",
-	ai_ariel_spawn_turn = 20, -- turn after which ariel can appear for either the Sisters or Orion
-	ai_ariel_spawn_chance = 50, -- chance on each turn that ariel will spawn (chance is per faction, with Sisters prioritised)
 	ritual_resource_required_default = 100, -- standard amount of pooled resource required to trigger the Ritual of Rebirth. Used to check if we should fire an incident saying it's ready.
 	
 	-- INVASION VARIABLES
@@ -851,10 +846,6 @@ function Worldroots:add_worldroots_listeners()
 	cm:force_diplomacy("faction:wh2_dlc16_wef_drycha", "culture:wh_dlc05_wef_wood_elves", "form confederation", false, false)
 	cm:force_diplomacy("faction:wh2_dlc16_wef_drycha", "faction:wh_dlc05_wef_argwylon", "form confederation", true, true)
 	
-	if cm:get_faction(self.ariel_spawn_pending_faction) then
-		self:spawn_ariel(self.ariel_spawn_pending_faction)
-	end
-	
 	if not self.primary_player_key then
 		out("No human Wood Elves found")		
 		return -- Nothing after this point should fire if there aren't any human Wood Elves
@@ -903,11 +894,6 @@ function Worldroots:add_worldroots_listeners()
 		
 		cm:faction_add_pooled_resource("wh2_dlc16_wef_drycha", "wef_amber", "wh2_dlc16_resource_factor_worldroots_healed", 1)
 		
-		if Worldroots.debug_ariel_unlock then 
-			self:spawn_ariel(self.primary_player_key)
-			
-			cm:spawn_unique_agent(cm:get_faction("wh2_dlc16_wef_drycha"):command_queue_index(), "wh2_dlc16_wef_coeddil", true)
-		end
 	end
 	
 	-- setup ritual listeners
@@ -1460,63 +1446,6 @@ function Worldroots:generate_encounter(faction_interface)
 		end
 		
 		self.turns_since_last_marker = 0
-	end
-end
-
-function Worldroots:spawn_ariel(faction_key)
-	if faction_key == "wh2_dlc16_wef_drycha" then
-		return
-	end
-	
-	core:add_listener(
-		"GiveArielAncillaries",
-		"UniqueAgentSpawned",
-		function(context)
-			return context:unique_agent_details():character():character_subtype("wh2_dlc16_wef_ariel")
-		end,
-		function(context)
-			local agent = context:unique_agent_details():character()
-			
-			if not agent:is_null_interface() and agent:rank() < 30 then
-				local cqi = agent:cqi()
-				
-				cm:replenish_action_points(cm:char_lookup_str(cqi))
-				
-				cm:callback(
-					function()
-						cm:force_add_ancillary(agent, "wh2_dlc16_anc_arcane_item_wand_of_wych_elm", false, true)
-						cm:force_add_ancillary(agent, "wh2_dlc16_anc_enchanted_item_acorns_of_the_oak_of_ages", false, true)
-						cm:force_add_ancillary(agent, "wh2_dlc16_anc_talisman_berry_wine", false, true)
-						cm:force_add_ancillary(agent, "wh2_dlc16_anc_weapon_dart_of_doom", false, true)
-						cm:force_add_ancillary(agent, "wh2_dlc16_anc_armour_heartstone_of_athel_loren", false, true)
-						
-						cm:trigger_incident_with_targets(agent:faction():command_queue_index(), "wh2_dlc16_incident_wef_ariel_arrives", 0, 0, cqi, 0, 0, 0)
-						
-						cm:callback(function() CampaignUI.ClearSelection() end, 0.5)
-					end,
-					0.5
-				)
-			end
-		end,
-		false
-	)
-	
-	self.ariel_spawn_pending_faction = faction_key
-	
-	if cm:is_processing_battle() then
-		cm:progress_on_battle_completed(
-			"ariel_spawn_pending_battle_delay",
-			function()
-				cm:spawn_unique_agent(cm:get_faction(faction_key):command_queue_index(), "wh2_dlc16_wef_ariel", true)
-				self.ariel_unlocked = true
-				self.ariel_spawn_pending_faction = ""
-				cm:cancel_progress_on_battle_completed("ariel_spawn_pending_battle_delay")
-			end
-		)
-	else
-		cm:spawn_unique_agent(cm:get_faction(faction_key):command_queue_index(), "wh2_dlc16_wef_ariel", true)
-		self.ariel_unlocked = true
-		self.ariel_spawn_pending_faction = ""
 	end
 end
 
@@ -2124,10 +2053,8 @@ cm:add_saving_game_callback(
 			cm:save_named_value("Worldroots" .. k .. "rite_active", v.rite_active,context)
 		end
 		
-		cm:save_named_value("WorldrootsArielSpawned", Worldroots.ariel_unlocked, context)
 		cm:save_named_value("WorldrootsCompletedEncounters", Worldroots.completed_encounters, context)
 		cm:save_named_value("WorldrootsTurnsSinceLastMarker", Worldroots.turns_since_last_marker, context)
-		cm:save_named_value("WorldrootsArielSpawnPendingFaction", Worldroots.ariel_spawn_pending_faction, context)
 	end
 )
 
@@ -2141,8 +2068,6 @@ cm:add_loading_game_callback(
 			
 			Worldroots.completed_encounters = cm:load_named_value("WorldrootsCompletedEncounters", {}, context)
 			Worldroots.turns_since_last_marker = cm:load_named_value("WorldrootsTurnsSinceLastMarker", 0, context)
-			Worldroots.ariel_unlocked = cm:load_named_value("WorldrootsArielSpawned", false, context)
-			Worldroots.ariel_spawn_pending_faction = cm:load_named_value("WorldrootsArielSpawnPendingFaction", "", context)
 		end
 	end
 )

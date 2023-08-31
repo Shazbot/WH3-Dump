@@ -22,7 +22,8 @@ local factions_to_respawn = {
 	wh2_dlc13_lzd_spirits_of_the_jungle = true,
 	wh_dlc03_bst_beastmen_chaos = false,
 	wh2_dlc13_bst_beastmen_invasion = false,
-	wh2_dlc16_grn_savage_invasion = false
+	wh2_dlc16_grn_savage_invasion = false,
+	wh3_dlc24_tze_the_deceivers = true
 }
 
 local horde_respawn_data = {
@@ -48,6 +49,11 @@ local horde_respawn_data = {
 	wh2_main_sc_lzd_lizardmen = {
 		incident = "wh3_main_incident_horde_reemerges_lzd",
 		building = "wh2_dlc13_horde_lizardmen_portal_quetzl_1",
+		exclude_player_cultures_from_incident = {}
+	},
+	wh3_main_sc_tze_tzeentch = {
+		incident = nil, --In the case of the changeling we don't want an incident when he comes back
+		building = nil,
 		exclude_player_cultures_from_incident = {}
 	}
 }
@@ -75,6 +81,14 @@ random_army_manager:add_unit("wh2_main_sc_lzd_lizardmen_horde", "wh2_main_lzd_in
 random_army_manager:add_unit("wh2_main_sc_lzd_lizardmen_horde", "wh2_dlc13_lzd_mon_sacred_kroxigors_0",			2)
 random_army_manager:add_unit("wh2_main_sc_lzd_lizardmen_horde", "wh2_main_lzd_cav_cold_ones_1",					1)
 random_army_manager:add_unit("wh2_main_sc_lzd_lizardmen_horde", "wh2_main_lzd_mon_carnosaur_0",					1)
+
+random_army_manager:new_force("wh3_main_sc_tze_tzeentch_horde")
+
+random_army_manager:add_unit("wh3_main_sc_tze_tzeentch_horde", "wh3_main_tze_inf_blue_horrors_0",				3)
+random_army_manager:add_unit("wh3_main_sc_tze_tzeentch_horde", "wh3_main_tze_inf_pink_horrors_0",				3)
+random_army_manager:add_unit("wh3_main_sc_tze_tzeentch_horde", "wh3_main_tze_inf_forsaken_0",					2)
+random_army_manager:add_unit("wh3_main_sc_tze_tzeentch_horde", "wh3_main_tze_mon_screamers_0",					1)
+random_army_manager:add_unit("wh3_main_sc_tze_tzeentch_horde", "wh3_main_tze_cav_chaos_knights_0",				1)
 
 function add_horde_reemergence_listeners()
 	-- force horde factions to re-emerge via random incident

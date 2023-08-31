@@ -88,6 +88,7 @@ function setup_campaign_help_pages()
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_contracts", "ogre_contracts");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_meat", "ogre_great_maw");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_compass", "cathay_compass");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_compass", "dlc24_jade_compass");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_ivory_road", "cathay_caravans");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_military_convoys", "military_convoys");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_chaos_rifts", "rifts_panel");
@@ -97,6 +98,11 @@ function setup_campaign_help_pages()
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_sea_lanes", "sea_lanes_panel");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_grudges", "book_of_grudges");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_hellforge", "hellforge_panel_main");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_matters_of_state", "dlc24_matters_of_state");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_schemes", "dlc24_schemes");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_witchs_hut", "dlc24_witches_hut");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_witchs_hut", "brews_holder");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_hexes", "dlc24_hex_rituals");
 	
 	hpm:register_help_page_to_info_button_mapping(
 		"script_link_campaign_intrigue_at_the_court",
@@ -3196,8 +3202,7 @@ function setup_campaign_help_pages()
 		hpr_normal("war.camp.hp.compass.003"),
 		hpr_normal("war.camp.hp.compass.004"),
 		hpr_normal("war.camp.hp.compass.005"),
-		hpr_normal("war.camp.hp.compass.006"),
-		hpr_normal("war.camp.hp.compass.007")
+		hpr_normal("war.camp.hp.compass.006")
 	);
 	parser:add_record("campaign_compass", "script_link_campaign_compass", "tooltip_campaign_compass");
 	tp_compass = tooltip_patcher:new("tooltip_campaign_compass");
@@ -4504,6 +4509,25 @@ function setup_campaign_help_pages()
 		"ui_text_replacements_localised_text_hp_campaign_description_empire",
 		"UI/help_images/empire.png"
 	);
+
+	
+	
+	--
+	-- empowering the compass
+	--
+
+	hp_empowering_the_compass = help_page:new(
+		"script_link_campaign_empowering_the_compass",
+		hpr_title("war.camp.hp.empowering_the_compass.001"),
+		hpr_leader("war.camp.hp.empowering_the_compass.002"),
+		hpr_normal("war.camp.hp.empowering_the_compass.003"),
+		hpr_normal("war.camp.hp.empowering_the_compass.004"),
+		hpr_normal("war.camp.hp.empowering_the_compass.005"),
+		hpr_normal("war.camp.hp.empowering_the_compass.006")
+	);
+	parser:add_record("campaign_empowering_the_compass", "script_link_campaign_empowering_the_compass", "tooltip_campaign_empowering_the_compass");
+	tp_empowering_the_compass = tooltip_patcher:new("tooltip_campaign_empowering_the_compass");
+	tp_empowering_the_compass:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_empowering_the_compass", "ui_text_replacements_localised_text_hp_campaign_description_empowering_the_compass");
 	
 	
 	--
@@ -6191,6 +6215,26 @@ function setup_campaign_help_pages()
 			uim:unhighlight_all_for_tooltips();
 		end
 	);
+
+	
+	
+	--
+	-- hexes
+	--
+
+	hp_hexes = help_page:new(
+		"script_link_campaign_hexes",
+		hpr_title("war.camp.hp.hexes.001"),
+		hpr_leader("war.camp.hp.hexes.002"),
+		hpr_normal("war.camp.hp.hexes.003"),
+		hpr_normal("war.camp.hp.hexes.004"),
+		hpr_normal("war.camp.hp.hexes.005"),
+		hpr_normal("war.camp.hp.hexes.006"),
+		hpr_normal("war.camp.hp.hexes.007")
+	);
+	parser:add_record("campaign_hexes", "script_link_campaign_hexes", "tooltip_campaign_hexes");
+	tp_hexes = tooltip_patcher:new("tooltip_campaign_hexes");
+	tp_hexes:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_hexes", "ui_text_replacements_localised_text_hp_campaign_description_hexes");
 	
 	
 	
@@ -7126,6 +7170,26 @@ function setup_campaign_help_pages()
 	parser:add_record("campaign_marks_of_ruination", "script_link_campaign_marks_of_ruination", "tooltip_campaign_marks_of_ruination");
 	tp_marks_of_ruination = tooltip_patcher:new("tooltip_campaign_marks_of_ruination");
 	tp_marks_of_ruination:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_marks_of_ruination", "ui_text_replacements_localised_text_hp_campaign_description_marks_of_ruination");
+
+	
+	
+	--
+	-- matters of state
+	--
+
+	hp_matters_of_state = help_page:new(
+		"script_link_campaign_matters_of_state",
+		hpr_title("war.camp.hp.matters_of_state.001"),
+		hpr_leader("war.camp.hp.matters_of_state.002"),
+		hpr_normal("war.camp.hp.matters_of_state.003"),
+		hpr_normal("war.camp.hp.matters_of_state.004"),
+		hpr_normal("war.camp.hp.matters_of_state.005"),
+		hpr_normal("war.camp.hp.matters_of_state.006"),
+		hpr_normal("war.camp.hp.matters_of_state.007")
+	);
+	parser:add_record("campaign_matters_of_state", "script_link_campaign_matters_of_state", "tooltip_campaign_matters_of_state");
+	tp_matters_of_state = tooltip_patcher:new("tooltip_campaign_matters_of_state");
+	tp_matters_of_state:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_matters_of_state", "ui_text_replacements_localised_text_hp_campaign_description_matters_of_state");
 
 	
 	
@@ -9718,8 +9782,7 @@ function setup_campaign_help_pages()
 		hpr_leader("war.camp.hp.ruins.002"),
 		hpr_normal("war.camp.hp.ruins.003"),
 		hpr_normal("war.camp.hp.ruins.004"),
-		hpr_normal("war.camp.hp.ruins.005"), 
-		hpr_normal("war.camp.hp.ruins.006") 
+		hpr_normal("war.camp.hp.ruins.005")
 	);
 	parser:add_record("campaign_ruins", "script_link_campaign_ruins", "tooltip_campaign_ruins");
 	tp_ruins = tooltip_patcher:new("tooltip_campaign_ruins");
@@ -9809,6 +9872,25 @@ function setup_campaign_help_pages()
 	tp_saving_and_loading = tooltip_patcher:new("tooltip_campaign_saving_and_loading");
 	tp_saving_and_loading:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_saving_and_loading", "ui_text_replacements_localised_text_hp_campaign_description_saving_and_loading");
 
+	
+	
+	--
+	-- schemes
+	--
+
+	hp_schemes = help_page:new(
+		"script_link_campaign_schemes",
+		hpr_title("war.camp.hp.schemes.001"),
+		hpr_leader("war.camp.hp.schemes.002"),
+		hpr_normal("war.camp.hp.schemes.003"),
+		hpr_normal("war.camp.hp.schemes.004"),
+		hpr_normal("war.camp.hp.schemes.005"),
+		hpr_normal("war.camp.hp.schemes.006")
+	);
+	parser:add_record("campaign_schemes", "script_link_campaign_schemes", "tooltip_campaign_schemes");
+	tp_schemes = tooltip_patcher:new("tooltip_campaign_schemes");
+	tp_schemes:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_schemes", "ui_text_replacements_localised_text_hp_campaign_description_schemes");
+
 
 
 	--
@@ -9863,24 +9945,6 @@ function setup_campaign_help_pages()
 	parser:add_record("campaign_sea_shanties", "script_link_campaign_sea_shanties", "tooltip_campaign_sea_shanties");
 	tp_sea_shanties = tooltip_patcher:new("tooltip_campaign_sea_shanties");
 	tp_sea_shanties:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_sea_shanties", "ui_text_replacements_localised_text_hp_campaign_description_sea_shanties");
-	
-	
-	--
-	-- searching_ruins
-	--
-
-	hp_searching_ruins = help_page:new(
-		"script_link_campaign_searching_ruins",
-		hpr_title("war.camp.hp.searching_ruins.001"),
-		hpr_leader("war.camp.hp.searching_ruins.002"),
-		hpr_normal("war.camp.hp.searching_ruins.003"),
-		hpr_normal("war.camp.hp.searching_ruins.004"),
-		hpr_normal("war.camp.hp.searching_ruins.005"),
-		hpr_normal("war.camp.hp.searching_ruins.006")
-	);
-	parser:add_record("campaign_searching_ruins", "script_link_campaign_searching_ruins", "tooltip_campaign_searching_ruins");
-	tp_searching_ruins = tooltip_patcher:new("tooltip_campaign_searching_ruins");
-	tp_searching_ruins:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_searching_ruins", "ui_text_replacements_localised_text_hp_campaign_description_searching_ruins");
 
 
 	--
@@ -11211,8 +11275,8 @@ function setup_campaign_help_pages()
 		hpr_normal("war.camp.hp.tower_of_zharr.007")
 	);
 	parser:add_record("campaign_tower_of_zharr", "script_link_campaign_tower_of_zharr", "tooltip_campaign_tower_of_zharr");
-	tp_trade = tooltip_patcher:new("tooltip_campaign_tower_of_zharr");
-	tp_trade:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_tower_of_zharr", "ui_text_replacements_localised_text_hp_campaign_description_tower_of_zharr");
+	tp_tower_of_zharr = tooltip_patcher:new("tooltip_campaign_tower_of_zharr");
+	tp_tower_of_zharr:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_tower_of_zharr", "ui_text_replacements_localised_text_hp_campaign_description_tower_of_zharr");
 	
 	tl_tower_of_zharr = tooltip_listener:new(
 		"tooltip_campaign_tower_of_zharr",
@@ -11237,8 +11301,7 @@ function setup_campaign_help_pages()
 		hpr_normal("war.camp.hp.trade.003"),
 		hpr_normal("war.camp.hp.trade.004"),
 		hpr_normal("war.camp.hp.trade.005"),
-		hpr_normal("war.camp.hp.trade.006"),
-		hpr_normal("war.camp.hp.trade.009")
+		hpr_normal("war.camp.hp.trade.006")
 	);
 	parser:add_record("campaign_trade", "script_link_campaign_trade", "tooltip_campaign_trade");
 	tp_trade = tooltip_patcher:new("tooltip_campaign_trade");
@@ -11477,6 +11540,25 @@ function setup_campaign_help_pages()
 	parser:add_record("campaign_tribal_confederation", "script_link_campaign_tribal_confederation", "tooltip_campaign_tribal_confederation");
 	tp_tribal_confederation = tooltip_patcher:new("tooltip_campaign_tribal_confederation");
 	tp_tribal_confederation:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_tribal_confederation", "ui_text_replacements_localised_text_hp_campaign_description_tribal_confederation");
+
+	
+	
+	--
+	-- trickster cults
+	--
+
+	hp_trickster_cults = help_page:new(
+		"script_link_campaign_trickster_cults",
+		hpr_title("war.camp.hp.trickster_cults.001"),
+		hpr_leader("war.camp.hp.trickster_cults.002"),
+		hpr_normal("war.camp.hp.trickster_cults.003"),
+		hpr_normal("war.camp.hp.trickster_cults.004"),
+		hpr_normal("war.camp.hp.trickster_cults.005"),
+		hpr_normal("war.camp.hp.trickster_cults.006")
+	);
+	parser:add_record("campaign_trickster_cults", "script_link_campaign_trickster_cults", "tooltip_campaign_trickster_cults");
+	tp_trickster_cults = tooltip_patcher:new("tooltip_campaign_trickster_cults");
+	tp_trickster_cults:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_trickster_cults", "ui_text_replacements_localised_text_hp_campaign_description_trickster_cults");
 	
 	
 	
@@ -12666,6 +12748,46 @@ function setup_campaign_help_pages()
 		"tooltip_campaign_winds_of_magic_power_reserve_bar",
 		function()
 			uim:highlight_winds_of_magic(true);
+		end,
+		function()
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+	
+	
+	--
+	-- witchs hut
+	--
+
+	hp_witchs_hut = help_page:new(
+		"script_link_campaign_witchs_hut",
+		hpr_title("war.camp.hp.witchs_hut.001"),
+		hpr_leader("war.camp.hp.witchs_hut.002"),
+		hpr_normal("war.camp.hp.witchs_hut.003"),
+		hpr_normal("war.camp.hp.witchs_hut.004"),
+		hpr_normal("war.camp.hp.witchs_hut.005"),
+		hpr_normal("war.camp.hp.witchs_hut.006"),
+		hpr_normal("war.camp.hp.witchs_hut.007")
+	);
+	parser:add_record("campaign_witchs_hut", "script_link_campaign_witchs_hut", "tooltip_campaign_witchs_hut");
+	tp_witchs_hut = tooltip_patcher:new("tooltip_campaign_witchs_hut");
+	tp_witchs_hut:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_witchs_hut", "ui_text_replacements_localised_text_hp_campaign_description_witchs_hut");
+
+
+
+	--
+	-- witchs_hut_panel
+	--
+
+	parser:add_record("campaign_witchs_hut_panel", "script_link_campaign_witchs_hut_panel", "tooltip_campaign_witchs_hut_panel");
+	tp_witchs_hut_panel = tooltip_patcher:new("tooltip_campaign_witchs_hut_panel");
+	tp_witchs_hut_panel:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_campaign_title_witchs_hut_panel");
+	
+	tl_witchs_hut_panel = tooltip_listener:new(
+		"tooltip_campaign_witchs_hut_panel",
+		function()
+			uim:highlight_witchs_hut_panel(true);
 		end,
 		function()
 			uim:unhighlight_all_for_tooltips();

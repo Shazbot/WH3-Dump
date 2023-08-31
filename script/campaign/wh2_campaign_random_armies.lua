@@ -466,8 +466,7 @@ function WH_Random_Army_Generator:generate_random_army(key, template_key, num_un
 		ram:add_unit(key, "wh2_main_lzd_inf_saurus_warriors_1", 8*weighting_modifier);
 		ram:add_unit(key, "wh2_main_lzd_inf_saurus_spearmen_1", 8*weighting_modifier);
 		ram:add_unit(key, "wh2_main_lzd_cav_cold_ones_feral_0", 4*weighting_modifier);
-		ram:add_unit(key, "wh2_main_lzd_cav_cold_ones_0", 2*weighting_modifier);
-		ram:add_unit(key, "wh2_main_lzd_cav_cold_ones_1", 2*weighting_modifier);
+		ram:add_unit(key, "wh2_main_lzd_cav_cold_ones_1", 4*weighting_modifier);
 		ram:add_unit(key, "wh2_main_lzd_cav_horned_ones_0", 1*weighting_modifier);
 		ram:add_unit(key, "wh2_main_lzd_cav_terradon_riders_0", 2*weighting_modifier);
 		ram:add_unit(key, "wh2_main_lzd_cav_terradon_riders_1", 2*weighting_modifier);
@@ -478,7 +477,7 @@ function WH_Random_Army_Generator:generate_random_army(key, template_key, num_un
 		ram:add_unit(key, "wh2_main_lzd_mon_bastiladon_0", 2*weighting_modifier);
 		ram:add_unit(key, "wh2_main_lzd_mon_stegadon_0", 1*weighting_modifier);
 		ram:add_unit(key, "wh2_main_lzd_mon_kroxigors", 2*weighting_modifier);
-		ram:add_unit(key, "wh2_dlc12_lzd_mon_razordon_pack_0", 2*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc13_lzd_mon_razordon_pack_0", 2*weighting_modifier);
 
 		local weighting_modifier = high_tier_modifier
 		ram:add_unit(key, "wh2_main_lzd_inf_temple_guards", 4*weighting_modifier);
@@ -791,7 +790,7 @@ function WH_Random_Army_Generator:generate_random_army(key, template_key, num_un
 		local weighting_modifier = low_tier_modifier
 		ram:add_unit(key, "wh2_main_lzd_cav_cold_ones_feral_0", 6*weighting_modifier)
 		ram:add_unit(key, "wh2_dlc12_lzd_mon_salamander_pack_0", 2*weighting_modifier);
-		ram:add_unit(key, "wh2_dlc12_lzd_mon_razordon_pack_0", 2*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc13_lzd_mon_razordon_pack_0", 2*weighting_modifier);
 		
 		local weighting_modifier = mid_tier_modifier
 		ram:add_unit(key, "wh2_main_lzd_mon_bastiladon_0", 1*weighting_modifier);
@@ -814,8 +813,7 @@ function WH_Random_Army_Generator:generate_random_army(key, template_key, num_un
 		ram:add_unit(key, "wh2_main_lzd_inf_saurus_warriors_1", 8*weighting_modifier);
 		ram:add_unit(key, "wh2_main_lzd_inf_saurus_spearmen_1", 8*weighting_modifier);
 		ram:add_unit(key, "wh2_main_lzd_cav_cold_ones_feral_0", 4*weighting_modifier);
-		ram:add_unit(key, "wh2_main_lzd_cav_cold_ones_0", 2*weighting_modifier);
-		ram:add_unit(key, "wh2_main_lzd_cav_cold_ones_1", 2*weighting_modifier);
+		ram:add_unit(key, "wh2_main_lzd_cav_cold_ones_1", 4*weighting_modifier);
 		ram:add_unit(key, "wh2_main_lzd_cav_horned_ones_0", 1*weighting_modifier);
 		ram:add_unit(key, "wh2_main_lzd_cav_terradon_riders_0", 2*weighting_modifier);
 		ram:add_unit(key, "wh2_main_lzd_cav_terradon_riders_1", 2*weighting_modifier);

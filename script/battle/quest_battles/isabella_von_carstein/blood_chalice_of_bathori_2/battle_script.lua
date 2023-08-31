@@ -49,7 +49,7 @@ gb:queue_help_on_message("battle_started", "wh_pro02_qb_vmp_isabella_von_carstei
 gb:message_on_time_offset("start_ambush", 10000);
 gb:message_on_time_offset("reinforce_1", 195000);
 ga_ai_01:message_on_casualties("reinforce_1",0.75);
-ga_ai_01:defend_on_message("battle_started");
+ga_ai_01:defend_on_message("battle_started", 23, 51, 64.4);
 ga_ai_01:attack_on_message("battle_started",60000);
 ga_ai_02:reinforce_on_message("reinforce_1",9000);
 ga_ai_02:attack_on_message("reinforce_1");

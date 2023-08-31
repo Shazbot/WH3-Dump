@@ -122,7 +122,9 @@ Bastion.dragon_emperors_wrath_region_list_combi = {
 	"wh3_main_combi_region_fortress_of_eyes",
 	"wh3_main_combi_region_iron_storm",
 	"wh3_main_combi_region_dragons_crossroad",
-	"wh3_main_combi_region_red_fortress"
+	"wh3_main_combi_region_red_fortress",
+	"wh3_main_combi_region_foundry_of_bones",
+	"wh3_main_combi_region_bloodwind_keep"
 }
 
 Bastion.message_keys = { -- incident mapping
@@ -290,9 +292,41 @@ function Bastion:great_bastion_start()
 		cm:set_public_order_disabled_for_province_for_region_for_all_factions_and_set_default(self.spawn_locations_by_gate[i].gate_key, true)
 	end
 	
-	-- for IE, disable further Bastion behaviour if there are no human Cathayans.
-	if combined_map and #cm:get_human_factions_of_subculture(self.cathay_subculture) < 1 then
-		return
+	-- handle the dragon emperors wrath compass ability
+	core:add_listener(
+		"emperors_wrath_activated",
+		"WoMCompassUserActionTriggeredEvent",
+		function(context)
+			return context:action() == "apply_attrition_to_enemies_in_direction"
+		end,
+		function()
+			for i = 1, #self.dragon_emperors_wrath_region_list do
+				cm:apply_effect_bundle_to_region("wh3_region_payload_compass_wrath", self.dragon_emperors_wrath_region_list[i], 3)
+			end
+			
+			if cm:get_local_faction_subculture(true) == self.cathay_subculture then
+				CampaignUI.ClosePanel("cathay_compass")
+				cuim:start_scripted_sequence()
+				
+				cm:scroll_camera_with_cutscene_to_settlement(3, function() cuim:stop_scripted_sequence() end, self.dragon_emperors_wrath_region_list[1])
+			end
+		end,
+		true
+	)
+	
+	-- for IE, disable further Bastion behaviour if there are no player factions with the bastion threat feature
+	if combined_map then
+		local human_factions = cm:get_human_factions()
+		local no_bastion_threat = true
+		
+		for i = 1, #human_factions do
+			if self:faction_uses_bastion_threat(human_factions[i]) then
+				no_bastion_threat = false
+				break
+			end
+		end
+		
+		if no_bastion_threat then return end
 	end
 	
 	-- reduce the threat each time a kurgan warband army is defeated in battle, or end the active invasion if they die entirely
@@ -491,28 +525,6 @@ function Bastion:great_bastion_start()
 		true
 	)
 	
-	-- handle the dragon emperors wrath compass ability
-	core:add_listener(
-		"emperors_wrath_activated",
-		"WoMCompassUserActionTriggeredEvent",
-		function(context)
-			return context:action() == "apply_attrition_to_enemies_in_direction"
-		end,
-		function()
-			for i = 1, #self.dragon_emperors_wrath_region_list do
-				cm:apply_effect_bundle_to_region("wh3_region_payload_compass_wrath", self.dragon_emperors_wrath_region_list[i], 3)
-			end
-			
-			if cm:get_local_faction_subculture(true) == self.cathay_subculture then
-				CampaignUI.ClosePanel("cathay_compass")
-				cuim:start_scripted_sequence()
-				
-				cm:scroll_camera_with_cutscene_to_settlement(3, function() cuim:stop_scripted_sequence() end, self.dragon_emperors_wrath_region_list[1])
-			end
-		end,
-		true
-	)
-	
 	-- set up custom battle scripts for Miao Ying and Zhao Ming when defending the bastion, it will trigger a unique cutscene in battle
 	core:add_listener(
 		"player_defends_bastion_battle",
@@ -585,8 +597,20 @@ function Bastion:great_bastion_start()
 		true
 	)
 	
+	core:add_listener(
+		"reload_bastion_threat_UI_faction_turn_start",
+		"FactionTurnStart",
+		function(context)
+			local faction = context:faction()
+			return faction:is_human() and faction:subculture() == self.cathay_subculture
+		end,
+		function()
+			self:get_threat_increase_value()
+		end,
+		true
+	)
+	
 	self:get_threat_increase_value()
-	self:collect_threat_bonus_values()
 end
 
 -- get the current threat increase value, made up of the base threat, bastions not controlled by cathay and any bonus values
@@ -619,18 +643,20 @@ function Bastion:trigger_incident(incident_key, target_kurgan_warband, region)
 	local human_factions = cm:get_human_factions(true)
 	
 	for i = 1, #human_factions do
-		local current_human_faction = cm:get_faction(human_factions[i])
-		
-		if current_human_faction:culture() == "wh3_main_cth_cathay" then
+		if self:faction_uses_bastion_threat(human_factions[i]) then
 			if target_kurgan_warband then
-				cm:trigger_incident_with_targets(current_human_faction:command_queue_index(), incident_key, cm:get_faction(self.invasion_faction):command_queue_index(), 0, 0, 0, 0, 0)
+				cm:trigger_incident_with_targets(cm:get_faction(human_factions[i]):command_queue_index(), incident_key, cm:get_faction(self.invasion_faction):command_queue_index(), 0, 0, 0, 0, 0)
 			elseif region then
-				cm:trigger_incident_with_targets(current_human_faction:command_queue_index(), incident_key, 0, 0, 0, 0, cm:get_region(region):cqi(), 0)
+				cm:trigger_incident_with_targets(cm:get_faction(human_factions[i]):command_queue_index(), incident_key, 0, 0, 0, 0, cm:get_region(region):cqi(), 0)
 			else
 				cm:trigger_incident(human_factions[i], incident_key, true)
 			end
 		end
 	end
+end
+
+function Bastion:faction_uses_bastion_threat(faction_name)
+	return cco("CcoCampaignFaction", faction_name):Call("CanUseUiFeature(\"BASTION_THREAT\", FactionRecordContext)")
 end
 
 -- spawn a kurgan warband army at a given position
@@ -739,7 +765,11 @@ function Bastion:collect_threat_bonus_values()
 		end
 		
 		if not current_bastion_region:is_abandoned() and current_bastion_region:owning_faction():subculture() == self.cathay_subculture then
-			bv = bv + cm:get_regions_bonus_value(current_bastion_region, "bastion_threat_modifier") or 0
+			local region_bonus_value = cm:get_regions_bonus_value(current_bastion_region, "bastion_threat_modifier")
+			
+			common.set_context_value("bastion_bonus_value_" .. current_bastion_region:name(), region_bonus_value)
+			
+			bv = bv + region_bonus_value
 		end
 	end
 	

@@ -27,6 +27,11 @@ out.narrative("* wh3_narrative_great_game.lua loaded");
 
 local shared_prepend_str = shared_narrative_event_prepend_str;
 
+-- factions that should not run these narrative events
+local excluded_factions = {
+	wh3_dlc24_tze_the_deceivers = true
+}
+
 
 local locked_unholy_manifestation_keys = {
 	wh3_main_kho_khorne = {
@@ -102,6 +107,10 @@ end;
 
 
 function great_game_narrative_loader(faction_key, chaos_type, chaos_corruption_type, culture)
+	if excluded_factions[faction_key] then
+		out.narrative("\t* not running great game narrative events for faction [" .. faction_key .. "] as they are part of the exclusion list");
+		return;
+	end;
 
 	local chaos_type_lower = string.lower(chaos_type);
 

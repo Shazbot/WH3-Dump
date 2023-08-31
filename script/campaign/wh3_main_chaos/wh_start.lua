@@ -56,31 +56,29 @@ cm:add_pre_first_tick_callback(
 			end;
 			
 			-- If SCRIPTED_TWEAKER_21 is set then the central benchmark is disabled, allowing per-faction benchmarks to work
-			if not cm:is_multiplayer() then
-				if core:is_tweaker_set("SCRIPTED_TWEAKER_21") then
-					cm:load_local_faction_script("_start");
-				else
-					-- load the faction scripts (or benchmark)
-					-- loads the file in script/campaigns/<campaign_name>/factions/<faction_name>/<faction_name>_start.lua
-					cm:show_benchmark_if_required(
-						function()
-							cm:load_local_faction_script("_start");
-						end, 
-						"campaign_benchmark_01"
-						-- 348.7,		-- x
-						-- 330.9,		-- y
-						-- 10,			-- d
-						-- 0,			-- b
-						-- 10			-- h
-					);
+			if cm:is_multiplayer() or core:is_tweaker_set("SCRIPTED_TWEAKER_21") then
+				cm:load_local_faction_script("_start");
+			else
+				-- load the faction scripts (or benchmark)
+				-- loads the file in script/campaigns/<campaign_name>/factions/<faction_name>/<faction_name>_start.lua
+				cm:show_benchmark_if_required(
+					function()
+						cm:load_local_faction_script("_start");
+					end, 
+					"campaign_benchmark_01"
+					-- 348.7,		-- x
+					-- 330.9,		-- y
+					-- 10,			-- d
+					-- 0,			-- b
+					-- 10			-- h
+				);
 
-					if cm:is_benchmark_mode() then
-						cm:force_terrain_patch_visible("wh3_main_patch_area_forge_of_souls");
-						cm:force_terrain_patch_visible("wh3_main_patch_area_khorne_realm");
-						cm:force_terrain_patch_visible("wh3_main_patch_area_nurgle_realm");
-						cm:force_terrain_patch_visible("wh3_main_patch_area_slaanesh_realm");
-						cm:force_terrain_patch_visible("wh3_main_patch_area_tzeentch_realm");
-					end;
+				if cm:is_benchmark_mode() then
+					cm:force_terrain_patch_visible("wh3_main_patch_area_forge_of_souls");
+					cm:force_terrain_patch_visible("wh3_main_patch_area_khorne_realm");
+					cm:force_terrain_patch_visible("wh3_main_patch_area_nurgle_realm");
+					cm:force_terrain_patch_visible("wh3_main_patch_area_slaanesh_realm");
+					cm:force_terrain_patch_visible("wh3_main_patch_area_tzeentch_realm");
 				end;
 			end;
 		end;
@@ -196,6 +194,11 @@ function start_game_all_factions()
 	hellforge:setup_listeners()
 	chaos_dwarf_labour_move:setup_listeners()
 	chd_labour_raid:start_listeners()
+	
+	-- dlc24
+	mother_ostankya_features:initialise()
+	matters_of_state:initialise()
+	the_changeling_features:initialise()
 
 	-- General
 	character_unlocking:setup_legendary_hero_unlocking();
@@ -248,16 +251,6 @@ cm:add_ui_created_callback_mp_new(
 cm:add_first_tick_callback_mp_new(
 	function()
 		cm:fade_scene(1, 1);			-- fade to picture over 1s
-		cm:callback(
-			function()
-				if core:is_tweaker_set("SCRIPTED_TWEAKER_16") or activate_narrative_missions_in_mp then
-					if not cm:tol_campaign_key() then
-						core:trigger_event("ScriptEventStartNarrativeEventsMP");
-					end;
-				end;
-			end,
-			1
-		);
 	end
 );
 

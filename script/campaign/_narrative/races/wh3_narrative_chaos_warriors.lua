@@ -27,11 +27,6 @@ out.narrative("* wh3_narrative_champions.lua loaded");
 
 local shared_prepend_str = shared_narrative_event_prepend_str .. "_champions";
 
-narrative.add_exception_faction("wh3_dlc20_chs_azazel")
-narrative.add_exception_faction("wh3_dlc20_chs_festus")
-narrative.add_exception_faction("wh3_dlc20_chs_valkia")
-narrative.add_exception_faction("wh3_dlc20_chs_vilitch")
-
 
 coc_narrative_missions = {}
 
@@ -504,7 +499,7 @@ function coc_narrative_missions:initialise(faction_key)
 		local name = "champions_event_sacrifice_souls";
 		local mission_info = self.sacrifice_souls[faction_key]
 
-		if not narrative.get(faction_key, name .. "_block") then
+		if mission_info and not narrative.get(faction_key, name .. "_block") then
 			narrative_events.generic(
 				name,														-- unique name for this narrative event
 				faction_key,												-- key of faction to which it applies
@@ -541,7 +536,7 @@ function coc_narrative_missions:initialise(faction_key)
 		local name = "champions_event_gain_chaos_gift_slot";
 		local mission_info = self.gain_chaos_gift_slot[faction_key]
 
-		if not narrative.get(faction_key, name .. "_block") then
+		if mission_info and not narrative.get(faction_key, name .. "_block") then
 			narrative_events.generic(
 				name,														-- unique name for this narrative event
 				faction_key,												-- key of faction to which it applies
@@ -578,7 +573,7 @@ function coc_narrative_missions:initialise(faction_key)
 		local name = "champions_event_mark_units";
 		local mission_info = self.mark_units[faction_key]
 
-		if not narrative.get(faction_key, name .. "_block") then
+		if mission_info and not narrative.get(faction_key, name .. "_block") then
 			narrative_events.generic(
 				name,														-- unique name for this narrative event
 				faction_key,												-- key of faction to which it applies
@@ -619,7 +614,7 @@ function coc_narrative_missions:initialise(faction_key)
 		local name = "champions_event_upgrade_units";
 		local mission_info = self.upgrade_units[faction_key]
 
-		if not narrative.get(faction_key, name .. "_block") then
+		if mission_info and not narrative.get(faction_key, name .. "_block") then
 			narrative_events.generic(
 				name,														-- unique name for this narrative event
 				faction_key,												-- key of faction to which it applies
@@ -661,7 +656,7 @@ function coc_narrative_missions:initialise(faction_key)
 		local name = "champions_event_increase_dark_authority";
 		local mission_info = self.increase_dark_authority[faction_key]
 
-		if not narrative.get(faction_key, name .. "_block") then
+		if mission_info and not narrative.get(faction_key, name .. "_block") then
 			narrative_events.generic(
 				name,														-- unique name for this narrative event
 				faction_key,												-- key of faction to which it applies
@@ -697,7 +692,7 @@ function coc_narrative_missions:initialise(faction_key)
 		local name = "champions_event_path_to_glory";
 		local mission_info = self.path_to_glory[faction_key]
 
-		if not narrative.get(faction_key, name .. "_block") then
+		if mission_info and not narrative.get(faction_key, name .. "_block") then
 			narrative_events.generic(
 				name,														-- unique name for this narrative event
 				faction_key,												-- key of faction to which it applies
@@ -734,7 +729,7 @@ function coc_narrative_missions:initialise(faction_key)
 		local name = "champions_event_war_coordination";
 		local mission_info = self.war_coordination[faction_key]
 
-		if not narrative.get(faction_key, name .. "_block") then
+		if mission_info and not narrative.get(faction_key, name .. "_block") then
 			narrative_events.generic(
 				name,																			-- unique name for this narrative event
 				faction_key,																	-- key of faction to which it applies
@@ -765,7 +760,7 @@ function coc_narrative_missions:initialise(faction_key)
 		local name = "champions_event_gain_dark_fortress";
 		local mission_info = self.gain_dark_fortress[faction_key]
 
-		if not narrative.get(faction_key, name .. "_block") then
+		if mission_info and not narrative.get(faction_key, name .. "_block") then
 			narrative_events.generic(
 				name,																			-- unique name for this narrative event
 				faction_key,																	-- key of faction to which it applies

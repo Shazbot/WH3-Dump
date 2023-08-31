@@ -25,8 +25,6 @@
 -- Next add character name and subtype information
 -- 		EXAMPLE: ulrika = {
 --					name = "ulrika", 						-> Needs to match the character name
---					forename = "1001259072",				-> This value is from the Names table in DaVE
---					surname = "247283887", 					-> Add either the forename, surname or both depending on how it's linked to the character
 --					subtype = "wh3_twa09_neu_ulrika", 		-> This is the Agent subtype from the agent_subtypes table
 -- 				}
 -- Next specify the allowed cultures that can potentially get the character.
@@ -92,13 +90,15 @@ character_unlocking.character_list = {
 	"ariel",
 	"coeddil",
 	"gorduz",
-	"ulrika",
-	"harald"
+	"ulrika",		
+	"harald",
+	"scribes",
+	"aekold"
 }
 character_unlocking.character_data = {
 	kroak = {
 		-- Lizardmen Players will get a mission to unlock lord kroak after reaching rank 15
-		-- Itza unlocks kroak for free at the start (this stops anyone else getting him/the mission)
+		-- Human Itza unlocks kroak for free at the start (this stops anyone else getting him/the mission)
 		-- If there's no lizard players the strongest AI lizard gets kroak after turn 30
 
 		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
@@ -107,7 +107,6 @@ character_unlocking.character_data = {
 		ai_unlock_turn = 30, -- If there are no player lizardmen, assign kroak to the strongest current lizard faction
 		has_spawned = false,
 		name = "lord_kroak",
-		surname = "894850662", -- Names table ID
 		subtype = "wh2_dlc12_lzd_lord_kroak",
 		starting_owner_faction = "wh2_main_lzd_itza", -- Including this will spawn the hero for the faction when starting as them
 		allowed_cultures = {
@@ -150,7 +149,6 @@ character_unlocking.character_data = {
 		ai_unlock_rank = 5, -- If there are no player clan molder, assign ghoritch to the them
 		has_spawned = false,
 		name = "ghoritch",
-		forename = "1646918554",
 		subtype = "wh2_dlc16_skv_ghoritch",
 		override_allowed_factions = {
 			"wh2_main_skv_clan_moulder"
@@ -172,7 +170,6 @@ character_unlocking.character_data = {
 		ai_unlock_turn = 20,
 		has_spawned = false,
 		name = "ariel",
-		forename = "898828143",
 		subtype = "wh2_dlc16_wef_ariel",
 		require_dlc = "TW_WH2_DLC16_TWILIGHT",
 		override_allowed_factions = {
@@ -215,7 +212,6 @@ character_unlocking.character_data = {
 		ai_unlock_turn = 20,
 		has_spawned = false,
 		name = "coeddil",
-		forename = "898828143",
 		subtype = "wh2_dlc16_wef_coeddil",
 		override_allowed_factions = {
 			"wh2_dlc16_wef_drycha"
@@ -235,7 +231,6 @@ character_unlocking.character_data = {
 		ai_unlock_turn = 30,
 		has_spawned = false,
 		name = "gorduz",
-		forename = "1111304278",
 		subtype = "wh3_dlc23_chd_gorduz_backstabber",
 		allowed_cultures = {
 			"wh3_dlc23_chd_chaos_dwarfs"
@@ -271,8 +266,6 @@ character_unlocking.character_data = {
 		ai_unlock_rank = 15,
 		has_spawned = false,
 		name = "ulrika",
-		forename = "1001259072",
-		surname = "247283887",
 		subtype = "wh3_dlc23_neu_ulrika",
 		require_dlc = "TW_WH3_ULRIKA_FREE",
 		allowed_cultures = {
@@ -292,7 +285,7 @@ character_unlocking.character_data = {
 		dilemma_keys = {
 			"wh3_dlc23_neu_ulrika_choice"
 		},
-		spawn_hero_dilemma_choice = 0,
+		spawn_hero_dilemma_choice = {0},
 		ai_spawn_hero_dilemma_choice = 1,
 		ancillaries = {
 			"wh3_dlc23_anc_arcane_item_blood_shard",
@@ -333,7 +326,6 @@ character_unlocking.character_data = {
 		ai_unlock_turn = 25,
 		has_spawned = false,
 		name = "harald",
-		surname = "1924032272", -- Names table ID
 		subtype = "wh3_pro11_chs_cha_harald_hammerstorm",
 		require_dlc = "TW_WH3_PRO11_HARALD_HAMMERSTORM",
 		allowed_cultures = {
@@ -353,6 +345,218 @@ character_unlocking.character_data = {
 				"wh3_pro11_mis_chs_harald_hammerstorm_unlock"
 			}
 		},
+	},
+	scribes = {
+		-- Tzeentch players will get a mission to unlock the Blue Scribes once their faction leader reaches rank 8
+		-- Additionally at the end of the mission chain players will get a dilemma with options to either recruit the Blue Scribes or let the AI recruit them
+		-- If there are no human Tzeentch players the strongest Tzeentch faction will get the Blue Scribes after 30 turns
+
+		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
+		ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.turn,
+		alternate_grant_condition = character_unlocking.character_alternate_grant_condition_types.dilemma_payload,
+		unlock_rank = 10,
+		ai_unlock_turn = 30,
+		has_spawned = false,
+		name = "scribes",
+		subtype = "wh3_dlc24_tze_blue_scribes",
+		require_dlc = "TW_WH3_SHADOWS_OF_CHANGE",
+		override_allowed_factions = {
+			main_warhammer = {
+				"wh3_main_tze_oracles_of_tzeentch",
+				"wh3_dlc24_tze_the_deceivers",
+				"wh3_dlc20_chs_vilitch",
+				"wh3_main_dae_daemon_prince",
+				"wh3_dlc20_chs_kholek",
+				"wh3_dlc20_chs_sigvald",
+				"wh_main_chs_chaos",
+				"wh3_main_chs_shadow_legion"
+			},
+			wh3_main_chaos = {
+				"wh3_main_tze_oracles_of_tzeentch",
+				"wh3_dlc24_tze_the_deceivers",
+				"wh3_dlc20_chs_vilitch",
+				"wh3_main_dae_daemon_prince"
+			}
+		},
+		factions_involved = {},
+		mission_keys = {
+			["wh3_main_tze_oracles_of_tzeentch"] = "wh3_dlc24_mis_tze_blue_scribes_stage_1",
+			["wh3_dlc20_chs_kholek"] = "wh3_dlc24_mis_tze_blue_scribes_stage_1_chs",
+			["wh3_dlc20_chs_sigvald"] = "wh3_dlc24_mis_tze_blue_scribes_stage_1_chs",
+			["wh3_dlc20_chs_vilitch"] = "wh3_dlc24_mis_tze_blue_scribes_stage_1_chs",
+			["wh_main_chs_chaos"] = "wh3_dlc24_mis_tze_blue_scribes_stage_1_chs",
+			["wh3_main_chs_shadow_legion"] = "wh3_dlc24_mis_tze_blue_scribes_stage_1_chs",
+			["wh3_main_dae_daemon_prince"] = "wh3_dlc24_mis_tze_blue_scribes_stage_1_dae",
+			["wh3_dlc24_tze_the_deceivers"] = "wh3_dlc24_mis_tze_blue_scribes_stage_1_changeling"
+		},
+		dilemma_keys = {
+			"wh3_dlc24_tze_blue_scribes_choice"
+		},
+		spawn_hero_dilemma_choice = {0,1},
+		mission_chain_keys = {
+			main_warhammer = {
+				"wh3_dlc24_mis_tze_blue_scribes_stage_1",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_2",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_3",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_1_chs",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_2_chs",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_3_chs",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_1_dae",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_2_dae",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_3_dae",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_1_changeling",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_2_changeling",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_3_changeling"
+			},
+			wh3_main_chaos = {
+				"wh3_dlc24_mis_tze_blue_scribes_stage_1",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_2",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_3",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_1_chs",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_2_chs",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_3_chs",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_1_dae",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_2_dae",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_3_dae",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_1_changeling",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_2_changeling",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_3_changeling"
+			}
+		},
+		missions_to_trigger_dilemma = {
+			main_warhammer = {
+				"wh3_dlc24_mis_tze_blue_scribes_stage_3",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_3_chs",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_3_dae",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_3_changeling"
+			},
+			wh3_main_chaos = {
+				"wh3_dlc24_mis_tze_blue_scribes_stage_3",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_3_chs",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_3_dae",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_3_changeling"
+			}
+		},
+		trigger_dilemma_key = "wh3_dlc24_tze_blue_scribes_choice",
+		alt_reward_dilemma_triggered = false
+	},
+	aekold = {
+		-- Tzeentch players will get a mission to unlock Aekold Helbrass once their faction leader reaches rank 12
+		-- Additionally at the end of the mission chain players will get a dilemma with options to either recruit Aekold or let the AI recruit him
+		-- If there are no human Tzeentch players the strongest Tzeentch faction will get Aekold Helbrass after 30 turns
+
+		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
+		ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.turn,
+		alternate_grant_condition = character_unlocking.character_alternate_grant_condition_types.dilemma_payload,
+		unlock_rank = 12,
+		ai_unlock_turn = 30,
+		has_spawned = false,
+		name = "aekold",
+		subtype = "wh3_dlc24_tze_aekold_helbrass",
+		require_dlc = "TW_WH3_AEKOLD_FREE",
+		override_allowed_factions = {
+			main_warhammer = {
+				"wh3_main_tze_oracles_of_tzeentch",
+				"wh3_dlc24_tze_the_deceivers",
+				"wh3_dlc20_chs_vilitch",
+				"wh3_main_dae_daemon_prince",
+				"wh3_dlc20_chs_kholek",
+				"wh3_dlc20_chs_sigvald",
+				"wh_main_chs_chaos",
+				"wh3_main_chs_shadow_legion"
+			},
+			wh3_main_chaos = {
+				"wh3_main_tze_oracles_of_tzeentch",
+				"wh3_dlc24_tze_the_deceivers",
+				"wh3_dlc20_chs_vilitch",
+				"wh3_main_dae_daemon_prince"
+			}
+		},
+		factions_involved = {},
+		mission_keys = {
+			wh3_main_tze_oracles_of_tzeentch = {
+				["main_warhammer"] = "wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_1",
+				["wh3_main_chaos"] = "wh3_dlc24_mis_tze_aekold_helbrass_stage_1"
+			},
+			wh3_dlc20_chs_vilitch = {
+				["main_warhammer"] = "wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_1_chs",
+				["wh3_main_chaos"] = "wh3_dlc24_mis_tze_aekold_helbrass_stage_1_chs"
+			},
+			wh3_main_dae_daemon_prince = {
+				["main_warhammer"] = "wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_1_dae",
+				["wh3_main_chaos"] = "wh3_dlc24_mis_tze_aekold_helbrass_stage_1_dae"
+			},
+			wh3_dlc24_tze_the_deceivers = {
+				["main_warhammer"] = "wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_1_changeling",
+				["wh3_main_chaos"] = "wh3_dlc24_mis_tze_aekold_helbrass_stage_1_changeling"
+			},
+			wh3_dlc20_chs_kholek = {
+				["main_warhammer"] = "wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_1_chs",
+			},
+			wh3_dlc20_chs_sigvald = {
+				["main_warhammer"] = "wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_1_chs",
+			},
+			wh_main_chs_chaos = {
+				["main_warhammer"] = "wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_1_chs",
+			},
+			wh3_main_chs_shadow_legion = {
+				["main_warhammer"] = "wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_1_chs",
+			},
+		},
+		dilemma_keys = {
+			"wh3_dlc24_tze_aekold_helbras_choice"
+		},
+		spawn_hero_dilemma_choice = {0,1},
+		ancillaries = {
+			"wh3_dlc24_anc_weapon_the_windblade",
+			"wh3_dlc24_anc_enchanted_item_the_breath_of_life"
+		},
+		mission_chain_keys = {
+			main_warhammer = {
+				"wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_1_changeling",
+				"wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_1_chs",
+				"wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_1_dae",
+				"wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_1",
+				"wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_2_changeling",
+				"wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_2_chs",
+				"wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_2_dae",
+				"wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_2",
+				"wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_3_changeling",
+				"wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_3_chs",
+				"wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_3_dae",
+				"wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_3",
+			},
+			wh3_main_chaos = {
+				"wh3_dlc24_mis_tze_aekold_helbrass_stage_1_changeling",
+				"wh3_dlc24_mis_tze_aekold_helbrass_stage_1_chs",
+				"wh3_dlc24_mis_tze_aekold_helbrass_stage_1_dae",
+				"wh3_dlc24_mis_tze_aekold_helbrass_stage_1",
+				"wh3_dlc24_mis_tze_aekold_helbrass_stage_2_changeling",
+				"wh3_dlc24_mis_tze_aekold_helbrass_stage_2_chs",
+				"wh3_dlc24_mis_tze_aekold_helbrass_stage_2_dae",
+				"wh3_dlc24_mis_tze_aekold_helbrass_stage_2",
+				"wh3_dlc24_mis_tze_aekold_helbrass_stage_3_changeling",
+				"wh3_dlc24_mis_tze_aekold_helbrass_stage_3_chs",
+				"wh3_dlc24_mis_tze_aekold_helbrass_stage_3_dae",
+				"wh3_dlc24_mis_tze_aekold_helbrass_stage_3"
+			}
+		},
+		missions_to_trigger_dilemma = {
+			main_warhammer = {
+				"wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_3_changeling",
+				"wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_3_chs",
+				"wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_3_dae",
+				"wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_3",
+			},
+			wh3_main_chaos = {
+				"wh3_dlc24_mis_tze_aekold_helbrass_stage_3_changeling",
+				"wh3_dlc24_mis_tze_aekold_helbrass_stage_3_chs",
+				"wh3_dlc24_mis_tze_aekold_helbrass_stage_3_dae",
+				"wh3_dlc24_mis_tze_aekold_helbrass_stage_3"
+			}
+		},
+		trigger_dilemma_key = "wh3_dlc24_tze_aekold_helbras_choice",
+		alt_reward_dilemma_triggered = false
 	}
 }
 
@@ -379,7 +583,7 @@ function character_unlocking:setup_legendary_hero_unlocking()
 					has_starting_owner = true
 				end
 			end
-			if has_starting_owner == false then
+			if has_starting_owner == false then --Remember to add the spawn_hero_for_ai() function to the end of function for any new unlock condition type that you may add.
 				if current_character.condition_to_start_unlock == self.character_unlock_condition_types.rank then
 					self:add_listeners_for_character_rank_unlock(character)
 				elseif current_character.condition_to_start_unlock == self.character_unlock_condition_types.quest then
@@ -408,16 +612,19 @@ end
 function character_unlocking:add_listeners_for_character_rank_unlock(character)
 	out("#### Add Legendary Hero unlocking Listeners ####")
 	local character_info = self.character_data[character]
+	local rank_hero_unlock_human_count = 0
 
 	for i = 1, #character_info.allowed_factions do
 		local faction_interface = cm:get_faction(character_info.allowed_factions[i])
 		if faction_interface and faction_interface:is_human() then
 			-- there's at least 1 human player of mission factions
 			self:setup_mission_listeners(character)
-			return
+			rank_hero_unlock_human_count = rank_hero_unlock_human_count + 1
 		end
 	end
-	self:spawn_hero_for_ai(character)
+	if rank_hero_unlock_human_count == 0 then
+		self:spawn_hero_for_ai(character)
+	end
 end
 
 function character_unlocking:setup_mission_listeners(character)
@@ -427,7 +634,8 @@ function character_unlocking:setup_mission_listeners(character)
 
 	if character_info.has_spawned == false then
 		for i = 1, #character_info.allowed_factions do
-			if cm:get_faction(character_info.allowed_factions[i]):is_human() then
+			local faction = cm:get_faction(character_info.allowed_factions[i])
+			if faction and faction:is_human() then
 				cm:add_faction_turn_start_listener_by_name(
 					character_launch_mission,
 					character_info.allowed_factions[i],
@@ -436,9 +644,14 @@ function character_unlocking:setup_mission_listeners(character)
 							local faction = context:faction()
 							local faction_name = faction:name()
 
-							if character_info.factions_involved[faction_name] ~= true and faction:faction_leader():rank() >= character_info.unlock_rank then
+							if not character_info.factions_involved[faction_name] and faction:faction_leader():rank() >= character_info.unlock_rank then
 								character_info.factions_involved[faction_name] = true
-								cm:trigger_mission(faction_name, self:get_mission_key(character_info.mission_keys, faction_name), true)
+								local mission_key = self:get_mission_key(character_info.mission_keys, faction_name)
+								if is_string(mission_key) then 
+									cm:trigger_mission(faction_name, mission_key, true)
+								else
+									script_error("Legendary Hero spawning script returned >1 or 0 missions for a character when setting up listeners, which would otherwise crash the game")
+								end 
 							end
 						end
 					end,
@@ -476,15 +689,15 @@ end
 function character_unlocking:add_quest_mission_listener(character)
 	local character_info = self.character_data[character]
 	local character_mission_success = character_info.name .. "MissionSuccess"
+	local quest_hero_unlock_human_count = 0
 
 	for i = 1, #character_info.allowed_factions do
 		local faction = cm:get_faction(character_info.allowed_factions[i])
 
 		if faction and faction:is_human() then
 			local faction_name = faction:name()
-			if character_info.factions_involved[faction_name] ~= true then
-				character_info.factions_involved[faction_name] = true
-			end
+			character_info.factions_involved[faction_name] = true
+			quest_hero_unlock_human_count = quest_hero_unlock_human_count + 1
 
 			core:add_listener(
 				faction_name .. character_mission_success,
@@ -505,10 +718,11 @@ function character_unlocking:add_quest_mission_listener(character)
 				end,
 				true
 			)
-			return
 		end
 	end
-	self:spawn_hero_for_ai(character)
+	if quest_hero_unlock_human_count == 0 then
+		self:spawn_hero_for_ai(character)
+	end
 end
 
 ----------------------------------
@@ -518,15 +732,15 @@ end
 function character_unlocking:add_ritual_listener(character)
 	local character_info = self.character_data[character]
 	local character_ritual_success = character_info.name .. "ritualCompletedEvent"
+	local ritual_hero_unlock_human_count = 0
 
 	for i = 1, #character_info.allowed_factions do
 		local faction = cm:get_faction(character_info.allowed_factions[i])
 
 		if faction and faction:is_human() then
 			local faction_name = faction:name()
-			if character_info.factions_involved[faction_name] ~= true then
-				character_info.factions_involved[faction_name] = true
-			end
+			character_info.factions_involved[faction_name] = true
+			ritual_hero_unlock_human_count = ritual_hero_unlock_human_count + 1
 
 			core:add_listener(
 				faction_name .. character_ritual_success,
@@ -558,7 +772,9 @@ function character_unlocking:add_ritual_listener(character)
 			)
 		end
 	end
-	self:spawn_hero_for_ai(character)
+	if ritual_hero_unlock_human_count == 0 then
+		self:spawn_hero_for_ai(character)
+	end
 end
 
 ----------------------------------
@@ -598,15 +814,14 @@ function character_unlocking:ai_unlock_by_rank(character)
 
 	core:add_listener(
 		character_ai_spawn,
-		"CharacterrankUp",
+		"CharacterRankUp",
 		function(context)
-			local character = context:character()
-			local faction = character:family_member():character_details():faction()
+			local character_interface = context:character()
+			local faction = character_interface:family_member():character_details():faction()
 			local faction_name = faction:name()
 			for i = 1, #character_info.allowed_factions do
 				if faction_name == character_info.allowed_factions[i] then
-					return character:rank() == character_info.ai_unlock_rank and
-						self:character_has_valid_faction_in_campaign(character)
+					return character_interface:rank() >= character_info.ai_unlock_rank and self:character_has_valid_faction_in_campaign(character) and character_info.has_spawned == false
 				end
 			end
 		end,
@@ -643,7 +858,7 @@ function character_unlocking:add_dilemma_payload_listener(character)
 		function(context)
 			local choice = context:choice()
 			local cancel_for_other_mp_players = true
-			if choice == character_info.spawn_hero_dilemma_choice then
+			if self:is_match_key_from_list(choice, character_info.spawn_hero_dilemma_choice) then
 				self:spawn_hero(context:faction():name(), character, context:faction():faction_leader():command_queue_index())
 			elseif #cm:get_human_factions() > 1 and choice == character_info.ai_spawn_hero_dilemma_choice then
 				cancel_for_other_mp_players = false -- Don't cancel for other mp players
@@ -682,6 +897,7 @@ end
 function character_unlocking:add_building_completed_listeners(character)
 	local character_info = self.character_data[character]
 	local character_building_complete = character_info.name .. "buildingcompleted"
+	local building_unlock_human_faction_counter = 0
 
 	-- Setup mission trigger listeners
 	for i = 1, #character_info.allowed_factions do
@@ -689,9 +905,8 @@ function character_unlocking:add_building_completed_listeners(character)
 
 		if faction and faction:is_human() then
 			local faction_name = faction:name()
-			if character_info.factions_involved[faction_name] ~= true then
-				character_info.factions_involved[faction_name] = true
-			end
+			character_info.factions_involved[faction_name] = true
+			building_unlock_human_faction_counter = building_unlock_human_faction_counter + 1
 
 			core:add_listener(
 				faction_name..character_building_complete,
@@ -734,16 +949,24 @@ function character_unlocking:add_building_completed_listeners(character)
 		end,
 		false
 	)
+
+	if building_unlock_human_faction_counter == 0 then
+		self:spawn_hero_for_ai(character)
+	end
 end
 
 ----------------------------------
 ----------- Spawn Hero -----------
 ----------------------------------
 
-function character_unlocking:spawn_hero(faction, character, spawn_character_cqi)
+function character_unlocking:spawn_hero(faction_name, character, spawn_character_cqi)
 	local character_info = self.character_data[character]
+	local faction = cm:get_faction(faction_name)
 	if character_info.has_spawned == false then
 		character_info.has_spawned = true
+		if character_info.require_dlc ~= nil and not cm:faction_has_dlc_or_is_ai(character_info.require_dlc, faction_name) then
+			return
+		end
 		local character_ancillaries = character_info.name .. "GiveAncillaries"
 		local names_table = "names_name_"
 
@@ -751,11 +974,7 @@ function character_unlocking:spawn_hero(faction, character, spawn_character_cqi)
 			character_ancillaries,
 			"UniqueAgentSpawned",
 			function(context)
-				if character_info.surname then
-					return context:unique_agent_details():character():get_surname() == names_table .. character_info.surname
-				elseif character_info.forename then
-					return context:unique_agent_details():character():get_forename() == names_table .. character_info.forename
-				end
+				return context:unique_agent_details():character():character_subtype(character_info.subtype)
 			end,
 			function(context)
 				local agent = context:unique_agent_details():character()
@@ -770,60 +989,86 @@ function character_unlocking:spawn_hero(faction, character, spawn_character_cqi)
 
 					cm:replenish_action_points(cm:char_lookup_str(cqi))
 
-					cm:callback(
-						function()
-							if character_info.ancillaries then
-								for i = 1, #character_info.ancillaries do
-									cm:force_add_ancillary(agent, character_info.ancillaries[i], false, true)
+					if faction:is_human() then
+						cm:callback( --This can be a bit temperamental with AI factions, so we will use different method for them.
+							function()
+								if character_info.ancillaries then
+									for i = 1, #character_info.ancillaries do
+										cm:force_add_ancillary(agent, character_info.ancillaries[i], false, true)
+									end
 								end
-							end
 
+								cm:callback(
+									function()
+										CampaignUI.ClearSelection()
+									end,
+									0.5
+								)
+							end,
+							0.5
+						)
+
+						-- Move camera to newly spawned character position
+						if context:unique_agent_details():faction():is_human() and faction_name == cm:get_local_faction_name(true) then
 							cm:callback(
 								function()
-									CampaignUI.ClearSelection()
+									if not cm:model():pending_battle():is_active() then
+										local character = faction:faction_leader()
+										cm:scroll_camera_from_current(true, 1.5, {character:display_position_x(), character:display_position_y(), 6, 0, 6});
+									end
 								end,
-								0.5
+								0.4
 							)
-						end,
-						0.5
-					)
-
-					-- Move camera to newly spawned character position
-					local hero_faction = context:unique_agent_details():faction():name()
-					if cm:get_faction(hero_faction):is_human() and faction == cm:get_local_faction_name(true) then
-						cm:callback(
+						end
+					else 
+						character_ancillaries_ai = character_ancillaries .. "_ai"
+						core:add_listener(
+							character_ancillaries_ai,
+							"WorldStartRound",
+							true,
 							function()
-								if not cm:model():pending_battle():is_active() then
-									local character = cm:get_faction(faction):faction_leader()
-									cm:scroll_camera_from_current(true, 1.5, {character:display_position_x(), character:display_position_y(), 6, 0, 6});
+								if character_info.ancillaries then
+									for i = 1, #character_info.ancillaries do
+										cm:force_add_ancillary(agent, character_info.ancillaries[i], false, true)
+									end
 								end
 							end,
-							0.4
+							false
 						)
 					end
 				end
 			end,
 			false
 		)
-		local can_spawn = true
-		if character_info.require_dlc ~= nil and not cm:faction_has_dlc_or_is_ai(character_info.require_dlc, faction) then
-			can_spawn = false
+		
+		if not spawn_character_cqi and faction:has_faction_leader() then
+			local faction_leader = faction:faction_leader()
+			if faction_leader:has_military_force() then
+				spawn_character_cqi = faction_leader:command_queue_index()
+			end
 		end
 
-		if can_spawn then
-			if spawn_character_cqi then
+		if spawn_character_cqi then
+			local spawn_character = cm:get_character_by_cqi(spawn_character_cqi)
+			
+			if spawn_character:has_region() then
 				cm:spawn_unique_agent_at_character(
-					cm:get_faction(faction):command_queue_index(),
+					faction:command_queue_index(),
 					character_info.subtype,
 					spawn_character_cqi,
 					true
 				)
+			elseif faction:has_home_region() then
+				cm:spawn_unique_agent_at_region(faction:command_queue_index(), character_info.subtype, faction:home_region():cqi(), true)
 			else
-				cm:spawn_unique_agent(cm:get_faction(faction):command_queue_index(), character_info.subtype, true)
+				cm:spawn_unique_agent(faction:command_queue_index(), character_info.subtype, true)
 			end
-			if character_info.mission_incidents ~= nil then -- Trigger optional incidents
-				cm:trigger_incident(faction, character_info.mission_incidents[faction], true, true)
-			end
+		else
+			cm:spawn_unique_agent(faction:command_queue_index(), character_info.subtype, true)
+		end
+		
+		if character_info.mission_incidents ~= nil and faction:is_human() then -- Trigger optional incidents
+			cm:trigger_incident(faction_name, character_info.mission_incidents[faction_name], true, true)
 		end
 	end
 end
@@ -841,9 +1086,10 @@ function character_unlocking:get_strongest_ai_faction_available_to_character(cha
 
 	for _, valid_faction in ipairs(character_info.allowed_factions) do
 		local faction = cm:get_faction(valid_faction)
-		local rank = world:faction_strength_rank(faction)
+		
+		if faction and not faction:is_human() then
+			local rank = world:faction_strength_rank(faction)
 
-		if not faction:is_null_interface() and not faction:is_human() then
 			if rank < strongest_rank then
 				strongest_faction = valid_faction
 				strongest_rank = rank
@@ -910,23 +1156,42 @@ function character_unlocking:character_has_valid_faction_in_campaign(character)
 end
 
 function character_unlocking:get_allowed_factions_list(character_data)
-	local allowed_factions = {}
-	if character_data.override_allowed_factions then
-		allowed_factions = character_data.override_allowed_factions
-	else
-		for _, v in ipairs(character_data.allowed_cultures) do
-			local culture_to_allowed_factions =	self:get_allowed_factions_for_culture(v, character_data.non_playable_factions_allowed)
-			for i = 1, #culture_to_allowed_factions do
-				-- Don't setup missions for characters a player wouldn't be able to spawn due to lacking the DLC permissions anyway
-				if character_data.require_dlc ~= nil and cm:faction_has_dlc_or_is_ai(character_data.require_dlc, culture_to_allowed_factions[i]) then
-					table.insert(allowed_factions, culture_to_allowed_factions[i])
-				elseif character_data.require_dlc == nil then
-					table.insert(allowed_factions, culture_to_allowed_factions[i])
-				end
+    local allowed_factions = {}
+    local campaign_name = cm:get_campaign_name()
+
+    if character_data.override_allowed_factions then
+        local allowed_factions_list
+        if character_data.override_allowed_factions[campaign_name] ~= nil then
+            allowed_factions_list = character_data.override_allowed_factions[campaign_name]
+        else
+            allowed_factions_list = character_data.override_allowed_factions
+        end
+        for i = 1, #allowed_factions_list do
+			if (character_data.require_dlc and cm:faction_has_dlc_or_is_ai(character_data.require_dlc, allowed_factions_list[i])) or not character_data.require_dlc then
+				table.insert(allowed_factions, allowed_factions_list[i])
 			end
-		end
-	end
-	return allowed_factions
+        end
+    end
+	
+    if character_data.allowed_cultures then
+        local cultures_list
+        if character_data.allowed_cultures[campaign_name] ~= nil then
+            cultures_list = character_data.allowed_cultures[campaign_name]
+        else
+            cultures_list = character_data.allowed_cultures
+        end
+
+        for _, v in ipairs(cultures_list) do
+            local culture_to_allowed_factions = self:get_allowed_factions_for_culture(v, character_data.non_playable_factions_allowed)
+            for i = 1, #culture_to_allowed_factions do
+                -- Don't setup missions for characters a player wouldn't be able to spawn due to lacking the DLC permissions anyway
+				if (character_data.require_dlc and cm:faction_has_dlc_or_is_ai(character_data.require_dlc, culture_to_allowed_factions[i])) or not character_data.require_dlc then
+                    table.insert(allowed_factions, culture_to_allowed_factions[i])
+                end
+            end
+        end
+    end
+    return allowed_factions
 end
 
 function character_unlocking:get_allowed_factions_for_culture(culture, non_playable_factions_allowed)
@@ -946,6 +1211,7 @@ function character_unlocking:get_allowed_factions_for_culture(culture, non_playa
 	return available_factions
 end
 
+--Should rewrite this function at some point, it currently must return a string to achieve desired functionality but as written can return a table, a string, or nil. 
 function character_unlocking:get_mission_key(mission_keys, faction_name)
 	local faction_name = faction_name or ""
 	local campaign_name = cm:get_campaign_name()
@@ -977,18 +1243,16 @@ function character_unlocking:cancel_missions_for_other_players(completing_factio
 	local campaign_name = cm:get_campaign_name()
 	for i = 1, #character_info.allowed_factions do
 		local faction = character_info.allowed_factions[i]
-		if character_info.factions_involved[faction] == true then
-			if character_info.factions_involved[faction] ~= completing_faction then
-				if character_info.mission_chain_keys ~= nil then
-					for _, mission_key in ipairs(character_info.mission_chain_keys[campaign_name]) do
-						cm:cancel_custom_mission(faction, mission_key)
-					end
-				else
-					cm:cancel_custom_mission(faction, self:get_mission_key(character_info.mission_keys, faction))
+		if character_info.factions_involved[faction] and faction ~= completing_faction then
+			if character_info.mission_chain_keys ~= nil then
+				for _, mission_key in ipairs(character_info.mission_chain_keys[campaign_name]) do
+					cm:cancel_custom_mission(faction, mission_key)
 				end
-				if character_mission_success_listener then
-					core:remove_listener(faction .. character_mission_success_listener)
-				end
+			else
+				cm:cancel_custom_mission(faction, self:get_mission_key(character_info.mission_keys, faction))
+			end
+			if character_mission_success_listener then
+				core:remove_listener(faction .. character_mission_success_listener)
 			end
 		end
 	end

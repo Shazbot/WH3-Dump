@@ -275,6 +275,7 @@ function gotrek_setup()
 				cm:callback(
 					function()
 						cm:apply_effect_bundle_to_characters_force("wh2_pro08_gotrek_xp_sharing", char_cqi, 30, true)
+						cm:force_add_ancillary(cm:get_character_by_cqi(gotrek_details.gotrek_cqi), "wh2_pro08_anc_weapon_gotrek_axe", true, true)
 					end,
 					0.5
 				)
@@ -299,6 +300,7 @@ function gotrek_setup()
 							return
 						end
 						
+						cm:force_add_ancillary(cm:get_character_by_cqi(gotrek_details.felix_cqi), "wh2_pro08_anc_weapon_felix_sword", true, true)
 						local gotrek_char = cm:get_character_by_cqi(gotrek_details.gotrek_cqi)
 						
 						if gotrek_char and gotrek_char:has_military_force() then

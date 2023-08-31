@@ -420,8 +420,8 @@ function timer_manager:new_frontend()
 	--
 	-- In frontend, we repoint model callbacks to use the real timer as we have no model
 	timer_manager.callback = timer_manager.real_callback;
-	timer_manager.repeat_callback = timer_manager.real_repeat_callback;
-	timer_manager.remove_callback = timer_manager.real_remove_callback;
+	timer_manager.repeat_callback = timer_manager.repeat_real_callback;
+	timer_manager.remove_callback = timer_manager.remove_real_callback;
 
 
 	core.tm = tm;

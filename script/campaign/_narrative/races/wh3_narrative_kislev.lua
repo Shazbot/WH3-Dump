@@ -40,7 +40,13 @@ local shared_prepend_str = shared_narrative_event_prepend_str .. "_kislev";
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
 
+local kislev_devotion_excluded_factions = {
+	wh3_dlc24_ksl_daughters_of_the_forest = true
+}
+
 local function kislev_devotion_narrative_loader(faction_key)
+
+	if kislev_devotion_excluded_factions[faction_key] then return false end
 
 	-- output header
 	narrative.output_chain_header("kislev devotion", faction_key);
@@ -1013,7 +1019,13 @@ end;
 ------------------------------------------------------------------------------------------------------------------------
 
 
+local kislev_atamans_excluded_factions = {
+	wh3_dlc24_ksl_daughters_of_the_forest = true
+}
+
 local function kislev_atamans_narrative_loader(faction_key)
+
+	if kislev_atamans_excluded_factions[faction_key] then return false end
 
 	-- output header
 	narrative.output_chain_header("kislev atamans", faction_key);

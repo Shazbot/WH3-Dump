@@ -147,11 +147,9 @@ gb:message_on_time_offset("reinforcements_defend", 23000,"01_intro_cutscene_end"
 ga_player_reinforcements_1:reinforce_on_message("player_reinforcements", 10);
 ga_player_reinforcements_2:reinforce_on_message("player_reinforcements", 10);
 
-ga_player_reinforcements_1:defend_on_message("reinforcements_defend",-400,-3,100);
-ga_player_reinforcements_2:defend_on_message("reinforcements_defend",450,-50,100);
-ga_enemy_reinforcements_1:move_to_position_on_message("enemy_attack", v(420,426,50));
+ga_enemy_reinforcements_1:move_to_position_on_message("enemy_attack", v(-450,160,50));
 ga_enemy_reinforcements_1:attack_on_message("reinforcements_defend");
-ga_enemy_reinforcements_2:move_to_position_on_message("enemy_attack", v(-450,160,50));
+ga_enemy_reinforcements_2:move_to_position_on_message("enemy_attack", v(420,426,50));
 ga_enemy_reinforcements_2:attack_on_message("reinforcements_defend");
 
 -------------------------------------------------------------------------------------------------

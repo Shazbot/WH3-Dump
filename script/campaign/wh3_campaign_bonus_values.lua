@@ -1159,10 +1159,42 @@ core:add_listener(
 	function(context)
 		local slot_manager = context:slot_manager();
 		
-		cm:apply_dilemma_diplomatic_bonus(slot_manager:faction():name(), slot_manager:region():owning_faction():name(), math.clamp(cm:get_regions_bonus_value(slot_manager:region(), "alter_attitude_on_foreign_slot_completion"), -6, 6));
+		cm:apply_dilemma_diplomatic_bonus(
+			slot_manager:faction():name(), 
+			slot_manager:region():owning_faction():name(), 
+			math.clamp(cm:get_regions_bonus_value(slot_manager:region(), "alter_attitude_on_foreign_slot_completion"), -6, 6)
+		);
 	end,
 	true
 );
+
+-- provide a diplomatic bonus every turn whilst a specified foreign slot building is present
+core:add_listener(
+	"alter_attitude_each_turn_from_foreign_slot",
+	"FactionTurnStart",
+	function(context)
+		return not context:faction():foreign_slot_managers():is_empty()
+	end,
+	function(context)
+		local faction = context:faction()
+		local foreign_slot_managers = faction:foreign_slot_managers()
+		
+		for i = 0, foreign_slot_managers:num_items() - 1 do
+			local region = foreign_slot_managers:item_at(i):region()
+			local bv = cm:get_regions_bonus_value(region, "alter_attitude_each_turn_from_foreign_slot")
+			if bv ~= 0 then
+				cm:apply_dilemma_diplomatic_bonus(
+					faction:name(), 
+					region:owning_faction():name(), 
+					math.clamp(bv, -6, 6)
+				)
+			end
+		end
+		
+	end,
+	true
+)
+
 --[[
 -- surrender region to builder of foreign slot
 core:add_listener(
@@ -1390,6 +1422,180 @@ core:add_listener(
 	end,
 	function(context)
 		determine_forces_to_apply_climate_recruitment_cost(false, context:character():military_force());
+	end,
+	true
+);
+
+-- trade_agreement_visibility
+core:add_listener(
+	"trade_agreement_visibility_turn_start",
+	"ScriptEventHumanFactionTurnStart",
+	function(context)
+		return cm:get_factions_bonus_value(context:faction(), "trade_agreement_visibility") > 0;
+	end,
+	function(context)
+		reveal_shroud_over_trade_partner_territory(context:faction());
+	end,
+	true
+);
+
+-- reveal the shroud when a trade deal is made, if it's the player's turn
+core:add_listener(
+	"trade_agreement_visibility_trade_established",
+	"TradeRouteEstablished",
+	function(context)
+		local faction = context:faction();
+		return faction:is_human() and faction:is_factions_turn() and cm:get_factions_bonus_value(faction, "trade_agreement_visibility") > 0;
+	end,
+	function(context)
+		reveal_shroud_over_trade_partner_territory(context:faction());
+	end,
+	true
+);
+
+function reveal_shroud_over_trade_partner_territory(faction)
+	local factions_trading_with = faction:factions_trading_with();
+	local faction_name = faction:name();
+	
+	if factions_trading_with:num_items() > 0 then
+		for i = 0, factions_trading_with:num_items() - 1 do
+			local current_faction = factions_trading_with:item_at(i);
+			local current_faction_regions = current_faction:region_list();
+			
+			for j = 0, current_faction_regions:num_items() - 1 do
+				cm:make_region_visible_in_shroud(faction_name, current_faction_regions:item_at(j):name());
+			end;
+		end;
+	end;
+end;
+
+if cm:get_campaign_name() ~= "wh3_main_prologue" then
+	-- leech region's gdp to mother ostankya's faction
+	core:add_listener(
+		"region_gdp_leech_mother_ostankya",
+		"FactionTurnStart",
+		function(context)
+			return context:faction():name() == mother_ostankya_features.ostankya_faction
+		end,
+		function()
+			for _, region in model_pairs(cm:model():world():region_manager():region_list()) do
+				local bv = cm:get_regions_bonus_value(region, "region_gdp_leech_mother_ostankya")
+				
+				if bv > 0 then
+					cm:treasury_mod(mother_ostankya_features.ostankya_faction, math.round(region:gdp() * (bv / 100)))
+				end
+			end
+		end,
+		true
+	)
+
+	-- spawn disciple armies for mother ostankya
+	core:add_listener(
+		"create_disciple_army_mother_ostankya",
+		"FactionTurnStart",
+		function(context)
+			return context:faction():name() == mother_ostankya_features.ostankya_faction
+		end,
+		function()
+			for _, faction in model_pairs(cm:model():world():faction_list()) do
+				local bv = cm:get_factions_bonus_value(faction, "create_disciple_army_mother_ostankya")
+				
+				if bv > 0 then
+					local save_value = faction:name() .. "_create_disciple_army_mother_ostankya"
+					
+					if cm:get_saved_value(save_value) then
+						cm:set_saved_value(save_value, false)
+					else
+						local region_list = faction:region_list()
+						local region_to_spawn_in = region_list:item_at(cm:random_number(region_list:num_items()) - 1):name()
+						local x, y = cm:find_valid_spawn_location_for_character_from_settlement(mother_ostankya_features.ostankya_faction, region_to_spawn_in, false, true, 12)
+						
+						if x > 0 then
+							local units = "wh3_dlc24_ksl_mon_the_things_in_the_woods,wh3_dlc24_ksl_mon_the_things_in_the_woods,wh3_dlc24_ksl_mon_incarnate_elemental_of_beasts,wh3_main_ksl_mon_elemental_bear_0"
+							
+							if bv > 1 then
+								units = "wh3_dlc24_ksl_mon_the_things_in_the_woods,wh3_dlc24_ksl_mon_the_things_in_the_woods,wh3_dlc24_ksl_mon_the_things_in_the_woods,wh3_dlc24_ksl_mon_incarnate_elemental_of_beasts,wh3_dlc24_ksl_mon_incarnate_elemental_of_beasts,wh3_main_ksl_mon_elemental_bear_0"
+							end
+							
+							cm:create_force_with_general(
+								mother_ostankya_features.ostankya_faction,
+								units,
+								region_to_spawn_in,
+								x,
+								y,
+								"general",
+								"wh3_dlc24_ksl_boyar_summoned",
+								"",
+								"",
+								"",
+								"",
+								false,
+								function(cqi)
+									cm:apply_effect_bundle_to_characters_force("wh3_dlc24_bundle_ksl_mother_ostankya_disciple_army", cqi, 0)
+									cm:replenish_action_points(cm:char_lookup_str(cqi))
+								end
+							)
+						end
+						
+						cm:set_saved_value(save_value, true)
+					end
+				end
+			end
+		end,
+		true
+	)
+	
+	-- leech faction's background income to Jade dragon
+	core:add_listener(
+		"faction_gdp_leech_yuan_bo",
+		"FactionTurnStart",
+		function(context)
+			return context:faction():name() == matters_of_state.faction_string
+		end,
+		function(context)
+			local income_sum = 0
+			local yuan_siphon_bundle = "wh3_dlc24_ritual_cth_mos_stone_faction_steal_background_income_self"
+			local yuan_faction = context:faction()
+
+			for _, faction in model_pairs(cm:model():world():faction_list()) do
+				local bv = cm:get_factions_bonus_value(faction, "steal_gdp_for_yuan_bo")
+
+				if bv > 0 then
+					cm:treasury_mod(matters_of_state.faction_string, bv)
+					cm:treasury_mod(faction:name(), -bv)
+					income_sum = income_sum + bv
+				end
+			end
+
+			if yuan_faction:has_effect_bundle(yuan_siphon_bundle) then
+				cm:remove_effect_bundle(yuan_siphon_bundle, matters_of_state.faction_string)
+			end;
+			
+			if income_sum > 0 then
+				local bundle = cm:create_new_custom_effect_bundle(yuan_siphon_bundle)
+		
+				bundle:add_effect("wh3_dlc24_ritual_cth_mos_stone_faction_steal_background_income_self", "faction_to_faction_own", income_sum)
+				bundle:set_duration(0)
+				cm:apply_custom_effect_bundle_to_faction(bundle, yuan_faction)
+			end;
+		end,
+		true
+	)
+end
+
+-- Support for the blue scribes skill that generates a random cataclysm spell for the attached army
+core:add_listener(
+	"force_scribes_cataclysm_bundle",
+	"CharacterTurnStart",
+	function(context)
+	return cm:get_characters_bonus_value(context:character(), "scribes_random_cataclysm") == 1
+	end,
+	function(context)
+		local force = context:character():military_force()
+		local bundle = cm:create_new_custom_effect_bundle("wh3_dlc24_scripted_scribes_random_cataclysm")
+		local roll = cm:random_number(8)
+		bundle:add_effect("wh3_dlc24_effect_scribes_random_cataclysm_roll_"..roll, "force_to_force_own", 1)
+		cm:apply_custom_effect_bundle_to_force(bundle, force)
 	end,
 	true
 );

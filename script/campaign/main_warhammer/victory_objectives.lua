@@ -594,7 +594,7 @@ victory_objectives_ie = {
 			alignment = "chaos",
 			objectives = {
 				{
-					-- Destroy the empire factions
+					-- Destroy the empire factions (+ Bretonnia)
 					type = "DESTROY_FACTION",
 					conditions = {
 						"faction wh_main_emp_empire",
@@ -608,6 +608,7 @@ victory_objectives_ie = {
 						"faction wh_main_emp_stirland",
 						"faction wh_main_emp_talabecland",
 						"faction wh_main_emp_wissenland",
+						"faction wh_main_emp_marienburg",
 						"confederation_valid"
 					}
 				},
@@ -1574,6 +1575,68 @@ victory_objectives_ie = {
 				no_subculture_objective = true
 			},
 
+		-- Mother Ostankya
+		wh3_dlc24_ksl_daughters_of_the_forest = {
+			objectives = {
+				{
+					-- Collect 3 of Ostankya's forbidden Hexes
+					type = "SCRIPTED",
+					conditions = {
+						"script_key hexes_short_some",
+						"override_text mission_text_text_mis_activity_ostankya_collect_some_hexes"
+					}
+				},
+			},
+			long_objectives = {
+				{
+					--Collect each Hex and win the final Malediction of Ruin Hex battle 
+					type = "SCRIPTED",
+					conditions = {
+						"script_key hexes_victory_5",
+						"override_text mission_text_text_mis_activity_ostankya_roc_collect_hex_fifth"
+					}
+				},
+				{
+					type = "SCRIPTED",
+					conditions = {
+						"script_key hexes_victory_1",
+						"override_text mission_text_text_mis_activity_ostankya_roc_collect_hex_first"
+					}
+				},
+				{
+					type = "SCRIPTED",
+					conditions = {
+						"script_key hexes_victory_2",
+						"override_text mission_text_text_mis_activity_ostankya_roc_collect_hex_second"
+					}
+				},
+				{
+					type = "SCRIPTED",
+					conditions = {
+						"script_key hexes_victory_3",
+						"override_text mission_text_text_mis_activity_ostankya_roc_collect_hex_fourth"
+					}
+				},
+				{
+					type = "SCRIPTED",
+					conditions = {
+						"script_key hexes_victory_4",
+						"override_text mission_text_text_mis_activity_ostankya_roc_collect_hex_third"
+					}
+				},
+				{
+					type = "SCRIPTED",
+					conditions = {
+						"script_key hexes_long_all",
+						"override_text mission_text_text_mis_activity_ostankya_collect_all_hexes"
+					}
+				},
+		},
+			no_alignment_objective = true,
+			no_subculture_objective = true
+		},
+		
+
 		-- Mannfred von Carstein
 		wh_main_vmp_vampire_counts = {
 			objectives = {
@@ -1819,6 +1882,65 @@ victory_objectives_ie = {
 				}
 			}
 		},
+	
+			-- Yuan Bo, The Jade Dragon
+			wh3_dlc24_cth_the_celestial_court = {
+				objectives = {
+					{
+						-- Complete 2 of the 4 astromantic relays
+						type = "SCRIPTED",
+						conditions = {
+							"script_key empower_compass",
+							"override_text mission_text_text_wh3_dlc24_victory_complete_astromantic_relays"
+						}
+					}
+				},
+				long_objectives = {
+					{
+						-- Complete the north astromantic relay
+						type = "SCRIPTED",
+						conditions = {
+							"script_key empower_compass_north",
+							"override_text  mission_text_text_wh3_dlc24_victory_complete_astromantic_relays_north_ie"
+						}
+					},
+					{
+						-- Complete the east astromantic relay
+						type = "SCRIPTED",
+						conditions = {
+							"script_key empower_compass_east",
+							"override_text  mission_text_text_wh3_dlc24_victory_complete_astromantic_relays_east_ie"
+						}
+					},
+					{
+						-- Complete the south astromantic relay
+						type = "SCRIPTED",
+						conditions = {
+							"script_key empower_compass_south",
+							"override_text  mission_text_text_wh3_dlc24_victory_complete_astromantic_relays_south_ie"
+						}
+					},
+					{
+						-- Complete the west astromantic relay
+						type = "SCRIPTED",
+						conditions = {
+							"script_key empower_compass_west",
+							"override_text  mission_text_text_wh3_dlc24_victory_complete_astromantic_relays_west_ie"
+						}
+					},
+					{
+						-- win the final battle
+						type = "SCRIPTED",
+						conditions = {
+							"script_key final_battle",
+							"override_text mission_text_text_wh3_dlc24_victory_yuan_bo_final_battle"
+						}
+					}
+				},
+				no_alignment_objective = true,
+				no_subculture_objective = true
+			},
+	
 
 		--Grimgor Ironhide
 		wh_main_grn_greenskins = {
@@ -2345,10 +2467,11 @@ victory_objectives_ie = {
 		wh_main_chs_chaos = {
 			objectives = {
 				{
-					-- Destroy or Vassalise the Ice Court
+					-- Destroy or Vassalise the Ice Court & Boris
 					type = "DESTROY_FACTION",
 					conditions = {
 						"faction wh3_main_ksl_the_ice_court",
+						"faction wh3_main_ksl_ursun_revivalists",
 						"confederation_valid",
 						"vassalization_valid"
 					}
@@ -2362,7 +2485,70 @@ victory_objectives_ie = {
 						"province wh3_main_combi_province_the_skull_road"
 					}
 				}
-			}
+			},
+			long_objectives = {
+				{
+					-- Bring ruin to the Empire of Man
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh_main_emp_empire",
+						"faction wh_main_emp_averland",
+						"faction wh_main_emp_hochland",
+						"faction wh_main_emp_middenland",
+						"faction wh_main_emp_marienburg",
+						"faction wh_main_emp_nordland",
+						"faction wh_main_emp_ostland",
+						"faction wh_main_emp_ostermark",
+						"faction wh_main_emp_stirland",
+						"faction wh_main_emp_talabecland",
+						"faction wh_main_emp_wissenland",
+						"confederation_valid"
+					}
+				},
+				{
+					-- Capture at least 9 of the Dark Fortress regions
+					type = "CONTROL_N_REGIONS_FROM",
+					conditions = {
+						"total 9",
+						"region wh3_main_combi_region_ancient_city_of_quintex",
+						"region wh3_main_combi_region_altar_of_the_crimson_harvest",
+						"region wh3_main_combi_region_black_rock",
+						"region wh3_main_combi_region_black_fortress",
+						"region wh3_main_combi_region_brass_keep",
+						"region wh3_main_combi_region_bloodwind_keep",
+						"region wh3_main_combi_region_daemons_gate",
+						"region wh3_main_combi_region_dagraks_end",
+						"region wh3_main_combi_region_doomkeep",
+						"region wh3_main_combi_region_fortress_of_the_damned",
+						"region wh3_main_combi_region_karak_dum",
+						"region wh3_main_combi_region_karak_vlag",
+						"region wh3_main_combi_region_konquata",
+						"region wh3_main_combi_region_middenheim",
+						"region wh3_main_combi_region_monolith_of_borkill_the_bloody_handed",
+						"region wh3_main_combi_region_nuln",
+						"region wh3_main_combi_region_okkams_forever_maze",
+						"region wh3_main_combi_region_praag",
+						"region wh3_main_combi_region_red_fortress",
+						"region wh3_main_combi_region_tower_of_gorgoth",
+						"region wh3_main_combi_region_zanbaijin",
+						"region wh3_main_combi_region_the_challenge_stone",
+						"region wh3_main_combi_region_the_crystal_spires",
+						"region wh3_main_combi_region_the_godless_crater",
+						"region wh3_main_combi_region_the_forbidden_citadel",
+						"region wh3_main_combi_region_the_frozen_city",
+						"region wh3_main_combi_region_the_howling_citadel",
+						"region wh3_main_combi_region_the_lost_palace",
+						"region wh3_main_combi_region_the_monolith_of_katam",
+						"region wh3_main_combi_region_the_palace_of_ruin",
+						"region wh3_main_combi_region_the_silvered_tower_of_sorcerers",
+						"region wh3_main_combi_region_the_tower_of_khrakk",
+						"region wh3_main_combi_region_the_twisted_towers",
+						"region wh3_main_combi_region_the_writhing_fortress",
+						"override_text mission_text_text_mis_activity_control_n_regions_satrapy_including_at_least_n"
+					},
+				},
+			},
+			no_subculture_objective = true
 		},
 
 		-- Kholek Suneater
@@ -2463,6 +2649,40 @@ victory_objectives_ie = {
 					}
 				}
 			}
+		},
+
+		-- The Changeling
+		wh3_dlc24_tze_the_deceivers = {
+			objectives = {
+				{
+					-- Complete 2 Grand Schemes
+					type = "SCRIPTED",
+					conditions = {
+						"script_key schemes",
+						"override_text mission_text_text_wh3_dlc24_objective_the_changeling_short"
+					}
+				}
+			},
+			long_objectives = {
+				{
+					-- Complete 5 Grand Schemes
+					type = "SCRIPTED",
+					conditions = {
+						"script_key schemes_grand",
+						"override_text mission_text_text_wh3_dlc24_objective_the_changeling_long_grand_schemes_ie"
+					}
+				},
+				{
+					-- Complete the Ultimate Scheme
+					type = "SCRIPTED",
+					conditions = {
+						"script_key schemes",
+						"override_text mission_text_text_wh3_dlc24_objective_the_changeling_long"
+					}
+				}
+			},
+			no_alignment_objective = true,
+			no_subculture_objective = true
 		},
 
 		-- N'kari
@@ -2819,11 +3039,15 @@ end
 
 function victory_objectives_ie:create_alignment_objective(mm, faction_alignment, mission_key, faction_key)
 
-	local objectives = self.alignments[faction_alignment][mission_key].objectives
+	if not self.factions[faction_key] or (self.factions[faction_key] and self.factions[faction_key].no_alignment_objective ~= true) then
 
-	if objectives ~= nil then
+		local objectives = self.alignments[faction_alignment][mission_key].objectives
 
-		self:add_objectives(mm, objectives, faction_key)
+		if objectives ~= nil then
+
+			self:add_objectives(mm, objectives, faction_key)
+
+		end
 
 	end
 
@@ -3329,4 +3553,5 @@ function victory_objectives_ie:add_scripted_victory_listeners()
 			true
 		)
 	end
+
 end

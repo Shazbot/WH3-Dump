@@ -190,12 +190,13 @@ enemy_vampirates_west:message_on_casualties("enemy_vampirates_west_dying", 0.5);
 --gb:start_terrain_composite_scene_on_message("start_cs", flash_cs);
 
 --main orders
-enemy_cinematic:release_on_message("fight");
-ally_cinematic:attack_on_message("fight");
+enemy_cinematic:attack_force_on_message("fight", ally_cinematic, 8);           
+ally_cinematic:attack_force_on_message("fight", enemy_cinematic, 8);
 ally_cinematic:release_on_message("allies_dying");
 
 enemy_skaven_east:release_on_message("01_intro_cutscene_end", 5);
-enemy_vampirates_west:release_on_message("enemy_vampirates_proximity", 5);
+enemy_skaven_east:attack_on_message("01_intro_cutscene_end", 8);
+enemy_vampirates_west:attack_on_message("enemy_vampirates_proximity", 1);
 enemy_vampirates_west:goto_location_offset_on_message("01_intro_cutscene_end", 10, 150, true);
 --reinforcement boss orders
 
@@ -206,7 +207,7 @@ enemy_harkon_boss:reinforce_on_message("enemy_vampirates_west_dying", 10);
 enemy_harkon_boss:release_on_message("enemy_vampirates_west_dying", 30);
 --ally orders
 ally_nakai:goto_location_offset_on_message("01_intro_cutscene_end", 10, 150, true);
-ally_nakai:attack_on_message("nakai_proximity", 5);
+ally_nakai:attack_on_message("nakai_proximity", 3);
 ally_nakai:release_on_message("nakai_fighting", 5);
 
 gb:block_message_on_message("enemy_skaven_east_dying", "enemy_vampirates_west_dying", true);

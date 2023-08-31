@@ -163,13 +163,14 @@ ally_cinematic:message_on_rout_proportion("slann_dead", 1);
 ally_gor_rok:message_on_rout_proportion("gorrok_dead", 1);
 
 --reinforcement messages
-gb:message_on_time_offset("fight", 12000);
+gb:message_on_time_offset("fight", 9000);
 --ga_enemy_reinforcements:message_on_proximity_to_enemy("enemy_reinf_close", 150);
 enemy_cinematic:message_on_casualties("zombies_dying", 0.2);
 enemy_cinematic:message_on_casualties("zombies_almost_dead", 0.4);
 ally_cinematic:message_on_casualties("allies_dying", 0.1);
 
-ally_gor_rok:message_on_proximity_to_enemy("gor_rok_proximity", 100);
+--ally_gor_rok:message_on_proximity_to_enemy("gor_rok_proximity", 100);
+ally_gor_rok:attack_on_message("fight");
 enemy_vampirates_west:message_on_proximity_to_enemy("vampirates_west_proximity", 100);
 
 --composite scene timers
@@ -203,7 +204,7 @@ enemy_harkon_boss:release_on_message("enemy_skaven_east_dying", 30);
 enemy_harkon_boss:reinforce_on_message("enemy_vampirates_west_dying", 10);
 enemy_harkon_boss:release_on_message("enemy_vampirates_west_dying", 30);
 --ally orders
-ally_gor_rok:release_on_message("gor_rok_proximity", 5);
+--ally_gor_rok:release_on_message("gor_rok_proximity", 5);
 
 gb:block_message_on_message("enemy_skaven_east_dying", "enemy_vampirates_west_dying", true);
 gb:block_message_on_message("enemy_vampirates_west_dying", "enemy_skaven_east_dying", true);

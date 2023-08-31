@@ -955,7 +955,8 @@ function movie_overlay:stop()
 	end;
 
 	if self.uic:IsValid() then
-		self.uic:InterfaceFunction("StopMovie");
+		local uic_player = find_uicomponent(self.uic, "movie_overlay_player");
+		uic_player:InterfaceFunction("StopMovie");
 	end;
 end;
 

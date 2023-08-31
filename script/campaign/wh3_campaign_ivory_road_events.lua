@@ -41,32 +41,24 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			local target_faction = decoded_args[2];
 			local enemy_faction;
 			local target_region = decoded_args[1];
-			local custom_option = nil;
 			
 			local bandit_threat = tonumber(decoded_args[3]);
 		
 			local attacking_force = caravans:generate_attackers(bandit_threat, "");
 			
-			local cargo_amount = caravan_handle:cargo();
-			
-			--Dilemma option to remove cargo
-			function remove_cargo()
-				cm:set_caravan_cargo(caravan_handle, cargo_amount - 200)
-			end
-			
-			custom_option = remove_cargo;
-			
 			--Handles the custom options for the dilemmas, such as battles (only?)
 			local enemy_cqi = caravans:attach_battle_to_dilemma(
-													dilemma_name,
-													caravan,
-													attacking_force,
-													is_ambush,
-													target_faction,
-													enemy_faction,
-													target_region,
-													custom_option
-													);
+				dilemma_name,
+				caravan,
+				attacking_force,
+				is_ambush,
+				target_faction,
+				enemy_faction,
+				target_region,
+				function()
+					cm:set_caravan_cargo(caravan_handle, caravan_handle:cargo() - 200)
+				end
+			);
 			out.design(enemy_cqi);
 			
 			local target_faction_object = cm:get_faction(target_faction);
@@ -146,7 +138,6 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			local target_faction = decoded_args[2];
 			local enemy_faction;
 			local target_region = decoded_args[1];
-			local custom_option;
 			
 			local bandit_threat = tonumber(decoded_args[3]);
 			local attacking_force = caravans:generate_attackers(bandit_threat)
@@ -156,15 +147,15 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			-- else just ambush
 			if caravan:caravan_master():character_details():has_skill("wh3_main_skill_cth_caravan_master_scouts") or cm:random_number(3,0) == 3 then
 				local enemy_cqi = caravans:attach_battle_to_dilemma(
-														dilemma_name,
-														caravan,
-														attacking_force,
-														false,
-														target_faction,
-														enemy_faction,
-														target_region,
-														custom_option
-														);
+					dilemma_name,
+					caravan,
+					attacking_force,
+					false,
+					target_faction,
+					enemy_faction,
+					target_region,
+					nil
+				);
 				
 				--Trigger dilemma to be handled by aboove function
 				local faction_cqi = caravan_handle:caravan_force():faction():command_queue_index();
@@ -267,33 +258,17 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			local bandit_threat = tonumber(decoded_args[3]);
 			local attacking_force = caravans:generate_attackers(bandit_threat,"ogres")
 			
-			
-			--Eat unit to option 2
-			function eat_unit_outcome()
-				if random_unit ~= nil then
-					local caravan_master_lookup = cm:char_lookup_str(caravan:caravan_force():general_character():command_queue_index())
-					cm:remove_unit_from_character(
-					caravan_master_lookup,
-					random_unit);
-
-				else
-					out("Script error - should have a unit to eat?")
-				end
-			end
-			
-			custom_option = nil; --eat_unit_outcome;
-			
 			--Battle to option 1, eat unit to 2
 			local enemy_force_cqi = caravans:attach_battle_to_dilemma(
-														dilemma_name,
-														caravan,
-														attacking_force,
-														false,
-														target_faction,
-														enemy_faction,
-														target_region,
-														custom_option
-														);
+				dilemma_name,
+				caravan,
+				attacking_force,
+				false,
+				target_faction,
+				enemy_faction,
+				target_region,
+				nil
+			);
 		
 			--Trigger dilemma to be handled by above function
 			
@@ -355,13 +330,6 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			local faction_key = caravan_handle:caravan_force():faction():name();
 			local force_cqi = caravan_handle:caravan_force():command_queue_index();
 			
-			function extra_move()
-				--check if more than 1 move from the end
-				out.design(force_cqi);
-				cm:move_caravan(caravan_handle);
-			end
-			custom_option = extra_move;
-			
 			caravans:attach_battle_to_dilemma(
 				dilemma_name,
 				caravan_handle,
@@ -370,7 +338,10 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 				nil,
 				nil,
 				nil,
-				custom_option);
+				function()
+					cm:move_caravan(caravan_handle);
+				end
+			);
 			
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
 			local payload_builder = cm:create_payload();
@@ -483,12 +454,6 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			local faction_cqi = caravan_handle:caravan_force():faction():command_queue_index();
 			local force_cqi = caravan_handle:caravan_force():command_queue_index();
 			
-			function add_cargo()
-				local cargo = caravan_handle:cargo();
-				cm:set_caravan_cargo(caravan_handle, cargo+200)
-			end
-			custom_option = add_cargo;
-			
 			caravans:attach_battle_to_dilemma(
 				dilemma_name,
 				caravan_handle,
@@ -497,7 +462,10 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 				nil,
 				nil,
 				nil,
-				custom_option);
+				function()
+					cm:set_caravan_cargo(caravan_handle, caravan_handle:cargo() + 200)
+				end
+			);
 				
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
 			local payload_builder = cm:create_payload();
@@ -548,14 +516,15 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			--none to decode
 			
 			caravans:attach_battle_to_dilemma(
-						dilemma_name,
-						caravan_handle,
-						nil,
-						false,
-						nil,
-						nil,
-						nil,
-						nil);
+				dilemma_name,
+				caravan_handle,
+				nil,
+				false,
+				nil,
+				nil,
+				nil,
+				nil
+			);
 			
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
 			local payload_builder = cm:create_payload();
@@ -600,14 +569,15 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			--none to decode
 			
 			caravans:attach_battle_to_dilemma(
-						dilemma_name,
-						caravan_handle,
-						nil,
-						false,
-						nil,
-						nil,
-						nil,
-						nil);
+				dilemma_name,
+				caravan_handle,
+				nil,
+				false,
+				nil,
+				nil,
+				nil,
+				nil
+			);
 			
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
 			local payload_builder = cm:create_payload();
@@ -652,18 +622,18 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			out.design("giftFromInd action called")
 			local dilemma_name = "wh3_main_dilemma_cth_caravan_5";
 			
-			--Decode the string into arguments-- Need to specify the argument encoding
-			--none to decode
-			
 			caravans:attach_battle_to_dilemma(
-						dilemma_name,
-						caravan_handle,
-						nil,
-						false,
-						nil,
-						nil,
-						nil,
-						nil);
+				dilemma_name,
+				caravan_handle,
+				nil,
+				false,
+				nil,
+				nil,
+				nil,
+				function()
+					cm:set_caravan_cargo(caravan_handle, caravan_handle:cargo() + 1000)
+				end
+			);
 			
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
 			local payload_builder = cm:create_payload();
@@ -748,23 +718,21 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			local target_faction;
 			local enemy_faction = "wh3_main_kho_khorne_qb1";
 			local target_region = decoded_args[1];
-			local custom_option = nil;
 			
 			local bandit_threat = tonumber(decoded_args[3]);
 			local attacking_force = caravans:generate_attackers(bandit_threat,"daemon_incursion")
 			
-			
 			--Battle to option 1, eat unit to 2
 			local enemy_force_cqi = caravans:attach_battle_to_dilemma(
-														dilemma_name,
-														caravan,
-														attacking_force,
-														false,
-														target_faction,
-														enemy_faction,
-														target_region,
-														custom_option
-														);
+				dilemma_name,
+				caravan,
+				attacking_force,
+				false,
+				target_faction,
+				enemy_faction,
+				target_region,
+				nil
+			);
 		
 			--Trigger dilemma to be handled by above function
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);

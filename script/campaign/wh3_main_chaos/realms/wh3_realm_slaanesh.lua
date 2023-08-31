@@ -383,11 +383,14 @@ function setup_realm_slaanesh(entering_faction)
 							if circle_id == "slaanesh_first" then
 								
 								circle_dilemma_payload_first:treasury_adjustment(15000);
-								circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "common"));
-								circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "common"));
-								circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "common"));
-								circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "common"));
-								circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "uncommon"));
+								local ancillary = get_random_ancillary_key_for_faction(faction_name, false, "common")
+								if ancillary then
+									circle_dilemma_payload_first:faction_ancillary_gain(faction, ancillary);
+									circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "common"));
+									circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "common"));
+									circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "common"));
+									circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "uncommon"));
+								end;
 								
 							elseif circle_id == "slaanesh_second" then
 								
@@ -524,12 +527,15 @@ function setup_realm_slaanesh(entering_faction)
 									end;
 								elseif index == 2 then
 									circle_dilemma_payload_first:treasury_adjustment(100000);
-									circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "uncommon"));
-									circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "uncommon"));
-									circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "uncommon"));
-									circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "rare"));
-									circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "rare"));
-									circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "rare"));
+									local ancillary = get_random_ancillary_key_for_faction(faction_name, false, "uncommon")
+									if ancillary then
+										circle_dilemma_payload_first:faction_ancillary_gain(faction, ancillary);
+										circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "uncommon"));
+										circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "uncommon"));
+										circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "rare"));
+										circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "rare"));
+										circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "rare"));
+									end;
 								elseif index == 3 then
 									circle_dilemma_payload_first:treasury_adjustment(75000);
 									if not faction:ancillary_exists("wh3_main_anc_weapon_slaaneshs_blade") then
@@ -538,24 +544,30 @@ function setup_realm_slaanesh(entering_faction)
 									end;
 								elseif index == 4 then
 									circle_dilemma_payload_first:treasury_adjustment(75000);
-									circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "uncommon"));
-									circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "uncommon"));
-									circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "uncommon"));
-									circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "uncommon"));
-									circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "rare"));
-									circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "rare"));
+									local ancillary = get_random_ancillary_key_for_faction(faction_name, false, "uncommon")
+									if ancillary then
+										circle_dilemma_payload_first:faction_ancillary_gain(faction, ancillary);
+										circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "uncommon"));
+										circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "uncommon"));
+										circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "uncommon"));
+										circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "rare"));
+										circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "rare"));
+									end;
 									if not faction:ancillary_exists("wh3_main_anc_follower_personal_sycophant") then
 										remove_slaanesh_ancillary("wh3_main_anc_follower_personal_sycophant");
 										circle_dilemma_payload_first:character_ancillary_gain(character, "wh3_main_anc_follower_personal_sycophant", true);
 									end;
 								elseif index == 5 then
 									circle_dilemma_payload_first:treasury_adjustment(75000);
-									circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "uncommon"));
-									circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "uncommon"));
-									circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "rare"));
-									circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "rare"));
-									circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "rare"));
-									circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "rare"));
+									local ancillary = get_random_ancillary_key_for_faction(faction_name, false, "uncommon")
+									if ancillary then
+										circle_dilemma_payload_first:faction_ancillary_gain(faction, ancillary);
+										circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "uncommon"));
+										circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "rare"));
+										circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "rare"));
+										circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "rare"));
+										circle_dilemma_payload_first:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "rare"));
+									end;
 								else
 									circle_dilemma_payload_first:treasury_adjustment(50000);
 								end;

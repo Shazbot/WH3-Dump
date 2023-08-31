@@ -251,7 +251,10 @@ regiments_of_renown = {
 		"wh_pro04_chs_mon_chaos_spawn_ror_0",
 		"wh3_twa07_tze_cav_doom_knights_ror_0",
 		"wh3_twa08_tze_mon_lord_of_change_0_ror",
-		"wh3_twa10_tze_inf_blue_horrors_ror"
+		"wh3_twa10_tze_inf_blue_horrors_ror",
+		"wh3_dlc24_tze_inf_pink_horrors_ror",
+		"wh3_dlc24_tze_mon_mutalith_vortex_beast_ror",
+		"wh3_dlc24_tze_mon_screamers_ror"
 	},	
 	------------------
 	----  KHORNE  ----
@@ -271,7 +274,10 @@ regiments_of_renown = {
 		"wh3_twa06_ksl_inf_tzar_guard_ror_0",
 		"wh3_twa07_ksl_cav_war_bear_riders_ror_0",
 		"wh3_twa08_ksl_mon_elemental_bear_0_ror",
-		"wh3_twa10_ksl_inf_armoured_kossars_ror"
+		"wh3_twa10_ksl_inf_armoured_kossars_ror",
+		"wh3_dlc24_ksl_inf_akshina_ambushers_ror",
+		"wh3_dlc24_ksl_inf_streltsi_ror",
+		"wh3_dlc24_ksl_mon_the_things_in_the_woods_ror"
 	},
 	------------------
 	----  CATHAY  ----
@@ -280,7 +286,10 @@ regiments_of_renown = {
 		"wh3_twa06_cth_inf_dragon_guard_ror_0",
 		"wh3_twa07_cth_cav_jade_longma_riders_ror_0",
 		"wh3_twa08_cth_mon_terracotta_sentinel_0_ror",
-		"wh3_twa10_cth_inf_peasant_archers_ror"
+		"wh3_twa10_cth_inf_peasant_archers_ror",
+		"wh3_dlc24_cth_inf_dragon_guard_crossbowmen_ror",
+		"wh3_dlc24_cth_inf_onyx_crowmen_ror",
+		"wh3_dlc24_cth_veh_zhangu_war_drum_ror"
 	},
 	------------------
 	----  CHD  ----

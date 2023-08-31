@@ -919,7 +919,7 @@ function empire_check_civil_war(faction)
 							end
 						end
 					end
-					if war_dec == true then
+					if war_dec == true and faction:is_human() then
 						cm:trigger_incident(faction_key, "wh2_dlc13_emp_elector_civil_war", true);
 						empire_politics_factions[i].civil_war = true;
 						return true;
@@ -2483,6 +2483,7 @@ ELECTOR_REGION_GROUPS = {
 	"elector_region_middenland",
 	"elector_region_nordland",
 	"elector_region_ostermark",
+	"elector_region_ostland",
 	"elector_region_stirland",
 	"elector_region_talabecland",
 	"elector_region_wissenland"

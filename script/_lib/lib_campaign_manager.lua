@@ -708,7 +708,7 @@ end;
 
 
 --- @function require_path_to_campaign_faction_folder
---- @desc Adds the player faction's script folder for the current campaign to the lua path (<code>script/campaign/%campaign_name%/factions/%player_faction_name%/</code>), so that scripts related to the faction can be loaded with the <code>require</code> command. Unlike @campaign_manager:require_path_to_campaign_folder this can only be called after the game state has been created. A name for this campaign must have been set with @campaign_manager:new or @campaign_manager:set_campaign_name prior to calling this function.
+--- @desc Adds all player factions' script folder for the current campaign to the lua path (<code>script/campaign/%campaign_name%/factions/%player_faction_name%/</code>), so that scripts related to the faction can be loaded with the <code>require</code> command. Unlike @campaign_manager:require_path_to_campaign_folder this can only be called after the game state has been created. A name for this campaign must have been set with @campaign_manager:new or @campaign_manager:set_campaign_name prior to calling this function.
 function campaign_manager:require_path_to_campaign_faction_folder()
 	-- don't proceed if no campaign name has been set
 	if not self.name_is_set then
@@ -721,14 +721,16 @@ function campaign_manager:require_path_to_campaign_faction_folder()
 		return false;
 	end;
 
-	local local_faction_name = self:get_local_faction_name(true);
+	local human_faction_keys = self:get_human_factions();
 	
-	if not local_faction_name then
-		script_error("ERROR: require_path_to_campaign_faction_folder() called but no local faction could be found - has it been called too early during the load sequence, or during an autotest?");
+	if #human_faction_keys == 0 then
+		script_error("ERROR: require_path_to_campaign_faction_folder() called but no local factions could be found - has it been called too early during the load sequence, or during an autotest?");
 		return false;
 	end;
-
-	package.path = package.path .. ";" .. self:get_campaign_folder() .. "/" .. self.name .. "/factions/" .. local_faction_name .. "/?.lua"
+	
+	for i = 1, #human_faction_keys do
+		package.path = package.path .. ";" .. self:get_campaign_folder() .. "/" .. self.name .. "/factions/" .. human_faction_keys[i] .. "/?.lua"
+	end;
 end;
 
 
@@ -768,7 +770,7 @@ end;
 
 
 --- @function load_local_faction_script
---- @desc Loads a script file in the factions subfolder that corresponds to the name of the local player faction, with the supplied string appellation attached to the end of the script filename. This function is the preferred method for loading in local faction-specific script files. It calls @campaign_manager:require_path_to_campaign_faction_folder internally to set up the path, and uses @campaign_manager:load_global_script to perform the loading. It must not be called before the game is created.
+--- @desc Loads a script file in the factions subfolder that corresponds to the name of each player faction, with the supplied string appellation attached to the end of the script filename. This function is the preferred method for loading in local faction-specific script files. It calls @campaign_manager:require_path_to_campaign_faction_folder internally to set up the path, and uses @campaign_manager:load_global_script to perform the loading. It must not be called before the game is created.
 --- @p string script name appellation
 --- @r @boolean file loaded successfully
 --- @new_example
@@ -789,37 +791,40 @@ function campaign_manager:load_local_faction_script(name_appellation, single_pla
 		name_appellation = "";
 	end;
 	
-	local local_faction_name = self:get_local_faction_name(true);
+	local human_faction_keys = self:get_human_factions();
 	
-	if not local_faction_name then
-		out("Not loading local faction scripts as no local faction could be determined");
-		return false;
-	end;
-
-	local script_name = local_faction_name .. name_appellation;
-
-	if not vfs.exists("script/campaign/" .. self:get_campaign_name() .. "/factions/" .. local_faction_name .. "/" .. script_name .. ".lua") then
-		script_error("ERROR: load_local_faction_script() couldn't find faction script called [" .. script_name .. "] for faction [" .. local_faction_name .. "]");
+	if #human_faction_keys == 0 then
+		out("Not loading local faction scripts as no local factions could be determined");
 		return false;
 	end;
 	
-	-- include path to scripts in script/campaigns/<campaign_name>/factions/<faction_name>/* associated with this campaign/faction
-	self:require_path_to_campaign_faction_folder();	
-	
-	out("Loading faction script " .. script_name .. " for faction " .. local_faction_name);
-	
-	out.inc_tab();
-	
-	-- faction scripts loaded here - function will return true if the load succeeded
-	if self:load_global_script(script_name, single_player_only) then
-		out.dec_tab();
-		out("Faction scripts loaded");
-		return true;
-	else
-		out.dec_tab();
-	end;
+	for i = 1, #human_faction_keys do
+		local script_name = human_faction_keys[i] .. name_appellation;
 
-	return false;
+		if not vfs.exists("script/campaign/" .. self:get_campaign_name() .. "/factions/" .. human_faction_keys[i] .. "/" .. script_name .. ".lua") then
+			script_error("ERROR: load_local_faction_script() couldn't find faction script called [" .. script_name .. "] for faction [" .. human_faction_keys[i] .. "]");
+			return false;
+		end;
+	
+		-- include path to scripts in script/campaigns/<campaign_name>/factions/<faction_name>/* associated with this campaign/faction
+		self:require_path_to_campaign_faction_folder();	
+		
+		out("Loading faction script " .. script_name .. " for faction " .. human_faction_keys[i]);
+		
+		out.inc_tab();
+		
+		-- faction scripts loaded here - function will return true if the load succeeded
+		if self:load_global_script(script_name, single_player_only) then
+			out.dec_tab();
+		else
+			out.dec_tab();
+
+			return false;
+		end;
+	end;
+	
+	out("Faction scripts loaded");
+	return true;
 end;
 
 
@@ -2427,114 +2432,128 @@ end;
 
 
 -- internal function to play the intro cutscene
-local function campaign_intro_cutscene_play(cindy_scene_key_or_duration, cutscene_advice_keys, cam_gameplay_start, cutscene_config_callback, end_callback, hide_faction_leader_during_cutscene)
-	cm:fade_scene(1, 1);
+local function campaign_intro_cutscene_play(faction_key, cindy_scene_key_or_duration, cutscene_advice_keys, cam_gameplay_start, cutscene_config_callback, end_callback, hide_faction_leader_during_cutscene)
+	if cm:get_local_faction_name(true) == faction_key then
+		cm:fade_scene(1, 1);
 
-	local cutscene_intro;
+		local cutscene_intro;
 
-	local faction_leader_is_hidden = false;
+		local faction_leader_is_hidden = false;
 
-	local cindy_scene_key = nil;
-	local duration = nil;
-	if is_string(cindy_scene_key_or_duration) then
-		cindy_scene_key = cindy_scene_key_or_duration;
-	elseif is_number(cindy_scene_key_or_duration) then
-		duration = cindy_scene_key_or_duration;
-	end;
-
-	local function end_callback_wrapper()
-		cm:modify_advice(true);
-
-		if faction_leader_is_hidden then
-			out("Intro Cutscene: unhiding faction leader's character model at end of cutscene");
-			cm:toggle_character_hidden_from_view(cm:get_local_faction():faction_leader(), false);
+		local cindy_scene_key = nil;
+		local duration = nil;
+		if is_string(cindy_scene_key_or_duration) then
+			cindy_scene_key = cindy_scene_key_or_duration;
+		elseif is_number(cindy_scene_key_or_duration) then
+			duration = cindy_scene_key_or_duration;
 		end;
 
-		end_callback();
-	end;
-	
-	if cindy_scene_key then
-		cutscene_intro = campaign_cutscene:new_from_cindyscene(
-			cm:get_local_faction_name(true) .. "_intro",							-- string name for this cutscene
-			end_callback_wrapper,													-- end callback
-			cindy_scene_key,														-- path to cindyscene
-			0,																		-- blend in time (s)
-			1																		-- blend out time (s)
-		);
-	else
-		cutscene_intro = campaign_cutscene:new(
-			cm:get_local_faction_name(true) .. "_intro",							-- string name for this cutscene
-			duration,																-- duration (s)
-			end_callback_wrapper													-- end callback
-		);
-
-		cutscene_intro:action(
-			function()
-				cm:set_camera_position(cam_gameplay_start.x, cam_gameplay_start.y, cam_gameplay_start.d, cam_gameplay_start.b, cam_gameplay_start.h);
-			end,
-			0
-		);
-	end;
-
-	if hide_faction_leader_during_cutscene then
-		faction_leader_is_hidden = true;
-
-		-- If hide_faction_leader_during_cutscene is a number > 0, then interpret it as a timestamp and add an action to the cutscene to unhide them at this time
-		if is_number(hide_faction_leader_during_cutscene) and hide_faction_leader_during_cutscene > 0 then
-			cutscene_intro:action(
+		local function end_callback_wrapper()
+			cm:progress_on_all_clients_ui_triggered(
+				faction_key .. "_intro_finished",
 				function()
-					out("Intro Cutscene: unhiding faction leader's character model");
-					cm:toggle_character_hidden_from_view(cm:get_local_faction():faction_leader(), false);
-					faction_leader_is_hidden = false;
-				end,
-				hide_faction_leader_during_cutscene
+					cm:modify_advice(true);
+
+					if faction_leader_is_hidden then
+						out("Intro Cutscene: unhiding faction leader's character model at end of cutscene");
+						cm:toggle_character_hidden_from_view(cm:get_faction(faction_key):faction_leader(), false);
+					end;
+
+					end_callback();
+				end
 			);
 		end;
-	end;
+		
+		if cindy_scene_key then
+			cutscene_intro = campaign_cutscene:new_from_cindyscene(
+				faction_key .. "_intro",							-- string name for this cutscene
+				end_callback_wrapper,													-- end callback
+				cindy_scene_key,														-- path to cindyscene
+				0,																		-- blend in time (s)
+				1																		-- blend out time (s)
+			);
+		else
+			cutscene_intro = campaign_cutscene:new(
+				faction_key .. "_intro",							-- string name for this cutscene
+				duration,																-- duration (s)
+				end_callback_wrapper													-- end callback
+			);
 
-	--cutscene_intro:set_debug();
-	cutscene_intro:set_skippable(
-		true,
-		function() 
-			cm:override_ui("disable_advice_audio", true);
-			
-			-- clear advice history, and then show all the advice for the intro cutscene
-			common.clear_advice_session_history();
-			if is_table(cutscene_advice_keys) then
-				for i = 1, #cutscene_advice_keys do
-					cm:show_advice(cutscene_advice_keys[i], true);
-				end;
+			cutscene_intro:action(
+				function()
+					cm:set_camera_position(cam_gameplay_start.x, cam_gameplay_start.y, cam_gameplay_start.d, cam_gameplay_start.b, cam_gameplay_start.h);
+				end,
+				0
+			);
+		end;
+
+		if hide_faction_leader_during_cutscene then
+			faction_leader_is_hidden = true;
+
+			-- If hide_faction_leader_during_cutscene is a number > 0, then interpret it as a timestamp and add an action to the cutscene to unhide them at this time
+			if is_number(hide_faction_leader_during_cutscene) and hide_faction_leader_during_cutscene > 0 then
+				cutscene_intro:action(
+					function()
+						out("Intro Cutscene: unhiding faction leader's character model");
+						cm:toggle_character_hidden_from_view(cm:get_faction(faction_key):faction_leader(), false);
+						faction_leader_is_hidden = false;
+					end,
+					hide_faction_leader_during_cutscene
+				);
 			end;
-			
-			cm:callback(function() cm:override_ui("disable_advice_audio", false) end, 0.5);
-		end
-	);
+		end;
 
-	cutscene_intro:set_skip_camera(cam_gameplay_start.x, cam_gameplay_start.y, cam_gameplay_start.d, cam_gameplay_start.b, cam_gameplay_start.h);
-	cutscene_intro:set_disable_settlement_labels(false);
-	cutscene_intro:set_dismiss_advice_on_end(false);
-	cutscene_intro:set_disable_shroud(true);
-	cutscene_intro:set_intro_cutscene(true);
-	
-	if is_function(cutscene_config_callback) then
-		cutscene_config_callback(cutscene_intro);
+		--cutscene_intro:set_debug();
+		cutscene_intro:set_skippable(
+			true,
+			function() 
+				cm:override_ui("disable_advice_audio", true);
+				
+				-- clear advice history, and then show all the advice for the intro cutscene
+				common.clear_advice_session_history();
+				if is_table(cutscene_advice_keys) then
+					for i = 1, #cutscene_advice_keys do
+						cm:show_advice(cutscene_advice_keys[i], true);
+					end;
+				end;
+				
+				cm:callback(function() cm:override_ui("disable_advice_audio", false) end, 0.5);
+			end
+		);
+
+		cutscene_intro:set_skip_camera(cam_gameplay_start.x, cam_gameplay_start.y, cam_gameplay_start.d, cam_gameplay_start.b, cam_gameplay_start.h);
+		cutscene_intro:set_disable_settlement_labels(false);
+		cutscene_intro:set_dismiss_advice_on_end(false);
+		cutscene_intro:set_disable_shroud(true);
+		cutscene_intro:set_intro_cutscene(true);
+		
+		if is_function(cutscene_config_callback) then
+			cutscene_config_callback(cutscene_intro);
+		end;
+
+		cutscene_intro:start();
+	else
+		cm:progress_on_all_clients_ui_triggered(
+			faction_key .. "_intro_finished",
+			function()
+				end_callback();
+			end
+		);
 	end;
-
-	cutscene_intro:start();
 end;
 
 
-local function attempt_campaign_intro_cutscene_play(cindy_scene_key_or_duration, cutscene_advice_keys, cam_gameplay_start, cutscene_config_callback, end_callback_outer, hide_faction_leader_during_cutscene, pre_cindyscene_delay_callback, intro_fsm_skipped)
+local function attempt_campaign_intro_cutscene_play(faction_key, cindy_scene_key_or_duration, cutscene_advice_keys, cam_gameplay_start, cutscene_config_callback, end_callback_outer, hide_faction_leader_during_cutscene, pre_cindyscene_delay_callback, intro_fsm_skipped)
 
 	if not pre_cindyscene_delay_callback then
-		campaign_intro_cutscene_play(cindy_scene_key_or_duration, cutscene_advice_keys, cam_gameplay_start, cutscene_config_callback, end_callback_outer, hide_faction_leader_during_cutscene);
+		campaign_intro_cutscene_play(faction_key, cindy_scene_key_or_duration, cutscene_advice_keys, cam_gameplay_start, cutscene_config_callback, end_callback_outer, hide_faction_leader_during_cutscene);
 		return;
 	end;
 
 	local function progress_callback()
 		-- Wait for cutscene fade, otherwise the spacebar options will flash.
 		cm:callback(function() cuim:override("campaign_spacebar_options"):unlock() end, 1)
-		campaign_intro_cutscene_play(cindy_scene_key_or_duration, cutscene_advice_keys, cam_gameplay_start, cutscene_config_callback, end_callback_outer, hide_faction_leader_during_cutscene);
+		campaign_intro_cutscene_play(faction_key, cindy_scene_key_or_duration, cutscene_advice_keys, cam_gameplay_start, cutscene_config_callback, end_callback_outer, hide_faction_leader_during_cutscene);
 	end;
 
 	cuim:override("campaign_spacebar_options"):lock();
@@ -2546,6 +2565,7 @@ end;
 
 --- @function setup_campaign_intro_cutscene
 --- @desc Sets up defines common behaviour for intro cutscenes that factions scripts can use invoke of defining their own behaviour manually. In singleplayer mode, an intro cutscene will be started when the loading screen is dismised that will play the supplied cindyscene. In multiplayer mode, the camera is positioned at the default camera position. In both cases the script event <code>ScriptEventIntroCutsceneFinished</code> event is triggered when the sequence completes.
+--- @p @string faction key, The faction key that this cutscene is triggering for
 --- @p @table default camera position, Default camera position. This should be a lua table containing <code>x</code>, <code>y</code>, <code>d</code>, <code>b</code> and <code>h</code> fields.
 --- @p [opt=nil] @string cindy key or duration, @string key of the cindy scene to play, from table <code>campaign_cinematic_resources</code>, or (if you're building a new cutscene and editing it using <code>cutscene_config_callback</code>) the @number duration of that cutscene. If left as nil, then a placeholder non-cindy cutscene will be shown with a duration of 3 seconds.
 --- @p [opt=nil] @table advice keys, Table of advice keys that may be played within the cutscene.
@@ -2554,8 +2574,9 @@ end;
 --- @p [opt=nil] @string movie, Pre-cindyscene fullscreen movie to play, if one is desired. This should be a key from the <code>videos</code> table.
 --- @p [opt=false] @number hide faction leader, Hide the faction leader's character model while the intro cutscene is playing. If the @boolean value <code>true</code> is supplied here, or <code>0</code>, the faction leader's model will be hiddent at the start of the cutscene and unhidden at the end. If a positive number is supplied they will be hidden at the start, and then unhidden that many seconds in to the cutscene (or when the cutscene is skipped, whichever comes first).
 --- @p [opt=nil] @function pre-cindyscene callback, Pre-cindyscene progress-blocking callback. If supplied, this callback will be called prior to the cindyscene starting. When called, it will be supplied a progress function as a single argument. The cindyscene will not start until the progress function is called, allowing client scripts to determne when this should happen. The intended usage for this is to show an incident prior to the cindyscene launching, but this mechanism could be put to other uses.
-function campaign_manager:setup_campaign_intro_cutscene(cam_gameplay_start, cindy_scene_key_or_duration, cutscene_advice_keys, end_callback, cutscene_config_callback, pre_cutscene_fsm, hide_faction_leader_during_cutscene, pre_cindyscene_delay_callback)
-	if not self:is_new_game() then
+--- @p [opt=false] @boolean is the intro exclusive to the Realm of Chaos victory conditions. If supplied as true, the intro will only play when the Realm of Chaos victory conditions are enabled (an option available in MPC).
+function campaign_manager:setup_campaign_intro_cutscene(faction_key, cam_gameplay_start, cindy_scene_key_or_duration, cutscene_advice_keys, end_callback, cutscene_config_callback, pre_cutscene_fsm, hide_faction_leader_during_cutscene, pre_cindyscene_delay_callback, is_realm_of_chaos_exclusive)
+	if not self:is_new_game() or (cm:model():campaign_type() == "MP_NORMAL_NO_ROC" and is_realm_of_chaos_exclusive) then
 		return;
 	end;
 	
@@ -2604,25 +2625,24 @@ function campaign_manager:setup_campaign_intro_cutscene(cam_gameplay_start, cind
 		core:trigger_event("ScriptEventIntroCutsceneFinished");
 	end;
 
-
-	if not self:is_multiplayer() then
-		-- Failsafe: position the camera over the local faction's main army
-		do
-			local faction = cm:get_local_faction();
-			if faction then
-				local character = cm:get_highest_ranked_general_for_faction(faction);
-				if character then
-					local d = 14;
-					cm:set_camera_position(character:display_position_x(), character:display_position_y(), d, 0, d * 1.25);
-				end;
+	-- Failsafe: position the camera over the local faction's main army
+	do
+		local faction = cm:get_faction(faction_key);
+		if faction then
+			local character = cm:get_highest_ranked_general_for_faction(faction);
+			if character then
+				local d = 14;
+				cm:set_camera_position(character:display_position_x(), character:display_position_y(), d, 0, d * 1.25);
 			end;
 		end;
+	end;
 
-		-- At the start of a new singleplayer game, wait for the loading screen and then play the intro cutscene
-		self:start_intro_cutscene_on_loading_screen_dismissed(
-			function() 
-				-- If we have been given a fullscreen movie then play that first
-				if pre_cutscene_fsm and not cm:is_benchmark_mode() then
+	-- At the start of a new game, wait for the loading screen and then play the intro cutscene
+	self:start_intro_cutscene_on_loading_screen_dismissed(
+		function() 
+			-- If we have been given a fullscreen movie then play that first
+			if pre_cutscene_fsm and not cm:is_benchmark_mode() then
+				if cm:get_local_faction_name(true) == faction_key then
 					cm:fade_scene(0, 0);
 
 					local fsm_skipped = false;
@@ -2638,32 +2658,50 @@ function campaign_manager:setup_campaign_intro_cutscene(cam_gameplay_start, cind
 					mo:set_end_callback(
 						function()
 							if hide_faction_leader_during_cutscene then
-								cm:toggle_character_hidden_from_view(cm:get_local_faction():faction_leader(), true);
+								cm:toggle_character_hidden_from_view(cm:get_faction(faction_key):faction_leader(), true);
 							end;
 							
-							attempt_campaign_intro_cutscene_play(cindy_scene_key_or_duration, cutscene_advice_keys, cam_gameplay_start, cutscene_config_callback, end_callback_outer, hide_faction_leader_during_cutscene, pre_cindyscene_delay_callback, fsm_skipped);
+							cm:progress_on_all_clients_ui_triggered(
+								faction_key .. "_movie_finished",
+								function()
+									attempt_campaign_intro_cutscene_play(faction_key, cindy_scene_key_or_duration, cutscene_advice_keys, cam_gameplay_start, cutscene_config_callback, end_callback_outer, hide_faction_leader_during_cutscene, pre_cindyscene_delay_callback, fsm_skipped);
+								end
+							);
 						end
 					);
 
 					mo:start();
 				else
-					-- Hide faction leader character here so that it gets hidden for benchmark + standard intro
-					if hide_faction_leader_during_cutscene then
-						cm:toggle_character_hidden_from_view(cm:get_local_faction():faction_leader(), true);
-					end;
-
-					-- Play a benchmark if we're supposed to
-					self:show_benchmark_if_required(
+					cm:progress_on_all_clients_ui_triggered(
+						faction_key .. "_movie_finished",
 						function()
-							-- We're not in a benchmark, proceed with the normal intro
-							attempt_campaign_intro_cutscene_play(cindy_scene_key_or_duration, cutscene_advice_keys, cam_gameplay_start, cutscene_config_callback, end_callback_outer, hide_faction_leader_during_cutscene, pre_cindyscene_delay_callback, false);
-						end,
-						cindy_scene_key
+							attempt_campaign_intro_cutscene_play(faction_key, cindy_scene_key_or_duration, cutscene_advice_keys, cam_gameplay_start, cutscene_config_callback, end_callback_outer, hide_faction_leader_during_cutscene, pre_cindyscene_delay_callback, fsm_skipped);
+						end
 					);
 				end;
-			end
-		);		
-	end;
+			else
+				-- Hide faction leader character here so that it gets hidden for benchmark + standard intro
+				if hide_faction_leader_during_cutscene then
+					cm:toggle_character_hidden_from_view(cm:get_faction(faction_key):faction_leader(), true);
+				end;
+
+				-- Play a benchmark if we're supposed to
+				self:show_benchmark_if_required(
+					function()
+						-- We're not in a benchmark, proceed with the normal intro
+						cm:progress_on_all_clients_ui_triggered(
+							faction_key .. "_no_movie",
+							function()
+								attempt_campaign_intro_cutscene_play(faction_key, cindy_scene_key_or_duration, cutscene_advice_keys, cam_gameplay_start, cutscene_config_callback, end_callback_outer, hide_faction_leader_during_cutscene, pre_cindyscene_delay_callback, false);
+							end
+						);
+					end,
+					cindy_scene_key
+				);
+			end;
+		end,
+		faction_key
+	);
 end;
 
 
@@ -3567,7 +3605,7 @@ function campaign_manager:get_local_faction_name(force)
 end;
 
 
---- @function local_faction_exists
+--- @function has_local_faction
 --- @desc Returns whether a local faction exists. This should only return <code>false</code> in an autotest without a local faction.
 --- @return @boolean local faction exists
 function campaign_manager:has_local_faction()
@@ -4282,6 +4320,8 @@ end;
 --- @r @boolean <code>true</code> if the faction was player-controlled and owns the DLC, or if the faction was AI, otherwise <code>false</code>. 
 function campaign_manager:faction_has_dlc_or_is_ai(dlc_key, faction_key)
 	faction = self:get_faction(faction_key)
+	if not faction then return false end;
+	
 	if not faction:is_human() then
 		return true;
 	else
@@ -5783,7 +5823,7 @@ function campaign_manager:char_is_garrison_commander(character)
 		return false;
 	end;
 	
-	return self:char_is_general_with_army(character) and character:military_force():is_armed_citizenry();
+	return self:char_has_army(character) and character:military_force():is_armed_citizenry();
 end;
 
 
@@ -6657,6 +6697,7 @@ end;
 --- @p string character subtype, Character subtype of the agent.
 --- @p number x, x logical co-ordinate of agent.
 --- @p number y, y logical co-ordinate of agent.
+--- @p [opt=false] boolean disable_auto_select, if set to true it will prevent the game automatically selecting the agent on creation.
 --- @r @character interface Returns newly-created character if successful, false if not. 
 --- @example cm:create_agent(
 --- @example 	"wh_main_dwf_dwarfs",
@@ -6664,7 +6705,8 @@ end;
 --- @example 	714,
 --- @example 	353
 --- @example );
-function campaign_manager:create_agent(faction_key, agent_key, subtype_key, x, y)
+function campaign_manager:create_agent(faction_key, agent_key, subtype_key, x, y, disable_auto_select)
+	disable_auto_select = disable_auto_select or false
 	if not is_string(faction_key) then
 		script_error("ERROR: create_agent() called but supplied faction key [" .. tostring(faction_key) .. "] is not a string");
 		return;
@@ -6712,9 +6754,17 @@ function campaign_manager:create_agent(faction_key, agent_key, subtype_key, x, y
 	out("id: " .. id);
 	
 	out.dec_tab();
+
+	if disable_auto_select then
+		uim:override("selection_change"):lock()
+	end
 	
 	-- make the call to create the agent
 	local new_agent_interface = self.game_interface:create_agent(faction_key, agent_key, subtype_key, x, y, id);
+
+	if disable_auto_select then
+		uim:override("selection_change"):unlock()
+	end
 
 	if not new_agent_interface or new_agent_interface:is_null_interface() then
 		script_error("ERROR: create_agent() called for agent subtype "..subtype_key.." at "..tostring(x)..", "..tostring(y).." but code was unable to spawn agent!");
@@ -10340,7 +10390,7 @@ function campaign_manager:cache_pending_battle_character(list, character)
 	record.fm_cqi = character:family_member():command_queue_index();
 	record.faction_name = character:faction():name();
 	record.units = {};
-	record.position = {};
+	record.embedded_character_subtypes = {};
 	
 	if character:has_military_force() then
 		local mf = character:military_force();
@@ -10355,6 +10405,12 @@ function campaign_manager:cache_pending_battle_character(list, character)
 			unit_record.unit_key = unit:unit_key();
 			table.insert(record.units, unit_record);
 		end;
+		
+		for _, embedded_character in model_pairs(mf:character_list()) do
+			if record.cqi ~= embedded_character:command_queue_index() then
+				table.insert(record.embedded_character_subtypes, embedded_character:character_subtype_key())
+			end
+		end
 	else
 		script_error("WARNING: cache_pending_battle_character() called but supplied character (cqi: [" .. character:cqi() .. "], faction name: [" .. character:faction():name() .. "]) has no military force, how can this be? Not going to add CQI.");
 		return;
@@ -10473,6 +10529,17 @@ function campaign_manager:print_pending_battle_cache()
 		end;
 		
 		out(units_output .. "]");
+
+		local embedded_characters_output = "\t\t\t embedded character subtypes: [";
+		for j = 1, #current_record.embedded_character_subtypes do
+			embedded_characters_output = embedded_characters_output .. current_record.embedded_character_subtypes[j];
+			
+			if j < #current_record.embedded_character_subtypes then
+				embedded_characters_output = embedded_characters_output .. ", "
+			end;
+		end;
+		
+		out(embedded_characters_output .. "]");
 	end;
 	out("\tdefenders:");
 	for i = 1, #defenders do
@@ -10499,6 +10566,17 @@ function campaign_manager:print_pending_battle_cache()
 		end;
 		
 		out(units_output .. "]");
+
+		local embedded_characters_output = "\t\t\t embedded character subtypes: [";
+		for j = 1, #current_record.embedded_character_subtypes do
+			embedded_characters_output = embedded_characters_output .. current_record.embedded_character_subtypes[j];
+			
+			if j < #current_record.embedded_character_subtypes then
+				embedded_characters_output = embedded_characters_output .. ", "
+			end;
+		end;
+		
+		out(embedded_characters_output .. "]");
 	end;
 	out("*****");
 end;
@@ -10605,6 +10683,20 @@ function campaign_manager:pending_battle_cache_get_attacker(index)
 	end;
 	
 	return self.pbc_attackers[index].cqi, self.pbc_attackers[index].mf_cqi, self.pbc_attackers[index].faction_name;
+end;
+
+
+--- @function pending_battle_cache_get_attacker_embedded_character_subtypes
+--- @desc Returns the agent subtypes of all embedded characrers in a particular attacker's army in the cached pending battle. The attacker is specified by numerical index, with the first being accessible at record 1.
+--- @p @number index of attacker
+--- @r @table agent subtype keys
+function campaign_manager:pending_battle_cache_get_attacker_embedded_character_subtypes(index)
+	if not is_number(index) or index < 0 or index > #self.pbc_attackers then
+		script_error("ERROR: pending_battle_cache_get_attacker_embedded_character_subtypes() called but supplied index [" .. tostring(index) .. "] is out of range");
+		return false;
+	end;
+	
+	return self.pbc_attackers[index].embedded_character_subtypes;
 end;
 
 
@@ -10740,6 +10832,20 @@ function campaign_manager:pending_battle_cache_get_defender(index)
 end;
 
 
+--- @function pending_battle_cache_get_defender_embedded_character_subtypes
+--- @desc Returns the agent subtypes of all embedded characrers in a particular defender's army in the cached pending battle. The defender is specified by numerical index, with the first being accessible at record 1.
+--- @p @number index of defender
+--- @r @table agent subtype keys
+function campaign_manager:pending_battle_cache_get_defender_embedded_character_subtypes(index)
+	if not is_number(index) or index < 0 or index > #self.pbc_defenders then
+		script_error("ERROR: pending_battle_cache_get_defender_embedded_character_subtypes() called but supplied index [" .. tostring(index) .. "] is out of range");
+		return false;
+	end;
+	
+	return self.pbc_defenders[index].embedded_character_subtypes;
+end;
+
+
 --- @function pending_battle_cache_get_defender_fm_cqi
 --- @desc Returns the family member cqi of a particular defender in the cached pending battle. The defender is specified by numerical index, with the first being accessible at record 1.
 --- @p @number index of defender
@@ -10838,19 +10944,6 @@ function campaign_manager:pending_battle_cache_get_defender_unit(index, unit_ind
 	local unit_record = character_record.units[unit_index];
 
 	return unit_record.unit_cqi, unit_record.unit_key;
-end;
-
-
---- @function pending_battle_cache_get_defender_location
---- @desc Gets the x and y position of the defending army in the pending battle cache, at the specified index.
---- @p @number defender index, Index of defending character within the pending battle cache.
---- @r @number x position
---- @r @string y position
-function campaign_manager:pending_battle_cache_get_defender_location(index)
-	if not is_number(index) or index < 0 or index > #self.pbc_attackers then
-		script_error("ERROR: pending_battle_cache_get_defender_location() called but supplied index [" .. tostring(index) .. "] is out of range");
-		return false, false;
-	end;
 end;
 
 
@@ -11908,6 +12001,42 @@ function campaign_manager:scroll_camera_from_current(correct_endpoint, t, ...)
 	self:scroll_camera_with_direction(correct_endpoint, t, unpack(arg))
 	out.dec_tab();
 end;
+
+--- @function scroll_camera_to_region
+--- @desc Scrolls the camera from the current camera position. This hooks into scroll_camera_from_current, and respects the player's current height/rotation
+--- @p string faction_key, which faction to pan the camera for. This is to make sure we're not panning the camera for all players in mp
+--- @p string region_key, the region the camera should pan to. 
+--- @p string time, Time in seconds over which to scroll.
+--- @example cm:scroll_camera_to_region(
+--- @example 	"wh_main_emp_empire",
+--- @example 	"wh3_main_combi_region_altdorf",
+--- @example 	5
+--- @example )
+function campaign_manager:scroll_camera_to_region(faction_key, region_key, time)
+	if not is_string(faction_key) then
+		script_error("ERROR: scroll_camera_to_region() called but supplied faction key [" .. tostring(faction_key) .. "] is not a string");
+		return false;
+	end;
+
+	if not is_string(region_key) then
+		script_error("ERROR: scroll_camera_to_region() called but supplied region key [" .. tostring(region_key) .. "] is not a string");
+		return false;
+	end;
+
+	local region = cm:get_region(region_key);
+	
+	if not region then
+		script_error("ERROR: scroll_camera_to_region() called but region with supplied key [" .. region_key .. "] could not be found");
+		return false;
+	end;
+	
+	if cm:get_local_faction_name() == faction_key then
+		local display_x = region:settlement():display_position_x()
+		local display_y = region:settlement():display_position_y()
+		local cached_x, cached_y, cached_d, cached_b, cached_h = cm:get_camera_position()
+		cm:scroll_camera_from_current(false, time, {display_x, display_y, cached_d, cached_b, cached_h})
+	end
+end
 
 
 --- @function scroll_camera_with_cutscene
@@ -13457,8 +13586,9 @@ end;
 --- @function start_intro_cutscene_on_loading_screen_dismissed
 --- @desc This function provides an easy one-shot method of starting an intro flyby cutscene from a loading screen with a fade effect. Call this function on the first tick (or before), and pass to it a function which starts an intro cutscene.
 --- @p function callback, Callback to call.
+--- @p string faction_key, which faction to start the intro cutscene for. This is to make sure we're not turning on cinematic borders for all players in mp
 --- @p [opt=0] number fade in time, Time in seconds over which to fade in the camera from black.
-function campaign_manager:start_intro_cutscene_on_loading_screen_dismissed(callback, fade_in_duration)
+function campaign_manager:start_intro_cutscene_on_loading_screen_dismissed(callback, faction_key, fade_in_duration)
 	if not is_function(callback) then
 		script_error("ERROR: start_intro_cutscene_on_loading_screen_dismissed() called but supplied callback [" .. tostring(callback) .. "] is not a function");
 		return false;
@@ -13471,7 +13601,10 @@ function campaign_manager:start_intro_cutscene_on_loading_screen_dismissed(callb
 		return false;
 	end;
 	
-	CampaignUI.ToggleCinematicBorders(true);
+	if cm:get_local_faction_name(true) == faction_key then
+		CampaignUI.ToggleCinematicBorders(true);
+	end;
+	
 	self:fade_scene(0, 0);
 
 	core:progress_on_loading_screen_dismissed(
@@ -14584,20 +14717,19 @@ campaign_manager.diplomacy_types = {
 	["break trade"] = 2^12,							--- @desc <li>"break trade"</li>
 	["break alliance"] = 2^13,						--- @desc <li>"break alliance"</li>
 	["hostages"] = 2^14,							--- @desc <li>"hostages"</li>
-	["marriage"] = 2^15,							--- @desc <li>"marriage"</li>
-	["non aggression pact"] = 2^16,					--- @desc <li>"non aggression pact"</li>
-	["soft military access"] = 2^17,				--- @desc <li>"soft military access"</li>
-	["cancel soft military access"] = 2^18,			--- @desc <li>"cancel soft military access"</li>
-	["defensive alliance"] = 2^19,					--- @desc <li>"defensive alliance"</li>
-	["client state"] = 2^20,						--- @desc <li>"client state"</li>
-	["form confederation"] = 2^21,					--- @desc <li>"form confederation"</li>
-	["break non aggression pact"] = 2^22,			--- @desc <li>"break non aggression pact"</li>
-	["break soft military access"] = 2^23,			--- @desc <li>"break soft military access"</li>
-	["break defensive alliance"] = 2^24,			--- @desc <li>"break defensive alliance"</li>
-	["break vassal"] = 2^25,						--- @desc <li>"break vassal"</li>
-	["break client state"] = 2^26,					--- @desc <li>"break client state"</li>
-	["state gift unilateral"] = 2^27--[[,			--- @desc <li>"state gift unilateral"</li>
-	["all"] = (2^28 - 1)							--- @desc <li>"all"</li></ul>
+	["non aggression pact"] = 2^15,					--- @desc <li>"non aggression pact"</li>
+	["soft military access"] = 2^16,				--- @desc <li>"soft military access"</li>
+	["cancel soft military access"] = 2^17,			--- @desc <li>"cancel soft military access"</li>
+	["defensive alliance"] = 2^18,					--- @desc <li>"defensive alliance"</li>
+	["client state"] = 2^19,						--- @desc <li>"client state"</li>
+	["form confederation"] = 2^20,					--- @desc <li>"form confederation"</li>
+	["break non aggression pact"] = 2^21,			--- @desc <li>"break non aggression pact"</li>
+	["break soft military access"] = 2^22,			--- @desc <li>"break soft military access"</li>
+	["break defensive alliance"] = 2^23,			--- @desc <li>"break defensive alliance"</li>
+	["break vassal"] = 2^24,						--- @desc <li>"break vassal"</li>
+	["break client state"] = 2^25,					--- @desc <li>"break client state"</li>
+	["state gift unilateral"] = 2^26--[[,			--- @desc <li>"state gift unilateral"</li>
+	["all"] = (2^27 - 1)							--- @desc <li>"all"</li></ul>
 ]]
 };
 

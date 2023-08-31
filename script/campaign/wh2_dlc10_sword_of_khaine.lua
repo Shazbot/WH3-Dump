@@ -246,7 +246,9 @@ function sword_of_khaine:handle_vfx(cqi, apply)
 					cm:add_garrison_residence_vfx(garrison_cqi, self.vfx.garrison, true);
 					self.vfx_cache.garrison = garrison_cqi;
 				else
-					cm:add_character_vfx(cqi, self.vfx.character, true);
+					if not character:is_hidden() or character:faction():name() == cm:get_local_faction_name(true) then
+						cm:add_character_vfx(cqi, self.vfx.character, true);
+					end;
 					self.vfx_cache.character = cqi;
 				end
 			end;

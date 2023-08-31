@@ -434,7 +434,7 @@ local food_sea_encounter_chance = 50
 local merchant_turns_interval = 10
 
 -- number of turns before ai cooks and grom grows/gains trait
-local ai_cook_recipe_turns_interval = 15
+local ai_cook_recipe_turns_interval = 12
 local ai_add_trait_turns_interval = 40
 
 local merchant_dilemma_all_ingredients = "wh2_dlc15_dilemma_food_merchant_all_unlocked"

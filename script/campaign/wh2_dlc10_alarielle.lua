@@ -2,6 +2,7 @@ local power_of_nature_regions = {};
 local power_of_nature_vfx = {full = "scripted_effect7", half = "scripted_effect8"};
 
 local alarielle_faction_key = "wh2_main_hef_avelorn";
+local alarielle_subtype_key = "wh2_dlc10_hef_alarielle";
 local hellebron_faction_key = "wh2_main_def_har_ganeth";
 
 local defender_of_ulthuan_effect = "";
@@ -54,16 +55,19 @@ function add_alarielle_listeners()
 	out("#### Adding Alarielle Listeners ####");
 	
 	-- POWER OF NATURE
-	cm:add_faction_turn_start_listener_by_name(
+	core:add_listener(
 		"power_of_nature",
-		alarielle_faction_key,
+		"CharacterTurnStart",
 		function(context)
-			local character = context:faction():faction_leader();
+			return context:character():character_subtype_key() == alarielle_subtype_key;
+		end,
+		function(context)
+			local character = context:character();
 			
 			if character:has_region() and not character:is_at_sea() then
 				local region = character:region();
 				
-				if not region:is_abandoned() and region:owning_faction():name() == alarielle_faction_key then
+				if not region:is_abandoned() and region:owning_faction() == character:faction() then
 					local region_key = region:name();
 					
 					if region:has_effect_bundle("wh2_dlc10_power_of_nature") then
@@ -223,6 +227,28 @@ function add_alarielle_listeners()
 			cm:callback(function() cm:disable_event_feed_events(false, "wh_event_category_traits_ancillaries", "", "") end, 0.5);
 		end,
 		true
+	);
+	
+	-- remove the mortal worlds torment trait if alarielle is confederated
+	core:add_listener(
+		"alarielle_confederated",
+		"FactionJoinsConfederation",
+		function(context)
+			return context:faction():name() == alarielle_faction_key;
+		end,
+		function(context)
+			for _, character in model_pairs(context:confederation():character_list()) do
+				if character:character_subtype_key() == alarielle_subtype_key then
+					cm:disable_event_feed_events(true, "", "wh_event_subcategory_character_traits", "");
+					local char_str = cm:char_lookup_str(character);
+					cm:force_remove_trait(char_str, "wh2_dlc10_trait_alarielle_chaos");
+					cm:force_remove_trait(char_str, "wh2_dlc10_trait_alarielle_chaos_none");
+					cm:disable_event_feed_events(false, "", "wh_event_subcategory_character_traits", "");
+					break;
+				end;
+			end;
+		end,
+		false
 	);
 		
 	if cm:get_faction(alarielle_faction_key):is_human() then

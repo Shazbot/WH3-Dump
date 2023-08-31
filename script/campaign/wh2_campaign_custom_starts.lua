@@ -55,8 +55,8 @@ custom_starts.start_data.chs_custom_start_factions = {
 		}
 	},
 
-		--------------------
-	------ BORIS ------
+	--------------------
+	------ BORIS -------
 	--------------------
 	{
 		if_human = {"wh3_main_ksl_ursun_revivalists", "wh3_dlc23_chd_astragoth"},
@@ -94,7 +94,7 @@ custom_starts.start_data.chs_custom_start_factions = {
 		}
 	},
 	{
-		if_human = nil,
+		if_human = nil, --Gives AI Tzeentch something to do, as the AI doesn't get the intro missions. 
 		if_ai = {"wh3_main_tze_oracles_of_tzeentch"},
 		changes = {
 			{"force_diplomacy", "wh3_main_tze_oracles_of_tzeentch", "wh3_main_chs_khazag", "war"},
@@ -104,7 +104,6 @@ custom_starts.start_data.chs_custom_start_factions = {
 
 --Immortal Empires Changes
 custom_starts.start_data.me_custom_start_factions = {
-
 
 	--------------------
 	----   DURTHU   ----
@@ -139,20 +138,6 @@ custom_starts.start_data.me_custom_start_factions = {
 		}
 	},
 
-
-	--------------------
-	------ LOUEN -------
-	--------------------
-	{
-		if_human = "wh_main_brt_bretonnia",
-		if_ai = nil,
-		changes = {
-			{"create_army", "wh_main_vmp_mousillon", "wh_main_vmp_inf_zombie,wh_main_vmp_inf_zombie,wh_main_vmp_inf_zombie,wh_main_vmp_inf_zombie,wh_main_vmp_inf_zombie,wh_main_vmp_inf_crypt_ghouls,wh_main_vmp_inf_crypt_ghouls,wh_main_vmp_cav_black_knights_0,wh_main_vmp_cav_black_knights_0",
-			"wh3_main_combi_region_languille", 392, 666, "wh_main_vmp_lord", false}
-		}
-	},
-	
-	
 	--------------------
 	------ KHAZRAK -----
 	--------------------
@@ -161,7 +146,7 @@ custom_starts.start_data.me_custom_start_factions = {
 		if_ai = {"wh_main_emp_empire", "wh2_dlc16_wef_sisters_of_twilight", "wh2_dlc16_wef_drycha", "wh_dlc05_wef_wood_elves", "wh_dlc05_wef_argwylon"},
 		changes = {
 			{"create_army", "wh3_main_wef_laurelorn", "wh_dlc05_wef_inf_dryads_0,wh_dlc05_wef_inf_dryads_0,wh_dlc05_wef_inf_eternal_guard_0,wh_dlc05_wef_inf_eternal_guard_0,wh_dlc05_wef_inf_waywatchers_0,wh_dlc05_wef_inf_waywatchers_0", 
-				"wh3_main_combi_region_middenheim", 530, 720, "wh_dlc05_wef_glade_lord", false
+				"wh3_main_combi_region_middenheim", 525, 720, "wh_dlc05_wef_glade_lord", false
 			},
 			{"force_diplomacy", "wh_dlc03_bst_beastmen", "wh3_main_wef_laurelorn", "war"},
 			{"teleport_character", "wh_dlc03_bst_beastmen", 543, 741, 519, 717, true},
@@ -176,26 +161,11 @@ custom_starts.start_data.me_custom_start_factions = {
 		if_human = "wh_main_vmp_schwartzhafen",
 		if_ai = nil,
 		changes = {
-			-- vlad 
-			{"modify_units_in_army", "wh_main_vmp_schwartzhafen", 718, 622, {"wh_main_vmp_inf_grave_guard_0", "wh_dlc02_vmp_cav_blood_knights_0"}, {}, "names_name_2147345130", "names_name_2147343895"},
-			-- isabella
-			{"modify_units_in_army", "wh_main_vmp_schwartzhafen", 718, 622, {"wh_main_vmp_inf_crypt_ghouls", "wh_main_vmp_mon_varghulf"}, {}, "names_name_2147345124", "names_name_2147343895"}
+			-- If Isabella remove the Vlad specific units and add the Isabella specific ones
+			{"modify_units_in_army", "wh_main_vmp_schwartzhafen", 718, 622, {"wh_main_vmp_inf_crypt_ghouls", "wh_main_vmp_mon_varghulf"}, {"wh_main_vmp_inf_grave_guard_0", "wh_dlc02_vmp_cav_blood_knights_0"}, "names_name_2147345124", "names_name_2147343895"}
 		}
 	},
 	
-	---------------------------
-	-------- THORGRIM ---------
-	---------------------------
-	{
-		if_human = "wh_main_dwf_dwarfs",
-		if_ai = nil,
-		changes = {
-			{"force_change_faction_cai_personality", "wh_main_grn_bloody_spearz", "wh_script_foolishly_brave" },
-		}
-	},
-
-
-
 	---------------------------
 	-------- ELTHARION --------
 	---------------------------
@@ -227,19 +197,6 @@ custom_starts.start_data.me_custom_start_factions = {
 		}
 	},
 
-
-	---------------------------
-	----- MANNFRED/GHORST -----
-	---------------------------
-	{
-		if_human = "wh_main_vmp_vampire_counts",
-		if_ai = nil,
-		changes = {
-			{"force_change_cai_faction_personality", "wh_main_vmp_rival_sylvanian_vamps", "wh_script_foolishly_brave"}
-		}
-	},
-
-
 	--------------------
 	------ ORION ------
 	--------------------
@@ -247,23 +204,48 @@ custom_starts.start_data.me_custom_start_factions = {
 		if_human = "wh_dlc05_wef_wood_elves",
 		if_ai = nil,
 		changes = {
-			{"force_diplomacy", "wh_dlc05_wef_wood_elves", "wh_dlc03_bst_redhorn", "peace"},
 			{"teleport_character", "wh_dlc05_wef_wood_elves", 503, 518, 471, 517, true},
 			{"teleport_character", "wh_dlc05_wef_wood_elves", 515, 516, 467, 518, false},
 		}
 	},
-
 	
-	--------------------
-	------ DURTHU ------
-	--------------------
+	-------------------------------------------
+	------ Hag Greaf When Malus is an AI ------
+	-------------------------------------------
 	{
-		if_human = "wh_dlc05_wef_argwylon",
-		if_ai = nil,
+		if_human = "wh2_main_def_naggarond",
+		if_ai = {"wh2_main_def_hag_graef"},
 		changes = {
-			{"force_diplomacy", "wh_dlc05_wef_argwylon", "wh_dlc03_bst_redhorn", "peace"}
+			{"region_change", "wh3_main_combi_region_hag_graef", "wh2_main_def_clar_karond"},
 		}
-	}
+	},
+	{
+		if_ai = {"wh2_main_def_hag_graef", "wh2_main_def_naggarond"},
+		changes = {
+			{"region_change", "wh3_main_combi_region_hag_graef", "wh2_main_def_naggarond"},
+		}
+	},
+	---------------------
+	------ Yuan Bo ------
+	---------------------
+	{
+		if_ai = "wh3_dlc24_cth_the_celestial_court",
+		changes = {
+			{"region_change", "wh3_main_combi_region_shang_wu", "wh3_main_cth_the_jade_custodians"},
+		}
+	},
+
+	---------------------
+	---- Changeling -----
+	---------------------
+	{
+		if_human = "wh3_dlc24_tze_the_deceivers",
+		if_ai = {"wh_dlc03_bst_beastmen"},
+		changes = {
+			{"teleport_character", "wh_dlc03_bst_beastmen", 514, 723, 605, 587, true},
+			{"teleport_character", "wh_dlc03_bst_beastmen", 518, 732, 604, 585, false},
+		}
+	},
 }
 
 function custom_starts:add_campaign_custom_start_listeners()
@@ -1491,8 +1473,7 @@ function custom_starts:generate_random_army(subculture, num_units)
 		
 		--Cavalry
 		ram:add_unit("custom_start_random_army", "wh2_main_lzd_cav_cold_ones_feral_0", 6);
-		ram:add_unit("custom_start_random_army", "wh2_main_lzd_cav_cold_ones_0", 5);
-		ram:add_unit("custom_start_random_army", "wh2_main_lzd_cav_cold_ones_1", 5);
+		ram:add_unit("custom_start_random_army", "wh2_main_lzd_cav_cold_ones_1", 10);
 		ram:add_unit("custom_start_random_army", "wh2_main_lzd_cav_horned_ones_0", 1);
 		ram:add_unit("custom_start_random_army", "wh2_main_lzd_cav_terradon_riders_0", 8);
 		ram:add_unit("custom_start_random_army", "wh2_main_lzd_cav_terradon_riders_1", 4);

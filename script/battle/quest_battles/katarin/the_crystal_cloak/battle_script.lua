@@ -159,7 +159,7 @@ function intro_cutscene_end()
 
 	if not bm:is_multiplayer() then
 		ga_defender_01.sunits:change_behaviour_active("fire_at_will", true);
-		ga_defender_01.sunits:change_behaviour_active("skirmish", true);
+		-- ga_defender_01.sunits:change_behaviour_active("skirmish", true);
 		ga_attacker_01.sunits:change_behaviour_active("fire_at_will", true);
 		ga_attacker_01.sunits:change_behaviour_active("skirmish", true);
 	end;	

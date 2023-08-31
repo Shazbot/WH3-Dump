@@ -63,7 +63,7 @@ ga_ai_shaman_01:message_on_rout_proportion("enemy_shaman_dead", 1);
 ga_ai_shaman_02:message_on_rout_proportion("enemy_shaman_dead", 1);
 ga_ai_shaman_03:message_on_rout_proportion("enemy_shaman_dead", 1);
 ga_ai_shaman_04:message_on_rout_proportion("enemy_shaman_dead", 1);
-ga_player_01:force_victory_on_message("all_shamans_dead"); 
+ga_player_01:force_victory_on_message("all_shamans_dead");  
 
 gb:add_listener(
 	"enemy_shaman_dead",
@@ -73,13 +73,13 @@ gb:add_listener(
 		print("Shaman Killed - Num Shamans Killed: " .. num_shamans_killed);
 		
 		if num_shamans_killed == 1 then
-			gb:message_on_time_offset("one_shaman_dead", 0);
+			sm:trigger_message("one_shaman_dead");
 		elseif num_shamans_killed == 2 then
-			gb:message_on_time_offset("two_shamans_dead", 0);
+			sm:trigger_message("two_shamans_dead");
 		elseif num_shamans_killed == 3 then
-			gb:message_on_time_offset("three_shamans_dead", 0);
+			sm:trigger_message("three_shamans_dead");
 		elseif num_shamans_killed == 4 then
-			gb:message_on_time_offset("all_shamans_dead", 0);
+			sm:trigger_message("all_shamans_dead");
 			gb:remove_listener("enemy_shaman_dead");
 		end
 	end,

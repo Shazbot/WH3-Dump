@@ -2764,8 +2764,8 @@ function generated_army:defend(x, y, radius, no_debug_output)
 end;
 
 
---- @function defend
---- @desc Instructs all units in a generated army to defend a position.
+--- @function rush_position
+--- @desc Instructs all units in a generated army to rush a position.
 --- @p @number x co-ordinate, x co-ordinate in m
 --- @p @number y co-ordinate, y co-ordinate in m
 --- @p @number radius
@@ -3320,6 +3320,34 @@ function generated_army:rout_over_time_on_message(message, period)
 	);
 end;
 
+--- @function teleport_withdraw_over_time_on_message
+--- @desc Teleports away the units in the generated army over the specified time period upon receipt of a supplied message. See @script_units:teleport_withdraw_over_time.
+--- @p @string message, Message.
+--- @p @number period in ms, Period over which the units in the generated army should teleport, in ms.
+function generated_army:teleport_withdraw_over_time_on_message(message, period)
+	if not is_string(message) then
+		script_error(self.id .. " ERROR: teleport_withdraw_over_time_on_message() called but supplied message [" .. tostring(message) .. "] is not a string");
+		return false;
+	end;
+	
+	if not is_number(period) then
+		script_error(self.id .. " ERROR: teleport_withdraw_over_time_on_message() called but supplied period [" .. tostring(period) .. "] is not a number");
+		return false;
+	end;
+	
+	if period < 0 then
+		script_error(self.id .. " ERROR: teleport_withdraw_over_time_on_message() called but supplied period [" .. tostring(period) .. "] is not a positive number");
+		return false;
+	end;
+		
+	self.sm:add_listener(
+		message,
+		function()
+			bm:out(self.id .. " responding to message " .. message .. ", teleporting all units over a period of " .. period .. "ms");
+			self.sunits:teleport_withdraw_over_time(period);
+		end
+	);
+end;
 
 --- @function prevent_rallying_if_routing_on_message
 --- @desc Prevents the units in the generated army from rallying if they ever rout upon receipt of a supplied message. See @script_unit:prevent_rallying_if_routing.

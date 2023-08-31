@@ -346,7 +346,14 @@ function chaos_movements_narrative_loader(faction_key)
 					end,
 				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
 				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
-					payload.money(20000, faction_key)																												-- issue money
+					payload.money(
+						20000,
+						faction_key,																													-- faction key
+						{																																-- params for potential money replacement
+							value = "v_high",																												-- value of this mission  - see wh3_campaign_payload_remapping.lua
+							glory_type = "khorne,nurgle"																									-- glory type to issue
+						}
+					)
 				},
 				narrative.get(faction_key, name .. "_trigger_messages") or "StartChaosMovementSackRazeHumanSettlementsMission",									-- script message(s) on which to trigger when received
 				narrative.get(faction_key, name .. "_on_issued_messages") or "ChaosMovementSackRazeHumanSettlementsMissionIssued",								-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
@@ -480,7 +487,11 @@ function chaos_movements_narrative_loader(faction_key)
 				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
 					payload.money(
 						5000, 
-						faction_key
+						faction_key,																													-- faction key
+						{																																-- params for potential money replacement
+							value = "high",																												-- value of this mission  - see wh3_campaign_payload_remapping.lua
+							glory_type = "khorne"																										-- glory type to issue
+						}
 					),
 					payload.ancillary_mission_payload(faction_key, "weapon", "rare")																	-- issue random rare weapon								
 				},

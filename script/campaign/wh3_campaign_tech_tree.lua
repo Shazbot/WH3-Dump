@@ -36,6 +36,15 @@ scripted_technology_tree = {
 		wh3_main_combi_region_black_crag = {
 			wh_dlc08_tech_nor_other_19 = {culture = "wh_dlc08_nor_norsca", allow_allies = false}
 		},
+		wh3_main_combi_region_great_hall_of_greasus = {
+			wh3_main_ie_tech_nor_darklands_ogre_kingdoms_capital = {culture = "wh_dlc08_nor_norsca", allow_allies = false}
+		},
+		wh3_main_combi_region_the_oak_of_ages = {
+			wh_dlc08_tech_nor_other_21 = {culture = "wh_dlc08_nor_norsca", allow_allies = false}
+		},
+		wh3_main_combi_region_zharr_naggrund = {
+			wh3_main_ie_tech_nor_darklands_chaos_dwarfs_capital = {culture = "wh_dlc08_nor_norsca", allow_allies = false}
+		},
 		wh3_main_combi_region_kislev = {
 			wh3_main_ie_tech_nor_oldworld_kislev_capital = {culture = "wh_dlc08_nor_norsca", allow_allies = false},
 			wh3_main_tech_ksl_2_10 = {culture = "wh3_main_ksl_kislev", allow_allies = true},
@@ -71,7 +80,7 @@ scripted_technology_tree = {
 			wh3_main_tech_ksl_4_15 = {culture = "wh3_main_ksl_kislev", allow_allies = true}
 		},
 		wh3_main_combi_region_erengrad = {
-			wh3_main_tech_ksl_3_10 = {culture = "wh3_main_ksl_kislev", allow_allies = true},
+			wh3_main_tech_ksl_3_06 = {culture = "wh3_main_ksl_kislev", allow_allies = true},
 			wh3_main_tech_ksl_3_11 = {culture = "wh3_main_ksl_kislev", allow_allies = true},
 			wh3_main_tech_ksl_3_12 = {culture = "wh3_main_ksl_kislev", allow_allies = true},
 			wh3_main_tech_ksl_3_13 = {culture = "wh3_main_ksl_kislev", allow_allies = true},
@@ -79,7 +88,7 @@ scripted_technology_tree = {
 			wh3_main_tech_ksl_3_15 = {culture = "wh3_main_ksl_kislev", allow_allies = true}
 		},
 		wh3_main_chaos_region_erengrad = {
-			wh3_main_tech_ksl_3_10 = {culture = "wh3_main_ksl_kislev", allow_allies = true},
+			wh3_main_tech_ksl_3_06 = {culture = "wh3_main_ksl_kislev", allow_allies = true},
 			wh3_main_tech_ksl_3_11 = {culture = "wh3_main_ksl_kislev", allow_allies = true},
 			wh3_main_tech_ksl_3_12 = {culture = "wh3_main_ksl_kislev", allow_allies = true},
 			wh3_main_tech_ksl_3_13 = {culture = "wh3_main_ksl_kislev", allow_allies = true},

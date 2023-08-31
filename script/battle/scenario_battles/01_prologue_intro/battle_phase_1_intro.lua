@@ -31,14 +31,6 @@ bm:register_phase_change_callback(
 		-- Disable camera rotation.
 		bm:disable_shortcut("rot_l", true)
 		bm:disable_shortcut("rot_r", true)
-
-		-- A hack: deployment phase has started so we let the ai armies deploy. If we don't do this the battle won't advance to conflict phase due to a hack put into the code
-		-- We have to let the deploy now, then teleport them back to where they started when conflict begins.
-		sunits_allied_defenders:release_control();
-		sunits_enemy_all:release_control();
-		sunits_enemy_general:release_control();
-		sunits_allied_defenders:release_control();
-		sunits_allied_skirmishers:release_control();
 	
 		-- prevent UI hiding
 		bm:enable_ui_hiding(false);

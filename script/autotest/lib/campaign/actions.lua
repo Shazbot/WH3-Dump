@@ -639,6 +639,37 @@ local function teleport_army_to_character(army_leader_cqi, target_character_cqi)
     end, 100)
 end
 
+function Lib.Campaign.Actions.TeleportToNamedCharacter(characterName)
+    callback(function() 
+        target_cqi = common.get_context_value("CcoCampaignRoot", "", "CharacterList.FirstContext(Name==\""..characterName.."\").CQI")
+        if(target_cqi == nil)then
+            --if we dont find an exact name match, look for a name containing the name given
+            --e.g. entering Morghur instead of Morghur the Shadowgave will fail, but this line gives us a chance to catch it
+            target_cqi = common.get_context_value("CcoCampaignRoot", "", "CharacterList.FirstContext(StringContains(Name,\""..characterName.."\")).CQI")
+        end
+        player_faction_leader_cqi = Lib.Campaign.Faction_Info.get_faction_leader_cqi()
+
+        teleport_army_to_character(player_faction_leader_cqi, target_cqi)
+    end)
+end
+
+function Lib.Campaign.Actions.GiveUnitsToArmy(unitList, characterName)
+    callback(function()
+        local targetCharacter
+        if(characterName == "") then
+            targetCharacter = Lib.Campaign.Faction_Info.get_faction_leader_cqi()
+        else
+            targetCharacter = common.get_context_value("CharacterList.FirstContext(Name==\""..characterName.."\").CQI")
+        end
+        Timers_Callbacks.campaign_call(function() 
+            characterLookupString = cm:char_lookup_str(targetCharacter) 
+            for _, unitKey in ipairs(unitList) do
+                cm:grant_unit_to_character(characterLookupString, unitKey)
+            end
+        end)
+    end)
+end
+
 local function teleport_army_to_location(army_leader_cqi, target_x, target_y)
     callback(function()
         local character_int, target_int

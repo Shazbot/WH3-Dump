@@ -1369,7 +1369,7 @@ function mission_manager:construct_victory_objective_mission_string()
 	if self.victory_type then
 		mission_string = mission_string .. ";victory_type " .. self.victory_type;
 	else
-		script_error("ERROR: construct_victory_objective_mission_string() called on mission manager with key [" .. self.mission_key .. "] but victory type has been added");
+		script_error("ERROR: construct_victory_objective_mission_string() called on mission manager with key [" .. self.mission_key .. "] but no victory type has been added");
 		return false;
 	end
 	
@@ -2137,6 +2137,39 @@ function payload.agent(region_key, agent_type, agent_subtype, ap_factor)
 end;
 
 
+--- @function agent_at_faction_leader
+--- @desc Returns a payload string which defines an agent reward that is created at the event's faction leader for a string mission definition. No kind of equivalence is looked up.
+--- @p @string agent type, Agent type key, from the <code>agents</code> database table.
+--- @p @string agent subtype, Agent subtype key, from the <code>agent_subtypes</code> database table.
+--- @p [opt=100] @number action points, Percentage of action points that the spawned agent should start with. By default the agent starts with 100% action points.
+--- @r @string payload string
+function payload.agent_at_faction_leader(agent_type, agent_subtype, ap_factor)
+	if not validate.is_string(agent_type) then
+		return false;
+	end;
+
+	if not validate.is_string(agent_subtype) then
+		return false;
+	end;
+
+	if ap_factor then
+		if not validate.is_number(ap_factor) then
+			return false;
+		end;
+		if ap_factor < 0 or ap_factor > 100 then
+			script_error("WARNING: payload.agent_at_faction_leader() was supplied an action_points factor value of [" .. tostring(ap_factor) .. "] which is not a valid 0 .. 100 percentage value - setting it to be 100%");
+			ap_factor = 100;
+		end;
+	else
+		ap_factor = 100;
+	end;
+
+	local payload_string = "grant_agent{location ; military_force_cqi ;agent_key " .. agent_type .. ";agent_subtype_key " .. agent_subtype .. ";ap_factor " .. ap_factor .. ";}";
+
+	return payload_string;
+end;
+
+
 --- @function agent_for_faction
 --- @desc Returns a payload string which defines an agent reward for a string mission definition, for a faction. This differs from @payload:agent in that this function takes a faction key, and looks up the home region of that faction. If the faction has no home region, then a script error is thrown and money is substituted.
 --- @p @string faction key, Key of faction for which the agent is being spawned, from the <code>factions</code> table. This is used to specify the region in which the agent is spawned - the home region of the faction is used.
@@ -2181,8 +2214,8 @@ end;
 --- @desc Returns a mission reward string that adds the specified ancillary to the faction pool when the mission being constructed is completed.
 --- @p @string ancillary key, Ancillary key, from the <code>ancillaries</code> database table.
 --- @p @string faction key, Faction key, from the <code>factions</code> database table.
---- @p @string ancillary category, Ancillary category. Valid values are presently <code>"armour"</code>, <code>"enchanted_item"</code>>, <code>"banner"</code>>, <code>"talisman"</code>>, <code>"weapon"</code> and <code>"arcane_item"</code>. Arcane items may only be equipped by spellcasters.
---- @p @string ancillary rarity, Ancillary rarity. Valid values are presently <code>"common"</code>, <code>"uncommon"</code> and <code>"rare"</code>.
+--- @p [opt=nil] @string ancillary category, Ancillary category. Valid values are presently <code>"armour"</code>, <code>"enchanted_item"</code>>, <code>"banner"</code>>, <code>"talisman"</code>>, <code>"weapon"</code> and <code>"arcane_item"</code>. Arcane items may only be equipped by spellcasters.
+--- @p [opt=nil] @string ancillary rarity, Ancillary rarity. Valid values are presently <code>"common"</code>, <code>"uncommon"</code> and <code>"rare"</code>.
 --- @return ancillary mission reward string
 function payload.ancillary_mission_payload(faction_key, category, rarity)
 
@@ -2190,11 +2223,11 @@ function payload.ancillary_mission_payload(faction_key, category, rarity)
 		return false;
 	end;
 
-	if not validate.is_string(category) then
+	if category and not validate.is_string(category) then
 		return false;
 	end;
 
-	if not validate.is_string(rarity) then
+	if rarity and not validate.is_string(rarity) then
 		return false;
 	end;
 
@@ -2387,6 +2420,84 @@ function payload.meat(amount)
 	end;
 	
 	return payload.pooled_resource_mission_payload("wh3_main_ogr_meat", "events", amount);
+end;
+
+
+--- @function chivalry
+--- @desc Returns a payload string which defines a Chivalry reward for a Bretonnia string mission definition. No kind of equivalence is looked up.
+--- @p @number amount
+--- @r @string payload string
+function payload.chivalry(amount)
+	if not validate.is_positive_number(amount) then
+		return false;
+	end;
+	
+	return payload.pooled_resource_mission_payload("brt_chivalry", "missions", amount);
+end;
+
+
+--- @function slaves
+--- @desc Returns a payload string which defines a Slaves reward for a Dark Elf string mission definition. No kind of equivalence is looked up.
+--- @p @number amount
+--- @r @string payload string
+function payload.slaves(amount)
+	if not validate.is_positive_number(amount) then
+		return false;
+	end;
+	
+	return payload.pooled_resource_mission_payload("def_slaves", "missions", amount);
+end;
+
+
+--- @function infamy
+--- @desc Returns a payload string which defines a infamy reward for a Vampire Coast string mission definition. No kind of equivalence is looked up.
+--- @p @number amount
+--- @r @string payload string
+function payload.infamy(amount)
+	if not validate.is_positive_number(amount) then
+		return false;
+	end;
+	
+	return payload.pooled_resource_mission_payload("cst_infamy", "missions", amount);
+end;
+
+
+--- @function souls
+--- @desc Returns a payload string which defines a souls reward for a Warriors of Chaos string mission definition. No kind of equivalence is looked up.
+--- @p @number amount
+--- @r @string payload string
+function payload.souls(amount)
+	if not validate.is_positive_number(amount) then
+		return false;
+	end;
+	
+	return payload.pooled_resource_mission_payload("wh3_dlc20_chs_souls", "wh3_dlc20_souls_other", amount);
+end;
+
+
+--- @function canopic jars
+--- @desc Returns a payload string which defines a canopic_jars reward for a Tomb Kings string mission definition. No kind of equivalence is looked up.
+--- @p @number amount
+--- @r @string payload string
+function payload.canopic_jars(amount)
+	if not validate.is_positive_number(amount) then
+		return false;
+	end;
+	
+	return payload.pooled_resource_mission_payload("tmb_canopic_jars", "missions", amount);
+end;
+
+
+--- @function spirit essence
+--- @desc Returns a payload string which defines a spirit_essence reward for a Mother Ostankya (Kislev) string mission definition. No kind of equivalence is looked up.
+--- @p @number amount
+--- @r @string payload string
+function payload.spirit_essence(amount)
+	if not validate.is_positive_number(amount) then
+		return false;
+	end;
+	
+	return payload.pooled_resource_mission_payload("wh3_dlc24_ksl_spirit_essence", "missions", amount);
 end;
 
 

@@ -117,26 +117,6 @@ function setup_realms()
 	
 	if cm:is_new_game() then
 		in_ursuns_roar_cutscene:start();
-		
-		if cm:is_multiplayer() then
-			local human_factions = cm:get_human_factions();
-			
-			for i = 1, #human_factions do
-				local current_faction_name = human_factions[i];
-				
-				core:add_listener(
-					"intro_story_panel_listener",
-					"ScriptEventShowIntroStoryPanel",
-					function(context)
-						return context:faction():name() == current_faction_name;
-					end,
-					function(context)
-						show_intro_story_panel(current_faction_name);
-					end,
-					false
-				);
-			end;
-		end;
 	end;
 	
 	-- handle ai winning campaign
@@ -2236,15 +2216,10 @@ function show_story_panel(faction_key, id, show_for_team_mates)
 	end;
 end;
 
-
-function show_intro_story_panel(faction_key, intro_story_panel_key)
-	show_story_panel(faction_key, intro_story_panel_key);
-end;
-
 function show_intro_story_panel_with_progression_callback(faction_key, intro_story_panel_key, progression_callback, intro_fsm_skipped)
 	cm:callback(
 		function()
-			show_intro_story_panel(faction_key, intro_story_panel_key);
+			show_story_panel(faction_key, intro_story_panel_key);
 			cm:set_music_paused(true); --pause the music system when the panel is opened--
 			common.trigger_soundevent("music_c_intro_eventpanel_start"); --play the bespoke music--
 		end,
@@ -2257,8 +2232,8 @@ function show_intro_story_panel_with_progression_callback(faction_key, intro_sto
         true,
         function()
             cm:set_music_paused(false); --resume the music system when the panel is closed--
-			common.trigger_soundevent("music_c_intro_eventpanel_stop");--stop the bespoke music--
-            progression_callback()
+			common.trigger_soundevent("music_c_intro_eventpanel_stop");--stop the bespoke music--]
+			progression_callback()
         end,
         false
     );

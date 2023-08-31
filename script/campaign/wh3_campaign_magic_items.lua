@@ -513,8 +513,7 @@ local ancillary_list = {
 			"wh3_main_anc_weapon_dawn_glaive",
 			"wh3_main_anc_weapon_hellblade",
 			"wh3_dlc20_anc_weapon_aether_sword",
-			"wh3_dlc20_anc_weapon_axe_of_khorne",
-			"wh3_dlc20_anc_weapon_rapier_of_ecstacy"
+			"wh3_dlc20_anc_weapon_rapier_of_ecstasy"
 		},
 	},
 	

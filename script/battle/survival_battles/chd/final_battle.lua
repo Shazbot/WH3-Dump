@@ -79,6 +79,28 @@ ga_ai_belegar_units:get_army():suppress_reinforcement_adc(1);
 ga_ai_dwf_boss_backup:get_army():suppress_reinforcement_adc(1);
 
 ---------------------
+-----MULTIPLAYER-----
+---------------------
+
+local armies_player = bm:alliances():item(1):armies()
+
+if armies_player:count() == 2 then
+	ga_player_02 = gb:get_army(gb:get_player_alliance_num(), 1);
+	bm:out("2 Player armies loaded in to battle")
+elseif armies_player:count() == 3 then
+	ga_player_02 = gb:get_army(gb:get_player_alliance_num(), 1);
+	ga_player_03 = gb:get_army(gb:get_player_alliance_num(), 1);
+	bm:out("3 Player armies loaded in to battle")
+elseif armies_player:count() == 4 then
+	ga_player_02 = gb:get_army(gb:get_player_alliance_num(), 1);
+	ga_player_03 = gb:get_army(gb:get_player_alliance_num(), 1);
+	ga_player_04 = gb:get_army(gb:get_player_alliance_num(), 1);
+	bm:out("4 Player armies loaded in to battle")
+end
+
+bm:out("Number of players in the alliance: " .. armies_player:count())
+
+---------------------
 -----Spawn Zones-----
 ---------------------
 
@@ -318,7 +340,20 @@ function play_intro_cutscene()
 	cutscene_intro:action(
 		function() 	
 			capture_point_01:set_enabled(false);
+
 			ga_player_01.sunits:set_invisible_to_all(true);
+
+			if armies_player:count() == 2 then
+				ga_player_02.sunits:set_invisible_to_all(true);
+			elseif armies_player:count() == 3 then
+				ga_player_02.sunits:set_invisible_to_all(true);
+				ga_player_03.sunits:set_invisible_to_all(true);
+			elseif armies_player:count() == 4 then
+				ga_player_02.sunits:set_invisible_to_all(true);
+				ga_player_03.sunits:set_invisible_to_all(true);
+				ga_player_04.sunits:set_invisible_to_all(true);
+			end
+
 			bm:stop_terrain_composite_scene(drill_idle);	
 		end, 
 		10
@@ -401,6 +436,24 @@ end;
 function end_intro_cutscene()
 	ga_player_01.sunits:set_invisible_to_all(false);
 	ga_player_01.sunits:release_control();
+
+	if armies_player:count() == 2 then
+		ga_player_02.sunits:set_invisible_to_all(false);
+		ga_player_02.sunits:release_control();
+	elseif armies_player:count() == 3 then
+		ga_player_02.sunits:set_invisible_to_all(false);
+		ga_player_02.sunits:release_control();
+		ga_player_03.sunits:set_invisible_to_all(false);
+		ga_player_03.sunits:release_control();
+	elseif armies_player:count() == 4 then
+		ga_player_02.sunits:set_invisible_to_all(false);
+		ga_player_02.sunits:release_control();
+		ga_player_03.sunits:set_invisible_to_all(false);
+		ga_player_03.sunits:release_control();
+		ga_player_04.sunits:set_invisible_to_all(false);
+		ga_player_04.sunits:release_control();
+	end
+
 	capture_point_01:set_enabled(true);
 	gb.sm:trigger_message("intro_cutscene_end");
 	bm:cindy_preload(reveal_cinematic_file);
@@ -456,6 +509,18 @@ function play_mid_cutscene()
 	cutscene_mid:action(
 		function() 	
 			ga_player_01.sunits:set_invisible_to_all(true);
+			
+			if armies_player:count() == 2 then
+				ga_player_02.sunits:set_invisible_to_all(true);
+			elseif armies_player:count() == 3 then
+				ga_player_02.sunits:set_invisible_to_all(true);
+				ga_player_03.sunits:set_invisible_to_all(true);
+			elseif armies_player:count() == 4 then
+				ga_player_02.sunits:set_invisible_to_all(true);
+				ga_player_03.sunits:set_invisible_to_all(true);
+				ga_player_04.sunits:set_invisible_to_all(true);
+			end
+			
 			bm:stop_terrain_composite_scene(drill_move_down);	
 			bm:start_terrain_composite_scene(drill_down_idle, nil, 0);	
 		end, 
@@ -507,6 +572,24 @@ end;
 function end_mid_cutscene()
 	ga_player_01.sunits:set_invisible_to_all(false);
 	ga_player_01.sunits:release_control();
+	
+	if armies_player:count() == 2 then
+		ga_player_02.sunits:set_invisible_to_all(false);
+		ga_player_02.sunits:release_control();
+	elseif armies_player:count() == 3 then
+		ga_player_02.sunits:set_invisible_to_all(false);
+		ga_player_02.sunits:release_control();
+		ga_player_03.sunits:set_invisible_to_all(false);
+		ga_player_03.sunits:release_control();
+	elseif armies_player:count() == 4 then
+		ga_player_02.sunits:set_invisible_to_all(false);
+		ga_player_02.sunits:release_control();
+		ga_player_03.sunits:set_invisible_to_all(false);
+		ga_player_03.sunits:release_control();
+		ga_player_04.sunits:set_invisible_to_all(false);
+		ga_player_04.sunits:release_control();
+	end
+
 	gb.sm:trigger_message("mid_cutscene_end")
 	cam:move_to(cam_pos_mid, cam_targ_mid, 0.25)
 	cam:fade(false, 2)
@@ -562,6 +645,18 @@ function play_final_cutscene()
 	cutscene_final:action(
 		function() 	
 			ga_player_01.sunits:set_invisible_to_all(true);
+
+			if armies_player:count() == 2 then
+				ga_player_02.sunits:set_invisible_to_all(true);
+			elseif armies_player:count() == 3 then
+				ga_player_02.sunits:set_invisible_to_all(true);
+				ga_player_03.sunits:set_invisible_to_all(true);
+			elseif armies_player:count() == 4 then
+				ga_player_02.sunits:set_invisible_to_all(true);
+				ga_player_03.sunits:set_invisible_to_all(true);
+				ga_player_04.sunits:set_invisible_to_all(true);
+			end
+
 			bm:stop_terrain_composite_scene(drop_hammers_idle);	
 		end, 
 		10
@@ -628,6 +723,24 @@ end;
 function end_final_cutscene()
 	ga_player_01.sunits:set_invisible_to_all(false);
 	ga_player_01.sunits:release_control();
+
+	if armies_player:count() == 2 then
+		ga_player_02.sunits:set_invisible_to_all(false);
+		ga_player_02.sunits:release_control();
+	elseif armies_player:count() == 3 then
+		ga_player_02.sunits:set_invisible_to_all(false);
+		ga_player_02.sunits:release_control();
+		ga_player_03.sunits:set_invisible_to_all(false);
+		ga_player_03.sunits:release_control();
+	elseif armies_player:count() == 4 then
+		ga_player_02.sunits:set_invisible_to_all(false);
+		ga_player_02.sunits:release_control();
+		ga_player_03.sunits:set_invisible_to_all(false);
+		ga_player_03.sunits:release_control();
+		ga_player_04.sunits:set_invisible_to_all(false);
+		ga_player_04.sunits:release_control();
+	end
+
 	bm:start_terrain_composite_scene(drop_hammers, nil, 0);
 	bm:start_terrain_composite_scene(trains_left, nil, 0);
 	bm:start_terrain_composite_scene(trains_right, nil, 0);

@@ -13,6 +13,8 @@
 -----------------------------------------------------------------------------------
 
 if cm:is_new_game() then
+	local faction_key = "wh3_main_ksl_ursun_revivalists";
+	
 	local cam_gameplay_start = {
 		x = 485.7,
 		y = 170.9,
@@ -51,9 +53,9 @@ if cm:is_new_game() then
 
 	-- Intro story panel callback, shown after the fsm and before the cindyscene
 	local function pre_cindyscene_delay_callback(progression_callback)
-		show_intro_story_panel_with_progression_callback(cm:get_local_faction_name(), "wh3_main_story_panel_intro_ksl", progression_callback);
+		show_intro_story_panel_with_progression_callback(faction_key, "wh3_main_story_panel_intro_ksl", progression_callback);
 	end;
 
 	-- Invoke conmmon campaign intro setup
-	cm:setup_campaign_intro_cutscene(cam_gameplay_start, cindy_scene_key, advice_to_play, end_callback, cutscene_configurator, fullscreen_movie, hide_faction_leader_during_cutscene, pre_cindyscene_delay_callback);
+	cm:setup_campaign_intro_cutscene(faction_key, cam_gameplay_start, cindy_scene_key, advice_to_play, end_callback, cutscene_configurator, fullscreen_movie, hide_faction_leader_during_cutscene, pre_cindyscene_delay_callback, true);
 end;

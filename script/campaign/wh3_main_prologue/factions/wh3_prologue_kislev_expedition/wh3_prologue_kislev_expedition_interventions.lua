@@ -5720,6 +5720,11 @@ function prologue_autoresolve_intervention()
 			prologue_check_progression["fought_first_open_battle"] = true
 			prologue_intervention_autoresolve:complete()
 			cm:contextual_vo_enabled(true);
+			cm:callback(function() 
+				uim:override("prebattle_attack"):set_allowed(true);
+				uim:override("retreat"):set_allowed(true);
+				uim:override("autoresolve"):set_allowed(true); 
+			end, 0.5)
 		end
 	)
 	tour_test_autoresolve:set_show_skip_button(false);
@@ -5731,6 +5736,11 @@ function prologue_autoresolve_intervention()
 			tour_test_autoresolve:show_fullscreen_highlight(true)
 
 			cm:steal_user_input(false);
+
+			uim:override("prebattle_attack"):set_allowed(false);
+			uim:override("retreat"):set_allowed(false);
+			uim:override("autoresolve"):set_allowed(false); 
+			
 
 			local text_pointer_test_autoresolve = text_pointer:new_from_component(
 				"text_pointer_test_autoresolve",

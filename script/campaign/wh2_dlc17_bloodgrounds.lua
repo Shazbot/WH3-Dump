@@ -811,7 +811,9 @@ function Bloodgrounds:preview_ui_listeners()
 		"SettlementSelectedBloodgrounds",
 		"SettlementSelected",
 		function()
-			return cm:get_local_faction(true):subculture() == self.beastmen_sc_key
+			if cm:has_local_faction(true) then
+				return cm:get_local_faction(true):subculture() == self.beastmen_sc_key
+			end
 		end,
 		function(context)
 			local region = context:garrison_residence():region()

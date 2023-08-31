@@ -2366,7 +2366,7 @@ function beastmen_panel_scripted_tour_unit_cap_advice(uic_panel)
 	core:cache_and_set_advisor_priority(1500, true);
 	cm:show_advice("wh2.dlc17.camp.advice.bst.panel.002.units")
 
-	local uic_unit_caps_holder = find_uicomponent(uic_panel, "mid_colum", "unit_caps", "content_holder");
+	local uic_unit_caps_holder = find_uicomponent(uic_panel, "mid_colum", "unit_caps");
 
 	if not uic_unit_caps_holder then
 		script_error("WARNING: beastmen_panel_scripted_tour_unit_cap_advice() could not find the uic_unit_caps_holder uicomponent in the beastmen panel, how can this be?");
@@ -2420,7 +2420,7 @@ function beastmen_panel_scripted_tour_unit_cap_advice(uic_panel)
 end
 
 function beastmen_panel_scripted_tour_unit_caps_dread_advice(uic_panel)
-	local uic_unit_caps_holder = find_uicomponent(uic_panel, "mid_colum", "unit_caps", "content_holder");
+	local uic_unit_caps_holder = find_uicomponent(uic_panel, "mid_colum", "unit_caps");
 
 	if not uic_unit_caps_holder then
 		script_error("WARNING: beastmen_panel_scripted_tour_unit_caps_dread_advice() could not find the uic_unit_caps_holder uicomponent in the beastmen panel, how can this be?");
@@ -2488,7 +2488,7 @@ function beastmen_panel_scripted_tour_unit_caps_dread_advice(uic_panel)
 end
 
 function beastmen_panel_scripted_tour_unit_caps_marks_advice(uic_panel)
-	local uic_unit_caps_holder = find_uicomponent(uic_panel, "mid_colum", "unit_caps", "content_holder");
+	local uic_unit_caps_holder = find_uicomponent(uic_panel, "mid_colum", "unit_caps");
 
 	if not uic_unit_caps_holder then
 		script_error("WARNING: beastmen_panel_scripted_tour_unit_caps_marks_advice() could not find the uic_unit_caps_holder uicomponent in the beastmen panel, how can this be?");
@@ -2569,7 +2569,7 @@ function beastmen_panel_scripted_tour_unit_caps_marks_advice(uic_panel)
 end
 
 function beastmen_panel_scripted_tour_unit_caps_pooled_resources_advice(uic_panel)
-	local uic_unit_caps_holder = find_uicomponent(uic_panel, "mid_colum", "unit_caps", "content_holder");
+	local uic_unit_caps_holder = find_uicomponent(uic_panel, "mid_colum", "unit_caps");
 
 	if not uic_unit_caps_holder then
 		script_error("WARNING: beastmen_panel_scripted_tour_unit_caps_pooled_resources_advice() could not find the uic_unit_caps_holder uicomponent in the beastmen panel, how can this be?");
@@ -3848,7 +3848,7 @@ scripted_chd_hellforge_armoury_tour = {
 
 function get_hellforge_shared_unit_cap_component()
 	local parent = find_uicomponent(core:get_ui_root(), "hellforge_panel_main", "CcoRitualCategoryRecordHELLFORGE_CAPS_MELEE_INFANTRY", "unit_entries_items")
-	if parent ~= nil then
+	if parent then
 		for i = 1, parent:ChildCount() do
 			local child = find_child_uicomponent_by_index(parent, i)
 			if child ~= nil and child:Visible() then return child end
@@ -3859,7 +3859,7 @@ end
 
 function get_hellforge_shared_unit_cap_title_component()
 	local parent = find_uicomponent(core:get_ui_root(), "hellforge_panel_main", "CcoRitualCategoryRecordHELLFORGE_CAPS_MELEE_INFANTRY", "group_title", "unlock_bar_holder")
-	if parent ~= nil then
+	if parent then
 		for i = 1, parent:ChildCount() do
 			local child = find_child_uicomponent_by_index(parent, i)
 			if child ~= nil and child:Visible() then return child end

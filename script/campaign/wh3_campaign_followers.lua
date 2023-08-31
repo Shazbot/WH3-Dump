@@ -3275,7 +3275,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return not character:has_ancillary("wh3_main_anc_follower_ksl_priest_of_taal") and cm:character_won_battle_against_culture(character, {"wh_main_chs_chaos", "wh_dlc08_nor_norsca", "wh_dlc03_bst_beastmen", "wh3_main_dae_daemons", "wh3_main_kho_khorne", "wh3_main_nur_nurgle", "wh3_main_sla_slaanesh", "wh3_main_tze_tzeentch"});
+				return has_devotion_pooled_resource(character:faction()) and not character:has_ancillary("wh3_main_anc_follower_ksl_priest_of_taal") and cm:character_won_battle_against_culture(character, {"wh_main_chs_chaos", "wh_dlc08_nor_norsca", "wh_dlc03_bst_beastmen", "wh3_main_dae_daemons", "wh3_main_kho_khorne", "wh3_main_nur_nurgle", "wh3_main_sla_slaanesh", "wh3_main_tze_tzeentch"});
 			end,
 		["chance"] = 5
 	},
@@ -3285,7 +3285,8 @@ local followers = {
 		["condition"] =
 			function(context)
 				local target_character_culture = context:target_character():faction():culture();
-				return not context:character():has_ancillary("wh3_main_anc_follower_ksl_priest_of_ursun") and (target_character_culture == "wh_main_chs_chaos" or target_character_culture == "wh_dlc08_nor_norsca" or target_character_culture == "wh_dlc03_bst_beastmen" or target_character_culture == "wh3_main_dae_daemons" or target_character_culture == "wh3_main_kho_khorne" or target_character_culture == "wh3_main_nur_nurgle" or target_character_culture == "wh3_main_sla_slaanesh" or target_character_culture == "wh3_main_tze_tzeentch") and (context:mission_result_success() or context:mission_result_critial_success()) and context:ability() ~= "assist_army";
+				local character = context:character();
+				return has_devotion_pooled_resource(character:faction()) and not character:has_ancillary("wh3_main_anc_follower_ksl_priest_of_ursun") and (target_character_culture == "wh_main_chs_chaos" or target_character_culture == "wh_dlc08_nor_norsca" or target_character_culture == "wh_dlc03_bst_beastmen" or target_character_culture == "wh3_main_dae_daemons" or target_character_culture == "wh3_main_kho_khorne" or target_character_culture == "wh3_main_nur_nurgle" or target_character_culture == "wh3_main_sla_slaanesh" or target_character_culture == "wh3_main_tze_tzeentch") and (context:mission_result_success() or context:mission_result_critial_success()) and context:ability() ~= "assist_army";
 			end,
 		["chance"] = 5
 	},

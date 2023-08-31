@@ -26,6 +26,8 @@ gb = generated_battle:new(
 	false                                      			-- debug mode
 );
 
+gb:set_cutscene_during_deployment(true);
+
 --preload stuttering fix
 intro_cinematic_file = "script\\battle\\quest_battles\\_cutscene\\managers\\elth_fnl_m01.CindySceneManager";
 bm:cindy_preload(intro_cinematic_file);
@@ -147,13 +149,16 @@ function end_deployment_phase()
 end;
 
 function intro_cutscene_end()
-	gb.sm:trigger_message("01_intro_cutscene_end")
+	--gb.sm:trigger_message("01_intro_cutscene_end")
 end;
 
 
 -------------------------------------------------------------------------------------------------
 ------------------------------------------ ORDERS -------------------------------------------
 -------------------------------------------------------------------------------------------------
+
+gb:message_on_time_offset("01_intro_cutscene_end", 100);
+
 --Stopping armies from firing until the cutscene is done
 ga_defender_player:change_behaviour_active_on_message("battle_started", "fire_at_will", false, false);
 ga_defender_player:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true);
@@ -350,12 +355,12 @@ gb.sm:add_listener(
 			return;
 		end;
 
-		local text_key = "trap_icon_tooltip";
+		-- local text_key = "trap_icon_tooltip";
 
-		for i = 0, uic_ping_icon_parent:ChildCount() - 1 do
-			local uic_ping_icon_button = find_uicomponent(UIComponent(uic_ping_icon_parent:Find(i)), "icon");
-			uic_ping_icon_button:SetTooltipTextWithRLSKey(text_key,	true);
-		end;
+		-- for i = 0, uic_ping_icon_parent:ChildCount() - 1 do
+		-- 	local uic_ping_icon_button = find_uicomponent(UIComponent(uic_ping_icon_parent:Find(i)), "icon");
+		-- 	uic_ping_icon_button:SetTooltipTextWithRLSKey(text_key,	true);
+		-- end;
 	end
 );
 

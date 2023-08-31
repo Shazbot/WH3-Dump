@@ -197,6 +197,16 @@ data.faction_intros = {
 		advice_line = "wh3_dlc21_ie_camp_cst_cylostra_intro_01",
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},
+	
+	wh3_dlc24_ksl_daughters_of_the_forest = faction_intro_data:new{
+		preset = data.intro_presets.standard,
+		cam_cutscene_start = {x = 64.5, y = 472.8,	d = 21.561523, b = 0.0,	h = 62.004826,},
+		cam_gameplay_start = {x = 64.5, y = 472.8,	d = 7.926331, b = 0, h = 12.026555,},
+		advice_line = "wh3_dlc24_ie_camp_ksl_mother_ostankya_intro_01",
+		cutscene_style = data.cutscene_styles.zoom_in_and_speak,
+		fullscreen_movie = "warhammer3/ksl/mother_ostankya_intro"
+	},
+
 
 
 	--------------------
@@ -378,8 +388,17 @@ data.faction_intros = {
 		advice_line = "wh3_dlc21_ie_camp_grn_azhag_intro_01",
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},
-
-
+	
+	wh3_dlc24_tze_the_deceivers = faction_intro_data:new{
+		preset = data.intro_presets.standard,
+		cam_cutscene_start = {x = 424.9, y = 489.8,	d = 21.561523, b = 0.0,	h = 62.004826,},
+		cam_gameplay_start = {x = 424.9, y = 489.8,	d = 14, b = 0, h = 18,},
+		advice_line = "wh3_dlc24_ie_camp_tze_the_changeling_intro_01",
+		cutscene_style = data.cutscene_styles.zoom_in_and_speak,
+		fullscreen_movie = "warhammer3/tze/the_changeling_intro"
+	},
+	
+	
 	--------------------
 	-------ULTHUAN------
 	--------------------
@@ -537,6 +556,15 @@ data.faction_intros = {
 		cam_gameplay_start = {x = 52, y = 441,	d = 7.926331, b = 0, h = 11.630013,},
 		advice_line = "wh3_dlc21_ie_camp_def_morathi_intro_01",
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
+	},
+	
+	wh3_dlc24_cth_the_celestial_court = faction_intro_data:new{
+		preset = data.intro_presets.standard,
+		cam_cutscene_start = {x = 46.9, y = 305,	d = 21.561523, b = 0.0,	h = 62.004826,},
+		cam_gameplay_start = {x = 46.9, y = 305,	d = 7.926331, b = 0, h = 12.026555,},
+		advice_line = "wh3_dlc24_ie_camp_cth_yuan_bo_intro_01",
+		cutscene_style = data.cutscene_styles.zoom_in_and_speak,
+		fullscreen_movie = "warhammer3/cth/yuan_bo_intro"
 	},
 
 
@@ -840,8 +868,8 @@ data.faction_intros = {
 
 	wh3_main_vmp_caravan_of_blue_roses = faction_intro_data:new{
 		preset = data.intro_presets.standard,
-		cam_cutscene_start = {x = 704.805359, y = 332.506256,	d = 22.695648, b = 0.0,	h = 64.956429,},
-		cam_gameplay_start = {x = 704.805359, y = 330.059662,	d = 9.299866, b = 0, h = 10.896576,},
+		cam_cutscene_start = {x = 704.543762, y = 342.065613,	d = 22.695648, b = 0.0,	h = 64.956429,},
+		cam_gameplay_start = {x = 704.543762, y = 342.065613,	d = 9.299866, b = 0, h = 10.896576,},
 		advice_line = "wh3_dlc21_ie_camp_vmp_ghorst_intro_01",
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},

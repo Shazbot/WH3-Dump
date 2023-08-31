@@ -25,18 +25,8 @@ function battle_logging()
 			function()
 				local turn = cm:turn_number();
 
-				if turn == 50 then
-					PrintBattleLog("_50");
-				elseif turn == 100 then
-					PrintBattleLog("_100");
-				elseif turn == 150 then
-					PrintBattleLog("_150");
-				elseif turn == 200 then
-					PrintBattleLog("_200");
-				elseif turn == 250 then
-					PrintBattleLog("_250");
-				elseif turn == 300 then
-					PrintBattleLog("_300");
+				if turn % 50 == 0 then
+					PrintBattleLog("_"..tostring(turn));
 				end
 
 				PrintBattleLog("");
@@ -298,7 +288,7 @@ function PrintBattleLog(turn_num)
 			local total_type_ambush_ratio = (total_type_ambush / total_fought) * 100;
 			local total_type_other_ratio = (total_type_other / total_fought) * 100;
 
-			local total_output = faction_key..","..faction_is_major..",TOTAL,0,"; --double comma at the end here is deliberate, to make the columns line up
+			local total_output = faction_key..","..faction_is_major..",TOTAL,0,";
 			total_output = total_output..total_fought..",";
 			total_output = total_output..rti(total_win_percent).."%,";
 			total_output = total_output..rti(total_attacker_percent).."%,";

@@ -17,7 +17,7 @@ function setup_kislev_devotion()
 	local human_factions = cm:get_human_factions();
 	
 	for i = 1, #human_factions do
-		if cm:get_faction(human_factions[i]):culture() == "wh3_main_ksl_kislev" then
+		if has_devotion_pooled_resource(cm:get_faction(human_factions[i])) then
 			common.set_context_value("devotion_incursion_chance_ui_state_" .. human_factions[i], cm:get_saved_value("devotion_incursion_chance_ui_state_" .. human_factions[i]) or 0);
 		end;
 	end;
@@ -113,43 +113,59 @@ function setup_kislev_devotion()
 		true
 	);
 	
-	-- force chaos rebellions if a human kislev faction has a low level of devotion
 	core:add_listener(
 		"set_devotion_incursion_chance",
 		"FactionTurnStart",
 		function(context)
 			local faction = context:faction();
-			return faction:culture() == "wh3_main_ksl_kislev" and faction:is_human();
+			return has_devotion_pooled_resource(faction);
 		end,
 		function(context)
 			local faction = context:faction();
-			local faction_key = faction:name();
-			local devotion_value = faction:pooled_resource_manager():resource("wh3_main_ksl_devotion"):value();
-			local incursion_chance = cm:get_saved_value("devotion_incursion_chance_" .. faction_key) or 0;
 			
-			-- tick up the chance of incursion each turn
-			if devotion_value <= 100 then
-				incursion_chance = incursion_chance + 1;
-			else
-				incursion_chance = 0;
+			-- counter climate effects when commandment is active
+			for _, region in model_pairs(faction:region_list()) do
+				local has_effect_bundle = region:has_effect_bundle("wh3_dlc24_climate_uninhabitable_chaotic_anti")
+				
+				if region:get_active_edict_key() == "wh3_dlc24_edict_ksl_anti_chaos" then
+					if not has_effect_bundle then
+						cm:apply_effect_bundle_to_region("wh3_dlc24_climate_uninhabitable_chaotic_anti", region:name(), -1)
+					end
+				elseif has_effect_bundle then
+					cm:remove_effect_bundle_from_region("wh3_dlc24_climate_uninhabitable_chaotic_anti", region:name())
+				end
+			end
+			
+			-- force chaos rebellions if a human kislev faction has a low level of devotion
+			if faction:is_human() then
+				local faction_key = faction:name();
+				local devotion_value = faction:pooled_resource_manager():resource("wh3_main_ksl_devotion"):value();
+				local incursion_chance = cm:get_saved_value("devotion_incursion_chance_" .. faction_key) or 0;
+				
+				-- tick up the chance of incursion each turn
+				if devotion_value < 0 then
+					incursion_chance = incursion_chance + 1;
+				else
+					incursion_chance = 0;
+				end;
+				
+				local devotion_incursion_chance_ui_state = 0;
+				
+				if incursion_chance > 15 then
+					attempt_to_spawn_chaos_incursion(faction, 3);
+					devotion_incursion_chance_ui_state = 3;
+				elseif incursion_chance > 5 then
+					attempt_to_spawn_chaos_incursion(faction, 2);
+					devotion_incursion_chance_ui_state = 2;
+				elseif incursion_chance > 0 then
+					attempt_to_spawn_chaos_incursion(faction, 1);
+					devotion_incursion_chance_ui_state = 1;
+				end;
+				
+				cm:set_saved_value("devotion_incursion_chance_" .. faction_key, incursion_chance)
+				cm:set_saved_value("devotion_incursion_chance_ui_state_" .. faction_key, devotion_incursion_chance_ui_state)
+				common.set_context_value("devotion_incursion_chance_ui_state_" .. faction_key, devotion_incursion_chance_ui_state);
 			end;
-			
-			local devotion_incursion_chance_ui_state = 0;
-			
-			if incursion_chance > 15 then
-				attempt_to_spawn_chaos_incursion(faction, 3);
-				devotion_incursion_chance_ui_state = 3;
-			elseif incursion_chance > 5 then
-				attempt_to_spawn_chaos_incursion(faction, 2);
-				devotion_incursion_chance_ui_state = 2;
-			elseif incursion_chance > 0 then
-				attempt_to_spawn_chaos_incursion(faction, 1);
-				devotion_incursion_chance_ui_state = 1;
-			end;
-			
-			cm:set_saved_value("devotion_incursion_chance_" .. faction_key, incursion_chance)
-			cm:set_saved_value("devotion_incursion_chance_ui_state_" .. faction_key, devotion_incursion_chance_ui_state)
-			common.set_context_value("devotion_incursion_chance_ui_state_" .. faction_key, devotion_incursion_chance_ui_state);
 		end,
 		true
 	);
@@ -159,7 +175,7 @@ function setup_kislev_devotion()
 		"NegativeDiplomaticEvent",
 		function(context)
 			local proposer = context:proposer();
-			return proposer:is_human() and proposer:culture() == "wh3_main_ksl_kislev" and context:recipient():culture() == "wh3_main_ksl_kislev" and context:is_war();
+			return proposer:is_human() and has_devotion_pooled_resource(proposer) and context:recipient():culture() == "wh3_main_ksl_kislev" and context:is_war();
 		end,
 		function(context)
 			cm:faction_add_pooled_resource(context:proposer():name(), "wh3_main_ksl_devotion", "declared_war_on_kislev", devotion_amount_declare_war_on_kislev);
@@ -178,11 +194,14 @@ function setup_kislev_devotion()
 		
 		local devotion_hero_actions_frost_maiden = faction:bonus_values():scripted_value("devotion_hero_actions_frost_maiden", "value");
 		local devotion_hero_actions_patriarch = faction:bonus_values():scripted_value("devotion_hero_actions_patriarch", "value");
+		--local devotion_hero_actions_hag_witch = faction:bonus_values():scripted_value("devotion_hero_actions_hag_witch", "value");
 		
 		if devotion_hero_actions_frost_maiden > 0 and character_subtype:find("wh3_main_ksl_frost_maiden") then
 			devotion_to_add = devotion_hero_actions_frost_maiden;
 		elseif devotion_hero_actions_patriarch > 0 and character_subtype == "wh3_main_ksl_patriarch" then
 			devotion_to_add = devotion_hero_actions_patriarch;
+		--elseif devotion_hero_actions_hag_witch > 0 and character_subtype:find("wh3_dlc24_ksl_hag_witch") then
+			--devotion_to_add = devotion_hero_actions_hag_witch;
 		end;
 		
 		if devotion_to_add > 0 then
@@ -365,7 +384,7 @@ function setup_kislev_devotion()
 		local human_factions = cm:get_human_factions();
 		
 		for i = 1, #human_factions do
-			if human_factions[i] == "wh3_main_ksl_the_ice_court" or human_factions[i] =="wh3_main_ksl_the_great_orthodoxy" then
+			if human_factions[i] == "wh3_main_ksl_the_ice_court" or human_factions[i] == "wh3_main_ksl_the_great_orthodoxy" then
 				cm:show_message_event(
 					human_factions[i],
 					title,
@@ -429,7 +448,7 @@ function setup_kislev_devotion()
 		"FactionTurnStart",
 		function(context)
 			local faction = context:faction();
-			return faction:culture() == "wh3_main_ksl_kislev" and faction:can_be_human();
+			return has_supporters_pooled_resource(faction) and faction:can_be_human();
 		end,
 		function(context)
 			local faction = context:faction();
@@ -534,6 +553,14 @@ function setup_kislev_devotion()
 		true
 	);
 end;
+
+function has_devotion_pooled_resource(faction)
+	return not faction:pooled_resource_manager():resource("wh3_main_ksl_devotion"):is_null_interface()
+end
+
+function has_supporters_pooled_resource(faction)
+	return not faction:pooled_resource_manager():resource("wh3_main_ksl_followers"):is_null_interface()
+end
 
 --------------------------------------------------------------
 ----------------------- SAVING / LOADING ---------------------

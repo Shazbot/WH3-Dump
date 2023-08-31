@@ -253,13 +253,6 @@ local current_workshop_lvl = 1;
 
 local initialized = false;
 
-local script_contexts = { --decides which of the paths the AI should go down
-	"cai_faction_script_context_alpha", --doomwheels and doomflayers
-	"cai_faction_script_context_beta", --weapons teams
-};
-
-local script_context_chosen = "cai_faction_script_context_beta" --fallback in case something goes wrong
-
 cm:add_faction_turn_start_listener_by_name(
 	"faction_turn_start_ikit_initialisation",
 	ikit_faction,
@@ -746,15 +739,9 @@ function initialize_workshop_listeners()
 	local ikit_faction_interface = cm:get_faction(ikit_faction);
 	ikit_faction_cqi = ikit_faction_interface:command_queue_index();
 
-	if not ikit_faction_interface:is_human() then --Bypasses the mission unlock requirements for the AI and picks one of the two script contexts
+	if not ikit_faction_interface:is_human() then --Bypasses the mission unlock requirements for the AI
 		current_workshop_lvl = 4
-		if cm:is_new_game() == true then 
-			local r_num = cm:random_number(#script_contexts);
-			script_context_chosen = script_contexts[r_num];
-		end
 	end
-	cm:cai_set_faction_script_context(ikit_faction, script_context_chosen);
-	out.design("============== This faction: "..ikit_faction.." is now using this context: "..cm:cai_get_faction_script_context(ikit_faction)..", defining AI behaviour for faction feature ==============");
 	
 	check_and_update_rite_details();
 
@@ -799,7 +786,6 @@ cm:add_saving_game_callback(
 		cm:save_named_value("nuke_drop_chance_current", nuke_drop_chance_current, context);
 		cm:save_named_value("reactor_add_chances", reactor_add_chances, context);
 		cm:save_named_value("workshop_rite_details", workshop_rite_details, context);
-		cm:save_named_value("ikit_script_context", script_context_chosen, context);
 	end
 );
 
@@ -814,7 +800,6 @@ cm:add_loading_game_callback(
 			initialized = cm:load_named_value("initialized", false, context);
 			nuke_drop_chance_current = cm:load_named_value("nuke_drop_chance_current", 0, context);
 			workshop_rite_details = cm:load_named_value("workshop_rite_details", workshop_rite_details, context);
-			script_context_chosen = cm:load_named_value("ikit_script_context", script_context_chosen, context);
 		end;
 	end
 );

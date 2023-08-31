@@ -82,6 +82,46 @@ victory_objectives = {
 				{type = "SCRIPTED", conditions = {"script_key hellshard_bound_relics_requirement", "override_text mission_text_text_mis_activity_dlc23_complete_hellshard_bound_relics_requirement"}},
 				{type = "SCRIPTED", conditions = {"script_key chaos_dwarf_final_battle", "override_text mission_text_text_mis_activity_dlc23_complete_chaos_dwarf_final_battle"}},
 			}
+		},
+
+		the_changeling_schemes = {
+			campaign_types = {SP_NORMAL_NO_ROC = true},
+			factions = {wh3_dlc24_tze_the_deceivers = true},
+			mission_key = "wh_main_long_victory",
+			victory_type = "wh_dlc03_victory_type_major",
+			objectives = {
+				{type = "SCRIPTED", conditions = {"script_key schemes_grand", "override_text mission_text_text_wh3_dlc24_objective_the_changeling_long_grand_schemes_roc"}},
+				{type = "SCRIPTED", conditions = {"script_key schemes", "override_text mission_text_text_wh3_dlc24_objective_the_changeling_long"}},
+			}
+		},
+
+		jade_dragon_astromantic_relays = {
+			campaign_types = {SP_NORMAL_NO_ROC = true},
+			factions = {wh3_dlc24_cth_the_celestial_court = true},
+			mission_key = "wh_main_long_victory",
+			victory_type = "wh_dlc03_victory_type_major",
+			objectives = {
+				{type = "SCRIPTED", conditions = {"script_key empower_compass_north", "override_text mission_text_text_wh3_dlc24_victory_complete_astromantic_relays_north_roc"}},
+				{type = "SCRIPTED", conditions = {"script_key empower_compass_east", "override_text mission_text_text_wh3_dlc24_victory_complete_astromantic_relays_east_roc"}},
+				{type = "SCRIPTED", conditions = {"script_key empower_compass_south", "override_text mission_text_text_wh3_dlc24_victory_complete_astromantic_relays_south_roc"}},
+				{type = "SCRIPTED", conditions = {"script_key empower_compass_west", "override_text mission_text_text_wh3_dlc24_victory_complete_astromantic_relays_west_roc"}},
+				{type = "SCRIPTED", conditions = {"script_key final_battle", "override_text mission_text_text_wh3_dlc24_victory_yuan_bo_final_battle"}}
+			}
+		},
+
+		mother_ostankya_hexes = {
+			campaign_types = {SP_NORMAL_NO_ROC = true},
+			factions = {wh3_dlc24_ksl_daughters_of_the_forest = true},
+			mission_key = "wh_main_long_victory",
+			victory_type = "wh_dlc03_victory_type_major",
+			objectives = {
+				{type = "SCRIPTED", conditions = {"script_key hexes_victory_5",	"override_text mission_text_text_mis_activity_ostankya_roc_collect_hex_fifth"}},
+				{type = "SCRIPTED", conditions = {"script_key hexes_victory_1", "override_text mission_text_text_mis_activity_ostankya_roc_collect_hex_first"}},
+				{type = "SCRIPTED", conditions = {"script_key hexes_victory_2", "override_text mission_text_text_mis_activity_ostankya_roc_collect_hex_second"}},
+				{type = "SCRIPTED", conditions = {"script_key hexes_victory_3", "override_text mission_text_text_mis_activity_ostankya_roc_collect_hex_third"}},
+				{type = "SCRIPTED", conditions = {"script_key hexes_victory_4",	"override_text mission_text_text_mis_activity_ostankya_roc_collect_hex_fourth"}},
+				{type = "SCRIPTED", conditions = {"script_key hexes_long_all", "override_text mission_text_text_mis_activity_ostankya_collect_all_hexes"}},
+			}
 		}
 	},
 
@@ -183,6 +223,16 @@ victory_objectives = {
 			"wh3_main_tze_oracles_of_tzeentch",
 			"wh3_main_dae_daemon_prince"
 		},
+		wh3_dlc24_ksl_daughters_of_the_forest = {
+			"wh3_main_kho_exiles_of_khorne",
+			"wh3_main_nur_poxmakers_of_nurgle",
+			"wh3_main_sla_seducers_of_slaanesh",
+			"wh3_main_tze_oracles_of_tzeentch",
+			"wh3_main_dae_daemon_prince",
+			"wh3_dlc23_chd_astragoth",
+			"wh3_dlc23_chd_legion_of_azgorh",
+			"wh3_dlc23_chd_zhatan"
+		},
 		wh3_main_cth_the_northern_provinces = {
 			"wh3_main_kho_exiles_of_khorne",
 			"wh3_main_ksl_the_great_orthodoxy",
@@ -206,6 +256,31 @@ victory_objectives = {
 			"wh3_main_sla_seducers_of_slaanesh",
 			"wh3_main_tze_oracles_of_tzeentch",
 			"wh3_main_dae_daemon_prince",
+		},
+		wh3_dlc24_cth_the_celestial_court = {
+			"wh3_main_kho_exiles_of_khorne",
+			"wh3_main_ksl_the_great_orthodoxy",
+			"wh3_main_ksl_the_ice_court",
+			"wh3_main_ksl_ursun_revivalists",
+			"wh3_main_nur_poxmakers_of_nurgle",
+			"wh3_main_ogr_disciples_of_the_maw",
+			"wh3_main_ogr_goldtooth",
+			"wh3_main_sla_seducers_of_slaanesh",
+			"wh3_main_tze_oracles_of_tzeentch",
+			"wh3_main_dae_daemon_prince",
+		},
+		wh3_dlc24_tze_the_deceivers = {
+			"wh3_main_kho_exiles_of_khorne",
+			"wh3_main_ksl_the_great_orthodoxy",
+			"wh3_main_ksl_the_ice_court",
+			"wh3_main_ksl_ursun_revivalists",
+			"wh3_main_nur_poxmakers_of_nurgle",
+			"wh3_main_sla_seducers_of_slaanesh",
+			"wh3_main_dae_daemon_prince",
+			"wh3_main_cth_the_northern_provinces",
+			"wh3_main_cth_the_western_provinces",
+			"wh3_dlc24_cth_the_celestial_court",
+			"wh3_dlc24_ksl_daughters_of_the_forest" 
 		}
 	},
 

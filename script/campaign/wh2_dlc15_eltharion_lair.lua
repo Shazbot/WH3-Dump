@@ -149,7 +149,7 @@ function add_eltharion_lair_listeners()
 			local character = context:character();
 			local faction = character:faction();
 			
-			return faction:name() == yvresse_faction_key and faction:is_human() and not character:is_faction_leader() and not character:character_details():is_unique() and character:rank() >= lair_mistwalker_level;
+			return faction:name() == yvresse_faction_key and faction:is_human() and not character:is_faction_leader() and not character:is_loaned() and not character:character_details():is_unique() and character:rank() >= lair_mistwalker_level;
 		end,
 		function(context)
 			local character = context:character();

@@ -49,7 +49,7 @@ function setup_daemon_cults()
 	local human_daemon_factions = {};
 	
 	for i = 1, #human_factions do
-		if cult_data[cm:get_faction(human_factions[i]):culture()] then
+		if cult_data[cm:get_faction(human_factions[i]):culture()] and human_factions[i] ~= "wh3_dlc24_tze_the_deceivers" then
 			table.insert(human_daemon_factions, human_factions[i]);
 		end;
 	end;
@@ -101,7 +101,7 @@ function setup_daemon_cults()
 						local available_regions = current_faction_cult_data[3];
 						
 						if #available_regions > 0 and not cm:get_saved_value(current_faction_name .. "_create_cult_on_cooldown") then
-							local fs = cm:add_foreign_slot_set_to_region_for_faction(current_faction:command_queue_index(), available_regions[cm:random_number(#available_regions)], current_faction_cult_data[2]);
+							fs = cm:add_foreign_slot_set_to_region_for_faction(current_faction:command_queue_index(), available_regions[cm:random_number(#available_regions)], current_faction_cult_data[2])
 							local region = fs:region();
 							
 							cm:trigger_incident_with_targets(current_faction:command_queue_index(), "wh3_main_incident_cult_manifests", 0, 0, 0, 0, region:cqi(), region:settlement():cqi());

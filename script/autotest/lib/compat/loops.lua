@@ -54,3 +54,19 @@ function Lib.Compat.Loops.vram_budget_loop()
         end
     end)  
 end
+
+--##### Resolution stability loops #####--
+
+function Lib.Compat.Loops.resolution_stability_loop(log_csv, game_mode, display_mode)
+    callback(function()
+        local resolution_count, resolution_list = Common_Actions.get_dropdown_list_count(Lib.Components.Frontend.resolution_dropdown())
+        for _,resolution in ipairs(resolution_list) do
+            local used_resolution = UIComponent(resolution:Find("row_tx")):GetStateText()
+            Lib.Frontend.Options.select_resolution(used_resolution)
+            if log_csv then
+                Functions.write_to_document(game_mode..","..display_mode..","..used_resolution..",Pass", g_reso_stab_log_location, g_reso_stab_log_name, ".csv", false, true)
+            end
+            Lib.Helpers.Misc.wait(2, true)
+        end
+    end)
+end

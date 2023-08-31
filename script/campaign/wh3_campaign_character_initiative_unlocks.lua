@@ -1290,7 +1290,8 @@ initiative_templates = {
 					"wh3_main_kho_cha_skarbrand_0",
 					"wh3_main_nur_cha_ku_gath_plaguefather_0",
 					"wh3_main_sla_cha_nkari_0",
-					"wh3_main_tze_cha_kairos_fateweaver_0"
+					"wh3_main_tze_cha_kairos_fateweaver_0",
+					"wh_dlc01_chs_cha_qb_lord_of_change_0"
 				}
 				for i = 0, #exalted_daemon_lord_character_list do
 					local is_character = cm:pending_battle_cache_unit_key_exists(exalted_daemon_lord_character_list[i])

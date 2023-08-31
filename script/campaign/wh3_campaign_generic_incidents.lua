@@ -102,8 +102,14 @@ core:add_listener(
 				["wh3_main_ritual_tze_cotw_halt_faction"] = "wh3_main_incident_ritual_tze_cotw_halt_faction",
 				["wh3_main_ritual_tze_cotw_open_gates"] = "wh3_main_incident_ritual_tze_cotw_open_gates",
 				["wh3_main_ritual_tze_cotw_reveal_shroud"] = "wh3_main_incident_ritual_tze_cotw_reveal_shroud",
+				["wh3_main_ritual_tze_cotw_vilitch_reveal_shroud"] = "wh3_main_incident_ritual_tze_cotw_reveal_shroud",
 				["wh3_main_ritual_tze_cotw_show_ai_intentions"] = "wh3_main_incident_ritual_tze_cotw_show_ai_intentions",
-				["wh3_main_ritual_tze_cotw_track_army"] = "wh3_main_incident_ritual_tze_cotw_track_army"
+				["wh3_main_ritual_tze_cotw_vilitch_show_ai_intentions"] = "wh3_main_incident_ritual_tze_cotw_show_ai_intentions",
+				["wh3_main_ritual_tze_cotw_track_army"] = "wh3_main_incident_ritual_tze_cotw_track_army",
+				["wh3_dlc20_ritual_tze_cotw_vilitch_drain_magic"] = "wh3_dlc20_incident_ritual_tze_cotw_vilitch_drain_magic",
+				["wh3_dlc20_ritual_tze_cotw_vilitch_muddle_minds"] = "wh3_dlc20_incident_ritual_tze_cotw_vilitch_muddle_minds",
+				["wh3_dlc20_ritual_tze_cotw_vilitch_spawnification"] = "wh3_dlc20_incident_ritual_tze_cotw_vilitch_spawnification",
+				["wh3_main_ritual_tze_cotw_borrow_time"] = "wh3_main_incident_ritual_tze_cotw_borrow_time"
 			};
 			
 			local ritual_target = ritual:ritual_target();
@@ -118,7 +124,13 @@ core:add_listener(
 				target_faction = ritual_target:get_target_faction();
 				faction_cqi = target_faction:command_queue_index();
 			elseif target_type == "MILITARY_FORCE" or target_type == "FORCE" then
-				character_cqi = ritual_target:get_target_force():general_character():command_queue_index();
+				local target_force = ritual_target:get_target_force()
+				character_cqi = target_force:general_character():command_queue_index();
+				target_faction = target_force:faction()
+				
+				if ritual_key == "wh3_main_ritual_tze_cotw_borrow_time" then -- to be replaced with campaign_payload eventually
+					cm:replenish_action_points(cm:char_lookup_str(character_cqi))
+				end
 			elseif target_type == "REGION" then
 				local region = ritual_target:get_target_region();
 				region_cqi = region:cqi();
@@ -133,11 +145,32 @@ core:add_listener(
 				local incident_mapping = {
 					["wh3_main_ritual_tze_cotw_force_rebellion"] = "wh3_main_incident_ritual_tze_cotw_force_rebellion_theirs",
 					["wh3_main_ritual_tze_cotw_halt_faction"] = "wh3_main_incident_ritual_tze_cotw_halt_faction_theirs",
-					["wh3_main_ritual_tze_cotw_open_gates"] = "wh3_main_incident_ritual_tze_cotw_open_gates_theirs"
+					["wh3_main_ritual_tze_cotw_open_gates"] = "wh3_main_incident_ritual_tze_cotw_open_gates_theirs",
+					["wh3_dlc20_ritual_tze_cotw_vilitch_drain_magic"] = "wh3_dlc20_incident_ritual_tze_cotw_vilitch_drain_magic_theirs",
+					["wh3_dlc20_ritual_tze_cotw_vilitch_muddle_minds"] = "wh3_dlc20_incident_ritual_tze_cotw_vilitch_muddle_minds_theirs",
+					["wh3_dlc20_ritual_tze_cotw_vilitch_spawnification"] = "wh3_dlc20_incident_ritual_tze_cotw_vilitch_spawnification_theirs"
 				};
 				
 				if incident_mapping[ritual_key] then
 					cm:trigger_incident_with_targets(target_faction:command_queue_index(), incident_mapping[ritual_key], performing_faction_cqi, 0, character_cqi, 0, region_cqi, 0);
+				end;
+			end;
+			
+			-- special case for spread corruption
+			if ritual_key == "wh3_dlc24_ritual_tze_cotw_the_changeling_spread_corruption" or ritual_key == "wh3_dlc24_ritual_tze_cotw_vilitch_spread_corruption" then
+				cm:trigger_incident_with_targets(performing_faction_cqi, "wh3_dlc24_incident_ritual_tze_cotw_the_changeling_spread_corruption", 0, 0, character_cqi, 0, 0, 0);
+				
+				local character = cm:get_character_by_cqi(character_cqi);
+				
+				if character:has_region() then
+					local region = character:region();
+					
+					if not region:is_abandoned() then
+						local faction = region:owning_faction();
+						if faction:is_human() then
+							cm:trigger_incident_with_targets(faction:command_queue_index(), "wh3_dlc24_incident_ritual_tze_cotw_the_changeling_spread_corruption_theirs", 0, 0, character_cqi, 0, 0, 0);
+						end;
+					end;
 				end;
 			end;
 		end;
@@ -145,7 +178,7 @@ core:add_listener(
 	true
 );
 
-core:add_listener(
+--[[core:add_listener(
 	"cathay_harmony_event_feed",
 	"FactionTurnStart",
 	function(context)
@@ -180,7 +213,7 @@ core:add_listener(
 		end;
 	end,
 	true
-);
+);]]
 
 core:add_listener(
 	"camp_destroyed_event_feed",

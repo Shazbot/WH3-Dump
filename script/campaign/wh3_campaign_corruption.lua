@@ -56,6 +56,10 @@ local corruption_province_overrides = {
 	{
 		["chaos"] = 30,
 	},
+	["wh3_main_combi_province_the_bleak_coast"] =
+	{
+		["chaos"] = 30,
+	}
 };
 
 function add_starting_corruption()

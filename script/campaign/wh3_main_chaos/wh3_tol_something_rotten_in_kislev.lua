@@ -166,6 +166,10 @@ cm:add_first_tick_callback_new(
 			
 			teleport_character_faction_leader("wh3_main_kho_crimson_skull", 238, 199);
 			
+			cm:force_declare_war("wh3_main_kho_crimson_skull", "wh3_main_ksl_the_great_orthodoxy", false, false);
+			cm:force_declare_war("wh3_main_kho_crimson_skull", "wh3_main_ksl_ursun_revivalists", false, false);
+			cm:force_declare_war("wh3_main_kho_crimson_skull", "wh3_main_ksl_the_ice_court", false, false);
+			
 			local kho_inv_1 = invasion_manager:new_invasion(
 				"kho_inv_1",
 				"wh3_main_kho_crimson_skull",
@@ -296,6 +300,10 @@ cm:add_first_tick_callback_new(
 			);
 			
 			teleport_character_faction_leader("wh3_main_nur_septic_claw", 335, 178);
+			
+			cm:force_declare_war("wh3_main_nur_septic_claw", "wh3_main_ksl_the_great_orthodoxy", false, false);
+			cm:force_declare_war("wh3_main_nur_septic_claw", "wh3_main_ksl_ursun_revivalists", false, false);
+			cm:force_declare_war("wh3_main_nur_septic_claw", "wh3_main_ksl_the_ice_court", false, false);
 			
 			local nur_inv_1 = invasion_manager:new_invasion(
 				"nur_inv_1",
@@ -542,6 +550,10 @@ cm:add_first_tick_callback_new(
 			
 			teleport_character_faction_leader("wh3_main_tze_flaming_scribes", 531, 207);
 			
+			cm:force_declare_war("wh3_main_tze_flaming_scribes", "wh3_main_ksl_the_great_orthodoxy", false, false);
+			cm:force_declare_war("wh3_main_tze_flaming_scribes", "wh3_main_ksl_ursun_revivalists", false, false);
+			cm:force_declare_war("wh3_main_tze_flaming_scribes", "wh3_main_ksl_the_ice_court", false, false);
+			
 			local tze_inv_1 = invasion_manager:new_invasion(
 				"tze_inv_1",
 				"wh3_main_tze_flaming_scribes",
@@ -633,7 +645,8 @@ cm:add_first_tick_callback_new(
 			cm:add_building_to_settlement("wh3_main_chaos_region_hell_pit", "wh2_main_skv_monsters_4");
 			
 			
-			kill_faction("wh_dlc08_nor_vanaheimlings");
+			kill_faction("wh3_dlc20_nor_dolgan");
+			kill_faction("wh3_dlc24_tze_the_deceivers");
 			kill_faction("wh3_main_ksl_druzhina_enclave");
 			kill_faction("wh3_main_ksl_ropsmenn_clan");
 			kill_faction("wh3_main_ksl_ungol_kindred");

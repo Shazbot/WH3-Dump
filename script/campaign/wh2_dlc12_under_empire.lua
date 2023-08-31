@@ -391,8 +391,8 @@ function add_under_empire_listeners()
 			local display_chain = mordheim:display_primary_building_chain();
 			local building_chain = mordheim:primary_building_chain();
 			
-			cm:override_building_chain_display(display_chain, "wh2_dlc12_dummy_nuclear_ruins", "wh3_main_combi_region_mordheim");
-			cm:override_building_chain_display(building_chain, "wh2_dlc12_dummy_nuclear_ruins", "wh3_main_combi_region_mordheim");
+			cm:override_building_chain_display(display_chain, "wh2_dlc12_dummy_nuclear_ruins", "wh3_main_combi_region_mordheim", false);
+			cm:override_building_chain_display(building_chain, "wh2_dlc12_dummy_nuclear_ruins", "wh3_main_combi_region_mordheim", false);
 			skaven_under_empire_ruins["wh3_main_combi_region_mordheim"] = {display_chain, building_chain};
 		end
 		

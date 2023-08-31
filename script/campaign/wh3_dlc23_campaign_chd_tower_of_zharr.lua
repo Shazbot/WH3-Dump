@@ -483,10 +483,9 @@ function tower_of_zharr:initialise()
 		"ToZ_RitualStartedEvent",
 		"RitualStartedEvent",
 		function(context)
-			local ritual_category = context:ritual():ritual_category()
-			local district = self.districts[ritual_category]
+			local faction = context:performing_faction()
 
-			return context:performing_faction() ~= nil and district ~= nil
+			return faction ~= nil and faction:culture() == "wh3_dlc23_chd_chaos_dwarfs" and self.districts[context:ritual():ritual_category()] ~= nil
 		end,
 		function(context)
 			local ritual = context:ritual()

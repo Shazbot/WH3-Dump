@@ -286,7 +286,13 @@ function unlock_campaign_movies()
 		"wh3_dlc23_story_panel_narrative_sacrifice_chd",
 		"dlc23_astragoth_win",
 		"dlc23_drazhoath_win",
-		"dlc23_zhatan_win"
+		"dlc23_zhatan_win",
+		"mother_ostankya_intro",
+		"mother_ostankya_win",
+		"the_changeling_intro",
+		"the_changeling_win",
+		"yuan_bo_intro",
+		"yuan_bo_win"
 	};
 	
 	for i = 1, #movies_to_unlock do

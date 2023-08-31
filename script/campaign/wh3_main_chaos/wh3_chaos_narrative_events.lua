@@ -26,8 +26,13 @@ out.narrative("* wh3_chaos_narrative_events.lua loaded");
 package.path = package.path .. ";" .. cm:get_campaign_folder() .. "/_narrative/?.lua"
 require("wh3_narrative_loader");
 
-
-
+narrative.add_exception_faction("wh3_dlc20_chs_azazel")
+narrative.add_exception_faction("wh3_dlc20_chs_festus")
+narrative.add_exception_faction("wh3_dlc20_chs_valkia")
+narrative.add_exception_faction("wh3_dlc20_chs_vilitch")
+narrative.add_exception_faction("wh3_dlc23_chd_astragoth")
+narrative.add_exception_faction("wh3_dlc23_chd_legion_of_azgorh")
+narrative.add_exception_faction("wh3_dlc23_chd_zhatan")
 
 ------------------------------------------------------------------------------------------------------------------
 -- Realm Intro Cutscenes
@@ -454,9 +459,9 @@ local function customise_narrative_event_faction_data_for_campaign()
 		narrative.add_data_for_faction(faction_key, "initial_enemy_faction_key", initial_enemy_faction_key);
 	
 		-- defeat initial enemy mission
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_advice_key", "wh3_main_camp_narrative_chs_katarin_attack_enemy_01");								-- advice key
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_mission_key", "wh3_main_camp_narrative_chaos_katarin_defeat_initial_enemy_01");						-- mission key
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_mission_rewards", 																					-- mission reward
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_advice_key", "wh3_main_camp_narrative_chs_katarin_attack_enemy_01");								-- advice key
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_key", "wh3_main_camp_narrative_chaos_katarin_defeat_initial_enemy_01");					-- mission key
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_rewards", 																				-- mission reward
 			{
 				payload.money(1000),
 				payload.devotion(10),
@@ -550,9 +555,9 @@ local function customise_narrative_event_faction_data_for_campaign()
 		narrative.add_data_for_faction(faction_key, "initial_enemy_faction_key", initial_enemy_faction_key);
 	
 		-- defeat initial enemy mission
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_advice_key", "wh3_main_camp_narrative_chs_kostaltyn_attack_enemy_01");								-- advice key
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_mission_key", "wh3_main_camp_narrative_chaos_kostaltyn_defeat_initial_enemy_01");					-- mission key
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_mission_rewards", 																					-- mission reward
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_advice_key", "wh3_main_camp_narrative_chs_kostaltyn_attack_enemy_01");							-- advice key
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_key", "wh3_main_camp_narrative_chaos_kostaltyn_defeat_initial_enemy_01");				-- mission key
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_rewards", 																				-- mission reward
 			{
 				payload.money(1000),
 				payload.devotion(10),
@@ -623,9 +628,9 @@ local function customise_narrative_event_faction_data_for_campaign()
 		narrative.add_data_for_faction(faction_key, "initial_enemy_faction_key", initial_enemy_faction_key);
 	
 		-- defeat initial enemy mission
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_advice_key", "wh3_main_camp_narrative_chs_boris_ursus_attack_enemy_01");							-- advice key
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_mission_key", "wh3_main_camp_narrative_chaos_boris_ursus_defeat_initial_enemy_01");					-- mission key
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_mission_rewards", 																					-- mission reward
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_advice_key", "wh3_main_camp_narrative_chs_boris_ursus_attack_enemy_01");							-- advice key
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_key", "wh3_main_camp_narrative_chaos_boris_ursus_defeat_initial_enemy_01");				-- mission key
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_rewards", 																				-- mission reward
 			{
 				payload.money(1000),
 				payload.devotion(10),
@@ -711,8 +716,8 @@ local function customise_narrative_event_faction_data_for_campaign()
 		narrative.add_data_for_faction(faction_key, "initial_unoccupied_region_key", initial_unoccupied_region_key);
 	
 		-- defeat initial enemy mission
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_advice_key", "wh3_main_camp_narrative_chs_daemon_prince_attack_enemy_01");							-- advice key
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_mission_key", "wh3_main_camp_narrative_chaos_daemon_prince_defeat_initial_enemy_01");				-- mission key
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_advice_key", "wh3_main_camp_narrative_chs_daemon_prince_attack_enemy_01");						-- advice key
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_key", "wh3_main_camp_narrative_chaos_daemon_prince_defeat_initial_enemy_01");			-- mission key
 		
 		-- Capture Initial Settlement mission (DP ONLY)
 		narrative.add_data_for_faction(faction_key, "chs_event_daemon_prince_occupy_initial_settlement_countdown_allow", true);															-- enable the countdown to the mission
@@ -846,9 +851,9 @@ local function customise_narrative_event_faction_data_for_campaign()
 		narrative.add_data_for_faction(faction_key, "initial_enemy_faction_key", initial_enemy_faction_key);
 
 		-- defeat initial enemy mission
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_advice_key", "wh3_main_camp_narrative_chs_skarbrand_attack_enemy_01");								-- advice key
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_mission_key", "wh3_main_camp_narrative_chaos_skarbrand_defeat_initial_enemy_01");					-- mission key
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_mission_rewards", 																					-- mission reward
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_advice_key", "wh3_main_camp_narrative_chs_skarbrand_attack_enemy_01");							-- advice key
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_key", "wh3_main_camp_narrative_chaos_skarbrand_defeat_initial_enemy_01");				-- mission key
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_rewards", 																				-- mission reward
 			{
 				payload.money(																																							-- issue money or equivalent
 					1000,																																									-- money reward, if we aren't giving something else for this faction
@@ -935,9 +940,9 @@ local function customise_narrative_event_faction_data_for_campaign()
 		narrative.add_data_for_faction(faction_key, "initial_enemy_faction_key", initial_enemy_faction_key);
 	
 		-- defeat initial enemy mission
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_advice_key", "wh3_main_camp_narrative_chs_kugath_attack_enemy_01");									-- advice key
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_mission_key", "wh3_main_camp_narrative_chaos_kugath_defeat_initial_enemy_01");						-- mission key
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_mission_rewards", 																					-- mission reward
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_advice_key", "wh3_main_camp_narrative_chs_kugath_attack_enemy_01");								-- advice key
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_key", "wh3_main_camp_narrative_chaos_kugath_defeat_initial_enemy_01");					-- mission key
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_rewards", 																				-- mission reward
 			{
 				payload.money(																																							-- issue money or equivalent
 					1000,																																									-- money reward, if we aren't giving something else for this faction
@@ -1025,9 +1030,9 @@ local function customise_narrative_event_faction_data_for_campaign()
 		narrative.add_data_for_faction(faction_key, "initial_enemy_faction_key", initial_enemy_faction_key);
 	
 		-- defeat initial enemy mission
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_advice_key", "wh3_main_camp_narrative_chs_nkari_attack_enemy_01");									-- advice key
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_mission_key", "wh3_main_camp_narrative_chaos_nkari_defeat_initial_enemy_01");						-- mission key
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_mission_rewards", 																					-- mission reward
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_advice_key", "wh3_main_camp_narrative_chs_nkari_attack_enemy_01");								-- advice key
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_key", "wh3_main_camp_narrative_chaos_nkari_defeat_initial_enemy_01");					-- mission key
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_rewards", 																				-- mission reward
 			{
 				payload.money(																																							-- issue money or equivalent
 					1000,																																									-- money reward, if we aren't giving something else for this faction
@@ -1112,8 +1117,8 @@ local function customise_narrative_event_faction_data_for_campaign()
 		local faction_key = "wh3_main_tze_oracles_of_tzeentch";																															-- key of faction to apply overrides for
 		local initial_enemy_faction_key = "wh3_main_cth_imperial_wardens";																												-- key of their initial enemy faction
 		local initial_settlement_target_faction_key = "wh3_main_chs_khazag";																											-- key of the faction that owns the target settlement
-		local initial_enemy_region_key = get_initial_enemy_region_key(faction_key, initial_settlement_target_faction_key);																			-- key of the closest enemy faction region to player
-		local initial_enemy_province_key = get_initial_enemy_province_key(initial_settlement_target_faction_key, initial_enemy_region_key)															-- province controlled by initial enemy faction
+		local initial_enemy_region_key = "wh3_main_chaos_region_bloodwind_keep";																										-- key of the closest enemy faction region to player
+		local initial_enemy_province_key = get_initial_enemy_province_key(initial_settlement_target_faction_key, initial_enemy_region_key)												-- province controlled by initial enemy faction
 		local initial_enemy_mission_agent_reward_type = "runesmith";
 		local initial_enemy_mission_agent_reward_subtype = "wh3_main_tze_iridescent_horror_tzeentch";
 		
@@ -1121,9 +1126,9 @@ local function customise_narrative_event_faction_data_for_campaign()
 		narrative.add_data_for_faction(faction_key, "initial_enemy_faction_key", initial_enemy_faction_key);
 		
 		-- defeat initial enemy mission
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_advice_key", "wh3_main_camp_narrative_chs_kairos_attack_enemy_01");									-- advice key
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_mission_key", "wh3_main_camp_narrative_chaos_kairos_defeat_initial_enemy_01");						-- mission key
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_mission_rewards", 																					-- mission reward
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_advice_key", "wh3_main_camp_narrative_chs_kairos_attack_enemy_01");								-- advice key
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_key", "wh3_main_camp_narrative_chaos_kairos_defeat_initial_enemy_01");					-- mission key
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_rewards", 																				-- mission reward
 			{
 				payload.grimoires(150)																																						-- grimoires reward
 			}
@@ -1220,9 +1225,9 @@ local function customise_narrative_event_faction_data_for_campaign()
 	
 		-- defeat initial enemy mission
 		narrative.add_data_for_faction(faction_key, "initial_enemy_faction_key", initial_enemy_faction_key);																			-- initial enemy faction
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_advice_key", "wh3_main_camp_narrative_chs_miao_ying_attack_enemy_01");								-- advice key
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_mission_key", "wh3_main_camp_narrative_chaos_miao_ying_defeat_initial_enemy_01");					-- mission key
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_mission_rewards", 																					-- mission reward
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_advice_key", "wh3_main_camp_narrative_chs_miao_ying_attack_enemy_01");							-- advice key
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_key", "wh3_main_camp_narrative_chaos_miao_ying_defeat_initial_enemy_01");				-- mission key
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_rewards", 																				-- mission reward
 			{
 				payload.money(																																							-- issue money or equivalent
 					1000,																																									-- money reward, if we aren't giving something else for this faction
@@ -1284,9 +1289,9 @@ local function customise_narrative_event_faction_data_for_campaign()
 	
 		-- defeat initial enemy mission
 		narrative.add_data_for_faction(faction_key, "initial_enemy_faction_key", initial_enemy_faction_key);																			-- initial enemy faction
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_advice_key", "wh3_main_camp_narrative_chs_zhao_ming_attack_enemy_01");								-- advice key
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_mission_key", "wh3_main_camp_narrative_chaos_zhao_ming_defeat_initial_enemy_01");					-- mission key
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_mission_rewards", 																					-- mission reward
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_advice_key", "wh3_main_camp_narrative_chs_zhao_ming_attack_enemy_01");							-- advice key
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_key", "wh3_main_camp_narrative_chaos_zhao_ming_defeat_initial_enemy_01");				-- mission key
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_rewards", 																				-- mission reward
 			{
 				payload.money(																																							-- issue money or equivalent
 					1000,																																									-- money reward, if we aren't giving something else for this faction
@@ -1348,9 +1353,9 @@ local function customise_narrative_event_faction_data_for_campaign()
 	
 		-- defeat initial enemy mission
 		narrative.add_data_for_faction(faction_key, "initial_enemy_faction_key", initial_enemy_faction_key);																			-- initial enemy faction
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_advice_key", "wh3_main_camp_narrative_chs_greasus_attack_enemy_01");								-- advice key
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_mission_key", "wh3_main_camp_narrative_chaos_greasus_defeat_initial_enemy_01");						-- mission key
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_mission_rewards", 																					-- mission reward
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_advice_key", "wh3_main_camp_narrative_chs_greasus_attack_enemy_01");								-- advice key
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_key", "wh3_main_camp_narrative_chaos_greasus_defeat_initial_enemy_01");					-- mission key
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_rewards", 																				-- mission reward
 			{
 				payload.money(																																							-- issue money or equivalent
 					1000,																																									-- money reward, if we aren't giving something else for this faction
@@ -1413,9 +1418,9 @@ local function customise_narrative_event_faction_data_for_campaign()
 	
 		-- defeat initial enemy mission
 		narrative.add_data_for_faction(faction_key, "initial_enemy_faction_key", initial_enemy_faction_key);																			-- initial enemy faction
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_advice_key", "wh3_main_camp_narrative_chs_skrag_attack_enemy_01");									-- advice key
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_mission_key", "wh3_main_camp_narrative_chaos_skrag_defeat_initial_enemy_01");						-- mission key
-		narrative.add_data_for_faction(faction_key, "chs_event_defeat_initial_enemy_mission_rewards", 																					-- mission reward
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_advice_key", "wh3_main_camp_narrative_chs_skrag_attack_enemy_01");								-- advice key
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_key", "wh3_main_camp_narrative_chaos_skrag_defeat_initial_enemy_01");					-- mission key
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_rewards", 																				-- mission reward
 			{
 				payload.money(																																							-- issue money or equivalent
 					1000,																																									-- money reward, if we aren't giving something else for this faction
@@ -1597,36 +1602,6 @@ function start_narrative_events_chaos_for_faction(faction_key)
 		-----------------------------------------------------------------------------------------------------------
 		--	CHAOS MISSION ONE: Attack Initial Enemy
 		-----------------------------------------------------------------------------------------------------------
-
-		do
-			local name = "chs_event_defeat_initial_enemy";
-
-			if not narrative.get(faction_key, name .. "_block") then
-				narrative_events.defeat_initial_enemy_army(
-					name,																																-- unique name for this narrative event
-					faction_key,																														-- key of faction to which it applies
-					narrative.get(faction_key, name .. "_advice_key"),																					-- key of advice to deliver
-					narrative.get(faction_key, name .. "_mission_key") or shared_prepend_str .. "_chaos_shared_defeat_initial_enemy_01",				-- key of mission to deliver
-					narrative.get(faction_key, "initial_enemy_faction_key"), 																			-- enemy faction key - this must be specified in the faction data
-					narrative.get(faction_key, name .. "_camera_target"),																				-- target to move camera to (can be nil)
-					narrative.get(faction_key, name .. "_mission_issuer"),																				-- mission issuer (can be nil in which case default is used)
-					narrative.get(faction_key, name .. "_mission_rewards") or {																			-- mission rewards
-						payload.money(																														-- issue money or equivalent
-							1000,																															-- money reward, if we aren't giving something else for this faction
-							faction_key,																													-- faction key
-							{																																-- params for potential money replacement
-								value = "v_low",																												-- value of this mission  - see wh3_campaign_payload_remapping.lua
-								glory_type = "khorne,nurgle"																									-- glory type to issue
-							}
-						)
-					},
-					narrative.get(faction_key, name .. "_trigger_messages") or "StartNarrativeEvents",													-- script message(s) on which to trigger when received
-					narrative.get(faction_key, name .. "_on_issued_messages"),																			-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
-					narrative.get(faction_key, name .. "_completed_messages") or {"DefeatInitialEnemyCompleted"},										-- script message(s) to trigger when this mission is completed
-					narrative.get(faction_key, name .. "_inherit_list")																					-- list of other narrative events to inherit rewards from (may be nil)
-				);
-			end;
-		end;
 	
 
 		-----------------------------------------------------------------------------------------------------------
@@ -1698,7 +1673,7 @@ function start_narrative_events_chaos_for_faction(faction_key)
 
 			local matching_subtype = narrative.get(faction_key, name .. "_subtype");
 
-			if not narrative.get(faction_key, name .. "_block") then
+			if matching_subtype and not narrative.get(faction_key, name .. "_block") then
 				narrative_events.embed_agent(
 					name,																																			-- unique name for this narrative event
 					faction_key,																																	-- key of faction to which it applies

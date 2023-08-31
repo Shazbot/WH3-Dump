@@ -31,6 +31,83 @@ local shared_prepend_str = shared_narrative_event_prepend_str;
 
 
 
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+--
+--	ATTACK INITIAL ENEMY CHAIN
+--
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+
+local function start_narrative_shared_chain_defeat_initial_enemy(faction_key)
+
+	-- output header
+	narrative.output_chain_header("defeat_initial_enemy", faction_key);
+
+
+
+
+
+
+
+
+	-----------------------------------------------------------------------------------------------------------
+	--	Is Enemy Army Closer Than Settlement
+	-----------------------------------------------------------------------------------------------------------
+
+	do
+		local name = "shared_defeat_initial_army_query_is_enemy_army_closer_than_settlement";
+		
+		if not narrative.get(faction_key, name .. "_block") then
+			narrative_queries.is_faction_army_closer_than_settlement_to_faction(
+				name,																																			-- unique name for this narrative query
+				faction_key,																																	-- key of faction to which it applies
+				narrative.get(faction_key, "initial_enemy_faction_key"),																						-- key of enemy faction to which it applies
+				narrative.get(faction_key, name .. "_trigger_messages") or "StartNarrativeEvents",																-- message(s) on which to trigger
+				narrative.get(faction_key, name .. "_positive_messages") or "StartDefeatInitialEnemyChain",														-- positive target message(s) - faction can capture territory
+				narrative.get(faction_key, name .. "_negative_messages") or "StartSettlementCaptureChain",														-- negative target message(s) - faction cannot capture territory
+				narrative.get(faction_key, name .. "_condition")																								-- opt condition function
+			);
+		end;
+	end;
+
+	
+	
+	-----------------------------------------------------------------------------------------------------------
+	--	Defeat Initial Enemy
+	-----------------------------------------------------------------------------------------------------------
+
+	do
+		local name = "shared_event_defeat_initial_enemy";
+
+		if not narrative.get(faction_key, name .. "_block") then
+			narrative_events.defeat_initial_enemy_army(
+				name,																																-- unique name for this narrative event
+				faction_key,																														-- key of faction to which it applies
+				narrative.get(faction_key, name .. "_advice_key"),																					-- key of advice to deliver
+				narrative.get(faction_key, name .. "_mission_key") or shared_prepend_str .. "_shared_defeat_initial_enemy_01",						-- key of mission to deliver
+				narrative.get(faction_key, "initial_enemy_faction_key"), 																			-- enemy faction key - this must be specified in the faction data
+				narrative.get(faction_key, name .. "_camera_target"),																				-- target to move camera to (can be nil)
+				narrative.get(faction_key, name .. "_mission_issuer"),																				-- mission issuer (can be nil in which case default is used)
+				narrative.get(faction_key, name .. "_mission_rewards") or {																			-- mission rewards
+					payload.money(																														-- issue money or equivalent
+						500,																															-- money reward, if we aren't giving something else for this faction
+						faction_key,																													-- faction key
+						{																																-- params for potential money replacement
+							value = "v_low",																												-- value of this mission  - see wh3_campaign_payload_remapping.lua
+							glory_type = "khorne,nurgle"																									-- glory type to issue
+						}
+					)
+				},
+				narrative.get(faction_key, name .. "_trigger_messages") or "StartDefeatInitialEnemyChain",											-- script message(s) on which to trigger when received
+				narrative.get(faction_key, name .. "_on_issued_messages"),																			-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
+				narrative.get(faction_key, name .. "_completed_messages") or {"DefeatInitialEnemyCompleted"},										-- script message(s) to trigger when this mission is completed
+				narrative.get(faction_key, name .. "_inherit_list")																					-- list of other narrative events to inherit rewards from (may be nil)
+			);
+		end;
+	end;
+end;
+
 
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -63,8 +140,7 @@ local function start_narrative_shared_chain_settlement_captured(faction_key)
 			narrative_queries.can_capture_territory(
 				name,																																			-- unique name for this narrative query
 				faction_key,																																	-- key of faction to which it applies
-				-- StartNarrativeEvents message is overridden for chaos campaign
-				narrative.get(faction_key, name .. "_trigger_messages") or "StartNarrativeEvents",																-- message(s) on which to trigger
+				narrative.get(faction_key, name .. "_trigger_messages") or "StartSettlementCaptureChain",														-- message(s) on which to trigger
 				-- Also, for the chaos campaign a second injected positive message directly triggers the capture settlement mission
 				narrative.get(faction_key, name .. "_positive_messages") or "StartSettlementCapturedQueryAdvice",												-- positive target message(s) - faction can capture territory
 				narrative.get(faction_key, name .. "_negative_messages"),																						-- negative target message(s) - faction cannot capture territory
@@ -89,7 +165,7 @@ local function start_narrative_shared_chain_settlement_captured(faction_key)
 				narrative.get(faction_key, name .. "_positive_messages") or "StartSettlementCapturedChainExpert",												-- positive target message(s) - advice experienced
 				-- in the Chaos campaign this is overridden to be blank - the settlement capture mission is
 				-- triggered directly from the can_capture_territory query
-				narrative.get(faction_key, name .. "_negative_messages") or "StartSettlementCapturedChainFull",													-- negative target message(s) - advice not experienced
+				narrative.get(faction_key, name .. "_negative_messages") or "StartSettlementCapturedCaptureSettlement",											-- negative target message(s) - advice not experienced
 				narrative.get(faction_key, name .. "_all_advice_strings") or {																					-- list of advice strings, positive message triggered if all are in advice history
 					shared_prepend_str .. "_shared_province_completed"
 				},
@@ -132,7 +208,7 @@ local function start_narrative_shared_chain_settlement_captured(faction_key)
 				faction_key,																																	-- key of faction to which it applies
 				narrative.get(faction_key, name .. "_trigger_messages") or "StartSettlementCapturedQueryOneTurnFromProvinceCapture",							-- message(s) on which to trigger
 				narrative.get(faction_key, name .. "_positive_messages") or "StartSettlementCapturedCaptureProvince",											-- positive target message(s) - player is one turn from completing province
-				narrative.get(faction_key, name .. "_negative_messages") or "StartSettlementCapturedCaptureSettlement",											-- negative target message(s) - player is not one turn from completing province
+				narrative.get(faction_key, name .. "_negative_messages") or "StartSettlementCapturedCaptureProvince",											-- negative target message(s) - player is not one turn from completing province
 				narrative.get(faction_key, name .. "_condition")																								-- opt condition function
 			);
 		end;
@@ -157,7 +233,7 @@ local function start_narrative_shared_chain_settlement_captured(faction_key)
 				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
 				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
 					payload.money(																																	-- issue money or equivalent
-						1000,																																			-- money reward, if we aren't giving something else for this faction
+						750,																																			-- money reward, if we aren't giving something else for this faction
 						faction_key,																																	-- faction key
 						{																																				-- params for potential money replacement
 							value = "med",																																	-- value of this mission
@@ -168,7 +244,7 @@ local function start_narrative_shared_chain_settlement_captured(faction_key)
 				},
 				narrative.get(faction_key, name .. "_trigger_messages") or "StartSettlementCapturedCaptureSettlement",											-- script message(s) on which to trigger when received
 				narrative.get(faction_key, name .. "_on_issued_messages"),																						-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
-				narrative.get(faction_key, name .. "_completed_messages") or "StartSettlementCapturedCaptureProvince",											-- script message(s) to trigger when this mission is completed
+				narrative.get(faction_key, name .. "_completed_messages") or "StartSettlementCapturedChainFull",												-- script message(s) to trigger when this mission is completed
 				narrative.get(faction_key, name .. "_inherit_list"),																							-- list of other narrative events to inherit rewards from (may be nil)
 				true	-- high priority - replace this at some point
 			);
@@ -194,7 +270,7 @@ local function start_narrative_shared_chain_settlement_captured(faction_key)
 				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
 				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
 					payload.money(																																	-- issue money or equivalent
-						5000,																																			-- money reward, if we aren't giving something else for this faction
+						1000,																																			-- money reward, if we aren't giving something else for this faction
 						faction_key,																																	-- faction key
 						{																																				-- params for potential money replacement
 							value = "high",																																	-- value of this mission
@@ -250,14 +326,7 @@ local function start_narrative_shared_chain_settlement_captured(faction_key)
 				narrative.get(faction_key, name .. "_commandment"),																								-- commandment to enact, can be nil
 				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
 				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
-					payload.money(																																	-- issue money or equivalent
-						500,																																			-- money reward, if we aren't giving something else for this faction
-						faction_key,																																	-- faction key
-						{																																				-- params for potential money replacement
-							value = "med",																																	-- value of this mission
-							glory_type = "slaanesh,tzeentch"																												-- glory type to issue
-						}
-					)
+					payload.ancillary_mission_payload(faction_key, false, "common")
 				},
 				narrative.get(faction_key, name .. "_trigger_messages") or "StartSettlementCapturedEnactCommandment",											-- script message(s) on which to trigger when received
 				narrative.get(faction_key, name .. "_on_issued_messages"),																						-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
@@ -309,7 +378,7 @@ local function start_narrative_shared_chain_settlement_captured(faction_key)
 				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
 				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
 					payload.money(																																	-- issue money or equivalent
-						3000,																																			-- money reward, if we aren't giving something else for this faction
+						1000,																																			-- money reward, if we aren't giving something else for this faction
 						faction_key,																																	-- faction key
 						{																																				-- params for potential money replacement
 							value = "med",																																	-- value of this mission
@@ -414,7 +483,7 @@ local function start_narrative_shared_chain_settlement_captured(faction_key)
 				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
 				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
 					payload.money(																																	-- issue money or equivalent
-						5000,																																			-- money reward, if we aren't giving something else for this faction
+						1000,																																			-- money reward, if we aren't giving something else for this faction
 						faction_key,																																	-- faction key
 						{																																				-- params for potential money replacement
 							value = "v_high",																																-- value of this mission
@@ -541,14 +610,7 @@ local function start_narrative_shared_chain_unit_recruitment(faction_key)
 				narrative.get(faction_key, name .. "_exclude_existing") or true,																				-- exclude preexisting units
 				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
 				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
-					payload.money(																																	-- issue money or equivalent
-						1000,																																			-- money reward, if we aren't giving something else for this faction
-						faction_key,																																	-- faction key
-						{																																				-- params for potential money replacement
-							value = "med",																																	-- value of this mission
-							glory_type = "undivided"																														-- glory type to issue
-						}
-					)
+					payload.ancillary_mission_payload(faction_key, false, "common")
 				},
 				narrative.get(faction_key, name .. "_trigger_messages") or "StartUnitRecruitmentRecruitUnits",													-- script message(s) on which to trigger when received
 				narrative.get(faction_key, name .. "_on_issued_messages"),																						-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
@@ -650,7 +712,7 @@ local function start_narrative_shared_chain_unit_recruitment(faction_key)
 				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
 				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
 					payload.money(																																	-- issue money or equivalent
-						3000,																																			-- money reward, if we aren't giving something else for this faction
+						750,																																			-- money reward, if we aren't giving something else for this faction
 						faction_key,																																	-- faction key
 						{																																				-- params for potential money replacement
 							value = "high",																																	-- value of this mission
@@ -788,7 +850,7 @@ local function start_narrative_shared_chain_settlement_upgrade(faction_key)
 				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
 				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
 					payload.money(																																	-- issue money or equivalent
-						1000,																																			-- money reward, if we aren't giving something else for this faction
+						750,																																			-- money reward, if we aren't giving something else for this faction
 						faction_key,																																	-- faction key
 						{																																				-- params for potential money replacement
 							value = "low",																																	-- value of this mission
@@ -865,7 +927,7 @@ local function start_narrative_shared_chain_settlement_upgrade(faction_key)
 				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
 				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
 					payload.money(																																	-- issue money or equivalent
-						1000,																																			-- money reward, if we aren't giving something else for this faction
+						750,																																			-- money reward, if we aren't giving something else for this faction
 						faction_key,																																	-- faction key
 						{																																				-- params for potential money replacement
 							value = "med",																																	-- value of this mission
@@ -995,7 +1057,7 @@ local function start_narrative_shared_chain_settlement_upgrade(faction_key)
 				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
 				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
 					payload.money(																																	-- issue money or equivalent
-						5000,																																			-- money reward, if we aren't giving something else for this faction
+						1000,																																			-- money reward, if we aren't giving something else for this faction
 						faction_key,																																	-- faction key
 						{																																				-- params for potential money replacement
 							value = "v_high",																																-- value of this mission
@@ -1174,14 +1236,7 @@ local function start_narrative_shared_chain_technology_research(faction_key)
 				narrative.get(faction_key, name .. "_include_existing") or false,																				-- includes existing technologies
 				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
 				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
-					payload.money(																																	-- issue money or equivalent
-						500,																																			-- money reward, if we aren't giving something else for this faction
-						faction_key,																																	-- faction key
-						{																																				-- params for potential money replacement
-							value = "v_low",																																-- value of this mission
-							glory_type = "tzeentch"																															-- glory type to issue
-						}
-					)
+					payload.ancillary_mission_payload(faction_key, false, "uncommon")
 				},
 				narrative.get(faction_key, name .. "_trigger_messages") or "StartTechnologyResearchResearchTechnology",											-- script message(s) on which to trigger when received
 				narrative.get(faction_key, name .. "_on_issued_messages"),																						-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
@@ -1400,7 +1455,7 @@ local function start_narrative_shared_chain_technology_research(faction_key)
 				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
 				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
 					payload.money(																																	-- issue money or equivalent
-						3000,																																			-- money reward, if we aren't giving something else for this faction
+						750,																																			-- money reward, if we aren't giving something else for this faction
 						faction_key,																																	-- faction key
 						{																																				-- params for potential money replacement
 							value = "high",																																	-- value of this mission
@@ -1617,14 +1672,7 @@ local function start_narrative_shared_chain_heroes(faction_key)
 				narrative.get(faction_key, name .. "_mission_key") or shared_prepend_str .. "_shared_recruit_hero_01",											-- key of mission to deliver
 				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
 				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
-					payload.money(																																	-- issue money or equivalent
-						1000,																																			-- money reward, if we aren't giving something else for this faction
-						faction_key,																																	-- faction key
-						{																																				-- params for potential money replacement
-							value = "med",																																	-- value of this mission
-							glory_type = "slaanesh"																															-- glory type to issue
-						}
-					)
+					payload.ancillary_mission_payload(faction_key, false, "uncommon")
 				},
 				narrative.get(faction_key, name .. "_trigger_messages") or "StartHeroesRecruitHero",															-- script message(s) on which to trigger when received
 				narrative.get(faction_key, name .. "_on_issued_messages"),																						-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
@@ -1879,7 +1927,7 @@ local function start_narrative_shared_chain_heroes(faction_key)
 				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
 				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
 					payload.money(																																	-- issue money or equivalent
-						4000,																																			-- money reward, if we aren't giving something else for this faction
+						1000,																																			-- money reward, if we aren't giving something else for this faction
 						faction_key,																																	-- faction key
 						{																																				-- params for potential money replacement
 							value = "high",																																	-- value of this mission
@@ -2012,14 +2060,6 @@ local function start_narrative_shared_chain_finance(faction_key)
 				narrative.get(faction_key, name .. "_income") or moderate_income, 																						-- number of units
 				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
 				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
-					payload.money(																																-- issue money or equivalent
-						500,																																		-- money reward, if we aren't giving something else for this faction
-						faction_key,																																-- faction key
-						{																																			-- params for potential money replacement
-							value = "low",																																-- value of this mission
-							glory_type = "nurgle"																														-- glory type to issue
-						}
-					),
 					payload.ancillary_mission_payload(faction_key, "enchanted_item", "uncommon")
 				},
 				narrative.get(faction_key, name .. "_trigger_messages") or "StartFinanceGainModerateIncome",													-- script message(s) on which to trigger when received
@@ -2340,7 +2380,7 @@ local function start_narrative_shared_chain_finance(faction_key)
 				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
 				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
 					payload.money(																																-- issue money or equivalent
-						3000,																																		-- money reward, if we aren't giving something else for this faction
+						1000,																																		-- money reward, if we aren't giving something else for this faction
 						faction_key,																																-- faction key
 						{																																			-- params for potential money replacement
 							value = "high",																																-- value of this mission
@@ -2928,7 +2968,24 @@ local function start_narrative_shared_chain_diplomacy(faction_key)
 	--	TRADE
 	------------------------------------------------------------------------------------------------------------------------
 
-	narrative.todo_output("Trade missions should automatically detect if the faction cannot trade");
+	-----------------------------------------------------------------------------------------------------------
+	--	Can Trade Query
+	-----------------------------------------------------------------------------------------------------------
+
+	do
+		local name = "shared_diplomacy_query_can_trade";
+		
+		if not narrative.get(faction_key, name .. "_block") then
+			narrative_queries.can_trade(
+				name,																																			-- unique name for this narrative query
+				faction_key,																																	-- key of faction to which it applies
+				narrative.get(faction_key, name .. "_trigger_messages") or "SharedDiplomacyNonAggressionPactMissionAgreed",										-- message(s) on which to trigger
+				narrative.get(faction_key, name .. "_positive_messages") or "SharedDiplomacyStartTradeAgreementCountdown",										-- positive target message(s) - faction can trade
+				narrative.get(faction_key, name .. "_negative_messages") or "SharedDiplomacyTradeAgreementMade",												-- negative target message(s) - faction cannot trade
+				narrative.get(faction_key, name .. "_condition")																								-- opt condition function
+			);
+		end;
+	end;
 
 
 	-----------------------------------------------------------------------------------------------------------
@@ -2945,7 +3002,7 @@ local function start_narrative_shared_chain_diplomacy(faction_key)
 			narrative_triggers.turn_countdown(
 				name,																																			-- unique name for this narrative trigger
 				faction_key,																																	-- key of faction to which it applies
-				narrative.get(faction_key, name .. "_start_messages") or "SharedDiplomacyNonAggressionPactMissionAgreed",										-- script message(s) on which to start
+				narrative.get(faction_key, name .. "_start_messages") or "SharedDiplomacyStartTradeAgreementCountdown",											-- script message(s) on which to start
 				narrative.get(faction_key, name .. "_target_messages") or "StartSharedDiplomacyTradeAgreementPossibleTriggers",									-- target message(s) to trigger
 				narrative.get(faction_key, name .. "_cancel_messages") or "SharedDiplomacyTradeAgreementMade",													-- script message(s) on which to cancel
 				narrative.get(faction_key, name .. "_num_turns") or 1,																							-- num turns to wait
@@ -3069,7 +3126,7 @@ local function start_narrative_shared_chain_diplomacy(faction_key)
 				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
 				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
 					payload.money(																																	-- issue money or equivalent
-						1000,																																			-- money reward, if we aren't giving something else for this faction
+						750,																																			-- money reward, if we aren't giving something else for this faction
 						faction_key,																																	-- faction key
 						{																																				-- params for potential money replacement
 							value = "med",																																	-- value of this mission
@@ -3346,7 +3403,7 @@ local function start_narrative_shared_chain_diplomacy(faction_key)
 				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
 				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
 					payload.money(																																	-- issue money or equivalent
-						2000,																																			-- money reward, if we aren't giving something else for this faction
+						1000,																																			-- money reward, if we aren't giving something else for this faction
 						faction_key,																																	-- faction key
 						{																																				-- params for potential money replacement
 							value = "high",																																	-- value of this mission
@@ -3613,7 +3670,7 @@ local function start_narrative_shared_chain_diplomacy(faction_key)
 				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
 				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
 					payload.money(																																	-- issue money or equivalent
-						2000,																																			-- money reward, if we aren't giving something else for this faction
+						1000,																																			-- money reward, if we aren't giving something else for this faction
 						faction_key,																																	-- faction key
 						{																																				-- params for potential money replacement
 							value = "high",																																	-- value of this mission
@@ -3996,7 +4053,7 @@ local function start_narrative_shared_chain_diplomacy(faction_key)
 				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
 				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
 					payload.money(																																	-- issue money or equivalent
-						1200,																																			-- money reward, if we aren't giving something else for this faction
+						1000,																																			-- money reward, if we aren't giving something else for this faction
 						faction_key,																																	-- faction key
 						{																																				-- params for potential money replacement
 							value = "med",																																	-- value of this mission
@@ -4305,7 +4362,7 @@ local function start_narrative_shared_chain_received_gifts_of_slaanesh(faction_k
 					end,
 				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
 				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
-					payload.money(3000),																															-- issue money
+					payload.money(1000),																															-- issue money
 					payload.ancillary_mission_payload(faction_key, "talisman", "common")
 				},
 				narrative.get(faction_key, name .. "_trigger_messages") or "StartSharedGiftOfSlaaneshLoseGiftMission",											-- script message(s) on which to trigger when received
@@ -4456,29 +4513,8 @@ local function start_narrative_events_shared_for_faction(faction_key)
 		end;
 	end;
 
-
-	-----------------------------------------------------------------------------------------------------------
-	--	Start Narrative Events [Multiplayer]
-	-----------------------------------------------------------------------------------------------------------
-
-	do
-		local name = "chs_event_start_mp";
-
-		if not narrative.get(faction_key, name .. "_block") then
-			narrative_triggers.generic(
-				name,																																			-- unique name for this narrative trigger
-				faction_key,																																	-- key of faction to which it applies
-				narrative.get(faction_key, name .. "_start_messages"),																							-- script message(s) on which to start
-				narrative.get(faction_key, name .. "_target_messages") or "PreStartIntroStory",																	-- script message(s) to fire when this narrative trigger triggers
-				narrative.get(faction_key, name .. "_cancel_messages"),																							-- script message(s) on which to cancel
-				narrative.get(faction_key, name .. "_script_event") or "ScriptEventStartNarrativeEventsMP",														-- script event to listen for
-				narrative.get(faction_key, name .. "_event_condition") or true,																					-- event condition
-				narrative.get(faction_key, "_immediate_trigger") or true 																						-- immediate trigger
-			);
-		end;
-	end;
-
 	if not narrative.exception_factions[faction_key] then
+		start_narrative_shared_chain_defeat_initial_enemy(faction_key);
 		start_narrative_shared_chain_settlement_captured(faction_key);
 		start_narrative_shared_chain_unit_recruitment(faction_key);
 		start_narrative_shared_chain_settlement_upgrade(faction_key);

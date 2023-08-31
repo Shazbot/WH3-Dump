@@ -405,21 +405,19 @@ function trigger_encounter_followup_incident(character, incident)
 	
 	cm:trigger_incident_with_targets(faction_cqi, incident, 0, 0, character_cqi, force_cqi, 0, 0);
 	
-	if encounter_events_battle_details[incident] then
-		-- trigger extra loot event if the faction has a bonus value
-		if faction:bonus_values():scripted_value("increase_sea_encounter_loot", "value") > 0 then
-			cm:callback(
-				function()
-					cm:trigger_incident_with_targets(faction_cqi, "wh2_dlc11_neo_counter_extra_loot", 0, 0, character_cqi, force_cqi, 0, 0);
-				end,
-				0.5
-			);
-		end;
-		
-		-- check treasure map drops
-		if culture == "wh2_dlc11_cst_vampire_coast" then
-			trigger_treasure_map_mission(faction:name(), encounter_events_battle_details[incident][3])
-		end;
+	-- trigger extra loot event if the faction has a bonus value
+	if faction:bonus_values():scripted_value("increase_sea_encounter_loot", "value") > 0 then
+		cm:callback(
+			function()
+				cm:trigger_incident_with_targets(faction_cqi, "wh2_dlc11_neo_counter_extra_loot", 0, 0, character_cqi, force_cqi, 0, 0);
+			end,
+			0.5
+		);
+	end;
+	
+	-- check treasure map drops
+	if encounter_events_battle_details[incident] and culture == "wh2_dlc11_cst_vampire_coast" then
+		trigger_treasure_map_mission(faction:name(), encounter_events_battle_details[incident][3])
 	end;
 end;
 

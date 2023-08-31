@@ -27,6 +27,7 @@ require("wh3_campaign_bonus_values");
 require("wh3_campaign_tech_tree");
 require("wh3_campaign_generic_incidents");
 require("wh3_campaign_achievements");
+require("wh2_campaign_interactive_marker_manager");
 force_require("wh_campaign_experience_triggers");
 force_require("wh3_campaign_magic_items");
 
@@ -88,9 +89,6 @@ function setup_wh_campaign(generic_battle_script_path_override)
 	
 	-- listen for blood pack incidents firing, then apply effects
 	blood_pack_incidents_listener();
-	
-	-- high elf elven espionage
-	elven_espionage_monitor();
 	
 	-- skaven menace below army ability
 	menace_below_monitor();
@@ -170,6 +168,11 @@ function setup_wh_campaign(generic_battle_script_path_override)
 	
 	---if a quest associated with a unique item is cancelled, give the item anyway.
 	setup_cancelled_quest_listener()
+	
+	--Marker Manager
+	if not cm:is_new_game() then
+		Interactive_Marker_Manager:reconstruct_markers()
+	end
 
 	out.dec_tab();
 end;
@@ -1230,6 +1233,8 @@ function determine_siege_equipment_bundle(cqi, unit_key)
 		cm:apply_effect_bundle_to_force("wh3_main_bundle_force_siege_equipment_tze", cqi, 0);
 	elseif string.find(unit_key, "_ogr_") then
 		-- do nothing, ogres do not have siege equipment
+	elseif string.find(unit_key, "_chd_") then
+		cm:apply_effect_bundle_to_force("wh3_dlc23_bundle_force_siege_equipment_chd", cqi, 0);
 	else
 		script_error("ERROR: determine_siege_equipment_bundle() called but cannot find a suitable effect bundle to apply to rebel/rogue army unit with key [" .. unit_key .. "]");
 	end;
@@ -1303,80 +1308,6 @@ function blood_pack_incidents_listener()
 		
 	end
 end
-
-
--- for all human High Elf factions, reveal the shroud on regions belonging to factions that they are trading with
-function elven_espionage_monitor()
-	-- reveal the shroud on game start
-	cm:disable_event_feed_events(true, "", "", "diplomacy_faction_encountered");
-	
-	local human_factions = cm:get_human_factions();
-	
-	for i = 1, #human_factions do
-		local faction = cm:get_faction(human_factions[i]);
-		
-		if faction:culture() == "wh2_main_hef_high_elves" then
-			elven_espionage_reveal_shroud(faction);
-		end;
-	end;
-	
-	cm:callback(function() cm:disable_event_feed_events(false, "", "", "diplomacy_faction_encountered") end, 1);
-	
-	-- reveal the shroud on the faction's turn start
-	core:add_listener(
-		"elven_espionage_turn_start",
-		"ScriptEventHumanFactionTurnStart",
-		function(context)
-			return context:faction():culture() == "wh2_main_hef_high_elves";
-		end,
-		function(context)
-			elven_espionage_reveal_shroud(context:faction());
-		end,
-		true
-	);
-	
-	-- reveal the shroud when a trade deal is made, if it's the player's turn
-	core:add_listener(
-		"elven_espionage_trade_established",
-		"TradeRouteEstablished",
-		function(context)
-			local faction = context:faction();
-			return faction:is_human() and faction:is_factions_turn() and faction:culture() == "wh2_main_hef_high_elves";
-		end,
-		function(context)
-			elven_espionage_reveal_shroud(context:faction());
-		end,
-		true
-	);
-end;
-
-function elven_espionage_reveal_shroud(faction)
-	local effect_bundle = "wh2_main_bundle_faction_elven_espionage";
-	
-	local has_effect_bundle = faction:has_effect_bundle(effect_bundle);
-	
-	local factions_trading_with = faction:factions_trading_with();
-	local faction_name = faction:name();
-	
-	if factions_trading_with:num_items() > 0 then
-		if has_effect_bundle then
-			cm:apply_effect_bundle(effect_bundle, faction_name, 0);
-		end;
-	
-		for i = 0, factions_trading_with:num_items() - 1 do
-			local current_faction = factions_trading_with:item_at(i);
-			local current_faction_regions = current_faction:region_list();
-			
-			for j = 0, current_faction_regions:num_items() - 1 do
-				local current_region_name = current_faction_regions:item_at(j):name();
-				
-				cm:make_region_visible_in_shroud(faction_name, current_region_name);
-			end;
-		end;
-	elseif has_effect_bundle then
-		cm:remove_effect_bundle(effect_bundle, faction_name);
-	end;
-end;
 	
 function show_how_to_play_event(faction_name, end_callback, delay)
 	
@@ -1728,6 +1659,10 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 		elseif faction_name == "wh3_main_ksl_the_ice_court" or faction_name == "wh3_main_ksl_the_great_orthodoxy" or faction_name == "wh3_main_ksl_ursun_revivalists" then
 			secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_kislev_secondary_detail";
 			pic = 15;
+		elseif faction_name == "wh3_dlc24_ksl_daughters_of_the_forest" then
+			title = "event_feed_strings_text_wh3_scripted_event_path_to_victory_title";
+			secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_kislev_mother_ostankya_secondary_detail";
+			pic = 38;
 		
 		------------------------
 		-- Daemon Prince
@@ -1768,7 +1703,11 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 		elseif faction_name == "wh3_main_tze_oracles_of_tzeentch" then
 			secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_tzeentch_secondary_detail";
 			pic = 14;
-			
+		elseif faction_name == "wh3_dlc24_tze_the_deceivers" then
+			title = "event_feed_strings_text_wh3_scripted_event_path_to_victory_title";
+			secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_tzeentch_changeling_secondary_detail";
+			pic = 39;
+
 		------------------------
 		-- Cathay
 		------------------------
@@ -1776,6 +1715,10 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 		elseif faction_name == "wh3_main_cth_the_northern_provinces" or faction_name == "wh3_main_cth_the_western_provinces" then
 			secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_cathay_secondary_detail";
 			pic = 17;
+		elseif faction_name == "wh3_dlc24_cth_the_celestial_court" then
+			title = "event_feed_strings_text_wh3_scripted_event_path_to_victory_title";
+			secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_cathay_yuan_bo_secondary_detail";
+			pic = 40;
 		
 		------------------------
 		-- WH3 DLC
@@ -1931,17 +1874,29 @@ function set_up_rank_up_listener(quests, subtype, infotext)
 		local current_type = current_quest_record[1];
 		local current_ancillary_key = current_quest_record[2];
 		local current_mission_key = current_quest_record[3];
-		local current_rank_req = current_quest_record[4];
-		local current_mp_mission_key = current_quest_record[5];
-		local current_advice_key = current_quest_record[6];
-		local current_x = current_quest_record[7];
-		local current_y = current_quest_record[8];
-		local current_region_key = current_quest_record[9];
+		local current_rank_req = cco("CcoCharacterAncillaryQuestUiDetailRecord", current_ancillary_key .. subtype):Call("Rank");
+		
+		if not current_rank_req then
+			script_error("set_up_rank_up_listener() called but could not find a rank for ancillary [" .. current_ancillary_key .. "] for agent subtype [" .. subtype .. "] - does it exist in the character_ancillary_quest_ui_details table?")
+		end
+		
+		local current_mp_mission_key = current_quest_record[4];
+		local current_advice_key = current_quest_record[5];
+		local current_x = 0;
+		local current_y = 0;
+		
+		if current_mission_key then
+			local current_cco = cco("CcoMissionRecord", current_mission_key);
+			current_x = current_cco:Call("LocationX");
+			current_y = current_cco:Call("LocationY");
+		end;
+		
+		local current_region_key = current_quest_record[6];
 		local current_intervention_name = false;
 		local current_saved_name = false;
 
-		---quest battles can't be cancelled, so don't bother storing info for them.
-		if not current_x and current_mission_key then
+		-- quest battles can't be cancelled, so don't bother storing info for them.
+		if current_x == 0 and current_mission_key then
 			quest_cancellation_data[current_mission_key] = {current_ancillary_key, subtype}
 		end
 		
@@ -1995,7 +1950,7 @@ function set_up_rank_up_listener(quests, subtype, infotext)
 					common.set_advice_history_string_seen("quests_infotext");
 				end;
 				
-				if current_advice_key and current_x and current_y then
+				if current_advice_key and current_x > 0 and current_y > 0 then
 					out.design("\tscrolling the camera with advice");
 					
 					-- we have advice to deliver and a position
@@ -2017,7 +1972,7 @@ function set_up_rank_up_listener(quests, subtype, infotext)
 						infotext_to_show,
 						mm
 					);
-				elseif current_x and current_y then
+				elseif current_x > 0 and current_y > 0 then
 					-- we have a position but no advice
 					out.design("\tscrolling camera with no advice");
 					

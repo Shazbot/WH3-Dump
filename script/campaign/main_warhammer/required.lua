@@ -11,16 +11,21 @@
 package.path = package.path .. ";data/script/campaign/?.lua"
 package.path = package.path .. ";data/script/campaign/main_warhammer/?.lua"
 
---	general campaign behaviour
+-- general campaign behaviour
 force_require("wh_campaign_setup")
 
 -- campaign advice interventions
 force_require("wh_campaign_interventions")
 
---	help pages
+-- help pages
 force_require("wh_campaign_help_pages")
 
-require("wh3_campaign_payload_remapping")
+-- Scripted Tours
+require("scripted_tours/campaign_tours")
+
+-- narrative events
+require("wh3_campaign_payload_remapping");
+require("wh3_ie_narrative_events");
 
 -- campaign-specific files
 require("wh_first_turn")
@@ -41,7 +46,6 @@ require("wh2_campaign_custom_starts")
 require("wh2_campaign_quest_battle_helper")
 require("wh2_campaign_tech_tree_lords")
 require("wh2_campaign_confederation_missions")
-require("wh2_campaign_interactive_marker_manager")
 require("wh2_campaign_forced_battle_manager")
 require("wh2_campaign_random_armies")
 require("wh3_campaign_character_initiative_unlocks")
@@ -181,7 +185,6 @@ require("wh2_dlc16_wef_worldroots")
 require("wh2_dlc16_wef_sisters_forge")
 require("wh2_dlc16_flesh_lab")
 require("wh2_dlc16_drycha_coeddil_unchained")
-require("wh2_dlc16_throt_ghoritch")
 
 -- TWA03 - Rakarth
 require("wh2_twa03_rakarth")
@@ -209,3 +212,9 @@ require("wh3_dlc23_campaign_chd_hellforge")
 require("wh3_dlc23_labour_move")
 require("wh3_dlc23_labour_raid")
 require("wh3_dlc23_chaos_dwarf_relics")
+
+-- DLC24
+require("wh3_dlc24_jade_dragon")
+require("wh3_dlc24_mother_ostankya")
+require("wh3_dlc24_matters_of_state")
+require("wh3_dlc24_the_changeling")

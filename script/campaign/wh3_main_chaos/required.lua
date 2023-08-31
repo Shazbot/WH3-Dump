@@ -29,6 +29,7 @@ require("wh2_campaign_random_armies");
 require("wh_quests");
 require("wh_campaign_ror_recruitment");
 require("wh3_campaign_set_piece_battle_abilities")
+require("wh2_campaign_forced_battle_manager")
 
 -- narrative events
 require("wh3_campaign_payload_remapping");
@@ -81,6 +82,11 @@ require("wh3_campaign_faction_initiative_unlocks")
 require("wh3_dlc23_campaign_chd_hellforge")
 require("wh3_dlc23_campaign_chd_tower_of_zharr")
 require("wh3_dlc23_labour_move")
+
+-- DLC24
+require("wh3_dlc24_mother_ostankya")
+require("wh3_dlc24_matters_of_state")
+require("wh3_dlc24_the_changeling")
 
 require("realms/wh3_realm_common");
 require("realms/wh3_realm_khorne");

@@ -80,6 +80,9 @@ cm:add_first_tick_callback_new(
 	function()
 		if cm:tol_campaign_key() == "wh3_main_tol_darkness_and_disharmony" then
 			tol_shared_setup()
+			
+			kill_faction("wh3_dlc24_cth_the_celestial_court");
+			
 			-- Khorne
 			region_change(
 				"wh3_main_chaos_region_shi_long",

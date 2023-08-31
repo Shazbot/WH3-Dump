@@ -3026,12 +3026,50 @@ function script_units:rout_over_time(period)
 	end;
 end;
 
+--- @function teleport_withdraw_over_time
+--- @desc Teleports units over the specified period in ms so all units eventually withdraw
+--- @p number period in ms, Time in ms over wich the units are teleported away. Must be positive.
+function script_units:teleport_withdraw_over_time(period)
+	if not is_number(period) or period < 0 then
+		script_error(self.name .. " ERROR: teleport_withdraw_over_time() called but supplied period [" .. tostring(period) .. "] is not a positive number");
+		return false;
+	end;
 
+	-- work out how many units we have
+	local standing_sunits = {};
 
+	for i = 1, #self.sunit_list do
+		local current_sunit = self.sunit_list[i];
 
+		if is_routing_or_dead(current_sunit) then
+			table.insert(standing_sunits, current_sunit);
+		elseif not current_sunit.unit:is_valid_target() then
+			current_sunit.uc:kill();
+		else
+			table.insert(standing_sunits, current_sunit);
+		end;
+	end;
 
+	if #standing_sunits == 0 then
+		return;
+	end;
 
+	local graduation = math.floor(period / #standing_sunits);
+	-- if period is not long enough just teleport units without delay
+	if period < 1000 then
+		graduation = 0;
+	end;
 
+	for i = 1, #standing_sunits do
+		bm:callback(
+			function() 
+				--- can not issue orders if units are routing
+				standing_sunits[i].uc:morale_behavior_default() 
+				standing_sunits[i].uc:teleport_withdraw_unit()
+			end,
+			graduation * i);
+	end;
+end;
 
 ----------------------------------------------------------------------------
 ---	@section Deployment

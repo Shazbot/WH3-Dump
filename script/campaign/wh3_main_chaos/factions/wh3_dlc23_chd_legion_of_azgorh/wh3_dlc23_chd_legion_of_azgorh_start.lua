@@ -11,6 +11,8 @@
 -----------------------------------------------------------------------------------
 
 if cm:is_new_game() then
+	local faction_key = "wh3_dlc23_chd_legion_of_azgorh";
+	
 	-- position of the camera when cutscene skipped in singleplayer or gameplay starts in multiplayer
 	local cam_gameplay_start = {
 		x = 658.7,
@@ -33,7 +35,7 @@ if cm:is_new_game() then
 	local function end_callback()
 		-- perform non-standard cutscene-end configuration here
 		local intro_panel = "wh3_dlc23_story_panel_intro_chd"
-		show_intro_story_panel(cm:get_local_faction_name(), intro_panel)
+		show_story_panel(faction_key, intro_panel)
 		cm:activate_music_trigger("ScriptedEvent_Positive", "wh3_dlc23_sc_chd_chaos_dwarfs")
 
 		core:svr_save_registry_bool(intro_panel, true);
@@ -53,6 +55,6 @@ if cm:is_new_game() then
 	local hide_faction_leader_during_cutscene = false;
 
 	-- Invoke common campaign intro setup
-	cm:setup_campaign_intro_cutscene(cam_gameplay_start, cindy_scene_key, advice_to_play, end_callback, cutscene_configurator, fullscreen_movie, hide_faction_leader_during_cutscene);	
+	cm:setup_campaign_intro_cutscene(faction_key, cam_gameplay_start, cindy_scene_key, advice_to_play, end_callback, cutscene_configurator, fullscreen_movie, hide_faction_leader_during_cutscene);	
 
 end;

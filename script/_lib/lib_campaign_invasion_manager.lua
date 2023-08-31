@@ -1274,6 +1274,23 @@ end
 --------------------------
 ---- Saving / Loading ----
 --------------------------
+local function get_indexed_invasions(invasions_lookup)
+	local invasions_indexed = {}
+
+	for _, invasion in pairs(invasions_lookup) do
+		table.insert(invasions_indexed, invasion)
+	end;
+
+	table.sort(
+		invasions_indexed,
+		function(inv1, inv2)
+			return inv1.key < inv2.key
+		end
+	)
+
+	return invasions_indexed
+end
+
 function save_invasion_manager(context)
 	cm:save_named_value("Invasion_Manager", invasion_manager, context);
 end
@@ -1314,12 +1331,13 @@ function load_invasion_manager(context)
 		"EndOfRound",
 		true,
 		function()
-			for key, value in pairs(invasion_manager.invasions) do
-				if value:has_started() == true and value.respawn == true then
-					local force = value:get_force();
+			local invasions_indexed = get_indexed_invasions(invasion_manager.invasions)
+			for _, invasion in ipairs(invasions_indexed) do
+				if invasion:has_started() == true and invasion.respawn == true then
+					local force = invasion:get_force();
 					
 					if force:is_null_interface() == true then
-						value:advance();
+						invasion:advance();
 					end
 				end
 			end

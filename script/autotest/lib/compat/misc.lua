@@ -139,3 +139,75 @@ function Lib.Compat.Misc.find_build_number_and_changelist()
         g_changelist = string.match(trim, '%.(.*)%s')
     end)
 end
+
+--##### resolution stability functions #####--
+
+--setup the resolution stability log file and add the header line
+function Lib.Compat.Misc.setup_csv_log_file()
+    local appdata = os.getenv("APPDATA")
+    g_reso_stab_log_location = appdata.."\\CA_Autotest\\WH3\\resolution_stability"
+    Utilities.print("LOGS! "..g_reso_stab_log_location)
+    g_reso_stab_log_name = os.date("resolution_stability_log_%d%m%y_%H%M")
+    os.execute("mkdir \""..g_reso_stab_log_location.."\"")
+    Functions.write_to_document("Game Area,Display Mode,Resolution,Result", g_reso_stab_log_location, g_reso_stab_log_name, ".csv", false, true)
+end
+
+function Lib.Compat.Misc.test_resolution_stability(variables)
+    callback(function()
+        if (variables.testing_area == 'All' or variables.testing_area == 'Frontend') then
+            Lib.Compat.Misc.test_resolution_stability_in_frontend(variables)
+        end
+        if (variables.testing_area == 'All' or variables.testing_area == 'Campaign') then
+            Lib.Compat.Misc.test_resolution_stability_in_campaign(variables)
+        end
+        if (variables.testing_area == 'All' or variables.testing_area == 'Custom Battle') then
+            Lib.Compat.Misc.test_resolution_stability_in_custom_battle(variables)
+        end
+    end)
+end
+
+function Lib.Compat.Misc.test_resolution_stability_in_frontend(variables)
+    callback(function()
+        Lib.Frontend.Clicks.options_tab()
+        Lib.Frontend.Clicks.options_graphics()
+        Lib.Compat.Misc.resolution_stability_test(variables.log_csv, "Frontend", variables.display_mode)
+    end)
+end
+
+function Lib.Compat.Misc.test_resolution_stability_in_campaign(variables)
+    callback(function()
+        Lib.Frontend.Loaders.load_chaos_campaign("Random", variables.campaign_type)
+        Lib.Campaign.Misc.ensure_cutscene_ended()
+        Lib.Helpers.Misc.wait(5, true)
+        Lib.Menu.Misc.open_menu_without_fail()
+        Lib.Helpers.Clicks.select_ingame_graphics_options()
+        Lib.Compat.Misc.resolution_stability_test(variables.log_csv, "Campaign", variables.display_mode)
+        Lib.Menu.Misc.quit_to_frontend()
+    end)
+end
+
+function Lib.Compat.Misc.test_resolution_stability_in_custom_battle(variables)
+    callback(function()
+        Lib.Frontend.Loaders.load_custom_battle()
+        Lib.Helpers.Misc.wait(5, true)
+        Lib.Menu.Misc.open_menu_without_fail()
+        Lib.Helpers.Clicks.select_ingame_graphics_options()
+        Lib.Compat.Misc.resolution_stability_test(variables.log_csv, "Custom Battle", variables.display_mode)
+        Lib.Battle.Misc.concede_battle_after_duration(10)
+    end)
+end
+
+function Lib.Compat.Misc.resolution_stability_test(log_csv, game_mode, display_mode)
+    callback(function()
+        if display_mode == "Both" then
+            Lib.Frontend.Options.change_display_mode("fullscreen")
+            Lib.Compat.Loops.resolution_stability_loop(log_csv, game_mode, "fullscreen")
+            Lib.Helpers.Misc.wait(5, true)
+            Lib.Frontend.Options.change_display_mode("windowed")
+            Lib.Compat.Loops.resolution_stability_loop(log_csv, game_mode, "windowed")
+        else
+            Lib.Frontend.Options.change_display_mode(display_mode)
+            Lib.Compat.Loops.resolution_stability_loop(log_csv, game_mode, display_mode)
+        end
+    end)
+end

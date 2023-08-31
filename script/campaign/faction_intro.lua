@@ -377,20 +377,23 @@ function faction_intro:perform_intro(campaign_folder_name, faction_key)
 		script_error(string.format("ERROR: You cannot specify both a duration (used for defining a brand new cutscene) and a cindy scene key (used for playing an existing one) in faction intro for %s.", error_signature));
 	end
 	
-	cm:setup_campaign_intro_cutscene(intro_config.cam_gameplay_start,
+	cm:setup_campaign_intro_cutscene(
+		faction_key,
+		intro_config.cam_gameplay_start,
 		intro_config.cindy_scene_key,
 		intro_config.advice_to_play,
 		composite_end_callback,
 		intro_config.cutscene_configurator,
 		intro_config.fullscreen_movie,
 		intro_config.hide_faction_leader_during_cutscene,
-		intro_config.pre_cindyscene_delay_callback)
+		intro_config.pre_cindyscene_delay_callback
+	)
 	
-		-- Fire How They Play very early to ensure it appears before other missions and popups. It shouldn't actually be visible before the cutscene ends.
+		--[[ Fire How They Play very early to ensure it appears before other missions and popups. It shouldn't actually be visible before the cutscene ends.
 	if intro_config.how_they_play then
 		out("SHOWING HOW THEY PLAY")
 		show_how_to_play_event();
-	end
+	end]]
 end
 
 -- Load the intro data from the given campaign folder

@@ -523,6 +523,16 @@ local help_panel_position_overrides_campaign = {
 	military_convoys = {
 		["x"] = 5,
 		["y"] = -5
+	},
+	
+	dlc24_jade_compass = {
+		["x"] = -5,
+		["y"] = -5
+	},
+	
+	dlc24_witches_hut = {
+		["x"] = 5,
+		["y"] = 5
 	}
 };
 

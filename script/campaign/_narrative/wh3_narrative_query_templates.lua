@@ -425,6 +425,85 @@ end;
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
 --
+--	Is Faction Army Closer Than Settlement To Faction Leader
+--	Indicates whether supplied faction has an army closer than a settlement to the supplied faction's leader.
+--
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+local function construct_narrative_query_is_faction_army_closer_than_settlement_to_faction(name, faction_key, target_faction_key, trigger_messages, positive_target_messages, negative_target_messages)
+	local query_records = {
+		{
+			message = positive_target_messages, 		-- army is closer than settlement
+			fail_message = negative_target_messages, 	-- settlement is closer than army
+			query = function(context, nq)
+				local faction = cm:get_faction(faction_key)
+				
+				if faction then
+					local character = faction:faction_leader()
+					if not character:has_military_force() then
+						local character_list = faction:character_list()
+						for i = 0, character_list:num_items() -1 do
+							local secondary_character = character_list:item_at(i)
+							if secondary_character:has_military_force() and not secondary_character:military_force():is_armed_citizenry() then
+								character = secondary_character
+								break
+							end
+						end
+					end
+					
+					local closest_character = cm:get_closest_character_to_position_from_faction(target_faction_key, character:logical_position_x(), character:logical_position_y())
+					
+					if not closest_character:has_garrison_residence() then
+						return true, "army is closer than settlement"
+					end
+				end
+				
+				return false, "settlement is closer than army"
+			end
+		}
+	}
+
+	local nq = narrative_query:new(name, faction_key, trigger_messages, query_records)
+
+	return nq
+end
+
+
+--- @function is_faction_army_closer_than_settlement_to_faction
+--- @desc Creates a narrative query that queries the distance between a specified faction's armies and settlements and another faction and acts upon the result. Should the target faction have an army closer than a settlement to the supplied faction's leader the positive message(s) are fired. Otherwise, the negative message(s) are fired, if any were supplied.
+--- @p @string unique name, Unique name amongst other declared narrative queries.
+--- @p @string faction key, Key of the faction to which this narrative query applies, from the <code>factions</code> database table.
+--- @p @string target faction key, Key of the target faction to which this narrative query applies, from the <code>factions</code> database table.
+--- @p @string trigger message, Message on which this narrative query should trigger. If multiple trigger messages are required a @table containing string message names can be supplied here instead.
+--- @p @string positive message, Message to trigger if the faction is one settlement from completing a province. This can be a single string or a @table of strings if multiple messages are desired.
+--- @p [opt=nil] @string negative message, Message to trigger if the faction is not one settlement from completing a province. This can be a single string or a @table of strings if multiple messages are desired.
+function narrative_queries.is_faction_army_closer_than_settlement_to_faction(name, faction_key, target_faction_key, trigger_messages, positive_target_messages, negative_target_messages)
+	local nq = construct_narrative_query_is_faction_army_closer_than_settlement_to_faction(name, faction_key, target_faction_key, trigger_messages, positive_target_messages, negative_target_messages)
+
+	if nq then
+		nq:start()
+	end
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+--
 --	One Settlement From Completing Province
 --	Indicates whether supplied faction is exactly one settlement away from completing any province.
 --
@@ -1075,6 +1154,80 @@ end;
 --- @p_long_desc The condition function may also return a string as a second return value, which will be used for output.
 function narrative_queries.can_recruit_hero_of_type(name, faction_key, trigger_messages, positive_messages, negative_messages, hero_types, condition)
 	local nq = construct_narrative_query_can_recruit_hero(name, faction_key, trigger_messages, positive_messages, negative_messages, hero_types, condition);
+
+	if nq then
+		nq:start();
+	end;
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+--
+--	Can Trade
+--	Acts on whether the faction can make a trade agreement
+--	(the faction belongs to the factions_without_trade faction set)
+--
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+local function construct_narrative_query_can_trade(name, faction_key, trigger_messages, positive_messages, negative_messages, condition)
+
+	local query_records = {
+		{
+			message = positive_messages,
+			fail_message = negative_messages,
+			query = function(context, nq)
+
+				if is_function(condition) then
+					local result, result_str = condition(context, nq);
+					if is_boolean(result) then
+						return result, error_str;
+					end;
+				end;
+
+				local faction = cm:get_faction(faction_key, true);
+				if not faction then
+					return false, "no faction with key [" .. faction_key .. "] could be found - assuming they have died";
+				end;
+
+				if not faction:is_contained_in_faction_set("factions_without_trade") then
+					return true, "faction with key [" .. faction_key .. "] is allowed to trade";
+				end;
+
+				return false, "faction with key [" .. faction_key .. "] is not allowed to trade";
+			end;
+		}
+	};
+
+	local nq = narrative_query:new(name, faction_key, trigger_messages, query_records);
+
+	return nq;
+end;
+
+
+--- @function can_trade
+--- @desc Creates a narrative query that queries whether the specified faction can make a trade agreement (they are part of the "factions_without_trade" faction set), and acts on the result. If the faction can trade then the positive trigger message(s) are fired, otherwise the negative trigger message(s) are fired.
+--- @p @string unique name, Unique name amongst other declared narrative queries.
+--- @p @string faction key, Key of the faction to which this narrative query applies, from the <code>factions</code> database table.
+--- @p @string trigger message, Message on which this narrative query should trigger. If multiple trigger messages are required a @table containing string message names can be supplied here instead.
+--- @p @string positive message, Message to trigger if the faction can capture territory. This can be a single string or a @table of strings if multiple messages are desired.
+--- @p [opt=nil] @string negative message, Message to trigger if the faction cannot capture territory. This can be a single string or a @table of strings if multiple messages are desired.
+--- @p [opt=nil] @function additional condition, Additional condition function which can force a positive or negative result. If supplied, the function is called with the context and narrative query objects passed in as separate functions. If it returns <code>true</code> then a positive result is forced, if <code>false</code> then a negative result is forced. If it returns any other value then no result is forced.
+--- @p_long_desc The condition function may also return a string as a second return value, which will be used for output.
+function narrative_queries.can_trade(name, faction_key, trigger_messages, positive_messages, negative_messages, condition)
+	local nq = construct_narrative_query_can_trade(name, faction_key, trigger_messages, positive_messages, negative_messages, condition);
 
 	if nq then
 		nq:start();

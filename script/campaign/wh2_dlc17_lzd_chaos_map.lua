@@ -325,14 +325,14 @@ local m_mission_config = {
 			["wh3_main_nur_nurgle"] = "mission_text_text_wh3_main_threat_map_title_daemon_region_2",
 			["wh3_main_sla_slaanesh"] = "mission_text_text_wh3_main_threat_map_title_daemon_region_3",
 			["wh3_main_tze_tzeentch"] = "mission_text_text_wh3_main_threat_map_title_daemon_region_4",
-			["wh3_main_dae_daemons"] = "mission_text_text_wh3_main_threat_map_title_daemon_region_5"
+			["wh3_main_dae_daemons"] = "mission_text_text_wh2_dlc17_threat_map_title_norsca_region_3"
 		},
 		description = {
 			["wh3_main_kho_khorne"] = "mission_text_text_wh3_main_threat_map_description_daemon_region_1",
 			["wh3_main_nur_nurgle"] = "mission_text_text_wh3_main_threat_map_description_daemon_region_2",
 			["wh3_main_sla_slaanesh"] = "mission_text_text_wh3_main_threat_map_description_daemon_region_3",
 			["wh3_main_tze_tzeentch"] = "mission_text_text_wh3_main_threat_map_description_daemon_region_4",
-			["wh3_main_dae_daemons"] = "mission_text_text_wh3_main_threat_map_description_daemon_region_5"
+			["wh3_main_dae_daemons"] = "mission_text_text_wh2_dlc17_threat_map_description_norsca_region_2"
 		},
 		failure_payloads = {
 			keys = {

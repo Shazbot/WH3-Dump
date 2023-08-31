@@ -137,11 +137,8 @@ local function daemon_prince_ancillary_equivalence_mapping(faction_key, category
 		glory_value = 80;
 	elseif rarity == "uncommon" then
 		glory_value = 50;
-	elseif rarity == "common" then
-		glory_value = 20;
 	else
-		script_error("ERROR: daemon_prince_ancillary_equivalence_mapping() called but supplied ancillary rarity [" .. tostring(category) .. "] is not recognised. No reward will be generated");
-		return;
+		glory_value = 20;
 	end;
 
 	return payload.khorne_glory(glory_value), payload.nurgle_glory(glory_value), payload.slaanesh_glory(glory_value), payload.tzeentch_glory(glory_value), payload.undivided_glory(glory_value);
@@ -227,4 +224,217 @@ local function tzeentch_grimoires_money_equivalence_mapping(money_value, faction
 end
 
 payload.add_money_equivalence_mapping("wh3_main_tze_oracles_of_tzeentch", tzeentch_grimoires_money_equivalence_mapping);
+payload.add_money_equivalence_mapping("wh3_dlc24_tze_the_deceivers", tzeentch_grimoires_money_equivalence_mapping);
 
+
+
+
+
+
+
+
+
+-------------------------------------------------
+-------------------------------------------------
+-- CHIVALRY
+-- For Bretonnia factions
+-------------------------------------------------
+-------------------------------------------------
+
+local function bretonnia_chivalry_money_equivalence_mapping(money_value, faction_key, params)
+
+	-- 1/2 of the money is re-allocated to chivalry (at 1/100th the original money value)
+	local chivalry_value = money_value * 0.01;
+	money_value = money_value * 0.5;
+	
+	return payload.money_direct(money_value) .. ";" .. payload.chivalry(chivalry_value)
+end
+
+payload.add_money_equivalence_mapping("wh_main_brt_bretonnia", bretonnia_chivalry_money_equivalence_mapping);
+payload.add_money_equivalence_mapping("wh_main_brt_bordeleaux", bretonnia_chivalry_money_equivalence_mapping);
+payload.add_money_equivalence_mapping("wh_main_brt_carcassonne", bretonnia_chivalry_money_equivalence_mapping);
+payload.add_money_equivalence_mapping("wh2_dlc14_brt_chevaliers_de_lyonesse", bretonnia_chivalry_money_equivalence_mapping);
+
+
+
+
+
+
+
+
+
+-------------------------------------------------
+-------------------------------------------------
+-- SLAVES
+-- For Dark Elf factions
+-------------------------------------------------
+-------------------------------------------------
+
+local function dark_elf_slaves_money_equivalence_mapping(money_value, faction_key, params)
+
+	-- 1/4 of the money is re-allocated to slaves (at 1/10th the original money value)
+	local slaves_value = money_value * 0.1;
+	money_value = money_value * 0.75;
+	
+	return payload.money_direct(money_value) .. ";" .. payload.slaves(slaves_value)
+end
+
+payload.add_money_equivalence_mapping("wh2_main_def_naggarond", dark_elf_slaves_money_equivalence_mapping);
+payload.add_money_equivalence_mapping("wh2_main_def_cult_of_pleasure", dark_elf_slaves_money_equivalence_mapping);
+payload.add_money_equivalence_mapping("wh2_main_def_har_ganeth", dark_elf_slaves_money_equivalence_mapping);
+payload.add_money_equivalence_mapping("wh2_dlc11_def_the_blessed_dread", dark_elf_slaves_money_equivalence_mapping);
+payload.add_money_equivalence_mapping("wh2_main_def_hag_graef", dark_elf_slaves_money_equivalence_mapping);
+payload.add_money_equivalence_mapping("wh2_twa03_def_rakarth", dark_elf_slaves_money_equivalence_mapping);
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------
+-------------------------------------------------
+-- INFAMY
+-- For Vampire Coast factions
+-------------------------------------------------
+-------------------------------------------------
+
+local function vampire_coast_infamy_money_equivalence_mapping(money_value, faction_key, params)
+
+	-- 1/2 of the money is re-allocated to infamy (at 1/100th the original money value)
+	local infamy_value = money_value * 0.01;
+	money_value = money_value * 0.5;
+	
+	return payload.money_direct(money_value) .. ";" .. payload.infamy(infamy_value)
+end
+
+payload.add_money_equivalence_mapping("wh2_dlc11_cst_noctilus", vampire_coast_infamy_money_equivalence_mapping);
+payload.add_money_equivalence_mapping("wh2_dlc11_cst_vampire_coast", vampire_coast_infamy_money_equivalence_mapping);
+payload.add_money_equivalence_mapping("wh2_dlc11_cst_the_drowned", vampire_coast_infamy_money_equivalence_mapping);
+payload.add_money_equivalence_mapping("wh2_dlc11_cst_pirates_of_sartosa", vampire_coast_infamy_money_equivalence_mapping);
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------
+-------------------------------------------------
+-- SOULS
+-- For Warriors of Chaos factions
+-------------------------------------------------
+-------------------------------------------------
+
+local function warriors_of_chaos_souls_money_equivalence_mapping(money_value, faction_key, params)
+
+	-- 1/4 of the money is re-allocated to souls (at 1/20th the original money value)
+	local souls_value = money_value * 0.05;
+	money_value = money_value * 0.75;
+	
+	return payload.money_direct(money_value) .. ";" .. payload.souls(souls_value)
+end
+
+payload.add_money_equivalence_mapping("wh_main_chs_chaos", warriors_of_chaos_souls_money_equivalence_mapping);
+payload.add_money_equivalence_mapping("wh3_dlc20_chs_festus", warriors_of_chaos_souls_money_equivalence_mapping);
+payload.add_money_equivalence_mapping("wh3_dlc20_chs_azazel", warriors_of_chaos_souls_money_equivalence_mapping);
+payload.add_money_equivalence_mapping("wh3_dlc20_chs_vilitch", warriors_of_chaos_souls_money_equivalence_mapping);
+payload.add_money_equivalence_mapping("wh3_dlc20_chs_sigvald", warriors_of_chaos_souls_money_equivalence_mapping);
+payload.add_money_equivalence_mapping("wh3_main_chs_shadow_legion", warriors_of_chaos_souls_money_equivalence_mapping);
+payload.add_money_equivalence_mapping("wh3_dlc20_chs_valkia", warriors_of_chaos_souls_money_equivalence_mapping);
+payload.add_money_equivalence_mapping("wh3_dlc20_chs_kholek", warriors_of_chaos_souls_money_equivalence_mapping);
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------
+-------------------------------------------------
+-- CANOPIC JARS
+-- For Tomb Kings factions
+-------------------------------------------------
+-------------------------------------------------
+
+local function tomb_kings_canopic_jars_money_equivalence_mapping(money_value, faction_key, params)
+
+	-- 3/4 of the money is re-allocated to canopic_jars (at 1/50th the original money value)
+	local canopic_jars_value = money_value * 0.02;
+	money_value = money_value * 0.25;
+	
+	return payload.money_direct(money_value) .. ";" .. payload.canopic_jars(canopic_jars_value)
+end
+
+payload.add_money_equivalence_mapping("wh2_dlc09_tmb_lybaras", tomb_kings_canopic_jars_money_equivalence_mapping);
+payload.add_money_equivalence_mapping("wh2_dlc09_tmb_exiles_of_nehek", tomb_kings_canopic_jars_money_equivalence_mapping);
+payload.add_money_equivalence_mapping("wh2_dlc09_tmb_followers_of_nagash", tomb_kings_canopic_jars_money_equivalence_mapping);
+payload.add_money_equivalence_mapping("wh2_dlc09_tmb_khemri", tomb_kings_canopic_jars_money_equivalence_mapping);
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------
+-------------------------------------------------
+-- INFECTIONS
+-- For Nurgle factions
+-------------------------------------------------
+-------------------------------------------------
+
+local function nurgle_infections_money_equivalence_mapping(money_value, faction_key, params)
+
+	-- 1/4 of the money is re-allocated to infections (at 1/100th the original money value)
+	local infections_value = money_value * 0.01;
+	money_value = money_value * 0.75;
+	
+	return payload.money_direct(money_value) .. ";" .. payload.infections(infections_value)
+end
+
+payload.add_money_equivalence_mapping("wh3_main_nur_poxmakers_of_nurgle", nurgle_infections_money_equivalence_mapping);
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------
+-------------------------------------------------
+-- SPIRIT ESSENCE
+-- For Mother Ostankya's faction
+-------------------------------------------------
+-------------------------------------------------
+
+local function mother_ostankya_spirit_essence_money_equivalence_mapping(money_value, faction_key, params)
+
+	-- all money is re-allocated to spirit_essence (at 1/100th the original money value)
+	local spirit_essence_value = money_value * 0.01;
+	
+	return payload.spirit_essence(spirit_essence_value)
+end
+
+payload.add_money_equivalence_mapping("wh3_dlc24_ksl_daughters_of_the_forest", mother_ostankya_spirit_essence_money_equivalence_mapping);

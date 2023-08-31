@@ -423,7 +423,7 @@ function death_night:update_ui()
 			
 			out.design("\tSetBarLock: "..tostring(self.current_level));
 			if self.current_level > 0 then
-				death_night_holder:InterfaceFunction("SetBarLock", self.current_level, table.unpack(self.min_level_missions));
+				death_night_holder:InterfaceFunction("SetBarLock", self.current_level, unpack(self.min_level_missions));
 			else
 				death_night_holder:InterfaceFunction("SetBarLock", 0);
 			end
@@ -555,36 +555,33 @@ function death_night:mission_rewards()
 end
 
 function death_night:launch_level_raising_missions()
-	if not (missions_launched) then
-		local turn_number = cm:turn_number()
-		missions_launched = true
-
-		if turn_number == 2 then
-			local mm1 = mission_manager:new(self.faction_key, self.mission_config.alarielle.mission_key);
-			mm1:add_new_objective(self.mission_config.alarielle.objective);
-			mm1:set_mission_issuer(self.mission_config.alarielle.issuer);
-			for _, objective in ipairs(self.mission_config.alarielle.conditions) do
-				mm1:add_condition(objective);
-			end
-			for _, payload in ipairs(self.mission_config.alarielle.payloads) do
-				mm1:add_condition(payload);
-			end
-			mm1:set_should_whitelist(false);
-			mm1:trigger();
-
-
-			local mm2 = mission_manager:new(self.faction_key, self.mission_config.morathi.mission_key);
-			mm2:add_new_objective(self.mission_config.morathi.objective);
-			mm2:set_mission_issuer(self.mission_config.morathi.issuer);
-			for _, objective in ipairs(self.mission_config.morathi.conditions) do
-				mm2:add_condition(objective);
-			end
-			for _, payload in ipairs(self.mission_config.morathi.payloads) do
-				mm2:add_condition(payload);
-			end
-			mm2:set_should_whitelist(false);
-			mm2:trigger();
+	if not self.missions_launched and cm:turn_number() == 2 then
+		local mm1 = mission_manager:new(self.faction_key, self.mission_config.alarielle.mission_key);
+		mm1:add_new_objective(self.mission_config.alarielle.objective);
+		mm1:set_mission_issuer(self.mission_config.alarielle.issuer);
+		for _, objective in ipairs(self.mission_config.alarielle.conditions) do
+			mm1:add_condition(objective);
 		end
+		for _, payload in ipairs(self.mission_config.alarielle.payloads) do
+			mm1:add_payload(payload);
+		end
+		mm1:set_should_whitelist(false);
+		mm1:trigger();
+
+
+		local mm2 = mission_manager:new(self.faction_key, self.mission_config.morathi.mission_key);
+		mm2:add_new_objective(self.mission_config.morathi.objective);
+		mm2:set_mission_issuer(self.mission_config.morathi.issuer);
+		for _, objective in ipairs(self.mission_config.morathi.conditions) do
+			mm2:add_condition(objective);
+		end
+		for _, payload in ipairs(self.mission_config.morathi.payloads) do
+			mm2:add_payload(payload);
+		end
+		mm2:set_should_whitelist(false);
+		mm2:trigger();
+		
+		self.missions_launched = true
 	end
 end
 

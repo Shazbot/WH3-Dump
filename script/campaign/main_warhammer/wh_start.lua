@@ -21,61 +21,6 @@ cm:add_pre_first_tick_callback(
 		faction_initiatives_unlocker:initiatives_unlocker_listeners()
 		
 		load_followers();
-		
-		if cm:is_new_game() then
-					
-			-- give the Oak of Ages region to Argwylon if they are human (but not if Wood Elves are human as well)
-			local argwylon = cm:get_faction("wh_dlc05_wef_argwylon");
-			local wood_elves = cm:get_faction("wh_dlc05_wef_wood_elves");
-			
-			if argwylon and argwylon:is_human() and not wood_elves:is_human() then
-				cm:disable_event_feed_events(true, "wh_event_category_conquest", "", "");
-				cm:disable_event_feed_events(true, "wh_event_category_diplomacy", "", "");
-				
-				cm:transfer_region_to_faction("wh3_main_combi_region_the_oak_of_ages", "wh_dlc05_wef_argwylon");
-				
-				cm:callback(
-					function()
-						cm:disable_event_feed_events(false, "wh_event_category_conquest", "", "");
-						cm:disable_event_feed_events(false, "wh_event_category_diplomacy", "", "");
-					end,
-					1
-				);
-			end;
-
-			-- give Hag Graef to Naggarond if both Naggarond and Hag Graef are AI, if only Hag Graef is AI and Naggarond is a player then give Hag Graef to Clar Karond
-			-- to note if Hag Graef is ever player controlled he keeps Hag Graef settlement as its set up in data
-			local naggarond = cm:get_faction("wh2_main_def_naggarond");
-			local hag_graef = cm:get_faction("wh2_main_def_hag_graef");
-
-			if not naggarond:is_human() and not hag_graef:is_human() then
-				cm:disable_event_feed_events(true, "wh_event_category_conquest", "", "");
-				cm:disable_event_feed_events(true, "wh_event_category_diplomacy", "", "");
-				
-				cm:transfer_region_to_faction("wh3_main_combi_region_hag_graef", "wh2_main_def_naggarond");
-				
-				cm:callback(
-					function()
-						cm:disable_event_feed_events(false, "wh_event_category_conquest", "", "");
-						cm:disable_event_feed_events(false, "wh_event_category_diplomacy", "", "");
-					end,
-					1
-				);
-			elseif naggarond and naggarond:is_human() and not hag_graef:is_human() then
-				cm:disable_event_feed_events(true, "wh_event_category_conquest", "", "");
-				cm:disable_event_feed_events(true, "wh_event_category_diplomacy", "", "");
-				
-				cm:transfer_region_to_faction("wh3_main_combi_region_hag_graef", "wh2_main_def_clar_karond");
-				
-				cm:callback(
-					function()
-						cm:disable_event_feed_events(false, "wh_event_category_conquest", "", "");
-						cm:disable_event_feed_events(false, "wh_event_category_diplomacy", "", "");
-					end,
-					1
-				);
-			end;
-		end;
 	end
 );
 
@@ -84,10 +29,12 @@ cm:add_first_tick_callback_new(
 		-- Either run the campaign benchmark if in benchmark mode, or load and perform the faction intro.
 		cm:show_benchmark_if_required(
 			function()
-				-- Perform the start-of-campaign dressing for the current faction.
-				local local_faction_key = cm:get_local_faction_name(true);
-				if local_faction_key then
-					faction_intro:perform_intro("main_warhammer", local_faction_key);
+				-- Perform the start-of-campaign dressing for all players.
+				local human_factions = cm:get_human_factions();
+				if #human_factions > 0 then
+					for i = 1, #human_factions do
+						faction_intro:perform_intro("main_warhammer", human_factions[i]);
+					end;
 				end;
 			end, 
 			"campaign_benchmark_ie_01"
@@ -147,9 +94,6 @@ function start_game_all_factions()
 	);
 	
 	if cm:is_new_game() then
-		-- put the camera at the player's faction leader at the start of a new game
-		cm:callback(function() cm:position_camera_at_primary_military_force(cm:get_local_faction_name(true)) end, 0.5); -- delay this in case armies are teleported, their position doesn't update in time
-		
 		-- setup subculture-specific diplomacy option exclusions
 		apply_default_diplomacy();
 		award_faction_trait_effect_bundles_for_vampires();
@@ -190,16 +134,13 @@ function start_game_all_factions()
 
 		add_starting_corruption();
 	end
+	
+	start_narrative_events();
 
 	-- Corruption Swing
 	out("==== Corruption Swing ====")
 	corruption_swing:setup();
-
-	--Marker Manager
-	out("==== Marker Manager====")
-	if not cm:is_new_game() then
-		Interactive_Marker_Manager:reconstruct_markers()
-	end
+	
 	-- DLC03 Beastmen Features
 	out("==== Beastman ====");
 	beastmen_moon:add_moon_phase_listeners();
@@ -364,6 +305,11 @@ function start_game_all_factions()
 	chd_labour_raid:start_listeners()
 	chaos_dwarf_relics_ie:initialise()
 	
+	-- dlc24
+	jade_dragon_start:initialise()
+	mother_ostankya_features:initialise()
+	matters_of_state:initialise()
+	the_changeling_features:initialise()
 	
 	out.dec_tab();
 end;

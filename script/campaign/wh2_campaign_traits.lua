@@ -148,6 +148,9 @@ campaign_traits = {
 		["wh3_dlc23_chd_astragoth"] =				"wh3_dlc23_trait_defeated_astragoth",					-- Astragoth
 		["wh3_dlc23_chd_drazhoath"] =				"wh3_dlc23_trait_defeated_drazhoath",					-- Drazhoath
 		["wh3_dlc23_chd_zhatan"] =					"wh3_dlc23_trait_defeated_zhatan",						-- Zhatan
+		["wh3_dlc24_tze_the_changeling"] = 			"wh3_dlc24_trait_defeated_the_changeling",				-- The Changeling
+		["wh3_dlc24_ksl_mother_ostankya"] = 		"wh3_dlc24_trait_defeated_mother_ostankya",				-- Mother Ostankya
+		["wh3_dlc24_cth_yuan_bo"] = 				"wh3_dlc24_trait_defeated_yuan_bo",						-- Yuan Bo
 	},
 	subcultures_trait_keys = {
 		["wh_main_sc_chs_chaos"] = "chaos",
@@ -704,7 +707,7 @@ function (context)
 		elseif stance == "MILITARY_FORCE_ACTIVE_STANCE_TYPE_AMBUSH" then
 			campaign_traits:give_trait(character, "wh2_main_trait_stance_ambushing");
 		-- TUNNELING
-		elseif stance == "MILITARY_FORCE_ACTIVE_STANCE_TYPE_TUNNELING" then
+		elseif stance == "MILITARY_FORCE_ACTIVE_STANCE_TYPE_TUNNELING" and (culture == "wh_main_dwf_dwarfs" or culture == "wh_main_grn_greenskins" or culture == "wh2_main_skv_skaven") then
 			campaign_traits:give_trait(character, "wh2_main_trait_stance_tunneling");
 		-- FORCED MARCH
 		elseif stance == "MILITARY_FORCE_ACTIVE_STANCE_TYPE_MARCH" then

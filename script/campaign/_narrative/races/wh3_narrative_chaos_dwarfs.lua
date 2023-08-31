@@ -25,10 +25,6 @@
 
 out.narrative("* wh3_narrative_chaos_dwarfs.lua loaded");
 
-narrative.add_exception_faction("wh3_dlc23_chd_astragoth")
-narrative.add_exception_faction("wh3_dlc23_chd_legion_of_azgorh")
-narrative.add_exception_faction("wh3_dlc23_chd_zhatan")
-
 chd_narrative_missions = {}
 
 chd_narrative_missions.fight_battle = {

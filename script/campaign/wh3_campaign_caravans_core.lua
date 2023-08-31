@@ -464,38 +464,38 @@ caravans.unit_data = {
 
 caravans.region_to_incident = {
 	wh3_main_cth_cathay = {
-		wh3_main_chaos_region_altdorf				="wh3_main_cth_caravan_completed_altdorf",
-		wh3_main_combi_region_altdorf				="wh3_main_cth_caravan_completed_altdorf",
+		wh3_main_chaos_region_altdorf				= "wh3_main_cth_caravan_completed_altdorf",
+		wh3_main_combi_region_altdorf				= "wh3_main_cth_caravan_completed_altdorf",
 
-		wh3_main_chaos_region_castle_drakenhof		="wh3_main_chaos_region_castle_drakenhof",
-		wh3_main_combi_region_castle_drakenhof		="wh3_main_combi_region_castle_drakenhof",
+		wh3_main_chaos_region_castle_drakenhof		= "wh3_main_cth_caravan_completed_castle_drakenhof",
+		wh3_main_combi_region_castle_drakenhof		= "wh3_main_cth_caravan_completed_castle_drakenhof",
 
-		wh3_main_chaos_region_erengrad				="wh3_main_cth_caravan_completed_erengrad",
-		wh3_main_combi_region_erengrad				="wh3_main_cth_caravan_completed_erengrad",
+		wh3_main_chaos_region_erengrad				= "wh3_main_cth_caravan_completed_erengrad",
+		wh3_main_combi_region_erengrad				= "wh3_main_cth_caravan_completed_erengrad",
 
-		wh3_main_chaos_region_estalia				="wh3_main_cth_caravan_completed_estalia",
-		wh3_main_combi_region_estalia				="wh3_main_cth_caravan_completed_estalia",
+		wh3_main_chaos_region_estalia				= "wh3_main_cth_caravan_completed_estalia",
+		wh3_main_combi_region_estalia				= "wh3_main_cth_caravan_completed_estalia",
 
-		wh3_main_chaos_region_frozen_landing		="wh3_main_cth_caravan_completed_frozen_landing",
-		wh3_main_combi_region_frozen_landing		="wh3_main_cth_caravan_completed_frozen_landing",
+		wh3_main_chaos_region_frozen_landing		= "wh3_main_cth_caravan_completed_frozen_landing",
+		wh3_main_combi_region_frozen_landing		= "wh3_main_cth_caravan_completed_frozen_landing",
 
-		wh3_main_chaos_region_Ind					="wh3_main_cth_caravan_completed_ind",
-		wh3_main_combi_region_Ind					="wh3_main_cth_caravan_completed_ind",
+		wh3_main_chaos_region_Ind					= "wh3_main_cth_caravan_completed_ind",
+		wh3_main_combi_region_Ind					= "wh3_main_cth_caravan_completed_ind",
 
-		wh3_main_chaos_region_marienburg			="wh3_main_cth_caravan_completed_marienburg",
-		wh3_main_combi_region_marienburg			="wh3_main_cth_caravan_completed_marienburg",
+		wh3_main_chaos_region_marienburg			= "wh3_main_cth_caravan_completed_marienburg",
+		wh3_main_combi_region_marienburg			= "wh3_main_cth_caravan_completed_marienburg",
 
-		wh3_main_chaos_region_novchozy				="wh3_main_cth_caravan_completed_novchozy",
-		wh3_main_combi_region_novchozy				="wh3_main_cth_caravan_completed_novchozy",
+		wh3_main_chaos_region_novchozy				= "wh3_main_cth_caravan_completed_novchozy",
+		wh3_main_combi_region_novchozy				= "wh3_main_cth_caravan_completed_novchozy",
 
-		wh3_main_chaos_region_shattered_stone_bay	="wh3_main_cth_caravan_completed_stone_bay",
-		wh3_main_combi_region_shattered_stone_bay	="wh3_main_cth_caravan_completed_stone_bay",
+		wh3_main_chaos_region_shattered_stone_bay	= "wh3_main_cth_caravan_completed_stone_bay",
+		wh3_main_combi_region_shattered_stone_bay	= "wh3_main_cth_caravan_completed_stone_bay",
 
-		wh3_main_chaos_region_Zharr_naggrund		="wh3_main_cth_caravan_completed_zharr_nagrund",
-		wh3_main_combi_region_karaz_a_karak			="wh3_main_cth_caravan_completed_zharr_nagrund",
+		wh3_main_chaos_region_zharr_naggrund		= "wh3_main_cth_caravan_completed_zharr_nagrund",
+		wh3_main_combi_region_karaz_a_karak			= "wh3_main_cth_caravan_completed_zharr_nagrund",
 
-		wh3_main_combi_region_myrmidens				="wh3_main_cth_caravan_completed_tilea",
-		wh3_main_chaos_region_tilea					="wh3_main_cth_caravan_completed_tilea",
+		wh3_main_combi_region_myrmidens				= "wh3_main_cth_caravan_completed_tilea",
+		wh3_main_chaos_region_tilea					= "wh3_main_cth_caravan_completed_tilea",
 
 	},
 	wh3_dlc23_chd_chaos_dwarfs = {
@@ -778,9 +778,15 @@ function caravans:initialise()
 				cm:cai_insert_caravan_diplomatic_event(region_owner_key,faction_key)
 
 				if region_owner:is_human() and faction_key ~= region_owner_key then
+					local incident_key = "wh3_main_cth_caravan_completed_received"
+					
+					if faction:culture() == "wh3_dlc23_chd_chaos_dwarfs" then
+						incident_key = "wh3_dlc23_chd_convoy_completed_received"
+					end
+					
 					cm:trigger_incident_with_targets(
 						region_owner:command_queue_index(),
-						"wh3_main_cth_caravan_completed_received",
+						incident_key,
 						0,
 						0,
 						0,
@@ -1230,16 +1236,7 @@ end;
 
 --Handles battles for dilemmas
 
-function caravans:attach_battle_to_dilemma(
-			dilemma_name,
-			caravan,
-			attacking_force,
-			is_ambush,
-			target_faction,
-			enemy_faction,
-			target_region,
-			custom_option)
-	
+function caravans:attach_battle_to_dilemma(dilemma_name, caravan, attacking_force, is_ambush, target_faction, enemy_faction, target_region, custom_option)
 	--Create the enemy force
 	local enemy_force_cqi = nil;
 	local x = nil;
@@ -1248,59 +1245,55 @@ function caravans:attach_battle_to_dilemma(
 	if attacking_force ~= nil then
 		enemy_force_cqi, x, y = self:spawn_caravan_battle_force(caravan, attacking_force, target_region, is_ambush, false, enemy_faction)
 	end
-	
-	function ivory_road_dilemma_choice(context)
-		local dilemma = context:dilemma();
-		local choice = context:choice();
-		local faction = context:faction();
-		local faction_key = faction:name();
-		
-		if dilemma == dilemma_name then
-			--if battle option is chosen
-			core:remove_listener("cth_DilemmaChoiceMadeEvent_"..faction_key);
-			
+
+	core:add_listener(
+		"cth_DilemmaChoiceMadeEvent_" .. caravan:caravan_master():character():faction():name(),
+		"DilemmaChoiceMadeEvent",
+		function(context)
+			return context:dilemma() == dilemma_name
+		end,
+		function(context)
+			local choice = context:choice();
+				
 			if choice == 3 then
 				return;
 			end
 
-			local choice_zero_dilemmas = 
-				{
-					wh3_dlc23_dilemma_chd_convoy_cathay_caravan = true,
-					wh3_dlc23_dilemma_chd_convoy_rats_in_a_tunnel = true,
-					wh3_dlc23_dilemma_chd_convoy_dwarfs = true,
-					wh3_dlc23_dilemma_chd_convoy_localised_elfs = true,
-					wh3_dlc23_dilemma_chd_convoy_far_from_home = true
-				};
-			local choice_one_dilemmas = 
-				{
-					wh3_dlc23_dilemma_chd_convoy_cathay_caravan = true,
-					wh3_dlc23_dilemma_chd_convoy_rats_in_a_tunnel = true,
-					wh3_dlc23_dilemma_chd_convoy_portals_part_1 = true,
-					wh3_dlc23_dilemma_chd_convoy_the_ambush = true,
-					wh3_dlc23_dilemma_chd_convoy_dwarfs = true,
-					wh3_dlc23_dilemma_chd_convoy_localised_elfs = true,
-					wh3_dlc23_dilemma_chd_convoy_far_from_home = true,
-					wh3_dlc23_dilemma_chd_convoy_quick_way_down = true,
-					wh3_dlc23_dilemma_chd_convoy_trading_dark_elfs = true
-				};	
+			local choice_zero_dilemmas = {
+				wh3_dlc23_dilemma_chd_convoy_cathay_caravan = true,
+				wh3_dlc23_dilemma_chd_convoy_rats_in_a_tunnel = true,
+				wh3_dlc23_dilemma_chd_convoy_dwarfs = true,
+				wh3_dlc23_dilemma_chd_convoy_localised_elfs = true,
+				wh3_dlc23_dilemma_chd_convoy_far_from_home = true
+			};
+			local choice_one_dilemmas = {
+				wh3_main_dilemma_cth_caravan_5 = true,
+				wh3_dlc23_dilemma_chd_convoy_cathay_caravan = true,
+				wh3_dlc23_dilemma_chd_convoy_rats_in_a_tunnel = true,
+				wh3_dlc23_dilemma_chd_convoy_portals_part_1 = true,
+				wh3_dlc23_dilemma_chd_convoy_the_ambush = true,
+				wh3_dlc23_dilemma_chd_convoy_dwarfs = true,
+				wh3_dlc23_dilemma_chd_convoy_localised_elfs = true,
+				wh3_dlc23_dilemma_chd_convoy_far_from_home = true,
+				wh3_dlc23_dilemma_chd_convoy_quick_way_down = true,
+				wh3_dlc23_dilemma_chd_convoy_trading_dark_elfs = true
+			};	
 
-			local not_move_dilemmas = 
-				{
-					wh3_dlc23_dilemma_chd_convoy_training_camp = true,
-					wh3_dlc23_dilemma_chd_convoy_portals_part_1 = true,
-					wh3_dlc23_dilemma_chd_convoy_quick_way_down = true
-				};	
+			local not_move_dilemmas = {
+				wh3_dlc23_dilemma_chd_convoy_training_camp = true,
+				wh3_dlc23_dilemma_chd_convoy_portals_part_1 = true,
+				wh3_dlc23_dilemma_chd_convoy_quick_way_down = true
+			};	
 
-			local move_dilemma_one =
-				{
-					wh3_dlc23_dilemma_chd_convoy_the_ambush = true
-				};
+			local move_dilemma_one = {
+				wh3_dlc23_dilemma_chd_convoy_the_ambush = true
+			};
 
-			local cargo_dilemmas =
-				{
-					wh3_dlc23_dilemma_chd_convoy_portals_part_1 = true,
-					wh3_dlc23_dilemma_chd_convoy_trading_dark_elfs = true
-				}
+			local cargo_dilemmas = {
+				wh3_main_dilemma_cth_caravan_5 = true,
+				wh3_dlc23_dilemma_chd_convoy_portals_part_1 = true,
+				wh3_dlc23_dilemma_chd_convoy_trading_dark_elfs = true
+			}
 
 			if choice == 0 and attacking_force ~= nil and not choice_zero_dilemmas[dilemma_name] then
 				self:create_caravan_battle(caravan, enemy_force_cqi, x, y, is_ambush);
@@ -1308,11 +1301,12 @@ function caravans:attach_battle_to_dilemma(
 				self:create_caravan_battle(caravan, enemy_force_cqi, x, y, is_ambush);
 				custom_option();
 			end	
+			
 			if (choice ~= 0 and not move_dilemma_one[dilemma_name]) or (choice == 0 and attacking_force == nil and not not_move_dilemmas[dilemma_name]) then
 				cm:move_caravan(caravan);
 			end	
 			
-			if (choice == 0 and attacking_force == nil and cargo_dilemmas[dilemma_name]) or (custom_option ~= nil and choice == 1 and not choice_one_dilemmas[dilemma_name]) then
+			if custom_option and ((choice == 0 and attacking_force == nil and cargo_dilemmas[dilemma_name]) or (choice == 1 and not choice_one_dilemmas[dilemma_name])) then
 				custom_option();
 			end
 			
@@ -1321,17 +1315,6 @@ function caravans:attach_battle_to_dilemma(
 				cm:move_caravan(caravan);
 				custom_option();
 			end
-		end
-	end
-	
-	local faction_key = caravan:caravan_master():character():faction():name()
-
-	core:add_listener(
-		"cth_DilemmaChoiceMadeEvent_"..faction_key,
-		"DilemmaChoiceMadeEvent",
-		true,
-		function(context)
-			ivory_road_dilemma_choice(context) 
 		end,
 		true
 	);
@@ -1573,12 +1556,10 @@ function caravans:build_list_of_nodes()
 end
 
 function caravans:reward_item_check(faction,region_key,caravan_master)
-	
 	local reward = self.item_data[faction:culture()][region_key]
 	if not reward then 
 		return false 
 	end
-	
 
 	if not faction:ancillary_exists(reward) then
 		local character = caravan_master:character()

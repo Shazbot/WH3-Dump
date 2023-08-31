@@ -91,6 +91,7 @@ local panels_blocking = {
 	"ogre_great_maw",
 	"rifts",
 	"war_coordination",
+	"narrative_viewer",
 
 	--WH3 DLC
 	"chaos_gifts",
@@ -98,7 +99,11 @@ local panels_blocking = {
 	"hellforge_panel_main",
 	"tower_of_zharr",
 	"military_convoys",
-	"labour_economy"
+	"labour_economy",
+	"dlc24_jade_compass",
+	"dlc24_matters_of_state",
+	"dlc24_witches_hut",
+	"dlc24_schemes"
 };
 
 -- Panels for which a PanelOpenedCampaign event is sent to script, but the panel should not block interventions or be considered by cm:progress_on_blocking_panel_dismissed()
@@ -114,7 +119,8 @@ local panels_not_blocking = {
 	"waiting_for_players",
 	"malus_quest_details",
 	"sea_lanes",
-	"chd_end_game_teleport"
+	"chd_end_game_teleport",
+	"dlc24_hex_rituals"
 };
 
 
@@ -8890,6 +8896,63 @@ function campaign_ui_manager:highlight_winds_of_magic(value, pulse_strength, for
 			end;
 		end;
 	end;
+end;
+
+
+--- @function highlight_witchs_hut_button
+--- @desc Highlights the witch's hut button. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
+--- @p [opt=false] boolean show highlight, Show highlight.
+--- @p [opt=nil] number pulse strength override, Pulse Strength Override. Default is 10 for smaller components such as buttons, and 5 for larger components such as panels. Set a higher number for a more pronounced pulsing.
+--- @p [opt=false] boolean force highlight, Forces the highlight to show even if the <code>help_page_link_highlighting</code> ui override is set.
+function campaign_ui_manager:highlight_witchs_hut_button(value, pulse_strength, force_highlight)
+	if not self.help_page_link_highlighting_permitted and not force_highlight then
+		return;
+	end;
+	
+	local uic_button = find_uicomponent(core:get_ui_root(), "faction_buttons_docker", "button_witches_hut");
+	
+	if uic_button and uic_button:Visible(true) then
+		pulse_uicomponent(uic_button, value, pulse_strength or self.button_pulse_strength);
+		if value then
+			table.insert(self.unhighlight_action_list, function() self:highlight_witchs_hut_button(false, pulse_strength, force_highlight) end);
+		end;
+		return true;
+	end;
+	
+	return false;
+end;
+
+
+--- @function highlight_witchs_hut_panel
+--- @desc Highlights the witch's hut panel. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
+--- @p [opt=false] boolean show highlight, Show highlight.
+--- @p [opt=nil] number pulse strength override, Pulse Strength Override. Default is 10 for smaller components such as buttons, and 5 for larger components such as panels. Set a higher number for a more pronounced pulsing.
+--- @p [opt=false] boolean force highlight, Forces the highlight to show even if the <code>help_page_link_highlighting</code> ui override is set.
+--- @p [opt=false] boolean dont highlight upstream, Suppress highlighting of any upstream components if this one is not currently visible.
+function campaign_ui_manager:highlight_witchs_hut_panel(value, pulse_strength, force_highlight, do_not_highlight_upstream)
+	if not self.help_page_link_highlighting_permitted and not force_highlight then
+		return;
+	end;
+	
+	local uic_incantations_list = find_uicomponent(core:get_ui_root(), "dlc24_witches_hut", "right_components_holder");
+		
+	if uic_incantations_list and uic_incantations_list:Visible(true) then	
+		pulse_uicomponent(uic_incantations_list, value, pulse_strength or self.panel_pulse_strength);
+		
+		local uic_ingredients_list = find_uicomponent(core:get_ui_root(), "dlc24_witches_hut", "ingredients_list_holder");
+		if uic_ingredients_list then
+			pulse_uicomponent(uic_ingredients_list, value, pulse_strength or self.panel_pulse_strength, true);
+		end;
+		
+		if value then
+			table.insert(self.unhighlight_action_list, function() self:highlight_witchs_hut_panel(false, pulse_strength, force_highlight) end);
+		end;
+		return true;
+	elseif not do_not_highlight_upstream then
+		return self:highlight_witchs_hut_button(value, pulse_strength, force_highlight);
+	end;
+	
+	return false;
 end;
 
 
