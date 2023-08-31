@@ -1,0 +1,116 @@
+CampaignTargetting
+{
+	IsForDiplomacyAction
+	{
+		IsOfType(TargettingContext, "CcoCampaignDiplomacyManipulationInteraction")
+	}
+	
+	IsForRitualAction
+	{
+		IsOfType(TargettingContext, "CcoCampaignRitualInteraction")
+	}
+	
+	HasAForceTargetted
+	{
+		IsOfType(TargettingContext.CurrentTargetContext, "CcoCampaignMilitaryForce")
+	}
+	
+	HasASettlementTargetted
+	{
+		IsOfType(TargettingContext.CurrentTargetContext, "CcoCampaignSettlement")
+	}
+	
+	ShouldShowForceSelector
+	{
+		GetIfElse
+		(
+			IsForRitualAction,
+			TargettingContext.RitualContext.TargetType == "MILITARY_FORCE",
+			false
+		)
+	}
+	
+	ShouldShowSettlementSelector
+	{
+		GetIfElse
+		(
+			IsForRitualAction,
+			TargettingContext.RitualContext.TargetType == "REGION",
+			TargettingContext.DiplomacyManipulationInfoContext.Category == "transfer_settlement"
+		)
+	}
+	
+	ShouldShowForceAndSettlementSelector
+	{
+		GetIfElse
+		(
+			IsForDiplomacyAction,
+			TargettingContext.DiplomacyManipulationInfoContext.Category == "give_war_coordination_target",
+			false
+		)
+	}
+	
+	ShouldShowRitualFactionSelector
+	{
+		IsForRitualAction && TargettingContext.RitualContext.TargetType == "FACTION"
+	}
+	
+	ShouldShowDiplomacySourceFactionSelector
+	{
+		IsForDiplomacyAction && TargettingContext.ShouldDisplayFactionDropdown(true)
+	}
+	
+	ShouldShowDiplomacyObjectiveFactionSelector
+	{
+		IsForDiplomacyAction && TargettingContext.ShouldDisplayFactionDropdown(false)
+	}
+	
+	IsSelectingForce
+	{
+		GetIfElse
+		(
+			IsForDiplomacyAction,
+			TargettingContext.GetTargetSelectionModeString == "force",
+			true
+		)
+	}
+	
+	IsSelectingSettlement
+	{
+		GetIfElse
+		(
+			IsForDiplomacyAction,
+			TargettingContext.GetTargetSelectionModeString == "region",
+			true
+		)
+	}
+	
+	IsSelectingSourceFaction
+	{
+		GetIfElse
+		(
+			IsForDiplomacyAction,
+			TargettingContext.GetTargetSelectionModeString == "source_faction",
+			false
+		)
+	}
+	
+	IsSelectingObjectiveFaction
+	{
+		GetIfElse
+		(
+			IsForDiplomacyAction,
+			TargettingContext.GetTargetSelectionModeString == "objective_faction",
+			false
+		)
+	}
+	
+	ValidateSourceFaction
+	{
+		DoIf
+		(
+			CampaignTargetting.IsForDiplomacyAction && TargettingContext.ValidSourceFactionList.Contains(TargettingContext.SourceFactionContext) == false,
+			TargettingContext.SetupInitialTargetFaction(TargettingContext.ValidSourceFactionList.FirstContext)
+		)
+	}
+}

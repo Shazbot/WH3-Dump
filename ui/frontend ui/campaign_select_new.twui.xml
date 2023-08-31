@@ -6,7 +6,9 @@
 	<hierarchy>
 		<root this="C36CDD28-26B8-482B-B4B2B78BD1462CFC">
 			<campaign_select_new this="29DFE441-5B64-4758-844CE8F6FB4090FE">
+				<button_start_bg_gradient this="98A1EA64-A342-4520-BEDE3D4DF0E7E6CB"/>
 				<button_start_parent this="0A897269-353D-424E-9C4653881D3A26F3">
+					<frame_image this="874AC621-506C-4C07-8DC37F645AF15FF2"/>
 					<button_start_campaign this="E3F883B6-5494-43AA-9DCA10A2A87051A4">
 						<button_flame this="E8AF0F50-7795-43DD-AFC04C6386D5337F"/>
 						<button_txt this="904255A0-B98E-4526-A769A2B030130F66"/>
@@ -169,6 +171,28 @@
 										<icon_holder this="6663A486-00CB-462F-8948AA7165432958"/>
 										<template_icon_army this="EC0FA61C-A210-4302-8AFA68B8C8E2569A"/>
 									</map>
+									<climates this="FABA49E0-A403-4E3B-9E8ACAD11DC37EBD">
+										<parchment_divider_title this="1C48C91F-A707-4EEB-9023B635D4178153">
+											<heading_details this="55C9960D-C78F-472F-AAAA9F5CBB15DF5C"/>
+										</parchment_divider_title>
+										<types_list this="FABE17A3-8CEE-4154-B65E2AAF2C51E755">
+											<suitability_good this="ECA840A8-DE3B-4B8A-B59EB973F2924C95">
+												<good_header this="1BCAD801-53FC-49EA-BAEC3F8371936B93"/>
+												<template_entry this="F7A03F12-552D-4DFB-93785A012F62498B"/>
+												<tx_none this="B4F94131-0784-4B8D-87F7F7382F0E594E"/>
+											</suitability_good>
+											<suitability_poor this="FE0D9122-9D0F-4E98-888B2D1D5AF25A59">
+												<poor_header this="75F29C37-6C80-4229-A20C8EE74D04D7E9"/>
+												<template_entry this="C8F3C237-C193-4DCF-931D588E83860FC1"/>
+												<tx_none this="FC35F1C7-9626-4D28-B738333B6A0BEF5B"/>
+											</suitability_poor>
+											<suitability_verypoor this="1ACA88DC-5A0F-498B-938BA192F6EA7141">
+												<very_poor_header this="1F8A1A67-50E2-4A23-8655700F38211952"/>
+												<template_entry this="64999AAB-2C90-4CCC-9DB607D8DF207027"/>
+												<tx_none this="42FD40BA-D1AB-4A1B-BC48611A7CB081D8"/>
+											</suitability_verypoor>
+										</types_list>
+									</climates>
 								</tab_map>
 								<tab_lore this="63D79BC6-59F8-4AAF-900CA27C703D19FB">
 									<content_holder this="5850284D-4AB1-471D-B9BE25864F3958E2">
@@ -498,6 +522,18 @@
 													<label_tx this="4FB61CF3-EBDA-457C-ABE5D2B82EBF6861"/>
 												</realism_mode>
 											</battle_settings>
+											<ai_stat_mod_holder this="5102BE54-8A09-4D23-90ED66082D022014">
+												<dy_ai_stat_mod this="CC750F5E-E4A3-46A2-86BAD266B111ED04"/>
+												<ai_stat_mod_slider this="AF89161C-C35F-4515-91A13EA43912CC18">
+													<frame_left this="EBDAA930-940B-4EC9-94F1CA012B73FE1B"/>
+													<frame_right this="4FA2424E-3524-4A3F-8131A60BD25CB726"/>
+													<handle this="4DC5BBBB-13F2-4D66-8BCEDA293A641BA0"/>
+													<left this="DD008D54-1435-4CAF-8FCF36DDA020C378"/>
+													<right this="AD7F777B-D709-4710-8E18E3E1CE4E74E9"/>
+													<tx_easy this="F4DAD717-CF26-4709-BF75F9FBE37B3A97"/>
+													<tx_hard this="3FE6E72D-CF75-4DE5-9C1BCBAA7C342A3F"/>
+												</ai_stat_mod_slider>
+											</ai_stat_mod_holder>
 											<saving_header this="4418EDAE-796D-429D-9A954E66164A7BA5">
 												<header_label this="2B6A6DDC-5F70-4162-B43160CA7A69F698"/>
 											</saving_header>
@@ -961,6 +997,80 @@
 				<element value=""/>
 			</override_images>
 		</accept_difficulty_changes>
+		<ai_stat_mod_slider
+			this="AF89161C-C35F-4515-91A13EA43912CC18"
+			id="ai_stat_mod_slider"
+			template_id="panel_slider_horizontal"
+			part_of_template="true"
+			uniqueguid_in_template="FC457A20-45F6-4299-9140D634E46D7FE1"
+			uniqueguid="AF89161C-C35F-4515-91A13EA43912CC18"
+			dimensions="134.00,20.00"
+			offset="94.00,0.00"
+			priority="60">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="76E68410-3CD3-49CD-A88552AA6F3F9DBD"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="61AB910C-ED78-471A-AEA9C9A69D034B3D"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_horizontal_mid.png"
+					uniqueguid="4A7B132B-A73A-474A-96EC1E9B9AF1AB4B"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="HSliderSetting"/>
+				<callback_with_context
+					callback_id="ContextCommandEvent"
+					context_function_id="self.SetValue(BattleAiStatsModifierFromDifficulty(PrefAsInt(&quot;battle_difficulty&quot;)) * 100)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="EnvironmentSettingChangedbattle_difficulty"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="Notify"
+					value=""/>
+				<property
+					name="SnapToValues"
+					value=""/>
+				<property
+					name="Value"
+					value="100"/>
+				<property
+					name="maxValue"
+					value="110"/>
+				<property
+					name="minValue"
+					value="90"/>
+				<property
+					name="step_size"
+					value="1"/>
+				<property
+					name="setting"
+					value="battle_ai_stats_modifier"/>
+				<property
+					name="use_float_setting"
+					value=""/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/slider_horizontal_mid.png"/>
+			</override_images>
+		</ai_stat_mod_slider>
 		<button_autogen
 			this="747A9A18-6366-4C7A-B321CF9AB4B1A993"
 			id="button_autogen"
@@ -1503,7 +1613,13 @@
 				<callback_with_context
 					callback_id="ContextDropdownMenu"
 					context_object_id="CcoCultureRecord"
-					context_function_id="CultureList.FirstContext( (x) =&gt; LordListForFaction(x).Any(FactionRecordContext.IsFactionUnlocked))"/>
+					context_function_id="CultureList.FirstContext( (x) =&gt; LordListForFaction(x).Any(FactionRecordContext.IsFactionUnlocked))">
+					<child_m_user_properties>
+						<property
+							name="close_on_esc"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context callback_id="StatePropagatorCallback">
 					<child_m_user_properties>
 						<property
@@ -1514,7 +1630,7 @@
 				<callback_with_context
 					callback_id="ContextCommandGiverOnVisibilityChanged"
 					context_object_id="CcoStaticObject"
-					context_function_id="self.SimulateLClick"/>
+					context_function_id="DoIf(&#10;  !Component(&quot;29DFE441-5B64-4758-844CE8F6FB4090FE&quot;).StoredContext(&quot;CcoFrontendFactionLeaderRecord&quot;),&#10;  self.SimulateLClick)"/>
 			</callbacks_with_context>
 			<localised_texts>
 				<localised_text/>
@@ -3822,6 +3938,50 @@
 				<element value="ui/skins/default/panel_slider_horizontal_left.png"/>
 			</override_images>
 		</frame_left>
+		<frame_left
+			this="EBDAA930-940B-4EC9-94F1CA012B73FE1B"
+			id="frame_left"
+			part_of_template="true"
+			uniqueguid_in_template="A3AE9505-267C-460C-8BCDBF7D1022334B"
+			uniqueguid="EBDAA930-940B-4EC9-94F1CA012B73FE1B"
+			dimensions="28.00,25.00"
+			dock_point="Center Left External"
+			offset="1.00,0.00"
+			priority="60">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="4308C095-239D-45EF-BAFDF1E296B4975E"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="21194CC7-EEE5-4B0B-BCA33698CA7864EE"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/panel_slider_horizontal_left.png"
+					uniqueguid="99FF5EB3-E201-4475-99209190F5537C2C"/>
+			</component_image_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="position"/>
+				<property
+					name="disable_override0"
+					value="resizable"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/panel_slider_horizontal_left.png"/>
+			</override_images>
+		</frame_left>
 		<smoke
 			this="E6B4DB8B-1A83-47A1-A15D44FC4B7D7E2C"
 			id="smoke"
@@ -4504,6 +4664,49 @@
 				<element value="ui/skins/default/panel_slider_horizontal_right.png"/>
 			</override_images>
 		</frame_right>
+		<frame_right
+			this="4FA2424E-3524-4A3F-8131A60BD25CB726"
+			id="frame_right"
+			part_of_template="true"
+			uniqueguid_in_template="8AB6653E-BA9D-4E0A-8624659F5EE89CE9"
+			uniqueguid="4FA2424E-3524-4A3F-8131A60BD25CB726"
+			dimensions="29.00,25.00"
+			dock_point="Center Right External"
+			priority="60">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="61B163D9-04B1-4A12-8A1DC72AB49592C3"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="7F5E03F7-AC1D-43FA-B082EAB3512A21E7"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/panel_slider_horizontal_right.png"
+					uniqueguid="3FF7BFE4-C5CF-4C39-81A1A8FC532F4B25"/>
+			</component_image_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="position"/>
+				<property
+					name="disable_override0"
+					value="resizable"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/panel_slider_horizontal_right.png"/>
+			</override_images>
+		</frame_right>
 		<icon
 			this="DEDAF3A4-8A89-4FDE-972B079882D6B59A"
 			id="icon"
@@ -4911,6 +5114,76 @@
 			</callbacks_with_context>
 			<localised_texts>
 				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/slider_vertical_handle.png"/>
+				<element value="ui/skins/default/slider_vertical_handle_underlay.png"/>
+			</override_images>
+		</handle>
+		<handle
+			this="4DC5BBBB-13F2-4D66-8BCEDA293A641BA0"
+			id="handle"
+			part_of_template="true"
+			uniqueguid_in_template="51744703-473E-4651-845DB01529737BD0"
+			uniqueguid="4DC5BBBB-13F2-4D66-8BCEDA293A641BA0"
+			dimensions="18.00,35.00"
+			tooltips_localised="false"
+			offset="0.00,-8.00"
+			priority="60"
+			sound_category="UI_GBL_TMP_Slider_Handle">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="03A0096F-01E0-42C0-A21D1859A916806C"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="15A1EDAE-FC56-44F7-BF355C6929653233"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="59EDFDB5-A18B-4F44-A96FF969DAF17EC7"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="36C03991-E226-438E-94E98738CCFE0FC3"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_vertical_handle.png"
+					uniqueguid="46A80D86-493C-4C16-85AF6CDFE75697CD"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_vertical_handle_underlay.png"
+					uniqueguid="5E8AB2E3-51E9-40B7-986B8F6F3709DE8D"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="HSliderHandle"/>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoPair"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_function_id="MakePair(self.ParentContext.Value, 0)">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text
+					tooltip_label="ComponentTooltip_7b65d144"
+					tooltip_text="{{tt:ui/common ui/tooltip_ai_stats_modifier}}"/>
 				<localised_text
 					state="active"
 					is_text_localised="false"/>
@@ -5373,6 +5646,90 @@
 				<element value="ui/skins/default/panel_slider_vertical_bottom_inactive.png"/>
 			</override_images>
 		</left>
+		<left
+			this="DD008D54-1435-4CAF-8FCF36DDA020C378"
+			id="left"
+			part_of_template="true"
+			uniqueguid_in_template="A56C8E0A-1E64-451C-90B89EA6EE81176E"
+			uniqueguid="DD008D54-1435-4CAF-8FCF36DDA020C378"
+			dimensions="21.00,21.00"
+			dock_point="Center Left External"
+			offset="-4.00,-1.00"
+			priority="60"
+			sound_category="UI_GBL_TMP_Slider_Arrows">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="F9892F3D-B351-47F4-AF9AF2B0CC114793"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="F54A0B37-A586-44AB-9DEA0A956FA847C8"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="ECD35890-D0DA-4905-B310A17E95A75DFC"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="9404E441-F4B5-4001-ADCB687C3B169F6E"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="6FDACBB1-0F21-46EA-956B7DA357FE78DF"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/panel_slider_vertical_bottom_active.png"
+					uniqueguid="FC8E6031-1BCA-40FE-BDF4D4601575C32B"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/panel_slider_vertical_bottom_pressed.png"
+					uniqueguid="8AF9C1E6-6C07-4C4B-A0F8004F2620454C"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/panel_slider_vertical_bottom_hover.png"
+					uniqueguid="72E2465E-3322-421E-BEB8E0CA8EEA6C00"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/panel_slider_vertical_bottom_inactive.png"
+					uniqueguid="E22AC60C-4D0B-45D2-A5EA8E64574EA361"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="SliderDecrementButton"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="position"/>
+				<property
+					name="disable_override0"
+					value="resizable"/>
+				<property
+					name="stepSize"
+					value="1"/>
+				<property
+					name="update_frequency_ms"
+					value="200"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/panel_slider_vertical_bottom_active.png"/>
+				<element value="ui/skins/default/panel_slider_vertical_bottom_pressed.png"/>
+				<element value="ui/skins/default/panel_slider_vertical_bottom_hover.png"/>
+				<element value="ui/skins/default/panel_slider_vertical_bottom_inactive.png"/>
+			</override_images>
+		</left>
 		<right
 			this="85D97AB7-52A0-4075-BC060E3D9253CF0A"
 			id="right"
@@ -5414,6 +5771,90 @@
 				<component_image_uniqueguid
 					name="ui/skins/default/panel_slider_vertical_top_inactive.png"
 					uniqueguid="D5780124-B89F-4E88-8B241FB6AB3EE9BA"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="SliderIncrementButton"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="position"/>
+				<property
+					name="disable_override0"
+					value="resizable"/>
+				<property
+					name="stepSize"
+					value="1"/>
+				<property
+					name="update_frequency_ms"
+					value="200"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/panel_slider_vertical_top_active.png"/>
+				<element value="ui/skins/default/panel_slider_vertical_top_pressed.png"/>
+				<element value="ui/skins/default/panel_slider_vertical_top_hover.png"/>
+				<element value="ui/skins/default/panel_slider_vertical_top_inactive.png"/>
+			</override_images>
+		</right>
+		<right
+			this="AD7F777B-D709-4710-8E18E3E1CE4E74E9"
+			id="right"
+			part_of_template="true"
+			uniqueguid_in_template="0C7C26D2-B48D-4B8F-A90D69F91240C2EF"
+			uniqueguid="AD7F777B-D709-4710-8E18E3E1CE4E74E9"
+			dimensions="21.00,21.00"
+			dock_point="Center Right"
+			offset="24.00,-1.00"
+			priority="60"
+			sound_category="UI_GBL_TMP_Slider_Arrows">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="C670E18D-2FC1-4DF3-96531F90672C1BE5"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="922AEB0F-82DD-454F-9394D9308EF11825"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="9AC3234B-B60A-4D04-A3A0FB7571F1EFE7"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="C51C07C4-403B-4B7E-86A038B253DF9B05"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="4D911123-EAD4-4043-9DFCF784CDF7389D"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/panel_slider_vertical_top_active.png"
+					uniqueguid="67AE6707-DEA9-43B4-98C71F916AF8DCA3"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/panel_slider_vertical_top_pressed.png"
+					uniqueguid="670D7CB2-D49B-46DC-AC2E3B7C6ABF9AB7"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/panel_slider_vertical_top_hover.png"
+					uniqueguid="9809BA17-D688-4668-92AED51B1BD57BC7"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/panel_slider_vertical_top_inactive.png"
+					uniqueguid="F37C4123-2EA5-4578-8BC01AD596FAA02B"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context callback_id="SliderIncrementButton"/>
@@ -6023,9 +6464,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="D67CEBE8-312C-448F-BEEE3260D6E073DB"
@@ -6064,9 +6505,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -6104,9 +6545,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="F217F840-FE2F-4846-9F6C22ADA8E7F1CE"
@@ -6156,9 +6597,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -6191,9 +6632,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 			</states>
 		</button_spell_browser>
@@ -6232,8 +6673,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_text_brand_warhammer3"/>
+						font_m_leading="3"
+						fontcat_name="header_12"/>
 				</active>
 				<inactive
 					this="477F380D-F975-4E8C-86D4A146FB1AE0A4"
@@ -6250,9 +6691,10 @@
 						textlabel="StateText_3ef79040"
 						font_m_font_name="brand_header"
 						font_m_size="12"
-						font_m_colour="#666666FF"
-						font_m_leading="1"
-						fontcat_name="fe_text_brand_inactive_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_12"
+						font_colour_override_preset_key="ui_font_inactive_grey"/>
 				</inactive>
 			</states>
 		</button_txt>
@@ -6568,9 +7010,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<inactive
 					this="588FD002-9328-41EB-A93E0E4343E7FD61"
@@ -6595,9 +7037,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 			</states>
 		</h_ranged_slider>
@@ -6676,9 +7118,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down_off
 					this="64123AD6-A9F7-468B-82870EA690811E92"
@@ -6713,9 +7155,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="312176C6-11FD-4BD6-AC15A23807006FC7"
@@ -6764,9 +7206,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</hover>
 				<inactive
 					this="018A66FB-CA2C-417D-8C789A875202C3A7"
@@ -6809,9 +7251,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 			</states>
 		</handle>
@@ -6899,9 +7341,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="0EADC320-2C5F-44B5-9C256C657603128A"
@@ -6930,9 +7372,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down>
 				<down_off
 					this="250D2AF1-B487-4E40-B00E7A10EF0B8A2D"
@@ -6960,9 +7402,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="7A2D1D7C-D63D-41F5-859F17966672951F"
@@ -6999,9 +7441,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</hover>
 				<inactive
 					this="6AB2F019-847A-4AE6-8444A75BEC42711C"
@@ -7034,9 +7476,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 			</states>
 		</left>
@@ -7125,9 +7567,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="3F98D27B-2EF8-44DD-B0B7088205C4F6E5"
@@ -7157,9 +7599,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down>
 				<down_off
 					this="C6B1E082-A1BD-411A-91F826D820A5B712"
@@ -7187,9 +7629,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="D36D6FAA-9C17-489D-AE125A6333C5271C"
@@ -7227,9 +7669,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</hover>
 				<inactive
 					this="C2F4A24A-C780-483B-B0A9963502F2A160"
@@ -7263,9 +7705,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 			</states>
 		</right>
@@ -7327,8 +7769,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</active>
 				<down
@@ -7357,8 +7799,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</down>
 				<hover
@@ -7395,8 +7837,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -7424,8 +7866,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						text_shader_name="set_greyscale_t0"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</inactive>
@@ -7497,9 +7939,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="1DF77EFF-BE56-4A48-93540A42CF2A6F5F"
@@ -7527,9 +7969,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -7556,9 +7998,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="EC9E8F9A-AFA2-4CF2-B5D7FD08B4EECB04"
@@ -7590,9 +8032,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -7616,9 +8058,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 			</states>
 			<animations>
@@ -7937,9 +8379,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="90E09AC3-33EE-4816-857C29FE26A5855C"
@@ -7973,9 +8415,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -8007,9 +8449,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="AD3845F7-2D4B-49D7-97810CB76B72C011"
@@ -8040,9 +8482,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -8064,9 +8506,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 			</states>
 		</campaign_image>
@@ -8281,9 +8723,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="8CC1FE0D-649A-44E2-822BCD548A150E31"
@@ -8312,9 +8754,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -8341,9 +8783,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="82954652-5300-436F-AD8E8BD83220B51C"
@@ -8375,9 +8817,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -8400,9 +8842,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 			</states>
 		</frame>
@@ -8443,8 +8885,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</active>
 				<down
@@ -8464,8 +8906,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</down>
 				<hover
@@ -8485,8 +8927,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</hover>
 			</states>
@@ -8533,7 +8975,7 @@
 				<callback_with_context
 					callback_id="ContextCommandGiverOnContextSet"
 					context_object_id="CcoURI"
-					context_function_id="DoIf(HasArgument(&quot;frontend_faction_leaders&quot;), Do(self.SetState(&quot;active&quot;), Component(&quot;41458EF9-1D8F-4A32-94362A04AC123355&quot;).SelectPanelButton(self)))"/>
+					context_function_id="DoIf(HasArgument(&quot;frontend_faction_leaders&quot;), Do(self.SetState(&quot;active&quot;), Component(&quot;41458EF9-1D8F-4A32-94362A04AC123355&quot;).SelectButton(self)))"/>
 				<callback_with_context
 					callback_id="ContextCommandEvent"
 					context_object_id="CcoStaticObject"
@@ -8593,9 +9035,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="D3E6C868-0BDF-4D98-9C0FDFE3D88DF32E"
@@ -8623,9 +9065,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -8652,9 +9094,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="CD5947E6-3955-425D-85E24EB34872E061"
@@ -8686,9 +9128,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -8714,9 +9156,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 				<selected
 					this="AEEBC26D-EF00-43D9-82F5B45A4A009A99"
@@ -8744,9 +9186,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</selected>
 			</states>
 			<animations>
@@ -8974,8 +9416,8 @@
 						font_m_font_name="la_gioconda_uppercase"
 						font_m_size="18"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_section_heading"
+						font_m_leading="3"
+						fontcat_name="header_18_bold"
 						text_shader_name="drop_shadow_t0"
 						textshadervars="0.00,1.00,2.00,0.00"/>
 				</newstate>
@@ -9277,9 +9719,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="30975E9F-0CF5-4DBB-A1F9641F3BAF9330"
@@ -9307,9 +9749,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -9336,9 +9778,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="F2BD3853-1D14-4503-8B226575F92B53D1"
@@ -9370,9 +9812,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -9398,9 +9840,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 				<selected
 					this="445DCB45-C333-4265-B35F5796F8A3002E"
@@ -9428,9 +9870,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</selected>
 			</states>
 			<animations>
@@ -9823,8 +10265,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</active>
 				<down
@@ -9844,8 +10286,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</down>
 				<hover
@@ -9865,8 +10307,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</hover>
 			</states>
@@ -9938,9 +10380,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="5CDB77DE-2368-423B-8A245A0B17D76760"
@@ -9968,9 +10410,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -9996,9 +10438,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="B0D3AF0F-B504-4A66-9F459E32DF3C1006"
@@ -10029,9 +10471,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -10053,9 +10495,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 			</states>
 		</campaign_image>
@@ -10095,8 +10537,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</active>
 				<down
@@ -10116,8 +10558,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</down>
 				<hover
@@ -10137,8 +10579,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</hover>
 			</states>
@@ -10191,9 +10633,10 @@
 						textlabel="StateText_5a316188"
 						font_m_font_name="georgia_italic"
 						font_m_size="12"
-						font_m_colour="#A99F89FF"
-						font_m_leading="1"
-						fontcat_name="fe_italic"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12_italic"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</active>
 				<down
@@ -10212,9 +10655,10 @@
 						textlabel="StateText_e9d1dd9a"
 						font_m_font_name="georgia_italic"
 						font_m_size="12"
-						font_m_colour="#A99F89FF"
-						font_m_leading="1"
-						fontcat_name="fe_italic"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12_italic"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</down>
 				<hover
@@ -10233,9 +10677,10 @@
 						textlabel="StateText_25db6b81"
 						font_m_font_name="georgia_italic"
 						font_m_size="12"
-						font_m_colour="#A99F89FF"
-						font_m_leading="1"
-						fontcat_name="fe_italic"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12_italic"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</hover>
 			</states>
@@ -10284,7 +10729,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"
+						fontcat_name="body_12"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</active>
 				<down
@@ -10303,7 +10748,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"
+						fontcat_name="body_12"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</down>
 				<hover
@@ -10322,7 +10767,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"
+						fontcat_name="body_12"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</hover>
 			</states>
@@ -10370,8 +10815,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</active>
 				<down
@@ -10390,8 +10835,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</down>
 				<hover
@@ -10410,8 +10855,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</hover>
 			</states>
@@ -10473,9 +10918,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="DD4E80D7-61CF-4A28-9C8A21A2932497F4"
@@ -10503,9 +10948,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -10532,9 +10977,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="ABEDB2F0-7AA6-451B-9D146BB93EDAAADE"
@@ -10566,9 +11011,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -10591,9 +11036,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 				<selected
 					this="0484BDA2-7A90-46CF-B64BBE6B438BDF06"
@@ -10844,7 +11289,7 @@
 				<callback_with_context
 					callback_id="ContextCommandGiverOnContextSet"
 					context_object_id="CcoURI"
-					context_function_id="DoIf(this.HasArgument(&quot;frontend_faction_leaders&quot;) &amp;&amp; DatabaseRecordContext(&quot;CcoFrontendFactionLeaderRecord&quot;, this.Argument(&quot;frontend_faction_leaders&quot;)) == self.StoredContextRequired(&quot;CcoFrontendFactionLeader&quot;).FrontendFactionLeaderRecordContext, Do(Component(&quot;^2&quot;).SelectButton(self), Component(&quot;lord_movie&quot;, &quot;sp_grand_campaign&quot;).PropagateContext(self.StoredContextRequired(&quot;CcoFrontendFactionLeader&quot;)), Component(&quot;button_start_parent&quot;, &quot;sp_grand_campaign&quot;).PropagateContext(self.StoredContextRequired(&quot;CcoFrontendFactionLeader&quot;)), Component(&quot;lord_info&quot;, &quot;sp_grand_campaign&quot;).PropagateContext(self.StoredContextRequired(&quot;CcoFrontendFactionLeader&quot;))))"/>
+					context_function_id="DoIf(this.HasArgument(&quot;frontend_faction_leaders&quot;) &amp;&amp; DatabaseRecordContext(&quot;CcoFrontendFactionLeaderRecord&quot;, this.Argument(&quot;frontend_faction_leaders&quot;)) == self.StoredContextRequired(&quot;CcoFrontendFactionLeader&quot;).FrontendFactionLeaderRecordContext, Do(Component(&quot;lord_movie&quot;, &quot;sp_grand_campaign&quot;).PropagateContext(self.StoredContextRequired(&quot;CcoFrontendFactionLeader&quot;)), Component(&quot;button_start_parent&quot;, &quot;sp_grand_campaign&quot;).PropagateContext(self.StoredContextRequired(&quot;CcoFrontendFactionLeader&quot;)), Component(&quot;lord_info&quot;, &quot;sp_grand_campaign&quot;).PropagateContext(self.StoredContextRequired(&quot;CcoFrontendFactionLeader&quot;))))"/>
 				<callback_with_context
 					callback_id="ContextStopVO"
 					context_object_id="CcoURI"
@@ -10943,9 +11388,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="0E0F094E-23E0-47F3-8951DD37CEC5D273"
@@ -10997,9 +11442,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -11049,9 +11494,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="747FBAFA-16C3-4845-93FBE39DA43A6AC3"
@@ -11104,9 +11549,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -11151,9 +11596,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 				<selected
 					this="BE13C478-3B2D-4638-B0BA0C2E839CE900"
@@ -11206,9 +11651,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</selected>
 			</states>
 			<animations>
@@ -11372,8 +11817,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</active>
 				<down
@@ -11393,8 +11838,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</down>
 				<hover
@@ -11414,8 +11859,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</hover>
 			</states>
@@ -11649,8 +12094,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="16"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_paragraph_heading"/>
+						font_m_leading="3"
+						fontcat_name="header_16"/>
 				</active>
 			</states>
 		</race_name>
@@ -11667,7 +12112,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoFrontendFactionLeader"
-					context_function_id="GetIfElse(UnitList.Distinct.IsEmpty == false, UnitList.Distinct, StoredContext(&quot;CcoCampaignStartInfo&quot;, &quot;button_list&quot;, &quot;campaign_select_new&quot;).LordListForFaction(StoredContext(&quot;CcoCultureRecord&quot;, &quot;list_box&quot;, &quot;lord_select_list&quot;)).FirstContext(FactionRecordContext == this.FactionRecordContext &amp;&amp; FrontendFactionLeaderRecord != this).UnitList.Distinct)"/>
+					context_function_id="GetIfElse(UnitList.IsEmpty == false, UnitList, StoredContext(&quot;CcoCampaignStartInfo&quot;, &quot;button_list&quot;, &quot;campaign_select_new&quot;).LordListForFaction(StoredContext(&quot;CcoCultureRecord&quot;, &quot;list_box&quot;, &quot;lord_select_list&quot;)).FirstContext(FactionRecordContext == this.FactionRecordContext &amp;&amp; FrontendFactionLeaderRecord != this).UnitList).Sort(RecruitCost).Sort(UnitRecordContext.ParentGroupSortOrder, true)"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -11678,10 +12123,14 @@
 					uniqueguid="5DC31ED4-5DDA-49E4-8AF8E8E6AC19FE2F"/>
 			</states>
 			<LayoutEngine
-				type="HorizontalList"
+				type="List"
 				spacing="3.00,0.00"
-				sizetocontent="true"
-				max_length="560"/>
+				itemsperrow="8"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="42"/>
+				</columnwidths>
+			</LayoutEngine>
 		</card_holder>
 		<dy_faction_leader
 			this="F553F636-673B-48CA-9CBA182FE7594976"
@@ -11719,8 +12168,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="16"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_paragraph_heading"/>
+						font_m_leading="3"
+						fontcat_name="header_16"/>
 				</newstate>
 			</states>
 		</dy_faction_leader>
@@ -11883,8 +12332,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"/>
+						font_m_leading="3"
+						fontcat_name="header_14"/>
 				</newstate>
 			</states>
 			<animations>
@@ -11938,8 +12387,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"/>
+						font_m_leading="3"
+						fontcat_name="header_14"/>
 				</default>
 			</states>
 			<LayoutEngine
@@ -12074,16 +12523,16 @@
 				<newstate
 					this="D8BA9D7C-BFF8-48DE-8312555E99427B46"
 					name="NewState"
-					width="830"
-					height="631"
+					width="776"
+					height="590"
 					uniqueguid="D8BA9D7C-BFF8-48DE-8312555E99427B46">
 					<imagemetrics>
 						<image
 							this="36CAB783-A2AB-4283-B37B25AC9CF8BE7C"
 							uniqueguid="36CAB783-A2AB-4283-B37B25AC9CF8BE7C"
 							componentimage="3DF54455-CA83-43D4-9BFE3693FD11CDB2"
-							width="830"
-							height="631"
+							width="776"
+							height="590"
 							tile="true"
 							margin="30.00,40.00,30.00,40.00"/>
 					</imagemetrics>
@@ -12222,8 +12671,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"/>
+						font_m_leading="3"
+						fontcat_name="header_14"/>
 				</newstate>
 			</states>
 		</highlight>
@@ -12241,8 +12690,8 @@
 				<newstate
 					this="33BAB938-0860-4271-869D82D304A3097A"
 					name="NewState"
-					width="820"
-					height="621"
+					width="766"
+					height="580"
 					uniqueguid="33BAB938-0860-4271-869D82D304A3097A"/>
 			</states>
 		</icon_holder>
@@ -12331,8 +12780,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_text_brand_warhammer3"/>
+						font_m_leading="3"
+						fontcat_name="header_12"/>
 				</active>
 				<inactive
 					this="8260E786-8DE0-409C-8FF739A81A8C8E9E"
@@ -12348,9 +12797,10 @@
 						textlabel="StateText_66e008f0"
 						font_m_font_name="brand_header"
 						font_m_size="12"
-						font_m_colour="#666666FF"
-						font_m_leading="1"
-						fontcat_name="fe_text_brand_inactive_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_12"
+						font_colour_override_preset_key="ui_font_inactive_grey"/>
 				</inactive>
 			</states>
 		</label_context_name>
@@ -12383,8 +12833,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,1.00,2.00,0.00"/>
 				</newstate>
 			</states>
@@ -12419,7 +12869,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<animations>
@@ -12509,7 +12959,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -12643,7 +13093,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</list_clip>
@@ -12969,9 +13419,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="941296CE-BB48-4F43-A7C16F38840DA40D"
@@ -13024,9 +13474,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -13077,9 +13527,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="C7DC30A0-672E-4A8D-AEB17EF852D4741E"
@@ -13133,9 +13583,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -13182,9 +13632,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 				<selected
 					this="999F9E2E-8831-4477-A8E03B88809F687C"
@@ -13230,9 +13680,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</selected>
 			</states>
 			<animations>
@@ -13358,8 +13808,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"/>
+						font_m_leading="3"
+						fontcat_name="header_14"/>
 				</newstate>
 			</states>
 			<animations>
@@ -13413,8 +13863,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"/>
+						font_m_leading="3"
+						fontcat_name="header_14"/>
 				</default>
 			</states>
 			<LayoutEngine
@@ -13480,9 +13930,6 @@
 				<property
 					name="movie_index"
 					value="2"/>
-				<property
-					name="path"
-					value="Front_end_selection_movies/cst_lokhir_fellhart"/>
 			</userproperties>
 			<states>
 				<newstate
@@ -13540,10 +13987,11 @@
 		<map
 			this="D2323668-DE25-4959-B9F1D819478C3AA2"
 			id="map"
-			offset="58.00,42.00"
+			offset="85.00,30.00"
 			clipimagestocomponent="true"
-			docking="Center"
-			component_anchor_point="0.50,0.50"
+			docking="Top Center"
+			dock_offset="0.00,30.00"
+			component_anchor_point="0.50,0.00"
 			priority="10"
 			tooltipslocalised="true"
 			uniqueguid="D2323668-DE25-4959-B9F1D819478C3AA2"
@@ -13566,8 +14014,8 @@
 				<newstate
 					this="BBD1C88F-A3C1-434C-B3FEACF4450BE076"
 					name="NewState"
-					width="820"
-					height="621"
+					width="766"
+					height="580"
 					interactive="true"
 					shader_name="border_alpha_blend"
 					uniqueguid="BBD1C88F-A3C1-434C-B3FEACF4450BE076">
@@ -13576,8 +14024,8 @@
 							this="2366FDFA-1C7B-48A3-A6312EB7CCD90EDF"
 							uniqueguid="2366FDFA-1C7B-48A3-A6312EB7CCD90EDF"
 							componentimage="41771D51-1CB5-4F1A-AF480E06AA1A4C2A"
-							width="820"
-							height="621"/>
+							width="766"
+							height="580"/>
 					</imagemetrics>
 				</newstate>
 			</states>
@@ -13589,13 +14037,14 @@
 							interpolationpropertymask="2"
 							targetmetrics_m_height="621"
 							targetmetrics_m_width="820"
-							targetmetrics_m_offset="200.00,0.00"
+							targetmetrics_m_offset="200.00,30.00"
 							is_movement_absolute="true"/>
 						<frame
 							interpolationtime="250"
 							interpolationpropertymask="2"
 							targetmetrics_m_height="621"
 							targetmetrics_m_width="820"
+							targetmetrics_m_offset="0.00,30.00"
 							is_movement_absolute="true"/>
 					</frames>
 				</oncreate>
@@ -13627,8 +14076,8 @@
 				<newstate
 					this="80F08765-89FC-4D1A-850B5BE65AD17B19"
 					name="NewState"
-					width="820"
-					height="621"
+					width="766"
+					height="580"
 					interactive="true"
 					uniqueguid="80F08765-89FC-4D1A-850B5BE65AD17B19">
 					<imagemetrics>
@@ -13636,8 +14085,8 @@
 							this="F83D1C8E-0055-4D84-8726AEE08F3D7B8B"
 							uniqueguid="F83D1C8E-0055-4D84-8726AEE08F3D7B8B"
 							componentimage="A853DE17-F30F-4B18-9CFE6AF58F917022"
-							width="820"
-							height="621"/>
+							width="766"
+							height="580"/>
 					</imagemetrics>
 				</newstate>
 			</states>
@@ -13936,11 +14385,19 @@
 			id="start_units"
 			offset="0.00,30.00"
 			allowhorizontalresize="false"
-			allowverticalresize="false"
 			priority="60"
 			tooltipslocalised="true"
 			uniqueguid="50604084-BA8B-451C-A737782788B35464"
 			currentstate="603C10DD-D731-4989-9ADF753853DD336D">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="ResizeToFitTarget">
+					<child_m_user_properties>
+						<property
+							name="target"
+							value="card_holder"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
 			<userproperties>
 				<property
 					name="Margin"
@@ -13963,6 +14420,7 @@
 		<tab_campaign
 			this="7F46F3E3-8A5A-436E-AF305AFD7B3B685D"
 			id="tab_campaign"
+			visible="false"
 			docking="Top Right"
 			component_anchor_point="1.00,0.00"
 			tooltipslocalised="true"
@@ -14086,13 +14544,8 @@
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
-					callback_id="ContextTooltipSetter"
-					context_object_id="CcoEffect"
-					context_function_id="GetIf(IsContextValid(AbilityContext), &quot;{{tt:ui/common ui/special_ability_tooltip}}&quot;)"/>
-				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
-					context_object_id="CcoEffect"
-					context_function_id="AbilityContext"/>
+					callback_id="AbilityEffectIcon"
+					context_object_id="CcoEffect"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -14129,7 +14582,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<animations>
@@ -14192,13 +14645,8 @@
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
-					context_object_id="CcoEffect"
-					context_function_id="AbilityContext"/>
-				<callback_with_context
-					callback_id="ContextTooltipSetter"
-					context_object_id="CcoEffect"
-					context_function_id="GetIf(IsContextValid(AbilityContext), &quot;{{tt:ui/common ui/special_ability_tooltip}}&quot;)"/>
+					callback_id="AbilityEffectIcon"
+					context_object_id="CcoEffect"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -14235,7 +14683,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<animations>
@@ -14263,7 +14711,7 @@
 		<template_icon_army
 			this="EC0FA61C-A210-4302-8AFA68B8C8E2569A"
 			id="template_icon_army"
-			offset="21.00,21.00"
+			offset="20.00,21.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			priority="60"
@@ -14717,8 +15165,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"/>
+						font_m_leading="3"
+						fontcat_name="header_14"/>
 				</newstate>
 			</states>
 		</text_input>
@@ -14749,8 +15197,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,1.00,2.00,0.00"/>
 				</newstate>
 			</states>
@@ -14822,8 +15270,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_text_brand_warhammer3"/>
+						font_m_leading="3"
+						fontcat_name="header_12"/>
 				</active>
 			</states>
 		</change_race>
@@ -14936,8 +15384,9 @@
 		<blocker
 			this="77B1876E-6C3C-43F0-A8750D13E0742B70"
 			id="blocker"
-			offset="0.00,110.00"
+			offset="0.00,108.00"
 			allowverticalresize="false"
+			dock_offset="0.00,-2.00"
 			priority="60"
 			tooltipslocalised="true"
 			uniqueguid="77B1876E-6C3C-43F0-A8750D13E0742B70"
@@ -14958,8 +15407,7 @@
 			id="blocker"
 			offset="0.00,108.00"
 			allowverticalresize="false"
-			docking="Bottom Center"
-			component_anchor_point="0.50,1.00"
+			dock_offset="0.00,-2.00"
 			priority="60"
 			tooltipslocalised="true"
 			uniqueguid="27606E63-7EAE-4617-853DE04F816746C3"
@@ -15003,7 +15451,7 @@
 					this="439D591E-B09F-44BF-8979BAD038F2DC6D"
 					name="default"
 					width="400"
-					height="112"
+					height="110"
 					uniqueguid="439D591E-B09F-44BF-8979BAD038F2DC6D"/>
 			</states>
 			<LayoutEngine
@@ -15072,6 +15520,12 @@
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="40EE447D-91EC-42BE-8480F0E4E4F8C3A0"
+					uniqueguid="40EE447D-91EC-42BE-8480F0E4E4F8C3A0"
+					imagepath="ui/skins/default/parchment_divider.png"/>
+			</componentimages>
 			<states>
 				<newstate
 					this="19E59239-AC0F-4D83-9E6E8731DE1879CC"
@@ -15080,11 +15534,20 @@
 					height="803"
 					interactive="true"
 					uniqueguid="19E59239-AC0F-4D83-9E6E8731DE1879CC">
+					<imagemetrics>
+						<image
+							this="920A9BB7-3889-46C8-ACC1D6D78E7C3131"
+							uniqueguid="920A9BB7-3889-46C8-ACC1D6D78E7C3131"
+							componentimage="40EE447D-91EC-42BE-8480F0E4E4F8C3A0"
+							width="440"
+							height="803"
+							margin="25.00,25.00,25.00,25.00"/>
+					</imagemetrics>
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</details_listview>
@@ -15093,8 +15556,8 @@
 			id="details_subpanel"
 			offset="0.00,5.00"
 			allowhorizontalresize="false"
-			docking="Bottom Center"
-			component_anchor_point="0.50,1.00"
+			docking="Top Left"
+			dock_offset="0.00,5.00"
 			priority="65"
 			tooltipslocalised="true"
 			uniqueguid="323D62AC-E737-439A-8863929A7C97824A"
@@ -15117,34 +15580,19 @@
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="ED0EA935-86F2-420E-A5116FA406380859"
-					uniqueguid="ED0EA935-86F2-420E-A5116FA406380859"
-					imagepath="ui/skins/default/parchment_divider.png"/>
-			</componentimages>
 			<states>
 				<newstate
 					this="F42FD0CE-9C78-42BE-9288887AC002F374"
 					name="NewState"
 					width="440"
-					height="798"
+					height="456"
 					interactive="true"
 					uniqueguid="F42FD0CE-9C78-42BE-9288887AC002F374">
-					<imagemetrics>
-						<image
-							this="D11A119D-9962-42CE-8FD7CB2D523B6AFA"
-							uniqueguid="D11A119D-9962-42CE-8FD7CB2D523B6AFA"
-							componentimage="ED0EA935-86F2-420E-A5116FA406380859"
-							width="440"
-							height="798"
-							margin="25.00,25.00,25.00,25.00"/>
-					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -15861,9 +16309,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="583DAEEF-03B7-4D59-B7CF850C91F54182"
@@ -15905,9 +16353,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -15948,9 +16396,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="9036D71F-A888-491D-97617E61C8938A9D"
@@ -16002,9 +16450,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -16039,9 +16487,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 				<selected
 					this="E6CF445C-D3EB-4A40-B4A65C4A275A823D"
@@ -16089,9 +16537,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</selected>
 				<selected_down
 					this="4BB6D224-FB44-43B5-B0C9A023071949CA"
@@ -16133,9 +16581,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</selected_down>
 				<selected_down_off
@@ -16176,9 +16624,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</selected_down_off>
 				<selected_hover
 					this="CE83125D-EAD4-4C7C-97F00C372DD83DD9"
@@ -16230,9 +16678,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</selected_hover>
 				<selected_inactive
@@ -16267,9 +16715,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</selected_inactive>
 			</states>
 		</dropdown_battle>
@@ -16389,9 +16837,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="F7FFA6E1-78B5-491C-B0A70CFB50E66537"
@@ -16437,9 +16885,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -16484,9 +16932,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="A9D8217D-66F9-412C-98047707E22EC9CE"
@@ -16543,9 +16991,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -16584,9 +17032,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 				<selected
 					this="3BA53266-084C-44BB-821AF2BC2DB3A522"
@@ -16639,9 +17087,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</selected>
 				<selected_down
 					this="BEEE956C-B7D6-4874-94BFC555754BACA5"
@@ -16687,9 +17135,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</selected_down>
 				<selected_down_off
@@ -16734,9 +17182,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</selected_down_off>
 				<selected_hover
 					this="BA96056F-1FAE-4BBD-ADE00E0D92D9FBC7"
@@ -16793,9 +17241,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</selected_hover>
 				<selected_inactive
@@ -16834,9 +17282,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</selected_inactive>
 			</states>
 		</dropdown_campaign>
@@ -16953,9 +17401,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="87365C9D-BFFB-477C-A3265399632FE72B"
@@ -17001,9 +17449,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -17048,9 +17496,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="71C878B7-9AF8-4FBB-A758B2EE0C89F0A7"
@@ -17107,9 +17555,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -17148,9 +17596,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 				<selected
 					this="B786FEC5-FFC8-4CFA-A469B1B1CCF76ABA"
@@ -17203,9 +17651,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</selected>
 				<selected_down
 					this="42E8CD79-E798-4C9C-A74919E8C81EB4EA"
@@ -17251,9 +17699,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</selected_down>
 				<selected_down_off
@@ -17298,9 +17746,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</selected_down_off>
 				<selected_hover
 					this="A1ACE88F-235C-4291-82BAA6C58FDE8A9E"
@@ -17357,9 +17805,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</selected_hover>
 				<selected_inactive
@@ -17398,18 +17846,17 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</selected_inactive>
 			</states>
 		</dropdown_campaign_advice>
 		<dy_descr
 			this="55D792EB-0686-424D-A51F45C8EA496700"
 			id="dy_descr"
-			offset="0.00,348.00"
+			offset="0.00,344.00"
 			allowhorizontalresize="false"
-			allowverticalresize="false"
 			priority="65"
 			tooltipslocalised="true"
 			uniqueguid="55D792EB-0686-424D-A51F45C8EA496700"
@@ -17431,17 +17878,19 @@
 					this="9EE39379-DFFB-45B5-BBDEC6165CC53C1A"
 					name="default"
 					width="440"
-					height="440"
+					height="102"
 					uniqueguid="9EE39379-DFFB-45B5-BBDEC6165CC53C1A">
 					<component_text
 						text="[PH]Orcs and Goblins are the scourge of the Old World. Orcs are built for violence; Goblins, by contrast, are smaller but more cunning. Collectively known as Greenskins, they are an aggressive and brutal race with an unquenchable love of fighting."
 						textxoffset="20.00,20.00"
-						textyoffset="4.00,0.00"
+						textyoffset="5.00,5.00"
+						texthbehaviour="Resize"
 						textlabel="StateText_bae21a3e"
 						font_m_size="12"
-						font_m_colour="#A99989FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text_faded_warhammer3"/>
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
 				</default>
 			</states>
 		</dy_descr>
@@ -17482,9 +17931,10 @@
 						texthbehaviour="Resize"
 						textlabel="StateText_998b1427"
 						font_m_size="12"
-						font_m_colour="#A99989FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text_faded_warhammer3"/>
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
 				</default>
 			</states>
 		</dy_descr>
@@ -17525,9 +17975,10 @@
 						texthbehaviour="Resize"
 						textlabel="StateText_17736735"
 						font_m_size="12"
-						font_m_colour="#A99989FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text_faded_warhammer3"/>
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
 				</default>
 			</states>
 		</dy_descr>
@@ -17561,8 +18012,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"/>
+						font_m_leading="3"
+						fontcat_name="header_14"/>
 				</default>
 			</states>
 		</dy_header>
@@ -17596,8 +18047,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"/>
+						font_m_leading="3"
+						fontcat_name="header_14"/>
 				</default>
 			</states>
 		</dy_header>
@@ -17650,8 +18101,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"/>
+						font_m_leading="3"
+						fontcat_name="header_14"/>
 				</default>
 			</states>
 		</dy_race>
@@ -17688,8 +18139,8 @@
 						textlabel="StateText_3842f9af"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</dy_selected_txt>
@@ -17726,8 +18177,8 @@
 						textlabel="StateText_933f7bdc"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</dy_selected_txt>
@@ -17764,8 +18215,8 @@
 						textlabel="StateText_bffb00f0"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</dy_selected_txt>
@@ -18159,7 +18610,7 @@
 		<first_time_panel
 			this="3E58886B-8E6D-4B69-B8464628D124B3A7"
 			id="first_time_panel"
-			offset="350.00,324.00"
+			offset="350.00,325.00"
 			allowhorizontalresize="false"
 			docking="Center"
 			component_anchor_point="0.50,0.50"
@@ -18186,7 +18637,7 @@
 					this="C9321263-4956-443C-8F65D8BC5A738D98"
 					name="default"
 					width="900"
-					height="252"
+					height="250"
 					uniqueguid="C9321263-4956-443C-8F65D8BC5A738D98">
 					<imagemetrics>
 						<image
@@ -18194,7 +18645,7 @@
 							uniqueguid="0DE967E7-66EA-4FA8-A6F5CDB389E5F80B"
 							componentimage="B0708E47-7695-41D9-AFE30906770CC11B"
 							width="900"
-							height="252"
+							height="250"
 							tile="true"
 							margin="5.00,5.00,5.00,5.00"/>
 						<image
@@ -18202,7 +18653,7 @@
 							uniqueguid="EE772669-B7A7-4564-8AEA06F5B4AFBBB7"
 							componentimage="AD62E8BF-8A62-4A86-8741123E79FEFA2D"
 							width="900"
-							height="252"
+							height="250"
 							tile="true"
 							margin="30.00,30.00,30.00,30.00"/>
 					</imagemetrics>
@@ -18221,7 +18672,7 @@
 		<footer
 			this="3B810D5F-1841-438C-B2CBB2F3F8D4E543"
 			id="footer"
-			offset="0.00,182.00"
+			offset="0.00,180.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			tooltipslocalised="true"
@@ -18780,8 +19231,8 @@
 						textlabel="StateText_e1140bde"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</label_tx>
@@ -18813,7 +19264,7 @@
 					interactive="true"
 					uniqueguid="D4FC0A6A-BCEE-4CCC-9FC793889F527DCA">
 					<component_text
-						text="Advice Frequency"
+						text="Advice frequency"
 						textvalign="Center"
 						texthbehaviour="Never split"
 						textlocalised="true"
@@ -18821,7 +19272,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</label_tx>
@@ -19037,7 +19488,7 @@
 					this="2F60F867-9017-4A2E-B13CEFF854C81FA8"
 					name="NewState"
 					width="716"
-					height="838"
+					height="893"
 					shadervars="0.00,30.00,0.00,30.00"
 					uniqueguid="2F60F867-9017-4A2E-B13CEFF854C81FA8"/>
 			</states>
@@ -19075,7 +19526,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</list_clip>
@@ -19266,7 +19717,7 @@
 					this="A2D77E8A-9B67-42E4-A95B23E3E0614598"
 					name="default"
 					width="440"
-					height="112"
+					height="110"
 					uniqueguid="A2D77E8A-9B67-42E4-A95B23E3E0614598"/>
 			</states>
 			<LayoutEngine
@@ -19278,7 +19729,7 @@
 		<mechanics_list
 			this="030ADE3A-3911-439F-88FBAD812BD06A8B"
 			id="mechanics_list"
-			offset="0.00,36.00"
+			offset="0.00,38.00"
 			allowhorizontalresize="false"
 			priority="65"
 			tooltipslocalised="true"
@@ -19296,19 +19747,20 @@
 					callback_id="ContextPropagator"
 					context_object_id="CcoCampaignStartInfo"
 					context_function_id="StoredContext(&quot;CcoCultureRecord&quot;)"/>
-				<callback_with_context callback_id="ResizeToFillRemaining"/>
+				<callback_with_context callback_id="#ResizeToFillRemaining"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
 					this="E8EDE4CE-3AD5-4CCF-A268B68D71B0C05C"
 					name="NewState"
 					width="400"
-					height="250"
+					height="34"
 					interactive="true"
 					uniqueguid="E8EDE4CE-3AD5-4CCF-A268B68D71B0C05C"/>
 			</states>
 			<LayoutEngine
 				type="List"
+				sizetocontent="true"
 				margins="-15.00,0.00"
 				is_listview_lookup_enabled="false">
 				<columnwidths>
@@ -20054,8 +20506,8 @@
 						textlabel="StateText_a589b761"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</row_tx>
@@ -20084,8 +20536,8 @@
 						textlabel="StateText_63b7a3f0"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</row_tx>
@@ -20114,8 +20566,8 @@
 						textlabel="StateText_4dcf381c"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</row_tx>
@@ -20144,8 +20596,8 @@
 						textlabel="StateText_9212afa4"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</row_tx>
@@ -20174,8 +20626,8 @@
 						textlabel="StateText_196ff0ae"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</row_tx>
@@ -20206,8 +20658,8 @@
 						textlabel="StateText_2a15cd6a"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</row_tx>
@@ -20236,8 +20688,8 @@
 						textlabel="StateText_6059d3fc"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</row_tx>
@@ -20266,8 +20718,8 @@
 						textlabel="StateText_2e67781b"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</row_tx>
@@ -20297,7 +20749,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</row_tx>
@@ -20328,8 +20780,8 @@
 						textlabel="StateText_966aa545"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</row_tx>
@@ -20358,8 +20810,8 @@
 						textlabel="StateText_e63887f5"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</row_tx>
@@ -20388,8 +20840,8 @@
 						textlabel="StateText_69562a72"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</row_tx>
@@ -20507,7 +20959,7 @@
 					this="B6B33D5A-75A9-4DD1-B35A60180151B76F"
 					name="default"
 					width="400"
-					height="112"
+					height="110"
 					pixelcollision="true"
 					shader_name="brighten_t0"
 					shadervars="-0.80,0.00,0.00,0.00"
@@ -20542,6 +20994,13 @@
 					uniqueguid="62DA34E1-A17C-483F-83C59F795AF1036D"
 					stateeditordisplaypos="108.00,9.00"/>
 			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="400"/>
+				</columnwidths>
+			</LayoutEngine>
 		</template_campaign_difficulty>
 		<template_mechanic_entry
 			this="19650815-53C2-4B3B-9410A523FA5A5602"
@@ -20600,10 +21059,9 @@
 							this="4DE756E4-1AEC-4CE5-98259A127D79B0E0"
 							uniqueguid="4DE756E4-1AEC-4CE5-98259A127D79B0E0"
 							componentimage="69D4504E-F79C-484D-A4995005CCAA1A6A"
-							offset="0.00,-2.00"
 							width="36"
 							height="36"
-							dockpoint="Center Left"
+							dockpoint="Top Left"
 							canresizeheight="false"
 							canresizewidth="false"/>
 					</imagemetrics>
@@ -20614,9 +21072,10 @@
 						texthbehaviour="Resize"
 						textlabel="StateText_84a68903"
 						font_m_size="12"
-						font_m_colour="#A0FF37FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_tooltip_green"/>
+						fontcat_name="body_12"
+						font_colour_override_preset_key="green"/>
 				</newstate>
 			</states>
 			<animations>
@@ -20676,8 +21135,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"/>
+						font_m_leading="3"
+						fontcat_name="header_14"/>
 				</newstate>
 			</states>
 		</campaign_difficulty_txt>
@@ -20716,8 +21175,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"/>
+						font_m_leading="3"
+						fontcat_name="header_14"/>
 				</newstate>
 			</states>
 		</battle_difficulty_txt>
@@ -20746,8 +21205,8 @@
 						font_m_font_name="la_gioconda_uppercase"
 						font_m_size="18"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_section_heading"/>
+						font_m_leading="3"
+						fontcat_name="header_18_bold"/>
 				</default>
 			</states>
 		</tx_battle>
@@ -20775,8 +21234,8 @@
 						font_m_font_name="la_gioconda_uppercase"
 						font_m_size="18"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_section_heading"/>
+						font_m_leading="3"
+						fontcat_name="header_18_bold"/>
 				</default>
 			</states>
 		</tx_campaign>
@@ -21468,9 +21927,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="16EDD973-1CAD-4D8C-A7127F9C1FF8DBF7"
@@ -21498,9 +21957,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -21527,9 +21986,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="CBE76D50-0D3D-4DC8-AAEB3D3261ADC3A9"
@@ -21561,9 +22020,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -21587,9 +22046,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 				<selected
 					this="20F6C1B0-D579-4330-860875851D0EA772"
@@ -21617,9 +22076,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</selected>
 			</states>
 		</prologue_entry>
@@ -21750,9 +22209,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down_off
 					this="A626B3A3-BC85-40A7-903088085E4A95D9"
@@ -21787,9 +22246,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="A6F12E2B-E4C3-47EB-8331AFCAB239CCBE"
@@ -21838,9 +22297,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</hover>
 				<inactive
 					this="2A2C0A26-C8C7-4F23-90F08AC8A407929D"
@@ -21883,9 +22342,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 			</states>
 		</max_handle>
@@ -21928,8 +22387,8 @@
 						textlabel="StateText_192796a3"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</label_tx>
@@ -21960,7 +22419,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</label_tx>
@@ -21992,7 +22451,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</label_tx>
@@ -22051,7 +22510,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</max_value_txt>
@@ -22110,7 +22569,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</min_value_txt>
@@ -22167,7 +22626,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</scale_percentage_tx>
@@ -22533,8 +22992,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</active>
 				<down
@@ -22563,8 +23022,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</down>
 				<hover
@@ -22601,8 +23060,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -22630,8 +23089,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						text_shader_name="set_greyscale_t0"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</inactive>
@@ -22816,9 +23275,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="F177FBC7-008D-40BA-8D8CF9E24A7D5EB8"
@@ -22846,9 +23305,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -22875,9 +23334,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="9E4330CA-BDCA-4738-A4A1752CE2008A8F"
@@ -22909,9 +23368,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -22934,9 +23393,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 				<selected
 					this="AE7D08B5-7886-4D7E-85BDE03464151BB1"
@@ -23025,9 +23484,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="A958C995-9863-4D3C-A577933AEEB91B63"
@@ -23055,9 +23514,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -23084,9 +23543,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="A28A7BD7-07D0-4166-926CF6EF4F6443A6"
@@ -23118,9 +23577,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -23143,9 +23602,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 				<selected
 					this="78FA1052-32D0-4D32-9CFF824813B7B606"
@@ -23245,9 +23704,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="8DE50E16-A71A-43C5-849A0DF616D9861E"
@@ -23284,9 +23743,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -23320,9 +23779,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="5C5E78C0-7C0B-4919-821A9926C0CBB81D"
@@ -23363,9 +23822,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -23396,9 +23855,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 				<selected
 					this="50D75572-3F20-4837-8591AD8356EA3A8C"
@@ -24187,9 +24646,10 @@
 						texthalign="Center"
 						textlabel="StateText_84b2a8aa"
 						font_m_size="12"
-						font_m_colour="#A99989FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text_faded_warhammer3"/>
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
 				</default>
 			</states>
 			<animations>
@@ -24775,9 +25235,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="B3F88A14-F054-4BAA-B8264C4A92861D1F"
@@ -24805,9 +25265,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -24834,9 +25294,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="47289C34-75CD-4DED-B252DFAD17262D96"
@@ -24868,9 +25328,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -24893,9 +25353,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 				<selected
 					this="DD1B08E2-3DF2-4340-8384E4E2C4AB29F0"
@@ -24929,7 +25389,7 @@
 		<h_line
 			this="E5F05217-A7D0-42C9-94ED147F0E0B8FD6"
 			id="h_line"
-			offset="20.00,334.00"
+			offset="20.00,330.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			priority="65"
@@ -24964,7 +25424,7 @@
 		<icon_recommended
 			this="B0FF9C8A-4DA4-4756-99FD45102865E507"
 			id="icon_recommended"
-			offset="85.00,0.00"
+			offset="85.00,2.00"
 			allowverticalresize="false"
 			priority="65"
 			tooltipslocalised="true"
@@ -25013,9 +25473,10 @@
 						textlocalised="true"
 						textlabel="StateText_366b4bd1"
 						font_m_size="12"
-						font_m_colour="#A99989FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text_faded_warhammer3"/>
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
 				</active>
 			</states>
 		</icon_recommended>
@@ -25078,7 +25539,7 @@
 				<component_image
 					this="8632AB85-DEDB-4172-84675E94D6FEA706"
 					uniqueguid="8632AB85-DEDB-4172-84675E94D6FEA706"
-					imagepath="ui/skins/warhammer3/fe_backgraund_gradient.png"/>
+					imagepath="ui/skins/default/fe_backgraund_gradient.png"/>
 			</componentimages>
 			<states>
 				<newstate
@@ -25143,7 +25604,6 @@
 			id="top_part_holder"
 			offset="20.00,30.00"
 			allowhorizontalresize="false"
-			allowverticalresize="false"
 			priority="65"
 			tooltipslocalised="true"
 			uniqueguid="09F458C8-4D7F-4C3C-96896403C5B8913A"
@@ -25157,12 +25617,15 @@
 					this="68F84C70-0E6A-45EE-80212169144B0E56"
 					name="default"
 					width="400"
-					height="294"
+					height="290"
 					uniqueguid="68F84C70-0E6A-45EE-80212169144B0E56"/>
 			</states>
 			<LayoutEngine
 				type="List"
 				spacing="0.00,10.00"
+				sizetocontent="true"
+				min_dimensions="0.00,290.00"
+				margins="2.00,0.00"
 				horizontal_alignment="Center">
 				<columnwidths>
 					<column width="400"/>
@@ -25525,7 +25988,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</template_card>
@@ -25712,7 +26175,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</active>
 				<hover
 					this="E3499213-9A5C-4E17-BACFB51E8A881A09"
@@ -25787,7 +26250,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"
+						fontcat_name="body_12"
 						textshadervars="0.20,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -25858,7 +26321,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"
+						fontcat_name="body_12"
 						textshadervars="1.00,0.50,0.00,0.00"/>
 				</inactive>
 				<selected
@@ -25939,7 +26402,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"
+						fontcat_name="body_12"
 						textshadervars="0.20,0.00,0.00,0.00"/>
 				</selected>
 				<selected_hover
@@ -26024,7 +26487,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"
+						fontcat_name="body_12"
 						textshadervars="0.20,0.00,0.00,0.00"/>
 				</selected_hover>
 			</states>
@@ -26658,8 +27121,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_text_brand_warhammer3"
+						font_m_leading="3"
+						fontcat_name="header_12"
 						text_shader_name="set_greyscale_t0"
 						textshadervars="0.00,0.70,0.00,0.00"/>
 				</active>
@@ -26679,8 +27142,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_text_brand_warhammer3"/>
+						font_m_leading="3"
+						fontcat_name="header_12"/>
 				</selected>
 			</states>
 		</button_txt>
@@ -28723,8 +29186,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_text_brand_warhammer3"
+						font_m_leading="3"
+						fontcat_name="header_12"
 						text_shader_name="set_greyscale_t0"
 						textshadervars="0.00,0.70,0.00,0.00"/>
 				</active>
@@ -28744,8 +29207,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_text_brand_warhammer3"/>
+						font_m_leading="3"
+						fontcat_name="header_12"/>
 				</selected>
 			</states>
 		</button_txt>
@@ -28778,8 +29241,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_text_brand_warhammer3"
+						font_m_leading="3"
+						fontcat_name="header_12"
 						text_shader_name="set_greyscale_t0"
 						textshadervars="0.00,0.70,0.00,0.00"/>
 				</active>
@@ -28799,8 +29262,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_text_brand_warhammer3"/>
+						font_m_leading="3"
+						fontcat_name="header_12"/>
 				</selected>
 			</states>
 		</button_txt>
@@ -32837,8 +33300,7 @@
 			docking="Center Right External"
 			component_anchor_point="-0.00,0.50"
 			priority="100"
-			tooltipslocalised="true"
-			componentleveltooltip="When checked, any one of the selected endgame scenarios listed below could trigger. At least one scenario must be selected for an endgame to trigger."
+			componentleveltooltip="{{tr:enable_end_game_tooltip}}"
 			tooltiplabel="ComponentTooltip_fb356690"
 			uniqueguid="B16085F3-F544-4F79-B79F433AC2CCB3BF"
 			currentstate="2A0195C1-F35F-4B04-BED4F2CBD1BF0785">
@@ -32870,8 +33332,8 @@
 						textlabel="StateText_a40b126f"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</label_tx>
@@ -33087,7 +33549,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"
+						fontcat_name="body_12"
 						textshadervars="0.00,1.00,2.00,0.00"/>
 				</newstate>
 			</states>
@@ -33157,7 +33619,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"
+						fontcat_name="body_12"
 						textshadervars="0.00,1.00,2.00,0.00"/>
 				</newstate>
 			</states>
@@ -33461,9 +33923,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="E36E49AD-58B5-494B-A89678E757604448"
@@ -33491,9 +33953,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -33520,9 +33982,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="7D88566A-F573-478F-A7501363D5669358"
@@ -33554,9 +34016,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -33580,9 +34042,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 			</states>
 			<animations>
@@ -34094,8 +34556,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</active>
 				<down
@@ -34124,8 +34586,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</down>
 				<hover
@@ -34162,8 +34624,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -34191,8 +34653,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						text_shader_name="set_greyscale_t0"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</inactive>
@@ -34255,8 +34717,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</active>
 				<down
@@ -34285,8 +34747,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</down>
 				<hover
@@ -34323,8 +34785,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -34352,8 +34814,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						text_shader_name="set_greyscale_t0"
 						textshadervars="0.00,0.50,0.00,0.00"/>
 				</inactive>
@@ -34435,9 +34897,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="9711F20E-0065-45CA-86789D6D9B8A256A"
@@ -34471,9 +34933,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -34505,9 +34967,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="4FE50011-C938-41DE-AB69BE09DA0BF14F"
@@ -34538,9 +35000,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -34562,9 +35024,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 			</states>
 		</campaign_image>
@@ -34588,6 +35050,9 @@
 						<property
 							name="Single Selection"
 							value="1"/>
+						<property
+							name="dont_simulate_click"
+							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
@@ -34662,9 +35127,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="9A932425-BA8B-4995-97A8893B363E8D08"
@@ -34693,9 +35158,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -34722,9 +35187,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="18200321-7700-4144-88EC670CD6A913A4"
@@ -34756,9 +35221,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -34781,9 +35246,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 			</states>
 		</frame>
@@ -34844,9 +35309,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="316D544B-0E46-4F29-9CCCD2FEA1EC88FD"
@@ -34874,9 +35339,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -34903,9 +35368,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="EF9EB00D-C23A-4AD4-8A51D0D8B203325B"
@@ -34937,9 +35402,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -34962,9 +35427,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 				<selected
 					this="BC5CD59E-DFC3-476E-9A75B01DF3AC4086"
@@ -35496,9 +35961,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="74C35D0E-F7A3-4AFD-A1B013BE95C82802"
@@ -35526,9 +35991,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -35555,9 +36020,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="32758093-EDBD-43C2-AE14904034A92549"
@@ -35589,9 +36054,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -35615,9 +36080,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 				<selected
 					this="87225935-80EE-408B-85F25C25CC32A0CF"
@@ -35645,9 +36110,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</selected>
 			</states>
 		</template_campaign_entry>
@@ -35993,7 +36458,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</default>
 			</states>
 			<animations>
@@ -36057,8 +36522,8 @@
 						textlabel="StateText_298f50d8"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</default>
 			</states>
 		</dy_start_pos_text>
@@ -36569,8 +37034,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"/>
+						font_m_leading="3"
+						fontcat_name="header_14"/>
 				</newstate>
 			</states>
 		</header_label>
@@ -38834,9 +39299,9 @@
 					<component_text
 						textvalign="Center"
 						texthalign="Center"
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="ingame_text_small_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -38952,9 +39417,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="822A5965-EA5A-465E-912B101D2BF7161B"
@@ -38996,9 +39461,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -39039,9 +39504,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="B25BD9AC-8A2A-497C-A6EFC73BE9AED970"
@@ -39093,9 +39558,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -39130,9 +39595,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 				<selected
 					this="2A017EF6-2A94-4F3B-8FACE25D98D96352"
@@ -39180,9 +39645,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</selected>
 				<selected_down
 					this="FD20781D-8F62-47A6-8009823ACE0B8F4E"
@@ -39224,9 +39689,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</selected_down>
 				<selected_down_off
@@ -39267,9 +39732,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</selected_down_off>
 				<selected_hover
 					this="315DFDAC-5AD5-418F-8F6AEB6F0DF0BF35"
@@ -39321,9 +39786,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</selected_hover>
 				<selected_inactive
@@ -39358,9 +39823,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</selected_inactive>
 			</states>
 		</dropdown_battle_time>
@@ -39397,8 +39862,8 @@
 						textlabel="StateText_616f11fe"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</dy_selected_txt>
@@ -39437,8 +39902,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"/>
+						font_m_leading="3"
+						fontcat_name="header_14"/>
 				</newstate>
 			</states>
 		</header_label>
@@ -39477,8 +39942,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"/>
+						font_m_leading="3"
+						fontcat_name="header_14"/>
 				</newstate>
 			</states>
 		</header_label>
@@ -39517,8 +39982,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"/>
+						font_m_leading="3"
+						fontcat_name="header_14"/>
 				</newstate>
 			</states>
 		</header_label>
@@ -39593,8 +40058,8 @@
 						textlabel="StateText_d4c5f995"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</label_tx>
@@ -39637,8 +40102,8 @@
 						textlabel="StateText_8c6dfe19"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</label_tx>
@@ -39681,8 +40146,8 @@
 						textlabel="StateText_d32a237f"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</label_tx>
@@ -39713,14 +40178,14 @@
 					disabled="true"
 					uniqueguid="FED1435C-1F1F-4E0C-A680A4E3DB20AA98">
 					<component_text
-						text="Time Limit"
+						text="Time limit"
 						textvalign="Center"
 						textlocalised="true"
 						textlabel="StateText_91b34d57"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</label_txt>
@@ -39836,8 +40301,8 @@
 						textlabel="StateText_1399024a"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</row_tx>
@@ -39866,8 +40331,8 @@
 						textlabel="StateText_61f27545"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</row_tx>
@@ -39896,8 +40361,8 @@
 						textlabel="StateText_2903f3fc"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</row_tx>
@@ -39926,15 +40391,15 @@
 						textlabel="StateText_f8f4980b"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</row_tx>
 		<saving_header
 			this="4418EDAE-796D-429D-9A954E66164A7BA5"
 			id="saving_header"
-			offset="0.00,686.00"
+			offset="0.00,741.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			priority="60"
@@ -40518,7 +40983,7 @@
 		<saving_settings
 			this="B90CCE12-F156-46DB-9091B083CC8F0003"
 			id="saving_settings"
-			offset="0.00,754.00"
+			offset="0.00,809.00"
 			allowhorizontalresize="false"
 			priority="60"
 			tooltipslocalised="true"
@@ -40620,7 +41085,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</text_input_autosave_limit>
@@ -40845,9 +41310,9 @@
 					uniqueguid="E71F6CEC-1F52-43BF-A0533909A9D5EF95">
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -40883,9 +41348,9 @@
 					uniqueguid="E68F37C3-C886-4BBC-AA189CA0906A2B09">
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -40928,8 +41393,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"/>
+						font_m_leading="3"
+						fontcat_name="header_14"/>
 				</default>
 			</states>
 		</dy_culture>
@@ -40966,7 +41431,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</default>
 			</states>
 		</dy_descr>
@@ -41007,7 +41472,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</default>
 			</states>
 		</dy_descr>
@@ -41042,8 +41507,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"/>
+						font_m_leading="3"
+						fontcat_name="header_14"/>
 				</default>
 			</states>
 		</dy_race>
@@ -41071,7 +41536,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</faction_lore>
@@ -41183,7 +41648,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</list_clip>
@@ -41209,7 +41674,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</list_clip>
@@ -41234,7 +41699,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</lord_lore>
@@ -41373,9 +41838,10 @@
 						texthbehaviour="Resize"
 						textlabel="StateText_988f0128"
 						font_m_size="12"
-						font_m_colour="#A0FF37FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_tooltip_green"/>
+						fontcat_name="body_12"
+						font_colour_override_preset_key="green"/>
 				</newstate>
 			</states>
 			<animations>
@@ -41669,8 +42135,8 @@
 						font_m_font_name="la_gioconda_uppercase"
 						font_m_size="24"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="4"
-						fontcat_name="fe_page_heading"
+						font_m_leading="3"
+						fontcat_name="header_24_bold"
 						text_shader_name="drop_shadow_t0"
 						textshadervars="0.00,-2.00,1.00,0.00"/>
 				</default>
@@ -41701,8 +42167,8 @@
 						font_m_font_name="la_gioconda_uppercase"
 						font_m_size="18"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_section_heading"
+						font_m_leading="3"
+						fontcat_name="header_18_bold"
 						text_shader_name="drop_shadow_t0"
 						textshadervars="0.00,-2.00,1.00,0.00"/>
 				</default>
@@ -41735,8 +42201,8 @@
 						font_m_font_name="la_gioconda_uppercase"
 						font_m_size="18"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_section_heading"
+						font_m_leading="3"
+						fontcat_name="header_18_bold"
 						text_shader_name="drop_shadow_t0"
 						textshadervars="0.00,-2.00,1.00,0.00"/>
 				</default>
@@ -42039,7 +42505,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</default>
 			</states>
 			<animations>
@@ -42112,9 +42578,9 @@
 					stateeditordisplaypos="40.00,24.00">
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 			</states>
 		</beta_tooltip>
@@ -42153,9 +42619,9 @@
 					stateeditordisplaypos="40.00,24.00">
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 			</states>
 		</beta_tooltip>
@@ -42197,9 +42663,9 @@
 					stateeditordisplaypos="40.00,24.00">
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 			</states>
 		</beta_tooltip>
@@ -42509,9 +42975,10 @@
 						textlabel="StateText_a721c7a7"
 						font_m_font_name="georgia_italic"
 						font_m_size="12"
-						font_m_colour="#A99F89FF"
-						font_m_leading="1"
-						fontcat_name="fe_italic"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12_italic"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
 				</default>
 			</states>
 		</campaign_label>
@@ -42543,9 +43010,10 @@
 						textlabel="StateText_adb8f0d"
 						font_m_font_name="georgia_italic"
 						font_m_size="12"
-						font_m_colour="#A99F89FF"
-						font_m_leading="1"
-						fontcat_name="fe_italic"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12_italic"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
 				</default>
 			</states>
 		</campaign_label>
@@ -42725,5 +43193,990 @@
 				</columnwidths>
 			</LayoutEngine>
 		</holder_name_culture>
+		<climates
+			this="FABA49E0-A403-4E3B-9E8ACAD11DC37EBD"
+			id="climates"
+			offset="197.00,628.00"
+			allowverticalresize="false"
+			docking="Bottom Center"
+			component_anchor_point="0.50,1.00"
+			priority="20"
+			tooltipslocalised="true"
+			uniqueguid="FABA49E0-A403-4E3B-9E8ACAD11DC37EBD"
+			currentstate="7FC4D969-41FC-4199-82A4972C7A0CD2C8"
+			defaultstate="7FC4D969-41FC-4199-82A4972C7A0CD2C8">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoFrontendFactionLeader"
+					context_function_id="FactionRecordContext"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoFactionRecord"
+					context_function_id="CanUseUiFeature(&quot;NO_CLIMATES&quot;, this) == false"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="6F693D40-9AEC-4150-ADFA69442E16E35E"
+					uniqueguid="6F693D40-9AEC-4150-ADFA69442E16E35E"
+					imagepath="ui/skins/default/parchment_divider.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="7FC4D969-41FC-4199-82A4972C7A0CD2C8"
+					name="default"
+					width="542"
+					height="78"
+					interactive="true"
+					uniqueguid="7FC4D969-41FC-4199-82A4972C7A0CD2C8">
+					<imagemetrics>
+						<image
+							this="7CCD57FF-B0C4-41B6-A1D0F25E15CB8F92"
+							uniqueguid="7CCD57FF-B0C4-41B6-A1D0F25E15CB8F92"
+							componentimage="6F693D40-9AEC-4150-ADFA69442E16E35E"
+							width="542"
+							height="78"
+							tile="true"
+							margin="30.00,30.00,15.00,30.00"/>
+					</imagemetrics>
+				</default>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true"
+				secondary_margins="20.00,20.00"
+				horizontal_alignment="Center">
+				<columnwidths>
+					<column width="450"/>
+				</columnwidths>
+			</LayoutEngine>
+		</climates>
+		<good_header
+			this="1BCAD801-53FC-49EA-BAEC3F8371936B93"
+			id="good_header"
+			allowverticalresize="false"
+			priority="20"
+			tooltipslocalised="true"
+			uniqueguid="1BCAD801-53FC-49EA-BAEC3F8371936B93"
+			currentstate="A1A635D7-884F-4182-98F3471280A0D46E"
+			defaultstate="A1A635D7-884F-4182-98F3471280A0D46E">
+			<states>
+				<newstate
+					this="A1A635D7-884F-4182-98F3471280A0D46E"
+					name="NewState"
+					width="58"
+					height="26"
+					interactive="true"
+					uniqueguid="A1A635D7-884F-4182-98F3471280A0D46E">
+					<component_text
+						text="Suitable:"
+						textvalign="Center"
+						textyoffset="5.00,5.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="StateText_10a2575b"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+				</newstate>
+			</states>
+		</good_header>
+		<heading_details
+			this="55C9960D-C78F-472F-AAAA9F5CBB15DF5C"
+			id="heading_details"
+			offset="28.00,6.00"
+			allowverticalresize="false"
+			docking="Top Center"
+			dock_offset="0.00,6.00"
+			component_anchor_point="0.50,0.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="55C9960D-C78F-472F-AAAA9F5CBB15DF5C"
+			currentstate="9DFB1D44-AD91-40FA-98A51FBA1DFB7B14"
+			defaultstate="9DFB1D44-AD91-40FA-98A51FBA1DFB7B14">
+			<states>
+				<newstate
+					this="9DFB1D44-AD91-40FA-98A51FBA1DFB7B14"
+					name="NewState"
+					width="300"
+					height="30"
+					interactive="true"
+					uniqueguid="9DFB1D44-AD91-40FA-98A51FBA1DFB7B14">
+					<component_text
+						text="Climates"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_88623e01"
+						font_m_font_name="brand_header"
+						font_m_size="16"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_16"
+						textshadervars="1.00,1.00,1.00,0.00"/>
+				</newstate>
+			</states>
+		</heading_details>
+		<parchment_divider_title
+			this="1C48C91F-A707-4EEB-9023B635D4178153"
+			id="parchment_divider_title"
+			offset="93.00,-10.00"
+			allowverticalresize="false"
+			dock_offset="0.00,-10.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="1C48C91F-A707-4EEB-9023B635D4178153"
+			currentstate="2A31A1AF-DC35-48C7-9D8304914EAD73A7"
+			defaultstate="2A31A1AF-DC35-48C7-9D8304914EAD73A7">
+			<componentimages>
+				<component_image
+					this="D9083126-63A8-462B-88EB8FBA917B5AA9"
+					uniqueguid="D9083126-63A8-462B-88EB8FBA917B5AA9"
+					imagepath="ui/skins/default/parchment_divider_title.png"/>
+				<component_image
+					this="ED2EB690-18EC-4A10-B0F69F138520D3C5"
+					uniqueguid="ED2EB690-18EC-4A10-B0F69F138520D3C5"
+					imagepath="ui/skins/default/parchment_divider_title_top.png"/>
+				<component_image
+					this="3BE3D62B-C475-484F-8BD21F4285BF0A76"
+					uniqueguid="3BE3D62B-C475-484F-8BD21F4285BF0A76"
+					imagepath="ui/skins/default/parchment_divider_title_bottom.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="2A31A1AF-DC35-48C7-9D8304914EAD73A7"
+					name="NewState"
+					width="356"
+					height="43"
+					interactive="true"
+					uniqueguid="2A31A1AF-DC35-48C7-9D8304914EAD73A7">
+					<imagemetrics>
+						<image
+							this="D8B4EA44-F608-455A-AC3B46663F23B120"
+							uniqueguid="D8B4EA44-F608-455A-AC3B46663F23B120"
+							componentimage="D9083126-63A8-462B-88EB8FBA917B5AA9"
+							width="356"
+							height="43"
+							tile="true"
+							dockpoint="Center"
+							margin="10.00,40.00,10.00,40.00"/>
+						<image
+							this="CC792AD1-A160-4B1D-9859B1DFE42103DF"
+							uniqueguid="CC792AD1-A160-4B1D-9859B1DFE42103DF"
+							componentimage="ED2EB690-18EC-4A10-B0F69F138520D3C5"
+							offset="147.00,-2.00"
+							width="61"
+							height="14"
+							dockpoint="Top Center"
+							dock_offset="0.00,-2.00"
+							canresizeheight="false"
+							canresizewidth="false"/>
+						<image
+							this="514B24FC-4633-4123-BA0C7F34D6936587"
+							uniqueguid="514B24FC-4633-4123-BA0C7F34D6936587"
+							componentimage="3BE3D62B-C475-484F-8BD21F4285BF0A76"
+							offset="144.00,39.00"
+							width="68"
+							height="11"
+							dockpoint="Bottom Center"
+							dock_offset="0.00,7.00"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<component_text
+						textvalign="Center"
+						texthalign="Center"
+						font_m_font_name="brand_header"
+						font_m_size="16"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_16"/>
+				</newstate>
+			</states>
+		</parchment_divider_title>
+		<poor_header
+			this="75F29C37-6C80-4229-A20C8EE74D04D7E9"
+			id="poor_header"
+			allowverticalresize="false"
+			priority="20"
+			tooltipslocalised="true"
+			uniqueguid="75F29C37-6C80-4229-A20C8EE74D04D7E9"
+			currentstate="A2CD35C2-24F9-4576-AAF4639F1445097D"
+			defaultstate="A2CD35C2-24F9-4576-AAF4639F1445097D">
+			<states>
+				<newstate
+					this="A2CD35C2-24F9-4576-AAF4639F1445097D"
+					name="NewState"
+					width="81"
+					height="26"
+					interactive="true"
+					uniqueguid="A2CD35C2-24F9-4576-AAF4639F1445097D">
+					<component_text
+						text="Unpleasant:"
+						textvalign="Center"
+						textyoffset="5.00,5.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="StateText_4351d19c"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+				</newstate>
+			</states>
+		</poor_header>
+		<suitability_good
+			this="ECA840A8-DE3B-4B8A-B59EB973F2924C95"
+			id="suitability_good"
+			allowverticalresize="false"
+			priority="20"
+			tooltipslocalised="true"
+			uniqueguid="ECA840A8-DE3B-4B8A-B59EB973F2924C95"
+			currentstate="A13473BE-C883-4685-903198B86DBF34E6"
+			defaultstate="A13473BE-C883-4685-903198B86DBF34E6">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoFactionRecord"
+					context_function_id="ClimatesList(&quot;suitability_good&quot;, StoredContextFromParent(&quot;CcoCampaignStartInfo&quot;).Key)"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="A13473BE-C883-4685-903198B86DBF34E6"
+					name="NewState"
+					width="132"
+					height="26"
+					interactive="true"
+					uniqueguid="A13473BE-C883-4685-903198B86DBF34E6"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				spacing="5.00,0.00"
+				sizetocontent="true"/>
+		</suitability_good>
+		<suitability_poor
+			this="FE0D9122-9D0F-4E98-888B2D1D5AF25A59"
+			id="suitability_poor"
+			offset="152.00,0.00"
+			allowverticalresize="false"
+			priority="20"
+			tooltipslocalised="true"
+			uniqueguid="FE0D9122-9D0F-4E98-888B2D1D5AF25A59"
+			currentstate="81F5194A-3537-4586-A8786643060FAF45"
+			defaultstate="81F5194A-3537-4586-A8786643060FAF45">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoFactionRecord"
+					context_function_id="ClimatesList(&quot;suitability_poor&quot;, StoredContextFromParent(&quot;CcoCampaignStartInfo&quot;).Key)"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="81F5194A-3537-4586-A8786643060FAF45"
+					name="NewState"
+					width="155"
+					height="26"
+					interactive="true"
+					uniqueguid="81F5194A-3537-4586-A8786643060FAF45"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				spacing="5.00,0.00"
+				sizetocontent="true"/>
+		</suitability_poor>
+		<suitability_verypoor
+			this="1ACA88DC-5A0F-498B-938BA192F6EA7141"
+			id="suitability_verypoor"
+			offset="327.00,0.00"
+			allowverticalresize="false"
+			priority="20"
+			tooltipslocalised="true"
+			uniqueguid="1ACA88DC-5A0F-498B-938BA192F6EA7141"
+			currentstate="06C89BEA-B7FE-4C29-9F46039ADFC06763"
+			defaultstate="06C89BEA-B7FE-4C29-9F46039ADFC06763">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoFactionRecord"
+					context_function_id="ClimatesList(&quot;suitability_verypoor&quot;, StoredContextFromParent(&quot;CcoCampaignStartInfo&quot;).Key)"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="06C89BEA-B7FE-4C29-9F46039ADFC06763"
+					name="NewState"
+					width="175"
+					height="26"
+					interactive="true"
+					uniqueguid="06C89BEA-B7FE-4C29-9F46039ADFC06763"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				spacing="5.00,0.00"
+				sizetocontent="true"/>
+		</suitability_verypoor>
+		<template_entry
+			this="F7A03F12-552D-4DFB-93785A012F62498B"
+			id="template_entry"
+			offset="63.00,0.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="20"
+			componentleveltooltip="{{CcoSettlementClimateTypeRecord:UiName}}||{{CcoSettlementClimateTypeRecord:UiDescription}}"
+			uniqueguid="F7A03F12-552D-4DFB-93785A012F62498B"
+			currentstate="E936EA5D-2C6F-4384-A834CC6032CF8629"
+			defaultstate="E936EA5D-2C6F-4384-A834CC6032CF8629">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoSettlementClimateTypeRecord"
+					context_function_id="UiIconImage"/>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoSettlementClimateTypeRecord">
+					<child_m_user_properties>
+						<property
+							name="suppress_localise_asserts"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="CCE282EC-C6CF-465F-AD47051AC298D7C9"
+					uniqueguid="CCE282EC-C6CF-465F-AD47051AC298D7C9"
+					imagepath="ui/campaign ui/climate_types/frozen.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="E936EA5D-2C6F-4384-A834CC6032CF8629"
+					name="NewState"
+					width="26"
+					height="26"
+					interactive="true"
+					uniqueguid="E936EA5D-2C6F-4384-A834CC6032CF8629">
+					<imagemetrics>
+						<image
+							this="8FCD202E-F145-45AD-9127600F9CCCACA8"
+							uniqueguid="8FCD202E-F145-45AD-9127600F9CCCACA8"
+							componentimage="CCE282EC-C6CF-465F-AD47051AC298D7C9"
+							width="26"
+							height="26"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</template_entry>
+		<template_entry
+			this="C8F3C237-C193-4DCF-931D588E83860FC1"
+			id="template_entry"
+			offset="86.00,0.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="20"
+			componentleveltooltip="{{CcoSettlementClimateTypeRecord:UiName}}||{{CcoSettlementClimateTypeRecord:UiDescription}}"
+			uniqueguid="C8F3C237-C193-4DCF-931D588E83860FC1"
+			currentstate="DC15AA31-0B86-4A39-9AFECDDD23FB62A2"
+			defaultstate="DC15AA31-0B86-4A39-9AFECDDD23FB62A2">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoSettlementClimateTypeRecord"
+					context_function_id="UiIconImage"/>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoSettlementClimateTypeRecord">
+					<child_m_user_properties>
+						<property
+							name="suppress_localise_asserts"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="08FC0870-991E-4771-88AFCD087A7C1925"
+					uniqueguid="08FC0870-991E-4771-88AFCD087A7C1925"
+					imagepath="ui/campaign ui/climate_types/frozen.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="DC15AA31-0B86-4A39-9AFECDDD23FB62A2"
+					name="NewState"
+					width="26"
+					height="26"
+					interactive="true"
+					uniqueguid="DC15AA31-0B86-4A39-9AFECDDD23FB62A2">
+					<imagemetrics>
+						<image
+							this="0122BBFA-7730-4684-AD16AE02C5BEB800"
+							uniqueguid="0122BBFA-7730-4684-AD16AE02C5BEB800"
+							componentimage="08FC0870-991E-4771-88AFCD087A7C1925"
+							width="26"
+							height="26"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</template_entry>
+		<template_entry
+			this="64999AAB-2C90-4CCC-9DB607D8DF207027"
+			id="template_entry"
+			offset="106.00,0.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="20"
+			componentleveltooltip="{{CcoSettlementClimateTypeRecord:UiName}}||{{CcoSettlementClimateTypeRecord:UiDescription}}"
+			uniqueguid="64999AAB-2C90-4CCC-9DB607D8DF207027"
+			currentstate="2456F58A-870E-4B75-8998BCD3A28FC268"
+			defaultstate="2456F58A-870E-4B75-8998BCD3A28FC268">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoSettlementClimateTypeRecord"
+					context_function_id="UiIconImage"/>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoSettlementClimateTypeRecord">
+					<child_m_user_properties>
+						<property
+							name="suppress_localise_asserts"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="07AB71B2-2DD1-4AD2-91275FF0E83442A7"
+					uniqueguid="07AB71B2-2DD1-4AD2-91275FF0E83442A7"
+					imagepath="ui/campaign ui/climate_types/frozen.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="2456F58A-870E-4B75-8998BCD3A28FC268"
+					name="NewState"
+					width="26"
+					height="26"
+					interactive="true"
+					uniqueguid="2456F58A-870E-4B75-8998BCD3A28FC268">
+					<imagemetrics>
+						<image
+							this="2AB87072-0E2D-4EA4-82B36CB71FE89F5E"
+							uniqueguid="2AB87072-0E2D-4EA4-82B36CB71FE89F5E"
+							componentimage="07AB71B2-2DD1-4AD2-91275FF0E83442A7"
+							width="26"
+							height="26"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</template_entry>
+		<types_list
+			this="FABE17A3-8CEE-4154-B65E2AAF2C51E755"
+			id="types_list"
+			offset="20.00,43.00"
+			allowverticalresize="false"
+			priority="20"
+			tooltipslocalised="true"
+			uniqueguid="FABE17A3-8CEE-4154-B65E2AAF2C51E755"
+			currentstate="0CD82EAE-2F99-4B12-963FC97CA49592F4"
+			defaultstate="0CD82EAE-2F99-4B12-963FC97CA49592F4">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignStartInfo"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="0CD82EAE-2F99-4B12-963FC97CA49592F4"
+					name="NewState"
+					width="502"
+					height="26"
+					uniqueguid="0CD82EAE-2F99-4B12-963FC97CA49592F4"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				spacing="20.00,4.00"
+				itemsperrow="3"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="386"/>
+				</columnwidths>
+			</LayoutEngine>
+		</types_list>
+		<very_poor_header
+			this="1F8A1A67-50E2-4A23-8655700F38211952"
+			id="very_poor_header"
+			allowverticalresize="false"
+			priority="20"
+			tooltipslocalised="true"
+			uniqueguid="1F8A1A67-50E2-4A23-8655700F38211952"
+			currentstate="12275009-5390-46EE-ACAD3638FF90380E"
+			defaultstate="12275009-5390-46EE-ACAD3638FF90380E">
+			<states>
+				<newstate
+					this="12275009-5390-46EE-ACAD3638FF90380E"
+					name="NewState"
+					width="101"
+					height="26"
+					interactive="true"
+					uniqueguid="12275009-5390-46EE-ACAD3638FF90380E">
+					<component_text
+						text="Uninhabitable:"
+						textvalign="Center"
+						textyoffset="5.00,5.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="StateText_1e24303"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+				</newstate>
+			</states>
+		</very_poor_header>
+		<tx_none
+			this="B4F94131-0784-4B8D-87F7F7382F0E594E"
+			id="tx_none"
+			offset="94.00,1.00"
+			allowverticalresize="false"
+			dock_offset="0.00,1.00"
+			priority="20"
+			tooltipslocalised="true"
+			uniqueguid="B4F94131-0784-4B8D-87F7F7382F0E594E"
+			currentstate="0406B837-53E9-428C-AB4708BA46C95D95"
+			defaultstate="0406B837-53E9-428C-AB4708BA46C95D95">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoFactionRecord"
+					context_function_id="ClimatesList(&quot;suitability_good&quot;, StoredContextFromParent(&quot;CcoCampaignStartInfo&quot;).Key).IsEmpty"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="0406B837-53E9-428C-AB4708BA46C95D95"
+					name="default"
+					width="38"
+					height="24"
+					uniqueguid="0406B837-53E9-428C-AB4708BA46C95D95">
+					<component_text
+						text="None"
+						textvalign="Center"
+						texthalign="Center"
+						textyoffset="5.00,5.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="StateText_6932f891"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</default>
+			</states>
+		</tx_none>
+		<tx_none
+			this="FC35F1C7-9626-4D28-B738333B6A0BEF5B"
+			id="tx_none"
+			offset="117.00,1.00"
+			allowverticalresize="false"
+			dock_offset="0.00,1.00"
+			priority="20"
+			tooltipslocalised="true"
+			uniqueguid="FC35F1C7-9626-4D28-B738333B6A0BEF5B"
+			currentstate="E3DE1342-0303-4F0D-B0981FD225BC7DDF"
+			defaultstate="E3DE1342-0303-4F0D-B0981FD225BC7DDF">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoFactionRecord"
+					context_function_id="ClimatesList(&quot;suitability_poor&quot;, StoredContextFromParent(&quot;CcoCampaignStartInfo&quot;).Key).IsEmpty"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="E3DE1342-0303-4F0D-B0981FD225BC7DDF"
+					name="default"
+					width="38"
+					height="24"
+					uniqueguid="E3DE1342-0303-4F0D-B0981FD225BC7DDF">
+					<component_text
+						text="None"
+						textvalign="Center"
+						texthalign="Center"
+						textyoffset="5.00,5.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="StateText_86487ef"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</default>
+			</states>
+		</tx_none>
+		<tx_none
+			this="42FD40BA-D1AB-4A1B-BC48611A7CB081D8"
+			id="tx_none"
+			offset="137.00,1.00"
+			allowverticalresize="false"
+			dock_offset="0.00,1.00"
+			priority="20"
+			tooltipslocalised="true"
+			uniqueguid="42FD40BA-D1AB-4A1B-BC48611A7CB081D8"
+			currentstate="94CE0606-9F65-4E9E-99B49C28F1E76948"
+			defaultstate="94CE0606-9F65-4E9E-99B49C28F1E76948">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoFactionRecord"
+					context_function_id="ClimatesList(&quot;suitability_verypoor&quot;, StoredContextFromParent(&quot;CcoCampaignStartInfo&quot;).Key).IsEmpty"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="94CE0606-9F65-4E9E-99B49C28F1E76948"
+					name="default"
+					width="38"
+					height="24"
+					uniqueguid="94CE0606-9F65-4E9E-99B49C28F1E76948">
+					<component_text
+						text="None"
+						textvalign="Center"
+						texthalign="Center"
+						textyoffset="5.00,5.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="StateText_7be3716e"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</default>
+			</states>
+		</tx_none>
+		<ai_stat_mod_holder
+			this="5102BE54-8A09-4D23-90ED66082D022014"
+			id="ai_stat_mod_holder"
+			offset="0.00,686.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="5102BE54-8A09-4D23-90ED66082D022014"
+			currentstate="841C764A-A944-44DD-8F18E2A01F4C3CA4">
+			<states>
+				<newstate
+					this="841C764A-A944-44DD-8F18E2A01F4C3CA4"
+					name="NewState"
+					width="319"
+					height="35"
+					uniqueguid="841C764A-A944-44DD-8F18E2A01F4C3CA4">
+					<component_text
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
+				</newstate>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				spacing="30.00,0.00"
+				sizetocontent="true"
+				vertical_alignment="Center"/>
+		</ai_stat_mod_holder>
+		<dy_ai_stat_mod
+			this="CC750F5E-E4A3-46A2-86BAD266B111ED04"
+			id="dy_ai_stat_mod"
+			offset="0.00,-3.00"
+			priority="60"
+			componentleveltooltip="{{tt:ui/common ui/tooltip_ai_stats_modifier}}"
+			tooltiplabel="ComponentTooltip_b4bf18d5"
+			uniqueguid="CC750F5E-E4A3-46A2-86BAD266B111ED04"
+			currentstate="0058AB7D-73C8-4A32-BDD953DC1F37CCB6"
+			defaultstate="0058AB7D-73C8-4A32-BDD953DC1F37CCB6">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoPair"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_function_id="MakePair(self.ParentContext.ChildContext(&quot;ai_stat_mod_slider&quot;).Value, 0)">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+				<property
+					name="dynamic_child_parent"
+					value="battle_diff_slider"/>
+			</userproperties>
+			<states>
+				<newstate
+					this="0058AB7D-73C8-4A32-BDD953DC1F37CCB6"
+					name="NewState"
+					width="155"
+					height="40"
+					interactive="true"
+					uniqueguid="0058AB7D-73C8-4A32-BDD953DC1F37CCB6">
+					<component_text
+						text="AI stats modifier"
+						textvalign="Center"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_9462298j"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						textshadervars="0.00,1.00,2.00,0.00"/>
+				</newstate>
+			</states>
+		</dy_ai_stat_mod>
+		<tx_easy
+			this="F4DAD717-CF26-4709-BF75F9FBE37B3A97"
+			id="tx_easy"
+			offset="-123.00,-1.00"
+			visible="false"
+			docking="Center Left External"
+			dock_offset="-40.00,0.00"
+			component_anchor_point="1.00,0.50"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="F4DAD717-CF26-4709-BF75F9FBE37B3A97"
+			currentstate="AC36C639-E418-44EE-B25DC68C26AE4487"
+			defaultstate="AC36C639-E418-44EE-B25DC68C26AE4487">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+				<property
+					name="dynamic_child_parent"
+					value="battle_diff_slider"/>
+			</userproperties>
+			<states>
+				<newstate
+					this="AC36C639-E418-44EE-B25DC68C26AE4487"
+					name="NewState"
+					width="83"
+					height="23"
+					interactive="true"
+					uniqueguid="AC36C639-E418-44EE-B25DC68C26AE4487">
+					<component_text
+						text="Easy"
+						textvalign="Center"
+						texthalign="Right"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_2f915d18"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+		</tx_easy>
+		<tx_hard
+			this="3FE6E72D-CF75-4DE5-9C1BCBAA7C342A3F"
+			id="tx_hard"
+			offset="174.00,-1.00"
+			visible="false"
+			docking="Center Right External"
+			dock_offset="40.00,0.00"
+			component_anchor_point="-0.00,0.50"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="3FE6E72D-CF75-4DE5-9C1BCBAA7C342A3F"
+			currentstate="13A72A77-4B9C-4CDF-B2BEC16A02374C3C"
+			defaultstate="13A72A77-4B9C-4CDF-B2BEC16A02374C3C">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+				<property
+					name="dynamic_child_parent"
+					value="battle_diff_slider"/>
+			</userproperties>
+			<states>
+				<newstate
+					this="13A72A77-4B9C-4CDF-B2BEC16A02374C3C"
+					name="NewState"
+					width="83"
+					height="23"
+					interactive="true"
+					uniqueguid="13A72A77-4B9C-4CDF-B2BEC16A02374C3C">
+					<component_text
+						text="Hard"
+						textvalign="Center"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_e846835c"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+		</tx_hard>
+		<button_start_bg_gradient
+			this="98A1EA64-A342-4520-BEDE3D4DF0E7E6CB"
+			id="button_start_bg_gradient"
+			offset="0.00,804.00"
+			visible="false"
+			docking="Bottom Center"
+			component_anchor_point="0.50,1.00"
+			priority="1"
+			tooltipslocalised="true"
+			uniqueguid="98A1EA64-A342-4520-BEDE3D4DF0E7E6CB"
+			currentstate="B72E58C4-4684-41B9-9199DB2469653EB5"
+			defaultstate="B72E58C4-4684-41B9-9199DB2469653EB5">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoStaticObject"
+					context_function_id="Component(&quot;button_start_campaign&quot;).PropertyExists(&quot;campaign_key&quot;)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="campaign_selected"/>
+						<property
+							name="event1"
+							value="lord_selected"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="077DEE83-C16B-4C8D-8704CDBF23259FE8"
+					uniqueguid="077DEE83-C16B-4C8D-8704CDBF23259FE8"
+					imagepath="ui/skins/default/fe_backgraund_gradient.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="B72E58C4-4684-41B9-9199DB2469653EB5"
+					name="NewState"
+					width="1600"
+					height="96"
+					uniqueguid="B72E58C4-4684-41B9-9199DB2469653EB5">
+					<imagemetrics>
+						<image
+							this="05F5A3A1-2EFC-4376-8D050A7B217B7D7A"
+							uniqueguid="05F5A3A1-2EFC-4376-8D050A7B217B7D7A"
+							componentimage="077DEE83-C16B-4C8D-8704CDBF23259FE8"
+							offset="-160.00,0.00"
+							width="1920"
+							height="96"
+							colour="#FFFFFFF0"
+							dockpoint="Center"
+							margin="0.00,152.00,0.00,152.00"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+			<animations>
+				<show id="show">
+					<frames>
+						<frame
+							interpolationtime="0"
+							interpolationpropertymask="64"
+							targetmetrics_m_colour="#FFFFFF00"
+							targetmetrics_m_height="96"
+							targetmetrics_m_width="1600">
+							<triggers>
+								<trigger
+									trigger_component="98A1EA64-A342-4520-BEDE3D4DF0E7E6CB"
+									trigger_property="visible true"/>
+							</triggers>
+						</frame>
+						<frame
+							interpolationtime="350"
+							interpolationpropertymask="64"
+							targetmetrics_m_height="96"
+							targetmetrics_m_width="1600"
+							easing_curve_type="Quadratic Out"/>
+					</frames>
+				</show>
+				<hide id="hide">
+					<frames>
+						<frame
+							interpolationtime="0"
+							interpolationpropertymask="64"
+							targetmetrics_m_colour="#FFFFFF00"
+							targetmetrics_m_height="96"
+							targetmetrics_m_width="1600">
+							<triggers>
+								<trigger
+									trigger_component="98A1EA64-A342-4520-BEDE3D4DF0E7E6CB"
+									trigger_property="visible false"/>
+							</triggers>
+						</frame>
+					</frames>
+				</hide>
+			</animations>
+		</button_start_bg_gradient>
+		<frame_image
+			this="874AC621-506C-4C07-8DC37F645AF15FF2"
+			id="frame_image"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			tooltipslocalised="true"
+			uniqueguid="874AC621-506C-4C07-8DC37F645AF15FF2"
+			updatewhennotvisible="true"
+			currentstate="37368F6A-74E9-42DD-B09CFB819C0D7A22"
+			defaultstate="37368F6A-74E9-42DD-B09CFB819C0D7A22">
+			<componentimages>
+				<component_image
+					this="0E856A49-9C69-4E73-88DED571425A4246"
+					uniqueguid="0E856A49-9C69-4E73-88DED571425A4246"
+					imagepath="ui/skins/default/frontend_start_campaign_back.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="37368F6A-74E9-42DD-B09CFB819C0D7A22"
+					name="NewState"
+					width="372"
+					height="78"
+					uniqueguid="37368F6A-74E9-42DD-B09CFB819C0D7A22">
+					<imagemetrics>
+						<image
+							this="2C8E2619-852E-4DA5-A19227BBADAC99C3"
+							uniqueguid="2C8E2619-852E-4DA5-A19227BBADAC99C3"
+							componentimage="0E856A49-9C69-4E73-88DED571425A4246"
+							width="372"
+							height="78"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+			<animations>
+				<oncreate
+					id="OnCreate"
+					propagate="true">
+					<frames>
+						<frame
+							interpolationtime="0"
+							interpolationpropertymask="2"
+							targetmetrics_m_height="135"
+							targetmetrics_m_width="569"
+							targetmetrics_m_offset="0.00,111.00"/>
+						<frame
+							interpolationtime="0"
+							interpolationpropertymask="2"
+							targetmetrics_m_height="135"
+							targetmetrics_m_width="569"/>
+						<frame
+							interpolationtime="500"
+							interpolationpropertymask="2"
+							targetmetrics_m_height="135"
+							targetmetrics_m_width="569"
+							targetmetrics_m_offset="0.00,-111.00"
+							easing_curve_type="Quadratic Out"/>
+					</frames>
+				</oncreate>
+			</animations>
+		</frame_image>
 	</components>
 </layout>

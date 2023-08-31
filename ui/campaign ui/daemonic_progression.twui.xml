@@ -72,10 +72,10 @@
 															<dy_set_icon this="4AC8CF00-9316-4383-80D9C554897B6285"/>
 														</template_part_icon>
 													</armory_items_holder>
-													<locked_chains this="53EACA57-3B8C-4B4D-866E2E5FE4E4C1F4"/>
 													<padlock this="A33B4779-BA8A-49BC-961FAFF527B57403"/>
 													<cost this="F2BBEBB8-32E2-4145-9F1143F8402121B0"/>
 													<tick this="05E62A75-306A-451D-8B3B26522313E2DB"/>
+													<tier_requirement this="F7A60A90-1A0B-4796-AFD477FF6A2713B1"/>
 												</template_armory_bundle>
 												<divider_arrow this="468F3E23-7DDB-4E5B-9585B7FB0A8CAF39"/>
 											</template_effects_and_armory_list>
@@ -108,10 +108,10 @@
 													<armory_items_holder this="E6715DC3-AB51-4C54-A43B246BF59CBF26">
 														<template_part_icon this="224CDA8C-7C7E-46E7-B477D1CD28C9D97C"/>
 													</armory_items_holder>
-													<locked_chains this="0E1B0A03-F66F-4F79-AF7B6F43F3BED5B9"/>
 													<padlock this="0303A3A5-91D3-4E4C-819836DC1486AC96"/>
 													<cost this="6EF09CF1-05FE-4B1B-AD368CC997DFA494"/>
 													<tick this="4E3D2D96-9B70-4D63-95FF2093B293AE11"/>
+													<tier_requirement this="E4967015-DC58-4EA1-A2D10A13345BC27E"/>
 												</template_armory_item>
 												<divider_arrow this="375069B0-7FFC-469D-9EC6C2EDC16F04D8"/>
 											</template_effects_and_armory_list>
@@ -321,9 +321,6 @@
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
-					context_object_id="CcoCampaignRitual"/>
-				<callback_with_context
 					callback_id="ContextCommandLeftClick"
 					context_object_id="CcoCampaignRitual"
 					context_function_id="Perform"/>
@@ -349,6 +346,15 @@
 							value="lclick"/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoCampaignRitual">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/campaign ui/tooltip_ritual"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -368,9 +374,7 @@
 					value=""/>
 			</user_properties>
 			<localised_texts>
-				<localised_text
-					tooltip_label="button_ascend_Tooltip_210018"
-					tooltip_text="{{tt:ui/campaign ui/tooltip_ritual}}"/>
+				<localised_text/>
 				<localised_text
 					state="active"
 					is_text_localised="false"/>
@@ -1074,13 +1078,13 @@
 					<child_m_user_properties>
 						<property
 							name="1.selected"
-							value="ActiveOperationSetList(PlayersFaction).Contains(StoredContext(&quot;CcoCampaignOperationSetRecord&quot;))"/>
+							value="IsLockedByAchievement  == false &amp;&amp; ActiveOperationSetList(PlayersFaction).Contains(StoredContext(&quot;CcoCampaignOperationSetRecord&quot;))"/>
 						<property
 							name="2.inactive"
-							value="ActiveOperationSetList(PlayersFaction).IsEmpty == false &amp;&amp; ActiveOperationSetList(PlayersFaction).Contains(StoredContext(&quot;CcoCampaignOperationSetRecord&quot;)) == false"/>
+							value="IsLockedByAchievement == false &amp;&amp; ActiveOperationSetList(PlayersFaction).IsEmpty == false &amp;&amp; ActiveOperationSetList(PlayersFaction).Contains(StoredContext(&quot;CcoCampaignOperationSetRecord&quot;)) == false"/>
 						<property
 							name="3.active"
-							value="PooledResourceList.FirstContext.Total &gt;= LowerBound"/>
+							value="IsLockedByAchievement  == false &amp;&amp; PooledResourceList.FirstContext.Total &gt;= LowerBound"/>
 						<property
 							name="event0"
 							value="PooledResourceTransaction"/>
@@ -1211,13 +1215,13 @@
 					<child_m_user_properties>
 						<property
 							name="1.selected"
-							value="ActiveOperationSetList(PlayersFaction).Contains(StoredContext(&quot;CcoCampaignOperationSetRecord&quot;))"/>
+							value="IsLockedByAchievement  == false &amp;&amp; ActiveOperationSetList(PlayersFaction).Contains(StoredContext(&quot;CcoCampaignOperationSetRecord&quot;))"/>
 						<property
 							name="2.inactive"
-							value="ActiveOperationSetList(PlayersFaction).IsEmpty == false &amp;&amp; ActiveOperationSetList(PlayersFaction).Contains(StoredContext(&quot;CcoCampaignOperationSetRecord&quot;)) == false"/>
+							value="IsLockedByAchievement == false &amp;&amp; ActiveOperationSetList(PlayersFaction).IsEmpty == false &amp;&amp; ActiveOperationSetList(PlayersFaction).Contains(StoredContext(&quot;CcoCampaignOperationSetRecord&quot;)) == false"/>
 						<property
 							name="3.active"
-							value="PooledResourceList.FirstContext.Total &gt;= LowerBound"/>
+							value="IsLockedByAchievement  == false &amp;&amp; PooledResourceList.FirstContext.Total &gt;= LowerBound"/>
 						<property
 							name="event0"
 							value="PooledResourceTransaction"/>
@@ -1791,7 +1795,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoPooledResourceThresholdOperationSetRecord"
-					context_function_id="ActiveOperationSetList(PlayersFaction).IsEmpty &amp;&amp; (PooledResourceList.FirstContext.Total &gt;= LowerBound || self.ParentContext.IsMouseOver || self.ParentContext.IsMouseOverChildren )">
+					context_function_id="ActiveOperationSetList(PlayersFaction).IsEmpty &amp;&amp; ((PooledResourceList.FirstContext.Total &gt;= LowerBound &amp;&amp; IsLockedByAchievement  == false) || self.ParentContext.IsMouseOver || self.ParentContext.IsMouseOverChildren )">
 					<child_m_user_properties>
 						<property
 							name="update_constant"
@@ -1868,7 +1872,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoPooledResourceThresholdOperationSetRecord"
-					context_function_id="ActiveOperationSetList(PlayersFaction).IsEmpty &amp;&amp; (PooledResourceList.FirstContext.Total &gt;= LowerBound || self.ParentContext.IsMouseOver || self.ParentContext.IsMouseOverChildren )">
+					context_function_id="ActiveOperationSetList(PlayersFaction).IsEmpty &amp;&amp; ((PooledResourceList.FirstContext.Total &gt;= LowerBound &amp;&amp; IsLockedByAchievement  == false) || self.ParentContext.IsMouseOver || self.ParentContext.IsMouseOverChildren )">
 					<child_m_user_properties>
 						<property
 							name="update_constant"
@@ -2059,7 +2063,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoPooledResourceThresholdOperationSetRecord"
-					context_function_id="PooledResourceList.FirstContext.Total &lt; LowerBound">
+					context_function_id="PooledResourceList.FirstContext.Total &lt; LowerBound || IsLockedByAchievement">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -2105,7 +2109,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoPooledResourceThresholdOperationSetRecord"
-					context_function_id="PooledResourceList.FirstContext.Total &lt; LowerBound">
+					context_function_id="PooledResourceList.FirstContext.Total &lt; LowerBound || IsLockedByAchievement">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -2128,112 +2132,6 @@
 				<element value="ui/skins/default/padlock.png"/>
 			</override_images>
 		</padlock>
-		<locked_chains
-			this="53EACA57-3B8C-4B4D-866E2E5FE4E4C1F4"
-			id="locked_chains"
-			part_of_template="true"
-			uniqueguid_in_template="D0DA74C3-FED9-442F-AA0A3D34CAED9B77"
-			uniqueguid="53EACA57-3B8C-4B4D-866E2E5FE4E4C1F4"
-			dimensions="72.00,72.00"
-			dock_point="Center"
-			is_visible="false"
-			priority="20">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="CC35FE62-DDC2-4FFE-81441944C44524EB"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="AD0F6E77-6E2A-4F03-A98BA74D3101F186"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/dae_gift_locked_chains.png"
-					uniqueguid="85B8C72F-76FA-4E9D-ABC570191AD89D62"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoPooledResourceThresholdOperationSetRecord"
-					context_function_id="PooledResourceList.FirstContext.Total &gt;= LowerBound &amp;&amp; ( (ActiveOperationSetList(PlayersFaction).IsEmpty == false &amp;&amp; ActiveOperationSetList(PlayersFaction).Contains(StoredContextFromParent(&quot;CcoCampaignOperationSetRecord&quot;)) == false) || (ActiveOperationSetList(PlayersFaction).IsEmpty &amp;&amp; CurrentMouseOverComponentContext.StoredContextFromParent(&quot;CcoCampaignOperationSetRecord&quot;) != StoredContextFromParent(&quot;CcoCampaignOperationSetRecord&quot;) &amp;&amp; CurrentMouseOverComponentContext.StoredContextFromParent(&quot;CcoPooledResourceThresholdOperationSetRecord&quot;) == this))">
-					<child_m_user_properties>
-						<property
-							name="update_constant"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="disable_override0"
-					value="all"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/dae_gift_locked_chains.png"/>
-			</override_images>
-		</locked_chains>
-		<locked_chains
-			this="0E1B0A03-F66F-4F79-AF7B6F43F3BED5B9"
-			id="locked_chains"
-			part_of_template="true"
-			uniqueguid_in_template="D0DA74C3-FED9-442F-AA0A3D34CAED9B77"
-			uniqueguid="0E1B0A03-F66F-4F79-AF7B6F43F3BED5B9"
-			dimensions="72.00,72.00"
-			dock_point="Center"
-			is_visible="false"
-			priority="20">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="83A41FC7-BFBA-4421-A6A579C6DAE3B625"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="95B55104-626A-4407-8FB5BF2C9256CAC1"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/dae_gift_locked_chains.png"
-					uniqueguid="75C6FA73-4FCD-4A57-B2CFC47C7A28BF1F"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoPooledResourceThresholdOperationSetRecord"
-					context_function_id="PooledResourceList.FirstContext.Total &gt;= LowerBound &amp;&amp; ( (ActiveOperationSetList(PlayersFaction).IsEmpty == false &amp;&amp; ActiveOperationSetList(PlayersFaction).Contains(StoredContextFromParent(&quot;CcoCampaignOperationSetRecord&quot;)) == false) || (ActiveOperationSetList(PlayersFaction).IsEmpty &amp;&amp; CurrentMouseOverComponentContext.StoredContextFromParent(&quot;CcoCampaignOperationSetRecord&quot;) != StoredContextFromParent(&quot;CcoCampaignOperationSetRecord&quot;) &amp;&amp; CurrentMouseOverComponentContext.StoredContextFromParent(&quot;CcoPooledResourceThresholdOperationSetRecord&quot;) == this))">
-					<child_m_user_properties>
-						<property
-							name="update_constant"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="disable_override0"
-					value="all"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/dae_gift_locked_chains.png"/>
-			</override_images>
-		</locked_chains>
 		<right
 			this="5DA19B7F-A361-47D9-8103DC04B049D7B8"
 			id="right"
@@ -2383,6 +2281,210 @@
 				<element value="ui/skins/default/icon_check_22px.png"/>
 			</override_images>
 		</tick>
+		<tier_requirement
+			this="F7A60A90-1A0B-4796-AFD477FF6A2713B1"
+			id="tier_requirement"
+			part_of_template="true"
+			uniqueguid_in_template="2DC66D59-8665-49F0-854BAEA826A7AE53"
+			uniqueguid="F7A60A90-1A0B-4796-AFD477FF6A2713B1"
+			dimensions="50.00,50.00"
+			dock_point="Top Center"
+			tooltips_localised="false"
+			offset="0.00,-24.00"
+			priority="500">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="1"
+					uniqueguid="E0BC8B51-0DBB-453A-8489510481FBBF67"/>
+				<state_uniqueguid
+					name="2"
+					uniqueguid="1F5AC747-DA71-43A9-BED08854A226CB19"/>
+				<state_uniqueguid
+					name="3"
+					uniqueguid="0242DA27-0D35-43AC-88810C0F8B18FC80"/>
+				<state_uniqueguid
+					name="4"
+					uniqueguid="9B083789-7A69-45A5-A38AA4F5A872B765"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/mirror_of_madness/mom_trials_progress_bar_awards_1_large.png"
+					uniqueguid="605A269B-E19B-43C1-9894E1B4463F78C8"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/mirror_of_madness/mom_trials_progress_bar_awards_2_large.png"
+					uniqueguid="81D102E8-0ADD-49A8-9369273388EBFFF1"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/mirror_of_madness/mom_trials_progress_bar_awards_3_large.png"
+					uniqueguid="B19AF1E7-0ACC-4AA3-95792F8B3FA2153B"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoArmoryItemRecord">
+					<child_m_user_properties>
+						<property
+							name="1"
+							value="AchievementUnlockScore == GameCoreContext.TrialManager.TrialBronzeMedalScore"/>
+						<property
+							name="2"
+							value="AchievementUnlockScore == GameCoreContext.TrialManager.TrialSilverMedalScore"/>
+						<property
+							name="3"
+							value="AchievementUnlockScore == GameCoreContext.TrialManager.TrialGoldMedalScore"/>
+						<property
+							name="4"
+							value="AchievementUnlockScore == GameCoreContext.TrialManager.TrialPlatinumMedalScore"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoStaticObject">
+					<child_m_user_properties>
+						<property
+							name="different_text_per_state"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoArmoryItemRecord"
+					context_function_id="AchievementUnlockScore &gt; 0"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignOperationSetRecord"
+					context_function_id="ArmoryItemList.FirstContext"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="1"
+					tooltip_label="StateTooltip_6eb16236"
+					tooltip_text="{{CcoStaticObject: Loc(&quot;trials_bronze_tier_tooltip&quot;) + Loc(&quot;trials_score_needed_for_tier&quot;, GameCoreContext.TrialManager.TrialBronzeMedalScore) }}"
+					is_text_localised="false"/>
+				<localised_text
+					state="2"
+					tooltip_label="StateTooltip_4d3699c7"
+					tooltip_text="{{CcoStaticObject: Loc(&quot;trials_silver_tier_tooltip&quot;) + Loc(&quot;trials_score_needed_for_tier&quot;, GameCoreContext.TrialManager.TrialSilverMedalScore) }}"
+					is_text_localised="false"/>
+				<localised_text
+					state="3"
+					tooltip_label="StateTooltip_5f834206"
+					tooltip_text="{{CcoStaticObject: Loc(&quot;trials_gold_tier_tooltip&quot;) + Loc(&quot;trials_score_needed_for_tier&quot;, GameCoreContext.TrialManager.TrialGoldMedalScore) }}"
+					is_text_localised="false"/>
+				<localised_text
+					state="4"
+					tooltip_label="StateTooltip_1c379015"
+					tooltip_text="{{CcoStaticObject: Loc(&quot;trials_platinum_tier_tooltip&quot;) + Loc(&quot;trials_score_needed_for_tier&quot;, GameCoreContext.TrialManager.TrialPlatinumMedalScore) }}"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/mirror_of_madness/mom_trials_progress_bar_awards_1_large.png"/>
+				<element value="ui/skins/default/mirror_of_madness/mom_trials_progress_bar_awards_2_large.png"/>
+				<element value="ui/skins/default/mirror_of_madness/mom_trials_progress_bar_awards_3_large.png"/>
+			</override_images>
+		</tier_requirement>
+		<tier_requirement
+			this="E4967015-DC58-4EA1-A2D10A13345BC27E"
+			id="tier_requirement"
+			part_of_template="true"
+			uniqueguid_in_template="2DC66D59-8665-49F0-854BAEA826A7AE53"
+			uniqueguid="E4967015-DC58-4EA1-A2D10A13345BC27E"
+			dimensions="50.00,50.00"
+			dock_point="Top Center"
+			tooltips_localised="false"
+			offset="0.00,-24.00"
+			priority="500">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="1"
+					uniqueguid="94BB5C3C-9051-486F-94A37015F640DC4A"/>
+				<state_uniqueguid
+					name="2"
+					uniqueguid="A4D4EC0C-7FD7-4FA0-8DE7F8832993B26C"/>
+				<state_uniqueguid
+					name="3"
+					uniqueguid="DE42C4A5-012D-49EC-B94AD60147AD22C2"/>
+				<state_uniqueguid
+					name="4"
+					uniqueguid="28A442FA-B8C2-4751-ACECCB7E6229849F"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/mirror_of_madness/mom_trials_progress_bar_awards_1_large.png"
+					uniqueguid="6013E114-56F8-4DCA-88CBBD6609D1E519"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/mirror_of_madness/mom_trials_progress_bar_awards_2_large.png"
+					uniqueguid="F9F0957E-9555-4BA6-B504C87ED3D86C86"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/mirror_of_madness/mom_trials_progress_bar_awards_3_large.png"
+					uniqueguid="EF33F5B7-294B-43F0-9619FFD124F33A12"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoArmoryItemRecord">
+					<child_m_user_properties>
+						<property
+							name="1"
+							value="AchievementUnlockScore == GameCoreContext.TrialManager.TrialBronzeMedalScore"/>
+						<property
+							name="2"
+							value="AchievementUnlockScore == GameCoreContext.TrialManager.TrialSilverMedalScore"/>
+						<property
+							name="3"
+							value="AchievementUnlockScore == GameCoreContext.TrialManager.TrialGoldMedalScore"/>
+						<property
+							name="4"
+							value="AchievementUnlockScore == GameCoreContext.TrialManager.TrialPlatinumMedalScore"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoStaticObject">
+					<child_m_user_properties>
+						<property
+							name="different_text_per_state"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoArmoryItemRecord"
+					context_function_id="AchievementUnlockScore &gt; 0"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignOperationSetRecord"
+					context_function_id="ArmoryItemList.FirstContext"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="1"
+					tooltip_label="StateTooltip_6eb16236"
+					tooltip_text="{{CcoStaticObject: Loc(&quot;trials_bronze_tier_tooltip&quot;) + Loc(&quot;trials_score_needed_for_tier&quot;, GameCoreContext.TrialManager.TrialBronzeMedalScore) }}"
+					is_text_localised="false"/>
+				<localised_text
+					state="2"
+					tooltip_label="StateTooltip_4d3699c7"
+					tooltip_text="{{CcoStaticObject: Loc(&quot;trials_silver_tier_tooltip&quot;) + Loc(&quot;trials_score_needed_for_tier&quot;, GameCoreContext.TrialManager.TrialSilverMedalScore) }}"
+					is_text_localised="false"/>
+				<localised_text
+					state="3"
+					tooltip_label="StateTooltip_5f834206"
+					tooltip_text="{{CcoStaticObject: Loc(&quot;trials_gold_tier_tooltip&quot;) + Loc(&quot;trials_score_needed_for_tier&quot;, GameCoreContext.TrialManager.TrialGoldMedalScore) }}"
+					is_text_localised="false"/>
+				<localised_text
+					state="4"
+					tooltip_label="StateTooltip_1c379015"
+					tooltip_text="{{CcoStaticObject: Loc(&quot;trials_platinum_tier_tooltip&quot;) + Loc(&quot;trials_score_needed_for_tier&quot;, GameCoreContext.TrialManager.TrialPlatinumMedalScore) }}"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/mirror_of_madness/mom_trials_progress_bar_awards_1_large.png"/>
+				<element value="ui/skins/default/mirror_of_madness/mom_trials_progress_bar_awards_2_large.png"/>
+				<element value="ui/skins/default/mirror_of_madness/mom_trials_progress_bar_awards_3_large.png"/>
+			</override_images>
+		</tier_requirement>
 		<root
 			this="06EB42CF-EA4E-4C12-A9E7B3CC26941A1B"
 			id="root"
@@ -2547,8 +2649,8 @@
 						font_m_font_name="la_gioconda_uppercase"
 						font_m_size="18"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_section_heading"
+						font_m_leading="3"
+						fontcat_name="header_18_bold"
 						text_shader_name="drop_shadow_t0"
 						textshadervars="0.00,-2.00,-1.00,0.00"/>
 				</newstate>
@@ -2620,9 +2722,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</panel_frame_wh3>
@@ -3045,9 +3147,9 @@
 							margin="0.00,10.00,0.00,10.00"/>
 					</imagemetrics>
 					<component_text
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="ingame_text_small_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
 				</newstate>
 			</states>
 		</prog_bar>
@@ -3106,9 +3208,9 @@
 							margin="0.00,5.00,0.00,5.00"/>
 					</imagemetrics>
 					<component_text
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="ingame_text_small_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
 				</wh3_main_dae_khorne_points>
 				<wh3_main_dae_nurgle_points
 					this="E1CF58ED-E0F5-4A88-829A91031A62E613"
@@ -3130,9 +3232,9 @@
 							margin="0.00,5.00,0.00,5.00"/>
 					</imagemetrics>
 					<component_text
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="ingame_text_small_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
 				</wh3_main_dae_nurgle_points>
 				<wh3_main_dae_slaanesh_points
 					this="87FFF302-44E2-4725-8895EB7B035A5F39"
@@ -3154,9 +3256,9 @@
 							margin="0.00,5.00,0.00,5.00"/>
 					</imagemetrics>
 					<component_text
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="ingame_text_small_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
 				</wh3_main_dae_slaanesh_points>
 				<wh3_main_dae_tzeentch_points
 					this="69213CBD-0200-41AB-838D83E4A51B47C7"
@@ -3178,9 +3280,9 @@
 							margin="0.00,5.00,0.00,5.00"/>
 					</imagemetrics>
 					<component_text
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="ingame_text_small_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
 				</wh3_main_dae_tzeentch_points>
 				<wh3_main_dae_undivided_points
 					this="B2AB204E-3EC8-48A2-A1F8BF67E5D70A51"
@@ -3202,9 +3304,9 @@
 							margin="0.00,5.00,0.00,5.00"/>
 					</imagemetrics>
 					<component_text
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="ingame_text_small_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
 				</wh3_main_dae_undivided_points>
 			</states>
 		</prog_bar_fill>
@@ -3722,9 +3824,9 @@
 							margin="0.00,10.00,0.00,10.00"/>
 					</imagemetrics>
 					<component_text
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="ingame_text_small_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
 				</newstate>
 			</states>
 		</prog_bar_ascend>
@@ -3831,9 +3933,9 @@
 							margin="0.00,5.00,0.00,5.00"/>
 					</imagemetrics>
 					<component_text
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="ingame_text_small_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
 				</wh3_main_dae_khorne_points>
 				<wh3_main_dae_nurgle_points
 					this="4FC34E3F-602D-477F-8EDACC4CEC116240"
@@ -3855,9 +3957,9 @@
 							margin="0.00,5.00,0.00,5.00"/>
 					</imagemetrics>
 					<component_text
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="ingame_text_small_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
 				</wh3_main_dae_nurgle_points>
 				<wh3_main_dae_slaanesh_points
 					this="8D40E264-7CAF-44C7-8685B7B96A69EA2A"
@@ -3879,9 +3981,9 @@
 							margin="0.00,5.00,0.00,5.00"/>
 					</imagemetrics>
 					<component_text
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="ingame_text_small_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
 				</wh3_main_dae_slaanesh_points>
 				<wh3_main_dae_tzeentch_points
 					this="3994C847-324D-423E-86B86AE0DFCFBD93"
@@ -3903,9 +4005,9 @@
 							margin="0.00,5.00,0.00,5.00"/>
 					</imagemetrics>
 					<component_text
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="ingame_text_small_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
 				</wh3_main_dae_tzeentch_points>
 				<wh3_main_dae_undivided_points
 					this="D33FA7EC-A85C-4AAD-B5A43127636A24C9"
@@ -3927,9 +4029,9 @@
 							margin="0.00,5.00,0.00,5.00"/>
 					</imagemetrics>
 					<component_text
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="ingame_text_small_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
 				</wh3_main_dae_undivided_points>
 			</states>
 		</prog_bar_fill>
@@ -5464,8 +5566,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						text_shader_name="text_outline_t0"
 						textshadervars="0.00,0.00,0.00,1.00"/>
 				</default>

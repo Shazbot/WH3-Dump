@@ -8,6 +8,19 @@
 			<province_info this="54E7DC65-94BE-4EE1-84606C36B869B8B7">
 				<script_hider_parent this="89232C68-1F18-49A7-90825F73CC7AC23D">
 					<panel this="46E88B26-FDF7-4B76-930DA5868F0DE6A0">
+						<harmony_holder this="EA4494E0-A132-4741-92EE5867DD18CF61">
+							<harmony this="2A484757-14E4-4C4F-91D24C516A756A3C">
+								<symbol this="1A1EFAC1-09ED-40D6-A4F17181C1B4782E"/>
+								<petals this="5EADDB97-9DE5-4096-BB0DF009E4B28A47">
+									<petal_white_1 this="D2D9D508-92EE-4623-87ED7EB6A3DEDD76"/>
+									<petal_white_2 this="6A7466B0-A5B2-46CD-9920C63B6A8129D3"/>
+									<petal_white_3 this="DA583E5D-1569-4AF7-AB7396C4B1088903"/>
+									<petal_black_1 this="3D30632D-C281-4317-81320439FAEF2636"/>
+									<petal_black_2 this="F98623C7-AA51-4B66-BFAB6A527B13BA34"/>
+									<petal_black_3 this="21C3EF16-A934-41D6-BE11550C1E4BE880"/>
+								</petals>
+							</harmony>
+						</harmony_holder>
 						<frame_growth this="954700B7-2099-4BC7-AF08A07C391EB113">
 							<panel_smoke_t this="1D5BE6E0-B9E3-4FD8-AE11FB15B4D4BF14"/>
 							<header_frame this="D9326143-42BD-4555-962D48D9ACBE798A"/>
@@ -71,6 +84,13 @@
 								</checkbox_tax_exempt>
 							</tax_holder>
 						</frame_income>
+						<frame_foreign_slot_income this="75B1EC2D-9157-4597-8ABE0F08595DD630">
+							<header_income this="B54AAF4B-14A4-4E7D-B177D718F353359F"/>
+							<foreign_slot_wealth_holder this="5ABA976F-0140-48BF-A5B942AFEC219249">
+								<coin this="19AE34AA-64FC-43BA-84BEAF69AE7EE58D"/>
+								<dy_wealth this="C8C1AB79-0125-40FC-8C3488D9FDF9FC78"/>
+							</foreign_slot_wealth_holder>
+						</frame_foreign_slot_income>
 						<frame_industry this="5D893FB5-5872-4FF4-A65B48839BB1B00D">
 							<header_industry this="83A3CAA3-9F69-44D5-B5562DF304277CE4"/>
 							<industry_docker this="DB9406A8-1152-40D7-9B2DBAE31A883336">
@@ -503,6 +523,59 @@
 					is_text_localised="false"/>
 			</localised_texts>
 		</button_txt>
+		<harmony
+			this="2A484757-14E4-4C4F-91D24C516A756A3C"
+			id="harmony"
+			template_id="harmony"
+			part_of_template="true"
+			uniqueguid_in_template="CEAA7EF6-C092-4420-8E7AEB9E114BF111"
+			uniqueguid="2A484757-14E4-4C4F-91D24C516A756A3C"
+			dimensions="110.00,44.00"
+			dock_point="Top Center"
+			offset="0.00,-42.00"
+			priority="1">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="016A5120-879C-4633-91EF4AC86161DB9F"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/wh3_main_cth_cathay/harmony_base.png"
+					uniqueguid="93625223-0572-4457-BB4C054D02B9488B"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="IsValidContext"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignFactionProvinceManager"
+					context_function_id="PooledResourceContext(&quot;wh3_dlc24_cth_province_harmony&quot;)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="PooledResourceTransaction"/>
+						<property
+							name="event1"
+							value="CampaignBattleFullyCompleted"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextInitPlayerFaction"
+					context_object_id="CcoCampaignFaction"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/wh3_main_cth_cathay/harmony_base.png"/>
+			</override_images>
+		</harmony>
 		<button_no_more
 			this="91F9F16E-4F73-4E7A-ACDB3557E42D2879"
 			id="button_no_more"
@@ -1602,6 +1675,7 @@
 			uniqueguid="420208D8-4E9A-4D63-A717C7444C2B9B72"
 			dimensions="26.00,29.00"
 			dock_point="Bottom Right External"
+			is_visible="false"
 			tooltips_localised="false"
 			offset="0.00,-250.00"
 			priority="999999"
@@ -1871,6 +1945,32 @@
 				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
 			</override_images>
 		</dev_button_subtract_resource>
+		<petals
+			this="5EADDB97-9DE5-4096-BB0DF009E4B28A47"
+			id="petals"
+			part_of_template="true"
+			uniqueguid_in_template="FBD384AF-2A6B-4315-BD6D92DD7EB8B355"
+			uniqueguid="5EADDB97-9DE5-4096-BB0DF009E4B28A47"
+			dimensions="110.00,44.00"
+			dock_point="Center"
+			priority="1">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="B77AD4B5-7BFF-4E2F-814173A4B9C1478E"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignPooledResource"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</petals>
 		<radio_button
 			this="D776983A-DA59-40B3-A2F474512BD244B3"
 			id="radio_button"
@@ -2080,9 +2180,6 @@
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
-					context_object_id="CcoCampaignRitual"/>
-				<callback_with_context
 					callback_id="ContextImageSetter"
 					context_object_id="CcoCampaignRitual"
 					context_function_id="RitualContext.Icon"/>
@@ -2114,6 +2211,15 @@
 							value="CampaignTechnologyStateChangeAny"/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoCampaignRitual">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/campaign ui/tooltip_ritual"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -2127,9 +2233,7 @@
 					value="0"/>
 			</user_properties>
 			<localised_texts>
-				<localised_text
-					tooltip_label="ComponentTooltip_b3d7e6de"
-					tooltip_text="{{tt:ui/campaign ui/tooltip_ritual}}"/>
+				<localised_text/>
 				<localised_text
 					state="active"
 					is_text_localised="false"/>
@@ -2256,9 +2360,6 @@
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
-					context_object_id="CcoCampaignRitual"/>
-				<callback_with_context
 					callback_id="ContextImageSetter"
 					context_object_id="CcoCampaignRitual"
 					context_function_id="RitualContext.Icon"/>
@@ -2280,6 +2381,15 @@
 				<callback_with_context
 					callback_id="ContextObjectStore"
 					context_object_id="CcoCampaignSettlement"/>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoCampaignRitual">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/campaign ui/tooltip_ritual"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -2293,9 +2403,7 @@
 					value="0"/>
 			</user_properties>
 			<localised_texts>
-				<localised_text
-					tooltip_label="template_devotees_ritual_Tooltip_b0274850"
-					tooltip_text="{{tt:ui/campaign ui/tooltip_ritual}}"/>
+				<localised_text/>
 				<localised_text
 					state="active"
 					is_text_localised="false"/>
@@ -2422,9 +2530,6 @@
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
-					context_object_id="CcoCampaignRitual"/>
-				<callback_with_context
 					callback_id="ContextImageSetter"
 					context_object_id="CcoCampaignRitual"
 					context_function_id="RitualContext.Icon"/>
@@ -2443,6 +2548,15 @@
 					context_object_id="CcoCampaignRitual"
 					context_function_id="Perform(SelectedSettlement)"/>
 				<callback_with_context callback_id="CallbackAnimTrigger"/>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoCampaignRitual">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/campaign ui/tooltip_ritual"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -2456,9 +2570,7 @@
 					value="0"/>
 			</user_properties>
 			<localised_texts>
-				<localised_text
-					tooltip_label="ComponentTooltip_30bc1989"
-					tooltip_text="{{tt:ui/campaign ui/tooltip_ritual}}"/>
+				<localised_text/>
 				<localised_text
 					state="active"
 					is_text_localised="false"/>
@@ -2808,6 +2920,73 @@
 					text_label="button_txt_inactive_Text_1003d"/>
 			</localised_texts>
 		</button_txt>
+		<petal_black_1
+			this="3D30632D-C281-4317-81320439FAEF2636"
+			id="petal_black_1"
+			part_of_template="true"
+			uniqueguid_in_template="5F929A4F-512D-41A4-A7C13531334E8BE0"
+			uniqueguid="3D30632D-C281-4317-81320439FAEF2636"
+			dimensions="110.00,44.00"
+			dock_point="Center"
+			tooltips_localised="false"
+			priority="1">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="7C2DF154-14D4-407D-8E911EC5951342CC"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="742AF4D8-44E5-4DEE-B1AC50EA2FCCBACA"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/wh3_main_cth_cathay/harmony_petal_black_1.png"
+					uniqueguid="04C0798F-451D-43DE-9432C6E896B12BE2"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="EffectList(&quot;ABSOLUTE_VALUE&quot;).FirstContext((x) =&gt; x.EffectBundle.Key == &quot;wh3_main_bundle_cth_harmony_yin_1&quot;).EffectBundle"/>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoCampaignPooledResource">
+					<child_m_user_properties>
+						<property
+							name="active"
+							value="Total &lt;= EffectList(&quot;ABSOLUTE_VALUE&quot;).FirstContext((x) =&gt; x.EffectBundle.Key == &quot;wh3_main_bundle_cth_harmony_yin_1&quot;).UpperBound"/>
+						<property
+							name="event0"
+							value="PooledResourceEffectChanged"/>
+						<property
+							name="fallback_state"
+							value="inactive"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="ContextCustomTooltipStore"/>
+				<property
+					name="disable_override1"
+					value="ContextStateSetterConditional"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text
+					tooltip_label="ComponentTooltip_710fa049"
+					tooltip_text="{{tt:ui/common ui/tooltip_effect_bundle}}"/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/wh3_main_cth_cathay/harmony_petal_black_1.png"/>
+			</override_images>
+		</petal_black_1>
 		<button_flame
 			this="E5A02A8E-5DD3-4951-8506A2E85406C2F5"
 			id="button_flame"
@@ -3169,6 +3348,73 @@
 				<element value="ui/skins/default/slider_vertical_bottom.png"/>
 			</override_images>
 		</frame_bottom>
+		<petal_black_2
+			this="F98623C7-AA51-4B66-BFAB6A527B13BA34"
+			id="petal_black_2"
+			part_of_template="true"
+			uniqueguid_in_template="0B76C610-3E2C-4375-8B3E8227499F80B3"
+			uniqueguid="F98623C7-AA51-4B66-BFAB6A527B13BA34"
+			dimensions="110.00,44.00"
+			dock_point="Center"
+			tooltips_localised="false"
+			priority="1">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="61E35142-63CD-4699-97A016C07849821F"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="525E64D8-4D4A-4418-99A677E5485585E4"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/wh3_main_cth_cathay/harmony_petal_black_2.png"
+					uniqueguid="D6843FE7-D94F-4669-92F2659502BABCFF"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="EffectList(&quot;ABSOLUTE_VALUE&quot;).FirstContext((x) =&gt; x.EffectBundle.Key == &quot;wh3_main_bundle_cth_harmony_yin_2&quot;).EffectBundle"/>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoCampaignPooledResource">
+					<child_m_user_properties>
+						<property
+							name="active"
+							value="Total &lt;= EffectList(&quot;ABSOLUTE_VALUE&quot;).FirstContext((x) =&gt; x.EffectBundle.Key == &quot;wh3_main_bundle_cth_harmony_yin_2&quot;).UpperBound"/>
+						<property
+							name="event0"
+							value="PooledResourceEffectChanged"/>
+						<property
+							name="fallback_state"
+							value="inactive"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="ContextCustomTooltipStore"/>
+				<property
+					name="disable_override1"
+					value="ContextStateSetterConditional"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text
+					tooltip_label="ComponentTooltip_3fd28e33"
+					tooltip_text="{{tt:ui/common ui/tooltip_effect_bundle}}"/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/wh3_main_cth_cathay/harmony_petal_black_2.png"/>
+			</override_images>
+		</petal_black_2>
 		<frame_top
 			this="533829AA-68D3-48E4-9394FE3E7D766CCE"
 			id="frame_top"
@@ -3245,6 +3491,73 @@
 				<element value="ui/skins/default/slider_vertical_top.png"/>
 			</override_images>
 		</frame_top>
+		<petal_black_3
+			this="21C3EF16-A934-41D6-BE11550C1E4BE880"
+			id="petal_black_3"
+			part_of_template="true"
+			uniqueguid_in_template="20A81507-39B3-40F5-846290083885EC02"
+			uniqueguid="21C3EF16-A934-41D6-BE11550C1E4BE880"
+			dimensions="110.00,44.00"
+			dock_point="Center"
+			tooltips_localised="false"
+			priority="1">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="23B7DC29-FA31-42DE-8498DF8F5C5C1B95"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="ED70E0BA-334E-4AA6-B226960507FCD888"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/wh3_main_cth_cathay/harmony_petal_black_3.png"
+					uniqueguid="71961512-C85B-4EC8-82D8D1A0827D00D1"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="EffectList(&quot;ABSOLUTE_VALUE&quot;).FirstContext((x) =&gt; x.EffectBundle.Key == &quot;wh3_main_bundle_cth_harmony_yin_3&quot;).EffectBundle"/>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoCampaignPooledResource">
+					<child_m_user_properties>
+						<property
+							name="active"
+							value="Total &lt;= EffectList(&quot;ABSOLUTE_VALUE&quot;).FirstContext((x) =&gt; x.EffectBundle.Key == &quot;wh3_main_bundle_cth_harmony_yin_3&quot;).UpperBound"/>
+						<property
+							name="event0"
+							value="PooledResourceEffectChanged"/>
+						<property
+							name="fallback_state"
+							value="inactive"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="ContextCustomTooltipStore"/>
+				<property
+					name="disable_override1"
+					value="ContextStateSetterConditional"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text
+					tooltip_label="ComponentTooltip_fc86ac99"
+					tooltip_text="{{tt:ui/common ui/tooltip_effect_bundle}}"/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/wh3_main_cth_cathay/harmony_petal_black_3.png"/>
+			</override_images>
+		</petal_black_3>
 		<handle
 			this="03FA1997-D7BF-4AD6-A148E6FE6F8E995F"
 			id="handle"
@@ -3365,6 +3678,140 @@
 				<element value="ui/skins/default/slider_vertical_handle_underlay.png"/>
 			</override_images>
 		</handle>
+		<petal_white_1
+			this="D2D9D508-92EE-4623-87ED7EB6A3DEDD76"
+			id="petal_white_1"
+			part_of_template="true"
+			uniqueguid_in_template="2C0C6D31-6AC7-4D37-8FAD091249C10491"
+			uniqueguid="D2D9D508-92EE-4623-87ED7EB6A3DEDD76"
+			dimensions="110.00,44.00"
+			dock_point="Center"
+			tooltips_localised="false"
+			priority="1">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="CB45335E-D96B-4A74-AA44C96BF9F64053"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="BF207653-A7F1-46CC-9879BBFC91834DF2"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/wh3_main_cth_cathay/harmony_petal_white_1.png"
+					uniqueguid="A8F39C2E-02EB-46D7-A13EC8F25B5BCC04"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="EffectList(&quot;ABSOLUTE_VALUE&quot;).FirstContext((x) =&gt; x.EffectBundle.Key == &quot;wh3_main_bundle_cth_harmony_yang_1&quot;).EffectBundle"/>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoCampaignPooledResource">
+					<child_m_user_properties>
+						<property
+							name="active"
+							value="Total &gt;= EffectList(&quot;ABSOLUTE_VALUE&quot;).FirstContext((x) =&gt; x.EffectBundle.Key == &quot;wh3_main_bundle_cth_harmony_yang_1&quot;).LowerBound"/>
+						<property
+							name="event0"
+							value="PooledResourceEffectChanged"/>
+						<property
+							name="fallback_state"
+							value="inactive"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="ContextCustomTooltipStore"/>
+				<property
+					name="disable_override1"
+					value="ContextStateSetterConditional"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text
+					tooltip_label="ComponentTooltip_f84e89fe"
+					tooltip_text="{{tt:ui/common ui/tooltip_effect_bundle}}"/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/wh3_main_cth_cathay/harmony_petal_white_1.png"/>
+			</override_images>
+		</petal_white_1>
+		<petal_white_2
+			this="6A7466B0-A5B2-46CD-9920C63B6A8129D3"
+			id="petal_white_2"
+			part_of_template="true"
+			uniqueguid_in_template="A9FFF3AD-9354-427B-891359746FB330F3"
+			uniqueguid="6A7466B0-A5B2-46CD-9920C63B6A8129D3"
+			dimensions="110.00,44.00"
+			dock_point="Center"
+			tooltips_localised="false"
+			priority="1">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="4C811B24-A6D0-4077-B3402C359141A180"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="6D68ED32-D445-48D8-A8F8CB405B73E14B"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/wh3_main_cth_cathay/harmony_petal_white_2.png"
+					uniqueguid="C5E9ACAD-47BC-48F2-8901DD27FC3D8CAB"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="EffectList(&quot;ABSOLUTE_VALUE&quot;).FirstContext((x) =&gt; x.EffectBundle.Key == &quot;wh3_main_bundle_cth_harmony_yang_2&quot;).EffectBundle"/>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoCampaignPooledResource">
+					<child_m_user_properties>
+						<property
+							name="active"
+							value="Total &gt;= EffectList(&quot;ABSOLUTE_VALUE&quot;).FirstContext((x) =&gt; x.EffectBundle.Key == &quot;wh3_main_bundle_cth_harmony_yang_2&quot;).LowerBound"/>
+						<property
+							name="event0"
+							value="PooledResourceEffectChanged"/>
+						<property
+							name="fallback_state"
+							value="inactive"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="ContextCustomTooltipStore"/>
+				<property
+					name="disable_override1"
+					value="ContextStateSetterConditional"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text
+					tooltip_label="ComponentTooltip_a8c63912"
+					tooltip_text="{{tt:ui/common ui/tooltip_effect_bundle}}"/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/wh3_main_cth_cathay/harmony_petal_white_2.png"/>
+			</override_images>
+		</petal_white_2>
 		<top
 			this="F9CD0D7F-BF1B-4B8F-BA5E79D54EF74330"
 			id="top"
@@ -3519,6 +3966,195 @@
 				<element value="ui/skins/default/slider_vertical_top_hover.png"/>
 			</override_images>
 		</top>
+		<petal_white_3
+			this="DA583E5D-1569-4AF7-AB7396C4B1088903"
+			id="petal_white_3"
+			part_of_template="true"
+			uniqueguid_in_template="6483BF54-0AC2-49E2-B3ECAB39386906F2"
+			uniqueguid="DA583E5D-1569-4AF7-AB7396C4B1088903"
+			dimensions="110.00,44.00"
+			dock_point="Center"
+			tooltips_localised="false"
+			priority="1">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="367509E2-75BB-4A87-8E70971423BF6776"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="998194C2-5CD8-4187-92D346C7E0702359"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/wh3_main_cth_cathay/harmony_petal_white_3.png"
+					uniqueguid="1C6026F1-E6EF-4823-9251010998B43326"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="EffectList(&quot;ABSOLUTE_VALUE&quot;).FirstContext((x) =&gt; x.EffectBundle.Key == &quot;wh3_main_bundle_cth_harmony_yang_3&quot;).EffectBundle"/>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoCampaignPooledResource">
+					<child_m_user_properties>
+						<property
+							name="active"
+							value="Total &gt;= EffectList(&quot;ABSOLUTE_VALUE&quot;).FirstContext((x) =&gt; x.EffectBundle.Key == &quot;wh3_main_bundle_cth_harmony_yang_3&quot;).LowerBound"/>
+						<property
+							name="event0"
+							value="PooledResourceEffectChanged"/>
+						<property
+							name="fallback_state"
+							value="inactive"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="ContextCustomTooltipStore"/>
+				<property
+					name="disable_override1"
+					value="ContextStateSetterConditional"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text
+					tooltip_label="ComponentTooltip_fbb9aeb3"
+					tooltip_text="{{tt:ui/common ui/tooltip_effect_bundle}}"/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/wh3_main_cth_cathay/harmony_petal_white_3.png"/>
+			</override_images>
+		</petal_white_3>
+		<symbol
+			this="1A1EFAC1-09ED-40D6-A4F17181C1B4782E"
+			id="symbol"
+			part_of_template="true"
+			uniqueguid_in_template="CC661CB7-C12A-45A9-9718FD312C93DAB3"
+			uniqueguid="1A1EFAC1-09ED-40D6-A4F17181C1B4782E"
+			dimensions="34.00,34.00"
+			dock_point="Center"
+			offset="0.00,-2.00"
+			priority="1">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="0"
+					uniqueguid="D1CF8C97-C94B-419B-A3E0B530C25B868B"/>
+				<state_uniqueguid
+					name="yang_1"
+					uniqueguid="0D6BA7FC-B7ED-4E83-BCEDF5937B2C44CA"/>
+				<state_uniqueguid
+					name="yang_2"
+					uniqueguid="758DEEA6-E51B-44C0-B9160CB1FAA562F1"/>
+				<state_uniqueguid
+					name="yang_3"
+					uniqueguid="F7EFE7D5-B782-4111-8249051AEA67B4D2"/>
+				<state_uniqueguid
+					name="yin_1"
+					uniqueguid="D9718A6B-0B4A-4DA9-B89A36E08E587CDE"/>
+				<state_uniqueguid
+					name="yin_2"
+					uniqueguid="0FAEFD2B-D7E1-4D62-B2E0B187F3FF85F8"/>
+				<state_uniqueguid
+					name="yin_3"
+					uniqueguid="41BFB9F6-3746-4636-AA95372E8FD42F41"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/wh3_main_cth_cathay/harmony_symbol_0.png"
+					uniqueguid="9F1F4028-6BFF-4DC6-AAD0A42D2A4DF0CC"/>
+				<component_image_uniqueguid
+					name="ui/skins/wh3_main_cth_cathay/harmony_symbol_black.png"
+					uniqueguid="EDCD6F8B-BB11-46E0-9BE6B4DBA92702DE"/>
+				<component_image_uniqueguid
+					name="ui/skins/wh3_main_cth_cathay/harmony_symbol_black_1.png"
+					uniqueguid="B3AB76F0-B273-44F4-A7B04EC21A3F56DB"/>
+				<component_image_uniqueguid
+					name="ui/skins/wh3_main_cth_cathay/harmony_symbol_black_2.png"
+					uniqueguid="3CD446DA-CD61-4D60-A293BDA27013B81D"/>
+				<component_image_uniqueguid
+					name="ui/skins/wh3_main_cth_cathay/harmony_symbol_white.png"
+					uniqueguid="D22C9FA3-095B-4AE0-A3544E6437DBB69C"/>
+				<component_image_uniqueguid
+					name="ui/skins/wh3_main_cth_cathay/harmony_symbol_white_1.png"
+					uniqueguid="D1F3C11A-D04A-4977-BD21A46BE9EA47CE"/>
+				<component_image_uniqueguid
+					name="ui/skins/wh3_main_cth_cathay/harmony_symbol_white_2.png"
+					uniqueguid="64A21297-5DC6-42AE-83DF65F19D7AD3DC"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoCampaignPooledResource"/>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="StringReplace( CurrentGroupPooledResourceEffectContext(&quot;ABSOLUTE_VALUE&quot;).EffectBundle.Key, &quot;wh3_main_bundle_cth_harmony_&quot;, &quot;&quot;)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="PooledResourceEffectChanged"/>
+						<property
+							name="fallback_state"
+							value="0"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_function_id="&quot;{{tt:ui/campaign ui/tooltip_harmony}}&quot;"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="ContextCustomTooltipStore"/>
+				<property
+					name="disable_override1"
+					value="ContextStateSetter"/>
+				<property
+					name="disable_override2"
+					value="ContextTooltipSetter"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="0"
+					is_text_localised="false"/>
+				<localised_text
+					state="yang_1"
+					is_text_localised="false"/>
+				<localised_text
+					state="yang_2"
+					is_text_localised="false"/>
+				<localised_text
+					state="yang_3"
+					is_text_localised="false"/>
+				<localised_text
+					state="yin_1"
+					is_text_localised="false"/>
+				<localised_text
+					state="yin_2"
+					is_text_localised="false"/>
+				<localised_text
+					state="yin_3"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/wh3_main_cth_cathay/harmony_symbol_0.png"/>
+				<element value="ui/skins/wh3_main_cth_cathay/harmony_symbol_black.png"/>
+				<element value="ui/skins/wh3_main_cth_cathay/harmony_symbol_black_1.png"/>
+				<element value="ui/skins/wh3_main_cth_cathay/harmony_symbol_black_2.png"/>
+				<element value="ui/skins/wh3_main_cth_cathay/harmony_symbol_white.png"/>
+				<element value="ui/skins/wh3_main_cth_cathay/harmony_symbol_white_1.png"/>
+				<element value="ui/skins/wh3_main_cth_cathay/harmony_symbol_white_2.png"/>
+			</override_images>
+		</symbol>
 		<root
 			this="AB480649-0FB4-4EB2-B91CCA7B14227020"
 			id="root"
@@ -3702,9 +4338,9 @@
 						texthbehaviour="Resize"
 						textlabel="dy_growth_NewState_Text_390039"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</dy_growth>
@@ -3742,8 +4378,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="16"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_paragraph_heading"
+						font_m_leading="3"
+						fontcat_name="header_16"
 						text_shader_name="text_outline_t0"
 						textshadervars="0.00,0.00,0.00,1.00"/>
 				</newstate>
@@ -3822,7 +4458,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"
+						fontcat_name="body_12"
 						text_shader_name="drop_shadow_t0"
 						textshadervars="-1.00,-1.00,1.00,0.00"/>
 				</newstate>
@@ -3869,16 +4505,16 @@
 						texthbehaviour="Resize"
 						textlabel="dy_wealth_NewState_Text_390000"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</dy_wealth>
 		<effects
 			this="BB682B0D-42FF-4822-A6DCC3D764DFF447"
 			id="effects"
-			offset="0.00,810.00"
+			offset="0.00,880.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			priority="45"
@@ -3928,9 +4564,10 @@
 						textvalign="Center"
 						texthalign="Center"
 						font_m_size="12"
-						font_m_colour="#A99989FF"
-						font_m_leading="1"
-						fontcat_name="parchment_text_warhammer3"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"
 						textshadervars="0.00,1.00,2.00,0.00"/>
 				</default>
 			</states>
@@ -3938,7 +4575,7 @@
 		<frame_corruption
 			this="A3F38307-4845-4D09-AC72EE65BF596C80"
 			id="frame_corruption"
-			offset="0.00,718.00"
+			offset="0.00,788.00"
 			allowhorizontalresize="false"
 			priority="45"
 			tooltipslocalised="true"
@@ -3988,7 +4625,7 @@
 		<frame_growth
 			this="954700B7-2099-4BC7-AF08A07C391EB113"
 			id="frame_growth"
-			offset="0.00,17.00"
+			offset="0.00,21.00"
 			allowhorizontalresize="false"
 			tooltipslocalised="true"
 			uniqueguid="954700B7-2099-4BC7-AF08A07C391EB113"
@@ -4043,7 +4680,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"
+						fontcat_name="body_12"
 						text_shader_name="drop_shadow_t0"
 						textshadervars="2.00,2.00,1.00,0.00"/>
 				</default>
@@ -4052,7 +4689,7 @@
 		<frame_income
 			this="090F08E4-6FE6-4E20-948E7A42E8506658"
 			id="frame_income"
-			offset="0.00,100.00"
+			offset="0.00,104.00"
 			allowhorizontalresize="false"
 			priority="45"
 			tooltipslocalised="true"
@@ -4066,7 +4703,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="IsPlayerOwned &amp;&amp; FactionProvinceManagerContext.IsWealthEnabled &amp;&amp; IsContextValid(ResourceList.FirstContext(Key == &quot;res_fortress&quot; || Key == &quot;res_empire_fort&quot;)) == false &amp;&amp; RegionRecordKey != &quot;wh3_main_combi_region_the_oak_of_ages&quot;"/>
+					context_function_id="HostileForeignSlotList(PlayersFaction).IsEmpty == false || ( IsPlayerOwned &amp;&amp; FactionProvinceManagerContext.IsWealthEnabled &amp;&amp; IsContextValid(ResourceList.FirstContext(Key == &quot;res_fortress&quot; || Key == &quot;res_empire_fort&quot;)) == false &amp;&amp; RegionRecordKey != &quot;wh3_main_combi_region_the_oak_of_ages&quot;)"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -4113,13 +4750,15 @@
 			allowverticalresize="false"
 			docking="Center"
 			component_anchor_point="0.50,0.50"
-			componentleveltooltip="{{tr:population_surplus_tooltip}}"
-			tooltiplabel="growth_pts_holder_Tooltip_190035"
 			uniqueguid="62CB0B0C-9A76-4713-A86BF0EE3A6ABE69"
 			currentstate="32F94D55-9DD2-4570-A59BF09D48CDB462"
 			defaultstate="32F94D55-9DD2-4570-A59BF09D48CDB462">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="ContextAnimationTrigger"/>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoCampaignFactionProvinceManager"
+					context_function_id="&quot;{{tr:population_surplus_tooltip}}&quot; + GetIfElse(HasMaxDevelopmentPoints, Format(&quot;&#10;&#10;%s&quot;, Loc(&quot;development_points_tooltip_growth_max&quot;)), &quot;&quot;)"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -4230,8 +4869,9 @@
 						textlabel="header_frame_NewState_Text_7b"
 						font_m_font_name="brand_header"
 						font_m_size="14"
-						font_m_colour="#FFFFE0FF"
-						fontcat_name="parchment_header_small_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_14"/>
 				</wh3>
 			</states>
 		</header_frame>
@@ -4282,8 +4922,9 @@
 						textlabel="header_frame_NewState_Text_7bu"
 						font_m_font_name="brand_header"
 						font_m_size="14"
-						font_m_colour="#FFFFE0FF"
-						fontcat_name="parchment_header_small_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_14"/>
 				</wh3>
 			</states>
 		</header_corruption>
@@ -4334,8 +4975,9 @@
 						textlabel="header_frame_NewState_Text_660035"
 						font_m_font_name="brand_header"
 						font_m_size="14"
-						font_m_colour="#FFFFE0FF"
-						fontcat_name="parchment_header_small_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_14"/>
 				</wh3>
 			</states>
 		</header_frame>
@@ -4418,9 +5060,10 @@
 						textlocalised="true"
 						textlabel="label_txt_NewState_Text_240059"
 						font_m_size="12"
-						font_m_colour="#A99989FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_faded_warhammer3"/>
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
 				</newstate>
 			</states>
 		</label_txt>
@@ -4453,9 +5096,10 @@
 					<component_text
 						font_m_font_name="georgia_italic"
 						font_m_size="12"
-						font_m_colour="#A99F89FF"
-						font_m_leading="1"
-						fontcat_name="fe_italic"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12_italic"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -4511,9 +5155,10 @@
 					<component_text
 						font_m_font_name="georgia_italic"
 						font_m_size="12"
-						font_m_colour="#A99F89FF"
-						font_m_leading="1"
-						fontcat_name="fe_italic"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12_italic"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
 				</newstate>
 			</states>
 		</template_effect>
@@ -4605,9 +5250,9 @@
 						textlocalised="true"
 						textlabel="StateText_4feb4938"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<inactive
 					this="F6747966-555F-4087-9AE56A1381202587"
@@ -4638,9 +5283,10 @@
 						textlocalised="true"
 						textlabel="StateText_4feb4938"
 						font_m_size="12"
-						font_m_colour="#666666FF"
-						font_m_leading="1"
-						fontcat_name="fe_text_inactive"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_inactive_grey"/>
 				</inactive>
 			</states>
 		</template_corruption>
@@ -4696,16 +5342,17 @@
 						textlabel="header_income_wh3_Text_54d1de44"
 						font_m_font_name="brand_header"
 						font_m_size="14"
-						font_m_colour="#B95C00FF"
-						font_m_leading="1"
-						fontcat_name="fe_hyperlink"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_14"
+						font_colour_override_preset_key="link"/>
 				</wh3>
 			</states>
 		</header_income>
 		<panel
 			this="46E88B26-FDF7-4B76-930DA5868F0DE6A0"
 			id="panel"
-			offset="-3.00,-419.00"
+			offset="-3.00,-489.00"
 			allowhorizontalresize="false"
 			docking="Bottom Left"
 			dock_offset="-3.00,19.00"
@@ -4734,7 +5381,7 @@
 					this="2CE3110E-BF7A-4889-8A36069AE427B59A"
 					name="NewState"
 					width="254"
-					height="906"
+					height="976"
 					interactive="true"
 					uniqueguid="2CE3110E-BF7A-4889-8A36069AE427B59A">
 					<imagemetrics>
@@ -4743,7 +5390,7 @@
 							uniqueguid="00344AFD-732B-4C7A-B8745F90796E5EE8"
 							componentimage="82625FD3-E959-46B9-B33DFCC70EE66789"
 							width="254"
-							height="888"
+							height="957"
 							tile="true"
 							dockpoint="Top Center"
 							margin="50.00,50.00,50.00,50.00"/>
@@ -4766,7 +5413,7 @@
 							componentimage="C650A34F-17E3-4FF5-929FA623F327E401"
 							offset="-9.00,-9.00"
 							width="271"
-							height="907"
+							height="977"
 							tile="true"
 							margin="80.00,80.00,80.00,80.00"/>
 					</imagemetrics>
@@ -4864,7 +5511,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</dy_value>
@@ -5104,9 +5751,9 @@
 					stateeditordisplaypos="20.00,24.00">
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 			</states>
 			<animations>
@@ -5158,6 +5805,10 @@
 					callback_id="ContextTrashOnCondition"
 					context_object_id="CcoCampaignFaction"
 					context_function_id="CultureContext.Key == &quot;wh3_dlc23_chd_chaos_dwarfs&quot;"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="IsPlayerOwned"/>
 			</callbackwithcontextlist>
 			<states>
 				<default
@@ -5329,9 +5980,9 @@
 						texthalign="Center"
 						textlabel="no_corruption_NewState_Text_2d0039"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</no_corruption>
@@ -5437,9 +6088,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 			</states>
 			<animations>
@@ -5874,7 +6525,7 @@
 		<frame_public_order
 			this="60AA8576-EB91-47C7-85C9C81E5455F296"
 			id="frame_public_order"
-			offset="0.00,458.00"
+			offset="0.00,528.00"
 			allowhorizontalresize="false"
 			priority="45"
 			uniqueguid="60AA8576-EB91-47C7-85C9C81E5455F296"
@@ -5971,9 +6622,9 @@
 						texthbehaviour="Resize"
 						textlabel="dy_growth_NewState_Text_390012"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</dy_growth>
@@ -6039,9 +6690,10 @@
 						textlabel="StateText_632293ea"
 						font_m_font_name="brand_header"
 						font_m_size="14"
-						font_m_colour="#B95C00FF"
-						font_m_leading="1"
-						fontcat_name="fe_hyperlink"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_14"
+						font_colour_override_preset_key="link"/>
 				</chaos_dwarfs>
 				<wh3
 					this="BAC6454C-5D55-4562-8C3AAB9161107460"
@@ -6069,9 +6721,10 @@
 						textlabel="header_control_wh3_Text_97e737eb"
 						font_m_font_name="brand_header"
 						font_m_size="14"
-						font_m_colour="#B95C00FF"
-						font_m_leading="1"
-						fontcat_name="fe_hyperlink"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_14"
+						font_colour_override_preset_key="link"/>
 				</wh3>
 			</states>
 		</header_control>
@@ -6347,8 +7000,9 @@
 						textlabel="StateText_99d11c9f"
 						font_m_font_name="brand_header"
 						font_m_size="14"
-						font_m_colour="#FFFFE0FF"
-						fontcat_name="parchment_header_small_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_14"/>
 				</newstate>
 			</states>
 		</dy_slaves>
@@ -6503,7 +7157,7 @@
 		<frame_devotees
 			this="756B62EF-2EBD-4C06-B589C9E03B74CBF0"
 			id="frame_devotees"
-			offset="0.00,538.00"
+			offset="0.00,608.00"
 			allowhorizontalresize="false"
 			priority="45"
 			tooltipslocalised="true"
@@ -6625,9 +7279,10 @@
 						textlabel="dy_devotees_NewState_Text_1c0023"
 						font_m_font_name="brand_header"
 						font_m_size="14"
-						font_m_colour="#B95C00FF"
-						font_m_leading="1"
-						fontcat_name="fe_hyperlink"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_14"
+						font_colour_override_preset_key="link"/>
 				</newstate>
 			</states>
 		</dy_devotees>
@@ -6673,9 +7328,9 @@
 						texthbehaviour="Resize"
 						textlabel="dy_devotees_NewState_Text_390000"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</dy_devotees>
@@ -6842,9 +7497,9 @@
 						textlocalised="true"
 						textlabel="text_default_Text_7f089f18"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</default>
 			</states>
 		</text>
@@ -7051,7 +7706,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -7087,7 +7742,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -7130,9 +7785,9 @@
 						texthbehaviour="Never split"
 						textlabel="growth_NewState_Text_190012"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</number_devotees>
@@ -7164,9 +7819,9 @@
 						texthbehaviour="Never split"
 						textlabel="dy_name_NewState_Text_7a003f"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</province>
@@ -7297,9 +7952,10 @@
 						textlocalised="true"
 						textlabel="tx_no_effects_default_Text_1f0037"
 						font_m_size="12"
-						font_m_colour="#A99989FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_faded_warhammer3"/>
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
 				</default>
 			</states>
 		</tx_no_effects>
@@ -7425,9 +8081,9 @@
 						textyoffset="10.00,0.00"
 						textlabel="StateText_ef56c331"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</text>
 			</states>
 		</cooldown_display>
@@ -7493,9 +8149,9 @@
 						textyoffset="10.00,0.00"
 						textlabel="StateText_635e58ec"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</text>
 			</states>
 		</cooldown_display>
@@ -7571,16 +8227,17 @@
 						textlabel="StateText_2e5a73bc"
 						font_m_font_name="brand_header"
 						font_m_size="14"
-						font_m_colour="#B95C00FF"
-						font_m_leading="1"
-						fontcat_name="fe_hyperlink"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_14"
+						font_colour_override_preset_key="link"/>
 				</newstate>
 			</states>
 		</dy_slaves>
 		<frame_slaves
 			this="0298F2C2-3CBA-4B5F-946C81480A935E15"
 			id="frame_slaves"
-			offset="0.00,628.00"
+			offset="0.00,698.00"
 			allowhorizontalresize="false"
 			priority="45"
 			tooltipslocalised="true"
@@ -7949,9 +8606,9 @@
 						textyoffset="10.00,0.00"
 						textlabel="StateText_409c3e18"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</text>
 			</states>
 		</cooldown_display>
@@ -7985,9 +8642,10 @@
 						textlabel="StateText_63c9ebcd"
 						font_m_font_name="brand_header"
 						font_m_size="14"
-						font_m_colour="#B95C00FF"
-						font_m_leading="1"
-						fontcat_name="fe_hyperlink"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_14"
+						font_colour_override_preset_key="link"/>
 				</newstate>
 			</states>
 		</dy_labour>
@@ -8033,9 +8691,9 @@
 						texthbehaviour="Resize"
 						textlabel="StateText_5a5be90c"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</dy_devotees>
@@ -8071,7 +8729,7 @@
 		<frame_industry
 			this="5D893FB5-5872-4FF4-A65B48839BB1B00D"
 			id="frame_industry"
-			offset="0.00,196.00"
+			offset="0.00,266.00"
 			allowhorizontalresize="false"
 			tooltipslocalised="true"
 			uniqueguid="5D893FB5-5872-4FF4-A65B48839BB1B00D"
@@ -8130,7 +8788,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"
+						fontcat_name="body_12"
 						text_shader_name="drop_shadow_t0"
 						textshadervars="2.00,2.00,1.00,0.00"/>
 				</default>
@@ -8147,7 +8805,7 @@
 		<frame_labour
 			this="F735978F-B914-4D04-82B50763D199FDB3"
 			id="frame_labour"
-			offset="0.00,368.00"
+			offset="0.00,438.00"
 			allowhorizontalresize="false"
 			priority="45"
 			tooltipslocalised="true"
@@ -8243,8 +8901,9 @@
 						textlabel="StateText_db5ede88"
 						font_m_font_name="brand_header"
 						font_m_size="14"
-						font_m_colour="#FFFFE0FF"
-						fontcat_name="parchment_header_small_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_14"/>
 				</wh3>
 			</states>
 		</header_industry>
@@ -8458,9 +9117,9 @@
 						texthbehaviour="Resize"
 						textlabel="StateText_e722c092"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<inactive
 					this="13E7EAEE-9FC2-4916-BCA2C74FD7C83DCB"
@@ -8480,9 +9139,10 @@
 						textlocalised="true"
 						textlabel="StateText_4feb4938"
 						font_m_size="12"
-						font_m_colour="#666666FF"
-						font_m_leading="1"
-						fontcat_name="fe_text_inactive"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_inactive_grey"/>
 				</inactive>
 			</states>
 		</labour_value>
@@ -8613,9 +9273,9 @@
 						texthbehaviour="Resize"
 						textlabel="StateText_f837a24f"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<inactive
 					this="1D77A300-6CD7-42C4-8539D353A4804BEB"
@@ -8635,9 +9295,10 @@
 						textlocalised="true"
 						textlabel="StateText_f341e5cb"
 						font_m_size="12"
-						font_m_colour="#666666FF"
-						font_m_leading="1"
-						fontcat_name="fe_text_inactive"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_inactive_grey"/>
 				</inactive>
 			</states>
 		</workload_tracker>
@@ -8668,9 +9329,9 @@
 						texthbehaviour="Resize"
 						textlabel="StateText_3807543c"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</default>
 			</states>
 		</braket_left>
@@ -8701,9 +9362,9 @@
 						texthbehaviour="Resize"
 						textlabel="StateText_a4aa863d"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</default>
 			</states>
 		</braket_right>
@@ -8796,9 +9457,10 @@
 						texthbehaviour="Resize"
 						textlabel="StateText_2d5aaad5"
 						font_m_size="12"
-						font_m_colour="#FF2D2DFF"
-						font_m_leading="7"
-						fontcat_name="fe_text_red_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
 				</default>
 			</states>
 		</labour_loss>
@@ -8990,9 +9652,9 @@
 						texthbehaviour="Never split"
 						textlabel="StateText_a7450489"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</default>
 			</states>
 		</efficiency_percentage>
@@ -9039,9 +9701,10 @@
 						textlocalised="true"
 						textlabel="StateText_f56d17c5"
 						font_m_size="12"
-						font_m_colour="#A99989FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_faded_warhammer3"/>
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
 				</newstate>
 			</states>
 		</label_txt>
@@ -9229,9 +9892,9 @@
 						texthbehaviour="Never split"
 						textlabel="StateText_d3079b43"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</default>
 			</states>
 		</real_output_value>
@@ -9382,9 +10045,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="0669F0D5-8F1A-48B1-90751161688AAD3E"
@@ -9436,9 +10099,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -9486,9 +10149,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="B4AAE54D-3E13-478D-9D0EC43B8EB6905B"
@@ -9691,9 +10354,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -9736,9 +10399,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 			</states>
 			<animations>
@@ -9937,9 +10600,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="06ADF353-A19B-48F9-9804CACEC00DF901"
@@ -9991,9 +10654,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -10041,9 +10704,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="D55DF54F-A792-457A-831C61C844249682"
@@ -10246,9 +10909,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -10291,9 +10954,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 			</states>
 			<animations>
@@ -10362,9 +11025,10 @@
 						textlocalised="true"
 						textlabel="StateText_a81f8b52"
 						font_m_size="12"
-						font_m_colour="#A99989FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_faded_warhammer3"/>
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
 				</newstate>
 			</states>
 		</confirmation_txt>
@@ -10472,9 +11136,9 @@
 						texthbehaviour="Never split"
 						textlabel="StateText_f38d2073"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</default>
 				<inactive
 					this="ACC59DB1-DCB4-4446-9FCCBE0E178C0483"
@@ -10498,9 +11162,10 @@
 						texthbehaviour="Never split"
 						textlabel="StateText_c8fb8936"
 						font_m_size="12"
-						font_m_colour="#FF2D2DFF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_red"/>
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
 				</inactive>
 			</states>
 		</real_output_value>
@@ -10539,9 +11204,10 @@
 						texthbehaviour="Resize"
 						textlabel="StateText_c90a14aa"
 						font_m_size="12"
-						font_m_colour="#FF2D2DFF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_tooltip_red"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"
 						text_shader_name="drop_shadow_t0"
 						textshadervars="0.00,-1.00,2.00,0.00"/>
 				</negative>
@@ -10561,8 +11227,8 @@
 						textlabel="StateText_bec837ef"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"
+						font_m_leading="3"
+						fontcat_name="body_12"
 						text_shader_name="drop_shadow_t0"
 						textshadervars="0.00,-1.00,2.00,0.00"/>
 				</positive>
@@ -10929,11 +11595,284 @@
 						texthbehaviour="Resize"
 						textlabel="StateText_d0e94573"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</template_entry>
+		<harmony_holder
+			this="EA4494E0-A132-4741-92EE5867DD18CF61"
+			id="harmony_holder"
+			offset="0.00,17.00"
+			allowhorizontalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="EA4494E0-A132-4741-92EE5867DD18CF61"
+			currentstate="5120C97E-4A20-4C10-8F6661C618EF4F09"
+			defaultstate="5120C97E-4A20-4C10-8F6661C618EF4F09">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="FactionProvinceManagerContext">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignSettlementSelectedAny"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="IsPlayerOwned &amp;&amp; IsContextValid( FactionProvinceManagerContext.PooledResourceContext(&quot;wh3_dlc24_cth_province_harmony&quot;))">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignSettlementSelectedAny"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="5120C97E-4A20-4C10-8F6661C618EF4F09"
+					name="NewState"
+					width="254"
+					height="1"
+					disabled="true"
+					uniqueguid="5120C97E-4A20-4C10-8F6661C618EF4F09"/>
+			</states>
+		</harmony_holder>
+		<coin
+			this="19AE34AA-64FC-43BA-84BEAF69AE7EE58D"
+			id="coin"
+			offset="18.00,0.00"
+			docking="Center Left"
+			dock_offset="18.00,0.00"
+			component_anchor_point="0.00,0.50"
+			priority="45"
+			tooltipslocalised="true"
+			componentleveltooltip="This is the amount of income this province generates every turn."
+			tooltiplabel="ComponentTooltip_385402dd"
+			uniqueguid="19AE34AA-64FC-43BA-84BEAF69AE7EE58D"
+			currentstate="88FC2731-7F66-43B9-A20E9DDD76078570"
+			defaultstate="88FC2731-7F66-43B9-A20E9DDD76078570">
+			<componentimages>
+				<component_image
+					this="42E09173-ED2B-4C66-8CE1F8114B2657F1"
+					uniqueguid="42E09173-ED2B-4C66-8CE1F8114B2657F1"
+					imagepath="ui/skins/default/icon_foreign_slot_income_plus.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="88FC2731-7F66-43B9-A20E9DDD76078570"
+					name="NewState"
+					width="26"
+					height="26"
+					uniqueguid="88FC2731-7F66-43B9-A20E9DDD76078570">
+					<imagemetrics>
+						<image
+							this="FD7EF03D-287E-4AB3-97391E0D219392CA"
+							uniqueguid="FD7EF03D-287E-4AB3-97391E0D219392CA"
+							componentimage="42E09173-ED2B-4C66-8CE1F8114B2657F1"
+							width="26"
+							height="26"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</coin>
+		<dy_wealth
+			this="C8C1AB79-0125-40FC-8C3488D9FDF9FC78"
+			id="dy_wealth"
+			offset="48.00,1.00"
+			allowverticalresize="false"
+			docking="Center Left"
+			dock_offset="48.00,0.00"
+			component_anchor_point="0.00,0.50"
+			priority="45"
+			tooltipslocalised="true"
+			uniqueguid="C8C1AB79-0125-40FC-8C3488D9FDF9FC78"
+			currentstate="4D3590E1-6E32-4103-93E826C2A98C3DB4"
+			defaultstate="4D3590E1-6E32-4103-93E826C2A98C3DB4">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="ProvinceContext.PlayerFactionForeignSlotIncome">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="TaxLevelChanged"/>
+						<property
+							name="event1"
+							value="DevoteesEffectsChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="4D3590E1-6E32-4103-93E826C2A98C3DB4"
+					name="NewState"
+					width="27"
+					height="24"
+					uniqueguid="4D3590E1-6E32-4103-93E826C2A98C3DB4">
+					<component_text
+						text="999"
+						textvalign="Center"
+						texthbehaviour="Resize"
+						textlabel="StateText_e77df7a6"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+		</dy_wealth>
+		<foreign_slot_wealth_holder
+			this="5ABA976F-0140-48BF-A5B942AFEC219249"
+			id="foreign_slot_wealth_holder"
+			offset="10.00,32.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			dock_offset="10.00,0.00"
+			priority="45"
+			componentleveltooltip="{{tt:ui/campaign ui/tooltip_province_foreign_slot_wealth}}"
+			tooltiplabel="ComponentTooltip_473bf2a6"
+			uniqueguid="5ABA976F-0140-48BF-A5B942AFEC219249"
+			currentstate="14862D71-5AC8-4E25-A3D6CF2018EAEA74"
+			defaultstate="14862D71-5AC8-4E25-A3D6CF2018EAEA74">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoCampaignProvince"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="ProvinceContext"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="14862D71-5AC8-4E25-A3D6CF2018EAEA74"
+					name="NewState"
+					width="254"
+					height="26"
+					interactive="true"
+					uniqueguid="14862D71-5AC8-4E25-A3D6CF2018EAEA74"/>
+			</states>
+		</foreign_slot_wealth_holder>
+		<frame_foreign_slot_income
+			this="75B1EC2D-9157-4597-8ABE0F08595DD630"
+			id="frame_foreign_slot_income"
+			offset="0.00,200.00"
+			allowhorizontalresize="false"
+			priority="45"
+			tooltipslocalised="true"
+			uniqueguid="75B1EC2D-9157-4597-8ABE0F08595DD630"
+			currentstate="A8466629-236E-4549-9DCB67A3D5EB24C7"
+			defaultstate="A8466629-236E-4549-9DCB67A3D5EB24C7">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextInitPlayerFaction"
+					context_object_id="CcoCampaignFaction"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="ProvinceContext.PlayerFactionForeignSlotIncome &gt; 0"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="D19CA2FC-63C9-47AD-BF6862C63E7BBDAF"
+					uniqueguid="D19CA2FC-63C9-47AD-BF6862C63E7BBDAF"
+					imagepath="ui/skins/default/parchment_divider.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="A8466629-236E-4549-9DCB67A3D5EB24C7"
+					name="default"
+					width="254"
+					height="63"
+					disabled="true"
+					uniqueguid="A8466629-236E-4549-9DCB67A3D5EB24C7">
+					<imagemetrics>
+						<image
+							this="15895B21-2BA6-439F-B25186D4E35EF34D"
+							uniqueguid="15895B21-2BA6-439F-B25186D4E35EF34D"
+							componentimage="D19CA2FC-63C9-47AD-BF6862C63E7BBDAF"
+							offset="7.00,0.00"
+							width="240"
+							height="63"
+							tile="true"
+							dockpoint="Bottom Center"
+							margin="30.00,30.00,15.00,30.00"/>
+					</imagemetrics>
+				</default>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true"
+				margins="0.00,5.00"
+				horizontal_alignment="Center">
+				<columnwidths>
+					<column width="254"/>
+				</columnwidths>
+			</LayoutEngine>
+		</frame_foreign_slot_income>
+		<header_income
+			this="B54AAF4B-14A4-4E7D-B177D718F353359F"
+			id="header_income"
+			offset="48.00,0.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="45"
+			tooltipslocalised="true"
+			componentleveltooltip="Factions gain income from buildings in territory they control. Place the mouse cursor over the income value on this panel to see a breakdown of sources.||{{tr:click_to_open_hp}}"
+			tooltiplabel="ComponentTooltip_d34c426f"
+			uniqueguid="B54AAF4B-14A4-4E7D-B177D718F353359F"
+			currentstate="11F0CD9D-57C2-4B2B-A72F85ED3FC93AEF">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignFactionProvinceManager"
+					context_function_id="FactionContext.IsCampaignFeatureAvailable(&quot;slaves&quot;) == false || FactionContext.IsCampaignFeatureAvailable(&quot;devotees&quot;)"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="6C9C8478-DB0E-41AD-90EF7D327CF35EEF"
+					uniqueguid="6C9C8478-DB0E-41AD-90EF7D327CF35EEF"
+					imagepath="ui/skins/default/parchment_divider_title.png"/>
+			</componentimages>
+			<states>
+				<wh3
+					this="11F0CD9D-57C2-4B2B-A72F85ED3FC93AEF"
+					name="wh3"
+					width="158"
+					interactive="true"
+					uniqueguid="11F0CD9D-57C2-4B2B-A72F85ED3FC93AEF">
+					<imagemetrics>
+						<image
+							this="3FBDD8D0-EE7C-437E-BC8BC839080230F0"
+							uniqueguid="3FBDD8D0-EE7C-437E-BC8BC839080230F0"
+							componentimage="6C9C8478-DB0E-41AD-90EF7D327CF35EEF"
+							offset="-31.00,0.00"
+							width="220"
+							tile="true"
+							dockpoint="Bottom Center"
+							margin="10.00,40.00,10.00,40.00"/>
+					</imagemetrics>
+					<component_text
+						text="[[url:script_link_campaign_income]]{{tr:varying_regular_income_foreign_slot}}[[/url]]"
+						texthalign="Center"
+						textyoffset="7.00,0.00"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_67aa2a85"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_14"
+						font_colour_override_preset_key="link"/>
+				</wh3>
+			</states>
+		</header_income>
 	</components>
 </layout>

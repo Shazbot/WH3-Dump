@@ -1,0 +1,10 @@
+CcoCampaignWomCompassDirection
+{
+	ExIconPath { AddDefaultSkinPath(Format("icon_%s.png", Key.Replace("wh3_main_chaos_", "").Replace("wh3_dlc24_compass_advanced_", "compass_"))) }
+	ExUnlockMissionKey { this 	| Key == "wh3_dlc24_compass_advanced_nonchang_basin" => "wh3_dlc24_cth_yuan_bo_victory_west"
+								| Key == "wh3_dlc24_compass_advanced_ashshair" => "wh3_dlc24_cth_yuan_bo_victory_east"
+								| Key == "wh3_dlc24_compass_advanced_broken_lands" => "wh3_dlc24_cth_yuan_bo_victory_south"
+								| Key == "wh3_dlc24_compass_advanced_dragon_river" => "wh3_dlc24_cth_yuan_bo_victory_north"
+								| "" }
+	ExUnlockMissionContext { GetIf(ExUnlockMissionKey.IsEmpty == false, PlayersFaction.MissionList.FirstContext(MissionRecordContext.Key == this.ExUnlockMissionKey)) }
+}

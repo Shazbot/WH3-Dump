@@ -1,0 +1,223 @@
+Schemes
+{
+	RegionGroupListForCurrentCampaign
+	{
+		GetIfElse
+		(
+			CampaignKey == "wh3_main_chaos",
+			Join
+			(
+				DatabaseRecordContext("CcoRegionGroupRecord", "wh3_dlc24_schemes_theatre_chaos_chaos_wastes"),
+				DatabaseRecordContext("CcoRegionGroupRecord", "wh3_dlc24_schemes_theatre_chaos_darklands"),
+				DatabaseRecordContext("CcoRegionGroupRecord", "wh3_dlc24_schemes_theatre_chaos_grand_cathay"),
+				DatabaseRecordContext("CcoRegionGroupRecord", "wh3_dlc24_schemes_theatre_chaos_norsca"),
+				DatabaseRecordContext("CcoRegionGroupRecord", "wh3_dlc24_schemes_theatre_chaos_the_empire")
+			),
+			Join
+			(
+				DatabaseRecordContext("CcoRegionGroupRecord", "wh3_dlc24_schemes_theatre_ie_badlands"),
+				DatabaseRecordContext("CcoRegionGroupRecord", "wh3_dlc24_schemes_theatre_ie_bretonnia"),
+				DatabaseRecordContext("CcoRegionGroupRecord", "wh3_dlc24_schemes_theatre_ie_darklands"),
+				DatabaseRecordContext("CcoRegionGroupRecord", "wh3_dlc24_schemes_theatre_ie_grand_cathay"),
+				DatabaseRecordContext("CcoRegionGroupRecord", "wh3_dlc24_schemes_theatre_ie_lustria"),
+				DatabaseRecordContext("CcoRegionGroupRecord", "wh3_dlc24_schemes_theatre_ie_naggaroth"),
+				DatabaseRecordContext("CcoRegionGroupRecord", "wh3_dlc24_schemes_theatre_ie_norsca"),
+				DatabaseRecordContext("CcoRegionGroupRecord", "wh3_dlc24_schemes_theatre_ie_the_empire"),
+				DatabaseRecordContext("CcoRegionGroupRecord", "wh3_dlc24_schemes_theatre_ie_ulthuan")
+			)
+		)
+	}
+
+	EventCategoryFromRegionGroup(CcoRegionGroupRecord region_group)
+	{
+		"scheme" +
+		(
+			region_group.Key |
+				"wh3_dlc24_schemes_theatre_chaos_chaos_wastes" 	=> "_chaos_wastes" |
+				"wh3_dlc24_schemes_theatre_ie_badlands" 		=> "_badlands" |
+				"wh3_dlc24_schemes_theatre_ie_bretonnia" 		=> "_bretonnia" |
+				"wh3_dlc24_schemes_theatre_chaos_darklands" 	=> "_darklands" |
+				"wh3_dlc24_schemes_theatre_ie_darklands" 	    => "_darklands" |
+				"wh3_dlc24_schemes_theatre_chaos_grand_cathay"  => "_grand_cathay" |
+				"wh3_dlc24_schemes_theatre_ie_grand_cathay" 	=> "_grand_cathay" |
+				"wh3_dlc24_schemes_theatre_ie_lustria" 			=> "_lustria" |
+				"wh3_dlc24_schemes_theatre_ie_naggaroth" 		=> "_naggaroth" |
+				"wh3_dlc24_schemes_theatre_chaos_norsca" 		=> "_norsca" |
+				"wh3_dlc24_schemes_theatre_ie_norsca" 			=> "_norsca" |
+				"wh3_dlc24_schemes_theatre_chaos_the_empire" 	=> "_the_empire" |
+				"wh3_dlc24_schemes_theatre_ie_the_empire" 		=> "_the_empire" |
+				"wh3_dlc24_schemes_theatre_ie_ulthuan" 			=> "_ulthuan" |
+				"invalid"
+		)
+	}
+
+	AllSchemeList
+	{
+		PlayersFaction.MissionList.Filter(ExIsScheme)
+	}
+
+	MinorSchemeListForRegionGroup(CcoRegionGroupRecord region_group)
+	{
+		(event_category = EventCategoryFromRegionGroup(region_group)) =>
+		{
+			PlayersFaction.MissionList.Filter(MissionRecordContext.EventCategoryContext.CategoryKey == event_category && ExIsGrandScheme == false)
+		}
+	}
+
+	GrandSchemeForRegionGroup(CcoRegionGroupRecord region_group)
+	{
+		(event_category = EventCategoryFromRegionGroup(region_group)) =>
+		{
+			PlayersFaction.MissionList.FirstContext(MissionRecordContext.EventCategoryContext.CategoryKey == event_category && ExIsGrandScheme)
+		}
+	}
+
+	GrandSchemeQuestBattleForRegionGroup(CcoRegionGroupRecord region_group)
+	{
+		(grand_scheme = GrandSchemeForRegionGroup(region_group)) =>
+		{
+			PlayersFaction.MissionList.FirstContext(MissionRecordContext.EventCategoryContext.CategoryKey == "Quest" && MissionRecordContext.Key.StartsWith(grand_scheme.MissionRecordContext.Key))
+		}
+	}
+
+	GrandSchemeList
+	{
+		PlayersFaction.MissionList.Filter(ExIsGrandScheme)
+	}
+
+	CompletedGrandSchemes
+	{
+		GrandSchemeList.Filter(Completed)
+	}
+
+	NumGrandSchemesCompleted
+	{
+		CompletedGrandSchemes.Size
+	}
+
+	NumGrandSchemesTotal
+	{
+		GrandSchemeList.Size
+	}
+
+	GrandSchemesNeededForUltimateScheme
+	{
+		GetIfElse(CampaignKey == "wh3_main_chaos", 3, 5)
+	}
+
+	IsUltimateSchemeUnlocked
+	{
+		NumGrandSchemesCompleted >= GrandSchemesNeededForUltimateScheme
+	}
+
+	IsGrandSchemeUnlockedForRegionGroup(CcoRegionGroupRecord region_group)
+	{
+		Schemes.MinorSchemeListForRegionGroup(region_group).Count(Completed) >= Schemes.NumMinorSchemesToUnlockGrandSchemeInRegionGroup(region_group)
+	}
+
+	IsGrandSchemeCompleteForRegionGroup(CcoRegionGroupRecord region_group)
+	{
+		GrandSchemeForRegionGroup(region_group).Completed
+	}
+
+	MinorSchemeProgressForRegionGroup(CcoRegionGroupRecord region_group)
+	{
+		(minor_schemes = MinorSchemeListForRegionGroup(region_group)) =>
+		{
+			minor_schemes.Count(Completed) / minor_schemes.Size
+		}
+	}
+
+	AllMinorSchemesCompletedForRegionGroup(CcoRegionGroupRecord region_group)
+	{
+		MinorSchemeListForRegionGroup(region_group).All(Completed)
+	}
+
+	SchemeButtonMouseOn(CcoCampaignMission mission)
+	{
+		(scheme_details = Component("7AD3A230-6EF7-4021-B4139996EEC9970A")) =>
+		{
+			Do
+			(
+				scheme_details.SetVisible(true),
+				scheme_details.PropagateContext(mission)
+			)
+		}
+	}
+
+	SchemeButtonMouseOff
+	{
+		(scheme_details = Component("7AD3A230-6EF7-4021-B4139996EEC9970A"), selected_scheme = Component("B54DFC0F-D4EC-4D61-9258847BDADA7E2B").CurrentSelection.FirstObject) =>
+		{
+			DoIfElse
+			(
+				IsContextValid(selected_scheme),
+				scheme_details.PropagateContext(selected_scheme),
+				scheme_details.SetVisible(false)
+			)
+		}
+	}
+
+	NumMinorSchemesToUnlockGrandSchemeInRegionGroup(CcoRegionGroupRecord region_group)
+	{
+		Ceiling(Schemes.MinorSchemeListForRegionGroup(region_group).Size / 2.0)
+	}
+
+	GetTheatreCurrentlyIn
+	{
+		(start_str = "wh3_dlc24_schemes_theatre_" + GetIfElse(CampaignKey == "wh3_main_chaos", "chaos_", "ie_")) =>
+		{
+			RegionRecordContextAtPosition(PlayersFaction.FactionLeaderContext.Position)
+			.RegionGroupsList.FirstContext(Key.StartsWith(start_str))
+		}
+	}
+
+	SelectTheatreCurrentlyIn
+	{
+		Do
+		(
+			Component("28F97D8E-36D1-40B8-BBC6F9F277FCA6F4").SelectContext
+			(
+				Schemes.GetTheatreCurrentlyIn
+			),
+			UiMsg("scroll_to_selected_theatre")
+		)
+	}
+}
+
+CcoCampaignMission
+{
+	ExIsScheme
+	{
+		MissionRecordContext.EventCategoryContext.CategoryKey.StartsWith("scheme_")
+	}
+
+	ExIsGrandScheme
+	{
+		ExIsScheme && MissionRecordContext.Key.EndsWith("_grand")
+	}
+}
+
+CcoRegionGroupRecord
+{
+	ExMapImagePathFromLevel(Int level)
+	{
+		AddDefaultSkinPath(Format("dlc24_schemes_changeling\map_%s_0%d.png", Key.Replace("wh3_dlc24_schemes_theatre_", ""), level))
+	}
+
+	ExMapImagePath
+	{
+		this
+		| Schemes.GrandSchemeForRegionGroup(this).Completed                                                                                     => ExMapImagePathFromLevel(3)
+		| Schemes.MinorSchemeListForRegionGroup(this).Filter(Completed).Size >= Ceiling(Schemes.MinorSchemeListForRegionGroup(this).Size / 4.0) => ExMapImagePathFromLevel(2)
+		| ExMapImagePathFromLevel(1)
+	}
+}
+
+CcoBattleSetPieceArmyRecord
+{
+	ExGrandSchemeMissionContext
+	{
+		PlayersFaction.MissionList.FirstContext(MissionRecordContext.Key == ScriptObjectContext(this.Key).StringValue)
+	}
+}

@@ -1,0 +1,57 @@
+MattersOfState
+{
+	ResourceIconState(CcoCampaignPooledResource resource, CcoScriptObject resource_pending, Int child_index)
+	{
+		GetIfElse
+		(
+			child_index <= resource.Total,
+			"active",
+			GetIfElse
+			(
+				child_index <= resource.Total + resource_pending.NumericValue,
+				"primed",
+				"inactive"
+			)
+		)
+	}
+	
+	CanPerformAction(CcoCampaignRitual action)
+	{
+		GetIfElse
+		(
+			IsContextValid(TargettingContext),
+			TargettingContext.CanPerformAction,
+			action.CanAfford
+		)
+	}
+	
+	PerformAction(CcoCampaignRitual action)
+	{
+		GetIfElse
+		(
+			IsContextValid(TargettingContext),
+			TargettingContext.PerformAction,
+			action.Perform
+		)
+	}
+	
+	ActionPerformTooltip(CcoCampaignRitual action)
+	{
+		GetIfElse
+		(
+			IsContextValid(TargettingContext),
+			TargettingContext.ActionPerformTooltip,
+			action.InvalidRitualReason
+		)
+	}
+	
+	SetActionsAvailable(Bool actions_available, CcoComponent action_container, CcoComponent perform_button, CcoComponent no_actions_comp)
+	{
+		Do
+		(
+			action_container.SetVisible(actions_available),
+			perform_button.SetVisible(actions_available),
+			no_actions_comp.SetVisible(actions_available == false)
+		)
+	}
+}

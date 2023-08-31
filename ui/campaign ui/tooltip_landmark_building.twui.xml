@@ -355,11 +355,17 @@
 					callback_id="ContextImageSetter"
 					context_object_id="CcoBuildingLevelRecord"
 					context_function_id="PlayerVariantRecordContext.Icon"/>
-				<callback_with_context callback_id="BuildingInfoPanelMouseOver"/>
+				<callback_with_context callback_id="BuildingInfoPanelMouseOver">
+					<child_m_user_properties>
+						<property
+							name="hide_explanation_text"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextCommandGiverOnContextSet"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="OpenBuildingInfoPanel(StoredContextFromParent(&quot;CcoCampaignSettlement&quot;), StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;))"/>
+					context_function_id="OpenBuildingInfoPanel(StoredContextFromParent(&quot;CcoCampaignSettlement&quot;), StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;), false, PlayersFaction)"/>
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoBuildingChainRecord"
@@ -404,8 +410,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</normal>
 			</states>
 		</template_building>
@@ -430,7 +436,7 @@
 					this="D12C33DB-D8F6-4095-8FE07158E1C67ED4"
 					name="default"
 					width="340"
-					height="39"
+					height="41"
 					uniqueguid="D12C33DB-D8F6-4095-8FE07158E1C67ED4">
 					<component_text
 						text="The following landmark building can be constructed here:"
@@ -441,14 +447,14 @@
 						textlabel="StateText_85e8afb7"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</default>
 				<multiple
 					this="DFABD87C-4D7A-4391-B84109F79A9BED13"
 					name="multiple"
 					width="340"
-					height="39"
+					height="41"
 					uniqueguid="DFABD87C-4D7A-4391-B84109F79A9BED13">
 					<component_text
 						text="The following landmark buildings can be constructed here:"
@@ -459,8 +465,8 @@
 						textlabel="StateText_9012aaf7"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</multiple>
 			</states>
 		</landmark_text>
@@ -510,15 +516,6 @@
 			defaultstate="86C22260-3C01-4C42-8042A13252B5D0A3">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="MouseClickHideCallback"
-					context_object_id="CcoStaticObject">
-					<child_m_user_properties>
-						<property
-							name="condition"
-							value="Component(&quot;button_ritual_panel&quot;, &quot;^1&quot;).IsMouseOver == false"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
 					callback_id="ContextObjectStore"
 					context_object_id="CcoCampaignSettlement"/>
 			</callbackwithcontextlist>
@@ -533,7 +530,7 @@
 					this="86C22260-3C01-4C42-8042A13252B5D0A3"
 					name="NewState"
 					width="340"
-					height="147"
+					height="149"
 					interactive="true"
 					uniqueguid="86C22260-3C01-4C42-8042A13252B5D0A3">
 					<imagemetrics>
@@ -542,7 +539,7 @@
 							uniqueguid="4D4A0865-3D58-4B7C-8648AB7AB6740F5A"
 							componentimage="EB365112-DBDD-4869-BA59CBD5D89626DD"
 							width="340"
-							height="147"
+							height="149"
 							tile="true"
 							margin="16.00,20.00,16.00,20.00"/>
 						<image
@@ -550,7 +547,7 @@
 							uniqueguid="C203C2EC-4530-4F0B-9D138852D7BA2C6D"
 							componentimage="EB365112-DBDD-4869-BA59CBD5D89626DD"
 							width="340"
-							height="147"
+							height="149"
 							colour="#FFFFFF80"
 							tile="true"
 							margin="16.00,20.00,16.00,20.00"/>
@@ -560,8 +557,8 @@
 						textyoffset="6.00,0.00"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -578,7 +575,7 @@
 		<building_list
 			this="2EED4142-73F3-4A5C-B0FB222D64D66788"
 			id="building_list"
-			offset="133.00,52.00"
+			offset="133.00,54.00"
 			priority="255"
 			tooltipslocalised="true"
 			uniqueguid="2EED4142-73F3-4A5C-B0FB222D64D66788"
@@ -588,7 +585,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="PlayersFactionChainList.Filter(BuildingSetContext.Key == &quot;wh2_main_set_landmark&quot; || Key.StartsWith(&quot;wh2_dlc17_bst_special_settlement_&quot;) || ((Key.Contains(&quot;legendary_&quot;) || Key.Contains(&quot;special_&quot;)) &amp;&amp; BuildingSetContext.Key == &quot;wh_main_set_port&quot;))"/>
+					context_function_id="ExLandmarkBuildingList"/>
 			</callbackwithcontextlist>
 			<states>
 				<default

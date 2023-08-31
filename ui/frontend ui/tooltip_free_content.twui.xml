@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="138"
+	version="141"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -43,7 +43,6 @@
 					name="default"
 					width="1600"
 					height="900"
-					texthbehaviour="Never split"
 					uniqueguid="AFD52EBC-CE7C-4EE3-8D86F20B473D9B4F">
 					<imagemetrics>
 						<image
@@ -78,19 +77,118 @@
 					name="NewState"
 					width="173"
 					height="36"
-					text="dy_content_required"
-					textvalign="Center"
-					texthbehaviour="Resize"
-					textlabel="StateText_f2d86b85"
-					font_m_font_name="brand_header"
-					font_m_size="14"
-					font_m_colour="#FFF8D7FF"
-					font_m_leading="1"
-					fontcat_name="FE_header_small"
 					interactive="true"
-					uniqueguid="22E25F7D-785F-4CAD-82F93074E82D9AA1"/>
+					uniqueguid="22E25F7D-785F-4CAD-82F93074E82D9AA1">
+					<component_text
+						text="dy_content_required"
+						textvalign="Center"
+						texthbehaviour="Resize"
+						textlabel="StateText_f2d86b85"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_14"/>
+				</newstate>
 			</states>
 		</additional_content_label>
+		<button_store
+			this="EAE946C7-47FD-4545-AAE0751E5A47E9FD"
+			id="button_store"
+			template_id="round_small_button"
+			part_of_template="true"
+			uniqueguid_in_template="82F58892-7F49-4844-B36443AED497BEEF"
+			uniqueguid="EAE946C7-47FD-4545-AAE0751E5A47E9FD"
+			dimensions="38.00,38.00"
+			sound_category="UI_GBL_TMP_Round_Small_Button">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="5879433E-96CB-4840-BF4F2864027E3AA8"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="74CD81FA-E225-4206-A59A661678A60807"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="B17B80F6-F79B-4B65-BD9CC4A707939CFC"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="CC2DDE1E-2FA6-4D3D-BDBE2BF60DAB6E68"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="918033E1-AA29-4A7B-AFCEE9C762A00471"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/icon_button_external_link.png"
+					uniqueguid="C8F88368-35F7-4C6A-866EC8B83963A45F"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_pressed.png"
+					uniqueguid="B53C2F8C-C951-42FC-BA9622FDC4FCF226"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_hover.png"
+					uniqueguid="7C692654-331C-482C-9EEB3687BE2DCCF3"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_active.png"
+					uniqueguid="9FCD78A1-FCF2-4A0E-9FA20D203B671935"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_inactive.png"
+					uniqueguid="54667C0B-A52C-4402-9BF76114869C207D"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_underlay.png"
+					uniqueguid="BFD4A1BC-E138-4B19-8C0CDA804607CBD2"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="Button"/>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoOwnershipProductRecord"
+					context_function_id="OpenStore"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoOwnershipProductRecord"
+					context_function_id="IsOwned == false"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="resizable"/>
+				<property
+					name="disable_override0"
+					value="CallbackAnimTrigger"/>
+				<property
+					name="dynamic_image"
+					value="0"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/icon_button_external_link.png"/>
+				<element value="ui/skins/default/button_round_small_pressed.png"/>
+				<element value="ui/skins/default/button_round_small_hover.png"/>
+				<element value="ui/skins/default/button_round_small_active.png"/>
+				<element value="ui/skins/default/button_round_small_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_underlay.png"/>
+				<element value=""/>
+			</override_images>
+		</button_store>
 		<tooltip_free_content
 			this="3A58F379-EE17-486D-BDC568E54AF7CAD2"
 			id="tooltip_free_content"
@@ -110,7 +208,7 @@
 					this="ACCC9935-5981-4DC7-A011E668A8CDAFFC"
 					name="NewState"
 					width="417"
-					height="196"
+					height="198"
 					interactive="true"
 					uniqueguid="ACCC9935-5981-4DC7-A011E668A8CDAFFC">
 					<imagemetrics>
@@ -119,7 +217,7 @@
 							uniqueguid="A8026B15-FCC5-45B8-A6672C754647E9A3"
 							componentimage="66825B2B-556F-4531-816F203F1B86E0C8"
 							width="417"
-							height="196"
+							height="198"
 							tile="true"
 							margin="16.00,20.00,16.00,20.00"/>
 					</imagemetrics>
@@ -189,119 +287,25 @@
 					this="59D9E930-5092-415E-8FBE4F9F2F689B20"
 					name="NewState"
 					width="360"
-					height="33"
-					text="Game must be restarted to activate any newly-claimed content."
-					textvalign="Center"
-					textxoffset="20.00,10.00"
-					texthbehaviour="Resize"
-					textlocalised="true"
-					textlabel="StateText_10964d1e"
-					font_m_font_name="georgia_italic"
-					font_m_size="12"
-					font_m_colour="#A99F89FF"
-					font_m_leading="1"
-					fontcat_name="fe_italic"
+					height="35"
 					interactive="true"
-					uniqueguid="59D9E930-5092-415E-8FBE4F9F2F689B20"/>
+					uniqueguid="59D9E930-5092-415E-8FBE4F9F2F689B20">
+					<component_text
+						text="Game must be restarted to activate any newly-claimed content."
+						textvalign="Center"
+						textxoffset="20.00,10.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="StateText_10964d1e"
+						font_m_font_name="georgia_italic"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12_italic"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+				</newstate>
 			</states>
 		</warning_label>
-		<button_store
-			this="EAE946C7-47FD-4545-AAE0751E5A47E9FD"
-			id="button_store"
-			template_id="round_small_button"
-			part_of_template="true"
-			uniqueguid_in_template="82F58892-7F49-4844-B36443AED497BEEF"
-			uniqueguid="EAE946C7-47FD-4545-AAE0751E5A47E9FD"
-			dimensions="38.00,38.00"
-			sound_category="UI_GBL_TMP_Round_Small_Button">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="5879433E-96CB-4840-BF4F2864027E3AA8"/>
-				<state_uniqueguid
-					name="down"
-					uniqueguid="74CD81FA-E225-4206-A59A661678A60807"/>
-				<state_uniqueguid
-					name="down_off"
-					uniqueguid="B17B80F6-F79B-4B65-BD9CC4A707939CFC"/>
-				<state_uniqueguid
-					name="hover"
-					uniqueguid="CC2DDE1E-2FA6-4D3D-BDBE2BF60DAB6E68"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="918033E1-AA29-4A7B-AFCEE9C762A00471"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/icon_button_external_link.png"
-					uniqueguid="C8F88368-35F7-4C6A-866EC8B83963A45F"/>
-				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_pressed.png"
-					uniqueguid="B53C2F8C-C951-42FC-BA9622FDC4FCF226"/>
-				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_hover.png"
-					uniqueguid="7C692654-331C-482C-9EEB3687BE2DCCF3"/>
-				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_active.png"
-					uniqueguid="9FCD78A1-FCF2-4A0E-9FA20D203B671935"/>
-				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_inactive.png"
-					uniqueguid="54667C0B-A52C-4402-9BF76114869C207D"/>
-				<component_image_uniqueguid
-					name="ui\skins\default\button_round_small_underlay.png"
-					uniqueguid="BFD4A1BC-E138-4B19-8C0CDA804607CBD2"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context callback_id="Button"/>
-				<callback_with_context callback_id="CallbackAnimTrigger"/>
-				<callback_with_context
-					callback_id="ContextCommandLeftClick"
-					context_object_id="CcoOwnershipProductRecord"
-					context_function_id="OpenStore"/>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoOwnershipProductRecord"
-					context_function_id="IsOwned == false"/>
-			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="disable_override"
-					value="resizable"/>
-				<property
-					name="disable_override0"
-					value="CallbackAnimTrigger"/>
-				<property
-					name="dynamic_image"
-					value="0"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="down"
-					is_text_localised="false"/>
-				<localised_text
-					state="down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/icon_button_external_link.png"/>
-				<element value="ui\skins\default\button_round_small_pressed.png"/>
-				<element value="ui\skins\default\button_round_small_hover.png"/>
-				<element value="ui\skins\default\button_round_small_active.png"/>
-				<element value="ui\skins\default\button_round_small_inactive.png"/>
-				<element value="ui\skins\default\button_round_small_underlay.png"/>
-				<element value=""/>
-			</override_images>
-		</button_store>
 		<conditional_text
 			this="D7E17FCF-9416-4CB5-9B4818D25E9A2229"
 			id="conditional_text"

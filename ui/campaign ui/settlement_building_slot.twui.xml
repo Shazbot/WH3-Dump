@@ -277,9 +277,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="40A16308-533D-48B0-89B36DFCDA010D20"
@@ -315,9 +315,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -349,9 +349,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="6EA3B406-2F4B-4206-95F45C6704626485"
@@ -532,9 +532,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -561,9 +561,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 			</states>
 			<animations>
@@ -751,11 +751,11 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="CreateCost(GetIfElse(IsContextValid(StoredContextFromParent(&quot;CcoCampaignSettlement&quot;)), StoredContextFromParent(&quot;CcoCampaignSettlement&quot;), StoredContextFromParent(&quot;CcoCampaignCharacter&quot;)))"/>
+					context_function_id="GetIfElse(Buildings.IsHostileButtonSelected, CreateCost(Buildings.StoredSettlementOrCharacter, PlayersFaction), CreateCost(Buildings.StoredSettlementOrCharacter))"/>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="CreateCost(GetIfElse(IsContextValid(StoredContextFromParent(&quot;CcoCampaignSettlement&quot;)), StoredContextFromParent(&quot;CcoCampaignSettlement&quot;), StoredContextFromParent(&quot;CcoCampaignCharacter&quot;))) != 0"/>
+					context_function_id="GetIfElse(Buildings.IsHostileButtonSelected, CreateCost(Buildings.StoredSettlementOrCharacter, PlayersFaction), CreateCost(Buildings.StoredSettlementOrCharacter)) != 0"/>
 				<callback_with_context
 					callback_id="ContextStateSetterConditional"
 					context_object_id="CcoBuildingLevelRecord">
@@ -768,7 +768,7 @@
 							value="normal"/>
 						<property
 							name="red"
-							value="CanAfford(GetIfElse(IsContextValid(StoredContextFromParent(&quot;CcoCampaignSettlement&quot;)), StoredContextFromParent(&quot;CcoCampaignSettlement&quot;), StoredContextFromParent(&quot;CcoCampaignCharacter&quot;))) == false"/>
+							value="(Buildings.IsHostileButtonSelected &amp;&amp; CanAfford(Buildings.StoredSettlementOrCharacter, PlayersFaction) == false) || (Buildings.IsHostileButtonSelected == false &amp;&amp; CanAfford(Buildings.StoredSettlementOrCharacter) == false)"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbacks_with_context>
@@ -2227,7 +2227,7 @@
 					text="8"
 					text_label="Turns_not_queued_Text_320032"
 					tooltip_label="turns_corner_cyclical_Tooltip_cab0148c"
-					tooltip_text="[Ph] Turns to cycle to this level"
+					tooltip_text="Turns to cycle to this level"
 					is_text_localised="false"/>
 				<localised_text
 					state="not_queued"
@@ -2309,7 +2309,7 @@
 				<callback_with_context
 					callback_id="ContextCommandGiverOnContextSet"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="OpenBuildingInfoPanel(GetIfElse(IsContextValid(StoredContextFromParent(&quot;CcoCampaignSettlement&quot;)), StoredContextFromParent(&quot;CcoCampaignSettlement&quot;), StoredContextFromParent(&quot;CcoCampaignCharacter&quot;)), StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;), true)"/>
+					context_function_id="OpenBuildingInfoPanel(Buildings.StoredSettlementOrCharacter, StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;), true)"/>
 				<callback_with_context
 					callback_id="ContextTrashOnCondition"
 					context_function_id="true"/>
@@ -2456,7 +2456,7 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="DevelopmentPointCost(GetIfElse(IsContextValid(StoredContextFromParent(&quot;CcoCampaignSettlement&quot;)), StoredContextFromParent(&quot;CcoCampaignSettlement&quot;), StoredContextFromParent(&quot;CcoCampaignCharacter&quot;))) "/>
+					context_function_id="DevelopmentPointCost(Buildings.StoredSettlementOrCharacter)"/>
 				<callback_with_context
 					callback_id="ContextStateSetterConditional"
 					context_object_id="CcoBuildingLevelRecord">
@@ -2466,7 +2466,7 @@
 							value="default"/>
 						<property
 							name="red"
-							value="HasEnoughDevelopmentPoints(GetIfElse(IsContextValid(StoredContextFromParent(&quot;CcoCampaignSettlement&quot;)), StoredContextFromParent(&quot;CcoCampaignSettlement&quot;), StoredContextFromParent(&quot;CcoCampaignCharacter&quot;))) == false"/>
+							value="HasEnoughDevelopmentPoints(Buildings.StoredSettlementOrCharacter) == false"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbacks_with_context>
@@ -2606,8 +2606,8 @@
 			uniqueguid_in_template="8E71F5BE-8BDB-4B22-976CED6E5334CB35"
 			uniqueguid="08A354D8-D374-4395-B4AF7F3E01953CC7"
 			dimensions="72.00,46.00"
-			dock_point="Bottom Right"
-			offset="12.00,6.00"
+			dock_point="Center Right"
+			offset="22.00,37.00"
 			priority="70">
 			<state_uniqueguids>
 				<state_uniqueguid
@@ -2843,7 +2843,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="UnitList(GetIfElse(IsContextValid(StoredContextFromParent(&quot;CcoCampaignSettlement&quot;)), StoredContextFromParent(&quot;CcoCampaignSettlement&quot;), StoredContextFromParent(&quot;CcoCampaignCharacter&quot;)))"/>
+					context_function_id="UnitList(Buildings.StoredSettlementOrCharacter, PlayersFaction)"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -2886,6 +2886,9 @@
 				<component_image_uniqueguid
 					name="ui/skins/default/mask_unit_secondary.png"
 					uniqueguid="403F19E3-3BA4-487A-B2AEFFC485215BF1"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/unit_card_background.png"
+					uniqueguid="BEEC0890-EE24-4958-A8B98C4DD64124C8"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context
@@ -2921,6 +2924,7 @@
 				<element value="ui/skins/default/hero_building_card.png"/>
 				<element value="ui/skins/default/mask_unit_primary.png"/>
 				<element value="ui/skins/default/mask_unit_secondary.png"/>
+				<element value="ui/skins/default/unit_card_background.png"/>
 			</override_images>
 		</agent_context>
 		<known_parent
@@ -3249,17 +3253,23 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="EffectList.Any((x) =&gt; IsContextValid(x.PooledResourceContext(&quot;wh3_main_cth_harmony&quot;, PlayersFaction)))">
+					context_function_id="EffectList.Any((x) =&gt; IsContextValid(x.PooledResourceContext(&quot;wh3_dlc24_cth_province_harmony&quot;, StoredContextFromParent(&quot;CcoCampaignSettlement&quot;).FactionProvinceManagerContext)))">
 					<child_m_user_properties>
 						<property
 							name="object_store_events"
-							value=""/>
+							value="^3"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="EffectList.FirstContext((x) =&gt; IsContextValid(x.PooledResourceContext(&quot;wh3_main_cth_harmony&quot;, PlayersFaction)))"/>
+					context_function_id="EffectList.FirstContext((x) =&gt; IsContextValid(x.PooledResourceContext(&quot;wh3_dlc24_cth_province_harmony&quot;, StoredContextFromParent(&quot;CcoCampaignSettlement&quot;).FactionProvinceManagerContext)))">
+					<child_m_user_properties>
+						<property
+							name="object_store_events"
+							value="^3"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextStateSetter"
 					context_object_id="CcoEffect"
@@ -3267,7 +3277,7 @@
 				<callback_with_context
 					callback_id="ContextTrashOnCondition"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="IsContextValid(PlayersFaction.PooledResourceContext(&quot;wh3_main_cth_harmony&quot;)) == false"/>
+					context_function_id="IsContextValid(PlayersFaction.SettlementList.FirstContext.FactionProvinceManagerContext.PooledResourceContext(&quot;wh3_dlc24_cth_province_harmony&quot;)) == false"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -3574,14 +3584,11 @@
 							name="flip_when_offscreen"
 							value=""/>
 						<property
-							name="invert_y"
-							value=""/>
-						<property
 							name="offset_x"
 							value="10"/>
 						<property
 							name="offset_y"
-							value="50"/>
+							value="-30"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
@@ -3853,14 +3860,11 @@
 							name="flip_y_when_offscreen"
 							value=""/>
 						<property
-							name="invert_y"
-							value=""/>
-						<property
 							name="offset_x"
 							value="10"/>
 						<property
 							name="offset_y"
-							value="30"/>
+							value="-30"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
@@ -3911,7 +3915,7 @@
 				<callback_with_context
 					callback_id="ContextCommandRightClick"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="DoIf(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;).IsPlayerFaction &amp;&amp; StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;).IsForeignSlot == false &amp;&amp; IsPanelOpen(&quot;building_browser&quot;) == false, Do(DoIf(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;).IsRegionSlot, StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;).SettlementContext.Select), ShowBuildingBrowser(this)))"/>
+					context_function_id="DoIf(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;).IsPlayerFaction &amp;&amp; StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;).IsAlliedSlot == false &amp;&amp; IsPanelOpen(&quot;building_browser&quot;) == false, Do(DoIf(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;).IsHordeSlot == false, StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;).SettlementContext.Select), ShowBuildingBrowser(this)))"/>
 				<callback_with_context
 					callback_id="ContextUISFXSwitchSetter"
 					context_object_id="CcoBuildingLevelRecord">

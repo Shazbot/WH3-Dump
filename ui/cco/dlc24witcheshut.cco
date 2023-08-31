@@ -1,0 +1,85 @@
+WitchesHut
+{
+	PrimaryIngredientList 
+	{ 
+		Join(StoredContext("CcoCookingIngredientRecord", "main_ingredient_slot_1", "dlc24_witches_hut"), StoredContext("CcoCookingIngredientRecord", "main_ingredient_slot_2", "dlc24_witches_hut"))  
+	}
+	SecondaryIngredientList 
+	{ 
+		Join(StoredContext("CcoCookingIngredientRecord", "main_ingredient_slot_3", "dlc24_witches_hut"), StoredContext("CcoCookingIngredientRecord", "main_ingredient_slot_4", "dlc24_witches_hut")) 
+	}
+	
+	RequiredTechnologyList
+	{
+		PlayersFaction.TechnologyList.Filter(RecordContext.Key == "wh3_dlc24_tech_ksl_ostankya_witches_hut_unlock" || RecordContext.Key == "wh3_dlc24_tech_ksl_ostankya_witches_hut_unlock_2")
+	}
+}
+
+CcoCookingSystem
+{
+	ExBrewTooltipReason
+	{ 
+		(recipe = StoredContext("CcoCookingRecipeRecord")) =>
+		{
+			recipe
+			| IsContextValid(recipe) == false => Loc("tooltip_button_brew_not_valid_recipe")
+			| this.CanCookIngredients(WitchesHut.PrimaryIngredientList, WitchesHut.SecondaryIngredientList) => Loc("tooltip_button_brew_active")
+			| WitchesHut.PrimaryIngredientList.Any((ing) => PlayersFaction.CookingSystem.IngredientCooldown(ing)) ||  WitchesHut.SecondaryIngredientList.Any((ing) => PlayersFaction.CookingSystem.IngredientCooldown(ing)) => Loc("tooltip_brew_ingredients_on_cooldown")
+			| Loc("tooltip_button_brew_cannot_afford") 
+		}
+	}
+}
+
+CcoCampaignRitual
+{		
+	ExIsEmpowered 
+	{ 
+		SharedStateReadBool(RitualContext.Key.Replace("_empowered", "") + "_is_empowered")
+	}
+	
+	ExIsMagicalForestHex
+	{
+		RitualContext.Key.Contains("wh3_dlc24_ritual_ksl_hex_2_")
+	}
+	
+	ExShouldDisplayHex 
+	{
+		RitualContext.Key.Contains("_empowered") == ExIsEmpowered &&
+		(ExIsMagicalForestHex == false ||
+		GetIfElse(TargettingContext.RitualContext.ExIsMagicalForestHex, 
+		TargettingContext.RitualContext.ExEmpoweredHexContext == this || TargettingContext.RitualContext.ExDefaultHexContext == this, 
+		PlayersFaction.RitualManagerContext.UnlockableRitualList.Filter(RitualContext.Key.Contains("_empowered") == ExIsEmpowered && ExIsMagicalForestHex).Sort(RitualContext.Key).Sort(RemainingCooldown).FirstContext == this))
+	}
+		
+	ExSetHexEmpowered (Bool set) 
+	{ 
+		Do(SharedStateWriteBool(RitualContext.Key.Replace("_empowered", "") + "_is_empowered", set), DoIf(ExIsMagicalForestHex, PlayersFaction.RitualManagerContext.UnlockableRitualList.Filter(ExIsMagicalForestHex).ForEach(SharedStateWriteBool(RitualContext.Key.Replace("_empowered", "") + "_is_empowered", set)) )) 
+	}
+	
+	ExEmpoweredHexContext 
+	{ 
+		GetIfElse(RitualContext.Key.Contains("_empowered") == false, FactionContext.RitualManagerContext.UnlockableRitualList.FirstContext(RitualContext.Key == (this.RitualContext.Key + "_empowered")), this) 
+	}
+	
+	ExDefaultHexContext 
+	{ 
+		GetIfElse(RitualContext.Key.Contains("_empowered"), FactionContext.RitualManagerContext.UnlockableRitualList.FirstContext(RitualContext.Key == this.RitualContext.Key.Replace("_empowered", "")), this) 
+	}
+	
+	ExCurrentHexContext
+	{
+		GetIfElse(ExIsEmpowered, ExEmpoweredHexContext, ExDefaultHexContext)
+	}
+	
+	ExLastTurnHexPerformed
+	{
+		SharedStateReadFloat(RitualContext.Key + "_turn_performed")
+	}
+	
+	ExUpdateHexPerformedTurn
+	{
+		SharedStateWriteFloat(RitualContext.Key + "_turn_performed", CampaignRoot.TurnNumber)
+	}
+	
+	
+}

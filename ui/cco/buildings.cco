@@ -1,0 +1,46 @@
+Buildings
+{
+	SelectedSettlementOrHordeContext
+	{
+		GetIfElse(IsContextValid(SelectedSettlement), SelectedSettlement, SelectedCharacter.MilitaryForceContext.HordeContext)
+	}
+	
+	StoredSettlementOrCharacter
+	{
+		GetIfElse(IsContextValid(StoredContextFromParent("CcoCampaignSettlement")), StoredContextFromParent("CcoCampaignSettlement"), StoredContextFromParent("CcoCampaignCharacter"))
+	}
+	
+	IsHostileButtonSelected
+	{
+		SelectedSettlement.IsPlayerOwned == false || Try(Component("building_browser", "settlement_list").ChildContext("CcoCampaignSettlement" + SelectedSettlement.RegionRecordKey).ChildContext("button_player_foreign_view").IsSelected)
+	}
+	
+	ShouldShowSettlementDiscoveredSlots
+	{
+		IsContextValid(self.ParentContext("discovered_views"))
+	}
+}
+
+CcoBuildingSetRecord
+{
+	ExBuildingChainList
+	{
+		GetIfElse(Buildings.IsHostileButtonSelected, BuildingChains(Buildings.SelectedSettlementOrHordeContext, PlayersFaction), BuildingChains(Buildings.SelectedSettlementOrHordeContext))
+	}	
+}
+
+CcoBuildingChainRecord
+{
+	ExBuildingBrowserSlotContext
+	{
+		GetIfElse(Buildings.IsHostileButtonSelected, BuildingBrowserSlotContext(Buildings.SelectedSettlementOrHordeContext, PlayersFaction), BuildingBrowserSlotContext(Buildings.SelectedSettlementOrHordeContext))
+	}
+}
+
+CcoCampaignSettlement
+{
+	ExLandmarkBuildingList
+	{
+		PlayersFactionChainList.Filter(BuildingSetContext.Key == "wh2_main_set_landmark" || Key.StartsWith("wh2_dlc17_bst_special_settlement_") || Key.StartsWith("wh_dlc05_wef_office_") || ((Key.Contains("legendary_") || Key.Contains("special_")) && BuildingSetContext.Key.Contains("_port") && Key.Contains("_wef") == false))
+	}
+}

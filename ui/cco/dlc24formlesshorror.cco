@@ -1,0 +1,115 @@
+FormlessHorror
+{
+	GlideToCharacterOnMap(CcoCampaignCharacter character, CcoComponent map_comp)
+	{
+		(lord_pos = PlayersFaction.FactionLeaderContext.Position, target_pos = character.Position) =>
+		{
+			Do
+			(
+				map_comp.CentreOverTargetContext(lord_pos.x, lord_pos.z, 0.0, 0.0, true),
+				map_comp.CentreOverTargetContext(target_pos.x, target_pos.z, 0.0, 0.0, false)
+			)
+		}
+	}
+
+	FormListSortStatKey
+	{
+		(filter_stat = #Filter stat comp#Component("758F6C76-ED4A-4A58-8F04EA9A82F6586F").StoredContext("CcoUiUnitStatRecord")) =>
+		{
+			GetIfElse
+			(
+				IsContextValid(filter_stat),
+				filter_stat.Key,
+				""
+			)
+		}
+	}
+	
+	CultureList
+	{
+		(forms = ShapeshiftFormsThisCampaignList) =>
+		{
+			DatabaseRecords("CcoCultureRecord")
+			.Filter((culture) => { forms.Any(IsPartOfCulture(culture)) })
+			.Sort(Name, true)
+		}
+	}
+	
+	FormFilterRating(CcoShapeshiftForm form)
+	{
+		form.MainUnitRecordContext.UnitDetailsContext.BaseStatValueFromKey(FormListSortStatKey) + GetIfElse(AreLockedMovedToBack && form.IsLocked, 100000, 0) * GetIfElse(FormListSortDir == "asc", 1, -1)
+	}
+
+	FormListSortDir
+	{
+		#Sort dir comp#Component("278AD591-52A1-446D-A830E7FCBE184937").CurrentState
+	}
+
+	SortFormList
+	{
+		UiMsg("sort_form_list_" + FormListSortDir)
+	}
+	
+	AreLockedMovedToBack
+	{
+		#Move locked to bottom comp#Component("E2216CC1-9F74-4ED9-9E3D3DA850EB9E1D").CurrentState.StartsWith("selected")
+	}
+	
+	CustomBattleSelectedFormInit(CcoComponent comp, CcoCustomBattleUnit unit)
+	{
+		(selected_form = unit.TransformationUnitOverrideContext.ShapeshiftFormContext) =>
+		{
+			DoIf
+			(
+				IsContextValid(selected_form),
+				comp.SelectContext(selected_form)
+			)
+		}
+	}
+	
+	IsEquippedFormFromCulture(CcoCultureRecord culture)
+	{
+		PlayersFaction.EquippedShapeshiftFormContext.IsPartOfCulture(culture)
+	}
+	
+	ScrollToSelectedFormCulture(CcoComponent selection_comp, CcoComponent listview_comp, CcoComponent listbox_comp)
+	{
+		(selected_culture = PlayersFaction.EquippedShapeshiftFormContext.CulturesPartOfList.Sort(Name, true).FirstContext,
+		selected_culture_comp = listbox_comp.ChildList.FirstContext(Id.EndsWith(selected_culture.Key))) =>
+		{
+			DoIf
+			(
+				IsContextValid(selected_culture_comp),
+				listview_comp.ScrollToComponent(selected_culture_comp)
+			)
+		}
+	}
+	
+	LockedFormTooltip(CcoShapeshiftForm form)
+	{
+		GetIfElse
+		(
+			form.HasCharacter && form.CharacterContext.IsVisible,
+			Loc("wh3_dlc24_shapeshift_form_locked_visible"),
+			Loc("wh3_dlc24_shapeshift_form_locked_not_visible")
+		)
+	}
+	
+	UnlockedFormTooltip(CcoShapeshiftForm form)
+	{
+		GetIfElse
+		(
+			form.IsEquipped,
+			Loc("wh3_dlc24_shapeshift_form_already_equipped"),
+			Loc("wh3_dlc24_shapeshift_form_equip")
+		)
+	}
+}
+
+CcoCampaignCharacter
+{
+	ExCanCharacterEquipForms
+	{
+		UnitDetailsContext.AbilityDetailsList.Any(AbilityContext.SpecialAbilityBehaviourGroup == "changeling_transformation")
+	}
+}

@@ -108,6 +108,7 @@
 						<climate this="942FFF11-31B0-4E04-ABBC46CEFE287EC5">
 							<ring this="B47124C4-E225-4E00-8524F7A33DFC10B3"/>
 						</climate>
+						<icon_harmony this="B5939D39-BFB9-44D2-9B01FC9DED629F22"/>
 						<city_effect_list this="7AC68C5F-6EAB-4A0C-8B6C36023BE7DB45">
 							<template_global_effect_icon_and_timer this="CD157B71-3B01-47E7-BD8F72D2C092E6C3"/>
 							<template_global_effect_icon this="A09FB0DF-C909-4FE5-8BB3322CEAA2D056"/>
@@ -131,13 +132,13 @@
 								<smoke_particle_emitter this="46C5C17C-EC70-4C35-B18673F1599101CB">
 									<template_particle this="67D5BE14-765F-4A28-B34299BD95D1D0E3"/>
 								</smoke_particle_emitter>
-								<icon_cove this="A56B8DA3-3861-47C3-A0A96EE46299B3CA"/>
+								<icon this="A56B8DA3-3861-47C3-A0A96EE46299B3CA"/>
 							</wh2_dlc11_cst_vampire_coast>
 							<wh2_main_skv_skaven this="5B27C4FD-DE93-4370-AD61135E4278EA4C">
 								<smoke_particle_emitter this="BEC98E8D-828A-4B66-9C19EE3F2D0CEC96">
 									<template_particle this="C854CFFE-D2B8-44C6-A3E61704D4D9A06F"/>
 								</smoke_particle_emitter>
-								<icon_cove this="73D6F9DA-85C4-4BFA-BC614680EAA54930"/>
+								<icon this="73D6F9DA-85C4-4BFA-BC614680EAA54930"/>
 							</wh2_main_skv_skaven>
 							<wh3_dae_cult_building this="599336D7-40CC-43C8-914726047B96A04E">
 								<smoke_particle_emitter this="7062AD9F-66E0-4D0F-B02C8E267B713EFA">
@@ -194,6 +195,9 @@
 						<dy_income this="069B1EF1-86D6-473A-A60310A17CF91BC3">
 							<icon_coin this="F46B12CD-7871-47F6-BD16374F8534D3A2"/>
 						</dy_income>
+						<dy_foreign_slots_income this="FF73D7A1-53FD-4661-8453482DF3E8FB76">
+							<icon_coin this="896F04BC-19E8-4964-859151709C0CDE5E"/>
+						</dy_foreign_slots_income>
 						<dy_public_order this="C43A8252-4CE8-4C74-BF0079298EE399E7">
 							<icon_public_order this="7CE58AAF-B774-4BAB-A6564E83740CECB4">
 								<arrow this="7682FDD8-E2F7-4044-AF9061550542B6A0"/>
@@ -658,6 +662,18 @@
 					callback_id="ContextTooltipSetter"
 					context_object_id="CcoCampaignFaction"
 					context_function_id="Format(&quot;%s||%s&quot;, Format(Loc(&quot;tooltip_city_info_bar_vassal_war_coordination_title&quot;), Name), Loc(&quot;tooltip_city_info_bar_vassal_war_coordination_description&quot;))"/>
+				<callback_with_context
+					callback_id="ContextInactiveStateSetter"
+					context_function_id="IsLocalPlayersTurn">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignTurnEnd"/>
+						<property
+							name="event1"
+							value="CampaignTurnStart"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -948,7 +964,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</root>
@@ -1086,9 +1102,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="C3CE570D-046F-423C-B79AEED081CBEA5B"
@@ -1130,9 +1146,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -1171,9 +1187,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="264D2485-90A2-4451-8D943F4FBFE3CD3B"
@@ -1363,9 +1379,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -1399,9 +1415,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 			</states>
 			<animations>
@@ -1657,9 +1673,9 @@
 					<component_text
 						textvalign="Center"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</_0>
 				<_1
 					this="11DCF97F-F723-42C6-9218C703BE4A5CE1"
@@ -1681,9 +1697,9 @@
 					<component_text
 						textvalign="Center"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</_1>
 				<_2
 					this="E51E12C4-AE54-4A1C-BCAF061D72B8CE89"
@@ -1705,9 +1721,9 @@
 					<component_text
 						textvalign="Center"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</_2>
 				<_3
 					this="02355D99-DD1E-4370-A475A688670C7A7C"
@@ -1729,9 +1745,9 @@
 					<component_text
 						textvalign="Center"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</_3>
 				<_4
 					this="FA8F39C3-A099-46D4-B40CDDC4122439E5"
@@ -1753,9 +1769,9 @@
 					<component_text
 						textvalign="Center"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</_4>
 				<_5
 					this="4F3B4E8B-011F-436B-8B2B07461B039517"
@@ -1777,9 +1793,9 @@
 					<component_text
 						textvalign="Center"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</_5>
 				<_6
 					this="D0FFF6C7-7499-4B4A-8773752529175B4C"
@@ -1801,9 +1817,9 @@
 					<component_text
 						textvalign="Center"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</_6>
 			</states>
 		</attitude>
@@ -1865,9 +1881,9 @@
 					<component_text
 						textvalign="Center"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</_0>
 				<_1
 					this="42FF07B6-8E58-4F50-9EF5C87261B4D60A"
@@ -1889,9 +1905,9 @@
 					<component_text
 						textvalign="Center"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</_1>
 				<_2
 					this="BA9ADB6A-D2F4-4195-9A2D0E3F201A32C4"
@@ -1913,9 +1929,9 @@
 					<component_text
 						textvalign="Center"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</_2>
 				<_3
 					this="BBA86140-542C-4378-84B973CA9A07B24C"
@@ -1937,9 +1953,9 @@
 					<component_text
 						textvalign="Center"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</_3>
 				<_4
 					this="BA543557-F488-4F50-A009C82DCABFD23F"
@@ -1961,9 +1977,9 @@
 					<component_text
 						textvalign="Center"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</_4>
 				<_5
 					this="489F080D-2493-4026-856CDEBB4F74F06B"
@@ -1985,9 +2001,9 @@
 					<component_text
 						textvalign="Center"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</_5>
 				<_6
 					this="CAB1C9F4-11C3-4876-99CD995086DE9896"
@@ -2009,9 +2025,9 @@
 					<component_text
 						textvalign="Center"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</_6>
 			</states>
 		</attitude>
@@ -2119,7 +2135,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</city_info_bar>
@@ -2132,10 +2148,12 @@
 			tooltipslocalised="true"
 			uniqueguid="942FFF11-31B0-4E04-ABBC46CEFE287EC5"
 			currentstate="2C17EDAE-6AD8-4C89-B152F6C8EF6C37AA"
-			defaultstate="2C17EDAE-6AD8-4C89-B152F6C8EF6C37AA"
-			locked="true">
+			defaultstate="2C17EDAE-6AD8-4C89-B152F6C8EF6C37AA">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="CampaignClimateIcon"/>
+				<callback_with_context
+					callback_id="ContextTrashOnCondition"
+					context_function_id="CanUseUiFeature(&quot;NO_CLIMATES&quot;)"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -2176,6 +2194,9 @@
 			defaultstate="3E0EED9A-AB0F-4987-8A24E11851B5F8ED">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="CampaignClimateIcon"/>
+				<callback_with_context
+					callback_id="ContextTrashOnCondition"
+					context_function_id="CanUseUiFeature(&quot;NO_CLIMATES&quot;)"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -2269,9 +2290,10 @@
 					<component_text
 						font_m_font_name="la_gioconda_uppercase"
 						font_m_size="24"
-						font_m_colour="#000000FF"
-						font_m_leading="4"
-						fontcat_name="ingame_panel_heading"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_24_bold"
+						font_colour_override_preset_key="black"/>
 				</_0>
 				<allied
 					this="4A3BE72B-C2CE-4C99-9B945F13378EBB54"
@@ -2295,9 +2317,10 @@
 					<component_text
 						font_m_font_name="la_gioconda_uppercase"
 						font_m_size="24"
-						font_m_colour="#000000FF"
-						font_m_leading="4"
-						fontcat_name="ingame_panel_heading"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_24_bold"
+						font_colour_override_preset_key="black"/>
 				</allied>
 				<allied_military
 					this="DE0EC789-052B-4537-9A4A3B2E1D2772B2"
@@ -2320,9 +2343,10 @@
 					<component_text
 						font_m_font_name="la_gioconda_uppercase"
 						font_m_size="24"
-						font_m_colour="#000000FF"
-						font_m_leading="4"
-						fontcat_name="ingame_panel_heading"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_24_bold"
+						font_colour_override_preset_key="black"/>
 				</allied_military>
 				<client_state
 					this="D291C798-2147-4C3B-95070F65D38B95DB"
@@ -2345,9 +2369,10 @@
 					<component_text
 						font_m_font_name="la_gioconda_uppercase"
 						font_m_size="16"
-						font_m_colour="#FF2D2DFF"
-						font_m_leading="4"
-						fontcat_name="ingame_paragraph_heading_red"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_16_bold"
+						font_colour_override_preset_key="red"/>
 				</client_state>
 				<client_state_player
 					this="627BB976-B20A-4D1D-B9975406F695CFB0"
@@ -2370,9 +2395,10 @@
 					<component_text
 						font_m_font_name="la_gioconda_uppercase"
 						font_m_size="16"
-						font_m_colour="#FF2D2DFF"
-						font_m_leading="4"
-						fontcat_name="ingame_paragraph_heading_red"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_16_bold"
+						font_colour_override_preset_key="red"/>
 				</client_state_player>
 				<vassal
 					this="04F74307-9F30-440F-A31DAB44F0134ABF"
@@ -2395,9 +2421,10 @@
 					<component_text
 						font_m_font_name="la_gioconda_uppercase"
 						font_m_size="24"
-						font_m_colour="#000000FF"
-						font_m_leading="4"
-						fontcat_name="ingame_panel_heading"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_24_bold"
+						font_colour_override_preset_key="black"/>
 				</vassal>
 				<vassal_player
 					this="F8F98224-3068-4923-88A43D16C862647F"
@@ -2420,9 +2447,10 @@
 					<component_text
 						font_m_font_name="la_gioconda_uppercase"
 						font_m_size="16"
-						font_m_colour="#FF2D2DFF"
-						font_m_leading="4"
-						fontcat_name="ingame_paragraph_heading_red"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_16_bold"
+						font_colour_override_preset_key="red"/>
 				</vassal_player>
 				<war
 					this="FB2EBF65-C3A2-45B4-98C1D0DB0AA522F4"
@@ -2445,9 +2473,10 @@
 					<component_text
 						font_m_font_name="la_gioconda_uppercase"
 						font_m_size="24"
-						font_m_colour="#000000FF"
-						font_m_leading="4"
-						fontcat_name="ingame_panel_heading"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_24_bold"
+						font_colour_override_preset_key="black"/>
 				</war>
 			</states>
 		</diplomatic_relations>
@@ -2517,9 +2546,10 @@
 					<component_text
 						font_m_font_name="la_gioconda_uppercase"
 						font_m_size="24"
-						font_m_colour="#000000FF"
-						font_m_leading="4"
-						fontcat_name="ingame_panel_heading"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_24_bold"
+						font_colour_override_preset_key="black"/>
 				</_0>
 				<allied
 					this="5477F34E-F3A1-4B09-B3EBA1958C55D8D9"
@@ -2543,9 +2573,10 @@
 					<component_text
 						font_m_font_name="la_gioconda_uppercase"
 						font_m_size="24"
-						font_m_colour="#000000FF"
-						font_m_leading="4"
-						fontcat_name="ingame_panel_heading"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_24_bold"
+						font_colour_override_preset_key="black"/>
 				</allied>
 				<allied_military
 					this="14DEB061-71E6-425D-8DE28B895028777E"
@@ -2568,9 +2599,10 @@
 					<component_text
 						font_m_font_name="la_gioconda_uppercase"
 						font_m_size="24"
-						font_m_colour="#000000FF"
-						font_m_leading="4"
-						fontcat_name="ingame_panel_heading"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_24_bold"
+						font_colour_override_preset_key="black"/>
 				</allied_military>
 				<client_state
 					this="80189D73-D4DD-4F16-9D923AAE1A2D9F11"
@@ -2593,9 +2625,10 @@
 					<component_text
 						font_m_font_name="la_gioconda_uppercase"
 						font_m_size="16"
-						font_m_colour="#FF2D2DFF"
-						font_m_leading="4"
-						fontcat_name="ingame_paragraph_heading_red"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_16_bold"
+						font_colour_override_preset_key="red"/>
 				</client_state>
 				<client_state_player
 					this="DCB5096F-24A2-4193-8F883554C344D1A6"
@@ -2618,9 +2651,10 @@
 					<component_text
 						font_m_font_name="la_gioconda_uppercase"
 						font_m_size="16"
-						font_m_colour="#FF2D2DFF"
-						font_m_leading="4"
-						fontcat_name="ingame_paragraph_heading_red"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_16_bold"
+						font_colour_override_preset_key="red"/>
 				</client_state_player>
 				<vassal
 					this="0F398F3F-2D34-43EE-8EBF39AF23CC1586"
@@ -2643,9 +2677,10 @@
 					<component_text
 						font_m_font_name="la_gioconda_uppercase"
 						font_m_size="24"
-						font_m_colour="#000000FF"
-						font_m_leading="4"
-						fontcat_name="ingame_panel_heading"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_24_bold"
+						font_colour_override_preset_key="black"/>
 				</vassal>
 				<vassal_player
 					this="7B5309A2-04EB-4FD7-AEE84F690F47E4CD"
@@ -2668,9 +2703,10 @@
 					<component_text
 						font_m_font_name="la_gioconda_uppercase"
 						font_m_size="16"
-						font_m_colour="#FF2D2DFF"
-						font_m_leading="4"
-						fontcat_name="ingame_paragraph_heading_red"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_16_bold"
+						font_colour_override_preset_key="red"/>
 				</vassal_player>
 				<war
 					this="995E4828-39F0-4312-84CE66406483BB89"
@@ -2693,16 +2729,17 @@
 					<component_text
 						font_m_font_name="la_gioconda_uppercase"
 						font_m_size="24"
-						font_m_colour="#000000FF"
-						font_m_leading="4"
-						fontcat_name="ingame_panel_heading"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_24_bold"
+						font_colour_override_preset_key="black"/>
 				</war>
 			</states>
 		</diplomatic_relations>
 		<dy_garrison
 			this="6D230CB9-980D-4569-928D088C37FF75FC"
 			id="dy_garrison"
-			offset="241.00,0.00"
+			offset="320.00,0.00"
 			allowverticalresize="false"
 			componentleveltooltip="{{tt:ui/campaign ui/tooltip_garrisons}}"
 			tooltiplabel="dy_garrison_Tooltip_5f001f"
@@ -2730,9 +2767,9 @@
 						texthbehaviour="Resize"
 						textlabel="dy_garrison_NewState_Text_300031"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						font_colour_override_preset_key="black"/>
 				</newstate>
 			</states>
@@ -2771,9 +2808,9 @@
 						texthbehaviour="Resize"
 						textlabel="text_gold_NewState_Text_370005"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						font_colour_override_preset_key="black"
 						textshadervars="0.00,1.00,2.00,0.00"/>
 				</newstate>
@@ -2862,9 +2899,9 @@
 						textlabel="dy_name_unwalled_Text_7a003f"
 						font_m_font_name="Calligraph421"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="Scroll_text_warhammer3"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_alternative_12"
 						textshadervars="0.00,0.00,0.00,1.00"/>
 				</unwalled>
 				<unwalled_magic_forest
@@ -2896,9 +2933,9 @@
 						textlabel="StateText_9445d049"
 						font_m_font_name="Calligraph421"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="Scroll_text_warhammer3"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_alternative_12"
 						text_shader_name="text_outline_t0"
 						textshadervars="0.00,0.00,0.00,1.00"/>
 				</unwalled_magic_forest>
@@ -2932,9 +2969,9 @@
 						textlabel="StateText_4b6029d1"
 						font_m_font_name="Calligraph421"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="Scroll_text_warhammer3"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_alternative_12"
 						text_shader_name="text_outline_t0"
 						textshadervars="0.00,0.00,0.00,1.00"/>
 				</unwalled_wh3>
@@ -2979,9 +3016,9 @@
 						textlabel="dy_name_walled_Text_7a003f"
 						font_m_font_name="Calligraph421"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="Scroll_text_warhammer3"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_alternative_12"
 						textshadervars="0.00,0.00,0.00,1.00"/>
 				</walled>
 				<walled_magic_forest
@@ -3024,9 +3061,9 @@
 						textlabel="StateText_43ed9610"
 						font_m_font_name="Calligraph421"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="Scroll_text_warhammer3"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_alternative_12"
 						text_shader_name="text_outline_t0"
 						textshadervars="0.00,0.00,0.00,1.00"/>
 				</walled_magic_forest>
@@ -3071,9 +3108,9 @@
 						textlabel="StateText_aca40c87"
 						font_m_font_name="Calligraph421"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="Scroll_text_warhammer3"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_alternative_12"
 						text_shader_name="text_outline_t0"
 						textshadervars="0.00,0.00,0.00,1.00"/>
 				</walled_wh3>
@@ -3082,7 +3119,7 @@
 		<dy_public_order
 			this="C43A8252-4CE8-4C74-BF0079298EE399E7"
 			id="dy_public_order"
-			offset="124.00,0.00"
+			offset="203.00,0.00"
 			allowverticalresize="false"
 			componentleveltooltip="{{tt:ui/campaign ui/province_publicorder_tooltip}}"
 			tooltiplabel="dy_public_order_Tooltip_760072"
@@ -3120,9 +3157,9 @@
 						texthbehaviour="Resize"
 						textlabel="dy_public_order_NewState_Text_340029"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						font_colour_override_preset_key="black"
 						textshadervars="0.00,1.00,2.00,0.00"/>
 				</newstate>
@@ -3313,9 +3350,9 @@
 					<component_text
 						texthbehaviour="Never split"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</icon_coin>
@@ -3333,7 +3370,7 @@
 				<newstate
 					this="55C6151C-59A7-4A00-8B634F0F46BE7BBE"
 					name="NewState"
-					width="307"
+					width="333"
 					height="26"
 					uniqueguid="55C6151C-59A7-4A00-8B634F0F46BE7BBE"/>
 			</states>
@@ -3405,7 +3442,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</happy>
 				<neutral
 					this="D82B38B9-3D10-4C03-85E4794BA8B277ED"
@@ -3453,7 +3490,7 @@
 				<newstate
 					this="FAA5D494-9C70-4260-87F68472C9CC39F9"
 					name="NewState"
-					width="371"
+					width="450"
 					height="24"
 					uniqueguid="FAA5D494-9C70-4260-87F68472C9CC39F9">
 					<component_text
@@ -3461,8 +3498,8 @@
 						texthalign="Center"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -3474,7 +3511,7 @@
 		<info_bar_background
 			this="98761E2D-3198-415C-AC74472A6B7664C2"
 			id="info_bar_background"
-			offset="-170.00,26.00"
+			offset="-210.00,26.00"
 			allowverticalresize="false"
 			docking="Bottom Center"
 			dock_offset="0.00,36.00"
@@ -3496,7 +3533,7 @@
 				<newstate
 					this="16B0FA62-FA6E-421B-B67B9118C4942E15"
 					name="NewState"
-					width="371"
+					width="450"
 					height="40"
 					uniqueguid="16B0FA62-FA6E-421B-B67B9118C4942E15">
 					<imagemetrics>
@@ -3504,7 +3541,7 @@
 							this="D851BA33-2E3D-42D0-BC0E1A53C3CBF17C"
 							uniqueguid="D851BA33-2E3D-42D0-BC0E1A53C3CBF17C"
 							componentimage="AB730207-2228-4102-922135E9EE0D2FC5"
-							width="371"
+							width="450"
 							height="40"
 							tile="true"
 							margin="0.00,60.00,0.00,60.00"/>
@@ -3515,7 +3552,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<animations>
@@ -3605,7 +3642,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"
+						fontcat_name="body_12"
 						text_shader_name="drop_shadow_t0"
 						textshadervars="0.00,1.00,2.00,0.00"/>
 				</newstate>
@@ -4100,7 +4137,7 @@
 		<corruption_list
 			this="4B2AABA8-8EB1-4BC2-900562B87E01053D"
 			id="corruption_list"
-			offset="200.00,0.00"
+			offset="279.00,0.00"
 			allowverticalresize="false"
 			tooltipslocalised="true"
 			uniqueguid="4B2AABA8-8EB1-4BC2-900562B87E01053D"
@@ -4124,7 +4161,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="ProvinceContext.PooledResourceList.Filter( Total &gt; 0 ) &amp;&amp; IsScriptLockActive(&quot;hide_settlement_label_corruption&quot;) == false">
+					context_function_id="ProvinceContext.PooledResourceList.Filter( Total &gt; 0 &amp;&amp; StringContains(Key, &quot;corruption&quot;)) &amp;&amp; IsScriptLockActive(&quot;hide_settlement_label_corruption&quot;) == false">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -4146,9 +4183,9 @@
 						textxoffset="26.00,2.00"
 						texthbehaviour="Never split"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.00,1.00,2.00,0.00"/>
 				</newstate>
 			</states>
@@ -4187,7 +4224,7 @@
 		<list_parent
 			this="A0279D24-493E-420B-8EE10F60F2644EC5"
 			id="list_parent"
-			offset="-224.00,-18.00"
+			offset="-237.00,-18.00"
 			allowverticalresize="false"
 			docking="Center"
 			component_anchor_point="0.50,0.50"
@@ -4199,7 +4236,7 @@
 				<newstate
 					this="8D129CCF-3C5C-4884-8840CCD712858679"
 					name="NewState"
-					width="479"
+					width="505"
 					height="67"
 					uniqueguid="8D129CCF-3C5C-4884-8840CCD712858679"/>
 			</states>
@@ -4915,9 +4952,9 @@
 					uniqueguid="C80503C5-E6EC-4CA7-A246CCF87FE78D0F"/>
 			</states>
 		</wh2_dlc11_cst_vampire_coast>
-		<icon_cove
+		<icon
 			this="A56B8DA3-3861-47C3-A0A96EE46299B3CA"
-			id="icon_cove"
+			id="icon"
 			offset="0.00,-8.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
@@ -4953,7 +4990,7 @@
 					</imagemetrics>
 				</newstate>
 			</states>
-		</icon_cove>
+		</icon>
 		<smoke_particle_emitter
 			this="46C5C17C-EC70-4C35-B18673F1599101CB"
 			id="smoke_particle_emitter"
@@ -5105,7 +5142,7 @@
 		<foreign_slot_holder
 			this="66FB6F63-3A0B-414F-833029A91F373173"
 			id="foreign_slot_holder"
-			offset="119.00,2.00"
+			offset="145.00,2.00"
 			allowverticalresize="false"
 			tooltipslocalised="true"
 			uniqueguid="66FB6F63-3A0B-414F-833029A91F373173"
@@ -5139,9 +5176,9 @@
 				type="HorizontalList"
 				sizetocontent="true"/>
 		</foreign_slot_holder>
-		<icon_cove
+		<icon
 			this="73D6F9DA-85C4-4BFA-BC614680EAA54930"
-			id="icon_cove"
+			id="icon"
 			offset="0.00,-8.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
@@ -5226,7 +5263,7 @@
 					</imagemetrics>
 				</owned_discovered>
 			</states>
-		</icon_cove>
+		</icon>
 		<smoke_particle_emitter
 			this="BEC98E8D-828A-4B66-9C19EE3F2D0CEC96"
 			id="smoke_particle_emitter"
@@ -5378,7 +5415,6 @@
 		<wh2_main_skv_skaven
 			this="5B27C4FD-DE93-4370-AD61135E4278EA4C"
 			id="wh2_main_skv_skaven"
-			offset="45.00,0.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			visible="false"
@@ -5415,7 +5451,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="ShouldShowWarCoordinationPendingRequest(this) || (IsContextValid(WarCoordinationTargetterList.FirstContext) == false &amp;&amp; IsContextValid(TargettingContext) &amp;&amp; TargettingContext.IsValidTarget(this) &amp;&amp; TargettingContext.CurrentTargetContext != this)">
+					context_function_id="ShouldShowWarCoordinationPendingRequest(this) || (IsContextValid(WarCoordinationTargetterList.FirstContext) == false &amp;&amp; IsContextValid(TargettingContext) &amp;&amp; TargettingContext.IsValidTarget(this) &amp;&amp; TargettingContext.IsContextTargeted(this) == false)">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -5426,6 +5462,9 @@
 						<property
 							name="event2"
 							value="TargettingInterfaceTargetSet"/>
+						<property
+							name="event3"
+							value="DiplomacyManipulationTargetSelectionModeChanged"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
@@ -5461,7 +5500,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="WarCoordinationTargetterList.FirstContext || TargettingContext.CurrentTargetContext == this">
+					context_function_id="WarCoordinationTargetterList.FirstContext || TargettingContext.IsContextTargeted(this)">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -5472,6 +5511,9 @@
 						<property
 							name="event2"
 							value="TargettingInterfaceTargetSet"/>
+						<property
+							name="event3"
+							value="DiplomacyManipulationTargetSelectionModeChanged"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
@@ -5565,8 +5607,9 @@
 						textlabel="dy_loyalty_NewState_Text_35"
 						font_m_font_name="brand_header"
 						font_m_size="14"
-						font_m_colour="#FFFFE0FF"
-						fontcat_name="parchment_header_small_warhammer3"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						font_colour_override_preset_key="black"
 						textshadervars="1.00,1.00,2.00,0.00"/>
 				</newstate>
@@ -5825,7 +5868,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</default>
 			</states>
 		</corruption_icon>
@@ -5878,9 +5921,9 @@
 						textlocalised="true"
 						textlabel="template_corruption_NewState_Text_78"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						font_colour_override_preset_key="black"
 						textshadervars="0.00,1.00,2.00,0.00"/>
 				</newstate>
@@ -5933,9 +5976,9 @@
 							colour="#A0FF37FF"/>
 					</imagemetrics>
 					<component_text
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="ingame_text_small_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
 				</newstate>
 			</states>
 		</fill>
@@ -6019,9 +6062,9 @@
 					height="30"
 					uniqueguid="B8E366BE-599C-4B24-980A1461ED9D14AE">
 					<component_text
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="ingame_text_small_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
 				</newstate>
 			</states>
 		</strength_bar>
@@ -6353,7 +6396,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="ShouldShowWarCoordinationPendingRequest(this) || ShouldShowWarCoordinationPendingRequest(StationedForceContext) || (IsVisible &amp;&amp; IsContextValid(WarCoordinationTargetterList.FirstContext) == false &amp;&amp; IsContextValid(TargettingContext) &amp;&amp; TargettingContext.IsValidTarget(StationedForceContext) &amp;&amp; TargettingContext.IsValidTarget(this) == false &amp;&amp; TargettingContext.CurrentTargetContext != StationedForceContext)">
+					context_function_id="ShouldShowWarCoordinationPendingRequest(this) || ShouldShowWarCoordinationPendingRequest(StationedForceContext) || (IsVisible &amp;&amp; IsContextValid(WarCoordinationTargetterList.FirstContext) == false &amp;&amp; IsContextValid(TargettingContext) &amp;&amp; TargettingContext.IsValidTarget(StationedForceContext) &amp;&amp; TargettingContext.IsValidTarget(this) == false &amp;&amp; TargettingContext.IsContextTargeted(StationedForceContext) == false)">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -6364,6 +6407,9 @@
 						<property
 							name="event2"
 							value="TargettingInterfaceTargetSet"/>
+						<property
+							name="event3"
+							value="DiplomacyManipulationTargetSelectionModeChanged"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
@@ -6397,7 +6443,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignMilitaryForce"
-					context_function_id="WarCoordinationTargetterList.FirstContext || TargettingContext.CurrentTargetContext == this">
+					context_function_id="WarCoordinationTargetterList.FirstContext || TargettingContext.IsContextTargeted(this)">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -6408,6 +6454,9 @@
 						<property
 							name="event2"
 							value="TargettingInterfaceTargetSet"/>
+						<property
+							name="event3"
+							value="DiplomacyManipulationTargetSelectionModeChanged"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
@@ -6539,9 +6588,9 @@
 					<component_text
 						textvalign="Center"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</default>
 			</states>
 		</icon_can_loan>
@@ -6660,8 +6709,8 @@
 						textlabel="faction_strength_rank_NewState_Text_390000"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</faction_strength_rank>
@@ -7351,7 +7400,7 @@
 		<wh3_dae_cult_building
 			this="599336D7-40CC-43C8-914726047B96A04E"
 			id="wh3_dae_cult_building"
-			offset="90.00,-7.00"
+			offset="0.00,-7.00"
 			visible="false"
 			dock_offset="0.00,-7.00"
 			tooltipslocalised="true"
@@ -7375,9 +7424,8 @@
 			this="AD552AF3-68DA-41D2-8FC7FA460BADB167"
 			id="icon"
 			dock_offset="0.00,-7.00"
-			tooltipslocalised="true"
-			componentleveltooltip="You have a [[img:icon_cult]][[/img]]cult in this settlement."
-			tooltiplabel="ComponentTooltip_afdb883c"
+			componentleveltooltip="{{tr:city_info_bar_cult_tooltip}}"
+			tooltiplabel="ComponentTooltip_492c7da6"
 			uniqueguid="AD552AF3-68DA-41D2-8FC7FA460BADB167"
 			isaspectratiolocked="true"
 			currentstate="2D890654-8F22-4AA7-A9EFDB0241A0E771"
@@ -7387,11 +7435,38 @@
 					this="F7912146-A41F-40D3-9DBA7284BB115894"
 					uniqueguid="F7912146-A41F-40D3-9DBA7284BB115894"
 					imagepath="ui/skins/daemon/wh3_dae_cult_building.png"/>
+				<component_image
+					this="D7DB3D11-2658-43EB-828F2C08E5B48A79"
+					uniqueguid="D7DB3D11-2658-43EB-828F2C08E5B48A79"
+					imagepath="ui/skins/default/icon_status_alert_high_24px.png"/>
+				<component_image
+					this="FE90F334-DA2E-4210-881A132E58A7C00A"
+					uniqueguid="FE90F334-DA2E-4210-881A132E58A7C00A"
+					imagepath="ui/skins/default/icon_under_empire_discovered_large.png"/>
 			</componentimages>
 			<states>
-				<default
+				<discovered
+					this="9AE640FC-5DAD-4BD3-BB2A17FC8D4F14F6"
+					name="discovered"
+					width="40"
+					height="40"
+					interactive="true"
+					disabled="true"
+					shader_name="glow_pulse_t0"
+					shadervars="1.00,2.00,3.00,0.00"
+					uniqueguid="9AE640FC-5DAD-4BD3-BB2A17FC8D4F14F6">
+					<imagemetrics>
+						<image
+							this="BAC7E3AB-7920-425C-A7B354EA18A3B4E1"
+							uniqueguid="BAC7E3AB-7920-425C-A7B354EA18A3B4E1"
+							componentimage="FE90F334-DA2E-4210-881A132E58A7C00A"
+							width="40"
+							height="40"/>
+					</imagemetrics>
+				</discovered>
+				<owned
 					this="2D890654-8F22-4AA7-A9EFDB0241A0E771"
-					name="default"
+					name="owned"
 					width="40"
 					height="40"
 					interactive="true"
@@ -7407,7 +7482,34 @@
 							width="40"
 							height="40"/>
 					</imagemetrics>
-				</default>
+				</owned>
+				<owned_discovered
+					this="B6F913DC-1A52-4783-B8865B176AB017C3"
+					name="owned_discovered"
+					width="40"
+					height="40"
+					interactive="true"
+					disabled="true"
+					shader_name="glow_pulse_t0"
+					shadervars="1.00,2.00,3.00,0.00"
+					uniqueguid="B6F913DC-1A52-4783-B8865B176AB017C3">
+					<imagemetrics>
+						<image
+							this="B196C74C-FCF1-4AD3-8F8F15AC932C6195"
+							uniqueguid="B196C74C-FCF1-4AD3-8F8F15AC932C6195"
+							componentimage="F7912146-A41F-40D3-9DBA7284BB115894"
+							width="40"
+							height="40"/>
+						<image
+							this="BD4105BB-F07A-418B-A0720CE1DF4246C8"
+							uniqueguid="BD4105BB-F07A-418B-A0720CE1DF4246C8"
+							componentimage="D7DB3D11-2658-43EB-828F2C08E5B48A79"
+							offset="16.00,16.00"
+							width="24"
+							height="24"
+							dockpoint="Bottom Right"/>
+					</imagemetrics>
+				</owned_discovered>
 			</states>
 		</icon>
 		<smoke_particle_emitter
@@ -7612,7 +7714,7 @@
 		<city_effect_list
 			this="7AC68C5F-6EAB-4A0C-8B6C36023BE7DB45"
 			id="city_effect_list"
-			offset="32.00,3.00"
+			offset="58.00,3.00"
 			allowverticalresize="false"
 			tooltipslocalised="true"
 			uniqueguid="7AC68C5F-6EAB-4A0C-8B6C36023BE7DB45"
@@ -7769,9 +7871,9 @@
 						texthbehaviour="Resize"
 						textlabel="template_global_effect_icon_and_timer_NewState_Text_36"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</template_global_effect_icon_and_timer>
@@ -7854,9 +7956,9 @@
 						textlabel="StateText_b86ebed2"
 						font_m_font_name="Calligraph421"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="Scroll_text_warhammer3"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_alternative_12"
 						font_colour_override_preset_key="black"/>
 				</active>
 				<complete
@@ -7873,9 +7975,9 @@
 						textlabel="StateText_6364add9"
 						font_m_font_name="Calligraph421"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="Scroll_text_warhammer3"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_alternative_12"
 						font_colour_override_preset_key="black"/>
 				</complete>
 				<inactive
@@ -7893,9 +7995,9 @@
 						textlabel="StateText_767961ba"
 						font_m_font_name="Calligraph421"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="Scroll_text_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_alternative_12"/>
 				</inactive>
 			</states>
 		</button_txt>
@@ -7986,9 +8088,9 @@
 						textvalign="Center"
 						texthalign="Center"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<complete
 					this="8DCE27D7-97A3-41A0-9C07BD03EBCC42C3"
@@ -8014,9 +8116,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</complete>
 				<down
 					this="D0D24DA5-68FB-47AE-864F8FBB1F962C11"
@@ -8049,9 +8151,9 @@
 						textvalign="Center"
 						texthalign="Center"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -8081,9 +8183,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="C1F40676-8C7A-4764-AF92E4ECC3C42611"
@@ -8120,9 +8222,9 @@
 						textvalign="Center"
 						texthalign="Center"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -8152,9 +8254,9 @@
 						textvalign="Center"
 						texthalign="Center"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 			</states>
 		</herdstone_ritual_button>
@@ -8227,8 +8329,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						text_shader_name="text_outline_t0"
 						textshadervars="0.00,0.00,0.00,1.00"/>
 				</active>
@@ -8261,8 +8363,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"/>
+						font_m_leading="3"
+						fontcat_name="header_14"/>
 				</defiled>
 				<herdstone_preview
 					this="2F2F5D4D-7BF6-48A9-870516C34BF3B027"
@@ -8303,8 +8405,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						text_shader_name="text_outline_t0"
 						textshadervars="0.00,0.00,0.00,1.00"/>
 				</herdstone_preview>
@@ -8347,8 +8449,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						text_shader_name="text_outline_t0"
 						textshadervars="0.00,0.00,0.00,1.00"/>
 				</herdstone_ritual_available>
@@ -8391,8 +8493,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						text_shader_name="text_outline_t0"
 						textshadervars="0.00,0.00,0.00,1.00"/>
 				</herdstone_ritual_locked>
@@ -8426,8 +8528,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						text_shader_name="text_outline_t0"
 						textshadervars="0.00,0.00,0.00,1.00"/>
 				</inactive>
@@ -8554,9 +8656,9 @@
 						textvalign="Center"
 						texthalign="Center"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<complete
 					this="B672229D-5163-4F50-9766E66B45538D29"
@@ -8581,9 +8683,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</complete>
 				<down
 					this="F0A76218-CB9C-4BC4-B8CA2976D8EA07AF"
@@ -8616,9 +8718,9 @@
 						textvalign="Center"
 						texthalign="Center"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -8648,9 +8750,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="8963E013-0481-4F31-AC3D996793E72E64"
@@ -8687,9 +8789,9 @@
 						textvalign="Center"
 						texthalign="Center"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -8718,9 +8820,9 @@
 						textvalign="Center"
 						texthalign="Center"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 			</states>
 		</herdstone_ritual_button>
@@ -8793,8 +8895,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						text_shader_name="drop_shadow_t0"
 						textshadervars="0.00,0.00,3.00,3.00"/>
 				</active>
@@ -8827,8 +8929,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"/>
+						font_m_leading="3"
+						fontcat_name="header_14"/>
 				</defiled>
 				<herdstone_ritual_available
 					this="575534CB-F3FF-4DB3-9A49577F4BC738FD"
@@ -8869,8 +8971,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						text_shader_name="drop_shadow_t0"
 						textshadervars="0.00,0.00,3.00,3.00"/>
 				</herdstone_ritual_available>
@@ -8913,8 +9015,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						text_shader_name="drop_shadow_t0"
 						textshadervars="0.00,0.00,3.00,3.00"/>
 				</herdstone_ritual_locked>
@@ -8948,8 +9050,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						textshadervars="0.50,0.50,0.00,0.00"/>
 				</inactive>
 			</states>
@@ -8999,9 +9101,9 @@
 						textlabel="StateText_6a80ab29"
 						font_m_font_name="Calligraph421"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="Scroll_text_warhammer3"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_alternative_12"
 						font_colour_override_preset_key="black"/>
 				</active>
 				<complete
@@ -9018,9 +9120,9 @@
 						textlabel="StateText_7a9ba3be"
 						font_m_font_name="Calligraph421"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="Scroll_text_warhammer3"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_alternative_12"
 						font_colour_override_preset_key="black"/>
 				</complete>
 				<inactive
@@ -9038,9 +9140,9 @@
 						textlabel="StateText_e45a9492"
 						font_m_font_name="Calligraph421"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="Scroll_text_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_alternative_12"/>
 				</inactive>
 			</states>
 		</button_txt>
@@ -9427,9 +9529,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="C17801E4-A65D-4D48-9EAEE236041E10B3"
@@ -9473,9 +9575,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -9515,9 +9617,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="26F008B0-198D-4331-83E0E28ED118265E"
@@ -9586,9 +9688,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -9624,9 +9726,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 			</states>
 		</button_cancel>
@@ -9746,9 +9848,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="F5AEF8E1-12AA-4B57-AD3C0BCF34029A09"
@@ -9792,9 +9894,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -9834,9 +9936,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="11BE7DD6-276A-40CA-BFE78D14DCE4D8CF"
@@ -9905,9 +10007,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -9943,9 +10045,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 			</states>
 		</button_confirm>
@@ -9975,7 +10077,7 @@
 						font_m_size="14"
 						font_m_colour="#FFFFFFFF"
 						font_m_leading="1"
-						fontcat_name="auto_ 133"
+						fontcat_name="auto_ 35"
 						text_shader_name="brighten_t0"
 						textshadervars="4.50,0.00,0.00,0.00"/>
 				</new>
@@ -10009,7 +10111,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"
+						fontcat_name="body_12"
 						text_shader_name="set_greyscale_t0"
 						textshadervars="1.00,1.00,0.00,0.00"/>
 				</new>
@@ -10117,9 +10219,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -10651,7 +10753,7 @@
 		<dy_mercenaries
 			this="A6B16BA0-04C0-4724-92E3A913F6485D3F"
 			id="dy_mercenaries"
-			offset="289.00,0.00"
+			offset="368.00,0.00"
 			allowverticalresize="false"
 			componentleveltooltip="{{tt:ui/campaign ui/tooltip_province_mercenary_pools}}"
 			tooltiplabel="ComponentTooltip_876e3c1"
@@ -10691,9 +10793,9 @@
 						texthbehaviour="Resize"
 						textlabel="StateText_f244e4cf"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						font_colour_override_preset_key="black"/>
 				</default>
 			</states>
@@ -10860,9 +10962,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</active>
 				<down
 					this="A3F9AD9C-E395-43B2-9AEAF3EA7BDD83E5"
@@ -10906,9 +11008,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</down>
 				<down_off
@@ -10948,9 +11050,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</down_off>
 				<hover
 					this="961D6A5C-A0ED-44E4-9D44F5BF77C62D75"
@@ -11019,9 +11121,9 @@
 					</transitionmap>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.30,0.00,0.00,0.00"/>
 				</hover>
 				<inactive
@@ -11056,9 +11158,9 @@
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</inactive>
 			</states>
 		</grudge_mission_target>
@@ -11109,7 +11211,7 @@
 		<dark_fortress_and_vassal_holder
 			this="CBDEAAF9-E830-4D98-80D20EAC2E636B74"
 			id="dark_fortress_and_vassal_holder"
-			offset="186.00,-13.00"
+			offset="212.00,-13.00"
 			tooltipslocalised="true"
 			uniqueguid="CBDEAAF9-E830-4D98-80D20EAC2E636B74"
 			currentstate="8AFEC31E-E09B-42F5-9B517F002044DF9F"
@@ -11726,7 +11828,7 @@
 		<resource_list
 			this="BCA02C5B-77E3-4AB0-8214453F5D905A93"
 			id="resource_list"
-			offset="118.00,15.00"
+			offset="144.00,15.00"
 			tooltipslocalised="true"
 			uniqueguid="BCA02C5B-77E3-4AB0-8214453F5D905A93"
 			currentstate="2B4F4598-8BFE-4564-885762C48A788872"
@@ -11746,7 +11848,7 @@
 		<icon_settlement_type
 			this="59DC962A-0D63-4FFE-B339D0AE8EACC4B4"
 			id="icon_settlement_type"
-			offset="120.00,2.00"
+			offset="146.00,2.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			tooltipslocalised="true"
@@ -11942,7 +12044,7 @@
 		<icon_landmark
 			this="71D116D3-1F27-4885-BB20F913B95B4780"
 			id="icon_landmark"
-			offset="94.00,3.00"
+			offset="120.00,3.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			uniqueguid="71D116D3-1F27-4885-BB20F913B95B4780"
@@ -11961,7 +12063,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="PlayersFactionChainList.Filter(BuildingSetContext.Key == &quot;wh2_main_set_landmark&quot; || Key.StartsWith(&quot;wh2_dlc17_bst_special_settlement_&quot;) || ((Key.Contains(&quot;legendary_&quot;) || Key.Contains(&quot;special_&quot;)) &amp;&amp; BuildingSetContext.Key == &quot;wh_main_set_port&quot;)).IsEmpty == false"/>
+					context_function_id="ExLandmarkBuildingList.IsEmpty == false"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -11990,5 +12092,240 @@
 				</default>
 			</states>
 		</icon_landmark>
+		<icon_harmony
+			this="B5939D39-BFB9-44D2-9B01FC9DED629F22"
+			id="icon_harmony"
+			offset="32.00,2.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			componentleveltooltip="{{tt:ui/campaign ui/tooltip_harmony}}"
+			tooltiplabel="ComponentTooltip_d45235cc"
+			uniqueguid="B5939D39-BFB9-44D2-9B01FC9DED629F22"
+			currentstate="F9F3E5E4-52D9-464D-8A5751F277D435F1"
+			defaultstate="F9F3E5E4-52D9-464D-8A5751F277D435F1">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoCampaignPooledResource">
+					<child_m_user_properties>
+						<property
+							name="0"
+							value="Total &gt; 0"/>
+						<property
+							name="1"
+							value="Total == 0"/>
+						<property
+							name="2"
+							value="Total &lt; 0"/>
+						<property
+							name="event0"
+							value="PooledResourceTransaction"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignFactionProvinceManager"
+					context_function_id="FactionContext == PlayersFaction &amp;&amp; IsContextValid(PooledResourceContext(&quot;wh3_dlc24_cth_province_harmony&quot;))"/>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoCampaignPooledResource"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignFactionProvinceManager"
+					context_function_id="PooledResourceContext(&quot;wh3_dlc24_cth_province_harmony&quot;)"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="FactionProvinceManagerContext">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="SettlementFactionChange"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="CAC88808-C32D-482F-A98D88AF5451B354"
+					uniqueguid="CAC88808-C32D-482F-A98D88AF5451B354"
+					imagepath="ui/skins/default/icon_yang_harmony.png"/>
+				<component_image
+					this="C699D5A1-C1CE-4A36-BEAEBDCB13B49479"
+					uniqueguid="C699D5A1-C1CE-4A36-BEAEBDCB13B49479"
+					imagepath="ui/skins/default/icon_yin_harmony.png"/>
+				<component_image
+					this="40B123AA-88C5-4B14-90EB69E4ACE44331"
+					uniqueguid="40B123AA-88C5-4B14-90EB69E4ACE44331"
+					imagepath="ui/skins/default/icon_yin_yang.png"/>
+			</componentimages>
+			<states>
+				<_0
+					this="F9F3E5E4-52D9-464D-8A5751F277D435F1"
+					name="0"
+					width="26"
+					height="26"
+					interactive="true"
+					disabled="true"
+					uniqueguid="F9F3E5E4-52D9-464D-8A5751F277D435F1">
+					<imagemetrics>
+						<image
+							this="E411E7EF-980E-4707-A384B6178BC8ABA9"
+							uniqueguid="E411E7EF-980E-4707-A384B6178BC8ABA9"
+							componentimage="CAC88808-C32D-482F-A98D88AF5451B354"
+							width="26"
+							height="26"/>
+					</imagemetrics>
+				</_0>
+				<_1
+					this="3089722B-BF4F-415D-A261B6C510122E50"
+					name="1"
+					width="26"
+					height="26"
+					interactive="true"
+					disabled="true"
+					uniqueguid="3089722B-BF4F-415D-A261B6C510122E50">
+					<imagemetrics>
+						<image
+							this="3ECCA761-EABB-423B-829E38315F39F522"
+							uniqueguid="3ECCA761-EABB-423B-829E38315F39F522"
+							componentimage="40B123AA-88C5-4B14-90EB69E4ACE44331"
+							width="26"
+							height="26"/>
+					</imagemetrics>
+				</_1>
+				<_2
+					this="A3CE83E8-E141-4423-8D81E8660579E01F"
+					name="2"
+					width="26"
+					height="26"
+					interactive="true"
+					disabled="true"
+					uniqueguid="A3CE83E8-E141-4423-8D81E8660579E01F">
+					<imagemetrics>
+						<image
+							this="16804C38-2993-479E-8AE64A865BE96F64"
+							uniqueguid="16804C38-2993-479E-8AE64A865BE96F64"
+							componentimage="C699D5A1-C1CE-4A36-BEAEBDCB13B49479"
+							width="26"
+							height="26"/>
+					</imagemetrics>
+				</_2>
+			</states>
+		</icon_harmony>
+		<dy_foreign_slots_income
+			this="FF73D7A1-53FD-4661-8453482DF3E8FB76"
+			id="dy_foreign_slots_income"
+			offset="124.00,0.00"
+			allowverticalresize="false"
+			componentleveltooltip="{{tt:ui/campaign ui/tooltip_province_foreign_slot_wealth}}"
+			tooltiplabel="ComponentTooltip_d8102a4e"
+			uniqueguid="FF73D7A1-53FD-4661-8453482DF3E8FB76"
+			currentstate="57194F04-2AE8-4B7E-AB6C1AB3D4B88268">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoCampaignProvince"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="IsPlayerOwned == false &amp;&amp; PlayerFactionForeignSlotIncome &gt; 0">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignBuildingStateChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="PlayerFactionForeignSlotIncome">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignBuildingStateChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="ProvinceContext"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="57194F04-2AE8-4B7E-AB6C1AB3D4B88268"
+					name="NewState"
+					width="75"
+					height="24"
+					interactive="true"
+					disabled="true"
+					uniqueguid="57194F04-2AE8-4B7E-AB6C1AB3D4B88268">
+					<component_text
+						text="10000"
+						textvalign="Center"
+						textxoffset="26.00,4.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_bf0be26f"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="black"
+						textshadervars="0.00,1.00,2.00,0.00"/>
+				</newstate>
+			</states>
+		</dy_foreign_slots_income>
+		<icon_coin
+			this="896F04BC-19E8-4964-859151709C0CDE5E"
+			id="icon_coin"
+			offset="0.00,-1.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center Left"
+			component_anchor_point="0.00,0.50"
+			tooltipslocalised="true"
+			uniqueguid="896F04BC-19E8-4964-859151709C0CDE5E"
+			currentstate="6958B19A-A222-4C34-B835265B0388BCF2">
+			<componentimages>
+				<component_image
+					this="9D7B00BF-9CAC-4939-9EF42EB52BDFE3C2"
+					uniqueguid="9D7B00BF-9CAC-4939-9EF42EB52BDFE3C2"
+					imagepath="ui/skins/default/icon_foreign_slot_income_plus.png"/>
+				<component_image
+					this="CA69B74F-2453-4565-8653BF3E5D052FAD"
+					uniqueguid="CA69B74F-2453-4565-8653BF3E5D052FAD"
+					imagepath="ui/skins/default/red_text_banner_shadow.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="6958B19A-A222-4C34-B835265B0388BCF2"
+					name="NewState"
+					width="26"
+					height="26"
+					uniqueguid="6958B19A-A222-4C34-B835265B0388BCF2">
+					<imagemetrics>
+						<image
+							this="FD5450B6-9959-4999-9A5B5644AB99A53B"
+							uniqueguid="FD5450B6-9959-4999-9A5B5644AB99A53B"
+							componentimage="CA69B74F-2453-4565-8653BF3E5D052FAD"
+							offset="-5.00,0.00"
+							width="33"
+							height="26"
+							colour="#FFFFFF96"/>
+						<image
+							this="8A4D2DD2-FDB4-40DC-9214EDD1927A0767"
+							uniqueguid="8A4D2DD2-FDB4-40DC-9214EDD1927A0767"
+							componentimage="9D7B00BF-9CAC-4939-9EF42EB52BDFE3C2"
+							width="26"
+							height="26"/>
+					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+		</icon_coin>
 	</components>
 </layout>

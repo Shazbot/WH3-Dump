@@ -27,8 +27,34 @@
 								<dy_wind_name this="3103EDB3-EEEF-439F-A8795294714CF05C"/>
 							</info_bar>
 						</dy_wind>
+						<winds_effect_list_change this="690F99AA-1031-4C5A-B8B12C7E9DDCB747">
+							<dy_title this="48CAD16C-F491-4CA0-8176E1768CB40D67"/>
+							<winds_effect_list_change this="3A6CB648-A1E4-4213-87286F9A6F8A2C9F">
+								<template_region_effect this="26E0DB1C-D687-4523-BBFAF88226696AA5"/>
+							</winds_effect_list_change>
+						</winds_effect_list_change>
 					</template_province>
 				</province_overlay_list>
+				<stored_wom_holder this="E315BA6F-DEF6-498A-A4BDFFEBA0FFEB74">
+					<stored_wom_bar this="E8D5F06D-A49D-403F-A827317D763FDEBF">
+						<bar_fill_parent this="1EC5A467-C2E3-47DD-96D3E3B049476685">
+							<bar_fill this="1AE57004-5D3B-4FC1-9B6AA552AF7B866B"/>
+						</bar_fill_parent>
+						<magic_flame_overflow_effect this="76CCF4CE-38A8-4396-95C4D2CA7ECE56A7"/>
+						<bar_frame this="D11EF21F-7786-440E-BA08EBB67F5C0A21">
+							<dy_stored_wom this="C00CC3B2-05ED-4AA3-91B74B7595122B92"/>
+							<eye_holder this="F26910EE-F540-43B1-B880FB5233661ECE"/>
+							<eye_glow this="9E5F7B71-8D81-497A-B880187174E9E2AD"/>
+						</bar_frame>
+						<eye_holder this="74AC0E47-B748-469D-92C228AB21AFD6CC">
+							<eye_clipper this="8751E4E9-5B2C-4404-B468EFABDFA9A667">
+								<eye this="CF347307-A7CC-480E-8E5115DEB61DEE48"/>
+								<eye_1_lid_animation this="F2159CEE-3D8F-4CD7-B8BCAA22EB49977F"/>
+							</eye_clipper>
+							<eye_top this="BCA2A86E-E1B7-4CE6-A11CD68B2C4E2849"/>
+						</eye_holder>
+					</stored_wom_bar>
+				</stored_wom_holder>
 			</tzeench_wom_manipulation>
 		</root>
 	</hierarchy>
@@ -81,9 +107,9 @@
 			defaultstate="E24364A0-08DA-47A6-85AE71905869C972">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextCommandLeftClick"
-					context_object_id="CcoCampaignWindsOfMagicArea"
-					context_function_id="Do(self.ParentContext.ParentContext.ChildContext(&quot;fill_list&quot;).PropagateContext(CcoRTLevel(Level : CurrentStrengthContext.Level )), ChangeAreaStrength(true))"/>
+					callback_id="#ContextCommandLeftClick"
+					context_object_id="CcoCampaignMapWindsOfMagicStrengthRecord str, CcoCampaignProvince province"
+					context_function_id="DoIf(str.PreviewChangedEffectList(province.LocalPlayerProvinceManagerContext).IsEmpty == false, self.ParentContext.ParentContext.ChildContext(&quot;winds_effect_list_change&quot;).TriggerAnimation(&quot;show&quot;), self.ParentContext.ParentContext.ChildContext(&quot;winds_effect_list_change&quot;).PropagateContext(str))"/>
 				<callback_with_context
 					callback_id="ContextInactiveStateSetter"
 					context_object_id="CcoCampaignWindsOfMagicArea"
@@ -110,6 +136,20 @@
 							value="PooledResourceTransaction"/>
 						<property
 							name="event1"
+							value="WindsOfMagicStrengthChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoCampaignWindsOfMagicArea"
+					context_function_id="Do(self.ParentContext.ParentContext.ChildContext(&quot;fill_list&quot;).PropagateContext(CcoRTLevel(Level : CurrentStrengthContext.Level )), ChangeAreaStrength(true))"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignWindsOfMagicArea"
+					context_function_id="DefaultDatabaseRecord(&quot;CcoCampaignMapWindsOfMagicStrengthRecord&quot;).RecordList.Sort(Level, true).NextContext(CurrentStrengthContext)">
+					<child_m_user_properties>
+						<property
+							name="event0"
 							value="WindsOfMagicStrengthChanged"/>
 					</child_m_user_properties>
 				</callback_with_context>
@@ -204,9 +244,6 @@
 		<tzeench_wom_manipulation
 			this="E2606795-F19E-4703-98F7D8C9ECD19DE6"
 			id="tzeench_wom_manipulation"
-			offset="748.00,398.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
 			docking="Center"
 			component_anchor_point="0.50,0.50"
 			tooltipslocalised="true"
@@ -225,13 +262,14 @@
 							value="overlay_winds_of_magic"/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context callback_id="ScreenSizedComponent"/>
 			</callbackwithcontextlist>
 			<states>
 				<default
 					this="FF5B9223-01C0-49C4-929CDADA56CCE808"
 					name="default"
-					width="104"
-					height="104"
+					width="1600"
+					height="900"
 					uniqueguid="FF5B9223-01C0-49C4-929CDADA56CCE808"/>
 			</states>
 		</tzeench_wom_manipulation>
@@ -265,9 +303,9 @@
 						texthbehaviour="Resize"
 						textlabel="dy_income_NewState_Text_7a003f"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.00,1.00,2.00,0.00"/>
 				</newstate>
 			</states>
@@ -293,8 +331,8 @@
 						texthalign="Center"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -343,8 +381,8 @@
 						texthalign="Center"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<animations>
@@ -440,9 +478,9 @@
 			defaultstate="DFAF4555-52A7-4874-A2306931D4166B67">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextCommandLeftClick"
-					context_object_id="CcoCampaignWindsOfMagicArea"
-					context_function_id="ChangeAreaStrength(false)"/>
+					callback_id="#ContextCommandLeftClick"
+					context_object_id="CcoCampaignMapWindsOfMagicStrengthRecord str, CcoCampaignProvince province"
+					context_function_id="DoIf(str.PreviewChangedEffectList(province.LocalPlayerProvinceManagerContext).IsEmpty == false, self.ParentContext.ParentContext.ChildContext(&quot;winds_effect_list_change&quot;).TriggerAnimation(&quot;show&quot;), self.ParentContext.ParentContext.ChildContext(&quot;winds_effect_list_change&quot;).PropagateContext(str))"/>
 				<callback_with_context
 					callback_id="ContextInactiveStateSetter"
 					context_object_id="CcoCampaignWindsOfMagicArea"
@@ -472,6 +510,20 @@
 							value="WindsOfMagicStrengthChanged"/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignWindsOfMagicArea"
+					context_function_id="DefaultDatabaseRecord(&quot;CcoCampaignMapWindsOfMagicStrengthRecord&quot;).RecordList.Sort(Level, true).PreviousContext(CurrentStrengthContext)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="WindsOfMagicStrengthChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoCampaignWindsOfMagicArea"
+					context_function_id="ChangeAreaStrength(false)"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -634,7 +686,9 @@
 		<province_overlay_list
 			this="5A45D384-4AAD-4AA2-81019FDE16C4F8D4"
 			id="province_overlay_list"
-			offset="-17.00,2.00"
+			offset="758.00,376.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
 			tooltipslocalised="true"
 			uniqueguid="5A45D384-4AAD-4AA2-81019FDE16C4F8D4"
 			currentstate="B826E72D-EA31-41E2-A05484DB8B492A02"
@@ -672,7 +726,8 @@
 			allowverticalresize="false"
 			docking="Center"
 			component_anchor_point="0.50,0.50"
-			tooltipslocalised="true"
+			componentleveltooltip="{{tt:ui/campaign ui/tooltip_wom_strength}}"
+			tooltiplabel="ComponentTooltip_3503b2f6"
 			uniqueguid="30D97628-72BB-49F5-A83F8172A021F6C0"
 			currentstate="E4739AE4-56B8-4206-8FB1BBF8DD403EFE"
 			defaultstate="E4739AE4-56B8-4206-8FB1BBF8DD403EFE">
@@ -701,7 +756,7 @@
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
-					callback_id="ContextTooltipSetter"
+					callback_id="#ContextTooltipSetter"
 					context_object_id="CcoCampaignMapWindsOfMagicStrengthRecord"
 					context_function_id="LocalisedName"/>
 				<callback_with_context
@@ -718,6 +773,12 @@
 					callback_id="ContextCommandGiverOnContextSet"
 					context_object_id="CcoRTLevel"
 					context_function_id="DoIf(Level == StoredContext(&quot;CcoCampaignMapWindsOfMagicStrengthRecord&quot;).Level - 1, self.TriggerAnimation(&quot;increase&quot;))"/>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoCampaignMapWindsOfMagicStrengthRecord"/>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignProvince"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -852,9 +913,9 @@
 						texthbehaviour="Resize"
 						textlabel="dy_income_NewState_Text_7a003f"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.00,1.00,2.00,0.00"/>
 				</newstate>
 			</states>
@@ -900,8 +961,8 @@
 						texthalign="Center"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<animations>
@@ -981,8 +1042,8 @@
 						texthalign="Center"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_default_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -1210,5 +1271,1059 @@
 				</hide>
 			</animations>
 		</magic_effect_outer>
+		<winds_effect_list_change
+			this="690F99AA-1031-4C5A-B8B12C7E9DDCB747"
+			id="winds_effect_list_change"
+			offset="-87.00,-68.00"
+			docking="Top Center External"
+			dock_offset="0.00,-20.00"
+			component_anchor_point="0.50,1.00"
+			tooltipslocalised="true"
+			uniqueguid="690F99AA-1031-4C5A-B8B12C7E9DDCB747"
+			updatewhennotvisible="true"
+			currentstate="226B151A-38B4-400D-A1DF6B2BAC30B057"
+			defaultstate="226B151A-38B4-400D-A1DF6B2BAC30B057"
+			comment="has show animation">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignMapWindsOfMagicStrengthRecord str, CcoCampaignProvince province"
+					context_function_id="str.PreviewChangedEffectList(province.LocalPlayerProvinceManagerContext, 0)"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignWindsOfMagicArea"
+					context_function_id="CurrentStrengthContext"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="B4DFE6D2-85A0-42A4-8DB24EFFD6CA59BB"
+					uniqueguid="B4DFE6D2-85A0-42A4-8DB24EFFD6CA59BB"/>
+			</componentimages>
+			<states>
+				<default
+					this="226B151A-38B4-400D-A1DF6B2BAC30B057"
+					name="default"
+					width="290"
+					height="48"
+					uniqueguid="226B151A-38B4-400D-A1DF6B2BAC30B057">
+					<imagemetrics>
+						<image
+							this="9C99DC7E-AF0B-419D-A429A56C9E587DD5"
+							uniqueguid="9C99DC7E-AF0B-419D-A429A56C9E587DD5"
+							componentimage="B4DFE6D2-85A0-42A4-8DB24EFFD6CA59BB"
+							width="290"
+							height="48"
+							colour="#242424C8"/>
+					</imagemetrics>
+				</default>
+			</states>
+			<animations>
+				<_show
+					id="#show"
+					propagate="true">
+					<frames>
+						<frame
+							interpolationtime="0"
+							interpolationpropertymask="64"
+							targetmetrics_m_colour="#FFFFFF00"
+							targetmetrics_m_height="24"
+							targetmetrics_m_width="129"
+							targetmetrics_m_offset="0.00,-58.00">
+							<triggers>
+								<trigger
+									trigger_component="690F99AA-1031-4C5A-B8B12C7E9DDCB747"
+									trigger_property="visible true"/>
+							</triggers>
+						</frame>
+						<frame
+							interpolationtime="200"
+							interpolationpropertymask="64"
+							targetmetrics_m_height="24"
+							targetmetrics_m_width="129"
+							targetmetrics_m_offset="0.00,-58.00"/>
+						<frame
+							interpolationtime="2000"
+							interpolationpropertymask="64"
+							targetmetrics_m_height="24"
+							targetmetrics_m_width="129"
+							targetmetrics_m_offset="0.00,-58.00"/>
+						<frame
+							interpolationtime="2000"
+							interpolationpropertymask="64"
+							targetmetrics_m_colour="#FFFFFF00"
+							targetmetrics_m_height="24"
+							targetmetrics_m_width="129"
+							targetmetrics_m_offset="0.00,-58.00">
+							<triggers>
+								<trigger
+									trigger_component="690F99AA-1031-4C5A-B8B12C7E9DDCB747"
+									trigger_property="visible false"/>
+							</triggers>
+						</frame>
+					</frames>
+				</_show>
+			</animations>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true"
+				margins="5.00,0.00">
+				<columnwidths>
+					<column width="129"/>
+				</columnwidths>
+			</LayoutEngine>
+		</winds_effect_list_change>
+		<dy_title
+			this="48CAD16C-F491-4CA0-8176E1768CB40D67"
+			id="dy_title"
+			offset="0.00,5.00"
+			allowhorizontalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="48CAD16C-F491-4CA0-8176E1768CB40D67"
+			currentstate="E31DB5B4-FCA9-4E8F-9E5C5B0EE11B8EE8"
+			defaultstate="E31DB5B4-FCA9-4E8F-9E5C5B0EE11B8EE8">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoEffect"
+					context_function_id="LocalisedText.Replace(&quot;&#10;&quot;, &quot; &quot;)"/>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoEffect"
+					context_function_id="IconPath"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="E31DB5B4-FCA9-4E8F-9E5C5B0EE11B8EE8"
+					name="default"
+					width="290"
+					height="16"
+					uniqueguid="E31DB5B4-FCA9-4E8F-9E5C5B0EE11B8EE8">
+					<component_text
+						text="Effects now active from local buildings:"
+						textvalign="Center"
+						textxoffset="5.00,5.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="StateText_ce6597a"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						textshadervars="0.00,0.00,0.00,1.00"/>
+				</default>
+			</states>
+		</dy_title>
+		<bar_frame
+			this="D11EF21F-7786-440E-BA08EBB67F5C0A21"
+			id="bar_frame"
+			offset="-22.00,-35.00"
+			docking="Center"
+			dock_offset="0.00,18.00"
+			component_anchor_point="0.50,0.50"
+			tooltipslocalised="true"
+			uniqueguid="D11EF21F-7786-440E-BA08EBB67F5C0A21"
+			currentstate="1C6146EA-1DDE-4C0D-8835B49B65833FAC"
+			defaultstate="1C6146EA-1DDE-4C0D-8835B49B65833FAC">
+			<componentimages>
+				<component_image
+					this="3647FA53-C390-43A0-925966D2E68010F1"
+					uniqueguid="3647FA53-C390-43A0-925966D2E68010F1"
+					imagepath="ui/skins/default/dlc24_wom_manipulation/wom_manipulation_bar_frame.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="1C6146EA-1DDE-4C0D-8835B49B65833FAC"
+					name="default"
+					width="80"
+					height="476"
+					uniqueguid="1C6146EA-1DDE-4C0D-8835B49B65833FAC">
+					<imagemetrics>
+						<image
+							this="49D7BBCF-A6BC-4702-B654D26679242BF5"
+							uniqueguid="49D7BBCF-A6BC-4702-B654D26679242BF5"
+							componentimage="3647FA53-C390-43A0-925966D2E68010F1"
+							width="80"
+							height="476"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</bar_frame>
+		<bar_fill_parent
+			this="1EC5A467-C2E3-47DD-96D3E3B049476685"
+			id="bar_fill_parent"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			tooltipslocalised="true"
+			componentleveltooltip="Number of times the Winds of Magic can be increased this turn"
+			tooltiplabel="ComponentTooltip_6ae56856w"
+			uniqueguid="1EC5A467-C2E3-47DD-96D3E3B049476685"
+			currentstate="851B2219-75C1-4548-BD63DF58E8BC150A"
+			defaultstate="851B2219-75C1-4548-BD63DF58E8BC150A">
+			<states>
+				<default
+					this="851B2219-75C1-4548-BD63DF58E8BC150A"
+					name="default"
+					width="36"
+					height="370"
+					interactive="true"
+					uniqueguid="851B2219-75C1-4548-BD63DF58E8BC150A"/>
+			</states>
+		</bar_fill_parent>
+		<stored_wom_bar
+			this="E8D5F06D-A49D-403F-A827317D763FDEBF"
+			id="stored_wom_bar"
+			offset="41.00,40.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center"
+			dock_offset="20.00,0.00"
+			component_anchor_point="0.50,0.50"
+			tooltipslocalised="true"
+			uniqueguid="E8D5F06D-A49D-403F-A827317D763FDEBF"
+			currentstate="1A8D9C11-6AAC-4B27-9A04085FC6F32F52"
+			defaultstate="1A8D9C11-6AAC-4B27-9A04085FC6F32F52">
+			<componentimages>
+				<component_image
+					this="73717061-19FD-4F4E-A38DD11FE870ED2B"
+					uniqueguid="73717061-19FD-4F4E-A38DD11FE870ED2B"
+					imagepath="ui/skins/default/dlc24_wom_manipulation/wom_manipulation_bar_frame_base.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="1A8D9C11-6AAC-4B27-9A04085FC6F32F52"
+					name="default"
+					width="36"
+					height="370"
+					uniqueguid="1A8D9C11-6AAC-4B27-9A04085FC6F32F52">
+					<imagemetrics>
+						<image
+							this="EB15E88D-0B3E-4B11-99A82BF655BF0B1F"
+							uniqueguid="EB15E88D-0B3E-4B11-99A82BF655BF0B1F"
+							componentimage="73717061-19FD-4F4E-A38DD11FE870ED2B"
+							width="36"
+							height="370"
+							dockpoint="Center"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</stored_wom_bar>
+		<stored_wom_holder
+			this="E315BA6F-DEF6-498A-A4BDFFEBA0FFEB74"
+			id="stored_wom_holder"
+			offset="-10.00,225.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center Left"
+			dock_offset="-10.00,0.00"
+			component_anchor_point="0.00,0.50"
+			tooltipslocalised="true"
+			uniqueguid="E315BA6F-DEF6-498A-A4BDFFEBA0FFEB74"
+			currentstate="ABBB151B-90AA-4F1B-824564152A43FEFE"
+			defaultstate="ABBB151B-90AA-4F1B-824564152A43FEFE">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_function_id="PlayersFaction.PooledResourceContext(&quot;wh3_main_tze_winds_of_magic_manipulation&quot;)"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="6949463F-4B09-4A6B-81DDD7D16F903552"
+					uniqueguid="6949463F-4B09-4A6B-81DDD7D16F903552"
+					imagepath="ui/skins/default/dlc24_wom_manipulation/wom_manipulation_bar_back_panel.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="ABBB151B-90AA-4F1B-824564152A43FEFE"
+					name="default"
+					width="78"
+					height="450"
+					uniqueguid="ABBB151B-90AA-4F1B-824564152A43FEFE">
+					<imagemetrics>
+						<image
+							this="36638EE9-C3BE-4344-9C60BA672472EF7A"
+							uniqueguid="36638EE9-C3BE-4344-9C60BA672472EF7A"
+							componentimage="6949463F-4B09-4A6B-81DDD7D16F903552"
+							width="78"
+							height="450"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</stored_wom_holder>
+		<bar_fill
+			this="1AE57004-5D3B-4FC1-9B6AA552AF7B866B"
+			id="bar_fill"
+			allowhorizontalresize="false"
+			docking="Bottom Center"
+			component_anchor_point="0.50,1.00"
+			tooltipslocalised="true"
+			uniqueguid="1AE57004-5D3B-4FC1-9B6AA552AF7B866B"
+			currentstate="3B50491D-FFE7-4870-AA6BBAE492F576FC"
+			defaultstate="3B50491D-FFE7-4870-AA6BBAE492F576FC">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextFillBar"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="Percentage(Clamp(Total, 0, 5), 5&#10;)"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="2E290DAE-6053-42CB-851F690EA874DD85"
+					uniqueguid="2E290DAE-6053-42CB-851F690EA874DD85"
+					imagepath="ui/skins/default/dlc24_wom_manipulation/wom_manipulation_bar_fill.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="3B50491D-FFE7-4870-AA6BBAE492F576FC"
+					name="default"
+					width="36"
+					height="370"
+					uniqueguid="3B50491D-FFE7-4870-AA6BBAE492F576FC">
+					<imagemetrics>
+						<image
+							this="8E7D07A0-D918-462B-852357E5AF650CB5"
+							uniqueguid="8E7D07A0-D918-462B-852357E5AF650CB5"
+							componentimage="2E290DAE-6053-42CB-851F690EA874DD85"
+							width="36"
+							height="370"
+							tile="true"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</bar_fill>
+		<dy_stored_wom
+			this="C00CC3B2-05ED-4AA3-91B74B7595122B92"
+			id="dy_stored_wom"
+			offset="31.00,407.00"
+			allowverticalresize="false"
+			docking="Bottom Left"
+			dock_offset="31.00,-35.00"
+			component_anchor_point="0.00,1.00"
+			priority="1"
+			tooltipslocalised="true"
+			componentleveltooltip="Number of times the Winds of Magic can be increased this turn"
+			tooltiplabel="ComponentTooltip_a77f689f"
+			soundcategory="UI_GBL_TMP_Mouse_Over_Only"
+			uniqueguid="C00CC3B2-05ED-4AA3-91B74B7595122B92"
+			currentstate="565216C6-DB06-4242-BA6B1765FE55FD30"
+			defaultstate="565216C6-DB06-4242-BA6B1765FE55FD30">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="Total">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="PooledResourceTransaction"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="565216C6-DB06-4242-BA6B1765FE55FD30"
+					name="NewState"
+					width="27"
+					height="34"
+					interactive="true"
+					uniqueguid="565216C6-DB06-4242-BA6B1765FE55FD30">
+					<component_text
+						text="999"
+						textvalign="Center"
+						texthbehaviour="Resize"
+						textlabel="StateText_75475954"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						textshadervars="0.00,1.00,2.00,0.00"/>
+				</newstate>
+			</states>
+			<animations>
+				<flash_update
+					id="flash_update"
+					propagate="true">
+					<frames>
+						<frame
+							interpolationtime="0"
+							interpolationpropertymask="3"
+							targetmetrics_m_height="37"
+							targetmetrics_m_width="64"/>
+						<frame
+							interpolationtime="200"
+							interpolationpropertymask="3"
+							targetmetrics_m_colour="#FFFF00FF"
+							targetmetrics_m_height="37"
+							targetmetrics_m_width="64"
+							targetmetrics_m_offset="0.00,-4.00"/>
+						<frame
+							interpolationtime="200"
+							interpolationpropertymask="3"
+							targetmetrics_m_colour="#FFF8D7FF"
+							targetmetrics_m_height="37"
+							targetmetrics_m_width="64"
+							targetmetrics_m_offset="0.00,4.00"/>
+					</frames>
+				</flash_update>
+			</animations>
+		</dy_stored_wom>
+		<eye
+			this="CF347307-A7CC-480E-8E5115DEB61DEE48"
+			id="eye"
+			offset="7.00,7.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center"
+			dock_offset="0.00,4.00"
+			component_anchor_point="0.50,0.50"
+			priority="500"
+			tooltipslocalised="true"
+			uniqueguid="CF347307-A7CC-480E-8E5115DEB61DEE48"
+			currentstate="710C68D2-356B-4BCE-BC6EB338333A0AF2"
+			defaultstate="710C68D2-356B-4BCE-BC6EB338333A0AF2">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="ContextMouseFollowingComponent">
+					<child_m_user_properties>
+						<property
+							name="bounded_by_parent"
+							value=""/>
+						<property
+							name="circular"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="4DF87150-C720-494D-91C9F3F180AEB4DB"
+					uniqueguid="4DF87150-C720-494D-91C9F3F180AEB4DB"
+					imagepath="ui/skins/default/dlc24_wom_manipulation/wom_manipulation_bar_frame_eye_ball.png"/>
+			</componentimages>
+			<states>
+				<tzeentch_undivided
+					this="710C68D2-356B-4BCE-BC6EB338333A0AF2"
+					name="tzeentch_undivided"
+					width="56"
+					height="56"
+					uniqueguid="710C68D2-356B-4BCE-BC6EB338333A0AF2">
+					<imagemetrics>
+						<image
+							this="ECB475DA-7AA1-4E53-ADB24FCF6E0B39B3"
+							uniqueguid="ECB475DA-7AA1-4E53-ADB24FCF6E0B39B3"
+							componentimage="4DF87150-C720-494D-91C9F3F180AEB4DB"
+							width="56"
+							height="56"
+							dockpoint="Center"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</tzeentch_undivided>
+			</states>
+		</eye>
+		<eye_1_lid_animation
+			this="F2159CEE-3D8F-4CD7-B8BCAA22EB49977F"
+			id="eye_1_lid_animation"
+			offset="2.00,-1.00"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="500"
+			tooltipslocalised="true"
+			uniqueguid="F2159CEE-3D8F-4CD7-B8BCAA22EB49977F"
+			currentstate="F89A370C-0A54-441A-8AA0F440E85C7B76"
+			defaultstate="F89A370C-0A54-441A-8AA0F440E85C7B76">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="SpriteAnimation">
+					<child_m_user_properties>
+						<property
+							name="frame_name"
+							value="UI/sprite_anims/chaos_gifts_tzeentch_eyes/eye_wink_top_"/>
+						<property
+							name="last_frame"
+							value="7"/>
+						<property
+							name="last_frame_delay"
+							value="5500"/>
+						<property
+							name="loops"
+							value="-1"/>
+						<property
+							name="sound_event"
+							value="UI_CAM_HUD_WoC_DLC20_Chaos_Gifts_Tzeentch_Eye_Blink_Oneshot"/>
+						<property
+							name="time_per_frame"
+							value="60"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoStaticObject"
+					context_function_id="DoIf(self.IsPlaying == false, self.StartAnimation)"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name=""
+					value=""/>
+				<property
+					name=""
+					value=""/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="B0D6ED10-ACAA-4453-8265214B731E53D2"
+					uniqueguid="B0D6ED10-ACAA-4453-8265214B731E53D2"
+					imagepath="ui/sprite_anims/chaos_gifts_tzeentch_eyes/eye_wink_top_0.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="F89A370C-0A54-441A-8AA0F440E85C7B76"
+					name="default"
+					width="65"
+					height="65"
+					interactive="true"
+					uniqueguid="F89A370C-0A54-441A-8AA0F440E85C7B76">
+					<imagemetrics>
+						<image
+							this="255C6C23-9204-449E-9D4CB1BC2F63A594"
+							uniqueguid="255C6C23-9204-449E-9D4CB1BC2F63A594"
+							componentimage="B0D6ED10-ACAA-4453-8265214B731E53D2"
+							width="65"
+							height="65"
+							dockpoint="Center"
+							rotation_angle="-0.785398185"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</eye_1_lid_animation>
+		<eye_clipper
+			this="8751E4E9-5B2C-4404-B468EFABDFA9A667"
+			id="eye_clipper"
+			offset="-15.00,-11.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="500"
+			tooltipslocalised="true"
+			uniqueguid="8751E4E9-5B2C-4404-B468EFABDFA9A667"
+			maskimage="7C740324-492B-4A0B-9714611CE010E62B"
+			currentstate="723EE0DE-5C36-4496-9A51BA397346243E"
+			defaultstate="723EE0DE-5C36-4496-9A51BA397346243E">
+			<componentimages>
+				<component_image
+					this="7C740324-492B-4A0B-9714611CE010E62B"
+					uniqueguid="7C740324-492B-4A0B-9714611CE010E62B"
+					imagepath="ui/skins/default/dlc24_wom_manipulation/wom_manipulation_bar_frame_eye_mask.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="723EE0DE-5C36-4496-9A51BA397346243E"
+					name="default"
+					width="70"
+					height="62"
+					uniqueguid="723EE0DE-5C36-4496-9A51BA397346243E">
+					<imagemetrics>
+						<image
+							this="655B33A0-2E5C-4EAF-82B6F27C842AD1CC"
+							uniqueguid="655B33A0-2E5C-4EAF-82B6F27C842AD1CC"
+							componentimage="7C740324-492B-4A0B-9714611CE010E62B"
+							offset="-2.00,1.00"
+							width="75"
+							height="60"
+							dockpoint="Center"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</eye_clipper>
+		<eye_holder
+			this="F26910EE-F540-43B1-B880FB5233661ECE"
+			id="eye_holder"
+			offset="20.00,5.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Top Center"
+			dock_offset="0.00,5.00"
+			component_anchor_point="0.50,0.00"
+			priority="500"
+			tooltipslocalised="true"
+			uniqueguid="F26910EE-F540-43B1-B880FB5233661ECE"
+			currentstate="86C078B6-CF86-45F8-B793AE258991A3F2"
+			defaultstate="86C078B6-CF86-45F8-B793AE258991A3F2">
+			<states>
+				<default
+					this="86C078B6-CF86-45F8-B793AE258991A3F2"
+					name="default"
+					width="40"
+					height="40"
+					uniqueguid="86C078B6-CF86-45F8-B793AE258991A3F2"/>
+			</states>
+		</eye_holder>
+		<eye_holder
+			this="74AC0E47-B748-469D-92C228AB21AFD6CC"
+			id="eye_holder"
+			offset="-2.00,-28.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Top Center"
+			dock_offset="0.00,-28.00"
+			component_anchor_point="0.50,0.00"
+			priority="500"
+			tooltipslocalised="true"
+			uniqueguid="74AC0E47-B748-469D-92C228AB21AFD6CC"
+			currentstate="61E795F7-29EA-49F1-88109FE6D30FA02A"
+			defaultstate="61E795F7-29EA-49F1-88109FE6D30FA02A">
+			<states>
+				<default
+					this="61E795F7-29EA-49F1-88109FE6D30FA02A"
+					name="default"
+					width="40"
+					height="40"
+					uniqueguid="61E795F7-29EA-49F1-88109FE6D30FA02A"/>
+			</states>
+		</eye_holder>
+		<eye_top
+			this="BCA2A86E-E1B7-4CE6-A11CD68B2C4E2849"
+			id="eye_top"
+			offset="-5.00,0.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="500"
+			tooltipslocalised="true"
+			uniqueguid="BCA2A86E-E1B7-4CE6-A11CD68B2C4E2849"
+			currentstate="D6E4323E-6549-4DA5-878446CEAD569DE0"
+			defaultstate="D6E4323E-6549-4DA5-878446CEAD569DE0">
+			<componentimages>
+				<component_image
+					this="985ED8BA-746E-4150-8C192FF325BFE96E"
+					uniqueguid="985ED8BA-746E-4150-8C192FF325BFE96E"
+					imagepath="ui/skins/default/dlc24_wom_manipulation/wom_manipulation_bar_frame_eye_base.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="D6E4323E-6549-4DA5-878446CEAD569DE0"
+					name="default"
+					width="50"
+					height="40"
+					uniqueguid="D6E4323E-6549-4DA5-878446CEAD569DE0">
+					<imagemetrics>
+						<image
+							this="2A43467A-D8D3-49D5-8243AC60DC4ADC98"
+							uniqueguid="2A43467A-D8D3-49D5-8243AC60DC4ADC98"
+							componentimage="985ED8BA-746E-4150-8C192FF325BFE96E"
+							width="50"
+							height="40"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</eye_top>
+		<magic_flame_overflow_effect
+			this="76CCF4CE-38A8-4396-95C4D2CA7ECE56A7"
+			id="magic_flame_overflow_effect"
+			offset="-71.00,-97.00"
+			docking="Center"
+			dock_offset="1.00,18.00"
+			component_anchor_point="0.50,0.50"
+			tooltipslocalised="true"
+			uniqueguid="76CCF4CE-38A8-4396-95C4D2CA7ECE56A7"
+			currentstate="EE0B6FF8-9078-47BD-91BCA6FCF2C8D5F4"
+			defaultstate="EE0B6FF8-9078-47BD-91BCA6FCF2C8D5F4">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="Total &gt; 5"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="8EF13BAF-0AD5-4158-8A898EC7E4E4A24E"
+					uniqueguid="8EF13BAF-0AD5-4158-8A898EC7E4E4A24E"/>
+			</componentimages>
+			<states>
+				<default
+					this="EE0B6FF8-9078-47BD-91BCA6FCF2C8D5F4"
+					name="default"
+					width="180"
+					height="600"
+					material_name="ui/effects/materials/magic_flame.xml.material"
+					uniqueguid="EE0B6FF8-9078-47BD-91BCA6FCF2C8D5F4">
+					<imagemetrics>
+						<image
+							this="4B1C97E9-0327-4C17-8821DC87286FD84C"
+							uniqueguid="4B1C97E9-0327-4C17-8821DC87286FD84C"
+							componentimage="8EF13BAF-0AD5-4158-8A898EC7E4E4A24E"
+							width="180"
+							height="600"
+							colour="#1C6BA7FF"/>
+					</imagemetrics>
+					<material_m_parameter_overrides>
+						<property
+							name="distortion_strength"
+							x="0.200000003"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="true"/>
+						<property
+							name="flow_speed"
+							x="-0.100000001"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="true"/>
+						<property
+							name="sparkle_distortion"
+							x="0.100000001"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="true"/>
+						<property
+							name="sparkle_ro"
+							x="0"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="false"/>
+						<property
+							name="sparkle_speed1"
+							x="0.150000006"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="true"/>
+						<property
+							name="sparkle_speed2"
+							x="0.100000001"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="true"/>
+						<property
+							name="sparkle_strength"
+							x="0"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="true"/>
+						<property
+							name="sparkle_tiling"
+							x="2"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="false"/>
+						<property
+							name="uv_distortion_pan"
+							x="0.100000001"
+							y="0.200000003"
+							z="0"
+							w="0"
+							is_override_of_default="true"/>
+						<property
+							name="u_tiling"
+							x="8"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="true"/>
+						<property
+							name="v_tiling"
+							x="5"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="true"/>
+						<property
+							name="heat_percent"
+							x="1"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="true"/>
+					</material_m_parameter_overrides>
+					<material_m_texture_overrides>
+						<property
+							slot_id="t_xml_effect_colours"
+							filepath="ui/effects/textures/astral_projection/effect_winds_of_magic.dds"
+							is_override_of_default="true"/>
+						<property
+							slot_id="t_xml_heat_mask"
+							filepath="ui/effects/textures/magic_flame_heat_radial.dds"
+							is_override_of_default="true"/>
+						<property
+							slot_id="t_xml_shape_flow"
+							filepath="ui\effects\textures\magic_flame_flow_radial.dds"
+							is_override_of_default="true"/>
+						<property
+							slot_id="t_xml_uv_distortion"
+							filepath="commontextures\cloud_shadow_02.dds"
+							is_override_of_default="false"/>
+						<property
+							slot_id="t_xml_uv_element"
+							filepath="commontextures\default_noise1.dds"
+							is_override_of_default="false"/>
+						<property
+							slot_id="t_xml_general_mask"
+							filepath="ui/effects/textures/tzeentch_wom_bar_overflow.dds"
+							is_override_of_default="true"/>
+						<property
+							slot_id="t_xml_sparkle1"
+							filepath="commontextures\volumetric_noise.dds"
+							is_override_of_default="false"/>
+					</material_m_texture_overrides>
+				</default>
+			</states>
+			<animations>
+				<show id="show">
+					<frames>
+						<frame
+							interpolationtime="0"
+							interpolationpropertymask="8"
+							targetmetrics_m_colour="#1C6BA7FF"
+							targetmetrics_m_height="1325"
+							targetmetrics_m_width="1325"
+							targetmetrics_m_offset="0.00,-40.00">
+							<triggers>
+								<trigger
+									trigger_component="76CCF4CE-38A8-4396-95C4D2CA7ECE56A7"
+									trigger_property="visibility true"/>
+								<trigger trigger_animation="show"/>
+							</triggers>
+						</frame>
+						<frame
+							interpolationtime="800"
+							interpolationpropertymask="1032"
+							targetmetrics_m_colour="#1C6BA7FF"
+							targetmetrics_m_height="1325"
+							targetmetrics_m_width="1325"
+							targetmetrics_m_offset="0.00,-40.00"
+							targetmetrics_m_shadervars="1.00,0.00,0.00,0.00"
+							material_param_id="heat_percent"/>
+						<frame
+							interpolationtime="100"
+							interpolationpropertymask="1032"
+							targetmetrics_m_colour="#1C6BA7FF"
+							targetmetrics_m_height="1325"
+							targetmetrics_m_width="1325"
+							targetmetrics_m_offset="0.00,-40.00"
+							targetmetrics_m_shadervars="0.70,0.00,0.00,0.00"
+							material_param_id="heat_percent">
+							<triggers>
+								<trigger trigger_component="76CCF4CE-38A8-4396-95C4D2CA7ECE56A7"/>
+								<trigger trigger_animation="hide"/>
+							</triggers>
+						</frame>
+					</frames>
+				</show>
+				<hide id="hide">
+					<frames>
+						<frame
+							interpolationtime="0"
+							interpolationpropertymask="1032"
+							targetmetrics_m_colour="#1C6BA7FF"
+							targetmetrics_m_height="1325"
+							targetmetrics_m_width="1325"
+							targetmetrics_m_offset="0.00,-40.00"
+							targetmetrics_m_shadervars="0.70,0.00,0.00,0.00"
+							material_param_id="heat_percent"/>
+						<frame
+							interpolationtime="900"
+							interpolationpropertymask="1032"
+							targetmetrics_m_colour="#1C6BA7FF"
+							targetmetrics_m_height="1325"
+							targetmetrics_m_width="1325"
+							targetmetrics_m_offset="0.00,-40.00"
+							material_param_id="heat_percent"/>
+					</frames>
+				</hide>
+			</animations>
+		</magic_flame_overflow_effect>
+		<eye_glow
+			this="9E5F7B71-8D81-497A-B880187174E9E2AD"
+			id="eye_glow"
+			offset="8.00,3.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Top Center"
+			dock_offset="0.00,3.00"
+			component_anchor_point="0.50,0.00"
+			tooltipslocalised="true"
+			uniqueguid="9E5F7B71-8D81-497A-B880187174E9E2AD"
+			currentstate="995B1D2F-CD14-4837-B0523D1229A17283"
+			defaultstate="995B1D2F-CD14-4837-B0523D1229A17283">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="Total &gt; 5"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="134F94B6-742A-42AD-ACFF17F9354F92B0"
+					uniqueguid="134F94B6-742A-42AD-ACFF17F9354F92B0"
+					imagepath="ui/skins/default/dlc24_wom_manipulation/wom_bar_frame_eye_glow.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="995B1D2F-CD14-4837-B0523D1229A17283"
+					name="default"
+					width="64"
+					height="36"
+					uniqueguid="995B1D2F-CD14-4837-B0523D1229A17283">
+					<imagemetrics>
+						<image
+							this="02EBC3C9-9EA9-4B39-BF40836D6567454E"
+							uniqueguid="02EBC3C9-9EA9-4B39-BF40836D6567454E"
+							componentimage="134F94B6-742A-42AD-ACFF17F9354F92B0"
+							width="64"
+							height="36"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</eye_glow>
+		<template_region_effect
+			this="26E0DB1C-D687-4523-BBFAF88226696AA5"
+			id="template_region_effect"
+			offset="5.00,0.00"
+			allowhorizontalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="26E0DB1C-D687-4523-BBFAF88226696AA5"
+			currentstate="5F27CCAE-D1C9-4F50-91B8D6EEF391D3BE"
+			defaultstate="5F27CCAE-D1C9-4F50-91B8D6EEF391D3BE">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoEffect"
+					context_function_id="LocalisedText.Replace(&quot;&#10;&quot;, &quot; &quot;)"/>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoEffect"
+					context_function_id="IconPath"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="D6CAAACE-B267-4E95-A02CCCEE0741EB62"
+					uniqueguid="D6CAAACE-B267-4E95-A02CCCEE0741EB62"
+					imagepath="ui/skins/default/army.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="5F27CCAE-D1C9-4F50-91B8D6EEF391D3BE"
+					name="default"
+					width="277"
+					height="22"
+					uniqueguid="5F27CCAE-D1C9-4F50-91B8D6EEF391D3BE">
+					<imagemetrics>
+						<image
+							this="23E74022-77C8-421E-A61037112AC4FD67"
+							uniqueguid="23E74022-77C8-421E-A61037112AC4FD67"
+							componentimage="D6CAAACE-B267-4E95-A02CCCEE0741EB62"
+							offset="0.00,-1.00"
+							width="24"
+							height="24"
+							dockpoint="Center Left"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<component_text
+						text="dy_region_effect"
+						textvalign="Center"
+						textxoffset="28.00,0.00"
+						textyoffset="3.00,3.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_d84f49ab"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						text_shader_name="text_outline_t0"
+						textshadervars="0.00,0.00,0.00,1.00"/>
+				</default>
+			</states>
+		</template_region_effect>
+		<winds_effect_list_change
+			this="3A6CB648-A1E4-4213-87286F9A6F8A2C9F"
+			id="winds_effect_list_change"
+			offset="0.00,21.00"
+			tooltipslocalised="true"
+			uniqueguid="3A6CB648-A1E4-4213-87286F9A6F8A2C9F"
+			updatewhennotvisible="true"
+			currentstate="E07FB81F-AC5C-4862-A4BF68661C041424"
+			defaultstate="E07FB81F-AC5C-4862-A4BF68661C041424"
+			comment="has show animation">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoCampaignMapWindsOfMagicStrengthRecord str, CcoCampaignProvince province"
+					context_function_id="str.PreviewChangedEffectList(province.LocalPlayerProvinceManagerContext, 0)"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="E07FB81F-AC5C-4862-A4BF68661C041424"
+					name="default"
+					width="287"
+					height="27"
+					uniqueguid="E07FB81F-AC5C-4862-A4BF68661C041424"/>
+			</states>
+			<animations>
+				<show
+					id="show"
+					propagate="true">
+					<frames>
+						<frame
+							interpolationtime="0"
+							interpolationpropertymask="64"
+							targetmetrics_m_colour="#FFFFFF00"
+							targetmetrics_m_height="24"
+							targetmetrics_m_width="129"
+							targetmetrics_m_offset="0.00,-58.00">
+							<triggers>
+								<trigger
+									trigger_component="3A6CB648-A1E4-4213-87286F9A6F8A2C9F"
+									trigger_property="visible true"/>
+							</triggers>
+						</frame>
+						<frame
+							interpolationtime="200"
+							interpolationpropertymask="64"
+							targetmetrics_m_height="24"
+							targetmetrics_m_width="129"
+							targetmetrics_m_offset="0.00,-58.00"/>
+						<frame
+							interpolationtime="2000"
+							interpolationpropertymask="64"
+							targetmetrics_m_height="24"
+							targetmetrics_m_width="129"
+							targetmetrics_m_offset="0.00,-58.00"/>
+						<frame
+							interpolationtime="2000"
+							interpolationpropertymask="64"
+							targetmetrics_m_colour="#FFFFFF00"
+							targetmetrics_m_height="24"
+							targetmetrics_m_width="129"
+							targetmetrics_m_offset="0.00,-58.00">
+							<triggers>
+								<trigger
+									trigger_component="3A6CB648-A1E4-4213-87286F9A6F8A2C9F"
+									trigger_property="visible false"/>
+							</triggers>
+						</frame>
+					</frames>
+				</show>
+			</animations>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true"
+				secondary_margins="5.00,5.00"
+				margins="0.00,5.00">
+				<columnwidths>
+					<column width="129"/>
+				</columnwidths>
+			</LayoutEngine>
+		</winds_effect_list_change>
 	</components>
 </layout>

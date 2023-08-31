@@ -241,11 +241,11 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="CreateCost(GetIfElse(IsContextValid(StoredContextFromParent(&quot;CcoCampaignSettlement&quot;)), StoredContextFromParent(&quot;CcoCampaignSettlement&quot;), StoredContextFromParent(&quot;CcoCampaignCharacter&quot;)))"/>
+					context_function_id="GetIfElse(Buildings.IsHostileButtonSelected, CreateCost(Buildings.StoredSettlementOrCharacter, PlayersFaction), CreateCost(Buildings.StoredSettlementOrCharacter))"/>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="CreateCost(GetIfElse(IsContextValid(StoredContextFromParent(&quot;CcoCampaignSettlement&quot;)), StoredContextFromParent(&quot;CcoCampaignSettlement&quot;), StoredContextFromParent(&quot;CcoCampaignCharacter&quot;))) != 0"/>
+					context_function_id="GetIfElse(Buildings.IsHostileButtonSelected, CreateCost(Buildings.StoredSettlementOrCharacter, PlayersFaction), CreateCost(Buildings.StoredSettlementOrCharacter)) != 0"/>
 				<callback_with_context
 					callback_id="ContextStateSetterConditional"
 					context_object_id="CcoBuildingLevelRecord">
@@ -258,7 +258,7 @@
 							value="normal"/>
 						<property
 							name="red"
-							value="CanAfford(GetIfElse(IsContextValid(StoredContextFromParent(&quot;CcoCampaignSettlement&quot;)), StoredContextFromParent(&quot;CcoCampaignSettlement&quot;), StoredContextFromParent(&quot;CcoCampaignCharacter&quot;))) == false"/>
+							value="(Buildings.IsHostileButtonSelected &amp;&amp; CanAfford(Buildings.StoredSettlementOrCharacter, PlayersFaction) == false) || (Buildings.IsHostileButtonSelected == false &amp;&amp; CanAfford(Buildings.StoredSettlementOrCharacter) == false)"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbackwithcontextlist>
@@ -324,9 +324,9 @@
 						texthbehaviour="Resize"
 						textlabel="dy_cost_NewSate_Text_2"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</normal>
 				<red
 					this="59E36DF5-6345-44FE-8D52C4ED14DC8045"
@@ -370,9 +370,10 @@
 						texthbehaviour="Resize"
 						textlabel="dy_cost_NewSate_Text_2"
 						font_m_size="12"
-						font_m_colour="#FF2D2DFF"
-						font_m_leading="7"
-						fontcat_name="fe_text_red_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
 				</red>
 			</states>
 		</building_cost>
@@ -980,8 +981,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</_0>
 				<_1
 					this="E04046A1-31B2-424F-8944D7B47B61700A"
@@ -1001,8 +1002,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</_1>
 				<_10
 					this="B109BEDA-FDB5-4252-86EAF3F43462F2E9"
@@ -1022,8 +1023,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</_10>
 				<_11
 					this="A54BAC06-DFAF-4EFC-B4641627E1AF13AD"
@@ -1043,8 +1044,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</_11>
 				<_12
 					this="F979050C-A36A-4B56-A29FBA62E686733E"
@@ -1080,8 +1081,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</_2>
 				<_3
 					this="9BD50EAF-29E4-406E-92FDD1B674D06A03"
@@ -1101,8 +1102,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</_3>
 				<_4
 					this="1CACA182-6EE2-4DE4-BC5C12640D24D4B3"
@@ -1122,8 +1123,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</_4>
 				<_5
 					this="6C0EFD17-DA23-43E4-804B7E89115AEEDD"
@@ -1143,8 +1144,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</_5>
 				<_6
 					this="7733F1E7-576A-4989-981FB2078DE92683"
@@ -1164,8 +1165,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</_6>
 				<_7
 					this="494A6AAA-E1BE-4477-AE8E1B45971C6C86"
@@ -1185,8 +1186,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</_7>
 				<_8
 					this="6D3E5853-C50B-480B-A96F0C7A4CE6B4FB"
@@ -1206,8 +1207,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</_8>
 				<_9
 					this="11C85A62-46FF-4A2D-B5DE1181EAE5E568"
@@ -1227,8 +1228,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</_9>
 			</states>
 		</constructing_animation>
@@ -1341,8 +1342,8 @@
 						textxoffset="2.00,0.00"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</cyclical>
 				<default
 					this="CC68C0D2-1CDD-4004-A136CDD55D432495"
@@ -1366,8 +1367,8 @@
 						textxoffset="2.00,0.00"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</default>
 			</states>
 		</damaged>
@@ -1461,8 +1462,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="16"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_paragraph_heading"
+						font_m_leading="3"
+						fontcat_name="header_16"
 						text_shader_name="drop_shadow_t0"
 						textshadervars="2.00,2.00,1.00,0.00"/>
 				</newstate>
@@ -1512,9 +1513,9 @@
 							height="30"/>
 					</imagemetrics>
 					<component_text
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="ingame_text_small_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
 				</newstate>
 			</states>
 		</fill>
@@ -1541,9 +1542,9 @@
 					height="30"
 					uniqueguid="D2183664-D51E-437D-AD712C11D910F8C5">
 					<component_text
-						font_m_colour="#FFFFE0FF"
-						font_m_leading="1"
-						fontcat_name="ingame_text_small_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
 				</newstate>
 			</states>
 		</fill_clip>
@@ -2549,7 +2550,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"
+						fontcat_name="body_12"
 						text_shader_name="text_outline_t0"/>
 				</blocked>
 				<construct
@@ -2582,7 +2583,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"
+						fontcat_name="body_12"
 						text_shader_name="text_outline_t0"
 						textshadervars="0.00,0.00,0.00,1.00"/>
 				</construct>
@@ -2622,7 +2623,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"
+						fontcat_name="body_12"
 						text_shader_name="text_outline_t0"
 						textshadervars="0.00,0.00,0.00,1.00"/>
 				</demolish>
@@ -2711,9 +2712,9 @@
 						texthbehaviour="Never split"
 						textlabel="Turns_not_queued_Text_320032"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</blocked>
 				<cyclical
 					this="412F2001-11DA-4026-89C9085C1BEF949F"
@@ -2755,7 +2756,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"
+						fontcat_name="body_12"
 						text_shader_name="text_outline_t0"
 						textshadervars="0.00,0.00,0.00,1.00"/>
 				</cyclical>
@@ -2786,9 +2787,9 @@
 						texthbehaviour="Never split"
 						textlabel="Turns_not_queued_Text_320032"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</not_queued>
 				<percentage
 					this="589F4662-5F44-4604-9E91AE4784C5FF45"
@@ -2818,9 +2819,9 @@
 						texthbehaviour="Never split"
 						textlabel="StateText_960f70f8"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</percentage>
 				<queued
 					this="E3121FA8-CB38-47A4-BAD64D5A3D088703"
@@ -2849,9 +2850,9 @@
 						texthbehaviour="Never split"
 						textlabel="Turns_not_queued_Text_320032"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</queued>
 			</states>
 		</turns_corner>
@@ -2900,7 +2901,7 @@
 				<callback_with_context
 					callback_id="ContextCommandGiverOnContextSet"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="OpenBuildingInfoPanel(GetIfElse(IsContextValid(StoredContextFromParent(&quot;CcoCampaignSettlement&quot;)), StoredContextFromParent(&quot;CcoCampaignSettlement&quot;), StoredContextFromParent(&quot;CcoCampaignCharacter&quot;)), StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;), true)"/>
+					context_function_id="OpenBuildingInfoPanel(Buildings.StoredSettlementOrCharacter, StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;), true)"/>
 				<callback_with_context callback_id="BuildingInfoPanelMouseOver"/>
 			</callbackwithcontextlist>
 			<userproperties>
@@ -3080,8 +3081,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</center>
 				<left
 					this="993F45F9-29CD-4909-A67A08D3A94293B4"
@@ -3101,8 +3102,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</left>
 				<one
 					this="40AA939B-0A56-47CE-9E4408D89F26A0B9"
@@ -3122,8 +3123,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</one>
 				<right
 					this="9322DDA1-7152-402E-964F48F2EEB122FE"
@@ -3143,8 +3144,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</right>
 			</states>
 		</upgrade_box>
@@ -3165,7 +3166,7 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="DevelopmentPointCost(GetIfElse(IsContextValid(StoredContextFromParent(&quot;CcoCampaignSettlement&quot;)), StoredContextFromParent(&quot;CcoCampaignSettlement&quot;), StoredContextFromParent(&quot;CcoCampaignCharacter&quot;))) "/>
+					context_function_id="DevelopmentPointCost(Buildings.StoredSettlementOrCharacter)"/>
 				<callback_with_context
 					callback_id="ContextStateSetterConditional"
 					context_object_id="CcoBuildingLevelRecord">
@@ -3175,7 +3176,7 @@
 							value="default"/>
 						<property
 							name="red"
-							value="HasEnoughDevelopmentPoints(GetIfElse(IsContextValid(StoredContextFromParent(&quot;CcoCampaignSettlement&quot;)), StoredContextFromParent(&quot;CcoCampaignSettlement&quot;), StoredContextFromParent(&quot;CcoCampaignCharacter&quot;))) == false"/>
+							value="HasEnoughDevelopmentPoints(Buildings.StoredSettlementOrCharacter) == false"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbackwithcontextlist>
@@ -3205,8 +3206,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						text_shader_name="text_outline_t0"
 						textshadervars="0.00,0.00,0.00,1.00"/>
 				</default>
@@ -3227,8 +3228,8 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"
+						font_m_leading="3"
+						fontcat_name="header_14"
 						font_colour_override_preset_key="red"
 						text_shader_name="text_outline_t0"
 						textshadervars="0.00,0.00,0.00,1.00"/>
@@ -3356,9 +3357,9 @@
 						texthbehaviour="Resize"
 						textlabel="dy_food_cost_normal_Text_300002"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"
+						fontcat_name="body_12"
 						textshadervars="0.00,2.00,1.00,0.00"/>
 				</normal>
 				<red
@@ -3402,9 +3403,10 @@
 						texthbehaviour="Resize"
 						textlabel="dy_food_cost_red_Text_300002"
 						font_m_size="12"
-						font_m_colour="#FF2D2DFF"
-						font_m_leading="7"
-						fontcat_name="fe_text_red_warhammer3"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"
 						textshadervars="0.00,2.00,1.00,0.00"/>
 				</red>
 			</states>
@@ -3413,10 +3415,10 @@
 			this="8E71F5BE-8BDB-4B22-976CED6E5334CB35"
 			id="cost_list"
 			uniqueguid_in_template="8E71F5BE-8BDB-4B22-976CED6E5334CB35"
-			offset="11.00,32.00"
-			docking="Bottom Right"
-			dock_offset="12.00,6.00"
-			component_anchor_point="1.00,1.00"
+			offset="21.00,50.00"
+			docking="Center Right"
+			dock_offset="22.00,37.00"
+			component_anchor_point="1.00,0.50"
 			priority="45"
 			tooltipslocalised="true"
 			componentleveltooltip="Cost||This amount will be deducted from your {{tr:icon_treasury}}{{tr:treasury}} in order to construct this building."
@@ -3440,9 +3442,9 @@
 						textvalign="Center"
 						texthbehaviour="Never split"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</default>
 			</states>
 			<LayoutEngine
@@ -3722,7 +3724,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="UnitList(GetIfElse(IsContextValid(StoredContextFromParent(&quot;CcoCampaignSettlement&quot;)), StoredContextFromParent(&quot;CcoCampaignSettlement&quot;), StoredContextFromParent(&quot;CcoCampaignCharacter&quot;)))"/>
+					context_function_id="UnitList(Buildings.StoredSettlementOrCharacter, PlayersFaction)"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -4518,11 +4520,11 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="EffectList.Any((x) =&gt; IsContextValid(x.PooledResourceContext(&quot;wh3_main_cth_harmony&quot;, PlayersFaction)))">
+					context_function_id="EffectList.Any((x) =&gt; IsContextValid(x.PooledResourceContext(&quot;wh3_dlc24_cth_province_harmony&quot;, StoredContextFromParent(&quot;CcoCampaignSettlement&quot;).FactionProvinceManagerContext)))">
 					<child_m_user_properties>
 						<property
 							name="object_store_events"
-							value=""/>
+							value="^3"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
@@ -4532,11 +4534,17 @@
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="EffectList.FirstContext((x) =&gt; IsContextValid(x.PooledResourceContext(&quot;wh3_main_cth_harmony&quot;, PlayersFaction)))"/>
+					context_function_id="EffectList.FirstContext((x) =&gt; IsContextValid(x.PooledResourceContext(&quot;wh3_dlc24_cth_province_harmony&quot;, StoredContextFromParent(&quot;CcoCampaignSettlement&quot;).FactionProvinceManagerContext)))">
+					<child_m_user_properties>
+						<property
+							name="object_store_events"
+							value="^3"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextTrashOnCondition"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="IsContextValid(PlayersFaction.PooledResourceContext(&quot;wh3_main_cth_harmony&quot;)) == false"/>
+					context_function_id="IsContextValid(PlayersFaction.SettlementList.FirstContext.FactionProvinceManagerContext.PooledResourceContext(&quot;wh3_dlc24_cth_province_harmony&quot;)) == false"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -4895,20 +4903,17 @@
 							name="flip_when_offscreen"
 							value=""/>
 						<property
-							name="invert_y"
-							value=""/>
-						<property
 							name="offset_x"
 							value="10"/>
 						<property
 							name="offset_y"
-							value="50"/>
+							value="-30"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextCommandGiverOnContextSet"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="OpenBuildingInfoPanel(GetIfElse(IsContextValid(StoredContextFromParent(&quot;CcoCampaignSettlement&quot;)), StoredContextFromParent(&quot;CcoCampaignSettlement&quot;), StoredContextFromParent(&quot;CcoCampaignCharacter&quot;)), StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;))"/>
+					context_function_id="OpenBuildingInfoPanel(Buildings.StoredSettlementOrCharacter, StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;))"/>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBuildingLevelRecord"
@@ -5066,8 +5071,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</built>
 				<built_inactive
 					this="C9A37727-5747-445B-8A55A0D83D1A4729"
@@ -5097,8 +5102,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</built_inactive>
 				<built_panel
 					this="E880DD99-3CC8-4816-8E85545F62CA6537"
@@ -5136,8 +5141,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</built_panel>
 				<built_panel_hover
 					this="B54B0268-7778-4534-B4833C4EBB19469F"
@@ -5178,8 +5183,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</built_panel_hover>
 				<cannot_build_ever
 					this="61A92936-3454-4280-8BC814C25D3D28C0"
@@ -5265,8 +5270,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"
+						font_m_leading="3"
+						fontcat_name="body_12"
 						textshadervars="0.95,1.00,0.00,0.00"/>
 				</greyed>
 				<hover
@@ -5312,8 +5317,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</hover>
 				<locked
 					this="56D2C668-2A5D-42AB-9CF3B7EAE2E0CA81"
@@ -5400,8 +5405,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</normal>
 				<not_owned
 					this="35DC0B41-FF1E-4168-B43CF846EFD89AA0"
@@ -5446,8 +5451,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"
+						font_m_leading="3"
+						fontcat_name="body_12"
 						textshadervars="0.95,1.00,0.00,0.00"/>
 				</not_owned>
 				<selected
@@ -5483,8 +5488,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</selected>
 				<selected_hover
 					this="8DB03040-AF8E-4D35-AFB1BF4F5C1693BB"
@@ -5521,8 +5526,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</selected_hover>
 				<unknown
 					this="6B2651E6-D214-4298-8DBB91D627AE4CD6"
@@ -5590,20 +5595,17 @@
 							name="flip_y_when_offscreen"
 							value=""/>
 						<property
-							name="invert_y"
-							value=""/>
-						<property
 							name="offset_x"
 							value="10"/>
 						<property
 							name="offset_y"
-							value="30"/>
+							value="-30"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextCommandGiverOnContextSet"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="OpenBuildingInfoPanel(GetIfElse(IsContextValid(StoredContextFromParent(&quot;CcoCampaignSettlement&quot;)), StoredContextFromParent(&quot;CcoCampaignSettlement&quot;), StoredContextFromParent(&quot;CcoCampaignCharacter&quot;)), StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;))"/>
+					context_function_id="OpenBuildingInfoPanel(Buildings.StoredSettlementOrCharacter, StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;))"/>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBuildingLevelRecord"
@@ -5611,7 +5613,7 @@
 				<callback_with_context
 					callback_id="ContextCommandRightClick"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="DoIf(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;).IsPlayerFaction &amp;&amp; StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;).IsForeignSlot == false &amp;&amp; IsPanelOpen(&quot;building_browser&quot;) == false, Do(DoIf(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;).IsRegionSlot, StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;).SettlementContext.Select), ShowBuildingBrowser(this)))"/>
+					context_function_id="DoIf(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;).IsPlayerFaction &amp;&amp; StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;).IsAlliedSlot == false &amp;&amp; IsPanelOpen(&quot;building_browser&quot;) == false, Do(DoIf(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;).IsHordeSlot == false, StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;).SettlementContext.Select), ShowBuildingBrowser(this)))"/>
 				<callback_with_context
 					callback_id="ContextUISFXSwitchSetter"
 					context_object_id="CcoBuildingLevelRecord">
@@ -5762,8 +5764,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</built>
 				<built_inactive
 					this="8E27D314-A2B0-4680-98805B5C43C4CCEF"
@@ -5793,8 +5795,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</built_inactive>
 				<built_panel
 					this="B62B9D6D-C19A-4871-915151A8155D615E"
@@ -5834,8 +5836,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</built_panel>
 				<built_panel_hover
 					this="00FD2409-4DEE-4742-9AB19A2AE4D8A799"
@@ -5878,8 +5880,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</built_panel_hover>
 				<cannot_build_ever
 					this="1028EA45-F7A5-4110-8FDD8574288F4F1C"
@@ -5951,8 +5953,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"
+						font_m_leading="3"
+						fontcat_name="body_12"
 						textshadervars="0.95,1.00,0.00,0.00"/>
 				</greyed>
 				<hover
@@ -5999,8 +6001,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</hover>
 				<locked
 					this="F7752041-0F1F-4D15-8EDF3E73DC6B57C5"
@@ -6073,8 +6075,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</normal>
 				<not_owned
 					this="4D4C16EC-C06D-4723-9DED58615D472E21"
@@ -6115,8 +6117,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"
+						font_m_leading="3"
+						fontcat_name="body_12"
 						textshadervars="0.95,1.00,0.00,0.00"/>
 				</not_owned>
 				<selected
@@ -6153,8 +6155,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</selected>
 				<selected_hover
 					this="147538B4-31A3-4ACC-8C69648624321515"
@@ -6190,8 +6192,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</selected_hover>
 				<unknown
 					this="3ADADC10-471B-4DA5-9C8C4681A4947E0E"
@@ -6354,7 +6356,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"
+						fontcat_name="body_12"
 						text_shader_name="text_outline_t0"/>
 				</blocked>
 				<construct
@@ -6398,7 +6400,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"
+						fontcat_name="body_12"
 						text_shader_name="text_outline_t0"
 						textshadervars="0.00,0.00,0.00,1.00"/>
 				</construct>
@@ -6487,8 +6489,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</_0>
 				<_1
 					this="C06CA2BC-4783-4E00-BBA42CD3E1E985FC"
@@ -6508,8 +6510,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</_1>
 				<_10
 					this="332C5061-D794-473D-8666316334964D35"
@@ -6529,8 +6531,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</_10>
 				<_11
 					this="C8F4C1EA-00DC-4D46-9A8E6F0A090802BF"
@@ -6550,8 +6552,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</_11>
 				<_12
 					this="CDBF6826-4583-4042-AA953C5B756A3AE7"
@@ -6587,8 +6589,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</_2>
 				<_3
 					this="BC63108C-0A2A-4D6F-869299087D78C456"
@@ -6608,8 +6610,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</_3>
 				<_4
 					this="1E244F5E-6A72-48E6-AA2669B916CBC934"
@@ -6629,8 +6631,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</_4>
 				<_5
 					this="4E0631AD-8D44-48BA-920B4E70D6BC728E"
@@ -6650,8 +6652,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</_5>
 				<_6
 					this="7A9150A5-E181-4ECF-984CE2340D3E9B09"
@@ -6671,8 +6673,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</_6>
 				<_7
 					this="53D6316B-192E-4CE2-8693169794AD8B88"
@@ -6692,8 +6694,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</_7>
 				<_8
 					this="E9113367-CF94-4ED4-ABE4FF20C6513142"
@@ -6713,8 +6715,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</_8>
 				<_9
 					this="0C4FAE36-7BAE-4BC5-A74DB5D623AEF1B8"
@@ -6734,8 +6736,8 @@
 					<component_text
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</_9>
 			</states>
 		</constructing_animation_circular>

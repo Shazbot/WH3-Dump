@@ -2,7 +2,7 @@
 <layout
 	version="141"
 	comment=""
-	precache_condition="">
+	precache_condition="PlayersFaction.CanPerformRituals">
 	<hierarchy>
 		<root this="7476614A-DD2A-42B2-8A0EC1E9BFBFA4AB">
 			<tooltip_ritual this="648AA297-B627-4DCE-AC6BED66283CA7A1">
@@ -81,8 +81,16 @@
 							<unit_card this="F105AD7D-D6CA-4C7E-B6521314FD2E6CDC"/>
 						</template_unit>
 					</unit_holder>
+					<dy_spirit_essence_requirement this="A4AEA048-18BB-4BBF-A0D3EE8BE2864F29"/>
+					<stick_progress_bar this="8B1654FD-5189-44CE-9247B83623A95A48">
+						<bar_extents_and_pos this="E13BBBD9-7F16-4509-83EC626A029C85CD">
+							<auto_resizing_comp this="B914098B-EA11-4737-8FD730CF7B504F09">
+								<completed_comp this="35BFC8DB-D952-4BE5-A84B34B53CD8F9CE"/>
+								<in_progress_comp this="B610C98B-ED22-4299-AFE194F18D8669B1"/>
+							</auto_resizing_comp>
+						</bar_extents_and_pos>
+					</stick_progress_bar>
 				</list_parent>
-				<ability_tooltip_creator this="23543B69-A54B-4C30-9FCA545A1427FB46"/>
 			</tooltip_ritual>
 		</root>
 	</hierarchy>
@@ -119,6 +127,41 @@
 				</newstate>
 			</states>
 		</root>
+		<completed_comp
+			this="35BFC8DB-D952-4BE5-A84B34B53CD8F9CE"
+			id="completed_comp"
+			part_of_template="true"
+			uniqueguid_in_template="DE8557ED-0386-4BFF-87237559FEB7164F"
+			uniqueguid="35BFC8DB-D952-4BE5-A84B34B53CD8F9CE"
+			dimensions="369.00,3.00"
+			dock_point="Center"
+			is_visible="false">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="917EF796-F40D-44AD-9CA208CB315B8B7F"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/sticky_bar_fill.png"
+					uniqueguid="94487B49-A2FC-4700-9555B8958AAC59DC"/>
+			</component_image_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+				<element value="ui/skins/default/sticky_bar_fill.png"/>
+			</override_images>
+		</completed_comp>
 		<dy_heading_textbox
 			this="1177C13A-A56F-42BE-9574C9E7B36A2224"
 			id="dy_heading_textbox"
@@ -151,15 +194,115 @@
 						font_m_font_name="brand_header"
 						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="FE_header_small"/>
+						font_m_leading="3"
+						fontcat_name="header_14"/>
 				</newstate>
 			</states>
 		</dy_heading_textbox>
+		<in_progress_comp
+			this="B610C98B-ED22-4299-AFE194F18D8669B1"
+			id="in_progress_comp"
+			part_of_template="true"
+			uniqueguid_in_template="598D2980-2D81-4431-B8372E64160B25BB"
+			uniqueguid="B610C98B-ED22-4299-AFE194F18D8669B1"
+			dimensions="369.00,3.00"
+			dock_point="Center">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="F35BC94E-23EB-4CC4-8B81C5C6CB20719F"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/sticky_bar_fill.png"
+					uniqueguid="0948E165-C7EA-45F3-A5DDD69B5E326679"/>
+			</component_image_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+				<element value="ui/skins/default/sticky_bar_fill.png"/>
+			</override_images>
+		</in_progress_comp>
+		<stick_progress_bar
+			this="8B1654FD-5189-44CE-9247B83623A95A48"
+			id="stick_progress_bar"
+			template_id="stick_progress_bar"
+			part_of_template="true"
+			uniqueguid_in_template="B5D91471-862C-459A-9117F067B37F7730"
+			uniqueguid="8B1654FD-5189-44CE-9247B83623A95A48"
+			dimensions="1.00,10.00"
+			is_visible="false">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="B3AC96B2-BFE0-4962-A956A5405171C3AE"/>
+			</state_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override1"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</stick_progress_bar>
+		<auto_resizing_comp
+			this="B914098B-EA11-4737-8FD730CF7B504F09"
+			id="auto_resizing_comp"
+			part_of_template="true"
+			uniqueguid_in_template="9F4A9EBE-A605-40E1-AACEB22402830771"
+			uniqueguid="B914098B-EA11-4737-8FD730CF7B504F09"
+			dimensions="369.00,3.00"
+			dock_point="Center">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="C736C42C-7387-4243-BCD69F8D60A7384B"/>
+			</state_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</auto_resizing_comp>
+		<bar_extents_and_pos
+			this="E13BBBD9-7F16-4509-83EC626A029C85CD"
+			id="bar_extents_and_pos"
+			part_of_template="true"
+			uniqueguid_in_template="3F331065-E782-467B-804031161278DDBC"
+			uniqueguid="E13BBBD9-7F16-4509-83EC626A029C85CD"
+			dimensions="369.00,3.00"
+			offset="7.00,3.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="EE8AB85A-DB20-49F3-815D3A5DE7D966E2"/>
+			</state_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</bar_extents_and_pos>
 		<dy_desc
 			this="0F83601D-0385-4906-9E5EF4D4D19DB17F"
 			id="dy_desc"
-			offset="0.00,595.00"
+			offset="0.00,583.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -190,9 +333,10 @@
 						textlabel="dy_desc_NewState_Text_6e003d"
 						font_m_font_name="georgia_italic"
 						font_m_size="12"
-						font_m_colour="#A99F89FF"
-						font_m_leading="1"
-						fontcat_name="fe_italic"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12_italic"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
 				</newstate>
 			</states>
 		</dy_desc>
@@ -218,7 +362,7 @@
 					this="56606790-7623-46ED-A1F085F0E9E2B15D"
 					name="NewState"
 					width="386"
-					height="857"
+					height="873"
 					uniqueguid="56606790-7623-46ED-A1F085F0E9E2B15D">
 					<imagemetrics>
 						<image
@@ -226,7 +370,7 @@
 							uniqueguid="3655AFCC-A410-4480-B010FD3DDC8E676F"
 							componentimage="201E1334-8C23-417D-896543D910C578FC"
 							width="386"
-							height="857"
+							height="873"
 							tile="true"
 							margin="16.00,20.00,16.00,20.00"/>
 					</imagemetrics>
@@ -236,7 +380,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<animations>
@@ -300,7 +444,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -379,7 +523,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -427,7 +571,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</active>
 				<inactive
 					this="8983A005-BE26-4860-B8F1C07E2FB67914"
@@ -442,9 +586,10 @@
 						texthbehaviour="Resize"
 						textlabel="dy_cost_NewState_Text_300001"
 						font_m_size="12"
-						font_m_colour="#FF2D2DFF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_red"/>
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
 				</inactive>
 			</states>
 		</dy_cost>
@@ -486,7 +631,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</active>
 				<inactive
 					this="A6F5DE27-9E48-42E7-9EF20F25B4256690"
@@ -503,9 +648,10 @@
 						texthbehaviour="Resize"
 						textlabel="dy_turns_remaining_NewState_Text_1b000a"
 						font_m_size="12"
-						font_m_colour="#FF2D2DFF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_red"/>
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
 				</inactive>
 			</states>
 		</dy_resource_name>
@@ -540,7 +686,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -582,7 +728,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -609,6 +755,9 @@
 					callback_id="ContextImageSetter"
 					context_object_id="CcoEffect"
 					context_function_id="IconPath"/>
+				<callback_with_context
+					callback_id="AbilityEffectIcon"
+					context_object_id="CcoEffect"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -646,7 +795,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</template_effect>
@@ -703,14 +852,14 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</dy_cost_image>
 		<dy_turns_remaining
 			this="5759A40C-950C-4AC6-85F2EF1F69944F29"
 			id="dy_turns_remaining"
-			offset="0.00,623.00"
+			offset="0.00,611.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -745,9 +894,10 @@
 						textlabel="dy_turns_remaining_NewState_Text_19e1ceb3"
 						font_m_font_name="georgia_italic"
 						font_m_size="12"
-						font_m_colour="#A99F89FF"
-						font_m_leading="1"
-						fontcat_name="fe_italic"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12_italic"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
 				</newstate>
 			</states>
 		</dy_turns_remaining>
@@ -788,9 +938,10 @@
 						texthbehaviour="Resize"
 						textlabel="label_script_lock_NewState_Text_5ff37b6f"
 						font_m_size="12"
-						font_m_colour="#FF2D2DFF"
-						font_m_leading="7"
-						fontcat_name="fe_text_red_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
 				</newstate>
 			</states>
 		</label_script_lock>
@@ -831,7 +982,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -864,6 +1015,9 @@
 					callback_id="ContextImageSetter"
 					context_object_id="CcoEffect"
 					context_function_id="IconPath"/>
+				<callback_with_context
+					callback_id="AbilityEffectIcon"
+					context_object_id="CcoEffect"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -901,7 +1055,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</template_effect>
@@ -957,7 +1111,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</dy_cost_image>
@@ -994,9 +1148,10 @@
 						texthbehaviour="Resize"
 						textlabel="dy_resource_active_Text_ff6be311"
 						font_m_size="12"
-						font_m_colour="#A0FF37FF"
-						font_m_leading="7"
-						fontcat_name="fe_text_green_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="green"/>
 				</active>
 			</states>
 		</dy_resource>
@@ -1041,7 +1196,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<LayoutEngine type="List">
@@ -1073,7 +1228,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -1120,7 +1275,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</slaanesh_ritual_penalty>
@@ -1161,7 +1316,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</active>
 				<inactive
 					this="278A0847-1C16-4143-823A6C7D1AC26605"
@@ -1176,9 +1331,10 @@
 						texthbehaviour="Resize"
 						textlabel="dy_cost_NewState_Text_300001"
 						font_m_size="12"
-						font_m_colour="#FF2D2DFF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_red"/>
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
 				</inactive>
 			</states>
 		</dy_cost>
@@ -1220,7 +1376,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</dy_cost_image>
@@ -1259,7 +1415,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</active>
 				<inactive
 					this="F4DC39E2-6679-467B-BBE5395B6435294A"
@@ -1277,9 +1433,10 @@
 						textlocalised="true"
 						textlabel="dy_turns_remaining_NewState_Text_1b000a"
 						font_m_size="12"
-						font_m_colour="#FF2D2DFF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_red"/>
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
 				</inactive>
 			</states>
 		</dy_resource_name>
@@ -1314,7 +1471,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -1358,9 +1515,10 @@
 						textlabel="dy_effects_duration_NewState_Text_589e1b3a"
 						font_m_font_name="georgia_italic"
 						font_m_size="12"
-						font_m_colour="#A99F89FF"
-						font_m_leading="1"
-						fontcat_name="fe_italic"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12_italic"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
 				</newstate>
 			</states>
 		</dy_effects_duration>
@@ -1387,7 +1545,7 @@
 					this="85A3ADED-CD3D-4D04-9444C4201845CC8C"
 					name="inactive"
 					width="386"
-					height="47"
+					height="43"
 					interactive="true"
 					uniqueguid="85A3ADED-CD3D-4D04-9444C4201845CC8C">
 					<component_text
@@ -1399,9 +1557,10 @@
 						textlocalised="true"
 						textlabel="ascension_already_complete_inactive_Text_792523ce"
 						font_m_size="12"
-						font_m_colour="#FF2D2DFF"
-						font_m_leading="7"
-						fontcat_name="fe_text_red_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
 				</inactive>
 			</states>
 		</ascension_already_complete>
@@ -1446,7 +1605,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -1510,7 +1669,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</dy_cost_image>
@@ -1547,9 +1706,10 @@
 						texthbehaviour="Resize"
 						textlabel="dy_resource_active_Text_ff6be311"
 						font_m_size="12"
-						font_m_colour="#A0FF37FF"
-						font_m_leading="7"
-						fontcat_name="fe_text_green_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="green"/>
 				</active>
 			</states>
 		</dy_resource>
@@ -1576,7 +1736,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -1621,7 +1781,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -1665,7 +1825,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -1698,6 +1858,9 @@
 					callback_id="ContextImageSetter"
 					context_object_id="CcoEffect"
 					context_function_id="IconPath"/>
+				<callback_with_context
+					callback_id="AbilityEffectIcon"
+					context_object_id="CcoEffect"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -1735,7 +1898,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</template_effect>
@@ -1775,16 +1938,17 @@
 						textlabel="when_activated_NewState_Text_51138cef"
 						font_m_font_name="georgia_italic"
 						font_m_size="12"
-						font_m_colour="#A99F89FF"
-						font_m_leading="1"
-						fontcat_name="fe_italic"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12_italic"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
 				</newstate>
 			</states>
 		</upon_completion>
 		<dy_cast_time
 			this="77472F33-7946-44AD-A6E6C3CA510B0BD6"
 			id="dy_cast_time"
-			offset="0.00,651.00"
+			offset="0.00,639.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -1819,9 +1983,10 @@
 						textlabel="dy_cast_time_NewState_Text_8a7f61b1"
 						font_m_font_name="georgia_italic"
 						font_m_size="12"
-						font_m_colour="#A99F89FF"
-						font_m_leading="1"
-						fontcat_name="fe_italic"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12_italic"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
 				</newstate>
 			</states>
 		</dy_cast_time>
@@ -1863,9 +2028,10 @@
 						textlabel="dy_effects_duration_NewState_Text_589e1b3a"
 						font_m_font_name="georgia_italic"
 						font_m_size="12"
-						font_m_colour="#A99F89FF"
-						font_m_leading="1"
-						fontcat_name="fe_italic"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12_italic"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
 				</newstate>
 			</states>
 		</dy_completion_effects_duration>
@@ -1906,9 +2072,10 @@
 						texthbehaviour="Resize"
 						textlabel="dy_cooldown_NewState_Text_660039"
 						font_m_size="12"
-						font_m_colour="#FF2D2DFF"
-						font_m_leading="7"
-						fontcat_name="fe_text_red_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
 				</newstate>
 			</states>
 		</dy_cooldown>
@@ -1949,9 +2116,10 @@
 						texthbehaviour="Resize"
 						textlabel="dy_cooldown_target_settlement_NewState_Text_dd20d931"
 						font_m_size="12"
-						font_m_colour="#FF2D2DFF"
-						font_m_leading="7"
-						fontcat_name="fe_text_red_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
 				</newstate>
 			</states>
 		</dy_cooldown_target_settlement>
@@ -2002,14 +2170,14 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</dy_cooldown_on_activation>
 		<dy_target_invalid_text
 			this="F0B5136E-97B3-4750-82FFF1F9411CBDF2"
 			id="dy_target_invalid_text"
-			offset="0.00,567.00"
+			offset="0.00,555.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2045,16 +2213,17 @@
 						texthbehaviour="Resize"
 						textlabel="StateText_f838dfeb"
 						font_m_size="12"
-						font_m_colour="#FF2D2DFF"
-						font_m_leading="7"
-						fontcat_name="fe_text_red_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
 				</newstate>
 			</states>
 		</dy_target_invalid_text>
 		<effects_holder
 			this="B35E7E66-2600-466B-9550DA9FD49B99E8"
 			id="effects_holder"
-			offset="0.00,679.00"
+			offset="0.00,667.00"
 			priority="255"
 			tooltipslocalised="true"
 			uniqueguid="B35E7E66-2600-466B-9550DA9FD49B99E8"
@@ -2082,101 +2251,6 @@
 				</columnwidths>
 			</LayoutEngine>
 		</effects_holder>
-		<ability_tooltip_creator
-			this="23543B69-A54B-4C30-9FCA545A1427FB46"
-			id="ability_tooltip_creator"
-			offset="10.00,10.00"
-			visible="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="23543B69-A54B-4C30-9FCA545A1427FB46"
-			currentstate="40912C40-3CEE-46CA-AF79D60B5FD630E6"
-			defaultstate="40912C40-3CEE-46CA-AF79D60B5FD630E6">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="ComponentCreator">
-					<child_m_user_properties>
-						<property
-							name="layout"
-							value="ui/common ui/special_ability_tooltip"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoUnitAbility"
-					context_function_id="IsValidContext &amp;&amp; (self.ParentContext(&quot;tooltip_ritual&quot;).TooltipParent.PropertyExists(&quot;hide_tooltip_effects_on_cooldown&quot;) == false || IsOnCooldown == false)">
-					<child_m_user_properties>
-						<property
-							name="object_store_events"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoRitualPayloadRecord"
-					context_function_id="EffectBundleList.FirstContext(IsContextValid(EffectList.FirstContext(IsContextValid(AbilityContext))))"/>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoRitualRecord"
-					context_function_id="ActiveEffectList.FirstContext(IsContextValid(AbilityContext)).AbilityContext">
-					<child_m_user_properties>
-						<property
-							name="clear_on_empty"
-							value=""/>
-						<property
-							name="context_to_clear"
-							value="CcoUnitAbility"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextObjectStore"
-					context_object_id="CcoUnitAbility"/>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoEffectBundle"
-					context_function_id="EffectList.FirstContext(IsContextValid(AbilityContext)).AbilityContext">
-					<child_m_user_properties>
-						<property
-							name="clear_on_empty"
-							value=""/>
-						<property
-							name="context_to_clear"
-							value="CcoUnitAbility"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoRitualRecord"
-					context_function_id="GetIfElse(IsContextValid(StartPayloadContext), StartPayloadContext, CompletionPayloadContext)">
-					<child_m_user_properties>
-						<property
-							name="clear_on_empty"
-							value=""/>
-						<property
-							name="context_to_clear"
-							value="CcoRitualPayloadRecord"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoCampaignRitual"
-					context_function_id="RitualContext"/>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="40912C40-3CEE-46CA-AF79D60B5FD630E6"
-					name="NewState"
-					width="1"
-					height="1"
-					uniqueguid="40912C40-3CEE-46CA-AF79D60B5FD630E6"/>
-			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true">
-				<columnwidths>
-					<column width="300"/>
-				</columnwidths>
-			</LayoutEngine>
-		</ability_tooltip_creator>
 		<tooltip_ritual
 			this="648AA297-B627-4DCE-AC6BED66283CA7A1"
 			id="tooltip_ritual"
@@ -2187,9 +2261,6 @@
 			uniqueguid="648AA297-B627-4DCE-AC6BED66283CA7A1"
 			currentstate="CFDC406A-C9F6-42A8-A26C5C07A9D91A86">
 			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="CustomTooltip"
-					context_object_id="CcoCampaignRitual"/>
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoRTRitualFactionPair"
@@ -2207,21 +2278,22 @@
 				<callback_with_context
 					callback_id="ContextObjectStore"
 					context_object_id="CcoCampaignFaction"/>
+				<callback_with_context callback_id="ContextLayoutTooltipChild"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
 					this="CFDC406A-C9F6-42A8-A26C5C07A9D91A86"
 					name="NewState"
 					width="386"
-					height="865"
+					height="881"
 					uniqueguid="CFDC406A-C9F6-42A8-A26C5C07A9D91A86">
 					<component_text
 						textxoffset="8.00,0.00"
 						textyoffset="6.00,0.00"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="fe_tooltip_text"/>
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<animations>
@@ -2279,7 +2351,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</template_unit>
@@ -2313,7 +2385,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</unit>
@@ -2380,7 +2452,7 @@
 		<unit_holder
 			this="28A2E511-8367-4B93-A2A1C63086C00419"
 			id="unit_holder"
-			offset="0.00,771.00"
+			offset="0.00,759.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2414,7 +2486,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -2449,7 +2521,7 @@
 					this="6DB8944B-9032-4308-BE0D06CC2DDCD90A"
 					name="NewState"
 					width="386"
-					height="47"
+					height="43"
 					interactive="true"
 					uniqueguid="6DB8944B-9032-4308-BE0D06CC2DDCD90A">
 					<component_text
@@ -2461,16 +2533,17 @@
 						textlocalised="true"
 						textlabel="StateText_6d1cd6bc"
 						font_m_size="12"
-						font_m_colour="#FF2D2DFF"
-						font_m_leading="7"
-						fontcat_name="fe_text_red_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
 				</newstate>
 			</states>
 		</cannot_confederate_human>
 		<cannot_confederate_already_confed
 			this="C0AA5198-A5FB-439A-98F456126A9E4F8A"
 			id="cannot_confederate_already_confed"
-			offset="0.00,399.00"
+			offset="0.00,395.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2489,7 +2562,7 @@
 					this="B4346A8A-6393-4ED5-AF1122A328749A30"
 					name="NewState"
 					width="386"
-					height="47"
+					height="43"
 					interactive="true"
 					uniqueguid="B4346A8A-6393-4ED5-AF1122A328749A30">
 					<component_text
@@ -2501,9 +2574,10 @@
 						textlocalised="true"
 						textlabel="StateText_4204f23f"
 						font_m_size="12"
-						font_m_colour="#FF2D2DFF"
-						font_m_leading="7"
-						fontcat_name="fe_text_red_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
 				</newstate>
 			</states>
 		</cannot_confederate_already_confed>
@@ -2546,7 +2620,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="fe_text"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</label_claimed_seat>
@@ -2587,9 +2661,10 @@
 						texthbehaviour="Resize"
 						textlabel="StateText_61628c95"
 						font_m_size="12"
-						font_m_colour="#FF2D2DFF"
-						font_m_leading="7"
-						fontcat_name="fe_text_red_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
 				</newstate>
 			</states>
 		</dy_script_lock_cooldown>
@@ -2648,7 +2723,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</active>
 				<inactive
 					this="105327E3-8552-45B8-BFFD59BCCA140384"
@@ -2665,9 +2740,10 @@
 						texthbehaviour="Resize"
 						textlabel="StateText_3505f9cf"
 						font_m_size="12"
-						font_m_colour="#FF2D2DFF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_red"/>
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
 				</inactive>
 			</states>
 		</template_toz_resource_cost>
@@ -2705,9 +2781,10 @@
 						textlocalised="true"
 						textlabel="StateText_315bbaae"
 						font_m_size="12"
-						font_m_colour="#FF2D2DFF"
-						font_m_leading="7"
-						fontcat_name="fe_text_red_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
 				</newstate>
 			</states>
 		</label_seat_usurped>
@@ -2748,7 +2825,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</active>
 				<inactive
 					this="DE0FB0ED-C8C4-456F-ABC86276EA37680F"
@@ -2763,9 +2840,10 @@
 						texthbehaviour="Resize"
 						textlabel="StateText_3cc9e633"
 						font_m_size="12"
-						font_m_colour="#FF2D2DFF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_red"/>
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
 				</inactive>
 			</states>
 		</dy_cost>
@@ -2822,7 +2900,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</dy_cost_image>
@@ -2864,7 +2942,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</active>
 				<inactive
 					this="5B0C25DF-6DCF-4A5B-8AB17A40E505604C"
@@ -2881,9 +2959,10 @@
 						texthbehaviour="Resize"
 						textlabel="StateText_a2a6ad7f"
 						font_m_size="12"
-						font_m_colour="#FF2D2DFF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_red"/>
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
 				</inactive>
 			</states>
 		</dy_resource_name>
@@ -2918,7 +2997,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -2952,7 +3031,7 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_tooltip"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 			<LayoutEngine
@@ -2962,7 +3041,7 @@
 		<cannot_confederate_dead_faction
 			this="0E56F210-FA4B-48A7-B895121E249B7657"
 			id="cannot_confederate_dead_faction"
-			offset="0.00,450.00"
+			offset="0.00,442.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2981,7 +3060,7 @@
 					this="A767DBFE-759E-4949-9998A48C3F6DA5B0"
 					name="NewState"
 					width="386"
-					height="47"
+					height="43"
 					interactive="true"
 					uniqueguid="A767DBFE-759E-4949-9998A48C3F6DA5B0">
 					<component_text
@@ -2993,16 +3072,17 @@
 						textlocalised="true"
 						textlabel="StateText_8c7a827b"
 						font_m_size="12"
-						font_m_colour="#FF2D2DFF"
-						font_m_leading="7"
-						fontcat_name="fe_text_red_warhammer3"/>
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
 				</newstate>
 			</states>
 		</cannot_confederate_dead_faction>
 		<confederate_faction_dead_only_lord
 			this="2E623CBC-83A9-4E00-9FB5ED4BBE22FEFE"
 			id="confederate_faction_dead_only_lord"
-			offset="0.00,501.00"
+			offset="0.00,489.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -3033,11 +3113,55 @@
 						textlocalised="true"
 						textlabel="StateText_f54c657"
 						font_m_size="12"
-						font_m_colour="#FFFFE0FF"
+						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="ingame_text_warhammer3"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</confederate_faction_dead_only_lord>
+		<dy_spirit_essence_requirement
+			this="A4AEA048-18BB-4BBF-A0D3EE8BE2864F29"
+			id="dy_spirit_essence_requirement"
+			offset="0.00,845.00"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="A4AEA048-18BB-4BBF-A0D3EE8BE2864F29"
+			updatewhennotvisible="true"
+			currentstate="1FD29A53-3A41-41F2-856566C9E9AD5A0D"
+			defaultstate="1FD29A53-3A41-41F2-856566C9E9AD5A0D">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignRitual"
+					context_function_id="RitualContext.Category == &quot;OSTANKYA_HEX_RITUAL&quot; &amp;&amp; ScriptObjectContext(Format(&quot;%s_spirit_essence_remaining&quot;, RitualContext.Key)).NumericValue &gt; 0"/>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignRitual"
+					context_function_id="Format(Loc(&quot;tooltip_ritual_ostankya_hex_spirit_essence_requirement&quot;), RoundFloat(ScriptObjectContext(Format(&quot;%s_spirit_essence_remaining&quot;, RitualContext.Key)).NumericValue))"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="1FD29A53-3A41-41F2-856566C9E9AD5A0D"
+					name="NewState"
+					width="386"
+					height="24"
+					interactive="true"
+					uniqueguid="1FD29A53-3A41-41F2-856566C9E9AD5A0D">
+					<component_text
+						text="dy_spirit_essence_requirement"
+						textvalign="Center"
+						textxoffset="12.00,12.00"
+						textyoffset="4.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_4f4d5c7b"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_yellow"/>
+				</newstate>
+			</states>
+		</dy_spirit_essence_requirement>
 	</components>
 </layout>
