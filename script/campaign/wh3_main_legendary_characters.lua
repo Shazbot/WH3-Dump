@@ -397,15 +397,19 @@ character_unlocking.character_data = {
 			main_warhammer = {
 				"wh3_dlc24_mis_tze_blue_scribes_stage_1",
 				"wh3_dlc24_mis_tze_blue_scribes_stage_2",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_2_b",
 				"wh3_dlc24_mis_tze_blue_scribes_stage_3",
 				"wh3_dlc24_mis_tze_blue_scribes_stage_1_chs",
 				"wh3_dlc24_mis_tze_blue_scribes_stage_2_chs",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_2_b_chs",
 				"wh3_dlc24_mis_tze_blue_scribes_stage_3_chs",
 				"wh3_dlc24_mis_tze_blue_scribes_stage_1_dae",
 				"wh3_dlc24_mis_tze_blue_scribes_stage_2_dae",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_2_b_dae",
 				"wh3_dlc24_mis_tze_blue_scribes_stage_3_dae",
 				"wh3_dlc24_mis_tze_blue_scribes_stage_1_changeling",
 				"wh3_dlc24_mis_tze_blue_scribes_stage_2_changeling",
+				"wh3_dlc24_mis_tze_blue_scribes_stage_2_b_changeling",
 				"wh3_dlc24_mis_tze_blue_scribes_stage_3_changeling"
 			},
 			wh3_main_chaos = {

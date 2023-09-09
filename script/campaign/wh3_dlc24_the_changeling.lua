@@ -1767,6 +1767,7 @@ function the_changeling_features:initialise()
 		cm:set_saved_value("the_changeling_schemes_rewards_bundle", {})
 		cm:set_saved_value("the_changeling_cultist_agent_action_key", false)
 		cm:set_saved_value("the_changeling_ultimate_battle_strings", self.schemes.ultimate_battle_strings)
+		cm:set_saved_value("the_changeling_rift_tech_unlock", false)
 
 		-- RoR unit locking
 		for unit, reason in pairs(self.schemes.ror_locks.all) do
@@ -2307,8 +2308,13 @@ function the_changeling_features:initialise()
 						elseif self.campaign_name == "wh3_main_chaos" then
 							self:open_rift("wh3_dlc24_the_changeling_rifts_chaos_the_empire_castle_drakenhof")
 						end
-						for tech_key, _ in pairs(self.rift_regions[self.campaign_name]) do
-							cm:unlock_technology(self.faction_key, tech_key)
+						local tech_unlocked = cm:get_saved_value("the_changeling_rift_tech_unlock") or false
+						if not tech_unlocked then
+							cm:set_saved_value("the_changeling_rift_tech_unlock", true)
+							core:remove_listener("the_changeling_rift_tech_unlock")
+							for tech_key, _ in pairs(self.rift_regions[self.campaign_name]) do
+								cm:unlock_technology(self.faction_key, tech_key)
+							end
 						end
 					end
 
@@ -2479,6 +2485,28 @@ function the_changeling_features:initialise()
 			end,
 			true
 		)
+
+		-- Listener for the rift tech unlocks when the player has 2 rift gems
+		local tech_unlocked = cm:get_saved_value("the_changeling_rift_tech_unlock") or false
+		if not tech_unlocked then
+			core:add_listener(
+				"the_changeling_rift_tech_unlock",
+				"PooledResourceChanged",
+				function(context)
+					return context:resource():key() == "wh3_dlc24_tze_rift_gems" and context:resource():value() >= 2 and context:faction():name() == self.faction_key
+				end,
+				function()
+					local tech_unlock = cm:get_saved_value("the_changeling_rift_tech_unlock") or false
+					if not tech_unlock then
+						cm:set_saved_value("the_changeling_rift_tech_unlock", true)
+						for tech_key, _ in pairs(self.rift_regions[self.campaign_name]) do
+							cm:unlock_technology(self.faction_key, tech_key)
+						end
+					end
+				end,
+				false
+			)
+		end
 
 		core:add_listener(
 			"the_changeling_nukes_scheme",
@@ -2922,6 +2950,9 @@ function the_changeling_features:trigger_rebellion(region, faction_key, no_chang
 	if is_string(region) then
 		region = cm:get_region(region)
 	end
+	if region:is_abandoned() then
+		return false
+	end	
 	local chaos_rebels = self.army_spawns.chaos_rebels
 	faction_key = faction_key or chaos_rebels.factions[cm:random_number(#chaos_rebels.factions)]
 	local faction = cm:get_faction(self.faction_key)
