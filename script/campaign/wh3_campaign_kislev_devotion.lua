@@ -121,24 +121,30 @@ function setup_kislev_devotion()
 			return has_devotion_pooled_resource(faction);
 		end,
 		function(context)
-			local faction = context:faction();
+			local faction = context:faction()
+			local faction_key = faction:name()
+			local effect_bundle = "wh3_dlc24_climate_uninhabitable_chaotic_anti"
+			
+			-- the chaotic climate for boris is unsuitable rather than uninhabitable, so he gets a different effect bundle to counter those effects
+			if faction_key == "wh3_main_ksl_ursun_revivalists" then
+				effect_bundle = "wh3_dlc24_climate_unsuitable_chaotic_anti"
+			end
 			
 			-- counter climate effects when commandment is active
 			for _, region in model_pairs(faction:region_list()) do
-				local has_effect_bundle = region:has_effect_bundle("wh3_dlc24_climate_uninhabitable_chaotic_anti")
+				local has_effect_bundle = region:has_effect_bundle(effect_bundle)
 				
 				if region:get_active_edict_key() == "wh3_dlc24_edict_ksl_anti_chaos" then
-					if not has_effect_bundle then
-						cm:apply_effect_bundle_to_region("wh3_dlc24_climate_uninhabitable_chaotic_anti", region:name(), -1)
+					if region:settlement():get_climate() == "climate_chaotic" and not has_effect_bundle then
+						cm:apply_effect_bundle_to_region(effect_bundle, region:name(), -1)
 					end
 				elseif has_effect_bundle then
-					cm:remove_effect_bundle_from_region("wh3_dlc24_climate_uninhabitable_chaotic_anti", region:name())
+					cm:remove_effect_bundle_from_region(effect_bundle, region:name())
 				end
 			end
 			
 			-- force chaos rebellions if a human kislev faction has a low level of devotion
 			if faction:is_human() then
-				local faction_key = faction:name();
 				local devotion_value = faction:pooled_resource_manager():resource("wh3_main_ksl_devotion"):value();
 				local incursion_chance = cm:get_saved_value("devotion_incursion_chance_" .. faction_key) or 0;
 				
@@ -480,7 +486,9 @@ function setup_kislev_devotion()
 		end,
 		function(context)
 			-- cache this value as buildings complete at end of round, so to display the pooled resource change in the UI, add it at the start of their turn instead
-			cm:set_saved_value("followers_to_add_" .. context:building():faction():name(), 1)
+			local save_value = "followers_to_add_" .. context:building():faction():name()
+			local amount_to_add = cm:get_saved_value(save_value) or 0
+			cm:set_saved_value(save_value, amount_to_add + 1) -- increment the value as this event can fire multiple times before the next turn
 		end,
 		true
 	);

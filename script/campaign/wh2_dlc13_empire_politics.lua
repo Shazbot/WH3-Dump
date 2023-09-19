@@ -1,4 +1,4 @@
-local empire_politics_factions = {
+empire_politics_factions = {
 	{elector = "reikland", faction = "wh_main_emp_empire"},
 	{elector = "golden", faction = "wh2_dlc13_emp_golden_order"},
 	{elector = "averland", faction = "wh_main_emp_averland"},

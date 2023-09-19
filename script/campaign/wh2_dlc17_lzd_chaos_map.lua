@@ -1619,7 +1619,7 @@ local function generate_mission_army_table(culture_table, difficulty)
 				for j = 0, faction_character_list:num_items() - 1 do
 					local character = faction_character_list:item_at(j)
 					local faction_leader = character:is_faction_leader()
-					if(is_blocked_faction(faction:name()) == false and character:has_military_force() and character:in_settlement() == false and (faction_leader == false or faction_leader == m_force_difficulty_values[difficulty].can_be_leader) and character:is_at_sea() == false) then
+					if(is_blocked_faction(faction:name()) == false and character:has_military_force() and not character:is_hidden() and character:in_settlement() == false and (faction_leader == false or faction_leader == m_force_difficulty_values[difficulty].can_be_leader) and character:is_at_sea() == false) then
 						local region = character:region()
 						if(region:is_null_interface() == false) then
 							local region_key = region:name()

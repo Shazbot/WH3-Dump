@@ -1984,6 +1984,11 @@ function trigger_in_witchs_hut()
 		function()
 			cm:steal_user_input(false)
 			
+			local uic_tech_1 = find_uicomponent("main_ingredient_slot_3", "tech_icon")
+			local uic_tech_2 = find_uicomponent("main_ingredient_slot_4", "tech_icon")
+			uic_tech_1:SetDisabled(true)
+			uic_tech_2:SetDisabled(true)
+			
 			local uic = find_uicomponent("dlc24_witches_hut", "base_brew")
 
 			local tp = text_pointer:new_from_component(
@@ -2009,8 +2014,12 @@ function trigger_in_witchs_hut()
 					-- Re-enable buttons.
 					local uic_help_button = find_uicomponent("dlc24_witches_hut", "button_info")
 					local uic_button_ok_witchs_hut = find_uicomponent("dlc24_witches_hut", "button_ok")
+					local uic_tech_1 = find_uicomponent("main_ingredient_slot_3", "tech_icon")
+					local uic_tech_2 = find_uicomponent("main_ingredient_slot_4", "tech_icon")
 					uic_help_button:SetDisabled(false)
 					uic_button_ok_witchs_hut:SetDisabled(false)
+					uic_tech_1:SetDisabled(false)
+					uic_tech_2:SetDisabled(false)
 					
 					tp:hide(true)
 					core:hide_fullscreen_highlight()

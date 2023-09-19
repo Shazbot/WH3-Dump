@@ -87,6 +87,7 @@ require("wh3_dlc23_labour_move")
 require("wh3_dlc24_mother_ostankya")
 require("wh3_dlc24_matters_of_state")
 require("wh3_dlc24_the_changeling")
+require("wh2_dlc13_empire_politics")
 
 require("realms/wh3_realm_common");
 require("realms/wh3_realm_khorne");

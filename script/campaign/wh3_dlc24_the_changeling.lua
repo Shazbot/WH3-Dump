@@ -1892,7 +1892,7 @@ function the_changeling_features:initialise()
 			"WorldStartRound",
 			function()
 				local changeling_faction = cm:get_faction(self.faction_key)
-				return changeling_faction:is_dead() == false and changeling_faction:was_confederated() == false and changeling_faction:is_human() == false and cm:turn_number() % 3 == 1
+				return changeling_faction:is_dead() == false and changeling_faction:was_confederated() == false and cm:turn_number() % 3 == 1
 			end,
 			function()
 				local random_forms = {}
@@ -2098,7 +2098,7 @@ function the_changeling_features:initialise()
 			local trickster_cultist = cm:get_saved_value("the_changeling_cultist_agent_action_key")
 			if trickster_cultist then
 				local foreign_slot_manager = region:foreign_slot_manager_for_faction(self.faction_key)
-				if foreign_slot_manager:is_null_interface() == false and foreign_slot_manager:slots():item_at(0):template_key() == the_changeling_features.slot_template then
+				if foreign_slot_manager:is_null_interface() == false and foreign_slot_manager:slots():item_at(0):template_key() == self.slot_template then
 					for i = 1, #self.bonus_cultist_buildings[trickster_cultist] do
 					cm:foreign_slot_instantly_upgrade_building(foreign_slot_manager:slots():item_at(i-1), self.bonus_cultist_buildings[trickster_cultist][i])
 					end
@@ -2118,6 +2118,23 @@ function the_changeling_features:initialise()
 		end,
 		function(context)
 			cm:set_character_excluded_from_trespassing(context:character(), true)
+		end,
+		true
+	)
+
+	-- Grant the form of legendary heroes when they are recruited
+	core:add_listener(
+		"the_changeling_formless_horror_unique_hero_recruited",
+		"UniqueAgentSpawned",
+		function(context)
+			return context:unique_agent_details():character():faction():name() == self.faction_key
+		end,
+		function(context)
+			local character = context:unique_agent_details():character()
+			if not character:is_null_interface() then
+				self:grant_formless_horror_form(character:character_subtype_key())
+			end
+
 		end,
 		true
 	)
@@ -2188,7 +2205,7 @@ function the_changeling_features:initialise()
 		"the_changeling_formless_horror_allied_to_faction",
 		"PositiveDiplomaticEvent",
 		function(context)
-			return (context:recipient():name() == self.faction_key or context:proposer():name() == self.faction_key) and (context:is_military_alliance() or context:is_defensive_alliance())
+			return (context:recipient():name() == self.faction_key or context:proposer():name() == self.faction_key) and (context:is_military_alliance() or context:is_defensive_alliance() or context:is_vassalage())
 		end,
 		function(context)
 			local other_faction
@@ -2215,6 +2232,28 @@ function the_changeling_features:initialise()
 		end,
 		true
 	)
+
+	-- Update the owned forms for the changeling when they are involved in confederation
+	core:add_listener(
+		"the_changeling_formless_horror_confederates_faction",
+		"FactionJoinsConfederation",
+		function(context)
+			return context:confederation():name() == self.faction_key or context:faction():name() == self.faction_key
+		end,
+		function(context)
+			local confederation = context:confederation()
+			local character_list = confederation:character_list()
+
+			for i = 0,  character_list:num_items() - 1 do
+				local character = character_list:item_at(i)
+				local subtype_key = character:character_subtype_key()
+				if subtype_key ~= "wh3_dlc24_tze_the_changeling" then
+					self:grant_formless_horror_form(subtype_key, confederation:command_queue_index())
+				end
+			end
+		end,
+		true
+	);
 	
 	-- The below listeners are all based around missions, teleport networks, and schemes, which aren't available to the AI
 	if faction:is_human() then
@@ -2681,46 +2720,48 @@ function the_changeling_features:initialise()
 			"the_changeling_schemes_land_battles_in_theatre",
 			"BattleCompleted",
 			function()
-				return cm:pending_battle_cache_faction_won_battle(self.faction_key) and cm:model():pending_battle():battle_type() == "land_normal"
+				local pb = cm:model():pending_battle()
+				return cm:pending_battle_cache_faction_won_battle(self.faction_key) and pb:battle_type() == "land_normal" and not pb:region_data():region():is_null_interface()
 			end,
 			function()
 				local region = cm:model():pending_battle():region_data():region()
-					local chaos_wastes_mission = "wh3_dlc24_mission_schemes_chaos_wastes_minor_5"
-					if not self.schemes.schemes_complete[chaos_wastes_mission] and region:is_contained_in_region_group("wh3_dlc24_schemes_theatre_chaos_chaos_wastes") then
-						local battles_won = cm:get_saved_value("the_changeling_chaos_wastes_land_battles") or 0
-						battles_won = battles_won + 1
-						cm:set_scripted_mission_text(chaos_wastes_mission, "schemes", "mission_text_text_wh3_dlc24_mission_schemes_chaos_wastes_win_battles", battles_won)
-						if battles_won >= 15 then
-							cm:complete_scripted_mission_objective(self.faction_key, chaos_wastes_mission, "schemes", true)
-						end
-						cm:set_saved_value("the_changeling_chaos_wastes_land_battles", battles_won)
-
+				
+				local chaos_wastes_mission = "wh3_dlc24_mission_schemes_chaos_wastes_minor_5"
+				if not self.schemes.schemes_complete[chaos_wastes_mission] and region:is_contained_in_region_group("wh3_dlc24_schemes_theatre_chaos_chaos_wastes") then
+					local battles_won = cm:get_saved_value("the_changeling_chaos_wastes_land_battles") or 0
+					battles_won = battles_won + 1
+					cm:set_scripted_mission_text(chaos_wastes_mission, "schemes", "mission_text_text_wh3_dlc24_mission_schemes_chaos_wastes_win_battles", battles_won)
+					if battles_won >= 15 then
+						cm:complete_scripted_mission_objective(self.faction_key, chaos_wastes_mission, "schemes", true)
 					end
+					cm:set_saved_value("the_changeling_chaos_wastes_land_battles", battles_won)
 
-					local empire_mission = "wh3_dlc24_mission_schemes_the_empire_minor_4"
-					if not self.schemes.schemes_complete[empire_mission] and (region:is_contained_in_region_group("wh3_dlc24_schemes_theatre_chaos_the_empire") or region:is_contained_in_region_group("wh3_dlc24_schemes_theatre_ie_the_empire")) then
-						local battles_won = cm:get_saved_value("the_changeling_the_empire_land_battles") or 0
-						battles_won = battles_won + 1
-						cm:set_scripted_mission_text(empire_mission, "schemes", "mission_text_text_wh3_dlc24_mission_schemes_the_empire_win_battles", battles_won)
-						if battles_won >= 15 then
-							cm:complete_scripted_mission_objective(self.faction_key, empire_mission, "schemes", true)
-						end
-						cm:set_saved_value("the_changeling_the_empire_land_battles", battles_won)
+				end
 
+				local empire_mission = "wh3_dlc24_mission_schemes_the_empire_minor_4"
+				if not self.schemes.schemes_complete[empire_mission] and (region:is_contained_in_region_group("wh3_dlc24_schemes_theatre_chaos_the_empire") or region:is_contained_in_region_group("wh3_dlc24_schemes_theatre_ie_the_empire")) then
+					local battles_won = cm:get_saved_value("the_changeling_the_empire_land_battles") or 0
+					battles_won = battles_won + 1
+					cm:set_scripted_mission_text(empire_mission, "schemes", "mission_text_text_wh3_dlc24_mission_schemes_the_empire_win_battles", battles_won)
+					if battles_won >= 15 then
+						cm:complete_scripted_mission_objective(self.faction_key, empire_mission, "schemes", true)
 					end
+					cm:set_saved_value("the_changeling_the_empire_land_battles", battles_won)
 
-					local cathay_mission = "wh3_dlc24_mission_schemes_grand_cathay_minor_2"
-					if not self.schemes.schemes_complete[cathay_mission] and (region:is_contained_in_region_group("wh3_dlc24_schemes_theatre_chaos_grand_cathay") or region:is_contained_in_region_group("wh3_dlc24_schemes_theatre_ie_grand_cathay")) then
-						local battles_won = cm:get_saved_value("the_changeling_grand_cathay_land_battles") or 0
-						battles_won = battles_won + 1
-						cm:set_scripted_mission_text(cathay_mission, "schemes", "mission_text_text_wh3_dlc24_mission_schemes_grand_cathay_win_battles", battles_won)
-						if battles_won >= 15 then
-							cm:complete_scripted_mission_objective(self.faction_key, cathay_mission, "schemes", true)
-						end
-						cm:set_saved_value("the_changeling_grand_cathay_land_battles", battles_won)
+				end
 
+				local cathay_mission = "wh3_dlc24_mission_schemes_grand_cathay_minor_2"
+				if not self.schemes.schemes_complete[cathay_mission] and (region:is_contained_in_region_group("wh3_dlc24_schemes_theatre_chaos_grand_cathay") or region:is_contained_in_region_group("wh3_dlc24_schemes_theatre_ie_grand_cathay")) then
+					local battles_won = cm:get_saved_value("the_changeling_grand_cathay_land_battles") or 0
+					battles_won = battles_won + 1
+					cm:set_scripted_mission_text(cathay_mission, "schemes", "mission_text_text_wh3_dlc24_mission_schemes_grand_cathay_win_battles", battles_won)
+					if battles_won >= 15 then
+						cm:complete_scripted_mission_objective(self.faction_key, cathay_mission, "schemes", true)
 					end
-				end,
+					cm:set_saved_value("the_changeling_grand_cathay_land_battles", battles_won)
+
+				end
+			end,
 			true
 		)
 		
@@ -2850,11 +2891,6 @@ function the_changeling_features:grant_formless_horror_form(agent_subtype, facti
 		agent_subtype = {"wh_pro02_vmp_isabella_von_carstein", "wh_dlc04_vmp_vlad_con_carstein"}
 	end
 
-	-- Ariel comes with the Sisters of Twilight
-	if agent_subtype == "wh2_dlc16_wef_sisters_of_twilight" then
-		agent_subtype = {"wh2_dlc16_wef_sisters_of_twilight", "wh2_dlc16_wef_ariel"}
-	end
-
 	-- Convert any strings passed through to a table, to make it easier to handle unlocking multiple at the same time
 	if is_string(agent_subtype) then
 		agent_subtype = {agent_subtype}
@@ -2864,7 +2900,7 @@ function the_changeling_features:grant_formless_horror_form(agent_subtype, facti
 	for i = 1, #agent_subtype do
 		local current_agent_subtype = agent_subtype[i]
 		-- Before unlocking we need to make sure the agent subtype is valid in the current campaign, and that we haven't already unlocked it
-		if cm:is_agent_transformation_available(current_agent_subtype) and not the_changeling_features.formless_horror.unlocked_agent_subtypes[current_agent_subtype] then
+		if cm:is_agent_transformation_available(current_agent_subtype) and not self.formless_horror.unlocked_agent_subtypes[current_agent_subtype] then
 			self.formless_horror.unlocked_agent_subtypes[current_agent_subtype] = true
 			cm:set_saved_value("the_changeling_agent_subtypes_unlocked", self.formless_horror.unlocked_agent_subtypes)
 			cm:unlock_transformable_unit(faction_cqi, current_agent_subtype)
@@ -2873,7 +2909,7 @@ function the_changeling_features:grant_formless_horror_form(agent_subtype, facti
 			if mission then
 				self:complete_objective(mission)
 			end
-			
+
 			local faction = cm:model():faction_for_command_queue_index(faction_cqi)
 			
 			if faction:is_human() then
@@ -3885,7 +3921,32 @@ function the_changeling_features:grand_scheme_the_empire(kislev, darklands, amou
 		self:spawn_cultist(region_key, amount)
 	end
 
-	--Setting Reikland's imperial authority to the minimum value forces an empire politics civil war to occur
+	-- Loop through the Empire elector count factions and force a war between all of them. Also restrict peace so they can't talk it out
+	-- Uses the empire politics script to ensure parity with the Elector count list
+	for i = 1, #empire_politics_factions do
+		local faction_key = empire_politics_factions[i].faction
+		local faction = cm:get_faction(faction_key)
+
+		-- One sided human check is to ensure that a human player (in mpc) is declared on, but can still make peace/confederate
+		if faction and faction:was_confederated() == false and faction:is_human() == false then
+			for j = 1, #empire_politics_factions do
+				local secondary_faction_key = empire_politics_factions[j].faction
+				if faction_key ~= secondary_faction_key then
+					local secondary_faction = cm:get_faction(secondary_faction_key)
+					if secondary_faction then
+						cm:force_diplomacy("faction:" .. faction_key, "faction:" .. secondary_faction_key, "form confederation", false, false, true)
+						cm:force_diplomacy("faction:" .. faction_key, "faction:" .. secondary_faction_key, "peace", false, false, true)
+
+						if faction:is_dead() == false and secondary_faction:was_confederated() == false and secondary_faction:is_dead() == false and faction:at_war_with(secondary_faction) == false then
+							cm:force_declare_war(faction_key, secondary_faction_key, false, false)
+						end
+					end
+				end
+			end
+		end
+	end
+
+	--Setting Reikland's imperial authority to the minimum value forces the empire politics script into civil war
 	cm:faction_add_pooled_resource("wh_main_emp_empire", "emp_imperial_authority", "events_negative", -200)
 
 	local altdorf = {
