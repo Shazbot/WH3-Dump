@@ -547,20 +547,15 @@
 				<callback_with_context
 					callback_id="ContextInactiveStateSetter"
 					context_object_id="CcoMissionRecord"
-					context_function_id="PlayersFaction.MissionList.Any(MissionRecordContext == this)"/>
+					context_function_id="PlayersFaction.MissionList.Any(MissionRecordContext == this) &amp;&amp; PlayersFaction.MissionList.FirstContext(MissionRecordContext == this).IsTeleportEnabled"/>
 				<callback_with_context
 					callback_id="ContextCommandLeftClick"
 					context_object_id="CcoMissionRecord"
 					context_function_id="PlayersFaction.MissionList.FirstContext(MissionRecordContext == this).TeleportCharacter"/>
 				<callback_with_context
 					callback_id="ContextTooltipSetter"
-					context_object_id="CcoMissionRecord">
-					<child_m_user_properties>
-						<property
-							name="different_text_per_state"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
+					context_object_id="CcoMissionRecord"
+					context_function_id="GetIfElse(PlayersFaction.MissionList.Any(MissionRecordContext == this) , PlayersFaction.MissionList.FirstContext(MissionRecordContext == this).TeleportReasonTooltip, Format(Loc(&quot;ultimate_scheme_teleport_tooltip_locked&quot;), Schemes.GrandSchemesNeededForUltimateScheme, Schemes.NumGrandSchemesCompleted, Schemes.GrandSchemesNeededForUltimateScheme))"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -778,8 +773,6 @@
 					name="inactive"
 					width="406"
 					height="51"
-					tooltip="Complete {{CcoMissionRecord:Schemes.GrandSchemesNeededForUltimateScheme}} Grand Schemes to unlock the Ultimate Scheme battle.||Grand Schemes completed: {{CcoMissionRecord:Schemes.NumGrandSchemesCompleted}} / {{CcoMissionRecord:Schemes.GrandSchemesNeededForUltimateScheme}}"
-					tooltiplabel="StateTooltip_d4c9bca2"
 					interactive="true"
 					disabled="true"
 					pixelcollision="true"

@@ -1467,6 +1467,9 @@ victory_objectives_ie = {
 					}
 				}
 			},
+			wh_main_long_victory = {
+				payload_bundle = "wh3_main_ie_victory_objective_nakai_long"	
+			},
 			no_subculture_objective = true
 		},
 
@@ -2915,7 +2918,7 @@ function victory_objectives_ie:create_multiplayer_mission(faction_key)
 
 	self:create_multiplayer_objective(mm, faction_key)
 
-	self:trigger_mission(mm, self.victory_type.multiplayer)
+	self:trigger_mission(faction_key, mm, self.victory_type.multiplayer)
 end
 
 -- Faction victory utilises the faction unique objectives (if any)
@@ -2928,7 +2931,7 @@ function victory_objectives_ie:create_faction_mission(faction_key, faction_align
 	self:create_faction_objective(mm, faction_key)
 	self:create_alignment_objective(mm, faction_alignment, mission_key, faction_key)
 
-	self:trigger_mission(mm, self.victory_type.faction, mission_key, faction_alignment)
+	self:trigger_mission(faction_key, mm, self.victory_type.faction, mission_key, faction_alignment)
 end
 
 -- Long victory combines the faction unique objectives (if any) with the subculture objective
@@ -2947,7 +2950,7 @@ function victory_objectives_ie:create_long_mission(faction_key, faction_subcultu
 	self:create_alignment_objective(mm, faction_alignment, mission_key, faction_key)
 	self:create_long_objective(mm, faction_subculture_key, faction_key)
 
-	self:trigger_mission(mm, self.victory_type.subculture, mission_key, faction_alignment)
+	self:trigger_mission(faction_key, mm, self.victory_type.subculture, mission_key, faction_alignment)
 end
 
 -- Domination victory creates a generic objective to destroy factions of the opposing alignment
@@ -2958,16 +2961,22 @@ function victory_objectives_ie:create_domination_mission(faction_key)
 	
 	self:create_domination_objective(mm, faction_key)
 
-	self:trigger_mission(mm, self.victory_type.domination)
+	self:trigger_mission(faction_key, mm, self.victory_type.domination)
 end
 
 -- Take the mission manager after objectives have been added, and perform the shared functionality to trigger it
-function victory_objectives_ie:trigger_mission(mm, victory_type, mission_key, faction_alignment)
+function victory_objectives_ie:trigger_mission(faction_key, mm, victory_type, mission_key, faction_alignment)
 	
 	-- Add the permanent bonus for completing the objective, if applicable
 	local bundle = nil
 	if mission_key ~= nil and faction_alignment ~= nil then
 		bundle = self.alignments[faction_alignment][mission_key].payload_bundle
+		
+		-- override the bundle on a faction level if necessary
+		if self.factions[faction_key] and self.factions[faction_key][mission_key] then
+			bundle = self.factions[faction_key][mission_key].payload_bundle
+		end
+		
 		if is_table(bundle) then
 			for i = 1, #bundle do
 				if bundle[i] ~= nil then
@@ -3129,12 +3138,19 @@ cm:add_first_tick_callback_new(
 
 -- Trigger an incident after completing victory to let the player know they did it, and the reward for doing it
 function victory_objectives_ie:trigger_victory_incident(faction, mission_key, incident_key)
+	local faction_key = faction:name()
 	local faction_subculture_key = faction:subculture()
 	local faction_alignment = self.alignments.default
 	if self.subcultures[faction_subculture_key] then
 		faction_alignment = self.subcultures[faction_subculture_key].alignment
 	end
 	local bundle = self.alignments[faction_alignment][mission_key].payload_bundle
+	
+	-- override the bundle on a faction level if necessary
+	if self.factions[faction_key] and self.factions[faction_key][mission_key] then
+		bundle = self.factions[faction_key][mission_key].payload_bundle
+	end
+	
 	local incident_builder = cm:create_incident_builder(incident_key)
 	local payload = cm:create_new_custom_effect_bundle(bundle)
 	--if the effect bundle is nil skip duration
@@ -3144,7 +3160,7 @@ function victory_objectives_ie:trigger_victory_incident(faction, mission_key, in
 	local payload_builder = cm:create_payload()
 	payload_builder:effect_bundle_to_faction(payload)
 	incident_builder:set_payload(payload_builder)
-	cm:launch_custom_incident_from_builder(incident_builder, cm:get_faction(faction:name()))
+	cm:launch_custom_incident_from_builder(incident_builder, faction)
 end
 
 -- Listeners for scripted faction-specific objectives

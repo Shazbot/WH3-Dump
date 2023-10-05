@@ -275,7 +275,12 @@ function gotrek_setup()
 				cm:callback(
 					function()
 						cm:apply_effect_bundle_to_characters_force("wh2_pro08_gotrek_xp_sharing", char_cqi, 30, true)
-						cm:force_add_ancillary(cm:get_character_by_cqi(gotrek_details.gotrek_cqi), "wh2_pro08_anc_weapon_gotrek_axe", true, true)
+						
+						local gotrek_char = cm:get_character_by_cqi(gotrek_details.gotrek_cqi)
+						
+						if gotrek_char and not gotrek_char:has_ancillary("wh2_pro08_anc_weapon_gotrek_axe") then
+							cm:force_add_ancillary(gotrek_char, "wh2_pro08_anc_weapon_gotrek_axe", true, true)
+						end
 					end,
 					0.5
 				)
@@ -300,7 +305,10 @@ function gotrek_setup()
 							return
 						end
 						
-						cm:force_add_ancillary(cm:get_character_by_cqi(gotrek_details.felix_cqi), "wh2_pro08_anc_weapon_felix_sword", true, true)
+						if not felix_char:has_ancillary("wh2_pro08_anc_weapon_felix_sword") then
+							cm:force_add_ancillary(felix_char, "wh2_pro08_anc_weapon_felix_sword", true, true)
+						end
+						
 						local gotrek_char = cm:get_character_by_cqi(gotrek_details.gotrek_cqi)
 						
 						if gotrek_char and gotrek_char:has_military_force() then
@@ -547,6 +555,13 @@ function kill_gotrek_and_felix_characters()
 	local character_killed = false
 	
 	cm:disable_event_feed_events(true, "wh_event_category_character", "", "")
+	
+	-- remove their ancillaries from the faction
+	local faction = cm:get_faction(gotrek_details.owner)
+	if faction then
+		cm:force_remove_ancillary_from_faction(faction, "wh2_pro08_anc_weapon_gotrek_axe")
+		cm:force_remove_ancillary_from_faction(faction, "wh2_pro08_anc_weapon_felix_sword")
+	end
 	
 	local gotrek_char = cm:get_character_by_cqi(gotrek_details.gotrek_cqi)
 	
