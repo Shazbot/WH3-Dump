@@ -104,11 +104,8 @@ function endgame_will_of_hashut:trigger()
 	local human_factions = cm:get_human_factions()
 	local objectives = {
 		{
-			type = "CONTROL_N_REGIONS_FROM",
-			conditions = {
-				"total 3",
-				"override_text mission_text_text_mis_activity_control_n_regions_satrapy_including_n"
-			}
+			type = "RAZE_OR_OWN_SETTLEMENTS",
+			conditions = {}
 		}
 	}
 
