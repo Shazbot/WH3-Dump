@@ -1390,7 +1390,7 @@ local followers = {
 		["event"] = "CharacterRankUp",
 		["condition"] =
 			function(context)
-				return context:character():faction():research_queue_idle() and cm:model():turn_number() > 1;
+				return cm:get_saved_value("tech_researched_this_turn_" .. context:character():faction():name()) and cm:model():turn_number() > 1;
 			end,
 		["chance"] = 13
 	},
@@ -1426,7 +1426,7 @@ local followers = {
 		["event"] = "CharacterRankUp",
 		["condition"] =
 			function(context)
-				return context:character():faction():research_queue_idle() and cm:model():turn_number() > 1;
+				return cm:get_saved_value("tech_researched_this_turn_" .. context:character():faction():name()) and cm:model():turn_number() > 1;
 			end,
 		["chance"] = 15
 	},

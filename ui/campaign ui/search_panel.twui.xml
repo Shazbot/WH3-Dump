@@ -30,6 +30,7 @@
 					</button_list>
 					<campaign_search this="9DF81AA9-94BA-4BA3-B5A4240336377FBE">
 						<highlight this="27FCB58E-097A-4415-8C9BDAEE6CDC0571"/>
+						<button_clear_search this="F7DCAFE4-5380-426A-B776E28CF6DB0541"/>
 					</campaign_search>
 					<search_results this="DDB2E9D9-4801-43CD-ACA538713993FC03">
 						<listview this="9E6704EC-80C7-4203-98217AE09D735C43">
@@ -7081,5 +7082,89 @@
 				</inactive>
 			</states>
 		</vslider>
+		<button_clear_search
+			this="F7DCAFE4-5380-426A-B776E28CF6DB0541"
+			id="button_clear_search"
+			offset="322.00,6.00"
+			docking="Center Right"
+			dock_offset="-6.00,0.00"
+			component_anchor_point="1.00,0.50"
+			priority="51"
+			tooltipslocalised="true"
+			soundcategory="UI_GBL_TMP_Parchment_Row"
+			uniqueguid="F7DCAFE4-5380-426A-B776E28CF6DB0541"
+			currentstate="07BD62A1-586F-42D3-AFB7477333EFC128"
+			defaultstate="07BD62A1-586F-42D3-AFB7477333EFC128">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_function_id="self.ParentContext.GetText.IsEmpty == false">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignSearchChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_function_id="Do(self.ParentContext.InputSetText(&quot;&quot;), self.SetVisible(false), self.UiMsg(&quot;CampaignSearchChanged&quot;))"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="99D4832D-DE9F-460A-8652CAEAA883AF63"
+					uniqueguid="99D4832D-DE9F-460A-8652CAEAA883AF63"
+					imagepath="ui/skins/default/icon_cross_small.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="07BD62A1-586F-42D3-AFB7477333EFC128"
+					name="default"
+					width="22"
+					height="22"
+					interactive="true"
+					uniqueguid="07BD62A1-586F-42D3-AFB7477333EFC128"
+					stateeditordisplaypos="40.00,20.00">
+					<imagemetrics>
+						<image
+							this="AA154006-0C77-4A68-97E5F4666C07B9F4"
+							uniqueguid="AA154006-0C77-4A68-97E5F4666C07B9F4"
+							componentimage="99D4832D-DE9F-460A-8652CAEAA883AF63"
+							offset="-8.00,-8.00"
+							width="38"
+							height="38"
+							dockpoint="Center"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition transition_m_target_state="9D3615C4-156A-4010-B6413119B1FFC729"/>
+					</transitionmap>
+				</default>
+				<hover
+					this="9D3615C4-156A-4010-B6413119B1FFC729"
+					name="hover"
+					width="22"
+					height="22"
+					interactive="true"
+					shader_name="brighten_t0"
+					shadervars="1.00,0.00,0.00,0.00"
+					uniqueguid="9D3615C4-156A-4010-B6413119B1FFC729"
+					stateeditordisplaypos="178.00,107.00">
+					<imagemetrics>
+						<image
+							this="BE4179E3-95A3-4991-90FB9E7B62B500DE"
+							uniqueguid="BE4179E3-95A3-4991-90FB9E7B62B500DE"
+							componentimage="99D4832D-DE9F-460A-8652CAEAA883AF63"
+							offset="-8.00,-8.00"
+							width="38"
+							height="38"
+							dockpoint="Center"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="07BD62A1-586F-42D3-AFB7477333EFC128"/>
+					</transitionmap>
+				</hover>
+			</states>
+		</button_clear_search>
 	</components>
 </layout>

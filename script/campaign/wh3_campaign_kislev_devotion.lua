@@ -349,40 +349,25 @@ function setup_kislev_devotion()
 		end	
 		if follower_thresholds[4].completed == false and follower_thresholds[3].completed == true   then
 			if followers_katarin >= follower_thresholds[4].follower_threshold then
-				local title_final_katarin = "event_feed_strings_text_wh3_main_event_feed_scripted_event_followers_katarin_final_title"
-				local description_final_katarin = "event_feed_strings_text_wh3_main_event_feed_scripted_event_followers_katarin_final_description"
 				effect_bundle_update(4, faction_katarin:name(), current_winner)
 				follower_thresholds[4].completed = true;
 				follower_thresholds[4].winner = faction_katarin:name();
 				current_winner = faction_katarin:name()
 
 				if cm:is_multiplayer() == false or faction_kostaltyn:is_human() == false then
-					trigger_event(title_final_katarin, description_final_katarin)
-					force_confederation(faction_katarin, faction_kostaltyn)
+					trigger_final_supporters_dilemma(current_winner, faction_kostaltyn:name(), "wh3_main_ksl_dilemma_supporters_katarin")
 				end
 			elseif followers_kostaltyn >= follower_thresholds[4].follower_threshold then
-				local title_final_kostaltyn = "event_feed_strings_text_wh3_main_event_feed_scripted_event_followers_kostaltyn_final_title"
-				local description_final_kostaltyn = "event_feed_strings_text_wh3_main_event_feed_scripted_event_followers_kostaltyn_final_description"
 				effect_bundle_update(4, faction_kostaltyn:name(), current_winner)
 				follower_thresholds[4].completed = true;
 				follower_thresholds[4].winner = faction_kostaltyn:name();
 				current_winner = faction_kostaltyn:name()
 
 				if cm:is_multiplayer() == false or faction_katarin:is_human() == false then
-					trigger_event(title_final_kostaltyn, description_final_kostaltyn)
-					force_confederation(faction_kostaltyn, faction_katarin)
+					trigger_final_supporters_dilemma(current_winner, faction_katarin:name(), "wh3_main_ksl_dilemma_supporters_kostaltyn")
 				end
 			end
 		end	
-	end
-
-	-- Function to force confederation
-	function force_confederation(faction1, faction2)
-		if not faction2:is_human() then
-			cm:force_confederation(faction1:name(), faction2:name());
-		else
-			cm:apply_effect_bundle("wh3_main_ksl_reward_ai_motherland_victory", faction1:name(), 0)
-		end
 	end
 
 	-- Function to trigger event
@@ -568,6 +553,37 @@ end
 
 function has_supporters_pooled_resource(faction)
 	return not faction:pooled_resource_manager():resource("wh3_main_ksl_followers"):is_null_interface()
+end
+
+function trigger_final_supporters_dilemma(winner, loser, dilemma)
+	-- allow war again as the race is over
+	cm:force_diplomacy("faction:wh3_main_ksl_the_ice_court", "faction:wh3_main_ksl_the_great_orthodoxy", "war", true, true, true)
+	
+	if cm:get_faction(loser):is_human() then
+		cm:apply_effect_bundle("wh3_main_ksl_reward_ai_motherland_victory", winner, 0)
+	else
+		cm:trigger_dilemma(winner, dilemma)
+		
+		core:add_listener(
+			"final_supporters_dilemma_choice",
+			"DilemmaChoiceMadeEvent",
+			function(context)
+				return context:dilemma() == dilemma
+			end,
+			function(context)
+				local choice = context:choice()
+				
+				if choice == 0 then
+					cm:force_confederation(winner, loser)
+				elseif choice == 1 then
+					cm:force_alliance(winner, loser, true)
+				else
+					cm:force_declare_war(winner, loser, false, false)
+				end
+			end,
+			false
+		)
+	end
 end
 
 --------------------------------------------------------------

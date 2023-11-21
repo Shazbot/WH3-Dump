@@ -178,6 +178,7 @@
 				<tech_search this="89DF32F2-F4D2-4B17-A0B39A685356C840">
 					<highlight this="4587A971-6D0B-4C6D-A8303E8F00CA18E2"/>
 					<prompt_text this="424FCF3B-6FA2-42A6-82FBDAB0CC9E762D"/>
+					<button_clear_search this="C7577576-E175-424E-9486A9E7EDE3FDE7"/>
 				</tech_search>
 				<dy_dae_descr this="84B210AE-2DB8-4319-A031E506767B52C1"/>
 				<tabs this="D390D1BB-5813-461A-B85BAB292DC731B7">
@@ -8911,7 +8912,7 @@
 				<callback_with_context
 					callback_id="ContextCommandEvent"
 					context_object_id="CcoTechnologyUiTabRecord"
-					context_function_id="DoIf((IsContextValid(PlayersFaction.TechnologyManagerContext.CurrentResearchingTechnologyContext) &amp;&amp; PlayersFaction.TechnologyManagerContext.CurrentResearchingTechnologyContext.UiTabContext == this) || (IsContextValid(PlayersFaction.TechnologyManagerContext.CurrentResearchingTechnologyContext) == false &amp;&amp; PlayersFaction.TechnologyManagerContext.ResearchedTechnologyList.LastContext.UiTabContext == this) , self.SimulateLClick)">
+					context_function_id="DoIf(self.IsSelected == false &amp;&amp; ( (IsContextValid(PlayersFaction.TechnologyManagerContext.CurrentResearchingTechnologyContext) &amp;&amp; PlayersFaction.TechnologyManagerContext.CurrentResearchingTechnologyContext.UiTabContext == this) || (IsContextValid(PlayersFaction.TechnologyManagerContext.CurrentResearchingTechnologyContext) == false &amp;&amp; PlayersFaction.TechnologyManagerContext.ResearchedTechnologyList.LastContext.UiTabContext == this)) , self.SimulateLClick)">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -8921,18 +8922,17 @@
 				<callback_with_context
 					callback_id="ContextCommandGiverOnContextSet"
 					context_object_id="CcoRTSelectedTech"
-					context_function_id="DoIf(PlayersFaction.TechnologyList.FirstContext(this.Key == RecordContext.Key).UiTabContext == StoredContext(&quot;CcoTechnologyUiTabRecord&quot;), self.SimulateLClick)"/>
+					context_function_id="DoIf(self.IsSelected == false &amp;&amp; PlayersFaction.TechnologyList.FirstContext(this.Key == RecordContext.Key).UiTabContext == StoredContext(&quot;CcoTechnologyUiTabRecord&quot;), self.SimulateLClick)"/>
 				<callback_with_context
 					callback_id="ContextObjectStore"
 					context_object_id="CcoTechnologyUiTabRecord"/>
-				<callback_with_context callback_id="ButtonAnimTrigger">
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_function_id="self.ParentContext(&quot;technology_panel&quot;).ClearStoredTechRecords">
 					<child_m_user_properties>
 						<property
-							name="target_anim"
-							value="chain_move_up"/>
-						<property
-							name="target_id"
-							value="chain_l"/>
+							name="ignore_simulated_clicks"
+							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbackwithcontextlist>
@@ -9960,5 +9960,89 @@
 				type="HorizontalList"
 				sizetocontent="true"/>
 		</dev_tier_pos_parent>
+		<button_clear_search
+			this="C7577576-E175-424E-9486A9E7EDE3FDE7"
+			id="button_clear_search"
+			offset="322.00,6.00"
+			docking="Center Right"
+			dock_offset="-6.00,0.00"
+			component_anchor_point="1.00,0.50"
+			priority="51"
+			tooltipslocalised="true"
+			soundcategory="UI_GBL_TMP_Parchment_Row"
+			uniqueguid="C7577576-E175-424E-9486A9E7EDE3FDE7"
+			currentstate="5550CA37-A71A-40A1-889C8D1DC9A4E846"
+			defaultstate="5550CA37-A71A-40A1-889C8D1DC9A4E846">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_function_id="self.ParentContext.GetText.IsEmpty == false">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="TechSearchChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_function_id="Do(self.ParentContext.InputSetText(&quot;&quot;), self.SetVisible(false), self.UiMsg(&quot;TechSearchChanged&quot;))"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="5F9C8E0C-FF3B-487F-BF66A756161FAF99"
+					uniqueguid="5F9C8E0C-FF3B-487F-BF66A756161FAF99"
+					imagepath="ui/skins/default/icon_cross_small.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="5550CA37-A71A-40A1-889C8D1DC9A4E846"
+					name="default"
+					width="22"
+					height="22"
+					interactive="true"
+					uniqueguid="5550CA37-A71A-40A1-889C8D1DC9A4E846"
+					stateeditordisplaypos="40.00,20.00">
+					<imagemetrics>
+						<image
+							this="411A3E1E-FAFE-464F-AA00FF417EFA89F7"
+							uniqueguid="411A3E1E-FAFE-464F-AA00FF417EFA89F7"
+							componentimage="5F9C8E0C-FF3B-487F-BF66A756161FAF99"
+							offset="-8.00,-8.00"
+							width="38"
+							height="38"
+							dockpoint="Center"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition transition_m_target_state="203BC7FD-676D-407B-A8B1745506081C7E"/>
+					</transitionmap>
+				</default>
+				<hover
+					this="203BC7FD-676D-407B-A8B1745506081C7E"
+					name="hover"
+					width="22"
+					height="22"
+					interactive="true"
+					shader_name="brighten_t0"
+					shadervars="1.00,0.00,0.00,0.00"
+					uniqueguid="203BC7FD-676D-407B-A8B1745506081C7E"
+					stateeditordisplaypos="178.00,107.00">
+					<imagemetrics>
+						<image
+							this="016BFB30-30A5-4E6D-9582DBCB4287BA78"
+							uniqueguid="016BFB30-30A5-4E6D-9582DBCB4287BA78"
+							componentimage="5F9C8E0C-FF3B-487F-BF66A756161FAF99"
+							offset="-8.00,-8.00"
+							width="38"
+							height="38"
+							dockpoint="Center"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="5550CA37-A71A-40A1-889C8D1DC9A4E846"/>
+					</transitionmap>
+				</hover>
+			</states>
+		</button_clear_search>
 	</components>
 </layout>

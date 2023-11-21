@@ -151,6 +151,8 @@ function start_game_all_factions()
 	-- load the campaign quest battle listners script
 	set_piece_battle_abilities:initialise();
 	
+	add_gotrek_felix_listeners();
+	
 	setup_ogre_contracts();
 	
 	setup_khorne_skulls();
@@ -233,24 +235,8 @@ function start_game_all_factions()
 	out.dec_tab();
 end;
 
-
-
-
--------------------------------------------------------
--- In multiplayer mode we fade to black when the UI loads, then
--- back to picture when the first tick occurs
--------------------------------------------------------
-
 cm:add_ui_created_callback_mp_new(
 	function()
 		cm:set_camera_height(10);		-- ensure the camera is not in strategic view when starting - it'll get moved after this
-		cm:fade_scene(0, 0);			-- fade to black immediately
 	end
 );
-
-cm:add_first_tick_callback_mp_new(
-	function()
-		cm:fade_scene(1, 1);			-- fade to picture over 1s
-	end
-);
-

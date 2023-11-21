@@ -69,15 +69,19 @@ gb:queue_help_on_message("hoppers", "wh_dlc07_qb_brt_louen_sword_of_couronne_04"
 
 -------ORDERS-------
 
+ga_ai_01:attack_on_message("battle_started",100);
 ga_ai_01:message_on_casualties("orcs_weak",0.5);
+ga_ai_01:message_on_proximity_to_enemy("beware_there_be_goblins",100);
+
 ga_ai_02:halt("battle_started");
 ga_ai_02:message_on_proximity_to_enemy("beware_there_be_goblins",150);
 ga_ai_02:message_on_proximity_to_enemy("louen_approach",50);
 ga_ai_02:release_on_message("louen_approach");
 ga_ai_02:release_on_message("orcs_weak",30000);
-ga_ai_03:reinforce_on_message ("louen_approach",60000);
 gb:message_on_time_offset("goblin_move", 300000);
 ga_ai_02:release_on_message("goblin_move");
+
+ga_ai_03:reinforce_on_message ("louen_approach",60000);
 ga_ai_03:message_on_any_deployed ("hoppers");
 
 

@@ -1299,7 +1299,6 @@ function Worldroots:add_worldroots_listeners()
 			cm:callback(function() Worldroots.vfx_active = false end, 4)
 			
 			magical_forest_info:SetInteractive(true)
-			Worldroots:set_magic_forest_panel_visibility(true)
 		end,
 		true
 	)

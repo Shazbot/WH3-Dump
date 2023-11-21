@@ -11,6 +11,9 @@
 						<template_line this="5492CDAB-9E10-4D89-A537CF8D30FE5C5D">
 							<line_segment this="9DCCD64D-9473-4B84-86658CD20D162B70"/>
 						</template_line>
+						<template_capture_line this="EB8CE464-F658-4789-A296EA7D3DEB1CE5">
+							<line_segment this="ACBB251A-D68B-42B3-A5E0210F6CE3EF15"/>
+						</template_capture_line>
 					</connected_lines_list>
 					<icon this="72F23502-32D0-4A23-8471C49C893BDA5E">
 						<fill_container this="FA0A3AC9-2465-46D5-B3C65C30181E6237">
@@ -176,8 +179,6 @@
 			id="capture_point_icon_internal"
 			uniqueguid_in_template="72AA5741-FB57-4642-9E5AFDCD0A27ADF6"
 			offset="604.00,344.00"
-			componentleveltooltip="{{tt:ui/battle ui/capture_point_tooltip}}"
-			tooltiplabel="capture_point_icon_Tooltip_e0063"
 			uniqueguid="72AA5741-FB57-4642-9E5AFDCD0A27ADF6"
 			updatewhennotvisible="true"
 			isaspectratiolocked="true"
@@ -239,16 +240,31 @@
 					context_object_id="CcoBattleCapturePoint"
 					context_function_id="SetMouseOver(false)"/>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
-					context_object_id="CcoBattleCapturePoint"/>
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoBattleCapturePoint">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/battle ui/capture_point_tooltip"/>
+						<property
+							name="on_hide_expression"
+							value="SetStickyTooltipActive(false)"/>
+						<property
+							name="on_show_expression"
+							value="SetStickyTooltipActive(true)"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextCommandEvent"
 					context_object_id="CcoBattleCapturePoint"
-					context_function_id="self.SetCallbackProperty(&quot;ContextWorldSpaceComponent&quot;,&quot;depth_disabled&quot;, GetIfElse(IsMouseOver, &quot;1&quot;, &quot;0&quot;))">
+					context_function_id="self.SetCallbackProperty(&quot;ContextWorldSpaceComponent&quot;,&quot;depth_disabled&quot;, GetIfElse(IsMouseOver || IsStickyTooltipActive, &quot;1&quot;, &quot;0&quot;))">
 					<child_m_user_properties>
 						<property
 							name="event0"
 							value="CapturePointMouseOverChanged"/>
+						<property
+							name="event1"
+							value="CapturePointStickyTooltipChanged"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbackwithcontextlist>
@@ -834,7 +850,6 @@
 			id="connected_lines_list"
 			uniqueguid_in_template="E8F1FEAA-9A05-48F5-BE1333B7C3705F3F"
 			offset="9.00,55.00"
-			visible="false"
 			tooltipslocalised="true"
 			uniqueguid="E8F1FEAA-9A05-48F5-BE1333B7C3705F3F"
 			currentstate="4183655D-281B-4618-9FBE904518C45169"
@@ -843,7 +858,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoBattleCapturePoint"
-					context_function_id="Join(ToggleableSlotTowersList, ToggleableSlotBarricadesList)"/>
+					context_function_id="Join(ToggleableSlotTowersList, ToggleableSlotBarricadesList, LinkedParentCapturePointContext, LinkedChildCapturePointsList)"/>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBattleCapturePoint"
@@ -878,6 +893,9 @@
 							value="1000"/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextListTemplateCallback"
+					context_object_id="CcoBattleToggleableSlot"/>
 			</callbackwithcontextlist>
 			<states>
 				<default
@@ -941,10 +959,21 @@
 			this="F21E53B5-7C01-433D-A5B8723140CF70A1"
 			id="lock_icon"
 			uniqueguid_in_template="F21E53B5-7C01-433D-A5B8723140CF70A1"
-			tooltipslocalised="true"
 			uniqueguid="F21E53B5-7C01-433D-A5B8723140CF70A1"
 			currentstate="DC372E2C-95D9-46FD-AB4F182871ACB8C7"
 			defaultstate="DC372E2C-95D9-46FD-AB4F182871ACB8C7">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="GetIfElse(IsNearingReLock, &quot;locking&quot;, GetIfElse(IsMouseOver, &quot;locked_highlight&quot;, &quot;default&quot;))">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
 					this="9AB76879-F5F9-4289-AA8B3A6017187FFE"
@@ -967,6 +996,42 @@
 							height="24"/>
 					</imagemetrics>
 				</default>
+				<locked_highlight
+					this="173063E6-A81A-4527-9128294F944B35B3"
+					name="locked_highlight"
+					width="24"
+					height="24"
+					shader_name="red_pulse_t0"
+					shadervars="0.00,0.25,1.00,0.00"
+					uniqueguid="173063E6-A81A-4527-9128294F944B35B3">
+					<imagemetrics>
+						<image
+							this="0EF072F4-CC0B-4BA4-B57B7F79EDF2CC8F"
+							uniqueguid="0EF072F4-CC0B-4BA4-B57B7F79EDF2CC8F"
+							componentimage="9AB76879-F5F9-4289-AA8B3A6017187FFE"
+							width="24"
+							height="24"/>
+					</imagemetrics>
+				</locked_highlight>
+				<locking
+					this="34EFE8F1-3434-4870-BBEA71350B6D9B2B"
+					name="locking"
+					width="24"
+					height="24"
+					disabled="true"
+					shader_name="glow_pulse_t0"
+					shadervars="0.15,1.00,1.00,0.00"
+					uniqueguid="34EFE8F1-3434-4870-BBEA71350B6D9B2B">
+					<imagemetrics>
+						<image
+							this="9927584F-1E46-43D0-9B934C2273FE0AA4"
+							uniqueguid="9927584F-1E46-43D0-9B934C2273FE0AA4"
+							componentimage="9AB76879-F5F9-4289-AA8B3A6017187FFE"
+							width="24"
+							height="24"
+							colour="#FFFFFFC4"/>
+					</imagemetrics>
+				</locking>
 			</states>
 		</lock_icon>
 		<lock_parent
@@ -985,7 +1050,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBattleCapturePoint"
-					context_function_id="BattleRoot.CaptureLocationManagerContext.TimeUntilAllCapturePointsAvailable &gt; 0 || this.IsLocked == true">
+					context_function_id="BattleRoot.CaptureLocationManagerContext.TimeUntilAllCapturePointsAvailable &gt; 0 || this.IsLockedForAlliance(BattleRoot.PlayerArmyContext.AllianceIndex)  == true || IsNearingReLock">
 					<child_m_user_properties>
 						<property
 							name="update_constant"
@@ -1152,5 +1217,106 @@
 				</default>
 			</states>
 		</line_segment>
+		<line_segment
+			this="ACBB251A-D68B-42B3-A5E0210F6CE3EF15"
+			id="line_segment"
+			uniqueguid_in_template="ACBB251A-D68B-42B3-A5E0210F6CE3EF15"
+			offset="6.00,64.00"
+			allowverticalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="ACBB251A-D68B-42B3-A5E0210F6CE3EF15"
+			updatewhennotvisible="true"
+			currentstate="02511B79-030A-4CA3-ADB4C3A43107EC3D"
+			defaultstate="02511B79-030A-4CA3-ADB4C3A43107EC3D">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="WorldSpaceLineConnectionCallback"
+					context_object_id="CcoBattleCapturePoint">
+					<child_m_user_properties>
+						<property
+							name="end_y_offset"
+							value="5"/>
+						<property
+							name="ending_point"
+							value="this.Position"/>
+						<property
+							name="start_y_offset"
+							value="24"/>
+						<property
+							name="starting_point"
+							value="self.ParentContext(&quot;capture_point_icon_internal&quot;).StoredContextFromParent(&quot;CcoBattleCapturePoint&quot;).Position"/>
+						<property
+							name="update_constant"
+							value="10000"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextColourSetter"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="self.ParentContext(&quot;capture_point_icon_internal&quot;).StoredContextFromParent(&quot;CcoBattleCapturePoint&quot;).ColourForHolder">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CaptureLocationStateChanged"/>
+						<property
+							name="update_constant"
+							value="1000"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="DE162D9E-9CC8-48AC-9E7E718C33CE4775"
+					uniqueguid="DE162D9E-9CC8-48AC-9E7E718C33CE4775"
+					imagepath="ui/skins/default/node_link_line_2.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="02511B79-030A-4CA3-ADB4C3A43107EC3D"
+					name="default"
+					width="50"
+					height="10"
+					uniqueguid="02511B79-030A-4CA3-ADB4C3A43107EC3D">
+					<imagemetrics>
+						<image
+							this="25B9AC2A-F83D-4A5C-9B589D4FDD119025"
+							uniqueguid="25B9AC2A-F83D-4A5C-9B589D4FDD119025"
+							componentimage="DE162D9E-9CC8-48AC-9E7E718C33CE4775"
+							width="50"
+							height="10"
+							colour="#FFB900C8"
+							dockpoint="Center"
+							canresizeheight="false"
+							margin="0.00,20.00,0.00,20.00"
+							ui_colour_preset_type_key="alliance_player"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</line_segment>
+		<template_capture_line
+			this="EB8CE464-F658-4789-A296EA7D3DEB1CE5"
+			id="template_capture_line"
+			uniqueguid_in_template="EB8CE464-F658-4789-A296EA7D3DEB1CE5"
+			offset="10.00,10.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="EB8CE464-F658-4789-A296EA7D3DEB1CE5"
+			updatewhennotvisible="true"
+			currentstate="277C54B8-CCFA-403E-B670524A1E91B366"
+			defaultstate="277C54B8-CCFA-403E-B670524A1E91B366"
+			marked_for_deletion="true">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextListTemplateCallback"
+					context_object_id="CcoBattleCapturePoint"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="277C54B8-CCFA-403E-B670524A1E91B366"
+					name="default"
+					uniqueguid="277C54B8-CCFA-403E-B670524A1E91B366"/>
+			</states>
+		</template_capture_line>
 	</components>
 </layout>

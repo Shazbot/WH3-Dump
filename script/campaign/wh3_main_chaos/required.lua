@@ -30,6 +30,7 @@ require("wh_quests");
 require("wh_campaign_ror_recruitment");
 require("wh3_campaign_set_piece_battle_abilities")
 require("wh2_campaign_forced_battle_manager")
+require("wh2_pro08_gotrek_felix")
 
 -- narrative events
 require("wh3_campaign_payload_remapping");

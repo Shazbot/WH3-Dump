@@ -4376,7 +4376,7 @@
 				<callback_with_context
 					callback_id="ContextCommandGiverOnContextSet"
 					context_object_id="CcoCampaignBuildingSlot"
-					context_function_id="GetIfElse(IsEmpty &amp;&amp; ShouldShowCategoriesPopup, self.SetProperty(&quot;mouseover&quot;, &quot;building_categories_popup&quot;),   GetIfElse(CanShowUpgradeOptions, self.SetProperty(&quot;mouseover&quot;, &quot;building_construction_popup&quot;), self.SetProperty(&quot;mouseover&quot;, &quot;&quot;)))"/>
+					context_function_id="GetIfElse(IsContextValid(self.ParentContext(&quot;building_browser&quot;)), GetIfElse(IsEmpty == false &amp;&amp; CanShowOptionsPopup &amp;&amp; (IsPrimary == false || CharacterContext.MilitaryForceContext.IsFixedCamp == false), self.SetProperty(&quot;mouseover&quot;, &quot;options_list&quot;), self.SetProperty(&quot;mouseover&quot;, &quot;&quot;)), GetIfElse(IsEmpty &amp;&amp; ShouldShowCategoriesPopup, self.SetProperty(&quot;mouseover&quot;, &quot;building_categories_popup&quot;),   GetIfElse(CanShowUpgradeOptions, self.SetProperty(&quot;mouseover&quot;, &quot;building_construction_popup&quot;), self.SetProperty(&quot;mouseover&quot;, &quot;&quot;))))"/>
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoCampaignBuildingSlot">
@@ -4413,6 +4413,9 @@
 				<callback_with_context
 					callback_id="ContextObjectStore"
 					context_object_id="CcoCampaignSettlement"/>
+				<callback_with_context
+					callback_id="ContextCommandGiverOnCreate"
+					context_function_id="DoIf(IsContextValid(self.ParentContext(&quot;building_browser&quot;)), self.SetProperty(&quot;parent&quot;, &quot;building_browser&quot;))"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property

@@ -416,7 +416,7 @@ function gotrek_setup()
 		"gotrek_FactionBeginTurnPhaseNormal",
 		"WorldStartRound",
 		function()
-			return gotrek_details.cooldown > 0 and (gotrek_details.state == gotrek_state.cooldown or gotrek_details.state == gotrek_state.cooldown_ai)
+			return gotrek_details.cooldown and gotrek_details.cooldown > 0 and gotrek_details.state and (gotrek_details.state == gotrek_state.cooldown or gotrek_details.state == gotrek_state.cooldown_ai)
 		end,
 		function()
 			gotrek_details.cooldown = gotrek_details.cooldown - 1

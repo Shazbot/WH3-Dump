@@ -177,7 +177,8 @@ campaign_traits = {
 		["wh3_main_sc_nur_nurgle"] = "nurgle",
 		["wh3_main_sc_ogr_ogre_kingdoms"] = "ogre_kingdoms",
 		["wh3_main_sc_sla_slaanesh"] = "slaanesh",
-		["wh3_main_sc_tze_tzeentch"] = "tzeentch"
+		["wh3_main_sc_tze_tzeentch"] = "tzeentch",
+		["wh3_dlc23_sc_chd_chaos_dwarfs"] = "chaos_dwarfs"
 	},
 	action_key_to_action = {
 		["wh2_main_agent_action_champion_hinder_agent_assassinate"] = "Assassinate",

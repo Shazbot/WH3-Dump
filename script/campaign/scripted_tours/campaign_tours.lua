@@ -2098,7 +2098,7 @@ function trigger_in_hexes()
 				if uic_hex_list_child then
 					for i = 0, uic_hex_list_child:ChildCount() - 1 do
 						uic_hex = UIComponent(uic_hex_list_child:Find(i))
-						if uic_hex then
+						if uic_hex and uic_hex:CurrentState() ~= "inactive" then
 							uic_hex:SetDisabled(should_disable)
 						end
 					end
@@ -3069,6 +3069,10 @@ function trigger_in_formless_horror()
 			cm:steal_escape_key(false)
 			common.enable_all_shortcuts(true)
 			disable_race_filters(false)
+			local uic_button_ok = find_uicomponent("character_details_panel", "button_ok")
+			if uic_button_ok then
+				uic_button_ok:SetDisabled(false)
+			end
 			cm:steal_user_input(false)
 			
 			nt_formless_horror:restore_scripted_tour_controls_priority()
@@ -3092,7 +3096,8 @@ function trigger_in_formless_horror()
 			-- If this is still in the next section (the character details panel), close it.
 			if cm:get_campaign_ui_manager():is_panel_open("character_details_panel") then
 				local uic_button_ok = find_uicomponent("character_details_panel", "button_ok")
-				if uic_button_ok then 
+				if uic_button_ok then
+					uic_button_ok:SetDisabled(false)
 					cm:steal_user_input(false)
 					uic_button_ok:SimulateLClick()
 					cm:steal_user_input(true)
@@ -3175,6 +3180,9 @@ function trigger_in_formless_horror()
 			end
 			
 			disable_race_filters(true)
+			
+			local uic_button_ok = find_uicomponent("character_details_panel", "button_ok")
+			uic_button_ok:SetDisabled(true)
 			
 			-- Unlock input
 			cm:steal_user_input(false)

@@ -77,7 +77,15 @@ function add_grom_story_listeners()
 		setup_black_toof_mission_listener(BlacktoofMissionsCurrent);
 	end
 	
-	setup_black_toof_prophecies_listener();
+	core:add_listener(
+		"wh2_dlc15_grom_blacktoof_prophecy_0",
+		"GromUnlockedAllTheCauldronSlots",
+		true,
+		function(context)
+			cm:complete_scripted_mission_objective(Grom_faction, "wh2_dlc15_grom_blacktoof_prophecy_0", "prophecies_0", true);
+		end,
+		true
+	)
 end
 
 --this will setup 1 of the 3 prophecies from blacktoof
@@ -99,22 +107,10 @@ function setup_black_toofs_prophecies()
 	mm:set_should_whitelist(false);
 	mm:trigger();
 	
-	setup_black_toof_prophecies_listener();
-	
 	cm:trigger_mission(Grom_faction, "wh2_dlc15_grom_blacktoof_prophecy_1", true);
 	cm:trigger_mission(Grom_faction, "wh2_dlc15_grom_blacktoof_prophecy_2", true);
-end
-
-function setup_black_toof_prophecies_listener()
-	core:add_listener(
-		"wh2_dlc15_grom_blacktoof_prophecy_0",
-		"GromUnlockedAllTheCauldronSlots",
-		true,
-		function(context)
-			cm:complete_scripted_mission_objective(Grom_faction, "wh2_dlc15_grom_blacktoof_prophecy_0", "prophecies_0", true);
-		end,
-		true
-	);
+	
+	check_blacktoof_mission_requirement();
 end
 
 function trigger_black_toof_mission(index)

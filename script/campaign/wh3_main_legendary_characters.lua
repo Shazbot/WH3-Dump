@@ -1025,15 +1025,18 @@ function character_unlocking:spawn_hero(faction_name, character, spawn_character
 							)
 						end
 					else 
-						character_ancillaries_ai = character_ancillaries .. "_ai"
 						core:add_listener(
-							character_ancillaries_ai,
+							character_ancillaries .. "_ai",
 							"WorldStartRound",
-							true,
 							function()
-								if character_info.ancillaries then
+								return character_info.ancillaries
+							end,
+							function()
+								local ai_character = cm:get_character_by_cqi(cqi)
+								
+								if ai_character then
 									for i = 1, #character_info.ancillaries do
-										cm:force_add_ancillary(agent, character_info.ancillaries[i], false, true)
+										cm:force_add_ancillary(ai_character, character_info.ancillaries[i], false, true)
 									end
 								end
 							end,

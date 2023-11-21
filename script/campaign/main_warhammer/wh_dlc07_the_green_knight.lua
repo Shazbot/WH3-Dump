@@ -11,12 +11,10 @@ function add_green_knight_listeners()
 			end,
 			function(context)
 				local faction = context:faction()
-				for i = 0, faction:unique_agents():num_items() - 1 do
-					--- technically Bretonnia has access to multiple unique agents. This works on the assumption that none of them will be a valid spawn.
-					local unique_agent = faction:unique_agents():item_at(i)
-					out("Spawn_AI_Green_Knight check for faction: " .. faction:name() .. " - Agent: " .. unique_agent:agent_key() .. " (" .. unique_agent:charges_expended() .. "/" .. unique_agent:charges()..")")
-					if unique_agent:valid() then
-						out("Attempting to spawning AI Green Knight for faction"..faction:name())
+				
+				for _, unique_agent in model_pairs(faction:unique_agents()) do
+					if unique_agent:agent_subtype_key() == "wh_dlc07_brt_green_knight" and unique_agent:valid() then
+						out("Attempting to spawn AI Green Knight for faction " .. faction:name())
 						cm:spawn_unique_agent(faction:command_queue_index(), "wh_dlc07_brt_green_knight", false)
 						break
 					end

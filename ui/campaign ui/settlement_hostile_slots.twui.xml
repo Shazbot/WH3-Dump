@@ -624,6 +624,13 @@
 			defaultstate="C07AF3DF-6015-4FDE-9459C294ADE41439">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="ResizeToFitParent"/>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignFaction"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="HostileSlotsGroupList.FirstContext(GroupedList.FirstContext.ForeignSlotDiscoveredByFaction(PlayersFaction) &amp;&amp; CategoryObject.IsPlayersFaction == false).CategoryObject"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -649,7 +656,13 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="GetIfElse(Buildings.ShouldShowSettlementDiscoveredSlots, HostileSlotsGroupList.FirstContext(GroupedList.FirstContext.ForeignSlotDiscoveredByFaction(PlayersFaction) &amp;&amp; CategoryObject.IsPlayersFaction == false).CategoryObject.CultureContext.Key == &quot;wh2_main_skv_skaven&quot;, HostileSlotsGroupList.Any(CategoryObject.CultureContext.Key == &quot;wh2_main_skv_skaven&quot; &amp;&amp; CategoryObject.IsPlayersFaction))"/>
+					context_function_id="GetIfElse(Buildings.ShouldShowSettlementDiscoveredSlots, HostileSlotsGroupList.FirstContext(CategoryObject == StoredContextFromParent(&quot;CcoCampaignFaction&quot;)).CategoryObject.CultureContext.Key == &quot;wh2_main_skv_skaven&quot;, HostileSlotsGroupList.Any(CategoryObject.CultureContext.Key == &quot;wh2_main_skv_skaven&quot; &amp;&amp; CategoryObject.IsPlayersFaction))">
+					<child_m_user_properties>
+						<property
+							name="object_store_events"
+							value="^1"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -727,30 +740,17 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="HostileForeignSlotList(StoredContext(&quot;CcoCampaignFaction&quot;))">
+					context_function_id="GetIfElse(Buildings.ShouldShowSettlementDiscoveredSlots, HostileForeignSlotList(StoredContextFromParent(&quot;CcoCampaignFaction&quot;)), HostileForeignSlotList(PlayersFaction))">
 					<child_m_user_properties>
 						<property
 							name="event0"
 							value="ForeignSlotRemoved"/>
 						<property
 							name="object_store_events"
-							value=""/>
+							value="^2"/>
 						<property
 							name="template_layout"
 							value="ui/campaign ui/settlement_building_slot"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextObjectStore"
-					context_object_id="CcoCampaignFaction"/>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoCampaignSettlement"
-					context_function_id="HostileSlotsGroupList.FirstContext(CategoryObject.CultureContext.Key.Contains(&quot;wh3_main_&quot;) &amp;&amp; (CategoryObject.IsPlayersFaction || GroupedList.FirstContext.ForeignSlotDiscoveredByFaction(PlayersFaction)) ).CategoryObject">
-					<child_m_user_properties>
-						<property
-							name="only_target"
-							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbackwithcontextlist>
@@ -890,30 +890,17 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="HostileForeignSlotList(StoredContext(&quot;CcoCampaignFaction&quot;))">
+					context_function_id="GetIfElse(Buildings.ShouldShowSettlementDiscoveredSlots, HostileForeignSlotList(StoredContextFromParent(&quot;CcoCampaignFaction&quot;)), HostileForeignSlotList(PlayersFaction))">
 					<child_m_user_properties>
 						<property
 							name="event0"
 							value="ForeignSlotRemoved"/>
 						<property
 							name="object_store_events"
-							value=""/>
+							value="^3"/>
 						<property
 							name="template_layout"
 							value="ui/campaign ui/settlement_building_slot"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextObjectStore"
-					context_object_id="CcoCampaignFaction"/>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoCampaignSettlement"
-					context_function_id="HostileSlotsGroupList.FirstContext(CategoryObject.CultureContext.Key == &quot;wh2_main_skv_skaven&quot; &amp;&amp; (CategoryObject.IsPlayersFaction || GroupedList.FirstContext.ForeignSlotDiscoveredByFaction(PlayersFaction)) ).CategoryObject">
-					<child_m_user_properties>
-						<property
-							name="only_target"
-							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbackwithcontextlist>
@@ -1130,7 +1117,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="GetIfElse(Buildings.ShouldShowSettlementDiscoveredSlots, HostileSlotsGroupList.FirstContext(GroupedList.FirstContext.ForeignSlotDiscoveredByFaction(PlayersFaction) &amp;&amp; CategoryObject.IsPlayersFaction == false).CategoryObject.CultureContext.Key.Contains(&quot;wh3_main_&quot;), HostileSlotsGroupList.Any(CategoryObject.CultureContext.Key.Contains(&quot;wh3_main_&quot;) &amp;&amp; CategoryObject.IsPlayersFaction))">
+					context_function_id="GetIfElse(Buildings.ShouldShowSettlementDiscoveredSlots, HostileSlotsGroupList.FirstContext(CategoryObject == StoredContextFromParent(&quot;CcoCampaignFaction&quot;)).CategoryObject.CultureContext.Key.Contains(&quot;wh3_main_&quot;), HostileSlotsGroupList.Any(CategoryObject.CultureContext.Key.Contains(&quot;wh3_main_&quot;) &amp;&amp; CategoryObject.IsPlayersFaction))">
 					<child_m_user_properties>
 						<property
 							name="event2"
@@ -1138,6 +1125,9 @@
 						<property
 							name="event3"
 							value="CampaignBuildingStateChanged"/>
+						<property
+							name="object_store_events"
+							value="^1"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context callback_id="ResizeToFitParent"/>

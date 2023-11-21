@@ -51,6 +51,9 @@ gb:queue_help_on_message("wave_arrive", "wh_dlc06_qb_grn_skarsnik_skarsniks_prod
 gb:message_on_time_offset("start_ambush", 1);
 
 ga_ai_01:message_on_casualties("monsters_are_dead", 0.6); 
+ga_player_01:message_on_proximity_to_enemy("player_close", 180);
+ga_ai_01:attack_on_message("player_close", 100);
+
 ga_ai_02:reinforce_on_message("monsters_are_dead",15000);
 ga_ai_02:message_on_deployed("wave_arrive"); 
 

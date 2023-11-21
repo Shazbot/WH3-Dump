@@ -84,6 +84,8 @@ local ingredients_data = {
 			"wh3_dlc23_chd_cha_sorcerer_prophet_hashut_lammasu",
 			"wh3_dlc23_chd_cha_sorcerer_prophet_metal_lammasu",
 			"wh3_dlc23_chd_cha_zhatan_the_black_lammasu",
+			"wh3_dlc24_cth_mon_jade_lion",
+			"wh3_dlc24_cth_mon_jet_lion"
 		}
 	},
 	wh2_dlc15_lizard = {
@@ -240,7 +242,9 @@ local ingredients_data = {
 			"wh3_main_cth_cha_iron_dragon_0",
 			"wh3_main_cth_cha_iron_dragon_1",
 			"wh3_main_cth_cha_storm_dragon_0",
-			"wh3_main_cth_cha_storm_dragon_1"
+			"wh3_main_cth_cha_storm_dragon_1",
+			"wh3_dlc24_cth_cha_yuan_bo_dragon",
+			"wh3_dlc24_cth_cha_yuan_bo_human"
 		}
 	},
 	wh2_dlc15_eagle = {
@@ -308,7 +312,8 @@ local ingredients_data = {
 		merchant_dilemma = "wh2_dlc15_dilemma_food_merchant_19",
 		units_to_recruit = {
 			wh_main_grn_inf_night_goblin_fanatics = true,
-			wh_main_grn_inf_night_goblin_fanatics_1 = true
+			wh_main_grn_inf_night_goblin_fanatics_1 = true,
+			wh_dlc06_grn_inf_da_eight_peaks_loonies_0 = true
 		}
 	},
 	wh2_dlc15_stinky = {
@@ -356,7 +361,9 @@ local ingredients_data = {
 			"wh2_dlc11_cst_mon_mournguls_ror_0",
 			"wh2_dlc17_dwf_cha_thane_ghost_2",
 			"wh2_dlc16_wef_cav_great_stag_knights_ror_0",
-			"wh3_main_ksl_mon_elemental_bear_0"
+			"wh3_main_ksl_mon_elemental_bear_0",
+			"wh3_dlc24_ksl_mon_incarnate_elemental_of_beasts",
+			"wh3_twa08_ksl_mon_elemental_bear_0_ror"
 		}
 	},
 	wh2_dlc15_milk = {
@@ -393,6 +400,7 @@ local ingredients_data = {
 		cooking_callback = function() cm:add_units_to_faction_mercenary_pool(cm:get_faction(grom_faction_key):command_queue_index(), "wh2_dlc15_grn_cav_forest_goblin_spider_riders_waaagh_0", 5) end,
 		units_to_recruit = {
 			wh_main_grn_mon_arachnarok_spider_0 = true,
+			wh_dlc06_grn_mon_venom_queen_0 = true,
 			wh2_dlc15_grn_mon_arachnarok_spider_waaagh_0 = true
 		}
 	}
@@ -447,7 +455,7 @@ local food_challenge_ids = {{7, 8, 9}, {13, 14, 15, 16, 17}, {1, 2, 3, 4}}
 local food_challenge_rewards = {
 	{"effect_bundle{bundle_key wh2_dlc15_grom_increase_cooking_slot_1_dummy;turns 0;}", "money 3000"},
 	{"effect_bundle{bundle_key wh2_dlc15_grom_increase_cooking_slot_2_dummy;turns 0;}", "money 3000"},
-	{"faction_pooled_resource_transaction{resource grn_salvage;factor wh2_dlc12_resource_factor_loot;amount 150;}", "money 5000"}
+	{"faction_pooled_resource_transaction{resource grn_salvage;factor looting;amount 150;context absolute;}", "money 5000"}
 }
 
 local food_challenge_requirements = {
@@ -902,6 +910,10 @@ function check_blacktoof_mission_requirement()
 	if get_number_of_ingredients(true) >= blacktoof_required_ingredients_number then
 		core:trigger_event("GromHasUnlockedEnoughIngredients")
 	end
+	
+	if cm:model():world():cooking_system():faction_cooking_info(cm:get_faction(grom_faction_key)):max_secondary_ingredients() > 1 then
+		core:trigger_event("GromUnlockedAllTheCauldronSlots")
+	end
 end
 
 -- check and spawn food merchant
@@ -1039,11 +1051,9 @@ function setup_food_challenge_listener()
 			
 			if current_slots < 2 then
 				cm:set_faction_max_secondary_cooking_ingredients(faction, current_slots + 1)
-				
-				if current_slots == 1 then
-					core:trigger_event("GromUnlockedAllTheCauldronSlots")
-				end
 			end
+			
+			check_blacktoof_mission_requirement()
 			
 			current_food_challenge.is_active = false
 			current_food_challenge.id = current_food_challenge.id + 1

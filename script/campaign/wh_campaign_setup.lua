@@ -107,6 +107,9 @@ function setup_wh_campaign(generic_battle_script_path_override)
 
 	---prevent factions from declaring war on vassals
 	vassal_diplomacy_lock_listeners()
+	
+	-- track when a faction has completed technology on their turn
+	track_technology_researched()
 
 	if not cm:model():campaign_name("wh3_main_prologue") then
 		GeneratedConstants:generate_constants()
@@ -2497,6 +2500,34 @@ function disable_tax_and_public_order_for_regions(regions)
 		cm:set_public_order_disabled_for_province_for_region_for_all_factions_and_set_default(regions[i], true);
 	end;
 end;
+
+
+
+function track_technology_researched()
+	core:add_listener(
+		"research_completed_save_value",
+		"ResearchCompleted",
+		true,
+		function(context)
+			cm:set_saved_value("tech_researched_this_turn_" .. context:faction():name(), true)
+		end,
+		true
+	)
+	
+	core:add_listener(
+		"faction_turn_start_research_completed_save_value",
+		"FactionTurnEnd",
+		true,
+		function(context)
+			local faction_name = context:faction():name()
+			
+			if cm:get_saved_value("tech_researched_this_turn_" .. faction_name) then
+				cm:set_saved_value("tech_researched_this_turn_" .. faction_name, false)
+			end
+		end,
+		true
+	)
+end
 
 
 

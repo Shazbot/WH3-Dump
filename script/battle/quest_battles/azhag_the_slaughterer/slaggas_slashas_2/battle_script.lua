@@ -46,3 +46,6 @@ gb:queue_help_on_message("battle_started", "wh_main_qb_grn_azhag_the_slaughterer
 -------ORDERS-------
 
 ga_ai_02:reinforce_on_message("battle_started");
+ga_ai_02:message_on_proximity_to_enemy("player_close", 340);
+ga_ai_01:message_on_proximity_to_enemy("player_close", 500);
+ga_ai_01:attack_on_message("player_close", 50);

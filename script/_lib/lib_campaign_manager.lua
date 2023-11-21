@@ -6032,7 +6032,7 @@ function campaign_manager:get_closest_character_from_faction(faction, x, y)
 		local current_distance = distance_squared(x, y, current_char:logical_position_x(), current_char:logical_position_y());
 		if closest_distance == false or current_distance < closest_distance then
 			closest_distance = current_distance;
-			closest_character = current_character;
+			closest_character = current_char;
 		end;
 	end;
 	
@@ -9015,7 +9015,7 @@ function campaign_manager:force_gold_value(force)
 			local unit = unit_list:item_at(i);
 			
 			if unit:is_null_interface() == false then
-				force_value = force_value + (unit:get_unit_custom_battle_cost() * unit:percentage_proportion_of_full_strength() * 0.01);
+				force_value = force_value + (math.max(0, unit:get_unit_custom_battle_cost()) * unit:percentage_proportion_of_full_strength() * 0.01);
 			end
 		end
 	end

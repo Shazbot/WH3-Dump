@@ -6,6 +6,11 @@
 	<hierarchy>
 		<root this="FF8C630A-ED3E-4D1A-96878B325E8BA2E6">
 			<unit_information this="22193386-2217-43A5-A8637FFFF9BDE9EC">
+				<button_holder this="BBE29308-D6F8-41F9-A7BF5896F19279AF">
+					<info_toggle_holder this="4F66C501-2C26-4F69-85AAC3449DF8ED69">
+						<button_info_toggle this="D4FC1E3C-01BF-46FE-A248F045714D86A8"/>
+					</info_toggle_holder>
+				</button_holder>
 				<info_parent this="EF33DC9B-9952-4BF9-9C3C1CECE92587B4">
 					<info_panel this="AFBA1052-2EB2-4264-AA59E5B2D3A9751D">
 						<header this="4B71F999-5786-43A7-BE9023BC1980FA66">
@@ -211,11 +216,6 @@
 						</auto_resizing_comp>
 					</bar_extents_and_pos>
 				</stick_progress_bar>
-				<button_holder this="BBE29308-D6F8-41F9-A7BF5896F19279AF">
-					<info_toggle_holder this="4F66C501-2C26-4F69-85AAC3449DF8ED69">
-						<button_info_toggle this="D4FC1E3C-01BF-46FE-A248F045714D86A8"/>
-					</info_toggle_holder>
-				</button_holder>
 				<training_slot_lore_holder this="C79B4EAA-F31B-44E5-A03AB26621DB40F1">
 					<training_slot_lore_list this="D0852E8A-F639-446D-A352C55DFAFC16B1">
 						<template_ability_group this="27E6A338-5E5A-4663-8197DFDBE3DEFEF9">
@@ -1877,7 +1877,7 @@
 		<button_holder
 			this="BBE29308-D6F8-41F9-A7BF5896F19279AF"
 			id="button_holder"
-			offset="0.00,597.00"
+			offset="0.00,5.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			priority="46"
@@ -2529,11 +2529,11 @@
 		<info_toggle_holder
 			this="4F66C501-2C26-4F69-85AAC3449DF8ED69"
 			id="info_toggle_holder"
-			offset="283.00,-44.00"
+			offset="283.00,536.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			docking="Bottom Right"
-			dock_offset="9.00,-16.00"
+			dock_offset="9.00,564.00"
 			component_anchor_point="1.00,1.00"
 			priority="46"
 			tooltipslocalised="true"
@@ -3467,7 +3467,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoUnitDetails"
-					context_function_id="#Needs CcoUnitDetails declared so that the expression is called after the linking of the tooltip parent var# IsShowingExpandedUnitInfo == false"/>
+					context_function_id="self.ParentContext.ChildContext(&quot;row_header_abilities&quot;).IsVisible &amp;&amp; self.ParentContext.ChildContext(&quot;row_header_abilities&quot;).IsSelected == false"/>
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoUnitDetails"
@@ -6752,7 +6752,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoUnitDetails"
-					context_function_id="#Needs CcoUnitDetails declared so that the expression is called after the linking of the tooltip parent var#IsShowingExpandedUnitInfo"/>
+					context_function_id="IsShowingExpandedUnitInfo || self.ParentContext.ChildContext(&quot;row_header_abilities&quot;).IsSelected"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -8938,7 +8938,7 @@
 		<training_slot_lore_holder
 			this="C79B4EAA-F31B-44E5-A03AB26621DB40F1"
 			id="training_slot_lore_holder"
-			offset="2.00,593.00"
+			offset="2.00,594.00"
 			allowhorizontalresize="false"
 			dock_offset="2.00,-5.00"
 			priority="46"
@@ -9558,7 +9558,7 @@
 		<additional_explanation
 			this="9BCBE611-2031-41A7-BD97AC08A7D4AEAA"
 			id="additional_explanation"
-			offset="0.00,672.00"
+			offset="0.00,673.00"
 			clipchildren="true"
 			priority="255"
 			tooltipslocalised="true"
@@ -9663,7 +9663,7 @@
 		<info_parent
 			this="EF33DC9B-9952-4BF9-9C3C1CECE92587B4"
 			id="info_parent"
-			offset="0.00,5.00"
+			offset="0.00,6.00"
 			priority="46"
 			tooltipslocalised="true"
 			uniqueguid="EF33DC9B-9952-4BF9-9C3C1CECE92587B4"
@@ -9674,11 +9674,12 @@
 					this="7EBFA972-CA97-4CAA-A0DAF206E066883C"
 					name="default"
 					width="290"
-					height="592"
+					height="593"
 					uniqueguid="7EBFA972-CA97-4CAA-A0DAF206E066883C"/>
 			</states>
 			<LayoutEngine
 				type="List"
+				sizetocontent="true"
 				is_listview_lookup_enabled="false">
 				<columnwidths>
 					<column width="32"/>
@@ -9688,8 +9689,7 @@
 		<agent_panel_visibility_parent
 			this="0B4BDA17-49E3-41A3-B918F1405FEA8827"
 			id="agent_panel_visibility_parent"
-			offset="0.00,589.00"
-			dock_offset="0.00,-3.00"
+			offset="0.00,592.00"
 			priority="46"
 			tooltipslocalised="true"
 			uniqueguid="0B4BDA17-49E3-41A3-B918F1405FEA8827"
@@ -9754,6 +9754,7 @@
 			</animations>
 			<LayoutEngine
 				type="List"
+				sizetocontent="true"
 				is_listview_lookup_enabled="false">
 				<columnwidths>
 					<column width="1"/>
@@ -9826,6 +9827,7 @@
 			</animations>
 			<LayoutEngine
 				type="List"
+				sizetocontent="true"
 				is_listview_lookup_enabled="false">
 				<columnwidths>
 					<column width="1"/>

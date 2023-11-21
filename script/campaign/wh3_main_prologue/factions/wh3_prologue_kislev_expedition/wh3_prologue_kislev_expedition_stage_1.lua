@@ -1571,7 +1571,7 @@ if cm:is_new_game() then
 		cm:treasury_mod("wh3_prologue_tong", 6000)
 
 		-- set enemy faction personality so that they don't retreat from battle
-		cm:force_change_cai_faction_personality(enemy_faction_name, "wh_script_foolishly_brave");
+		--cm:force_change_cai_faction_personality(enemy_faction_name, "wh_script_foolishly_brave");
 		
 	end
 

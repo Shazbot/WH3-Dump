@@ -299,7 +299,11 @@ end;
 
 -- set new sword owner and update sword owner cache
 function sword_of_khaine:set_sword_owner(cqi, limited_to_elven, awarded_via_dilemma)
-	local character = cm:get_character_by_cqi(cqi); 
+	local character = false;
+	
+	if cqi then
+		character = cm:get_character_by_cqi(cqi); 
+	end;
 	
 	if not character or character:is_null_interface() or (limited_to_elven and not self:faction_is_elven(character:faction())) or character:faction():name() == "rebels" then
 		-- The character cqi isn't valid, or the sword is limited to elves and we're not elven, or the character is a rebel
@@ -384,7 +388,17 @@ function sword_of_khaine:level_up(awarded_via_dilemma)
 end;
 
 function sword_of_khaine:is_character_valid_to_equip_sword(character)
-	return not character:is_null_interface() and cm:char_is_general_with_army(character) and not character:military_force():is_armed_citizenry() and not character:character_subtype("wh2_main_def_black_ark") and not character:character_subtype("wh3_main_dae_daemon_prince");
+	local invalid_mf_types = {
+		DISCIPLE_ARMY = true,
+		OGRE_CAMP = true,
+		CARAVAN = true,
+		CONVOY = true
+	};
+	
+	if not character:is_null_interface() and cm:char_is_general_with_army(character) then
+		local mf = character:military_force();
+		return not mf:is_armed_citizenry() and not invalid_mf_types[mf:force_type():key()] and not character:character_subtype("wh2_main_def_black_ark") and not character:character_subtype("wh3_main_dae_daemon_prince") and not character:faction():is_quest_battle_faction();
+	end;
 end;
 
 function sword_of_khaine:find_candidate_for_faction(faction)
@@ -408,6 +422,8 @@ function sword_of_khaine:transfer_sword_after_battle(target_character)
 		else
 			self:set_sword_owner(cqi, false);
 		end;
+	else
+		self:set_sword_owner();
 	end;
 end;
 

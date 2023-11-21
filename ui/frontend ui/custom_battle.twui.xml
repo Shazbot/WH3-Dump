@@ -3429,6 +3429,9 @@
 				<callback_with_context callback_id="ButtonToggleSetting">
 					<child_m_user_properties>
 						<property
+							name="only_enable"
+							value=""/>
+						<property
 							name="panel"
 							value="recruitment_visibility_parent"/>
 						<property
@@ -3560,6 +3563,9 @@
 					<child_m_user_properties>
 						<property
 							name="invert"
+							value=""/>
+						<property
+							name="only_enable"
 							value=""/>
 						<property
 							name="setting"
@@ -17419,6 +17425,9 @@
 				<callback_with_context callback_id="ButtonGroupPanelSelector">
 					<child_m_user_properties>
 						<property
+							name="Single Selection"
+							value="1"/>
+						<property
 							name="dont_simulate_click"
 							value=""/>
 					</child_m_user_properties>
@@ -30476,11 +30485,12 @@
 						<property
 							name="layout"
 							value="ui/frontend ui/custom_battle_trials"/>
-						<property
-							name="visibility_based"
-							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTrashOnCondition"
+					context_object_id="CcoCustomBattleLobby"
+					context_function_id="SettingsContext.IsLabMode == false"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -30977,7 +30987,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCultureRecord"
-					context_function_id="(factions = StoredContextFromParent(&quot;CcoCustomBattlePlayerSlot&quot;).FactionsForCulture(this).Filter(OwnershipProductRequirementList.IsEmpty == false)) =&gt; { factions.IsEmpty == false &amp;&amp; factions.Any(OwnershipProductRequirementList.All(OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc == false)))}"/>
+					context_function_id="(factions = StoredContextFromParent(&quot;CcoCustomBattlePlayerSlot&quot;).FactionsForCulture(this).Filter(OwnershipProductRequirementList.IsEmpty == false)) =&gt; { (this.Key.Contains(&quot;wh3_main_&quot;) == false || IsOgreKingdoms) &amp;&amp; factions.IsEmpty == false &amp;&amp; factions.All(OwnershipProductRequirementList.All(OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc == false)))}"/>
 				<callback_with_context
 					callback_id="#ContextLayoutTooltip"
 					context_object_id="CcoCultureRecord"

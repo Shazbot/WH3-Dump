@@ -1657,8 +1657,6 @@
 			offset="0.00,86.00"
 			allowverticalresize="false"
 			priority="50"
-			componentleveltooltip="{{tt:ui/campaign ui/tooltip_ancillary_record}}"
-			tooltiplabel="template_payload_ancillary_Tooltip_c2c80468"
 			uniqueguid="6C82A573-E01F-40BD-B0892F0C368C1518"
 			currentstate="F0317D54-2D75-486D-99FA399A3EFEA03E"
 			defaultstate="F0317D54-2D75-486D-99FA399A3EFEA03E">
@@ -1675,13 +1673,28 @@
 					context_object_id="CcoCampaignPayloadInfoEntry"
 					context_function_id="Icon"/>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
-					context_object_id="CcoCampaignPayloadInfoEntry"
-					context_function_id="Ancillary"/>
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoAncillaryRecord">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/campaign ui/edict_tooltip"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextStateSetter"
 					context_object_id="CcoCampaignPayloadInfoEntry"
 					context_function_id="State"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignPayloadInfoEntry"
+					context_function_id="Ancillary">
+					<child_m_user_properties>
+						<property
+							name="only_target"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image

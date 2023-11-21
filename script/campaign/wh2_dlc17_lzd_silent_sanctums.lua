@@ -23,9 +23,6 @@ local m_starting_building_key = "wh2_dlc17_silent_sanctum_upkeep_0"
 
 local m_current_transport_building_region = ""
 
-local m_sanctum_point_skill = "wh2_dlc17_skill_lzd_oxyotl_unique_ancient_knowledge"
-local m_sanctum_point_skill_owned = false
-
 local m_regions_with_sanctums = {}
 local m_region_to_lord_list = {}
 
@@ -377,34 +374,16 @@ local function ambush_enemy_armies_listener()
     )
 end
 
-local function sanctum_point_skill_listener()
+local function sanctum_point_add_listener()
 	core:add_listener(
-        "oxy_sanctum_skill",
-        "CharacterSkillPointAllocated",
-        function(context)
-			return context:skill_point_spent_on() == m_sanctum_point_skill
-        end,
-		function(context)
-			m_sanctum_point_skill_owned = true
-        end,
-        false
-    )
-end
-
-local function sanctum_point_skill_owned_listener()
-	core:add_listener(
-        "oxy_sanctum_skill",
+        "oxy_sanctum_gems_per_turn",
         "FactionTurnStart",
 		function(context)
 			local faction_name = context:faction():name()
-			if(faction_name == m_oxyotl_faction_key and m_sanctum_point_skill_owned == true) then
-				return true
-			end
-			return false
+			return faction_name == m_oxyotl_faction_key and cm:get_factions_bonus_value(faction_name, "oxyotl_sanctum_gems_per_turn") > 0
         end,
 		function(context)
-			-- this should match whatever value is assigned to the skill effect in the DB
-			Silent_Sanctums:add_sanctum_gems(1)
+			Silent_Sanctums:add_sanctum_gems(cm:get_factions_bonus_value(context:faction():name(), "oxyotl_sanctum_gems_per_turn"))
         end,
         true
     )
@@ -455,8 +434,7 @@ function add_oxyotl_sanctum_listeners()
 			vision_building_built_listener()
 			reapply_sanctum_vision_listener()
 			ambush_enemy_armies_listener()
-			sanctum_point_skill_listener()
-			sanctum_point_skill_owned_listener()
+			sanctum_point_add_listener()
 		else
 			-- AI behaviour
 
@@ -471,7 +449,6 @@ end
 
 cm:add_saving_game_callback(
     function(context)
-		cm:save_named_value("oxy_gems_skill_owned", m_sanctum_point_skill_owned, context)
 		cm:save_named_value("oxy_gems_first_gems", m_first_sanctum_point_gained, context)
 		cm:save_named_value("oxy_gems_first_sanctum", m_first_sanctum_constructed, context)
 		cm:save_named_value("oxy_current_teleport_region", m_current_transport_building_region, context)
@@ -481,7 +458,6 @@ cm:add_saving_game_callback(
 cm:add_loading_game_callback(
 	function(context)
 		if cm:is_new_game() == false then
-			m_sanctum_point_skill_owned = cm:load_named_value("oxy_gems_skill_owned", m_sanctum_point_skill_owned, context)
 			m_first_sanctum_point_gained = cm:load_named_value("oxy_gems_first_gems", m_first_sanctum_point_gained, context)
 			m_first_sanctum_constructed = cm:load_named_value("oxy_gems_first_sanctum", m_first_sanctum_constructed, context)
 			m_current_transport_building_region = cm:load_named_value("oxy_current_teleport_region", m_current_transport_building_region, context)

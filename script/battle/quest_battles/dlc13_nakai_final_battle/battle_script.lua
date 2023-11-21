@@ -226,8 +226,46 @@ emp_harass_2:release_on_message("reinforcements_player", 28);
 -------------------------------------------------------------------------------------------------
 
 gb:set_objective_on_message("01_intro_cutscene_end", "wh2_dlc13_lzd_final_battle_main_objective");
-gb:set_locatable_objective_on_message("battle_started", "wh2_dlc13_lzd_final_battle_protect_summoner_1", 0, v(261, 256, 2), v(1175, 90, 57), 2);
-gb:set_locatable_objective_on_message("battle_started", "wh2_dlc13_lzd_final_battle_protect_summoner_2", 0, v(-261, 256, 2), v(-1175, 90, -57), 2);
+gb:set_locatable_objective_callback_on_message(
+    "battle_started",
+    "wh2_dlc13_lzd_final_battle_protect_summoner_1",
+    0,
+    function()
+        local summoner_general = summoner1.sunits:get_general_sunit();
+        if summoner_general then
+            local cam_targ = summoner_general.unit:position();
+            local cam_pos = v_offset_by_bearing(
+                cam_targ,
+                get_bearing(cam_targ, bm:camera():position()),    -- horizontal bearing from camera target to current camera position
+                100,                                                -- distance from camera position to camera target
+                d_to_r(30)                                        -- vertical bearing from horizon to cam-targ/cam-pos line
+            );
+            return cam_pos, cam_targ;
+        end;
+    end,
+    2
+);
+
+gb:set_locatable_objective_callback_on_message(
+    "battle_started",
+    "wh2_dlc13_lzd_final_battle_protect_summoner_2",
+    0,
+    function()
+        local summoner_general = summoner2.sunits:get_general_sunit();
+        if summoner_general then
+            local cam_targ = summoner_general.unit:position();
+            local cam_pos = v_offset_by_bearing(
+                cam_targ,
+                get_bearing(cam_targ, bm:camera():position()),    -- horizontal bearing from camera target to current camera position
+                100,                                                -- distance from camera position to camera target
+                d_to_r(30)                                        -- vertical bearing from horizon to cam-targ/cam-pos line
+            );
+            return cam_pos, cam_targ;
+        end;
+    end,
+    2
+);
+
 gb:add_ping_icon_on_message("01_intro_cutscene_end", v(-350, 221, 0), 15, 1900, 12000);
 gb:add_ping_icon_on_message("01_intro_cutscene_end", v(360, 221, 0), 15, 1900, 12000);
 

@@ -83,8 +83,12 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 				--for anyone searching for diplomatic_attitude_adjustment: the int ranges from -6 -> 6, and selects a value set in the DB
 				payload_builder:diplomatic_attitude_adjustment(target_faction_object, 6);
 			else
-				out.design("Use best ogre faction "..caravans:get_best_ogre_faction(own_faction:name()):name() )
-				payload_builder:diplomatic_attitude_adjustment(caravans:get_best_ogre_faction(own_faction:name()), 6);
+				local ogre_faction = caravans:get_best_ogre_faction(own_faction:name())
+				
+				if ogre_faction then
+					out.design("Use best ogre faction " .. ogre_faction:name())
+					payload_builder:diplomatic_attitude_adjustment(ogre_faction, 6);
+				end
 			end
 			dilemma_builder:add_choice_payload("SECOND", payload_builder);
 			
@@ -283,8 +287,12 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 				--for anyone searching for diplomatic_attitude_adjustment: the int ranges from -6 -> 6, and selects a value set in the DC
 				payload_builder:diplomatic_attitude_adjustment(target_faction_object, 6);
 			else
-				out.design("Use best ogre faction "..caravans:get_best_ogre_faction(own_faction:name()):name() )
-				payload_builder:diplomatic_attitude_adjustment(caravans:get_best_ogre_faction(own_faction:name()), 6);
+				local ogre_faction = caravans:get_best_ogre_faction(own_faction:name())
+				
+				if ogre_faction then
+					out.design("Use best ogre faction " .. ogre_faction:name())
+					payload_builder:diplomatic_attitude_adjustment(ogre_faction, 6);
+				end
 			end
 			payload_builder:remove_unit(caravan:caravan_force(), random_unit);
 			dilemma_builder:add_choice_payload("SECOND", payload_builder);

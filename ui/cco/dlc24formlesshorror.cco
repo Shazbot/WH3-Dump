@@ -104,6 +104,19 @@ FormlessHorror
 			Loc("wh3_dlc24_shapeshift_form_equip")
 		)
 	}
+	
+	IsFormHiddenBySearch(CcoComponent search_bar, CcoShapeshiftForm form)
+	{
+		(search_str = search_bar.GetText) =>
+		{
+			GetIfElse
+			(
+				search_str.IsEmpty,
+				false,
+				form.MatchesQuery(search_str) == false
+			)
+		}
+	}
 }
 
 CcoCampaignCharacter

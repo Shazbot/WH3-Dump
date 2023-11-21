@@ -43,7 +43,7 @@ core:svr_save_string("can_concede", tostring(1));
 
 
 if prologue_check_progression["stage_5_area_triggers"] == false then
-	cm:add_circle_area_trigger(282, 324, 15, "brazen_altar", "", true, false, false)
+	cm:add_circle_area_trigger(282, 324, 18, "brazen_altar", "", true, false, false)
 
 	cm:add_circle_area_trigger(231, 275, 10, "norsca_1_diplomacy", "", true, false, false);
 	cm:add_circle_area_trigger(258, 290, 10, "norsca_2_diplomacy", "", true, false, false);

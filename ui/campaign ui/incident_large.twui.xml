@@ -1149,6 +1149,22 @@
 					callback_id="ContextPropagator"
 					context_object_id="CcoCampaignEventFeedMessageDetails"
 					context_function_id="CustomContext"/>
+				<callback_with_context
+					callback_id="ContextDynamicDialogueTrigger"
+					context_object_id="CcoCampaignEventIncident"
+					context_function_id="CampaignVOEventName">
+					<child_m_user_properties>
+						<property
+							name="actor_id"
+							value="this.CampaignVOActorGroup"/>
+						<property
+							name="delay"
+							value="this.CampaignVODelay"/>
+						<property
+							name="trigger_on_context_set"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -2108,27 +2124,6 @@
 			uniqueguid="41D22CC0-F07D-4CDD-A5E0594B897A5AE1"
 			currentstate="8E06F530-2A33-4651-B029165DFE25C1CA"
 			defaultstate="8E06F530-2A33-4651-B029165DFE25C1CA">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextDynamicDialogueTrigger"
-					context_object_id="CcoCampaignEventIncident"
-					context_function_id="CampaignVOEventName">
-					<child_m_user_properties>
-						<property
-							name="actor_id"
-							value="this.CampaignVOActorGroup"/>
-						<property
-							name="condition"
-							value="StoredContext(&quot;CcoCampaignEventFeedMessageDetails&quot;, &quot;756AD0ED-D7F6-4CAF-AB1AB64785D8B0D3&quot;).IsRead == false"/>
-						<property
-							name="delay"
-							value="this.CampaignVODelay"/>
-						<property
-							name="trigger_on_show"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
 			<userproperties>
 				<property
 					name="min_width"

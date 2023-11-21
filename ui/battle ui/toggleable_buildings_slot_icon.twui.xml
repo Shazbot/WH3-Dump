@@ -11,6 +11,7 @@
 						<building_slot_indicator this="C689144F-7717-4CB4-8D12F276EDC1AA6D">
 							<deconstructing this="CA7AC9B2-933F-4DC3-B74DD54BE8EB45ED"/>
 							<time_remaining this="1D587EF4-1830-4E3D-A45CBCB39CDA7082"/>
+							<building_destroyed this="24525D56-5922-482D-AF157C7AF2871CCC"/>
 						</building_slot_indicator>
 						<building_slot_indicator_small this="CD2E4573-62A0-4ABF-9FC61C303B471B74"/>
 						<connected_lines_list this="CE10999C-854F-4D4E-8B8932BB733DEB6A">
@@ -80,9 +81,6 @@
 			docking="Bottom Left"
 			dock_offset="29.00,-37.00"
 			component_anchor_point="0.00,1.00"
-			tooltipslocalised="true"
-			componentleveltooltip="Dismantle||Dismantle this building for a refund of {{CcoBattleToggleableSlotBuildable:Ceiling(RefundValue)}} supplies"
-			tooltiplabel="button_destroy_Tooltip_c77cbce0"
 			soundcategory="UI_BAT_HUD_Radial_Dismantle_Button"
 			uniqueguid="977CEF56-5B53-4098-9BAD382EFA776F13"
 			currentstate="1286175A-1F09-482C-A47A0D366E6F1257"
@@ -109,10 +107,23 @@
 				<callback_with_context
 					callback_id="ContextStateSetter"
 					context_object_id="CcoBattleToggleableSlotBuildable"
-					context_function_id="ParentContext.CanInteract(BattleRoot.PlayerArmyContext) | &quot;active&quot; | &quot;inactive&quot;"/>
+					context_function_id="ParentContext.CanInteract(BattleRoot.PlayerArmyContext) &amp;&amp;  BattleRoot.CanDismantleBuildings | &quot;active&quot; | &quot;inactive&quot;">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="PanelClosed_finish_deployment"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextTooltipSetter"
-					context_object_id="CcoBattleToggleableSlotBuildable"/>
+					context_object_id="CcoBattleToggleableSlotBuildable"
+					context_function_id="GetIfElse(BattleRoot.CanDismantleBuildings, Format(Loc(&quot;battle_dismantle_building&quot;), Ceiling(RefundValue)), Loc(&quot;battle_cannot_dismantle_post_deployment&quot;))">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="PanelClosed_finish_deployment"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -2179,5 +2190,53 @@
 					uniqueguid="ED4E43EE-D5A5-48ED-9AD2D24429E5B99A"/>
 			</states>
 		</template_line>
+		<building_destroyed
+			this="24525D56-5922-482D-AF157C7AF2871CCC"
+			id="building_destroyed"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			tooltipslocalised="true"
+			uniqueguid="24525D56-5922-482D-AF157C7AF2871CCC"
+			currentstate="0AA830DA-A6F0-4070-8F30DE67A1D8D3E3"
+			defaultstate="0AA830DA-A6F0-4070-8F30DE67A1D8D3E3">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoBattleToggleableSlot"
+					context_function_id="IsDestroyed">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="ToggleableBuildingDestroyed"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="D84A7299-FB89-4ABF-80AA81C1FE14F699"
+					uniqueguid="D84A7299-FB89-4ABF-80AA81C1FE14F699"
+					imagepath="ui/skins/default/battle_building_icons/building_deconstructing.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="0AA830DA-A6F0-4070-8F30DE67A1D8D3E3"
+					name="default"
+					width="40"
+					height="40"
+					tooltip="Destroyed buildings cannot be rebuilt."
+					tooltiplabel="StateTooltip_1c6215ed"
+					interactive="true"
+					uniqueguid="0AA830DA-A6F0-4070-8F30DE67A1D8D3E3">
+					<imagemetrics>
+						<image
+							this="C870B590-E758-45BD-B4A31577764DCFE1"
+							uniqueguid="C870B590-E758-45BD-B4A31577764DCFE1"
+							componentimage="D84A7299-FB89-4ABF-80AA81C1FE14F699"
+							width="40"
+							height="40"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</building_destroyed>
 	</components>
 </layout>

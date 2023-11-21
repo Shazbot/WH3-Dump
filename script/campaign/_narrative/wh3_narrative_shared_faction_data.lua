@@ -517,6 +517,31 @@ local function add_narrative_data_for_playable_faction(faction_key)
 			end;
 		end;
 	end;
+	
+	
+	
+	
+	
+	-- DAEMON PRINCE
+	
+	-- Daemon Prince
+
+	if faction_key == "wh3_main_dae_daemon_prince" then
+		narrative.add_data_for_faction(faction_key, "shared_technology_chain_block", true); -- daemon prince has no technology
+	end;
+	
+	
+	
+	
+	
+	-- BEASTMEN
+
+	if culture == "wh_dlc03_bst_beastmen" then
+		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_control_province_block", true); -- beastmen cannot control entire provinces, just single herdstone regions
+		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_control_two_provinces_block", true);
+		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_control_provinces_block", true);
+		narrative.add_data_for_faction(faction_key, "shared_finance_query_advice_block", true); -- beastmen do not get income
+	end;
 end;
 
 

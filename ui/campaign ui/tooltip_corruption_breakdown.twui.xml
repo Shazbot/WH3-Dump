@@ -222,11 +222,35 @@
 					callback_id="ContextTextLabel"
 					context_object_id="CcoStringValue"
 					context_function_id="IntValue"/>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoStringValue">
+					<child_m_user_properties>
+						<property
+							name="negative"
+							value="IntValue &lt; 0"/>
+						<property
+							name="positive"
+							value="IntValue &gt; 0"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<states>
-				<default
+				<negative
+					this="BF3DFFE9-8981-4F2D-949E803003F2C990"
+					name="negative"
+					width="40"
+					height="24"
+					uniqueguid="BF3DFFE9-8981-4F2D-949E803003F2C990">
+					<component_text
+						text="99"
+						texthbehaviour="Never split"
+						textlabel="StateText_8061d343"
+						font_colour_override_preset_key="red"/>
+				</negative>
+				<positive
 					this="E8A8DCBF-33BD-44BC-9F8F1118CC808779"
-					name="default"
+					name="positive"
 					width="40"
 					height="24"
 					interactive="true"
@@ -235,12 +259,12 @@
 						text="99"
 						textvalign="Center"
 						texthbehaviour="Never split"
-						textlocalised="true"
 						textlabel="label_amount_NewState_Text_390039"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="body_10"/>
-				</default>
+						fontcat_name="body_10"
+						font_colour_override_preset_key="green"/>
+				</positive>
 			</states>
 		</dy_value>
 		<factor_list
@@ -256,7 +280,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoCampaignPooledResource"
-					context_function_id="CorruptionPendingFactorList(this)"/>
+					context_function_id="Join(PositivePendingFactorList.Filter(IntValue &gt; 0), NegativePendingFactorList.Filter(IntValue &lt; 0)).Sort(StringValue, true)"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate

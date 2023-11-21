@@ -1,9 +1,7 @@
 
 out.design("*** Caravans script loaded ***");
 
-caravans = {
-	trade_modifier = 0,
-}
+caravans = {}
 
 enemy_char_cqi = {}
 
@@ -100,7 +98,7 @@ caravans.traits_to_units = {
 		"wh3_main_cth_cav_jade_lancers_0",
 		"wh3_main_cth_cav_jade_lancers_0",
 		"wh3_main_cth_cav_jade_lancers_0"
-		},
+	},
 
 	["wh3_main_skill_innate_cth_caravan_master_gunner"] = {
 		"wh3_main_cth_inf_peasant_archers_0",
@@ -112,19 +110,19 @@ caravans.traits_to_units = {
 		"wh3_main_cth_inf_jade_warriors_0",
 		"wh3_main_cth_veh_sky_lantern_0",
 		"wh3_main_cth_veh_sky_lantern_0"
-		},
+	},
 
 	["wh3_main_skill_innate_cth_caravan_master_stealth"] = {
-		"wh3_main_cth_inf_peasant_archers_0",
-		"wh3_main_cth_inf_peasant_archers_0",
-		"wh3_main_cth_inf_peasant_spearmen_1",
-		"wh3_main_cth_inf_peasant_spearmen_1",
-		"wh3_main_cth_inf_jade_warriors_0",
-		"wh3_main_cth_inf_jade_warriors_0",
-		"wh3_main_cth_inf_jade_warriors_1",
-		"wh3_main_cth_inf_jade_warrior_crossbowmen_1",
-		"wh3_main_cth_inf_jade_warrior_crossbowmen_1"
-		},
+		{"wh3_main_cth_inf_peasant_archers_0", 2},
+		{"wh3_main_cth_inf_peasant_archers_0", 2},
+		{"wh3_main_cth_inf_peasant_spearmen_1", 2},
+		{"wh3_main_cth_inf_peasant_spearmen_1", 2},
+		{"wh3_main_cth_inf_jade_warriors_0", 4},
+		{"wh3_main_cth_inf_jade_warriors_0", 2},
+		{"wh3_main_cth_inf_jade_warriors_1", 4},
+		{"wh3_main_cth_inf_jade_warrior_crossbowmen_1", 4},
+		{"wh3_main_cth_inf_jade_warrior_crossbowmen_1", 4}
+	},
 
 	["wh3_main_skill_innate_cth_caravan_master_royalty"] = {
 		"wh3_main_cth_inf_peasant_archers_0",
@@ -138,7 +136,7 @@ caravans.traits_to_units = {
 		"wh3_main_cth_inf_iron_hail_gunners_0",
 		"wh3_main_cth_inf_iron_hail_gunners_0",
 		"wh3_main_cth_cav_jade_lancers_0"
-		},
+	},
 
 	["wh3_main_skill_innate_cth_caravan_master_Dragon-Blooded"] = {
 		"wh3_main_cth_inf_peasant_archers_0",
@@ -149,7 +147,7 @@ caravans.traits_to_units = {
 		"wh3_main_cth_inf_jade_warriors_1",
 		"wh3_main_cth_inf_dragon_guard_0",
 		"wh3_main_cth_inf_dragon_guard_crossbowmen_0"
-		},
+	},
 
 	["wh3_main_skill_innate_cth_caravan_master_Former-Artillery-Officer"] = {
 		"wh3_main_cth_inf_peasant_archers_0",
@@ -160,7 +158,7 @@ caravans.traits_to_units = {
 		"wh3_main_cth_inf_jade_warriors_1",
 		"wh3_main_cth_art_grand_cannon_0",
 		"wh3_main_cth_art_grand_cannon_0"
-		},
+	},
 
 	["wh3_main_skill_innate_cth_caravan_master_Humble-Born"] = {
 		"wh3_main_cth_inf_peasant_archers_0",
@@ -175,7 +173,7 @@ caravans.traits_to_units = {
 		"wh3_main_cth_inf_peasant_spearmen_1",
 		"wh3_main_cth_inf_jade_warriors_1",
 		"wh3_main_cth_inf_jade_warriors_1"
-		},
+	},
 
 	["wh3_main_skill_innate_cth_caravan_master_Longma-Whisperer"] = {
 		"wh3_main_cth_inf_peasant_archers_0",
@@ -186,7 +184,7 @@ caravans.traits_to_units = {
 		"wh3_main_cth_inf_jade_warriors_1",
 		"wh3_main_cth_cav_jade_longma_riders_0",
 		"wh3_main_cth_cav_jade_longma_riders_0"
-		},
+	},
 
 	["wh3_main_skill_innate_cth_caravan_master_Nan-Gau"] = {
 		"wh3_main_cth_inf_peasant_archers_0",
@@ -198,7 +196,7 @@ caravans.traits_to_units = {
 		"wh3_main_cth_inf_crane_gunners_0",
 		"wh3_main_cth_inf_crane_gunners_0",
 		"wh3_main_cth_art_fire_rain_rocket_battery_0"
-		},
+	},
 
 	["wh3_main_skill_innate_cth_caravan_master_Ogre-Ally"] = {
 		"wh3_main_cth_inf_peasant_archers_0",
@@ -209,7 +207,7 @@ caravans.traits_to_units = {
 		"wh3_main_cth_inf_jade_warriors_1",
 		"wh3_main_ogr_inf_maneaters_0",
 		"wh3_main_ogr_inf_maneaters_1"
-		},
+	},
 
 	["wh3_main_skill_innate_cth_caravan_master_Shang-Yang"] = {
 		"wh3_main_cth_cha_alchemist_0",
@@ -223,7 +221,7 @@ caravans.traits_to_units = {
 		"wh3_main_cth_inf_jade_warriors_0",
 		"wh3_main_cth_inf_jade_warriors_0",
 		"wh3_main_cth_inf_jade_warriors_0"
-		},
+	},
 
 	["wh3_main_skill_innate_cth_caravan_master_Western-Idealist"] = {
 		"wh3_main_cth_inf_peasant_archers_0",
@@ -236,7 +234,7 @@ caravans.traits_to_units = {
 		"wh_main_emp_inf_halberdiers",
 		"wh_main_emp_inf_handgunners",
 		"wh_main_emp_inf_crossbowmen"
-		},
+	},
 
 	---CHAOS DWARFS
 	["wh3_dlc23_skill_innate_chd_convoy_overseer_bull_centaur_master"] = {
@@ -246,7 +244,7 @@ caravans.traits_to_units = {
 		"wh3_dlc23_chd_inf_chaos_dwarf_blunderbusses",
 		"wh3_dlc23_chd_cav_bull_centaurs_greatweapons",
 		"wh3_dlc23_chd_cav_bull_centaurs_axe"
-		},
+	},
 
 	["wh3_dlc23_skill_innate_chd_convoy_overseer_cannonry_experience"] = {
 		"wh3_dlc23_chd_inf_chaos_dwarf_warriors",
@@ -255,7 +253,7 @@ caravans.traits_to_units = {
 		"wh3_dlc23_chd_inf_chaos_dwarf_blunderbusses",
 		"wh3_dlc23_chd_inf_infernal_guard",
 		"wh_main_chs_art_hellcannon"
-		},
+	},
 
 	["wh3_dlc23_skill_innate_chd_convoy_overseer_connected"] = {
 		"wh3_dlc23_chd_inf_chaos_dwarf_warriors",
@@ -266,7 +264,7 @@ caravans.traits_to_units = {
 		"wh3_dlc23_chd_inf_chaos_dwarf_blunderbusses",
 		"wh3_dlc23_chd_inf_chaos_dwarf_warriors_great_weapons",
 		"wh3_dlc23_chd_inf_chaos_dwarf_warriors_great_weapons"
-		},
+	},
 
 	["wh3_dlc23_skill_innate_chd_convoy_overseer_covert"] = {
 		"wh3_dlc23_chd_inf_chaos_dwarf_warriors",
@@ -274,7 +272,7 @@ caravans.traits_to_units = {
 		"wh3_dlc23_chd_inf_infernal_guard_fireglaives",
 		"wh3_dlc23_chd_inf_infernal_guard",
 		"wh3_dlc23_chd_inf_infernal_guard"
-		},
+	},
 
 	["wh3_dlc23_skill_innate_chd_convoy_overseer_hobgoblin_favour"] = {
 		"wh3_dlc23_chd_inf_chaos_dwarf_warriors",
@@ -285,7 +283,7 @@ caravans.traits_to_units = {
 		"wh3_dlc23_chd_inf_hobgoblin_sneaky_gits",
 		"wh3_dlc23_chd_inf_hobgoblin_archers",
 		"wh3_dlc23_chd_cav_hobgoblin_wolf_raiders_swords"
-		},
+	},
 	
 	["wh3_dlc23_skill_innate_chd_convoy_overseer_kdaai_domination"] = {
 		"wh3_dlc23_chd_inf_chaos_dwarf_warriors",
@@ -294,7 +292,7 @@ caravans.traits_to_units = {
 		"wh3_dlc23_chd_inf_chaos_dwarf_blunderbusses",
 		"wh3_dlc23_chd_mon_kdaai_fireborn",
 		"wh3_dlc23_chd_mon_kdaai_destroyer"
-		},
+	},
 
 	["wh3_dlc23_skill_innate_chd_convoy_overseer_metallic_resilience"] = {
 		"wh3_dlc23_chd_inf_chaos_dwarf_warriors",
@@ -303,7 +301,7 @@ caravans.traits_to_units = {
 		"wh3_dlc23_chd_inf_chaos_dwarf_blunderbusses",
 		"wh3_dlc23_chd_inf_infernal_ironsworn",
 		"wh3_dlc23_chd_inf_infernal_ironsworn"
-		},
+	},
 
 	["wh3_dlc23_skill_innate_chd_convoy_overseer_monster_commander"] = {
 		"wh3_dlc23_chd_inf_chaos_dwarf_warriors",
@@ -312,7 +310,7 @@ caravans.traits_to_units = {
 		"wh3_dlc23_chd_inf_chaos_dwarf_blunderbusses",
 		"wh3_dlc23_chd_mon_great_taurus",
 		"wh3_dlc23_chd_mon_lammasu"
-		},
+	},
 
 	["wh3_dlc23_skill_innate_chd_convoy_overseer_ogre_controller"] = {
 		"wh3_dlc23_chd_inf_chaos_dwarf_warriors",
@@ -321,7 +319,7 @@ caravans.traits_to_units = {
 		"wh3_dlc23_chd_inf_chaos_dwarf_blunderbusses",
 		"wh3_main_ogr_inf_maneaters_1",
 		"wh3_main_ogr_inf_maneaters_0"
-		},		
+	},		
 
 	["wh3_dlc23_skill_innate_chd_convoy_overseer_retired_daemonsmither"] = {
 		"wh3_dlc23_chd_inf_chaos_dwarf_warriors",
@@ -330,7 +328,7 @@ caravans.traits_to_units = {
 		"wh3_dlc23_chd_inf_chaos_dwarf_blunderbusses",
 		"wh3_dlc23_chd_inf_chaos_dwarf_blunderbusses",
 		"wh3_dlc23_chd_cav_bull_centaurs_greatweapons"
-		},			
+	},			
 
 	["wh3_dlc23_skill_innate_chd_convoy_overseer_sharpshooter"] = {
 		"wh3_dlc23_chd_inf_chaos_dwarf_warriors",
@@ -339,7 +337,7 @@ caravans.traits_to_units = {
 		"wh3_dlc23_chd_inf_chaos_dwarf_blunderbusses",
 		"wh3_dlc23_chd_inf_infernal_guard_fireglaives",
 		"wh3_dlc23_chd_inf_infernal_guard_fireglaives"
-		},		
+	},		
 	
 	["wh3_dlc23_skill_innate_chd_convoy_overseer_war_machinist"] = {
 		"wh3_dlc23_chd_inf_chaos_dwarf_warriors",
@@ -348,7 +346,7 @@ caravans.traits_to_units = {
 		"wh3_dlc23_chd_inf_chaos_dwarf_blunderbusses",
 		"wh3_dlc23_chd_veh_iron_daemon",
 		"wh3_dlc23_chd_veh_skullcracker_1dreadquake"
-		}		
+	}		
 }
 
 caravans.item_data = {
@@ -756,21 +754,25 @@ function caravans:initialise()
 			if faction:is_human() then
 				self:reward_item_check(faction, region_name, context:caravan_master())
 			end
-			--faction has tech that grants extra trade tariffs bonus after every caravan - create scripted bundle
-			if faction:has_technology("wh3_dlc23_tech_chd_industry_24") then
-				local temp_trade = self.trade_modifier + 5
-				self.trade_modifier = temp_trade
+			
+			-- faction has tech that grants extra trade tariffs bonus after every caravan - create scripted bundle
+			local bv = cm:get_factions_bonus_value(faction, "chd_convoy_trade_tariff_scripted")
+			if bv > 0 then
+				local trade_modifier = cm:get_saved_value("convoy_trade_modifier_" .. faction_key) or 0
+				trade_modifier = trade_modifier + bv
+				cm:set_saved_value("convoy_trade_modifier_" .. faction_key, trade_modifier)
 				local trade_effect = "wh_main_effect_economy_trade_tariff_mod"
-				local trade_effect_bundle = cm:create_new_custom_effect_bundle("wh3_dlc23_effect_chd_convoy_trade_tariff_scripted_bundle")
+				local trade_effect_bundle_key = "wh3_dlc23_effect_chd_convoy_trade_tariff_scripted_bundle"
+				local trade_effect_bundle = cm:create_new_custom_effect_bundle(trade_effect_bundle_key)
 
-				trade_effect_bundle:add_effect(trade_effect, "faction_to_faction_own_unseen", temp_trade)
+				trade_effect_bundle:add_effect(trade_effect, "faction_to_faction_own_unseen", trade_modifier)
 				trade_effect_bundle:set_duration(0)
 
-				if faction:has_effect_bundle(trade_effect_bundle:key()) then
-					cm:remove_effect_bundle(trade_effect_bundle:key(), faction:name())
-				end				
+				if faction:has_effect_bundle(trade_effect_bundle_key) then
+					cm:remove_effect_bundle(trade_effect_bundle_key, faction_key)
+				end
+				
 				cm:apply_custom_effect_bundle_to_faction(trade_effect_bundle, faction)
-
 			end
 				
 			if not region_owner:is_null_interface() then
@@ -1323,16 +1325,29 @@ function caravans:attach_battle_to_dilemma(dilemma_name, caravan, attacking_forc
 end;
 
 function caravans:add_inital_force(caravan)
-	local force_cqi = caravan:caravan_force():command_queue_index();
 	local commander = caravan:caravan_force():general_character()
-	local lord_cqi = commander:command_queue_index();
-	local lord_str = cm:char_lookup_str(lord_cqi);
+	local lord_str = cm:char_lookup_str(commander:command_queue_index());
 	local innate_skill = commander:background_skill()
 
 	if self.traits_to_units[innate_skill] then
 		local unit_list = self.traits_to_units[innate_skill]
-		for i = 1, #unit_list do 
-			cm:grant_unit_to_character(lord_str, unit_list[i], true, 1);
+		
+		for i = 1, #unit_list do
+			local unit_to_add = unit_list[i]
+			local add_xp = false
+			
+			if is_table(unit_to_add) then
+				unit_to_add = unit_to_add[1]
+				add_xp = true
+			end
+			
+			local units_added = cm:grant_unit_to_character(lord_str, unit_to_add, true, 1)
+			
+			if add_xp then
+				for _, unit in model_pairs(units_added) do
+					cm:add_experience_to_unit(unit, unit_list[i][2])
+				end
+			end
 		end
 	else
 		out("*** Unknown Caravan Master ??? ***")
@@ -1557,23 +1572,33 @@ end
 
 function caravans:reward_item_check(faction,region_key,caravan_master)
 	local reward = self.item_data[faction:culture()][region_key]
-	if not reward then 
-		return false 
+	
+	if not reward then return false end
+	
+	local faction_does_not_own_ancillary = not faction:ancillary_exists(reward)
+	local character = caravan_master:character()
+	local payload_builder = cm:create_payload();
+	local unit_reward = self.unit_data[faction:culture()]
+	local num_units = 0
+	
+	-- if faction has tech that grants extra unit on caravan completion increase num_units for payload builder
+	local bv = cm:get_factions_bonus_value(faction, "chd_convoy_additional_unit_reward_scripted")
+	if bv > 0 then
+		num_units = bv
 	end
-
-	if not faction:ancillary_exists(reward) then
-		local character = caravan_master:character()
-		local payload_builder = cm:create_payload();
-		local unit_reward = self.unit_data[faction:culture()]
+	
+	if faction_does_not_own_ancillary then
 		if unit_reward then 
-			local num_units = 1
-			--if faction has tech that grants extra unit on caravan completion increase num_units for payload builder
-			if faction:has_technology("wh3_dlc23_tech_chd_industry_24") then
-				num_units = 2
-			end
-			payload_builder:add_unit(character:military_force(), unit_reward[region_key], num_units, 0)
+			num_units = num_units + 1
 		end
 		payload_builder:character_ancillary_gain(character, reward, false)
+	end
+	
+	if num_units > 0 then
+		payload_builder:add_unit(character:military_force(), unit_reward[region_key], num_units, 0)
+	end
+	
+	if faction_does_not_own_ancillary or num_units > 0 then
 		cm:trigger_custom_incident_with_targets(
 			faction:command_queue_index(),
 			self.region_to_incident[faction:culture()][region_key],
@@ -1585,13 +1610,14 @@ function caravans:reward_item_check(faction,region_key,caravan_master)
 			0,
 			0,
 			0
-			)
+		)
+		
 		return 0
 	end
-	if cm:random_number(10,1) == 1 then
-		return self:reward_item_check(faction,self.region_reward_list[cm:random_number(#self.region_reward_list,1)],caravan_master)
+	
+	if cm:random_number(10) == 1 then
+		return self:reward_item_check(faction, self.region_reward_list[cm:random_number(#self.region_reward_list)], caravan_master)
 	end
-
 end
 
 function caravans:get_best_ogre_faction(self_faction)

@@ -19,10 +19,11 @@
 				</body_parts_small_buttons_holder>
 				<filter_holder this="B4E7FF9D-1507-4191-BA3ADB62FD3160E1">
 					<header_frame this="0CF69DEE-9529-4F21-9106E9A58976A4D8"/>
-					<skill_search this="2882C46D-0B85-4B22-97897A469D4D5D14">
+					<gift_search this="2882C46D-0B85-4B22-97897A469D4D5D14">
 						<highlight this="4569416E-3873-4457-8EA029DBDD8FEDCB"/>
 						<prompt_text this="314012CD-284E-4A44-8186168A03272CD8"/>
-					</skill_search>
+						<button_clear_search this="5246EC89-39CE-44CD-8D889E2752727FFF"/>
+					</gift_search>
 					<god_type_list this="45316435-3CF4-4730-86D703322959DC67">
 						<template_checkbox_holder this="5667F588-4A4A-4CC4-AFBF24985ECC5D63">
 							<icon_god this="6957FAFA-603D-4C55-A66E101E8BD88585"/>
@@ -950,37 +951,6 @@
 				<element value="ui/skins/default/slider_vertical_handle_underlay.png"/>
 			</override_images>
 		</handle>
-		<root
-			this="01B45FE3-3657-4181-975298D95766A14D"
-			id="root"
-			tooltipslocalised="true"
-			uniqueguid="01B45FE3-3657-4181-975298D95766A14D"
-			currentstate="6DC8C30E-EA71-4624-BE2736F836571D3E"
-			defaultstate="6DC8C30E-EA71-4624-BE2736F836571D3E">
-			<componentimages>
-				<component_image
-					this="BC5D4C81-6475-455E-88BFB5DA6B51D354"
-					uniqueguid="BC5D4C81-6475-455E-88BFB5DA6B51D354"/>
-			</componentimages>
-			<states>
-				<default
-					this="6DC8C30E-EA71-4624-BE2736F836571D3E"
-					name="default"
-					width="1600"
-					height="900"
-					uniqueguid="6DC8C30E-EA71-4624-BE2736F836571D3E">
-					<imagemetrics>
-						<image
-							this="A6EB340D-92E6-4284-AD66BED37B5CE024"
-							uniqueguid="A6EB340D-92E6-4284-AD66BED37B5CE024"
-							componentimage="BC5D4C81-6475-455E-88BFB5DA6B51D354"
-							width="1920"
-							height="1080"
-							colour="#1C1C1CFF"/>
-					</imagemetrics>
-				</default>
-			</states>
-		</root>
 		<top
 			this="A68EFABB-0204-4593-B96C288101C63E65"
 			id="top"
@@ -1058,6 +1028,37 @@
 				<element value="ui/skins/default/slider_vertical_top_hover.png"/>
 			</override_images>
 		</top>
+		<root
+			this="01B45FE3-3657-4181-975298D95766A14D"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="01B45FE3-3657-4181-975298D95766A14D"
+			currentstate="6DC8C30E-EA71-4624-BE2736F836571D3E"
+			defaultstate="6DC8C30E-EA71-4624-BE2736F836571D3E">
+			<componentimages>
+				<component_image
+					this="BC5D4C81-6475-455E-88BFB5DA6B51D354"
+					uniqueguid="BC5D4C81-6475-455E-88BFB5DA6B51D354"/>
+			</componentimages>
+			<states>
+				<default
+					this="6DC8C30E-EA71-4624-BE2736F836571D3E"
+					name="default"
+					width="1600"
+					height="900"
+					uniqueguid="6DC8C30E-EA71-4624-BE2736F836571D3E">
+					<imagemetrics>
+						<image
+							this="A6EB340D-92E6-4284-AD66BED37B5CE024"
+							uniqueguid="A6EB340D-92E6-4284-AD66BED37B5CE024"
+							componentimage="BC5D4C81-6475-455E-88BFB5DA6B51D354"
+							width="1920"
+							height="1080"
+							colour="#1C1C1CFF"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</root>
 		<body_parts_listview
 			this="2E4F9B56-F4B8-4BA5-90EE8526A14B834F"
 			id="body_parts_listview"
@@ -2341,6 +2342,9 @@
 					callback_id="ContextPropagator"
 					context_object_id="CcoArmoryItemRecord"
 					context_function_id="CcoRTSelectedArmoryItem()"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_function_id="SelectedOrContainedCharacter"/>
 			</callbackwithcontextlist>
 			<states>
 				<default
@@ -3199,9 +3203,9 @@
 				</newstate>
 			</states>
 		</prompt_text>
-		<skill_search
+		<gift_search
 			this="2882C46D-0B85-4B22-97897A469D4D5D14"
-			id="skill_search"
+			id="gift_search"
 			offset="30.00,42.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
@@ -3264,7 +3268,7 @@
 						fontcat_name="body_12"/>
 				</newstate>
 			</states>
-		</skill_search>
+		</gift_search>
 		<template_armory_effect
 			this="AB7446C9-B6A1-4464-A8E30AB697815B48"
 			id="template_armory_effect"
@@ -3468,7 +3472,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoArmoryItemRecord"
-					context_function_id="(Query = self.ParentContext(&quot;character_details_panel_dae_gifts&quot;).ChildContext(&quot;skill_search&quot;).GetText) =&gt; {&#10;  MatchesQuery(Query)&#10; &amp;&amp; (IsContextValid(Component(&quot;god_type_list&quot;)) == false || Component(&quot;god_type_list&quot;).CurrentSelection.SelectedObjectList.Any(Key == this.ItemTypeContext.Key) || Component(&quot;god_type_list&quot;).CurrentSelection.SelectedObjectList.IsEmpty)}">
+					context_function_id="(Query = self.ParentContext(&quot;character_details_panel_dae_gifts&quot;).ChildContext(&quot;gift_search&quot;).GetText) =&gt; {&#10;  MatchesQuery(Query)&#10; &amp;&amp; (IsContextValid(Component(&quot;god_type_list&quot;)) == false || Component(&quot;god_type_list&quot;).CurrentSelection.SelectedObjectList.Any(Key == this.ItemTypeContext.Key) || Component(&quot;god_type_list&quot;).CurrentSelection.SelectedObjectList.IsEmpty)}">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -3831,5 +3835,89 @@
 					uniqueguid="7C72007E-106E-4CF3-8C3B5CB7C6982A68"/>
 			</states>
 		</template_small_holder>
+		<button_clear_search
+			this="5246EC89-39CE-44CD-8D889E2752727FFF"
+			id="button_clear_search"
+			offset="322.00,6.00"
+			docking="Center Right"
+			dock_offset="-6.00,0.00"
+			component_anchor_point="1.00,0.50"
+			priority="51"
+			tooltipslocalised="true"
+			soundcategory="UI_GBL_TMP_Parchment_Row"
+			uniqueguid="5246EC89-39CE-44CD-8D889E2752727FFF"
+			currentstate="5B8227B0-06E2-46F9-A773DD1438EC000F"
+			defaultstate="5B8227B0-06E2-46F9-A773DD1438EC000F">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_function_id="self.ParentContext.GetText.IsEmpty == false">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="DaemonPartsSearchChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_function_id="Do(self.ParentContext.InputSetText(&quot;&quot;), self.SetVisible(false), self.UiMsg(&quot;DaemonPartsSearchChanged&quot;))"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="621F49F0-6D7F-4A50-9EE6CB967C27FCB8"
+					uniqueguid="621F49F0-6D7F-4A50-9EE6CB967C27FCB8"
+					imagepath="ui/skins/default/icon_cross_small.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="5B8227B0-06E2-46F9-A773DD1438EC000F"
+					name="default"
+					width="22"
+					height="22"
+					interactive="true"
+					uniqueguid="5B8227B0-06E2-46F9-A773DD1438EC000F"
+					stateeditordisplaypos="40.00,20.00">
+					<imagemetrics>
+						<image
+							this="9FF7B5C6-ED67-40A6-A5B2DDA9C55E6FC1"
+							uniqueguid="9FF7B5C6-ED67-40A6-A5B2DDA9C55E6FC1"
+							componentimage="621F49F0-6D7F-4A50-9EE6CB967C27FCB8"
+							offset="-8.00,-8.00"
+							width="38"
+							height="38"
+							dockpoint="Center"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition transition_m_target_state="8BDAE179-4663-4157-B8BDDE329709AAC1"/>
+					</transitionmap>
+				</default>
+				<hover
+					this="8BDAE179-4663-4157-B8BDDE329709AAC1"
+					name="hover"
+					width="22"
+					height="22"
+					interactive="true"
+					shader_name="brighten_t0"
+					shadervars="1.00,0.00,0.00,0.00"
+					uniqueguid="8BDAE179-4663-4157-B8BDDE329709AAC1"
+					stateeditordisplaypos="178.00,107.00">
+					<imagemetrics>
+						<image
+							this="71DD3314-2980-420C-A933AA9ED96ACC0A"
+							uniqueguid="71DD3314-2980-420C-A933AA9ED96ACC0A"
+							componentimage="621F49F0-6D7F-4A50-9EE6CB967C27FCB8"
+							offset="-8.00,-8.00"
+							width="38"
+							height="38"
+							dockpoint="Center"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="5B8227B0-06E2-46F9-A773DD1438EC000F"/>
+					</transitionmap>
+				</hover>
+			</states>
+		</button_clear_search>
 	</components>
 </layout>

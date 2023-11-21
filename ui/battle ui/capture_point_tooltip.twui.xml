@@ -22,6 +22,8 @@
 					</ownership_info_parent>
 					<description this="6D5A8C1E-55F7-49D2-AF069FF71C7810B4"/>
 					<dy_description this="47249C26-2ABC-4852-9D48C55A35E36CD6"/>
+					<dy_linked_location_info this="27A2B5BE-672D-4ACC-A283C2D238C37E31"/>
+					<dy_contest_warning this="400AEACC-2725-42ED-A5DFAE51E135553C"/>
 					<towers_list this="D740689D-4A34-465E-A570908067F679B0">
 						<template_building_slot this="8B903EF0-689E-4052-99686D5D728CD0E0">
 							<building_icon this="FCF1FAE4-EB64-4540-B24F7BE1FFCD809D"/>
@@ -32,12 +34,35 @@
 							<building_icon this="13283456-B953-476F-97C49D4B9D3607E9"/>
 						</template_barricade_slot>
 					</barricades_list>
+					<capture_point_list this="B2E50434-3F97-41CC-B38D02BE331171F0">
+						<template_capture_point this="3506D29A-0A41-4613-B86CCCF3E6DD5A9F">
+							<icon this="798CCADD-7131-44D1-8144B68AA8E66E63">
+								<fill_container this="709C7CA0-DAD8-4192-8C4150CF22443D59">
+									<icon_fill this="6E8928E6-DFC7-411D-AAFA5A52EC7F663C"/>
+								</fill_container>
+							</icon>
+							<contested_arrow_up this="4EC3C6DD-CDC3-4B92-BDF0AF924C64F872"/>
+							<contested_arrow_down this="463D5023-E1A4-42BE-A39BC475F338E74D"/>
+							<lock_icon this="F2B70105-9ACC-476D-9F3A04DEB0B84245"/>
+						</template_capture_point>
+					</capture_point_list>
 					<unlockable_units_list this="78B51F59-F1A2-4218-A49ACD0364428E16">
 						<template_unit_unlock this="DA7D8289-AB04-4E37-94951498136CE2B2"/>
 					</unlockable_units_list>
 					<tx_header this="061BBB2D-E426-40C5-97AF7EFDCBF020EF"/>
+					<ability_list this="DAA6B3BE-746A-41D7-86E244ECF31A3567">
+						<template_ability this="4AAFE100-2DF4-49E1-A833A0287F293E65"/>
+					</ability_list>
+					<tx_zoom this="661D72B6-31AC-4EBC-84B2809BC0214EF3"/>
+					<stick_progress_bar this="87D9F153-A25E-4B66-816871B6EE209D3E">
+						<bar_extents_and_pos this="B4677B79-4134-4B0A-9F78C4E97B3ABDEF">
+							<auto_resizing_comp this="94AD9B4B-562D-4C07-B39159435F2223A7">
+								<completed_comp this="96EC0551-FB45-4E50-B78396C8173213E5"/>
+								<in_progress_comp this="8CCAA61C-0F2D-488A-A6661D617A3AF172"/>
+							</auto_resizing_comp>
+						</bar_extents_and_pos>
+					</stick_progress_bar>
 				</subparent>
-				<ability_list this="DAA6B3BE-746A-41D7-86E244ECF31A3567"/>
 			</capture_point_tooltip>
 			<kill_ratio_ph this="1CC3E7DF-7952-4AAF-9FBD3D7BA266B939">
 				<fill_enemy this="7DC13F13-E50A-4B35-B3D51A93EA333CF0"/>
@@ -88,7 +113,6 @@
 			uniqueguid="C993050E-20E6-4E9C-9DB54169EA1F84BF"
 			currentstate="773B6CED-25E5-466C-B3B3C8CD49A937FD">
 			<callbackwithcontextlist>
-				<callback_with_context callback_id="CustomTooltip"/>
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoBattleCapturePoint"
@@ -102,13 +126,28 @@
 							value="CcoBattleBuilding"/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoBattleCapturePoint"/>
+				<callback_with_context
+					callback_id="ContextCommandDblLeftClick"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="ZoomTo"/>
+				<callback_with_context
+					callback_id="ContextCommandMouseOn"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="SetMouseOver(true)"/>
+				<callback_with_context
+					callback_id="ContextCommandMouseOff"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="SetMouseOver(false)"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
 					this="773B6CED-25E5-466C-B3B3C8CD49A937FD"
 					name="NewState"
 					width="392"
-					height="326"
+					height="502"
 					interactive="true"
 					uniqueguid="773B6CED-25E5-466C-B3B3C8CD49A937FD">
 					<component_text
@@ -167,6 +206,141 @@
 				</columnwidths>
 			</LayoutEngine>
 		</capture_point_tooltip>
+		<completed_comp
+			this="96EC0551-FB45-4E50-B78396C8173213E5"
+			id="completed_comp"
+			part_of_template="true"
+			uniqueguid_in_template="DE8557ED-0386-4BFF-87237559FEB7164F"
+			uniqueguid="96EC0551-FB45-4E50-B78396C8173213E5"
+			dimensions="375.00,3.00"
+			dock_point="Center"
+			is_visible="false">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="ADC8EE74-3720-4152-8FB2A3BA5310086E"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/sticky_bar_fill.png"
+					uniqueguid="39772FAD-D0A4-4654-8A24571776B7E452"/>
+			</component_image_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+				<element value="ui/skins/default/sticky_bar_fill.png"/>
+			</override_images>
+		</completed_comp>
+		<in_progress_comp
+			this="8CCAA61C-0F2D-488A-A6661D617A3AF172"
+			id="in_progress_comp"
+			part_of_template="true"
+			uniqueguid_in_template="598D2980-2D81-4431-B8372E64160B25BB"
+			uniqueguid="8CCAA61C-0F2D-488A-A6661D617A3AF172"
+			dimensions="375.00,3.00"
+			dock_point="Center"
+			is_visible="false">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="A5A71CB1-68BD-4889-904EE7808982BD10"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/sticky_bar_fill.png"
+					uniqueguid="5340020F-1CDF-40EB-AED5EC1E959DE5AC"/>
+			</component_image_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+				<element value="ui/skins/default/sticky_bar_fill.png"/>
+			</override_images>
+		</in_progress_comp>
+		<stick_progress_bar
+			this="87D9F153-A25E-4B66-816871B6EE209D3E"
+			id="stick_progress_bar"
+			template_id="stick_progress_bar"
+			part_of_template="true"
+			uniqueguid_in_template="B5D91471-862C-459A-9117F067B37F7730"
+			uniqueguid="87D9F153-A25E-4B66-816871B6EE209D3E"
+			dimensions="1.00,10.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="9FF44229-1702-4713-A1C4BB32919D34A4"/>
+			</state_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override1"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</stick_progress_bar>
+		<auto_resizing_comp
+			this="94AD9B4B-562D-4C07-B39159435F2223A7"
+			id="auto_resizing_comp"
+			part_of_template="true"
+			uniqueguid_in_template="9F4A9EBE-A605-40E1-AACEB22402830771"
+			uniqueguid="94AD9B4B-562D-4C07-B39159435F2223A7"
+			dimensions="375.00,3.00"
+			dock_point="Center">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="FA756D7D-62A1-4843-BC4EFE1038FF44DA"/>
+			</state_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</auto_resizing_comp>
+		<bar_extents_and_pos
+			this="B4677B79-4134-4B0A-9F78C4E97B3ABDEF"
+			id="bar_extents_and_pos"
+			part_of_template="true"
+			uniqueguid_in_template="3F331065-E782-467B-804031161278DDBC"
+			uniqueguid="B4677B79-4134-4B0A-9F78C4E97B3ABDEF"
+			dimensions="375.00,3.00"
+			offset="-11.00,9.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="21937A14-6D10-4A88-A5F575D5F0D54FCB"/>
+			</state_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</bar_extents_and_pos>
 		<ownership_info_parent
 			this="60959F04-DC42-4DCD-A23957061B4D0EA5"
 			id="ownership_info_parent"
@@ -181,7 +355,7 @@
 					name="NewState"
 					width="352"
 					height="36"
-					interactive="true"
+					disabled="true"
 					uniqueguid="4B21D28C-9D71-4ACF-AC9936315DD2DB5C">
 					<component_text
 						font_m_font_name="dev_font"
@@ -382,7 +556,7 @@
 		<barricades_list
 			this="3599CC24-F468-4053-AC2C9515582576D4"
 			id="barricades_list"
-			offset="20.00,156.00"
+			offset="20.00,208.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			priority="30"
@@ -394,11 +568,20 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoBattleCapturePoint"
-					context_function_id="ToggleableSlotBarricadesList"/>
+					context_function_id="ToggleableSlotBarricadesList">
+					<child_m_user_properties>
+						<property
+							name="stored_object_to_pass0"
+							value="CcoBattleCapturePoint"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBattleCapturePoint"
 					context_function_id="ToggleableSlotBarricadesList.IsEmpty() == false &amp;&amp; CanCurrentOwnerBuild"/>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoBattleCapturePoint"/>
 			</callbackwithcontextlist>
 			<states>
 				<default
@@ -406,7 +589,7 @@
 					name="default"
 					width="250"
 					height="56"
-					interactive="true"
+					disabled="true"
 					uniqueguid="77EC2A09-7D34-40AE-B470C679179B9409">
 					<component_text
 						text="Barricades:"
@@ -442,6 +625,10 @@
 					callback_id="ContextImageSetter"
 					context_object_id="CcoBattleToggleableSlot"
 					context_function_id="IconBlendablePathForIndex(CurrentBuildableOwner,EnabledIndex)"/>
+				<callback_with_context
+					callback_id="ContextColourSetter"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="ColourForHolder"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -453,7 +640,7 @@
 				<default
 					this="29093327-1C63-44AB-80DD9196A19992BB"
 					name="default"
-					interactive="true"
+					disabled="true"
 					uniqueguid="29093327-1C63-44AB-80DD9196A19992BB">
 					<imagemetrics>
 						<image
@@ -482,6 +669,10 @@
 					callback_id="ContextImageSetter"
 					context_object_id="CcoBattleBuilding"
 					context_function_id="RadarIcon"/>
+				<callback_with_context
+					callback_id="ContextCommandDblLeftClick"
+					context_object_id="CcoBattleToggleableSlot"
+					context_function_id="ZoomTo"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -516,6 +707,12 @@
 			uniqueguid="8B903EF0-689E-4052-99686D5D728CD0E0"
 			currentstate="D6460E30-09E2-40DF-81D46D596C370872"
 			defaultstate="D6460E30-09E2-40DF-81D46D596C370872">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextCommandDblLeftClick"
+					context_object_id="CcoBattleToggleableSlot"
+					context_function_id="ZoomTo"/>
+			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
 					this="A025BC21-A1BC-41DB-881CE9BB34DC87CE"
@@ -541,7 +738,7 @@
 		<towers_list
 			this="D740689D-4A34-465E-A570908067F679B0"
 			id="towers_list"
-			offset="20.00,100.00"
+			offset="20.00,152.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			priority="30"
@@ -553,7 +750,13 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoBattleCapturePoint"
-					context_function_id="ToggleableSlotTowersList"/>
+					context_function_id="ToggleableSlotTowersList">
+					<child_m_user_properties>
+						<property
+							name="stored_object_to_pass0"
+							value="CcoBattleCapturePoint"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBattleCapturePoint"
@@ -565,7 +768,7 @@
 					name="default"
 					width="250"
 					height="56"
-					interactive="true"
+					disabled="true"
 					uniqueguid="1F2EEACB-98B0-442B-A6E876DF69D93EDF">
 					<component_text
 						text="Towers:"
@@ -601,6 +804,10 @@
 					callback_id="ContextImageSetter"
 					context_object_id="CcoBattleToggleableSlot"
 					context_function_id="IconBlendablePathForIndex(CurrentBuildableOwner,EnabledIndex)"/>
+				<callback_with_context
+					callback_id="ContextColourSetter"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="ColourForHolder"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -612,7 +819,7 @@
 				<default
 					this="CD884E0F-85C0-466F-BE965951557BBA97"
 					name="default"
-					interactive="true"
+					disabled="true"
 					uniqueguid="CD884E0F-85C0-466F-BE965951557BBA97">
 					<imagemetrics>
 						<image
@@ -628,7 +835,7 @@
 		<dy_description
 			this="47249C26-2ABC-4852-9D48C55A35E36CD6"
 			id="dy_description"
-			offset="304.00,-242.00"
+			offset="20.00,100.00"
 			allowhorizontalresize="false"
 			visible="false"
 			priority="255"
@@ -664,7 +871,7 @@
 		<tx_header
 			this="061BBB2D-E426-40C5-97AF7EFDCBF020EF"
 			id="tx_header"
-			offset="20.00,286.00"
+			offset="20.00,394.00"
 			priority="30"
 			tooltipslocalised="true"
 			uniqueguid="061BBB2D-E426-40C5-97AF7EFDCBF020EF"
@@ -685,26 +892,28 @@
 					this="7FC0F655-5BFF-4943-995024970F97E745"
 					name="default"
 					width="300"
-					height="30"
-					interactive="true"
+					height="24"
+					disabled="true"
 					uniqueguid="7FC0F655-5BFF-4943-995024970F97E745">
 					<component_text
 						text="Provides constant effect:"
 						textvalign="Center"
+						textyoffset="4.00,0.00"
 						texthbehaviour="Never split"
 						textlocalised="true"
 						textlabel="tx_header_default_Text_530040"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="body_12"/>
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
 				</default>
 				<locked
 					this="EACEC9C6-A58D-4C77-99D2A9696807E7BA"
 					name="locked"
 					width="234"
 					height="16"
-					interactive="true"
+					disabled="true"
 					uniqueguid="EACEC9C6-A58D-4C77-99D2A9696807E7BA">
 					<component_text
 						text="Provides constant effect (disabled):"
@@ -716,7 +925,7 @@
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
 						fontcat_name="body_12"
-						text_shader_name="set_greyscale_t0"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"
 						textshadervars="1.00,0.80,0.00,0.00"/>
 				</locked>
 			</states>
@@ -770,7 +979,7 @@
 		<unlockable_units_list
 			this="78B51F59-F1A2-4218-A49ACD0364428E16"
 			id="unlockable_units_list"
-			offset="20.00,212.00"
+			offset="20.00,320.00"
 			allowverticalresize="false"
 			priority="30"
 			tooltipslocalised="true"
@@ -799,7 +1008,7 @@
 					name="default"
 					width="300"
 					height="74"
-					interactive="true"
+					disabled="true"
 					uniqueguid="6EB7EA68-16BC-47B4-B598CF3DB9C9B11B">
 					<component_text
 						text="Unlocks reinforcements:"
@@ -1395,6 +1604,12 @@
 			uniqueguid="6DCB6AF5-6D1A-44F0-8305B7CA643C0B83"
 			currentstate="BA656118-7A6D-4B5A-A69EC504A4EA01D0"
 			defaultstate="BA656118-7A6D-4B5A-A69EC504A4EA01D0">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="GetIfElse(IsNearingReLock, &quot;locking&quot;, GetIfElse(IsMouseOver, &quot;locked_highlight&quot;, &quot;default&quot;))"/>
+			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
 					this="BE8F7577-ED24-46F8-9F8790BA3FC3D73A"
@@ -1417,6 +1632,41 @@
 							height="24"/>
 					</imagemetrics>
 				</default>
+				<locked_highlight
+					this="4E705D56-84E0-4AAF-9758A7ABE7192F17"
+					name="locked_highlight"
+					width="24"
+					height="24"
+					shader_name="red_pulse_t0"
+					shadervars="0.00,0.25,1.00,0.00"
+					uniqueguid="4E705D56-84E0-4AAF-9758A7ABE7192F17">
+					<imagemetrics>
+						<image
+							this="C10D1C6F-093A-4931-AD4C7792613BF294"
+							uniqueguid="C10D1C6F-093A-4931-AD4C7792613BF294"
+							componentimage="BE8F7577-ED24-46F8-9F8790BA3FC3D73A"
+							width="24"
+							height="24"/>
+					</imagemetrics>
+				</locked_highlight>
+				<locking
+					this="3DF41762-9877-4E42-A5139084EC80AF38"
+					name="locking"
+					width="24"
+					height="24"
+					shader_name="glow_pulse_t0"
+					shadervars="0.15,1.00,1.00,0.00"
+					uniqueguid="3DF41762-9877-4E42-A5139084EC80AF38">
+					<imagemetrics>
+						<image
+							this="485D2F86-13D5-4961-9DA5C3FB36469E9B"
+							uniqueguid="485D2F86-13D5-4961-9DA5C3FB36469E9B"
+							componentimage="BE8F7577-ED24-46F8-9F8790BA3FC3D73A"
+							width="24"
+							height="24"
+							colour="#FFFFFFC4"/>
+					</imagemetrics>
+				</locking>
 			</states>
 		</lock_icon>
 		<lock_parent
@@ -1434,7 +1684,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBattleCapturePoint"
-					context_function_id="BattleRoot.CaptureLocationManagerContext.TimeUntilAllCapturePointsAvailable &gt; 0 || this.IsLocked == true">
+					context_function_id="BattleRoot.CaptureLocationManagerContext.TimeUntilAllCapturePointsAvailable &gt; 0 || this.IsLockedForAlliance(BattleRoot.PlayerArmyContext.AllianceIndex) || IsNearingReLock">
 					<child_m_user_properties>
 						<property
 							name="update_constant"
@@ -1504,8 +1754,10 @@
 		<ability_list
 			this="DAA6B3BE-746A-41D7-86E244ECF31A3567"
 			id="ability_list"
-			offset="0.00,309.00"
-			dock_offset="0.00,-17.00"
+			offset="20.00,414.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			dock_offset="0.00,-4.00"
 			priority="30"
 			tooltipslocalised="true"
 			uniqueguid="DAA6B3BE-746A-41D7-86E244ECF31A3567"
@@ -1519,13 +1771,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoBattleBuilding"
-					context_function_id="HasOwner | this.SpecialAbilitiesList | this.SpecialAbilitiesListWithArmy(BattleRoot.PlayerArmyContext)">
-					<child_m_user_properties>
-						<property
-							name="template_layout"
-							value="ui/common ui/special_ability_tooltip"/>
-					</child_m_user_properties>
-				</callback_with_context>
+					context_function_id="HasOwner | this.SpecialAbilitiesList | this.SpecialAbilitiesListWithArmy(BattleRoot.PlayerArmyContext)"/>
 				<callback_with_context callback_id="ResizeToFitTarget">
 					<child_m_user_properties>
 						<property
@@ -1555,14 +1801,14 @@
 				<default
 					this="01471886-76AC-48CA-A77151087FC0AC70"
 					name="default"
-					width="1"
-					height="1"
+					width="348"
+					height="38"
 					uniqueguid="01471886-76AC-48CA-A77151087FC0AC70"/>
 				<locked_state
 					this="DA7FCDAC-EACA-4CB8-A223F47AD39736EE"
 					name="locked_state"
-					width="1"
-					height="1"
+					width="348"
+					height="38"
 					shader_name="set_greyscale_t0"
 					shadervars="1.00,1.00,0.00,0.00"
 					uniqueguid="DA7FCDAC-EACA-4CB8-A223F47AD39736EE"/>
@@ -1584,11 +1830,10 @@
 					</frames>
 				</locked_state>
 			</animations>
-			<LayoutEngine type="List">
-				<columnwidths>
-					<column width="1"/>
-				</columnwidths>
-			</LayoutEngine>
+			<LayoutEngine
+				type="HorizontalList"
+				secondary_margins="5.00,5.00"
+				margins="3.00,0.00"/>
 		</ability_list>
 		<subparent
 			this="6E27BEB6-840F-487C-95C7359278659327"
@@ -1619,7 +1864,7 @@
 					this="6275E61C-5FBC-49B0-BCFDB7EAC9EE1F50"
 					name="default"
 					width="392"
-					height="326"
+					height="502"
 					uniqueguid="6275E61C-5FBC-49B0-BCFDB7EAC9EE1F50">
 					<imagemetrics>
 						<image
@@ -1627,7 +1872,7 @@
 							uniqueguid="A6862DEB-A903-4036-BAAB340AA5FB5AF0"
 							componentimage="49A9F404-3938-421E-923EAB4EBE31703B"
 							width="392"
-							height="326"
+							height="502"
 							tile="true"
 							margin="16.00,20.00,16.00,20.00"/>
 						<image
@@ -1673,5 +1918,1055 @@
 				sizetocontent="true"
 				vertical_alignment="Center"/>
 		</label_owner_container>
+		<capture_point_list
+			this="B2E50434-3F97-41CC-B38D02BE331171F0"
+			id="capture_point_list"
+			offset="20.00,264.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="30"
+			tooltipslocalised="true"
+			uniqueguid="B2E50434-3F97-41CC-B38D02BE331171F0"
+			currentstate="E4BB62C1-274F-46BF-867172FBF54FB07F"
+			defaultstate="E4BB62C1-274F-46BF-867172FBF54FB07F">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="Join(LinkedParentCapturePointContext, LinkedChildCapturePointsList)">
+					<child_m_user_properties>
+						<property
+							name="hide_if_empty"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagationBlocker"
+					context_object_id="CcoBattleCapturePoint"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="E4BB62C1-274F-46BF-867172FBF54FB07F"
+					name="default"
+					width="250"
+					height="56"
+					disabled="true"
+					uniqueguid="E4BB62C1-274F-46BF-867172FBF54FB07F">
+					<component_text
+						text="Linked Capture Location:"
+						textyoffset="4.00,0.00"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_8ded5f7ee"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+				</default>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				secondary_margins="24.00,0.00"/>
+		</capture_point_list>
+		<dy_linked_location_info
+			this="27A2B5BE-672D-4ACC-A283C2D238C37E31"
+			id="dy_linked_location_info"
+			offset="20.00,100.00"
+			allowhorizontalresize="false"
+			priority="30"
+			tooltipslocalised="true"
+			uniqueguid="27A2B5BE-672D-4ACC-A283C2D238C37E31"
+			currentstate="C2E346C4-96EA-4DCE-83D0F9B66CC7C152"
+			defaultstate="C2E346C4-96EA-4DCE-83D0F9B66CC7C152">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="(IsContextValid(LinkedParentCapturePointContext) || LinkedChildCapturePointsList.IsEmpty == false) &amp;&amp; #Hide when we are showing a contest warning#(IsNearingReLock || IsChildNearingReLock) == false"/>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="GetIfElse(OriginalOwnerAlliance == BattleRoot.PlayerArmyContext.AllianceIndex, #defender# GetIfElse(LinkedChildCapturePointsList.IsEmpty == false, #parent# Format(Loc(&quot;capture_point_parent_defender_info&quot;), LinkedChildCapturePointsList.FirstContext.DisplayName), #child# Format(Loc(&quot;capture_point_child_defender_info&quot;), LinkedParentCapturePointContext.DisplayName)), #attacker# GetIfElse(LinkedChildCapturePointsList.IsEmpty == false, #parent# Format(Loc(&quot;capture_point_parent_attacker_info&quot;), LinkedChildCapturePointsList.FirstContext.DisplayName), #child# Format(Loc(&quot;capture_point_child_attacker_info&quot;), LinkedParentCapturePointContext.DisplayName)))"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="C2E346C4-96EA-4DCE-83D0F9B66CC7C152"
+					name="default"
+					width="352"
+					height="26"
+					disabled="true"
+					uniqueguid="C2E346C4-96EA-4DCE-83D0F9B66CC7C152">
+					<component_text
+						text="dy_linked_location_info"
+						textvalign="Center"
+						textyoffset="5.00,5.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_f8382e93"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</default>
+			</states>
+		</dy_linked_location_info>
+		<template_ability
+			this="4AAFE100-2DF4-49E1-A833A0287F293E65"
+			id="template_ability"
+			offset="3.00,5.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="46"
+			componentleveltooltip="{{tt:ui/common ui/special_ability_tooltip}}"
+			tooltiplabel="ComponentTooltip_9dce797f"
+			uniqueguid="4AAFE100-2DF4-49E1-A833A0287F293E65"
+			currentstate="EEB41656-368D-4722-B614DD9285AB445A"
+			defaultstate="EEB41656-368D-4722-B614DD9285AB445A">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoBattleAbility"
+					context_function_id="SetupAbilityContext.IconPath"/>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoBattleAbility"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="tooltip_dock"
+					value="tre"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="D884D91B-959F-47C2-9C261593C5024410"
+					uniqueguid="D884D91B-959F-47C2-9C261593C5024410"
+					imagepath="ui/battle ui/ability_icons/causes_fear.png"/>
+				<component_image
+					this="7D128BB4-8333-4779-9180F9F121EDCC48"
+					uniqueguid="7D128BB4-8333-4779-9180F9F121EDCC48"
+					imagepath="ui/skins/default/ability_icon_frame_small.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="EEB41656-368D-4722-B614DD9285AB445A"
+					name="active"
+					width="28"
+					height="28"
+					interactive="true"
+					uniqueguid="EEB41656-368D-4722-B614DD9285AB445A"
+					stateeditordisplaypos="204.00,44.00">
+					<imagemetrics>
+						<image
+							this="42FBC2EF-8354-4DEA-A6BDF94A705189AC"
+							uniqueguid="42FBC2EF-8354-4DEA-A6BDF94A705189AC"
+							componentimage="D884D91B-959F-47C2-9C261593C5024410"
+							offset="1.00,1.00"
+							width="26"
+							height="26"
+							colour="#F0F0F0FF"
+							dockpoint="Center"/>
+						<image
+							this="15C2A25D-E89A-4FD3-A3E8F53C76D13846"
+							uniqueguid="15C2A25D-E89A-4FD3-A3E8F53C76D13846"
+							componentimage="7D128BB4-8333-4779-9180F9F121EDCC48"
+							width="28"
+							height="28"
+							dockpoint="Center"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							transition_m_target_state="781754C7-E098-416C-8F8D17144599B058"
+							transition_m_transition_time="100"
+							transition_m_interpolation_property_mask="4"/>
+					</transitionmap>
+					<component_text
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
+				</active>
+				<active_hover
+					this="781754C7-E098-416C-8F8D17144599B058"
+					name="active_hover"
+					width="28"
+					height="28"
+					interactive="true"
+					uniqueguid="781754C7-E098-416C-8F8D17144599B058"
+					stateeditordisplaypos="284.00,108.00">
+					<imagemetrics>
+						<image
+							this="FBC87822-0E87-4A61-8615C4348326BBBB"
+							uniqueguid="FBC87822-0E87-4A61-8615C4348326BBBB"
+							componentimage="D884D91B-959F-47C2-9C261593C5024410"
+							offset="-5.00,-5.00"
+							width="38"
+							height="38"
+							colour="#F0F0F0FF"
+							dockpoint="Center"/>
+						<image
+							this="2D06025A-6BF2-4C5D-BBC456A7CD970572"
+							uniqueguid="2D06025A-6BF2-4C5D-BBC456A7CD970572"
+							componentimage="7D128BB4-8333-4779-9180F9F121EDCC48"
+							offset="-6.00,-6.00"
+							width="40"
+							height="40"
+							dockpoint="Center"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="EEB41656-368D-4722-B614DD9285AB445A"
+							transition_m_transition_time="100"
+							transition_m_interpolation_property_mask="4"/>
+					</transitionmap>
+					<component_text
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
+				</active_hover>
+				<passive
+					this="F789EDDD-8051-404F-A551766EF24A4EE9"
+					name="passive"
+					width="28"
+					height="28"
+					interactive="true"
+					uniqueguid="F789EDDD-8051-404F-A551766EF24A4EE9"
+					stateeditordisplaypos="83.00,115.00">
+					<imagemetrics>
+						<image
+							this="2C72D6A9-00DE-47DA-AAB786D24C9F0EF9"
+							uniqueguid="2C72D6A9-00DE-47DA-AAB786D24C9F0EF9"
+							componentimage="7D128BB4-8333-4779-9180F9F121EDCC48"
+							width="28"
+							height="28"
+							dockpoint="Center"/>
+						<image
+							this="C983C643-1E31-45CF-BDF7DED9AD70CC29"
+							uniqueguid="C983C643-1E31-45CF-BDF7DED9AD70CC29"
+							componentimage="D884D91B-959F-47C2-9C261593C5024410"
+							offset="1.00,1.00"
+							width="26"
+							height="26"
+							dockpoint="Center"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							transition_m_target_state="F8CA8104-2542-4465-8DAD6445356E43D2"
+							transition_m_transition_time="100"
+							transition_m_interpolation_property_mask="4"/>
+					</transitionmap>
+				</passive>
+				<passive_hover
+					this="F8CA8104-2542-4465-8DAD6445356E43D2"
+					name="passive_hover"
+					width="28"
+					height="28"
+					interactive="true"
+					uniqueguid="F8CA8104-2542-4465-8DAD6445356E43D2"
+					stateeditordisplaypos="183.00,196.00">
+					<imagemetrics>
+						<image
+							this="931EFB4F-5387-4D68-8F6EC20128B34933"
+							uniqueguid="931EFB4F-5387-4D68-8F6EC20128B34933"
+							componentimage="7D128BB4-8333-4779-9180F9F121EDCC48"
+							offset="-6.00,-6.00"
+							width="40"
+							height="40"
+							dockpoint="Center"/>
+						<image
+							this="884F6E86-7ED3-4E33-BEDE121FFE27F914"
+							uniqueguid="884F6E86-7ED3-4E33-BEDE121FFE27F914"
+							componentimage="D884D91B-959F-47C2-9C261593C5024410"
+							offset="-5.00,-5.00"
+							width="38"
+							height="38"
+							dockpoint="Center"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="F789EDDD-8051-404F-A551766EF24A4EE9"/>
+					</transitionmap>
+				</passive_hover>
+				<shot_type
+					this="9DAF6BAE-AEA8-4B9D-BAA54C8220E14EBD"
+					name="shot_type"
+					width="28"
+					height="28"
+					interactive="true"
+					uniqueguid="9DAF6BAE-AEA8-4B9D-BAA54C8220E14EBD">
+					<imagemetrics>
+						<image
+							this="CAA36D02-57DB-4856-8D7954D1106A5B3C"
+							uniqueguid="CAA36D02-57DB-4856-8D7954D1106A5B3C"
+							componentimage="D884D91B-959F-47C2-9C261593C5024410"
+							offset="1.00,1.00"
+							width="26"
+							height="26"
+							colour="#F0F0F0FF"
+							dockpoint="Center"
+							canresizeheight="false"
+							canresizewidth="false"/>
+						<image
+							this="4FBF62BD-8A6C-4BB3-B67B6405803192ED"
+							uniqueguid="4FBF62BD-8A6C-4BB3-B67B6405803192ED"
+							componentimage="7D128BB4-8333-4779-9180F9F121EDCC48"
+							width="28"
+							height="28"
+							dockpoint="Center"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<component_text
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
+				</shot_type>
+			</states>
+		</template_ability>
+		<dy_contest_warning
+			this="400AEACC-2725-42ED-A5DFAE51E135553C"
+			id="dy_contest_warning"
+			offset="20.00,126.00"
+			allowhorizontalresize="false"
+			priority="30"
+			tooltipslocalised="true"
+			uniqueguid="400AEACC-2725-42ED-A5DFAE51E135553C"
+			currentstate="CAFC335A-9DBD-4523-9E8E10FEF5312577"
+			defaultstate="CAFC335A-9DBD-4523-9E8E10FEF5312577">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="IsNearingReLock || IsChildNearingReLock"/>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="GetIfElse(LinkedChildCapturePointsList.IsEmpty == false, Format(Loc(&quot;capture_point_parent_attacker_contest_warning&quot;), LinkedChildCapturePointsList.FirstContext.DisplayName), Format(Loc(&quot;capture_point_child_attacker_contest_warning&quot;), LinkedParentCapturePointContext.DisplayName))"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="CAFC335A-9DBD-4523-9E8E10FEF5312577"
+					name="default"
+					width="352"
+					height="26"
+					disabled="true"
+					uniqueguid="CAFC335A-9DBD-4523-9E8E10FEF5312577">
+					<component_text
+						text="dy_contest_warning"
+						textvalign="Center"
+						textyoffset="5.00,5.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_911f1a16"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</default>
+			</states>
+		</dy_contest_warning>
+		<tx_zoom
+			this="661D72B6-31AC-4EBC-84B2809BC0214EF3"
+			id="tx_zoom"
+			offset="20.00,456.00"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="661D72B6-31AC-4EBC-84B2809BC0214EF3"
+			currentstate="C783E6F0-AE3F-4F8B-908FE129307E3EF3"
+			defaultstate="C783E6F0-AE3F-4F8B-908FE129307E3EF3"
+			comment="We hide description when part of a skill tooltip">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_function_id="Loc(&quot;double_left_click_to_zoom&quot;)"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="min_text_width"
+					value="300"/>
+			</userproperties>
+			<states>
+				<default
+					this="C783E6F0-AE3F-4F8B-908FE129307E3EF3"
+					name="default"
+					width="320"
+					height="26"
+					uniqueguid="C783E6F0-AE3F-4F8B-908FE129307E3EF3">
+					<component_text
+						text="tx_zoom"
+						textyoffset="5.00,5.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="StateText_e9186514"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+				</default>
+			</states>
+		</tx_zoom>
+		<contested_arrow_down
+			this="463D5023-E1A4-42BE-A39BC475F338E74D"
+			id="contested_arrow_down"
+			offset="0.00,18.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Bottom Left"
+			dock_offset="0.00,6.00"
+			component_anchor_point="0.00,1.00"
+			priority="30"
+			tooltipslocalised="true"
+			uniqueguid="463D5023-E1A4-42BE-A39BC475F338E74D"
+			currentstate="CA7DC6F0-729D-4ABA-82466618F462F9DD"
+			defaultstate="CA7DC6F0-729D-4ABA-82466618F462F9DD">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="(x = ContestingFactorForAlliance(BattleRoot.PlayerAllianceContext.Id)) =&gt; { (x &lt; 0) || (x &lt;= 0 &amp;&amp;  IsContested) }">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value="100"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="ContestingFactorForAlliance(BattleRoot.PlayerAllianceContext.Id)">
+					<child_m_user_properties>
+						<property
+							name="threshold0"
+							value="-0.6"/>
+						<property
+							name="threshold1"
+							value="-0.35"/>
+						<property
+							name="update_constant"
+							value="100"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="D3019ABA-7397-4A55-8436F3D12A5B979D"
+					uniqueguid="D3019ABA-7397-4A55-8436F3D12A5B979D"
+					imagepath="ui/skins/default/norsca_god_bar_arrow_down.png"/>
+			</componentimages>
+			<states>
+				<_0
+					this="3E4FE19E-7F4D-466B-9719FEA057D730FB"
+					name="0"
+					width="8"
+					height="22"
+					interactive="true"
+					shader_name="brighten_t0"
+					uniqueguid="3E4FE19E-7F4D-466B-9719FEA057D730FB">
+					<imagemetrics>
+						<image
+							this="6F8D5C3D-484F-430B-BE0F6A8382AA05B0"
+							uniqueguid="6F8D5C3D-484F-430B-BE0F6A8382AA05B0"
+							componentimage="D3019ABA-7397-4A55-8436F3D12A5B979D"
+							offset="-4.00,0.00"
+							width="16"
+							height="10"
+							dockpoint="Center"
+							dock_offset="0.00,-6.00"/>
+						<image
+							this="1C7951AB-EB26-4CD5-B1ACB245AE5E6356"
+							uniqueguid="1C7951AB-EB26-4CD5-B1ACB245AE5E6356"
+							componentimage="D3019ABA-7397-4A55-8436F3D12A5B979D"
+							offset="-4.00,6.00"
+							width="16"
+							height="10"
+							dockpoint="Center"/>
+						<image
+							this="E771B400-D06B-43C5-BFB1BAB5BB338F49"
+							uniqueguid="E771B400-D06B-43C5-BFB1BAB5BB338F49"
+							componentimage="D3019ABA-7397-4A55-8436F3D12A5B979D"
+							offset="-4.00,12.00"
+							width="16"
+							height="10"
+							dockpoint="Center"
+							dock_offset="0.00,6.00"/>
+					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</_0>
+				<_1
+					this="12F72D13-1903-4E0B-848036BA21157595"
+					name="1"
+					width="8"
+					height="22"
+					interactive="true"
+					shader_name="brighten_t0"
+					uniqueguid="12F72D13-1903-4E0B-848036BA21157595">
+					<imagemetrics>
+						<image
+							this="9F7F5487-B00A-49BE-AFD965CD1DADB5C3"
+							uniqueguid="9F7F5487-B00A-49BE-AFD965CD1DADB5C3"
+							componentimage="D3019ABA-7397-4A55-8436F3D12A5B979D"
+							offset="-4.00,3.00"
+							width="16"
+							height="10"
+							dockpoint="Center"
+							dock_offset="0.00,-3.00"/>
+						<image
+							this="51AF89E5-5D52-443E-A65A0D2AE1EDCF49"
+							uniqueguid="51AF89E5-5D52-443E-A65A0D2AE1EDCF49"
+							componentimage="D3019ABA-7397-4A55-8436F3D12A5B979D"
+							offset="-4.00,9.00"
+							width="16"
+							height="10"
+							dockpoint="Center"
+							dock_offset="0.00,3.00"/>
+					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</_1>
+				<_2
+					this="CA7DC6F0-729D-4ABA-82466618F462F9DD"
+					name="2"
+					width="8"
+					height="22"
+					interactive="true"
+					shader_name="brighten_t0"
+					uniqueguid="CA7DC6F0-729D-4ABA-82466618F462F9DD">
+					<imagemetrics>
+						<image
+							this="2C27152E-B811-4A10-9662A0C83595F8CB"
+							uniqueguid="2C27152E-B811-4A10-9662A0C83595F8CB"
+							componentimage="D3019ABA-7397-4A55-8436F3D12A5B979D"
+							offset="-4.00,6.00"
+							width="16"
+							height="10"
+							dockpoint="Center"/>
+					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</_2>
+			</states>
+		</contested_arrow_down>
+		<contested_arrow_up
+			this="4EC3C6DD-CDC3-4B92-BDF0AF924C64F872"
+			id="contested_arrow_up"
+			offset="26.00,17.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Bottom Left"
+			dock_offset="26.00,5.00"
+			component_anchor_point="0.00,1.00"
+			priority="30"
+			tooltipslocalised="true"
+			uniqueguid="4EC3C6DD-CDC3-4B92-BDF0AF924C64F872"
+			currentstate="786DBB0F-A566-4B0B-8E226FE5FD313474"
+			defaultstate="786DBB0F-A566-4B0B-8E226FE5FD313474">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="(x = ContestingFactorForAlliance(BattleRoot.PlayerAllianceContext.Id)) =&gt; { (x &gt; 0) || (x &gt;= 0 &amp;&amp;  IsContested) }">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value="100"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="ContestingFactorForAlliance(BattleRoot.PlayerAllianceContext.Id)">
+					<child_m_user_properties>
+						<property
+							name="threshold0"
+							value="0.35"/>
+						<property
+							name="threshold1"
+							value="0.6"/>
+						<property
+							name="update_constant"
+							value="100"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="4D86C1BD-C381-470D-B08F196AC088AF76"
+					uniqueguid="4D86C1BD-C381-470D-B08F196AC088AF76"
+					imagepath="ui/skins/default/norsca_god_bar_arrow_up.png"/>
+			</componentimages>
+			<states>
+				<_0
+					this="786DBB0F-A566-4B0B-8E226FE5FD313474"
+					name="0"
+					width="8"
+					height="22"
+					interactive="true"
+					shader_name="brighten_t0"
+					uniqueguid="786DBB0F-A566-4B0B-8E226FE5FD313474">
+					<imagemetrics>
+						<image
+							this="9D27FABD-6DFB-4D77-8DE7D97FA5C69DA8"
+							uniqueguid="9D27FABD-6DFB-4D77-8DE7D97FA5C69DA8"
+							componentimage="4D86C1BD-C381-470D-B08F196AC088AF76"
+							offset="-4.00,6.00"
+							width="16"
+							height="10"
+							dockpoint="Center"/>
+					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</_0>
+				<_1
+					this="CF7D4D5D-1429-413F-A890AAAA044974FC"
+					name="1"
+					width="8"
+					height="22"
+					interactive="true"
+					shader_name="brighten_t0"
+					uniqueguid="CF7D4D5D-1429-413F-A890AAAA044974FC">
+					<imagemetrics>
+						<image
+							this="E7BA0C7C-3690-41BA-B59038C23C3BDC89"
+							uniqueguid="E7BA0C7C-3690-41BA-B59038C23C3BDC89"
+							componentimage="4D86C1BD-C381-470D-B08F196AC088AF76"
+							offset="-4.00,3.00"
+							width="16"
+							height="10"
+							dockpoint="Center"
+							dock_offset="0.00,-3.00"/>
+						<image
+							this="2552521B-C2B9-496A-9B898A6D28286F00"
+							uniqueguid="2552521B-C2B9-496A-9B898A6D28286F00"
+							componentimage="4D86C1BD-C381-470D-B08F196AC088AF76"
+							offset="-4.00,9.00"
+							width="16"
+							height="10"
+							dockpoint="Center"
+							dock_offset="0.00,3.00"/>
+					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</_1>
+				<_2
+					this="815301F3-7108-41BC-8888F60A77569E93"
+					name="2"
+					width="8"
+					height="22"
+					interactive="true"
+					shader_name="brighten_t0"
+					uniqueguid="815301F3-7108-41BC-8888F60A77569E93">
+					<imagemetrics>
+						<image
+							this="D51CC39D-9655-43E6-BCDC528CF63830F9"
+							uniqueguid="D51CC39D-9655-43E6-BCDC528CF63830F9"
+							componentimage="4D86C1BD-C381-470D-B08F196AC088AF76"
+							offset="-4.00,0.00"
+							width="16"
+							height="10"
+							dockpoint="Center"
+							dock_offset="0.00,-6.00"/>
+						<image
+							this="899925CB-ECD7-44F8-BC55F719F2FA1B6B"
+							uniqueguid="899925CB-ECD7-44F8-BC55F719F2FA1B6B"
+							componentimage="4D86C1BD-C381-470D-B08F196AC088AF76"
+							offset="-4.00,6.00"
+							width="16"
+							height="10"
+							dockpoint="Center"/>
+						<image
+							this="95B3FA9C-3A1D-4057-B59775FDBC915019"
+							uniqueguid="95B3FA9C-3A1D-4057-B59775FDBC915019"
+							componentimage="4D86C1BD-C381-470D-B08F196AC088AF76"
+							offset="-4.00,12.00"
+							width="16"
+							height="10"
+							dockpoint="Center"
+							dock_offset="0.00,6.00"/>
+					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</_2>
+			</states>
+		</contested_arrow_up>
+		<fill_container
+			this="709C7CA0-DAD8-4192-8C4150CF22443D59"
+			id="fill_container"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="30"
+			tooltipslocalised="true"
+			uniqueguid="709C7CA0-DAD8-4192-8C4150CF22443D59"
+			currentstate="1E737487-2E08-41A2-8C4FA5D64522039C"
+			defaultstate="1E737487-2E08-41A2-8C4FA5D64522039C">
+			<states>
+				<default
+					this="1E737487-2E08-41A2-8C4FA5D64522039C"
+					name="default"
+					width="34"
+					height="34"
+					uniqueguid="1E737487-2E08-41A2-8C4FA5D64522039C"/>
+			</states>
+		</fill_container>
+		<icon
+			this="798CCADD-7131-44D1-8144B68AA8E66E63"
+			id="icon"
+			clipchildren="true"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="30"
+			tooltipslocalised="true"
+			uniqueguid="798CCADD-7131-44D1-8144B68AA8E66E63"
+			currentstate="C83988EC-A36C-4E67-838C4E8D0CA87FC6"
+			defaultstate="C83988EC-A36C-4E67-838C4E8D0CA87FC6">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="GetIfElse(this.IsContested,&quot;glow&quot;, &quot;default&quot;)">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextColourSetter"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="ColourBase">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="IconPath">
+					<child_m_user_properties>
+						<property
+							name="force_resize_image"
+							value=""/>
+						<property
+							name="resize_component"
+							value=""/>
+						<property
+							name="suffix"
+							value="_small"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="A8109D6A-CE45-4315-B6B314076BCEAA80"
+					uniqueguid="A8109D6A-CE45-4315-B6B314076BCEAA80"
+					imagepath="ui/battle ui/capture_point_icons/capture_point_armour_major_small.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="C83988EC-A36C-4E67-838C4E8D0CA87FC6"
+					name="default"
+					width="34"
+					height="34"
+					uniqueguid="C83988EC-A36C-4E67-838C4E8D0CA87FC6">
+					<imagemetrics>
+						<image
+							this="B04ABBF3-B3E8-4807-B1CC334D2953779B"
+							uniqueguid="B04ABBF3-B3E8-4807-B1CC334D2953779B"
+							componentimage="A8109D6A-CE45-4315-B6B314076BCEAA80"
+							width="34"
+							height="34"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</default>
+				<glow
+					this="94F6CC62-9CB7-4EB6-A241C5A16B449F3F"
+					name="glow"
+					width="34"
+					height="34"
+					shader_name="glow_pulse_t0"
+					uniqueguid="94F6CC62-9CB7-4EB6-A241C5A16B449F3F">
+					<imagemetrics>
+						<image
+							this="CB01188E-A058-4DFC-8BA32E02ADBF577A"
+							uniqueguid="CB01188E-A058-4DFC-8BA32E02ADBF577A"
+							componentimage="A8109D6A-CE45-4315-B6B314076BCEAA80"
+							width="34"
+							height="34"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</glow>
+			</states>
+		</icon>
+		<icon_fill
+			this="6E8928E6-DFC7-411D-AAFA5A52EC7F663C"
+			id="icon_fill"
+			offset="1.00,0.00"
+			allowhorizontalresize="false"
+			clipimagestocomponent="true"
+			docking="Bottom Center"
+			component_anchor_point="0.50,1.00"
+			priority="30"
+			tooltipslocalised="true"
+			uniqueguid="6E8928E6-DFC7-411D-AAFA5A52EC7F663C"
+			currentstate="90AE1D3C-E685-4C7C-8C8CAA1976C56CF1"
+			defaultstate="90AE1D3C-E685-4C7C-8C8CAA1976C56CF1">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextColourSetter"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="ColourFill">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextFillBar"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="FillPercent">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value=""/>
+						<property
+							name="vertical"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="GetIfElse(this.IsContested,&quot;glow&quot;, &quot;default&quot;)">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="IconPath">
+					<child_m_user_properties>
+						<property
+							name="force_resize_image"
+							value=""/>
+						<property
+							name="suffix"
+							value="_small"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="3DFFA34E-143B-4B2A-805E369007EB8EAE"
+					uniqueguid="3DFFA34E-143B-4B2A-805E369007EB8EAE"
+					imagepath="ui/battle ui/capture_point_icons/capture_point_armour_major_small.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="90AE1D3C-E685-4C7C-8C8CAA1976C56CF1"
+					name="default"
+					height="34"
+					uniqueguid="90AE1D3C-E685-4C7C-8C8CAA1976C56CF1">
+					<imagemetrics>
+						<image
+							this="686AF90F-4929-416D-82B88424F0DA6096"
+							uniqueguid="686AF90F-4929-416D-82B88424F0DA6096"
+							componentimage="3DFFA34E-143B-4B2A-805E369007EB8EAE"
+							offset="-1.00,0.00"
+							width="34"
+							height="34"
+							colour="#FFB900FF"
+							dockpoint="Bottom Center"
+							canresizeheight="false"
+							canresizewidth="false"
+							ui_colour_preset_type_key="alliance_player"/>
+					</imagemetrics>
+				</default>
+				<glow
+					this="6444E5F7-9DF5-4656-85C8195D37EAAA4A"
+					name="glow"
+					height="34"
+					shader_name="glow_pulse_t0"
+					uniqueguid="6444E5F7-9DF5-4656-85C8195D37EAAA4A">
+					<imagemetrics>
+						<image
+							this="D4861563-C413-413B-9312AEB3AF698650"
+							uniqueguid="D4861563-C413-413B-9312AEB3AF698650"
+							componentimage="3DFFA34E-143B-4B2A-805E369007EB8EAE"
+							offset="-1.00,0.00"
+							width="34"
+							height="34"
+							colour="#FFB900FF"
+							dockpoint="Bottom Center"
+							canresizeheight="false"
+							canresizewidth="false"
+							ui_colour_preset_type_key="alliance_player"/>
+					</imagemetrics>
+				</glow>
+			</states>
+		</icon_fill>
+		<lock_icon
+			this="F2B70105-9ACC-476D-9F3A04DEB0B84245"
+			id="lock_icon"
+			offset="18.00,-4.00"
+			docking="Top Right External"
+			dock_offset="-16.00,16.00"
+			component_anchor_point="-0.00,1.00"
+			priority="30"
+			tooltipslocalised="true"
+			uniqueguid="F2B70105-9ACC-476D-9F3A04DEB0B84245"
+			currentstate="2E855EC2-7D76-4D42-83B786FD75F3A298"
+			defaultstate="2E855EC2-7D76-4D42-83B786FD75F3A298">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="BattleRoot.CaptureLocationManagerContext.TimeUntilAllCapturePointsAvailable &gt; 0 || IsLockedForAlliance(BattleRoot.PlayerArmyContext.AllianceIndex) || IsNearingReLock">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value="100"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="GetIfElse(IsNearingReLock, &quot;locking&quot;, GetIfElse(IsMouseOver, &quot;locked_highlight&quot;, &quot;default&quot;))"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="C1024496-E16E-4EAB-9FDC1740080EE384"
+					uniqueguid="C1024496-E16E-4EAB-9FDC1740080EE384"
+					imagepath="ui/battle ui/capture_point_icons/capture_point_lock.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="2E855EC2-7D76-4D42-83B786FD75F3A298"
+					name="default"
+					width="20"
+					height="20"
+					uniqueguid="2E855EC2-7D76-4D42-83B786FD75F3A298">
+					<imagemetrics>
+						<image
+							this="C356DA28-2C77-4C7D-BBD7786DBEF45817"
+							uniqueguid="C356DA28-2C77-4C7D-BBD7786DBEF45817"
+							componentimage="C1024496-E16E-4EAB-9FDC1740080EE384"
+							width="20"
+							height="20"/>
+					</imagemetrics>
+				</default>
+				<locked_highlight
+					this="B8F8843C-8A5D-4793-AE092F918AC2A02C"
+					name="locked_highlight"
+					width="20"
+					height="20"
+					shader_name="red_pulse_t0"
+					shadervars="0.00,0.25,1.00,0.00"
+					uniqueguid="B8F8843C-8A5D-4793-AE092F918AC2A02C">
+					<imagemetrics>
+						<image
+							this="B3A860FC-E47E-4B33-B6CA00A3A868D30F"
+							uniqueguid="B3A860FC-E47E-4B33-B6CA00A3A868D30F"
+							componentimage="C1024496-E16E-4EAB-9FDC1740080EE384"
+							width="20"
+							height="20"/>
+					</imagemetrics>
+				</locked_highlight>
+				<locking
+					this="F2C393BB-3D2B-4641-BB571DBA832F90B5"
+					name="locking"
+					width="20"
+					height="20"
+					shader_name="glow_pulse_t0"
+					shadervars="0.15,1.00,1.00,0.00"
+					uniqueguid="F2C393BB-3D2B-4641-BB571DBA832F90B5">
+					<imagemetrics>
+						<image
+							this="9906710F-CF63-4473-AF187E6CD17D0183"
+							uniqueguid="9906710F-CF63-4473-AF187E6CD17D0183"
+							componentimage="C1024496-E16E-4EAB-9FDC1740080EE384"
+							width="20"
+							height="20"
+							colour="#FFFFFFC4"/>
+					</imagemetrics>
+				</locking>
+			</states>
+		</lock_icon>
+		<template_capture_point
+			this="3506D29A-0A41-4613-B86CCCF3E6DD5A9F"
+			id="template_capture_point"
+			offset="0.00,22.00"
+			dock_offset="0.00,-2.00"
+			priority="30"
+			uniqueguid="3506D29A-0A41-4613-B86CCCF3E6DD5A9F"
+			updatewhennotvisible="true"
+			isaspectratiolocked="true"
+			currentstate="A09ABFAE-5019-49E3-889A2B13E40F711D"
+			defaultstate="A09ABFAE-5019-49E3-889A2B13E40F711D">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoBattleCapturePoint">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/battle ui/capture_point_tooltip"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandDblLeftClick"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="ZoomTo"/>
+				<callback_with_context
+					callback_id="ContextCommandMouseOn"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="SetMouseOver(true)"/>
+				<callback_with_context
+					callback_id="ContextCommandMouseOff"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="SetMouseOver(false)"/>
+			</callbackwithcontextlist>
+			<states>
+				<active
+					this="A09ABFAE-5019-49E3-889A2B13E40F711D"
+					name="active"
+					width="34"
+					height="34"
+					interactive="true"
+					uniqueguid="A09ABFAE-5019-49E3-889A2B13E40F711D"/>
+			</states>
+		</template_capture_point>
 	</components>
 </layout>

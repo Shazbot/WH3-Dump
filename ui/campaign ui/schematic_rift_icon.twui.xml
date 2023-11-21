@@ -49,8 +49,6 @@
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			priority="10"
-			componentleveltooltip="{{tt:ui/common ui/tooltip_effect_bundle}}"
-			tooltiplabel="ComponentTooltip_77c04917"
 			uniqueguid="6F1086F1-E925-45CD-93187A6A3A363C69"
 			isaspectratiolocked="true"
 			currentstate="D7E24945-0530-435E-AB7AC221B4BBF00C"
@@ -81,7 +79,7 @@
 		<icon
 			this="0280CD9E-732F-45AD-BB5BD93A2586A87A"
 			id="icon"
-			offset="0.00,22.00"
+			offset="12.00,50.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			docking="Bottom Center"
@@ -93,9 +91,18 @@
 			defaultstate="67D104D8-2CD1-45E3-AF3D3BDDE157609D">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="#ContextCustomTooltipStore"
+					callback_id="#ContextLayoutTooltip"
 					context_object_id="CcoTeleportationNetworkNodeRecord"
-					context_function_id="CcoEffectBundle(Name:TeleportationTemplateContext.Name, Description: TeleportationTemplateContext.Description, EffectList: EffectList, TurnsRemaining: 0 )"/>
+					context_function_id="CcoEffectBundle(Name:TeleportationTemplateContext.Name, Description: TeleportationTemplateContext.Description, EffectList: EffectList, TurnsRemaining: 0 )">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/common ui/tooltip_effect_bundle"/>
+						<property
+							name="offset_x"
+							value="10"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_function_id="IsAnyTeleportHUDPanelOpen == false">
@@ -127,8 +134,9 @@
 				<active
 					this="67D104D8-2CD1-45E3-AF3D3BDDE157609D"
 					name="active"
-					width="84"
-					height="88"
+					width="60"
+					height="60"
+					disabled="true"
 					shader_name="brighten_t0"
 					uniqueguid="67D104D8-2CD1-45E3-AF3D3BDDE157609D"
 					stateeditordisplaypos="187.00,100.00">
@@ -137,8 +145,8 @@
 							this="3F1CCBC0-41A7-4ECC-A65DACAD67F7B658"
 							uniqueguid="3F1CCBC0-41A7-4ECC-A65DACAD67F7B658"
 							componentimage="5E065B72-3C9A-4F91-977758DEF0EC8FAA"
-							width="84"
-							height="88"/>
+							width="60"
+							height="60"/>
 					</imagemetrics>
 					<transitionmap>
 						<transition
@@ -150,8 +158,8 @@
 				<down
 					this="A7883E7E-051A-4D01-8897D8626ADEBA5D"
 					name="down"
-					width="84"
-					height="88"
+					width="60"
+					height="60"
 					interactive="true"
 					shader_name="brighten_t0"
 					shadervars="-0.50,0.00,0.00,0.00"
@@ -162,8 +170,8 @@
 							this="2F1B1BF9-00DE-4794-9CAD39F7E0A01D4F"
 							uniqueguid="2F1B1BF9-00DE-4794-9CAD39F7E0A01D4F"
 							componentimage="5E065B72-3C9A-4F91-977758DEF0EC8FAA"
-							width="84"
-							height="88"/>
+							width="60"
+							height="60"/>
 					</imagemetrics>
 					<transitionmap>
 						<transition
@@ -177,8 +185,8 @@
 				<down_off
 					this="C1766012-BF3E-45DC-912F6DAB4FE67197"
 					name="down_off"
-					width="84"
-					height="88"
+					width="60"
+					height="60"
 					interactive="true"
 					uniqueguid="C1766012-BF3E-45DC-912F6DAB4FE67197"
 					stateeditordisplaypos="228.00,244.00">
@@ -187,8 +195,8 @@
 							this="DB41EEB1-9DC0-460C-ABF0E0643EA13D2F"
 							uniqueguid="DB41EEB1-9DC0-460C-ABF0E0643EA13D2F"
 							componentimage="5E065B72-3C9A-4F91-977758DEF0EC8FAA"
-							width="84"
-							height="88"/>
+							width="60"
+							height="60"/>
 					</imagemetrics>
 					<transitionmap>
 						<transition
@@ -199,8 +207,8 @@
 				<hover
 					this="AD390FEF-24AE-42B3-804DC1136A68DCB7"
 					name="hover"
-					width="84"
-					height="88"
+					width="60"
+					height="60"
 					interactive="true"
 					shader_name="brighten_t0"
 					shadervars="1.00,0.00,0.00,0.00"
@@ -211,8 +219,8 @@
 							this="4E21CDFB-55BB-4FC0-ABF47D8FC585B1BD"
 							uniqueguid="4E21CDFB-55BB-4FC0-ABF47D8FC585B1BD"
 							componentimage="5E065B72-3C9A-4F91-977758DEF0EC8FAA"
-							width="84"
-							height="88"/>
+							width="60"
+							height="60"/>
 					</imagemetrics>
 					<transitionmap>
 						<transition
@@ -228,8 +236,8 @@
 				<inactive
 					this="4727F171-015C-4B4A-B141174CF2A10C0B"
 					name="inactive"
-					width="84"
-					height="88"
+					width="60"
+					height="60"
 					shader_name="set_greyscale_t0"
 					shadervars="1.00,1.00,0.00,0.00"
 					uniqueguid="4727F171-015C-4B4A-B141174CF2A10C0B">
@@ -238,15 +246,15 @@
 							this="7B518A38-23BE-47F9-8BF60B120E945199"
 							uniqueguid="7B518A38-23BE-47F9-8BF60B120E945199"
 							componentimage="5E065B72-3C9A-4F91-977758DEF0EC8FAA"
-							width="84"
-							height="88"/>
+							width="60"
+							height="60"/>
 					</imagemetrics>
 				</inactive>
 				<selected
 					this="CF30A4A3-DAA3-4B72-844A793E25F69105"
 					name="selected"
-					width="84"
-					height="88"
+					width="60"
+					height="60"
 					interactive="true"
 					shader_name="brighten_t0"
 					shadervars="1.00,0.00,0.00,0.00"
@@ -256,8 +264,8 @@
 							this="02054F07-48E7-4DCF-A9FF278ECC30370C"
 							uniqueguid="02054F07-48E7-4DCF-A9FF278ECC30370C"
 							componentimage="5E065B72-3C9A-4F91-977758DEF0EC8FAA"
-							width="84"
-							height="88"/>
+							width="60"
+							height="60"/>
 					</imagemetrics>
 				</selected>
 			</states>

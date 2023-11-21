@@ -6380,7 +6380,7 @@
 			docking="Center"
 			dock_offset="0.00,10.00"
 			component_anchor_point="0.50,0.50"
-			priority="60"
+			priority="1"
 			tooltipslocalised="true"
 			uniqueguid="E6C0465E-C3F0-4121-9CD8C82A0AE5F232"
 			currentstate="C7DFB5D9-50C1-4D2A-9B3F7F22EE617209"
@@ -11776,7 +11776,7 @@
 		<list_box
 			this="6BD17BD9-96F4-44AA-B946F638918D1E90"
 			id="list_box"
-			offset="323.00,0.00"
+			offset="323.00,9.00"
 			allowverticalresize="false"
 			docking="Center"
 			component_anchor_point="0.50,0.50"
@@ -11870,10 +11870,11 @@
 		<list_clip
 			this="A150D048-22E1-48E2-AF352E777BABCA0B"
 			id="list_clip"
-			offset="5.00,0.00"
+			offset="5.00,-10.00"
 			allowverticalresize="false"
 			clipchildren="true"
 			docking="Top Center"
+			dock_offset="0.00,-10.00"
 			component_anchor_point="0.50,0.00"
 			tooltipslocalised="true"
 			uniqueguid="A150D048-22E1-48E2-AF352E777BABCA0B"
@@ -11883,7 +11884,7 @@
 					this="C809D09B-266D-4BF2-8BA6056095348361"
 					name="NewState"
 					width="652"
-					height="195"
+					height="215"
 					interactive="true"
 					uniqueguid="C809D09B-266D-4BF2-8BA6056095348361"/>
 			</states>
@@ -12106,7 +12107,7 @@
 		<mercenary_display
 			this="7987963B-EDC3-41AB-9E4512023731305C"
 			id="mercenary_display"
-			offset="19.00,967.00"
+			offset="19.00,586.00"
 			visible="false"
 			tooltipslocalised="true"
 			uniqueguid="7987963B-EDC3-41AB-9E4512023731305C"
@@ -15714,8 +15715,6 @@
 			docking="Bottom Center"
 			dock_offset="0.00,968.00"
 			component_anchor_point="0.50,1.00"
-			componentleveltooltip="{{tt:ui/common ui/tooltip_effect_bundle}}"
-			tooltiplabel="template_threshold_Tooltip_989fd149"
 			uniqueguid="33AC6A20-9E91-4D59-8A4D890BB690F33E"
 			currentstate="5CAB8A5E-CC2A-4550-8B7A22ABA06739A3"
 			defaultstate="5CAB8A5E-CC2A-4550-8B7A22ABA06739A3">
@@ -15734,9 +15733,18 @@
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
+					callback_id="ContextLayoutTooltip"
 					context_object_id="CcoGroupPooledResourceEffectRecord"
-					context_function_id="EffectBundle"/>
+					context_function_id="EffectBundle">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/common ui/tooltip_effect_bundle"/>
+						<property
+							name="offset_x"
+							value="10"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoGroupPooledResourceEffectRecord"
@@ -16304,16 +16312,23 @@
 			this="1B514254-B7E7-4715-A8030BB5620E227E"
 			id="icon_plague"
 			offset="42.00,0.00"
-			componentleveltooltip="{{tt:ui/common ui/tooltip_effect_bundle_list}}"
-			tooltiplabel="ComponentTooltip_1c7b4df8"
 			uniqueguid="1B514254-B7E7-4715-A8030BB5620E227E"
 			currentstate="8CB8276D-D303-4639-8FA271CDFBB3FD90"
 			defaultstate="8CB8276D-D303-4639-8FA271CDFBB3FD90">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
+					callback_id="ContextLayoutTooltip"
 					context_object_id="CcoCampaignCharacter"
-					context_function_id="CcoRTEffectBundleList(EffectBundleList: this.MilitaryForceContext.PlagueEffectBundleList)"/>
+					context_function_id="CcoRTEffectBundleList(EffectBundleList: this.MilitaryForceContext.PlagueEffectBundleList)">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/common ui/tooltip_effect_bundle_list"/>
+						<property
+							name="offset_x"
+							value="10"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignCharacter"

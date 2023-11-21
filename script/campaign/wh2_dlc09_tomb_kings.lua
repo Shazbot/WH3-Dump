@@ -99,7 +99,7 @@ function books_of_nagash_war_declared(context)
 		
 		local book_invasion = im:get_invasion(book_invasion_key);
 		
-		if book_invasion ~= nil then
+		if book_invasion then
 			book_invasion:release();
 		end
 	end

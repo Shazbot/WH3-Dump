@@ -1,37 +1,37 @@
+-- this table must be in the same order as the options in the cdir_events_dilemma_choice_details table
+local subtype_to_choice_mapping = {
+	"wh2_dlc13_lzd_slann_mage_priest_fire",
+	"wh2_dlc13_lzd_slann_mage_priest_high",
+	"wh2_main_lzd_slann_mage_priest", -- light
+	"wh2_dlc13_lzd_slann_mage_priest_life",
+	"wh2_dlc13_lzd_slann_mage_priest_metal",
+	"wh2_dlc13_lzd_slann_mage_priest_death",
+	"wh2_dlc13_lzd_slann_mage_priest_heavens",
+	"wh2_dlc13_lzd_slann_mage_priest_beasts",
+	"wh2_dlc13_lzd_slann_mage_priest_shadows"
+}
+
 function add_slann_selection_listeners()
-	out("#### Adding Slann Selection Listeners ####");
+	out("#### Adding Slann Selection Listeners ####")
 	
 	core:add_listener(
 		"slann_RitualCompletedEvent",
 		"RitualCompletedEvent",
 		function(context)
-			return context:succeeded();
+			return context:succeeded() and context:ritual():ritual_key() == "wh2_main_ritual_lzd_awakening"
 		end,
 		function(context)
-			local faction = context:performing_faction();
-			local faction_key = faction:name();
-			local ritual = context:ritual():ritual_key();
+			local faction = context:performing_faction()
 			
-			if ritual == "wh2_main_ritual_lzd_awakening" then
-				if faction:is_human() == true then
-					cm:trigger_dilemma(faction_key, "wh2_main_lzd_slann_selection");
-				else
-					local slann_rand = cm:random_number(100);
-
-					if slann_rand > 75 then
-						slann_spawn(faction_key, "wh2_dlc13_lzd_slann_mage_priest_fire");
-					elseif slann_rand > 50 then
-						slann_spawn(faction_key, "wh2_dlc13_lzd_slann_mage_priest_high");
-					elseif slann_rand > 25 then
-						slann_spawn(faction_key, "wh2_main_lzd_slann_mage_priest");
-					else
-						slann_spawn(faction_key, "wh2_dlc13_lzd_slann_mage_priest_life");
-					end
-				end
+			if faction:is_human() then
+				cm:trigger_dilemma(faction:name(), "wh2_main_lzd_slann_selection")
+			else
+				slann_spawn(faction:name(), subtype_to_choice_mapping[cm:random_number(#subtype_to_choice_mapping)])
 			end
 		end,
 		true
-	);
+	)
+	
 	core:add_listener(
 		"slann_DilemmaChoiceMadeEvent",
 		"DilemmaChoiceMadeEvent",
@@ -39,42 +39,10 @@ function add_slann_selection_listeners()
 			return context:dilemma() == "wh2_main_lzd_slann_selection"
 		end,
 		function(context)
-			local faction_key = context:faction():name();
-			local choice = context:choice();
-
-			if faction_key == "wh2_dlc13_lzd_spirits_of_the_jungle" then
-				if choice == 0 then
-					-- Fire Slann
-					slann_spawn(faction_key, "wh2_dlc13_lzd_slann_mage_priest_fire_horde");
-				elseif choice == 1 then
-					-- High Slann
-					slann_spawn(faction_key, "wh2_dlc13_lzd_slann_mage_priest_high_horde");
-				elseif choice == 2 then
-					-- Light Slann
-					slann_spawn(faction_key, "wh2_main_lzd_slann_mage_priest_horde");
-				else
-					-- Life Slann
-					slann_spawn(faction_key, "wh2_dlc13_lzd_slann_mage_priest_life_horde");
-				end
-
-			else
-				if choice == 0 then
-					-- Fire Slann
-					slann_spawn(faction_key, "wh2_dlc13_lzd_slann_mage_priest_fire");
-				elseif choice == 1 then
-					-- High Slann
-					slann_spawn(faction_key, "wh2_dlc13_lzd_slann_mage_priest_high");
-				elseif choice == 2 then
-					-- Light Slann
-					slann_spawn(faction_key, "wh2_main_lzd_slann_mage_priest");
-				else
-					-- Life Slann
-					slann_spawn(faction_key, "wh2_dlc13_lzd_slann_mage_priest_life");
-				end
-			end
+			slann_spawn(context:faction():name(), subtype_to_choice_mapping[context:choice() + 1])
 		end,
 		true
-	);
+	)
 end
 
 local lzd_names = {
@@ -386,10 +354,12 @@ local lzd_names = {
 	"988230570",
 	"99038456",
 	"997178125"
-};
+}
 
 function slann_spawn(faction_key, subtype_key)
-	local rand = cm:random_number(#lzd_names);
-	local name = lzd_names[rand];
-	cm:spawn_character_to_pool(faction_key, "names_name_"..name, "names_name_2147360514", "", "", 22, true, "general", subtype_key, false, "");
+	if faction_key == "wh2_dlc13_lzd_spirits_of_the_jungle" then
+		subtype_key = subtype_key .. "_horde"
+	end
+	
+	cm:spawn_character_to_pool(faction_key, "names_name_" .. lzd_names[cm:random_number(#lzd_names)], "names_name_2147360514", "", "", 22, true, "general", subtype_key, false, "")
 end

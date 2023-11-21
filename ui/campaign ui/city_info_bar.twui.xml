@@ -5184,7 +5184,7 @@
 			allowverticalresize="false"
 			tooltipslocalised="true"
 			uniqueguid="73D6F9DA-85C4-4BFA-BC614680EAA54930"
-			currentstate="B727BD19-8E31-4554-8E218F1DD4B8D648"
+			currentstate="B3E315E7-8EE7-4D05-8ED548DA2694B946"
 			defaultstate="B727BD19-8E31-4554-8E218F1DD4B8D648">
 			<componentimages>
 				<component_image
@@ -5206,6 +5206,8 @@
 					name="discovered"
 					width="45"
 					height="45"
+					interactive="true"
+					disabled="true"
 					uniqueguid="B3E315E7-8EE7-4D05-8ED548DA2694B946">
 					<imagemetrics>
 						<image
@@ -6720,15 +6722,19 @@
 			offset="16.00,29.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
-			componentleveltooltip="{{tt:ui/common ui/tooltip_effect_bundle}}"
-			tooltiplabel="faction_trophy_preview_Tooltip_3c005d"
 			uniqueguid="4D5A0E68-1978-4DC0-AD08E026B83CD967"
 			currentstate="5AB7E670-920D-48B2-97F0B998E6147E92"
 			defaultstate="5AB7E670-920D-48B2-97F0B998E6147E92">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
-					context_object_id="CcoEffectBundle"/>
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoEffectBundle">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/common ui/tooltip_effect_bundle"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -7108,8 +7114,6 @@
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			visible="false"
-			componentleveltooltip="{{tt:ui/common ui/tooltip_effect_bundle_list}}"
-			tooltiplabel="icon_plague_Tooltip_ed05a419"
 			uniqueguid="CDC46337-F850-42C6-92F876B72AE437C7"
 			currentstate="6B1EBFF9-2BEF-440B-83CA6C2117149FFC"
 			defaultstate="6B1EBFF9-2BEF-440B-83CA6C2117149FFC">
@@ -7128,9 +7132,15 @@
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
+					callback_id="ContextLayoutTooltip"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="CcoRTEffectBundleList(EffectBundleList: this.PlagueEffectBundleList)"/>
+					context_function_id="CcoRTEffectBundleList(EffectBundleList: this.PlagueEffectBundleList)">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/common ui/tooltip_effect_bundle_list"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -7762,8 +7772,14 @@
 			defaultstate="4949C57C-68D1-43DB-B7657B02D353B338">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="CampaignEffectsBundleIcon"
-					context_object_id="CcoEffectBundle"/>
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoEffectBundle">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="UI/Campaign UI/edict_tooltip"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextImageSetter"
 					context_object_id="CcoEffectBundle"
@@ -7810,8 +7826,14 @@
 					context_object_id="CcoEffectBundle"
 					context_function_id="TurnsRemaining &gt; 0"/>
 				<callback_with_context
-					callback_id="CampaignEffectsBundleIcon"
-					context_object_id="CcoEffectBundle"/>
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoEffectBundle">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="UI/Campaign UI/edict_tooltip"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextImageSetter"
 					context_object_id="CcoEffectBundle"
@@ -10074,9 +10096,9 @@
 						textvalign="Center"
 						texthalign="Center"
 						texthbehaviour="Never split"
+						font_m_font_name="la_gioconda_uppercase"
 						font_m_size="14"
-						font_m_colour="#FFFFFFFF"
-						font_m_leading="1"
+						font_m_colour="#666666FF"
 						fontcat_name="auto_ 35"
 						text_shader_name="brighten_t0"
 						textshadervars="4.50,0.00,0.00,0.00"/>

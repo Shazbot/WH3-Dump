@@ -2941,30 +2941,41 @@ function prologue_first_siege_intervention()
 
 			local uic = find_uicomponent(core:get_ui_root(), "popup_pre_battle", "mid", "battle_deployment", "regular_deployment", "list", "siege_information_panel", "header", "tl_list", "defender_siege_supplies")
 
-			local text_pointer_test_first_siege = text_pointer:new_from_component(
-				"text_pointer_test_first_siege_3",
-				"bottom",
-				100,
-				uic,
-				0.5,
-				0.2
-			)
-			text_pointer_test_first_siege:add_component_text("text", "ui_text_replacements_localised_text_prologue_first_siege_3")
-			text_pointer_test_first_siege:set_style("semitransparent")
-			text_pointer_test_first_siege:set_topmost(true)
-			text_pointer_test_first_siege:set_highlight_close_button(0.5)
-			text_pointer_test_first_siege:set_close_button_callback(
-				function()
-					-- Check to see if this is a walled siege battle and start appropriate tour.
-					if equipment_siege == false then
-						prologue_check_progression["pre_battle_first_siege_without_equipment"] = true
-						tour_test_first_siege:complete()
-						completely_lock_input(false);
-					else
-						tour_test_first_siege:start("tour_test_first_siege_action_walls")
-					end
-				end)
-			text_pointer_test_first_siege:show()
+			if uic and uic:Visible(true) then
+				local text_pointer_test_first_siege = text_pointer:new_from_component(
+					"text_pointer_test_first_siege_3",
+					"bottom",
+					100,
+					uic,
+					0.5,
+					0.2
+				)
+				text_pointer_test_first_siege:add_component_text("text", "ui_text_replacements_localised_text_prologue_first_siege_3")
+				text_pointer_test_first_siege:set_style("semitransparent")
+				text_pointer_test_first_siege:set_topmost(true)
+				text_pointer_test_first_siege:set_highlight_close_button(0.5)
+				text_pointer_test_first_siege:set_close_button_callback(
+					function()
+						-- Check to see if this is a walled siege battle and start appropriate tour.
+						if equipment_siege == false then
+							prologue_check_progression["pre_battle_first_siege_without_equipment"] = true
+							tour_test_first_siege:complete()
+							completely_lock_input(false);
+						else
+							tour_test_first_siege:start("tour_test_first_siege_action_walls")
+						end
+					end)
+				text_pointer_test_first_siege:show()
+			else
+				if equipment_siege == false then
+					prologue_check_progression["pre_battle_first_siege_without_equipment"] = true
+					tour_test_first_siege:complete()
+					completely_lock_input(false);
+				else
+					tour_test_first_siege:start("tour_test_first_siege_action_walls")
+				end
+			end
+				
 		end,
 		0,
 		"tour_test_first_siege_action_3"
@@ -5131,7 +5142,7 @@ prologue_intervention_post_battle_options = intervention:new(
 
 prologue_intervention_post_battle_options:set_wait_for_battle_complete(false);
 prologue_intervention_post_battle_options:set_should_prevent_saving_game()
-
+prologue_intervention_post_battle_options:set_should_lock_ui(true)
 prologue_intervention_post_battle_options:set_wait_for_fullscreen_panel_dismissed(false)
 prologue_intervention_post_battle_options:add_trigger_condition(
 	"ScriptEventProloguePostBattleOptions",
@@ -5197,7 +5208,7 @@ function prologue_post_battle_options_intervention()
 				text_pointer_test_post_battle_options:set_show_close_button(false);
 				text_pointer_test_post_battle_options:show();
 
-				
+				cm:steal_user_input(false);
 
 				core:add_listener(
 					"post_battle_options_listener",
@@ -5218,7 +5229,7 @@ function prologue_post_battle_options_intervention()
 			0
 		);
 		tour_test_post_battle_options:start();  
-		cm:callback(function() cm:steal_user_input(false); end, 1);
+	
 	 end, 1.5);
 end
 

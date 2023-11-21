@@ -913,8 +913,6 @@
 		<allied_tickets
 			this="E701920C-9784-47D8-8BB34CA86B1179A5"
 			id="allied_tickets"
-			componentleveltooltip="{{tt:ui/battle ui/tooltip_victory_points}}"
-			tooltiplabel="ComponentTooltip_ec0d6754"
 			uniqueguid="E701920C-9784-47D8-8BB34CA86B1179A5"
 			currentstate="1DCCF965-DD10-43D1-9200C4B94C4E7E46"
 			defaultstate="1DCCF965-DD10-43D1-9200C4B94C4E7E46">
@@ -934,8 +932,14 @@
 					context_object_id="CcoBattleRoot"
 					context_function_id="GetIfElse(PlayerAllianceContext.IsDefender, DefendingAllianceContext, AttackingAllianceContext)"/>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
-					context_object_id="CcoBattleAlliance"/>
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoBattleAlliance">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/battle ui/tooltip_victory_points"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<states>
 				<default
@@ -1670,11 +1674,11 @@
 		<contested_arrow_down
 			this="7CBECF81-DEE2-4896-98C97E95CBF361CE"
 			id="contested_arrow_down"
-			offset="0.00,6.00"
+			offset="0.00,7.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			docking="Bottom Left"
-			dock_offset="0.00,-6.00"
+			dock_offset="0.00,-5.00"
 			component_anchor_point="0.00,1.00"
 			priority="25"
 			tooltipslocalised="true"
@@ -2289,7 +2293,7 @@
 		<docked_holder
 			this="ACC5D87B-26DD-4BE0-96DEC1D2A17DD8A5"
 			id="docked_holder"
-			offset="-557.00,12.00"
+			offset="-667.00,12.00"
 			allowverticalresize="false"
 			docking="Top Center"
 			dock_offset="0.00,12.00"
@@ -2313,13 +2317,13 @@
 				<component_image
 					this="FD4F4453-1BEE-4F15-A07A8AF101627C8F"
 					uniqueguid="FD4F4453-1BEE-4F15-A07A8AF101627C8F"
-					imagepath="ui/skins/default/bar_top_center.png"/>
+					imagepath="ui/skins/default/bar_top_center_1.png"/>
 			</componentimages>
 			<states>
 				<newstate
 					this="B360758B-FB1F-4ABE-B46206C61628F261"
 					name="NewState"
-					width="1557"
+					width="1777"
 					height="29"
 					pixelcollision="true"
 					uniqueguid="B360758B-FB1F-4ABE-B46206C61628F261">
@@ -2329,7 +2333,7 @@
 							uniqueguid="4CE95040-1B9D-4A46-B03F63473DA3E15A"
 							componentimage="FD4F4453-1BEE-4F15-A07A8AF101627C8F"
 							offset="0.00,-14.00"
-							width="1557"
+							width="1777"
 							height="67"
 							tile="true"
 							dockpoint="Top Center"
@@ -2628,8 +2632,6 @@
 			this="A3DE68A3-6710-4E6D-97EA8E43CC1F47EB"
 			id="enemy_tickets"
 			offset="78.00,0.00"
-			componentleveltooltip="{{tt:ui/battle ui/tooltip_victory_points}}"
-			tooltiplabel="ComponentTooltip_76323b85"
 			uniqueguid="A3DE68A3-6710-4E6D-97EA8E43CC1F47EB"
 			currentstate="0A1A410A-EF84-4BC7-A0256CF7FA8F9AE4"
 			defaultstate="0A1A410A-EF84-4BC7-A0256CF7FA8F9AE4">
@@ -2649,8 +2651,14 @@
 					context_object_id="CcoBattleRoot"
 					context_function_id="GetIfElse(PlayerAllianceContext.IsDefender, AttackingAllianceContext, DefendingAllianceContext)"/>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
-					context_object_id="CcoBattleAlliance"/>
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoBattleAlliance">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/battle ui/tooltip_victory_points"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<states>
 				<default
@@ -4958,7 +4966,17 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBattleCapturePoint"
-					context_function_id="BattleRoot.CaptureLocationManagerContext.TimeUntilAllCapturePointsAvailable &gt; 0 || this.IsLocked == true">
+					context_function_id="BattleRoot.CaptureLocationManagerContext.TimeUntilAllCapturePointsAvailable &gt; 0 || this.IsLockedForAlliance(BattleRoot.PlayerArmyContext.AllianceIndex)  == true || IsNearingReLock">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value="100"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="GetIfElse(IsNearingReLock, &quot;locking&quot;, GetIfElse(IsMouseOver, &quot;locked_highlight&quot;, &quot;default&quot;))">
 					<child_m_user_properties>
 						<property
 							name="update_constant"
@@ -4988,6 +5006,41 @@
 							height="20"/>
 					</imagemetrics>
 				</default>
+				<locked_highlight
+					this="862F1F22-04D7-4C57-AAD71554AFE82BE0"
+					name="locked_highlight"
+					width="20"
+					height="20"
+					shader_name="red_pulse_t0"
+					shadervars="0.00,0.25,1.00,0.00"
+					uniqueguid="862F1F22-04D7-4C57-AAD71554AFE82BE0">
+					<imagemetrics>
+						<image
+							this="C145EC65-2CFA-43C2-8F388D31762EBF42"
+							uniqueguid="C145EC65-2CFA-43C2-8F388D31762EBF42"
+							componentimage="9D457B48-ACBF-4B7E-896A6CC3F69EC646"
+							width="20"
+							height="20"/>
+					</imagemetrics>
+				</locked_highlight>
+				<locking
+					this="DD06372E-463C-49A5-9D9DFA9EA50E0792"
+					name="locking"
+					width="20"
+					height="20"
+					shader_name="glow_pulse_t0"
+					shadervars="0.15,1.00,1.00,0.00"
+					uniqueguid="DD06372E-463C-49A5-9D9DFA9EA50E0792">
+					<imagemetrics>
+						<image
+							this="22BBC429-8AC6-4721-9E536E13F8216492"
+							uniqueguid="22BBC429-8AC6-4721-9E536E13F8216492"
+							componentimage="9D457B48-ACBF-4B7E-896A6CC3F69EC646"
+							width="20"
+							height="20"
+							colour="#FFFFFFC4"/>
+					</imagemetrics>
+				</locking>
 			</states>
 		</lock_icon>
 		<mastery_of_elemental_winds_frame
@@ -5481,7 +5534,7 @@
 		<realm_of_souls_parent
 			this="5059DD92-B3AA-49BB-916B15569948A832"
 			id="realm_of_souls_parent"
-			offset="410.00,0.00"
+			offset="630.00,0.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			priority="30"
@@ -5569,9 +5622,6 @@
 			offset="410.00,0.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
-			visible="false"
-			componentleveltooltip="{{tt:ui/battle ui/tooltip_victory_points}}"
-			tooltiplabel="ComponentTooltip_8a84f810"
 			uniqueguid="3AE98D10-C55A-4E8B-8A32DE7D8863E649"
 			currentstate="B3F5A874-9DA5-4A80-BB51C6104C8C6ADE"
 			defaultstate="B3F5A874-9DA5-4A80-BB51C6104C8C6ADE">
@@ -5581,8 +5631,20 @@
 					context_object_id="CcoBattleRoot"
 					context_function_id="IsSiege"/>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
-					context_object_id="CcoBattleRoot"/>
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoBattleRoot">
+					<child_m_user_properties>
+						<property
+							name="alternate_parent_dock_point"
+							value="bce"/>
+						<property
+							name="layout_path"
+							value="ui/battle ui/tooltip_victory_points"/>
+						<property
+							name="offset_x"
+							value="5"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<states>
 				<default
@@ -5805,7 +5867,7 @@
 		<supplies_display
 			this="6B8586F9-43BC-40B4-993CC9156AA5780D"
 			id="supplies_display"
-			offset="1055.00,-3.00"
+			offset="1275.00,-3.00"
 			allowverticalresize="false"
 			dock_offset="0.00,-3.00"
 			componentleveltooltip="{{tt:ui/battle ui/tooltip_battle_currency}}"
@@ -5941,7 +6003,7 @@
 		<survival_waves
 			this="ADEB2BCF-24D4-409C-B5F6EC061DAB6F55"
 			id="survival_waves"
-			offset="1164.00,-9.00"
+			offset="1384.00,-9.00"
 			clipimagestocomponent="true"
 			dock_offset="0.00,-9.00"
 			componentleveltooltip="{{tt:ui/battle ui/tooltip_survival_wave}}"
@@ -6050,8 +6112,6 @@
 			this="2D0A83E3-7992-477A-9DA32B31EF6CA9ED"
 			id="template_capture_point_icon"
 			priority="8"
-			componentleveltooltip="{{tt:ui/battle ui/capture_point_tooltip}}"
-			tooltiplabel="ComponentTooltip_bcebd4d0"
 			uniqueguid="2D0A83E3-7992-477A-9DA32B31EF6CA9ED"
 			updatewhennotvisible="true"
 			isaspectratiolocked="true"
@@ -6083,8 +6143,20 @@
 					context_object_id="CcoBattleCapturePoint"
 					context_function_id="ZoomTo"/>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
-					context_object_id="CcoBattleCapturePoint"/>
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoBattleCapturePoint">
+					<child_m_user_properties>
+						<property
+							name="invert_y"
+							value=""/>
+						<property
+							name="layout_path"
+							value="ui/battle ui/capture_point_tooltip"/>
+						<property
+							name="offset_y"
+							value="25"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBattleCapturePoint"
@@ -6117,7 +6189,7 @@
 		<trials_score_display
 			this="20F4B698-5E77-4833-AC975625870A1739"
 			id="trials_score_display"
-			offset="706.00,-3.00"
+			offset="926.00,-3.00"
 			allowverticalresize="false"
 			dock_offset="0.00,-3.00"
 			uniqueguid="20F4B698-5E77-4833-AC975625870A1739"

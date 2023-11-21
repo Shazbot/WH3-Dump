@@ -103,13 +103,11 @@ function add_horde_reemergence_listeners()
 			local factions_dead = {}
 			local faction_list = cm:model():world():faction_list()
 			
-			factions_to_respawn = cm:get_saved_value("factions_to_respawn") or factions_to_respawn
-			
 			for i = 0, faction_list:num_items() - 1 do
 				local current_faction = faction_list:item_at(i)
 				local current_faction_name = current_faction:name()
 				
-				if current_faction:is_dead() and (factions_to_respawn[current_faction_name] or (subcultures_to_respawn[current_faction:subculture()] and factions_to_respawn[current_faction_name] ~= false)) and not current_faction:is_quest_battle_faction() then
+				if current_faction:is_dead() and not current_faction:was_confederated() and (factions_to_respawn[current_faction_name] or (subcultures_to_respawn[current_faction:subculture()] and factions_to_respawn[current_faction_name] ~= false)) and not current_faction:is_quest_battle_faction() then
 					local turns_dead = cm:get_saved_value(current_faction_name .. "_dead")
 					
 					if turns_dead == nil or turns_dead == 0 then
@@ -128,18 +126,6 @@ function add_horde_reemergence_listeners()
 			if #factions_dead > 0 and cm:random_number(100) <= chance_of_horde_reemerging then
 				attempt_to_spawn_scripted_army(factions_dead[cm:random_number(#factions_dead)])
 			end
-		end,
-		true
-	)
-	
-	-- don't respawn factions that have been confederated
-	core:add_listener(
-		"track_confederated_hordes",
-		"FactionJoinsConfederation",
-		true,
-		function(context)
-			factions_to_respawn[context:faction():name()] = false
-			cm:set_saved_value("factions_to_respawn", factions_to_respawn)
 		end,
 		true
 	)

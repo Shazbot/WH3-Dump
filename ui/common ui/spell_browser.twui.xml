@@ -2828,8 +2828,8 @@
 					context_object_id="CcoMainUnitRecord"/>
 				<callback_with_context
 					callback_id="ContextCommandGiverOnContextSet"
-					context_object_id="CcoRTSelectedUnit"
-					context_function_id="GetIf(Key == StoredContextFromParent(&quot;CcoMainUnitRecord&quot;).Key, self.ParentContext(&quot;units_listview&quot;).ScrollToComponent(self, false))"/>
+					context_object_id="CcoRTSelectedUnit selected_unit, CcoUnitsCustomBattlePermissionRecord this_unit_perms"
+					context_function_id="DoIf(selected_unit.Key == this_unit_perms.UnitContext.Key, Do(self.ParentContext(&quot;units_listview&quot;).ScrollToComponent(self, false), self.ParentContext(&quot;list_box&quot;).SelectContext(this_unit_perms)))"/>
 				<callback_with_context
 					callback_id="ContextUnitCardImageSetter"
 					context_object_id="CcoUnitsCustomBattlePermissionRecord"/>

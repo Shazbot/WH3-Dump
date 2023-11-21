@@ -1696,7 +1696,7 @@
 		<list_parent
 			this="CB91A23E-18CE-4A37-81662459E1B854BA"
 			id="list_parent"
-			offset="-33.00,-184.00"
+			offset="-33.00,-288.00"
 			allowhorizontalresize="false"
 			docking="Bottom Center"
 			component_anchor_point="0.50,1.00"
@@ -1709,7 +1709,7 @@
 					this="5A6C9D58-D1F6-4217-96686B1F7CB88CC2"
 					name="NewState"
 					width="116"
-					height="234"
+					height="338"
 					uniqueguid="5A6C9D58-D1F6-4217-96686B1F7CB88CC2"/>
 			</states>
 			<LayoutEngine
@@ -1849,7 +1849,7 @@
 		<status_bar
 			this="04E12E2A-5516-4E84-BF6EC2D62615D6D6"
 			id="status_bar"
-			offset="-492.00,0.00"
+			offset="-492.00,104.00"
 			allowverticalresize="false"
 			tooltipslocalised="true"
 			uniqueguid="04E12E2A-5516-4E84-BF6EC2D62615D6D6"
@@ -1888,7 +1888,7 @@
 					this="1EB80DE2-73EE-45B0-BE1B1F1A4A6EA690"
 					name="NewState"
 					width="116"
-					height="24"
+					height="128"
 					uniqueguid="1EB80DE2-73EE-45B0-BE1B1F1A4A6EA690"/>
 			</states>
 			<LayoutEngine
@@ -1993,10 +1993,6 @@
 					callback_id="ContextComponentInitialiser"
 					context_object_id="CcoCampaignCharacter"
 					context_function_id="LoyaltyContext"/>
-				<callback_with_context
-					callback_id="ContextTrashOnCondition"
-					context_object_id="CcoStaticObject"
-					context_function_id="PlayersFaction.FactionRecordContext.Key != &quot;wh_main_emp_empire&quot;"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -2233,16 +2229,20 @@
 			offset="555.00,-1.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
-			componentleveltooltip="{{tt:ui/common ui/tooltip_effect_bundle_list}}"
-			tooltiplabel="icon_plague_Tooltip_ed05a419"
 			uniqueguid="F53E62F7-9135-4BE6-9455FF3FDC6957C7"
 			currentstate="ED97B290-048D-4B35-B1846762E927552E"
 			defaultstate="ED97B290-048D-4B35-B1846762E927552E">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
+					callback_id="ContextLayoutTooltip"
 					context_object_id="CcoCampaignCharacter"
-					context_function_id="CcoRTEffectBundleList(EffectBundleList: this.MilitaryForceContext.PlagueEffectBundleList)"/>
+					context_function_id="CcoRTEffectBundleList(EffectBundleList: this.MilitaryForceContext.PlagueEffectBundleList)">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/common ui/tooltip_effect_bundle_list"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignCharacter"
@@ -2287,7 +2287,7 @@
 		<dy_name
 			this="1F4E30E6-C671-4CA6-B4EEE9875AAF20A4"
 			id="dy_name"
-			offset="-23.00,120.00"
+			offset="-23.00,224.00"
 			allowverticalresize="false"
 			tooltipslocalised="true"
 			uniqueguid="1F4E30E6-C671-4CA6-B4EEE9875AAF20A4"
@@ -2305,6 +2305,8 @@
 					name="allied"
 					width="162"
 					height="28"
+					interactive="true"
+					disabled="true"
 					uniqueguid="61594124-A97E-4AE0-87AA87BB473DEFBC">
 					<imagemetrics>
 						<image
@@ -2337,6 +2339,8 @@
 					name="allied_def"
 					width="162"
 					height="28"
+					interactive="true"
+					disabled="true"
 					uniqueguid="184B838B-A2BF-46FB-A12227F8F776A9AF">
 					<imagemetrics>
 						<image
@@ -2369,6 +2373,8 @@
 					name="enemy"
 					width="162"
 					height="28"
+					interactive="true"
+					disabled="true"
 					uniqueguid="29027E80-C301-4290-8939BD6458C7A22D">
 					<imagemetrics>
 						<image
@@ -2401,6 +2407,8 @@
 					name="neutral"
 					width="162"
 					height="28"
+					interactive="true"
+					disabled="true"
 					uniqueguid="79B6562F-DCCA-4B43-B709D4D8E03871CE">
 					<imagemetrics>
 						<image
@@ -2433,6 +2441,8 @@
 					name="player_owned"
 					width="162"
 					height="28"
+					interactive="true"
+					disabled="true"
 					uniqueguid="965EAB43-6C38-4B1C-B10609BDFF2589D7">
 					<imagemetrics>
 						<image
@@ -3280,15 +3290,19 @@
 			offset="16.00,29.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
-			componentleveltooltip="{{tt:ui/common ui/tooltip_effect_bundle}}"
-			tooltiplabel="faction_trophy_preview_Tooltip_3c005d"
 			uniqueguid="21BEBC9C-5E8C-49BA-825EA2A86A53852A"
 			currentstate="BBEFA807-05E1-4EA7-9C5B89FBF3FCB7F6"
 			defaultstate="BBEFA807-05E1-4EA7-9C5B89FBF3FCB7F6">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
-					context_object_id="CcoEffectBundle"/>
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoEffectBundle">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/common ui/tooltip_effect_bundle"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -3305,7 +3319,6 @@
 			this="B1EF331A-E39C-44C5-B402C18BC1D13564"
 			id="shadowy_dealings_target"
 			offset="25.00,50.00"
-			visible="false"
 			docking="Bottom Center"
 			component_anchor_point="0.50,1.00"
 			tooltipslocalised="true"
@@ -3385,11 +3398,21 @@
 			this="DE53ED31-539D-49BB-95CD26677830F722"
 			id="target_icons_holder"
 			offset="8.00,0.00"
-			visible="false"
 			tooltipslocalised="true"
 			uniqueguid="DE53ED31-539D-49BB-95CD26677830F722"
 			currentstate="23B0D002-EAB3-4C46-8EDDD71AE07C1C87"
 			defaultstate="23B0D002-EAB3-4C46-8EDDD71AE07C1C87">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_function_id="self.ChildList.Any(IsVisible)">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
 			<states>
 				<newstate
 					this="23B0D002-EAB3-4C46-8EDDD71AE07C1C87"
@@ -4479,7 +4502,7 @@
 		<stance_holder
 			this="37297272-A6F0-45A9-9F3A230B2EFCF4FD"
 			id="stance_holder"
-			offset="-28.00,184.00"
+			offset="-28.00,288.00"
 			tooltipslocalised="true"
 			uniqueguid="37297272-A6F0-45A9-9F3A230B2EFCF4FD"
 			currentstate="C5F83A52-C8D7-445B-AFCFC3972B90CD75"
@@ -4499,7 +4522,7 @@
 		<dy_mp_player_name
 			this="63578CEA-56C2-4B22-9B4B4226DCC60500"
 			id="dy_mp_player_name"
-			offset="-48.00,152.00"
+			offset="-48.00,256.00"
 			allowverticalresize="false"
 			tooltipslocalised="true"
 			uniqueguid="63578CEA-56C2-4B22-9B4B4226DCC60500"
@@ -4523,6 +4546,8 @@
 					name="allied"
 					width="162"
 					height="28"
+					interactive="true"
+					disabled="true"
 					uniqueguid="2382BCDE-EC34-457B-83C72EB941ACCE0F">
 					<imagemetrics>
 						<image
@@ -4555,6 +4580,8 @@
 					name="allied_def"
 					width="162"
 					height="28"
+					interactive="true"
+					disabled="true"
 					uniqueguid="53211EDD-67E0-42AB-AC01AF33254DBBEC">
 					<imagemetrics>
 						<image
@@ -4587,6 +4614,8 @@
 					name="enemy"
 					width="162"
 					height="28"
+					interactive="true"
+					disabled="true"
 					uniqueguid="19C5C899-EEC6-43FD-82A0EE8B155F7BBD">
 					<imagemetrics>
 						<image
@@ -4619,6 +4648,8 @@
 					name="neutral"
 					width="162"
 					height="28"
+					interactive="true"
+					disabled="true"
 					uniqueguid="278AFFF5-9782-46AF-A6421B43FCE1F19F">
 					<imagemetrics>
 						<image
@@ -4651,6 +4682,8 @@
 					name="player_owned"
 					width="212"
 					height="28"
+					interactive="true"
+					disabled="true"
 					uniqueguid="4F6336B0-F601-425B-BAFC46A63EC3A0C8">
 					<imagemetrics>
 						<image
@@ -5618,8 +5651,14 @@
 			defaultstate="F547FB85-8645-4A07-9DC0D5AEBA601970">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="CampaignEffectsBundleIcon"
-					context_object_id="CcoEffectBundle"/>
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoEffectBundle">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="UI/Campaign UI/edict_tooltip"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextImageSetter"
 					context_object_id="CcoEffectBundle"
@@ -5666,8 +5705,14 @@
 					context_object_id="CcoEffectBundle"
 					context_function_id="TurnsRemaining &gt; 0"/>
 				<callback_with_context
-					callback_id="CampaignEffectsBundleIcon"
-					context_object_id="CcoEffectBundle"/>
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoEffectBundle">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="UI/Campaign UI/edict_tooltip"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextImageSetter"
 					context_object_id="CcoEffectBundle"

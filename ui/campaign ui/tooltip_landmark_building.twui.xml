@@ -8,10 +8,22 @@
 			<tooltip_landmark_building this="AAEB946E-33FA-4D9A-8542B228B0720EC3">
 				<landmark_text this="9EE69A2D-BDC4-42CC-A4AB65F8F8BB0931"/>
 				<building_list this="2EED4142-73F3-4A5C-B0FB222D64D66788">
-					<template_building this="F7EE6004-6FF6-4714-8C1880E832CB45AD">
-						<frame this="9785A789-11DA-42D1-80B27DAF9FB93E7A"/>
-						<building_level this="2C9E83FC-1F9A-4DCA-AC967B1ADBC18749"/>
-					</template_building>
+					<template_chain_parent this="E81601A9-0B97-4CF8-AD1B4843FFCA0D3E">
+						<building_chain this="6F2DC35D-E57B-43EA-BCA99CAA133906D1">
+							<branch_parent this="4B4300B4-1FA5-4A18-9DCAEC84659E8D68">
+								<template_branch_horizontal this="155C2995-017C-4079-B5D9A44E0EAD128B"/>
+								<template_branch_vertical this="9D603745-D907-4A33-AF365AFDD9DE96CA"/>
+								<template_branch_end this="CE9D312E-4B40-4325-B7DECADB5178DB77"/>
+							</branch_parent>
+							<slot_parent this="1F5B732A-BEB3-4A52-A50E12B8B39B6241">
+								<template_slot_entry this="F7EE6004-6FF6-4714-8C1880E832CB45AD">
+									<frame this="9785A789-11DA-42D1-80B27DAF9FB93E7A"/>
+									<building_level this="2C9E83FC-1F9A-4DCA-AC967B1ADBC18749"/>
+								</template_slot_entry>
+							</slot_parent>
+						</building_chain>
+						<empty_slot this="DB2EBC29-5003-4FC1-B592EA5ECFB59091"/>
+					</template_chain_parent>
 				</building_list>
 				<stick_progress_bar this="0F105394-CAA9-4D57-81CB2F46B910A7B5">
 					<bar_extents_and_pos this="8F797B68-E3B3-4BFC-B9BA6C012EEBE49A">
@@ -342,9 +354,10 @@
 					is_text_localised="false"/>
 			</localised_texts>
 		</bar_extents_and_pos>
-		<template_building
+		<template_slot_entry
 			this="F7EE6004-6FF6-4714-8C1880E832CB45AD"
-			id="template_building"
+			id="template_slot_entry"
+			offset="-97.00,-20.00"
 			priority="255"
 			tooltipslocalised="true"
 			uniqueguid="F7EE6004-6FF6-4714-8C1880E832CB45AD"
@@ -366,10 +379,6 @@
 					callback_id="ContextCommandGiverOnContextSet"
 					context_object_id="CcoBuildingLevelRecord"
 					context_function_id="OpenBuildingInfoPanel(StoredContextFromParent(&quot;CcoCampaignSettlement&quot;), StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;), false, PlayersFaction)"/>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoBuildingChainRecord"
-					context_function_id="LevelsList.Filter(Key.Contains(&quot;ruin&quot;) == false).FirstContext"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -414,7 +423,7 @@
 						fontcat_name="body_12"/>
 				</normal>
 			</states>
-		</template_building>
+		</template_slot_entry>
 		<landmark_text
 			this="9EE69A2D-BDC4-42CC-A4AB65F8F8BB0931"
 			id="landmark_text"
@@ -575,7 +584,7 @@
 		<building_list
 			this="2EED4142-73F3-4A5C-B0FB222D64D66788"
 			id="building_list"
-			offset="133.00,54.00"
+			offset="123.00,54.00"
 			priority="255"
 			tooltipslocalised="true"
 			uniqueguid="2EED4142-73F3-4A5C-B0FB222D64D66788"
@@ -585,20 +594,561 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="ExLandmarkBuildingList"/>
+					context_function_id="ExLandmarkBuildingList">
+					<child_m_user_properties>
+						<property
+							name="stored_object_to_pass0"
+							value="CcoCampaignSettlement"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignSettlement"/>
 			</callbackwithcontextlist>
 			<states>
 				<default
 					this="84E2C1CF-A8A2-4BC3-93D99C52BCE7B898"
 					name="default"
-					width="74"
+					width="94"
 					height="74"
 					interactive="true"
 					uniqueguid="84E2C1CF-A8A2-4BC3-93D99C52BCE7B898"/>
 			</states>
 			<LayoutEngine
 				type="HorizontalList"
-				sizetocontent="true"/>
+				spacing="10.00,0.00"
+				sizetocontent="true"
+				margins="10.00,10.00"
+				vertical_alignment="Bottom"/>
 		</building_list>
+		<branch_parent
+			this="4B4300B4-1FA5-4A18-9DCAEC84659E8D68"
+			id="branch_parent"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="4B4300B4-1FA5-4A18-9DCAEC84659E8D68"
+			currentstate="47EEADDD-82CC-4BD6-8D506712C226D56F"
+			defaultstate="47EEADDD-82CC-4BD6-8D506712C226D56F">
+			<states>
+				<newstate
+					this="47EEADDD-82CC-4BD6-8D506712C226D56F"
+					name="NewState"
+					width="55"
+					height="55"
+					uniqueguid="47EEADDD-82CC-4BD6-8D506712C226D56F"/>
+			</states>
+		</branch_parent>
+		<building_chain
+			this="6F2DC35D-E57B-43EA-BCA99CAA133906D1"
+			id="building_chain"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="6F2DC35D-E57B-43EA-BCA99CAA133906D1"
+			currentstate="799192C2-9CDD-49F4-A52E07CB5D18B226"
+			defaultstate="799192C2-9CDD-49F4-A52E07CB5D18B226">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="TreeCallback"
+					context_object_id="CcoRTChain"
+					context_function_id="BuildingTree(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;))">
+					<child_m_user_properties>
+						<property
+							name="padding_x"
+							value="32"/>
+						<property
+							name="padding_y"
+							value="32"/>
+						<property
+							name="scale_tree"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoBuildingChainRecord"
+					context_function_id="CcoRTChain()"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="799192C2-9CDD-49F4-A52E07CB5D18B226"
+					name="NewState"
+					width="74"
+					height="74"
+					uniqueguid="799192C2-9CDD-49F4-A52E07CB5D18B226">
+					<component_text
+						texthalign="Center"
+						textyoffset="6.00,0.00"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+			<animations>
+				<show id="show">
+					<frames>
+						<frame
+							interpolationtime="200"
+							interpolationpropertymask="6"
+							targetmetrics_m_height="218"
+							targetmetrics_m_width="84"
+							targetmetrics_m_offset="-42.00,-208.00"
+							easing_curve_type="Circular Out"/>
+					</frames>
+				</show>
+				<hide id="hide">
+					<frames>
+						<frame
+							interpolationtime="100"
+							interpolationpropertymask="6"
+							targetmetrics_m_height="20"
+							targetmetrics_m_width="20"
+							targetmetrics_m_offset="42.00,208.00"
+							easing_curve_type="Circular In"/>
+					</frames>
+				</hide>
+			</animations>
+		</building_chain>
+		<empty_slot
+			this="DB2EBC29-5003-4FC1-B592EA5ECFB59091"
+			id="empty_slot"
+			offset="10.00,10.00"
+			visible="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="DB2EBC29-5003-4FC1-B592EA5ECFB59091"
+			currentstate="EF5A70BC-4854-44D0-8E230FABD2F31177"
+			defaultstate="EF5A70BC-4854-44D0-8E230FABD2F31177"
+			comment="The value 106 is the sum of the height of a tree slot (74), plus the height of an arrow(32, also defined as the TreeCallback padding)">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextCommandGiverOnContextSet"
+					context_object_id="CcoBuildingChainRecord chain, CcoCampaignSettlement settlement"
+					context_function_id="self.Resize(self.Dimensions.x, 106 * (chain.LevelsList.Filter(Key.EndsWith(&quot;_ruin&quot;) == false).FirstContext.PrimarySlotBuildingLevelRequirement - settlement.ExLandmarkBuildingList.Sort(LevelsList.Filter(Key.EndsWith(&quot;_ruin&quot;) == false).FirstContext.PrimarySlotBuildingLevelRequirement, true).FirstContext.LevelsList.Filter(Key.EndsWith(&quot;_ruin&quot;) == false).FirstContext.PrimarySlotBuildingLevelRequirement), false)"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoBuildingChainRecord chain, CcoCampaignSettlement settlement"
+					context_function_id="chain.LevelsList.Filter(Key.EndsWith(&quot;_ruin&quot;) == false).FirstContext.PrimarySlotBuildingLevelRequirement &gt; settlement.ExLandmarkBuildingList.Sort(LevelsList.Filter(Key.EndsWith(&quot;_ruin&quot;) == false).FirstContext.PrimarySlotBuildingLevelRequirement, true).FirstContext.LevelsList.Filter(Key.EndsWith(&quot;_ruin&quot;) == false).FirstContext.PrimarySlotBuildingLevelRequirement"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="EF5A70BC-4854-44D0-8E230FABD2F31177"
+					name="default"
+					width="74"
+					height="74"
+					uniqueguid="EF5A70BC-4854-44D0-8E230FABD2F31177"/>
+			</states>
+		</empty_slot>
+		<slot_parent
+			this="1F5B732A-BEB3-4A52-A50E12B8B39B6241"
+			id="slot_parent"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="1F5B732A-BEB3-4A52-A50E12B8B39B6241"
+			currentstate="C0341141-245B-4033-8B0916E14A6B09DB"
+			defaultstate="C0341141-245B-4033-8B0916E14A6B09DB">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignBuildingSlot"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="C0341141-245B-4033-8B0916E14A6B09DB"
+					name="NewState"
+					width="55"
+					height="55"
+					uniqueguid="C0341141-245B-4033-8B0916E14A6B09DB"/>
+			</states>
+		</slot_parent>
+		<template_branch_end
+			this="CE9D312E-4B40-4325-B7DECADB5178DB77"
+			id="template_branch_end"
+			offset="26.00,-71.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Top Left"
+			dock_offset="26.00,-71.00"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="CE9D312E-4B40-4325-B7DECADB5178DB77"
+			currentstate="10F74298-D26F-4AA8-83363E92D54BBA2B"
+			defaultstate="10F74298-D26F-4AA8-83363E92D54BBA2B">
+			<userproperties>
+				<property
+					name="line_end_offset"
+					value="3"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="CF98EC1C-4135-4AB3-BBE0947733C58AB7"
+					uniqueguid="CF98EC1C-4135-4AB3-BBE0947733C58AB7"
+					imagepath="ui/skins/default/branch_end.png"/>
+			</componentimages>
+			<states>
+				<bottom_active
+					this="920632A3-BB47-4427-91DE4C970E0EC21B"
+					name="bottom_active"
+					width="17"
+					height="17"
+					uniqueguid="920632A3-BB47-4427-91DE4C970E0EC21B">
+					<imagemetrics>
+						<image
+							this="DB8B46C2-1FB0-496C-B70384344B84E091"
+							uniqueguid="DB8B46C2-1FB0-496C-B70384344B84E091"
+							componentimage="CF98EC1C-4135-4AB3-BBE0947733C58AB7"
+							offset="-3.00,2.00"
+							width="12"
+							height="12"
+							colour="#FFAD5BFF"
+							tile="true"
+							dockpoint="Center"
+							dock_offset="-5.00,0.00"
+							canresizeheight="false"
+							canresizewidth="false"
+							rotation_angle="-1.57079601"/>
+					</imagemetrics>
+				</bottom_active>
+				<bottom_inactive
+					this="C3DDFF87-5FE5-439C-A308F04BF1CB422B"
+					name="bottom_inactive"
+					width="17"
+					height="17"
+					uniqueguid="C3DDFF87-5FE5-439C-A308F04BF1CB422B">
+					<imagemetrics>
+						<image
+							this="50C556D1-B0E8-4CBF-98C2BB3403748233"
+							uniqueguid="50C556D1-B0E8-4CBF-98C2BB3403748233"
+							componentimage="CF98EC1C-4135-4AB3-BBE0947733C58AB7"
+							offset="-3.00,2.00"
+							width="12"
+							height="12"
+							colour="#666666FF"
+							tile="true"
+							dockpoint="Center"
+							dock_offset="-5.00,0.00"
+							canresizeheight="false"
+							canresizewidth="false"
+							rotation_angle="-1.57079601"/>
+					</imagemetrics>
+				</bottom_inactive>
+				<left_active
+					this="10F74298-D26F-4AA8-83363E92D54BBA2B"
+					name="left_active"
+					width="17"
+					height="17"
+					uniqueguid="10F74298-D26F-4AA8-83363E92D54BBA2B">
+					<imagemetrics>
+						<image
+							this="785B948D-42FC-42FB-A1A57E705674A1A3"
+							uniqueguid="785B948D-42FC-42FB-A1A57E705674A1A3"
+							componentimage="CF98EC1C-4135-4AB3-BBE0947733C58AB7"
+							offset="-10.00,-3.00"
+							width="12"
+							height="12"
+							colour="#7D9EC0FF"
+							tile="true"
+							dockpoint="Center"
+							dock_offset="-12.00,-5.00"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</left_active>
+				<left_inactive
+					this="B2BC5599-D461-48D5-83821B0B4846164E"
+					name="left_inactive"
+					width="17"
+					height="17"
+					uniqueguid="B2BC5599-D461-48D5-83821B0B4846164E">
+					<imagemetrics>
+						<image
+							this="37EF1C15-1B43-4E00-A1439CE71404BA1E"
+							uniqueguid="37EF1C15-1B43-4E00-A1439CE71404BA1E"
+							componentimage="CF98EC1C-4135-4AB3-BBE0947733C58AB7"
+							offset="-10.00,-3.00"
+							width="12"
+							height="12"
+							colour="#666666FF"
+							tile="true"
+							dockpoint="Center"
+							dock_offset="-12.00,-5.00"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</left_inactive>
+				<right_active
+					this="9B3F8DCA-8ED5-4D47-B58174DEFF7C6362"
+					name="right_active"
+					width="17"
+					height="17"
+					uniqueguid="9B3F8DCA-8ED5-4D47-B58174DEFF7C6362">
+					<imagemetrics>
+						<image
+							this="0EF85A9B-4503-4D19-AC09868750925B84"
+							uniqueguid="0EF85A9B-4503-4D19-AC09868750925B84"
+							componentimage="CF98EC1C-4135-4AB3-BBE0947733C58AB7"
+							offset="2.00,2.00"
+							width="12"
+							height="12"
+							colour="#7D9EC0FF"
+							tile="true"
+							dockpoint="Center"
+							canresizeheight="false"
+							canresizewidth="false"
+							rotation_angle="3.14159298"/>
+					</imagemetrics>
+				</right_active>
+				<right_inactive
+					this="53B44C34-E2E2-417D-895B4AD26ED55B19"
+					name="right_inactive"
+					width="17"
+					height="17"
+					uniqueguid="53B44C34-E2E2-417D-895B4AD26ED55B19">
+					<imagemetrics>
+						<image
+							this="C5BAE4F8-1710-4FCD-AD310FD536562D84"
+							uniqueguid="C5BAE4F8-1710-4FCD-AD310FD536562D84"
+							componentimage="CF98EC1C-4135-4AB3-BBE0947733C58AB7"
+							offset="2.00,2.00"
+							width="12"
+							height="12"
+							colour="#666666FF"
+							tile="true"
+							dockpoint="Center"
+							canresizeheight="false"
+							canresizewidth="false"
+							rotation_angle="3.14159298"/>
+					</imagemetrics>
+				</right_inactive>
+				<top_active
+					this="60109E9E-C0B7-4EDB-B6DF4E46A459A7F8"
+					name="top_active"
+					width="17"
+					height="17"
+					uniqueguid="60109E9E-C0B7-4EDB-B6DF4E46A459A7F8">
+					<imagemetrics>
+						<image
+							this="45C5EB18-E31D-4819-973D4A66B236ACE1"
+							uniqueguid="45C5EB18-E31D-4819-973D4A66B236ACE1"
+							componentimage="CF98EC1C-4135-4AB3-BBE0947733C58AB7"
+							offset="-3.00,-10.00"
+							width="12"
+							height="12"
+							colour="#7D9EC0FF"
+							tile="true"
+							dockpoint="Center"
+							dock_offset="-5.00,-12.00"
+							canresizeheight="false"
+							canresizewidth="false"
+							rotation_angle="1.57079601"/>
+					</imagemetrics>
+				</top_active>
+				<top_inactive
+					this="D194C6BC-F170-45AB-87D79594AD1835F7"
+					name="top_inactive"
+					width="17"
+					height="17"
+					uniqueguid="D194C6BC-F170-45AB-87D79594AD1835F7">
+					<imagemetrics>
+						<image
+							this="78622E74-B022-4B1F-B46A7FB62B27851C"
+							uniqueguid="78622E74-B022-4B1F-B46A7FB62B27851C"
+							componentimage="CF98EC1C-4135-4AB3-BBE0947733C58AB7"
+							offset="-3.00,-10.00"
+							width="12"
+							height="12"
+							colour="#666666FF"
+							tile="true"
+							dockpoint="Center"
+							dock_offset="-5.00,-12.00"
+							canresizeheight="false"
+							canresizewidth="false"
+							rotation_angle="1.57079601"/>
+					</imagemetrics>
+				</top_inactive>
+			</states>
+		</template_branch_end>
+		<template_branch_horizontal
+			this="155C2995-017C-4079-B5D9A44E0EAD128B"
+			id="template_branch_horizontal"
+			offset="-5.00,-113.00"
+			allowverticalresize="false"
+			visible="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="155C2995-017C-4079-B5D9A44E0EAD128B"
+			currentstate="7FF967D3-B3DF-425A-A1617802964C6BD0"
+			defaultstate="7FF967D3-B3DF-425A-A1617802964C6BD0">
+			<componentimages>
+				<component_image
+					this="00F26A18-A400-49CD-9FB15C0694ABC1AE"
+					uniqueguid="00F26A18-A400-49CD-9FB15C0694ABC1AE"
+					imagepath="ui/skins/default/branch_length.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="7FF967D3-B3DF-425A-A1617802964C6BD0"
+					name="active"
+					width="20"
+					height="3"
+					uniqueguid="7FF967D3-B3DF-425A-A1617802964C6BD0">
+					<imagemetrics>
+						<image
+							this="81E78652-58C9-4D35-929FAA4EB5385E36"
+							uniqueguid="81E78652-58C9-4D35-929FAA4EB5385E36"
+							componentimage="00F26A18-A400-49CD-9FB15C0694ABC1AE"
+							width="20"
+							height="3"
+							colour="#7D9EC0FF"
+							tile="true"/>
+					</imagemetrics>
+				</active>
+				<inactive
+					this="CC797B8A-1413-4181-BF1104A0CF69EC9B"
+					name="inactive"
+					width="20"
+					height="3"
+					uniqueguid="CC797B8A-1413-4181-BF1104A0CF69EC9B">
+					<imagemetrics>
+						<image
+							this="609B52CA-60DD-4C48-80C6B98B1CB22505"
+							uniqueguid="609B52CA-60DD-4C48-80C6B98B1CB22505"
+							componentimage="00F26A18-A400-49CD-9FB15C0694ABC1AE"
+							width="20"
+							height="3"
+							colour="#666666FF"
+							tile="true"/>
+					</imagemetrics>
+				</inactive>
+			</states>
+			<animations>
+				<oncreate id="OnCreate">
+					<frames>
+						<frame
+							targetmetrics_m_colour="#7D9EC0FF"
+							targetmetrics_m_height="3"
+							targetmetrics_m_width="20"
+							targetmetrics_m_offset="-5.00,-113.00"/>
+					</frames>
+				</oncreate>
+			</animations>
+		</template_branch_horizontal>
+		<template_branch_vertical
+			this="9D603745-D907-4A33-AF365AFDD9DE96CA"
+			id="template_branch_vertical"
+			offset="0.00,100.00"
+			allowhorizontalresize="false"
+			visible="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="9D603745-D907-4A33-AF365AFDD9DE96CA"
+			currentstate="68EC1233-5A2C-4D35-A093B3EE2D7239A1"
+			defaultstate="68EC1233-5A2C-4D35-A093B3EE2D7239A1">
+			<componentimages>
+				<component_image
+					this="D02C45B3-B7A8-4273-AE61E879DA5D2EDC"
+					uniqueguid="D02C45B3-B7A8-4273-AE61E879DA5D2EDC"
+					imagepath="ui/skins/default/branch_height.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="68EC1233-5A2C-4D35-A093B3EE2D7239A1"
+					name="active"
+					width="5"
+					height="20"
+					uniqueguid="68EC1233-5A2C-4D35-A093B3EE2D7239A1">
+					<imagemetrics>
+						<image
+							this="71052808-89E9-4CD6-B2A0A62AAF76B736"
+							uniqueguid="71052808-89E9-4CD6-B2A0A62AAF76B736"
+							componentimage="D02C45B3-B7A8-4273-AE61E879DA5D2EDC"
+							width="5"
+							height="20"
+							colour="#FFAD5BFF"
+							tile="true"
+							margin="1.00,0.00,20.00,0.00"/>
+					</imagemetrics>
+				</active>
+				<active_regrowth
+					this="DF2C1EAB-08A8-4F1C-BBB55146ECB38763"
+					name="active_regrowth"
+					width="5"
+					height="20"
+					uniqueguid="DF2C1EAB-08A8-4F1C-BBB55146ECB38763">
+					<imagemetrics>
+						<image
+							this="7ECBB6D5-C04D-48EB-9E3620D67FACB4E6"
+							uniqueguid="7ECBB6D5-C04D-48EB-9E3620D67FACB4E6"
+							componentimage="D02C45B3-B7A8-4273-AE61E879DA5D2EDC"
+							width="5"
+							height="20"
+							colour="#00FF00FF"
+							tile="true"
+							margin="1.00,0.00,20.00,0.00"/>
+					</imagemetrics>
+				</active_regrowth>
+				<inactive
+					this="12377147-4EA5-4409-AC40BFF24D9D505B"
+					name="inactive"
+					width="5"
+					height="20"
+					uniqueguid="12377147-4EA5-4409-AC40BFF24D9D505B">
+					<imagemetrics>
+						<image
+							this="7763FF38-C9EC-42A0-8EE1976A5427C129"
+							uniqueguid="7763FF38-C9EC-42A0-8EE1976A5427C129"
+							componentimage="D02C45B3-B7A8-4273-AE61E879DA5D2EDC"
+							width="5"
+							height="20"
+							colour="#666666FF"
+							tile="true"
+							margin="1.00,0.00,20.00,0.00"/>
+					</imagemetrics>
+				</inactive>
+				<inactive_regrowth
+					this="0F629CE0-320F-4AFF-AF9AB5D0FC8DDF9D"
+					name="inactive_regrowth"
+					width="5"
+					height="20"
+					uniqueguid="0F629CE0-320F-4AFF-AF9AB5D0FC8DDF9D">
+					<imagemetrics>
+						<image
+							this="73A24623-FC80-4734-9FD59593F3E722FD"
+							uniqueguid="73A24623-FC80-4734-9FD59593F3E722FD"
+							componentimage="D02C45B3-B7A8-4273-AE61E879DA5D2EDC"
+							width="5"
+							height="20"
+							colour="#009300FF"
+							tile="true"
+							margin="1.00,0.00,20.00,0.00"/>
+					</imagemetrics>
+				</inactive_regrowth>
+			</states>
+		</template_branch_vertical>
+		<template_chain_parent
+			this="E81601A9-0B97-4CF8-AD1B4843FFCA0D3E"
+			id="template_chain_parent"
+			offset="10.00,0.00"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="E81601A9-0B97-4CF8-AD1B4843FFCA0D3E"
+			currentstate="2203EC84-0319-4FBE-8D6105CE1AD8DF59"
+			defaultstate="2203EC84-0319-4FBE-8D6105CE1AD8DF59">
+			<states>
+				<default
+					this="2203EC84-0319-4FBE-8D6105CE1AD8DF59"
+					name="default"
+					width="74"
+					height="74"
+					uniqueguid="2203EC84-0319-4FBE-8D6105CE1AD8DF59"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="48"/>
+				</columnwidths>
+			</LayoutEngine>
+		</template_chain_parent>
 	</components>
 </layout>

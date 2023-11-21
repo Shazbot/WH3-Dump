@@ -1291,60 +1291,6 @@
 				<element value=""/>
 			</override_images>
 		</spread_parent>
-		<tooltip_special_ability_phase
-			this="DEF82C6F-7550-49F3-B3F08EC7CB82FDF2"
-			id="tooltip_special_ability_phase"
-			offset="389.00,287.00"
-			tooltipslocalised="true"
-			uniqueguid="DEF82C6F-7550-49F3-B3F08EC7CB82FDF2"
-			currentstate="5F9DC8A8-80A1-4BB6-A6F66D03AC023A15"
-			defaultstate="5F9DC8A8-80A1-4BB6-A6F66D03AC023A15"
-			comment="store battle unit effect here and propagate phase record so can read intensity from the effect, rather than creating tooltip then passing phase record which would not have that info">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="CustomTooltip"/>
-				<callback_with_context
-					callback_id="ContextObjectStore"
-					context_object_id="CcoBattleUnitEffect"/>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoBattleUnitEffect"
-					context_function_id="PhaseRecordContext"/>
-			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="DE122F54-7AC5-4E16-97787483A8CE0FDF"
-					uniqueguid="DE122F54-7AC5-4E16-97787483A8CE0FDF"
-					imagepath="ui/skins/default/tooltip_frame.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="5F9DC8A8-80A1-4BB6-A6F66D03AC023A15"
-					name="NewState"
-					width="384"
-					height="410"
-					uniqueguid="5F9DC8A8-80A1-4BB6-A6F66D03AC023A15">
-					<imagemetrics>
-						<image
-							this="D586233B-3FC1-457B-A5C24F6811A5BE73"
-							uniqueguid="D586233B-3FC1-457B-A5C24F6811A5BE73"
-							componentimage="DE122F54-7AC5-4E16-97787483A8CE0FDF"
-							width="384"
-							height="410"
-							tile="true"
-							margin="16.00,20.00,16.00,20.00"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true"
-				secondary_margins="12.00,12.00"
-				margins="12.00,12.00">
-				<columnwidths>
-					<column width="280"/>
-				</columnwidths>
-			</LayoutEngine>
-		</tooltip_special_ability_phase>
 		<spread_value
 			this="B5F8269D-2A72-4E8D-A6BDD8DE76AB66DF"
 			id="spread_value"
@@ -1399,6 +1345,9 @@
 							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagationBlocker"
+					context_object_id="CcoEffect"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -1415,42 +1364,65 @@
 				<element value=""/>
 			</override_images>
 		</additional_ui_effects_list>
-		<header
-			this="A84106B8-A020-4400-BCE9F0C2935D3D2F"
-			id="header"
-			offset="12.00,12.00"
-			allowhorizontalresize="false"
+		<tooltip_special_ability_phase
+			this="DEF82C6F-7550-49F3-B3F08EC7CB82FDF2"
+			id="tooltip_special_ability_phase"
+			offset="389.00,287.00"
 			tooltipslocalised="true"
-			uniqueguid="A84106B8-A020-4400-BCE9F0C2935D3D2F"
-			currentstate="CFD13528-0ADF-467F-B3F2CABC3A892EB4"
-			defaultstate="CFD13528-0ADF-467F-B3F2CABC3A892EB4">
+			uniqueguid="DEF82C6F-7550-49F3-B3F08EC7CB82FDF2"
+			currentstate="5F9DC8A8-80A1-4BB6-A6F66D03AC023A15"
+			defaultstate="5F9DC8A8-80A1-4BB6-A6F66D03AC023A15"
+			comment="store battle unit effect here and propagate phase record so can read intensity from the effect, rather than creating tooltip then passing phase record which would not have that info">
 			<callbackwithcontextlist>
+				<callback_with_context callback_id="CustomTooltip"/>
 				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoSpecialAbilityPhaseRecord"
-					context_function_id="GetIfElse(StoredContextFromParent(&quot;CcoBattleUnitEffect&quot;), StoredContextFromParent(&quot;CcoBattleUnitEffect&quot;).Name, OnscreenName)"/>
+					callback_id="ContextObjectStore"
+					context_object_id="CcoBattleUnitEffect"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoBattleUnitEffect"
+					context_function_id="PhaseRecordContext"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoEffect"
+					context_function_id="SpecialAbilityPhaseRecordContext"/>
+				<callback_with_context callback_id="ContextObjectStore"/>
 			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="DE122F54-7AC5-4E16-97787483A8CE0FDF"
+					uniqueguid="DE122F54-7AC5-4E16-97787483A8CE0FDF"
+					imagepath="ui/skins/default/tooltip_frame.png"/>
+			</componentimages>
 			<states>
 				<newstate
-					this="CFD13528-0ADF-467F-B3F2CABC3A892EB4"
+					this="5F9DC8A8-80A1-4BB6-A6F66D03AC023A15"
 					name="NewState"
-					width="221"
-					height="24"
-					interactive="true"
-					uniqueguid="CFD13528-0ADF-467F-B3F2CABC3A892EB4">
-					<component_text
-						text="Phase name"
-						textxoffset="4.00,4.00"
-						textyoffset="4.00,4.00"
-						texthbehaviour="Resize"
-						textlabel="header_NewState_Text_3f0057"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12_bold"/>
+					width="384"
+					height="410"
+					uniqueguid="5F9DC8A8-80A1-4BB6-A6F66D03AC023A15">
+					<imagemetrics>
+						<image
+							this="D586233B-3FC1-457B-A5C24F6811A5BE73"
+							uniqueguid="D586233B-3FC1-457B-A5C24F6811A5BE73"
+							componentimage="DE122F54-7AC5-4E16-97787483A8CE0FDF"
+							width="384"
+							height="410"
+							tile="true"
+							margin="16.00,20.00,16.00,20.00"/>
+					</imagemetrics>
 				</newstate>
 			</states>
-		</header>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true"
+				secondary_margins="12.00,12.00"
+				margins="12.00,12.00">
+				<columnwidths>
+					<column width="280"/>
+				</columnwidths>
+			</LayoutEngine>
+		</tooltip_special_ability_phase>
 		<icon_effect
 			this="4E6B5406-6F4C-4098-AE9BC2C442A17D29"
 			id="icon_effect"
@@ -1541,6 +1513,42 @@
 					is_text_localised="false"/>
 			</localised_texts>
 		</icon_effect_parent>
+		<header
+			this="A84106B8-A020-4400-BCE9F0C2935D3D2F"
+			id="header"
+			offset="12.00,12.00"
+			allowhorizontalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="A84106B8-A020-4400-BCE9F0C2935D3D2F"
+			currentstate="CFD13528-0ADF-467F-B3F2CABC3A892EB4"
+			defaultstate="CFD13528-0ADF-467F-B3F2CABC3A892EB4">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="GetIfElse(StoredContextFromParent(&quot;CcoBattleUnitEffect&quot;), StoredContextFromParent(&quot;CcoBattleUnitEffect&quot;).Name, OnscreenName)"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="CFD13528-0ADF-467F-B3F2CABC3A892EB4"
+					name="NewState"
+					width="221"
+					height="24"
+					interactive="true"
+					uniqueguid="CFD13528-0ADF-467F-B3F2CABC3A892EB4">
+					<component_text
+						text="Phase name"
+						textxoffset="4.00,4.00"
+						textyoffset="4.00,4.00"
+						texthbehaviour="Resize"
+						textlabel="header_NewState_Text_3f0057"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12_bold"/>
+				</newstate>
+			</states>
+		</header>
 		<label_additional_effect
 			this="ECD1B5EC-FDBD-47A9-B1BF2548307AA6CE"
 			id="label_additional_effect"

@@ -1,4 +1,31 @@
-
+wh3_campaign_achievements = {
+	long_victory = { --The unique string component of the winning achievements in IE, see achievements table in dave
+		wh2_dlc09_tmb_tomb_kings = "TOMB_KINGS",
+		wh2_dlc11_cst_vampire_coast = "vAMPIRE_COAST",
+		wh2_main_def_dark_elves = "DARK_ELVES",
+		wh2_main_hef_high_elves = "HIGH_ELVES",
+		wh2_main_lzd_lizardmen = "LIZARDMEN",
+		wh2_main_skv_skaven = "SKAVEN",
+		wh3_dlc23_chd_chaos_dwarfs = "CHAOS_DWARFS",
+		wh3_main_cth_cathay = "CATHAY",
+		wh3_main_dae_daemons = "DAEMON_PRINCE",
+		wh3_main_kho_khorne = "KHORNE",
+		wh3_main_ksl_kislev = "KISLEV",
+		wh3_main_nur_nurgle = "NURGLE",
+		wh3_main_ogr_ogre_kingdoms = "OGRES",
+		wh3_main_sla_slaanesh = "SLAANESH",
+		wh3_main_tze_tzeentch = "TZEENTCH",
+		wh_dlc03_bst_beastmen = "BEASTMEN",
+		wh_dlc05_wef_wood_elves = "WOOD_ELVES",
+		wh_dlc08_nor_norsca = "NORSCA",
+		wh_main_brt_bretonnia = "BRETONNIA",
+		wh_main_chs_chaos = "CHAOS",
+		wh_main_dwf_dwarfs = "DWARFS",
+		wh_main_emp_empire = "EMPIRE",
+		wh_main_grn_greenskins = "GREENSKINS",
+		wh_main_vmp_vampire_counts = "VAMPIRE_COUNTS"
+	},
+}
 
 
 
@@ -346,6 +373,28 @@ function start_achievement_listeners()
 					end;
 				end;
 			end;
+		end,
+		true
+	);
+
+	core:add_listener(
+		"WH3_ACHIEVEMENT_LONG_VICTORY_COMPLETE",
+		"MissionSucceeded",
+		function(context)
+			return context:mission():mission_record_key() == "wh_main_long_victory"
+		end,
+		function(context)
+			local faction_interface = context:faction()
+			local faction = faction_interface:name()
+			local culture = faction_interface:culture()
+
+			if wh3_campaign_achievements.long_victory[culture] then
+				award_achievement_to_faction(faction, "WH3_ACHIEVEMENT_WINNING_"..wh3_campaign_achievements.long_victory[culture].."_1") ---always grant regular victory
+				if cm:get_difficulty() > 3 then
+					award_achievement_to_faction(faction, "WH3_ACHIEVEMENT_WINNING_"..wh3_campaign_achievements.long_victory[culture].."_2") --- Achievement for victory on very hard or above
+				end	
+			end
+
 		end,
 		true
 	);

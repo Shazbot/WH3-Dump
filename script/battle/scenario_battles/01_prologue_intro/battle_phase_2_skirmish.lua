@@ -835,6 +835,7 @@ function start_attacking_advice(was_skipped)
 		"wh3_main_scenario_01_prologue_intro_attacking_02",
 		function()
 			-- Resets armies to default state once player engaged.
+			sunits_enemy_skirmish:take_control()
 			sunits_enemy_skirmish:set_invincible_for_time_proportion(0)
 			sunits_allied_skirmishers:set_invincible_for_time_proportion(0.5)
 			bm:callback(function() start_monitoring_advice() end, 1000) end

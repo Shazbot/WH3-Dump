@@ -67,6 +67,7 @@
 									<requirements_list this="259454A1-23EA-4958-8E8EED492AFD6F97">
 										<template_requirement this="5BF1A126-FE93-4B4E-BB501A0E7857132D">
 											<dy_target_name this="7ABAF3B2-708A-401E-9416B434A5475DF3"/>
+											<icon_complete this="FEF52730-D3BE-4959-A516452AFB64640F"/>
 										</template_requirement>
 									</requirements_list>
 									<requirement_listview this="6F543739-6785-4E6C-A67778387871F3E6">
@@ -74,6 +75,7 @@
 											<list_box this="6D930F9E-C8F6-4671-B1BE9D4F84000880">
 												<template_requirement this="3FAB4E7D-1197-4861-AD250D1C262CC65A">
 													<dy_target_name this="D46A1DC1-79C3-408F-8FEBD4D2CDF6C74A"/>
+													<icon_complete this="E1E4EEC1-8A44-4D47-97DF362C50A0AF9F"/>
 												</template_requirement>
 											</list_box>
 										</list_clip>
@@ -7150,8 +7152,17 @@
 					context_object_id="CcoCampaignMissionDefinition"
 					context_function_id="self.Resize(GetIfElse (RootComponent.Dimensions.y &gt;= 1080, 350, 300), self.Dimensions.x, false)"/>
 				<callback_with_context
-					callback_id="CampaignEffectsBundleIcon"
-					context_object_id="CcoAncillaryRecord"/>
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoAncillaryRecord">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/campaign ui/edict_tooltip"/>
+						<property
+							name="offset_y"
+							value="-20"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoCampaignPayloadInfoEntry"
@@ -9024,5 +9035,172 @@
 					uniqueguid="6C51372D-EE85-4454-B976178422AB6397"/>
 			</states>
 		</vslider_holder>
+		<icon_complete
+			this="FEF52730-D3BE-4959-A516452AFB64640F"
+			id="icon_complete"
+			offset="339.00,15.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Bottom Right"
+			component_anchor_point="1.00,1.00"
+			priority="50"
+			tooltipslocalised="true"
+			uniqueguid="FEF52730-D3BE-4959-A516452AFB64640F"
+			currentstate="ADC34B32-A7EE-4F09-8FA2703E5DA67CC8"
+			defaultstate="ADC34B32-A7EE-4F09-8FA2703E5DA67CC8">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignMissionObjectiveRequirements"
+					context_function_id="IsCompleted">
+					<child_m_user_properties>
+						<property
+							name="object_store_events"
+							value="^2"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child_parent"
+					value="template_target"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="E49F5921-670B-466B-AE0F8C1FA38E0448"
+					uniqueguid="E49F5921-670B-466B-AE0F8C1FA38E0448"
+					imagepath="ui/skins/default/bullet_point_tick.png"/>
+			</componentimages>
+			<states>
+				<complete
+					this="ADC34B32-A7EE-4F09-8FA2703E5DA67CC8"
+					name="complete"
+					width="21"
+					height="19"
+					interactive="true"
+					uniqueguid="ADC34B32-A7EE-4F09-8FA2703E5DA67CC8">
+					<imagemetrics>
+						<image
+							this="10519CF5-69B0-4AA5-A742ECBD83A5AD6B"
+							uniqueguid="10519CF5-69B0-4AA5-A742ECBD83A5AD6B"
+							componentimage="E49F5921-670B-466B-AE0F8C1FA38E0448"
+							width="21"
+							height="19"
+							dockpoint="Center"/>
+					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="green"/>
+				</complete>
+				<incomplete
+					this="04949CC8-6C71-44D8-A1AD7083B9477FD1"
+					name="incomplete"
+					width="21"
+					height="19"
+					uniqueguid="04949CC8-6C71-44D8-A1AD7083B9477FD1">
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="green"/>
+				</incomplete>
+			</states>
+		</icon_complete>
+		<icon_complete
+			this="E1E4EEC1-8A44-4D47-97DF362C50A0AF9F"
+			id="icon_complete"
+			offset="314.00,15.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Bottom Right"
+			component_anchor_point="1.00,1.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="E1E4EEC1-8A44-4D47-97DF362C50A0AF9F"
+			currentstate="991E574A-0C0F-4E82-A4D473FE1E49CAB1"
+			defaultstate="991E574A-0C0F-4E82-A4D473FE1E49CAB1">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignMissionObjectiveRequirements"
+					context_function_id="IsCompleted">
+					<child_m_user_properties>
+						<property
+							name="object_store_events"
+							value="^2"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoCampaignMissionObjectiveRequirements"
+					context_function_id="GetIfElse(IsCompleted, &quot;complete&quot;, &quot;incomplete&quot;)"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child_parent"
+					value="template_target"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="7BC18589-3026-4538-8B2C20C219F6D54C"
+					uniqueguid="7BC18589-3026-4538-8B2C20C219F6D54C"
+					imagepath="ui/skins/default/bullet_point_tick.png"/>
+				<component_image
+					this="6609D92A-4260-446D-A21CB966A360213F"
+					uniqueguid="6609D92A-4260-446D-A21CB966A360213F"
+					imagepath="ui/skins/default/icon_cross_red_22px.png"/>
+			</componentimages>
+			<states>
+				<complete
+					this="991E574A-0C0F-4E82-A4D473FE1E49CAB1"
+					name="complete"
+					width="21"
+					height="19"
+					interactive="true"
+					uniqueguid="991E574A-0C0F-4E82-A4D473FE1E49CAB1">
+					<imagemetrics>
+						<image
+							this="36C98D6F-8DC1-4EB0-90EFA1F77B1D1143"
+							uniqueguid="36C98D6F-8DC1-4EB0-90EFA1F77B1D1143"
+							componentimage="7BC18589-3026-4538-8B2C20C219F6D54C"
+							width="21"
+							height="19"
+							dockpoint="Center"/>
+					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="green"/>
+				</complete>
+				<incomplete
+					this="CE708342-8A53-43D9-93BC2BED015F90C6"
+					name="incomplete"
+					width="21"
+					height="19"
+					uniqueguid="CE708342-8A53-43D9-93BC2BED015F90C6">
+					<imagemetrics>
+						<image
+							this="6E8E68BC-4997-4EA9-AA6BEA288F05FD76"
+							uniqueguid="6E8E68BC-4997-4EA9-AA6BEA288F05FD76"
+							componentimage="6609D92A-4260-446D-A21CB966A360213F"
+							offset="3.00,0.00"
+							width="18"
+							height="19"/>
+					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="green"/>
+				</incomplete>
+			</states>
+		</icon_complete>
 	</components>
 </layout>

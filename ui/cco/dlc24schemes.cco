@@ -87,7 +87,7 @@ Schemes
 
 	CompletedGrandSchemes
 	{
-		GrandSchemeList.Filter(Completed)
+		GrandSchemeList.Filter(Completed && IsCancelled == false)
 	}
 
 	NumGrandSchemesCompleted
@@ -112,7 +112,7 @@ Schemes
 
 	IsGrandSchemeUnlockedForRegionGroup(CcoRegionGroupRecord region_group)
 	{
-		Schemes.MinorSchemeListForRegionGroup(region_group).Count(Completed) >= Schemes.NumMinorSchemesToUnlockGrandSchemeInRegionGroup(region_group)
+		Schemes.MinorSchemeListForRegionGroup(region_group).Count(Completed && IsCancelled == false) >= Schemes.NumMinorSchemesToUnlockGrandSchemeInRegionGroup(region_group)
 	}
 
 	IsGrandSchemeCompleteForRegionGroup(CcoRegionGroupRecord region_group)
@@ -124,13 +124,13 @@ Schemes
 	{
 		(minor_schemes = MinorSchemeListForRegionGroup(region_group)) =>
 		{
-			minor_schemes.Count(Completed) / minor_schemes.Size
+			minor_schemes.Count(Completed && IsCancelled == false) / minor_schemes.Size
 		}
 	}
 
 	AllMinorSchemesCompletedForRegionGroup(CcoRegionGroupRecord region_group)
 	{
-		MinorSchemeListForRegionGroup(region_group).All(Completed)
+		MinorSchemeListForRegionGroup(region_group).All(Completed && IsCancelled == false)
 	}
 
 	SchemeButtonMouseOn(CcoCampaignMission mission)

@@ -5505,14 +5505,29 @@
 					callback_id="ContextTrashOnCondition"
 					context_object_id="CcoStaticObject"
 					context_function_id="CanUseUiFeature(&quot;FLESH_LAB&quot;) == false"/>
-				<callback_with_context
-					callback_id="ContextInactiveStateSetter"
-					context_object_id="CcoStaticObject"
-					context_function_id="IsLocalPlayersTurn">
+				<callback_with_context callback_id="ContextStateSetterConditional">
 					<child_m_user_properties>
 						<property
 							name="event0"
 							value="CampaignTurnStart"/>
+						<property
+							name="event1"
+							value="PanelClosed_augment_panel"/>
+						<property
+							name="event2"
+							value="PanelOpened_augment_panel"/>
+						<property
+							name="fallback_state"
+							value="active"/>
+						<property
+							name="handle_button_states"
+							value=""/>
+						<property
+							name="inactive"
+							value="IsLocalPlayersTurn == false"/>
+						<property
+							name="selected"
+							value="IsPanelOpen(&quot;augment_panel&quot;)"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
@@ -7728,7 +7743,7 @@
 					uniqueguid="A8E33878-F35F-481A-9B5B26A578C2FC79"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
-				<callback_with_context callback_id="Button"/>
+				<callback_with_context callback_id="ButtonGroupButton"/>
 				<callback_with_context
 					callback_id="ContextTrashOnCondition"
 					context_object_id="CcoStaticObject"
@@ -14247,7 +14262,7 @@
 					uniqueguid="49D9247D-F8D2-458B-920A7EA910E48C73"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
-				<callback_with_context callback_id="Button"/>
+				<callback_with_context callback_id="ButtonGroupButton"/>
 				<callback_with_context callback_id="CallbackAnimTrigger"/>
 			</callbacks_with_context>
 			<user_properties>
@@ -14538,6 +14553,9 @@
 						<property
 							name="event0"
 							value="Reopen_warband_upgrades"/>
+						<property
+							name="event1"
+							value="close_warband_upgrades"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbacks_with_context>
@@ -24125,6 +24143,9 @@
 							name="filtered_mission_category21"
 							value="yuan_bo_compass"/>
 						<property
+							name="filtered_mission_category22"
+							value="treasure_hunt_coast"/>
+						<property
 							name="filtered_mission_category3"
 							value="wulfharts_hunters"/>
 						<property
@@ -27067,7 +27088,15 @@
 			currentstate="C101F9AA-BBC7-4921-84C7FDEE8AE97A43"
 			defaultstate="C101F9AA-BBC7-4921-84C7FDEE8AE97A43">
 			<callbackwithcontextlist>
-				<callback_with_context callback_id="CampaignEffectsBundleIcon"/>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoEffectBundle">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="UI/Campaign UI/edict_tooltip"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -27171,7 +27200,15 @@
 			currentstate="2E705831-444E-4B19-9882158CCBD2FA4E"
 			defaultstate="2E705831-444E-4B19-9882158CCBD2FA4E">
 			<callbackwithcontextlist>
-				<callback_with_context callback_id="CampaignEffectsBundleIcon"/>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoEffectBundle">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="UI/Campaign UI/edict_tooltip"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -27275,7 +27312,15 @@
 			currentstate="4EE8EDAC-9650-424D-B91707989892382C"
 			defaultstate="4EE8EDAC-9650-424D-B91707989892382C">
 			<callbackwithcontextlist>
-				<callback_with_context callback_id="CampaignEffectsBundleIcon"/>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoEffectBundle">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="UI/Campaign UI/edict_tooltip"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -27379,7 +27424,15 @@
 			currentstate="D8AB0086-8E1E-4B14-8A53E5AD42542C58"
 			defaultstate="D8AB0086-8E1E-4B14-8A53E5AD42542C58">
 			<callbackwithcontextlist>
-				<callback_with_context callback_id="CampaignEffectsBundleIcon"/>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoEffectBundle">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="UI/Campaign UI/edict_tooltip"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -27482,7 +27535,15 @@
 			currentstate="E3830448-5DEC-4757-94A3CF731702481A"
 			defaultstate="E3830448-5DEC-4757-94A3CF731702481A">
 			<callbackwithcontextlist>
-				<callback_with_context callback_id="CampaignEffectsBundleIcon"/>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoEffectBundle">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="UI/Campaign UI/edict_tooltip"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -30896,7 +30957,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoStaticObject"
-					context_function_id="CampaignRoot.IsCinematicModeEnabled == false &amp;&amp; IsContextValid(CampaignBattleContext) == false &amp;&amp; IsScriptLockActive(&quot;hide_3d_ui&quot;) == false &amp;&amp; IsPanelOpen(&quot;military_convoys&quot;) == false">
+					context_function_id="CampaignRoot.IsCinematicModeEnabled == false &amp;&amp; IsPanelOpen(&quot;pre_battle_screen&quot;) == false &amp;&amp; IsPanelOpen(&quot;post_battle_screen&quot;) == false &amp;&amp; IsScriptLockActive(&quot;hide_3d_ui&quot;) == false &amp;&amp; IsPanelOpen(&quot;military_convoys&quot;) == false">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -31096,6 +31157,15 @@
 			defaultstate="053A75B9-A7FE-45E9-BF6ACCB331968134">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="CampaignTechTurnsRemainingLabel"/>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoCampaignTechnology">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/campaign ui/tech_tooltip_context"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -35524,7 +35594,39 @@
 			currentstate="1E0822FC-7B11-4BD3-A2C7812B6F18048A"
 			defaultstate="1E0822FC-7B11-4BD3-A2C7812B6F18048A">
 			<callbackwithcontextlist>
-				<callback_with_context callback_id="TotalAvailableRitualsLabel"/>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_function_id="PlayersFaction.RitualManagerContext.AvailableRitualList.Filter(RitualContext.Category == &quot;BLOODLINE_RITUAL&quot; &amp;&amp; CanPerformRitual).Size">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CharacterMoveEndAny"/>
+						<property
+							name="event1"
+							value="CampaignBattleFullyCompleted"/>
+						<property
+							name="event2"
+							value="RitualComplete"/>
+						<property
+							name="event3"
+							value="RitualStarted"/>
+						<property
+							name="event4"
+							value="CampaignRitualLockStatusChanged"/>
+						<property
+							name="event5"
+							value="CampaignTurnStart"/>
+						<property
+							name="event6"
+							value="PooledResourceTransaction"/>
+						<property
+							name="event7"
+							value="CampaignTreasuryChanged"/>
+						<property
+							name="event8"
+							value="SettlementFactionChangeAny"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -35533,9 +35635,6 @@
 				<property
 					name="dynamic_child_parent"
 					value="button_bloodlines"/>
-				<property
-					name="ritual_category"
-					value="BLOODLINE_RITUAL"/>
 			</userproperties>
 			<componentimages>
 				<component_image
@@ -35735,7 +35834,39 @@
 			currentstate="DED97C4E-C761-4EFF-B25F16373858A0DB"
 			defaultstate="DED97C4E-C761-4EFF-B25F16373858A0DB">
 			<callbackwithcontextlist>
-				<callback_with_context callback_id="TotalAvailableRitualsLabel"/>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_function_id="PlayersFaction.RitualManagerContext.AvailableRitualList.Filter(RitualContext.Category == &quot;STANDARD_RITUAL&quot; &amp;&amp; CanPerformRitual).Size">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignTurnStart"/>
+						<property
+							name="event1"
+							value="RitualStarted"/>
+						<property
+							name="event2"
+							value="RitualComplete"/>
+						<property
+							name="event3"
+							value="CampaignRitualLockStatusChanged"/>
+						<property
+							name="event4"
+							value="PooledResourceTransaction"/>
+						<property
+							name="event5"
+							value="SettlementFactionChangeAny"/>
+						<property
+							name="event6"
+							value="CampaignBattleFullyCompleted"/>
+						<property
+							name="event7"
+							value="CampaignTreasuryChanged"/>
+						<property
+							name="event8"
+							value="CharacterMoveEndAny"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -35744,9 +35875,6 @@
 				<property
 					name="dynamic_child_parent"
 					value="button_rituals"/>
-				<property
-					name="ritual_category"
-					value="STANDARD_RITUAL"/>
 			</userproperties>
 			<componentimages>
 				<component_image

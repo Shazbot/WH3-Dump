@@ -2684,6 +2684,9 @@ victory_objectives_ie = {
 					}
 				}
 			},
+			wh_main_long_victory = {
+				payload_bundle = "wh3_dlc24_ie_victory_objective_changeling_long"	
+			},
 			no_alignment_objective = true,
 			no_subculture_objective = true
 		},

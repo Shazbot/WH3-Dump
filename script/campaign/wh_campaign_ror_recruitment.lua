@@ -265,7 +265,8 @@ regiments_of_renown = {
 		"wh3_twa07_kho_cav_bloodcrushers_ror_0",
 		"wh3_dlc20_kho_cav_skullcrushers_mkho_ror",
 		"wh3_twa08_kho_mon_bloodthirster_0_ror",
-		"wh3_twa10_kho_inf_flesh_hounds_of_khorne_ror"
+		"wh3_twa10_kho_inf_flesh_hounds_of_khorne_ror",
+		"wh2_dlc17_kho_mon_ghorgon_ror_0"
 	},	
 	------------------
 	----  KISLEV  ----
@@ -291,9 +292,9 @@ regiments_of_renown = {
 		"wh3_dlc24_cth_inf_onyx_crowmen_ror",
 		"wh3_dlc24_cth_veh_zhangu_war_drum_ror"
 	},
-	------------------
-	----  CHD  ----
-	------------------
+	------------------------
+	----  CHAOS DWARFS  ----
+	------------------------
 	["wh3_dlc23_sc_chd_chaos_dwarfs"] = {
 		"wh3_dlc23_chd_cav_bull_centaurs_dual_axe_ror",
 		"wh3_dlc23_chd_cav_hobgoblin_wolf_raiders_ror",
@@ -302,9 +303,65 @@ regiments_of_renown = {
 		"wh3_dlc23_chd_inf_infernal_ironsworn_ror",
 		"wh3_dlc23_chd_veh_iron_daemon_ror",
 		"wh_pro04_chs_art_hellcannon_ror_0" 
+	},
+	----------------
+	---- NORSCA ----
+	----------------
+	["wh_dlc08_sc_nor_norsca"] = {
+		"wh_dlc08_nor_art_hellcannon_battery",
+		"wh_dlc08_nor_mon_frost_wyrm_ror_0",
+		"wh_dlc08_nor_mon_war_mammoth_ror_1",
+		"wh_pro04_nor_inf_chaos_marauders_ror_0",
+		"wh_pro04_nor_inf_marauder_berserkers_ror_0",
+		"wh_pro04_nor_mon_fimir_ror_0",
+		"wh_pro04_nor_mon_skinwolves_ror_0",
+		"wh_pro04_nor_mon_war_mammoth_ror_0",
+		"wh_pro04_nor_mon_marauder_warwolves_ror_0"
+	},
+	---------------------------
+	---- WARRIORS OF CHAOS ----
+	---------------------------
+	["wh_main_sc_chs_chaos"] = {
+		"wh_pro04_chs_art_hellcannon_ror_0",
+		"wh_pro04_chs_cav_chaos_knights_ror_0",
+		"wh_pro04_chs_inf_chaos_warriors_ror_0",
+		"wh_pro04_chs_inf_forsaken_ror_0",
+		"wh_pro04_chs_mon_chaos_spawn_ror_0",
+		"wh_pro04_chs_mon_dragon_ogre_ror_0",
+		"wh_pro04_nor_inf_marauder_berserkers_ror_0",
+		"wh2_dlc17_kho_mon_ghorgon_ror_0",
+		"wh3_dlc20_chs_cav_chaos_chariot_msla_ror",
+		"wh3_dlc20_chs_inf_aspiring_champions_mtze_ror",
+		"wh3_dlc20_chs_mon_giant_mnur_ror",
+		"wh3_dlc20_kho_cav_skullcrushers_mkho_ror",
+		"wh3_dlc24_tze_inf_pink_horrors_ror",
+		"wh3_dlc24_tze_mon_mutalith_vortex_beast_ror",
+		"wh3_dlc24_tze_mon_screamers_ror",
+		"wh3_twa06_kho_inf_bloodletters_ror_0",
+		"wh3_twa06_nur_inf_plaguebearers_ror_0",
+		"wh3_twa06_sla_inf_daemonette_ror_0",
+		"wh3_twa06_tze_inf_pink_horrors_ror_0",
+		"wh3_twa07_kho_cav_bloodcrushers_ror_0",
+		"wh3_twa07_nur_cav_pox_riders_of_nurgle_ror_0",
+		"wh3_twa07_sla_cav_heartseekers_of_slaanesh_ror_0",
+		"wh3_twa07_tze_cav_doom_knights_ror_0",
+		"wh3_twa08_kho_mon_bloodthirster_0_ror",
+		"wh3_twa08_nur_mon_great_unclean_one_0_ror",
+		"wh3_twa08_sla_mon_keeper_of_secrets_0_ror",
+		"wh3_twa08_tze_mon_lord_of_change_0_ror",
+		"wh3_twa10_kho_inf_flesh_hounds_of_khorne_ror",
+		"wh3_twa10_nur_inf_nurglings_ror",
+		"wh3_twa10_tze_inf_blue_horrors_ror"
 	}
- 
 };
+
+local indexed_subcultures = {};
+
+for subculture, _ in pairs(regiments_of_renown) do
+	table.insert(indexed_subcultures, subculture);
+end;
+
+table.sort(indexed_subcultures);
 
 core:add_listener(
 	"ROR_ScriptEventGlobalCampaignManagerCreated",
@@ -322,7 +379,9 @@ function Add_ROR_Locks()
 	local human_factions = cm:get_human_factions();
 	local faction_list = cm:model():world():faction_list();
 	
-	for subculture, units in pairs(regiments_of_renown) do
+	for i = 1, #indexed_subcultures do
+		local subculture = indexed_subcultures[i]
+		
 		output_ror("Checking for subculture: "..subculture);
 		local human_player = false;
 		

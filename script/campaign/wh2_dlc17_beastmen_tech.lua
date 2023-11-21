@@ -237,65 +237,86 @@ function TechLockUnlockListener(key, beastmen_player)
 	);	
 	
 	--Have 3 characters reach rank 15 to unlock
+	local function character_reaches_rank_15()
+		beastmen_player.unfavoured_counter = beastmen_player.unfavoured_counter + 1;
+		cm:update_technology_unlock_progress_values(key, "tech_dlc17_bst_unfavoured_battle", {(beastmen_player.unfavoured_counter)});
+		
+		if beastmen_player.unfavoured_counter == unfavoured_variable then
+			cm:unlock_technology(key, "tech_dlc17_bst_unfavoured_battle");
+			Tech_unlock_notify(key, "tech_dlc17_bst_unfavoured_battle");
+		end
+	end
+	
 	core:add_listener(
 		"unlock_tech_rank_up",
 		"CharacterRankUp",
+		function(context)
+			local character = context:character()
+			return key == character:faction():name() and character:rank() - context:ranks_gained() == 14 and beastmen_player.unfavoured_counter < unfavoured_variable
+		end,
+		character_reaches_rank_15,
+		true
+	)
+	
+	core:add_listener(
+		"unlock_tech_rank_up_character_created",
+		"CharacterCreated",
+		function(context)
+			return key == context:character():faction():name() and not context:has_respawned() and beastmen_player.unfavoured_counter < unfavoured_variable
+		end,
+		function(context)
+			local character_cqi = context:character():command_queue_index()
+			
+			-- have to delay the rank check as they are created at rank 1 first, when the CharacerCreated event fires, then their rank is set after this
+			cm:callback(
+				function()
+					local cached_character = cm:get_character_by_cqi(character_cqi)
+					if cached_character and cached_character:rank() >= 15 then
+						character_reaches_rank_15()
+					end
+				end,
+				0.2
+			)
+		end,
+		true
+	)
+	
+	--Kill 5 Faction Leaders to unlock this tech
+	core:add_listener(
+		"faction_leader_unlock_tech",
+		"CharacterCompletedBattle",
 		function(context)
 			return key == context:character():faction():name();
 		end,
 		function (context)
 			local character = context:character();
+			local faction = character:faction();
 			
-			if character:rank() == 15 and beastmen_player.unfavoured_counter < unfavoured_variable then
-				beastmen_player.unfavoured_counter = beastmen_player.unfavoured_counter + 1;
-				cm:update_technology_unlock_progress_values(key, "tech_dlc17_bst_unfavoured_battle", {(beastmen_player.unfavoured_counter)});
+			if cm:char_is_general_with_army(character) and character:won_battle() and faction:is_human() then
+				local enemies = cm:pending_battle_cache_get_enemies_of_char(character);
 				
-				if beastmen_player.unfavoured_counter == unfavoured_variable then
-					cm:unlock_technology(key, "tech_dlc17_bst_unfavoured_battle");
-					Tech_unlock_notify(key, "tech_dlc17_bst_unfavoured_battle");
-				end
-			end
-		
-		end,
-		true
-	);
-	
-	--Kill 5 Faction Leaders to unlock this tech
-	core:add_listener(
-	"faction_leader_unlock_tech",
-	"CharacterCompletedBattle",
-	function(context)
-		return key == context:character():faction():name();
-	end,
-	function (context)
-		local character = context:character();
-		local faction = character:faction();
-		
-		if cm:char_is_general_with_army(character) and character:won_battle() and faction:is_human() then
-			local enemies = cm:pending_battle_cache_get_enemies_of_char(character);
-			
-			for i = 1, #enemies do
-				local enemy = enemies[i];
-				
-				if enemy ~= nil and enemy:is_null_interface() == false then
-					local enemy_faction = enemy:faction();
+				for i = 1, #enemies do
+					local enemy = enemies[i];
 					
-					if enemy:is_faction_leader() and beastmen_player.faction_leader_counter < faction_leader_variable then
-						beastmen_player.faction_leader_counter = beastmen_player.faction_leader_counter + 1;
-						cm:update_technology_unlock_progress_values(key, "tech_dlc17_bst_chariot_only", {(beastmen_player.faction_leader_counter)});
-						out("FACTION LEADER BATTLE");
+					if enemy ~= nil and enemy:is_null_interface() == false then
+						local enemy_faction = enemy:faction();
 						
-						if beastmen_player.faction_leader_counter == faction_leader_variable then
-							cm:unlock_technology(key, "tech_dlc17_bst_chariot_only");
-							Tech_unlock_notify(key, "tech_dlc17_bst_chariot_only");
+						if enemy:is_faction_leader() and beastmen_player.faction_leader_counter < faction_leader_variable then
+							beastmen_player.faction_leader_counter = beastmen_player.faction_leader_counter + 1;
+							cm:update_technology_unlock_progress_values(key, "tech_dlc17_bst_chariot_only", {(beastmen_player.faction_leader_counter)});
+							out("FACTION LEADER BATTLE");
+							
+							if beastmen_player.faction_leader_counter == faction_leader_variable then
+								cm:unlock_technology(key, "tech_dlc17_bst_chariot_only");
+								Tech_unlock_notify(key, "tech_dlc17_bst_chariot_only");
+							end
+							
 						end
-						
 					end
 				end
 			end
-		end
-	end,
-	true
+		end,
+		true
 	);
 	
 	--Win a  Battle with at least 5 Heroes.

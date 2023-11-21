@@ -157,6 +157,17 @@ ga_defender_reinforcements_west = gb:get_army(gb:get_non_player_alliance_num(), 
 ga_defender_reinforcements_east = gb:get_army(gb:get_non_player_alliance_num(), "reinforcements_east"); -- East reinforcements
 ga_defender_reinforcements_south = gb:get_army(gb:get_non_player_alliance_num(), "reinforcements_south"); -- South reinforcements
 
+ga_enemy_all = script_units:new(
+	"enemy_all",
+	-- sunit_enemy_01,
+	ga_defender_01,
+	ga_defender_reinforcements_west,
+	ga_defender_reinforcements_east,
+	ga_defender_reinforcements_south
+);
+
+ga_enemy_all:take_control();
+
 -- build spawn zone collections
 sz_collection_1 = bm:get_spawn_zone_collection_by_name("defender_reinforcements_west");
 sz_collection_2 = bm:get_spawn_zone_collection_by_name("defender_reinforcements_east");

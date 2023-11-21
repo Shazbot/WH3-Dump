@@ -241,7 +241,10 @@
 							<dy_pts this="07D322CB-307C-445F-BBB77CB0B0127388">
 								<skill_points_vfx this="27E9896A-AE1F-4CB0-A50A0E27C018070C"/>
 							</dy_pts>
-							<button_stats_reset this="F2DA2A72-C166-4375-A47BA24042425ED8"/>
+							<reset_buttons_holder this="C3F0E076-5544-40FB-922C388ACAE59A65">
+								<button_stats_reset this="F2DA2A72-C166-4375-A47BA24042425ED8"/>
+								<button_stats_reset_all this="E7781048-8ABF-433A-B6FECAB18F209253"/>
+							</reset_buttons_holder>
 						</skill_pts>
 					</skill_pts_holder>
 					<tl_holder this="75D2B92B-F2CF-4D45-906C61298088B2ED">
@@ -1749,8 +1752,8 @@
 			</user_properties>
 			<localised_texts>
 				<localised_text
-					tooltip_label="button_stats_reset_Tooltip_75004e"
-					tooltip_text="Reset skill points"/>
+					tooltip_label="ComponentTooltip_714556ab"
+					tooltip_text="Undo assigned skill points||Any skill points that have been assigned but not yet confirmed will be undone."/>
 				<localised_text
 					state="active"
 					is_text_localised="false"/>
@@ -1777,6 +1780,114 @@
 				<element value=""/>
 			</override_images>
 		</button_stats_reset>
+		<button_stats_reset_all
+			this="E7781048-8ABF-433A-B6FECAB18F209253"
+			id="button_stats_reset_all"
+			template_id="round_small_button"
+			part_of_template="true"
+			uniqueguid_in_template="82F58892-7F49-4844-B36443AED497BEEF"
+			uniqueguid="E7781048-8ABF-433A-B6FECAB18F209253"
+			dimensions="38.00,38.00"
+			tooltips_localised="false"
+			priority="50"
+			sound_category="UI_GBL_TMP_Round_Small_Button">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="AA6F7774-78C7-477C-AA03282785B80028"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="BFC14E5A-16D8-4DDE-B022CF49AFB13E7F"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="CCCB4136-F775-4C83-913D729F0ECEBB92"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="873F5FEA-2E13-4F97-9ECC95988E2931FC"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="56F202A3-4468-4564-AFA38DF6106ABDFC"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/icon_stats_reset_all.png"
+					uniqueguid="16084D18-58EB-41CC-88AB31CFDE5C5FC8"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_pressed.png"
+					uniqueguid="804779D3-4040-42E0-A10DCF3D37C4E3D4"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_hover.png"
+					uniqueguid="4867FB13-7916-41E0-A70A8019812F2F12"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_active.png"
+					uniqueguid="1CF6F1DF-210D-461A-9A62378A44C5DAD3"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_inactive.png"
+					uniqueguid="D1A70F93-DB6E-4CFB-BCCCAEFD0541CAE6"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_underlay.png"
+					uniqueguid="A30F49DB-8880-4EB1-AD122CFE5AF9B530"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="Button"/>
+				<callback_with_context callback_id="StatePropagatorCallback">
+					<child_m_user_properties>
+						<property
+							name="use_transitions"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="ShowPrompt(Loc(&quot;details_panel_skills_reset_all&quot;), Loc(&quot;details_panel_skills_reset_all_desc&quot;), Do(ResetAllSkills, self.SetState(&quot;inactive&quot;)))"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="resizable"/>
+				<property
+					name="disable_override0"
+					value="CallbackAnimTrigger"/>
+				<property
+					name="dynamic_image"
+					value="0"/>
+				<property
+					name="starts_showing"
+					value=""/>
+				<property
+					name="toggle_panel"
+					value=""/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/icon_stats_reset_all.png"/>
+				<element value="ui/skins/default/button_round_small_pressed.png"/>
+				<element value="ui/skins/default/button_round_small_hover.png"/>
+				<element value="ui/skins/default/button_round_small_active.png"/>
+				<element value="ui/skins/default/button_round_small_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_underlay.png"/>
+				<element value=""/>
+			</override_images>
+		</button_stats_reset_all>
 		<button_view_tree
 			this="92CD8C31-44F7-41EB-A849DA80BAFB1E23"
 			id="button_view_tree"
@@ -6879,7 +6990,7 @@
 				<callback_with_context
 					callback_id="ContextInactiveStateSetter"
 					context_object_id="CcoCampaignCharacter"
-					context_function_id="IsInLimbo == false"/>
+					context_function_id="IsTravellingInTeleportationNode == false"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -8180,7 +8291,7 @@
 		<skill_pts
 			this="5EAE6806-42C4-4413-A67FE25FBFDD8D4D"
 			id="skill_pts"
-			offset="-150.00,0.00"
+			offset="-188.00,0.00"
 			docking="Center Right"
 			component_anchor_point="1.00,0.50"
 			tooltipslocalised="true"
@@ -8191,7 +8302,7 @@
 				<default
 					this="CD5725E9-860B-43E8-B2C7BFC87B20799C"
 					name="default"
-					width="234"
+					width="272"
 					height="38"
 					interactive="true"
 					uniqueguid="CD5725E9-860B-43E8-B2C7BFC87B20799C"/>
@@ -10077,6 +10188,14 @@
 			uniqueguid="B5FC5E48-AC61-4FBA-87CDEC3DC84C4F12"
 			currentstate="0EA07304-7987-413D-B76E35BDC1BC74C5"
 			defaultstate="0EA07304-7987-413D-B76E35BDC1BC74C5">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="AbilityEffectIcon"
+					context_object_id="CcoEffect"/>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoEffect"/>
+			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
 					this="BFA5C932-FDAF-4D40-84D3894692D42F65"
@@ -10332,11 +10451,11 @@
 		<skill_pts_holder
 			this="997B2BC0-22E3-4884-AC07546B74207D56"
 			id="skill_pts_holder"
-			offset="1516.00,95.00"
+			offset="1512.00,95.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			docking="Top Right"
-			dock_offset="0.00,95.00"
+			dock_offset="-4.00,95.00"
 			component_anchor_point="1.00,0.00"
 			tooltipslocalised="true"
 			uniqueguid="997B2BC0-22E3-4884-AC07546B74207D56"
@@ -13429,5 +13548,26 @@
 				</newstate>
 			</states>
 		</tx_formless_horror>
+		<reset_buttons_holder
+			this="C3F0E076-5544-40FB-922C388ACAE59A65"
+			id="reset_buttons_holder"
+			offset="196.00,0.00"
+			tooltipslocalised="true"
+			uniqueguid="C3F0E076-5544-40FB-922C388ACAE59A65"
+			currentstate="67BBA1A9-6858-484B-8A43D76B86B2D304"
+			defaultstate="67BBA1A9-6858-484B-8A43D76B86B2D304">
+			<states>
+				<default
+					this="67BBA1A9-6858-484B-8A43D76B86B2D304"
+					name="default"
+					width="76"
+					height="38"
+					uniqueguid="67BBA1A9-6858-484B-8A43D76B86B2D304"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"
+				vertical_alignment="Center"/>
+		</reset_buttons_holder>
 	</components>
 </layout>

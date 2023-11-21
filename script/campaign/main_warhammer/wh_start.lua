@@ -27,18 +27,44 @@ cm:add_pre_first_tick_callback(
 cm:add_first_tick_callback_new(
 	function()
 		-- Either run the campaign benchmark if in benchmark mode, or load and perform the faction intro.
-		cm:show_benchmark_if_required(
-			function()
-				-- Perform the start-of-campaign dressing for all players.
-				local human_factions = cm:get_human_factions();
-				if #human_factions > 0 then
-					for i = 1, #human_factions do
-						faction_intro:perform_intro("main_warhammer", human_factions[i]);
-					end;
+
+		if cm:is_benchmark_mode() then
+			if cm:get_local_faction_name(true) == "wh_main_dwf_dwarfs" then
+				out("Running new campaign benchmark !!");
+				cm:load_global_script("script.benchmarks.ie_ui_campaign_benchmark.ie_ui_campaign_benchmark");
+				new_campaign_benchmark.benchmark_start();
+				local function exit_benchmark()
+					out("*** Benchmark script: exit_benchmark() called");
+					local ui_root = core:get_ui_root();
+					ui_root:UnLockPriority();
+					ui_root:InterfaceFunction("QuitForScript");
+				end
+
+				cm:callback(
+					function ()
+						out("Ending benchmark !!");
+						exit_benchmark();
+					end,
+					140
+				);
+
+			else
+				cm:show_benchmark_if_required(
+					function ()
+						-- this will never get called.
+					end,
+					"campaign_benchmark_ie_01"
+				);
+			end
+		else
+			-- Perform the start-of-campaign dressing for all players.
+			local human_factions = cm:get_human_factions();
+			if #human_factions > 0 then
+				for i = 1, #human_factions do
+					faction_intro:perform_intro("main_warhammer", human_factions[i]);
 				end;
-			end, 
-			"campaign_benchmark_ie_01"
-		);
+			end;
+		end;
 	end
 );
 

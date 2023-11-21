@@ -20,6 +20,11 @@
 					<unit_cat_frame this="2E5D3D8A-64BC-4AF1-8ACCEC8ABEFCBBBB">
 						<unit_category_icon this="0AAFDF02-C404-47A2-BCDFEB5AAD20A808"/>
 					</unit_cat_frame>
+					<train_cat_frame this="B9DB971F-7AEF-4F5D-AE8ED8AA88C974DD">
+						<list_cat_holder this="498FCC5E-5614-45EE-B2DF54BEF79B8092">
+							<template_unit_cat this="28C6C42C-233A-4E78-B408F4F5418E7222"/>
+						</list_cat_holder>
+					</train_cat_frame>
 					<turns this="F1FD9FA2-D2FA-4CF6-897774A957E6A554"/>
 					<max_units this="248902EB-85AF-4151-89672618C14DA26F"/>
 					<max_units_long this="421FC228-6517-4B50-A28BE07376EC59FC"/>
@@ -3338,6 +3343,12 @@
 			uniqueguid="2E5D3D8A-64BC-4AF1-8ACCEC8ABEFCBBBB"
 			currentstate="8DEC8306-F935-4BFF-9347D4284B6D50D1"
 			defaultstate="8DEC8306-F935-4BFF-9347D4284B6D50D1">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoMainUnitRecord"
+					context_function_id="IsTrain == false"/>
+			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
 					this="7106CF82-096E-416E-804B416991266B39"
@@ -4260,5 +4271,224 @@
 				</flash_update>
 			</animations>
 		</hellforge_display_holder>
+		<list_cat_holder
+			this="498FCC5E-5614-45EE-B2DF54BEF79B8092"
+			id="list_cat_holder"
+			offset="22.00,3.00"
+			docking="Bottom Center"
+			component_anchor_point="0.50,1.00"
+			tooltipslocalised="true"
+			uniqueguid="498FCC5E-5614-45EE-B2DF54BEF79B8092"
+			currentstate="463CA32A-1C03-4DE6-BD9693B93A6904AC"
+			defaultstate="463CA32A-1C03-4DE6-BD9693B93A6904AC">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="#ContextList"
+					context_object_id="CcoMainUnitRecord"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="463CA32A-1C03-4DE6-BD9693B93A6904AC"
+					name="default"
+					width="22"
+					height="22"
+					uniqueguid="463CA32A-1C03-4DE6-BD9693B93A6904AC"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				spacing="-5.00,0.00"
+				sizetocontent="true"
+				allow_overlap="true"/>
+		</list_cat_holder>
+		<template_unit_cat
+			this="28C6C42C-233A-4E78-B408F4F5418E7222"
+			id="template_unit_cat"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="28C6C42C-233A-4E78-B408F4F5418E7222"
+			currentstate="11E7D14E-4050-4743-9A7489604DACF893"
+			defaultstate="11E7D14E-4050-4743-9A7489604DACF893">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="CallbackRedirector"/>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoMainUnitRecord"
+					context_function_id="CategoryIcon"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="parent_id"
+					value="UnitCard"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="6C8C3936-5C92-42AD-8D6B3EBAE8154C3D"
+					uniqueguid="6C8C3936-5C92-42AD-8D6B3EBAE8154C3D"
+					imagepath="ui/common ui/unit_category_icons/infantry_sword.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="11E7D14E-4050-4743-9A7489604DACF893"
+					name="default"
+					width="22"
+					height="22"
+					disabled="true"
+					pixelcollision="true"
+					uniqueguid="11E7D14E-4050-4743-9A7489604DACF893">
+					<imagemetrics>
+						<image
+							this="6F28EBFD-329B-48D1-9AC925AE1090E477"
+							uniqueguid="6F28EBFD-329B-48D1-9AC925AE1090E477"
+							componentimage="6C8C3936-5C92-42AD-8D6B3EBAE8154C3D"
+							width="22"
+							height="22"/>
+					</imagemetrics>
+				</default>
+				<inactive
+					this="E51BD24D-188F-4598-BDBB31D1C09C5469"
+					name="inactive"
+					width="22"
+					height="22"
+					disabled="true"
+					pixelcollision="true"
+					shader_name="set_greyscale_t0"
+					shadervars="1.00,1.00,0.00,0.00"
+					uniqueguid="E51BD24D-188F-4598-BDBB31D1C09C5469">
+					<imagemetrics>
+						<image
+							this="7BB0E0FA-8DFF-4ABC-A06DF30F9B6CBFEE"
+							uniqueguid="7BB0E0FA-8DFF-4ABC-A06DF30F9B6CBFEE"
+							componentimage="6C8C3936-5C92-42AD-8D6B3EBAE8154C3D"
+							width="22"
+							height="22"/>
+					</imagemetrics>
+				</inactive>
+				<raise
+					this="3F421022-0863-4528-83956B36015D65F3"
+					name="raise"
+					width="22"
+					height="22"
+					disabled="true"
+					pixelcollision="true"
+					shader_name="set_greyscale_t0"
+					shadervars="1.00,1.00,0.00,0.00"
+					uniqueguid="3F421022-0863-4528-83956B36015D65F3">
+					<imagemetrics>
+						<image
+							this="750B958D-B829-4757-BF3C0ED5CFE5E2DC"
+							uniqueguid="750B958D-B829-4757-BF3C0ED5CFE5E2DC"
+							componentimage="6C8C3936-5C92-42AD-8D6B3EBAE8154C3D"
+							width="22"
+							height="22"/>
+					</imagemetrics>
+				</raise>
+			</states>
+		</template_unit_cat>
+		<train_cat_frame
+			this="B9DB971F-7AEF-4F5D-AE8ED8AA88C974DD"
+			id="train_cat_frame"
+			offset="0.00,111.00"
+			visible="false"
+			docking="Bottom Center"
+			component_anchor_point="0.50,1.00"
+			tooltipslocalised="true"
+			uniqueguid="B9DB971F-7AEF-4F5D-AE8ED8AA88C974DD"
+			currentstate="1C5550E3-5583-4111-8D882B96DB3F2238"
+			defaultstate="1C5550E3-5583-4111-8D882B96DB3F2238">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoMainUnitRecord"
+					context_function_id="IsTrain"/>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoMainUnitRecord">
+					<child_m_user_properties>
+						<property
+							name="fallback_state"
+							value="default"/>
+						<property
+							name="renown"
+							value="IsRenown"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context callback_id="StatePropagatorCallback"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="88482C22-C742-400B-9E42DC5408E6BB41"
+					uniqueguid="88482C22-C742-400B-9E42DC5408E6BB41"
+					imagepath="ui/skins/default/unit_card_large_base.png"/>
+				<component_image
+					this="9AE3C24E-9846-498A-ABF1040B299C7579"
+					uniqueguid="9AE3C24E-9846-498A-ABF1040B299C7579"
+					imagepath="ui/skins/default/unit_card_renown_large_base.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="1C5550E3-5583-4111-8D882B96DB3F2238"
+					name="default"
+					width="66"
+					height="25"
+					uniqueguid="1C5550E3-5583-4111-8D882B96DB3F2238">
+					<imagemetrics>
+						<image
+							this="BA1BDD6D-A15D-4349-A24E422EB8877A90"
+							uniqueguid="BA1BDD6D-A15D-4349-A24E422EB8877A90"
+							componentimage="88482C22-C742-400B-9E42DC5408E6BB41"
+							offset="0.00,-11.00"
+							width="67"
+							height="36"
+							tile="true"
+							dockpoint="Bottom Center"
+							canresizeheight="false"
+							margin="0.00,12.00,0.00,12.00"/>
+					</imagemetrics>
+				</default>
+				<inactive
+					this="07273BC8-CE9F-46C2-B6E5C267617E7B44"
+					name="inactive"
+					width="66"
+					height="25"
+					shader_name="set_greyscale_t0"
+					shadervars="1.00,1.00,0.00,0.00"
+					uniqueguid="07273BC8-CE9F-46C2-B6E5C267617E7B44">
+					<imagemetrics>
+						<image
+							this="E720CB7A-A7B0-453F-A283AED4BB9D03ED"
+							uniqueguid="E720CB7A-A7B0-453F-A283AED4BB9D03ED"
+							componentimage="88482C22-C742-400B-9E42DC5408E6BB41"
+							offset="0.00,-11.00"
+							width="67"
+							height="36"
+							tile="true"
+							dockpoint="Bottom Center"
+							canresizeheight="false"
+							margin="0.00,12.00,0.00,12.00"/>
+					</imagemetrics>
+				</inactive>
+				<renown
+					this="37FDB46F-84C7-4597-86419C61C46E5053"
+					name="renown"
+					width="66"
+					height="25"
+					uniqueguid="37FDB46F-84C7-4597-86419C61C46E5053">
+					<imagemetrics>
+						<image
+							this="786A9E0D-1CC2-44E6-BBAA74E45FB1A0E1"
+							uniqueguid="786A9E0D-1CC2-44E6-BBAA74E45FB1A0E1"
+							componentimage="9AE3C24E-9846-498A-ABF1040B299C7579"
+							offset="0.00,-11.00"
+							width="67"
+							height="36"
+							tile="true"
+							dockpoint="Bottom Center"
+							canresizeheight="false"
+							margin="0.00,12.00,0.00,12.00"/>
+					</imagemetrics>
+				</renown>
+			</states>
+		</train_cat_frame>
 	</components>
 </layout>

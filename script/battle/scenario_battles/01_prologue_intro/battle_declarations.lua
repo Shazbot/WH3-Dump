@@ -321,6 +321,8 @@ sunits_allied_defenders = script_units:new(
 	sunit_allies_12
 );
 
+sunits_allied_defenders:take_control();
+
 
 function hide_skirmish_allies()
 	for i = 1, sunits_allied_skirmishers:count() do
@@ -578,6 +580,7 @@ sunits_enemy_all:hide_unbreakable_in_ui(true);
 
 -- make the enemy army always visible (not hidden by hills/line-of-sight etc)
 sunits_enemy_all:set_always_visible(true);
+sunits_enemy_all:take_control();
 
 sunits_enemy_main = script_units:new(
 	"enemy_main",

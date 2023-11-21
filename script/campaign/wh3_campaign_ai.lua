@@ -300,9 +300,11 @@ function campaign_ai_script:count_standing_bastions()
 end
 
 function campaign_ai_script:set_bastion_related_factions_to_context(target_context)
-	for i, v in pairs(self.chaos_bastion_related_factions_list) do
-		cm:cai_set_faction_script_context(v, target_context)
-		out.design("============== This faction: "..v.." is now using this context: "..cm:cai_get_faction_script_context(v).." ==============")
+	for i, faction_key in pairs(self.chaos_bastion_related_factions_list) do
+		if cm:get_faction(faction_key) then
+			cm:cai_set_faction_script_context(faction_key, target_context)
+			out.design("============== This faction: "..faction_key.." is now using this context: "..cm:cai_get_faction_script_context(faction_key).." ==============")
+		end
 	end
 end
 

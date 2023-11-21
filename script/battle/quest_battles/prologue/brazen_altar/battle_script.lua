@@ -267,6 +267,7 @@ ga_defender_01.sunits:item(6).uc:teleport_to_location(v(-193.95, 43.9), 90, 31.9
 
 
 --Simaergul
+ga_defender_sim.sunits:set_invisible_to_all(true);
 ga_defender_sim.sunits:item(1).uc:teleport_to_location(v(-356, 294), 135, 1.4);
 --ga_defender_sim.sunits:item(1).uc:morale_behavior_fearless();
 
@@ -280,6 +281,16 @@ ga_defender_scout.sunits:item(2).uc:teleport_to_location(v(-118, 13.06), 90, 32)
 ga_defender_scout.sunits:item(3).uc:teleport_to_location(v(-118, -32.94), 90, 32);
 ga_defender_scout.sunits:item(4).uc:teleport_to_location(v(-118, -77.94), 90, 32);
 ga_defender_scout.sunits:item(5).uc:teleport_to_location(v(-118, 103.06), 90, 32);
+
+ga_enemy_all = script_units:new(
+	"enemy_all",
+	-- sunit_enemy_01,
+	ga_defender_01,
+	ga_defender_sim,
+	ga_defender_scout
+);
+
+ga_enemy_all:take_control();
 
 
 end;
@@ -315,6 +326,7 @@ ga_defender_scout:rout_over_time_on_message("simaergul_defeated", 2000)
 ga_defender_sim:halt();
 
 ga_defender_sim:set_enabled_on_message("01_intro_cutscene_end", false);
+ga_defender_sim.sunits:set_invisible_to_all_on_message("one_hound_defeated", false);
 ga_defender_sim:set_enabled_on_message("one_hound_defeated", true);
 
 --ga_defender_sim:set_invincible_on_message("01_intro_cutscene_end", true);

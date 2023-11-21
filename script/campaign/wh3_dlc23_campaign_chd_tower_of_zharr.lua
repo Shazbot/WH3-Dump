@@ -41,7 +41,6 @@ tower_of_zharr = {
 		"wh3_dlc23_anc_enchanted_item_daemon_flask_of_ashak",
 		"wh3_dlc23_anc_enchanted_item_furnace_blast_gem",
 		"wh3_dlc23_anc_enchanted_item_gauntlets_of_bazherak_the_cruel",
-		"wh3_dlc23_anc_enchanted_item_naptha_bomb",
 		"wh3_dlc23_anc_enchanted_item_the_mask_of_the_furnace",
 		"wh3_dlc23_anc_enchanted_item_the_vial_of_hashut",
 		"wh_main_anc_enchanted_item_healing_potion",
@@ -58,6 +57,9 @@ tower_of_zharr = {
 		"wh_main_anc_arcane_item_power_stone",
 		"wh_main_anc_arcane_item_book_of_ashur",
 		"wh_main_anc_arcane_item_scroll_of_leeching",
+		"wh3_dlc23_anc_arcane_item_chalice_of_blood_and_darkness",
+		"wh3_dlc23_anc_arcane_item_dweomer_leach_orb",
+		"wh3_dlc23_anc_arcane_item_spell_wrought_sceptre"
 	},
 	weapons_and_armours_counter_reset = 3,
 	weapons_and_armours_list = {
@@ -250,8 +252,7 @@ tower_of_zharr.scripted_rituals = {
 				if counter_variables.banners_and_followers_counter_current <= 0 then
 					counter_variables.banners_and_followers_counter_current = tower_of_zharr.banners_and_followers_counter_reset
 					local ancillary = tower_of_zharr.banners_and_followers_list[cm:random_number(#tower_of_zharr.banners_and_followers_list)]
-					cm:add_ancillary_to_faction(cm:get_faction(faction_name), ancillary, false)
-					cm:trigger_incident(faction, "wh3_dlc23_chd_toz_ancilliary_banners_followers", true)
+					cm:trigger_custom_incident(faction, "wh3_dlc23_chd_toz_ancilliary_banners_followers", true, "payload{add_ancillary_to_faction_pool{ancillary_key " .. ancillary .. ";}}")
 				end
 				counter_variables.banners_and_followers_counter_current = counter_variables.banners_and_followers_counter_current - 1
 			end
@@ -270,8 +271,7 @@ tower_of_zharr.scripted_rituals = {
 				if counter_variables.weapons_and_armours_counter_current <= 0 then
 					counter_variables.weapons_and_armours_counter_current = tower_of_zharr.weapons_and_armours_counter_reset
 					local ancillary = tower_of_zharr.weapons_and_armours_list[cm:random_number(#tower_of_zharr.weapons_and_armours_list)]
-					cm:add_ancillary_to_faction(cm:get_faction(faction_name), ancillary, false)
-					cm:trigger_incident(faction, "wh3_dlc23_chd_toz_ancilliary_weapons_armour", true)
+					cm:trigger_custom_incident(faction, "wh3_dlc23_chd_toz_ancilliary_weapons_armour", true, "payload{add_ancillary_to_faction_pool{ancillary_key " .. ancillary .. ";}}")
 				end
 				counter_variables.weapons_and_armours_counter_current = counter_variables.weapons_and_armours_counter_current - 1
 			end
@@ -307,8 +307,7 @@ tower_of_zharr.scripted_rituals = {
 				if counter_variables.enchanted_items_and_talismans_counter_current <= 0 then
 					counter_variables.enchanted_items_and_talismans_counter_current = tower_of_zharr.enchanted_items_and_talismans_counter_reset
 					local ancillary = tower_of_zharr.enchanted_items_and_talismans_list[cm:random_number(#tower_of_zharr.enchanted_items_and_talismans_list)]
-					cm:add_ancillary_to_faction(cm:get_faction(faction_name), ancillary, false)
-					cm:trigger_incident(faction, "wh3_dlc23_chd_toz_ancilliary_talismans_items", true)
+					cm:trigger_custom_incident(faction, "wh3_dlc23_chd_toz_ancilliary_talismans_items", true, "payload{add_ancillary_to_faction_pool{ancillary_key " .. ancillary .. ";}}")
 				end
 				counter_variables.enchanted_items_and_talismans_counter_current = counter_variables.enchanted_items_and_talismans_counter_current - 1
 			end

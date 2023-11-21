@@ -505,7 +505,10 @@
 					</ashshair_icon_holder>
 				</jade_compass_directions>
 				<global_effect_list this="076B0F46-1216-4771-AA0BDC3B4AB65016">
-					<template_global_effect_icon this="904FB554-C504-46DA-963CF983AEBF6E53"/>
+					<template_global_effect_icon this="B882BC57-A3AB-4830-A1EC8A81000FB50D">
+						<effect_bundle_tooltip_hover this="559BE5EE-379A-4710-B9DC7E2903F8FBBD"/>
+						<upkeep_tooltip_hover this="99353515-CEF5-4CED-81BE6AC9697BC37B"/>
+					</template_global_effect_icon>
 				</global_effect_list>
 				<compass_holder this="63480718-032C-4E1F-ABC6BB99601DA8CF">
 					<compass_holder this="F3EDE45D-D36D-4932-95FE903474243A55"/>
@@ -8421,46 +8424,6 @@
 				</default>
 			</states>
 		</root>
-		<template_global_effect_icon
-			this="904FB554-C504-46DA-963CF983AEBF6E53"
-			id="template_global_effect_icon"
-			offset="0.00,11.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			priority="45"
-			soundcategory="UI_GBL_TMP_Mouse_Over_Only"
-			uniqueguid="904FB554-C504-46DA-963CF983AEBF6E53"
-			currentstate="0C4C6A75-43DD-4B90-999F5650ABC44661"
-			defaultstate="0C4C6A75-43DD-4B90-999F5650ABC44661">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="CampaignEffectsBundleIcon"/>
-			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="EDDF6353-664A-4903-A0A79A55DE5A3CE6"
-					uniqueguid="EDDF6353-664A-4903-A0A79A55DE5A3CE6"
-					imagepath="ui/skins/default/replenishement_positive.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="0C4C6A75-43DD-4B90-999F5650ABC44661"
-					name="NewState"
-					width="24"
-					height="24"
-					interactive="true"
-					uniqueguid="0C4C6A75-43DD-4B90-999F5650ABC44661">
-					<imagemetrics>
-						<image
-							this="AF88A678-1693-4D7A-B3E18A156F881224"
-							uniqueguid="AF88A678-1693-4D7A-B3E18A156F881224"
-							componentimage="EDDF6353-664A-4903-A0A79A55DE5A3CE6"
-							width="24"
-							height="24"
-							dockpoint="Bottom Left"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-		</template_global_effect_icon>
 		<tzeentch_grimoires_icon
 			this="14D555B1-6FAF-4EF1-A5035718B8B200AE"
 			id="tzeentch_grimoires_icon"
@@ -9732,8 +9695,6 @@
 			dock_offset="0.00,1.00"
 			component_anchor_point="0.50,0.50"
 			priority="1"
-			componentleveltooltip="{{tt:ui/common ui/tooltip_effect_bundle}}"
-			tooltiplabel="ascendant_icon_Tooltip_989fd149"
 			uniqueguid="B863B9B0-1D23-4B84-95E223B2F2CBA5A5"
 			isaspectratiolocked="true"
 			currentstate="45DEABFD-BACF-4855-AC4D8ACC6E568468"
@@ -9750,9 +9711,21 @@
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
+					callback_id="ContextLayoutTooltip"
 					context_object_id="CcoScriptObject"
-					context_function_id="GetIfElse(this.StringValue == &quot;none&quot;, DatabaseRecordContext(&quot;CcoEffectBundle&quot;, &quot;wh3_main_bundle_great_game_ascend_none_dummy&quot;), GetIfElse(PlayersFaction.CultureContext.Key == this.StringValue, PlayersFaction.EffectBundleUnfilteredList.FirstContext(Key==Format(&quot;wh3_main_bundle_great_game_ascend_%s&quot;, this.StringValue)), PlayersFaction.EffectBundleUnfilteredList.FirstContext(Key==Format(&quot;wh3_main_bundle_great_game_ascend_%s_bad_dummy&quot;, this.StringValue))))"/>
+					context_function_id="GetIfElse(this.StringValue == &quot;none&quot;, DatabaseRecordContext(&quot;CcoEffectBundle&quot;, &quot;wh3_main_bundle_great_game_ascend_none_dummy&quot;), GetIfElse(PlayersFaction.CultureContext.Key == this.StringValue, PlayersFaction.EffectBundleUnfilteredList.FirstContext(Key==Format(&quot;wh3_main_bundle_great_game_ascend_%s&quot;, this.StringValue)), PlayersFaction.EffectBundleUnfilteredList.FirstContext(Key==Format(&quot;wh3_main_bundle_great_game_ascend_%s_bad_dummy&quot;, this.StringValue))))">
+					<child_m_user_properties>
+						<property
+							name="invert_y"
+							value=""/>
+						<property
+							name="layout_path"
+							value="ui/common ui/tooltip_effect_bundle"/>
+						<property
+							name="offset_y"
+							value="40"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -11203,7 +11176,7 @@
 		<chs_power_bar_holder
 			this="F3F3E909-140F-41C2-8BF4572044375D93"
 			id="chs_power_bar_holder"
-			offset="911.00,4.00"
+			offset="867.00,4.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			visible="false"
@@ -13546,8 +13519,6 @@
 			dock_offset="0.00,-8.00"
 			component_anchor_point="0.50,1.00"
 			priority="1"
-			componentleveltooltip="{{tt:ui/common ui/tooltip_effect_bundle}}"
-			tooltiplabel="ComponentTooltip_6d9a3f8b"
 			uniqueguid="4DDDBF45-B9E5-456B-90016E812D967973"
 			currentstate="DF014B49-7BB6-4CD3-95027880B4FE9BE6"
 			defaultstate="DF014B49-7BB6-4CD3-95027880B4FE9BE6">
@@ -13567,8 +13538,20 @@
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
-					context_object_id="CcoEffectBundle"/>
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoEffectBundle">
+					<child_m_user_properties>
+						<property
+							name="invert_y"
+							value=""/>
+						<property
+							name="layout_path"
+							value="ui/common ui/tooltip_effect_bundle"/>
+						<property
+							name="offset_y"
+							value="30"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoPooledResourceThresholdOperationSetRecord"
@@ -13936,7 +13919,7 @@
 		<chd_resource_holder
 			this="56ABC296-D2C0-4443-A11CD400D2CF66D5"
 			id="chd_resource_holder"
-			offset="1293.00,0.00"
+			offset="1531.00,0.00"
 			visible="false"
 			priority="1"
 			uniqueguid="56ABC296-D2C0-4443-A11CD400D2CF66D5"
@@ -15492,8 +15475,6 @@
 			docking="Center"
 			component_anchor_point="0.50,0.50"
 			priority="1"
-			componentleveltooltip="{{tt:ui/common ui/tooltip_effect_bundle}}"
-			tooltiplabel="ComponentTooltip_ea483cc1"
 			uniqueguid="48DA8938-81BA-4A85-A392B8E2357E2170"
 			currentstate="1B3108FC-582C-4818-A0B432D8DD0ED8E7"
 			defaultstate="1B3108FC-582C-4818-A0B432D8DD0ED8E7">
@@ -15503,8 +15484,20 @@
 					context_object_id="CcoCampaignMission"
 					context_function_id="AddDefaultSkinPath(&quot;dlc23_chd_narrative_panel\&quot; + MissionRecordContext.Key.Replace(&quot;wh3_dlc23_chd_ancestor_&quot;, &quot;&quot;) + &quot;_small.png&quot;)"/>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
-					context_object_id="CcoEffectBundle"/>
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoEffectBundle">
+					<child_m_user_properties>
+						<property
+							name="invert_y"
+							value=""/>
+						<property
+							name="layout_path"
+							value="ui/common ui/tooltip_effect_bundle"/>
+						<property
+							name="offset_y"
+							value="30"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoScriptObject"
@@ -15864,6 +15857,32 @@
 					</imagemetrics>
 				</default>
 			</states>
+			<animations>
+				<flash_update id="flash_update">
+					<frames>
+						<frame
+							interpolationtime="0"
+							interpolationpropertymask="3"
+							targetmetrics_m_height="60"
+							targetmetrics_m_width="147"
+							is_movement_absolute="true"/>
+						<frame
+							interpolationtime="200"
+							interpolationpropertymask="3"
+							targetmetrics_m_colour="#FFFF00FF"
+							targetmetrics_m_height="60"
+							targetmetrics_m_width="147"
+							targetmetrics_m_offset="0.00,-4.00"
+							is_movement_absolute="true"/>
+						<frame
+							interpolationtime="200"
+							interpolationpropertymask="3"
+							targetmetrics_m_height="60"
+							targetmetrics_m_width="147"
+							is_movement_absolute="true"/>
+					</frames>
+				</flash_update>
+			</animations>
 		</holder_labour_economy>
 		<dy_kislev_spirit_essence
 			this="64A46179-F9FD-4C45-9D7B033776DF068B"
@@ -21881,5 +21900,123 @@
 				</default>
 			</states>
 		</magic_flame_glow>
+		<effect_bundle_tooltip_hover
+			this="559BE5EE-379A-4710-B9DC7E2903F8FBBD"
+			id="effect_bundle_tooltip_hover"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="45"
+			tooltipslocalised="true"
+			uniqueguid="559BE5EE-379A-4710-B9DC7E2903F8FBBD"
+			currentstate="5F880D66-F178-49B6-94D3AF742144B9E2"
+			defaultstate="5F880D66-F178-49B6-94D3AF742144B9E2">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoEffectBundle">
+					<child_m_user_properties>
+						<property
+							name="invert_y"
+							value=""/>
+						<property
+							name="layout_path"
+							value="ui/campaign ui/edict_tooltip"/>
+						<property
+							name="offset_y"
+							value="30"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTrashOnCondition"
+					context_object_id="CcoEffectBundle"
+					context_function_id="self.ParentContext.PropertyExists(&quot;is_upkeep_icon&quot;)"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="5F880D66-F178-49B6-94D3AF742144B9E2"
+					name="default"
+					width="24"
+					height="24"
+					interactive="true"
+					uniqueguid="5F880D66-F178-49B6-94D3AF742144B9E2"/>
+			</states>
+		</effect_bundle_tooltip_hover>
+		<template_global_effect_icon
+			this="B882BC57-A3AB-4830-A1EC8A81000FB50D"
+			id="template_global_effect_icon"
+			offset="0.00,11.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="45"
+			tooltipslocalised="true"
+			soundcategory="UI_GBL_TMP_Mouse_Over_Only"
+			uniqueguid="B882BC57-A3AB-4830-A1EC8A81000FB50D"
+			currentstate="F82CC839-3669-4DBB-B607A0435CAE256A"
+			defaultstate="F82CC839-3669-4DBB-B607A0435CAE256A">
+			<componentimages>
+				<component_image
+					this="5426630C-B306-4CDD-AB59654B2205E836"
+					uniqueguid="5426630C-B306-4CDD-AB59654B2205E836"
+					imagepath="ui/skins/default/replenishement_positive.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="F82CC839-3669-4DBB-B607A0435CAE256A"
+					name="NewState"
+					width="24"
+					height="24"
+					disabled="true"
+					uniqueguid="F82CC839-3669-4DBB-B607A0435CAE256A">
+					<imagemetrics>
+						<image
+							this="D399A923-8CC3-4EB3-BF42C9A3B60C316A"
+							uniqueguid="D399A923-8CC3-4EB3-BF42C9A3B60C316A"
+							componentimage="5426630C-B306-4CDD-AB59654B2205E836"
+							width="24"
+							height="24"
+							dockpoint="Bottom Left"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</template_global_effect_icon>
+		<upkeep_tooltip_hover
+			this="99353515-CEF5-4CED-81BE6AC9697BC37B"
+			id="upkeep_tooltip_hover"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="45"
+			tooltipslocalised="true"
+			uniqueguid="99353515-CEF5-4CED-81BE6AC9697BC37B"
+			currentstate="2322B515-E067-4607-906D811E6C545B7C"
+			defaultstate="2322B515-E067-4607-906D811E6C545B7C">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="ContextLayoutTooltip">
+					<child_m_user_properties>
+						<property
+							name="invert_y"
+							value=""/>
+						<property
+							name="layout_path"
+							value="ui/common ui/tooltip_campaign_upkeep_effect"/>
+						<property
+							name="offset_y"
+							value="30"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTrashOnCondition"
+					context_object_id="CcoEffectBundle"
+					context_function_id="self.ParentContext.PropertyExists(&quot;is_upkeep_icon&quot;) == false"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="2322B515-E067-4607-906D811E6C545B7C"
+					name="default"
+					width="24"
+					height="24"
+					interactive="true"
+					uniqueguid="2322B515-E067-4607-906D811E6C545B7C"/>
+			</states>
+		</upkeep_tooltip_hover>
 	</components>
 </layout>

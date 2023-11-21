@@ -10,6 +10,8 @@ DEFSlavesGreaterThan1000	Owner.ModelPooledResourceContext("def_slaves").Total >=
 DEFSlavesGreaterThan150	Owner.ModelPooledResourceContext("def_slaves").Total >= 150	false
 DEFSlavesGreaterThan200	Owner.ModelPooledResourceContext("def_slaves").Total >= 200	false
 DevPointGreatThan5	Region.DevelopmentPoints >= 5	false
+DwarfHidden	Owner.CultureKey == "wh_main_dwf_dwarfs"	true
+FactionHasTrade	Owner.IsInFactionSet("factions_without_trade") == false	true
 FactionIsSeducible	Region.Owner.IsInFactionSet("slaanesh_seducible_factions")	false
 FavouredCorruptionKhorne	Owner.IsInFactionSet("FavouredCorruptionKhorne") == true	true
 FavouredCorruptionNone	Owner.IsInFactionSet("FavouredCorruptionNone") == true	true
@@ -54,6 +56,7 @@ IsChaosCampaign	CampaignModelRoot.CampaignKey == "wh3_main_chaos"	true
 IsFactionAstragoth	Owner.RecordKeyIsOneOf("wh3_dlc23_chd_astragoth")	true
 IsFactionAzazel	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_azazel")	true
 IsFactionAzazelOrSigvald	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_azazel", "wh3_dlc20_chs_sigvald")	true
+IsFactionClanMoulder	Owner.RecordKeyIsOneOf("wh2_main_skv_clan_moulder")	true
 IsFactionDrazhoath	Owner.RecordKeyIsOneOf("wh3_dlc23_chd_legion_of_azgorh")	true
 IsFactionDrycha	Owner.RecordKeyIsOneOf("wh2_dlc16_wef_drycha")	true
 IsFactionFestus	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_festus")	true
@@ -82,6 +85,7 @@ IsJadeDragonCommercialDistrict	Region.IsEffectBundleActive("wh3_dlc24_ritual_cth
 IsJadeDragonFortressCity	Region.IsEffectBundleActive("wh3_dlc24_ritual_cth_mos_stone_settlement_type_switch_fortress") == true	true
 IsKholek	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_kholek")	true
 IsKroqGar	Owner.RecordKeyIsOneOf("wh2_main_lzd_last_defenders")	true
+IsNOTUniqueRegionOrFort	Region.RecordKeyIsOneOf("wh3_main_chaos_region_altdorf","wh3_main_combi_region_altdorf","wh3_main_combi_region_lothern","wh3_main_combi_region_hexoatl","wh3_main_combi_region_itza","wh3_main_combi_region_khemri","wh3_main_chaos_region_castle_drakenhof","wh3_main_combi_region_castle_drakenhof","wh3_main_combi_region_couronne","wh3_main_combi_region_miragliano","wh3_main_combi_region_naggarond","wh3_main_combi_region_skavenblight","wh3_main_chaos_region_hell_pit","wh3_main_combi_region_hell_pit","wh3_main_combi_region_karaz_a_karak","wh3_main_combi_region_karak_eight_peaks","wh3_main_combi_region_massif_orcal","wh3_main_chaos_region_kislev","wh3_main_combi_region_kislev","wh3_main_chaos_region_praag","wh3_main_combi_region_praag","wh3_main_chaos_region_erengrad","wh3_main_combi_region_erengrad","wh3_main_combi_region_the_awakening","wh3_main_combi_region_sartosa","wh3_main_combi_region_the_galleons_graveyard") == false	true
 IsNotChampionsFaction	Owner.IsInFactionSet("champions_factions") == false	true
 IsNotChampionsOrSigvaldFaction	Owner.IsInFactionSet("champions_factions") == false && Owner.RecordKeyIsOneOf("wh3_dlc20_chs_sigvald") == false	true
 IsNotChaosDwarfs	Region.Owner.CultureKey != "wh3_dlc23_chd_chaos_dwarfs"	true
@@ -91,12 +95,14 @@ IsRegionBeastmen	Region.Owner.CultureKey == "wh_dlc03_bst_beastmen"	true
 IsRegionChaosDwarfs	Region.Owner.CultureKey == "wh3_dlc23_chd_chaos_dwarfs"	true
 IsRegionNorsca	Region.Owner.CultureKey == "wh_dlc08_nor_norsca"	false
 IsRegionNotAbandoned	Region.IsAbandoned == false	true
+IsRegionNotTombKing	Region.Owner.CultureKey != "wh2_dlc09_tmb_tomb_kings"	true
 IsRegionTombKing	Region.Owner.CultureKey == "wh2_dlc09_tmb_tomb_kings"	true
 IsRegionVampireCounts	Region.Owner.CultureKey == "wh_main_vmp_vampire_counts"	true
 IsSPChaosCampaign	CampaignModelRoot.CampaignKey == "wh3_main_chaos" && CampaignModelRoot.IsMultiplayer == false	true
 KSLHasDevotion	Owner.ModelPooledResourceContext("wh3_main_ksl_devotion")	true
 KSLHasSupporters	Owner.ModelPooledResourceContext("wh3_main_ksl_followers")	true
 NotDwarf	Owner.CultureKey != "wh_main_dwf_dwarfs"	false
+NotDwarfHidden	Owner.CultureKey != "wh_main_dwf_dwarfs"	true
 PublicOrder100	Region.PublicOrder > 99	false
 PublicOrderGreaterThan-25	Region.PublicOrder >= -25	false
 PublicOrderGreaterThan-50	Region.PublicOrder >= -50	false

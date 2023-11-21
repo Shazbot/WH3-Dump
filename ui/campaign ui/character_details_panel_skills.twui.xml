@@ -60,6 +60,7 @@
 				<skill_search this="BD44EFC7-A108-4EC2-8E92EDC7CD59DE51">
 					<highlight this="DDC74505-DD90-4C6B-B668CDE2D8B7A05E"/>
 					<prompt_text this="AD7A5965-72F4-4EB4-823FA60A83F0BB3F"/>
+					<button_clear_search this="22A72E56-A82B-4BA9-AE4A283AC4A98BC9"/>
 				</skill_search>
 			</character_details_panel_skills>
 		</root>
@@ -2886,10 +2887,14 @@
 		<list_box
 			this="39CA33CF-71FD-4145-BFF0EFBCA6DFD312"
 			id="list_box"
-			docking="Top Left"
+			offset="0.00,70.00"
+			docking="Center Left"
+			dock_offset="0.00,-10.00"
+			component_anchor_point="0.00,0.50"
 			priority="20"
 			tooltipslocalised="true"
 			uniqueguid="39CA33CF-71FD-4145-BFF0EFBCA6DFD312"
+			isrelativeresize="true"
 			currentstate="1525F4B6-053B-4F1C-AB4259BF217D2506">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="HorizontalList"/>
@@ -2911,16 +2916,18 @@
 			<LayoutEngine
 				type="HorizontalList"
 				itemsperrow="10"
-				sizetocontent="true"
 				margins="10.00,10.00"/>
 		</list_box>
 		<list_clip
 			this="A77736FB-7FE9-4FEE-B5300DFD13D4C4EB"
 			id="list_clip"
 			clipchildren="true"
+			docking="Center Left"
+			component_anchor_point="0.00,0.50"
 			priority="20"
 			tooltipslocalised="true"
 			uniqueguid="A77736FB-7FE9-4FEE-B5300DFD13D4C4EB"
+			isrelativeresize="true"
 			currentstate="6841B58F-F4D2-4B34-8FA740F8C6BE0890">
 			<states>
 				<newstate
@@ -3061,11 +3068,11 @@
 		<skill_search
 			this="BD44EFC7-A108-4EC2-8E92EDC7CD59DE51"
 			id="skill_search"
-			offset="-276.00,712.00"
+			offset="-275.00,706.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			docking="Bottom Left"
-			dock_offset="-276.00,47.00"
+			dock_offset="-275.00,41.00"
 			component_anchor_point="0.00,1.00"
 			priority="51"
 			tooltipslocalised="true"
@@ -3474,5 +3481,89 @@
 				</inactive>
 			</states>
 		</type_icon>
+		<button_clear_search
+			this="22A72E56-A82B-4BA9-AE4A283AC4A98BC9"
+			id="button_clear_search"
+			offset="322.00,6.00"
+			docking="Center Right"
+			dock_offset="-6.00,0.00"
+			component_anchor_point="1.00,0.50"
+			priority="51"
+			tooltipslocalised="true"
+			soundcategory="UI_GBL_TMP_Parchment_Row"
+			uniqueguid="22A72E56-A82B-4BA9-AE4A283AC4A98BC9"
+			currentstate="6BA127AD-2E8E-4B11-8A6313980EDBBB55"
+			defaultstate="6BA127AD-2E8E-4B11-8A6313980EDBBB55">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_function_id="self.ParentContext.GetText.IsEmpty == false">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CharacterSkillSearchChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_function_id="Do(self.ParentContext.InputSetText(&quot;&quot;), self.SetVisible(false), self.UiMsg(&quot;CharacterSkillSearchChanged&quot;))"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="F91DF92B-44C3-4DD0-8476BDFD3A26ED2B"
+					uniqueguid="F91DF92B-44C3-4DD0-8476BDFD3A26ED2B"
+					imagepath="ui/skins/default/icon_cross_small.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="6BA127AD-2E8E-4B11-8A6313980EDBBB55"
+					name="default"
+					width="22"
+					height="22"
+					interactive="true"
+					uniqueguid="6BA127AD-2E8E-4B11-8A6313980EDBBB55"
+					stateeditordisplaypos="40.00,20.00">
+					<imagemetrics>
+						<image
+							this="75AE4C3C-EA4F-419A-86C6BCF19105EF63"
+							uniqueguid="75AE4C3C-EA4F-419A-86C6BCF19105EF63"
+							componentimage="F91DF92B-44C3-4DD0-8476BDFD3A26ED2B"
+							offset="-8.00,-8.00"
+							width="38"
+							height="38"
+							dockpoint="Center"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition transition_m_target_state="C877B8C0-FEC3-4A3F-BE2571BBF471A2F8"/>
+					</transitionmap>
+				</default>
+				<hover
+					this="C877B8C0-FEC3-4A3F-BE2571BBF471A2F8"
+					name="hover"
+					width="22"
+					height="22"
+					interactive="true"
+					shader_name="brighten_t0"
+					shadervars="1.00,0.00,0.00,0.00"
+					uniqueguid="C877B8C0-FEC3-4A3F-BE2571BBF471A2F8"
+					stateeditordisplaypos="178.00,107.00">
+					<imagemetrics>
+						<image
+							this="84FD65C3-FC26-4A5D-96FA1076910C73BA"
+							uniqueguid="84FD65C3-FC26-4A5D-96FA1076910C73BA"
+							componentimage="F91DF92B-44C3-4DD0-8476BDFD3A26ED2B"
+							offset="-8.00,-8.00"
+							width="38"
+							height="38"
+							dockpoint="Center"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="6BA127AD-2E8E-4B11-8A6313980EDBBB55"/>
+					</transitionmap>
+				</hover>
+			</states>
+		</button_clear_search>
 	</components>
 </layout>

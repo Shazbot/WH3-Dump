@@ -68,7 +68,11 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignMission"
-					context_function_id="Completed"/>
+					context_function_id="Completed || IsCancelled"/>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoCampaignMission"
+					context_function_id="GetIfElse(IsCancelled, &quot;cancelled&quot;, &quot;complete&quot;)"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -80,19 +84,50 @@
 				<property
 					name="disable_override2"
 					value="instance_resize"/>
+				<property
+					name="disable_override3"
+					value="text"/>
 			</userproperties>
 			<componentimages>
 				<component_image
 					this="FFE8C582-2BA1-4B8E-B0F416534DA9E166"
 					uniqueguid="FFE8C582-2BA1-4B8E-B0F416534DA9E166"
 					imagepath="ui/skins/default/icon_check_green.png"/>
+				<component_image
+					this="9958CB89-1E73-4EA0-88F3102225135878"
+					uniqueguid="9958CB89-1E73-4EA0-88F3102225135878"
+					imagepath="ui/skins/default/icon_cross_red_22px.png"/>
 			</componentimages>
 			<states>
-				<default
-					this="EDCE8AA3-708E-4C4B-81F4FB27BA11AC9F"
-					name="default"
+				<cancelled
+					this="480F786E-0270-48C7-B38653C9745EE089"
+					name="cancelled"
 					width="22"
 					height="20"
+					tooltip="This scheme is no longer possible to complete"
+					tooltiplabel="StateTooltip_a8d7e35ch"
+					interactive="true"
+					disabled="true"
+					uniqueguid="480F786E-0270-48C7-B38653C9745EE089">
+					<imagemetrics>
+						<image
+							this="74E22A40-EA61-4ACE-8A7519D0D45E1639"
+							uniqueguid="74E22A40-EA61-4ACE-8A7519D0D45E1639"
+							componentimage="9958CB89-1E73-4EA0-88F3102225135878"
+							offset="3.00,3.00"
+							width="17"
+							height="18"/>
+					</imagemetrics>
+				</cancelled>
+				<complete
+					this="EDCE8AA3-708E-4C4B-81F4FB27BA11AC9F"
+					name="complete"
+					width="22"
+					height="20"
+					tooltip="This scheme has been completed"
+					tooltiplabel="StateTooltip_c560e7ed"
+					interactive="true"
+					disabled="true"
 					uniqueguid="EDCE8AA3-708E-4C4B-81F4FB27BA11AC9F">
 					<imagemetrics>
 						<image
@@ -103,14 +138,14 @@
 							height="20"
 							dockpoint="Center"/>
 					</imagemetrics>
-				</default>
+				</complete>
 			</states>
 		</completed_tick>
 		<completed_tick
 			this="A7C92447-F64F-4794-881846B80584FA14"
 			id="completed_tick"
 			uniqueguid_in_template="A7C92447-F64F-4794-881846B80584FA14"
-			offset="35.00,36.00"
+			offset="37.00,36.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			tooltipslocalised="true"
@@ -134,6 +169,9 @@
 				<property
 					name="disable_override2"
 					value="instance_resize"/>
+				<property
+					name="disable_override3"
+					value="text"/>
 			</userproperties>
 			<componentimages>
 				<component_image
@@ -142,11 +180,15 @@
 					imagepath="ui/skins/default/icon_check_green.png"/>
 			</componentimages>
 			<states>
-				<default
+				<complete
 					this="38AF6685-20B9-4ECB-8B8C3ABE8F06539A"
-					name="default"
+					name="complete"
 					width="22"
 					height="20"
+					tooltip="This grand scheme has been completed"
+					tooltiplabel="StateTooltip_c869a82c"
+					interactive="true"
+					disabled="true"
 					uniqueguid="38AF6685-20B9-4ECB-8B8C3ABE8F06539A">
 					<imagemetrics>
 						<image
@@ -157,7 +199,7 @@
 							height="20"
 							dockpoint="Center"/>
 					</imagemetrics>
-				</default>
+				</complete>
 			</states>
 		</completed_tick>
 		<dlc24_scheme_button
@@ -2072,7 +2114,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoRegionGroupRecord"
-					context_function_id="Schemes.MinorSchemeListForRegionGroup(this).Count(Completed) &lt; Schemes.NumMinorSchemesToUnlockGrandSchemeInRegionGroup(this)"/>
+					context_function_id="Schemes.MinorSchemeListForRegionGroup(this).Count(Completed &amp;&amp; IsCancelled == false) &lt; Schemes.NumMinorSchemesToUnlockGrandSchemeInRegionGroup(this)"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property

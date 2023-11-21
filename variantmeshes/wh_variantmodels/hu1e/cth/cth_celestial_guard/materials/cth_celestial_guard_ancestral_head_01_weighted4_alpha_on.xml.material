@@ -1,6 +1,6 @@
 <material>
  <name>cth_celestial_guard_ancestral_head_01_weighted4_alpha_on.xml</name>
- <shader>shaders/weighted4_character_emissive_alpha.xml.shader</shader>
+ <shader>shaders/weighted4_character_dissolve_emissive_alpha.xml.shader</shader>
  <sort_override>255</sort_override>
  <textures>
   <texture>
@@ -12,6 +12,14 @@
    <source>commontextures/bloodmap.dds</source>
   </texture>
   <texture>
+   <slot version="2">t_xml_dissolve_detail</slot>
+   <source>commontextures/lava_heatmap_mask.dds</source>
+  </texture>
+  <texture>
+   <slot version="2">t_xml_dissolve_map</slot>
+   <source>commontextures/noise_colour.dds</source>
+  </texture>
+  <texture>
    <slot version="2">t_xml_dither</slot>
    <source>commontextures/dither.dds</source>
   </texture>
@@ -21,7 +29,7 @@
   </texture>
   <texture>
    <slot version="2">t_xml_emissive_texture</slot>
-   <source>commontextures/organic_greyscale_01.dds</source>
+   <source>commontextures/test_black.dds</source>
   </texture>
   <texture>
    <slot version="2">t_xml_mask</slot>
@@ -66,6 +74,46 @@
    <value>0</value>
   </param>
   <param>
+   <name>dissolve_amount</name>
+   <type>float</type>
+   <value>0</value>
+  </param>
+  <param>
+   <name>dissolve_color_lerp_strength</name>
+   <type>float</type>
+   <value>2.5</value>
+  </param>
+  <param>
+   <name>dissolve_end_color</name>
+   <type>float3</type>
+   <value>1,0.1,0</value>
+  </param>
+  <param>
+   <name>dissolve_glow_edge</name>
+   <type>float</type>
+   <value>0.15</value>
+  </param>
+  <param>
+   <name>dissolve_glow_size</name>
+   <type>float</type>
+   <value>0.3</value>
+  </param>
+  <param>
+   <name>dissolve_glow_strength</name>
+   <type>float</type>
+   <value>10</value>
+  </param>
+  <param>
+   <name>dissolve_start_color</name>
+   <type>float3</type>
+   <value>0.8,0.4,0</value>
+  </param>
+  <param>
+   <name>dissolve_uv_scale</name>
+   <type>float2</type>
+   <value>1,1</value>
+  </param>
+  <param>
    <name>emissive_direction</name>
    <type>float2</type>
    <value>1,1</value>
@@ -78,7 +126,7 @@
   <param>
    <name>emissive_fresnel_strength</name>
    <type>float</type>
-   <value>0</value>
+   <value>2</value>
   </param>
   <param>
    <name>emissive_gradient_colour_stop_1</name>
@@ -88,12 +136,12 @@
   <param>
    <name>emissive_gradient_colour_stop_2</name>
    <type>float3</type>
-   <value>0.333,0.333,0.333</value>
+   <value>0,0.247059,0.615686</value>
   </param>
   <param>
    <name>emissive_gradient_colour_stop_3</name>
    <type>float3</type>
-   <value>0.667,0.667,0.667</value>
+   <value>0,0.501961,0.886275</value>
   </param>
   <param>
    <name>emissive_gradient_colour_stop_4</name>
@@ -108,12 +156,12 @@
   <param>
    <name>emissive_gradient_stop_2</name>
    <type>float</type>
-   <value>0.333</value>
+   <value>0.33</value>
   </param>
   <param>
    <name>emissive_gradient_stop_3</name>
    <type>float</type>
-   <value>0.667</value>
+   <value>0.67</value>
   </param>
   <param>
    <name>emissive_gradient_stop_4</name>
@@ -138,7 +186,7 @@
   <param>
    <name>emissive_strength</name>
    <type>float</type>
-   <value>1.66371</value>
+   <value>2</value>
   </param>
   <param>
    <name>emissive_tiling</name>

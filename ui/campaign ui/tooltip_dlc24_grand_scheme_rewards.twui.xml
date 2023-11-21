@@ -199,6 +199,27 @@
 					is_text_localised="false"/>
 			</localised_texts>
 		</auto_resizing_comp>
+		<bar_extents_and_pos
+			this="222A151D-5DA9-4370-AA0281CC8513D29D"
+			id="bar_extents_and_pos"
+			part_of_template="true"
+			uniqueguid_in_template="3F331065-E782-467B-804031161278DDBC"
+			uniqueguid="222A151D-5DA9-4370-AA0281CC8513D29D"
+			dimensions="434.00,3.00"
+			offset="5.00,-1.00"
+			priority="255">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="CAC10B81-225E-4CD1-83A0D4129588A176"/>
+			</state_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</bar_extents_and_pos>
 		<deteriorating_timer_holder
 			this="2DF21EA9-2E72-4D84-B841507A3D165F30"
 			id="deteriorating_timer_holder"
@@ -238,31 +259,10 @@
 					uniqueguid="E120D66E-001F-47FE-84C7C6F64EA22FC7"/>
 			</states>
 		</deteriorating_timer_holder>
-		<bar_extents_and_pos
-			this="222A151D-5DA9-4370-AA0281CC8513D29D"
-			id="bar_extents_and_pos"
-			part_of_template="true"
-			uniqueguid_in_template="3F331065-E782-467B-804031161278DDBC"
-			uniqueguid="222A151D-5DA9-4370-AA0281CC8513D29D"
-			dimensions="434.00,3.00"
-			offset="5.00,-1.00"
-			priority="255">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="CAC10B81-225E-4CD1-83A0D4129588A176"/>
-			</state_uniqueguids>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					is_text_localised="false"/>
-			</localised_texts>
-		</bar_extents_and_pos>
 		<deteriorating_timer_holder
 			this="080C17BD-8BF2-4EE1-AB2DF9020206445A"
 			id="deteriorating_timer_holder"
-			offset="392.00,6.00"
+			offset="390.00,6.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			docking="Center Right External"
@@ -764,7 +764,7 @@
 				<default
 					this="91804E0D-C2A1-41E7-A78636E5F9944755"
 					name="default"
-					width="422"
+					width="423"
 					height="122"
 					uniqueguid="91804E0D-C2A1-41E7-A78636E5F9944755"/>
 			</states>
@@ -779,8 +779,9 @@
 		<template_payload_ancillary
 			this="7E675C36-6918-4DCF-B25146796DECDC75"
 			id="template_payload_ancillary"
-			offset="0.00,86.00"
+			offset="3.00,86.00"
 			allowhorizontalresize="false"
+			dock_offset="3.00,0.00"
 			priority="255"
 			uniqueguid="7E675C36-6918-4DCF-B25146796DECDC75"
 			currentstate="FB74541C-ECD9-4641-9351AE8CAD7EFEE5"
@@ -798,10 +799,6 @@
 					context_object_id="CcoCampaignPayloadInfoEntry"
 					context_function_id="Icon"/>
 				<callback_with_context
-					callback_id="#ContextCustomTooltipStore"
-					context_object_id="CcoCampaignPayloadInfoEntry"
-					context_function_id="Ancillary"/>
-				<callback_with_context
 					callback_id="ContextStateSetter"
 					context_object_id="CcoCampaignPayloadInfoEntry"
 					context_function_id="State"/>
@@ -810,8 +807,20 @@
 					context_object_id="CcoCampaignMissionDefinition"
 					context_function_id="self.Resize(GetIfElse (RootComponent.Dimensions.y &gt;= 1080, 350, 300), self.Dimensions.x, false)"/>
 				<callback_with_context
-					callback_id="CampaignEffectsBundleIcon"
-					context_object_id="CcoAncillaryRecord"/>
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoAncillaryRecord">
+					<child_m_user_properties>
+						<property
+							name="invert_x"
+							value=""/>
+						<property
+							name="layout_path"
+							value="ui/campaign ui/edict_tooltip"/>
+						<property
+							name="offset_y"
+							value="-35"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoCampaignPayloadInfoEntry"
@@ -847,7 +856,7 @@
 				<common
 					this="FB74541C-ECD9-4641-9351AE8CAD7EFEE5"
 					name="common"
-					width="400"
+					width="398"
 					height="36"
 					interactive="true"
 					disabled="true"
@@ -892,7 +901,7 @@
 				<crafted
 					this="2AC1AC58-6271-4773-8206F9868D835FB8"
 					name="crafted"
-					width="400"
+					width="398"
 					height="36"
 					interactive="true"
 					disabled="true"
@@ -937,7 +946,7 @@
 				<legendary
 					this="D978B325-51F0-4E7A-8C3A43F8A92F9EBE"
 					name="legendary"
-					width="400"
+					width="398"
 					height="36"
 					interactive="true"
 					disabled="true"
@@ -982,7 +991,7 @@
 				<rare
 					this="2CD4E869-81B5-4309-BB2DC7768DEC0D0B"
 					name="rare"
-					width="400"
+					width="398"
 					height="36"
 					interactive="true"
 					disabled="true"
@@ -1027,7 +1036,7 @@
 				<uncommon
 					this="1150ACF0-3DB7-43BA-83B4069424BFEBFA"
 					name="uncommon"
-					width="400"
+					width="398"
 					height="36"
 					interactive="true"
 					disabled="true"
@@ -1229,8 +1238,9 @@
 		<template_unit
 			this="76169C00-7117-433B-BBBBE9175D6F93B4"
 			id="template_unit"
-			offset="0.00,36.00"
+			offset="1.00,36.00"
 			allowverticalresize="false"
+			dock_offset="1.00,0.00"
 			priority="255"
 			tooltipslocalised="true"
 			uniqueguid="76169C00-7117-433B-BBBBE9175D6F93B4"
@@ -1352,7 +1362,7 @@
 		<turns_display
 			this="4E766CAD-AB4B-49FD-96EEA1872C405DB0"
 			id="turns_display"
-			offset="410.00,6.00"
+			offset="408.00,6.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			docking="Center Right External"

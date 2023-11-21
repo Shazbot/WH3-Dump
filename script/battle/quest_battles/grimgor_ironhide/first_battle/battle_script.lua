@@ -43,6 +43,8 @@ ga_ai_02 = gb:get_army(gb:get_non_player_alliance_num(), 1, "gyrocopters");
 
 -------ORDERS-------
 ga_player_01:message_on_proximity_to_enemy("player_visible", 50);
+ga_player_01:message_on_proximity_to_enemy("player_advancing", 130);
+ga_ai_01:attack_on_message("player_advancing", 3000);
 
 ga_ai_02:reinforce_on_message("player_visible", 60000);
 

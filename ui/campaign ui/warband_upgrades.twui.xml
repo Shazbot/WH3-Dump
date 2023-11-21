@@ -3743,7 +3743,7 @@
 				<callback_with_context
 					callback_id="ContextCommandEvent"
 					context_object_id="CcoStaticObject"
-					context_function_id="DoIf(IsPanelOpen(&quot;events&quot;) == false,  Component(&quot;F1AAE419-51EE-4186-A31E850AE0A54F6B&quot;).SimulateLClick)">
+					context_function_id="DoIf(self.IsVisible &amp;&amp; IsPanelOpen(&quot;events&quot;) == false,  UiMsg(&quot;close_warband_upgrades&quot;))">
 					<child_m_user_properties>
 						<property
 							name="disable_when_invisible"
@@ -3772,6 +3772,30 @@
 						<property
 							name="local_visibility_only"
 							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandEvent"
+					context_function_id="DoIf(self.IsVisible, UiMsg(&quot;close_warband_upgrades&quot;))">
+					<child_m_user_properties>
+						<property
+							name="disable_when_invisible"
+							value=""/>
+						<property
+							name="event0"
+							value="PanelOpened_mercenary_recruitment"/>
+						<property
+							name="event1"
+							value="PanelOpened_units_recruitment"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandEvent"
+					context_function_id="DoIf(self.IsVisible &amp;&amp; SelectedCharacter.IsPlayerCharacter == false, UiMsg(&quot;close_warband_upgrades&quot;))">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignCharacterSelectedAny"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbackwithcontextlist>

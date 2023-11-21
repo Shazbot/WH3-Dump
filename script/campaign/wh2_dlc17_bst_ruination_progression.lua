@@ -100,7 +100,10 @@ Ruination = {
 			"wh2_dlc17_bst_special_settlement_karaz_a_karak_2",
 			"wh2_dlc17_bst_special_settlement_lothern_2",
 			"wh2_dlc17_bst_special_settlement_naggarond_2",
-			"wh2_dlc17_bst_special_settlement_oak_of_ages_2"
+			"wh2_dlc17_bst_special_settlement_oak_of_ages_2",
+			"wh2_dlc17_bst_special_settlement_kislev_2",
+			"wh2_dlc17_bst_special_settlement_wei_jin_2",
+			"wh2_dlc17_bst_special_settlement_zharr_naggrund_2"
 		},
 		[2] = {
 			"wh2_dlc17_bst_settlement_major_3",
@@ -112,7 +115,10 @@ Ruination = {
 			"wh2_dlc17_bst_special_settlement_karaz_a_karak_3",
 			"wh2_dlc17_bst_special_settlement_lothern_3",
 			"wh2_dlc17_bst_special_settlement_naggarond_3",
-			"wh2_dlc17_bst_special_settlement_oak_of_ages_3"
+			"wh2_dlc17_bst_special_settlement_oak_of_ages_3",
+			"wh2_dlc17_bst_special_settlement_kislev_3",
+			"wh2_dlc17_bst_special_settlement_wei_jin_3",
+			"wh2_dlc17_bst_special_settlement_zharr_naggrund_3"
 		},
 		[3] = {
 			"wh2_dlc17_bst_settlement_major_4",
@@ -124,7 +130,10 @@ Ruination = {
 			"wh2_dlc17_bst_special_settlement_karaz_a_karak_4",
 			"wh2_dlc17_bst_special_settlement_lothern_4",
 			"wh2_dlc17_bst_special_settlement_naggarond_4",
-			"wh2_dlc17_bst_special_settlement_oak_of_ages_4"
+			"wh2_dlc17_bst_special_settlement_oak_of_ages_4",
+			"wh2_dlc17_bst_special_settlement_kislev_4",
+			"wh2_dlc17_bst_special_settlement_wei_jin_4",
+			"wh2_dlc17_bst_special_settlement_zharr_naggrund_4"
 		},
 		[4] = {
 			"wh2_dlc17_bst_settlement_major_5",
@@ -136,7 +145,10 @@ Ruination = {
 			"wh2_dlc17_bst_special_settlement_karaz_a_karak_5",
 			"wh2_dlc17_bst_special_settlement_lothern_5",
 			"wh2_dlc17_bst_special_settlement_naggarond_5",
-			"wh2_dlc17_bst_special_settlement_oak_of_ages_5"
+			"wh2_dlc17_bst_special_settlement_oak_of_ages_5",
+			"wh2_dlc17_bst_special_settlement_kislev_5",
+			"wh2_dlc17_bst_special_settlement_wei_jin_5",
+			"wh2_dlc17_bst_special_settlement_zharr_naggrund_5"
 		}
 	},
 

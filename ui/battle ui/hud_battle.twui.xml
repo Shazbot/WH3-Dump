@@ -2636,6 +2636,19 @@
 					callback_id="ContextPropagator"
 					context_object_id="CcoBattleRoot"
 					context_function_id="SelectionContext"/>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoBattleSelection"
+					context_function_id="GetIfElse(UnitList.All(IsFlying), &quot;ui/skins/default/icon_land_button.png&quot;, &quot;ui/skins/default/icon_fly_button.png&quot;)">
+					<child_m_user_properties>
+						<property
+							name="image_index"
+							value="0"/>
+						<property
+							name="update_constant"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -6516,6 +6529,9 @@
 				<callback_with_context
 					callback_id="ContextObjectStore"
 					context_object_id="CcoBattleAbility"/>
+				<callback_with_context
+					callback_id="ContextPropagationBlocker"
+					context_object_id="CcoEffect"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -7764,8 +7780,6 @@
 			allowverticalresize="false"
 			docking="Center"
 			component_anchor_point="0.50,0.50"
-			componentleveltooltip="{{tt:ui/battle ui/capture_point_tooltip}}"
-			tooltiplabel="capture_point_icon_Tooltip_e0063"
 			uniqueguid="5DBF8583-A6AC-4DFF-8B229E19100201BC"
 			updatewhennotvisible="true"
 			isaspectratiolocked="true"
@@ -7787,8 +7801,14 @@
 					context_object_id="CcoBattleCapturePoint"
 					context_function_id="ZoomTo"/>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
-					context_object_id="CcoBattleCapturePoint"/>
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoBattleCapturePoint">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/battle ui/capture_point_tooltip"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context callback_id="BattleRadarCapturePoint"/>
 			</callbackwithcontextlist>
 			<states>
@@ -7797,6 +7817,7 @@
 					name="active"
 					width="24"
 					height="24"
+					disabled="true"
 					uniqueguid="F1CCFBC9-ABBE-48D5-A21CA52B2DE65469"/>
 			</states>
 		</icon_capture_point>

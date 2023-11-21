@@ -599,8 +599,10 @@ function add_start_quest_battle_objective()
 	if prologue_check_progression["lucent_maze_pre_battle"] == false and prologue_check_progression["close_to_lucent_maze"] then
 		cm:set_objective_with_leader("wh3_prologue_objective_start_quest_battle")
 
-		prologue_mission_ice_maiden_actions:trigger();
-		prologue_check_progression["triggered_ice_maiden_mission"] = true
+		if prologue_check_progression["triggered_ice_maiden_mission"] == false then
+			prologue_mission_ice_maiden_actions:trigger();
+			prologue_check_progression["triggered_ice_maiden_mission"] = true
+		end
 	end
 end
 
@@ -667,7 +669,7 @@ core:add_listener(
 				load_check_before_building_growth_end_turn()
 				Add_Growth_Building_Progress_End_Turn_Listeners()
 				ConstructionTopicLeaders("wh3_prologue_objective_turn_014_02", "wh3_prologue_objective_turn_014_03", true)
-			elseif prologue_lock_check == "post_dervingard" then
+			elseif prologue_load_check == "post_dervingard" then
 				PrologueAddTopicLeader("wh3_prologue_objective_chaos_wastes", function() if prologue_check_progression["open_world"] then cm:remove_objective("wh3_prologue_objective_chaos_wastes") end end)
 			elseif prologue_load_check == "trials" then
 				PrologueTrialsDilemma()

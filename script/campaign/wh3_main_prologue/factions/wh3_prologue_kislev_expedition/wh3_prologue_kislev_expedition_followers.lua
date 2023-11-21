@@ -254,7 +254,7 @@ local followers = {
 		["event"] = "CharacterRankUp",
 		["condition"] =
 			function(context)
-				return context:character():faction():research_queue_idle();
+				return cm:get_saved_value("tech_researched_this_turn_" .. context:character():faction():name());
 			end,
 		["chance"] = 13
 	},

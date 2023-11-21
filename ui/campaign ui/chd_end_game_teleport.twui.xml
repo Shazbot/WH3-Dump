@@ -3486,8 +3486,6 @@
 			dock_offset="0.00,21.00"
 			component_anchor_point="0.50,1.00"
 			priority="10"
-			componentleveltooltip="{{tt:ui/common ui/tooltip_effect_bundle}}"
-			tooltiplabel="ComponentTooltip_5088b59"
 			soundcategory="UI_CAM_CLICK_Rifts_Select_Rift"
 			uniqueguid="D7D21F9F-EE9D-4DD3-A932BE49F20EE61F"
 			isaspectratiolocked="true"
@@ -3515,9 +3513,15 @@
 					context_object_id="CcoTeleportationNetworkNodeRecord"
 					context_function_id="TargettingContext.SetTarget(this)"/>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
+					callback_id="ContextLayoutTooltip"
 					context_object_id="CcoTeleportationNetworkNodeRecord"
-					context_function_id="CcoEffectBundle(Name:TeleportationTemplateContext.Name, Description: TeleportationTemplateContext.Description, EffectList: EffectList, TurnsRemaining: 0 )"/>
+					context_function_id="CcoEffectBundle(Name:TeleportationTemplateContext.Name, Description: TeleportationTemplateContext.Description, EffectList: EffectList, TurnsRemaining: 0 )">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/common ui/tooltip_effect_bundle"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextImageSetter"
 					context_object_id="CcoTeleportationNetworkNodeRecord"
@@ -4463,7 +4467,7 @@
 					disabled="true"
 					uniqueguid="E3E643F1-15AB-4BF2-AE178EDA872EC3E5">
 					<component_text
-						text="Traverse The Tunnel"
+						text="Traverse the Tunnel"
 						textvalign="Center"
 						texthalign="Center"
 						texthbehaviour="Never split"

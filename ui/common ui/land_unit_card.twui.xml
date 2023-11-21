@@ -1962,13 +1962,17 @@
 				<callback_with_context
 					callback_id="ContextImageSetter"
 					context_object_id="CcoMainUnitRecord"
-					context_function_id="GetIf(IsTrain, &quot;unit_card_warmachines_recruitment_frame.png&quot;)">
+					context_function_id="GetIf(IsTrain, AddDefaultSkinPath(&quot;unit_card_warmachines_recruitment_frame.png&quot;))">
 					<child_m_user_properties>
 						<property
 							name="image_index"
 							value="2"/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoUnitDetails"
+					context_function_id="UnitRecordContext"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -4587,7 +4591,7 @@
 					name="NewState"
 					width="38"
 					height="25"
-					tooltip="Summoned|Summoned units exist in this world on borrowed time and will soon disappear back to the Winds from whence they came."
+					tooltip="Summoned||Summoned units exist in this world on borrowed time and will soon disappear back to the Winds from whence they came."
 					tooltiplabel="icon_raise_NewState_Tooltip_3a000c"
 					interactive="true"
 					disabled="true"
@@ -7617,17 +7621,41 @@
 		<bribe_cost
 			this="2D63BD33-67B4-42E8-916BC7BFBA4E289C"
 			id="bribe_cost"
-			offset="-5.00,112.00"
+			offset="-4.00,112.00"
 			allowverticalresize="false"
 			visible="false"
-			docking="Bottom Center"
-			component_anchor_point="0.50,1.00"
+			docking="Bottom Left"
+			dock_offset="-4.00,0.00"
+			component_anchor_point="0.00,1.00"
 			tooltipslocalised="true"
 			componentleveltooltip="Seduction cost"
 			tooltiplabel="bribe_cost_Tooltip_9bad5e95"
 			uniqueguid="2D63BD33-67B4-42E8-916BC7BFBA4E289C"
 			currentstate="D5379088-F743-43B2-AD5F88EDF500101D"
 			defaultstate="D5379088-F743-43B2-AD5F88EDF500101D">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="TopmostObjectCallback"
+					context_function_id="self.Position.y &lt;  self.ParentContext(&quot;list_clip&quot;).Position.y + self.ParentContext(&quot;list_clip&quot;).Dimensions.y">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="update_topmost"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandGiverOnVisibilityChanged"
+					context_function_id="UiMsg(&quot;update_topmost&quot;)">
+					<child_m_user_properties>
+						<property
+							name="local_visibility_only"
+							value=""/>
+						<property
+							name="on_hide_and_show"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
 					this="177A8D71-2F5A-44A3-9B6F1850979E14AD"
@@ -7675,9 +7703,9 @@
 					</imagemetrics>
 					<component_text
 						text="2000"
-						textxoffset="26.00,4.00"
+						textxoffset="26.00,8.00"
 						textyoffset="2.00,0.00"
-						texthbehaviour="Never split"
+						texthbehaviour="Resize"
 						textlabel="dy_cost_NewSate_Text_2"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
@@ -7723,9 +7751,9 @@
 					</imagemetrics>
 					<component_text
 						text="2000"
-						textxoffset="26.00,4.00"
+						textxoffset="26.00,8.00"
 						textyoffset="2.00,0.00"
-						texthbehaviour="Never split"
+						texthbehaviour="Resize"
 						textlabel="dy_cost_NewSate_Text_2"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
@@ -9040,7 +9068,7 @@
 					name="NewState"
 					width="52"
 					height="7"
-					interactive="true"
+					disabled="true"
 					uniqueguid="466DD669-A5FE-4244-A802CB6DDAB66A4B">
 					<imagemetrics>
 						<image
@@ -9962,6 +9990,25 @@
 							height="22"/>
 					</imagemetrics>
 				</default>
+				<inactive
+					this="4A35D487-6DB7-4D23-8C3FCB9318AD0808"
+					name="inactive"
+					width="22"
+					height="22"
+					disabled="true"
+					pixelcollision="true"
+					shader_name="set_greyscale_t0"
+					shadervars="1.00,1.00,0.00,0.00"
+					uniqueguid="4A35D487-6DB7-4D23-8C3FCB9318AD0808">
+					<imagemetrics>
+						<image
+							this="1380BF1B-83B6-4BD7-BA324BE7C8D1C786"
+							uniqueguid="1380BF1B-83B6-4BD7-BA324BE7C8D1C786"
+							componentimage="F22650C9-A374-41DC-B9A58288A3F8F3BA"
+							width="22"
+							height="22"/>
+					</imagemetrics>
+				</inactive>
 				<raise
 					this="029CA591-E366-4E6C-84307A164D4C47A0"
 					name="raise"
@@ -10019,6 +10066,7 @@
 							value="IsRenown"/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context callback_id="StatePropagatorCallback"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image

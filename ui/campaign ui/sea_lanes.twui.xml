@@ -3484,8 +3484,6 @@
 			dock_offset="0.00,21.00"
 			component_anchor_point="0.50,1.00"
 			priority="10"
-			componentleveltooltip="{{tt:ui/common ui/tooltip_effect_bundle}}"
-			tooltiplabel="ComponentTooltip_dd9bf58b"
 			soundcategory="UI_CAM_CLICK_Rifts_Select_Rift"
 			uniqueguid="2B0C5B6C-CA64-4675-B7AA271CA27591AA"
 			isaspectratiolocked="true"
@@ -3513,9 +3511,18 @@
 					context_object_id="CcoTeleportationNetworkNodeRecord"
 					context_function_id="TargettingContext.SetTarget(this)"/>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
+					callback_id="ContextLayoutTooltip"
 					context_object_id="CcoTeleportationNetworkNodeRecord"
-					context_function_id="CcoEffectBundle(Name:TeleportationTemplateContext.Name, Description: TeleportationTemplateContext.Description, EffectList: EffectList, TurnsRemaining: 0 )"/>
+					context_function_id="CcoEffectBundle(Name:TeleportationTemplateContext.Name, Description: TeleportationTemplateContext.Description, EffectList: EffectList, TurnsRemaining: 0 )">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/common ui/tooltip_effect_bundle"/>
+						<property
+							name="offset_x"
+							value="10"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextImageSetter"
 					context_object_id="CcoTeleportationNetworkNodeRecord"

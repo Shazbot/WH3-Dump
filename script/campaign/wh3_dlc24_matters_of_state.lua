@@ -218,6 +218,36 @@ function matters_of_state:initialise()
 		true
 	)
 	
+	-- remove matters of state hero success effect bundles after actions
+	local function mos_hero_action_success(context)
+		local faction = context:character():faction()
+		if (context:mission_result_critial_success() or context:mission_result_success()) and faction:name() == self.faction_string and faction:has_effect_bundle(self.agent_success_effect_bundle) then
+			cm:remove_effect_bundle(self.agent_success_effect_bundle, self.faction_string)
+		end
+	end
+	
+	core:add_listener(
+		"JadeDragonHeroActionListener",
+		"CharacterCharacterTargetAction",
+		function(context)
+			return context:target_character():faction():name() ~= self.faction_string
+		end,
+		function(context)
+			mos_hero_action_success(context)
+		end,
+		true
+	)
+
+	core:add_listener(
+		"JadeDragonHeroActionListenerSettlement",
+		"CharacterGarrisonTargetAction", 
+		true,
+		function(context)
+			mos_hero_action_success(context)
+		end,
+		true
+	)
+	
 	if cm:get_faction(self.faction_string):is_human() then
 		if not cm:get_saved_value("yuan_bo_victory_complete") then
 			core:add_listener(
@@ -440,35 +470,6 @@ function matters_of_state:ritual_completed_event(ritual)
 				end
 			end
 		end
-	end
-
-	if ritual_key == self.rituals.force_agent_action_success then
-		--effect bundle delivered by ritual payload
-		core:add_listener(
-			"JadeDragonHeroActionListener",
-			"CharacterCharacterTargetAction",
-			function(context)
-				return (context:mission_result_critial_success() or context:mission_result_success()) and context:character():faction():name() == self.faction_string and context:target_character():faction():name() ~= self.faction_string
-			end,
-			function()
-				cm:remove_effect_bundle(self.agent_success_effect_bundle, self.faction_string)
-				core:remove_listener("JadeDragonHeroActionListenerSettlement")
-			end,
-			false
-		)
-	
-		core:add_listener(
-			"JadeDragonHeroActionListenerSettlement",
-			"CharacterGarrisonTargetAction", 
-			function(context)
-				return (context:mission_result_critial_success() or context:mission_result_success()) and context:character():faction():name() == self.faction_string
-			end,
-			function()
-				cm:remove_effect_bundle(self.agent_success_effect_bundle, self.faction_string)
-				core:remove_listener("JadeDragonHeroActionListener")
-			end,
-			false
-		)
 	end
 
 	if ritual_key == self.rituals.generate_ancillaries then

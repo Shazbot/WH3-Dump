@@ -412,6 +412,10 @@ core:add_listener(
 	end,
 	function()
 
+		-- Disable the ESC key
+		cm:steal_escape_key(true);
+		
+
 		local uic_ally = find_uicomponent(core:get_ui_root(), "units_and_banners_parent", "units_window", "commander_header_1");
 
 		if uic_ally then
@@ -424,7 +428,7 @@ core:add_listener(
 			if uic_kill_button then
 				uic_kill_button:SetVisible(false);
 			else
-				out("COULDNT FINDS IT")
+				out("COULDNT FIND the Kill button")
 			end
 		end, 2.7);
 
@@ -567,6 +571,8 @@ function PrologueAfterPostBattle()
 		end
 	end
 	cm:set_unit_experience_disabled(true)
+
+	cm:steal_escape_key(false);
 
 	prologue_advice_mission_complete_saving_beacon();
 end

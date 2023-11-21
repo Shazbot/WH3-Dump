@@ -90,6 +90,10 @@ core:add_listener(
 
 			cm:replenish_action_points("faction:"..enemy_faction_name..",forename:709990315", 0)
 
+			-- Disable the ESC key
+			cm:steal_escape_key(true);
+			uim:override("esc_menu"):set_allowed(false);
+
 			--core:remove_listener("autoresolve_button_listener_post");
 
 			prologue_tutorial_passed["hide_campaign_unit_information"] = true;
@@ -447,6 +451,10 @@ function PrologueAfterSecondBattle()
 				cm:callback(function() prologue_advice_second_fight(); end, 1)
 				
 				core:remove_listener("Open_FactionTurnStart_Prologue");
+
+				-- Disable the ESC key
+				cm:steal_escape_key(false);
+				uim:override("esc_menu"):set_allowed(true);
 
 				-- Disble the end turn button
 				uim:override("end_turn"):set_allowed(false);

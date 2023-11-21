@@ -46,9 +46,7 @@ function sea_lanes:character_arrived_incident_listener()
 		function(context)
 			local from_record = context:from_record()
 
-			if from_record:is_null_interface() == false then
-				return from_record:key():starts_with("wh3_main_sea_lane")
-			end
+			return from_record:is_null_interface() == false and sea_lanes.nodes[from_record:template_key()]
 		end,
 		function(context)
 			local character = context:character():character()

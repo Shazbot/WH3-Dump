@@ -2421,8 +2421,6 @@
 			offset="0.00,72.00"
 			allowhorizontalresize="false"
 			priority="50"
-			componentleveltooltip="{{tt:ui/campaign ui/tooltip_ancillary_record}}"
-			tooltiplabel="template_payload_ancillary_Tooltip_c2c80468"
 			uniqueguid="65CBDA3C-2ADA-4147-8DD8879B2E66B835"
 			currentstate="AED5EB86-25BD-40F7-822A7D3BB544F271"
 			defaultstate="AED5EB86-25BD-40F7-822A7D3BB544F271">
@@ -2439,13 +2437,34 @@
 					context_object_id="CcoCampaignPayloadInfoEntry"
 					context_function_id="Icon"/>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
-					context_object_id="CcoCampaignPayloadInfoEntry"
-					context_function_id="Ancillary"/>
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoAncillaryRecord">
+					<child_m_user_properties>
+						<property
+							name="alternate_parent_dock_point"
+							value="tce"/>
+						<property
+							name="layout_path"
+							value="ui/campaign ui/edict_tooltip"/>
+						<property
+							name="offset_x"
+							value="15"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextStateSetter"
 					context_object_id="CcoCampaignPayloadInfoEntry"
 					context_function_id="State"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignPayloadInfoEntry"
+					context_function_id="Ancillary">
+					<child_m_user_properties>
+						<property
+							name="only_target"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -2706,8 +2725,6 @@
 			id="template_payload_effect_bundle"
 			allowhorizontalresize="false"
 			priority="50"
-			componentleveltooltip="{{tt:ui/common ui/tooltip_effect_bundle}}"
-			tooltiplabel="template_payload_effect_bundle_Tooltip_3c005d"
 			uniqueguid="82FA531B-CBB3-4B5C-92C8E337941F0A6E"
 			currentstate="94B295EB-0FCD-420B-9A6EE2D23EFC3658"
 			defaultstate="94B295EB-0FCD-420B-9A6EE2D23EFC3658">
@@ -2724,8 +2741,14 @@
 					context_object_id="CcoCampaignPayloadInfoEntry"
 					context_function_id="Icon"/>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
-					context_object_id="CcoEffectBundle"/>
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoEffectBundle">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/common ui/tooltip_effect_bundle"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoCampaignPayloadInfoEntry"

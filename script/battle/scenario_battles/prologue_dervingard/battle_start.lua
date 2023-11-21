@@ -40,6 +40,7 @@ local player_army = bm:get_scriptunits_for_local_players_army();
 local yuri = player_army:get_general_sunit();
 local enemy_army = bm:get_scriptunits_for_main_enemy_army_to_local_player()
 
+
 local boss_group_boss = enemy_army:item(1) -- Skollden
 local boss_group_unit_1 = enemy_army:item(14) -- Wolves
 local sunits_boss_group = script_units:new(
@@ -148,7 +149,26 @@ local sunits_middle_west = script_units:new(
 middle_west_unit_1.uc:teleport_to_location(v(-204, 133), 180, 30)
 sunits_middle_west:set_always_visible(true)
 
+local all_enemy_units = script_units:new(
+	"all_enemy",
+	boss_group_boss,
+	boss_group_unit_1,
+	north_west_unit_1,
+	north_west_unit_2,
+	north_east_unit_1,
+	north_east_unit_2,
+	marauders_unit_1,
+	marauders_unit_2,
+	valley_unit_1,
+	valley_unit_2,
+	wolves_unit_1,
+	wolves_unit_2,
+	middle_east_unit_1,
+	middle_west_unit_1
 
+)
+
+all_enemy_units:take_control();
 
 -- Delete the garrison, which are any units after 14.
 for i = 1, enemy_army:count() do
@@ -206,7 +226,6 @@ bm:register_phase_change_callback(
 					0,
 					function()
 						player_spawned_at_front = true
-						sunits_valley:take_control()
 						sunits_valley:start_attack_closest_enemy()
 					end
 				)
@@ -241,7 +260,6 @@ bm:watch(
 	end,
 	0,
 	function()
-		enemy_army:take_control()
 		enemy_army:start_attack_closest_enemy()
 	end
 )
@@ -253,9 +271,7 @@ bm:watch(
 	end,
 	0,
 	function()
-		sunits_middle_west:take_control()
 		sunits_middle_west:start_attack_closest_enemy()
-		sunits_middle_east:take_control()
 		sunits_middle_east:start_attack_closest_enemy()
 	end
 )
@@ -268,9 +284,7 @@ bm:watch(
 	end,
 	0,
 	function()
-		sunits_north_west:take_control()
 		sunits_north_west:start_attack_closest_enemy()
-		sunits_north_east:take_control()
 		sunits_north_east:start_attack_closest_enemy()
 	end
 )
@@ -282,9 +296,7 @@ bm:watch(
 	end,
 	0,
 	function()
-		sunits_marauders:take_control()
 		sunits_marauders:start_attack_closest_enemy()
-		sunits_valley:take_control()
 		sunits_valley:start_attack_closest_enemy()
 	end
 )
@@ -296,9 +308,7 @@ bm:watch(
 	end,
 	0,
 	function()
-		sunits_middle_west:take_control()
 		sunits_middle_west:start_attack_closest_enemy()
-		sunits_middle_east:take_control()
 		sunits_middle_east:start_attack_closest_enemy()
 	end
 )
@@ -731,7 +741,6 @@ function DeployWolves()
 	sunits_wolves:set_enabled(true)
 	sunits_wolves:set_always_visible(true)
 	-- Start attack.
-	sunits_wolves:take_control()
 	sunits_wolves:start_attack_closest_enemy()
 	--Set up a metric variable to be used in campaign later
 	core:svr_save_bool("sbool_prologue_dervingard_battle_wolves_attacked", true);
