@@ -3065,6 +3065,8 @@ function trigger_in_formless_horror()
 			infotext:attach_to_advisor(true) -- Reattach infotext to advisor
 			infotext:restore_detatched_infotext_priority()
 			
+			core:hide_fullscreen_highlight()
+			
 			-- Clean up escape key steal and shortcuts.
 			cm:steal_escape_key(false)
 			common.enable_all_shortcuts(true)
@@ -3172,6 +3174,12 @@ function trigger_in_formless_horror()
 			-- Open panel if shut.
 			if cm:get_campaign_ui_manager():is_panel_open("character_details_panel") == false then
 				local uic = find_uicomponent("hud_campaign", "info_panel_holder", "button_no_form")
+				
+				if not uic or uic:Visible() == false then
+					-- a form has been selected already, so look for the other button
+					uic = find_uicomponent("hud_campaign", "info_panel_holder", "button_selected_form")
+				end
+				
 				if uic then
 					cm:steal_user_input(false)
 					uic:SimulateLClick()

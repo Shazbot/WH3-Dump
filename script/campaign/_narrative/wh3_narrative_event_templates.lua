@@ -3027,7 +3027,7 @@ local function construct_narrative_event_upgrade_any_settlement(unique_name, fac
 					local completed_building_level = cm:building_level_for_building(completed_building_key);
 
 					if completed_building_superchain_key and completed_building_level then
-						return string.find(completed_building_superchain_key, "_settlement") and completed_building_level + 1 >= building_level;
+						return string.find(completed_building_superchain_key, "_settlement") and (not building_level or completed_building_level + 1 >= building_level);
 					end;
 				end;
 			end

@@ -344,7 +344,11 @@ function attempt_to_issue_ogre_contracts(faction_key)
 			if random_payload == 1 then
 				payload = payload .. "effect_bundle {bundle_key wh3_main_bundle_ogre_contract_camp_growth;turns 5;}";
 			elseif random_payload == 2 then
-				payload = payload .. "add_ancillary_to_faction_pool {ancillary_key " .. get_random_ancillary_key_for_faction(faction_key, nil, "rare") .. ";}";
+				local ancillary_key = get_random_ancillary_key_for_faction(faction_key, nil, "rare");
+				
+				if ancillary_key then
+					payload = payload .. "add_ancillary_to_faction_pool {ancillary_key " .. ancillary_key .. ";}";
+				end;
 			else
 				-- find the army with the lowest level of meat
 				local mf_list = faction:military_force_list();

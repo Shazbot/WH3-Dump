@@ -5213,6 +5213,23 @@
 					callback_id="ContextImageSetter"
 					context_object_id="CcoCampaignPayloadInfoEntry"
 					context_function_id="Icon"/>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoCampaignPayloadInfoEntry"
+					context_function_id="GetIfElse(IsContextValid(TraitLevelRecordContext), &quot;trait&quot;, &quot;default&quot;)"/>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoCharacterTraitLevelRecord">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/common ui/character_trait_tooltip_sticky"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignPayloadInfoEntry"
+					context_function_id="TraitLevelRecordContext"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -5221,9 +5238,9 @@
 					imagepath="ui/skins/default/treasury.png"/>
 			</componentimages>
 			<states>
-				<gold
+				<default
 					this="8B19ED49-5A57-4401-BF14725101B774C7"
-					name="gold"
+					name="default"
 					width="395"
 					height="36"
 					uniqueguid="8B19ED49-5A57-4401-BF14725101B774C7">
@@ -5252,7 +5269,41 @@
 						font_m_leading="3"
 						fontcat_name="body_12"
 						font_colour_override_preset_key="green"/>
-				</gold>
+				</default>
+				<trait
+					this="0B9751D9-C422-4555-AA93E60BCA3B9C96"
+					name="trait"
+					width="395"
+					height="36"
+					interactive="true"
+					disabled="true"
+					uniqueguid="0B9751D9-C422-4555-AA93E60BCA3B9C96">
+					<imagemetrics>
+						<image
+							this="A2B35A08-D906-4E4E-BFC7C0D1E57F0C9A"
+							uniqueguid="A2B35A08-D906-4E4E-BFC7C0D1E57F0C9A"
+							componentimage="BDEF1CEE-B15C-467A-A4112B3D483EFCDC"
+							offset="8.00,7.00"
+							width="24"
+							height="24"
+							dockpoint="Top Left"
+							dock_offset="8.00,7.00"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<component_text
+						text="dy_effect_bundle"
+						textvalign="Center"
+						textxoffset="34.00,15.00"
+						textyoffset="10.00,15.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_98797305"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="green"/>
+				</trait>
 			</states>
 		</template_payload_entry>
 		<turns_display

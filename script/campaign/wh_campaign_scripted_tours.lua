@@ -577,6 +577,26 @@ function character_skill_points_tour_lock_ui(value)
 			uim:override(overrides_to_lock[i]):unlock();
 		end;
 	end;
+	
+	-- disable pinned missions buttons from opening the objectives panel
+	local uic_pinned_mission_list = find_uicomponent(core:get_ui_root(), "mission_list");
+	
+	if uic_pinned_mission_list then
+		for i = 0, uic_pinned_mission_list:ChildCount() - 1 do
+			local uic_pinned_mission = UIComponent(uic_pinned_mission_list:Find(i));
+			local uic_button = find_uicomponent(uic_pinned_mission, "header_frame", "flyer_holder", "button_show_objectives");
+			if uic_button then
+				uic_button:SetDisabled(value);
+			end;
+		end;
+	end;
+	
+	-- disable character movement
+	if value then
+		cm:disable_movement_for_character(cm:char_lookup_str(character_skill_point_tour.char_cqi));
+	else
+		cm:enable_movement_for_character(cm:char_lookup_str(character_skill_point_tour.char_cqi));
+	end;
 end;
 
 

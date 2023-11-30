@@ -482,24 +482,28 @@ function tomb_king_ror_locks()
 	core:add_listener(
 		"tomb_king_ror_unlock",
 		"RitualCompletedEvent",
+		true,
 		function(context)
-			return context:performing_faction():is_human();
-		end,
-		function(context)
-			local faction_key = context:performing_faction():name();
+			local performing_faction = context:performing_faction();
+			local faction_key = performing_faction:name();
 			local ritual_key = context:ritual():ritual_key();
 			
 			if ritual_key == "wh2_dlc09_ritual_tmb_tahoth" then
 				cm:remove_event_restricted_unit_record_for_faction("wh2_dlc09_tmb_art_casket_of_souls_0", faction_key);
-			elseif ritual_key == "wh2_dlc09_ritual_crafting_tmb_carrion" then
-				cm:remove_event_restricted_unit_record_for_faction("wh2_dlc09_tmb_mon_carrion_ror", faction_key);
-			elseif ritual_key == "wh2_dlc09_ritual_crafting_tmb_nehekhara_warriors" then
-				cm:remove_event_restricted_unit_record_for_faction("wh2_dlc09_tmb_inf_nehekhara_warriors_ror", faction_key);
-			elseif ritual_key == "wh2_dlc09_ritual_crafting_tmb_nehekhara_horsemen" then
-				cm:remove_event_restricted_unit_record_for_faction("wh2_dlc09_tmb_cav_nehekhara_horsemen_ror", faction_key);
-			elseif ritual_key == "wh2_dlc09_ritual_crafting_tmb_necropolis_knights" then
-				cm:remove_event_restricted_unit_record_for_faction("wh2_dlc09_tmb_cav_necropolis_knights_ror", faction_key);
-			end
+				return;
+			end;
+			
+			if performing_faction:is_human() then
+				if ritual_key == "wh2_dlc09_ritual_crafting_tmb_carrion" then
+					cm:remove_event_restricted_unit_record_for_faction("wh2_dlc09_tmb_mon_carrion_ror", faction_key);
+				elseif ritual_key == "wh2_dlc09_ritual_crafting_tmb_nehekhara_warriors" then
+					cm:remove_event_restricted_unit_record_for_faction("wh2_dlc09_tmb_inf_nehekhara_warriors_ror", faction_key);
+				elseif ritual_key == "wh2_dlc09_ritual_crafting_tmb_nehekhara_horsemen" then
+					cm:remove_event_restricted_unit_record_for_faction("wh2_dlc09_tmb_cav_nehekhara_horsemen_ror", faction_key);
+				elseif ritual_key == "wh2_dlc09_ritual_crafting_tmb_necropolis_knights" then
+					cm:remove_event_restricted_unit_record_for_faction("wh2_dlc09_tmb_cav_necropolis_knights_ror", faction_key);
+				end;
+			end;
 		end,
 		true
 	);

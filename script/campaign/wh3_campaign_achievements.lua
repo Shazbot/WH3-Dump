@@ -37,7 +37,6 @@ end;
 
 
 function start_achievement_listeners()
-	
 	if cm:is_multiplayer() then
 		cm:award_achievement("WH3_ACHIEVEMENT_MP_CAMPAIGN_START");
 	end;
@@ -395,6 +394,107 @@ function start_achievement_listeners()
 				end	
 			end
 
+		end,
+		true
+	);
+	
+	core:add_listener(
+		"WH3_ACHIEVEMENT_CATHAY_OCCUPY_GREAT_BASTION",
+		"RegionFactionChangeEvent",
+		function(context)
+			return not context:region():is_abandoned();
+		end,
+		function(context)
+			local region = context:region();
+			local owning_faction = region:owning_faction();
+			
+			if owning_faction:is_human() and owning_faction:culture() == "wh3_main_cth_cathay" then
+				local regions = {
+					wh3_main_combi_region_dragon_gate = true,
+					wh3_main_combi_region_snake_gate = true,
+					wh3_main_combi_region_turtle_gate = true
+				};
+				
+				if cm:get_campaign_name() == "wh3_main_chaos" then
+					regions = {
+						wh3_main_chaos_region_dragon_gate = true,
+						wh3_main_chaos_region_snake_gate = true,
+						wh3_main_chaos_region_turtle_gate = true
+					}
+				end;
+				
+				if regions[region:name()] then
+					for region, _ in pairs(regions) do
+						local current_region = cm:get_region(region);
+						
+						if current_region:is_abandoned() or current_region:owning_faction() ~= owning_faction then
+							return;
+						end;
+					end;
+					
+					award_achievement_to_faction(owning_faction:name(), "WH3_ACHIEVEMENT_CATHAY_OCCUPY_GREAT_BASTION");
+				end;
+			end;
+		end,
+		true
+	);
+	
+	core:add_listener(
+		"WH3_ACHIEVEMENT_CATHAY_OCCUPY_WEI_JIN",
+		"RegionFactionChangeEvent",
+		function(context)
+			local region = context:region();
+			
+			if not region:is_abandoned() then
+				local owning_faction = region:owning_faction();
+				local region_name = region:name();
+				
+				return (region_name == "wh3_main_chaos_region_wei_jin" or region_name == "wh3_main_combi_region_wei_jin") and owning_faction:is_human() and owning_faction:culture() == "wh3_main_cth_cathay";
+			end;
+		end,
+		function(context)
+			award_achievement_to_faction(context:region():owning_faction():name(), "WH3_ACHIEVEMENT_CATHAY_OCCUPY_WEI_JIN");
+		end,
+		true
+	);
+	
+	core:add_listener(
+		"WH3_ACHIEVEMENT_KISLEV_OCCUPY_3_CITIES",
+		"RegionFactionChangeEvent",
+		function(context)
+			return not context:region():is_abandoned();
+		end,
+		function(context)
+			local region = context:region();
+			local owning_faction = region:owning_faction();
+			
+			if owning_faction:is_human() and owning_faction:culture() == "wh3_main_ksl_kislev" then
+				local regions = {
+					wh3_main_combi_region_erengrad = true,
+					wh3_main_combi_region_kislev = true,
+					wh3_main_combi_region_praag = true
+				};
+				
+				if cm:get_campaign_name() == "wh3_main_chaos" then
+					regions = {
+						wh3_main_chaos_region_erengrad = true,
+						wh3_main_chaos_region_kislev = true,
+						wh3_main_chaos_region_praag = true
+					}
+				end;
+				
+				if regions[region:name()] then
+					for region, _ in pairs(regions) do
+						local current_region = cm:get_region(region);
+						
+						if current_region:is_abandoned() or current_region:owning_faction() ~= owning_faction then
+							return;
+						end;
+					end;
+					
+					award_achievement_to_faction(owning_faction:name(), "WH3_ACHIEVEMENT_KISLEV_OCCUPY_3_CITIES");
+				end;
+			end;
 		end,
 		true
 	);

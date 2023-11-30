@@ -195,7 +195,7 @@ function attempt_to_award_random_magical_item(context)
 			end;
 		end;
 		
-		chance = math.max(chance + victory_type_mod, 100)
+		chance = math.min(chance + victory_type_mod, 100)
 		
 		-- tomb kings chance is cut in half due to mortuary cult
 		if faction:culture() == "wh2_dlc09_tmb_tomb_kings" then
