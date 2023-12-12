@@ -559,9 +559,7 @@ function trigger_final_supporters_dilemma(winner, loser, dilemma)
 	-- allow war again as the race is over
 	cm:force_diplomacy("faction:wh3_main_ksl_the_ice_court", "faction:wh3_main_ksl_the_great_orthodoxy", "war", true, true, true)
 	
-	if cm:get_faction(loser):is_human() then
-		cm:apply_effect_bundle("wh3_main_ksl_reward_ai_motherland_victory", winner, 0)
-	else
+	if cm:get_faction(winner):is_human() then
 		cm:trigger_dilemma(winner, dilemma)
 		
 		core:add_listener(
@@ -583,6 +581,8 @@ function trigger_final_supporters_dilemma(winner, loser, dilemma)
 			end,
 			false
 		)
+	else
+		cm:apply_effect_bundle("wh3_main_ksl_reward_ai_motherland_victory", winner, 0)
 	end
 end
 
