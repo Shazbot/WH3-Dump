@@ -829,31 +829,21 @@ initiative_templates = {
 					
 					local defender_char_cqi, defender_mf_cqi, defender_faction_name = cm:pending_battle_cache_get_defender(1);
 					local attacker_char_cqi, attacker_mf_cqi, attacker_faction_name = cm:pending_battle_cache_get_attacker(1);
-					
-					local num_enemy_characters = 0
 
-					if defender_faction_name == character_faction_name and pb:has_attacker() then
-						attacker_char_list = pb:attacker():military_force():character_list()
-
-						for i = 0, attacker_char_list:num_items() - 1 do
-							local temp_character = attacker_char_list:item_at(i)
-							if temp_character:is_caster() then
-								num_enemy_characters = num_enemy_characters + 1
+					if defender_faction_name == character_faction_name then
+						for i = 1, cm:pending_battle_cache_num_attackers() do
+							-- count the general as one character, so need to have 2 or more embedded characters to pass this test
+							if cm:pending_battle_cache_num_attacker_embedded_characters(i) > 1 then
+								return true;
 							end
 						end
-						
-					elseif attacker_faction_name == character_faction_name and pb:has_defender() then
-						defender_char_list = pb:defender():military_force():character_list()
-
-						for i = 0, defender_char_list:num_items() - 1 do
-							local temp_character = defender_char_list:item_at(i)
-							if temp_character:is_caster() then
-								num_enemy_characters = num_enemy_characters + 1
+					elseif attacker_faction_name == character_faction_name then
+						for i = 1, cm:pending_battle_cache_num_defenders() do
+							if cm:pending_battle_cache_num_defender_embedded_characters(i) > 1 then
+								return true;
 							end
 						end
 					end;
-
-					return num_enemy_characters >2
 				end;
 			end,
 		["grant_immediately"] = true

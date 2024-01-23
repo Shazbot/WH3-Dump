@@ -305,7 +305,7 @@ function Bloodgrounds:setup_ritual_of_ruin_listener()
 			local region_key = string.gsub(context:trigger(), self.ritual_script_trigger_prefix, "")
 			local bloodground = self:is_bloodground_region(region_key)
 
-			if bloodground.ritual_unlocked and not bloodground.ritual_completed then
+			if bloodground and bloodground.ritual_unlocked and not bloodground.ritual_completed then
 				self:out("Performing Ritual of Ruin!")
 				bloodground.ritual_completed = true
 				self:apply_vfx(region_key, self.defiled_bloodground_vfx_key)

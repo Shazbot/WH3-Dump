@@ -503,47 +503,53 @@ core:add_listener(
 	true
 );
 
+-- build a numerically indexed list of bad traits based on the keyed table in wh_campaign_bretonnia_chivalry
+local indexed_bad_traits = {};
+for trait_name, _ in pairs(chivalry.bad_traits) do
+	table.insert(indexed_bad_traits, trait_name)
+end;
+
+table.sort(indexed_bad_traits);
 
 -- Devoted
 core:add_listener(
 	"character_turn_end_devoted_trait",
 	"CharacterTurnEnd",
-	true,
 	function(context)
-		if cm:char_is_general_with_army(context:character()) and context:character():faction():culture() == "wh_main_brt_bretonnia" then
-			if context:character():has_region() and context:character():in_settlement() and region_has_chain(context:character():region(), "wh_main_BRETONNIA_worship") then
-				local char_cqi = tostring(context:character():command_queue_index()).."_praying";
-				local char_turns_praying = BRET_LORDS_RECORDS[char_cqi] or 0;
-				char_turns_praying = char_turns_praying + 1;
-				local char_bad_traits = {};
-
-				for i = 1, #chivalry.bad_traits do
-					local current_trait = chivalry.bad_traits[i]
-					if context:character():has_trait(current_trait) and context:character():trait_points(current_trait) >= chivalry[current_trait].levels[1].points then
-						table.insert(char_bad_traits, current_trait);
-					end
-				end
-				
-				if #char_bad_traits > 0 then
-					-- Displayed 30% - Actual 40%
-					if context:character():region():building_exists("wh_main_brt_worship_3") and cm:model():random_percent(40) then
-						cm:force_remove_trait("character_cqi:"..context:character():command_queue_index(), char_bad_traits[cm:random_number(#char_bad_traits)]);
-					-- Displayed 20% - Actual 30%
-					elseif context:character():region():building_exists("wh_main_brt_worship_2") and cm:model():random_percent(30) then
-						cm:force_remove_trait("character_cqi:"..context:character():command_queue_index(), char_bad_traits[cm:random_number(#char_bad_traits)]);
-					-- Displayed 10% - Actual 20%
-					elseif context:character():region():building_exists("wh_main_brt_worship_1") and cm:model():random_percent(20) then
-						cm:force_remove_trait("character_cqi:"..context:character():command_queue_index(), char_bad_traits[cm:random_number(#char_bad_traits)]);
-					end
-				end
-				
-				if char_turns_praying >= 5 and context:character():has_trait("wh_dlc07_trait_brt_lord_good_praying") == false then
-					campaign_traits:give_trait(context:character(), "wh_dlc07_trait_brt_lord_good_praying", 1, 100);
-					BRET_LORDS_RECORDS[char_cqi] = nil; -- Reset
-				else
-					BRET_LORDS_RECORDS[char_cqi] = char_turns_praying;
-				end
+		local character = context:character();
+		return cm:char_is_general_with_army(character) and character:faction():culture() == "wh_main_brt_bretonnia" and character:has_region() and character:in_settlement() and region_has_chain(character:region(), "wh_main_BRETONNIA_worship")
+	end,
+	function(context)
+		local char_cqi = tostring(context:character():command_queue_index()).."_praying";
+		local char_turns_praying = BRET_LORDS_RECORDS[char_cqi] or 0;
+		char_turns_praying = char_turns_praying + 1;
+		local char_bad_traits = {};
+		
+		for i = 1, #indexed_bad_traits do
+			local current_trait = indexed_bad_traits[i];
+			if context:character():has_trait(current_trait) and context:character():trait_points(current_trait) >= chivalry.bad_traits[current_trait].levels[1].points then
+				table.insert(char_bad_traits, current_trait);
 			end
+		end
+		
+		if #char_bad_traits > 0 then
+			-- Displayed 30% - Actual 40%
+			if context:character():region():building_exists("wh_main_brt_worship_3") and cm:model():random_percent(40) then
+				cm:force_remove_trait("character_cqi:"..context:character():command_queue_index(), char_bad_traits[cm:random_number(#char_bad_traits)]);
+			-- Displayed 20% - Actual 30%
+			elseif context:character():region():building_exists("wh_main_brt_worship_2") and cm:model():random_percent(30) then
+				cm:force_remove_trait("character_cqi:"..context:character():command_queue_index(), char_bad_traits[cm:random_number(#char_bad_traits)]);
+			-- Displayed 10% - Actual 20%
+			elseif context:character():region():building_exists("wh_main_brt_worship_1") and cm:model():random_percent(20) then
+				cm:force_remove_trait("character_cqi:"..context:character():command_queue_index(), char_bad_traits[cm:random_number(#char_bad_traits)]);
+			end
+		end
+		
+		if char_turns_praying >= 5 and context:character():has_trait("wh_dlc07_trait_brt_lord_good_praying") == false then
+			campaign_traits:give_trait(context:character(), "wh_dlc07_trait_brt_lord_good_praying", 1, 100);
+			BRET_LORDS_RECORDS[char_cqi] = nil; -- Reset
+		else
+			BRET_LORDS_RECORDS[char_cqi] = char_turns_praying;
 		end
 	end,
 	true

@@ -874,8 +874,9 @@ local m_sanctum_stone_effect_bundle_keys = {
 local m_latest_failure_payload_key = ""
 
 local m_blocked_factions = {
-	-- don't use taurox for any threat map missions
+	-- don't use taurox or changeling for any threat map missions
 	"wh2_dlc17_bst_taurox",
+	"wh3_dlc24_tze_the_deceivers",
 
 	-- copy and paste of the faction keys within the cai_diplomacy_excluded_factions table.
 	-- This isn't the most future proof solution but in the interest of time it will do.

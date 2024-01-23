@@ -107,9 +107,9 @@ require("wh_dlc07_bretonnia")
 require("wh_dlc07_blessing_of_the_lady")
 require("wh_dlc07_diplomatic_tech")
 require("wh_dlc07_peasant_economy")
+require("wh_campaign_bretonnia_chivalry") -- must be loaded before the virtues and traits file as it references this
 require("wh_dlc07_virtues_and_traits")
 require("wh_dlc07_the_green_knight")
-require("wh_campaign_bretonnia_chivalry")
 require("wh_dlc07_vows")
 
 -- PRO02 - Isabella

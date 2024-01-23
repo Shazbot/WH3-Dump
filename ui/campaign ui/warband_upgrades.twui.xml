@@ -3791,7 +3791,7 @@
 				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextCommandEvent"
-					context_function_id="DoIf(self.IsVisible &amp;&amp; SelectedCharacter.IsPlayerCharacter == false, UiMsg(&quot;close_warband_upgrades&quot;))">
+					context_function_id="DoIf(self.IsVisible &amp;&amp; (SelectedCharacter.IsPlayerCharacter == false || IsContextValid(SelectedCharacter.MilitaryForceContext) == false || IsContextValid(SelectedCharacter.MilitaryForceContext.FactionLoanedFromContext)), UiMsg(&quot;close_warband_upgrades&quot;))">
 					<child_m_user_properties>
 						<property
 							name="event0"

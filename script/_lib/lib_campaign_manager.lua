@@ -10776,6 +10776,30 @@ function campaign_manager:pending_battle_cache_num_attacker_units(index)
 end;
 
 
+--- @function pending_battle_cache_num_attacker_embedded_characters
+--- @desc Returns the number of embedded characters that a specified attacker in the cached pending battle took into battle, or will take into battle. The total number of embedded characters across all attacking armies is returned if no army index is specified.
+--- @p [opt=nil] @number index of attacker
+--- @r @number number of attacking embedded characters
+function campaign_manager:pending_battle_cache_num_attacker_embedded_characters(index)
+	if index ~= nil and (index < 0 or index > #self.pbc_attackers) then
+		script_error("ERROR: pending_battle_cache_num_attacker_embedded_characters() called but supplied index [" .. tostring(index) .. "] is out of range");
+		return false;
+	end;
+
+	if index == nil then
+		local embedded_character_count = 0;
+		
+		for i = 1, self:pending_battle_cache_num_attackers() do
+			embedded_character_count = embedded_character_count + #self:pending_battle_cache_get_attacker_embedded_character_subtypes(i);
+		end;
+		
+		return embedded_character_count;
+	else
+		return #self:pending_battle_cache_get_attacker_embedded_character_subtypes(index);
+	end;
+end;
+
+
 --- @function pending_battle_cache_get_attacker_unit
 --- @desc Returns the cqi and unit key of a specified unit on the specified attacker in the pending battle cache, by index.
 --- @p @number attacker index, Index of attacking character within the pending battle cache.
@@ -10907,7 +10931,7 @@ end;
 --- @function pending_battle_cache_num_defender_units
 --- @desc Returns the number of units that a specified defender in the cached pending battle took into battle, or will take into battle. The total number of units across all defending armies is returned if no army index is specified.
 --- @p [opt=nil] @number index of defender
---- @r @number number of attacking units
+--- @r @number number of defending units
 function campaign_manager:pending_battle_cache_num_defender_units(index)
 	if index ~= nil and (index < 0 or index > #self.pbc_defenders) then
 		script_error("ERROR: pending_battle_cache_num_defender_units() called but supplied index [" .. tostring(index) .. "] is out of range");
@@ -10918,6 +10942,30 @@ function campaign_manager:pending_battle_cache_num_defender_units(index)
 		return self.pbc_defender_unit_count;
 	else
 		return #self.pbc_defenders[index].units;
+	end;
+end;
+
+
+--- @function pending_battle_cache_num_defender_embedded_characters
+--- @desc Returns the number of embedded characters that a specified defender in the cached pending battle took into battle, or will take into battle. The total number of embedded characters across all defending armies is returned if no army index is specified.
+--- @p [opt=nil] @number index of defender
+--- @r @number number of defending embedded characters
+function campaign_manager:pending_battle_cache_num_defender_embedded_characters(index)
+	if index ~= nil and (index < 0 or index > #self.pbc_defenders) then
+		script_error("ERROR: pending_battle_cache_num_defender_embedded_characters() called but supplied index [" .. tostring(index) .. "] is out of range");
+		return false;
+	end;
+
+	if index == nil then
+		local embedded_character_count = 0;
+		
+		for i = 1, self:pending_battle_cache_num_defenders() do
+			embedded_character_count = embedded_character_count + #self:pending_battle_cache_get_defender_embedded_character_subtypes(i);
+		end;
+		
+		return embedded_character_count;
+	else
+		return #self:pending_battle_cache_get_defender_embedded_character_subtypes(index);
 	end;
 end;
 
