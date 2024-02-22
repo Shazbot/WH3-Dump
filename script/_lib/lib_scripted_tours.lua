@@ -1498,6 +1498,7 @@ function navigable_tour:add_section_actions_on_start(current_section, current_se
 	local st = self.st;
 	local current_section_name = current_section.name;
 	local current_actions = current_section.actions;
+	self.section_currently_playing = false;
 
 	st:action(
 		function()

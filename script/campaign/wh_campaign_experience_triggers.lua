@@ -39,100 +39,16 @@ campaign_experience_triggers = {
 	xp_hero_target_character_success_bonus_10		= 300,		-- this is added if the assassination target is > rank 10
 	xp_hero_target_character_success_bonus_20		= 600,		-- this is added if the assassination target is > rank 20
 
-	subtype_groups  ={
-		hef_casters = {
-			wh2_dlc10_hef_mage_heavens = true,
-			wh2_dlc10_hef_mage_shadows = true,
-			wh2_dlc15_hef_archmage_beasts = true,
-			wh2_dlc15_hef_archmage_death = true,
-			wh2_dlc15_hef_archmage_fire = true,
-			wh2_dlc15_hef_archmage_heavens = true,
-			wh2_dlc15_hef_archmage_high = true,
-			wh2_dlc15_hef_archmage_life = true,
-			wh2_dlc15_hef_archmage_light = true,
-			wh2_dlc15_hef_archmage_metal = true,
-			wh2_dlc15_hef_archmage_shadows = true,
-			wh2_dlc15_hef_mage_beasts = true,
-			wh2_dlc15_hef_mage_death = true,
-			wh2_dlc15_hef_mage_fire = true,
-			wh2_dlc15_hef_mage_metal = true,
-			wh2_main_hef_mage_high = true,
-			wh2_main_hef_mage_life = true,
-			wh2_main_hef_mage_light = true,
-			wh2_main_hef_loremaster_of_hoeth = true
-		},
-		def_casters = {
-			wh2_dlc10_def_sorceress_beasts  = true,
-			wh2_dlc10_def_sorceress_death  = true,
-			wh2_dlc10_def_supreme_sorceress_beasts  = true,
-			wh2_dlc10_def_supreme_sorceress_dark  = true,
-			wh2_dlc10_def_supreme_sorceress_death  = true,
-			wh2_dlc10_def_supreme_sorceress_fire  = true,
-			wh2_dlc10_def_supreme_sorceress_shadow  = true,
-			wh2_main_def_sorceress_dark  = true,
-			wh2_main_def_sorceress_fire = true,
-			wh2_main_def_sorceress_shadow  = true,
-		},
-
-		chs_undivided = {
-			wh_dlc01_chs_kholek_suneater = true,
-			wh_dlc01_chs_sorcerer_lord_death = true,
-			wh_dlc01_chs_sorcerer_lord_fire = true,
-			wh_dlc01_chs_sorcerer_lord_metal = true,
-			wh_dlc07_chs_chaos_sorcerer_shadow = true,
-			wh_dlc07_chs_sorcerer_lord_shadow = true,
-			wh_main_chs_archaon = true,
-			wh_main_chs_chaos_sorcerer_death = true,
-			wh_main_chs_chaos_sorcerer_fire = true,
-			wh_main_chs_chaos_sorcerer_metal = true,
-			wh_main_chs_exalted_hero = true,
-			wh_main_chs_lord = true,
-			wh3_dlc20_chs_daemon_prince_undivided = true,
-		},
-
-		chs_slaanesh = {
-			wh3_main_sla_cultist = true,
-			wh3_dlc20_chs_lord_msla = true,
-			wh3_dlc20_chs_sorcerer_shadows_msla = true,
-			wh3_dlc20_chs_sorcerer_slaanesh_msla = true,
-			wh_dlc01_chs_prince_sigvald = true,
-			wh3_dlc20_sla_azazel = true,
-			wh3_dlc20_chs_daemon_prince_slaanesh = true,
-
-		},
-
-		chs_tzeentch = {
-			wh3_dlc20_chs_sorcerer_lord_metal_mtze = true,
-			wh3_dlc20_chs_sorcerer_lord_tzeentch_mtze = true,
-			wh3_dlc20_chs_sorcerer_metal_mtze = true,
-			wh3_dlc20_chs_sorcerer_tzeentch_mtze = true,
-			wh3_dlc20_tze_vilitch = true,
-			wh3_dlc20_chs_daemon_prince_tzeentch = true,
-
-		},
-
-		chs_nurgle = {
-			wh3_dlc20_chs_exalted_hero_mnur = true,
-			wh3_dlc20_chs_sorcerer_lord_death_mnur = true,
-			wh3_dlc20_chs_sorcerer_lord_nurgle_mnur = true,
-			wh3_dlc20_nur_festus = true,
-			wh3_dlc20_chs_daemon_prince_nurgle = true,
-		},
-
-		chs_khorne = {
-			wh3_dlc20_chs_exalted_hero_mkho = true,
-			wh3_dlc20_chs_lord_mkho = true,
-			wh3_dlc20_kho_valkia = true,
-			wh3_dlc20_chs_daemon_prince_khorne = true
-		},
-		saurus = {
-			wh2_dlc13_lzd_saurus_old_blood_horde = true,
-			wh2_main_lzd_saurus_old_blood = true,
-			wh2_main_lzd_saurus_scar_veteran = true
-		},
-		chd_convoy = {
-			wh3_dlc23_chd_lord_convoy_overseer = true,
-		}
+	subtype_groups = {
+		"hef_casters",
+		"def_casters",
+		"chs_undivided",
+		"chs_slaanesh",
+		"chs_tzeentch",
+		"chs_nurgle",
+		"chs_khorne",
+		"saurus",
+		"chd_convoy"
 	},
 
 	---bonus values that modify the xp gain from all sources
@@ -486,14 +402,12 @@ function campaign_experience_triggers:add_experience(context, is_general, value,
 end;
 
 function campaign_experience_triggers:get_xp_groups_for_character(character_interface)
-	local character_subtype = character_interface:character_subtype_key()
-
 	local groups = {}
 	local groups_found = false
 
-	for group_key, subtypes in pairs(self.subtype_groups) do
-		if subtypes[character_subtype] then
-			table.insert(groups, group_key)
+	for i = 1, #self.subtype_groups do
+		if character_interface:is_part_of_subtype_set(self.subtype_groups[i]) then
+			table.insert(groups, self.subtype_groups[i])
 			groups_found = true
 		end
 	end

@@ -1085,7 +1085,7 @@ core:add_listener(
 
 		local region_list = context:world():region_manager():region_list()
 		for i, start_region in model_pairs(region_list) do	
-			if cm:get_regions_bonus_value(start_region, "settlement_spread_to_province_ruin_chance") > 0 then
+			if cm:get_regions_bonus_value(start_region, "settlement_spread_to_province_ruin_chance") > 0 and not start_region:has_effect_bundle("wh2_dlc17_effect_bundle_defiled_bloodgrounds") then
 				local owner_key = start_region:owning_faction():name()
 				local province_regions = start_region:province():regions()
 				local source_spread_chance = cm:get_regions_bonus_value(start_region, "settlement_spread_to_province_ruin_chance") + cm:get_provinces_bonus_value(start_region:faction_province(), "settlement_spread_to_province_ruin_chance")

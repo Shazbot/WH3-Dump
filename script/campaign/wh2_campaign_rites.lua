@@ -983,7 +983,7 @@ function rite_unlock_listeners()
 		{
 			["culture"] = "wh2_main_lzd_lizardmen",
 			["rite_name"] = "wh2_dlc12_tehenhauin_sacrifice_of_chaqua",
-			["event_name"] = "ScriptEventSacrificeTier3Unlocked",
+			["event_name"] = "ScriptEventSacrificeTier2Unlocked",
 			["condition"] =
 				function(context)
 					local faction_key = context:faction():name();
@@ -1027,7 +1027,7 @@ function rite_unlock_listeners()
 		{
 			["culture"] = "wh2_main_lzd_lizardmen",
 			["rite_name"] = "wh2_dlc12_tehenhauin_sacrifice_of_incatol",
-			["event_name"] = "ScriptEventSacrificeTier2Unlocked",
+			["event_name"] = "ScriptEventSacrificeTier3Unlocked",
 			["condition"] =
 				function(context)
 					local faction_key = context:faction():name();

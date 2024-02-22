@@ -3804,20 +3804,9 @@ function prologue_lord_recruit_intervention()
 	uim:override("settlement_panel_lord_recruit_with_button_hidden"):set_allowed(true);
 	allow_hotkeys(false)
 
-	core:add_listener(
-		"PanelOpenedCampaignSettlementPanel",
-		"PanelOpenedCampaign",
-		function(context) return context.string == "settlement_panel" end,
-		function()
-			cm:callback(function() 
-				completely_lock_input(true)
-			end, 0.01)
-		end,
-		false			
-	)
-
 	local closest_region = cm:get_closest_settlement_from_faction_to_position(prologue_player_faction, cm:model():world():faction_by_key(prologue_player_faction):faction_leader():logical_position_x(), cm:model():world():faction_by_key(prologue_player_faction):faction_leader():logical_position_y())
 	common.call_context_command("CcoCampaignSettlement", closest_region:cqi(), "Select(false)");
+	completely_lock_input(true)
 
 	cm:disable_event_feed_events(false, "", "", "character_ready_for_duty_starting_general"); 
 
@@ -3828,7 +3817,6 @@ function prologue_lord_recruit_intervention()
 		cm:steal_escape_key(true)
 
 		core:remove_listener("FactionTurnStart_Lord_Recruitment_Listener");
-		core:remove_listener("PanelOpenedCampaignSettlementPanel")
 		
 		local tour_test_recruit_button = scripted_tour:new(
 			"test2_tour_recruit_button",

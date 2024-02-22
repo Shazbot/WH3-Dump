@@ -377,8 +377,12 @@ function campaign_traits:get_enemy_legendary_lords_in_last_battle(character)
 	local num_attackers = cm:pending_battle_cache_num_attackers();
 	local num_defenders = cm:pending_battle_cache_num_defenders();
 
-	if pb:night_battle() == true or pb:ambush_battle() == true then
+	if pb:night_battle() then
 		num_attackers = 1;
+		num_defenders = 1;
+	end
+
+	if pb:ambush_battle() then
 		num_defenders = 1;
 	end
 	

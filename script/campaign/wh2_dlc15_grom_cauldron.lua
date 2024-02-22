@@ -45,6 +45,9 @@ local ingredients_data = {
 			"wh_dlc07_brt_cav_royal_hippogryph_knights_0",
 			"wh2_dlc16_wef_mon_feral_manticore",
 			"wh3_main_ogr_mon_sabretusk_pack_0",
+			"wh3_dlc24_cth_mon_jade_lion",
+			"wh3_dlc24_cth_mon_jet_lion",
+			"wh3_dlc24_cth_mon_celestial_lion",
 			"wh2_dlc15_hef_cha_eltharion_the_grim_2",	-- mounts
 			"wh2_dlc15_hef_cha_prince_6",
 			"wh2_dlc15_hef_cha_princess_6",
@@ -84,8 +87,7 @@ local ingredients_data = {
 			"wh3_dlc23_chd_cha_sorcerer_prophet_hashut_lammasu",
 			"wh3_dlc23_chd_cha_sorcerer_prophet_metal_lammasu",
 			"wh3_dlc23_chd_cha_zhatan_the_black_lammasu",
-			"wh3_dlc24_cth_mon_jade_lion",
-			"wh3_dlc24_cth_mon_jet_lion"
+			"wh3_dlc24_cth_cha_celestial_general_yang_celestial_lion"
 		}
 	},
 	wh2_dlc15_lizard = {
@@ -392,7 +394,9 @@ local ingredients_data = {
 			"wh3_dlc23_chd_cav_bull_centaurs_dual_axe",
 			"wh3_dlc23_chd_cav_bull_centaurs_dual_axe_ror",
 			"wh3_dlc23_chd_cav_bull_centaurs_greatweapons",
-			"wh3_dlc23_chd_cha_bull_centaur_taurruk"
+			"wh3_dlc23_chd_cha_bull_centaur_taurruk",
+			"wh3_dlc24_bst_inf_centigors_great_weapons_mtze",
+			"wh3_dlc24_tze_inf_centigors_great_weapons"
 		}
 	},
 	wh2_dlc15_yolk = {

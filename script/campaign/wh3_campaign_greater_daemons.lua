@@ -47,27 +47,32 @@ greater_daemons = {
 			dilemma = "wh3_dlc20_dilemma_daemon_prince_ascension",
 			incident = "wh3_dlc20_incident_daemon_prince_ascension"
 		},
-		wh3_dlc20_chs_lord_msla						= {
+		wh3_dlc20_chs_lord_msla	= {
 			agent = "wh3_dlc20_chs_daemon_prince_slaanesh",
 			dilemma = "wh3_dlc20_dilemma_daemon_prince_ascension",
 			incident = "wh3_dlc20_incident_daemon_prince_ascension"
 		},
-		wh3_dlc20_chs_sorcerer_lord_death_mnur			= {
+		wh3_dlc24_chs_lord_mtze = {
+			agent = "wh3_dlc20_chs_daemon_prince_tzeentch",
+			dilemma = "wh3_dlc20_dilemma_daemon_prince_ascension",
+			incident = "wh3_dlc20_incident_daemon_prince_ascension"
+		},
+		wh3_dlc20_chs_sorcerer_lord_death_mnur = {
 			agent = "wh3_dlc20_chs_daemon_prince_nurgle",
 			dilemma = "wh3_dlc20_dilemma_daemon_prince_ascension",
 			incident = "wh3_dlc20_incident_daemon_prince_ascension"
 		},
-		wh3_dlc20_chs_sorcerer_lord_nurgle_mnur			= {
+		wh3_dlc20_chs_sorcerer_lord_nurgle_mnur = {
 			agent = "wh3_dlc20_chs_daemon_prince_nurgle",
 			dilemma = "wh3_dlc20_dilemma_daemon_prince_ascension",
 			incident = "wh3_dlc20_incident_daemon_prince_ascension"
 		},
-		wh3_dlc20_chs_sorcerer_lord_metal_mtze			= {
+		wh3_dlc20_chs_sorcerer_lord_metal_mtze = {
 			agent = "wh3_dlc20_chs_daemon_prince_tzeentch", 
 			dilemma = "wh3_dlc20_dilemma_daemon_prince_ascension",
 			incident = "wh3_dlc20_incident_daemon_prince_ascension",
 		},
-		wh3_dlc20_chs_sorcerer_lord_tzeentch_mtze		= {
+		wh3_dlc20_chs_sorcerer_lord_tzeentch_mtze = {
 			agent =  "wh3_dlc20_chs_daemon_prince_tzeentch",
 			dilemma = "wh3_dlc20_dilemma_daemon_prince_ascension",
 			incident = "wh3_dlc20_incident_daemon_prince_ascension"

@@ -465,7 +465,7 @@ local function add_narrative_data_for_playable_faction(faction_key)
 		local mission_rewards = {payload.money(1000, faction_key)}
 		
 		if cm:get_campaign_name() == "wh3_main_chaos" then
-			table.insert(mission_rewards, payload.agent_for_faction(faction_key, "engineer", "wh3_main_cth_alchemist"))
+			table.insert(mission_rewards, payload.agent_for_faction(faction_key, "champion", "wh3_dlc24_cth_gate_master"))
 		end
 		
 		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_key", "wh3_dlc24_camp_narrative_chaos_yuan_bo_defeat_initial_enemy_01");				-- mission key

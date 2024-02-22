@@ -10,88 +10,96 @@ CUS.default_xp_proportion = 0.5
 CUS.initiative_to_agent_junctions = {
 	wh3_dlc20_character_initiative_devote_exalted_hero_to_khorne = {
 		type = "champion",
-		subtype = "wh3_dlc20_chs_exalted_hero_mkho",
-		},
+		subtype = "wh3_dlc20_chs_exalted_hero_mkho"
+	},
 	wh3_dlc20_character_initiative_devote_exalted_hero_to_nurgle = {
 		type = "champion",
-		subtype ="wh3_dlc20_chs_exalted_hero_mnur",
-		xp_proportion =  0.5},
+		subtype = "wh3_dlc20_chs_exalted_hero_mnur"
+	},
+	wh3_dlc24_character_initiative_devote_exalted_hero_to_tzeentch = {
+		type = "champion",
+		subtype = "wh3_dlc24_chs_exalted_hero_mtze"
+	},
 	wh3_dlc20_character_initiative_devote_sorceror_to_slaanesh_shadows = {
 		type = "wizard",
-		subtype ="wh3_dlc20_chs_sorcerer_shadows_msla",
-		},
+		subtype = "wh3_dlc20_chs_sorcerer_shadows_msla"
+	},
 	wh3_dlc20_character_initiative_devote_sorceror_to_slaanesh_slaanesh = {
 		type = "wizard",
-		subtype ="wh3_dlc20_chs_sorcerer_slaanesh_msla",
-		xp_proportion =  0.5},
+		subtype = "wh3_dlc20_chs_sorcerer_slaanesh_msla"
+	},
 	wh3_dlc20_character_initiative_devote_sorceror_to_tzeentch_metal = {
 		type = "wizard",
-		subtype ="wh3_dlc20_chs_sorcerer_metal_mtze", 
-		},
+		subtype = "wh3_dlc20_chs_sorcerer_metal_mtze"
+	},
 	wh3_dlc20_character_initiative_devote_sorceror_to_tzeentch_tzeentch = {
 		type = "wizard",
-		subtype ="wh3_dlc20_chs_sorcerer_tzeentch_mtze",
-		},
+		subtype = "wh3_dlc20_chs_sorcerer_tzeentch_mtze"
+	},
 	wh3_dlc20_character_initiative_devote_lord_to_khorne = {
 		type = "general",
-		subtype = "wh3_dlc20_chs_lord_mkho",
-		},
+		subtype = "wh3_dlc20_chs_lord_mkho"
+	},
 	wh3_dlc20_character_initiative_devote_lord_to_slaanesh = {
 		type = "general",
-		subtype ="wh3_dlc20_chs_lord_msla",
-		},
+		subtype = "wh3_dlc20_chs_lord_msla"
+	},
+	wh3_dlc24_character_initiative_devote_lord_to_tzeentch = {
+		type = "general",
+		subtype = "wh3_dlc24_chs_lord_mtze"
+	},
 	wh3_dlc20_character_initiative_devote_sorceror_lord_to_nurgle_death = {
 		type = "general",
-		subtype = "wh3_dlc20_chs_sorcerer_lord_death_mnur",
-		},
+		subtype = "wh3_dlc20_chs_sorcerer_lord_death_mnur"
+	},
 	wh3_dlc20_character_initiative_devote_sorceror_lord_to_nurgle_nurgle = {
 		type = "general",
-		subtype ="wh3_dlc20_chs_sorcerer_lord_nurgle_mnur",
-		},
+		subtype = "wh3_dlc20_chs_sorcerer_lord_nurgle_mnur"
+	},
 	wh3_dlc20_character_initiative_devote_sorceror_lord_to_tzeentch_metal = {
-		type ="general", 
-		subtype ="wh3_dlc20_chs_sorcerer_lord_metal_mtze", 
-		},
+		type = "general", 
+		subtype = "wh3_dlc20_chs_sorcerer_lord_metal_mtze"
+	},
 	wh3_dlc20_character_initiative_devote_sorceror_lord_to_tzeentch_tzeentch = {
-		type ="general",
-		subtype ="wh3_dlc20_chs_sorcerer_lord_tzeentch_mtze", 
-		},
+		type = "general",
+		subtype = "wh3_dlc20_chs_sorcerer_lord_tzeentch_mtze"
+	},
 	wh3_dlc20_character_initiative_ascend_lord_to_daemon_prince_khorne = {
-		type ="general",
-		subtype ="wh3_dlc20_chs_daemon_prince_khorne", 
-		}, 
+		type = "general",
+		subtype = "wh3_dlc20_chs_daemon_prince_khorne"
+	},
 	wh3_dlc20_character_initiative_ascend_lord_to_daemon_prince_nurgle = {
-		type ="general", 
-		subtype ="wh3_dlc20_chs_daemon_prince_nurgle", 
-		}, 
+		type = "general", 
+		subtype = "wh3_dlc20_chs_daemon_prince_nurgle"
+	},
 	wh3_dlc20_character_initiative_ascend_lord_to_daemon_prince_slaanesh = {
-		type ="general", 
-		subtype = "wh3_dlc20_chs_daemon_prince_slaanesh",
-		}, 
+		type = "general", 
+		subtype = "wh3_dlc20_chs_daemon_prince_slaanesh"
+	},
 	wh3_dlc20_character_initiative_ascend_lord_to_daemon_prince_tzeentch = {
-		type ="general",
-		subtype ="wh3_dlc20_chs_daemon_prince_tzeentch",
-		}, 
+		type = "general",
+		subtype = "wh3_dlc20_chs_daemon_prince_tzeentch"
+	},
 	wh3_dlc20_character_initiative_ascend_lord_to_daemon_prince_undivided = {
-		type ="general",
-		subtype ="wh3_dlc20_chs_daemon_prince_undivided",
-		},
+		type = "general",
+		subtype = "wh3_dlc20_chs_daemon_prince_undivided"
+	},
 	wh3_dlc20_character_initiative_ascend_lord_to_daemon_prince_khorne_from_und = {
-		type ="general",
-		subtype ="wh3_dlc20_chs_daemon_prince_khorne", 
-		}, 
+		type = "general",
+		subtype = "wh3_dlc20_chs_daemon_prince_khorne",
+	},
 	wh3_dlc20_character_initiative_ascend_lord_to_daemon_prince_nurgle_from_und = {
-		type ="general", 
-		subtype ="wh3_dlc20_chs_daemon_prince_nurgle",
-		}, 
+		type = "general", 
+		subtype = "wh3_dlc20_chs_daemon_prince_nurgle"
+	},
 	wh3_dlc20_character_initiative_ascend_lord_to_daemon_prince_slaanesh_from_und = {
-		type ="general", 
-		subtype = "wh3_dlc20_chs_daemon_prince_slaanesh",
-		}, 
+		type = "general", 
+		subtype = "wh3_dlc20_chs_daemon_prince_slaanesh"
+	},
 	wh3_dlc20_character_initiative_ascend_lord_to_daemon_prince_tzeentch_from_und = {
-		type ="general",
-		subtype ="wh3_dlc20_chs_daemon_prince_tzeentch",
-		}, 
+		type = "general",
+		subtype = "wh3_dlc20_chs_daemon_prince_tzeentch"
+	}
 }
 
 

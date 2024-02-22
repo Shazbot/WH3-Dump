@@ -220,7 +220,8 @@ mother_ostankya_features = {
 			start_unlocked = true
 		}
 	},
-	ai_cook_recipe_turns_interval = 4
+	ai_cook_recipe_turns_interval = 4,
+	ai_max_recipes = 10
 }
 
 function mother_ostankya_features:initialise()
@@ -363,14 +364,17 @@ function mother_ostankya_features:initialise()
 			true,
 			function()
 				if not ostankya_faction_obj:is_dead() then
-					local possible_recipes = {}
 					local faction_cco = cco("CcoCampaignFaction", self.ostankya_faction)
-					
-					for i = 0, faction_cco:Call("CookingSystem.GetPossibleRecipeRecords.Size") - 1 do
-						table.insert(possible_recipes, faction_cco:Call("CookingSystem.GetPossibleRecipeRecords.At(" .. i .. ").Key"))
+
+					if faction_cco:Call("CookingSystem.StoredCookingDishList.Size") < self.ai_max_recipes then
+						local possible_recipes = {}
+						
+						for i = 0, faction_cco:Call("CookingSystem.GetPossibleRecipeRecords.Size") - 1 do
+							table.insert(possible_recipes, faction_cco:Call("CookingSystem.GetPossibleRecipeRecords.At(" .. i .. ").Key"))
+						end
+						local recipe = possible_recipes[cm:random_number(#possible_recipes)]
+						cm:force_cook_recipe(ostankya_faction_obj, recipe, false, false)
 					end
-					local recipe = possible_recipes[cm:random_number(#possible_recipes)]
-					cm:force_cook_recipe(ostankya_faction_obj, recipe, false, false)
 				end
 				
 				cm:add_turn_countdown_event(self.ostankya_faction, self.ai_cook_recipe_turns_interval, "ScriptEventAIOstankyaCooksRecipe")
@@ -387,7 +391,7 @@ function mother_ostankya_features:initialise()
 		end,
 		function(context)
 			local faction = context:faction()
-			
+
 			-- add spirit essence when a province has low corruption
 			for _, province in model_pairs(faction:provinces()) do
 				local region = province:regions():item_at(0)

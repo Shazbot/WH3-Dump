@@ -618,7 +618,7 @@ function Bloodgrounds:update_effect_bundles_for_bloodgrounds()
 				end
 			end
 
-			if not bundle_found then
+			if not bundle_found or bloodground.pending_removal then
 				table.insert(bundles_to_remove, bundle_key)
 			end
 		end

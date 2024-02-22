@@ -159,8 +159,7 @@ function cult_of_sotek:start_prophecy_2()
 		end
 	end
 	
-	for i = 1, #skaven_faction_list do							
-		cm:apply_effect_bundle("wh2_dlc12_prophecy_of_sotek_stage_2_skaven", skaven_faction_list[i], -1)
+	for i = 1, #skaven_faction_list do
 		cm:force_diplomacy("faction:" .. self.faction_key, "faction:" .. skaven_faction_list[i], "peace", false, false, true)
 	end
 end

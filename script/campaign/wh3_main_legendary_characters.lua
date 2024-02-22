@@ -93,7 +93,9 @@ character_unlocking.character_list = {
 	"ulrika",		
 	"harald",
 	"scribes",
-	"aekold"
+	"aekold",
+	"saytang",
+	"leysa"
 }
 character_unlocking.character_data = {
 	kroak = {
@@ -560,6 +562,135 @@ character_unlocking.character_data = {
 			}
 		},
 		trigger_dilemma_key = "wh3_dlc24_tze_aekold_helbras_choice",
+		alt_reward_dilemma_triggered = false
+	},
+	saytang = {
+		-- Cathayan players will get a mission to unlock Saytang once their faction leader reaches rank 13.
+		-- If there are no human Cathayan players the strongest Cathay faction will get Saytang after 30 turns
+		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
+		ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.turn,
+		alternate_grant_condition = character_unlocking.character_alternate_grant_condition_types.dilemma_payload,
+		unlock_rank = 13,
+		ai_unlock_turn = 30,
+		has_spawned = false,
+		name = "saytang",
+		subtype = "wh3_dlc24_cth_saytang_the_watcher",
+		require_dlc = "TW_WH3_SHADOWS_OF_CHANGE",
+		allowed_cultures = {
+			"wh3_main_cth_cathay"
+		},
+		factions_involved = {},
+		mission_keys = {
+			wh3_dlc24_cth_the_celestial_court = {
+				["main_warhammer"] = "wh3_dlc24_mis_ie_cth_saytang_unlock_01",
+				["wh3_main_chaos"] = "wh3_dlc24_mis_cth_saytang_unlock_01"
+			},
+			wh3_main_cth_the_northern_provinces = {
+				["main_warhammer"] = "wh3_dlc24_mis_ie_cth_saytang_unlock_01",
+				["wh3_main_chaos"] = "wh3_dlc24_mis_cth_saytang_unlock_01"
+			},
+			wh3_main_cth_the_western_provinces = {
+				["main_warhammer"] = "wh3_dlc24_mis_ie_cth_saytang_unlock_01",
+				["wh3_main_chaos"] = "wh3_dlc24_mis_cth_saytang_unlock_01"
+			},
+		},
+		dilemma_keys = {
+			"wh3_dlc24_cth_saytang_choice"
+		},
+		spawn_hero_dilemma_choice = {0,1},
+		ancillaries = {
+			"wh3_dlc24_anc_weapon_wind_bow"
+		},
+		mission_chain_keys = {
+			main_warhammer = {
+				"wh3_dlc24_mis_ie_cth_saytang_unlock_01",
+				"wh3_dlc24_mis_ie_cth_saytang_unlock_02",
+			},
+			wh3_main_chaos = {
+				"wh3_dlc24_mis_cth_saytang_unlock_01",
+				"wh3_dlc24_mis_cth_saytang_unlock_02",
+			}
+		},
+		missions_to_trigger_dilemma = {
+			main_warhammer = {
+				"wh3_dlc24_mis_ie_cth_saytang_unlock_02",
+			},
+			wh3_main_chaos = {
+				"wh3_dlc24_mis_cth_saytang_unlock_02",
+			}
+		},
+		trigger_dilemma_key = "wh3_dlc24_cth_saytang_choice",
+		alt_reward_dilemma_triggered = false
+	},
+	leysa = {
+		-- Kislevite players will get a mission to unlock the Golden Knight, Leysa once their faction leader reaches rank 11
+		-- If there are no human Kislevite players the strongest Kislev faction will get the Golden Knight after 30 turns
+
+		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
+		ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.turn,
+		alternate_grant_condition = character_unlocking.character_alternate_grant_condition_types.dilemma_payload,
+		unlock_rank = 11,
+		ai_unlock_turn = 30,
+		has_spawned = false,
+		name = "leysa",
+		subtype = "wh3_dlc24_ksl_the_golden_knight",
+		require_dlc = "TW_WH3_SHADOWS_OF_CHANGE",
+		allowed_cultures = {
+			"wh3_main_ksl_kislev"
+		},
+		factions_involved = {},
+		mission_keys = {
+			wh3_main_ksl_the_ice_court = {
+				["main_warhammer"] = "wh3_dlc24_mis_ie_ksl_golden_knight_unlock_01",
+				["wh3_main_chaos"] = "wh3_dlc24_mis_ksl_golden_knight_unlock_01"
+			},
+			wh3_main_ksl_the_great_orthodoxy = {
+				["main_warhammer"] = "wh3_dlc24_mis_ie_ksl_golden_knight_unlock_01",
+				["wh3_main_chaos"] = "wh3_dlc24_mis_ksl_golden_knight_unlock_01"
+			},
+			wh3_main_ksl_ursun_revivalists = {
+				["main_warhammer"] = "wh3_dlc24_mis_ie_ksl_golden_knight_unlock_01",
+				["wh3_main_chaos"] = "wh3_dlc24_mis_ksl_golden_knight_unlock_01"
+			},
+			wh3_dlc24_ksl_daughters_of_the_forest = {
+				["main_warhammer"] = "wh3_dlc24_mis_ie_ksl_golden_knight_unlock_ostankya_01",
+				["wh3_main_chaos"] = "wh3_dlc24_mis_ksl_golden_knight_unlock_ostankya_01"
+			},
+		},
+		dilemma_keys = {
+			"wh3_dlc24_ksl_golden_knight_choice"
+		},
+		spawn_hero_dilemma_choice = {0,1},
+		ancillaries = {
+			"wh3_dlc24_anc_weapon_ursuns_claw",
+			"wh3_dlc24_anc_enchanted_item_totem_of_ursus",
+			"wh3_dlc24_anc_talisman_blessing_wafers"
+		},
+		mission_chain_keys = {
+			main_warhammer = {
+				"wh3_dlc24_mis_ie_ksl_golden_knight_unlock_01",
+				"wh3_dlc24_mis_ie_ksl_golden_knight_unlock_02",
+				"wh3_dlc24_mis_ie_ksl_golden_knight_unlock_ostankya_01",
+				"wh3_dlc24_mis_ie_ksl_golden_knight_unlock_ostankya_02",
+			},
+			wh3_main_chaos = {
+				"wh3_dlc24_mis_ksl_golden_knight_unlock_01",
+				"wh3_dlc24_mis_ksl_golden_knight_unlock_02",
+				"wh3_dlc24_mis_ksl_golden_knight_unlock_ostankya_01",
+				"wh3_dlc24_mis_ksl_golden_knight_unlock_ostankya_02",
+			}
+		},
+		missions_to_trigger_dilemma = {
+			main_warhammer = {
+				"wh3_dlc24_mis_ie_ksl_golden_knight_unlock_02",
+				"wh3_dlc24_mis_ie_ksl_golden_knight_unlock_ostankya_02",
+			},
+			wh3_main_chaos = {
+				"wh3_dlc24_mis_ksl_golden_knight_unlock_02",
+				"wh3_dlc24_mis_ksl_golden_knight_unlock_ostankya_02",
+			}
+		},
+		trigger_dilemma_key = "wh3_dlc24_ksl_golden_knight_choice",
 		alt_reward_dilemma_triggered = false
 	}
 }

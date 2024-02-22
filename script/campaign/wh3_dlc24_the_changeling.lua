@@ -2088,7 +2088,7 @@ function the_changeling_features:initialise()
 		"the_changeling_cult_created",
 		"ForeignSlotManagerCreatedEvent",
 		function(context)
-			return context:requesting_faction():name() == self.faction_key
+			return context:requesting_faction():name() == self.faction_key and not context:is_allied()
 		end,
 		function(context)
 			local region = context:region()

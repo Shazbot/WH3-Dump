@@ -163,6 +163,7 @@
 							</delete_holder>
 						</savegames>
 					</body>
+					<fetch_all_saves_warning_text this="6520328A-39D7-4C0A-AE23A2BD29546019"/>
 				</centre_docker>
 				<footer this="20BBDA46-3705-4750-BA68B806A44ACCC6">
 					<button_holder this="EE521E97-F6F4-4B29-BB6023024AF0DB30">
@@ -184,7 +185,6 @@
 					<button_fetch_all_saves this="8B5AFEDB-DAB7-4330-AD8EAF8D2CEE8179">
 						<button_flame this="AE4D9327-848B-4519-9E95078F95648639"/>
 						<button_txt this="E767AE07-5C35-404F-87C31B0D07A4ACB3"/>
-						<warning_text this="6520328A-39D7-4C0A-AE23A2BD29546019"/>
 					</button_fetch_all_saves>
 				</footer>
 			</load_save_game>
@@ -485,9 +485,9 @@
 			uniqueguid_in_template="D8275039-5A3B-40C0-974330DBC4409AFD"
 			uniqueguid="8B5AFEDB-DAB7-4330-AD8EAF8D2CEE8179"
 			dimensions="361.00,51.00"
-			dock_point="Bottom Left"
+			dock_point="Center Left"
 			tooltips_localised="false"
-			offset="50.00,0.00"
+			offset="-25.00,4.00"
 			priority="55"
 			sound_category="UI_FE_HUD_Start_Campaign_Battle">
 			<state_uniqueguids>
@@ -526,6 +526,9 @@
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context callback_id="TextButton"/>
+				<callback_with_context
+					callback_id="ContextCommandGiverOnCreate"
+					context_function_id="(x_offset = GetIfElse(IsContextValid(FrontendRoot), 43, -25)) =&gt; { self.SetDockOffset(x_offset, 4) }"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -4250,10 +4253,11 @@
 		<button_holder
 			this="EE521E97-F6F4-4B29-BB6023024AF0DB30"
 			id="button_holder"
-			offset="774.00,12.00"
+			offset="774.00,16.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			docking="Center"
+			dock_offset="0.00,4.00"
 			component_anchor_point="0.50,0.50"
 			priority="55"
 			tooltipslocalised="true"
@@ -4313,7 +4317,7 @@
 				<newstate
 					this="EF230797-8937-4F49-9B008FA01FE5D496"
 					name="NewState"
-					width="368"
+					width="470"
 					interactive="true"
 					uniqueguid="EF230797-8937-4F49-9B008FA01FE5D496"/>
 			</states>
@@ -5092,7 +5096,7 @@
 		<tx_incremental_autosave
 			this="ED3F3F37-142E-4B89-A6C0D37C7D050701"
 			id="tx_incremental_autosave"
-			offset="133.00,0.00"
+			offset="235.00,0.00"
 			allowverticalresize="false"
 			priority="60"
 			componentleveltooltip="{{tr:incremental_autosave_tooltip}}"
@@ -5151,16 +5155,16 @@
 				<newstate
 					this="1AF7E958-0729-4502-88012CB2B8D9C15D"
 					name="NewState"
-					width="123"
+					width="225"
 					interactive="true"
 					uniqueguid="1AF7E958-0729-4502-88012CB2B8D9C15D">
 					<component_text
-						text="Save to cloud"
+						text="Store manual saves on cloud"
 						textvalign="Center"
 						textxoffset="32.00,0.00"
 						texthbehaviour="Resize"
 						textlocalised="true"
-						textlabel="tx_cloud_NewState_Text_490002"
+						textlabel="StateText_79416632"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
@@ -5855,7 +5859,7 @@
 		<text_input_autosave_limit
 			this="7203CB63-8F03-44CA-94349C69AB31482B"
 			id="text_input_autosave_limit"
-			offset="325.00,4.00"
+			offset="427.00,4.00"
 			allowverticalresize="false"
 			priority="60"
 			tooltipslocalised="true"
@@ -6095,14 +6099,13 @@
 				</columnwidths>
 			</LayoutEngine>
 		</load_panel>
-		<warning_text
+		<fetch_all_saves_warning_text
 			this="6520328A-39D7-4C0A-AE23A2BD29546019"
-			id="warning_text"
-			offset="-51.00,-198.00"
+			id="fetch_all_saves_warning_text"
+			offset="0.00,582.00"
 			allowhorizontalresize="false"
-			docking="Top Left External"
-			dock_offset="110.00,-20.00"
-			component_anchor_point="1.00,1.00"
+			docking="Bottom Left"
+			component_anchor_point="-0.00,1.00"
 			priority="55"
 			tooltipslocalised="true"
 			tooltiplabel="ComponentText_4cfd18b2f"
@@ -6124,6 +6127,7 @@
 					height="178"
 					uniqueguid="EA6EB15B-D359-49A7-A727A7C1A1C9B822">
 					<component_text
+						texthalign="Center"
 						textxoffset="5.00,5.00"
 						textyoffset="5.00,5.00"
 						texthbehaviour="Resize"
@@ -6135,7 +6139,7 @@
 						fontcat_name="body_12"/>
 				</default>
 			</states>
-		</warning_text>
+		</fetch_all_saves_warning_text>
 		<button_delete_playthrough
 			this="DC9BDACE-7BC7-4ECA-A2AE5E5D08D302EC"
 			id="button_delete_playthrough"
