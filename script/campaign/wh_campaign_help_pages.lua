@@ -11554,7 +11554,8 @@ function setup_campaign_help_pages()
 		hpr_normal("war.camp.hp.trickster_cults.003"),
 		hpr_normal("war.camp.hp.trickster_cults.004"),
 		hpr_normal("war.camp.hp.trickster_cults.005"),
-		hpr_normal("war.camp.hp.trickster_cults.006")
+		hpr_normal("war.camp.hp.trickster_cults.006"),
+		hpr_normal("war.camp.hp.trickster_cults.007")
 	);
 	parser:add_record("campaign_trickster_cults", "script_link_campaign_trickster_cults", "tooltip_campaign_trickster_cults");
 	tp_trickster_cults = tooltip_patcher:new("tooltip_campaign_trickster_cults");

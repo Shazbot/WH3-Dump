@@ -805,8 +805,8 @@ end;
 --- @p object second collection
 --- @p [opt=false] boolean non-routing only, Disregard routing or dead units from inclusion in the result.
 --- @p return number Closest distance in m between forces
---- @p return obj Closest ojbect from first supplied force, a @script_unit or a @battle_unit
---- @p return obj Closest ojbect from second supplied force, a @script_unit or a @battle_unit
+--- @p return obj Closest object from first supplied force, a @script_unit or a @battle_unit
+--- @p return obj Closest object from second supplied force, a @script_unit or a @battle_unit
 function distance_between_forces(a, b, standing_only)
 	local closest_distance = 50000;
 	local closest_obj_a = false;
@@ -904,7 +904,7 @@ end;
 
 function distance_between_forces_test(unit, obj, standing_only)	
 	-- do the test if we're not only searching for routing units AND the unit is routing
-	if unit:is_valid_target() or unit:is_hidden() and not (standing_only and is_routing_or_dead(unit)) then
+	if unit:is_deployed() and (unit:is_valid_target() or unit:is_hidden() and not (standing_only and is_routing_or_dead(unit))) then
 		local closest_unit, closest_distance, closest_sunit = get_closest_unit(obj, unit:position(), standing_only)
 		
 		if closest_sunit then

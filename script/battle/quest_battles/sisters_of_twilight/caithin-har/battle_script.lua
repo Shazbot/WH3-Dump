@@ -181,7 +181,7 @@ ga_enemy_beastmen_ambusher_army_right:release_on_message("right_flank_engaged");
 
 
 ga_enemy_beastmen_ambusher_army_left:reinforce_on_message("left_flank_alerted",150000);
-ga_enemy_beastmen_ambusher_army_left:message_on_any_deployed("left_flank_alerted"); 
+ga_enemy_beastmen_ambusher_army_left:message_on_any_deployed("left_flank_advance"); 
 ga_enemy_beastmen_ambusher_army_left:attack_on_message("left_flank_advance");
 ga_enemy_beastmen_ambusher_army_left:message_on_proximity_to_enemy("left_flank_engaged",200);
 ga_enemy_beastmen_ambusher_army_left:release_on_message("left_flank_engaged");

@@ -1829,10 +1829,16 @@ function the_changeling_features:initialise()
 		function(context)
 			local faction = context:faction()
 			local cults = faction:foreign_slot_managers()
-			
+			local has_no_armies = faction:military_force_list():is_empty()
+
 			for cult_index = 0, cults:num_items() - 1 do
 				local cult = cults:item_at(cult_index)
 				local region = cult:region()
+
+				-- reveal cult if changeling has no armies
+				if has_no_armies and not region:is_abandoned() then
+					cm:foreign_slot_set_reveal_to_faction(region:owning_faction(), cult)
+				end
 
 				-- Expand cults
 				local expand_chance = cm:get_regions_bonus_value(region, self.cult_expansion_chance_bonus_value)
@@ -1881,6 +1887,27 @@ function the_changeling_features:initialise()
 
 			end
 			
+		end,
+		true
+	)
+
+	-- reveal cult if changeling loses a battle in that region
+	core:add_listener(
+		"the_changeling_loses_battle",
+		"BattleCompleted",
+		function()
+			return cm:pending_battle_cache_faction_lost_battle(self.faction_key) and not cm:model():pending_battle():region_data():region():is_null_interface()
+		end,
+		function(context)
+			local region = cm:model():pending_battle():region_data():region()
+
+			if not region:is_abandoned() then
+				local foreign_slot_manager = region:foreign_slot_manager_for_faction(self.faction_key)
+				
+				if foreign_slot_manager:is_null_interface() == false and foreign_slot_manager:slots():item_at(0):template_key() == self.slot_template then
+					cm:foreign_slot_set_reveal_to_faction(region:owning_faction(), foreign_slot_manager)
+				end
+			end
 		end,
 		true
 	)
