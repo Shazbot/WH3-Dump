@@ -32,7 +32,6 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 		
 			out.design("banditExtort action called")
 			local dilemma_name = "wh3_main_dilemma_cth_caravan_battle_1A";
-			local caravan = caravan_handle;
 			
 			--Decode the string into arguments-- read_out_event_params explains encoding
 			local decoded_args = caravans:read_out_event_params(event_conditions,3);
@@ -45,18 +44,30 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			local bandit_threat = tonumber(decoded_args[3]);
 		
 			local attacking_force = caravans:generate_attackers(bandit_threat, "");
+
+			local cargo_reduction = -200;
+
+			-- reduce the amount of cargo reduction based on any bonus values the character has
+			local character = caravan_handle:caravan_master():character();
+			if not character:is_null_interface() then
+				local bv_reduction = cm:get_characters_bonus_value(character, "caravan_lower_toll");
+
+				if bv_reduction < 0 then
+					cargo_reduction = cargo_reduction + cargo_reduction * (bv_reduction / 100);
+				end;
+			end;
 			
 			--Handles the custom options for the dilemmas, such as battles (only?)
 			local enemy_cqi = caravans:attach_battle_to_dilemma(
 				dilemma_name,
-				caravan,
+				caravan_handle,
 				attacking_force,
 				is_ambush,
 				target_faction,
 				enemy_faction,
 				target_region,
 				function()
-					cm:set_caravan_cargo(caravan_handle, caravan_handle:cargo() - 200)
+					cm:set_caravan_cargo(caravan_handle, caravan_handle:cargo() + cargo_reduction)
 				end
 			);
 			out.design(enemy_cqi);
@@ -74,7 +85,7 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			payload_builder:clear();
 			
 			local cargo_bundle = cm:create_new_custom_effect_bundle("wh3_main_dilemma_cth_caravan_2_b");
-			cargo_bundle:add_effect("wh3_main_effect_caravan_cargo_DUMMY", "force_to_force_own", -200);
+			cargo_bundle:add_effect("wh3_main_effect_caravan_cargo_DUMMY", "force_to_force_own", cargo_reduction);
 			cargo_bundle:set_duration(0);
 			
 			payload_builder:effect_bundle_to_force(caravan_handle:caravan_force(), cargo_bundle);
@@ -133,7 +144,6 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			
 			out.design("banditAmbush action called")
 			local dilemma_name = "wh3_main_dilemma_cth_caravan_battle_2A";
-			local caravan = caravan_handle;
 			
 			--Decode the string into arguments-- Need to specify the argument encoding
 			local decoded_args = caravans:read_out_event_params(event_conditions,3);
@@ -146,10 +156,21 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			local bandit_threat = tonumber(decoded_args[3]);
 			local attacking_force = caravans:generate_attackers(bandit_threat)
 			
-			
-			--If anti ambush skill, then roll for detected event, if passed trigger event with battle
-			-- else just ambush
-			if caravan:caravan_master():character_details():has_skill("wh3_main_skill_cth_caravan_master_scouts") or cm:random_number(3,0) == 3 then
+			-- there's a 33.3% chance of it being an ambush battle, this can be reduced by a bonus value
+			local ambush_chance = 333;
+
+			local character = caravan_handle:caravan_master():character();
+
+			if not character:is_null_interface() then
+				local bv_ambush_chance_reduction = cm:get_characters_bonus_value(character, "caravan_scouts");
+
+				if bv_ambush_chance_reduction ~= 0 then
+					ambush_chance = ambush_chance + ambush_chance * (bv_ambush_chance_reduction / 100);
+				end;
+			end;
+
+			if cm:random_number(1000) > ambush_chance then
+				-- regular land battle
 				local enemy_cqi = caravans:attach_battle_to_dilemma(
 					dilemma_name,
 					caravan,
@@ -161,13 +182,12 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 					nil
 				);
 				
-				--Trigger dilemma to be handled by aboove function
+				--Trigger dilemma to be handled by above function
 				local faction_cqi = caravan_handle:caravan_force():faction():command_queue_index();
 				local settlement_target = cm:get_region(target_region):settlement();
 				
 				out.design("Triggering dilemma:"..dilemma_name)
-					
-				--Trigger dilemma to be handled by above function
+				
 				local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
 				local payload_builder = cm:create_payload();
 				
@@ -183,8 +203,7 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 				out.design("Triggering dilemma:"..dilemma_name)
 				cm:launch_custom_dilemma_from_builder(dilemma_builder, caravan_handle:caravan_force():faction());
 			else
-				--Immidiately ambush
-				--create_caravan_battle(caravan, attacking_force, target_region, true)
+				-- ambush battle
 				caravans:spawn_caravan_battle_force(caravan, attacking_force, target_region, true, true);
 			end;
 		end,
@@ -314,12 +333,11 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			local eventname = "genericShortcut".."?";
 			local probability = 2;
 			
-			local has_scouting = world_conditions["caravan_master"]:character_details():has_skill(
-				"wh3_main_skill_cth_caravan_master_wheelwright");
-			
-			if has_scouting == true then
-				probability = probability + 6
-			end
+			local character = world_conditions["caravan_master"]:character();
+
+			if not character:is_null_interface() then
+				probability = probability + cm:get_characters_bonus_value(character, "caravan_double_move")
+			end;
 			
 			return {probability,eventname}
 			

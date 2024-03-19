@@ -1896,7 +1896,8 @@ function the_changeling_features:initialise()
 		"the_changeling_loses_battle",
 		"BattleCompleted",
 		function()
-			return cm:pending_battle_cache_faction_lost_battle(self.faction_key) and not cm:model():pending_battle():region_data():region():is_null_interface()
+			local pb = cm:model():pending_battle()
+			return pb:has_been_fought() and cm:pending_battle_cache_faction_lost_battle(self.faction_key) and not pb:region_data():region():is_null_interface()
 		end,
 		function(context)
 			local region = cm:model():pending_battle():region_data():region()

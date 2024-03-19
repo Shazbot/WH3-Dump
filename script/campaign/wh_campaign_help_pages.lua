@@ -1964,8 +1964,7 @@ function setup_campaign_help_pages()
 		hpr_normal("war.camp.hp.bretonnian_vows.003"),
 		hpr_normal("war.camp.hp.bretonnian_vows.004"),
 		hpr_normal("war.camp.hp.bretonnian_vows.005"),
-		hpr_normal("war.camp.hp.bretonnian_vows.006"),
-		hpr_normal("war.camp.hp.bretonnian_vows.007")
+		hpr_normal("war.camp.hp.bretonnian_vows.006")
 	);
 	parser:add_record("campaign_bretonnian_vows", "script_link_campaign_bretonnian_vows", "tooltip_campaign_bretonnian_vows");
 	tp_bretonnian_vows = tooltip_patcher:new("tooltip_campaign_bretonnian_vows");

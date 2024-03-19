@@ -446,24 +446,27 @@ core:add_listener(
 -- Pledge to Campaign
 core:add_listener(
 	"character_completed_battle_pledge_to_campaign",
-	"CharacterCompletedBattle",
+	"BattleCompleted",
 	function(context)
-		local pb = context:pending_battle()
+		local pb = context:model():pending_battle()
 		
-		if pb:battle_type() == "settlement_standard" then
-			local character = context:character()
-			if character:won_battle() then
-				local faction = character:faction()
-				if faction:is_human() and faction:culture() == "wh_main_brt_bretonnia" and pb:has_attacker() and pb:attacker() == character and character:has_region() then
-					local climate = character:region():settlement():get_climate()
-					
-					return climate == "climate_desert" or climate == "climate_jungle"
+		return pb:battle_type() == "settlement_standard" and cm:pending_battle_cache_attacker_victory() and cm:pending_battle_cache_human_is_attacker() and cm:pending_battle_cache_culture_is_attacker("wh_main_brt_bretonnia")
+	end,
+	function()
+		for i = 1, cm:pending_battle_cache_num_attackers() do
+			local attacker_char_cqi, attacker_mf_cqi, attacker_faction_name = cm:pending_battle_cache_get_attacker(i)
+
+			local character = cm:get_character_by_cqi(attacker_char_cqi)
+			local faction = cm:get_faction(attacker_faction_name)
+
+			if character and faction and faction:is_human() and faction:culture() == "wh_main_brt_bretonnia" and character:has_region() then
+				local climate = character:region():settlement():get_climate()
+				
+				if climate == "climate_desert" or climate == "climate_jungle" then
+					add_vow_progress(character, "wh_dlc07_trait_brt_questing_vow_campaign_pledge", false, true)
 				end
 			end
 		end
-	end,
-	function(context)
-		add_vow_progress(context:character(), "wh_dlc07_trait_brt_questing_vow_campaign_pledge", false, true)
 	end,
 	true
 )

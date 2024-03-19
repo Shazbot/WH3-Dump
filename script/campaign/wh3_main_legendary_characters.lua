@@ -1188,8 +1188,14 @@ function character_unlocking:spawn_hero(faction_name, character, spawn_character
 
 		if spawn_character_cqi then
 			local spawn_character = cm:get_character_by_cqi(spawn_character_cqi)
+			local has_region = spawn_character:has_region()
+			local has_garrison_residence = false
+
+			if has_region then
+				has_garrison_residence = spawn_character:has_garrison_residence()
+			end
 			
-			if spawn_character:has_region() then
+			if has_region and not has_garrison_residence or (has_garrison_residence and not spawn_character:garrison_residence():is_under_siege()) then
 				cm:spawn_unique_agent_at_character(
 					faction:command_queue_index(),
 					character_info.subtype,
