@@ -2491,7 +2491,7 @@
 					<child_m_user_properties>
 						<property
 							name="update_constant"
-							value="500"/>
+							value="250"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
@@ -2501,13 +2501,13 @@
 					<child_m_user_properties>
 						<property
 							name="update_constant"
-							value="500"/>
+							value="250"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextPriorityLockOnCondition"
 					context_object_id="CcoCustomBattleLobby"
-					context_function_id="IsReadyCountdownActive">
+					context_function_id="self.IsSelected">
 					<child_m_user_properties>
 						<property
 							name="update_constant"
@@ -21418,7 +21418,7 @@
 				<callback_with_context
 					callback_id="ContextTooltipSetter"
 					context_object_id="CcoCustomBattlePlayerSlot"
-					context_function_id="GetIfElse(GetTotalBudget(true, false) == GetTotalBudget(false, false), &#10;Format(Loc(&quot;total_funds_available&quot;), GetTotalBudget(true, false)), &#10;Format(Loc(&quot;total_funds_available_for&quot;), Loc(&quot;attacker&quot;), GetTotalBudget(false, false)) + &quot;&#10;&quot; + Format(Loc(&quot;total_funds_available_for&quot;), Loc(&quot;defender&quot;), GetTotalBudget(true, false)))+ GetIf(GetReinforcementFundsMultiplier != 1.0, Format(&quot;&#10;%s (%f)&quot;, Loc(&quot;reinforcement_fund_multiplier&quot;), GetReinforcementFundsMultiplier))&#10;#GetTotalBudget(is_defender, is_main_army)">
+					context_function_id="(attack_budget = GetTotalBudget(false, false), defend_budget = GetTotalBudget(true, false)) =&gt; { GetIfElse(attack_budget == defend_budget, Format(Loc(&quot;total_funds_available&quot;), attack_budget),  Format(Loc(&quot;total_funds_available_for&quot;), Loc(&quot;attacker&quot;), attack_budget) + &quot;&#10;&quot; + Format(Loc(&quot;total_funds_available_for&quot;), Loc(&quot;defender&quot;), defend_budget)) + GetIf(GetReinforcementFundsMultiplier != 1.0, Format(&quot;%s (%f)&quot;, Loc(&quot;reinforcement_fund_multiplier&quot;), GetReinforcementFundsMultiplier)) }">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -25355,7 +25355,7 @@
 				<callback_with_context
 					callback_id="ContextTooltipSetter"
 					context_object_id="CcoCustomBattlePlayerSlot"
-					context_function_id="GetIfElse(GetTotalBudget(true, true) == GetTotalBudget(false, true), &#10;Format(Loc(&quot;total_funds_available&quot;), GetTotalBudget(true, true)), &#10;Format(Loc(&quot;total_funds_available_for&quot;), Loc(&quot;attacker&quot;), GetTotalBudget(false, true)) + &quot;&#10;&quot; + Format(Loc(&quot;total_funds_available_for&quot;), Loc(&quot;defender&quot;), GetTotalBudget(true, true)))+ GetIf(GetReinforcementFundsMultiplier != 1.0, Format(&quot;&#10;%s (%f)&quot;, Loc(&quot;reinforcement_fund_multiplier&quot;), GetReinforcementFundsMultiplier))&#10;#GetTotalBudget(is_defender, is_main_army)">
+					context_function_id="(attack_budget = GetTotalBudget(false, true), defend_budget = GetTotalBudget(true, true)) =&gt; { GetIfElse(attack_budget == defend_budget, Format(Loc(&quot;total_funds_available&quot;), attack_budget),  Format(Loc(&quot;total_funds_available_for&quot;), Loc(&quot;attacker&quot;), attack_budget) + &quot;&#10;&quot; + Format(Loc(&quot;total_funds_available_for&quot;), Loc(&quot;defender&quot;), defend_budget)) + GetIf(GetReinforcementFundsMultiplier != 1.0, Format(&quot;%s (%f)&quot;, Loc(&quot;reinforcement_fund_multiplier&quot;), GetReinforcementFundsMultiplier)) }">
 					<child_m_user_properties>
 						<property
 							name="event0"

@@ -1125,7 +1125,7 @@ initiative_templates = {
 	{
 		["initiative_key"] = 
 			{
-				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_tze_05", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_tze_05", -- Arcane Exemplar
+				-- Nothing to see here
 			},
 		["event"] = "CharacterTurnEnd",
 		["condition"] =

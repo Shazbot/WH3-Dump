@@ -4175,7 +4175,7 @@ end;
 --- @desc Triggers the supplied message when this generated army finds itself with the supplied distance of its enemy.
 --- @p @string message, Message to trigger.
 --- @p @number threshold distance, Threshold distance in m.
-function generated_army:message_on_proximity_to_enemy(message, distance)
+function generated_army:message_on_proximity_to_enemy(message, distance, ignore_deployed_test)
 	if not is_string(message) then
 		script_error(self.id .. " ERROR: message_on_proximity_to_enemy() called but supplied message [" .. tostring(message) .. "] is not a string");
 		return false;
@@ -4188,7 +4188,7 @@ function generated_army:message_on_proximity_to_enemy(message, distance)
 	
 	-- if the battle hasn't started then put this off until it has
 	if not self.generated_battle:has_battle_started() then
-		self.sm:add_listener("battle_started", function() self:message_on_proximity_to_enemy(message, distance) end);
+		self.sm:add_listener("battle_started", function() self:message_on_proximity_to_enemy(message, distance, ignore_deployed_test) end);
 		return;
 	end;
 	
@@ -4197,7 +4197,7 @@ function generated_army:message_on_proximity_to_enemy(message, distance)
 	
 	bm:watch(
 		function()
-			local current_distance = distance_between_forces(self.sunits, self.enemy_force, true);
+			local current_distance = distance_between_forces(self.sunits, self.enemy_force, true, ignore_deployed_test);
 			-- bm:out(self.id .. " is checking current distance to enemy and found it to be " .. tostring(current_distance) .. "m");
 			return current_distance < distance;
 		end,
