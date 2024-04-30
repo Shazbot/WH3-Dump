@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -452,6 +452,9 @@
 					name="hover"
 					uniqueguid="F8274D9A-608C-4B69-813242D1D4D54079"/>
 				<state_uniqueguid
+					name="inactive"
+					uniqueguid="1AEFC76D-8C26-4456-B8F78083FB9747C8"/>
+				<state_uniqueguid
 					name="selected"
 					uniqueguid="ADEB3DA6-1273-4D28-A1D340C56BFD93AC"/>
 			</state_uniqueguids>
@@ -480,6 +483,9 @@
 				<component_image_uniqueguid
 					name="ui/skins/default/tab_square_medium_text_overlay.png"
 					uniqueguid="93FD28FC-46FD-474E-9E58D70116210C64"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_medium_text_inactive.png"
+					uniqueguid="D85328ED-6AD9-46DB-B79009C346EB1E35"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context callback_id="ButtonGroupButton"/>
@@ -511,6 +517,9 @@
 					state="hover"
 					is_text_localised="false"/>
 				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
 					state="selected"
 					is_text_localised="false"/>
 			</localised_texts>
@@ -523,6 +532,7 @@
 				<element value="ui/skins/default/tab_square_medium_text_underlay.png"/>
 				<element value="ui/skins/default/tab_square_medium_text_selected_underlay.png"/>
 				<element value="ui/skins/default/tab_square_medium_text_overlay.png"/>
+				<element value="ui/skins/default/tab_square_medium_text_inactive.png"/>
 			</override_images>
 		</button_player>
 		<commander_portrait
@@ -6811,6 +6821,10 @@
 					this="DEFCAE83-8A21-4F98-956F3B31D47D3B61"
 					uniqueguid="DEFCAE83-8A21-4F98-956F3B31D47D3B61"
 					imagepath="ui/skins/warhammer2/unit_card_semicircle_mistwalker.png"/>
+				<component_image
+					this="77745BE3-2B68-47E9-912854C3418AB641"
+					uniqueguid="77745BE3-2B68-47E9-912854C3418AB641"
+					imagepath="ui/skins/default/unit_card_semicircle_chieftain.png"/>
 			</componentimages>
 			<states>
 				<blessed_spawning
@@ -6831,6 +6845,23 @@
 							dock_offset="-1.00,0.00"/>
 					</imagemetrics>
 				</blessed_spawning>
+				<chieftain
+					this="B77CDD85-8476-49E0-9E797D3DC06961B9"
+					name="chieftain"
+					width="36"
+					height="36"
+					uniqueguid="B77CDD85-8476-49E0-9E797D3DC06961B9">
+					<imagemetrics>
+						<image
+							this="961C87AD-E10A-47B6-82598AEE7ED89A8A"
+							uniqueguid="961C87AD-E10A-47B6-82598AEE7ED89A8A"
+							componentimage="77745BE3-2B68-47E9-912854C3418AB641"
+							offset="-9.00,1.00"
+							width="55"
+							height="35"
+							dockpoint="Bottom Center"/>
+					</imagemetrics>
+				</chieftain>
 				<crafted
 					this="420A16D6-8720-4E81-B5DF1B82972F4D78"
 					name="crafted"
@@ -7144,7 +7175,7 @@
 			priority="500"
 			tooltipslocalised="true"
 			uniqueguid="884C3163-3165-47E9-BA077E5C9EF39E93"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="752089DB-7985-4E6E-9AA06BFE23087684"
 			defaultstate="752089DB-7985-4E6E-9AA06BFE23087684">
 			<callbackwithcontextlist>
@@ -12173,7 +12204,7 @@
 			priority="500"
 			tooltipslocalised="true"
 			uniqueguid="874815E1-0129-42AF-A1926AF09EE91D7E"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="8BD8D4F8-558D-4D15-A1C594510FF220A1"
 			defaultstate="8BD8D4F8-558D-4D15-A1C594510FF220A1">
 			<callbackwithcontextlist>
@@ -12316,7 +12347,7 @@
 			priority="500"
 			tooltipslocalised="true"
 			uniqueguid="9B1315EE-B1EC-4B3E-A54D249587CFC579"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="51F109DA-B0B3-4498-BE451B27AD28349C"
 			defaultstate="51F109DA-B0B3-4498-BE451B27AD28349C">
 			<callbackwithcontextlist>
@@ -12730,7 +12761,7 @@
 			component_anchor_point="0.50,0.50"
 			priority="500"
 			uniqueguid="DEB67E2F-BE19-4596-A80AC59E489DDA27"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="1C3A6304-ED0E-4BED-ABA0923441B899BF"
 			defaultstate="1C3A6304-ED0E-4BED-ABA0923441B899BF">
 			<callbackwithcontextlist>
@@ -12876,7 +12907,7 @@
 			priority="500"
 			tooltipslocalised="true"
 			uniqueguid="0FD7F157-F24F-4CEC-9CF8C7774BFA5819"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="B3675C70-BEE4-43F1-9201CA8CC8F3C05F"
 			defaultstate="B3675C70-BEE4-43F1-9201CA8CC8F3C05F">
 			<callbackwithcontextlist>
@@ -13039,7 +13070,7 @@
 			component_anchor_point="1.00,0.50"
 			priority="500"
 			uniqueguid="DA4C90B4-686B-4FE0-94ACBB11CE0976F2"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="9C7DF195-5401-47F6-A83F864726CEB005"
 			defaultstate="9C7DF195-5401-47F6-A83F864726CEB005">
 			<callbackwithcontextlist>
@@ -13484,7 +13515,7 @@
 							width="38"
 							height="39"
 							dockpoint="Center"
-							isaspectratiolocked="true"/>
+							aspect_ratio_locked_behaviour="Width First"/>
 						<image
 							this="4BEAD816-3034-437D-94929CEF94BEF435"
 							uniqueguid="4BEAD816-3034-437D-94929CEF94BEF435"
@@ -13514,7 +13545,7 @@
 							width="38"
 							height="39"
 							dockpoint="Center"
-							isaspectratiolocked="true"/>
+							aspect_ratio_locked_behaviour="Width First"/>
 						<image
 							this="BFE94759-E137-46FB-B83461C99FC4A7B9"
 							uniqueguid="BFE94759-E137-46FB-B83461C99FC4A7B9"
@@ -13541,7 +13572,7 @@
 							width="38"
 							height="39"
 							dockpoint="Center"
-							isaspectratiolocked="true"/>
+							aspect_ratio_locked_behaviour="Width First"/>
 						<image
 							this="6559163D-B700-4715-A346C215AF06E494"
 							uniqueguid="6559163D-B700-4715-A346C215AF06E494"
@@ -13572,7 +13603,7 @@
 							width="38"
 							height="39"
 							dockpoint="Center"
-							isaspectratiolocked="true"/>
+							aspect_ratio_locked_behaviour="Width First"/>
 						<image
 							this="E57E59A0-A722-442C-8B5F20EE2E4FA864"
 							uniqueguid="E57E59A0-A722-442C-8B5F20EE2E4FA864"

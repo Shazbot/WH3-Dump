@@ -1365,12 +1365,13 @@ function mission_manager:construct_victory_objective_mission_string()
 	
 	mission_string = "mission{key " .. self.mission_key .. ";issuer " .. self.mission_issuer;
 
-	
-	if self.victory_type then
-		mission_string = mission_string .. ";victory_type " .. self.victory_type;
-	else
-		script_error("ERROR: construct_victory_objective_mission_string() called on mission manager with key [" .. self.mission_key .. "] but no victory type has been added");
-		return false;
+	if self.victory_type ~= false then
+		if self.victory_type then
+			mission_string = mission_string .. ";victory_type " .. self.victory_type;
+		else
+			script_error("ERROR: construct_victory_objective_mission_string() called on mission manager with key [" .. self.mission_key .. "] but no victory type has been added");
+			return false;
+		end
 	end
 	
 	if self.turn_limit then
@@ -1466,9 +1467,12 @@ end;
 function mission_manager:start_listeners()
 	local mission_key = self.mission_key;
 	local faction_name = self.faction_name;
+
+	local scripted_objectives = self.scripted_objectives;
+	local any_scripted_objectives = #scripted_objectives > 0;
 	
 	-- success listener
-	if is_function(self.success_callback) then
+	if any_scripted_objectives or is_function(self.success_callback) then
 		core:add_listener(
 			mission_key .. "_success_listener",
 			"MissionSucceeded",
@@ -1494,11 +1498,11 @@ function mission_manager:start_listeners()
 	end;
 	
 	-- failure listener
-	if is_function(self.failure_callback) then
+	if any_scripted_objectives or is_function(self.failure_callback) then
 		core:add_listener(
 			mission_key .. "_failure_listener",
 			"MissionFailed",
-			function(context) return context:mission():mission_record_key() == mission_key end,
+			function(context) return context:mission():mission_record_key() == mission_key and context:faction():name() == faction_name end,
 			function()
 				out("~~~ MissionManager for mission [" .. mission_key .. "] and faction [" .. faction_name .. "] has received a MissionFailed event - this mission has been failed");
 				self:complete();
@@ -1520,11 +1524,11 @@ function mission_manager:start_listeners()
 	end;
 	
 	-- cancellation listener
-	if is_function(self.cancellation_callback) then
+	if any_scripted_objectives or is_function(self.cancellation_callback) then
 		core:add_listener(
 			mission_key .. "_cancellation_listener",
 			"MissionCancelled",
-			function(context) return context:mission():mission_record_key() == mission_key end,
+			function(context) return context:mission():mission_record_key() == mission_key and context:faction():name() == faction_name end,
 			function()
 				out("~~~ MissionManager for mission [" .. mission_key .. "] and faction [" .. faction_name .. "] has received a MissionCancelled event - this mission has been cancelled");
 				self:complete();
@@ -1562,8 +1566,8 @@ function mission_manager:start_listeners()
 	end;
 	
 	-- scripted objective listeners
-	for i = 1, #self.scripted_objectives do
-		local current_scripted_objective_record = self.scripted_objectives[i];
+	for i = 1, #scripted_objectives do
+		local current_scripted_objective_record = scripted_objectives[i];
 		local script_key = current_scripted_objective_record.script_key;
 		
 		for j = 1, #current_scripted_objective_record.success_conditions do
@@ -1894,12 +1898,12 @@ end;
 function chapter_mission:issue_mission()
 	local intervention = self.intervention;
 	
-	-- On legendary difficulty, establish a listener for when the new mission is issued and then save the game.
-	-- This is because on legendary difficulty the game autosaves at the start of turn, which can happen after
+	-- With ironman enabled (manual saves disabled), establish a listener for when the new mission is issued and then save the game.
+	-- This is because with manual saves disabled the game autosaves at the start of turn, which can happen after
 	-- the previous chapter mission is completed but before the next one is issued.
 	local should_autosave_after_mission_issued = false;
 	
-	if cm:model():difficulty_level() == -3 then
+	if cm:model():manual_saves_disabled() then
 		should_autosave_after_mission_issued = true;
 	end;
 	
@@ -2212,7 +2216,6 @@ end;
 
 --- @function ancillary_mission_payload
 --- @desc Returns a mission reward string that adds the specified ancillary to the faction pool when the mission being constructed is completed.
---- @p @string ancillary key, Ancillary key, from the <code>ancillaries</code> database table.
 --- @p @string faction key, Faction key, from the <code>factions</code> database table.
 --- @p [opt=nil] @string ancillary category, Ancillary category. Valid values are presently <code>"armour"</code>, <code>"enchanted_item"</code>>, <code>"banner"</code>>, <code>"talisman"</code>>, <code>"weapon"</code> and <code>"arcane_item"</code>. Arcane items may only be equipped by spellcasters.
 --- @p [opt=nil] @string ancillary rarity, Ancillary rarity. Valid values are presently <code>"common"</code>, <code>"uncommon"</code> and <code>"rare"</code>.
@@ -2242,6 +2245,24 @@ function payload.ancillary_mission_payload(faction_key, category, rarity)
 	end;
 end;
 
+--- @function ancillary_mission_payload_specific
+--- @desc Returns a mission reward string that adds the specified ancillary to the faction pool when the mission being constructed is completed.
+--- @p @string faction key, Faction key, from the <code>factions</code> database table.
+--- @return ancillary mission reward string
+function payload.ancillary_mission_payload_specific(faction_key, ancillary_key)
+
+	if not validate.is_string(faction_key) then
+		return false
+	end;
+
+	if not validate.is_string(ancillary_key) then
+		return false
+	end;
+
+	if ancillary_key then
+		return "add_ancillary_to_faction_pool{ancillary_key " .. ancillary_key ..";}"
+	end
+end;
 
 
 

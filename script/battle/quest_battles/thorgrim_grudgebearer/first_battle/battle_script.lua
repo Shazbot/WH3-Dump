@@ -34,11 +34,9 @@ end
 gb:set_cutscene_during_deployment(true);
 
 -------AUDIO-------
-Dwarf_Horn = new_sfx("EGX_Dwarf_Reinforcements_Horn");
-Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
-Ambush_VO = new_sfx("Play_DWF_Thor_Qbattle_prelude_high_king_post_ambush_vs_Grnskns_v1");
-Rear_Attack_01_VO = new_sfx("Play_DWF_Unq4_CS_Enemy_Rear");
-Left_Attack_VO = new_sfx("Play_DWF_Inf4_CS_Enemy_Flanking");
+Ambush_VO = new_sfx("Play_DWF_Thor_Qbattle_prelude_high_king_post_ambush_vs_Grnskns_v1", false, true);
+Rear_Attack_01_VO = new_sfx("Play_DWF_Unq4_CS_Enemy_Rear", false, true);
+Left_Attack_VO = new_sfx("Play_DWF_Inf4_CS_Enemy_Flanking_02", false, true);
 
 
 -------ARMY SETUP-------
@@ -82,7 +80,6 @@ ga_ai_01:message_on_proximity_to_enemy("player_reinforcements", 40);
 
 --RIGHT HAND SIDE SPAWNS
 ga_ai_right:reinforce_on_message("start_right");
-gb:play_sound_on_message("start_right", Orc_Horn, v(-134, 100, -335), 3000);
 
 --only play thorgrim vo if thorgrim is actually here to say it
 if gb:get_army(gb:get_player_alliance_num(), 1):are_unit_types_in_army("wh_main_dwf_cha_high_king_thorgrim_grudgebearer_1") then
@@ -94,14 +91,12 @@ ga_ai_right_2:reinforce_on_message("start_right_2", 1000);
 	
 --LEFT HAND SIDE SPAWNS
 ga_ai_left:reinforce_on_message("start_left");
-gb:play_sound_on_message("start_left", Orc_Horn, v(-441, 100, -336), 1000);
 gb:play_sound_on_message("start_left", Left_Attack_VO, nil, 7000);
 
 ga_ai_left_2:reinforce_on_message("start_left_2");
 	
 --REAR SPAWNS
 ga_ai_trolls:reinforce_on_message("start_trolls");
-gb:play_sound_on_message("start_trolls", Orc_Horn, v(-300, 100, -660), 3000);
 gb:play_sound_on_message("start_trolls", Rear_Attack_01_VO, nil, 6000);
 
 --PLAYER REINFORCEMENT

@@ -1,0 +1,105 @@
+{
+"skeleton": {
+	"hash": "ZZ0z53MLSd8",
+	"spine": "4.1.24",
+	"x": -13.85,
+	"y": -107.36,
+	"width": 27.74,
+	"height": 14.65,
+	"images": "",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" },
+	{ "name": "line_effect_card/glow", "parent": "root", "scaleX": 0.5711, "scaleY": 0.2914 },
+	{ "name": "line_effect_card/glow2", "parent": "root", "scaleX": -0.5711, "scaleY": 0.2914 }
+],
+"slots": [
+	{ "name": "left_line", "bone": "root", "attachment": "left_line" },
+	{ "name": "right_line", "bone": "root", "attachment": "right_line" },
+	{ "name": "line_effect_card/glow", "bone": "line_effect_card/glow", "attachment": "line_effect_card/glow" },
+	{ "name": "line_effect_card/glow2", "bone": "line_effect_card/glow2", "attachment": "line_effect_card/glow" }
+],
+"path": [
+	{
+		"name": "left_line_constraint",
+		"bones": [ "line_effect_card/glow" ],
+		"target": "left_line"
+	},
+	{
+		"name": "right_line_constraint",
+		"order": 1,
+		"bones": [ "line_effect_card/glow2" ],
+		"target": "right_line"
+	}
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"left_line": {
+				"left_line": {
+					"type": "path",
+					"lengths": [ 50.01, 249.94, 299.82, 502.14 ],
+					"vertexCount": 12,
+					"vertices": [ 14.86, -99.86, 0.02, -100.04, -12.8, -100.03, -44.11, -100.02, -49.99, -100.03, -49.95, -93.82, -49.95, 96.08, -49.89, 99.89, -45.54, 99.9, -8.49, 99.97, -0.01, 100.01, 14.66, 99.73 ]
+				}
+			},
+			"line_effect_card/glow": {
+				"line_effect_card/glow": { "width": 48, "height": 48 }
+			},
+			"line_effect_card/glow2": {
+				"line_effect_card/glow": { "width": 48, "height": 48 }
+			},
+			"right_line": {
+				"right_line": {
+					"type": "path",
+					"lengths": [ 49.9, 249.9, 304.59, 506.91 ],
+					"vertexCount": 12,
+					"vertices": [ -14.81, -100.21, 0.02, -100.04, 12.84, -99.73, 44.08, -100.05, 49.92, -100.02, 49.91, -93.81, 50, 96.1, 50.03, 99.98, 45.72, 99.96, 3.82, 100.11, -4.66, 99.96, -19.32, 99.33 ]
+				}
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"slots": {
+			"line_effect_card/glow": {
+				"alpha": [
+					{ "value": 0 },
+					{ "time": 0.3333, "value": 1, "curve": "stepped" },
+					{ "time": 0.6667, "value": 1 },
+					{ "time": 1, "value": 0 }
+				]
+			},
+			"line_effect_card/glow2": {
+				"alpha": [
+					{ "value": 0 },
+					{ "time": 0.3333, "value": 1, "curve": "stepped" },
+					{ "time": 0.6667, "value": 1 },
+					{ "time": 1, "value": 0 }
+				]
+			}
+		},
+		"path": {
+			"left_line_constraint": {
+				"position": [
+					{
+						"curve": [ 0.341, 0.0237, 0.188, 1.1136 ]
+					},
+					{ "time": 1, "value": 1 }
+				]
+			},
+			"right_line_constraint": {
+				"position": [
+					{
+						"curve": [ 0.342, 0.0293, 0.189, 1.1089 ]
+					},
+					{ "time": 1, "value": 1 }
+				]
+			}
+		}
+	}
+}
+}

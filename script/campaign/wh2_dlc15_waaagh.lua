@@ -495,8 +495,8 @@ function waaagh:add_listener_for_confederation_dilemma(enemy_leader_family_membe
 		true,
 		function(context)
 			if context:dilemma() == self.confederate_dilemma_key and context:choice() == self.confederation_dilemma_execution_option then
-				-- Autosave on legendary.
-				if cm:model():difficulty_level() == -3 and not cm:is_multiplayer() then
+				-- Autosave on ironman.
+				if cm:model():manual_saves_disabled() and not cm:is_multiplayer() then
 					cm:callback(function() cm:autosave_at_next_opportunity() end, 0.5);
 				end;
 				

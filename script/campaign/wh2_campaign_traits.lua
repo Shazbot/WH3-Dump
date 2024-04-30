@@ -121,7 +121,7 @@ campaign_traits = {
 		["wh2_dlc15_hef_imrik"] = 					"wh2_dlc15_trait_defeated_imrik",						-- Imrik
 		["wh2_dlc15_hef_eltharion"] = 				"wh2_dlc15_trait_defeated_eltharion",					-- Eltharion the Grim
 		["wh2_dlc15_grn_grom_the_paunch"] =			"wh2_dlc15_trait_defeated_grom",						-- Grom the Paunch
-		["wh2_dlc16_wef_drycha"] = 		            "wh2_main_trait_defeated_drycha",						-- Drycha
+		["wh2_dlc16_wef_drycha"] = 		          	"wh2_main_trait_defeated_drycha",						-- Drycha
 		["wh2_dlc16_wef_sisters_of_twilight"] =     "wh2_main_trait_defeated_sisters_of_twilight",			-- Sisters of Twilight
 		["wh2_dlc16_skv_throt_the_unclean"] = 		"wh2_main_trait_defeated_throt",						-- Throt the Unclean
 		["wh2_twa03_def_rakarth"] = 				"wh2_twa03_trait_defeated_rakarth",						-- Rakarth
@@ -151,6 +151,10 @@ campaign_traits = {
 		["wh3_dlc24_tze_the_changeling"] = 			"wh3_dlc24_trait_defeated_the_changeling",				-- The Changeling
 		["wh3_dlc24_ksl_mother_ostankya"] = 		"wh3_dlc24_trait_defeated_mother_ostankya",				-- Mother Ostankya
 		["wh3_dlc24_cth_yuan_bo"] = 				"wh3_dlc24_trait_defeated_yuan_bo",						-- Yuan Bo
+		["wh3_dlc25_nur_tamurkhan"] = 				"wh3_dlc25_trait_defeated_tamurkhan",					-- Tamurkhan
+		["wh3_dlc25_dwf_malakai_makaisson"] = 		"wh3_dlc25_trait_defeated_malakai",						-- Malakai
+		["wh3_dlc25_nur_epidemius"] = 				"wh3_dlc25_trait_defeated_epidemius",					-- Epidemius
+		["wh3_dlc25_emp_elspeth_von_draken"] = 		"wh3_dlc25_trait_defeated_elspeth"						-- Elspeth
 	},
 	subcultures_trait_keys = {
 		["wh_main_sc_chs_chaos"] = "chaos",
@@ -661,22 +665,18 @@ events.CharacterTurnStart[#events.CharacterTurnStart+1] =
 function (context)
 	local character = context:character();
 
-	if character:is_null_interface() == false then
-		if not character:faction():is_allowed_to_capture_territory() then
-			if cm:char_is_general_with_army(character) and character:has_region() and not character:region():is_abandoned() then
-				if character:turns_in_enemy_regions() >= 20 then
-					if character:trait_points("wh2_main_trait_lone_wolf") == 2 then
-						campaign_traits:give_trait(character, "wh2_main_trait_lone_wolf");
-					end
-				elseif character:turns_in_enemy_regions() >= 15 then
-					if character:trait_points("wh2_main_trait_lone_wolf") == 1 then
-						campaign_traits:give_trait(character, "wh2_main_trait_lone_wolf");
-					end
-				elseif character:turns_in_enemy_regions() >= 10 then
-					if character:trait_points("wh2_main_trait_lone_wolf") == 0 then
-						campaign_traits:give_trait(character, "wh2_main_trait_lone_wolf");
-					end
-				end
+	if character:is_null_interface() == false and (wh_faction_is_horde(character:faction()) or character:faction():culture() == "wh_dlc03_bst_beastmen") and cm:char_is_general_with_army(character) and character:has_region() and not character:region():is_abandoned() then
+		if character:turns_in_enemy_regions() >= 20 then
+			if character:trait_points("wh2_main_trait_lone_wolf") == 2 then
+				campaign_traits:give_trait(character, "wh2_main_trait_lone_wolf");
+			end
+		elseif character:turns_in_enemy_regions() >= 15 then
+			if character:trait_points("wh2_main_trait_lone_wolf") == 1 then
+				campaign_traits:give_trait(character, "wh2_main_trait_lone_wolf");
+			end
+		elseif character:turns_in_enemy_regions() >= 10 then
+			if character:trait_points("wh2_main_trait_lone_wolf") == 0 then
+				campaign_traits:give_trait(character, "wh2_main_trait_lone_wolf");
 			end
 		end
 	end

@@ -35,7 +35,8 @@ bm:cindy_preload(intro_cinematic_file);
 ---------------------------------------- INTRO VO & SUBS ----------------------------------------
 -------------------------------------------------------------------------------------------------
 
-wh3_main_sfx_00 = new_sfx("Play_Movie_WH3_DLC24_QB_The_Tricksters_Staff_Sweetener");
+wh3_main_sfx_sweetener_start = new_sfx("Play_Movie_WH3_DLC24_QB_The_Tricksters_Staff_Sweetener");
+wh3_main_sfx_sweetener_stop = new_sfx("Play_Movie_WH3_DLC24_QB_Unmute", false, false);
 
 wh3_main_sfx_01 = new_sfx("Play_wh3_dlc24_qb_tze_the_changeling_the_tricksters_staff_01");
 wh3_main_sfx_02 = new_sfx("Play_wh3_dlc24_qb_tze_the_changeling_the_tricksters_staff_02");
@@ -96,12 +97,12 @@ local cutscene_intro = cutscene:new_from_cindyscene(
 	);
 
 	-- Voiceover and Subtitles --
-	cutscene_intro:action(function() cutscene_intro:play_sound(wh3_main_sfx_00) end, 100);
+	cutscene_intro:action(function() cutscene_intro:play_sound(wh3_main_sfx_sweetener_start) end, 100);
 	
 	cutscene_intro:add_cinematic_trigger_listener(
 		"wh3_dlc24_qb_tze_the_changeling_the_tricksters_staff_01", 
 			function()
-				cutscene_intro:play_sound(new_sfx("Play_wh3_dlc24_qb_tze_the_changeling_the_tricksters_staff_01"));
+				cutscene_intro:play_sound(wh3_main_sfx_01);
 				bm:show_subtitle("wh3_dlc24_qb_tze_the_changeling_the_tricksters_staff_pt_01", false, true);
 			end
 	);
@@ -109,7 +110,7 @@ local cutscene_intro = cutscene:new_from_cindyscene(
 	cutscene_intro:add_cinematic_trigger_listener(
 		"wh3_dlc24_qb_tze_the_changeling_the_tricksters_staff_02", 
 			function()
-				cutscene_intro:play_sound(new_sfx("Play_wh3_dlc24_qb_tze_the_changeling_the_tricksters_staff_02"));
+				cutscene_intro:play_sound(wh3_main_sfx_02);
 				bm:show_subtitle("wh3_dlc24_qb_tze_the_changeling_the_tricksters_staff_pt_02", false, true);
 			end
 	);
@@ -117,7 +118,7 @@ local cutscene_intro = cutscene:new_from_cindyscene(
 	cutscene_intro:add_cinematic_trigger_listener(
 		"wh3_dlc24_qb_tze_the_changeling_the_tricksters_staff_03", 
 			function()
-				cutscene_intro:play_sound(new_sfx("Play_wh3_dlc24_qb_tze_the_changeling_the_tricksters_staff_03"));
+				cutscene_intro:play_sound(wh3_main_sfx_03);
 				bm:show_subtitle("wh3_dlc24_qb_tze_the_changeling_the_tricksters_staff_pt_03", false, true);
 			end
 	);
@@ -125,7 +126,7 @@ local cutscene_intro = cutscene:new_from_cindyscene(
 	cutscene_intro:add_cinematic_trigger_listener(
 		"wh3_dlc24_qb_tze_the_changeling_the_tricksters_staff_04", 
 			function()
-				cutscene_intro:play_sound(new_sfx("Play_wh3_dlc24_qb_tze_the_changeling_the_tricksters_staff_04"));
+				cutscene_intro:play_sound(wh3_main_sfx_04);
 				bm:show_subtitle("wh3_dlc24_qb_tze_the_changeling_the_tricksters_staff_pt_04", false, true);
 			end
 	);
@@ -133,7 +134,7 @@ local cutscene_intro = cutscene:new_from_cindyscene(
 	cutscene_intro:add_cinematic_trigger_listener(
 		"wh3_dlc24_qb_tze_the_changeling_the_tricksters_staff_05", 
 			function()
-				cutscene_intro:play_sound(new_sfx("Play_wh3_dlc24_qb_tze_the_changeling_the_tricksters_staff_05"));
+				cutscene_intro:play_sound(wh3_main_sfx_05);
 				bm:show_subtitle("wh3_dlc24_qb_tze_the_changeling_the_tricksters_staff_pt_05", false, true);
 			end
 	);
@@ -141,7 +142,7 @@ local cutscene_intro = cutscene:new_from_cindyscene(
 	cutscene_intro:add_cinematic_trigger_listener(
 		"wh3_dlc24_qb_tze_the_changeling_the_tricksters_staff_06", 
 			function()
-				cutscene_intro:play_sound(new_sfx("Play_wh3_dlc24_qb_tze_the_changeling_the_tricksters_staff_06"));
+				cutscene_intro:play_sound(wh3_main_sfx_06);
 				bm:show_subtitle("wh3_dlc24_qb_tze_the_changeling_the_tricksters_staff_pt_06", false, true);
 			end
 	);
@@ -150,6 +151,7 @@ local cutscene_intro = cutscene:new_from_cindyscene(
 end;
 
 function intro_cutscene_end()
+	play_sound_2D(wh3_main_sfx_sweetener_stop);
 	witch_hunter:set_invisible_to_all(false)
 	gb.sm:trigger_message("01_intro_cutscene_end");
 end;
@@ -204,6 +206,7 @@ karak_waypoint = v(0.0, 553.0, 225.5);
 gb:message_on_time_offset("start", 100);
 gb:message_on_time_offset("hint_01", 1000);
 gb:message_on_time_offset("objective_01", 5000);
+
 
 -------------------------------------------------------------------------------------------------
 ------------------------------------------ALLY ORDERS--------------------------------------------

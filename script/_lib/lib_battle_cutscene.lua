@@ -202,7 +202,7 @@ function cutscene:new_from_cindyscene(name, players_army, end_callback, cindy_sc
 			c:add_cinematic_trigger_listener(
 				"end_cinematic",
 				function()
-					c:skip();
+					c:skip(false);
 				end
 			);
 		end,
@@ -1492,7 +1492,8 @@ end;
 
 --- @function skip
 --- @desc Causes the cutscene to skip. This function is called internally when the ESC key is pressed, but it may also be called externally while the cutscene is running.
-function cutscene:skip()
+--- @p [opt=true] @boolean should stop sounds
+function cutscene:skip(should_stop_sounds)
 	if not self:is_active() then
 		script_error(self.name .. " WARNING: skip() called when not running");
 		
@@ -1507,8 +1508,11 @@ function cutscene:skip()
 	self:show_esc_prompt(false);
 	
 	-- stop any currently-playing sounds
-	for i = 1, #self.sounds do
-		stop_sound(self.sounds[i]);
+	should_stop_sounds = (should_stop_sounds ~= false);
+	if should_stop_sounds then
+		for i = 1, #self.sounds do
+			stop_sound(self.sounds[i]);
+		end;
 	end;
 	
 	-- unregister this function as an ESC key listener

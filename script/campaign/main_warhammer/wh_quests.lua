@@ -22,13 +22,17 @@ function q_setup()
 			{"mission", "wh_main_anc_enchanted_item_cloak_of_molten_metal", "wh3_main_ie_qb_emp_balthasar_gelt_cloak_of_molten_metal", nil, "war.camp.advice.quests.001"},
 			{"mission", "wh_main_anc_talisman_amulet_of_sea_gold", "wh3_main_ie_qb_emp_balthasar_gelt_amulet_of_sea_gold", nil, nil},
 			{"mission", "wh_main_anc_arcane_item_staff_of_volans", "wh3_main_ie_qb_emp_balthasar_gelt_staff_of_volans", nil, nil},
-		},		
+		},
 		["wh_dlc04_emp_volkmar"] = {			
 			{"mission", "wh_dlc04_anc_talisman_jade_griffon", "wh3_main_ie_qb_emp_volkmar_the_grim_jade_griffon", nil, "war.camp.advice.quests.001"},
 			{"mission", "wh_dlc04_anc_weapon_staff_of_command", "wh3_main_ie_qb_emp_volkmar_the_grim_staff_of_command", nil, nil},
 		},
 		["wh2_dlc13_emp_cha_markus_wulfhart"] = {			
 			{"mission", "wh2_dlc13_anc_weapon_amber_bow", "wh3_main_ie_qb_emp_wulfhart_amber_bow", nil, "war.camp.advice.quests.001"},
+		},
+		["wh3_dlc25_emp_elspeth_von_draken"] = {			
+			{"mission", "wh3_dlc25_anc_talisman_deaths_timekeeper", "wh3_dlc25_ie_qb_emp_elspeth_deaths_timekeeper", nil, "wh3_dlc25_elspeth_cam_quest_mission_001"},
+			{"mission", "wh3_dlc25_anc_weapon_the_pale_scythe", "wh3_dlc23_ie_qb_emp_elspeth_the_pale_scythe"},
 		},
 		
 		----------------------
@@ -58,6 +62,10 @@ function q_setup()
 		["wh2_dlc17_dwf_thorek"] = {			
 			{"mission", "wh2_dlc17_anc_armour_thoreks_rune_armour", "wh3_main_ie_qb_dwf_thorek_rune_armour_quest"},
 			{"mission", "wh2_dlc17_anc_weapon_klad_brakak", "wh3_main_ie_qb_dwf_thorek_klad_brakak", nil, "war.camp.advice.quests.001"},
+		},
+		["wh3_dlc25_dwf_malakai_makaisson"] = {
+			{"mission", "wh3_dlc25_anc_enchanted_item_the_eyes_of_grungni", "wh3_dlc25_mis_dwf_malakai_fellow_engineer_ie", nil, nil},
+			{"mission", "wh3_dlc25_anc_weapon_makaissons_persuader", "wh3_dlc25_dwf_malakai_makaissons_persuader"}
 		},
 		----------------------
 		----- GREENSKINS -----
@@ -411,6 +419,13 @@ function q_setup()
 		----------------------
 		["wh3_main_nur_kugath"] = {
 			{"mission", "wh3_main_anc_weapon_necrotic_missiles", "wh3_main_ie_qb_nur_kugath_necrotic_missiles", nil, "wh3_main_camp_quest_kugath_necrotic_missiles_001"}
+		},
+		["wh3_dlc25_nur_tamurkhan"] = {
+			{"mission", "wh3_dlc25_anc_weapon_the_black_cleaver", "wh3_dlc25_qb_ie_nur_tamurkhan_gates_of_nuln", nil, "wh3_dlc25_tamurkhan_cam_quest_mission_001"}
+		},
+		["wh3_dlc25_nur_epidemius"] = {
+			{"mission", "wh3_dlc25_anc_weapon_epidemius_sword", "wh3_dlc25_ie_qb_nur_epidemius_purveyor_of_mortality"},
+			{"mission", "wh3_dlc25_anc_enchanted_item_epidemius_hourglass", "wh3_dlc25_ie_qb_nur_epidemius_sands_of_sickness"}
 		},
 
 		----------------------

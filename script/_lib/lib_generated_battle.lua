@@ -3497,6 +3497,47 @@ function generated_army:use_army_special_ability_on_message(message, special_abi
 end;
 
 
+--- @function kill_proportion_over_time_on_message
+--- @desc Kills a unary proportion of this unit over a specified time period in ms.
+--- @p number proportion, Proportion to kill, expressed as a unary value (e.g. 0.5 = 50% of the unit's starting number of soldiers die).
+--- @p number duration, Duration in ms over which to kill soldiers.
+--- @p [opt=false] boolean stop on rout, Stops the function from killing any more soldiers if the unit routs during the process.
+--- @p @string message, Message.
+function generated_army:kill_proportion_over_time_on_message(proportion, duration, stop_on_rout, message)
+	self.sm:add_listener(
+		message,
+		function()
+			bm:out(self.id .. " responding to message " .. message .. ", killing proportion of " .. proportion .. " over duration of " .. duration .. "ms for all units")
+			
+			local sunits = self.sunits
+			
+			for i = 1, sunits:count() do
+				sunits:item(i):kill_proportion_over_time(proportion, duration, stop_on_rout)
+			end
+		end
+	)
+end
+
+
+--- @function stop_kill_proportion_over_time_on_message
+--- @desc Stops a running process started by @generated_army:kill_proportion_over_time_on_message.
+--- @p @string message, Message.
+function generated_army:stop_kill_proportion_over_time_on_message(message)
+	self.sm:add_listener(
+		message,
+		function()
+			bm:out(self.id .. " responding to message " .. message .. ", stopping kill proportion over time for all units")
+			
+			local sunits = self.sunits
+			
+			for i = 1, sunits:count() do
+				sunits:item(i):stop_kill_proportion_over_time()
+			end
+		end
+	)
+end
+
+
 --- @function change_behaviour_active_on_message
 --- @desc Activates or deactivates a supplied behaviour on units within the generated army on receipt of a supplied message. An additional flag specifies whether script control of the units should be released afterwards - set this to true if the player is controlling this army.
 --- @p @string message, Message.
@@ -3766,7 +3807,7 @@ end;
 --- @p [opt=500] @number minimum duration, Minimum duration of the sound in ms. This is only used if an end message is supplied, and is handy during development for when the sound has not yet been recorded.
 function generated_army:play_general_vo_on_message(message, sound, wait_interval, message_on_finished, minimum_sound_duration)
 	if not is_string(message) then
-		script_error(self.id .. " ERROR: grant_infinite_ammo_on_message() called but supplied message [" .. tostring(message) .. "] is not a string");
+		script_error(self.id .. " ERROR: play_general_vo_on_message() called but supplied message [" .. tostring(message) .. "] is not a string");
 		return false;
 	end;
 
@@ -3778,7 +3819,7 @@ function generated_army:play_general_vo_on_message(message, sound, wait_interval
 	wait_interval = wait_interval or 0;
 
 	if message_on_finished and not is_string(message_on_finished) then
-		script_error("generated_battle ERROR: play_sound_on_message() called but supplied message [" .. tostring(message) .. "] is not a string");
+		script_error("generated_battle ERROR: play_general_vo_on_message() called but supplied message [" .. tostring(message) .. "] is not a string");
 		return false;
 	end;
 

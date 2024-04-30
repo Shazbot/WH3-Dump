@@ -33,7 +33,7 @@ gb:set_objective_on_message("deployment_started", "wh_main_qb_emp_balthasar_gelt
 gb:queue_help_on_message("battle_started", "wh_main_qb_emp_balthasar_gelt_staff_of_volans_hint_objective", 13000, 2000, 0);
 
 gb:queue_help_on_message("enemy_really_near", "wh_main_qb_emp_balthasar_gelt_staff_of_volans_stage_2_extra", 13000, 2000, 1000);
-gb:play_sound_on_message("enemy_really_near", new_sfx("Play_EMP_Gelt_Qbattle_staff_of_volans1_post_ambush"), nil, 1000);
+gb:play_sound_on_message("enemy_really_near", new_sfx("Play_EMP_Gelt_Qbattle_staff_of_volans1_post_ambush", false, true), nil, 1000);
 
 -------ORDERS-------
 ga_ai_01:attack_on_message("enemy_near"); 

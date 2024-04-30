@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -2229,7 +2229,7 @@
 			priority="60"
 			tooltipslocalised="true"
 			uniqueguid="BF20D590-6D28-45E3-8529E08593011842"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="AFC06955-1A49-4ED9-A3BCF7A650747DCD"
 			defaultstate="AFC06955-1A49-4ED9-A3BCF7A650747DCD">
 			<componentimages>
@@ -2261,11 +2261,11 @@
 		<lord_list
 			this="57DA16D4-894D-4DA0-8A37961B5B238EC6"
 			id="lord_list"
-			offset="27.00,124.00"
+			offset="16.00,124.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			docking="Bottom Left"
-			dock_offset="27.00,139.00"
+			dock_offset="16.00,139.00"
 			component_anchor_point="0.00,1.00"
 			priority="10"
 			tooltipslocalised="true"
@@ -2326,7 +2326,8 @@
 			<LayoutEngine
 				type="HorizontalList"
 				spacing="6.00,0.00"
-				max_length="460"/>
+				max_length="460"
+				allow_scale_items_down="true"/>
 		</lord_list>
 		<lord_button
 			this="C3265709-DF7A-4625-A87D975868158DFA"
@@ -2694,7 +2695,7 @@
 			priority="60"
 			tooltipslocalised="true"
 			uniqueguid="1C5A5F7B-36F9-45AD-BCF7CE4104E9BB38"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Smallest"
 			currentstate="E6D30D02-7D42-4E15-AC07E99EA7C9C788"
 			defaultstate="E6D30D02-7D42-4E15-AC07E99EA7C9C788">
 			<callbackwithcontextlist>
@@ -2732,9 +2733,6 @@
 							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextCommandGiverOnCreate"
-					context_function_id="(ratio = MinNumericValue(1, 5.00 /StoredContextFromParent(&quot;CcoCultureRecord&quot;).QuestBattleGroupList.Size)) =&gt; self.Resize(self.Dimensions.x * ratio, self.Dimensions.y * ratio, true)"/>
 			</callbackwithcontextlist>
 			<states>
 				<default
@@ -4620,7 +4618,7 @@
 					this="2859E2B6-8991-4489-A3AC95E75CB0FA07"
 					name="default"
 					width="296"
-					height="216"
+					height="253"
 					uniqueguid="2859E2B6-8991-4489-A3AC95E75CB0FA07"/>
 			</states>
 			<LayoutEngine
@@ -5563,8 +5561,9 @@
 		<icon
 			this="A9A9F057-EC95-4A50-9CA3DD3B7DFE1754"
 			id="icon"
-			offset="130.00,0.00"
+			offset="130.00,210.00"
 			allowhorizontalresize="false"
+			dock_offset="0.00,210.00"
 			tooltipslocalised="true"
 			uniqueguid="A9A9F057-EC95-4A50-9CA3DD3B7DFE1754"
 			currentstate="94BF0B03-195E-46BF-AAB507878DF9C07E"
@@ -5580,14 +5579,14 @@
 					this="94BF0B03-195E-46BF-AAB507878DF9C07E"
 					name="default"
 					width="36"
-					height="216"
+					height="43"
 					uniqueguid="94BF0B03-195E-46BF-AAB507878DF9C07E">
 					<imagemetrics>
 						<image
 							this="1E01F827-852E-48F4-8CC53866737F6F27"
 							uniqueguid="1E01F827-852E-48F4-8CC53866737F6F27"
 							componentimage="5B00D321-965A-4AB9-AA6CF213B389BAAF"
-							offset="0.00,89.00"
+							offset="0.00,3.00"
 							width="36"
 							height="37"
 							dockpoint="Center"
@@ -6459,6 +6458,10 @@
 					this="071B7EA2-3222-4269-9A1318A4737DC8C4"
 					uniqueguid="071B7EA2-3222-4269-9A1318A4737DC8C4"
 					imagepath="ui/skins/default/unit_card_semicircle_elector.png"/>
+				<component_image
+					this="CF5700A7-9BFF-49D6-A05D0D39D0C74CC0"
+					uniqueguid="CF5700A7-9BFF-49D6-A05D0D39D0C74CC0"
+					imagepath="ui/skins/default/unit_card_semicircle_chieftain.png"/>
 			</componentimages>
 			<states>
 				<blessed_spawning
@@ -6478,6 +6481,23 @@
 							dockpoint="Bottom Center"/>
 					</imagemetrics>
 				</blessed_spawning>
+				<chieftain
+					this="2F1FECFB-8118-401D-98A8E3F73AEB7C81"
+					name="chieftain"
+					width="36"
+					height="36"
+					uniqueguid="2F1FECFB-8118-401D-98A8E3F73AEB7C81">
+					<imagemetrics>
+						<image
+							this="5A9D3200-0ECD-4A07-9D149CF17AB524E2"
+							uniqueguid="5A9D3200-0ECD-4A07-9D149CF17AB524E2"
+							componentimage="CF5700A7-9BFF-49D6-A05D0D39D0C74CC0"
+							offset="-9.00,1.00"
+							width="55"
+							height="35"
+							dockpoint="Bottom Center"/>
+					</imagemetrics>
+				</chieftain>
 				<crafted
 					this="7854C38E-6788-4C6C-97C78F564DDBB3E6"
 					name="crafted"
@@ -6622,7 +6642,7 @@
 			priority="10"
 			tooltipslocalised="true"
 			uniqueguid="243038E1-58DE-4C92-86C0A2D9209B2035"
-			currentstate="BD8948FD-EFD0-4E82-88D299AE1D3A78C6"
+			currentstate="21D124B6-7E78-4E07-9F07FCC7F97910E6"
 			defaultstate="BD8948FD-EFD0-4E82-88D299AE1D3A78C6">
 			<callbackwithcontextlist>
 				<callback_with_context
@@ -6655,6 +6675,10 @@
 					this="00ADB686-9643-42DB-82BCB7B0A9C7783B"
 					uniqueguid="00ADB686-9643-42DB-82BCB7B0A9C7783B"
 					imagepath="ui/skins/default/unit_card_semicircle_elector.png"/>
+				<component_image
+					this="A4859BC6-B17A-4A2C-9EB434A9557FD987"
+					uniqueguid="A4859BC6-B17A-4A2C-9EB434A9557FD987"
+					imagepath="ui/skins/default/unit_card_semicircle_chieftain.png"/>
 			</componentimages>
 			<states>
 				<blessed_spawning
@@ -6674,6 +6698,23 @@
 							dockpoint="Bottom Center"/>
 					</imagemetrics>
 				</blessed_spawning>
+				<chieftain
+					this="21D124B6-7E78-4E07-9F07FCC7F97910E6"
+					name="chieftain"
+					width="36"
+					height="36"
+					uniqueguid="21D124B6-7E78-4E07-9F07FCC7F97910E6">
+					<imagemetrics>
+						<image
+							this="17043057-53AB-499C-B16C1F43931B2D01"
+							uniqueguid="17043057-53AB-499C-B16C1F43931B2D01"
+							componentimage="A4859BC6-B17A-4A2C-9EB434A9557FD987"
+							offset="-9.00,1.00"
+							width="55"
+							height="35"
+							dockpoint="Bottom Center"/>
+					</imagemetrics>
+				</chieftain>
 				<crafted
 					this="02BBF50D-A711-4C3F-813C418FD265DCD3"
 					name="crafted"
@@ -6907,7 +6948,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBattleSetup"
-					context_function_id="OtherPlayerAllianceContext.ArmyList.Size &gt; 1"/>
+					context_function_id="OtherPlayerAllianceContext.ArmyList(true).Size &gt; 1"/>
 			</callbackwithcontextlist>
 			<states>
 				<default

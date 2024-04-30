@@ -234,8 +234,12 @@ function attempt_to_award_random_magical_item(context)
 end;
 
 
-function ancillary_is_available_to_faction(ancillary, faction)
-	return cco("CcoAncillaryRecord", ancillary):Call("CanFactionUseAncillary(DatabaseRecordContext(\"CcoFactionRecord\", \"" .. faction .. "\"))")
+function ancillary_is_available_to_faction(ancillary, faction_key)
+	if faction_key == "rebels" then
+		return false
+	end
+
+	return cco("CcoAncillaryRecord", ancillary):Call("CanFactionUseAncillary(DatabaseRecordContext(\"CcoFactionRecord\", \"" .. faction_key .. "\"))")
 end
 
 

@@ -97,6 +97,7 @@ campaign_manager = {				-- default values should not be nil, otherwise they'll f
 	use_cinematic_borders_for_automated_cutscenes = true,
 	ui_hiding_enabled = true,
 	intro_cutscene_playing = false,
+	cutscene_playing_allowed = true,
 
 	-- cached local player culture and subculture keys
 	local_faction_culture_key = "",
@@ -337,6 +338,15 @@ function campaign_manager:new(name)
 		function(context) cm.infotext:cancel_add_infotext() end,
 		true
 	);
+
+	core:add_listener(	"set_cutscene_playing_allowed",
+						"SetCutscenePlayingAllowed",
+						true,
+						function(context)
+							cm:set_cutscene_playing_allowed(context:cutscene_playing_allowed());
+						end,
+						true
+					);
 	
 	-- start pending battle cache
 	cm.pbc_attackers = {};
@@ -2531,7 +2541,9 @@ local function campaign_intro_cutscene_play(faction_key, cindy_scene_key_or_dura
 			cutscene_config_callback(cutscene_intro);
 		end;
 
-		cutscene_intro:start();
+		if cm:is_cutscene_playing_allowed() then
+			cutscene_intro:start();
+		end;
 	else
 		cm:progress_on_all_clients_ui_triggered(
 			faction_key .. "_intro_finished",
@@ -4294,6 +4306,19 @@ function campaign_manager:is_intro_cutscene_playing()
 	return self.intro_cutscene_playing;
 end;
 
+--- @function set_cutscene_playing_allowed
+--- @desc Sets a flag which will block the starting of cutscenes if they are not allowed.
+function campaign_manager:set_cutscene_playing_allowed(allowed)
+	self.cutscene_playing_allowed = allowed;
+end;
+
+
+--- @function is_cutscene_playing_allowed
+--- @desc Returns whether we allow the starting of cutscenes.
+--- @return is cutscene playing allowed
+function campaign_manager:is_cutscene_playing_allowed()
+	return self.cutscene_playing_allowed;
+end;
 
 --- @function has_intro_cutscene_played
 --- @desc Returns whether an intro cutscene has been played this campaign playthrough at all.
@@ -15897,7 +15922,8 @@ function campaign_manager:setup_mission_managers_post_first_tick(mission_manager
 					mm:set_persistent_value(key, value);
 				end;
 				mm:trigger_from_savegame(current_record.started, current_record.completed);
-			else
+			-- Throw a script error, unless the mission record indicates that the mission has been started and completed, in which case we assume it's safe to ignore
+			elseif not (current_record.started and current_record.completed) then
 				script_error("WARNING: attempting to set up mission manager on the first tick after loading the game but we couldn't find any declared mission managers for faction [" .. tostring(faction_name) .. "] with mission key ["  .. tostring(mission_key) .. "]. Mission managers should be declared during script startup. Will proceed, but this indicates some kind of script/savegame mismatch");
 			end;
 		else

@@ -4843,9 +4843,8 @@ local function construct_narrative_event_spread_plagues(unique_name, faction_key
 			"ScriptEventPlagueSpreading",
 			function(context)
 				if context:faction():name() == faction_key then
-					local num_spreads = context:count();
-					mm:update_scripted_objective_text(full_mission_text, num_spreads);
-					return num_spreads > spreads_threshold;
+					mm:update_scripted_objective_text(full_mission_text, 1);
+					return true
 				end;
 			end
 		);

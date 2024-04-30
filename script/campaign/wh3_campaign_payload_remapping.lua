@@ -402,14 +402,16 @@ payload.add_money_equivalence_mapping("wh2_dlc09_tmb_khemri", tomb_kings_canopic
 
 local function nurgle_infections_money_equivalence_mapping(money_value, faction_key, params)
 
-	-- 1/4 of the money is re-allocated to infections (at 1/100th the original money value)
-	local infections_value = money_value * 0.01;
+	-- 1/4 of the money is re-allocated to infections (at 1/10th the original money value)
+	local infections_value = money_value * 0.1;
 	money_value = money_value * 0.75;
 	
 	return payload.money_direct(money_value) .. ";" .. payload.infections(infections_value)
 end
 
 payload.add_money_equivalence_mapping("wh3_main_nur_poxmakers_of_nurgle", nurgle_infections_money_equivalence_mapping);
+payload.add_money_equivalence_mapping("wh3_dlc25_nur_tamurkhan", nurgle_infections_money_equivalence_mapping);
+payload.add_money_equivalence_mapping("wh3_dlc25_nur_epidemius", nurgle_infections_money_equivalence_mapping);
 
 
 

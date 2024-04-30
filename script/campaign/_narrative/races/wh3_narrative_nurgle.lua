@@ -89,7 +89,7 @@ local function nurgle_plagues_narrative_loader(faction_key)
 				narrative.get(faction_key, name .. "_start_messages") or "StartNurglePlaguesChainFull",															-- script message(s) on which to start
 				narrative.get(faction_key, name .. "_target_messages") or "StartNurglePlaguesPreConcoctPlagueQuery",											-- target message(s) to trigger
 				narrative.get(faction_key, name .. "_cancel_messages"),																							-- script message(s) on which to cancel
-				narrative.get(faction_key, name .. "_num_turns") or 3,																							-- num turns to wait
+				narrative.get(faction_key, name .. "_num_turns") or 4,																							-- num turns to wait
 				narrative.get(faction_key, name .. "_immediate") or true																						-- trigger immediately
 			);
 		end;
@@ -197,7 +197,7 @@ local function nurgle_plagues_narrative_loader(faction_key)
 	-----------------------------------------------------------------------------------------------------------
 	--	Unlock Symptoms
 	-----------------------------------------------------------------------------------------------------------
-
+--[[
 	do
 		local name = "nurgle_plagues_event_unlock_symptoms";
 
@@ -261,7 +261,7 @@ local function nurgle_plagues_narrative_loader(faction_key)
 		end;
 	end;
 
-
+]]
 
 
 
@@ -277,7 +277,8 @@ local function nurgle_plagues_narrative_loader(faction_key)
 
 
 	narrative.todo_output("Add trigger for unlocking symptoms");
-
+--REMOVED MISSION AS IT IS LONGER VALID FOR NEW PLAGUE SYSTEM
+--[[	
 	-----------------------------------------------------------------------------------------------------------
 	--	[EXPERT] Turn Countdown Pre Unlock Many Symptoms
 	-----------------------------------------------------------------------------------------------------------
@@ -327,7 +328,7 @@ local function nurgle_plagues_narrative_loader(faction_key)
 		end;
 	end;
 
-
+]]
 
 
 
@@ -811,15 +812,371 @@ local function nurgle_plaguelords_blessings_narrative_loader(faction_key)
 end;
 
 
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+--
+--	TAMURKHAN'S NARRATIVE MISSIONS
+--
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+
+tamurkhan_narrative_missions = {}
+
+tamurkhan_narrative_missions.chieftain_hero =
+{
+	mission = "wh3_dlc25_camp_narrative_nurgle_chieftain_hero",
+	objective_text = "wh3_dlc25_camp_narrative_mission_description_nurgle_chieftain_hero", 
+	reward = {
+		payload.money_direct(1000)
+	},
+	chieftain_key = "wh3_dlc25_nur_kayzk_the_befouled",
+	chieftain_recruited = nil
+}
+
+tamurkhan_narrative_missions.chieftain_unit =
+{
+	advice = "wh3_dlc25_tamurkhan_cam_mission_chieftain_unit_001",
+	mission = "wh3_dlc25_camp_narrative_nurgle_chieftain_unit",
+	objective_text = "wh3_dlc25_camp_narrative_mission_description_nurgle_chieftain_unit",
+	reward = {
+		payload.pooled_resource_mission_payload("wh3_dlc25_chieftain_dominance", "wh3_dlc25_dominance_gain_events", 2), 
+		payload.money_direct(2000)
+	},
+	unit_keys = {
+		--wh3_dlc25_nur_kayzk_the_befouled
+			"wh3_dlc25_nur_chieftain_cav_chaos_chariot_mnur",
+			"wh3_dlc25_nur_chieftain_cav_rot_knights",
+			"wh3_dlc25_nur_chieftain_mon_toad_dragon",
+
+		--wh3_dlc25_nur_bray_shaman_wild_chieftain
+			"wh3_dlc25_nur_chieftain_inf_centigors_1",
+			"wh3_dlc25_nur_chieftain_inf_cygor_0",
+			"wh3_dlc25_nur_chieftain_mon_ghorgon",
+
+		--wh3_dlc25_nur_fimir_balefiend_shadow_chieftain
+			"wh3_dlc25_nur_chieftain_mon_fimir_0",
+			"wh3_dlc25_nur_chieftain_mon_fimir_1",
+			"wh3_dlc25_nur_chieftain_mon_frost_wyrm_0",
+
+		--wh3_dlc25_nur_skin_wolf_werekin_chieftain
+			"wh3_dlc25_nur_chieftain_mon_skinwolves_0",
+			"wh3_dlc25_nur_chieftain_mon_war_mammoth_0",
+			"wh3_dlc25_nur_chieftain_mon_war_mammoth_1",
+
+		--wh3_dlc25_nur_castellan_chieftain
+			"wh3_dlc25_nur_chieftain_inf_chaos_dwarf_blunderbusses",
+			"wh3_dlc25_nur_chieftain_inf_infernal_guard_fireglaives",
+			"wh3_dlc25_nur_chieftain_veh_dreadquake_mortar",
+
+		--wh3_dlc25_nur_exalted_hero_chieftain
+			"wh3_dlc25_nur_chieftain_inf_aspiring_champions_0",
+			"wh3_dlc25_nur_chieftain_art_hellcannon",
+			"wh3_dlc25_nur_chieftain_mon_dragon_ogre_shaggoth",
+	}
+}
+
+tamurkhan_narrative_missions.deference =
+{
+	advice = "wh3_dlc25_tamurkhan_cam_mission_deference_001",
+	mission = "wh3_dlc25_camp_narrative_nurgle_deference",
+	objective_text = "wh3_dlc25_camp_narrative_mission_description_nurgle_deference", 
+	reward = {
+		payload.pooled_resource_mission_payload("wh3_dlc25_chieftain_dominance", "wh3_dlc25_dominance_gain_events", 4), 
+		payload.money_direct(3000)
+	},
+	deference_key = "wh3_dlc25_chieftain_deference_kazyk",	
+}
+
+tamurkhan_narrative_missions.kill_khorne =
+{
+	mission = "wh3_dlc25_camp_narrative_nurgle_kill_khorne", 
+	reward = {
+		payload.pooled_resource_mission_payload("wh3_main_nur_infections", "missions", 200),
+		payload.pooled_resource_mission_payload("wh3_dlc25_chieftain_dominance", "wh3_dlc25_dominance_gain_events", 2), 
+		payload.money_direct(1000)
+	},
+	faction_key = "wh3_main_kho_crimson_skull",
+}
+
+tamurkhan_narrative_missions.kill_tzeentch =
+{
+	advice = "wh3_dlc25_tamurkhan_cam_mission_kill_tzeentch_001",
+	mission = "wh3_dlc25_camp_narrative_nurgle_kill_tzeentch",
+	reward = {
+		payload.pooled_resource_mission_payload("wh3_main_nur_infections", "missions", 400), 
+		payload.pooled_resource_mission_payload("wh3_dlc25_chieftain_dominance", "wh3_dlc25_dominance_gain_events", 4), 
+		payload.money_direct(2000)
+	},
+	faction_key = "wh3_main_tze_flaming_scribes",
+}
 
 
+local function tamurkhan_narrative_events(faction_key)
+	----------------------------------------------------
+	--				TAMURKHAN CHIEFTAINS			  --
+	----------------------------------------------------
+	
+	-----------------------------------------------------------------------------------------------------------
+	--	Chieftain Unit
+	-----------------------------------------------------------------------------------------------------------
+	do
+		local name = "tamurkhan_chieftain_unit_turn_countdown"
+
+		if not narrative.get(faction_key, name .. "_block") then
+			narrative_triggers.turn_countdown(
+				name,														-- unique name for this narrative trigger
+				faction_key,												-- key of faction to which it applies
+				"ScriptEventStartTamurkhan_ChieftainHero",					-- script message(s) on which to start
+				"ScriptEvent_StartChieftainUnitMission",					-- target message(s) to trigger
+				nil,														-- script message(s) on which to cancel
+				1,															-- num turns to wait
+				true														-- trigger immediately
+			)
+		end
+	end
+
+	-----------------------------------------------------------------------------------------------------------
+	--	Chieftain Deference
+	-----------------------------------------------------------------------------------------------------------
+
+	do
+		local name = "tamurkhan_deference_turn_countdown"
+
+		if not narrative.get(faction_key, name .. "_block") then
+			narrative_triggers.turn_countdown(
+				name,														-- unique name for this narrative trigger
+				faction_key,												-- key of faction to which it applies
+				"ScriptEventStartTamurkhan_ChieftainHero",					-- script message(s) on which to start
+				"ScriptEventStartTamurkhan_Deference",						-- target message(s) to trigger
+				nil,														-- script message(s) on which to cancel
+				2,															-- num turns to wait
+				true														-- trigger immediately
+			)
+		end
+	end
+
+	----------------------------------------------------
+	--					DEFEAT FACTIONS				  --
+	----------------------------------------------------
+	if cm:get_campaign_name() == "wh3_main_chaos" then
+		-----------------------------------------------------------------------------------------------------------
+		--	Kill Khorne
+		-----------------------------------------------------------------------------------------------------------
+		do
+			local name = "tamurkhan_kill_khorne_turn_countdown"
+
+			if not narrative.get(faction_key, name .. "_block") then
+				narrative_triggers.turn_countdown(
+					name,														-- unique name for this narrative trigger
+					faction_key,												-- key of faction to which it applies
+					"StartNarrativeEvents",										-- script message(s) on which to start
+					"ScriptEventStartTamurkhan_KillKhorne",						-- target message(s) to trigger
+					nil,														-- script message(s) on which to cancel
+					1,															-- num turns to wait
+					true														-- trigger immediately
+				)
+			end
+		end
+		
+		-----------------------------------------------------------------------------------------------------------
+		--	Kill Tzeentch
+		-----------------------------------------------------------------------------------------------------------
+		do
+			local name = "tamurkhan_kill_tzeentch_turn_countdown"
+
+			if not narrative.get(faction_key, name .. "_block") then
+				narrative_triggers.turn_countdown(
+					name,														-- unique name for this narrative trigger
+					faction_key,												-- key of faction to which it applies
+					"ScriptEventStartTamurkhan_KhorneKilled",					-- script message(s) on which to start
+					"ScriptEventStartTamurkhan_KillTzeentch",					-- target message(s) to trigger
+					nil,														-- script message(s) on which to cancel
+					1,															-- num turns to wait
+					true														-- trigger immediately
+				)
+			end
+		end	
+	end
+	tamurkhan_narrative_missions:initialise(faction_key)
+
+end
+
+function tamurkhan_narrative_missions:initialise(faction_key)
+
+	----------------------------------------------------
+	--				TAMURKHAN CHIEFTAINS			  --
+	----------------------------------------------------
+	
+	-----------------------------------------------------------------------------------------------------------
+	--	Chieftain Hero
+	-----------------------------------------------------------------------------------------------------------
+	do
+		local name = "tamurkhan_event_chieftain_hero"
+		local mission_info = self.chieftain_hero
+
+		if not narrative.get(faction_key, name .. "_block") then
+			narrative_events.generic(
+				name,														-- unique name for this narrative event
+				faction_key,												-- key of faction to which it applies
+				nil,														-- key of advice to deliver
+				mission_info.mission,										-- key of mission to deliver
+				mission_info.objective_text,								-- key of mission objective text
+				{															-- event/condition listeners
+					{
+						event = "UniqueAgentSpawned",
+						condition =	function(context)
+							return context:unique_agent_details():character():character_subtype_key() == mission_info.chieftain_key							
+						end
+					}
+				},
+				nil,														-- camera scroll callback
+				nil,														-- mission issuer (can be nil in which case default is used)
+				mission_info.reward,										-- mission rewards
+				"StartNarrativeEvents",										-- script message(s) on which to trigger when received
+				nil,														-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
+				"ScriptEventStartTamurkhan_ChieftainHero",					-- script message(s) to trigger when this mission is completed
+				nil,
+				true 														-- force the advice to always play
+			)
+		end
+	end
+
+	-----------------------------------------------------------------------------------------------------------
+	--	Chieftain Units
+	-----------------------------------------------------------------------------------------------------------
+	do
+		local name = "tamurkhan_event_chieftain_unit"
+		local mission_info = self.chieftain_unit		
+
+		if not narrative.get(faction_key, name .. "_block") then
+			narrative_events.generic(
+				name,														-- unique name for this narrative event
+				faction_key,												-- key of faction to which it applies
+				mission_info.advice,										-- key of advice to deliver
+				mission_info.mission,										-- key of mission to deliver
+				mission_info.objective_text,								-- key of mission objective text
+				{															-- event/condition listeners
+					{
+						event = "UnitCreated",
+						condition =	function(context)
+							local unit_key = context:unit():unit_key()
+							local chieftain_units = mission_info.unit_keys
+							for i = 1, #chieftain_units do
+								if unit_key == chieftain_units[i] then
+									return true
+								end
+							end
+						end
+					}
+				},
+				nil,														-- camera scroll callback
+				nil,														-- mission issuer (can be nil in which case default is used)
+				mission_info.reward,										-- mission rewards
+				"ScriptEvent_StartChieftainUnitMission",					-- script message(s) on which to trigger when received
+				nil,														-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
+				nil,														-- script message(s) to trigger when this mission is completed
+				nil,
+				true 														-- force the advice to always play
+			)
+		end
+
+	end
+
+	-----------------------------------------------------------------------------------------------------------
+	--	Chieftain Deference
+	-----------------------------------------------------------------------------------------------------------
+	do
+		local name = "tamurkhan_event_deference"
+		local mission_info = self.deference		
+
+		if not narrative.get(faction_key, name .. "_block") then
+			narrative_events.generic(
+				name,														-- unique name for this narrative event
+				faction_key,												-- key of faction to which it applies
+				mission_info.advice,										-- key of advice to deliver
+				mission_info.mission,										-- key of mission to deliver
+				mission_info.objective_text,								-- key of mission objective text
+				{															-- event/condition listeners
+					{
+						event = "PooledResourceChanged",
+						condition =	function(context)
+							local resource = context:resource()							
+							if resource:key() == mission_info.deference_key then									
+								if context:faction():name() == faction_key and resource:value() >= 7 then
+									return true
+								end
+							end							
+						end
+					}
+				},
+				nil,														-- camera scroll callback
+				nil,														-- mission issuer (can be nil in which case default is used)
+				mission_info.reward,										-- mission rewards
+				"ScriptEventStartTamurkhan_Deference",						-- script message(s) on which to trigger when received
+				nil,														-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
+				nil,														-- script message(s) to trigger when this mission is completed
+				nil,
+				true 														-- force the advice to always play
+			)
+		end
+	end
+
+	----------------------------------------------------
+	--			 	 DEFEAT FACTIONS	 			  --
+	----------------------------------------------------
+
+	-----------------------------------------------------------------------------------------------------------
+	--	Kill Khorne
+	-----------------------------------------------------------------------------------------------------------
+	do
+		local name = "tamurkhan_event_kill_khorne"
+		local mission_info = self.kill_khorne
+
+		if not narrative.get(faction_key, name .. "_block") then
+			narrative_events.destroy_faction(
+				name,														-- unique name for this narrative event
+				faction_key,												-- key of faction to which it applies
+				nil,														-- key of advice to deliver
+				mission_info.mission,										-- key of mission to deliver
+				mission_info.faction_key,									-- key of mission to target
+				nil,														-- mission issuer (can be nil in which case default is used)
+				mission_info.reward,										-- mission rewards
+				"ScriptEventStartTamurkhan_KillKhorne",						-- script message(s) on which to trigger when received
+				nil,														-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
+				"ScriptEventStartTamurkhan_KhorneKilled",					-- script message(s) to trigger when this mission is completed
+				nil,
+				true 														-- force the advice to always play
+			)
+		end
+	end
+
+	-----------------------------------------------------------------------------------------------------------
+	--	Kill Tzeentch
+	-----------------------------------------------------------------------------------------------------------
+	do
+		local name = "tamurkhan_event_kill_tzeentch"
+		local mission_info = self.kill_tzeentch
+
+		if not narrative.get(faction_key, name .. "_block") then
+			narrative_events.destroy_faction(
+				name,														-- unique name for this narrative event
+				faction_key,												-- key of faction to which it applies
+				mission_info.advice,										-- key of advice to deliver
+				mission_info.mission,										-- key of mission to deliver
+				mission_info.faction_key,									-- key of mission to target
+				nil,														-- mission issuer (can be nil in which case default is used)
+				mission_info.reward,										-- mission rewards
+				"ScriptEventStartTamurkhan_KillTzeentch",					-- script message(s) on which to trigger when received
+				nil,														-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
+				nil,														-- script message(s) to trigger when this mission is completed
+				nil,
+				true 														-- force the advice to always play
+			)
+		end
+	end
 
 
-
-
-
-
-
+end
 
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
@@ -838,6 +1195,11 @@ local function start_nurgle_narrative_events(faction_key)
 	nurgle_great_game_narrative_loader(faction_key);
 	nurgle_plaguelords_blessings_narrative_loader(faction_key);
 	chaos_movements_narrative_loader(faction_key);
+
+	if faction_key == "wh3_dlc25_nur_tamurkhan" then
+		tamurkhan_narrative_events(faction_key)
+	end
+
 end;
 
 

@@ -541,6 +541,7 @@ local function add_narrative_data_for_playable_faction(faction_key)
 		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_control_two_provinces_block", true);
 		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_control_provinces_block", true);
 		narrative.add_data_for_faction(faction_key, "shared_finance_query_advice_block", true); -- beastmen do not get income
+		narrative.add_data_for_faction(faction_key, "shared_technology_chain_block", true); -- beastmen technology works differently to how these missions expect it to
 	end;
 end;
 

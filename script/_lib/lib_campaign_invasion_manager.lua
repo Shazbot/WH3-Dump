@@ -571,7 +571,8 @@ end
 --- @p [opt=true] boolean declare_war, If True the invasion will declare war on its targets
 --- @p [opt=true] boolean invite_attacker_allies, If True the invasion will invite its allies when declaring war
 --- @p [opt=true] boolean invite_defender_allies, If True the invasions target will invite its allies when declaring war
-function invasion:start_invasion(callback_function, declare_war, invite_attacker_allies, invite_defender_allies)
+--- @p [opt=true] boolean allow_diplomatic_discovery, If True the invasion manager will decide whether to allow diplomatic discovery for the spawned ai force; If false there will be no diplomatic discovery occurring for the spawned ai force (this additional optional parameter is being supplied because it can create a major slowdown)
+function invasion:start_invasion(callback_function, declare_war, invite_attacker_allies, invite_defender_allies, allow_diplomatic_discovery)
 	out.invasions("Invasion: Starting Invasion for '"..self.key.."'...");
 	if declare_war == nil then
 		declare_war = true;
@@ -581,6 +582,9 @@ function invasion:start_invasion(callback_function, declare_war, invite_attacker
 	end
 	if invite_defender_allies == nil then
 		invite_defender_allies = true;
+	end
+	if allow_diplomatic_discovery == nil then
+		allow_diplomatic_discovery = true
 	end
 	
 	if self.started == false then
@@ -604,7 +608,7 @@ function invasion:start_invasion(callback_function, declare_war, invite_attacker
 			if self.new_general ~= nil then
 				out.invasions("\t\tCreating force with new general!");
 				cm:create_force_with_general(self.faction, self.unit_list, temp_region, x, y, self.new_general.agent_type, self.new_general.agent_subtype, self.new_general.forename, self.new_general.clan_name, self.new_general.family_name, self.new_general.other_name, self.new_general.make_faction_leader,
-				function(cqi) self:force_created(cqi, declare_war, invite_attacker_allies, invite_defender_allies) end, true);
+				function(cqi) self:force_created(cqi, declare_war, invite_attacker_allies, invite_defender_allies) end, allow_diplomatic_discovery);
 			elseif self.general_cqi == nil then
 				cm:create_force_with_full_diplomatic_discovery(self.faction, self.unit_list, temp_region, x, y, true,
 				function(cqi) self:force_created(cqi, declare_war, invite_attacker_allies, invite_defender_allies) end, false);

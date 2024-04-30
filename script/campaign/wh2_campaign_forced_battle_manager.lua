@@ -25,10 +25,11 @@ function Forced_Battle_Manager:trigger_forced_battle_with_generated_army(
 	opt_general_subtype,
 	opt_general_level,
 	opt_effect_bundle,
-	opt_player_is_generated_force
+	opt_player_is_generated_force,
+	opt_forced_battle_key_override
 	)
 
-	local forced_battle_key = generated_force_template.."_forced_battle"
+	local forced_battle_key = opt_forced_battle_key_override or generated_force_template.."_forced_battle"
 	local forced_battle = Forced_Battle_Manager:setup_new_battle(forced_battle_key)
 	local generated_force =  WH_Random_Army_Generator:generate_random_army(forced_battle_key, generated_force_template, generated_force_size, generated_force_power, true, false)
 	forced_battle:add_new_force(forced_battle_key, generated_force, generated_force_faction, destroy_generated_force_after_battle, opt_effect_bundle, opt_general_subtype,opt_general_level)
@@ -63,7 +64,8 @@ function Forced_Battle_Manager:trigger_forced_battle_with_generated_army(
 
 	local player_force_general_cqi = cm:get_character_by_mf_cqi(target_force_cqi):command_queue_index()
 
-	local x,y = cm:find_valid_spawn_location_for_character_from_character(generated_force_faction,"character_cqi:"..player_force_general_cqi,true,6)
+	local x,y = cm:find_valid_spawn_location_for_character_from_character(generated_force_faction,"character_cqi:"..player_force_general_cqi,true, 6)
+
 	forced_battle:trigger_battle(attacker, defender, x, y, is_ambush)
 end
 
@@ -102,6 +104,7 @@ function Forced_Battle_Manager:get_battle(key)
 			return self.forced_battles_list[key]
 		else 
 			script_error("ERROR: Forced Battle Manager - trying to get Forced Battle "..key.." but this marker cannot be found")
+			return false
 		end
 	end
 end
@@ -258,7 +261,6 @@ function forced_battle:trigger_battle(attacker_force, target_force, opt_target_x
 
 	Forced_Battle_Manager.active_battle = self.key
 	Forced_Battle_Manager:setup_battle_completion_listener()
-		
 end
 
 
@@ -340,14 +342,15 @@ function Forced_Battle_Manager:setup_battle_completion_listener()
 			end
 
 			local active_forced_battle = self:get_battle(self.active_battle)
-			active_forced_battle:trigger_post_battle_events(attacker_won)
+			if active_forced_battle ~= false then
+				active_forced_battle:trigger_post_battle_events(attacker_won)
 
-			-- Re-enable character event messages after battle has been completed
-			local callback_delay = 0.2
-			cm:callback(function() cm:disable_event_feed_events(false, "wh_event_category_character", "", "") end, callback_delay)
+				-- Re-enable character event messages after battle has been completed
+				local callback_delay = 0.2
+				cm:callback(function() cm:disable_event_feed_events(false, "wh_event_category_character", "", "") end, callback_delay)
 
-			active_forced_battle:clear_up_forced_battle()
-
+				active_forced_battle:clear_up_forced_battle()
+			end
 		end,
 		false
 	)
@@ -409,7 +412,9 @@ function forced_battle:forced_battle_stage_2()
 			"FactionLeaderDeclaresWar",
 			true,
 				function()
-					cm:force_attack_of_opportunity(self.attacker.cqi, self.target.cqi, self.is_ambush)
+					cm:callback(function()
+						cm:force_attack_of_opportunity(self.attacker.cqi, self.target.cqi, self.is_ambush)
+					end, 0.05)
 				end,
 			false
 			)
@@ -418,7 +423,9 @@ function forced_battle:forced_battle_stage_2()
 			
 			cm:force_declare_war(attacker_faction:name(), target_faction:name(),false,false, false)
 		else
-			 cm:force_attack_of_opportunity(self.attacker.cqi, self.target.cqi, self.is_ambush)
+			cm:callback(function()
+				cm:force_attack_of_opportunity(self.attacker.cqi, self.target.cqi, self.is_ambush)
+			end, 0.05)
 		end
 	
 end

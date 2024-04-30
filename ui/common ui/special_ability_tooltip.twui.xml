@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -30,6 +30,10 @@
 								<label_num_uses_battle this="10300E88-A064-4FFE-8A1BE0CAA53F368D"/>
 								<intensity_parent this="FD16E25B-092A-47E6-AAF20ED1395A8592">
 									<label_intensity this="F6E29F71-DDEE-448E-BBB3E95F05062D6C"/>
+									<fill_bar_parent this="66B9B3F7-8638-4D59-B31AB29BE3EA5049">
+										<intensity_fill this="64227A29-2284-4779-A5278D5FBAD52094"/>
+										<frame this="6766FB5A-BC00-417E-936E48A1FC32CCD8"/>
+									</fill_bar_parent>
 									<value_intensity this="E90B68E2-2CB6-4A21-A6ACD80024DDCD70"/>
 								</intensity_parent>
 							</title>
@@ -120,6 +124,15 @@
 													<label_additional_effect this="76CE0D32-2156-464F-968CDEDE01F407EA"/>
 												</template_additional_effect>
 											</additional_ui_effects_list>
+											<ammunition_replenishment_effect this="CD8243AB-8667-4BC3-902EAB9F23FE71B2">
+												<effect_icon_parent this="752F4F15-752A-41EC-9C443BB2C1542F04">
+													<effect_icon this="74C6272E-BE0E-4DD1-973A8372AC2D0E0D"/>
+												</effect_icon_parent>
+												<label_effect this="49E5147F-5B08-430A-BBC35242A3537074"/>
+											</ammunition_replenishment_effect>
+											<remove_magical_effect this="C58D8E10-2F85-44AC-AFE97548D8873F10">
+												<label_effect this="0144A82F-E29D-4650-9A9CBB3F180E3A14"/>
+											</remove_magical_effect>
 										</phase_info>
 									</template_phase>
 								</phase_list>
@@ -329,6 +342,21 @@
 								<label_additional_effect this="1E6DD71A-3EF3-44F3-ACAA5A989A78BF76"/>
 							</template_additional_effect>
 						</additional_ui_effects_list>
+						<ammunition_replenishment_effect this="1CB1C04A-6C66-4686-8FC05702F1273A53">
+							<effect_icon_parent this="6F368F00-CD6E-4E55-8AF5A8057031DBA0">
+								<effect_icon this="11C833E4-D264-4986-B9FA61CDE8E6A039"/>
+							</effect_icon_parent>
+							<label_effect this="896ACAB7-DC7A-45B6-8C2B89928948C4F4"/>
+						</ammunition_replenishment_effect>
+						<remove_magical_effect this="318E309F-162C-4CB0-8E37058BCFDD4559">
+							<label_effect this="C7242FBB-EEBD-4901-AF955721BE3E469B"/>
+						</remove_magical_effect>
+						<ammunition_replenishment_effect this="B94DC2D7-423E-4D91-AA863C4849F086C3">
+							<effect_icon_parent this="188BDD12-DACE-4A1D-A048918419D65419">
+								<effect_icon this="1FE39A3D-3273-4234-BC402544CEADBD64"/>
+							</effect_icon_parent>
+							<label_effect this="20966CF3-A143-49ED-80D4C62F0AC7B19A"/>
+						</ammunition_replenishment_effect>
 					</phase_info>
 				</contact_effect>
 			</special_ability_tooltip>
@@ -892,7 +920,7 @@
 			part_of_template="true"
 			uniqueguid_in_template="439A25D8-93EF-4237-A6AC5071A3B38702"
 			uniqueguid="F98DFE82-E61F-4A38-B8D0B3C74BA1B646"
-			dimensions="360.00,362.00">
+			dimensions="379.00,410.00">
 			<state_uniqueguids>
 				<state_uniqueguid
 					name="NewState"
@@ -903,6 +931,9 @@
 				<callback_with_context
 					callback_id="ContextObjectStore"
 					context_object_id="CcoBattleAbility"/>
+				<callback_with_context
+					callback_id="ContextPropagationBlocker"
+					context_object_id="CcoEffect"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -923,7 +954,7 @@
 			part_of_template="true"
 			uniqueguid_in_template="439A25D8-93EF-4237-A6AC5071A3B38702"
 			uniqueguid="21C0404B-E810-44B4-8E19A47EE0887936"
-			dimensions="360.00,362.00">
+			dimensions="379.00,434.00">
 			<state_uniqueguids>
 				<state_uniqueguid
 					name="NewState"
@@ -934,6 +965,9 @@
 				<callback_with_context
 					callback_id="ContextObjectStore"
 					context_object_id="CcoBattleAbility"/>
+				<callback_with_context
+					callback_id="ContextPropagationBlocker"
+					context_object_id="CcoEffect"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -3401,6 +3435,374 @@
 					text_label="StateText_c6db0bad"/>
 			</localised_texts>
 		</value_barrier_duration_infinite>
+		<ammunition_replenishment_effect
+			this="CD8243AB-8667-4BC3-902EAB9F23FE71B2"
+			id="ammunition_replenishment_effect"
+			part_of_template="true"
+			uniqueguid_in_template="D6F22B45-BFEC-479E-B406114AFCC4ED7F"
+			uniqueguid="CD8243AB-8667-4BC3-902EAB9F23FE71B2"
+			dimensions="360.00,24.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="false"
+					uniqueguid="596E786C-3A41-4C4A-8DAF7A88D9169CC3"/>
+				<state_uniqueguid
+					name="true"
+					uniqueguid="48A6D31F-F1C4-483A-86171013883BD9CB"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="HasAmmunitionReplenishment"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="false"
+					is_text_localised="false"/>
+				<localised_text
+					state="true"
+					is_text_localised="false"/>
+			</localised_texts>
+		</ammunition_replenishment_effect>
+		<ammunition_replenishment_effect
+			this="1CB1C04A-6C66-4686-8FC05702F1273A53"
+			id="ammunition_replenishment_effect"
+			part_of_template="true"
+			uniqueguid_in_template="D6F22B45-BFEC-479E-B406114AFCC4ED7F"
+			uniqueguid="1CB1C04A-6C66-4686-8FC05702F1273A53"
+			dimensions="360.00,24.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="false"
+					uniqueguid="EADB46AD-26AD-4A58-A43CF503B8A79983"/>
+				<state_uniqueguid
+					name="true"
+					uniqueguid="BCE851E8-8AFE-4E46-8763750307A86C55"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="HasAmmunitionReplenishment"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="false"
+					is_text_localised="false"/>
+				<localised_text
+					state="true"
+					is_text_localised="false"/>
+			</localised_texts>
+		</ammunition_replenishment_effect>
+		<effect_icon
+			this="74C6272E-BE0E-4DD1-973A8372AC2D0E0D"
+			id="effect_icon"
+			part_of_template="true"
+			uniqueguid_in_template="C124DAD0-46E8-4049-B9C1E854BF0F3621"
+			uniqueguid="74C6272E-BE0E-4DD1-973A8372AC2D0E0D"
+			dimensions="24.00,24.00"
+			dock_point="Center Right">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="0AD24432-DE0A-4CF6-931DFF24C64EC10F"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/campaign ui/effect_bundles/ammo_character.png"
+					uniqueguid="30E9B278-EE19-4E32-86D831C0062DB1BB"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/campaign ui/effect_bundles/ammo_character.png"/>
+			</override_images>
+		</effect_icon>
+		<effect_icon
+			this="11C833E4-D264-4986-B9FA61CDE8E6A039"
+			id="effect_icon"
+			part_of_template="true"
+			uniqueguid_in_template="C124DAD0-46E8-4049-B9C1E854BF0F3621"
+			uniqueguid="11C833E4-D264-4986-B9FA61CDE8E6A039"
+			dimensions="24.00,24.00"
+			dock_point="Center Right">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="061E66CB-3147-4897-9753E6F0BC457DF8"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/campaign ui/effect_bundles/ammo_character.png"
+					uniqueguid="72A37ADA-1F20-48B4-B18C0F7EBD3F8068"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/campaign ui/effect_bundles/ammo_character.png"/>
+			</override_images>
+		</effect_icon>
+		<effect_icon_parent
+			this="752F4F15-752A-41EC-9C443BB2C1542F04"
+			id="effect_icon_parent"
+			part_of_template="true"
+			uniqueguid_in_template="DA0A9D24-CB62-4A61-9CE4186BFE065635"
+			uniqueguid="752F4F15-752A-41EC-9C443BB2C1542F04"
+			dimensions="45.00,24.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="C1CAA3F1-4F0C-4BCC-B34DE5CE984697CF"/>
+			</state_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</effect_icon_parent>
+		<effect_icon_parent
+			this="6F368F00-CD6E-4E55-8AF5A8057031DBA0"
+			id="effect_icon_parent"
+			part_of_template="true"
+			uniqueguid_in_template="DA0A9D24-CB62-4A61-9CE4186BFE065635"
+			uniqueguid="6F368F00-CD6E-4E55-8AF5A8057031DBA0"
+			dimensions="45.00,24.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="6E4B02E2-A0E5-4F96-BC9F1C6405312D15"/>
+			</state_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</effect_icon_parent>
+		<label_effect
+			this="49E5147F-5B08-430A-BBC35242A3537074"
+			id="label_effect"
+			part_of_template="true"
+			uniqueguid_in_template="9CA2A994-92F5-4735-A64C41EC55D1719C"
+			uniqueguid="49E5147F-5B08-430A-BBC35242A3537074"
+			dimensions="315.00,24.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="false"
+					uniqueguid="96054770-E2F8-43A1-8F2F83CFA87D94C8"/>
+				<state_uniqueguid
+					name="true"
+					uniqueguid="907F5119-EF67-423F-BF314E9173C27805"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="Loc(GetIfElse(AmmunitionReplenishment &gt; 0, &quot;phase_replenish_ammunition&quot;, &quot;phase_destroy_ammunition&quot;))"/>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="AmmunitionReplenishment &gt; 0"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="false"
+					text="dy_effect"
+					text_label="StateText_b505c32c"
+					is_text_localised="false"/>
+				<localised_text
+					state="true"
+					text="dy_effect"
+					text_label="StateText_d17fe5f4"
+					is_text_localised="false"/>
+			</localised_texts>
+		</label_effect>
+		<label_effect
+			this="896ACAB7-DC7A-45B6-8C2B89928948C4F4"
+			id="label_effect"
+			part_of_template="true"
+			uniqueguid_in_template="9CA2A994-92F5-4735-A64C41EC55D1719C"
+			uniqueguid="896ACAB7-DC7A-45B6-8C2B89928948C4F4"
+			dimensions="315.00,24.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="false"
+					uniqueguid="487487B5-97F2-4A48-B3FA3361ADA44D77"/>
+				<state_uniqueguid
+					name="true"
+					uniqueguid="C34A7482-89C6-4FD4-AAE8E024229D9D5C"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="Loc(GetIfElse(AmmunitionReplenishment &gt; 0, &quot;phase_replenish_ammunition&quot;, &quot;phase_destroy_ammunition&quot;))"/>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="AmmunitionReplenishment &gt; 0"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="false"
+					text="dy_effect"
+					text_label="StateText_b505c32c"
+					is_text_localised="false"/>
+				<localised_text
+					state="true"
+					text="dy_effect"
+					text_label="StateText_d17fe5f4"
+					is_text_localised="false"/>
+			</localised_texts>
+		</label_effect>
+		<label_effect
+			this="0144A82F-E29D-4650-9A9CBB3F180E3A14"
+			id="label_effect"
+			part_of_template="true"
+			uniqueguid_in_template="13158C80-90FB-44A1-B105C5D5B3411AA6"
+			uniqueguid="0144A82F-E29D-4650-9A9CBB3F180E3A14"
+			dimensions="285.00,24.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="false"
+					uniqueguid="87E875CA-1466-4CC6-BFA8E231320342A7"/>
+				<state_uniqueguid
+					name="true"
+					uniqueguid="371D331A-ABF3-42F8-9D81FBA1FF827DB3"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="DatabaseRecordContext(&quot;CcoUnitAbilitiesAdditionalUiEffectRecord&quot;, &quot;wh3_dlc23_negate_magical_weapons&quot;).LocalisedText"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="false"
+					text="dy_effect"
+					text_label="StateText_4ba80b59"
+					is_text_localised="false"/>
+				<localised_text
+					state="true"
+					text="dy_effect"
+					text_label="StateText_96de534c"
+					is_text_localised="false"/>
+			</localised_texts>
+		</label_effect>
+		<label_effect
+			this="C7242FBB-EEBD-4901-AF955721BE3E469B"
+			id="label_effect"
+			part_of_template="true"
+			uniqueguid_in_template="13158C80-90FB-44A1-B105C5D5B3411AA6"
+			uniqueguid="C7242FBB-EEBD-4901-AF955721BE3E469B"
+			dimensions="285.00,24.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="false"
+					uniqueguid="187CE94B-6691-4B27-B99819015CD7F259"/>
+				<state_uniqueguid
+					name="true"
+					uniqueguid="39AB9D0E-27BD-4086-B45F12E6FF7E5DE3"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="DatabaseRecordContext(&quot;CcoUnitAbilitiesAdditionalUiEffectRecord&quot;, &quot;wh3_dlc23_negate_magical_weapons&quot;).LocalisedText"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="false"
+					text="dy_effect"
+					text_label="StateText_4ba80b59"
+					is_text_localised="false"/>
+				<localised_text
+					state="true"
+					text="dy_effect"
+					text_label="StateText_96de534c"
+					is_text_localised="false"/>
+			</localised_texts>
+		</label_effect>
+		<remove_magical_effect
+			this="C58D8E10-2F85-44AC-AFE97548D8873F10"
+			id="remove_magical_effect"
+			part_of_template="true"
+			uniqueguid_in_template="7757101A-46B8-4F84-92A4D386E7BDCC1D"
+			uniqueguid="C58D8E10-2F85-44AC-AFE97548D8873F10"
+			dimensions="360.00,24.00"
+			offset="19.00,0.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="false"
+					uniqueguid="1CD2311D-E918-4DCB-83943A061583EDFB"/>
+				<state_uniqueguid
+					name="true"
+					uniqueguid="29EC0EB6-D6CD-4777-86FA9C857F4B0BDE"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="RemoveMagical"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="false"
+					is_text_localised="false"/>
+				<localised_text
+					state="true"
+					is_text_localised="false"/>
+			</localised_texts>
+		</remove_magical_effect>
+		<remove_magical_effect
+			this="318E309F-162C-4CB0-8E37058BCFDD4559"
+			id="remove_magical_effect"
+			part_of_template="true"
+			uniqueguid_in_template="7757101A-46B8-4F84-92A4D386E7BDCC1D"
+			uniqueguid="318E309F-162C-4CB0-8E37058BCFDD4559"
+			dimensions="360.00,24.00"
+			offset="19.00,0.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="false"
+					uniqueguid="EF1F7000-CD2C-4C76-8BED9D34F8A77B9A"/>
+				<state_uniqueguid
+					name="true"
+					uniqueguid="E5389083-DBCA-4B93-9552CC8E41E60CE4"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="RemoveMagical"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="false"
+					is_text_localised="false"/>
+				<localised_text
+					state="true"
+					is_text_localised="false"/>
+			</localised_texts>
+		</remove_magical_effect>
 		<contact_label
 			this="79226B68-49A3-4C00-A6B1026EF0B9C4BB"
 			id="contact_label"
@@ -3519,7 +3921,7 @@
 		<attribute_additional_info
 			this="3F8AA97D-3D48-4ED9-90A1B683C48091AA"
 			id="attribute_additional_info"
-			offset="0.00,761.00"
+			offset="0.00,749.00"
 			tooltipslocalised="true"
 			uniqueguid="3F8AA97D-3D48-4ED9-90A1B683C48091AA"
 			currentstate="11C1B1AE-6412-4A57-8A6D96FA72FCBA78"
@@ -3723,6 +4125,7 @@
 					callback_id="ContextCommandGiverOnContextSet"
 					context_object_id="CcoUnitAbilityDetails"
 					context_function_id="self.ClearContext(&quot;CcoBattleAbility&quot;, false)"/>
+				<callback_with_context callback_id="HorizontalListScreenFitter"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -3735,7 +4138,7 @@
 					this="3C75BAF0-42D6-42ED-95396E32C476414A"
 					name="NewState"
 					width="392"
-					height="1209"
+					height="1267"
 					uniqueguid="3C75BAF0-42D6-42ED-95396E32C476414A">
 					<imagemetrics>
 						<image
@@ -3743,7 +4146,7 @@
 							uniqueguid="1E048C16-CFCB-42CD-80F349C68398CE6E"
 							componentimage="264A0A38-792F-4539-9A7ADDF56E57F556"
 							width="392"
-							height="1209"
+							height="1267"
 							colour="#FFFFFF00"
 							tile="true"
 							margin="16.00,20.00,16.00,20.00"/>
@@ -3756,12 +4159,11 @@
 				</newstate>
 			</states>
 			<LayoutEngine
-				type="List"
-				spacing="0.00,2.00"
-				sizetocontent="true"
-				margins="10.00,0.00">
+				type="HorizontalList"
+				itemsperrow="6"
+				sizetocontent="true">
 				<columnwidths>
-					<column width="280"/>
+					<column column_width="392"/>
 				</columnwidths>
 			</LayoutEngine>
 		</special_ability_tooltip>
@@ -3797,8 +4199,8 @@
 				<newstate
 					this="EC7790FF-529F-470D-BFA0FA7F8BC5179D"
 					name="NewState"
-					width="360"
-					height="557"
+					width="379"
+					height="605"
 					uniqueguid="EC7790FF-529F-470D-BFA0FA7F8BC5179D">
 					<imagemetrics>
 						<image
@@ -3832,7 +4234,6 @@
 		<main_tooltip_body
 			this="17A9C627-69D8-4392-A3D7879C47E03B77"
 			id="main_tooltip_body"
-			offset="0.00,10.00"
 			tooltipslocalised="true"
 			uniqueguid="17A9C627-69D8-4392-A3D7879C47E03B77"
 			currentstate="003F5933-E2A0-4EEA-AA2ABE8ED62DC1AA"
@@ -4611,8 +5012,8 @@
 				<newstate
 					this="7DC7CCA0-1DF6-447B-8657B4143E014CEF"
 					name="NewState"
-					width="360"
-					height="381"
+					width="379"
+					height="429"
 					uniqueguid="7DC7CCA0-1DF6-447B-8657B4143E014CEF">
 					<component_text
 						texthbehaviour="Never split"
@@ -4854,7 +5255,7 @@
 		<projectile_parent
 			this="A084F874-142B-48A2-86114F7BF1258854"
 			id="projectile_parent"
-			offset="0.00,414.00"
+			offset="0.00,462.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -5250,8 +5651,8 @@
 				<default
 					this="E6492C63-E38B-48F1-AF4F74B48445782E"
 					name="default"
-					width="360"
-					height="381"
+					width="379"
+					height="429"
 					uniqueguid="E6492C63-E38B-48F1-AF4F74B48445782E">
 					<component_text
 						texthbehaviour="Never split"
@@ -5836,7 +6237,7 @@
 		<vortex_parent
 			this="C7D94578-ACC4-45DB-B46862505D4C4C7F"
 			id="vortex_parent"
-			offset="0.00,413.00"
+			offset="0.00,461.00"
 			tooltipslocalised="true"
 			uniqueguid="C7D94578-ACC4-45DB-B46862505D4C4C7F"
 			currentstate="8363B521-A338-4DD6-8F7BA1B3444E4185"
@@ -6420,8 +6821,8 @@
 				<default
 					this="4C1CD129-D6CF-498F-93388A1EDD750050"
 					name="default"
-					width="360"
-					height="405"
+					width="379"
+					height="453"
 					uniqueguid="4C1CD129-D6CF-498F-93388A1EDD750050"/>
 			</states>
 			<LayoutEngine
@@ -6443,8 +6844,8 @@
 				<default
 					this="C4F3D5E4-CED1-4713-937923609257CD62"
 					name="default"
-					width="360"
-					height="405"
+					width="379"
+					height="453"
 					interactive="true"
 					uniqueguid="C4F3D5E4-CED1-4713-937923609257CD62"/>
 			</states>
@@ -7423,7 +7824,7 @@
 		<contact_effect
 			this="9F84FA76-2F15-412B-AE6505D09ED6A8E4"
 			id="contact_effect"
-			offset="0.00,805.00"
+			offset="0.00,791.00"
 			allowhorizontalresize="false"
 			tooltipslocalised="true"
 			uniqueguid="9F84FA76-2F15-412B-AE6505D09ED6A8E4"
@@ -7458,7 +7859,7 @@
 					this="8F3A0CB8-0841-43DD-A5A1A5BCA8DCBEAD"
 					name="NewState"
 					width="365"
-					height="404"
+					height="476"
 					uniqueguid="8F3A0CB8-0841-43DD-A5A1A5BCA8DCBEAD">
 					<imagemetrics>
 						<image
@@ -7466,7 +7867,7 @@
 							uniqueguid="E4F704C8-B23C-410E-BDCC91CEDA302963"
 							componentimage="1295B005-FC0D-4A4E-B8D595A5811AD2DA"
 							width="365"
-							height="404"
+							height="476"
 							tile="true"
 							margin="16.00,20.00,16.00,20.00"/>
 					</imagemetrics>
@@ -8068,7 +8469,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBattleAbility"
-					context_function_id="AbilityApplyIntensity(1) != 1">
+					context_function_id="MaxIntensity != 1.0">
 					<child_m_user_properties>
 						<property
 							name="update_when_parent_invisible"
@@ -8094,7 +8495,10 @@
 						fontcat_name="body_12"/>
 				</active>
 			</states>
-			<LayoutEngine type="HorizontalList"/>
+			<LayoutEngine
+				type="HorizontalList"
+				spacing="10.00,0.00"
+				vertical_alignment="Center"/>
 		</intensity_parent>
 		<label_intensity
 			this="F6E29F71-DDEE-448E-BBB3E95F05062D6C"
@@ -8130,8 +8534,7 @@
 		<value_intensity
 			this="E90B68E2-2CB6-4A21-A6ACD80024DDCD70"
 			id="value_intensity"
-			offset="62.00,0.00"
-			allowverticalresize="false"
+			offset="212.00,4.00"
 			priority="255"
 			tooltipslocalised="true"
 			uniqueguid="E90B68E2-2CB6-4A21-A6ACD80024DDCD70"
@@ -8141,28 +8544,34 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoBattleAbility"
-					context_function_id="Format(&quot;%d%&quot;, RoundFloat(100 * AbilityApplyIntensity(1)))"/>
+					context_function_id="Format(&quot;%d%&quot;, RoundFloat(100 * AbilityApplyIntensity(1)))">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value="100"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<states>
 				<active
 					this="3BE42D97-C685-4CFF-A765630C75CA1733"
 					name="active"
-					width="39"
-					height="24"
+					width="54"
+					height="16"
 					interactive="true"
 					uniqueguid="3BE42D97-C685-4CFF-A765630C75CA1733">
 					<component_text
-						text="ph%"
+						text="dy%"
 						textvalign="Center"
-						texthalign="Right"
-						textxoffset="5.00,0.00"
-						texthbehaviour="Resize"
+						texthbehaviour="Never split"
 						textlocalised="true"
-						textlabel="StateText_9c7a0217"
+						textlabel="StateText_d46ef50a"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="body_12"/>
+						fontcat_name="body_12"
+						text_shader_name="text_outline_t0"
+						textshadervars="0.00,0.00,0.00,128.00"/>
 				</active>
 			</states>
 		</value_intensity>
@@ -8825,7 +9234,7 @@
 		<mirror_behaviour_parent
 			this="D9595D51-5E44-4934-A7DF2A85C231D00D"
 			id="mirror_behaviour_parent"
-			offset="0.00,510.00"
+			offset="0.00,558.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -9012,8 +9421,8 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextTextLabel"
-					context_object_id="CcoProjectileRecord"
-					context_function_id="NumProjectiles"/>
+					context_object_id="CcoProjectileRecord proj, CcoUnitAbility ability"
+					context_function_id="GetIfElse(proj.NumProjectiles &gt; 1 &amp;&amp; !ability.BombardmentRecordContext, proj.NumProjectiles, ability.BombardmentRecordContext.NumProjectiles)"/>
 			</callbackwithcontextlist>
 			<states>
 				<default
@@ -9050,8 +9459,8 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoProjectileRecord"
-					context_function_id="NumProjectiles &gt; 1"/>
+					context_object_id="CcoProjectileRecord proj, CcoUnitAbility ability"
+					context_function_id="proj.NumProjectiles &gt; 1 || ability.BombardmentRecordContext"/>
 			</callbackwithcontextlist>
 			<states>
 				<default
@@ -9153,11 +9562,7 @@
 				type="HorizontalList"
 				spacing="10.00,0.00"
 				margins="5.00,0.00"
-				vertical_alignment="Center">
-				<columnwidths>
-					<:anonymous column_width="344"/>
-				</columnwidths>
-			</LayoutEngine>
+				vertical_alignment="Center"/>
 		</form_parent>
 		<form_text
 			this="9A85EEF2-177D-4B24-BE9CA3A60B7599A8"
@@ -9209,7 +9614,7 @@
 			tooltipslocalised="true"
 			soundcategory="UI_GBL_TMP_Round_Small_Button"
 			uniqueguid="016B968B-9237-48ED-8D40C5F94AB19410"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="838D70AE-2082-4F28-92BCB69B4C56393E"
 			defaultstate="838D70AE-2082-4F28-92BCB69B4C56393E">
 			<callbackwithcontextlist>
@@ -9303,7 +9708,7 @@
 							height="66"
 							dockpoint="Center"
 							dock_offset="0.00,2.00"
-							isaspectratiolocked="true"/>
+							aspect_ratio_locked_behaviour="Width First"/>
 						<image
 							this="E1484396-BF57-4E54-A502512B0C3585F1"
 							uniqueguid="E1484396-BF57-4E54-A502512B0C3585F1"
@@ -9347,5 +9752,289 @@
 				</mouseoff>
 			</animations>
 		</form_portrait>
+		<ammunition_replenishment_effect
+			this="B94DC2D7-423E-4D91-AA863C4849F086C3"
+			id="ammunition_replenishment_effect"
+			offset="0.00,410.00"
+			allowhorizontalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="B94DC2D7-423E-4D91-AA863C4849F086C3"
+			currentstate="497864E2-76A7-40DE-903AAE0070CABDB3"
+			defaultstate="497864E2-76A7-40DE-903AAE0070CABDB3">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="HasAmmunitionReplenishment"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<false
+					this="43525A27-A580-47E2-9F82C7351A017ABD"
+					name="false"
+					width="360"
+					height="24"
+					interactive="true"
+					uniqueguid="43525A27-A580-47E2-9F82C7351A017ABD">
+					<component_text
+						textvalign="Center"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
+				</false>
+				<true
+					this="497864E2-76A7-40DE-903AAE0070CABDB3"
+					name="true"
+					width="360"
+					height="24"
+					interactive="true"
+					uniqueguid="497864E2-76A7-40DE-903AAE0070CABDB3">
+					<component_text
+						textvalign="Center"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="green"/>
+				</true>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"/>
+		</ammunition_replenishment_effect>
+		<effect_icon
+			this="1FE39A3D-3273-4234-BC402544CEADBD64"
+			id="effect_icon"
+			offset="21.00,0.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center Right"
+			component_anchor_point="1.00,0.50"
+			tooltipslocalised="true"
+			uniqueguid="1FE39A3D-3273-4234-BC402544CEADBD64"
+			currentstate="CB65E9A2-21DD-4973-9C7CCD935D6B342C"
+			defaultstate="CB65E9A2-21DD-4973-9C7CCD935D6B342C">
+			<componentimages>
+				<component_image
+					this="616DFE47-3FD4-4C83-9DFA377BD0B69C65"
+					uniqueguid="616DFE47-3FD4-4C83-9DFA377BD0B69C65"
+					imagepath="ui/campaign ui/effect_bundles/ammo_character.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="CB65E9A2-21DD-4973-9C7CCD935D6B342C"
+					name="default"
+					width="24"
+					height="24"
+					uniqueguid="CB65E9A2-21DD-4973-9C7CCD935D6B342C">
+					<imagemetrics>
+						<image
+							this="AEB04B2C-8F59-4E5C-9BC1344118FF0476"
+							uniqueguid="AEB04B2C-8F59-4E5C-9BC1344118FF0476"
+							componentimage="616DFE47-3FD4-4C83-9DFA377BD0B69C65"
+							width="24"
+							height="24"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</effect_icon>
+		<effect_icon_parent
+			this="188BDD12-DACE-4A1D-A048918419D65419"
+			id="effect_icon_parent"
+			allowverticalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="188BDD12-DACE-4A1D-A048918419D65419"
+			currentstate="13592904-F5E8-4C5E-984A7FD44E0A641D"
+			defaultstate="13592904-F5E8-4C5E-984A7FD44E0A641D">
+			<states>
+				<default
+					this="13592904-F5E8-4C5E-984A7FD44E0A641D"
+					name="default"
+					width="45"
+					height="24"
+					uniqueguid="13592904-F5E8-4C5E-984A7FD44E0A641D"/>
+			</states>
+		</effect_icon_parent>
+		<label_effect
+			this="20966CF3-A143-49ED-80D4C62F0AC7B19A"
+			id="label_effect"
+			offset="45.00,0.00"
+			allowhorizontalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="20966CF3-A143-49ED-80D4C62F0AC7B19A"
+			currentstate="A284B5A9-79CB-420D-8F5843DCC9F322ED"
+			defaultstate="A284B5A9-79CB-420D-8F5843DCC9F322ED">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="Loc(GetIfElse(AmmunitionReplenishment &gt; 0, &quot;phase_replenish_ammunition&quot;, &quot;phase_destroy_ammunition&quot;))"/>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="AmmunitionReplenishment &gt; 0"/>
+			</callbackwithcontextlist>
+			<states>
+				<false
+					this="3E17F6D7-772A-4CDC-80519C3EB8E5302D"
+					name="false"
+					width="315"
+					height="24"
+					uniqueguid="3E17F6D7-772A-4CDC-80519C3EB8E5302D">
+					<component_text
+						text="dy_effect"
+						textvalign="Center"
+						textxoffset="5.00,0.00"
+						textyoffset="4.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_3665f2ee"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
+				</false>
+				<true
+					this="A284B5A9-79CB-420D-8F5843DCC9F322ED"
+					name="true"
+					width="315"
+					height="24"
+					uniqueguid="A284B5A9-79CB-420D-8F5843DCC9F322ED">
+					<component_text
+						text="dy_effect"
+						textvalign="Center"
+						textxoffset="5.00,0.00"
+						textyoffset="4.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_61aa4132"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="green"/>
+				</true>
+			</states>
+		</label_effect>
+		<fill_bar_parent
+			this="66B9B3F7-8638-4D59-B31AB29BE3EA5049"
+			id="fill_bar_parent"
+			offset="72.00,8.00"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="66B9B3F7-8638-4D59-B31AB29BE3EA5049"
+			currentstate="B88C9D0F-68B6-4B9E-A2FD5F22DB7397ED"
+			defaultstate="B88C9D0F-68B6-4B9E-A2FD5F22DB7397ED">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoBattleAbility"
+					context_function_id="IntensitySettingContext.IntensityType != &quot;set&quot;"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="B88C9D0F-68B6-4B9E-A2FD5F22DB7397ED"
+					name="default"
+					width="130"
+					height="8"
+					uniqueguid="B88C9D0F-68B6-4B9E-A2FD5F22DB7397ED"/>
+			</states>
+		</fill_bar_parent>
+		<intensity_fill
+			this="64227A29-2284-4779-A5278D5FBAD52094"
+			id="intensity_fill"
+			docking="Center Left"
+			component_anchor_point="0.00,0.50"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="64227A29-2284-4779-A5278D5FBAD52094"
+			currentstate="87DCD8E3-3B11-4A3E-868474B45857E06F"
+			defaultstate="87DCD8E3-3B11-4A3E-868474B45857E06F">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextFillBar"
+					context_object_id="CcoBattleAbility"
+					context_function_id="AbilityApplyIntensity(1)">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value="100"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextColourSetter"
+					context_object_id="CcoStaticObject"
+					context_function_id="MainThemeColour"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="D00C25E5-943A-49C1-91E570C31CE382DA"
+					uniqueguid="D00C25E5-943A-49C1-91E570C31CE382DA"
+					imagepath="ui/skins/default/bar_fill_ability_intensity.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="87DCD8E3-3B11-4A3E-868474B45857E06F"
+					name="default"
+					width="130"
+					height="8"
+					uniqueguid="87DCD8E3-3B11-4A3E-868474B45857E06F">
+					<imagemetrics>
+						<image
+							this="047672C9-462A-4D19-BCE8C5F3AE5DA4C0"
+							uniqueguid="047672C9-462A-4D19-BCE8C5F3AE5DA4C0"
+							componentimage="D00C25E5-943A-49C1-91E570C31CE382DA"
+							width="130"
+							height="8"/>
+					</imagemetrics>
+					<component_text
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
+				</default>
+			</states>
+		</intensity_fill>
+		<frame
+			this="6766FB5A-BC00-417E-936E48A1FC32CCD8"
+			id="frame"
+			offset="-5.00,-5.00"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="6766FB5A-BC00-417E-936E48A1FC32CCD8"
+			currentstate="5B930334-EFE4-4FBC-85D4AC4A1E1DB042"
+			defaultstate="5B930334-EFE4-4FBC-85D4AC4A1E1DB042">
+			<componentimages>
+				<component_image
+					this="33BBFEDE-EA87-4D7F-ADB1B9DF2C0A82D4"
+					uniqueguid="33BBFEDE-EA87-4D7F-ADB1B9DF2C0A82D4"
+					imagepath="ui/skins/default/chivalry_bar_frame.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="5B930334-EFE4-4FBC-85D4AC4A1E1DB042"
+					name="default"
+					width="140"
+					height="19"
+					uniqueguid="5B930334-EFE4-4FBC-85D4AC4A1E1DB042">
+					<imagemetrics>
+						<image
+							this="9FFAF7AF-07A9-4FA1-BFBDE928000E5C9E"
+							uniqueguid="9FFAF7AF-07A9-4FA1-BFBDE928000E5C9E"
+							componentimage="33BBFEDE-EA87-4D7F-ADB1B9DF2C0A82D4"
+							width="140"
+							height="19"
+							tile="true"
+							margin="5.00,10.00,5.00,10.00"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</frame>
 	</components>
 </layout>

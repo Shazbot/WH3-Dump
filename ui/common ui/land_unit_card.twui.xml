@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -6009,7 +6009,7 @@
 			component_anchor_point="0.50,0.50"
 			tooltipslocalised="true"
 			uniqueguid="318102FC-52B2-4632-8E3C4FBBFE25BF8B"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="5D323A10-ED6E-421F-841FBF03B2BBACD8"
 			defaultstate="5D323A10-ED6E-421F-841FBF03B2BBACD8">
 			<componentimages>
@@ -6808,13 +6808,12 @@
 			offset="-5.00,48.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
-			visible="false"
 			docking="Center"
 			component_anchor_point="0.50,0.50"
 			tooltipslocalised="true"
 			uniqueguid="42A25320-5104-472B-BEA9804A0A87076A"
-			currentstate="EA6C0711-323D-4144-84CB4421A8059C1E"
-			defaultstate="EA6C0711-323D-4144-84CB4421A8059C1E">
+			currentstate="C5AEECBA-84D6-440A-A25FD4DAC94851CB"
+			defaultstate="C5AEECBA-84D6-440A-A25FD4DAC94851CB">
 			<componentimages>
 				<component_image
 					this="37D14FAE-39F8-40D3-AC757AD16A944A9A"
@@ -6829,10 +6828,6 @@
 					uniqueguid="D13B92F0-6839-4511-B7EED42FC1A0FE6F"
 					imagepath="ui/skins/default/icon_continue_siege.png"/>
 				<component_image
-					this="08E7D1B9-6790-43B9-AD1E5B99207ED656"
-					uniqueguid="08E7D1B9-6790-43B9-AD1E5B99207ED656"
-					imagepath="ui/skins/default/turns_banner_not_queued.png"/>
-				<component_image
 					this="AC22E076-F186-4A8B-9C3B8BD851BC7EA0"
 					uniqueguid="AC22E076-F186-4A8B-9C3B8BD851BC7EA0"
 					imagepath="ui/skins/default/turns_banner.png"/>
@@ -6844,6 +6839,10 @@
 					this="2CDBAB25-B42B-4BD8-815ABB221AD2871B"
 					uniqueguid="2CDBAB25-B42B-4BD8-815ABB221AD2871B"
 					imagepath="ui/skins/default/turns_banner_queued.png"/>
+				<component_image
+					this="515FEBF4-1E97-4509-851CF344C3978405"
+					uniqueguid="515FEBF4-1E97-4509-851CF344C3978405"
+					imagepath="ui/skins/default/turns_banner_foreign_slots.png"/>
 			</componentimages>
 			<states>
 				<_0
@@ -6884,17 +6883,17 @@
 							dockpoint="Center"/>
 					</imagemetrics>
 				</blocked_siege>
-				<not_queued
-					this="6C6DFD53-0374-4BA3-92AE72DEE6F60638"
-					name="not_queued"
+				<not_queued_allied
+					this="BC184CBE-4E83-4F77-A041A779F89F77B6"
+					name="not_queued_allied"
 					width="70"
 					height="34"
-					uniqueguid="6C6DFD53-0374-4BA3-92AE72DEE6F60638">
+					uniqueguid="BC184CBE-4E83-4F77-A041A779F89F77B6">
 					<imagemetrics>
 						<image
-							this="9D5BEA51-6F92-4FB4-BD7B1AC94B9B324E"
-							uniqueguid="9D5BEA51-6F92-4FB4-BD7B1AC94B9B324E"
-							componentimage="08E7D1B9-6790-43B9-AD1E5B99207ED656"
+							this="FE0F8E66-0FA7-4D38-911A5CF38D031229"
+							uniqueguid="FE0F8E66-0FA7-4D38-911A5CF38D031229"
+							componentimage="449839D4-8741-49CE-9A7F609E87094950"
 							offset="5.00,-1.00"
 							width="70"
 							height="34"
@@ -6906,14 +6905,44 @@
 						textvalign="Center"
 						textxoffset="25.00,0.00"
 						texthbehaviour="Never split"
-						textlabel="Turns_not queued_Text_320032"
+						textlabel="StateText_62ac0239"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
 						fontcat_name="body_12"
 						text_shader_name="text_outline_t0"
 						textshadervars="0.00,0.00,0.00,1.00"/>
-				</not_queued>
+				</not_queued_allied>
+				<not_queued_foreign_slots
+					this="A8789E71-C94C-4DAD-AA31725BEB7CB5BA"
+					name="not_queued_foreign_slots"
+					width="70"
+					height="34"
+					uniqueguid="A8789E71-C94C-4DAD-AA31725BEB7CB5BA">
+					<imagemetrics>
+						<image
+							this="96258828-A90D-4F64-92CCCF91885895B0"
+							uniqueguid="96258828-A90D-4F64-92CCCF91885895B0"
+							componentimage="515FEBF4-1E97-4509-851CF344C3978405"
+							offset="5.00,-1.00"
+							width="70"
+							height="34"
+							tile="true"
+							margin="0.00,40.00,0.00,30.00"/>
+					</imagemetrics>
+					<component_text
+						text="22"
+						textvalign="Center"
+						textxoffset="25.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="StateText_2e263bfd"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						text_shader_name="text_outline_t0"
+						textshadervars="0.00,0.00,0.00,1.00"/>
+				</not_queued_foreign_slots>
 				<not_queued_global
 					this="33670E05-B174-4106-B678CF356CA7B753"
 					name="not_queued_global"
@@ -6922,9 +6951,9 @@
 					uniqueguid="33670E05-B174-4106-B678CF356CA7B753">
 					<imagemetrics>
 						<image
-							this="245F7B59-DFDD-4FCD-9DAA900A870746BA"
-							uniqueguid="245F7B59-DFDD-4FCD-9DAA900A870746BA"
-							componentimage="08E7D1B9-6790-43B9-AD1E5B99207ED656"
+							this="84038D24-C532-4B26-A00FF7C0DE59804D"
+							uniqueguid="84038D24-C532-4B26-A00FF7C0DE59804D"
+							componentimage="449839D4-8741-49CE-9A7F609E87094950"
 							offset="5.00,-1.00"
 							width="70"
 							height="34"
@@ -6944,6 +6973,66 @@
 						text_shader_name="text_outline_t0"
 						textshadervars="0.00,0.00,0.00,1.00"/>
 				</not_queued_global>
+				<not_queued_horde
+					this="0B271F57-8317-4C0F-BCF23270AB9E53EE"
+					name="not_queued_horde"
+					width="70"
+					height="34"
+					uniqueguid="0B271F57-8317-4C0F-BCF23270AB9E53EE">
+					<imagemetrics>
+						<image
+							this="062E5A8B-928A-47F8-ACC9B66202BEC554"
+							uniqueguid="062E5A8B-928A-47F8-ACC9B66202BEC554"
+							componentimage="515FEBF4-1E97-4509-851CF344C3978405"
+							offset="5.00,-1.00"
+							width="70"
+							height="34"
+							tile="true"
+							margin="0.00,40.00,0.00,30.00"/>
+					</imagemetrics>
+					<component_text
+						text="22"
+						textvalign="Center"
+						textxoffset="25.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="StateText_1ad97899"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						text_shader_name="text_outline_t0"
+						textshadervars="0.00,0.00,0.00,1.00"/>
+				</not_queued_horde>
+				<not_queued_local
+					this="6C6DFD53-0374-4BA3-92AE72DEE6F60638"
+					name="not_queued_local"
+					width="70"
+					height="34"
+					uniqueguid="6C6DFD53-0374-4BA3-92AE72DEE6F60638">
+					<imagemetrics>
+						<image
+							this="3B2301C5-3673-4245-AEDE385A1146C610"
+							uniqueguid="3B2301C5-3673-4245-AEDE385A1146C610"
+							componentimage="2CDBAB25-B42B-4BD8-815ABB221AD2871B"
+							offset="5.00,-1.00"
+							width="70"
+							height="34"
+							tile="true"
+							margin="0.00,40.00,0.00,30.00"/>
+					</imagemetrics>
+					<component_text
+						text="22"
+						textvalign="Center"
+						textxoffset="25.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="Turns_not queued_Text_320032"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						text_shader_name="text_outline_t0"
+						textshadervars="0.00,0.00,0.00,1.00"/>
+				</not_queued_local>
 				<on_hold
 					this="62D3DD45-4FC0-43DF-B2FBA890133D7592"
 					name="on_hold"
@@ -6981,18 +7070,18 @@
 						fontcat_name="body_12"
 						textshadervars="0.00,0.00,0.00,1.00"/>
 				</on_hold>
-				<queued
-					this="EA6C0711-323D-4144-84CB4421A8059C1E"
-					name="queued"
+				<queued_allied
+					this="DED07D41-2909-4BE6-9ABE6D8BF5FD1DAA"
+					name="queued_allied"
 					width="70"
 					height="34"
 					disabled="true"
-					uniqueguid="EA6C0711-323D-4144-84CB4421A8059C1E">
+					uniqueguid="DED07D41-2909-4BE6-9ABE6D8BF5FD1DAA">
 					<imagemetrics>
 						<image
-							this="B6E854BB-2003-4F8D-AEA54577236EA3A2"
-							uniqueguid="B6E854BB-2003-4F8D-AEA54577236EA3A2"
-							componentimage="2CDBAB25-B42B-4BD8-815ABB221AD2871B"
+							this="580749AF-FF30-4BFC-825FAEC1496F6153"
+							uniqueguid="580749AF-FF30-4BFC-825FAEC1496F6153"
+							componentimage="449839D4-8741-49CE-9A7F609E87094950"
 							offset="5.00,-1.00"
 							width="70"
 							height="34"
@@ -7004,14 +7093,45 @@
 						textvalign="Center"
 						textxoffset="25.00,0.00"
 						texthbehaviour="Never split"
-						textlabel="Turns_queued_Text_320032"
+						textlabel="StateText_ea1df481"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
 						fontcat_name="body_12"
 						text_shader_name="text_outline_t0"
 						textshadervars="0.00,0.00,0.00,1.00"/>
-				</queued>
+				</queued_allied>
+				<queued_foreign_slots
+					this="524B1714-62BC-4B1A-897E8C97BD2AE12D"
+					name="queued_foreign_slots"
+					width="70"
+					height="34"
+					disabled="true"
+					uniqueguid="524B1714-62BC-4B1A-897E8C97BD2AE12D">
+					<imagemetrics>
+						<image
+							this="E9EE2A4E-A8F8-48B3-AD3ECCF73E1815A2"
+							uniqueguid="E9EE2A4E-A8F8-48B3-AD3ECCF73E1815A2"
+							componentimage="515FEBF4-1E97-4509-851CF344C3978405"
+							offset="5.00,-1.00"
+							width="70"
+							height="34"
+							tile="true"
+							margin="0.00,40.00,0.00,30.00"/>
+					</imagemetrics>
+					<component_text
+						text="22"
+						textvalign="Center"
+						textxoffset="25.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="StateText_a2fb0be4"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						text_shader_name="text_outline_t0"
+						textshadervars="0.00,0.00,0.00,1.00"/>
+				</queued_foreign_slots>
 				<queued_global
 					this="C052E8F0-C43C-497D-BB3959779C88FCBB"
 					name="queued_global"
@@ -7043,6 +7163,68 @@
 						text_shader_name="text_outline_t0"
 						textshadervars="0.00,0.00,0.00,1.00"/>
 				</queued_global>
+				<queued_horde
+					this="B90EB999-070B-4F2F-B523937DF6143767"
+					name="queued_horde"
+					width="70"
+					height="34"
+					disabled="true"
+					uniqueguid="B90EB999-070B-4F2F-B523937DF6143767">
+					<imagemetrics>
+						<image
+							this="D893F3C2-7DCF-4617-884189BFCF96B21E"
+							uniqueguid="D893F3C2-7DCF-4617-884189BFCF96B21E"
+							componentimage="515FEBF4-1E97-4509-851CF344C3978405"
+							offset="5.00,-1.00"
+							width="70"
+							height="34"
+							tile="true"
+							margin="0.00,40.00,0.00,30.00"/>
+					</imagemetrics>
+					<component_text
+						text="22"
+						textvalign="Center"
+						textxoffset="25.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="StateText_abb69b9c"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						text_shader_name="text_outline_t0"
+						textshadervars="0.00,0.00,0.00,1.00"/>
+				</queued_horde>
+				<queued_local
+					this="EA6C0711-323D-4144-84CB4421A8059C1E"
+					name="queued_local"
+					width="70"
+					height="34"
+					disabled="true"
+					uniqueguid="EA6C0711-323D-4144-84CB4421A8059C1E">
+					<imagemetrics>
+						<image
+							this="B6E854BB-2003-4F8D-AEA54577236EA3A2"
+							uniqueguid="B6E854BB-2003-4F8D-AEA54577236EA3A2"
+							componentimage="2CDBAB25-B42B-4BD8-815ABB221AD2871B"
+							offset="5.00,-1.00"
+							width="70"
+							height="34"
+							tile="true"
+							margin="0.00,40.00,0.00,30.00"/>
+					</imagemetrics>
+					<component_text
+						text="22"
+						textvalign="Center"
+						textxoffset="25.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="Turns_queued_Text_320032"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						text_shader_name="text_outline_t0"
+						textshadervars="0.00,0.00,0.00,1.00"/>
+				</queued_local>
 			</states>
 		</turns>
 		<unit_strength_number
@@ -8039,7 +8221,7 @@
 			componentleveltooltip="{{tt:ui/common ui/tooltip_augment_breakdown}}"
 			tooltiplabel="augment_display_holder_Tooltip_2006c"
 			uniqueguid="86A90121-85F8-4261-BFAF810C429A5CCF"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="6D04C703-8097-4F5D-B2978E59446651F9"
 			defaultstate="6D04C703-8097-4F5D-B2978E59446651F9">
 			<callbackwithcontextlist>
@@ -8202,7 +8384,7 @@
 			priority="60"
 			tooltipslocalised="true"
 			uniqueguid="D7593E96-0925-4BE9-924D79AEE77DC4AF"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="7103310A-FFE3-4819-B439B45C0023594D"
 			defaultstate="7103310A-FFE3-4819-B439B45C0023594D">
 			<callbackwithcontextlist>
@@ -10216,7 +10398,7 @@
 			component_anchor_point="0.50,1.00"
 			tooltipslocalised="true"
 			uniqueguid="52505121-A685-440A-A5936B24442947D0"
-			currentstate="90F9B0FE-A8F7-4E92-ACF3AE5EEF7D30CF"
+			currentstate="C7DBE460-B3A5-4DE3-9D084A01563F88FA"
 			defaultstate="90F9B0FE-A8F7-4E92-ACF3AE5EEF7D30CF">
 			<callbackwithcontextlist>
 				<callback_with_context
@@ -10265,6 +10447,10 @@
 					this="34DCAC72-FF9B-41C1-AC3B3E8C773D516E"
 					uniqueguid="34DCAC72-FF9B-41C1-AC3B3E8C773D516E"
 					imagepath="ui/skins/warhammer2/unit_card_semicircle_mistwalker.png"/>
+				<component_image
+					this="F5E91A1F-711D-42DA-A1201150DAFE5B45"
+					uniqueguid="F5E91A1F-711D-42DA-A1201150DAFE5B45"
+					imagepath="ui/skins/default/unit_card_semicircle_chieftain.png"/>
 			</componentimages>
 			<states>
 				<blessed_spawning
@@ -10284,6 +10470,23 @@
 							dockpoint="Bottom Center"/>
 					</imagemetrics>
 				</blessed_spawning>
+				<chieftain
+					this="C7DBE460-B3A5-4DE3-9D084A01563F88FA"
+					name="chieftain"
+					width="36"
+					height="36"
+					uniqueguid="C7DBE460-B3A5-4DE3-9D084A01563F88FA">
+					<imagemetrics>
+						<image
+							this="7CEDBB8A-03D6-4B5D-9537F329BC44E9A0"
+							uniqueguid="7CEDBB8A-03D6-4B5D-9537F329BC44E9A0"
+							componentimage="F5E91A1F-711D-42DA-A1201150DAFE5B45"
+							offset="-9.00,1.00"
+							width="55"
+							height="35"
+							dockpoint="Bottom Center"/>
+					</imagemetrics>
+				</chieftain>
 				<crafted
 					this="272F8566-09DF-4ACD-AB25C6DC415F9998"
 					name="crafted"
@@ -10579,7 +10782,7 @@
 							width="38"
 							height="39"
 							dockpoint="Center"
-							isaspectratiolocked="true"/>
+							aspect_ratio_locked_behaviour="Width First"/>
 						<image
 							this="FDDC199F-B321-4500-9674F0A49742DD09"
 							uniqueguid="FDDC199F-B321-4500-9674F0A49742DD09"
@@ -10609,7 +10812,7 @@
 							width="38"
 							height="39"
 							dockpoint="Center"
-							isaspectratiolocked="true"/>
+							aspect_ratio_locked_behaviour="Width First"/>
 						<image
 							this="EA9E52C7-F99F-45B5-883C0DE0AB340073"
 							uniqueguid="EA9E52C7-F99F-45B5-883C0DE0AB340073"
@@ -10636,7 +10839,7 @@
 							width="38"
 							height="39"
 							dockpoint="Center"
-							isaspectratiolocked="true"/>
+							aspect_ratio_locked_behaviour="Width First"/>
 						<image
 							this="3D1F8CE3-9D7B-4BA4-8B481E1A5FF555CE"
 							uniqueguid="3D1F8CE3-9D7B-4BA4-8B481E1A5FF555CE"
@@ -10667,7 +10870,7 @@
 							width="38"
 							height="39"
 							dockpoint="Center"
-							isaspectratiolocked="true"/>
+							aspect_ratio_locked_behaviour="Width First"/>
 						<image
 							this="1FC28E4A-BEB4-4700-874A26BFB356D735"
 							uniqueguid="1FC28E4A-BEB4-4700-874A26BFB356D735"

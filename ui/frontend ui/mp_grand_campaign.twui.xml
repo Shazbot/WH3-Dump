@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -106,6 +106,9 @@
 								<checkbox_sea_lanes this="23B0313C-DB75-4653-92830CD745E701E9">
 									<dy_label this="9344295F-2436-46A2-A8A42F26F0762305"/>
 								</checkbox_sea_lanes>
+								<checkbox_ironman_mode this="E2EDB5D1-9179-4DDA-80E3FB6E059C5B74">
+									<dy_label this="F4F451D0-57C2-4037-9A397129931609D0"/>
+								</checkbox_ironman_mode>
 							</settings_list>
 							<listview this="E1508CE0-B8F6-4E3A-AAD765F3842A23DD">
 								<list_clip this="7089FC44-68DE-4B25-A3880B9662DA2EBB">
@@ -1503,6 +1506,138 @@
 				<element value="ui/skins/default/fe_tab_text_selected_underlay.png"/>
 			</override_images>
 		</button_tab_settings>
+		<checkbox_ironman_mode
+			this="E2EDB5D1-9179-4DDA-80E3FB6E059C5B74"
+			id="checkbox_ironman_mode"
+			template_id="checkbox_toggle"
+			part_of_template="true"
+			uniqueguid_in_template="7F83FB2C-D99A-49C3-9E182FC5C1CDFF35"
+			uniqueguid="E2EDB5D1-9179-4DDA-80E3FB6E059C5B74"
+			dimensions="34.00,32.00"
+			sound_category="UI_GBL_TMP_CheckBox">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="7788FB97-7877-421C-8991BDCDE00AF228"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="19BE8A3D-9DA2-4907-8FE13C4741FF94F1"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="CD262414-9C81-4D9F-9BC8638AB5D20BB9"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="87242854-9317-47D0-96845BF14D02F003"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="81F6BA9B-B752-4DA4-8793691768AEC47F"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="9A58B5A6-F312-487E-B3526DD935D168D5"/>
+				<state_uniqueguid
+					name="selected_down"
+					uniqueguid="966A09D8-FC40-4CE9-B7AC86635F925B26"/>
+				<state_uniqueguid
+					name="selected_down_off"
+					uniqueguid="9E51E1B8-0EC6-4A83-A09F6B4EE2826B02"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="4E2B2B7A-7445-436F-AC39C3D11006B4C7"/>
+				<state_uniqueguid
+					name="selected_inactive"
+					uniqueguid="313616DF-0B9A-42EB-88084840290762B4"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_active.png"
+					uniqueguid="959F896D-B26E-4B00-8797B51F3FCA9F20"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_hover.png"
+					uniqueguid="BABF59B9-9D82-405D-B89EF909DF5D23C6"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_selected.png"
+					uniqueguid="C66F96BC-F52B-4E98-A1D52482384A0ED3"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_selected_hover.png"
+					uniqueguid="4661DEA5-7767-4161-990053A66623A7CE"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoMultiplayerCampaignSettingRecord"
+					context_function_id="StoredContextFromParent(&quot;CcoMPCampaignSettings&quot;).ToggleOptionForSetting(this)"/>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoMultiplayerCampaignSettingRecord">
+					<child_m_user_properties>
+						<property
+							name="0.selected_inactive"
+							value="StoredContextFromParent(&quot;CcoMPCampaignSettings&quot;).CanChangeSetting(this) == false &amp;&amp; StoredContextFromParent(&quot;CcoMPCampaignSettings&quot;).GetCurrentOptionForSetting(this).Value == 1"/>
+						<property
+							name="1.inactive"
+							value="StoredContextFromParent(&quot;CcoMPCampaignSettings&quot;).CanChangeSetting(this) == false"/>
+						<property
+							name="2.selected"
+							value="StoredContextFromParent(&quot;CcoMPCampaignSettings&quot;).GetCurrentOptionForSetting(this).Value == 1"/>
+						<property
+							name="event1"
+							value="MPLobbyOnCampaignParamsChanged"/>
+						<property
+							name="event2"
+							value="MPLobbyOnHostMigrated"/>
+						<property
+							name="fallback_state"
+							value="active"/>
+						<property
+							name="ordered_states"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoMPCampaignLobby"
+					context_function_id="FindContext(&quot;CcoMultiplayerCampaignSettingRecord&quot;, &quot;ironman_mode&quot;)"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/checkbox_active.png"/>
+				<element value="ui/skins/default/checkbox_hover.png"/>
+				<element value="ui/skins/default/checkbox_selected.png"/>
+				<element value="ui/skins/default/checkbox_selected_hover.png"/>
+			</override_images>
+		</checkbox_ironman_mode>
 		<checkbox_load_lord
 			this="6CCCA2D2-7C06-4C23-9EA1E20DF8D009FD"
 			id="checkbox_load_lord"
@@ -1964,28 +2099,15 @@
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoMPCampaignSettings"
-					context_function_id="ShouldShowAllianceOnlySetting">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="MPLobbyOnPlayerTeamChangedAny"/>
-						<property
-							name="event1"
-							value="MPLobbyOnCampaignParamsChanged"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
 					callback_id="ContextStateSetterConditional"
 					context_object_id="CcoMPCampaignSettings">
 					<child_m_user_properties>
 						<property
 							name="0.selected_inactive"
-							value="CanChangeSetting(StoredContext(&quot;CcoMultiplayerCampaignSettingRecord&quot;)) == false &amp;&amp; IsAllianceOnly"/>
+							value="(CanChangeSetting(StoredContext(&quot;CcoMultiplayerCampaignSettingRecord&quot;)) == false || IsAllianceOnlySettingActive == false) &amp;&amp; IsAllianceOnly"/>
 						<property
 							name="1.inactive"
-							value="CanChangeSetting(StoredContext(&quot;CcoMultiplayerCampaignSettingRecord&quot;)) == false &amp;&amp; IsAllianceOnly == false"/>
+							value="(CanChangeSetting(StoredContext(&quot;CcoMultiplayerCampaignSettingRecord&quot;)) == false || IsAllianceOnlySettingActive == false) &amp;&amp; IsAllianceOnly == false"/>
 						<property
 							name="2.selected"
 							value="IsAllianceOnly"/>
@@ -1995,6 +2117,9 @@
 						<property
 							name="event1"
 							value="MPLobbyOnPlayerTeamChangedAny"/>
+						<property
+							name="event2"
+							value="MPLobbyOnPlayerLeftAny"/>
 						<property
 							name="fallback_state"
 							value="active"/>
@@ -2518,6 +2643,9 @@
 					name="hover"
 					uniqueguid="0C7EDCB6-04E7-4B00-A4158F55108D9759"/>
 				<state_uniqueguid
+					name="inactive"
+					uniqueguid="37846EE9-98BF-4DD7-8CB6A8BAFB0C84C4"/>
+				<state_uniqueguid
 					name="selected"
 					uniqueguid="73BE0151-D25D-4F89-89C6F13EEBCE3B90"/>
 			</state_uniqueguids>
@@ -2546,6 +2674,9 @@
 				<component_image_uniqueguid
 					name="ui/skins/default/tab_square_medium_text_overlay.png"
 					uniqueguid="3F2CCFD2-25C1-46DF-BF51DFB97E0E1CD0"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_medium_text_inactive.png"
+					uniqueguid="04881601-50F0-4672-BE0F773F9FC76488"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context callback_id="ButtonGroupButton">
@@ -2589,6 +2720,9 @@
 					state="hover"
 					is_text_localised="false"/>
 				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
 					state="selected"
 					is_text_localised="false"/>
 			</localised_texts>
@@ -2601,6 +2735,7 @@
 				<element value="ui/skins/default/tab_square_medium_text_underlay.png"/>
 				<element value="ui/skins/default/tab_square_medium_text_selected_underlay.png"/>
 				<element value="ui/skins/default/tab_square_medium_text_overlay.png"/>
+				<element value="ui/skins/default/tab_square_medium_text_inactive.png"/>
 			</override_images>
 		</tab_button_lord>
 		<tab_button_objectives
@@ -2626,6 +2761,9 @@
 				<state_uniqueguid
 					name="hover"
 					uniqueguid="CBD057B9-D9EC-43B5-AA0ECA67ABEE118B"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="558FF3E5-3FC8-4FA0-87C9E96A8BA3B462"/>
 				<state_uniqueguid
 					name="selected"
 					uniqueguid="63FD1A16-AD1A-43F2-81116777CDABCBE1"/>
@@ -2655,6 +2793,9 @@
 				<component_image_uniqueguid
 					name="ui/skins/default/tab_square_medium_text_overlay.png"
 					uniqueguid="E7B47825-909A-4D63-8FB00C6C75C4FD94"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_medium_text_inactive.png"
+					uniqueguid="462FCE71-0F5F-40A7-8A5040DC4B3C5F3A"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context callback_id="ButtonGroupButton">
@@ -2698,6 +2839,9 @@
 					state="hover"
 					is_text_localised="false"/>
 				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
 					state="selected"
 					is_text_localised="false"/>
 			</localised_texts>
@@ -2710,6 +2854,7 @@
 				<element value="ui/skins/default/tab_square_medium_text_underlay.png"/>
 				<element value="ui/skins/default/tab_square_medium_text_selected_underlay.png"/>
 				<element value="ui/skins/default/tab_square_medium_text_overlay.png"/>
+				<element value="ui/skins/default/tab_square_medium_text_inactive.png"/>
 			</override_images>
 		</tab_button_objectives>
 		<template_checkbox
@@ -7454,7 +7599,7 @@
 			dock_offset="4.00,4.00"
 			tooltipslocalised="true"
 			uniqueguid="249E73A0-8E40-4ECF-8CA30E0F0585BEAE"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="853104FE-59FB-429F-9F60EC5C52E8E92C">
 			<states>
 				<newstate
@@ -7508,7 +7653,7 @@
 			component_anchor_point="0.50,0.50"
 			tooltipslocalised="true"
 			uniqueguid="EC06AAFC-EB60-4360-80C2B1C699F32DFA"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="62090494-05D8-436E-9F8DC905CB1B3798"
 			defaultstate="62090494-05D8-436E-9F8DC905CB1B3798">
 			<componentimages>
@@ -7571,7 +7716,7 @@
 			component_anchor_point="0.00,0.50"
 			tooltipslocalised="true"
 			uniqueguid="4090FA12-2DB3-4EE3-836DBB7C0C18A7A9"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="CF01A185-56C9-432E-84CFA038AB561488"
 			defaultstate="CF01A185-56C9-432E-84CFA038AB561488">
 			<callbackwithcontextlist>
@@ -7759,7 +7904,7 @@
 					this="90D83D09-A86D-402F-96ECFBD2AC2F06DC"
 					name="NewState"
 					width="200"
-					height="180"
+					height="222"
 					uniqueguid="90D83D09-A86D-402F-96ECFBD2AC2F06DC">
 					<imagemetrics>
 						<image
@@ -7767,7 +7912,7 @@
 							uniqueguid="43ECB15E-1AB2-4220-AF908882B250D785"
 							componentimage="DBA92C5F-93C2-4DA8-893745D16A76265E"
 							width="200"
-							height="180"
+							height="222"
 							colour="#FFFFFF00"
 							tile="true"
 							margin="40.00,40.00,50.00,40.00"/>
@@ -8632,7 +8777,7 @@
 			component_anchor_point="0.50,0.50"
 			tooltipslocalised="true"
 			uniqueguid="5F00599E-F3B9-40EA-86BA2E5C766887E8"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="6D238B3C-B031-4948-A6FE1E1B4AF96E62"
 			defaultstate="6D238B3C-B031-4948-A6FE1E1B4AF96E62">
 			<componentimages>
@@ -12779,7 +12924,7 @@
 			priority="100"
 			tooltipslocalised="true"
 			uniqueguid="3AC1D93D-4D03-455F-A16CEA726BD0FDEA"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="C0FA6E3E-C47B-4081-8ABE870F3D948267"
 			defaultstate="C0FA6E3E-C47B-4081-8ABE870F3D948267">
 			<callbackwithcontextlist>
@@ -12984,8 +13129,6 @@
 			docking="Center Right External"
 			component_anchor_point="-0.00,0.50"
 			tooltipslocalised="true"
-			componentleveltooltip="Members of each team will take their turns simultaneously"
-			tooltiplabel="label_simultaneous_alliance_only_Tooltip_7018eb23"
 			uniqueguid="B92A2D43-EB22-4EFA-88E6D87196B8EF6A"
 			currentstate="B008E8EF-F764-444E-A8952D24BC46C9C3">
 			<callbackwithcontextlist>
@@ -12994,6 +13137,22 @@
 						<property
 							name="parent_id"
 							value="checkbox_simultaneous_alliance_only"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoMPCampaignSettings"
+					context_function_id="GetIfElse(IsAllianceOnlySettingActive, Loc(&quot;mp_options_simultaneous_turns_active_tooltip&quot;), Loc(&quot;mp_options_simultaneous_turns_inactive_tooltip&quot;))">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="MPLobbyOnCampaignParamsChanged"/>
+						<property
+							name="event1"
+							value="MPLobbyOnPlayerTeamChangedAny"/>
+						<property
+							name="event2"
+							value="MPLobbyOnPlayerLeftAny"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbackwithcontextlist>
@@ -13621,7 +13780,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoMultiplayerCampaignSettingRecord"
-					context_function_id="RecordList.Filter(IsPerPlayerSetting == false &amp;&amp; Key != &quot;campaign_difficulty&quot; &amp;&amp; Key != &quot;character_loading&quot; &amp;&amp; Key != &quot;realm_of_chaos&quot; &amp;&amp; Key != &quot;enable_sea_lanes&quot; &amp;&amp; Key != &quot;enable_end_game&quot;)"/>
+					context_function_id="RecordList.Filter(IsPerPlayerSetting == false &amp;&amp; Key != &quot;campaign_difficulty&quot; &amp;&amp; Key != &quot;character_loading&quot; &amp;&amp; Key != &quot;realm_of_chaos&quot; &amp;&amp; Key != &quot;enable_sea_lanes&quot; &amp;&amp; Key != &quot;enable_end_game&quot; &amp;&amp; Key != &quot;ironman_mode&quot;)"/>
 				<callback_with_context
 					callback_id="ContextObjectStore"
 					context_object_id="CcoMPCampaignSettings"/>
@@ -14080,7 +14239,7 @@
 			priority="65"
 			tooltipslocalised="true"
 			uniqueguid="DBC30DC6-D6DE-474E-9178F2A8AD4E109A"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="21559757-6618-47C3-9BB27F8486C584DF"
 			defaultstate="21559757-6618-47C3-9BB27F8486C584DF">
 			<callbackwithcontextlist>
@@ -14178,7 +14337,7 @@
 			priority="65"
 			tooltipslocalised="true"
 			uniqueguid="5A299EE2-4EB1-4B40-AB9EDC315AB16898"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="B7941D4A-5418-4A24-A67B0043E6C30745"
 			defaultstate="B7941D4A-5418-4A24-A67B0043E6C30745">
 			<callbackwithcontextlist>
@@ -16340,5 +16499,54 @@
 				</newstate>
 			</states>
 		</tx_hard>
+		<dy_label
+			this="F4F451D0-57C2-4037-9A397129931609D0"
+			id="dy_label"
+			offset="-247.00,2.00"
+			docking="Center Left External"
+			dock_offset="0.00,1.00"
+			component_anchor_point="1.00,0.50"
+			priority="10"
+			tooltipslocalised="true"
+			uniqueguid="F4F451D0-57C2-4037-9A397129931609D0"
+			currentstate="5D5E3852-C031-407F-B6A533690F185832">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoMultiplayerCampaignSettingRecord"
+					context_function_id="LocalisedName"/>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoMultiplayerCampaignSettingRecord"
+					context_function_id="LocalisedTooltip"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<newstate
+					this="5D5E3852-C031-407F-B6A533690F185832"
+					name="NewState"
+					width="247"
+					height="30"
+					focustype="Active"
+					interactive="true"
+					disabled="true"
+					uniqueguid="5D5E3852-C031-407F-B6A533690F185832">
+					<component_text
+						text="dy label"
+						textvalign="Center"
+						textlocalised="true"
+						textlabel="StateText_72c4dffe"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+				</newstate>
+			</states>
+		</dy_label>
 	</components>
 </layout>

@@ -37,7 +37,7 @@ gb:set_objective_on_message("deployment_started", "wh_main_qb_dwf_ungrim_ironfis
 -------HINTS-------
 gb:queue_help_on_message("battle_started", "wh_main_qb_dwf_ungrim_ironfist_axe_of_dargo_hint_objective");
 
-gb:play_sound_on_message("battle_started", new_sfx("Play_DWF_Un_Qbattle_axe_dargo_extra_in_battle"), nil, 260000);
+gb:play_sound_on_message("battle_started", new_sfx("Play_DWF_Un_Qbattle_axe_dargo_extra_in_battle", false, true), nil, 260000);
 gb:queue_help_on_message("battle_started", "wh_main_qb_dwf_ungrim_ironfist_axe_of_dargo_stage_4_extra", 13000, 2000, 260000);
 
 -------ORDERS-------

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -23,7 +23,6 @@
 									<effect_icon this="78016B22-89DD-47DE-9E590427AC43EAA9"/>
 								</faction_trophy_preview>
 							</waaagh_target_info>
-							<grudge_mission_target this="D681BA1E-678B-4F30-BA0EC13BFCD86E70"/>
 						</target_icons_holder>
 						<status_bar this="04E12E2A-5516-4E84-BF6EC2D62615D6D6">
 							<icon_harmony this="DCB734D4-FA95-47F5-81CD2A31F72E2959"/>
@@ -64,7 +63,9 @@
 							<garrisoned this="A99263C9-FDEE-4A6C-9B1D0ACCA0CEEF11"/>
 							<horde this="B766CA93-320A-4215-9A34045E538EEC59"/>
 							<gift_of_slaanesh this="BAF0920C-8B74-41A7-A8A2310EA70FFE62"/>
-							<icon_plague this="F53E62F7-9135-4BE6-9455FF3FDC6957C7"/>
+							<icon_plague this="5782F18C-1D2B-4651-BC43AED77C640CDA"/>
+							<immune_icon this="2EA2D77D-B841-4C1B-87FB59CA9FB8195E"/>
+							<icon_army_plague this="F53E62F7-9135-4BE6-9455FF3FDC6957C7"/>
 							<label_ambush_chance this="32FF7BB7-1893-459E-9969D40B551E73F6"/>
 							<force_effect_list this="EAB97057-2844-4864-8740946EC7BC7A68">
 								<template_global_effect_icon_and_timer this="DAFE8945-8113-4F8D-B1CC0E502F391BA3"/>
@@ -98,6 +99,15 @@
 							</chaos_realm_effect>
 							<caravan_cargo this="CE6DFC38-6F05-4DF8-BBE6A721ECFF3F8E"/>
 							<hidden_army this="E143D98F-DF7F-4500-BF8CE4CDFE1EE57A"/>
+							<grudge_holder this="08859023-DA8A-4488-83A75564A7ABD925">
+								<grudge_effect this="5591E428-CB18-4047-BCD03938CE764409"/>
+								<label_grudge_points this="098FA438-A2DF-47CC-83947B5484BEC057">
+									<dev_button_add_grudge this="BA8C0935-5E9D-4630-97031E60EC7614B9">
+										<button_txt this="E878C6C9-7DEE-46CA-A3720044D0FCD55B"/>
+										<dev_icon this="330C01E9-8B1E-4B51-9CB6227C0B91260B"/>
+									</dev_button_add_grudge>
+								</label_grudge_points>
+							</grudge_holder>
 						</status_bar>
 					</status_docker>
 					<dy_name this="1F4E30E6-C671-4CA6-B4EEE9875AAF20A4"/>
@@ -141,60 +151,108 @@
 		</root>
 	</hierarchy>
 	<components>
-		<root
-			this="259EDF48-91EC-4386-A0DACE02D1B0F675"
-			id="root"
-			tooltipslocalised="true"
-			uniqueguid="259EDF48-91EC-4386-A0DACE02D1B0F675"
-			currentstate="2A1D2800-E1FF-4ACA-9CB153B7CA711E13"
-			defaultstate="2A1D2800-E1FF-4ACA-9CB153B7CA711E13">
-			<componentimages>
-				<component_image
-					this="48189BB0-FAD4-4858-A35DBE62E3F284D5"
-					uniqueguid="48189BB0-FAD4-4858-A35DBE62E3F284D5"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="2A1D2800-E1FF-4ACA-9CB153B7CA711E13"
-					name="NewState"
-					width="1600"
-					height="900"
-					interactive="true"
-					uniqueguid="2A1D2800-E1FF-4ACA-9CB153B7CA711E13">
-					<imagemetrics>
-						<image
-							this="CEC0E537-CC3D-49C5-B3572D57A8F37754"
-							uniqueguid="CEC0E537-CC3D-49C5-B3572D57A8F37754"
-							componentimage="48189BB0-FAD4-4858-A35DBE62E3F284D5"
-							width="1440"
-							height="900"
-							colour="#7F7F7FFF"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-		</root>
-		<army_banner
-			this="1A8B2BE5-2BF0-4A61-B56754991A6EFB44"
-			id="army_banner"
-			offset="702.00,466.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			tooltipslocalised="true"
-			uniqueguid="1A8B2BE5-2BF0-4A61-B56754991A6EFB44"
-			currentstate="34311D78-F84A-465E-AD690A016BD98F4A"
-			defaultstate="34311D78-F84A-465E-AD690A016BD98F4A">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="CampaignCharacterIdArmy"/>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="34311D78-F84A-465E-AD690A016BD98F4A"
-					name="NewState"
-					width="50"
-					height="50"
-					uniqueguid="34311D78-F84A-465E-AD690A016BD98F4A"/>
-			</states>
-		</army_banner>
+		<button_txt
+			this="E878C6C9-7DEE-46CA-A3720044D0FCD55B"
+			id="button_txt"
+			part_of_template="true"
+			uniqueguid_in_template="C5314C5F-DB2A-4917-835E17930F5E2573"
+			uniqueguid="E878C6C9-7DEE-46CA-A3720044D0FCD55B"
+			dimensions="108.00,29.00"
+			dock_point="Center"
+			offset="0.00,-1.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="45140A54-A9C2-4C49-8B0797E49A7FACC6"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="&quot;+&quot; + Name"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					text="dy_resource"
+					text_label="StateText_66a60299"
+					is_text_localised="false"/>
+			</localised_texts>
+		</button_txt>
+		<dev_button_add_grudge
+			this="BA8C0935-5E9D-4630-97031E60EC7614B9"
+			id="dev_button_add_grudge"
+			template_id="dev_text_button"
+			is_dev_only="true"
+			part_of_template="true"
+			uniqueguid_in_template="715902FD-2442-4210-8831AAF520A41055"
+			uniqueguid="BA8C0935-5E9D-4630-97031E60EC7614B9"
+			dimensions="108.00,29.00"
+			is_visible="false"
+			offset="-14.00,33.00"
+			priority="1"
+			sound_category="UI_GBL_TMP_Square_Large_Text_Button_Toggle">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="E7054CCE-C9C8-4885-9E5E12593A892197"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="DC04477A-B98E-485F-B5CAD11B66FC8C94"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="549E2009-9035-495E-A8ABADDD26EF58FA"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="E139673F-2E65-45A4-A075EF5D3F340D02"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="3772B16B-A236-47FF-88734722CDB9844D"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/button_rectangular_backplate.png"
+					uniqueguid="0C561609-29AE-495C-9F1DB1538D45814E"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/button_square_hover_highlight.png"
+					uniqueguid="C1655134-FDA9-49C9-8981C12E6A5AB289"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="DevAddAmount(100)"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/button_rectangular_backplate.png"/>
+				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
+			</override_images>
+		</dev_button_add_grudge>
 		<fill
 			this="8C20D1CC-EECF-451A-9B67B951C3D5DF23"
 			id="fill"
@@ -310,6 +368,36 @@
 				<element value="ui/skins/default/seductive_influence_multi_layout_inner_backgroud.png"/>
 			</override_images>
 		</background>
+		<dev_icon
+			this="330C01E9-8B1E-4B51-9CB6227C0B91260B"
+			id="dev_icon"
+			part_of_template="true"
+			uniqueguid_in_template="0F4F9F06-4613-496B-A0F05A2B8B88B70D"
+			uniqueguid="330C01E9-8B1E-4B51-9CB6227C0B91260B"
+			dimensions="24.00,24.00"
+			dock_point="Center Left"
+			offset="2.00,0.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="EE6BBDD2-DE42-4207-8970FEE7647B1B4F"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/dev_icon.png"
+					uniqueguid="F7CF7515-3CAA-481E-A8CEAA230122F0F9"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/dev_icon.png"/>
+			</override_images>
+		</dev_icon>
 		<foreground
 			this="2072CCFD-B949-4076-B3638F5D6CA79594"
 			id="foreground"
@@ -403,6 +491,61 @@
 					is_text_localised="false"/>
 			</localised_texts>
 		</seductive_influence_tracker>
+		<root
+			this="259EDF48-91EC-4386-A0DACE02D1B0F675"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="259EDF48-91EC-4386-A0DACE02D1B0F675"
+			currentstate="2A1D2800-E1FF-4ACA-9CB153B7CA711E13"
+			defaultstate="2A1D2800-E1FF-4ACA-9CB153B7CA711E13">
+			<componentimages>
+				<component_image
+					this="48189BB0-FAD4-4858-A35DBE62E3F284D5"
+					uniqueguid="48189BB0-FAD4-4858-A35DBE62E3F284D5"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="2A1D2800-E1FF-4ACA-9CB153B7CA711E13"
+					name="NewState"
+					width="1600"
+					height="900"
+					interactive="true"
+					uniqueguid="2A1D2800-E1FF-4ACA-9CB153B7CA711E13">
+					<imagemetrics>
+						<image
+							this="CEC0E537-CC3D-49C5-B3572D57A8F37754"
+							uniqueguid="CEC0E537-CC3D-49C5-B3572D57A8F37754"
+							componentimage="48189BB0-FAD4-4858-A35DBE62E3F284D5"
+							width="1440"
+							height="900"
+							colour="#7F7F7FFF"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</root>
+		<army_banner
+			this="1A8B2BE5-2BF0-4A61-B56754991A6EFB44"
+			id="army_banner"
+			offset="702.00,466.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			useglobalclicks="true"
+			tooltipslocalised="true"
+			uniqueguid="1A8B2BE5-2BF0-4A61-B56754991A6EFB44"
+			currentstate="34311D78-F84A-465E-AD690A016BD98F4A"
+			defaultstate="34311D78-F84A-465E-AD690A016BD98F4A">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="CampaignCharacterIdArmy"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="34311D78-F84A-465E-AD690A016BD98F4A"
+					name="NewState"
+					width="50"
+					height="50"
+					uniqueguid="34311D78-F84A-465E-AD690A016BD98F4A"/>
+			</states>
+		</army_banner>
 		<button_trespass_warning
 			this="3699FB30-A118-4094-8BAFECFC6DCF1B72"
 			id="button_trespass_warning"
@@ -1496,11 +1639,34 @@
 					this="8D2739FB-E8D6-4CAD-846EA6CAE4EF6511"
 					uniqueguid="8D2739FB-E8D6-4CAD-846EA6CAE4EF6511"
 					imagepath="ui/skins/default/icon_horde_cst.png"/>
+				<component_image
+					this="C33BC974-7EFF-43E8-AEAAEB3A708D8468"
+					uniqueguid="C33BC974-7EFF-43E8-AEAAEB3A708D8468"
+					imagepath="ui/skins/default/icon_horde_dwf.png"/>
 			</componentimages>
 			<states>
-				<coast
+				<normal
+					this="E543D04B-C5ED-4390-A67361D9C4AA3591"
+					name="normal"
+					width="24"
+					height="24"
+					tooltip="{{tr:horde_army_tooltip}}"
+					tooltiplabel="horde_normal_Tooltip_b005f"
+					interactive="true"
+					disabled="true"
+					uniqueguid="E543D04B-C5ED-4390-A67361D9C4AA3591">
+					<imagemetrics>
+						<image
+							this="181209ED-A972-44C5-B47E55C536A3FF04"
+							uniqueguid="181209ED-A972-44C5-B47E55C536A3FF04"
+							componentimage="4B899826-F807-4658-8F5408A497F8823C"
+							width="24"
+							height="24"/>
+					</imagemetrics>
+				</normal>
+				<wh2_dlc11_cst_vampire_coast
 					this="93E4FB65-1322-4553-B3FAF0B46A4A6AB6"
-					name="coast"
+					name="wh2_dlc11_cst_vampire_coast"
 					width="24"
 					height="24"
 					tooltip="Pirate Crew||This army has access to shipbuilding."
@@ -1516,26 +1682,26 @@
 							width="24"
 							height="24"/>
 					</imagemetrics>
-				</coast>
-				<normal
-					this="E543D04B-C5ED-4390-A67361D9C4AA3591"
-					name="normal"
+				</wh2_dlc11_cst_vampire_coast>
+				<wh_main_dwf_dwarfs
+					this="80BFE439-1151-4F10-A15A396994665686"
+					name="wh_main_dwf_dwarfs"
 					width="24"
 					height="24"
-					tooltip="Horde"
-					tooltiplabel="horde_normal_Tooltip_b005f"
+					tooltip="The Spirit of Grungni||Malakai's army has access to Airship buildings."
+					tooltiplabel="StateTooltip_5880fab7"
 					interactive="true"
 					disabled="true"
-					uniqueguid="E543D04B-C5ED-4390-A67361D9C4AA3591">
+					uniqueguid="80BFE439-1151-4F10-A15A396994665686">
 					<imagemetrics>
 						<image
-							this="181209ED-A972-44C5-B47E55C536A3FF04"
-							uniqueguid="181209ED-A972-44C5-B47E55C536A3FF04"
-							componentimage="4B899826-F807-4658-8F5408A497F8823C"
+							this="68564B5D-327F-4AEE-85D4A600202A65C0"
+							uniqueguid="68564B5D-327F-4AEE-85D4A600202A65C0"
+							componentimage="C33BC974-7EFF-43E8-AEAAEB3A708D8468"
 							width="24"
 							height="24"/>
 					</imagemetrics>
-				</normal>
+				</wh_main_dwf_dwarfs>
 			</states>
 		</horde>
 		<icon_infinity
@@ -1829,7 +1995,7 @@
 		<siege
 			this="D7E2E420-1EED-4B1F-A7C13BF5F6DE9EDB"
 			id="siege"
-			offset="733.00,0.00"
+			offset="791.00,0.00"
 			allowverticalresize="false"
 			uniqueguid="D7E2E420-1EED-4B1F-A7C13BF5F6DE9EDB"
 			currentstate="79CCF41C-0A13-4401-9BEDD4551ACDB090"
@@ -1849,7 +2015,7 @@
 		<status_bar
 			this="04E12E2A-5516-4E84-BF6EC2D62615D6D6"
 			id="status_bar"
-			offset="-492.00,104.00"
+			offset="-561.00,104.00"
 			allowverticalresize="false"
 			tooltipslocalised="true"
 			uniqueguid="04E12E2A-5516-4E84-BF6EC2D62615D6D6"
@@ -1865,7 +2031,7 @@
 				<newstate
 					this="A73D7A8E-CC3A-4922-8CEA92A0658E1EA4"
 					name="NewState"
-					width="1099"
+					width="1237"
 					height="24"
 					uniqueguid="A73D7A8E-CC3A-4922-8CEA92A0658E1EA4"/>
 			</states>
@@ -2162,7 +2328,6 @@
 			offset="2.00,12.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
-			visible="false"
 			docking="Center"
 			dock_offset="0.00,10.00"
 			component_anchor_point="0.50,0.50"
@@ -2223,12 +2388,14 @@
 				</newstate>
 			</states>
 		</strength_bar>
-		<icon_plague
+		<icon_army_plague
 			this="F53E62F7-9135-4BE6-9455FF3FDC6957C7"
-			id="icon_plague"
-			offset="555.00,-1.00"
+			id="icon_army_plague"
+			offset="613.00,-1.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
+			componentleveltooltip="{{tt:ui/campaign ui/tooltip_dlc25_active_plague}}"
+			tooltiplabel="ComponentTooltip_f2d78c69"
 			uniqueguid="F53E62F7-9135-4BE6-9455FF3FDC6957C7"
 			currentstate="ED97B290-048D-4B35-B1846762E927552E"
 			defaultstate="ED97B290-048D-4B35-B1846762E927552E">
@@ -2236,17 +2403,11 @@
 				<callback_with_context
 					callback_id="ContextLayoutTooltip"
 					context_object_id="CcoCampaignCharacter"
-					context_function_id="CcoRTEffectBundleList(EffectBundleList: this.MilitaryForceContext.PlagueEffectBundleList)">
-					<child_m_user_properties>
-						<property
-							name="layout_path"
-							value="ui/common ui/tooltip_effect_bundle_list"/>
-					</child_m_user_properties>
-				</callback_with_context>
+					context_function_id="MilitaryForceContext.ArmyPlagueContext.ActivePlagueContext.PlagueCompositionContext"/>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignCharacter"
-					context_function_id="MilitaryForceContext.HasPlague">
+					context_function_id="MilitaryForceContext.HasArmyPlague">
 					<child_m_user_properties>
 						<property
 							name="update_constant"
@@ -2256,7 +2417,23 @@
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoCampaignCharacter"
-					context_function_id="MilitaryForceContext.PlagueEffectBundleList.FirstContext"/>
+					context_function_id="MilitaryForceContext.ArmyPlagueContext.ActivePlagueContext.PlagueCompositionContext">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="PooledResourceTransaction"/>
+						<property
+							name="event1"
+							value="PlagueSelectionChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignFaction"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="FactionContext"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -2283,7 +2460,7 @@
 					</imagemetrics>
 				</newstate>
 			</states>
-		</icon_plague>
+		</icon_army_plague>
 		<dy_name
 			this="1F4E30E6-C671-4CA6-B4EEE9875AAF20A4"
 			id="dy_name"
@@ -2562,7 +2739,7 @@
 		<label_ambush_chance
 			this="32FF7BB7-1893-459E-9969D40B551E73F6"
 			id="label_ambush_chance"
-			offset="581.00,-1.00"
+			offset="639.00,-1.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			tooltipslocalised="true"
@@ -3137,6 +3314,13 @@
 			defaultstate="6E93BB81-8804-4216-9A2769755EA122A6">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="CharacterEffectsBundleIcon"/>
+				<callback_with_context callback_id="ContextLayoutTooltip">
+					<child_m_user_properties>
+						<property
+							name="allow_no_path"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -3780,7 +3964,7 @@
 		<icon_available_war_coord_target
 			this="A8D06B81-3796-49E4-A39C26A2A2D2CDEA"
 			id="icon_available_war_coord_target"
-			offset="887.00,-13.00"
+			offset="945.00,-13.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			tooltipslocalised="true"
@@ -3881,7 +4065,7 @@
 		<icon_current_war_coord_target
 			this="FD56D115-A052-49D4-894FB4B59AE4EE8B"
 			id="icon_current_war_coord_target"
-			offset="837.00,-13.00"
+			offset="895.00,-13.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			tooltipslocalised="true"
@@ -4522,11 +4706,11 @@
 		<dy_mp_player_name
 			this="63578CEA-56C2-4B22-9B4B4226DCC60500"
 			id="dy_mp_player_name"
-			offset="-23.00,256.00"
+			offset="-48.00,256.00"
 			allowverticalresize="false"
 			tooltipslocalised="true"
 			uniqueguid="63578CEA-56C2-4B22-9B4B4226DCC60500"
-			currentstate="2382BCDE-EC34-457B-83C72EB941ACCE0F"
+			currentstate="4F6336B0-F601-425B-BAFC46A63EC3A0C8"
 			defaultstate="4F6336B0-F601-425B-BAFC46A63EC3A0C8">
 			<callbackwithcontextlist>
 				<callback_with_context
@@ -4972,7 +5156,7 @@
 			component_anchor_point="0.00,1.00"
 			tooltipslocalised="true"
 			uniqueguid="1A008052-0BAA-4D11-BDFDA15526EB196D"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="A190909B-47A0-4CBA-A891664EB8525DFD"
 			defaultstate="A190909B-47A0-4CBA-A891664EB8525DFD">
 			<callbackwithcontextlist>
@@ -5025,7 +5209,7 @@
 							height="23"
 							dockpoint="Center"
 							dock_offset="-1.00,2.00"
-							isaspectratiolocked="true"/>
+							aspect_ratio_locked_behaviour="Width First"/>
 					</imagemetrics>
 				</defensive>
 				<offensive
@@ -5052,7 +5236,7 @@
 							width="18"
 							height="21"
 							dockpoint="Center"
-							isaspectratiolocked="true"/>
+							aspect_ratio_locked_behaviour="Width First"/>
 					</imagemetrics>
 				</offensive>
 			</states>
@@ -5068,7 +5252,7 @@
 			component_anchor_point="0.00,1.00"
 			tooltipslocalised="true"
 			uniqueguid="C8F5191F-ED13-4797-AA4A291F542992C7"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="9CA6B8C5-0332-450D-9DD495BB18EEE12D"
 			defaultstate="9CA6B8C5-0332-450D-9DD495BB18EEE12D">
 			<callbackwithcontextlist>
@@ -5386,6 +5570,13 @@
 			defaultstate="C9FBABCF-D8EF-4DB1-A11C39BA5081AA7E">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="CharacterEffectsBundleIcon"/>
+				<callback_with_context callback_id="ContextLayoutTooltip">
+					<child_m_user_properties>
+						<property
+							name="allow_no_path"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -5592,7 +5783,7 @@
 		<force_effect_list
 			this="EAB97057-2844-4864-8740946EC7BC7A68"
 			id="force_effect_list"
-			offset="673.00,0.00"
+			offset="731.00,0.00"
 			tooltipslocalised="true"
 			uniqueguid="EAB97057-2844-4864-8740946EC7BC7A68"
 			currentstate="E4057243-AF2D-4832-A0A23BBA68675456"
@@ -5611,7 +5802,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignCharacter"
-					context_function_id="MilitaryForceContext.IsGarrisoned == false &amp;&amp; Join(EffectBundleList, MilitaryForceContext.EffectBundleList).Filter(IsHighlightedEffectBundle &amp;&amp; (ShowHighlightedOnOwnerOnly == false || (ShowHighlightedOnOwnerOnly &amp;&amp; this.FactionContext == PlayersFaction))).IsEmpty == false">
+					context_function_id="Join(EffectBundleList, MilitaryForceContext.EffectBundleList).Filter(IsHighlightedEffectBundle &amp;&amp; (ShowHighlightedOnOwnerOnly == false || (ShowHighlightedOnOwnerOnly &amp;&amp; this.FactionContext == PlayersFaction))).IsEmpty == false">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -5778,331 +5969,6 @@
 				</newstate>
 			</states>
 		</template_global_effect_icon_and_timer>
-		<grudge_mission_target
-			this="D681BA1E-678B-4F30-BA0EC13BFCD86E70"
-			id="grudge_mission_target"
-			offset="35.00,35.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			docking="Center"
-			component_anchor_point="0.50,0.50"
-			priority="50"
-			tooltipslocalised="true"
-			componentleveltooltip="This is the target of a grudge!"
-			tooltiplabel="ComponentTooltip_2984353d"
-			soundcategory="UI_GBL_TMP_Round_Small_Button"
-			uniqueguid="D681BA1E-678B-4F30-BA0EC13BFCD86E70"
-			currentstate="B3CE3BDC-D1EF-4BE6-A9A73DDBBFF42B4B"
-			defaultstate="B3CE3BDC-D1EF-4BE6-A9A73DDBBFF42B4B">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTrashOnCondition"
-					context_object_id="CcoStaticObject"
-					context_function_id="PlayersFaction.SubcultureContext.Key != &quot;wh_main_sc_dwf_dwarfs&quot;"/>
-				<callback_with_context
-					callback_id="GrudgeTargetIcon"
-					context_object_id="CcoCampaignCharacter"/>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="disable_override"
-					value="resizable"/>
-				<property
-					name="dynamic_image"
-					value="0"/>
-			</userproperties>
-			<componentimages>
-				<component_image
-					this="256C2122-27C3-46B2-8F46EEB0DFF0EDF5"
-					uniqueguid="256C2122-27C3-46B2-8F46EEB0DFF0EDF5"
-					imagepath="ui/skins/default/icon_book_grudges.png"/>
-				<component_image
-					this="BABC6633-32D5-4D3E-8D7D03789C872622"
-					uniqueguid="BABC6633-32D5-4D3E-8D7D03789C872622"
-					imagepath="ui/skins/default/button_round_small_pressed.png"/>
-				<component_image
-					this="ABA0CC9B-C89E-464B-9E83B5C6061862B3"
-					uniqueguid="ABA0CC9B-C89E-464B-9E83B5C6061862B3"
-					imagepath="ui/skins/default/button_round_small_hover.png"/>
-				<component_image
-					this="9A245C3D-6E57-493B-939D912B53EA325C"
-					uniqueguid="9A245C3D-6E57-493B-939D912B53EA325C"
-					imagepath="ui/skins/default/button_round_small_active.png"/>
-				<component_image
-					this="41B8FED3-296C-4404-9A3274F3ED4E2E7C"
-					uniqueguid="41B8FED3-296C-4404-9A3274F3ED4E2E7C"
-					imagepath="ui/skins/default/button_round_small_inactive.png"/>
-				<component_image
-					this="CFCAEF0A-8754-4673-84C0D53E5B4C5DD4"
-					uniqueguid="CFCAEF0A-8754-4673-84C0D53E5B4C5DD4"
-					imagepath="ui/skins/default/button_round_small_underlay.png"/>
-			</componentimages>
-			<states>
-				<active
-					this="B3CE3BDC-D1EF-4BE6-A9A73DDBBFF42B4B"
-					name="active"
-					width="30"
-					height="30"
-					interactive="true"
-					uniqueguid="B3CE3BDC-D1EF-4BE6-A9A73DDBBFF42B4B"
-					stateeditordisplaypos="40.00,24.00">
-					<imagemetrics>
-						<image
-							this="E952BF59-2566-4C66-991911155DE6605C"
-							uniqueguid="E952BF59-2566-4C66-991911155DE6605C"
-							componentimage="CFCAEF0A-8754-4673-84C0D53E5B4C5DD4"
-							width="30"
-							height="30"/>
-						<image
-							this="6D698DC8-B6D0-4CCD-A5CDDD030CF5CB4F"
-							uniqueguid="6D698DC8-B6D0-4CCD-A5CDDD030CF5CB4F"
-							componentimage="9A245C3D-6E57-493B-939D912B53EA325C"
-							width="30"
-							height="30"/>
-						<image
-							this="D2DDB1B6-BF18-40EF-99B9C3F5137F8050"
-							uniqueguid="D2DDB1B6-BF18-40EF-99B9C3F5137F8050"
-							componentimage="ABA0CC9B-C89E-464B-9E83B5C6061862B3"
-							width="30"
-							height="30"
-							colour="#FFFFFF00"/>
-						<image
-							this="85ADEBCE-2345-4618-A72C5C454DF2B189"
-							uniqueguid="85ADEBCE-2345-4618-A72C5C454DF2B189"
-							componentimage="256C2122-27C3-46B2-8F46EEB0DFF0EDF5"
-							width="30"
-							height="30"
-							dockpoint="Center"
-							shader_name="brighten_t0"/>
-						<image
-							this="03ABB4D7-6226-484B-949217C877BAC86C"
-							uniqueguid="03ABB4D7-6226-484B-949217C877BAC86C"
-							componentimage="256C2122-27C3-46B2-8F46EEB0DFF0EDF5"
-							width="30"
-							height="30"
-							dockpoint="Center"
-							shader_name="brighten_t0"/>
-						<image
-							this="ABE0DA1D-2D57-40BD-8D58EDEDFA37F5EE"
-							uniqueguid="ABE0DA1D-2D57-40BD-8D58EDEDFA37F5EE"
-							componentimage="256C2122-27C3-46B2-8F46EEB0DFF0EDF5"
-							width="30"
-							height="30"
-							colour="#FFFFFF00"
-							dockpoint="Center"
-							shadertechnique_vars="0.50,0.00,0.00,0.00"
-							shader_name="brighten_t0"/>
-					</imagemetrics>
-					<transitionmap>
-						<transition
-							transition_m_target_state="2B2D6638-FBE8-4ED7-81B014A8FD104AE7"
-							transition_m_transition_time="200"
-							transition_m_interpolation_property_mask="64"/>
-					</transitionmap>
-					<component_text
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</active>
-				<down
-					this="E6774B04-2579-4BC0-AFC99DF4A676D036"
-					name="down"
-					width="30"
-					height="30"
-					interactive="true"
-					uniqueguid="E6774B04-2579-4BC0-AFC99DF4A676D036"
-					stateeditordisplaypos="145.00,219.00">
-					<imagemetrics>
-						<image
-							this="1CD3F4B7-FAEA-42A2-9F73714F8BDE4B81"
-							uniqueguid="1CD3F4B7-FAEA-42A2-9F73714F8BDE4B81"
-							componentimage="CFCAEF0A-8754-4673-84C0D53E5B4C5DD4"
-							width="30"
-							height="30"/>
-						<image
-							this="3834865E-5BE5-4129-92E8F3C7803FA864"
-							uniqueguid="3834865E-5BE5-4129-92E8F3C7803FA864"
-							componentimage="BABC6633-32D5-4D3E-8D7D03789C872622"
-							width="30"
-							height="30"/>
-						<image
-							this="C964B68B-C8AE-41FF-A98AF515BFF5760E"
-							uniqueguid="C964B68B-C8AE-41FF-A98AF515BFF5760E"
-							componentimage="256C2122-27C3-46B2-8F46EEB0DFF0EDF5"
-							offset="0.00,3.00"
-							width="30"
-							height="30"
-							colour="#6E6E6EFF"
-							dockpoint="Center"
-							dock_offset="0.00,3.00"/>
-					</imagemetrics>
-					<transitionmap>
-						<transition
-							index="3"
-							transition_m_target_state="2B2D6638-FBE8-4ED7-81B014A8FD104AE7"/>
-						<transition
-							index="1"
-							transition_m_target_state="15DA2AEE-0363-4B90-9B44C21E30EB8E33"/>
-					</transitionmap>
-					<component_text
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"
-						textshadervars="0.30,0.00,0.00,0.00"/>
-				</down>
-				<down_off
-					this="15DA2AEE-0363-4B90-9B44C21E30EB8E33"
-					name="down_off"
-					width="30"
-					height="30"
-					interactive="true"
-					uniqueguid="15DA2AEE-0363-4B90-9B44C21E30EB8E33"
-					stateeditordisplaypos="40.00,319.00">
-					<imagemetrics>
-						<image
-							this="8A9259C6-7E55-424C-BD763308406DF3F5"
-							uniqueguid="8A9259C6-7E55-424C-BD763308406DF3F5"
-							componentimage="CFCAEF0A-8754-4673-84C0D53E5B4C5DD4"
-							width="30"
-							height="30"/>
-						<image
-							this="CFC072F3-293F-4762-96B2030FB16FE90E"
-							uniqueguid="CFC072F3-293F-4762-96B2030FB16FE90E"
-							componentimage="9A245C3D-6E57-493B-939D912B53EA325C"
-							width="30"
-							height="30"/>
-						<image
-							this="F7C03D4F-8768-49A9-9BB253EFB05F8100"
-							uniqueguid="F7C03D4F-8768-49A9-9BB253EFB05F8100"
-							componentimage="256C2122-27C3-46B2-8F46EEB0DFF0EDF5"
-							width="30"
-							height="30"
-							dockpoint="Center"/>
-					</imagemetrics>
-					<transitionmap>
-						<transition transition_m_target_state="E6774B04-2579-4BC0-AFC99DF4A676D036"/>
-						<transition
-							index="8"
-							transition_m_target_state="B3CE3BDC-D1EF-4BE6-A9A73DDBBFF42B4B"/>
-					</transitionmap>
-					<component_text
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</down_off>
-				<hover
-					this="2B2D6638-FBE8-4ED7-81B014A8FD104AE7"
-					name="hover"
-					width="30"
-					height="30"
-					interactive="true"
-					uniqueguid="2B2D6638-FBE8-4ED7-81B014A8FD104AE7"
-					stateeditordisplaypos="137.00,126.00">
-					<imagemetrics>
-						<image
-							this="178B1C7B-5427-4646-ABACCFED47503E4D"
-							uniqueguid="178B1C7B-5427-4646-ABACCFED47503E4D"
-							componentimage="CFCAEF0A-8754-4673-84C0D53E5B4C5DD4"
-							width="30"
-							height="30"/>
-						<image
-							this="EAD6F7A9-21A6-48D5-8571344A4AF0A7E2"
-							uniqueguid="EAD6F7A9-21A6-48D5-8571344A4AF0A7E2"
-							componentimage="9A245C3D-6E57-493B-939D912B53EA325C"
-							width="30"
-							height="30"
-							colour="#FFFFFF00"/>
-						<image
-							this="0F98F800-BA93-4787-9939B407F0D0885C"
-							uniqueguid="0F98F800-BA93-4787-9939B407F0D0885C"
-							componentimage="ABA0CC9B-C89E-464B-9E83B5C6061862B3"
-							width="30"
-							height="30"/>
-						<image
-							this="B436D9EF-3C3D-4BC5-9021417A3D3549C2"
-							uniqueguid="B436D9EF-3C3D-4BC5-9021417A3D3549C2"
-							componentimage="256C2122-27C3-46B2-8F46EEB0DFF0EDF5"
-							width="30"
-							height="30"
-							dockpoint="Center"
-							shader_name="brighten_t0"/>
-						<image
-							this="E0D150B4-B79C-4FF4-8DC5D6BA73E4F8F8"
-							uniqueguid="E0D150B4-B79C-4FF4-8DC5D6BA73E4F8F8"
-							componentimage="256C2122-27C3-46B2-8F46EEB0DFF0EDF5"
-							width="30"
-							height="30"
-							colour="#FFFFFF00"
-							dockpoint="Center"
-							shader_name="brighten_t0"/>
-						<image
-							this="E7996D77-0B2F-4DDE-9C9A1AADDD24EC01"
-							uniqueguid="E7996D77-0B2F-4DDE-9C9A1AADDD24EC01"
-							componentimage="256C2122-27C3-46B2-8F46EEB0DFF0EDF5"
-							width="30"
-							height="30"
-							dockpoint="Center"
-							shadertechnique_vars="0.50,0.00,0.00,0.00"
-							shader_name="brighten_t0"/>
-					</imagemetrics>
-					<transitionmap>
-						<transition
-							index="1"
-							transition_m_target_state="B3CE3BDC-D1EF-4BE6-A9A73DDBBFF42B4B"
-							transition_m_transition_time="200"
-							transition_m_interpolation_property_mask="64"/>
-						<transition
-							index="2"
-							transition_m_target_state="E6774B04-2579-4BC0-AFC99DF4A676D036"/>
-					</transitionmap>
-					<component_text
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"
-						textshadervars="0.30,0.00,0.00,0.00"/>
-				</hover>
-				<inactive
-					this="6992C24B-46A7-43D4-8D512B65149F85F0"
-					name="inactive"
-					width="30"
-					height="30"
-					interactive="true"
-					disabled="true"
-					uniqueguid="6992C24B-46A7-43D4-8D512B65149F85F0">
-					<imagemetrics>
-						<image
-							this="FD7AC2A2-7531-46E6-AEF88EC55DCB8146"
-							uniqueguid="FD7AC2A2-7531-46E6-AEF88EC55DCB8146"
-							componentimage="CFCAEF0A-8754-4673-84C0D53E5B4C5DD4"
-							width="30"
-							height="30"/>
-						<image
-							this="1045B5E4-BBB9-4169-850EC0EA6E1491B0"
-							uniqueguid="1045B5E4-BBB9-4169-850EC0EA6E1491B0"
-							componentimage="41B8FED3-296C-4404-9A3274F3ED4E2E7C"
-							width="30"
-							height="30"/>
-						<image
-							this="083C2180-101C-4575-9E016FDF7D8D0B2F"
-							uniqueguid="083C2180-101C-4575-9E016FDF7D8D0B2F"
-							componentimage="256C2122-27C3-46B2-8F46EEB0DFF0EDF5"
-							width="30"
-							height="30"
-							colour="#FFFFFF46"
-							dockpoint="Center"/>
-					</imagemetrics>
-					<component_text
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</inactive>
-			</states>
-		</grudge_mission_target>
 		<siege_icon
 			this="F2625FFF-2B75-44E0-804177A3EBBDA3B1"
 			id="siege_icon"
@@ -6225,91 +6091,15 @@
 					this="9F03632C-A54A-4E70-81A045AFF76907E5"
 					uniqueguid="9F03632C-A54A-4E70-81A045AFF76907E5"
 					imagepath="ui/skins/default/tertiary_mask.png"/>
+				<component_image
+					this="3D1709D0-5292-4796-987997A16E4DFF8E"
+					uniqueguid="3D1709D0-5292-4796-987997A16E4DFF8E"
+					imagepath="ui/skins/default/spell_dial_spell_selected_hover.png"/>
 			</componentimages>
 			<states>
-				<colonel
-					this="119FD821-7328-4971-AA9332EB76237BB0"
-					name="colonel"
-					width="46"
-					height="46"
-					uniqueguid="119FD821-7328-4971-AA9332EB76237BB0">
-					<imagemetrics>
-						<image
-							this="FCDF6182-7E8F-4060-9323B48329CB2F85"
-							uniqueguid="FCDF6182-7E8F-4060-9323B48329CB2F85"
-							componentimage="1FB4F5F6-A23B-40F8-88AF8E00A7F5841F"
-							offset="4.00,-12.00"
-							width="37"
-							height="80"
-							dockpoint="Center"
-							dock_offset="0.00,5.00"
-							isaspectratiolocked="true"/>
-						<image
-							this="9DA34ECC-4F3B-4EAE-88E44D408BD94B63"
-							uniqueguid="9DA34ECC-4F3B-4EAE-88E44D408BD94B63"
-							componentimage="DF6E0D1B-00F3-4BD6-9A8594892F2C1AD2"
-							width="46"
-							height="46"/>
-					</imagemetrics>
-				</colonel>
-				<default
-					this="A4857FE7-B92A-4E82-B76C9E54EA72A570"
-					name="default"
-					width="46"
-					height="46"
-					uniqueguid="A4857FE7-B92A-4E82-B76C9E54EA72A570">
-					<imagemetrics>
-						<image
-							this="34D6AB41-E235-4F63-9D20FE6269E915AA"
-							uniqueguid="34D6AB41-E235-4F63-9D20FE6269E915AA"
-							componentimage="40966125-3B94-42B4-BD6847E33A26037C"
-							width="46"
-							height="46"
-							dockpoint="Center"/>
-						<image
-							this="3D0C2E4B-A8C2-420C-996565214849E9FE"
-							uniqueguid="3D0C2E4B-A8C2-420C-996565214849E9FE"
-							componentimage="1FB4F5F6-A23B-40F8-88AF8E00A7F5841F"
-							offset="2.00,4.00"
-							width="42"
-							height="42"
-							dockpoint="Center"
-							dock_offset="0.00,2.00"
-							shader_name="brighten_t0"/>
-						<image
-							this="E04FC1E3-8FF1-452D-98BDF287D1626F83"
-							uniqueguid="E04FC1E3-8FF1-452D-98BDF287D1626F83"
-							componentimage="671B6208-4EF3-4345-8AB47EE0A5354774"
-							offset="2.00,4.00"
-							width="42"
-							height="42"
-							dockpoint="Center"
-							dock_offset="0.00,2.00"/>
-						<image
-							this="92FBF593-52B6-4AAF-BAE0DA021C5D53F7"
-							uniqueguid="92FBF593-52B6-4AAF-BAE0DA021C5D53F7"
-							componentimage="AABC4979-C392-4667-9B3904A394B869C6"
-							offset="2.00,4.00"
-							width="42"
-							height="42"
-							dockpoint="Center"
-							dock_offset="0.00,2.00"/>
-						<image
-							this="4F948468-6FB0-4FE7-BC0E4E972C8B7F1E"
-							uniqueguid="4F948468-6FB0-4FE7-BC0E4E972C8B7F1E"
-							componentimage="DF6E0D1B-00F3-4BD6-9A8594892F2C1AD2"
-							width="46"
-							height="46"/>
-					</imagemetrics>
-					<component_text
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</default>
-				<wh3
+				<active
 					this="1BF8DD50-93BD-4777-AA1BAC26A54D9625"
-					name="wh3"
+					name="active"
 					width="46"
 					height="46"
 					uniqueguid="1BF8DD50-93BD-4777-AA1BAC26A54D9625"
@@ -6331,7 +6121,7 @@
 							height="42"
 							dockpoint="Center"
 							dock_offset="0.00,2.00"
-							isaspectratiolocked="true"
+							aspect_ratio_locked_behaviour="Width First"
 							shader_name="brighten_t0"/>
 						<image
 							this="9CC6E2CE-2E81-4253-B3ADA2DA85DCC04C"
@@ -6342,7 +6132,7 @@
 							height="42"
 							dockpoint="Center"
 							dock_offset="0.00,2.00"
-							isaspectratiolocked="true"/>
+							aspect_ratio_locked_behaviour="Width First"/>
 						<image
 							this="9D236475-BA2B-4B44-9455E54B68FB0F50"
 							uniqueguid="9D236475-BA2B-4B44-9455E54B68FB0F50"
@@ -6352,7 +6142,7 @@
 							height="42"
 							dockpoint="Center"
 							dock_offset="0.00,2.00"
-							isaspectratiolocked="true"/>
+							aspect_ratio_locked_behaviour="Width First"/>
 						<image
 							this="7F9D79B5-B98E-4145-B1713F9B83B3F386"
 							uniqueguid="7F9D79B5-B98E-4145-B1713F9B83B3F386"
@@ -6362,7 +6152,7 @@
 							height="42"
 							dockpoint="Center"
 							dock_offset="0.00,2.00"
-							isaspectratiolocked="true"/>
+							aspect_ratio_locked_behaviour="Width First"/>
 						<image
 							this="8FE24EF3-34E8-45A7-94CA14E5AE953D65"
 							uniqueguid="8FE24EF3-34E8-45A7-94CA14E5AE953D65"
@@ -6372,7 +6162,7 @@
 							height="42"
 							dockpoint="Center"
 							dock_offset="0.00,2.00"
-							isaspectratiolocked="true"/>
+							aspect_ratio_locked_behaviour="Width First"/>
 						<image
 							this="54F58C48-8BA9-4857-82115BAB6476FF13"
 							uniqueguid="54F58C48-8BA9-4857-82115BAB6476FF13"
@@ -6382,7 +6172,7 @@
 							height="42"
 							dockpoint="Center"
 							dock_offset="0.00,2.00"
-							isaspectratiolocked="true"/>
+							aspect_ratio_locked_behaviour="Width First"/>
 						<image
 							this="DE8C86C9-E42A-48B5-AC2548954712F85D"
 							uniqueguid="DE8C86C9-E42A-48B5-AC2548954712F85D"
@@ -6395,7 +6185,193 @@
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
 						fontcat_name="body_12"/>
-				</wh3>
+				</active>
+				<hover
+					this="4E15E60D-A420-41A9-BE56914668F1B96C"
+					name="hover"
+					width="46"
+					height="46"
+					shader_name="brighten_t0"
+					shadervars="1.00,0.00,0.00,0.00"
+					uniqueguid="4E15E60D-A420-41A9-BE56914668F1B96C">
+					<imagemetrics>
+						<image
+							this="15924645-9BB5-4533-81ECAC88A47EB402"
+							uniqueguid="15924645-9BB5-4533-81ECAC88A47EB402"
+							componentimage="40966125-3B94-42B4-BD6847E33A26037C"
+							width="46"
+							height="46"
+							dockpoint="Center"/>
+						<image
+							this="CEB602EA-D88B-4324-9B54855D7D2A3878"
+							uniqueguid="CEB602EA-D88B-4324-9B54855D7D2A3878"
+							componentimage="1FB4F5F6-A23B-40F8-88AF8E00A7F5841F"
+							offset="-17.00,4.00"
+							width="80"
+							height="42"
+							dockpoint="Center"
+							dock_offset="0.00,2.00"
+							aspect_ratio_locked_behaviour="Width First"/>
+						<image
+							this="20591884-C3AA-41FD-9C22CEEA635F05BF"
+							uniqueguid="20591884-C3AA-41FD-9C22CEEA635F05BF"
+							componentimage="A79417A8-69B4-45E7-A0C2C4182818499B"
+							offset="-17.00,4.00"
+							width="80"
+							height="42"
+							dockpoint="Center"
+							dock_offset="0.00,2.00"
+							aspect_ratio_locked_behaviour="Width First"/>
+						<image
+							this="C0AFBB71-000E-49A6-A26918D1E1F5B18A"
+							uniqueguid="C0AFBB71-000E-49A6-A26918D1E1F5B18A"
+							componentimage="671B6208-4EF3-4345-8AB47EE0A5354774"
+							offset="-17.00,4.00"
+							width="80"
+							height="42"
+							dockpoint="Center"
+							dock_offset="0.00,2.00"
+							aspect_ratio_locked_behaviour="Width First"/>
+						<image
+							this="71CC06C0-15A7-4838-BDDC850C3D2A6C9E"
+							uniqueguid="71CC06C0-15A7-4838-BDDC850C3D2A6C9E"
+							componentimage="C7F9AA4E-30FD-45E6-A0A52EB41972D710"
+							offset="-17.00,4.00"
+							width="80"
+							height="42"
+							dockpoint="Center"
+							dock_offset="0.00,2.00"
+							aspect_ratio_locked_behaviour="Width First"/>
+						<image
+							this="D6198332-DFED-4757-82E5C4ED44F39874"
+							uniqueguid="D6198332-DFED-4757-82E5C4ED44F39874"
+							componentimage="AABC4979-C392-4667-9B3904A394B869C6"
+							offset="-17.00,4.00"
+							width="80"
+							height="42"
+							dockpoint="Center"
+							dock_offset="0.00,2.00"
+							aspect_ratio_locked_behaviour="Width First"/>
+						<image
+							this="4371D12C-165E-4B52-A266E0C44BEED8A5"
+							uniqueguid="4371D12C-165E-4B52-A266E0C44BEED8A5"
+							componentimage="9F03632C-A54A-4E70-81A045AFF76907E5"
+							offset="-17.00,4.00"
+							width="80"
+							height="42"
+							dockpoint="Center"
+							dock_offset="0.00,2.00"
+							aspect_ratio_locked_behaviour="Width First"/>
+						<image
+							this="1C5087FB-D2D7-4485-B69FDF9362AFF52A"
+							uniqueguid="1C5087FB-D2D7-4485-B69FDF9362AFF52A"
+							componentimage="DF6E0D1B-00F3-4BD6-9A8594892F2C1AD2"
+							width="46"
+							height="46"/>
+					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</hover>
+				<selected
+					this="D5C6B5BD-ED19-4208-B78081F2ADD11F22"
+					name="selected"
+					width="46"
+					height="46"
+					shader_name="brighten_t0"
+					shadervars="1.00,0.00,0.00,0.00"
+					uniqueguid="D5C6B5BD-ED19-4208-B78081F2ADD11F22">
+					<imagemetrics>
+						<image
+							this="18A2764E-5BBB-464F-86CD90812036FCB0"
+							uniqueguid="18A2764E-5BBB-464F-86CD90812036FCB0"
+							componentimage="40966125-3B94-42B4-BD6847E33A26037C"
+							width="46"
+							height="46"
+							dockpoint="Center"/>
+						<image
+							this="E4379807-D18B-4E31-A54ABEB2615B9E25"
+							uniqueguid="E4379807-D18B-4E31-A54ABEB2615B9E25"
+							componentimage="1FB4F5F6-A23B-40F8-88AF8E00A7F5841F"
+							offset="-17.00,4.00"
+							width="80"
+							height="42"
+							dockpoint="Center"
+							dock_offset="0.00,2.00"
+							aspect_ratio_locked_behaviour="Width First"/>
+						<image
+							this="AB13BEFF-D879-4743-8516C2600630C530"
+							uniqueguid="AB13BEFF-D879-4743-8516C2600630C530"
+							componentimage="A79417A8-69B4-45E7-A0C2C4182818499B"
+							offset="-17.00,4.00"
+							width="80"
+							height="42"
+							dockpoint="Center"
+							dock_offset="0.00,2.00"
+							aspect_ratio_locked_behaviour="Width First"/>
+						<image
+							this="DC5F900D-B6C5-46BC-899FF7F576429418"
+							uniqueguid="DC5F900D-B6C5-46BC-899FF7F576429418"
+							componentimage="671B6208-4EF3-4345-8AB47EE0A5354774"
+							offset="-17.00,4.00"
+							width="80"
+							height="42"
+							dockpoint="Center"
+							dock_offset="0.00,2.00"
+							aspect_ratio_locked_behaviour="Width First"/>
+						<image
+							this="EAD377B2-2B63-45AB-97B21D72F968ABA8"
+							uniqueguid="EAD377B2-2B63-45AB-97B21D72F968ABA8"
+							componentimage="C7F9AA4E-30FD-45E6-A0A52EB41972D710"
+							offset="-17.00,4.00"
+							width="80"
+							height="42"
+							dockpoint="Center"
+							dock_offset="0.00,2.00"
+							aspect_ratio_locked_behaviour="Width First"/>
+						<image
+							this="2F3FFCF6-6234-41B1-BC9A403B362F45A6"
+							uniqueguid="2F3FFCF6-6234-41B1-BC9A403B362F45A6"
+							componentimage="AABC4979-C392-4667-9B3904A394B869C6"
+							offset="-17.00,4.00"
+							width="80"
+							height="42"
+							dockpoint="Center"
+							dock_offset="0.00,2.00"
+							aspect_ratio_locked_behaviour="Width First"/>
+						<image
+							this="D34615E0-AAD0-46DD-8083DB155487EEB1"
+							uniqueguid="D34615E0-AAD0-46DD-8083DB155487EEB1"
+							componentimage="9F03632C-A54A-4E70-81A045AFF76907E5"
+							offset="-17.00,4.00"
+							width="80"
+							height="42"
+							dockpoint="Center"
+							dock_offset="0.00,2.00"
+							aspect_ratio_locked_behaviour="Width First"/>
+						<image
+							this="71728706-3240-46B7-B0B7D192AA339A58"
+							uniqueguid="71728706-3240-46B7-B0B7D192AA339A58"
+							componentimage="DF6E0D1B-00F3-4BD6-9A8594892F2C1AD2"
+							width="46"
+							height="46"/>
+						<image
+							this="E25F215F-15C7-48BA-98DF318B2951C7D4"
+							uniqueguid="E25F215F-15C7-48BA-98DF318B2951C7D4"
+							componentimage="3D1709D0-5292-4796-987997A16E4DFF8E"
+							offset="2.00,2.00"
+							width="42"
+							height="42"
+							dockpoint="Center"/>
+					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</selected>
 			</states>
 		</character_portrait>
 		<character_portrait_parent
@@ -6631,7 +6607,7 @@
 			component_anchor_point="0.50,0.50"
 			tooltipslocalised="true"
 			uniqueguid="25D3B850-E115-4228-B3BE85D9635D131F"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="5EC70BA7-565A-4268-AC40E6EF6E63B610"
 			defaultstate="5EC70BA7-565A-4268-AC40E6EF6E63B610">
 			<callbackwithcontextlist>
@@ -6691,7 +6667,7 @@
 			component_anchor_point="0.50,0.50"
 			tooltipslocalised="true"
 			uniqueguid="EB7FC27D-85B2-4BAC-9704172202F809C4"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="3AC1A0CC-AC93-4E17-886CBD62AEDE8E68"
 			defaultstate="3AC1A0CC-AC93-4E17-886CBD62AEDE8E68">
 			<callbackwithcontextlist>
@@ -6764,6 +6740,31 @@
 						<property
 							name="event1"
 							value="MissionEnded"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="PlayersFaction.ActiveMissionList.FirstContext(CharacterContextAtObjectiveDisplayPosition == this)">
+					<child_m_user_properties>
+						<property
+							name="clear_on_empty"
+							value=""/>
+						<property
+							name="event0"
+							value="MissionIssued"/>
+						<property
+							name="event1"
+							value="MissionEnded"/>
+						<property
+							name="event3"
+							value="CharacterMoveStart"/>
+						<property
+							name="event4"
+							value="CharacterMoveEnd"/>
+						<property
+							name="event5"
+							value="CampaignShroudUpdated"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbackwithcontextlist>
@@ -7222,7 +7223,7 @@
 		<caravan_cargo
 			this="CE6DFC38-6F05-4DF8-BBE6A721ECFF3F8E"
 			id="caravan_cargo"
-			offset="977.00,-5.00"
+			offset="1035.00,-5.00"
 			allowverticalresize="false"
 			priority="1"
 			tooltipslocalised="true"
@@ -7342,7 +7343,7 @@
 		<hidden_army
 			this="E143D98F-DF7F-4500-BF8CE4CDFE1EE57A"
 			id="hidden_army"
-			offset="1069.00,-3.00"
+			offset="1127.00,-3.00"
 			tooltipslocalised="true"
 			componentleveltooltip="This army is hidden from enemies"
 			tooltiplabel="ComponentTooltip_aa812eb"
@@ -7393,5 +7394,349 @@
 				</default>
 			</states>
 		</hidden_army>
+		<grudge_effect
+			this="5591E428-CB18-4047-BCD03938CE764409"
+			id="grudge_effect"
+			offset="4.00,0.00"
+			allowverticalresize="false"
+			visible="false"
+			priority="1"
+			componentleveltooltip="{{tt:ui/campaign ui/tooltip_pooled_resource_breakdown}}"
+			tooltiplabel="ComponentTooltip_ef09dabd"
+			uniqueguid="5591E428-CB18-4047-BCD03938CE764409"
+			currentstate="ED4D60E8-AC6F-4BD3-8BB77D3F606B1299"
+			defaultstate="ED4D60E8-AC6F-4BD3-8BB77D3F606B1299"
+			marked_for_deletion="true">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoCampaignPooledResource"/>
+			</callbackwithcontextlist>
+			<states>
+				<positive
+					this="ED4D60E8-AC6F-4BD3-8BB77D3F606B1299"
+					name="positive"
+					width="1"
+					height="37"
+					interactive="true"
+					uniqueguid="ED4D60E8-AC6F-4BD3-8BB77D3F606B1299">
+					<component_text
+						textxoffset="28.00,4.00"
+						textyoffset="16.00,0.00"
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						text_shader_name="drop_shadow_t0"
+						textshadervars="0.00,-1.00,2.00,0.00"/>
+				</positive>
+			</states>
+			<animations>
+				<flash_update
+					id="flash_update"
+					propagate="true">
+					<frames>
+						<frame
+							interpolationtime="0"
+							interpolationpropertymask="3"
+							targetmetrics_m_height="37"
+							targetmetrics_m_width="64"/>
+						<frame
+							interpolationtime="200"
+							interpolationpropertymask="3"
+							targetmetrics_m_colour="#FFFF00FF"
+							targetmetrics_m_height="37"
+							targetmetrics_m_width="64"
+							targetmetrics_m_offset="0.00,-4.00"/>
+						<frame
+							interpolationtime="200"
+							interpolationpropertymask="3"
+							targetmetrics_m_colour="#FFF8D7FF"
+							targetmetrics_m_height="37"
+							targetmetrics_m_width="64"
+							targetmetrics_m_offset="0.00,4.00"/>
+					</frames>
+				</flash_update>
+			</animations>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"
+				secondary_margins="10.00,0.00"/>
+		</grudge_effect>
+		<grudge_holder
+			this="08859023-DA8A-4488-83A75564A7ABD925"
+			id="grudge_holder"
+			offset="1157.00,-7.00"
+			allowverticalresize="false"
+			priority="1"
+			componentleveltooltip="{{tt:ui/campaign ui/tooltip_pooled_resource_breakdown}}"
+			tooltiplabel="ComponentTooltip_351d24ed"
+			soundcategory="UI_GBL_TMP_Round_Small_Button"
+			uniqueguid="08859023-DA8A-4488-83A75564A7ABD925"
+			currentstate="C8478C94-F1DD-4F28-B6E9B8062CAB877A"
+			defaultstate="C8478C94-F1DD-4F28-B6E9B8062CAB877A">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTrashOnCondition"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="CanUseUiFeature(&quot;GRUDGES&quot;) == false"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="MilitaryForceContext.PooledResourceContext(&quot;wh3_dlc25_dwf_grudge_points_enemy_armies&quot;)"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="Total &gt; 0">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="FactionDiplomacyChangeAny"/>
+						<property
+							name="update_when_parent_invisible"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoCampaignPooledResource"/>
+			</callbackwithcontextlist>
+			<states>
+				<positive
+					this="C8478C94-F1DD-4F28-B6E9B8062CAB877A"
+					name="positive"
+					width="80"
+					height="37"
+					interactive="true"
+					disabled="true"
+					uniqueguid="C8478C94-F1DD-4F28-B6E9B8062CAB877A">
+					<component_text
+						textxoffset="28.00,4.00"
+						textyoffset="16.00,0.00"
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						text_shader_name="drop_shadow_t0"
+						textshadervars="0.00,-1.00,2.00,0.00"/>
+				</positive>
+			</states>
+			<animations>
+				<flash_update
+					id="flash_update"
+					propagate="true">
+					<frames>
+						<frame
+							interpolationtime="0"
+							interpolationpropertymask="3"
+							targetmetrics_m_height="37"
+							targetmetrics_m_width="64"/>
+						<frame
+							interpolationtime="200"
+							interpolationpropertymask="3"
+							targetmetrics_m_colour="#FFFF00FF"
+							targetmetrics_m_height="37"
+							targetmetrics_m_width="64"
+							targetmetrics_m_offset="0.00,-4.00"/>
+						<frame
+							interpolationtime="200"
+							interpolationpropertymask="3"
+							targetmetrics_m_colour="#FFF8D7FF"
+							targetmetrics_m_height="37"
+							targetmetrics_m_width="64"
+							targetmetrics_m_offset="0.00,4.00"/>
+					</frames>
+				</flash_update>
+			</animations>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"
+				margins="4.00,4.00"/>
+		</grudge_holder>
+		<icon_plague
+			this="5782F18C-1D2B-4651-BC43AED77C640CDA"
+			id="icon_plague"
+			offset="555.00,-1.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			uniqueguid="5782F18C-1D2B-4651-BC43AED77C640CDA"
+			currentstate="ADA909C8-B67B-4437-9079E70A899761BB"
+			defaultstate="ADA909C8-B67B-4437-9079E70A899761BB">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="MilitaryForceContext.PlagueInfectionContext">
+					<child_m_user_properties>
+						<property
+							name="alternate_parent"
+							value="hud_campaign"/>
+						<property
+							name="layout_path"
+							value="ui/campaign ui/tooltip_dlc25_active_plague"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="MilitaryForceContext.HasPlague">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="8172A1D2-63AA-48A6-939AD94DE23D3483"
+					uniqueguid="8172A1D2-63AA-48A6-939AD94DE23D3483"
+					imagepath="ui/skins/default/icon_plague.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="ADA909C8-B67B-4437-9079E70A899761BB"
+					name="NewState"
+					width="26"
+					height="26"
+					interactive="true"
+					disabled="true"
+					uniqueguid="ADA909C8-B67B-4437-9079E70A899761BB">
+					<imagemetrics>
+						<image
+							this="9E20BFB7-6DD3-4976-81A29235085F24DE"
+							uniqueguid="9E20BFB7-6DD3-4976-81A29235085F24DE"
+							componentimage="8172A1D2-63AA-48A6-939AD94DE23D3483"
+							width="26"
+							height="26"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</icon_plague>
+		<label_grudge_points
+			this="098FA438-A2DF-47CC-83947B5484BEC057"
+			id="label_grudge_points"
+			offset="4.00,4.00"
+			allowverticalresize="false"
+			dock_offset="0.00,4.00"
+			priority="1"
+			tooltipslocalised="true"
+			uniqueguid="098FA438-A2DF-47CC-83947B5484BEC057"
+			currentstate="2EEE2AE6-1AF5-4439-BE725A1F6A75F740"
+			defaultstate="2EEE2AE6-1AF5-4439-BE725A1F6A75F740">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="Total">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignTurnStart"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="B5A016B6-AD9F-468C-9D4BD947A95807D2"
+					uniqueguid="B5A016B6-AD9F-468C-9D4BD947A95807D2"
+					imagepath="ui/skins/default/icon_banner_bg.png"/>
+				<component_image
+					this="2D56D2EB-25E4-4130-9483E454CC65FFEF"
+					uniqueguid="2D56D2EB-25E4-4130-9483E454CC65FFEF"
+					imagepath="ui/skins/default/icon_grudge_points.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="2EEE2AE6-1AF5-4439-BE725A1F6A75F740"
+					name="NewState"
+					width="72"
+					height="26"
+					disabled="true"
+					uniqueguid="2EEE2AE6-1AF5-4439-BE725A1F6A75F740">
+					<imagemetrics>
+						<image
+							this="671F6584-3DED-4992-82148489B5FF80D3"
+							uniqueguid="671F6584-3DED-4992-82148489B5FF80D3"
+							componentimage="B5A016B6-AD9F-468C-9D4BD947A95807D2"
+							offset="6.00,-1.00"
+							width="62"
+							height="29"
+							tile="true"
+							dockpoint="Center Left"
+							dock_offset="6.00,0.00"
+							canresizeheight="false"
+							margin="0.00,40.00,0.00,10.00"/>
+						<image
+							this="E195D4FF-9437-406A-8778B39309DBA65E"
+							uniqueguid="E195D4FF-9437-406A-8778B39309DBA65E"
+							componentimage="2D56D2EB-25E4-4130-9483E454CC65FFEF"
+							width="26"
+							height="26"
+							dockpoint="Center Left"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<component_text
+						text="99%"
+						textxoffset="26.00,12.00"
+						textyoffset="6.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_cafde360"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						textshadervars="2.00,2.00,1.00,0.00"/>
+				</newstate>
+			</states>
+		</label_grudge_points>
+		<immune_icon
+			this="2EA2D77D-B841-4C1B-87FB59CA9FB8195E"
+			id="immune_icon"
+			offset="581.00,-4.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="99999"
+			tooltipslocalised="true"
+			uniqueguid="2EA2D77D-B841-4C1B-87FB59CA9FB8195E"
+			currentstate="80291CFD-CEF1-4CE5-812D1A65BB115ED6"
+			defaultstate="80291CFD-CEF1-4CE5-812D1A65BB115ED6">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignMilitaryForce"
+					context_function_id="IsImmuneToPlagues &amp;&amp; HasPlague == false &amp;&amp; (CanUseUiFeature(&quot;NURGLE_PLAGUES&quot;) || CommandingCharacterContext.IsPlayerCharacter)"/>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoCampaignMilitaryForce"
+					context_function_id="Loc(&quot;wh3_dlc25_plagues_target_immune&quot;, PlagueImmunityTurns)"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="30106A00-9B9C-403A-8687C15687E4AC84"
+					uniqueguid="30106A00-9B9C-403A-8687C15687E4AC84"
+					imagepath="ui/skins/default/0_placeholder_small_38x38.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="80291CFD-CEF1-4CE5-812D1A65BB115ED6"
+					name="default"
+					interactive="true"
+					disabled="true"
+					uniqueguid="80291CFD-CEF1-4CE5-812D1A65BB115ED6">
+					<imagemetrics>
+						<image
+							this="A1259E2A-67C9-4EB5-A50786A4B0D3E2BE"
+							uniqueguid="A1259E2A-67C9-4EB5-A50786A4B0D3E2BE"
+							componentimage="30106A00-9B9C-403A-8687C15687E4AC84"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</immune_icon>
 	</components>
 </layout>

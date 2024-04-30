@@ -489,6 +489,21 @@ function generate_sea_encounter_invasion(character, loc, army_size)
 	
 	local force = random_army_manager:generate_force("encounter_force", army_size, false);
 	local invasion_1 = invasion_manager:new_invasion("encounter_invasion", "wh2_dlc11_cst_vampire_coast_encounters", force, loc);
+
+	invasion_1:create_general(false, "wh2_dlc11_cst_admiral_fem_deep")
+	local difficulty = cm:get_difficulty(true)
+	if difficulty == "hard" then
+		invasion_1:add_character_experience(4, true)	-- designers may fine-tune these experience numbers
+		invasion_1:add_unit_experience(1)
+	elseif difficulty == "very hard" then
+		invasion_1:add_character_experience(8, true)
+		invasion_1:add_unit_experience(2)
+	elseif difficulty == "legendary" then
+		invasion_1:add_character_experience(16, true)
+		invasion_1:add_unit_experience(4)
+	end
+	invasion_1:add_aggro_radius(5, {faction_name})
+
 	invasion_1:set_target("CHARACTER", character:command_queue_index(), faction_name);
 	invasion_1:apply_effect("wh_main_bundle_military_upkeep_free_force", -1);
 	invasion_1:start_invasion(
@@ -517,6 +532,7 @@ function generate_sea_encounter_invasion(character, loc, army_size)
 			
 			cm:force_declare_war("wh2_dlc11_cst_vampire_coast_encounters", faction_name, false, false);
 		end,
+		false,
 		false,
 		false,
 		false

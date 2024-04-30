@@ -42,6 +42,7 @@ function endgame_grudge_too_far:trigger()
 		wh3_main_dwf_the_ancestral_throng = "wh3_main_combi_region_drackla_spire",
 		wh_main_dwf_dwarfs = "wh3_main_combi_region_karaz_a_karak",
 		wh_main_dwf_kraka_drak = "wh3_main_combi_region_kraka_drak",
+		wh3_dlc25_dwf_malakai = "wh3_main_combi_region_sjoktraken",
 		wh_main_dwf_barak_varr = "wh3_main_combi_region_barak_varr",
 		wh_main_dwf_zhufbar = "wh3_main_combi_region_zhufbar",
 		wh3_main_dwf_karak_azorn = "wh3_main_combi_region_karak_azorn",

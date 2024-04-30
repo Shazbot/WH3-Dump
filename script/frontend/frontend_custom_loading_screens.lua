@@ -1,6 +1,7 @@
 -- custom loading screens used when the "intro" option is NOT checked on the frontend
 custom_loading_screens_no_intro = {	
 	-- combined map
+	--[start_pos_characters id] = custom_loading_screens key
 	["1991761668"] = "wh2_main_hef_tyrion_gc",
 	["1620402507"] = "wh2_main_hef_teclis_gc",
 	["350221326"] = "wh2_main_def_malekith_gc",
@@ -93,6 +94,10 @@ custom_loading_screens_no_intro = {
 	["913082313"] = "wh3_dlc24_cth_the_celestial_court_gc",
 	["1764355874"] = "wh3_dlc24_ksl_daughters_of_the_forest_gc",
 	["673242576"] = "wh3_dlc24_tze_the_deceivers_gc",
+	["1391450514"] = "wh_main_emp_wissenland_gc",
+	["27074398"] = "wh3_dlc25_dwf_malakai_gc",
+	["432969859"] = "wh3_dlc25_nur_tamurkhan_gc",
+	["2026198078"] = "wh3_dlc25_nur_epidemius_gc",
 	
 	-- chaos map
 	["780864164"] = "wh3_main_ksl_the_ice_court",
@@ -117,6 +122,9 @@ custom_loading_screens_no_intro = {
 	["1311887776"] = "wh3_dlc24_cth_the_celestial_court",
 	["1179882791"] = "wh3_dlc24_ksl_daughters_of_the_forest",
 	["1563791448"] = "wh3_dlc24_tze_the_deceivers",
+	["1708856401"] = "wh_main_emp_wissenland",
+	["369720970"] = "wh3_dlc25_dwf_malakai",
+	["1064818377"] = "wh3_dlc25_nur_tamurkhan",
 
 	-- prologue
 	["138084536"] = ""--"wh3_main_prologue_initial_load"	--Prologue handled in code so pass an empty string to make use C++ code path

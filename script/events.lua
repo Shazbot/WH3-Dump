@@ -1,5 +1,5 @@
 --[[
-Automatically generated via export from C:/Users/Build/DaVE_local/branches/warhammer3/patch_4_2/warhammer/raw_data/db
+Automatically generated via export from C:/Users/build/DaVE_local/branches/warhammer3/patch_5_0/warhammer/raw_data/db
 Edit manually at your own risk
 --]]
 
@@ -185,6 +185,7 @@ FactionCharacterTagEntryEvent = {}
 FactionCharacterTagRemovedEvent = {}
 FactionCivilWarOccured = {}
 FactionCookedDish = {}
+FactionDeath = {}
 FactionEncountersOtherFaction = {}
 FactionFameLevelUp = {}
 FactionGainedAncillary = {}

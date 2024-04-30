@@ -1,8 +1,10 @@
 local tech_tree_lords = {
 	-- Raknik Spiderclaw
-	["tech_grn_mid_1_1"] = {forename = "names_name_1478382266", surname = "names_name_618498202", subtype = "wh2_dlc15_grn_goblin_great_shaman_raknik", immortal = true},
+	tech_grn_mid_1_1 = {forename = "names_name_1478382266", surname = "names_name_618498202", subtype = "wh2_dlc15_grn_goblin_great_shaman_raknik", immortal = true},
 	-- Oglok the 'Orrible
-	["tech_grn_mid_2_1"] = {forename = "names_name_221373666", surname = "names_name_651577131", subtype = "wh2_dlc15_grn_orc_warboss_oglok", immortal = true}
+	tech_grn_mid_2_1 = {forename = "names_name_221373666", surname = "names_name_651577131", subtype = "wh2_dlc15_grn_orc_warboss_oglok", immortal = true},
+	-- Mikael Leadstrong
+	wh_main_tech_dwf_civ_6_3 = {forename = "names_name_291390137", surname = "names_name_2147358935", subtype = "wh3_dlc25_dwf_lord_mikael_leadstrong", immortal = true},
 };
 
 function add_tech_tree_lords_listeners()

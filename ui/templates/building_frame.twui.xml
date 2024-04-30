@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="IsContextValid(CampaignRoot)">
 	<hierarchy>
@@ -58,9 +58,6 @@
 					</units_list>
 					<function_icon this="3E09659A-3DE1-4816-8FF6C87B5A6F082D"/>
 					<unlocks_tech_icon this="CF65763C-C5F8-4A85-93D972B77A9BBB16"/>
-					<benefit_list this="1002E305-34E1-478E-B26C60DC99E94660">
-						<template_benefit_icon this="EFCC7F9A-7467-4847-A563C09D3E7BD028"/>
-					</benefit_list>
 					<pointer this="8EA2AFA5-F135-489B-BF8FE011982CFA84"/>
 					<upgradable this="699423C7-7B5E-4F8A-9AB319FBA53104C4">
 						<smoke_particle_emitter this="26082724-F31C-4C52-A16C9D660C132263">
@@ -76,7 +73,9 @@
 					</dev_points>
 					<mercenary_unit_list this="BD7563C2-2DAA-4632-933A9160C45EDB15">
 						<template_merc_entry_parent this="5EB0F94D-8DDD-49EF-BB89492D2054DD89">
-							<merc_context this="2B2EDBE0-9A1C-47D1-81A5BDEA14B7E2A1"/>
+							<merc_context this="2B2EDBE0-9A1C-47D1-81A5BDEA14B7E2A1">
+								<amount this="CA61A5A8-A1F4-4A2D-A5F865CFA33F824D"/>
+							</merc_context>
 						</template_merc_entry_parent>
 					</mercenary_unit_list>
 					<icon_harmony this="13090A5B-A716-406F-85EA1DF8F09E51FA"/>
@@ -131,7 +130,7 @@
 			tooltipslocalised="true"
 			soundcategory="UI_GBL_TMP_Building_Button"
 			uniqueguid="2D210B2E-0C35-49E8-9A7BFDCF84A8963E"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="0FA42CCF-245D-457F-84ED646ED3A82A71"
 			defaultstate="0FA42CCF-245D-457F-84ED646ED3A82A71">
 			<userproperties>
@@ -168,63 +167,6 @@
 				</oncreate>
 			</animations>
 		</building_frame>
-		<template_benefit_icon
-			this="EFCC7F9A-7467-4847-A563C09D3E7BD028"
-			id="template_benefit_icon"
-			uniqueguid_in_template="EFCC7F9A-7467-4847-A563C09D3E7BD028"
-			tooltipslocalised="true"
-			uniqueguid="EFCC7F9A-7467-4847-A563C09D3E7BD028"
-			currentstate="88DC561E-B96F-4BC9-A7F02C2CE79DF5BD"
-			defaultstate="88DC561E-B96F-4BC9-A7F02C2CE79DF5BD">
-			<componentimages>
-				<component_image
-					this="11FF4471-8DE2-48DF-89F040701E016605"
-					uniqueguid="11FF4471-8DE2-48DF-89F040701E016605"
-					imagepath="ui/skins/default/icon_public_order_positive.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="88DC561E-B96F-4BC9-A7F02C2CE79DF5BD"
-					name="NewState"
-					width="16"
-					height="16"
-					interactive="true"
-					uniqueguid="88DC561E-B96F-4BC9-A7F02C2CE79DF5BD">
-					<imagemetrics>
-						<image
-							this="CFA3EAAB-B2A1-4925-98FFCAEC225EAAF7"
-							uniqueguid="CFA3EAAB-B2A1-4925-98FFCAEC225EAAF7"
-							componentimage="11FF4471-8DE2-48DF-89F040701E016605"
-							width="16"
-							height="16"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-		</template_benefit_icon>
-		<benefit_list
-			this="1002E305-34E1-478E-B26C60DC99E94660"
-			id="benefit_list"
-			uniqueguid_in_template="1002E305-34E1-478E-B26C60DC99E94660"
-			offset="27.00,58.00"
-			visible="false"
-			tooltipslocalised="true"
-			uniqueguid="1002E305-34E1-478E-B26C60DC99E94660"
-			currentstate="1C812968-A22D-438F-BCE9C6B1D91A3B58"
-			defaultstate="1C812968-A22D-438F-BCE9C6B1D91A3B58">
-			<states>
-				<newstate
-					this="1C812968-A22D-438F-BCE9C6B1D91A3B58"
-					name="NewState"
-					width="16"
-					height="16"
-					uniqueguid="1C812968-A22D-438F-BCE9C6B1D91A3B58"/>
-			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				sizetocontent="true"
-				max_length="45"
-				allow_overlap="true"/>
-		</benefit_list>
 		<building_cost
 			this="1CD7CB03-C469-428F-BC54714777F516B2"
 			id="building_cost"
@@ -241,7 +183,13 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="GetIfElse(Buildings.IsHostileButtonSelected, CreateCost(Buildings.StoredSettlementOrCharacter, PlayersFaction), CreateCost(Buildings.StoredSettlementOrCharacter))"/>
+					context_function_id="GetIfElse(Buildings.IsHostileButtonSelected, CreateCost(Buildings.StoredSettlementOrCharacter, PlayersFaction), CreateCost(Buildings.StoredSettlementOrCharacter))">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CharacterCreatedAny"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBuildingLevelRecord"
@@ -772,6 +720,7 @@
 					name="locked"
 					width="71"
 					height="72"
+					soundcategory="UI_GBL_TMP_Selection_Locked_Unavailable_Small"
 					interactive="true"
 					shadervars="1.00,1.00,0.00,0.00"
 					uniqueguid="482D29A3-C53C-4A88-8FFB145E8A551579">
@@ -813,6 +762,7 @@
 					name="not_owned"
 					width="71"
 					height="72"
+					soundcategory="UI_GBL_TMP_Selection_Locked_Unavailable_Small"
 					interactive="true"
 					shader_name="set_greyscale_t0"
 					shadervars="1.00,1.00,0.00,0.00"
@@ -2647,7 +2597,13 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="GetIfElse(HasLifecycleState &amp;&amp; (Level !=0 || IsBuiltInSlot(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;))), LifecycleTransitionTime(StoredContextFromParent(&quot;CcoCampaignSettlement&quot;)), CreateTime(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;)))"/>
+					context_function_id="GetIfElse(HasLifecycleState &amp;&amp; (Level !=0 || IsBuiltInSlot(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;))), LifecycleTransitionTime(StoredContextFromParent(&quot;CcoCampaignSettlement&quot;)), CreateTime(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;)))">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CharacterCreatedAny"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextStateSetterConditional"
 					context_object_id="CcoBuildingLevelRecord">
@@ -2860,10 +2816,10 @@
 			this="4AF2618A-D12B-4453-B80F59035FBE0DE3"
 			id="units_list"
 			uniqueguid_in_template="4AF2618A-D12B-4453-B80F59035FBE0DE3"
-			offset="55.00,-19.00"
+			offset="55.00,-22.00"
 			allowverticalresize="false"
 			docking="Top Right"
-			dock_offset="17.00,-19.00"
+			dock_offset="17.00,-22.00"
 			component_anchor_point="1.00,0.00"
 			tooltipslocalised="true"
 			uniqueguid="4AF2618A-D12B-4453-B80F59035FBE0DE3"
@@ -4145,7 +4101,6 @@
 			uniqueguid_in_template="BD7563C2-2DAA-4632-933A9160C45EDB15"
 			offset="25.00,-38.00"
 			allowverticalresize="false"
-			visible="false"
 			docking="Top Center External"
 			dock_offset="0.00,5.00"
 			component_anchor_point="0.50,1.00"
@@ -4157,7 +4112,13 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="MercenaryUnitList"/>
+					context_function_id="MercenaryUnitAndAmountPairList">
+					<child_m_user_properties>
+						<property
+							name="hide_if_empty"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -4174,7 +4135,7 @@
 			</states>
 			<LayoutEngine
 				type="HorizontalList"
-				spacing="-10.00,0.00"
+				spacing="-8.00,0.00"
 				sizetocontent="true"
 				max_length="60"
 				allow_overlap="true"/>
@@ -4183,8 +4144,8 @@
 			this="2B2EDBE0-9A1C-47D1-81A5BDEA14B7E2A1"
 			id="merc_context"
 			uniqueguid_in_template="2B2EDBE0-9A1C-47D1-81A5BDEA14B7E2A1"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
 			tooltipslocalised="true"
 			uniqueguid="2B2EDBE0-9A1C-47D1-81A5BDEA14B7E2A1"
 			currentstate="D51FB6B1-27B8-4D64-B1130834BDBDD73D"
@@ -4194,6 +4155,11 @@
 					callback_id="ContextImageSetter"
 					context_object_id="CcoMainUnitRecord"
 					context_function_id="IconPath"/>
+				<callback_with_context callback_id="StatePropagatorCallback"/>
+				<callback_with_context
+					callback_id="ContextCommandMouseOn"
+					context_object_id="CcoStaticObject"/>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -4246,7 +4212,6 @@
 					<transitionmap>
 						<transition
 							transition_m_target_state="E7991FC4-436F-4CFC-B63DA500A9A452FE"
-							transition_m_transition_time="100"
 							transition_m_interpolation_property_mask="4"/>
 					</transitionmap>
 				</active>
@@ -4279,7 +4244,6 @@
 					<transitionmap>
 						<transition
 							transition_m_target_state="132BD569-5578-479A-9D618E27BCC1AACF"
-							transition_m_transition_time="100"
 							transition_m_interpolation_property_mask="4"/>
 					</transitionmap>
 				</active_red>
@@ -4293,16 +4257,16 @@
 					stateeditordisplaypos="258.00,242.00">
 					<imagemetrics>
 						<image
-							this="B513CCAC-06BE-4512-986BE34D24379A59"
-							uniqueguid="B513CCAC-06BE-4512-986BE34D24379A59"
+							this="EF4ED241-9118-47A3-B53153953AA2D770"
+							uniqueguid="EF4ED241-9118-47A3-B53153953AA2D770"
 							componentimage="5FEB6CEC-D3F7-47E1-B3EE48CE4683E60D"
 							offset="-3.00,-7.00"
 							width="30"
 							height="65"
 							dockpoint="Center"/>
 						<image
-							this="7B870E24-AD93-4BC0-AC265F7EB3088C64"
-							uniqueguid="7B870E24-AD93-4BC0-AC265F7EB3088C64"
+							this="2149E65E-E9F0-4378-A5D8E3FF4F8E1353"
+							uniqueguid="2149E65E-E9F0-4378-A5D8E3FF4F8E1353"
 							componentimage="8DC9C686-BB27-4FE1-A4AE1D1C7720ED10"
 							offset="-3.00,-7.00"
 							width="30"
@@ -4386,6 +4350,44 @@
 					</imagemetrics>
 				</locked>
 			</states>
+			<animations>
+				<onexitstate_hover
+					id="OnExitState_hover"
+					propagate="true">
+					<frames>
+						<frame
+							interpolationtime="0"
+							targetmetrics_m_height="65"
+							targetmetrics_m_width="30"
+							is_movement_absolute="true"
+							is_resize_for_image="true">
+							<triggers>
+								<trigger
+									trigger_component="CA61A5A8-A1F4-4A2D-A5F865CFA33F824D"
+									trigger_animation="not_hover"/>
+							</triggers>
+						</frame>
+					</frames>
+				</onexitstate_hover>
+				<onenterstate_hover
+					id="OnEnterState_hover"
+					propagate="true">
+					<frames>
+						<frame
+							interpolationtime="0"
+							targetmetrics_m_height="50"
+							targetmetrics_m_width="23"
+							is_movement_absolute="true"
+							is_resize_for_image="true">
+							<triggers>
+								<trigger
+									trigger_component="CA61A5A8-A1F4-4A2D-A5F865CFA33F824D"
+									trigger_animation="hover"/>
+							</triggers>
+						</frame>
+					</frames>
+				</onenterstate_hover>
+			</animations>
 		</merc_context>
 		<template_merc_entry_parent
 			this="5EB0F94D-8DDD-49EF-BB89492D2054DD89"
@@ -4418,6 +4420,16 @@
 							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoPair"
+					context_function_id="First"/>
+				<callback_with_context
+					callback_id="ContextCommandMouseOn"
+					context_function_id="self.ChildContext(&quot;available_count&quot;).TriggerAnimation(&quot;mouseon&quot;)"/>
+				<callback_with_context
+					callback_id="ContextCommandMouseOff"
+					context_function_id="self.ChildContext(&quot;available_count&quot;).TriggerAnimation(&quot;mouseoff&quot;)"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -4426,6 +4438,15 @@
 				<property
 					name="disable_override2"
 					value="TopmostObjectCallback"/>
+				<property
+					name="disable_override3"
+					value="ContextPropagator"/>
+				<property
+					name="disable_override4"
+					value="ContextCommandMouseOn"/>
+				<property
+					name="disable_override5"
+					value="ContextCommandMouseOff"/>
 			</userproperties>
 			<states>
 				<active
@@ -4775,12 +4796,12 @@
 			this="4F0CD2ED-5D96-4D86-93782BECC18F372D"
 			id="tier_label"
 			uniqueguid_in_template="4F0CD2ED-5D96-4D86-93782BECC18F372D"
-			offset="57.00,17.00"
+			offset="57.00,23.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			visible="false"
 			docking="Center Right"
-			dock_offset="35.00,0.00"
+			dock_offset="35.00,6.00"
 			component_anchor_point="1.00,0.50"
 			priority="60"
 			tooltipslocalised="true"
@@ -4874,7 +4895,7 @@
 			tooltipslocalised="true"
 			soundcategory="UI_GBL_TMP_Building_Button"
 			uniqueguid="98067473-D4C1-4BE7-B60D32AA985AA36F"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			isrelativeresize="true"
 			currentstate="D419BB8E-AD0B-43BF-A5756720959892E5"
 			defaultstate="D419BB8E-AD0B-43BF-A5756720959892E5">
@@ -4917,7 +4938,13 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="HasLifecycleState"/>
+					context_function_id="HasLifecycleState">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignBuildingStateChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextCommandRightClick"
 					context_object_id="CcoBuildingLevelRecord"
@@ -4938,13 +4965,9 @@
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
-					callback_id="ContextTrashOnCondition"
-					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="HasLifecycleState == false"/>
-				<callback_with_context
 					callback_id="ContextUISFXTrigger"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="slot = StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;) | slot.IsBuildingNew || slot.IsUpgrading =&gt; &quot;UI_CAM_HUD_Construction_Cancel&quot; | &quot;UI_CLICK_Construction_Start&quot;">
+					context_function_id="slot = StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;)&#10;| slot.IsBuildingNew || slot.IsUpgrading || slot.IsRepairing =&gt; &quot;UI_CAM_HUD_Construction_Cancel&quot; &#10;| slot.IsDismantling =&gt; &quot;UI_CLICK_Cancel_Decline&quot;&#10;| slot.CanUpgrade &amp;&amp; self.ParentContext.Id != &quot;slot_entry&quot; &amp;&amp; !slot.IsEmpty &amp;&amp; self.CurrentState == &quot;hover&quot; =&gt; &quot;UI_CLICK_Building_Upgrade&quot; &#10;| slot.IsEmpty &amp;&amp; self.CurrentState == &quot;hover&quot; =&gt; &quot;UI_CLICK_Construction_Start&quot;">
 					<child_m_user_properties>
 						<property
 							name="mouse_event0"
@@ -4977,9 +5000,6 @@
 				<property
 					name="disable_override6"
 					value="ContextUISFXSwitchSetter"/>
-				<property
-					name="disable_override7"
-					value="ContextTrashOnCondition"/>
 				<property
 					name="disable_override8"
 					value="ContextUISFXTrigger"/>
@@ -5079,6 +5099,7 @@
 					name="built_inactive"
 					width="74"
 					height="74"
+					soundcategory="UI_GBL_TMP_Selection_Locked_Unavailable_Small"
 					interactive="true"
 					shader_name="glow_pulse_t0"
 					shadervars="1.00,2.00,1.50,0.00"
@@ -5110,6 +5131,7 @@
 					name="built_panel"
 					width="74"
 					height="74"
+					soundcategory="UI_GBL_TMP_Generic_Click"
 					interactive="true"
 					shadervars="5.00,5.00,5.00,5.00"
 					uniqueguid="E880DD99-3CC8-4816-8E85545F62CA6537"
@@ -5149,6 +5171,7 @@
 					name="built_panel_hover"
 					width="74"
 					height="74"
+					soundcategory="UI_GBL_TMP_Generic_Click"
 					interactive="true"
 					shader_name="brighten_t0"
 					shadervars="0.40,0.00,0.00,0.00"
@@ -5563,7 +5586,7 @@
 			tooltipslocalised="true"
 			soundcategory="UI_GBL_TMP_Building_Button"
 			uniqueguid="C4065442-93B9-4DFD-A6E7ECFF4676D92B"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			isrelativeresize="true"
 			currentstate="00221134-68FF-4787-80C1496C6E999AC2"
 			defaultstate="00221134-68FF-4787-80C1496C6E999AC2">
@@ -5609,7 +5632,13 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="HasLifecycleState == false"/>
+					context_function_id="HasLifecycleState == false">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignBuildingStateChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextCommandRightClick"
 					context_object_id="CcoBuildingLevelRecord"
@@ -5632,7 +5661,7 @@
 				<callback_with_context
 					callback_id="ContextUISFXTrigger"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="slot = StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;) | slot.IsRepairing =&gt; &quot;UI_CLICK_Building_Destroy&quot; | slot.IsUpgrading =&gt; &quot;UI_CAM_HUD_Construction_Cancel&quot; | &quot;UI_CLICK_Construction_Start&quot;">
+					context_function_id="slot = StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;)&#10;| slot.IsBuildingNew || slot.IsUpgrading || slot.IsRepairing =&gt; &quot;UI_CAM_HUD_Construction_Cancel&quot;&#10;| slot.IsDismantling =&gt; &quot;UI_CLICK_Cancel_Decline&quot; &#10;| slot.CanUpgrade &amp;&amp; self.ParentContext.Id != &quot;slot_entry&quot; &amp;&amp; !slot.IsEmpty &amp;&amp; self.CurrentState == &quot;hover&quot; =&gt; &quot;UI_CLICK_Building_Upgrade&quot; &#10;| slot.IsEmpty &amp;&amp; self.CurrentState == &quot;hover&quot; =&gt; { slot.CharacterContext.MilitaryForceContext.ForceType == &quot;MALAKAI_BOUND_HORDE&quot; | &quot;UI_CAM_DWF_SpiritOfGrugni&quot; | &quot;UI_CLICK_Construction_Start&quot; }">
 					<child_m_user_properties>
 						<property
 							name="mouse_event0"
@@ -5640,9 +5669,9 @@
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
-					callback_id="ContextTrashOnCondition"
-					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="HasLifecycleState"/>
+					callback_id="ContextSoundSetter"
+					context_object_id="CcoComponent"
+					context_function_id="ContextObjectId"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -5672,9 +5701,6 @@
 				<property
 					name="disable_override7"
 					value="ContextUISFXTrigger"/>
-				<property
-					name="disable_override8"
-					value="ContextTrashOnCondition"/>
 				<property
 					name="dynamic_image"
 					value="0"/>
@@ -5723,6 +5749,7 @@
 					name="built"
 					width="74"
 					height="74"
+					soundcategory="UI_GBL_TMP_Selection_Locked_Unavailable_Small"
 					interactive="true"
 					shadervars="5.00,5.00,5.00,5.00"
 					uniqueguid="EAD9D4A9-CFA5-4CB4-91ED0C8E87182D81"
@@ -5772,6 +5799,7 @@
 					name="built_inactive"
 					width="74"
 					height="74"
+					soundcategory="UI_GBL_TMP_Selection_Locked_Unavailable_Small"
 					interactive="true"
 					shader_name="glow_pulse_t0"
 					shadervars="1.00,2.00,1.50,0.00"
@@ -5803,6 +5831,7 @@
 					name="built_panel"
 					width="74"
 					height="74"
+					soundcategory="UI_GBL_TMP_Generic_Click"
 					interactive="true"
 					shadervars="5.00,5.00,5.00,5.00"
 					uniqueguid="B62B9D6D-C19A-4871-915151A8155D615E"
@@ -5844,6 +5873,7 @@
 					name="built_panel_hover"
 					width="74"
 					height="74"
+					soundcategory="UI_GBL_TMP_Generic_Click"
 					interactive="true"
 					shader_name="brighten_t0"
 					shadervars="0.40,0.00,0.00,0.00"
@@ -6200,6 +6230,7 @@
 					name="unknown"
 					width="74"
 					height="74"
+					soundcategory="UI_GBL_TMP_Selection_Locked_Unavailable_Small"
 					disabled="true"
 					uniqueguid="3ADADC10-471B-4DA5-9C8C4681A4947E0E">
 					<imagemetrics>
@@ -6226,11 +6257,11 @@
 			this="242AEAAB-C611-42FF-AC4E00A098C1215A"
 			id="lifecycle_turns"
 			uniqueguid_in_template="242AEAAB-C611-42FF-AC4E00A098C1215A"
-			offset="39.00,58.00"
+			offset="37.00,58.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			docking="Bottom Right"
-			dock_offset="10.00,8.00"
+			dock_offset="8.00,8.00"
 			component_anchor_point="1.00,1.00"
 			tooltipslocalised="true"
 			componentleveltooltip="Construction turns left||You are currently building this item."
@@ -6807,5 +6838,141 @@
 				</default>
 			</states>
 		</constructing_animation_circular_parent>
+		<amount
+			this="CA61A5A8-A1F4-4A2D-A5F865CFA33F824D"
+			id="amount"
+			uniqueguid_in_template="CA61A5A8-A1F4-4A2D-A5F865CFA33F824D"
+			offset="-3.00,31.00"
+			docking="Bottom Center"
+			dock_offset="-3.00,3.00"
+			component_anchor_point="0.50,1.00"
+			tooltipslocalised="true"
+			uniqueguid="CA61A5A8-A1F4-4A2D-A5F865CFA33F824D"
+			currentstate="ADF5D31C-1A4B-484A-9225B1AD8393313D"
+			defaultstate="ADF5D31C-1A4B-484A-9225B1AD8393313D">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoPair"
+					context_function_id="Second"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoPair"
+					context_function_id="Second &gt; 1"/>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="disable_override0"
+					value="ContextTextLabel"/>
+				<property
+					name="disable_override1"
+					value="ContextVisibilitySetter"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="03D198ED-360E-440A-8E1CFC86B700BFDC"
+					uniqueguid="03D198ED-360E-440A-8E1CFC86B700BFDC"
+					imagepath="ui/skins/default/small_unit_card_corner_holder.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="ADF5D31C-1A4B-484A-9225B1AD8393313D"
+					name="active"
+					width="22"
+					height="22"
+					interactive="true"
+					uniqueguid="ADF5D31C-1A4B-484A-9225B1AD8393313D">
+					<imagemetrics>
+						<image
+							this="E1858800-E368-4519-844ABF6739E5FDD4"
+							uniqueguid="E1858800-E368-4519-844ABF6739E5FDD4"
+							componentimage="03D198ED-360E-440A-8E1CFC86B700BFDC"
+							offset="5.00,0.00"
+							width="15"
+							height="17"
+							dockpoint="Center"
+							dock_offset="2.00,-2.00"/>
+					</imagemetrics>
+					<component_text
+						text="10"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Never split"
+						textlabel="StateText_5c6c8464"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"
+						font_colour_override_preset_key="white"/>
+				</active>
+				<hover
+					this="D48C9E0A-32C6-4EB0-91B3BD860A0B41C3"
+					name="hover"
+					width="22"
+					height="22"
+					disabled="true"
+					uniqueguid="D48C9E0A-32C6-4EB0-91B3BD860A0B41C3">
+					<imagemetrics>
+						<image
+							this="11BCFAF5-F40C-4E43-A6BBCCAE3BB15622"
+							uniqueguid="11BCFAF5-F40C-4E43-A6BBCCAE3BB15622"
+							componentimage="03D198ED-360E-440A-8E1CFC86B700BFDC"
+							offset="5.00,0.00"
+							width="15"
+							height="17"
+							dockpoint="Center"
+							dock_offset="2.00,-2.00"/>
+					</imagemetrics>
+					<component_text
+						text="10"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Never split"
+						textlabel="StateText_60412af8"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"
+						font_colour_override_preset_key="white"/>
+				</hover>
+			</states>
+			<animations>
+				<not_hover id="not_hover">
+					<frames>
+						<frame
+							interpolationtime="0"
+							interpolationpropertymask="2"
+							targetmetrics_m_height="22"
+							targetmetrics_m_width="22"
+							targetmetrics_m_offset="-3.00,7.00"
+							is_movement_absolute="true"/>
+						<frame
+							interpolationtime="0"
+							interpolationpropertymask="2"
+							targetmetrics_m_height="22"
+							targetmetrics_m_width="22"
+							targetmetrics_m_offset="-3.00,3.00"
+							is_movement_absolute="true"/>
+					</frames>
+				</not_hover>
+				<hover id="hover">
+					<frames>
+						<frame
+							interpolationtime="0"
+							interpolationpropertymask="2"
+							targetmetrics_m_height="22"
+							targetmetrics_m_width="22"
+							targetmetrics_m_offset="-3.00,3.00"
+							is_movement_absolute="true"/>
+						<frame
+							interpolationtime="0"
+							interpolationpropertymask="2"
+							targetmetrics_m_height="22"
+							targetmetrics_m_width="22"
+							targetmetrics_m_offset="-6.00,11.00"
+							is_movement_absolute="true"/>
+					</frames>
+				</hover>
+			</animations>
+		</amount>
 	</components>
 </layout>

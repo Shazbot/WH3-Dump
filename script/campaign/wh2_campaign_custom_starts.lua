@@ -100,6 +100,17 @@ custom_starts.start_data.chs_custom_start_factions = {
 			{"force_diplomacy", "wh3_main_tze_oracles_of_tzeentch", "wh3_main_chs_khazag", "war"},
 		}
 	},
+	--------------------
+	----- MALAKAI ------
+	--------------------
+	{
+		if_human = "wh3_dlc25_dwf_malakai",
+		if_ai = nil,
+		changes = {
+			-- Add additional units for Norscan force to fight on turn 1
+			{"modify_units_in_army", "wh_main_nor_baersonling", 412, 267, {"wh_main_nor_inf_chaos_marauders_0","wh_main_nor_inf_chaos_marauders_0","wh_main_nor_inf_chaos_marauders_1","wh_dlc08_nor_mon_norscan_ice_trolls_0"}, {}, nil, nil }
+		}
+	},
 };
 
 --Immortal Empires Changes
@@ -197,6 +208,17 @@ custom_starts.start_data.me_custom_start_factions = {
 		}
 	},
 
+	---------------------------
+	------ BALTHASAR GELT -----
+	---------------------------
+	{
+		if_human = "wh2_dlc13_emp_golden_order",
+		if_ai = nil,
+		changes = {
+			{"char_effect_bundle", "wh2_dlc13_emp_golden_order", 1137, 451, "wh3_main_ie_scripted_endgame_force_immune_to_regionless_attrition", 2},
+		}
+	},
+	
 	--------------------
 	------ ORION ------
 	--------------------
@@ -231,10 +253,13 @@ custom_starts.start_data.me_custom_start_factions = {
 	{
 		if_ai = "wh3_dlc24_cth_the_celestial_court",
 		changes = {
-			{"region_change", "wh3_main_combi_region_shang_wu", "wh3_main_cth_the_jade_custodians"},
+			{"region_change", "wh3_main_combi_region_shang_wu", "wh3_dlc21_vmp_jiangshi_rebels"},
+			{"primary_slot_change", "wh3_main_combi_region_shang_wu", "wh_main_vmp_settlement_major_2"},
+			{"secondary_slot_change", "wh3_main_combi_region_shang_wu", 0, "wh_main_vmp_bindingcircle_2"},
+			{"modify_units_in_army", "wh3_dlc21_vmp_jiangshi_rebels", 316, 574, {"wh_main_vmp_cav_hexwraiths", "wh_main_vmp_inf_grave_guard_0", "wh_main_vmp_mon_fell_bats", "wh_main_vmp_mon_vargheists"}, {"wh_main_vmp_inf_skeleton_warriors_0", "wh_main_vmp_inf_zombie", "wh_main_vmp_inf_zombie", "wh_main_vmp_mon_dire_wolves"}, nil, nil}
 		}
 	},
-
+	
 	---------------------
 	---- Changeling -----
 	---------------------
@@ -246,6 +271,35 @@ custom_starts.start_data.me_custom_start_factions = {
 			{"teleport_character", "wh_dlc03_bst_beastmen", 518, 732, 604, 585, false},
 		}
 	},
+	--------------------
+	----- MALAKAI ------
+	--------------------
+	{
+		if_human = "wh3_dlc25_dwf_malakai",
+		if_ai = nil,
+		changes = {
+			-- Add additional units for Norscan force to fight on turn 1
+			{"modify_units_in_army", "wh3_main_nur_maggoth_kin", 728, 537, {"wh3_main_nur_inf_nurglings_0","wh3_main_nur_inf_plaguebearers_0","wh3_main_nur_inf_plaguebearers_0"}, {}, nil, nil },
+		}
+	},
+	-----------------------
+	----   EPIDEMIUS   ----
+	-----------------------
+	{
+		if_human = "wh3_dlc25_nur_epidemius",
+		if_ai = nil,
+		changes = {
+			{"add_xp_to_unit", "wh3_dlc25_nur_epidemius", "wh3_main_nur_inf_plaguebearers_0", 3},
+			{"add_xp_to_unit", "wh3_dlc25_nur_epidemius", "wh3_main_nur_inf_plaguebearers_1", 3}
+		}
+	},
+	{
+		if_human = "wh3_dlc25_nur_epidemius",
+		if_ai = "wh3_main_dae_daemon_prince",
+		changes = {
+			{"teleport_character_faction_leader", "wh3_main_dae_daemon_prince", 726, 901}
+		}
+	}
 }
 
 function custom_starts:add_campaign_custom_start_listeners()

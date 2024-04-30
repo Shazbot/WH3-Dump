@@ -818,7 +818,7 @@ function start_global_interventions_main()
 	-- Specific Factions
 	if subculture == "wh3_main_sc_kho_khorne" then
 		khorne_ascendancy:start()
-	elseif subculture == "wh3_main_sc_nur_nurgle" then
+	elseif subculture == "wh3_main_sc_nur_nurgle" and local_faction_name ~= "wh3_dlc25_nur_tamurkhan" then
 		nurgle_ascendancy:start()
 	elseif subculture == "wh3_main_sc_sla_slaanesh" then
 		slaanesh_ascendancy:start()
@@ -19849,7 +19849,7 @@ in_oathgold:add_trigger_condition(
 	function(context)
 		local faction = context:faction();
 		local resource = faction:pooled_resource_manager():resource("dwf_oathgold");
-		return resource:value() > 100 and faction:name() == cm:get_local_faction_name();
+		return resource:value() > 200 and faction:name() == cm:get_local_faction_name();
 	end
 );
 

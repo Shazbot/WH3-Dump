@@ -37,8 +37,8 @@ wh2_main_sfx_03 = new_sfx("Play_wh2_main_great_vortex_liz_kroq_gar_hand_of_gods_
 wh2_main_sfx_04 = new_sfx("Play_wh2_main_great_vortex_liz_kroq_gar_hand_of_gods_stage_3_pt_04");
 wh2_main_sfx_05 = new_sfx("Play_wh2_main_great_vortex_liz_kroq_gar_hand_of_gods_stage_3_pt_05");
 
-wh2_main_intro_01 = new_sfx("Play_Movie_Warhammer2_Hand_of_God_Intro");
-wh2_main_intro_stop_01 = new_sfx("Stop_Movie_Warhammer2_Hand_of_God_Intro");
+wh2_main_intro_01 = new_sfx("Play_Movie_Warhammer2_Hand_of_God_Intro", false, true);
+wh2_main_intro_stop_01 = new_sfx("Stop_Movie_Warhammer2_Hand_of_God_Intro", false, true);
 
 --wh2_main_sfx_music_stop = new_sfx("music_b_REVEAL_STOP"); 
 

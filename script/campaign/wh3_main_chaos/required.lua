@@ -35,11 +35,14 @@ require("wh2_pro08_gotrek_felix")
 -- narrative events
 require("wh3_campaign_payload_remapping");
 require("wh3_chaos_narrative_events");
+require("wh3_dlc25_narrative_tod")
 
 require("wh3_tol_helpers");
 require("wh3_tol_darkness_and_disharmony");
 require("wh3_tol_something_rotten_in_kislev");
 
+
+---- faction and race features
 require("wh3_campaign_slaanesh_devotees");
 require("wh3_campaign_slaanesh_seductive_influence");
 require("wh3_campaign_daemon_cults");
@@ -72,7 +75,13 @@ require("wh3_dlc20_campaign_chs_vassal_dilemmas")
 require("wh3_campaign_reveal_chaos_realm_mission_areas")
 require("wh3_campaign_scripted_occupation_options")
 require("wh3_campaign_harmony")
-
+require("wh3_dlc25_emp_techs")
+require("wh3_campaign_grudges")
+require("wh3_campaign_grudges_starting_missions")
+require("wh3_campaign_grudges_legendary")
+require("wh3_dlc25_grudge_cycles")
+require("wh2_campaign_tech_tree_lords")
+require("wh3_campaign_forge")
 
 -- DLC23 - Chaos Dwarfs
 require("wh3_dlc23_narrative_chaos_dwarfs");
@@ -96,6 +105,17 @@ require("realms/wh3_realm_nurgle");
 require("realms/wh3_realm_slaanesh");
 require("realms/wh3_realm_tzeentch");
 require("realms/wh3_realm_tzeentch_data");
+
+-- DLC25
+require("wh3_dlc25_campaign_nur_chieftains")
+require("wh3_dlc25_malakai_battles")
+require("wh3_dlc25_gunnery_school")
+require("wh3_dlc25_imperial_authority")
+require("wh3_dlc25_spirit_of_grungni")
+require("wh3_dlc25_empire_state_troops")
+require("wh3_dlc25_imperial_authority")
+require("wh3_dlc25_gardens_of_morr")
+
 
 -- Game systems
 require("victory_objectives");

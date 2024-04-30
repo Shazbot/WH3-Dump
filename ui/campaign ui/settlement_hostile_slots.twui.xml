@@ -19,6 +19,9 @@
 					<building_slot_template this="BAEC5C85-C144-497A-B6B5547385C6191D"/>
 					<slots this="B890518F-AB1D-4DAF-BD2B443ECF7691D9"/>
 				</wh2_main_lzd_lizardmen>
+				<wh3_dlc25_emp_empire this="763D79EF-E7F2-42DC-8640F8C17B9127C0">
+					<slots this="FEC4A32C-185C-484F-98E5C80D304A67CE"/>
+				</wh3_dlc25_emp_empire>
 				<skaven_view this="10F16752-D762-4E24-9004082675067486">
 					<wh2_main_skv_skaven this="9E82C3B6-0DDC-4565-BE44B8ABDBCB31CC">
 						<slots this="BF2924BE-A8F2-471E-A878A71A3E1AF40A"/>
@@ -959,7 +962,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="HostileSlotsGroupList.Any(CategoryObject.IsPlayersFaction &amp;&amp; CategoryObject.CultureContext.Key == &quot;wh2_dlc11_cst_vampire_coast&quot;)">
+					context_function_id="GetIfElse(Buildings.ShouldShowSettlementDiscoveredSlots, HostileSlotsGroupList.FirstContext(CategoryObject == StoredContextFromParent(&quot;CcoCampaignFaction&quot;)).CategoryObject.CultureContext.Key == &quot;wh2_dlc11_cst_vampire_coast&quot;, HostileSlotsGroupList.Any(CategoryObject.CultureContext.Key == &quot;wh2_dlc11_cst_vampire_coast&quot; &amp;&amp; CategoryObject.IsPlayersFaction))">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -1173,5 +1176,167 @@
 				</newstate>
 			</states>
 		</wh3_daemon_factions>
+		<slots
+			this="FEC4A32C-185C-484F-98E5C80D304A67CE"
+			id="slots"
+			offset="83.00,76.00"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			tooltipslocalised="true"
+			uniqueguid="FEC4A32C-185C-484F-98E5C80D304A67CE"
+			currentstate="08AD7594-3CF5-44F8-80828D79CF3D9CDC"
+			defaultstate="08AD7594-3CF5-44F8-80828D79CF3D9CDC"
+			comment="the CcoCampaignFaction comes from SettlementViewCallback">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="HostileForeignSlotList(StoredContext(&quot;CcoCampaignFaction&quot;))">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="ForeignSlotRemoved"/>
+						<property
+							name="object_store_events"
+							value=""/>
+						<property
+							name="template_layout"
+							value="ui/campaign ui/settlement_building_slot"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignFaction"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="HostileSlotsGroupList.FirstContext(CategoryObject.CultureContext.Key == &quot;wh_main_emp_empire&quot; &amp;&amp; CategoryObject.IsPlayersFaction).CategoryObject">
+					<child_m_user_properties>
+						<property
+							name="only_target"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<states>
+				<ally
+					this="81A0362C-45CE-4B2C-BB1E7389E9CC59E4"
+					name="ally"
+					width="43"
+					height="1"
+					uniqueguid="81A0362C-45CE-4B2C-BB1E7389E9CC59E4"/>
+				<enemy
+					this="3ADF9EEC-2D66-453D-9047536DBAEA0197"
+					name="enemy"
+					width="43"
+					height="1"
+					uniqueguid="3ADF9EEC-2D66-453D-9047536DBAEA0197"/>
+				<neutral
+					this="23E19CAD-97F9-4472-88E6DAAA40BAA172"
+					name="neutral"
+					width="43"
+					height="1"
+					uniqueguid="23E19CAD-97F9-4472-88E6DAAA40BAA172"/>
+				<player
+					this="08AD7594-3CF5-44F8-80828D79CF3D9CDC"
+					name="player"
+					width="43"
+					height="1"
+					uniqueguid="08AD7594-3CF5-44F8-80828D79CF3D9CDC"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				spacing="10.00,10.00"
+				sizetocontent="true"
+				secondary_margins="42.00,42.00">
+				<columnwidths>
+					<column width="295"/>
+				</columnwidths>
+			</LayoutEngine>
+		</slots>
+		<wh3_dlc25_emp_empire
+			this="763D79EF-E7F2-42DC-8640F8C17B9127C0"
+			id="wh3_dlc25_emp_empire"
+			offset="-3.00,0.00"
+			allowverticalresize="false"
+			visible="false"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			tooltipslocalised="true"
+			uniqueguid="763D79EF-E7F2-42DC-8640F8C17B9127C0"
+			currentstate="F4BA5805-4E25-4238-809E8AC08D3FB8DF"
+			defaultstate="F4BA5805-4E25-4238-809E8AC08D3FB8DF">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="GetIfElse(Buildings.ShouldShowSettlementDiscoveredSlots, HostileSlotsGroupList.FirstContext(CategoryObject == StoredContextFromParent(&quot;CcoCampaignFaction&quot;)).CategoryObject.CultureContext.Key == &quot;wh_main_emp_empire&quot;, HostileSlotsGroupList.Any(CategoryObject.CultureContext.Key == &quot;wh_main_emp_empire&quot; &amp;&amp; CategoryObject.IsPlayersFaction))">
+					<child_m_user_properties>
+						<property
+							name="event2"
+							value="ForeignSlotRemoved"/>
+						<property
+							name="event3"
+							value="CampaignBuildingStateChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context callback_id="ResizeToFitParent"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="C74AEABD-4DB4-4EB8-84CC86A1CBEA1B7B"
+					uniqueguid="C74AEABD-4DB4-4EB8-84CC86A1CBEA1B7B"
+					imagepath="ui/skins/warhammer2/under_empire_trim.png"/>
+				<component_image
+					this="CD789001-81C2-4311-AFDAB48419BAB2C2"
+					uniqueguid="CD789001-81C2-4311-AFDAB48419BAB2C2"
+					imagepath="ui/skins/wh_main_emp_empire/elspeth_nuln_settlement_panel_background.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="F4BA5805-4E25-4238-809E8AC08D3FB8DF"
+					name="NewState"
+					width="210"
+					height="154"
+					uniqueguid="F4BA5805-4E25-4238-809E8AC08D3FB8DF">
+					<imagemetrics>
+						<image
+							this="733AF8AB-B17A-4770-B007B66E69933AEB"
+							uniqueguid="733AF8AB-B17A-4770-B007B66E69933AEB"
+							componentimage="C74AEABD-4DB4-4EB8-84CC86A1CBEA1B7B"
+							offset="141.00,-40.00"
+							width="72"
+							height="52"
+							dockpoint="Top Right"
+							dock_offset="3.00,-40.00"
+							canresizeheight="false"
+							canresizewidth="false"/>
+						<image
+							this="9C5C3167-6CF8-4590-85B0277198D81279"
+							uniqueguid="9C5C3167-6CF8-4590-85B0277198D81279"
+							componentimage="C74AEABD-4DB4-4EB8-84CC86A1CBEA1B7B"
+							offset="-3.00,-39.00"
+							width="72"
+							height="52"
+							x_flipped="true"
+							dockpoint="Top Left"
+							dock_offset="-3.00,-39.00"
+							canresizeheight="false"
+							canresizewidth="false"/>
+						<image
+							this="C70A8202-E9AB-4909-BF29234C91F79A69"
+							uniqueguid="C70A8202-E9AB-4909-BF29234C91F79A69"
+							componentimage="CD789001-81C2-4311-AFDAB48419BAB2C2"
+							offset="5.00,-57.00"
+							width="200"
+							height="230"
+							dockpoint="Center"
+							dock_offset="0.00,-19.00"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</wh3_dlc25_emp_empire>
 	</components>
 </layout>

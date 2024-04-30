@@ -15,23 +15,25 @@ local realm_gameplay_campaign_types =
 	SP_NORMAL = true
 }
 
-local champions_gameplay_campaign_type = "SP_NORMAL_NO_ROC"
-local champions_participant_factions =
-{
+local sp_gameplay_campaign_type = "SP_NORMAL_NO_ROC"
+local champions_participant_factions = {
 	"wh3_dlc20_chs_valkia",
 	"wh3_dlc20_chs_vilitch",
 	"wh3_dlc20_chs_azazel",
 	"wh3_dlc20_chs_festus"
 }
 
-local chd_gameplay_campaign_type = "SP_NORMAL_NO_ROC"
-local chd_participant_factions =
-{
+local chd_participant_factions = {
 	"wh3_dlc23_chd_astragoth",
 	"wh3_dlc23_chd_legion_of_azgorh",
 	"wh3_dlc23_chd_zhatan"
 }
 
+local tod_participant_factions = {
+	"wh_main_emp_wissenland",
+	"wh3_dlc25_nur_tamurkhan",
+	"wh3_dlc25_dwf_malakai"
+}
 cm:add_pre_first_tick_callback(
 	function()
 		out("**** Campaign Type is: "..cm:model():campaign_type())
@@ -104,8 +106,6 @@ function start_new_game_all_factions()
 	
 	apply_default_diplomacy();
 	
-	add_starting_corruption();
-	
 	-- put the camera at the player's faction leader at the start of a new game
 	if not cm:tol_campaign_key() then
 		local local_faction = cm:get_local_faction_name(true);
@@ -140,54 +140,35 @@ function start_game_all_factions()
 	
 	start_narrative_events();
 	
-	
-
 	q_setup();
 
+	
 	corruption_swing:setup();
-	
 	setup_encounters_at_sea_listeners();
-	
 	-- load the campaign quest battle listners script
 	set_piece_battle_abilities:initialise();
-	
-	add_gotrek_felix_listeners();
-	
+	--add_gotrek_felix_listeners();
 	setup_ogre_contracts();
-	
 	setup_khorne_skulls();
-	
 	setup_ice_court_ai();
-	
 	setup_kislev_devotion();
-
 	recruited_unit_health:initialise()
-	
 	setup_slaanesh_devotees();
-
 	Seductive_Influence:initialise()
-	
 	setup_daemon_cults();
-	
 	great_game_start();
-	
 	setup_boris();
-
 	dark_authority:initialise()
-
 	norscan_homeland:initialise()
-
 	eye_of_the_gods:initialise()
-
 	vassal_dilemmas:initialise()
-
 	chaos_realm_missions:initialise()
-	
 	greater_daemons:setup_greater_daemons();
-	
 	harmony:initialise()
-
 	caravans:initialise()
+	emp_techs:initialise()
+	add_tech_tree_lords_listeners()
+	ancillary_item_forge:initialise()
 
 	-- Chaos Dwarfs
 	chaos_dwarf_labour_loss:labour_loss()
@@ -202,9 +183,23 @@ function start_game_all_factions()
 	matters_of_state:initialise()
 	the_changeling_features:initialise()
 
+	-- dlc25
+	nur_chieftains:initialise()
+	malakai_battles:initialize()
+	gunnery_school:initialise()
+	nurgle_plagues:initialise()
+	imperial_authority:roc_temp_initialise()
+	spirit_of_grungni:initialise()
+	empire_state_troops:initialise()
+	imperial_authority:initialise()
+	gardens_of_morr:initialise()
+
 	-- General
 	character_unlocking:setup_legendary_hero_unlocking();
 	campaign_ai_script:setup_listeners();
+	grudge_cycle:initialise()
+	starting_grudge_missions:initialise()
+	legendary_grudges:initialise()
 	
 	scripted_technology_tree:start_technology_listeners();
 
@@ -224,13 +219,20 @@ function start_game_all_factions()
 
 		if realm_gameplay_campaign_types[campaign_type] and not realm_gameplay_disabled_override then
 			setup_realms()
-		elseif cm:are_any_factions_human(champions_participant_factions) and campaign_type == champions_gameplay_campaign_type then
+		elseif cm:are_any_factions_human(champions_participant_factions) and campaign_type == sp_gameplay_campaign_type then
 			setup_ursun_saved()
 			champions_narrative:initialise()
-		elseif cm:are_any_factions_human(chd_participant_factions) and campaign_type == chd_gameplay_campaign_type then
+		elseif cm:are_any_factions_human(chd_participant_factions) and campaign_type == sp_gameplay_campaign_type then
 			chaos_dwarfs_narrative:initialise()
+		elseif cm:are_any_factions_human(tod_participant_factions) and campaign_type == sp_gameplay_campaign_type then
+			tod_narrative:initialise()
 		end
 	end;
+	
+	-- add corruption after the custom starts have been applied (e.g. Boris Ursus)
+	if cm:is_new_game() then
+		add_starting_corruption();
+	end
 	
 	out.dec_tab();
 end;

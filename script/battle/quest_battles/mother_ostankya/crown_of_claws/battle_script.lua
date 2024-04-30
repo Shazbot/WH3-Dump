@@ -35,7 +35,8 @@ bm:cindy_preload(intro_cinematic_file);
 ---------------------------------------- INTRO VO & SUBS ----------------------------------------
 -------------------------------------------------------------------------------------------------
 
-wh3_main_sfx_00 = new_sfx("Play_Movie_WH3_DLC24_QB_Crown_of_Claws_Sweetener");
+wh3_main_sfx_sweetener_start = new_sfx("Play_Movie_WH3_DLC24_QB_Crown_of_Claws_Sweetener");
+wh3_main_sfx_sweetener_stop = new_sfx("Play_Movie_WH3_DLC24_QB_Unmute", false, false);
 
 wh3_main_sfx_01 = new_sfx("Play_wh3_dlc24_qb_ksl_mother_ostankya_crown_of_claws_01");
 wh3_main_sfx_02 = new_sfx("Play_wh3_dlc24_qb_ksl_mother_ostankya_crown_of_claws_02");
@@ -91,7 +92,7 @@ wh3_main_sfx_06 = new_sfx("Play_wh3_dlc24_qb_ksl_mother_ostankya_crown_of_claws_
  	cutscene_intro:action(function() cam:fade(false, 1) end, 1000);
 
  	-- Voiceover and Subtitles --
-	cutscene_intro:action(function() cutscene_intro:play_sound(wh3_main_sfx_00) end, 100);
+	cutscene_intro:action(function() cutscene_intro:play_sound(wh3_main_sfx_sweetener_start) end, 100);
 	
 	cutscene_intro:add_cinematic_trigger_listener(
 		"wh3_dlc24_qb_ksl_mother_ostankya_crown_of_claws_01", 
@@ -145,6 +146,7 @@ wh3_main_sfx_06 = new_sfx("Play_wh3_dlc24_qb_ksl_mother_ostankya_crown_of_claws_
 end;
 
 function intro_cutscene_end()
+	play_sound(v(0,0),wh3_main_sfx_sweetener_stop);
 	gb.sm:trigger_message("01_intro_cutscene_end");
 end;
 

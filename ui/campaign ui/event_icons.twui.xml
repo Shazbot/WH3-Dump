@@ -39,8 +39,10 @@
 						<dy_growth_pts this="A7D8F4F7-30A0-4985-B20BFAEA017270D0"/>
 					</growth_pts_holder>
 				</event_pop_surplus>
-				<event_dilemma_active this="3D1E9B53-9412-4C3C-99F7C30FE655B415"/>
-				<event_dilemma_review this="3150A50E-7D09-4DA5-90865AFA987180D5"/>
+				<event_dilemma this="8EAD345A-20E9-4467-9014C57583B72B6E">
+					<faction this="001D2A70-0414-4AEE-911D319526D4CBAD"/>
+					<normal_icon this="5A15A607-8DBA-4B6F-B78EECE265EBC053"/>
+				</event_dilemma>
 				<event_faction this="2B859D2F-C0DE-47A3-965C5725CB83213F">
 					<dy_mon_faction_1 this="BF77E523-F5B2-44CA-B2CA80F3C7013256"/>
 				</event_faction>
@@ -2412,54 +2414,6 @@
 					uniqueguid="D10E0CA2-D2D9-43E0-8ACE6CA40468F302"/>
 			</states>
 		</event_building_constructed>
-		<event_dilemma_active
-			this="3D1E9B53-9412-4C3C-99F7C30FE655B415"
-			id="event_dilemma_active"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			visible="false"
-			docking="Top Center"
-			component_anchor_point="0.50,0.00"
-			priority="50"
-			tooltipslocalised="true"
-			uniqueguid="3D1E9B53-9412-4C3C-99F7C30FE655B415"
-			currentstate="1DAA4EEE-1E7A-4A59-86867BFBC0BA4117"
-			defaultstate="1DAA4EEE-1E7A-4A59-86867BFBC0BA4117">
-			<userproperties>
-				<property
-					name="layout"
-					value="ui/campaign ui/dilemma"/>
-			</userproperties>
-			<states>
-				<newstate
-					this="1DAA4EEE-1E7A-4A59-86867BFBC0BA4117"
-					name="NewState"
-					width="55"
-					height="55"
-					interactive="true"
-					uniqueguid="1DAA4EEE-1E7A-4A59-86867BFBC0BA4117"/>
-			</states>
-		</event_dilemma_active>
-		<event_dilemma_review
-			this="3150A50E-7D09-4DA5-90865AFA987180D5"
-			id="event_dilemma_review"
-			offset="25.00,9.00"
-			allowhorizontalresize="false"
-			visible="false"
-			priority="50"
-			tooltipslocalised="true"
-			uniqueguid="3150A50E-7D09-4DA5-90865AFA987180D5"
-			currentstate="CB5DD4AC-CA3E-4B4B-93FAF9312168DAF3"
-			defaultstate="CB5DD4AC-CA3E-4B4B-93FAF9312168DAF3">
-			<states>
-				<newstate
-					this="CB5DD4AC-CA3E-4B4B-93FAF9312168DAF3"
-					name="NewState"
-					width="380"
-					height="1"
-					uniqueguid="CB5DD4AC-CA3E-4B4B-93FAF9312168DAF3"/>
-			</states>
-		</event_dilemma_review>
 		<event_diplomacy_notification
 			this="99515B9C-2528-4E8E-BB0CFCF1FB54EE63"
 			id="event_diplomacy_notification"
@@ -4733,5 +4687,130 @@
 					uniqueguid="83F3400E-5D56-4C6C-8038BE0C0A76FB1E"/>
 			</states>
 		</event_armory_item>
+		<event_dilemma
+			this="8EAD345A-20E9-4467-9014C57583B72B6E"
+			id="event_dilemma"
+			priority="50"
+			tooltipslocalised="true"
+			uniqueguid="8EAD345A-20E9-4467-9014C57583B72B6E"
+			updatewhennotvisible="true"
+			currentstate="EB2FE751-79A8-42A5-95E2478DA39022E6"
+			defaultstate="EB2FE751-79A8-42A5-95E2478DA39022E6">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignEventFeedMessageDetails"
+					context_function_id="CustomContext"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="EB2FE751-79A8-42A5-95E2478DA39022E6"
+					name="NewState"
+					width="55"
+					height="55"
+					uniqueguid="EB2FE751-79A8-42A5-95E2478DA39022E6"/>
+			</states>
+		</event_dilemma>
+		<faction
+			this="001D2A70-0414-4AEE-911D319526D4CBAD"
+			id="faction"
+			offset="0.00,2.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			docking="Center Left"
+			component_anchor_point="0.00,0.50"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="001D2A70-0414-4AEE-911D319526D4CBAD"
+			currentstate="DD4285C0-96DF-490D-813A8989842657A5"
+			defaultstate="DD4285C0-96DF-490D-813A8989842657A5">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignEventDilemma"
+					context_function_id="PrimaryTargetFactionContext"/>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoCampaignFaction"
+					context_function_id="FactionFlagMedium"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignEventDilemma"
+					context_function_id="IsContextValid(PrimaryTargetFactionContext)"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="D2081B70-7C2E-4E1D-8C918DE19CBAD711"
+					uniqueguid="D2081B70-7C2E-4E1D-8C918DE19CBAD711"
+					imagepath="ui/flags/wh_main_emp_empire/mon_64.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="DD4285C0-96DF-490D-813A8989842657A5"
+					name="NewState"
+					width="50"
+					height="50"
+					uniqueguid="DD4285C0-96DF-490D-813A8989842657A5">
+					<imagemetrics>
+						<image
+							this="F5188E95-98C3-48B6-B0433B4CF67250FA"
+							uniqueguid="F5188E95-98C3-48B6-B0433B4CF67250FA"
+							componentimage="D2081B70-7C2E-4E1D-8C918DE19CBAD711"
+							width="50"
+							height="50"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</faction>
+		<normal_icon
+			this="5A15A607-8DBA-4B6F-B78EECE265EBC053"
+			id="normal_icon"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="50"
+			tooltipslocalised="true"
+			uniqueguid="5A15A607-8DBA-4B6F-B78EECE265EBC053"
+			currentstate="7986F10F-F061-4532-80FFBE0CF612DB00"
+			defaultstate="7986F10F-F061-4532-80FFBE0CF612DB00">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoCampaignEventFeedMessageDetails"
+					context_function_id="IconPath"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignEventDilemma"
+					context_function_id="IsContextValid(PrimaryTargetFactionContext) == false"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="E9D9E9AD-6792-4FE6-A00C8214D2687B6E"
+					uniqueguid="E9D9E9AD-6792-4FE6-A00C8214D2687B6E"
+					imagepath="ui/campaign ui/message_icons/event_gen_news_positive.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="7986F10F-F061-4532-80FFBE0CF612DB00"
+					name="NewState"
+					width="55"
+					height="55"
+					uniqueguid="7986F10F-F061-4532-80FFBE0CF612DB00">
+					<imagemetrics>
+						<image
+							this="0E08D0DA-6C86-4DBE-BD1BCB0F48300D96"
+							uniqueguid="0E08D0DA-6C86-4DBE-BD1BCB0F48300D96"
+							componentimage="E9D9E9AD-6792-4FE6-A00C8214D2687B6E"
+							offset="4.00,4.00"
+							width="47"
+							height="47"
+							dockpoint="Center"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</normal_icon>
 	</components>
 </layout>

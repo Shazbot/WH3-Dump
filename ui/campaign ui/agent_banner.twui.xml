@@ -941,6 +941,13 @@
 				<callback_with_context
 					callback_id="ContextCommandGiverOnCreate"
 					context_function_id="self.SetVisible(false)"/>
+				<callback_with_context callback_id="ContextLayoutTooltip">
+					<child_m_user_properties>
+						<property
+							name="allow_no_path"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -1340,8 +1347,8 @@
 			docking="Center"
 			dock_offset="2.00,-1.00"
 			component_anchor_point="0.50,0.50"
-			componentleveltooltip="{{tt:ui/campaign ui/tooltip_plague_composition}}"
-			tooltiplabel="plague_icon_Tooltip_c5df686a"
+			componentleveltooltip="{{tt:ui/campaign ui/tooltip_dlc25_active_plague}}"
+			tooltiplabel="ComponentTooltip_61bfea3c"
 			uniqueguid="A685D81A-5AAD-4A1F-A8095DC72FD95110"
 			currentstate="6032D3D9-2BD8-440C-B9B25DD93D3C45AE"
 			defaultstate="6032D3D9-2BD8-440C-B9B25DD93D3C45AE">
@@ -1351,8 +1358,14 @@
 					context_object_id="CcoCampaignCharacter"
 					context_function_id="IsContextValid(PlagueCompositionContext)"/>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
-					context_object_id="CcoCampaignPlagueComposition"/>
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoCampaignPlagueComposition">
+					<child_m_user_properties>
+						<property
+							name="alternate_parent"
+							value="hud_campaign"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoCampaignCharacter"
@@ -1361,6 +1374,13 @@
 					callback_id="ContextImageSetter"
 					context_object_id="CcoCampaignCharacter"
 					context_function_id="PlagueCompositionContext.BasePlagueContext.PlagueEffectContext.EffectBundleList.FirstContext.IconPath"/>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignFaction"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="FactionContext"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property

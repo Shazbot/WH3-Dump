@@ -532,10 +532,12 @@ initiative_templates = {
 				"wh3_dlc20_character_initiative_devote_lord_to_khorne",																									-- 	Chaos Lord - Khorne
 				"wh3_dlc20_character_initiative_devote_lord_to_slaanesh",																								-- 	Chaos Lord - Slaanesh
 				"wh3_dlc24_character_initiative_devote_lord_to_tzeentch",																								-- 	Chaos Lord - Tzeentch
+				"wh3_dlc20_character_initiative_devote_lord_to_nurgle",																								-- 	Chaos Lord - Nurgle
 				"wh3_dlc20_character_initiative_devote_sorceror_to_tzeentch_tzeentch", 																					--	Sorceror - Tzeentch (Tzeentch) 
 				"wh3_dlc20_character_initiative_devote_sorceror_lord_to_tzeentch_tzeentch",																				--	Sorceror Lord - Tzeentch (Tzeentch)
 				"wh3_dlc20_character_initiative_devote_sorceror_to_slaanesh_slaanesh",																					--	Sorceror - Slaanesh (Slaanesh) 
 				"wh3_dlc20_character_initiative_devote_sorceror_lord_to_nurgle_nurgle", 																				--	Sorceror Lord - Nurgle (Nurgle) 
+				"wh3_dlc25_character_initiative_devote_sorceror_to_nurgle_nurgle", 																				--	Sorceror - Nurgle (Nurgle) 
 			},
 		["event"] = {"CharacterRankUp", "CharacterRecruited"},
 		["condition"] =
@@ -551,6 +553,7 @@ initiative_templates = {
 				"wh3_dlc20_character_initiative_devote_sorceror_lord_to_tzeentch_metal", 																				--	Sorceror Lord - Tzeentch (Metal)
 				"wh3_dlc20_character_initiative_devote_sorceror_to_slaanesh_shadows", 																					--	Sorceror - Slaanesh (Shadows)
 				"wh3_dlc20_character_initiative_devote_sorceror_lord_to_nurgle_death",	 																				--	Sorceror Lord - Nurgle (Death)
+				"wh3_dlc25_character_initiative_devote_sorceror_to_nurgle_death",	 																				--	Sorceror - Nurgle (Death)
 			},
 		["event"] = {"CharacterRankUp", "CharacterRecruited"},
 		["condition"] =
@@ -567,7 +570,7 @@ initiative_templates = {
 			{
 				"wh3_dlc20_character_initiative_chs_exalted_hero_und_03", "wh3_dlc20_character_initiative_chs_chaos_lord_und_02", "wh3_dlc20_character_initiative_chs_daemon_prince_und_03",	-- 	Undivided (Exalted Hero, Chaos Lord, Daemon Prince)
 				"wh3_dlc20_character_initiative_chs_exalted_hero_kho_05", "wh3_dlc20_character_initiative_chs_chaos_lord_kho_03", "wh3_dlc20_character_initiative_chs_daemon_prince_kho_03",	-- 	Khorne (Exalted Hero, Chaos Lord, Daemon Prince)
-				"wh3_dlc20_character_initiative_chs_exalted_hero_nur_03", "wh3_dlc20_character_initiative_chs_daemon_prince_nur_03",															-- 	Nurgle (Exalted Hero, Daemon Prince)
+				"wh3_dlc20_character_initiative_chs_exalted_hero_nur_03", "wh3_dlc20_character_initiative_chs_daemon_prince_nur_03","wh3_dlc25_character_initiative_chs_chaos_lord_nur_03",		-- 	Nurgle (Exalted Hero, Daemon Prince, Chaos Lord)
 				"wh3_dlc20_character_initiative_chs_chaos_lord_sla_03", "wh3_dlc20_character_initiative_chs_daemon_prince_sla_03", 																-- 	Slaanesh (Chaos Lord, Daemon Prince)
 				"wh3_dlc24_character_initiative_chs_exalted_hero_tze_05", "wh3_dlc24_character_initiative_chs_chaos_lord_tze_03",																--	Tzeentch (Chaos Lord, Exalted Hero)
 			},
@@ -596,12 +599,15 @@ initiative_templates = {
 	{
 		["initiative_key"] = 
 			{
-				"wh3_dlc20_character_initiative_chs_exalted_hero_und_01", "wh3_dlc20_character_initiative_chs_exalted_hero_kho_01", "wh3_dlc20_character_initiative_chs_exalted_hero_nur_01", "wh3_dlc24_character_initiative_chs_exalted_hero_tze_01",	-- Exalted Heroes
-				"wh3_dlc20_character_initiative_chs_chaos_lord_und_01", "wh3_dlc20_character_initiative_chs_chaos_lord_kho_01", "wh3_dlc20_character_initiative_chs_chaos_lord_sla_01", "wh3_dlc24_character_initiative_chs_chaos_lord_tze_01",			-- Chaos Lords
-				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_und_01", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_sla_01", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_tze_01", 													-- Chaos Sorcerers
-				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_und_01", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_nur_01", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_tze_01", 										-- Chaos Sorcerer Lords
-				"wh3_dlc20_character_initiative_chs_daemon_prince_und_01", "wh3_dlc20_character_initiative_chs_daemon_prince_kho_01", "wh3_dlc20_character_initiative_chs_daemon_prince_nur_01", 														-- Daemon Princes
-				"wh3_dlc20_character_initiative_chs_daemon_prince_sla_01", "wh3_dlc20_character_initiative_chs_daemon_prince_tze_01",  																													-- Daemon Princes
+				"wh3_dlc20_character_initiative_chs_exalted_hero_und_01", "wh3_dlc20_character_initiative_chs_exalted_hero_kho_01", 
+				"wh3_dlc20_character_initiative_chs_exalted_hero_nur_01", "wh3_dlc24_character_initiative_chs_exalted_hero_tze_01",																					-- Exalted Heroes
+				"wh3_dlc20_character_initiative_chs_chaos_lord_und_01", "wh3_dlc20_character_initiative_chs_chaos_lord_kho_01", "wh3_dlc20_character_initiative_chs_chaos_lord_sla_01", 							-- Exalted Heroes
+				"wh3_dlc24_character_initiative_chs_chaos_lord_tze_01", "wh3_dlc25_character_initiative_chs_chaos_lord_nur_01",																						-- Chaos Lords
+				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_und_01", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_sla_01", 																			-- Chaos Lords
+				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_tze_01", "wh3_dlc25_character_initiative_chs_chaos_sorcerer_nur_01",																				-- Chaos Sorcerers
+				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_und_01", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_nur_01", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_tze_01", 	-- Chaos Sorcerer Lords
+				"wh3_dlc20_character_initiative_chs_daemon_prince_und_01", "wh3_dlc20_character_initiative_chs_daemon_prince_kho_01", "wh3_dlc20_character_initiative_chs_daemon_prince_nur_01", 					-- Daemon Princes
+				"wh3_dlc20_character_initiative_chs_daemon_prince_sla_01", "wh3_dlc20_character_initiative_chs_daemon_prince_tze_01",  																				-- Daemon Princes
 			},
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
@@ -618,7 +624,7 @@ initiative_templates = {
 			{
 				"wh3_dlc20_character_initiative_chs_chaos_lord_und_08", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_und_09", "wh3_dlc20_character_initiative_chs_daemon_prince_und_08",	-- 	Undivided (Chaos Lord, Chaos Sorcerer Lord, Daemon Prince)
 				"wh3_dlc20_character_initiative_chs_chaos_lord_kho_08", "wh3_dlc20_character_initiative_chs_daemon_prince_kho_08",																	-- 	Khorne (Chaos Lord, Daemon Prince)
-				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_nur_09", "wh3_dlc20_character_initiative_chs_daemon_prince_nur_08",															-- 	Nurgle (Chaos Sorcerer Lord, Daemon Prince)
+				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_nur_09", "wh3_dlc20_character_initiative_chs_daemon_prince_nur_08",	"wh3_dlc25_character_initiative_chs_chaos_lord_nur_08",	-- 	Nurgle (Chaos Sorcerer Lord, Daemon Prince, Lord)
 				"wh3_dlc20_character_initiative_chs_chaos_lord_sla_08", "wh3_dlc20_character_initiative_chs_daemon_prince_sla_08",																	-- 	Slaanesh (Chaos Lord, Daemon Prince)
 				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_tze_09", "wh3_dlc20_character_initiative_chs_daemon_prince_tze_08", "wh3_dlc24_character_initiative_chs_chaos_lord_tze_08",	-- 	Tzeentch (Chaos Lord, Chaos Sorcerer Lord, Daemon Prince)
 			},
@@ -633,9 +639,9 @@ initiative_templates = {
 	{
 		["initiative_key"] = 
 			{
-				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_nur_04", "wh3_dlc20_character_initiative_chs_exalted_hero_nur_06", 			-- Nurgle - Corruption
-				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_nur_06", "wh3_dlc20_character_initiative_chs_daemon_prince_nur_06",			-- Favoured by Nurgle
-				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_und_05", 																	-- Tempted by Decay
+				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_nur_04", "wh3_dlc20_character_initiative_chs_exalted_hero_nur_06", 																-- Nurgle - Corruption
+				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_nur_06", "wh3_dlc20_character_initiative_chs_daemon_prince_nur_06",	"wh3_dlc25_character_initiative_chs_chaos_sorcerer_nur_05",	-- Favoured by Nurgle
+				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_und_05", 																														-- Tempted by Decay
 			},
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
@@ -676,12 +682,13 @@ initiative_templates = {
 	{
 		["initiative_key"] = 
 			{
-				"wh3_dlc20_character_initiative_chs_exalted_hero_kho_09", "wh3_dlc20_character_initiative_chs_exalted_hero_nur_09", "wh3_dlc20_character_initiative_chs_exalted_hero_und_08", "wh3_dlc24_character_initiative_chs_exalted_hero_tze_09",	-- Mortal Champion (Exalted Hero)
-				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_und_10", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_tze_10", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_sla_10", 													-- Mortal Prophet (Chaos Sorcerer)
-				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_und_08", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_nur_08", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_tze_08", 										-- Mortal Supremacy (Chaos Sorcerer Lord)
-				"wh3_dlc20_character_initiative_chs_chaos_lord_und_07", "wh3_dlc20_character_initiative_chs_chaos_lord_kho_07", "wh3_dlc20_character_initiative_chs_chaos_lord_sla_07", "wh3_dlc24_character_initiative_chs_chaos_lord_tze_07",			-- Mortal Supremacy (Chaos Lord)
-				"wh3_dlc20_character_initiative_chs_daemon_prince_und_04", "wh3_dlc20_character_initiative_chs_daemon_prince_tze_04", "wh3_dlc20_character_initiative_chs_daemon_prince_sla_04", 														-- Mortal Supremacy (Daemon Prince)
-				"wh3_dlc20_character_initiative_chs_daemon_prince_nur_04", "wh3_dlc20_character_initiative_chs_daemon_prince_kho_04", 																													-- Mortal Supremacy (Daemon Prince)
+				"wh3_dlc20_character_initiative_chs_exalted_hero_kho_09", "wh3_dlc20_character_initiative_chs_exalted_hero_nur_09", "wh3_dlc20_character_initiative_chs_exalted_hero_und_08", "wh3_dlc24_character_initiative_chs_exalted_hero_tze_09",			-- Mortal Champion (Exalted Hero)
+				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_und_10", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_tze_10", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_sla_10", "wh3_dlc25_character_initiative_chs_chaos_sorcerer_nur_09",	-- Mortal Prophet (Chaos Sorcerer)
+				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_und_08", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_nur_08", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_tze_08", 												-- Mortal Supremacy (Chaos Sorcerer Lord)
+				"wh3_dlc20_character_initiative_chs_chaos_lord_und_07", "wh3_dlc20_character_initiative_chs_chaos_lord_kho_07", "wh3_dlc20_character_initiative_chs_chaos_lord_sla_07",																			-- Mortal Supremacy (Chaos Lord)
+				"wh3_dlc24_character_initiative_chs_chaos_lord_tze_07",	"wh3_dlc25_character_initiative_chs_chaos_lord_nur_07", 																																-- Mortal Supremacy (Chaos Lord)
+				"wh3_dlc20_character_initiative_chs_daemon_prince_und_04", "wh3_dlc20_character_initiative_chs_daemon_prince_tze_04", "wh3_dlc20_character_initiative_chs_daemon_prince_sla_04", 																-- Mortal Supremacy (Daemon Prince)
+				"wh3_dlc20_character_initiative_chs_daemon_prince_nur_04", "wh3_dlc20_character_initiative_chs_daemon_prince_kho_04", 																															-- Mortal Supremacy (Daemon Prince)
 			},
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
@@ -696,10 +703,11 @@ initiative_templates = {
 	{
 		["initiative_key"] = 
 			{
-				"wh3_dlc20_character_initiative_chs_chaos_lord_kho_09", "wh3_dlc20_character_initiative_chs_chaos_lord_sla_09", "wh3_dlc20_character_initiative_chs_chaos_lord_und_09", "wh3_dlc24_character_initiative_chs_chaos_lord_tze_09",	-- Soul Harvester (Chaos Lord)
-				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_nur_10", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_tze_10", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_und_10", 								-- Soul Harvester (Chaos Sorcerer Lord)
-				"wh3_dlc20_character_initiative_chs_daemon_prince_und_09", "wh3_dlc20_character_initiative_chs_daemon_prince_nur_09", "wh3_dlc20_character_initiative_chs_daemon_prince_kho_09",				 								-- Soul Harvester (Daemon Prince) 
-				"wh3_dlc20_character_initiative_chs_daemon_prince_sla_09", "wh3_dlc20_character_initiative_chs_daemon_prince_tze_09", 																											-- Soul Harvester (Daemon Prince) 
+				"wh3_dlc20_character_initiative_chs_chaos_lord_kho_09", "wh3_dlc20_character_initiative_chs_chaos_lord_sla_09", "wh3_dlc20_character_initiative_chs_chaos_lord_und_09", 							-- Soul Harvester (Chaos Lord)
+				"wh3_dlc24_character_initiative_chs_chaos_lord_tze_09",	"wh3_dlc25_character_initiative_chs_chaos_lord_nur_09",																						-- Soul Harvester (Chaos Lord)
+				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_nur_10", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_tze_10", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_und_10", 	-- Soul Harvester (Chaos Sorcerer Lord)
+				"wh3_dlc20_character_initiative_chs_daemon_prince_und_09", "wh3_dlc20_character_initiative_chs_daemon_prince_nur_09", "wh3_dlc20_character_initiative_chs_daemon_prince_kho_09",				 	-- Soul Harvester (Daemon Prince) 
+				"wh3_dlc20_character_initiative_chs_daemon_prince_sla_09", "wh3_dlc20_character_initiative_chs_daemon_prince_tze_09", 																				-- Soul Harvester (Daemon Prince) 
 			},
 		["event"] = "CharacterPostBattleCaptureOption",
 		["condition"] =
@@ -741,10 +749,10 @@ initiative_templates = {
 	{
 		["initiative_key"] = 
 			{
-				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_sla_04", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_tze_04", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_und_04", 													-- Mage Hunter (Chaos Sorcerer)
-				"wh3_dlc20_character_initiative_chs_exalted_hero_kho_06", "wh3_dlc20_character_initiative_chs_exalted_hero_nur_04", "wh3_dlc20_character_initiative_chs_exalted_hero_und_04", "wh3_dlc24_character_initiative_chs_exalted_hero_tze_06",	-- Mage Hunter (Exalted Hero)
-				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_tze_04", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_tze_03", "wh3_dlc20_character_initiative_chs_daemon_prince_tze_03", 												-- Master Sorcerer
-				"wh3_dlc20_character_initiative_chs_daemon_prince_und_06",  																																											-- Pyromancer
+				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_sla_04", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_tze_04", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_und_04", "wh3_dlc25_character_initiative_chs_chaos_sorcerer_nur_03",	-- Mage Hunter (Chaos Sorcerer)
+				"wh3_dlc20_character_initiative_chs_exalted_hero_kho_06", "wh3_dlc20_character_initiative_chs_exalted_hero_nur_04", "wh3_dlc20_character_initiative_chs_exalted_hero_und_04", "wh3_dlc24_character_initiative_chs_exalted_hero_tze_06",			-- Mage Hunter (Exalted Hero)
+				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_tze_04", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_tze_03", "wh3_dlc20_character_initiative_chs_daemon_prince_tze_03", 														-- Master Sorcerer
+				"wh3_dlc20_character_initiative_chs_daemon_prince_und_06",  																																													-- Pyromancer
 			},
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
@@ -772,6 +780,7 @@ initiative_templates = {
 		["initiative_key"] = 
 			{
 				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_sla_02", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_tze_02", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_und_02", 					-- Partners in Chaos (Chaos Sorcerer)
+				"wh3_dlc25_character_initiative_chs_chaos_sorcerer_nur_02",																																				-- Partners in Chaos (Chaos Sorcerer)
 				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_nur_02", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_tze_02", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_und_02", 		-- Partners in Chaos (Chaos Sorcerer Lord)
 				"wh3_dlc20_character_initiative_chs_daemon_prince_und_02", "wh3_dlc20_character_initiative_chs_daemon_prince_tze_02", 																					-- Partners in Chaos (Daemon Prince)
 				"wh3_dlc20_character_initiative_chs_daemon_prince_sla_02", "wh3_dlc20_character_initiative_chs_daemon_prince_nur_02", 																					-- Partners in Chaos (Daemon Prince)
@@ -834,21 +843,31 @@ initiative_templates = {
 					
 					local defender_char_cqi, defender_mf_cqi, defender_faction_name = cm:pending_battle_cache_get_defender(1);
 					local attacker_char_cqi, attacker_mf_cqi, attacker_faction_name = cm:pending_battle_cache_get_attacker(1);
+					
+					local num_enemy_characters = 0
 
-					if defender_faction_name == character_faction_name then
-						for i = 1, cm:pending_battle_cache_num_attackers() do
-							-- count the general as one character, so need to have 2 or more embedded characters to pass this test
-							if cm:pending_battle_cache_num_attacker_embedded_characters(i) > 1 then
-								return true;
+					if defender_faction_name == character_faction_name and pb:has_attacker() then
+						attacker_char_list = pb:attacker():military_force():character_list()
+
+						for i = 0, attacker_char_list:num_items() - 1 do
+							local temp_character = attacker_char_list:item_at(i)
+							if temp_character:is_caster() then
+								num_enemy_characters = num_enemy_characters + 1
 							end
 						end
-					elseif attacker_faction_name == character_faction_name then
-						for i = 1, cm:pending_battle_cache_num_defenders() do
-							if cm:pending_battle_cache_num_defender_embedded_characters(i) > 1 then
-								return true;
+						
+					elseif attacker_faction_name == character_faction_name and pb:has_defender() then
+						defender_char_list = pb:defender():military_force():character_list()
+
+						for i = 0, defender_char_list:num_items() - 1 do
+							local temp_character = defender_char_list:item_at(i)
+							if temp_character:is_caster() then
+								num_enemy_characters = num_enemy_characters + 1
 							end
 						end
 					end;
+
+					return num_enemy_characters >2
 				end;
 			end,
 		["grant_immediately"] = true
@@ -858,7 +877,8 @@ initiative_templates = {
 		["initiative_key"] = 
 			{
 				"wh3_dlc20_character_initiative_chs_exalted_hero_kho_07", "wh3_dlc20_character_initiative_chs_exalted_hero_nur_07", "wh3_dlc20_character_initiative_chs_exalted_hero_und_06", "wh3_dlc24_character_initiative_chs_exalted_hero_tze_07",	-- Survivor (Exalted Hero)
-				"wh3_dlc20_character_initiative_chs_chaos_lord_kho_06", "wh3_dlc20_character_initiative_chs_chaos_lord_sla_06", "wh3_dlc20_character_initiative_chs_chaos_lord_und_06", "wh3_dlc24_character_initiative_chs_chaos_lord_tze_06",			-- Survivor (Chaos Lord)				
+				"wh3_dlc20_character_initiative_chs_chaos_lord_kho_06", "wh3_dlc20_character_initiative_chs_chaos_lord_sla_06", "wh3_dlc20_character_initiative_chs_chaos_lord_und_06", 																-- Survivor (Chaos Lord)				
+				"wh3_dlc24_character_initiative_chs_chaos_lord_tze_06", "wh3_dlc25_character_initiative_chs_chaos_lord_nur_06",																															-- Survivor (Chaos Lord)				
 				"wh3_dlc20_character_initiative_chs_daemon_prince_kho_07", "wh3_dlc20_character_initiative_chs_daemon_prince_nur_07", "wh3_dlc20_character_initiative_chs_daemon_prince_tze_07", 														-- Survivor (Daemon Prince)
 				"wh3_dlc20_character_initiative_chs_daemon_prince_und_07", "wh3_dlc20_character_initiative_chs_daemon_prince_sla_07",  																													-- Survivor (Daemon Prince)
 			},
@@ -984,7 +1004,7 @@ initiative_templates = {
 			{
 				"wh3_dlc20_character_initiative_chs_chaos_lord_kho_05", "wh3_dlc20_character_initiative_chs_chaos_lord_sla_05", 	-- Impenetrable
 				"wh3_dlc20_character_initiative_chs_chaos_lord_und_05", "wh3_dlc20_character_initiative_chs_daemon_prince_kho_06",  -- Impenetrable
-				"wh3_dlc24_character_initiative_chs_chaos_lord_tze_05",																-- Impenetrable
+				"wh3_dlc24_character_initiative_chs_chaos_lord_tze_05",	 "wh3_dlc25_character_initiative_chs_chaos_lord_nur_05",	-- Impenetrable
 			},
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
@@ -1038,8 +1058,8 @@ initiative_templates = {
 	{
 		["initiative_key"] = 
 			{
-				"wh3_dlc20_character_initiative_chs_exalted_hero_kho_10", "wh3_dlc20_character_initiative_chs_exalted_hero_nur_10", "wh3_dlc20_character_initiative_chs_exalted_hero_und_09", "wh3_dlc24_character_initiative_chs_exalted_hero_tze_10",	-- Chaos Assassin
-				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_und_09", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_tze_09", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_sla_09", 													-- Oppressive Force
+				"wh3_dlc20_character_initiative_chs_exalted_hero_kho_10", "wh3_dlc20_character_initiative_chs_exalted_hero_nur_10", "wh3_dlc20_character_initiative_chs_exalted_hero_und_09", "wh3_dlc24_character_initiative_chs_exalted_hero_tze_10",			-- Chaos Assassin
+				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_und_09", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_tze_09", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_sla_09", "wh3_dlc25_character_initiative_chs_chaos_sorcerer_nur_08",	-- Oppressive Force
 			},
 		["event"] = {"CharacterCharacterTargetAction", "CharacterGarrisonTargetAction"},
 		["condition"] =
@@ -1054,6 +1074,7 @@ initiative_templates = {
 			{
 				"wh3_dlc20_character_initiative_chs_chaos_lord_sla_04", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_sla_05", 			-- Living Nightmare
 				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_nur_05", "wh3_dlc20_character_initiative_chs_exalted_hero_nur_05",		-- Aura of Atrophy
+				"wh3_dlc25_character_initiative_chs_chaos_sorcerer_nur_06", "wh3_dlc25_character_initiative_chs_chaos_lord_nur_02",				-- Aura of Atrophy
 			},
 		["event"] = "CharacterRankUp",
 		["condition"] =
@@ -1098,7 +1119,7 @@ initiative_templates = {
 	{
 		["initiative_key"] = 
 			{
-				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_tze_03", "wh3_dlc20_character_initiative_chs_daemon_prince_tze_03", 																		-- Master Sorcerer
+				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_tze_03", "wh3_dlc20_character_initiative_chs_daemon_prince_tze_03", "wh3_dlc25_character_initiative_chs_chaos_sorcerer_nur_07",			-- Master Sorcerer
 				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_und_07", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_sla_08", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_und_08",	-- Attuned to Ulgu
 			},
 		["event"] = "CharacterTurnEnd",
@@ -1178,7 +1199,8 @@ initiative_templates = {
 	{
 		["initiative_key"] = 
 			{
-				"wh3_dlc20_character_initiative_chs_exalted_hero_nur_06", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_nur_04", -- Nurgle - Corruption
+				"wh3_dlc20_character_initiative_chs_exalted_hero_nur_06", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_nur_04", 	-- Nurgle - Corruption
+				"wh3_dlc25_character_initiative_chs_chaos_lord_nur_04", "wh3_dlc25_character_initiative_chs_chaos_sorcerer_nur_04", 		-- Nurgle - Corruption
 			},
 		["event"] = "GarrisonOccupiedEvent",
 		["condition"] =

@@ -190,7 +190,7 @@ function endgame:update_campaign_settings()
 		-- Each scenario will choose how to use this scaling difficulty mod independently
 		-- Recommended usage: modifying faction potential modifiers or spawned army counts.
 		-- This number is 100x higher in the shared state manager as it only supports integers but we want a float
-		self.settings.difficulty_mod = ssm:get_state_as_float_value("endgame_difficulty_mod")/100
+		self.settings.difficulty_mod = (ssm:get_state_as_float_value("endgame_difficulty_mod") or 1) / 100
 
 		-- Tweaker that causes all endgame scenarios to fire at the same time. Why did you do this to yourself?
 		self.settings.all_scenarios = ssm:get_state_as_bool_value("endgame_all_scenarios")

@@ -370,6 +370,8 @@ end
 
 --Updates the momentum pooled resource amount with the passed integer argument
 function TauroxRampage_MomentumUpdate(momentum_entry)
+	if not momentum_entry then return false end
+	
 	if not cm:get_saved_value("taurox_rampage_active") then
 		cm:set_saved_value("taurox_rampage_active", true)
 	end

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -42,6 +42,10 @@
 						<button_decline this="260E3E97-11EC-4BD0-9F082ABD2B96E96C"/>
 					</title>
 					<stage2_approach this="5BFEC191-4AE3-4324-9A65857A12398232">
+						<plague_list this="0AAC1EA0-CDE1-4D31-98D7F2AA6330DD02">
+							<base_plague_icon this="5F470B58-87DD-4A35-9FBCF55F883033CC"/>
+							<combined_ingredient_icon this="D5170970-59AD-4410-81BC1D03E1EEA001"/>
+						</plague_list>
 						<method_list this="A54DD054-ECBE-4098-A82D3E4B53A1D2E8">
 							<action_type_template this="1E9E9414-2A2F-4E67-98B23AAE3D91F537">
 								<button_method this="397E1A9E-C9ED-48AE-9317CDDDDE21AB58">
@@ -64,12 +68,7 @@
 										<dy_rank this="21840BCF-F898-4A9B-AFD43A773ED7603F"/>
 									</rank>
 									<dy_method_icon this="4CC5983F-3B1F-4D16-80A9E174DC49B21C"/>
-									<plague_list this="0AAC1EA0-CDE1-4D31-98D7F2AA6330DD02">
-										<base_plague_icon this="5F470B58-87DD-4A35-9FBCF55F883033CC"/>
-										<ingredient_list this="83845489-B2A8-415A-A2ED2A6E6F08E998">
-											<template_ingredient_icon this="CDAAD6B5-477C-4A9E-888A4E5C3E678429"/>
-										</ingredient_list>
-									</plague_list>
+									<immune_icon this="2CA465C7-F27D-4D13-A61F53ACB72091FE"/>
 									<cost_list this="A3FCAA42-E7A4-4FA6-808D23B2BCF63F81">
 										<dy_cooldown this="980E8D40-E99E-4D21-9CF8245F8346FACA"/>
 										<tx_income this="1CB92199-4070-4D4E-BED62648ADD2DFA2">
@@ -1391,9 +1390,10 @@
 		<button_method
 			this="397E1A9E-C9ED-48AE-9317CDDDDE21AB58"
 			id="button_method"
-			offset="68.00,0.00"
+			offset="50.00,-10.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
+			dock_offset="-18.00,-10.00"
 			tooltipslocalised="true"
 			soundcategory="UI_CAM_HUD_Embed_Character"
 			uniqueguid="397E1A9E-C9ED-48AE-9317CDDDDE21AB58"
@@ -3741,7 +3741,7 @@
 		<method_list
 			this="A54DD054-ECBE-4098-A82D3E4B53A1D2E8"
 			id="method_list"
-			offset="10.00,0.00"
+			offset="10.00,35.00"
 			tooltipslocalised="true"
 			uniqueguid="A54DD054-ECBE-4098-A82D3E4B53A1D2E8"
 			currentstate="8B6199D0-4D6E-49C6-A25904C2992B2FFB"
@@ -3771,7 +3771,7 @@
 		<options_panel
 			this="9BCE63DE-6D49-450A-9989B84152E3A178"
 			id="options_panel"
-			offset="362.00,645.00"
+			offset="362.00,610.00"
 			docking="Bottom Center"
 			component_anchor_point="0.50,1.00"
 			priority="10"
@@ -3799,7 +3799,7 @@
 					this="B69AA0C1-EFB6-4683-A6C7BBD443758DAC"
 					name="NewState"
 					width="555"
-					height="379"
+					height="414"
 					interactive="true"
 					uniqueguid="B69AA0C1-EFB6-4683-A6C7BBD443758DAC">
 					<imagemetrics>
@@ -3808,7 +3808,7 @@
 							uniqueguid="910CCCD3-9F3F-472C-8D5D045C5F05F2E7"
 							componentimage="78C1E48A-3B42-4C32-B489080B689A6240"
 							width="555"
-							height="379"
+							height="414"
 							tile="true"
 							dockpoint="Center"
 							margin="5.00,5.00,5.00,5.00"/>
@@ -3817,7 +3817,7 @@
 							uniqueguid="FC92BDA6-116E-4522-8AC006AF3FAC9652"
 							componentimage="57A3466E-F5AE-4DE7-9979908F74A6CDED"
 							width="555"
-							height="379"
+							height="414"
 							tile="true"
 							margin="30.00,30.00,30.00,30.00"/>
 						<image
@@ -3877,7 +3877,8 @@
 		<small_bar
 			this="24A0BF8A-F28D-4E39-AF0E04A47783EE6A"
 			id="small_bar"
-			offset="265.00,950.00"
+			offset="290.00,950.00"
+			allowhorizontalresize="false"
 			allowverticalresize="false"
 			docking="Bottom Center"
 			component_anchor_point="0.50,1.00"
@@ -3905,7 +3906,7 @@
 				<newstate
 					this="A29382FC-3B81-447B-99C791EA71C0FEC9"
 					name="NewState"
-					width="749"
+					width="699"
 					height="74"
 					interactive="true"
 					uniqueguid="A29382FC-3B81-447B-99C791EA71C0FEC9">
@@ -3915,7 +3916,7 @@
 							uniqueguid="F2959068-9340-441F-8A20877A92D71DD8"
 							componentimage="3562CD1E-2B1D-4400-A3C82DF6FC7BEEE3"
 							offset="0.00,16.00"
-							width="749"
+							width="699"
 							height="58"
 							tile="true"
 							dockpoint="Bottom Center"
@@ -3936,7 +3937,7 @@
 							this="03D644DE-2103-465F-A17CAB9D3050995B"
 							uniqueguid="03D644DE-2103-465F-A17CAB9D3050995B"
 							componentimage="CEAF9057-D21E-437C-8F88DBD40C929AE3"
-							offset="634.00,16.00"
+							offset="584.00,16.00"
 							width="57"
 							height="58"
 							x_flipped="true"
@@ -3979,7 +3980,7 @@
 					this="9D46862B-7AC8-41AA-864EDB80C5967DF7"
 					name="NewState"
 					width="555"
-					height="267"
+					height="302"
 					uniqueguid="9D46862B-7AC8-41AA-864EDB80C5967DF7"/>
 			</states>
 			<LayoutEngine
@@ -4126,6 +4127,13 @@
 			defaultstate="61C7404C-B8C1-4117-820A9CF9FA1F6189">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="CharacterEffectsBundleIcon"/>
+				<callback_with_context callback_id="ContextLayoutTooltip">
+					<child_m_user_properties>
+						<property
+							name="allow_no_path"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -5167,8 +5175,7 @@
 		<base_plague_icon
 			this="5F470B58-87DD-4A35-9FBCF55F883033CC"
 			id="base_plague_icon"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
+			offset="0.00,-13.00"
 			clipchildren="true"
 			priority="46"
 			uniqueguid="5F470B58-87DD-4A35-9FBCF55F883033CC"
@@ -5187,7 +5194,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignPlagueComposition"
-					context_function_id="IsContextValid(SpecialCompositionForFactionContext(PlayersFaction)) == false"/>
+					context_function_id="IsContextValid(BasePlagueContext) &amp;&amp; BasePlagueContext.Key.Contains(&quot;hidden&quot;) == false &amp;&amp; IsContextValid(SpecialCompositionForFactionContext(PlayersFaction)) == false"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -5204,8 +5211,8 @@
 				<active
 					this="20305E1C-3B38-482A-BDCD35B8CF45356A"
 					name="active"
-					width="40"
-					height="40"
+					width="50"
+					height="50"
 					uniqueguid="20305E1C-3B38-482A-BDCD35B8CF45356A"
 					stateeditordisplaypos="156.00,138.00">
 					<imagemetrics>
@@ -5213,54 +5220,21 @@
 							this="9E98926E-1E16-4EAD-94A1C964EAB45FF9"
 							uniqueguid="9E98926E-1E16-4EAD-94A1C964EAB45FF9"
 							componentimage="1018EA41-F204-4810-89FE3B574A933FA1"
-							offset="2.00,2.00"
-							width="36"
-							height="36"
-							dockpoint="Center"
-							canresizeheight="false"
-							canresizewidth="false"/>
+							width="50"
+							height="50"
+							dockpoint="Center"/>
 					</imagemetrics>
 				</active>
 			</states>
 		</base_plague_icon>
-		<ingredient_list
-			this="83845489-B2A8-415A-A2ED2A6E6F08E998"
-			id="ingredient_list"
-			offset="40.00,0.00"
-			priority="46"
-			tooltipslocalised="true"
-			uniqueguid="83845489-B2A8-415A-A2ED2A6E6F08E998"
-			currentstate="EE632478-D6D1-48CB-B29712E1A27837C2"
-			defaultstate="EE632478-D6D1-48CB-B29712E1A27837C2">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextList"
-					context_object_id="CcoCampaignPlagueComposition"
-					context_function_id="PlagueIngredientList"/>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="EE632478-D6D1-48CB-B29712E1A27837C2"
-					name="NewState"
-					width="40"
-					height="40"
-					uniqueguid="EE632478-D6D1-48CB-B29712E1A27837C2"/>
-			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				sizetocontent="true"
-				vertical_alignment="Center"/>
-		</ingredient_list>
 		<plague_list
 			this="0AAC1EA0-CDE1-4D31-98D7F2AA6330DD02"
 			id="plague_list"
-			offset="301.00,34.00"
-			docking="Bottom Right"
-			dock_offset="-19.00,-11.00"
-			component_anchor_point="1.00,1.00"
+			offset="228.00,-14.00"
+			dock_offset="0.00,-14.00"
 			priority="46"
-			componentleveltooltip="{{tt:ui/campaign ui/tooltip_plague_composition}}"
-			tooltiplabel="plague_list_Tooltip_c5df686a"
+			componentleveltooltip="{{tt:ui/campaign ui/tooltip_dlc25_active_plague}}"
+			tooltiplabel="ComponentTooltip_ae058ec8"
 			uniqueguid="0AAC1EA0-CDE1-4D31-98D7F2AA6330DD02"
 			currentstate="AEB64592-5E97-4579-A626484C3F6B49CF"
 			defaultstate="AEB64592-5E97-4579-A626484C3F6B49CF">
@@ -5277,39 +5251,48 @@
 					callback_id="ContextObjectStore"
 					context_object_id="CcoCampaignFaction"/>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
-					context_object_id="CcoCampaignPlagueComposition"/>
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoCampaignPlagueComposition">
+					<child_m_user_properties>
+						<property
+							name="alternate_parent"
+							value="agent_options"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="FactionContext"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
 					this="AEB64592-5E97-4579-A626484C3F6B49CF"
 					name="NewState"
-					width="80"
-					height="40"
+					width="100"
+					height="35"
 					interactive="true"
 					uniqueguid="AEB64592-5E97-4579-A626484C3F6B49CF"/>
 			</states>
 			<LayoutEngine
 				type="HorizontalList"
 				sizetocontent="true"
+				secondary_margins="-10.00,-5.00"
 				vertical_alignment="Center"/>
 		</plague_list>
-		<template_ingredient_icon
-			this="CDAAD6B5-477C-4A9E-888A4E5C3E678429"
-			id="template_ingredient_icon"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
+		<combined_ingredient_icon
+			this="D5170970-59AD-4410-81BC1D03E1EEA001"
+			id="combined_ingredient_icon"
+			offset="50.00,-13.00"
 			clipchildren="true"
 			priority="46"
-			uniqueguid="CDAAD6B5-477C-4A9E-888A4E5C3E678429"
-			currentstate="8EBF2AC3-6A5B-41E7-AC6B4D200C73D140"
-			defaultstate="8EBF2AC3-6A5B-41E7-AC6B4D200C73D140">
+			uniqueguid="D5170970-59AD-4410-81BC1D03E1EEA001"
+			currentstate="03642C46-B43F-44A0-AFAFE7C7A35C0D90"
+			defaultstate="03642C46-B43F-44A0-AFAFE7C7A35C0D90">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="Button"/>
 				<callback_with_context
-					callback_id="ContextImageSetter"
-					context_object_id="CcoCampaignPlagueIngredient"
-					context_function_id="ImagePath"/>
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignPlagueIngredient"/>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignPlagueComposition"
@@ -5321,8 +5304,9 @@
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
-					callback_id="ContextObjectStore"
-					context_object_id="CcoCampaignPlagueIngredient"/>
+					callback_id="ContextImageSetter"
+					context_object_id="CcoCampaignPlagueComposition"
+					context_function_id="ExImageForUI"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -5331,32 +5315,88 @@
 			</userproperties>
 			<componentimages>
 				<component_image
-					this="5848CB34-ABAC-4E8F-B7A726674DD54280"
-					uniqueguid="5848CB34-ABAC-4E8F-B7A726674DD54280"
+					this="D84350D4-3930-495F-8B21599B2DE4B084"
+					uniqueguid="D84350D4-3930-495F-8B21599B2DE4B084"
 					imagepath="ui/campaign ui/plague_icons/wh3_main_nur_base_buboes.png"/>
 			</componentimages>
 			<states>
 				<active
-					this="8EBF2AC3-6A5B-41E7-AC6B4D200C73D140"
+					this="03642C46-B43F-44A0-AFAFE7C7A35C0D90"
 					name="active"
-					width="40"
-					height="40"
-					uniqueguid="8EBF2AC3-6A5B-41E7-AC6B4D200C73D140"
+					width="50"
+					height="50"
+					uniqueguid="03642C46-B43F-44A0-AFAFE7C7A35C0D90"
 					stateeditordisplaypos="156.00,138.00">
 					<imagemetrics>
 						<image
-							this="47EC36EE-0482-44A0-890CBC4F7BCCE897"
-							uniqueguid="47EC36EE-0482-44A0-890CBC4F7BCCE897"
-							componentimage="5848CB34-ABAC-4E8F-B7A726674DD54280"
-							offset="2.00,2.00"
-							width="36"
-							height="36"
-							dockpoint="Center"
-							canresizeheight="false"
-							canresizewidth="false"/>
+							this="2804E77F-4850-4F69-8258439335E983CE"
+							uniqueguid="2804E77F-4850-4F69-8258439335E983CE"
+							componentimage="D84350D4-3930-495F-8B21599B2DE4B084"
+							width="50"
+							height="50"
+							dockpoint="Center"/>
 					</imagemetrics>
 				</active>
 			</states>
-		</template_ingredient_icon>
+		</combined_ingredient_icon>
+		<immune_icon
+			this="2CA465C7-F27D-4D13-A61F53ACB72091FE"
+			id="immune_icon"
+			offset="352.00,38.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Bottom Right"
+			dock_offset="-16.00,-15.00"
+			component_anchor_point="1.00,1.00"
+			priority="99999"
+			tooltipslocalised="true"
+			uniqueguid="2CA465C7-F27D-4D13-A61F53ACB72091FE"
+			currentstate="58618CBF-A7F4-4FF9-938A81F31F9198ED"
+			defaultstate="58618CBF-A7F4-4FF9-938A81F31F9198ED">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignCharacter"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoRTTarget target, CcoCampaignCharacter character"
+					context_function_id="target.IsImmuneToPlagues &amp;&amp; CanUseUiFeature(&quot;NURGLE_PLAGUES&quot;) &amp;&amp; IsContextValid(character.PlagueCompositionContext)"/>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoRTTarget"
+					context_function_id="Loc(&quot;wh3_dlc25_plagues_target_immune&quot;, PlagueImmunityTurns)"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="CcoRTTarget(this)"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignMilitaryForce"
+					context_function_id="CcoRTTarget(this)"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="9385653C-4819-475D-8C6D10AB46EBA33C"
+					uniqueguid="9385653C-4819-475D-8C6D10AB46EBA33C"
+					imagepath="ui/skins/default/dlc25_plague_caulderon/icon_plague_immunity.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="58618CBF-A7F4-4FF9-938A81F31F9198ED"
+					name="default"
+					interactive="true"
+					disabled="true"
+					uniqueguid="58618CBF-A7F4-4FF9-938A81F31F9198ED">
+					<imagemetrics>
+						<image
+							this="0E7EA178-9D78-4176-86AFBE037AA1547F"
+							uniqueguid="0E7EA178-9D78-4176-86AFBE037AA1547F"
+							componentimage="9385653C-4819-475D-8C6D10AB46EBA33C"
+							width="36"
+							height="40"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</immune_icon>
 	</components>
 </layout>

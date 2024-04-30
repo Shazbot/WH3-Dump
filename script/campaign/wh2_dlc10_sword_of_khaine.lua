@@ -164,7 +164,7 @@ end
 function sword_of_khaine:set_sword_button_state()
 	local local_faction = cm:get_local_faction_name(true);
 	local button = find_uicomponent(core:get_ui_root(), "button_sword_of_khaine");
-	local faction_symbol = find_uicomponent(core:get_ui_root(), "faction_symbol");
+	local faction_symbol = find_uicomponent(core:get_ui_root(), "sword_of_khaine", "faction_symbol");
 	local ui_fire_vfx = false
 	
 	if self.owner.faction and self.owner.faction ~= "rebels" then
@@ -489,7 +489,7 @@ function sword_of_khaine:add_listeners()
 			return context:character():region():name() == self.region_key;
 		end,
 		function(context)
-			find_uicomponent(core:get_ui_root(), "faction_symbol"):SetVisible(false);
+			find_uicomponent(core:get_ui_root(), "sword_of_khaine", "faction_symbol"):SetVisible(false);
 			
 			if not self.owner.character_cqi then
 				self.owner.faction = nil;
@@ -808,11 +808,11 @@ function sword_of_khaine:add_listeners()
 	core:add_listener(
 		"sword_of_khaine_CharacterLeavesGarrison",
 		"CharacterLeavesGarrison",
-		true,
 		function(context)
-			if context:garrison_residence():region():name() == self.region_key and context:character():command_queue_index() == self.owner.character_cqi then
-				self:handle_vfx(self.owner.character_cqi, true);
-			end;
+			return context:character():command_queue_index() == self.owner.character_cqi;
+		end,
+		function()
+			self:handle_vfx(self.owner.character_cqi, true);
 		end,
 		true
 	);

@@ -50,6 +50,7 @@ Bloodgrounds = {
 	defiled_bloodground_vfx_key = "wh2_dlc17_bloodground_defilement",
 	ritual_ready_vfx_key = "wh2_dlc17_ritual_of_ruin_ready",
 	occupation_button = "occupy_button",
+	postbattle_gift_button = "postbattle_gift_button",
 	colonise_button = "subjugation_button",
 	raze_settlement_vfx = "raze_settlement",
 	bloodgrounds_uic_name = "bloodgrounds",
@@ -114,6 +115,7 @@ function Bloodgrounds:setup_post_battle_listener()
 
 			if self.occupation_options_are_locked then
 				uim:override(self.occupation_button):unlock();
+				uim:override(self.postbattle_gift_button):unlock();
 				self.occupation_options_are_locked = false
 			end
 
@@ -138,6 +140,7 @@ function Bloodgrounds:setup_post_battle_listener()
 			if bloodground then
 				if were_attacker and context:character():faction():is_human() then
 					uim:override(self.occupation_button):lock();
+					uim:override(self.postbattle_gift_button):lock();
 					self.occupation_options_are_locked = true
 				end
 
@@ -159,6 +162,7 @@ function Bloodgrounds:setup_herdstone_listeners()
 		function(context)
 			if self.occupation_options_are_locked then
 				uim:override(self.occupation_button):unlock(true);
+				uim:override(self.postbattle_gift_button):unlock(true);
 				uim:override(self.colonise_button):unlock(true);
 				self.occupation_options_are_locked = false
 			end
@@ -233,6 +237,7 @@ function Bloodgrounds:setup_herdstone_listeners()
 			
 			if self.occupation_options_are_locked then
 				uim:override(self.occupation_button):unlock(true)
+				uim:override(self.postbattle_gift_button):unlock(true)
 				uim:override(self.colonise_button):unlock(true)
 				self.occupation_options_are_locked = false
 			end
@@ -247,11 +252,13 @@ function Bloodgrounds:setup_herdstone_listeners()
 
 			if character_is_beastmen then
 				uim:override(self.occupation_button):lock(true)
+				uim:override(self.postbattle_gift_button):lock(true)
 				uim:override(self.colonise_button):lock(true)
 				self.occupation_options_are_locked = true
 
 			elseif bloodground.ritual_completed and region_is_ruin then 
 				uim:override(self.colonise_button):lock(true)
+				uim:override(self.postbattle_gift_button):lock(true)
 				self.occupation_options_are_locked = true
 			end
 			

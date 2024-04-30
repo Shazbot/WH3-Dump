@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="PlayerArmy.HasMurderousProwess">
 	<hierarchy>
@@ -73,7 +73,7 @@
 				<newstate
 					this="68B33D7D-221D-45D3-8DAB162F7EB54A46"
 					name="NewState"
-					width="321"
+					width="306"
 					height="134"
 					uniqueguid="68B33D7D-221D-45D3-8DAB162F7EB54A46">
 					<imagemetrics>
@@ -81,7 +81,7 @@
 							this="918A67F9-811E-452C-8E098BDD468568DC"
 							uniqueguid="918A67F9-811E-452C-8E098BDD468568DC"
 							componentimage="E5E86D85-EF81-4D81-818C8F8FB0E99CE4"
-							width="321"
+							width="306"
 							height="134"
 							tile="true"
 							margin="16.00,20.00,16.00,20.00"/>
@@ -136,21 +136,26 @@
 			uniqueguid="399DE451-072F-4886-B89799980BC66A94"
 			currentstate="0FD94786-CE01-4B74-A139981EA1FD8F78"
 			defaultstate="0FD94786-CE01-4B74-A139981EA1FD8F78">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoUnitAbility"
+					context_function_id="Name"/>
+			</callbackwithcontextlist>
 			<states>
 				<newstate
 					this="0FD94786-CE01-4B74-A139981EA1FD8F78"
 					name="NewState"
-					width="144"
+					width="179"
 					height="24"
 					interactive="true"
 					uniqueguid="0FD94786-CE01-4B74-A139981EA1FD8F78">
 					<component_text
-						text="Murderous Prowess"
+						text="dy_murderous_prowness"
 						textxoffset="4.00,4.00"
 						textyoffset="4.00,4.00"
 						texthbehaviour="Resize"
-						textlocalised="true"
-						textlabel="header_NewState_Text_40006f"
+						textlabel="StateText_e9608a22"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
@@ -202,7 +207,13 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoBattleArmy"
-					context_function_id="MurderousProwessScore"/>
+					context_function_id="MurderousProwessScore">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -270,21 +281,26 @@
 			uniqueguid="7B3A060C-9FD6-4E4D-84F215FF9A9846C9"
 			currentstate="2AFEED2E-BFD9-4B3D-A26A8B381F2C5B87"
 			defaultstate="2AFEED2E-BFD9-4B3D-A26A8B381F2C5B87">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoUnitAbility"/>
+			</callbackwithcontextlist>
 			<states>
 				<newstate
 					this="2AFEED2E-BFD9-4B3D-A26A8B381F2C5B87"
 					name="NewState"
-					width="297"
+					width="282"
 					height="62"
 					interactive="true"
 					uniqueguid="2AFEED2E-BFD9-4B3D-A26A8B381F2C5B87">
 					<component_text
-						text="The Murderous Prowess ability will trigger once this many combatants have been killed."
+						text="The {{CcoUnitAbility:Name}} ability will trigger once this many combatants have been killed."
 						textxoffset="4.00,4.00"
 						textyoffset="4.00,4.00"
 						texthbehaviour="Resize"
 						textlocalised="true"
-						textlabel="header2_NewState_Text_76001b"
+						textlabel="StateText_a4cfc2b1"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"

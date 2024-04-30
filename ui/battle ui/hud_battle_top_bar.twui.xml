@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -2293,7 +2293,7 @@
 		<docked_holder
 			this="ACC5D87B-26DD-4BE0-96DEC1D2A17DD8A5"
 			id="docked_holder"
-			offset="-667.00,12.00"
+			offset="-798.00,12.00"
 			allowverticalresize="false"
 			docking="Top Center"
 			dock_offset="0.00,12.00"
@@ -2323,7 +2323,7 @@
 				<newstate
 					this="B360758B-FB1F-4ABE-B46206C61628F261"
 					name="NewState"
-					width="1777"
+					width="2040"
 					height="29"
 					pixelcollision="true"
 					uniqueguid="B360758B-FB1F-4ABE-B46206C61628F261">
@@ -2333,7 +2333,7 @@
 							uniqueguid="4CE95040-1B9D-4A46-B03F63473DA3E15A"
 							componentimage="FD4F4453-1BEE-4F15-A07A8AF101627C8F"
 							offset="0.00,-14.00"
-							width="1777"
+							width="2040"
 							height="67"
 							tile="true"
 							dockpoint="Top Center"
@@ -3216,6 +3216,11 @@
 			uniqueguid="12ADD1B5-2F55-4A2F-AFE40382D6F8D8DB"
 			currentstate="114E479F-82E1-4107-A3AC513989992E19"
 			defaultstate="114E479F-82E1-4107-A3AC513989992E19">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoUnitAbility"/>
+			</callbackwithcontextlist>
 			<states>
 				<newstate
 					this="114E479F-82E1-4107-A3AC513989992E19"
@@ -3867,10 +3872,6 @@
 				<callback_with_context
 					callback_id="ContextCustomTooltipStore"
 					context_object_id="CcoUnitSpecialAbilityRecord"/>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoStaticObject"
-					context_function_id="DatabaseRecordContext(&quot;CcoUnitSpecialAbilityRecord&quot;,&quot;wh2_main_faction_abilities_murderous_prowess&quot;)"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -5217,10 +5218,9 @@
 		<murderous_prowess_parent
 			this="FD20CAB4-1B0D-4BAC-92581FE71B8F2C7D"
 			id="murderous_prowess_parent"
-			offset="410.00,0.00"
+			offset="630.00,0.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
-			visible="false"
 			priority="30"
 			tooltipslocalised="true"
 			uniqueguid="FD20CAB4-1B0D-4BAC-92581FE71B8F2C7D"
@@ -5236,6 +5236,18 @@
 					context_object_id="CcoBattleArmy"
 					context_function_id="HasMurderousProwess == false"/>
 				<callback_with_context callback_id="ContextInitPlayerArmy"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoBattleArmy"
+					context_function_id="UnitList.FirstContext(UnitDetailsContext.AbilityDetailsList.FirstContext(AbilityContext.UnitSpecialAbilityRecordContext.IsMurderousProwess)).UnitDetailsContext.AbilityDetailsList.FirstContext(AbilityContext.UnitSpecialAbilityRecordContext.IsMurderousProwess)"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoUnitAbility"
+					context_function_id="UnitSpecialAbilityRecordContext"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoUnitAbilityDetails"
+					context_function_id="AbilityContext"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -5534,7 +5546,7 @@
 		<realm_of_souls_parent
 			this="5059DD92-B3AA-49BB-916B15569948A832"
 			id="realm_of_souls_parent"
-			offset="630.00,0.00"
+			offset="893.00,0.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			priority="30"
@@ -5867,7 +5879,7 @@
 		<supplies_display
 			this="6B8586F9-43BC-40B4-993CC9156AA5780D"
 			id="supplies_display"
-			offset="1275.00,-3.00"
+			offset="1538.00,-3.00"
 			allowverticalresize="false"
 			dock_offset="0.00,-3.00"
 			componentleveltooltip="{{tt:ui/battle ui/tooltip_battle_currency}}"
@@ -6003,7 +6015,7 @@
 		<survival_waves
 			this="ADEB2BCF-24D4-409C-B5F6EC061DAB6F55"
 			id="survival_waves"
-			offset="1384.00,-9.00"
+			offset="1647.00,-9.00"
 			clipimagestocomponent="true"
 			dock_offset="0.00,-9.00"
 			componentleveltooltip="{{tt:ui/battle ui/tooltip_survival_wave}}"
@@ -6098,7 +6110,7 @@
 							height="26"
 							dockpoint="Top Center"
 							dock_offset="0.00,2.00"
-							isaspectratiolocked="true"/>
+							aspect_ratio_locked_behaviour="Width First"/>
 						<image
 							this="FB67B4DE-6A32-4A46-A8BCD4780160BB05"
 							uniqueguid="FB67B4DE-6A32-4A46-A8BCD4780160BB05"
@@ -6114,7 +6126,7 @@
 			priority="8"
 			uniqueguid="2D0A83E3-7992-477A-9DA32B31EF6CA9ED"
 			updatewhennotvisible="true"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="29A1B09A-B823-4A7C-B3E77DCBF29BCC73"
 			defaultstate="29A1B09A-B823-4A7C-B3E77DCBF29BCC73">
 			<callbackwithcontextlist>
@@ -6189,7 +6201,7 @@
 		<trials_score_display
 			this="20F4B698-5E77-4833-AC975625870A1739"
 			id="trials_score_display"
-			offset="926.00,-3.00"
+			offset="1189.00,-3.00"
 			allowverticalresize="false"
 			dock_offset="0.00,-3.00"
 			uniqueguid="20F4B698-5E77-4833-AC975625870A1739"
@@ -6247,7 +6259,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBattleRoot"
-					context_function_id="IsDomination || IsOverthrow"/>
+					context_function_id="IsDomination"/>
 			</callbackwithcontextlist>
 			<states>
 				<default

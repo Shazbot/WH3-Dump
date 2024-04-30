@@ -29,6 +29,7 @@
 									</dev_button_grant_quest_item>
 								</dy_reward_icon>
 								<dy_set_icon this="A3278A01-D267-40F0-805C671C1BBA729C"/>
+								<stamp_complete_anim this="80293CF1-BFAB-416D-A576F2EF80526663"/>
 							</template_quest_entry>
 						</list_box>
 					</list_clip>
@@ -560,7 +561,7 @@
 			defaultstate="DF287826-81D5-404C-952499F94AAF16BE"
 			comment="chars have no more than 4 quests currently">
 			<callbackwithcontextlist>
-				<callback_with_context callback_id="ResizeChildrenToFit"/>
+				<callback_with_context callback_id="ResizeToFitParent"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -1115,6 +1116,16 @@
 					callback_id="ContextPropagator"
 					context_object_id="CcoCharacterAncillaryQuestUiDetailRecord"
 					context_function_id="AncillaryContext"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoAncillaryRecord"
+					context_function_id="PlayersFaction.MissionList.FirstContext(MissionDefinitionContext.PrimaryPayloadInfoContext.Entries.Any(Ancillary == this))">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="MissionEnded"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -1363,5 +1374,60 @@
 					uniqueguid="62B47058-6BAB-4E5D-81A5C8A99C86F85B"/>
 			</states>
 		</top_parent>
+		<stamp_complete_anim
+			this="80293CF1-BFAB-416D-A576F2EF80526663"
+			id="stamp_complete_anim"
+			offset="200.00,490.00"
+			docking="Bottom Right"
+			dock_offset="-10.00,0.00"
+			component_anchor_point="1.00,1.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="80293CF1-BFAB-416D-A576F2EF80526663"
+			isaspectratiolocked="true"
+			currentstate="0D3EBB29-456F-44C4-8734599A807F5163"
+			defaultstate="0D3EBB29-456F-44C4-8734599A807F5163">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextColourSetter"
+					context_object_id="CcoStaticObject"
+					context_function_id="MainThemeColour"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignMission"
+					context_function_id="IsValidContext &amp;&amp; Completed"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="AA9AF863-B1BD-4FBC-9229AF8B390B7B9F"
+					uniqueguid="AA9AF863-B1BD-4FBC-9229AF8B390B7B9F"
+					imagepath="ui/skins/default/stamp_mission_complete.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="0D3EBB29-456F-44C4-8734599A807F5163"
+					name="NewState"
+					width="170"
+					height="159"
+					uniqueguid="0D3EBB29-456F-44C4-8734599A807F5163">
+					<imagemetrics>
+						<image
+							this="11FD5EEC-869F-4609-930865E6C28AB157"
+							uniqueguid="11FD5EEC-869F-4609-930865E6C28AB157"
+							componentimage="AA9AF863-B1BD-4FBC-9229AF8B390B7B9F"
+							width="170"
+							height="159"
+							colour="#FFFFFF80"/>
+						<image
+							this="CE904685-6225-4B23-AC1694892BD39C98"
+							uniqueguid="CE904685-6225-4B23-AC1694892BD39C98"
+							componentimage="AA9AF863-B1BD-4FBC-9229AF8B390B7B9F"
+							width="170"
+							height="159"
+							colour="#FFFFFF80"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</stamp_complete_anim>
 	</components>
 </layout>

@@ -10,7 +10,7 @@ victory_objectives_ie = {
 	multiplayer = {
 		objectives = {
 			{
-				type = "ALL_PLAYERS_RAZE_OR_OWN_X_SETTLEMENTS",
+				type = "ALL_PLAYERS_RAZE_SACK_OR_OWN_X_SETTLEMENTS",
 				conditions = {
 					"total 100"
 				}
@@ -316,13 +316,14 @@ victory_objectives_ie = {
 			alignment = "order",
 			objectives = {
 				{
-					-- Keep Grudges under control
-					type = "AQUIRE_MISSION_CATEGORY_WEIGHT",
+					-- Spend Grudge Points 
+					type = "SCRIPTED",
 					conditions = {
-						"event_category Grudges",
-						"value 9.0",
-						"value_minimum false",
-						"override_text mission_text_text_wh_main_objective_override_dwarfs_grudges_threshold"
+						"script_key dwarf_grudge_long_victory",
+						"override_text mission_text_text_wh3_dlc25_dwf_long_objective_grudge_points",
+						"total 4",
+						"count 0",
+						"count_completion"
 					}
 				}
 			}
@@ -837,6 +838,28 @@ victory_objectives_ie = {
 				}
 			}
 		},
+		--- Elspeth Von Draken
+		wh_main_emp_wissenland = {
+			objectives = {
+				{
+					-- Level up Gunnery School to Level 3
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_elspeth_gunnery_school_progression_rank_achieved",
+						"script_key gunnery_school_level_3_victory"
+					}
+				},
+				{	
+					-- Eliminate Vlad and Festus 
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh_main_vmp_schwartzhafen",
+						"faction wh3_dlc20_chs_festus",
+						"confederation_valid"
+					}
+				}
+			}
+		},
 
 		-- Markus Wulfhart
 		wh2_dlc13_emp_the_huntmarshals_expedition = {
@@ -898,14 +921,47 @@ victory_objectives_ie = {
 		wh2_dlc13_emp_golden_order = {
 			objectives = {
 				{
-					-- Eliminate Vlad/Izzy
-					type = "DESTROY_FACTION",
+					-- Use College of Magic Feature 
+					type = "SCRIPTED",
 					conditions = {
-						"faction wh_main_vmp_schwartzhafen",  
-						"confederation_valid"
+						"override_text mission_text_text_gelt_college_of_magic_short_victory",
+						"script_key college_of_magic_short",
+						"total 12",
+						"count 0",
+						"count_completion"
+					}
+				},
+				{
+					-- Eliminate snikch/Lokhir
+					type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
+					conditions = {
+						"total 30"
 					}
 				}
-			}
+			},
+			long_objectives = {
+				
+				{
+					-- Use College of Magic Feature 
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_gelt_college_of_magic_long_victory",
+						"script_key college_of_magic_long",
+						"total 24",
+						"count 0",
+						"count_completion"
+					}
+				},
+				{
+					-- Gelt and Allies to control all of Cathay 
+					type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
+					conditions = {	
+						"total 75"
+					}
+				}
+			},
+			no_subculture_objective = true,
+			no_alignment_objective = true
 		},
 
 		-- Orion
@@ -1191,11 +1247,22 @@ victory_objectives_ie = {
 					-- Complete one of Thorgrim's core grudges
 					type = "SCRIPTED",
 					conditions = {
-						"script_key thorgrim_one_grudge_short_victory",
-						"override_text mission_text_text_mis_activity_complete_one_grudge"
+						"override_text mission_text_text_thorgrim_grudge_actions_completed_success",
+						"script_key thorgrim_grudge_short_victory",
+						"total 2",
+						"count 0",
+						"count_completion"
 					}
 				},
-			} 
+				{
+					-- Kill Skarsnik
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh_main_grn_crooked_moon",
+						"confederation_valid"
+					}
+				}
+			}
 		},
 
 		-- Thorek Ironbrow
@@ -1249,7 +1316,55 @@ victory_objectives_ie = {
 				}
 			}
 		},
-
+		---Malakai
+		wh3_dlc25_dwf_malakai = {
+			objectives = {
+				{
+					-- Complete Several Oaths of iron and glory battles
+					type = "SCRIPTED",
+					conditions = {
+						"script_key oath_iron_glory_short_victory",
+						"override_text mission_text_text_malakai_oath_steel_glory_short_victory",
+						"total 4",
+						"count 0",
+						"count_completion"
+					}
+				},
+				{
+					type = "DESTROY_FACTION",
+					conditions = {
+						-- Destroy Astragoth and Archaon
+						"faction wh_main_chs_chaos",
+						"faction wh3_dlc23_chd_astragoth",
+						"confederation_valid"
+					}
+				}
+			},
+			long_objectives = {
+				{
+					-- Complete Several Oaths of iron and glory battles
+					type = "SCRIPTED",
+					conditions = {
+						"script_key oath_iron_glory_long_victory",
+						"override_text mission_text_text_malakai_oath_steel_glory_long_victory",
+						"total 7",
+						"count 0",
+						"count_completion"
+					}
+				},
+				{
+				type = "DESTROY_FACTION",
+				conditions = {
+					-- Destroy Chaos Dwarfs and Grimgor
+					"faction wh3_dlc23_chd_legion_of_azgorh",
+					"faction wh3_dlc23_chd_conclave",
+					"faction wh_main_grn_greenskins",
+					"confederation_valid"
+					}
+				}
+			}, 
+			no_subculture_objective = true	
+		},
 		-- Louen Leoncoeur
 		wh_main_brt_bretonnia = {
 			objectives = {
@@ -1639,29 +1754,54 @@ victory_objectives_ie = {
 			no_subculture_objective = true
 		},
 		
-
 		-- Mannfred von Carstein
 		wh_main_vmp_vampire_counts = {
 			objectives = {
 				{
-					-- Eliminate Settra and Volkmar
+					-- Eliminate Settra, Repanse and Volkmar nearby
 					type = "DESTROY_FACTION",
 					conditions = {
 						"faction wh2_dlc09_tmb_khemri",
 						"faction wh3_main_emp_cult_of_sigmar",
+						"faction wh2_dlc14_brt_chevaliers_de_lyonesse",
 						"confederation_valid"
 					}
 				},
 				{
-					-- Hold the Black Pyramid of Nagash via allies or vassals
-					type = "CONTROL_N_REGIONS_FROM",
+					type = "CONTROL_N_PROVINCES_INCLUDING",
+						conditions = {
+							"total 1",
+							"province wh3_main_combi_province_land_of_the_dead",				
+						}
+				},
+			},
+			long_objectives = {
+				{
+					-- Awaken 7 Lords from any Vampiric Bloodline
+					type = "SCRIPTED",
 					conditions = {
-						"total 1",
-						"region wh3_main_combi_region_black_pyramid_of_nagash"
+						"override_text mission_text_text_mis_activity_vc_bloodline_awakenings",
+						"script_key bloodline_awaken_threshold_victory"
+						}
+				},
+				{
+				--Hold key provinces with unique Landmarks/Books of Nagash
+				type = "CONTROL_N_PROVINCES_INCLUDING",
+					conditions = {
+						"total 6",
+						"province wh3_main_combi_province_broken_teeth",
+						"province wh3_main_combi_province_crater_of_the_waking_dead",
+						"province wh3_main_combi_province_great_mortis_delta",
+						"province wh3_main_combi_province_marshes_of_madness",
+						"province wh3_main_combi_province_eight_peaks",
+						"province wh3_main_combi_province_the_plain_of_bones"
+
 					}
-				}
-			}
-		},
+				},
+				
+			},
+			no_subculture_objective = true
+		},	
 
 		-- Heinrich Kemmler
 		wh2_dlc11_vmp_the_barrow_legion = {
@@ -2193,7 +2333,7 @@ victory_objectives_ie = {
 					}
 				},
 				{
-					-- Hold The Galleon’s Graveyard 
+					-- Hold The Galleon�s Graveyard 
 					type = "CONTROL_N_REGIONS_FROM",
 					conditions = {
 						"total 1",
@@ -2739,7 +2879,93 @@ victory_objectives_ie = {
 				}
 			}
 		},
-		
+		--- Tamurkhan
+		wh3_dlc25_nur_tamurkhan = {
+			objectives = {
+				{
+					-- Complete Several Chieftains to devoted deference  
+					type = "SCRIPTED",
+					conditions = {
+						"script_key chieftain_devoted_short",
+						"override_text mission_text_text_tamurkhan_chieftain_devoted_deference_short",
+						"total 3",
+						"count 0",
+						"count_completion"
+					}
+				},
+				{
+					-- Destroy nearby Warriors of Chaos, Ogres and Greenskins
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh3_dlc20_chs_kholek",
+						"faction wh_main_grn_greenskins",
+						"faction wh3_main_ogr_goldtooth",
+						"confederation_valid"
+					}
+				}
+
+			},
+			long_objectives = {
+				{
+					-- Complete all Chieftains to devoted deference  
+					type = "SCRIPTED",
+					conditions = {
+						"script_key chieftain_devoted_long",
+						"override_text mission_text_text_tamurkhan_chieftain_devoted_deference_long",
+						"total 6",
+						"count 0",
+						"count_completion"
+					}
+				},
+				{
+					-- Take Nuln
+					type = "CONTROL_N_REGIONS_FROM",
+					conditions = {
+						"total 1",
+						"region wh3_main_combi_region_nuln"
+					}
+				}
+					
+			},
+			no_subculture_objective = true,
+			no_alignment_objective = true
+		},
+		wh3_dlc25_nur_epidemius = {
+			objectives = {
+				{
+					-- Destroy nearby Dwarf factions and Imrik
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh2_main_def_hag_graef",
+						"faction wh3_main_ksl_ursun_revivalists",
+						"faction wh3_dlc25_dwf_malakai",
+						"confederation_valid"
+					}
+				},
+
+			},
+			long_objectives = {
+				{
+					-- Destroy Kislev
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh3_main_ksl_the_ice_court",
+						"faction wh3_main_ksl_the_great_orthodoxy",
+						"confederation_valid"
+					}
+				},
+				{
+					-- Control the Talabecland Province
+					type = "OWN_N_REGIONS_INCLUDING",
+					conditions = {
+						"total 1",
+						"region wh3_main_combi_region_talabheim",
+					}
+				}
+					
+			},
+			no_subculture_objective = true
+		},
 		-- Skarbrand 
 		wh3_main_kho_exiles_of_khorne = {
 			objectives = {
@@ -2753,7 +2979,7 @@ victory_objectives_ie = {
 				}
 			}
 		},
-
+		
 		-- Festus the Leechlord
 		wh3_dlc20_chs_festus = {
 			objectives = {
@@ -2881,7 +3107,9 @@ victory_objectives_ie = {
 			}
 		},
 
-	}
+	},
+	-- used to track gelts unique ritual objective
+	gelt_unique_rituals = {}
 }
 
 -- This function creates the victory missions for all playable factions
@@ -3197,17 +3425,37 @@ function victory_objectives_ie:add_scripted_victory_listeners()
 		true
 	)
 
-	-- Thorgrim resolves one of his main Grudge missions
-	local thorgrim_faction_key = "wh_main_dwf_dwarfs"
-	if cm:get_faction(thorgrim_faction_key):is_human() then
+	-- Dwarf Grudges. Check for Thorgrim short victory otherwise long victory for all dwarfs 
+
+	core:add_listener(
+		"IEVictoryConditionDwarfsGrudges",
+		"MissionSucceeded",
+		function(context)
+			return context:mission():mission_record_key():starts_with("wh3_dlc25_grudge_legendary_")
+		end,
+		function(context)
+			cm:increase_scripted_mission_count("wh_main_short_victory", "thorgrim_grudge_short_victory", 1)
+			cm:increase_scripted_mission_count("wh_main_long_victory", "dwarf_grudge_long_victory", 1)
+		end,
+		true
+	)
+
+		--- Gelt College of Magic
+	local gelt_faction_key = "wh2_dlc13_emp_golden_order"
+	if cm:get_faction(gelt_faction_key):is_human() then
 		core:add_listener(
-			"IEVictoryConditionThorgrimFirstGrudge",
-			"MissionSucceeded",
+			"IEVictoryConditionShortVictoryGeltCollege",
+			"RitualCompletedEvent",
 			function(context)
-				return context:faction():name() == thorgrim_faction_key and (context:mission():mission_record_key() == "wh2_dlc17_grudge_legendary_enemy_skarsnik" or context:mission():mission_record_key() == "wh2_dlc17_grudge_legendary_enemy_queek" or context:mission():mission_record_key() == "wh2_dlc17_grudge_legendary_settlement_black_crag" or context:mission():mission_record_key() == "wh2_dlc17_grudge_legendary_settlement_karak_azgal")
+				return context:ritual():ritual_key():starts_with("wh3_dlc25_college_of_magic_")
 			end,
-			function()
-				cm:complete_scripted_mission_objective(thorgrim_faction_key, "wh_main_short_victory", "thorgrim_one_grudge_short_victory", true)
+			function(context)
+				local ritual_key = context:ritual():ritual_key()
+				if self.gelt_unique_rituals[ritual_key] == nil then
+					self.gelt_unique_rituals[ritual_key] = true
+					cm:increase_scripted_mission_count("wh_main_short_victory", "college_of_magic_short", 1)
+					cm:increase_scripted_mission_count("wh_main_long_victory", "college_of_magic_long", 1)
+				end
 			end,
 			true
 		)
@@ -3245,6 +3493,7 @@ function victory_objectives_ie:add_scripted_victory_listeners()
 		)
 	end
 
+	
 	-- Daemon Prince ascends to any of the 5 paths
 	local daemon_prince_faction_key = "wh3_main_dae_daemon_prince"
 	if cm:get_faction(daemon_prince_faction_key):is_human() then
@@ -3519,6 +3768,28 @@ function victory_objectives_ie:add_scripted_victory_listeners()
 		)
 	end
 
+	-- Mannfred performs 7 Bloodline Awakenings.
+	local mannfred_faction_key = "wh_main_vmp_vampire_counts"
+	if cm:get_faction(mannfred_faction_key):is_human() then
+		core:add_listener(
+			"IEVictoryConditionBloodlineAwakenings",
+			"RitualCompletedEvent",
+			function(context)
+				return context:performing_faction():name() == mannfred_faction_key and (context:ritual():ritual_category() == "BLOODLINE_RITUAL" )
+			end,
+			function()
+				-- add the saved value from awakened bloodlines
+				local awakened_ritual_count = cm:get_saved_value("mannfred_victory_count") or 0
+				awakened_ritual_count = awakened_ritual_count +1
+				cm:set_saved_value("mannfred_victory_count", awakened_ritual_count)
+					if awakened_ritual_count == 7 then
+						cm:complete_scripted_mission_objective(mannfred_faction_key, "wh_main_long_victory", "bloodline_awaken_threshold_victory", true)
+					end
+			end,
+			true
+		)
+	end
+
 	-- Nakai chooses the dilemma option to spawn an army
 	if cm:get_faction(nakai_faction_key):is_human() then
 		core:add_listener(
@@ -3574,3 +3845,19 @@ function victory_objectives_ie:add_scripted_victory_listeners()
 	end
 
 end
+
+--------------------- SAVE/LOAD ---------------------
+
+cm:add_saving_game_callback(
+	function(context)
+		cm:save_named_value("victory_objectives_ie.gelt_unique_rituals", victory_objectives_ie.gelt_unique_rituals, context)
+	end
+)
+
+cm:add_loading_game_callback(
+	function(context)
+		if not cm:is_new_game() then
+			victory_objectives_ie.gelt_unique_rituals = cm:load_named_value("victory_objectives_ie.gelt_unique_rituals", victory_objectives_ie.gelt_unique_rituals, context)
+		end
+	end
+)

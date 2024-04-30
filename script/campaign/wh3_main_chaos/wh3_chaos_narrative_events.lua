@@ -33,6 +33,9 @@ narrative.add_exception_faction("wh3_dlc20_chs_vilitch")
 narrative.add_exception_faction("wh3_dlc23_chd_astragoth")
 narrative.add_exception_faction("wh3_dlc23_chd_legion_of_azgorh")
 narrative.add_exception_faction("wh3_dlc23_chd_zhatan")
+narrative.add_exception_faction("wh3_dlc25_nur_tamurkhan")
+narrative.add_exception_faction("wh_main_emp_wissenland")
+narrative.add_exception_faction("wh3_dlc25_dwf_malakai")
 
 ------------------------------------------------------------------------------------------------------------------
 -- Realm Intro Cutscenes

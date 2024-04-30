@@ -1,274 +1,605 @@
+nurgle_plagues = {
 
--- dev ui for adding symptons
-core:add_listener(
-	"dev_ui_button_pressed_add_symptoms",
-	"ComponentLClickUp",
-	function(context)
-		return context.string == "dev_button_simulate_spread"
-	end,
-	function(context)
-		local uic = UIComponent(context.component);
-		local uic_parent = UIComponent(uic:Parent());
-		local plague_key = string.match(uic_parent:Id(), "+(.*)")
-		out.design(plague_key);
-		
-		local faction_name = "wh3_main_nur_poxmakers_of_nurgle"
-		local counter_name = nil
-		
-		if plague_key == "wh3_main_nur_base_Ague" then
-			counter_name = "Ague_spread_counter_"..faction_name
-		elseif plague_key == "wh3_main_nur_base_Buboes" then
-			counter_name = "Buboes_spread_counter_"..faction_name
-		elseif plague_key == "wh3_main_nur_base_Pox" then
-			counter_name = "Pox_spread_counter_"..faction_name
-		elseif plague_key == "wh3_main_nur_base_Rot" then
-			counter_name = "Rot_spread_counter_"..faction_name
-		elseif plague_key == "wh3_main_nur_base_Shakes" then
-			counter_name = "Shakes_spread_counter_"..faction_name
-		end
-		
-		local spread_count = cm:model():shared_states_manager():get_state_as_float_value(counter_name);
-		
-		tick_plague_counter(spread_count, counter_name, faction_name, 5);
-	end,
-	true
-);
+	symptoms_list = {		
+		"wh3_dlc25_nur_battle_2",
+		"wh3_dlc25_nur_settlement_4",
+		"wh3_dlc25_nur_force_2",
+		"wh3_dlc25_nur_battle_7",
+		"wh3_dlc25_nur_battle_6",
+		"wh3_dlc25_nur_battle_1",
+		"wh3_dlc25_nur_settlement_5",
+		"wh3_dlc25_nur_force_3",
+		"wh3_dlc25_nur_battle_4",
+		"wh3_dlc25_nur_force_1",
+		"wh3_dlc25_nur_force_6",
+		"wh3_dlc25_nur_settlement_1",
+		"wh3_dlc25_nur_settlement_2",
+		"wh3_dlc25_nur_battle_5",
+		"wh3_dlc25_nur_force_5",
+		"wh3_dlc25_nur_settlement_3",
+		"wh3_dlc25_nur_force_4",
+		"wh3_dlc25_nur_battle_3",		
+	},
 
-local unlocks = {
-				["wh3_nur_plague_component_3"] = {["base_key"] = "wh3_main_nur_base_Ague",["spread_count"] = 5},
-				["wh3_nur_plague_component_8"] = {["base_key"] = "wh3_main_nur_base_Ague",["spread_count"] = 25},
-				["wh3_nur_plague_component_13"] = {["base_key"] = "wh3_main_nur_base_Ague",["spread_count"] = 50},
-				["wh3_nur_plague_component_2"] = {["base_key"] = "wh3_main_nur_base_Buboes",["spread_count"] = 5},
-				["wh3_nur_plague_component_7"] = {["base_key"] = "wh3_main_nur_base_Buboes",["spread_count"] = 25},
-				["wh3_nur_plague_component_12"] = {["base_key"] = "wh3_main_nur_base_Buboes",["spread_count"] = 50},
-				["wh3_nur_plague_component_1"] = {["base_key"] = "wh3_main_nur_base_Pox",["spread_count"] = 5},
-				["wh3_nur_plague_component_6"] = {["base_key"] = "wh3_main_nur_base_Pox",["spread_count"] = 25},
-				["wh3_nur_plague_component_11"] = {["base_key"] = "wh3_main_nur_base_Pox",["spread_count"] = 50},
-				["wh3_nur_plague_component_4"] = {["base_key"] = "wh3_main_nur_base_Rot",["spread_count"] = 5},
-				["wh3_nur_plague_component_9"] = {["base_key"] = "wh3_main_nur_base_Rot",["spread_count"] = 25},
-				["wh3_nur_plague_component_14"] = {["base_key"] = "wh3_main_nur_base_Rot",["spread_count"] = 50},
-				["wh3_nur_plague_component_5"] = {["base_key"] = "wh3_main_nur_base_Shakes",["spread_count"] = 5},
-				["wh3_nur_plague_component_10"] = {["base_key"] = "wh3_main_nur_base_Shakes",["spread_count"] = 25},
-				["wh3_nur_plague_component_15"] = {["base_key"] = "wh3_main_nur_base_Shakes",["spread_count"] = 50}
-				};
+	kugath_subtype_key = "wh3_main_nur_kugath",
+	kugath_faction = "wh3_main_nur_poxmakers_of_nurgle",
+	epidemius_faction = "wh3_dlc25_nur_epidemius",
+	epidemius_pooled_resource = "nur_epidemius_tally_of_pestilence",
+	epidemius_pooled_resource_factor_forces = "plague_tally_forces",
+	epidemius_pooled_resource_factor_settlements = "plague_tally_settlements",
+	festus_faction = "wh3_dlc20_chs_festus",
+	festus_symptom_key_replace = {"wh3_dlc25_nur_force_5", "wh3_dlc25_nur_settlement_3"},
+	festus_symptom_key_append = "_festus",
 
---Initialise the counters for the different plague types
-cm:add_first_tick_callback_new(
-	function()
-		local faction_list = cm:model():world():faction_list();
+	hidden_force_effect = "wh3_dlc25_nur_base_hidden_epidemius_force",
+	hidden_region_effect = "wh3_dlc25_nur_base_hidden_epidemius_region",
+	force_bundle_list = {
+		"wh3_dlc25_epidemius_plague_bundle_1_scripted",
+		"wh3_dlc25_epidemius_plague_bundle_2_scripted",
+		"wh3_dlc25_epidemius_plague_bundle_3_scripted",
+		"wh3_dlc25_epidemius_plague_bundle_4_scripted",
+	},
+
+	
+	plague_faction_info = {
+		["wh3_main_nur_poxmakers_of_nurgle"] = {max_blessed_symptoms = 2, current_symptoms_list = {}, plague_creation_counter = 3},
+		["wh3_dlc25_nur_tamurkhan"] = {max_blessed_symptoms = 1, current_symptoms_list = {}, plague_creation_counter = 3},
+		["wh3_dlc25_nur_epidemius"] = {max_blessed_symptoms = 1, current_symptoms_list = {}, plague_creation_counter = 3},
+		["wh3_dlc20_chs_festus"] = {max_blessed_symptoms = 1, current_symptoms_list = {}, plague_creation_counter = 3},
+	},
+
+	starting_symptom_key = "wh3_dlc25_nur_force_3",
+	starting_blessed_symptom_key = "wh3_dlc25_nur_settlement_1",
+	kugath_additional_blessed_symptom_key = "wh3_dlc25_nur_force_6",
+	blessed_tech = "wh3_main_tech_nur_growth_21",
+	plague_creation_base_counter = 3,
+	nurgle_plague_faction_set = "plague_effect_set_nurgle_positive",
+
+	plague_button_unlock = {
+		["wh3_main_nur_poxmakers_of_nurgle"] = {button_locked = true, infections_gained = 0, infections_end_of_last_turn = 200},
+		["wh3_dlc25_nur_tamurkhan"] = {button_locked = true, infections_gained = 0, infections_end_of_last_turn = 200},
+		["wh3_dlc25_nur_epidemius"] = {button_locked = true, infections_gained = 0, infections_end_of_last_turn = 200},
+		["wh3_dlc20_chs_festus"] = {button_locked = true, infections_gained = 0, infections_end_of_last_turn = 200},
+	},
+
+	pr_key = "wh3_main_nur_infections",
+	pr_required_to_unlock = 200,
+	plagues_unlocked_incident = "wh3_dlc25_nur_plagues_feature_unlocked",
+	disable_plagues_key = "disable_nurgle_plagues_button",
+
+}
+
+
+function nurgle_plagues:initialise()
+
+	local faction_list = cm:model():world():faction_list()
+	--if its a new game select the starting plague component to be unlocked
+	if cm:is_new_game() then
 		for i = 0, faction_list:num_items() - 1 do
-			local faction = faction_list:item_at(i);
-			
-			if faction:subculture() == "wh3_main_sc_nur_nurgle" or faction:name() == "wh3_dlc20_chs_festus" then
-				local faction_name = faction:name();
-				out.design("Initialise plague counters for " .. faction_name);
+			local faction = faction_list:item_at(i)
 				
-				cm:set_script_state("Ague_spread_counter_" .. faction_name, 0);
-				cm:set_script_state("Buboes_spread_counter_" .. faction_name, 0);
-				cm:set_script_state("Pox_spread_counter_" .. faction_name, 0);
-				cm:set_script_state("Rot_spread_counter_" .. faction_name, 0);
-				cm:set_script_state("Shakes_spread_counter_" .. faction_name, 0);
+			if faction:is_contained_in_faction_set(self.nurgle_plague_faction_set) then			
+				local pfi = self.plague_faction_info	
+				local faction_name = faction:name()
+				local faction_info = pfi[faction_name]
+				if faction_info ~= nil then
+					faction_info.current_symptoms_list = self:copy_symptom_table()
 
+					if faction_name == self.festus_faction then
+						self:festus_symptom_swap(faction_info)
+					end
+
+					if faction:is_human() then
+						cm:override_ui(self.disable_plagues_key, true)
+					end
+					
+					common.set_context_value("random_plague_component_list_" .. faction_name, faction_info.current_symptoms_list)
+					common.set_context_value("random_plague_creation_count_" .. faction_name, faction_info.plague_creation_counter)
+					cm:set_plague_component_state(faction, self.starting_symptom_key, "UNLOCKED", true)
+					cm:set_plague_component_state(faction, self.starting_blessed_symptom_key, "BLESSED", true)
+					if faction_name == self.kugath_faction then
+						cm:set_plague_component_state(faction, self.kugath_additional_blessed_symptom_key, "BLESSED", true)
+					end
+				end
 			end
 		end
-	end
-);
-
-cm:add_first_tick_callback(
-	function()
-		local faction_list = cm:model():world():faction_list();
+	else
 		for i = 0, faction_list:num_items() - 1 do
-			local faction = faction_list:item_at(i);
-			
-			if faction:subculture() == "wh3_main_sc_nur_nurgle" or faction:name() == "wh3_dlc20_chs_festus" then
-				local faction_name = faction:name();
-				out.design("Set plague nurgle unlock context value for " .. faction_name);
-				common.set_context_value("plague_component_unlocks_"..faction_name, unlocks);
+			local faction = faction_list:item_at(i)
+				
+			if faction:is_contained_in_faction_set(self.nurgle_plague_faction_set) then				
+				local pfi = self.plague_faction_info
+				local pbu = self.plague_button_unlock	
+				local faction_name = faction:name()	
+				local faction_info = pfi[faction_name]
+				local unlock_info = pbu[faction_name]
+				if faction_info ~= nil then
+					common.set_context_value("random_plague_component_list_" .. faction_name, faction_info.current_symptoms_list)
+					common.set_context_value("random_plague_creation_count_" .. faction_name, faction_info.plague_creation_counter)
+					common.set_context_value("unlock_plague_button_" .. faction_name, unlock_info.infections_gained)
+				end				
 			end
 		end
 	end
-);
 
-core:add_listener(
-	"PlagueInfectionForce",
-	"MilitaryForceInfectionEvent",
-	true,
-	function(context)
-		local plague_interface = context:plague();
-		local is_created = context:is_creation();
-		
-		local plague_owner = context:faction();
-		local target_force = context:target_force();
-		
-		add_plague_counter(plague_interface, plague_owner);
-	end,
-	true
-);
+	self:plague_listeners()
 
-core:add_listener(
-	"PlagueInfectionRegion",
-	"RegionInfectionEvent",
-	true,
-	function(context)
-		local plague_interface = context:plague();
-		local is_created = context:is_creation();
-		
-		local plague_owner = context:faction();
-		local target_region = context:target_region();
-		
-		add_plague_counter(plague_interface, plague_owner);
-	end,
-	true
-);
-
-function add_plague_counter(plague_interface, faction)
-	local faction_name = faction:name();
-
-	local counter_name = plague_to_script_state_name(plague_interface, faction_name);
-	local spread_count = cm:model():shared_states_manager():get_state_as_float_value(counter_name);
-
-	-- Notify other scripts of plague spreading
-	core:trigger_custom_event("ScriptEventPlagueSpreading", {plague = plague_interface, faction = faction, count = spread_count});
-	
-	tick_plague_counter(spread_count, counter_name, faction_name);
-	
-	--Debug out
-	local spread_count_new = cm:model():shared_states_manager():get_state_as_float_value(counter_name);
-	out.design(counter_name..": "..tostring(spread_count_new));
 end
 
-function tick_plague_counter(spread_count, counter_name, faction_name, debug_count)
-	if spread_count then
-		local increment = debug_count or 1;
-		cm:set_script_state(counter_name, spread_count + increment);
-		update_plague_unlocks(faction_name);
-	end
-end
+function nurgle_plagues:plague_listeners()
+
+	-- add ap when plague cultist spawns
+	core:add_listener(
+		"Plagues_CultistCreated",
+		"CharacterCreated",
+		function(context)
+			return context:character():character_subtype("wh3_main_nur_cultist_plague_ritual")
+		end,
+		function(context)
+			local character = cm:char_lookup_str(context:character():cqi())
+			cm:callback(function() cm:replenish_action_points(character) end, 0.2)
+		end,
+		true
+	)
+
+	core:add_listener(
+		"Plagues_AchievementListener",
+		"FactionTurnStart",
+		function(context)
+			local faction = context:faction()
+			return faction:is_contained_in_faction_set(self.nurgle_plague_faction_set) and faction:is_human()	
+		end,
+		function(context)
+			local all_unlocked = true
+			local component_list = faction:plagues():plague_component_list()	
+			--loop through all components to see if any are locked
+			for i = 0, component_list:num_items() -1 do
+				local symptom = component_list:item_at(i)
+				if not symptom:has_state("UNLOCKED") and not string.find(symptom:key(), "mutation") then
+					--not all symptoms unlocked yet
+					all_unlocked = false
+					break
+				end
+			end
+			if all_unlocked then
+				core:trigger_event("ScriptEvent_AllPlagueComponentsUnlocked", context)
+			end
+		end,
+		true
+	)
+
+	--remove blessed state on any symptoms spawned with a plague cultist
+	core:add_listener(
+		"Plagues_CultistCreated",
+		"AgentPlagueDataCreatedEvent",
+		function(context)
+			return context:agent():character():character_subtype("wh3_main_nur_cultist_plague_ritual")
+		end,
+		function(context)
+			local plague_components = context:agent():character():try_get_agent_plague_components()
+			self:remove_blessed_symptom(plague_components)
+		end,
+		true
+	)
+
+	core:add_listener(
+		"Plagues_PlagueCreationCounter",
+		"RitualStartedEvent",
+		function(context)			
+			return context:performing_faction():is_human() and string.find(context:ritual():ritual_key(), "wh3_main_ritual_nur_plague_") 
+		end,
+		function(context)
+			local faction = context:performing_faction()
+			local pfi = self.plague_faction_info	
+			local faction_info = pfi[faction:name()]
+
+			faction_info.plague_creation_counter = faction_info.plague_creation_counter - 1
+
+			if faction_info.plague_creation_counter <= 0 then
+				--adding a callback as RitualStartedEvent triggers before MilitaryForceInfectionEvent or RegionInfectionEvent 
+				--this results in blessed symptoms not being granted if its part of the final Plague before reset positions and blessed symptoms		
+				cm:callback(function() self:randomise_symptom_location(faction) end, 0.5)
+			end
+
+			common.set_context_value("random_plague_creation_count_" .. faction:name(), faction_info.plague_creation_counter)
+		end,
+		true
+	)
+
+	core:add_listener(
+		"Plagues_TrackFactionTurnStart",
+		"FactionTurnStart",
+		function(context)
+			return context:faction():name() == self.epidemius_faction
+		end,
+		function (context)
+			self:count_plagues_on_non_nurgle_targets()	
+		end,
+		true
+	)
+
+	core:add_listener(
+		"Plagues_AdditionalMaxBlessedCharacterRankUp",
+		"CharacterRankUp",
+		function(context)
+			local character = context:character()
+			return character:character_subtype(self.kugath_subtype_key) and character:rank() % 10 == 0 and character:faction():name() == self.kugath_faction
+		end,
+		function (context)
+			local pfi = self.plague_faction_info	
+			local faction_info = pfi[self.kugath_faction]
+			faction_info.max_blessed_symptoms = faction_info.max_blessed_symptoms + 1
+		end,
+		true
+	)
 
 
-local base_key_to_base_plague_mapping_cache = {};
-local component_name_to_number_mapping_cache = {};
+	core:add_listener(
+		"Plagues_TrackBlessedSymptom_Region",
+		"RegionInfectionEvent",
+		function(context)
+			return context:faction():is_human()
+		end,
+		function(context)
+			--check that the plague has just been created and wasnt spread by an agent
+			if context:is_creation() and context:spreading_agent() ~= nil then 
+				self:remove_blessed_symptom(context:plague():plague_components())	
+			else
+				core:trigger_custom_event("ScriptEventPlagueSpreading", {faction = context:faction()})
+			end	
+			if context:plague():creator_faction():name() == self.epidemius_faction then
+				self:count_plagues_on_non_nurgle_targets()	
+			end			
+		end,
+		true
+	)
 
-function update_plague_unlocks(faction_name)
-	--apply effect bundles to unlock
-	local component_unlocks_bundle = cm:create_new_custom_effect_bundle("wh3_main_scripted_custom_effect_bundle_nur_component_unlocks");
-	component_unlocks_bundle:set_duration(0);
-	
-	local ague_count = cm:model():shared_states_manager():get_state_as_float_value("Ague_spread_counter_" .. faction_name)			-- these are all nil?
-	local buboes_count = cm:model():shared_states_manager():get_state_as_float_value("Buboes_spread_counter_" .. faction_name)
-	local pox_count = cm:model():shared_states_manager():get_state_as_float_value("Pox_spread_counter_" .. faction_name)
-	local rot_count = cm:model():shared_states_manager():get_state_as_float_value("Rot_spread_counter_" .. faction_name)
-	local shakes_count = cm:model():shared_states_manager():get_state_as_float_value("Shakes_spread_counter_" .. faction_name)
-	
-	for component_name, record in pairs(unlocks) do
+	core:add_listener(
+		"Plagues_TrackBlessedSymptom_Force",
+		"MilitaryForceInfectionEvent",
+		function(context)
+			return context:faction():is_human()
+		end,
+		function(context)
+			--check that the plague has just been created and wasnt spread by an agent
+			if context:is_creation() and context:spreading_agent() ~= nil then 
+				self:remove_blessed_symptom(context:plague():plague_components())	
+			else
+				core:trigger_custom_event("ScriptEventPlagueSpreading", {faction = context:faction()})
+			end
+			if context:plague():creator_faction():name() == self.epidemius_faction then
+				self:count_plagues_on_non_nurgle_targets()	
+			end
+		end,
+		true
+	)
 
-		-- Attempt to derive the base_plague (e.g. "Ague") from the base_key (e.g. "wh3_main_nur_base_Ague"). Look it up first in
-		-- a cache and if it isn't there, do some string operations to extract it and then add it to the cache so future lookups
-		-- are much quicker.
-		local base_key = record["base_key"];
-		local base_plague = base_key_to_base_plague_mapping_cache[base_key];
+	core:add_listener(
+		"Plagues_TrackBattleCompleted",
+		"BattleCompleted",
+		function()
+			return cm:model():pending_battle():has_been_fought() and cm:pending_battle_cache_human_is_involved()
+		end,
+		function (context)
+			self:count_plagues_on_non_nurgle_targets()	
+		end,
+		true
+	)
 
-		if not base_plague then
-			base_plague = string.match(base_key, "_[^_]+$");
-			base_plague = base_plague:gsub('_', '');
-			base_key_to_base_plague_mapping_cache[base_key] = base_plague;
-		end;
-		--out.design("base_key is " .. base_key .. ", base_plague is " .. base_plague)
+	core:add_listener(
+		"Plagues_AdditionalMaxBlessedTech",
+		"ResearchCompleted",
+		function(context)
+			local technology = context:technology()
+			local faction = context:faction()
 
-		--get the count for the base plague
-		local this_count = cm:model():shared_states_manager():get_state_as_float_value(base_plague.."_spread_counter_" .. faction_name)
-		
-		--test the count against the spread_count
-		if this_count >= record["spread_count"] then
-			--get the component number from the component name
-			--"wh3_nur_plague_component_3" -> "3"
+			if faction:is_contained_in_faction_set(self.nurgle_plague_faction_set) then	
+				return faction:is_human() and technology == self.blessed_tech
+			end
+			return false
+		end,
+		function(context)
+			local faction = context:faction()
+			local pfi = self.plague_faction_info	
+			local faction_info = pfi[faction:name()]
+			faction_info.max_blessed_symptoms = faction_info.max_blessed_symptoms + 1
 
-			-- Attempt to derive the component_number (e.g. "3") from the component_name (e.g. "wh3_nur_plague_component_3").
-			-- Look it up first in a cache, and write it to the cache if it's not there.
-			local component_number = component_name_to_number_mapping_cache[component_name];
-			if not component_number then
-				component_number = string.match(component_name, "_[^_]+$");
-				component_number = component_number:gsub('_', '');
-				component_name_to_number_mapping_cache[component_name] = component_number;
-			end;
-			component_unlocks_bundle:add_effect("wh3_main_effect_unlock_plague_components_nur_"..component_number, "faction_to_faction_own_unseen", 1);
+		end,
+		true
+	)
+
+	core:add_listener(
+		"Plagues_PooledResourceChanged",
+		"PooledResourceChanged",
+		function(context)
+			local faction = context:faction()
+			if not faction:is_null_interface() then
+				if faction:is_contained_in_faction_set(self.nurgle_plague_faction_set) and faction:is_human() then	
+					local pbu = self.plague_button_unlock	
+					local unlock_info = pbu[faction:name()]
+					
+					return unlock_info.button_locked
+				end
+			end
+			return false
+		end,
+		function(context)
+			local faction = context:faction()
+			local pbu = self.plague_button_unlock	
+			local unlock_info = pbu[faction:name()]
+
+			local pr_changed = context:resource():key()
+			local pr = faction:pooled_resource_manager():resource(self.pr_key)
+
+			if pr_changed == self.pr_key then
+				local amount_changed = context:amount()
+				if amount_changed > 0 then
+					unlock_info.infections_gained = unlock_info.infections_gained + amount_changed
+				end
+			end
+			if unlock_info.infections_gained >= self.pr_required_to_unlock then
+				self:unlock_plagues_button(faction, unlock_info)				
+			end
+			common.set_context_value("unlock_plague_button_" .. faction:name(), unlock_info.infections_gained)
+		end,
+		true
+	)
+
+	core:add_listener(
+		"Plagues_PooledResourceFactionTurnStart",
+		"FactionTurnStart",
+		function(context)
+			local faction = context:faction()
+			if not faction:is_null_interface() then
+				if faction:is_contained_in_faction_set(self.nurgle_plague_faction_set) and faction:is_human() then	
+					local pbu = self.plague_button_unlock	
+					local unlock_info = pbu[faction:name()]
+					
+					return unlock_info.button_locked
+				end
+			end
+			return false
+		end,
+		function(context)
+			local faction = context:faction()
+			local pbu = self.plague_button_unlock	
+			local unlock_info = pbu[faction:name()]
+
+			local pr_value = faction:pooled_resource_manager():resource(self.pr_key):value()
 			
-			out.design("Unlock plague component "..component_name);
+			if pr_value > unlock_info.infections_end_of_last_turn then
+				local amount = pr_value - unlock_info.infections_end_of_last_turn
+				unlock_info.infections_gained = unlock_info.infections_gained + amount
+			end			
+			if unlock_info.infections_gained >= self.pr_required_to_unlock then
+				self:unlock_plagues_button(faction, unlock_info)				
+			end
+			common.set_context_value("unlock_plague_button_" .. faction:name(), unlock_info.infections_gained)
+		end,
+		true
+	)
 
-			-- If we haven't unlocked this plague component/symptom before for this faction then do so, and send a script event
-			if not cm:get_saved_value("plague_symptom_" .. component_number .. "_unlocked_" .. faction_name) then
-				cm:set_saved_value("plague_symptom_" .. component_number .. "_unlocked_" .. faction_name, true);
+	core:add_listener(
+		"Plagues_PooledResourceFactionTurnEnd",
+		"FactionTurnEnd",
+		function(context)
+			local faction = context:faction()
+			if not faction:is_null_interface() then
+				if faction:is_contained_in_faction_set(self.nurgle_plague_faction_set) and faction:is_human() then	
+					local pbu = self.plague_button_unlock	
+					local unlock_info = pbu[faction:name()]
+					
+					return unlock_info.button_locked
+				end
+			end
+			return false
+		end,
+		function(context)
+			local faction = context:faction()
+			local pbu = self.plague_button_unlock	
+			local unlock_info = pbu[faction:name()]
 
-				-- Update a value in the savegame of how many symptoms this faction has unlocked
-				local symptoms_unlocked = cm:get_saved_value("plague_symptoms_unlocked_" .. faction_name) or 0;
-				cm:set_saved_value("plague_symptoms_unlocked_" .. faction_name, symptoms_unlocked + 1);
+			unlock_info.infections_end_of_last_turn = faction:pooled_resource_manager():resource(self.pr_key):value()
+		end,
+		true
+	)
 
-				-- Trigger a script event for narrative missions
-				core:trigger_custom_event("ScriptEventPlagueSymptomUnlocked", {faction = cm:get_faction(faction_name), symptom = component_name});
-			end;
+end
+
+function nurgle_plagues:add_blessed_symptoms(faction)
+
+	local component_list = faction:plagues():plague_component_list()
+	local blessed_list = {}
+	
+	--reset blessed state for all symptoms
+	for i = 0, component_list:num_items() -1 do
+		local symptom = component_list:item_at(i)
+		symptom:set_state("BLESSED", false)
+	end
+
+	--create list of symptoms that could be blessed
+	for i = 0, component_list:num_items() -1 do
+		local symptom = component_list:item_at(i)
+		--remove any mutations are these can not be blessed
+		if not string.find(symptom:key(), "mutation") then
+			--add any valid plague_component key to list
+			table.insert(blessed_list, symptom)
 		end
 	end
-	
-	--Apply the custom bundle
-	local faction = cm:get_faction(faction_name);
-	if faction:has_effect_bundle("wh3_main_nur_component_unlocks") then
-		cm:remove_effect_bundle("wh3_main_nur_component_unlocks", faction_name);
-	end;
-	cm:apply_custom_effect_bundle_to_faction(component_unlocks_bundle, faction);
-end;
 
-function plague_to_script_state_name(plague_interface, faction_name)
-	local record = plague_interface:plague_record();
+	local pfi = self.plague_faction_info	
+	local faction_info = pfi[faction:name()]		
+
 	
-	out.design(record);
-	
-	if record == "wh3_main_nur_base_Ague" then
-		return "Ague_spread_counter_"..faction_name
-	elseif record == "wh3_main_nur_base_Buboes" then
-		return "Buboes_spread_counter_"..faction_name
-	elseif record == "wh3_main_nur_base_Pox" then
-		return "Pox_spread_counter_"..faction_name
-	elseif record == "wh3_main_nur_base_Rot" then
-		return "Rot_spread_counter_"..faction_name
-	elseif record == "wh3_main_nur_base_Shakes" then
-		return "Shakes_spread_counter_"..faction_name
+	--loop for max blessed symptoms
+	for i = 1, faction_info.max_blessed_symptoms do
+		if #blessed_list > 0 then
+			local symptom = blessed_list[cm:random_number(#blessed_list)]
+			for i, v in ipairs(blessed_list) do
+				if v == symptom then
+					table.remove(blessed_list, i)
+					break
+				end
+			end
+			symptom:set_state("BLESSED", true)
+		end
 	end
-	
-	out.design("No matching Plague for counter");
-	return "we_failed";
+
 end
 
-function are_all_plague_components_unlocked(faction)
-	if faction:is_human() and faction:culture() == "wh3_main_nur_nurgle" then
-		local ssm = cm:model():shared_states_manager();
-		local faction_name = faction:name();
-		
-		--test all conditions for unlocking components
-		return  ssm:get_state_as_float_value("Ague_spread_counter_"..faction_name)   >= 50 and
-				ssm:get_state_as_float_value("Buboes_spread_counter_"..faction_name) >= 50 and
-				ssm:get_state_as_float_value("Pox_spread_counter_"..faction_name)    >= 50 and
-				ssm:get_state_as_float_value("Rot_spread_counter_"..faction_name)    >= 50 and
-				ssm:get_state_as_float_value("Shakes_spread_counter_"..faction_name) >= 50 and
-				faction:has_technology("wh3_main_tech_nur_7")  and
-				faction:has_technology("wh3_main_tech_nur_12") and
-				faction:has_technology("wh3_main_tech_nur_19") and
-				faction:has_technology("wh3_main_tech_nur_22") and
-				faction:has_technology("wh3_main_tech_nur_29")
-	end
+function nurgle_plagues:remove_blessed_symptom(component_list)
 	
-	return false
+	for i = 0, component_list:num_items() -1 do
+		local symptom = component_list:item_at(i)
+		if symptom:has_state("BLESSED") then
+			symptom:set_state("BLESSED", false)
+		end
+	end	
 end
 
--- add ap when plague cultist spawns
-core:add_listener(
-	"plague_cultist_created",
-	"CharacterCreated",
+function nurgle_plagues:randomise_symptom_location(faction)
+
+	local pfi = self.plague_faction_info	
+	local faction_name = faction:name()
+	local faction_info = pfi[faction_name]
+	local symptom_list = self:copy_symptom_table()
+
+	if faction_name == self.festus_faction then
+		self:festus_symptom_swap(faction_info)
+	end
+
+	for i = #symptom_list, 2, -1 do
+		local j = cm:random_number(i)
+		symptom_list[i], symptom_list[j] = symptom_list[j], symptom_list[i]
+	end
+	
+	faction_info.current_symptoms_list = symptom_list
+	common.set_context_value("random_plague_component_list_" .. faction_name, symptom_list)
+
+	faction_info.plague_creation_counter = self.plague_creation_base_counter
+	common.set_context_value("random_plague_creation_count_" .. faction_name, faction_info.plague_creation_counter)
+	self:add_blessed_symptoms(faction)
+end
+
+function nurgle_plagues:count_plagues_on_non_nurgle_targets()
+	
+	local plague_count_armies = 0
+	local plague_count_settlements = 0
+	local non_nurgle_forces_plagued = {}
+	
+	local faction_list = cm:model():world():faction_list()
+	for i = 0, faction_list:num_items() - 1 do
+		local force_list = faction_list:item_at(i):military_force_list()
+		local region_list = faction_list:item_at(i):region_list()
+		if not region_list:is_empty() then 
+			for j = 0, region_list:num_items() -1 do
+				local region = region_list:item_at(j)
+				local region_garrison = region:garrison_residence()
+				local plague = region:get_plague_if_infected()
+				if not plague:is_null_interface() then
+					if region:has_effect_bundle(self.hidden_region_effect) and plague:creator_faction():name() == self.epidemius_faction then
+						plague_count_settlements = plague_count_settlements + 1
+						table.insert(non_nurgle_forces_plagued, region_garrison:command_queue_index())
+					end
+				end
+			end
+		end
+		if not force_list:is_empty() then
+			for j = 0, force_list:num_items() - 1 do
+				local force = force_list:item_at(j)
+				local plague = force:get_plague_if_infected()
+				if not plague:is_null_interface() then
+					if force:has_effect_bundle(self.hidden_force_effect) and plague:creator_faction():name() == self.epidemius_faction then
+						plague_count_armies = plague_count_armies + 1
+						table.insert(non_nurgle_forces_plagued, force:command_queue_index())
+					end
+				end
+			end
+		end
+	end
+	local combined_plague_count = plague_count_armies + plague_count_settlements
+
+	cm:faction_add_pooled_resource(self.epidemius_faction, self.epidemius_pooled_resource, self.epidemius_pooled_resource_factor_forces, -99999)		
+	cm:faction_add_pooled_resource(self.epidemius_faction, self.epidemius_pooled_resource, self.epidemius_pooled_resource_factor_settlements, -99999)		
+	self:apply_effect_bundles_to_non_nurgle_targets(combined_plague_count, non_nurgle_forces_plagued)		
+	cm:faction_add_pooled_resource(self.epidemius_faction, self.epidemius_pooled_resource, self.epidemius_pooled_resource_factor_forces, plague_count_armies)
+	cm:faction_add_pooled_resource(self.epidemius_faction, self.epidemius_pooled_resource, self.epidemius_pooled_resource_factor_settlements, plague_count_settlements)
+
+
+end
+
+function nurgle_plagues:apply_effect_bundles_to_non_nurgle_targets(plague_count, force_list)
+
+	--pick effect bundle key based on plague_count
+	local effect_bundle_threshold = 0
+	if plague_count >= 20 then
+		effect_bundle_threshold = 4
+	elseif plague_count >= 10 then
+		effect_bundle_threshold = 3
+	elseif plague_count >= 5 then
+		effect_bundle_threshold = 2
+	elseif plague_count >= 1 then
+		effect_bundle_threshold = 1
+	end
+
+	for i = 1, #force_list do
+		for j = 1, #self.force_bundle_list do
+			cm:remove_effect_bundle_from_force(self.force_bundle_list[j], force_list[i])
+		end
+		if effect_bundle_threshold > 0 then
+			cm:apply_effect_bundle_to_force(self.force_bundle_list[effect_bundle_threshold], force_list[i], 1)
+		end
+	end
+
+end
+
+function nurgle_plagues:festus_symptom_swap(faction_info)
+
+	for i = 1, #faction_info.current_symptoms_list do
+		for j = 1, #self.festus_symptom_key_replace do
+			if faction_info.current_symptoms_list[i] == self.festus_symptom_key_replace[j] then
+				faction_info.current_symptoms_list[i] = self.festus_symptom_key_replace[j]  .. self.festus_symptom_key_append
+			end
+		end
+	end
+
+end
+
+function nurgle_plagues:copy_symptom_table()
+	local s_table = {}
+
+	for i=1, #self.symptoms_list do
+		table.insert(s_table, self.symptoms_list[i])
+	end
+
+	return s_table
+end
+
+function nurgle_plagues:unlock_plagues_button(faction, unlock_info)
+	local local_faction_cqi = cm:get_local_faction(true):command_queue_index()
+	if local_faction_cqi == faction:command_queue_index() then
+		cm:override_ui(self.disable_plagues_key, false)	
+	end
+	unlock_info.button_locked = false
+	cm:trigger_incident(faction:name(), self.plagues_unlocked_incident, true, true)
+end
+
+
+--------------------------------------------------------------
+----------------------- SAVING / LOADING ---------------------
+--------------------------------------------------------------
+
+cm:add_saving_game_callback(
 	function(context)
-		return context:character():character_subtype("wh3_main_nur_cultist_plague_ritual");
-	end,
+		cm:save_named_value("NurglePlagues_PlagueFactionInfo", nurgle_plagues.plague_faction_info, context)
+		cm:save_named_value("NurglePlagues_PlagueButtonInfo", nurgle_plagues.plague_button_unlock, context)
+	end
+)
+cm:add_loading_game_callback(
 	function(context)
-		local character = cm:char_lookup_str(context:character():cqi());
-		cm:callback(function() cm:replenish_action_points(character) end, 0.2);
-	end,
-	true
-);
+		if not cm:is_new_game() then
+			nurgle_plagues.plague_faction_info = cm:load_named_value("NurglePlagues_PlagueFactionInfo", nurgle_plagues.plague_faction_info, context)
+			nurgle_plagues.plague_button_unlock = cm:load_named_value("NurglePlagues_PlagueButtonInfo", nurgle_plagues.plague_button_unlock, context)
+		end
+	end
+)

@@ -93,7 +93,12 @@ end;
 --- @desc A shorthand method for creating a sound effect object.
 --- @p string sound event, Name of sound event
 --- @r battle_sound_effect
-function new_sfx(soundfile)
+--- @p [opt=true] @boolean is the sound cinematic, if true it can only trigger during cinematics
+--- @p [opt=true] @boolean is the sound vo, if true we will make sure it doesn't overlap other vo
+function new_sfx(soundfile, _is_cinematic, _is_vo)
+	is_cinematic = (_is_cinematic == nil) or _is_cinematic;
+	is_vo = (_is_vo == nil) or _is_vo;
+
 	local retval = battle_sound_effect:new();
 	retval:load(soundfile);
 	
@@ -101,7 +106,25 @@ function new_sfx(soundfile)
 	if not retval:is_valid() then
 		script_error("new_sfx() called but supplied parameter is " .. tostring(soundfile) .. " and not a valid sound file. No audio will play.");
 	end;
-	
+
+	if not is_boolean(is_cinematic) then
+		script_error("new_sfx() called but supplied is_cinematic [" .. tostring(is_cinematic) .. "] is not a boolean");
+		return false;
+	end;
+
+	if not is_boolean(is_vo) then
+		script_error("new_sfx() called but supplied is_vo [" .. tostring(is_vo) .. "] is not a boolean");
+		return false;
+	end;
+
+	if(is_cinematic) then
+		retval:set_cinematic();
+	end;
+
+	if(is_vo) then
+		retval:set_vo();
+	end;
+
 	return retval;
 end;
 

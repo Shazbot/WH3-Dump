@@ -196,11 +196,11 @@ local reactor_resource_factor_key = {
 	["negative"] = "workshop_research"
 };
 
+-- percentage chance of adding warp fuel and a modifier that increases the chance each time the roll fails
 local reactor_add_chances = {
-	[ikit_subtype] = {40, 1, 0},
-	[master_engineer_subtype] = {20, 1, 0},
-	[engineer_subtype] = {30, 1, 0},
-	["extra_loot"] = {12, 1, 0}
+	[ikit_subtype] = {40, 0},
+	[master_engineer_subtype] = {20, 0},
+	[engineer_subtype] = {30, 0}
 };
 
 local workshop_level_dummy_effect_bundle = {
@@ -617,92 +617,69 @@ core:add_listener(
 		return cm:pending_battle_cache_faction_is_involved(ikit_faction);
 	end,
 	function(context)
-		local engineers_in_battle = {
-			[ikit_subtype] = {},
-			[master_engineer_subtype] = {}
-		};
+		-- generate loot tables and check skills and other factors that affects loot chance
+		local loot_rolls_ikit = {};
+		local loot_rolls_master_engineer = {};
+		
+		local function add_character_to_loot_roll(cqi, faction_name)
+			local character = cm:get_character_by_cqi(cqi);
+			
+			if character and faction_name == ikit_faction and character:won_battle() then
+				local subtype = character:character_subtype_key();
+				
+				if subtype == ikit_subtype then
+					local characters_chance = reactor_add_chances[ikit_subtype][1] + cm:get_characters_bonus_value(character, "reactor_core_chance")
+					table.insert(loot_rolls_ikit, {characters_chance, reactor_add_chances[ikit_subtype][2]});
+				elseif subtype == master_engineer_subtype then
+					local characters_chance = reactor_add_chances[master_engineer_subtype][1] + cm:get_characters_bonus_value(character, "reactor_core_chance")
+					table.insert(loot_rolls_master_engineer, {characters_chance, reactor_add_chances[master_engineer_subtype][2]});
+				end;
+			end;
+		end;
 		
 		if cm:pending_battle_cache_num_attackers() >= 1 then
 			for i = 1, cm:pending_battle_cache_num_attackers() do
 				local this_char_cqi, this_mf_cqi, current_faction_name = cm:pending_battle_cache_get_attacker(i);
-				local character = cm:get_character_by_cqi(this_char_cqi);
 				
-				if character then
-					local subtype = character:character_subtype_key();
-					
-					if character:faction():name() == ikit_faction and character:won_battle() and (subtype == ikit_subtype or subtype == master_engineer_subtype) then
-						table.insert(engineers_in_battle[subtype], this_char_cqi);
-					end;
-				end;
+				add_character_to_loot_roll(this_char_cqi, current_faction_name);
 			end;
 		end;
 		
 		if cm:pending_battle_cache_num_defenders() >= 1 then
 			for i = 1, cm:pending_battle_cache_num_defenders() do
 				local this_char_cqi, this_mf_cqi, current_faction_name = cm:pending_battle_cache_get_defender(i);
-				local character = cm:get_character_by_cqi(this_char_cqi);
 				
-				if character then
-					local subtype = character:character_subtype_key();
-					
-					if character and character:faction():name() == ikit_faction and character:won_battle() and (subtype == ikit_subtype or subtype == master_engineer_subtype) then
-						table.insert(engineers_in_battle[subtype], this_char_cqi);
-					end;
-				end;
+				add_character_to_loot_roll(this_char_cqi, current_faction_name);
 			end;
-		end;
-		
-		-- generate loot tables and check skills and other factors that affects loot chance
-		local loot_rolls_ikit = {};
-		local loot_rolls_master_engineer = {};
-		local loot_rolls_extra = {};
-		
-		for i = 1, #engineers_in_battle[ikit_subtype] do
-			table.insert(loot_rolls_ikit, reactor_add_chances[ikit_subtype]);
-			
-			if cm:get_character_by_cqi(engineers_in_battle[ikit_subtype][i]):has_skill("wh2_dlc12_skill_skv_ikit_unique_2") then
-				table.insert(loot_rolls_extra, reactor_add_chances["extra_loot"]);
-			end;
-		end;
-		
-		for i = 1, #engineers_in_battle[master_engineer_subtype] do
-			table.insert(loot_rolls_master_engineer, reactor_add_chances[master_engineer_subtype]);
 		end;
 		
 		-- process loot
-		process_reactor_loot_rolls(#loot_rolls_ikit, ikit_subtype);
-		process_reactor_loot_rolls(#loot_rolls_master_engineer, master_engineer_subtype);
-		process_reactor_loot_rolls(#loot_rolls_extra, "extra_loot");
+		process_reactor_loot_rolls(loot_rolls_ikit, ikit_subtype);
+		process_reactor_loot_rolls(loot_rolls_master_engineer, master_engineer_subtype);
 	end,
 	true
 );
 
-function process_reactor_loot_rolls(loot_rolls, index)
+function process_reactor_loot_rolls(loot_rolls, subtype_index)
 	local local_faction_name = cm:get_local_faction_name(true);
 	
-	for i = 1, loot_rolls do
-		if reactor_add_chances[index][1] * (reactor_add_chances[index][3] + 1) > cm:random_number(100) then
-			if index == engineer_subtype then
-				cm:faction_add_pooled_resource(ikit_faction, reactor_resource_key, reactor_resource_factor_key["add_alt"], reactor_add_chances[index][2]);
-				
-				if local_faction_name and local_faction_name == ikit_faction then
-					find_uicomponent(core:get_ui_root(), "hud_campaign"):InterfaceFunction("ShowPooledResourceAnimation", reactor_resource_key, reactor_add_chances[index][2]);
-				end
+	for i = 1, #loot_rolls do
+		if loot_rolls[i][1] * (reactor_add_chances[subtype_index][2] + 1) > cm:random_number(100) then
+			if subtype_index == engineer_subtype then
+				cm:faction_add_pooled_resource(ikit_faction, reactor_resource_key, reactor_resource_factor_key["add_alt"], 1);
 			else
-				cm:faction_add_pooled_resource(ikit_faction, reactor_resource_key, reactor_resource_factor_key["add"], reactor_add_chances[index][2]);
-				
-				if local_faction_name and local_faction_name == ikit_faction then
-					find_uicomponent(core:get_ui_root(), "hud_campaign"):InterfaceFunction("ShowPooledResourceAnimation", reactor_resource_key, reactor_add_chances[index][2]);
-				end;
+				cm:faction_add_pooled_resource(ikit_faction, reactor_resource_key, reactor_resource_factor_key["add"], 1);
 			end;
-			
+				
 			if local_faction_name and local_faction_name == ikit_faction then
+				find_uicomponent(core:get_ui_root(), "hud_campaign"):InterfaceFunction("ShowPooledResourceAnimation", reactor_resource_key, 1);
+				
 				find_uicomponent(core:get_ui_root(), "cores_icon"):TriggerAnimation("play");
 			end;
 			
-			reactor_add_chances[index][3] = 0; 
+			reactor_add_chances[subtype_index][2] = 0; 
 		else
-			reactor_add_chances[index][3] = reactor_add_chances[index][3] + 1;
+			reactor_add_chances[subtype_index][2] = reactor_add_chances[subtype_index][2] + 1;
 		end;
 	end;
 end;
@@ -716,7 +693,7 @@ core:add_listener(
 		return (context:mission_result_critial_success() or context:mission_result_success()) and character:character_subtype_key() == engineer_subtype and character:faction():name() == ikit_faction and context:target_character():faction():name() ~= ikit_faction;
 	end,
 	function()
-		process_reactor_loot_rolls(1, engineer_subtype);
+		process_reactor_loot_rolls({reactor_add_chances[engineer_subtype]}, engineer_subtype);
 	end,
 	true
 );
@@ -729,7 +706,7 @@ core:add_listener(
 		return (context:mission_result_critial_success() or context:mission_result_success()) and character:character_subtype_key() == engineer_subtype and character:faction():name() == ikit_faction;
 	end,
 	function()
-		process_reactor_loot_rolls(1, engineer_subtype);
+		process_reactor_loot_rolls({reactor_add_chances[engineer_subtype]}, engineer_subtype);
 	end,
 	true
 );
@@ -799,6 +776,7 @@ cm:add_loading_game_callback(
 			workshop_category_progress = cm:load_named_value("workshop_category_progress", workshop_category_progress, context);
 			initialized = cm:load_named_value("initialized", false, context);
 			nuke_drop_chance_current = cm:load_named_value("nuke_drop_chance_current", 0, context);
+			reactor_add_chances = cm:load_named_value("reactor_add_chances", reactor_add_chances, context);
 			workshop_rite_details = cm:load_named_value("workshop_rite_details", workshop_rite_details, context);
 		end;
 	end

@@ -28,6 +28,9 @@ regiments_of_renown = {
 		"wh2_dlc13_emp_inf_archers_ror_0",
 		"wh2_dlc13_emp_inf_huntsmen_ror_0",
 		"wh2_dlc13_emp_veh_war_wagon_ror_0",
+		"wh3_dlc25_emp_inf_nuln_ironsides_ror",
+		"wh3_dlc25_emp_inf_spearmen_shields_ror",
+		"wh3_dlc25_emp_veh_marienburg_land_ship_ror"
 	},
 	------------------
 	---- VAMPIRES ----
@@ -56,7 +59,10 @@ regiments_of_renown = {
 		"wh_dlc06_dwf_inf_peak_gate_guard_0",
 		"wh_dlc06_dwf_inf_ulthars_raiders_0",
 		"wh_dlc06_dwf_inf_warriors_dragonfire_pass_0",
-		"wh_dlc06_dwf_veh_skyhammer_0"
+		"wh_dlc06_dwf_veh_skyhammer_0",
+		"wh3_dlc25_dwf_art_flame_cannon_ror",
+		"wh3_dlc25_dwf_inf_doomseekers_ror",
+		"wh3_dlc25_dwf_inf_thunderers_ror"
 	},
 	--------------------
 	---- GREENSKINS ----
@@ -220,7 +226,10 @@ regiments_of_renown = {
 		"wh3_twa06_nur_inf_plaguebearers_ror_0",
 		"wh3_twa07_nur_cav_pox_riders_of_nurgle_ror_0",
 		"wh3_twa08_nur_mon_great_unclean_one_0_ror",
-		"wh3_twa10_nur_inf_nurglings_ror"
+		"wh3_twa10_nur_inf_nurglings_ror",
+		"wh3_dlc25_nur_cav_rot_knights_ror",
+		"wh3_dlc25_nur_mon_soul_grinder_0_ror",
+		"wh3_dlc25_nur_cav_plague_drones_1_ror"
 	},
 	-----------------------
 	---- OGRE KINGDOMS ----

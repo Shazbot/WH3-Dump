@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -73,7 +73,7 @@
 		<panel_title
 			this="FDB22D72-3A80-497C-9259D5209441E070"
 			id="panel_title"
-			offset="132.00,-25.00"
+			offset="100.00,-25.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			docking="Top Center"
@@ -94,7 +94,7 @@
 				<newstate
 					this="7BA992BD-BFE4-45E9-A65A6472924B4E75"
 					name="NewState"
-					width="635"
+					width="700"
 					height="59"
 					uniqueguid="7BA992BD-BFE4-45E9-A65A6472924B4E75">
 					<imagemetrics>
@@ -102,8 +102,8 @@
 							this="2F0CBC38-642D-4E01-80C5A0D1C2DBF4D0"
 							uniqueguid="2F0CBC38-642D-4E01-80C5A0D1C2DBF4D0"
 							componentimage="977C5569-4E23-4E4A-AB855000F6241DF4"
-							offset="-20.00,0.00"
-							width="675"
+							offset="-22.00,0.00"
+							width="744"
 							height="59"
 							tile="true"
 							dockpoint="Center"
@@ -1224,7 +1224,7 @@
 		<button_txt
 			this="7048EFE6-0D9C-44E2-9548370A15554B21"
 			id="button_txt"
-			offset="125.00,4.00"
+			offset="142.00,4.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			docking="Center"
@@ -1245,7 +1245,7 @@
 				<active
 					this="F59E00A4-EDDF-48F5-89BCDBC8DB9BCA60"
 					name="active"
-					width="384"
+					width="416"
 					height="51"
 					uniqueguid="F59E00A4-EDDF-48F5-89BCDBC8DB9BCA60">
 					<component_text
@@ -1264,7 +1264,7 @@
 				<inactive
 					this="5C33350A-3E75-461E-A0A4B1A2C42028F4"
 					name="inactive"
-					width="384"
+					width="416"
 					height="51"
 					uniqueguid="5C33350A-3E75-461E-A0A4B1A2C42028F4">
 					<component_text
@@ -1354,7 +1354,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignEventFeedMessageDetails"
-					context_function_id="HasSepiaFade == false &amp;&amp; CampaignRoot.IsPrologue"/>
+					context_function_id="UseRevealingText == false &amp;&amp; CampaignRoot.IsPrologue"/>
 				<callback_with_context callback_id="Textview"/>
 			</callbackwithcontextlist>
 			<userproperties>
@@ -2271,6 +2271,16 @@
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignEventFeedMessageDetails"
 					context_function_id="FileExists(&quot;movies/&quot; + MoviePath)"/>
+				<callback_with_context
+					callback_id="ContextCommandEvent"
+					context_object_id="CcoCampaignEventFeedMessageDetails"
+					context_function_id="self.PropagateContext(this)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="MoviePlaybackFinished_dy_movie_frame"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -2378,7 +2388,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignEventFeedMessageDetails"
-					context_function_id="CampaignRoot.IsPrologue == false &amp;&amp; HasSepiaFade == false"/>
+					context_function_id="CampaignRoot.IsPrologue == false &amp;&amp; UseRevealingText == false"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -2440,6 +2450,10 @@
 					callback_id="ContextImageSetter"
 					context_object_id="CcoCampaignEventFeedMessageDetails"
 					context_function_id="ImagePath"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignEventFeedMessageDetails"
+					context_function_id="FileExists(ImagePath)"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -2690,7 +2704,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignEventFeedMessageDetails"
-					context_function_id="HasSepiaFade"/>
+					context_function_id="UseRevealingText"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property

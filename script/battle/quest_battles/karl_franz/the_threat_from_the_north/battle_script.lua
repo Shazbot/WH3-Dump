@@ -31,7 +31,6 @@ Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
 
 -------ARMY SETUP-------
 ga_ai_01 = gb:get_army(gb:get_non_player_alliance_num(), "defenders"); -- Initial Force
-ga_ai_01_r1 = gb:get_army(gb:get_non_player_alliance_num(), "reinforcement_1"); -- Reinforcements
 ga_ai_02 = gb:get_army(gb:get_non_player_alliance_num(), "reinforcement_2"); -- Reinforcements
 ga_ai_02_r1	= gb:get_army(gb:get_non_player_alliance_num(), "reinforcement_3"); -- Reinforcements
 ga_ai_02_r2	= gb:get_army(gb:get_non_player_alliance_num(), "reinforcement_4"); -- Reinforcements
@@ -44,33 +43,25 @@ gb:set_objective_on_message("deployment_started", "wh_main_qb_objective_defend_d
 
 -------HINTS-------
 gb:queue_help_on_message("battle_started", "wh_main_qb_emp_karl_franz_reikland_runefang_stage_3_hint_objective");
-
---gb:play_sound_on_message("reinforcements_1", Orc_Horn, v(-300, 100, -660), 2000);
 gb:queue_help_on_message("reinforcements_2", "wh_main_qb_emp_karl_franz_reikland_runefang_stage_3_hint_reinforcements", 13000, 2000, 2000);
-
---gb:play_sound_on_message("reinforcements_4", Orc_Horn, v(-300, 100, -660), 2000);
 gb:queue_help_on_message("reinforcements_4", "wh_main_qb_emp_karl_franz_reikland_runefang_stage_3_hint_reinforcements_2", 13000, 2000, 2000);
 
 -------ORDERS-------
 ga_ai_01:attack_on_message("battle_started");
 
-gb:message_on_time_offset("reinforcements_1", 60000);
-gb:message_on_time_offset("reinforcements_2", 240000);
-gb:message_on_time_offset("reinforcements_3", 487500);
-gb:message_on_time_offset("reinforcements_4", 511000);
-gb:message_on_time_offset("reinforcements_5", 524200);
-gb:message_on_time_offset("reinforcements_6", 531200);
+ga_ai_01:message_on_casualties("reinforcements_2", 0.7)
+ga_ai_02:message_on_casualties("reinforcements_3", 0.3)
+ga_ai_02:message_on_casualties("reinforcements_4", 0.7)
+ga_ai_03:message_on_casualties("reinforcements_5", 0.3)
 
-ga_ai_01_r1:reinforce_on_message("reinforcements_1");
 ga_ai_02:reinforce_on_message("reinforcements_2");	
 ga_ai_02_r1:reinforce_on_message("reinforcements_3");
-ga_ai_02_r2:reinforce_on_message("reinforcements_4");
-ga_ai_03:reinforce_on_message("reinforcements_5");
-ga_ai_03_r1:reinforce_on_message("reinforcements_6");
+ga_ai_02_r2:reinforce_on_message("reinforcements_3");
+ga_ai_03:reinforce_on_message("reinforcements_4");
+ga_ai_03_r1:reinforce_on_message("reinforcements_5");
 
-ga_ai_01_r1:rush_on_message("reinforcements_1");
 ga_ai_02:rush_on_message("reinforcements_2");
 ga_ai_02_r1:rush_on_message("reinforcements_3");
-ga_ai_02_r2:rush_on_message("reinforcements_4");
-ga_ai_03:rush_on_message("reinforcements_5");
-ga_ai_03_r1:rush_on_message("reinforcements_6");
+ga_ai_02_r2:rush_on_message("reinforcements_3");
+ga_ai_03:rush_on_message("reinforcements_4");
+ga_ai_03_r1:rush_on_message("reinforcements_5");

@@ -403,7 +403,7 @@ local help_panel_position_overrides_campaign = {
 		["x"] = 5,
 		["y"] = -20
 	},
-	book_of_grudges = {
+	dlc25_bog_main = {
 		["x"] = 5,
 		["y"] = -5
 	},
@@ -532,6 +532,11 @@ local help_panel_position_overrides_campaign = {
 	
 	dlc24_witches_hut = {
 		["x"] = 5,
+		["y"] = 5
+	},
+
+	dlc25_don_main = {
+		["x"] = -5,
 		["y"] = 5
 	}
 };

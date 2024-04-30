@@ -208,6 +208,7 @@ function campaign_ui_manager:load_ui_overrides()
 		-- sally_forth_button
 		-- subjugation_button
 		-- occupy_button
+		-- postbattle_gift_button
 		-- raze_button
 		-- loot_button
 		-- sack_button
@@ -1196,6 +1197,19 @@ function campaign_ui_manager:load_ui_overrides()
 		end,
 		function()
 			cm:override_ui("disable_postbattle_occupy_button", false);
+		end
+	);
+
+	-------------------------------
+	-- postbattle_gift_button
+	-------------------------------
+	ui_overrides.postbattle_gift_button = ui_override:new(
+		"postbattle_gift_button",
+		function()
+			cm:override_ui("disable_postbattle_gift_button", true);
+		end,
+		function()
+			cm:override_ui("disable_postbattle_gift_button", false);
 		end
 	);
 	

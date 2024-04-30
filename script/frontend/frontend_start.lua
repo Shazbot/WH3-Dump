@@ -190,7 +190,7 @@ function set_custom_loading_screen(intro_enabled)
 								out("set_custom_loading_screen() is overriding loading screen with text key [" .. loading_screen .. "], first-turn intro is enabled");
 								common.set_custom_loading_screen_key(loading_screen);
 							else
-								script_error("ERROR: set_custom_loading_screen() called, but couldn't find a loading screen override for character with start pos id " .. start_pos_id .. " (first-turn intro is enabled)");
+								script_error("ERROR: set_custom_loading_screen() called, but couldn't find a loading screen override for character with start pos id " .. start_pos_id .. " (first-turn intro is enabled) - please add it to script/frontend/frontend_custom_loading_screens.lua");
 							end;
 						else
 							local loading_screen = custom_loading_screens_no_intro[start_pos_id];
@@ -198,7 +198,7 @@ function set_custom_loading_screen(intro_enabled)
 								out("set_custom_loading_screen() is overriding loading screen with text key [" .. loading_screen .. "], starting normal campaign without first-turn intro");
 								common.set_custom_loading_screen_key(loading_screen);
 							else
-								script_error("ERROR: set_custom_loading_screen() called, but couldn't find a loading screen override for character with start pos id " .. start_pos_id .. " (normal campaign without first-turn intro)");
+								script_error("ERROR: set_custom_loading_screen() called, but couldn't find a loading screen override for character with start pos id " .. start_pos_id .. " (normal campaign without first-turn intro) - please add it to script/frontend/frontend_custom_loading_screens.lua");
 							end;
 						end;
 						

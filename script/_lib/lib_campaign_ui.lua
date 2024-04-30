@@ -103,7 +103,14 @@ local panels_blocking = {
 	"dlc24_jade_compass",
 	"dlc24_matters_of_state",
 	"dlc24_witches_hut",
-	"dlc24_schemes"
+	"dlc24_schemes",
+	"dlc25_don_main",
+	"dlc25_tamurkhan_chieftains",
+	"dlc25_malakai_oaths",
+	"dlc25_bog_main",
+	"dlc25_college_of_magic",
+	"dlc25_electoral_machinations",
+	"dlc25_nurgle_plagues",
 };
 
 -- Panels for which a PanelOpenedCampaign event is sent to script, but the panel should not block interventions or be considered by cm:progress_on_blocking_panel_dismissed()
@@ -120,7 +127,8 @@ local panels_not_blocking = {
 	"malus_quest_details",
 	"sea_lanes",
 	"chd_end_game_teleport",
-	"dlc24_hex_rituals"
+	"dlc24_hex_rituals",
+	"dlc25_nemesis_crown",
 };
 
 
@@ -4015,6 +4023,37 @@ function campaign_ui_manager:highlight_chivalry(value, pulse_strength, force_hig
 	return false;
 end;
 
+--- @function highlight_electoral_machinations
+--- @desc Highlights the Electoral Machinations. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
+--- @p [opt=false] boolean show highlight, Show highlight.
+--- @p [opt=nil] number pulse strength override, Pulse Strength Override. Default is 10 for smaller components such as buttons, and 5 for larger components such as panels. Set a higher number for a more pronounced pulsing.
+--- @p [opt=false] boolean force highlight, Forces the highlight to show even if the <code>help_page_link_highlighting</code> ui override is set.
+function campaign_ui_manager:highlight_electoral_machinations(value, pulse_strength, force_highlight)
+	if not self.help_page_link_highlighting_permitted and not force_highlight then
+		return;
+	end;
+	
+	local ui_root = core:get_ui_root();
+	local pulse_strength_to_use = pulse_strength or self.panel_pulse_strength;
+	
+	local uic_panel = find_uicomponent(ui_root, "dlc25_electoral_machinations");
+	if uic_panel and uic_panel:Visible(true) then
+		pulse_uicomponent(uic_panel, value, pulse_strength_to_use, true);
+		
+		if value then
+			table.insert(self.unhighlight_action_list, function() self:highlight_electoral_machinations(false, pulse_strength_to_use, force_highlight) end);
+		end;
+	else
+		local uic_button = find_uicomponent(ui_root, "hud_campaign", "faction_buttons_docker", "button_electoral_machinations");
+		if uic_button and uic_button:Visible(true) then
+			pulse_uicomponent(uic_button, value, pulse_strength_to_use or self.panel_pulse_strength, true);
+			
+			if value then
+				table.insert(self.unhighlight_action_list, function() self:highlight_electoral_machinations(false) end);
+			end;
+		end;
+	end;
+end;
 
 --- @function highlight_commandments
 --- @desc Highlights commandments. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
@@ -4335,6 +4374,38 @@ end;
 --- @p [opt=false] boolean force highlight, Forces the highlight to show even if the <code>help_page_link_highlighting</code> ui override is set.
 function campaign_ui_manager:highlight_dynasties_panel(value, pulse_strength, force_highlight)
 	return self:highlight_technology_panel(value, pulse_strength, force_highlight);
+end;
+
+--- @function highlight_colleges_of_magic
+--- @desc Highlights the Colleges of Magic. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
+--- @p [opt=false] boolean show highlight, Show highlight.
+--- @p [opt=nil] number pulse strength override, Pulse Strength Override. Default is 10 for smaller components such as buttons, and 5 for larger components such as panels. Set a higher number for a more pronounced pulsing.
+--- @p [opt=false] boolean force highlight, Forces the highlight to show even if the <code>help_page_link_highlighting</code> ui override is set.
+function campaign_ui_manager:highlight_colleges_of_magic(value, pulse_strength, force_highlight)
+	if not self.help_page_link_highlighting_permitted and not force_highlight then
+		return;
+	end;
+	
+	local ui_root = core:get_ui_root();
+	local pulse_strength_to_use = pulse_strength or self.panel_pulse_strength;
+	
+	local uic_panel = find_uicomponent(ui_root, "dlc25_college_of_magic");
+	if uic_panel and uic_panel:Visible(true) then
+		pulse_uicomponent(uic_panel, value, pulse_strength_to_use, true);
+		
+		if value then
+			table.insert(self.unhighlight_action_list, function() self:highlight_colleges_of_magic(false, pulse_strength_to_use, force_highlight) end);
+		end;
+	else
+		local uic_button = find_uicomponent(ui_root, "hud_campaign", "faction_buttons_docker", "button_college_of_magic");
+		if uic_button and uic_button:Visible(true) then
+			pulse_uicomponent(uic_button, value, pulse_strength_to_use or self.panel_pulse_strength, true);
+			
+			if value then
+				table.insert(self.unhighlight_action_list, function() self:highlight_colleges_of_magic(false) end);
+			end;
+		end;
+	end;
 end;
 
 
@@ -5081,6 +5152,38 @@ function campaign_ui_manager:highlight_forging_magic_items_panel(value, pulse_st
 	return false;
 end;
 
+--- @function highlight_gardens_of_morr
+--- @desc Highlights the Gardens of Morr. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
+--- @p [opt=false] boolean show highlight, Show highlight.
+--- @p [opt=nil] number pulse strength override, Pulse Strength Override. Default is 10 for smaller components such as buttons, and 5 for larger components such as panels. Set a higher number for a more pronounced pulsing.
+--- @p [opt=false] boolean force highlight, Forces the highlight to show even if the <code>help_page_link_highlighting</code> ui override is set.
+function campaign_ui_manager:highlight_gardens_of_morr(value, pulse_strength, force_highlight)
+	if not self.help_page_link_highlighting_permitted and not force_highlight then
+		return;
+	end;
+	
+	local ui_root = core:get_ui_root();
+	local pulse_strength_to_use = pulse_strength or self.panel_pulse_strength;
+	
+	local uic_panel = find_uicomponent(ui_root, "dlc25_black_towers");
+	if uic_panel and uic_panel:Visible(true) then
+		pulse_uicomponent(uic_panel, value, pulse_strength_to_use, true);
+		
+		if value then
+			table.insert(self.unhighlight_action_list, function() self:highlight_gardens_of_morr(false, pulse_strength_to_use, force_highlight) end);
+		end;
+	else
+		local uic_button = find_uicomponent(ui_root, "hud_campaign", "faction_buttons_docker", "button_black_tower");
+		if uic_button and uic_button:Visible(true) then
+			pulse_uicomponent(uic_button, value, pulse_strength_to_use or self.panel_pulse_strength, true);
+			
+			if value then
+				table.insert(self.unhighlight_action_list, function() self:highlight_gardens_of_morr(false) end);
+			end;
+		end;
+	end;
+end;
+
 
 --- @function highlight_garrison_armies
 --- @desc Highlights garrison army unit cards on the army panel. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
@@ -5593,7 +5696,7 @@ function campaign_ui_manager:highlight_horde_buildings(value, pulse_strength, fo
 	local uic_tab = find_uicomponent(ui_root, "units_panel", "main_units_panel", "tabgroup", "tab_horde_buildings");
 	
 	if uic_tab and uic_tab:Visible(true) and uic_tab:CurrentState() == "selected" then
-		local uic_settlements = find_uicomponent(ui_root, "units_panel", "main_units_panel", "horde_building_frame", "settlement_parent");
+		local uic_settlements = find_uicomponent(ui_root, "units_panel", "main_units_panel", "horde_building_frame", "horde_slot_list");
 		
 		pulse_uicomponent(uic_settlements, value, pulse_strength or self.button_pulse_strength, true);
 		if value then
@@ -5602,6 +5705,39 @@ function campaign_ui_manager:highlight_horde_buildings(value, pulse_strength, fo
 		return true;
 	elseif not do_not_highlight_upstream then
 		self:highlight_building_panel_tab(value, pulse_strength, force_highlight);
+	end;
+end;
+
+
+--- @function highlight_imperial_gunnery_school
+--- @desc Highlights the Imperial Gunnery School. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
+--- @p [opt=false] boolean show highlight, Show highlight.
+--- @p [opt=nil] number pulse strength override, Pulse Strength Override. Default is 10 for smaller components such as buttons, and 5 for larger components such as panels. Set a higher number for a more pronounced pulsing.
+--- @p [opt=false] boolean force highlight, Forces the highlight to show even if the <code>help_page_link_highlighting</code> ui override is set.
+function campaign_ui_manager:highlight_imperial_gunnery_school(value, pulse_strength, force_highlight)
+	if not self.help_page_link_highlighting_permitted and not force_highlight then
+		return;
+	end;
+	
+	local ui_root = core:get_ui_root();
+	local pulse_strength_to_use = pulse_strength or self.panel_pulse_strength;
+	
+	local uic_panel = find_uicomponent(ui_root, "dlc25_don_main");
+	if uic_panel and uic_panel:Visible(true) then
+		pulse_uicomponent(uic_panel, value, pulse_strength_to_use, true);
+		
+		if value then
+			table.insert(self.unhighlight_action_list, function() self:highlight_imperial_gunnery_school(false, pulse_strength_to_use, force_highlight) end);
+		end;
+	else
+		local uic_button = find_uicomponent(ui_root, "hud_campaign", "faction_buttons_docker", "button_districts_of_nuln");
+		if uic_button and uic_button:Visible(true) then
+			pulse_uicomponent(uic_button, value, pulse_strength_to_use or self.panel_pulse_strength, true);
+			
+			if value then
+				table.insert(self.unhighlight_action_list, function() self:highlight_imperial_gunnery_school(false) end);
+			end;
+		end;
 	end;
 end;
 
@@ -5969,6 +6105,41 @@ function campaign_ui_manager:highlight_lords_pre_battle_screen(value, pulse_stre
 		table.insert(self.unhighlight_action_list, function() self:highlight_lords_pre_battle_screen(false, pulse_strength, force_highlight, reinforcements_only) end);
 	end;
 end;
+
+
+
+--- @function highlight_malakais_adventures
+--- @desc Highlights the malakai's adventures. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
+--- @p [opt=false] boolean show highlight, Show highlight.
+--- @p [opt=nil] number pulse strength override, Pulse Strength Override. Default is 10 for smaller components such as buttons, and 5 for larger components such as panels. Set a higher number for a more pronounced pulsing.
+--- @p [opt=false] boolean force highlight, Forces the highlight to show even if the <code>help_page_link_highlighting</code> ui override is set.
+function campaign_ui_manager:highlight_malakais_adventures(value, pulse_strength, force_highlight)
+	if not self.help_page_link_highlighting_permitted and not force_highlight then
+		return;
+	end;
+	
+	local ui_root = core:get_ui_root();
+	local pulse_strength_to_use = pulse_strength or self.panel_pulse_strength;
+	
+	local uic_panel = find_uicomponent(ui_root, "dlc25_malakai_oaths");
+	if uic_panel and uic_panel:Visible(true) then
+		pulse_uicomponent(uic_panel, value, pulse_strength_to_use, true);
+		
+		if value then
+			table.insert(self.unhighlight_action_list, function() self:highlight_malakais_adventures(false, pulse_strength_to_use, force_highlight) end);
+		end;
+	else
+		local uic_button = find_uicomponent(ui_root, "hud_campaign", "resources_bar_holder", "resources_bar", "dwf_malakai_adventures", "button_diamond");
+		if uic_button and uic_button:Visible(true) then
+			pulse_uicomponent(uic_button, value, pulse_strength_to_use or self.panel_pulse_strength, true);
+			
+			if value then
+				table.insert(self.unhighlight_action_list, function() self:highlight_malakais_adventures(false) end);
+			end;
+		end;
+	end;
+end;
+
 
 
 --- @function highlight_military_convoys
@@ -8198,6 +8369,102 @@ function campaign_ui_manager:highlight_slaves_buttons(value, pulse_strength, for
 end;
 
 
+--- @function highlight_spirit_of_grungni_button
+--- @desc Highlights the spirit of grungni tab on the army panel. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
+--- @p [opt=false] boolean show highlight, Show highlight.
+--- @p [opt=nil] number pulse strength override, Pulse Strength Override. Default is 10 for smaller components such as buttons, and 5 for larger components such as panels. Set a higher number for a more pronounced pulsing.
+--- @p [opt=false] boolean force highlight, Forces the highlight to show even if the <code>help_page_link_highlighting</code> ui override is set.
+function campaign_ui_manager:highlight_spirit_of_grungni_button(value, pulse_strength, force_highlight)
+	if not self.help_page_link_highlighting_permitted and not force_highlight then
+		return;
+	end;
+
+	local uic_tab = find_uicomponent(core:get_ui_root(), "units_panel", "main_units_panel", "tabgroup", "tab_horde_buildings");
+	
+	if uic_tab and uic_tab:Visible(true) then
+		pulse_uicomponent(uic_tab, value, pulse_strength or self.button_pulse_strength);
+	
+		if value then
+			table.insert(self.unhighlight_action_list, function() self:highlight_spirit_of_grungni_button(false, pulse_strength, force_highlight) end);
+		end;
+	else
+		self:highlight_armies(value, pulse_strength, force_highlight);
+	end;
+	
+	return false;
+end;
+
+
+--- @function highlight_spirit_of_grungni_panel
+--- @desc Highlights the spirit of grungni panel. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
+--- @p [opt=false] boolean show highlight, Show highlight.
+--- @p [opt=nil] number pulse strength override, Pulse Strength Override. Default is 10 for smaller components such as buttons, and 5 for larger components such as panels. Set a higher number for a more pronounced pulsing.
+--- @p [opt=false] boolean force highlight, Forces the highlight to show even if the <code>help_page_link_highlighting</code> ui override is set.
+--- @p [opt=false] boolean dont highlight upstream, Suppress highlighting of any upstream components if this one is not currently visible.
+function campaign_ui_manager:highlight_spirit_of_grungni_panel(value, pulse_strength, force_highlight, do_not_highlight_upstream)
+	if not self.help_page_link_highlighting_permitted and not force_highlight then
+		return;
+	end;
+
+	local ui_root = core:get_ui_root();
+	local uic_tab = find_uicomponent(ui_root, "units_panel", "main_units_panel", "tabgroup", "tab_horde_buildings");
+	
+	if uic_tab and uic_tab:Visible(true) and uic_tab:CurrentState() == "selected" then
+	
+		pulse_strength = pulse_strength or self.panel_pulse_strength;
+	
+		local uic_panel = find_uicomponent(ui_root, "units_panel", "main_units_panel");
+		pulse_uicomponent(uic_panel, value, pulse_strength);
+		
+		-- frame
+		local uic_frame = find_uicomponent(uic_panel, "frame");
+		if uic_frame then
+			pulse_uicomponent(uic_frame, value, pulse_strength);
+		end;
+		
+		-- header
+		local uic_header = find_uicomponent(uic_panel, "header");
+		if uic_header then
+			pulse_uicomponent(uic_header, value, pulse_strength, true);
+		end;
+		
+		-- building frame
+		local uic_building_frame = find_uicomponent(uic_panel, "horde_building_frame");
+		if uic_building_frame then
+			
+			-- background
+			local uic_background = find_uicomponent(uic_building_frame, "panorama");
+			if uic_background then
+				pulse_uicomponent(uic_background, value, pulse_strength);
+			end;
+			
+			-- growth
+			local uic_growth = find_uicomponent(uic_building_frame, "pop_surplus");
+			if uic_growth then
+				pulse_uicomponent(uic_growth, value, pulse_strength, true);
+			end;
+			
+			-- income
+			local uic_income = find_uicomponent(uic_building_frame, "dy_income");
+			if uic_income then
+				pulse_uicomponent(uic_income, value, pulse_strength, true);
+			end;
+		end;
+
+		if value then
+			self:highlight_horde_buildings(value,  pulse_strength, force_highlight, true);
+			table.insert(self.unhighlight_action_list, function() self:highlight_spirit_of_grungni_panel(false, pulse_strength, force_highlight) end);
+		end;
+		return true;
+	elseif not do_not_highlight_upstream then
+		self:highlight_spirit_of_grungni_button(value, pulse_strength, force_highlight);
+	end;
+	
+	return false;
+end;
+
+
+
 --- @function highlight_stances
 --- @desc Highlights the stances rollout. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
 --- @p [opt=false] boolean show highlight, Show highlight.
@@ -8309,6 +8576,69 @@ function campaign_ui_manager:highlight_tax(value, pulse_strength, force_highligh
 	end;
 	
 	return false;
+end;
+
+--- @function highlight_tally_of_pestilence
+--- @desc Highlights the Tally of Pestilence. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
+--- @p [opt=false] boolean show highlight, Show highlight.
+--- @p [opt=nil] number pulse strength override, Pulse Strength Override. Default is 10 for smaller components such as buttons, and 5 for larger components such as panels. Set a higher number for a more pronounced pulsing.
+--- @p [opt=false] boolean force highlight, Forces the highlight to show even if the <code>help_page_link_highlighting</code> ui override is set.
+function campaign_ui_manager:highlight_tally_of_pestilence(value, pulse_strength, force_highlight)
+	if not self.help_page_link_highlighting_permitted and not force_highlight then
+		return;
+	end;
+	
+	local ui_root = core:get_ui_root();
+	local pulse_strength_to_use = pulse_strength or self.panel_pulse_strength;
+	
+	local uic_panel = find_uicomponent(ui_root, "dlc25_tally_of_pestilence");
+	if uic_panel and uic_panel:Visible(true) then
+		pulse_uicomponent(uic_panel, value, pulse_strength_to_use, true);
+		
+		if value then
+			table.insert(self.unhighlight_action_list, function() self:highlight_tally_of_pestilence(false, pulse_strength_to_use, force_highlight) end);
+		end;
+	else
+		local uic_button = find_uicomponent(ui_root, "hud_campaign", "faction_buttons_docker", "button_tally_of_pestilence");
+		if uic_button and uic_button:Visible(true) then
+			pulse_uicomponent(uic_button, value, pulse_strength_to_use or self.panel_pulse_strength, true);
+			
+			if value then
+				table.insert(self.unhighlight_action_list, function() self:highlight_tally_of_pestilence(false) end);
+			end;
+		end;
+	end;
+end;
+--- @function highlight_tamurkhans_chieftains
+--- @desc Highlights the Tamurkhans's Chieftains. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
+--- @p [opt=false] boolean show highlight, Show highlight.
+--- @p [opt=nil] number pulse strength override, Pulse Strength Override. Default is 10 for smaller components such as buttons, and 5 for larger components such as panels. Set a higher number for a more pronounced pulsing.
+--- @p [opt=false] boolean force highlight, Forces the highlight to show even if the <code>help_page_link_highlighting</code> ui override is set.
+function campaign_ui_manager:highlight_tamurkhans_chieftains(value, pulse_strength, force_highlight)
+	if not self.help_page_link_highlighting_permitted and not force_highlight then
+		return;
+	end;
+	
+	local ui_root = core:get_ui_root();
+	local pulse_strength_to_use = pulse_strength or self.panel_pulse_strength;
+	
+	local uic_panel = find_uicomponent(ui_root, "dlc25_tamurkhans_chieftains");
+	if uic_panel and uic_panel:Visible(true) then
+		pulse_uicomponent(uic_panel, value, pulse_strength_to_use, true);
+		
+		if value then
+			table.insert(self.unhighlight_action_list, function() self:highlight_tamurkhans_chieftains(false, pulse_strength_to_use, force_highlight) end);
+		end;
+	else
+		local uic_button = find_uicomponent(ui_root, "hud_campaign", "faction_buttons_docker", "button_tamurkhans_chiefs");
+		if uic_button and uic_button:Visible(true) then
+			pulse_uicomponent(uic_button, value, pulse_strength_to_use or self.panel_pulse_strength, true);
+			
+			if value then
+				table.insert(self.unhighlight_action_list, function() self:highlight_tamurkhans_chieftains(false) end);
+			end;
+		end;
+	end;
 end;
 
 

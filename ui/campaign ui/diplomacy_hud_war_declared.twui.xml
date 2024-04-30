@@ -20,7 +20,6 @@
 					</text_list>
 				</panel_subtitle>
 				<faction_left_name this="B54423AF-6D73-41C2-B3603586BBBAC0F4"/>
-				<warning this="1E1107CF-9DBA-470F-8F8F74AE2BECB3E7"/>
 				<allies_parent this="AA92643A-6B41-4598-9F13FE70524877A3">
 					<checkbox_call_allies this="11B51005-F768-4FD7-A733EBD9FD79CE45">
 						<call_help_tx this="5BF0AD50-B3F9-4EE0-92430A5536B3C572"/>
@@ -94,6 +93,10 @@
 				</their_allies_refused_tx>
 				<label_waiting_on_war_response this="7F00C48B-DEDD-4E0F-89CB4F1363FF24EB"/>
 				<opponent_settlement_number this="795F8ECC-BCFF-4B19-88C623D1B59BF7DB"/>
+				<warning_holder this="65CFF818-B5B2-42FB-A494D0CE208827C1">
+					<effect_bundle_container this="3CB5439B-92E8-4C2A-B92E4C0DE0457A2F"/>
+					<warning this="1E1107CF-9DBA-470F-8F8F74AE2BECB3E7"/>
+				</warning_holder>
 			</diplomacy_hud_war_declared>
 		</root>
 	</hierarchy>
@@ -1707,6 +1710,7 @@
 			offset="436.00,0.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
+			visible="false"
 			priority="50"
 			tooltipslocalised="true"
 			uniqueguid="4BB6BEBA-6FEE-42AA-BE11E0331C3FCC98"
@@ -1900,6 +1904,7 @@
 			offset="437.00,0.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
+			visible="false"
 			priority="50"
 			tooltipslocalised="true"
 			uniqueguid="8CC75878-5C68-4FD7-96657318D3DDB567"
@@ -2256,9 +2261,10 @@
 		<icon_kislev_devotion_warning
 			this="D0C1EC49-78A8-4307-8FB836DC494B37FF"
 			id="icon_kislev_devotion_warning"
-			offset="438.00,0.00"
+			offset="437.00,0.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
+			visible="false"
 			priority="50"
 			tooltipslocalised="true"
 			uniqueguid="D0C1EC49-78A8-4307-8FB836DC494B37FF"
@@ -5717,12 +5723,8 @@
 		<warning
 			this="1E1107CF-9DBA-470F-8F8F74AE2BECB3E7"
 			id="warning"
-			offset="30.00,-96.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
-			docking="Top Center"
-			dock_offset="0.00,-96.00"
-			component_anchor_point="0.50,0.00"
 			tooltipslocalised="true"
 			uniqueguid="1E1107CF-9DBA-470F-8F8F74AE2BECB3E7"
 			currentstate="F342B3F8-1E2B-4E2D-8842E9B0E8924BF7"
@@ -5931,5 +5933,67 @@
 				</newstate>
 			</states>
 		</your_allies_tx>
+		<effect_bundle_container
+			this="3CB5439B-92E8-4C2A-B92E4C0DE0457A2F"
+			id="effect_bundle_container"
+			offset="130.00,70.00"
+			visible="false"
+			tooltipslocalised="true"
+			uniqueguid="3CB5439B-92E8-4C2A-B92E4C0DE0457A2F"
+			currentstate="4BCBED12-8AE2-4954-A28CBAF5ABDFFC45"
+			defaultstate="4BCBED12-8AE2-4954-A28CBAF5ABDFFC45">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="ComponentCreator">
+					<child_m_user_properties>
+						<property
+							name="layout"
+							value="ui/common ui/tooltip_effect_bundle"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="4BCBED12-8AE2-4954-A28CBAF5ABDFFC45"
+					name="default"
+					width="1"
+					height="1"
+					uniqueguid="4BCBED12-8AE2-4954-A28CBAF5ABDFFC45"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="32"/>
+				</columnwidths>
+			</LayoutEngine>
+		</effect_bundle_container>
+		<warning_holder
+			this="65CFF818-B5B2-42FB-A494D0CE208827C1"
+			id="warning_holder"
+			offset="30.00,-93.00"
+			docking="Top Center External"
+			dock_offset="0.00,-23.00"
+			component_anchor_point="0.50,1.00"
+			tooltipslocalised="true"
+			uniqueguid="65CFF818-B5B2-42FB-A494D0CE208827C1"
+			currentstate="00065DC5-C8C8-48E0-97DEF502DED7E0A4"
+			defaultstate="00065DC5-C8C8-48E0-97DEF502DED7E0A4">
+			<states>
+				<default
+					this="00065DC5-C8C8-48E0-97DEF502DED7E0A4"
+					name="default"
+					width="700"
+					height="70"
+					uniqueguid="00065DC5-C8C8-48E0-97DEF502DED7E0A4"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true"
+				horizontal_alignment="Center">
+				<columnwidths>
+					<column width="32"/>
+				</columnwidths>
+			</LayoutEngine>
+		</warning_holder>
 	</components>
 </layout>

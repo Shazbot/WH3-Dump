@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -112,9 +112,17 @@
 									</health_barrier_bar>
 									<damaged_max this="9FF1AA27-D2D5-4285-822561D96B86F21A"/>
 								</health_bar>
-								<hit_points this="375F9A6E-1D5D-4090-83E70131DFC71BC5">
-									<icon this="B40C8587-DAB5-444C-BA473021C5A2943C"/>
-								</hit_points>
+								<holder_values this="1FBF793E-C030-4078-B8FD7016B79A4437">
+									<holder_barrier this="56F523E6-40AB-41A7-9EA09507B3B2B68F">
+										<icon this="F3426D3F-F3AC-4A06-9272E546E50FC9ED"/>
+										<barrier_hit_points this="38E19D04-6C2E-41B9-ADC1104BAFD3E4BB"/>
+									</holder_barrier>
+									<holder_hit_points this="DBCC78BE-17A2-4194-B2441C41C30E35FE">
+										<icon_regen this="FE4D53EF-1D40-4B6E-9CCC48DC81BE1391"/>
+										<icon this="D9DE3390-03E9-45FC-BA4B6BB0271A84C4"/>
+										<hit_points this="375F9A6E-1D5D-4090-83E70131DFC71BC5"/>
+									</holder_hit_points>
+								</holder_values>
 								<dev_damage_taken_parent this="BA5AB7D5-DFE2-42C2-8635E22402984BC9">
 									<dev_damage_taken this="4CEEF970-261F-4CDC-950AA2B1FB6F54BA"/>
 								</dev_damage_taken_parent>
@@ -2538,7 +2546,7 @@
 			priority="46"
 			tooltipslocalised="true"
 			uniqueguid="4F66C501-2C26-4F69-85AAC3449DF8ED69"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="C5C1A503-4183-4E3F-B7994F390458B23B"
 			defaultstate="C5C1A503-4183-4E3F-B7994F390458B23B">
 			<componentimages>
@@ -4796,15 +4804,30 @@
 			currentstate="2C2740EC-203E-45BF-975234FFE0CC8259">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextTooltipSetter"
-					context_object_id="CcoUnitDetails"
-					context_function_id="GetIf(IsKnownHp, HealthTooltip)">
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoUnitDetails">
 					<child_m_user_properties>
 						<property
-							name="update_constant"
-							value="GetIfElse(IsContextValid(BattleRoot), 1, 0)"/>
+							name="appear_condition"
+							value="IsKnownHp &amp;&amp; IsContextValid(BattleRoot)"/>
+						<property
+							name="invert_y"
+							value=""/>
+						<property
+							name="layout_path"
+							value="ui/common ui/tooltip_unit_health"/>
+						<property
+							name="offset_x"
+							value="32"/>
+						<property
+							name="offset_y"
+							value="-15"/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoUnitDetails"
+					context_function_id="GetIf(IsKnownHp, GetIf(IsContextValid(BattleRoot) == false, HealthTooltip))"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -4834,7 +4857,7 @@
 				<callback_with_context
 					callback_id="ContextFillBar"
 					context_object_id="CcoUnitDetails"
-					context_function_id="HitPointsPercent">
+					context_function_id="GetIfElse(IsKnownHp, HitPointsPercent, 100)">
 					<child_m_user_properties>
 						<property
 							name="update_constant"
@@ -4989,11 +5012,8 @@
 		<hit_points
 			this="375F9A6E-1D5D-4090-83E70131DFC71BC5"
 			id="hit_points"
-			offset="102.00,4.00"
+			offset="28.00,0.00"
 			allowverticalresize="false"
-			docking="Center"
-			dock_offset="10.00,1.00"
-			component_anchor_point="0.50,0.50"
 			tooltipslocalised="true"
 			uniqueguid="375F9A6E-1D5D-4090-83E70131DFC71BC5"
 			currentstate="43047858-0B01-4158-AE6B11194064FA48">
@@ -5013,16 +5033,16 @@
 				<_1
 					this="43047858-0B01-4158-AE6B11194064FA48"
 					name="1"
-					width="36"
+					width="45"
 					height="18"
 					disabled="true"
 					uniqueguid="43047858-0B01-4158-AE6B11194064FA48">
 					<component_text
-						text="1000"
+						text="10000"
 						textvalign="Center"
 						texthalign="Center"
 						texthbehaviour="Resize"
-						textlabel="hit_points_1_Text_1"
+						textlabel="StateText_9c11c342"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
@@ -5032,43 +5052,6 @@
 				</_1>
 			</states>
 		</hit_points>
-		<icon
-			this="B40C8587-DAB5-444C-BA473021C5A2943C"
-			id="icon"
-			offset="-15.00,0.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			docking="Center Left External"
-			dock_offset="-3.00,-1.00"
-			component_anchor_point="1.00,0.50"
-			tooltipslocalised="true"
-			uniqueguid="B40C8587-DAB5-444C-BA473021C5A2943C"
-			currentstate="74973F98-EF2F-449C-8DA2ECB46588D95E"
-			defaultstate="74973F98-EF2F-449C-8DA2ECB46588D95E">
-			<componentimages>
-				<component_image
-					this="F6237129-E88F-45EC-84AA4AB414DF1793"
-					uniqueguid="F6237129-E88F-45EC-84AA4AB414DF1793"
-					imagepath="ui/skins/default/icon_stat_health_noframe.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="74973F98-EF2F-449C-8DA2ECB46588D95E"
-					name="NewState"
-					width="12"
-					height="15"
-					uniqueguid="74973F98-EF2F-449C-8DA2ECB46588D95E">
-					<imagemetrics>
-						<image
-							this="0FCBA0B6-E9D7-4F9B-A2BB7CD2A7C11625"
-							uniqueguid="0FCBA0B6-E9D7-4F9B-A2BB7CD2A7C11625"
-							componentimage="F6237129-E88F-45EC-84AA4AB414DF1793"
-							width="12"
-							height="15"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-		</icon>
 		<icon_kills
 			this="4E7A2193-5DEC-443B-865D61B086AB4772"
 			id="icon_kills"
@@ -6831,7 +6814,7 @@
 				<callback_with_context
 					callback_id="List"
 					context_object_id="CcoUnitDetails"
-					context_function_id="GetIfElse(HasRandomisedSpells, AbilityDetailsList.FirstContext.CategoryStateList.Filter(Value != &quot;spells&quot;), AbilityDetailsList.FirstContext.CategoryStateList)">
+					context_function_id="GetIfElse(HasRandomisedSpells, AbilityDetailsList.FirstContext.CategoryStateList.Filter(Value != &quot;spells&quot;), AbilityDetailsList.FirstContext.CategoryStateList).Filter((x) =&gt; { this.AbilityDetailsList.Any(CategoryStateName == x.Value)})">
 					<child_m_user_properties>
 						<property
 							name="dont_recreate"
@@ -8177,26 +8160,6 @@
 					callback_id="ContextStateSetter"
 					context_object_id="CcoString"
 					context_function_id="Value"/>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoComponent"
-					context_function_id="NumVisibleChildren &gt; 0">
-					<child_m_user_properties>
-						<property
-							name="update_constant"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextInitComponent"
-					context_object_id="CcoStaticObject"
-					context_function_id="self.ChildContext(0)">
-					<child_m_user_properties>
-						<property
-							name="init_self"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
 			</callbackwithcontextlist>
 			<states>
 				<abilities
@@ -8216,6 +8179,40 @@
 						font_m_leading="3"
 						fontcat_name="body_12"/>
 				</abilities>
+				<additional_stats
+					this="B4909EB3-D330-4B06-9C0E64149BC8B2DD"
+					name="additional_stats"
+					width="250"
+					height="54"
+					uniqueguid="B4909EB3-D330-4B06-9C0E64149BC8B2DD">
+					<component_text
+						text="Additional Stats"
+						textxoffset="10.00,0.00"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_4e7a694c"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</additional_stats>
+				<attributes
+					this="A8609070-27FA-489F-8600C1B27851FF32"
+					name="attributes"
+					width="250"
+					height="54"
+					uniqueguid="A8609070-27FA-489F-8600C1B27851FF32">
+					<component_text
+						text="Unit Attributes"
+						textxoffset="10.00,0.00"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_c1caa3e9"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</attributes>
 				<passives
 					this="73B5B26C-CF2C-4462-BCF303002D7A6AA9"
 					name="passives"
@@ -9091,6 +9088,10 @@
 					this="7BAC9CB4-DDC3-435B-975AD2E432EB3B07"
 					uniqueguid="7BAC9CB4-DDC3-435B-975AD2E432EB3B07"
 					imagepath="ui/skins/warhammer2/unit_cat_holder_round_mistwalker.png"/>
+				<component_image
+					this="0DCBD6F7-6721-4375-87140D39B6454F07"
+					uniqueguid="0DCBD6F7-6721-4375-87140D39B6454F07"
+					imagepath="ui/skins/default/unit_cat_holder_round_chieftain.png"/>
 			</componentimages>
 			<states>
 				<blessed_spawning
@@ -9111,6 +9112,22 @@
 							dock_offset="-1.00,-3.00"/>
 					</imagemetrics>
 				</blessed_spawning>
+				<chieftain
+					this="2F89E99C-80E3-4B13-8554FBC0DED5DF15"
+					name="chieftain"
+					width="34"
+					height="34"
+					uniqueguid="2F89E99C-80E3-4B13-8554FBC0DED5DF15">
+					<imagemetrics>
+						<image
+							this="90A177A5-EF60-4705-8FF633B283E0B441"
+							uniqueguid="90A177A5-EF60-4705-8FF633B283E0B441"
+							componentimage="0DCBD6F7-6721-4375-87140D39B6454F07"
+							offset="-3.00,-5.00"
+							width="38"
+							height="36"/>
+					</imagemetrics>
+				</chieftain>
 				<crafted
 					this="53E60B63-881E-4295-9882D79A974EAD0F"
 					name="crafted"
@@ -9498,21 +9515,22 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextLazyFillBar"
-					context_object_id="CcoUnitDetails"
-					context_function_id="BattleUnitContext.DelayedHealthPercent">
+					context_object_id="CcoBattleUnit"
+					context_function_id="DelayedHealthPercent">
 					<child_m_user_properties>
 						<property
-							name="is_lazy_fill_bar"
-							value=""/>
-						<property
 							name="update_constant"
-							value="GetIfElse(IsContextValid(BattleRoot), 1000, 0)"/>
+							value="GetIfElse(IsContextValid(BattleRoot), 100, 0)"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoUnitDetails"
 					context_function_id="IsContextValid(BattleUnitContext)"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoUnitDetails"
+					context_function_id="BattleUnitContext"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -9550,7 +9568,8 @@
 						<frame
 							interpolationpropertymask="4"
 							targetmetrics_m_height="10"
-							targetmetrics_m_width="40"/>
+							targetmetrics_m_width="40"
+							easing_curve_type="Quadratic Out"/>
 					</frames>
 				</resize>
 			</animations>
@@ -9568,7 +9587,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoUnitDetails"
-					context_function_id="StoredContextFromParent(&quot;CcoPooledResourceThresholdOperationSetRecord&quot;) || (IsPanelOpen(&quot;building_browser&quot;) &amp;&amp; UnitRecordContext.BuildingUnlockTooltip.IsEmpty == false)"/>
+					context_function_id="StoredContextFromParent(&quot;CcoPooledResourceThresholdOperationSetRecord&quot;) || ((IsPanelOpen(&quot;building_browser&quot;) || IsContextValid(self.ParentContext(&quot;building_categories_popup&quot;))) &amp;&amp; UnitRecordContext.BuildingUnlockTooltip.IsEmpty == false)"/>
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_function_id="StoredContextFromParent(&quot;CcoPooledResourceThresholdOperationSetRecord&quot;)"/>
@@ -9637,7 +9656,7 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoUnitDetails"
-					context_function_id="GetIfElse(IsPanelOpen(&quot;building_browser&quot;), UnitRecordContext.BuildingUnlockTooltip, Format(Loc(&quot;unit_pooled_resource_threshold_operation_requirement&quot;), StoredContextFromParent(&quot;CcoPooledResourceThresholdOperationSetRecord&quot;).PooledResourceList.FirstContext.IconPath, StoredContextFromParent(&quot;CcoPooledResourceThresholdOperationSetRecord&quot;).LowerBound, StoredContextFromParent(&quot;CcoPooledResourceThresholdOperationSetRecord&quot;).PooledResourceList.FirstContext.Name))"/>
+					context_function_id="GetIfElse((IsPanelOpen(&quot;building_browser&quot;) || IsContextValid(self.ParentContext(&quot;building_categories_popup&quot;))), UnitRecordContext.BuildingUnlockTooltip, Format(Loc(&quot;unit_pooled_resource_threshold_operation_requirement&quot;), StoredContextFromParent(&quot;CcoPooledResourceThresholdOperationSetRecord&quot;).PooledResourceList.FirstContext.IconPath, StoredContextFromParent(&quot;CcoPooledResourceThresholdOperationSetRecord&quot;).LowerBound, StoredContextFromParent(&quot;CcoPooledResourceThresholdOperationSetRecord&quot;).PooledResourceList.FirstContext.Name))"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -9848,18 +9867,18 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextLazyFillBar"
-					context_object_id="CcoUnitDetails"
-					context_function_id="BattleUnitContext.DelayedBarrierHpPercent">
+					context_object_id="CcoBattleUnit"
+					context_function_id="DelayedBarrierHpPercent">
 					<child_m_user_properties>
 						<property
 							name="update_constant"
-							value="GetIfElse(IsContextValid(BattleRoot), 100, 0)"/>
+							value="GetIfElse(IsContextValid(BattleRoot), 1, 0)"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
-					callback_id="ContextVisibilitySetter"
+					callback_id="ContextPropagator"
 					context_object_id="CcoUnitDetails"
-					context_function_id="IsContextValid(BattleUnitContext)"/>
+					context_function_id="BattleUnitContext"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -9897,7 +9916,8 @@
 							interpolationpropertymask="4"
 							targetmetrics_m_height="8"
 							targetmetrics_m_width="212"
-							targetmetrics_m_shadervars="0.50,0.00,0.00,0.00"/>
+							targetmetrics_m_shadervars="0.50,0.00,0.00,0.00"
+							easing_curve_type="Quadratic Out"/>
 					</frames>
 				</resize>
 			</animations>
@@ -11028,5 +11048,248 @@
 				</newstate>
 			</states>
 		</icon_kills>
+		<barrier_hit_points
+			this="38E19D04-6C2E-41B9-ADC1104BAFD3E4BB"
+			id="barrier_hit_points"
+			offset="16.00,0.00"
+			allowverticalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="38E19D04-6C2E-41B9-ADC1104BAFD3E4BB"
+			currentstate="9CCB98A8-02D3-4A41-8D3A76F1FF591A24">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoUnitDetails"
+					context_function_id="GetIfElse(IsKnownHp, BarrierHp, &quot;??&quot;)">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value="GetIfElse(IsContextValid(BattleRoot), 1, 0)"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<states>
+				<_1
+					this="9CCB98A8-02D3-4A41-8D3A76F1FF591A24"
+					name="1"
+					width="45"
+					height="18"
+					disabled="true"
+					uniqueguid="9CCB98A8-02D3-4A41-8D3A76F1FF591A24">
+					<component_text
+						text="10000"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Resize"
+						textlabel="StateText_9dd0b936"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						text_shader_name="text_outline_t0"
+						textshadervars="0.00,0.00,0.00,1.00"/>
+				</_1>
+			</states>
+		</barrier_hit_points>
+		<holder_barrier
+			this="56F523E6-40AB-41A7-9EA09507B3B2B68F"
+			id="holder_barrier"
+			allowverticalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="56F523E6-40AB-41A7-9EA09507B3B2B68F"
+			currentstate="E5C1C35D-36DC-4C11-9709690399D227E4">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoUnitDetails"
+					context_function_id="BarrierMaxHp &gt; 0"/>
+			</callbackwithcontextlist>
+			<states>
+				<_1
+					this="E5C1C35D-36DC-4C11-9709690399D227E4"
+					name="1"
+					width="61"
+					height="18"
+					disabled="true"
+					uniqueguid="E5C1C35D-36DC-4C11-9709690399D227E4">
+					<component_text
+						textvalign="Center"
+						texthalign="Center"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						text_shader_name="text_outline_t0"
+						textshadervars="0.00,0.00,0.00,1.00"/>
+				</_1>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"/>
+		</holder_barrier>
+		<holder_hit_points
+			this="DBCC78BE-17A2-4194-B2441C41C30E35FE"
+			id="holder_hit_points"
+			offset="71.00,0.00"
+			allowverticalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="DBCC78BE-17A2-4194-B2441C41C30E35FE"
+			currentstate="744F849A-00A1-4A98-8210AB0E65EDD7A6">
+			<states>
+				<_1
+					this="744F849A-00A1-4A98-8210AB0E65EDD7A6"
+					name="1"
+					width="73"
+					height="18"
+					disabled="true"
+					uniqueguid="744F849A-00A1-4A98-8210AB0E65EDD7A6">
+					<component_text
+						textvalign="Center"
+						texthalign="Center"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						text_shader_name="text_outline_t0"
+						textshadervars="0.00,0.00,0.00,1.00"/>
+				</_1>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"/>
+		</holder_hit_points>
+		<holder_values
+			this="1FBF793E-C030-4078-B8FD7016B79A4437"
+			id="holder_values"
+			offset="38.00,3.00"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			tooltipslocalised="true"
+			uniqueguid="1FBF793E-C030-4078-B8FD7016B79A4437"
+			currentstate="D5A41BDA-6368-4E78-BEB419851DEFCA29"
+			defaultstate="D5A41BDA-6368-4E78-BEB419851DEFCA29">
+			<states>
+				<default
+					this="D5A41BDA-6368-4E78-BEB419851DEFCA29"
+					name="default"
+					width="144"
+					height="18"
+					uniqueguid="D5A41BDA-6368-4E78-BEB419851DEFCA29"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				spacing="10.00,0.00"
+				sizetocontent="true"/>
+		</holder_values>
+		<icon
+			this="F3426D3F-F3AC-4A06-9272E546E50FC9ED"
+			id="icon"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="F3426D3F-F3AC-4A06-9272E546E50FC9ED"
+			currentstate="E5F77F70-2621-43C8-AD3907DB91216FAD"
+			defaultstate="E5F77F70-2621-43C8-AD3907DB91216FAD">
+			<componentimages>
+				<component_image
+					this="A669AF43-CDF1-48CF-9A55C6BC83A89F99"
+					uniqueguid="A669AF43-CDF1-48CF-9A55C6BC83A89F99"
+					imagepath="ui/campaign ui/effect_bundles/barrier.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="E5F77F70-2621-43C8-AD3907DB91216FAD"
+					name="NewState"
+					width="16"
+					height="16"
+					uniqueguid="E5F77F70-2621-43C8-AD3907DB91216FAD">
+					<imagemetrics>
+						<image
+							this="35457402-8425-4239-A1E45A41EDB7E2F4"
+							uniqueguid="35457402-8425-4239-A1E45A41EDB7E2F4"
+							componentimage="A669AF43-CDF1-48CF-9A55C6BC83A89F99"
+							width="16"
+							height="16"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</icon>
+		<icon
+			this="D9DE3390-03E9-45FC-BA4B6BB0271A84C4"
+			id="icon"
+			offset="16.00,0.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="D9DE3390-03E9-45FC-BA4B6BB0271A84C4"
+			currentstate="EBE1791C-B2DD-4415-9240A8647E3618C4"
+			defaultstate="EBE1791C-B2DD-4415-9240A8647E3618C4">
+			<componentimages>
+				<component_image
+					this="25D1EB83-4E93-4EA8-85B366B9F6C6AAED"
+					uniqueguid="25D1EB83-4E93-4EA8-85B366B9F6C6AAED"
+					imagepath="ui/skins/default/icon_stat_health_noframe.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="EBE1791C-B2DD-4415-9240A8647E3618C4"
+					name="NewState"
+					width="12"
+					height="15"
+					uniqueguid="EBE1791C-B2DD-4415-9240A8647E3618C4">
+					<imagemetrics>
+						<image
+							this="88AA185E-5C71-4EE0-B57BF51FB2C962A5"
+							uniqueguid="88AA185E-5C71-4EE0-B57BF51FB2C962A5"
+							componentimage="25D1EB83-4E93-4EA8-85B366B9F6C6AAED"
+							width="12"
+							height="15"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</icon>
+		<icon_regen
+			this="FE4D53EF-1D40-4B6E-9CCC48DC81BE1391"
+			id="icon_regen"
+			tooltipslocalised="true"
+			uniqueguid="FE4D53EF-1D40-4B6E-9CCC48DC81BE1391"
+			currentstate="C052C89D-566C-4A35-9FF7D44DED4D2826"
+			defaultstate="C052C89D-566C-4A35-9FF7D44DED4D2826">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoUnitDetails"
+					context_function_id="IsContextValid(BattleUnitContext) &amp;&amp; BattleUnitContext.HealthReplenishRateBase != 0.0 &amp;&amp; BattleUnitContext.HealingPower != 0.0">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value="100"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="45536928-4176-4C97-9D930B5FC1D0955E"
+					uniqueguid="45536928-4176-4C97-9D930B5FC1D0955E"
+					imagepath="ui/battle ui/ability_icons/wh2_main_unit_contact_healing_heavy.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="C052C89D-566C-4A35-9FF7D44DED4D2826"
+					name="default"
+					width="16"
+					height="16"
+					uniqueguid="C052C89D-566C-4A35-9FF7D44DED4D2826">
+					<imagemetrics>
+						<image
+							this="1130DB00-E0E8-4C01-A13C3703A66094A1"
+							uniqueguid="1130DB00-E0E8-4C01-A13C3703A66094A1"
+							componentimage="45536928-4176-4C97-9D930B5FC1D0955E"
+							width="16"
+							height="16"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</icon_regen>
 	</components>
 </layout>

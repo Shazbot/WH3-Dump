@@ -325,16 +325,11 @@ function start_achievement_listeners()
 	if cm:get_campaign_name() ~= "wh3_main_prologue" then
 		core:add_listener(
 			"WH3_ACHIEVEMENT_NURGLE_UNLOCK_PLAGUE_INGREDIENTS",
-			"FactionTurnStart",
+			"ScriptEvent_AllPlagueComponentsUnlocked",
 			true,
 			function(context)
-				if are_all_plague_components_unlocked ~= nil then
-					local faction = context:faction();
-					
-					if are_all_plague_components_unlocked(faction) then
-						award_achievement_to_faction(faction:name(), "WH3_ACHIEVEMENT_NURGLE_UNLOCK_PLAGUE_INGREDIENTS");
-					end;
-				end;
+				local faction_key = context:faction():name()
+				award_achievement_to_faction(faction_key, "WH3_ACHIEVEMENT_NURGLE_UNLOCK_PLAGUE_INGREDIENTS");
 			end,
 			true
 		);

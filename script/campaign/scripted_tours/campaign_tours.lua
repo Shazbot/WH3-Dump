@@ -57,7 +57,7 @@ in_daemon_prince_customisation = intervention:new(
 )
 in_daemon_prince_customisation:set_must_trigger()
 in_daemon_prince_customisation:set_should_lock_ui()
-in_daemon_prince_customisation:add_precondition(function() return not cm:is_multiplayer() and cm:get_local_faction_name() == "wh3_main_dae_daemon_prince" and not in_daemon_prince_customisation:has_ever_triggered() end)
+in_daemon_prince_customisation:add_precondition(function() return cm:get_local_faction_name() == "wh3_main_dae_daemon_prince" and not in_daemon_prince_customisation:has_ever_triggered() end)
 in_daemon_prince_customisation:add_trigger_condition(
 "PanelClosedCampaign",
 function(context)
@@ -487,7 +487,7 @@ in_changing_of_the_ways = intervention:new(
 )
 in_changing_of_the_ways:set_must_trigger()
 in_changing_of_the_ways:set_should_lock_ui()
-in_changing_of_the_ways:add_precondition(function() return not cm:is_multiplayer() and cm:get_local_faction_subculture() == "wh3_main_sc_tze_tzeentch" and not in_changing_of_the_ways:has_ever_triggered() end)
+in_changing_of_the_ways:add_precondition(function() return cm:get_local_faction_subculture() == "wh3_main_sc_tze_tzeentch" and not in_changing_of_the_ways:has_ever_triggered() end)
 in_changing_of_the_ways:add_trigger_condition(
 "PanelClosedCampaign",
 function(context)
@@ -833,7 +833,7 @@ in_caravans = intervention:new(
 )
 in_caravans:set_must_trigger()
 in_caravans:set_should_lock_ui()
-in_caravans:add_precondition(function() return not cm:is_multiplayer() and cm:get_local_faction_subculture() == "wh3_main_sc_cth_cathay" and not cm:get_saved_value("caravan_tour_complete") end)
+in_caravans:add_precondition(function() return cm:get_local_faction_subculture() == "wh3_main_sc_cth_cathay" and not cm:get_saved_value("caravan_tour_complete") end)
 in_caravans:add_trigger_condition("PanelOpenedCampaign", function(context) return context.string == "cathay_caravans" and not core:is_advice_level_minimal() end)
 in_caravans:set_wait_for_fullscreen_panel_dismissed(false)
 
@@ -1268,7 +1268,7 @@ in_end_turn_camera = intervention:new(
 	function() trigger_in_end_turn_camera() end,						-- trigger callback
 	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
 )
-in_end_turn_camera:add_precondition(function() return not cm:is_multiplayer() and not in_end_turn_camera:has_ever_triggered() end)
+in_end_turn_camera:add_precondition(function() return not in_end_turn_camera:has_ever_triggered() end)
 
 if not in_end_turn_camera:has_ever_triggered() then
 	-- Value for storing number of factions that have ended turn in sequence. Will reset on player's turn.
@@ -1680,7 +1680,7 @@ in_witchs_hut = intervention:new(
 )
 in_witchs_hut:set_must_trigger()
 in_witchs_hut:set_should_lock_ui()
-in_witchs_hut:add_precondition(function() return not cm:is_multiplayer() and cm:get_local_faction_name() == "wh3_dlc24_ksl_daughters_of_the_forest" and not in_witchs_hut:has_ever_triggered() end)
+in_witchs_hut:add_precondition(function() return cm:get_local_faction_name() == "wh3_dlc24_ksl_daughters_of_the_forest" and not in_witchs_hut:has_ever_triggered() end)
 
 in_witchs_hut:add_trigger_condition(
 "PanelClosedCampaign",
@@ -2061,7 +2061,7 @@ in_hexes = intervention:new(
 )
 in_hexes:set_must_trigger()
 in_hexes:set_should_lock_ui()
-in_hexes:add_precondition(function() return not cm:is_multiplayer() and cm:get_local_faction_name() == "wh3_dlc24_ksl_daughters_of_the_forest" and not in_hexes:has_ever_triggered() end)
+in_hexes:add_precondition(function() return cm:get_local_faction_name() == "wh3_dlc24_ksl_daughters_of_the_forest" and not in_hexes:has_ever_triggered() end)
 
 in_hexes:add_trigger_condition(
 "PanelClosedCampaign",
@@ -2314,7 +2314,7 @@ in_blessings:set_must_trigger()
 in_blessings:set_should_lock_ui()
 in_blessings:set_wait_for_battle_complete(false)
 in_blessings:set_player_turn_only(false)
-in_blessings:add_precondition(function() return not cm:is_multiplayer() and cm:get_local_faction_name() == "wh3_dlc24_ksl_daughters_of_the_forest" and not in_blessings:has_ever_triggered() end)
+in_blessings:add_precondition(function() return cm:get_local_faction_name() == "wh3_dlc24_ksl_daughters_of_the_forest" and not in_blessings:has_ever_triggered() end)
 
 in_blessings:add_trigger_condition(
 	"ScriptEventPreBattlePanelOpened",
@@ -2434,7 +2434,7 @@ in_curses:set_must_trigger()
 in_curses:set_should_lock_ui()
 in_curses:set_wait_for_battle_complete(false)
 in_curses:set_player_turn_only(false)
-in_curses:add_precondition(function() return not cm:is_multiplayer() and cm:get_local_faction_name() == "wh3_dlc24_ksl_daughters_of_the_forest" and not in_curses:has_ever_triggered() end)
+in_curses:add_precondition(function() return cm:get_local_faction_name() == "wh3_dlc24_ksl_daughters_of_the_forest" and not in_curses:has_ever_triggered() end)
 
 in_curses:add_trigger_condition(
 	"ScriptEventPreBattlePanelOpened",
@@ -2553,7 +2553,7 @@ in_schemes = intervention:new(
 in_schemes:set_must_trigger()
 in_schemes:set_should_lock_ui()
 in_schemes:set_wait_for_fullscreen_panel_dismissed(false)
-in_schemes:add_precondition(function() return not cm:is_multiplayer() and cm:get_local_faction_name() == "wh3_dlc24_tze_the_deceivers" and not in_schemes:has_ever_triggered() end)
+in_schemes:add_precondition(function() return cm:get_local_faction_name() == "wh3_dlc24_tze_the_deceivers" and not in_schemes:has_ever_triggered() end)
 in_schemes:add_trigger_condition(
 
 "PanelClosedCampaign",
@@ -2621,10 +2621,8 @@ function trigger_in_schemes()
 			cm:steal_user_input(true)
 			
 			local uic_button_info = find_uicomponent("dlc24_schemes", "button_info")
-			local uic_button_close = find_uicomponent("dlc24_schemes", "button_close")
 			
 			if uic_button_info then uic_button_info:SetDisabled(true) end
-			if uic_button_close then uic_button_close:SetDisabled(true) end
 		end,
 		0
 	)
@@ -2663,12 +2661,13 @@ function trigger_in_schemes()
 	-- Create action of section
 	nts_schemes_button:action(
 		function()
-			-- If this is still in the next section (the witchs hut screen), close it.
+			-- If this is still in the next section (the schemes screen), close it.
 			if cm:get_campaign_ui_manager():is_panel_open("dlc24_schemes") then
-				local uic_button_ok = find_uicomponent("dlc24_schemes", "button_ok")
-				if uic_button_ok then 
+				local uic_button_close = find_uicomponent("dlc24_schemes", "button_close")
+				if uic_button_close then
 					cm:steal_user_input(false)
-					uic_button_ok:SimulateLClick() 
+					uic_button_close:SetDisabled(false)
+					uic_button_close:SimulateLClick() 
 					cm:steal_user_input(true)
 				end
 			end
@@ -2760,6 +2759,9 @@ function trigger_in_schemes()
 			tp:set_highlight_close_button(0.5)
 			tp:do_not_release_escape_key(true)
 			tp:show()
+			
+			local uic_button_close = find_uicomponent("dlc24_schemes", "button_close")
+			if uic_button_close then uic_button_close:SetDisabled(true) end
 			
 			core:show_fullscreen_highlight_around_components(5, false, true, uic)
 			
@@ -3009,7 +3011,7 @@ in_formless_horror = intervention:new(
 )
 in_formless_horror:set_must_trigger()
 in_formless_horror:set_should_lock_ui()
-in_formless_horror:add_precondition(function() return not cm:is_multiplayer() and not in_formless_horror:has_ever_triggered() end)
+in_formless_horror:add_precondition(function() return not in_formless_horror:has_ever_triggered() end)
 
 in_formless_horror:add_trigger_condition(
 	"ScriptEventChangelingGainsForm",
@@ -3378,7 +3380,7 @@ in_matters_of_state = intervention:new(
 in_matters_of_state:set_must_trigger()
 in_matters_of_state:set_should_lock_ui()
 in_matters_of_state:set_wait_for_fullscreen_panel_dismissed(false)
-in_matters_of_state:add_precondition(function() return not cm:is_multiplayer() and cm:get_local_faction_name() == "wh3_dlc24_cth_the_celestial_court" and not in_matters_of_state:has_ever_triggered() end)
+in_matters_of_state:add_precondition(function() return cm:get_local_faction_name() == "wh3_dlc24_cth_the_celestial_court" and not in_matters_of_state:has_ever_triggered() end)
 
 in_matters_of_state:add_trigger_condition(
 	"PanelOpenedCampaign",
@@ -3820,7 +3822,7 @@ in_empowering_the_compass = intervention:new(
 in_empowering_the_compass:set_must_trigger()
 in_empowering_the_compass:set_should_lock_ui()
 in_empowering_the_compass:set_wait_for_fullscreen_panel_dismissed(false)
-in_empowering_the_compass:add_precondition(function() return not cm:is_multiplayer() and cm:get_local_faction_name() == "wh3_dlc24_cth_the_celestial_court" and not in_empowering_the_compass:has_ever_triggered() end)
+in_empowering_the_compass:add_precondition(function() return cm:get_local_faction_name() == "wh3_dlc24_cth_the_celestial_court" and not in_empowering_the_compass:has_ever_triggered() end)
 
 in_empowering_the_compass:add_trigger_condition(
 	"FactionTurnStart",
@@ -4112,8 +4114,8 @@ core:add_listener(
 	"LoadingScreenDismissed",
 	true,
 	function()
-		-- Campaign tours will only start once and not in autoruns
-		if cm:get_local_faction(true) and not cm:get_saved_value("campaign_tours_started") then
+		-- Campaign tours will only start once and not in multiplayer games or autoruns
+		if not cm:is_multiplayer() and cm:get_local_faction(true) and not cm:get_saved_value("campaign_tours_started") then
 			in_daemon_prince_customisation:start()
 			in_changing_of_the_ways:start()
 			in_caravans:start()

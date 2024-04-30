@@ -26,8 +26,6 @@ function qbh:initialise()
 	qbh:setup_qb_effect_bundle_listener("wh2_dlc15_bundle_talisman_of_hoeth_army_ability","wh2_dlc15_qb_hef_eltharion_talisman_of_hoeth_stage_3",true, "defender")
 	qbh:setup_qb_effect_bundle_listener("wh2_dlc16_call_to_ceithin_har_enable","wh2_dlc16_qb_wef_sisters_dragon",true, "attacker")
 	qbh:setup_qb_effect_bundle_listener("wh2_dlc17_qb_bundle_ancestor_rune_grimnir","wh2_dlc17_qb_dwf_thorek_lost_vault",true, "attacker")
-
-
 end
 
 

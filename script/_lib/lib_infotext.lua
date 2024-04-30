@@ -155,7 +155,7 @@ function infotext_manager:setup_infotext_uicomponents()
 
 	self.uic_advice_interface = find_uicomponent("advice_interface");
 	
-	if self.infotext_docked_to_advisor then
+	if self.infotext_docked_to_advisor and self.uic_advice_interface and is_uicomponent(self.uic_advice_interface) then
 		self.uic_infotext = find_uicomponent(self.uic_advice_interface, "info_text");
 	else
 		self.uic_infotext = find_uicomponent("under_advisor_docker", "info_text");

@@ -353,8 +353,7 @@ function setup_kislev_devotion()
 				follower_thresholds[4].completed = true;
 				follower_thresholds[4].winner = faction_katarin:name();
 				current_winner = faction_katarin:name()
-
-				if cm:is_multiplayer() == false or faction_kostaltyn:is_human() == false then
+				if faction_katarin:is_human() == true  and (cm:is_multiplayer() == false or faction_kostaltyn:is_human() == false) then
 					trigger_final_supporters_dilemma(current_winner, faction_kostaltyn:name(), "wh3_main_ksl_dilemma_supporters_katarin")
 				end
 			elseif followers_kostaltyn >= follower_thresholds[4].follower_threshold then
@@ -363,7 +362,7 @@ function setup_kislev_devotion()
 				follower_thresholds[4].winner = faction_kostaltyn:name();
 				current_winner = faction_kostaltyn:name()
 
-				if cm:is_multiplayer() == false or faction_katarin:is_human() == false then
+				if faction_kostaltyn:is_human() == true and (cm:is_multiplayer() == false or faction_katarin:is_human() == false) then
 					trigger_final_supporters_dilemma(current_winner, faction_katarin:name(), "wh3_main_ksl_dilemma_supporters_kostaltyn")
 				end
 			end

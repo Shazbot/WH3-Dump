@@ -73,6 +73,25 @@ core:add_listener(
 	true
 );
 
+--- Nurgle Tech effect - generate income when building cycles complete
+core:add_listener(
+"income_when_cycle_end",
+"BuildingLifecycleDevelops", 
+ function(context)
+	local value = cm:get_regions_bonus_value(context:region(), "cycle_building_completion_earn_income")
+	return value > 0
+ end,
+function(context)
+	if context:region():owning_faction():is_human() then
+		local faction = context:region():owning_faction():name()
+		local value = cm:get_regions_bonus_value(context:region(), "cycle_building_completion_earn_income")
+		cm:treasury_mod(faction, value)
+	end	
+end,
+true
+
+)
+
 function give_climate_growth(faction)
 	local growth_in_climate_chaotic = cm:get_factions_bonus_value(faction, "growth_in_climate_chaotic");
 	local growth_in_climate_frozen = cm:get_factions_bonus_value(faction, "growth_in_climate_frozen");
@@ -265,19 +284,20 @@ core:add_listener(
 	"PlagueInfectionRegionSight",
 	"MilitaryForceInfectionEvent",
 	function(context)
-		local faction = context:faction();
+		local faction = context:faction()
 		
-		return faction:is_human() and cm:get_factions_bonus_value(faction, "plague_sight") > 0;
+		return faction:is_human() and cm:get_factions_bonus_value(faction, "plague_sight") > 0
 	end,
 	function(context)
 		local target_general = context:target_force():general_character();
-		
-		if target_general:has_region() then
-			cm:make_region_visible_in_shroud(context:faction():name(), target_general:region():name())
-		end;
+		if target_general:is_null_interface() == false then
+			if target_general:has_region() then
+				cm:make_region_visible_in_shroud(context:faction():name(), target_general:region():name())
+			end
+		end
 	end,
 	true
-);
+)
 
 --Earn Souls Points on Plague Spread
 
@@ -314,7 +334,6 @@ core:add_listener(
 	end,
 	true
 );
-
 
 -- extra growth for camp in enemy territory, on turn roll
 core:add_listener(
@@ -765,20 +784,12 @@ core:add_listener(
 	"create_random_nurgle_plague",
 	"ForeignSlotBuildingCompleteEvent",
 	function(context)
-		return cm:get_regions_bonus_value(context:slot_manager():region(), "create_random_nurgle_plague") ~= 0;
+		return cm:get_regions_bonus_value(context:slot_manager():region(), "create_random_nurgle_plague") ~= 0
 	end,
 	function(context)
-		local plagues = {
-			"wh3_main_nur_base_Ague",
-			"wh3_main_nur_base_Buboes",
-			"wh3_main_nur_base_Pox",
-			"wh3_main_nur_base_Rot",
-			"wh3_main_nur_base_Shakes"
-		};
-		
-		local sm = context:slot_manager();
-		
-		cm:spawn_plague_at_settlement(sm:faction(), sm:region():settlement(), plagues[cm:random_number(#plagues)]);
+		local sm = context:slot_manager()
+		local selected_plague = "wh3_dlc25_nur_random_plague_" .. cm:random_number(5)
+		cm:spawn_plague_at_settlement(sm:faction(), sm:region():settlement(), selected_plague)
 	end,
 	true
 );
@@ -1247,6 +1258,212 @@ core:add_listener(
 	end,
 	true
 );
+
+core:add_listener(
+	"UnbreakableGrudgeBonus_PendingBattle",
+	"PendingBattle",
+	function(context)
+		return pending_battle_bv_check("unbreakable_when_grudges_over_1000", context:pending_battle()) 
+	end,
+	function(context)
+		local pb = context:pending_battle()
+
+		local attackers_with_bonus_value = {}
+		local defenders_with_bonus_value = {}
+		local attackers_grudges, defenders_grudges = grudges_scripted_bv_handler("unbreakable_when_grudges_over_1000", pb, attackers_with_bonus_value, defenders_with_bonus_value)
+
+		if attackers_grudges >= 1000 then
+			for i = 1, #defenders_with_bonus_value do
+				cm:apply_effect_bundle_to_force("wh3_dlc25_unbreakable_grudge_scripted_hidden", defenders_with_bonus_value[i], 1)
+			end
+		end
+		if defenders_grudges >= 1000 then
+			for i = 1, #attackers_with_bonus_value do
+				cm:apply_effect_bundle_to_force("wh3_dlc25_unbreakable_grudge_scripted_hidden", attackers_with_bonus_value[i], 1)	
+			end
+		end
+		
+		cm:update_pending_battle()
+	end,
+	true
+)
+
+core:add_listener(
+	"UnbreakableGrudgeBonus_BattleCompleted",
+	"BattleCompleted",
+	function(context)
+		return pending_battle_bv_check("unbreakable_when_grudges_over_1000", context:model():pending_battle()) 
+	end,
+	function(context)	
+		local pb = context:model():pending_battle()
+		
+		local attackers_with_bonus_value = {}
+		local defenders_with_bonus_value = {}
+		grudges_scripted_bv_handler("unbreakable_when_grudges_over_1000", pb, attackers_with_bonus_value, defenders_with_bonus_value)	
+		
+		for i = 1, #defenders_with_bonus_value do
+			cm:remove_effect_bundle_from_force("wh3_dlc25_unbreakable_grudge_scripted_hidden", defenders_with_bonus_value[i])
+		end
+		for i = 1, #attackers_with_bonus_value do
+			cm:remove_effect_bundle_from_force("wh3_dlc25_unbreakable_grudge_scripted_hidden", attackers_with_bonus_value[i])	
+		end
+	end,
+	true
+)
+
+core:add_listener(
+	"PerfectVigourGrudgeBonus_PendingBattle",
+	"PendingBattle",
+	function(context)
+		return pending_battle_bv_check("perfect_vigour_when_grudges_over_1000", context:pending_battle()) 
+	end,
+	function(context)
+		local pb = context:pending_battle()
+
+		local attackers_with_bonus_value = {}
+		local defenders_with_bonus_value = {}
+		local attackers_grudges, defenders_grudges = grudges_scripted_bv_handler("perfect_vigour_when_grudges_over_1000", pb, attackers_with_bonus_value, defenders_with_bonus_value)
+
+		if attackers_grudges >= 1000 then
+			for i = 1, #defenders_with_bonus_value do
+				cm:apply_effect_bundle_to_force("wh3_dlc25_perfect_vigour_grudge_scripted_hidden", defenders_with_bonus_value[i], 1)
+			end
+		end
+		if defenders_grudges >= 1000 then
+			for i = 1, #attackers_with_bonus_value do
+				cm:apply_effect_bundle_to_force("wh3_dlc25_perfect_vigour_grudge_scripted_hidden", attackers_with_bonus_value[i], 1)	
+			end
+		end
+
+		cm:update_pending_battle()
+	end,
+	true
+)
+
+core:add_listener(
+	"PerfectVigourGrudgeBonus_BattleCompleted",
+	"BattleCompleted",
+	function(context)
+		return pending_battle_bv_check("perfect_vigour_when_grudges_over_1000", context:model():pending_battle()) 
+	end,
+	function(context)
+		local pb = context:model():pending_battle()
+		
+		local attackers_with_bonus_value = {}
+		local defenders_with_bonus_value = {}
+		grudges_scripted_bv_handler("perfect_vigour_when_grudges_over_1000", pb, attackers_with_bonus_value, defenders_with_bonus_value)
+
+		for i = 1, #defenders_with_bonus_value do
+			cm:remove_effect_bundle_from_force("wh3_dlc25_perfect_vigour_grudge_scripted_hidden", defenders_with_bonus_value[i])
+		end
+		for i = 1, #attackers_with_bonus_value do
+			cm:remove_effect_bundle_from_force("wh3_dlc25_perfect_vigour_grudge_scripted_hidden", attackers_with_bonus_value[i])	
+		end
+	end,
+	true
+)
+
+function pending_battle_bv_check(bonus_value, pending_battle) 
+
+	local scripted_bonus_value_present = false
+
+	local attacker = pending_battle:attacker()
+	if not attacker:is_null_interface() and cm:get_forces_bonus_value(attacker:military_force(), bonus_value) > 0 then
+		scripted_bonus_value_present = true
+	end
+
+	local defender = pending_battle:defender()
+	if not defender:is_null_interface() and cm:get_forces_bonus_value(defender:military_force(), bonus_value) > 0 then
+		scripted_bonus_value_present = true
+	end
+
+	local attacker_list = pending_battle:secondary_attackers()
+	for i = 0, attacker_list:num_items() - 1 do
+		local attacker = attacker_list:item_at(i)
+
+		if not attacker:is_null_interface() and cm:get_forces_bonus_value(attacker:military_force(), bonus_value) > 0 then
+			scripted_bonus_value_present = true
+		end
+	end
+
+	local defender_list = pending_battle:secondary_defenders()
+	for i = 0, defender_list:num_items() - 1 do
+		local defender = defender_list:item_at(i)
+
+		if not defender:is_null_interface() and cm:get_forces_bonus_value(defender:military_force(), bonus_value) > 0 then
+			scripted_bonus_value_present = true
+		end
+	end
+	
+	return scripted_bonus_value_present
+end
+
+function grudges_scripted_bv_handler(bonus_value, pending_battle, attackers_with_bonus_value, defenders_with_bonus_value)
+
+	local total_attackers_grudges = 0
+	local total_defenders_grudges = 0
+
+	local attacker = pending_battle:attacker()
+	if not attacker:is_null_interface() then
+		total_attackers_grudges = grudges_scripted_bv_check(attacker:military_force(), bonus_value, attackers_with_bonus_value, total_attackers_grudges) 
+	end
+
+	local attacker_list = pending_battle:secondary_attackers()
+	for i = 0, attacker_list:num_items() - 1 do
+		local attacker = attacker_list:item_at(i)
+		if not attacker:is_null_interface() then
+			total_attackers_grudges = total_attackers_grudges + grudges_scripted_bv_check(attacker:military_force(), bonus_value, attackers_with_bonus_value, total_attackers_grudges) 
+		end
+	end
+
+	local defender = pending_battle:defender()
+	if not defender:is_null_interface() then
+		total_defenders_grudges = grudges_scripted_bv_check(defender:military_force(), bonus_value, defenders_with_bonus_value, total_defenders_grudges) 
+	end
+
+	local defender_list = pending_battle:secondary_defenders()
+	for i = 0, defender_list:num_items() - 1 do
+		local defender = defender_list:item_at(i)
+
+		if not defender:is_null_interface() then
+			total_defenders_grudges = total_defenders_grudges + grudges_scripted_bv_check(defender:military_force(), bonus_value, defenders_with_bonus_value, total_defenders_grudges) 
+		end
+	end
+
+	return total_attackers_grudges, total_defenders_grudges
+end
+
+function grudges_scripted_bv_check(military_force, bonus_value, forces_with_bonus_value, total_grudges) 
+
+	-- Check if the attacker has the bonus value
+	if cm:get_forces_bonus_value(military_force, bonus_value) > 0 then
+		table.insert(forces_with_bonus_value, military_force:command_queue_index())
+	
+	else -- If they do not have the bonus value check if they have over 1000 Grudges
+
+	-- Check if military force is a garrison
+		if military_force:is_armed_citizenry() then
+			local region = military_force:garrison_residence():region()
+			-- Check if region has Grudge resource and if it does, is it over 1000
+			if not region:pooled_resource_manager():is_null_interface() then
+				local region_prm = region:pooled_resource_manager()
+				if region_prm:resource("wh3_dlc25_dwf_grudge_points_enemy_settlements") then
+					total_grudges = total_grudges + region_prm:resource("wh3_dlc25_dwf_grudge_points_enemy_settlements"):value()
+				end
+			end
+		else
+			-- Check if force has Grudge resource and if it does, is it over 1000
+			if not military_force:pooled_resource_manager():is_null_interface() then
+				local mf_prm = military_force:pooled_resource_manager()
+				if mf_prm:resource("wh3_dlc25_dwf_grudge_points_enemy_armies") then
+					total_grudges = total_grudges + mf_prm:resource("wh3_dlc25_dwf_grudge_points_enemy_armies"):value()
+				end
+			end
+		end
+	end
+	return total_grudges
+end
+
 
 --[[
 core:add_listener(

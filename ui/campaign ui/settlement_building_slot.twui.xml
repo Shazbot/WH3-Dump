@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -142,7 +142,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignBuildingSlot"
-					context_function_id="SettlementContext.IsPlayerOwned &amp;&amp; HasInstantUpgradeFeature &amp;&amp; (IsUpgrading||IsBuildingNew) &amp;&amp; ConstructionItemContext.BuildingLevelRecordContext.HasLifecycleState == false">
+					context_function_id="SettlementContext.IsPlayerOwned &amp;&amp; HasInstantUpgradeFeature &amp;&amp; IsDismantling == false &amp;&amp; (((IsUpgrading||IsBuildingNew) &amp;&amp; FactionContext.CultureContext.Key != &quot;wh3_main_nur_nurgle&quot;) || (IsContextValid(LifecycleStateContext) &amp;&amp; FactionContext.CultureContext.Key == &quot;wh3_main_nur_nurgle&quot;))">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -751,7 +751,13 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="GetIfElse(Buildings.IsHostileButtonSelected, CreateCost(Buildings.StoredSettlementOrCharacter, PlayersFaction), CreateCost(Buildings.StoredSettlementOrCharacter))"/>
+					context_function_id="GetIfElse(Buildings.IsHostileButtonSelected, CreateCost(Buildings.StoredSettlementOrCharacter, PlayersFaction), CreateCost(Buildings.StoredSettlementOrCharacter))">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CharacterCreatedAny"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBuildingLevelRecord"
@@ -2191,7 +2197,13 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="GetIfElse(HasLifecycleState &amp;&amp; (Level !=0 || IsBuiltInSlot(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;))), LifecycleTransitionTime(StoredContextFromParent(&quot;CcoCampaignSettlement&quot;)), CreateTime(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;)))"/>
+					context_function_id="GetIfElse(HasLifecycleState &amp;&amp; (Level !=0 || IsBuiltInSlot(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;))), LifecycleTransitionTime(StoredContextFromParent(&quot;CcoCampaignSettlement&quot;)), CreateTime(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;)))">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CharacterCreatedAny"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextStateSetterConditional"
 					context_object_id="CcoBuildingLevelRecord">
@@ -3598,7 +3610,13 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="HasLifecycleState"/>
+					context_function_id="HasLifecycleState">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignBuildingStateChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextStateSetterConditional"
 					context_object_id="CcoCampaignBuildingSlot">
@@ -3646,13 +3664,9 @@
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
-					callback_id="ContextTrashOnCondition"
-					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="HasLifecycleState == false"/>
-				<callback_with_context
 					callback_id="ContextUISFXTrigger"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="slot = StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;) | slot.IsBuildingNew || slot.IsUpgrading =&gt; &quot;UI_CAM_HUD_Construction_Cancel&quot; | &quot;UI_CLICK_Construction_Start&quot;">
+					context_function_id="slot = StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;)&#10;| slot.IsBuildingNew || slot.IsUpgrading || slot.IsRepairing =&gt; &quot;UI_CAM_HUD_Construction_Cancel&quot; &#10;| slot.CanUpgrade &amp;&amp; self.ParentContext.Id != &quot;slot_entry&quot; &amp;&amp; !slot.IsEmpty &amp;&amp; self.CurrentState == &quot;hover&quot; =&gt; &quot;UI_CLICK_Building_Upgrade&quot; &#10;| slot.IsEmpty &amp;&amp; self.CurrentState == &quot;hover&quot; =&gt; &quot;UI_CLICK_Construction_Start&quot;">
 					<child_m_user_properties>
 						<property
 							name="mouse_event0"
@@ -3685,9 +3699,6 @@
 				<property
 					name="disable_override6"
 					value="ContextUISFXSwitchSetter"/>
-				<property
-					name="disable_override7"
-					value="ContextTrashOnCondition"/>
 				<property
 					name="disable_override8"
 					value="ContextUISFXTrigger"/>
@@ -3874,7 +3885,13 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="HasLifecycleState == false"/>
+					context_function_id="HasLifecycleState == false">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignBuildingStateChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextStateSetterConditional"
 					context_object_id="CcoCampaignBuildingSlot">
@@ -3934,17 +3951,13 @@
 				<callback_with_context
 					callback_id="ContextUISFXTrigger"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="slot = StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;) | slot.IsRepairing =&gt; &quot;UI_CLICK_Building_Destroy&quot; | slot.IsUpgrading =&gt; &quot;UI_CAM_HUD_Construction_Cancel&quot; | &quot;UI_CLICK_Construction_Start&quot;">
+					context_function_id="slot = StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;)&#10;| slot.IsBuildingNew || slot.IsUpgrading || slot.IsRepairing =&gt; &quot;UI_CAM_HUD_Construction_Cancel&quot; &#10;| slot.CanUpgrade &amp;&amp; self.ParentContext.Id != &quot;slot_entry&quot; &amp;&amp; !slot.IsEmpty &amp;&amp; self.CurrentState == &quot;hover&quot; =&gt; &quot;UI_CLICK_Building_Upgrade&quot; &#10;| slot.IsEmpty &amp;&amp; self.CurrentState == &quot;hover&quot; =&gt; { slot.CharacterContext.MilitaryForceContext.ForceType == &quot;MALAKAI_BOUND_HORDE&quot; | &quot;UI_CAM_DWF_SpiritOfGrugni&quot; | &quot;UI_CLICK_Construction_Start&quot; }">
 					<child_m_user_properties>
 						<property
 							name="mouse_event0"
 							value="lclick"/>
 					</child_m_user_properties>
 				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextTrashOnCondition"
-					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="HasLifecycleState"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -3974,9 +3987,6 @@
 				<property
 					name="disable_override7"
 					value="ContextUISFXTrigger"/>
-				<property
-					name="disable_override8"
-					value="ContextTrashOnCondition"/>
 				<property
 					name="dynamic_image"
 					value="0"/>
@@ -4376,7 +4386,7 @@
 				<callback_with_context
 					callback_id="ContextCommandGiverOnContextSet"
 					context_object_id="CcoCampaignBuildingSlot"
-					context_function_id="GetIfElse(IsContextValid(self.ParentContext(&quot;building_browser&quot;)), GetIfElse(IsEmpty == false &amp;&amp; CanShowOptionsPopup &amp;&amp; (IsPrimary == false || CharacterContext.MilitaryForceContext.IsFixedCamp == false), self.SetProperty(&quot;mouseover&quot;, &quot;options_list&quot;), self.SetProperty(&quot;mouseover&quot;, &quot;&quot;)), GetIfElse(IsEmpty &amp;&amp; ShouldShowCategoriesPopup, self.SetProperty(&quot;mouseover&quot;, &quot;building_categories_popup&quot;),   GetIfElse(CanShowUpgradeOptions, self.SetProperty(&quot;mouseover&quot;, &quot;building_construction_popup&quot;), self.SetProperty(&quot;mouseover&quot;, &quot;&quot;))))"/>
+					context_function_id="GetIfElse(IsContextValid(self.ParentContext(&quot;building_browser&quot;)), GetIfElse(IsEmpty == false &amp;&amp; CanShowOptionsPopup &amp;&amp; (IsHordeSlot == false || IsPrimary == false || CharacterContext.MilitaryForceContext.IsFixedCamp == false), self.SetProperty(&quot;mouseover&quot;, &quot;options_list&quot;), self.SetProperty(&quot;mouseover&quot;, &quot;&quot;)), GetIfElse(IsEmpty &amp;&amp; ShouldShowCategoriesPopup, self.SetProperty(&quot;mouseover&quot;, &quot;building_categories_popup&quot;),   GetIfElse(CanShowUpgradeOptions, self.SetProperty(&quot;mouseover&quot;, &quot;building_construction_popup&quot;), self.SetProperty(&quot;mouseover&quot;, &quot;&quot;))))"/>
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoCampaignBuildingSlot">

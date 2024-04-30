@@ -96,6 +96,15 @@
 									<label_additional_effect this="A3B2D7DB-9253-4A80-8DB0898161586F09"/>
 								</template_additional_effect>
 							</additional_ui_effects_list>
+							<ammunition_replenishment_effect this="B20571C4-6B27-48C5-A6AF0FEF21C18371">
+								<effect_icon_parent this="67115DC0-27B5-4810-AA67A1929A8F0C43">
+									<effect_icon this="58CCD46D-AE2B-499F-B6225AFE773A818E"/>
+								</effect_icon_parent>
+								<label_effect this="8E91DD10-A87C-462B-99CDC05B5F0B6837"/>
+							</ammunition_replenishment_effect>
+							<remove_magical_effect this="0802E8E2-0485-45FD-83644CA2C1FA3925">
+								<label_effect this="415E1D86-95ED-4414-A8938CEB65471085"/>
+							</remove_magical_effect>
 						</projectile_phase_phase>
 					</contact_phase_parent>
 					<description this="A41D0B55-D20D-4F8E-A3E2B1AABABD1465"/>
@@ -386,7 +395,7 @@
 			part_of_template="true"
 			uniqueguid_in_template="439A25D8-93EF-4237-A6AC5071A3B38702"
 			uniqueguid="E4F9B218-4C29-4964-8BD8A4802AB9E1C5"
-			dimensions="360.00,362.00">
+			dimensions="379.00,410.00">
 			<state_uniqueguids>
 				<state_uniqueguid
 					name="NewState"
@@ -397,6 +406,9 @@
 				<callback_with_context
 					callback_id="ContextObjectStore"
 					context_object_id="CcoBattleAbility"/>
+				<callback_with_context
+					callback_id="ContextPropagationBlocker"
+					context_object_id="CcoEffect"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -941,60 +953,6 @@
 				<element value="ui/skins/default/modifier_icon_flaming.png"/>
 			</override_images>
 		</ignition_imbuement_value>
-		<tooltip_projectile
-			this="8F7D47E7-5D82-46C0-AFEAEFA96AF68FDB"
-			id="tooltip_projectile"
-			offset="389.00,287.00"
-			tooltipslocalised="true"
-			uniqueguid="8F7D47E7-5D82-46C0-AFEAEFA96AF68FDB"
-			currentstate="279FE83F-30F0-422F-986CA02507903A39"
-			defaultstate="279FE83F-30F0-422F-986CA02507903A39"
-			comment="Should be given a CcoProjectileRecord context, but if it is passed a unit ability details context reinitialises by grabbing projectile context">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="CustomTooltip"/>
-				<callback_with_context
-					callback_id="ContextComponentInitialiser"
-					context_object_id="CcoUnitAbilityDetails"
-					context_function_id="ProjectileRecordContext"/>
-			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="C8818088-6297-4FBC-9D3020CFE98862B0"
-					uniqueguid="C8818088-6297-4FBC-9D3020CFE98862B0"
-					imagepath="ui/skins/default/tooltip_frame.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="279FE83F-30F0-422F-986CA02507903A39"
-					name="NewState"
-					width="376"
-					height="532"
-					uniqueguid="279FE83F-30F0-422F-986CA02507903A39">
-					<imagemetrics>
-						<image
-							this="EFE755AB-D4E3-4AC2-87B295F41B64C673"
-							uniqueguid="EFE755AB-D4E3-4AC2-87B295F41B64C673"
-							componentimage="C8818088-6297-4FBC-9D3020CFE98862B0"
-							offset="-1.00,-8.00"
-							width="379"
-							height="548"
-							tile="true"
-							dockpoint="Center"
-							margin="16.00,20.00,16.00,20.00"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-			<LayoutEngine
-				type="List"
-				spacing="0.00,2.00"
-				sizetocontent="true"
-				secondary_margins="8.00,8.00"
-				margins="8.00,8.00">
-				<columnwidths>
-					<column width="280"/>
-				</columnwidths>
-			</LayoutEngine>
-		</tooltip_projectile>
 		<label_effect
 			this="857BDBD6-CE0F-4300-9C3F7523F3286151"
 			id="label_effect"
@@ -1034,6 +992,60 @@
 					is_text_localised="false"/>
 			</localised_texts>
 		</label_effect>
+		<tooltip_projectile
+			this="8F7D47E7-5D82-46C0-AFEAEFA96AF68FDB"
+			id="tooltip_projectile"
+			offset="389.00,287.00"
+			tooltipslocalised="true"
+			uniqueguid="8F7D47E7-5D82-46C0-AFEAEFA96AF68FDB"
+			currentstate="279FE83F-30F0-422F-986CA02507903A39"
+			defaultstate="279FE83F-30F0-422F-986CA02507903A39"
+			comment="Should be given a CcoProjectileRecord context, but if it is passed a unit ability details context reinitialises by grabbing projectile context">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="CustomTooltip"/>
+				<callback_with_context
+					callback_id="ContextComponentInitialiser"
+					context_object_id="CcoUnitAbilityDetails"
+					context_function_id="ProjectileRecordContext"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="C8818088-6297-4FBC-9D3020CFE98862B0"
+					uniqueguid="C8818088-6297-4FBC-9D3020CFE98862B0"
+					imagepath="ui/skins/default/tooltip_frame.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="279FE83F-30F0-422F-986CA02507903A39"
+					name="NewState"
+					width="395"
+					height="580"
+					uniqueguid="279FE83F-30F0-422F-986CA02507903A39">
+					<imagemetrics>
+						<image
+							this="EFE755AB-D4E3-4AC2-87B295F41B64C673"
+							uniqueguid="EFE755AB-D4E3-4AC2-87B295F41B64C673"
+							componentimage="C8818088-6297-4FBC-9D3020CFE98862B0"
+							offset="-1.00,-8.00"
+							width="398"
+							height="597"
+							tile="true"
+							dockpoint="Center"
+							margin="16.00,20.00,16.00,20.00"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+			<LayoutEngine
+				type="List"
+				spacing="0.00,2.00"
+				sizetocontent="true"
+				secondary_margins="8.00,8.00"
+				margins="8.00,8.00">
+				<columnwidths>
+					<column width="280"/>
+				</columnwidths>
+			</LayoutEngine>
+		</tooltip_projectile>
 		<label_ignition_imbument
 			this="E0CD22B3-DEC3-45EA-B34A4E7AD0D5927F"
 			id="label_ignition_imbument"
@@ -1657,6 +1669,40 @@
 					is_text_localised="false"/>
 			</localised_texts>
 		</label_phase_barrier_parent>
+		<value_barrier
+			this="76F40FEE-2BF6-4FDC-A7EECEAD896BD91B"
+			id="value_barrier"
+			part_of_template="true"
+			uniqueguid_in_template="CCD9FA44-C256-4572-82F09185BAAE33DD"
+			uniqueguid="76F40FEE-2BF6-4FDC-A7EECEAD896BD91B"
+			dimensions="27.00,24.00"
+			offset="0.00,2.00"
+			priority="255">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="2B5448C7-C5CB-4E07-816BE5EEC6D2C2B0"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="IntensifiedValueText(TotalBarrierHealPercent *100 / MaxNumericValue(Duration, 1.0), &quot;%+.2f%%&quot;)"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="suppress_localise_asserts"
+					value=""/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					text="999"
+					text_label="StateText_f0a4d333"
+					is_text_localised="false"/>
+			</localised_texts>
+		</value_barrier>
 		<list_parent
 			this="11944EF4-FA42-4544-B834FDC724841D08"
 			id="list_parent"
@@ -1669,8 +1715,8 @@
 				<newstate
 					this="E03C6761-2432-41FF-B4313150895F2618"
 					name="NewState"
-					width="360"
-					height="516"
+					width="379"
+					height="564"
 					uniqueguid="E03C6761-2432-41FF-B4313150895F2618"/>
 			</states>
 			<animations>
@@ -1720,40 +1766,6 @@
 				</columnwidths>
 			</LayoutEngine>
 		</list_parent>
-		<value_barrier
-			this="76F40FEE-2BF6-4FDC-A7EECEAD896BD91B"
-			id="value_barrier"
-			part_of_template="true"
-			uniqueguid_in_template="CCD9FA44-C256-4572-82F09185BAAE33DD"
-			uniqueguid="76F40FEE-2BF6-4FDC-A7EECEAD896BD91B"
-			dimensions="27.00,24.00"
-			offset="0.00,2.00"
-			priority="255">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="2B5448C7-C5CB-4E07-816BE5EEC6D2C2B0"/>
-			</state_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoSpecialAbilityPhaseRecord"
-					context_function_id="IntensifiedValueText(TotalBarrierHealPercent *100 / MaxNumericValue(Duration, 1.0), &quot;%+.2f%%&quot;)"/>
-			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="suppress_localise_asserts"
-					value=""/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					text="999"
-					text_label="StateText_f0a4d333"
-					is_text_localised="false"/>
-			</localised_texts>
-		</value_barrier>
 		<value_barrier_duration_infinite
 			this="5AA088E8-FF54-444B-B624C23D38B27488"
 			id="value_barrier_duration_infinite"
@@ -1786,6 +1798,84 @@
 					text_label="StateText_c6db0bad"/>
 			</localised_texts>
 		</value_barrier_duration_infinite>
+		<ammunition_replenishment_effect
+			this="B20571C4-6B27-48C5-A6AF0FEF21C18371"
+			id="ammunition_replenishment_effect"
+			part_of_template="true"
+			uniqueguid_in_template="D6F22B45-BFEC-479E-B406114AFCC4ED7F"
+			uniqueguid="B20571C4-6B27-48C5-A6AF0FEF21C18371"
+			dimensions="360.00,24.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="false"
+					uniqueguid="C4355A48-48BB-4649-AD0E2DBBFA3F2322"/>
+				<state_uniqueguid
+					name="true"
+					uniqueguid="4D411E20-CC72-4EF3-9A2B408D6AB38E29"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="HasAmmunitionReplenishment"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="false"
+					is_text_localised="false"/>
+				<localised_text
+					state="true"
+					is_text_localised="false"/>
+			</localised_texts>
+		</ammunition_replenishment_effect>
+		<effect_icon
+			this="58CCD46D-AE2B-499F-B6225AFE773A818E"
+			id="effect_icon"
+			part_of_template="true"
+			uniqueguid_in_template="C124DAD0-46E8-4049-B9C1E854BF0F3621"
+			uniqueguid="58CCD46D-AE2B-499F-B6225AFE773A818E"
+			dimensions="24.00,24.00"
+			dock_point="Center Right">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="D060105C-6E16-461B-A762064366E1C1D0"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/campaign ui/effect_bundles/ammo_character.png"
+					uniqueguid="DFD24BC3-6005-4F83-B74CA9BDF012EF32"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/campaign ui/effect_bundles/ammo_character.png"/>
+			</override_images>
+		</effect_icon>
+		<effect_icon_parent
+			this="67115DC0-27B5-4810-AA67A1929A8F0C43"
+			id="effect_icon_parent"
+			part_of_template="true"
+			uniqueguid_in_template="DA0A9D24-CB62-4A61-9CE4186BFE065635"
+			uniqueguid="67115DC0-27B5-4810-AA67A1929A8F0C43"
+			dimensions="45.00,24.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="CD8B33EB-AF7A-4F77-AA4F2126532F98F1"/>
+			</state_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</effect_icon_parent>
 		<title
 			this="230C8A64-8349-4438-97146C10CBEE8258"
 			id="title"
@@ -1849,6 +1939,45 @@
 				</columnwidths>
 			</LayoutEngine>
 		</fixed_stats_list>
+		<label_effect
+			this="8E91DD10-A87C-462B-99CDC05B5F0B6837"
+			id="label_effect"
+			part_of_template="true"
+			uniqueguid_in_template="9CA2A994-92F5-4735-A64C41EC55D1719C"
+			uniqueguid="8E91DD10-A87C-462B-99CDC05B5F0B6837"
+			dimensions="315.00,24.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="false"
+					uniqueguid="457627C8-4877-4661-AE39EB8E59073D9B"/>
+				<state_uniqueguid
+					name="true"
+					uniqueguid="086BF617-F7A4-46C4-9EDD4199B661FCA8"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="Loc(GetIfElse(AmmunitionReplenishment &gt; 0, &quot;phase_replenish_ammunition&quot;, &quot;phase_destroy_ammunition&quot;))"/>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="AmmunitionReplenishment &gt; 0"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="false"
+					text="dy_effect"
+					text_label="StateText_b505c32c"
+					is_text_localised="false"/>
+				<localised_text
+					state="true"
+					text="dy_effect"
+					text_label="StateText_d17fe5f4"
+					is_text_localised="false"/>
+			</localised_texts>
+		</label_effect>
 		<contact_phase_parent
 			this="3348485B-EC37-4E70-A05A413E51E42831"
 			id="contact_phase_parent"
@@ -1871,8 +2000,8 @@
 				<newstate
 					this="D8F069EC-79C4-4D14-B7D65004EBDBAFB5"
 					name="NewState"
-					width="360"
-					height="386"
+					width="379"
+					height="434"
 					uniqueguid="D8F069EC-79C4-4D14-B7D65004EBDBAFB5"/>
 			</states>
 			<LayoutEngine
@@ -1883,10 +2012,45 @@
 				</columnwidths>
 			</LayoutEngine>
 		</contact_phase_parent>
+		<label_effect
+			this="415E1D86-95ED-4414-A8938CEB65471085"
+			id="label_effect"
+			part_of_template="true"
+			uniqueguid_in_template="13158C80-90FB-44A1-B105C5D5B3411AA6"
+			uniqueguid="415E1D86-95ED-4414-A8938CEB65471085"
+			dimensions="285.00,24.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="false"
+					uniqueguid="4A2B3922-8CF5-45A2-A9BE1BBD090CFA34"/>
+				<state_uniqueguid
+					name="true"
+					uniqueguid="EA95C49D-8F14-44F8-B802791D2019ADB2"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="DatabaseRecordContext(&quot;CcoUnitAbilitiesAdditionalUiEffectRecord&quot;, &quot;wh3_dlc23_negate_magical_weapons&quot;).LocalisedText"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="false"
+					text="dy_effect"
+					text_label="StateText_4ba80b59"
+					is_text_localised="false"/>
+				<localised_text
+					state="true"
+					text="dy_effect"
+					text_label="StateText_96de534c"
+					is_text_localised="false"/>
+			</localised_texts>
+		</label_effect>
 		<description
 			this="A41D0B55-D20D-4F8E-A3E2B1AABABD1465"
 			id="description"
-			offset="0.00,488.00"
+			offset="0.00,536.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -1939,6 +2103,38 @@
 				</default>
 			</states>
 		</description>
+		<remove_magical_effect
+			this="0802E8E2-0485-45FD-83644CA2C1FA3925"
+			id="remove_magical_effect"
+			part_of_template="true"
+			uniqueguid_in_template="7757101A-46B8-4F84-92A4D386E7BDCC1D"
+			uniqueguid="0802E8E2-0485-45FD-83644CA2C1FA3925"
+			dimensions="360.00,24.00"
+			offset="19.00,0.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="false"
+					uniqueguid="246FC81D-B243-40EA-BF8BE36317BA9441"/>
+				<state_uniqueguid
+					name="true"
+					uniqueguid="63F3CB93-E3EF-4438-8F83D0D6CE3762FC"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="RemoveMagical"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="false"
+					is_text_localised="false"/>
+				<localised_text
+					state="true"
+					is_text_localised="false"/>
+			</localised_texts>
+		</remove_magical_effect>
 		<label_name
 			this="D82EE6A9-0405-4086-8CA81DB3C679EE0F"
 			id="label_name"

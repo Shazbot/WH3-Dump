@@ -1390,9 +1390,10 @@ local followers = {
 		["event"] = "CharacterRankUp",
 		["condition"] =
 			function(context)
-				return cm:get_saved_value("tech_researched_this_turn_" .. context:character():faction():name()) and cm:model():turn_number() > 1;
+				-- can only be equipped by heroes so not granting for lords
+				return cm:get_saved_value("tech_researched_this_turn_" .. context:character():faction():name()) and cm:model():turn_number() > 1 and context:character():character_type("general") == false;
 			end,
-		["chance"] = 13
+		["chance"] = 7
 	},
 	
 	---------------
@@ -1426,9 +1427,9 @@ local followers = {
 		["event"] = "CharacterRankUp",
 		["condition"] =
 			function(context)
-				return cm:get_saved_value("tech_researched_this_turn_" .. context:character():faction():name()) and cm:model():turn_number() > 1;
+				return cm:get_saved_value("tech_researched_this_turn_" .. context:character():faction():name()) and cm:model():turn_number() > 1 and context:character():has_military_force();
 			end,
-		["chance"] = 15
+		["chance"] = 7
 	},
 	{
 		["follower"] = "wh_main_anc_follower_dwarfs_brewmaster",

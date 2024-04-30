@@ -1,0 +1,249 @@
+Chieftains
+{
+  TokenResource
+  {
+    PlayersFaction.PooledResourceContext("wh3_dlc25_chieftain_token_resource")
+  }
+
+  ChieftainKeyFromBase(CcoCampaignRitual unlock)
+  {
+    unlock.RitualContext.Key.Replace("_recruit", "").Replace("wh3_dlc25_ritual_nur_", "")
+  }
+
+  UnlockRituals
+  {
+    PlayersFaction.UnlockableRitualList("TAMURKHAN_CHIEFTAIN_RECRUIT")
+  }
+  
+  IsChieftainKnown(CcoCampaignRitual unlock)
+  { 
+      unlock.IsComplete
+  }
+  
+  AbilityListFromBase(CcoCampaignRitual unlock)
+  {
+    (chief = Chieftains.ChieftainKeyFromBase(unlock)) => {
+	  Join(
+		PlayersFaction.RitualManagerContext.RitualContext(DatabaseRecordContext("CcoRitualRecord", "wh3_dlc25_ritual_nur_special_" + chief + "_tier_2")),
+		PlayersFaction.RitualManagerContext.RitualContext(DatabaseRecordContext("CcoRitualRecord", "wh3_dlc25_ritual_nur_special_" + chief + "_tier_3"))
+	  )
+	}
+  }
+  
+  IsAbilityUnlocked(CcoCampaignRitual ritual, CcoAgentSubtypeRecord owner)
+  {
+    ritual.CanPerformRitual && ritual.IsAvailable && 
+    ((ritual.RitualContext.Key.EndsWith("3")
+	&& ritual.RitualContext.Key.EndsWith("castellan_tier_3") == false
+	&& ritual.RitualContext.Key.EndsWith("exalted_hero_tier_3") == false
+	&& ritual.RitualContext.Key.EndsWith("fimir_balefiend_tier_3") == false) ||
+      # TODO: using data binding in this call to FirstContext breaks #
+      ((a = PlayersFaction.CharacterList.FirstContext(AgentSubtypeRecordContext == owner)) =>
+        a && (a.IsAgent == false || a.TransportedInMilitaryForceContext))
+    )
+  }
+  
+  FavourRitualFromBase(CcoCampaignRitual unlock)
+  {
+    (chief = Chieftains.ChieftainKeyFromBase(unlock)) => {
+      PlayersFaction.RitualManagerContext.RitualContext(DatabaseRecordContext("CcoRitualRecord", "wh3_dlc25_ritual_nur_" + chief + "_tier_2"))
+	}
+  }
+  
+  DeferenceResourceForChieftain(UniString chieftain)
+  {
+	PlayersFaction.PooledResourceContext("wh3_dlc25_chieftain_deference_" + chieftain)
+  }
+  
+  DeferenceGroupListFromBase(CcoCampaignRitual unlock)
+  {
+    (chief = Chieftains.ChieftainKeyFromBase(unlock)) => {
+	  Join(
+		DatabaseRecordContext("CcoCampaignGroupRecord", "wh3_dlc25_chieftain_deference_" + chief + "_tier_1"),
+		DatabaseRecordContext("CcoCampaignGroupRecord", "wh3_dlc25_chieftain_deference_" + chief + "_tier_2"),
+		DatabaseRecordContext("CcoCampaignGroupRecord", "wh3_dlc25_chieftain_deference_" + chief + "_tier_3")
+	  )
+	}
+  }
+  
+  CurrentDeferenceForBase(CcoCampaignRitual unlock)
+  {
+    (deference_idx = Chieftains.CurrentDeferenceIndexForBase(unlock)) => {
+	  
+	  GetIf(
+	    deference_idx != -1,
+		Chieftains.DeferenceBundleListFromBase(unlock)[deference_idx])
+	  
+	}
+  }
+  
+  CurrentDeferenceIndexForBase(CcoCampaignRitual unlock)
+  {
+    (chief    = Chieftains.ChieftainKeyFromBase(unlock),
+	 tiers    = Chieftains.DeferenceGroupListFromBase(unlock),
+	 resource = Chieftains.DeferenceResourceForChieftain(chief)) => {
+	 
+	  tiers.Filter((t) => resource.Total >= t.MinRange).Size - 1
+	 
+	}
+  }
+  
+  CurrentTraitForBase(CcoCampaignRitual unlock)
+  {
+    (deference_idx = Chieftains.CurrentDeferenceIndexForBase(unlock)) => {
+	  Chieftains.TraitList(unlock)[MaxNumericValue(0, deference_idx)]
+	}
+  }
+  
+  TraitList(CcoCampaignRitual unlock)
+  {
+    (chief = Chieftains.ChieftainKeyFromBase(unlock)) => {
+	  Join(
+		DatabaseRecordContext("CcoCharacterTraitLevelRecord", "wh3_dlc25_trait_chieftain_" + chief + "_1"),
+		DatabaseRecordContext("CcoCharacterTraitLevelRecord", "wh3_dlc25_trait_chieftain_" + chief + "_2"),
+		DatabaseRecordContext("CcoCharacterTraitLevelRecord", "wh3_dlc25_trait_chieftain_" + chief + "_3")
+	  )
+	}
+  }
+  
+  DeferenceBundleListFromBase(CcoCampaignRitual unlock)
+  {
+    (chief = Chieftains.ChieftainKeyFromBase(unlock)) => {
+	  Join(
+		DatabaseRecordContext("CcoEffectBundle", "wh3_dlc25_chieftain_deference_" + chief + "_tier_1"),
+		DatabaseRecordContext("CcoEffectBundle", "wh3_dlc25_chieftain_deference_" + chief + "_tier_2"),
+		DatabaseRecordContext("CcoEffectBundle", "wh3_dlc25_chieftain_deference_" + chief + "_tier_3"),
+		DatabaseRecordContext("CcoEffectBundle", "wh3_dlc25_chieftain_deference_" + chief + "_tier_4")
+	  )
+	}
+  }
+  
+  DeferenceGroupContextFromTierIndex(CcoCampaignRitual unlock, Int index)
+  {
+	GetIf(index > 1 && Chieftains.Chieftains.DeferenceGroupListFromBase(unlock).Size > index - 1, Chieftains.Chieftains.DeferenceGroupListFromBase(unlock).At(index - 2))
+  }
+  
+  DeferenceUnitList(CcoEffectBundle bundle)
+  {
+    bundle
+	  .EffectList
+	  .Transform(
+	    UnitSetsFromAllSourcesList
+		  .FirstContext
+		  .UnitsInSetList
+		  .FirstContext)
+  }
+  
+  AgentSubtypeFromRitualTemp(CcoCampaignRitual unlock)
+  {
+    (chief = Chieftains.ChieftainKeyFromBase(unlock)) => 
+	{
+	  chief |
+	  chief == "bray_shaman" => DatabaseRecordContext("CcoAgentSubtypeRecord", "wh3_dlc25_nur_bray_shaman_wild_chieftain") |
+      chief == "castellan" => DatabaseRecordContext("CcoAgentSubtypeRecord", "wh3_dlc25_nur_castellan_chieftain") |
+      chief == "exalted_hero" => DatabaseRecordContext("CcoAgentSubtypeRecord", "wh3_dlc25_nur_exalted_hero_chieftain") |
+      chief == "fimir_balefiend" => DatabaseRecordContext("CcoAgentSubtypeRecord", "wh3_dlc25_nur_fimir_balefiend_shadow_chieftain") |
+      chief == "werekin" => DatabaseRecordContext("CcoAgentSubtypeRecord", "wh3_dlc25_nur_skin_wolf_werekin_chieftain") |
+	  chief == "kazyk" => DatabaseRecordContext("CcoAgentSubtypeRecord", "wh3_dlc25_nur_kayzk_the_befouled")
+	}
+  }
+  
+  MercenaryUnitFromMainUnit(CcoMainUnitRecord unit)
+  {
+    PlayersFaction
+	  .MercenaryPoolContext
+	  .MercenaryPoolUnitList
+	  .FirstContext((u) => u.MainUnitRecordContext == unit)
+  }
+  
+  MercenaryRitualForUnit(CcoMainUnitRecord unit)
+  {
+    (chief = Chieftains.ChieftainKeyFromBase(unlock)) => {
+	  Join(
+		PlayersFaction.RitualManagerContext.RitualContext(DatabaseRecordContext("CcoRitualRecord", "wh3_dlc25_ritual_nur_" + chief + "_tier_2")),
+		PlayersFaction.RitualManagerContext.RitualContext(DatabaseRecordContext("CcoRitualRecord", "wh3_dlc25_ritual_nur_" + chief + "_tier_3"))
+	  )
+	}
+  }
+  
+  CanPurchaseMercenaryUnit(CcoCampaignRitual ritual)
+  {
+	(unit = ritual.RitualContext.CompletionPayloadContext.CampaignPayloadContext.UnitComponents.FirstContext.UnitContext, merc =  Chieftains.MercenaryUnitFromMainUnit(unit)) => 
+	{
+	  (PlayersFaction.ExNumUnitsRecruited(unit) + merc.AvailableUnitCount) < PlayersFaction.UnitCapForUnit(unit) && ritual.CanPerformRitual && ritual.IsAvailable
+	}
+  }
+  
+  AncillaryFromBase(CcoCampaignRitual unlock)
+  {
+    (chief = Chieftains.ChieftainKeyFromBase(unlock),
+	 cat = DatabaseRecordContext("CcoAncillaryTypeRecord", "wh3_dlc25_anc_chieftain_" + chief)) => {
+	  DefaultDatabaseRecord("CcoAncillaryRecord")
+	    .RecordList
+		.FirstContext((a) => a.TypeContext == cat)
+	}
+  }
+  
+  UnitRitualForUnit(CcoMainUnitRecord unit)
+  {
+    PlayersFaction
+	  .UnlockableRitualList("TAMURKHAN_CHIEFTAIN_UNIT_PURCHASE")
+	  .FirstContext(
+	    RitualContext
+		  .CompletionPayloadContext
+		  .CampaignPayloadContext
+		  .UnitComponents
+		  .FirstContext
+		  .UnitContext == unit
+	  )
+  }
+  
+  QuestBattleMissionRecordFromBase(CcoCampaignRitual unlock)
+  {
+  (chief = Chieftains.ChieftainKeyFromBase(unlock)) => 
+	{
+		GetIfElse(CampaignRoot.CampaignKey == "wh3_main_combi", 
+		DatabaseRecordContext("CcoMissionRecord", "wh3_dlc25_ie_qb_nur_tamurkhan_chieftain_battle_" + chief), 
+		DatabaseRecordContext("CcoMissionRecord", "wh3_dlc25_qb_nur_tamurkhan_chieftain_battle_" + chief))
+	}
+  }
+  
+  QuestBattleMissionFromBase(CcoCampaignRitual unlock)
+  {
+	PlayersFaction.MissionList.FirstContext(MissionRecordContext == Chieftains.QuestBattleMissionRecordFromBase(unlock))
+  }
+  
+  QuestBattleMissionCompleted(CcoCampaignRitual unlock)
+  {
+  (mission = QuestBattleMissionFromBase(unlock)) =>
+	{
+		IsContextValid(mission) && mission.Completed
+	}
+  }
+  
+  IsDeferenceTierComplete(CcoCampaignPooledResource resource, CcoCampaignRitual unlock, Int index)
+  {
+	(group = Chieftains.DeferenceGroupContextFromTierIndex(unlock, index)) =>
+	{
+		(index == 1 && unlock.IsComplete) || (IsContextValid(group) && (resource.Total >=  group.MaxRange + 1 || (group.MinRange == group.MaxRange && resource.Total == group.MaxRange)) || (IsContextValid(group) == false && QuestBattleMissionCompleted(unlock)))
+	}
+  }
+  
+  TooltipForAbilityRitual(CcoCampaignRitual ritual)
+  {
+	ritual 
+	| ritual.IsAvailable == false => Loc("wh3_dlc25_tamurkhan_tooltip_deference_level_needed", Chieftains.DeferenceBundleListFromBase(self.ParentContext.ParentContext.StoredContextFromParent("CcoCampaignRitual"))[self.ParentContext.ChildIndex].Name)
+	| ritual.CanAfford == false => Loc("pooled_resource_insufficient_dominance")
+	| ritual.IsOnCooldown => Format(Loc("ritual_cooldown"), ritual.RemainingCooldown)
+	| Chieftains.IsAbilityUnlocked(ritual, StoredContextFromParentRequired("CcoAgentSubtypeRecord")) == false => Loc("wh3_dlc25_tamurkhan_tooltip_ability_embed_hero") 
+	| Format(Loc("wh3_dlc25_tamurkhan_tooltip_ability_available"), ritual.RitualContext.CompletionPayloadContext.EffectBundleAndDurationPairList.FirstContext.Second)
+  }
+}
+
+CcoCampaignFaction
+{
+    ExNumUnitsRecruited(CcoMainUnitRecord unit)
+    {
+        Floor(ControllableMilitaryForceList.Sum((force) => force.UnitList.Count((fu) => fu.UnitRecordContext == unit)))
+    }
+}

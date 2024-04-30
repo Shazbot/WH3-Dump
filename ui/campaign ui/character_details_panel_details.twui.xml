@@ -8995,7 +8995,16 @@
 				<callback_with_context
 					callback_id="List"
 					context_object_id="CcoAncillariesCategoryRecord"
-					context_function_id="RecordList.Filter(IsHidden == false &amp;&amp; Category != &quot;general&quot; &amp;&amp; Category != &quot;mount&quot;).Sort(SortOrder, true)"/>
+					context_function_id="RecordList.Filter(IsHidden == false &amp;&amp; Category != &quot;general&quot; &amp;&amp; Category != &quot;mount&quot;).Sort(SortOrder, true)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignSelectionChanged"/>
+						<property
+							name="stored_object_to_pass0"
+							value="CcoCampaignCharacter"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextInitDatabaseRecord"
 					context_object_id="CcoAncillariesCategoryRecord">
@@ -9005,6 +9014,9 @@
 							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignCharacter"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -9037,7 +9049,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoCampaignCharacter"
-					context_function_id="AncillaryList.Filter(AncillaryRecordContext.CategoryContext.Category == &quot;general&quot;).PadRight(FactionContext.NumAncillariesAllowedPerCharacterForFaction(&quot;general&quot;))">
+					context_function_id="AncillaryList.Filter(AncillaryRecordContext.CategoryContext.Category == &quot;general&quot;).PadRight(FactionContext.NumAncillariesAllowedPerCharacterForFaction(this, &quot;general&quot;))">
 					<child_m_user_properties>
 						<property
 							name="event1"
@@ -11522,7 +11534,7 @@
 			component_anchor_point="0.00,1.00"
 			priority="80"
 			tooltipslocalised="true"
-			componentleveltooltip="This item is unique, and only available to this character."
+			componentleveltooltip="This item is unique and only available to this character."
 			tooltiplabel="ComponentTooltip_fa02d1de"
 			uniqueguid="3EBA3B2E-3898-42BB-921FD810BA8ACDD1"
 			currentstate="6A9DD03D-A7DB-4B16-91A9E9187C133F16"
@@ -11815,7 +11827,7 @@
 					height="30"
 					uniqueguid="2F3D4EF0-7A5F-41D4-AE9FCA50274546EC">
 					<component_text
-						text="Uneqipped"
+						text="Unequipped"
 						textvalign="Center"
 						textxoffset="6.00,6.00"
 						texthbehaviour="Never split"
@@ -12172,7 +12184,7 @@
 					name="NewState"
 					width="294"
 					height="134"
-					interactive="true"
+					disabled="true"
 					uniqueguid="5D5D37D7-76E3-416B-896106B96135D79B"/>
 			</states>
 			<LayoutEngine
@@ -12319,7 +12331,7 @@
 					name="NewState"
 					width="297"
 					height="496"
-					interactive="true"
+					disabled="true"
 					uniqueguid="5564820B-5DC0-47F5-AA51FC6A11527B2E"/>
 			</states>
 		</list_clip>
@@ -12634,7 +12646,7 @@
 					name="NewState"
 					width="294"
 					height="58"
-					interactive="true"
+					disabled="true"
 					uniqueguid="DF3C4129-5725-4211-AECEF90A329BCBD5"/>
 			</states>
 			<LayoutEngine
@@ -12859,7 +12871,16 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoCampaignCharacter"
-					context_function_id="AncillaryList.Filter(AncillaryRecordContext.CategoryContext.Category == StoredContextFromParent(&quot;CcoAncillariesCategoryRecord&quot;).Category).PadRight(StoredContextFromParent(&quot;CcoAncillariesCategoryRecord&quot;).NumAllowedPerCharacterForFaction(FactionContext.FactionRecordContext))"/>
+					context_function_id="AncillaryList.Filter(AncillaryRecordContext.CategoryContext.Category == StoredContextFromParent(&quot;CcoAncillariesCategoryRecord&quot;).Category).PadRight(StoredContextFromParent(&quot;CcoAncillariesCategoryRecord&quot;).NumAllowedPerCharacterForFaction(this, this.FactionContext.FactionRecordContext))">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignSelectionChanged"/>
+						<property
+							name="object_store_events"
+							value="^1"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<states>
 				<default
@@ -14076,7 +14097,7 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					context_object_id="CcoAncillariesCategoryRecord"
-					context_function_id="NumAllowedPerCharacterForFaction == 1"/>
+					context_function_id="NumAllowedPerCharacterForFaction(SelectedOrContainedCharacter) == 1 &amp;&amp; SelectedOrContainedCharacter.CanUseAncillaryCategory(this)"/>
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoCampaignCharacter"
@@ -14240,19 +14261,10 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					context_object_id="CcoAncillariesCategoryRecord"
-					context_function_id="NumAllowedPerCharacterForFaction &gt; 1"/>
+					context_function_id="NumAllowedPerCharacterForFaction(SelectedOrContainedCharacter) &gt; 1 &amp;&amp; SelectedOrContainedCharacter.CanUseAncillaryCategory(this)"/>
 				<callback_with_context
 					callback_id="ContextObjectStore"
 					context_object_id="CcoAncillariesCategoryRecord"/>
-				<callback_with_context
-					callback_id="ContextCommandEvent"
-					context_function_id="GetIfElse(self.ChildContext(&quot;empty_slot&quot;).SelectionManagingComponentContext.CurrentSelection.SelectedObjectList.FirstContext.AncillaryRecordContext.CategoryContext == StoredContext(&quot;CcoAncillariesCategoryRecord&quot;) &amp;&amp; SelectedOrContainedCharacter.CanEquipAncillary(self.ChildContext(&quot;empty_slot&quot;).SelectionManagingComponentContext.CurrentSelection.SelectedObjectList.FirstContext, IsContextValid(StoredContext(&quot;CcoCampaignAncillary&quot;)) ), self.SetState(&quot;glow&quot;), self.SetState(&quot;inactive&quot;))">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="SlotItemDragStart"/>
-					</child_m_user_properties>
-				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextCommandEvent"
 					context_function_id="self.SetState(&quot;active&quot;)">
@@ -14266,6 +14278,16 @@
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoAncillariesCategoryRecord"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoAncillariesCategoryRecord"
+					context_function_id="SelectedOrContainedCharacter.CanUseAncillaryCategory(this)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignSelectionChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -14461,7 +14483,13 @@
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoCampaignCharacter"
-					context_function_id="StoredContextFromParent(&quot;CcoAncillariesCategoryRecord&quot;)"/>
+					context_function_id="StoredContextFromParent(&quot;CcoAncillariesCategoryRecord&quot;)">
+					<child_m_user_properties>
+						<property
+							name="object_store_events"
+							value="^2"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextCommandEvent"
 					context_function_id="self.SetState(&quot;active&quot;)">

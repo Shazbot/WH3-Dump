@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -4500,7 +4500,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignFaction"
-					context_function_id="MissionList.Filter((mission) =&gt; Component(&quot;03864E19-EAB8-49E8-8A2EC45D3D4CAE01&quot;).ShouldShowMission(mission) &amp;&amp; MissionRecordContext.EventCategoryContext.CategoryKey != &quot;Grudges&quot;).Size &gt; 0">
+					context_function_id="MissionList.Filter((mission) =&gt; Component(&quot;03864E19-EAB8-49E8-8A2EC45D3D4CAE01&quot;).ShouldShowMission(mission)).Size &gt; 0">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -4871,7 +4871,7 @@
 			priority="50"
 			tooltipslocalised="true"
 			uniqueguid="18B82DF9-0D22-4CD2-8F7C71D059AD86B1"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="FD9FDB1C-B5FC-4A8F-B7AEE059B36BA0BA"
 			defaultstate="FD9FDB1C-B5FC-4A8F-B7AEE059B36BA0BA">
 			<callbackwithcontextlist>
@@ -5113,7 +5113,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignMission"
-					context_function_id="BattleSetupInfoContext.AllianceContextFromIndex(1).ArmyList.Size &gt; 1"/>
+					context_function_id="BattleSetupInfoContext.AllianceContextFromIndex(1).ArmyList(true).Size &gt; 1"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -5555,7 +5555,7 @@
 			priority="50"
 			tooltipslocalised="true"
 			uniqueguid="FA7EF950-20AE-4712-8B3806700DFC4861"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="74390C7C-AF72-4D65-BA588E27018381B2"
 			defaultstate="74390C7C-AF72-4D65-BA588E27018381B2">
 			<callbackwithcontextlist>
@@ -6882,6 +6882,13 @@
 			defaultstate="C92AE6FA-74BF-4A26-830D953D68D47A77">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="CharacterEffectsBundleIcon"/>
+				<callback_with_context callback_id="ContextLayoutTooltip">
+					<child_m_user_properties>
+						<property
+							name="allow_no_path"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -10174,7 +10181,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoCampaignFaction"
-					context_function_id="MissionList.Filter((mission) =&gt; Component(&quot;03864E19-EAB8-49E8-8A2EC45D3D4CAE01&quot;).ShouldShowMission(mission) &amp;&amp; MissionRecordContext.EventCategoryContext.CategoryKey != &quot;Grudges&quot;).Sort(Completed, true)">
+					context_function_id="MissionList.Filter((mission) =&gt; Component(&quot;03864E19-EAB8-49E8-8A2EC45D3D4CAE01&quot;).ShouldShowMission(mission)).Sort(Completed, true)">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -10730,7 +10737,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignFaction"
-					context_function_id="MissionList.Filter((mission) =&gt; Component(&quot;03864E19-EAB8-49E8-8A2EC45D3D4CAE01&quot;).ShouldShowMission(mission) &amp;&amp; MissionRecordContext.EventCategoryContext.CategoryKey != &quot;Grudges&quot;).Size == 0">
+					context_function_id="MissionList.Filter((mission) =&gt; Component(&quot;03864E19-EAB8-49E8-8A2EC45D3D4CAE01&quot;).ShouldShowMission(mission)).Size == 0">
 					<child_m_user_properties>
 						<property
 							name="event0"

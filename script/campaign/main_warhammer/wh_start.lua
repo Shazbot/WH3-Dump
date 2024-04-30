@@ -89,9 +89,6 @@ function start_game_all_factions()
 	
 	-- load the campaign quest battle listners script
 	set_piece_battle_abilities:initialise();
-
-	-- load the Grudges script
-	attempt_to_load_grudges_script();
 	
 	-- load the horde reemergence script
 	add_horde_reemergence_listeners();
@@ -240,8 +237,8 @@ function start_game_all_factions()
 	add_wulfhart_hunters_listeners();
 	nakai_temples:add_nakai_temples_listeners();
 	
-	-- PRO08 Gotrek & Felix Features
-	add_gotrek_felix_listeners();
+	-- PRO08 Gotrek & Felix Features (removed with Gotrek and Felix rework to both Legendary Heroes)
+	--add_gotrek_felix_listeners();
 	
 	-- DLC14 The Shadow & The Blade
 	out("==== Shadow & Blade ====");
@@ -312,6 +309,11 @@ function start_game_all_factions()
 	caravans:initialise()
 	harmony:initialise()
 	campaign_ai_script:setup_listeners()
+	grudge_cycle:initialise()
+	legendary_grudges:initialise()
+	starting_grudge_missions:initialise()
+	emp_techs:initialise()
+	ancillary_item_forge:initialise()
 
 
 	---Champions of Chaos
@@ -336,6 +338,20 @@ function start_game_all_factions()
 	mother_ostankya_features:initialise()
 	matters_of_state:initialise()
 	the_changeling_features:initialise()
+
+	-- dlc25
+	nur_chieftains:initialise()
+	malakai_battles:initialize()
+	gunnery_school:initialise()
+	college_of_magic:initialise()
+	emperors_decrees:initialise()
+	nemesis_crown:initialise()
+	nurgle_plagues:initialise()
+	imperial_authority:initialise()
+	spirit_of_grungni:initialise()
+	empire_state_troops:initialise()
+	gardens_of_morr:initialise()
+	gelt_dilemmas:initialise()
 	
 	out.dec_tab();
 end;

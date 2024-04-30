@@ -1,0 +1,34 @@
+BlackTower
+{
+	BlackTowerResource
+	{
+		PlayersFaction.PooledResourceContext("wh3_dlc25_emp_black_towers")
+	}
+	
+	CanTeleport(CcoCampaignSettlement settlement, CcoCampaignRitual ritual)
+	{
+		ritual.CanPerformRitual(settlement, PlayersFaction.FactionLeaderContext) && PlayersFaction.FactionLeaderContext.MilitaryForceContext.IsLayingSiege == false && PlayersFaction.FactionLeaderContext.SettlementContext.IsUnderSiege == false
+	}
+	
+	TeleportTooltip(CcoCampaignSettlement settlement, CcoCampaignRitual ritual)
+	{
+		Loc("wh3_dlc25_elspeth_travel_tooltip")
+		+ GetIf(PlayersFaction.FactionLeaderContext.MilitaryForceContext.IsLayingSiege, "{{tr:new_paragraph}}" + Loc("wh3_dlc25_elspeth_travel_tooltip_laying_siege"))
+		+ GetIf(PlayersFaction.FactionLeaderContext.SettlementContext.IsUnderSiege, "{{tr:new_paragraph}}" + Loc("wh3_dlc25_elspeth_travel_tooltip_under_siege"))
+		+ GetIf(ritual.CanPerformRitual(settlement, PlayersFaction.FactionLeaderContext) == false, "{{tr:new_paragraph}}" + ritual.InvalidRitualReason(settlement, PlayersFaction.FactionLeaderContext))
+	}
+}
+
+CcoCampaignSettlement
+{
+	ExHasBlackTowerSlot
+	{ 
+		HostileSlotsGroupList.Any(CategoryObject.CultureContext.Key == "wh_main_emp_empire" && CategoryObject.IsPlayersFaction ) 
+    }
+
+	ExBlackTowerSlot
+	{
+		HostileSlotsGroupList.FirstContext(CategoryObject.CultureContext.Key == "wh_main_emp_empire" && CategoryObject.IsPlayersFaction )
+	}
+}
+

@@ -22,6 +22,12 @@ nagash_book_participant_factions = {
 	["wh3_main_emp_cult_of_sigmar"] = true
 }
 
+function does_local_faction_have_books_of_nagash()
+	local local_faction = cm:get_local_faction(true)
+	
+	return nagash_book_participant_factions[local_faction:name()] or nagash_book_participant_cultures[local_faction:culture()]
+end
+
 function fail_books_of_nagash_missions_for_other_players(completing_faction, mission_key)
 	local human_factions = cm:get_human_factions();
 
@@ -114,16 +120,18 @@ function setup_book_missions(faction_key, spawn_forces, is_mp)
 			
 			books_mission_regions[books_mission_prefix .. i] = book_objective.target;
 			
-			local region = cm:get_region(book_objective.target);
-			
-			if region then
-				local garrison_residence = region:garrison_residence();
-				local garrison_residence_CQI = garrison_residence:command_queue_index();
-				cm:add_garrison_residence_vfx(garrison_residence_CQI, books_vfx_key, true);
-				out("Adding Books of Nagash scripted VFX to garrison...\n\tGarrison CQI: " .. garrison_residence_CQI .. "\n\tVFX: " .. books_vfx_key);
-			else
-				script_error("Could not find region with key [" .. book_objective.target .. "] to apply a Books of Nagash scripted VFX to");
-				return;
+			if does_local_faction_have_books_of_nagash() then
+				local region = cm:get_region(book_objective.target);
+				
+				if region then
+					local garrison_residence = region:garrison_residence();
+					local garrison_residence_CQI = garrison_residence:command_queue_index();
+					cm:add_garrison_residence_vfx(garrison_residence_CQI, books_vfx_key, true);
+					out("Adding Books of Nagash scripted VFX to garrison...\n\tGarrison CQI: " .. garrison_residence_CQI .. "\n\tVFX: " .. books_vfx_key);
+				else
+					script_error("Could not find region with key [" .. book_objective.target .. "] to apply a Books of Nagash scripted VFX to");
+					return;
+				end
 			end
 		elseif book_objective.objective == "ENGAGE_FORCE" then
 			if spawn_forces then
@@ -147,9 +155,11 @@ function setup_book_missions(faction_key, spawn_forces, is_mp)
 			mm:add_condition("cqi " .. force_cqi);
 			mm:add_condition("requires_victory");
 			
-			local leader_cqi = cm:get_faction(book_objective.target):faction_leader():command_queue_index();
-			out("Adding Books of Nagash scripted VFX to character...\n\tCharacter CQI: " .. leader_cqi .. "\n\tVFX: " .. books_vfx_key);
-			cm:add_character_vfx(leader_cqi, books_vfx_key, true);
+			if does_local_faction_have_books_of_nagash() then
+				local leader_cqi = cm:get_faction(book_objective.target):faction_leader():command_queue_index();
+				out("Adding Books of Nagash scripted VFX to character...\n\tCharacter CQI: " .. leader_cqi .. "\n\tVFX: " .. books_vfx_key);
+				cm:add_character_vfx(leader_cqi, books_vfx_key, true);
+			end
 			
 			books_mission_characters[books_mission_prefix .. i] = leader_cqi;
 			books_mission_factions[books_mission_prefix .. i] = book_objective.target;
@@ -196,7 +206,7 @@ function setup_book_missions(faction_key, spawn_forces, is_mp)
 end
 
 function remove_book_region_vfx(mission_key)
-	if books_mission_regions[mission_key] ~= nil then
+	if books_mission_regions[mission_key] ~= nil and does_local_faction_have_books_of_nagash() then
 		local region_key = books_mission_regions[mission_key];
 		local region = cm:model():world():region_manager():region_by_key(region_key);
 		local garrison_residence = region:garrison_residence();
@@ -206,7 +216,7 @@ function remove_book_region_vfx(mission_key)
 end
 
 function remove_book_character_vfx(mission_key)
-	if books_mission_characters[mission_key] ~= nil then
+	if books_mission_characters[mission_key] ~= nil and does_local_faction_have_books_of_nagash() then
 		local character_cqi = books_mission_characters[mission_key];
 		cm:remove_character_vfx(character_cqi, books_vfx_key);
 	end

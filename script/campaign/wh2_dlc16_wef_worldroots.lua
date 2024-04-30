@@ -1720,10 +1720,7 @@ function Worldroots:update_worldroots_health()
 				
 				if current_human_faction:culture() == "wh_dlc05_wef_wood_elves" then
 					local bv = cm:get_factions_bonus_value(current_human_faction, "worldroots_health_per_turn_all_regions")
-					
-					if bv > 0 then
-						Worldroots:add_pooled_resource_to_all_wood_elves(forest, "technology", bv)
-					end
+					Worldroots:add_pooled_resource_to_all_wood_elves(forest, "events", bv)
 				end
 			end
 			

@@ -114,8 +114,8 @@ function Norsca_Listen_For_Execution_of_Enemy_Lord(enemy_leader_family_member_ke
 		true,
 		function(context)
 			if context:dilemma() == NORSCA_CONFEDERATE_DILEMMA and context:choice() == NORSCA_CONFEDERATE_DILEMMA_EXECUTION_OPTION then
-				-- Autosave on legendary.
-				if cm:model():difficulty_level() == -3 and not cm:is_multiplayer() then
+				-- Autosave on ironman.
+				if cm:model():manual_saves_disabled() and not cm:is_multiplayer() then
 					cm:callback(function() cm:autosave_at_next_opportunity() end, 0.5);
 				end;
 

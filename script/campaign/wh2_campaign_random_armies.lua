@@ -764,6 +764,38 @@ function WH_Random_Army_Generator:generate_random_army(key, template_key, num_un
 		ram:add_unit(key, "wh_main_grn_mon_giant", 1*weighting_modifier);
 		ram:add_unit(key, "wh_main_grn_inf_black_orcs", 2*weighting_modifier);
 
+	elseif template_key == "grn_greenskins_goblins_only" then
+		local weighting_modifier = low_tier_modifier
+		ram:add_unit(key, "wh_main_grn_inf_goblin_spearmen", 10*weighting_modifier);
+		ram:add_unit(key, "wh_dlc06_grn_inf_nasty_skulkers_0", 4*weighting_modifier);
+		ram:add_unit(key, "wh_main_grn_inf_night_goblins", 2*weighting_modifier);
+		ram:add_unit(key, "wh_main_grn_mon_trolls", 3*weighting_modifier);
+		ram:add_unit(key, "wh_main_grn_inf_goblin_archers", 10*weighting_modifier);
+		ram:add_unit(key, "wh_main_grn_cav_goblin_wolf_riders_0", 5*weighting_modifier);
+		ram:add_unit(key, "wh_main_grn_cav_goblin_wolf_riders_1", 2*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc15_grn_veh_snotling_pump_wagon_0", 2*weighting_modifier);
+		
+		local weighting_modifier = mid_tier_modifier
+		ram:add_unit(key, "wh_main_grn_art_goblin_rock_lobber", 2*weighting_modifier);
+		ram:add_unit(key, "wh_main_grn_cav_goblin_wolf_chariot", 1*weighting_modifier);
+		ram:add_unit(key, "wh_main_grn_cav_forest_goblin_spider_riders_0", 2*weighting_modifier);
+		ram:add_unit(key, "wh_main_grn_cav_forest_goblin_spider_riders_1", 2*weighting_modifier);
+		ram:add_unit(key, "wh_dlc06_grn_inf_squig_herd_0", 1*weighting_modifier);
+		ram:add_unit(key, "wh_dlc06_grn_cav_squig_hoppers_0", 1*weighting_modifier);
+		ram:add_unit(key, "wh_main_grn_inf_night_goblin_archers", 4*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc15_grn_mon_stone_trolls_0", 1*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc15_grn_mon_river_trolls_0", 1*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc15_grn_veh_snotling_pump_wagon_flappas_0", 1*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc15_grn_veh_snotling_pump_wagon_roller_0", 1*weighting_modifier);
+		
+		local weighting_modifier = high_tier_modifier
+		ram:add_unit(key, "wh_main_grn_inf_night_goblin_fanatics", 2*weighting_modifier);
+		ram:add_unit(key, "wh_main_grn_inf_night_goblin_fanatics_1", 2*weighting_modifier);
+		ram:add_unit(key, "wh_main_grn_mon_giant", 1*weighting_modifier);
+		ram:add_unit(key, "wh_main_grn_mon_arachnarok_spider_0", 1*weighting_modifier);
+		ram:add_unit(key, "wh_main_grn_art_doom_diver_catapult", 1*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc15_grn_mon_rogue_idol_0", 1*weighting_modifier);
+
 	elseif template_key == "def_corsairs" then
 		
 		local weighting_modifier = low_tier_modifier
@@ -967,6 +999,117 @@ function WH_Random_Army_Generator:generate_random_army(key, template_key, num_un
 		ram:add_unit(key, "wh3_main_sla_mon_keeper_of_secrets_0", 2*weighting_modifier);
 		ram:add_unit(key, "wh3_main_sla_mon_soul_grinder_0", 1*weighting_modifier);
 
+	elseif template_key == "wh3_dlc23_sc_chd_chaos_dwarfs" then
+		local weighting_modifier = low_tier_modifier
+		ram:add_unit(key, "wh3_dlc23_chd_inf_hobgoblin_cutthroats", 12*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc23_chd_inf_hobgoblin_archers", 10*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc23_chd_inf_goblin_labourers", 8*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc23_chd_inf_orc_labourers", 8*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc23_chd_inf_chaos_dwarf_warriors", 7*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc23_chd_inf_chaos_dwarf_warriors_great_weapons", 4*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc23_chd_inf_chaos_dwarf_blunderbusses", 2*weighting_modifier);
+
+		local weighting_modifier = mid_tier_modifier
+		ram:add_unit(key, "wh3_dlc23_chd_inf_chaos_dwarf_blunderbusses", 2*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc23_chd_mon_kdaai_fireborn", 2*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc23_chd_cav_bull_centaurs_axe", 1*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc23_chd_mon_great_taurus", 1*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc23_chd_veh_iron_daemon", 1*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc23_chd_veh_skullcracker", 1*weighting_modifier);
+		
+		local weighting_modifier = high_tier_modifier
+		ram:add_unit(key, "wh3_dlc23_chd_inf_infernal_guard", 2*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc23_chd_inf_infernal_guard_fireglaives", 2*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc23_chd_mon_kdaai_destroyer", 1*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc23_chd_mon_bale_taurus", 1*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc23_chd_veh_deathshrieker_rocket_launcher", 1*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc23_chd_veh_magma_cannon", 1*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc23_chd_veh_dreadquake_mortar", 1*weighting_modifier);
+
+	elseif template_key == "chaos_dwarf_caravan_force" then
+		local weighting_modifier = low_tier_modifier
+		ram:add_unit(key, "wh3_dlc23_chd_inf_hobgoblin_cutthroats", 12*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc23_chd_inf_hobgoblin_archers", 10*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc23_chd_inf_orc_labourers", 8*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc23_chd_inf_chaos_dwarf_warriors", 7*weighting_modifier);
+
+		local weighting_modifier = mid_tier_modifier
+		ram:add_unit(key, "wh3_dlc23_chd_inf_chaos_dwarf_blunderbusses", 2*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc23_chd_cav_bull_centaurs_axe", 2*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc23_chd_veh_iron_daemon", 1*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc23_chd_veh_skullcracker", 1*weighting_modifier);
+		
+		local weighting_modifier = high_tier_modifier
+		ram:add_unit(key, "wh3_dlc23_chd_inf_infernal_guard", 2*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc23_chd_inf_infernal_guard_fireglaives", 2*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc23_chd_mon_kdaai_destroyer", 1*weighting_modifier);
+		ram:add_unit(key, "wh2_main_def_mon_black_dragon", 1*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc17_bst_mon_ghorgon_0", 1*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc24_tze_mon_mutalith_vortex_beast", 1*weighting_modifier);
+		ram:add_unit(key, "wh2_main_skv_mon_hell_pit_abomination", 1*weighting_modifier);
+
+	elseif template_key == "greenskin_spider_swarm_force" then
+		ram:add_unit(key, "wh_dlc06_grn_inf_nasty_skulkers_0", 1);
+		ram:add_unit(key, "wh_main_grn_inf_night_goblins", 2);
+		ram:add_unit(key, "wh_main_grn_mon_trolls", 1);
+		ram:add_unit(key, "wh_main_grn_cav_goblin_wolf_chariot", 2);
+		ram:add_unit(key, "wh_main_grn_cav_forest_goblin_spider_riders_0", 1);
+		ram:add_unit(key, "wh_main_grn_cav_forest_goblin_spider_riders_1", 2);
+		ram:add_unit(key, "wh_dlc06_grn_cav_squig_hoppers_0", 2);
+		ram:add_unit(key, "wh2_dlc15_grn_mon_stone_trolls_0", 2);
+		ram:add_unit(key, "wh2_dlc15_grn_mon_river_trolls_0", 1);
+		ram:add_unit(key, "wh_main_grn_inf_night_goblin_fanatics_1", 3);
+		ram:add_unit(key, "wh_main_grn_mon_giant", 1);
+		ram:add_unit(key, "wh_main_grn_mon_arachnarok_spider_0", 1);
+
+	elseif template_key == "wef_malevolent_spirits" then
+		local weighting_modifier = low_tier_modifier
+		ram:add_unit(key, "wh2_dlc16_wef_inf_malicious_dryads_0", 20*weighting_modifier);
+				
+		local weighting_modifier = mid_tier_modifier
+		ram:add_unit(key, "wh2_dlc16_wef_inf_malicious_dryads_0", 10*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc16_wef_mon_malicious_treekin_0", 10*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc16_wef_mon_malicious_treeman_0", 1*weighting_modifier);
+	
+		local weighting_modifier = high_tier_modifier
+		ram:add_unit(key, "wh2_dlc16_wef_inf_malicious_dryads_0", 5*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc16_wef_mon_malicious_treekin_0", 5*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc16_wef_mon_malicious_treeman_0", 2*weighting_modifier);
+		
+	elseif template_key == "wood_elves_malevolent_trees_and_elves" then
+		local weighting_modifier = low_tier_modifier
+		ram:add_unit(key, "wh_dlc05_wef_inf_eternal_guard_0", 6*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc16_wef_inf_malicious_dryads_0", 10*weighting_modifier);
+		ram:add_unit(key, "wh_dlc05_wef_inf_glade_guard_0", 6*weighting_modifier);
+		
+		local weighting_modifier = mid_tier_modifier
+		ram:add_unit(key, "wh_dlc05_wef_cav_wild_riders_0", 2*weighting_modifier);
+		ram:add_unit(key, "wh_dlc05_wef_mon_great_eagle_0", 1*weighting_modifier);
+		ram:add_unit(key, "wh_dlc05_wef_inf_wardancers_0", 3*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc16_wef_mon_malicious_treekin_0", 5*weighting_modifier);
+		ram:add_unit(key, "wh_dlc05_wef_inf_deepwood_scouts_0", 4*weighting_modifier);
+		
+		local weighting_modifier = high_tier_modifier
+		ram:add_unit(key, "wh2_dlc16_wef_mon_malicious_treeman_0", 2*weighting_modifier);
+		ram:add_unit(key, "wh_dlc05_wef_forest_dragon_0", 1*weighting_modifier);
+
+	elseif template_key == "hef_high_elf_patrol" then
+		local weighting_modifier = low_tier_modifier
+		ram:add_unit(key, "wh2_main_hef_inf_spearmen_0", 16*weighting_modifier);
+		ram:add_unit(key, "wh2_main_hef_inf_archers_1", 12*weighting_modifier);
+		ram:add_unit(key, "wh2_main_hef_cav_ellyrian_reavers_0", 6*weighting_modifier);
+		ram:add_unit(key, "wh2_main_hef_cav_ellyrian_reavers_1", 4*weighting_modifier);
+
+		local weighting_modifier = mid_tier_modifier
+		ram:add_unit(key, "wh2_main_hef_inf_white_lions_of_chrace_0", 8*weighting_modifier);
+		ram:add_unit(key, "wh2_main_hef_inf_lothern_sea_guard_0", 8*weighting_modifier);
+		ram:add_unit(key, "wh2_main_hef_inf_lothern_sea_guard_1", 4*weighting_modifier);
+		ram:add_unit(key, "wh2_main_hef_cav_silver_helms_0", 2*weighting_modifier);
+		ram:add_unit(key, "wh2_main_hef_cav_silver_helms_1", 1*weighting_modifier);
+
+		local weighting_modifier = high_tier_modifier
+		ram:add_unit(key, "wh2_dlc15_hef_veh_lion_chariot_of_chrace_0", 1*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc15_hef_mon_war_lions_of_chrace_0", 1*weighting_modifier);
 
 	else
 		script_error("ERROR: generate_random_army() called but supplied template_key [" .. template_key .. "] is not supported");

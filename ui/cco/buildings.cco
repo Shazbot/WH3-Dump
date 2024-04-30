@@ -12,7 +12,9 @@ Buildings
 	
 	IsHostileButtonSelected
 	{
-		SelectedSettlement.IsPlayerOwned == false || Try(Component("building_browser", "settlement_list").ChildContext("CcoCampaignSettlement" + SelectedSettlement.RegionRecordKey).ChildContext("button_player_foreign_view").IsSelected)
+		StoredContextFromParent("CcoCampaignSettlement").IsPlayerOwned() == false
+		|| Try(Component("building_browser", "settlement_list").ChildContext("CcoCampaignSettlement" + SelectedSettlement.RegionRecordKey).ChildContext("button_player_foreign_view").IsSelected)
+		|| StoredContextFromParent("CcoCampaignBuildingSlot").IsForeignSlot
 	}
 	
 	ShouldShowSettlementDiscoveredSlots

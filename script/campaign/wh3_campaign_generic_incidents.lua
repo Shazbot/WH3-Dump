@@ -127,10 +127,7 @@ core:add_listener(
 				local target_force = ritual_target:get_target_force()
 				character_cqi = target_force:general_character():command_queue_index();
 				target_faction = target_force:faction()
-				
-				if ritual_key == "wh3_main_ritual_tze_cotw_borrow_time" then -- to be replaced with campaign_payload eventually
-					cm:replenish_action_points(cm:char_lookup_str(character_cqi))
-				end
+			
 			elseif target_type == "REGION" then
 				local region = ritual_target:get_target_region();
 				region_cqi = region:cqi();

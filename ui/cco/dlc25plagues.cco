@@ -1,0 +1,205 @@
+Plagues
+{
+    AllowedSelectionCount
+    {
+        3
+    }
+    
+    SelectedIngredientsList
+    {
+        Component("DB2E8A87-67E1-47D5-A3A8CB2022B8BF63").CurrentSelection.SelectedObjectList
+    }
+    
+    SelectedSlotsList
+    {
+        Component("DB2E8A87-67E1-47D5-A3A8CB2022B8BF63")
+            .CurrentSelectedComponents
+            .Transform((c) => c.StoredContextRequiredFromParent("CcoPlagueComponentUiDataRecord"))
+    }
+    
+    SelectedMutationsList
+    {
+        Component("5BFDA195-0B8A-4B76-86C0712C86AF1F18").ChildList.Transform((c) => c.StoredContext("CcoCampaignPlagueIngredient"))
+    }
+    
+    TargetContext
+    {
+        Component("2ADB3AB4-7827-4A64-951019658E0A74AE").CurrentSelection.SelectedObjectList.FirstContext
+    }
+    
+    BasePlagueContext
+    {
+        PlayersFaction.PlaguesCompositionSystemContext.BasePlagueList.FirstContext(Key == "wh3_dlc25_nur_base_hidden")
+    }
+    
+    PlagueCompositionContext
+    {
+        PlayersFaction.PlaguesCompositionSystemContext.PlagueCompositionContext(
+            Plagues.BasePlagueContext,
+            Join(
+                Plagues.SelectedIngredientsList,
+                Plagues.SelectedMutationsList
+            )
+        )
+    }
+
+	BasePlagueCompositionContext
+    {
+        PlayersFaction.PlaguesCompositionSystemContext.PlagueCompositionContext(
+            Plagues.BasePlagueContext,
+            Plagues.SelectedIngredientsList
+        )
+    }
+    
+	BaseCompositionAndTargetContext
+    {
+        PlayersFaction.PlaguesCompositionSystemContext.CompositionAndTargetPair(
+            Plagues.BasePlagueCompositionContext,
+            Plagues.TargetContext)
+    }
+
+    CompositionAndTargetContext
+    {
+        PlayersFaction.PlaguesCompositionSystemContext.CompositionAndTargetPair(
+            Plagues.PlagueCompositionContext,
+            Plagues.TargetContext)
+    }
+    
+    DirectRitualContext
+    {
+        (target = Plagues.TargetContext) => {
+            GetIfElse(
+                IsContextValid(target) && ContextTypeId(target) == "CcoCampaignMilitaryForce",
+                PlayersFaction.RitualManagerContext.RitualContext(CcoRitualRecord("wh3_main_ritual_nur_plague_target_army")),
+                PlayersFaction.RitualManagerContext.RitualContext(CcoRitualRecord("wh3_main_ritual_nur_plague_target_settlement"))
+            )
+        }
+    }
+    
+    AgentRitualContext
+    {
+        (target = Plagues.TargetContext) => {
+            GetIfElse(
+                IsContextValid(target) && ContextTypeId(target) == "CcoCampaignMilitaryForce",
+                PlayersFaction.RitualManagerContext.RitualContext(CcoRitualRecord("wh3_main_ritual_nur_plague_agent_army")),
+                PlayersFaction.RitualManagerContext.RitualContext(CcoRitualRecord("wh3_main_ritual_nur_plague_agent_settlement"))
+            )
+        }
+    }
+    
+    IsValidSelection
+    {
+        (l = SelectedIngredientsList) => { l.IsEmpty == false && l.Size == Plagues.AllowedSelectionCount }
+    }
+    
+    EffectsForSelection(Bool enemy)
+    {
+      (set = CcoFactionSetRecord(GetIfElse(enemy, "plague_effect_set_nurgle_positive", "plague_effect_set_nurgle_negative"))) => {
+        Plagues
+            .SelectedIngredientsList
+            .Transform((ingredient) => 
+                ingredient
+                    .PlagueEffectContext
+                    .EffectsAndTypeList(ingredient)
+                    .Filter((effects) => effects.FactionSetList[0] == set)
+                    .Transform((filtered) => 
+                        filtered
+                            .EffectListWithSourceList
+                            .Transform((effect_list) => effect_list.EffectList)
+                    )
+            )
+      }
+    }
+    
+    IngredientForSlot(CcoPlagueComponentUiDataRecord slot)
+    {
+        Component("79A82651-B1A0-471F-8683372B261DDF7A")
+            .ChildList[1:]
+            .FirstContext((c) => c.StoredContextRequired("CcoPlagueComponentUiDataRecord") == slot)
+            .ChildContext("slot_item")
+            .StoredContextRequired("CcoCampaignPlagueIngredient")
+    }
+    
+    SlotForIngredient(CcoCampaignPlagueIngredient ingredient)
+    {
+         Component("79A82651-B1A0-471F-8683372B261DDF7A")
+            .ChildList[1:]
+            .FirstContext((c) => c.ChildContext("slot_item").StoredContext("CcoCampaignPlagueIngredient") == ingredient)
+            .StoredContextRequired("CcoPlagueComponentUiDataRecord")
+    }
+    
+    LinkedIngredientsList(CcoCampaignPlagueIngredient ingredient)
+    {
+        Plagues.SlotForIngredient(ingredient).LinkedSlotsList.Transform((s) => Plagues.IngredientForSlot(s))
+    }
+    
+    IsIngredientSelectable(CcoCampaignPlagueIngredient ingredient)
+    {
+        (sel           = Plagues.SelectedSlotsList,
+         slot_for_this = Plagues.SlotForIngredient(ingredient)) => { 
+            ingredient.IsOnCooldown == false && 
+            (
+                (sel.IsEmpty && ingredient.IsUnlocked) || 
+                sel.Any((slot) => Plagues.IngredientForSlot(slot) == ingredient) || 
+                slot_for_this.LinkedSlotsList.Any((slot) => sel.Contains(slot)) ||
+                sel.Any((slot) => Plagues.LinkedIngredientsList(Plagues.IngredientForSlot(slot)).Contains(ingredient)) &&
+                sel.Size <= Plagues.AllowedSelectionCount - 1
+            )
+        }
+    }
+    
+    LineIsComplete(CcoComponent line)
+    {
+        (sel = Plagues.SelectedSlotsList,
+         origin_selected = sel.Contains(StoredContextFromParentRequired("CcoPlagueComponentUiDataRecord")),
+         target_selected = sel.Contains(line.StoredContextRequiredFromParent("CcoPlagueComponentUiDataRecord"))) => {
+                origin_selected && target_selected
+        }
+    }
+    
+    LineIsLinked(CcoComponent line)
+    {
+        (sel = Plagues.SelectedSlotsList,
+         origin_selected = sel.Contains(StoredContextFromParentRequired("CcoPlagueComponentUiDataRecord")),
+         target_selected = sel.Contains(line.StoredContextRequiredFromParent("CcoPlagueComponentUiDataRecord")),
+         cooldown = Plagues.IngredientForSlot(StoredContextFromParentRequired("CcoPlagueComponentUiDataRecord")).IsOnCooldown 
+                    || Plagues.IngredientForSlot(line.StoredContextRequiredFromParent("CcoPlagueComponentUiDataRecord")).IsOnCooldown) => {
+                    
+            cooldown == false && sel.Size != Plagues.AllowedSelectionCount && (origin_selected || target_selected)
+            
+        }
+    }
+    
+    FormatTurnsEffect(Int value)
+    {
+        Loc(
+            GetIfElse(value == 1, "wh3_dlc25_plagues_single_turn_effect", "wh3_dlc25_plagues_turns_effect"),
+            value)
+    }
+    
+    TriggerCelebration
+    {
+        # M A G G O T S #
+        Component("4E9CBDD2-26B5-4FA8-A38DCAB5E966E46F")
+          .ChildList[1:]
+          .ForEach(
+            (c, emitter = c.ChildContext("maggot_emitter"), emitter2 = c.ChildContext("maggot_emitter2")) => 
+              emitter.SetVisible(true);
+              emitter.ChildList[1:].ForEach((p) => p.ChildList[0].TriggerAnimation("stop"); p.TriggerAnimation("die"));
+			  emitter2.SetVisible(true);
+              emitter2.ChildList[1:].ForEach((p) => p.ChildList[0].TriggerAnimation("stop"); p.TriggerAnimation("die"))
+          );
+        Component("DB2E8A87-67E1-47D5-A3A8CB2022B8BF63").ClearSelection
+    }
+}
+
+CcoCampaignPlagueComposition
+{
+    ExImageForUI
+    {
+        Format(
+            "ui/campaign ui/plague_icons/wh3_nur_ingredient_%d.png",
+            RoundFloat(Abs(PlagueIngredientList.Filter((ingredient) => ingredient.IsMutation == false).Reduce((acc, ingredient) => acc + ingredient.Key.Hash, 0) % 20))
+        )
+    }
+}

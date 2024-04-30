@@ -1,0 +1,21 @@
+MalakaiAdventures
+{
+	CurrentCompletedQuestChains
+	{
+		JadeDatabaseContext.MalakaiOathsQuestChainList.Filter(IsContextValid(ExFinalBattleContext.MissionContext) &&  ExFinalBattleContext.MissionContext.Completed).Size
+	}
+}
+
+
+CcoMalakaiOathsQuestChain
+{
+	ExFinalBattleContext
+	{
+		OathsMissionList.Filter(IsMissionAvailableInCurrentCampaign).Sort((x) => x.SortOrder, true).LastContext
+	}
+	
+	ExIsChainUnlocked
+	{
+		CompletedQuestsRequiredToUnlock <= MalakaiAdventures.CurrentCompletedQuestChains
+	}
+}

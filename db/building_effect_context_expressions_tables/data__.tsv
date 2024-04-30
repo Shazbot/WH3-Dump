@@ -26,6 +26,9 @@ GrowthGreaterThan200	Region.Growth >= 200	false
 GrowthGreaterThan200DPare5	Region.GrowthPerTurn >= 200 || Region.DevelopmentPoints >= 5	false
 GrowthPerTurnGreaterThan200	Region.GrowthPerTurn >= 200	false
 HasAzazelUpgradeTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_sla_azazel_buildings")	true
+HasBlackTowerBuildingUpgrade1	Owner.IsEffectBundleActive("wh3_dlc25_ritual_emp_don_black_tower_1") == true	false
+HasBlackTowerBuildingUpgrade2	Owner.IsEffectBundleActive("wh3_dlc25_ritual_emp_don_black_tower_2") == true	false
+HasBlackTowerBuildingUpgrade3	Owner.IsEffectBundleActive("wh3_dlc25_ritual_emp_don_black_tower_3") == true	false
 HasCHDChaosCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_sorcery_2")	false
 HasCHDHashutInfluenceTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_sorcery_17")	false
 HasCHDLogisticsTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_industry_16")	false
@@ -37,10 +40,12 @@ HasCHDTowerInfluenceTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_sorcer
 HasFestusUpgradeTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_nur_festus_buildings")	true
 HasFinalOgreCampTech	Owner.IsTechnologyResearched("wh3_main_tech_ogr_2_11_0")	false
 HasKhoCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_kho_shared_gift_upgrade_corruption")	true
+HasLegendaryGrudgeSkavenComplete	Owner.IsEffectBundleActive("wh3_dlc25_legendary_grudge_skaven_reward") == true	true
 HasMarkedHeroesTech	 Owner.IsTechnologyResearched("wh3_dlc20_chs_kho_valkia_heroes_lords") ||  Owner.IsTechnologyResearched("wh3_dlc20_chs_nur_festus_heroes_lords")  || Owner.IsTechnologyResearched("wh3_dlc20_chs_sla_azazel_heroes_lords") || Owner.IsTechnologyResearched("wh3_dlc20_chs_tze_vilitch_heroes_lords")	true
 HasNotToZFactoryConclaveSeat	Owner.IsEffectBundleActive("wh3_dlc23_ritual_chd_toz_slot_t2_industry_2") == false	true
 HasNotUpgradedMegaMortar	Owner.IsEffectBundleActive("wh3_dlc23_ritual_chd_toz_slot_t2_military_2") == false	true
 HasNurCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_nur_shared_gift_upgrade_corruption")	true
+HasNurGarrisonAbilityTech	Owner.IsTechnologyResearched("wh3_main_tech_nur_growth_25")	false
 HasSlaCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_sla_shared_gift_upgrade_corruption")	true
 HasToZFactoryConclaveSeat	Owner.IsEffectBundleActive("wh3_dlc23_ritual_chd_toz_slot_t2_industry_2") == true	true
 HasTzeCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_tze_shared_gift_upgrade_corruption")	true
@@ -53,6 +58,8 @@ IsAgentPresentOwn	Region.IsAnyOwnAgentPresent	false
 IsBretonnia	Owner.CultureKey == "wh_main_brt_bretonnia"	true
 IsChampionsFaction	Owner.IsInFactionSet("champions_factions")	true
 IsChaosCampaign	CampaignModelRoot.CampaignKey == "wh3_main_chaos"	true
+IsChaosCampaignAndKugath	CampaignModelRoot.CampaignKey == "wh3_main_chaos" && Owner.RecordKeyIsOneOf("wh3_main_nur_poxmakers_of_nurgle")	true
+IsElspethPresent	Region.IsOwnAgentSubtypePresent("wh3_dlc25_emp_elspeth_von_draken")	false
 IsFactionAstragoth	Owner.RecordKeyIsOneOf("wh3_dlc23_chd_astragoth")	true
 IsFactionAzazel	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_azazel")	true
 IsFactionAzazelOrSigvald	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_azazel", "wh3_dlc20_chs_sigvald")	true
@@ -60,6 +67,7 @@ IsFactionClanMoulder	Owner.RecordKeyIsOneOf("wh2_main_skv_clan_moulder")	true
 IsFactionDrazhoath	Owner.RecordKeyIsOneOf("wh3_dlc23_chd_legion_of_azgorh")	true
 IsFactionDrycha	Owner.RecordKeyIsOneOf("wh2_dlc16_wef_drycha")	true
 IsFactionFestus	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_festus")	true
+IsFactionGelt	Owner.RecordKeyIsOneOf("wh2_dlc13_emp_golden_order")	true
 IsFactionJadeDragon	Owner.RecordKeyIsOneOf("wh3_dlc24_cth_the_celestial_court")	true
 IsFactionMalus	Owner.RecordKeyIsOneOf("wh2_main_def_hag_graef")	true
 IsFactionMorathi	Owner.RecordKeyIsOneOf("wh2_main_def_cult_of_pleasure")	true
@@ -73,8 +81,10 @@ IsFactionRogueSkaven	Owner.RecordKeyIsOneOf("wh2_dlc11_cst_rogue_grey_point_scut
 IsFactionRogueSlaanesh	Owner.RecordKeyIsOneOf("wh3_main_rogue_the_baleful_princes_muses", "wh3_main_rogue_the_convent", "wh3_main_rogue_the_pleasure_tide")	true
 IsFactionRogueTzeentch	Owner.RecordKeyIsOneOf("wh3_main_rogue_scriveners_of_fate", "wh3_main_rogue_argfluxs_pyrocasters", "wh3_main_rogue_the_fluxion_host")	true
 IsFactionRogueVampiric	Owner.RecordKeyIsOneOf("wh2_dlc11_cst_shanty_shark_straight_seadogs", "wh2_dlc11_cst_rogue_terrors_of_the_dark_straights", "wh2_main_rogue_vmp_heirs_of_mourkain", "wh2_main_rogue_scourge_of_aquitaine", "wh2_main_rogue_the_wandering_dead")	true
+IsFactionTamurkhan	Owner.RecordKeyIsOneOf("wh3_dlc25_nur_tamurkhan")	true
 IsFactionValkia	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_valkia")	true
 IsFactionVilitch	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_vilitch")	true
+IsFactionWissenland	Owner.RecordKeyIsOneOf("wh_main_emp_wissenland")	true
 IsFactionYvresse	Owner.RecordKeyIsOneOf("wh2_main_hef_yvresse")	true
 IsFactionZhatan	Owner.RecordKeyIsOneOf("wh3_dlc23_chd_zhatan")	true
 IsGeneralPresentEnemy	Region.IsAnyEnemyMilitaryForcePresent	false
@@ -83,6 +93,7 @@ IsGeneralPresentOwn	Region.IsOwnMilitaryForcePresent	false
 IsImmortalEmpires	CampaignModelRoot.CampaignKey == "wh3_main_combi"	true
 IsJadeDragonCommercialDistrict	Region.IsEffectBundleActive("wh3_dlc24_ritual_cth_mos_steel_settlement_type_switch_commercial") == true	true
 IsJadeDragonFortressCity	Region.IsEffectBundleActive("wh3_dlc24_ritual_cth_mos_stone_settlement_type_switch_fortress") == true	true
+IsKarlFranz	Owner.RecordKeyIsOneOf("wh_main_emp_empire")	true
 IsKholek	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_kholek")	true
 IsKroqGar	Owner.RecordKeyIsOneOf("wh2_main_lzd_last_defenders")	true
 IsNOTUniqueRegionOrFort	Region.RecordKeyIsOneOf("wh3_main_chaos_region_altdorf","wh3_main_combi_region_altdorf","wh3_main_combi_region_lothern","wh3_main_combi_region_hexoatl","wh3_main_combi_region_itza","wh3_main_combi_region_khemri","wh3_main_chaos_region_castle_drakenhof","wh3_main_combi_region_castle_drakenhof","wh3_main_combi_region_couronne","wh3_main_combi_region_miragliano","wh3_main_combi_region_naggarond","wh3_main_combi_region_skavenblight","wh3_main_chaos_region_hell_pit","wh3_main_combi_region_hell_pit","wh3_main_combi_region_karaz_a_karak","wh3_main_combi_region_karak_eight_peaks","wh3_main_combi_region_massif_orcal","wh3_main_chaos_region_kislev","wh3_main_combi_region_kislev","wh3_main_chaos_region_praag","wh3_main_combi_region_praag","wh3_main_chaos_region_erengrad","wh3_main_combi_region_erengrad","wh3_main_combi_region_the_awakening","wh3_main_combi_region_sartosa","wh3_main_combi_region_the_galleons_graveyard") == false	true

@@ -84,6 +84,15 @@
 											<label_additional_effect this="15D55835-014C-4C70-8E4B044E816947B1"/>
 										</template_additional_effect>
 									</additional_ui_effects_list>
+									<ammunition_replenishment_effect this="64F863D4-4606-4AFB-8424D48F61604CFB">
+										<effect_icon_parent this="0F9E101E-410B-4D3A-83E1502FE8B6163A">
+											<effect_icon this="B730988C-7041-464A-9E6E7FC2C602B2D1"/>
+										</effect_icon_parent>
+										<label_effect this="29AEF2BD-99C8-4D30-950B52AD8A6AC78D"/>
+									</ammunition_replenishment_effect>
+									<remove_magical_effect this="03B33A81-9B15-4D28-9DCA967E35B6F9B7">
+										<label_effect this="F7E663DD-C29C-44B4-8B92152945037F04"/>
+									</remove_magical_effect>
 								</phase_effect>
 							</phase_effect_holder>
 						</template_phase>
@@ -382,7 +391,7 @@
 			part_of_template="true"
 			uniqueguid_in_template="439A25D8-93EF-4237-A6AC5071A3B38702"
 			uniqueguid="CC44296B-E6D7-46F3-A29AA1F741A185DF"
-			dimensions="360.00,362.00">
+			dimensions="379.00,410.00">
 			<state_uniqueguids>
 				<state_uniqueguid
 					name="NewState"
@@ -393,6 +402,9 @@
 				<callback_with_context
 					callback_id="ContextObjectStore"
 					context_object_id="CcoBattleAbility"/>
+				<callback_with_context
+					callback_id="ContextPropagationBlocker"
+					context_object_id="CcoEffect"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -1612,8 +1624,8 @@
 				<newstate
 					this="066F87E9-6257-4493-84D401CE06CD38F1"
 					name="NewState"
-					width="360"
-					height="395"
+					width="379"
+					height="443"
 					uniqueguid="066F87E9-6257-4493-84D401CE06CD38F1"/>
 			</states>
 			<LayoutEngine
@@ -1690,6 +1702,65 @@
 					text_label="StateText_c6db0bad"/>
 			</localised_texts>
 		</value_barrier_duration_infinite>
+		<ammunition_replenishment_effect
+			this="64F863D4-4606-4AFB-8424D48F61604CFB"
+			id="ammunition_replenishment_effect"
+			part_of_template="true"
+			uniqueguid_in_template="D6F22B45-BFEC-479E-B406114AFCC4ED7F"
+			uniqueguid="64F863D4-4606-4AFB-8424D48F61604CFB"
+			dimensions="360.00,24.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="false"
+					uniqueguid="C084D606-ACE0-4824-A112C2031BC8E0ED"/>
+				<state_uniqueguid
+					name="true"
+					uniqueguid="71AE2353-E8E5-432F-894FF6AF89C8AD6E"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="HasAmmunitionReplenishment"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="false"
+					is_text_localised="false"/>
+				<localised_text
+					state="true"
+					is_text_localised="false"/>
+			</localised_texts>
+		</ammunition_replenishment_effect>
+		<effect_icon
+			this="B730988C-7041-464A-9E6E7FC2C602B2D1"
+			id="effect_icon"
+			part_of_template="true"
+			uniqueguid_in_template="C124DAD0-46E8-4049-B9C1E854BF0F3621"
+			uniqueguid="B730988C-7041-464A-9E6E7FC2C602B2D1"
+			dimensions="24.00,24.00"
+			dock_point="Center Right">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="16CFA49F-6F63-484A-AA2847E85BCE9651"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/campaign ui/effect_bundles/ammo_character.png"
+					uniqueguid="E6792F0F-A93A-41B6-9252401BBEBFC0B9"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/campaign ui/effect_bundles/ammo_character.png"/>
+			</override_images>
+		</effect_icon>
 		<effect_list
 			this="53121279-7894-4FF8-9CA92B204AE8A78D"
 			id="effect_list"
@@ -1722,8 +1793,8 @@
 				<newstate
 					this="DCD3E173-FDDF-448E-8BBF0E91EFCC094C"
 					name="NewState"
-					width="360"
-					height="395"
+					width="379"
+					height="443"
 					uniqueguid="DCD3E173-FDDF-448E-8BBF0E91EFCC094C"/>
 			</states>
 			<LayoutEngine
@@ -1735,6 +1806,25 @@
 				</columnwidths>
 			</LayoutEngine>
 		</effect_list>
+		<effect_icon_parent
+			this="0F9E101E-410B-4D3A-83E1502FE8B6163A"
+			id="effect_icon_parent"
+			part_of_template="true"
+			uniqueguid_in_template="DA0A9D24-CB62-4A61-9CE4186BFE065635"
+			uniqueguid="0F9E101E-410B-4D3A-83E1502FE8B6163A"
+			dimensions="45.00,24.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="26C59158-0D23-467D-AD173F7EA9F1669F"/>
+			</state_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</effect_icon_parent>
 		<list_parent
 			this="C5E56FD4-ED34-4384-B9C0AB2F9B627D92"
 			id="list_parent"
@@ -1746,8 +1836,8 @@
 				<newstate
 					this="D56EB98D-A6EE-450D-8A114D61F78512D5"
 					name="NewState"
-					width="360"
-					height="395"
+					width="379"
+					height="443"
 					uniqueguid="D56EB98D-A6EE-450D-8A114D61F78512D5"/>
 			</states>
 			<animations>
@@ -1796,6 +1886,45 @@
 				</columnwidths>
 			</LayoutEngine>
 		</list_parent>
+		<label_effect
+			this="29AEF2BD-99C8-4D30-950B52AD8A6AC78D"
+			id="label_effect"
+			part_of_template="true"
+			uniqueguid_in_template="9CA2A994-92F5-4735-A64C41EC55D1719C"
+			uniqueguid="29AEF2BD-99C8-4D30-950B52AD8A6AC78D"
+			dimensions="315.00,24.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="false"
+					uniqueguid="9ADF343B-C5A0-4B2C-997DE2684780C7B4"/>
+				<state_uniqueguid
+					name="true"
+					uniqueguid="0B25C537-2F39-49D3-B19D5511F0379821"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="Loc(GetIfElse(AmmunitionReplenishment &gt; 0, &quot;phase_replenish_ammunition&quot;, &quot;phase_destroy_ammunition&quot;))"/>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="AmmunitionReplenishment &gt; 0"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="false"
+					text="dy_effect"
+					text_label="StateText_b505c32c"
+					is_text_localised="false"/>
+				<localised_text
+					state="true"
+					text="dy_effect"
+					text_label="StateText_d17fe5f4"
+					is_text_localised="false"/>
+			</localised_texts>
+		</label_effect>
 		<template_phase
 			this="3E081491-1502-4DA0-A51F18270C5CFD34"
 			id="template_phase"
@@ -1816,8 +1945,8 @@
 				<newstate
 					this="274CB815-F929-479E-B393A5C79108192B"
 					name="NewState"
-					width="360"
-					height="395"
+					width="379"
+					height="443"
 					uniqueguid="274CB815-F929-479E-B393A5C79108192B"/>
 			</states>
 			<LayoutEngine
@@ -1829,6 +1958,41 @@
 				</columnwidths>
 			</LayoutEngine>
 		</template_phase>
+		<label_effect
+			this="F7E663DD-C29C-44B4-8B92152945037F04"
+			id="label_effect"
+			part_of_template="true"
+			uniqueguid_in_template="13158C80-90FB-44A1-B105C5D5B3411AA6"
+			uniqueguid="F7E663DD-C29C-44B4-8B92152945037F04"
+			dimensions="285.00,24.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="false"
+					uniqueguid="8B668FEF-68B3-4237-A82D259CE7BBD659"/>
+				<state_uniqueguid
+					name="true"
+					uniqueguid="C558701E-7563-4BC9-9D663463955A1BC2"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="DatabaseRecordContext(&quot;CcoUnitAbilitiesAdditionalUiEffectRecord&quot;, &quot;wh3_dlc23_negate_magical_weapons&quot;).LocalisedText"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="false"
+					text="dy_effect"
+					text_label="StateText_4ba80b59"
+					is_text_localised="false"/>
+				<localised_text
+					state="true"
+					text="dy_effect"
+					text_label="StateText_96de534c"
+					is_text_localised="false"/>
+			</localised_texts>
+		</label_effect>
 		<title
 			this="21479491-74C0-44EF-82114746E02DE9F1"
 			id="title"
@@ -1867,6 +2031,38 @@
 				</default>
 			</states>
 		</title>
+		<remove_magical_effect
+			this="03B33A81-9B15-4D28-9DCA967E35B6F9B7"
+			id="remove_magical_effect"
+			part_of_template="true"
+			uniqueguid_in_template="7757101A-46B8-4F84-92A4D386E7BDCC1D"
+			uniqueguid="03B33A81-9B15-4D28-9DCA967E35B6F9B7"
+			dimensions="360.00,24.00"
+			offset="19.00,0.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="false"
+					uniqueguid="F5241DE9-78D1-4D04-A1484C285CFF862F"/>
+				<state_uniqueguid
+					name="true"
+					uniqueguid="1AA78197-293E-4803-825BE8D62DC13A02"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="RemoveMagical"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="false"
+					is_text_localised="false"/>
+				<localised_text
+					state="true"
+					is_text_localised="false"/>
+			</localised_texts>
+		</remove_magical_effect>
 		<template_ability
 			this="F61B7328-463A-4455-BF9008A565532AD5"
 			id="template_ability"
@@ -1942,8 +2138,8 @@
 				<newstate
 					this="3A56FB5B-5C9B-4818-BD3E0460602AA4B5"
 					name="NewState"
-					width="360"
-					height="362"
+					width="379"
+					height="410"
 					uniqueguid="3A56FB5B-5C9B-4818-BD3E0460602AA4B5"/>
 			</states>
 			<LayoutEngine

@@ -56,7 +56,7 @@ victory_objectives = {
 			mission_key = "wh3_main_chaos_domination_victory",
 			victory_type = "wh3_main_victory_type_chaos_domination",
 			objectives = {
-				{type = "ALL_PLAYERS_RAZE_OR_OWN_X_SETTLEMENTS"}, -- conditions generated automatically
+				{type = "ALL_PLAYERS_RAZE_SACK_OR_OWN_X_SETTLEMENTS"}, -- conditions generated automatically
 			}
 		},
 
@@ -122,7 +122,47 @@ victory_objectives = {
 				{type = "SCRIPTED", conditions = {"script_key hexes_victory_4",	"override_text mission_text_text_mis_activity_ostankya_roc_collect_hex_fourth"}},
 				{type = "SCRIPTED", conditions = {"script_key hexes_long_all", "override_text mission_text_text_mis_activity_ostankya_collect_all_hexes"}},
 			}
-		}
+		},
+		elspeth_gunnery_school = {
+			campaign_types = {SP_NORMAL_NO_ROC = true},
+			factions = {wh_main_emp_wissenland = true},
+			mission_key = "wh_main_long_victory",
+			victory_type = "wh_dlc03_victory_type_major",
+			objectives = {
+				{type = "FIGHT_SET_PIECE_BATTLE", conditions = {"set_piece_battle wh3_dlc25_qb_nemesis_crown_elspeth","override_text mission_text_text_mis_activity_dlc25_complete_nemesis_crown_final_battle"}}
+
+			}
+		},
+		tamurkhan_chieftains = {
+			campaign_types = {SP_NORMAL_NO_ROC = true},
+			factions = {wh3_dlc25_nur_tamurkhan = true},
+			mission_key = "wh_main_long_victory",
+			victory_type = "wh_dlc03_victory_type_major",
+			objectives = {
+				{type = "SCRIPTED", conditions = {"script_key tamurkhan_chieftain_devoted_deference_realms",
+				"override_text mission_text_text_tamurkhan_chieftain_devoted_deference_short_roc",
+				"total 3",
+				"count 0",
+				"count_completion"
+				}}
+			}
+		},
+		malakai_monster_hunts = {
+			campaign_types = {SP_NORMAL_NO_ROC = true},
+			factions = {wh3_dlc25_dwf_malakai = true},
+			mission_key = "wh_main_long_victory",
+			victory_type = "wh_dlc03_victory_type_major",
+			objectives = {
+				{type = "SCRIPTED", conditions = {
+					"script_key malakai_oath_steel_glory_realms_victory", 
+					"override_text mission_text_text_malakai_oath_steel_glory_battles_completed_roc",
+					"total 2",
+					"count 0",
+					"count_completion"
+				}},
+				{type = "FIGHT_SET_PIECE_BATTLE", conditions = {"set_piece_battle wh3_dlc25_qb_dwf_malakai_warpstone_bomb","override_text mission_text_text_malakai_adventures_thunderbarge_qb_completed_roc"}}
+			}
+		} 
 	},
 
 	----DOMINATION VARIABLES----
@@ -281,19 +321,47 @@ victory_objectives = {
 			"wh3_main_cth_the_western_provinces",
 			"wh3_dlc24_cth_the_celestial_court",
 			"wh3_dlc24_ksl_daughters_of_the_forest" 
-		}
+		},
+		wh3_dlc25_dwf_malakai = {
+		"wh3_dlc23_chd_zhatan",
+		"wh3_dlc23_chd_legion_of_azgorh",
+		"wh3_dlc23_chd_conclave",
+		"wh3_dlc23_chd_astragoth",
+		"wh3_main_nur_poxmakers_of_nurgle",
+		"wh3_main_sla_seducers_of_slaanesh",
+		"wh3_main_tze_oracles_of_tzeentch",
+		"wh3_main_dae_daemon_prince",
 	},
+		wh_main_emp_wissenland = {
+		"wh3_dlc20_chs_festus",
+		"wh3_dlc20_chs_vilitch",
+		"wh3_dlc25_nur_tamurkhan",
+		"wh3_main_nur_poxmakers_of_nurgle",
+		"wh3_main_tze_oracles_of_tzeentch",
+		"wh3_main_dae_daemon_prince",
+	},
+		wh3_dlc25_nur_tamurkhan = {
+		"wh_main_emp_wissenland",
+		"wh3_main_ogr_goldtooth",
+		"wh3_main_tze_oracles_of_tzeentch",
+		"wh3_dlc20_chs_vilitch",			
+	}
+},
 
-	domination_province_target_default = 50,
-	domination_province_target_overrides = {
-		wh3_dlc20_chs_valkia = 20,
-		wh3_dlc20_chs_vilitch = 20,
-		wh3_dlc20_chs_azazel = 20,
-		wh3_dlc20_chs_festus = 20,
-	},
+domination_province_target_default = 50,
+domination_province_target_overrides = {
+	wh3_dlc20_chs_valkia = 20,
+	wh3_dlc20_chs_vilitch = 20,
+	wh3_dlc20_chs_azazel = 20,
+	wh3_dlc20_chs_festus = 20,
+	wh3_dlc25_nur_tamurkhan = 30,
+	wh_main_emp_wissenland = 30,
+	wh3_dlc25_dwf_malakai = 20
+},
+
 
 	----RAZING/SACKING VARIABLES----
-	--- used to generate mission parameters when using the ALL_PLAYERS_RAZE_OR_OWN_X_SETTLEMENTS or RAZE_OR_OWN_X_SETTLEMENTS without conditions
+	--- used to generate mission parameters when using the ALL_PLAYERS_RAZE_SACK_OR_OWN_X_SETTLEMENTS or RAZE_OR_OWN_X_SETTLEMENTS without conditions
 	mp_team_size_to_target_regions = {
 		[1] = 70,
 		[2] = 100,
@@ -358,8 +426,8 @@ function victory_objectives:generate_objective_from_template(faction_key, templa
 		local objective = template.objectives[i]
 
 		--- if in a team of one, replace all-players version of raze/occupy with single player version
-		if objective.type == "ALL_PLAYERS_RAZE_OR_OWN_X_SETTLEMENTS" and team_size == 1 then
-			mission:add_new_objective("RAZE_OR_OWN_X_SETTLEMENTS")
+		if objective.type == "ALL_PLAYERS_RAZE_SACK_OR_OWN_X_SETTLEMENTS" and team_size == 1 then
+			mission:add_new_objective("OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS")
 		else
 			mission:add_new_objective(objective.type)
 		end
@@ -377,7 +445,7 @@ function victory_objectives:generate_objective_from_template(faction_key, templa
 			local domination_province_target = self.domination_province_target_overrides[faction_key] or self.domination_province_target_default
 			mission:add_condition("total "..domination_province_target)
 
-		elseif objective.type == "ALL_PLAYERS_RAZE_OR_OWN_X_SETTLEMENTS" or objective.type == "RAZE_OR_OWN_X_SETTLEMENTS" and not objective.conditions then
+		elseif objective.type == "ALL_PLAYERS_RAZE_SACK_OR_OWN_X_SETTLEMENTS" or objective.type == "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS" and not objective.conditions then
 			local target_regions_number = self.mp_team_size_to_target_regions[team_size]
 			mission:add_condition("total "..target_regions_number)
 

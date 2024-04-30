@@ -44,7 +44,7 @@ data.cutscene_styles = {
 
 		local new_configurator = function(cutscene)
             cutscene:set_relative_mode(true)
-            cutscene:action_fade_scene(0, 1, 2)
+            cutscene:action_fade_scene(0, 1, 3.5)
             cutscene:action_override_ui_visibility(0, false, data.map_ui)
             -- Other functions take xydbk coords but this one takes enumerated ones. Need to translate from one to the other.
             cutscene:action_set_camera_position(0, { self.cam_cutscene_start.x, self.cam_cutscene_start.y, self.cam_cutscene_start.d, self.cam_cutscene_start.b, self.cam_cutscene_start.h })
@@ -228,6 +228,15 @@ data.faction_intros = {
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},
 
+	wh3_dlc25_nur_tamurkhan = faction_intro_data:new{
+		preset = data.intro_presets.standard,
+		cam_cutscene_start = {x = 657.133911, y = 630.021545,	d = 26.618471, b = 0, h = 63.678686,},
+		cam_gameplay_start = {x = 657.133911, y = 639.021545,	d = 16.618471, b = -0.056796, h = 13.678686,},
+		advice_line = "wh3_dlc25_ie_camp_nur_tamurkhan_intro_01",
+		cutscene_style = data.cutscene_styles.zoom_in_and_speak,
+		fullscreen_movie = "warhammer3/nur/tamurkhan_intro"
+	},
+
 	wh2_main_def_hag_graef = faction_intro_data:new{
 		preset = data.intro_presets.standard,
 		cam_cutscene_start = {x = 393, y = 715,	d = 20.705231, b = 0.0,	h = 65.031822,},
@@ -246,20 +255,27 @@ data.faction_intros = {
 
 	wh_main_chs_chaos = faction_intro_data:new{
 		preset = data.intro_presets.standard,
-		cam_cutscene_start = {x = 607, y = 674,	d = 20.705231, b = 0.0,	h = 65.031822,},
-		cam_gameplay_start = {x = 607, y = 674,	d = 6.965149, b = 0, h = 8.008892,},
+		cam_cutscene_start = {x = 604.369141, y = 674.792053,	d = 20.705231, b = 0.0,	h = 65.031822,},
+		cam_gameplay_start = {x = 604.369141, y = 674.792053,	d = 7.952637, b = 0, h = 9.342808,},
 		advice_line = "wh3_dlc21_ie_camp_chs_archaon_intro_01",
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},
 
 	wh3_main_dae_daemon_prince = faction_intro_data:new{
 		preset = data.intro_presets.standard,
-		cam_cutscene_start = {x = 436.466309, y = 722.225769,	d = 22.638367, b = 0.0,	h = 64.875122,},
-		cam_gameplay_start = {x = 436.466309, y = 719.910156,	d = 9.694824, b = 0, h = 11.417195,},
+		cam_cutscene_start = {x = 461.978302, y = 723.853149,	d = 22.638367, b = 0.0,	h = 64.875122,},
+		cam_gameplay_start = {x = 461.978302, y = 723.853149,	d = 9.694824, b = 0, h = 11.417195,},
 		advice_line = "wh3_dlc21_ie_camp_dae_daemon_prince_intro_01",
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},
 
+	wh3_dlc25_nur_epidemius = faction_intro_data:new{
+		preset = data.intro_presets.standard,
+		cam_cutscene_start = {x = 420.046387, y = 713.983948,	d = 26.618471, b = 0, h = 63.678686,},
+		cam_gameplay_start = {x = 420.046387, y = 713.983948,	d = 16.618471, b = 0, h = 13.678686,},
+		advice_line = "wh3_dlc25_ie_camp_nur_epidemius_intro_01",
+		cutscene_style = data.cutscene_styles.zoom_in_and_speak
+	},
 
 	--------------------
 	-------NORSCA-------
@@ -304,6 +320,15 @@ data.faction_intros = {
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},
 
+	wh3_dlc25_dwf_malakai = faction_intro_data:new{
+		preset = data.intro_presets.standard,
+		cam_cutscene_start = {x = 487.498596, y = 655.835266,	d = 27.159929, b = 0.088087,	h = 63.123718,},
+		cam_gameplay_start = {x = 486.036652, y = 648.737,	d = 14.421857, b = 0.514084, h = 11.484471,},
+		advice_line = "wh3_dlc25_ie_camp_dwf_malakai_makaisson_intro_01",
+		cutscene_style = data.cutscene_styles.zoom_in_and_speak,
+		fullscreen_movie = "warhammer3/dwf/malakai_intro"
+	},
+
 	wh3_main_ksl_the_ice_court = faction_intro_data:new{
 		preset = data.intro_presets.standard,
 		cam_cutscene_start = {x = 467, y = 564,	d = 20.705231, b = 0.0,	h = 65.031822,},
@@ -340,12 +365,13 @@ data.faction_intros = {
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},
 
-	wh2_dlc13_emp_golden_order = faction_intro_data:new{
+	wh_main_emp_wissenland = faction_intro_data:new{
 		preset = data.intro_presets.standard,
-		cam_cutscene_start = {x = 399.372192, y = 437.864746,	d = 20.705231, b = 0.0,	h = 65.031822,},
-		cam_gameplay_start = {x = 399.372192, y = 434.674164,	d = 7.694366, b = 0, h = 9.052497,},
-		advice_line = "wh3_dlc21_ie_camp_emp_balthasar_gelt_intro_01",
-		cutscene_style = data.cutscene_styles.zoom_in_and_speak
+		cam_cutscene_start = {x = 364.778229, y = 467.303497,	d = 29.050016, b = -0.82798,	h = 66.054382,},
+		cam_gameplay_start = {x = 368.053864, y = 457.214966,	d = 14.413223, b = -0.82798, h = 11.522536,},
+		advice_line = "wh3_dlc25_ie_camp_emp_elspeth_von_draken_intro_01",
+		cutscene_style = data.cutscene_styles.zoom_in_and_speak,
+		fullscreen_movie = "warhammer3/emp/elspeth_intro"
 	},
 
 	wh_dlc03_bst_beastmen = faction_intro_data:new{
@@ -366,18 +392,18 @@ data.faction_intros = {
 
 	wh_main_vmp_schwartzhafen = {
 		wh_dlc04_vmp_vlad_con_carstein = faction_intro_data:new{
-		preset = data.intro_presets.standard,
-		cam_cutscene_start = {x = 483.219208, y = 486.664215,	d = 21.561523, b = 0.0,	h = 62.004826,},
-		cam_gameplay_start = {x = 479.425568, y = 477.427551,	d = 8.30011, b = 0, h = 9.739759,},
-		advice_line = "wh3_dlc21_ie_camp_vmp_vlad_intro_01",
-		cutscene_style = data.cutscene_styles.zoom_in_and_speak
+			preset = data.intro_presets.standard,
+			cam_cutscene_start = {x = 483.219208, y = 486.664215,	d = 21.561523, b = 0.0,	h = 62.004826,},
+			cam_gameplay_start = {x = 479.425568, y = 477.427551,	d = 8.30011, b = 0, h = 9.739759,},
+			advice_line = "wh3_dlc21_ie_camp_vmp_vlad_intro_01",
+			cutscene_style = data.cutscene_styles.zoom_in_and_speak
 		},
-		wh_pro02_vmp_isabella_von_carstein = faction_intro_data:new{
-		preset = data.intro_presets.standard,
-		cam_cutscene_start = {x = 483.219208, y = 486.664215,	d = 21.561523, b = 0.0,	h = 62.004826,},
-		cam_gameplay_start = {x = 479.425568, y = 477.427551,	d = 8.30011, b = 0, h = 9.739759,},
-		advice_line = "wh3_dlc21_ie_camp_vmp_vlad_intro_01",
-		cutscene_style = data.cutscene_styles.zoom_in_and_speak
+			wh_pro02_vmp_isabella_von_carstein = faction_intro_data:new{
+			preset = data.intro_presets.standard,
+			cam_cutscene_start = {x = 483.219208, y = 486.664215,	d = 21.561523, b = 0.0,	h = 62.004826,},
+			cam_gameplay_start = {x = 479.425568, y = 477.427551,	d = 8.30011, b = 0, h = 9.739759,},
+			advice_line = "wh3_dlc21_ie_camp_vmp_isabella_intro_01",
+			cutscene_style = data.cutscene_styles.zoom_in_and_speak
 		},
 	},
 
@@ -927,6 +953,14 @@ data.faction_intros = {
 		cam_cutscene_start = {x = 738.351685, y = 383.537323,	d = 21.33252, b = 0.0,	h = 64.150696,},
 		cam_gameplay_start = {x = 738.351685, y = 379.588745,	d = 7.776306, b = 0, h = 9.045765,},
 		advice_line = "wh3_dlc21_ie_camp_cth_zhao_ming_intro_01",
+		cutscene_style = data.cutscene_styles.zoom_in_and_speak
+	},
+
+	wh2_dlc13_emp_golden_order = faction_intro_data:new{
+		preset = data.intro_presets.standard,
+		cam_cutscene_start = {x = 765.876343, y = 354.341003,	d = 24.992941, b = 0.288022,	h = 56.252411,},
+		cam_gameplay_start = {x = 761.077393, y = 338.143005,	d = 5.750698, b = 0.288015, h = 4.597349,},
+		advice_line = "wh3_dlc21_ie_camp_emp_balthasar_gelt_intro_01",
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},
 

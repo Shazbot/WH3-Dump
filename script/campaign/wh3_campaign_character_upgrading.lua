@@ -20,6 +20,14 @@ CUS.initiative_to_agent_junctions = {
 		type = "champion",
 		subtype = "wh3_dlc24_chs_exalted_hero_mtze"
 	},
+	wh3_dlc25_character_initiative_devote_sorceror_to_nurgle_death = {
+		type = "wizard",
+		subtype ="wh3_dlc25_chs_sorcerer_death_mnur",
+	},
+	wh3_dlc25_character_initiative_devote_sorceror_to_nurgle_nurgle = {
+		type = "wizard",
+		subtype ="wh3_dlc25_chs_sorcerer_nurgle_mnur",
+	},
 	wh3_dlc20_character_initiative_devote_sorceror_to_slaanesh_shadows = {
 		type = "wizard",
 		subtype = "wh3_dlc20_chs_sorcerer_shadows_msla"
@@ -43,6 +51,10 @@ CUS.initiative_to_agent_junctions = {
 	wh3_dlc20_character_initiative_devote_lord_to_slaanesh = {
 		type = "general",
 		subtype = "wh3_dlc20_chs_lord_msla"
+	},
+	wh3_dlc20_character_initiative_devote_lord_to_nurgle = {
+		type = "general",
+		subtype ="wh3_dlc25_chs_lord_mnur",
 	},
 	wh3_dlc24_character_initiative_devote_lord_to_tzeentch = {
 		type = "general",

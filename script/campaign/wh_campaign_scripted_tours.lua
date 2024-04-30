@@ -10,6 +10,8 @@ function start_scripted_tours()
 		character_skill_point_tour:start();
 		in_settlement_sieged_tour:start();
 
+		-- cultures
+
 		--Starting Flesh Lab Scripted tour in here instead of early_game.lua so it is used in both campaigns
 		local throt_interface = cm:get_faction("wh2_main_skv_clan_moulder");
 		if throt_interface and throt_interface:is_human() then
@@ -29,6 +31,45 @@ function start_scripted_tours()
 			in_chd_hellforge_armoury_tour:start()
 			in_chd_hellforge_manufactory_tour:start()
 			in_chd_labour_economy_tour:start()
+		end
+		
+		if cm:are_any_factions_human(nil, "wh3_main_nur_nurgle") then
+			in_nur_plagues_tour:start()
+		end
+
+		if cm:are_any_factions_human(nil, "wh_main_dwf_dwarfs") then
+			in_dwf_book_of_grudges:start()
+		end
+
+
+		-- factions
+
+		--Starting Chieftains Scripted tour in here instead of early_game.lua so it is used in both campaigns
+		local tamurkhan_interface = cm:get_faction("wh3_dlc25_nur_tamurkhan")
+		if tamurkhan_interface and tamurkhan_interface:is_human() then
+			in_nur_tamurkhans_chieftains_tour:start()
+		end
+
+		--Starting Malakai's Adventures Scripted tour in here instead of early_game.lua so it is used in both campaigns
+		local malakai_interface = cm:get_faction("wh3_dlc25_dwf_malakai");
+		if malakai_interface and malakai_interface:is_human() then
+			in_dwf_malakai_adventures_unlocked_tour:start();
+			in_dwf_malakai_adventures_started_adventure:start();
+		end
+
+		local elspeth_interface = cm:get_faction("wh_main_emp_wissenland");
+		if elspeth_interface and elspeth_interface:is_human() then
+			in_emp_gunnery_school_tour:start();
+		end
+
+		local elspeth_interface = cm:get_faction("wh2_dlc13_emp_golden_order");
+		if elspeth_interface and elspeth_interface:is_human() then
+			in_emp_college_of_magic_tour:start();
+		end
+
+		local elspeth_interface = cm:get_faction("wh_main_emp_empire");
+		if elspeth_interface and elspeth_interface:is_human() then
+			in_emp_electoral_machinations_tour:start();
 		end
 	end
 end
@@ -3294,7 +3335,7 @@ in_chd_minor_occupation_tour = intervention:new(
 	0, 																	-- cost
 	function() 															-- trigger callback
 		out("#### "..scripted_chd_minor_occupation_tour.id.." ####")
-		ui_scripted_tour:display_stage(scripted_chd_minor_occupation_tour, 1, in_chd_minor_occupation_tour)
+		ui_scripted_tour:construct_tour(scripted_chd_minor_occupation_tour, in_chd_minor_occupation_tour)
 	end,					
 	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
 )
@@ -3316,6 +3357,7 @@ in_chd_minor_occupation_tour:add_trigger_condition(
 
 scripted_chd_minor_occupation_tour = {
 	id = "in_chd_minor_occupation_tour",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_chd_economy",
 	advice_string = "wh3.dlc23.camp.advice.chd.occupation_minor.001",
 	{
 		id = "chd_minor_overview",
@@ -3382,7 +3424,7 @@ in_chd_major_occupation_tour = intervention:new(
 	0, 																	-- cost
 	function() 															-- trigger callback
 		out("#### "..scripted_chd_major_occupation_tour.id.." ####")
-		ui_scripted_tour:display_stage(scripted_chd_major_occupation_tour, 1, in_chd_major_occupation_tour)
+		ui_scripted_tour:construct_tour(scripted_chd_major_occupation_tour, in_chd_major_occupation_tour)
 	end,					
 	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
 )
@@ -3404,6 +3446,7 @@ in_chd_major_occupation_tour:add_trigger_condition(
 
 scripted_chd_major_occupation_tour = {
 	id = "in_chd_major_occupation_tour",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_chd_economy",
 	advice_string = "wh3.dlc23.camp.advice.chd.occupation_major.001",
 	{
 		id = "chd_major_overview",
@@ -3471,7 +3514,7 @@ in_chd_toz_tour = intervention:new(
 	function() 
 		cm:callback(function()
 			out("#### "..scripted_chd_toz_tour.id.." ####")
-			ui_scripted_tour:display_stage(scripted_chd_toz_tour, 1, in_chd_toz_tour)
+			ui_scripted_tour:construct_tour(scripted_chd_toz_tour, in_chd_toz_tour)
 		end,
 		0.2)															-- trigger callback
 	end,					
@@ -3494,6 +3537,7 @@ in_chd_toz_tour:add_trigger_condition(
 		
 scripted_chd_toz_tour = {
 	id = "in_chd_toz_tour",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_tower_of_zharr",
 	advice_string = "wh3.dlc23.camp.advice.chd.toz.001",
 	{
 		id = "chd_toz_overview",
@@ -3582,7 +3626,8 @@ scripted_chd_toz_tour = {
 		},
 		pulse = {
 			function() return find_uicomponent(core:get_ui_root(), "tower_of_zharr", "effects_panel", "tabs_holder") end
-		}
+		},
+		click_on_navigate = function() return find_uicomponent(core:get_ui_root(), "tower_of_zharr", "side_nav_bar", "CcoRitualCategoryGroupRecordtoz_tier_1") end
 	},
 	{
 		id = "chd_toz_navigation",
@@ -3595,8 +3640,8 @@ scripted_chd_toz_tour = {
 			size = 350,
 			length = 50
 		},
-		click = function() return find_uicomponent(core:get_ui_root(), "tower_of_zharr", "side_nav_bar", "CcoRitualCategoryGroupRecordtoz_tier_2") end,
-		confirmation = function() return find_uicomponent(core:get_ui_root(), "tower_of_zharr", "side_nav_bar", "CcoRitualCategoryGroupRecordtoz_tier_2") end
+		click_on_navigate = function() return find_uicomponent(core:get_ui_root(), "tower_of_zharr", "side_nav_bar", "CcoRitualCategoryGroupRecordtoz_tier_2") end,
+		navigation_delay = 0.5
 	},
 	{
 		id = "chd_toz_locked_tiers",
@@ -3610,7 +3655,7 @@ scripted_chd_toz_tour = {
 			length = 50,
 			x_offset = 100
 		},
-		click = function() return find_uicomponent(core:get_ui_root(), "tower_of_zharr", "side_nav_bar", "CcoRitualCategoryGroupRecordtoz_tier_1") end
+		navigation_delay = 0.5
 	}
 }
 
@@ -3631,13 +3676,13 @@ in_chd_industry_tour = intervention:new(
 	function() 
 		cm:callback(function()
 			-- need to check if industry frame is visible after a small delay as there's a small animation when opening this panel where it's not visible at first.
-			if find_uicomponent(core:get_ui_root(), "frame_industry"):VisibleFromRoot() then
+			if find_uicomponent(core:get_ui_root(), "hud_campaign", "info_panel_holder", "frame_industry"):VisibleFromRoot() then
 				out("#### "..scripted_chd_industry_tour.id.." ####")
-				ui_scripted_tour:display_stage(scripted_chd_industry_tour, 1, in_chd_industry_tour)
+				ui_scripted_tour:construct_tour(scripted_chd_industry_tour, in_chd_industry_tour)
 			else
 				in_chd_industry_tour:cancel()
 			end
-		end, 0.2)
+		end, 0.5)
 	end,					
 	BOOL_INTERVENTIONS_DEBUG
 )
@@ -3650,7 +3695,7 @@ in_chd_industry_tour:add_trigger_condition(
 	"PanelOpenedCampaign",
 	function(context)
 		if context.string == "settlement_panel" then
-			if find_uicomponent(core:get_ui_root(), "frame_industry") then
+			if find_uicomponent(core:get_ui_root(), "hud_campaign", "info_panel_holder", "frame_industry") then
 				return true
 			end
 			return false
@@ -3660,6 +3705,7 @@ in_chd_industry_tour:add_trigger_condition(
 
 scripted_chd_industry_tour = {
 	id = "in_chd_industry_tour",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_chd_economy",
 	advice_string = "wh3.dlc23.camp.advice.chd.industry.001",
 	{
 		id = "chd_industry_overview",
@@ -3761,7 +3807,7 @@ in_chd_hellforge_armoury_tour = intervention:new(
 	function() 
 		cm:callback(function()
 			out("#### "..scripted_chd_hellforge_armoury_tour.id.." ####")
-			ui_scripted_tour:display_stage(scripted_chd_hellforge_armoury_tour, 1, in_chd_hellforge_armoury_tour)
+			ui_scripted_tour:construct_tour(scripted_chd_hellforge_armoury_tour, in_chd_hellforge_armoury_tour)
 		end,
 		0.2)															-- trigger callback
 	end,					
@@ -3785,6 +3831,7 @@ in_chd_hellforge_armoury_tour:add_trigger_condition(
 
 scripted_chd_hellforge_armoury_tour = {
 	id = "in_chd_hellforge_armoury_tour",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_hellforge",
 	advice_string = "wh3.dlc23.camp.advice.chd.hellforge_armoury.001",
 
 	{
@@ -3816,7 +3863,7 @@ scripted_chd_hellforge_armoury_tour = {
 	{
 		id = "chd_hellforge_shared_cap",
 		highlight = {
-			function() return find_uicomponent(get_hellforge_shared_unit_cap_component()) end
+			function() return find_uicomponent(ui_scripted_tour:find_valid_child_component(find_uicomponent(core:get_ui_root(), "hellforge_panel_main", "CcoRitualCategoryRecordHELLFORGE_CAPS_MELEE_INFANTRY", "unit_entries_items"))) end
 		},
 		text_box = {
 			text = "dlc23_text_pointer_chd_hellforge_armoury_3",
@@ -3825,13 +3872,13 @@ scripted_chd_hellforge_armoury_tour = {
 			length = 80
 		},
 		pulse = {
-			function() return find_uicomponent(get_hellforge_shared_unit_cap_component(), "cap_value_holder") end
+			function() return find_uicomponent(ui_scripted_tour:find_valid_child_component(find_uicomponent(core:get_ui_root(), "hellforge_panel_main", "CcoRitualCategoryRecordHELLFORGE_CAPS_MELEE_INFANTRY", "unit_entries_items")), "cap_value_holder") end
 		}
 	},
 	{
 		id = "chd_hellforge_cap_increase",
 		highlight = {
-			function() return find_uicomponent(get_hellforge_shared_unit_cap_component(), "increase_cap_holder") end
+			function() return find_uicomponent(ui_scripted_tour:find_valid_child_component(find_uicomponent(core:get_ui_root(), "hellforge_panel_main", "CcoRitualCategoryRecordHELLFORGE_CAPS_MELEE_INFANTRY", "unit_entries_items")), "increase_cap_holder") end
 		},
 		text_box = {
 			text = "dlc23_text_pointer_chd_hellforge_armoury_4",
@@ -3843,7 +3890,7 @@ scripted_chd_hellforge_armoury_tour = {
 	{
 		id = "chd_hellforge_upgrade_bar",
 		highlight = {
-			function() return find_uicomponent(get_hellforge_shared_unit_cap_title_component()) end
+			function() return find_uicomponent(ui_scripted_tour:find_valid_child_component(find_uicomponent(core:get_ui_root(), "hellforge_panel_main", "CcoRitualCategoryRecordHELLFORGE_CAPS_MELEE_INFANTRY", "group_title", "unlock_bar_holder"))) end
 		},
 		text_box = {
 			text = "dlc23_text_pointer_chd_hellforge_armoury_5",
@@ -3866,28 +3913,6 @@ scripted_chd_hellforge_armoury_tour = {
 	},
 }
 
-function get_hellforge_shared_unit_cap_component()
-	local parent = find_uicomponent(core:get_ui_root(), "hellforge_panel_main", "CcoRitualCategoryRecordHELLFORGE_CAPS_MELEE_INFANTRY", "unit_entries_items")
-	if parent then
-		for i = 1, parent:ChildCount() do
-			local child = find_child_uicomponent_by_index(parent, i)
-			if child ~= nil and child:Visible() then return child end
-		end
-	end
-	return false
-end
-
-function get_hellforge_shared_unit_cap_title_component()
-	local parent = find_uicomponent(core:get_ui_root(), "hellforge_panel_main", "CcoRitualCategoryRecordHELLFORGE_CAPS_MELEE_INFANTRY", "group_title", "unlock_bar_holder")
-	if parent then
-		for i = 1, parent:ChildCount() do
-			local child = find_child_uicomponent_by_index(parent, i)
-			if child ~= nil and child:Visible() then return child end
-		end
-	end
-	return false
-end
-
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---- CHD Hell-Forge Manufactory
@@ -3901,7 +3926,7 @@ in_chd_hellforge_manufactory_tour = intervention:new(
 		cm:callback(function()
 			out("#### "..scripted_chd_hellforge_manufactory_tour.id.." ####")
 			
-			ui_scripted_tour:display_stage(scripted_chd_hellforge_manufactory_tour, 1, in_chd_hellforge_manufactory_tour)
+			ui_scripted_tour:construct_tour(scripted_chd_hellforge_manufactory_tour, in_chd_hellforge_manufactory_tour)
 		end,
 		0.2)															-- trigger callback
 	end,					
@@ -3923,6 +3948,7 @@ in_chd_hellforge_manufactory_tour:add_trigger_condition(
 
 scripted_chd_hellforge_manufactory_tour = {
 	id = "in_chd_hellforge_manufactory_tour",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_hellforge",
 	advice_string = "wh3.dlc23.camp.advice.chd.hellforge_manufactory.001",
 
 	{
@@ -3936,8 +3962,7 @@ scripted_chd_hellforge_manufactory_tour = {
 			size = 250,
 			length = 50
 		},
-		click = function() return find_uicomponent(get_active_hellforge_manufactory_quick_move_component()) end,
-		confirmation = function() return find_uicomponent(get_active_hellforge_manufactory_category_component()) end
+		click_on_navigate = function() return find_uicomponent(get_active_hellforge_manufactory_quick_move_component()) end
 	},
 	{
 		id = "chd_hellforge_categories",
@@ -3951,8 +3976,8 @@ scripted_chd_hellforge_manufactory_tour = {
 			length = 80,
 			y_offset = -200
 		},
-		click = function() return is_side_panel_active() end,
-		confirmation = function() return find_uicomponent(get_active_hellforge_manufactory_category_component(), "content_holder") end
+		click_on_navigate = function() if is_hellforge_side_panel_active() then return find_uicomponent(get_active_hellforge_manufactory_quick_move_component()) end end,
+		navigation_delay = 0.5
 	},
 	{
 		id = "chd_hellforge_side_panel",
@@ -3984,19 +4009,17 @@ scripted_chd_hellforge_manufactory_tour = {
 		pulse = {
 			function() return find_uicomponent(get_active_hellforge_manufactory_category_component(), "category_upkeep", "cost_holder") end
 		}
-	},
+	}
 }
 
 function get_active_hellforge_manufactory_category_component()
 	local parent = find_uicomponent(core:get_ui_root(), "hellforge_panel_category_tab", "category_list", "list_box")
-	if parent ~= nil then
+	if parent then
 		local count = parent:ChildCount()
-		for i = 1, parent:ChildCount() do
+		for i = 0, parent:ChildCount() - 1 do
 			local child = find_child_uicomponent_by_index(parent, i)
-			if child ~= nil then
-				if child:CurrentState() == "active" or child:CurrentState() == "selected" then
-					return child
-				end
+			if child and child:Visible() and (child:CurrentState() == "active" or child:CurrentState() == "selected") then
+				return child
 			end
 		end
 	end
@@ -4005,26 +4028,20 @@ end
 
 function get_active_hellforge_manufactory_quick_move_component()
 	local parent = find_uicomponent(core:get_ui_root(), "hellforge_panel_category_tab", "button_list")
-	if parent ~= nil then
-		for i = 1, parent:ChildCount() do
+	if parent then
+		for i = 0, parent:ChildCount() - 1 do
 			local child = find_child_uicomponent_by_index(parent, i)
-			if child ~= nil then
-				if child:CurrentState() == "active" or child:CurrentState() == "selected" then
-					return child
-				end
+			if child and child:Visible() and (child:CurrentState() == "active" or child:CurrentState() == "selected") then
+				return child
 			end
 		end
 	end
 	return false
 end
 
-function is_side_panel_active()
+function is_hellforge_side_panel_active()
 	local side_panel_component = find_uicomponent(core:get_ui_root(), "hellforge_panel_main", "hellforge_panel_category_tab", "category_title_container")
-	if side_panel_component and side_panel_component:Visible() then
-		return "skip_click"
-	else
-		return find_uicomponent(get_active_hellforge_manufactory_quick_move_component())
-	end
+	return not (side_panel_component and side_panel_component:Visible())
 end
 
 
@@ -4042,7 +4059,7 @@ in_chd_labour_economy_tour = intervention:new(
 		cm:callback(function()
 			out("#### "..scripted_chd_labour_economy_tour.id.." ####")
 			
-			ui_scripted_tour:display_stage(scripted_chd_labour_economy_tour, 1, in_chd_labour_economy_tour)
+			ui_scripted_tour:construct_tour(scripted_chd_labour_economy_tour, in_chd_labour_economy_tour)
 		end,
 		0.2)															-- trigger callback
 	end,					
@@ -4064,6 +4081,7 @@ in_chd_labour_economy_tour:add_trigger_condition(
 
 scripted_chd_labour_economy_tour = {
 	id = "in_chd_labour_economy_tour",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_labour",
 	advice_string = "wh3.dlc23.camp.advice.chd.labour_panel.001",
 
 	{
@@ -4160,6 +4178,1092 @@ function get_labour_economy_first_province()
 	return find_child_uicomponent_by_index(parent, 1)
 end
 
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- NUR Plagues Panel
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_nur_plagues_tour = intervention:new(
+	"in_nur_plagues_tour",			 						-- string name
+	0, 														-- cost
+	function() 
+		cm:callback(function()
+			out("#### "..scripted_nur_plagues_tour.id.." ####")
+			
+			ui_scripted_tour:construct_tour(scripted_nur_plagues_tour, in_nur_plagues_tour)
+		end,
+		0.2)												-- trigger callback
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 							-- show debug output
+)
+
+in_nur_plagues_tour:add_advice_key_precondition("wh3.dlc25.camp.advice.nur.plagues_panel.001")
+in_nur_plagues_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_nur_plagues_tour:set_should_lock_ui()
+in_nur_plagues_tour:add_trigger_condition(
+	"ComponentLClickUp",
+	function(context)
+		local plagues_panel = find_uicomponent(core:get_ui_root(), "dlc25_nurgle_plagues")
+		if plagues_panel and plagues_panel:Visible() then
+			return true
+		end
+	end
+)
+
+scripted_nur_plagues_tour = {
+	id = "in_nur_plagues_tour",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_plagues",
+	advice_string = "wh3.dlc25.camp.advice.nur.plagues_panel.001",
+
+	{
+		id = "nur_plagues_intro",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "tab_plague_builder") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_nur_plagues_panel_1",
+			direction = "right",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "nur_plagues_start",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "tab_plague_builder") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_nur_plagues_panel_2",
+			direction = "right",
+			size = 350,
+			length = 50
+		},
+		pulse = {
+			function() return find_uicomponent(core:get_ui_root(), "slot_parent", "CcoPlagueComponentUiDataRecord10", "plague_ingredient") end
+		},
+	},
+	{
+		id = "nur_plagues_adjacency",
+		highlight = {
+			function() 
+				local symptom = find_uicomponent(core:get_ui_root(), "slot_parent", "CcoPlagueComponentUiDataRecord10", "slot_item")
+				symptom:SimulateLClick()
+			end,
+			function() return find_uicomponent(core:get_ui_root(), "tab_plague_builder") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_nur_plagues_panel_3",
+			direction = "right",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "nur_plagues_blessed",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "tab_plague_builder") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_nur_plagues_panel_4",
+			direction = "right",
+			size = 350,
+			length = 50
+		},
+		pulse = {
+			function() return find_uicomponent(core:get_ui_root(), "slot_parent", "CcoPlagueComponentUiDataRecord6", "plague_ingredient") end
+		},
+	},
+	{
+		id = "nur_plagues_effects",
+		highlight = {
+			function() 
+				local symptom = find_uicomponent(core:get_ui_root(), "slot_parent", "CcoPlagueComponentUiDataRecord6", "slot_item")
+				symptom:SimulateLClick()
+			end,
+			function() return find_uicomponent(core:get_ui_root(), "list_plague_options") end,
+			function() return find_uicomponent(core:get_ui_root(), "holder_plague_effects") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_nur_plagues_panel_5",
+			direction = "left",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "nur_plagues_factors",
+		highlight = {
+			function() 
+				local symptom = find_uicomponent(core:get_ui_root(), "slot_parent", "CcoPlagueComponentUiDataRecord12", "slot_item")
+				symptom:SimulateLClick()
+			end,
+			function() return find_uicomponent(core:get_ui_root(), "holder_mutations") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_nur_plagues_panel_6",
+			direction = "left",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "nur_plagues_factors_immunity",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "holder_mutations") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_nur_plagues_panel_7",
+			direction = "left",
+			size = 350,
+			length = 50
+		},
+		pulse = {
+			function() return find_uicomponent(core:get_ui_root(), "mutations_list", "CcoPlagueMutationUiDataRecordimmunity") end
+		},
+	},
+	{
+		id = "nur_plagues_targetting",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "holder_target_action") end,
+			function() return find_uicomponent(core:get_ui_root(), "holder_helper_text") end,
+		},
+		text_box = {
+			text = "dlc25_text_pointer_nur_plagues_panel_8",
+			direction = "left",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "nur_plagues_infecting",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "holder_buttons") end,
+			function() return find_uicomponent(core:get_ui_root(), "holder_total_cost") end,
+		},
+		text_box = {
+			text = "dlc25_text_pointer_nur_plagues_panel_9",
+			direction = "bottom",
+			size = 500,
+			length = 50
+		}
+	},
+	{
+		id = "nur_plagues_randomisation",
+		highlight = {
+			function() 
+				local symptom = find_uicomponent(core:get_ui_root(), "slot_parent", "CcoPlagueComponentUiDataRecord10", "slot_item")
+				symptom:SimulateLClick()
+			end,
+			function() return find_uicomponent(core:get_ui_root(), "instability_holder", "holder_description") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_nur_plagues_panel_10",
+			direction = "top",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "nur_plagues_new_starts",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "tab_plague_builder") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_nur_plagues_panel_11",
+			direction = "right",
+			size = 350,
+			length = 50
+		}
+	}
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- NUR TAMURKHAN'S CHIEFTAINS PANEL
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_nur_tamurkhans_chieftains_tour = intervention:new(
+	"in_nur_tamurkhans_chieftains_tour",			 				-- string name
+	0, 																	-- cost
+	function() 
+		cm:callback(function()
+			out("#### "..scripted_tamurkhans_chieftains_tour.id.." ####")
+			ui_scripted_tour:construct_tour(scripted_tamurkhans_chieftains_tour, in_nur_tamurkhans_chieftains_tour)
+		end,
+		0.2)															-- trigger callback
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_nur_tamurkhans_chieftains_tour:add_advice_key_precondition("wh3.dlc25.camp.advice.nur.tamurkhan_chieftains.001")
+in_nur_tamurkhans_chieftains_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_nur_tamurkhans_chieftains_tour:set_should_lock_ui()
+in_nur_tamurkhans_chieftains_tour:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		if context.string == "dlc25_tamurkhan_chieftains" then
+			local feature_tab = find_uicomponent(core:get_ui_root(), "dlc25_tamurkhan_chieftains", "content_clipper")
+			if feature_tab and feature_tab:Visible() then
+				return true
+			end
+		end
+	end
+)
+
+scripted_tamurkhans_chieftains_tour = {
+	id = "in_nur_tamurkhans_chieftains_tour",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_chieftains",
+	advice_string = "wh3.dlc25.camp.advice.nur.tamurkhan_chieftains.001",
+
+	{
+		id = "tamurkhans_chieftains_chieftain_tabs",
+		highlight = {
+			function() return find_uicomponent(ui_scripted_tour:find_valid_child_component(find_uicomponent(core:get_ui_root(), "dlc25_tamurkhan_chieftains", "panel_chieftain_stats"), "holder_content"), "list_box") end
+		},
+		text_box = {
+			text = "wh3_dlc25_text_pointer_nur_tamurkhans_chieftains_1",
+			direction = "top",
+			size = 250,
+			length = 50
+		},
+	},
+	{
+		id = "tamurkhans_chieftains_recruit",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_tamurkhan_chieftains", "progression_list", "button_unlock") end
+		},
+		text_box = {
+			text = "wh3_dlc25_text_pointer_nur_tamurkhans_chieftains_2",
+			direction = "bottom",
+			size = 250,
+			length = 50
+		},
+	},
+	{
+		id = "tamurkhans_chieftains_portrait",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_tamurkhan_chieftains", "character_holder") end
+		},
+		text_box = {
+			text = "wh3_dlc25_text_pointer_nur_tamurkhans_chieftains_3",
+			direction = "left",
+			size = 250,
+			length = 50
+		},
+	},
+	{
+		id = "tamurkhans_chieftains_fealty",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_tamurkhan_chieftains", "content") end,
+		},
+		text_box = {
+			text = "wh3_dlc25_text_pointer_nur_tamurkhans_chieftains_4",
+			direction = "bottom",
+			size = 250,
+			length = 50
+		},
+	},
+	{
+		id = "tamurkhans_chieftains_units",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_tamurkhan_chieftains", "chieftain_units") end
+		},
+		text_box = {
+			text = "wh3_dlc25_text_pointer_nur_tamurkhans_chieftains_5",
+			direction = "top",
+			size = 250,
+			length = 50
+		}
+	},
+	{
+		id = "tamurkhans_chieftains_abilities",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_tamurkhan_chieftains", "holder_special_abilities") end
+		},
+		text_box = {
+			text = "wh3_dlc25_text_pointer_nur_tamurkhans_chieftains_6",
+			direction = "right",
+			size = 250,
+			length = 50
+		}
+	},
+	{
+		id = "tamurkhans_chieftains_unlock",
+		highlight = {
+			function() return find_uicomponent(ui_scripted_tour:find_valid_child_component(find_uicomponent(core:get_ui_root(), "dlc25_tamurkhan_chieftains", "panel_chieftain_stats"), "holder_content"), "list_box") end
+		},
+		text_box = {
+			text = "wh3_dlc25_text_pointer_nur_tamurkhans_chieftains_7",
+			direction = "top",
+			size = 250,
+			length = 50
+		},
+	},
+	{
+		id = "tamurkhans_chieftains_devote",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_tamurkhan_chieftains", "CcoEffectBundlewh3_dlc25_chieftain_deference_kazyk_tier_4_0") end,
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_tamurkhan_chieftains", "CcoEffectBundlewh3_dlc25_chieftain_deference_kazyk_tier_4_0", "deference_icon") end
+		},
+		text_box = {
+			text = "wh3_dlc25_text_pointer_nur_tamurkhans_chieftains_8",
+			direction = "right",
+			size = 250,
+			length = 50
+		},
+	},
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- DWF Malakai's Adventures Panel Unlocked
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_dwf_malakai_adventures_unlocked_tour = intervention:new(
+	"in_dwf_malakai_adventures_unlocked_tour",			 				-- string name
+	0, 																	-- cost
+	function() 
+		cm:callback(function()
+			out("#### "..scripted_dwf_malakai_adventures_unlocked_tour.id.." ####")
+			ui_scripted_tour:construct_tour(scripted_dwf_malakai_adventures_unlocked_tour, in_dwf_malakai_adventures_unlocked_tour)
+		end,
+		0.2)															-- trigger callback
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_dwf_malakai_adventures_unlocked_tour:add_advice_key_precondition("wh3.dlc25.camp.advice.dwf.malakai_adventures.001")
+in_dwf_malakai_adventures_unlocked_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_dwf_malakai_adventures_unlocked_tour:set_should_lock_ui()
+in_dwf_malakai_adventures_unlocked_tour:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		if context.string == "dlc25_malakai_oaths" then
+			local feature_tab = find_uicomponent(core:get_ui_root(), "dlc25_malakai_oaths", "list_mission_tabs")
+			if feature_tab and feature_tab:Visible() then
+				return true
+			end
+		end
+	end
+)
+
+scripted_dwf_malakai_adventures_unlocked_tour = {
+	id = "in_dwf_malakai_adventures_unlocked_tour",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_malakais_adventures",
+	advice_string = "wh3.dlc25.camp.advice.dwf.malakai_adventures.001",
+
+	{
+		id = "malakai_adventures_adventure_tabs",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_malakai_oaths", "list_mission_tabs") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_dwf_malakai_adventures_opened_1",
+			direction = "left",
+			size = 400,
+			length = 80
+		}
+	},
+	{
+		id = "malakai_adventures_mission_buttons",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_malakai_oaths", "holder_part_tabs") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_dwf_malakai_adventures_opened_2",
+			direction = "top",
+			size = 500,
+			length = 80
+		}
+	},
+	{
+		id = "malakai_adventures_main_description",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_malakai_oaths", "dy_adventure_description") end,
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_malakai_oaths", "dy_bullet_point_text") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_dwf_malakai_adventures_opened_3",
+			direction = "top",
+			size = 400,
+			length = 80
+		}
+	},
+	{
+		id = "malakai_adventures_battle_information",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_malakai_oaths", "holder_left_section") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_dwf_malakai_adventures_opened_4",
+			direction = "left",
+			size = 400,
+			length = 80
+		}
+	},
+	{
+		id = "malakai_adventures_battle_information_2",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_malakai_oaths", "holder_right_section") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_dwf_malakai_adventures_opened_5",
+			direction = "right",
+			size = 400,
+			length = 80
+		}
+	},
+	{
+		id = "malakai_adventures_start_adventure",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_malakai_oaths", "holder_activate_ritual", "header_adventure_start") end,
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_malakai_oaths", "holder_activate_ritual", "txt_activate") end,
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_malakai_oaths", "holder_activate_ritual", "unit_list") end,
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_malakai_oaths", "button_activate") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_dwf_malakai_adventures_opened_6",
+			direction = "bottom",
+			size = 500,
+			length = 80
+		},
+		pulse = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_malakai_oaths", "button_activate") end
+		}
+	}
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- DWF Malakai's Adventures Started Adventure
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_dwf_malakai_adventures_started_adventure = intervention:new(
+	"in_dwf_malakai_adventures_started_adventure",			 			-- string name
+	0, 																	-- cost
+	function() 
+		cm:callback(function()
+			out("#### "..scripted_dwf_malakai_adventures_started_adventure.id.." ####")
+			ui_scripted_tour:construct_tour(scripted_dwf_malakai_adventures_started_adventure, in_dwf_malakai_adventures_started_adventure)
+		end,
+		0.2)															-- trigger callback
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_dwf_malakai_adventures_started_adventure:add_advice_key_precondition("wh3.dlc25.camp.advice.dwf.malakai_adventures.002")
+in_dwf_malakai_adventures_started_adventure:set_wait_for_fullscreen_panel_dismissed(false)
+in_dwf_malakai_adventures_started_adventure:set_should_lock_ui()
+in_dwf_malakai_adventures_started_adventure:add_trigger_condition(
+	"ComponentLClickUp",
+	function(context)
+		local feature_tab = find_uicomponent(core:get_ui_root(), "dlc25_malakai_oaths", "list_mission_tabs")
+		if feature_tab and feature_tab:Visible() and context.string == "button_activate" then
+			return true
+		end
+	end
+)
+
+scripted_dwf_malakai_adventures_started_adventure = {
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_malakais_adventures",
+	id = "in_dwf_malakai_adventures_started_adventure",
+	advice_string = "wh3.dlc25.camp.advice.dwf.malakai_adventures.002",
+
+	{
+		id = "malakai_adventures_missions",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_malakai_oaths", "holder_part_tabs") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_dwf_malakai_adventures_started_1",
+			direction = "top",
+			size = 400,
+			length = 80
+		},
+		pulse = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_malakai_oaths", "button_activate") end
+		}
+	},
+	{
+		id = "malakai_adventures_mission_info",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_malakai_oaths", "holder_middle_section", "tab_objective_holder") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_dwf_malakai_adventures_started_2",
+			direction = "right",
+			size = 300,
+			length = 80
+		}
+	},
+	{
+		id = "malakai_adventures_final_battle",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_malakai_oaths", "holder_middle_section", "holder_progrssion") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_dwf_malakai_adventures_started_3",
+			direction = "top",
+			size = 400,
+			length = 80
+		},
+		pulse = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_malakai_oaths", "holder_middle_section", "list_part_tabs") end
+		}
+	},
+	{
+		id = "malakai_adventures_top_bar_info",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dwf_malakai_adventures", "holder_frame") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_dwf_malakai_adventures_started_4",
+			direction = "top",
+			size = 400,
+			length = 80
+		},
+		pulse = {
+			function() return find_uicomponent(core:get_ui_root(), "dwf_malakai_adventures", "mission_list_left") end,
+			function() return find_uicomponent(core:get_ui_root(), "dwf_malakai_adventures", "mission_list_right") end
+		}
+	},
+	{
+		id = "malakai_adventures_pin_button",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_malakai_oaths", "holder_middle_section", "holder_switch_ritual") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_dwf_malakai_adventures_started_5",
+			direction = "top",
+			size = 500,
+			length = 80
+		},
+		pulse = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_malakai_oaths", "holder_middle_section", "holder_switch_ritual", "round_small_button_toggle") end
+		}
+	}
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- DWF Book of Grudges
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_dwf_book_of_grudges = intervention:new(
+	"in_dwf_book_of_grudges",			 			-- string name
+	0, 																	-- cost
+	function() 
+		cm:callback(function()
+			out("#### "..scripted_dwf_book_of_grudges.id.." ####")
+			ui_scripted_tour:construct_tour(scripted_dwf_book_of_grudges, in_dwf_book_of_grudges)
+		end,
+		0.2)															-- trigger callback
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_dwf_book_of_grudges:add_advice_key_precondition("wh3.dlc25.camp.advice.dwf.book_of_grudges.001")
+in_dwf_book_of_grudges:set_wait_for_fullscreen_panel_dismissed(false)
+in_dwf_book_of_grudges:set_should_lock_ui()
+in_dwf_book_of_grudges:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		if context.string == "dlc25_bog_main" then
+			local feature_tab = find_uicomponent(core:get_ui_root(), "dlc25_bog_main", "legendary_grudges_tab")
+			if feature_tab and feature_tab:Visible() then
+				return true
+			end
+		end
+	end
+)
+
+scripted_dwf_book_of_grudges = {
+	id = "in_dwf_book_of_grudges",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_grudges",
+	advice_string = "wh3.dlc25.camp.advice.dwf.book_of_grudges.001",
+	reposition_controls = function() return find_uicomponent(core:get_ui_root(), "dlc25_bog_main", "header_frame") end,
+
+	{
+		id = "BoG_1",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_bog_main", "tab_list", "unit_pack_tab") end,
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_bog_main", "tab_list", "confederation_tab") end,
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_bog_main", "tab_list", "legendary_grudges_tab") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_dwf_book_of_grudges_1",
+			direction = "left",
+			size = 400,
+			length = 120
+		}
+	},
+	{
+		id = "BoG_2",
+		highlight = {
+			function() return ui_scripted_tour:find_valid_child_component(find_uicomponent(core:get_ui_root(), "dlc25_bog_main", "tab_legendary_grudges", "misison_list")) end,
+		},
+		text_box = {
+			text = "dlc25_text_pointer_dwf_book_of_grudges_2",
+			direction = "left",
+			size = 400,
+			length = 80
+		},
+		click_on_navigate = function() return find_uicomponent(core:get_ui_root(), "dlc25_bog_main", "legendary_grudges_tab") end
+	},
+	{
+		id = "BoG_3",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_bog_main", "page cycle") end,
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_bog_main", "button_l") end,
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_bog_main", "button_r") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_dwf_book_of_grudges_3",
+			direction = "bottom",
+			size = 400,
+			length = 60
+		},
+		click_on_navigate = function() return find_uicomponent(core:get_ui_root(), "dlc25_bog_main", "confederation_tab") end,
+		navigation_delay = 1
+	},
+	{
+		id = "BoG_4",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "holder_confederate_content") end,
+			function() return find_uicomponent(core:get_ui_root(), "button_confederate") end,
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_bog_confederate", "holder_feature_description") end,
+		},
+		text_box = {
+			text = "dlc25_text_pointer_dwf_book_of_grudges_4",
+			direction = "left",
+			size = 400,
+			length = 80
+		},
+		click_on_navigate = function() return find_uicomponent(core:get_ui_root(), "dlc25_bog_main", "unit_pack_tab") end,
+		navigation_delay = 1
+	},
+	{
+		id = "BoG_5",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_bog_main", "dlc25_bog_unit_packs", "holder_unit_packs") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_dwf_book_of_grudges_5",
+			direction = "left",
+			size = 400,
+			length = 80
+		},
+		pulse = {
+			function() return find_uicomponent(ui_scripted_tour:find_valid_child_component(find_uicomponent(core:get_ui_root(), "dlc25_bog_main", "dlc25_bog_unit_packs", "holder_unit_packs")), "unlock_tier") end
+		},
+		navigation_delay = 1
+	},
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- EMP Gunnery School
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_emp_gunnery_school_tour = intervention:new(
+	"in_emp_gunnery_school_tour",			 						-- string name
+	0, 																	-- cost
+	function() 
+		cm:callback(function()
+			out("#### "..scripted_emp_gunnery_school_tour.id.." ####")
+			
+			ui_scripted_tour:construct_tour(scripted_emp_gunnery_school_tour, in_emp_gunnery_school_tour)
+		end,
+		0.2)															-- trigger callback
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_emp_gunnery_school_tour:add_advice_key_precondition("wh3.dlc25.camp.advice.emp.gunnery_school.001")
+in_emp_gunnery_school_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_emp_gunnery_school_tour:set_should_lock_ui()
+in_emp_gunnery_school_tour:add_trigger_condition(
+	"ComponentLClickUp",
+	function(context)
+		local panel = find_uicomponent(core:get_ui_root(), "dlc25_don_main")
+		if panel and panel:Visible() then
+			return true
+		end
+	end
+)
+
+scripted_emp_gunnery_school_tour = {
+	id = "in_emp_gunnery_school_tour",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_imperial_gunnery_school",
+	advice_string = "wh3.dlc25.camp.advice.emp.gunnery_school.001",
+	reposition_controls = function() return find_uicomponent(core:get_ui_root(), "dlc25_don_main", "bar_holder") end,
+
+	{
+		id = "emp_gunnery_school_intro",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_don_main", "panel_title") end,
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_don_main", "buttons_container") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_emp_gunnery_school_1",
+			direction = "top",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "emp_gunnery_school_buttons",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_don_main", "units_list") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_emp_gunnery_school_2",
+			direction = "left",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "emp_gunnery_school_units",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_don_main", "card_holder") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_emp_gunnery_school_3",
+			direction = "right",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "emp_gunnery_school_upgrades",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_don_main", "upgrades_container") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_emp_gunnery_school_4",
+			direction = "right",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "emp_gunnery_school_upgrade_purchase",
+		highlight = {
+			function() return find_uicomponent(get_gunnery_upgrade_comp(1), "upgrade_details_container") end,
+		},
+		text_box = {
+			text = "dlc25_text_pointer_emp_gunnery_school_5",
+			direction = "right",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "emp_gunnery_school_upgrade_locks",
+		highlight = {
+			function() return find_uicomponent(get_gunnery_upgrade_comp(2), "upgrade_level") end,
+			function() return find_uicomponent(get_gunnery_upgrade_comp(3), "upgrade_level") end,
+		},
+		text_box = {
+			text = "dlc25_text_pointer_emp_gunnery_school_6",
+			direction = "right",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "emp_gunnery_school_tiers",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_don_main", "workshop_level_context") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_emp_gunnery_school_7",
+			direction = "top",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "emp_gunnery_school_amethyst_armory",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_don_main", "tab_armoury") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_emp_gunnery_school_8",
+			direction = "top",
+			size = 350,
+			length = 50
+		}
+	},
+}
+
+function get_gunnery_upgrade_comp(child_no)
+	local parent = find_uicomponent(core:get_ui_root(), "dlc25_don_main", "gun_school_creator", "upgrade_content")
+	return find_child_uicomponent_by_index(parent, child_no)
+end
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- EMP Electoral Machinations
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_emp_electoral_machinations_tour = intervention:new(
+	"in_emp_electoral_machinations_tour",			 						-- string name
+	0, 																	-- cost
+	function() 
+		cm:callback(function()
+			out("#### "..scripted_emp_electoral_machinations_tour.id.." ####")
+			
+			ui_scripted_tour:construct_tour(scripted_emp_electoral_machinations_tour, in_emp_electoral_machinations_tour)
+		end,
+		0.2)															-- trigger callback
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_emp_electoral_machinations_tour:add_advice_key_precondition("wh3.dlc25.camp.advice.emp.electoral_machinations.001")
+in_emp_electoral_machinations_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_emp_electoral_machinations_tour:set_should_lock_ui()
+in_emp_electoral_machinations_tour:add_trigger_condition(
+	"ComponentLClickUp",
+	function(context)
+		local panel = find_uicomponent(core:get_ui_root(), "dlc25_electoral_machinations")
+		if panel and panel:Visible() then
+			return true
+		end
+	end
+)
+
+scripted_emp_electoral_machinations_tour = {
+	id = "in_emp_electoral_machinations_tour",
+	localised_name = "ui_text_replacements_localised_text_dlc25_college_of_magic_title_wh_main_emp_empire",
+	advice_string = "wh3.dlc25.camp.advice.emp.electoral_machinations.001",
+
+	{
+		id = "emp_electoral_machinations_1",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_electoral_machinations") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_emp_electoral_machinations_1",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "emp_electoral_machinations_2",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_electoral_machinations", "category_button") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_emp_electoral_machinations_2",
+			direction = "top",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "emp_electoral_machinations_3",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_electoral_machinations", "repeatable_rituals_list") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_emp_electoral_machinations_3",
+			direction = "left",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "emp_electoral_machinations_4",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_electoral_machinations", "ritual_info") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_emp_electoral_machinations_4",
+			direction = "right",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "emp_electoral_machinations_5",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_electoral_machinations", "button_perform") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_emp_electoral_machinations_5",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+		click_on_navigate = function() return find_uicomponent(core:get_ui_root(), "dlc25_electoral_machinations", "category_button") end
+	},
+	{
+		id = "emp_electoral_machinations_6",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_electoral_machinations", "button_electoral_machinations") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_emp_electoral_machinations_6",
+			direction = "top",
+			size = 350,
+			length = 50
+		},
+		click_on_navigate = function() return find_uicomponent(core:get_ui_root(), "dlc25_electoral_machinations", "button_electoral_machinations") end
+	},
+	{
+		id = "emp_electoral_machinations_7",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_electoral_machinations", "dropdown_button") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_emp_electoral_machinations_7",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "emp_electoral_machinations_8",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_electoral_machinations", "button_improve") end,
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_electoral_machinations", "button_decrease") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_emp_electoral_machinations_8",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- EMP College of Magic
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_emp_college_of_magic_tour = intervention:new(
+	"in_emp_college_of_magic_tour",			 						-- string name
+	0, 																	-- cost
+	function() 
+		cm:callback(function()
+			out("#### "..scripted_emp_college_of_magic_tour.id.." ####")
+			
+			ui_scripted_tour:construct_tour(scripted_emp_college_of_magic_tour, in_emp_college_of_magic_tour)
+		end,
+		0.2)															-- trigger callback
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_emp_college_of_magic_tour:add_advice_key_precondition("wh3.dlc25.camp.advice.emp.college_of_magic.001")
+in_emp_college_of_magic_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_emp_college_of_magic_tour:set_should_lock_ui()
+in_emp_college_of_magic_tour:add_trigger_condition(
+	"ComponentLClickUp",
+	function(context)
+		local panel = find_uicomponent(core:get_ui_root(), "dlc25_college_of_magic")
+		if panel and panel:Visible() then
+			return true
+		end
+	end
+)
+
+scripted_emp_college_of_magic_tour = {
+	id = "in_emp_college_of_magic_tour",
+	localised_name = "ui_text_replacements_localised_text_dlc25_college_of_magic_title",
+	advice_string = "wh3.dlc25.camp.advice.emp.college_of_magic.001",
+
+	{
+		id = "emp_college_of_magic_intro",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_college_of_magic", "panel_container") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_emp_college_of_magic_1",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "emp_college_of_magic_tabs",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_college_of_magic", "category_group_list") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_emp_college_of_magic_2",
+			direction = "top",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "emp_college_of_magic_repeatable",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_college_of_magic", "repeatable_rituals_list") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_emp_college_of_magic_3",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "emp_college_of_magic_unlocks",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_college_of_magic", "oneshot_rituals_list") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_emp_college_of_magic_4",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "emp_college_of_magic_info",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_college_of_magic", "ritual_info") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_emp_college_of_magic_5",
+			direction = "right",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "emp_college_of_magic_purchase",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc25_college_of_magic", "button_perform") end
+		},
+		text_box = {
+			text = "dlc25_text_pointer_emp_college_of_magic_6",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	}
+}
+
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---- Common Functions
@@ -4167,6 +5271,142 @@ end
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ui_scripted_tour = {}
+
+function ui_scripted_tour:construct_tour(tour, intervention)
+	local infotext = get_infotext_manager()
+	
+	local nt = navigable_tour:new(
+		tour.id, -- unique name 																
+		function() end, -- end callback
+		tour.localised_name -- title string
+	)
+	
+	if tour.reposition_controls then
+		nt:set_interval_before_tour_controls_visible(0)
+	end
+	
+	nt:start_action(
+		function()
+			-- Dismiss advice.
+			cm:dismiss_advice()
+			
+			infotext:attach_to_advisor(false) -- Unattach infotext to advisor
+			nt:set_tour_controls_above_infotext(true) -- This must be called after infotext is unattached
+			infotext:cache_and_set_detached_infotext_priority(1500, true)
+			nt:cache_and_set_scripted_tour_controls_priority(1500, true)
+			
+			-- Re-position the controls if needed
+			if tour.reposition_controls then
+				-- Get components
+				local uic_scripted_tour_controls = find_uicomponent("under_advisor_docker", "scripted_tour_controls")
+				local uic_target = tour.reposition_controls()
+				
+				if not uic_target then
+					script_error("ERROR: Attempted to re-position scripted tour controls, but could not find ui component - check the calling function")
+					return false
+				end
+				
+				-- Get positions
+				local uic_target_pos_x, uic_target_pos_y = uic_target:Position()
+
+				-- Get dimensions
+				local uic_target_width, uic_target_height = uic_target:Dimensions()
+
+				-- Move beside target component
+				uic_scripted_tour_controls:MoveTo((uic_target_pos_x + uic_target_width), uic_target_pos_y)
+			end
+			
+			-- Disable escape key and shortcuts.
+			cm:steal_escape_key(true)
+			self:toggle_shortcuts(false)
+		end,
+		0
+	)
+	nt:end_action( -- Called when the tour ends
+		function() 
+			infotext:attach_to_advisor(true) -- Reattach infotext to advisor
+			infotext:restore_detatched_infotext_priority()
+			
+			-- Clean up escape key steal and shortcuts.
+			cm:steal_escape_key(false)
+			self:toggle_shortcuts(true)
+			cm:steal_user_input(false)
+			
+			-- Show advice - this can be hidden to ensure the tour does not repeat until advice is reset
+			if tour.advice_string then
+				cm:show_advice(tour.advice_string, true)
+			end
+			
+			nt:restore_scripted_tour_controls_priority()
+			intervention:complete()
+		end,
+		0
+	)
+	
+	for i = 1, #tour do
+		local stage = tour[i]
+		
+		-- Create navigable tour section.
+		local nts_stage = navigable_tour_section:new(
+			stage.id, -- name of tour section
+			false -- activate controls on start
+		)
+		
+		-- Create action of section
+		nts_stage:action(
+			function()
+				-- Build a table of the valid ui components to highlight
+				local comp_exists = self:check_components_exist(stage.highlight, stage.id, intervention)
+						
+				if not comp_exists then return end
+
+				-- Unlock input
+				cm:steal_user_input(false)
+				
+				local highlight_size_mod = stage.highlight_size_mod or 0
+				
+				core:show_fullscreen_highlight_around_components(15 + highlight_size_mod, false, false, unpack(stage.highlight.components))
+
+				self:pulse_components(stage.pulse, true)
+
+				local pos, width, height = ui_scripted_tour:get_highlighted_size_and_position(stage.highlight.components)
+				local tp = ui_scripted_tour:display_text_pointer(stage.text_box.text, stage.text_box.direction, stage.text_box.size, stage.text_box.length, pos, width, height, stage.text_box.x_offset, stage.text_box.y_offset)
+
+				-- Responsible for cleaning up the action after the player moves forward.
+				nts_stage:add_skip_action(
+					function(is_tour_ending, is_skipping_backwards)
+						core:hide_fullscreen_highlight()
+						tp:hide(true)
+						
+						self:pulse_components(stage.pulse, false)
+						
+						-- Open the relevant panel when skipping forwards
+						if stage.click_on_navigate and not is_skipping_backwards then
+							local result = stage.click_on_navigate()
+							if result then
+								result:SimulateLClick()
+							end
+						-- Open the relevant panel when skipping backwards
+						elseif is_skipping_backwards and tour[i - 2] and tour[i - 2].click_on_navigate then
+							local result = tour[i - 2].click_on_navigate()
+							if result then
+								result:SimulateLClick()
+							end
+						end
+						
+						-- Steal input to block actions during transition.
+						cm:steal_user_input(true)
+					end
+				)
+			end,
+			stage.navigation_delay or 0 -- Interval to start action after section starts.
+		)
+		
+		nt:add_navigable_section(nts_stage)
+	end
+	
+	nt:start()
+end
 
 function ui_scripted_tour:check_components_exist(component_paths, id, intervention)
 	component_paths.components = {}
@@ -4254,123 +5494,11 @@ function ui_scripted_tour:display_text_pointer(ui_text_replacement, direction, b
 	tp_box:add_component_text("text", "ui_text_replacements_localised_text_"..ui_text_replacement);
 	tp_box:set_style("semitransparent_highlight");
 	tp_box:set_panel_width(box_size);
+	tp_box:do_not_release_escape_key(true);
 
-	cm:callback(
-		function()
-			tp_box:show()
-		end,
-		0.5
-	)
+	tp_box:show()
 
 	return tp_box
-end
-
-function ui_scripted_tour:display_stage(tour, stage_number, intervention)
-	local stage = tour[stage_number]
-	local advice_level = common.get_advice_level()
-	local highlight_size_mod = stage.highlight_size_mod or 0
-	out("\tAdvice: "..advice_level)
-
-	-- calling steal escape at the start of every slide seems to stop panels being closed down with escape spam accidently. Calling it once at the start of the tour doesn't seem to work.
-	cm:steal_escape_key(true)
-	self:toggle_shortcuts(false)
-
-	cm:dismiss_advice()
-	comp_exists = self:check_components_exist(stage.highlight, stage.id, intervention)
-	
-	if comp_exists then
-		core:show_fullscreen_highlight_around_components(15 + highlight_size_mod, false, false, unpack(stage.highlight.components))
-
-		self:pulse_components(stage.pulse, true)
-
-		local pos, width, height = ui_scripted_tour:get_highlighted_size_and_position(stage.highlight.components)
-		local tp_box = ui_scripted_tour:display_text_pointer(stage.text_box.text, stage.text_box.direction, stage.text_box.size, stage.text_box.length, pos, width, height, stage.text_box.x_offset, stage.text_box.y_offset)
-
-		if #tour > stage_number then
-			local next_stage = stage_number + 1
-			ui_scripted_tour:advance_tour(tour, next_stage, tp_box, intervention, stage.pulse, stage.click, stage.confirmation)
-		else
-			ui_scripted_tour:complete_tour(tour, intervention, tp_box, stage.pulse, stage.click)
-		end
-	end
-end
-
-function ui_scripted_tour:advance_tour(tour, stage, text_pointer, intervention, pulse_components, click_component, confirmation_component)
-	text_pointer:set_close_button_callback(function()	
-		text_pointer:hide() 
-		core:hide_fullscreen_highlight()
-		self:pulse_components(pulse_components, false)
-
-		if click_component then
-			click_component = click_component()
-			if click_component == "skip_click" then
-				self:display_stage(tour, stage, intervention)
-			else
-				if confirmation_component then
-					click_component:SimulateLClick()
-					self:progress_on_confirmation_component(confirmation_component, tour, stage, intervention)
-				else
-					click_component:SimulateLClick()
-				end
-			end
-		else
-			self:display_stage(tour, stage, intervention)
-		end
-	end)
-end
-
-function ui_scripted_tour:progress_on_confirmation_component(component, tour, stage, intervention, duration_checked)
-	local max_check_duration = 1 -- seconds
-	local check_rate = 0.1 -- seconds
-	local duration_checked = duration_checked or 0
-	cm:steal_escape_key(true)
-	self:toggle_shortcuts(false)
-
-	cm:callback(
-		function()
-			confirmation_component = component()
-
-			if confirmation_component ~= nil and confirmation_component:VisibleFromRoot() == true then
-				core:progress_on_uicomponent_animation(
-					tour.id, 
-					confirmation_component, 
-					function()	
-						self:display_stage(tour, stage, intervention)
-					end
-				)
-			elseif duration_checked < max_check_duration then
-				duration_checked = duration_checked + check_rate
-				self:progress_on_confirmation_component(component, tour, stage, intervention, duration_checked)
-			else
-				script_error("WARNING: attempted to click during scripted tour but confirmation component wasn't found. Ending tour.")
-				core:hide_fullscreen_highlight()
-				cm:dismiss_advice()
-				intervention:complete()
-				cm:steal_escape_key(false)
-				self:toggle_shortcuts(true)
-				return false
-			end
-		end,
-		check_rate
-	)
-end
-
-function ui_scripted_tour:complete_tour(tour, intervention, text_pointer, pulse_components, click_component)
-	text_pointer:set_close_button_callback(function()
-		self:pulse_components(pulse_components, false)
-		text_pointer:hide() 
-		core:hide_fullscreen_highlight()
-
-		if click_component then
-			click_component = click_component()
-			click_component:SimulateLClick()
-		end
-
-		intervention:complete()
-		cm:steal_escape_key(false)
-		self:toggle_shortcuts(true)
-		cm:show_advice(tour.advice_string, true)
-	end)
 end
 
 function ui_scripted_tour:pulse_components(components_table, turn_on)
@@ -4439,4 +5567,14 @@ function ui_scripted_tour:toggle_shortcuts(enable)
 	common.enable_shortcut("toggle_labels", enable)
 	common.enable_shortcut("current_selection_disband", enable)
 	common.enable_shortcut("auto_merge_units", enable)
+end
+
+function ui_scripted_tour:find_valid_child_component(parent_component, ignore_component)
+	if parent_component then
+		for i = 0, parent_component:ChildCount() - 1 do
+			local child = find_child_uicomponent_by_index(parent_component, i)
+			if child and child:Visible() and child:Id() ~= ignore_component then return child end
+		end
+	end
+	return false
 end

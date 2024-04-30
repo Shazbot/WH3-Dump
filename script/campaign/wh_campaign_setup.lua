@@ -1351,6 +1351,10 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 		elseif faction_name == "wh_main_dwf_karak_kadrin" then
 			secondary_detail = "event_feed_strings_text_wh_main_event_feed_string_scripted_event_intro_dwarfs_secondary_detail";
 			pic = 592;
+		elseif faction_name == "wh3_dlc25_dwf_malakai" then
+			title = "event_feed_strings_text_wh3_scripted_event_path_to_victory_title";
+			secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_malakai_secondary_detail";
+			pic = 592;
 		elseif faction_name == "wh_main_chs_chaos" or faction_name == "wh3_dlc20_chs_kholek" or faction_name == "wh3_dlc20_chs_sigvald" or faction_name == "wh3_main_chs_shadow_legion" then
 			secondary_detail = "event_feed_strings_text_wh_main_event_feed_string_scripted_event_intro_warriors_of_chaos_secondary_detail";
 			pic = 595;
@@ -1360,10 +1364,12 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 		------------------------
 			-- Karl Franz
 		elseif faction_name == "wh_main_emp_empire" then
+			title = "event_feed_strings_text_wh3_scripted_event_path_to_victory_title";
 			secondary_detail = "event_feed_strings_text_wh_main_event_feed_string_scripted_event_intro_empire_karl_franz_secondary_detail";
 			pic = 591;
 			-- Balthasar Gelt
 		elseif faction_name == "wh2_dlc13_emp_golden_order" then
+			title = "event_feed_strings_text_wh3_scripted_event_path_to_victory_title";
 			secondary_detail = "event_feed_strings_text_wh_main_event_feed_string_scripted_event_intro_empire_balthasar_gelt_secondary_detail";
 			pic = 591;
 			-- Volkmar the Grim
@@ -1373,6 +1379,14 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 		-- Markus Wulfhart
 		elseif faction_name == "wh2_dlc13_emp_the_huntmarshals_expedition" then
 			secondary_detail = "event_feed_strings_text_wh2_scripted_event_how_they_play_huntsmarshals_expedition_secondary_detail";
+			pic = 591;
+		elseif faction_name == "wh_main_emp_wissenland" then
+			title = "event_feed_strings_text_wh3_scripted_event_path_to_victory_title";
+			if cm:model():campaign_name_key() == "wh3_main_chaos" then
+				secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_wissenland_secondary_detail_roc";
+			else
+				secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_wissenland_secondary_detail_ie";
+			end
 			pic = 591;
 		--
 		-- WH1 DLC
@@ -1690,6 +1704,14 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 		elseif faction_name == "wh3_main_nur_poxmakers_of_nurgle" then
 			secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_nurgle_secondary_detail";
 			pic = 12;
+		elseif faction_name == "wh3_dlc25_nur_tamurkhan" then
+			title = "event_feed_strings_text_wh3_scripted_event_path_to_victory_title";
+			secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_tamurkhan_secondary_detail";
+			pic = 12;
+		elseif faction_name == "wh3_dlc25_nur_epidemius" then
+			title = "event_feed_strings_text_wh3_scripted_event_path_to_victory_title";
+			secondary_detail = "ui_text_replacements_localised_text_how_they_play_epidemius";
+			pic = 12;
 		
 		------------------------
 		-- Slaanesh
@@ -1760,7 +1782,7 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 			secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_chaos_dwarfs_secondary_detail";
 			pic = 597;
 		else
-			script_error("ERROR: show_how_to_play_event() called but couldn't recognise supplied faction name [" .. faction_name .. "]");
+			script_error("ERROR: show_how_to_play_event() called but couldn't recognise supplied faction name [" .. faction_name .. "]. Please add it to script/campaign/wh_campaign_setup.lua");
 			
 			if end_callback then end_callback() end;
 			
@@ -2645,6 +2667,26 @@ function apply_default_diplomacy()
 	-- Beastmen confederation is unlocked via tech tree
 	cm:force_diplomacy("culture:wh_dlc03_bst_beastmen", "culture:wh_dlc03_bst_beastmen", "form confederation", false, false, true);
 	
+	-- Restrict Dwarf confederation between Legendary Lords
+	local dwarf_playable_factions = world:lookup_factions_from_faction_set("dwarf_playable_factions")
+	local human_dwarf_faction = false
+	-- Check if there are any human dwarf factions
+	for _, faction in model_pairs(dwarf_playable_factions) do
+		if faction:is_human() then
+			human_dwarf_faction = true
+		end
+	end
+	-- If there are any human dwarf factions block confederation between the Legendary Lords
+	if human_dwarf_faction then
+		for _, source_faction in model_pairs(dwarf_playable_factions) do
+			for __, target_faction in model_pairs(dwarf_playable_factions) do
+				if source_faction ~= target_faction then
+					cm:force_diplomacy("faction:" .. source_faction:name(), "faction:" .. target_faction:name(), "form confederation", false, false, true)
+				end
+			end
+		end
+	end
+
 	-- The Empire cannot be at peace with Empire Secessionists
 	if cm:get_faction("wh_main_emp_empire_separatists") then
 		cm:force_diplomacy("faction:wh_main_emp_empire", "faction:wh_main_emp_empire_separatists", "peace", false, false, true);

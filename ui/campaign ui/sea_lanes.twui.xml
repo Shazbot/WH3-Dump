@@ -1463,8 +1463,8 @@
 				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextTooltipSetter"
-					context_object_id="CcoCampaignCharacterTeleportationSystem"
-					context_function_id="this | CanCharacterTeleport == false =&gt; Loc(&quot;cannot_teleport_sea_lanes&quot;) | IsContextValid(StoredContext(&quot;CcoTeleportationNetworkNodeRecord&quot;)) == false =&gt; Loc(&quot;cannot_teleport_sea_lane_no_sea_lanes_available&quot;) | TeleportationCost(StoredContext(&quot;CcoTeleportationNetworkNodeRecord&quot;).TeleportationTemplateContext) &gt; 0 &amp;&amp; CharacterContext.FactionContext.PooledResourceManagerContext.CanAfford(TeleportationCost(StoredContext(&quot;CcoTeleportationNetworkNodeRecord&quot;).TeleportationTemplateContext)) == false  =&gt; Loc(&quot;rituals_ritual_status_insufficient_gold&quot;) |  InteractingNodeContext.TeleportationTemplateContext.Key.Contains(&quot;_neutral&quot;) =&gt; Loc(&quot;sea_lanes_not_claimed&quot;) | Loc(&quot;sea_lanes_traverse_tooltip&quot;)">
+					context_object_id="CcoCampaignCharacterTeleportationSystem system, CcoTeleportationNetworkNodeRecord node"
+					context_function_id="this | system.CanCharacterTeleport == false =&gt; Loc(&quot;cannot_teleport_sea_lanes&quot;) | IsContextValid(StoredContext(&quot;CcoTeleportationNetworkNodeRecord&quot;)) == false =&gt; Loc(&quot;cannot_teleport_sea_lane_no_sea_lanes_available&quot;) | system.TeleportationCost(StoredContext(&quot;CcoTeleportationNetworkNodeRecord&quot;).TeleportationTemplateContext) &gt; 0 &amp;&amp; system.CharacterContext.FactionContext.PooledResourceManagerContext.CanAfford(TeleportationCost(StoredContext(&quot;CcoTeleportationNetworkNodeRecord&quot;).TeleportationTemplateContext)) == false  =&gt; Loc(&quot;rituals_ritual_status_insufficient_gold&quot;) |  system.InteractingNodeContext.TeleportationTemplateContext.Key.Contains(&quot;_neutral&quot;) =&gt; Loc(&quot;sea_lanes_not_claimed&quot;) | Format(Loc(&quot;sea_lanes_traverse_tooltip&quot;), node.TravelTime)">
 					<child_m_user_properties>
 						<property
 							name="object_store_events"

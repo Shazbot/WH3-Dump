@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -384,7 +384,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignMilitaryForce"
-					context_function_id="IsWarCoordinationOpen || IsSelected || FactionContext == DiplomacySelectedFactionContext || CampaignRoot.CursorContext.CharacterContext.MilitaryForceContext == this || IsCampaignOverlayShowing">
+					context_function_id="IsWarCoordinationOpen || IsSelected || FactionContext == DiplomacySelectedFactionContext || CampaignRoot.CursorContext.CharacterContext.MilitaryForceContext == this || (IsCampaignOverlayShowing &amp;&amp; (IsPanelOpen == false || IsPanelOpen(&quot;events&quot;) || IsPanelOpen(&quot;diplomacy_dropdown&quot;)))">
 					<child_m_user_properties>
 						<property
 							name="update_constant"

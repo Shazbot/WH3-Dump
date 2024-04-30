@@ -1,13 +1,13 @@
 local wulfhart_faction = "wh2_dlc13_emp_the_huntmarshals_expedition"
 
-local buildings_to_lock = {"wh_main_emp_barracks_3", "wh_main_emp_stables_2", "wh_main_emp_stables_3", "wh_main_emp_forges_2", "wh_main_emp_forges_3"}
+local buildings_to_lock = {"wh_main_emp_barracks_3", "wh_main_emp_stables_2", "wh_main_emp_stables_3", "wh_main_emp_forges_2", "wh_main_emp_forges_3", "wh3_dlc25_emp_shooting_range_3", "wh_main_emp_forges_4"}
 
 local buildings_to_unlock = {
 	{},
 	{"wh_main_emp_barracks_3", "wh_main_emp_stables_2"},
-	{},
-	{"wh_main_emp_stables_3", "wh_main_emp_forges_2"},
-	{"wh_main_emp_forges_3"},
+	{"wh_main_emp_forges_2", "wh_main_emp_stables_3"},
+	{"wh3_dlc25_emp_shooting_range_3", "wh_main_emp_forges_3"},
+	{"wh_main_emp_forges_4"},
 	{}
 }
 
@@ -708,8 +708,6 @@ function update_acclaim_bar(factor)
 			for j = 1, #buildings_to_unlock[i + 1] do
 				cm:remove_event_restricted_building_record_for_faction(buildings_to_unlock[i + 1][j], wulfhart_faction)
 			end
-			
-			lock_wulfhart_buildings(i + 2)
 		elseif previous_acclaim_value >= acclaim_thresholds[i] and current_acclaim_value < acclaim_thresholds[i] then
 			lock_wulfhart_buildings(i + 1)
 		elseif current_acclaim_value < acclaim_thresholds[1] then

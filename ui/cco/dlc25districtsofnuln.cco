@@ -1,0 +1,61 @@
+CcoProphecyOfSotekStageRecord
+{
+  ExRequiredMissionsList
+  {
+    DatabaseRecords("CcoProphecyOfSotekStagesToMissionRecord")
+      .Filter((s) => s.StageContext == this)
+  }
+  
+  ExRequiredCampaignMissionsList
+  {
+    ExRequiredMissionsList
+      .Transform((mr) => PlayersFaction.MissionList.FirstContext((cm) => cm.MissionRecordContext == mr.MissionContext))
+  }
+}
+
+Gunnery
+{
+  StagesList
+  {
+    DatabaseRecords("CcoProphecyOfSotekStageRecord")
+      .Filter((s) => s.TooltipType == "gunnery_school")
+      .Sort((s) => s.Order, true)
+  }
+
+  CurrentStageIndex
+  {
+    Gunnery.StagesList.Count((s, missions = s.ExRequiredCampaignMissionsList) => missions.IsEmpty == false && missions.All((m) => m.Completed))
+  }
+  
+  IsStageComplete(CcoProphecyOfSotekStageRecord stage)
+  {
+    Gunnery.CurrentStageIndex > Gunnery.StagesList.IndexForFirstContext((c) => c == stage)
+  }
+  
+  IsStageActive(CcoProphecyOfSotekStageRecord stage)
+  {
+    (stage_idx     = Gunnery.StagesList.IndexForFirstContext((c) => c == stage),
+     completed_idx = Gunnery.CurrentStageIndex) => {
+     
+      (completed_idx == 0 && stage_idx == 0) || (completed_idx != 0 && completed_idx == stage_idx)
+     
+    }
+  }
+  
+  ChargeResourceForRitual(CcoCampaignRitual ritual)
+  {
+	PlayersFaction.PooledResourceContext(
+	   ritual.RitualContext
+      .CompletionPayloadContext
+      .ResourceTransactionsList
+      .FirstContext
+      .PooledResourceCostsList
+      .FirstContext
+      .ResourceKey)
+  }
+  
+  HasMaxChargesForRitual(CcoCampaignRitual ritual)
+  {
+	Gunnery.ChargeResourceForRitual(ritual).Total >= Gunnery.ChargeResourceForRitual(ritual).Max
+  }
+}

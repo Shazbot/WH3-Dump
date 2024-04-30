@@ -259,7 +259,7 @@ function add_vampire_coast_listeners()
 					false
 				)
 				
-				cm:force_declare_war(players_faction, faction, true, true)														--force player to declare war on faction
+				cm:force_declare_war(players_faction, faction, false, false)													--force player to declare war on faction
 				cm:force_diplomacy("all", "faction:" .. faction, "all", false, false, true) 									--set all factions to not do diplomacy with inv faction
 				cm:force_diplomacy("faction:" .. faction, "all", "all", false, false, true) 									--set inv faction to not do diplomacy with all factions
 			end,

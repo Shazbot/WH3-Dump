@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -18,9 +18,7 @@
 					<plague_composition this="AAF29F72-D39D-4456-B59D17A9BDD15599">
 						<plague_list this="46790610-9ECA-4662-917F876C91FFFB72">
 							<base_plague_icon this="3E66452F-A763-4485-8A51B31DBBBBB134"/>
-							<ingredient_list this="8CD831B7-89C0-4D1A-B1758DACE9FCD9B7">
-								<template_ingredient_icon this="A6AF3FDD-7192-4AF5-A7DDD65602EA0124"/>
-							</ingredient_list>
+							<combined_ingredient_icon this="A6AF3FDD-7192-4AF5-A7DDD65602EA0124"/>
 						</plague_list>
 					</plague_composition>
 					<description_background this="94CD2FB3-5A20-46A6-9911F508057A2296">
@@ -1403,7 +1401,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignPlagueComposition"
-					context_function_id="IsContextValid(SpecialCompositionForFactionContext(PlayersFaction)) == false"/>
+					context_function_id="IsContextValid(BasePlagueContext) &amp;&amp; BasePlagueContext.Key.Contains(&quot;hidden&quot;) == false &amp;&amp; IsContextValid(SpecialCompositionForFactionContext(PlayersFaction)) == false"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -1446,15 +1444,28 @@
 			docking="Center"
 			component_anchor_point="0.50,0.50"
 			priority="46"
-			componentleveltooltip="{{tt:ui/campaign ui/tooltip_plague_composition}}"
-			tooltiplabel="plague_list_Tooltip_c5df686a"
+			componentleveltooltip="{{tt:ui/campaign ui/tooltip_dlc25_active_plague}}"
+			tooltiplabel="ComponentTooltip_bcefcf9f"
 			uniqueguid="46790610-9ECA-4662-917F876C91FFFB72"
 			currentstate="1D02BF00-7635-431D-A69FCDF06F8E875C"
 			defaultstate="1D02BF00-7635-431D-A69FCDF06F8E875C">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
-					context_object_id="CcoCampaignPlagueComposition"/>
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoCampaignPlagueComposition">
+					<child_m_user_properties>
+						<property
+							name="alternate_parent"
+							value="^1"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="FactionContext"/>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignFaction"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -1470,9 +1481,10 @@
 				sizetocontent="true"
 				vertical_alignment="Center"/>
 		</plague_list>
-		<template_ingredient_icon
+		<combined_ingredient_icon
 			this="A6AF3FDD-7192-4AF5-A7DDD65602EA0124"
-			id="template_ingredient_icon"
+			id="combined_ingredient_icon"
+			offset="40.00,0.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			clipchildren="true"
@@ -1484,8 +1496,8 @@
 				<callback_with_context callback_id="Button"/>
 				<callback_with_context
 					callback_id="ContextImageSetter"
-					context_object_id="CcoCampaignPlagueIngredient"
-					context_function_id="ImagePath"/>
+					context_object_id="CcoCampaignPlagueComposition"
+					context_function_id="ExImageForUI"/>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignPlagueComposition"
@@ -1533,44 +1545,7 @@
 					</imagemetrics>
 				</active>
 			</states>
-		</template_ingredient_icon>
-		<ingredient_list
-			this="8CD831B7-89C0-4D1A-B1758DACE9FCD9B7"
-			id="ingredient_list"
-			offset="40.00,0.00"
-			priority="46"
-			tooltipslocalised="true"
-			uniqueguid="8CD831B7-89C0-4D1A-B1758DACE9FCD9B7"
-			currentstate="57519947-B273-4E23-955232859DEFCEF5"
-			defaultstate="57519947-B273-4E23-955232859DEFCEF5">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextList"
-					context_object_id="CcoCampaignPlagueComposition"
-					context_function_id="PlagueIngredientList">
-					<child_m_user_properties>
-						<property
-							name="stored_object_to_pass0"
-							value="CcoCampaignPlagueComposition"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextObjectStore"
-					context_object_id="CcoCampaignPlagueComposition"/>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="57519947-B273-4E23-955232859DEFCEF5"
-					name="NewState"
-					width="40"
-					height="40"
-					uniqueguid="57519947-B273-4E23-955232859DEFCEF5"/>
-			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				sizetocontent="true"
-				vertical_alignment="Center"/>
-		</ingredient_list>
+		</combined_ingredient_icon>
 		<bottom
 			this="C53C15D3-01DF-4A32-9D942829C9CDE9DE"
 			id="bottom"

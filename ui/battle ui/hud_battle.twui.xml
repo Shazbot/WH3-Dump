@@ -572,6 +572,15 @@
 										<label_additional_effect this="E984C328-F85F-4245-B2907B6958D0A95E"/>
 									</template_additional_effect>
 								</additional_ui_effects_list>
+								<ammunition_replenishment_effect this="D676C324-9828-4305-8382FF5CFEED3FF2">
+									<effect_icon_parent this="4776F9C8-A73C-4C09-9BFDD46A247E394E">
+										<effect_icon this="2DB62CDA-EAF2-45C4-95419F0D2338E356"/>
+									</effect_icon_parent>
+									<label_effect this="C784A851-D677-40E5-96E5AF752E361DEC"/>
+								</ammunition_replenishment_effect>
+								<remove_magical_effect this="B7A679C0-5CB6-45FF-80C1C8D7A663A00D">
+									<label_effect this="572F23F3-1DC5-46A2-A7CD20FF4AC8EE56"/>
+								</remove_magical_effect>
 							</phase_info>
 						</parent_ascendancy_phase>
 						<lore_icon this="CD563FF5-5786-439A-8145AC4932574EE1"/>
@@ -6518,7 +6527,7 @@
 			part_of_template="true"
 			uniqueguid_in_template="439A25D8-93EF-4237-A6AC5071A3B38702"
 			uniqueguid="69ED9BC7-7F51-4E38-85F6581E45530380"
-			dimensions="360.00,362.00">
+			dimensions="379.00,410.00">
 			<state_uniqueguids>
 				<state_uniqueguid
 					name="NewState"
@@ -7772,6 +7781,190 @@
 					text_label="StateText_c6db0bad"/>
 			</localised_texts>
 		</value_barrier_duration_infinite>
+		<ammunition_replenishment_effect
+			this="D676C324-9828-4305-8382FF5CFEED3FF2"
+			id="ammunition_replenishment_effect"
+			part_of_template="true"
+			uniqueguid_in_template="D6F22B45-BFEC-479E-B406114AFCC4ED7F"
+			uniqueguid="D676C324-9828-4305-8382FF5CFEED3FF2"
+			dimensions="360.00,24.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="false"
+					uniqueguid="DEDE8F60-7DFD-4D78-ACB0C03368B3FB15"/>
+				<state_uniqueguid
+					name="true"
+					uniqueguid="3A492CBC-A47A-481A-823B113CA092C8E9"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="HasAmmunitionReplenishment"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="false"
+					is_text_localised="false"/>
+				<localised_text
+					state="true"
+					is_text_localised="false"/>
+			</localised_texts>
+		</ammunition_replenishment_effect>
+		<effect_icon
+			this="2DB62CDA-EAF2-45C4-95419F0D2338E356"
+			id="effect_icon"
+			part_of_template="true"
+			uniqueguid_in_template="C124DAD0-46E8-4049-B9C1E854BF0F3621"
+			uniqueguid="2DB62CDA-EAF2-45C4-95419F0D2338E356"
+			dimensions="24.00,24.00"
+			dock_point="Center Right">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="0FB1118E-E4F6-4A12-8802B93DE3CA335E"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/campaign ui/effect_bundles/ammo_character.png"
+					uniqueguid="34CA10E6-E2F3-45D7-9FBD957BA8D0066E"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/campaign ui/effect_bundles/ammo_character.png"/>
+			</override_images>
+		</effect_icon>
+		<effect_icon_parent
+			this="4776F9C8-A73C-4C09-9BFDD46A247E394E"
+			id="effect_icon_parent"
+			part_of_template="true"
+			uniqueguid_in_template="DA0A9D24-CB62-4A61-9CE4186BFE065635"
+			uniqueguid="4776F9C8-A73C-4C09-9BFDD46A247E394E"
+			dimensions="45.00,24.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="D08F3A29-56C8-4247-BCFF63FA70339A30"/>
+			</state_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</effect_icon_parent>
+		<label_effect
+			this="C784A851-D677-40E5-96E5AF752E361DEC"
+			id="label_effect"
+			part_of_template="true"
+			uniqueguid_in_template="9CA2A994-92F5-4735-A64C41EC55D1719C"
+			uniqueguid="C784A851-D677-40E5-96E5AF752E361DEC"
+			dimensions="315.00,24.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="false"
+					uniqueguid="2EB52854-38D9-46F8-9B87F1DE31C629E3"/>
+				<state_uniqueguid
+					name="true"
+					uniqueguid="8C70A8D5-CA75-4C34-AD5226FB3F41559B"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="Loc(GetIfElse(AmmunitionReplenishment &gt; 0, &quot;phase_replenish_ammunition&quot;, &quot;phase_destroy_ammunition&quot;))"/>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="AmmunitionReplenishment &gt; 0"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="false"
+					text="dy_effect"
+					text_label="StateText_b505c32c"
+					is_text_localised="false"/>
+				<localised_text
+					state="true"
+					text="dy_effect"
+					text_label="StateText_d17fe5f4"
+					is_text_localised="false"/>
+			</localised_texts>
+		</label_effect>
+		<label_effect
+			this="572F23F3-1DC5-46A2-A7CD20FF4AC8EE56"
+			id="label_effect"
+			part_of_template="true"
+			uniqueguid_in_template="13158C80-90FB-44A1-B105C5D5B3411AA6"
+			uniqueguid="572F23F3-1DC5-46A2-A7CD20FF4AC8EE56"
+			dimensions="285.00,24.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="false"
+					uniqueguid="849C2F7A-C391-4AAF-989560A733F2DEF3"/>
+				<state_uniqueguid
+					name="true"
+					uniqueguid="990A4784-D8D5-46F8-A9F33DDD158DCF3E"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="DatabaseRecordContext(&quot;CcoUnitAbilitiesAdditionalUiEffectRecord&quot;, &quot;wh3_dlc23_negate_magical_weapons&quot;).LocalisedText"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="false"
+					text="dy_effect"
+					text_label="StateText_4ba80b59"
+					is_text_localised="false"/>
+				<localised_text
+					state="true"
+					text="dy_effect"
+					text_label="StateText_96de534c"
+					is_text_localised="false"/>
+			</localised_texts>
+		</label_effect>
+		<remove_magical_effect
+			this="B7A679C0-5CB6-45FF-80C1C8D7A663A00D"
+			id="remove_magical_effect"
+			part_of_template="true"
+			uniqueguid_in_template="7757101A-46B8-4F84-92A4D386E7BDCC1D"
+			uniqueguid="B7A679C0-5CB6-45FF-80C1C8D7A663A00D"
+			dimensions="360.00,24.00"
+			offset="19.00,0.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="false"
+					uniqueguid="45017DCE-95E6-4818-84664D373A0C8944"/>
+				<state_uniqueguid
+					name="true"
+					uniqueguid="335B80A6-8E1A-4BCC-85BFC821E2FA6F1D"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="RemoveMagical"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="false"
+					is_text_localised="false"/>
+				<localised_text
+					state="true"
+					is_text_localised="false"/>
+			</localised_texts>
+		</remove_magical_effect>
 		<icon_capture_point
 			this="5DBF8583-A6AC-4DFF-8B229E19100201BC"
 			id="icon_capture_point"
@@ -38795,7 +38988,7 @@
 		<parent_ascendancy_phase
 			this="D77E65A8-276C-46AF-8E5D6647C4C10602"
 			id="parent_ascendancy_phase"
-			offset="-50.00,65.00"
+			offset="-59.00,65.00"
 			docking="Bottom Center External"
 			dock_offset="0.00,-93.00"
 			component_anchor_point="0.50,-0.00"
@@ -38838,16 +39031,16 @@
 				<newstate
 					this="B8AC16C3-0785-4A18-A047681D7DF18176"
 					name="NewState"
-					width="360"
-					height="402"
+					width="379"
+					height="450"
 					uniqueguid="B8AC16C3-0785-4A18-A047681D7DF18176">
 					<imagemetrics>
 						<image
 							this="6CDCF494-D458-40A6-AFA5B07A4BCD0948"
 							uniqueguid="6CDCF494-D458-40A6-AFA5B07A4BCD0948"
 							componentimage="586CAE64-F148-4CD6-997610ECEB9071EB"
-							width="360"
-							height="402"
+							width="379"
+							height="450"
 							tile="true"
 							margin="16.00,20.00,16.00,20.00"/>
 					</imagemetrics>

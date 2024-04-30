@@ -1,0 +1,167 @@
+CcoCampaignFaction
+{
+    ExBoGCompleteUnitPackRitualList
+    {
+        AvailableRitualList("DWARF_RITUAL_UNIT_PACKS")
+    }
+
+    ExBogTotalUnitPackRitualsCanPerform
+    {
+        ExBoGCompleteUnitPackRitualList.Filter(CanAfford && IsOnCooldown == false && (IsRepeatableRitual || (IsRepeatableRitual == false && IsComplete == false))).Size
+    }
+
+    ExBoGUnitPackRitualListMaxSize
+    {
+        ExBoGCompleteUnitPackRitualList.Size
+    }
+
+    ExBoGUnitPackRitualList
+    {
+        ExBoGCompleteUnitPackRitualList
+    }
+
+    ExBogCompleteConfederationRitualList
+    {
+        AvailableRitualList("DWARF_RITUAL_LORDS").Filter(RitualContext.CompletionPayloadContext.ConfederatedFactionsList.FirstContext.FactionRecordContext.IsFactionUnlocked && RitualContext.CompletionPayloadContext.ConfederatedFactionsList.FirstContext.FactionRecordContext != PlayersFaction)
+    }
+
+    ExBogTotalConferderationRitualsCanPerform
+    {
+        ExBogCompleteConfederationRitualList.Filter(CanAfford && IsOnCooldown == false && (IsRepeatableRitual == false || IsRepeatableRitual && IsComplete == false) && ExCanFactionBeConfederated).Size
+    }
+
+    ExBogConfederationRitualListMaxSize
+    {
+        ExBogCompleteConfederationRitualList.Size
+    }
+
+    ExBogConfederationRitualList
+    {
+        ExBogCompleteConfederationRitualList
+    }
+
+    ExBogTotalNumberOfRitualsCanPerform
+    {
+        ExBogTotalConferderationRitualsCanPerform + ExBogTotalLegendaryGrudgesNotComplete
+    }
+	
+	ExBogFullLegendaryGrudgesList
+	{
+		MissionList.Filter(MissionRecordContext.EventCategoryContext.CategoryKey == "Grudges")
+	}
+	
+	ExBogLegendaryGrudgesList
+	{
+		ExBogFullLegendaryGrudgesList.Skip(Grudges.CalculateNextRituals).Take(Grudges.RitualPageCapForSelectedTab)
+	}
+	
+	ExBogTotalLegendaryGrudgesNotComplete
+	{
+		ExBogFullLegendaryGrudgesList.Filter(Completed == false).Size
+	}
+}
+
+CcoCampaignRitual
+{
+	ExCanFactionBeConfederated
+	{
+		(fac = RitualContext.CompletionPayloadContext.ConfederatedFactionsList.FirstContext) => {fac.WasConfederated == false && fac.IsHuman == false && fac.IsIdleHuman == false}
+	}
+	
+	ExTeleportExtraReason
+	{
+		this
+		| CanPerformRitual(SelectedCharacter) => ""
+		| IsContextValid(SelectedCharacter) == false || SelectedCharacter.IsPlayerCharacter == false => Loc("dlc25_underway_teleport_needs_army")
+		| IsTargetValid(SelectedCharacter) == false => Loc("dlc25_underway_teleport_invalid_army_position")
+	}
+}
+
+CcoCampaignSettlement
+{
+	ExUnderwayTeleportRitual
+	{
+		PlayersFaction.RitualManagerContext.UnlockableRitualList.FirstContext(RitualContext.CategoryContext.Id == "UNDERWAY_TELEPORTATION" && RitualContext.CompletionPayloadContext.ArmyTeleportList.Any(RegionContext == this.RegionRecordContext))
+	}
+}
+
+CcoCampaignMission
+{
+	ExIsLegendaryGrudge
+	{
+		MissionRecordContext.EventCategoryContext.CategoryKey == "Grudges"
+	}
+}
+
+Grudges
+{
+    FactionLeaderMainUnit(CcoCampaignFaction faction)
+    {
+        faction.FactionRecordContext.Key |
+			"wh_main_dwf_karak_izor" 	        => DatabaseRecordContext("CcoMainUnitRecord", "wh_dlc06_dwf_cha_belegar_ironhammer_0") |
+			"wh3_main_dwf_the_ancestral_throng" => DatabaseRecordContext("CcoMainUnitRecord", "wh_pro01_dwf_cha_grombrindal_0") |
+			"wh3_dlc25_dwf_malakai" 		    => DatabaseRecordContext("CcoMainUnitRecord", "wh3_dlc25_dwf_cha_malakai_makaisson") |
+			"wh2_dlc17_dwf_thorek_ironbrow" 	=> DatabaseRecordContext("CcoMainUnitRecord", "wh2_dlc17_dwf_cha_thorek_ironbrow_0") |
+			"wh_main_dwf_dwarfs" 	            => DatabaseRecordContext("CcoMainUnitRecord", "wh_main_dwf_cha_high_king_thorgrim_grudgebearer_1") |
+			"wh_main_dwf_karak_kadrin"          => DatabaseRecordContext("CcoMainUnitRecord", "wh_main_dwf_cha_ungrim_ironfist")
+
+    }
+
+
+    CalcAndSetMaxNumPages(Int size)
+    {
+       Grudges.SetMaxNumPages(Ceiling(size * 1.0/ Grudges.RitualPageCapForSelectedTab)); 
+	   UiMsg("refresh_max_pages")
+    }
+
+    CalculateNextRituals
+    {
+        Floor((Grudges.CurrentPage - 1) * Grudges.RitualPageCapForSelectedTab)
+    }
+
+    RitualPageCapForSelectedTab
+    {
+		Floor(ToNumber(Component("1A0DADBA-FE01-4993-8036341BE66A0ED7").SelectedComponents.FirstContext.GetProperty("ritual_cap")))  
+    }
+
+	PageCycleComponent
+	{
+		Component("68DDF979-8890-4BB2-AA10BD8701101DB0")
+	}
+
+    CurrentPage
+    {
+		Floor(ToNumber(PageCycleComponent.GetProperty("current_page")))
+    }
+
+    SetCurrentPage(Int num)
+    {
+		PageCycleComponent.SetProperty("current_page", num)
+    }
+
+    SetMaxNumPages(Int num)
+    {
+		PageCycleComponent.SetProperty("max_pages", num)
+    }
+
+    MaxPages
+    {
+		Floor(ToNumber(PageCycleComponent.GetProperty("max_pages")))
+    }
+
+    PageBack
+    {
+        (next_page = Grudges.CurrentPage - 1) =>
+        {
+            Do(Grudges.SetCurrentPage(GetIfElse( next_page < 1, 1, next_page)), UiMsg("refresh_grudge_pages"))
+        }
+    }
+
+    PageForward
+    {
+        (next_page = Grudges.CurrentPage + 1) =>
+        {
+            Do(Grudges.SetCurrentPage(GetIfElse( next_page > Grudges.MaxPages, Grudges.MaxPages, next_page)), UiMsg("refresh_grudge_pages"))
+        }
+    }
+}

@@ -12,23 +12,9 @@
 						<description this="613DD18D-28B8-460F-9A0FD1A3434D94B9"/>
 						<seperator this="655E4CDE-20F4-4B31-B063A52B1223637E"/>
 						<locked_reason this="553E6A73-1EEC-4D6C-B5CEF8B1355E3366"/>
+						<txt_invalid_reason this="17BE06B5-82B2-43BF-9B48586FF030D57C"/>
+						<txt_blessed this="6F29DA16-CE7A-4BBA-A5746A1AC0DE8ACC"/>
 					</list_parent>
-					<recipe_holder this="23AF86F4-3572-4CDF-A9EF0C4C0F43E1E3">
-						<not_unlocked this="309709B3-ED53-41B6-89AFBC9D5121D0C9"/>
-						<left_click this="F1B5FD9B-5650-47BA-BE0516A29E00ADE0"/>
-						<title this="A68E464E-7142-47EE-97A46592351899F0"/>
-						<base_plague this="391D6366-9749-43E7-99DEE6F3AF096E40">
-							<icon this="8E7DB162-33A7-4562-9E71AD0121FC59A4"/>
-						</base_plague>
-						<ingredient_list this="9723EA62-7C6E-405A-AC459107EFE6E331">
-							<template_ingredient this="5516CBCA-995C-48EE-971F7B59AB318BEC">
-								<icon this="37C52566-E86E-4FEC-965387F7D0086E36"/>
-								<padlock this="A18A3F7A-38A8-4F77-AED6A75FB77F4342"/>
-							</template_ingredient>
-						</ingredient_list>
-						<seperator this="14D49B5F-E3BC-4999-8044B8CD8351DB6A"/>
-						<additional_effects this="1D94DD86-4686-439D-B95A8CFFFA68E868"/>
-					</recipe_holder>
 					<effect_bundle_list this="984A6BB2-D0EF-47A6-93FA6C8DF3F57563">
 						<template_effect_bundle this="158ECB66-177C-4C12-9E4138EBBACD0A9E">
 							<title this="34E82F98-F6A6-4640-BBF9F990BF5233B4"/>
@@ -84,7 +70,7 @@
 		<ability_tooltip_creator
 			this="69F5829A-8E9C-444E-BF846BC86DD35DE5"
 			id="ability_tooltip_creator"
-			offset="0.00,455.00"
+			offset="0.00,142.00"
 			priority="255"
 			tooltipslocalised="true"
 			uniqueguid="69F5829A-8E9C-444E-BF846BC86DD35DE5"
@@ -137,10 +123,12 @@
 			id="description"
 			offset="0.00,39.00"
 			allowhorizontalresize="false"
+			visible="false"
 			tooltipslocalised="true"
 			uniqueguid="613DD18D-28B8-460F-9A0FD1A3434D94B9"
 			currentstate="AAEA586D-32B9-4A40-AA618FC21296C9BF"
-			defaultstate="AAEA586D-32B9-4A40-AA618FC21296C9BF">
+			defaultstate="AAEA586D-32B9-4A40-AA618FC21296C9BF"
+			marked_for_deletion="true">
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextTextLabel"
@@ -183,7 +171,7 @@
 					this="F2A61E1F-6A05-49D7-B24CD896D32CAB54"
 					name="NewState"
 					width="340"
-					height="104"
+					height="80"
 					uniqueguid="F2A61E1F-6A05-49D7-B24CD896D32CAB54"/>
 			</states>
 			<animations>
@@ -253,7 +241,7 @@
 					this="B820407A-553B-4991-9E96D9450D6703B8"
 					name="default"
 					width="340"
-					height="455"
+					height="142"
 					uniqueguid="B820407A-553B-4991-9E96D9450D6703B8">
 					<imagemetrics>
 						<image
@@ -261,7 +249,7 @@
 							uniqueguid="A64132F0-52DB-4AD9-99AC5E9DA2B7A346"
 							componentimage="555FF651-845D-41F6-84271E9127BC8C4F"
 							width="340"
-							height="455"
+							height="142"
 							tile="true"
 							margin="16.00,20.00,16.00,20.00"/>
 					</imagemetrics>
@@ -270,7 +258,7 @@
 					this="A73C8A97-4BFC-4BFD-AD964E63E00FCD6C"
 					name="empty"
 					width="340"
-					height="455"
+					height="142"
 					uniqueguid="A73C8A97-4BFC-4BFD-AD964E63E00FCD6C"/>
 			</states>
 			<LayoutEngine
@@ -285,7 +273,7 @@
 		<effect_bundle_list
 			this="984A6BB2-D0EF-47A6-93FA6C8DF3F57563"
 			id="effect_bundle_list"
-			offset="0.00,361.00"
+			offset="0.00,80.00"
 			allowhorizontalresize="false"
 			tooltipslocalised="true"
 			uniqueguid="984A6BB2-D0EF-47A6-93FA6C8DF3F57563"
@@ -295,7 +283,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoRTPlagueSelection"
-					context_function_id="PlagueEffectContext.EffectsAndTypeList">
+					context_function_id="PlagueEffectContext.EffectsAndTypeList(StoredContextFromParentRequired(&quot;CcoCampaignPlagueIngredient&quot;))">
 					<child_m_user_properties>
 						<property
 							name="refresh_when_same"
@@ -324,11 +312,13 @@
 			id="title"
 			offset="0.00,4.00"
 			allowverticalresize="false"
+			visible="false"
 			priority="255"
 			tooltipslocalised="true"
 			uniqueguid="FE882090-E45C-4A47-A58BB6559FCFE15A"
 			currentstate="ACF89AB9-0F5D-4215-8DD85DF7EAF7F488"
-			defaultstate="ACF89AB9-0F5D-4215-8DD85DF7EAF7F488">
+			defaultstate="ACF89AB9-0F5D-4215-8DD85DF7EAF7F488"
+			marked_for_deletion="true">
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextTextLabel"
@@ -360,7 +350,7 @@
 		<attribute_additional_info
 			this="15968325-D8FA-4349-8547603AB8EA69DD"
 			id="attribute_additional_info"
-			offset="0.00,456.00"
+			offset="0.00,143.00"
 			tooltipslocalised="true"
 			uniqueguid="15968325-D8FA-4349-8547603AB8EA69DD"
 			currentstate="ED8BF2F2-982F-4674-9A77C3500940E8C5"
@@ -629,13 +619,7 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoPlagueEffectList"
-					context_function_id="Name">
-					<child_m_user_properties>
-						<property
-							name="object_store_events"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
+					context_function_id="Name"/>
 			</callbackwithcontextlist>
 			<states>
 				<default
@@ -658,474 +642,10 @@
 				</default>
 			</states>
 		</title>
-		<ingredient_list
-			this="9723EA62-7C6E-405A-AC459107EFE6E331"
-			id="ingredient_list"
-			offset="0.00,167.00"
-			allowhorizontalresize="false"
-			tooltipslocalised="true"
-			uniqueguid="9723EA62-7C6E-405A-AC459107EFE6E331"
-			currentstate="27DA2DAA-F78C-4B0D-A83A554BF976823E"
-			defaultstate="27DA2DAA-F78C-4B0D-A83A554BF976823E">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextList"
-					context_object_id="CcoCampaignPlagueComposition"
-					context_function_id="PlagueIngredientList"/>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="27DA2DAA-F78C-4B0D-A83A554BF976823E"
-					name="NewState"
-					width="340"
-					height="26"
-					uniqueguid="27DA2DAA-F78C-4B0D-A83A554BF976823E"/>
-			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true">
-				<columnwidths>
-					<column width="280"/>
-				</columnwidths>
-			</LayoutEngine>
-		</ingredient_list>
-		<icon
-			this="37C52566-E86E-4FEC-965387F7D0086E36"
-			id="icon"
-			offset="14.00,0.00"
-			docking="Top Left"
-			dock_offset="14.00,0.00"
-			tooltipslocalised="true"
-			uniqueguid="37C52566-E86E-4FEC-965387F7D0086E36"
-			currentstate="E6F294FC-515C-4C6A-A5D7B7333EF4D052"
-			defaultstate="E6F294FC-515C-4C6A-A5D7B7333EF4D052">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextImageSetter"
-					context_object_id="CcoCampaignPlagueComposition"
-					context_function_id="PlagueIngredientList.At(self.ParentContext.ChildIndex - 1).ImagePath"/>
-			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="C36B879B-AD13-4AFD-B8087A7F2221E4E9"
-					uniqueguid="C36B879B-AD13-4AFD-B8087A7F2221E4E9"
-					imagepath="ui/skins/default/construction_positive.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="E6F294FC-515C-4C6A-A5D7B7333EF4D052"
-					name="NewState"
-					width="37"
-					height="10"
-					uniqueguid="E6F294FC-515C-4C6A-A5D7B7333EF4D052">
-					<imagemetrics>
-						<image
-							this="A6C271A8-C543-4948-8D3EDF155C61D042"
-							uniqueguid="A6C271A8-C543-4948-8D3EDF155C61D042"
-							componentimage="C36B879B-AD13-4AFD-B8087A7F2221E4E9"
-							width="24"
-							height="24"
-							dockpoint="Top Left"
-							canresizeheight="false"
-							canresizewidth="false"/>
-					</imagemetrics>
-					<component_text
-						textxoffset="44.00,6.00"
-						textyoffset="4.00,6.00"
-						texthbehaviour="Resize"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
-			</states>
-		</icon>
-		<recipe_holder
-			this="23AF86F4-3572-4CDF-A9EF0C4C0F43E1E3"
-			id="recipe_holder"
-			offset="0.00,104.00"
-			allowhorizontalresize="false"
-			tooltipslocalised="true"
-			uniqueguid="23AF86F4-3572-4CDF-A9EF0C4C0F43E1E3"
-			currentstate="C87F6BC5-B63E-4D39-B8165E96E25C9F07"
-			defaultstate="C87F6BC5-B63E-4D39-B8165E96E25C9F07">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="any"
-					context_function_id="self.ParentContext(&quot;tooltip_plagues&quot;).TooltipParent.StoredContext(&quot;CcoPlagueSpecialCompositionRecord&quot;)">
-					<child_m_user_properties>
-						<property
-							name="clear_on_empty"
-							value=""/>
-						<property
-							name="context_to_clear"
-							value="CcoPlagueSpecialCompositionRecord"/>
-						<property
-							name="object_store_events"
-							value="^3"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoPlagueSpecialCompositionRecord"
-					context_function_id="IsValidContext"/>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoPlagueSpecialCompositionRecord"
-					context_function_id="FactionPlagueCompositionContext(PlayersFaction)"/>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="C87F6BC5-B63E-4D39-B8165E96E25C9F07"
-					name="NewState"
-					width="340"
-					height="257"
-					uniqueguid="C87F6BC5-B63E-4D39-B8165E96E25C9F07"/>
-			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true">
-				<columnwidths>
-					<column width="440"/>
-				</columnwidths>
-			</LayoutEngine>
-		</recipe_holder>
-		<template_ingredient
-			this="5516CBCA-995C-48EE-971F7B59AB318BEC"
-			id="template_ingredient"
-			allowhorizontalresize="false"
-			tooltipslocalised="true"
-			uniqueguid="5516CBCA-995C-48EE-971F7B59AB318BEC"
-			currentstate="45DA5D04-DE07-4F1C-92E3BEF18315EBB9"
-			defaultstate="45DA5D04-DE07-4F1C-92E3BEF18315EBB9">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoCampaignPlagueComposition"
-					context_function_id="PlagueIngredientList.At(self.ChildIndex - 1).Name"/>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="45DA5D04-DE07-4F1C-92E3BEF18315EBB9"
-					name="NewState"
-					width="242"
-					height="26"
-					uniqueguid="45DA5D04-DE07-4F1C-92E3BEF18315EBB9">
-					<component_text
-						text="dy_ingredient"
-						textxoffset="44.00,6.00"
-						textyoffset="4.00,6.00"
-						texthbehaviour="Resize"
-						textlabel="template_ingredient_NewState_Text_4f87317f"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
-			</states>
-		</template_ingredient>
-		<title
-			this="A68E464E-7142-47EE-97A46592351899F0"
-			id="title"
-			offset="0.00,93.00"
-			allowhorizontalresize="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="A68E464E-7142-47EE-97A46592351899F0"
-			currentstate="76E60FA6-EF06-481F-B580D99CFD1E2BAE"
-			defaultstate="76E60FA6-EF06-481F-B580D99CFD1E2BAE">
-			<states>
-				<default
-					this="76E60FA6-EF06-481F-B580D99CFD1E2BAE"
-					name="default"
-					width="340"
-					height="48"
-					uniqueguid="76E60FA6-EF06-481F-B580D99CFD1E2BAE">
-					<component_text
-						text="Base Plague and symptoms in this recipe:"
-						textvalign="Center"
-						textxoffset="12.00,15.00"
-						textlocalised="true"
-						textlabel="title_default_Text_5ea8fc0d"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</default>
-			</states>
-		</title>
-		<base_plague
-			this="391D6366-9749-43E7-99DEE6F3AF096E40"
-			id="base_plague"
-			offset="0.00,141.00"
-			allowhorizontalresize="false"
-			tooltipslocalised="true"
-			uniqueguid="391D6366-9749-43E7-99DEE6F3AF096E40"
-			currentstate="9253CD54-A99C-4A62-ABA0A87B6538B5EF"
-			defaultstate="9253CD54-A99C-4A62-ABA0A87B6538B5EF">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoCampaignPlagueComposition"
-					context_function_id="BasePlagueContext.Name"/>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="9253CD54-A99C-4A62-ABA0A87B6538B5EF"
-					name="NewState"
-					width="340"
-					height="26"
-					uniqueguid="9253CD54-A99C-4A62-ABA0A87B6538B5EF">
-					<component_text
-						text="dy_plague"
-						textxoffset="44.00,6.00"
-						textyoffset="4.00,6.00"
-						texthbehaviour="Resize"
-						textlabel="base_plague_NewState_Text_1b7da20b"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
-			</states>
-		</base_plague>
-		<icon
-			this="8E7DB162-33A7-4562-9E71AD0121FC59A4"
-			id="icon"
-			offset="14.00,0.00"
-			docking="Top Left"
-			dock_offset="14.00,0.00"
-			tooltipslocalised="true"
-			uniqueguid="8E7DB162-33A7-4562-9E71AD0121FC59A4"
-			currentstate="28801622-563D-4983-A37CD3A0EA87EA6C"
-			defaultstate="28801622-563D-4983-A37CD3A0EA87EA6C">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextImageSetter"
-					context_object_id="CcoCampaignPlagueComposition"
-					context_function_id="BasePlagueContext.PlagueRecordContext.ImagePath"/>
-			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="F0547559-DCF3-4777-B338F1FAE4A010D3"
-					uniqueguid="F0547559-DCF3-4777-B338F1FAE4A010D3"
-					imagepath="ui/skins/default/construction_positive.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="28801622-563D-4983-A37CD3A0EA87EA6C"
-					name="NewState"
-					width="50"
-					height="10"
-					uniqueguid="28801622-563D-4983-A37CD3A0EA87EA6C">
-					<imagemetrics>
-						<image
-							this="BEEBD34B-A598-4C00-8EED8A13DB27FFF0"
-							uniqueguid="BEEBD34B-A598-4C00-8EED8A13DB27FFF0"
-							componentimage="F0547559-DCF3-4777-B338F1FAE4A010D3"
-							width="24"
-							height="24"
-							dockpoint="Top Left"
-							canresizeheight="false"
-							canresizewidth="false"/>
-					</imagemetrics>
-					<component_text
-						textxoffset="44.00,6.00"
-						textyoffset="4.00,6.00"
-						texthbehaviour="Resize"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
-			</states>
-		</icon>
-		<additional_effects
-			this="1D94DD86-4686-439D-B95A8CFFFA68E868"
-			id="additional_effects"
-			offset="0.00,209.00"
-			allowhorizontalresize="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="1D94DD86-4686-439D-B95A8CFFFA68E868"
-			currentstate="70235934-E52A-4A33-B5159B8AA86C76E1"
-			defaultstate="70235934-E52A-4A33-B5159B8AA86C76E1">
-			<states>
-				<default
-					this="70235934-E52A-4A33-B5159B8AA86C76E1"
-					name="default"
-					width="340"
-					height="48"
-					uniqueguid="70235934-E52A-4A33-B5159B8AA86C76E1">
-					<component_text
-						text="Additional effects provided by this recipe:"
-						textvalign="Center"
-						textxoffset="12.00,8.00"
-						textlocalised="true"
-						textlabel="additional_effects_default_Text_ddd73f15"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</default>
-			</states>
-		</additional_effects>
-		<seperator
-			this="14D49B5F-E3BC-4999-8044B8CD8351DB6A"
-			id="seperator"
-			offset="0.00,193.00"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="14D49B5F-E3BC-4999-8044B8CD8351DB6A"
-			currentstate="DD684CBF-570D-4DF5-AEBB0DB178A6710E"
-			defaultstate="DD684CBF-570D-4DF5-AEBB0DB178A6710E">
-			<componentimages>
-				<component_image
-					this="75211641-A654-4AF6-98374B1E084092C5"
-					uniqueguid="75211641-A654-4AF6-98374B1E084092C5"
-					imagepath="ui/skins/default/separator_skull.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="DD684CBF-570D-4DF5-AEBB0DB178A6710E"
-					name="NewState"
-					width="331"
-					height="16"
-					uniqueguid="DD684CBF-570D-4DF5-AEBB0DB178A6710E">
-					<imagemetrics>
-						<image
-							this="F59D682B-8076-45DA-8479E8F9ED76FE63"
-							uniqueguid="F59D682B-8076-45DA-8479E8F9ED76FE63"
-							componentimage="75211641-A654-4AF6-98374B1E084092C5"
-							offset="7.00,0.00"
-							width="322"
-							height="14"
-							tile="true"
-							margin="0.00,50.00,0.00,45.00"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-		</seperator>
-		<not_unlocked
-			this="309709B3-ED53-41B6-89AFBC9D5121D0C9"
-			id="not_unlocked"
-			allowhorizontalresize="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="309709B3-ED53-41B6-89AFBC9D5121D0C9"
-			currentstate="28B4416F-AB6F-4F4E-8616B7F73AD7C7AB"
-			defaultstate="28B4416F-AB6F-4F4E-8616B7F73AD7C7AB">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoCampaignPlagueComposition"
-					context_function_id="PlagueIngredientList.Any(IsUnlocked(PlayersFaction) == false)"/>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="28B4416F-AB6F-4F4E-8616B7F73AD7C7AB"
-					name="default"
-					width="340"
-					height="48"
-					uniqueguid="28B4416F-AB6F-4F4E-8616B7F73AD7C7AB">
-					<component_text
-						text="The listed symptoms must be unlocked in order to use this recipe."
-						textvalign="Center"
-						textxoffset="12.00,15.00"
-						textlocalised="true"
-						textlabel="not_unlocked_default_Text_fe219b43"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"
-						font_colour_override_preset_key="red"/>
-				</default>
-			</states>
-		</not_unlocked>
-		<padlock
-			this="A18A3F7A-38A8-4F77-AED6A75FB77F4342"
-			id="padlock"
-			offset="247.00,-4.00"
-			tooltipslocalised="true"
-			uniqueguid="A18A3F7A-38A8-4F77-AED6A75FB77F4342"
-			currentstate="8DE2E9CD-0FA0-41DD-AC431F7CADA5EA3B"
-			defaultstate="8DE2E9CD-0FA0-41DD-AC431F7CADA5EA3B">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoCampaignPlagueComposition"
-					context_function_id="PlagueIngredientList.At(self.ParentContext.ChildIndex - 1).IsUnlocked(PlayersFaction) == false"/>
-			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="0A9A877E-6A9E-4F1A-AEBE3C57D57703F3"
-					uniqueguid="0A9A877E-6A9E-4F1A-AEBE3C57D57703F3"
-					imagepath="ui/skins/default/icon_padlock.png"/>
-			</componentimages>
-			<states>
-				<default
-					this="8DE2E9CD-0FA0-41DD-AC431F7CADA5EA3B"
-					name="default"
-					width="27"
-					height="27"
-					uniqueguid="8DE2E9CD-0FA0-41DD-AC431F7CADA5EA3B">
-					<imagemetrics>
-						<image
-							this="6A8B00C4-6792-4214-8295F53A6D8B1BDB"
-							uniqueguid="6A8B00C4-6792-4214-8295F53A6D8B1BDB"
-							componentimage="0A9A877E-6A9E-4F1A-AEBE3C57D57703F3"
-							offset="-5.00,-5.00"
-							width="38"
-							height="38"
-							dockpoint="Center"
-							canresizeheight="false"
-							canresizewidth="false"/>
-					</imagemetrics>
-				</default>
-			</states>
-		</padlock>
-		<left_click
-			this="F1B5FD9B-5650-47BA-BE0516A29E00ADE0"
-			id="left_click"
-			offset="0.00,48.00"
-			allowhorizontalresize="false"
-			tooltipslocalised="true"
-			uniqueguid="F1B5FD9B-5650-47BA-BE0516A29E00ADE0"
-			currentstate="AF748076-A431-4D72-BA48D7441AF2E516"
-			defaultstate="AF748076-A431-4D72-BA48D7441AF2E516">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoCampaignPlagueComposition"
-					context_function_id="PlagueIngredientList.All(IsUnlocked(PlayersFaction))"/>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="AF748076-A431-4D72-BA48D7441AF2E516"
-					name="NewState"
-					width="340"
-					height="45"
-					uniqueguid="AF748076-A431-4D72-BA48D7441AF2E516">
-					<component_text
-						text="Left-click to add the Base Plague and symptoms."
-						textvalign="Bottom"
-						textxoffset="12.00,8.00"
-						textyoffset="2.00,8.00"
-						texthbehaviour="Resize"
-						textlocalised="true"
-						textlabel="left_click_NewState_Text_14f1054e"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
-			</states>
-		</left_click>
 		<locked_reason
 			this="553E6A73-1EEC-4D6C-B5CEF8B1355E3366"
 			id="locked_reason"
-			offset="0.00,98.00"
+			offset="0.00,4.00"
 			allowhorizontalresize="false"
 			visible="false"
 			priority="255"
@@ -1191,8 +711,7 @@
 			tooltipslocalised="true"
 			uniqueguid="9F49BBF4-2D65-4B83-A5AA297C42A47A71"
 			currentstate="8FED1121-B6E3-4643-99E8BBC7045D07CC"
-			defaultstate="8FED1121-B6E3-4643-99E8BBC7045D07CC"
-			comment="Use &quot;empty&quot; state if you don't want the tooltip background to show (for creating this tooltip inside another tooltip)">
+			defaultstate="8FED1121-B6E3-4643-99E8BBC7045D07CC">
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="CustomTooltip"
@@ -1215,26 +734,16 @@
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoCampaignBasePlague"
-					context_function_id="PlagueEffectContext">
-					<child_m_user_properties>
-						<property
-							name="only_target"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
 					callback_id="ContextObjectStore"
 					context_object_id="CcoPlagueEffectRecord"/>
 				<callback_with_context
 					callback_id="ContextPropagator"
-					context_object_id="CcoCampaignBasePlague"
+					context_object_id="CcoCampaignPlagueIngredient"
 					context_function_id="CcoRTPlagueSelection(Name, Description, PlagueEffectContext)"/>
 				<callback_with_context
 					callback_id="ContextPropagator"
-					context_object_id="CcoCampaignPlagueIngredient"
-					context_function_id="CcoRTPlagueSelection(Name, Description, PlagueEffectContext)"/>
+					context_object_id="CcoRtPlagueIngredient"
+					context_function_id="Ingredient"/>
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoEffect"
@@ -1245,13 +754,13 @@
 					this="8FED1121-B6E3-4643-99E8BBC7045D07CC"
 					name="default"
 					width="341"
-					height="498"
+					height="185"
 					uniqueguid="8FED1121-B6E3-4643-99E8BBC7045D07CC"/>
 				<empty
 					this="F57FFA83-DDB1-47DD-AEC4FB0532E8A4AC"
 					name="empty"
 					width="341"
-					height="498"
+					height="185"
 					uniqueguid="F57FFA83-DDB1-47DD-AEC4FB0532E8A4AC"/>
 			</states>
 			<LayoutEngine
@@ -1265,27 +774,15 @@
 		<dy_click_text
 			this="BE7A995E-B849-4CDB-BC96C274E63F7F60"
 			id="dy_click_text"
-			offset="0.00,413.00"
+			offset="0.00,57.00"
 			allowhorizontalresize="false"
+			visible="false"
 			priority="255"
 			tooltipslocalised="true"
 			uniqueguid="BE7A995E-B849-4CDB-BC96C274E63F7F60"
 			currentstate="2046798C-955A-4784-96D7FFDAE81B3D79"
-			defaultstate="2046798C-955A-4784-96D7FFDAE81B3D79">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoCampaignBasePlague"
-					context_function_id="Loc(&quot;nurgle_plague_and_recipe_select&quot;)"/>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoCampaignPlagueIngredient"
-					context_function_id="GetIfElse(IsContextValid(self.ParentContext(&quot;tooltip_plagues&quot;).TooltipParent.StoredContext(&quot;CcoPlagueSpecialCompositionRecord&quot;)), Loc(&quot;nurgle_plague_and_recipe_select&quot;), Loc(&quot;nurgle_symptom_select&quot;) )"/>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="any"
-					context_function_id="IsPanelOpen(&quot;nurgle_plagues&quot;) &amp;&amp; (IsOfType(this, &quot;CcoCampaignPlagueIngredient&quot;) == false || IsUnlocked)"/>
-			</callbackwithcontextlist>
+			defaultstate="2046798C-955A-4784-96D7FFDAE81B3D79"
+			marked_for_deletion="true">
 			<states>
 				<default
 					this="2046798C-955A-4784-96D7FFDAE81B3D79"
@@ -1309,12 +806,14 @@
 		<seperator
 			this="655E4CDE-20F4-4B31-B063A52B1223637E"
 			id="seperator"
-			offset="5.00,84.00"
+			offset="5.00,4.00"
+			visible="false"
 			priority="255"
 			tooltipslocalised="true"
 			uniqueguid="655E4CDE-20F4-4B31-B063A52B1223637E"
 			currentstate="34969418-1382-4A7B-ABC8134E17E280E7"
-			defaultstate="34969418-1382-4A7B-ABC8134E17E280E7">
+			defaultstate="34969418-1382-4A7B-ABC8134E17E280E7"
+			marked_for_deletion="true">
 			<componentimages>
 				<component_image
 					this="353AD1EF-4E07-4FDB-A8037F0F7C6FA01C"
@@ -1342,5 +841,91 @@
 				</newstate>
 			</states>
 		</seperator>
+		<txt_blessed
+			this="6F29DA16-CE7A-4BBA-A5746A1AC0DE8ACC"
+			id="txt_blessed"
+			offset="0.00,40.00"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			component_level_text="txt_blessed_ingredient"
+			text_label="ComponentText_349104dd"
+			uniqueguid="6F29DA16-CE7A-4BBA-A5746A1AC0DE8ACC"
+			currentstate="DBBD78BC-2A96-4960-A8681E6E518711C5"
+			defaultstate="DBBD78BC-2A96-4960-A8681E6E518711C5">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignPlagueIngredient"
+					context_function_id="IsBlessed"/>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoStaticObject"
+					context_function_id="Loc(&quot;wh3_dlc25_plagues_symptom_blessed&quot;)"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="DBBD78BC-2A96-4960-A8681E6E518711C5"
+					name="default"
+					width="340"
+					height="36"
+					uniqueguid="DBBD78BC-2A96-4960-A8681E6E518711C5">
+					<component_text
+						textvalign="Center"
+						textxoffset="12.00,8.00"
+						textyoffset="10.00,16.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="StateText_d3f9e3dd"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</default>
+			</states>
+		</txt_blessed>
+		<txt_invalid_reason
+			this="17BE06B5-82B2-43BF-9B48586FF030D57C"
+			id="txt_invalid_reason"
+			offset="0.00,4.00"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			component_level_text="txt_blessed_ingredient"
+			text_label="ComponentText_9da8ef9e"
+			uniqueguid="17BE06B5-82B2-43BF-9B48586FF030D57C"
+			currentstate="F3DFD74E-CF0E-4B88-9FF54D9E1E40F228"
+			defaultstate="F3DFD74E-CF0E-4B88-9FF54D9E1E40F228">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoRtPlagueIngredient"
+					context_function_id="AnySelection == false &amp;&amp; Ingredient.IsUnlocked == false ||&#10;FullSelection == false &amp;&amp; IsSelectable == false"/>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoRtPlagueIngredient"
+					context_function_id="GetIfElse(&#10;      Ingredient.IsOnCooldown,&#10;      Loc(&quot;wh3_dlc25_plagues_symptom_cooldown&quot;),&#10;      GetIfElse(&#10;        AnySelection == false &amp;&amp; Ingredient.IsUnlocked == false,&#10;        Loc(&quot;wh3_dlc25_plagues_symptom_locked&quot;),&#10;        Loc(&quot;wh3_dlc25_plagues_symptom_invalid&quot;)))"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="F3DFD74E-CF0E-4B88-9FF54D9E1E40F228"
+					name="default"
+					width="340"
+					height="36"
+					uniqueguid="F3DFD74E-CF0E-4B88-9FF54D9E1E40F228">
+					<component_text
+						textvalign="Center"
+						textxoffset="12.00,8.00"
+						textyoffset="10.00,16.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="StateText_7e99fcb0"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</default>
+			</states>
+		</txt_invalid_reason>
 	</components>
 </layout>

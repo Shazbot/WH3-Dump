@@ -303,7 +303,7 @@ function faction_intro:perform_intro(campaign_folder_name, faction_key)
 
 	intro_config = campaign_config.faction_intros[faction_key]
 	if intro_config == nil then
-		script_error(string.format("ERROR: Couldn't run intro for %s. Faction key did not have an entry under this campaign.", error_signature))
+		script_error(string.format("ERROR: Couldn't run intro for %s. Faction key did not have an entry under this campaign. Please add it to script/campaign/" .. campaign_folder_name .. "/faction_intro/" .. campaign_folder_name .. "_faction_intro.lua", error_signature))
 		return
 	end
 
