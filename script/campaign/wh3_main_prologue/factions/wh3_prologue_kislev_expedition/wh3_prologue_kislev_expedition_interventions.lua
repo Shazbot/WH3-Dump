@@ -4400,14 +4400,13 @@ function prologue_unit_recruit_intervention()
 					0,
 					0.5
 				);
-				
 				text_pointer_test_button_recruit:add_component_text("text", "ui_text_replacements_localised_text_prologue_text_pointer_unit_recruitment_2");
 				text_pointer_test_button_recruit:set_style("semitransparent");
 				text_pointer_test_button_recruit:set_topmost(true);
 				text_pointer_test_button_recruit:set_show_close_button(true)
 				text_pointer_test_button_recruit:show();
 				text_pointer_test_button_recruit:set_close_button_callback(function() core:hide_fullscreen_highlight(); cm:callback(function() tour_test_button_recruit_2:start("tour_test_button_recruit_2_action_2") end, 0.5) end)
-		
+				
 			end,
 			0,
 			"tour_test_button_recruit_2_action_1"
@@ -4417,7 +4416,7 @@ function prologue_unit_recruit_intervention()
 			function() 
 				out("STARTING AN ACTION 2 IN tour_test_button_recruit_2")
 
-				local uic_RecruitmentCost = find_uicomponent(core:get_ui_root(), "units_panel", "main_units_panel", "recruitment_docker", "recruitment_options", "recruitment_listbox", "global", "unit_list", "listview", "list_clip", "list_box", "wh3_main_ksl_inf_kossars_tutorial_1_recruitable", "unit_icon", "RecruitmentCost")
+				local uic_RecruitmentCost = find_uicomponent(core:get_ui_root(), "units_panel", "main_units_panel", "recruitment_docker", "recruitment_options", "recruitment_listbox", "global", "unit_list", "listview", "list_clip", "list_box", "wh3_main_ksl_inf_kossars_tutorial_1_recruitable", "RecruitmentCost")
 				core:hide_fullscreen_highlight()
 				core:show_fullscreen_highlight_around_components(0, false, false, uic_RecruitmentCost)
 				local text_pointer_test_button_recruit = text_pointer:new_from_component(
@@ -4443,7 +4442,7 @@ function prologue_unit_recruit_intervention()
 		tour_test_button_recruit_2:action(
 			function() 
 				out("STARTING AN ACTION 3 IN tour_test_button_recruit_2") 
-				local uic_UpkeepCost = find_uicomponent(core:get_ui_root(), "units_panel", "main_units_panel", "recruitment_docker", "recruitment_options", "recruitment_listbox", "global", "unit_list", "listview", "list_clip", "list_box", "wh3_main_ksl_inf_kossars_tutorial_1_recruitable", "unit_icon", "UpkeepCost")
+				local uic_UpkeepCost = find_uicomponent(core:get_ui_root(), "units_panel", "main_units_panel", "recruitment_docker", "recruitment_options", "recruitment_listbox", "global", "unit_list", "listview", "list_clip", "list_box", "wh3_main_ksl_inf_kossars_tutorial_1_recruitable", "UpkeepCost")
 				core:hide_fullscreen_highlight()
 				core:show_fullscreen_highlight_around_components(0, false, false, uic_UpkeepCost)
 				local text_pointer_test_button_recruit = text_pointer:new_from_component(
