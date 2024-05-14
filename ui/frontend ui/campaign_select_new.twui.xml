@@ -13118,7 +13118,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoFrontendFactionLeader"
-					context_function_id="GetIfElse(UnitList.IsEmpty == false, UnitList, StoredContext(&quot;CcoCampaignStartInfo&quot;, &quot;button_list&quot;, &quot;campaign_select_new&quot;).LordListForFaction(StoredContext(&quot;CcoCultureRecord&quot;, &quot;list_box&quot;, &quot;lord_select_list&quot;)).FirstContext(FactionRecordContext == this.FactionRecordContext &amp;&amp; FrontendFactionLeaderRecordContext != this).UnitList).Sort(RecruitCost).Sort(UnitRecordContext.ParentGroupSortOrder, true)"/>
+					context_function_id="GetIfElse(UnitList.IsEmpty == false, UnitList, StoredContext(&quot;CcoCampaignStartInfo&quot;, &quot;button_list&quot;, &quot;campaign_select_new&quot;).LordListForFaction(StoredContext(&quot;CcoCultureRecord&quot;, &quot;list_box&quot;, &quot;lord_select_list&quot;)).FirstContext(FactionRecordContext == this.FactionRecordContext &amp;&amp; FrontendFactionLeaderRecordContext != this).UnitList).Sort(UnitRecordContext.Key).Sort(RecruitCost).Sort(UnitRecordContext.ParentGroupSortOrder, true)"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -15656,6 +15656,9 @@
 				</callback_with_context>
 				<callback_with_context
 					callback_id="AbilityEffectIcon"
+					context_object_id="CcoEffect"/>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
 					context_object_id="CcoEffect"/>
 			</callbackwithcontextlist>
 			<componentimages>
@@ -27012,7 +27015,7 @@
 			tooltipslocalised="true"
 			soundcategory="UI_GBL_TMP_Unit_Card"
 			uniqueguid="F22E1975-41D1-48CA-A36BB1C6CE517B7F"
-			currentstate="E3499213-9A5C-4E17-BACFB51E8A881A09"
+			currentstate="E1A669E2-BDBB-4473-9EDAEDA0723FE542"
 			defaultstate="E1A669E2-BDBB-4473-9EDAEDA0723FE542"
 			comment="ScottB: The ContextPropagator that passes own context to self for unit record is to make it refresh when change selection, in the event that the list itself isnt refreshed when changed character selection">
 			<callbackwithcontextlist>

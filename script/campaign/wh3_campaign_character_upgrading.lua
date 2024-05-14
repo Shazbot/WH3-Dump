@@ -205,6 +205,9 @@ CUS.subtype_to_bonus_traits = {
 	wh3_dlc24_chs_lord_mtze= {
 		default = "wh3_dlc20_legacy_trait_lord_to_daemon_prince",
 	},
+	wh3_dlc25_chs_lord_mnur= {
+		default = "wh3_dlc20_legacy_trait_lord_to_daemon_prince",
+	},
 	--Sorcerer Lords
 	wh_dlc01_chs_sorcerer_lord_death = {
 		default = "wh3_dlc20_legacy_trait_sorcerer_death",

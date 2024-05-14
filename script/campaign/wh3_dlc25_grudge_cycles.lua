@@ -5,14 +5,14 @@ grudge_modifiers = {
 }
 
 grudge_cycle = {
-	cycle_time = 10, -- turns
+	cycle_time = 15, -- turns
 	faction_times = {},
 
 	minimum_world_grudges = 5000,
 	minimum_world_grudges_met = true,
 	target_grudge_value = {},
-	target_grudge_base = 2000,
-	target_grudge_percentage = 35,
+	target_grudge_base = 1000,
+	target_grudge_percentage = 75,
 	cycle_grudges = {},
 	previous_reward_modifiers = {
 		[0] = 20, -- if previous level is 0 it means they delayed. This value should match the modifier we state in delay dilemma
@@ -21,6 +21,14 @@ grudge_cycle = {
 		[3] = 0,
 		[4] = 10,
 		[5] = 20
+	},
+
+	difficulty_modifiers = {
+		["easy"] = -20,
+		["normal"] = 0,
+		["hard"] = 5,
+		["very hard"] = 10,
+		["legendary"] = 20,
 	},
 
 	delayed_factions = {},
@@ -36,27 +44,38 @@ grudge_cycle = {
 
 	starting_grudges = {
 		["main_warhammer"] = {
-			["wh3_main_nur_maggoth_kin"] = 200,
-			["wh_dlc08_nor_goromadny_tribe"] = 150,
-			["wh_main_nor_aesling"] = 150,
-			["wh2_main_skv_clan_moulder"] = 275,
+			["wh3_main_nur_maggoth_kin"] = 100,
+			["wh_dlc08_nor_goromadny_tribe"] = 75,
+			["wh_main_nor_aesling"] = 75,
+			["wh2_main_skv_clan_moulder"] = 180,
 			["wh2_main_grn_arachnos"] = 50,
-			["wh_main_vmp_vampire_counts"] = 150,
-			["wh3_main_kho_exiles_of_khorne"] = 200,
-			["wh2_main_skv_clan_septik"] = 200,
-			["wh2_main_def_naggarond"] = 300,
-			["wh2_dlc17_bst_taurox"] = 150,
-			["wh3_dlc20_chs_valkia"] = 150,
-			["wh_main_vmp_schwartzhafen"] = 200,
-			["wh_main_vmp_rival_sylvanian_vamps"] = 125,
-			["wh2_main_skv_clan_skryre"] = 275,
-			["wh3_main_ogr_disciples_of_the_maw"] = 100
+			["wh_main_vmp_vampire_counts"] = 75,
+			["wh3_main_kho_exiles_of_khorne"] = 100,
+			["wh2_main_skv_clan_septik"] = 110,
+			["wh2_main_def_naggarond"] = 150,
+			["wh2_dlc17_bst_taurox"] = 75,
+			["wh3_dlc20_chs_valkia"] = 75,
+			["wh_main_vmp_schwartzhafen"] = 100,
+			["wh_main_vmp_rival_sylvanian_vamps"] = 60,
+			["wh2_main_skv_clan_skryre"] = 180,
+			["wh3_main_ogr_disciples_of_the_maw"] = 50,
+			["wh2_main_vmp_the_silver_host"] = 25,
+			["wh3_dlc23_chd_astragoth"] = 75,
+			["wh3_dlc23_chd_legion_of_azgorh"] = 75,
+			["wh3_dlc23_chd_zhatan"] = 75,
+			["wh3_dlc23_chd_minor_faction"] = 25,
+			["wh3_dlc23_chd_conclave"] = 125
 		},
 		["wh3_main_chaos"] = {
-			["wh_dlc08_nor_goromadny_tribe"] = 150,
-			["wh_main_nor_aesling"] = 150,
-			["wh_main_nor_baersonling"] = 150,
-			["wh2_main_skv_clan_moulder"] = 275
+			["wh_dlc08_nor_goromadny_tribe"] = 75,
+			["wh_main_nor_aesling"] = 75,
+			["wh_main_nor_baersonling"] = 75,
+			["wh2_main_skv_clan_moulder"] = 160,
+			["wh3_dlc23_chd_astragoth"] = 75,
+			["wh3_dlc23_chd_legion_of_azgorh"] = 75,
+			["wh3_dlc23_chd_zhatan"] = 75,
+			["wh3_dlc23_chd_minor_faction"] = 25,
+			["wh3_dlc23_chd_conclave"] = 125,
 		}
 	},
 
@@ -133,7 +152,7 @@ grudge_cycle = {
 	},
 
 	grudge_army_size = {
-		base = 14,
+		base = 9,
 		bonus_value = "dwf_grudge_settler_army_unit_count"
 	},
 	grudge_armies = {},
@@ -155,33 +174,33 @@ grudge_cycle = {
 	},
 	values = {
 		-- Enemy army actions
-		trespass = 20,
-		raiding = 45,
-		dwarf_attacked = 100, -- settlement or army if a non-dwarf is the attacker, regardless of winner
+		trespass = 10,
+		raiding = 25,
+		dwarf_attacked = 30, -- settlement or army if a non-dwarf is the attacker, regardless of winner
 		hero_actions = {
 			-- gets applied faction-wide
-			success = 55,
-			failure = 15
+			success = 25,
+			failure = 10
 		},
 		-- occupation
-		occupation_per_tier = 75, -- per tier of the settlement
-		sack_per_tier = 50, -- per tier of the settlement
-		razed_per_tier = 100, -- per tier of the settlement`
+		occupation_per_tier = 45, -- per tier of the settlement
+		sack_per_tier = 25, -- per tier of the settlement
+		razed_per_tier = 50, -- per tier of the settlement`
 		historical_settlement = {
 			-- added ontop of the base occupation value
-			legendary = 500,
-			holds = 200,
+			legendary = 250,
+			holds = 100,
 			other = 50
 		},
 		-- armies attacked
-		army_casualties = 3, -- per 1000 cp kill value
+		army_casualties = 2, -- per 1000 cp kill value
 		-- diplomacy
-		broken_treaty = 75,
-		war_declaration = 150,
-		positive_diplomacy = -50,
-		peace = -100,
-		faction_actions = 15, -- percentage
-		culture_actions = 5 -- percentage
+		broken_treaty = 45,
+		war_declaration = 75,
+		positive_diplomacy = -30,
+		peace = -70,
+		faction_actions = 10, -- percentage
+		culture_actions = 3 -- percentage
 	},
 	factors = {
 		army_prefix = "wh3_dlc25_dwf_grudge_points_enemy_armies_",
@@ -338,7 +357,6 @@ function grudge_cycle:setup()
 		end
 	end
 
-
 	-- throw starting grudges to various targets
 	for faction_key, value in pairs(self.starting_grudges[campaign_name]) do
 		local faction = cm:get_faction(faction_key)
@@ -358,16 +376,16 @@ function grudge_cycle:set_grudge_target(faction, previous_level, value_override)
 		local grudges = self:get_met_grudges(faction)
 		local value
 
-
 		if value_override then
 			value = value_override
-		elseif world_grudges > self.minimum_world_grudges then
+		elseif world_grudges > self.minimum_world_grudges and grudges > 0 then
+			local difficulty = cm:get_difficulty(true)
 			previous_level = previous_level or 3 -- defaulting to 3 means that no modifiers are applied to the target.
 
 			self.minimum_world_grudges_met = true
 
-			value = math.floor((grudges / 100) * (self.target_grudge_percentage + self.previous_reward_modifiers[previous_level])) + self.target_grudge_base
-			value = math.floor(value / 100) * 100
+			value = math.floor((grudges / 100) * self.target_grudge_percentage) + self.target_grudge_base
+			value = math.floor(value / 100) * (100 + self.previous_reward_modifiers[previous_level] + self.difficulty_modifiers[difficulty])
 
 			cm:trigger_incident(faction_name, self.incident_prefix..previous_level, true)
 		else
@@ -403,10 +421,10 @@ end
 
 function grudge_cycle:get_met_grudges(faction)
 	local met_grudges = 0
-	local faction_list = faction:factions_met()
+	local faction_list = self:get_nearby_factions(faction)
 
-	for i = 0, faction_list:num_items() - 1 do
-		local faction_interface = faction_list:item_at(i)
+	for faction_key, _ in pairs(faction_list) do
+		local faction_interface = cm:get_faction(faction_key)
 		local mf_list = faction_interface:military_force_list()
 		local region_list = faction_interface:region_list()
 
@@ -768,7 +786,7 @@ function grudge_cycle:track_acts_of_aggression()
 						for i = 0, factors:num_items() - 1 do
 							local factor = factors:item_at(i)
 
-							self:assign_grudges(region, factor:key(), -factor:value())
+							self:assign_grudges(region, factor:key(), -factor:value(), false, false)
 						end
 					end
 				end
@@ -915,61 +933,70 @@ function grudge_cycle:dwarf_is_attacker_or_defender(pending_battle)
 	return dwarf_attacker, dwarf_defender
 end
 
-function grudge_cycle:assign_grudges(target_interface, factor, value, spread)
+function grudge_cycle:assign_grudges(target_interface, factor, value, spread, modify_negatives)
 	local faction
 
 	if is_region(target_interface) then
 		faction = target_interface:owning_faction()
 		culture = faction:culture()
+		local modifier = self.cultural_modifiers[culture] or grudge_modifiers.standard
 		
 		if culture == self.cultures.dwarf or culture == self.cultures.rogue or faction:is_rebel() then
 			return
 		end
 
-		local modifier = self.cultural_modifiers[culture] or grudge_modifiers.standard
+		if value < 0  and modify_negatives ~= false then
+			if value < 0 then
+				-- if culture has a modifier, reduce the positive benefits of lowering grudges by the same modifier
+				modifier = (1 - modifier) + 1
+			end
 
-		if value < 0 then
-			-- if culture has a modifier, reduce the positive benefits of lowering grudges by the same modifier
-			modifier = (1 - modifier) + 1
+			value = math.floor(value * modifier)
+		elseif value > 0 then
+			value = math.floor(value * modifier)
 		end
-
-		value = math.floor(value * modifier)
 
 		cm:entity_add_pooled_resource_transaction(target_interface, self.factors.settlement_prefix..factor, value)
 	elseif is_militaryforce(target_interface) then
 		faction = target_interface:faction()
 		culture = faction:culture()
+		local modifier = self.cultural_modifiers[culture] or grudge_modifiers.standard
 		
 		if culture == self.cultures.dwarf or culture == self.cultures.rogue or faction:is_rebel() then
 			return
 		end
 
-		local modifier = self.cultural_modifiers[culture] or grudge_modifiers.standard
+		if value < 0  and modify_negatives ~= false then
+			if value < 0 then
+				-- if culture has a modifier, reduce the positive benefits of lowering grudges by the same modifier
+				modifier = (1 - modifier) + 1
+			end
 
-		if value < 0 then
-			-- if culture has a modifier, reduce the positive benefits of lowering grudges by the same modifier
-			modifier = (1 - modifier) + 1
+			value = math.floor(value * modifier)
+		elseif value > 0 then
+			value = math.floor(value * modifier)
 		end
-
-		value = math.floor(value * modifier)
 
 		cm:entity_add_pooled_resource_transaction(target_interface, self.factors.army_prefix..factor, value)
 	elseif is_faction(target_interface) then
 		faction = target_interface
 		culture = faction:culture()
+		local modifier = self.cultural_modifiers[culture] or grudge_modifiers.standard
 		
 		if culture == self.cultures.dwarf or culture == self.cultures.rogue or faction:is_rebel() then
 			return
 		end
 
-		local modifier = self.cultural_modifiers[culture] or grudge_modifiers.standard
+		if value < 0  and modify_negatives ~= false then
+			if value < 0 then
+				-- if culture has a modifier, reduce the positive benefits of lowering grudges by the same modifier
+				modifier = (1 - modifier) + 1
+			end
 
-		if value < 0 then
-			-- if culture has a modifier, reduce the positive benefits of lowering grudges by the same modifier
-			modifier = (1 - modifier) + 1
+			value = math.floor(value * modifier)
+		elseif value > 0 then
+			value = math.floor(value * modifier)
 		end
-
-		value = math.floor(value * modifier)
 
 		local mf_list = faction:military_force_list()
 		local region_list = faction:region_list()
@@ -1159,7 +1186,7 @@ function grudge_cycle:settle_grudges()
 							local value = mf:pooled_resource_manager():resource(self.resources.grudge_army):value() or loser.grudges
 							grudges = grudges + value
 
-							self:assign_grudges(mf, self.factors.settled, -value, false)
+							self:assign_grudges(mf, self.factors.settled, -value, false, false)
 						end
 					else
 						-- mf was wiped out, just log the pending battle saved grudges
@@ -1200,7 +1227,7 @@ function grudge_cycle:settle_grudges()
 					common.set_context_value("cycle_grudge_value", self.cycle_grudges[faction_name])
 				end
 
-				self:assign_grudges(region, self.factors.settled, -value, false)
+				self:assign_grudges(region, self.factors.settled, -value, false, false)
 				cm:faction_add_pooled_resource(faction_name, self.resources.settled_grudges, self.factors.settled, value)
 				self:update_cycle_tracker(faction_name)
 			end
@@ -1370,7 +1397,7 @@ function grudge_cycle:spawn_grudge_settler_army(faction_key)
 	local region_name
 	local pos_x, pos_y
 
-	if not faction_leader:is_null_interface() and not faction_leader:is_wounded() and faction_leader:is_deployed() then
+	if not faction_leader:is_null_interface() and not faction_leader:is_wounded() and faction_leader:has_region() then
 		region_name = faction_leader:region():name()
 	elseif not home_region:is_null_interface() and not home_region:garrison_residence():is_under_siege() then
 		region_name = home_region:name()
@@ -1405,8 +1432,8 @@ function grudge_cycle:spawn_grudge_settler_army(faction_key)
 	ram:remove_force("grudge_settler_army")
 	ram:new_force("grudge_settler_army")
 
-	ram:add_unit("grudge_settler_army","wh3_dlc25_dwf_art_grudge_thrower_grudge_reward", 2)
-	ram:add_unit("grudge_settler_army","wh_main_dwf_art_flame_cannon_grudge_reward", 2)
+	ram:add_unit("grudge_settler_army","wh3_dlc25_dwf_art_grudge_thrower_grudge_reward", 1)
+	ram:add_unit("grudge_settler_army","wh_main_dwf_art_flame_cannon_grudge_reward", 1)
 	ram:add_unit("grudge_settler_army","wh_main_dwf_inf_hammerers_grudge_reward", 5)
 	ram:add_unit("grudge_settler_army","wh_main_dwf_inf_irondrakes_0_grudge_reward", 3)
 	ram:add_unit("grudge_settler_army","wh_main_dwf_inf_longbeards_1_grudge_reward", 5)
@@ -1461,11 +1488,11 @@ function grudge_cycle:launch_dilemma_when_grudges_low()
 				if #faction_list > 0 then
 					for _, faction_key in ipairs(faction_list) do
 						local faction = cm:get_faction(faction_key)
-						local met_faction_list = faction:factions_met()
+						local met_faction_list = self:get_nearby_factions(faction)
 						local nuetral_met_faction_list = {}
 
-						for i = 0, met_faction_list:num_items() - 1 do
-							local met_faction = met_faction_list:item_at(i)
+						for faction_key, _ in pairs(met_faction_list) do
+							local met_faction = cm:get_faction(faction_key)
 
 							if met_faction:at_war_with(faction) == false and met_faction:allied_with(faction) == false and met_faction:culture() ~= self.cultures.dwarf and met_faction:is_human() == false then
 								table.insert(nuetral_met_faction_list, met_faction)
@@ -1504,6 +1531,32 @@ function grudge_cycle:launch_dilemma_when_grudges_low()
 		end,
 		true
 	)
+end
+
+function grudge_cycle:get_nearby_factions(faction)
+	local region_list = faction:region_list()
+	local faction_list = {}
+	local faction_name = faction:name()
+
+	for i = 0, region_list:num_items() - 1 do
+		local region = region_list:item_at(i)
+		local adjacent_region_list = region:adjacent_region_list()
+		
+		for j = 0, adjacent_region_list:num_items() - 1 do
+			local adj_region = adjacent_region_list:item_at(j)
+			local adj_region_owner = adj_region:owning_faction()
+			
+			if adj_region_owner:is_null_interface() == false and adj_region_owner:is_rebel() == false then
+				local adj_region_owner_name = adj_region_owner:name()
+				if faction_name ~= adj_region_owner_name and faction_list[adj_region_owner_name] ~= true then
+					faction_list[adj_region_owner_name] = true
+				end
+				
+			end
+		end
+	end
+
+	return faction_list
 end
 
 function grudge_cycle:spawn_grudge_dilemma(faction_key, target_faction_key)

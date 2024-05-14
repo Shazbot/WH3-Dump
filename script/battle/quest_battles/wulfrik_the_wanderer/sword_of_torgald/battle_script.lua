@@ -46,21 +46,21 @@ ga_ai_bret_02:attack_on_message("archers_advance");
 ga_ai_bret_02:message_on_proximity_to_enemy("archers_engaged",50);
 ga_ai_bret_02:release_on_message("archers_engaged");
 
-ga_ai_bret_02:message_on_proximity_to_enemy("militia_alerted",180, true); -- temp fix to reinforcements not arriving, ignore deployed check. remove last parameter
+ga_ai_bret_02:message_on_proximity_to_enemy("militia_alerted",180);
 ga_ai_bret_03:reinforce_on_message("militia_alerted",30000);
 ga_ai_bret_03:message_on_any_deployed("militia_advance"); 
 ga_ai_bret_03:attack_on_message("militia_advance");
 ga_ai_bret_03:message_on_proximity_to_enemy("militia_engaged",50);
 ga_ai_bret_03:release_on_message("militia_engaged");
 
-ga_ai_bret_03:message_on_proximity_to_enemy("knights_alerted", 160, true); -- temp fix to reinforcements not arriving, ignore deployed check. remove last parameter
+ga_ai_bret_03:message_on_proximity_to_enemy("knights_alerted", 160);
 ga_ai_bret_04:reinforce_on_message("knights_alerted",90000);
 ga_ai_bret_04:message_on_any_deployed("knights_advance"); 
 ga_ai_bret_04:attack_on_message("knights_advance");
 ga_ai_bret_04:message_on_proximity_to_enemy("knights_engaged",50);
 ga_ai_bret_04:release_on_message("knights_engaged");
 
-ga_ai_bret_04:message_on_proximity_to_enemy("green_knight_alerted", 160, true); -- temp fix to reinforcements not arriving, ignore deployed check. remove last parameter
+ga_ai_bret_04:message_on_proximity_to_enemy("green_knight_alerted", 160);
 ga_ai_bret_05:reinforce_on_message("green_knight_alerted",45000);
 ga_ai_bret_05:message_on_any_deployed("green_knight_advance"); 
 ga_ai_bret_05:attack_on_message("green_knight_advance");

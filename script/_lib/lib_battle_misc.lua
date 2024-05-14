@@ -830,7 +830,7 @@ end;
 --- @p return number Closest distance in m between forces
 --- @p return obj Closest object from first supplied force, a @script_unit or a @battle_unit
 --- @p return obj Closest object from second supplied force, a @script_unit or a @battle_unit
-function distance_between_forces(a, b, standing_only, ignore_deployed_test)
+function distance_between_forces(a, b, standing_only)
 	local closest_distance = 50000;
 	local closest_obj_a = false;
 	local closest_obj_b = false;
@@ -838,7 +838,7 @@ function distance_between_forces(a, b, standing_only, ignore_deployed_test)
 	if is_scriptunits(a) then
 		for i = 1, a:count() do
 			local current_obj = a:item(i);
-			local current_distance, current_closest_obj_b = distance_between_forces_test(current_obj.unit, b, standing_only, ignore_deployed_test)
+			local current_distance, current_closest_obj_b = distance_between_forces_test(current_obj.unit, b, standing_only)
 			
 			if current_distance < closest_distance then
 				closest_distance = current_distance;
@@ -848,7 +848,7 @@ function distance_between_forces(a, b, standing_only, ignore_deployed_test)
 		end;
 		
 	elseif is_scriptunit(a) then
-		closest_distance, closest_obj_b = distance_between_forces_test(a.unit, b, standing_only, ignore_deployed_test);
+		closest_distance, closest_obj_b = distance_between_forces_test(a.unit, b, standing_only);
 		closest_obj_a = a;
 			
 	elseif is_table(a) then
@@ -859,11 +859,11 @@ function distance_between_forces(a, b, standing_only, ignore_deployed_test)
 			local current_distance = 50000;
 			
 			if is_unit(current_obj) then
-				current_distance, current_closest_obj_b = distance_between_forces_test(current_obj, b, standing_only, ignore_deployed_test)
+				current_distance, current_closest_obj_b = distance_between_forces_test(current_obj, b, standing_only)
 			elseif is_scriptunit(current_obj) then
-				current_distance, current_closest_obj_b = distance_between_forces_test(current_obj.unit, b, standing_only, ignore_deployed_test)
+				current_distance, current_closest_obj_b = distance_between_forces_test(current_obj.unit, b, standing_only)
 			else
-				current_distance, current_closest_obj_a, current_closest_obj_b = distance_between_forces(current_obj, b, standing_only, ignore_deployed_test);
+				current_distance, current_closest_obj_a, current_closest_obj_b = distance_between_forces(current_obj, b, standing_only);
 			end;
 			
 			if current_distance < closest_distance then
@@ -878,7 +878,7 @@ function distance_between_forces(a, b, standing_only, ignore_deployed_test)
 			local current_unit = a:item(i);
 			local current_closest_obj_b = false;
 			
-			local current_distance, current_closest_obj_b = distance_between_forces_test(current_unit, b, standing_only, ignore_deployed_test)
+			local current_distance, current_closest_obj_b = distance_between_forces_test(current_unit, b, standing_only)
 			
 			if current_distance < closest_distance then
 				closest_distance = current_distance;
@@ -888,13 +888,13 @@ function distance_between_forces(a, b, standing_only, ignore_deployed_test)
 		end;
 		
 	elseif is_army(a) then
-		closest_distance, closest_obj_a, closest_obj_b = distance_between_forces(a:units(), b, standing_only, ignore_deployed_test);
+		closest_distance, closest_obj_a, closest_obj_b = distance_between_forces(a:units(), b, standing_only);
 		
 		for i = 1, a:num_reinforcement_units() do
 			local r_units = a:get_reinforcement_units(i);
 			
 			if is_units(r_units) then
-				local r_closest_distance, r_closest_obj_a, r_closest_obj_b = distance_between_forces(r_units, b, standing_only, ignore_deployed_test);
+				local r_closest_distance, r_closest_obj_a, r_closest_obj_b = distance_between_forces(r_units, b, standing_only);
 				
 				if r_closest_distance < closest_distance then
 					closest_distance = r_closest_distance;
@@ -906,7 +906,7 @@ function distance_between_forces(a, b, standing_only, ignore_deployed_test)
 	
 	elseif is_armies(a) then
 		for i = 1, a:count() do
-			local current_distance, current_closest_obj_a, current_closest_obj_b = distance_between_forces(a:item(i):units(), b, standing_only, ignore_deployed_test);
+			local current_distance, current_closest_obj_a, current_closest_obj_b = distance_between_forces(a:item(i):units(), b, standing_only);
 			
 			if current_distance < closest_distance then
 				closest_distance = current_distance;
@@ -916,7 +916,7 @@ function distance_between_forces(a, b, standing_only, ignore_deployed_test)
 		end;
 	
 	elseif is_alliance(a) then
-		closest_distance, closest_obj_a, closest_obj_b = distance_between_forces(a:armies(), b, standing_only, ignore_deployed_test);
+		closest_distance, closest_obj_a, closest_obj_b = distance_between_forces(a:armies(), b, standing_only);
 	else
 		script_error("ERROR: distance_between_forces() called but first force " .. tostring(a) .. " is not a recognised unit container")
 	end;
@@ -925,9 +925,9 @@ function distance_between_forces(a, b, standing_only, ignore_deployed_test)
 end;
 
 
-function distance_between_forces_test(unit, obj, standing_only, ignore_deployed_test) -- TODO: remove the ignore_deployed_test parameter once model side is investigated
+function distance_between_forces_test(unit, obj, standing_only)
 	-- do the test if we're not only searching for routing units AND the unit is routing
-	if (unit:is_deployed() or ignore_deployed_test) and (unit:is_valid_target() or unit:is_hidden() and not (standing_only and is_routing_or_dead(unit))) then
+	if unit:is_deployed() and (unit:is_valid_target() or unit:is_hidden() and not (standing_only and is_routing_or_dead(unit))) then
 		local closest_unit, closest_distance, closest_sunit = get_closest_unit(obj, unit:position(), standing_only)
 		
 		if closest_sunit then

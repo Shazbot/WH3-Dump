@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -45,7 +45,7 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextObjectStore"
-					context_object_id="CcoAbilityCollection"/>
+					context_object_id="CcoAbilityCollectionRecord"/>
 				<callback_with_context callback_id="CustomTooltip"/>
 			</callbackwithcontextlist>
 			<states>
@@ -82,8 +82,8 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextList"
-					context_object_id="CcoAbilityCollection"
-					context_function_id="UnitAbilities">
+					context_object_id="CcoAbilityCollectionRecord collection, CcoUnitDetails unit_details"
+					context_function_id="collection.AbilitiesForUnit(unit_details)">
 					<child_m_user_properties>
 						<property
 							name="template_layout"
@@ -119,8 +119,8 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextList"
-					context_object_id="CcoAbilityCollection"
-					context_function_id="Attributes"/>
+					context_object_id="CcoAbilityCollectionRecord collection, CcoUnitDetails unit_details"
+					context_function_id="collection.AttributesForUnit(unit_details)"/>
 				<callback_with_context callback_id="LayoutStallerCallback"/>
 			</callbackwithcontextlist>
 			<states>

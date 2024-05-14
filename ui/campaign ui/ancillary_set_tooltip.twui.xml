@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -11,7 +11,9 @@
 					<dy_description this="2437B64A-1764-4BA8-A548A1A27A2C72C4"/>
 					<ancillary_list this="DF61D283-3E06-4DCF-BE15289BD0F79E13">
 						<dy_header this="D801CF25-7557-4E69-994D54AE30094DBF"/>
-						<template_entry this="D803E506-C796-4AB1-956F341484DB6FF1"/>
+						<template_entry this="D803E506-C796-4AB1-956F341484DB6FF1">
+							<ancillary_icon this="C230E658-E5FB-4DCC-917C281C0565CC31"/>
+						</template_entry>
 					</ancillary_list>
 					<effect_list this="D46D0E81-EAE4-4143-AE2703C1FFE23E99">
 						<dy_effects_header this="218EC6C2-0061-4811-B0E489283157D895"/>
@@ -147,7 +149,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoAncillarySetRecord"
-					context_function_id="RequiredAncillariesList">
+					context_function_id="RequiredAncillariesList.Sort(CategoryContext.SortOrder, true).Sort(CategoryContext.Category != &quot;mount&quot;)">
 					<child_m_user_properties>
 						<property
 							name="hide_if_empty"
@@ -379,16 +381,8 @@
 				<callback_with_context
 					callback_id="ContextObjectStore"
 					context_object_id="CcoAncillaryRecord"/>
-				<callback_with_context
-					callback_id="ContextImageSetter"
-					context_object_id="CcoAncillaryRecord"
-					context_function_id="GetIfElse(CategoryContext.Category == &quot;general&quot;, IconPath, StringReplace( IconPath, &quot;.png&quot;, &quot;_small.png&quot;))"/>
 			</callbackwithcontextlist>
 			<componentimages>
-				<component_image
-					this="0912F7DA-8265-4A5A-A284DB1CEC021333"
-					uniqueguid="0912F7DA-8265-4A5A-A284DB1CEC021333"
-					imagepath="ui/skins/default/equipment_items_weapon_small.png"/>
 				<component_image
 					this="F67D380C-45B1-44BA-A6C3BD67EC959E0E"
 					uniqueguid="F67D380C-45B1-44BA-A6C3BD67EC959E0E"
@@ -402,15 +396,6 @@
 					height="23"
 					uniqueguid="D67D569C-EC27-499C-8D16E2A0EBFB5A69">
 					<imagemetrics>
-						<image
-							this="3A61CF44-38EB-4504-B72416CC4A976440"
-							uniqueguid="3A61CF44-38EB-4504-B72416CC4A976440"
-							componentimage="0912F7DA-8265-4A5A-A284DB1CEC021333"
-							offset="8.00,-2.00"
-							width="24"
-							height="24"
-							canresizeheight="false"
-							canresizewidth="false"/>
 						<image
 							this="1F6CAF37-9B74-4C8C-B50B159D15FF91F7"
 							uniqueguid="1F6CAF37-9B74-4C8C-B50B159D15FF91F7"
@@ -439,17 +424,6 @@
 					width="120"
 					height="23"
 					uniqueguid="BED683A1-A7C3-47D4-A586E446305B70D5">
-					<imagemetrics>
-						<image
-							this="5EEA36F1-8879-4CF5-8B091570254D3A05"
-							uniqueguid="5EEA36F1-8879-4CF5-8B091570254D3A05"
-							componentimage="0912F7DA-8265-4A5A-A284DB1CEC021333"
-							offset="8.00,-2.00"
-							width="24"
-							height="24"
-							canresizeheight="false"
-							canresizewidth="false"/>
-					</imagemetrics>
 					<component_text
 						text="dy_item_name"
 						textxoffset="34.00,6.00"
@@ -467,17 +441,6 @@
 					width="120"
 					height="23"
 					uniqueguid="06D4590C-8A14-440A-9100EF47991A8DEC">
-					<imagemetrics>
-						<image
-							this="6F80BDDA-3A55-427C-941A2EFE2D129E80"
-							uniqueguid="6F80BDDA-3A55-427C-941A2EFE2D129E80"
-							componentimage="0912F7DA-8265-4A5A-A284DB1CEC021333"
-							offset="8.00,-2.00"
-							width="24"
-							height="24"
-							canresizeheight="false"
-							canresizewidth="false"/>
-					</imagemetrics>
 					<component_text
 						text="dy_item_name"
 						textxoffset="34.00,6.00"
@@ -600,5 +563,90 @@
 				</newstate>
 			</states>
 		</dy_effects_header>
+		<ancillary_icon
+			this="C230E658-E5FB-4DCC-917C281C0565CC31"
+			id="ancillary_icon"
+			offset="8.00,-2.00"
+			allowverticalresize="false"
+			docking="Center Left"
+			dock_offset="8.00,-2.00"
+			component_anchor_point="0.00,0.50"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="C230E658-E5FB-4DCC-917C281C0565CC31"
+			currentstate="65613E8E-2FF7-4122-8A5CC42EF4B13E39"
+			defaultstate="65613E8E-2FF7-4122-8A5CC42EF4B13E39">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoAncillaryRecord"
+					context_function_id="GetIfElse(CategoryContext.Category == &quot;general&quot; || CategoryContext.Category == &quot;mount&quot;, IconPath, StringReplace( IconPath, &quot;.png&quot;, &quot;_small.png&quot;))"/>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoAncillaryRecord"
+					context_function_id="GetIfElse(CategoryContext.Category == &quot;mount&quot;, &quot;mount&quot;, &quot;default&quot;)"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="8B543349-19D4-4CCA-80B7F44FB64B2B6D"
+					uniqueguid="8B543349-19D4-4CCA-80B7F44FB64B2B6D"
+					imagepath="ui/skins/default/equipment_items_weapon_small.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="65613E8E-2FF7-4122-8A5CC42EF4B13E39"
+					name="default"
+					width="25"
+					height="23"
+					uniqueguid="65613E8E-2FF7-4122-8A5CC42EF4B13E39">
+					<imagemetrics>
+						<image
+							this="46B8AA9A-AB2B-4BDE-9CBF2506D8471F42"
+							uniqueguid="46B8AA9A-AB2B-4BDE-9CBF2506D8471F42"
+							componentimage="8B543349-19D4-4CCA-80B7F44FB64B2B6D"
+							width="24"
+							height="24"
+							dockpoint="Center"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<component_text
+						textxoffset="34.00,6.00"
+						textyoffset="4.00,6.00"
+						texthbehaviour="Never split"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"
+						font_colour_override_preset_key="green"/>
+				</default>
+				<mount
+					this="5B3467E8-A354-4CF0-A652A36B089F27A0"
+					name="mount"
+					width="25"
+					height="23"
+					uniqueguid="5B3467E8-A354-4CF0-A652A36B089F27A0">
+					<imagemetrics>
+						<image
+							this="2C1F6648-3CE2-4315-A3A0B52E04F52DF9"
+							uniqueguid="2C1F6648-3CE2-4315-A3A0B52E04F52DF9"
+							componentimage="8B543349-19D4-4CCA-80B7F44FB64B2B6D"
+							offset="-2.00,-3.00"
+							width="30"
+							height="30"
+							dockpoint="Center"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<component_text
+						textxoffset="34.00,6.00"
+						textyoffset="4.00,6.00"
+						texthbehaviour="Never split"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+				</mount>
+			</states>
+		</ancillary_icon>
 	</components>
 </layout>

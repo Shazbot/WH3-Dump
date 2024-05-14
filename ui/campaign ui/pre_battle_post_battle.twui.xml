@@ -9424,7 +9424,7 @@
 					name="not_ready"
 					width="26"
 					height="26"
-					tooltip="[ph] Not ended turn"
+					tooltip="Not ended turn"
 					tooltiplabel="icon_ready_not_ended_turn_Tooltip_18b7d4d4"
 					interactive="true"
 					disabled="true"
@@ -9449,7 +9449,7 @@
 					name="ready_to_end_turn"
 					width="26"
 					height="26"
-					tooltip="[ph] Ended turn"
+					tooltip="Ended turn"
 					tooltiplabel="icon_ready_ended_turn_Tooltip_ab706d4b"
 					interactive="true"
 					disabled="true"
@@ -11194,7 +11194,7 @@
 				<callback_with_context
 					callback_id="List"
 					context_object_id="CcoCampaignCharacter"
-					context_function_id="Join(PlayersFaction.CookingSystem.StoredCookingDishList, PlayersFaction.CookingSystem.DishesAppliedToAllUnitsList).Filter(CookingDishRecordContext.EnemyUnitEffectsContext.Effects.IsEmpty == this.IsPlayerCharacter).Sort(CookingDishRecordContext.Index).Distinct"/>
+					context_function_id="Join(PlayersFaction.CookingSystem.StoredCookingDishList, PlayersFaction.CookingSystem.DishesAppliedToAllUnitsList).Filter(CookingDishRecordContext.AlliedUnitEffectsContext.Effects.IsEmpty == this.FactionContext.IsEnemy).Sort(CookingDishRecordContext.Index).Distinct"/>
 				<callback_with_context
 					callback_id="ContextCommandGiverOnCreate"
 					context_function_id="self.ChildList.ForEach(DoIf(ChildIndex != 0, Trash))"/>
@@ -11635,7 +11635,7 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoCampaignCharacter"
-					context_function_id="GetIfElse(IsPlayerCharacter, Loc(&quot;pre_battle_dish_ally_button&quot;), Loc(&quot;pre_battle_dish_enemy_button&quot;))"/>
+					context_function_id="GetIfElse(FactionContext.IsEnemy == false, Loc(&quot;pre_battle_dish_ally_button&quot;), Loc(&quot;pre_battle_dish_enemy_button&quot;))"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property

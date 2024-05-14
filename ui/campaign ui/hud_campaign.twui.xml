@@ -33617,6 +33617,9 @@
 						<property
 							name="event2"
 							value="CompassCooldownChanged"/>
+						<property
+							name="event3"
+							value="CompassActionTriggered"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
@@ -36082,8 +36085,7 @@
 					context_function_id="OpenWarCoordinationPanel"/>
 				<callback_with_context
 					callback_id="ContextInactiveStateSetter"
-					context_object_id="CcoCampaignFaction"
-					context_function_id="FactionInteractionList.IsEmpty == false &amp;&amp; IsLocalPlayersTurn">
+					context_function_id="PlayersFaction.FactionInteractionList.IsEmpty == false &amp;&amp; IsLocalPlayersTurn &amp;&amp; InPendingBattle == false">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -36094,9 +36096,11 @@
 						<property
 							name="event2"
 							value="CampaignTurnStart"/>
+						<property
+							name="event3"
+							value="CampaignBattleFullyCompleted"/>
 					</child_m_user_properties>
 				</callback_with_context>
-				<callback_with_context callback_id="ContextInitPlayerFaction"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -38196,6 +38200,9 @@
 						<property
 							name="event2"
 							value="CompassCooldownChanged"/>
+						<property
+							name="event3"
+							value="CompassActionTriggered"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context

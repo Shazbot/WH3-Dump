@@ -3261,11 +3261,11 @@
 					context_object_id="CcoUnitAbilityDetails"/>
 				<callback_with_context
 					callback_id="AbilityEffectIcon"
-					context_object_id="CcoAbilityCollection"/>
+					context_object_id="CcoAbilityCollectionRecord"/>
 				<callback_with_context
 					callback_id="ContextImageSetter"
-					context_object_id="CcoAbilityCollection"
-					context_function_id="IconPath"/>
+					context_object_id="CcoAbilityCollectionRecord collection, CcoUnitDetails unit_details"
+					context_function_id="collection.IconPathForUnit(unit_details)"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -4857,7 +4857,7 @@
 				<callback_with_context
 					callback_id="ContextFillBar"
 					context_object_id="CcoUnitDetails"
-					context_function_id="GetIfElse(IsKnownHp, HitPointsPercent, 100)">
+					context_function_id="GetIfElse(IsContextValid(BattleRoot), GetIfElse(IsKnownHp, HitPointsPercent, 100), 100)">
 					<child_m_user_properties>
 						<property
 							name="update_constant"
@@ -6450,6 +6450,13 @@
 				<callback_with_context
 					callback_id="AbilityEffectIcon"
 					context_object_id="CcoUnitAbilityDetails"/>
+				<callback_with_context
+					callback_id="AbilityEffectIcon"
+					context_object_id="CcoAbilityCollectionRecord"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoUnitAbilityDetails"
+					context_function_id="AbilityCollectionContext"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -8157,9 +8164,9 @@
 			defaultstate="E32FF10F-1CD0-41A2-A157AD8468C1E6A6">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextStateSetter"
-					context_object_id="CcoString"
-					context_function_id="Value"/>
+					callback_id="ContextCommandGiverOnContextSet"
+					context_object_id="CcoUnitDetails unit_details, CcoString category_str"
+					context_function_id="Do(self.SetState(category_str.Value), self.SetVisible(unit_details.AbilityDetailsList.Any( (ability) =&gt;{ ability.CategoryStateName == category_str.Value &amp;&amp; (IsContextValid(ability.AbilityCollectionContext) == false || ability == ability.AbilityCollectionContext.PrimaryAbilityForUnit(unit_details)) } )))"/>
 			</callbackwithcontextlist>
 			<states>
 				<abilities
@@ -8288,8 +8295,8 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextList"
-					context_object_id="CcoUnitDetails"
-					context_function_id="AbilityDetailsList.Filter(CategoryStateName == self.ParentContext.CurrentState)">
+					context_object_id="CcoUnitDetails unit_details"
+					context_function_id="unit_details.AbilityDetailsList.Filter( (ability) =&gt;{ ability.CategoryStateName == self.ParentContext.CurrentState &amp;&amp; (IsContextValid(ability.AbilityCollectionContext) == false || ability == ability.AbilityCollectionContext.PrimaryAbilityForUnit(unit_details)) } )">
 					<child_m_user_properties>
 						<property
 							name="hide_if_empty"

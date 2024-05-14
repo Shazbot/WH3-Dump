@@ -57,6 +57,11 @@ greater_daemons = {
 			dilemma = "wh3_dlc20_dilemma_daemon_prince_ascension",
 			incident = "wh3_dlc20_incident_daemon_prince_ascension"
 		},
+		wh3_dlc25_chs_lord_mnur = {
+			agent = "wh3_dlc20_chs_daemon_prince_nurgle",
+			dilemma = "wh3_dlc20_dilemma_daemon_prince_ascension",
+			incident = "wh3_dlc20_incident_daemon_prince_ascension"
+		},
 		wh3_dlc25_chs_lord_nurgle_mnur = {
 			agent = "wh3_dlc20_chs_daemon_prince_nurgle",
 			dilemma = "wh3_dlc20_dilemma_daemon_prince_ascension",
