@@ -173,7 +173,7 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 				-- regular land battle
 				local enemy_cqi = caravans:attach_battle_to_dilemma(
 					dilemma_name,
-					caravan,
+					caravan_handle,
 					attacking_force,
 					false,
 					target_faction,
@@ -204,7 +204,7 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 				cm:launch_custom_dilemma_from_builder(dilemma_builder, caravan_handle:caravan_force():faction());
 			else
 				-- ambush battle
-				caravans:spawn_caravan_battle_force(caravan, attacking_force, target_region, true, true);
+				caravans:spawn_caravan_battle_force(caravan_handle, attacking_force, target_region, true, true);
 			end;
 		end,
 		true},

@@ -1781,7 +1781,8 @@ function character_unlocking:setup_mission_completed_spawn_hero_listener(charact
 			)
 		end,
 		function(context)
-			local faction_name = context:faction():name()
+			local faction = context:faction()
+			local faction_name = faction:name()
 			if not character_info.alternate_grant_condition then
 				self:spawn_hero(faction_name, character, faction:faction_leader():command_queue_index())
 				self:cancel_missions_for_other_players(faction_name, character, character_mission_success)
@@ -1806,7 +1807,8 @@ function character_unlocking:setup_ritual_completed_spawn_hero_listener(characte
 			)
 		end,
 		function(context)
-			local name = context:performing_faction():name()
+			local faction = context:performing_faction()
+			local name = faction:name()
 			if not character_info.alternate_grant_condition then
 				self:spawn_hero(name, character, faction:faction_leader():command_queue_index())
 

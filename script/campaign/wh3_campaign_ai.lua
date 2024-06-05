@@ -210,7 +210,7 @@ function campaign_ai_script:setup_listeners()
 		"AINearbyDiplomaticContact",
 		"FactionTurnStart",
 		function(context)
-			faction = context:faction()
+			local faction = context:faction()
 			return not faction:is_rebel() and not faction:is_human()
 		end,
 		function(context)

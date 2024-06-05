@@ -90,7 +90,7 @@ function nurgle_plagues:initialise()
 					end
 
 					if faction:is_human() then
-						cm:override_ui(self.disable_plagues_key, true)
+						self:toggle_plagues_button(faction, self.plague_button_unlock[faction:name()], true, false)
 					end
 					
 					common.set_context_value("random_plague_component_list_" .. faction_name, faction_info.current_symptoms_list)
@@ -117,7 +117,12 @@ function nurgle_plagues:initialise()
 					common.set_context_value("random_plague_component_list_" .. faction_name, faction_info.current_symptoms_list)
 					common.set_context_value("random_plague_creation_count_" .. faction_name, faction_info.plague_creation_counter)
 					common.set_context_value("unlock_plague_button_" .. faction_name, unlock_info.infections_gained)
-				end				
+
+					-- ensure the plague button is unlocked
+					if faction:is_human() and unlock_info.infections_gained >= self.pr_required_to_unlock then
+						self:toggle_plagues_button(faction, unlock_info, false, false)
+					end
+				end
 			end
 		end
 	end
@@ -151,7 +156,7 @@ function nurgle_plagues:plague_listeners()
 		end,
 		function(context)
 			local all_unlocked = true
-			local component_list = faction:plagues():plague_component_list()	
+			local component_list = context:faction():plagues():plague_component_list()
 			--loop through all components to see if any are locked
 			for i = 0, component_list:num_items() -1 do
 				local symptom = component_list:item_at(i)
@@ -338,7 +343,7 @@ function nurgle_plagues:plague_listeners()
 				end
 			end
 			if unlock_info.infections_gained >= self.pr_required_to_unlock then
-				self:unlock_plagues_button(faction, unlock_info)				
+				self:toggle_plagues_button(faction, unlock_info, false, true)				
 			end
 			common.set_context_value("unlock_plague_button_" .. faction:name(), unlock_info.infections_gained)
 		end,
@@ -372,7 +377,7 @@ function nurgle_plagues:plague_listeners()
 				unlock_info.infections_gained = unlock_info.infections_gained + amount
 			end			
 			if unlock_info.infections_gained >= self.pr_required_to_unlock then
-				self:unlock_plagues_button(faction, unlock_info)				
+				self:toggle_plagues_button(faction, unlock_info, false, true)				
 			end
 			common.set_context_value("unlock_plague_button_" .. faction:name(), unlock_info.infections_gained)
 		end,
@@ -576,13 +581,16 @@ function nurgle_plagues:copy_symptom_table()
 	return s_table
 end
 
-function nurgle_plagues:unlock_plagues_button(faction, unlock_info)
+function nurgle_plagues:toggle_plagues_button(faction, unlock_info, should_lock, show_incident)
 	local local_faction_cqi = cm:get_local_faction(true):command_queue_index()
 	if local_faction_cqi == faction:command_queue_index() then
-		cm:override_ui(self.disable_plagues_key, false)	
+		cm:override_ui(self.disable_plagues_key, should_lock)
 	end
-	unlock_info.button_locked = false
-	cm:trigger_incident(faction:name(), self.plagues_unlocked_incident, true, true)
+	unlock_info.button_locked = should_lock
+
+	if show_incident then
+		cm:trigger_incident(faction:name(), self.plagues_unlocked_incident, true, true)
+	end
 end
 
 

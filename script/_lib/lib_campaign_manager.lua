@@ -4344,7 +4344,7 @@ end;
 --- @p @string faction key, The key of the faction being checked
 --- @r @boolean <code>true</code> if the faction was player-controlled and owns the DLC, or if the faction was AI, otherwise <code>false</code>. 
 function campaign_manager:faction_has_dlc_or_is_ai(dlc_key, faction_key)
-	faction = self:get_faction(faction_key)
+	local faction = self:get_faction(faction_key)
 	if not faction then return false end;
 	
 	if not faction:is_human() then

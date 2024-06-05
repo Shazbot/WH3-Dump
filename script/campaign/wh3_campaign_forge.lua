@@ -34,7 +34,7 @@ function ancillary_item_forge:initialise()
 			lock_factions = model:lookup_factions_from_faction_set(v)
 			for _, faction in model_pairs(lock_factions) do
 				if not faction:is_null_interface() then
-					if faction:is_human() then
+					if faction:is_human() and cm:get_local_faction(true) == faction then
 						-- lock the Forge button
 						cm:override_ui(self.disable_forge_key, true)
 						break
