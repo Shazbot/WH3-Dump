@@ -228,16 +228,19 @@ function nurgle_plagues:plague_listeners()
 		"CharacterRankUp",
 		function(context)
 			local character = context:character()
-			return character:character_subtype(self.kugath_subtype_key) and character:rank() % 10 == 0 and character:faction():name() == self.kugath_faction
+			if character:character_subtype(self.kugath_subtype_key) and character:faction():name() == self.kugath_faction then
+				local ranks_gained = context:ranks_gained()
+				local rank = character:rank()
+				return math.floor(rank / 10) ~= math.floor((rank - ranks_gained) / 10)
+			end
 		end,
-		function (context)
+		function()
 			local pfi = self.plague_faction_info	
 			local faction_info = pfi[self.kugath_faction]
 			faction_info.max_blessed_symptoms = faction_info.max_blessed_symptoms + 1
 		end,
 		true
 	)
-
 
 	core:add_listener(
 		"Plagues_TrackBlessedSymptom_Region",
@@ -280,12 +283,24 @@ function nurgle_plagues:plague_listeners()
 	)
 
 	core:add_listener(
+		"Plagues_TrackPendingBattle",
+		"PendingBattle",
+		function()
+			return cm:pending_battle_cache_human_is_involved() and cm:pending_battle_cache_faction_is_involved(self.epidemius_faction)
+		end,
+		function()
+			self:count_plagues_on_non_nurgle_targets()	
+		end,
+		true
+	)
+
+	core:add_listener(
 		"Plagues_TrackBattleCompleted",
 		"BattleCompleted",
 		function()
-			return cm:model():pending_battle():has_been_fought() and cm:pending_battle_cache_human_is_involved()
+			return cm:model():pending_battle():has_been_fought() and cm:pending_battle_cache_human_is_involved() and cm:pending_battle_cache_faction_is_involved(self.epidemius_faction)
 		end,
-		function (context)
+		function()
 			self:count_plagues_on_non_nurgle_targets()	
 		end,
 		true

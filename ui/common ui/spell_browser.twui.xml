@@ -3183,7 +3183,7 @@
 				<callback_with_context
 					callback_id="ContextCommandGiverOnContextSet"
 					context_object_id="CcoRTSelectedUnit selected_unit, CcoUnitsCustomBattlePermissionRecord this_unit_perms"
-					context_function_id="DoIf(selected_unit.Key == this_unit_perms.UnitContext.Key, Do(self.ParentContext(&quot;units_listview&quot;).ScrollToComponent(self, false), self.ParentContext(&quot;list_box&quot;).SelectContext(this_unit_perms)))"/>
+					context_function_id="DoIf(selected_unit.Key == this_unit_perms.UnitContext.UnitLandRecordContext.Key, Do(self.ParentContext(&quot;units_listview&quot;).ScrollToComponent(self, false), self.ParentContext(&quot;list_box&quot;).SelectContext(this_unit_perms)))"/>
 				<callback_with_context
 					callback_id="ContextUnitCardImageSetter"
 					context_object_id="CcoUnitsCustomBattlePermissionRecord"/>
@@ -4195,7 +4195,7 @@
 			component_anchor_point="0.50,1.00"
 			tooltipslocalised="true"
 			uniqueguid="C7B21422-199D-4141-B17F788ACD4F3A61"
-			currentstate="8922B821-7D0A-46C9-A29234BB1B00E4FE"
+			currentstate="FCE4658D-AA46-4C4B-90BCC6A24AAF7295"
 			defaultstate="FCE4658D-AA46-4C4B-90BCC6A24AAF7295">
 			<callbackwithcontextlist>
 				<callback_with_context
@@ -4639,7 +4639,6 @@
 			id="units_tab_parent"
 			offset="0.00,125.00"
 			allowhorizontalresize="false"
-			visible="false"
 			docking="Top Center"
 			dock_offset="0.00,125.00"
 			component_anchor_point="0.50,0.00"
@@ -4714,6 +4713,7 @@
 			id="spells_tab_parent"
 			offset="18.00,125.00"
 			allowhorizontalresize="false"
+			visible="false"
 			docking="Top Center"
 			dock_offset="0.00,125.00"
 			component_anchor_point="0.50,0.00"
@@ -5022,7 +5022,7 @@
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoMainUnitRecord"
-					context_function_id="GetIf(IsValidContext, CcoRTSelectedUnit(Key: this.Key))"/>
+					context_function_id="GetIf(IsValidContext, CcoRTSelectedUnit(Key: this.UnitLandRecordContext.Key))"/>
 			</callbackwithcontextlist>
 			<states>
 				<default

@@ -11035,6 +11035,9 @@
 							value="PooledResourceTransaction"/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_function_id="self.ChildContext(&quot;alert_icon&quot;).SetVisible(false)"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -32239,7 +32242,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoStaticObject"
-					context_function_id="CampaignRoot.IsCinematicModeEnabled == false &amp;&amp; IsPanelOpen(&quot;pre_battle_screen&quot;) == false &amp;&amp; IsPanelOpen(&quot;post_battle_screen&quot;) == false &amp;&amp; IsScriptLockActive(&quot;hide_3d_ui&quot;) == false &amp;&amp; IsPanelOpen(&quot;military_convoys&quot;) == false">
+					context_function_id="CampaignRoot.IsCinematicModeEnabled == false &amp;&amp; InPendingBattle == false &amp;&amp; IsScriptLockActive(&quot;hide_3d_ui&quot;) == false &amp;&amp; IsPanelOpen(&quot;military_convoys&quot;) == false">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -35654,19 +35657,17 @@
 			defaultstate="12EF3287-AB73-4372-868AFD255360F279">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoCampaignFaction"
-					context_function_id="PlaguesCompositionSystemContext().HasAvailablePlagueComponents() &amp;&amp; AvailableRitualList(&quot;NURGLE_RITUAL&quot;).Any(CanAfford) &amp;&amp; AvailableRitualList(&quot;NURGLE_RITUAL&quot;).All( IsOnCooldown == false) &amp;&amp; CampaignRoot.TurnNumber &gt;= CampaignVariableIntValue(&quot;ui_plagues_feature_unlock_turn&quot;)">
+					callback_id="ContextCommandEvent"
+					context_function_id="DoIf(IsScriptLockActive(&quot;disable_nurgle_plagues_button&quot;) == false, self.SetVisible(true))">
 					<child_m_user_properties>
 						<property
 							name="event0"
-							value="PooledResourceThresholdSetEvaluated"/>
+							value="CampaignScriptLockChanged_disable_nurgle_plagues_button"/>
 						<property
-							name="event1"
-							value="PooledResourceTransaction"/>
+							name="update_when_invisible"
+							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
-				<callback_with_context callback_id="ContextInitPlayerFaction"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property

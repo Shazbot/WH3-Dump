@@ -558,11 +558,14 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoBattleUnit"
-					context_function_id="(pcnt = RoundFloat(HealingPower * 100), pcnt_str = Format(&quot;%d%%&quot;, pcnt)) =&gt; { GetIfElse(pcnt &lt; 100, Format(&quot;[[col:red]]%s[[/col]]&quot;, pcnt_str), GetIfElse(pcnt != 100, Format(&quot;[[col:green]]%s[[/col]]&quot;, pcnt_str), pcnt_str)) }">
+					context_function_id="(pcnt = RoundFloat(HealingPower * 100), pcnt_str = Format(&quot;%d%&quot;, pcnt)) =&gt; { GetIfElse(pcnt &lt; 100, Format(&quot;[[col:red]]%s[[/col]]&quot;, pcnt_str), GetIfElse(pcnt != 100, Format(&quot;[[col:green]]%s[[/col]]&quot;, pcnt_str), pcnt_str)) }">
 					<child_m_user_properties>
 						<property
 							name="suppress_localise_asserts"
 							value=""/>
+						<property
+							name="update_constant"
+							value="50"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbackwithcontextlist>
@@ -689,7 +692,7 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoBattleUnit"
-					context_function_id="Format(&quot;%.1f%&quot;, HealthReplenishRateBase * 100)">
+					context_function_id="Format(&quot;%.2f%&quot;, HealthReplenishRateBase * 100)">
 					<child_m_user_properties>
 						<property
 							name="update_constant"
@@ -768,9 +771,15 @@
 			defaultstate="1BC3B4A4-9EE4-4326-B68596CE648BC364">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="#ContextTooltipSetter"
-					context_object_id="CcoUnitDetails"
-					context_function_id="HealthTooltip"/>
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoBattleUnit"
+					context_function_id="BarrierHpPercent &lt; 1.0 &amp;&amp; IsBarrierCharging">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value="50"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -805,11 +814,16 @@
 			uniqueguid="DC11AA62-A6F0-4F0B-A9D51202D5662322"
 			currentstate="318D9209-710C-4C4B-B9C4DD29EBCA9412"
 			defaultstate="318D9209-710C-4C4B-B9C4DD29EBCA9412">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_function_id="Loc(&quot;tooltip_healing_power&quot;)"/>
+			</callbackwithcontextlist>
 			<states>
 				<newstate
 					this="318D9209-710C-4C4B-B9C4DD29EBCA9412"
 					name="NewState"
-					width="145"
+					width="167"
 					height="26"
 					interactive="true"
 					disabled="true"
@@ -877,13 +891,9 @@
 			defaultstate="E55E3612-D2B3-4FFF-A016B546E8D70EAD">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="#ContextTooltipSetter"
-					context_object_id="CcoUnitDetails"
-					context_function_id="HealthTooltip"/>
-				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBattleUnit"
-					context_function_id="HealthReplenishRateBase &gt; 0.0">
+					context_function_id="HealthReplenishRateBase &gt; 0.0 &amp;&amp; HealthPercent &lt; 1.0">
 					<child_m_user_properties>
 						<property
 							name="update_constant"
@@ -1111,7 +1121,6 @@
 			this="22ED4F72-F1E7-4059-92A8DE17A29C3EE1"
 			id="icon_tooltip_available"
 			offset="145.00,0.00"
-			visible="false"
 			tooltipslocalised="true"
 			uniqueguid="22ED4F72-F1E7-4059-92A8DE17A29C3EE1"
 			currentstate="643C508D-B2D4-42A0-921F5805369A0C9E"

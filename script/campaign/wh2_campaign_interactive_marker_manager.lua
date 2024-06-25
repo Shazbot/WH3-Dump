@@ -386,7 +386,7 @@ function marker:set_up_interaction_listener()
 			end
 
 			if self.despawn_settings.should_despawn == true and self.despawn_settings.dilemma_choices == nil then 
-				self:despawn(context:area_key(),context, true)
+				self:despawn(context:area_key(), true)
 			end
 		end,
 		true

@@ -103,6 +103,7 @@ character_unlocking.character_list = {
 	"aekold",
 	"saytang",
 	"leysa",
+	"karanak",
 	"gotrek_and_felix",
 	"garagrim",
 	"theodore"
@@ -719,6 +720,73 @@ character_unlocking.character_data = {
 		},
 		trigger_dilemma_key = "wh3_dlc24_ksl_golden_knight_choice",
 		alt_reward_dilemma_triggered = false
+	},
+	karanak = {
+		-- Khorne, Warriors of Chaos & Daemon Prince players will get the chance to unlock Karanak once their faction leader reaches rank 16
+		-- If there are no human WoC, KHO or DAE players the strongest AI faction will get Karanak after 25 turns
+		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
+		ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.turn,
+		unlock_rank = 16,
+		ai_unlock_turn = 25,
+		has_spawned = false,
+		name = "karanak",
+		subtype = "wh3_pro12_kho_cha_karanak",
+		require_dlc = {"TW_WH3_PRO12_KARANAK"},
+		override_allowed_factions = {
+			main_warhammer = {
+				"wh3_dlc20_chs_valkia",
+				"wh3_main_kho_exiles_of_khorne",
+				"wh3_main_dae_daemon_prince",
+				"wh3_dlc20_chs_kholek",
+				"wh_main_chs_chaos",
+				"wh3_main_chs_shadow_legion"
+			},
+			wh3_main_chaos = {
+				"wh3_dlc20_chs_valkia",
+				"wh3_main_kho_exiles_of_khorne",
+				"wh3_main_dae_daemon_prince",
+			}
+		},
+		priority_ai_faction = "wh3_main_kho_exiles_of_khorne",	-- If no player is playing a faction that can own karanak, he goes to skarbrand to reduce legendary hero overload on AI archaon
+		factions_involved = {},
+		mission_keys = {
+			wh3_dlc20_chs_valkia = {
+				["main_warhammer"] = "wh3_pro12_mis_ie_chs_karanak_unlock_01",
+				["wh3_main_chaos"] = "wh3_pro12_mis_chs_karanak_unlock_01"
+			},
+			wh3_main_kho_exiles_of_khorne = {
+				["main_warhammer"] = "wh3_pro12_mis_ie_kho_karanak_unlock_01",
+				["wh3_main_chaos"] = "wh3_pro12_mis_kho_karanak_unlock_01"
+			},
+			wh3_main_dae_daemon_prince = {
+				["main_warhammer"] = "wh3_pro12_mis_ie_dae_karanak_unlock_01",
+				["wh3_main_chaos"] = "wh3_pro12_mis_dae_karanak_unlock_01"
+			},
+			wh3_dlc20_chs_kholek = {
+				["main_warhammer"] = "wh3_pro12_mis_ie_chs_karanak_unlock_01",
+			},
+			wh_main_chs_chaos = {
+				["main_warhammer"] = "wh3_pro12_mis_ie_chs_karanak_unlock_01",
+			},
+			wh3_main_chs_shadow_legion = {
+				["main_warhammer"] = "wh3_pro12_mis_ie_chs_karanak_unlock_01",
+			},
+		},
+		ancillaries = {
+			"wh3_pro12_anc_talisman_brass_collar_of_bloody_vengeance",
+		},
+		mission_chain_keys = {
+			main_warhammer = {
+				"wh3_pro12_mis_ie_chs_karanak_unlock_01",
+				"wh3_pro12_mis_ie_dae_karanak_unlock_01",
+				"wh3_pro12_mis_ie_kho_karanak_unlock_01"
+			},
+			wh3_main_chaos = {
+				"wh3_pro12_mis_chs_karanak_unlock_01",
+				"wh3_pro12_mis_dae_karanak_unlock_01",
+				"wh3_pro12_mis_kho_karanak_unlock_01"
+			}
+		},
 	},
 	gotrek_and_felix = {
 		-- Empire, Bretonnia, Dwarfs, Kislev and Cathay Players will get a mission to unlock Gotrek and Felix after reaching rank 15
@@ -1508,7 +1576,7 @@ function character_unlocking:unique_agent_listener(context, faction, character_i
 			)
 
 			-- Move camera to newly spawned character position
-			if context:unique_agent_details():faction():is_human() and faction_name == cm:get_local_faction_name(true) then
+			if context:unique_agent_details():faction():is_human() and faction:name() == cm:get_local_faction_name(true) then
 				cm:callback(
 					function()
 						if not cm:model():pending_battle():is_active() then

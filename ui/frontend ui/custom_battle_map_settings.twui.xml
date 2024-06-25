@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -54,10 +54,11 @@
 				</map_listview>
 				<map_details_parent this="D21752E6-89AA-46A8-93E47BEC4EC8A9CC">
 					<map_parent this="4C0E80F5-C107-4A59-9653471640D526FD">
-						<map_clip this="352742E5-F2EC-4DC1-A1F3199A93E6245C">
-							<map_image this="BC16CD2A-26FF-4A0E-91E7A4A379DAC337"/>
-						</map_clip>
-						<label_map_name this="A6E2A859-B2A1-4A32-ADDA8A2FBD7E3EF2"/>
+						<map_image this="BC16CD2A-26FF-4A0E-91E7A4A379DAC337"/>
+						<name_holder this="1CDA2109-73FA-482B-9E17AEB9902399F0">
+							<label_map_name this="A6E2A859-B2A1-4A32-ADDA8A2FBD7E3EF2"/>
+							<label_map_author this="47E026D5-C3D1-4638-90C81A6532FAB838"/>
+						</name_holder>
 					</map_parent>
 					<map_preview this="B3BB6B54-E257-47E7-93BE99BF75B6B9B6">
 						<icon_refreshing_map this="FD690120-33F1-4511-9B263C0EE335E020"/>
@@ -192,6 +193,9 @@
 						<checkbox_split_funds_mode this="6C7C562B-86EB-41A4-BC16F0FB9A54EB1C">
 							<label_realism_mode this="A4BD6F65-5412-4D7B-BE9CD4168C1B144B"/>
 						</checkbox_split_funds_mode>
+						<checkbox_allow_multi_lords this="6E67C48F-9E2E-48EB-BC54E267E6C7DF76">
+							<label_multi_lords this="C6ADDB25-81A1-46DD-AA0704CE171B7800"/>
+						</checkbox_allow_multi_lords>
 					</checkbox_parent>
 				</settings_parent>
 			</custom_battle_map_settings>
@@ -493,6 +497,147 @@
 				<element value="ui/skins/default/button_square_togle_active.png"/>
 			</override_images>
 		</button_random_map>
+		<checkbox_allow_multi_lords
+			this="6E67C48F-9E2E-48EB-BC54E267E6C7DF76"
+			id="checkbox_allow_multi_lords"
+			template_id="checkbox_toggle"
+			part_of_template="true"
+			uniqueguid_in_template="7F83FB2C-D99A-49C3-9E182FC5C1CDFF35"
+			uniqueguid="6E67C48F-9E2E-48EB-BC54E267E6C7DF76"
+			dimensions="34.00,32.00"
+			sound_category="UI_GBL_TMP_CheckBox">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="FDE8F5F2-2E43-4051-A4FBA5F910C1EF69"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="A5E9A4A4-B4B8-4F81-A28814ECBAA177CF"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="5D0BEF62-F69E-4EAA-A9A548FD424AFC9C"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="641FFC3A-EEB1-4CCA-91527B5556918DDF"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="7AB2678B-CC08-41CE-9404DFFBBF4DCEDC"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="1B7B0A93-0422-4992-894D81413FB0EE7C"/>
+				<state_uniqueguid
+					name="selected_down"
+					uniqueguid="FB653F3B-2D3B-42A6-8857A626CCD083C4"/>
+				<state_uniqueguid
+					name="selected_down_off"
+					uniqueguid="E9236F8D-6E63-4117-9772673A98B076DE"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="4826E948-3CC6-495D-919DB3C4FAB7F381"/>
+				<state_uniqueguid
+					name="selected_inactive"
+					uniqueguid="6C0CC285-15F3-4741-B42F4009D47946C4"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_active.png"
+					uniqueguid="0E30524B-4868-427C-85E24EAE1B65CD66"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_hover.png"
+					uniqueguid="F5707C64-B87F-4D02-8EE63EFE293729B6"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_selected.png"
+					uniqueguid="AB518462-4060-4BAB-9A030DB23FEAA586"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_selected_hover.png"
+					uniqueguid="99D83307-4883-40AE-A04EF87E319B24E1"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoCustomBattleSettings"
+					context_function_id="ToggleMultipleLords"/>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoCustomBattleSettings">
+					<child_m_user_properties>
+						<property
+							name="0.selected_inactive"
+							value="CanChangeSettings == false &amp;&amp; IsMultipleLordsEnabled"/>
+						<property
+							name="1.inactive"
+							value="CanChangeSettings == false &amp;&amp; IsMultipleLordsEnabled == false"/>
+						<property
+							name="2.selected"
+							value="IsMultipleLordsEnabled"/>
+						<property
+							name="event0"
+							value="CustomBattleOnSettingChangedMultipleLordsEnabled"/>
+						<property
+							name="event1"
+							value="CustomBattleOnHostMigrated"/>
+						<property
+							name="event2"
+							value="CustomBattleOnSettingChangedBattleType"/>
+						<property
+							name="fallback_state"
+							value="active"/>
+						<property
+							name="handle_button_states"
+							value=""/>
+						<property
+							name="ordered_states"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ScriptTag"
+					context_function_id="&quot;fe_custom_battle_multiple_lords&quot;"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCustomBattleLobby"
+					context_function_id="IsMatchmadeBattle == false"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/checkbox_active.png"/>
+				<element value="ui/skins/default/checkbox_hover.png"/>
+				<element value="ui/skins/default/checkbox_selected.png"/>
+				<element value="ui/skins/default/checkbox_selected_hover.png"/>
+			</override_images>
+		</checkbox_allow_multi_lords>
 		<checkbox_large_armies
 			this="802ED4FB-AE52-4569-A0C1CDD7954FE334"
 			id="checkbox_large_armies"
@@ -1993,6 +2138,157 @@
 				<element value="ui/skins/default/button_dropdown_underlay.png"/>
 			</override_images>
 		</dropdown_settlement_level>
+		<dropdown_ticket_limit
+			this="366F26BB-9957-4558-B9A46B99DD0E42FE"
+			id="dropdown_ticket_limit"
+			template_id="dropdown_context"
+			part_of_template="true"
+			uniqueguid_in_template="D621BD9D-AFB2-475A-AF8022E2B5FDE4F7"
+			uniqueguid="366F26BB-9957-4558-B9A46B99DD0E42FE"
+			dimensions="230.00,34.00"
+			sound_category="UI_GBL_TMP_DropDown">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="9D2D4C45-1F33-445D-A9CD3CBB85644A41"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="F1EC7FAE-C9C4-452E-B0CDADF5B03508E4"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="71F9908D-AAFD-4382-B5EF4BB01835E94B"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="E6A7B77B-AF27-4FFC-B2EF2DAAFD58B8AB"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="8382E5A3-3C09-41F5-AE63A6BAD0A7C0E0"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="4BFC0119-A4D0-4461-B5606CEAE7FE6252"/>
+				<state_uniqueguid
+					name="selected_down"
+					uniqueguid="83C8BB4F-3393-42AA-A3CE32BAA0A36AFF"/>
+				<state_uniqueguid
+					name="selected_down_off"
+					uniqueguid="D11E9EBB-2009-4385-8776A067968AD1AD"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="D10ED0EA-B1BD-42DF-A7C3426A82919671"/>
+				<state_uniqueguid
+					name="selected_inactive"
+					uniqueguid="0AF48B06-15F9-43A1-BE72CF9ECC8D74FF"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_dropdown_selected_inactive.png"
+					uniqueguid="C313B42A-B09E-41A3-815D5E7755BACCDC"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_dropdown_pressed.png"
+					uniqueguid="75F0A372-E957-4EA3-8D7BBC0EA82ECD76"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_dropdown_selected_hover.png"
+					uniqueguid="C2D10050-640F-4A3C-A3A4EFD5982AEBAC"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_dropdown_hover.png"
+					uniqueguid="C149961D-5181-421E-9C8E2BA5947D2FB5"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_dropdown_active.png"
+					uniqueguid="D4BBC619-2C1B-4E7C-BB49918E6521F1FA"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_dropdown_inactive.png"
+					uniqueguid="A55A2E4D-0BE4-4F1A-9EAE82C8FCB6BF8C"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_dropdown_selected.png"
+					uniqueguid="683E67A2-5E9B-4B60-B13E499F67C2DAAA"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_dropdown_selected_pressed.png"
+					uniqueguid="F8E44B79-5305-4E5F-8728E1318CE7E09E"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_dropdown_selected_underlay.png"
+					uniqueguid="EAFD9F68-7368-4DBA-87CC503D338BEB53"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_dropdown_underlay.png"
+					uniqueguid="177DEA05-2584-4C75-99929BF9F4A7DE39"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextDropdownMenu"
+					context_object_id="CcoCustomBattleSettings"
+					context_function_id="TicketLimitSettingContext">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CustomBattleOnSettingChangedTicketLimit"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextInactiveStateSetter"
+					context_object_id="CcoCustomBattleSettings"
+					context_function_id="CanChangeSettings">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CustomBattleOnHostMigrated"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCustomBattleSettings"
+					context_function_id="HasConfigurableTicketLimit">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CustomBattleOnSettingChangedBattleType"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/button_dropdown_selected_inactive.png"/>
+				<element value="ui/skins/default/button_dropdown_pressed.png"/>
+				<element value="ui/skins/default/button_dropdown_selected_hover.png"/>
+				<element value="ui/skins/default/button_dropdown_hover.png"/>
+				<element value="ui/skins/default/button_dropdown_active.png"/>
+				<element value="ui/skins/default/button_dropdown_inactive.png"/>
+				<element value="ui/skins/default/button_dropdown_selected.png"/>
+				<element value="ui/skins/default/button_dropdown_selected_pressed.png"/>
+				<element value="ui/skins/default/button_dropdown_selected_underlay.png"/>
+				<element value="ui/skins/default/button_dropdown_underlay.png"/>
+			</override_images>
+		</dropdown_ticket_limit>
 		<dropdown_time_limit
 			this="8EF253C5-D27D-4E59-8E6CA1BB165B389C"
 			id="dropdown_time_limit"
@@ -3329,6 +3625,40 @@
 				<element value="ui/skins/default/button_dropdown_panel.png"/>
 			</override_images>
 		</popup_menu>
+		<popup_menu
+			this="ED97B812-35A2-49CD-B14FCB7FDC35D652"
+			id="popup_menu"
+			part_of_template="true"
+			uniqueguid_in_template="08542153-4C83-4AB7-9EF7FE7E3BDFADB3"
+			uniqueguid="ED97B812-35A2-49CD-B14FCB7FDC35D652"
+			dimensions="234.00,38.00"
+			is_visible="false"
+			offset="0.00,34.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="NewState"
+					uniqueguid="57A31222-8C8B-413A-A553D533C9294F9E"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_dropdown_panel.png"
+					uniqueguid="BB8ED30A-A846-4CAA-8C0DD5F92CF45F6E"/>
+			</component_image_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="NewState"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/button_dropdown_panel.png"/>
+			</override_images>
+		</popup_menu>
 		<label_context_name
 			this="3C1634DC-C54A-4CA7-8E7CEC7101344FD6"
 			id="label_context_name"
@@ -3534,6 +3864,47 @@
 					is_text_localised="false"/>
 			</localised_texts>
 		</label_context_name>
+		<label_context_name
+			this="BAD75739-1C11-41D4-91EAA7E6BA5BBB05"
+			id="label_context_name"
+			part_of_template="true"
+			uniqueguid_in_template="BC9C4D76-4FA2-4B83-96C47D717D3EA557"
+			uniqueguid="BAD75739-1C11-41D4-91EAA7E6BA5BBB05"
+			dimensions="226.00,30.00"
+			comment="Fill in context object and function to match objects dealing with so can display object. Also feel free to add any other children such as icons want to display for each entry, etc">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="286B3154-8A1C-43F5-9178F8F588EBF2AE"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="5089C2C0-C088-4918-86307C667040296C"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCustomBattleSettingRecord"
+					context_function_id="Name"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					text="[ph] Context name"
+					text_label="StateText_abe68053"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					text="[ph] Context name"
+					text_label="StateText_95aa1858"
+					is_text_localised="false"/>
+			</localised_texts>
+		</label_context_name>
 		<list_box
 			this="267E7CA4-88FC-4D7F-B0276A2263BF5987"
 			id="list_box"
@@ -3676,6 +4047,37 @@
 					callback_id="List"
 					context_object_id="CcoCustomBattleSettings"
 					context_function_id="SettlementLevelSettingList"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="NewState"
+					is_text_localised="false"/>
+			</localised_texts>
+		</list_box>
+		<list_box
+			this="1B7E43D2-CA53-4FE7-BCA2667EDC963D1F"
+			id="list_box"
+			part_of_template="true"
+			uniqueguid_in_template="8C7F2F1C-EA20-407D-8156CDCEAADEDA60"
+			uniqueguid="1B7E43D2-CA53-4FE7-BCA2667EDC963D1F"
+			dimensions="234.00,38.00"
+			comment="Fill in the context object and context function in order to populate the available list of options for the dropdown menu">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="NewState"
+					uniqueguid="EB246AEC-70E9-40A8-AAB1F9BD9DF53200"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="List"
+					context_object_id="CcoCustomBattleSettings"
+					context_function_id="TicketLimitSettingList"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -3861,6 +4263,41 @@
 					state="NewState"
 					text="[ph] Selected context"
 					text_label="StateText_4ed88304"
+					is_text_localised="false"/>
+			</localised_texts>
+		</selected_context_display>
+		<selected_context_display
+			this="EEE4307D-BAA6-4F9B-A5CD7EA011F55F33"
+			id="selected_context_display"
+			part_of_template="true"
+			uniqueguid_in_template="3896C234-79D6-479F-B3024080DDACEE7A"
+			uniqueguid="EEE4307D-BAA6-4F9B-A5CD7EA011F55F33"
+			dimensions="230.00,24.00"
+			dock_point="Center Left"
+			offset="0.00,-2.00"
+			comment="Just fill in the context object and context function to display what information you want about the selected context from the dropdown.  Feel free to also add any other children you want like icons, etc that you want to display related to the selected context!">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="NewState"
+					uniqueguid="2AC1A328-C1A6-4B98-872370EE2C22A40F"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCustomBattleSettingRecord"
+					context_function_id="Name"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="NewState"
+					text="[ph] Funds type"
+					text_label="StateText_915cd2c1"
 					is_text_localised="false"/>
 			</localised_texts>
 		</selected_context_display>
@@ -4134,7 +4571,7 @@
 				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextTooltipSetter"
-					context_function_id="Loc(Format(&quot;difficulty_level_%d_tooltip_battle&quot;, self.ChildIndex))"/>
+					context_function_id="Loc(Format(&quot;difficulty_level_%d_tooltip_battle&quot;, self.ChildIndex - 1))"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -4202,6 +4639,80 @@
 					callback_id="ContextCommandLeftClick"
 					context_object_id="CcoFrontendRoot"
 					context_function_id="CustomBattleLobbyContext.SettingsContext.SetSettlementLevelSettingContext(StoredContext(&quot;CcoCustomBattleSettingRecord&quot;))"/>
+				<callback_with_context callback_id="ContextInitFrontendRoot">
+					<child_m_user_properties>
+						<property
+							name="init_self"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="override_sound"
+					value=""/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/button_dropdown_highlight.png"/>
+			</override_images>
+		</template_dropdown_entry>
+		<template_dropdown_entry
+			this="38FDA03F-B8B7-41D3-BA489BC7BF89168F"
+			id="template_dropdown_entry"
+			part_of_template="true"
+			uniqueguid_in_template="B48531B3-2559-4A6C-9719809DB7EAFC6B"
+			uniqueguid="38FDA03F-B8B7-41D3-BA489BC7BF89168F"
+			dimensions="226.00,30.00"
+			sound_category="UI_GBL_TMP_DropDown_List"
+			comment="Fill in context object type with what type need to store for diplay purposes and for passing along. Also feel free to change ContextCommandLeftClick to an initialiser or whatever else you want to handle when selecting an entry.  Also feel free to add any other children such as icons want to display for each entry, etc">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="85B3ACA6-2677-4170-8164ED329D324848"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="5F9A11D8-A240-4E10-8AC348D1373513EC"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="C66F591A-75B2-451C-B622DC98952F3DF2"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="560EE061-2EB8-400B-8AF9E7DFC96AF9AD"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="C5F94E3A-60C0-440B-B358D3EC25CAA100"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_dropdown_highlight.png"
+					uniqueguid="31EFB231-9BC4-4620-BDE8C2FD381F0C23"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextDropdownMenuItem"
+					context_object_id="CcoCustomBattleSettingRecord"/>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoFrontendRoot"
+					context_function_id="CustomBattleLobbyContext.SettingsContext.SetTicketLimitSettingContext(StoredContext(&quot;CcoCustomBattleSettingRecord&quot;))"/>
 				<callback_with_context callback_id="ContextInitFrontendRoot">
 					<child_m_user_properties>
 						<property
@@ -4337,6 +4848,26 @@
 					is_text_localised="false"/>
 			</localised_texts>
 		</icon_holder>
+		<icon_holder
+			this="B8750904-E412-44B6-B26957D02663DDC3"
+			id="icon_holder"
+			part_of_template="true"
+			uniqueguid_in_template="A281CA84-5437-472C-9123ABFF66359FEB"
+			uniqueguid="B8750904-E412-44B6-B26957D02663DDC3"
+			dimensions="1.00,30.00"
+			priority="65">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="2DAAE85D-97D0-410A-A2C08AC3F5463BAE"/>
+			</state_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</icon_holder>
 		<dy_label
 			this="F3ADBD41-E223-4C68-BE9C43635BDFBA08"
 			id="dy_label"
@@ -4454,6 +4985,31 @@
 					state="NewState"
 					text="Settlement level"
 					text_label="StateText_ee56d17d"/>
+			</localised_texts>
+		</dy_label>
+		<dy_label
+			this="A77C9991-B80E-46E0-B677481023BFAE98"
+			id="dy_label"
+			part_of_template="true"
+			uniqueguid_in_template="8B7879E9-903C-4F40-BFB9BDE01088C272"
+			uniqueguid="A77C9991-B80E-46E0-B677481023BFAE98"
+			dimensions="124.00,40.00"
+			dock_point="Center Left"
+			offset="-130.00,-2.00"
+			priority="60">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="NewState"
+					uniqueguid="26D34665-536F-4967-BCDEF85ADECAE082"/>
+			</state_uniqueguids>
+			<localised_texts>
+				<localised_text
+					tooltip_label="ComponentTooltip_61d5b28f"
+					tooltip_text="Number of tickets for battle"/>
+				<localised_text
+					state="NewState"
+					text="Ticket limit"
+					text_label="StateText_b9f91e10"/>
 			</localised_texts>
 		</dy_label>
 		<root
@@ -4807,7 +5363,7 @@
 			priority="100"
 			tooltipslocalised="true"
 			uniqueguid="C1020EA6-0FDC-421A-95BE2E333BAE1EDA"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="8A1E0401-0548-45CF-8B9960628E71054E"
 			defaultstate="8A1E0401-0548-45CF-8B9960628E71054E">
 			<callbackwithcontextlist>
@@ -5765,9 +6321,9 @@
 		<checkbox_parent
 			this="69DA3A44-668B-44A3-94C91DB8BC9357EC"
 			id="checkbox_parent"
-			offset="40.00,323.00"
+			offset="-136.00,323.00"
 			allowhorizontalresize="false"
-			dock_offset="40.00,0.00"
+			dock_offset="-136.00,0.00"
 			tooltipslocalised="true"
 			uniqueguid="69DA3A44-668B-44A3-94C91DB8BC9357EC"
 			currentstate="12C20332-95D7-4A33-A4A294667C7A3AF6"
@@ -6243,7 +6799,7 @@
 							width="120"
 							height="120"
 							dockpoint="Center"
-							isaspectratiolocked="true"/>
+							aspect_ratio_locked_behaviour="Width First"/>
 					</imagemetrics>
 					<transitionmap>
 						<transition
@@ -6275,7 +6831,7 @@
 							height="120"
 							colour="#7F7F7FFF"
 							dockpoint="Center"
-							isaspectratiolocked="true"/>
+							aspect_ratio_locked_behaviour="Width First"/>
 					</imagemetrics>
 					<transitionmap>
 						<transition
@@ -6307,7 +6863,7 @@
 							width="120"
 							height="120"
 							dockpoint="Center"
-							isaspectratiolocked="true"/>
+							aspect_ratio_locked_behaviour="Width First"/>
 					</imagemetrics>
 					<transitionmap>
 						<transition transition_m_target_state="F6744B71-BAEE-4F39-BEBD42CA84771EA9"/>
@@ -6338,7 +6894,7 @@
 							width="120"
 							height="120"
 							dockpoint="Center"
-							isaspectratiolocked="true"/>
+							aspect_ratio_locked_behaviour="Width First"/>
 					</imagemetrics>
 					<transitionmap>
 						<transition
@@ -6373,7 +6929,7 @@
 							width="120"
 							height="120"
 							dockpoint="Center"
-							isaspectratiolocked="true"/>
+							aspect_ratio_locked_behaviour="Width First"/>
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
@@ -6398,7 +6954,7 @@
 							width="120"
 							height="120"
 							dockpoint="Center"
-							isaspectratiolocked="true"/>
+							aspect_ratio_locked_behaviour="Width First"/>
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
@@ -6423,7 +6979,7 @@
 							width="120"
 							height="120"
 							dockpoint="Center"
-							isaspectratiolocked="true"/>
+							aspect_ratio_locked_behaviour="Width First"/>
 					</imagemetrics>
 					<component_text
 						font_m_size="12"
@@ -6442,13 +6998,64 @@
 			uniqueguid="D8C6B2E8-D647-4EC1-819034131C9EC2DA"
 			currentstate="DBB8D7F8-A15C-4D92-A95DBAB0711BB475"
 			defaultstate="DBB8D7F8-A15C-4D92-A95DBAB0711BB475">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoBattleRecord">
+					<child_m_user_properties>
+						<property
+							name="1.user_created"
+							value="IsOfficial == false"/>
+						<property
+							name="2.community"
+							value="IsCommunity"/>
+						<property
+							name="fallback_state"
+							value="default"/>
+						<property
+							name="ordered_states"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCustomBattleMap"
+					context_function_id="BattleRecordContext"/>
+			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
 					this="A620C893-B964-48CF-B18BB9B6E7AB59FA"
 					uniqueguid="A620C893-B964-48CF-B18BB9B6E7AB59FA"
 					imagepath="ui/skins/default/icon_custom_battle_map_ca.png"/>
+				<component_image
+					this="278777E3-333F-4F76-AF0CC4313D7317FE"
+					uniqueguid="278777E3-333F-4F76-AF0CC4313D7317FE"
+					imagepath="ui/skins/default/icon_custom_battle_map_user.png"/>
 			</componentimages>
 			<states>
+				<community
+					this="B482F70B-4345-465F-AE5F87269A6188DB"
+					name="community"
+					width="30"
+					height="30"
+					uniqueguid="B482F70B-4345-465F-AE5F87269A6188DB">
+					<imagemetrics>
+						<image
+							this="8F0D46DB-8115-43CB-A0FF60E2D9786E82"
+							uniqueguid="8F0D46DB-8115-43CB-A0FF60E2D9786E82"
+							componentimage="A620C893-B964-48CF-B18BB9B6E7AB59FA"
+							offset="0.00,1.00"
+							width="25"
+							height="25"/>
+						<image
+							this="580F24DA-F55B-49C5-9328448373904B0A"
+							uniqueguid="580F24DA-F55B-49C5-9328448373904B0A"
+							componentimage="278777E3-333F-4F76-AF0CC4313D7317FE"
+							offset="8.00,5.00"
+							width="25"
+							height="25"/>
+					</imagemetrics>
+				</community>
 				<default
 					this="DBB8D7F8-A15C-4D92-A95DBAB0711BB475"
 					name="default"
@@ -6465,6 +7072,21 @@
 							height="30"/>
 					</imagemetrics>
 				</default>
+				<user_created
+					this="7801A010-DD8F-4AC4-B565B449897B225F"
+					name="user_created"
+					width="30"
+					height="30"
+					uniqueguid="7801A010-DD8F-4AC4-B565B449897B225F">
+					<imagemetrics>
+						<image
+							this="E1457164-0297-4AD2-BB088C6CFF55DB60"
+							uniqueguid="E1457164-0297-4AD2-BB088C6CFF55DB60"
+							componentimage="278777E3-333F-4F76-AF0CC4313D7317FE"
+							width="30"
+							height="30"/>
+					</imagemetrics>
+				</user_created>
 			</states>
 		</icon>
 		<icon
@@ -7264,12 +7886,11 @@
 		<label_large_armies
 			this="1B0A58AF-85AF-450B-886536962BE67C73"
 			id="label_large_armies"
-			offset="-170.00,-4.00"
+			offset="34.00,-4.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
-			docking="Center Left External"
-			dock_offset="-6.00,0.00"
-			component_anchor_point="1.00,0.50"
+			docking="Center Right External"
+			component_anchor_point="-0.00,0.50"
 			tooltipslocalised="true"
 			componentleveltooltip="Regular armies are limited to a maximum of 20 units, whereas large armies have are limited to a maximum of 40 units.||This option is unavailable when more than 4 armies are involved in the battle."
 			tooltiplabel="ComponentTooltip_d5b55b23"
@@ -7317,12 +7938,11 @@
 		<label_loading_characters
 			this="78BC990F-E7F1-4CA8-A135F4492AC44FBD"
 			id="label_loading_characters"
-			offset="-170.00,-4.00"
+			offset="34.00,-4.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
-			docking="Center Left External"
-			dock_offset="-6.00,0.00"
-			component_anchor_point="1.00,0.50"
+			docking="Center Right External"
+			component_anchor_point="-0.00,0.50"
 			tooltipslocalised="true"
 			componentleveltooltip="Toggle saved characters"
 			tooltiplabel="ComponentTooltip_5714781e"
@@ -7370,14 +7990,9 @@
 		<label_map_name
 			this="A6E2A859-B2A1-4A32-ADDA8A2FBD7E3EF2"
 			id="label_map_name"
-			offset="163.00,153.00"
-			allowverticalresize="false"
-			docking="Bottom Center External"
-			dock_offset="0.00,3.00"
-			component_anchor_point="0.50,-0.00"
+			allowhorizontalresize="false"
 			tooltipslocalised="true"
 			uniqueguid="A6E2A859-B2A1-4A32-ADDA8A2FBD7E3EF2"
-			isrelativeresize="true"
 			currentstate="6680B19C-6907-4C5B-9D7B96B79B327376"
 			comment="Fill in context object and function to match objects dealing with so can display object. Also feel free to add any other children such as icons want to display for each entry, etc">
 			<callbackwithcontextlist>
@@ -7395,32 +8010,32 @@
 				<active
 					this="6680B19C-6907-4C5B-9D7B96B79B327376"
 					name="active"
-					width="141"
-					height="29"
+					width="293"
+					height="28"
 					uniqueguid="6680B19C-6907-4C5B-9D7B96B79B327376">
 					<component_text
 						text="[ph] Context name"
 						textvalign="Center"
-						texthalign="Center"
 						textxoffset="6.00,8.00"
+						textyoffset="5.00,5.00"
 						texthbehaviour="Resize"
 						textlabel="StateText_c85fef2d"
-						font_m_size="12"
+						font_m_font_name="brand_header"
+						font_m_size="14"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="body_12"/>
+						fontcat_name="header_14"/>
 				</active>
 			</states>
 		</label_map_name>
 		<label_realism_mode
 			this="73D2E5CC-C482-4715-AA32273A1428BF43"
 			id="label_realism_mode"
-			offset="-170.00,-4.00"
+			offset="34.00,-4.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
-			docking="Center Left External"
-			dock_offset="-6.00,0.00"
-			component_anchor_point="1.00,0.50"
+			docking="Center Right External"
+			component_anchor_point="-0.00,0.50"
 			tooltipslocalised="true"
 			componentleveltooltip="When checked, battles must be fought without the radar map or contextual tooltips. Orders may not be issued whilst the battle is paused and the game speed may not be slowed.||The camera will be restricted to within 200 meters of any unit, and any enemy units more than 600 meters away will be hidden from sight."
 			tooltiplabel="ComponentTooltip_54c32dc2"
@@ -7468,12 +8083,11 @@
 		<label_realism_mode
 			this="A4BD6F65-5412-4D7B-BE9CD4168C1B144B"
 			id="label_realism_mode"
-			offset="-170.00,-4.00"
+			offset="34.00,-4.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
-			docking="Center Left External"
-			dock_offset="-6.00,0.00"
-			component_anchor_point="1.00,0.50"
+			docking="Center Right External"
+			component_anchor_point="-0.00,0.50"
 			tooltipslocalised="true"
 			componentleveltooltip="When checked, if using default funds, each player will have less funds the more members there are in a team."
 			tooltiplabel="ComponentTooltip_b42a186a"
@@ -7521,12 +8135,11 @@
 		<label_storm_of_magic
 			this="BC81D5A6-D97B-46D5-B6D9937F7D8FF5C2"
 			id="label_storm_of_magic"
-			offset="-170.00,-4.00"
+			offset="34.00,-4.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
-			docking="Center Left External"
-			dock_offset="-6.00,0.00"
-			component_anchor_point="1.00,0.50"
+			docking="Center Right External"
+			component_anchor_point="-0.00,0.50"
 			tooltipslocalised="true"
 			componentleveltooltip="The battles takes place within a Storm of Magic. The Winds of Magic are infinite in these battles, so casting spells will change the ascendant Wind, each with a global effect and a different cataclysm spell."
 			tooltiplabel="ComponentTooltip_e3c608e6"
@@ -7574,12 +8187,11 @@
 		<label_unit_caps
 			this="688A4090-519B-4EFF-96075865FCA553E7"
 			id="label_unit_caps"
-			offset="-170.00,-4.00"
+			offset="34.00,-4.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
-			docking="Center Left External"
-			dock_offset="-6.00,0.00"
-			component_anchor_point="1.00,0.50"
+			docking="Center Right External"
+			component_anchor_point="-0.00,0.50"
 			tooltipslocalised="true"
 			componentleveltooltip="Toggle multiplayer unit caps. The unit cap limits the total number of units associated with a single unit type in an army. Some units contribute towards several unit caps. If capacity is reached for any of the associated unit caps, the unit cannot be recruited.||Unit caps are always applied to ranked battles."
 			tooltiplabel="ComponentTooltip_180dfaca"
@@ -7715,34 +8327,14 @@
 					uniqueguid="C17F8ED0-5EBD-4644-8FB241A02E5FD5A6"/>
 			</states>
 		</list_clip>
-		<map_clip
-			this="352742E5-F2EC-4DC1-A1F3199A93E6245C"
-			id="map_clip"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			clipchildren="true"
-			docking="Center"
-			component_anchor_point="0.50,0.50"
-			tooltipslocalised="true"
-			uniqueguid="352742E5-F2EC-4DC1-A1F3199A93E6245C"
-			currentstate="ACD757CE-2389-4894-AA5F117095C918C2"
-			defaultstate="ACD757CE-2389-4894-AA5F117095C918C2">
-			<states>
-				<default
-					this="ACD757CE-2389-4894-AA5F117095C918C2"
-					name="default"
-					width="468"
-					height="150"
-					interactive="true"
-					uniqueguid="ACD757CE-2389-4894-AA5F117095C918C2"/>
-			</states>
-		</map_clip>
 		<map_details_parent
 			this="D21752E6-89AA-46A8-93E47BEC4EC8A9CC"
 			id="map_details_parent"
-			offset="433.00,154.00"
+			offset="417.00,154.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
 			docking="Top Left"
-			dock_offset="433.00,154.00"
+			dock_offset="417.00,154.00"
 			tooltipslocalised="true"
 			uniqueguid="D21752E6-89AA-46A8-93E47BEC4EC8A9CC"
 			currentstate="680162EE-1878-4AF7-80D5F3B171511690"
@@ -7779,10 +8371,9 @@
 		<map_image
 			this="BC16CD2A-26FF-4A0E-91E7A4A379DAC337"
 			id="map_image"
-			allowhorizontalresize="false"
 			allowverticalresize="false"
-			docking="Center"
-			component_anchor_point="0.50,0.50"
+			docking="Center Right"
+			component_anchor_point="1.00,0.50"
 			tooltipslocalised="true"
 			uniqueguid="BC16CD2A-26FF-4A0E-91E7A4A379DAC337"
 			currentstate="9B28D71E-2A92-4A83-87069C389B83BD21"
@@ -7802,23 +8393,63 @@
 					this="A6E5B7E5-7C4D-48E8-A3FE4F39ED111A69"
 					uniqueguid="A6E5B7E5-7C4D-48E8-A3FE4F39ED111A69"
 					imagepath="ui/frontend ui/battle_map_images/aeslings_conclave.png"/>
+				<component_image
+					this="9D27692B-144E-4227-885D4E27937DB402"
+					uniqueguid="9D27692B-144E-4227-885D4E27937DB402"
+					imagepath="ui/skins/default/custom_battle_map_image_fade.png"/>
+				<component_image
+					this="E490DD89-52B5-4284-A6885997C7AF247C"
+					uniqueguid="E490DD89-52B5-4284-A6885997C7AF247C"
+					imagepath="ui/skins/default/path_to_glory/panel_back_frame_stroke.png"/>
+				<component_image
+					this="EEAE3A81-49E9-4EF4-91D56B9B5CCB25C4"
+					uniqueguid="EEAE3A81-49E9-4EF4-91D56B9B5CCB25C4"/>
 			</componentimages>
 			<states>
 				<default
 					this="9B28D71E-2A92-4A83-87069C389B83BD21"
 					name="default"
-					width="468"
+					width="775"
 					height="150"
 					shader_name="border_alpha_blend"
 					shadervars="100.00,0.00,100.00,0.00"
 					uniqueguid="9B28D71E-2A92-4A83-87069C389B83BD21">
 					<imagemetrics>
 						<image
+							this="39628C3E-783A-41B1-9399446FD457407A"
+							uniqueguid="39628C3E-783A-41B1-9399446FD457407A"
+							componentimage="EEAE3A81-49E9-4EF4-91D56B9B5CCB25C4"
+							width="775"
+							height="150"
+							colour="#000000FF"/>
+						<image
 							this="7680B5B9-8293-4081-B022BFD0B58DB9AB"
 							uniqueguid="7680B5B9-8293-4081-B022BFD0B58DB9AB"
 							componentimage="A6E5B7E5-7C4D-48E8-A3FE4F39ED111A69"
+							offset="307.00,0.00"
 							width="468"
-							height="150"/>
+							height="150"
+							dockpoint="Center Right"
+							canresizeheight="false"
+							canresizewidth="false"/>
+						<image
+							this="D783D001-EEF0-47F8-8D29A12721DD37AD"
+							uniqueguid="D783D001-EEF0-47F8-8D29A12721DD37AD"
+							componentimage="9D27692B-144E-4227-885D4E27937DB402"
+							offset="307.00,0.00"
+							width="300"
+							height="150"
+							canresizeheight="false"
+							canresizewidth="false"/>
+						<image
+							this="8AC0F7B9-749D-4BE2-A476A03654728AFD"
+							uniqueguid="8AC0F7B9-749D-4BE2-A476A03654728AFD"
+							componentimage="E490DD89-52B5-4284-A6885997C7AF247C"
+							width="775"
+							height="150"
+							colour="#FFFFFFC8"
+							tile="true"
+							margin="4.00,4.00,4.00,4.00"/>
 					</imagemetrics>
 				</default>
 			</states>
@@ -7870,11 +8501,9 @@
 		<map_parent
 			this="4C0E80F5-C107-4A59-9653471640D526FD"
 			id="map_parent"
-			offset="139.00,0.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
-			docking="Top Center"
-			component_anchor_point="0.50,0.00"
+			docking="Top Left"
 			tooltipslocalised="true"
 			uniqueguid="4C0E80F5-C107-4A59-9653471640D526FD"
 			currentstate="7A52A3BE-44F9-46CA-AA89E8249AF5A2FC"
@@ -7883,7 +8512,7 @@
 				<default
 					this="7A52A3BE-44F9-46CA-AA89E8249AF5A2FC"
 					name="default"
-					width="468"
+					width="775"
 					height="150"
 					interactive="true"
 					uniqueguid="7A52A3BE-44F9-46CA-AA89E8249AF5A2FC"/>
@@ -7892,15 +8521,12 @@
 		<map_preview
 			this="B3BB6B54-E257-47E7-93BE99BF75B6B9B6"
 			id="map_preview"
-			offset="437.00,186.00"
+			offset="520.00,184.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
-			docking="Top Center"
-			dock_offset="192.00,186.00"
-			component_anchor_point="0.50,0.00"
 			tooltipslocalised="true"
 			uniqueguid="B3BB6B54-E257-47E7-93BE99BF75B6B9B6"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="80ECB282-2339-4669-B117A1E7856AA1BF"
 			defaultstate="80ECB282-2339-4669-B117A1E7856AA1BF">
 			<callbackwithcontextlist>
@@ -8847,7 +9473,9 @@
 		<dy_ai_stat_mod
 			this="3BB2E61C-3A65-4DC9-9C47CB55ECE08C7E"
 			id="dy_ai_stat_mod"
-			offset="0.00,-3.00"
+			offset="3.00,-3.00"
+			dock_offset="3.00,0.00"
+			component_anchor_point="0.00,0.50"
 			priority="60"
 			componentleveltooltip="{{tt:ui/common ui/tooltip_ai_stats_modifier}}"
 			tooltiplabel="ComponentTooltip_30d32932"
@@ -9068,182 +9696,6 @@
 				</hover>
 			</states>
 		</button_clear_search>
-		<dropdown_ticket_limit
-			this="366F26BB-9957-4558-B9A46B99DD0E42FE"
-			id="dropdown_ticket_limit"
-			template_id="dropdown_context"
-			part_of_template="true"
-			uniqueguid_in_template="D621BD9D-AFB2-475A-AF8022E2B5FDE4F7"
-			uniqueguid="366F26BB-9957-4558-B9A46B99DD0E42FE"
-			dimensions="230.00,34.00"
-			sound_category="UI_GBL_TMP_DropDown">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="9D2D4C45-1F33-445D-A9CD3CBB85644A41"/>
-				<state_uniqueguid
-					name="down"
-					uniqueguid="F1EC7FAE-C9C4-452E-B0CDADF5B03508E4"/>
-				<state_uniqueguid
-					name="down_off"
-					uniqueguid="71F9908D-AAFD-4382-B5EF4BB01835E94B"/>
-				<state_uniqueguid
-					name="hover"
-					uniqueguid="E6A7B77B-AF27-4FFC-B2EF2DAAFD58B8AB"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="8382E5A3-3C09-41F5-AE63A6BAD0A7C0E0"/>
-				<state_uniqueguid
-					name="selected"
-					uniqueguid="4BFC0119-A4D0-4461-B5606CEAE7FE6252"/>
-				<state_uniqueguid
-					name="selected_down"
-					uniqueguid="83C8BB4F-3393-42AA-A3CE32BAA0A36AFF"/>
-				<state_uniqueguid
-					name="selected_down_off"
-					uniqueguid="D11E9EBB-2009-4385-8776A067968AD1AD"/>
-				<state_uniqueguid
-					name="selected_hover"
-					uniqueguid="D10ED0EA-B1BD-42DF-A7C3426A82919671"/>
-				<state_uniqueguid
-					name="selected_inactive"
-					uniqueguid="0AF48B06-15F9-43A1-BE72CF9ECC8D74FF"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_dropdown_selected_inactive.png"
-					uniqueguid="C313B42A-B09E-41A3-815D5E7755BACCDC"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_dropdown_pressed.png"
-					uniqueguid="75F0A372-E957-4EA3-8D7BBC0EA82ECD76"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_dropdown_selected_hover.png"
-					uniqueguid="C2D10050-640F-4A3C-A3A4EFD5982AEBAC"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_dropdown_hover.png"
-					uniqueguid="C149961D-5181-421E-9C8E2BA5947D2FB5"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_dropdown_active.png"
-					uniqueguid="D4BBC619-2C1B-4E7C-BB49918E6521F1FA"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_dropdown_inactive.png"
-					uniqueguid="A55A2E4D-0BE4-4F1A-9EAE82C8FCB6BF8C"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_dropdown_selected.png"
-					uniqueguid="683E67A2-5E9B-4B60-B13E499F67C2DAAA"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_dropdown_selected_pressed.png"
-					uniqueguid="F8E44B79-5305-4E5F-8728E1318CE7E09E"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_dropdown_selected_underlay.png"
-					uniqueguid="EAFD9F68-7368-4DBA-87CC503D338BEB53"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_dropdown_underlay.png"
-					uniqueguid="177DEA05-2584-4C75-99929BF9F4A7DE39"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context
-					callback_id="ContextDropdownMenu"
-					context_object_id="CcoCustomBattleSettings"
-					context_function_id="TicketLimitSettingContext">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="CustomBattleOnSettingChangedTicketLimit"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextInactiveStateSetter"
-					context_object_id="CcoCustomBattleSettings"
-					context_function_id="CanChangeSettings">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="CustomBattleOnHostMigrated"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoCustomBattleSettings"
-					context_function_id="HasConfigurableTicketLimit">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="CustomBattleOnSettingChangedBattleType"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbacks_with_context>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="down"
-					is_text_localised="false"/>
-				<localised_text
-					state="down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_down"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_inactive"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/button_dropdown_selected_inactive.png"/>
-				<element value="ui/skins/default/button_dropdown_pressed.png"/>
-				<element value="ui/skins/default/button_dropdown_selected_hover.png"/>
-				<element value="ui/skins/default/button_dropdown_hover.png"/>
-				<element value="ui/skins/default/button_dropdown_active.png"/>
-				<element value="ui/skins/default/button_dropdown_inactive.png"/>
-				<element value="ui/skins/default/button_dropdown_selected.png"/>
-				<element value="ui/skins/default/button_dropdown_selected_pressed.png"/>
-				<element value="ui/skins/default/button_dropdown_selected_underlay.png"/>
-				<element value="ui/skins/default/button_dropdown_underlay.png"/>
-			</override_images>
-		</dropdown_ticket_limit>
-		<dy_label
-			this="A77C9991-B80E-46E0-B677481023BFAE98"
-			id="dy_label"
-			part_of_template="true"
-			uniqueguid_in_template="8B7879E9-903C-4F40-BFB9BDE01088C272"
-			uniqueguid="A77C9991-B80E-46E0-B677481023BFAE98"
-			dimensions="124.00,40.00"
-			dock_point="Center Left"
-			offset="-130.00,-2.00"
-			priority="60">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="NewState"
-					uniqueguid="26D34665-536F-4967-BCDEF85ADECAE082"/>
-			</state_uniqueguids>
-			<localised_texts>
-				<localised_text
-					tooltip_label="ComponentTooltip_61d5b28f"
-					tooltip_text="Amount of tickets for battle"/>
-				<localised_text
-					state="NewState"
-					text="Ticket limit"
-					text_label="StateText_b9f91e10"/>
-			</localised_texts>
-		</dy_label>
 		<highlight
 			this="5B900CC1-43DD-445A-959F4532CBDFBA00"
 			id="highlight"
@@ -9283,241 +9735,6 @@
 				</newstate>
 			</states>
 		</highlight>
-		<icon_holder
-			this="B8750904-E412-44B6-B26957D02663DDC3"
-			id="icon_holder"
-			part_of_template="true"
-			uniqueguid_in_template="A281CA84-5437-472C-9123ABFF66359FEB"
-			uniqueguid="B8750904-E412-44B6-B26957D02663DDC3"
-			dimensions="1.00,30.00"
-			priority="65">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="2DAAE85D-97D0-410A-A2C08AC3F5463BAE"/>
-			</state_uniqueguids>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					is_text_localised="false"/>
-			</localised_texts>
-		</icon_holder>
-		<label_context_name
-			this="BAD75739-1C11-41D4-91EAA7E6BA5BBB05"
-			id="label_context_name"
-			part_of_template="true"
-			uniqueguid_in_template="BC9C4D76-4FA2-4B83-96C47D717D3EA557"
-			uniqueguid="BAD75739-1C11-41D4-91EAA7E6BA5BBB05"
-			dimensions="226.00,30.00"
-			comment="Fill in context object and function to match objects dealing with so can display object. Also feel free to add any other children such as icons want to display for each entry, etc">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="286B3154-8A1C-43F5-9178F8F588EBF2AE"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="5089C2C0-C088-4918-86307C667040296C"/>
-			</state_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoCustomBattleSettingRecord"
-					context_function_id="Name"/>
-			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="disable_override"
-					value="position"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					text="[ph] Context name"
-					text_label="StateText_abe68053"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					text="[ph] Context name"
-					text_label="StateText_95aa1858"
-					is_text_localised="false"/>
-			</localised_texts>
-		</label_context_name>
-		<list_box
-			this="1B7E43D2-CA53-4FE7-BCA2667EDC963D1F"
-			id="list_box"
-			part_of_template="true"
-			uniqueguid_in_template="8C7F2F1C-EA20-407D-8156CDCEAADEDA60"
-			uniqueguid="1B7E43D2-CA53-4FE7-BCA2667EDC963D1F"
-			dimensions="234.00,38.00"
-			comment="Fill in the context object and context function in order to populate the available list of options for the dropdown menu">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="NewState"
-					uniqueguid="EB246AEC-70E9-40A8-AAB1F9BD9DF53200"/>
-			</state_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context
-					callback_id="List"
-					context_object_id="CcoCustomBattleSettings"
-					context_function_id="TicketLimitSettingList"/>
-			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="disable_override"
-					value="position"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="NewState"
-					is_text_localised="false"/>
-			</localised_texts>
-		</list_box>
-		<popup_menu
-			this="ED97B812-35A2-49CD-B14FCB7FDC35D652"
-			id="popup_menu"
-			part_of_template="true"
-			uniqueguid_in_template="08542153-4C83-4AB7-9EF7FE7E3BDFADB3"
-			uniqueguid="ED97B812-35A2-49CD-B14FCB7FDC35D652"
-			dimensions="234.00,38.00"
-			is_visible="false"
-			offset="0.00,34.00">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="NewState"
-					uniqueguid="57A31222-8C8B-413A-A553D533C9294F9E"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_dropdown_panel.png"
-					uniqueguid="BB8ED30A-A846-4CAA-8C0DD5F92CF45F6E"/>
-			</component_image_uniqueguids>
-			<user_properties>
-				<property
-					name="disable_override"
-					value="position"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="NewState"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/button_dropdown_panel.png"/>
-			</override_images>
-		</popup_menu>
-		<selected_context_display
-			this="EEE4307D-BAA6-4F9B-A5CD7EA011F55F33"
-			id="selected_context_display"
-			part_of_template="true"
-			uniqueguid_in_template="3896C234-79D6-479F-B3024080DDACEE7A"
-			uniqueguid="EEE4307D-BAA6-4F9B-A5CD7EA011F55F33"
-			dimensions="230.00,24.00"
-			dock_point="Center Left"
-			offset="0.00,-2.00"
-			comment="Just fill in the context object and context function to display what information you want about the selected context from the dropdown.  Feel free to also add any other children you want like icons, etc that you want to display related to the selected context!">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="NewState"
-					uniqueguid="2AC1A328-C1A6-4B98-872370EE2C22A40F"/>
-			</state_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoCustomBattleSettingRecord"
-					context_function_id="Name"/>
-			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="disable_override"
-					value="position"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="NewState"
-					text="[ph] Funds type"
-					text_label="StateText_915cd2c1"
-					is_text_localised="false"/>
-			</localised_texts>
-		</selected_context_display>
-		<template_dropdown_entry
-			this="38FDA03F-B8B7-41D3-BA489BC7BF89168F"
-			id="template_dropdown_entry"
-			part_of_template="true"
-			uniqueguid_in_template="B48531B3-2559-4A6C-9719809DB7EAFC6B"
-			uniqueguid="38FDA03F-B8B7-41D3-BA489BC7BF89168F"
-			dimensions="226.00,30.00"
-			sound_category="UI_GBL_TMP_DropDown_List"
-			comment="Fill in context object type with what type need to store for diplay purposes and for passing along. Also feel free to change ContextCommandLeftClick to an initialiser or whatever else you want to handle when selecting an entry.  Also feel free to add any other children such as icons want to display for each entry, etc">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="85B3ACA6-2677-4170-8164ED329D324848"/>
-				<state_uniqueguid
-					name="hover"
-					uniqueguid="5F9A11D8-A240-4E10-8AC348D1373513EC"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="C66F591A-75B2-451C-B622DC98952F3DF2"/>
-				<state_uniqueguid
-					name="selected"
-					uniqueguid="560EE061-2EB8-400B-8AF9E7DFC96AF9AD"/>
-				<state_uniqueguid
-					name="selected_hover"
-					uniqueguid="C5F94E3A-60C0-440B-B358D3EC25CAA100"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_dropdown_highlight.png"
-					uniqueguid="31EFB231-9BC4-4620-BDE8C2FD381F0C23"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context
-					callback_id="ContextDropdownMenuItem"
-					context_object_id="CcoCustomBattleSettingRecord"/>
-				<callback_with_context
-					callback_id="ContextCommandLeftClick"
-					context_object_id="CcoFrontendRoot"
-					context_function_id="CustomBattleLobbyContext.SettingsContext.SetTicketLimitSettingContext(StoredContext(&quot;CcoCustomBattleSettingRecord&quot;))"/>
-				<callback_with_context callback_id="ContextInitFrontendRoot">
-					<child_m_user_properties>
-						<property
-							name="init_self"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="override_sound"
-					value=""/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_hover"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/button_dropdown_highlight.png"/>
-			</override_images>
-		</template_dropdown_entry>
 		<text_input_custom_funds
 			this="A537DDDE-3F4E-494D-A940AA10DD31E4DA"
 			id="text_input_custom_funds"
@@ -9632,5 +9849,133 @@
 				</active>
 			</states>
 		</text_input_custom_funds>
+		<label_multi_lords
+			this="C6ADDB25-81A1-46DD-AA0704CE171B7800"
+			id="label_multi_lords"
+			offset="34.00,-4.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center Right External"
+			component_anchor_point="-0.00,0.50"
+			tooltipslocalised="true"
+			componentleveltooltip="When checked, multiple lords can be added to the army instead of just one. Only the first Lord in the list will count as the army commander in battle."
+			tooltiplabel="ComponentTooltip_430e3e29"
+			uniqueguid="C6ADDB25-81A1-46DD-AA0704CE171B7800"
+			currentstate="4CDBB565-3EE4-4A3B-88285188772650E9">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="CallbackRedirector">
+					<child_m_user_properties>
+						<property
+							name="parent_id"
+							value="checkbox_allow_multi_lords"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+				<property
+					name="dynamic_child_parent"
+					value="checkbox_realism_mode"/>
+			</userproperties>
+			<states>
+				<newstate
+					this="4CDBB565-3EE4-4A3B-88285188772650E9"
+					name="NewState"
+					width="164"
+					height="40"
+					focustype="Active"
+					interactive="true"
+					uniqueguid="4CDBB565-3EE4-4A3B-88285188772650E9">
+					<component_text
+						text="Allow Multiple Lords"
+						textvalign="Center"
+						textlocalised="true"
+						textlabel="StateText_8f8f6be7"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+				</newstate>
+			</states>
+		</label_multi_lords>
+		<label_map_author
+			this="47E026D5-C3D1-4638-90C81A6532FAB838"
+			id="label_map_author"
+			offset="0.00,28.00"
+			allowhorizontalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="47E026D5-C3D1-4638-90C81A6532FAB838"
+			currentstate="C413C59F-ACF9-4F2D-910AEED9461F203C"
+			comment="Fill in context object and function to match objects dealing with so can display object. Also feel free to add any other children such as icons want to display for each entry, etc">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoBattleRecord"
+					context_function_id="Loc(&quot;custom_battle_made_by_string&quot;, Author)"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCustomBattleMap"
+					context_function_id="BattleRecordContext"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoBattleRecord"
+					context_function_id="Author.IsEmpty == false"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="disable_override"
+					value="position"/>
+			</userproperties>
+			<states>
+				<active
+					this="C413C59F-ACF9-4F2D-910AEED9461F203C"
+					name="active"
+					width="178"
+					height="26"
+					uniqueguid="C413C59F-ACF9-4F2D-910AEED9461F203C">
+					<component_text
+						text="[ph] by CA"
+						textvalign="Center"
+						textxoffset="6.00,8.00"
+						textyoffset="5.00,5.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_1827c913"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</active>
+			</states>
+		</label_map_author>
+		<name_holder
+			this="1CDA2109-73FA-482B-9E17AEB9902399F0"
+			id="name_holder"
+			offset="18.00,48.00"
+			docking="Center Left"
+			dock_offset="18.00,0.00"
+			component_anchor_point="0.00,0.50"
+			tooltipslocalised="true"
+			uniqueguid="1CDA2109-73FA-482B-9E17AEB9902399F0"
+			currentstate="44E97A2B-D1BC-4029-8B6B55C2E98359A3"
+			defaultstate="44E97A2B-D1BC-4029-8B6B55C2E98359A3">
+			<states>
+				<default
+					this="44E97A2B-D1BC-4029-8B6B55C2E98359A3"
+					name="default"
+					width="293"
+					height="54"
+					uniqueguid="44E97A2B-D1BC-4029-8B6B55C2E98359A3"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="349"/>
+				</columnwidths>
+			</LayoutEngine>
+		</name_holder>
 	</components>
 </layout>

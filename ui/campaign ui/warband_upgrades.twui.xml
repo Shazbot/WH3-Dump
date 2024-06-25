@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="CanUseUiFeature(&quot;WARBANDS&quot;)">
 	<hierarchy>
@@ -2032,6 +2032,9 @@
 					name="blessed_spawning"
 					uniqueguid="C8A12F36-C194-4B48-8D99DD1898853E12"/>
 				<state_uniqueguid
+					name="chieftain"
+					uniqueguid="EACEC60A-888A-4891-A05D2696422B871B"/>
+				<state_uniqueguid
 					name="crafted"
 					uniqueguid="0060734D-E187-4A46-B8E9A75857753814"/>
 				<state_uniqueguid
@@ -2078,11 +2081,17 @@
 				<component_image_uniqueguid
 					name="ui/skins/warhammer2/unit_card_semicircle_mistwalker.png"
 					uniqueguid="C0D080DD-CF7F-4006-B28537D17924E497"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/unit_card_semicircle_chieftain.png"
+					uniqueguid="89B2ACE6-F343-46CE-8C2B6FCCCA0295CA"/>
 			</component_image_uniqueguids>
 			<localised_texts>
 				<localised_text/>
 				<localised_text
 					state="blessed_spawning"
+					is_text_localised="false"/>
+				<localised_text
+					state="chieftain"
 					is_text_localised="false"/>
 				<localised_text
 					state="crafted"
@@ -2117,6 +2126,7 @@
 				<element value="ui/skins/warhammer2/unit_card_semicircle_tech_lab.png"/>
 				<element value="ui/skins/default/unit_card_semicircle_elector.png"/>
 				<element value="ui/skins/warhammer2/unit_card_semicircle_mistwalker.png"/>
+				<element value="ui/skins/default/unit_card_semicircle_chieftain.png"/>
 			</override_images>
 		</unit_cat_frame>
 		<handle
@@ -2236,7 +2246,7 @@
 				<callback_with_context
 					callback_id="ContextImageGroupSetter"
 					context_object_id="CcoStaticObject"
-					context_function_id="Component(&quot;59B57F69-058B-4679-9A85EA5A71F75D35&quot;).CurrentSelectedComponents.FirstContext.ParentContext.GetProperty(&quot;God&quot;).ToLower">
+					context_function_id="Component(&quot;59B57F69-058B-4679-9A85EA5A71F75D35&quot;).CurrentSelectedComponents.FirstContext.ParentContext.GetProperty(&quot;God&quot;).ToLowerUnlocalised">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -2466,7 +2476,7 @@
 				<callback_with_context
 					callback_id="ContextStateSetter"
 					context_object_id="CcoMainUnitRecord"
-					context_function_id="self.ParentContext(&quot;warband_upgrades&quot;).ChildContext(&quot;god_affinity_tabs&quot;).CurrentSelectedComponents.FirstContext.ParentContext.GetProperty(&quot;God&quot;).ToLower">
+					context_function_id="self.ParentContext(&quot;warband_upgrades&quot;).ChildContext(&quot;god_affinity_tabs&quot;).CurrentSelectedComponents.FirstContext.ParentContext.GetProperty(&quot;God&quot;).ToLowerUnlocalised">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -3764,7 +3774,7 @@
 				<callback_with_context
 					callback_id="ContextStateSetter"
 					context_object_id="CcoContextSelection"
-					context_function_id="self.ChildContext(&quot;god_affinity_tabs&quot;).CurrentSelectedComponents.FirstContext.ParentContext.GetProperty(&quot;God&quot;).ToLower"/>
+					context_function_id="self.ChildContext(&quot;god_affinity_tabs&quot;).CurrentSelectedComponents.FirstContext.ParentContext.GetProperty(&quot;God&quot;).ToLowerUnlocalised"/>
 				<callback_with_context
 					callback_id="ContextCommandGiverOnVisibilityChanged"
 					context_function_id="UiMsg(&quot;RefreshUnitSelection&quot;)">

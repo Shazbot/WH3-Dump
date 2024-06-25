@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
 		<root this="C3EB6010-3E95-476D-9DD16E25B8DADB25">
 			<vortex_details this="534A6C66-9037-4DCD-9AC21B4226480653">
+				<vortex_header this="10D507A2-1766-4798-AF5669A7FE039EE4"/>
 				<label_vortex_damage_parent this="02D260DC-ADE9-4AA4-95377E9905A4F60F">
 					<label_vortex_damage_header this="BF5B0FE5-2ADB-4912-B4C7773B2AD2E311"/>
 					<label_vortex_dps this="3FA81644-889D-4F90-8DB6FF55C0FED449"/>
@@ -83,7 +84,7 @@
 					this="EB9827E6-7A73-4B35-85F76F46EAC79F74"
 					name="NewState"
 					width="360"
-					height="120"
+					height="139"
 					uniqueguid="EB9827E6-7A73-4B35-85F76F46EAC79F74">
 					<component_text
 						texthbehaviour="Never split"
@@ -205,6 +206,7 @@
 		<label_vortex_damage_parent
 			this="02D260DC-ADE9-4AA4-95377E9905A4F60F"
 			id="label_vortex_damage_parent"
+			offset="0.00,19.00"
 			priority="255"
 			tooltipslocalised="true"
 			uniqueguid="02D260DC-ADE9-4AA4-95377E9905A4F60F"
@@ -247,7 +249,7 @@
 		<label_vortex_movespeed_parent
 			this="0DC65D66-1646-4F21-B760EFE8D6EE7D5B"
 			id="label_vortex_movespeed_parent"
-			offset="0.00,72.00"
+			offset="0.00,91.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -395,7 +397,7 @@
 		<label_vortex_size_parent
 			this="8B5531FE-9D84-4767-984E9BF42A31DDE5"
 			id="label_vortex_size_parent"
-			offset="0.00,49.00"
+			offset="0.00,68.00"
 			allowhorizontalresize="false"
 			dock_offset="0.00,1.00"
 			priority="255"
@@ -525,7 +527,7 @@
 		<label_vortex_contact_parent
 			this="51F8063B-6B67-480C-9C0C168DAA0F3423"
 			id="label_vortex_contact_parent"
-			offset="0.00,96.00"
+			offset="0.00,115.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -644,7 +646,7 @@
 		<vortex_duration_parent
 			this="DA365010-C8EA-46AB-A9664D105BA1296D"
 			id="vortex_duration_parent"
-			offset="0.00,24.00"
+			offset="0.00,43.00"
 			allowhorizontalresize="false"
 			tooltipslocalised="true"
 			uniqueguid="DA365010-C8EA-46AB-A9664D105BA1296D"
@@ -878,5 +880,42 @@
 				</default>
 			</states>
 		</label_vortex_ap>
+		<vortex_header
+			this="10D507A2-1766-4798-AF5669A7FE039EE4"
+			id="vortex_header"
+			allowverticalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="10D507A2-1766-4798-AF5669A7FE039EE4"
+			currentstate="7A65FCC9-203B-4E42-B6BDB90687C3B946"
+			defaultstate="7A65FCC9-203B-4E42-B6BDB90687C3B946"
+			comment="Only show header if multiple phases in the channel">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoUnitAbility"
+					context_function_id="BombardmentRecordContext || ProjectileRecordContext"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="7A65FCC9-203B-4E42-B6BDB90687C3B946"
+					name="default"
+					width="51"
+					height="19"
+					uniqueguid="7A65FCC9-203B-4E42-B6BDB90687C3B946">
+					<component_text
+						text="Vortex"
+						textvalign="Center"
+						textxoffset="2.00,2.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="StateText_e3b68785"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</default>
+			</states>
+		</vortex_header>
 	</components>
 </layout>

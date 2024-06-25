@@ -120,7 +120,7 @@ local cutscene_intro = cutscene:new_from_cindyscene(
 end;
 
 function intro_cutscene_end()
-	play_sound(v(0,0),new_sound("Play_Movie_WH3_DLC24_QB_Unmute", false, false));
+	play_sound(v(0,0),new_sfx("Play_Movie_WH3_DLC24_QB_Unmute", false, false));
 	gb.sm:trigger_message("01_intro_cutscene_end");
 end;
 

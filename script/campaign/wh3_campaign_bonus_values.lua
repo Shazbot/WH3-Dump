@@ -1447,7 +1447,7 @@ function grudges_scripted_bv_check(military_force, bonus_value, forces_with_bonu
 			-- Check if region has Grudge resource and if it does, is it over 1000
 			if not region:pooled_resource_manager():is_null_interface() then
 				local region_prm = region:pooled_resource_manager()
-				if region_prm:resource("wh3_dlc25_dwf_grudge_points_enemy_settlements") then
+				if not region_prm:resource("wh3_dlc25_dwf_grudge_points_enemy_settlements"):is_null_interface() then
 					total_grudges = total_grudges + region_prm:resource("wh3_dlc25_dwf_grudge_points_enemy_settlements"):value()
 				end
 			end
@@ -1455,7 +1455,7 @@ function grudges_scripted_bv_check(military_force, bonus_value, forces_with_bonu
 			-- Check if force has Grudge resource and if it does, is it over 1000
 			if not military_force:pooled_resource_manager():is_null_interface() then
 				local mf_prm = military_force:pooled_resource_manager()
-				if mf_prm:resource("wh3_dlc25_dwf_grudge_points_enemy_armies") then
+				if not mf_prm:resource("wh3_dlc25_dwf_grudge_points_enemy_armies"):is_null_interface() then
 					total_grudges = total_grudges + mf_prm:resource("wh3_dlc25_dwf_grudge_points_enemy_armies"):value()
 				end
 			end

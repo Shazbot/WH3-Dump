@@ -476,7 +476,7 @@ function forced_battle:spawn_generated_force(force_key, x, y)
 
 	forced_battle_force:start_invasion(
 		function()
-			self:forced_battle_stage_2(self)
+			self:forced_battle_stage_2()
 		end,
 		false,false,false)
 	force.spawned = true

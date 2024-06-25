@@ -229,7 +229,9 @@ coc_narrative_missions.path_to_glory = {
 		initiatives = {
 			["wh3_dlc20_character_initiative_devote_exalted_hero_to_nurgle"] = true,
 			["wh3_dlc20_character_initiative_devote_sorceror_lord_to_nurgle_death"] = true, 
-			["wh3_dlc20_character_initiative_devote_sorceror_lord_to_nurgle_nurgle"] = true
+			["wh3_dlc20_character_initiative_devote_sorceror_lord_to_nurgle_nurgle"] = true,
+			["wh3_dlc25_character_initiative_devote_sorceror_to_nurgle_death"] = true,
+			["wh3_dlc25_character_initiative_devote_sorceror_to_nurgle_nurgle"] = true
 		} 					
 	},
 	wh3_dlc20_chs_valkia 	= {

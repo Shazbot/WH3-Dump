@@ -36,6 +36,9 @@
 											</timer_ring>
 										</non_infinite_parent>
 										<effect_state this="AC6E03AA-B35A-4302-9577FCD93AB4BF8B"/>
+										<bar_intensity this="147F6C89-5C05-45E9-BD9628A6603AB78D">
+											<intensity_fill this="C824A6B8-18DE-408F-8D5F65BD9C4403CE"/>
+										</bar_intensity>
 									</template_ability>
 								</active_effect_list>
 								<cooldown_effect_list this="7A1AD442-833A-45E2-8FF1FCC401BB84E4">
@@ -4355,23 +4358,24 @@
 			allowverticalresize="false"
 			dock_offset="-3.00,0.00"
 			priority="46"
-			tooltipslocalised="true"
 			uniqueguid="B18BC6AD-C3B8-4F55-B6F9FA87EAE389C7"
 			currentstate="CB803157-27B0-4930-89002CDD67F18E33"
 			defaultstate="CB803157-27B0-4930-89002CDD67F18E33">
 			<callbackwithcontextlist>
 				<callback_with_context
+					callback_id="ContextCommandGiverOnCreate"
+					context_function_id="DoIf(IsLoadingScreenActive, Do(self.SetCallbackProperty(&quot;ContextLayoutTooltip&quot;, &quot;instant_stick&quot;, &quot;&quot;), UiMsg(&quot;ContextLayoutTooltipSettingsChanged&quot;)))"/>
+				<callback_with_context
 					callback_id="ContextStateSetter"
 					context_object_id="CcoUnitDetails"
 					context_function_id="GetIfElse(IsLargeEntity, &quot;large&quot;, &quot;small&quot;)"/>
 				<callback_with_context
-					callback_id="ContextTooltipSetter"
-					context_object_id="CcoUnitDetails"
-					context_function_id="GetIfElse(IsLargeEntity, &#10;GetIfElse(IsCampaign, Loc(&quot;large_entity_campaign&quot;), Loc(&quot;large_entity&quot;)),&#10;GetIfElse(IsCampaign, Loc(&quot;small_entity_campaign&quot;), Loc(&quot;small_entity&quot;)))&#10;+ &quot;&#10;&quot; + Loc(&quot;mass&quot;)  + ': ' + RoundFloat(Mass) + &quot;[[img:ui/skins/default/icon_stat_mass.png]]&quot; + &quot;&#10;&quot; + Loc(&quot;unit_stat_mass_description&quot;)">
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoUnitDetails">
 					<child_m_user_properties>
 						<property
-							name="update_constant"
-							value="GetIfElse(IsContextValid(BattleRoot), 1000, 0)"/>
+							name="layout_path"
+							value="ui/common ui/tooltip_entity_info"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
@@ -4401,8 +4405,6 @@
 					name="large"
 					width="100"
 					height="24"
-					tooltip="Entity &amp; unit size||This is a unit of large entities.||This displays the current unit size compared to the maximum unit size. Units will replenish over time when in owned territory or certain stances."
-					tooltiplabel="dy_men_large_Tooltip_1f001c"
 					interactive="true"
 					uniqueguid="8F19E40F-7F49-438B-9D668C6311D2CEBE">
 					<imagemetrics>
@@ -4432,8 +4434,6 @@
 					name="small"
 					width="100"
 					height="24"
-					tooltip="Entity &amp; Unit size||This is a unit of small entities.||This displays the current unit size compared to the maximum unit size. Units will replenish over time when in owned territory or certain stances."
-					tooltiplabel="dy_men_small_Tooltip_180019"
 					interactive="true"
 					uniqueguid="CB803157-27B0-4930-89002CDD67F18E33">
 					<imagemetrics>
@@ -8166,7 +8166,27 @@
 				<callback_with_context
 					callback_id="ContextCommandGiverOnContextSet"
 					context_object_id="CcoUnitDetails unit_details, CcoString category_str"
-					context_function_id="Do(self.SetState(category_str.Value), self.SetVisible(unit_details.AbilityDetailsList.Any( (ability) =&gt;{ ability.CategoryStateName == category_str.Value &amp;&amp; (IsContextValid(ability.AbilityCollectionContext) == false || ability == ability.AbilityCollectionContext.PrimaryAbilityForUnit(unit_details)) } )))"/>
+					context_function_id="Do(self.SetState(category_str.Value), self.SetVisible(unit_details.AbilityDetailsList.Any( (ability) =&gt; { ability.CategoryStateName == category_str.Value &amp;&amp; (IsContextValid(ability.AbilityCollectionContext) == false || ability == ability.AbilityCollectionContext.PrimaryAbilityForUnit(unit_details)) } )))"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoComponent"
+					context_function_id="NumVisibleChildren &gt; 0">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextInitComponent"
+					context_object_id="CcoStaticObject"
+					context_function_id="self.ChildContext(0)">
+					<child_m_user_properties>
+						<property
+							name="init_self"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<states>
 				<abilities
@@ -8296,7 +8316,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoUnitDetails unit_details"
-					context_function_id="unit_details.AbilityDetailsList.Filter( (ability) =&gt;{ ability.CategoryStateName == self.ParentContext.CurrentState &amp;&amp; (IsContextValid(ability.AbilityCollectionContext) == false || ability == ability.AbilityCollectionContext.PrimaryAbilityForUnit(unit_details)) } )">
+					context_function_id="unit_details.AbilityDetailsList.Filter( (ability) =&gt; { ability.CategoryStateName == self.ParentContext.CurrentState &amp;&amp; (IsContextValid(ability.AbilityCollectionContext) == false || ability == ability.AbilityCollectionContext.PrimaryAbilityForUnit(unit_details)) } )">
 					<child_m_user_properties>
 						<property
 							name="hide_if_empty"
@@ -9062,6 +9082,18 @@
 			uniqueguid="6734CAD7-0502-4C94-BF81A480D7CCA43F"
 			currentstate="EF2FD4AF-28F5-4519-BD9C2918A3EDA207"
 			defaultstate="EF2FD4AF-28F5-4519-BD9C2918A3EDA207">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoUnitDetails"
+					context_function_id="UnitRecordContext.SpecialCategoryKey">
+					<child_m_user_properties>
+						<property
+							name="fallback_state"
+							value="default"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
 					this="A6A2B3D3-6D17-4D6F-B607D03BDFED3281"
@@ -11298,5 +11330,119 @@
 				</default>
 			</states>
 		</icon_regen>
+		<bar_intensity
+			this="147F6C89-5C05-45E9-BD9628A6603AB78D"
+			id="bar_intensity"
+			offset="26.00,2.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center Right"
+			dock_offset="10.00,0.00"
+			component_anchor_point="1.00,0.50"
+			tooltipslocalised="true"
+			uniqueguid="147F6C89-5C05-45E9-BD9628A6603AB78D"
+			currentstate="08B0D8EF-36CB-4D2B-8E0A4F43B251B5B3"
+			defaultstate="08B0D8EF-36CB-4D2B-8E0A4F43B251B5B3">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoBattleUnitEffect"
+					context_function_id="BattleAbilityContext"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoBattleAbility"
+					context_function_id="MaxIntensity != 1.0 &amp;&amp; IntensitySettingContext.IntensityType != &quot;set&quot;"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="29B5ED62-1C2B-403F-A917D1A18F53120D"
+					uniqueguid="29B5ED62-1C2B-403F-A917D1A18F53120D"
+					imagepath="ui/skins/default/intensity_small_bar_frame.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="08B0D8EF-36CB-4D2B-8E0A4F43B251B5B3"
+					name="default"
+					width="12"
+					height="24"
+					uniqueguid="08B0D8EF-36CB-4D2B-8E0A4F43B251B5B3">
+					<imagemetrics>
+						<image
+							this="732EB80E-7030-4163-917DED0B63BF36D2"
+							uniqueguid="732EB80E-7030-4163-917DED0B63BF36D2"
+							componentimage="29B5ED62-1C2B-403F-A917D1A18F53120D"
+							offset="1.00,-4.00"
+							width="9"
+							tile="true"
+							dockpoint="Bottom Right"
+							dock_offset="-2.00,4.00"
+							margin="5.00,0.00,5.00,0.00"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</bar_intensity>
+		<intensity_fill
+			this="C824A6B8-18DE-408F-8D5F65BD9C4403CE"
+			id="intensity_fill"
+			offset="2.00,0.00"
+			allowhorizontalresize="false"
+			docking="Bottom Center"
+			dock_offset="-2.00,0.00"
+			component_anchor_point="0.50,1.00"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="C824A6B8-18DE-408F-8D5F65BD9C4403CE"
+			currentstate="02314185-3B35-4C0D-96C59FBAA7D49AE6"
+			defaultstate="02314185-3B35-4C0D-96C59FBAA7D49AE6">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextFillBar"
+					context_object_id="CcoBattleAbility"
+					context_function_id="AbilityApplyIntensity(1)">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value="100"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextColourSetter"
+					context_object_id="CcoStaticObject"
+					context_function_id="MainThemeColour"/>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoBattleUnitEffect"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="C1DAA0D9-384A-4752-B0B2213084E2DA6C"
+					uniqueguid="C1DAA0D9-384A-4752-B0B2213084E2DA6C"
+					imagepath="ui/skins/default/army_schem_str_bar_fill.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="02314185-3B35-4C0D-96C59FBAA7D49AE6"
+					name="default"
+					width="4"
+					height="24"
+					uniqueguid="02314185-3B35-4C0D-96C59FBAA7D49AE6">
+					<imagemetrics>
+						<image
+							this="39E692AF-EE39-4B01-A0B5B4AF4F79E2E0"
+							uniqueguid="39E692AF-EE39-4B01-A0B5B4AF4F79E2E0"
+							componentimage="C1DAA0D9-384A-4752-B0B2213084E2DA6C"
+							width="4"
+							height="24"
+							dockpoint="Bottom Center"
+							shadertechnique_vars="2.00,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+					</imagemetrics>
+					<component_text
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
+				</default>
+			</states>
+		</intensity_fill>
 	</components>
 </layout>

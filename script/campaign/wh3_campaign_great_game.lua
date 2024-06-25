@@ -226,7 +226,6 @@ function great_game_start()
 		function(context)
 			local ritual = context:ritual();
 			local ritual_key = ritual:ritual_key();
-			
 			if string.find(ritual_key, "wh3_main_ritual_kho_gg_1") then
 				local target_force = ritual:ritual_target():get_target_force();
 				local target_force_cqi = target_force:command_queue_index();
@@ -240,54 +239,11 @@ function great_game_start()
 				cm:set_saved_value("khorne_ritual_battle_active", true);
 				generate_khorne_ritual_battle_force(target_force:general_character(), string.find(ritual_key, "upgraded"));
 				khorne_ritual_battle_cleanup();
-			elseif string.find(ritual_key, "wh3_main_ritual_nur_gg_4") then
-				local target_force = ritual:ritual_target():get_target_force();
-				
-				if not target_force:is_null_interface() and target_force:has_general() then
-					local general = target_force:general_character();
-					
-					if general:has_region() then
-						local plagues = {
-							"wh3_main_nur_base_Ague",
-							"wh3_main_nur_base_Buboes",
-							"wh3_main_nur_base_Pox",
-							"wh3_main_nur_base_Rot",
-							"wh3_main_nur_base_Shakes"
-						};
-						
-						local selected_plague = plagues[cm:random_number(#plagues)];
-						local target_province = general:region():province();
-						local target_province_key = target_province:key();
-						local target_faction = target_force:faction();
-						
-						-- spawn the plague at every region that's in the province of the target force
-						local regions = target_province:regions();
-						
-						for i = 0, regions:num_items() - 1 do
-							cm:spawn_plague_at_settlement(target_faction, regions:item_at(i):settlement(), selected_plague);
-						end;
-						
-						-- spawn the plague at every army that's in the province of the target force
-						local faction_list = cm:model():world():faction_list();
-						
-						for i = 0, faction_list:num_items() - 1 do
-							local current_faction = faction_list:item_at(i);
-							local mf_list = current_faction:military_force_list();
-							
-							for j = 0, mf_list:num_items() - 1 do
-								local current_mf = mf_list:item_at(j);
-								
-								if current_mf:has_general() then
-									local current_general = current_mf:general_character();
-									
-									if current_general:has_region() and current_general:region():province():key() == target_province_key then
-										cm:spawn_plague_at_military_force(target_faction, current_mf, selected_plague);
-									end;
-								end;
-							end;
-						end;
-					end;
-				end;
+
+			elseif ritual_key == "wh3_main_ritual_nur_gg_4" then
+				cm:heal_military_force(ritual:ritual_target():get_target_force())	
+			elseif ritual_key == "wh3_main_ritual_nur_gg_4_upgraded" then
+				heal_forces_in_province(ritual:ritual_target():get_target_region())
 			elseif ritual_key == "wh3_main_ritual_belakor_gg_3" then
 				local target_force = ritual:ritual_target():get_target_force();
 				
@@ -463,6 +419,22 @@ function kill_khorne_ritual_battle_invasion()
 		);
 	end;
 end;
+
+
+function heal_forces_in_province(region)
+	local target_province_regions = region:province():regions()
+	for j=0, target_province_regions:num_items() -1 do 
+		local regions = target_province_regions:item_at(j)
+		local region_chars = regions:characters_in_region()
+			for z=0, region_chars:num_items() -1 do 
+				local character = region_chars:item_at(z)
+				if character:has_military_force() and character:has_region() and character:faction():subculture() == "wh3_main_sc_nur_nurgle" then
+						cm:heal_military_force(character:military_force())
+				end
+			end	
+	end
+end
+
 
 function update_available_rituals(interval_string, counter)
 	local gg_level = tonumber(string.sub(interval_string, -1));
