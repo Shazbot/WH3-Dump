@@ -347,7 +347,7 @@ function setup_teleportals_listeners(exiting_teleportal)
 				local character = context:family_member():character();
 				if not character:is_null_interface() then
 					local faction = character:faction();
-					return context:area_key() == start_teleportal and exiting_teleportal ~= character:command_queue_index() and cm:char_is_general_with_army(character) and not faction:pooled_resource_manager():resource("wh3_main_realm_complete_khorne"):is_null_interface();
+					return not cm:model():pending_battle():is_active() and context:area_key() == start_teleportal and exiting_teleportal ~= character:command_queue_index() and cm:char_is_general_with_army(character) and not faction:pooled_resource_manager():resource("wh3_main_realm_complete_khorne"):is_null_interface();
 				end;
 			end,
 			function(context)

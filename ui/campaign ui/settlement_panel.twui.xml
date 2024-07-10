@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -113,10 +113,10 @@
 							<discovered_views this="070DF7E0-82A6-43EC-B8D9AC0DB3DE0423">
 								<discovered_list this="547F2FFF-AE41-499C-92CA04CBC24E6248">
 									<template_discovered_entry this="36739DDF-8049-47B5-8AEC86065E434D2B">
-										<button_remove this="DA96B37A-9FE7-4C19-A22F7C422E1AE7A6"/>
 										<dy_banner this="21E567D1-417A-47F7-B0B49C51511108FD"/>
 										<dy_name this="F95322E1-1762-4E64-95788282E5E0652B"/>
 										<dy_cost this="C990ED17-3124-433C-BA744CA913597832"/>
+										<button_remove this="DA96B37A-9FE7-4C19-A22F7C422E1AE7A6"/>
 									</template_discovered_entry>
 								</discovered_list>
 							</discovered_views>
@@ -867,11 +867,11 @@
 				<callback_with_context
 					callback_id="ContextCommandEvent"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="GetIf(IsPlayerOwned, self.SimulateLClick)">
+					context_function_id="DoIf(HostileSlotsGroupList.Any(CategoryObject.IsPlayersFaction == false &amp;&amp; GroupedList.FirstContext.ForeignSlotDiscoveredByFaction(PlayersFaction)) == false, self.SimulateLClick)">
 					<child_m_user_properties>
 						<property
 							name="event0"
-							value="ForeignSlotRemoved"/>
+							value="ForeignSlotRemovedUnique"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context callback_id="CallbackAnimTrigger"/>
@@ -1030,7 +1030,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="HostileSlotsGroupList.Any((this.IsPlayerOwned &amp;&amp; GroupedList.FirstContext.ForeignSlotDiscoveredByFaction(PlayersFaction)))">
+					context_function_id="HostileSlotsGroupList.Any(CategoryObject.IsPlayersFaction == false &amp;&amp; GroupedList.FirstContext.ForeignSlotDiscoveredByFaction(PlayersFaction))">
 					<child_m_user_properties>
 						<property
 							name="update_when_parent_invisible"
@@ -1673,7 +1673,6 @@
 			uniqueguid_in_template="18ECC36C-741F-40BF-869875E6BB71B6CC"
 			uniqueguid="DA96B37A-9FE7-4C19-A22F7C422E1AE7A6"
 			dimensions="55.00,55.00"
-			dock_point="Center Right"
 			sound_category="UI_GBL_TMP_Round_Small_Button">
 			<state_uniqueguids>
 				<state_uniqueguid
@@ -3767,7 +3766,7 @@
 			dock_offset="11.00,9.00"
 			tooltipslocalised="true"
 			uniqueguid="AF505EA1-5752-4A1C-9F84EA302E98FA52"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="6D6692D4-9BCC-4423-A28D62606E143691"
 			defaultstate="6D6692D4-9BCC-4423-A28D62606E143691">
 			<states>
@@ -7176,7 +7175,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="(IsPlayerOwned &amp;&amp; HostileSlotsGroupList.Any(GroupedList.FirstContext.ForeignSlotDiscoveredByFaction(PlayersFaction))) || AlliedSlotsGroupList.IsEmpty == false || HostileSlotsGroupList.Any(CategoryObject.IsPlayersFaction)">
+					context_function_id="HostileSlotsGroupList.Any(GroupedList.FirstContext.ForeignSlotDiscoveredByFaction(PlayersFaction)) || AlliedSlotsGroupList.IsEmpty == false || HostileSlotsGroupList.Any(CategoryObject.IsPlayersFaction)">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -9238,7 +9237,6 @@
 			this="547F2FFF-AE41-499C-92CA04CBC24E6248"
 			id="discovered_list"
 			offset="204.00,115.00"
-			allowhorizontalresize="false"
 			docking="Top Right External"
 			dock_offset="0.00,185.00"
 			component_anchor_point="-0.00,1.00"
@@ -9250,7 +9248,7 @@
 				<callback_with_context
 					callback_id="ButtonGroup"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="HostileSlotsGroupList.Filter(GroupedList.FirstContext.ForeignSlotDiscoveredByFaction(PlayersFaction))">
+					context_function_id="HostileSlotsGroupList.Filter(CategoryObject.IsPlayersFaction == false &amp;&amp; GroupedList.FirstContext.ForeignSlotDiscoveredByFaction(PlayersFaction))">
 					<child_m_user_properties>
 						<property
 							name="Single Selection"
@@ -9273,7 +9271,7 @@
 				<newstate
 					this="519DFCE4-E4C1-49EE-81051F4789D7F343"
 					name="NewState"
-					width="300"
+					width="306"
 					height="70"
 					interactive="true"
 					uniqueguid="519DFCE4-E4C1-49EE-81051F4789D7F343">
@@ -9282,7 +9280,7 @@
 							this="04656A9E-4FED-4681-AC40EC335A153863"
 							uniqueguid="04656A9E-4FED-4681-AC40EC335A153863"
 							componentimage="E8A18B4F-43DB-45EA-9669434AA83FC538"
-							width="300"
+							width="310"
 							height="70"
 							tile="true"
 							margin="16.00,20.00,16.00,20.00"/>
@@ -9292,7 +9290,7 @@
 			<LayoutEngine
 				type="List"
 				sizetocontent="true"
-				secondary_margins="10.00,0.00"
+				secondary_margins="10.00,5.00"
 				margins="10.00,10.00">
 				<columnwidths>
 					<column width="300"/>
@@ -9302,9 +9300,7 @@
 		<dy_banner
 			this="21E567D1-417A-47F7-B0B49C51511108FD"
 			id="dy_banner"
-			offset="0.00,13.00"
-			docking="Center Left"
-			component_anchor_point="0.00,0.50"
+			offset="5.00,13.00"
 			tooltipslocalised="true"
 			uniqueguid="21E567D1-417A-47F7-B0B49C51511108FD"
 			currentstate="C0FFC4C7-188D-472A-AC785332A892D616"
@@ -9342,12 +9338,9 @@
 		<dy_cost
 			this="C990ED17-3124-433C-BA744CA913597832"
 			id="dy_cost"
-			offset="155.00,10.00"
+			offset="170.00,11.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
-			docking="Center Right"
-			dock_offset="-55.00,0.00"
-			component_anchor_point="1.00,0.50"
 			priority="1"
 			tooltipslocalised="true"
 			componentleveltooltip="Cost||This amount will be deducted from your [[img:icon_treasury]][[/img]]{{tr:treasury}} in order to call upon this intervention."
@@ -9468,10 +9461,7 @@
 		<dy_name
 			this="F95322E1-1762-4E64-95788282E5E0652B"
 			id="dy_name"
-			offset="26.00,0.00"
-			docking="Center Left"
-			dock_offset="26.00,0.00"
-			component_anchor_point="0.00,0.50"
+			offset="30.00,0.00"
 			tooltipslocalised="true"
 			uniqueguid="F95322E1-1762-4E64-95788282E5E0652B"
 			currentstate="1024C361-0C93-431E-9203A250AA485BAD"
@@ -9504,9 +9494,9 @@
 		<template_discovered_entry
 			this="36739DDF-8049-47B5-8AEC86065E434D2B"
 			id="template_discovered_entry"
-			offset="10.00,10.00"
-			allowhorizontalresize="false"
+			offset="5.00,10.00"
 			allowverticalresize="false"
+			dock_offset="-5.00,0.00"
 			tooltipslocalised="true"
 			uniqueguid="36739DDF-8049-47B5-8AEC86065E434D2B"
 			currentstate="8129C876-A422-4253-804036D73009D944"
@@ -9554,7 +9544,7 @@
 				<active
 					this="8129C876-A422-4253-804036D73009D944"
 					name="active"
-					width="280"
+					width="296"
 					height="50"
 					interactive="true"
 					uniqueguid="8129C876-A422-4253-804036D73009D944"
@@ -9566,7 +9556,7 @@
 				<down
 					this="0DB38FAD-489C-4A6C-9707B14C1397D9C1"
 					name="down"
-					width="280"
+					width="296"
 					height="50"
 					interactive="true"
 					uniqueguid="0DB38FAD-489C-4A6C-9707B14C1397D9C1"
@@ -9576,7 +9566,8 @@
 							this="09EC2503-3D7B-40C6-8F2E25B683993F26"
 							uniqueguid="09EC2503-3D7B-40C6-8F2E25B683993F26"
 							componentimage="020A7347-30F7-4C92-8BD440170902A54C"
-							width="280"
+							offset="3.00,0.00"
+							width="287"
 							height="50"
 							colour="#FFFFFF64"/>
 					</imagemetrics>
@@ -9592,7 +9583,7 @@
 				<down_off
 					this="F4FC5961-BC06-4F39-B0D5B100D96478C4"
 					name="down_off"
-					width="280"
+					width="296"
 					height="50"
 					interactive="true"
 					uniqueguid="F4FC5961-BC06-4F39-B0D5B100D96478C4"
@@ -9607,7 +9598,7 @@
 				<hover
 					this="4B622B78-CDF7-485E-B127E4F629306DF0"
 					name="hover"
-					width="280"
+					width="296"
 					height="50"
 					interactive="true"
 					uniqueguid="4B622B78-CDF7-485E-B127E4F629306DF0"
@@ -9617,7 +9608,8 @@
 							this="D9B2BD82-BF81-4B17-A0381154D9E07AC1"
 							uniqueguid="D9B2BD82-BF81-4B17-A0381154D9E07AC1"
 							componentimage="020A7347-30F7-4C92-8BD440170902A54C"
-							width="280"
+							offset="4.00,0.00"
+							width="287"
 							height="50"
 							colour="#FFFFFF64"/>
 					</imagemetrics>
@@ -9633,7 +9625,7 @@
 				<selected
 					this="2940CF37-0180-4161-9FD9E905A9E7A687"
 					name="selected"
-					width="280"
+					width="296"
 					height="50"
 					interactive="true"
 					uniqueguid="2940CF37-0180-4161-9FD9E905A9E7A687"
@@ -9643,11 +9635,18 @@
 							this="78C0B6FC-38ED-4F35-A8B4DFAF7872FD42"
 							uniqueguid="78C0B6FC-38ED-4F35-A8B4DFAF7872FD42"
 							componentimage="020A7347-30F7-4C92-8BD440170902A54C"
-							width="280"
+							offset="4.00,0.00"
+							width="287"
 							height="50"/>
 					</imagemetrics>
 				</selected>
 			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				spacing="1.00,0.00"
+				sizetocontent="true"
+				margins="5.00,0.00"
+				vertical_alignment="Center"/>
 		</template_discovered_entry>
 	</components>
 </layout>

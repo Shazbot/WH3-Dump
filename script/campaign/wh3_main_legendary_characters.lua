@@ -5,9 +5,7 @@
 ------------------
 
 -- To use the character unlocking function there are a few steps you need to take
--- Add the character name of the character you want to add into character_unlocking.character_list
--- 		EXAMPLE: character_unlocking.character_list = {"kroak", "ulrika", ...}
--- Next add a new section for the character in character_unlocking.character_data with the same name you added in the character_list
+-- Add a new section for the character in character_unlocking.character_data
 -- 		EXAMPLE: character_unlocking.character_data = {ulrika = {} }
 -- Next determine the unlock conditions for the player and AI. This determines how the initial chain of events to unlock the character starts
 -- 		In the example the player gets a mission once their LL reaches a specified rank, while the AI would get them once a specified turn is reached
@@ -85,29 +83,6 @@ character_unlocking.character_unlock_condition_types = {
 	building = "building" -- Unlocked when you build a specified building
 }
 
-character_unlocking.character_alternate_grant_condition_types = {
-	-- Alternate payload options that handle granting the character
-	dilemma_payload = "dilemma" -- Grant Character via payload
-}
-
-character_unlocking.character_list = {
-	-- REQUIRED. List of all the characters to be used. Must match character names in character_data
-	"kroak",
-	"ghoritch",
-	"ariel",
-	"coeddil",
-	"gorduz",
-	"ulrika",		
-	"harald",
-	"scribes",
-	"aekold",
-	"saytang",
-	"leysa",
-	"karanak",
-	"gotrek_and_felix",
-	"garagrim",
-	"theodore"
-}
 character_unlocking.character_data = {
 	kroak = {
 		-- Lizardmen Players will get a mission to unlock lord kroak after reaching rank 15
@@ -274,7 +249,6 @@ character_unlocking.character_data = {
 
 		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
 		ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
-		alternate_grant_condition = character_unlocking.character_alternate_grant_condition_types.dilemma_payload,
 		unlock_rank = 11,
 		ai_unlock_rank = 15,
 		has_spawned = false,
@@ -302,9 +276,6 @@ character_unlocking.character_data = {
 				["main_warhammer"] = "wh3_dlc25_ie_dwf_ulrika_stage_1",
 				["wh3_main_chaos"] = "wh3_dlc25_chaos_dwf_ulrika_stage_1"				
 			},
-		},
-		dilemma_keys = {
-			"wh3_dlc23_neu_ulrika_choice"
 		},
 		spawn_hero_dilemma_choice = {0},
 		ai_spawn_hero_dilemma_choice = 1,
@@ -383,7 +354,6 @@ character_unlocking.character_data = {
 
 		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
 		ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.turn,
-		alternate_grant_condition = character_unlocking.character_alternate_grant_condition_types.dilemma_payload,
 		unlock_rank = 10,
 		ai_unlock_turn = 30,
 		has_spawned = false,
@@ -419,10 +389,6 @@ character_unlocking.character_data = {
 			["wh3_main_dae_daemon_prince"] = "wh3_dlc24_mis_tze_blue_scribes_stage_1_dae",
 			["wh3_dlc24_tze_the_deceivers"] = "wh3_dlc24_mis_tze_blue_scribes_stage_1_changeling"
 		},
-		dilemma_keys = {
-			"wh3_dlc24_tze_blue_scribes_choice"
-		},
-		spawn_hero_dilemma_choice = {0,1},
 		mission_chain_keys = {
 			main_warhammer = {
 				"wh3_dlc24_mis_tze_blue_scribes_stage_1",
@@ -481,7 +447,6 @@ character_unlocking.character_data = {
 
 		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
 		ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.turn,
-		alternate_grant_condition = character_unlocking.character_alternate_grant_condition_types.dilemma_payload,
 		unlock_rank = 12,
 		ai_unlock_turn = 30,
 		has_spawned = false,
@@ -537,10 +502,6 @@ character_unlocking.character_data = {
 				["main_warhammer"] = "wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_1_chs",
 			},
 		},
-		dilemma_keys = {
-			"wh3_dlc24_tze_aekold_helbras_choice"
-		},
-		spawn_hero_dilemma_choice = {0,1},
 		ancillaries = {
 			"wh3_dlc24_anc_weapon_the_windblade",
 			"wh3_dlc24_anc_enchanted_item_the_breath_of_life"
@@ -597,7 +558,6 @@ character_unlocking.character_data = {
 		-- If there are no human Cathayan players the strongest Cathay faction will get Saytang after 30 turns
 		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
 		ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.turn,
-		alternate_grant_condition = character_unlocking.character_alternate_grant_condition_types.dilemma_payload,
 		unlock_rank = 13,
 		ai_unlock_turn = 30,
 		has_spawned = false,
@@ -622,10 +582,6 @@ character_unlocking.character_data = {
 				["wh3_main_chaos"] = "wh3_dlc24_mis_cth_saytang_unlock_01"
 			},
 		},
-		dilemma_keys = {
-			"wh3_dlc24_cth_saytang_choice"
-		},
-		spawn_hero_dilemma_choice = {0,1},
 		ancillaries = {
 			"wh3_dlc24_anc_weapon_wind_bow"
 		},
@@ -656,7 +612,6 @@ character_unlocking.character_data = {
 
 		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
 		ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.turn,
-		alternate_grant_condition = character_unlocking.character_alternate_grant_condition_types.dilemma_payload,
 		unlock_rank = 11,
 		ai_unlock_turn = 30,
 		has_spawned = false,
@@ -685,10 +640,6 @@ character_unlocking.character_data = {
 				["wh3_main_chaos"] = "wh3_dlc24_mis_ksl_golden_knight_unlock_ostankya_01"
 			},
 		},
-		dilemma_keys = {
-			"wh3_dlc24_ksl_golden_knight_choice"
-		},
-		spawn_hero_dilemma_choice = {0,1},
 		ancillaries = {
 			"wh3_dlc24_anc_weapon_ursuns_claw",
 			"wh3_dlc24_anc_enchanted_item_totem_of_ursus",
@@ -787,6 +738,20 @@ character_unlocking.character_data = {
 				"wh3_pro12_mis_kho_karanak_unlock_01"
 			}
 		},
+		missions_to_trigger_dilemma = {
+			main_warhammer = {
+				"wh3_pro12_mis_ie_chs_karanak_unlock_01",
+				"wh3_pro12_mis_ie_dae_karanak_unlock_01",
+				"wh3_pro12_mis_ie_kho_karanak_unlock_01",
+			},
+			wh3_main_chaos = {
+				"wh3_pro12_mis_chs_karanak_unlock_01",
+				"wh3_pro12_mis_dae_karanak_unlock_01",
+				"wh3_pro12_mis_kho_karanak_unlock_01",
+			}
+		},
+		trigger_dilemma_key = "wh3_pro12_kho_karanak_choice",
+		alt_reward_dilemma_triggered = false
 	},
 	gotrek_and_felix = {
 		-- Empire, Bretonnia, Dwarfs, Kislev and Cathay Players will get a mission to unlock Gotrek and Felix after reaching rank 15
@@ -1022,6 +987,13 @@ character_unlocking.character_data = {
 	},
 }
 
+-- build a numerically indexed list of character keys
+character_unlocking.character_list = {}
+for character_name, _ in pairs(character_unlocking.character_data) do
+	table.insert(character_unlocking.character_list, character_name)
+end
+table.sort(character_unlocking.character_list)
+
 function character_unlocking:setup_legendary_hero_unlocking()
 	for i = 1, #self.character_list do
 		local character = self.character_list[i]
@@ -1061,11 +1033,9 @@ function character_unlocking:setup_legendary_hero_unlocking()
 					self:add_building_completed_listeners(character)
 				end
 
-				-- Setup listeners for alternate grant conditions
-				if current_character.alternate_grant_condition ~= nil then
-					if current_character.alternate_grant_condition == self.character_alternate_grant_condition_types.dilemma_payload then
-						self:add_dilemma_payload_listener(character)
-					end
+				-- Setup listeners for dilemma grant condition
+				if current_character.trigger_dilemma_key then
+					self:add_dilemma_payload_listener(character)
 				end
 			end
 		end
@@ -1163,7 +1133,7 @@ function character_unlocking:setup_mission_listeners(character)
 			end,
 			function(context)
 				local faction_name = context:faction():name()
-				if not character_info.alternate_grant_condition then
+				if not character_info.trigger_dilemma_key then
 					self:spawn_hero(faction_name, character)
 					self:cancel_missions_for_other_players(faction_name, character, character_mission_success)
 				end
@@ -1341,12 +1311,12 @@ function character_unlocking:add_dilemma_payload_listener(character)
 		character_dilemma_choice,
 		"DilemmaChoiceMadeEvent",
 		function(context)
-			return self:is_match_key_from_list(context:dilemma(), character_info.dilemma_keys)
+			return context:dilemma() == character_info.trigger_dilemma_key
 		end,
 		function(context)
 			local choice = context:choice()
 			local cancel_for_other_mp_players = true
-			if self:is_match_key_from_list(choice, character_info.spawn_hero_dilemma_choice) then
+			if not character_info.spawn_hero_dilemma_choice or self:is_match_key_from_list(choice, character_info.spawn_hero_dilemma_choice) then -- if a choice isn't specifically listed, spawn with any choice
 				self:spawn_hero(context:faction():name(), character, context:faction():faction_leader():command_queue_index())
 			elseif #cm:get_human_factions() > 1 and choice == character_info.ai_spawn_hero_dilemma_choice then
 				cancel_for_other_mp_players = false -- Don't cancel for other mp players
@@ -1428,7 +1398,7 @@ function character_unlocking:add_building_completed_listeners(character)
 		function(context)
 			local faction_interface = context:faction()
 			local faction_name = faction_interface:name()
-			if not character_info.alternate_grant_condition then
+			if not character_info.trigger_dilemma_key then
 				self:spawn_hero(faction_name, character, faction_interface:faction_leader():command_queue_index())
 				self:cancel_missions_for_other_players(faction_name, character, building_mission_success)
 			end
@@ -1851,7 +1821,7 @@ function character_unlocking:setup_mission_completed_spawn_hero_listener(charact
 		function(context)
 			local faction = context:faction()
 			local faction_name = faction:name()
-			if not character_info.alternate_grant_condition then
+			if not character_info.trigger_dilemma_key then
 				self:spawn_hero(faction_name, character, faction:faction_leader():command_queue_index())
 				self:cancel_missions_for_other_players(faction_name, character, character_mission_success)
 			end
@@ -1877,7 +1847,7 @@ function character_unlocking:setup_ritual_completed_spawn_hero_listener(characte
 		function(context)
 			local faction = context:performing_faction()
 			local name = faction:name()
-			if not character_info.alternate_grant_condition then
+			if not character_info.trigger_dilemma_key then
 				self:spawn_hero(name, character, faction:faction_leader():command_queue_index())
 
 				for _, v in ipairs(character_info.allowed_factions) do

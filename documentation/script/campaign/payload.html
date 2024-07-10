@@ -65,9 +65,11 @@
 							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:payload:text_display">text_display</a></li>
 						<li>&emsp;&emsp;<a href="#section:payload:Agent Payloads">Agent Payloads</a></li>
 							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:payload:agent">agent</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:payload:agent_at_faction_leader">agent_at_faction_leader</a></li>
 							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:payload:agent_for_faction">agent_for_faction</a></li>
 						<li>&emsp;&emsp;<a href="#section:payload:Ancillary Payloads">Ancillary Payloads</a></li>
 							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:payload:ancillary_mission_payload">ancillary_mission_payload</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:payload:ancillary_mission_payload_specific">ancillary_mission_payload_specific</a></li>
 						<li>&emsp;&emsp;<a href="#section:payload:Pooled Resource Payloads">Pooled Resource Payloads</a></li>
 							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:payload:pooled_resource_mission_payload">pooled_resource_mission_payload</a></li>
 							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:payload:khorne_glory">khorne_glory</a></li>
@@ -82,6 +84,12 @@
 							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:payload:devotion">devotion</a></li>
 							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:payload:supporters">supporters</a></li>
 							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:payload:meat">meat</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:payload:chivalry">chivalry</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:payload:slaves">slaves</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:payload:infamy">infamy</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:payload:souls">souls</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:payload:canopic">canopic</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:payload:spirit">spirit</a></li>
 						<li>&emsp;&emsp;<a href="#section:payload:Mercenary Payloads">Mercenary Payloads</a></li>
 							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:payload:mercenary_mission_payload">mercenary_mission_payload</a></li>
 						<li>&emsp;&emsp;<a href="#section:payload:Effect Bundles">Effect Bundles</a></li>
@@ -244,7 +252,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1990</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1994</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -290,7 +298,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2008</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2012</p>
 						</dd>
 					</dl>
 				</div>
@@ -332,7 +340,7 @@
 							<ol>
 								<li><code><code><a href="lua.html#class:string">string</a></code></code> payload string</li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2033</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2037</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -388,7 +396,7 @@
 							<ol>
 								<li><code><code><a href="lua.html#class:string">string</a></code></code> payload string</li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2046</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2050</p>
 						</dd>
 					</dl>
 				</div>
@@ -430,7 +438,7 @@
 							<ol>
 								<li><code><code><a href="lua.html#class:string">string</a></code></code> payload string</li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2075</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2079</p>
 						</dd>
 					</dl>
 				</div>
@@ -506,7 +514,64 @@
 							<ol>
 								<li><code><code><a href="lua.html#class:string">string</a></code></code> payload string</li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2102</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2106</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:payload:agent_at_faction_leader"><h3 class="function_name"><strong><code>payload.agent_at_faction_leader(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">agent type</i><code><strong>, <code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">agent subtype</i><code><strong>, [<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">action points</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a payload string which defines an agent reward that is created at the event's faction leader for a string mission definition. No kind of equivalence is looked up.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Agent type key, from the <code>agents</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Agent subtype key, from the <code>agent_subtypes</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=100</i></p>
+										<p>Percentage of action points that the spawned agent should start with. By default the agent starts with 100% action points.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> payload string</li>
+							</ol>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2144</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -575,7 +640,7 @@
 							<ol>
 								<li><code><code><a href="lua.html#class:string">string</a></code></code> payload string</li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2140</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2177</p>
 						</dd>
 					</dl>
 				</div>
@@ -588,7 +653,7 @@
 				<div class="section_body">
 					<dl class="function">
 						<dt>
-							<a name="function:payload:ancillary_mission_payload"><h3 class="function_name"><strong><code>payload.ancillary_mission_payload(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">ancillary key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">ancillary category</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">ancillary rarity</i><code><strong><br />)</code></strong></h3></a>
+							<a name="function:payload:ancillary_mission_payload"><h3 class="function_name"><strong><code>payload.ancillary_mission_payload(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">ancillary category</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">ancillary rarity</i><code><strong>]<br />)</code></strong></h3></a>
 						</dt>
 						<dd>
 							Returns a mission reward string that adds the specified ancillary to the faction pool when the mission being constructed is completed.
@@ -608,7 +673,7 @@
 										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
 									</td>
 									<td>
-										<p>Ancillary key, from the <code>ancillaries</code> database table.</p>
+										<p>Faction key, from the <code>factions</code> database table.</p>
 									</td>
 								</tr>
 								<tr>
@@ -619,7 +684,8 @@
 										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
 									</td>
 									<td>
-										<p>Faction key, from the <code>factions</code> database table.</p>
+										<p><i>optional, default value=nil</i></p>
+										<p>Ancillary category. Valid values are presently <code>"armour"</code>, <code>"enchanted_item"</code>>, <code>"banner"</code>>, <code>"talisman"</code>>, <code>"weapon"</code> and <code>"arcane_item"</code>. Arcane items may only be equipped by spellcasters.</p>
 									</td>
 								</tr>
 								<tr>
@@ -630,17 +696,7 @@
 										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
 									</td>
 									<td>
-										<p>Ancillary category. Valid values are presently <code>"armour"</code>, <code>"enchanted_item"</code>>, <code>"banner"</code>>, <code>"talisman"</code>>, <code>"weapon"</code> and <code>"arcane_item"</code>. Arcane items may only be equipped by spellcasters.</p>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<p><strong>4</strong></p>
-									</td>
-									<td>
-										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
-									</td>
-									<td>
+										<p><i>optional, default value=nil</i></p>
 										<p>Ancillary rarity. Valid values are presently <code>"common"</code>, <code>"uncommon"</code> and <code>"rare"</code>.</p>
 									</td>
 								</tr>
@@ -650,7 +706,41 @@
 							<ol>
 								<li><code>ancillary</code> mission reward string</li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2180</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2217</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:payload:ancillary_mission_payload_specific"><h3 class="function_name"><strong><code>payload.ancillary_mission_payload_specific(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a mission reward string that adds the specified ancillary to the faction pool when the mission being constructed is completed.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Faction key, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>ancillary</code> mission reward string</li>
+							</ol>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2248</p>
 						</dd>
 					</dl>
 				</div>
@@ -714,7 +804,7 @@
 							<ol>
 								<li><code><code><a href="lua.html#class:string">string</a></code></code> pooled resource mission reward string</li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2226</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2280</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -748,7 +838,7 @@
 							<ol>
 								<li><code><code><a href="lua.html#class:string">string</a></code></code> payload string</li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2237</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2291</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -782,7 +872,7 @@
 							<ol>
 								<li><code><code><a href="lua.html#class:string">string</a></code></code> payload string</li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2250</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2304</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -816,7 +906,7 @@
 							<ol>
 								<li><code><code><a href="lua.html#class:string">string</a></code></code> payload string</li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2263</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2317</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -850,7 +940,7 @@
 							<ol>
 								<li><code><code><a href="lua.html#class:string">string</a></code></code> payload string</li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2276</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2330</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -884,7 +974,7 @@
 							<ol>
 								<li><code><code><a href="lua.html#class:string">string</a></code></code> payload string</li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2289</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2343</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -918,7 +1008,7 @@
 							<ol>
 								<li><code><code><a href="lua.html#class:string">string</a></code></code> payload string</li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2302</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2356</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -952,7 +1042,7 @@
 							<ol>
 								<li><code><code><a href="lua.html#class:string">string</a></code></code> payload string</li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2315</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2369</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -986,7 +1076,7 @@
 							<ol>
 								<li><code><code><a href="lua.html#class:string">string</a></code></code> payload string</li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2328</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2382</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1020,7 +1110,7 @@
 							<ol>
 								<li><code><code><a href="lua.html#class:string">string</a></code></code> payload string</li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2341</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2395</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1054,7 +1144,7 @@
 							<ol>
 								<li><code><code><a href="lua.html#class:string">string</a></code></code> payload string</li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2354</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2408</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1088,7 +1178,7 @@
 							<ol>
 								<li><code><code><a href="lua.html#class:string">string</a></code></code> payload string</li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2367</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2421</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1122,7 +1212,211 @@
 							<ol>
 								<li><code><code><a href="lua.html#class:string">string</a></code></code> payload string</li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2380</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2434</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:payload:chivalry"><h3 class="function_name"><strong><code>payload.chivalry(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">amount</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a payload string which defines a Chivalry reward for a Bretonnia string mission definition. No kind of equivalence is looked up.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>amount</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> payload string</li>
+							</ol>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2447</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:payload:slaves"><h3 class="function_name"><strong><code>payload.slaves(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">amount</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a payload string which defines a Slaves reward for a Dark Elf string mission definition. No kind of equivalence is looked up.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>amount</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> payload string</li>
+							</ol>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2460</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:payload:infamy"><h3 class="function_name"><strong><code>payload.infamy(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">amount</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a payload string which defines a infamy reward for a Vampire Coast string mission definition. No kind of equivalence is looked up.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>amount</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> payload string</li>
+							</ol>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2473</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:payload:souls"><h3 class="function_name"><strong><code>payload.souls(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">amount</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a payload string which defines a souls reward for a Warriors of Chaos string mission definition. No kind of equivalence is looked up.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>amount</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> payload string</li>
+							</ol>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2486</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:payload:canopic"><h3 class="function_name"><strong><code>payload.canopic(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">amount</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a payload string which defines a canopic_jars reward for a Tomb Kings string mission definition. No kind of equivalence is looked up.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>amount</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> payload string</li>
+							</ol>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2499</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:payload:spirit"><h3 class="function_name"><strong><code>payload.spirit(<code><a href="lua.html#class:number">number</a></code> </strong></code><i class="parameter">amount</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns a payload string which defines a spirit_essence reward for a Mother Ostankya (Kislev) string mission definition. No kind of equivalence is looked up.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:number">number</a></code></code></p>
+									</td>
+									<td>
+										<p>amount</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:string">string</a></code></code> payload string</li>
+							</ol>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2512</p>
 						</dd>
 					</dl>
 				</div>
@@ -1175,7 +1469,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2405</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2537</p>
 						</dd>
 					</dl>
 				</div>
@@ -1228,7 +1522,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2427</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 2559</p>
 						</dd>
 					</dl>
 				</div>
@@ -1238,7 +1532,7 @@
 
 		</div>
 
-		<div id="about">Last updated 12/08/2022 11:56:57</div>
+		<div id="about">Last updated 02/07/2024 16:56:04</div>
 
 	</div>
 

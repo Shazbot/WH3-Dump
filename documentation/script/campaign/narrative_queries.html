@@ -59,6 +59,7 @@
 						<li>&emsp;&emsp;<a href="#function:narrative_queries:narrative_event_has_triggered">narrative_event_has_triggered</a></li>
 						<li>&emsp;&emsp;<a href="#function:narrative_queries:advice_history">advice_history</a></li>
 						<li>&emsp;&emsp;<a href="#function:narrative_queries:advice_history_for_narrative_chain">advice_history_for_narrative_chain</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_queries:is_faction_army_closer_than_settlement_to_faction">is_faction_army_closer_than_settlement_to_faction</a></li>
 						<li>&emsp;&emsp;<a href="#function:narrative_queries:one_settlement_from_completing_province">one_settlement_from_completing_province</a></li>
 						<li>&emsp;&emsp;<a href="#function:narrative_queries:controls_x_provinces">controls_x_provinces</a></li>
 						<li>&emsp;&emsp;<a href="#function:narrative_queries:highest_level_settlement_for_faction">highest_level_settlement_for_faction</a></li>
@@ -68,6 +69,7 @@
 						<li>&emsp;&emsp;<a href="#function:narrative_queries:can_capture_territory">can_capture_territory</a></li>
 						<li>&emsp;&emsp;<a href="#function:narrative_queries:can_recruit_any_hero">can_recruit_any_hero</a></li>
 						<li>&emsp;&emsp;<a href="#function:narrative_queries:can_recruit_hero_of_type">can_recruit_hero_of_type</a></li>
+						<li>&emsp;&emsp;<a href="#function:narrative_queries:can_trade">can_trade</a></li>
 						<li>&emsp;&emsp;<a href="#function:narrative_queries:contains_any_hero">contains_any_hero</a></li>
 						<li>&emsp;&emsp;<a href="#function:narrative_queries:contains_any_hero_of_type">contains_any_hero_of_type</a></li>
 						<li>&emsp;&emsp;<a href="#function:narrative_queries:corruption_in_adjacent_region">corruption_in_adjacent_region</a></li>
@@ -282,7 +284,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 87</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 87</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -397,7 +399,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 188</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 188</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -540,7 +542,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 328</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 328</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -645,7 +647,97 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 356</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 356</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_queries:is_faction_army_closer_than_settlement_to_faction"><h3 class="function_name"><strong><code>narrative_queries.is_faction_army_closer_than_settlement_to_faction(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">target faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">trigger message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">positive message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">negative message</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a narrative query that queries the distance between a specified faction's armies and settlements and another faction and acts upon the result. Should the target faction have an army closer than a settlement to the supplied faction's leader the positive message(s) are fired. Otherwise, the negative message(s) are fired, if any were supplied.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative queries.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative query applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the target faction to which this narrative query applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative query should trigger. If multiple trigger messages are required a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message to trigger if the faction is one settlement from completing a province. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message to trigger if the faction is not one settlement from completing a province. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 473</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -737,7 +829,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 490</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 569</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -840,7 +932,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 579</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 658</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -943,7 +1035,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 673</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 752</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1035,7 +1127,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 748</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 827</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1127,7 +1219,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 819</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 898</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1230,7 +1322,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 894</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 973</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1322,7 +1414,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 968</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1047</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1414,7 +1506,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1048</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1127</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1518,7 +1610,99 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1066</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1145</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:narrative_queries:can_trade"><h3 class="function_name"><strong><code>narrative_queries.can_trade(<br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">unique name</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction key</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">trigger message</i><code><strong>, <br />&emsp;&emsp;<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">positive message</i><code><strong>, <br />&emsp;&emsp;[<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">negative message</i><code><strong>], <br />&emsp;&emsp;[<code><a href="lua.html#class:function">function</a></code> </strong></code><i class="parameter">additional condition</i><code><strong>]<br />)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Creates a narrative query that queries whether the specified faction can make a trade agreement (they are part of the "factions_without_trade" faction set), and acts on the result. If the faction can trade then the positive trigger message(s) are fired, otherwise the negative trigger message(s) are fired.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Unique name amongst other declared narrative queries.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Key of the faction to which this narrative query applies, from the <code>factions</code> database table.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message on which this narrative query should trigger. If multiple trigger messages are required a <code><a href="lua.html#class:table">table</a></code> containing string message names can be supplied here instead.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>Message to trigger if the faction can capture territory. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>5</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Message to trigger if the faction cannot capture territory. This can be a single string or a <code><a href="lua.html#class:table">table</a></code> of strings if multiple messages are desired.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>6</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:function">function</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=nil</i></p>
+										<p>Additional condition function which can force a positive or negative result. If supplied, the function is called with the context and narrative query objects passed in as separate functions. If it returns <code>true</code> then a positive result is forced, if <code>false</code> then a negative result is forced. If it returns any other value then no result is forced.</p>
+										<p>The condition function may also return a string as a second return value, which will be used for output.</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1220</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1610,7 +1794,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1145</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1298</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1714,7 +1898,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1163</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1316</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1852,7 +2036,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1266</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1419</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1956,7 +2140,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1342</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1495</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -2084,7 +2268,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1511</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1664</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -2212,7 +2396,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1620</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1773</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -2340,7 +2524,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1729</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1882</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -2468,7 +2652,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1838</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1991</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -2582,7 +2766,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../Warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 1941</p>
+							<p class="file_comment">defined in ../../warhammer/working_data/script/campaign/_narrative/wh3_narrative_query_templates.lua, line 2094</p>
 						</dd>
 					</dl>
 				</div>
@@ -2592,7 +2776,7 @@
 
 		</div>
 
-		<div id="about">Last updated 12/08/2022 11:56:58</div>
+		<div id="about">Last updated 02/07/2024 16:56:04</div>
 
 	</div>
 

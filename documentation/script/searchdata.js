@@ -3211,6 +3211,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"script_ai_planner:rush_position()",
+		envs:{
+			battle:"battle/script_ai_planner.html#function:script_ai_planner:rush_position"
+		}
+	},
+	{
 		term:"script_ai_planner:set_should_reorder()",
 		envs:{
 			battle:"battle/script_ai_planner.html#function:script_ai_planner:set_should_reorder"
@@ -4009,6 +4015,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"script_units:teleport_withdraw_over_time()",
+		envs:{
+			battle:"battle/script_unit.html#function:script_units:teleport_withdraw_over_time"
+		}
+	},
+	{
 		term:"script_units:have_any_deployed()",
 		envs:{
 			battle:"battle/script_unit.html#function:script_units:have_any_deployed"
@@ -4186,6 +4198,12 @@ var all_terms = [
 		term:"battle_ui_manager:is_panel_open()",
 		envs:{
 			battle:"battle/battle_ui_manager.html#function:battle_ui_manager:is_panel_open"
+		}
+	},
+	{
+		term:"battle_ui_manager:is_esc_menu_open()",
+		envs:{
+			battle:"battle/battle_ui_manager.html#function:battle_ui_manager:is_esc_menu_open"
 		}
 	},
 	{
@@ -5431,9 +5449,9 @@ var all_terms = [
 		}
 	},
 	{
-		term:"campaign_manager:local_faction_exists()",
+		term:"campaign_manager:has_local_faction()",
 		envs:{
-			campaign:"campaign/campaign_manager.html#function:campaign_manager:local_faction_exists"
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:has_local_faction"
 		}
 	},
 	{
@@ -5488,6 +5506,24 @@ var all_terms = [
 		term:"campaign_manager:get_active_human_factions()",
 		envs:{
 			campaign:"campaign/campaign_manager.html#function:campaign_manager:get_active_human_factions"
+		}
+	},
+	{
+		term:"campaign_manager:get_factions_by_filter()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:get_factions_by_filter"
+		}
+	},
+	{
+		term:"campaign_manager:get_factions_by_culture()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:get_factions_by_culture"
+		}
+	},
+	{
+		term:"campaign_manager:get_factions_by_subculture()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:get_factions_by_subculture"
 		}
 	},
 	{
@@ -5632,6 +5668,18 @@ var all_terms = [
 		term:"campaign_manager:is_intro_cutscene_playing()",
 		envs:{
 			campaign:"campaign/campaign_manager.html#function:campaign_manager:is_intro_cutscene_playing"
+		}
+	},
+	{
+		term:"campaign_manager:set_cutscene_playing_allowed()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:set_cutscene_playing_allowed"
+		}
+	},
+	{
+		term:"campaign_manager:is_cutscene_playing_allowed()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:is_cutscene_playing_allowed"
 		}
 	},
 	{
@@ -5887,6 +5935,60 @@ var all_terms = [
 		}
 	},
 	{
+		term:"campaign_manager:char_can_recruit_unit()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:char_can_recruit_unit"
+		}
+	},
+	{
+		term:"campaign_manager:char_army_has_unit()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:char_army_has_unit"
+		}
+	},
+	{
+		term:"campaign_manager:count_char_army_has_unit()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:count_char_army_has_unit"
+		}
+	},
+	{
+		term:"campaign_manager:char_army_has_unit_category()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:char_army_has_unit_category"
+		}
+	},
+	{
+		term:"campaign_manager:count_char_army_has_unit_category()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:count_char_army_has_unit_category"
+		}
+	},
+	{
+		term:"campaign_manager:general_has_caster_embedded_in_army()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:general_has_caster_embedded_in_army"
+		}
+	},
+	{
+		term:"campaign_manager:character_won_battle_against_culture()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:character_won_battle_against_culture"
+		}
+	},
+	{
+		term:"campaign_manager:character_won_battle_against_unit()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:character_won_battle_against_unit"
+		}
+	},
+	{
+		term:"campaign_manager:character_reinforced_alongside_culture()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:character_reinforced_alongside_culture"
+		}
+	},
+	{
 		term:"campaign_manager:char_is_victorious_general()",
 		envs:{
 			campaign:"campaign/campaign_manager.html#function:campaign_manager:char_is_victorious_general"
@@ -6139,9 +6241,9 @@ var all_terms = [
 		}
 	},
 	{
-		term:"campaign_manager:force_add_skill()",
+		term:"campaign_manager:add_skill()",
 		envs:{
-			campaign:"campaign/campaign_manager.html#function:campaign_manager:force_add_skill"
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:add_skill"
 		}
 	},
 	{
@@ -6439,6 +6541,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"campaign_manager:region_has_chain_or_superchain()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:region_has_chain_or_superchain"
+		}
+	},
+	{
 		term:"campaign_manager:instantly_upgrade_building_in_region()",
 		envs:{
 			campaign:"campaign/campaign_manager.html#function:campaign_manager:instantly_upgrade_building_in_region"
@@ -6559,6 +6667,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"campaign_manager:pending_battle_cache_get_attacker_embedded_character_subtypes()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:pending_battle_cache_get_attacker_embedded_character_subtypes"
+		}
+	},
+	{
 		term:"campaign_manager:pending_battle_cache_get_attacker_fm_cqi()",
 		envs:{
 			campaign:"campaign/campaign_manager.html#function:campaign_manager:pending_battle_cache_get_attacker_fm_cqi"
@@ -6589,6 +6703,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"campaign_manager:pending_battle_cache_num_attacker_embedded_characters()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:pending_battle_cache_num_attacker_embedded_characters"
+		}
+	},
+	{
 		term:"campaign_manager:pending_battle_cache_get_attacker_unit()",
 		envs:{
 			campaign:"campaign/campaign_manager.html#function:campaign_manager:pending_battle_cache_get_attacker_unit"
@@ -6604,6 +6724,12 @@ var all_terms = [
 		term:"campaign_manager:pending_battle_cache_get_defender()",
 		envs:{
 			campaign:"campaign/campaign_manager.html#function:campaign_manager:pending_battle_cache_get_defender"
+		}
+	},
+	{
+		term:"campaign_manager:pending_battle_cache_get_defender_embedded_character_subtypes()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:pending_battle_cache_get_defender_embedded_character_subtypes"
 		}
 	},
 	{
@@ -6637,15 +6763,15 @@ var all_terms = [
 		}
 	},
 	{
-		term:"campaign_manager:pending_battle_cache_get_defender_unit()",
+		term:"campaign_manager:pending_battle_cache_num_defender_embedded_characters()",
 		envs:{
-			campaign:"campaign/campaign_manager.html#function:campaign_manager:pending_battle_cache_get_defender_unit"
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:pending_battle_cache_num_defender_embedded_characters"
 		}
 	},
 	{
-		term:"campaign_manager:pending_battle_cache_get_defender_location()",
+		term:"campaign_manager:pending_battle_cache_get_defender_unit()",
 		envs:{
-			campaign:"campaign/campaign_manager.html#function:campaign_manager:pending_battle_cache_get_defender_location"
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:pending_battle_cache_get_defender_unit"
 		}
 	},
 	{
@@ -6853,6 +6979,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"campaign_manager:pending_battle_cache_faction_won_battle_against_unit()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:pending_battle_cache_faction_won_battle_against_unit"
+		}
+	},
+	{
 		term:"campaign_manager:pending_battle_cache_attacker_value()",
 		envs:{
 			campaign:"campaign/campaign_manager.html#function:campaign_manager:pending_battle_cache_attacker_value"
@@ -6958,6 +7090,12 @@ var all_terms = [
 		term:"campaign_manager:scroll_camera_from_current()",
 		envs:{
 			campaign:"campaign/campaign_manager.html#function:campaign_manager:scroll_camera_from_current"
+		}
+	},
+	{
+		term:"campaign_manager:scroll_camera_to_region()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:scroll_camera_to_region"
 		}
 	},
 	{
@@ -7987,6 +8125,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"payload.agent_at_faction_leader()",
+		envs:{
+			campaign:"campaign/payload.html#function:payload:agent_at_faction_leader"
+		}
+	},
+	{
 		term:"payload.agent_for_faction()",
 		envs:{
 			campaign:"campaign/payload.html#function:payload:agent_for_faction"
@@ -7996,6 +8140,12 @@ var all_terms = [
 		term:"payload.ancillary_mission_payload()",
 		envs:{
 			campaign:"campaign/payload.html#function:payload:ancillary_mission_payload"
+		}
+	},
+	{
+		term:"payload.ancillary_mission_payload_specific()",
+		envs:{
+			campaign:"campaign/payload.html#function:payload:ancillary_mission_payload_specific"
 		}
 	},
 	{
@@ -8074,6 +8224,42 @@ var all_terms = [
 		term:"payload.meat()",
 		envs:{
 			campaign:"campaign/payload.html#function:payload:meat"
+		}
+	},
+	{
+		term:"payload.chivalry()",
+		envs:{
+			campaign:"campaign/payload.html#function:payload:chivalry"
+		}
+	},
+	{
+		term:"payload.slaves()",
+		envs:{
+			campaign:"campaign/payload.html#function:payload:slaves"
+		}
+	},
+	{
+		term:"payload.infamy()",
+		envs:{
+			campaign:"campaign/payload.html#function:payload:infamy"
+		}
+	},
+	{
+		term:"payload.souls()",
+		envs:{
+			campaign:"campaign/payload.html#function:payload:souls"
+		}
+	},
+	{
+		term:"payload.canopic()",
+		envs:{
+			campaign:"campaign/payload.html#function:payload:canopic"
+		}
+	},
+	{
+		term:"payload.spirit()",
+		envs:{
+			campaign:"campaign/payload.html#function:payload:spirit"
 		}
 	},
 	{
@@ -9025,6 +9211,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"campaign_ui_manager:highlight_electoral_machinations()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_electoral_machinations"
+		}
+	},
+	{
 		term:"campaign_ui_manager:highlight_commandments()",
 		envs:{
 			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_commandments"
@@ -9073,6 +9265,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"campaign_ui_manager:highlight_drill_of_hashut()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_drill_of_hashut"
+		}
+	},
+	{
 		term:"campaign_ui_manager:highlight_drop_down_list_buttons()",
 		envs:{
 			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_drop_down_list_buttons"
@@ -9088,6 +9286,12 @@ var all_terms = [
 		term:"campaign_ui_manager:highlight_dynasties_panel()",
 		envs:{
 			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_dynasties_panel"
+		}
+	},
+	{
+		term:"campaign_ui_manager:highlight_colleges_of_magic()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_colleges_of_magic"
 		}
 	},
 	{
@@ -9187,6 +9391,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"campaign_ui_manager:highlight_gardens_of_morr()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_gardens_of_morr"
+		}
+	},
+	{
 		term:"campaign_ui_manager:highlight_garrison_armies()",
 		envs:{
 			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_garrison_armies"
@@ -9235,6 +9445,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"campaign_ui_manager:highlight_hellforge()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_hellforge"
+		}
+	},
+	{
 		term:"campaign_ui_manager:highlight_help_pages_button()",
 		envs:{
 			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_help_pages_button"
@@ -9274,6 +9490,12 @@ var all_terms = [
 		term:"campaign_ui_manager:highlight_horde_buildings()",
 		envs:{
 			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_horde_buildings"
+		}
+	},
+	{
+		term:"campaign_ui_manager:highlight_imperial_gunnery_school()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_imperial_gunnery_school"
 		}
 	},
 	{
@@ -9358,6 +9580,18 @@ var all_terms = [
 		term:"campaign_ui_manager:highlight_lords_pre_battle_screen()",
 		envs:{
 			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_lords_pre_battle_screen"
+		}
+	},
+	{
+		term:"campaign_ui_manager:highlight_malakais_adventures()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_malakais_adventures"
+		}
+	},
+	{
+		term:"campaign_ui_manager:highlight_military_convoys()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_military_convoys"
 		}
 	},
 	{
@@ -9715,6 +9949,18 @@ var all_terms = [
 		}
 	},
 	{
+		term:"campaign_ui_manager:highlight_spirit_of_grungni_button()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_spirit_of_grungni_button"
+		}
+	},
+	{
+		term:"campaign_ui_manager:highlight_spirit_of_grungni_panel()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_spirit_of_grungni_panel"
+		}
+	},
+	{
 		term:"campaign_ui_manager:highlight_stances()",
 		envs:{
 			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_stances"
@@ -9739,6 +9985,18 @@ var all_terms = [
 		}
 	},
 	{
+		term:"campaign_ui_manager:highlight_tally_of_pestilence()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_tally_of_pestilence"
+		}
+	},
+	{
+		term:"campaign_ui_manager:highlight_tamurkhans_chieftains()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_tamurkhans_chieftains"
+		}
+	},
+	{
 		term:"campaign_ui_manager:highlight_technologies()",
 		envs:{
 			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_technologies"
@@ -9754,6 +10012,12 @@ var all_terms = [
 		term:"campaign_ui_manager:highlight_technology_panel()",
 		envs:{
 			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_technology_panel"
+		}
+	},
+	{
+		term:"campaign_ui_manager:highlight_tower_of_zharr()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_tower_of_zharr"
 		}
 	},
 	{
@@ -9844,6 +10108,18 @@ var all_terms = [
 		term:"campaign_ui_manager:highlight_winds_of_magic()",
 		envs:{
 			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_winds_of_magic"
+		}
+	},
+	{
+		term:"campaign_ui_manager:highlight_witchs_hut_button()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_witchs_hut_button"
+		}
+	},
+	{
+		term:"campaign_ui_manager:highlight_witchs_hut_panel()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_witchs_hut_panel"
 		}
 	},
 	{
@@ -12276,6 +12552,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"generated_army:rush_position()",
+		envs:{
+			battle:"battle/generated_battle.html#function:generated_army:rush_position"
+		}
+	},
+	{
 		term:"generated_army:release()",
 		envs:{
 			battle:"battle/generated_battle.html#function:generated_army:release"
@@ -12348,6 +12630,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"generated_army:rush_position_on_message()",
+		envs:{
+			battle:"battle/generated_battle.html#function:generated_army:rush_position_on_message"
+		}
+	},
+	{
 		term:"generated_army:release_on_message()",
 		envs:{
 			battle:"battle/generated_battle.html#function:generated_army:release_on_message"
@@ -12363,6 +12651,12 @@ var all_terms = [
 		term:"generated_army:rout_over_time_on_message()",
 		envs:{
 			battle:"battle/generated_battle.html#function:generated_army:rout_over_time_on_message"
+		}
+	},
+	{
+		term:"generated_army:teleport_withdraw_over_time_on_message()",
+		envs:{
+			battle:"battle/generated_battle.html#function:generated_army:teleport_withdraw_over_time_on_message"
 		}
 	},
 	{
@@ -12387,6 +12681,18 @@ var all_terms = [
 		term:"generated_army:use_army_special_ability_on_message()",
 		envs:{
 			battle:"battle/generated_battle.html#function:generated_army:use_army_special_ability_on_message"
+		}
+	},
+	{
+		term:"generated_army:kill_proportion_over_time_on_message()",
+		envs:{
+			battle:"battle/generated_battle.html#function:generated_army:kill_proportion_over_time_on_message"
+		}
+	},
+	{
+		term:"generated_army:stop_kill_proportion_over_time_on_message()",
+		envs:{
+			battle:"battle/generated_battle.html#function:generated_army:stop_kill_proportion_over_time_on_message"
 		}
 	},
 	{
@@ -14767,6 +15073,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"battle_capture_location:linked_buildings()",
+		envs:{
+			battle:"battle/battle_capture_location.html#function:battle_capture_location:linked_buildings"
+		}
+	},
+	{
 		term:"battle_capture_location:change_holding_army()",
 		envs:{
 			battle:"battle/battle_capture_location.html#function:battle_capture_location:change_holding_army"
@@ -15076,6 +15388,18 @@ var all_terms = [
 		term:"battle_sound_effect:load()",
 		envs:{
 			battle:"battle/battle_sound_effect.html#function:battle_sound_effect:load"
+		}
+	},
+	{
+		term:"battle_sound_effect:set_cinematic()",
+		envs:{
+			battle:"battle/battle_sound_effect.html#function:battle_sound_effect:set_cinematic"
+		}
+	},
+	{
+		term:"battle_sound_effect:set_vo()",
+		envs:{
+			battle:"battle/battle_sound_effect.html#function:battle_sound_effect:set_vo"
 		}
 	},
 	{
@@ -15838,6 +16162,12 @@ var all_terms = [
 		term:"battle_unitcontroller:morale_behavior_rout()",
 		envs:{
 			battle:"battle/battle_unitcontroller.html#function:battle_unitcontroller:morale_behavior_rout"
+		}
+	},
+	{
+		term:"battle_unitcontroller:teleport_withdraw_unit()",
+		envs:{
+			battle:"battle/battle_unitcontroller.html#function:battle_unitcontroller:teleport_withdraw_unit"
 		}
 	},
 	{
@@ -17197,6 +17527,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"battle:spawn_vortex()",
+		envs:{
+			battle:"battle/battle.html#function:battle:spawn_vortex"
+		}
+	},
+	{
 		term:"battle:unlock_achievement()",
 		envs:{
 			battle:"battle/battle.html#function:battle:unlock_achievement"
@@ -17446,6 +17782,12 @@ var all_terms = [
 		term:"ai_planner:defend_position()",
 		envs:{
 			battle:"battle/ai_planner.html#function:ai_planner:defend_position"
+		}
+	},
+	{
+		term:"ai_planner:rush_position()",
+		envs:{
+			battle:"battle/ai_planner.html#function:ai_planner:rush_position"
 		}
 	},
 	{
@@ -19827,6 +20169,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"custom_starts:change_camera_position()",
+		envs:{
+			campaign:"campaign/custom_starts.html#function:custom_starts:change_camera_position"
+		}
+	},
+	{
 		term:"custom_starts:generate_random_army()",
 		envs:{
 			campaign:"campaign/custom_starts.html#function:custom_starts:generate_random_army"
@@ -20943,15 +21291,15 @@ var all_terms = [
 		}
 	},
 	{
-		term:"episodic_scripting:toggle_character_initiative_active()",
+		term:"episodic_scripting:toggle_initiative_active()",
 		envs:{
-			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:toggle_character_initiative_active"
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:toggle_initiative_active"
 		}
 	},
 	{
-		term:"episodic_scripting:toggle_character_initiative_script_locked()",
+		term:"episodic_scripting:toggle_initiative_script_locked()",
 		envs:{
-			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:toggle_character_initiative_script_locked"
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:toggle_initiative_script_locked"
 		}
 	},
 	{
@@ -21003,9 +21351,9 @@ var all_terms = [
 		}
 	},
 	{
-		term:"episodic_scripting:force_add_skill()",
+		term:"episodic_scripting:add_skill()",
 		envs:{
-			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:force_add_skill"
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:add_skill"
 		}
 	},
 	{
@@ -21864,6 +22212,24 @@ var all_terms = [
 		term:"episodic_scripting:update_technology_unlock_progress_values()",
 		envs:{
 			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:update_technology_unlock_progress_values"
+		}
+	},
+	{
+		term:"episodic_scripting:instantly_research_technology()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:instantly_research_technology"
+		}
+	},
+	{
+		term:"episodic_scripting:instantly_research_all_technologies()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:instantly_research_all_technologies"
+		}
+	},
+	{
+		term:"episodic_scripting:instantly_clear_all_technologies()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:instantly_clear_all_technologies"
 		}
 	},
 	{
@@ -22803,6 +23169,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"narrative_events.consume_pooled_resource()",
+		envs:{
+			campaign:"campaign/narrative_events.html#function:narrative_events:consume_pooled_resource"
+		}
+	},
+	{
 		term:"narrative_events.gain_pooled_resource()",
 		envs:{
 			campaign:"campaign/narrative_events.html#function:narrative_events:gain_pooled_resource"
@@ -23049,6 +23421,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"narrative_queries.is_faction_army_closer_than_settlement_to_faction()",
+		envs:{
+			campaign:"campaign/narrative_queries.html#function:narrative_queries:is_faction_army_closer_than_settlement_to_faction"
+		}
+	},
+	{
 		term:"narrative_queries.one_settlement_from_completing_province()",
 		envs:{
 			campaign:"campaign/narrative_queries.html#function:narrative_queries:one_settlement_from_completing_province"
@@ -23100,6 +23478,12 @@ var all_terms = [
 		term:"narrative_queries.can_recruit_hero_of_type()",
 		envs:{
 			campaign:"campaign/narrative_queries.html#function:narrative_queries:can_recruit_hero_of_type"
+		}
+	},
+	{
+		term:"narrative_queries.can_trade()",
+		envs:{
+			campaign:"campaign/narrative_queries.html#function:narrative_queries:can_trade"
 		}
 	},
 	{
