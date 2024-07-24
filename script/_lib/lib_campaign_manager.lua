@@ -2569,7 +2569,10 @@ local function attempt_campaign_intro_cutscene_play(faction_key, cindy_scene_key
 	end;
 
 	cuim:override("campaign_spacebar_options"):lock();
-	CampaignUI.ToggleCinematicBorders(false);
+	
+	if cm:get_local_faction_name(true) == faction_key then
+		CampaignUI.ToggleCinematicBorders(false);
+	end;
 
 	pre_cindyscene_delay_callback(progress_callback, intro_fsm_skipped);
 end;

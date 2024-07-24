@@ -19855,14 +19855,6 @@ var all_terms = [
 		}
 	},
 	{
-		term:"common.execute_cli_command()",
-		envs:{
-			campaign:"campaign/common.html#function:common:execute_cli_command",
-			battle:"battle/common.html#function:common:execute_cli_command",
-			frontend:"frontend/common.html#function:common:execute_cli_command"
-		}
-	},
-	{
 		term:"common.take_screenshot()",
 		envs:{
 			campaign:"campaign/common.html#function:common:take_screenshot",
@@ -22920,24 +22912,6 @@ var all_terms = [
 		term:"episodic_scripting:cai_remove_point_of_interest_generic_marker()",
 		envs:{
 			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:cai_remove_point_of_interest_generic_marker"
-		}
-	},
-	{
-		term:"episodic_scripting:trigger_performance_metrics_start()",
-		envs:{
-			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:trigger_performance_metrics_start"
-		}
-	},
-	{
-		term:"episodic_scripting:trigger_performance_metrics_stop()",
-		envs:{
-			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:trigger_performance_metrics_stop"
-		}
-	},
-	{
-		term:"episodic_scripting:trigger_scripted_tour_metrics_start()",
-		envs:{
-			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:trigger_scripted_tour_metrics_start"
 		}
 	},
 	{

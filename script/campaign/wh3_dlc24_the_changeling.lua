@@ -2995,7 +2995,7 @@ function the_changeling_features:sack_settlement(region)
 			0,
 			0,
 			0,
-			region_cqi,
+			region:cqi(),
 			0
 		)
 	end	

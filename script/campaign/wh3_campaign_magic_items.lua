@@ -145,9 +145,12 @@ function attempt_to_award_random_magical_item(context)
 		local model = pb:model();
 		local campaign_difficulty = model:difficulty_level();
 		local chance = 40;
-		local bv_chance = character:post_battle_ancillary_chance();
+		local char_bv = cm:get_characters_bonus_value(character, "post_battle_ancillary_drop_chance_mod");
+		local faction_bv = cm:get_factions_bonus_value(character:faction(), "post_battle_ancillary_drop_chance_mod");
+		local mf_bv = cm:get_forces_bonus_value(character:military_force(), "post_battle_ancillary_drop_chance_mod");
 		
 		-- mod the chance based on the bonus value state
+		local bv_chance = char_bv + faction_bv + mf_bv;
 		chance = chance + bv_chance;
 		
 		-- mod the chance based on campaign difficulty (only if singleplayer)
@@ -200,11 +203,6 @@ function attempt_to_award_random_magical_item(context)
 		end;
 		
 		chance = math.min(chance + victory_type_mod, 100)
-		
-		-- tomb kings chance is cut in half due to mortuary cult
-		if faction:culture() == "wh2_dlc09_tmb_tomb_kings" then
-			chance = chance * 0.5;
-		end;
 		
 		local roll = cm:random_number(100);
 		
