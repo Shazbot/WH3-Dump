@@ -69,7 +69,7 @@ end
 
 function emperors_decrees:requisition(performing_faction)
 	for _, state_troop in ipairs(self.state_units) do
-		cm:add_units_to_faction_mercenary_pool(performing_faction:command_queue_index(), state_troop, 1);
+		cm:add_units_to_faction_mercenary_pool(performing_faction:command_queue_index(), state_troop, 99);
 	end
 end
 

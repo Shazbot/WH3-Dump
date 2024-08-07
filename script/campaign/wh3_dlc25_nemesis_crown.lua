@@ -326,7 +326,10 @@ function nemesis_crown:update_context_values()
 	
 	-- Set the current and next effect bundle keys
 	if crown.owner_faction_key ~= nil then
-		local subculture = cm:get_faction(crown.owner_faction_key):subculture()
+		local faction = cm:get_faction(crown.owner_faction_key)
+		if not faction then return end
+
+		local subculture = faction:subculture()
 		local subculture_suffix = self.subculture_bundle_suffixes[subculture]
 		
 		if subculture_suffix ~= nil then
@@ -369,7 +372,7 @@ function nemesis_crown:crown_owner_loses_battle(new_owner_cqi)
 	end
 	
 	--character must be alive, not a garrison, must be a general but not a caravan master
-	if not (not new_crown_character:is_null_interface() and new_crown_character:is_wounded() == false and new_crown_character:military_force():is_armed_citizenry() == false 
+	if new_crown_faction:is_rebel() or not (not new_crown_character:is_null_interface() and new_crown_character:is_wounded() == false and new_crown_character:military_force():is_armed_citizenry() == false 
 	and new_crown_character:character_type("general") and not (new_crown_character:character_subtype("wh3_dlc23_chd_lord_convoy_overseer") or new_crown_character:character_subtype("wh3_main_cth_lord_caravan_master"))) then				
 		
 		nemesis_crown:set_crown_lost(self.lost_event)
@@ -576,6 +579,7 @@ function nemesis_crown:marker_and_battle_listeners(human_factions)
 								faction_name
 							)
 
+							nemesis_marker:set_loaned_characters_allowed(false)
 							nemesis_marker:is_persistent(false)
 							nemesis_marker:spawn_at_location(spawn_location.coords.x, spawn_location.coords.y, false)
 

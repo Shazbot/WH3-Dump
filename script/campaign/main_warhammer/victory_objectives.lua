@@ -2911,7 +2911,7 @@ victory_objectives_ie = {
 					type = "SCRIPTED",
 					conditions = {
 						"script_key chieftain_devoted_long",
-						"override_text mission_text_text_tamurkhan_chieftain_devoted_deference_long",
+						"override_text mission_text_text_tamurkhan_chieftain_devoted_deference_short",
 						"total 6",
 						"count 0",
 						"count_completion"

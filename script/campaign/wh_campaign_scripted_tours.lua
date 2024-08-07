@@ -62,13 +62,13 @@ function start_scripted_tours()
 			in_emp_gunnery_school_tour:start();
 		end
 
-		local elspeth_interface = cm:get_faction("wh2_dlc13_emp_golden_order");
-		if elspeth_interface and elspeth_interface:is_human() then
+		local balthasar_interface = cm:get_faction("wh2_dlc13_emp_golden_order");
+		if balthasar_interface and balthasar_interface:is_human() then
 			in_emp_college_of_magic_tour:start();
 		end
 
-		local elspeth_interface = cm:get_faction("wh_main_emp_empire");
-		if elspeth_interface and elspeth_interface:is_human() then
+		local karl_franz_interface = cm:get_faction("wh_main_emp_empire");
+		if karl_franz_interface and karl_franz_interface:is_human() then
 			in_emp_electoral_machinations_tour:start();
 		end
 	end

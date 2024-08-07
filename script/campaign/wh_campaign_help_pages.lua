@@ -209,7 +209,7 @@ function setup_campaign_help_pages()
 		function()
 			local uic_raise_dead = find_uicomponent(ui_root, "hud_center", "button_group_army", "button_mercenary_recruit_raise_dead");
 			
-			return uic_raise_dead and uic_raise_dead:CurrentState() == "selected" and cm:get_local_faction_culture(true) ~= "wh_main_chs_chaos";
+			return uic_raise_dead and uic_raise_dead:CurrentState() == "selected" and cm:get_local_faction_culture(true) ~= "wh_main_chs_chaos" and cm:get_local_faction_culture(true) ~= "wh_dlc05_wef_wood_elves";
 		end
 	);
 	
@@ -280,6 +280,16 @@ function setup_campaign_help_pages()
 			local uic_raise_dead = find_uicomponent(ui_root, "hud_center", "button_group_army", "button_mercenary_recruit_raise_dead"); -- warriors of chaos warbands recruitment uses the raise dead button
 			
 			return uic_raise_dead and uic_raise_dead:CurrentState() == "selected" and cm:get_local_faction_culture(true) == "wh_main_chs_chaos";
+		end
+	);
+
+	hpm:register_help_page_to_info_button_mapping(
+		"script_link_campaign_forest_spirits_animals",
+		"recruitment_options",
+		function()
+			local uic_raise_dead = find_uicomponent(ui_root, "hud_center", "button_group_army", "button_mercenary_recruit_raise_dead"); -- drycha wild spirits recruitment uses the raise dead button
+			
+			return uic_raise_dead and uic_raise_dead:CurrentState() == "selected" and cm:get_local_faction_culture(true) == "wh_dlc05_wef_wood_elves";
 		end
 	);
 

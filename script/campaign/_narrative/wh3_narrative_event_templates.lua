@@ -3566,7 +3566,7 @@ local function construct_narrative_event_win_battles_with_hero(unique_name, fact
 							if threshold_reached then
 								mm:update_scripted_objective_text(full_mission_text, battles_won);
 								return true;
-							else
+							elseif battles_won > most_battles_won then
 								update_text = true;
 								most_battles_won = battles_won;
 							end;

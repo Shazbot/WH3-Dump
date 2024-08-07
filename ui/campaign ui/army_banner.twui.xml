@@ -6745,7 +6745,7 @@
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoCampaignCharacter"
-					context_function_id="PlayersFaction.ActiveMissionList.FirstContext(CharacterContextAtObjectiveDisplayPosition == this)">
+					context_function_id="PlayersFaction.ActiveMissionList.Filter((mission) =&gt; HasZoomLocation &amp;&amp;  IsQuest == false &amp;&amp; (Component(&quot;03864E19-EAB8-49E8-8A2EC45D3D4CAE01&quot;).ShouldShowMission(mission))).FirstContext(CharacterContextAtObjectiveDisplayPosition == this)">
 					<child_m_user_properties>
 						<property
 							name="clear_on_empty"
@@ -7352,7 +7352,7 @@
 			defaultstate="5526014E-1017-49D8-A88E6D54462450A8">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextVisibilitySetter"
+					callback_id="ContextInactiveStateSetter"
 					context_object_id="CcoCampaignCharacter"
 					context_function_id="MilitaryForceContext.IsHiddenToEnemies">
 					<child_m_user_properties>
@@ -7367,17 +7367,25 @@
 							value="MilitaryForceStanceChanged"/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="FactionContext.FactionRecordContext.Key == &quot;wh3_dlc24_tze_the_deceivers&quot;"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
 					this="B08CDB65-017C-41AD-987208E3962A0F6C"
 					uniqueguid="B08CDB65-017C-41AD-987208E3962A0F6C"
 					imagepath="ui/skins/default/dlc24_hidden_army.png"/>
+				<component_image
+					this="099A7FC9-8C2A-423A-90C5434F000BEB62"
+					uniqueguid="099A7FC9-8C2A-423A-90C5434F000BEB62"
+					imagepath="ui/skins/default/dlc24_hidden_army_revealed.png"/>
 			</componentimages>
 			<states>
-				<default
+				<active
 					this="5526014E-1017-49D8-A88E6D54462450A8"
-					name="default"
+					name="active"
 					width="30"
 					height="30"
 					interactive="true"
@@ -7391,7 +7399,30 @@
 							width="30"
 							height="30"/>
 					</imagemetrics>
-				</default>
+				</active>
+				<inactive
+					this="48325D87-A1D2-4CCB-9E3744C7ABD01009"
+					name="inactive"
+					width="30"
+					height="30"
+					tooltip="[[col:red]]This army is visible to enemies![[/col]]"
+					tooltiplabel="StateTooltip_351e847"
+					interactive="true"
+					disabled="true"
+					uniqueguid="48325D87-A1D2-4CCB-9E3744C7ABD01009">
+					<imagemetrics>
+						<image
+							this="E455B443-60BB-4C23-BC5C5E6566AE5573"
+							uniqueguid="E455B443-60BB-4C23-BC5C5E6566AE5573"
+							componentimage="099A7FC9-8C2A-423A-90C5434F000BEB62"
+							offset="-2.00,0.00"
+							width="35"
+							height="31"
+							dockpoint="Center"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</inactive>
 			</states>
 		</hidden_army>
 		<grudge_effect

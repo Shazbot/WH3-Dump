@@ -140,7 +140,7 @@ victory_objectives = {
 			victory_type = "wh_dlc03_victory_type_major",
 			objectives = {
 				{type = "SCRIPTED", conditions = {"script_key tamurkhan_chieftain_devoted_deference_realms",
-				"override_text mission_text_text_tamurkhan_chieftain_devoted_deference_short_roc",
+				"override_text mission_text_text_tamurkhan_chieftain_devoted_deference_short",
 				"total 3",
 				"count 0",
 				"count_completion"

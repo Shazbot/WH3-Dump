@@ -411,6 +411,10 @@ local help_panel_position_overrides_campaign = {
 		["x"] = -5,
 		["y"] = -5
 	},
+	elector_counts = {
+		["x"] = 5,
+		["y"] = "middle"
+	},
 
 	-- WH2
 	rituals_panel = {
@@ -460,6 +464,10 @@ local help_panel_position_overrides_campaign = {
 	groms_cauldron = {
 		["x"] = -5,
 		["y"] = -5
+	},
+	forge_of_daith_panel = {
+		["x"] = -5,
+		["y"] = "middle"
 	},
 
 	-- WH3

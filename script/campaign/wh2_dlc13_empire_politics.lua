@@ -536,6 +536,7 @@ function empire_disable_diplomacy(faction_key, is_human)
 		cm:force_diplomacy("faction:"..faction_key, "faction:wh_main_emp_marienburg", elector_treaties_to_disable[i], true, true, false)
 		cm:force_diplomacy("faction:"..faction_key, "faction:wh2_dlc13_emp_the_huntmarshals_expedition", elector_treaties_to_disable[i], true, true, false)
 		cm:force_diplomacy("faction:"..faction_key, "faction:wh3_main_emp_cult_of_sigmar", elector_treaties_to_disable[i], true, true, false)
+		cm:force_diplomacy("faction:"..faction_key, "faction:wh2_dlc13_emp_golden_order", elector_treaties_to_disable[i], true, true, false)
 
 		if cm:get_faction("wh_main_emp_wissenland"):is_human() then
 			cm:force_diplomacy("faction:"..faction_key, "faction:wh_main_emp_wissenland", elector_treaties_to_disable[i], true, true, false)

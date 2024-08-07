@@ -60,13 +60,9 @@ function ancillary_item_forge:initialise()
 			return false
 		end,
 		function(context)
-			local local_faction_cqi = cm:get_local_faction(true):command_queue_index()
-			if local_faction_cqi == context:faction():command_queue_index() then
-				cm:override_ui(self.disable_forge_key, false)
-			end
-			cm:trigger_incident(context:faction():name(), self.forge_unlocked_incident, true, true)
+			self:unlock_forge_button(context:faction())
 		end,
-		false
+		true
 	)
 
 	core:add_listener(
@@ -87,12 +83,22 @@ function ancillary_item_forge:initialise()
 			return false
 		end,
 		function(context)
-			local local_faction_cqi = cm:get_local_faction(true):command_queue_index()
-			if local_faction_cqi == context:faction():command_queue_index() then
-				cm:override_ui(self.disable_forge_key, false)
-			end
-			cm:trigger_incident(context:faction():name(), self.forge_unlocked_incident, true, true)
+			self:unlock_forge_button(context:faction())
 		end,
-		false
+		true
 	)
+end
+
+function ancillary_item_forge:unlock_forge_button(faction)
+	local faction_name = faction:name()
+
+	if cm:get_saved_value(faction_name .. "_forge_button_unlocked") then return end
+	
+	local local_faction_cqi = cm:get_local_faction(true):command_queue_index()
+
+	if local_faction_cqi == faction:command_queue_index() then
+		cm:override_ui(self.disable_forge_key, false)
+	end
+	cm:trigger_incident(faction_name, self.forge_unlocked_incident, true, true)
+	cm:set_saved_value(faction_name .. "_forge_button_unlocked", true)
 end

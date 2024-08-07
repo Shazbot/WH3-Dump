@@ -1325,28 +1325,28 @@ end
 
 function malakai_battles:victory_condition_listener()
 	--- Malakai Oaths of Iron and Glory victory conditions
-	local campaign_name = cm:get_campaign_name()    
+	local campaign_name = cm:get_campaign_name()
 	if campaign_name == "main_warhammer" then
 		core:add_listener(
-		"IEVictoryConditionShortVictoryMalakaiIronSteelBattles",
-		"MissionSucceeded",
-		function(context)
-			local mission_key = context:mission():mission_record_key()
-			return context:faction():name() == self.malakai_faction and (mission_key == "wh3_dlc25_mis_dwf_malakai_undead_empowered_narrative_battle_ie" or mission_key == "wh3_dlc25_mis_dwf_malakai_spider_swarm_narrative_battle_ie" or mission_key == "wh3_dlc25_mis_dwf_malakai_dragon_hunters_narrative_battle_ie" or mission_key == "wh3_dlc25_mis_dwf_malakai_dreadquake_destruction_narrative_battle_ie" or mission_key == "wh3_dlc25_mis_dwf_malakai_exalted_bloodthirster_narrative_battle_ie" or mission_key == "wh3_dlc25_mis_dwf_malakai_malevolent_tree_spirits_narrative_battle_ie")			
-		end,
-		function()
-			cm:increase_scripted_mission_count("wh_main_short_victory", "oath_iron_glory_short_victory", 1)
-			cm:increase_scripted_mission_count("wh_main_long_victory", "oath_iron_glory_long_victory", 1)
-		end,
-		true
+			"IEVictoryConditionShortVictoryMalakaiIronSteelBattles",
+			"MissionSucceeded",
+			function(context)
+				local mission_key = context:mission():mission_record_key()
+				return context:faction():name() == self.malakai_faction and (mission_key == "wh3_dlc25_mis_dwf_malakai_undead_empowered_narrative_battle_ie" or mission_key == "wh3_dlc25_mis_dwf_malakai_spider_swarm_narrative_battle_ie" or mission_key == "wh3_dlc25_mis_dwf_malakai_dragon_hunters_narrative_battle_ie" or mission_key == "wh3_dlc25_mis_dwf_malakai_dreadquake_destruction_narrative_battle_ie" or mission_key == "wh3_dlc25_mis_dwf_malakai_exalted_bloodthirster_narrative_battle_ie" or mission_key == "wh3_dlc25_mis_dwf_malakai_malevolent_tree_spirits_narrative_battle_ie" or mission_key == "wh3_dlc25_mis_dwf_malakai_warpstone_bomb_narrative_battle_ie")			
+			end,
+			function()
+				cm:increase_scripted_mission_count("wh_main_short_victory", "oath_iron_glory_short_victory", 1)
+				cm:increase_scripted_mission_count("wh_main_long_victory", "oath_iron_glory_long_victory", 1)
+			end,
+			true
 		)
 	elseif campaign_name == "wh3_main_chaos" then 
-			core:add_listener(
+		core:add_listener(
 			"ROCVictoryConditionShortVictoryMalakaiIronSteelBattles",
 			"MissionSucceeded",
 			function(context)
 				local mission_key = context:mission():mission_record_key()
-				return context:faction():name() == self.malakai_faction and (mission_key == "wh3_dlc25_mis_dwf_malakai_undead_empowered_narrative_battle" or mission_key == "wh3_dlc25_mis_dwf_malakai_spider_swarm_narrative_battle" or mission_key == "wh3_dlc25_mis_dwf_malakai_dragon_hunters_narrative_battle" or mission_key == "wh3_dlc25_mis_dwf_malakai_dreadquake_destruction_narrative_battle" or mission_key == "wh3_dlc25_mis_dwf_malakai_exalted_bloodthirster_narrative_battle" or mission_key == "wh3_dlc25_mis_dwf_malakai_malevolent_tree_spirits_narrative_battle")			
+				return context:faction():name() == self.malakai_faction and (mission_key == "wh3_dlc25_mis_dwf_malakai_undead_empowered_narrative_battle" or mission_key == "wh3_dlc25_mis_dwf_malakai_spider_swarm_narrative_battle" or mission_key == "wh3_dlc25_mis_dwf_malakai_dragon_hunters_narrative_battle" or mission_key == "wh3_dlc25_mis_dwf_malakai_dreadquake_destruction_narrative_battle" or mission_key == "wh3_dlc25_mis_dwf_malakai_exalted_bloodthirster_narrative_battle" or mission_key == "wh3_dlc25_mis_dwf_malakai_malevolent_tree_spirits_narrative_battle" or mission_key == "wh3_dlc25_mis_dwf_malakai_warpstone_bomb_narrative_battle")			
 			end,
 			function()
 				cm:increase_scripted_mission_count("wh_main_long_victory", "malakai_oath_steel_glory_realms_victory", 1)

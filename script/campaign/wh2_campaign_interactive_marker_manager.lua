@@ -28,6 +28,7 @@ function Interactive_Marker_Manager:new_marker_type(key, marker_info, opt_durati
 	new_marker.key = key
 	new_marker.marker_info = marker_info
 	new_marker.persistent = true
+	new_marker.allow_loaned_characters = true
 	new_marker.radius = opt_radius or 1
 	new_marker.faction_filter = opt_faction_filter or ""
 	new_marker.subculture_filter = opt_subculture_filter or ""
@@ -253,6 +254,11 @@ function marker:is_persistent(bool)
 	self.persistent = bool
 end
 
+---by default, markers will allow loaned characters to trigger the AreaEntered event. Set this to false to exclude them
+function marker:set_loaned_characters_allowed(bool)
+	self.allow_loaned_characters = bool
+end
+
 -----------------
 ---SPECIAL-------
 -----------------
@@ -360,6 +366,10 @@ function marker:set_up_interaction_listener()
 			local has_military_force = character:has_military_force()
 
 			if not faction:is_human() then
+				return
+			end
+
+			if not self.allow_loaned_characters and character:is_loaned() then
 				return
 			end
 
