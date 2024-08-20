@@ -39,7 +39,7 @@ local military_force_types = {
 
 function setup_ogre_contracts()
 	local human_ogre_exists = false;
-	local human_factions = cm:get_human_factions(true);
+	local human_factions = cm:get_human_factions();
 	
 	for i = 1, #human_factions do
 		local local_faction_key = human_factions[i];

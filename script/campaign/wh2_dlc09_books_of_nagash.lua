@@ -151,12 +151,13 @@ function setup_book_missions(faction_key, spawn_forces, is_mp)
 			
 			cm:force_diplomacy("faction:" .. faction_key, "faction:" .. book_objective.target, "war", true, true, false);
 			
-			local force_cqi = cm:get_faction(book_objective.target):faction_leader():military_force():command_queue_index();
+			local faction_leader = cm:get_faction(book_objective.target):faction_leader()
+			local force_cqi = faction_leader:military_force():command_queue_index();
+			local leader_cqi = faction_leader:command_queue_index();
 			mm:add_condition("cqi " .. force_cqi);
 			mm:add_condition("requires_victory");
 			
 			if does_local_faction_have_books_of_nagash() then
-				local leader_cqi = cm:get_faction(book_objective.target):faction_leader():command_queue_index();
 				out("Adding Books of Nagash scripted VFX to character...\n\tCharacter CQI: " .. leader_cqi .. "\n\tVFX: " .. books_vfx_key);
 				cm:add_character_vfx(leader_cqi, books_vfx_key, true);
 			end

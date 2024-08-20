@@ -2226,17 +2226,23 @@ function show_intro_story_panel_with_progression_callback(faction_key, intro_sto
 		intro_fsm_skipped and 3 or 1
 	);
 
-	core:add_listener(
-        "pre_cindyscene_delay_callback",
-        "PanelClosedCampaign",
-        true,
-        function()
-            cm:set_music_paused(false); --resume the music system when the panel is closed--
-			common.trigger_soundevent("music_c_intro_eventpanel_stop");--stop the bespoke music--]
-			progression_callback()
-        end,
-        false
-    );
+	if cm:get_local_faction_name(true) == faction_key then
+		core:add_listener(
+			"pre_cindyscene_delay_callback",
+			"PanelClosedCampaign",
+			function(context)
+				return context.string == "events"
+			end,
+			function()
+				cm:set_music_paused(false); --resume the music system when the panel is closed--
+				common.trigger_soundevent("music_c_intro_eventpanel_stop");--stop the bespoke music--]
+				progression_callback()
+			end,
+			false
+		);
+	else
+		progression_callback()
+	end;
 end;
 
 

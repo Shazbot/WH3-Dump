@@ -1299,15 +1299,6 @@ function campaign_manager:load_named_value(name, default, context, allow_nil)
 		return false;
 	end;
 	
-	if default == nil then
-		if allow_nil then
-			return nil;
-		else
-			script_error("ERROR: load_named_value() called but no default value supplied. Is the default value something that can be nil sometimes? If so, set 'allow_nil' to true when calling load_named_value()");
-			return false;
-		end;
-	end;
-	
 	if not context then
 		script_error("ERROR: load_named_value() called but no context supplied");
 		return false;
@@ -1334,7 +1325,22 @@ function campaign_manager:load_named_value(name, default, context, allow_nil)
 	elseif is_string(default) then
 		return self:load_named_string(name, default, context);
 	else
+		if default == nil then
+			if allow_nil then
+				-- set the default value to be a string for now, as the model won't accept nil as a default value. We'll change it back later
+				default = "___default_nil_temp_string"
+			else
+				script_error("ERROR: load_named_value() called but no default value supplied. Is the default value something that can be nil sometimes? If so, set 'allow_nil' to true when calling load_named_value()");
+				return false;
+			end;
+		end;
+
 		local retval = self.game_interface:load_named_value(name, default, context);
+
+		if allow_nil and retval == "___default_nil_temp_string" then
+			retval = nil
+		end
+
 		out.savegame("Loading value " .. name .. " [" .. tostring(retval) .. "]");
 		return retval;
 	end
@@ -2658,7 +2664,9 @@ function campaign_manager:setup_campaign_intro_cutscene(faction_key, cam_gamepla
 			-- If we have been given a fullscreen movie then play that first
 			if pre_cutscene_fsm and not cm:is_benchmark_mode() then
 				if cm:get_local_faction_name(true) == faction_key then
-					cm:fade_scene(0, 0);
+					if cm:get_local_faction(true):is_factions_turn() then
+						cm:fade_scene(0, 0);
+					end;
 
 					local fsm_skipped = false;
 
@@ -14548,7 +14556,7 @@ function campaign_manager:apply_effect_bundle(bundle_key, faction_name, turns)
 		turns = 0;
 	end
 	
-	out(" & Applying effect bundle [" .. bundle_key .. "] to faction [" .. faction_name .. "] for [" .. turns .. "] turns");
+	--out(" & Applying effect bundle [" .. bundle_key .. "] to faction [" .. faction_name .. "] for [" .. turns .. "] turns");
 	
 	return self.game_interface:apply_effect_bundle(bundle_key, faction_name, turns);
 end;
@@ -14569,7 +14577,7 @@ function campaign_manager:remove_effect_bundle(bundle_key, faction_name)
 		return false;
 	end;
 	
-	out(" & Removing effect bundle [" .. bundle_key .. "] from faction [" .. faction_name .. "]");
+	--out(" & Removing effect bundle [" .. bundle_key .. "] from faction [" .. faction_name .. "]");
 	
 	return self.game_interface:remove_effect_bundle(bundle_key, faction_name);
 end;
@@ -14601,7 +14609,7 @@ function campaign_manager:apply_effect_bundle_to_force(bundle_key, mf_cqi, turns
 		turns = 0;
 	end
 	
-	out(" & Applying effect bundle [" .. bundle_key .. "] to military force with cqi [" .. mf_cqi .. "] for [" .. turns .. "] turns");
+	--out(" & Applying effect bundle [" .. bundle_key .. "] to military force with cqi [" .. mf_cqi .. "] for [" .. turns .. "] turns");
 	
 	return self.game_interface:apply_effect_bundle_to_force(bundle_key, mf_cqi, turns);
 end;
@@ -14622,7 +14630,7 @@ function campaign_manager:remove_effect_bundle_from_force(bundle_key, mf_cqi)
 		return false;
 	end;
 	
-	out(" & Removing effect bundle [" .. bundle_key .. "] from military force with cqi [" .. mf_cqi .. "]");
+	--out(" & Removing effect bundle [" .. bundle_key .. "] from military force with cqi [" .. mf_cqi .. "]");
 	
 	return self.game_interface:remove_effect_bundle_from_force(bundle_key, mf_cqi);
 end;
@@ -14654,7 +14662,7 @@ function campaign_manager:apply_effect_bundle_to_characters_force(bundle_key, ch
 		turns = 0;
 	end
 	
-	out("& Applying effect bundle [" .. bundle_key .. "] to the force of character with cqi [" .. char_cqi .. "] for [" .. turns .. "] turns");
+	--out("& Applying effect bundle [" .. bundle_key .. "] to the force of character with cqi [" .. char_cqi .. "] for [" .. turns .. "] turns");
 	
 	return self.game_interface:apply_effect_bundle_to_characters_force(bundle_key, char_cqi, turns);
 end;
@@ -14675,7 +14683,7 @@ function campaign_manager:remove_effect_bundle_from_characters_force(bundle_key,
 		return false;
 	end;
 		
-	out(" & Removing effect bundle [" .. bundle_key .. "] from the force of character with cqi [" .. char_cqi .. "]");
+	--out(" & Removing effect bundle [" .. bundle_key .. "] from the force of character with cqi [" .. char_cqi .. "]");
 	
 	return self.game_interface:remove_effect_bundle_from_characters_force(bundle_key, char_cqi);
 end;
@@ -14707,7 +14715,7 @@ function campaign_manager:apply_effect_bundle_to_region(bundle_key, region_key, 
 		turns = 0;
 	end
 	
-	out(" & Applying effect bundle [" .. bundle_key .. "] to region with key [" .. region_key .. "] for [" .. turns .. "] turns");
+	--out(" & Applying effect bundle [" .. bundle_key .. "] to region with key [" .. region_key .. "] for [" .. turns .. "] turns");
 	
 	return self.game_interface:apply_effect_bundle_to_region(bundle_key, region_key, turns);
 end;
@@ -14728,7 +14736,7 @@ function campaign_manager:remove_effect_bundle_from_region(bundle_key, region_ke
 		return false;
 	end;
 	
-	out(" & Removing effect bundle [" .. bundle_key .. "] from region with key [" .. region_key .. "]");
+	--out(" & Removing effect bundle [" .. bundle_key .. "] from region with key [" .. region_key .. "]");
 	
 	return self.game_interface:remove_effect_bundle_from_region(bundle_key, region_key);
 end;

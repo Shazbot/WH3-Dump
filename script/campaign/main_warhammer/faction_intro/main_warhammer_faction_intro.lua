@@ -878,8 +878,8 @@ data.faction_intros = {
 	--------------------
 	wh3_main_ogr_goldtooth = faction_intro_data:new{
 		preset = data.intro_presets.standard,
-		cam_cutscene_start = {x = 695.019775, y = 394.347137,	d = 21.301208, b = 0.0,	h = 60.872715,},
-		cam_gameplay_start = {x = 695.019775, y = 386.524506,	d = 4.307526, b = 0, h = 5.278111,},
+		cam_cutscene_start = {x = 691.5, y = 387,	d = 9, b = 0.0,	h = 60.872715,},
+		cam_gameplay_start = {x = 691.5, y = 387,	d = 9, b = 0, h = 7.2,},
 		advice_line = "wh3_dlc21_ie_camp_ogr_greasus_intro_01",
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},

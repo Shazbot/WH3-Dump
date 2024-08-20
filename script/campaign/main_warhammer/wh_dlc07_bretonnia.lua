@@ -98,7 +98,7 @@ function Add_Bretonnia_Listeners()
 			local character_cqi = character:command_queue_index()
 			
 			cm:remove_effect_bundle_from_characters_force(repanse_desert_thirst_bundle, character_cqi)
-			cm:apply_effect_bundle_to_characters_force(repanse_desert_thirst_bundle, character_cqi, 5, false)
+			cm:apply_effect_bundle_to_characters_force(repanse_desert_thirst_bundle, character_cqi, 5)
 		end
 	end
 	

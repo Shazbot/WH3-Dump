@@ -399,8 +399,8 @@ end;
 
 --- @function is_intro_cutscene
 --- @desc Returns whether this cutscene has been set to be an intro cutscene.
---- @return @boolean is intro cutscene
-function campaign_cutscene:is_intro_cutscene(value)
+--- @r @boolean is intro cutscene
+function campaign_cutscene:is_intro_cutscene()
 	return self.intro_cutscene;
 end;
 

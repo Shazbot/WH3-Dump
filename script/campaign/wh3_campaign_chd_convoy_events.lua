@@ -1,7 +1,5 @@
 caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
-
-		--Format is [key] == {probability function, event function}
-		["daemonsCargo"] = 
+	["daemonsCargo"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -45,26 +43,16 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 		
 			local attacking_force = caravans:generate_attackers(bandit_threat, "daemon_incursion_convoy");
 			
-			local cargo_amount = caravan_handle:cargo();
-			
-			--Dilemma option to remove cargo
-			function remove_cargo()
-				cm:set_caravan_cargo(caravan_handle, cargo_amount-100)
-			end
-			
-			custom_option = remove_cargo;
-			
 			--Handles the custom options for the dilemmas, such as battles (only?)
 			local enemy_cqi = caravans:attach_battle_to_dilemma(
-													dilemma_name,
-													caravan,
-													attacking_force,
-													is_ambush,
-													target_faction,
-													enemy_faction,
-													target_region,
-													custom_option
-													);
+				dilemma_name,
+				caravan,
+				{attacking_force, 0},
+				is_ambush,
+				enemy_faction,
+				target_region,
+				{function() cm:set_caravan_cargo(caravan_handle, caravan_handle:cargo()-100) end, 1}
+			);
 			
 			local target_faction_object = cm:get_faction(target_faction);
 			
@@ -97,8 +85,7 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			cm:launch_custom_dilemma_from_builder(dilemma_builder, own_faction);
 		end,
 		false},
-
-		["cathayCargo"] = 
+	["cathayCargo"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -146,27 +133,16 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 		
 			local attacking_force = caravans:generate_attackers(bandit_threat, "cathay_caravan_army");
 			
-			local cargo_amount = caravan_handle:cargo();
-			
-			--Dilemma option to add cargo
-			function add_cargo()
-				local cargo = caravan_handle:cargo();
-				cm:set_caravan_cargo(caravan_handle, cargo+100)
-			end
-			
-			custom_option = add_cargo;
-			
 			--Handles the custom options for the dilemmas, such as battles (only?)
 			local enemy_cqi = caravans:attach_battle_to_dilemma(
-													dilemma_name,
-													caravan,
-													attacking_force,
-													is_ambush,
-													target_faction,
-													enemy_faction,
-													target_region,
-													custom_option
-													);
+				dilemma_name,
+				caravan,
+				{attacking_force, 0},
+				is_ambush,
+				enemy_faction,
+				target_region,
+				{function() cm:set_caravan_cargo(caravan_handle, caravan_handle:cargo()+100) end, 0}
+			);
 			
 			local target_faction_object = cm:get_faction(target_faction);
 			
@@ -199,8 +175,7 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			cm:launch_custom_dilemma_from_builder(dilemma_builder, own_faction);
 		end,
 		false},
-
-		["genericShortcut"] = 
+	["genericShortcut"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -220,13 +195,7 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 		function(event_conditions,caravan_handle)
 			
 			out.design("genericShortcut action called")
-			local dilemma_name = "wh3_dlc23_dilemma_chd_convoy_the_guide"			
-			
-			function extra_move()
-				--check if more than 1 move from the end
-				cm:move_caravan(caravan_handle);
-			end
-			custom_option = extra_move;
+			local dilemma_name = "wh3_dlc23_dilemma_chd_convoy_the_guide"
 			
 			caravans:attach_battle_to_dilemma(
 				dilemma_name,
@@ -235,8 +204,8 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 				false,
 				nil,
 				nil,
-				nil,
-				custom_option);
+				{function() cm:move_caravan(caravan_handle) end, 1}
+			);
 			
 			local scout_skill = caravan_handle:caravan_master():character_details():character():bonus_values():scripted_value("caravan_scouting", "value");
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
@@ -261,8 +230,7 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			
 		end,
 		false},
-
-		["daemonsPortal"] = 
+	["daemonsPortal"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -291,13 +259,7 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			--Decode the string into arguments-- Need to specify the argument encoding
 			--none to decode
 
-			--Trigger dilemma to be handled by aboove function
-			
-			function add_cargo()
-				local cargo = caravan_handle:cargo();
-				cm:set_caravan_cargo(caravan_handle, cargo+100)
-			end
-			custom_option = add_cargo;
+			--Trigger dilemma to be handled by above function
 			
 			caravans:attach_battle_to_dilemma(
 				dilemma_name,
@@ -306,8 +268,9 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 				false,
 				nil,
 				nil,
-				nil,
-				custom_option);
+				{function() cm:set_caravan_cargo(caravan_handle, caravan_handle:cargo()+100) end, 0},
+				0
+			);
 			
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
 			local payload_builder = cm:create_payload();
@@ -334,8 +297,7 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			
 		end,
 		false},
-
-		["daemonsRecruitment"] = 
+	["daemonsRecruitment"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -363,14 +325,14 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			--none to decode
 			
 			caravans:attach_battle_to_dilemma(
-						dilemma_name,
-						caravan_handle,
-						nil,
-						false,
-						nil,
-						nil,
-						nil,
-						nil);
+				dilemma_name,
+				caravan_handle,
+				nil,
+				false,
+				nil,
+				nil,
+				nil
+			);
 			
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
 			local payload_builder = cm:create_payload();
@@ -395,8 +357,7 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			
 		end,
 		false},
-
-		["ogreRecruitment"] = 
+	["ogreRecruitment"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -424,14 +385,14 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			--none to decode
 			
 			caravans:attach_battle_to_dilemma(
-						dilemma_name,
-						caravan_handle,
-						nil,
-						false,
-						nil,
-						nil,
-						nil,
-						nil);
+				dilemma_name,
+				caravan_handle,
+				nil,
+				false,
+				nil,
+				nil,
+				nil
+			);
 			
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
 			local payload_builder = cm:create_payload();
@@ -455,8 +416,7 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			
 		end,
 		false},
-
-		["skavenShortcut"] = 
+	["skavenShortcut"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -501,25 +461,16 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 		
 			local attacking_force = caravans:generate_attackers(bandit_threat, "skaven_shortcut_army");
 			
-			local cargo_amount = caravan_handle:cargo();
-			
-			function extra_move()
-				--check if more than 1 move from the end
-				cm:move_caravan(caravan_handle);
-			end
-			custom_option = extra_move;
-			
 			--Handles the custom options for the dilemmas, such as battles (only?)
 			local enemy_cqi = caravans:attach_battle_to_dilemma(
-													dilemma_name,
-													caravan,
-													attacking_force,
-													is_ambush,
-													target_faction,
-													enemy_faction,
-													target_region,
-													custom_option
-													);
+				dilemma_name,
+				caravan,
+				{attacking_force, 0},
+				is_ambush,
+				enemy_faction,
+				target_region,
+				{function() cm:move_caravan(caravan_handle) end, 0}
+			);
 			
 			local target_faction_object = cm:get_faction(target_faction);
 			
@@ -546,8 +497,7 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			cm:launch_custom_dilemma_from_builder(dilemma_builder, own_faction);
 		end,
 		false},
-
-		["dwarfsConvoy"] = 
+	["dwarfsConvoy"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -590,34 +540,21 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			local target_faction = decoded_args[2]; --enemy faction name
 			local enemy_faction = decoded_args[2];
 			local target_region = decoded_args[1]; --event region name
-			local custom_option = nil;
 			
 			local bandit_threat = tonumber(decoded_args[3]);
 		
 			local attacking_force = caravans:generate_attackers(bandit_threat, "dwarf_convoy_army");
 			
-			local cargo_amount = caravan_handle:cargo();
-			
-			--Dilemma option to add cargo
-			function add_cargo()
-				local cargo = caravan_handle:cargo();
-				cm:set_caravan_cargo(caravan_handle, cargo+100)
-			end
-			
-			custom_option = add_cargo;
-			
 			--Handles the custom options for the dilemmas, such as battles (only?)
 			local enemy_cqi = caravans:attach_battle_to_dilemma(
-													dilemma_name,
-													caravan,
-													attacking_force,
-													is_ambush,
-													target_faction,
-													enemy_faction,
-													target_region,
-													custom_option
-													);
-
+				dilemma_name,
+				caravan,
+				{attacking_force, -1},
+				is_ambush,
+				enemy_faction,
+				target_region,
+				{function() cm:set_caravan_cargo(caravan_handle, caravan_handle:cargo()+100) end, -1}
+			);
 													
 			local target_faction_object = cm:get_faction(target_faction);
 			
@@ -649,8 +586,7 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			cm:launch_custom_dilemma_from_builder(dilemma_builder, own_faction);
 		end,
 		false},
-
-		["ogreAmbush"] = 
+	["ogreAmbush"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -697,15 +633,15 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			
 			--Handles the custom options for the dilemmas, such as battles (only?)
 			local enemy_cqi = caravans:attach_battle_to_dilemma(
-													dilemma_name,
-													caravan,
-													attacking_force,
-													is_ambush,
-													target_faction,
-													enemy_faction,
-													target_region,
-													custom_option
-													);
+				dilemma_name,
+				caravan,
+				{attacking_force, 0},
+				is_ambush,
+				enemy_faction,
+				target_region,
+				custom_option,
+				1
+			);
 
 			local target_faction_object = cm:get_faction(target_faction);
 			
@@ -729,8 +665,7 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			cm:launch_custom_dilemma_from_builder(dilemma_builder, own_faction);
 		end,
 		false},
-
-		["hobgoblinTribute"] = 
+	["hobgoblinTribute"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -759,14 +694,14 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			--none to decode
 			
 			caravans:attach_battle_to_dilemma(
-						dilemma_name,
-						caravan_handle,
-						nil,
-						false,
-						nil,
-						nil,
-						nil,
-						nil);
+				dilemma_name,
+				caravan_handle,
+				nil,
+				false,
+				nil,
+				nil,
+				nil
+			);
 			
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
 			local payload_builder = cm:create_payload();
@@ -795,8 +730,7 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			
 		end,
 		false},
-
-		["hungryDaemons"] = 
+	["hungryDaemons"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -825,8 +759,7 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 				..random_unit.."*"
 				..tostring(bandit_threat).."*"
 				..enemy_faction_name.."*";
-				
-			
+
 			--Calculate probability
 			local probability = 1;
 			local dilemma_name = "wh3_dlc23_dilemma_chd_convoy_hungry_daemons";
@@ -840,8 +773,6 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 					probability = 0;
 				end
 			end
-
-			
 
 			local caravan_faction = world_conditions["faction"];
 			if enemy_faction:name() == caravan_faction:name() then
@@ -865,39 +796,21 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			local target_faction = decoded_args[4];
 			local enemy_faction = decoded_args[4];
 			local target_region = decoded_args[1];
-			local custom_option = nil;
 			
 			local random_unit = decoded_args[2];
 			local bandit_threat = tonumber(decoded_args[3]);
 			local attacking_force = caravans:generate_attackers(bandit_threat,"hungry_chaos_army")
 			
-			
-			--Eat unit to option 2
-			function eat_unit_outcome()
-				if random_unit ~= nil then
-					local caravan_master_lookup = cm:char_lookup_str(caravan:caravan_force():general_character():command_queue_index())
-					cm:remove_unit_from_character(
-					caravan_master_lookup,
-					random_unit);
-
-				else
-					out("Script error - should have a unit to eat?")
-				end
-			end
-			
-			custom_option = nil; --eat_unit_outcome;
-			
 			--Battle to option 1, eat unit to 2
 			local enemy_force_cqi = caravans:attach_battle_to_dilemma(
-														dilemma_name,
-														caravan,
-														attacking_force,
-														false,
-														target_faction,
-														enemy_faction,
-														target_region,
-														custom_option
-														);
+				dilemma_name,
+				caravan,
+				{attacking_force, 0},
+				false,
+				enemy_faction,
+				target_region,
+				nil
+			);
 		
 			--Trigger dilemma to be handled by above function
 			
@@ -924,8 +837,7 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			
 		end,
 		false},
-
-		["trainingCamp"] = 
+	["trainingCamp"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -952,14 +864,14 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			--none to decode
 			
 			caravans:attach_battle_to_dilemma(
-						dilemma_name,
-						caravan_handle,
-						nil,
-						false,
-						nil,
-						nil,
-						nil,
-						nil);
+				dilemma_name,
+				caravan_handle,
+				nil,
+				false,
+				nil,
+				nil,
+				nil
+			);
 			
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
 			local payload_builder = cm:create_payload();
@@ -984,8 +896,7 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			
 		end,
 		false},
-
-		["wayofLava"] = 
+	["wayofLava"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -1012,12 +923,6 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			--Decode the string into arguments-- Need to specify the argument encoding
 			--none to decode
 			
-			function extra_move()
-				--check if more than 1 move from the end
-				cm:move_caravan(caravan_handle);
-			end
-			custom_option = extra_move;
-			
 			caravans:attach_battle_to_dilemma(
 				dilemma_name,
 				caravan_handle,
@@ -1025,8 +930,8 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 				false,
 				nil,
 				nil,
-				nil,
-				custom_option);
+				{function() cm:move_caravan(caravan_handle) end, 1}
+			);
 			
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
 			local payload_builder = cm:create_payload();
@@ -1052,8 +957,7 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			
 		end,
 		false},
-
-		["offenceorDefence"] = 
+	["offenceorDefence"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -1087,8 +991,8 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 				false,
 				nil,
 				nil,
-				nil,
-				nil);
+				nil
+			);
 			
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
 			local payload_builder = cm:create_payload();
@@ -1122,8 +1026,7 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			
 		end,
 		false},
-
-		["localisedElfs"] = 
+	["localisedElfs"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -1171,27 +1074,16 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 		
 			local attacking_force = caravans:generate_attackers(bandit_threat, "high_elf_army");
 			
-			local cargo_amount = caravan_handle:cargo();
-			
-			--Dilemma option to add cargo
-			function add_cargo()
-				local cargo = caravan_handle:cargo();
-				cm:set_caravan_cargo(caravan_handle, cargo+100)
-			end
-			
-			custom_option = add_cargo;
-			
 			--Handles the custom options for the dilemmas, such as battles (only?)
 			local enemy_cqi = caravans:attach_battle_to_dilemma(
-													dilemma_name,
-													caravan,
-													attacking_force,
-													is_ambush,
-													target_faction,
-													enemy_faction,
-													target_region,
-													custom_option
-													);
+				dilemma_name,
+				caravan,
+				{attacking_force, 0},
+				is_ambush,
+				enemy_faction,
+				target_region,
+				{function() cm:set_caravan_cargo(caravan_handle, caravan_handle:cargo()+100) end, 0}
+			);
 			
 			local target_faction_object = cm:get_faction(target_faction);
 			
@@ -1224,8 +1116,7 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			cm:launch_custom_dilemma_from_builder(dilemma_builder, own_faction);
 		end,
 		false},
-
-		["readDeadify"] = 
+	["readDeadify"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -1290,39 +1181,21 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			local target_faction = decoded_args[4];
 			local enemy_faction = decoded_args[4];
 			local target_region = decoded_args[1];
-			local custom_option = nil;
 			
 			local random_unit = decoded_args[2];
 			local bandit_threat = tonumber(decoded_args[3]);
 			local attacking_force = caravans:generate_attackers(bandit_threat,"vampire_count_army")
 			
-			
-			--Eat unit to option 2
-			function eat_unit_outcome()
-				if random_unit ~= nil then
-					local caravan_master_lookup = cm:char_lookup_str(caravan:caravan_force():general_character():command_queue_index())
-					cm:remove_unit_from_character(
-					caravan_master_lookup,
-					random_unit);
-
-				else
-					out("Script error - should have a unit to eat?")
-				end
-			end
-			
-			custom_option = nil; --eat_unit_outcome;
-			
 			--Battle to option 1, eat unit to 2
 			local enemy_force_cqi = caravans:attach_battle_to_dilemma(
-														dilemma_name,
-														caravan,
-														attacking_force,
-														false,
-														target_faction,
-														enemy_faction,
-														target_region,
-														custom_option
-														);
+				dilemma_name,
+				caravan,
+				{attacking_force, 0},
+				false,
+				enemy_faction,
+				target_region,
+				nil
+			);
 		
 			--Trigger dilemma to be handled by above function
 			
@@ -1349,8 +1222,7 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			
 		end,
 		false},
-		
-		["farfromHome"] = 
+	["farfromHome"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -1392,33 +1264,21 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			local target_faction = decoded_args[2]; --enemy faction name
 			local enemy_faction = decoded_args[2];
 			local target_region = decoded_args[1]; --event region name
-			local custom_option = nil;
 			
 			local bandit_threat = tonumber(decoded_args[3]);
 		
 			local attacking_force = caravans:generate_attackers(bandit_threat, "tomb_kings_army");
 			
-			local cargo_amount = caravan_handle:cargo();
-			
-			--Dilemma option to add cargo
-			function add_cargo()
-				local cargo = caravan_handle:cargo();
-				cm:set_caravan_cargo(caravan_handle, cargo+100)
-			end
-			
-			custom_option = add_cargo;
-			
 			--Handles the custom options for the dilemmas, such as battles (only?)
 			local enemy_cqi = caravans:attach_battle_to_dilemma(
-													dilemma_name,
-													caravan,
-													attacking_force,
-													is_ambush,
-													target_faction,
-													enemy_faction,
-													target_region,
-													custom_option
-													);
+				dilemma_name,
+				caravan,
+				{attacking_force, 0},
+				is_ambush,
+				enemy_faction,
+				target_region,
+				{function() cm:set_caravan_cargo(caravan_handle, caravan_handle:cargo()+100) end, 0}
+			);
 			
 			local target_faction_object = cm:get_faction(target_faction);
 			
@@ -1451,8 +1311,7 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			cm:launch_custom_dilemma_from_builder(dilemma_builder, own_faction);
 		end,
 		false},
-
-		["quickWayDown"] = 
+	["quickWayDown"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -1477,14 +1336,6 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			--Decode the string into arguments-- Need to specify the argument encoding
 			--none to decode
 			
-			local cargo_amount = caravan_handle:cargo();
-
-			function remove_cargo()
-				cm:set_caravan_cargo(caravan_handle, cargo_amount-50)
-			end
-			
-			custom_option = remove_cargo;
-			
 			caravans:attach_battle_to_dilemma(
 				dilemma_name,
 				caravan_handle,
@@ -1492,8 +1343,14 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 				false,
 				nil,
 				nil,
-				nil,
-				custom_option);
+				{
+					function()
+						cm:set_caravan_cargo(caravan_handle, caravan_handle:cargo()-50)
+						cm:move_caravan(caravan_handle)
+					end,
+					0
+				}
+			);
 			
 			local scout_skill = caravan_handle:caravan_master():character_details():character():bonus_values():scripted_value("caravan_scouting", "value");
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
@@ -1521,8 +1378,7 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			
 		end,
 		false},
-
-		["tradingDarkElfs"] = 
+	["tradingDarkElfs"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -1538,7 +1394,6 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			end
 			
 			return {probability,eventname}
-			
 		end,
 		--enacts everything for the event: creates battle, fires dilemma etc. [2]
 		function(event_conditions,caravan_handle)
@@ -1546,24 +1401,16 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			out.design("tradingDarkElfs action called")
 			local dilemma_name = "wh3_dlc23_dilemma_chd_convoy_trading_dark_elfs";
 			local faction_key = caravan_handle:caravan_force():faction():name();
-			
-			local cargo_amount = caravan_handle:cargo();
-
-			function remove_cargo()
-				cm:set_caravan_cargo(caravan_handle, cargo_amount-100)
-			end
-			
-			custom_option = remove_cargo;
 
 			caravans:attach_battle_to_dilemma(
-						dilemma_name,
-						caravan_handle,
-						nil,
-						false,
-						nil,
-						nil,
-						nil,
-						custom_option);
+				dilemma_name,
+				caravan_handle,
+				nil,
+				false,
+				nil,
+				nil,
+				{function() cm:set_caravan_cargo(caravan_handle, caravan_handle:cargo()-100) end, 0}
+			);
 			
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
 			local payload_builder = cm:create_payload();
@@ -1592,8 +1439,7 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			
 		end,
 		false},
-
-		["powerOverwhelming"] = 
+	["powerOverwhelming"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -1649,34 +1495,21 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			
 			local random_unit = decoded_args[2];
 			
-			function eat_unit_outcome()
-				if random_unit ~= nil then
-					local caravan_master_lookup = cm:char_lookup_str(caravan:caravan_force():general_character():command_queue_index())
-					cm:remove_unit_from_character(
-					caravan_master_lookup,
-					random_unit);
-
-				else
-					out("Script error - should have a unit to eat?")
-				end
-			end
-			
 			local faction_key = caravan_handle:caravan_force():faction():name();
 			
 			--Decode the string into arguments-- Need to specify the argument encoding
 			--none to decode
 			
 			caravans:attach_battle_to_dilemma(
-						dilemma_name,
-						caravan_handle,
-						nil,
-						false,
-						nil,
-						nil,
-						nil,
-						nil);
+				dilemma_name,
+				caravan_handle,
+				nil,
+				false,
+				nil,
+				nil,
+				nil
+			);
 
-		
 			--Trigger dilemma to be handled by above function
 			
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
@@ -1705,11 +1538,10 @@ caravans.event_tables["wh3_dlc23_chd_chaos_dwarfs"] = {
 			dilemma_builder:add_target("default", caravan_handle:caravan_force());
 			caravans.events_cooldown[faction_key][dilemma_name] = caravans.event_max_cooldown;
 			cm:launch_custom_dilemma_from_builder(dilemma_builder, caravan_handle:caravan_force():faction());
-			
 		end,
-		false},
-		
-	};
+		false
+	},
+};
 
 -- Ogre Bandit force B - High (10)
 random_army_manager:new_force("ogre_bandit_high_b");

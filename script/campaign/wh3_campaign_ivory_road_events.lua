@@ -25,13 +25,13 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			end;
 			
 			return {probability,eventname}
-			
 		end,
 		--enacts everything for the event: creates battle, fires dilemma etc. [2]
 		function(event_conditions,caravan_handle)
 		
 			out.design("banditExtort action called")
-			local dilemma_name = "wh3_main_dilemma_cth_caravan_battle_1A";
+			local dilemmas = {"wh3_main_dilemma_cth_caravan_battle_1A", "wh3_main_dilemma_cth_caravan_battle_1B"}
+			local dilemma_name = dilemmas[cm:random_number(#dilemmas)]
 			
 			--Decode the string into arguments-- read_out_event_params explains encoding
 			local decoded_args = caravans:read_out_event_params(event_conditions,3);
@@ -61,16 +61,17 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			local enemy_cqi = caravans:attach_battle_to_dilemma(
 				dilemma_name,
 				caravan_handle,
-				attacking_force,
+				{attacking_force, 0},
 				is_ambush,
-				target_faction,
 				enemy_faction,
 				target_region,
-				function()
-					cm:set_caravan_cargo(caravan_handle, caravan_handle:cargo() + cargo_reduction)
-				end
+				{
+					function()
+						cm:set_caravan_cargo(caravan_handle, caravan_handle:cargo() + cargo_reduction)
+					end,
+					1
+				}
 			);
-			out.design(enemy_cqi);
 			
 			local target_faction_object = cm:get_faction(target_faction);
 			
@@ -81,6 +82,7 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
 			local payload_builder = cm:create_payload();
 			
+			payload_builder:text_display("dummy_convoy_redeadify_first");
 			dilemma_builder:add_choice_payload("FIRST", payload_builder);
 			payload_builder:clear();
 			
@@ -109,9 +111,9 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			out.design("Triggering dilemma:"..dilemma_name)
 			cm:launch_custom_dilemma_from_builder(dilemma_builder, own_faction);
 		end,
-		true},
-		
-		["banditAmbush"] = 
+		true
+	},
+	["banditAmbush"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 		
@@ -137,13 +139,13 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			end;
 			
 			return {probability,eventname}
-			
 		end,
 		--enacts everything for the event: creates battle, fires dilemma etc. [2]
 		function(event_conditions,caravan_handle)
 			
 			out.design("banditAmbush action called")
-			local dilemma_name = "wh3_main_dilemma_cth_caravan_battle_2A";
+			local dilemmas = {"wh3_main_dilemma_cth_caravan_battle_2A", "wh3_main_dilemma_cth_caravan_battle_2B"}
+			local dilemma_name = dilemmas[cm:random_number(#dilemmas)]
 			
 			--Decode the string into arguments-- Need to specify the argument encoding
 			local decoded_args = caravans:read_out_event_params(event_conditions,3);
@@ -174,12 +176,12 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 				local enemy_cqi = caravans:attach_battle_to_dilemma(
 					dilemma_name,
 					caravan_handle,
-					attacking_force,
+					{attacking_force, 0},
 					false,
-					target_faction,
 					enemy_faction,
 					target_region,
-					nil
+					nil,
+					1
 				);
 				
 				--Trigger dilemma to be handled by above function
@@ -191,7 +193,9 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 				local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
 				local payload_builder = cm:create_payload();
 				
+				payload_builder:text_display("dummy_convoy_redeadify_first");
 				dilemma_builder:add_choice_payload("FIRST", payload_builder);
+				payload_builder:clear();
 
 				payload_builder:treasury_adjustment(-1000);
 				
@@ -199,6 +203,7 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 				
 				dilemma_builder:add_target("default", cm:get_military_force_by_cqi(enemy_cqi));
 				dilemma_builder:add_target("target_military_1", caravan_handle:caravan_force());
+				payload_builder:text_display("dummy_wh3_main_dilemma_cth_caravan_battle_1B_second");
 				
 				out.design("Triggering dilemma:"..dilemma_name)
 				cm:launch_custom_dilemma_from_builder(dilemma_builder, caravan_handle:caravan_force():faction());
@@ -207,9 +212,9 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 				caravans:spawn_caravan_battle_force(caravan_handle, attacking_force, target_region, true, true);
 			end;
 		end,
-		true},
-		
-		["banditHungryOgres"] = 
+		true
+	},
+	["banditHungryOgres"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -285,9 +290,8 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			local enemy_force_cqi = caravans:attach_battle_to_dilemma(
 				dilemma_name,
 				caravan,
-				attacking_force,
+				{attacking_force, 0},
 				false,
-				target_faction,
 				enemy_faction,
 				target_region,
 				nil
@@ -298,7 +302,9 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
 			local payload_builder = cm:create_payload();
 			
+			payload_builder:text_display("dummy_convoy_redeadify_first");
 			dilemma_builder:add_choice_payload("FIRST", payload_builder);
+			payload_builder:clear();
 			
 			local target_faction_object =  cm:get_faction(target_faction);
 			local own_faction = caravan_handle:caravan_force():faction();
@@ -324,9 +330,9 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			cm:launch_custom_dilemma_from_builder(dilemma_builder, caravan_handle:caravan_force():faction());
 			
 		end,
-		true},
-		
-		["genericShortcut"] = 
+		true
+	},
+	["genericShortcut"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -340,19 +346,18 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			end;
 			
 			return {probability,eventname}
-			
 		end,
 		--enacts everything for the event: creates battle, fires dilemma etc. [2]
 		function(event_conditions,caravan_handle)
 			
 			out.design("genericShortcut action called")
 			local dilemma_list = {"wh3_main_dilemma_cth_caravan_1A", "wh3_main_dilemma_cth_caravan_1B"}
-			local dilemma_name = dilemma_list[cm:random_number(2,1)];
+			local dilemma_name = dilemma_list[cm:random_number(#dilemma_list)];
 			
 			--Decode the string into arguments-- Need to specify the argument encoding
 			--none to decode
 
-			--Trigger dilemma to be handled by aboove function
+			--Trigger dilemma to be handled by above function
 			local faction_key = caravan_handle:caravan_force():faction():name();
 			local force_cqi = caravan_handle:caravan_force():command_queue_index();
 			
@@ -363,31 +368,34 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 				false,
 				nil,
 				nil,
-				nil,
-				function()
-					cm:move_caravan(caravan_handle);
-				end
+				{
+					function()
+						cm:move_caravan(caravan_handle);
+					end,
+					1
+				}
 			);
 			
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
 			local payload_builder = cm:create_payload();
 			
 			local scout_skill = caravan_handle:caravan_master():character_details():character():bonus_values():scripted_value("caravan_scouting", "value");
+			payload_builder:text_display("dummy_wh3_main_dilemma_cth_caravan_1A_first");
 			dilemma_builder:add_choice_payload("FIRST", payload_builder);
 			payload_builder:clear();
 			
 			payload_builder:treasury_adjustment(math.floor(-500*((100+scout_skill)/100)));
+			payload_builder:text_display("dummy_wh3_main_dilemma_cth_caravan_1A_second");
 			dilemma_builder:add_choice_payload("SECOND", payload_builder);
 			
 			dilemma_builder:add_target("default", caravan_handle:caravan_force());
 			
 			out.design("Triggering dilemma:"..dilemma_name)
 			cm:launch_custom_dilemma_from_builder(dilemma_builder, caravan_handle:caravan_force():faction());
-			
 		end,
-		false},
-		
-		["genericCharacter"] = 
+		false
+	},
+	["genericCharacter"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -396,7 +404,7 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			local probability = 1;
 			
 			local caravan_force = world_conditions["caravan"]:caravan_force();
-			local hero_list = {"wh3_main_ogr_cha_hunter_0","wh_main_emp_cha_captain_0","wh2_main_hef_cha_noble_0"}
+			local hero_list = {"wh3_main_ogr_cha_hunter_0","wh_main_emp_cha_captain_0","wh2_main_hef_cha_noble_0","wh3_dlc25_dwf_cha_dragon_slayer"}
 			
 			if not cm:military_force_contains_unit_type_from_list(caravan_force, hero_list) then
 				out.design("No characters - increase probability")
@@ -410,11 +418,9 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			end
 			
 			return {probability,eventname}
-			
 		end,
 		--enacts everything for the event: creates battle, fires dilemma etc. [2]
 		function(event_conditions,caravan_handle)
-			
 			out.design("genericCharacter action called")
 			
 			local AorB = {"A","B"};
@@ -425,33 +431,40 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			--Decode the string into arguments-- Need to specify the argument encoding
 			--none to decode
 
-			--Trigger dilemma to be handled by aboove function
-			local faction_cqi = caravan_handle:caravan_force():faction():command_queue_index();
-			local force_cqi = caravan_handle:caravan_force():command_queue_index();
-			local hero_list = {"wh3_main_ogr_cha_hunter_0","wh_main_emp_cha_captain_0","wh2_main_hef_cha_noble_0"};
-			
+			--Trigger dilemma to be handled by above function
+			caravans:attach_battle_to_dilemma(
+				dilemma_name,
+				caravan_handle,
+				nil,
+				false,
+				nil,
+				nil
+			);
+
+			local hero_list = {"wh3_main_ogr_cha_hunter_0","wh_main_emp_cha_captain_0","wh2_main_hef_cha_noble_0","wh3_dlc25_dwf_cha_dragon_slayer"};
 			
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
 			local payload_builder = cm:create_payload();
 			
+			payload_builder:text_display("dummy_wh3_main_dilemma_cth_caravan_1A_first");
 			dilemma_builder:add_choice_payload("FIRST", payload_builder);
+			payload_builder:clear();
 			
 			if choice == "B" then
 				payload_builder:treasury_adjustment(-500);
 			end
-			payload_builder:add_unit(caravan_handle:caravan_force(), hero_list[cm:random_number(#hero_list,1)], 1, 0);
+			payload_builder:add_unit(caravan_handle:caravan_force(), hero_list[cm:random_number(#hero_list)], 1, 0);
 			dilemma_builder:add_choice_payload("SECOND", payload_builder);
 			payload_builder:clear();
 			
 			dilemma_builder:add_target("default", caravan_handle:caravan_force());
 			
 			out.design("Triggering dilemma:"..dilemma_name)
-			cm:launch_custom_dilemma_from_builder(dilemma_builder, caravan_handle:caravan_force():faction());
-			
+			cm:launch_custom_dilemma_from_builder(dilemma_builder, caravan_handle:caravan_force():faction()); -- TODO: surely the attach_battle_to_dilemma needs to be here
 		end,
-		false},
-		
-		["genericCargoReplenish"] = 
+		false
+	},
+	["genericCargoReplenish"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -465,7 +478,6 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			end
 			
 			return {probability,eventname}
-			
 		end,
 		--enacts everything for the event: creates battle, fires dilemma etc. [2]
 		function(event_conditions,caravan_handle)
@@ -476,7 +488,7 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			--Decode the string into arguments-- Need to specify the argument encoding
 			--none to decode
 
-			--Trigger dilemma to be handled by aboove function
+			--Trigger dilemma to be handled by above function
 			local faction_cqi = caravan_handle:caravan_force():faction():command_queue_index();
 			local force_cqi = caravan_handle:caravan_force():command_queue_index();
 			
@@ -487,10 +499,12 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 				false,
 				nil,
 				nil,
-				nil,
-				function()
-					cm:set_caravan_cargo(caravan_handle, caravan_handle:cargo() + 200)
-				end
+				{
+					function()
+						cm:set_caravan_cargo(caravan_handle, caravan_handle:cargo() + 200)
+					end,
+					1
+				}
 			);
 				
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
@@ -516,11 +530,80 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			
 			out.design("Triggering dilemma:"..dilemma_name)
 			cm:launch_custom_dilemma_from_builder(dilemma_builder, caravan_handle:caravan_force():faction());
-			
 		end,
-		false},
-		
-		["recruitmentChoiceA"] = 
+		false
+	},
+	["genericCargoCorruption"] = 
+		--returns its probability [1]
+		{function(world_conditions)
+			
+			local eventname = "genericCargoCorruption".."?";
+			local caravan_force = world_conditions["caravan"]:caravan_force();
+			
+			local probability = 4;
+			
+			if cm:military_force_average_strength(caravan_force) == 100 and world_conditions["caravan"]:cargo() >= 1000 then
+				probability = 0
+			end
+			
+			return {probability,eventname}
+		end,
+		--enacts everything for the event: creates battle, fires dilemma etc. [2]
+		function(event_conditions,caravan_handle)
+			
+			out.design("genericCargoCorruption action called")
+			local dilemma_name = "wh3_main_dilemma_cth_caravan_2A";
+			
+			--Decode the string into arguments-- Need to specify the argument encoding
+			--none to decode
+
+			--Trigger dilemma to be handled by above function
+			local faction_cqi = caravan_handle:caravan_force():faction():command_queue_index();
+			local force_cqi = caravan_handle:caravan_force():command_queue_index();
+			
+			caravans:attach_battle_to_dilemma(
+				dilemma_name,
+				caravan_handle,
+				nil,
+				false,
+				nil,
+				nil,
+				{
+					function()
+						cm:set_caravan_cargo(caravan_handle, caravan_handle:cargo() + 200)
+					end,
+					1
+				}
+			);
+				
+			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
+			local payload_builder = cm:create_payload();
+
+			payload_builder:text_display("dummy_wh3_main_dilemma_cth_caravan_1A_first");
+			dilemma_builder:add_choice_payload("FIRST", payload_builder);
+			payload_builder:clear();
+			
+			local corruption_bundle = cm:create_new_custom_effect_bundle("wh3_main_dilemma_cth_caravan_2_a");
+			corruption_bundle:add_effect("wh3_main_effect_corruption_chaos_events_bad", "faction_to_province_own_factionwide", 2);
+			corruption_bundle:set_duration(5);
+			
+			payload_builder:effect_bundle_to_faction(corruption_bundle);
+			
+			local cargo_bundle = cm:create_new_custom_effect_bundle("wh3_main_dilemma_cth_caravan_2_b");
+			cargo_bundle:add_effect("wh3_main_effect_caravan_cargo_DUMMY", "force_to_force_own", 200);
+			cargo_bundle:set_duration(0);
+			
+			payload_builder:effect_bundle_to_force(caravan_handle:caravan_force(), cargo_bundle);
+			dilemma_builder:add_choice_payload("SECOND", payload_builder);
+			
+			dilemma_builder:add_target("default", caravan_handle:caravan_force());
+			
+			out.design("Triggering dilemma:"..dilemma_name)
+			cm:launch_custom_dilemma_from_builder(dilemma_builder, caravan_handle:caravan_force():faction());
+		end,
+		false
+	},
+	["recruitmentChoiceA"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -530,7 +613,6 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			local probability = math.floor((20 - army_size)/2);
 			
 			return {probability,eventname}
-			
 		end,
 		--enacts everything for the event: creates battle, fires dilemma etc. [2]
 		function(event_conditions,caravan_handle)
@@ -546,7 +628,6 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 				caravan_handle,
 				nil,
 				false,
-				nil,
 				nil,
 				nil,
 				nil
@@ -571,9 +652,9 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			cm:launch_custom_dilemma_from_builder(dilemma_builder, caravan_handle:caravan_force():faction());
 			
 		end,
-		false},
-		
-		["recruitmentChoiceB"] = 
+		false
+	},
+	["recruitmentChoiceB"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -583,7 +664,6 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			local probability = math.floor((20 - army_size)/2);
 			
 			return {probability,eventname}
-			
 		end,
 		--enacts everything for the event: creates battle, fires dilemma etc. [2]
 		function(event_conditions,caravan_handle)
@@ -599,7 +679,6 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 				caravan_handle,
 				nil,
 				false,
-				nil,
 				nil,
 				nil,
 				nil
@@ -624,9 +703,9 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			cm:launch_custom_dilemma_from_builder(dilemma_builder, caravan_handle:caravan_force():faction());
 			
 		end,
-		false},
-		
-		["giftFromInd"] = 
+		false
+	},
+	["giftFromInd"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 
@@ -640,7 +719,6 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			end
 			
 			return {probability,eventname}
-			
 		end,
 		--enacts everything for the event: creates battle, fires dilemma etc. [2]
 		function(event_conditions,caravan_handle)
@@ -655,10 +733,12 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 				false,
 				nil,
 				nil,
-				nil,
-				function()
-					cm:set_caravan_cargo(caravan_handle, caravan_handle:cargo() + 1000)
-				end
+				{
+					function()
+						cm:set_caravan_cargo(caravan_handle, caravan_handle:cargo() + 1000)
+					end,
+					0
+				}
 			);
 			
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
@@ -691,9 +771,9 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			cm:launch_custom_dilemma_from_builder(dilemma_builder, caravan_handle:caravan_force():faction());
 			
 		end,
-		false},
-		
-		["daemonIncursion"] = 
+		false
+	},
+	["daemonIncursion"] = 
 		--returns its probability [1]
 		{function(world_conditions)
 			
@@ -752,9 +832,8 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			local enemy_force_cqi = caravans:attach_battle_to_dilemma(
 				dilemma_name,
 				caravan,
-				attacking_force,
+				{attacking_force, 0},
 				false,
-				target_faction,
 				enemy_faction,
 				target_region,
 				nil
@@ -786,11 +865,10 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			dilemma_builder:add_target("target_military_1", caravan:caravan_force());
 			
 			cm:launch_custom_dilemma_from_builder(dilemma_builder, caravan_handle:caravan_force():faction());
-			
 		end,
-		true}
-		
-	};
+		true
+	}
+}
 
 -- Ogre Bandit force A - low (5)
 random_army_manager:new_force("ogre_bandit_low_a");

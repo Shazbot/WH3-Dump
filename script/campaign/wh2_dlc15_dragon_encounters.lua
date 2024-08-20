@@ -360,7 +360,7 @@ function spawn_dragon_campaign_army(loc, force, faction_drag, size)
 			cm:disable_event_feed_events(true, "wh_event_category_diplomacy", "", "");
 			cm:disable_event_feed_events(true, "wh_event_category_character", "", "");
 			
-			cm:force_declare_war(faction_drag, imrik_faction, false, false, false);
+			cm:force_declare_war(faction_drag, imrik_faction, false, false);
 		end,
 		false,
 		false,

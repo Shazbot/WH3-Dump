@@ -605,28 +605,6 @@ core:add_listener(
 	true
 );
 
--- destroy the foreign slot a faction starts their turn with this bonus value
-core:add_listener(
-	"destroy_foreign_slot",
-	"FactionTurnStart",
-	function(context)
-		return not context:faction():foreign_slot_managers():is_empty();
-	end,
-	function(context)
-		local faction = context:faction();
-		local fsm = faction:foreign_slot_managers();
-		
-		for i = 0, fsm:num_items() - 1 do
-			local current_region = fsm:item_at(i):region();
-			
-			if cm:get_regions_bonus_value(current_region, "destroy_foreign_slot") ~= 0 then
-				cm:remove_faction_foreign_slots_from_region(faction:command_queue_index(), current_region:cqi());
-			end;
-		end;
-	end,
-	true
-);
-
 -- damages walls when character besieges settlement with this bonus value complete
 core:add_listener(
 	"damage_settlement_wall",
@@ -760,20 +738,30 @@ core:add_listener(
 core:add_listener(
 	"summon_faction_leader",
 	"ForeignSlotBuildingCompleteEvent",
+	true,
 	function(context)
 		local sm = context:slot_manager();
-		local faction = sm:faction();
-		return cm:get_regions_bonus_value(sm:region(), "summon_faction_leader") ~= 0 and faction:has_faction_leader() and faction:faction_leader():has_region();
-	end,
-	function(context)
-		local sm = context:slot_manager()
-		local faction = sm:faction()
-		local region_name = sm:region():name();
-		local x, y = cm:find_valid_spawn_location_for_character_from_settlement(faction:name(), region_name, false, true, 12);
-		local faction_leader = faction:faction_leader()
+		local region = sm:region();
 
-		if x > 0 and faction_leader:has_military_force() then 
-			cm:teleport_military_force_to(faction_leader:military_force(), x, y)
+		if cm:get_regions_bonus_value(region, "summon_faction_leader") ~= 0 then
+			out("ForeignSlotBuildingCompleteEvent - summon_faction_leader bonus value detected");
+			local faction = sm:faction();
+			local region_name = region:name();
+
+			if faction:has_faction_leader() == true then
+				local faction_leader = faction:faction_leader();
+				out("\tLeader found - "..faction_leader:command_queue_index());
+
+				if faction_leader:has_region() == true or faction_leader:is_at_sea() == true then
+					local x, y = cm:find_valid_spawn_location_for_character_from_settlement(faction:name(), region_name, false, true, 12);
+					out("\t"..region_name.."  -  X: "..x.."  /  Y: "..y);
+
+					if x > 0 and faction_leader:has_military_force() == true then
+						local result = cm:teleport_military_force_to(faction_leader:military_force(), x, y)
+						out("\tTeleporting: "..tostring(result));
+					end
+				end
+			end
 		end
 	end,
 	true
@@ -790,6 +778,29 @@ core:add_listener(
 		local sm = context:slot_manager()
 		local selected_plague = "wh3_dlc25_nur_random_plague_" .. cm:random_number(5)
 		cm:spawn_plague_at_settlement(sm:faction(), sm:region():settlement(), selected_plague)
+	end,
+	true
+);
+
+-- create a random nurgle plague in all adjacent settlements
+core:add_listener(
+	"create_random_nurgle_plague_adj",
+	"ForeignSlotBuildingCompleteEvent",
+	function(context)
+		return cm:get_regions_bonus_value(context:slot_manager():region(), "create_random_nurgle_plague_adjacent") ~= 0
+	end,
+	function(context)
+		local sm = context:slot_manager();
+		local adjacent_region_list = sm:region():adjacent_region_list();
+
+		for i = 0, adjacent_region_list:num_items() - 1 do
+			local adj_region = adjacent_region_list:item_at(i);
+
+			if adj_region:is_abandoned() == false then --adj_region:owning_faction():command_queue_index() ~= sm:faction():command_queue_index() then
+				local selected_plague = "wh3_dlc25_nur_random_plague_"..cm:random_number(5);
+				cm:spawn_plague_at_settlement(sm:faction(), adj_region:settlement(), selected_plague);
+			end
+		end
 	end,
 	true
 );
@@ -820,25 +831,18 @@ core:add_listener(
 	"skulls_from_province_battles",
 	"BattleCompleted",
 	function()
-		return not cm:model():pending_battle():region_data():region():is_null_interface();
+		return cm:model():pending_battle():region_data():region():is_null_interface() == false;
 	end,
 	function()
-		-- test each region in the province
-		local regions = cm:model():pending_battle():region_data():region():province():regions();
-		
-		for i = 0, regions:num_items() - 1 do
-			-- test each foreign slot in the province
-			local fsm = regions:item_at(i):foreign_slot_managers();
-			
-			for j = 0, fsm:num_items() - 1 do
-				local faction = fsm:item_at(j):faction();
-				local bv = cm:get_factions_bonus_value(faction, "skulls_from_province_battles");
-				
-				if bv ~= 0 then
-					cm:faction_add_pooled_resource(faction:name(), "wh3_main_kho_skulls", "buildings", bv);
-				end;
-			end;
-		end;
+		local region = cm:model():pending_battle():region_data():region();
+		local province = region:faction_province();
+		local bv = cm:get_provinces_bonus_value(province, "skulls_from_province_battles");
+
+		if bv ~= 0 then
+			-- This is currently the only faction that could be creating this BV, this might need to change in future
+			-- Getting a BV from a province can't differentiate between factions which is an issue
+			cm:faction_add_pooled_resource("wh3_main_kho_exiles_of_khorne", "wh3_main_kho_skulls", "buildings", bv);
+		end
 	end,
 	true
 );

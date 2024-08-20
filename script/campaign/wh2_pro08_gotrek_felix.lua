@@ -274,7 +274,7 @@ function gotrek_setup()
 				
 				cm:callback(
 					function()
-						cm:apply_effect_bundle_to_characters_force("wh2_pro08_gotrek_xp_sharing", char_cqi, 30, true)
+						cm:apply_effect_bundle_to_characters_force("wh2_pro08_gotrek_xp_sharing", char_cqi, 30)
 						
 						local gotrek_char = cm:get_character_by_cqi(gotrek_details.gotrek_cqi)
 						

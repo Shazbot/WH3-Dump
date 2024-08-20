@@ -109,6 +109,7 @@
 									<template_unit_card_small this="375389E2-5D86-453F-B516D65847D9EDAD"/>
 								</unit_list>
 								<swords this="D2FECD0B-64E0-4FD4-B896C439C843BE0D"/>
+								<cathay_caravan_cargo this="3141027A-1D9A-453E-A66AF78307F3C989"/>
 							</template_military_force_target>
 						</army_target_list>
 					</main_holder>
@@ -6426,5 +6427,122 @@
 				</war>
 			</states>
 		</diplomatic_relations>
+		<cathay_caravan_cargo
+			this="3141027A-1D9A-453E-A66AF78307F3C989"
+			id="cathay_caravan_cargo"
+			offset="10.00,131.00"
+			allowverticalresize="false"
+			docking="Bottom Left"
+			dock_offset="10.00,0.00"
+			component_anchor_point="0.00,1.00"
+			priority="50"
+			tooltipslocalised="true"
+			componentleveltooltip="Cargo"
+			tooltiplabel="ComponentTooltip_a8e7b8c4"
+			uniqueguid="3141027A-1D9A-453E-A66AF78307F3C989"
+			currentstate="D6F5DBE3-6945-47D4-B1E8B2A3021E335B"
+			defaultstate="D6F5DBE3-6945-47D4-B1E8B2A3021E335B">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignMilitaryForce"
+					context_function_id="IsContextValid(CommandingCharacterContext.CaravanContext) &amp;&amp; CommandingCharacterContext.CaravanContext.IsReserve == false &amp;&amp; CommandingCharacterContext.CaravanContext.CargoAmount &gt; 0"/>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignMilitaryForce"
+					context_function_id="CommandingCharacterContext.CaravanContext.CargoAmount + &quot;/&quot; + CommandingCharacterContext.CaravanContext.MaximumCargo(CommandingCharacterContext.CaravanContext.ContractContext)"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="786A1C7C-33B5-4156-81EC855392988EFB"
+					uniqueguid="786A1C7C-33B5-4156-81EC855392988EFB"
+					imagepath="ui/skins/default/icon_banner.png"/>
+				<component_image
+					this="C06E8D82-D384-4577-8D0D95D9A38945B3"
+					uniqueguid="C06E8D82-D384-4577-8D0D95D9A38945B3"
+					imagepath="ui/skins/default/trade_tariffs.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="D6F5DBE3-6945-47D4-B1E8B2A3021E335B"
+					name="default"
+					width="92"
+					height="34"
+					interactive="true"
+					uniqueguid="D6F5DBE3-6945-47D4-B1E8B2A3021E335B">
+					<imagemetrics>
+						<image
+							this="DE5CC11F-28EB-4635-8BA4855C702C2B54"
+							uniqueguid="DE5CC11F-28EB-4635-8BA4855C702C2B54"
+							componentimage="786A1C7C-33B5-4156-81EC855392988EFB"
+							offset="15.00,0.00"
+							width="77"
+							height="34"
+							tile="true"
+							margin="0.00,40.00,0.00,10.00"/>
+						<image
+							this="2D418AED-8D26-4F26-9C2F78A4636A388F"
+							uniqueguid="2D418AED-8D26-4F26-9C2F78A4636A388F"
+							componentimage="C06E8D82-D384-4577-8D0D95D9A38945B3"
+							offset="0.00,4.00"
+							width="26"
+							height="26"
+							dockpoint="Center Left"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<component_text
+						text="9999"
+						textxoffset="26.00,30.00"
+						textyoffset="10.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_b4697af1"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</default>
+				<glow
+					this="37662244-35DB-4BE1-B80CDFB07AF4C18B"
+					name="glow"
+					width="92"
+					height="34"
+					interactive="true"
+					shader_name="glow_pulse_t0"
+					uniqueguid="37662244-35DB-4BE1-B80CDFB07AF4C18B">
+					<imagemetrics>
+						<image
+							this="3C07A391-4CA5-4E10-A2FD6C2CAC462B73"
+							uniqueguid="3C07A391-4CA5-4E10-A2FD6C2CAC462B73"
+							componentimage="786A1C7C-33B5-4156-81EC855392988EFB"
+							offset="15.00,0.00"
+							width="77"
+							height="34"
+							tile="true"
+							margin="0.00,40.00,0.00,10.00"/>
+						<image
+							this="8B3CF8C8-3573-4D70-8EB25E1720163139"
+							uniqueguid="8B3CF8C8-3573-4D70-8EB25E1720163139"
+							componentimage="C06E8D82-D384-4577-8D0D95D9A38945B3"
+							offset="0.00,4.00"
+							width="26"
+							height="26"
+							dockpoint="Center Left"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<component_text
+						text="9999"
+						textxoffset="26.00,30.00"
+						textyoffset="10.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_9b61c329"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</glow>
+			</states>
+		</cathay_caravan_cargo>
 	</components>
 </layout>

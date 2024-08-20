@@ -10,12 +10,9 @@
 -------------------------------------------------------------------------------------------------
 ------------------------------------------- PRELOADS --------------------------------------------
 -------------------------------------------------------------------------------------------------
-
 load_script_libraries();
-bm = battle_manager:new(empire_battle:new());
 
 bm:camera():fade(true, 0);
---bm:enable_cinematic_ui(false, true, false)		-- ensures UI is avaiable during deployment
 
 gb = generated_battle:new(
 	true,                                      		    -- screen starts black
@@ -287,23 +284,23 @@ function end_deployment_phase()
 	-- Voiceover and Subtitles --\
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 2000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Sisters_Final_Battle_pt_01", "subtitle_with_frame", 8, true) end, 2000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Sisters_Final_Battle_pt_01", "subtitle_with_frame", 3.5, true) end, 2000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 10500);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 11000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Sisters_Final_Battle_pt_02", "subtitle_with_frame", 5, true) end, 11000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Sisters_Final_Battle_pt_02", "subtitle_with_frame", 2, true) end, 11000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 18500);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_03) end, 19000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Sisters_Final_Battle_pt_03", "subtitle_with_frame", 7, true) end, 19000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Sisters_Final_Battle_pt_03", "subtitle_with_frame", 3.5, true) end, 19000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 27500);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_04) end, 28000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Sisters_Final_Battle_pt_04", "subtitle_with_frame", 9, true) end, 28000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Sisters_Final_Battle_pt_04", "subtitle_with_frame", 4.5, true) end, 28000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 40000);
 
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_05) end, 40500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Sisters_Final_Battle_pt_05", "subtitle_with_frame", 10, true) end, 40500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Sisters_Final_Battle_pt_05", "subtitle_with_frame", 5, true) end, 40500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 51000);
 
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_06) end, 51500);	
@@ -311,11 +308,11 @@ function end_deployment_phase()
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 68000);
 
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_07) end, 68500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Sisters_Final_Battle_pt_07", "subtitle_with_frame", 2, true) end, 68500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Sisters_Final_Battle_pt_07", "subtitle_with_frame", 1, true) end, 68500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 72500);
 
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_08) end, 73000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Sisters_Final_Battle_pt_08", "subtitle_with_frame", 4, true) end, 73000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Sisters_Final_Battle_pt_08", "subtitle_with_frame", 2, true) end, 73000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 78000);
 	
 	cutscene_intro:start();

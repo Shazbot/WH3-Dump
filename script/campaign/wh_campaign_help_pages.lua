@@ -66,6 +66,7 @@ function setup_campaign_help_pages()
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_intervention_armies", "interrupt_options");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_books_of_nagash", "books_of_nagash");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_bloodlines", "bloodlines_panel");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_monsters", "book_of_monster_hunts");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_infamy", "infamy_tooltip");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_sacrifice_to_sotek", "sotek_sacrifice_panel");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_forbidden_workshop", "ikit_workshop_panel");

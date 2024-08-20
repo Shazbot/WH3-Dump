@@ -556,7 +556,7 @@ function trigger_skill_point_advice_tour()
 	-- we can't trigger for embedded heroes
 	local character = cm:get_character_by_cqi(character_skill_point_tour.char_cqi);
 	
-	if advice_level == 2 and (character_skill_point_tour.is_general or not character:is_embedded_in_military_force()) and not character_skill_point_tour.has_fixed_camp and not character:character_subtype("wh3_main_dae_daemon_prince") then
+	if character and advice_level == 2 and (character_skill_point_tour.is_general or not character:is_embedded_in_military_force()) and not character_skill_point_tour.has_fixed_camp and not character:character_subtype("wh3_main_dae_daemon_prince") then
 		-- Long advice
 		character_selected_skill_point_advice_tour();
 	else

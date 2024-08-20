@@ -88,9 +88,9 @@ local loyalty_change_rate = {
 
 function clear_and_set_trait(character, trait, counter_trait, num)
 	if character:trait_points(counter_trait) ~= 0 then
-		cm:force_add_trait(cm:char_lookup_str(character), trait, false, character:trait_points(counter_trait), false);
+		cm:force_add_trait(cm:char_lookup_str(character), trait, false, character:trait_points(counter_trait));
 	elseif character:trait_points(trait) ~= 0 then
-		cm:force_add_trait(cm:char_lookup_str(character), counter_trait, false, character:trait_points(trait), false);
+		cm:force_add_trait(cm:char_lookup_str(character), counter_trait, false, character:trait_points(trait));
 	end;
 	
 	cm:force_add_trait(cm:char_lookup_str(character), trait, false, num);

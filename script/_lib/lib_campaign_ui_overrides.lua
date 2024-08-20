@@ -38,7 +38,7 @@ set_class_tostring(
 
 function ui_override:new(name, lock_func, unlock_func, lock_with_lock_ui)
 	if not is_string(name) then
-		script_error("ERROR: trying to create ui_override but name [" .. tostring(k_func) .. "] is not a function");
+		script_error("ERROR: trying to create ui_override but name [" .. tostring(name) .. "] is not a string");
 		return;
 	end;
 	

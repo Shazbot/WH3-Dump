@@ -28,9 +28,9 @@ regiments_of_renown = {
 		"wh2_dlc13_emp_inf_archers_ror_0",
 		"wh2_dlc13_emp_inf_huntsmen_ror_0",
 		"wh2_dlc13_emp_veh_war_wagon_ror_0",
-		"wh3_dlc25_emp_inf_nuln_ironsides_ror",
 		"wh3_dlc25_emp_inf_spearmen_shields_ror",
-		"wh3_dlc25_emp_veh_marienburg_land_ship_ror"
+		"wh3_dlc25_emp_veh_marienburg_land_ship_ror",
+		"wh3_dlc25_emp_inf_hochland_long_rifles_ror"
 	},
 	------------------
 	---- VAMPIRES ----
@@ -60,9 +60,9 @@ regiments_of_renown = {
 		"wh_dlc06_dwf_inf_ulthars_raiders_0",
 		"wh_dlc06_dwf_inf_warriors_dragonfire_pass_0",
 		"wh_dlc06_dwf_veh_skyhammer_0",
-		"wh3_dlc25_dwf_art_flame_cannon_ror",
 		"wh3_dlc25_dwf_inf_doomseekers_ror",
-		"wh3_dlc25_dwf_inf_thunderers_ror"
+		"wh3_dlc25_dwf_inf_thunderers_ror",
+		"wh3_dlc25_dwf_inf_slayer_pirates_ror"
 	},
 	--------------------
 	---- GREENSKINS ----

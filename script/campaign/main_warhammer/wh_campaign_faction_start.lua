@@ -83,9 +83,6 @@ function faction_start:new(name, x, y, d, b, h)
 	fs.default_d = d;
 	fs.default_b = b;
 	fs.default_h = h;
-		
-	fs.default_heading = heading;
-	fs.default_zoom = zoom;
 	
 	return fs;
 end;

@@ -427,7 +427,7 @@ function Bastion:great_bastion_start()
 					
 					local difficulty = "normal"
 					
-					local human_factions = cm:get_human_factions(true)
+					local human_factions = cm:get_human_factions()
 					for i = 1, #human_factions do
 						if cm:get_faction(human_factions[i]):subculture() == self.cathay_subculture then
 							difficulty = cm:get_difficulty(true)
@@ -640,7 +640,7 @@ end
 
 -- trigger an incident for all human cathay factions
 function Bastion:trigger_incident(incident_key, target_kurgan_warband, region)
-	local human_factions = cm:get_human_factions(true)
+	local human_factions = cm:get_human_factions()
 	
 	for i = 1, #human_factions do
 		if self:faction_uses_bastion_threat(human_factions[i]) then

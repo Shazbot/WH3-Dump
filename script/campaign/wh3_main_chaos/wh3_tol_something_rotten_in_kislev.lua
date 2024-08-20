@@ -674,7 +674,7 @@ cm:add_first_tick_callback_new(
 				0.5
 			);
 			
-			local human_factions = cm:get_human_factions(true);
+			local human_factions = cm:get_human_factions();
 			local mission_duration = 16;
 			
 			if #human_factions < 3 then
@@ -885,7 +885,7 @@ cm:add_first_tick_callback(
 					return context:mission():mission_record_key() == "wh3_main_mp_tol_kislev_intro";
 				end,
 				function()
-					local human_factions = cm:get_human_factions(true);
+					local human_factions = cm:get_human_factions();
 					
 					for i = 1, #human_factions do
 						cm:complete_scripted_mission_objective(human_factions[i], "wh3_main_mp_victory_tol_kislev", "tol", false);

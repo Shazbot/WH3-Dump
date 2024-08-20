@@ -5,8 +5,8 @@ local buildings_to_lock = {"wh_main_emp_barracks_3", "wh_main_emp_stables_2", "w
 local buildings_to_unlock = {
 	{},
 	{"wh_main_emp_barracks_3", "wh_main_emp_stables_2"},
-	{"wh_main_emp_forges_2", "wh_main_emp_stables_3"},
-	{"wh3_dlc25_emp_shooting_range_3", "wh_main_emp_forges_3"},
+	{"wh_main_emp_forges_2", "wh_main_emp_stables_3", "wh3_dlc25_emp_shooting_range_3"},
+	{"wh_main_emp_forges_3"},
 	{"wh_main_emp_forges_4"},
 	{}
 }

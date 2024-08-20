@@ -105,7 +105,8 @@ end;
 --
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
-
+local CORRUPTION_THRESHOLD_CHAOS_CULTS_CAN_SPAWN = 75;
+local TURN_THRESHOLD_CHAOS_CULTS_CAN_SPAWN = 10;
 
 function great_game_narrative_loader(faction_key, chaos_type, chaos_corruption_type, culture)
 	if excluded_factions[faction_key] then

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="PlayersFaction.SubcultureContext.Key == &quot;wh_dlc08_sc_nor_norsca&quot;">
 	<hierarchy>
@@ -73,6 +73,9 @@
 							</list_left>
 							<list_right this="79854C82-A235-4A65-BE2EBBD2342E7216"/>
 						</pages>
+						<button_info_holder this="44C742E2-D49F-4554-9E865620EE2F8108">
+							<button_info this="570B0C2D-32BD-4FCA-82E2BF5860D49D96"/>
+						</button_info_holder>
 					</book_frame>
 					<page_left this="D6EDF3A0-9ED5-4484-9C0700DD4CB1938E"/>
 					<page_right this="438F38EE-6028-4226-82799D4C70DBCEBB"/>
@@ -1367,7 +1370,7 @@
 					<component_text
 						texthbehaviour="Never split"
 						font_m_font_name="Norse-Bold"
-						font_m_size="50"
+						font_m_size="38"
 						font_m_colour="#4A0000FF"
 						font_m_leading="1"
 						fontcat_name="grudges_page_header"/>
@@ -1550,7 +1553,8 @@
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="body_alternative_12"/>
+						fontcat_name="body_alternative_12"
+						font_colour_override_preset_key="black"/>
 				</newstate>
 			</states>
 		</lock_description>
@@ -2083,7 +2087,7 @@
 						textlocalised="true"
 						textlabel="text_NewState_Text_50006a"
 						font_m_font_name="Norse-Bold"
-						font_m_size="50"
+						font_m_size="38"
 						font_m_colour="#4A0000FF"
 						font_m_leading="1"
 						fontcat_name="grudges_page_header"/>
@@ -2650,7 +2654,7 @@
 						textlocalised="true"
 						textlabel="tx_completed_NewState_Text_1f0052"
 						font_m_font_name="Norse-Bold"
-						font_m_size="50"
+						font_m_size="38"
 						font_m_colour="#4A0000FF"
 						font_m_leading="1"
 						fontcat_name="grudges_page_header"/>
@@ -2867,5 +2871,161 @@
 					uniqueguid="4C4F8C50-64C7-4B3F-985B42B629A58E00"/>
 			</states>
 		</panel>
+		<button_info
+			this="570B0C2D-32BD-4FCA-82E2BF5860D49D96"
+			id="button_info"
+			template_id="round_small_button"
+			part_of_template="true"
+			uniqueguid_in_template="82F58892-7F49-4844-B36443AED497BEEF"
+			uniqueguid="570B0C2D-32BD-4FCA-82E2BF5860D49D96"
+			dimensions="38.00,38.00"
+			dock_point="Top Right"
+			priority="60"
+			sound_category="UI_GBL_TMP_Round_Small_Button">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="A360BB0D-D652-4DF3-9A0FFB3AF31709E7"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="EC778E68-5D88-4652-96168A2734D9C788"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="F2CED0CF-1C3D-45DB-9F7C9DE097272C63"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="27D5E9B1-0D9D-4244-94665A57EEFB2F73"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="B4E1CDDA-DC38-49CA-AEACBFB956510352"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/icon_question_mark.png"
+					uniqueguid="ECC6BD48-25C5-4CA0-BD72807ED0C8E378"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_pressed.png"
+					uniqueguid="CD4DCAAD-D894-4D17-86AFCA2B27AAD044"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_hover.png"
+					uniqueguid="E684E3B6-4D7F-4BF8-AF9DC412E0F4A60F"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_active.png"
+					uniqueguid="C8350379-7521-4C31-94F685C61F1C4F1A"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_inactive.png"
+					uniqueguid="44A38D0E-3977-4021-A743D5DD2B9609F5"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_underlay.png"
+					uniqueguid="072C5778-2D10-4AF4-8CA7A8EA23EA66C8"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="Button"/>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="resizable"/>
+				<property
+					name="disable_override0"
+					value="CallbackAnimTrigger"/>
+				<property
+					name="dynamic_image"
+					value="0"/>
+				<property
+					name="starts_showing"
+					value=""/>
+				<property
+					name="toggle_panel"
+					value=""/>
+			</user_properties>
+			<localised_texts>
+				<localised_text
+					tooltip_label="ComponentTooltip_332d851b"
+					tooltip_text="{{tr:help_pages}}"/>
+				<localised_text state="active"/>
+				<localised_text state="down"/>
+				<localised_text state="down_off"/>
+				<localised_text state="hover"/>
+				<localised_text state="inactive"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/icon_question_mark.png"/>
+				<element value="ui/skins/default/button_round_small_pressed.png"/>
+				<element value="ui/skins/default/button_round_small_hover.png"/>
+				<element value="ui/skins/default/button_round_small_active.png"/>
+				<element value="ui/skins/default/button_round_small_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_underlay.png"/>
+				<element value=""/>
+			</override_images>
+		</button_info>
+		<button_info_holder
+			this="44C742E2-D49F-4554-9E865620EE2F8108"
+			id="button_info_holder"
+			offset="1302.00,4.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Top Right"
+			dock_offset="-4.00,4.00"
+			component_anchor_point="1.00,0.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="44C742E2-D49F-4554-9E865620EE2F8108"
+			currentstate="60CFD422-D75A-4529-BAD6FC362657998F"
+			defaultstate="60CFD422-D75A-4529-BAD6FC362657998F">
+			<states>
+				<newstate
+					this="60CFD422-D75A-4529-BAD6FC362657998F"
+					name="NewState"
+					width="30"
+					height="30"
+					interactive="true"
+					uniqueguid="60CFD422-D75A-4529-BAD6FC362657998F"/>
+			</states>
+			<animations>
+				<open
+					id="open"
+					propagate="true">
+					<frames>
+						<frame
+							interpolationtime="0"
+							interpolationpropertymask="66"
+							targetmetrics_m_colour="#FFFFFF00"
+							targetmetrics_m_height="175"
+							targetmetrics_m_width="133"
+							targetmetrics_m_offset="15.00,0.00"/>
+						<frame
+							interpolationtime="300"
+							interpolationpropertymask="66"
+							targetmetrics_m_colour="#FFFFFF00"
+							targetmetrics_m_height="175"
+							targetmetrics_m_width="133"/>
+						<frame
+							interpolationtime="250"
+							interpolationpropertymask="66"
+							targetmetrics_m_height="175"
+							targetmetrics_m_width="133"
+							targetmetrics_m_offset="-15.00,0.00"/>
+					</frames>
+				</open>
+				<close id="close">
+					<frames>
+						<frame
+							interpolationtime="0"
+							interpolationpropertymask="66"
+							targetmetrics_m_height="30"
+							targetmetrics_m_width="30"/>
+						<frame
+							interpolationtime="150"
+							interpolationpropertymask="66"
+							targetmetrics_m_colour="#FFFFFF00"
+							targetmetrics_m_height="30"
+							targetmetrics_m_width="30"
+							targetmetrics_m_offset="20.00,0.00"/>
+					</frames>
+				</close>
+			</animations>
+		</button_info_holder>
 	</components>
 </layout>

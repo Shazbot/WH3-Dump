@@ -702,7 +702,9 @@ function under_empire_nuke_region(region, nuke_owner, region_owner, show_vfx)
 	end
 	
 	-- Destroy Under-City
-	cm:remove_faction_foreign_slots_from_region(cm:get_faction(nuke_owner):command_queue_index(), region:cqi());
+	if nuke_owner ~= "" then
+		cm:remove_faction_foreign_slots_from_region(cm:get_faction(nuke_owner):command_queue_index(), region:cqi());
+	end
 	
 	-- Destroy City
 	cm:set_region_abandoned(region_key);
@@ -729,29 +731,33 @@ function under_empire_nuke_region(region, nuke_owner, region_owner, show_vfx)
 	cm:override_building_chain_display(building_chain, ruin_display, region_key);
 	skaven_under_empire_ruins[region_key] = {display_chain, building_chain};
 	
-	-- Tell the nuke owner
-	cm:show_message_event_located(
-		nuke_owner,
-		"event_feed_strings_text_wh2_dlc12_event_feed_string_scripted_event_doomsphere_title",
-		"regions_onscreen_" .. region_key,
-		"event_feed_strings_text_wh2_dlc12_event_feed_string_scripted_event_doomsphere_description",
-		settlement_x,
-		settlement_y,
-		true,
-		120
-	);
+	if nuke_owner ~= "" then
+		-- Tell the nuke owner
+		cm:show_message_event_located(
+			nuke_owner,
+			"event_feed_strings_text_wh2_dlc12_event_feed_string_scripted_event_doomsphere_title",
+			"regions_onscreen_" .. region_key,
+			"event_feed_strings_text_wh2_dlc12_event_feed_string_scripted_event_doomsphere_description",
+			settlement_x,
+			settlement_y,
+			true,
+			120
+		);
+	end
 	
-	-- Tell the region owner
-	cm:show_message_event_located(
-		region_owner,
-		"event_feed_strings_text_wh2_dlc12_event_feed_string_scripted_event_doomsphere_title",
-		"regions_onscreen_" .. region_key,
-		"event_feed_strings_text_wh2_dlc12_event_feed_string_scripted_event_doomsphere_description_target",
-		settlement_x,
-		settlement_y,
-		true,
-		120
-	);
+	if region_owner ~= "" then
+		-- Tell the region owner
+		cm:show_message_event_located(
+			region_owner,
+			"event_feed_strings_text_wh2_dlc12_event_feed_string_scripted_event_doomsphere_title",
+			"regions_onscreen_" .. region_key,
+			"event_feed_strings_text_wh2_dlc12_event_feed_string_scripted_event_doomsphere_description_target",
+			settlement_x,
+			settlement_y,
+			true,
+			120
+		);
+	end
 end
 
 --------------------------------------------------------------

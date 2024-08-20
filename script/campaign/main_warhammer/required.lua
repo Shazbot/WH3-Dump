@@ -10,6 +10,7 @@
 
 package.path = package.path .. ";data/script/campaign/?.lua"
 package.path = package.path .. ";data/script/campaign/main_warhammer/?.lua"
+package.path = package.path .. ";data/script/campaign/main_warhammer/minor_cults/?.lua"
 
 -- general campaign behaviour
 force_require("wh_campaign_setup")
@@ -90,6 +91,7 @@ require("wh3_campaign_grudges_starting_missions")
 require("wh3_dlc25_grudge_cycles")
 require("wh3_dlc25_emp_techs")
 require("wh3_campaign_forge")
+require("wh3_campaign_underdeep")
 
 -- Intro Logic (Often best to load this after other functionality has been loaded)
 require("faction_intro")
@@ -236,3 +238,9 @@ require("wh3_dlc25_spirit_of_grungni")
 require("wh3_dlc25_empire_state_troops")
 require("wh3_dlc25_gardens_of_morr")
 require("wh3_dlc25_gelt_dilemmas")
+
+-- Minor Cults
+require("wh3_campaign_minor_cults");
+for i = 1, #MINOR_CULT_LIST do
+	MINOR_CULT_LIST[i].cult = require(MINOR_CULT_LIST[i].key);
+end

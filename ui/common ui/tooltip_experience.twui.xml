@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -68,16 +68,16 @@
 				<newstate
 					this="89EA6C86-0C5E-4D13-9A56BB6C02EB404E"
 					name="NewState"
-					width="271"
-					height="89"
+					width="179"
+					height="63"
 					uniqueguid="89EA6C86-0C5E-4D13-9A56BB6C02EB404E">
 					<imagemetrics>
 						<image
 							this="66BFBA3C-47B4-4BDD-850C13E9A5A79BB5"
 							uniqueguid="66BFBA3C-47B4-4BDD-850C13E9A5A79BB5"
 							componentimage="6FD7B8FA-3D93-4515-958BE046A7D9CC81"
-							width="271"
-							height="89"
+							width="179"
+							height="63"
 							tile="true"
 							margin="16.00,20.00,16.00,20.00"/>
 					</imagemetrics>
@@ -96,7 +96,7 @@
 		<effect_list
 			this="7CC1EB78-E3CC-4F8A-965A67D2574DAD99"
 			id="effect_list"
-			offset="12.00,57.00"
+			offset="12.00,31.00"
 			tooltipslocalised="true"
 			uniqueguid="7CC1EB78-E3CC-4F8A-965A67D2574DAD99"
 			currentstate="E84F5F4E-B40B-422E-91B65226DC456AA0"
@@ -105,7 +105,13 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoUnitDetails"
-					context_function_id="ExperienceEffectList"/>
+					context_function_id="ExperienceEffectList">
+					<child_m_user_properties>
+						<property
+							name="hide_if_empty"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<states>
 				<default
@@ -172,6 +178,7 @@
 			id="next_rank"
 			offset="12.00,31.00"
 			allowverticalresize="false"
+			visible="false"
 			tooltipslocalised="true"
 			uniqueguid="4BB4D11D-AA53-448B-BB691A803822A67B"
 			currentstate="122F717F-2082-4370-BCF25F0ECBEE40BB"
@@ -190,7 +197,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoUnitDetails"
-					context_function_id="CampaignUnitContext || BattleUnitContext"/>
+					context_function_id="ExperienceRequiredForNextLevel != 0 &amp;&amp; (CampaignUnitContext || BattleUnitContext)"/>
 			</callbackwithcontextlist>
 			<states>
 				<default

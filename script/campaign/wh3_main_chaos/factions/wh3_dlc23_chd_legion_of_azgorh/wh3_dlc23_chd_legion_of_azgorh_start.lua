@@ -39,7 +39,6 @@ if cm:is_new_game() then
 		cm:activate_music_trigger("ScriptedEvent_Positive", "wh3_dlc23_sc_chd_chaos_dwarfs")
 
 		core:svr_save_registry_bool(intro_panel, true);
-		cm:register_instant_movie(intro_panel);
 	end;
 	
 	local function cutscene_configurator(c)

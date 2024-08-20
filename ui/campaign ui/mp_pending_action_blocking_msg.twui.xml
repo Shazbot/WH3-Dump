@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="CampaignRoot.IsMultiplayer">
 	<hierarchy>
@@ -207,6 +207,15 @@
 					context_function_id="UnlockCursor"/>
 				<callback_with_context callback_id="CallbackSoundTrigger"/>
 				<callback_with_context callback_id="TopmostObjectCallback"/>
+				<callback_with_context
+					callback_id="ContextCommandGiverOnVisibilityChanged"
+					context_function_id="DoIf(IsContextValid(EventFeedContext.NextAutoOpenEventContext), UiMsg(&quot;EventFeedAutoOpen&quot;))">
+					<child_m_user_properties>
+						<property
+							name="on_hide"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -333,7 +342,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoCampaignPendingAction"
-					context_function_id="InvolvedFactionList.Filter(IsHuman)">
+					context_function_id="InvolvedFactionList.Filter(IsHuman &amp;&amp; IsPlayersFaction == false)">
 					<child_m_user_properties>
 						<property
 							name="update_constant"

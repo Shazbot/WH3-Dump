@@ -693,7 +693,7 @@ function Bloodgrounds:grant_ritual_of_ruin_rewards(bloodground)
 	local ruination_incident_suffix = ""
 
 	if beastmen_moon.moon_phase == beastmen_moon.moon_max_phase then
-		if beastmen_moon.selected_moon_type == "preparations_full_moon" then
+		if beastmen_moon.selected_moon_type == "full_moon" then
 			moon_multiplier = self.moon_multipliers.full_moon
 			ruination_incident_suffix = "_full_moon"
 		elseif beastmen_moon.selected_moon_type == "lunar_eclipse" then
@@ -818,7 +818,7 @@ function Bloodgrounds:preview_ui_listeners()
 		"SettlementSelectedBloodgrounds",
 		"SettlementSelected",
 		function()
-			if cm:has_local_faction(true) then
+			if cm:has_local_faction() then
 				return cm:get_local_faction(true):subculture() == self.beastmen_sc_key
 			end
 		end,

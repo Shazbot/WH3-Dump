@@ -1103,7 +1103,7 @@ function empire_trigger_political_dilemma(faction, event_override)
 		out("\t\tSelected Event Type: "..tostring(EMPIRE_POLITICS_EVENT_TYPES[event_number]));
 	end
 	
-	if event_number > 0 then
+	if event_number and event_number > 0 then
 		local possible_targets = {};
 		local target_cqi_1 = 0;
 		local target_cqi_2 = 0;

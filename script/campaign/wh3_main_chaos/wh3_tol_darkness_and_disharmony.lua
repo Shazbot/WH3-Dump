@@ -266,7 +266,7 @@ cm:add_first_tick_callback_new(
 				end
 			);
 			
-			local human_factions = cm:get_human_factions(true);
+			local human_factions = cm:get_human_factions();
 			
 			cm:callback(
 				function()
@@ -417,7 +417,7 @@ function tol_listeners_data()
 		"RegionFactionChangeEvent",
 		true,
 		function(context)
-			local human_factions = cm:get_human_factions(true);
+			local human_factions = cm:get_human_factions();
 			
 			for i = 1, #human_factions do
 				local faction = human_factions[i];
@@ -434,7 +434,7 @@ function tol_listeners_data()
 		"BattleCompleted",
 		true,
 		function(context)
-			local human_factions = cm:get_human_factions(true);
+			local human_factions = cm:get_human_factions();
 			local alive_factions = {};
 			
 			for i = 1, #human_factions do
@@ -490,7 +490,7 @@ end;
 function update_victory_points(apply_pending)
 	--Calculate all scores
 	local scores = {}
-	local human_factions = cm:get_human_factions(true)
+	local human_factions = cm:get_human_factions()
 	
 	for i = 1, #human_factions do
 		local faction = human_factions[i]

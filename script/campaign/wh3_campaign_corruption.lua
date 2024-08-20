@@ -125,3 +125,130 @@ function add_starting_corruption()
 		end;
 	end;
 end;
+
+-- The point of this is to add a dummy effect bundle to provinces so we can use model safe CCOs in absence of model safe corruption detection for building context effects
+-- Probably a good idea in future to add this functionality directly in CCOs, some work already done there
+function add_high_corruption_dummy_effect_listeners()
+	core:add_listener(
+		"CorruptuonRegionTurnStart",
+		"RegionTurnStart",
+		true,
+		function(context)
+			local region = context:region();
+			local province = region:province();
+			check_region_corruption_effect(province, region, "wh3_main_corruption_chaos",
+			{
+				{threshold = 100, key = "wh3_main_max_corruption_chaos_dummy"},
+				{threshold = 75, key = "wh3_main_high_corruption_chaos_dummy"},
+				{threshold = 50, key = "wh3_main_mid_corruption_chaos_dummy"}
+			});
+			check_region_corruption_effect(province, region, "wh3_main_corruption_khorne",
+			{
+				{threshold = 100, key = "wh3_main_max_corruption_kho_dummy"},
+				{threshold = 75, key = "wh3_main_high_corruption_kho_dummy"},
+				{threshold = 50, key = "wh3_main_mid_corruption_kho_dummy"}
+			});
+			check_region_corruption_effect(province, region, "wh3_main_corruption_nurgle",
+			{
+				{threshold = 100, key = "wh3_main_max_corruption_nur_dummy"},
+				{threshold = 75, key = "wh3_main_high_corruption_nur_dummy"},
+				{threshold = 50, key = "wh3_main_mid_corruption_nur_dummy"}
+			});
+			check_region_corruption_effect(province, region, "wh3_main_corruption_slaanesh",
+			{
+				{threshold = 100, key = "wh3_main_max_corruption_sla_dummy"},
+				{threshold = 75, key = "wh3_main_high_corruption_sla_dummy"},
+				{threshold = 50, key = "wh3_main_mid_corruption_sla_dummy"}
+			});
+			check_region_corruption_effect(province, region, "wh3_main_corruption_tzeentch",
+			{
+				{threshold = 100, key = "wh3_main_max_corruption_tze_dummy"},
+				{threshold = 75, key = "wh3_main_high_corruption_tze_dummy"},
+				{threshold = 50, key = "wh3_main_mid_corruption_tze_dummy"}
+			});
+			check_region_corruption_effect(province, region, "wh3_main_corruption_vampiric",
+			{
+				{threshold = 100, key = "wh3_main_max_corruption_vmp_dummy"},
+				{threshold = 75, key = "wh3_main_high_corruption_vmp_dummy"},
+				{threshold = 50, key = "wh3_main_mid_corruption_vmp_dummy"}
+			});
+			check_region_corruption_effect(province, region, "wh3_main_corruption_skaven",
+			{
+				{threshold = 100, key = "wh3_main_max_corruption_skv_dummy"},
+				{threshold = 75, key = "wh3_main_high_corruption_skv_dummy"},
+				{threshold = 50, key = "wh3_main_mid_corruption_skv_dummy"}
+			});
+		end,
+		true
+	);
+end
+
+function check_region_corruption_effect(province, region, corruption_key, levels)
+	local prm = province:pooled_resource_manager();
+	local corruption_pr = prm:resource(corruption_key);
+
+	if corruption_pr:is_null_interface() == false then
+		local effect_applied = false;
+
+		for i = 1, #levels do
+			if corruption_pr:value() >= levels[i].threshold and effect_applied == false then
+				cm:apply_effect_bundle_to_region(levels[i].key, region:name(), 0);
+				effect_applied = true;
+			else
+				cm:remove_effect_bundle_from_region(levels[i].key, region:name());
+			end
+		end
+	end
+end
+
+function add_plague_indicator_dummy_effect_listeners()
+	core:add_listener(
+		"DummyRegionInfectionEvent1",
+		"RegionInfectionEvent",
+		true,
+		function(context)
+			if context:is_creation() then
+				if context:target_region():has_effect_bundle("wh3_main_plague_present_dummy") == false then
+					cm:apply_effect_bundle_to_region("wh3_main_plague_present_dummy", context:target_region():name(), 0);
+				end
+			elseif context:is_removed() then
+				cm:remove_effect_bundle_from_region("wh3_main_plague_present_dummy", context:target_region():name());
+			else
+			end
+		end,
+		true
+	);
+	core:add_listener(
+		"DummyRegionInfectionEvent2",
+		"RegionPlagueStateChanged",
+		true,
+		function(context)
+			if context:is_infected() then
+				if context:region():has_effect_bundle("wh3_main_plague_present_dummy") == false then
+					cm:apply_effect_bundle_to_region("wh3_main_plague_present_dummy", context:region():name(), 0);
+				end
+			else
+				cm:remove_effect_bundle_from_region("wh3_main_plague_present_dummy", context:region():name());
+			end
+		end,
+		true
+	);
+	core:add_listener(
+		"DummyRegionInfectionEvent3",
+		"RegionTurnStart",
+		true,
+		function(context)
+			local region = context:region();
+			local plague = region:get_plague_if_infected();
+
+			if plague:is_null_interface() == false then
+				if region:has_effect_bundle("wh3_main_plague_present_dummy") == false then
+					cm:apply_effect_bundle_to_region("wh3_main_plague_present_dummy", region:name(), 0);
+				end
+			else
+				cm:remove_effect_bundle_from_region("wh3_main_plague_present_dummy", region:name());
+			end
+		end,
+		true
+	);
+end

@@ -129,10 +129,13 @@ function attempt_to_award_random_magical_item(context)
 		
 		-- get the list of ancillaries based on the rarity
 		local rarity_roll = cm:random_number(100);
+		local faction_bv_rarity = cm:get_factions_bonus_value(character:faction(), "post_battle_ancillary_drop_rarity_mod");
+		local char_bv_rarity = cm:get_characters_bonus_value(character, "post_battle_ancillary_drop_rarity_mod");
+		rarity_roll = rarity_roll + faction_bv_rarity + char_bv_rarity;
 		
 		if rarity_roll > 90 then
 			new_ancillary_list = new_ancillary_category_list.rare;
-		elseif rarity_roll > 61 then
+		elseif rarity_roll > 60 then
 			new_ancillary_list = new_ancillary_category_list.uncommon;
 		else
 			new_ancillary_list = new_ancillary_category_list.common;
@@ -296,11 +299,18 @@ function get_random_ancillary_key_for_faction(faction_key, specified_category, r
 		end;
 	end;
 	
-	-- we still haven't found a caster in the faction, and the random category selected was arcane item - so change the random category to something else, otherwise we'll never find an equippable arcane item
-	if category == "arcane_item" and specified_category ~= "arcane_item" and not faction_has_caster then
-		table.remove(valid_ancillary_categories, 6);
+	-- we still haven't found a caster in the faction and the random category selected was arcane item - so change the random category to something else, otherwise we'll never find an equippable arcane item
+	-- note that dwarfs technically have casters with character runes (they are arcane items) they are not randomly dropped, so we exclude them specifically here
+	if category == "arcane_item" and specified_category ~= "arcane_item" and (not faction_has_caster or faction:culture() == "wh_main_dwf_dwarfs") then
+		local filtered_ancillary_categories = {}
 
-		category = valid_ancillary_categories[cm:random_number(#valid_ancillary_categories)];
+		for i = 1, #valid_ancillary_categories do
+			if valid_ancillary_categories[i] ~= "arcane_item" then
+				table.insert(filtered_ancillary_categories, valid_ancillary_categories[i])
+			end
+		end
+
+		category = filtered_ancillary_categories[cm:random_number(#filtered_ancillary_categories)];
 	end;
 
 	local ancillary_list_for_category_for_faction = cm:random_sort(ancillary_list[category][rarity]);

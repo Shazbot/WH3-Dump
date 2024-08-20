@@ -421,7 +421,7 @@ function forced_battle:forced_battle_stage_2()
 
 			self.attacker.faction = attacker_faction:name()
 			
-			cm:force_declare_war(attacker_faction:name(), target_faction:name(),false,false, false)
+			cm:force_declare_war(attacker_faction:name(), target_faction:name(),false,false)
 		else
 			cm:callback(function()
 				cm:force_attack_of_opportunity(self.attacker.cqi, self.target.cqi, self.is_ambush)

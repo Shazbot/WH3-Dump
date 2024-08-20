@@ -976,7 +976,7 @@ function create_new_food_challenge()
 	
 	-- ensure the same objective isn't issued again
 	for i = 1, #selected_objectives do
-		if selected_objective ~= current_food_challenge.objective then
+		if selected_objectives[i] ~= current_food_challenge.objective then
 			table.insert(available_objectives, selected_objectives[i])
 		end
 	end

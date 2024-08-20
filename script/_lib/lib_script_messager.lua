@@ -246,7 +246,7 @@ end;
 --- @p string message name
 function script_messager:remove_listener_by_name(name)
 	if not is_string(name) then
-		script_error("script_messager ERROR: remove_listener_by_name() called but supplied message [" .. tostring(message) .. "] is not a string");
+		script_error("script_messager ERROR: remove_listener_by_name() called but supplied name [" .. tostring(name) .. "] is not a string");
 		return false;
 	end;
 

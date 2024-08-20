@@ -315,7 +315,6 @@ function start_game_all_factions()
 	emp_techs:initialise()
 	ancillary_item_forge:initialise()
 
-
 	---Champions of Chaos
 	CUS:initialise()
 	norscan_homeland:initialise()
@@ -352,6 +351,10 @@ function start_game_all_factions()
 	empire_state_troops:initialise()
 	gardens_of_morr:initialise()
 	gelt_dilemmas:initialise()
+
+	-- Update 5.2
+	add_underdeep_listeners();
+	add_minor_cults_listeners();
 	
 	out.dec_tab();
 end;

@@ -62,7 +62,7 @@ function Eltharion_Duo_Start_Dilemma:add_yvresse_region_change_listeners()
 							
 							if secondary_army:has_region() and secondary_army:region():name() == self.yvresse_region then
 								cm:disable_event_feed_events(true, "wh_event_category_character", "", "")
-								cm:kill_character(secondary_army:command_queue_index(), true, false)
+								cm:kill_character(secondary_army:command_queue_index(), true)
 								cm:disable_event_feed_events(false, "wh_event_category_character", "", "")
 							end
 						end

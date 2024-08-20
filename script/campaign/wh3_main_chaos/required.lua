@@ -82,6 +82,7 @@ require("wh3_campaign_grudges_legendary")
 require("wh3_dlc25_grudge_cycles")
 require("wh2_campaign_tech_tree_lords")
 require("wh3_campaign_forge")
+require("wh3_campaign_underdeep")
 
 -- DLC23 - Chaos Dwarfs
 require("wh3_dlc23_narrative_chaos_dwarfs");

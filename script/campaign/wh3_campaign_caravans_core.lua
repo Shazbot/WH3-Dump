@@ -3,7 +3,7 @@ out.design("*** Caravans script loaded ***");
 
 caravans = {}
 
-enemy_char_cqi = {}
+caravans.enemy_force_cqi = 0
 
 caravans.event_tables = {}
 ------------------
@@ -30,14 +30,16 @@ caravans.culture_to_faction = {
 caravans.destinations_key = {
 	main_warhammer = {
 		cathay = {
-		"wh3_main_combi_region_frozen_landing",
-		"wh3_main_combi_region_myrmidens",
-		"wh3_main_combi_region_erengrad",
-		"wh3_main_combi_region_karaz_a_karak",
-		"wh3_main_combi_region_castle_drakenhof",
-		"wh3_main_combi_region_altdorf",
-		"wh3_main_combi_region_marienburg"
-
+			"wh3_main_combi_region_frozen_landing",
+			"wh3_main_combi_region_myrmidens",
+			"wh3_main_combi_region_erengrad",
+			"wh3_main_combi_region_karaz_a_karak",
+			"wh3_main_combi_region_castle_drakenhof",
+			"wh3_main_combi_region_altdorf",
+			"wh3_main_combi_region_marienburg",
+			"wh3_main_combi_region_barak_varr",
+			"wh3_main_combi_region_gisoreux",
+			"wh3_main_combi_region_nuln"
 		},
 
 		chaos_dwarfs = {
@@ -57,7 +59,6 @@ caravans.destinations_key = {
 	},
 
 	wh3_main_chaos = {
-
 		cathay = {
 			"wh3_main_chaos_region_frozen_landing",
 			"wh3_main_chaos_region_shattered_stone_bay",
@@ -322,6 +323,7 @@ caravans.traits_to_units = {
 	},		
 
 	["wh3_dlc23_skill_innate_chd_convoy_overseer_retired_daemonsmither"] = {
+		"wh3_dlc23_chd_cha_bull_centaur_taurruk",
 		"wh3_dlc23_chd_inf_chaos_dwarf_warriors",
 		"wh3_dlc23_chd_inf_chaos_dwarf_warriors",
 		"wh3_dlc23_chd_inf_chaos_dwarf_blunderbusses",
@@ -349,203 +351,94 @@ caravans.traits_to_units = {
 	}		
 }
 
-caravans.item_data = {
+caravans.reward_list = {
 	wh3_main_cth_cathay = {
-		wh3_main_chaos_region_frozen_landing     	= "wh3_main_anc_caravan_frost_wyrm_skull",
-		wh3_main_combi_region_frozen_landing		= "wh3_main_anc_caravan_frost_wyrm_skull",
+		wh3_main_chaos_region_frozen_landing     	= {"wh3_main_anc_caravan_frost_wyrm_skull", "wh3_main_cth_caravan_completed_frozen_landing", "wh3_main_ksl_mon_snow_leopard_0"},
+		wh3_main_combi_region_frozen_landing		= {"wh3_main_anc_caravan_frost_wyrm_skull", "wh3_main_cth_caravan_completed_frozen_landing", "wh3_main_ksl_mon_snow_leopard_0"},
 
-		wh3_main_chaos_region_shattered_stone_bay	= "wh3_main_anc_caravan_sky_titan_relic",
-		wh3_main_combi_region_shattered_stone_bay	= "wh3_main_anc_caravan_sky_titan_relic",
+		wh3_main_chaos_region_shattered_stone_bay	= {"wh3_main_anc_caravan_sky_titan_relic", "wh3_main_cth_caravan_completed_stone_bay", "wh3_main_ogr_veh_ironblaster_0"},
 
-		wh3_main_chaos_region_novchozy            	= "wh3_main_anc_caravan_frozen_pendant",
-		wh3_main_combi_region_novchozy				= "wh3_main_anc_caravan_frozen_pendant",
+		wh3_main_chaos_region_novchozy            	= {"wh3_main_anc_caravan_frozen_pendant", "wh3_main_cth_caravan_completed_novchozy", "wh3_dlc24_ksl_mon_the_things_in_the_woods"},
 
-		wh3_main_chaos_region_erengrad           	= "wh3_main_anc_caravan_gryphon_legion_lance",
-		wh3_main_combi_region_erengrad				= "wh3_main_anc_caravan_gryphon_legion_lance",
+		wh3_main_chaos_region_erengrad           	= {"wh3_main_anc_caravan_gryphon_legion_lance", "wh3_main_cth_caravan_completed_erengrad", "wh3_dlc24_ksl_inf_akshina_ambushers"},
+		wh3_main_combi_region_erengrad				= {"wh3_main_anc_caravan_gryphon_legion_lance", "wh3_main_cth_caravan_completed_erengrad", "wh3_dlc24_ksl_inf_akshina_ambushers"},
 
-		wh3_main_chaos_region_castle_drakenhof   	= "wh3_main_anc_caravan_von_carstein_blade",
-		wh3_main_combi_region_castle_drakenhof		= "wh3_main_anc_caravan_von_carstein_blade",
+		wh3_main_chaos_region_castle_drakenhof   	= {"wh3_main_anc_caravan_von_carstein_blade", "wh3_main_cth_caravan_completed_castle_drakenhof", "wh2_dlc13_emp_inf_huntsmen_0"},
+		wh3_main_combi_region_castle_drakenhof		= {"wh3_main_anc_caravan_von_carstein_blade", "wh3_main_cth_caravan_completed_castle_drakenhof", "wh2_dlc13_emp_inf_huntsmen_0"},
 
-		wh3_main_chaos_region_altdorf            	= "wh3_main_anc_caravan_luminark_lens",
-		wh3_main_combi_region_altdorf				= "wh3_main_anc_caravan_luminark_lens",
+		wh3_main_chaos_region_altdorf            	= {"wh3_main_anc_caravan_luminark_lens", "wh3_main_cth_caravan_completed_altdorf", "wh_main_emp_cav_pistoliers_1"},
+		wh3_main_combi_region_altdorf				= {"wh3_main_anc_caravan_luminark_lens", "wh3_main_cth_caravan_completed_altdorf", "wh_main_emp_cav_pistoliers_1"},
 
-		wh3_main_chaos_region_marienburg          	= "wh3_main_anc_caravan_warrant_of_trade",
-		wh3_main_combi_region_marienburg			= "wh3_main_anc_caravan_warrant_of_trade",
+		wh3_main_chaos_region_marienburg          	= {"wh3_main_anc_caravan_warrant_of_trade", "wh3_main_cth_caravan_completed_marienburg", "wh_main_emp_art_great_cannon"},
+		wh3_main_combi_region_marienburg			= {"wh3_main_anc_caravan_warrant_of_trade", "wh3_main_cth_caravan_completed_marienburg", "wh_main_emp_art_great_cannon"},
 
-		wh3_main_chaos_region_zharr_naggrund    	= "wh3_main_anc_caravan_statue_of_zharr",
-		wh3_main_combi_region_karaz_a_karak			= "wh2_dlc10_dwf_anc_talisman_the_ankor_chain_caravan",
+		wh3_main_combi_region_karaz_a_karak			= {"wh2_dlc10_dwf_anc_talisman_the_ankor_chain_caravan", "wh3_main_cth_caravan_completed_karaz_a_karak", "wh_main_dwf_veh_gyrocopter_0"},
 
-		wh3_main_chaos_region_ind                	= "wh3_main_anc_caravan_bejewelled_dagger",
-		wh3_main_combi_region_Ind					= "wh3_main_anc_caravan_bejewelled_dagger",
+		wh3_main_combi_region_myrmidens				= {"wh3_main_anc_caravan_grant_of_land", "wh3_main_cth_caravan_completed_tilea", "wh3_dlc25_dwf_inf_slayer_pirates"},
 
-		wh3_main_chaos_region_tilea               	= "wh3_main_anc_caravan_grant_of_land",
-		wh3_main_combi_region_myrmidens				= "wh3_main_anc_caravan_grant_of_land",
+		wh3_main_combi_region_barak_varr			= {"wh2_dlc10_dwf_anc_armour_starmetal_plate_caravan", "wh3_main_cth_caravan_completed_barak_varr", "wh_main_dwf_art_organ_gun"},
 
-		wh3_main_chaos_region_estalia             	= "wh3_main_anc_caravan_spy_in_court",
-		wh3_main_combi_region_estalia				= "wh3_main_anc_caravan_spy_in_court",
+		wh3_main_combi_region_gisoreux				= {"wh3_main_anc_caravan_mantle_of_damsel_elena", "wh3_main_cth_caravan_completed_gisoreux", "wh_dlc07_brt_cav_questing_knights_0"},
+
+		wh3_main_combi_region_nuln					= {"wh3_dlc25_anc_weapon_experimental_explosive_caravan", "wh3_main_cth_caravan_completed_nuln", "wh_main_emp_art_helstorm_rocket_battery"}
 	},
 	wh3_dlc23_chd_chaos_dwarfs = {
-		wh3_main_chaos_region_titans_notch 							= "wh3_dlc23_anc_convoy_bones_of_the_maw",
-		wh3_main_combi_region_great_hall_of_greasus 				= "wh3_dlc23_anc_convoy_bones_of_the_maw",
+		wh3_main_chaos_region_titans_notch 							= {"wh3_dlc23_anc_convoy_bones_of_the_maw", "wh3_dlc23_chd_convoy_unique_completed_titans_notch", "wh3_main_ogr_inf_maneaters_3"},
+		wh3_main_combi_region_great_hall_of_greasus 				= {"wh3_dlc23_anc_convoy_bones_of_the_maw", "wh3_dlc23_chd_convoy_unique_completed_great_hall_of_greasus", "wh3_main_ogr_inf_maneaters_3"},
+
+		wh3_main_chaos_region_castle_drakenhof 						= {"wh3_dlc23_anc_convoy_crown_of_skulls", "wh3_dlc23_chd_convoy_unique_completed_castle_drakenhof", "wh_main_vmp_mon_varghulf"},
+		wh3_main_combi_region_castle_drakenhof 						= {"wh3_dlc23_anc_convoy_crown_of_skulls", "wh3_dlc23_chd_convoy_unique_completed_castle_drakenhof", "wh_main_vmp_mon_varghulf"},
+
+		wh3_main_chaos_region_the_palace_of_ruin 					= {"wh3_dlc23_anc_convoy_everchanging_shield", "wh3_dlc23_chd_convoy_unique_completed_the_palace_of_ruin", "wh_main_chs_mon_giant"},
+		wh3_main_combi_region_black_crag 							= {"wh3_dlc23_anc_convoy_everchanging_shield", "wh3_dlc23_chd_convoy_unique_completed_black_crag", "wh_main_chs_mon_giant"},
+
+		wh3_main_chaos_region_bay_of_blades 						= {"wh3_dlc23_anc_convoy_everlasting_glacier", "wh3_dlc23_chd_convoy_unique_completed_bay_of_blades", "wh_dlc08_nor_mon_war_mammoth_0"},
+		wh3_main_combi_region_bay_of_blades 						= {"wh3_dlc23_anc_convoy_everlasting_glacier", "wh3_dlc23_chd_convoy_unique_completed_bay_of_blades", "wh_dlc08_nor_mon_war_mammoth_0"},
+
+		wh3_main_chaos_region_the_volary 							= {"wh3_dlc23_anc_convoy_mirror_blade", "wh3_dlc23_chd_convoy_unique_completed_the_volary", "wh3_main_tze_mon_soul_grinder_0"},
+		wh3_main_combi_region_the_volary 							= {"wh3_dlc23_anc_convoy_mirror_blade", "wh3_dlc23_chd_convoy_unique_completed_the_volary", "wh3_main_tze_mon_soul_grinder_0"},
+
+		wh3_main_chaos_region_the_silvered_tower_of_sorcerers 		= {"wh3_dlc23_anc_convoy_obedient_mutant", "wh3_dlc23_chd_convoy_unique_completed_the_silvered_tower_of_sorcerers", "wh_dlc01_chs_mon_dragon_ogre_shaggoth"},
+		wh3_main_combi_region_the_silvered_tower_of_sorcerers 		= {"wh3_dlc23_anc_convoy_obedient_mutant", "wh3_dlc23_chd_convoy_unique_completed_the_silvered_tower_of_sorcerers", "wh_dlc01_chs_mon_dragon_ogre_shaggoth"},
+
+		wh3_dlc20_chaos_region_grung_zint 							= {"wh3_dlc23_anc_convoy_orc_shaman", "wh3_dlc23_chd_convoy_unique_completed_grung_zint", "wh_main_grn_mon_arachnarok_spider_0"},
+		wh3_main_combi_region_grung_zint 							= {"wh3_dlc23_anc_convoy_orc_shaman", "wh3_dlc23_chd_convoy_unique_completed_grung_zint", "wh_main_grn_mon_arachnarok_spider_0"},
+
+		wh3_main_chaos_region_troll_fjord 							= {"wh3_dlc23_anc_convoy_powerful_berserker", "wh3_dlc23_chd_convoy_unique_completed_troll_fjord", "wh_dlc08_nor_mon_war_mammoth_2"},
+		wh3_main_combi_region_troll_fjord 							= {"wh3_dlc23_anc_convoy_powerful_berserker", "wh3_dlc23_chd_convoy_unique_completed_troll_fjord", "wh_dlc08_nor_mon_war_mammoth_2"},
+
+		wh3_main_chaos_region_the_crystal_spires 					= {"wh3_dlc23_anc_convoy_radiating_spike", "wh3_dlc23_chd_convoy_unique_completed_the_crystal_spires", "wh3_dlc20_chs_inf_chosen_msla"},
+		wh3_main_combi_region_the_crystal_spires 					= {"wh3_dlc23_anc_convoy_radiating_spike", "wh3_dlc23_chd_convoy_unique_completed_the_crystal_spires", "wh3_dlc20_chs_inf_chosen_msla"},
 	
-		wh3_main_chaos_region_castle_drakenhof 						= "wh3_dlc23_anc_convoy_crown_of_skulls",
-		wh3_main_combi_region_castle_drakenhof 						= "wh3_dlc23_anc_convoy_crown_of_skulls",
-	
-		wh3_main_chaos_region_the_palace_of_ruin 					= "wh3_dlc23_anc_convoy_everchanging_shield",
-		wh3_main_combi_region_black_crag 							= "wh3_dlc23_anc_convoy_everchanging_shield",
-	
-		wh3_main_chaos_region_bay_of_blades 						= "wh3_dlc23_anc_convoy_everlasting_glacier",
-		wh3_main_combi_region_bay_of_blades 						= "wh3_dlc23_anc_convoy_everlasting_glacier",
-	
-		wh3_main_chaos_region_the_volary 							= "wh3_dlc23_anc_convoy_mirror_blade",
-		wh3_main_combi_region_the_volary 							= "wh3_dlc23_anc_convoy_mirror_blade",
-	
-		wh3_main_chaos_region_the_silvered_tower_of_sorcerers 		= "wh3_dlc23_anc_convoy_obedient_mutant",
-		wh3_main_combi_region_the_silvered_tower_of_sorcerers 		= "wh3_dlc23_anc_convoy_obedient_mutant",
-	
-		wh3_dlc20_chaos_region_grung_zint 							= "wh3_dlc23_anc_convoy_orc_shaman",
-		wh3_main_combi_region_grung_zint 							= "wh3_dlc23_anc_convoy_orc_shaman",
-	
-		wh3_main_chaos_region_troll_fjord 							= "wh3_dlc23_anc_convoy_powerful_berserker",
-		wh3_main_combi_region_troll_fjord 							= "wh3_dlc23_anc_convoy_powerful_berserker",
-	
-		wh3_main_chaos_region_the_crystal_spires 					= "wh3_dlc23_anc_convoy_radiating_spike",
-		wh3_main_combi_region_the_crystal_spires 					= "wh3_dlc23_anc_convoy_radiating_spike",
-	
-		wh3_dlc23_chaos_region_the_haunted_forest 					= "wh3_dlc23_anc_convoy_ring_of_thorns",
-		wh3_main_combi_region_the_haunted_forest 					= "wh3_dlc23_anc_convoy_ring_of_thorns",
-	
-		wh3_main_combi_region_karond_kar 							= "wh3_dlc23_anc_convoy_spiked_whip",
-	
-		wh3_main_combi_region_wizard_caliphs_palace 				= "wh3_dlc23_anc_convoy_eternal_servant",
+		wh3_dlc23_chaos_region_the_haunted_forest 					= {"wh3_dlc23_anc_convoy_ring_of_thorns", "wh3_dlc23_chd_convoy_unique_completed_the_haunted_forest", "wh_main_vmp_inf_grave_guard_0"},
+		wh3_main_combi_region_the_haunted_forest 					= {"wh3_dlc23_anc_convoy_ring_of_thorns", "wh3_dlc23_chd_convoy_unique_completed_the_haunted_forest", "wh_main_vmp_inf_grave_guard_0"},
+
+		wh3_main_combi_region_karond_kar 							= {"wh3_dlc23_anc_convoy_spiked_whip", "wh3_dlc23_chd_convoy_unique_completed_karond_kar", "wh2_main_def_mon_war_hydra"},
+
+		wh3_main_combi_region_wizard_caliphs_palace 				= {"wh3_dlc23_anc_convoy_eternal_servant", "wh3_dlc23_chd_convoy_unique_completed_wizard_caliphs_palace", "wh2_dlc09_tmb_veh_khemrian_warsphinx_0"}
 	}
 }
 
-caravans.unit_data = {
-
-	wh3_dlc23_chd_chaos_dwarfs = {
-		wh3_main_chaos_region_titans_notch 							= "wh3_main_ogr_inf_maneaters_3",
-		wh3_main_combi_region_great_hall_of_greasus 				= "wh3_main_ogr_inf_maneaters_3",
-	
-		wh3_main_chaos_region_castle_drakenhof 						= "wh_main_vmp_mon_varghulf",
-		wh3_main_combi_region_castle_drakenhof 						= "wh_main_vmp_mon_varghulf",
-	
-		wh3_main_chaos_region_the_palace_of_ruin 					= "wh_main_chs_mon_giant",
-		wh3_main_combi_region_black_crag 							= "wh_main_grn_mon_giant",
-	
-		wh3_main_chaos_region_bay_of_blades 						= "wh_dlc08_nor_mon_war_mammoth_0",
-		wh3_main_combi_region_bay_of_blades 						= "wh_dlc08_nor_mon_war_mammoth_0",
-	
-		wh3_main_chaos_region_the_volary 							= "wh3_main_tze_mon_soul_grinder_0",
-		wh3_main_combi_region_the_volary 							= "wh3_main_tze_mon_soul_grinder_0",
-	
-		wh3_main_chaos_region_the_silvered_tower_of_sorcerers 		= "wh_dlc01_chs_mon_dragon_ogre_shaggoth",
-		wh3_main_combi_region_the_silvered_tower_of_sorcerers 		= "wh_dlc01_chs_mon_dragon_ogre_shaggoth",
-	
-		wh3_dlc20_chaos_region_grung_zint 							= "wh_main_grn_mon_arachnarok_spider_0",
-		wh3_main_combi_region_grung_zint 							= "wh_main_grn_mon_arachnarok_spider_0",
-	
-		wh3_main_chaos_region_troll_fjord 							= "wh_dlc08_nor_mon_war_mammoth_2",
-		wh3_main_combi_region_troll_fjord 							= "wh_dlc08_nor_mon_war_mammoth_2",
-	
-		wh3_main_chaos_region_the_crystal_spires 					= "wh3_dlc20_chs_inf_chosen_msla",
-		wh3_main_combi_region_the_crystal_spires 					= "wh3_dlc20_chs_inf_chosen_msla",
-	
-		wh3_dlc23_chaos_region_the_haunted_forest 					= "wh_main_vmp_inf_grave_guard_0",
-		wh3_main_combi_region_the_haunted_forest 					= "wh_main_vmp_inf_grave_guard_0",
-	
-		wh3_main_combi_region_karond_kar 							= "wh2_main_def_mon_war_hydra",
-	
-		wh3_main_combi_region_wizard_caliphs_palace 				= "wh2_dlc09_tmb_veh_khemrian_warsphinx_0",
-	}
-}
-
-caravans.region_to_incident = {
-	wh3_main_cth_cathay = {
-		wh3_main_chaos_region_altdorf				= "wh3_main_cth_caravan_completed_altdorf",
-		wh3_main_combi_region_altdorf				= "wh3_main_cth_caravan_completed_altdorf",
-
-		wh3_main_chaos_region_castle_drakenhof		= "wh3_main_cth_caravan_completed_castle_drakenhof",
-		wh3_main_combi_region_castle_drakenhof		= "wh3_main_cth_caravan_completed_castle_drakenhof",
-
-		wh3_main_chaos_region_erengrad				= "wh3_main_cth_caravan_completed_erengrad",
-		wh3_main_combi_region_erengrad				= "wh3_main_cth_caravan_completed_erengrad",
-
-		wh3_main_chaos_region_estalia				= "wh3_main_cth_caravan_completed_estalia",
-		wh3_main_combi_region_estalia				= "wh3_main_cth_caravan_completed_estalia",
-
-		wh3_main_chaos_region_frozen_landing		= "wh3_main_cth_caravan_completed_frozen_landing",
-		wh3_main_combi_region_frozen_landing		= "wh3_main_cth_caravan_completed_frozen_landing",
-
-		wh3_main_chaos_region_Ind					= "wh3_main_cth_caravan_completed_ind",
-		wh3_main_combi_region_Ind					= "wh3_main_cth_caravan_completed_ind",
-
-		wh3_main_chaos_region_marienburg			= "wh3_main_cth_caravan_completed_marienburg",
-		wh3_main_combi_region_marienburg			= "wh3_main_cth_caravan_completed_marienburg",
-
-		wh3_main_chaos_region_novchozy				= "wh3_main_cth_caravan_completed_novchozy",
-		wh3_main_combi_region_novchozy				= "wh3_main_cth_caravan_completed_novchozy",
-
-		wh3_main_chaos_region_shattered_stone_bay	= "wh3_main_cth_caravan_completed_stone_bay",
-		wh3_main_combi_region_shattered_stone_bay	= "wh3_main_cth_caravan_completed_stone_bay",
-
-		wh3_main_chaos_region_zharr_naggrund		= "wh3_main_cth_caravan_completed_zharr_nagrund",
-		wh3_main_combi_region_karaz_a_karak			= "wh3_main_cth_caravan_completed_zharr_nagrund",
-
-		wh3_main_combi_region_myrmidens				= "wh3_main_cth_caravan_completed_tilea",
-		wh3_main_chaos_region_tilea					= "wh3_main_cth_caravan_completed_tilea",
-
+-- ancillaries that don't have an associated end region so are awarded at random when a caravan completes
+caravans.special_reward_list = {
+	wh3_main_chaos = {
+		wh3_main_cth_cathay = {
+			{"wh3_main_anc_caravan_bejewelled_dagger", "wh3_main_cth_caravan_completed_ind"},
+			{"wh3_main_anc_caravan_statue_of_zharr", "wh3_main_cth_caravan_completed_karaz_a_karak"},
+			{"wh3_main_anc_caravan_spy_in_court", "wh3_main_cth_caravan_completed_estalia"},
+			{"wh2_dlc10_dwf_anc_talisman_the_ankor_chain_caravan", "wh3_main_cth_caravan_completed_karaz_a_karak"},
+			{"wh3_main_anc_caravan_grant_of_land", "wh3_main_cth_caravan_completed_ind"}
+		}
 	},
-	wh3_dlc23_chd_chaos_dwarfs = {
-		wh3_main_chaos_region_bay_of_blades 		= "wh3_dlc23_chd_convoy_unique_completed_bay_of_blades",
-		wh3_main_combi_region_bay_of_blades 		= "wh3_dlc23_chd_convoy_unique_completed_bay_of_blades",
-	
-		wh3_main_chaos_region_castle_drakenhof 		= "wh3_dlc23_chd_convoy_unique_completed_castle_drakenhof",
-		wh3_main_combi_region_castle_drakenhof 		= "wh3_dlc23_chd_convoy_unique_completed_castle_drakenhof",
-	
-		wh3_dlc20_chaos_region_grung_zint 			= "wh3_dlc23_chd_convoy_unique_completed_grung_zint",
-		wh3_main_combi_region_grung_zint 			= "wh3_dlc23_chd_convoy_unique_completed_grung_zint",
-	
-		wh3_main_chaos_region_the_crystal_spires	= "wh3_dlc23_chd_convoy_unique_completed_the_crystal_spires",
-		wh3_main_combi_region_the_crystal_spires	= "wh3_dlc23_chd_convoy_unique_completed_the_crystal_spires",
-	
-		wh3_dlc23_chaos_region_the_haunted_forest 	= "wh3_dlc23_chd_convoy_unique_completed_the_haunted_forest",
-		wh3_main_combi_region_the_haunted_forest 	= "wh3_dlc23_chd_convoy_unique_completed_the_haunted_forest",
-	
-		wh3_main_chaos_region_the_palace_of_ruin	= "wh3_dlc23_chd_convoy_unique_completed_the_palace_of_ruin",
-	
-		wh3_main_chaos_region_the_silvered_tower_of_sorcerers = "wh3_dlc23_chd_convoy_unique_completed_the_silvered_tower_of_sorcerers",
-		wh3_main_combi_region_the_silvered_tower_of_sorcerers = "wh3_dlc23_chd_convoy_unique_completed_the_silvered_tower_of_sorcerers",
-	
-		wh3_main_chaos_region_the_volary 			= "wh3_dlc23_chd_convoy_unique_completed_the_volary",
-		wh3_main_combi_region_the_volary 			= "wh3_dlc23_chd_convoy_unique_completed_the_volary",
-	
-		wh3_main_chaos_region_titans_notch 			= "wh3_dlc23_chd_convoy_unique_completed_titans_notch",
-		wh3_main_combi_region_great_hall_of_greasus = "wh3_dlc23_chd_convoy_unique_completed_great_hall_of_greasus",
-	
-		wh3_main_combi_region_black_crag 			= "wh3_dlc23_chd_convoy_unique_completed_black_crag",
-	
-		wh3_main_combi_region_karond_kar 			= "wh3_dlc23_chd_convoy_unique_completed_karond_kar",
-	
-		wh3_main_combi_region_wizard_caliphs_palace = "wh3_dlc23_chd_convoy_unique_completed_wizard_caliphs_palace",
-	
-		wh3_main_chaos_region_troll_fjord 			= "wh3_dlc23_chd_convoy_unique_completed_troll_fjord",
-		wh3_main_combi_region_troll_fjord 			= "wh3_dlc23_chd_convoy_unique_completed_troll_fjord"
+	wh3_main_combi = {
+		wh3_main_cth_cathay = {
+			{"wh3_main_anc_caravan_bejewelled_dagger", "wh3_main_cth_caravan_completed_ind"},
+			{"wh3_main_anc_caravan_statue_of_zharr", "wh3_main_cth_caravan_completed_karaz_a_karak"},
+			{"wh3_main_anc_caravan_spy_in_court", "wh3_main_cth_caravan_completed_estalia"},
+			{"wh3_main_anc_caravan_sky_titan_relic", "wh3_main_cth_caravan_completed_ind"},
+			{"wh3_main_anc_caravan_frozen_pendant", "wh3_main_cth_caravan_completed_ind"}
+		}
 	}
-}
-
-caravans.region_reward_list = {}
-caravans.region_reward_list_chaos = {
-	"wh3_main_chaos_region_estalia",
-	"wh3_main_chaos_region_Ind",
-	"wh3_main_chaos_region_tilea",
-	"wh3_main_chaos_region_Zharr_naggrund"
-}
-caravans.region_reward_list_combi = {
-	"wh3_main_combi_region_estalia",
-	"wh3_main_combi_region_Ind",
-	"wh3_main_combi_region_shattered_stone_bay",
-	"wh3_main_combi_region_novchozy"
 }
 
 caravans.deal_duration_mods = {
@@ -597,58 +490,37 @@ caravans.journey_durations = {
 ------------------
 function caravans:initialise()
 	--Setup
-
-	-- TODO sort this out, it's messy and needs to be adjusted to work with Chorfs
-	if cm:get_campaign_name() == "main_warhammer" then
-		self.region_reward_list = self.region_reward_list_combi;
-	elseif cm:get_campaign_name() == "wh3_main_chaos" then
-		self.region_reward_list = self.region_reward_list_chaos;
-	end
-
 	if not cm:get_saved_value("ivory_road_demand") then 
 		self:initalise_end_node_values();
 	end	
 
 	if cm:is_new_game() then
+		local human_factions = cm:get_human_factions_of_culture("wh3_dlc23_chd_chaos_dwarfs")
 
-		cm:set_script_state("caravan_camera_x",590);
-		cm:set_script_state("caravan_camera_y",305);
-	
-		local all_factions = cm:model():world():faction_list();
-		local faction = nil;
-		for i=0, all_factions:num_items()-1 do
-			faction = all_factions:item_at(i)
-			local faction_key = faction:name();
-			--TODO work out what this means and make it generic
-			if not faction:is_human() and faction:subculture() == "wh3_main_sc_cth_cathay" then
-				cm:apply_effect_bundle("wh3_main_caravan_AI_threat_reduction", faction:name(),0)
-			end
-
-			if faction:is_human() and faction:subculture() == "wh3_dlc23_sc_chd_chaos_dwarfs" then
-				caravans.events_cooldown[faction_key] = {
-					["wh3_dlc23_dilemma_chd_convoy_cathay_caravan"] = 0,
-					["wh3_dlc23_dilemma_chd_convoy_dwarfs"] = 0,
-					["wh3_dlc23_dilemma_chd_convoy_far_from_home"] = 0,
-					["wh3_dlc23_dilemma_chd_convoy_hobgoblin_tribute"] = 0,
-					["wh3_dlc23_dilemma_chd_convoy_hungry_daemons"] = 0,
-					["wh3_dlc23_dilemma_chd_convoy_localised_elfs"] = 0,
-					["wh3_dlc23_dilemma_chd_convoy_offence_or_defence"] = 0,
-					["wh3_dlc23_dilemma_chd_convoy_ogre_mercenaries"] = 0,
-					["wh3_dlc23_dilemma_chd_convoy_portals_part_1"] = 0,
-					["wh3_dlc23_dilemma_chd_convoy_portals_part_2"] = 0,
-					["wh3_dlc23_dilemma_chd_convoy_portals_part_3_a"] = 0,
-					["wh3_dlc23_dilemma_chd_convoy_power_overwhelming"] = 0,
-					["wh3_dlc23_dilemma_chd_convoy_quick_way_down"] = 0,
-					["wh3_dlc23_dilemma_chd_convoy_rats_in_a_tunnel"] = 0,
-					["wh3_dlc23_dilemma_chd_convoy_redeadify"] = 0,
-					["wh3_dlc23_dilemma_chd_convoy_the_ambush"] = 0,
-					["wh3_dlc23_dilemma_chd_convoy_the_guide"] = 0,
-					["wh3_dlc23_dilemma_chd_convoy_trading_dark_elfs"] = 0,
-					["wh3_dlc23_dilemma_chd_convoy_training_camp"] = 0,
-					["wh3_dlc23_dilemma_chd_convoy_way_of_lava"] = 0
-				}
-				caravans.events_fired[faction_key] = false
-			end
+		for i = 1, #human_factions do
+			local current_faction = human_factions[i]
+			caravans.events_cooldown[current_faction] = {
+				["wh3_dlc23_dilemma_chd_convoy_cathay_caravan"] = 0,
+				["wh3_dlc23_dilemma_chd_convoy_dwarfs"] = 0,
+				["wh3_dlc23_dilemma_chd_convoy_far_from_home"] = 0,
+				["wh3_dlc23_dilemma_chd_convoy_hobgoblin_tribute"] = 0,
+				["wh3_dlc23_dilemma_chd_convoy_hungry_daemons"] = 0,
+				["wh3_dlc23_dilemma_chd_convoy_localised_elfs"] = 0,
+				["wh3_dlc23_dilemma_chd_convoy_offence_or_defence"] = 0,
+				["wh3_dlc23_dilemma_chd_convoy_ogre_mercenaries"] = 0,
+				["wh3_dlc23_dilemma_chd_convoy_portals_part_1"] = 0,
+				["wh3_dlc23_dilemma_chd_convoy_portals_part_2"] = 0,
+				["wh3_dlc23_dilemma_chd_convoy_portals_part_3_a"] = 0,
+				["wh3_dlc23_dilemma_chd_convoy_power_overwhelming"] = 0,
+				["wh3_dlc23_dilemma_chd_convoy_quick_way_down"] = 0,
+				["wh3_dlc23_dilemma_chd_convoy_rats_in_a_tunnel"] = 0,
+				["wh3_dlc23_dilemma_chd_convoy_redeadify"] = 0,
+				["wh3_dlc23_dilemma_chd_convoy_the_ambush"] = 0,
+				["wh3_dlc23_dilemma_chd_convoy_the_guide"] = 0,
+				["wh3_dlc23_dilemma_chd_convoy_trading_dark_elfs"] = 0,
+				["wh3_dlc23_dilemma_chd_convoy_training_camp"] = 0,
+				["wh3_dlc23_dilemma_chd_convoy_way_of_lava"] = 0
+			}
 		end
 	end
 
@@ -665,7 +537,8 @@ function caravans:initialise()
 					end
 				end
 			end
-			for faction_key, _ in pairs (caravans.events_fired) do
+
+			for faction_key, _ in pairs(caravans.events_fired) do
 				caravans.events_fired[faction_key] = false
 			end	
 		end,
@@ -676,17 +549,14 @@ function caravans:initialise()
 		"caravan_waylay_query",
 		"QueryShouldWaylayCaravan",
 		function(context)
-			return context:faction():is_human()
+			local faction = context:faction()
+			return faction:is_human() and not caravans.events_fired[faction:name()]
 		end,
 		function(context)
-			local faction_key = context:faction():name()
-
-			if caravans.events_fired[faction_key] == nil or caravans.events_fired[faction_key] == false then
-				if self:event_handler(context) == false then
-					out.design("Caravan not valid for event");
-				elseif caravans.events_fired[faction_key] ~= nil then
-					caravans.events_fired[faction_key] = true
-				end
+			if self:event_handler(context) == false then
+				out.design("Caravan not valid for event");
+			else
+				caravans.events_fired[context:faction():name()] = true
 			end
 		end,
 		true
@@ -697,7 +567,14 @@ function caravans:initialise()
 		"CaravanWaylaid",
 		true,
 		function(context)
-			self:waylaid_caravan_handler(context);
+			local event_name_formatted = context:context();
+			local caravan_handle = context:caravan();
+			local event_key = self:read_out_event_key(event_name_formatted);
+			
+			local culture = caravan_handle:caravan_force():faction():culture()
+			local events = self.event_tables[culture]
+			--call the action side of the event
+			events[event_key][2](event_name_formatted,caravan_handle);
 		end,
 		true
 	);
@@ -809,7 +686,6 @@ function caravans:initialise()
 		true
 	);
 
-
 	core:add_listener(
 		"caravans_increase_demand",
 		"WorldStartRound",
@@ -828,16 +704,8 @@ function caravans:initialise()
 		end,
 		function(context)
 			--Heal Lord
-			local caravan_force_list = context:caravan_master():character():military_force():unit_list();
-			local unit = nil;
-			for i=0, caravan_force_list:num_items()-1 do
-				unit = caravan_force_list:item_at(i);
-
-				---TODO way to make this generic?
-				if unit:unit_key() == "wh3_main_cth_cha_lord_caravan_master" then
-					cm:set_unit_hp_to_unary_of_maximum(unit, 1);
-				end
-			end
+			cm:set_unit_hp_to_unary_of_maximum(context:caravan_master():character():military_force():unit_list():item_at(0), 1)
+			
 			--Spread out caravans
 			local caravan_lookup = cm:char_lookup_str(context:caravan():caravan_force():general_character():command_queue_index())
 			local x,y = cm:find_valid_spawn_location_for_character_from_character(
@@ -845,69 +713,24 @@ function caravans:initialise()
 				caravan_lookup,
 				true,
 				cm:random_number(15,5)
-				)
-			cm:teleport_to(caravan_lookup,  x,  y);
-		end,
-		true
-	);
-
-
-	---TODO must be a better way to do this???
-	core:add_listener(
-		"clean_up_attacker",
-		"FactionTurnStart",
-		function(context)
-			return context:faction():name() == "wh3_main_ogr_ogre_kingdoms_qb1"
-		end,
-		function(context)
-			cm:disable_event_feed_events(true, "", "", "diplomacy_faction_destroyed");
-
-			cm:kill_all_armies_for_faction(context:faction());
-
-			cm:callback(function() cm:disable_event_feed_events(false, "", "", "diplomacy_faction_destroyed") end, 0.2);
-		end,
-		true
-	);
-
-	core:add_listener(
-		"unlock_retreat_caravan",
-		"CharacterCompletedBattle",
-		function(context)
-			local character = context:character();
-			local caravan_system = cm:model():world():caravans_system():faction_caravans(character:faction())
-			
-			if not caravan_system:is_null_interface() then
-				local active_caravans = caravan_system:active_caravans()
-				return not active_caravans:is_empty() and character:command_queue_index() == active_caravans:item_at(0):caravan_master():character():command_queue_index()
-			end
-		end,
-		function(context)
-			cm:move_caravan(cm:model():world():caravans_system():faction_caravans(context:character():faction()):active_caravans():item_at(0))
-			
-			uim:override("retreat"):unlock()
-		end,
-		true
-	);
-
-	---TODO must be a better way to do this???
-	core:add_listener(
-		"reenable_event_feed_post_caravan_battle",
-		"BattleCompleted",
-		function()
-			return cm:pending_battle_cache_faction_is_involved("wh3_main_ogr_ogre_kingdoms_qb1")
-		end,
-		function()
-			cm:callback(
-				function()
-					cm:disable_event_feed_events(false, "", "", "diplomacy_war_declared")
-					cm:disable_event_feed_events(false, "", "", "diplomacy_faction_destroyed")
-					cm:disable_event_feed_events(false, "", "", "character_dies_battle")
-				end,
-				0.2
 			)
+
+			cm:teleport_to(caravan_lookup, x, y);
 		end,
 		true
 	);
+
+	core:add_listener(
+		"cleanup_caravan_battle",
+		"BattleCompleted",
+		function(context)
+			return self.enemy_force_cqi > 0
+		end,
+		function()
+			self:cleanup_post_battle()
+		end,
+		true
+	)
 
 	core:add_listener(
 		"convoy_refresh_values",
@@ -927,26 +750,11 @@ function caravans:initialise()
 	);
 
 	core:add_listener(
-		"convoy_post_dilemma_cleanup",
-		"WorldStartRound",
-		true,
-		function()
-			for j = 1, #enemy_char_cqi do
-				cm:disable_event_feed_events(true, "", "", "diplomacy_faction_destroyed");	
-				cm:kill_character("character_cqi:"..enemy_char_cqi[j], true)
-				cm:callback(function() cm:disable_event_feed_events(false, "", "", "diplomacy_faction_destroyed") end, 0.2);
-			end
-			enemy_char_cqi = {}
-		end,
-		true
-	);
-
-	core:add_listener(
 		"new_contracts_update",
 		"FactionTurnStart",
 		function(context)
 			local faction = context:faction()
-			return faction:can_be_human() and faction:culture() == "wh3_dlc23_chd_chaos_dwarfs"
+			return faction:is_human() and faction:culture() == "wh3_dlc23_chd_chaos_dwarfs"
 		end,
 		function(context)
 			local turn = cm:model():turn_number();
@@ -1086,25 +894,10 @@ function caravans:generate_event(conditions)
 	return contextual_event_name, is_battle
 end;
 
-function caravans:waylaid_caravan_handler(context)
-	
-	local event_name_formatted = context:context();
-	local caravan_handle = context:caravan();
-	
-	local event_key = self:read_out_event_key(event_name_formatted);
-	
-	local culture = caravan_handle:caravan_force():faction():culture()
-	local events = self.event_tables[culture]
-	--call the action side of the event
-	events[event_key][2](event_name_formatted,caravan_handle);
-	
-end
-
 function caravans:read_out_event_key(event_string)
 	
-	t = {}
-	s = event_string          --format is "banditAttack?first*second*third*"
-	for v in string.gmatch(s, "(%a+)?") do
+	local t = {}
+	for v in string.gmatch(event_string, "(%a+)?") do
 		table.insert(t, v)
 	end
 	
@@ -1173,32 +966,33 @@ function caravans:spawn_caravan_battle_force(caravan, attacking_force, region, i
 		y,
 		true,
 		function(char_cqi,force_cqi)
-			enemy_force_cqi = force_cqi;
-			
+			self.enemy_force_cqi = force_cqi
+
+			--suppress events
+			cm:disable_event_feed_events(true, "", "", "diplomacy_faction_destroyed");
+			cm:disable_event_feed_events(true, "", "", "character_dies_battle");
 			cm:disable_event_feed_events(true, "", "", "diplomacy_war_declared");
 			cm:force_declare_war(enemy_faction, caravan_faction:name(), false, false);	
 			cm:callback(function() cm:disable_event_feed_events(false, "", "", "diplomacy_war_declared") end, 0.2);
 			cm:disable_movement_for_character(cm:char_lookup_str(char_cqi));
 			cm:set_force_has_retreated_this_turn(cm:get_military_force_by_cqi(force_cqi));
-			table.insert(enemy_char_cqi, char_cqi);
-
 		end
 	);
 
 	if immediate_battle == true then
 		if cm:is_multiplayer() then
-			self:create_caravan_battle(caravan, enemy_force_cqi, x, y, is_ambush)
+			self:create_caravan_battle(caravan, self.enemy_force_cqi, x, y, is_ambush)
 		else
 			cm:trigger_transient_intervention(
 				"spawn_caravan_battle_force",
 				function(inv)
-					self:create_caravan_battle(caravan, enemy_force_cqi, x, y, is_ambush)
+					self:create_caravan_battle(caravan, self.enemy_force_cqi, x, y, is_ambush)
 					inv:complete()
 				end
 			);
 		end
 	elseif immediate_battle == false then 
-		return enemy_force_cqi, x, y
+		return self.enemy_force_cqi, x, y
 	end
 end
 
@@ -1224,10 +1018,6 @@ function caravans:create_caravan_battle(caravan, enemy_force_cqi, x, y, is_ambus
 	local uim = cm:get_campaign_ui_manager();
 	uim:override("retreat"):lock();
 	
-	--suppress events
-	cm:disable_event_feed_events(true, "", "", "diplomacy_faction_destroyed");
-	cm:disable_event_feed_events(true, "", "", "character_dies_battle");
-	
 	--attack of opportunity
 	cm:force_attack_of_opportunity(
 		enemy_force_cqi, 
@@ -1238,14 +1028,14 @@ end;
 
 --Handles battles for dilemmas
 
-function caravans:attach_battle_to_dilemma(dilemma_name, caravan, attacking_force, is_ambush, target_faction, enemy_faction, target_region, custom_option)
+function caravans:attach_battle_to_dilemma(dilemma_name, caravan, attacking_force, is_ambush, enemy_faction, target_region, custom_option, halt_choice)
 	--Create the enemy force
-	local enemy_force_cqi = nil;
+	local enemy_force_cqi = 0;
 	local x = nil;
 	local y = nil;
 	
-	if attacking_force ~= nil then
-		enemy_force_cqi, x, y = self:spawn_caravan_battle_force(caravan, attacking_force, target_region, is_ambush, false, enemy_faction)
+	if attacking_force then
+		enemy_force_cqi, x, y = self:spawn_caravan_battle_force(caravan, attacking_force[1], target_region, is_ambush, false, enemy_faction)
 	end
 
 	core:add_listener(
@@ -1256,73 +1046,51 @@ function caravans:attach_battle_to_dilemma(dilemma_name, caravan, attacking_forc
 		end,
 		function(context)
 			local choice = context:choice();
-				
-			if choice == 3 then
-				return;
+
+			-- fight the battle if the player chooses, otherwise clean up the spawned army
+			if attacking_force and (choice == attacking_force[2] or attacking_force[2] == -1) and enemy_force_cqi > 0 then
+				self:create_caravan_battle(caravan, enemy_force_cqi, x, y, is_ambush);
+			else
+				self:cleanup_post_battle();
 			end
 
-			local choice_zero_dilemmas = {
-				wh3_dlc23_dilemma_chd_convoy_cathay_caravan = true,
-				wh3_dlc23_dilemma_chd_convoy_rats_in_a_tunnel = true,
-				wh3_dlc23_dilemma_chd_convoy_dwarfs = true,
-				wh3_dlc23_dilemma_chd_convoy_localised_elfs = true,
-				wh3_dlc23_dilemma_chd_convoy_far_from_home = true
-			};
-			local choice_one_dilemmas = {
-				wh3_main_dilemma_cth_caravan_5 = true,
-				wh3_dlc23_dilemma_chd_convoy_cathay_caravan = true,
-				wh3_dlc23_dilemma_chd_convoy_rats_in_a_tunnel = true,
-				wh3_dlc23_dilemma_chd_convoy_portals_part_1 = true,
-				wh3_dlc23_dilemma_chd_convoy_the_ambush = true,
-				wh3_dlc23_dilemma_chd_convoy_dwarfs = true,
-				wh3_dlc23_dilemma_chd_convoy_localised_elfs = true,
-				wh3_dlc23_dilemma_chd_convoy_far_from_home = true,
-				wh3_dlc23_dilemma_chd_convoy_quick_way_down = true,
-				wh3_dlc23_dilemma_chd_convoy_trading_dark_elfs = true
-			};	
-
-			local not_move_dilemmas = {
-				wh3_dlc23_dilemma_chd_convoy_training_camp = true,
-				wh3_dlc23_dilemma_chd_convoy_portals_part_1 = true,
-				wh3_dlc23_dilemma_chd_convoy_quick_way_down = true
-			};	
-
-			local move_dilemma_one = {
-				wh3_dlc23_dilemma_chd_convoy_the_ambush = true
-			};
-
-			local cargo_dilemmas = {
-				wh3_main_dilemma_cth_caravan_5 = true,
-				wh3_dlc23_dilemma_chd_convoy_portals_part_1 = true,
-				wh3_dlc23_dilemma_chd_convoy_trading_dark_elfs = true
-			}
-
-			if choice == 0 and attacking_force ~= nil and not choice_zero_dilemmas[dilemma_name] then
-				self:create_caravan_battle(caravan, enemy_force_cqi, x, y, is_ambush);
-			elseif attacking_force ~= nil and (choice == 0 and choice_zero_dilemmas[dilemma_name]) or (dilemma_name == "wh3_dlc23_dilemma_chd_convoy_dwarfs") then
-				self:create_caravan_battle(caravan, enemy_force_cqi, x, y, is_ambush);
-				custom_option();
-			end	
-			
-			if (choice ~= 0 and not move_dilemma_one[dilemma_name]) or (choice == 0 and attacking_force == nil and not not_move_dilemmas[dilemma_name]) then
-				cm:move_caravan(caravan);
-			end	
-			
-			if custom_option and ((choice == 0 and attacking_force == nil and cargo_dilemmas[dilemma_name]) or (choice == 1 and not choice_one_dilemmas[dilemma_name])) then
-				custom_option();
+			-- run the scripted payload (e.g. extra move)
+			if custom_option and (choice == custom_option[2] or custom_option[2] == -1) then
+				custom_option[1]();
 			end
-			
-			if choice == 0 and attacking_force == nil and dilemma_name == "wh3_dlc23_dilemma_chd_convoy_quick_way_down" then
+
+			-- always move the caravan unless a payload halts it
+			if not halt_choice or choice ~= halt_choice then
 				cm:move_caravan(caravan);
-				cm:move_caravan(caravan);
-				custom_option();
 			end
 		end,
-		true
+		false
 	);
 	
 	return enemy_force_cqi
 end;
+
+function caravans:cleanup_post_battle()
+	uim:override("retreat"):unlock()
+
+	if self.enemy_force_cqi and self.enemy_force_cqi > 0 then
+		local mf = cm:get_military_force_by_cqi(self.enemy_force_cqi)
+
+		if mf then
+			cm:kill_all_armies_for_faction(mf:faction())
+		end
+	end
+
+	cm:callback(
+		function()
+			cm:disable_event_feed_events(false, "", "", "diplomacy_faction_destroyed")
+			cm:disable_event_feed_events(false, "", "", "character_dies_battle")
+		end,
+		0.2
+	)
+
+	self.enemy_force_cqi = 0
+end
 
 function caravans:add_inital_force(caravan)
 	local commander = caravan:caravan_force():general_character()
@@ -1361,20 +1129,22 @@ function caravans:set_stance(caravan)
 end;
 
 function caravans:initalise_end_node_values()
-
 	--randomise the end node values
 	local end_nodes = {}
 	local campaign_name = cm:get_campaign_name();
 	
 	if campaign_name == "main_warhammer" then
 		end_nodes.cathay = {
-			["wh3_main_combi_region_frozen_landing"]		=cm:random_number(75,25),
-			["wh3_main_combi_region_myrmidens"]				=cm:random_number(75,25),
-			["wh3_main_combi_region_erengrad"]				=cm:random_number(75,25),
-			["wh3_main_combi_region_karaz_a_karak"]			=cm:random_number(150,60),
-			["wh3_main_combi_region_castle_drakenhof"]		=cm:random_number(150,60),
-			["wh3_main_combi_region_altdorf"]				=cm:random_number(150,60),
-			["wh3_main_combi_region_marienburg"]			=cm:random_number(150,60)
+			["wh3_main_combi_region_frozen_landing"]		= cm:random_number(75, 25),
+			["wh3_main_combi_region_myrmidens"]				= cm:random_number(75, 25),
+			["wh3_main_combi_region_erengrad"]				= cm:random_number(75, 25),
+			["wh3_main_combi_region_karaz_a_karak"]			= cm:random_number(150, 60),
+			["wh3_main_combi_region_castle_drakenhof"]		= cm:random_number(150, 60),
+			["wh3_main_combi_region_altdorf"]				= cm:random_number(150, 60),
+			["wh3_main_combi_region_marienburg"]			= cm:random_number(150, 60),
+			["wh3_main_combi_region_barak_varr"]			= cm:random_number(150, 60),
+			["wh3_main_combi_region_gisoreux"]				= cm:random_number(150, 60),
+			["wh3_main_combi_region_nuln"]					= cm:random_number(150, 60)
 		};
 		end_nodes.chaos_dwarfs = {
 			["wh3_main_combi_region_great_hall_of_greasus"]				= 0,
@@ -1390,19 +1160,17 @@ function caravans:initalise_end_node_values()
 			["wh3_main_combi_region_wizard_caliphs_palace"]				= 0,
 			["wh3_main_combi_region_karond_kar"]						= 0
 		};
-
 	elseif campaign_name == "wh3_main_chaos"   then
 		end_nodes.cathay = {
-			["wh3_main_chaos_region_frozen_landing"]		=cm:random_number(75,25),
-			["wh3_main_chaos_region_shattered_stone_bay"]	=cm:random_number(75,25),
-			["wh3_main_chaos_region_novchozy"]				=cm:random_number(75,25),
-			["wh3_main_chaos_region_erengrad"]				=cm:random_number(150,60),
-			["wh3_main_chaos_region_castle_drakenhof"]		=cm:random_number(150,60),
-			["wh3_main_chaos_region_altdorf"]				=cm:random_number(150,60),
-			["wh3_main_chaos_region_marienburg"]			=cm:random_number(150,60),
-			["wh3_dlc23_chaos_region_the_haunted_forest"]	=cm:random_number(150,60),
+			["wh3_main_chaos_region_frozen_landing"]		= cm:random_number(75, 25),
+			["wh3_main_chaos_region_shattered_stone_bay"]	= cm:random_number(75, 25),
+			["wh3_main_chaos_region_novchozy"]				= cm:random_number(75, 25),
+			["wh3_main_chaos_region_erengrad"]				= cm:random_number(150, 60),
+			["wh3_main_chaos_region_castle_drakenhof"]		= cm:random_number(150, 60),
+			["wh3_main_chaos_region_altdorf"]				= cm:random_number(150, 60),
+			["wh3_main_chaos_region_marienburg"]			= cm:random_number(150, 60),
+			["wh3_dlc23_chaos_region_the_haunted_forest"]	= cm:random_number(150, 60),
 		};
-
 		end_nodes.chaos_dwarfs = {
 			["wh3_dlc23_chaos_region_the_haunted_forest"]				= 0,
 			["wh3_main_chaos_region_titans_notch"]						= 0,
@@ -1415,7 +1183,6 @@ function caravans:initalise_end_node_values()
 			["wh3_main_chaos_region_the_silvered_tower_of_sorcerers"]	= 0,
 			["wh3_main_chaos_region_the_palace_of_ruin"]				= 0
 		};
-		
 	end
 	
 	--save them
@@ -1444,7 +1211,6 @@ function caravans:adjust_end_node_values_for_demand()
 end
 
 function caravans:adjust_end_node_value(region_name, value, operation, culture_name, apply_variance)
-	
 	local region = cm:get_region(region_name);
 	if not region then
 		script_error("Could not find region " ..region_name.. " for caravan script")
@@ -1453,8 +1219,6 @@ function caravans:adjust_end_node_value(region_name, value, operation, culture_n
 	local cargo_value_bundle = cm:create_new_custom_effect_bundle("wh3_main_ivory_road_end_node_value");
 	cargo_value_bundle:set_duration(0);
 
-
-	
 	if operation == "replace" then
 		local temp_end_nodes = self:safe_get_saved_value_ivory_road_demand()
 		cargo_value_bundle:add_effect("wh3_main_effect_caravan_cargo_value_regions", "region_to_region_own", value);
@@ -1467,11 +1231,16 @@ function caravans:adjust_end_node_value(region_name, value, operation, culture_n
 		local old_value = temp_end_nodes[culture_name];
 
 		if old_value == nil then
-			out.design("*******   Error in ivory road script    *********")
+			script_error("End node values do not exist - how can this be?")
 			return 0;
 		end
 		
 		old_value = old_value[region_name]
+
+		if old_value == nil then
+			out.design("Save file does not have value for region " .. region_name .. " - was it added after this save file was created?")
+			return 0;
+		end
 
 		local new_value = math.min(old_value+value,200)
 		new_value = math.max(old_value+value,-60)
@@ -1570,54 +1339,48 @@ function caravans:build_list_of_nodes()
 	return all_nodes
 end
 
-function caravans:reward_item_check(faction,region_key,caravan_master)
-	local reward = self.item_data[faction:culture()][region_key]
+function caravans:reward_item_check(faction, region_key, caravan_master)
+	local culture = faction:culture()
+	local reward = self.reward_list[culture][region_key]
+
+	-- get a different ancillary if the faction already owns it
+	if faction:ancillary_exists(reward[1]) then
+		if cm:random_number(5) == 1 then
+			local item_list = self.special_reward_list[cm:model():campaign_name_key()][culture]
+
+			if item_list then
+				reward = item_list[cm:random_number(#item_list)]
+
+				if faction:ancillary_exists(reward[1]) then return end
+			else
+				return
+			end
+		else
+			return
+		end
+	end
 	
-	if not reward then return false end
-	
-	local faction_does_not_own_ancillary = not faction:ancillary_exists(reward)
 	local character = caravan_master:character()
 	local payload_builder = cm:create_payload();
-	local unit_reward = self.unit_data[faction:culture()]
-	local num_units = 0
 	
-	-- if faction has tech that grants extra unit on caravan completion increase num_units for payload builder
-	local bv = cm:get_factions_bonus_value(faction, "chd_convoy_additional_unit_reward_scripted")
-	if bv > 0 then
-		num_units = bv
+	payload_builder:character_ancillary_gain(character, reward[1], false)
+	
+	if reward[3] then
+		payload_builder:add_unit(character:military_force(), reward[3], 1 + cm:get_factions_bonus_value(faction, "chd_convoy_additional_unit_reward_scripted"), 0)
 	end
 	
-	if faction_does_not_own_ancillary then
-		if unit_reward then 
-			num_units = num_units + 1
-		end
-		payload_builder:character_ancillary_gain(character, reward, false)
-	end
-	
-	if num_units > 0 then
-		payload_builder:add_unit(character:military_force(), unit_reward[region_key], num_units, 0)
-	end
-	
-	if faction_does_not_own_ancillary or num_units > 0 then
-		cm:trigger_custom_incident_with_targets(
-			faction:command_queue_index(),
-			self.region_to_incident[faction:culture()][region_key],
-			true,
-			payload_builder,
-			0,
-			0,
-			character:command_queue_index(),
-			0,
-			0,
-			0
-		)
-		
-		return 0
-	end
-	
-	if cm:random_number(10) == 1 then
-		return self:reward_item_check(faction, self.region_reward_list[cm:random_number(#self.region_reward_list)], caravan_master)
-	end
+	cm:trigger_custom_incident_with_targets(
+		faction:command_queue_index(),
+		reward[2],
+		true,
+		payload_builder,
+		0,
+		0,
+		character:command_queue_index(),
+		0,
+		0,
+		0
+	)
 end
 
 function caravans:get_best_ogre_faction(self_faction)
@@ -1646,7 +1409,7 @@ end
 --------------------------------------------------------------
 cm:add_saving_game_callback(
 	function(context)
-		cm:save_named_value("enemy_char_cqi", enemy_char_cqi, context);
+		cm:save_named_value("enemy_force_cqi", caravans.enemy_force_cqi, context);
 		cm:save_named_value("events_cooldown", caravans.events_cooldown, context);
 		cm:save_named_value("events_fired", caravans.events_fired, context);
 	end
@@ -1655,7 +1418,7 @@ cm:add_saving_game_callback(
 cm:add_loading_game_callback(
 	function(context)
 		if not cm:is_new_game() then
-			enemy_char_cqi = cm:load_named_value("enemy_char_cqi", enemy_char_cqi, context);
+			caravans.enemy_force_cqi = cm:load_named_value("enemy_force_cqi", caravans.enemy_force_cqi, context);
 			caravans.events_cooldown = cm:load_named_value("events_cooldown", caravans.events_cooldown, context);
 			caravans.events_fired = cm:load_named_value("events_fired", caravans.events_fired, context);
 		end;

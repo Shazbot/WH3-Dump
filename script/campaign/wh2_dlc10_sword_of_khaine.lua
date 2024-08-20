@@ -353,6 +353,8 @@ function sword_of_khaine:set_sword_owner(cqi, limited_to_elven, awarded_via_dile
 end;
 
 function sword_of_khaine:faction_is_elven(faction)
+	if not faction then return false end
+
 	local subculture = faction:subculture();
 	
 	return self.elven_factions[subculture] ~= nil;
@@ -511,7 +513,7 @@ function sword_of_khaine:add_listeners()
 				local current_faction_name = self.owner.faction
 				local current_faction = cm:get_faction(current_faction_name)
 
-				if not current_faction:is_null_interface() then
+				if current_faction then
 					if current_faction:is_human() then
 						if self.owner.character_cqi then
 							if self.owner.cd >= 1 and self.owner.lv <= #self.key_index then
@@ -794,7 +796,10 @@ function sword_of_khaine:add_listeners()
 				self:return_sword_to_shrine();
 				
 				if self.owner.faction ~= nil and self:faction_is_elven(cm:get_faction(self.owner.faction)) then
-					cm:trigger_incident(character:faction():name(), self.event_index.sword_region_got, true);
+					local faction = character:faction()
+					if faction:is_human() then
+						cm:trigger_incident(faction:name(), self.event_index.sword_region_got, true);
+					end
 				end;
 			end;
 			

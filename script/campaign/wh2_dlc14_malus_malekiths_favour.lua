@@ -80,7 +80,7 @@ function malus_favour:add_malus_malekiths_favour_listeners()
 
 						if secondary_army:region():name() == self.hag_graef_region_key then
 							cm:disable_event_feed_events(true, event_type, "", "");
-							cm:kill_character(secondary_army:command_queue_index(), true, false);
+							cm:kill_character(secondary_army:command_queue_index(), true);
 							cm:disable_event_feed_events(false, event_type, "", "");
 						end
 					end

@@ -5,12 +5,16 @@ CHDRawMaterialsGreaterThan150	Owner.ModelPooledResourceContext("wh3_dlc23_chd_ra
 CHDRawMaterialsGreaterThan250	Owner.ModelPooledResourceContext("wh3_dlc23_chd_raw_materials").Total >= 250	false
 CHDRawMaterialsGreaterThan50	Owner.ModelPooledResourceContext("wh3_dlc23_chd_raw_materials").Total >= 50	false
 CHDRawMaterialsGreaterThan75	Owner.ModelPooledResourceContext("wh3_dlc23_chd_raw_materials").Total >= 75	false
+ChaosUndCorruption100	Region.IsEffectBundleActive("wh3_main_max_corruption_chaos_dummy")	false
+ChaosUndCorruption50	Region.IsEffectBundleActive("wh3_main_max_corruption_chaos_dummy") || Region.IsEffectBundleActive("wh3_main_high_corruption_chaos_dummy") || Region.IsEffectBundleActive("wh3_main_mid_corruption_chaos_dummy")	false
+ChaosUndCorruption75	Region.IsEffectBundleActive("wh3_main_max_corruption_chaos_dummy") || Region.IsEffectBundleActive("wh3_main_high_corruption_chaos_dummy")	false
 DEFSlavesGreaterThan100	Owner.ModelPooledResourceContext("def_slaves").Total >= 100	false
 DEFSlavesGreaterThan1000	Owner.ModelPooledResourceContext("def_slaves").Total >= 1000	false
 DEFSlavesGreaterThan150	Owner.ModelPooledResourceContext("def_slaves").Total >= 150	false
 DEFSlavesGreaterThan200	Owner.ModelPooledResourceContext("def_slaves").Total >= 200	false
 DevPointGreatThan5	Region.DevelopmentPoints >= 5	false
 DwarfHidden	Owner.CultureKey == "wh_main_dwf_dwarfs"	true
+DwfLowRegionCount	Owner.IsEffectBundleActive("wh3_main_bundle_dwarf_low_settlement_count_dummy")	false
 FactionHasTrade	Owner.IsInFactionSet("factions_without_trade") == false	true
 FactionIsSeducible	Region.Owner.IsInFactionSet("slaanesh_seducible_factions")	false
 FavouredCorruptionKhorne	Owner.IsInFactionSet("FavouredCorruptionKhorne") == true	true
@@ -37,6 +41,10 @@ HasCHDResourceIncomeTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_indust
 HasCHDResourceRawMaterialsTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_industry_9")	false
 HasCHDScavengerIncomeTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_industry_13")	false
 HasCHDTowerInfluenceTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_sorcery_20")	false
+HasDwfConstructionGuildTech	Owner.IsTechnologyResearched("wh_main_tech_dwf_civ_6_2")	false
+HasDwfToolmakerGuildTech	Owner.IsTechnologyResearched("wh_main_tech_dwf_civ_2_0")	false
+HasDwfTreasuriesTech	Owner.IsTechnologyResearched("wh_main_tech_dwf_civ_1_0")	false
+HasDwfWarriorGuildTech	Owner.IsTechnologyResearched("wh_main_tech_dwf_mil_1_3")	false
 HasFestusUpgradeTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_nur_festus_buildings")	true
 HasFinalOgreCampTech	Owner.IsTechnologyResearched("wh3_main_tech_ogr_2_11_0")	false
 HasKhoCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_kho_shared_gift_upgrade_corruption")	true
@@ -54,12 +62,17 @@ HasUpgradedMegaMortar	Owner.IsEffectBundleActive("wh3_dlc23_ritual_chd_toz_slot_
 HasValkiaUpgradeTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_kho_valkia_buildings")	true
 HasVilitchUpgradeTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_tze_vilitch_buildings")	true
 HasWoCGenBuildingTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_und_shared_building")	false
-IsAgentPresentOwn	Region.IsAnyOwnAgentPresent	false
+HostGDPGreaterThan1000	Region.GDP >= 1000	false
+HostGDPGreaterThan1500	Region.GDP >= 1500	false
+HostGDPGreaterThan2000	Region.GDP >= 2000	false
+HostGDPGreaterThan500	Region.GDP >= 500	false
+HostGDPGreaterThan5000	Region.GDP >= 5000	false
+IsAgentPresentOwn	Region.IsAnyOwnAgentPresent(Owner) == true	false
 IsBretonnia	Owner.CultureKey == "wh_main_brt_bretonnia"	true
 IsChampionsFaction	Owner.IsInFactionSet("champions_factions")	true
 IsChaosCampaign	CampaignModelRoot.CampaignKey == "wh3_main_chaos"	true
 IsChaosCampaignAndKugath	CampaignModelRoot.CampaignKey == "wh3_main_chaos" && Owner.RecordKeyIsOneOf("wh3_main_nur_poxmakers_of_nurgle")	true
-IsElspethPresent	Region.IsOwnAgentSubtypePresent("wh3_dlc25_emp_elspeth_von_draken")	false
+IsElspethPresent	Region.IsOwnAgentSubtypePresent("wh3_dlc25_emp_elspeth_von_draken", Owner)	false
 IsFactionAstragoth	Owner.RecordKeyIsOneOf("wh3_dlc23_chd_astragoth")	true
 IsFactionAzazel	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_azazel")	true
 IsFactionAzazelOrSigvald	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_azazel", "wh3_dlc20_chs_sigvald")	true
@@ -87,15 +100,17 @@ IsFactionVilitch	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_vilitch")	true
 IsFactionWissenland	Owner.RecordKeyIsOneOf("wh_main_emp_wissenland")	true
 IsFactionYvresse	Owner.RecordKeyIsOneOf("wh2_main_hef_yvresse")	true
 IsFactionZhatan	Owner.RecordKeyIsOneOf("wh3_dlc23_chd_zhatan")	true
-IsGeneralPresentEnemy	Region.IsAnyEnemyMilitaryForcePresent	false
-IsGeneralPresentInProvince	Province.IsAnyMilitaryForcePresent	false
-IsGeneralPresentOwn	Region.IsOwnMilitaryForcePresent	false
+IsGeneralPresentEnemy	Region.IsAnyEnemyMilitaryForcePresent(Owner) == true	false
+IsGeneralPresentInProvince	Province.IsAnyMilitaryForcePresent == true	false
+IsGeneralPresentOwn	Region.IsOwnMilitaryForcePresent(Owner) == true	false
 IsImmortalEmpires	CampaignModelRoot.CampaignKey == "wh3_main_combi"	true
 IsJadeDragonCommercialDistrict	Region.IsEffectBundleActive("wh3_dlc24_ritual_cth_mos_steel_settlement_type_switch_commercial") == true	true
 IsJadeDragonFortressCity	Region.IsEffectBundleActive("wh3_dlc24_ritual_cth_mos_stone_settlement_type_switch_fortress") == true	true
 IsKarlFranz	Owner.RecordKeyIsOneOf("wh_main_emp_empire")	true
 IsKholek	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_kholek")	true
 IsKroqGar	Owner.RecordKeyIsOneOf("wh2_main_lzd_last_defenders")	true
+IsMasterEngineerNotPresent	Region.IsOwnAgentSubtypePresent("wh_main_dwf_master_engineer") == false && Region.IsOwnAgentSubtypePresent("wh_dlc06_dwf_master_engineer_ghost") == false	false
+IsMasterEngineerPresent	Region.IsOwnAgentSubtypePresent("wh_main_dwf_master_engineer") || Region.IsOwnAgentSubtypePresent("wh_dlc06_dwf_master_engineer_ghost")	false
 IsNOTUniqueRegionOrFort	Region.RecordKeyIsOneOf("wh3_main_chaos_region_altdorf","wh3_main_combi_region_altdorf","wh3_main_combi_region_lothern","wh3_main_combi_region_hexoatl","wh3_main_combi_region_itza","wh3_main_combi_region_khemri","wh3_main_chaos_region_castle_drakenhof","wh3_main_combi_region_castle_drakenhof","wh3_main_combi_region_couronne","wh3_main_combi_region_miragliano","wh3_main_combi_region_naggarond","wh3_main_combi_region_skavenblight","wh3_main_chaos_region_hell_pit","wh3_main_combi_region_hell_pit","wh3_main_combi_region_karaz_a_karak","wh3_main_combi_region_karak_eight_peaks","wh3_main_combi_region_massif_orcal","wh3_main_chaos_region_kislev","wh3_main_combi_region_kislev","wh3_main_chaos_region_praag","wh3_main_combi_region_praag","wh3_main_chaos_region_erengrad","wh3_main_combi_region_erengrad","wh3_main_combi_region_the_awakening","wh3_main_combi_region_sartosa","wh3_main_combi_region_the_galleons_graveyard") == false	true
 IsNOTUniqueRegionOrFortForEmpire	Region.RecordKeyIsOneOf("wh3_main_chaos_region_altdorf","wh3_main_combi_region_altdorf","wh3_main_combi_region_khemri","wh3_main_chaos_region_castle_drakenhof","wh3_main_combi_region_castle_drakenhof","wh3_main_combi_region_couronne","wh3_main_combi_region_miragliano","wh3_main_combi_region_naggarond","wh3_main_combi_region_skavenblight","wh3_main_chaos_region_hell_pit","wh3_main_combi_region_hell_pit","wh3_main_combi_region_karaz_a_karak","wh3_main_combi_region_karak_eight_peaks","wh3_main_combi_region_massif_orcal","wh3_main_combi_region_the_awakening","wh3_main_combi_region_sartosa","wh3_main_combi_region_the_galleons_graveyard") == false	true
 IsNotChampionsFaction	Owner.IsInFactionSet("champions_factions") == false	true
@@ -105,27 +120,58 @@ IsNotFactionFestus	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_festus") == false	true
 IsOwnershipProductGotrekFelixUnlocked	Owner.IsOwnershipProductUnlocked("TW_WH2_GOTREK_FELIX") == true	true
 IsRegionBeastmen	Region.Owner.CultureKey == "wh_dlc03_bst_beastmen"	true
 IsRegionChaosDwarfs	Region.Owner.CultureKey == "wh3_dlc23_chd_chaos_dwarfs"	true
+IsRegionKarakEightPeaks	Region.RecordKeyIsOneOf("wh3_main_combi_region_karak_eight_peaks") == true	false
 IsRegionNorsca	Region.Owner.CultureKey == "wh_dlc08_nor_norsca"	false
 IsRegionNotAbandoned	Region.IsAbandoned == false	true
 IsRegionNotTombKing	Region.Owner.CultureKey != "wh2_dlc09_tmb_tomb_kings"	true
 IsRegionNotVampireCoast	Region.Owner.CultureKey != "wh2_dlc11_cst_vampire_coast"	true
+IsRegionSkavenblight	Region.RecordKeyIsOneOf("wh3_main_combi_region_skavenblight") == true	false
 IsRegionTombKing	Region.Owner.CultureKey == "wh2_dlc09_tmb_tomb_kings"	true
 IsRegionVampireCoast	Region.Owner.CultureKey == "wh2_dlc11_cst_vampire_coast"	true
 IsRegionVampireCounts	Region.Owner.CultureKey == "wh_main_vmp_vampire_counts"	true
+IsRegionZharrNaggrund	Region.RecordKeyIsOneOf("wh3_main_chaos_region_zharr_naggrund", "wh3_main_combi_region_zharr_naggrund") == true	false
 IsSPChaosCampaign	CampaignModelRoot.CampaignKey == "wh3_main_chaos" && CampaignModelRoot.IsMultiplayer == false	true
 KSLHasDevotion	Owner.ModelPooledResourceContext("wh3_main_ksl_devotion")	true
 KSLHasSupporters	Owner.ModelPooledResourceContext("wh3_main_ksl_followers")	true
+KhorneCorruption100	Region.IsEffectBundleActive("wh3_main_max_corruption_kho_dummy")	false
+KhorneCorruption50	Region.IsEffectBundleActive("wh3_main_max_corruption_kho_dummy") || Region.IsEffectBundleActive("wh3_main_high_corruption_kho_dummy") || Region.IsEffectBundleActive("wh3_main_mid_corruption_kho_dummy")	false
+KhorneCorruption75	Region.IsEffectBundleActive("wh3_main_max_corruption_kho_dummy") || Region.IsEffectBundleActive("wh3_main_high_corruption_kho_dummy")	false
+MountainClimate	Region.IsEffectBundleActive("wh3_dlc20_climate_suitable_mountain") == true	false
+MountainClimatePresent	Region.IsEffectBundleActive("wh3_dlc20_climate_suitable_mountain") == true	false
 NotDwarf	Owner.CultureKey != "wh_main_dwf_dwarfs"	false
 NotDwarfHidden	Owner.CultureKey != "wh_main_dwf_dwarfs"	true
+NurgleCorruption100	Region.IsEffectBundleActive("wh3_main_max_corruption_nur_dummy")	false
+NurgleCorruption50	Region.IsEffectBundleActive("wh3_main_max_corruption_nur_dummy") || Region.IsEffectBundleActive("wh3_main_high_corruption_nur_dummy") || Region.IsEffectBundleActive("wh3_main_mid_corruption_nur_dummy")	false
+NurgleCorruption75	Region.IsEffectBundleActive("wh3_main_max_corruption_nur_dummy") || Region.IsEffectBundleActive("wh3_main_high_corruption_nur_dummy")	false
+ProvinceIsFullyOwned	Province.IsFactionOwnerOfEntireProvince(Owner) == true	false
+ProvinceIsNotFullyOwned	Province.IsFactionOwnerOfEntireProvince(Owner) == false	false
 PublicOrder100	Region.PublicOrder > 99	false
 PublicOrderGreaterThan-25	Region.PublicOrder >= -25	false
 PublicOrderGreaterThan-50	Region.PublicOrder >= -50	false
-PublicOrderGreaterThan0	Region.PublicOrder > 0	false
-PublicOrderGreaterThan50	Region.PublicOrder > 25	false
+PublicOrderGreaterThan0	Region.PublicOrder >= 0	false
+PublicOrderGreaterThan25	Region.PublicOrder >= 25	false
+PublicOrderGreaterThan50	Region.PublicOrder >= 50	false
+PublicOrderGreaterThan75	Region.PublicOrder >= 75	false
 PublicOrderLessThan-50	Region.PublicOrder < -50	false
 PublicOrderLessThan0	Region.PublicOrder < 0	false
 PublicOrderLessThan25	Region.PublicOrder <= 25	false
-TreasuryGreaterThan5000	Owner.Treasury >=5000	false
+RegionHasAdjacentDwarfFaction	Region.IsEffectBundleActive("wh3_main_adjacent_dwarf_dummy")	false
+RegionHasPlague	Region.IsEffectBundleActive("wh3_main_plague_present_dummy")	false
+SkavenCorruption100	Region.IsEffectBundleActive("wh3_main_max_corruption_skv_dummy")	false
+SkavenCorruption50	Region.IsEffectBundleActive("wh3_main_max_corruption_skv_dummy") || Region.IsEffectBundleActive("wh3_main_high_corruption_skv_dummy") || Region.IsEffectBundleActive("wh3_main_mid_corruption_skv_dummy")	false
+SkavenCorruption75	Region.IsEffectBundleActive("wh3_main_max_corruption_skv_dummy") || Region.IsEffectBundleActive("wh3_main_high_corruption_skv_dummy")	false
+SlaaneshCorruption100	Region.IsEffectBundleActive("wh3_main_max_corruption_sla_dummy")	false
+SlaaneshCorruption50	Region.IsEffectBundleActive("wh3_main_max_corruption_sla_dummy") || Region.IsEffectBundleActive("wh3_main_high_corruption_sla_dummy") || Region.IsEffectBundleActive("wh3_main_mid_corruption_sla_dummy")	false
+SlaaneshCorruption75	Region.IsEffectBundleActive("wh3_main_max_corruption_sla_dummy") || Region.IsEffectBundleActive("wh3_main_high_corruption_sla_dummy")	false
+TreasuryGreaterThan5000	Owner.Treasury >5000	false
+TreasuryLessThan2000	Owner.Treasury < 2000	false
+TreasuryMoreThan2000	Owner.Treasury >= 2000	false
+TzeentchCorruption100	Region.IsEffectBundleActive("wh3_main_max_corruption_tze_dummy")	false
+TzeentchCorruption50	Region.IsEffectBundleActive("wh3_main_max_corruption_tze_dummy") || Region.IsEffectBundleActive("wh3_main_high_corruption_tze_dummy") || Region.IsEffectBundleActive("wh3_main_mid_corruption_tze_dummy")	false
+TzeentchCorruption75	Region.IsEffectBundleActive("wh3_main_max_corruption_tze_dummy") || Region.IsEffectBundleActive("wh3_main_high_corruption_tze_dummy")	false
+VampiricCorruption100	Region.IsEffectBundleActive("wh3_main_max_corruption_vmp_dummy")	false
+VampiricCorruption50	Region.IsEffectBundleActive("wh3_main_max_corruption_vmp_dummy") || Region.IsEffectBundleActive("wh3_main_high_corruption_vmp_dummy") || Region.IsEffectBundleActive("wh3_main_mid_corruption_vmp_dummy")	false
+VampiricCorruption75	Region.IsEffectBundleActive("wh3_main_max_corruption_vmp_dummy") || Region.IsEffectBundleActive("wh3_main_high_corruption_vmp_dummy")	false
 WallEffect	Region.IsOriginatingSubcultureOneOf("wh_dlc05_sc_wef_wood_elves","wh3_main_sc_ogr_ogre_kingdoms","wh_dlc08_sc_nor_norsca") == false	false
 WoMGreaterThan3	Region.WindsOfMagicStrengthLevel >= 3	false
 WoMGreaterThan4	Region.WindsOfMagicStrengthLevel >= 4	false

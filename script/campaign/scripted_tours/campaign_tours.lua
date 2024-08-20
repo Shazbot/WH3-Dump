@@ -836,6 +836,7 @@ in_caravans:set_should_lock_ui()
 in_caravans:add_precondition(function() return cm:get_local_faction_subculture() == "wh3_main_sc_cth_cathay" and not cm:get_saved_value("caravan_tour_complete") end)
 in_caravans:add_trigger_condition("PanelOpenedCampaign", function(context) return context.string == "cathay_caravans" and not core:is_advice_level_minimal() end)
 in_caravans:set_wait_for_fullscreen_panel_dismissed(false)
+in_caravans:add_advice_key_precondition("wh3.dlc26.camp.advice.cth.ivory_road.001")
 
 function trigger_in_caravans()
 
@@ -901,6 +902,8 @@ function trigger_in_caravans()
 			cm:steal_escape_key(false)
 			common.enable_all_shortcuts(true)
 			cm:steal_user_input(false)
+
+			cm:show_advice("wh3.dlc26.camp.advice.cth.ivory_road.001", true) -- empty advice that is just used to not play the tour twice
 			
 			nt_caravans:restore_scripted_tour_controls_priority()
 			in_caravans:complete()
@@ -3022,11 +3025,35 @@ in_formless_horror:add_trigger_condition(
 
 
 function trigger_in_formless_horror()
-	local function disable_race_filters(should_disable)
+	local function disable_character_details_buttons(should_disable)
+		local buttons = {
+			"button_replace_general",
+			"button_event_feed",
+			"button_save_character"
+		}
+
+		for i = 1, #buttons do
+			local current_uic = find_uicomponent("character_details_panel", buttons[i])
+
+			if current_uic then current_uic:SetDisabled(should_disable) end
+		end
+
+		local tabs = {
+			"details",
+			"skills",
+			"quests",
+		}
+
+		for i = 1, #tabs do
+			local current_uic = find_uicomponent("character_details_panel", "character_context_parent", "TabGroup", tabs[i])
+
+			if current_uic then current_uic:SetDisabled(should_disable) end
+		end
+
 		local uic_race_filters_list = find_uicomponent("holder_filter_by_faction", "list_box")
 		if uic_race_filters_list then
 			for i = 0, uic_race_filters_list:ChildCount() - 1 do
-				uic_race = UIComponent(uic_race_filters_list:Find(i))
+				local uic_race = UIComponent(uic_race_filters_list:Find(i))
 				if uic_race then
 					uic_race:SetDisabled(should_disable)
 				end
@@ -3072,7 +3099,7 @@ function trigger_in_formless_horror()
 			-- Clean up escape key steal and shortcuts.
 			cm:steal_escape_key(false)
 			common.enable_all_shortcuts(true)
-			disable_race_filters(false)
+			disable_character_details_buttons(false)
 			local uic_button_ok = find_uicomponent("character_details_panel", "button_ok")
 			if uic_button_ok then
 				uic_button_ok:SetDisabled(false)
@@ -3189,7 +3216,7 @@ function trigger_in_formless_horror()
 				end
 			end
 			
-			disable_race_filters(true)
+			disable_character_details_buttons(true)
 			
 			local uic_button_ok = find_uicomponent("character_details_panel", "button_ok")
 			uic_button_ok:SetDisabled(true)

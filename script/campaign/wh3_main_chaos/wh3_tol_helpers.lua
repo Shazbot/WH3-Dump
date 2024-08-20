@@ -61,7 +61,7 @@ function teleport_character_faction_leader(faction_key, target_x, target_y)
 	local faction = cm:get_faction(faction_key);
 	
 	if faction then
-		cm:teleport_to(cm:char_lookup_str(faction:faction_leader()), target_x, target_y, false);
+		cm:teleport_to(cm:char_lookup_str(faction:faction_leader()), target_x, target_y);
 	end;
 end;
 
@@ -75,7 +75,7 @@ function teleport_character_by_forename(faction_key, forename, target_x, target_
 			local current_char = char_list:item_at(i);
 			
 			if current_char:get_forename() == forename then
-				cm:teleport_to(cm:char_lookup_str(current_char), target_x, target_y, false);
+				cm:teleport_to(cm:char_lookup_str(current_char), target_x, target_y);
 				return true;
 			end;
 		end;

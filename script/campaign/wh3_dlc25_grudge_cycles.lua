@@ -1127,8 +1127,9 @@ function grudge_cycle:settle_grudges()
 		"CharacterCapturedSettlementUnopposed",
 		function(context)
 			local garrison_residence = context:garrison_residence()
+			local region = garrison_residence:region()
 			local faction = context:character():faction()
-			return faction:culture() == self.cultures.dwarf and faction:can_be_human() and not garrison_residence:region():is_abandoned() and garrison_residence:faction():is_rebel() == false
+			return faction:culture() == self.cultures.dwarf and faction:can_be_human() and not region:is_abandoned() and not region:pooled_resource_manager():resource(self.resources.grudge_settlement):is_null_interface() and garrison_residence:faction():is_rebel() == false
 		end,
 		function(context)
 			local region = context:garrison_residence():region()

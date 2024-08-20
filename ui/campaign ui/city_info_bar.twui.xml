@@ -133,6 +133,7 @@
 						<icon_plague this="CDC46337-F850-42C6-92F876B72AE437C7"/>
 						<immune_icon this="312D6869-241C-439F-80648B9528AAAA65"/>
 						<icon_landmark this="71D116D3-1F27-4885-BB20F913B95B4780"/>
+						<icon_resource_new this="491DA80A-1699-46AA-8BBCF8CDE06FD861"/>
 						<resource_list this="BCA02C5B-77E3-4AB0-8214453F5D905A93">
 							<resource_icon this="491CBDD2-DF84-4B55-BA8C44A50D273B89"/>
 						</resource_list>
@@ -163,6 +164,12 @@
 								</smoke_particle_emitter>
 								<icon this="6F64A3DD-0960-4774-8758459267198B13"/>
 							</wh3_dae_cult_building>
+							<wh3_dae_trickster_cult_building this="AD5ADA2E-760C-4C60-A13D67BF1C95494B">
+								<smoke_particle_emitter this="CC80D966-223D-42B5-8F79057129A3DA51">
+									<template_particle this="E33E4C8C-9392-45D3-94A4FE3B15515EEE"/>
+								</smoke_particle_emitter>
+								<icon this="9233CFFB-4DF9-4827-821F3E8FCD8816C4"/>
+							</wh3_dae_trickster_cult_building>
 						</foreign_slot_holder>
 						<icon_loyalty_holder this="0C11EC18-DEE2-414A-99BFCEAF5FC2ED5B">
 							<human_icon_loyalty this="59014C44-3D4E-4488-947B81F2A4172FCB">
@@ -4412,6 +4419,20 @@
 			uniqueguid="491CBDD2-DF84-4B55-BA8C44A50D273B89"
 			currentstate="DD982529-9BCA-4020-9F239B3E851BD470"
 			defaultstate="DD982529-9BCA-4020-9F239B3E851BD470">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoCampaignSettlement">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/campaign ui/tooltip_resource_building"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoResourceRecord"/>
+			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
 					this="899C5252-3D8F-4E34-A5D8C14D2028433A"
@@ -5864,17 +5885,17 @@
 			defaultstate="08678672-7855-40A7-92BA13F8C7F24738">
 			<userproperties>
 				<property
-					name="wh3_main_kho_khorne"
+					name="CULT"
 					value="wh3_dae_cult_building"/>
 				<property
-					name="wh3_main_nur_nurgle"
-					value="wh3_dae_cult_building"/>
+					name="HIDDEN_CULT"
+					value="wh3_dae_trickster_cult_building"/>
 				<property
-					name="wh3_main_sla_slaanesh"
-					value="wh3_dae_cult_building"/>
+					name="PIRATE_COVE"
+					value="wh2_dlc11_vampire_coast"/>
 				<property
-					name="wh3_main_tze_tzeentch"
-					value="wh3_dae_cult_building"/>
+					name="UNDEREMPIRE"
+					value="wh2_main_skv_skaven"/>
 			</userproperties>
 			<states>
 				<newstate
@@ -13639,5 +13660,323 @@
 				</default>
 			</states>
 		</imperial_icon>
+		<icon_resource_new
+			this="491DA80A-1699-46AA-8BBCF8CDE06FD861"
+			id="icon_resource_new"
+			offset="176.00,3.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			uniqueguid="491DA80A-1699-46AA-8BBCF8CDE06FD861"
+			currentstate="D7944B55-C356-429C-A6AD611CC26A683F"
+			defaultstate="D7944B55-C356-429C-A6AD611CC26A683F"
+			marked_for_deletion="true">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoCampaignSettlement">
+					<child_m_user_properties>
+						<property
+							name="alternate_parent"
+							value="hud_campaign"/>
+						<property
+							name="layout_path"
+							value="ui/campaign ui/tooltip_resource_building"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="ResourceList.FirstContext.IconFilepath"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="3FE2B97B-81D3-477F-8173EE136C45C72F"
+					uniqueguid="3FE2B97B-81D3-477F-8173EE136C45C72F"
+					imagepath="ui/campaign ui/effect_bundles/resource_animals.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="D7944B55-C356-429C-A6AD611CC26A683F"
+					name="default"
+					width="24"
+					height="24"
+					interactive="true"
+					disabled="true"
+					uniqueguid="D7944B55-C356-429C-A6AD611CC26A683F">
+					<imagemetrics>
+						<image
+							this="2B0023B0-0C1E-4C91-9C32B8E92F97C356"
+							uniqueguid="2B0023B0-0C1E-4C91-9C32B8E92F97C356"
+							componentimage="3FE2B97B-81D3-477F-8173EE136C45C72F"
+							width="24"
+							height="24"
+							dockpoint="Center"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</icon_resource_new>
+		<icon
+			this="9233CFFB-4DF9-4827-821F3E8FCD8816C4"
+			id="icon"
+			dock_offset="0.00,-7.00"
+			componentleveltooltip="{{tr:city_info_bar_cult_tooltip_wh3_dlc24_tze_the_deceivers}}"
+			tooltiplabel="ComponentTooltip_8970beeb"
+			uniqueguid="9233CFFB-4DF9-4827-821F3E8FCD8816C4"
+			aspect_ratio_locked_behaviour="Width First"
+			currentstate="2329A2CA-A957-436B-AF1B48507105E957"
+			defaultstate="2329A2CA-A957-436B-AF1B48507105E957">
+			<componentimages>
+				<component_image
+					this="2B1DEE6F-561E-48D9-A7AD9EF3D88DECCA"
+					uniqueguid="2B1DEE6F-561E-48D9-A7AD9EF3D88DECCA"
+					imagepath="ui/skins/daemon/wh3_dae_cult_building.png"/>
+				<component_image
+					this="0D347FDA-31DA-476C-85F9D32E511F4FF2"
+					uniqueguid="0D347FDA-31DA-476C-85F9D32E511F4FF2"
+					imagepath="ui/skins/default/icon_status_alert_high_24px.png"/>
+				<component_image
+					this="6696368B-8BA5-436A-A59448660DB64D4A"
+					uniqueguid="6696368B-8BA5-436A-A59448660DB64D4A"
+					imagepath="ui/skins/default/icon_under_empire_discovered_large.png"/>
+			</componentimages>
+			<states>
+				<discovered
+					this="FC4C8301-45F4-4DF3-B3893F001F1FF177"
+					name="discovered"
+					width="40"
+					height="40"
+					interactive="true"
+					disabled="true"
+					shader_name="glow_pulse_t0"
+					shadervars="1.00,2.00,3.00,0.00"
+					uniqueguid="FC4C8301-45F4-4DF3-B3893F001F1FF177">
+					<imagemetrics>
+						<image
+							this="7866ED23-6F5A-4F00-B0541B0CB207994D"
+							uniqueguid="7866ED23-6F5A-4F00-B0541B0CB207994D"
+							componentimage="6696368B-8BA5-436A-A59448660DB64D4A"
+							width="40"
+							height="40"/>
+					</imagemetrics>
+				</discovered>
+				<owned
+					this="2329A2CA-A957-436B-AF1B48507105E957"
+					name="owned"
+					width="40"
+					height="40"
+					interactive="true"
+					disabled="true"
+					shader_name="glow_pulse_t0"
+					shadervars="1.00,2.00,3.00,0.00"
+					uniqueguid="2329A2CA-A957-436B-AF1B48507105E957">
+					<imagemetrics>
+						<image
+							this="AE837E49-19AE-4AD0-95928FD27E0BA821"
+							uniqueguid="AE837E49-19AE-4AD0-95928FD27E0BA821"
+							componentimage="2B1DEE6F-561E-48D9-A7AD9EF3D88DECCA"
+							width="40"
+							height="40"/>
+					</imagemetrics>
+				</owned>
+				<owned_discovered
+					this="B2019881-3AA0-492D-A2786BB47E49D94A"
+					name="owned_discovered"
+					width="40"
+					height="40"
+					interactive="true"
+					disabled="true"
+					shader_name="glow_pulse_t0"
+					shadervars="1.00,2.00,3.00,0.00"
+					uniqueguid="B2019881-3AA0-492D-A2786BB47E49D94A">
+					<imagemetrics>
+						<image
+							this="94837C29-23CD-4B9A-96DBFC22B8862B71"
+							uniqueguid="94837C29-23CD-4B9A-96DBFC22B8862B71"
+							componentimage="2B1DEE6F-561E-48D9-A7AD9EF3D88DECCA"
+							width="40"
+							height="40"/>
+						<image
+							this="A7A1B1F4-A832-4688-BB185B5DA1F2234A"
+							uniqueguid="A7A1B1F4-A832-4688-BB185B5DA1F2234A"
+							componentimage="0D347FDA-31DA-476C-85F9D32E511F4FF2"
+							offset="16.00,16.00"
+							width="24"
+							height="24"
+							dockpoint="Bottom Right"/>
+					</imagemetrics>
+				</owned_discovered>
+			</states>
+		</icon>
+		<smoke_particle_emitter
+			this="CC80D966-223D-42B5-8F79057129A3DA51"
+			id="smoke_particle_emitter"
+			offset="4.00,-6.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center"
+			dock_offset="0.00,-10.00"
+			component_anchor_point="0.50,0.50"
+			priority="40"
+			tooltipslocalised="true"
+			uniqueguid="CC80D966-223D-42B5-8F79057129A3DA51"
+			currentstate="6B3A19C3-CB6E-4AA4-BA84011EDFC6ABAE"
+			defaultstate="6B3A19C3-CB6E-4AA4-BA84011EDFC6ABAE">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="LineParticleEmitter"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="angular_spread"
+					value="0"/>
+				<property
+					name="delay_creation"
+					value="1"/>
+				<property
+					name="line_angle"
+					value="-45"/>
+				<property
+					name="line_half_width"
+					value="20"/>
+				<property
+					name="loops"
+					value="-1"/>
+				<property
+					name="max_speed_f"
+					value="2"/>
+				<property
+					name="min_speed_f"
+					value="1"/>
+				<property
+					name="spawn_interval"
+					value="200"/>
+				<property
+					name="spread"
+					value="2"/>
+				<property
+					name="total_particles"
+					value="60"/>
+			</userproperties>
+			<states>
+				<newstate
+					this="6B3A19C3-CB6E-4AA4-BA84011EDFC6ABAE"
+					name="NewState"
+					uniqueguid="6B3A19C3-CB6E-4AA4-BA84011EDFC6ABAE"/>
+			</states>
+			<animations>
+				<stop id="stop">
+					<frames>
+						<frame
+							interpolationtime="0"
+							targetmetrics_m_offset="0.00,-10.00">
+							<triggers>
+								<trigger
+									trigger_component="CC80D966-223D-42B5-8F79057129A3DA51"
+									trigger_property="spawn_interval -1"/>
+							</triggers>
+						</frame>
+					</frames>
+				</stop>
+				<start id="start">
+					<frames>
+						<frame
+							interpolationtime="0"
+							targetmetrics_m_offset="0.00,-10.00">
+							<triggers>
+								<trigger
+									trigger_component="CC80D966-223D-42B5-8F79057129A3DA51"
+									trigger_property="spawn_interval 200"/>
+							</triggers>
+						</frame>
+					</frames>
+				</start>
+			</animations>
+		</smoke_particle_emitter>
+		<template_particle
+			this="E33E4C8C-9392-45D3-94A4FE3B15515EEE"
+			id="template_particle"
+			offset="14.00,7.00"
+			priority="40"
+			tooltipslocalised="true"
+			uniqueguid="E33E4C8C-9392-45D3-94A4FE3B15515EEE"
+			currentstate="57C54DC5-D49E-430B-A0BB2E7F426796B1"
+			defaultstate="57C54DC5-D49E-430B-A0BB2E7F426796B1">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="Particle"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="9E071EC5-DA62-463A-92514CB9DC6F11D5"
+					uniqueguid="9E071EC5-DA62-463A-92514CB9DC6F11D5"
+					imagepath="ui/skins/daemon/particle_city_info_cult.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="57C54DC5-D49E-430B-A0BB2E7F426796B1"
+					name="NewState"
+					width="20"
+					height="20"
+					shader_name="brighten_t0"
+					uniqueguid="57C54DC5-D49E-430B-A0BB2E7F426796B1">
+					<imagemetrics>
+						<image
+							this="0D6DDF1B-CD61-4865-86250A3515048AC7"
+							uniqueguid="0D6DDF1B-CD61-4865-86250A3515048AC7"
+							componentimage="9E071EC5-DA62-463A-92514CB9DC6F11D5"
+							width="20"
+							height="20"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+			<animations>
+				<particle_move
+					id="particle_move"
+					propagate="true">
+					<frames>
+						<frame
+							interpolationtime="0"
+							interpolationpropertymask="70"
+							targetmetrics_m_colour="#FFFFE0FF"
+							targetmetrics_m_height="20"
+							targetmetrics_m_width="20"
+							targetmetrics_m_shadervars="1.00,0.00,0.00,0.00"/>
+						<frame
+							interpolationpropertymask="70"
+							targetmetrics_m_colour="#FFFFE080"
+							targetmetrics_m_height="15"
+							targetmetrics_m_width="15"
+							targetmetrics_m_offset="0.00,-15.00"/>
+						<frame
+							interpolationpropertymask="70"
+							targetmetrics_m_colour="#FFFFE000"
+							targetmetrics_m_height="1"
+							targetmetrics_m_width="1"
+							targetmetrics_m_offset="0.00,-15.00"/>
+					</frames>
+				</particle_move>
+			</animations>
+		</template_particle>
+		<wh3_dae_trickster_cult_building
+			this="AD5ADA2E-760C-4C60-A13D67BF1C95494B"
+			id="wh3_dae_trickster_cult_building"
+			offset="10.00,10.00"
+			visible="false"
+			tooltipslocalised="true"
+			uniqueguid="AD5ADA2E-760C-4C60-A13D67BF1C95494B"
+			aspect_ratio_locked_behaviour="Width First"
+			currentstate="1A2889DC-B07C-4883-8EF198723EBE9696"
+			defaultstate="1A2889DC-B07C-4883-8EF198723EBE9696">
+			<states>
+				<default
+					this="1A2889DC-B07C-4883-8EF198723EBE9696"
+					name="default"
+					width="40"
+					height="40"
+					interactive="true"
+					disabled="true"
+					shadervars="1.00,2.00,3.00,0.00"
+					uniqueguid="1A2889DC-B07C-4883-8EF198723EBE9696"/>
+			</states>
+		</wh3_dae_trickster_cult_building>
 	</components>
 </layout>

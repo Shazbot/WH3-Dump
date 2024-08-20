@@ -112,12 +112,16 @@ function setup_wh_campaign(generic_battle_script_path_override)
 	track_technology_researched()
 
 	if not cm:model():campaign_name("wh3_main_prologue") then
-		GeneratedConstants:generate_constants()
-	end;
+		add_high_corruption_dummy_effect_listeners();
+		add_plague_indicator_dummy_effect_listeners();
 
-	--- set-up any cross-campaign quest battle listeners
-	if not cm:model():campaign_name("wh3_main_prologue") then
+		GeneratedConstants:generate_constants()
+
+		-- set-up any cross-campaign quest battle listeners
 		qbh:initialise()
+
+		-- automatically upgrade settlement building level to 1 when a faction resettles (i.e. has no regions and occupies one)
+		setup_faction_resettle_listener();
 	end;
 	
 	-- AI Beastmen armies can get stuck in encampment stance attempting to
@@ -137,11 +141,6 @@ function setup_wh_campaign(generic_battle_script_path_override)
 				cm:apply_effect_bundle("wh2_main_bundle_greenskin_animosity_bonus", current_faction:name(), 0);
 			end;
 		end;
-	end;
-	
-	-- automatically upgrade settlement building level to 1 when a faction resettles (i.e. has no regions and occupies one)
-	if not cm:model():campaign_name("wh3_main_prologue") then
-		setup_faction_resettle_listener();
 	end;
 	
 	-- daemon prince tint

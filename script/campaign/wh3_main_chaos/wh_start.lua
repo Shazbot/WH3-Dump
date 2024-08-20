@@ -46,7 +46,7 @@ cm:add_pre_first_tick_callback(
 		-- only load faction scripts if we have a local faction		
 		if not cm:tol_campaign_key() then
 			if cm:is_new_game() then
-				local human_factions = cm:get_human_factions(true);
+				local human_factions = cm:get_human_factions();
 				
 				if #human_factions > 0 then
 					for i = 1, #human_factions do
@@ -200,6 +200,9 @@ function start_game_all_factions()
 	grudge_cycle:initialise()
 	starting_grudge_missions:initialise()
 	legendary_grudges:initialise()
+	
+	-- Update 5.2
+	add_underdeep_listeners();
 	
 	scripted_technology_tree:start_technology_listeners();
 

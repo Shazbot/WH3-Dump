@@ -71,7 +71,7 @@ function Add_Wood_Elves_Listeners()
 						local current_mf = mf_list:item_at(i);
 						
 						if not current_mf:is_null_interface() and current_mf:has_general() then
-							cm:kill_character(current_mf:general_character():command_queue_index(), true, true);
+							cm:kill_character(current_mf:general_character():command_queue_index(), true);
 						end
 					end
 				end

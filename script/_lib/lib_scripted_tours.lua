@@ -2307,7 +2307,7 @@ function navigable_tour_section:action(action, action_time)
 	end;
 
 	if not is_number(action_time) or action_time < 0 then
-		script_error(self.name .. " ERROR: action() called but supplied action time [" .. tostring(number) .. "] is not a number");
+		script_error(self.name .. " ERROR: action() called but supplied action time [" .. tostring(action_time) .. "] is not a number");
 		return false;
 	end;
 

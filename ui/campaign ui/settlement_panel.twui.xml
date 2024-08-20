@@ -1076,8 +1076,8 @@
 			</user_properties>
 			<localised_texts>
 				<localised_text
-					tooltip_label="ComponentTooltip_fe6bdf1a"
-					tooltip_text="Discovered Under-Cities||You may discover Under-Cities whose development has reached a great enough extent that they can no longer remain hidden."/>
+					tooltip_label="ComponentTooltip_4770ee30"
+					tooltip_text="{{tr:discovered_foreign_slots}}"/>
 				<localised_text
 					state="active"
 					is_text_localised="false"/>
@@ -7438,7 +7438,7 @@
 				<callback_with_context
 					callback_id="ContextCommandEvent"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="DoIf(HostileSlotsGroupList.Any(CategoryObject.IsPlayersFaction &amp;&amp; CategoryObject.CultureContext.Key != &quot;wh2_main_skv_skaven&quot;), Do(self.SelectButton(self.ChildContext(&quot;button_player_foreign_view&quot;))), self.ParentContext(&quot;settlement_view&quot;).ParentContext.ChildContext(&quot;icon_list&quot;).SetVisible(false))">
+					context_function_id="DoIf(HostileSlotsGroupList.Any(CategoryObject.IsPlayersFaction &amp;&amp; CategoryObject.CultureContext.Key != &quot;wh2_main_skv_skaven&quot; &amp;&amp; CategoryObject.CultureContext.Key != &quot;wh_main_dwf_dwarfs&quot;), Do(self.SelectButton(self.ChildContext(&quot;button_player_foreign_view&quot;))), self.ParentContext(&quot;settlement_view&quot;).ParentContext.ChildContext(&quot;icon_list&quot;).SetVisible(false))">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -9236,10 +9236,10 @@
 		<discovered_list
 			this="547F2FFF-AE41-499C-92CA04CBC24E6248"
 			id="discovered_list"
-			offset="204.00,115.00"
-			docking="Top Right External"
-			dock_offset="0.00,185.00"
-			component_anchor_point="-0.00,1.00"
+			offset="204.00,99.00"
+			allowhorizontalresize="false"
+			docking="Bottom Right External"
+			dock_offset="0.00,-55.00"
 			tooltipslocalised="true"
 			uniqueguid="547F2FFF-AE41-499C-92CA04CBC24E6248"
 			currentstate="519DFCE4-E4C1-49EE-81051F4789D7F343"
@@ -9260,6 +9260,9 @@
 					context_object_id="CcoCampaignSettlement"
 					context_function_id="HostileSlotsGroupList.Any(CategoryObject.IsPlayersFaction == false &amp;&amp; GroupedList.FirstContext.ForeignSlotDiscoveredByFaction(PlayersFaction))"/>
 				<callback_with_context callback_id="TopmostObjectCallback"/>
+				<callback_with_context
+					callback_id="ContextCommandGiverOnVisibilityChanged"
+					context_function_id="DoIfElse(self.DockOffset.x &gt;= 0,&#10;DoIfElse(self.Position.x + self.Dimensions.x &gt; RootComponent.Dimensions.x, self.SetDockOffset(- self.Dimensions.x - 35, self.DockOffset.y), self.SetDockOffset(0, self.DockOffset.y)),&#10;DoIf(self.Position.x - self.DockOffset.x + self.Dimensions.x &lt; RootComponent.Dimensions.x), self.SetDockOffset(0, self.DockOffset.y) )"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -9362,7 +9365,7 @@
 				<component_image
 					this="9E594C9A-2724-49E9-A33D1844364FAE37"
 					uniqueguid="9E594C9A-2724-49E9-A33D1844364FAE37"
-					imagepath="ui/skins/default/icon_income.png"/>
+					imagepath="ui/skins/default/icon_treasury.png"/>
 				<component_image
 					this="F64E0200-184E-494D-851FAEC0270B291E"
 					uniqueguid="F64E0200-184E-494D-851FAEC0270B291E"
