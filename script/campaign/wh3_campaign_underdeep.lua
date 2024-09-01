@@ -148,6 +148,17 @@ function add_underdeep_listeners()
 				end
 			end
 
+			if key == "wh3_main_underdeep_dwf_grudges_2_a" then
+				common.set_context_value("cycle_grudge_target", 0);
+				common.set_context_value("cycle_grudge_value", -1);
+				grudge_cycle.delayed_factions[faction:name()] = true;
+
+				for i = 0, 5 do
+					cm:remove_effect_bundle("wh3_dlc25_grudge_cycle_"..i, faction:name());
+				end
+				cm:apply_effect_bundle("wh3_dlc25_grudge_cycle_0", faction:name(), 0);
+			end
+
 			if key == "wh3_main_underdeep_dwf_main_karak_eight_peaks_3" then
 				cm:trigger_dilemma(faction:name(), "wh3_main_dwf_move_capital_eight_peaks");
 			end
@@ -168,14 +179,38 @@ function add_underdeep_listeners()
 			local faction = slot_manager:faction();
 
 			if key == "wh3_main_underdeep_dwf_blocker_doomsphere_1" then
-				local nuke_chance = cm:get_regions_bonus_value(region, "doomsphere_detonation_chance_on_demolish");
+				local nuke_chance = 100;
+				local region_chars = region:characters_in_region();
+
+				for i = 0, region_chars:num_items() - 1 do
+					local char = region_chars:item_at(i);
+					local subtype = char:character_subtype_key();
+					
+					if (subtype == "wh_main_dwf_master_engineer" or subtype == "wh_dlc06_dwf_master_engineer_ghost") and char:faction():name() == faction:name() then
+						nuke_chance = 1;
+						break;
+					end
+				end
+				out("Doomsphere chance: "..nuke_chance);
 
 				if cm:model():random_percent(nuke_chance) then
-					-- Now I am become death, destroyer of... the Dawi?
-					under_empire_nuke_region(region, "", "", true);
+					cm:callback(function() 
+						-- Now I am become death, destroyer of... the Dawi?
+						under_empire_nuke_region(region, "", "", true);
+					end, 0.2);
 				end
 			elseif key == "wh3_main_underdeep_dwf_blocker_gold_1" then
 				cm:faction_add_pooled_resource(faction:name(), "dwf_oathgold", "buildings", 500);
+			elseif key == "wh3_main_underdeep_dwf_grudges_2_a" then
+				local stop_grudge_bv = cm:get_factions_bonus_value(faction:name(), "dwf_grudge_feature_off");
+
+				if stop_grudge_bv == 0 then
+					grudge_cycle.faction_times[faction:name()] = 0;
+
+					for i = 0, 5 do
+						cm:remove_effect_bundle("wh3_dlc25_grudge_cycle_"..i, faction:name());
+					end
+				end
 			end
 		end,
 		true
@@ -249,6 +284,23 @@ function add_underdeep_listeners()
 										cm:region_slot_instantly_dismantle_building(slot);
 										break;
 									end
+								end
+							end
+						end
+					end
+					
+					if cm:get_regions_bonus_value(current_region, "engineer_demolish_building") > 0 then
+						-- Demolish any warpstone caches
+						local slots = fsm:slots();
+						
+						for j = 0, slots:num_items() - 1 do
+							local slot = slots:item_at(j);
+
+							if slot:is_null_interface() == false and slot:has_building() == true then
+								local key = slot:building();
+
+								if key == "wh3_main_underdeep_dwf_blocker_warpstone_1" then
+									cm:foreign_slot_instantly_dismantle_building(slot);
 								end
 							end
 						end

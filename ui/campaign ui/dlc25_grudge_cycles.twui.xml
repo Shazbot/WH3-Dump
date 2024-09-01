@@ -20,6 +20,7 @@
 							<icon_timer this="2C99D51B-D214-4283-BCBE7CD35449B479"/>
 							<dy_timer this="38793F3E-D300-4520-87A9589838590020"/>
 						</holder_timer_inner>
+						<icon_inactive this="03FFEF15-7E2B-448F-9945C0C18D16FFDE"/>
 					</docker_right_timer>
 					<docker_left_percentage this="82405C6D-DCCE-46BA-B0BB798FD12F5E03">
 						<dy_percentage this="34A07289-7F81-43F9-AE6F935F474535E8"/>
@@ -1273,6 +1274,17 @@
 			uniqueguid="B0D25A11-7F23-4DA6-9B59E637BB3303D4"
 			currentstate="1E7B5A51-49BD-42D1-911720447B79C907"
 			defaultstate="1E7B5A51-49BD-42D1-911720447B79C907">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_function_id="ScriptObjectContext(&quot;cycle_grudge_value&quot;).NumericValue &gt; -1.0">
+					<child_m_user_properties>
+						<property
+							name="event1"
+							value="ScriptObjectValueUpdatedcycle_grudge_target"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
 			<states>
 				<default
 					this="1E7B5A51-49BD-42D1-911720447B79C907"
@@ -1572,7 +1584,7 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
-					context_function_id="ScriptObjectContext(&quot;cycle_grudge_target&quot;).NumericValue == 0.0">
+					context_function_id="ScriptObjectContext(&quot;cycle_grudge_target&quot;).NumericValue &lt;= 0.0">
 					<child_m_user_properties>
 						<property
 							name="event1"
@@ -1649,5 +1661,43 @@
 				</default>
 			</states>
 		</icon_no_active_rune>
+		<icon_inactive
+			this="03FFEF15-7E2B-448F-9945C0C18D16FFDE"
+			id="icon_inactive"
+			offset="6.00,-2.00"
+			tooltipslocalised="true"
+			uniqueguid="03FFEF15-7E2B-448F-9945C0C18D16FFDE"
+			currentstate="17BCD066-4C9C-4819-B51C9EBF5F516CC5"
+			defaultstate="17BCD066-4C9C-4819-B51C9EBF5F516CC5">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_function_id="ScriptObjectContext(&quot;cycle_grudge_value&quot;).NumericValue == -1.0">
+					<child_m_user_properties>
+						<property
+							name="event1"
+							value="ScriptObjectValueUpdatedcycle_grudge_target"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="17BCD066-4C9C-4819-B51C9EBF5F516CC5"
+					name="default"
+					uniqueguid="17BCD066-4C9C-4819-B51C9EBF5F516CC5">
+					<component_text
+						text="–"
+						textvalign="Center"
+						texthalign="Center"
+						textlabel="StateText_dc7ad24"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						text_shader_name="drop_shadow_t0"
+						textshadervars="-1.00,-1.00,1.00,0.00"/>
+				</default>
+			</states>
+		</icon_inactive>
 	</components>
 </layout>

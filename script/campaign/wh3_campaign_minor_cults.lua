@@ -247,11 +247,13 @@ function add_minor_cults_listeners()
 								end
 							elseif cult_key == "mc_cult_of_myrmidia" then
 								cm:trigger_incident_with_targets(remover:command_queue_index(), "wh3_main_minor_cult_myrmidia", 0, 0, 0, 0, region:cqi(), 0);
-								MINOR_CULT_LIST[i].cult.saved_data.event_triggers = MINOR_CULT_LIST[i].cult.saved_data.event_triggers + 1;
 							end
 							
 							if MINOR_CULT_LIST[i].cult.effect_bundle ~= nil then
 								cm:remove_effect_bundle_from_region(MINOR_CULT_LIST[i].cult.effect_bundle, region_key);
+							end
+							if MINOR_CULT_LIST[i].cult.event_data ~= nil then
+								MINOR_CULT_LIST[i].cult.saved_data.event_triggers = MINOR_CULT_LIST[i].cult.event_data.event_limit;
 							end
 							break;
 						end
@@ -441,6 +443,9 @@ function add_minor_cults_listeners()
 						if MINOR_CULT_LIST[i].cult.saved_data.region_key == region_key then
 							local faction = cm:model():world():faction_by_key(MINOR_CULT_LIST[i].cult.faction_key);
 							cm:remove_faction_foreign_slots_from_region(faction:command_queue_index(), region:cqi());
+							if MINOR_CULT_LIST[i].cult.event_data ~= nil then
+								MINOR_CULT_LIST[i].cult.saved_data.event_triggers = MINOR_CULT_LIST[i].cult.event_data.event_limit;
+							end
 							out("Minor Cult: Removing "..MINOR_CULT_LIST[i].key.." from "..region_key);
 							break;
 						end

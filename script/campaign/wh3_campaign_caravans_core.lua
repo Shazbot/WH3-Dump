@@ -19,9 +19,6 @@ caravans.events_cooldown = {}
 
 caravans.event_max_cooldown = 15
 
--- True false boolean per human faction depending if they have had an event this turn
-caravans.events_fired = {}
-
 caravans.culture_to_faction = {
 	wh3_main_cth_cathay = "cathay",
 	wh3_dlc23_chd_chaos_dwarfs = "chaos_dwarfs"
@@ -529,7 +526,7 @@ function caravans:initialise()
 		"convoy_event_update",
 		"WorldStartRound",
 		true,
-		function(context)
+		function()
 			for _, faction_cooldowns in pairs(caravans.events_cooldown) do
 				for dilemma_key, cooldown in pairs(faction_cooldowns) do
 					if cooldown > 0 then
@@ -538,9 +535,24 @@ function caravans:initialise()
 				end
 			end
 
-			for faction_key, _ in pairs(caravans.events_fired) do
-				caravans.events_fired[faction_key] = false
-			end	
+			-- select a random caravan for each human player to trigger an event for
+			local caravans_system = cm:model():world():caravans_system()
+			local human_factions = cm:get_human_factions()
+
+			for i = 1, #human_factions do
+				local caravans = caravans_system:faction_caravans_by_key(human_factions[i])
+				if not caravans:is_null_interface() then
+					local num_caravans = caravans:number_of_active_caravans()
+
+					if num_caravans > 0 then
+						local chosen_caravan = cm:random_number(num_caravans)
+						local chosen_caravan_cqi = caravans:active_caravans():item_at(chosen_caravan - 1):caravan_force():command_queue_index()
+						cm:set_saved_value("chosen_caravan_master_" .. human_factions[i], chosen_caravan_cqi)
+					end
+				end
+			end
+
+			self:adjust_end_node_values_for_demand();
 		end,
 		true
 	);
@@ -550,13 +562,11 @@ function caravans:initialise()
 		"QueryShouldWaylayCaravan",
 		function(context)
 			local faction = context:faction()
-			return faction:is_human() and not caravans.events_fired[faction:name()]
+			return faction:is_human() and context:caravan():caravan_force():command_queue_index() == cm:get_saved_value("chosen_caravan_master_" .. faction:name())
 		end,
 		function(context)
 			if self:event_handler(context) == false then
 				out.design("Caravan not valid for event");
-			else
-				caravans.events_fired[context:faction():name()] = true
 			end
 		end,
 		true
@@ -682,16 +692,6 @@ function caravans:initialise()
 			local faction = self.culture_to_faction[context:faction():culture()];
 			cm:callback(function()self:adjust_end_node_value(region_name, value, "add", faction) end, 5);
 						
-		end,
-		true
-	);
-
-	core:add_listener(
-		"caravans_increase_demand",
-		"WorldStartRound",
-		true,
-		function(context)
-			self:adjust_end_node_values_for_demand();
 		end,
 		true
 	);
@@ -1411,7 +1411,6 @@ cm:add_saving_game_callback(
 	function(context)
 		cm:save_named_value("enemy_force_cqi", caravans.enemy_force_cqi, context);
 		cm:save_named_value("events_cooldown", caravans.events_cooldown, context);
-		cm:save_named_value("events_fired", caravans.events_fired, context);
 	end
 );
 
@@ -1420,7 +1419,6 @@ cm:add_loading_game_callback(
 		if not cm:is_new_game() then
 			caravans.enemy_force_cqi = cm:load_named_value("enemy_force_cqi", caravans.enemy_force_cqi, context);
 			caravans.events_cooldown = cm:load_named_value("events_cooldown", caravans.events_cooldown, context);
-			caravans.events_fired = cm:load_named_value("events_fired", caravans.events_fired, context);
 		end;
 	end
 );

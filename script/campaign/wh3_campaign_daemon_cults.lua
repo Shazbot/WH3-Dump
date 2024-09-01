@@ -50,16 +50,16 @@ function setup_daemon_cults()
 
 		-- Spawn a number of Chaos Cults for AI factions
 		if kho and kho:is_null_interface() == false and kho:is_human() == false then
-			cult_spawn_random_cults(kho, "wh3_main_slot_set_kho_cult", random_cults_per_daemon, true);
+			cult_spawn_random_cults(kho, "wh3_main_slot_set_kho_cult", random_cults_per_daemon, true, false);
 		end
 		if tze and tze:is_null_interface() == false and tze:is_human() == false then
-			cult_spawn_random_cults(tze, "wh3_main_slot_set_tze_cult", random_cults_per_daemon, true);
+			cult_spawn_random_cults(tze, "wh3_main_slot_set_tze_cult", random_cults_per_daemon, true, false);
 		end
 		if sla and sla:is_null_interface() == false and sla:is_human() == false then
-			cult_spawn_random_cults(sla, "wh3_main_slot_set_sla_cult", random_cults_per_daemon, true);
+			cult_spawn_random_cults(sla, "wh3_main_slot_set_sla_cult", random_cults_per_daemon, true, false);
 		end
 		if nur and nur:is_null_interface() == false and nur:is_human() == false then
-			cult_spawn_random_cults(nur, "wh3_main_slot_set_nur_cult", random_cults_per_daemon, true);
+			cult_spawn_random_cults(nur, "wh3_main_slot_set_nur_cult", random_cults_per_daemon, true, false);
 		end
 	end
 	
@@ -91,7 +91,7 @@ function setup_daemon_cults()
 
 			-- TZEENTCH MAGUS
 			elseif building_key == "wh3_main_tze_cult_special" then
-				cult_spawn_random_cults(faction, "wh3_main_slot_set_tze_cult", 3, false);
+				cult_spawn_random_cults(faction, "wh3_main_slot_set_tze_cult", 3, false, true);
 
 			-- SLAANESH MAGUS
 			elseif building_key == "wh3_main_sla_cult_special" then
@@ -182,7 +182,7 @@ function setup_daemon_cults()
 								local possible_region = adjacent_region_list:item_at(adjacent_region_index);
 								local possible_region_key = possible_region:name();
 								
-								if possible_region:is_abandoned() == false and possible_region:owning_faction():is_null_interface() == false and possible_region:owning_faction():name() ~= faction_key then
+								if possible_region:is_null_interface() == false and possible_region:is_abandoned() == false and possible_region:owning_faction():is_null_interface() == false and possible_region:owning_faction():name() ~= faction_key then
 									local slot_manager = possible_region:foreign_slot_manager_for_faction(faction_key);
 									
 									if slot_manager:is_null_interface() == true then
@@ -207,7 +207,7 @@ function setup_daemon_cults()
 	);
 end
 
-function cult_spawn_random_cults(faction, cult_type, spawn_amount, home_adjacent)
+function cult_spawn_random_cults(faction, cult_type, spawn_amount, home_adjacent, delay_tick)
 	local valid_adjacent = {};
 	local possible_regions = weighted_list:new();
 	local region_list = cm:model():world():region_manager():region_list();
@@ -232,32 +232,36 @@ function cult_spawn_random_cults(faction, cult_type, spawn_amount, home_adjacent
 	for i = 0, region_list:num_items() - 1 do
 		local current_region = region_list:item_at(i);
 		
-		if current_region:is_abandoned() == false and current_region:name() ~= home:name() and current_region:foreign_slot_manager_for_faction(faction:name()):is_null_interface() then
-			local weight = 2;
+		if current_region:is_null_interface() == false and home:is_null_interface() == false and faction:is_null_interface() == false then
+			if current_region:is_abandoned() == false and current_region:name() ~= home:name() and current_region:foreign_slot_manager_for_faction(faction:name()):is_null_interface() then
+				if current_region:owning_faction():name() ~= faction:name() then
+					local weight = 2;
 
-			-- Prefer regions of enemy factions
-			if current_region:owning_faction():at_war_with(faction) then
-				weight = weight + 3;
-			end
-			-- Prefer regions with no other foreign slots
-			if current_region:foreign_slot_managers():is_empty() then
-				weight = weight + 2;
-			end
-			-- Slight avoidance of regions of allies
-			if current_region:owning_faction():allied_with(faction) then
-				weight = weight - 1;
-			end
+					-- Prefer regions of enemy factions
+					if current_region:owning_faction():at_war_with(faction) then
+						weight = weight + 3;
+					end
+					-- Prefer regions with no other foreign slots
+					if current_region:foreign_slot_managers():is_empty() then
+						weight = weight + 2;
+					end
+					-- Slight avoidance of regions of allies
+					if current_region:owning_faction():allied_with(faction) then
+						weight = weight - 1;
+					end
 
-			if home_adjacent == true then
-				if valid_adjacent[current_region:name()] == true then
-					weight = weight + 50;
-				else
-					weight = 0;
+					if home_adjacent == true then
+						if valid_adjacent[current_region:name()] == true then
+							weight = weight + 50;
+						else
+							weight = 0;
+						end
+					end
+
+					if weight > 0 then
+						possible_regions:add_item(current_region, weight);
+					end
 				end
-			end
-
-			if weight > 0 then
-				possible_regions:add_item(current_region, weight);
 			end
 		end
 	end
@@ -265,9 +269,19 @@ function cult_spawn_random_cults(faction, cult_type, spawn_amount, home_adjacent
 	if #possible_regions.items > 0 then
 		for i = 1, spawn_amount do
 			local region, index = possible_regions:weighted_select();
-			cm:add_foreign_slot_set_to_region_for_faction(faction:command_queue_index(), region:cqi(), cult_type);
-			out("Created Cult of type "..cult_type.." in "..region:name().." for "..faction:name());
-			cm:trigger_incident_with_targets(faction:command_queue_index(), "wh3_main_incident_cult_created", 0, 0, 0, 0, region:cqi(), region:settlement():cqi());
+
+			if delay_tick == true then
+				cm:callback(function() 
+					cm:add_foreign_slot_set_to_region_for_faction(faction:command_queue_index(), region:cqi(), cult_type);
+					cm:trigger_incident_with_targets(faction:command_queue_index(), "wh3_main_incident_cult_created", 0, 0, 0, 0, region:cqi(), region:settlement():cqi());
+					out("Created Cult of type "..cult_type.." in "..region:name().." for "..faction:name());
+				end, 0.1);
+			else
+				cm:add_foreign_slot_set_to_region_for_faction(faction:command_queue_index(), region:cqi(), cult_type);
+				cm:trigger_incident_with_targets(faction:command_queue_index(), "wh3_main_incident_cult_created", 0, 0, 0, 0, region:cqi(), region:settlement():cqi());
+				out("Created Cult of type "..cult_type.." in "..region:name().." for "..faction:name());
+			end
+
 			possible_regions:remove_item(index);
 
 			if #possible_regions.items == 0 then

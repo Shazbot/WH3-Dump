@@ -1,3 +1,37 @@
+-- instantly discover under-cities
+core:add_listener(
+	"SkavenMapCharacterTurnEnd",
+	"CharacterTurnEnd",
+	function(context)
+		return context:character():has_region();
+	end,
+	function(context)
+		local character = context:character();
+		local bonus_value = cm:get_characters_bonus_value(character, "under_empire_discovery");
+		
+		if bonus_value > 0 then
+			local current_region = character:region();
+			
+			if current_region:foreign_slot_managers():is_empty() == false then
+				local foreign_slots = current_region:foreign_slot_managers();
+					
+				for i = 0, foreign_slots:num_items() - 1 do
+					local foreign_slot = foreign_slots:item_at(i);
+					
+					if foreign_slot:is_null_interface() == false then
+						local foreign_slot_faction = foreign_slot:faction();
+						
+						if foreign_slot_faction:culture() == "wh2_main_skv_skaven" then
+							cm:foreign_slot_set_reveal_to_faction(character:faction(), foreign_slot);
+						end
+					end
+				end
+			end
+		end
+	end,
+	true
+);
+
 -- campaign_movement_range_post_battle_win
 core:add_listener(
 	"campaign_movement_range_post_battle_win",

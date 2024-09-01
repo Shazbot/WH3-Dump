@@ -384,8 +384,10 @@ function grudge_cycle:set_grudge_target(faction, previous_level, value_override)
 
 			self.minimum_world_grudges_met = true
 
+			local extra_grudge_bv = cm:get_factions_bonus_value(faction_name, "dwf_grudge_increase_requirement");
+
 			value = math.floor((grudges / 100) * self.target_grudge_percentage) + self.target_grudge_base
-			value = math.floor(value / 100) * (100 + self.previous_reward_modifiers[previous_level] + self.difficulty_modifiers[difficulty])
+			value = math.floor(value / 100) * (100 + self.previous_reward_modifiers[previous_level] + self.difficulty_modifiers[difficulty] + extra_grudge_bv)
 
 			cm:trigger_incident(faction_name, self.incident_prefix..previous_level, true)
 		else
@@ -1247,7 +1249,6 @@ function grudge_cycle:cycle_timer()
 			if faction:culture() == self.cultures.dwarf and faction:can_be_human() then
 				return true
 			end
-
 			return false
 		end,
 		function(context)
@@ -1255,69 +1256,73 @@ function grudge_cycle:cycle_timer()
 			local faction_key = faction:name()
 
 			if faction:is_human() then
-				if self.faction_times[faction_key] then
-					self.faction_times[faction_key] = self.faction_times[faction_key] - 1
+				local stop_grudge_bv = cm:get_factions_bonus_value(faction_key, "dwf_grudge_feature_off");
 
-					if self.faction_times[faction_key] <= 0 then
-						-- Timer complete, grant rewards and reset cycle
-						local level = self:get_current_grudge_level(faction_key)
-						local faction = cm:get_faction(faction_key)
+				if stop_grudge_bv == 0 then
+					if self.faction_times[faction_key] then
+						self.faction_times[faction_key] = self.faction_times[faction_key] - 1
 
-						for i = 0, 5 do
-							cm:remove_effect_bundle(self.reward_prefix..i, faction_key)
-						end
+						if self.faction_times[faction_key] <= 0 then
+							-- Timer complete, grant rewards and reset cycle
+							local level = self:get_current_grudge_level(faction_key)
+							local faction = cm:get_faction(faction_key)
 
-						cm:apply_effect_bundle(self.reward_prefix..level, faction_key, self.cycle_time + 1) -- effect bundle duration comes through as 1 less than the cycle time when applied so adding
-
-						self:set_grudge_target(faction, level)
-
-						if self.delayed_factions[faction_key] then
-							self.delayed_factions[faction_key] = false
-						end
-
-						if level > 0 and self.minimum_world_grudges_met then
-							out.design("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-							out.design("faction: "..faction_key.." reached grudge level: "..level)
-							out.design("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-
-							for k, unit in ipairs(self.settler_units[level]) do
-								cm:add_units_to_faction_mercenary_pool(faction:command_queue_index(), unit, 1)
+							for i = 0, 5 do
+								cm:remove_effect_bundle(self.reward_prefix..i, faction_key)
 							end
 
-							if cm:get_faction(faction_key):is_human() then
-								self.faction_levels[faction_key] = level
-								cm:trigger_dilemma(faction_key, self.delay_dilemma)
+							cm:apply_effect_bundle(self.reward_prefix..level, faction_key, self.cycle_time + 1) -- effect bundle duration comes through as 1 less than the cycle time when applied so adding
+
+							self:set_grudge_target(faction, level)
+
+							if self.delayed_factions[faction_key] then
+								self.delayed_factions[faction_key] = false
 							end
-						end
-						
-						if self.grudge_armies[faction_key] then
-							-- remove any existing grudge armies
-							cm:disable_event_feed_events(true, "", "", "character_dies_in_action")
-							cm:kill_character(cm:char_lookup_str(self.grudge_armies[faction_key]), true)
-							self.grudge_armies[faction_key] = nil
 
-							cm:callback(function()
-								cm:disable_event_feed_events(false, "", "", "character_dies_in_action")
-							end, 0.1)
+							if level > 0 and self.minimum_world_grudges_met then
+								out.design("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+								out.design("faction: "..faction_key.." reached grudge level: "..level)
+								out.design("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+
+								for k, unit in ipairs(self.settler_units[level]) do
+									cm:add_units_to_faction_mercenary_pool(faction:command_queue_index(), unit, 1)
+								end
+
+								if cm:get_faction(faction_key):is_human() then
+									self.faction_levels[faction_key] = level
+									cm:trigger_dilemma(faction_key, self.delay_dilemma)
+								end
+							end
+							
+							if self.grudge_armies[faction_key] then
+								-- remove any existing grudge armies
+								cm:disable_event_feed_events(true, "", "", "character_dies_in_action")
+								cm:kill_character(cm:char_lookup_str(self.grudge_armies[faction_key]), true)
+								self.grudge_armies[faction_key] = nil
+
+								cm:callback(function()
+									cm:disable_event_feed_events(false, "", "", "character_dies_in_action")
+								end, 0.1)
+							end
+
+							if level == 5 then
+								-- spawn new army if at lvl 5
+								self:spawn_grudge_settler_army(faction_key)
+							end
+
+							self.faction_times[faction_key] = self.cycle_time
+							self.cycle_grudges[faction_key] = 0
 						end
 
-						if level == 5 then
-							-- spawn new army if at lvl 5
-							self:spawn_grudge_settler_army(faction_key)
+						if cm:get_local_faction_name(true) == faction_key then
+							common.set_context_value("cycle_grudge_value", self.cycle_grudges[faction_key])
 						end
 
+						self:update_cycle_tracker(faction_key)
+					else
+						-- timer for dwarf faction didn't exist, set a fresh timer.
 						self.faction_times[faction_key] = self.cycle_time
-						self.cycle_grudges[faction_key] = 0
 					end
-
-					if cm:get_local_faction_name(true) == faction_key then
-						common.set_context_value("cycle_grudge_value", self.cycle_grudges[faction_key])
-					end
-
-					self:update_cycle_tracker(faction_key)
-				else
-					-- timer for dwarf faction didn't exist, set a fresh timer.
-					self.faction_times[faction_key] = self.cycle_time
 				end
 			end
 		end,
