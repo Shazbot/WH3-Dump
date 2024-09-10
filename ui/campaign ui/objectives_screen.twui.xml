@@ -4443,8 +4443,8 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextTextLabel"
-					context_object_id="CcoCampaignMission"
-					context_function_id="BattleSetupInfoContext.AllianceContextFromIndex(1).ArmyContext(0).BattleSetupFactionContext.Name"/>
+					context_object_id="CcoBattleSetPieceArmyRecord"
+					context_function_id="FactionContext.Name"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -4799,8 +4799,8 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextList"
-					context_object_id="CcoCampaignMission"
-					context_function_id="BattleSetupInfoContext.AllianceContextFromIndex(1).ArmyContext(0).UnitList"/>
+					context_object_id="CcoBattleSetPieceArmyRecord"
+					context_function_id="Join(CharactersList, UnitsList.Sort(UnitRecordContext.ParentGroupSortOrder, true))"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -4877,8 +4877,8 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextImageSetter"
-					context_object_id="CcoCampaignMission"
-					context_function_id="GetIf( IsContextValid(BattleSetupInfoContext), BattleSetupInfoContext.AllianceContextFromIndex(1).ArmyContext(0).BattleSetupFactionContext.FlagDir + &quot;\\mon_rotated.png&quot;)">
+					context_object_id="CcoBattleSetPieceArmyRecord"
+					context_function_id="FactionContext.FlagDir + &quot;\\mon_rotated.png&quot;">
 					<child_m_user_properties>
 						<property
 							name="image_index"
@@ -5062,7 +5062,7 @@
 					this="170DED49-2237-4CDA-80604F757892302A"
 					name="issued"
 					width="380"
-					height="342"
+					height="632"
 					uniqueguid="170DED49-2237-4CDA-80604F757892302A"/>
 			</states>
 			<animations>
@@ -5224,6 +5224,12 @@
 			uniqueguid="1F631B45-6DA6-4B77-83BEC333345A6D72"
 			currentstate="81C3307C-D875-4133-AED3D20976D6F224"
 			defaultstate="81C3307C-D875-4133-AED3D20976D6F224">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignMission"
+					context_function_id="MainOpponentArmy"/>
+			</callbackwithcontextlist>
 			<userproperties>
 				<property
 					name="dynamic_child"
@@ -5562,8 +5568,8 @@
 				<callback_with_context callback_id="#QuestEventUnitCardCallback"/>
 				<callback_with_context
 					callback_id="ContextImageSetter"
-					context_object_id="CcoBattleSetupUnit"
-					context_function_id="ImagePath">
+					context_object_id="any"
+					context_function_id="Try(GetIfElse(HasFunction(&quot;PortraitForCard&quot;), PortraitForCard, UnitRecordContext.IconPath))">
 					<child_m_user_properties>
 						<property
 							name="image_index"
@@ -5571,6 +5577,10 @@
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context callback_id="TopmostWhenDraggingCallback"/>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="any"
+					context_function_id="Try(GetIfElse(IsOfType(this, &quot;CcoBattleSetPieceArmiesCharacterRecord&quot;), Name, UnitRecordContext.Name))"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -11518,7 +11528,7 @@
 		<teleport
 			this="5D90C9E4-C0D4-4D0F-9CD1DC281AF11CCE"
 			id="teleport"
-			offset="0.00,291.00"
+			offset="0.00,581.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			priority="50"

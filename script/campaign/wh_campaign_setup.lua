@@ -779,6 +779,16 @@ function start_confederation_listeners()
 						cm:kill_character(current_char:command_queue_index(), true);
 					end
 				end
+			elseif faction_culture == "wh3_main_tze_tzeentch" and source_faction_name == "wh3_dlc24_tze_the_deceivers" then
+				local char_list = faction:character_list();
+				
+				for i = 0, char_list:num_items() - 1 do
+					local current_char = char_list:item_at(i);
+					
+					if current_char:has_skill("wh3_main_skill_all_dummy_agent_actions_tze_cult_magus") then
+						cm:kill_character(current_char:command_queue_index(), true);
+					end
+				end
 			elseif faction_name == "wh2_dlc13_lzd_spirits_of_the_jungle" then
 				local defender_faction = cm:get_faction("wh2_dlc13_lzd_defenders_of_the_great_plan");
 				

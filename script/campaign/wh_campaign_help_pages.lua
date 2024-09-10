@@ -111,6 +111,8 @@ function setup_campaign_help_pages()
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_colleges_of_magic", "dlc25_black_towers");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_imperial_gunnery_school", "dlc25_don_main");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_nemesis_crown", "dlc25_nemesis_crown");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_plagues_of_nurgle", "dlc25_nurgle_plagues");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_chieftains", "dlc25_tamurkhan_chieftains");
 	
 	hpm:register_help_page_to_info_button_mapping(
 		"script_link_campaign_intrigue_at_the_court",
@@ -3619,7 +3621,6 @@ function setup_campaign_help_pages()
 		hpr_title("war.camp.hp.daemons_of_chaos.001"),
 		hpr_image("war.camp.hp.image", "UI/help_images/daemons_of_chaos.png"),
 		hpr_leader("war.camp.hp.daemons_of_chaos.002"),
-		hpr_normal("war.camp.hp.daemons_of_chaos.003"),
 
 		hpr_section("glory"),
 		hpr_normal_unfaded("war.camp.hp.daemons_of_chaos.004", "glory"),
@@ -7142,7 +7143,6 @@ function setup_campaign_help_pages()
 		hpr_title("war.camp.hp.khorne.001"),
 		hpr_image("war.camp.hp.image", "UI/help_images/khorne.png"),
 		hpr_leader("war.camp.hp.khorne.002"),
-		hpr_normal("war.camp.hp.khorne.003"),
 
 		hpr_section("skulls"),
 		hpr_normal_unfaded("war.camp.hp.khorne.004", "skulls"),
@@ -8012,7 +8012,6 @@ function setup_campaign_help_pages()
 		hpr_title("war.camp.hp.nurgle.001"),
 		hpr_image("war.camp.hp.image", "UI/help_images/nurgle.png"),
 		hpr_leader("war.camp.hp.nurgle.002"),
-		hpr_normal("war.camp.hp.nurgle.003"),
 
 		hpr_section("plagues"),
 		hpr_normal_unfaded("war.camp.hp.nurgle.004", "plagues"),
@@ -12050,7 +12049,6 @@ function setup_campaign_help_pages()
 		hpr_title("war.camp.hp.tzeentch.001"),
 		hpr_image("war.camp.hp.image", "UI/help_images/tzeentch.png"),
 		hpr_leader("war.camp.hp.tzeentch.002"),
-		hpr_normal("war.camp.hp.tzeentch.003"),
 
 		hpr_section("magic"),
 		hpr_normal_unfaded("war.camp.hp.tzeentch.004", "magic"),
@@ -13043,7 +13041,6 @@ function setup_campaign_help_pages()
 		hpr_title("war.camp.hp.warriors_of_chaos.001"),
 		hpr_image("war.camp.hp.image", "UI/help_images/warriors_of_chaos.png"),
 		hpr_leader("war.camp.hp.warriors_of_chaos.002"),
-		hpr_normal("war.camp.hp.warriors_of_chaos.003"),
 
 		hpr_section("dark_fortress"),
 		hpr_normal_unfaded("war.camp.hp.warriors_of_chaos.004", "dark_fortress"),

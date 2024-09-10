@@ -469,6 +469,10 @@ local help_panel_position_overrides_campaign = {
 		["x"] = -5,
 		["y"] = "middle"
 	},
+	bloodlines_panel = {
+		["x"] = -5,
+		["y"] = -5
+	},
 
 	-- WH3
 	kislev_ice_court = {
@@ -545,6 +549,16 @@ local help_panel_position_overrides_campaign = {
 
 	dlc25_don_main = {
 		["x"] = -5,
+		["y"] = 5
+	},
+
+	dlc25_nurgle_plagues = {
+		["x"] = -5,
+		["y"] = 5
+	},
+
+	dlc25_tamurkhan_chieftains = {
+		["x"] = 5,
 		["y"] = 5
 	}
 };

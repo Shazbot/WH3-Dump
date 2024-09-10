@@ -244,6 +244,7 @@ CUS.subtype_to_bonus_traits = {
 	},
 	wh_main_chs_chaos_sorcerer_death = {
 		default = "wh3_dlc20_legacy_trait_sorcerer_death",
+		wh3_dlc25_chs_sorcerer_death_mnur = "wh3_dlc20_legacy_trait_sorcerer_lord_death_to_death_mnur",
 	},
 	wh_main_chs_chaos_sorcerer_fire = {
 		default = "wh3_dlc20_legacy_trait_sorcerer_fire",

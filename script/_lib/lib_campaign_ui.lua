@@ -1785,7 +1785,7 @@ function campaign_ui_manager:highlight_all_characters_near_camera(value, radius,
 			for j = 0, char_list:num_items() - 1 do
 				local character = char_list:item_at(j);
 				
-				if distance_squared(character:display_position_x(), character:display_position_y(), cam_x, cam_y) < radius_squared and character:is_visible_to_faction(cm:get_local_faction_name(true)) then
+				if distance_squared(character:display_position_x(), character:display_position_y(), math.max(0, cam_x), math.max(0, cam_y)) < radius_squared and character:is_visible_to_faction(cm:get_local_faction_name(true)) then
 					if not is_function(condition) or condition(character) then
 				
 						table.insert(
