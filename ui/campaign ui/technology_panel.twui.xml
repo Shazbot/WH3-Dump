@@ -167,6 +167,10 @@
 							</template_pooled_resource>
 						</pooled_resource_list>
 					</info_holder>
+					<label_research_point_surplus this="869D10B2-28F7-46C6-A33D9609DF49322C">
+						<tx_research_point_surplus this="C14C23A5-A63C-4E3A-AA5DC7C3FB92E67A"/>
+						<dy_research_point_surplus this="B9614DB2-7565-44E2-A4B6BA467D71006B"/>
+					</label_research_point_surplus>
 				</info_holder_parent>
 				<button_info_holder this="69528165-8210-4AF0-831A262BE6A3896C">
 					<button_info this="CB1915CA-E9AA-43B9-A995A37A9D558B66"/>
@@ -1257,6 +1261,7 @@
 			uniqueguid_in_template="715902FD-2442-4210-8831AAF520A41055"
 			uniqueguid="47BAA535-CB6F-4630-8F8AFCC7452CA6C1"
 			dimensions="90.00,29.00"
+			is_visible="false"
 			tooltips_localised="false"
 			priority="999999"
 			sound_category="UI_GBL_TMP_Square_Large_Text_Button_Toggle">
@@ -1322,6 +1327,7 @@
 			uniqueguid_in_template="715902FD-2442-4210-8831AAF520A41055"
 			uniqueguid="ADBEFA21-C1ED-4919-A9C376329E807032"
 			dimensions="80.00,29.00"
+			is_visible="false"
 			tooltips_localised="false"
 			priority="999999"
 			sound_category="UI_GBL_TMP_Square_Large_Text_Button_Toggle">
@@ -4315,7 +4321,7 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoCampaignFaction"
-					context_function_id="Format(&quot;%d%&quot;, TechnologyResearchPoints)"/>
+					context_function_id="Format(&quot;%d&quot;, TechnologyResearchPoints)"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -4482,11 +4488,13 @@
 		<dy_time
 			this="517B6EE8-5D6B-4CC3-B0688DF7E3EBB631"
 			id="dy_time"
-			offset="219.00,-4.00"
+			offset="194.00,-4.00"
 			docking="Top Right"
-			dock_offset="13.00,-4.00"
+			dock_offset="14.00,-4.00"
 			component_anchor_point="1.00,0.00"
-			priority="20"
+			priority="22"
+			componentleveltooltip="{{tt:ui/campaign ui/tooltip_technology_cost_breakdown}}"
+			tooltiplabel="ComponentTooltip_f100bfdd"
 			uniqueguid="517B6EE8-5D6B-4CC3-B0688DF7E3EBB631"
 			currentstate="503E69EF-5895-429B-A1F6324EEB644C56"
 			defaultstate="503E69EF-5895-429B-A1F6324EEB644C56">
@@ -4505,6 +4513,9 @@
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignTechnology"
 					context_function_id="Duration != 0 &amp;&amp; (CanResearch || IsResearching || IsQueued)"/>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoCampaignTechnology"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -4524,26 +4535,27 @@
 				<newstate
 					this="503E69EF-5895-429B-A1F6324EEB644C56"
 					name="NewState"
-					width="24"
+					width="50"
 					height="24"
+					interactive="true"
 					uniqueguid="503E69EF-5895-429B-A1F6324EEB644C56">
 					<imagemetrics>
 						<image
 							this="415E0C50-AECD-4096-BAA83FBE22C9B22B"
 							uniqueguid="415E0C50-AECD-4096-BAA83FBE22C9B22B"
 							componentimage="93173CBF-B20B-43D8-9D60D16E46132688"
-							offset="-19.00,-6.00"
-							width="68"
+							offset="-7.00,-6.00"
+							width="67"
 							height="34"
 							tile="true"
 							canresizeheight="false"
-							margin="0.00,40.00,0.00,30.00"/>
+							margin="0.00,30.00,0.00,20.00"/>
 					</imagemetrics>
 					<component_text
-						text="3"
+						text="5"
 						textvalign="Center"
 						texthalign="Center"
-						textlabel="template_slot_timer_NewState_Text_33"
+						textlabel="StateText_3be232ba"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
@@ -10573,7 +10585,8 @@
 			this="D6A95BE2-0307-466D-AAD7458883D41E68"
 			id="dev_bottom_bar"
 			is_dev_only="true"
-			offset="712.00,871.00"
+			offset="799.00,899.00"
+			visible="false"
 			docking="Bottom Center"
 			component_anchor_point="0.50,1.00"
 			uniqueguid="D6A95BE2-0307-466D-AAD7458883D41E68"
@@ -10583,8 +10596,8 @@
 				<default
 					this="C146049B-AD2E-4DAB-B8CC45D9A95B7B5E"
 					name="default"
-					width="175"
-					height="29"
+					width="1"
+					height="1"
 					uniqueguid="C146049B-AD2E-4DAB-B8CC45D9A95B7B5E"/>
 			</states>
 			<LayoutEngine
@@ -10722,5 +10735,145 @@
 				</default>
 			</states>
 		</required_technologies_number>
+		<dy_research_point_surplus
+			this="B9614DB2-7565-44E2-A4B6BA467D71006B"
+			id="dy_research_point_surplus"
+			offset="499.00,0.00"
+			allowverticalresize="false"
+			priority="40"
+			uniqueguid="B9614DB2-7565-44E2-A4B6BA467D71006B"
+			currentstate="EA58E5FD-6F30-4103-86162BFB6FBA397A"
+			defaultstate="EA58E5FD-6F30-4103-86162BFB6FBA397A">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignFaction"
+					context_function_id="Format(&quot;%d&quot;, TechnologyResearchPointSurplus)"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="EA58E5FD-6F30-4103-86162BFB6FBA397A"
+					name="NewState"
+					width="36"
+					height="34"
+					interactive="true"
+					uniqueguid="EA58E5FD-6F30-4103-86162BFB6FBA397A">
+					<component_text
+						text="XXX"
+						textvalign="Center"
+						texthbehaviour="Resize"
+						textlabel="StateText_bb41efa1"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						textshadervars="0.00,1.00,2.00,0.00"/>
+				</newstate>
+			</states>
+		</dy_research_point_surplus>
+		<label_research_point_surplus
+			this="869D10B2-28F7-46C6-A33D9609DF49322C"
+			id="label_research_point_surplus"
+			offset="0.00,34.00"
+			allowverticalresize="false"
+			priority="40"
+			tooltiplabel="{{tr:ui_text_replacements_localised_text_research_point_surplus_tooltip}}"
+			uniqueguid="869D10B2-28F7-46C6-A33D9609DF49322C"
+			currentstate="77707F61-5BD9-4362-ABDE652A2E406019"
+			defaultstate="77707F61-5BD9-4362-ABDE652A2E406019">
+			<componentimages>
+				<component_image
+					this="3B14ECA2-0078-42FF-85325F15F452643B"
+					uniqueguid="3B14ECA2-0078-42FF-85325F15F452643B"
+					imagepath="ui/skins/default/icon_banner.png"/>
+				<component_image
+					this="DF674C09-A681-42FE-91C42CBD1B59F871"
+					uniqueguid="DF674C09-A681-42FE-91C42CBD1B59F871"
+					imagepath="ui/skins/default/icon_tech.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="77707F61-5BD9-4362-ABDE652A2E406019"
+					name="NewState"
+					width="575"
+					height="34"
+					interactive="true"
+					uniqueguid="77707F61-5BD9-4362-ABDE652A2E406019">
+					<imagemetrics>
+						<image
+							this="A165C986-72F7-462A-8F88C0005C9283A0"
+							uniqueguid="A165C986-72F7-462A-8F88C0005C9283A0"
+							componentimage="3B14ECA2-0078-42FF-85325F15F452643B"
+							offset="-6.00,-1.00"
+							width="575"
+							height="34"
+							tile="true"
+							dockpoint="Center Left"
+							dock_offset="-6.00,-1.00"
+							canresizeheight="false"
+							margin="0.00,40.00,0.00,10.00"/>
+						<image
+							this="24A35BFB-3EBA-49BC-8C3FC6FC471D03EB"
+							uniqueguid="24A35BFB-3EBA-49BC-8C3FC6FC471D03EB"
+							componentimage="DF674C09-A681-42FE-91C42CBD1B59F871"
+							offset="-33.00,-5.00"
+							width="44"
+							height="44"
+							dockpoint="Center Left"
+							dock_offset="-33.00,0.00"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<component_text
+						textvalign="Center"
+						texthalign="Right"
+						textxoffset="6.00,80.00"
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						textshadervars="0.00,1.00,2.00,0.00"/>
+				</newstate>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				spacing="10.00,0.00"
+				sizetocontent="true"
+				margins="6.00,40.00"/>
+		</label_research_point_surplus>
+		<tx_research_point_surplus
+			this="C14C23A5-A63C-4E3A-AA5DC7C3FB92E67A"
+			id="tx_research_point_surplus"
+			offset="6.00,0.00"
+			allowverticalresize="false"
+			priority="40"
+			componentleveltooltip="{{tr:ui_text_replacements_localised_text_research_point_surplus_tooltip}}"
+			tooltiplabel="ComponentTooltip_d5a39f41"
+			uniqueguid="C14C23A5-A63C-4E3A-AA5DC7C3FB92E67A"
+			currentstate="52DDCDD5-B940-4E8B-8A42082FA8E7A7AC"
+			defaultstate="52DDCDD5-B940-4E8B-8A42082FA8E7A7AC">
+			<states>
+				<newstate
+					this="52DDCDD5-B940-4E8B-8A42082FA8E7A7AC"
+					name="NewState"
+					width="483"
+					height="34"
+					interactive="true"
+					uniqueguid="52DDCDD5-B940-4E8B-8A42082FA8E7A7AC">
+					<component_text
+						text="{{tr:ui_text_replacements_localised_text_research_point_surplus_label}}"
+						textvalign="Center"
+						texthalign="Right"
+						texthbehaviour="Resize"
+						textlabel="StateText_ccae0a32"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						textshadervars="0.00,1.00,2.00,0.00"/>
+				</newstate>
+			</states>
+		</tx_research_point_surplus>
 	</components>
 </layout>

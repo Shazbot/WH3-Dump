@@ -3394,7 +3394,6 @@ function setup_campaign_help_pages()
 		hpr_title("war.camp.hp.contracts.001"),
 		hpr_leader("war.camp.hp.contracts.002"),
 		hpr_normal("war.camp.hp.contracts.003"),
-		hpr_normal("war.camp.hp.contracts.004"),
 		hpr_normal("war.camp.hp.contracts.005")
 	);
 	parser:add_record("campaign_contracts", "script_link_campaign_contracts", "tooltip_campaign_contracts");

@@ -1,8 +1,8 @@
 local PEASANTS_EFFECT_PREFIX = "wh_dlc07_bundle_peasant_penalty_"
-local PEASANTS_PER_REGION = 2
 local show_peasant_debug = false
 
-local Bretonnia_Peasant_Units = {
+PEASANTS_PER_REGION = 2
+Bretonnia_Peasant_Units = {
 	["wh_dlc07_brt_art_blessed_field_trebuchet_0"] = 1,
 	["wh_dlc07_brt_inf_battle_pilgrims_0"] = 1,
 	["wh_dlc07_brt_inf_foot_squires_0"] = 1,

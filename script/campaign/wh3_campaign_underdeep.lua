@@ -6,6 +6,19 @@ local bonus_income_per_region = -5;
 local gold_resource_regions = {};
 local DEBUG_spawn_unique_blockers = false;
 
+underdeep_possible_blockers = {
+	{key = "NOTHING", weight = 130},
+	{key = "wh3_main_underdeep_dwf_blocker_gold_1", weight = 3},
+	{key = "wh3_main_underdeep_dwf_blocker_beer_1", weight = 2},
+	{key = "wh3_main_underdeep_dwf_blocker_doomsphere_1", weight = 2},
+	{key = "wh3_main_underdeep_dwf_blocker_lab_1", weight = 3},
+	{key = "wh3_main_underdeep_dwf_blocker_machines_1", weight = 2},
+	{key = "wh3_main_underdeep_dwf_blocker_warpstone_1", weight = 2}
+};
+underdeep_eight_peaks_key = "wh3_main_combi_region_karak_eight_peaks";
+underdeep_skavenblight_key = "wh3_main_combi_region_skavenblight";
+underdeep_zharr_naggrund_key = "wh3_main_combi_region_zharr_naggrund";
+
 function add_underdeep_listeners()
 	out("#### Adding Underdeep Listeners ####");
 	if cm:is_new_game() == true then
@@ -67,11 +80,11 @@ function add_underdeep_listeners()
 				underdeep_key = "wh3_main_slot_set_underdeep_dwarf_minor";
 			end
 
-			if region:name() == "wh3_main_combi_region_karak_eight_peaks" then
+			if region:name() == underdeep_eight_peaks_key then
 				underdeep_key = "wh3_main_slot_set_underdeep_dwarf_karak_eight_peaks";
-			elseif region:name() == "wh3_main_combi_region_skavenblight" then
+			elseif region:name() == underdeep_skavenblight_key then
 				underdeep_key = "wh3_main_slot_set_underdeep_dwarf_skavenblight";
-			elseif region:name() == "wh3_main_combi_region_zharr_naggrund" or region:name() == "wh3_main_chaos_region_zharr_naggrund" then
+			elseif region:name() == underdeep_zharr_naggrund_key or region:name() == "wh3_main_chaos_region_zharr_naggrund" then
 				underdeep_key = "wh3_main_slot_set_underdeep_dwarf_zharr_naggrund";
 			end
 			
@@ -435,7 +448,7 @@ function add_underdeep_listeners()
 		end,
 		function(context)
 			if context:choice() == 0 then
-				local region = cm:get_region("wh3_main_combi_region_karak_eight_peaks");
+				local region = cm:get_region(underdeep_eight_peaks_key);
 				cm:change_home_region_of_faction(context:faction(), region);
 			end
 		end,
@@ -478,6 +491,10 @@ function underdeep_update_region_adjacency_dummy(region, recursive)
 			local adjacent_region = adjacent_region_list:item_at(i);
 
 			if adjacent_region:is_null_interface() == false then
+				if recursive == true then
+					underdeep_update_region_adjacency_dummy(adjacent_region, false);
+				end
+				
 				if adjacent_region:is_abandoned() == false then
 					local owner = adjacent_region:owning_faction();
 
@@ -485,9 +502,6 @@ function underdeep_update_region_adjacency_dummy(region, recursive)
 						adjacent_dwarf = true;
 						break;
 					end
-				end
-				if recursive == true then
-					underdeep_update_region_adjacency_dummy(adjacent_region, false);
 				end
 			end
 		end
@@ -557,13 +571,10 @@ function underdeep_spawn_blockers(region_key, slot_list, block_slots, unique_slo
 			cm:foreign_slot_instantly_upgrade_building(slot_list:item_at(unique_slot), "wh3_main_underdeep_dwf_blocker_gold_1");
 		else
 			local possible_blockers = weighted_list:new();
-			possible_blockers:add_item("NOTHING", 130);
-			possible_blockers:add_item("wh3_main_underdeep_dwf_blocker_gold_1", 3);
-			possible_blockers:add_item("wh3_main_underdeep_dwf_blocker_beer_1", 2);
-			possible_blockers:add_item("wh3_main_underdeep_dwf_blocker_doomsphere_1", 2);
-			possible_blockers:add_item("wh3_main_underdeep_dwf_blocker_lab_1", 3);
-			possible_blockers:add_item("wh3_main_underdeep_dwf_blocker_machines_1", 2);
-			possible_blockers:add_item("wh3_main_underdeep_dwf_blocker_warpstone_1", 2);
+
+			for i = 1, #underdeep_possible_blockers do
+				possible_blockers:add_item(underdeep_possible_blockers[i].key, underdeep_possible_blockers[i].weight);
+			end
 
 			local blocker_key, index = possible_blockers:weighted_select();
 

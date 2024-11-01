@@ -1,4 +1,4 @@
-local encounter_sea_location_set = {
+encounter_sea_location_set = {
 	["main_warhammer"] = {
 		{
 			{ 165, 787}, { 237, 776}, { 294, 818}, { 376, 765}, { 291, 456}, { 259, 521}, {375, 852}, {534, 896}, {157, 678}, {668, 890},
@@ -39,7 +39,7 @@ local encounter_sea_location_set = {
 	}
 };
 
-local encounter_events_details = {
+encounter_events_details = {
 	["wh2_main_incident_encounter_at_sea_1"] = {
 		["category"] = "battle",
 		["variation"] = {"_a", "_b", "_c"},
@@ -106,7 +106,7 @@ local encounter_events_details = {
 };
 
 -- followup incident when battle won, dilemma, enemy army size, treasure map chance (vampire coast only), followup incident when battle skipped
-local encounter_events_battle_details = {
+encounter_events_battle_details = {
 	["wh2_main_incident_encounter_at_sea_1_a"] = {"wh2_dlc11_dilemma_neo_encounter_at_sea_1_a", 10, 30, "wh2_dlc11_incident_neo_encounter_at_sea_1_a"},
 	["wh2_main_incident_encounter_at_sea_1_b"] = {"wh2_dlc11_dilemma_neo_encounter_at_sea_1_b", 10, 30, "wh2_dlc11_incident_neo_encounter_at_sea_1_b"},
 	["wh2_main_incident_encounter_at_sea_1_c"] = {"wh2_dlc11_dilemma_neo_encounter_at_sea_1_c", 10, 30, "wh2_dlc11_incident_neo_encounter_at_sea_1_c"},
@@ -123,16 +123,16 @@ local encounter_events_battle_details = {
 local encounter_sea_spots = {};
 
 -- percentage of locations that will be filled with encounters at the start of the game
-local encounter_number_start = 17;
+encounter_number_start = 17;
 
 -- percentage of locations that will be filled with encounters each time they are respawned
-local encounter_number_per_turn = 3;
+encounter_number_per_turn = 3;
 
 -- percentage of active encounters that can be battle type
-local encounter_number_battle = 45;
+encounter_number_battle = 45;
 
 -- turn interval to respawn encounters
-local encounter_respawn_turn_interval = 5;
+encounter_respawn_turn_interval = 5;
 
 
 

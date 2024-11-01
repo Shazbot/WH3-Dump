@@ -1,8 +1,8 @@
 local wulfhart_faction = "wh2_dlc13_emp_the_huntmarshals_expedition"
 
-local buildings_to_lock = {"wh_main_emp_barracks_3", "wh_main_emp_stables_2", "wh_main_emp_stables_3", "wh_main_emp_forges_2", "wh_main_emp_forges_3", "wh3_dlc25_emp_shooting_range_3", "wh_main_emp_forges_4"}
+wulfhart_buildings_to_lock = {"wh_main_emp_barracks_3", "wh_main_emp_stables_2", "wh_main_emp_stables_3", "wh_main_emp_forges_2", "wh_main_emp_forges_3", "wh3_dlc25_emp_shooting_range_3", "wh_main_emp_forges_4"}
 
-local buildings_to_unlock = {
+wulfhart_buildings_to_unlock = {
 	{},
 	{"wh_main_emp_barracks_3", "wh_main_emp_stables_2"},
 	{"wh_main_emp_forges_2", "wh_main_emp_stables_3", "wh3_dlc25_emp_shooting_range_3"},
@@ -50,7 +50,7 @@ local hostility_level_scripted_army_size = {5, 5, 10, 14, 14, 18}
 
 -- regions that can have armies spawn in them - they must NOT be owned by wulfhart's faction or his allies. 
 -- will choose the region with the highest priority. If none are available, no army will spawn.
-local hostility_level_scripted_army_spawn_loc = {
+hostility_level_scripted_army_spawn_loc = {
 	["wh3_main_combi_region_tlaxtlan"]				= {coords = {181, 316}, priority = 9},
 	["wh3_main_combi_region_hualotal"]				= {coords = {118, 305}, priority = 8},
 	["wh3_main_combi_region_chaqua"]				= {coords ={164, 285}, priority = 7},
@@ -83,7 +83,7 @@ local hostility_level_enemy_buffs = {
 
 local hostility_level_scripted_army_faction = "wh2_dlc13_lzd_avengers"
 
-local queued_hostility_level_army_spawn = {
+queued_hostility_level_army_spawn = {
 	["counter"] = 2,
 	["strength_level"] = "lizard_retaliate_low",
 	["loc"] = {"wh3_main_combi_region_temple_of_kara", {128, 370}},
@@ -91,10 +91,10 @@ local queued_hostility_level_army_spawn = {
 }
 
 local elector_count_counter_default = 9
-local elector_count_index = {"averland", "reikland", "hochland", "middenland", "nordland", "ostermark", "ostland", "stirland", "talabecland", "wissenland"}
+elector_count_index = {"averland", "reikland", "hochland", "middenland", "nordland", "ostermark", "ostland", "stirland", "talabecland", "wissenland"}
 
 -- elector count details, name, affinity, and favor effect dummy
-local elector_count_details = {
+elector_count_details = {
 	["averland"] =		{0, "wh2_dlc13_wulfhart_favor_of_A_dummy"},
 	["reikland"] =		{0, "wh2_dlc13_wulfhart_favor_of_B_dummy"},
 	["hochland"] =		{0, "wh2_dlc13_wulfhart_favor_of_C_dummy"},
@@ -109,9 +109,9 @@ local elector_count_details = {
 	["ongoing"] = false
 }
 
-local elector_count_weight_table = {1, 1, 1, 1, 1, 2, 2, 2}
+elector_count_weight_table = {1, 1, 1, 1, 1, 2, 2, 2}
 
-local elector_count_dilemmas = {
+elector_count_dilemmas = {
 	["averland"] = {
 		"wh2_dlc13_wulfhart_dilemma_A_D_H",
 		"wh2_dlc13_wulfhart_dilemma_A_E_I",
@@ -232,7 +232,7 @@ local elector_count_dilemmas = {
 	}
 }
 
-local elector_count_incidents = {
+elector_count_incidents = {
 	["averland"] =	 	{"wh2_dlc13_wulfhart_reward_A", "wh2_dlc13_wulfhart_reward_A_unit"},
 	["reikland"] =	 	{"wh2_dlc13_wulfhart_reward_B", "wh2_dlc13_wulfhart_reward_B_unit"},
 	["hochland"] =	 	{"wh2_dlc13_wulfhart_reward_C", "wh2_dlc13_wulfhart_reward_C_unit"},
@@ -695,8 +695,8 @@ function update_acclaim_bar(factor)
 	local current_acclaim_value = faction:pooled_resource_manager():resource(acclaim_resource_key):value()
 	
 	local function lock_wulfhart_buildings(index)
-		for i = index, #buildings_to_lock do
-			cm:add_event_restricted_building_record_for_faction(buildings_to_lock[i], wulfhart_faction, "wulfhart_building_lock")
+		for i = index, #wulfhart_buildings_to_lock do
+			cm:add_event_restricted_building_record_for_faction(wulfhart_buildings_to_lock[i], wulfhart_faction, "wulfhart_building_lock")
 		end
 	end
 	
@@ -705,8 +705,8 @@ function update_acclaim_bar(factor)
 		if previous_acclaim_value < acclaim_thresholds[i] and current_acclaim_value >= acclaim_thresholds[i] then
 			cm:trigger_incident(wulfhart_faction, "wh2_dlc13_emp_wulfhart_progress_level_increase", true)
 			
-			for j = 1, #buildings_to_unlock[i + 1] do
-				cm:remove_event_restricted_building_record_for_faction(buildings_to_unlock[i + 1][j], wulfhart_faction)
+			for j = 1, #wulfhart_buildings_to_unlock[i + 1] do
+				cm:remove_event_restricted_building_record_for_faction(wulfhart_buildings_to_unlock[i + 1][j], wulfhart_faction)
 			end
 		elseif previous_acclaim_value >= acclaim_thresholds[i] and current_acclaim_value < acclaim_thresholds[i] then
 			lock_wulfhart_buildings(i + 1)

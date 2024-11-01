@@ -28,7 +28,7 @@ local lair_rituals_to_points = {
 	["wh2_dlc15_athel_tamarha_ranged_mistwalkers_2"] = 5,
 	["wh2_dlc15_athel_tamarha_ranged_mistwalkers_3"] = 5
 };
-local lair_culture_to_effects = {
+lair_culture_to_effects = {
 	["wh_dlc03_bst_beastmen"] =			"wh2_dlc15_hef_eltharion_dungeon_reward_beastmen",
 	["wh_main_brt_bretonnia"] =			"wh2_dlc15_hef_eltharion_dungeon_reward_bretonnia",
 	["wh_main_chs_chaos"] =				"wh2_dlc15_hef_eltharion_dungeon_reward_chaos_warriors",
@@ -55,7 +55,7 @@ local lair_culture_to_effects = {
 	["wh2_main_rogue"] =				"wh2_dlc15_hef_eltharion_dungeon_reward_rogue_armies",
 	["wh3_dlc23_chd_chaos_dwarfs"] =	"wh2_dlc15_hef_eltharion_dungeon_reward_chaos_dwarfs"
 };
-local lair_action_effects = {
+lair_action_effects = {
 	"wh2_dlc15_hef_dungeon_mistwalker_upgrade_wood_elves",
 	"wh2_dlc15_hef_dungeon_mistwalker_upgrade_vampire_counts",
 	"wh2_dlc15_hef_dungeon_mistwalker_upgrade_vampire_coast",

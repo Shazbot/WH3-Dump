@@ -632,13 +632,19 @@ function nemesis_crown:marker_and_battle_listeners(human_factions)
 			for i = 0, nemesis_char_list:num_items() - 1 do
 				local nemesis_char_items = nemesis_char_list:item_at(i)
 				local nemesis_char_fm = nemesis_char_items:family_member()
-				local nemesis_char_cqi = nemesis_char_fm:character():command_queue_index()
-				--local character = 
-				crown.owner_fm_cqi = nemesis_char_fm:command_queue_index()
-				cm:apply_effect_bundle_to_character(self:generate_effect_bundle_key(nemesis_char_items), nemesis_char_items, 0)
-				cm:add_character_vfx(nemesis_char_cqi, self.vfx.character, true)
-				cm:apply_effect_bundle_to_characters_force("wh_main_bundle_military_upkeep_free_force", nemesis_char_cqi, 0)
-				
+				local nemesis_char = nemesis_char_fm:character()
+
+				if not nemesis_char:is_null_interface() then
+					local nemesis_char_cqi = nemesis_char_fm:character():command_queue_index()
+					--local character = 
+					crown.owner_fm_cqi = nemesis_char_fm:command_queue_index()
+					cm:apply_effect_bundle_to_character(self:generate_effect_bundle_key(nemesis_char_items), nemesis_char_items, 0)
+					cm:add_character_vfx(nemesis_char_cqi, self.vfx.character, true)
+
+					if nemesis_char:has_military_force() then
+						cm:apply_effect_bundle_to_characters_force("wh_main_bundle_military_upkeep_free_force", nemesis_char_cqi, 0)
+					end
+				end
 			end	
 
 			--If the faction lives this is meant to stop all diplomacy between them and other factions.
@@ -646,7 +652,11 @@ function nemesis_crown:marker_and_battle_listeners(human_factions)
 			cm:force_diplomacy("faction:"..self.nemesis_crown_faction_key, "all", "war", true, true, true)
 			cm:force_diplomacy("faction:"..self.nemesis_crown_faction_key, "all", "peace", true, false, false)
 			for j = 0, faction_list:num_items() - 1 do
-				cm:force_declare_war(self.nemesis_crown_faction_key, faction_list:item_at(j):name(), false, false)
+				local current_faction = faction_list:item_at(j):name()
+
+				if current_faction ~= self.nemesis_crown_faction_key then
+					cm:force_declare_war(self.nemesis_crown_faction_key, faction_list:item_at(j):name(), false, false)
+				end
 			end
 			
 			crown.owner_faction_key = self.nemesis_crown_faction_key

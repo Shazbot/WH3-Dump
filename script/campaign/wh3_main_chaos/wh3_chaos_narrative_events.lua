@@ -1393,16 +1393,6 @@ local function customise_narrative_event_faction_data_for_campaign()
 		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_control_province_advice_key", "wh3_main_camp_narrative_chs_greasus_capture_province_01");
 		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_control_province_mission_key", "wh3_main_camp_narrative_chaos_greasus_complete_province_01");
 		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_control_province_province_keys", initial_enemy_province_key);										-- specify the province that has to be captured for this mission
-
-		-- Text overrides for upgrade settlement missions
-		narrative.todo_output("Move these text overrides to somewhere more central");
-		narrative.add_data_for_faction(faction_key, "shared_settlement_upgrade_upgrade_any_settlement_level_three_mission_key", "wh3_main_camp_narrative_ogres_upgrade_settlement_02");
-		narrative.add_data_for_faction(faction_key, "shared_settlement_upgrade_upgrade_any_settlement_level_five_mission_key", "wh3_main_camp_narrative_ogres_upgrade_settlement_03");
-
-		-- Switch in "evil" diplomacy advice line variants
-		narrative.add_data_for_faction(faction_key, "shared_diplomacy_event_non_aggression_pact_mission_advice_key", "wh3_main_camp_narrative_shared_non_aggression_pact_02");
-		narrative.add_data_for_faction(faction_key, "shared_diplomacy_event_trade_mission_advice_key", "wh3_main_camp_narrative_shared_trade_agreement_02");
-		narrative.add_data_for_faction(faction_key, "shared_diplomacy_event_confederation_mission_advice_key", "wh3_main_camp_narrative_shared_war_confederation_02");
 	end;
 
 
@@ -1454,16 +1444,6 @@ local function customise_narrative_event_faction_data_for_campaign()
 		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_control_province_advice_key", "wh3_main_camp_narrative_chs_skrag_capture_province_01");
 		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_control_province_mission_key", "wh3_main_camp_narrative_chaos_skrag_complete_province_01");
 		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_control_province_province_keys", initial_enemy_province_key);										-- specify the province that has to be captured for this mission
-
-		-- Text overrides for upgrade settlement missions
-		narrative.todo_output("Move these text overrides to somewhere more central");
-		narrative.add_data_for_faction(faction_key, "shared_settlement_upgrade_upgrade_any_settlement_level_three_mission_key", "wh3_main_camp_narrative_ogres_upgrade_settlement_02");
-		narrative.add_data_for_faction(faction_key, "shared_settlement_upgrade_upgrade_any_settlement_level_five_mission_key", "wh3_main_camp_narrative_ogres_upgrade_settlement_03");
-
-		-- Switch in "evil" diplomacy advice line variants
-		narrative.add_data_for_faction(faction_key, "shared_diplomacy_event_non_aggression_pact_mission_advice_key", "wh3_main_camp_narrative_shared_non_aggression_pact_02");
-		narrative.add_data_for_faction(faction_key, "shared_diplomacy_event_trade_mission_advice_key", "wh3_main_camp_narrative_shared_trade_agreement_02");
-		narrative.add_data_for_faction(faction_key, "shared_diplomacy_event_confederation_mission_advice_key", "wh3_main_camp_narrative_shared_war_confederation_02");
 	end;
 
 end;

@@ -3699,8 +3699,6 @@ local followers = {
 	}
 };
 
-
-
 function load_followers()
 	for i = 1, #followers do
 		core:add_listener(

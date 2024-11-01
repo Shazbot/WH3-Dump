@@ -1,3 +1,92 @@
+core:add_listener(
+	"MaadMapCharacterTurnEnd",
+	"CharacterTurnEnd",
+	function(context)
+		return context:character():has_ancillary("wh3_main_anc_enchanted_item_maads_map");
+	end,
+	function(context)
+		if cm:model():random_percent(20) then
+			local possible_regions = weighted_list:new();
+
+			local character = context:character();
+
+			if character:has_region() == true and character:is_at_sea() == false and character:in_settlement() == false and character:is_besieging() == false and character:is_embedded_in_military_force() == false then
+				local region = character:region();
+
+				if region:is_null_interface() == false then
+					local adj_regions = region:adjacent_region_list();
+					
+					if adj_regions:is_empty() == false then
+						for i = 0, adj_regions:num_items() - 1 do
+							local adj_region = adj_regions:item_at(i):name();
+							possible_regions:add_item(adj_region, 1);
+						end
+
+						if #possible_regions.items > 0 then
+							local selected_region, index = possible_regions:weighted_select();
+							local pos_x, pos_y = cm:find_valid_spawn_location_for_character_from_settlement(character:faction():name(), selected_region, false, false, 19);
+
+							if pos_x > -1 and pos_y > -1 then
+								cm:teleport_to(cm:char_lookup_str(character), pos_x, pos_y);
+							end
+						end
+					end
+				end
+			end
+		end
+	end,
+	true
+);
+
+core:add_listener(
+	"DraescaHelmFactionTurnEnd",
+	"FactionTurnEnd",
+	function(context)
+		return context:faction():ancillary_exists("wh3_main_anc_armour_helm_of_draesca");
+	end,
+	function(context)
+		if cm:model():random_percent(1) then
+			local faction = context:faction();
+			local char_list = faction:character_list();
+
+			for i = 0, char_list:num_items() - 1 do
+				local char = char_list:item_at(i);
+				
+				if char:has_ancillary("wh3_main_anc_armour_helm_of_draesca") == true then
+					if char:has_military_force() == true or char:is_embedded_in_military_force() == true then
+						local cqi = char:command_queue_index();
+
+						if char:character_details():is_immortal() == true then
+							if char:is_wounded() == false then
+								-- Use minimum time of 2 instead of 1 because this happens during end turn; 1 would mean the character is available immediately at the start of the next turn.
+								local convalescence_time = math.max(2, char:compute_convalesence_time());
+								cm:wound_character("character_cqi:"..cqi, convalescence_time);
+							end
+						else
+							cm:kill_character(cqi, false);
+						end
+					end
+					break; -- We can break out because only one of these items exists
+				end
+			end
+		end
+	end,
+	true
+);
+
+core:add_listener(
+	"AldredsCasketCharacterTurnStart",
+	"CharacterTurnStart",
+	function(context)
+		return context:character():has_region() and context:character():has_ancillary("wh3_main_anc_enchanted_item_aldreds_casket");
+	end,
+	function(context)
+		local province = context:character():region():province();
+		cm:force_winds_of_magic_change(province:key(), "wom_strength_0");
+	end,
+	true
+);
+
 -- instantly discover under-cities
 core:add_listener(
 	"SkavenMapCharacterTurnEnd",
@@ -786,7 +875,7 @@ core:add_listener(
 				local faction_leader = faction:faction_leader();
 				out("\tLeader found - "..faction_leader:command_queue_index());
 
-				if faction_leader:has_region() == true or faction_leader:is_at_sea() == true then
+				if faction_leader:has_military_force() == true or faction_leader:is_at_sea() == true then
 					local x, y = cm:find_valid_spawn_location_for_character_from_settlement(faction:name(), region_name, false, true, 12);
 					out("\t"..region_name.."  -  X: "..x.."  /  Y: "..y);
 
@@ -1843,7 +1932,7 @@ core:add_listener(
 	"force_scribes_cataclysm_bundle",
 	"CharacterTurnStart",
 	function(context)
-	return cm:get_characters_bonus_value(context:character(), "scribes_random_cataclysm") == 1
+		return cm:get_characters_bonus_value(context:character(), "scribes_random_cataclysm") == 1
 	end,
 	function(context)
 		local force = context:character():military_force()
@@ -1851,6 +1940,18 @@ core:add_listener(
 		local roll = cm:random_number(8)
 		bundle:add_effect("wh3_dlc24_effect_scribes_random_cataclysm_roll_"..roll, "force_to_force_own", 1)
 		cm:apply_custom_effect_bundle_to_force(bundle, force)
+	end,
+	true
+);
+core:add_listener(
+	"force_scribes_cataclysm_bundle",
+	"CharacterLeavesMilitaryForce",
+	function(context)
+		local mf = context:military_force()
+		return mf:has_general() and mf:has_effect_bundle("wh3_dlc24_scripted_scribes_random_cataclysm") and cm:get_characters_bonus_value(mf:general_character(), "scribes_random_cataclysm") == 0
+	end,
+	function(context)
+		cm:remove_effect_bundle_from_force("wh3_dlc24_scripted_scribes_random_cataclysm", context:military_force():command_queue_index())
 	end,
 	true
 );

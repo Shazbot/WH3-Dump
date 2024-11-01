@@ -779,7 +779,7 @@ function start_confederation_listeners()
 						cm:kill_character(current_char:command_queue_index(), true);
 					end
 				end
-			elseif faction_culture == "wh3_main_tze_tzeentch" and source_faction_name == "wh3_dlc24_tze_the_deceivers" then
+			elseif faction_name == "wh3_dlc24_tze_the_deceivers" then
 				local char_list = faction:character_list();
 				
 				for i = 0, char_list:num_items() - 1 do

@@ -49,10 +49,12 @@ function sea_lanes:character_arrived_incident_listener()
 			return from_record:is_null_interface() == false and sea_lanes.nodes[from_record:template_key()]
 		end,
 		function(context)
-			local character = context:character():character()
-			local character_cqi = character:command_queue_index()
-			local faction_cqi = character:faction():command_queue_index()
-			cm:trigger_incident_with_targets(faction_cqi, self.incident_key, 0, 0, character_cqi, 0, 0, 0)
+			if context:character():is_null_interface() == false and context:character():character():is_null_interface() == false then
+				local character = context:character():character()
+				local character_cqi = character:command_queue_index()
+				local faction_cqi = character:faction():command_queue_index()
+				cm:trigger_incident_with_targets(faction_cqi, self.incident_key, 0, 0, character_cqi, 0, 0, 0)
+			end
 		end,
 		true	
 	);

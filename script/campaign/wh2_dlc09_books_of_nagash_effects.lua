@@ -6,7 +6,7 @@ local resource_locations = {
 
 local mannfred_faction_key = "wh_main_vmp_vampire_counts"
 local malevolent_museum_key = "wh3_main_special_drakenhof_malevolent_museum"
-
+malevolent_region_key = "wh3_main_combi_region_castle_drakenhof"
 local volkmar_faction_key = "wh3_main_emp_cult_of_sigmar"
 
 
@@ -145,7 +145,7 @@ core:add_listener(
 );
 
 function mannfred_malevolant_museum_effect_update()
-	local region = cm:get_region("wh3_main_combi_region_castle_drakenhof")
+	local region = cm:get_region(malevolent_region_key)
 	local owner = region:owning_faction()
 
 	if owner:name() == mannfred_faction_key and region:building_exists(malevolent_museum_key) then

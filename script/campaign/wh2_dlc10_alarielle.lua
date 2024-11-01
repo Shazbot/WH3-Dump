@@ -8,7 +8,7 @@ local hellebron_faction_key = "wh2_main_def_har_ganeth";
 local defender_of_ulthuan_effect = "";
 local defender_of_ulthuan_level = 1;
 
-local ulthuan_regions = {
+ulthuan_regions = {
 	["outer"] = {
 		["wh3_main_combi_region_vauls_anvil_ulthuan"] = true,
 		["wh3_main_combi_region_tor_sethai"] = true,

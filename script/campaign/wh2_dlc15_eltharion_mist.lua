@@ -1,7 +1,7 @@
 local m_eltharion_faction_key = "wh2_main_hef_yvresse"
 local m_hef_culture = "wh2_main_hef_high_elves"
 
-local m_regions = {
+m_mist_regions = {
 	-- regions to apply mist to
 	level_1 = {
 		"wh3_main_combi_region_tor_yvresse"
@@ -46,12 +46,12 @@ local m_mist_effects = {
 local function purge_mists_of_yvresse()
 	out("wh2_dlc15_eltharion_mist: clearing Mists of Yvresse regional effect bundles")
 	
-	for i = 1, #m_regions.level_3 do
-		local region = cm:get_region(m_regions.level_3[i])
+	for i = 1, #m_mist_regions.level_3 do
+		local region = cm:get_region(m_mist_regions.level_3[i])
 		
 		for k, effect in pairs(m_mist_effects) do
 			if region:has_effect_bundle(effect) then
-				cm:remove_effect_bundle_from_region(effect, m_regions.level_3[i])
+				cm:remove_effect_bundle_from_region(effect, m_mist_regions.level_3[i])
 			end
 		end
 	end
@@ -115,28 +115,28 @@ local function update_mists_of_yvresse()
 	if yvresse_defence >= 25 and yvresse_defence <= 49 then
 		core:trigger_event("ScriptEventYvresseDefenceOne")
 		
-		for i = 1, #m_regions.level_1 do
-			local region = m_regions.level_1[i]
+		for i = 1, #m_mist_regions.level_1 do
+			local region = m_mist_regions.level_1[i]
 			apply_mists_of_yvresse_effects(region)
 		end
 	elseif yvresse_defence >= 50 and yvresse_defence <= 74 then
 		core:trigger_event("ScriptEventYvresseDefenceTwo")
 		
-		for i = 1, #m_regions.level_2 do
-			local region = m_regions.level_2[i]
+		for i = 1, #m_mist_regions.level_2 do
+			local region = m_mist_regions.level_2[i]
 			apply_mists_of_yvresse_effects(region)
 		end
 	elseif yvresse_defence >= 75 and yvresse_faction:is_human() then
 		core:trigger_event("ScriptEventYvresseDefenceThree")
 		
-		for i = 1, #m_regions.level_3 do
-			local region = m_regions.level_3[i]			
+		for i = 1, #m_mist_regions.level_3 do
+			local region = m_mist_regions.level_3[i]			
 			apply_mists_of_yvresse_effects(region)
 		end
 	elseif yvresse_defence >= 75 then
 		-- AI maintains level 2 bonuses
-		for i = 1, #m_regions.level_2 do
-			local region = m_regions.level_2[i]			
+		for i = 1, #m_mist_regions.level_2 do
+			local region = m_mist_regions.level_2[i]			
 			apply_mists_of_yvresse_effects(region)
 		end
 	end

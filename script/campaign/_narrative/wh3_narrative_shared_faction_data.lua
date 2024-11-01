@@ -543,6 +543,23 @@ local function add_narrative_data_for_playable_faction(faction_key)
 		narrative.add_data_for_faction(faction_key, "shared_finance_query_advice_block", true); -- beastmen do not get income
 		narrative.add_data_for_faction(faction_key, "shared_technology_chain_block", true); -- beastmen technology works differently to how these missions expect it to
 	end;
+
+
+
+
+
+	-- OGRE KINGDOMS
+
+	if culture == "wh3_main_ogr_ogre_kingdoms" then
+		-- Text overrides for upgrade settlement missions
+		narrative.add_data_for_faction(faction_key, "shared_settlement_upgrade_upgrade_any_settlement_level_three_mission_key", "wh3_main_camp_narrative_ogres_upgrade_settlement_02");
+		narrative.add_data_for_faction(faction_key, "shared_settlement_upgrade_upgrade_any_settlement_level_five_mission_key", "wh3_main_camp_narrative_ogres_upgrade_settlement_03");
+
+		-- Switch in "evil" diplomacy advice line variants
+		narrative.add_data_for_faction(faction_key, "shared_diplomacy_event_non_aggression_pact_mission_advice_key", "wh3_main_camp_narrative_shared_non_aggression_pact_02");
+		narrative.add_data_for_faction(faction_key, "shared_diplomacy_event_trade_mission_advice_key", "wh3_main_camp_narrative_shared_trade_agreement_02");
+		narrative.add_data_for_faction(faction_key, "shared_diplomacy_event_confederation_mission_advice_key", "wh3_main_camp_narrative_shared_war_confederation_02");
+	end
 end;
 
 

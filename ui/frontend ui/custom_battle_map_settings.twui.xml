@@ -9119,7 +9119,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCustomBattleMap"
-					context_function_id="StringContains(Name, Component(&quot;text_input_map_filter&quot;).CurrentText)">
+					context_function_id="StringContains(Name, Component(&quot;text_input_map_filter&quot;).CurrentText) || (TweakerAsBool(&quot;non_release_battles&quot;) == true &amp;&amp; StringContains(BattleRecordContext().Key, Component(&quot;text_input_map_filter&quot;).CurrentText))">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -9163,6 +9163,10 @@
 							value="CustomBattleOnSettingChangedMap"/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoCustomBattleMap"
+					context_function_id="DevInfo"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -9513,7 +9517,7 @@
 					interactive="true"
 					uniqueguid="1182D82C-BCF5-4743-BABA4E849BA85FBF">
 					<component_text
-						text="AI Stats Modifier"
+						text="AI stats modifier"
 						textvalign="Center"
 						texthbehaviour="Never split"
 						textlocalised="true"
@@ -9858,7 +9862,7 @@
 			docking="Center Right External"
 			component_anchor_point="-0.00,0.50"
 			tooltipslocalised="true"
-			componentleveltooltip="When checked, multiple lords can be added to the army instead of just one. Only the first Lord in the list will count as the army commander in battle."
+			componentleveltooltip="When checked, multiple Lords can be added to the army instead of just one. Only the first Lord in the list will count as the army commander in battle."
 			tooltiplabel="ComponentTooltip_430e3e29"
 			uniqueguid="C6ADDB25-81A1-46DD-AA0704CE171B7800"
 			currentstate="4CDBB565-3EE4-4A3B-88285188772650E9">
@@ -9889,7 +9893,7 @@
 					interactive="true"
 					uniqueguid="4CDBB565-3EE4-4A3B-88285188772650E9">
 					<component_text
-						text="Allow Multiple Lords"
+						text="Allow multiple Lords"
 						textvalign="Center"
 						textlocalised="true"
 						textlabel="StateText_8f8f6be7"

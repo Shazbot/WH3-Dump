@@ -42,6 +42,7 @@ cm:add_pre_first_tick_callback(
 		faction_initiatives_unlocker:initiatives_unlocker_listeners()
 		
 		load_followers();
+		load_rare_items();
 		
 		-- only load faction scripts if we have a local faction		
 		if not cm:tol_campaign_key() then
@@ -148,7 +149,7 @@ function start_game_all_factions()
 	-- load the campaign quest battle listners script
 	set_piece_battle_abilities:initialise();
 	--add_gotrek_felix_listeners();
-	setup_ogre_contracts();
+	ogre_bounties:setup_ogre_contracts();
 	setup_khorne_skulls();
 	setup_ice_court_ai();
 	setup_kislev_devotion();

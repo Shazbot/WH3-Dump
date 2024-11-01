@@ -340,8 +340,8 @@
 						</button_athel_tamarha_dungeon>
 						<button_groms_cauldron this="B889694B-0D8E-4442-A8D5220329169D85"/>
 						<button_ogre_contracts this="0FF834EE-329C-4822-941FF4E8B79B7366">
-							<alert_icon this="2C6E4F7E-6B4E-4F7A-81FB83EF11D8C473"/>
-							<turns_icon this="A128679C-52E5-4052-9973C9C9EA6C7AB7"/>
+							<label_bounties_count this="6D42A134-8856-4A79-B33EBAFBB424C0C9"/>
+							<turns_icon this="59E9B380-DCCA-4B5D-ABC081073B4EAECC"/>
 						</button_ogre_contracts>
 						<button_ice_court this="850635A2-840B-4C98-AE9F62F48DA51126">
 							<alert_icon this="4F5B8D98-EB1E-43B7-8A402165AC020395"/>
@@ -1633,6 +1633,7 @@
 			uniqueguid_in_template="458D70B0-C64B-4305-A2955C1A0732C8F9"
 			uniqueguid="783DF905-0B60-41DE-89243885964AB7F4"
 			dimensions="55.00,55.00"
+			is_visible="false"
 			sound_category="UI_GBL_TMP_Round_Large_Button_Toggle">
 			<state_uniqueguids>
 				<state_uniqueguid
@@ -10896,6 +10897,7 @@
 			uniqueguid_in_template="458D70B0-C64B-4305-A2955C1A0732C8F9"
 			uniqueguid="9DFB4D20-CB4C-4D43-87B3BC5BC4A262E2"
 			dimensions="55.00,55.00"
+			is_visible="false"
 			tooltips_localised="false"
 			sound_category="UI_GBL_TMP_Round_Large_Button_Toggle">
 			<state_uniqueguids>
@@ -11277,7 +11279,6 @@
 			uniqueguid_in_template="458D70B0-C64B-4305-A2955C1A0732C8F9"
 			uniqueguid="0FF834EE-329C-4822-941FF4E8B79B7366"
 			dimensions="55.00,55.00"
-			is_visible="false"
 			sound_category="UI_GBL_TMP_Round_Large_Button_Toggle">
 			<state_uniqueguids>
 				<state_uniqueguid
@@ -11364,9 +11365,6 @@
 							name="event1"
 							value="PanelClosed_ogre_contracts"/>
 						<property
-							name="event2"
-							value="PendingMissionsChanged"/>
-						<property
 							name="event3"
 							value="CampaignTurnEnd"/>
 						<property
@@ -11377,7 +11375,7 @@
 							value=""/>
 						<property
 							name="inactive"
-							value="PendingMissionList.Size == 0 || IsFactionsTurn == false"/>
+							value="MissionList.Filter((BecameInactiveThisTurn || CompletionStatus == 0) &amp;&amp; MissionRecordContext.EventCategoryContext.Type == &quot;OgreContract&quot;).Size == 0"/>
 						<property
 							name="selected"
 							value="IsHUDPanelOpen(&quot;ogre_contracts&quot;)"/>
@@ -11402,8 +11400,8 @@
 			</user_properties>
 			<localised_texts>
 				<localised_text
-					tooltip_label="button_ogre_contracts_Tooltip_eaa3afec"
-					tooltip_text="Contracts||Accept missions offered by other factions. Completion will improve relations between you."/>
+					tooltip_label="ComponentTooltip_84593183"
+					tooltip_text="Bounties||Fulfill missions offered by other factions. Completion will improve relations between you."/>
 				<localised_text
 					state="active"
 					is_text_localised="false"/>
@@ -14076,7 +14074,7 @@
 				<callback_with_context
 					callback_id="ContextCommandLeftClick"
 					context_object_id="CcoCampaignCharacter"
-					context_function_id="MilitaryForceContext.SpawnForce(&quot;wh3_main_sla_disciple_army&quot;)"/>
+					context_function_id="ShowPrompt(Loc(&quot;summon_disciple_army&quot;), Loc(&quot;summon_disciple_army_desc&quot;), Do(MilitaryForceContext.SpawnForce(&quot;wh3_main_sla_disciple_army&quot;)))"/>
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_function_id="SelectedCharacter"/>
@@ -19617,7 +19615,7 @@
 		<button_diplomacy
 			this="6B164D67-1CCE-4DFA-843764B8C45E344F"
 			id="button_diplomacy"
-			offset="-75.00,13.00"
+			offset="-73.00,2.00"
 			soundcategory="UI_GBL_TMP_Round_Large_Button_Toggle"
 			uniqueguid="6B164D67-1CCE-4DFA-843764B8C45E344F"
 			currentstate="4587E7B1-BCBB-4BD8-9E6E8497FD9D9862"
@@ -25392,6 +25390,9 @@
 						<property
 							name="filtered_mission_category26"
 							value="Grudges"/>
+						<property
+							name="filtered_mission_category27"
+							value="OgreContract"/>
 						<property
 							name="filtered_mission_category3"
 							value="wulfharts_hunters"/>
@@ -32190,9 +32191,11 @@
 		<mission_indicator_parent
 			this="51BFA7D8-1CC4-4DC2-A8FC7E941DC3475E"
 			id="mission_indicator_parent"
+			offset="1.00,3.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			docking="Top Left"
+			dock_offset="1.00,3.00"
 			priority="1"
 			tooltipslocalised="true"
 			uniqueguid="51BFA7D8-1CC4-4DC2-A8FC7E941DC3475E"
@@ -32201,7 +32204,7 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextList"
-					context_function_id="PlayersFaction.ActiveMissionList.Filter((mission) =&gt; HasZoomLocation &amp;&amp; (Component(&quot;03864E19-EAB8-49E8-8A2EC45D3D4CAE01&quot;).ShouldShowMission(mission) || ExIsScheme || ExIsLegendaryGrudge) &amp;&amp; IsQuest == false &amp;&amp; IsContextValid(TargetCharacterContext) == false &amp;&amp; IsObjectiveOverSettlementWithGarrisonedArmy == false)">
+					context_function_id="PlayersFaction.ActiveMissionList.Filter((mission) =&gt; HasZoomLocation &amp;&amp; (Component(&quot;03864E19-EAB8-49E8-8A2EC45D3D4CAE01&quot;).ShouldShowMission(mission) || ExIsPieceOfEight || ExIsScheme || ExIsLegendaryGrudge) &amp;&amp; IsQuest == false &amp;&amp; IsContextValid(TargetCharacterContext) == false &amp;&amp; IsObjectiveOverSettlementWithGarrisonedArmy == false)">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -32563,67 +32566,6 @@
 				</newstate>
 			</states>
 		</alert_icon>
-		<alert_icon
-			this="2C6E4F7E-6B4E-4F7A-81FB83EF11D8C473"
-			id="alert_icon"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			visible="false"
-			docking="Top Left"
-			priority="1"
-			tooltipslocalised="true"
-			componentleveltooltip="New contracts are available for selection."
-			tooltiplabel="alert_icon_Tooltip_cd42bc80"
-			uniqueguid="2C6E4F7E-6B4E-4F7A-81FB83EF11D8C473"
-			currentstate="20F47637-4E42-4FC4-920F4229A272521D"
-			defaultstate="20F47637-4E42-4FC4-920F4229A272521D">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_function_id="PlayersFaction.PendingMissionList.Size &gt; 0">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="PendingMissionsChanged"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-				<property
-					name="dynamic_child_parent"
-					value="button_ogre_contracts"/>
-			</userproperties>
-			<componentimages>
-				<component_image
-					this="253FD477-0290-40BE-B9ECBC85F26272B0"
-					uniqueguid="253FD477-0290-40BE-B9ECBC85F26272B0"
-					imagepath="ui/skins/default/icon_alert_message.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="20F47637-4E42-4FC4-920F4229A272521D"
-					name="NewState"
-					width="24"
-					height="24"
-					interactive="true"
-					disabled="true"
-					shader_name="glow_pulse_t0"
-					uniqueguid="20F47637-4E42-4FC4-920F4229A272521D">
-					<imagemetrics>
-						<image
-							this="6B474772-47FC-4D26-B84C8BABDFE49BDA"
-							uniqueguid="6B474772-47FC-4D26-B84C8BABDFE49BDA"
-							componentimage="253FD477-0290-40BE-B9ECBC85F26272B0"
-							width="24"
-							height="24"
-							dockpoint="Center"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-		</alert_icon>
 		<vignette_holder
 			this="8DB0DC9D-9764-4357-A1D768A83C9AA3A0"
 			id="vignette_holder"
@@ -32967,97 +32909,6 @@
 				</glow>
 			</animations>
 		</icon>
-		<turns_icon
-			this="A128679C-52E5-4052-9973C9C9EA6C7AB7"
-			id="turns_icon"
-			offset="15.00,32.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			docking="Bottom Center"
-			dock_offset="21.00,11.00"
-			component_anchor_point="0.50,1.00"
-			priority="1"
-			tooltipslocalised="true"
-			componentleveltooltip="Turns until new set of contracts are issued"
-			tooltiplabel="turns_icon_Tooltip_23ece704"
-			uniqueguid="A128679C-52E5-4052-9973C9C9EA6C7AB7"
-			currentstate="B244F179-A347-4E84-8288E4AD1063B36D"
-			defaultstate="B244F179-A347-4E84-8288E4AD1063B36D">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_function_id="ScriptObjectContext(Format(&quot;turns_until_ogre_contracts_%s&quot;, PlayersFaction.FactionRecordContext.Key))"/>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoScriptObject"
-					context_function_id="StringValue">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="ScriptObjectValueUpdated"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoScriptObject"
-					context_function_id="StringValue != &quot;&quot;">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="ScriptObjectValueUpdated"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-				<property
-					name="dynamic_child_parent"
-					value="button_ogre_contracts"/>
-			</userproperties>
-			<componentimages>
-				<component_image
-					this="1A2B1399-40EA-447D-B9B91F2A7A90D2B2"
-					uniqueguid="1A2B1399-40EA-447D-B9B91F2A7A90D2B2"
-					imagepath="ui/skins/default/turns_banner.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="B244F179-A347-4E84-8288E4AD1063B36D"
-					name="NewState"
-					width="68"
-					height="34"
-					interactive="true"
-					disabled="true"
-					pixelcollision="true"
-					uniqueguid="B244F179-A347-4E84-8288E4AD1063B36D">
-					<imagemetrics>
-						<image
-							this="B1AB0202-1586-4E3E-ADD78235F03E8B36"
-							uniqueguid="B1AB0202-1586-4E3E-ADD78235F03E8B36"
-							componentimage="1A2B1399-40EA-447D-B9B91F2A7A90D2B2"
-							offset="4.00,0.00"
-							width="68"
-							height="34"
-							tile="true"
-							margin="0.00,40.00,0.00,30.00"/>
-					</imagemetrics>
-					<component_text
-						text="xx"
-						textvalign="Center"
-						texthalign="Center"
-						textxoffset="20.00,0.00"
-						texthbehaviour="Never split"
-						textlocalised="true"
-						textlabel="turns_icon_NewState_Text_780078"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
-			</states>
-		</turns_icon>
 		<alert_icon
 			this="8D637411-7DBD-45B5-A3EAB7EE522E8860"
 			id="alert_icon"
@@ -38669,11 +38520,11 @@
 		<label_grudges_count
 			this="4A2B32EF-E0E6-4407-8521DAF4BE0E78BF"
 			id="label_grudges_count"
-			offset="29.00,-22.00"
+			offset="26.00,-22.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			docking="Center"
-			dock_offset="23.00,-29.00"
+			dock_offset="20.00,-29.00"
 			component_anchor_point="0.50,0.50"
 			priority="1"
 			tooltipslocalised="true"
@@ -39301,5 +39152,190 @@
 				</newstate>
 			</states>
 		</label_item_count>
+		<label_bounties_count
+			this="6D42A134-8856-4A79-B33EBAFBB424C0C9"
+			id="label_bounties_count"
+			offset="26.00,-22.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center"
+			dock_offset="20.00,-29.00"
+			component_anchor_point="0.50,0.50"
+			priority="1"
+			tooltipslocalised="true"
+			componentleveltooltip="Number of active bounties"
+			tooltiplabel="ComponentTooltip_3c693758"
+			uniqueguid="6D42A134-8856-4A79-B33EBAFBB424C0C9"
+			currentstate="E71977EB-83DD-4E42-90F325599E5AF9B9"
+			defaultstate="E71977EB-83DD-4E42-90F325599E5AF9B9">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignFaction"
+					context_function_id="ActiveMissionList.Filter(MissionRecordContext.EventCategoryContext.Type == &quot;OgreContract&quot;).Size">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="MissionIssued"/>
+						<property
+							name="event1"
+							value="MissionEnded"/>
+						<property
+							name="event2"
+							value="CampaignTurnStart"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoStaticObject"
+					context_function_id="PlayersFaction"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+				<property
+					name="dynamic_child_parent"
+					value="button_grudges"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="E62342C6-6467-45B1-8DEF3E4379B87C41"
+					uniqueguid="E62342C6-6467-45B1-8DEF3E4379B87C41"
+					imagepath="ui/skins/default/spell_dial_grudges_display.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="E71977EB-83DD-4E42-90F325599E5AF9B9"
+					name="NewState"
+					width="42"
+					height="41"
+					interactive="true"
+					disabled="true"
+					pixelcollision="true"
+					uniqueguid="E71977EB-83DD-4E42-90F325599E5AF9B9">
+					<imagemetrics>
+						<image
+							this="D6E908A5-E320-406A-AA5E977871BDBD6A"
+							uniqueguid="D6E908A5-E320-406A-AA5E977871BDBD6A"
+							componentimage="E62342C6-6467-45B1-8DEF3E4379B87C41"
+							offset="0.00,-1.00"
+							width="42"
+							height="41"
+							dockpoint="Center"
+							dock_offset="0.00,-1.00"/>
+					</imagemetrics>
+					<component_text
+						text="999"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_dc593f29"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"
+						text_shader_name="drop_shadow_t0"
+						textshadervars="0.00,1.00,2.00,0.00"/>
+				</newstate>
+			</states>
+		</label_bounties_count>
+		<turns_icon
+			this="59E9B380-DCCA-4B5D-ABC081073B4EAECC"
+			id="turns_icon"
+			offset="7.00,32.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Bottom Center"
+			dock_offset="13.00,11.00"
+			component_anchor_point="0.50,1.00"
+			priority="1"
+			tooltipslocalised="true"
+			componentleveltooltip="Turns until bounties are issued"
+			tooltiplabel="ComponentTooltip_d9b2d4b0"
+			uniqueguid="59E9B380-DCCA-4B5D-ABC081073B4EAECC"
+			currentstate="54725025-2731-4E91-91ACA4744D465041"
+			defaultstate="54725025-2731-4E91-91ACA4744D465041">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_function_id="ScriptObjectContext(&quot;bounties_turn_start&quot;)"/>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoScriptObject"
+					context_function_id="RoundFloat(NumericValue - CampaignRoot.TurnNumber)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="ScriptObjectValueUpdated"/>
+						<property
+							name="event1"
+							value="CampaignTurnEnd"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoScriptObject"
+					context_function_id="RoundFloat(NumericValue - CampaignRoot.TurnNumber) &gt; 0">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="ScriptObjectValueUpdated"/>
+						<property
+							name="event1"
+							value="CampaignTurnEnd"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+				<property
+					name="dynamic_child_parent"
+					value="button_ogre_contracts"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="E67FB2C3-C60C-45F5-9B86E3198994862D"
+					uniqueguid="E67FB2C3-C60C-45F5-9B86E3198994862D"
+					imagepath="ui/skins/default/turns_banner.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="54725025-2731-4E91-91ACA4744D465041"
+					name="NewState"
+					width="68"
+					height="34"
+					interactive="true"
+					disabled="true"
+					pixelcollision="true"
+					uniqueguid="54725025-2731-4E91-91ACA4744D465041">
+					<imagemetrics>
+						<image
+							this="4CA2AC10-564D-4E11-B920C931DEC8E33B"
+							uniqueguid="4CA2AC10-564D-4E11-B920C931DEC8E33B"
+							componentimage="E67FB2C3-C60C-45F5-9B86E3198994862D"
+							offset="4.00,0.00"
+							width="68"
+							height="34"
+							tile="true"
+							margin="0.00,40.00,0.00,30.00"/>
+					</imagemetrics>
+					<component_text
+						text="2"
+						textvalign="Center"
+						texthalign="Center"
+						textxoffset="20.00,0.00"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_51c5d6bf"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+		</turns_icon>
 	</components>
 </layout>

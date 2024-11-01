@@ -1,5 +1,5 @@
 --[[
-Automatically generated via export from C:/Users/build/DaVE_local/branches/warhammer3/patch_5_2/warhammer/raw_data/db
+Automatically generated via export from C:/Users/build/DaVE_local/branches/warhammer3/patch_5_3/warhammer/raw_data/db
 Edit manually at your own risk
 --]]
 
@@ -103,6 +103,7 @@ CharacterGarrisonTargetAction = {}
 CharacterInfoPanelOpened = {}
 CharacterInitiativeActivationChangedEvent = {}
 CharacterLeavesGarrison = {}
+CharacterLeavesMilitaryForce = {}
 CharacterLoanedEvent = {}
 CharacterLootedSettlement = {}
 CharacterMarriage = {}

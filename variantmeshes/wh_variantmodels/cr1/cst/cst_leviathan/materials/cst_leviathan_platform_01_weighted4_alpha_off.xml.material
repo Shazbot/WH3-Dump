@@ -1,6 +1,6 @@
 <material>
  <name>cst_leviathan_platform_01_weighted4_alpha_off.xml</name>
- <shader>shaders/weighted4_character.xml.shader</shader>
+ <shader>shaders/weighted4_flow_overlay.xml.shader</shader>
  <sort_override>255</sort_override>
  <textures>
   <texture>
@@ -12,8 +12,28 @@
    <source>commontextures/bloodmap.dds</source>
   </texture>
   <texture>
-   <slot version="2">t_xml_dither</slot>
-   <source>commontextures/dither.dds</source>
+   <slot version="2">t_xml_flow_map</slot>
+   <source>VariantMeshes/wh_variantmodels/cr1/cst/cst_leviathan/tex/cst_leviathan_platform_01_flow_map.dds</source>
+  </texture>
+  <texture>
+   <slot version="2">t_xml_flow_noise</slot>
+   <source>commontextures/winds_of_magic_noise.dds</source>
+  </texture>
+  <texture>
+   <slot version="2">t_xml_flow_normal</slot>
+   <source>commontextures/slime_normal.dds</source>
+  </texture>
+  <texture>
+   <slot version="2">t_xml_flow_normal_2</slot>
+   <source>commontextures/slime_normal.dds</source>
+  </texture>
+  <texture>
+   <slot version="2">t_xml_flow_texture</slot>
+   <source>commontextures/slime_base_colour.dds</source>
+  </texture>
+  <texture>
+   <slot version="2">t_xml_flow_texture_2</slot>
+   <source>commontextures/slime_base_colour.dds</source>
   </texture>
   <texture>
    <slot version="2">t_xml_mask</slot>
@@ -28,12 +48,12 @@
    <source>VariantMeshes/wh_variantmodels/cr1/cst/cst_leviathan/tex/cst_leviathan_platform_01_normal.dds</source>
   </texture>
   <texture>
-   <slot version="2">t_xml_distortion_noise</slot>
-   <source>commontextures/winds_of_magic_noise.dds</source>
+   <slot version="2">t_xml_dither</slot>
+   <source>commontextures/dither.dds</source>
   </texture>
   <texture>
-   <slot version="2">t_xml_distortion</slot>
-   <source>commontextures/winds_of_magic_specular.dds</source>
+   <slot version="2">t_xml_df7959d8_d174_49d2_88f1_ffc28b954e5f</slot>
+   <source>commontextures/winds_of_magic_noise.dds</source>
   </texture>
  </textures>
  <params>
@@ -41,21 +61,6 @@
    <name>blood_uv_scale</name>
    <type>float2</type>
    <value>1,1</value>
-  </param>
-  <param>
-   <name>diffuse_tint_colour</name>
-   <type>float3</type>
-   <value>0,0,0</value>
-  </param>
-  <param>
-   <name>diffuse_tint_mask</name>
-   <type>float4</type>
-   <value>0,0,0,0</value>
-  </param>
-  <param>
-   <name>diffuse_tint_variation</name>
-   <type>float</type>
-   <value>0</value>
   </param>
   <param>
    <name>faction1_tint_variation</name>
@@ -83,9 +88,39 @@
    <value>0</value>
   </param>
   <param>
-   <name>fuzz_amount</name>
+   <name>flow_distortion_stength</name>
+   <type>float2</type>
+   <value>0.1,0.1</value>
+  </param>
+  <param>
+   <name>flow_noise_speed</name>
    <type>float</type>
-   <value>0</value>
+   <value>0.01</value>
+  </param>
+  <param>
+   <name>flow_noise_tiling</name>
+   <type>float</type>
+   <value>3</value>
+  </param>
+  <param>
+   <name>flow_power</name>
+   <type>float</type>
+   <value>0.07</value>
+  </param>
+  <param>
+   <name>flow_speed</name>
+   <type>float</type>
+   <value>0.1</value>
+  </param>
+  <param>
+   <name>flow_texture_tiling</name>
+   <type>float2</type>
+   <value>2,2</value>
+  </param>
+  <param>
+   <name>overlay_strength</name>
+   <type>float</type>
+   <value>1</value>
   </param>
   <param>
    <name>receives_blood</name>

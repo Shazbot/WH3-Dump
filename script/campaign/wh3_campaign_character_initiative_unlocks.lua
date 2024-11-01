@@ -1382,7 +1382,7 @@ function collect_initiatives(character)
 					for j = 1, #current_initiative_template.initiative_key do
 						if current_initiative_key == current_initiative_template.initiative_key[j] then
 							local initiative = initiative_unlock:new(
-								current_initiative_template.initiative_key,
+								current_initiative_template.initiative_key[j],
 								current_initiative_template.event,
 								current_initiative_template.condition,
 								current_initiative_template.grant_immediately
@@ -1400,8 +1400,8 @@ end;
 function initiative_unlock:new(initiative_key, event, condition, grant_immediately)
 
 
-	if not is_table(initiative_key) then
-		script_error("ERROR: initiative_unlock:new() called but supplied initiative_key [" .. tostring(initiative_key) .."] is not a table");
+	if not is_string(initiative_key) then
+		script_error("ERROR: initiative_unlock:new() called but supplied initiative_key [" .. tostring(initiative_key) .."] is not a string");
 		return false;
 	elseif not is_table(event) then
 		script_error("ERROR: initiative_unlock:new() called but supplied event [" .. tostring(event) .."] is not a table");
@@ -1428,55 +1428,48 @@ function initiative_unlock:start(cqi)
 	local cm = self.cm;
 		
 	for i = 1, #self.event do
+		--out.design("Initiatives -- Starting listener for Initiative with key [" .. self.initiative_key .. "] for character with cqi [" .. cqi .. "]");
+		
+		core:add_listener(
+			self.initiative_key .. "_" .. cqi .. "_listener",
+			self.event[i],
+			function(context)
+				local character_cqi = false;
+				
+				-- get the characters cqi from the event
+				if is_function(context.character) and context:character() and not context:character():is_null_interface() then
+					character_cqi = context:character():command_queue_index();
+				elseif is_function(context.parent_character) and context:parent_character() and not context:parent_character():is_null_interface() then
+					character_cqi = context:parent_character():command_queue_index();
+				end;
+				
+				return character_cqi and character_cqi == cqi and self.condition(context);
+			end,
+			function()
+				out.design("Initiatives -- Conditions met for event [" .. self.event[i] .. "], unlocking Initiative with key [" .. self.initiative_key .. "] for character with cqi [" .. cqi .. "]");
+				
+				local character = cm:get_character_by_cqi(cqi);
 
-		for j = 1, #self.initiative_key do
-
-			--out.design("Initiatives -- Starting listener for Initiative with key [" .. self.initiative_key[j] .. "] for character with cqi [" .. cqi .. "]");
-			
-			core:add_listener(
-				self.initiative_key[j] .. "_" .. cqi .. "_listener",
-				self.event[i],
-				function(context)
-					local character_cqi = false;
+				for k, initiative_set in model_pairs(character:character_details():character_initiative_sets()) do
+					local initiative = initiative_set:lookup_initiative_by_key(self.initiative_key)
 					
-					-- get the characters cqi from the event
-					if is_function(context.character) and context:character() and not context:character():is_null_interface() then
-						character_cqi = context:character():command_queue_index();
-					elseif is_function(context.parent_character) and context:parent_character() and not context:parent_character():is_null_interface() then
-						character_cqi = context:parent_character():command_queue_index();
-					end;
-					
-					return character_cqi and character_cqi == cqi and self.condition(context);
-				end,
-				function()
-					out.design("Initiatives -- Conditions met for event [" .. self.event[i] .. "], unlocking Initiative with key [" .. self.initiative_key[j] .. "] for character with cqi [" .. cqi .. "]");
-					
-					local character = cm:get_character_by_cqi(cqi);
-
-					for k, initiative_set in model_pairs(character:character_details():character_initiative_sets()) do
-						if not initiative_set:lookup_initiative_by_key(self.initiative_key[j]):is_null_interface() then
-							cm:toggle_initiative_script_locked(initiative_set, self.initiative_key[j], false);
-							if self.grant_immediately then
-								cm:toggle_initiative_active(initiative_set, self.initiative_key[j], true);
-							end
+					if not initiative:is_null_interface() and initiative:is_script_locked() then
+						cm:toggle_initiative_script_locked(initiative_set, self.initiative_key, false);
+						if self.grant_immediately then
+							cm:toggle_initiative_active(initiative_set, self.initiative_key, true);
 						end
 					end
-					
-					for l = 1, #self.initiative_key do 
-						core:remove_listener(self.initiative_key[l] .. "_" .. cqi .. "_listener");
-					end
+				end
+				
+				core:remove_listener(self.initiative_key .. "_" .. cqi .. "_listener");
 
-					-- Save number of Initiatives unlocked by this faction, and trigger an event for narrative scripts
-					local saved_value_name = "num_big_names_unlocked_" .. character:faction():name();
-					local num_big_names_unlocked = cm:get_saved_value(saved_value_name) or 0;
-					cm:set_saved_value(saved_value_name, num_big_names_unlocked + 1);
-					core:trigger_custom_event("ScriptEventBigNameUnlocked", {character = character, initiative_key = self.initiative_key[j]});
-
-				end,
-				false
-			);
-
-		end
-
+				-- Save number of Initiatives unlocked by this faction, and trigger an event for narrative scripts
+				local saved_value_name = "num_big_names_unlocked_" .. character:faction():name();
+				local num_big_names_unlocked = cm:get_saved_value(saved_value_name) or 0;
+				cm:set_saved_value(saved_value_name, num_big_names_unlocked + 1);
+				core:trigger_custom_event("ScriptEventBigNameUnlocked", {character = character, initiative_key = self.initiative_key});
+			end,
+			false
+		);
 	end;
 end;

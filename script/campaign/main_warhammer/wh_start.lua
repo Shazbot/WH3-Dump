@@ -21,6 +21,7 @@ cm:add_pre_first_tick_callback(
 		faction_initiatives_unlocker:initiatives_unlocker_listeners()
 		
 		load_followers();
+		load_rare_items();
 	end
 );
 
@@ -289,7 +290,7 @@ function start_game_all_factions()
 	def_slaves:start_listeners();
 
 	-- WH3
-	setup_ogre_contracts();
+	ogre_bounties:setup_ogre_contracts();
 	setup_khorne_skulls();
 	setup_ice_court_ai();
 	setup_kislev_devotion();

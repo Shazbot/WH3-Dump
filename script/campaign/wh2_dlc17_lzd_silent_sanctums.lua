@@ -10,27 +10,27 @@ local m_sanctum_slot_set_key = "wh2_dlc17_slot_set_silent_sanctum"
 local m_sanctum_ritual_key = "wh2_dlc17_lzd_ritual_unlock_silent_sanctum"
 local m_sanctum_new_gems_incident_key = "wh2_dlc17_lzd_oxyotl_silent_sanctums_new_sanctum_point"
 
-local m_pooled_resource_sanctum_stone_cap = 8
+m_pooled_resource_sanctum_stone_cap = 8
 local m_pooled_resource_sanctum_gems = "lzd_sanctum_gems"
 local m_pooled_resource_sanctum_points = "lzd_sanctum_points"
 local m_pooled_resource_factor_sanctum_gems = "wh2_dlc17_resource_factor_retrieved"
 local m_pooled_resource_factor_sanctum_gems_converted = "wh2_dlc17_resource_factor_gem_sets_completed"
 local m_pooled_resource_factor_sanctum_points = "wh2_dlc17_resource_factor_sanctum_sets_gained"
 
-local m_vision_building_key = "wh2_dlc17_silent_sanctum_core_1"
-local m_transport_building_key = "wh2_dlc17_silent_sanctum_transport_0"
-local m_starting_building_key = "wh2_dlc17_silent_sanctum_upkeep_0"
+m_vision_building_key = "wh2_dlc17_silent_sanctum_core_1"
+m_transport_building_key = "wh2_dlc17_silent_sanctum_transport_0"
+m_starting_building_key = "wh2_dlc17_silent_sanctum_upkeep_0"
 
 local m_current_transport_building_region = ""
 
 local m_regions_with_sanctums = {}
 local m_region_to_lord_list = {}
 
-local m_starting_sanctum_regions = {
+m_starting_sanctum_regions = {
 	["main_warhammer"] = "wh3_main_combi_region_the_godless_crater"
 }
 
-local m_sanctum_ambush_config = {
+m_sanctum_ambush_config = {
 	ambush_min_value = 0,
 	ambush_max_value = 100,
 	ambush_chance = {

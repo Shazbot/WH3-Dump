@@ -54,7 +54,7 @@ local m_latest_marker_interaction_cqi = false
 local m_scripted_battle_active = {active = false, mission_key = nil, mission_id = nil}
 
 local m_invasion_count = 0
-local m_chaos_force_details = {
+m_chaos_force_details = {
 	{template_key = "wh_main_sc_chs_chaos", faction_key = "wh_main_chs_chaos_qb1", general_subtype = "wh_main_chs_lord", subculture = "wh_main_sc_chs_chaos", can_raid = false},
 	{template_key = "wh_dlc03_sc_bst_beastmen", faction_key = "wh2_main_bst_blooded_axe", general_subtype = "wh_dlc03_bst_beastlord", subculture = "wh_dlc03_sc_bst_beastmen", can_raid = true},
 	{template_key = "wh_dlc08_sc_nor_norsca", faction_key = "wh2_dlc17_nor_deadwood_ravagers", general_subtype = "wh_main_nor_marauder_chieftain", subculture = "wh_dlc08_sc_nor_norsca", can_raid = true},
@@ -153,7 +153,7 @@ local m_army_spawn_distance = {
 	max = 20
 }
 
-local m_mission_config = {
+m_mission_config = {
 	herdstone = {
 		objective = "RAZE_OR_OWN_SETTLEMENTS",
 		title = {
@@ -809,7 +809,7 @@ local m_mission_config = {
 	}
 }
 
-local m_starting_mission_config = {
+m_starting_mission_config = {
 	difficulty = "medium",
 	id = "oxy_starting_mission",
 	region = {

@@ -78,7 +78,7 @@ core:add_listener(
 	true,
 	function(context)
 		local character = context:character();
-		return character:won_battle() and cm:char_is_general_with_army(character) and not context:has_stolen_ancillary() and attempt_to_award_random_magical_item(context);
+		return character:won_battle() and cm:char_is_general_with_army(character) and not context:character_has_stolen_ancillary() and attempt_to_award_random_magical_item(context);
 	end,
 	true
 );

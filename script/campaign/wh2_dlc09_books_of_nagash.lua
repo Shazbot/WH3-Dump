@@ -6,7 +6,7 @@ local books_mission_factions = {};
 local books_faction_specific = true;
 local books_vfx_key = "scripted_effect3";
 
-local book_objective_overrides = {
+book_objective_overrides = {
 	["CAPTURE_REGIONS"] = "wh2_dlc09_objective_override_occupy_settlement",
 	["ENGAGE_FORCE"] = "wh2_dlc09_objective_override_defeat_rogue_army"
 };

@@ -3206,7 +3206,7 @@ end;
 
 
 --- @function output_campaign_obj
---- @desc Prints information about certain campaign objects (characters, regions, factions or military force) to the debug console spool. Preferably don't call this - just call <code>out(object)</code> insead.
+--- @desc Prints information about certain campaign objects (characters, regions, settlements, garrison_residences, factions or military forces) to the debug console spool. Preferably don't call this - just call <code>out(object)</code> insead.
 --- @p object campaign object
 function campaign_manager:output_campaign_obj(input, verbosity)
 	-- possible values of verbosity: 0 = full version, 1 = abridged, 2 = one line summary
@@ -3277,8 +3277,8 @@ function campaign_manager:output_campaign_obj(input, verbosity)
 			out("==============================================================");
 			out("");
 		end;
-	
-	
+
+
 	-- REGION
 	elseif is_region(input) then	
 		if verbosity == 0 then
@@ -3339,8 +3339,71 @@ function campaign_manager:output_campaign_obj(input, verbosity)
 			out("==============================================================");
 			out("");
 		end;
-	
-	
+
+
+	-- SETTLEMENT
+	elseif is_settlement(input) or (is_garrisonresidence(input) and input:is_settlement()) then
+		local settlement = (not is_settlement(input) and input:is_settlement()) and input:settlement_interface() or input
+		local region = settlement:region()
+
+		if verbosity == 0 then
+			out("")
+			out("SETTLEMENT:")
+			out("==============================================================")
+		end
+		out.inc_tab()
+		out("settlement id:\t\t\t" .. settlement:key())
+
+		if verbosity == 0 then
+			out("owning faction:")
+			out.inc_tab()
+			self:output_campaign_obj(region:owning_faction(), 1)
+			out.dec_tab()
+		else
+			out("owning faction:\t" .. self:campaign_obj_to_string(region:owning_faction()))
+		end
+
+		if region:garrison_residence():has_army() then
+			if verbosity == 0 then
+				out("garrisoned army:")
+				out.inc_tab()
+				self:output_campaign_obj(region:garrison_residence():army(), 1)
+				out.dec_tab()
+			else
+				out("garrisoned army: " .. self:campaign_obj_to_string(region:garrison_residence():army()))
+			end
+		else
+			out("garrisoned army:\t<no army>")
+		end
+
+		if region:garrison_residence():has_navy() then
+			if verbosity == 0 then
+				out("garrisoned navy:")
+				out.inc_tab()
+				self:output_campaign_obj(region:garrison_residence():navy(), 1)
+				out.dec_tab()
+			else
+				out("garrisoned navy: " .. self:campaign_obj_to_string(region:garrison_residence():navy()))
+			end
+		else
+			out("garrisoned navy:\t<no navy>")
+		end
+
+		out("under siege:\t\t" .. tostring(region:garrison_residence():is_under_siege()))
+
+		if verbosity == 0 then
+			out("num buildings:\t" .. tostring(region:num_buildings()))
+			out("public order:\t\t" .. tostring(region:public_order()))
+		end
+
+		out.dec_tab()
+
+		if verbosity == 0 then
+			out("==============================================================")
+			out("")
+		end
+
+
 	-- FACTION
 	elseif is_faction(input) then
 		if verbosity == 0 then
@@ -3483,7 +3546,7 @@ end;
 
 
 --- @function campaign_obj_to_string
---- @desc Returns a string summary description when passed certain campaign objects. Supported object types are character, region, faction, military force, and unit.
+--- @desc Returns a string summary description when passed certain campaign objects. Supported object types are character, region, settlement, garrison_residence, faction, military force, and unit.
 --- @p object campaign object
 --- @r string summary of object
 function campaign_manager:campaign_obj_to_string(input)
@@ -3492,6 +3555,10 @@ function campaign_manager:campaign_obj_to_string(input)
 	
 	elseif is_region(input) then
 		return ("REGION name[" .. input:name() .. "], owning faction[" .. input:owning_faction():name() .. "]");
+	
+	elseif is_settlement(input) or (is_garrisonresidence(input) and input:is_settlement()) then
+		local settlement = (not is_settlement(input) and input:is_settlement()) and input:settlement_interface() or input
+		return ("SETTLEMENT id[" .. settlement:key() .. "], owning faction[" .. settlement:owning_faction():name() .. "]");
 		
 	elseif is_faction(input) then
 		return ("FACTION name[" .. input:name() .. "], num regions[" .. tostring(input:region_list():num_items()) .. "]");
