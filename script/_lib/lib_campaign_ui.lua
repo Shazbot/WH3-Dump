@@ -10674,27 +10674,28 @@ end;
 --- @function highlight_ogre_contracts
 --- @desc Highlights the Winds of Magic Manipulation button and panel. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
 --- @p [opt=false] boolean show highlight, Show highlight.
---- @p [opt=nil] number pulse strength override, Pulse Strength Override. Default is 10 for smaller components such as buttons, and 5 for larger components such as panels. Set a higher number for a more pronounced pulsing.
+--- @p [opt=nil] number panel pulse strength override, Pulse Strength Override. Default is 5. Set a higher number for a more pronounced pulsing.
+--- @p [opt=nil] number button pulse strength override, Pulse Strength Override. Default is 5. Set a higher number for a more pronounced pulsing.
 --- @p [opt=false] boolean force highlight, Forces the highlight to show even if the <code>help_page_link_highlighting</code> ui override is set.
-function campaign_ui_manager:highlight_ogre_contracts(value, pulse_strength, force_highlight)
+function campaign_ui_manager:highlight_ogre_contracts(value, panel_pulse_strength, button_pulse_strength, force_highlight)
 	if not self.help_page_link_highlighting_permitted and not force_highlight then
 		return;
 	end;
 	
 	local ui_root = core:get_ui_root();
-	local pulse_strength_to_use = pulse_strength or self.panel_pulse_strength;
-	
 	local uic_panel = find_uicomponent(ui_root, "ogre_contracts");
 	if uic_panel and uic_panel:Visible(true) then
+		local pulse_strength_to_use = panel_pulse_strength or self.panel_pulse_strength;
 		pulse_uicomponent(uic_panel, value, pulse_strength_to_use, true);
 		
 		if value then
-			table.insert(self.unhighlight_action_list, function() self:highlight_ogre_contracts(false, pulse_strength_to_use, force_highlight) end);
+			table.insert(self.unhighlight_action_list, function() self:highlight_ogre_contracts(false) end);
 		end;
 	else
 		local uic_button = find_uicomponent(ui_root, "hud_campaign", "faction_buttons_docker", "button_ogre_contracts");
 		if uic_button and uic_button:Visible(true) then
-			pulse_uicomponent(uic_button, value, pulse_strength_to_use or self.panel_pulse_strength, true);
+			local pulse_strength_to_use = button_pulse_strength or self.panel_pulse_strength;
+			pulse_uicomponent(uic_button, value, pulse_strength_to_use, true);
 			
 			if value then
 				table.insert(self.unhighlight_action_list, function() self:highlight_ogre_contracts(false) end);

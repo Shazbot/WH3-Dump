@@ -95,6 +95,9 @@
 								</turns_display>
 							</expiry_frame>
 						</bounty_details>
+						<button_cancel_holder this="65E1FA03-3CC4-4100-BA67C85D7261B070">
+							<button_cancel_mission this="5E08E48C-8CD2-411D-8E8369E373DA61A4"/>
+						</button_cancel_holder>
 						<status_overlay this="2EDE927F-F492-4471-865DFDC63A5078B6"/>
 					</template_bounty>
 				</contracts_list>
@@ -133,6 +136,114 @@
 				</default>
 			</states>
 		</root>
+		<button_cancel_mission
+			this="5E08E48C-8CD2-411D-8E8369E373DA61A4"
+			id="button_cancel_mission"
+			template_id="round_small_button"
+			part_of_template="true"
+			uniqueguid_in_template="82F58892-7F49-4844-B36443AED497BEEF"
+			uniqueguid="5E08E48C-8CD2-411D-8E8369E373DA61A4"
+			dimensions="38.00,38.00"
+			dock_point="Center"
+			priority="50"
+			sound_category="UI_GBL_TMP_Round_Small_Button">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="9A0E3B08-18B0-4BA4-A44B3F8FCEB039D8"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="A3D00609-EC4F-4C0F-AB1CC6939F076A56"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="1D47BF01-B98B-4CCB-A8E9614879D2951B"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="064ED411-4ECF-4F5C-9ADCFC3E89B621BA"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="789C8ECA-9E11-4EF5-8665486D9AAB9F88"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/icon_stats_reset_all.png"
+					uniqueguid="B12D3777-87C1-4197-8567A85CD2BCBA04"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_pressed.png"
+					uniqueguid="503BCA5B-B164-40E0-9DF0C2351636C2A7"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_hover.png"
+					uniqueguid="ED33BCA6-90B1-405C-A34851E8AEE03F5D"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_active.png"
+					uniqueguid="6B43580F-183D-4D10-851FBAF2234B8AAE"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_inactive.png"
+					uniqueguid="ECE9AC43-1DCF-4802-BD8A6CAE6097C574"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_underlay.png"
+					uniqueguid="1DF6EA25-D621-444C-87DC85732887FFF9"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="Button"/>
+				<callback_with_context callback_id="StatePropagatorCallback">
+					<child_m_user_properties>
+						<property
+							name="use_transitions"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoCampaignMission"
+					context_function_id="CancelMission"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignMission"
+					context_function_id="IsCancelled == false &amp;&amp; Completed == false &amp;&amp; CanBeCancelled"/>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="resizable"/>
+				<property
+					name="disable_override0"
+					value="CallbackAnimTrigger"/>
+				<property
+					name="dynamic_image"
+					value="0"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text
+					tooltip_label="ComponentTooltip_4b7814c2"
+					tooltip_text="Decline Bounty||A new Bounty will be issued next turn."/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/icon_stats_reset_all.png"/>
+				<element value="ui/skins/default/button_round_small_pressed.png"/>
+				<element value="ui/skins/default/button_round_small_hover.png"/>
+				<element value="ui/skins/default/button_round_small_active.png"/>
+				<element value="ui/skins/default/button_round_small_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_underlay.png"/>
+				<element value=""/>
+			</override_images>
+		</button_cancel_mission>
 		<button_info
 			this="EF497E3F-7FD2-474B-A1E604D3DB850D4F"
 			id="button_info"
@@ -3968,5 +4079,26 @@
 				</columnwidths>
 			</LayoutEngine>
 		</title_holder>
+		<button_cancel_holder
+			this="65E1FA03-3CC4-4100-BA67C85D7261B070"
+			id="button_cancel_holder"
+			offset="311.00,29.00"
+			docking="Top Right"
+			dock_offset="-23.00,29.00"
+			component_anchor_point="1.00,0.00"
+			priority="50"
+			tooltipslocalised="true"
+			uniqueguid="65E1FA03-3CC4-4100-BA67C85D7261B070"
+			currentstate="3C72EA80-24F6-4645-96CC54641CF3D065"
+			defaultstate="3C72EA80-24F6-4645-96CC54641CF3D065">
+			<states>
+				<default
+					this="3C72EA80-24F6-4645-96CC54641CF3D065"
+					name="default"
+					width="36"
+					height="40"
+					uniqueguid="3C72EA80-24F6-4645-96CC54641CF3D065"/>
+			</states>
+		</button_cancel_holder>
 	</components>
 </layout>

@@ -3413,7 +3413,7 @@ function setup_campaign_help_pages()
 	tl_contracts_link = tooltip_listener:new(
 		"tooltip_campaign_"..script_feature_name.."_link",
 		function()
-			uim:highlight_ogre_contracts(true);
+			uim:highlight_ogre_contracts(true, 1.5);
 		end,
 		function()
 			uim:unhighlight_all_for_tooltips();
@@ -3432,7 +3432,7 @@ function setup_campaign_help_pages()
 	tl_contracts_panel = tooltip_listener:new(
 		"tooltip_campaign_contracts_panel", 
 		function() 
-			uim:highlight_ogre_contracts(true);
+			uim:highlight_ogre_contracts(true, 1.5);
 		end,
 		function() 
 			uim:unhighlight_all_for_tooltips();

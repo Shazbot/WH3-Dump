@@ -39,23 +39,67 @@ core:add_listener(
 );
 
 core:add_listener(
-	"DraescaHelmFactionTurnEnd",
-	"FactionTurnEnd",
+	"SisterSwordsFactionTurnStart",
+	"FactionTurnStart",
 	function(context)
-		return context:faction():ancillary_exists("wh3_main_anc_armour_helm_of_draesca");
+		return context:faction():ancillary_exists("wh3_main_anc_weapon_elthraician") and context:faction():ancillary_exists("wh3_main_anc_weapon_cynatcian");
 	end,
 	function(context)
-		if cm:model():random_percent(1) then
+		if cm:model():random_percent(5) then
+			local elthraician_character = nil;
+			local elthraician_region = -1;
+			local cynatcian_character = nil;
+			local cynatcian_region = -2;
 			local faction = context:faction();
 			local char_list = faction:character_list();
 
 			for i = 0, char_list:num_items() - 1 do
 				local char = char_list:item_at(i);
 				
-				if char:has_ancillary("wh3_main_anc_armour_helm_of_draesca") == true then
-					if char:has_military_force() == true or char:is_embedded_in_military_force() == true then
-						local cqi = char:command_queue_index();
+				if char:has_ancillary("wh3_main_anc_weapon_elthraician") == true then
+					if char:has_region() == true then
+						elthraician_character = char;
+						elthraician_region = char:region():cqi();
+					end
+				elseif char:has_ancillary("wh3_main_anc_weapon_cynatcian") == true then
+					if char:has_region() == true then
+						cynatcian_character = char;
+						cynatcian_region = char:region():cqi();
+					end
+				end
+			end
 
+			if elthraician_region == cynatcian_region then
+				campaign_traits:give_trait(elthraician_character, "wh3_trait_sister_swords", 1, 100);
+				campaign_traits:give_trait(cynatcian_character, "wh3_trait_sister_swords", 1, 100);
+			end
+		end
+	end,
+	true
+);
+
+core:add_listener(
+	"DraescaHelmFactionTurnEnd",
+	"FactionTurnEnd",
+	function(context)
+		return context:faction():ancillary_exists("wh3_main_anc_armour_helm_of_draesca");
+	end,
+	function(context)
+		local helm_death_chance = 1;
+		local helm_trait_chance = 2;
+		local faction = context:faction();
+		local char_list = faction:character_list();
+
+		for i = 0, char_list:num_items() - 1 do
+			local char = char_list:item_at(i);
+			
+			if char:has_ancillary("wh3_main_anc_armour_helm_of_draesca") == true then
+				if char:has_military_force() == true or char:is_embedded_in_military_force() == true then
+					local cqi = char:command_queue_index();
+
+					if cm:model():random_percent(helm_trait_chance) then
+						campaign_traits:give_trait(char, "wh3_trait_draesca", 1, 100);
+					elseif cm:model():random_percent(helm_death_chance) then
 						if char:character_details():is_immortal() == true then
 							if char:is_wounded() == false then
 								-- Use minimum time of 2 instead of 1 because this happens during end turn; 1 would mean the character is available immediately at the start of the next turn.
@@ -66,8 +110,8 @@ core:add_listener(
 							cm:kill_character(cqi, false);
 						end
 					end
-					break; -- We can break out because only one of these items exists
 				end
+				break; -- We can break out because only one of these items exists
 			end
 		end
 	end,

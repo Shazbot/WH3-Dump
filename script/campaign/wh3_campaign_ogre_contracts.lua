@@ -115,21 +115,14 @@ function ogre_bounties:attempt_to_issue_ogre_contracts(faction_key, num_contract
 	local used_general_targets = {}
 	local used_region_targets = {}
 	
-	local faction_pos_x = 0
-	local faction_pos_y = 0
+	local objs_to_test_distance = faction:military_force_list()
 	
-	if faction_has_faction_leader and faction:faction_leader():has_military_force() then
-		local faction_leader = faction:faction_leader()
-		
-		faction_pos_x = faction_leader:logical_position_x()
-		faction_pos_y = faction_leader:logical_position_y()
-	elseif faction_has_home_region then
-		local capital = faction:home_region():settlement()
-		
-		faction_pos_x = capital:logical_position_x()
-		faction_pos_y = capital:logical_position_y()
-	else
-		-- player doesn't have a faction leader or a capital somehow, not issuing contracts
+	if faction_has_home_region then
+		objs_to_test_distance = faction_region_list
+	end
+
+	if objs_to_test_distance:is_empty() then
+		-- player doesn't have an army or a capital somehow, not issuing contracts
 		return false
 	end
 	
@@ -147,13 +140,13 @@ function ogre_bounties:attempt_to_issue_ogre_contracts(faction_key, num_contract
 		-- select an enemy to target
 		local enemies = selected_issuing_faction:factions_at_war_with()
 		
-		-- filter out any factions that are dead or have no armies
+		-- filter out any factions that are dead or have no armies or are a team mate of the player
 		local filtered_enemies = {}
 		
 		for j = 0, enemies:num_items() - 1 do
 			local current_enemy = enemies:item_at(j)
 			
-			if not current_enemy:is_dead() and not current_enemy:military_force_list():is_empty() and not current_enemy:has_effect_bundle("wh3_main_bundle_realm_factions") and not current_enemy:has_effect_bundle("wh3_main_bundle_rift_factions") then
+			if not current_enemy:is_team_mate(faction) and not current_enemy:is_dead() and not current_enemy:military_force_list():is_empty() and not current_enemy:has_effect_bundle("wh3_main_bundle_realm_factions") and not current_enemy:has_effect_bundle("wh3_main_bundle_rift_factions") then
 				table.insert(filtered_enemies, current_enemy)
 			end
 		end
@@ -201,6 +194,7 @@ function ogre_bounties:attempt_to_issue_ogre_contracts(faction_key, num_contract
 		out.design("\tSelected mission is " .. selected_mission[1])
 		
 		local obj_str = false
+		local target = ""
 		local mission_distance = 0 -- convert the distance into a duration
 		
 		if selected_mission[1] == "KILL_CHARACTER_BY_ANY_MEANS" then
@@ -228,7 +222,6 @@ function ogre_bounties:attempt_to_issue_ogre_contracts(faction_key, num_contract
 			end
 			
 			local closest_distance = 500000
-			local chosen_general_cqi = false
 			
 			for j = 1, #valid_generals do
 				local current_general_fm = cm:get_family_member_by_cqi(valid_generals[j])
@@ -237,20 +230,36 @@ function ogre_bounties:attempt_to_issue_ogre_contracts(faction_key, num_contract
 					local current_general = current_general_fm:character()
 					
 					if not current_general:is_null_interface() then
-						local distance = distance_squared(current_general:logical_position_x(), current_general:logical_position_y(), faction_pos_x, faction_pos_y)
-						
-						if distance < closest_distance then
-							chosen_general_cqi = valid_generals[j]
-							closest_distance = distance
+						local general_x = current_general:logical_position_x()
+						local general_y = current_general:logical_position_y()
+
+						for _, obj in model_pairs(objs_to_test_distance) do
+							local x = 0
+							local y = 0
+
+							if is_region(obj) then
+								x = obj:settlement():logical_position_x()
+								y = obj:settlement():logical_position_y()
+							else
+								x = obj:logical_position_x()
+								y = obj:logical_position_y()
+							end
+
+							local distance = distance_squared(general_x, general_y, x, y)
+
+							if distance < closest_distance then
+								target = tostring(valid_generals[j])
+								closest_distance = distance
+							end
 						end
 					end
 				end
 			end
 			
-			if chosen_general_cqi then
-				used_general_targets[selected_issuing_faction_name .. chosen_general_cqi] = true
+			if target ~= "" then
+				used_general_targets[selected_issuing_faction_name .. target] = true
 				
-				obj_str = "family_member " .. chosen_general_cqi
+				obj_str = "family_member " .. target
 
 				mission_distance = closest_distance
 			end
@@ -258,7 +267,6 @@ function ogre_bounties:attempt_to_issue_ogre_contracts(faction_key, num_contract
 			-- get the closest region to the player, ensuring the same region is not used by the same issuer more than once
 			local closest_distance = 500000
 			local region_list = selected_enemy:region_list()
-			local chosen_region_key = ""
 			
 			for j = 0, region_list:num_items() - 1 do
 				local current_region = region_list:item_at(j)
@@ -266,19 +274,35 @@ function ogre_bounties:attempt_to_issue_ogre_contracts(faction_key, num_contract
 				local current_settlement = current_region:settlement()
 				
 				if not used_region_targets[selected_issuing_faction_name .. current_region_key] then
-					local distance = distance_squared(current_settlement:logical_position_x(), current_settlement:logical_position_y(), faction_pos_x, faction_pos_y)
-					
-					if distance < closest_distance then
-						chosen_region_key = current_region_key
-						closest_distance = distance
+					local settlement_x = current_settlement:logical_position_x()
+					local settlement_y = current_settlement:logical_position_y()
+
+					for _, obj in model_pairs(objs_to_test_distance) do
+						local x = 0
+						local y = 0
+
+						if is_region(obj) then
+							x = obj:settlement():logical_position_x()
+							y = obj:settlement():logical_position_y()
+						else
+							x = obj:logical_position_x()
+							y = obj:logical_position_y()
+						end
+
+						local distance = distance_squared(settlement_x, settlement_y, x, y)
+
+						if distance < closest_distance then
+							target = current_region_key
+							closest_distance = distance
+						end
 					end
 				end
 			end
 			
-			if chosen_region_key ~= "" then
-				used_region_targets[selected_issuing_faction_name .. chosen_region_key] = true
+			if target ~= "" then
+				used_region_targets[selected_issuing_faction_name .. target] = true
 				
-				obj_str = "region " .. chosen_region_key
+				obj_str = "region " .. target
 				
 				if selected_mission[1] == "RAZE_OR_SACK_N_DIFFERENT_SETTLEMENTS_INCLUDING" then
 					obj_str = obj_str .. ";total 1"
@@ -289,9 +313,28 @@ function ogre_bounties:attempt_to_issue_ogre_contracts(faction_key, num_contract
 		end
 		
 		if obj_str then
-			local mod = 1 + (faction:bonus_values():scripted_value("contracts_treasury_payload_modifier", "value") / 100)
+			local target_payload_bonus = false -- mod the payload if the target is of high value (province capital or immortal character)
+			local target_obj = cm:get_region(target)
+
+			if target_obj then
+				if target_obj:is_province_capital() then
+					target_payload_bonus = true
+				end
+			else
+				target_obj = cm:get_family_member_by_cqi(target)
+
+				if target_obj and target_obj:character_details():is_immortal() then
+					target_payload_bonus = true
+				end
+			end
 			
-			local money = math.max(math.floor(selected_issuing_faction:treasury() / 5), 1500) * mod
+			local money = math.max(math.round((math.sqrt(mission_distance) * 50) / 10) * 10, 2000)
+			if target_payload_bonus then
+				money = money * 1.25
+			end
+			
+			local treasury_mod = 1 + (faction:bonus_values():scripted_value("contracts_treasury_payload_modifier", "value") / 100)
+			money = math.round((money * treasury_mod) / 10) * 10
 			
 			local culture = self.culture_mapping[selected_enemy:culture()] or "gen"
 			
@@ -301,12 +344,13 @@ function ogre_bounties:attempt_to_issue_ogre_contracts(faction_key, num_contract
 								"attitude_adjustement 6;" ..
 							"}"
 			
-			-- add bonus payloads
-			local random_payload = cm:random_number(3)
+			-- add bonus payloads - cycle through each one so they are distributed evenly
+			local bonus_payload_id = cm:get_saved_value(faction_key .. "_last_bounty_payload_id") or 1
+			if bonus_payload_id > 3 then bonus_payload_id = 1 end
 			
-			if random_payload == 1 then
+			if bonus_payload_id == 1 then
 				payload = payload .. "effect_bundle {bundle_key wh3_main_bundle_ogre_contract_camp_growth;turns 5;}"
-			elseif random_payload == 2 then
+			elseif bonus_payload_id == 2 then
 				local ancillary_key = get_random_ancillary_key_for_faction(faction_key, nil, "rare")
 				
 				if ancillary_key then
@@ -339,6 +383,8 @@ function ogre_bounties:attempt_to_issue_ogre_contracts(faction_key, num_contract
 					payload = payload .. "military_force_pooled_resource_transaction{general_lookup " .. cm:char_lookup_str(selected_mf:general_character():command_queue_index()) .. ";resource wh3_main_ogr_meat;factor events;amount 25;context absolute;}"
 				end
 			end
+
+			cm:set_saved_value(faction_key .. "_last_bounty_payload_id", bonus_payload_id + 1)
 
 			cm:trigger_custom_mission_from_string(
 				faction_key,

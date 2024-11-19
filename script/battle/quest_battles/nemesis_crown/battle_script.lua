@@ -274,7 +274,7 @@ function rout_on_warboss_death(warboss, armies_to_rout, message_on_warboss_death
 	end
 
 	for j = 1, #messages_to_block do
-		gb:block_message_on_message(messages_to_block[j], message_on_warboss_death, true)
+		gb:block_message_on_message(message_on_warboss_death, messages_to_block[j], true)
 	end
 end
 

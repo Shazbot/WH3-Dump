@@ -9144,7 +9144,7 @@ end
 --- @p string or @region region name or interface
 --- @r region region
 function campaign_manager:get_region(region_arg)
-	if not is_string(region_arg) and is_region(region_arg) then
+	if not is_string(region_arg) and not is_region(region_arg) then
 		script_error("ERROR: get_region() called but supplied region name [" .. tostring(region_arg) .. "] is not a string or region interface.");
 		return false;
 	end;
