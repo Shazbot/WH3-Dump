@@ -8,9 +8,7 @@ core:add_listener(
 		local ritual_category = ritual:ritual_category();
 		
 		if performing_faction:is_human() then
-			if ritual_category == "SKULLS_RITUAL" then
-				cm:trigger_incident(performing_faction:name(), "wh3_main_incident_ritual_kho_the_skull_throne", true);
-			elseif ritual_category == "MOTHERLAND_RITUAL" then
+			if ritual_category == "MOTHERLAND_RITUAL" then
 				local incident_mapping = {
 					["wh3_main_ritual_ksl_winter_dazh"] = "wh3_main_incident_ritual_ksl_winter_dazh",
 					["wh3_main_ritual_ksl_winter_dazh_upgraded"] = "wh3_main_incident_ritual_ksl_winter_dazh",
@@ -175,43 +173,6 @@ core:add_listener(
 	true
 );
 
---[[core:add_listener(
-	"cathay_harmony_event_feed",
-	"FactionTurnStart",
-	function(context)
-		local faction = context:faction();
-		return faction:is_human() and faction:culture() == "wh3_main_cth_cathay";
-	end,
-	function(context)
-		local faction = context:faction();
-		local faction_name = faction:name();
-		local value = faction:pooled_resource_manager():resource("wh3_main_cth_harmony"):value();
-		
-		local event = "wh3_main_incident_cth_harmony_balanced";
-		
-		if value > 0 then
-			event = "wh3_main_incident_cth_harmony_yang";
-		elseif value < 0 then
-			event = "wh3_main_incident_cth_harmony_yin";
-		end;
-		
-		local save_value = cm:get_saved_value(faction_name .. "_harmony_event_last_shown");
-		
-		-- if the save value doesn't exist, no event has been shown, so only show the event once the harmony balance changes
-		if save_value == nil then
-			save_value = event;
-			cm:set_saved_value(faction_name .. "_harmony_event_last_shown", event);
-		end;
-		
-		-- the harmony balance has changed since we last showed an event, show a new one
-		if save_value ~= event then
-			cm:trigger_incident(faction_name, event, true);
-			cm:set_saved_value(faction_name .. "_harmony_event_last_shown", event);
-		end;
-	end,
-	true
-);]]
-
 core:add_listener(
 	"camp_destroyed_event_feed",
 	"CharacterConvalescedOrKilled",
@@ -227,6 +188,22 @@ core:add_listener(
 	end,
 	true
 );
+
+core:add_listener(
+	"camp_packed_event_feed",
+	"CharacterEntersLimboEvent",
+	function(context)
+		local character = context:character()
+		
+		return character:faction():is_human() and character:character_subtype("wh3_main_ogr_tyrant_camp")
+	end,
+	function(context)
+		local character = context:character()
+		
+		cm:trigger_incident_with_targets(character:faction():command_queue_index(), "wh3_dlc26_incident_ogr_camp_packed", 0, 0, character:command_queue_index(), 0, 0, 0)
+	end,
+	true
+)
 
 -- Music hookup for Daemonic Ascension Rituals for the daemon prince
 core:add_listener(

@@ -11,483 +11,835 @@ initiative_cultures = {
 	wh_main_chs_chaos = true
 }
 
+local all_ror_units = {}
+
 initiative_templates = {
 
-	--- OGRE BIG NAMES----
-	-- gatecrasher (greasus)
+	-- OGRE BIG NAMES - LEGENDARY CHARACTERS
+	-- GREASUS - GATECRASHER - Win a siege battle.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_greasus_gatecrasher",
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
-				return context:character():won_battle() and cm:model():pending_battle():battle_type() == "settlement_standard";
-			end
+				return context:character():won_battle() and cm:model():pending_battle():battle_type() == "settlement_standard"
+			end,
+		["grant_immediately"] = true
 	},
-	-- hoardmaster (greasus)
+	-- GREASUS - HOARDMASTER - End your turn 5k+ per turn income.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_greasus_hoardmaster",
-		["event"] = "CharacterCompletedBattle",
+		["event"] = "CharacterTurnStart",
 		["condition"] =
 			function(context)
-				return cm:character_won_battle_against_culture(context:character(), "wh3_main_ogr_ogre_kingdoms");
-			end
+				return context:character():faction():net_income() > 5000
+			end,
+		["grant_immediately"] = true
 	},
-	-- shockingly obese (greasus)
+	-- GREASUS - SHOCKINGLY OBESE - End your turn with over 1000 meat.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_greasus_shockingly_obese",
-		["event"] = "CharacterPostBattleCaptureOption",
+		["event"] = "CharacterTurnEnd",
 		["condition"] =
 			function(context)
-				return context:get_outcome_key() == "kill";
-			end
+				local character = context:character()
+				local mf = false
+				if character:has_military_force() then 
+					local meat = character:military_force():pooled_resource_manager():resource("wh3_main_ogr_meat")
+					return not meat:is_null_interface() and meat:value() > 1000
+				end
+			end,
+		["grant_immediately"] = true
 	},
-	-- tradelord (greasus)
+	-- GREASUS - DRAKECRUSH - Win a battle against an army with a dragon.
 	{
-		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_greasus_tradelord",
-		["event"] = "CharacterRankUp",
+		["initiative_key"] = "wh3_dlc26_character_initiative_ogr_big_name_greasus_drakecrush",
+		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				local character = context:character();
-				if character:has_military_force() then
-					local mf = character:military_force();
-					return (mf:active_stance() == "MILITARY_FORCE_ACTIVE_STANCE_TYPE_SET_CAMP_RAIDING" or mf:active_stance() == "MILITARY_FORCE_ACTIVE_STANCE_TYPE_LAND_RAID");
-				end;
-			end
+				local character = context:character()	
+				local units_to_defeat = {
+					"wh2_main_hef_mon_moon_dragon",
+					"wh2_main_hef_mon_star_dragon",
+					"wh2_main_hef_mon_sun_dragon",
+					"wh_dlc05_wef_forest_dragon_0",
+					"wh2_main_def_mon_black_dragon",
+					"wh2_dlc15_grn_mon_wyvern_waaagh_0",
+					"wh_dlc08_nor_mon_frost_wyrm_0",
+					"wh_dlc08_nor_mon_frost_wyrm_ror_0",
+					--mounts
+					"wh2_dlc10_def_cha_supreme_sorceress_beasts_5",
+					"wh2_dlc10_def_cha_supreme_sorceress_dark_5",
+					"wh2_dlc10_def_cha_supreme_sorceress_death_5",
+					"wh2_dlc10_def_cha_supreme_sorceress_fire_5",
+					"wh2_dlc10_def_cha_supreme_sorceress_shadow_5",
+					"wh2_dlc11_def_cha_lokhir_fellheart_1",
+					"wh2_dlc11_vmp_cha_bloodline_blood_dragon_lord_1",
+					"wh2_dlc11_vmp_cha_bloodline_blood_dragon_lord_3",
+					"wh2_dlc11_vmp_cha_bloodline_lahmian_lord_3",
+					"wh2_dlc11_vmp_cha_bloodline_necrarch_lord_3",
+					"wh2_dlc11_vmp_cha_bloodline_von_carstein_lord_3",
+					"wh2_dlc15_hef_cha_imrik_2",
+					"wh2_dlc15_hef_cha_mage_fire_3",
+					"wh2_main_def_cha_dreadlord_4",
+					"wh2_main_def_cha_dreadlord_female_4",
+					"wh2_main_def_cha_malekith_3",
+					"wh2_main_hef_cha_alastar_4",
+					"wh2_main_hef_cha_alastar_5",
+					"wh2_main_hef_cha_prince_4",
+					"wh2_main_hef_cha_prince_5",
+					"wh2_main_hef_cha_princess_4",
+					"wh2_main_hef_cha_princess_5",
+					"wh_dlc01_chs_cha_chaos_lord_2",
+					"wh_dlc01_chs_cha_chaos_sorcerer_lord_death_10",
+					"wh_dlc01_chs_cha_chaos_sorcerer_lord_fire_10",
+					"wh_dlc01_chs_cha_chaos_sorcerer_lord_metal_10",
+					"wh_dlc01_chs_cha_chaos_sorcerer_lord_shadows_4",
+					"wh_dlc05_vmp_cha_red_duke_3",
+					"wh_dlc05_wef_cha_female_glade_lord_3",
+					"wh_dlc05_wef_cha_glade_lord_3",
+					"wh_dlc08_chs_cha_chaos_lord_2_qb",
+					"wh_dlc08_nor_cha_kihar_0",
+					"wh_main_vmp_cha_mannfred_von_carstein_3",
+					"wh_main_vmp_cha_vampire_lord_3",
+					"wh2_dlc15_hef_cha_archmage_beasts_4",
+					"wh2_dlc15_hef_cha_archmage_death_4",
+					"wh2_dlc15_hef_cha_archmage_fire_4",
+					"wh2_dlc15_hef_cha_archmage_heavens_4",
+					"wh2_dlc15_hef_cha_archmage_high_4",
+					"wh2_dlc15_hef_cha_archmage_life_4",
+					"wh2_dlc15_hef_cha_archmage_light_4",
+					"wh2_dlc15_hef_cha_archmage_metal_4",
+					"wh2_dlc15_hef_cha_archmage_shadows_4",
+					"wh_main_grn_cha_azhag_the_slaughterer_1",
+					"wh_main_grn_cha_orc_warboss_1",
+					"wh2_dlc16_wef_cha_sisters_of_twilight_1",
+					"wh2_twa03_def_cha_rakarth_3",
+					"wh3_main_cth_cha_iron_dragon_0",
+					"wh3_main_cth_cha_iron_dragon_1",
+					"wh3_main_cth_cha_storm_dragon_0",
+					"wh3_main_cth_cha_storm_dragon_1",
+					"wh3_dlc24_cth_cha_yuan_bo_dragon",
+					"wh3_dlc24_cth_cha_yuan_bo_human"
+				}
+				return character:won_battle() and cm:character_won_battle_against_unit(character, units_to_defeat)
+			end,
+		["grant_immediately"] = true
 	},
-	
-	-- ever famished (skrag)
+	-- SKRAG - EVER-FAMISHED - End your turn with Starving Hunger level
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_skrag_ever_famished",
 		["event"] = "CharacterTurnEnd",
 		["condition"] =
 			function(context)
-				local character = context:character();
-				local mf = false;
-				
+				local character = context:character()
+				local mf = false
 				if character:has_military_force() then 
-					mf = character:military_force();
-				end;
-				
-				if mf then
-					local meat = mf:pooled_resource_manager():resource("wh3_main_ogr_meat");
-					
-					return not meat:is_null_interface() and meat:value() > 50;
-				end;
-			end
+					local active_effect = character:military_force():pooled_resource_manager():resource("wh3_main_ogr_meat"):active_effect(0)
+					return active_effect == "wh3_dlc26_bundle_ogr_hunger_1"
+				end
+
+			end,
+		["grant_immediately"] = true
 	},
-	-- gore harvester (skrag)
+	-- SKRAG - GORE-HARVESTER - Win a battle against an army with trolls.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_skrag_gore_harvester",
-		["event"] = "CharacterPostBattleCaptureOption",
+		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return context:get_outcome_key() == "kill";
-			end
+				local character = context:character()	
+				local units_to_defeat = {
+					"wh2_dlc15_grn_cha_river_troll_hag_0",
+					"wh2_dlc15_grn_mon_river_trolls_0",
+					"wh2_dlc15_grn_mon_river_trolls_ror_0",
+					"wh2_dlc15_grn_mon_stone_trolls_0",
+					"wh3_dlc25_nur_mon_bile_trolls",
+					"wh_dlc01_chs_mon_trolls_1",
+					"wh_dlc08_nor_cha_throgg_0",
+					"wh_dlc08_nor_mon_norscan_ice_trolls_0",
+					"wh_main_chs_mon_trolls",
+					"wh_main_grn_mon_trolls",
+					"wh_main_nor_mon_chaos_trolls",
+				}
+				return character:won_battle() and cm:character_won_battle_against_unit(character, units_to_defeat)
+			end,
+		["grant_immediately"] = true
 	},
-	-- maw that walks (skrag)
+	-- SKRAG - MAW-THAT-WALKS - Have all 4 Offerings to Maw active at once.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_skrag_maw_that_walks",
-		["event"] = "CharacterCompletedBattle",
+		["event"] = "CharacterTurnEnd",
 		["condition"] =
 			function(context)
-				local character = context:character();
-				
-				if character:won_battle() then
-					local character_faction_name = character:faction():name();
-					local pb = cm:model():pending_battle();
-					
-					local defender_char_cqi, defender_mf_cqi, defender_faction_name = cm:pending_battle_cache_get_defender(1);
-					local attacker_char_cqi, attacker_mf_cqi, attacker_faction_name = cm:pending_battle_cache_get_attacker(1);
-					
-					if defender_faction_name == character_faction_name and pb:has_attacker() then
-						return pb:attacker():is_caster();
-					elseif attacker_faction_name == character_faction_name and pb:has_defender() then
-						return pb:defender():is_caster();
-					end;
-				end;
-			end
+				local character_details = context:character():family_member():character_details()
+				local offerrings_count = 0
+				for i = 1, 4 do
+					local initiative_set = character_details:lookup_character_initiative_set_by_key("wh3_dlc26_character_initiative_set_ogr_maw_offering_" .. i)
+					if not initiative_set:is_null_interface() and initiative_set:active_initiatives():num_items() >= 1 then
+						offerrings_count = offerrings_count + 1
+					end
+				end
+				return offerrings_count >= 4
+			end,
+		["grant_immediately"] = true
 	},
-	-- world swallower (skrag)
+	-- SKRAG - WORLD-SWALLOWER - Use the "Maw" spell 3 times in a single battle.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_skrag_world_swallower",
 		["event"] = "CharacterCompletedBattle",
 		["condition"] =
 			function(context)
+				local pb = cm:model():pending_battle()
+				local character = context:character()
+				local character_faction_cqi = character:faction():command_queue_index()
+
+				local maw_count = pb:get_how_many_times_ability_has_been_used_in_battle(character_faction_cqi, "wh3_main_spell_great_maw_the_maw")
+				local maw_upgraded_count = pb:get_how_many_times_ability_has_been_used_in_battle(character_faction_cqi, "wh3_main_spell_great_maw_the_maw_upgraded")
+
+				return (maw_count + maw_upgraded_count) >= 3
+			end,
+		["grant_immediately"] = true
+	},
+	-- GOLGFAG - BARRELCRUSHER - Win a battle in a region with Wine resource.
+	{
+		["initiative_key"] = "wh3_dlc26_character_initiative_ogr_big_name_golgfag_01",
+		["event"] = "CharacterCompletedBattle",
+		["condition"] =
+			function(context)
+				local character = context:character()
+
+				return character:won_battle() and character:has_region() and character:region():resource_exists("res_rom_wine")
+			end,
+		["grant_immediately"] = true
+	},
+	-- GOLGFAG - GLOBETROTTER - End turn in Full Speed stance
+	{
+		["initiative_key"] = "wh3_dlc26_character_initiative_ogr_big_name_golgfag_02",
+		["event"] = "CharacterTurnEnd",
+		["condition"] =
+			function(context)
+				local character = context:character()
+				
+				return character:has_military_force() and character:military_force():active_stance() == "MILITARY_FORCE_ACTIVE_STANCE_TYPE_DOUBLE_TIME"				
+			end,
+		["grant_immediately"] = true
+	},
+	-- GOLGFAG - MANEATER - Win a battle against human factions.
+	{
+		["initiative_key"] = "wh3_dlc26_character_initiative_ogr_big_name_golgfag_03",
+		["event"] = "CharacterCompletedBattle",
+		["condition"] =
+			function(context)
+				return cm:character_won_battle_against_culture(context:character(), {"wh_main_emp_empire", "wh_main_brt_bretonnia", "wh3_main_ksl_kislev", "wh3_main_cth_cathay"})
+			end,
+		["grant_immediately"] = true
+	},
+	-- GOLGFAG - TALE SPINNER - Win a battle with 4 Regiments of Renown.
+	{
+		["initiative_key"] = "wh3_dlc26_character_initiative_ogr_big_name_golgfag_04",
+		["event"] = "CharacterCompletedBattle",
+		["condition"] =
+			function(context)
+				local character = context:character()
+				return character:won_battle() and cm:count_char_army_has_unit(character, all_ror_units) >= 4
+			end,
+		["grant_immediately"] = true
+	},
+	-- BRAGG - GUTSMAN - End your turn as highest ranking character in force.
+	{
+		["initiative_key"] = "wh3_dlc26_character_initiative_ogr_big_name_bragg_01",
+		["event"] = "CharacterTurnEnd",
+		["condition"] =
+			function(context)
+				local character = context:character()
+				local character_rank = context:character():rank()
+				local highest_rank = true
+				if character:is_embedded_in_military_force() then 
+					local character_list = character:embedded_in_military_force():character_list()
+					for i = 0, character_list:num_items() - 1 do
+						if not (character_list:item_at(i) == character) then
+							if character_list:item_at(i):rank() >= character_rank then
+								highest_rank = false
+							end
+						end
+					end
+				else
+					highest_rank = false
+				end
+				return highest_rank
+			end,
+		["grant_immediately"] = true
+	},
+	-- BRAGG - EXECUTIONER - Win a battle against an army with 3 characters.
+	{
+		["initiative_key"] = "wh3_dlc26_character_initiative_ogr_big_name_bragg_02",
+		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
+		["condition"] =
+			function(context)
 				local character = context:character();
 				
-				return character:won_battle() and character:battles_won() > 4;
-			end
+				if character:won_battle() then
+					local character_faction_name = character:faction():name();
+					local pb = cm:model():pending_battle();
+					
+					local defender_char_cqi, defender_mf_cqi, defender_faction_name = cm:pending_battle_cache_get_defender(1);
+					local attacker_char_cqi, attacker_mf_cqi, attacker_faction_name = cm:pending_battle_cache_get_attacker(1);
+
+					if defender_faction_name == character_faction_name then
+						return cm:pending_battle_cache_num_attacker_embedded_characters() > 1
+					elseif attacker_faction_name == character_faction_name then
+						return cm:pending_battle_cache_num_defender_embedded_characters() > 1
+					end
+				end;
+			end,
+		["grant_immediately"] = true
 	},
-	
-	-- arsebelcher
+	-- BRAGG - KIN FEARED - Win a battle against Ogre Kingdoms.
+	{
+		["initiative_key"] = "wh3_dlc26_character_initiative_ogr_big_name_bragg_03",
+		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
+		["condition"] =
+			function(context)
+				return cm:character_won_battle_against_culture(context:character(), "wh3_main_ogr_ogre_kingdoms", "_ogr_")
+			end,
+		["grant_immediately"] = true
+	},
+	-- BRAGG - HEROSLAYER - Critically Succeed at Assassinating a character
+	{
+		["initiative_key"] = "wh3_dlc26_character_initiative_ogr_big_name_bragg_04",
+		["event"] = "CharacterCharacterTargetAction",
+		["condition"] =
+			function(context)
+				return ( context:mission_result_critial_success() and context:agent_action_key() == "wh2_main_agent_action_champion_hinder_agent_assassinate")
+			end,
+		["grant_immediately"] = true
+	},
+	-- OGRE BIG NAMES - GENERIC CHARACTERS
+	-- ARSEBELCHER - Occupy a settlement with a Chaotic Wasteland climate.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_arsebelcher",
-		["event"] = "CharacterTurnStart",
+		["event"] = "GarrisonOccupiedEvent",
 		["condition"] =
-			function()
-				return cm:random_number(100) < 6;
-			end
+			function(context)
+				return context:garrison_residence():region():settlement():get_climate() == "climate_chaotic";
+			end,
+		["grant_immediately"] = true
 	},
-	-- beastkiller
+	-- BEASTKILLER - Win a battle against an army containing 3 monster units.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_beastkiller",
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return cm:character_won_battle_against_culture(context:character(), "wh_dlc03_bst_beastmen");
-			end
+				local character = context:character()
+				local monster_count = 0
+				if character:won_battle() then
+					local defender_char_cqi, defender_mf_cqi, defender_faction_name = cm:pending_battle_cache_get_defender(1)
+					local attacker_char_cqi, attacker_mf_cqi, attacker_faction_name = cm:pending_battle_cache_get_attacker(1)
+					local character_faction_name = character:faction():name()
+					local is_attacker = attacker_faction_name == character_faction_name
+					local is_defender = defender_faction_name == character_faction_name
+					
+					if is_attacker or is_defender then
+						local num_participants = 0
+						local monster_count = 0
+						if is_attacker then
+							num_participants = cm:pending_battle_cache_num_defenders()
+						else
+							num_participants = cm:pending_battle_cache_num_attackers()
+						end						
+						
+						for i = 1, num_participants do
+							local units = {}
+							
+							if is_attacker then
+								units = cm:pending_battle_cache_get_defender_units(i)
+							else
+								units = cm:pending_battle_cache_get_attacker_units(i)
+							end
+							
+							for j = 1, #units do
+								if common.get_context_value("CcoMainUnitRecord", units[j].unit_key, "CategoryName") == "Monster" then
+									monster_count = monster_count + 1									
+									if monster_count > 0 then
+										return true
+									end
+								end
+							end
+						end
+					end
+				end
+			end,
+		["grant_immediately"] = true
 	},
-	-- beastrider
-	{
-		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_beastrider",
-		["event"] = "CharacterAncillaryGained",
-		["condition"] =
-			function(context)
-				return context:ancillary() == "wh3_main_anc_mount_ogr_hunter_stonehorn";
-			end
-	},
-	-- bellyslapper
+	-- BELLYSLAPPER - Reach rank 15.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_bellyslapper",
-		["event"] = "CharacterPostBattleCaptureOption",
+		["event"] = "CharacterRankUp",
 		["condition"] =
 			function(context)
-				return context:get_outcome_key() == "enslave";
-			end
+				return context:character():rank() >= 15
+			end,
+		["grant_immediately"] = true
 	},
-	-- bigbellower
+	-- BIGBELLOWER - Win a battle whilst being reinforced.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_bigbellower",
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				local character = context:character();
-				
-				return character:won_battle() and ((cm:pending_battle_cache_faction_is_attacker(character:faction():name()) and cm:pending_battle_cache_num_attackers() > 1) or cm:pending_battle_cache_num_defenders() > 1);
-			end
+				local character = context:character()
+				local faction_name = character:faction():name()
+				return character:won_battle() and ((cm:pending_battle_cache_faction_is_attacker(faction_name) and cm:pending_battle_cache_num_attackers() > 1) or (cm:pending_battle_cache_faction_is_defender(faction_name) and cm:pending_battle_cache_num_defenders() > 1))
+			end,
+		["grant_immediately"] = true
 	},
-	-- bonechewer
+	-- BONECHEWER - Win a battle with 5 units of Sabretusks in your army.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_bonechewer",
-		["event"] = "CharacterTurnEnd",
+		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				local character = context:character();
-				local mf = false;
-				
-				if character:has_military_force() then 
-					mf = character:military_force();
-				elseif not character:embedded_in_military_force():is_null_interface() then
-					mf = character:embedded_in_military_force();
-				end;
-				
-				if mf then
-					local meat = mf:pooled_resource_manager():resource("wh3_main_ogr_meat");
-					
-					return not meat:is_null_interface() and meat:value() > 50;
-				end;
-			end
+				local character = context:character()				
+				return character:won_battle() and cm:count_char_army_has_unit(character, "wh3_main_ogr_mon_sabretusk_pack_0") > 4
+			end,
+		["grant_immediately"] = true
 	},
-	-- boommaker
+	-- BOOMMAKER - Win a battle with 5 units of Leadbelchers in your army.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_boommaker",
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				local character = context:character();
-				
-				return character:won_battle() and cm:char_army_has_unit(character, "wh3_main_ogr_inf_leadbelchers_0");
-			end
+				local character = context:character()				
+				return character:won_battle() and cm:count_char_army_has_unit(character, "wh3_main_ogr_inf_leadbelchers_0") > 4
+			end,
+		["grant_immediately"] = true
 	},
-	-- brawlerguts
+	-- BRAWLERGUTS - Win 5 battles.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_brawlerguts",
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				local character = context:character();
-				
-				return character:won_battle() and character:battles_won() > 4;
-			end
+				local character = context:character()				
+				return character:won_battle() and character:battles_won() > 4
+			end,
+		["grant_immediately"] = true
 	},
-	-- campmaker
+	-- CAMPMAKER - Deploy a camp from this character.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_campmaker",
 		["event"] = "SpawnableForceCreatedEvent",
 		["condition"] =
 			function(context)
-				return true;
-			end
+				return true
+			end,
+		["grant_immediately"] = true
 	},
-	-- chaos_slayer
+	-- COIN COUNTER - End your turn with over 3000 upkeep for this army.
 	{
-		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_chaos_slayer",
-		["event"] = "GarrisonOccupiedEvent",
+		["initiative_key"] = "wh3_dlc26_character_initiative_ogr_big_name_coin_counter",
+		["event"] = "CharacterTurnEnd",
 		["condition"] =
 			function(context)
-				local region_name = context:garrison_residence():region():name();
-				
-				return region_name == "wh3_main_chaos_region_the_challenge_stone" or region_name == "wh3_main_combi_region_the_challenge_stone";
-			end
+				local character = context:character()
+				if character:has_military_force() then
+					return character:military_force():upkeep() > 3000
+				end
+			end,
+		["grant_immediately"] = true
 	},
-	-- daemonbreaker
+	-- DAEMONBREAKER - Win a battle against any Daemon race.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_daemonbreaker",
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				local character = context:character();
-				
+				local character = context:character()				
 				return cm:character_won_battle_against_culture(character, {"wh3_main_kho_khorne", "wh3_main_nur_nurgle", "wh3_main_tze_tzeentch", "wh3_main_sla_slaanesh", "wh3_main_dae_daemons"})
-			end
+			end,
+		["grant_immediately"] = true
 	},
-	-- deathcheater
+	-- DEATHCHEATER - Win a battle against multiple armies.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_deathcheater",
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return not context:character():won_battle();
-			end
+				local character = context:character()				
+				return character:won_battle() and ((cm:pending_battle_cache_faction_is_attacker(character:faction():name()) and cm:pending_battle_cache_num_defenders() > 1) or cm:pending_battle_cache_num_attackers() > 1)
+			end,
+		["grant_immediately"] = true
 	},
-	-- dwarfsquasher
+	-- DWARFSQUASHER - Win a battle against Dwarfs.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_dwarfsquasher",
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return cm:character_won_battle_against_culture(context:character(), "wh_main_dwf_dwarfs");
-			end
+				return cm:character_won_battle_against_culture(context:character(), "wh_main_dwf_dwarfs", "_dwf_")
+			end,
+		["grant_immediately"] = true
 	},
-	-- elfmulcher
+	-- ELFMULCHER - Win a battle against Wood Elves, High Elves or Dark Elves.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_elfmulcher",
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
-			function(context)				
-				return cm:character_won_battle_against_culture(context:character(), {"wh2_main_hef_high_elves", "wh_dlc05_wef_wood_elves", "wh2_main_def_dark_elves"});
-			end
-	},
-	-- giantbreaker
-	{
-		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_giantbreaker",
-		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
-		["condition"] =
 			function(context)
-				return cm:character_won_battle_against_unit(context:character(), {"wh3_main_ogr_mon_giant_0", "wh_dlc03_bst_mon_giant_0", "wh_dlc08_nor_mon_norscan_giant_0", "wh_main_chs_mon_giant", "wh_main_grn_mon_giant"});
-			end
+				return cm:character_won_battle_against_culture(context:character(), {"wh2_main_hef_high_elves", "wh_dlc05_wef_wood_elves", "wh2_main_def_dark_elves"})
+			end,
+		["grant_immediately"] = true
 	},
-	-- gnoblarkicker
+	-- GNOBLARKICKER - Win a battle with 10 Gnoblar units in your army.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_gnoblarkicker",
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				local character = context:character();
-				
-				return character:won_battle() and cm:count_char_army_has_unit(character, {"wh3_main_ogr_inf_gnoblars_0", "wh3_main_ogr_inf_gnoblars_1"}) > 4;
-			end
+				local character = context:character()	
+				local gnoblars = {
+					"wh3_main_ogr_inf_gnoblars_0","wh3_main_ogr_inf_gnoblars_1","wh3_twa10_ogr_inf_gnoblars_ror",
+					"wh3_dlc26_ogr_inf_pigback_riders","wh3_dlc26_ogr_inf_pigback_riders_ror"
+				}
+				return character:won_battle() and cm:count_char_army_has_unit(character, gnoblars) > 9
+			end,
+		["grant_immediately"] = true
 	},
-	-- goldhoarder
+	-- GOLDHOARDER - Sack a settlement with this character.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_goldhoarder",
 		["event"] = "CharacterSackedSettlement",
 		["condition"] =
 			function()
-				return true;
-			end
+				return true
+			end,
+		["grant_immediately"] = true
 	},
-	-- grandfeaster
+	-- GRANDFEASTER - Raze a settlement with this character.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_grandfeaster",
+		["event"] = "CharacterRazedSettlement",
+		["condition"] =
+			function()
+				return true
+			end,
+		["grant_immediately"] = true
+	},
+	-- GROUNDBREAKER - Rank-up in Raiding stance.
+	{
+		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_groundbreaker",
 		["event"] = "CharacterRankUp",
 		["condition"] =
 			function(context)
-				return context:character():rank() >= 40;
-			end
+				local character = context:character()
+				if character:has_military_force() then
+					local mf = character:military_force()
+					return (mf:active_stance() == "MILITARY_FORCE_ACTIVE_STANCE_TYPE_SET_CAMP_RAIDING" or mf:active_stance() == "MILITARY_FORCE_ACTIVE_STANCE_TYPE_LAND_RAID")
+				end;
+			end,
+		["grant_immediately"] = true
 	},
-	-- groundbreaker
+	-- GROUNDSHAKER - Win a battle with 5 Crushers units in your army.
 	{
-		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_groundbreaker",
+		["initiative_key"] = "wh3_dlc26_character_initiative_ogr_big_name_groundshaker",
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return cm:character_won_battle_against_culture(context:character(), "wh3_main_cth_cathay");
-			end
+				local character = context:character()		
+				local crushers = {
+					"wh3_main_ogr_cav_crushers_0","wh3_main_ogr_cav_crushers_1","wh3_twa07_ogr_cav_crushers_ror_0",
+				}		
+				return character:won_battle() and cm:count_char_army_has_unit(character, crushers) > 4
+			end,
+		["grant_immediately"] = true
 	},
-	-- gutcrusher
+	-- GORE-DRENCHED - Win a battle with a Pyrric victory.
+	{
+		["initiative_key"] = "wh3_dlc26_character_initiative_ogr_big_name_gore_drenched",
+		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
+		["condition"] =
+			function(context)
+				if context:character():won_battle() then
+					local pb = cm:model():pending_battle()					
+					return (pb:attacker_won() and pb:attacker_battle_result() == "pyrrhic_victory") or  (pb:defender_won() and pb:defender_battle_result() == "pyrrhic_victory")
+				end
+			end,
+		["grant_immediately"] = true
+	},
+	-- GORGER HERDER - Win a battle with 5 Gorgers units in your army.
+	{
+		["initiative_key"] = "wh3_dlc26_character_initiative_ogr_big_name_gorger_herder",
+		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
+		["condition"] =
+			function(context)
+				local character = context:character()		
+				return character:won_battle() and cm:count_char_army_has_unit(character, "wh3_main_ogr_mon_gorgers_0") > 4
+			end,
+		["grant_immediately"] = true
+	},
+	-- GUTCRUSHER - Win a battle with 2500 kills.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_gutcrusher",
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				local character = context:character();
+				local character = context:character()
 				
 				if character:won_battle() then
-					local character_faction_name = character:faction():name();
-					local pb = cm:model():pending_battle();
-					
-					local defender_char_cqi, defender_mf_cqi, defender_faction_name = cm:pending_battle_cache_get_defender(1);
-					local attacker_char_cqi, attacker_mf_cqi, attacker_faction_name = cm:pending_battle_cache_get_attacker(1);
+					local character_faction_name = character:faction():name()
+					local pb = cm:model():pending_battle()					
+					local defender_char_cqi, defender_mf_cqi, defender_faction_name = cm:pending_battle_cache_get_defender(1)
+					local attacker_char_cqi, attacker_mf_cqi, attacker_faction_name = cm:pending_battle_cache_get_attacker(1)
 					
 					if attacker_faction_name == character_faction_name then
-						return pb:attacker_kills() > 2500;
+						return pb:attacker_kills() > 2500
 					elseif defender_faction_name == character_faction_name then
-						return pb:defender_kills() > 2500;
-					end;
-				end;
-			end
+						return pb:defender_kills() > 2500
+					end
+				end
+			end,
+		["grant_immediately"] = true
 	},
-	-- kineater
+	-- IMPENETRABLE GUT - Win a battle against an army containing 5 missile units.
 	{
-		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_kineater",
-		["event"] = "CharacterCompletedBattle",
-		["condition"] =
-			function(context)
-				local character = context:character();
-				
-				if not character:won_battle() then
-					local character_faction_name = character:faction():name();
-					local pb = cm:model():pending_battle();
-					
-					local defender_char_cqi, defender_mf_cqi, defender_faction_name = cm:pending_battle_cache_get_defender(1);
-					local attacker_char_cqi, attacker_mf_cqi, attacker_faction_name = cm:pending_battle_cache_get_attacker(1);
-					
-					if defender_faction_name == character_faction_name then
-						return pb:defender_kills() > pb:attacker_kills();
-					elseif attacker_faction_name == character_faction_name then
-						return pb:attacker_kills() > pb:defender_kills();
-					end;
-				end;
-			end
-	},
-	-- lizardstrangler
-	{
-		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_lizardstrangler",
+		["initiative_key"] = "wh3_dlc26_character_initiative_ogr_big_name_impenetrable_gut",
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return cm:character_won_battle_against_culture(context:character(), "wh2_main_lzd_lizardmen");
-			end
-	},
-	-- longstrider
-	{
-		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_longstrider",
-		["event"] = {"CharacterRankUp", "CharacterRecruited"},
-		["condition"] =
-			function(context)
-				return context:character():rank() >= 10;
-			end
-	},
-	-- magichunter
-	{
-		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_magichunter",
-		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
-		["condition"] =
-			function(context)
-				local character = context:character();
+				local character = context:character()
 				
 				if character:won_battle() then
-					local character_faction_name = character:faction():name();
-					local pb = cm:model():pending_battle();
+					local defender_char_cqi, defender_mf_cqi, defender_faction_name = cm:pending_battle_cache_get_defender(1)
+					local attacker_char_cqi, attacker_mf_cqi, attacker_faction_name = cm:pending_battle_cache_get_attacker(1)
+					local character_faction_name = character:faction():name()
+					local is_attacker = attacker_faction_name == character_faction_name
+					local is_defender = defender_faction_name == character_faction_name
 					
-					local defender_char_cqi, defender_mf_cqi, defender_faction_name = cm:pending_battle_cache_get_defender(1);
-					local attacker_char_cqi, attacker_mf_cqi, attacker_faction_name = cm:pending_battle_cache_get_attacker(1);
-					
-					if defender_faction_name == character_faction_name and pb:has_attacker() then
-						return pb:attacker():is_caster();
-					elseif attacker_faction_name == character_faction_name and pb:has_defender() then
-						return pb:defender():is_caster();
-					end;
-				end;
-			end
+					if is_attacker or is_defender then
+						local unit_class_inf_localised = common.get_localised_string("unit_class_onscreen_inf_mis")
+						local unit_class_cav_localised = common.get_localised_string("unit_class_onscreen_cav_mis")
+						local unit_class_art_localised = common.get_localised_string("unit_class_onscreen_art_fld")
+						local num_participants = 0
+						
+						if is_attacker then
+							num_participants = cm:pending_battle_cache_num_defenders()
+						else
+							num_participants = cm:pending_battle_cache_num_attackers()
+						end
+						
+						local count = 0
+						
+						for i = 1, num_participants do
+							local units = {}
+							
+							if is_attacker then
+								units = cm:pending_battle_cache_get_defender_units(i)
+							else
+								units = cm:pending_battle_cache_get_attacker_units(i)
+							end
+							
+							for j = 1, #units do
+								local unit_class = common.get_context_value("CcoMainUnitRecord", units[j].unit_key, "ClassName")
+								if unit_class == unit_class_inf_localised  or unit_class == unit_class_cav_localised or unit_class == unit_class_art_localised then
+									count = count + 1
+									
+									if count > 4 then
+										return true
+									end
+								end
+							end
+						end
+					end
+				end
+			end,
+		["grant_immediately"] = true
 	},
-	-- maneater
+	-- KINEATER - End your turn in a friendly region with less than -50 Control.
 	{
-		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_maneater",
+		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_kineater",
+		["event"] = "CharacterTurnEnd",
+		["condition"] =
+			function(context)
+				local character = context:character()
+				local region = character:region()
+				
+				if region:is_null_interface() == false then
+					local region_faction = region:owning_faction()
+
+					if region_faction:is_null_interface() == false then
+						if region_faction:is_faction(character:faction()) then
+							return region:public_order() < -50
+						end
+					end
+				else
+					return false
+				end
+
+			end,
+		["grant_immediately"] = true
+	},
+	-- KIN-GUARD - Win a battle with another hero in your army.
+	{
+		["initiative_key"] = "wh3_dlc26_character_initiative_ogr_big_name_kin_guard",
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return cm:character_won_battle_against_culture(context:character(), {"wh_main_emp_empire", "wh_main_brt_bretonnia"});
-			end
+				local character = context:character()
+				
+				if character:won_battle() then
+					local character_faction_name = character:faction():name()
+					local pb = cm:model():pending_battle()					
+					local defender_char_cqi, defender_mf_cqi, defender_faction_name = cm:pending_battle_cache_get_defender(1)
+					local attacker_char_cqi, attacker_mf_cqi, attacker_faction_name = cm:pending_battle_cache_get_attacker(1)
+					
+					if defender_faction_name == character_faction_name and pb:has_defender() then
+						defender_char_list = pb:defender():military_force():character_list()
+
+						for i = 0, defender_char_list:num_items() - 1 do
+							local temp_character = defender_char_list:item_at(i)
+							if not (temp_character == character) and not (temp_character:character_type("general") or temp_character:character_type("colonel")) then
+								return true
+							end
+						end
+						
+					elseif attacker_faction_name == character_faction_name and pb:has_attacker() then
+						
+						attacker_char_list = pb:attacker():military_force():character_list()
+
+						for i = 0, attacker_char_list:num_items() - 1 do
+							local temp_character = attacker_char_list:item_at(i)
+							if not (temp_character == character) and not (temp_character:character_type("general") or temp_character:character_type("colonel")) then
+								return true
+							end
+						end
+					end
+				end
+			end,
+		["grant_immediately"] = true
 	},
-	-- mawseeker
+	-- LONGSTRIDER - Successfully use a Hero action with this character.
 	{
-		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_mawseeker",
-		["event"] = "GarrisonOccupiedEvent",
+		["initiative_key"] = 
+			{
+				"wh3_main_character_initiative_ogr_big_name_longstrider_bruiser", "wh3_main_character_initiative_ogr_big_name_longstrider_butcher", 
+				"wh3_main_character_initiative_ogr_big_name_longstrider_firebelly", "wh3_main_character_initiative_ogr_big_name_longstrider_hunter",
+			},
+		["event"] = {"CharacterCharacterTargetAction", "CharacterGarrisonTargetAction"},
 		["condition"] =
 			function(context)
-				local region_name = context:garrison_residence():region():name();
-				
-				return region_name == "wh3_main_chaos_region_xen_wu" or region_name == "wh3_main_combi_region_xen_wu";
-			end
+				return (context:mission_result_success() or context:mission_result_critial_success()) and not (context:ability() == "assist_army")
+			end,
+		["grant_immediately"] = true
 	},
-	-- mountaineater
+	-- MAGIC FEASTER - Win a battle against an army led by a spellcaster.
+	{
+		["initiative_key"] = "wh3_dlc26_character_initiative_ogr_big_name_magic_feaster",
+		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
+		["condition"] =
+			function(context)
+				local character = context:character()
+				
+				if character:won_battle() then
+					local pb = cm:model():pending_battle()
+					return (pb:has_attacker() and pb:attacker() == character and cm:get_saved_value("big_name_defender_spellcaster")) or (pb:has_defender() and pb:defender() == character and cm:get_saved_value("big_name_attacker_spellcaster"))
+				end
+			end,
+		["grant_immediately"] = true
+	},
+	-- MARROW MUNCHER - End your turn with over 80 Winds of Magic reserves.
+	{
+		["initiative_key"] = 
+			{
+				"wh3_dlc26_character_initiative_ogr_big_name_marrow_muncher", "wh3_dlc26_character_initiative_ogr_big_name_firebelly_marrow_muncher", 
+			},
+		["event"] = "CharacterTurnEnd",
+		["condition"] =
+			function(context)
+				local character = context:character()
+				local mf = false
+				
+				if character:has_military_force() then 
+					mf = character:military_force()
+				elseif not character:embedded_in_military_force():is_null_interface() then
+					mf = character:embedded_in_military_force()
+				end
+			
+				if mf then
+					local wom = mf:pooled_resource_manager():resource("wh3_main_winds_of_magic")					
+					return not wom:is_null_interface() and wom:value() > 80
+				end
+			end,
+		["grant_immediately"] = true
+	},
+	-- MOUNTAINEATER - Win a battle with 3 units of Stonehorns or Thundertusks in your army.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_mountaineater",
-		["event"] = "GarrisonOccupiedEvent",
+		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return context:garrison_residence():region():settlement():get_climate() == "climate_mountain";
-			end
+				local character = context:character()		
+				local stonehorns_thundertusks = {
+					"wh3_main_ogr_mon_stonehorn_0","wh3_main_ogr_mon_stonehorn_1","wh3_twa08_ogr_mon_stonehorn_0_ror","wh3_dlc26_ogr_mon_thundertusk"
+				}		
+				return character:won_battle() and cm:count_char_army_has_unit(character, stonehorns_thundertusks) > 2
+			end,
+		["grant_immediately"] = true
 	},
-	-- mountaintalker
+	-- MOUNTAINTALKER - Win an ambush battle.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_mountaintalker",
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				if context:character():won_battle() then
-					local region = cm:get_region(cm:model():pending_battle():region_data():key());
-					
-					return region and region:settlement():get_climate() == "climate_mountain";
-				end;
-			end
+				return context:character():won_battle() and cm:model():pending_battle():ambush_battle()
+			end,
+		["grant_immediately"] = true
 	},
-	-- ogrekiller
-	{
-		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_ogrekiller",
-		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
-		["condition"] =
-			function(context)
-				return cm:character_won_battle_against_culture(context:character(), "wh3_main_ogr_ogre_kingdoms");
-			end
-	},
-	-- orcsplitter
+	-- ORCSPLITTER - Win a battle against Greenskins.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_orcsplitter",
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return cm:character_won_battle_against_culture(context:character(), "wh_main_grn_greenskins");
-			end
+				return cm:character_won_battle_against_culture(context:character(), "wh_main_grn_greenskins", "_grn_")
+			end,
+		["grant_immediately"] = true
 	},
-	-- ratkiller
+	-- RATKILLER - Win a battle against Skaven.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_ratkiller",
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return cm:character_won_battle_against_culture(context:character(), "wh2_main_skv_skaven");
-			end
+				return cm:character_won_battle_against_culture(context:character(), "wh2_main_skv_skaven", "_skv_")
+			end,
+		["grant_immediately"] = true
 	},
-	-- staydeader
+	-- STAYDEADER - Win a battle against Vampire Counts, Vampire Coast or Tomb Kings.
 	{
 		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_staydeader",
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return cm:character_won_battle_against_culture(context:character(), {"wh_main_vmp_vampire_counts", "wh2_dlc09_tmb_tomb_kings", "wh2_dlc11_cst_vampire_coast"});
-			end
+				return cm:character_won_battle_against_culture(context:character(), {"wh_main_vmp_vampire_counts", "wh2_dlc09_tmb_tomb_kings", "wh2_dlc11_cst_vampire_coast"})
+			end,
+		["grant_immediately"] = true
 	},
-	-- wallcrusher
+	-- UNSTOPPABLE - Win a battle with a Heroic victory.
 	{
-		["initiative_key"] = "wh3_main_character_initiative_ogr_big_name_wallcrusher",
+		["initiative_key"] = "wh3_dlc26_character_initiative_ogr_big_name_unstoppable",
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return context:character():won_battle() and cm:model():pending_battle():battle_type() == "settlement_standard";
-			end
+				if context:character():won_battle() then
+					local pb = cm:model():pending_battle()					
+					return (pb:attacker_won() and pb:attacker_battle_result() == "heroic_victory") or  (pb:defender_won() and pb:defender_battle_result() == "heroic_victory")
+				end
+			end,
+		["grant_immediately"] = true
 	},
 
 	-----------------------------------------------
@@ -646,7 +998,7 @@ initiative_templates = {
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return cm:character_won_battle_against_culture(context:character(), "wh3_main_nur_nurgle");
+				return cm:character_won_battle_against_culture(context:character(), "wh3_main_nur_nurgle", "_nur_");
 			end,
 		["grant_immediately"] = true
 	},
@@ -660,7 +1012,7 @@ initiative_templates = {
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return cm:character_won_battle_against_culture(context:character(), "wh3_main_sla_slaanesh");
+				return cm:character_won_battle_against_culture(context:character(), "wh3_main_sla_slaanesh", "_sla_");
 			end,
 		["grant_immediately"] = true
 	},
@@ -674,7 +1026,7 @@ initiative_templates = {
 		["event"] = {"CharacterCompletedBattle", "HeroCharacterParticipatedInBattle"},
 		["condition"] =
 			function(context)
-				return cm:character_won_battle_against_culture(context:character(), "wh3_main_tze_tzeentch");
+				return cm:character_won_battle_against_culture(context:character(), "wh3_main_tze_tzeentch", "_tze_");
 			end,
 		["grant_immediately"] = true
 	},
@@ -767,9 +1119,9 @@ initiative_templates = {
 					local attacker_char_cqi, attacker_mf_cqi, attacker_faction_name = cm:pending_battle_cache_get_attacker(1);
 					
 					if defender_faction_name == character_faction_name and pb:has_attacker() then
-						return pb:attacker():is_caster();
+						return pb:attacker():is_caster() and pb:attacker():faction():subculture() ~= "wh_main_sc_dwf_dwarfs"
 					elseif attacker_faction_name == character_faction_name and pb:has_defender() then
-						return pb:defender():is_caster();
+						return pb:defender():is_caster() and pb:defender():faction():subculture() ~= "wh_main_sc_dwf_dwarfs"
 					end;
 				end;
 			end,
@@ -1098,7 +1450,6 @@ initiative_templates = {
 				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_tze_06", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_und_06", "wh3_dlc24_character_initiative_chs_chaos_lord_tze_04",														-- Attuned to Chamon (Chaos Sorcerer Lord)
 				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_tze_07", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_und_07", 																														-- Attuned to Chamon (Chaos Sorcerer)
 				"wh3_dlc24_character_initiative_chs_exalted_hero_tze_04", 																																														-- Attuned to Chamon (Exalted Hero)
-				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_und_07", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_sla_08", "wh3_dlc20_character_initiative_chs_chaos_sorcerer_und_08", 														-- Attuned to Ulgu
 				"wh3_dlc20_character_initiative_chs_chaos_sorcerer_lord_nur_07", 																																												-- Attuned to Shyish	
 			},
 		["event"] = "CharacterRankUp",
@@ -1472,4 +1823,39 @@ function initiative_unlock:start(cqi)
 			false
 		);
 	end;
+
+	-- helper functions for certain big names
+	for _, units in pairs(regiments_of_renown) do
+		for i = 1, #units do
+			table.insert(all_ror_units, units[i])
+		end
+	end
+	
+	core:add_listener(
+		"big_name_pending_battle",
+		"PendingBattle",
+		true,
+		function(context)
+			cm:set_saved_value("big_name_attacker_spellcaster", false)
+			cm:set_saved_value("big_name_defender_spellcaster", false)
+
+			local pb = cm:model():pending_battle()
+			if pb:has_attacker() then
+				local attacker = pb:attacker()
+				
+				if attacker:is_caster() and attacker:faction():subculture() ~= "wh_main_sc_dwf_dwarfs" then
+					cm:set_saved_value("big_name_attacker_spellcaster", true)
+				end
+			end
+
+			if pb:has_defender() then
+				local defender = pb:defender()
+				
+				if defender:is_caster() and defender:faction():subculture() ~= "wh_main_sc_dwf_dwarfs" then
+					cm:set_saved_value("big_name_defender_spellcaster", true)
+				end
+			end
+		end,
+		true
+	)
 end;

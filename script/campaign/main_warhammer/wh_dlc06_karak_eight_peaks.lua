@@ -6,6 +6,18 @@ karak_eight_peaks_factions = {
 	"wh2_main_skv_clan_mors"
 };
 
+skarsniks_locked_buildings = {
+	"wh_main_grn_military_1",
+	"wh_main_grn_military_2",
+	"wh_main_grn_military_3",
+	"wh_main_grn_boars_2",
+	"wh3_dlc26_grn_boars_3",
+	"wh_dlc06_grn_boars_2_skarsnik",
+	"wh3_dlc26_grn_boars_3_skarsnik",
+}
+
+local skarsnik_faction_name = "wh_main_grn_crooked_moon"
+
 local karak_eight_peaks_region_name = "wh3_main_combi_region_karak_eight_peaks";
 
 -- list of karak eight peaks faction keys that we can lookup easily
@@ -175,6 +187,11 @@ function eight_peaks_setup()
 		cm:apply_effect_bundle_to_characters_force("wh_dlc06_bundle_eight_peaks_defender", gits_leader, 0);
 	end;
 	
+	--Add Skarsnik building restriction on the Orc recruitment chain
+	for i = 1, #skarsniks_locked_buildings do
+		cm:add_event_restricted_building_record_for_faction(skarsniks_locked_buildings[i], skarsnik_faction_name, "skarsnik_building_lock")
+	end
+
 	if skarsnik and skarsnik:is_human() then
 		
 		-- Skarsnik does NOT own Karak Eight Peaks to start with
@@ -357,8 +374,48 @@ function Add_Karak_Eight_Peaks_Listeners()
 		end,
 		true
 	);
+
+	core:add_listener(
+		"skarsnik_occupation_dismantle_check",
+		"CharacterPerformsSettlementOccupationDecision",
+		function(context)
+			return context:character():faction():name() == skarsnik_faction_name
+		end,
+		function(context)
+			local occupation_decision = context:occupation_decision_type()
+			
+			if occupation_decision == "occupation_decision_loot" or occupation_decision == "occupation_decision_occupy" then
+
+				local region = cm:get_region(karak_eight_peaks_region_name)
+				if region and not region:is_abandoned() then
+					if region:owning_faction():name() ~= skarsnik_faction_name then
+						local region_slot_list = context:garrison_residence():region():slot_list()
+						--check to see if the building exists in any of the regions
+						skarsniks_locked_buildings_removal(region_slot_list)
+					end
+				end
+			end
+		end,
+		true
+	)
+
 end;
 
+function skarsniks_locked_buildings_removal(region_slot_list)
+	for i = 1, #skarsniks_locked_buildings do
+	--check to see if the building exists in any of the regions
+		if region_slot_list:buliding_type_exists(skarsniks_locked_buildings[i]) then
+			for j = 0, region_slot_list:num_items() - 1 do
+				
+				--find the slot it exists in and remove it
+				local slot = region_slot_list:item_at(j)
+				if slot:has_building() and slot:building():name() == skarsniks_locked_buildings[i] then
+					cm:instantly_dismantle_building_in_region(slot)
+				end
+			end
+		end
+	end
+end
 
 function eight_peaks_check(karak_owner)
 	out("######## eight_peaks_check() ########");
@@ -421,5 +478,23 @@ function eight_peaks_check(karak_owner)
 	
 	out("\twh_dlc06_skarsnik_karak_owned_" .. tostring(skarsnik_owner));
 	cm:apply_effect_bundle("wh_dlc06_skarsnik_karak_owned_" .. tostring(skarsnik_owner), "wh_main_grn_crooked_moon", 0);
+	if skarsnik_owner == true then
+		for i = 1, #skarsniks_locked_buildings do
+			cm:remove_event_restricted_building_record_for_faction(skarsniks_locked_buildings[i], skarsnik_faction_name)
+		end
+	else
+		for i = 1, #skarsniks_locked_buildings do
+			cm:add_event_restricted_building_record_for_faction(skarsniks_locked_buildings[i], skarsnik_faction_name, "skarsnik_building_lock")
+			local skarsnik_region_list = cm:get_faction("wh_main_grn_crooked_moon"):region_list()
+
+			--loop through all of Skarsniks regions
+			for j = 0, skarsnik_region_list:num_items() - 1 do
+				local region_slot_list = skarsnik_region_list:item_at(j):slot_list()
+
+				--check to see if the building exists in any of the regions
+				skarsniks_locked_buildings_removal(region_slot_list)
+			end
+		end
+	end
 	out("#############################");
 end;

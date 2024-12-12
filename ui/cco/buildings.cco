@@ -9,6 +9,11 @@ Buildings
 	{
 		GetIfElse(IsContextValid(StoredContextFromParent("CcoCampaignSettlement")), StoredContextFromParent("CcoCampaignSettlement"), StoredContextFromParent("CcoCampaignCharacter"))
 	}
+
+	StoredSettlementOrForce
+	{
+		GetIfElse(IsContextValid(StoredContextFromParent("CcoCampaignSettlement")), StoredContextFromParent("CcoCampaignSettlement"), StoredContextFromParent("CcoCampaignCharacter").MilitaryForceContext)
+	}
 	
 	IsHostileButtonSelected
 	{

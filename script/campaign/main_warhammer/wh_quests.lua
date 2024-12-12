@@ -70,6 +70,11 @@ function q_setup()
 		----------------------
 		----- GREENSKINS -----
 		----------------------	
+		
+		["wh3_dlc26_grn_gorbad_ironclaw"] = {			
+			{"mission", "wh3_dlc26_anc_weapon_morglor_the_mangler", "wh3_dlc26_ie_qb_grn_gorbad_forest_bane", nil, nil}
+		},
+
 		["wh2_dlc15_grn_grom_the_paunch"] = {			
 			{"mission", "wh2_dlc15_anc_weapon_axe_of_grom", "wh3_main_ie_qb_grn_grom_axe_of_grom", nil, "war.camp.advice.quests.001"},
 			{"mission", "wh2_dlc15_anc_enchanted_item_lucky_banner", "wh3_main_ie_qb_grn_grom_lucky_banner"},
@@ -406,12 +411,21 @@ function q_setup()
 		["wh3_main_ogr_skrag_the_slaughterer"] = {
 			{"mission", "wh3_main_anc_enchanted_item_cauldron_of_the_great_maw", "wh3_main_ie_qb_ogr_skrag_cauldron_of_the_great_maw", nil, "wh3_main_camp_quest_skrag_cauldron_of_the_great_maw_001"}
 		},
+		["wh3_dlc26_ogr_golgfag_maneater"] = {
+			{"mission", "wh3_dlc26_anc_enchanted_item_bugmans_xxxxxx", "wh3_dlc26_ie_qb_ogr_golgfag_bugmans_xxxxxx", nil, "wh3_dlc26_camp_quest_golgfag_bugmans_xxxxxx_001"}
+		},
 		
 		----------------------
 		-------- KHORNE ------
 		----------------------	
 		["wh3_main_kho_skarbrand"] = {
 			{"mission", "wh3_main_anc_weapon_slaughter_and_carnage", "wh3_main_ie_qb_kho_skarbrand_slaughter_and_carnage", nil, "wh3_main_camp_quest_skarbrand_slaughter_and_carnage_001"}
+		},
+		["wh3_dlc26_kho_skulltaker"] = {
+			{"mission", "wh3_dlc26_anc_weapon_the_slayer_sword", "wh3_dlc26_ie_qb_kho_skulltaker_slayer_sword"}
+		},
+		["wh3_dlc26_kho_arbaal_the_undefeated"] = {
+			{"mission", "wh3_dlc26_anc_weapon_destroyer_of_khorne", "wh3_dlc26_ie_qb_kho_arbaal_destroyer_of_khorne", nil, "wh3_dlc26_camp_quest_arbaal_destroyer_of_khorne_001"}
 		},
 
 		----------------------

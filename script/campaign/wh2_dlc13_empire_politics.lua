@@ -101,6 +101,13 @@ political_event_count = 20; -- The total number of 'politics' events there are. 
 empire_political_debug_fire_dilemmas = false;
 empire_fired_political_events = {} -- list of political events that have already fired so we don't duplicate them.
 
+empire_male_dilemmas = { -- dilemmas that use male pronouns, so ignore any female faction leaders as targets
+	wh2_dlc13_emp_elector_politics_6 = true,
+	wh2_dlc13_emp_elector_politics_9 = true,
+	wh2_dlc13_emp_elector_politics_10 = true,
+	wh2_dlc13_emp_elector_politics_20 = true
+}
+
 EMPIRE_ELECTOR_COUNTS = {
 	["averland"] = {capital = "wh3_main_combi_region_averheim", faction_key = "wh_main_emp_averland"},
 	["reikland"] = {capital = "wh3_main_combi_region_altdorf", faction_key = "wh_main_emp_empire"},
@@ -1112,7 +1119,7 @@ function empire_trigger_political_dilemma(faction, event_override)
 		for i = 1, #empire_politics_factions do
 			local elector = cm:get_faction(empire_politics_factions[i].faction);
 
-			if elector:is_null_interface() == false and elector:is_dead() == false and elector:is_human() == false then
+			if elector:is_null_interface() == false and elector:is_dead() == false and elector:is_human() == false and (not empire_male_dilemmas["wh2_dlc13_emp_elector_politics_"..event_number] or not elector:faction_leader():character_details():character_subtype_has_female_name()) then 
 				table.insert(possible_targets, elector);
 			end
 		end

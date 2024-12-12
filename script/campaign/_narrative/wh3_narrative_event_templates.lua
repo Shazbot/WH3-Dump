@@ -3277,7 +3277,7 @@ local function construct_narrative_event_reduce_upkeep(unique_name, faction_key,
 
 		local function check_upkeep(faction)
 			local upkeep = faction:upkeep_income_percent();
-			ne:get_mission_manager():update_scripted_objective_text(full_mission_text, math.floor(upkeep));
+			ne:get_mission_manager():update_scripted_objective_text(full_mission_text, threshold, math.floor(upkeep));
 			return upkeep < threshold;
 		end;
 
@@ -3316,6 +3316,8 @@ local function construct_narrative_event_reduce_upkeep(unique_name, faction_key,
 				end
 			end
 		);
+
+		mm:add_each_time_trigger_callback(function() check_upkeep(cm:get_faction(faction_key)) end);
 
 		-- set up mission rewards
 		add_narrative_event_mission_rewards(ne, mission_rewards);

@@ -625,5 +625,9 @@ function tol_buff(faction_key)
 	if faction_key == "wh3_main_sla_seducers_of_slaanesh" then
 		cm:faction_add_pooled_resource("wh3_main_sla_seducers_of_slaanesh", "wh3_main_sla_devotees", "events", 500)
 	end
+
+	if faction_key == "wh3_main_ogr_goldtooth" then
+		cm:apply_effect_bundle("wh3_dlc26_bundle_tol_disable_tyrants_demands", "wh3_main_ogr_goldtooth", 0)
+	end
 end;
 

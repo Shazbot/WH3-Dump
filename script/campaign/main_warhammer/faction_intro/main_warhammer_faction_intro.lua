@@ -277,6 +277,14 @@ data.faction_intros = {
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},
 
+	wh3_dlc26_kho_arbaal = faction_intro_data:new{
+		preset = data.intro_presets.standard,
+		cam_cutscene_start = {x = 570.9, y = 622,	d = 28.640884, b = 0,	h = 62.461643,},
+		cam_gameplay_start = {x = 570.9, y = 622,	d = 8.05, b = 0, h = 8.35},
+		advice_line = "wh3_dlc26_ie_camp_kho_arbaal_intro_01",
+		cutscene_style = data.cutscene_styles.zoom_in_and_speak
+	},
+
 	--------------------
 	-------NORSCA-------
 	--------------------
@@ -597,18 +605,10 @@ data.faction_intros = {
 	--------------------
 	------BADLANDS------
 	--------------------
-	wh_main_grn_orcs_of_the_bloody_hand = faction_intro_data:new{
-		preset = data.intro_presets.standard,
-		cam_cutscene_start = {x = 428.481445, y = 338.935181,	d = 22.126953, b = 0.0,	h = 64.061188,},
-		cam_gameplay_start = {x = 428.481445, y = 336.249146,	d = 9.03183, b = 0, h = 10.620801,},
-		advice_line = "wh3_dlc21_ie_camp_grn_wurrzag_intro_01",
-		cutscene_style = data.cutscene_styles.zoom_in_and_speak
-	},
-
 	wh3_main_kho_exiles_of_khorne = faction_intro_data:new{
 		preset = data.intro_presets.standard,
-		cam_cutscene_start = {x = 462.971191, y = 247.862244,	d = 21.887283, b = 0.0,	h = 65.773239,},
-		cam_gameplay_start = {x = 459.347443, y = 252.015839,	d = 10.073624, b = 0, h = 11.982787,},
+		cam_cutscene_start = {x = 448.722534, y = 250.346802,	d = 21.887283, b = 0, h = 65.773239,},
+		cam_gameplay_start = {x = 448.722534, y = 250.346802,	d = 10.073624, b = 0, h = 11.982787,},
 		advice_line = "wh3_dlc21_ie_camp_kho_skarbrand_intro_01",
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},
@@ -619,6 +619,15 @@ data.faction_intros = {
 		cam_gameplay_start = {x = 438.66684, y = 278.236084,	d = 6.849304, b = 0, h = 7.866285,},
 		advice_line = "wh3_dlc21_ie_camp_bst_malagor_intro_01",
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
+	},
+
+	wh3_dlc26_grn_gorbad_ironclaw = faction_intro_data:new{
+		preset = data.intro_presets.standard,
+		cam_cutscene_start = {x = 486.923309, y = 367.893555,	d = 28.906952, b = 0.0,	h = 63.901413,},
+		cam_gameplay_start = {x = 486.923309, y = 367.893555,	d = 15.639679, b = 0, h = 12.637852,},
+		advice_line = "wh3_dlc26_ie_camp_grn_gorbad_ironclaw_intro_01",
+		cutscene_style = data.cutscene_styles.zoom_in_and_speak,
+		fullscreen_movie = "warhammer3/grn/gorbad_ironclaw_intro"
 	},
 
 
@@ -679,6 +688,15 @@ data.faction_intros = {
 		cam_gameplay_start = {x = 125.670151, y = 130.636841,	d = 11.932541, b = 0, h = 9.387771,},
 		advice_line = "wh3_dlc21_ie_camp_skv_skrolk_intro_01",
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
+	},
+
+	wh3_dlc26_kho_skulltaker = faction_intro_data:new{
+		preset = data.intro_presets.standard,
+		cam_cutscene_start = {x = 71.48, y = 235.65,	d = 28.640884, b = 0,	h = 62.461643,},
+		cam_gameplay_start = {x = 71.48, y = 235.65,	d = 5.50, b = 0, h = 6.20},
+		advice_line = "wh3_dlc26_ie_camp_kho_skulltaker_intro_01",
+		cutscene_style = data.cutscene_styles.zoom_in_and_speak,
+		fullscreen_movie = "warhammer3/kho/skulltaker_intro"
 	},
 
 
@@ -781,6 +799,13 @@ data.faction_intros = {
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},
 
+	wh_main_grn_orcs_of_the_bloody_hand = faction_intro_data:new{
+		preset = data.intro_presets.standard,
+		cam_cutscene_start = {x = 416.847565, y = 148.274902,	d = 28.963486, b = 0.0,	h = 63.193916,},
+		cam_gameplay_start = {x = 419.209076, y = 143.268433,	d = 19.159637, b = 0, h = 15.982112,},
+		advice_line = "wh3_dlc21_ie_camp_grn_wurrzag_intro_01",
+		cutscene_style = data.cutscene_styles.zoom_in_and_speak
+	},
 
 	--------------------
 	--SOUTHERN WASTES---
@@ -827,6 +852,15 @@ data.faction_intros = {
 		cam_gameplay_start = {x = 536.3703, y = 431.673462,	d = 6.451813, b = 0, h = 7.808351,},
 		advice_line = "wh3_dlc21_ie_camp_grn_skarsnik_intro_01",
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
+	},
+
+	wh3_dlc26_ogr_golgfag = faction_intro_data:new{
+		preset = data.intro_presets.standard,
+		cam_cutscene_start = {x = 415.989563, y = 594.78772, d = 26.595242, b = 0, h = 59.490002,},
+		cam_gameplay_start = {x = 411.467224, y = 586.985535,	d = 15.820679, b = 0, h = 13.942089,},
+		advice_line = "wh3_dlc26_ie_camp_ogr_golgfag_intro_01",
+		cutscene_style = data.cutscene_styles.zoom_in_and_speak,
+		fullscreen_movie = "warhammer3/ogr/golgfag_intro"
 	},
 
 
@@ -970,7 +1004,7 @@ data.faction_intros = {
 		cam_gameplay_start = {x = 886.934021, y = 282.235626,	d = 8.666168, b = 0, h = 10.348305,},
 		advice_line = "wh3_dlc21_ie_camp_lzd_nakai_intro_01",
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
-	},
+	}
 }
 
 return data

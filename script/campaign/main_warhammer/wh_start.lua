@@ -139,18 +139,6 @@ function start_game_all_factions()
 		end;
 		-- Starting Vows
 		add_starting_vows();
-		-- Add Ungrim start mission
-		local karak_kadrin = cm:get_faction("wh_main_dwf_karak_kadrin");
-		if karak_kadrin and karak_kadrin:is_human() then
-			local mm = mission_manager:new("wh_main_dwf_karak_kadrin", "wh2_main_dwf_ungrim_start_mission");
-			mm:add_new_objective("CAPTURE_REGIONS");
-			mm:add_condition("region wh3_main_combi_region_gnashraks_lair");
-			mm:add_condition("ignore_allies");
-			mm:add_payload("money 1000");
-			mm:add_payload("faction_pooled_resource_transaction{resource dwf_oathgold;factor grudges;amount 30;context absolute;}");
-			mm:set_should_whitelist(false);
-			mm:trigger();
-		end;
 		
 		--Campaign Custom Starts
 		out("==== Custom Starts ====");
@@ -315,6 +303,8 @@ function start_game_all_factions()
 	starting_grudge_missions:initialise()
 	emp_techs:initialise()
 	ancillary_item_forge:initialise()
+	subjugation:initialise()
+	unholy_manifestations:initialise()
 
 	---Champions of Chaos
 	CUS:initialise()
@@ -352,6 +342,14 @@ function start_game_all_factions()
 	empire_state_troops:initialise()
 	gardens_of_morr:initialise()
 	gelt_dilemmas:initialise()
+
+	-- dlc26
+	merc_contracts:initialise()
+	cloak_of_skulls:initialise()
+	wrath_of_khorne:initialise()
+	da_plan:initialise()
+	ogre_camps:initialise()
+	tyrants_demands:initialise()
 
 	-- Update 5.2
 	add_underdeep_listeners();

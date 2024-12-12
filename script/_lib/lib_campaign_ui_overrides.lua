@@ -3806,6 +3806,19 @@ function campaign_ui_manager:load_ui_overrides()
 			cm:override_ui("disable_help_pages", false);
 		end
 	)
+
+	------------------------------
+	-- disable_wrath_of_khorne_button
+	-------------------------------
+	ui_overrides.disable_wrath_of_khorne_button = ui_override:new(
+		"disable_wrath_of_khorne_button",
+		function()
+			cm:override_ui("disable_wrath_of_khorne_button", true);
+		end,
+		function()
+			cm:override_ui("disable_wrath_of_khorne_button", false);
+		end
+	)
 	
 	-- load in the contents of the ui_overrides table that we've just declared
 	for override_name, override in pairs(ui_overrides) do

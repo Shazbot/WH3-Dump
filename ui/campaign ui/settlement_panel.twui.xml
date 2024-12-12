@@ -106,6 +106,7 @@
 								<other_faction_overlay this="052ACA82-7072-4AE6-A4D6D04E36972416">
 									<dy_flag this="C34DBA86-13C7-4DB1-ACEE721A117D34B0">
 										<diplomatic_relations this="08FD0AD3-BB15-47BD-9A24039B9359D26E"/>
+										<reoccupation_countdown this="11CFAEED-8132-45FB-9D24ACFCE1052F65"/>
 									</dy_flag>
 								</other_faction_overlay>
 							</default_view>
@@ -7824,7 +7825,7 @@
 				<callback_with_context
 					callback_id="ContextImageSetter"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="FactionFlagRotated">
+					context_function_id="GetIfElse(IsOccupationImmune, &quot;ui/flags/wh3_dlc26_reoccupation_immunity/mon_rotated.png&quot; , FactionFlagRotated)">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -7868,7 +7869,7 @@
 				<callback_with_context
 					callback_id="ContextTooltipSetter"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="GetIfElse(IsAbandoned, Loc(&quot;abandoned_region_rebel_faction_name&quot;), FactionName)"/>
+					context_function_id="GetIfElse(IsAbandoned, GetIfElse(IsOccupationImmune, Loc(&quot;abandoned_region_immune_occupation&quot;), Loc(&quot;abandoned_region_rebel_faction_name&quot;)), FactionName)"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -8060,12 +8061,28 @@
 							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoCampaignSettlement">
+					<child_m_user_properties>
+						<property
+							name="fallback_state"
+							value="NewState"/>
+						<property
+							name="reoccupation_immunity"
+							value="IsOccupationImmune"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
 					this="CDF196E0-9333-4B1A-9BA7FA712947E62E"
 					uniqueguid="CDF196E0-9333-4B1A-9BA7FA712947E62E"
 					imagepath="ui/skins/default/settlement_locked.png"/>
+				<component_image
+					this="E97E5F93-1601-4796-8F9920B770D13E2A"
+					uniqueguid="E97E5F93-1601-4796-8F9920B770D13E2A"
+					imagepath="ui/skins/default/dlc26_reoccupation_immunity/settlement_reoccupation_immunity_overlay.png"/>
 			</componentimages>
 			<states>
 				<newstate
@@ -8083,6 +8100,21 @@
 							height="198"/>
 					</imagemetrics>
 				</newstate>
+				<reoccupation_immunity
+					this="D94C9A4C-BB58-4AE4-A689637CD3879DC8"
+					name="reoccupation_immunity"
+					width="186"
+					height="198"
+					uniqueguid="D94C9A4C-BB58-4AE4-A689637CD3879DC8">
+					<imagemetrics>
+						<image
+							this="C6BA9B72-E274-4C6F-B4EBCB10D5F2C6D3"
+							uniqueguid="C6BA9B72-E274-4C6F-B4EBCB10D5F2C6D3"
+							componentimage="E97E5F93-1601-4796-8F9920B770D13E2A"
+							width="186"
+							height="198"/>
+					</imagemetrics>
+				</reoccupation_immunity>
 			</states>
 		</other_faction_overlay>
 		<template_garrison_unit_card
@@ -9651,5 +9683,88 @@
 				margins="5.00,0.00"
 				vertical_alignment="Center"/>
 		</template_discovered_entry>
+		<reoccupation_countdown
+			this="11CFAEED-8132-45FB-9D24ACFCE1052F65"
+			id="reoccupation_countdown"
+			offset="0.00,30.00"
+			allowverticalresize="false"
+			visible="false"
+			docking="Center Left"
+			component_anchor_point="0.00,0.50"
+			priority="45"
+			componentleveltooltip="{{tr:tooltip_ruins_occupation_cooldown}}"
+			tooltiplabel="ComponentTooltip_893b37b7"
+			uniqueguid="11CFAEED-8132-45FB-9D24ACFCE1052F65"
+			currentstate="6336121C-5550-492E-B0E9C640D24152EC"
+			defaultstate="6336121C-5550-492E-B0E9C640D24152EC">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="IsOccupationImmune== true &amp;&amp; OccupationImmunityDuration &gt; 0"/>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="OccupationImmunityDuration">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignTurnStart"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="1B6DD1EE-5084-4930-A18313B48FC463B0"
+					uniqueguid="1B6DD1EE-5084-4930-A18313B48FC463B0"
+					imagepath="ui/skins/default/icon_banner_bg.png"/>
+				<component_image
+					this="DA484F9B-AD48-41FA-B9447E0655A7113F"
+					uniqueguid="DA484F9B-AD48-41FA-B9447E0655A7113F"
+					imagepath="ui/skins/default/icon_hourglass.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="6336121C-5550-492E-B0E9C640D24152EC"
+					name="default"
+					width="44"
+					height="29"
+					interactive="true"
+					disabled="true"
+					uniqueguid="6336121C-5550-492E-B0E9C640D24152EC">
+					<imagemetrics>
+						<image
+							this="D15A7A05-69F6-46A9-93BBF7165BC6022B"
+							uniqueguid="D15A7A05-69F6-46A9-93BBF7165BC6022B"
+							componentimage="1B6DD1EE-5084-4930-A18313B48FC463B0"
+							width="44"
+							height="29"
+							tile="true"
+							margin="0.00,15.00,0.00,0.00"/>
+						<image
+							this="4F09F408-A69E-4961-A780984D475FFB5F"
+							uniqueguid="4F09F408-A69E-4961-A780984D475FFB5F"
+							componentimage="DA484F9B-AD48-41FA-B9447E0655A7113F"
+							offset="-4.00,1.00"
+							width="19"
+							height="27"
+							dockpoint="Center Left"
+							dock_offset="-4.00,0.00"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<component_text
+						text="99"
+						textxoffset="16.00,10.00"
+						textyoffset="7.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_3c76cd1c"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</default>
+			</states>
+		</reoccupation_countdown>
 	</components>
 </layout>

@@ -41,6 +41,15 @@ function start_scripted_tours()
 			in_dwf_book_of_grudges:start()
 		end
 
+		if cm:are_any_factions_human(nil, "wh3_main_kho_khorne") then
+			in_kho_skull_throne_tour:start()
+		end
+
+		if cm:are_any_factions_human(nil, "wh3_main_ogr_ogre_kingdoms") then
+			in_ogr_meat_transfer_tour:start()
+			in_ogr_camps_tour:start()
+		end
+
 
 		-- factions
 
@@ -70,6 +79,32 @@ function start_scripted_tours()
 		local karl_franz_interface = cm:get_faction("wh_main_emp_empire");
 		if karl_franz_interface and karl_franz_interface:is_human() then
 			in_emp_electoral_machinations_tour:start();
+		end
+
+		local skulltaker_interface = cm:get_faction("wh3_dlc26_kho_skulltaker");
+		if skulltaker_interface and skulltaker_interface:is_human() then
+			in_kho_cloak_of_skulls_tour:start();
+			in_kho_cloak_of_skulls_teleport_tour:start();
+		end
+
+		local arbaal_interface = cm:get_faction("wh3_dlc26_kho_arbaal");
+		if arbaal_interface and arbaal_interface:is_human() then
+			in_kho_wrath_of_khorne_tour:start();
+		end
+
+		local greasus_interface = cm:get_faction("wh3_main_ogr_goldtooth");
+		if greasus_interface and greasus_interface:is_human() then
+			in_ogr_tyrants_demands_tour:start();
+		end
+
+		local golgfag_interface = cm:get_faction("wh3_dlc26_ogr_golgfag")
+		if golgfag_interface and golgfag_interface:is_human() then
+			in_ogr_contracts_tour:start()
+		end
+
+		local gorbad_interface = cm:get_faction("wh3_dlc26_grn_gorbad_ironclaw")
+		if gorbad_interface and gorbad_interface:is_human() then
+			in_grn_da_plan_tour:start()
 		end
 	end
 end
@@ -5264,6 +5299,999 @@ scripted_emp_college_of_magic_tour = {
 }
 
 
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Khorne Skull Throne
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_kho_skull_throne_tour = intervention:new(
+	"in_kho_skull_throne_tour",			 								-- string name
+	0, 																	-- cost
+	function() 															-- trigger callback
+		out("#### "..scripted_kho_skull_throne_tour.id.." ####")
+		ui_scripted_tour:construct_tour(scripted_kho_skull_throne_tour, in_kho_skull_throne_tour)
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_kho_skull_throne_tour:add_advice_key_precondition("wh3.dlc26.camp.advice.kho.skull_throne.001")
+in_kho_skull_throne_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_kho_skull_throne_tour:set_should_lock_ui()
+in_kho_skull_throne_tour:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		return context.string == "dlc26_skull_throne"
+	end
+)
+
+scripted_kho_skull_throne_tour = {
+	id = "in_kho_skull_throne_tour",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_skull_throne",
+	advice_string = "wh3.dlc26.camp.advice.kho.skull_throne.001",
+	{
+		id = "kho_skull_throne_rituals",
+		highlight = {
+			function() return find_uicomponent("dlc26_skull_throne", "rituals_holder") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_kho_skull_throne_1",
+			direction = "top",
+			size = 350,
+			length = 25
+		}
+	},
+	{
+		id = "kho_skull_throne_ritual_button",
+		highlight = {
+			function() return find_uicomponent(ui_scripted_tour:find_valid_child_component(find_uicomponent("dlc26_skull_throne", "t1_rituals_holder"))) end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_kho_skull_throne_2",
+			direction = "left",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "kho_skull_throne_skulls_bar",
+		highlight = {
+			function() return find_uicomponent("dlc26_skull_throne", "skull_throne_progress_bar", "bar") end
+		},
+		highlight_size_mod = 40,
+		text_box = {
+			text = "dlc26_text_pointer_kho_skull_throne_3",
+			direction = "left",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "kho_skull_throne_skulls_tier",
+		highlight = {
+			function() return find_uicomponent("dlc26_skull_throne", "CcoPooledResourceThresholdOperationSetRecordwh3_dlc26_operation_set_kho_skull_throne_progress_1") end
+		},
+		highlight_size_mod = 40,
+		text_box = {
+			text = "dlc26_text_pointer_kho_skull_throne_4",
+			direction = "left",
+			size = 350,
+			length = 50,
+			x_offset = 50
+		}
+	}
+}
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Khorne Cloak of Skulls
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_kho_cloak_of_skulls_tour = intervention:new(
+	"in_kho_cloak_of_skulls_tour",			 							-- string name
+	0, 																	-- cost
+	function() 															-- trigger callback
+		out("#### "..scripted_kho_cloak_of_skulls_tour.id.." ####")
+		ui_scripted_tour:construct_tour(scripted_kho_cloak_of_skulls_tour, in_kho_cloak_of_skulls_tour)
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_kho_cloak_of_skulls_tour:add_advice_key_precondition("wh3.dlc26.camp.advice.kho.cloak_of_skulls.001")
+in_kho_cloak_of_skulls_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_kho_cloak_of_skulls_tour:set_should_lock_ui()
+in_kho_cloak_of_skulls_tour:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		return context.string == "dlc26_cloak_of_skulls"
+	end
+)
+
+scripted_kho_cloak_of_skulls_tour = {
+	id = "in_kho_cloak_of_skulls_tour",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_cloak_of_skulls",
+	advice_string = "wh3.dlc26.camp.advice.kho.cloak_of_skulls.001",
+	{
+		id = "kho_cloak_of_skulls_cloak",
+		highlight = {
+			function() return find_uicomponent("dlc26_cloak_of_skulls", "skulls", "links") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_kho_cloak_of_skulls_1",
+			direction = "bottom",
+			size = 350,
+			length = 25
+		}
+	},
+	{
+		id = "kho_cloak_of_skulls_skull",
+		highlight = {
+			function() return find_uicomponent("dlc26_cloak_of_skulls", "row_1", "1") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_kho_cloak_of_skulls_2",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+		click_on_navigate = function()
+			local uic = find_uicomponent("dlc26_cloak_of_skulls", "skull_info_holder", "button_enchant")
+
+			if not uic or not uic:Visible() then
+				return find_uicomponent("dlc26_cloak_of_skulls", "row_1", "1", "dlc26_cloak_skull_template", "content_holder")
+			end
+		end
+	},
+	{
+		id = "kho_cloak_of_skulls_skull_details",
+		highlight = {
+			function() return find_uicomponent("dlc26_cloak_of_skulls", "skull_info_holder", "tier_list") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_kho_cloak_of_skulls_3",
+			direction = "left",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "kho_cloak_of_skulls_empower",
+		highlight = {
+			function() return find_uicomponent("dlc26_cloak_of_skulls", "skull_info_holder", "button_enchant") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_kho_cloak_of_skulls_4",
+			direction = "left",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "kho_cloak_of_skulls_effects",
+		highlight = {
+			function() return find_uicomponent("dlc26_cloak_of_skulls", "active_effects_holder") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_kho_cloak_of_skulls_5",
+			direction = "right",
+			size = 350,
+			length = 50
+		}
+	}
+}
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Khorne Cloak of Skulls Teleport
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_kho_cloak_of_skulls_teleport_tour = intervention:new(
+	"in_kho_cloak_of_skulls_teleport_tour",			 					-- string name
+	0, 																	-- cost
+	function() 															-- trigger callback
+		out("#### "..scripted_kho_cloak_of_skulls_teleport_tour.id.." ####")
+		ui_scripted_tour:construct_tour(scripted_kho_cloak_of_skulls_teleport_tour, in_kho_cloak_of_skulls_teleport_tour)
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_kho_cloak_of_skulls_teleport_tour:add_advice_key_precondition("wh3.dlc26.camp.advice.kho.cloak_of_skulls_teleport.001")
+in_kho_cloak_of_skulls_teleport_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_kho_cloak_of_skulls_teleport_tour:set_should_lock_ui()
+in_kho_cloak_of_skulls_teleport_tour:add_trigger_condition(
+	"CharacterSelected",
+	function(context)
+		local character = context:character()
+
+		return character:character_subtype_key() == "wh3_dlc26_kho_skulltaker" and not character:faction():rituals():ritual_status("wh3_dlc26_skulltaker_teleport"):script_locked()
+	end
+)
+
+in_kho_cloak_of_skulls_teleport_tour:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		if context.string == "units_panel" then
+
+			local skulltaker = find_uicomponent("units_panel", "units", "LandUnit 0")
+			if skulltaker then
+				local cco_skull = skulltaker:GetContextObject("CcoCampaignUnit"):Call("UnitRecordContext"):Call("Key")
+
+				if cco_skull and cco_skull == "wh3_dlc26_kho_cha_skulltaker" then
+					local skulltaker_faction = cm:get_faction("wh3_dlc26_kho_skulltaker")
+					return not skulltaker_faction:rituals():ritual_status("wh3_dlc26_skulltaker_teleport"):script_locked()
+				end
+			end
+		end
+
+		return false
+	end
+)
+
+
+scripted_kho_cloak_of_skulls_teleport_tour = {
+	id = "in_kho_cloak_of_skulls_teleport_tour",
+	localised_name = "rituals_display_name_wh3_dlc26_skulltaker_teleport",
+	advice_string = "wh3.dlc26.camp.advice.kho.cloak_of_skulls_teleport.001",
+	{
+		id = "kho_cloak_of_skulls_teleport_cloak",
+		highlight = {
+			function() return find_uicomponent("character_info_parent", "dlc26_cloak_of_skulls_teleport_holder") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_kho_cloak_of_skulls_teleport_1",
+			direction = "left",
+			size = 350,
+			length = 60
+		}
+	}
+}
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Khorne Wrath of Khorne
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_kho_wrath_of_khorne_tour = intervention:new(
+	"in_kho_wrath_of_khorne_tour",			 							-- string name
+	0, 																	-- cost
+	function() 															-- trigger callback
+		out("#### "..scripted_kho_wrath_of_khorne_tour.id.." ####")
+		ui_scripted_tour:construct_tour(scripted_kho_wrath_of_khorne_tour, in_kho_wrath_of_khorne_tour)
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_kho_wrath_of_khorne_tour:add_advice_key_precondition("wh3.dlc26.camp.advice.kho.wrath_of_khorne.001")
+in_kho_wrath_of_khorne_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_kho_wrath_of_khorne_tour:set_should_lock_ui()
+in_kho_wrath_of_khorne_tour:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		return context.string == "dlc26_wrath_of_khorne"
+	end
+)
+
+scripted_kho_wrath_of_khorne_tour = {
+	id = "in_kho_wrath_of_khorne_tour",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_wrath_of_khorne",
+	advice_string = "wh3.dlc26.camp.advice.kho.wrath_of_khorne.001",
+	{
+		id = "kho_wrath_of_khorne_challenges",
+		highlight = {
+			function() return find_uicomponent("dlc26_wrath_of_khorne", "map") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_kho_wrath_of_khorne_1",
+			direction = "bottom",
+			size = 350,
+			length = 25
+		},
+		click_on_navigate = function()
+			local uic = find_uicomponent("dlc26_wrath_of_khorne", "mission_selected")
+
+			if uic and uic:Visible() then
+				return find_uicomponent("dlc26_wrath_of_khorne", "map_overlay", "wh3_dlc26_arbaal_wrath_of_khorne_mission_weak_1")
+			end
+		end
+	},
+	{
+		id = "kho_wrath_of_khorne_challenge_types",
+		highlight = {
+			function() return find_uicomponent("dlc26_wrath_of_khorne", "no_marker_selected") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_kho_wrath_of_khorne_2",
+			direction = "left",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "kho_wrath_of_khorne_map",
+		highlight = {
+			function() return find_uicomponent("dlc26_wrath_of_khorne", "map_overlay", "wh3_dlc26_arbaal_wrath_of_khorne_mission_weak_1") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_kho_wrath_of_khorne_3",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+		click_on_navigate = function()
+			local uic = find_uicomponent("dlc26_wrath_of_khorne", "mission_selected")
+
+			if not uic or not uic:Visible() then
+				return find_uicomponent("dlc26_wrath_of_khorne", "map_overlay", "wh3_dlc26_arbaal_wrath_of_khorne_mission_weak_1")
+			end
+		end
+	},
+	{
+		id = "kho_wrath_of_khorne_travel",
+		highlight = {
+			function() return find_uicomponent("dlc26_wrath_of_khorne", "travel_button") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_kho_wrath_of_khorne_4",
+			direction = "left",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "kho_wrath_of_khorne_capital",
+		highlight = {
+			function() return find_uicomponent("dlc26_wrath_of_khorne", "map_overlay", "capital") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_kho_wrath_of_khorne_5",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "kho_wrath_of_khorne_boons",
+		highlight = {
+			function()
+				local uic = find_uicomponent("dlc26_wrath_of_khorne", "panel_right_low_res")
+
+				if uic and uic:Visible() then
+					return uic
+				else
+					return find_uicomponent("dlc26_wrath_of_khorne", "panel_right_high_res")
+				end
+			end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_kho_wrath_of_khorne_6",
+			direction = "right",
+			size = 350,
+			length = 50
+		}
+	}
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- OGR Meat Transfer
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_ogr_meat_transfer_tour = intervention:new(
+	"in_ogr_meat_transfer_tour",			 						-- string name
+	0, 																	-- cost
+	function() 
+		cm:callback(function()
+			if find_uicomponent(core:get_ui_root(), "units_panel", "main_units_panel", "meat_transfer_docker", "dlc26_ogr_meat_transfer"):VisibleFromRoot() then
+
+			out("#### "..scripted_ogr_meat_transfer_tour.id.." ####")
+			
+			ui_scripted_tour:construct_tour(scripted_ogr_meat_transfer_tour, in_ogr_meat_transfer_tour)
+			else 
+				in_ogr_meat_transfer_tour:cancel()
+
+			end
+		end,	0.2)															-- trigger callback
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_ogr_meat_transfer_tour:add_advice_key_precondition("wh3.dlc26.camp.advice.ogr.meat_transfer.001")
+in_ogr_meat_transfer_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_ogr_meat_transfer_tour:set_should_lock_ui()
+in_ogr_meat_transfer_tour:add_trigger_condition(
+	"ComponentLClickUp",
+	function(context)
+		local panel = find_uicomponent(core:get_ui_root(), "dlc26_ogr_meat_transfer")
+		if panel and panel:Visible() then
+			return true
+		end
+	end
+)
+
+scripted_ogr_meat_transfer_tour = {
+	id = "in_ogr_meat_transfer_tour",
+	localised_name = "ui_text_replacements_localised_text_dlc26_meat_transfer_title",
+	advice_string = "wh3.dlc26.camp.advice.ogr.meat_transfer.001",
+
+	{
+		id = "ogr_meat_transfer_1",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc26_ogr_meat_transfer", "panel_main") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_ogr_meat_transfer_1",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "ogr_meat_transfer_2",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc26_ogr_meat_transfer", "holder_armies_list") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_ogr_meat_transfer_2",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "ogr_meat_transfer_3",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc26_ogr_meat_transfer", "holder_camps_list") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_ogr_meat_transfer_3",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "ogr_meat_transfer_4",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc26_ogr_meat_transfer", "holder_transfer_controls") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_ogr_meat_transfer_4",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "ogr_meat_transfer_5",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc26_ogr_meat_transfer", "section_buttons")  end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_ogr_meat_transfer_5",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+	},
+}
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Ogre Kingdoms Tyrant's Demands
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_ogr_tyrants_demands_tour = intervention:new(
+	"in_ogr_tyrants_demands_tour",			 							-- string name
+	0, 																	-- cost
+	function() 															-- trigger callback
+		out("#### "..scripted_ogr_tyrants_demands_tour.id.." ####")
+		ui_scripted_tour:construct_tour(scripted_ogr_tyrants_demands_tour, in_ogr_tyrants_demands_tour)
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_ogr_tyrants_demands_tour:add_advice_key_precondition("wh3.dlc26.camp.advice.ogr_tyrants_demands.001")
+in_ogr_tyrants_demands_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_ogr_tyrants_demands_tour:set_should_lock_ui()
+in_ogr_tyrants_demands_tour:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		return context.string == "dlc26_tyrants_demands"
+	end
+)
+
+scripted_ogr_tyrants_demands_tour = {
+	id = "in_ogr_tyrants_demands_tour",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_tyrants_demands",
+	advice_string = "wh3.dlc26.camp.advice.ogr_tyrants_demands.001",
+	{
+		id = "ogr_tyrants_demands_panel",
+		highlight = {
+			function() return find_uicomponent("dlc26_tyrants_demands", "panel_container") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_ogr_tyrants_demands_1",
+			direction = "bottom",
+			size = 350,
+			length = 50,
+			y_offset = -10
+		}
+	},
+	{
+		id = "ogr_tyrants_demands_actions",
+		highlight = {
+			function() return find_uicomponent("dlc26_tyrants_demands", "actions_list") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_ogr_tyrants_demands_2",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "ogr_tyrants_demands_action_details",
+		highlight = {
+			function() return find_uicomponent("dlc26_tyrants_demands", "perform_target_holder") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_ogr_tyrants_demands_3",
+			direction = "right",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "ogr_tyrants_demands_perform",
+		highlight = {
+			function() return find_uicomponent("dlc26_tyrants_demands", "button_perform") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_ogr_tyrants_demands_4",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	}
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- OGR Contracts
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_ogr_contracts_tour = intervention:new(
+	"in_ogr_contracts_tour",			 						-- string name
+	0, 																	-- cost
+	function() 
+		cm:callback(function()
+			out("#### "..scripted_ogr_contracts_tour.id.." ####")
+			
+			ui_scripted_tour:construct_tour(scripted_ogr_contracts_tour, in_ogr_contracts_tour)
+		end,
+		0.2)															-- trigger callback
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+in_ogr_contracts_tour:add_advice_key_precondition("wh3.dlc26.camp.advice.ogr.contracts.001")
+in_ogr_contracts_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_ogr_contracts_tour:set_should_lock_ui()
+in_ogr_contracts_tour:add_trigger_condition(
+	"ScriptEventCampaignIntroComplete",
+	true
+)
+
+scripted_ogr_contracts_tour = {
+	id = "in_ogr_contracts_tour",
+	localised_name = "ui_text_replacements_localised_text_dlc26_ogre_contracts_title",
+	advice_string = "wh3.dlc26.camp.advice.ogr.contracts.001",
+
+	{
+		id = "ogr_contracts_1",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "button_ogre_war_contracts") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_ogre_contracts_1",
+			direction = "right",
+			size = 350,
+			length = 50
+		},
+		navigation_delay = 0.5,
+		click_on_navigate = function() 
+				if find_uicomponent(core:get_ui_root(), "dlc26_ogre_war_contracts") == false then
+					return find_uicomponent(core:get_ui_root(), "button_ogre_war_contracts")
+				else
+					return false
+				end
+			end,
+	},
+	{
+		id = "ogr_contracts_2",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc26_ogre_war_contracts", "panel_main", "list_box") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_ogre_contracts_2",
+			direction = "left",
+			size = 350,
+			length = 50
+		},
+		navigation_delay = 0.5
+	},
+	{
+		id = "ogr_contracts_3",
+		highlight = {
+			function()
+				local uic = find_uicomponent(core:get_ui_root(), "dlc26_ogre_war_contracts", "panel_main", "list_box", "available_contracts_list")
+				
+				for i = 0, uic:ChildCount() - 1 do
+					local child = find_child_uicomponent_by_index(uic, i)
+					if child and child:Visible() and string.find(child:Id(), "CcoCampaignWarContract") then
+						return child
+					end
+				end
+			end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_ogre_contracts_3",
+			direction = "left",
+			size = 350,
+			length = 50
+		},
+		click_on_navigate = function()
+			if find_uicomponent(core:get_ui_root(), "dlc26_ogre_war_contracts", "selected_contract"):VisibleFromRoot() == false then
+				local uic = find_uicomponent(core:get_ui_root(), "dlc26_ogre_war_contracts", "panel_main", "list_box", "available_contracts_list")
+					
+				for i = 0, uic:ChildCount() - 1 do
+					local child = find_child_uicomponent_by_index(uic, i)
+					if child and child:Visible() and string.find(child:Id(), "CcoCampaignWarContract") then
+						return child
+					end
+				end
+			end
+		end,
+	},
+	{
+		id = "ogr_contracts_4",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc26_ogre_war_contracts", "selected_contract", "client_emblem")  end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_ogre_contracts_4",
+			direction = "left",
+			size = 350,
+			length = 50
+		},
+		navigation_delay = 0.5
+	},
+	{
+		id = "ogr_contracts_5",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc26_ogre_war_contracts", "selected_contract", "objectives_holder")  end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_ogre_contracts_5",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+	},
+	{
+		id = "ogr_contracts_6",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc26_ogre_war_contracts", "selected_contract", "requirements_holder")  end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_ogre_contracts_6",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+	},
+	{
+		id = "ogr_contracts_7",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc26_ogre_war_contracts", "selected_contract", "actions_list")  end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_ogre_contracts_7",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+	},
+	{
+		id = "ogr_contracts_8",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc26_ogre_war_contracts", "panel_selected_contract", "rewards_list")  end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_ogre_contracts_8",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+	},
+	{
+		id = "ogr_contracts_9",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc26_ogre_war_contracts", "panel_selected_contract", "btn_stamp_holder", "accept_contract_btn")  end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_ogre_contracts_9",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+	},
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- OGR Camps
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+in_ogr_camps_tour = intervention:new(
+	"in_ogr_camps_tour",			 						-- string name
+	0, 																	-- cost
+	function() 
+		cm:callback(function()
+			if find_uicomponent(core:get_ui_root(), "hud_campaign", "info_panel_holder", "primary_info_panel_holder", "info_panel_background", "CharacterInfoPopup", "character_info_parent", "camp_teleport_holder", "camp_teleport_button"):VisibleFromRoot() then
+
+				out("#### "..scripted_ogr_camp_tour.id.." ####")
+			
+				ui_scripted_tour:construct_tour(scripted_ogr_camp_tour, in_ogr_camps_tour)
+			else 
+				in_ogr_camps_tour:cancel()
+
+			end
+		end,	0.2)															-- trigger callback
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+in_ogr_camps_tour:add_advice_key_precondition("wh3.dlc26.camp.advice.ogr.camp.001")
+in_ogr_camps_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_ogr_camps_tour:set_should_lock_ui()
+in_ogr_camps_tour:add_trigger_condition(
+	"CharacterSelected",
+	function(context)
+		return context:character():character_subtype_key() == "wh3_main_ogr_tyrant_camp"
+	end
+)
+
+scripted_ogr_camp_tour = {
+	id = "in_ogr_camps_tour",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_ogre_camps",
+	advice_string = "wh3.dlc26.camp.advice.ogr.camp.001",
+
+	{
+		id = "ogr_camps_1",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "CharacterInfoPopup", "icon_meat") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_ogre_camps_1",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+	},
+	{
+		id = "ogr_camps_2",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "CharacterInfoPopup", "icon_meat") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_ogre_camps_2",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+		navigation_delay = 0.5
+	},
+	{
+		id = "ogr_camps_3",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "CharacterInfoPopup", "camp_teleport_button") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_ogre_camps_3",
+			direction = "bottom",
+			size = 350,
+			length = 50,
+			label_offset_x = 100
+		},
+	},
+}
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- GRN Da Plan
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_grn_da_plan_tour = intervention:new(
+	"in_grn_da_plan_tour",			 						-- string name
+	0, 																	-- cost
+	function() 
+		cm:callback(function()
+			out("#### "..scripted_grn_da_plan_tour.id.." ####")
+			
+			ui_scripted_tour:construct_tour(scripted_grn_da_plan_tour, in_grn_da_plan_tour)
+		end,
+		0.2)															-- trigger callback
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+in_grn_da_plan_tour:add_advice_key_precondition("wh3.dlc26.camp.advice.grn.da_plan.001")
+in_grn_da_plan_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_grn_da_plan_tour:set_should_lock_ui()
+in_grn_da_plan_tour:add_trigger_condition(
+	"CharacterSelected",
+	function(context)
+		return context:character():character_subtype_key() == "wh3_dlc26_grn_gorbad_ironclaw"
+	end
+)
+
+scripted_grn_da_plan_tour = {
+	id = "in_grn_da_plan_tour",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_da_plan",
+	advice_string = "wh3.dlc26.camp.advice.grn.da_plan.001",
+
+	{
+		id = "grn_da_plan_1",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc26_da_plan", "parent_army_slots") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_grn_da_plan_1",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "grn_da_plan_2",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "grn_da_plan_planz") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_grn_da_plan_2",
+			direction = "top",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "grn_da_plan_3",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc26_da_plan", "parent_army_slots") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_grn_da_plan_3",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+		click_on_navigate = function() return find_uicomponent(core:get_ui_root(), "CcoCampaignInitiativeSet146wh3_dlc26_force_initiative_grn_da_plan")	end,
+	},
+	{
+		id = "grn_da_plan_4",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "da_plan_docker", "panel_main") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_grn_da_plan_4",
+			direction = "top",
+			size = 350,
+			length = 50
+		},
+		navigation_delay = 0.5
+	},
+	{
+		id = "grn_da_plan_5",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "listview_tactiks") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_grn_da_plan_5",
+			direction = "top",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "grn_da_plan_6",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "holder_top_detail", "holder_req_units") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_grn_da_plan_6",
+			direction = "right",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "grn_da_plan_7",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "holder_effects") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_grn_da_plan_7",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "grn_da_plan_8",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "button_equip_tactik") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_grn_da_plan_8",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "grn_da_plan_9",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc26_da_plan", "parent_army_slots") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_grn_da_plan_9",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+	{
+		id = "grn_da_plan_10",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "section_tactik_list", "holder_list_tabs") end
+		},
+		text_box = {
+			text = "dlc26_text_pointer_grn_da_plan_10",
+			direction = "top",
+			size = 350,
+			length = 50
+		}
+	}
+}
+
+
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---- Common Functions
@@ -5370,7 +6398,7 @@ function ui_scripted_tour:construct_tour(tour, intervention)
 				self:pulse_components(stage.pulse, true)
 
 				local pos, width, height = ui_scripted_tour:get_highlighted_size_and_position(stage.highlight.components)
-				local tp = ui_scripted_tour:display_text_pointer(stage.text_box.text, stage.text_box.direction, stage.text_box.size, stage.text_box.length, pos, width, height, stage.text_box.x_offset, stage.text_box.y_offset)
+				local tp = ui_scripted_tour:display_text_pointer(stage.text_box.text, stage.text_box.direction, stage.text_box.size, stage.text_box.length, pos, width, height, stage.text_box.x_offset, stage.text_box.y_offset, stage.text_box.label_offset_x, stage.text_box.label_offset_y)
 
 				-- Responsible for cleaning up the action after the player moves forward.
 				nts_stage:add_skip_action(
@@ -5470,9 +6498,11 @@ function ui_scripted_tour:get_highlighted_size_and_position(component_list)
 	return pos, width, height
 end
 
-function ui_scripted_tour:display_text_pointer(ui_text_replacement, direction, box_size, length, pos, width, height, x_offset, y_offset)
+function ui_scripted_tour:display_text_pointer(ui_text_replacement, direction, box_size, length, pos, width, height, x_offset, y_offset, label_offset_x, label_offset_y)
 	x_offset = x_offset or 0
 	y_offset = y_offset or 0
+	label_offset_x = label_offset_x or 0
+	label_offset_y = label_offset_y or 0
 	local x, y
 
 	if direction == "top"  then
@@ -5494,6 +6524,7 @@ function ui_scripted_tour:display_text_pointer(ui_text_replacement, direction, b
 	tp_box:add_component_text("text", "ui_text_replacements_localised_text_"..ui_text_replacement);
 	tp_box:set_style("semitransparent_highlight");
 	tp_box:set_panel_width(box_size);
+	tp_box:set_label_offset(label_offset_x, label_offset_y)
 	tp_box:do_not_release_escape_key(true);
 
 	tp_box:show()

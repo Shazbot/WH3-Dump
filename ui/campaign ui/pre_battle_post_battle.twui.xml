@@ -67,15 +67,20 @@
 									<flame this="2062AD81-1E26-4A17-A59B12E2275AA3CE"/>
 								</fill>
 								<divisions this="DD20E6C9-C25E-454F-A13C635520A961D1">
+									<decay_segment this="DAC2A15D-4805-4E4F-A900034CE979430B">
+										<smoke this="975BFBB4-5C24-4235-8D5A7ABC86C79CFF"/>
+										<flame this="DF0554ED-2D49-4819-AEEE6A7F9C301D41"/>
+									</decay_segment>
 									<segment_list this="287783EB-6DAF-4B4D-BCE775E5EE847914">
 										<template_segment this="47B1BBF3-D5AE-48E0-BDC57AD5377B68EA">
-											<cap this="4B6287C5-879D-48D0-93B858732EB1EBE2"/>
+											<cap this="0D0FB74F-F0E8-4604-B0207A86DF010125"/>
 											<template_division_bar this="AF50ADD8-29A7-4A8B-BDFB9538BCAB4FBB"/>
 										</template_segment>
 									</segment_list>
 								</divisions>
 							</bar>
 							<bar_frame this="929B2D91-C43C-49DF-9F095D49FC57BC6F"/>
+							<separator this="0EC101D4-990A-421B-B00AF7506732E60A"/>
 						</khorne_winstreak>
 						<porthole_frame this="CBCF959E-74DF-4386-83B37B1D77BD7C6E"/>
 						<ability_parent this="68376A35-B3F6-438C-8C277103DB2B7156">
@@ -7569,7 +7574,7 @@
 					name="default"
 					width="135"
 					height="24"
-					tooltip="Entity &amp; unit size||This is a unit of large entities.||This displays the current unit size compared to the maximum unit size. Units will replenish over time when in owned territory or certain stances."
+					tooltip="Entity size: Large"
 					tooltiplabel="dy_men_large_Tooltip_1f001c"
 					interactive="true"
 					uniqueguid="745D2FDB-6DC8-4006-B84494BC270B00DF">
@@ -8614,58 +8619,6 @@
 				</default>
 			</states>
 		</bar_frame>
-		<cap
-			this="4B6287C5-879D-48D0-93B858732EB1EBE2"
-			id="cap"
-			offset="0.00,5.00"
-			docking="Bottom Center"
-			component_anchor_point="0.50,1.00"
-			tooltipslocalised="true"
-			uniqueguid="4B6287C5-879D-48D0-93B858732EB1EBE2"
-			currentstate="CE4570AE-96EE-484C-BA5AA16A47104AF6"
-			defaultstate="CE4570AE-96EE-484C-BA5AA16A47104AF6">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoCampaignStreakEffectRecord"
-					context_function_id="Min == StoredContextFromParent(&quot;CcoCampaignStreakRecord&quot;).Min &amp;&amp; this != StoredContextFromParent(&quot;CcoCampaignWinStreak&quot;).CurrentStreakEffectContext">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="CampaignTurnEnd"/>
-						<property
-							name="object_store_events"
-							value="^4"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="7B6F0B61-DF61-4EE3-90EEF4A61978D87B"
-					uniqueguid="7B6F0B61-DF61-4EE3-90EEF4A61978D87B"
-					imagepath="ui/skins/warhammer3/winstreak_bar_cap.png"/>
-			</componentimages>
-			<states>
-				<default
-					this="CE4570AE-96EE-484C-BA5AA16A47104AF6"
-					name="default"
-					width="24"
-					height="95"
-					uniqueguid="CE4570AE-96EE-484C-BA5AA16A47104AF6">
-					<imagemetrics>
-						<image
-							this="ADEB1360-6835-4027-BA28399711D5592C"
-							uniqueguid="ADEB1360-6835-4027-BA28399711D5592C"
-							componentimage="7B6F0B61-DF61-4EE3-90EEF4A61978D87B"
-							offset="0.00,63.00"
-							width="24"
-							dockpoint="Bottom Center"
-							canresizeheight="false"
-							canresizewidth="false"/>
-					</imagemetrics>
-				</default>
-			</states>
-		</cap>
 		<chains
 			this="97F8E21E-67F4-472F-AA4A803832C27859"
 			id="chains"
@@ -9067,7 +9020,7 @@
 				<component_image
 					this="D0AEF25F-0B32-4774-A17F535DFEC62EFA"
 					uniqueguid="D0AEF25F-0B32-4774-A17F535DFEC62EFA"
-					imagepath="ui/skins/warhammer3/winstreak_bar_bar.png"/>
+					imagepath="ui/skins/default/winstreak_bar_bar.png"/>
 			</componentimages>
 			<states>
 				<default
@@ -13747,5 +13700,332 @@
 				</newstate>
 			</states>
 		</reinforcements_expected>
+		<cap
+			this="0D0FB74F-F0E8-4604-B0207A86DF010125"
+			id="cap"
+			offset="0.00,6.00"
+			docking="Bottom Center"
+			component_anchor_point="0.50,1.00"
+			tooltipslocalised="true"
+			uniqueguid="0D0FB74F-F0E8-4604-B0207A86DF010125"
+			currentstate="13786D70-6978-4898-A5ADF11655842656"
+			defaultstate="13786D70-6978-4898-A5ADF11655842656">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignStreakEffectRecord"
+					context_function_id="Min == StoredContextFromParent(&quot;CcoCampaignStreakRecord&quot;).Min &amp;&amp; this != StoredContextFromParent(&quot;CcoCampaignWinStreak&quot;).CurrentStreakEffectContext">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignTurnEnd"/>
+						<property
+							name="object_store_events"
+							value="^4"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="608EA5BC-ED95-4AD8-83FC5488EE09736F"
+					uniqueguid="608EA5BC-ED95-4AD8-83FC5488EE09736F"
+					imagepath="ui/skins/warhammer3/winstreak_bar_cap.png"/>
+				<component_image
+					this="D2194C6C-8C0E-4806-B9BA74A2431D2DF9"
+					uniqueguid="D2194C6C-8C0E-4806-B9BA74A2431D2DF9"/>
+			</componentimages>
+			<states>
+				<default
+					this="13786D70-6978-4898-A5ADF11655842656"
+					name="default"
+					width="24"
+					height="94"
+					uniqueguid="13786D70-6978-4898-A5ADF11655842656">
+					<imagemetrics>
+						<image
+							this="432117EC-0706-43F9-911657AE622B0662"
+							uniqueguid="432117EC-0706-43F9-911657AE622B0662"
+							componentimage="608EA5BC-ED95-4AD8-83FC5488EE09736F"
+							offset="0.00,62.00"
+							width="24"
+							colour="#FFFFFF00"
+							dockpoint="Bottom Center"
+							canresizeheight="false"
+							canresizewidth="false"/>
+						<image
+							this="3E170900-E452-4707-8AC66A0EC1548F5A"
+							uniqueguid="3E170900-E452-4707-8AC66A0EC1548F5A"
+							componentimage="D2194C6C-8C0E-4806-B9BA74A2431D2DF9"
+							width="24"
+							height="94"
+							colour="#0B0B0BFF"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</cap>
+		<decay_segment
+			this="DAC2A15D-4805-4E4F-A900034CE979430B"
+			id="decay_segment"
+			offset="-1.00,135.00"
+			clipchildren="true"
+			docking="Bottom Center"
+			dock_offset="-1.00,0.00"
+			component_anchor_point="0.50,1.00"
+			tooltipslocalised="true"
+			uniqueguid="DAC2A15D-4805-4E4F-A900034CE979430B"
+			currentstate="08594CFD-D6FA-4882-919079E237FDCD43"
+			defaultstate="08594CFD-D6FA-4882-919079E237FDCD43">
+			<componentimages>
+				<component_image
+					this="F527221E-D541-4145-94EDE6E5018C5F62"
+					uniqueguid="F527221E-D541-4145-94EDE6E5018C5F62"
+					imagepath="ui/skins/default/army_morale_bar_ph.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="08594CFD-D6FA-4882-919079E237FDCD43"
+					name="default"
+					width="24"
+					uniqueguid="08594CFD-D6FA-4882-919079E237FDCD43">
+					<imagemetrics>
+						<image
+							this="23ECB8F8-84CB-4D31-A3541CB9BA59A6CA"
+							uniqueguid="23ECB8F8-84CB-4D31-A3541CB9BA59A6CA"
+							componentimage="F527221E-D541-4145-94EDE6E5018C5F62"
+							width="24"
+							colour="#FFB900FF"
+							ui_colour_preset_type_key="yellow"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</decay_segment>
+		<flame
+			this="DF0554ED-2D49-4819-AEEE6A7F9C301D41"
+			id="flame"
+			offset="-15.00,-7.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Top Center"
+			dock_offset="0.00,-7.00"
+			component_anchor_point="0.50,0.00"
+			priority="100"
+			tooltipslocalised="true"
+			uniqueguid="DF0554ED-2D49-4819-AEEE6A7F9C301D41"
+			currentstate="50A63E0D-3F80-4BAF-85AD030924B386CB"
+			defaultstate="50A63E0D-3F80-4BAF-85AD030924B386CB">
+			<componentimages>
+				<component_image
+					this="2212F4B8-26FD-4CCD-8B4E61AE8F2C97D1"
+					uniqueguid="2212F4B8-26FD-4CCD-8B4E61AE8F2C97D1"/>
+			</componentimages>
+			<states>
+				<default
+					this="50A63E0D-3F80-4BAF-85AD030924B386CB"
+					name="default"
+					width="55"
+					height="55"
+					material_name="ui/effects/materials/magic_flame.xml.material"
+					uniqueguid="50A63E0D-3F80-4BAF-85AD030924B386CB">
+					<imagemetrics>
+						<image
+							this="FD7101FB-08BD-4C8F-98753737AA31CB50"
+							uniqueguid="FD7101FB-08BD-4C8F-98753737AA31CB50"
+							componentimage="2212F4B8-26FD-4CCD-8B4E61AE8F2C97D1"
+							width="55"
+							height="55"/>
+					</imagemetrics>
+					<material_m_parameter_overrides>
+						<property
+							name="distortion_strength"
+							x="0.200000003"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="true"/>
+						<property
+							name="flow_speed"
+							x="0.00999999978"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="true"/>
+						<property
+							name="sparkle_distortion"
+							x="0.100000001"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="false"/>
+						<property
+							name="sparkle_ro"
+							x="0"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="false"/>
+						<property
+							name="sparkle_speed1"
+							x="0.150000006"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="false"/>
+						<property
+							name="sparkle_speed2"
+							x="0.100000001"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="false"/>
+						<property
+							name="sparkle_strength"
+							x="0"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="true"/>
+						<property
+							name="sparkle_tiling"
+							x="2"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="false"/>
+						<property
+							name="uv_distortion_pan"
+							x="0.100000001"
+							y="0.100000001"
+							z="0"
+							w="0"
+							is_override_of_default="true"/>
+						<property
+							name="u_tiling"
+							x="10"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="true"/>
+						<property
+							name="v_tiling"
+							x="2"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="true"/>
+						<property
+							name="heat_percent"
+							x="1"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="false"/>
+					</material_m_parameter_overrides>
+					<material_m_texture_overrides>
+						<property
+							slot_id="t_xml_effect_colours"
+							filepath="ui/effects/textures/effect_fire_winstreak.dds"
+							is_override_of_default="true"/>
+						<property
+							slot_id="t_xml_heat_mask"
+							filepath="ui\effects\textures\magic_flame_heat_DU.dds"
+							is_override_of_default="true"/>
+						<property
+							slot_id="t_xml_shape_flow"
+							filepath="ui\effects\textures\magic_flame_flow_UD.dds"
+							is_override_of_default="true"/>
+						<property
+							slot_id="t_xml_uv_distortion"
+							filepath="commontextures\cloud_shadow_02.dds"
+							is_override_of_default="false"/>
+						<property
+							slot_id="t_xml_uv_element"
+							filepath="commontextures\default_noise1.dds"
+							is_override_of_default="false"/>
+						<property
+							slot_id="t_xml_general_mask"
+							filepath="ui\effects\textures\magic_flame_heat_DU.dds"
+							is_override_of_default="true"/>
+						<property
+							slot_id="t_xml_sparkle1"
+							filepath="commontextures\volumetric_noise.dds"
+							is_override_of_default="false"/>
+					</material_m_texture_overrides>
+				</default>
+			</states>
+		</flame>
+		<separator
+			this="0EC101D4-990A-421B-B00AF7506732E60A"
+			id="separator"
+			offset="6.00,170.00"
+			docking="Bottom Center"
+			dock_offset="-9.00,-64.00"
+			component_anchor_point="0.50,1.00"
+			tooltipslocalised="true"
+			uniqueguid="0EC101D4-990A-421B-B00AF7506732E60A"
+			currentstate="8E12EFDE-31EF-4BC5-B16C65EC3FD9F0B5"
+			defaultstate="8E12EFDE-31EF-4BC5-B16C65EC3FD9F0B5">
+			<componentimages>
+				<component_image
+					this="7305D187-324A-4AAE-BEED26A7119F9537"
+					uniqueguid="7305D187-324A-4AAE-BEED26A7119F9537"
+					imagepath="ui/skins/default/winstreak_bottom_separator.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="8E12EFDE-31EF-4BC5-B16C65EC3FD9F0B5"
+					name="default"
+					width="65"
+					height="28"
+					uniqueguid="8E12EFDE-31EF-4BC5-B16C65EC3FD9F0B5">
+					<imagemetrics>
+						<image
+							this="A55AD3B4-E265-4D68-906C739A3806C042"
+							uniqueguid="A55AD3B4-E265-4D68-906C739A3806C042"
+							componentimage="7305D187-324A-4AAE-BEED26A7119F9537"
+							width="65"
+							height="28"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</separator>
+		<smoke
+			this="975BFBB4-5C24-4235-8D5A7ABC86C79CFF"
+			id="smoke"
+			offset="-73.00,-137.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Bottom Center"
+			component_anchor_point="0.50,1.00"
+			tooltipslocalised="true"
+			uniqueguid="975BFBB4-5C24-4235-8D5A7ABC86C79CFF"
+			currentstate="1B7ADF38-097D-4F4E-B048836CF12CBE56"
+			defaultstate="1B7ADF38-097D-4F4E-B048836CF12CBE56">
+			<componentimages>
+				<component_image
+					this="1F0614A1-A3BD-4BF5-B979CAAE28CB384F"
+					uniqueguid="1F0614A1-A3BD-4BF5-B979CAAE28CB384F"
+					imagepath="ui/skins/default/army_morale_bar_ph.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="1B7ADF38-097D-4F4E-B048836CF12CBE56"
+					name="default"
+					width="170"
+					height="169"
+					shader_name="smoke_overlay_t0"
+					shadervars="1.00,1.00,1.00,0.00"
+					uniqueguid="1B7ADF38-097D-4F4E-B048836CF12CBE56">
+					<imagemetrics>
+						<image
+							this="741E6150-FA83-44DB-A811A8B0B4C4988D"
+							uniqueguid="741E6150-FA83-44DB-A811A8B0B4C4988D"
+							componentimage="1F0614A1-A3BD-4BF5-B979CAAE28CB384F"
+							width="170"
+							height="169"
+							colour="#FCFF1EFF"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</smoke>
 	</components>
 </layout>

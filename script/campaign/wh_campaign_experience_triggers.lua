@@ -13,10 +13,11 @@ campaign_experience_triggers = {
 
 
 	-- amount of experience to give Lords
-	xp_general_completes_horde_building 			= 200,
+	xp_general_completes_horde_building 			= 500,
 	xp_general_occupies_settlement					= 200,
 	xp_general_razes_settlement						= 200,
 	xp_general_completes_caravan_route				= 2000,
+	xp_general_merc_recruited_from_camp				= 1500,
 
 	-- amount of experience to give Heroes
 	xp_hero_is_active	 							= 50,
@@ -157,10 +158,29 @@ function campaign_experience_triggers:setup_experience_triggers()
 		true,
 		function(context)
 			-- horde general constructs a building
-			self:add_experience(context, true, self.xp_general_completes_horde_building);
+			local multiplier = cm:building_level_for_building(context:building()) + 1
+
+			self:add_experience(context, true, self.xp_general_completes_horde_building * multiplier)
 		end,
 		true
 	);
+
+	core:add_listener(
+		"UnitCreated_experience",
+		"UnitCreated",
+		function(context)
+			return context:unit():recruitment_source_key() == "ogre_mercenaries"
+		end,
+		function(context)
+			-- camp general had a unit recruited from it
+			local camp_character = context:unit():origin_character()
+
+			if camp_character then
+				self:add_experience(camp_character, true, self.xp_general_merc_recruited_from_camp)
+			end			
+		end,
+		true
+	)
 	
 	core:add_listener(
 		"CharacterGarrisonTargetAction_experience",

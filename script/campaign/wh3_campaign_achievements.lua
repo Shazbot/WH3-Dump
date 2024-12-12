@@ -155,10 +155,12 @@ function start_achievement_listeners()
 
 	core:add_listener(
 		"WH3_ACHIEVEMENT_OGRES_OFFER_TRIBUTE",
-		"RitualCompletedEvent",
-		true,
+		"CharacterInitiativeActivationChangedEvent",
 		function(context)
-			local faction = context:performing_faction();
+			return context:initiative():record_key():starts_with("wh3_dlc26_character_initiative_ogr_maw_offering")
+		end,
+		function(context)
+			local faction = context:character():faction()
 			
 			if faction:is_human() and faction:culture() == "wh3_main_ogr_ogre_kingdoms" then
 				award_achievement_to_faction(faction:name(), "WH3_ACHIEVEMENT_OGRES_OFFER_TRIBUTE");

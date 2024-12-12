@@ -152,19 +152,18 @@ function college_of_magic:initialise()
 		"PendingBattle",
 		function(context)
 			-- Find out if gelt's faction is in a battle and save the CQI.
-			self.current_mf_cqi = {}
+			self.current_mf_cqis = {}
 			local gelt_faction_in_battle = false
-
 
 			local attacker = context:pending_battle():attacker()
 			if attacker:faction():name() == self.faction_key then
-				table.insert(self.current_mf_cqi, attacker:military_force():command_queue_index())
+				table.insert(self.current_mf_cqis, attacker:military_force():command_queue_index())
 				gelt_faction_in_battle = true
 			end
 
 			local defender = context:pending_battle():defender()
 			if defender:faction():name() == self.faction_key then
-				table.insert(self.current_mf_cqi, attacker:military_force():command_queue_index())
+				table.insert(self.current_mf_cqis, attacker:military_force():command_queue_index())
 				gelt_faction_in_battle = true
 			end
 
@@ -173,7 +172,7 @@ function college_of_magic:initialise()
 				local attacker = attacker_list:item_at(i)
 
 				if attacker:faction():name() == self.faction_key then
-					table.insert(self.current_mf_cqi, attacker:military_force():command_queue_index())
+					table.insert(self.current_mf_cqis, attacker:military_force():command_queue_index())
 					gelt_faction_in_battle = true
 				end
 			end
@@ -183,34 +182,40 @@ function college_of_magic:initialise()
 				local defender = defender_list:item_at(i)
 
 				if defender:faction():name() == self.faction_key then
-					table.insert(self.current_mf_cqi, attacker:military_force():command_queue_index())
+					table.insert(self.current_mf_cqis, attacker:military_force():command_queue_index())
 					gelt_faction_in_battle = true
 				end
 			end
 
 			return gelt_faction_in_battle
 		end,
-		function(context)
-			for k, mf_cqi in ipairs(self.current_mf_cqi) do
+		function()
+			for k, mf_cqi in ipairs(self.current_mf_cqis) do
 				local mf = cm:get_military_force_by_cqi(mf_cqi)
-				local wizard_count = self:get_wizards_in_army_count(mf)
 
+				if mf:has_effect_bundle(self.disable_pr_effect_bundle) then
+					cm:remove_effect_bundle_from_force(self.disable_pr_effect_bundle, mf_cqi)
+				end
 
-				if wizard_count == 0 then
+				if self:get_wizards_in_army_count(mf) == 0 then
 					cm:apply_effect_bundle_to_force(self.disable_pr_effect_bundle, mf_cqi, 1)
+				end
+			end
+		end,
+		true
+	)
 
-					-- remove the debuff once battle is complete
-					core:add_listener(
-						"CollegeOfMagicRemoveDebuff",
-						"BattleCompleted",
-						true,
-						function(context)
-							for k, mf_cqi in ipairs(self.current_mf_cqi) do
-								cm:remove_effect_bundle_from_force(self.disable_pr_effect_bundle, mf_cqi)
-							end
-						end,
-						false
-					)
+	-- remove the debuff once battle is complete
+	core:add_listener(
+		"CollegeOfMagicRemoveDebuff",
+		"BattleCompleted",
+		function()
+			return cm:pending_battle_cache_faction_is_involved(self.faction_key)
+		end,
+		function()
+			for _, mf in model_pairs(cm:get_faction(self.faction_key):military_force_list()) do
+				if mf:has_effect_bundle(self.disable_pr_effect_bundle) then
+					cm:remove_effect_bundle_from_force(self.disable_pr_effect_bundle, mf:command_queue_index())
 				end
 			end
 		end,

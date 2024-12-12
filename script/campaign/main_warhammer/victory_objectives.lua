@@ -39,7 +39,7 @@ victory_objectives_ie = {
 					{
 						type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
 						conditions = {
-							"total 70"
+							"total 60"
 						}
 					}
 				},
@@ -63,7 +63,7 @@ victory_objectives_ie = {
 					{
 						type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
 						conditions = {
-							"total 75"
+							"total 60"
 						}
 					}
 				},
@@ -87,7 +87,7 @@ victory_objectives_ie = {
 					{
 						type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
 						conditions = {
-							"total 75"
+							"total 60"
 						}
 					}
 				},
@@ -100,7 +100,7 @@ victory_objectives_ie = {
 					{
 						type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
 						conditions = {
-							"total 35"
+							"total 30"
 						}
 					}
 				},
@@ -111,7 +111,7 @@ victory_objectives_ie = {
 					{
 						type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
 						conditions = {
-							"total 80"
+							"total 60"
 						}
 					}
 				},
@@ -135,7 +135,7 @@ victory_objectives_ie = {
 					{
 						type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
 						conditions = {
-							"total 75"
+							"total 60"
 						}
 					}
 				},
@@ -148,7 +148,7 @@ victory_objectives_ie = {
 					{
 						type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
 						conditions = {
-							"total 35"
+							"total 30"
 						}
 					}
 				},
@@ -159,7 +159,7 @@ victory_objectives_ie = {
 					{
 						type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
 						conditions = {
-							"total 80"
+							"total 60"
 						}
 					}
 				},
@@ -172,7 +172,7 @@ victory_objectives_ie = {
 					{
 						type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
 						conditions = {
-							"total 35"
+							"total 30"
 						}
 					}
 				},
@@ -183,7 +183,7 @@ victory_objectives_ie = {
 					{
 						type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
 						conditions = {
-							"total 80"
+							"total 60"
 						}
 					}
 				},
@@ -192,6 +192,46 @@ victory_objectives_ie = {
 					"wh3_dlc23_anc_enchanted_item_lesser_relic_of_morgrim",
 					"wh3_dlc23_anc_weapon_lesser_relic_of_smednir"
 				}
+			}
+		},
+		ogre_kingdoms = {
+			wh_main_short_victory = {
+				objectives = {
+					{
+						type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
+						conditions = {
+							"total 30"
+						}
+					},
+					{
+						-- Build camp up to level 5
+						type = "CONSTRUCT_N_OF_A_BUILDING",
+						conditions = {
+							"total 1",
+							"building_level wh3_main_ogr_camp_town_centre_5",
+						}
+					}
+				},
+				payload_bundle = "wh3_main_ie_victory_objective_destruction_short"			
+			},
+			wh_main_long_victory = {
+				objectives = {
+					{
+						type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
+						conditions = {
+							"total 60"
+						}
+					},
+					{
+						-- Build camps up to level 5
+						type = "CONSTRUCT_N_OF_A_BUILDING",
+						conditions = {
+							"total 2",
+							"building_level wh3_main_ogr_camp_town_centre_5",
+						}
+					}
+				},
+				payload_bundle = "wh3_main_ie_victory_objective_destruction_long"	
 			}
 		},
 	},
@@ -438,28 +478,6 @@ victory_objectives_ie = {
 				}
 			}
 		},
-		wh_main_sc_grn_greenskins = {
-			alignment = "destruction",
-			objectives = {
-				{
-					-- Da boss wants ta fite the puny gits
-					type = "DESTROY_FACTION",
-					conditions = {
-						"faction wh_main_grn_black_venom",
-						"faction wh_main_grn_bloody_spearz",
-						"faction wh_main_grn_broken_nose",
-						"faction wh_main_grn_necksnappers",
-						"faction wh_main_grn_red_eye",
-						"faction wh_main_grn_red_fangs",
-						"faction wh_main_grn_scabby_eye",
-						"faction wh_main_grn_skullsmasherz",
-						"faction wh_main_grn_teef_snatchaz",
-						"faction wh_main_grn_top_knotz",
-						"confederation_valid"
-					}
-				}
-			}
-		},
 		wh2_main_sc_skv_skaven = {
 			alignment = "destruction",
 			objectives = {
@@ -623,25 +641,13 @@ victory_objectives_ie = {
 			}
 		},
 		wh3_main_sc_ogr_ogre_kingdoms = {
-			alignment = "destruction",
+			alignment = "ogre_kingdoms",
 			objectives = {
 				{
-					-- Capture the majority of Greenskin or Cathayan capitals
-					type = "CONTROL_N_REGIONS_FROM",
+					-- Have 60 units
+					type = "OWN_N_UNITS",
 					conditions = {
-						"total 8",
-						"region wh3_main_combi_region_nan_gau",
-						"region wh3_main_combi_region_wei_jin",
-						"region wh3_main_combi_region_hanyu_port",
-						"region wh3_main_combi_region_black_crag",
-						"region wh3_main_combi_region_crookback_mountain",
-						"region wh3_main_combi_region_galbaraz",
-						"region wh3_main_combi_region_grom_peak",
-						"region wh3_main_combi_region_karak_ungor",
-						"region wh3_main_combi_region_massif_orcal",
-						"region wh3_main_combi_region_ekrund",
-						"region wh3_main_combi_region_sabre_mountain",
-						"override_text mission_text_text_mis_activity_control_n_regions_satrapy_including_at_least_n"
+						"total 60",
 					}
 				}
 			}
@@ -691,11 +697,11 @@ victory_objectives_ie = {
 			alignment = "khorne",
 			objectives = {
 				{
-					-- Eliminate Slaanesh
-					type = "DESTROY_FACTION",
+					-- Use Skull throne 8 times 
+					type = "PERFORM_RITUAL",
 					conditions = {
-						"faction wh3_main_sla_seducers_of_slaanesh",
-						"confederation_valid"
+						"ritual_category SKULLS_RITUAL",
+						"total 8"
 					}
 				}
 			}
@@ -956,7 +962,7 @@ victory_objectives_ie = {
 					-- Gelt and Allies to control all of Cathay 
 					type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
 					conditions = {	
-						"total 75"
+						"total 60"
 					}
 				}
 			},
@@ -1519,7 +1525,7 @@ victory_objectives_ie = {
 					conditions = {
 						"faction wh2_main_skv_clan_pestilens",
 						"faction wh3_dlc20_nur_pallid_nurslings",
-						"faction wh3_dlc20_kho_blood_keepers",
+						"faction wh3_dlc26_kho_skulltaker",
 						"faction wh2_main_skv_clan_spittel",
 						"confederation_valid"
 					}
@@ -1957,7 +1963,31 @@ victory_objectives_ie = {
 						"province wh3_main_combi_province_ivory_road",
 						"province wh3_main_combi_province_bone_road"
 					}
-				}
+				},
+				{
+					-- Use Greasus Feature 
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_greasus_tyrants_demands_short_victory",
+						"script_key greasus_tyrants_demands_short",
+						"total 12",
+						"count 0",
+						"count_completion"
+					}
+				},
+			},
+			long_objectives = {
+				{
+					-- Use Greasus Feature 
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_greasus_tyrants_demands_long_victory",
+						"script_key greasus_tyrants_demands_long",
+						"total 24",
+						"count 0",
+						"count_completion"
+					}
+				},
 			}
 		},
 
@@ -1980,6 +2010,36 @@ victory_objectives_ie = {
 						"confederation_valid"
 					}
 				}
+			}
+		},
+
+		-- Golgfag Maneater
+		wh3_dlc26_ogr_golgfag = {
+			objectives = {				
+				{
+					-- Golgfags Contracts completed
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_golgfag_contracts_short_victory",
+						"script_key golgfag_contracts_short",
+						"total 15",
+						"count 0",
+						"count_completion"
+					}
+				},
+			},
+			long_objectives = {
+				{
+					-- Golgfags Contracts completed
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_golgfag_contracts_long_victory",
+						"script_key golgfag_contracts_long",
+						"total 25",
+						"count 0",
+						"count_completion"
+					}
+				},
 			}
 		},
 
@@ -2145,14 +2205,31 @@ victory_objectives_ie = {
 					}
 				},
 				{
-					-- Control the Badlands
-					type = "CONTROL_N_PROVINCES_INCLUDING",
+					-- Build the Wurrzag landmarks
+					type = "CONSTRUCT_N_BUILDINGS_FROM",
 					conditions = {
 						"total 3",
-						"province wh3_main_combi_province_western_badlands",
-						"province wh3_main_combi_province_southern_badlands",
-						"province wh3_main_combi_province_eastern_badlands"
-						
+						"building_level wh3_dlc26_special_bone_nose_idols_1",
+						"building_level wh3_dlc26_special_bonewood_totems_1",
+						"building_level wh3_dlc26_special_iron_penz_1",
+					}
+				},
+				{
+					-- Build the Wurrzag landmarks
+					type = "CONSTRUCT_N_OF_A_BUILDING",
+					conditions = {
+						"total 3",
+						"building_level wh3_dlc26_special_gork_mork_idols_1",
+					}
+				}
+			},
+			long_objectives = {
+				{
+					-- Build the Wurrzag landmarks
+					type = "CONSTRUCT_N_OF_A_BUILDING",
+					conditions = {
+						"total 6",
+						"building_level wh3_dlc26_special_gork_mork_idols_1",
 					}
 				}
 			}
@@ -2169,6 +2246,69 @@ victory_objectives_ie = {
 						"region wh3_main_combi_region_tor_yvresse"
 					}
 				}
+			}
+		},
+
+		--Gorbad Ironclaw
+		wh3_dlc26_grn_gorbad_ironclaw = {
+			objectives = {
+				{
+					-- Control the Badlands
+					type = "CONTROL_N_PROVINCES_INCLUDING",
+					conditions = {
+						"total 5",
+						"province wh3_main_combi_province_western_badlands",
+						"province wh3_main_combi_province_southern_badlands",
+						"province wh3_main_combi_province_eastern_badlands",
+						"province wh3_main_combi_province_death_pass",
+						"province wh3_main_combi_province_blood_river_valley",
+						
+					},
+				},
+				{
+					-- Use Da Plan Feature 
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_gorbad_da_plan_short_victory",
+						"script_key gorbad_da_plan_short",
+						"total 5",
+						"count 0",
+						"count_completion"
+					}
+				}
+			},
+			long_objectives = {
+				{
+					-- Control the Gorbad's thematic Empire provinces
+					type = "CONTROL_N_PROVINCES_INCLUDING",
+					conditions = {
+						"total 3",
+						"province wh3_main_combi_province_wissenland",
+						"province wh3_main_combi_province_reikland",
+						"province wh3_main_combi_province_solland",
+						
+					}
+				},
+				{
+					-- Use Da Plan Feature 
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_gorbad_da_plan_long_victory",
+						"script_key gorbad_da_plan_long",
+						"total 10",
+						"count 0",
+						"count_completion"
+					}
+				},
+				{
+					-- Destroy the Gorbad's thematic Empire factions 
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh_main_emp_empire",
+						"faction wh_main_emp_wissenland",
+						"confederation_valid"
+					}
+				},
 			}
 		},
 
@@ -2979,7 +3119,76 @@ victory_objectives_ie = {
 				}
 			}
 		},
-		
+
+		--Skulltaker
+		wh3_dlc26_kho_skulltaker = {
+			objectives = {
+				{
+					-- Use Skulltaker's Claok of Skulls feature
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_skulltaker_cloak_of_skulls_short_victory",
+						"script_key skulltaker_cloak_of_skulls_short",
+						"total 9",
+						"count 0",
+						"count_completion"
+					}
+				},
+			},
+			long_objectives = {
+				{
+					-- Use Skulltaker's Cloak of skulls feature
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_skulltaker_cloak_of_skulls_long_victory",
+						"script_key skulltaker_cloak_of_skulls_long",
+						"total 18",
+						"count 0",
+						"count_completion"
+					}
+				},
+			}
+		},
+
+		--Arbaal
+		wh3_dlc26_kho_arbaal = {
+			objectives = {
+				{
+					-- Use Arbaal's Wrath of Khorne feature
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_arbaal_wrath_of_khorne_short_victory",
+						"script_key arbaal_wrath_of_khorne_short",
+						"total 8",
+						"count 0",
+						"count_completion"
+					}
+				},
+			},
+			long_objectives = {
+				{
+					-- Use Arbaal's Wrath of Khorne feature
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_arbaal_wrath_of_khorne_long_victory",
+						"script_key arbaal_wrath_of_khorne_long",
+						"total 15",
+						"count 0",
+						"count_completion"
+					}
+				},
+				{
+					-- Eliminate Azazel
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh3_dlc20_chs_azazel",
+						"confederation_valid"
+					}
+				}
+			},
+			--no_subculture_objective = true
+		},
+				
 		-- Festus the Leechlord
 		wh3_dlc20_chs_festus = {
 			objectives = {
@@ -3109,7 +3318,9 @@ victory_objectives_ie = {
 
 	},
 	-- used to track gelts unique ritual objective
-	gelt_unique_rituals = {}
+	gelt_unique_rituals = {},
+
+	gorbad_unique_initiatives = {}
 }
 
 -- This function creates the victory missions for all playable factions
@@ -3343,7 +3554,7 @@ function victory_objectives_ie:add_objectives(mm, objectives, faction_key)
 				mm:add_condition(objectives[i1].conditions[i2])
 			end
 			-- Unlike all other objectives, construct buildings requires the performing faction key as well. These objectives will fail if we don't add them here
-			if objectives[i1].type == "CONSTRUCT_N_BUILDINGS_FROM" or objectives[i1].type == "CONSTRUCT_N_BUILDINGS_INCLUDING" then
+			if objectives[i1].type == "CONSTRUCT_N_BUILDINGS_FROM" or objectives[i1].type == "CONSTRUCT_N_BUILDINGS_INCLUDING" or objectives[i1].type == "CONSTRUCT_N_OF_A_BUILDING" then
 				mm:add_condition("faction "..faction_key)
 			end
 		end
@@ -3440,7 +3651,7 @@ function victory_objectives_ie:add_scripted_victory_listeners()
 		true
 	)
 
-		--- Gelt College of Magic
+	-- Gelt College of Magic
 	local gelt_faction_key = "wh2_dlc13_emp_golden_order"
 	if cm:get_faction(gelt_faction_key):is_human() then
 		core:add_listener(
@@ -3456,6 +3667,61 @@ function victory_objectives_ie:add_scripted_victory_listeners()
 					cm:increase_scripted_mission_count("wh_main_short_victory", "college_of_magic_short", 1)
 					cm:increase_scripted_mission_count("wh_main_long_victory", "college_of_magic_long", 1)
 				end
+			end,
+			true
+		)
+	end
+
+	-- Gorbad's Da Plan
+	local gorbad_faction = cm:get_faction("wh3_dlc26_grn_gorbad_ironclaw")
+	if gorbad_faction and gorbad_faction:is_human() then
+		core:add_listener(
+			"IEVictoryConditionVictoryGorbadDaPlan",
+			"CharacterInitiativeActivationChangedEvent",
+			function(context)
+				return context:initiative():record_key():starts_with("wh3_dlc26_force_initiative_grn_da_plan_")
+			end,
+			function(context)
+				local initative_key = context:initiative():record_key()
+				if self.gorbad_unique_initiatives[initative_key] == nil then
+					self.gorbad_unique_initiatives[initative_key] = true
+					cm:increase_scripted_mission_count("wh_main_short_victory", "gorbad_da_plan_short", 1)
+					cm:increase_scripted_mission_count("wh_main_long_victory", "gorbad_da_plan_long", 1)
+				end
+			end,
+			true
+		)
+	end
+
+	-- Greasus's feature
+	local greasus_faction_key = "wh3_main_ogr_goldtooth"
+	if cm:get_faction(greasus_faction_key):is_human() then
+		core:add_listener(
+			"IEVictoryConditionVictoryGreasus",
+			"RitualCompletedEvent",
+			function(context)
+				return context:ritual():ritual_key():starts_with("wh3_dlc26_ogr_tyrants_demands_")
+			end,
+			function(context)
+				cm:increase_scripted_mission_count("wh_main_short_victory", "greasus_tyrants_demands_short", 1)
+				cm:increase_scripted_mission_count("wh_main_long_victory", "greasus_tyrants_demands_long", 1)
+			end,
+			true
+		)
+	end
+
+	-- Golgfag's feature
+	local golgfag_faction = cm:get_faction("wh3_dlc26_ogr_golgfag")
+	if golgfag_faction and golgfag_faction:is_human() then
+		core:add_listener(
+			"IEVictoryConditionVictoryGolgfag",
+			"WarContractSuccessEvent",
+			function(context)
+				return context:hired_faction():name() == "wh3_dlc26_ogr_golgfag"
+			end,
+			function(context)
+				cm:increase_scripted_mission_count("wh_main_short_victory", "golgfag_contracts_short", 1)
+				cm:increase_scripted_mission_count("wh_main_long_victory", "golgfag_contracts_long", 1)
 			end,
 			true
 		)
@@ -3561,6 +3827,40 @@ function victory_objectives_ie:add_scripted_victory_listeners()
 			end,
 			function()
 				cm:complete_scripted_mission_objective(skrag_faction_key, "wh_main_short_victory", "cauldron_of_maw_obtained", true)
+			end,
+			true
+		)
+	end
+
+	-- Skulltaker's Claok of Skulls
+	local skulltaker_faction = cm:get_faction("wh3_dlc26_kho_skulltaker")
+	if skulltaker_faction and skulltaker_faction:is_human() then
+		core:add_listener(
+			"IEVictoryConditionVictorySkulltakerCloakOfSkulls",
+			"RitualCompletedEvent",
+			function(context)
+				return context:ritual():ritual_key():starts_with("wh3_dlc26_kho_cloak_of_skulls_")
+			end,
+			function(context)
+				cm:increase_scripted_mission_count("wh_main_short_victory", "skulltaker_cloak_of_skulls_short", 1)
+				cm:increase_scripted_mission_count("wh_main_long_victory", "skulltaker_cloak_of_skulls_long", 1)
+			end,
+			true
+		)
+	end
+
+	-- Arbaal's Wrath of Khorne
+	local arbaal_faction = cm:get_faction("wh3_dlc26_kho_arbaal")
+	if arbaal_faction and arbaal_faction:is_human() then
+		core:add_listener(
+			"IEVictoryConditionVictoryArbaalWrathOfKhorne",
+			"MissionSucceeded",
+			function(context)
+				return context:mission():mission_record_key():starts_with("wh3_dlc26_arbaal_wrath_of_khorne_mission_")
+			end,
+			function(context)
+				cm:increase_scripted_mission_count("wh_main_short_victory", "arbaal_wrath_of_khorne_short", 1)
+				cm:increase_scripted_mission_count("wh_main_long_victory", "arbaal_wrath_of_khorne_long", 1)
 			end,
 			true
 		)
@@ -3851,6 +4151,7 @@ end
 cm:add_saving_game_callback(
 	function(context)
 		cm:save_named_value("victory_objectives_ie.gelt_unique_rituals", victory_objectives_ie.gelt_unique_rituals, context)
+		cm:save_named_value("victory_objectives_ie.gorbad_unique_initiatives", victory_objectives_ie.gorbad_unique_initiatives, context, true)
 	end
 )
 
@@ -3858,6 +4159,7 @@ cm:add_loading_game_callback(
 	function(context)
 		if not cm:is_new_game() then
 			victory_objectives_ie.gelt_unique_rituals = cm:load_named_value("victory_objectives_ie.gelt_unique_rituals", victory_objectives_ie.gelt_unique_rituals, context)
+			victory_objectives_ie.gorbad_unique_initiatives = cm:load_named_value("victory_objectives_ie.gorbad_unique_initiatives", victory_objectives_ie.gorbad_unique_initiatives, context, true)
 		end
 	end
 )

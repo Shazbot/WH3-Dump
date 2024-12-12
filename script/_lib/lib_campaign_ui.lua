@@ -32,6 +32,7 @@ local panels_blocking = {
 	"appoint_new_general",
 	"character_panel",		-- recruit lord/hero
 	"units_recruitment",
+	"unit_exchange",
 	"mercenary_recruitment",
 	"spell_browser",
 	"objectives_screen",
@@ -87,7 +88,7 @@ local panels_blocking = {
 	"nurgle_plagues",
 	"tzeench_wom_manipulation",
 	"tzeentch_changing_of_ways",
-	"ogre_contracts",
+	"ogre_bounties",
 	"ogre_great_maw",
 	"rifts",
 	"war_coordination",
@@ -111,6 +112,12 @@ local panels_blocking = {
 	"dlc25_college_of_magic",
 	"dlc25_electoral_machinations",
 	"dlc25_nurgle_plagues",
+	"dlc26_skull_throne",
+	"dlc26_cloak_of_skulls",
+	"dlc26_wrath_of_khorne",
+	"dlc26_ogre_war_contracts",
+	"dlc26_tyrants_demands",
+	"dlc26_character_panel_camps"
 };
 
 -- Panels for which a PanelOpenedCampaign event is sent to script, but the panel should not block interventions or be considered by cm:progress_on_blocking_panel_dismissed()
@@ -9876,6 +9883,56 @@ end;
 
 
 
+--- @function highlight_cloak_of_skulls
+--- @desc Highlights the Cloak of Skulls button. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
+--- @p [opt=false] boolean show highlight, Show highlight.
+--- @p [opt=nil] number pulse strength override, Pulse Strength Override. Default is 10 for smaller components such as buttons, and 5 for larger components such as panels. Set a higher number for a more pronounced pulsing.
+--- @p [opt=false] boolean force highlight, Forces the highlight to show even if the <code>help_page_link_highlighting</code> ui override is set.
+function campaign_ui_manager:highlight_cloak_of_skulls(value, pulse_strength, force_highlight)
+	if not self.help_page_link_highlighting_permitted and not force_highlight then
+		return;
+	end;
+	
+	local ui_root = core:get_ui_root();
+	
+	-- cloak of skulls button
+	local uic_panel = find_uicomponent(ui_root, "hud_campaign", "button_group_management", "button_cloak_of_skulls");
+	if uic_panel and uic_panel:Visible(true) then
+		pulse_uicomponent(uic_panel, value, pulse_strength or self.panel_pulse_strength, true);
+		
+		if value then
+			table.insert(self.unhighlight_action_list, function() self:highlight_cloak_of_skulls(false, pulse_strength, force_highlight) end);
+		end;
+	end;
+end;
+
+
+
+--- @function highlight_wrath_of_khorne
+--- @desc Highlights the Wrath of Khorne button. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
+--- @p [opt=false] boolean show highlight, Show highlight.
+--- @p [opt=nil] number pulse strength override, Pulse Strength Override. Default is 10 for smaller components such as buttons, and 5 for larger components such as panels. Set a higher number for a more pronounced pulsing.
+--- @p [opt=false] boolean force highlight, Forces the highlight to show even if the <code>help_page_link_highlighting</code> ui override is set.
+function campaign_ui_manager:highlight_wrath_of_khorne(value, pulse_strength, force_highlight)
+	if not self.help_page_link_highlighting_permitted and not force_highlight then
+		return;
+	end;
+	
+	local ui_root = core:get_ui_root();
+	
+	-- wrath of khorne button
+	local uic_panel = find_uicomponent(ui_root, "hud_campaign", "button_group_management", "button_wrath_of_khorne");
+	if uic_panel and uic_panel:Visible(true) then
+		pulse_uicomponent(uic_panel, value, pulse_strength or self.panel_pulse_strength, true);
+		
+		if value then
+			table.insert(self.unhighlight_action_list, function() self:highlight_wrath_of_khorne(false, pulse_strength, force_highlight) end);
+		end;
+	end;
+end;
+
+
+
 --- @function highlight_skull_throne
 --- @desc Highlights the Skull Throne button. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
 --- @p [opt=false] boolean show highlight, Show highlight.
@@ -9888,8 +9945,8 @@ function campaign_ui_manager:highlight_skull_throne(value, pulse_strength, force
 	
 	local ui_root = core:get_ui_root();
 	
-	-- skull throne panel
-	local uic_panel = find_uicomponent(ui_root, "hud_campaign", "resources_bar_holder", "khorne_skulls_holder");
+	-- skull throne button
+	local uic_panel = find_uicomponent(ui_root, "hud_campaign", "button_group_management", "button_skull_throne");
 	if uic_panel and uic_panel:Visible(true) then
 		pulse_uicomponent(uic_panel, value, pulse_strength or self.panel_pulse_strength, true);
 		
@@ -10683,7 +10740,7 @@ function campaign_ui_manager:highlight_ogre_contracts(value, panel_pulse_strengt
 	end;
 	
 	local ui_root = core:get_ui_root();
-	local uic_panel = find_uicomponent(ui_root, "ogre_contracts");
+	local uic_panel = find_uicomponent(ui_root, "ogre_bounties");
 	if uic_panel and uic_panel:Visible(true) then
 		local pulse_strength_to_use = panel_pulse_strength or self.panel_pulse_strength;
 		pulse_uicomponent(uic_panel, value, pulse_strength_to_use, true);
@@ -10692,7 +10749,7 @@ function campaign_ui_manager:highlight_ogre_contracts(value, panel_pulse_strengt
 			table.insert(self.unhighlight_action_list, function() self:highlight_ogre_contracts(false) end);
 		end;
 	else
-		local uic_button = find_uicomponent(ui_root, "hud_campaign", "faction_buttons_docker", "button_ogre_contracts");
+		local uic_button = find_uicomponent(ui_root, "hud_campaign", "faction_buttons_docker", "button_ogre_bounties");
 		if uic_button and uic_button:Visible(true) then
 			local pulse_strength_to_use = button_pulse_strength or self.panel_pulse_strength;
 			pulse_uicomponent(uic_button, value, pulse_strength_to_use, true);
@@ -10735,4 +10792,55 @@ function campaign_ui_manager:highlight_big_names(value, pulse_strength, force_hi
 	end;
 	
 	return false;
+end;
+
+
+
+--- @function highlight_tyrants_demands
+--- @desc Highlights the Tyrant's Demands button. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
+--- @p [opt=false] boolean show highlight, Show highlight.
+--- @p [opt=nil] number pulse strength override, Pulse Strength Override. Default is 10 for smaller components such as buttons, and 5 for larger components such as panels. Set a higher number for a more pronounced pulsing.
+--- @p [opt=false] boolean force highlight, Forces the highlight to show even if the <code>help_page_link_highlighting</code> ui override is set.
+function campaign_ui_manager:highlight_tyrants_demands(value, pulse_strength, force_highlight)
+	if not self.help_page_link_highlighting_permitted and not force_highlight then
+		return;
+	end;
+	
+	local ui_root = core:get_ui_root();
+	
+	-- tyrant's demands button
+	local uic_panel = find_uicomponent(ui_root, "hud_campaign", "button_group_management", "button_tyrants_demands");
+	if uic_panel and uic_panel:Visible(true) then
+		pulse_uicomponent(uic_panel, value, pulse_strength or self.panel_pulse_strength, true);
+		
+		if value then
+			table.insert(self.unhighlight_action_list, function() self:highlight_tyrants_demands(false, pulse_strength, force_highlight) end);
+		end;
+	end;
+end;
+
+
+
+
+--- @function highlight_mercenary_contracts
+--- @desc Highlights the Mercenary Contracts button. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
+--- @p [opt=false] boolean show highlight, Show highlight.
+--- @p [opt=nil] number pulse strength override, Pulse Strength Override. Default is 10 for smaller components such as buttons, and 5 for larger components such as panels. Set a higher number for a more pronounced pulsing.
+--- @p [opt=false] boolean force highlight, Forces the highlight to show even if the <code>help_page_link_highlighting</code> ui override is set.
+function campaign_ui_manager:highlight_mercenary_contracts(value, pulse_strength, force_highlight)
+	if not self.help_page_link_highlighting_permitted and not force_highlight then
+		return;
+	end;
+	
+	local ui_root = core:get_ui_root();
+	
+	-- mercenary contracts demands button
+	local uic_panel = find_uicomponent(ui_root, "hud_campaign", "button_group_management", "button_ogre_war_contracts");
+	if uic_panel and uic_panel:Visible(true) then
+		pulse_uicomponent(uic_panel, value, pulse_strength or self.panel_pulse_strength, true);
+		
+		if value then
+			table.insert(self.unhighlight_action_list, function() self:highlight_mercenary_contracts(false, pulse_strength, force_highlight) end);
+		end;
+	end;
 end;

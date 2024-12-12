@@ -1516,7 +1516,7 @@ end;
 --- @p @string message, Enqueue the help message for display on receipt of this message.
 --- @p @string objective key, Message key, from the scripted_objectives table.
 --- @p [opt=10000] @number display time, Time for which the help message should be displayed on-screen, in ms.
---- @p [opt=2000] @number display time, Time for which the help message should be displayed on-screen, in ms.
+--- @p [opt=2000] @number fade time, Time for which the help message should fade in on-screen after trigger, in ms.
 --- @p [opt=0] @number wait offset, Delay between receipt of the message and the help message being enqueued, in ms.
 --- @p [opt=false] @boolean high priority, High priority advice gets added to the front of the help queue rather than the back.
 --- @p [opt=nil] @string message on trigger, Specifies a message to be sent when this help message is actually triggered for display.
@@ -2752,7 +2752,7 @@ end;
 --- @p @number x co-ordinate, x co-ordinate in m
 --- @p @number y co-ordinate, y co-ordinate in m
 --- @p @number radius
-function generated_army:defend(x, y, radius, no_debug_output)
+function generated_army:defend(x, y, radius, no_debug_output, reorder)
 	if self.is_debug and not no_debug_output then
 		bm:out(self.id .. ":defend() called, defending position [" .. x .. ", " .. y .. "] with radius " .. radius .. "m");
 	end;
@@ -2760,7 +2760,14 @@ function generated_army:defend(x, y, radius, no_debug_output)
 	-- Ensure script planner is set up
 	self:set_up_script_planner();
 	
-	self:start_sai_behaviour(function() self.script_ai_planner:defend_position(v(x, y), radius) end);
+	self:start_sai_behaviour(
+		function() 
+			if not is_nil(reorder) then
+				self.script_ai_planner:set_should_reorder(reorder)
+			end
+			self.script_ai_planner:defend_position(v(x, y), radius) 
+		end
+	);
 end;
 
 
@@ -3115,7 +3122,8 @@ end;
 --- @p @number x co-ordinate, y co-ordinate in m.
 --- @p @number radius, Defence radius.
 --- @p [opt=0] @number wait offset, Time to wait after receipt of the message before issuing the defend order.
-function generated_army:defend_on_message(message, x, y, radius, wait_offset)
+--- @p [opt=true] @boolean reorder, reorder units to defend position if circumstances remain unchanged.
+function generated_army:defend_on_message(message, x, y, radius, wait_offset, reorder)
 	if not is_string(message) then
 		script_error(self.id .. " ERROR: defend_on_message() called but supplied message [" .. tostring(message) .. "] is not a string");
 		return false;
@@ -3150,7 +3158,7 @@ function generated_army:defend_on_message(message, x, y, radius, wait_offset)
 			bm:callback(
 				function()
 					bm:out(self.id .. " responding to message message " .. message .. ", being told to defend [" .. tostring(x) .. ", " .. tostring(y) .. "] with radius " .. tostring(radius));
-					self:defend(x, y, radius, true);
+					self:defend(x, y, radius, true, not not reorder);
 				end,
 				wait_offset
 			);

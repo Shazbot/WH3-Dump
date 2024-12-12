@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -143,16 +143,18 @@
 						<ancillary_title this="74E7083E-14AC-48D1-9A634757FCFCD41C"/>
 					</loot_frame>
 				</item_lost_animation>
-				<dead_rise_animation this="E1D3752D-B8D2-4F06-9B929D2924B6D1FF">
+				<unit_saving_animation this="E1D3752D-B8D2-4F06-9B929D2924B6D1FF">
 					<smoke_particle_emitter this="DA977A2F-9B1C-4493-8E731C3A90533816">
 						<template_particle this="A8DBA8AA-B810-4C71-91C4FD392B136AA0"/>
 					</smoke_particle_emitter>
 					<back this="FB5BA2C4-00C3-4D9C-BCD892D77C130184"/>
-					<reward_frame this="11A6B8A6-1FEC-46B4-A5AC465A13826A30"/>
-					<loot_value this="B025C1A9-22BA-4157-97B8095CDBC1628E">
-						<label_result this="9A6A0815-BE16-4DB2-87755661BDDE28C4"/>
-					</loot_value>
-				</dead_rise_animation>
+					<feature_dependent_components this="621C12E6-9C10-40FB-A01F55F0DC1BDBE7">
+						<loot_value this="B025C1A9-22BA-4157-97B8095CDBC1628E">
+							<label_result this="9A6A0815-BE16-4DB2-87755661BDDE28C4"/>
+						</loot_value>
+						<reward_frame this="11A6B8A6-1FEC-46B4-A5AC465A13826A30"/>
+					</feature_dependent_components>
+				</unit_saving_animation>
 				<quest_battle_header this="F67FB058-BAA6-4FB9-8B9E09ADACE1026F">
 					<dy_quest_battle this="B376CFB3-FFCF-479A-9BEFE09D40071FF0"/>
 				</quest_battle_header>
@@ -183,6 +185,8 @@
 						<wh3_dlc25_emp_arcane_essays this="9C048F61-AD8B-4221-96276026BC879376"/>
 						<wh3_dlc25_emp_research this="3BD02158-3A1B-46B7-BA1F72013D448930"/>
 						<wh3_dlc25_dwf_grudge_points this="6EEE5524-3E5D-4D9F-B0415D133C3BFCFC"/>
+						<wh3_dlc26_ogr_notoriety this="091779BF-DD97-4F0B-A8C69C88C6978F9F"/>
+						<wh3_dlc26_kho_arbaal_wrath_of_khorne_progress this="B5E5E7D9-13F7-4B78-83954F65668C1F9E"/>
 					</animation_properties>
 					<smoke_particle_emitter this="CBC8E405-C540-489C-A37A7DCF4EDE6023">
 						<template_particle this="B0E9A2A2-B14E-42A7-80362B5EA55C26B1"/>
@@ -1917,10 +1921,9 @@
 				</start>
 			</animations>
 		</blood_particle_emitter>
-		<dead_rise_animation
+		<unit_saving_animation
 			this="E1D3752D-B8D2-4F06-9B929D2924B6D1FF"
-			id="dead_rise_animation"
-			visible="false"
+			id="unit_saving_animation"
 			docking="Center"
 			component_anchor_point="0.50,0.50"
 			priority="45"
@@ -1931,6 +1934,9 @@
 			defaultstate="1375009E-7C95-47FA-BF94C586E59CC554">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="AnimationReporter"/>
+				<callback_with_context
+					callback_id="ContextCommandGiverOnCreate"
+					context_function_id="self.SetVisible(false)"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -1995,7 +2001,7 @@
 					</frames>
 				</show>
 			</animations>
-		</dead_rise_animation>
+		</unit_saving_animation>
 		<dy_quest_battle
 			this="B376CFB3-FFCF-479A-9BEFE09D40071FF0"
 			id="dy_quest_battle"
@@ -4102,9 +4108,30 @@
 			currentstate="58CAF23A-76CB-4DFD-B2F370602850A213"
 			defaultstate="58CAF23A-76CB-4DFD-B2F370602850A213">
 			<states>
-				<newstate
+				<daemonic
+					this="41DA32E9-068C-45B8-9FA3F7700D669332"
+					name="daemonic"
+					width="191"
+					height="42"
+					uniqueguid="41DA32E9-068C-45B8-9FA3F7700D669332">
+					<component_text
+						text="Daemons Reforged!"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_a6047e20"
+						font_m_font_name="brand_header"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_12"
+						text_shader_name="drop_shadow_t0"
+						textshadervars="-2.00,-2.00,1.00,0.00"/>
+				</daemonic>
+				<undead
 					this="58CAF23A-76CB-4DFD-B2F370602850A213"
-					name="NewState"
+					name="undead"
 					width="191"
 					height="42"
 					interactive="true"
@@ -4116,14 +4143,14 @@
 						texthbehaviour="Never split"
 						textlocalised="true"
 						textlabel="label_result_NewState_Text_670076"
-						font_m_font_name="la_gioconda_uppercase"
-						font_m_size="18"
+						font_m_font_name="brand_header"
+						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="header_18_bold"
+						fontcat_name="header_12"
 						text_shader_name="drop_shadow_t0"
 						textshadervars="-2.00,-2.00,1.00,0.00"/>
-				</newstate>
+				</undead>
 			</states>
 			<animations>
 				<hide id="hide">
@@ -5292,14 +5319,29 @@
 			defaultstate="F437C018-D330-4B06-BEE8A9644C6D68AA">
 			<componentimages>
 				<component_image
-					this="84EC2B96-0DB4-40BD-847A773667094421"
-					uniqueguid="84EC2B96-0DB4-40BD-847A773667094421"
+					this="E8EC0B4E-B7DA-4010-A76A46C9CB0E6C22"
+					uniqueguid="E8EC0B4E-B7DA-4010-A76A46C9CB0E6C22"
 					imagepath="ui/skins/default/talisman_numholder.png"/>
 			</componentimages>
 			<states>
-				<newstate
+				<daemonic
+					this="85CBBF36-F12B-4881-A29EEE47EB7CD47F"
+					name="daemonic"
+					width="423"
+					height="234"
+					uniqueguid="85CBBF36-F12B-4881-A29EEE47EB7CD47F">
+					<imagemetrics>
+						<image
+							this="A848C1B6-F969-4AD6-977D89321F6A13CA"
+							uniqueguid="A848C1B6-F969-4AD6-977D89321F6A13CA"
+							componentimage="E8EC0B4E-B7DA-4010-A76A46C9CB0E6C22"
+							width="423"
+							height="234"/>
+					</imagemetrics>
+				</daemonic>
+				<undead
 					this="F437C018-D330-4B06-BEE8A9644C6D68AA"
-					name="NewState"
+					name="undead"
 					width="423"
 					height="234"
 					interactive="true"
@@ -5307,12 +5349,11 @@
 					uniqueguid="F437C018-D330-4B06-BEE8A9644C6D68AA">
 					<imagemetrics>
 						<image
-							this="47195932-1667-4CCF-931359C944061A21"
-							uniqueguid="47195932-1667-4CCF-931359C944061A21"
-							componentimage="84EC2B96-0DB4-40BD-847A773667094421"
+							this="7A1E64E6-27D1-47C4-ACD80912B17168B5"
+							uniqueguid="7A1E64E6-27D1-47C4-ACD80912B17168B5"
+							componentimage="E8EC0B4E-B7DA-4010-A76A46C9CB0E6C22"
 							width="423"
-							height="234"
-							margin="10.00,10.00,10.00,10.00"/>
+							height="234"/>
 					</imagemetrics>
 					<component_text
 						texthalign="Center"
@@ -5324,7 +5365,7 @@
 						fontcat_name="header_24_bold"
 						text_shader_name="drop_shadow_t0"
 						textshadervars="-2.00,-2.00,1.00,0.00"/>
-				</newstate>
+				</undead>
 			</states>
 			<animations>
 				<show
@@ -6851,11 +6892,30 @@
 					this="0752DEAC-24FE-496B-8C9FEA562CA2E698"
 					uniqueguid="0752DEAC-24FE-496B-8C9FEA562CA2E698"
 					imagepath="ui/skins/default/reward_dead_rise.png"/>
+				<component_image
+					this="0289FC01-5B28-4646-B1CA1F244A360AE5"
+					uniqueguid="0289FC01-5B28-4646-B1CA1F244A360AE5"
+					imagepath="ui/skins/default/reward_daemons_reforged.png"/>
 			</componentimages>
 			<states>
-				<newstate
+				<daemonic
+					this="415080B3-2272-4424-881955ABB2AF49C8"
+					name="daemonic"
+					width="423"
+					height="234"
+					uniqueguid="415080B3-2272-4424-881955ABB2AF49C8">
+					<imagemetrics>
+						<image
+							this="E1B6C357-7485-45D6-A442C3AF4B5FC9D5"
+							uniqueguid="E1B6C357-7485-45D6-A442C3AF4B5FC9D5"
+							componentimage="0289FC01-5B28-4646-B1CA1F244A360AE5"
+							width="423"
+							height="234"/>
+					</imagemetrics>
+				</daemonic>
+				<undead
 					this="4CD91AC3-420F-461F-B142F6F0BD4A9F81"
-					name="NewState"
+					name="undead"
 					width="423"
 					height="234"
 					interactive="true"
@@ -6870,7 +6930,7 @@
 							height="234"
 							rotation_axis="0.00,1.00,0.00"/>
 					</imagemetrics>
-				</newstate>
+				</undead>
 			</states>
 			<animations>
 				<show
@@ -10708,7 +10768,7 @@
 			priority="45"
 			tooltipslocalised="true"
 			uniqueguid="72C5D58E-B8F9-4B88-87B6DB5A7909DD08"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="B191061A-3D6B-4FD8-9FDE91CB78FE2AFD"
 			defaultstate="B191061A-3D6B-4FD8-9FDE91CB78FE2AFD">
 			<componentimages>
@@ -12067,5 +12127,162 @@
 					uniqueguid="77D50193-CAD1-4334-BA78DB662741D06D"/>
 			</states>
 		</wh3_dlc25_dwf_grudge_points>
+		<wh3_dlc26_ogr_notoriety
+			this="091779BF-DD97-4F0B-A8C69C88C6978F9F"
+			id="wh3_dlc26_ogr_notoriety"
+			offset="10.00,10.00"
+			priority="45"
+			tooltipslocalised="true"
+			uniqueguid="091779BF-DD97-4F0B-A8C69C88C6978F9F"
+			currentstate="611A9D7B-1F82-43F7-A1D8C354D486B549"
+			defaultstate="611A9D7B-1F82-43F7-A1D8C354D486B549">
+			<userproperties>
+				<property
+					name="show_animation_move_frame"
+					value="2"/>
+				<property
+					name="show_animation_target_name"
+					value="ogr_notoriety_holder"/>
+				<property
+					name="show_animation_target_parent"
+					value="resources_bar"/>
+				<property
+					name="start_sound_event"
+					value="UI_CAM_ANI_Post_Battle_Anim_Grn_Scrap_Gained"/>
+				<property
+					name="stop_sound_event"
+					value=""/>
+			</userproperties>
+			<states>
+				<default
+					this="611A9D7B-1F82-43F7-A1D8C354D486B549"
+					name="default"
+					width="1"
+					height="1"
+					uniqueguid="611A9D7B-1F82-43F7-A1D8C354D486B549"/>
+			</states>
+		</wh3_dlc26_ogr_notoriety>
+		<wh3_dlc26_kho_arbaal_wrath_of_khorne_progress
+			this="B5E5E7D9-13F7-4B78-83954F65668C1F9E"
+			id="wh3_dlc26_kho_arbaal_wrath_of_khorne_progress"
+			offset="10.00,10.00"
+			priority="45"
+			tooltipslocalised="true"
+			uniqueguid="B5E5E7D9-13F7-4B78-83954F65668C1F9E"
+			currentstate="1862BA6F-53B3-4DD7-B7F232DC0BFE63BE"
+			defaultstate="1862BA6F-53B3-4DD7-B7F232DC0BFE63BE">
+			<userproperties>
+				<property
+					name="show_animation_move_frame"
+					value="2"/>
+				<property
+					name="show_animation_target_name"
+					value="wrath_of_khorne_icon"/>
+				<property
+					name="show_animation_target_parent"
+					value="resources_bar"/>
+				<property
+					name="start_sound_event"
+					value="UI_CAM_ANI_Post_Battle_Anim_Kho_Skulls_Gained"/>
+			</userproperties>
+			<states>
+				<default
+					this="1862BA6F-53B3-4DD7-B7F232DC0BFE63BE"
+					name="default"
+					width="1"
+					height="1"
+					uniqueguid="1862BA6F-53B3-4DD7-B7F232DC0BFE63BE"/>
+			</states>
+		</wh3_dlc26_kho_arbaal_wrath_of_khorne_progress>
+		<feature_dependent_components
+			this="621C12E6-9C10-40FB-A01F55F0DC1BDBE7"
+			id="feature_dependent_components"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="45"
+			tooltipslocalised="true"
+			uniqueguid="621C12E6-9C10-40FB-A01F55F0DC1BDBE7"
+			isrelativeresize="true"
+			currentstate="713EEF81-25AE-4D1B-8147CAA911A069D5"
+			defaultstate="713EEF81-25AE-4D1B-8147CAA911A069D5">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="ContextStateSetterConditional">
+					<child_m_user_properties>
+						<property
+							name="daemonic"
+							value="IsContextValid(PlayersFaction) &amp;&amp; PlayersFaction.IsCampaignFeatureAvailable(&quot;daemonic_unit_saving_postbattle&quot;)"/>
+						<property
+							name="fallback_state"
+							value="undead"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context callback_id="StatePropagatorCallback"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="show_animation_offset_x"
+					value="0"/>
+				<property
+					name="show_animation_offset_y"
+					value="0"/>
+			</userproperties>
+			<states>
+				<daemonic
+					this="AA4951F6-1E78-4C97-8009B53E496C40A3"
+					name="daemonic"
+					width="423"
+					height="234"
+					uniqueguid="AA4951F6-1E78-4C97-8009B53E496C40A3"/>
+				<undead
+					this="713EEF81-25AE-4D1B-8147CAA911A069D5"
+					name="undead"
+					width="423"
+					height="234"
+					interactive="true"
+					uniqueguid="713EEF81-25AE-4D1B-8147CAA911A069D5"/>
+			</states>
+			<animations>
+				<show
+					id="show"
+					propagate="true">
+					<frames>
+						<frame
+							interpolationtime="0"
+							interpolationpropertymask="87"
+							targetmetrics_m_height="234"
+							targetmetrics_m_width="423"
+							easing_curve_type="Quadratic In &amp; Out">
+							<triggers>
+								<trigger trigger_animation="show"/>
+							</triggers>
+						</frame>
+						<frame
+							interpolationtime="3000"
+							interpolationpropertymask="6"
+							targetmetrics_m_height="234"
+							targetmetrics_m_width="423"
+							easing_curve_type="Quadratic In &amp; Out"
+							soundcategory="UI_CAM_ANI_PostBattle_Lose_Transistion_In">
+							<triggers>
+								<trigger trigger_animation="hide"/>
+							</triggers>
+						</frame>
+						<frame
+							interpolationtime="500"
+							interpolationpropertymask="6"
+							targetmetrics_m_colour="#FFFFFF00"
+							targetmetrics_m_height="1"
+							targetmetrics_m_width="2"
+							easing_curve_type="Quadratic In &amp; Out">
+							<triggers>
+								<trigger
+									trigger_component="621C12E6-9C10-40FB-A01F55F0DC1BDBE7"
+									trigger_property="Visibility false"/>
+							</triggers>
+						</frame>
+					</frames>
+				</show>
+			</animations>
+		</feature_dependent_components>
 	</components>
 </layout>

@@ -161,6 +161,9 @@
 										<icon_kills this="DF25F97F-E24F-4F89-8BB98941B1CA23FA"/>
 									</dev_damage_dealt_recent>
 								</dev_damage_dealt_recent_holder>
+								<dy_meat this="189D121B-D3EE-431A-BD3ED51F6B28F7AD">
+									<arrow this="BEE80A8A-3C0A-4C87-AF56F766ADA00BEF"/>
+								</dy_meat>
 							</top_bar>
 							<row_header_stats this="EFA64BCB-10A2-45BF-A56FC6389DB4B27E">
 								<dy_title this="EB48F0E1-6118-455C-A318F26E1AA0EA56"/>
@@ -3502,6 +3505,12 @@
 							name="event4"
 							value="CharacterDetailsUnitInfoUpdated"/>
 						<property
+							name="event5"
+							value="InitiativeActivationChanged"/>
+						<property
+							name="event6"
+							value="CharacterTacticEquipmentModified"/>
+						<property
 							name="update_constant"
 							value="GetIfElse(IsContextValid(BattleRoot), 2000, 0)"/>
 					</child_m_user_properties>
@@ -4594,10 +4603,9 @@
 		<experience_parent
 			this="179B8784-9C4E-4CDD-915B4E104EA3F2EB"
 			id="experience_parent"
-			offset="220.00,3.00"
+			offset="222.00,3.00"
 			allowverticalresize="false"
 			docking="Center Right"
-			dock_offset="-2.00,0.00"
 			component_anchor_point="1.00,0.50"
 			priority="46"
 			componentleveltooltip="{{tt:ui/common ui/tooltip_experience}}"
@@ -6516,7 +6524,7 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoBattleUnitEffect"
-					context_function_id="TimeRemainingSeconds">
+					context_function_id="GetIfElse(&#10;  TotalDurationSeconds &gt; 1 &amp;&amp; TimeRemainingSeconds &gt; 0,&#10;  TimeRemainingSeconds,&#10;  TimeUntilIntensityDecay&#10;)">
 					<child_m_user_properties>
 						<property
 							name="update_constant"
@@ -8137,7 +8145,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBattleUnitEffect"
-					context_function_id="TotalDurationSeconds &gt; 1 &amp;&amp; TimeRemainingSeconds &gt; 0">
+					context_function_id="(TotalDurationSeconds &gt; 1 &amp;&amp; TimeRemainingSeconds &gt; 0) || (BattleAbilityContext.IntensityDecayTimerStarted &amp;&amp; TimeUntilIntensityDecay &gt; 0)">
 					<child_m_user_properties>
 						<property
 							name="update_constant"
@@ -11167,7 +11175,8 @@
 			</states>
 			<LayoutEngine
 				type="HorizontalList"
-				sizetocontent="true"/>
+				sizetocontent="true"
+				is_listview_lookup_enabled="false"/>
 		</holder_barrier>
 		<holder_hit_points
 			this="DBCC78BE-17A2-4194-B2441C41C30E35FE"
@@ -11198,7 +11207,8 @@
 			</states>
 			<LayoutEngine
 				type="HorizontalList"
-				sizetocontent="true"/>
+				sizetocontent="true"
+				is_listview_lookup_enabled="false"/>
 		</holder_hit_points>
 		<holder_values
 			this="1FBF793E-C030-4078-B8FD7016B79A4437"
@@ -11221,7 +11231,8 @@
 			<LayoutEngine
 				type="HorizontalList"
 				spacing="10.00,0.00"
-				sizetocontent="true"/>
+				sizetocontent="true"
+				is_listview_lookup_enabled="false"/>
 		</holder_values>
 		<icon
 			this="F3426D3F-F3AC-4A06-9272E546E50FC9ED"
@@ -11410,8 +11421,8 @@
 				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextColourSetter"
-					context_object_id="CcoStaticObject"
-					context_function_id="MainThemeColour"/>
+					context_object_id="CcoBattleAbility"
+					context_function_id="# Red colour while intensity is decaying #&#10;GetIfElse(IntensityDecayIsActive, GetColour(&quot;red&quot;), MainThemeColour)"/>
 				<callback_with_context
 					callback_id="ContextObjectStore"
 					context_object_id="CcoBattleUnitEffect"/>
@@ -11453,6 +11464,7 @@
 			is_dev_only="true"
 			offset="209.00,1.00"
 			allowverticalresize="false"
+			visible="false"
 			docking="Center Right"
 			component_anchor_point="1.00,0.50"
 			priority="46"
@@ -11494,5 +11506,159 @@
 				</default>
 			</states>
 		</dev_unit_cap>
+		<arrow
+			this="BEE80A8A-3C0A-4C87-AF56F766ADA00BEF"
+			id="arrow"
+			offset="12.00,9.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			docking="Center Right"
+			dock_offset="-14.00,0.00"
+			component_anchor_point="1.00,0.50"
+			priority="46"
+			tooltipslocalised="true"
+			uniqueguid="BEE80A8A-3C0A-4C87-AF56F766ADA00BEF"
+			currentstate="AAFBC2BE-1F1B-4755-987909E033C3BDE3"
+			defaultstate="AAFBC2BE-1F1B-4755-987909E033C3BDE3">
+			<componentimages>
+				<component_image
+					this="27C09239-E90D-42D3-886DFD2C4932EB16"
+					uniqueguid="27C09239-E90D-42D3-886DFD2C4932EB16"
+					imagepath="ui/skins/default/ua_arrow_increase_1.png"/>
+				<component_image
+					this="09E476F3-E87A-4B8A-A82686B86575124D"
+					uniqueguid="09E476F3-E87A-4B8A-A82686B86575124D"
+					imagepath="ui/skins/default/ua_arrow_decrease_1.png"/>
+			</componentimages>
+			<states>
+				<down
+					this="9159E8EA-BA4E-4AC3-82A56921C78E15F9"
+					name="down"
+					width="16"
+					height="16"
+					uniqueguid="9159E8EA-BA4E-4AC3-82A56921C78E15F9">
+					<imagemetrics>
+						<image
+							this="2DF849E3-3551-4225-B0526E0DEBE11415"
+							uniqueguid="2DF849E3-3551-4225-B0526E0DEBE11415"
+							componentimage="09E476F3-E87A-4B8A-A82686B86575124D"
+							width="16"
+							height="16"
+							dockpoint="Center"/>
+					</imagemetrics>
+				</down>
+				<up
+					this="AAFBC2BE-1F1B-4755-987909E033C3BDE3"
+					name="up"
+					width="16"
+					height="16"
+					interactive="true"
+					uniqueguid="AAFBC2BE-1F1B-4755-987909E033C3BDE3">
+					<imagemetrics>
+						<image
+							this="8315D325-EAFF-44E8-AD6B83250EFEA529"
+							uniqueguid="8315D325-EAFF-44E8-AD6B83250EFEA529"
+							componentimage="27C09239-E90D-42D3-886DFD2C4932EB16"
+							offset="0.00,-3.00"
+							width="16"
+							height="16"
+							dockpoint="Center"
+							dock_offset="0.00,-3.00"/>
+					</imagemetrics>
+				</up>
+			</states>
+		</arrow>
+		<dy_meat
+			this="189D121B-D3EE-431A-BD3ED51F6B28F7AD"
+			id="dy_meat"
+			offset="170.00,-3.00"
+			allowverticalresize="false"
+			docking="Center"
+			dock_offset="56.00,-1.00"
+			component_anchor_point="0.50,0.50"
+			priority="46"
+			tooltipslocalised="true"
+			uniqueguid="189D121B-D3EE-431A-BD3ED51F6B28F7AD"
+			currentstate="5D9E9C5E-BFC4-4168-B33118C31619C47D"
+			defaultstate="5D9E9C5E-BFC4-4168-B33118C31619C47D">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoUnitDetails"
+					context_function_id="CharacterContext"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CharacterContext"
+					context_function_id="MilitaryForceContext.PooledResourceContext(&quot;wh3_main_ogr_meat&quot;)"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="#IsContextValid(MilitaryForceContext) &amp;&amp; MilitaryForceContext.PooledResourceContext(&quot;wh3_main_ogr_meat&quot;).IsValidContext &amp;&amp; FactionContext.IsPlayersFaction&#10;false"/>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="GetIfElse(MilitaryForceBreakdownContext(SelectedCharacter.MilitaryForceContext).FactorValue(&quot;wh3_main_ogr_meat_factor_army_upkeep&quot;) &lt; 0, Loc(&quot;army_upkeep_meat_tooltip&quot;), Loc(&quot;army_upkeep_meat_tooltip_in_camp_sphere&quot;))">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CharacterMoveEndAny"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="GetIfElse(MilitaryForceBreakdownContext(SelectedCharacter.MilitaryForceContext).FactorValue(&quot;wh3_main_ogr_meat_factor_army_upkeep&quot;) &lt; 0, MilitaryForceBreakdownContext(SelectedCharacter.MilitaryForceContext).FactorValue(&quot;wh3_main_ogr_meat_factor_army_upkeep&quot;) * -1, &quot;-&quot;)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="PooledResourceTransaction"/>
+						<property
+							name="event1"
+							value="CharacterMoveEndAny"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="F4338B92-A79E-48BC-89A22C3726E5CE93"
+					uniqueguid="F4338B92-A79E-48BC-89A22C3726E5CE93"
+					imagepath="ui/skins/default/icon_meat.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="5D9E9C5E-BFC4-4168-B33118C31619C47D"
+					name="NewState"
+					width="42"
+					height="34"
+					interactive="true"
+					uniqueguid="5D9E9C5E-BFC4-4168-B33118C31619C47D">
+					<imagemetrics>
+						<image
+							this="234BD7DC-5080-454E-BF7486F77E03A943"
+							uniqueguid="234BD7DC-5080-454E-BF7486F77E03A943"
+							componentimage="F4338B92-A79E-48BC-89A22C3726E5CE93"
+							offset="2.00,7.00"
+							width="20"
+							height="20"
+							dockpoint="Center Left"
+							dock_offset="2.00,0.00"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<component_text
+						text="99"
+						textxoffset="24.00,0.00"
+						textyoffset="10.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_615b880f"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+				</newstate>
+			</states>
+		</dy_meat>
 	</components>
 </layout>

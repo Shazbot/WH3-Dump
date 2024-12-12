@@ -26,6 +26,7 @@ custom_loading_screens_no_intro = {
 	["132570744"] = "wh_main_grn_greenskins_azhag",
 	["1607251777"] = "wh_dlc06_grn_crooked_moon_skarsnik",
 	["1773851302"] = "wh_dlc06_grn_orcs_of_the_bloody_hand_wurrzag",
+	["866823155"] = "wh3_dlc26_grn_gorbad_gc",
 	["921656648"] = "wh_main_vmp_vampire_counts_mannfred",
 	["1487310411"] = "wh_main_vmp_vampire_counts_heinrich",
 	["1454422795"] = "wh_dlc04_vmp_vampire_counts_helman",
@@ -78,6 +79,7 @@ custom_loading_screens_no_intro = {
 	["621175995"] = "wh3_main_nur_poxmakers_of_nurgle_gc",
 	["435793894"] = "wh3_main_ogr_disciples_of_the_maw_gc",
 	["1529505691"] = "wh3_main_ogr_goldtooth_gc",
+	["1254735023"] = "wh3_dlc26_ogr_golgfag_gc",
 	["720077559"] = "wh3_main_sla_seducers_of_slaanesh_gc",
 	["1649736864"] = "wh3_main_tze_oracles_of_tzeentch_gc",
 	["992296451"] = "wh3_main_dae_daemon_prince_gc",
@@ -98,6 +100,8 @@ custom_loading_screens_no_intro = {
 	["27074398"] = "wh3_dlc25_dwf_malakai_gc",
 	["432969859"] = "wh3_dlc25_nur_tamurkhan_gc",
 	["2026198078"] = "wh3_dlc25_nur_epidemius_gc",
+	["1835770988"] = "wh3_dlc26_kho_skulltaker_gc",
+	["1851003875"] = "wh3_dlc26_kho_arbaal_gc",
 	
 	-- chaos map
 	["780864164"] = "wh3_main_ksl_the_ice_court",

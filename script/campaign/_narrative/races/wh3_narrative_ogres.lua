@@ -976,7 +976,130 @@ end;
 
 
 
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+--
+--	CONTRACTS
+--
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
 
+
+local function ogre_contracts_narrative_loader(faction_key)
+
+	-- output header
+	narrative.output_chain_header("ogre contracts", faction_key);
+
+	
+
+
+	local advice_history_key = shared_prepend_str .. "_contracts_chain_completed"
+
+
+
+	-----------------------------------------------------------------------------------------------------------
+	--	Listener for the War Contracts event
+	-----------------------------------------------------------------------------------------------------------
+	do
+		local name = "ogre_contracts_trigger_war_contract";
+
+		if not narrative.get(faction_key, name .. "_block") then
+			narrative_triggers.generic(
+				name,																																			-- unique name for this narrative trigger
+				faction_key,																																	-- key of faction to which it applies
+				narrative.get(faction_key, name .. "_start_messages"),																							-- script message(s) on which to start
+				narrative.get(faction_key, name .. "_target_messages") or "StartOgreContractsCompleteMission",													-- target message(s) to trigger
+				narrative.get(faction_key, name .. "_cancel_messages"),																							-- script message(s) on which to cancel
+				narrative.get(faction_key, name .. "_event") or "WarContractAcceptedEvent",																		-- event name
+				narrative.get(faction_key, name .. "_condition") or																								-- event condition
+					function(context)
+						return context:hired_faction():name() == faction_key
+					end,
+				narrative.get(faction_key, name .. "_immediate") or true																						-- trigger immediately or via intervention
+			);
+		end;
+	end
+
+	-----------------------------------------------------------------------------------------------------------
+	--	Campaign Start complete a contract
+	-----------------------------------------------------------------------------------------------------------
+	
+	do
+		local name = "ogre_contracts_trigger_campaign_start_complete_contract";
+		
+		
+		if not narrative.get(faction_key, name .. "_block") then
+			narrative_events.generic(
+				name,																																			-- unique name for this narrative event
+				faction_key,																																	-- key of faction to which it applies
+				narrative.get(faction_key, name .. "_advice_key"),																								-- key of advice to deliver
+				narrative.get(faction_key, name .. "_mission_key") or "wh3_dlc26_camp_narrative_ogres_contracts_02",											-- key of mission to deliver
+				narrative.get(faction_key, name .. "_mission_text") or "wh3_dlc26_narrative_mission_description_complete_ogre_contract",						-- key of mission objective text
+				narrative.get(faction_key, name .. "_event_listeners") or {																						-- event/condition listeners
+				{
+						event = "WarContractSuccessEvent",
+						condition =	function(context)
+							return context:hired_faction():name() == faction_key
+						end
+					}
+				},	
+				narrative.get(faction_key, name .. "_camera_scroll_callback"),				
+				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
+				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
+					payload.money_direct(5000)																							
+				},
+				narrative.get(faction_key, name .. "_trigger_messages") or "StartOgreContractsCompleteMission",													-- script message(s) on which to trigge ]]r when received
+				narrative.get(faction_key, name .. "_on_issued_messages"),																						-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
+				narrative.get(faction_key, name .. "_completed_messages"), 																						-- script message(s) to trigger when this mission is completed
+				narrative.get(faction_key, name .. "_inherit_list")																								-- list of other narrative events to inherit rewards from (may be nil)
+			);
+		end;
+	end;
+
+		
+	narrative.output_chain_footer();
+	
+end;
+
+
+
+
+-----------------------------------------------------------------------------------------------------------
+--	Campaign Start accept a contract
+-----------------------------------------------------------------------------------------------------------
+--[[ 
+do
+	local name = "ogre_contracts_trigger_campaign_start_accept_contract";
+
+
+	if not narrative.get(faction_key, name .. "_block") then
+		narrative_events.generic(
+			name,																																			-- unique name for this narrative event
+			faction_key,																																	-- key of faction to which it applies
+			narrative.get(faction_key, name .. "_advice_key"),																								-- key of advice to deliver
+			narrative.get(faction_key, name .. "_mission_key") or "wh3_dlc26_camp_narrative_ogres_contracts_01",											-- key of mission to deliver
+			narrative.get(faction_key, name .. "_mission_text") or "wh3_dlc26_narrative_mission_description_accept_ogre_contract",							-- key of mission objective text
+			narrative.get(faction_key, name .. "_event_listeners") or {																						-- event/condition listeners
+				{
+					event = "WarContractAcceptedEvent",
+					condition =	function(context)
+						return context:hired_faction():name() == faction_key
+					end
+				}
+			},	
+			narrative.get(faction_key, name .. "_camera_scroll_callback"),				
+			narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
+			narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
+				payload.money_direct(1000)																							
+			},
+			narrative.get(faction_key, name .. "_trigger_messages") 	or "StartNarrativeEvents",															-- script message(s) on which to trigger when received
+			narrative.get(faction_key, name .. "_on_issued_messages"),																						-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
+			narrative.get(faction_key, name .. "_completed_messages")	or "StartOgreContractsCompleteMission", 											-- script message(s) to trigger when this mission is completed
+			narrative.get(faction_key, name .. "_inherit_list")																								-- list of other narrative events to inherit rewards from (may be nil)
+		);
+	end;
+end;
+ ]]
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
 --
@@ -991,6 +1114,7 @@ local function start_ogre_narrative_events(faction_key)
 	ogre_camps_narrative_loader(faction_key);
 	ogre_meat_narrative_loader(faction_key);
 	ogre_big_names_narrative_loader(faction_key);
+	ogre_contracts_narrative_loader(faction_key)
 end;
 
 

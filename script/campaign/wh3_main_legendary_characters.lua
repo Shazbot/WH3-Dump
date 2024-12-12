@@ -10,8 +10,6 @@
 -- Next determine the unlock conditions for the player and AI. This determines how the initial chain of events to unlock the character starts
 -- 		In the example the player gets a mission once their LL reaches a specified rank, while the AI would get them once a specified turn is reached
 -- 		EXAMPLE: ulrika = {
---					condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
---					ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.turn,
 -- 					unlock_rank = 15,
 --					ai_unlock_turn = 30,
 --				}
@@ -41,18 +39,20 @@
 -- 				}
 -- Next add the keys required for your unlock condition
 -- 		unlock type to key type:
---			mission_keys for rank, quest
+--			starting_mission_keys for rank, quest
 -- 			ritual_keys for ritual
 --		EXAMPLE: ulrika = {
---			mission_keys = "mission key"
+--			starting_mission_keys = "mission key"
 -- 		OR
--- 			mission_keys = { "mission_key", ...}
+-- 			starting_mission_keys = { "mission_key", ...}
 --		OR
---			mission_keys = {
+--			starting_mission_keys = {
 --					allowed_faction_1 = "mission key 1",
 --					allowed_faction_2 = "mission key 2",
 --					allowed_faction_3 = "mission key 1",
 --					...} -> use if you have more than 1 allowed faction
+-- Ensure every individual mission is listed in the mission_chain_keys table - this is so the game can cancel all missions for other players in multiplayer games
+-- If the Hero spawns directly at the end of a mission chain (and not via a dilemma), you will need to include that mission key as the string final_mission_key - otherwise the script will spawn the Hero as soon as the first mission is completed
 -- Optional - add all the ancillaries that you want the character to start out having
 -- 		EXAMPLE: ulrica = {
 -- 					"wh3_twa09_anc_arcane_item_blood_shard",
@@ -75,22 +75,11 @@
 
 character_unlocking = {}
 
-character_unlocking.character_unlock_condition_types = {
-	rank = "rank", -- Unlocked when character reaches rank
-	quest = "quest", -- Unlocked when character starts specified quest
-	ritual = "ritual", -- Unlocked when ritual is completed
-	turn = "turn", -- Unlocked when specific world turn is reached
-	building = "building" -- Unlocked when you build a specified building
-}
-
 character_unlocking.character_data = {
 	kroak = {
 		-- Lizardmen Players will get a mission to unlock lord kroak after reaching rank 15
 		-- Human Itza unlocks kroak for free at the start (this stops anyone else getting him/the mission)
 		-- If there's no lizard players the strongest AI lizard gets kroak after turn 30
-
-		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
-		ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.turn,
 		unlock_rank = 15,
 		ai_unlock_turn = 30, -- If there are no player lizardmen, assign kroak to the strongest current lizard faction
 		has_spawned = false,
@@ -102,7 +91,7 @@ character_unlocking.character_data = {
 		},
 		non_playable_factions_allowed = false,
 		factions_involved = {},
-		mission_keys = {
+		starting_mission_keys = {
 			["wh2_main_lzd_hexoatl"] = "wh3_main_ie_mazdamundi_lord_kroak",
 			["wh2_main_lzd_last_defenders"] = "wh3_main_ie_kroqgar_lord_kroak",
 			["wh2_dlc12_lzd_cult_of_sotek"] = "wh3_main_ie_tehenhauin_lord_kroak",
@@ -131,9 +120,6 @@ character_unlocking.character_data = {
 	ghoritch = {
 		-- Clan Molder players will get Ghoritch awarded after completing Thrott's Quest -> Whip of Domination
 		-- If AI is playing Clan Molder they will get Ghoritch after Thrott reaches rank 5
-
-		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.quest,
-		ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
 		ai_unlock_rank = 5, -- If there are no player clan molder, assign ghoritch to the them
 		has_spawned = false,
 		name = "ghoritch",
@@ -142,7 +128,7 @@ character_unlocking.character_data = {
 			"wh2_main_skv_clan_moulder"
 		},
 		factions_involved = {},
-		mission_keys = {
+		starting_mission_keys = {
 			"wh3_main_ie_qb_skv_throt_main_whip_of_domination"
 		},
 		mission_incidents = {
@@ -152,9 +138,6 @@ character_unlocking.character_data = {
 	ariel = {
 		-- Wood Elf players playing either the Sisters, Orion or Durthu will unlock Ariel after completing the first forest ritual for any Forest
 		-- If there's no Wood Elf players of the 3 factions then the strongest Wood Elf of the 3 will get Ariel after 20 turns
-
-		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.ritual,
-		ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.turn,
 		ai_unlock_turn = 20,
 		has_spawned = false,
 		name = "ariel",
@@ -194,9 +177,6 @@ character_unlocking.character_data = {
 	coeddil = {
 		-- Drycha players will get Coeddil after completing Drycha's Quest -> Coeddil Unchained stage 4
 		-- If Drycha is AI controlled they will get Coeddil after 20 turns
-
-		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.quest,
-		ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.turn,
 		ai_unlock_turn = 20,
 		has_spawned = false,
 		name = "coeddil",
@@ -205,17 +185,13 @@ character_unlocking.character_data = {
 			"wh2_dlc16_wef_drycha"
 		},
 		factions_involved = {},
-		mission_keys = {
+		starting_mission_keys = {
 			"wh2_dlc16_wef_drycha_coeddil_unchained_stage_4"
 		}
 	},
 	gorduz = {
 		-- Chaos Dwarf players will get a mission to unlock Gorduz once their faction leader reaches rank 5
 		-- If there are no human Chaos Dwarf players the strongest Chaos Dwarf faction will get Gorduz after 30 turns
-
-		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.building,
-		ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.turn,
-		unlock_rank = 10,
 		ai_unlock_turn = 30,
 		has_spawned = false,
 		name = "gorduz",
@@ -224,7 +200,7 @@ character_unlocking.character_data = {
 			"wh3_dlc23_chd_chaos_dwarfs"
 		},
 		factions_involved = {},
-		mission_keys = "wh3_dlc23_mis_chd_gorduz_unlock",
+		starting_mission_keys = "wh3_dlc23_mis_chd_gorduz_unlock",
 		ancillaries = {
 			"wh3_dlc23_anc_enchanted_item_chd_banner_of_slavery",
 			"wh3_dlc23_anc_weapon_chd_dagger_of_malice"
@@ -246,9 +222,6 @@ character_unlocking.character_data = {
 		-- Kislev players will get a quest chain mission to unlock Ulrika once their faction leader reaches rank 10
 		-- Additionally at the end of the mission chain players will get a dilemma with options to either recruit Ulrika or let the AI recruit her
 		-- If there are no human kislev players the strongest AI kislev faction will unlock Ulrika once their faction leader reaches rank 15
-
-		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
-		ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
 		unlock_rank = 11,
 		ai_unlock_rank = 15,
 		has_spawned = false,
@@ -263,7 +236,7 @@ character_unlocking.character_data = {
 			"wh3_dlc25_dwf_malakai"
 		},
 		factions_involved = {},
-		mission_keys = {
+		starting_mission_keys = {
 			wh3_main_ksl_kislev = {
 				["main_warhammer"] = "wh3_dlc23_ie_ksl_ulrika_stage_1",
 				["wh3_main_chaos"] = "wh3_dlc23_chaos_ksl_ulrika_stage_1"
@@ -320,9 +293,6 @@ character_unlocking.character_data = {
 	harald = {
 		-- Warriors of Chaos players will get the chance to unlock Harald Hammerstone once their faction leader reaches rank 15
 		-- If there are no human Warriors of Chaos players the strongest AI WoC faction will get Harald after 25 turns
-
-		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
-		ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.turn,
 		unlock_rank = 15,
 		ai_unlock_turn = 25,
 		has_spawned = false,
@@ -333,7 +303,7 @@ character_unlocking.character_data = {
 			"wh_main_chs_chaos"
 		},
 		factions_involved = {},
-		mission_keys = "wh3_pro11_mis_chs_harald_hammerstorm_unlock",
+		starting_mission_keys = "wh3_pro11_mis_chs_harald_hammerstorm_unlock",
 		ancillaries = {
 			"wh3_pro11_anc_enchanted_item_bane_shield",
 			"wh3_pro11_anc_weapon_hammer_of_harry"
@@ -351,9 +321,6 @@ character_unlocking.character_data = {
 		-- Tzeentch players will get a mission to unlock the Blue Scribes once their faction leader reaches rank 8
 		-- Additionally at the end of the mission chain players will get a dilemma with options to either recruit the Blue Scribes or let the AI recruit them
 		-- If there are no human Tzeentch players the strongest Tzeentch faction will get the Blue Scribes after 30 turns
-
-		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
-		ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.turn,
 		unlock_rank = 10,
 		ai_unlock_turn = 30,
 		has_spawned = false,
@@ -379,7 +346,7 @@ character_unlocking.character_data = {
 			}
 		},
 		factions_involved = {},
-		mission_keys = {
+		starting_mission_keys = {
 			["wh3_main_tze_oracles_of_tzeentch"] = "wh3_dlc24_mis_tze_blue_scribes_stage_1",
 			["wh3_dlc20_chs_kholek"] = "wh3_dlc24_mis_tze_blue_scribes_stage_1_chs",
 			["wh3_dlc20_chs_sigvald"] = "wh3_dlc24_mis_tze_blue_scribes_stage_1_chs",
@@ -444,9 +411,6 @@ character_unlocking.character_data = {
 		-- Tzeentch players will get a mission to unlock Aekold Helbrass once their faction leader reaches rank 12
 		-- Additionally at the end of the mission chain players will get a dilemma with options to either recruit Aekold or let the AI recruit him
 		-- If there are no human Tzeentch players the strongest Tzeentch faction will get Aekold Helbrass after 30 turns
-
-		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
-		ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.turn,
 		unlock_rank = 12,
 		ai_unlock_turn = 30,
 		has_spawned = false,
@@ -472,7 +436,7 @@ character_unlocking.character_data = {
 			}
 		},
 		factions_involved = {},
-		mission_keys = {
+		starting_mission_keys = {
 			wh3_main_tze_oracles_of_tzeentch = {
 				["main_warhammer"] = "wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_1",
 				["wh3_main_chaos"] = "wh3_dlc24_mis_tze_aekold_helbrass_stage_1"
@@ -556,8 +520,6 @@ character_unlocking.character_data = {
 	saytang = {
 		-- Cathayan players will get a mission to unlock Saytang once their faction leader reaches rank 13.
 		-- If there are no human Cathayan players the strongest Cathay faction will get Saytang after 30 turns
-		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
-		ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.turn,
 		unlock_rank = 13,
 		ai_unlock_turn = 30,
 		has_spawned = false,
@@ -568,7 +530,7 @@ character_unlocking.character_data = {
 			"wh3_main_cth_cathay"
 		},
 		factions_involved = {},
-		mission_keys = {
+		starting_mission_keys = {
 			wh3_dlc24_cth_the_celestial_court = {
 				["main_warhammer"] = "wh3_dlc24_mis_ie_cth_saytang_unlock_01",
 				["wh3_main_chaos"] = "wh3_dlc24_mis_cth_saytang_unlock_01"
@@ -609,9 +571,6 @@ character_unlocking.character_data = {
 	leysa = {
 		-- Kislevite players will get a mission to unlock the Golden Knight, Leysa once their faction leader reaches rank 11
 		-- If there are no human Kislevite players the strongest Kislev faction will get the Golden Knight after 30 turns
-
-		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
-		ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.turn,
 		unlock_rank = 11,
 		ai_unlock_turn = 30,
 		has_spawned = false,
@@ -622,7 +581,7 @@ character_unlocking.character_data = {
 			"wh3_main_ksl_kislev"
 		},
 		factions_involved = {},
-		mission_keys = {
+		starting_mission_keys = {
 			wh3_main_ksl_the_ice_court = {
 				["main_warhammer"] = "wh3_dlc24_mis_ie_ksl_golden_knight_unlock_01",
 				["wh3_main_chaos"] = "wh3_dlc24_mis_ksl_golden_knight_unlock_01"
@@ -675,8 +634,6 @@ character_unlocking.character_data = {
 	karanak = {
 		-- Khorne, Warriors of Chaos & Daemon Prince players will get the chance to unlock Karanak once their faction leader reaches rank 16
 		-- If there are no human WoC, KHO or DAE players the strongest AI faction will get Karanak after 25 turns
-		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
-		ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.turn,
 		unlock_rank = 16,
 		ai_unlock_turn = 25,
 		has_spawned = false,
@@ -687,6 +644,8 @@ character_unlocking.character_data = {
 			main_warhammer = {
 				"wh3_dlc20_chs_valkia",
 				"wh3_main_kho_exiles_of_khorne",
+				"wh3_dlc26_kho_arbaal",
+				"wh3_dlc26_kho_skulltaker",
 				"wh3_main_dae_daemon_prince",
 				"wh3_dlc20_chs_kholek",
 				"wh_main_chs_chaos",
@@ -695,17 +654,27 @@ character_unlocking.character_data = {
 			wh3_main_chaos = {
 				"wh3_dlc20_chs_valkia",
 				"wh3_main_kho_exiles_of_khorne",
+				"wh3_dlc26_kho_arbaal",
+				"wh3_dlc26_kho_skulltaker",
 				"wh3_main_dae_daemon_prince",
 			}
 		},
 		priority_ai_faction = "wh3_main_kho_exiles_of_khorne",	-- If no player is playing a faction that can own karanak, he goes to skarbrand to reduce legendary hero overload on AI archaon
 		factions_involved = {},
-		mission_keys = {
+		starting_mission_keys = {
 			wh3_dlc20_chs_valkia = {
 				["main_warhammer"] = "wh3_pro12_mis_ie_chs_karanak_unlock_01",
 				["wh3_main_chaos"] = "wh3_pro12_mis_chs_karanak_unlock_01"
 			},
 			wh3_main_kho_exiles_of_khorne = {
+				["main_warhammer"] = "wh3_pro12_mis_ie_kho_karanak_unlock_01",
+				["wh3_main_chaos"] = "wh3_pro12_mis_kho_karanak_unlock_01"
+			},
+			wh3_dlc26_kho_arbaal = {
+				["main_warhammer"] = "wh3_pro12_mis_ie_kho_karanak_unlock_01",
+				["wh3_main_chaos"] = "wh3_pro12_mis_kho_karanak_unlock_01"
+			},
+			wh3_dlc26_kho_skulltaker = {
 				["main_warhammer"] = "wh3_pro12_mis_ie_kho_karanak_unlock_01",
 				["wh3_main_chaos"] = "wh3_pro12_mis_kho_karanak_unlock_01"
 			},
@@ -757,8 +726,6 @@ character_unlocking.character_data = {
 		-- Empire, Bretonnia, Dwarfs, Kislev and Cathay Players will get a mission to unlock Gotrek and Felix after reaching rank 15
 		-- Malakai unlocks gotrek and felix for free at the start (this stops anyone else getting him/the mission)
 		-- If there's no Empire, Bretonnia, Dwarfs, Kislev and Cathay players the strongest AI gets Gotrek and Felix after turn 30
-		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
-		ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.turn,
 		unlock_rank = 15,
 		ai_unlock_turn = 30, -- If there are no player factions, assign Gotrek and Felix to the strongest current valid faction
 		has_spawned = false,
@@ -808,7 +775,7 @@ character_unlocking.character_data = {
 		},
 		non_playable_factions_allowed = false,
 		factions_involved = {},
-		mission_keys = {
+		starting_mission_keys = {
 			wh_main_emp_wissenland = {
 				["main_warhammer"] = "wh3_dlc25_qb_gotrek_felix_ie_elspeth",
 				["wh3_main_chaos"] = "wh3_dlc25_qb_gotrek_felix_chaos_elspeth"
@@ -926,8 +893,6 @@ character_unlocking.character_data = {
 	garagrim = {
 		-- Dwarf players will get a mission to unlock Garagrim once their faction leader reaches rank 10
 		-- If there are no human Dwarf players the strongest Dwarf faction will get Garagrim after 30 turns
-		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
-		ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.turn,
 		unlock_rank = 10,
 		ai_unlock_turn = 30,
 		has_spawned = false,
@@ -940,7 +905,7 @@ character_unlocking.character_data = {
 		"wh_main_dwf_dwarfs"
 		},
 		factions_involved = {},
-		mission_keys = "wh3_dlc25_mis_dwf_garagrim_unlock",
+		starting_mission_keys = "wh3_dlc25_mis_dwf_garagrim_unlock",
 		ancillaries = {
 			"wh3_dlc25_anc_weapon_axes_of_kadrin"
 		},
@@ -956,8 +921,6 @@ character_unlocking.character_data = {
 	theodore = {
 		-- Empire players will get a mission to unlock Theodore once their faction leader reaches rank 10.
 		-- If there are no human Empire players, Theodore spawns on turn 20 for Nuln faction.
-		condition_to_start_unlock = character_unlocking.character_unlock_condition_types.rank,
-		ai_condition_to_start_unlock = character_unlocking.character_unlock_condition_types.turn,
 		unlock_rank = 10,
 		ai_unlock_turn = 20,
 		has_spawned = false,
@@ -970,7 +933,8 @@ character_unlocking.character_data = {
 		allowed_cultures = {
 			"wh_main_emp_empire"
 		},
-		mission_keys = "wh3_dlc25_mis_emp_theodore_unlock_1",
+		starting_mission_keys = "wh3_dlc25_mis_emp_theodore_unlock_1",
+		final_mission_key = "wh3_dlc25_mis_emp_theodore_unlock_2",
 		ancillaries = {
 			"wh3_dlc25_anc_talisman_baleflame_amulet",
 			"wh3_dlc25_anc_enchanted_item_stormlance",
@@ -978,12 +942,144 @@ character_unlocking.character_data = {
 		},
 		mission_chain_keys = {
 			main_warhammer = {
+				"wh3_dlc25_mis_emp_theodore_unlock_1",
 				"wh3_dlc25_mis_emp_theodore_unlock_2"
 			},
 			wh3_main_chaos = {
+				"wh3_dlc25_mis_emp_theodore_unlock_1",
 				"wh3_dlc25_mis_emp_theodore_unlock_2"
 			}
 		},
+	},
+	snagla = {
+		-- Greenskins players will get a mission to unlock Snagla once they build the basic spider riders chain
+		-- If there are no human Greenskin players the strongest Greenskin faction will get Snagla after 30 turns
+		ai_unlock_turn = 30,
+		has_spawned = false,
+		name = "snagla",
+		subtype = "wh3_dlc26_grn_snagla_grobpsit",
+		require_dlc = {"TW_WH3_OMENS_OF_DESTRUCTION_GRN"},
+		allowed_cultures = {
+			"wh_main_grn_greenskins"
+		},
+		factions_involved = {},
+		starting_mission_keys = "wh3_dlc26_ie_grn_snagla_stage_1",
+		ancillaries = {
+			"wh3_dlc26_anc_weapon_fangspike",
+			"wh3_dlc26_anc_enchanted_item_sting_of_snagla",
+		},
+		mission_chain_keys = {
+			main_warhammer = {
+				"wh3_dlc26_ie_grn_snagla_stage_1"
+			}
+		},
+		required_buildings = {
+			"wh_main_grn_forest_beasts_1",
+			"wh_main_grn_forest_beasts_2",
+			"wh_main_grn_forest_beasts_3",
+		}
+	},
+	bragg = {
+		-- Ogres players will get a mission to unlock Bragg once their faction leader reaches rank 10
+		-- If there are no human Ogre players the strongest Ogre faction will get Bragg after 30 turns
+		unlock_rank = 10,
+		ai_unlock_turn = 30,
+		has_spawned = false,
+		name = "bragg",
+		subtype = "wh3_dlc26_ogr_bragg_the_gutsman",
+		require_dlc = {"TW_WH3_OMENS_OF_DESTRUCTION_OGR"},
+		allowed_cultures = {
+			"wh3_main_ogr_ogre_kingdoms"
+		},
+		factions_involved = {},
+		starting_mission_keys = "wh3_dlc26_ie_ogr_bragg_stage_2",
+		ancillaries = {
+			"wh3_dlc26_anc_weapon_great_gutgouger"
+		},
+		mission_chain_keys = {
+			main_warhammer = {
+				"wh3_dlc26_ie_ogr_bragg_stage_2"
+			},
+			wh3_main_chaos = {
+				"wh3_dlc26_ie_ogr_bragg_stage_2"
+			}
+		}
+	},
+	skarr = {
+		-- Khorne players will get a mission to unlock Skarr once they construct the champion building (Strategy Chamber for Valkia)
+		-- If there are no human Khorne players the strongest Khorne faction will get Skarr after 30 turns
+		ai_unlock_turn = 30,
+		has_spawned = false,
+		name = "skarr",
+		subtype = "wh3_dlc26_kho_skarr_bloodwrath",
+		require_dlc = {"TW_WH3_OMENS_OF_DESTRUCTION_KHO"},
+		override_allowed_factions = {
+			"wh3_dlc20_chs_valkia",
+			"wh3_main_kho_exiles_of_khorne",
+			"wh3_dlc26_kho_arbaal",
+			"wh3_dlc26_kho_skulltaker",
+			"wh3_main_dae_daemon_prince"
+		},
+		factions_involved = {},
+		starting_mission_keys = "wh3_dlc26_kho_exiles_of_khorne_skarr_bloodwrath_unlock_1",
+		final_mission_key = {"wh3_dlc26_kho_exiles_of_khorne_skarr_bloodwrath_unlock_2"},
+		ancillaries = {
+			"wh3_dlc26_anc_weapon_bloodstorm_blades"
+		},
+		mission_chain_keys = {
+			main_warhammer = {
+				"wh3_dlc26_kho_exiles_of_khorne_skarr_bloodwrath_unlock_1",
+				"wh3_dlc26_kho_exiles_of_khorne_skarr_bloodwrath_unlock_2",
+			},
+			wh3_main_chaos = {
+				"wh3_dlc26_kho_exiles_of_khorne_skarr_bloodwrath_unlock_1",
+				"wh3_dlc26_kho_exiles_of_khorne_skarr_bloodwrath_unlock_2",
+			}
+		},
+		required_buildings = {
+			"wh3_main_kho_infra_champion_1",
+			"wh3_main_kho_infra_champion_2",
+			"wh3_dlc20_woc_dark_fortress_vassals_2",
+			"wh3_main_dae_advanced_kho_3"
+		}
+	},
+	scyla = {
+		-- Khorne players will get a mission to unlock Scyla once their faction leader reaches rank 10
+		-- If there are no human Khorne players the strongest Khorne faction will get Scyla after 30 turns
+		unlock_rank = 12,
+		ai_unlock_turn = 30,
+		has_spawned = false,
+		name = "scyla",
+		subtype = "wh3_dlc26_kho_scyla_anfingrimm",
+		require_dlc = {"TW_WH3_OMENS_OF_DESTRUCTION_KHO"},
+		override_allowed_factions = {
+			"wh3_dlc20_chs_valkia",
+			"wh3_main_kho_exiles_of_khorne",
+			"wh3_main_dae_daemon_prince",
+			"wh3_dlc20_chs_kholek",
+			"wh_main_chs_chaos",
+			"wh3_main_chs_shadow_legion",
+			"wh_dlc08_nor_norsca",
+			"wh_dlc08_nor_wintertooth",
+			"wh3_dlc26_kho_arbaal",
+			"wh3_dlc26_kho_skulltaker"
+		},
+		factions_involved = {},
+		starting_mission_keys = "wh3_dlc26_kho_exiles_of_khorne_scyla_anfingrimm_unlock_1",
+		final_mission_key = "wh3_dlc26_kho_exiles_of_khorne_scyla_anfingrimm_unlock_2",
+		ancillaries = {
+			"wh3_dlc26_anc_talisman_brass_collar_of_khorne"
+		},
+		mission_chain_keys = {
+			main_warhammer = {
+				"wh3_dlc26_kho_exiles_of_khorne_scyla_anfingrimm_unlock_1",
+				"wh3_dlc26_kho_exiles_of_khorne_scyla_anfingrimm_unlock_2"
+			},
+			wh3_main_chaos = {
+				"wh3_dlc26_kho_exiles_of_khorne_scyla_anfingrimm_unlock_1",
+				"wh3_dlc26_kho_exiles_of_khorne_scyla_anfingrimm_unlock_2"
+			}
+		}
 	},
 }
 
@@ -1003,7 +1099,6 @@ function character_unlocking:setup_legendary_hero_unlocking()
 		if current_character.allowed_factions == nil then
 			current_character.allowed_factions = self:get_allowed_factions_list(current_character)
 		end
-
 		if character and self:character_has_valid_faction_in_campaign(character) then
 			local has_starting_owner = false
 			if current_character.starting_owner_faction then
@@ -1023,14 +1118,16 @@ function character_unlocking:setup_legendary_hero_unlocking()
 				end
 			end
 			if has_starting_owner == false then --Remember to add the spawn_hero_for_ai() function to the end of function for any new unlock condition type that you may add.
-				if current_character.condition_to_start_unlock == self.character_unlock_condition_types.rank then
+				if current_character.unlock_rank then
 					self:add_listeners_for_character_rank_unlock(character)
-				elseif current_character.condition_to_start_unlock == self.character_unlock_condition_types.quest then
-					self:add_quest_mission_listener(character)
-				elseif current_character.condition_to_start_unlock == self.character_unlock_condition_types.ritual then
+				elseif current_character.ritual_keys then
 					self:add_ritual_listener(character)
-				elseif current_character.condition_to_start_unlock == self.character_unlock_condition_types.building then
+				elseif current_character.required_buildings then
 					self:add_building_completed_listeners(character)
+				elseif current_character.starting_mission_keys then
+					self:add_quest_mission_listener(character)
+				else
+					script_error("ERROR: Attempted to start unlock listeners for legendary hero [" .. character.subtype .. "] but could not find appropriate data!")
 				end
 
 				-- Setup listeners for dilemma grant condition
@@ -1055,7 +1152,7 @@ function character_unlocking:add_listeners_for_character_rank_unlock(character)
 	if character_info.priority_faction ~= nil then
 		local faction_interface = cm:get_faction(character_info.priority_faction)
 		if faction_interface and faction_interface:is_human() then
-			self:setup_mission_listeners(character)
+			self:setup_rank_unlock_mission_listeners(character)
 			rank_hero_unlock_human_count = rank_hero_unlock_human_count + 1
 			priority_faction_found = true
 		end
@@ -1066,7 +1163,7 @@ function character_unlocking:add_listeners_for_character_rank_unlock(character)
 			local faction_interface = cm:get_faction(character_info.allowed_factions[i])
 			if faction_interface and faction_interface:is_human() then
 				-- there's at least 1 human player of mission factions
-				self:setup_mission_listeners(character)
+				self:setup_rank_unlock_mission_listeners(character)
 				rank_hero_unlock_human_count = rank_hero_unlock_human_count + 1
 			end
 		end
@@ -1076,7 +1173,7 @@ function character_unlocking:add_listeners_for_character_rank_unlock(character)
 	end
 end
 
-function character_unlocking:setup_mission_listeners(character)
+function character_unlocking:setup_rank_unlock_mission_listeners(character)
 	local character_info = self.character_data[character]
 	local character_launch_mission = character_info.name .. "LaunchMission"
 	local character_mission_success = character_info.name .. "MissionSuccess"
@@ -1085,8 +1182,6 @@ function character_unlocking:setup_mission_listeners(character)
 		for i = 1, #character_info.allowed_factions do
 			local faction = cm:get_faction(character_info.allowed_factions[i])
 			if faction and faction:is_human() then
-				
-
 				cm:add_faction_turn_start_listener_by_name(
 					character_launch_mission,
 					character_info.allowed_factions[i],
@@ -1107,9 +1202,19 @@ function character_unlocking:setup_mission_listeners(character)
 
 							if trigger_mission then
 								character_info.factions_involved[faction_name] = true
-								local mission_key = self:get_mission_key(character_info.mission_keys, faction_name)
-								if is_string(mission_key) then 
-									cm:trigger_mission(faction_name, mission_key, true)
+								local mission_key = self:get_mission_key(character_info.starting_mission_keys, faction_name)
+								if is_string(mission_key) then
+									if cm:is_multiplayer() then
+										cm:trigger_mission(faction_name, mission_key, true)
+									else
+										cm:trigger_transient_intervention(
+											"trigger_legendary_hero_mission",
+											function(inv)
+												cm:trigger_mission(faction_name, mission_key, true)
+												inv:complete()
+											end
+										)
+									end
 								else
 									script_error("Legendary Hero spawning script returned >1 or 0 missions for a character when setting up listeners, which would otherwise crash the game")
 								end 
@@ -1125,11 +1230,19 @@ function character_unlocking:setup_mission_listeners(character)
 			character_mission_success,
 			"MissionSucceeded",
 			function(context)
-				return self:is_match_key_from_list(
-					context:mission():mission_record_key(),
-					character_info.mission_chain_keys,
-					context:faction():name()
-				)
+				if character_info.final_mission_key then
+					return self:is_match_key_from_list(
+						context:mission():mission_record_key(),
+						character_info.final_mission_key,
+						context:faction():name()
+					)
+				else
+					return self:is_match_key_from_list(
+						context:mission():mission_record_key(),
+						character_info.mission_chain_keys,
+						context:faction():name()
+					)
+				end
 			end,
 			function(context)
 				local faction_name = context:faction():name()
@@ -1159,7 +1272,7 @@ function character_unlocking:add_quest_mission_listener(character)
 			local faction_name = faction:name()
 			character_info.factions_involved[faction_name] = true
 			quest_hero_unlock_human_count = quest_hero_unlock_human_count + 1
-			self:setup_mission_completed_spawn_hero_listener(character, faction_name, character_mission_success)
+			self:setup_quest_mission_completed_spawn_hero_listener(character, faction_name, character_mission_success)
 			priority_faction_found = true
 		end
 	end
@@ -1172,7 +1285,7 @@ function character_unlocking:add_quest_mission_listener(character)
 				local faction_name = faction:name()
 				character_info.factions_involved[faction_name] = true
 				quest_hero_unlock_human_count = quest_hero_unlock_human_count + 1
-				self:setup_mission_completed_spawn_hero_listener(character, faction_name, character_mission_success)
+				self:setup_quest_mission_completed_spawn_hero_listener(character, faction_name, character_mission_success)
 			end
 		end
 	end
@@ -1225,9 +1338,9 @@ end
 
 function character_unlocking:spawn_hero_for_ai(character)
 	local character_info = self.character_data[character]
-	if character_info.ai_condition_to_start_unlock == self.character_unlock_condition_types.turn then
+	if character_info.ai_unlock_turn then
 		self:ai_unlock_by_turn(character)
-	elseif character_info.ai_condition_to_start_unlock == self.character_unlock_condition_types.rank then
+	elseif character_info.ai_unlock_rank then
 		self:ai_unlock_by_rank(character)
 	end
 end
@@ -1389,17 +1502,25 @@ function character_unlocking:add_building_completed_listeners(character)
 		building_mission_success,
 		"MissionSucceeded",
 		function(context)
-			return self:is_match_key_from_list(
-				context:mission():mission_record_key(),
-				character_info.mission_keys,
-				context:faction():name()
-			)
+			if character_info.final_mission_key then
+				return self:is_match_key_from_list(
+					context:mission():mission_record_key(),
+					character_info.final_mission_key,
+					context:faction():name()
+				)
+			else
+				return self:is_match_key_from_list(
+					context:mission():mission_record_key(),
+					character_info.mission_chain_keys,
+					context:faction():name()
+				)
+			end
 		end,
 		function(context)
-			local faction_interface = context:faction()
-			local faction_name = faction_interface:name()
+			local faction = context:faction()
+			local faction_name = faction:name()
 			if not character_info.trigger_dilemma_key then
-				self:spawn_hero(faction_name, character, faction_interface:faction_leader():command_queue_index())
+				self:spawn_hero(faction_name, character, faction:faction_leader():command_queue_index())
 				self:cancel_missions_for_other_players(faction_name, character, building_mission_success)
 			end
 		end,
@@ -1550,8 +1671,7 @@ function character_unlocking:unique_agent_listener(context, faction, character_i
 				cm:callback(
 					function()
 						if not cm:model():pending_battle():is_active() then
-							local character = faction:faction_leader()
-							cm:scroll_camera_from_current(true, 1.5, {character:display_position_x(), character:display_position_y(), 6, 0, 6});
+							cm:scroll_camera_from_current(true, 1.5, {agent:display_position_x(), agent:display_position_y(), 6, 0, 6});
 						end
 					end,
 					0.4
@@ -1794,7 +1914,7 @@ function character_unlocking:cancel_missions_for_other_players(completing_factio
 					cm:cancel_custom_mission(faction, mission_key)
 				end
 			else
-				cm:cancel_custom_mission(faction, self:get_mission_key(character_info.mission_keys, faction))
+				cm:cancel_custom_mission(faction, self:get_mission_key(character_info.starting_mission_keys, faction))
 			end
 			if character_mission_success_listener then
 				core:remove_listener(faction .. character_mission_success_listener)
@@ -1805,7 +1925,7 @@ function character_unlocking:cancel_missions_for_other_players(completing_factio
 end
 
 
-function character_unlocking:setup_mission_completed_spawn_hero_listener(character, faction_name, character_mission_success)
+function character_unlocking:setup_quest_mission_completed_spawn_hero_listener(character, faction_name, character_mission_success)
 	local character_info = self.character_data[character]
 
 	core:add_listener(
@@ -1814,7 +1934,7 @@ function character_unlocking:setup_mission_completed_spawn_hero_listener(charact
 		function(context)
 			return self:is_match_key_from_list(
 				context:mission():mission_record_key(),
-				character_info.mission_keys,
+				character_info.starting_mission_keys,
 				context:faction():name()
 			)
 		end,
@@ -1880,7 +2000,7 @@ function character_unlocking:setup_building_completed_spawn_hero_listener(charac
 		end,
 		function(context)
 			local faction_key = context:building():faction():name()
-			cm:trigger_mission(faction_key, self:get_mission_key(character_info.mission_keys, faction_key), true)
+			cm:trigger_mission(faction_key, self:get_mission_key(character_info.starting_mission_keys, faction_key), true)
 			core:remove_listener(faction_name..character_building_complete)
 		end,
 		true

@@ -110,6 +110,11 @@ local function get_initial_enemy_keys(faction_key)
 		return false
 	end
 
+	if faction_key == "wh3_dlc26_ogr_golgfag" then
+		-- golgfag starts with no starting enemies by design.
+		return false
+	end
+
 	local enemy_faction_save_value = faction_key .. "_narrative_initial_faction"
 	local enemy_region_save_value = faction_key .. "_narrative_initial_region"
 	local enemy_province_save_value = faction_key .. "_narrative_initial_province"
@@ -559,11 +564,194 @@ local function add_narrative_data_for_playable_faction(faction_key)
 		narrative.add_data_for_faction(faction_key, "shared_diplomacy_event_non_aggression_pact_mission_advice_key", "wh3_main_camp_narrative_shared_non_aggression_pact_02");
 		narrative.add_data_for_faction(faction_key, "shared_diplomacy_event_trade_mission_advice_key", "wh3_main_camp_narrative_shared_trade_agreement_02");
 		narrative.add_data_for_faction(faction_key, "shared_diplomacy_event_confederation_mission_advice_key", "wh3_main_camp_narrative_shared_war_confederation_02");
+		narrative.add_data_for_faction(faction_key, "ogre_contracts_trigger_war_contract_block", true)
+	end
+
+
+	-- Golgfag
+	if faction_key == "wh3_dlc26_ogr_golgfag" then
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_block", true);
+		narrative.add_data_for_faction(faction_key, "ogre_contracts_trigger_war_contract_block", false)
+	end
+
+
+
+
+
+	-- KHORNE
+
+	-- Arbaal
+	if faction_key == "wh3_dlc26_kho_arbaal" then
+		narrative.add_data_for_faction(faction_key, "khorne_win_streaks_use_eternal_war_mission_block", true);
+		narrative.add_data_for_faction(faction_key, "chaos_movements_trigger_start_block", true);
+		narrative.add_data_for_faction(faction_key, "shared_unit_recruitment_query_advice_block", true);
+		narrative.add_data_for_faction(faction_key, "shared_heroes_query_advice_block", true);
+
+		-- defeat initial enemy
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_key", "wh3_dlc26_camp_narrative_arbaal_defeat_initial_enemy_01");
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_rewards", {payload.money(500, faction_key), payload.khornes_favour(1)});
+
+		-- capture settlement
+		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_capture_settlement_mission_key", "wh3_dlc26_camp_narrative_arbaal_capture_settlement_01");
+		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_capture_settlement_mission_rewards", {payload.money(750, faction_key), payload.khornes_favour(1)});
+
+		-- trigger challenges when favour reaches 5
+		do
+			local name = "arbaal_gains_khorne_favour";
+
+			if not narrative.get(faction_key, name .. "_block") then
+				narrative_triggers.faction_pooled_resource_gained(
+					name,																																			-- unique name for this narrative trigger
+					faction_key,																																	-- key of faction to which it applies
+					narrative.get(faction_key, name .. "_start_messages") or "StartNarrativeEvents",																-- script message(s) on which to start
+					narrative.get(faction_key, name .. "_target_messages") or {"StartArbaalChallengeMission", "StartArbaalBoonMission"},							-- script message(s) to fire when this narrative trigger triggers
+					narrative.get(faction_key, name .. "_cancel_messages"),																							-- script message(s) on which to cancel
+					narrative.get(faction_key, name .. "_pooled_resource_faction_key") or faction_key,																-- key of faction to monitor resource changes for
+					narrative.get(faction_key, name .. "_pooled_resource_key") or "wh3_dlc26_kho_arbaal_wrath_of_khorne_progress",									-- pooled resource key(s)
+					narrative.get(faction_key, name .. "_threshold_value") or 5																						-- threshold value
+				);
+			end;
+		end;
+
+		-- complete a challenge mission
+		do
+			local name = "arbaal_complete_challenge_mission";
+
+			if not narrative.get(faction_key, name .. "_block") then
+				narrative_events.generic(
+					name,																																			-- unique name for this narrative event
+					faction_key,																																	-- key of faction to which it applies
+					narrative.get(faction_key, name .. "_advice_key"),																								-- key of advice to deliver
+					narrative.get(faction_key, name .. "_mission_key") or "wh3_dlc26_camp_narrative_arbaal_complete_a_challenge_01",								-- key of mission to deliver
+					narrative.get(faction_key, name .. "_mission_text") or "wh3_dlc26_narrative_mission_description_arbaal_challenge",								-- key of mission objective text
+					narrative.get(faction_key, name .. "_event_listeners") or {																						-- event/condition listeners
+						{
+							event = "MissionSucceeded",
+							condition =	function(context)
+								return context:mission():mission_record_key():starts_with("wh3_dlc26_arbaal_wrath_of_khorne_mission_")
+							end
+						}
+					},
+					narrative.get(faction_key, name .. "_camera_scroll_callback"),																					-- camera scroll callback
+					narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
+					narrative.get(faction_key, name .. "_mission_rewards") or {
+						payload.money(																																-- issue money or equivalent
+							1000,																																	-- money reward, if we aren't giving something else for this faction
+							faction_key																																-- faction key
+						),
+						payload.skulls(500)
+					},
+					narrative.get(faction_key, name .. "_trigger_messages") or "StartArbaalChallengeMission",														-- script message(s) on which to trigger when received
+					narrative.get(faction_key, name .. "_on_issued_messages"),																						-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
+					narrative.get(faction_key, name .. "_completed_messages"),																						-- script message(s) to trigger when this mission is completed
+					narrative.get(faction_key, name .. "_inherit_list")																								-- list of other narrative events to inherit rewards from (may be nil)
+				);
+			end;
+		end;
+
+		-- activate a boon mission
+		do
+			local name = "arbaal_activate_boon_mission";
+
+			if not narrative.get(faction_key, name .. "_block") then
+				narrative_events.generic(
+					name,																																			-- unique name for this narrative event
+					faction_key,																																	-- key of faction to which it applies
+					narrative.get(faction_key, name .. "_advice_key"),																								-- key of advice to deliver
+					narrative.get(faction_key, name .. "_mission_key") or "wh3_dlc26_camp_narrative_arbaal_activate_a_boon_01",										-- key of mission to deliver
+					narrative.get(faction_key, name .. "_mission_text") or "wh3_dlc26_narrative_mission_description_arbaal_activate_boon",							-- key of mission objective text
+					narrative.get(faction_key, name .. "_event_listeners") or {																						-- event/condition listeners
+						{
+							event = "FactionInitiativeActivationChangedEvent",
+							condition =	function(context)
+								return context:active()
+							end
+						}
+					},
+					narrative.get(faction_key, name .. "_camera_scroll_callback"),																					-- camera scroll callback
+					narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
+					narrative.get(faction_key, name .. "_mission_rewards") or {
+						payload.skulls(200)
+					},
+					narrative.get(faction_key, name .. "_trigger_messages") or "StartArbaalBoonMission",															-- script message(s) on which to trigger when received
+					narrative.get(faction_key, name .. "_on_issued_messages"),																						-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
+					narrative.get(faction_key, name .. "_completed_messages"),																						-- script message(s) to trigger when this mission is completed
+					narrative.get(faction_key, name .. "_inherit_list")																								-- list of other narrative events to inherit rewards from (may be nil)
+				);
+			end;
+		end;
+	end
+
+	-- Skulltaker
+	if faction_key == "wh3_dlc26_kho_skulltaker" then
+		-- defeat initial enemy
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_key", "wh3_dlc26_camp_narrative_skulltaker_defeat_initial_enemy_01");
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_rewards", {payload.money(500, faction_key), payload.champions_essence(5)});
+
+		-- capture settlement
+		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_capture_settlement_mission_key", "wh3_dlc26_camp_narrative_skulltaker_capture_settlement_01");
+		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_capture_settlement_mission_rewards", {payload.money(750, faction_key), payload.champions_essence(5)});
+
+		-- trigger empower skull mission when essence reaches 25
+		do
+			local name = "skulltaker_gains_champions_essence";
+
+			if not narrative.get(faction_key, name .. "_block") then
+				narrative_triggers.faction_pooled_resource_gained(
+					name,																																			-- unique name for this narrative trigger
+					faction_key,																																	-- key of faction to which it applies
+					narrative.get(faction_key, name .. "_start_messages") or "StartNarrativeEvents",																-- script message(s) on which to start
+					narrative.get(faction_key, name .. "_target_messages") or {"StartSkulltakerEmpowerSkullMission"},												-- script message(s) to fire when this narrative trigger triggers
+					narrative.get(faction_key, name .. "_cancel_messages"),																							-- script message(s) on which to cancel
+					narrative.get(faction_key, name .. "_pooled_resource_faction_key") or faction_key,																-- key of faction to monitor resource changes for
+					narrative.get(faction_key, name .. "_pooled_resource_key") or "wh3_dlc26_kho_champions_essence_faction",										-- pooled resource key(s)
+					narrative.get(faction_key, name .. "_threshold_value") or 25																					-- threshold value
+				);
+			end;
+		end;
+
+		-- empower skull mission
+		do
+			local name = "skulltaker_empower_skull";
+
+			if not narrative.get(faction_key, name .. "_block") then
+				narrative_events.generic(
+					name,																																			-- unique name for this narrative event
+					faction_key,																																	-- key of faction to which it applies
+					narrative.get(faction_key, name .. "_advice_key"),																								-- key of advice to deliver
+					narrative.get(faction_key, name .. "_mission_key") or "wh3_dlc26_camp_narrative_skulltaker_empower_skull_01",									-- key of mission to deliver
+					narrative.get(faction_key, name .. "_mission_text") or "wh3_dlc26_narrative_mission_description_skulltaker_empower_skull",						-- key of mission objective text
+					narrative.get(faction_key, name .. "_event_listeners") or {																						-- event/condition listeners
+						{
+							event = "RitualCompletedEvent",
+							condition =	function(context)
+								return context:performing_faction():name() == faction_key and context:ritual():ritual_category() == "CLOAK_OF_SKULLS";
+							end
+						}
+					},
+					narrative.get(faction_key, name .. "_camera_scroll_callback"),																					-- camera scroll callback
+					narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
+					narrative.get(faction_key, name .. "_mission_rewards") or {payload.money(1000)},
+					narrative.get(faction_key, name .. "_trigger_messages") or "StartSkulltakerEmpowerSkullMission",												-- script message(s) on which to trigger when received
+					narrative.get(faction_key, name .. "_on_issued_messages"),																						-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
+					narrative.get(faction_key, name .. "_completed_messages"),																						-- script message(s) to trigger when this mission is completed
+					narrative.get(faction_key, name .. "_inherit_list")																								-- list of other narrative events to inherit rewards from (may be nil)
+				);
+			end;
+		end;
+	end
+
+	-- GREENSKINS
+
+	if culture == "wh_main_grn_greenskins" then
+		narrative.add_data_for_faction(faction_key, "greenskins_da_plan_trigger_campaign_start_equip_tactic_block", true)
+	end
+
+	-- Gorbad
+	if faction_key == "wh3_dlc26_grn_gorbad_ironclaw" then
+		narrative.add_data_for_faction(faction_key, "greenskins_da_plan_trigger_campaign_start_equip_tactic_block", false)
 	end
 end;
-
-
-
 
 
 

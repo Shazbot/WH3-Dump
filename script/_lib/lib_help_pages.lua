@@ -560,6 +560,16 @@ local help_panel_position_overrides_campaign = {
 	dlc25_tamurkhan_chieftains = {
 		["x"] = 5,
 		["y"] = 5
+	},
+
+	dlc26_wrath_of_khorne = {
+		["x"] = -5,
+		["y"] = 5
+	},
+
+	dlc26_cloak_of_skulls = {
+		["x"] = -5,
+		["y"] = 5
 	}
 };
 

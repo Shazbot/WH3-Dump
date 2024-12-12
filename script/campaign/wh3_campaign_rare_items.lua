@@ -68,7 +68,8 @@ function load_rare_items()
 
 					if #possible_items.items > 0 then
 						local selected_item, index = possible_items:weighted_select();
-						cm:force_add_ancillary(character, selected_item, false, false);
+						--cm:force_add_ancillary(character, selected_item, false, false);
+						cm:add_ancillary_to_faction(character:faction(), selected_item, false);
 					end
 				end
 			end

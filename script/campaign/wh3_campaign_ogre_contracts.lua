@@ -240,9 +240,10 @@ function ogre_bounties:attempt_to_issue_ogre_contracts(faction_key, num_contract
 							if is_region(obj) then
 								x = obj:settlement():logical_position_x()
 								y = obj:settlement():logical_position_y()
-							else
-								x = obj:logical_position_x()
-								y = obj:logical_position_y()
+							elseif obj:has_general() then
+								local general = obj:general_character()
+								x = general:logical_position_x()
+								y = general:logical_position_y()
 							end
 
 							local distance = distance_squared(general_x, general_y, x, y)
@@ -284,9 +285,10 @@ function ogre_bounties:attempt_to_issue_ogre_contracts(faction_key, num_contract
 						if is_region(obj) then
 							x = obj:settlement():logical_position_x()
 							y = obj:settlement():logical_position_y()
-						else
-							x = obj:logical_position_x()
-							y = obj:logical_position_y()
+						elseif obj:has_general() then
+							local general = obj:general_character()
+							x = general:logical_position_x()
+							y = general:logical_position_y()
 						end
 
 						local distance = distance_squared(settlement_x, settlement_y, x, y)
@@ -380,7 +382,7 @@ function ogre_bounties:attempt_to_issue_ogre_contracts(faction_key, num_contract
 				end
 				
 				if selected_mf then
-					payload = payload .. "military_force_pooled_resource_transaction{general_lookup " .. cm:char_lookup_str(selected_mf:general_character():command_queue_index()) .. ";resource wh3_main_ogr_meat;factor events;amount 25;context absolute;}"
+					payload = payload .. "military_force_pooled_resource_transaction{general_lookup " .. cm:char_lookup_str(selected_mf:general_character():command_queue_index()) .. ";resource wh3_main_ogr_meat;factor events;amount 200;context absolute;}"
 				end
 			end
 

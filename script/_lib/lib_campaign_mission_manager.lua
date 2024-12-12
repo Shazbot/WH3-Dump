@@ -2522,6 +2522,32 @@ function payload.spirit_essence(amount)
 end;
 
 
+--- @function khorne's favour
+--- @desc Returns a payload string which defines a khornes_favour reward for a Arbaal (Khorne) string mission definition. No kind of equivalence is looked up.
+--- @p @number amount
+--- @r @string payload string
+function payload.khornes_favour(amount)
+	if not validate.is_positive_number(amount) then
+		return false;
+	end;
+	
+	return payload.pooled_resource_mission_payload("wh3_dlc26_kho_arbaal_wrath_of_khorne_progress", "missions", amount);
+end;
+
+
+--- @function champion's essence
+--- @desc Returns a payload string which defines a champions_essence reward for a Skultaker (Khorne) string mission definition. No kind of equivalence is looked up.
+--- @p @number amount
+--- @r @string payload string
+function payload.champions_essence(amount)
+	if not validate.is_positive_number(amount) then
+		return false;
+	end;
+	
+	return payload.pooled_resource_mission_payload("wh3_dlc26_kho_champions_essence_faction", "missions", amount);
+end;
+
+
 
 
 

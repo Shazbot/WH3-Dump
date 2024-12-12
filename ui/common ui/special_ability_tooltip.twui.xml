@@ -14,6 +14,9 @@
 						<shortcut_anchor this="5C695CFC-1BB8-40D5-951643A02D775E17">
 							<shortcut_text this="54F0F791-7E93-475A-BE49335CCEDBC505"/>
 						</shortcut_anchor>
+						<decay_timer this="9C3D6CF7-CFAC-490B-AF4D315DEE68F0C4">
+							<dy_decay_value this="CDF10773-31C2-457B-8E0153877E1611F1"/>
+						</decay_timer>
 					</header>
 					<top_parent this="1E0F3E38-509F-4B56-9BB6D1A6FFBC60BD">
 						<parent_list this="94301C27-BBC2-4956-A5DB72B2F05AD2D6">
@@ -9957,7 +9960,7 @@
 				<callback_with_context
 					callback_id="ContextFillBar"
 					context_object_id="CcoBattleAbility"
-					context_function_id="AbilityApplyIntensity(1)">
+					context_function_id="GetIfElse(&#10;  IntensitySettingContext.DefaultAmount &gt;= 0&#10;  , AbilityApplyIntensity(1)&#10;  , Percentage(1 + AbilityApplyIntensity(1), 2))">
 					<child_m_user_properties>
 						<property
 							name="update_constant"
@@ -9965,9 +9968,20 @@
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
-					callback_id="ContextColourSetter"
-					context_object_id="CcoStaticObject"
-					context_function_id="MainThemeColour"/>
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoBattleAbility">
+					<child_m_user_properties>
+						<property
+							name="decreasing"
+							value="IntensityDecayIsActive"/>
+						<property
+							name="default"
+							value="IntensityDecayTimerStarted"/>
+						<property
+							name="increasing"
+							value="!IntensityDecayTimerStarted &amp;&amp; !IntensityDecayIsActive"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -9976,6 +9990,27 @@
 					imagepath="ui/skins/default/bar_fill_ability_intensity.png"/>
 			</componentimages>
 			<states>
+				<decreasing
+					this="F6C0A89F-1C6A-4530-A7663CE97603EC6A"
+					name="decreasing"
+					width="130"
+					height="8"
+					uniqueguid="F6C0A89F-1C6A-4530-A7663CE97603EC6A">
+					<imagemetrics>
+						<image
+							this="A0805E65-ECF6-444B-84A7E63FAFA57E1C"
+							uniqueguid="A0805E65-ECF6-444B-84A7E63FAFA57E1C"
+							componentimage="D00C25E5-943A-49C1-91E570C31CE382DA"
+							width="130"
+							height="8"
+							colour="#FF2D2DFF"
+							ui_colour_preset_type_key="red"/>
+					</imagemetrics>
+					<component_text
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
+				</decreasing>
 				<default
 					this="87DCD8E3-3B11-4A3E-868474B45857E06F"
 					name="default"
@@ -9995,6 +10030,27 @@
 						font_m_leading="3"
 						fontcat_name="body_10"/>
 				</default>
+				<increasing
+					this="BD1E5723-2B64-4AAC-BF0A1791CA9C9DDA"
+					name="increasing"
+					width="130"
+					height="8"
+					uniqueguid="BD1E5723-2B64-4AAC-BF0A1791CA9C9DDA">
+					<imagemetrics>
+						<image
+							this="FA1A32C1-6D2C-4E9B-806BD2B95EFE0606"
+							uniqueguid="FA1A32C1-6D2C-4E9B-806BD2B95EFE0606"
+							componentimage="D00C25E5-943A-49C1-91E570C31CE382DA"
+							width="130"
+							height="8"
+							colour="#A0FF37FF"
+							ui_colour_preset_type_key="green"/>
+					</imagemetrics>
+					<component_text
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
+				</increasing>
 			</states>
 		</intensity_fill>
 		<frame
@@ -10071,5 +10127,88 @@
 				</default>
 			</states>
 		</projectile_header>
+		<decay_timer
+			this="9C3D6CF7-CFAC-490B-AF4D315DEE68F0C4"
+			id="decay_timer"
+			offset="-235.00,9.00"
+			docking="Center Right"
+			dock_offset="10.00,0.00"
+			component_anchor_point="1.00,0.50"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="9C3D6CF7-CFAC-490B-AF4D315DEE68F0C4"
+			currentstate="7354E24D-D874-4E1A-85AC624651EAA412"
+			defaultstate="7354E24D-D874-4E1A-85AC624651EAA412">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoBattleAbility"
+					context_function_id="IntensityDecayTimerStarted &amp;&amp; TimeUntilIntensityDecay &gt; 0"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="max_text_lines"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="7354E24D-D874-4E1A-85AC624651EAA412"
+					name="default"
+					width="599"
+					height="16"
+					uniqueguid="7354E24D-D874-4E1A-85AC624651EAA412">
+					<component_text
+						text="{{tr:ui_text_replacements_localised_text_battle_special_ability_tooltip_decay_label}}"
+						textvalign="Center"
+						texthalign="Right"
+						textxoffset="0.00,32.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_5a9f1e12"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</default>
+			</states>
+		</decay_timer>
+		<dy_decay_value
+			this="CDF10773-31C2-457B-8E0153877E1611F1"
+			id="dy_decay_value"
+			offset="568.00,-3.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center Right"
+			dock_offset="1.00,0.00"
+			component_anchor_point="1.00,0.50"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="CDF10773-31C2-457B-8E0153877E1611F1"
+			currentstate="1C9D73EC-94C8-417E-B318464FECAF2FD6"
+			defaultstate="1C9D73EC-94C8-417E-B318464FECAF2FD6">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoBattleAbility"
+					context_function_id="TimeUntilIntensityDecay"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="1C9D73EC-94C8-417E-B318464FECAF2FD6"
+					name="default"
+					height="22"
+					uniqueguid="1C9D73EC-94C8-417E-B318464FECAF2FD6">
+					<component_text
+						text="XXX"
+						textvalign="Center"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_5deea163"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</default>
+			</states>
+		</dy_decay_value>
 	</components>
 </layout>

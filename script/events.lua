@@ -1,5 +1,5 @@
 --[[
-Automatically generated via export from C:/Users/build/DaVE_local/branches/warhammer3/patch_5_3/warhammer/raw_data/db
+Automatically generated via export from C:/Users/build/DaVE_local/branches/warhammer3/patch_6_0/warhammer/raw_data/db
 Edit manually at your own risk
 --]]
 
@@ -96,6 +96,7 @@ CharacterDisembarksNavy = {}
 CharacterEmbarksNavy = {}
 CharacterEntersAttritionalArea = {}
 CharacterEntersGarrison = {}
+CharacterEntersLimboEvent = {}
 CharacterFactionCompletesResearch = {}
 CharacterFamilyRelationDied = {}
 CharacterFinishedMovingEvent = {}

@@ -93,6 +93,8 @@ require("wh3_dlc25_grudge_cycles")
 require("wh3_dlc25_emp_techs")
 require("wh3_campaign_forge")
 require("wh3_campaign_underdeep")
+require("wh3_campaign_subjugation")
+require("wh3_campaign_unholy_manifestations")
 
 -- Intro Logic (Often best to load this after other functionality has been loaded)
 require("faction_intro")
@@ -239,6 +241,15 @@ require("wh3_dlc25_spirit_of_grungni")
 require("wh3_dlc25_empire_state_troops")
 require("wh3_dlc25_gardens_of_morr")
 require("wh3_dlc25_gelt_dilemmas")
+
+-- DLC26
+require("wh3_dlc26_contracts")
+require("wh3_dlc26_cloak_of_skulls")
+require("wh3_dlc26_arbaal_wrath_of_khorne")
+require("wh3_dlc26_da_plan")
+require("wh3_dlc26_ogre_camps")
+require("wh3_dlc26_tyrants_demands")
+
 
 -- Minor Cults
 require("wh3_campaign_minor_cults");

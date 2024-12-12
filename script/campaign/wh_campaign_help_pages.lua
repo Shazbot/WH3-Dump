@@ -86,8 +86,9 @@ function setup_campaign_help_pages()
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_ice_court", "kislev_ice_court");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_motherland", "kislev_winter");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_atamans", "kislev_atamans");
-	hpm:register_help_page_to_info_button_mapping("script_link_campaign_contracts", "ogre_contracts");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_contracts", "ogre_bounties");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_meat", "ogre_great_maw");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_meat", "meat_transfer_docker");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_compass", "cathay_compass");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_compass", "dlc24_jade_compass");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_ivory_road", "cathay_caravans");
@@ -113,7 +114,14 @@ function setup_campaign_help_pages()
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_nemesis_crown", "dlc25_nemesis_crown");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_plagues_of_nurgle", "dlc25_nurgle_plagues");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_chieftains", "dlc25_tamurkhan_chieftains");
-	
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_skull_throne", "dlc26_skull_throne");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_cloak_of_skulls", "dlc26_cloak_of_skulls");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_wrath_of_khorne", "dlc26_wrath_of_khorne");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_tyrants_demands", "dlc26_tyrants_demands");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_ogre_camps", "dlc26_character_panel_camps");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_mercenary_contracts", "dlc26_ogre_war_contracts");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_da_plan", "dlc26_da_plan");
+
 	hpm:register_help_page_to_info_button_mapping(
 		"script_link_campaign_intrigue_at_the_court",
 		"intrigue_panel",
@@ -1749,6 +1757,33 @@ function setup_campaign_help_pages()
 	parser:add_record("campaign_blessing_lady", "script_link_campaign_blessing_lady", "tooltip_campaign_blessing_lady");
 	tp_blessing_lady = tooltip_patcher:new("tooltip_campaign_blessing_lady");
 	tp_blessing_lady:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_blessing_lady", "ui_text_replacements_localised_text_hp_campaign_description_blessing_lady");	
+
+
+
+	--
+	-- blood hosts
+	--
+	hp_blood_hosts = help_page:new(
+		"script_link_campaign_blood_hosts",
+		hpr_title("war.camp.hp.blood_hosts.001"),
+		hpr_leader("war.camp.hp.blood_hosts.002"),
+		hpr_normal("war.camp.hp.blood_hosts.003"),
+		hpr_normal("war.camp.hp.blood_hosts.004"),
+		hpr_normal("war.camp.hp.blood_hosts.005")
+	);
+	parser:add_record("campaign_blood_hosts", "script_link_campaign_blood_hosts", "tooltip_campaign_blood_hosts");
+	tp_blood_hosts = tooltip_patcher:new("tooltip_campaign_blood_hosts");
+	tp_blood_hosts:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_blood_hosts", "ui_text_replacements_localised_text_hp_campaign_description_blood_hosts");
+	
+	--[[tl_blood_hosts = tooltip_listener:new(
+		"tooltip_campaign_blood_hosts", 
+		function() 
+			uim:highlight_blood_hosts(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);]]
 	
 	
 	--
@@ -3152,6 +3187,57 @@ function setup_campaign_help_pages()
 		end
 	);
 
+
+
+	--
+	-- cloak_of_skulls
+	--
+	hp_cloak_of_skulls = help_page:new(
+		"script_link_campaign_cloak_of_skulls",
+		hpr_title("war.camp.hp.cloak_of_skulls.001"),
+		hpr_leader("war.camp.hp.cloak_of_skulls.002"),
+		hpr_normal("war.camp.hp.cloak_of_skulls.003"),
+		hpr_normal("war.camp.hp.cloak_of_skulls.004"),
+		hpr_normal("war.camp.hp.cloak_of_skulls.005"),
+		hpr_normal("war.camp.hp.cloak_of_skulls.006"),
+		hpr_normal("war.camp.hp.cloak_of_skulls.007")
+	);
+	parser:add_record("campaign_cloak_of_skulls", "script_link_campaign_cloak_of_skulls", "tooltip_campaign_cloak_of_skulls");
+	tp_cloak_of_skulls = tooltip_patcher:new("tooltip_campaign_cloak_of_skulls");
+	tp_cloak_of_skulls:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_cloak_of_skulls", "ui_text_replacements_localised_text_hp_campaign_description_cloak_of_skulls");
+	
+	tl_cloak_of_skulls = tooltip_listener:new(
+		"tooltip_campaign_cloak_of_skulls", 
+		function() 
+			uim:highlight_cloak_of_skulls(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+
+
+	--
+	-- cloak_of_skulls_link
+	--
+
+	parser:add_record("campaign_cloak_of_skulls_link", "script_link_campaign_cloak_of_skulls_link", "tooltip_campaign_cloak_of_skulls_link");
+	tp_skulls_link = tooltip_patcher:new("tooltip_campaign_cloak_of_skulls_link");
+	tp_skulls_link:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_campaign_title_cloak_of_skulls_link");
+	
+	tl_skulls_link = tooltip_listener:new(
+		"tooltip_campaign_cloak_of_skulls_link",
+		function() 
+			uim:highlight_cloak_of_skulls(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+
+
 	--
 	-- colleges_of_magic
 	--
@@ -3358,7 +3444,8 @@ function setup_campaign_help_pages()
 		hpr_leader("war.camp.hp.confederation.002"),
 		hpr_normal("war.camp.hp.confederation.003"),
 		hpr_normal("war.camp.hp.confederation.004"),
-		hpr_normal("war.camp.hp.confederation.005")
+		hpr_normal("war.camp.hp.confederation.005"),
+		hpr_normal("war.camp.hp.confederation.006")
 	);
 	parser:add_record("campaign_confederation", "script_link_campaign_confederation", "tooltip_campaign_confederation");
 	tp_confederation = tooltip_patcher:new("tooltip_campaign_confederation");
@@ -3524,6 +3611,24 @@ function setup_campaign_help_pages()
 	parser:add_record("campaign_cyclical_buildings", "script_link_campaign_cyclical_buildings", "tooltip_campaign_cyclical_buildings");
 	tp_cyclical_buildings = tooltip_patcher:new("tooltip_campaign_cyclical_buildings");
 	tp_cyclical_buildings:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_cyclical_buildings", "ui_text_replacements_localised_text_hp_campaign_description_cyclical_buildings");
+	
+
+	--
+	-- da plan
+	--
+	hp_da_plan = help_page:new(
+		"script_link_campaign_da_plan",
+		hpr_title("war.camp.hp.da_plan.001"),
+		hpr_leader("war.camp.hp.da_plan.002"),
+		hpr_normal("war.camp.hp.da_plan.003"),
+		hpr_normal("war.camp.hp.da_plan.004"),
+		hpr_normal("war.camp.hp.da_plan.005"),
+		hpr_normal("war.camp.hp.da_plan.006"),
+		hpr_normal("war.camp.hp.da_plan.007")
+	);
+	parser:add_record("campaign_da_plan", "script_link_campaign_da_plan", "tooltip_campaign_da_plan");
+	tp_da_plan = tooltip_patcher:new("tooltip_campaign_da_plan");
+	tp_da_plan:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_da_plan", "ui_text_replacements_localised_text_hp_campaign_description_da_plan");
 
 
 	--
@@ -7508,7 +7613,15 @@ function setup_campaign_help_pages()
 	tp_meat = tooltip_patcher:new("tooltip_campaign_meat");
 	tp_meat:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_meat", "ui_text_replacements_localised_text_hp_campaign_description_meat");
 
-
+	tl_meat = tooltip_listener:new(
+		"tooltip_campaign_meat", 
+		function() 
+			uim:highlight_ogre_meat(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
 
 	--
 	-- meat_link
@@ -8365,6 +8478,25 @@ function setup_campaign_help_pages()
 	parser:add_record("campaign_oxyotl_visions", "script_link_campaign_oxyotl_visions", "tooltip_campaign_oxyotl_visions");
 	tp_oxyotl_visions = tooltip_patcher:new("tooltip_campaign_oxyotl_visions");
 	tp_oxyotl_visions:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_oxyotl_visions_title", "ui_text_replacements_localised_text_hp_campaign_oxyotl_visions_description");
+
+
+
+	--
+	-- Path of the butcher
+	--
+	hp_path_of_the_butcher = help_page:new(
+		"script_link_campaign_path_of_the_butcher",
+		hpr_title("war.camp.hp.path_of_the_butcher.001"),
+		hpr_leader("war.camp.hp.path_of_the_butcher.002"),
+		hpr_normal("war.camp.hp.path_of_the_butcher.003"),
+		hpr_normal("war.camp.hp.path_of_the_butcher.004"),
+		hpr_normal("war.camp.hp.path_of_the_butcher.005")
+	);
+	parser:add_record("campaign_path_of_the_butcher", "script_link_campaign_path_of_the_butcher", "tooltip_campaign_path_of_the_butcher");
+	tp_path_of_the_butcher = tooltip_patcher:new("tooltip_campaign_path_of_the_butcher");
+	tp_path_of_the_butcher:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_path_of_the_butcher", "ui_text_replacements_localised_text_hp_campaign_description_path_of_the_butcher");
+
+
 
 	--
 	-- path to glory
@@ -10786,13 +10918,42 @@ function setup_campaign_help_pages()
 	--
 	-- skull_throne
 	--
-
+	hp_skull_throne = help_page:new(
+		"script_link_campaign_skull_throne",
+		hpr_title("war.camp.hp.skull_throne.001"),
+		hpr_leader("war.camp.hp.skull_throne.002"),
+		hpr_normal("war.camp.hp.skull_throne.003"),
+		hpr_normal("war.camp.hp.skull_throne.004"),
+		hpr_normal("war.camp.hp.skull_throne.005"),
+		hpr_normal("war.camp.hp.skull_throne.006"),
+		hpr_normal("war.camp.hp.skull_throne.007")
+	);
 	parser:add_record("campaign_skull_throne", "script_link_campaign_skull_throne", "tooltip_campaign_skull_throne");
 	tp_skull_throne = tooltip_patcher:new("tooltip_campaign_skull_throne");
-	tp_skull_throne:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_campaign_description_skull_throne");
+	tp_skull_throne:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_skull_throne", "ui_text_replacements_localised_text_hp_campaign_description_skull_throne");
 	
 	tl_skull_throne = tooltip_listener:new(
 		"tooltip_campaign_skull_throne", 
+		function() 
+			uim:highlight_skull_throne(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+
+
+	--
+	-- skull_throne_link
+	--
+
+	parser:add_record("campaign_skull_throne_link", "script_link_campaign_skull_throne_link", "tooltip_campaign_skull_throne_link");
+	tp_skulls_link = tooltip_patcher:new("tooltip_campaign_skull_throne_link");
+	tp_skulls_link:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_campaign_title_skull_throne_link");
+	
+	tl_skulls_link = tooltip_listener:new(
+		"tooltip_campaign_skull_throne_link",
 		function() 
 			uim:highlight_skull_throne(true);
 		end,
@@ -12079,6 +12240,78 @@ function setup_campaign_help_pages()
 
 
 	--
+	-- tyrant's demands
+	--
+	hp_tyrants_demands = help_page:new(
+		"script_link_campaign_tyrants_demands",
+		hpr_title("war.camp.hp.tyrants_demands.001"),
+		hpr_leader("war.camp.hp.tyrants_demands.002"),
+		hpr_normal("war.camp.hp.tyrants_demands.003"),
+		hpr_normal("war.camp.hp.tyrants_demands.004"),
+		hpr_normal("war.camp.hp.tyrants_demands.005")
+	);
+	parser:add_record("campaign_tyrants_demands", "script_link_campaign_tyrants_demands", "tooltip_campaign_tyrants_demands");
+	tp_tyrants_demands = tooltip_patcher:new("tooltip_campaign_tyrants_demands");
+	tp_tyrants_demands:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_tyrants_demands", "ui_text_replacements_localised_text_hp_campaign_description_tyrants_demands");
+	
+	tl_tyrants_demands = tooltip_listener:new(
+		"tooltip_campaign_tyrants_demands", 
+		function() 
+			uim:highlight_tyrants_demands(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+
+	--
+	-- mercenary contracts
+	--
+	hp_mercenary_contracts = help_page:new(
+		"script_link_campaign_mercenary_contracts",
+		hpr_title("war.camp.hp.mercenary_contracts.001"),
+		hpr_leader("war.camp.hp.mercenary_contracts.002"),
+		hpr_normal("war.camp.hp.mercenary_contracts.003"),
+		hpr_normal("war.camp.hp.mercenary_contracts.004"),
+		hpr_normal("war.camp.hp.mercenary_contracts.005"),
+		hpr_normal("war.camp.hp.mercenary_contracts.006"),
+		hpr_normal("war.camp.hp.mercenary_contracts.007")
+	);
+	parser:add_record("campaign_ogre_mercenary_contracts", "script_link_campaign_mercenary_contracts", "tooltip_campaign_mercenary_contracts");
+	tp_mercenary_contracts = tooltip_patcher:new("tooltip_campaign_mercenary_contracts");
+	tp_mercenary_contracts:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_mercenary_contracts", "ui_text_replacements_localised_text_hp_campaign_description_mercenary_contracts");
+	
+	tl_mercenary_contracts = tooltip_listener:new(
+		"tooltip_campaign_mercenary_contracts", 
+		function() 
+			uim:highlight_mercenary_contracts(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+	--
+	-- mercenary contracts link
+	--
+	
+	parser:add_record("campaign_mercenary_contracts_link", "script_link_campaign_mercenary_contracts_link", "tooltip_campaign_mercenary_contracts_link");
+	tp_mercenary_contracts_link = tooltip_patcher:new("tooltip_campaign_mercenary_contracts_link");
+	tp_mercenary_contracts_link:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_campaign_title_mercenary_contracts_link");
+	
+	tl_mercenary_contracts_link = tooltip_listener:new(
+		"tooltip_campaign_mercenary_contracts_link", 
+		function() 
+			uim:highlight_mercenary_contracts(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+
+	--
 	-- underway
 	--
 
@@ -13297,6 +13530,55 @@ function setup_campaign_help_pages()
 	parser:add_record("campaign_worldroots", "script_link_campaign_worldroots", "tooltip_campaign_worldroots");
 	tp_worldroots = tooltip_patcher:new("tooltip_campaign_worldroots");
 	tp_worldroots:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_wood_elves_new_worldroots", "ui_text_replacements_localised_text_hp_campaign_description_wood_elves_new_worldroots");
+
+
+
+	--
+	-- wrath of khorne
+	--
+	hp_wrath_of_khorne = help_page:new(
+		"script_link_campaign_wrath_of_khorne",
+		hpr_title("war.camp.hp.wrath_of_khorne.001"),
+		hpr_leader("war.camp.hp.wrath_of_khorne.002"),
+		hpr_normal("war.camp.hp.wrath_of_khorne.003"),
+		hpr_normal("war.camp.hp.wrath_of_khorne.004"),
+		hpr_normal("war.camp.hp.wrath_of_khorne.005"),
+		hpr_normal("war.camp.hp.wrath_of_khorne.006"),
+		hpr_normal("war.camp.hp.wrath_of_khorne.007")
+	);
+	parser:add_record("campaign_wrath_of_khorne", "script_link_campaign_wrath_of_khorne", "tooltip_campaign_wrath_of_khorne");
+	tp_wrath_of_khorne = tooltip_patcher:new("tooltip_campaign_wrath_of_khorne");
+	tp_wrath_of_khorne:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_wrath_of_khorne", "ui_text_replacements_localised_text_hp_campaign_description_wrath_of_khorne");
+	
+	tl_wrath_of_khorne = tooltip_listener:new(
+		"tooltip_campaign_wrath_of_khorne", 
+		function() 
+			uim:highlight_wrath_of_khorne(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+
+
+	--
+	-- wrath_of_khorne_link
+	--
+
+	parser:add_record("campaign_wrath_of_khorne_link", "script_link_campaign_wrath_of_khorne_link", "tooltip_campaign_wrath_of_khorne_link");
+	tp_wrath_of_khorne_link = tooltip_patcher:new("tooltip_campaign_wrath_of_khorne_link");
+	tp_wrath_of_khorne_link:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_campaign_title_wrath_of_khorne_link");
+	
+	tl_wrath_of_khorne_link = tooltip_listener:new(
+		"tooltip_campaign_wrath_of_khorne_link",
+		function()
+			uim:highlight_wrath_of_khorne(true);
+		end,
+		function()
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
 	
 	
 

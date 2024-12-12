@@ -1,0 +1,95 @@
+ScrapUpgrades
+{
+	PurchasableEffectComponents
+	{
+		# We use this verbose way because ChildContext searches recursively and often finds the wrong "list_box" component (each purchasable effect item contains list boxes of its own). #
+		RootComponent.Component("scrap_upgrades_parent", "scrap_upgrades_list_box")
+			.ChildList.FirstContext(Id == "list_clip")
+			.ChildList.FirstContext(Id == "list_box")
+			.ChildList
+	}
+
+	SelectedPurchasableEffects
+	{
+		PurchasableEffectComponents.Filter(IsVisible && IsSelected).Transform(
+			(component) => component.StoredContext("CcoUnitPurchasableEffectRecord")
+		)
+	}
+
+	CountOfSelectedUnitsHavingPurchased(CcoUnitPurchasableEffectRecord upgrade_record)
+	{
+		Component("units", "main_units_panel").UpgradingUnitsContextList.Count(HasPurchasedEffect(upgrade_record))
+	}
+
+	PurchasableEffectComponentState(CcoUnitPurchasableEffectRecord upgrade_record)
+	{
+		# activated: all units have the upgrade; inactive: no unit can get the upgrade; active/hover: some units can get the upgrade #
+		# We don't set 'selected'; this function is for (re-)initialising when the unit/character selection changes. #
+		(units = Component("units", "main_units_panel").UpgradingUnitsContextList) =>
+		{
+			GetIfElse(
+				units.Any(CanUpgrade(upgrade_record)),
+				(self.IsMouseOver | "hover" | "active"),
+				(units.All(HasPurchasedEffect(upgrade_record)) | "activated" | "inactive")
+			)
+		}
+	}
+	
+	PurchaseCostOfPurchasableEffectForUnit(CcoCampaignUnit unit, CcoComponent purchasable_effect_component)
+	{
+		# Calculate the purchase cost of a particular purchasable effect for a particular unit. We need the CcoComponent of the effect in order to check if it is selected. #
+		# Forecasted purchase cost is increased depending on how many other effects are selected to be purchased before this one. #
+		# For a selected upgrade, this means all other selected upgrades whose components are before its component in the list box. #
+		# For a non-selected upgrade, this means all selected upgrades. #
+		# Selected upgrades already purchased for the unit must be skipped! #
+		# We assume the cost to contain only one pooled resource, Scrap, so we just take the first resource context from it. #
+		(
+			upgrade_record = purchasable_effect_component.StoredContext("CcoUnitPurchasableEffectRecord"),
+			is_selected = purchasable_effect_component.IsSelected,
+			max_upgrade_component_index = (is_selected | purchasable_effect_component.ChildIndex | 10000),
+			other_selected_purchasable_effects_count = ScrapUpgrades.PurchasableEffectComponents.Count((c) => {
+				c.IsVisible &&
+				c.IsSelected &&
+				c.ChildIndex < max_upgrade_component_index &&
+				unit.HasPurchasedEffect(c.StoredContext("CcoUnitPurchasableEffectRecord")) == false
+			})
+		) =>
+		{
+			GetIfElse(
+				unit.HasPurchasedEffect(upgrade_record),
+				0,
+				unit.PurchasableEffectIncreasedPurchaseCost(upgrade_record, other_selected_purchasable_effects_count)
+					.PooledResourceTransactionList
+					.FirstContext
+					.AbsoluteValue
+			)
+		}
+	}
+
+	PurchaseCostOfPurchasableEffectForAllUnits(CcoComponent purchasable_effect_component)
+	{
+		# Calculate the total cost of a particular purchasable effect across all selected units. #
+		# The cost may be different for each unit due to other upgrades. Also, some units may have already purchased the effect. #
+		RoundFloat(Component("units", "main_units_panel").UpgradingUnitsContextList.Sum(
+			(unit) => ScrapUpgrades.PurchaseCostOfPurchasableEffectForUnit(unit, purchasable_effect_component)
+		))
+	}
+
+	TotalPurchaseCostForUnit(CcoCampaignUnit unit)
+	{
+		# Calculate the total cost of all currently selected purchasable effects for the given unit. #
+		# We assume the cost to contain only one pooled resource, Scrap, so we just take the first resource context from it. #
+		unit.PurchasableEffectsTotalPurchaseCost(ScrapUpgrades.SelectedPurchasableEffects)
+			.PooledResourceTransactionList
+			.FirstContext
+			.AbsoluteValue
+	}
+
+	TotalPurchaseCostForSelectedUnits
+	{
+		# Calculate the total cost of all currently selected purchasable effects for all selected units #
+		RoundFloat(Component("units", "main_units_panel").UpgradingUnitsContextList.Sum(
+			(unit) => ScrapUpgrades.TotalPurchaseCostForUnit(unit)
+		))
+	}
+}

@@ -228,18 +228,13 @@ function great_game_start()
 			local ritual_key = ritual:ritual_key();
 			if string.find(ritual_key, "wh3_main_ritual_kho_gg_1") then
 				local target_force = ritual:ritual_target():get_target_force();
-				local target_force_cqi = target_force:command_queue_index();
-				
-				cm:remove_effect_bundle_from_force("wh3_main_ritual_kho_gg_1", target_force_cqi);
-				cm:remove_effect_bundle_from_force("wh3_main_ritual_kho_gg_1_upgraded", target_force_cqi);
 				
 				cm:disable_event_feed_events(true, "wh_event_category_diplomacy", "", "");
 				cm:disable_event_feed_events(true, "wh_event_category_character", "", "");
 				
-				cm:set_saved_value("khorne_ritual_battle_active", true);
-				generate_khorne_ritual_battle_force(target_force:general_character(), string.find(ritual_key, "upgraded"));
+				cm:set_saved_value("khorne_ritual_battle_active", target_force:command_queue_index());
+				generate_khorne_ritual_battle_force(target_force:general_character());
 				khorne_ritual_battle_cleanup();
-
 			elseif ritual_key == "wh3_main_ritual_nur_gg_4" then
 				cm:heal_military_force(ritual:ritual_target():get_target_force())	
 			elseif ritual_key == "wh3_main_ritual_nur_gg_4_upgraded" then
@@ -342,6 +337,7 @@ function generate_khorne_ritual_battle_force(character, upgraded)
 	
 	local invasion_1 = invasion_manager:new_invasion("khorne_ritual_battle_invasion", "wh3_main_kho_khorne_qb1", units, {character:logical_position_x(), character:logical_position_y()});
 	invasion_1:set_target("CHARACTER", character:command_queue_index(), faction_name);
+	invasion_1:create_general(false, "wh3_main_kho_herald_of_khorne");
 	invasion_1:apply_effect("wh_main_bundle_military_upkeep_free_force", -1);
 	invasion_1:start_invasion(
 		function(self)
@@ -384,6 +380,19 @@ function khorne_ritual_battle_cleanup()
 			return cm:get_saved_value("khorne_ritual_battle_active");
 		end,
 		function()
+			local target_force_cqi = cm:get_saved_value("khorne_ritual_battle_active");
+			local mf = cm:get_military_force_by_cqi(target_force_cqi)
+
+			if mf then
+				if mf:has_effect_bundle("wh3_main_ritual_kho_gg_1") then
+					cm:remove_effect_bundle_from_force("wh3_main_ritual_kho_gg_1", target_force_cqi);
+				end
+
+				if mf:has_effect_bundle("wh3_main_ritual_kho_gg_1_upgraded") then
+					cm:remove_effect_bundle_from_force("wh3_main_ritual_kho_gg_1_upgraded", target_force_cqi);
+				end
+			end
+
 			cm:set_saved_value("khorne_ritual_battle_active", false);
 			
 			kill_khorne_ritual_battle_invasion();

@@ -30,7 +30,8 @@ local shared_prepend_str = shared_narrative_event_prepend_str;
 -- factions that should not run these narrative events
 local excluded_factions = {
 	wh3_dlc24_tze_the_deceivers = true,
-	wh3_dlc25_nur_tamurkhan = true
+	wh3_dlc25_nur_tamurkhan = true,
+	wh3_dlc26_kho_arbaal = true
 }
 
 

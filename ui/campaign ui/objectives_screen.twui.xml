@@ -147,6 +147,10 @@
 							</enemy_army_list>
 							<reinforcements_expected this="2E241792-14A7-48F0-81B5963B7A03CE51"/>
 						</tab_forces_child>
+						<dev_button_complete_mission this="5D0DFB42-9B77-4D20-BD024D0815734ABA">
+							<button_txt this="086FC724-1BB4-49F0-8D13A00E3C711507"/>
+							<dev_icon this="2E70EA3A-421E-463A-AAA97E7A2CAA3D50"/>
+						</dev_button_complete_mission>
 						<stamp_complete this="5FB8BE3E-2074-4DB4-9F9A2251AA908A79">
 							<stamp_parent this="82EFC87D-AC61-4214-A54480C319EF7A80">
 								<stamp_complete_anim this="27541D3B-E23D-4FC6-A755A5F36B8F875D"/>
@@ -324,6 +328,35 @@
 		</root>
 	</hierarchy>
 	<components>
+		<button_txt
+			this="086FC724-1BB4-49F0-8D13A00E3C711507"
+			id="button_txt"
+			part_of_template="true"
+			uniqueguid_in_template="C5314C5F-DB2A-4917-835E17930F5E2573"
+			uniqueguid="086FC724-1BB4-49F0-8D13A00E3C711507"
+			dimensions="244.00,29.00"
+			dock_point="Center"
+			offset="0.00,-1.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="14B4D8ED-88C4-4A5D-AAFA0A060F6EC1D6"/>
+			</state_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					text="Complete mission"
+					text_label="StateText_a2cb64d0"
+					is_text_localised="false"/>
+			</localised_texts>
+		</button_txt>
 		<root
 			this="0A6BC51D-78B2-4C33-A94A3A2588A6840A"
 			id="root"
@@ -1234,6 +1267,73 @@
 				<element value="ui/skins/default/button_square_large_text_underlay.png"/>
 			</override_images>
 		</button_teleport>
+		<dev_button_complete_mission
+			this="5D0DFB42-9B77-4D20-BD024D0815734ABA"
+			id="dev_button_complete_mission"
+			template_id="dev_text_button"
+			is_dev_only="true"
+			part_of_template="true"
+			uniqueguid_in_template="715902FD-2442-4210-8831AAF520A41055"
+			uniqueguid="5D0DFB42-9B77-4D20-BD024D0815734ABA"
+			dimensions="244.00,29.00"
+			tooltips_localised="false"
+			offset="78.00,2.00"
+			priority="100"
+			sound_category="UI_GBL_TMP_Square_Large_Text_Button_Toggle">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="B0D8A8BB-29D2-43B6-945268ADECCEDE7F"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="402F3A59-7A6A-4A9F-95F13201E3571D94"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="EC260B72-6062-48CF-B5DFB524E757DF91"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="70DD420D-2952-4732-8382AD8822BE1D6E"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="5C4AA0E8-8A3A-4F74-9199AE0E320D7DD0"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/button_rectangular_backplate.png"
+					uniqueguid="EB54BA63-7E3F-4FFC-9D5A38871EB42D55"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/button_square_hover_highlight.png"
+					uniqueguid="4318D0FC-3530-45E3-AF9607F57FE1DDA4"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoCampaignMission"
+					context_function_id="DevComplete"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/button_rectangular_backplate.png"/>
+				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
+			</override_images>
+		</dev_button_complete_mission>
 		<panel_title
 			this="FB300A5C-9030-4AB3-B90BAA0C1B9A9EA4"
 			id="panel_title"
@@ -2509,6 +2609,36 @@
 					text_label="button_txt_active_Text_1b003a"/>
 			</localised_texts>
 		</button_txt>
+		<dev_icon
+			this="2E70EA3A-421E-463A-AAA97E7A2CAA3D50"
+			id="dev_icon"
+			part_of_template="true"
+			uniqueguid_in_template="0F4F9F06-4613-496B-A0F05A2B8B88B70D"
+			uniqueguid="2E70EA3A-421E-463A-AAA97E7A2CAA3D50"
+			dimensions="24.00,24.00"
+			dock_point="Center Left"
+			offset="2.00,0.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="4630D496-AD30-4909-8CF2C8A3EC594A12"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/dev_icon.png"
+					uniqueguid="476FD149-AD21-4303-90D5168C8896BD01"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/dev_icon.png"/>
+			</override_images>
+		</dev_icon>
 		<frame_bottom
 			this="DA139B3F-CBA0-452A-A7BDFF9F302E6E09"
 			id="frame_bottom"
@@ -5062,7 +5192,7 @@
 					this="170DED49-2237-4CDA-80604F757892302A"
 					name="issued"
 					width="380"
-					height="632"
+					height="371"
 					uniqueguid="170DED49-2237-4CDA-80604F757892302A"/>
 			</states>
 			<animations>
@@ -11528,7 +11658,7 @@
 		<teleport
 			this="5D90C9E4-C0D4-4D0F-9CD1DC281AF11CCE"
 			id="teleport"
-			offset="0.00,581.00"
+			offset="0.00,320.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			priority="50"

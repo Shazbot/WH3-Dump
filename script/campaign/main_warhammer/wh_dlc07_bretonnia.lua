@@ -94,11 +94,17 @@ function Add_Bretonnia_Listeners()
 	
 	
 	local function Bret_RepanseSupplies(character, leaving)
-		if character:faction():name() == "wh2_dlc14_brt_chevaliers_de_lyonesse" and (character:in_settlement() or leaving) then
+		if character:faction():name() == "wh2_dlc14_brt_chevaliers_de_lyonesse" and (character:in_settlement() or leaving) and character:has_military_force() then
+			local mf = character:military_force()
 			local character_cqi = character:command_queue_index()
 			
-			cm:remove_effect_bundle_from_characters_force(repanse_desert_thirst_bundle, character_cqi)
-			cm:apply_effect_bundle_to_characters_force(repanse_desert_thirst_bundle, character_cqi, 5)
+			if mf:has_effect_bundle(repanse_desert_thirst_bundle) then
+				cm:remove_effect_bundle_from_characters_force(repanse_desert_thirst_bundle, character_cqi)
+			end
+
+			if mf:bonus_values():campaign_map_attrition_value("desert", "immunity") == 0 then
+				cm:apply_effect_bundle_to_characters_force(repanse_desert_thirst_bundle, character_cqi, 5)
+			end
 		end
 	end
 	

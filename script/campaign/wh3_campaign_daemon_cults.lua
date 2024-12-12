@@ -4,6 +4,14 @@ local faction_to_cult = {
 		cult = "wh3_main_slot_set_kho_cult",
 		bonus_value = "khorne_cult_adjacent_region_expansion_chance"
 	},
+	["wh3_dlc26_kho_arbaal"] = {
+		cult = "wh3_main_slot_set_kho_cult",
+		bonus_value = "khorne_cult_adjacent_region_expansion_chance"
+	},
+	["wh3_dlc26_kho_skulltaker"] = {
+		cult = "wh3_main_slot_set_kho_cult",
+		bonus_value = "khorne_cult_adjacent_region_expansion_chance"
+	},
 	["wh3_main_tze_oracles_of_tzeentch"] = {
 		cult = "wh3_main_slot_set_tze_cult",
 		bonus_value = "tzeentch_cult_adjacent_region_expansion_chance"

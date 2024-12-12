@@ -41,6 +41,13 @@ local shared_prepend_str = shared_narrative_event_prepend_str;
 
 local function start_narrative_shared_chain_defeat_initial_enemy(faction_key)
 
+
+	if faction_key == "wh3_dlc26_ogr_golgfag" then
+		-- Golgfag has no starting enemies by design
+		return false
+	end
+
+
 	-- output header
 	narrative.output_chain_header("defeat_initial_enemy", faction_key);
 
@@ -1975,9 +1982,12 @@ local function start_narrative_shared_chain_finance(faction_key)
 	narrative.output_chain_header("finance", faction_key);
 
 	local moderate_income = 3000;
+	local subculture = cm:get_faction(faction_key):subculture()
+	if subculture == "wh3_main_sc_kho_khorne" then
+		-- Khorne should not have income missions by design
+		return false
+	end
 	
-
-
 	
 	-----------------------------------------------------------------------------------------------------------
 	--	Advice Query

@@ -70,6 +70,12 @@ local function customise_narrative_event_faction_data_for_campaign(faction_key)
 		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_capture_settlement_mission_key", "wh_main_prelude_capture_pillars_of_grungni_dwarfs_1")
 		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_capture_settlement_advice_key", "war.camp.prelude.dwf.capture_settlement.001")
 	end
+
+	if faction_key == "wh_main_dwf_karak_kadrin" then
+		-- capture settlement
+		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_capture_settlement_mission_key", "wh2_main_dwf_ungrim_start_mission")
+		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_capture_settlement_region_key", "wh3_main_combi_region_gnashraks_lair")
+	end
 	
 	
 	
@@ -128,7 +134,8 @@ narrative.add_data_setup_callback(
 ------------------------------------------------------------------------------------------------------------------
 
 local function setup_campaign_narrative_event_data_all_factions()
-	narrative.add_data_for_campaign("shared_event_defeat_initial_enemy_completed_messages",					{"StartSettlementCaptureChain"})
+	narrative.add_data_for_campaign("shared_event_defeat_initial_enemy_completed_messages",						{"StartSettlementCaptureChain"})
+	narrative.add_data_for_campaign("shared_settlement_capture_query_can_capture_territory_positive_messages",	{"StartSettlementCapturedCaptureSettlement"}) -- always trigger the capture settlement mission regardless of advice
 end
 
 narrative.add_data_setup_callback(setup_campaign_narrative_event_data_all_factions)

@@ -1836,16 +1836,11 @@ function malakai_battles:setup_use_ability(mission_setup_data, mission_key, shou
 	mm:add_new_scripted_objective(
 		objective_key,
 		"BattleCompleted",
-		function(context)
+		function()
 			-- Check if ability used in battle
-			local is_human = cm:pending_battle_cache_human_is_involved()
-			local malakai_involved = cm:pending_battle_cache_faction_is_involved(self.malakai_faction)
-			if malakai_involved and is_human then
-				local pb = cm:model():pending_battle()
-				local faction_cqi = cm:get_faction(self.malakai_faction):command_queue_index()
-				if self:has_reached_required_number_for_objective(mission_setup_data, mm, objective_key) then
-					return true
-				end
+			local pb = cm:model():pending_battle()
+			if cm:pending_battle_cache_faction_is_involved(self.malakai_faction) and cm:pending_battle_cache_human_is_involved() and pb:has_been_fought() and pb:get_how_many_times_ability_has_been_used_in_battle(cm:get_faction(self.malakai_faction):command_queue_index(), mission_setup_data.ability_key) > 0 then
+				return self:has_reached_required_number_for_objective(mission_setup_data, mm, objective_key)
 			end
 			return false
 		end
@@ -2303,14 +2298,14 @@ function malakai_battles:handle_ai_unlocking()
 			local turn_number = cm:turn_number()
 			return context:faction():name() == self.malakai_faction and self.ai_rewards_by_turn[turn_number] ~= nil
 		end,
-		function()
+		function(context)
 			local effect_bundle_turn_duration = -1
 			local turn_number = cm:turn_number()
 			local rewards_to_grant = self.ai_rewards_by_turn[turn_number]
 			for _, reward in ipairs(rewards_to_grant.effect_bundles) do
 				cm:apply_effect_bundle(reward, self.malakai_faction, effect_bundle_turn_duration)
 			end
-			cm:add_ancillary_to_faction(faction, rewards_to_grant.ancillary, false)
+			cm:add_ancillary_to_faction(context:faction(), rewards_to_grant.ancillary, false)
 
 			if turn_number >= 70 then core:remove_listener("malakai_battles_ai_reward_unlocking") end
 		end,

@@ -154,7 +154,11 @@ campaign_traits = {
 		["wh3_dlc25_nur_tamurkhan"] = 				"wh3_dlc25_trait_defeated_tamurkhan",					-- Tamurkhan
 		["wh3_dlc25_dwf_malakai_makaisson"] = 		"wh3_dlc25_trait_defeated_malakai",						-- Malakai
 		["wh3_dlc25_nur_epidemius"] = 				"wh3_dlc25_trait_defeated_epidemius",					-- Epidemius
-		["wh3_dlc25_emp_elspeth_von_draken"] = 		"wh3_dlc25_trait_defeated_elspeth"						-- Elspeth
+		["wh3_dlc25_emp_elspeth_von_draken"] = 		"wh3_dlc25_trait_defeated_elspeth",						-- Elspeth
+		["wh3_dlc26_kho_skulltaker"] = 				"wh3_dlc26_trait_defeated_skulltaker",					-- Skulltaker
+		["wh3_dlc26_kho_arbaal_the_undefeated"] = 	"wh3_dlc26_trait_defeated_arbaal",						-- Arbaal the Undefeated
+		["wh3_dlc26_ogr_golgfag_maneater"] 		= 	"wh3_dlc26_trait_defeated_golgfag",						-- Golgfag Maneater
+		["wh3_dlc26_grn_gorbad_ironclaw"] 		= 	"wh3_dlc26_trait_defeated_gorbad"						-- Gorbad Ironclaw
 	},
 	subcultures_trait_keys = {
 		["wh_main_sc_chs_chaos"] = "chaos",

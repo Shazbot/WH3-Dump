@@ -118,6 +118,38 @@ scripted_technology_tree = {
 		wh3_main_tech_kho_4_3 =				"wh3_main_anc_magic_standard_khornes_gift",
 		wh3_main_tech_kho_6_2 =				"wh3_main_anc_magic_standard_lifetaker_banner",
 		wh3_main_tech_ksl_4_14 =			"wh3_main_anc_magic_standard_banner_of_the_orthodoxy"
+	},
+	khorne_techs_battle_wins = {
+		wh3_main_tech_kho_1_4 = {culture = "wh3_main_kho_khorne", value = 5},
+		wh3_main_tech_kho_3_3 = {culture = "wh3_main_kho_khorne", value = 5},
+		wh3_main_tech_kho_2_3 = {culture = "wh3_main_kho_khorne", value = 5},
+		wh3_main_tech_kho_1_8 = {culture = "wh3_main_kho_khorne", value = 5},
+		wh3_main_tech_kho_3_4 = {culture = "wh3_main_kho_khorne", value = 5},
+		wh3_main_tech_kho_2_8 = {culture = "wh3_main_kho_khorne", value = 5},
+		wh3_main_tech_kho_2_4 = {culture = "wh3_main_kho_khorne", value = 10},
+		wh3_main_tech_kho_4_8 = {culture = "wh3_main_kho_khorne", value = 10},
+		wh3_main_tech_kho_8_4 = {culture = "wh3_main_kho_khorne", value = 10},
+		wh3_dlc26_tech_kho_campaign_4_3 = {culture = "wh3_main_kho_khorne", value = 10},
+		wh3_main_tech_kho_3_7 = {culture = "wh3_main_kho_khorne", value = 10},
+		wh3_main_tech_kho_3_2 = {culture = "wh3_main_kho_khorne", value = 10},
+		wh3_main_tech_kho_2_2 = {culture = "wh3_main_kho_khorne", value = 15},
+		wh3_main_tech_kho_1_2 = {culture = "wh3_main_kho_khorne", value = 15},
+		wh3_main_tech_kho_8_8 = {culture = "wh3_main_kho_khorne", value = 15},
+		wh3_main_tech_kho_8_3 = {culture = "wh3_main_kho_khorne", value = 15},
+		wh3_dlc26_tech_kho_blood_hosts_1 = {culture = "wh3_main_kho_khorne", value = 15},
+		wh3_main_tech_kho_1_6 = {culture = "wh3_main_kho_khorne", value = 15},
+		wh3_main_tech_kho_8_5 = {culture = "wh3_main_kho_khorne", value = 20},
+		wh3_main_tech_kho_3_8 = {culture = "wh3_main_kho_khorne", value = 20},
+		wh3_main_tech_kho_6_3 = {culture = "wh3_main_kho_khorne", value = 20},
+		wh3_main_tech_kho_6_6 = {culture = "wh3_main_kho_khorne", value = 20},
+		wh3_main_tech_kho_8_6 = {culture = "wh3_main_kho_khorne", value = 20},
+		wh3_main_tech_kho_5_7 = {culture = "wh3_main_kho_khorne", value = 20},
+		wh3_main_tech_kho_6_7 = {culture = "wh3_main_kho_khorne", value = 25},
+		wh3_main_tech_kho_5_8 = {culture = "wh3_main_kho_khorne", value = 25},
+		wh3_main_tech_kho_4_4 = {culture = "wh3_main_kho_khorne", value = 25},
+		wh3_main_tech_kho_5_2 = {culture = "wh3_main_kho_khorne", value = 25},
+		wh3_main_tech_kho_6_5 = {culture = "wh3_main_kho_khorne", value = 25},
+		wh3_main_tech_kho_5_5 = {culture = "wh3_main_kho_khorne", value = 25}
 	}
 }
 
@@ -137,6 +169,8 @@ function scripted_technology_tree:start_technology_listeners()
 				end
 			end
 		end
+
+		self:toggle_technology(self.khorne_techs_battle_wins)
 	end
 	
 	core:add_listener(
@@ -195,6 +229,57 @@ function scripted_technology_tree:start_technology_listeners()
 		end,
 		true
 	)
+
+	core:add_listener(
+		"khorne_battle_victory_technology_unlock",
+		"BattleCompleted",
+		function()
+			return cm:pending_battle_cache_culture_is_involved("wh3_main_kho_khorne")
+		end,
+		function()
+			local winning_factions = {}
+			if cm:pending_battle_cache_attacker_victory() then
+				for i = 1, cm:pending_battle_cache_num_attackers() do
+					local char_cqi, mf_cqi, faction_key = cm:pending_battle_cache_get_attacker(i)
+					winning_factions[faction_key] = true
+				end
+			elseif cm:pending_battle_cache_defender_victory() then
+				for i = 1, cm:pending_battle_cache_num_defenders() do
+					local char_cqi, mf_cqi, faction_key = cm:pending_battle_cache_get_defender(i)
+					winning_factions[faction_key] = true
+				end
+			end
+
+			for faction_key, _ in pairs(winning_factions) do
+				self:count_khorne_battle_victories(faction_key)
+			end
+		end,
+		true
+	)
+end
+
+function scripted_technology_tree:count_khorne_battle_victories(faction_key)
+	local faction = cm:get_faction(faction_key)
+
+	if not faction or faction:is_rebel() then
+		return
+	end
+
+	if faction:culture() == "wh3_main_kho_khorne" then
+		local wins = cm:get_saved_value(faction_key .. "_won_battles_tech") or 0
+		wins = wins + 1
+		cm:set_saved_value(faction_key .. "_won_battles_tech", wins)
+
+		for technology_key, details in pairs(self.khorne_techs_battle_wins) do
+			if details.value then
+				if wins >= details.value then
+					cm:unlock_technology(faction_key, technology_key)
+				else
+					cm:update_technology_unlock_progress_values(faction_key, technology_key, {details.value, wins})
+				end
+			end
+		end
+	end
 end
 
 function scripted_technology_tree:resolve_diplomatic_event(proposer, recipient)
@@ -258,6 +343,10 @@ function scripted_technology_tree:toggle_technology(technologies, region_owner)
 		for technology_key, details in pairs(technologies) do
 			if current_faction_culture == details.culture and region_owner ~= current_faction and (not region_owner or (details.allow_allies and region_owner and not region_owner:is_ally_vassal_or_client_state_of(current_faction))) then
 				cm:lock_technology(current_faction:name(), technology_key)
+
+				if details.value then
+					cm:update_technology_unlock_progress_values(current_faction:name(), technology_key, {details.value, 0})
+				end
 			end
 		end
 	end

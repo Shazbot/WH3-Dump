@@ -11,6 +11,7 @@
 					<smoke_holder this="28C8BD1C-46EF-4251-8E5A8B5AA857D15F">
 						<panel_smoke_t this="A74835EF-B581-4E9B-BDFCF6A172B91E5A"/>
 					</smoke_holder>
+					<da_plan_docker this="9A01DD5C-953B-4B5D-A7809C868BF88666"/>
 					<recruitment_docker this="A458AB37-F2B5-4DCA-8E98F2389A244A10">
 						<recruitment_options this="B2E49D17-8B4E-4BBC-965A2BE0074C15AB">
 							<title_docker this="9FFBD85B-9065-4951-8DDABC4BB8828F12">
@@ -242,6 +243,8 @@
 						</recruitment_options>
 					</recruitment_docker>
 					<scrap_upgrades this="0635F89C-149A-420C-8959901959875350"/>
+					<meat_transfer_docker this="3308AA80-C921-4582-B5D11D7E5E14D3F8"/>
+					<graw_maw_docker this="61BDEB30-3D5F-4161-B32B8C0D7CA52D62"/>
 					<warband_upgrades_docker this="C3095B07-52EE-480A-A07ADA4C9DDB318F"/>
 					<frame this="691EF710-30A8-4A62-92EB47F6AA7DD58F"/>
 					<button_toggle_panel this="CA89BAF7-CE1C-4E6D-ADADCDAD8069B713"/>
@@ -343,12 +346,12 @@
 						<button_rename this="15ED963B-37C6-4CF5-B83CBE266D23689B"/>
 						<button_save_character this="425FB0DE-6243-40D4-861579CCC99BF463"/>
 						<button_retrain this="AFB281F1-FF06-469E-A7D2CBB6BB778EAD"/>
-						<button_purchasable_effects this="A30E8BBA-5974-4301-ADE104719F22B2D4"/>
 						<button_merge this="CC90CB5E-53D7-4785-AA0023FDA5148F59"/>
 						<button_disband this="257221EB-2799-4048-9FD3228944E99AA9"/>
 						<button_open_augment this="E43C6F3A-EA4B-4F14-B623C7C1A7DF99AE"/>
 					</button_group_unit>
 					<horde_building_frame this="E6C0465E-C3F0-4121-9CD8C82A0AE5F232"/>
+					<ogre_camp_recruitment_panel_docker this="69537FDB-ABE4-44C9-83A0EA3A6CAF1144"/>
 					<dev_button_kill_force_parent this="A5252849-BD83-461A-98CDDC8ABF629DC5">
 						<dev_button_kill_force this="6C68190F-2A99-4829-AE24004CDD5DAEDD">
 							<button_txt this="DA03DCAA-6058-4045-B9C31245289D72C3"/>
@@ -2019,96 +2022,6 @@
 				<element value=""/>
 			</override_images>
 		</button_open_augment>
-		<button_purchasable_effects
-			this="A30E8BBA-5974-4301-ADE104719F22B2D4"
-			id="button_purchasable_effects"
-			template_id="square_medium_button"
-			part_of_template="true"
-			uniqueguid_in_template="18ECC36C-741F-40BF-869875E6BB71B6CC"
-			uniqueguid="A30E8BBA-5974-4301-ADE104719F22B2D4"
-			dimensions="55.00,55.00"
-			tooltips_localised="false"
-			priority="12"
-			sound_category="UI_GBL_TMP_Round_Small_Button">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="6D3BBBF5-2E69-47FE-B8B65961F724DA5B"/>
-				<state_uniqueguid
-					name="down"
-					uniqueguid="BBDDD0B3-B0EB-40B5-A1EA987B8DA35A7D"/>
-				<state_uniqueguid
-					name="down_off"
-					uniqueguid="C3636C17-87A3-48ED-9D02017EA2A3C8D7"/>
-				<state_uniqueguid
-					name="hover"
-					uniqueguid="6B7E9CD8-AD58-4290-A132008578063692"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="B8476287-8935-4F89-95FE1C63CB4BA7CF"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/icon_salvage_panel.png"
-					uniqueguid="00B44BDB-E2FB-4A22-AD2AEAD33CC1F51E"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_basic_pressed.png"
-					uniqueguid="202E8BBD-F7D1-416D-8FFA13618ED41BD4"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_basic_hover.png"
-					uniqueguid="EF2DDCE8-2823-4B6B-BB370992E727DE87"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_basic_active.png"
-					uniqueguid="9BA96FD7-BBC1-4452-B44B5C642AD33FB7"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_basic_inactive.png"
-					uniqueguid="AD0A3EB5-239C-4130-BA65B000669949A6"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_basic_underlay.png"
-					uniqueguid="288DD85E-9A52-4238-AD0D8C08D14CBA37"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context callback_id="Button"/>
-				<callback_with_context callback_id="StatePropagatorCallback">
-					<child_m_user_properties>
-						<property
-							name="use_transitions"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context callback_id="CallbackAnimTrigger"/>
-			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="disable_override"
-					value="resizable"/>
-				<property
-					name="disable_override2"
-					value="CallbackAnimTrigger"/>
-				<property
-					name="dynamic_image"
-					value="0"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text
-					tooltip_label="button_upgrade_Tooltip_7ab9d855"
-					tooltip_text="{{tr:unit_upgrades_type}}"/>
-				<localised_text state="active"/>
-				<localised_text state="down"/>
-				<localised_text state="down_off"/>
-				<localised_text state="hover"/>
-				<localised_text state="inactive"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/icon_salvage_panel.png"/>
-				<element value="ui/skins/default/button_basic_pressed.png"/>
-				<element value="ui/skins/default/button_basic_hover.png"/>
-				<element value="ui/skins/default/button_basic_active.png"/>
-				<element value="ui/skins/default/button_basic_inactive.png"/>
-				<element value="ui/skins/default/button_basic_underlay.png"/>
-				<element value=""/>
-			</override_images>
-		</button_purchasable_effects>
 		<button_rename
 			this="15ED963B-37C6-4CF5-B83CBE266D23689B"
 			id="button_rename"
@@ -3338,6 +3251,16 @@
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context callback_id="ButtonGroupButton"/>
+				<callback_with_context
+					callback_id="ContextCommandEvent"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="DoIf(self.IsVisible &amp;&amp; IsInLimbo == true, self.SimulateLClick)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="PanelClosed"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -3607,7 +3530,8 @@
 				<callback_with_context callback_id="ButtonGroupButton"/>
 				<callback_with_context
 					callback_id="ContextCommandEvent"
-					context_function_id="DoIf(self.IsVisible, self.SimulateLClick)">
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="DoIf(self.IsVisible &amp;&amp; IsInLimbo == false, self.SimulateLClick)">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -3677,6 +3601,7 @@
 			uniqueguid_in_template="991ADD87-C800-4C53-BF04560E975CB572"
 			uniqueguid="B3D89CE4-2CE5-4BCD-9D136438B89B0CB6"
 			dimensions="47.00,36.00"
+			offset="1.00,1.00"
 			sound_category="UI_GBL_TMP_Square_Small_Tab_Toggle">
 			<state_uniqueguids>
 				<state_uniqueguid
@@ -3751,6 +3676,9 @@
 					callback_id="ContextTooltipSetter"
 					context_object_id="CcoStaticObject"
 					context_function_id="Loc(&quot;wagh_transported_army_tab_tooltip&quot;)"/>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_function_id="DoIf(Component(&quot;units_panel_scrap_upgrades&quot;,&quot;scrap_upgrades&quot;).IsVisibleFromRoot(), UiMsg(&quot;WaaaghViewSelected&quot;))"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -6209,7 +6137,7 @@
 					this="5A0CA1AE-A488-4F08-B99B975D9609271E"
 					name="NewState"
 					width="55"
-					height="363"
+					height="308"
 					interactive="true"
 					uniqueguid="5A0CA1AE-A488-4F08-B99B975D9609271E">
 					<imagemetrics>
@@ -6219,7 +6147,7 @@
 							componentimage="2F569568-D53B-498C-9F6DE93D8F00A0DC"
 							offset="-11.00,0.00"
 							width="77"
-							height="363"
+							height="308"
 							tile="true"
 							dockpoint="Center"
 							margin="30.00,40.00,23.00,40.00"/>
@@ -7111,7 +7039,7 @@
 				<component_image
 					this="29CE3AD5-19C5-4128-B02A8547A8C28964"
 					uniqueguid="29CE3AD5-19C5-4128-B02A8547A8C28964"
-					imagepath="ui/skins/default/icon_meat.png"/>
+					imagepath="ui/skins/default/dlc26_ogre_meat_transfer/icon_meat_upkeep.png"/>
 			</componentimages>
 			<states>
 				<newstate
@@ -8952,10 +8880,9 @@
 		<scrap_upgrades
 			this="0635F89C-149A-420C-8959901959875350"
 			id="scrap_upgrades"
-			offset="51.00,-284.00"
+			offset="-305.00,-437.00"
 			allowhorizontalresize="false"
 			visible="false"
-			clipchildren="true"
 			docking="Top Center External"
 			dock_offset="0.00,-14.00"
 			component_anchor_point="0.50,1.00"
@@ -8982,7 +8909,7 @@
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoStaticObject"
-					context_function_id="Component(&quot;units&quot;, &quot;main_units_panel&quot;).UpgradingUnitsContextList.FirstContext">
+					context_function_id="(unit_context = Component(&quot;units&quot;, &quot;main_units_panel&quot;).TryEnsureUpgradableUnitsSelected) =&gt; { GetIfElse(unit_context.IsValidContext, unit_context, UiMsg(&quot;CloseUnitUpgradePanel&quot;)) }">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -9008,13 +8935,60 @@
 							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoStaticObject"
+					context_function_id="(unit_context = Component(&quot;units&quot;, &quot;main_units_panel&quot;).UpgradingUnitsContextList.LastContext) =&gt; &#10;{&#10; GetIfElse( unit_context.PurchasableEffectsList.IsEmpty == false &amp;&amp; Component(&quot;units_panel_scrap_upgrades&quot;, &quot;scrap_upgrades&quot;).IsVisible() &amp;&amp; Component(&quot;units&quot;, &quot;main_units_panel&quot;).UpgradingUnitsContextList.All(IconPath == unit_context.IconPath), unit_context, UiMsg(&quot;CloseUnitUpgradePanel&quot;) )&#10;}">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="RefreshUnitSelection"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandEvent"
+					context_function_id="UiMsg(&quot;CloseUnitUpgradePanel&quot;)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="WaaaghViewSelected"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandEvent"
+					context_object_id="CcoStaticObject"
+					context_function_id="CloseUnitRecruitmentPanel">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="UpgradeUnitsRequested"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextUISFXTrigger"
+					context_function_id="&quot;UI_CAM_HUD_Greenskins_Scrap_Upgrades_Panel_Open&quot;">
+					<child_m_user_properties>
+						<property
+							name="trigger_on_show"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextUISFXTrigger"
+					context_function_id="&quot;UI_CAM_HUD_Greenskins_Scrap_Upgrades_Panel_Close&quot;">
+					<child_m_user_properties>
+						<property
+							name="trigger_on_hide"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
 					this="6532AEB7-A668-483A-AE3D40833EA61F30"
 					name="NewState"
-					width="566"
-					height="270"
+					width="1278"
+					height="423"
 					uniqueguid="6532AEB7-A668-483A-AE3D40833EA61F30">
 					<component_text
 						font_m_size="12"
@@ -17341,5 +17315,162 @@
 				</default>
 			</states>
 		</dev_icon>
+		<meat_transfer_docker
+			this="3308AA80-C921-4582-B5D11D7E5E14D3F8"
+			id="meat_transfer_docker"
+			offset="51.00,169.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			docking="Top Center External"
+			dock_offset="0.00,170.00"
+			component_anchor_point="0.50,1.00"
+			tooltipslocalised="true"
+			uniqueguid="3308AA80-C921-4582-B5D11D7E5E14D3F8"
+			updatewhennotvisible="true"
+			currentstate="144DB3D0-C646-450F-A3D02EF35AF061E8"
+			defaultstate="144DB3D0-C646-450F-A3D02EF35AF061E8"
+			comment="please do not make this invisible">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="ComponentCreator">
+					<child_m_user_properties>
+						<property
+							name="layout"
+							value="ui/campaign ui/dlc26_ogr_meat_transfer"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandGiverOnCreate"
+					context_function_id="self.SetVisible(true)"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="144DB3D0-C646-450F-A3D02EF35AF061E8"
+					name="NewState"
+					width="566"
+					height="1"
+					uniqueguid="144DB3D0-C646-450F-A3D02EF35AF061E8">
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
+				</newstate>
+			</states>
+		</meat_transfer_docker>
+		<da_plan_docker
+			this="9A01DD5C-953B-4B5D-A7809C868BF88666"
+			id="da_plan_docker"
+			offset="194.00,-15.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			docking="Top Center External"
+			dock_offset="0.00,-14.00"
+			component_anchor_point="0.50,1.00"
+			tooltipslocalised="true"
+			uniqueguid="9A01DD5C-953B-4B5D-A7809C868BF88666"
+			currentstate="C32B94AC-0CCC-4AB0-B84766C95F4D9CEA"
+			defaultstate="C32B94AC-0CCC-4AB0-B84766C95F4D9CEA">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="ComponentCreator">
+					<child_m_user_properties>
+						<property
+							name="layout"
+							value="ui/campaign ui/dlc26_da_plan"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandGiverOnCreate"
+					context_function_id="self.SetVisible(true)"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="C32B94AC-0CCC-4AB0-B84766C95F4D9CEA"
+					name="default"
+					width="280"
+					height="1"
+					uniqueguid="C32B94AC-0CCC-4AB0-B84766C95F4D9CEA"/>
+			</states>
+		</da_plan_docker>
+		<graw_maw_docker
+			this="61BDEB30-3D5F-4161-B32B8C0D7CA52D62"
+			id="graw_maw_docker"
+			offset="194.00,-186.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			docking="Top Center External"
+			dock_offset="0.00,-185.00"
+			component_anchor_point="0.50,1.00"
+			tooltipslocalised="true"
+			uniqueguid="61BDEB30-3D5F-4161-B32B8C0D7CA52D62"
+			currentstate="DD6AF8DC-B97E-4B09-840C1BEF6E6C619B"
+			defaultstate="DD6AF8DC-B97E-4B09-840C1BEF6E6C619B">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="ComponentCreator">
+					<child_m_user_properties>
+						<property
+							name="layout"
+							value="ui/campaign ui/ogre_great_maw"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandGiverOnCreate"
+					context_function_id="self.SetVisible(true)"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="DD6AF8DC-B97E-4B09-840C1BEF6E6C619B"
+					name="default"
+					width="280"
+					height="1"
+					uniqueguid="DD6AF8DC-B97E-4B09-840C1BEF6E6C619B"/>
+			</states>
+		</graw_maw_docker>
+		<ogre_camp_recruitment_panel_docker
+			this="69537FDB-ABE4-44C9-83A0EA3A6CAF1144"
+			id="ogre_camp_recruitment_panel_docker"
+			offset="51.00,0.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			docking="Top Center"
+			component_anchor_point="0.50,0.00"
+			tooltipslocalised="true"
+			uniqueguid="69537FDB-ABE4-44C9-83A0EA3A6CAF1144"
+			updatewhennotvisible="true"
+			currentstate="8365EF24-5636-4C19-AC5E83A1DD0DC7E5"
+			defaultstate="8365EF24-5636-4C19-AC5E83A1DD0DC7E5"
+			comment="please do not make this invisible">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="ComponentCreator">
+					<child_m_user_properties>
+						<property
+							name="layout"
+							value="ui/campaign ui/dlc26_character_panel_camps"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandGiverOnCreate"
+					context_function_id="self.SetVisible(true)"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="8365EF24-5636-4C19-AC5E83A1DD0DC7E5"
+					name="NewState"
+					width="566"
+					height="1"
+					uniqueguid="8365EF24-5636-4C19-AC5E83A1DD0DC7E5">
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
+				</newstate>
+			</states>
+		</ogre_camp_recruitment_panel_docker>
 	</components>
 </layout>

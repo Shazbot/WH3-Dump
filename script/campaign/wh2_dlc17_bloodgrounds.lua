@@ -49,9 +49,6 @@ Bloodgrounds = {
 	bloodground_vfx_key = "",
 	defiled_bloodground_vfx_key = "wh2_dlc17_bloodground_defilement",
 	ritual_ready_vfx_key = "wh2_dlc17_ritual_of_ruin_ready",
-	occupation_button = "occupy_button",
-	postbattle_gift_button = "postbattle_gift_button",
-	colonise_button = "subjugation_button",
 	raze_settlement_vfx = "raze_settlement",
 	bloodgrounds_uic_name = "bloodgrounds",
 	bloodgrounds_ritual_button_uic_name = "herdstone_ritual_button",
@@ -59,7 +56,7 @@ Bloodgrounds = {
 
 	----BLOODGROUNDS BUILDINGS AND BUNDLES
 	bloodground_effect_bundle_key = "wh2_dlc17_effect_bundle_bloodgrounds",
-	defiled_bloodground_effect_bundle_key = "wh2_dlc17_effect_bundle_defiled_bloodgrounds",
+	defiled_bloodground_effect_bundle_key = "wh3_dlc26_block_occupation_beastmen",
 
 	bloodgrounds_bundles_to_buildings = { --- make sure any bloodground-scoped effects match up between the building effects and the effect bundles
 		wh2_dlc17_bundle_bst_bloodground_building_spells = {
@@ -112,13 +109,6 @@ function Bloodgrounds:setup_post_battle_listener()
 		"CharacterCompletedBattleBloodgrounds",
 		"CharacterCompletedBattle",
 		function(context)
-
-			if self.occupation_options_are_locked then
-				uim:override(self.occupation_button):unlock();
-				uim:override(self.postbattle_gift_button):unlock();
-				self.occupation_options_are_locked = false
-			end
-
 			-- make sure character isn't at sea or in a non-region
 			if not context:character():has_region() then
 				return false
@@ -138,12 +128,6 @@ function Bloodgrounds:setup_post_battle_listener()
 			end
 
 			if bloodground then
-				if were_attacker and context:character():faction():is_human() then
-					uim:override(self.occupation_button):lock();
-					uim:override(self.postbattle_gift_button):lock();
-					self.occupation_options_are_locked = true
-				end
-
 				self:modify_devastation(bloodground, self.battle_victory_value)
 				local settlement_level = self:get_stored_settlement_level()
 				if settlement_level then
@@ -160,12 +144,6 @@ function Bloodgrounds:setup_herdstone_listeners()
 		"CharacterPerformsSettlementOccupationDecisionHerdstone",
 		"CharacterPerformsSettlementOccupationDecision",
 		function(context)
-			if self.occupation_options_are_locked then
-				uim:override(self.occupation_button):unlock(true);
-				uim:override(self.postbattle_gift_button):unlock(true);
-				uim:override(self.colonise_button):unlock(true);
-				self.occupation_options_are_locked = false
-			end
 			local decision = context:occupation_decision()
 			return self.herdstone_settlement_options[decision] or self.razing_settlement_options[decision]
 		end,
@@ -224,44 +202,6 @@ function Bloodgrounds:setup_herdstone_listeners()
 					self:update_effect_bundles_for_bloodgrounds()
 				end
 			end
-		end,
-		true
-	)
-
-	core:add_listener(
-		"CharacterCapturedSettlementUnopposedBloodgrounds",
-		"CharacterCapturedSettlementUnopposed",
-		function(context)
-			local region_key = context:garrison_residence():region():name()
-			local character_is_human = context:character():faction():is_human()
-			
-			if self.occupation_options_are_locked then
-				uim:override(self.occupation_button):unlock(true)
-				uim:override(self.postbattle_gift_button):unlock(true)
-				uim:override(self.colonise_button):unlock(true)
-				self.occupation_options_are_locked = false
-			end
-		
-			return self:is_bloodground_region(region_key) and character_is_human
-		end,
-		function(context)
-			local region_key = context:garrison_residence():region():name()
-			local bloodground = self:is_bloodground_region(region_key)
-			local character_is_beastmen = context:character():faction():subculture() == self.beastmen_sc_key
-			local region_is_ruin = context:garrison_residence():region():is_abandoned()
-
-			if character_is_beastmen then
-				uim:override(self.occupation_button):lock(true)
-				uim:override(self.postbattle_gift_button):lock(true)
-				uim:override(self.colonise_button):lock(true)
-				self.occupation_options_are_locked = true
-
-			elseif bloodground.ritual_completed and region_is_ruin then 
-				uim:override(self.colonise_button):lock(true)
-				uim:override(self.postbattle_gift_button):lock(true)
-				self.occupation_options_are_locked = true
-			end
-			
 		end,
 		true
 	)
@@ -589,7 +529,6 @@ end
 
 function Bloodgrounds:update_effect_bundles_for_bloodgrounds()
 	for k, bloodground in pairs(self.active_bloodgrounds) do
-		local vfx
 		local bundles_to_apply = {}
 		local bundles_to_remove = {}
 		local game_interface = cm:get_game_interface();
@@ -607,10 +546,8 @@ function Bloodgrounds:update_effect_bundles_for_bloodgrounds()
 
 	
 		if bloodground.ritual_completed then
-			vfx = self.defiled_bloodground_vfx_key
 			table.insert(bundles_to_apply, self.defiled_bloodground_effect_bundle_key)
 		else
-			vfx = self.bloodground_vfx_key
 			table.insert(bundles_to_remove, self.defiled_bloodground_effect_bundle_key)
 		end
 

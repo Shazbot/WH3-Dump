@@ -11,106 +11,70 @@ salvage = {
 		"wh2_dlc15_grn_bonerattlaz", 
 		"wh_main_grn_crooked_moon", 
 		"wh_main_grn_greenskins", 
-		"wh_main_grn_orcs_of_the_bloody_hand"
+		"wh_main_grn_orcs_of_the_bloody_hand",
+		"wh2_dlc15_grn_broken_axe",
+		"wh3_dlc26_grn_gorbad_ironclaw"
 	},
 	faction_exclusive_upgrade_index = { -- Faction key to unique upgrade junctions
 		wh2_dlc15_grn_bonerattlaz = "wh2_dlc15_grn_upgrade_sorcery_weapon",
 		wh_main_grn_crooked_moon = "wh2_dlc15_grn_upgrade_fungus_flask",
 		wh_main_grn_greenskins = "wh2_dlc15_grn_upgrade_immortual_armour",
-		wh_main_grn_orcs_of_the_bloody_hand = "wh2_dlc15_grn_upgrade_idol_of_gork"
+		wh_main_grn_orcs_of_the_bloody_hand = "wh2_dlc15_grn_upgrade_idol_of_gork",
+		wh2_dlc15_grn_broken_axe = "wh3_dlc26_grn_upgrade_less_lucky_banner",
+		wh3_dlc26_grn_gorbad_ironclaw = "wh3_dlc26_grn_upgrade_big_banner_boyz"
 	},
 	tech_keys = { -- List of techs which unlock salvage upgrades
-		"tech_grn_end_1_1",
-		"tech_grn_end_2_2",
-		"tech_grn_end_3_3",
-		"tech_grn_end_4_2",
-		"tech_grn_end_5_1",
-		"tech_grn_extra_1_1",
-		"tech_grn_extra_1_2",
-		"tech_grn_extra_1_3",
-		"tech_grn_extra_1_4",
-		"tech_grn_extra_3_1",
-		"tech_grn_extra_3_2",
-		"tech_grn_extra_3_3",
-		"tech_grn_extra_3_4"
+		"tech_grn_scrap_1",
+		"tech_grn_scrap_2",
+		"tech_grn_scrap_3",
+		"tech_grn_scrap_4",
+		"tech_grn_scrap_5",
+		"tech_grn_scrap_6",
+		"tech_grn_scrap_7",
+		"tech_grn_scrap_8"
 	},
 	tech_keys_to_unit_upgrades = { -- Tech key to upgrade junctions
-		tech_grn_end_1_1 = {
-			"wh2_dlc15_grn_upgrade_combat_ammobag_artillery",
-			"wh2_dlc15_grn_upgrade_winged_ammo_artillery"
+		tech_grn_scrap_1 = { -- Small Beasts
+			"wh3_dlc26_grn_upgrade_shroom_powda",
+			"wh3_dlc26_grn_upgrade_squig_spikes",
+			"wh3_dlc26_grn_upgrade_mandibles"
+		},	
+		tech_grn_scrap_2 = { -- Goblin Weapons
+			"wh2_dlc15_grn_upgrade_jagged_weapon",
+			"wh3_dlc26_grn_upgrade_spikier_weapon",
+			"wh2_dlc15_grn_upgrade_liquor_flask",
+			"wh2_dlc15_grn_upgrade_water_flask"
 		},
-		tech_grn_end_2_2 = {
-			"wh2_dlc15_grn_upgrade_reinforced_weapon_troll",
-			"wh2_dlc15_grn_upgrade_water_flask_troll"
+		tech_grn_scrap_3 = { -- Missiles
+			"wh2_dlc15_grn_upgrade_heavy_ammo",
+			"wh2_dlc15_grn_upgrade_combat_ammobag"
 		},
-		tech_grn_end_3_3 = {
-			"wh2_dlc15_grn_upgrade_piercing_weapon_arachnarok",
-			"wh2_dlc15_grn_upgrade_restraints_arachnarok"
+		tech_grn_scrap_4 = { -- Orc Weapons
+			"wh2_dlc15_grn_upgrade_reinforced_weapon",
+			"wh2_dlc15_grn_upgrade_piercing_weapon",
+			"wh2_dlc15_grn_upgrade_scrap_armour",
+			"wh3_dlc26_grn_upgrade_bone_breastplates"
 		},
-		tech_grn_end_4_2 = {
-			"wh2_dlc15_grn_upgrade_jagged_weapon_giant_idol",
-			"wh2_dlc15_grn_upgrade_stone_armour_giant_idol"
+		tech_grn_scrap_5 = { -- Artillery
+			"wh3_dlc26_grn_upgrade_wing_suit",
+			"wh3_dlc26_grn_upgrade_borrowed_bolts",
+			"wh3_dlc26_grn_upgrade_bigga_rocks"
 		},
-		tech_grn_end_5_1 = {
-			"wh2_dlc15_grn_upgrade_blinders_squig",
-			"wh2_dlc15_grn_upgrade_jagged_weapon_black_orc",
-			"wh2_dlc15_grn_upgrade_jagged_weapon_squig",
-			"wh2_dlc15_grn_upgrade_piercing_weapon_black_orc",
-			"wh2_dlc15_grn_upgrade_restraints_squig",
-			"wh2_dlc15_grn_upgrade_scrap_saddles_squig"
+		tech_grn_scrap_6 = { -- Chariot/Pumps
+			"wh2_dlc15_grn_upgrade_chariot_armour",
+			"wh3_dlc26_grn_upgrade_pump_plating"
 		},
-		tech_grn_extra_1_1 = {
-			"wh2_dlc15_grn_upgrade_blinders_pump_wagon",
-			"wh2_dlc15_grn_upgrade_chariot_armour_pump_wagon",
-			"wh2_dlc15_grn_upgrade_jagged_weapon_pump_wagon",
-			"wh2_dlc15_grn_upgrade_piercing_weapon_pump_wagon",
-			"wh2_dlc15_grn_upgrade_enlarged_ammobag_goblin",
-			"wh2_dlc15_grn_upgrade_heavy_ammo_goblin",
-			"wh2_dlc15_grn_upgrade_jagged_weapon_goblin",
-			"wh2_dlc15_grn_upgrade_scrap_armour_goblin",
-			"wh2_dlc15_grn_upgrade_spiked_weapon_goblin",
-			"wh2_dlc15_grn_upgrade_water_flask_goblin"
+		tech_grn_scrap_7 = { -- Top tier weapons
+			"wh3_dlc26_grn_upgrade_best_blades",
+			"wh3_dlc26_grn_upgrade_sharpening_stones",
+			"wh3_dlc26_grn_upgrade_biggest_stick"
 		},
-		tech_grn_extra_1_2 = {
-			"wh2_dlc15_grn_upgrade_blinders_wolf_rider",
-			"wh2_dlc15_grn_upgrade_chariot_armour_wolf_rider",
-			"wh2_dlc15_grn_upgrade_combat_ammobag_wolf_rider",
-			"wh2_dlc15_grn_upgrade_jagged_weapon_wolf_rider",
-			"wh2_dlc15_grn_upgrade_scrap_saddles_wolf_rider"
-		},
-		tech_grn_extra_1_3 = {
-			"wh2_dlc15_grn_upgrade_combat_ammobag_spider_rider",
-			"wh2_dlc15_grn_upgrade_jagged_weapon_spider_rider",
-			"wh2_dlc15_grn_upgrade_scrap_saddles_spider_rider"
-		},
-		tech_grn_extra_1_4 = {
-			"wh2_dlc15_grn_upgrade_combat_ammobag_night_goblin",
-			"wh2_dlc15_grn_upgrade_liquor_flask_night_goblin",
-			"wh2_dlc15_grn_upgrade_spiked_weapon_night_goblin",
-			"wh2_dlc15_grn_upgrade_winged_ammo_night_goblin"
-		},
-		tech_grn_extra_3_1 = {
-			"wh2_dlc15_grn_upgrade_combat_ammobag_orc",
-			"wh2_dlc15_grn_upgrade_padded_shield_orc",
-			"wh2_dlc15_grn_upgrade_reinforced_weapon_orc",
-			"wh2_dlc15_grn_upgrade_scrap_armour_orc"
-		},
-		tech_grn_extra_3_2 = {
-			"wh2_dlc15_grn_upgrade_blinders_orc_cav",
-			"wh2_dlc15_grn_upgrade_chariot_armour_orc_cav",
-			"wh2_dlc15_grn_upgrade_piercing_weapon_orc_cav",
-			"wh2_dlc15_grn_upgrade_reinforced_weapon_orc_cav",
-			"wh2_dlc15_grn_upgrade_scrap_saddles_orc_cav"
-		},
-		tech_grn_extra_3_3 = {
-			"wh2_dlc15_grn_upgrade_combat_ammobag_salvage_orc",
-			"wh2_dlc15_grn_upgrade_liquor_flask_salvage_orc",
-			"wh2_dlc15_grn_upgrade_piercing_weapon_salvage_orc"
-		},
-		tech_grn_extra_3_4 = {
-			"wh2_dlc15_grn_upgrade_piercing_weapon_salvage_orc_cav",
-			"wh2_dlc15_grn_upgrade_reinforced_weapon_salvage_orc_cav",
-			"wh2_dlc15_grn_upgrade_scrap_saddles_salvage_orc_cav"
+		tech_grn_scrap_8 = { -- Big Beasts
+			"wh3_dlc26_grn_upgrade_big_squig_spikes",
+			"wh3_dlc26_grn_upgrade_spiky_legs",
+			"wh3_dlc26_grn_upgrade_spiky_claws",
+			"wh3_dlc26_grn_upgrade_scrap_gauntlet",
+			"wh3_dlc26_grn_upgrade_strapped_plates"
 		}
 	}
 }
@@ -134,8 +98,8 @@ function salvage:initialise()
 			local tech = context:technology();
 			if self.tech_keys_to_unit_upgrades[tech] then
 				for i = 1 , #self.tech_keys_to_unit_upgrades[tech] do
-					local tech_key = self.tech_keys_to_unit_upgrades[tech][i]
-					cm:faction_set_unit_purchasable_effect_lock_state(context:faction(), tech_key, tech_key, false);
+					local effect_key = self.tech_keys_to_unit_upgrades[tech][i]
+					cm:faction_set_unit_purchasable_effect_lock_state(context:faction(), effect_key, tech, false);
 				end
 			end
 		end,
@@ -179,17 +143,18 @@ function salvage:new_game_setup()
 			-- Lock faction specific upgrades for both AI and humans
 			for i = 1, #self.faction_exclusive_available do
 				if faction:name() ~= self.faction_exclusive_available[i] then
-					local tech_key = self.faction_exclusive_upgrade_index[self.faction_exclusive_available[i]]
-					cm:faction_set_unit_purchasable_effect_lock_state(faction, tech_key, "", true);
+					local effect_key = self.faction_exclusive_upgrade_index[self.faction_exclusive_available[i]]
+					cm:faction_set_unit_purchasable_effect_lock_state(faction, effect_key, "grn_upgrade_faction_unique", true);
 				end
 			end
 
 			-- Lock tech-specific upgrades for humans
 			if faction:is_human() then
 				for i = 1, #self.tech_keys do
-					for j = 1, #self.tech_keys_to_unit_upgrades[self.tech_keys[i]] do
-						local tech_key = self.tech_keys_to_unit_upgrades[self.tech_keys[i]][j]
-						cm:faction_set_unit_purchasable_effect_lock_state(faction, tech_key, tech_key, true);
+					local tech_key = self.tech_keys[i]
+					for j = 1, #self.tech_keys_to_unit_upgrades[tech_key] do
+						local effect_key = self.tech_keys_to_unit_upgrades[tech_key][j]
+						cm:faction_set_unit_purchasable_effect_lock_state(faction, effect_key, tech_key, true);
 					end
 				end
 			end

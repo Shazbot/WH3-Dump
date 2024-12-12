@@ -10,7 +10,11 @@ function add_eltharion_yvresse_defence_listeners()
         function()
             local pb = cm:model():pending_battle();
 
-            return pb:siege_battle() and pb:has_defender() and pb:defender():region():name() == yvresse_region_key;
+            if pb:siege_battle() and pb:has_defender() then
+				local defender = pb:defender()
+				
+				return defender:has_region() and defender:region():name() == yvresse_region_key;
+			end
         end,
         function()
             local pb = cm:model():pending_battle();

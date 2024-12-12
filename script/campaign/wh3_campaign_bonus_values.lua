@@ -10,6 +10,11 @@ core:add_listener(
 
 			local character = context:character();
 
+			-- For now we exclude camps, in future we should add an ancillary blacklist as whitelisting is problematic
+			if character:character_subtype("wh3_main_ogr_tyrant_camp") == true then
+				return;
+			end
+
 			if character:has_region() == true and character:is_at_sea() == false and character:in_settlement() == false and character:is_besieging() == false and character:is_embedded_in_military_force() == false then
 				local region = character:region();
 
@@ -1255,16 +1260,11 @@ core:add_listener(
 core:add_listener(
 	"settlement_spread_to_province_ruin_chance",
 	"WorldStartRound",
-	true,
 	function(context)
 		--- don't fire on new game
-		if cm:is_new_game() then
-			return
-		end
-
-		local ruin_spread_start_penalty = -50 -- penalty to spread roll on fresh ruins
-		local ruin_spread_fail_mod_mult = 1 -- each time a ruin isn't spread to, increase the chance by this * base chance per turn
-
+ 		return not cm:is_new_game()
+	end,
+	function(context)
 		local region_list = context:world():region_manager():region_list()
 		for i, start_region in model_pairs(region_list) do	
 			if cm:get_regions_bonus_value(start_region, "settlement_spread_to_province_ruin_chance") > 0 and not start_region:has_effect_bundle("wh2_dlc17_effect_bundle_defiled_bloodgrounds") then
@@ -1276,12 +1276,10 @@ core:add_listener(
 				for i, target_region in model_pairs(province_regions) do
 					if target_region:is_abandoned() then
 						local target_bonus = cm:get_regions_bonus_value(target_region, "settlement_spread_to_province_ruin_chance_target_bonus")
+						local spread_chance = target_bonus + source_spread_chance
+						local roll = cm:random_number()
 
-						if not target_region:has_effect_bundle(tracker_bundle_key) then
-							target_bonus = target_bonus + ruin_spread_start_penalty
-						end
-
-						if cm:random_number() <= source_spread_chance + target_bonus then
+						if roll <= spread_chance then
 							cm:transfer_region_to_faction(target_region:name(), owner_key)
 
 							cm:trigger_incident_with_targets(
@@ -1294,11 +1292,16 @@ core:add_listener(
 								target_region:cqi(),
 								0
 							)
-						else
-							local ruin_spread_mod_bundle = cm:create_new_custom_effect_bundle(tracker_bundle_key);
-							ruin_spread_mod_bundle:add_effect("wh3_main_effect_region_chance_to_spread_to_ruin_target", "region_to_region_own", target_bonus + source_spread_chance*ruin_spread_fail_mod_mult);
+						elseif spread_chance > 0 then
+							local ruin_spread_mod_bundle = cm:create_new_custom_effect_bundle(tracker_bundle_key)
+							
+							if spread_chance > 100 then
+								spread_chance = 100
+							end
+
+							ruin_spread_mod_bundle:add_effect("wh3_main_effect_region_chance_to_spread_to_ruin_target_dummy", "region_to_region_own", spread_chance)
 							ruin_spread_mod_bundle:set_duration(0)
-							cm:apply_custom_effect_bundle_to_region(ruin_spread_mod_bundle,target_region)
+							cm:apply_custom_effect_bundle_to_region(ruin_spread_mod_bundle, target_region)
 						end
 					end
 				end
@@ -1434,7 +1437,7 @@ core:add_listener(
 	"UnbreakableGrudgeBonus_PendingBattle",
 	"PendingBattle",
 	function(context)
-		return pending_battle_bv_check("unbreakable_when_grudges_over_1000", context:pending_battle()) 
+		return pending_battle_bv_check("unbreakable_when_grudges_over_1000", context:pending_battle(), true, false)
 	end,
 	function(context)
 		local pb = context:pending_battle()
@@ -1463,7 +1466,7 @@ core:add_listener(
 	"UnbreakableGrudgeBonus_BattleCompleted",
 	"BattleCompleted",
 	function(context)
-		return pending_battle_bv_check("unbreakable_when_grudges_over_1000", context:model():pending_battle()) 
+		return pending_battle_bv_check("unbreakable_when_grudges_over_1000", context:model():pending_battle(), true, false)
 	end,
 	function(context)	
 		local pb = context:model():pending_battle()
@@ -1486,7 +1489,7 @@ core:add_listener(
 	"PerfectVigourGrudgeBonus_PendingBattle",
 	"PendingBattle",
 	function(context)
-		return pending_battle_bv_check("perfect_vigour_when_grudges_over_1000", context:pending_battle()) 
+		return pending_battle_bv_check("perfect_vigour_when_grudges_over_1000", context:pending_battle(), true, false)
 	end,
 	function(context)
 		local pb = context:pending_battle()
@@ -1515,7 +1518,7 @@ core:add_listener(
 	"PerfectVigourGrudgeBonus_BattleCompleted",
 	"BattleCompleted",
 	function(context)
-		return pending_battle_bv_check("perfect_vigour_when_grudges_over_1000", context:model():pending_battle()) 
+		return pending_battle_bv_check("perfect_vigour_when_grudges_over_1000", context:model():pending_battle(), true, false)
 	end,
 	function(context)
 		local pb = context:model():pending_battle()
@@ -1534,17 +1537,17 @@ core:add_listener(
 	true
 )
 
-function pending_battle_bv_check(bonus_value, pending_battle) 
+function pending_battle_bv_check(bonus_value, pending_battle, check_force, check_character) 
 
 	local scripted_bonus_value_present = false
 
 	local attacker = pending_battle:attacker()
-	if not attacker:is_null_interface() and cm:get_forces_bonus_value(attacker:military_force(), bonus_value) > 0 then
+	if not attacker:is_null_interface() and (cm:get_forces_bonus_value(attacker:military_force(), bonus_value) > 0 or cm:get_characters_bonus_value(attacker, bonus_value) > 0) then
 		scripted_bonus_value_present = true
 	end
 
 	local defender = pending_battle:defender()
-	if not defender:is_null_interface() and cm:get_forces_bonus_value(defender:military_force(), bonus_value) > 0 then
+	if not defender:is_null_interface() and (cm:get_forces_bonus_value(defender:military_force(), bonus_value) > 0 or cm:get_characters_bonus_value(defender, bonus_value) > 0) then
 		scripted_bonus_value_present = true
 	end
 
@@ -1552,7 +1555,7 @@ function pending_battle_bv_check(bonus_value, pending_battle)
 	for i = 0, attacker_list:num_items() - 1 do
 		local attacker = attacker_list:item_at(i)
 
-		if not attacker:is_null_interface() and cm:get_forces_bonus_value(attacker:military_force(), bonus_value) > 0 then
+		if not attacker:is_null_interface() and (cm:get_forces_bonus_value(attacker:military_force(), bonus_value) > 0 or cm:get_characters_bonus_value(attacker, bonus_value) > 0) then
 			scripted_bonus_value_present = true
 		end
 	end
@@ -1561,7 +1564,7 @@ function pending_battle_bv_check(bonus_value, pending_battle)
 	for i = 0, defender_list:num_items() - 1 do
 		local defender = defender_list:item_at(i)
 
-		if not defender:is_null_interface() and cm:get_forces_bonus_value(defender:military_force(), bonus_value) > 0 then
+		if not defender:is_null_interface() and (cm:get_forces_bonus_value(defender:military_force(), bonus_value) > 0 or cm:get_characters_bonus_value(defender, bonus_value) > 0) then
 			scripted_bonus_value_present = true
 		end
 	end
@@ -1999,3 +2002,246 @@ core:add_listener(
 	end,
 	true
 );
+
+core:add_listener(
+	"skulltaker_post_battle_bundle",
+	"CharacterCompletedBattle",
+	function(context)
+		local character = context:character()
+		return cm:get_characters_bonus_value(character, "skulltaker_kills_leave_bundle") > 0 and character:won_battle() == true and character:has_region()
+	end,
+	function(context)
+		local character = context:character()
+		cm:apply_effect_bundle_to_region("wh3_dlc26_skulltaker_skill_legacy_of_blood", character:region():name() , cm:get_characters_bonus_value(character, "skulltaker_kills_leave_bundle"))
+	end,
+true
+)
+
+-------------------------------------------------------------------------------------------------------------------
+--------------------------- GOLGFAG - EASY, COME, EASY, GO scripted bonus value and data --------------------------
+-------------------------------------------------------------------------------------------------------------------
+easy_come_easy_go = {
+	
+	--ancillary and effect keys for abilities gained from weapons
+	weapon = {
+		{ancillary_key = "wh_dlc03_anc_weapon_the_brass_cleaver", 	effect_key = "wh_dlc03_effect_ability_enable_the_brass_cleaver"},
+		{ancillary_key = "wh_main_anc_weapon_sword_of_anti-heroes", effect_key = "wh_main_effect_ability_enable_sword_of_anti-heroes"},
+		{ancillary_key = "wh_main_anc_weapon_tormentor_sword", 		effect_key = "wh_main_effect_ability_enable_tormentor_sword"},
+		{ancillary_key = "wh_main_anc_weapon_warrior_bane", 		effect_key = "wh_main_effect_ability_enable_warrior_bane"},
+		{ancillary_key = "wh3_main_anc_weapon_blood_cleaver", 		effect_key = "wh3_main_effect_ability_enable_blood_cleaver"},
+		{ancillary_key = "wh3_main_anc_weapon_siegebreaker", 		effect_key = "wh3_main_effect_ability_enable_bound_siegebreaker_2"},
+		{ancillary_key = "wh3_main_anc_weapon_the_tenderiser", 		effect_key = "wh3_main_effect_ability_enable_bound_the_tenderiser_2"},
+		{ancillary_key = "wh3_main_anc_weapon_thundermace", 		effect_key = "wh3_main_effect_ability_enable_bound_thundermace_1"},
+	},
+	--ancillary and effect keys for abilities gained from armour and enchanted_items
+	armour_and_enchanted_item = {
+	--armour
+		{ancillary_key = "wh_main_anc_armour_charmed_shield", 		effect_key = "wh_main_effect_ability_enable_charmed_shield"},
+		{ancillary_key = "wh_main_anc_armour_glittering_scales", 	effect_key = "wh_main_effect_ability_enable_glittering_scales"},
+		{ancillary_key = "wh_main_anc_armour_helm_of_discord", 		effect_key = "wh_main_effect_ability_enable_helm_of_discord"},
+		{ancillary_key = "wh3_main_anc_armour_gut_maw", 			effect_key = "wh3_main_effect_ability_enable_gut_maw"},
+	--enchanted_item
+		{ancillary_key = "wh_main_anc_talisman_opal_amulet", 				effect_key = "wh_main_effect_ability_enable_master_opal_amulet"},
+		{ancillary_key = "wh_main_anc_talisman_pidgeon_plucker_pendant", 	effect_key = "wh_main_effect_ability_enable_pidgeon_plucker_pendant"},
+		{ancillary_key = "wh3_main_anc_talisman_gnoblar_thiefstone", 		effect_key = "wh3_main_effect_ability_enable_gnoblar_thiefstone"},
+		{ancillary_key = "wh3_main_anc_talisman_greedy_fist", 				effect_key = "wh3_main_effect_ability_enable_greedy_fist"},
+	},
+	--ancillary and effect keys for abilities gained from talismans
+	talisman = {
+		{ancillary_key = "wh3_main_anc_enchanted_item_potion_of_farsight", 			effect_key = "wh3_main_effect_ability_enable_potion_of_farsight"},
+		{ancillary_key = "wh_main_anc_enchanted_item_crown_of_command", 			effect_key = "wh_main_effect_ability_enable_crown_of_command"},
+		{ancillary_key = "wh_main_anc_enchanted_item_featherfoe_torc", 				effect_key = "wh_main_effect_ability_enable_featherfoe_torc"},
+		{ancillary_key = "wh_main_anc_enchanted_item_healing_potion", 				effect_key = "wh_main_effect_ability_enable_potion_of_healing"},
+		{ancillary_key = "wh_main_anc_enchanted_item_potion_of_foolhardiness", 		effect_key = "wh_main_effect_ability_enable_potion_of_foolhardiness"},
+		{ancillary_key = "wh_main_anc_enchanted_item_potion_of_speed", 				effect_key = "wh_main_effect_ability_enable_potion_of_speed"},
+		{ancillary_key = "wh_main_anc_enchanted_item_potion_of_strength", 			effect_key = "wh_main_effect_ability_enable_potion_of_strength"},
+		{ancillary_key = "wh_main_anc_enchanted_item_potion_of_toughness", 			effect_key = "wh_main_effect_ability_enable_potion_of_toughness"},
+		{ancillary_key = "wh_main_anc_enchanted_item_the_other_tricksters_shard", 	effect_key = "wh_main_effect_ability_enable_the_other_tricksters_shard"},
+		{ancillary_key = "wh3_main_anc_enchanted_item_brahmir_statue", 				effect_key = "wh3_main_effect_ability_enable_brahmir_statue"},
+		{ancillary_key = "wh3_main_anc_enchanted_item_fistful_of_laurels", 			effect_key = "wh3_main_effect_ability_enable_bound_fistful_of_laurels"},
+		{ancillary_key = "wh3_main_anc_enchanted_item_jade_lion", 					effect_key = "wh3_main_effect_ability_enable_jade_lion"},
+		{ancillary_key = "wh3_main_anc_enchanted_item_rock_eye", 					effect_key = "wh3_main_effect_ability_enable_rock_eye"},
+	},
+}
+
+function return_which_character_has_scripted_bv(bonus_value, pending_battle)
+	
+	local character_with_bonus_value = nil
+
+	--loop through all character to find the bonus value
+	local attacker = pending_battle:attacker()
+	local defender = pending_battle:defender()
+
+	if not attacker:is_null_interface() and cm:get_characters_bonus_value(attacker, bonus_value) > 0 then
+		return attacker
+	end			
+	if not defender:is_null_interface() and cm:get_characters_bonus_value(defender, bonus_value) > 0 then
+		return defender
+	end
+
+	local attacker_list = pending_battle:secondary_attackers()
+	local defender_list = pending_battle:secondary_defenders()
+
+	for i = 0, attacker_list:num_items() - 1 do
+		local attacker = attacker_list:item_at(i)
+		if not attacker:is_null_interface() and cm:get_characters_bonus_value(attacker, bonus_value) > 0 then
+			return attacker
+		end
+	end				
+	for i = 0, defender_list:num_items() - 1 do
+		local defender = defender_list:item_at(i)
+		if not defender:is_null_interface() and cm:get_characters_bonus_value(defender, bonus_value) > 0 then
+			return defender
+		end
+	end
+
+
+	return false
+end
+
+core:add_listener(
+	"EasyComeEasyGo_PendingBattle",
+	"PendingBattle",
+	function(context)
+		return pending_battle_bv_check("easy_come_easy_go", context:pending_battle(), false, true)
+	end,
+	function(context)
+		local pb = context:pending_battle()
+		local character_with_bonus_value = return_which_character_has_scripted_bv("easy_come_easy_go", pb)
+
+		--create set of ancillary abilities
+		local random_ancillaries = {}
+
+		for anc_type, anc_table in pairs(easy_come_easy_go) do
+			local ancillary_added = false
+			while(not ancillary_added) do
+				local random_number = cm:random_number(#anc_table)
+				local ancillary_key = anc_table[random_number].ancillary_key
+				local effect_key = anc_table[random_number].effect_key
+
+				if character_with_bonus_value:character_details():has_ancillary(ancillary_key) == false then
+					table.insert(random_ancillaries, effect_key)
+					ancillary_added = true					
+				end
+			end
+			
+		end
+		
+		--create custom effect bundle with ancillary abilities
+		local easy_come_easy_go_bundle = cm:create_new_custom_effect_bundle("wh3_dlc26_easy_come_easy_go_scripted_hidden")
+
+		for i = 1, #random_ancillaries do
+			easy_come_easy_go_bundle:add_effect(random_ancillaries[i], "character_to_character_own", 1)
+		end
+		easy_come_easy_go_bundle:set_duration(1)
+		cm:apply_custom_effect_bundle_to_character(easy_come_easy_go_bundle, character_with_bonus_value)
+		
+		cm:update_pending_battle()
+	end,
+	true
+)
+
+core:add_listener(
+	"EasyComeEasyGo_BattleCompleted",
+	"BattleCompleted",
+	function(context)
+		return pending_battle_bv_check("easy_come_easy_go", context:model():pending_battle(), false, true)
+	end,
+	function(context)
+		local pb = context:model():pending_battle()
+		local character_with_bonus_value = return_which_character_has_scripted_bv("easy_come_easy_go", pb)
+		cm:remove_effect_bundle_from_character("wh3_dlc26_easy_come_easy_go_scripted_hidden", character_with_bonus_value)
+	end,
+	true
+)
+
+core:add_listener(
+	"siege_army_abilities_fort_battles",
+	"PendingBattle",
+	function(context)
+		local pb = context:pending_battle()
+
+		if pb:has_attacker() then
+			local attacker = pb:attacker()
+
+			if attacker:has_region() then
+				local region = attacker:region()
+
+				return region:resource_exists("res_bastion") or region:resource_exists("res_empire_fort") or region:resource_exists("res_fortress")
+			end
+		end
+	end,
+	function(context)
+		local function apply_army_abilities(mf)
+			local mf_cqi = mf:command_queue_index()
+			
+			if cm:get_forces_bonus_value(mf, "army_ability_enable_shatterstone_scripted") > 0 then
+				cm:apply_effect_bundle_to_force("wh2_dlc17_bundle_army_ability_enable_shatterstone_hidden", mf_cqi, 0)	
+			end
+
+			if cm:get_forces_bonus_value(mf, "army_ability_enable_vauls_hammer_scripted") > 0 then
+				cm:apply_effect_bundle_to_force("wh2_main_bundle_army_ability_enable_vauls_hammer_hidden", mf_cqi, 0)	
+			end
+
+			if cm:get_forces_bonus_value(mf, "army_ability_enable_stoneshaker_scripted") > 0 then
+				cm:apply_effect_bundle_to_force("wh3_main_bundle_army_ability_enable_stoneshaker_hidden", mf_cqi, 0)	
+			end
+		end
+		
+		local pb = context:pending_battle()
+		
+		apply_army_abilities(pb:attacker():military_force())
+
+		for _, sa in model_pairs(pb:secondary_attackers()) do
+			apply_army_abilities(sa:military_force())
+		end
+		
+		cm:update_pending_battle()
+	end,
+	true
+)
+
+core:add_listener(
+	"siege_army_abilities_fort_battles_cleanup",
+	"BattleCompleted",
+	true,
+	function(context)
+		local function remove_bundles(character)
+			if character:has_military_force() then
+				local mf = character:military_force()
+				local mf_cqi = mf:command_queue_index()
+
+				if mf:has_effect_bundle("wh2_dlc17_bundle_army_ability_enable_shatterstone_hidden") then
+					cm:remove_effect_bundle_from_force("wh2_dlc17_bundle_army_ability_enable_shatterstone_hidden", mf_cqi)
+				end
+
+				if mf:has_effect_bundle("wh2_main_bundle_army_ability_enable_vauls_hammer_hidden") then
+					cm:remove_effect_bundle_from_force("wh2_main_bundle_army_ability_enable_vauls_hammer_hidden", mf_cqi)
+				end
+
+				if mf:has_effect_bundle("wh3_main_bundle_army_ability_enable_stoneshaker_hidden") then
+					cm:remove_effect_bundle_from_force("wh3_main_bundle_army_ability_enable_stoneshaker_hidden", mf_cqi)
+				end
+			end
+		end
+
+		local pb = cm:model():pending_battle()
+
+		if pb:has_attacker() then
+			remove_bundles(pb:attacker())
+		end
+
+		for _, character in model_pairs(pb:secondary_attackers()) do
+			remove_bundles(character)
+		end
+
+		if pb:has_defender() then
+			remove_bundles(pb:defender())
+		end
+
+		for _, character in model_pairs(pb:secondary_defenders()) do
+			remove_bundles(character)
+		end
+	end,
+	true
+)

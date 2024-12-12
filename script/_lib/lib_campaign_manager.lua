@@ -5706,11 +5706,12 @@ end;
 
 
 --- @function character_won_battle_against_culture
---- @desc Returns <code>true</code> if the supplied character won their last battle against the key specified culture (or table of cultures), <code>false</code> otherwise.
+--- @desc Returns <code>true</code> if the supplied character won their last battle against the key specified culture (or table of cultures), <code>false</code> otherwise. A string parameter can be supplied to test against rebel units (e.g. "_emp_" to see if the rebellion contained an empire unit)
 --- @p character character
 --- @p @string culture or table of cultures
+--- @p [opt=nil] @string unit key segment
 --- @r @boolean character won against culture
-function campaign_manager:character_won_battle_against_culture(character, culture)
+function campaign_manager:character_won_battle_against_culture(character, culture, test_rebels_with_string)
 	if not validate.is_character(character) then
 		return false;
 	end;
@@ -5722,14 +5723,23 @@ function campaign_manager:character_won_battle_against_culture(character, cultur
 	if character:won_battle() then
 		local character_faction_name = character:faction():name();
 		local target_faction_name = false;
+		local enemy_units = {};
 		
 		local defender_char_cqi, defender_mf_cqi, defender_faction_name = cm:pending_battle_cache_get_defender(1);
 		local attacker_char_cqi, attacker_mf_cqi, attacker_faction_name = cm:pending_battle_cache_get_attacker(1);
 		
 		if defender_faction_name == character_faction_name then
 			target_faction_name = attacker_faction_name;
+
+			if test_rebels_with_string then
+				enemy_units = cm:pending_battle_cache_get_attacker_units(1)
+			end;
 		elseif attacker_faction_name == character_faction_name then
 			target_faction_name = defender_faction_name;
+
+			if test_rebels_with_string then
+				enemy_units = cm:pending_battle_cache_get_defender_units(1)
+			end;
 		end;
 		
 		if target_faction_name and target_faction_name ~= "rebels" then
@@ -5744,6 +5754,12 @@ function campaign_manager:character_won_battle_against_culture(character, cultur
 				end;
 			else
 				return enemy_culture == culture;
+			end;
+		elseif target_faction_name == "rebels" and test_rebels_with_string then
+			for i = 1, #enemy_units do
+				if string.find(enemy_units[i].unit_key, test_rebels_with_string) then
+					return true;
+				end;
 			end;
 		end;
 	end;
@@ -6124,6 +6140,15 @@ end;
 --- @r character closest character
 --- @r @number closest character distance
 function campaign_manager:get_closest_character_from_faction(faction, x, y)
+	if is_string(faction) then
+		faction = cm:get_faction(faction)
+	end
+
+	if not is_faction(faction) then
+		script_error("ERROR: get_closest_character_from_faction() called but supplied faction [" .. tostring(faction) .. "] is not a recognised faction")
+		return false
+	end
+
 	local closest_distance = false;
 	local closest_character = false;
 	
@@ -11027,7 +11052,10 @@ function campaign_manager:pending_battle_cache_get_defender_subtype(index)
 
 	local family_member = cm:get_family_member_by_cqi(self.pbc_defenders[index].fm_cqi)
 	local character_details = family_member:character_details();
-	return character_details:character_subtype_key();
+
+	if not character_details:is_null_interface() then
+		return character_details:character_subtype_key();
+	end;
 end;
 
 
@@ -16092,8 +16120,15 @@ end
 --- @p [opt=0] number callback delay, Delay in seconds before calling the end callback, if supplied.
 --- @p [opt=false] boolean dont whitelist, By default this function will whitelist the scripted event message type with @campaign_manager:whitelist_event_feed_event_type. Set this flag to <code>true</code> to prevent this.
 function campaign_manager:show_message_event(faction_key, title_loc_key, primary_detail_loc_key, secondary_detail_loc_key, is_persistent, index_num, end_callback, delay, suppress_whitelist)
-	if not cm:get_faction(faction_key) then
+	local faction = cm:get_faction(faction_key);
+	
+	if not faction then
 		script_error("ERROR: show_message_event() called but no faction with supplied name [" .. tostring(faction_key) .. "] could be found");
+		return false;
+	end;
+	
+	-- do not bother trying to show the event if the faction is not player controlled
+	if not faction:is_human() then
 		return false;
 	end;
 	
@@ -16190,8 +16225,15 @@ end;
 --- @p [opt=false] function end callback, Specifies a callback to call when this event is dismissed. Note that if another event message shows first for some reason, this callback will be called early.
 --- @p [opt=0] number callback delay, Delay in seconds before calling the end callback, if supplied.
 function campaign_manager:show_message_event_located(faction_key, title_loc_key, primary_detail_loc_key, secondary_detail_loc_key, x, y, is_persistent, index_num, end_callback, delay)
-	if not cm:get_faction(faction_key) then
+	local faction = cm:get_faction(faction_key);
+	
+	if not faction then
 		script_error("ERROR: show_message_event_located() called but no faction with supplied name [" .. tostring(faction_key) .. "] could be found");
+		return false;
+	end;
+	
+	-- do not bother trying to show the event if the faction is not player controlled
+	if not faction:is_human() then
 		return false;
 	end;
 	

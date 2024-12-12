@@ -1,0 +1,57 @@
+CloakOfSkulls
+{
+	ShouldShowHudButtonAlert
+	{ 
+        NumberOfAvailableSkulls > 0 && 
+        self.GetProperty("can_show_alert") == "1" && 
+        NumberOfAvailableSkulls > ToNumber(self.GetProperty("cached_number_of_available_skulls"))
+	}
+
+    NumberOfAvailableSkulls
+    {
+        PlayersFaction.RitualManagerContext.RitualChainContextFromCategory("CLOAK_OF_SKULLS").Filter(
+            NextInChainContext.CanPerformRitual && NextInChainContext.IsAvailable).Size
+    }
+
+    EmpoweredSkullTooltip(CcoCampaignRitualChain chain)
+    {
+        GetIfElse(IsContextValid(chain.NextInChainContext),
+            Loc("wh3_dlc26_cloak_of_skulls_empowered_skull_tooltip", chain.LastCompletedContext.RitualContext.DisplayName) + 
+                GetIf(chain.NextInChainContext.CanAfford == false, "{{tr:new_paragraph}}" + Loc("wh3_dlc26_cloak_of_skulls_cannot_afford_tooltip")),
+            Loc("wh3_dlc26_cloak_of_skulls_fully_empowered_skull_tooltip"))
+    }
+
+    LockedSkullTooltip(CcoCampaignRitualChain chain)
+    {
+        Loc("wh3_dlc26_cloak_of_skulls_cannot_empower_skull_tooltip")
+    }
+    
+    AvailableSkullTooltip(CcoCampaignRitualChain chain)
+    {
+        Loc("wh3_dlc26_cloak_of_skulls_skull_available_tooltip") +
+            GetIf(chain.NextInChainContext.CanAfford == false, "{{tr:new_paragraph}}" + Loc("wh3_dlc26_cloak_of_skulls_cannot_afford_tooltip"))
+    }
+
+    TeleportTooltipInactive
+    {
+        Loc("wh3_dlc26_cloak_of_skulls_teleport_tooltip") + "{{tr:new_paragraph}}" +  Loc("wh3_dlc26_cloak_of_skulls_teleport_tooltip_locked")
+    }
+
+    TeleportTooltip(CcoCampaignRitual ritual, CcoCampaignCharacter performing_character)
+	{
+		Loc("wh3_dlc26_cloak_of_skulls_teleport_tooltip")
+		+ GetIf(performing_character.MilitaryForceContext.IsLayingSiege || performing_character.SettlementContext.IsUnderSiege, "{{tr:new_paragraph}}" + Loc("teleport_ritual_unable_reason_siege"))
+        + GetIf(ritual.IsValidContext && ritual.IsOnCooldown, "{{tr:new_paragraph}}" + Loc("wh3_dlc26_cloak_of_skulls_teleport_tooltip_cooldown"))
+        + GetIf(ritual.RitualInteractionContext.IsTargettingActive, "{{tr:new_paragraph}}" + Loc("wh3_dlc26_cloak_of_skulls_teleport_tooltip_exit"))
+        + GetIf(ritual.IsValidContext == false || ritual.IsAvailable == false, "{{tr:new_paragraph}}" +  Loc("wh3_dlc26_cloak_of_skulls_teleport_tooltip_locked"))
+		+ GetIf(ritual.CanPerformRitualWithAnyValidTarget(performing_character) == false, "{{tr:new_paragraph}}" + ritual.InvalidReasonForRitualWithAnyValidTarget(performing_character))
+	}
+
+    IsTeleportLocked(CcoCampaignRitual ritual, CcoCampaignCharacter performing_character)
+    {
+        ritual.IsAvailable == false || 
+        ritual.CanPerformRitualWithAnyValidTarget(performing_character) == false ||
+        performing_character.MilitaryForceContext.IsLayingSiege || 
+        performing_character.SettlementContext.IsUnderSiege
+    }
+}

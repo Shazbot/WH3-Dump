@@ -446,7 +446,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignBuildingSlot"
-					context_function_id="IsPrimary &amp;&amp; CharacterContext.MilitaryForceContext.IsFixedCamp &amp;&amp; CharacterContext.IsPlayerCharacter &amp;&amp; IsLocalPlayersTurn"/>
+					context_function_id="IsPrimary &amp;&amp; (CharacterContext.MilitaryForceContext.IsFixedCamp &amp;&amp; CharacterContext.MilitaryForceContext.IsMovingCamp) == false  &amp;&amp; CharacterContext.IsPlayerCharacter &amp;&amp; IsLocalPlayersTurn"/>
 				<callback_with_context
 					callback_id="ContextCommandLeftClick"
 					context_object_id="CcoCampaignBuildingSlot"
@@ -4440,7 +4440,7 @@
 							value="normal"/>
 						<property
 							name="red"
-							value="PlayersFaction.PooledResourceManagerContext.CanAffordPooledResourceCost(ResourceCostContext(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;))) == false"/>
+							value="GetIfElse(Buildings.StoredSettlementOrForce, Buildings.StoredSettlementOrForce.PooledResourceManagerContext.CanAffordPooledResourceCost(ResourceCostContext(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;))), true) == false"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
@@ -4547,7 +4547,7 @@
 							value="normal"/>
 						<property
 							name="red"
-							value="PlayersFaction.PooledResourceManagerContext.CanAffordPooledResourceCost(ResourceCostContext(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;))) == false"/>
+							value="GetIfElse(Buildings.StoredSettlementOrForce, Buildings.StoredSettlementOrForce.PooledResourceManagerContext.CanAffordPooledResourceCost(ResourceCostContext(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;))), true) == false"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
@@ -4616,8 +4616,8 @@
 			uniqueguid_in_template="8E71F5BE-8BDB-4B22-976CED6E5334CB35"
 			uniqueguid="C8A7236E-888E-464C-A5C2C6BE7E8668FB"
 			dimensions="72.00,46.00"
-			dock_point="Center Right"
-			offset="22.00,37.00"
+			dock_point="Bottom Right"
+			offset="22.00,0.00"
 			priority="70">
 			<state_uniqueguids>
 				<state_uniqueguid
@@ -4645,8 +4645,8 @@
 			uniqueguid_in_template="8E71F5BE-8BDB-4B22-976CED6E5334CB35"
 			uniqueguid="2BA9D831-0C33-4376-A172B3D9292797B8"
 			dimensions="72.00,48.00"
-			dock_point="Center Right"
-			offset="22.00,37.00"
+			dock_point="Bottom Right"
+			offset="22.00,0.00"
 			priority="70">
 			<state_uniqueguids>
 				<state_uniqueguid
@@ -6419,7 +6419,7 @@
 			uniqueguid="2083283B-A380-434E-BDA0FBC871B2F1B9"
 			dimensions="74.00,74.00"
 			dock_point="Center"
-			sound_category="UI_GBL_TMP_Selection_Locked_Unavailable_Small">
+			sound_category="UI_GBL_TMP_Building_Button">
 			<state_uniqueguids>
 				<state_uniqueguid
 					name="built"
@@ -6961,7 +6961,7 @@
 			dimensions="74.00,74.00"
 			dock_point="Center"
 			offset="0.00,-2.00"
-			sound_category="UI_GBL_TMP_Selection_Locked_Unavailable_Small">
+			sound_category="UI_GBL_TMP_Building_Button">
 			<state_uniqueguids>
 				<state_uniqueguid
 					name="built"
@@ -7083,20 +7083,23 @@
 				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextStateSetterConditional"
-					context_object_id="CcoBuildingLevelRecord">
+					context_object_id="CcoBuildingLevelRecord level, CcoCampaignBuildingSlot slot">
 					<child_m_user_properties>
 						<property
 							name="built"
-							value="IsBuiltInSlot(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;)) || DoesBuildingExceedCap(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;))"/>
+							value="level.IsBuiltInSlot(slot)"/>
+						<property
+							name="built_inactive"
+							value="level.DoesBuildingExceedCap(slot)"/>
 						<property
 							name="cannot_build_ever"
-							value="IsEpisodicRestricted || PrimarySlotBuildingLevelRequirement &gt; StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;).PrimarySlotContext.PlayerVariantBuildingChainContext.MaximumLevel"/>
+							value="level.IsEpisodicRestricted || level.PrimarySlotBuildingLevelRequirement &gt; slot.PrimarySlotContext.PlayerVariantBuildingChainContext.MaximumLevel || slot.BuildingRequirementsMet(level) == false"/>
 						<property
 							name="fallback_state"
 							value="greyed"/>
 						<property
 							name="normal"
-							value="IsActiveForBuildingBrowser(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;)) &amp;&amp; IsBuiltInSlot(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;)) == false"/>
+							value="level.IsActiveForBuildingBrowser(slot) &amp;&amp; level.IsBuiltInSlot(slot) == false"/>
 						<property
 							name="object_store_events"
 							value="^2"/>

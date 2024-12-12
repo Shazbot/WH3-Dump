@@ -19,7 +19,8 @@ waaagh = {
 		wh_main_grn_azhag_the_slaughterer = "wh2_dlc15_bundle_azhags_big_waaagh_army_ability",
 		wh2_dlc15_grn_grom_the_paunch = "wh2_dlc15_bundle_groms_big_waaagh_army_ability",
 		wh_dlc06_grn_skarsnik = "wh2_dlc15_bundle_skarsniks_big_waaagh_army_ability",
-		wh_dlc06_grn_wurrzag_da_great_prophet = "wh2_dlc15_bundle_wurrzags_big_waaagh_army_ability"
+		wh_dlc06_grn_wurrzag_da_great_prophet = "wh2_dlc15_bundle_wurrzags_big_waaagh_army_ability",
+		wh3_dlc26_grn_gorbad_ironclaw = "wh3_dlc26_bundle_gorbads_big_waaagh_army_ability"
 	},
 	factions = {}, -- Dynamic script data populated on first tick and maintained by the script
 	faction_data = { -- Table containing playing greenskin factions unique event feed strings
@@ -42,19 +43,12 @@ waaagh = {
 		wh2_dlc15_grn_bonerattlaz = {
 			event_title = "event_feed_strings_text_wh2_main_event_feed_string_scripted_event_grn_waaagh_title_azhag",
 			event_description = "event_feed_strings_text_wh2_main_event_feed_string_scripted_event_grn_waaagh_description_azhag",
+		},
+		wh3_dlc26_grn_gorbad_ironclaw = {
+			event_title = "event_feed_strings_text_wh3_dlc26_event_feed_string_scripted_event_grn_waaagh_title_gorbad",
+			event_description = "event_feed_strings_text_wh3_dlc26_event_feed_string_scripted_event_grn_waaagh_description_gorbad",
 		}
 	},
-	-- All Legendary Lord greenskins require a slightly different version of the 'confederate' event: as they can't die, the 'kill lord' option should be removed.
-	greenskin_legendary_lords = {
-		wh_main_grn_grimgor_ironhide = true,
-		wh_dlc06_grn_skarsnik = true,
-		wh2_dlc15_grn_grom_the_paunch = true,
-		wh_main_grn_azhag_the_slaughterer = true,
-		wh_dlc06_grn_wurrzag_da_great_prophet = true,
-	},
-	confederate_dilemma_key = "wh2_main_grn_confederate_wh2_dlc15_grn_generic",
-	confederate_for_lls_dilemma_key = "wh2_main_grn_confederate_wh2_dlc15_grn_generic_no_execution",
-	confederation_dilemma_execution_option = 1,	-- (Zero-based) index of the option in the confederation dilemma that causes the enemy leader to die.
 	rewards = {
 		["humans"] = {
 			culture = {
@@ -146,7 +140,630 @@ waaagh = {
 	rs_waagh_triggered = "wh2_dlc15_resource_factor_waaagh_triggered",
 	rs_waagh_success = "wh2_dlc15_resource_factor_waaagh_success",
 	rs_waagh_other = "wh2_dlc15_resource_factor_waaagh_other",
-	rs_waagh_battle_other = "wh2_dlc15_resource_factor_waaagh_battle_other"
+	rs_waagh_battle_other = "wh2_dlc15_resource_factor_waaagh_battle_other",
+
+	waaagh_dilemma_setup = {
+
+		-- for all factions that don't have specific setup
+		basic_setup = {
+			dilemma_key = "wh3_dlc26_grn_successful_waaagh_dilemma",
+			tech_scripted_bonus_value = "dlc26_waaagh_dilemma_rewards_improvement",
+			base_setup = {
+				level_1 = {
+					-- option 1
+					[1] = {
+						[1] = {
+							payload_type = "resource",
+							key = "grn_salvage",
+							factor = "wh2_dlc15_resource_factor_waaagh_success",
+							amount = 300,
+						},
+						[2] = {
+							payload_type = "money",
+							amount = 4000
+						}
+					},
+					-- option 2
+					[2] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh_dlc06_grn_inf_squig_explosive_0",
+							amount = 3
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_cav_squig_hoppers_waaagh_0",
+							amount = 1
+						}
+					},
+					-- option 3
+					[3] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_cav_forest_goblin_spider_riders_waaagh_0",
+							amount = 2
+						}
+					},
+				},
+				level_2 = {
+					-- option 1
+					[1] = {
+						[1] = {
+							payload_type = "resource",
+							key = "grn_salvage",
+							factor = "wh2_dlc15_resource_factor_waaagh_success",
+							amount = 600,
+						},
+						[2] = {
+							payload_type = "money",
+							amount = 8000
+						}
+					},
+					-- option 2
+					[2] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh_dlc06_grn_inf_squig_explosive_0",
+							amount = 5
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_cav_squig_hoppers_waaagh_0",
+							amount = 2
+						}
+					},
+					-- option 3
+					[3] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_cav_forest_goblin_spider_riders_waaagh_0",
+							amount = 4
+						},
+					},
+					-- option 4
+					[4] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_mon_wyvern_waaagh_0",
+							amount = 1
+						},
+					},
+				},
+				level_3 = {
+					-- option 1
+					[1] = {
+						[1] = {
+							payload_type = "resource",
+							key = "grn_salvage",
+							factor = "wh2_dlc15_resource_factor_waaagh_success",
+							amount = 1000,
+						},
+						[2] = {
+							payload_type = "money",
+							amount = 16000
+						}
+					},
+					-- option 2
+					[2] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh_dlc06_grn_inf_squig_explosive_0",
+							amount = 7
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_cav_squig_hoppers_waaagh_0",
+							amount = 4
+						}
+					},
+					-- option 3
+					[3] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_cav_forest_goblin_spider_riders_waaagh_0",
+							amount = 5
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh_dlc15_grn_mon_arachnarok_spider_waaagh_0",
+							amount = 1
+						},
+					},
+					-- option 4
+					[4] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_mon_wyvern_waaagh_0",
+							amount = 2
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_mon_feral_hydra_waaagh_0",
+							amount = 1
+						},
+					},
+				},
+			},
+			tech_setup = {
+				level_1 = {
+					-- option 1
+					[1] = {
+						[1] = {
+							payload_type = "resource",
+							key = "grn_salvage",
+							factor = "wh2_dlc15_resource_factor_waaagh_success",
+							amount = 400,
+						},
+						[2] = {
+							payload_type = "money",
+							amount = 5000
+						}
+					},
+					-- option 2
+					[2] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh_dlc06_grn_inf_squig_explosive_0",
+							amount = 4
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_cav_squig_hoppers_waaagh_0",
+							amount = 2
+						}
+					},
+					-- option 3
+					[3] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_cav_forest_goblin_spider_riders_waaagh_0",
+							amount = 3
+						}
+					},
+					-- option 4
+					[4] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_mon_wyvern_waaagh_0",
+							amount = 1
+						},
+					},
+				},
+				level_2 = {
+					-- option 1
+					[1] = {
+						[1] = {
+							payload_type = "resource",
+							key = "grn_salvage",
+							factor = "wh2_dlc15_resource_factor_waaagh_success",
+							amount = 800,
+						},
+						[2] = {
+							payload_type = "money",
+							amount = 10000
+						}
+					},
+					-- option 2
+					[2] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh_dlc06_grn_inf_squig_explosive_0",
+							amount = 6
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_cav_squig_hoppers_waaagh_0",
+							amount = 4
+						}
+					},
+					-- option 3
+					[3] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_cav_forest_goblin_spider_riders_waaagh_0",
+							amount = 4
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh_dlc15_grn_mon_arachnarok_spider_waaagh_0",
+							amount = 1
+						},
+					},
+					-- option 4
+					[4] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_mon_wyvern_waaagh_0",
+							amount = 1
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_mon_feral_hydra_waaagh_0",
+							amount = 1
+						},
+					},
+				},
+				level_3 = {
+					-- option 1
+					[1] = {
+						[1] = {
+							payload_type = "resource",
+							key = "grn_salvage",
+							factor = "wh2_dlc15_resource_factor_waaagh_success",
+							amount = 1300,
+						},
+						[2] = {
+							payload_type = "money",
+							amount = 20000
+						}
+					},
+					-- option 2
+					[2] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh_dlc06_grn_inf_squig_explosive_0",
+							amount = 8
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_cav_squig_hoppers_waaagh_0",
+							amount = 6
+						}
+					},
+					-- option 3
+					[3] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_cav_forest_goblin_spider_riders_waaagh_0",
+							amount = 5
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh_dlc15_grn_mon_arachnarok_spider_waaagh_0",
+							amount = 2
+						},
+					},
+					-- option 4
+					[4] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_mon_wyvern_waaagh_0",
+							amount = 2
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_mon_feral_hydra_waaagh_0",
+							amount = 2
+						},
+					},
+				},
+			}
+		},
+
+		-- faction specific setup per faction_key
+		wh3_dlc26_grn_gorbad_ironclaw = {
+			dilemma_key = "wh3_dlc26_grn_successful_waaagh_dilemma",
+			tech_scripted_bonus_value = "dlc26_waaagh_dilemma_rewards_improvement",
+			base_setup = {
+				level_1 = {
+					-- option 1
+					[1] = {
+						[1] = {
+							payload_type = "resource",
+							key = "grn_salvage",
+							factor = "wh2_dlc15_resource_factor_waaagh_success",
+							amount = 400,
+						},
+						[2] = {
+							payload_type = "money",
+							amount = 5000
+						}
+					},
+					-- option 2
+					[2] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh_dlc06_grn_inf_squig_explosive_0",
+							amount = 4
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_cav_squig_hoppers_waaagh_0",
+							amount = 2
+						}
+					},
+					-- option 3
+					[3] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_cav_forest_goblin_spider_riders_waaagh_0",
+							amount = 3
+						}
+					},
+					-- option 4
+					[4] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_mon_wyvern_waaagh_0",
+							amount = 1
+						},
+					},
+				},
+				level_2 = {
+					-- option 1
+					[1] = {
+						[1] = {
+							payload_type = "resource",
+							key = "grn_salvage",
+							factor = "wh2_dlc15_resource_factor_waaagh_success",
+							amount = 800,
+						},
+						[2] = {
+							payload_type = "money",
+							amount = 10000
+						}
+					},
+					-- option 2
+					[2] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh_dlc06_grn_inf_squig_explosive_0",
+							amount = 6
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_cav_squig_hoppers_waaagh_0",
+							amount = 4
+						}
+					},
+					-- option 3
+					[3] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_cav_forest_goblin_spider_riders_waaagh_0",
+							amount = 4
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh_dlc15_grn_mon_arachnarok_spider_waaagh_0",
+							amount = 1
+						},
+					},
+					-- option 4
+					[4] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_mon_wyvern_waaagh_0",
+							amount = 1
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_mon_feral_hydra_waaagh_0",
+							amount = 1
+						},
+					},
+				},
+				level_3 = {
+					-- option 1
+					[1] = {
+						[1] = {
+							payload_type = "resource",
+							key = "grn_salvage",
+							factor = "wh2_dlc15_resource_factor_waaagh_success",
+							amount = 1300,
+						},
+						[2] = {
+							payload_type = "money",
+							amount = 20000
+						}
+					},
+					-- option 2
+					[2] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh_dlc06_grn_inf_squig_explosive_0",
+							amount = 8
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_cav_squig_hoppers_waaagh_0",
+							amount = 6
+						}
+					},
+					-- option 3
+					[3] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_cav_forest_goblin_spider_riders_waaagh_0",
+							amount = 5
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh_dlc15_grn_mon_arachnarok_spider_waaagh_0",
+							amount = 2
+						},
+					},
+					-- option 4
+					[4] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_mon_wyvern_waaagh_0",
+							amount = 2
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_mon_feral_hydra_waaagh_0",
+							amount = 2
+						},
+					},
+				},
+			},
+			tech_setup = {
+				level_1 = {
+					-- option 1
+					[1] = {
+						[1] = {
+							payload_type = "resource",
+							key = "grn_salvage",
+							factor = "wh2_dlc15_resource_factor_waaagh_success",
+							amount = 500,
+						},
+						[2] = {
+							payload_type = "money",
+							amount = 7000
+						}
+					},
+					-- option 2
+					[2] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh_dlc06_grn_inf_squig_explosive_0",
+							amount = 5
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_cav_squig_hoppers_waaagh_0",
+							amount = 4
+						}
+					},
+					-- option 3
+					[3] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_cav_forest_goblin_spider_riders_waaagh_0",
+							amount = 3
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh_dlc15_grn_mon_arachnarok_spider_waaagh_0",
+							amount = 1
+						},
+					},
+					-- option 4
+					[4] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_mon_wyvern_waaagh_0",
+							amount = 1
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_mon_feral_hydra_waaagh_0",
+							amount = 1
+						},
+					},
+				},
+				level_2 = {
+					-- option 1
+					[1] = {
+						[1] = {
+							payload_type = "resource",
+							key = "grn_salvage",
+							factor = "wh2_dlc15_resource_factor_waaagh_success",
+							amount = 1000,
+						},
+						[2] = {
+							payload_type = "money",
+							amount = 14000
+						}
+					},
+					-- option 2
+					[2] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh_dlc06_grn_inf_squig_explosive_0",
+							amount = 7
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_cav_squig_hoppers_waaagh_0",
+							amount = 6
+						}
+					},
+					-- option 3
+					[3] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_cav_forest_goblin_spider_riders_waaagh_0",
+							amount = 4
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh_dlc15_grn_mon_arachnarok_spider_waaagh_0",
+							amount = 2
+						},
+					},
+					-- option 4
+					[4] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_mon_wyvern_waaagh_0",
+							amount = 2
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_mon_feral_hydra_waaagh_0",
+							amount = 1
+						},
+					},
+				},
+				level_3 = {
+					-- option 1
+					[1] = {
+						[1] = {
+							payload_type = "resource",
+							key = "grn_salvage",
+							factor = "wh2_dlc15_resource_factor_waaagh_success",
+							amount = 1500,
+						},
+						[2] = {
+							payload_type = "money",
+							amount = 25000
+						}
+					},
+					-- option 2
+					[2] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh_dlc06_grn_inf_squig_explosive_0",
+							amount = 9
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_cav_squig_hoppers_waaagh_0",
+							amount = 8
+						}
+					},
+					-- option 3
+					[3] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_cav_forest_goblin_spider_riders_waaagh_0",
+							amount = 5
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh_dlc15_grn_mon_arachnarok_spider_waaagh_0",
+							amount = 3
+						},
+					},
+					-- option 4
+					[4] = {
+						[1] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_mon_wyvern_waaagh_0",
+							amount = 3
+						},
+						[2] = {
+							payload_type = "unit",
+							key = "wh2_dlc15_grn_mon_feral_hydra_waaagh_0",
+							amount = 2
+						},
+					},
+				},
+			}
+		},
+	}
 }
 
 function waaagh:add_waaagh_listeners()
@@ -215,7 +832,7 @@ function waaagh:add_waaagh_listeners()
 			return context:ritual():ritual_key() == self.ritual_key
 		end,
 		function(context)
-			faction = context:performing_faction()
+			local faction = context:performing_faction()
 			self.factions[faction:name()].active_waaagh = true
 			if faction:is_human() then
 				self:waaagh_started(context);
@@ -383,16 +1000,6 @@ function waaagh:add_waaagh_listeners()
 		true
 	);
 
-	cm:add_immortal_character_defeated_listener(
-		"GreenskinLordDefeatedConfederateEvent",
-		function(context)
-			-- Start checking if we need a Greenskin Confederate event if both attackers and defenders have greenskin armies involved.
-			return cm:pending_battle_cache_culture_is_attacker(self.greenskin_culture) and cm:pending_battle_cache_culture_is_defender(self.greenskin_culture);
-		end,
-		self.trigger_confederate_dilemma,
-		true
-	);
-
 	core:add_listener(
 		"Waaagh_ComponentLClickUp",
 		"ComponentLClickUp",
@@ -436,90 +1043,6 @@ function waaagh:add_waaagh_listeners()
 	);
 end
 
-function waaagh.trigger_confederate_dilemma(victorious_fm, defeated_fm)
-	local victorious_character = victorious_fm:character();
-	local defeated_character = defeated_fm:character();
-
-	if not victorious_character or victorious_character:is_null_interface() then
-		script_error("ERROR: Victorious character could not be obtained from victorious family member when trying to launch Greenskin confederation dilemma after a battle. "
-			.. "Is the victorious character dead? How did this happen if they won the battle?");
-		return;
-	end
-
-	if not defeated_character or defeated_character:is_null_interface() then
-		script_error("ERROR: Defeated character could not be obtained from Defeated family member when trying to launch Greenskin confederation dilemma after a battle. "
-			.. "This function should have been called after the defeated character respawned post-battle. Why hasn't this happened?");
-		return;
-	end
-	
-	local defeated_faction = defeated_character:faction();
-
-	if defeated_faction:is_human() or defeated_faction:subculture() ~= waaagh.greenskin_subculture or not defeated_character:is_faction_leader() then
-		return;
-	end
-
-	local victorious_faction = victorious_character:faction();
-
-	if victorious_faction:culture() == waaagh.greenskin_culture then
-		if victorious_faction:is_human() then
-			-- For Legendary Lords, we need to use the dilemma that doesn't have the 'execute enemy boss' option.
-			local confederate_dilemma_key = waaagh.confederate_dilemma_key;
-			if waaagh.greenskin_legendary_lords[defeated_character:character_subtype_key()] ~= nil then
-				confederate_dilemma_key = waaagh.confederate_for_lls_dilemma_key;
-			end
-
-			-- Trigger dilemma to offer confederation
-			cm:trigger_dilemma_with_targets(victorious_faction:command_queue_index(),
-				confederate_dilemma_key,
-				defeated_character:faction():command_queue_index(),
-				0,
-				defeated_character:command_queue_index(),
-				0,
-				0,
-				0,
-				function() waaagh:add_listener_for_confederation_dilemma(defeated_character:family_member():command_queue_index()) end);
-		else
-			-- AI confederation
-			cm:force_confederation(victorious_faction:name(), defeated_character:faction():name());
-			out.design("###### AI GREENSKIN CONFEDERATION");
-			out.design("Faction: ".. victorious_faction:name().." is confederating ".. defeated_character:faction():name());
-		end
-	end
-end
-
--- Check to see if the player chooses the execution option with the confederation dilemma, and if so kill the character off
-function waaagh:add_listener_for_confederation_dilemma(enemy_leader_family_member_key)
-	core:add_listener(
-		"Waaagh_DilemmaChoiceMadeEvent_Confederation_listener",
-		"DilemmaChoiceMadeEvent",
-		true,
-		function(context)
-			if context:dilemma() == self.confederate_dilemma_key and context:choice() == self.confederation_dilemma_execution_option then
-				-- Autosave on ironman.
-				if cm:model():manual_saves_disabled() and not cm:is_multiplayer() then
-					cm:callback(function() cm:autosave_at_next_opportunity() end, 0.5);
-				end;
-				
-				waaagh:greenskin_force_kill_leader(enemy_leader_family_member_key);
-			end;
-		end,
-		false
-	);
-end
-
-function waaagh:greenskin_force_kill_leader(enemy_leader_family_member_key)
-	local character_interface = cm:get_family_member_by_cqi(enemy_leader_family_member_key):character();
-	local character_cqi = character_interface:command_queue_index();
-
-	if self.greenskin_legendary_lords[character_interface:character_subtype_key()] then
-		script_error(string.format("ERROR: Attempt was made to force-kill one of the greenskin legendary lords ('%s'): this should not be possible through events, as legendary lords should trigger a confederation dilemma with no execution option. Aborting process.",
-			character_interface:character_subtype_key()));
-		return;
-	end
-	out("wh2_dlc15_waaagh script: Player has chosen execute option in dilemma. Target character: " .. character_interface:get_forename());
-	cm:set_character_immortality("character_cqi:"..character_cqi, false);
-	cm:kill_character(character_cqi, false);
-end
 
 --function to apply and remove the LL versions of the Big Waaagh! battle army abilities
 function waaagh:battle_big_waaagh_upgrade(faction, waaagh_turns)
@@ -563,16 +1086,7 @@ function waaagh:waaagh_started(context)
 		end
 	end
 
-	local reward_value = cm:model():world():faction_strength_rank(ritual_region_owner);
-	local reward_level = ""
-
-	if reward_value <= self.level_3_threshold then
-		reward_level = 3
-	elseif reward_value <= self.level_2_threshold then
-		reward_level = 2
-	else
-		reward_level = 1
-	end
+	local reward_level = waaagh:get_reward_level(ritual_region_owner)
 
 	-- Apply current preview reward
 	cm:apply_effect_bundle("wh2_main_faction_boost_reward_preview_level"..reward_level.."_"..reward_culture, faction_key, 0);
@@ -612,7 +1126,7 @@ function waaagh:waaagh_ended_human(context)
 
 	-- Switch active reward
 	if self.factions[faction_key].previous_reward_level then
-		cm:remove_effect_bundle("wh2_main_faction_boost_reward_"..self.factions[faction_key].previous_reward_level.."_"..self.factions[faction_key].previous_reward_culture, faction_key)
+		cm:remove_effect_bundle("wh2_main_faction_boost_reward_level"..self.factions[faction_key].previous_reward_level.."_"..self.factions[faction_key].previous_reward_culture, faction_key)
 	end
 
 	-- Set Waaagh to 0
@@ -629,17 +1143,22 @@ function waaagh:waaagh_ended_human(context)
 		end
 
 		-- trigger successful WAAAGH event
-		cm:trigger_incident(faction_key, "wh_main_incident_grn_waaagh_success", true)
+		--cm:trigger_incident(faction_key, "wh_main_incident_grn_waaagh_success", true)
 		core:trigger_event("PlayerWaghEndedSuccessful", faction);
 
 		out.design("#### Waaagh ended! Reward for culture: "..reward_culture.."! Level: "..reward_level)
 
 		-- Award waaagh and additional unit for successful WAAAGH!
 		self:modify_pooled_resource(faction_key, self.rs_waagh_success, self.successful_waaagh_boost*reward_level)
+		--[[ 
 		out.design("### Adding Waaagh units to mercenary pool")
 		for i = 1, #self.units["level_"..reward_level] do
 			cm:add_units_to_faction_mercenary_pool(faction:command_queue_index(), self.units["level_"..reward_level][i], 1);
 		end
+		]]
+		out.design("### Triggering Waaagh Dilemma")
+		self:waaagh_dilemma(faction, reward_level)
+
 		self.factions[faction_key].success = false;
 	else
 		-- trigger fail WAAAGH event
@@ -654,6 +1173,82 @@ function waaagh:waaagh_ended_human(context)
 	cm:remove_scripted_composite_scene(comp_scene);
 
 	self.factions[faction_key].ritual_region_key = nil;
+end
+
+function waaagh:waaagh_dilemma(faction, reward_level)
+	local faction_key = faction:name()
+	local general_dilemma_data = self.waaagh_dilemma_setup[faction_key] or self.waaagh_dilemma_setup.basic_setup
+	local dilemma_data = nil
+
+	if cm:get_factions_bonus_value(faction, general_dilemma_data.tech_scripted_bonus_value) > 0 then
+		dilemma_data = general_dilemma_data.tech_setup["level_"..reward_level]
+	else
+		dilemma_data = general_dilemma_data.base_setup["level_"..reward_level]
+	end
+
+	if not dilemma_data then
+		script_error("waaagh:waaagh_dilemma() doesn't have dilemma data for faction " .. faction_key .. " for level " .. reward_level)
+		return 
+	end
+
+	local dilemma_builder = cm:create_dilemma_builder(general_dilemma_data.dilemma_key);
+	local payload_builder = cm:create_payload();
+
+	local int_to_option = {
+		[1] = "FIRST",
+		[2] = "SECOND",
+		[3] = "THIRD",
+		[4] = "FOURTH"
+	}
+
+	for i, data in ipairs(dilemma_data) do
+		for j, payload in ipairs(data) do
+			if payload.payload_type == "resource" then
+				payload_builder:faction_pooled_resource_transaction(payload.key, payload.factor, payload.amount, false)
+			elseif payload.payload_type == "money" then
+				payload_builder:treasury_adjustment(payload.amount)
+			elseif payload.payload_type == "unit" then
+				payload_builder:add_mercenary_to_faction_pool(payload.key, payload.amount)
+			end
+		end
+		dilemma_builder:add_choice_payload(int_to_option[i], payload_builder)
+		payload_builder:clear()
+	end
+
+	out.design("Triggering dilemma:"..general_dilemma_data.dilemma_key)
+	cm:launch_custom_dilemma_from_builder(dilemma_builder, faction);
+end
+
+function waaagh:waaagh_success_ai(faction)
+	local faction_key = faction:name()
+	local faction_cqi = faction:command_queue_index()
+	local reward_level = self.factions[faction_key].reward_level
+
+	local general_dilemma_data = self.waaagh_dilemma_setup[faction_key] or self.waaagh_dilemma_setup.basic_setup
+	local dilemma_data = nil
+
+	if cm:get_factions_bonus_value(faction, general_dilemma_data.tech_scripted_bonus_value) > 0 then
+		dilemma_data = general_dilemma_data.tech_setup["level_"..reward_level]
+	else
+		dilemma_data = general_dilemma_data.base_setup["level_"..reward_level]
+	end
+
+	if not dilemma_data then
+		script_error("waaagh:waaagh_dilemma() doesn't have dilemma data for faction " .. faction_key .. " for level " .. reward_level)
+		return 
+	end
+
+	local rand = cm:random_number(#dilemma_data, 1)
+
+	for i, payload in ipairs(dilemma_data[rand]) do
+		if payload.payload_type == "resource" then
+			cm:faction_add_pooled_resource(faction_key, payload.key, payload.factor, payload.amount)
+		elseif payload.payload_type == "money" then
+			cm:treasury_mod(faction_key, payload.amount)
+		elseif payload.payload_type == "unit" then
+			cm:add_units_to_faction_mercenary_pool(faction_cqi, payload.key, payload.amount)
+		end
+	end
 end
 
 function waaagh:faction_turn_start_human(faction, faction_key)
@@ -761,6 +1356,8 @@ function waaagh:waaagh_started_ai(faction)
 			target_pos_y = home_region:settlement():logical_position_y();
 			out.design("####### AI Waaagh target faction is: ".. target_faction_key.." and target region is "..home_region:name())
 			ritual_target:set_target_region(home_region);
+			local reward_level = waaagh:get_reward_level(ritual_target:get_target_region():owning_faction())
+			self.factions[faction:name()].reward_level = reward_level
 		else
 			-- We don't have any valid targets. Print this to the console, but don't fire an error - this is expected in rare circumstances.
 			out.design("####### AI faction: "..faction:name().." wants to start a Waaagh, but there are no valid targets.")
@@ -816,6 +1413,7 @@ function waaagh:waaagh_ended_ai(context)
 	if region:is_abandoned() or region:owning_faction():name() == faction_key then
 		self:modify_pooled_resource(faction_key, self.rs_waagh_success, 50)
 		incident_key = "wh_main_incident_grn_waaagh_ai_success"
+		self:waaagh_success_ai(performing_faction)
 	end
 
 	for _, current_faction_met in model_pairs(performing_faction:factions_met()) do
@@ -919,6 +1517,19 @@ end
 
 function waaagh:modify_pooled_resource(faction, factor, amount)
 	cm:faction_add_pooled_resource(faction, self.pooled_resource, factor, amount);
+end
+
+function waaagh:get_reward_level (ritual_region_owner)
+	local reward_value = cm:model():world():faction_strength_rank(ritual_region_owner);
+	local reward_level = 1
+
+	if reward_value <= self.level_3_threshold then
+		reward_level = 3
+	elseif reward_value <= self.level_2_threshold then
+		reward_level = 2
+	end
+
+	return reward_level
 end
 
 function waaagh:print_battle(faction, waaagh_amount, aval, dval, bonus_mult, kill_ratio)

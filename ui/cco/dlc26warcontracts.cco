@@ -1,0 +1,35 @@
+WarContracts
+{
+    GetFactionSetSuffixForClient(CcoFactionRecord faction)
+    {
+       GetIfElse(CcoFactionSetRecord("faction_set_menace").ContainsFaction(faction),
+        "_civil_menace", 
+        GetIfElse(CcoFactionSetRecord("faction_set_civil").ContainsFaction(faction), 
+            "_civil",
+            GetIf(CcoFactionSetRecord("faction_set_destructive").ContainsFaction(faction), "_destructive")
+            )
+        ) 
+    }
+
+    TeleportTooltipInactive()
+	{
+		Loc("wh3_dlc26_war_contracts_teleport_tooltip") + "{{tr:new_paragraph}}" +  Loc("wh3_dlc26_war_contracts_teleport_tooltip_locked")
+	}
+
+    TeleportTooltip(CcoCampaignRitual ritual, CcoCampaignCharacter performing_character)
+	{
+		Loc("wh3_dlc26_war_contracts_teleport_tooltip")
+		+ GetIf(performing_character.MilitaryForceContext.IsLayingSiege || performing_character.SettlementContext.IsUnderSiege, "{{tr:new_paragraph}}" + Loc("teleport_ritual_unable_reason_siege"))
+        + GetIf(ritual.IsScriptLocked && performing_character.FactionContext.FactionWarContracts.ActiveContract, "{{tr:new_paragraph}}" + Loc("wh3_dlc26_war_contracts_teleport_tooltip_cooldown"))
+        + GetIf(ritual.RitualInteractionContext.IsTargettingActive, "{{tr:new_paragraph}}" + Loc("wh3_dlc26_war_contracts_teleport_tooltip_exit"))
+		+ GetIf(ritual.CanPerformRitualWithAnyValidTarget(performing_character) == false, "{{tr:new_paragraph}}" + ritual.InvalidReasonForRitualWithAnyValidTarget(performing_character))
+	}
+
+    IsTeleportLocked(CcoCampaignRitual ritual, CcoCampaignCharacter performing_character)
+    {
+        performing_character.FactionContext.FactionWarContracts.ActiveContract == false || 
+        ritual.CanPerformRitualWithAnyValidTarget(performing_character) == false ||
+        performing_character.MilitaryForceContext.IsLayingSiege || 
+        performing_character.SettlementContext.IsUnderSiege
+    }
+}

@@ -82,7 +82,9 @@ regiments_of_renown = {
 		"wh_dlc06_grn_mon_venom_queen_0",
 		"wh2_dlc15_grn_mon_river_trolls_ror_0",
 		"wh2_dlc15_grn_mon_rogue_idol_ror_0",
-		"wh2_dlc15_grn_veh_snotling_pump_wagon_ror_0"
+		"wh2_dlc15_grn_veh_snotling_pump_wagon_ror_0",
+		"wh3_dlc26_grn_art_bolt_throwa_ror",
+		"wh3_dlc26_grn_mon_colossal_squig_ror"
 	},
 	-------------------
 	---- BRETONNIA ----
@@ -238,7 +240,10 @@ regiments_of_renown = {
 		"wh3_twa06_ogr_inf_maneaters_ror_0",
 		"wh3_twa07_ogr_cav_crushers_ror_0",
 		"wh3_twa08_ogr_mon_stonehorn_0_ror",
-		"wh3_twa10_ogr_inf_gnoblars_ror"
+		"wh3_twa10_ogr_inf_gnoblars_ror",
+		"wh3_dlc26_ogr_inf_eshin_maneater_ror",
+		"wh3_dlc26_ogr_inf_pigback_riders_ror",
+		"wh3_dlc26_ogr_mon_yhetees_ror"
 	},
 	------------------
 	---- SLAANESH ----
@@ -275,7 +280,10 @@ regiments_of_renown = {
 		"wh3_dlc20_kho_cav_skullcrushers_mkho_ror",
 		"wh3_twa08_kho_mon_bloodthirster_0_ror",
 		"wh3_twa10_kho_inf_flesh_hounds_of_khorne_ror",
-		"wh2_dlc17_kho_mon_ghorgon_ror_0"
+		"wh2_dlc17_kho_mon_ghorgon_ror_0",
+		"wh3_dlc26_chs_inf_chosen_mkho_ror",
+		"wh3_dlc26_kho_inf_wrathmongers_ror",
+		"wh3_dlc26_kho_veh_skullcannon_ror"
 	},	
 	------------------
 	----  KISLEV  ----
@@ -360,7 +368,10 @@ regiments_of_renown = {
 		"wh3_twa08_tze_mon_lord_of_change_0_ror",
 		"wh3_twa10_kho_inf_flesh_hounds_of_khorne_ror",
 		"wh3_twa10_nur_inf_nurglings_ror",
-		"wh3_twa10_tze_inf_blue_horrors_ror"
+		"wh3_twa10_tze_inf_blue_horrors_ror",
+		"wh3_dlc26_chs_inf_chosen_mkho_ror",
+		"wh3_dlc26_kho_inf_wrathmongers_ror",
+		"wh3_dlc26_kho_veh_skullcannon_ror"
 	}
 };
 

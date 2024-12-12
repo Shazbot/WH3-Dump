@@ -170,6 +170,8 @@ function start_game_all_factions()
 	emp_techs:initialise()
 	add_tech_tree_lords_listeners()
 	ancillary_item_forge:initialise()
+	subjugation:initialise()
+	unholy_manifestations:initialise()
 
 	-- Chaos Dwarfs
 	chaos_dwarf_labour_loss:labour_loss()
@@ -194,6 +196,10 @@ function start_game_all_factions()
 	empire_state_troops:initialise()
 	imperial_authority:initialise()
 	gardens_of_morr:initialise()
+
+	-- dlc26
+	ogre_camps:initialise()
+	tyrants_demands:initialise()
 
 	-- General
 	character_unlocking:setup_legendary_hero_unlocking();

@@ -56,7 +56,7 @@ local function khorne_skulls_narrative_loader(faction_key)
 			function(context)
 				if context:performing_faction():name() == faction_key then
 					local ritual_key = context:ritual():ritual_key();
-					return ritual_key == "wh3_main_ritual_kho_the_skull_throne";
+					return ritual_key:starts_with("wh3_dlc26_ritual_kho_the_skull_throne");
 				end
 			end,
 			function()
@@ -213,8 +213,8 @@ local function khorne_skulls_narrative_loader(faction_key)
 				narrative.get(faction_key, name .. "_mission_key") or "wh3_main_camp_narrative_khorne_skull_throne_01",											-- key of mission to deliver
 				narrative.get(faction_key, name .. "_mission_text") or "wh3_main_narrative_mission_description_send_skulls_to_skull_throne",					-- key of mission objective
 				narrative.get(faction_key, name .. "_total") or 1,																								-- total rituals to perform
-				narrative.get(faction_key, name .. "_ritual_keys") or "wh3_main_ritual_kho_the_skull_throne",													-- ritual key(s)						
-				narrative.get(faction_key, name .. "_ritual_category_keys"),																					-- ritual category key(s)
+				narrative.get(faction_key, name .. "_ritual_keys"),																								-- ritual key(s)						
+				narrative.get(faction_key, name .. "_ritual_category_keys") or "SKULLS_RITUAL",																	-- ritual category key(s)
 				narrative.get(faction_key, name .. "_target_faction_keys"),																						-- target faction key(s)
 				narrative.get(faction_key, name .. "_listen_for_ritual_completed"),																				-- listen for ritual completing rather than starting
 				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
@@ -899,7 +899,7 @@ local function khorne_win_streaks_narrative_loader(faction_key)
 				narrative.get(faction_key, name .. "_listen_for_ritual_completed") or false,																	-- listen for ritual completing rather than starting
 				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
 				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
-					payload.money_direct(500, faction_key)
+					payload.money_direct(500)
 				},
 				narrative.get(faction_key, name .. "_trigger_messages") or "StartKhorneWinStreakEternalWarMission",												-- script message(s) on which to trigger when received
 				narrative.get(faction_key, name .. "_on_issued_messages"),																						-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
@@ -1006,7 +1006,7 @@ local function khorne_win_streaks_narrative_loader(faction_key)
 					{
 						event = "BattleCompletedCameraMove",
 						condition =	function(context)
-							return check_win_streaks_of_faction(faction_key, 3);
+							return check_win_streaks_of_faction(faction_key, 8);
 						end
 					}
 				},

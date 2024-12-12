@@ -299,7 +299,24 @@ custom_starts.start_data.me_custom_start_factions = {
 		changes = {
 			{"teleport_character_faction_leader", "wh3_main_dae_daemon_prince", 726, 901}
 		}
-	}
+	},
+	-----------------------
+	------   WURRZAG  ------
+	-----------------------
+	-- In any game where Tiktaq'to is AI and Wurrzag is human
+	{
+		if_human = "wh_main_grn_orcs_of_the_bloody_hand",
+		if_ai = "wh2_main_lzd_tlaqua",
+		changes = {
+			{"teleport_character_faction_leader", "wh2_dlc12_grn_leaf_cutterz_tribe", 615, 181},
+			{"region_change", "wh3_main_combi_region_statues_of_the_gods", "wh2_main_lzd_tlaqua"},
+			{"primary_slot_change", "wh3_main_combi_region_statues_of_the_gods", "wh2_main_lzd_settlement_minor_1"},
+			{"region_change", "wh3_main_combi_region_deaths_head_monoliths", "wh2_main_lzd_tlaqua"},
+			{"primary_slot_change", "wh3_main_combi_region_deaths_head_monoliths", "wh2_main_lzd_settlement_minor_2"},
+			{"port_slot_change", "wh3_main_combi_region_deaths_head_monoliths", 0, "wh2_main_lzd_port_1"},
+			{"secondary_slot_change", "wh3_main_combi_region_deaths_head_monoliths", 0, "wh2_main_lzd_skinks_1"},
+		}
+	},
 }
 
 function custom_starts:add_campaign_custom_start_listeners()

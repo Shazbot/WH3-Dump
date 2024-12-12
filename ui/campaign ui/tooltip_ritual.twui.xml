@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="PlayersFaction.CanPerformRituals">
 	<hierarchy>
@@ -13,6 +13,11 @@
 						<dy_cost_image this="D17B9C03-418B-45A3-BFF484C54E625659"/>
 						<dy_cost this="12F8C51C-4496-4208-A8320C002952947F"/>
 					</treasury_cost>
+					<unlock_requirement_cost_list this="630A98F5-9A24-4EDE-97AA221DF4033E0A">
+						<template_cost this="C5AB8E4D-D975-4284-B1E4E3280F9684BB">
+							<dy_resource_name this="90ED2F67-0F9D-4CDD-89254F051D322C71"/>
+						</template_cost>
+					</unlock_requirement_cost_list>
 					<resource_cost_list this="3B6213FC-6E0A-42EA-AABB9E1674301681">
 						<template_cost this="D1B22BC6-A15B-48FB-88AC1C50AC8A0542">
 							<dy_resource_name this="E914B15A-C71B-4A68-9B92500C9292A90D"/>
@@ -32,6 +37,7 @@
 					<dy_script_lock_cooldown this="9833B21F-DD31-41E1-B4B29993E68BCBB8"/>
 					<dy_cooldown this="25CA2571-61A8-4268-981EE2390F4B0CF8"/>
 					<dy_cooldown_on_activation this="5047969C-1297-4E63-8532970652FA60D7"/>
+					<dy_global_cooldown_on_activation this="CEC93A80-D870-4648-AF12B12A53FCECAE"/>
 					<dy_cooldown_target_settlement this="304C40A5-10BD-4690-8C2100FECD9677FA"/>
 					<label_script_lock this="4AABB66C-3FE7-4761-8FC41559EAB547B3"/>
 					<label_seat_usurped this="7BEFC72E-AEC5-44FC-B03FDCDD285949EC"/>
@@ -81,6 +87,7 @@
 							<unit_card this="F105AD7D-D6CA-4C7E-B6521314FD2E6CDC"/>
 						</template_unit>
 					</unit_holder>
+					<blood_ex_nihilo_restriction this="080DAB0F-64F1-4E8B-9BF59AF12FE2088F"/>
 					<dy_spirit_essence_requirement this="A4AEA048-18BB-4BBF-A0D3EE8BE2864F29"/>
 					<stick_progress_bar this="8B1654FD-5189-44CE-9247B83623A95A48">
 						<bar_extents_and_pos this="E13BBBD9-7F16-4509-83EC626A029C85CD">
@@ -302,7 +309,7 @@
 		<dy_desc
 			this="0F83601D-0385-4906-9E5EF4D4D19DB17F"
 			id="dy_desc"
-			offset="0.00,583.00"
+			offset="0.00,641.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -366,7 +373,7 @@
 					this="56606790-7623-46ED-A1F085F0E9E2B15D"
 					name="NewState"
 					width="386"
-					height="883"
+					height="1011"
 					uniqueguid="56606790-7623-46ED-A1F085F0E9E2B15D">
 					<imagemetrics>
 						<image
@@ -374,7 +381,7 @@
 							uniqueguid="3655AFCC-A410-4480-B010FD3DDC8E676F"
 							componentimage="201E1334-8C23-417D-896543D910C578FC"
 							width="386"
-							height="883"
+							height="1011"
 							tile="true"
 							margin="16.00,20.00,16.00,20.00"/>
 					</imagemetrics>
@@ -464,7 +471,7 @@
 		<resource_cost_list
 			this="3B6213FC-6E0A-42EA-AABB9E1674301681"
 			id="resource_cost_list"
-			offset="0.00,66.00"
+			offset="0.00,96.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -696,7 +703,6 @@
 			</states>
 			<LayoutEngine
 				type="List"
-				spacing="0.00,8.00"
 				sizetocontent="true"
 				margins="8.00,8.00">
 				<columnwidths>
@@ -783,11 +789,11 @@
 							this="697EE3F3-39B5-494D-AD743028570D0916"
 							uniqueguid="697EE3F3-39B5-494D-AD743028570D0916"
 							componentimage="A7ACC658-8201-4ED3-8674E079E60DB7C3"
-							offset="12.00,-4.00"
+							offset="12.00,0.00"
 							width="24"
 							height="24"
 							dockpoint="Top Left"
-							dock_offset="12.00,-4.00"
+							dock_offset="12.00,0.00"
 							canresizeheight="false"
 							canresizewidth="false"/>
 					</imagemetrics>
@@ -865,7 +871,7 @@
 		<dy_turns_remaining
 			this="5759A40C-950C-4AC6-85F2EF1F69944F29"
 			id="dy_turns_remaining"
-			offset="0.00,611.00"
+			offset="0.00,669.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -910,7 +916,7 @@
 		<label_script_lock
 			this="4AABB66C-3FE7-4761-8FC41559EAB547B3"
 			id="label_script_lock"
-			offset="0.00,264.00"
+			offset="0.00,322.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -954,7 +960,7 @@
 		<effect_list
 			this="7CA7E1D7-7C6B-427C-BA9EA3DBE29BF202"
 			id="effect_list"
-			offset="0.00,357.00"
+			offset="0.00,98.00"
 			allowhorizontalresize="false"
 			visible="false"
 			priority="255"
@@ -994,7 +1000,6 @@
 			</states>
 			<LayoutEngine
 				type="List"
-				spacing="0.00,8.00"
 				sizetocontent="true"
 				margins="8.00,8.00">
 				<columnwidths>
@@ -1045,11 +1050,11 @@
 							this="E4A48917-CAEC-468A-9F96F55999060A77"
 							uniqueguid="E4A48917-CAEC-468A-9F96F55999060A77"
 							componentimage="706DA49B-5540-4085-B699FDE46AD308E4"
-							offset="12.00,-4.00"
+							offset="12.00,0.00"
 							width="24"
 							height="24"
 							dockpoint="Top Left"
-							dock_offset="12.00,-4.00"
+							dock_offset="12.00,0.00"
 							canresizeheight="false"
 							canresizewidth="false"/>
 					</imagemetrics>
@@ -1166,7 +1171,7 @@
 		<positive_resource_cost_list
 			this="B9DEA772-1DF9-460A-B57EEBCF1D694061"
 			id="positive_resource_cost_list"
-			offset="0.00,435.00"
+			offset="0.00,24.00"
 			visible="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -1178,7 +1183,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoCampaignRitual"
-					context_function_id="ResourceTransactionContext(StoredContextFromParent(&quot;CcoCampaignFaction&quot;)).PooledResourceTransactionList.Filter(Value &gt; 0)">
+					context_function_id="ResourceTransactionContext(StoredContextFromParent(&quot;CcoCampaignFaction&quot;)).PooledResourceTransactionList.Filter(Value &gt; 0 &amp;&amp; Icon != &quot;ui/skins/default/&quot; &amp;&amp; PlayersFaction.PooledResourceContext(ResourceKey).SortOrder &gt;= 0)">
 					<child_m_user_properties>
 						<property
 							name="refresh_when_same"
@@ -1188,14 +1193,14 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignRitual"
-					context_function_id="IsActive == false &amp;&amp; ResourceTransactionContext(StoredContextFromParent(&quot;CcoCampaignFaction&quot;)).PooledResourceTransactionList.Filter(Value &gt; 0).Size &gt; 0"/>
+					context_function_id="IsActive == false"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
 					this="8315F53F-12E0-4FA4-AD8CB06AB4E0D9A0"
 					name="NewState"
-					width="386"
-					height="24"
+					width="127"
+					height="26"
 					interactive="true"
 					uniqueguid="8315F53F-12E0-4FA4-AD8CB06AB4E0D9A0">
 					<component_text
@@ -1207,7 +1212,9 @@
 						fontcat_name="body_12"/>
 				</newstate>
 			</states>
-			<LayoutEngine type="List">
+			<LayoutEngine
+				type="List"
+				sizetocontent="true">
 				<columnwidths>
 					<column width="386"/>
 				</columnwidths>
@@ -1500,7 +1507,7 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoCampaignRitual"
-					context_function_id="GetIf(RitualContext.CompletionPayloadContext.EffectBundleAndDurationPairList.IsEmpty == false, Format ( Loc(&quot;ritual_duration&quot;), RitualContext.CompletionPayloadContext.EffectBundleAndDurationPairList.FirstContext.Second))"/>
+					context_function_id="GetIf(RitualContext.CompletionPayloadContext.EffectBundleAndDurationPairList.IsEmpty == false, Format ( GetIfElse(RitualContext.CompletionPayloadContext.EffectBundleAndDurationPairList.FirstContext.Second == 1, Loc(&quot;ritual_duration_single&quot;), Loc(&quot;ritual_duration&quot;)), RitualContext.CompletionPayloadContext.EffectBundleAndDurationPairList.FirstContext.Second))"/>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignRitual"
@@ -1521,12 +1528,10 @@
 						textyoffset="4.00,0.00"
 						texthbehaviour="Resize"
 						textlabel="dy_effects_duration_NewState_Text_589e1b3a"
-						font_m_font_name="georgia_italic"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="body_12_italic"
-						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</dy_effects_duration>
@@ -1575,7 +1580,7 @@
 		<completion_payload_positive_resource_cost_list
 			this="F3BC2796-6372-40F1-93B374897BC7182A"
 			id="completion_payload_positive_resource_cost_list"
-			offset="0.00,329.00"
+			offset="0.00,74.00"
 			visible="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -1755,9 +1760,8 @@
 		<completion_payload_effect_bundle_list
 			this="94C959C5-4A7F-4AD4-987FE9915A2CBD09"
 			id="completion_payload_effect_bundle_list"
-			offset="0.00,64.00"
+			offset="0.00,74.00"
 			allowhorizontalresize="false"
-			visible="false"
 			priority="255"
 			tooltipslocalised="true"
 			uniqueguid="94C959C5-4A7F-4AD4-987FE9915A2CBD09"
@@ -1779,7 +1783,7 @@
 					this="0CC3840B-40EC-4732-B98E1A6E0CC8F8B9"
 					name="NewState"
 					width="386"
-					height="50"
+					height="42"
 					interactive="true"
 					uniqueguid="0CC3840B-40EC-4732-B98E1A6E0CC8F8B9">
 					<component_text
@@ -1795,8 +1799,7 @@
 			<LayoutEngine
 				type="List"
 				spacing="0.00,8.00"
-				sizetocontent="true"
-				margins="0.00,8.00">
+				sizetocontent="true">
 				<columnwidths>
 					<column width="310"/>
 				</columnwidths>
@@ -1839,7 +1842,6 @@
 			</states>
 			<LayoutEngine
 				type="List"
-				spacing="0.00,8.00"
 				sizetocontent="true"
 				margins="8.00,8.00">
 				<columnwidths>
@@ -1890,11 +1892,11 @@
 							this="F6B810BA-3358-44B6-9C1B06734360F906"
 							uniqueguid="F6B810BA-3358-44B6-9C1B06734360F906"
 							componentimage="F3535719-C0C5-4AE8-A2175DCBC1C17C06"
-							offset="12.00,-4.00"
+							offset="12.00,0.00"
 							width="24"
 							height="24"
 							dockpoint="Top Left"
-							dock_offset="12.00,-4.00"
+							dock_offset="12.00,0.00"
 							canresizeheight="false"
 							canresizewidth="false"/>
 					</imagemetrics>
@@ -1958,7 +1960,7 @@
 		<dy_cast_time
 			this="77472F33-7946-44AD-A6E6C3CA510B0BD6"
 			id="dy_cast_time"
-			offset="0.00,639.00"
+			offset="0.00,697.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2003,7 +2005,7 @@
 		<dy_completion_effects_duration
 			this="A42F02B4-28C0-43A8-BB2F4FC24F62F625"
 			id="dy_completion_effects_duration"
-			offset="0.00,74.00"
+			offset="0.00,116.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2015,7 +2017,7 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoCampaignRitual"
-					context_function_id="Format ( Loc(&quot;ritual_duration&quot;), RitualContext.CompletionPayloadContext.EffectBundleAndDurationPairList.FirstContext.Second)"/>
+					context_function_id="Format ( GetIfElse(RitualContext.CompletionPayloadContext.EffectBundleAndDurationPairList.FirstContext.Second == 1, Loc(&quot;ritual_duration_single&quot;), Loc(&quot;ritual_duration&quot;)), RitualContext.CompletionPayloadContext.EffectBundleAndDurationPairList.FirstContext.Second)"/>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignRitual"
@@ -2036,19 +2038,17 @@
 						textyoffset="4.00,0.00"
 						texthbehaviour="Resize"
 						textlabel="dy_effects_duration_NewState_Text_589e1b3a"
-						font_m_font_name="georgia_italic"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="body_12_italic"
-						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
 		</dy_completion_effects_duration>
 		<dy_cooldown
 			this="25CA2571-61A8-4268-981EE2390F4B0CF8"
 			id="dy_cooldown"
-			offset="0.00,180.00"
+			offset="0.00,210.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2092,7 +2092,7 @@
 		<dy_cooldown_target_settlement
 			this="304C40A5-10BD-4690-8C2100FECD9677FA"
 			id="dy_cooldown_target_settlement"
-			offset="0.00,236.00"
+			offset="0.00,294.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2136,7 +2136,7 @@
 		<dy_cooldown_on_activation
 			this="5047969C-1297-4E63-8532970652FA60D7"
 			id="dy_cooldown_on_activation"
-			offset="0.00,208.00"
+			offset="0.00,238.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2187,7 +2187,7 @@
 		<dy_target_invalid_text
 			this="F0B5136E-97B3-4750-82FFF1F9411CBDF2"
 			id="dy_target_invalid_text"
-			offset="0.00,555.00"
+			offset="0.00,613.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2233,7 +2233,7 @@
 		<effects_holder
 			this="B35E7E66-2600-466B-9550DA9FD49B99E8"
 			id="effects_holder"
-			offset="0.00,667.00"
+			offset="0.00,725.00"
 			priority="255"
 			tooltipslocalised="true"
 			uniqueguid="B35E7E66-2600-466B-9550DA9FD49B99E8"
@@ -2250,7 +2250,7 @@
 					this="D359A53C-CA8E-49A9-B50B2B89E56B41A3"
 					name="default"
 					width="386"
-					height="98"
+					height="140"
 					uniqueguid="D359A53C-CA8E-49A9-B50B2B89E56B41A3"/>
 			</states>
 			<LayoutEngine
@@ -2295,7 +2295,7 @@
 					this="CFDC406A-C9F6-42A8-A26C5C07A9D91A86"
 					name="NewState"
 					width="386"
-					height="891"
+					height="1019"
 					uniqueguid="CFDC406A-C9F6-42A8-A26C5C07A9D91A86">
 					<component_text
 						textxoffset="8.00,0.00"
@@ -2465,7 +2465,7 @@
 		<unit_holder
 			this="28A2E511-8367-4B93-A2A1C63086C00419"
 			id="unit_holder"
-			offset="0.00,769.00"
+			offset="0.00,869.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2515,7 +2515,7 @@
 		<cannot_confederate_human
 			this="E7E902FE-A193-454A-B9EA759A0B123E14"
 			id="cannot_confederate_human"
-			offset="0.00,348.00"
+			offset="0.00,406.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2556,7 +2556,7 @@
 		<cannot_confederate_already_confed
 			this="C0AA5198-A5FB-439A-98F456126A9E4F8A"
 			id="cannot_confederate_already_confed"
-			offset="0.00,395.00"
+			offset="0.00,453.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2579,7 +2579,7 @@
 					interactive="true"
 					uniqueguid="B4346A8A-6393-4ED5-AF1122A328749A30">
 					<component_text
-						text="Cannot confederate. This faction was already confederated by another player"
+						text="Cannot confederate – This faction was already confederated by another player."
 						textvalign="Center"
 						textxoffset="12.00,12.00"
 						textyoffset="4.00,0.00"
@@ -2597,7 +2597,7 @@
 		<label_claimed_seat
 			this="2C1C1B97-5E1A-4DF2-BC0197E28F4353E0"
 			id="label_claimed_seat"
-			offset="0.00,320.00"
+			offset="0.00,378.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2640,7 +2640,7 @@
 		<dy_script_lock_cooldown
 			this="9833B21F-DD31-41E1-B4B29993E68BCBB8"
 			id="dy_script_lock_cooldown"
-			offset="0.00,152.00"
+			offset="0.00,182.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2763,7 +2763,7 @@
 		<label_seat_usurped
 			this="7BEFC72E-AEC5-44FC-B03FDCDD285949EC"
 			id="label_seat_usurped"
-			offset="0.00,292.00"
+			offset="0.00,350.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2982,7 +2982,7 @@
 		<payload_base_resource_cost_list
 			this="95F2AA02-727A-47AB-968B3CF3F51A9753"
 			id="payload_base_resource_cost_list"
-			offset="0.00,122.00"
+			offset="0.00,152.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -3054,7 +3054,7 @@
 		<cannot_confederate_dead_faction
 			this="0E56F210-FA4B-48A7-B895121E249B7657"
 			id="cannot_confederate_dead_faction"
-			offset="0.00,442.00"
+			offset="0.00,500.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -3095,7 +3095,7 @@
 		<confederate_faction_dead_only_lord
 			this="2E623CBC-83A9-4E00-9FB5ED4BBE22FEFE"
 			id="confederate_faction_dead_only_lord"
-			offset="0.00,489.00"
+			offset="0.00,547.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -3135,7 +3135,7 @@
 		<dy_spirit_essence_requirement
 			this="A4AEA048-18BB-4BBF-A0D3EE8BE2864F29"
 			id="dy_spirit_essence_requirement"
-			offset="0.00,855.00"
+			offset="0.00,983.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -3176,5 +3176,301 @@
 				</newstate>
 			</states>
 		</dy_spirit_essence_requirement>
+		<dy_global_cooldown_on_activation
+			this="CEC93A80-D870-4648-AF12B12A53FCECAE"
+			id="dy_global_cooldown_on_activation"
+			offset="0.00,266.00"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="CEC93A80-D870-4648-AF12B12A53FCECAE"
+			updatewhennotvisible="true"
+			currentstate="03380769-F34E-46A5-A00EBC7E3B137B28"
+			defaultstate="03380769-F34E-46A5-A00EBC7E3B137B28">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignRitual"
+					context_function_id="Format (Loc(&quot;ritual_global_cooldown_on_activation&quot;),  RitualContext.GlobalCooldownTime)">
+					<child_m_user_properties>
+						<property
+							name="suppress_localise_asserts"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignRitual"
+					context_function_id="RemainingCooldown == 0 &amp;&amp; RitualContext.GlobalCooldownTime &gt; 0"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="03380769-F34E-46A5-A00EBC7E3B137B28"
+					name="NewState"
+					width="386"
+					height="24"
+					interactive="true"
+					uniqueguid="03380769-F34E-46A5-A00EBC7E3B137B28">
+					<component_text
+						text="dy_cooldown_on_activation"
+						textvalign="Center"
+						textxoffset="12.00,12.00"
+						textyoffset="4.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_7dd8d5cb"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+		</dy_global_cooldown_on_activation>
+		<dy_resource_name
+			this="90ED2F67-0F9D-4CDD-89254F051D322C71"
+			id="dy_resource_name"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="90ED2F67-0F9D-4CDD-89254F051D322C71"
+			updatewhennotvisible="true"
+			currentstate="62C13A8A-F7B2-4F0E-AF08A922B5DD096F"
+			defaultstate="F5DF52FB-EC62-4714-AFDAD50304A7656B">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoPooledResourceThresholdOperationSetRecord"
+					context_function_id="Format(Loc(&quot;skull_throne_ritual_requirement_tooltip&quot;), LowerBound - PooledResourceList.FirstContext.Total)"/>
+				<callback_with_context
+					callback_id="ContextInactiveStateSetter"
+					context_object_id="CcoCampaignRitual"
+					context_function_id="IsScriptLocked == false"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoPooledResourceThresholdOperationSetRecord"
+					context_function_id="PooledResourceList.FirstContext.Total &lt; LowerBound">
+					<child_m_user_properties>
+						<property
+							name="object_store_events"
+							value="^2"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<states>
+				<active
+					this="F5DF52FB-EC62-4714-AFDAD50304A7656B"
+					name="active"
+					width="386"
+					height="26"
+					interactive="true"
+					uniqueguid="F5DF52FB-EC62-4714-AFDAD50304A7656B">
+					<component_text
+						text="dy_skull_throne_unlock"
+						textvalign="Center"
+						textxoffset="12.00,5.00"
+						textyoffset="5.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_52b2a1ad"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</active>
+				<inactive
+					this="62C13A8A-F7B2-4F0E-AF08A922B5DD096F"
+					name="inactive"
+					width="386"
+					height="26"
+					interactive="true"
+					uniqueguid="62C13A8A-F7B2-4F0E-AF08A922B5DD096F">
+					<component_text
+						text="dy_skull_throne_unlock"
+						textvalign="Center"
+						textxoffset="12.00,5.00"
+						textyoffset="5.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_cc2b4752"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
+				</inactive>
+			</states>
+		</dy_resource_name>
+		<template_cost
+			this="C5AB8E4D-D975-4284-B1E4E3280F9684BB"
+			id="template_cost"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="C5AB8E4D-D975-4284-B1E4E3280F9684BB"
+			updatewhennotvisible="true"
+			currentstate="693E2CDF-D206-4382-9B5FB303BCFE4747"
+			defaultstate="693E2CDF-D206-4382-9B5FB303BCFE4747">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoPooledResourceThresholdOperationSetRecord threshold, CcoRitualRecord record"
+					context_function_id="GetIfElse(record.Key.StartsWith(&quot;wh3_dlc26_ritual_kho_the_skull_throne_1_&quot;), false, &#10; GetIfElse(record.Key.StartsWith(&quot;wh3_dlc26_ritual_kho_the_skull_throne_2_&quot;), threshold.Key == &quot;wh3_dlc26_operation_set_kho_skull_throne_progress_1&quot;,&#10;  GetIfElse(record.Key.StartsWith(&quot;wh3_dlc26_ritual_kho_the_skull_throne_3_&quot;), threshold.Key == &quot;wh3_dlc26_operation_set_kho_skull_throne_progress_2&quot;,&#10;   GetIfElse(record.Key.StartsWith(&quot;wh3_dlc26_ritual_kho_the_skull_throne_4_&quot;), threshold.Key == &quot;wh3_dlc26_operation_set_kho_skull_throne_progress_3&quot;, false))))"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignRitual"
+					context_function_id="ResourceTransactionContext(GetIfElse(IsContextValid( StoredContextFromParent(&quot;CcoCampaignFaction&quot;)), StoredContextFromParent(&quot;CcoCampaignFaction&quot;), SelectedSettlement ))">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignSettlementSelectedAny"/>
+						<property
+							name="object_store_events"
+							value="^2"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="693E2CDF-D206-4382-9B5FB303BCFE4747"
+					name="NewState"
+					width="386"
+					height="26"
+					interactive="true"
+					uniqueguid="693E2CDF-D206-4382-9B5FB303BCFE4747">
+					<component_text
+						textvalign="Center"
+						textxoffset="12.00,12.00"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"/>
+		</template_cost>
+		<unlock_requirement_cost_list
+			this="630A98F5-9A24-4EDE-97AA221DF4033E0A"
+			id="unlock_requirement_cost_list"
+			offset="0.00,66.00"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="630A98F5-9A24-4EDE-97AA221DF4033E0A"
+			updatewhennotvisible="true"
+			currentstate="627B1F98-2F0A-4C53-9B88484560F6E8B1"
+			defaultstate="627B1F98-2F0A-4C53-9B88484560F6E8B1">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignRitual"
+					context_function_id="IsAvailable == false">
+					<child_m_user_properties>
+						<property
+							name="object_store_events"
+							value="^2"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignRitual"
+					context_function_id="RitualContext">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignSettlementSelectedAny"/>
+						<property
+							name="object_store_events"
+							value="^2"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignRitual"/>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="Join(AvailableThresholdSetList, ActiveThresholdSetList)">
+					<child_m_user_properties>
+						<property
+							name="refresh_when_same"
+							value=""/>
+						<property
+							name="stored_object_to_pass0"
+							value="CcoCampaignRitual"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_function_id="PlayersFaction.PooledResourceContext(&quot;wh3_dlc26_kho_skull_throne_progress&quot;)"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="627B1F98-2F0A-4C53-9B88484560F6E8B1"
+					name="NewState"
+					width="375"
+					height="26"
+					interactive="true"
+					uniqueguid="627B1F98-2F0A-4C53-9B88484560F6E8B1">
+					<component_text
+						textvalign="Center"
+						textxoffset="12.00,12.00"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="386"/>
+				</columnwidths>
+			</LayoutEngine>
+		</unlock_requirement_cost_list>
+		<blood_ex_nihilo_restriction
+			this="080DAB0F-64F1-4E8B-9BF59AF12FE2088F"
+			id="blood_ex_nihilo_restriction"
+			offset="0.00,955.00"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="080DAB0F-64F1-4E8B-9BF59AF12FE2088F"
+			updatewhennotvisible="true"
+			currentstate="7BBFFB61-A8D2-43C1-AB3953BC855FFB18"
+			defaultstate="7BBFFB61-A8D2-43C1-AB3953BC855FFB18">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignRitual"
+					context_function_id="RitualContext.Key == &quot;wh3_dlc26_ritual_kho_the_skull_throne_1_2&quot; &amp;&amp; Component(&quot;^3&quot;).CurrentState == &quot;selected&quot;">
+					<child_m_user_properties>
+						<property
+							name="CcoCampaignRitual"
+							value="RemainingCooldown &gt; 0"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="7BBFFB61-A8D2-43C1-AB3953BC855FFB18"
+					name="NewState"
+					width="386"
+					height="24"
+					interactive="true"
+					uniqueguid="7BBFFB61-A8D2-43C1-AB3953BC855FFB18">
+					<component_text
+						text="{{tr:ui_text_replacements_localised_text_wh3_dlc26_skull_throne_blood_ex_nihilo_restrictive_text_tooltip}}"
+						textvalign="Center"
+						textxoffset="12.00,12.00"
+						textyoffset="4.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_135cea7f"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_yellow"/>
+				</newstate>
+			</states>
+		</blood_ex_nihilo_restriction>
 	</components>
 </layout>

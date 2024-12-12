@@ -22,6 +22,8 @@ gb = generated_battle:new(
 	false                                      			-- debug mode
 );
 
+gb:set_cutscene_during_deployment(true)
+ 
 --preload stuttering fix
 intro_cinematic_file = "script/battle/quest_battles/_cutscene/managers/otc.CindySceneManager";
 bm:cindy_preload(intro_cinematic_file);
@@ -212,18 +214,20 @@ battle_start_teleport_units();
 -------------------------------------------------------------------------------------------------
 -------------------------------------------- ORDERS ---------------------------------------------
 -------------------------------------------------------------------------------------------------
+gb:message_on_time_offset("start", 100);
+
 --Make enemy visible during cutscene
 ga_attacker_visible:set_always_visible_on_message("battle_started", true);
 ga_attacker_visible:set_always_visible_on_message("01_intro_cutscene_end", false);
 
 --Enemy Main Army - visible
 ga_attacker_visible:halt();
-ga_attacker_visible:attack_on_message("01_intro_cutscene_end");
+ga_attacker_visible:attack_on_message("start");
 ga_attacker_visible:message_on_casualties("reinforce_1", 0.1);
 
 --Enemy Main Army - hidden
 ga_attacker_hidden:halt();
-ga_attacker_hidden:attack_on_message("01_intro_cutscene_end");
+ga_attacker_hidden:attack_on_message("start");
 ga_attacker_hidden:message_on_casualties("reinforce_1", 0.1);
 
 --Enemy Reinforcements (North West - Large Force)
@@ -241,14 +245,14 @@ ga_reinforcements_02:attack_on_message("reinforcements_deployed_3");
 ------------------------------------------- OBJECTIVES ------------------------------------------
 -------------------------------------------------------------------------------------------------
  --Defeat the Orc forces!
-gb:set_objective_on_message("01_intro_cutscene_end", "wh3_main_qb_ogr_greasus_overtyrants_crown_Fire_mouth_volcano_hints_main_objective");
-ga_attacker_visible:add_ping_icon_on_message("01_intro_cutscene_end", 15, 1, 10000);
+gb:set_objective_on_message("start", "wh3_main_qb_ogr_greasus_overtyrants_crown_Fire_mouth_volcano_hints_main_objective");
+ga_attacker_visible:add_ping_icon_on_message("start", 15, 1, 10000);
 
 -------------------------------------------------------------------------------------------------
 --------------------------------------------- HINTS ---------------------------------------------
 -------------------------------------------------------------------------------------------------
 --While we hold the high ground, we have the advantage!
-gb:queue_help_on_message("01_intro_cutscene_end", "wh3_main_qb_ogr_greasus_overtyrants_crown_Fire_mouth_volcano_hints_main_hint", 10000, 2000, 5000, false);
+gb:queue_help_on_message("start", "wh3_main_qb_ogr_greasus_overtyrants_crown_Fire_mouth_volcano_hints_main_hint", 10000, 2000, 5000, false);
 
 --An attack from behind! We must now fight on two fronts.
 gb:queue_help_on_message("reinforce_1", "wh3_main_qb_ogr_greasus_overtyrants_crown_Fire_mouth_volcano_hints_reinforcements_1", 10000, 2000, 5000, false);

@@ -84,6 +84,7 @@ require("wh3_dlc25_grudge_cycles")
 require("wh2_campaign_tech_tree_lords")
 require("wh3_campaign_forge")
 require("wh3_campaign_underdeep")
+require("wh3_campaign_unholy_manifestations")
 
 -- DLC23 - Chaos Dwarfs
 require("wh3_dlc23_narrative_chaos_dwarfs");
@@ -118,11 +119,16 @@ require("wh3_dlc25_empire_state_troops")
 require("wh3_dlc25_imperial_authority")
 require("wh3_dlc25_gardens_of_morr")
 
+-- DLC26
+require("wh3_dlc26_ogre_camps")
+require("wh3_dlc26_tyrants_demands")
+
 
 -- Game systems
 require("victory_objectives");
 require("corruption_swing");
 require("wh3_main_legendary_characters");
+require("wh3_campaign_subjugation")
 
 require("DEBUG_economy_logging");
 

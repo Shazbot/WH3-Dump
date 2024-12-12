@@ -1,16 +1,15 @@
 local skull_piles = {};
-local skull_pile_base_duration = 15 -- duration of piles if there are no others on the map when spawned
-local skull_pile_min_duration = 5
+local skull_pile_max_duration = 40
+local skull_pile_min_duration = 10
 local skull_pile_min_skulls = 50
 local skull_pile_max_skulls = 500
 local skulls_per_casualty = 0.2
 local skull_pile_threshold = 200 -- if combined sum of all modifiers +random roll of 1- skull pile threshold exceeds this, spawn a pile. THis higher this is, the more random the spawns will be
 local khorne_corruption_weight = 2 -- multiplier on the value of Khorne corruption in the calculation
 local chs_corruption_weight = 1 -- multiplier on the value of generic Chaos corruption in the calculation
-local bonus_at_0_piles = 100 -- amount added to roll when there are 0 piles on the map
+local bonus_at_0_piles = 200 -- amount added to roll when there are 0 piles on the map
 local modifier_per_active_pile = 10 -- amount to reduce above bonus by per active pile. can go negative.
 local vision_bonus = 75 --if battle is visible to any player khorne faction, add this to roll
-local kho_player_faction_strings = {"wh3_main_kho_exiles_of_khorne"}
 
 
 
@@ -19,6 +18,83 @@ function setup_khorne_skulls()
 	local human_factions = cm:get_human_factions();
 
 	khorne_spawned_armies:setup_listeners()
+
+	core:add_listener(
+		"skull_throne_rituals_handler",
+		"RitualCompletedEvent",
+		true,
+		function(context)
+			local ritual_key = context:ritual():ritual_key()
+			local performing_faction = context:performing_faction()
+
+			local function handle_skull_throne_ritual(payload)
+				if performing_faction:has_faction_leader() then
+					local faction_leader = performing_faction:faction_leader()
+
+					if faction_leader:has_military_force() then
+						if payload == "ap" then
+							cm:replenish_action_points(cm:char_lookup_str(faction_leader))
+						elseif payload == "hp" then
+							for _, unit in model_pairs(faction_leader:military_force():unit_list()) do
+								cm:set_unit_hp_to_unary_of_maximum(unit, 1)
+							end
+						elseif payload == "blood_host" then
+							khorne_spawned_armies:spawn_army(faction_leader, false, true)
+						end
+					end
+				end
+
+				cm:remove_effect_bundle(ritual_key, performing_faction:name())
+			end
+
+			if ritual_key == "wh3_dlc26_ritual_kho_the_skull_throne_3_1" then -- replenish army ap
+				handle_skull_throne_ritual("ap")
+			elseif ritual_key == "wh3_dlc26_ritual_kho_the_skull_throne_3_2" then -- replenish army health
+				handle_skull_throne_ritual("hp")
+			elseif ritual_key == "wh3_dlc26_ritual_kho_the_skull_throne_4_1" then -- spawn blood host
+				handle_skull_throne_ritual("blood_host")
+			end
+		end,
+		true
+	)
+
+	-- deactivate rituals if faction leader isn't present
+	core:add_listener(
+		"skull_throne_panel_opened",
+		"PanelOpenedCampaign",
+		function(context)
+			return context.string == "dlc26_skull_throne"
+		end,
+		function()
+			local function set_ritual_inactive(uic)
+				if not uic then return end
+
+				for i = 0, uic:ChildCount() - 1 do
+					local child = find_child_uicomponent_by_index(uic, i)
+					if child and child:CurrentState() == "active" then child:SetState("unaffordable") end
+				end
+			end
+			
+			local faction = cm:get_local_faction(true)
+
+			if not faction:faction_leader():has_military_force() then
+				set_ritual_inactive(find_uicomponent("dlc26_skull_throne", "t4_rituals_holder"))
+				set_ritual_inactive(find_uicomponent("dlc26_skull_throne", "t3_rituals_holder"))
+			end
+
+			if faction:has_effect_bundle("wh3_dlc26_ritual_kho_the_skull_throne_1_2") then
+				local uic = find_uicomponent("dlc26_skull_throne", "t1_rituals_holder")
+
+				for i = 0, uic:ChildCount() - 1 do
+					local child = find_child_uicomponent_by_index(uic, i)
+					if child and string.find(child:Id(), "wh3_dlc26_ritual_kho_the_skull_throne_1_2") and child:CurrentState() == "active"  then
+						child:SetState("unaffordable")
+					end
+				end
+			end
+		end,
+		true
+	)
 
 	for i = 1, #human_factions do
 		if not cm:get_faction(human_factions[i]):pooled_resource_manager():resource("wh3_main_kho_skulls"):is_null_interface() then
@@ -29,6 +105,18 @@ function setup_khorne_skulls()
 end;
 
 function start_khorne_skull_listeners()
+	local selected_human_faction
+	local human_factions = cm:get_human_factions()
+
+	for i = 1, #human_factions do
+		local current_human_faction = cm:get_faction(human_factions[i])
+
+		if current_human_faction:culture() == "wh3_main_kho_khorne" then
+			selected_human_faction = human_factions[i]
+			break
+		end
+	end
+	
 	skull_piles = cm:get_saved_value("skull_piles") or {};
 	
 	for k, v in pairs(skull_piles) do
@@ -107,24 +195,24 @@ function start_khorne_skull_listeners()
 					local active_piles = cm:get_saved_value("active_piles") or 0
 					local active_piles_mod = bonus_at_0_piles - modifier_per_active_pile * active_piles
 					local vision_mod = 0
-
-					for i=1, #kho_player_faction_strings do
-						if winner_interface:is_visible_to_faction(kho_player_faction_strings[i]) then
-							vision_mod = vision_bonus
-							break
-						end
+					
+					if winner_interface:is_visible_to_faction(selected_human_faction) then
+						vision_mod = vision_bonus
 					end
 
-					if cm:random_number(skull_pile_threshold, 1) + corruption_mod + active_piles_mod + vision_mod < skull_pile_threshold then
+					if cm:random_number(skull_pile_threshold) + corruption_mod + active_piles_mod + vision_mod < skull_pile_threshold then
 						return 
 					end
-					
+
+					local char, dist = cm:get_closest_character_from_faction(selected_human_faction, pos_x, pos_y)
+
+					if not dist then return end
+
 				 	cm:add_interactable_campaign_marker(id, "wh3_main_kho_skull_pile", pos_x, pos_y, 2);
 										
 					local a_cqi, af_cqi, attacker_faction = cm:pending_battle_cache_get_attacker(1);
 					local d_cqi, df_cqi, defender_faction = cm:pending_battle_cache_get_defender(1);
-
-					local adjusted_duration = math.clamp(skull_pile_base_duration - active_piles, skull_pile_min_duration, skull_pile_base_duration)
+					local adjusted_duration = math.clamp(math.round(dist / 1000), skull_pile_min_duration, skull_pile_max_duration)
 					
 					skull_piles[id] = {
 						["kills"] = skulls,
@@ -329,6 +417,7 @@ end;
 khorne_spawned_armies = {
 	occupation_option_id = "1673500944",
 	spawned_army_general_subtype = "wh3_main_kho_herald_of_khorne_khorne_spawned_army",
+	spawned_army_upgraded_general_subtype = "wh3_dlc26_kho_exalted_bloodthirster_khorne_spawned_army",
 	spawned_army_size = 9,
 	spawned_army_starting_bundle_key = "wh3_main_bundle_force_khorne_summoned_army",
 	spawned_army_post_battle_bundle_key = "wh3_main_bundle_force_khorne_summoned_army_post_battle",
@@ -343,14 +432,11 @@ function khorne_spawned_armies:setup_listeners()
 		"CharacterPerformsSettlementOccupationDecisionSummonArmy",
 		"CharacterPerformsSettlementOccupationDecision",
 		function(context)
-			return context:occupation_decision() == self.occupation_option_id
+			local occupation_id = context:occupation_decision()
+			return occupation_id == self.occupation_option_id
 		end,
 		function(context)
-			local region = context:garrison_residence():settlement_interface():region()
-			local character = context:character()
-
-			self:spawn_army(region, character)
-			
+			self:spawn_army(context:character())
 		end,
 		true
 	);
@@ -359,7 +445,8 @@ function khorne_spawned_armies:setup_listeners()
 		"CharacterCompletedBattleKhorneSummonedArmy",
 		"CharacterCompletedBattle",
 		function(context)
-			return context:character():character_subtype(self.spawned_army_general_subtype)
+			local subtype = context:character():character_subtype_key()
+			return subtype == self.spawned_army_general_subtype or subtype == self.spawned_army_upgraded_general_subtype
 		end,
 		function(context)
 			local character = context:character()
@@ -379,89 +466,113 @@ function khorne_spawned_armies:setup_listeners()
 		end,
 		true
 	);
-
-	--[[core:add_listener(
-		"CharacterParticipatedAsSecondaryGeneralInBattleKhorneSummonedArmy",
-		"CharacterParticipatedAsSecondaryGeneralInBattle",
-		function(context)
-			return context:character():character_subtype(self.spawned_army_general_subtype)
-		end,
-		function(context)
-			local char_cqi = context:character():command_queue_index()
-			local bonus_bundle_duration = cm:get_factions_bonus_value(context:character():faction(), "kho_spawned_army_post_battle_attrition_immunity_duration_mod")
-			cm:apply_effect_bundle_to_characters_force(self.spawned_army_post_battle_bundle_key, char_cqi, self.spawned_army_post_battle_bundle_duration + bonus_bundle_duration)
-		end,
-		true
-	);]]
 end;
 
-function khorne_spawned_armies:spawn_army(region, character)
-	local region_key = region:name()
+function khorne_spawned_armies:spawn_army(character, spawned_by_bonus_value, spawned_by_skull_throne)
 	local faction = character:faction()
 	local faction_key = faction:name()
+	local distance = 10
 
-	local x, y = cm:find_valid_spawn_location_for_character_from_settlement(faction_key, region_key, false, true, 10);
+	if spawned_by_bonus_value or spawned_by_skull_throne then distance = 5 end
 
-	local bonus_size = cm:get_characters_bonus_value(character, "kho_spawned_army_size_mod")
-	local guaranteed_bloodthirsters = cm:get_characters_bonus_value(character, "kho_spawned_army_guaranteed_bloodthirsters")
-	local bonus_hounds = cm:get_characters_bonus_value(character, "kho_spawned_army_bonus_flesh_hounds")
-	local bloodletter_upgraded = cm:get_characters_bonus_value(character, "kho_spawned_army_bloodletter_upgrade") > 0
-
-	local bonus_initial_bundle_duration = cm:get_characters_bonus_value(character, "kho_spawned_army_initial_attrition_immunity_duration_mod")
+	local x, y = cm:find_valid_spawn_location_for_character_from_character(faction_key, cm:char_lookup_str(character), false, distance)
 	
 	if x > 0 then
+		local bonus_size = cm:get_characters_bonus_value(character, "kho_spawned_army_size_mod")
+		local guaranteed_bloodthirsters = cm:get_characters_bonus_value(character, "kho_spawned_army_guaranteed_bloodthirsters")
+		local guaranteed_soul_grinders = cm:get_characters_bonus_value(character, "kho_spawned_army_guaranteed_soul_grinders")
+		local guaranteed_bloodletters = cm:get_characters_bonus_value(character, "kho_spawned_army_guaranteed_bloodletters")
+		local guaranteed_chaos_warriors = cm:get_characters_bonus_value(character, "kho_spawned_army_guaranteed_chaos_warriors")
+		local guaranteed_hounds = cm:get_characters_bonus_value(character, "kho_spawned_army_bonus_flesh_hounds")
+
+		local bonus_initial_bundle_duration = cm:get_characters_bonus_value(character, "kho_spawned_army_initial_attrition_immunity_duration_mod")
+
 		local ram = random_army_manager;
 		ram:remove_force("kho_summoned_army");
 		ram:new_force("kho_summoned_army");
+		
+		ram:add_mandatory_unit("kho_summoned_army", "wh3_main_kho_inf_flesh_hounds_of_khorne_0", 1)
+		ram:add_mandatory_unit("kho_summoned_army", "wh3_main_kho_inf_chaos_furies_0", 1)
 
-		if guaranteed_bloodthirsters >0 then
-			ram:add_mandatory_unit("kho_summoned_army","wh3_main_kho_mon_bloodthirster_0",guaranteed_bloodthirsters)
+		if guaranteed_bloodthirsters > 0 then
+			ram:add_mandatory_unit("kho_summoned_army", "wh3_main_kho_mon_bloodthirster_0", guaranteed_bloodthirsters)
+			bonus_size = bonus_size + guaranteed_bloodthirsters
 		end
 
-		if bloodletter_upgraded then 
-			ram:add_mandatory_unit("kho_summoned_army","wh3_main_kho_inf_bloodletters_1",4)
-			ram:add_unit("kho_summoned_army","wh3_main_kho_inf_bloodletters_1",4)
+		if guaranteed_soul_grinders > 0 then
+			ram:add_mandatory_unit("kho_summoned_army", "wh3_main_kho_mon_soul_grinder_0", guaranteed_soul_grinders)
+			bonus_size = bonus_size + guaranteed_soul_grinders
+		end
+
+		if guaranteed_chaos_warriors > 0 then
+			ram:add_mandatory_unit("kho_summoned_army", "wh3_main_kho_inf_chaos_warriors_0", guaranteed_chaos_warriors)
+			bonus_size = bonus_size + guaranteed_chaos_warriors
+		end
+
+		if guaranteed_hounds > 0 then
+			ram:add_mandatory_unit("kho_summoned_army", "wh3_main_kho_inf_flesh_hounds_of_khorne_0", guaranteed_hounds)
+			bonus_size = bonus_size + guaranteed_hounds
+		end
+
+		if cm:get_factions_bonus_value(faction_key, "kho_spawned_army_bloodletter_upgrade") > 0 then
+			ram:add_mandatory_unit("kho_summoned_army", "wh3_main_kho_inf_bloodletters_1", 4 + guaranteed_bloodletters)
 		else
-			ram:add_mandatory_unit("kho_summoned_army","wh3_main_kho_inf_bloodletters_0",4)
-			ram:add_unit("kho_summoned_army","wh3_main_kho_inf_bloodletters_0",2)
-			ram:add_unit("kho_summoned_army","wh3_main_kho_inf_bloodletters_1",2)
+			ram:add_mandatory_unit("kho_summoned_army", "wh3_main_kho_inf_bloodletters_0", 4 + guaranteed_bloodletters)
 		end
 
-		if bonus_hounds > 0 then
-			ram:add_mandatory_unit("kho_summoned_army","wh3_main_kho_inf_flesh_hounds_of_khorne_0",bonus_hounds)
-			bonus_size = bonus_size + bonus_hounds
-		else
-			ram:add_unit("kho_summoned_army","wh3_main_kho_inf_flesh_hounds_of_khorne_0",4)
+		if guaranteed_bloodletters > 0 then
+			bonus_size = bonus_size + guaranteed_bloodletters
+		end
+		
+		if spawned_by_bonus_value then
+			local cloak_of_skulls_bonus_size = cm:get_factions_bonus_value(faction_key, "kho_spawned_army_skulltaker_army_size_mod")
+
+			if cloak_of_skulls_bonus_size > 0 then
+				bonus_size = bonus_size + cloak_of_skulls_bonus_size
+			end
 		end
 
-		ram:add_unit("kho_summoned_army","wh3_main_kho_inf_chaos_furies_0",6)
-		ram:add_unit("kho_summoned_army","wh3_main_kho_cav_bloodcrushers_0",2)
-		ram:add_unit("kho_summoned_army","wh3_main_kho_mon_spawn_of_khorne_0",4)
-		ram:add_unit("kho_summoned_army","wh3_main_kho_veh_skullcannon_0",3)
-		ram:add_unit("kho_summoned_army","wh3_main_kho_veh_blood_shrine_0",4)
-		ram:add_unit("kho_summoned_army","wh3_main_kho_mon_bloodthirster_0",1)
+		ram:add_unit("kho_summoned_army", "wh3_main_kho_inf_chaos_furies_0", 10)
+		ram:add_unit("kho_summoned_army", "wh3_main_kho_veh_blood_shrine_0", 10)
+		ram:add_unit("kho_summoned_army", "wh3_main_kho_inf_flesh_hounds_of_khorne_0", 10)
+		ram:add_unit("kho_summoned_army", "wh3_main_kho_inf_bloodletters_1", 5)
+		ram:add_unit("kho_summoned_army", "wh3_main_kho_mon_spawn_of_khorne_0", 5)
+		ram:add_unit("kho_summoned_army", "wh3_main_kho_veh_skullcannon_0", 5)
+		ram:add_unit("kho_summoned_army", "wh3_main_kho_cav_bloodcrushers_0", 2)
+		ram:add_unit("kho_summoned_army", "wh3_main_kho_mon_soul_grinder_0", 2)
+		ram:add_unit("kho_summoned_army", "wh3_main_kho_mon_bloodthirster_0", 1)
 
 		local army_size = math.clamp(self.spawned_army_size + bonus_size, 1, 19)
-		local unit_list = ram:generate_force("kho_summoned_army", army_size, false);
-		
+		local unit_list = ram:generate_force("kho_summoned_army", army_size, false)
+		local subtype = self.spawned_army_general_subtype
+
+		if spawned_by_skull_throne and cm:get_factions_bonus_value(faction_key, "kho_spawned_army_skull_throne_blood_host_bloodthirster") > 0 then
+			subtype = self.spawned_army_upgraded_general_subtype
+		end
+
 		cm:create_force_with_general(
 			faction_key,
 			unit_list,
-			region_key,
+			cm:model():world():region_manager():region_list():item_at(1):name(),
 			x,
 			y,
 			"general",
-			self.spawned_army_general_subtype,
+			subtype,
 			"",
 			"",
 			"",
 			"",
 			false,
 			function(cqi)
-				cm:apply_effect_bundle_to_characters_force(self.spawned_army_starting_bundle_key, cqi, 0);
+				cm:apply_effect_bundle_to_characters_force(self.spawned_army_starting_bundle_key, cqi, 0)
 				cm:apply_effect_bundle_to_characters_force(self.spawned_army_post_battle_bundle_key, cqi, self.spawned_army_initial_bundle_duration + bonus_initial_bundle_duration);
 			end
 		);
+
+		-- remove the skull throne bonus if it's active
+		if faction:has_effect_bundle("wh3_dlc26_ritual_kho_the_skull_throne_1_2") then
+			cm:remove_effect_bundle("wh3_dlc26_ritual_kho_the_skull_throne_1_2", faction_key)
+		end
 	end;
 end;
 

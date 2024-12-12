@@ -1,0 +1,36 @@
+DaPlan
+{
+	UnlockRituals
+    {
+        PlayersFaction.AvailableRitualList("DA_PLAN_YOOREEKA")
+    }
+    
+    MaxSlots { 3 }
+    
+    UnlockRankForSlot(Int slot)
+    {
+        # NOTE that the above is 1 indexed #
+        SelectedCharacter
+            .SkillList
+            .FirstContext((s) => s.Key == "wh3_dlc26_skill_node_grn_unique_da_plan_upgrades")
+            .LevelsDetailsList
+            .At(slot - 1)
+            .RankRequired + 1
+    }
+    
+    FilteredUnits(CcoInitiativeUnitSetRequirementsRecord reqs)
+    {
+        reqs.RequiredUnits.Filter((u) => u.IsVisuallyExcludedFromEffects == false)
+    }
+    
+    SortOrderForInitiative(CcoCampaignInitiative initiative)
+    {
+        initiative |
+            initiative.IsScriptLocked == false && 
+                initiative.ForceMeetsUnitRequirements(SelectedCharacter.MilitaryForceContext) == false => 2 |
+            initiative.IsActive => 0 |
+            initiative.IsScriptLocked == false && initiative.IsOnCooldown == false => 1 |
+            initiative.IsOnCooldown => 3 |
+            4
+    }
+}

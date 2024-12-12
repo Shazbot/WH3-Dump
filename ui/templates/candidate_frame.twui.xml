@@ -15,12 +15,6 @@
 						<frame this="E1E391ED-258A-49C6-9FF5E12DB493B7BF"/>
 						<dy_rank this="3985D889-0B69-44EB-AC29F73962EB44DE"/>
 					</rank>
-					<upkeep_cost_holder this="01982788-997D-4514-973AB203886C39C5">
-						<upkeep this="2BB05122-2690-43D4-8BA638DF95506360"/>
-					</upkeep_cost_holder>
-					<recruitment_cost_holder this="6335B953-21BD-43A7-BFDFC78A2C14C071">
-						<recruitment_cost this="2D67FC02-B64F-4908-8FDD0A04D6D77908"/>
-					</recruitment_cost_holder>
 					<health_frame this="5C400F55-159A-4E87-8A4180BB4832C493">
 						<health_back this="2DDD2A56-127F-4177-801EDFA6BC9E41D9"/>
 						<health_bar this="E6CEDDF0-5443-4753-8A30287873494548">
@@ -50,6 +44,22 @@
 						</trait_list>
 						<icon_background_skill this="2DC8B0E7-7ADA-41B5-A9793A6AA5EA615D"/>
 					</details_holder>
+					<cost_holder this="5F919E1E-B486-4B41-BA5A191302E879F3">
+						<recruitment_cost_holder this="6335B953-21BD-43A7-BFDFC78A2C14C071">
+							<recruitment_cost this="2D67FC02-B64F-4908-8FDD0A04D6D77908"/>
+						</recruitment_cost_holder>
+						<upkeep_cost_holder this="01982788-997D-4514-973AB203886C39C5">
+							<upkeep this="2BB05122-2690-43D4-8BA638DF95506360"/>
+						</upkeep_cost_holder>
+						<meat_upkeep_holder this="664E3885-4DE8-4EC3-A734418088352D2C">
+							<dy_meat this="908A517B-9650-4AAB-A9DEED35E74DC34C">
+								<arrow this="5DE669F8-EB66-4B5C-A4E055FC08694B15"/>
+							</dy_meat>
+						</meat_upkeep_holder>
+					</cost_holder>
+					<cooldown_holder this="D241AED3-E1CF-446A-A2157735858751EF">
+						<dy_turns this="5BBEA3D4-9408-4A48-BC23DB37B9AF7B77"/>
+					</cooldown_holder>
 				</info_holder>
 				<mouse_blocker this="6C16BB0E-9FF5-4A0C-903FE04D385AC8E8"/>
 			</candidate_frame>
@@ -1512,12 +1522,8 @@
 			this="6335B953-21BD-43A7-BFDFC78A2C14C071"
 			id="recruitment_cost_holder"
 			uniqueguid_in_template="6335B953-21BD-43A7-BFDFC78A2C14C071"
-			offset="428.00,62.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
-			docking="Bottom Right"
-			dock_offset="8.00,-24.00"
-			component_anchor_point="1.00,1.00"
 			tooltipslocalised="true"
 			componentleveltooltip="Cost||This amount will be deducted from your {{tr:icon_treasury}}{{tr:treasury}} in order to recruit this character."
 			tooltiplabel="RecruitmentCost_Tooltip_430063"
@@ -1664,12 +1670,9 @@
 			this="01982788-997D-4514-973AB203886C39C5"
 			id="upkeep_cost_holder"
 			uniqueguid_in_template="01982788-997D-4514-973AB203886C39C5"
-			offset="428.00,87.00"
+			offset="0.00,25.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
-			docking="Bottom Right"
-			dock_offset="8.00,1.00"
-			component_anchor_point="1.00,1.00"
 			tooltipslocalised="true"
 			componentleveltooltip="Upkeep||This amount will be deducted from your {{tr:icon_treasury}}{{tr:treasury}} each turn while this character exists."
 			tooltiplabel="UpkeepCost_Tooltip_c0048"
@@ -3594,5 +3597,322 @@
 				</mouseoff>
 			</animations>
 		</info_holder>
+		<arrow
+			this="5DE669F8-EB66-4B5C-A4E055FC08694B15"
+			id="arrow"
+			uniqueguid_in_template="5DE669F8-EB66-4B5C-A4E055FC08694B15"
+			offset="50.00,9.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			docking="Center Right"
+			dock_offset="-14.00,0.00"
+			component_anchor_point="1.00,0.50"
+			priority="1"
+			tooltipslocalised="true"
+			uniqueguid="5DE669F8-EB66-4B5C-A4E055FC08694B15"
+			currentstate="A78BC23B-CCDB-464D-928BCB1F95B21979"
+			defaultstate="A78BC23B-CCDB-464D-928BCB1F95B21979">
+			<componentimages>
+				<component_image
+					this="7F2B4D04-1891-4878-9F475054C345B6E2"
+					uniqueguid="7F2B4D04-1891-4878-9F475054C345B6E2"
+					imagepath="ui/skins/default/ua_arrow_increase_1.png"/>
+				<component_image
+					this="E32485AA-368D-4C38-9A92FBB8E0CF8AF7"
+					uniqueguid="E32485AA-368D-4C38-9A92FBB8E0CF8AF7"
+					imagepath="ui/skins/default/ua_arrow_decrease_1.png"/>
+			</componentimages>
+			<states>
+				<down
+					this="2B455036-3E90-4955-B0321DA6B5CB4588"
+					name="down"
+					width="16"
+					height="16"
+					uniqueguid="2B455036-3E90-4955-B0321DA6B5CB4588">
+					<imagemetrics>
+						<image
+							this="5F4865D0-2D0F-45F1-94B88F7A6F00BD93"
+							uniqueguid="5F4865D0-2D0F-45F1-94B88F7A6F00BD93"
+							componentimage="E32485AA-368D-4C38-9A92FBB8E0CF8AF7"
+							width="16"
+							height="16"
+							dockpoint="Center"/>
+					</imagemetrics>
+				</down>
+				<up
+					this="A78BC23B-CCDB-464D-928BCB1F95B21979"
+					name="up"
+					width="16"
+					height="16"
+					interactive="true"
+					uniqueguid="A78BC23B-CCDB-464D-928BCB1F95B21979">
+					<imagemetrics>
+						<image
+							this="29CB8C60-3598-4CFC-9AE2C153700FD0CE"
+							uniqueguid="29CB8C60-3598-4CFC-9AE2C153700FD0CE"
+							componentimage="7F2B4D04-1891-4878-9F475054C345B6E2"
+							offset="0.00,-3.00"
+							width="16"
+							height="16"
+							dockpoint="Center"
+							dock_offset="0.00,-3.00"/>
+					</imagemetrics>
+				</up>
+			</states>
+		</arrow>
+		<cost_holder
+			this="5F919E1E-B486-4B41-BA5A191302E879F3"
+			id="cost_holder"
+			uniqueguid_in_template="5F919E1E-B486-4B41-BA5A191302E879F3"
+			offset="426.00,61.00"
+			docking="Bottom Right"
+			dock_offset="6.00,0.00"
+			component_anchor_point="1.00,1.00"
+			tooltipslocalised="true"
+			uniqueguid="5F919E1E-B486-4B41-BA5A191302E879F3"
+			currentstate="61312DF1-23FF-44A1-BA498935C1BC904A"
+			defaultstate="61312DF1-23FF-44A1-BA498935C1BC904A">
+			<states>
+				<default
+					this="61312DF1-23FF-44A1-BA498935C1BC904A"
+					name="default"
+					width="70"
+					height="54"
+					uniqueguid="61312DF1-23FF-44A1-BA498935C1BC904A"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				spacing="0.00,-4.00"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="32"/>
+				</columnwidths>
+			</LayoutEngine>
+		</cost_holder>
+		<dy_meat
+			this="908A517B-9650-4AAB-A9DEED35E74DC34C"
+			id="dy_meat"
+			uniqueguid_in_template="908A517B-9650-4AAB-A9DEED35E74DC34C"
+			offset="-5.00,-2.00"
+			allowverticalresize="false"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="1"
+			tooltipslocalised="true"
+			uniqueguid="908A517B-9650-4AAB-A9DEED35E74DC34C"
+			currentstate="0C465E4C-F2A8-4335-99514B2DFF4359E5"
+			defaultstate="0C465E4C-F2A8-4335-99514B2DFF4359E5">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="IsContextValid(MilitaryForceContext) &amp;&amp; MilitaryForceContext.PooledResourceContext(&quot;wh3_main_ogr_meat&quot;).IsValidContext &amp;&amp; FactionContext.IsPlayersFaction"/>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="GetIfElse(MilitaryForceBreakdownContext(SelectedCharacter.MilitaryForceContext).FactorValue(&quot;wh3_main_ogr_meat_factor_army_upkeep&quot;) &lt; 0, MilitaryForceBreakdownContext(SelectedCharacter.MilitaryForceContext).FactorValue(&quot;wh3_main_ogr_meat_factor_army_upkeep&quot;) * -1, &quot;-&quot;)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="PooledResourceTransaction"/>
+						<property
+							name="event1"
+							value="CharacterMoveEndAny"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="MilitaryForceContext.PooledResourceContext(&quot;wh3_main_ogr_meat&quot;)"/>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="GetIfElse(MilitaryForceBreakdownContext(SelectedCharacter.MilitaryForceContext).FactorValue(&quot;wh3_main_ogr_meat_factor_army_upkeep&quot;) &lt; 0, Loc(&quot;army_upkeep_meat_tooltip&quot;), Loc(&quot;army_upkeep_meat_tooltip_in_camp_sphere&quot;))">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CharacterMoveEndAny"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="946A159A-9D99-4F66-8B239496334C7CFC"
+					uniqueguid="946A159A-9D99-4F66-8B239496334C7CFC"
+					imagepath="ui/skins/default/icon_banner.png"/>
+				<component_image
+					this="7916054C-29E7-4B65-ACF4347AE5F9D055"
+					uniqueguid="7916054C-29E7-4B65-ACF4347AE5F9D055"
+					imagepath="ui/skins/default/icon_meat.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="0C465E4C-F2A8-4335-99514B2DFF4359E5"
+					name="NewState"
+					width="80"
+					height="34"
+					interactive="true"
+					uniqueguid="0C465E4C-F2A8-4335-99514B2DFF4359E5">
+					<imagemetrics>
+						<image
+							this="E53A3391-BD2D-4C7F-9EE719337446F0E3"
+							uniqueguid="E53A3391-BD2D-4C7F-9EE719337446F0E3"
+							componentimage="946A159A-9D99-4F66-8B239496334C7CFC"
+							offset="11.00,2.00"
+							width="74"
+							height="30"
+							dockpoint="Center Right"
+							dock_offset="5.00,0.00"
+							margin="0.00,40.00,0.00,10.00"/>
+						<image
+							this="D684FFD4-1FFE-4095-8B2AA889D1C6F6C1"
+							uniqueguid="D684FFD4-1FFE-4095-8B2AA889D1C6F6C1"
+							componentimage="7916054C-29E7-4B65-ACF4347AE5F9D055"
+							offset="1.00,4.00"
+							width="26"
+							height="26"
+							dockpoint="Center Left"
+							dock_offset="1.00,0.00"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<component_text
+						text="99"
+						textxoffset="28.00,0.00"
+						textyoffset="10.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="StateText_5d0b5226"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+		</dy_meat>
+		<meat_upkeep_holder
+			this="664E3885-4DE8-4EC3-A734418088352D2C"
+			id="meat_upkeep_holder"
+			uniqueguid_in_template="664E3885-4DE8-4EC3-A734418088352D2C"
+			offset="0.00,50.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			tooltipslocalised="true"
+			uniqueguid="664E3885-4DE8-4EC3-A734418088352D2C"
+			currentstate="4122A261-168D-438C-967A8E5041A87D9C"
+			defaultstate="4122A261-168D-438C-967A8E5041A87D9C">
+			<states>
+				<default
+					this="4122A261-168D-438C-967A8E5041A87D9C"
+					name="default"
+					width="70"
+					height="29"
+					uniqueguid="4122A261-168D-438C-967A8E5041A87D9C"/>
+			</states>
+		</meat_upkeep_holder>
+		<cooldown_holder
+			this="D241AED3-E1CF-446A-A2157735858751EF"
+			id="cooldown_holder"
+			uniqueguid_in_template="D241AED3-E1CF-446A-A2157735858751EF"
+			offset="446.00,10.00"
+			visible="false"
+			docking="Top Right"
+			dock_offset="6.00,10.00"
+			component_anchor_point="1.00,0.00"
+			tooltipslocalised="true"
+			uniqueguid="D241AED3-E1CF-446A-A2157735858751EF"
+			currentstate="801F9FFC-186E-4B8C-9B0CFC3363C17988"
+			defaultstate="801F9FFC-186E-4B8C-9B0CFC3363C17988">
+			<states>
+				<default
+					this="801F9FFC-186E-4B8C-9B0CFC3363C17988"
+					name="default"
+					width="50"
+					height="24"
+					uniqueguid="801F9FFC-186E-4B8C-9B0CFC3363C17988"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				spacing="0.00,-4.00"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="32"/>
+				</columnwidths>
+			</LayoutEngine>
+		</cooldown_holder>
+		<dy_turns
+			this="5BBEA3D4-9408-4A48-BC23DB37B9AF7B77"
+			id="dy_turns"
+			uniqueguid_in_template="5BBEA3D4-9408-4A48-BC23DB37B9AF7B77"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="45"
+			tooltipslocalised="true"
+			componentleveltooltip="Turns until this Camp can be redeployed."
+			tooltiplabel="ComponentTooltip_11a4d1d2"
+			uniqueguid="5BBEA3D4-9408-4A48-BC23DB37B9AF7B77"
+			currentstate="C5C3988E-131C-41EB-8ED28907675942D8">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignMilitaryForceHorde"
+					context_function_id="GetIfElse ( TurnsUntilNextGrowthPoint &gt; 0, TurnsUntilNextGrowthPoint, &quot;-&quot; )"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="36DF053D-C481-4D11-A1EEBDD6369E0D7A"
+					uniqueguid="36DF053D-C481-4D11-A1EEBDD6369E0D7A"
+					imagepath="ui/skins/default/spacebar_bookmark.png"/>
+				<component_image
+					this="AE70E5BF-8082-470A-90F228BF352591FD"
+					uniqueguid="AE70E5BF-8082-470A-90F228BF352591FD"
+					imagepath="ui/skins/default/icon_hourglass.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="C5C3988E-131C-41EB-8ED28907675942D8"
+					name="NewState"
+					width="50"
+					height="24"
+					interactive="true"
+					disabled="true"
+					uniqueguid="C5C3988E-131C-41EB-8ED28907675942D8">
+					<imagemetrics>
+						<image
+							this="0C76D8F9-6625-4E85-B286299918D3D96E"
+							uniqueguid="0C76D8F9-6625-4E85-B286299918D3D96E"
+							componentimage="36DF053D-C481-4D11-A1EEBDD6369E0D7A"
+							offset="10.00,0.00"
+							width="40"
+							height="24"
+							dockpoint="Center Right"
+							margin="0.00,15.00,0.00,5.00"/>
+						<image
+							this="96B4B801-4B25-4993-A1C50432C9E742FA"
+							uniqueguid="96B4B801-4B25-4993-A1C50432C9E742FA"
+							componentimage="AE70E5BF-8082-470A-90F228BF352591FD"
+							offset="0.00,-1.00"
+							width="19"
+							height="27"
+							dockpoint="Center Left"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<component_text
+						text="99"
+						textvalign="Center"
+						textxoffset="20.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="StateText_62cf462d"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						text_shader_name="drop_shadow_t0"
+						textshadervars="-1.00,-1.00,1.00,0.00"/>
+				</newstate>
+			</states>
+		</dy_turns>
 	</components>
 </layout>

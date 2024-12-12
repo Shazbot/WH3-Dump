@@ -49,7 +49,8 @@ function endgame_waaagh:trigger()
 		"wh_main_grn_orcs_of_the_bloody_hand",
 		"wh2_dlc15_grn_broken_axe",
 		"wh2_dlc15_grn_bonerattlaz",
-		"wh_main_grn_crooked_moon"
+		"wh_main_grn_crooked_moon",
+		"wh3_dlc26_grn_gorbad_ironclaw"
 	}
 	local greenskin_factions = {}
 	
@@ -57,7 +58,7 @@ function endgame_waaagh:trigger()
 		local faction_key = potential_greenskins[i]
 		local faction = cm:get_faction(faction_key)
 		local region_key = nil
-		if not faction:is_human() and not faction:is_dead() and not faction:was_confederated() then
+		if faction and not faction:is_human() and not faction:is_dead() and not faction:was_confederated() then
 			if faction:faction_leader():has_region() then
 				region_key = faction:faction_leader():region():name()
 			elseif faction:has_home_region() then

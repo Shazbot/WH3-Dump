@@ -20,8 +20,8 @@ local armies = {
 		["enemy_faction"] =		"wh3_main_ogr_crossed_clubs",
 		["x_pos"] = 			960,
 		["y_pos"] = 			265,
-		["units"] = 			false,
-		["general_subtype"] =	false
+		["units"] = 			"wh3_main_ogr_inf_ogres_0,wh3_main_ogr_inf_ogres_0,wh3_main_ogr_inf_gnoblars_0",
+		["general_subtype"] =	"wh3_main_ogr_tyrant"
 	},
 	{
 		["playable_faction"] =	"wh3_main_ogr_disciples_of_the_maw",

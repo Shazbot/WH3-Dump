@@ -4312,7 +4312,7 @@
 			allowverticalresize="false"
 			priority="40"
 			tooltipslocalised="true"
-			componentleveltooltip="This is the speed at which you can research technology. Research rate can be increased via buildings, character traits and skills."
+			componentleveltooltip="This is the number of Research Points you generate per turn. Research rate can be increased via buildings, character traits and skills."
 			tooltiplabel="dy_research_rate_Tooltip_46005do"
 			uniqueguid="F140A436-8A4A-43F9-A5B430CA8CA9F098"
 			currentstate="3FFB5054-FD1B-4298-94AFC43EC604B911"
@@ -4959,7 +4959,7 @@
 			allowverticalresize="false"
 			priority="40"
 			tooltipslocalised="true"
-			componentleveltooltip="This is the speed at which you can research technology. Research rate can be increased via buildings, character traits and skills."
+			componentleveltooltip="This is the number of Research Points you generate per turn. Research rate can be increased via buildings, character traits and skills."
 			tooltiplabel="dy_research_rate_Tooltip_46005do"
 			uniqueguid="DCE9F513-DC63-43BC-B07E7C81F0833206"
 			currentstate="B5A3B0E2-AEF1-49F8-99E6E8F07FB34251"
@@ -6032,6 +6032,16 @@
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoTechnologyUiGroupRecord">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="TreeCreated"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoTechnologyUiGroupRecord"
+					context_function_id="Component(&quot;tree_parent&quot;).ChildContext(RightMostTechnology.RecordContext.Key).IsVisible()">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -7589,7 +7599,7 @@
 			allowverticalresize="false"
 			priority="40"
 			tooltipslocalised="true"
-			componentleveltooltip="This is the speed at which you can research technology. Research rate can be increased via buildings, character traits and skills."
+			componentleveltooltip="This is the number of Research Points you generate per turn. Research rate can be increased via buildings, character traits and skills."
 			tooltiplabel="dy_research_rate_Tooltip_46005do"
 			uniqueguid="AB625744-C4C5-4AF8-9422FDECFD7DB6DA"
 			currentstate="432813CF-EC8F-49B1-BFE61183D9384B29"
@@ -8939,8 +8949,8 @@
 			priority="40"
 			tooltipslocalised="true"
 			uniqueguid="84B210AE-2DB8-4319-A031E506767B52C1"
-			currentstate="4467D35E-6F2C-4465-A1A5B112DFA90B3A"
-			defaultstate="4467D35E-6F2C-4465-A1A5B112DFA90B3A">
+			currentstate="1DAE0B3B-79F5-4ECD-86835BB6088FD4FA"
+			defaultstate="1DAE0B3B-79F5-4ECD-86835BB6088FD4FA">
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextPropagator"
@@ -8948,33 +8958,13 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignFaction"
-					context_function_id="RootComponent.Dimensions.y &gt;= 1050 &amp;&amp; FactionRecordContext.Key != &quot;wh3_dlc24_tze_the_deceivers&quot; &amp;&amp; (&#10;CultureContext.Key == &quot;wh3_main_kho_khorne&quot; || CultureContext.Key == &quot;wh3_main_nur_nurgle&quot; || CultureContext.Key == &quot;wh3_main_sla_slaanesh&quot; || CultureContext.Key == &quot;wh3_main_tze_tzeentch&quot;)"/>
+					context_function_id="RootComponent.Dimensions.y &gt;= 1050 &amp;&amp; FactionRecordContext.Key != &quot;wh3_dlc24_tze_the_deceivers&quot; &amp;&amp; (&#10;CultureContext.Key == &quot;wh3_main_nur_nurgle&quot; || CultureContext.Key == &quot;wh3_main_sla_slaanesh&quot; || CultureContext.Key == &quot;wh3_main_tze_tzeentch&quot;)"/>
 				<callback_with_context
 					callback_id="ContextStateSetter"
 					context_object_id="CcoCampaignFaction"
 					context_function_id="CultureContext.Key"/>
 			</callbackwithcontextlist>
 			<states>
-				<wh3_main_kho_khorne
-					this="4467D35E-6F2C-4465-A1A5B112DFA90B3A"
-					name="wh3_main_kho_khorne"
-					width="800"
-					height="60"
-					uniqueguid="4467D35E-6F2C-4465-A1A5B112DFA90B3A">
-					<component_text
-						text="Eight is the number of the Blood God. Eight are the pillars at the heart of the Brass Citadel, each inscribed with Khorne’s commandments. Eight are the articles that form each edict – the Blood God’s laws that must be followed…"
-						textvalign="Center"
-						texthalign="Center"
-						textlocalised="true"
-						textlabel="StateText_4ec2361c"
-						font_m_font_name="brand_header"
-						font_m_size="18"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="header_18"
-						font_colour_override_preset_key="dark_r"
-						text_shader_name="text_outline_t0"/>
-				</wh3_main_kho_khorne>
 				<wh3_main_nur_nurgle
 					this="1DAE0B3B-79F5-4ECD-86835BB6088FD4FA"
 					name="wh3_main_nur_nurgle"

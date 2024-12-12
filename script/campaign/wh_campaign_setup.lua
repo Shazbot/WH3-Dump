@@ -158,6 +158,10 @@ function setup_wh_campaign(generic_battle_script_path_override)
 			start_global_interventions();
 		end;
 	end;
+	
+	-- ogre features
+	setup_ogre_meat_rework_listener()
+	setup_path_of_the_butcher()
 
 	start_achievement_listeners();
 	
@@ -1498,6 +1502,12 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 		elseif faction_name == "wh2_dlc15_grn_bonerattlaz" then
 			secondary_detail = "event_feed_strings_text_wh_main_event_feed_string_scripted_event_intro_greenskins_secondary_detail";
 			pic = 593;
+
+		-- Golgfag
+		elseif faction_name == "wh3_dlc26_grn_gorbad_ironclaw" then
+			secondary_detail = "event_feed_strings_text_wh3_dlc26_scripted_event_how_they_play_gorbad_ironclaw_secondary_detail";
+			pic = 593;
+
 		
 		------------------------
 		-- High Elves
@@ -1703,7 +1713,16 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 		------------------------
 		
 		elseif faction_name == "wh3_main_kho_exiles_of_khorne" then
+			title = "event_feed_strings_text_wh3_scripted_event_path_to_victory_title";
 			secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_khorne_secondary_detail";
+			pic = 11;
+		elseif faction_name == "wh3_dlc26_kho_skulltaker" then
+			title = "event_feed_strings_text_wh3_scripted_event_path_to_victory_title";
+			secondary_detail = "ui_text_replacements_localised_text_how_they_play_skulltaker";
+			pic = 88;
+		elseif faction_name == "wh3_dlc26_kho_arbaal" then
+			title = "event_feed_strings_text_wh3_scripted_event_path_to_victory_title";
+			secondary_detail = "ui_text_replacements_localised_text_how_they_play_arbaal";
 			pic = 11;
 		
 		------------------------
@@ -1762,8 +1781,14 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 		-- Ogre Kingdoms
 		------------------------
 		
-		elseif faction_name == "wh3_main_ogr_goldtooth" or faction_name == "wh3_main_ogr_disciples_of_the_maw" then
-			secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_ogre_kingdoms_secondary_detail";
+		elseif faction_name == "wh3_main_ogr_goldtooth" then
+			secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_ogre_kingdoms_goldtooth_secondary_detail";
+			pic = 16;
+		elseif faction_name == "wh3_dlc26_ogr_golgfag" then
+			secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_ogre_kingdoms_golgfag_secondary_detail";
+			pic = 16;
+		elseif faction_name == "wh3_main_ogr_disciples_of_the_maw" then
+			secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_ogre_kingdoms_disciples_of_the_maw_secondary_detail";
 			pic = 16;
 
 		------------------------
@@ -2771,6 +2796,58 @@ function apply_default_diplomacy()
 		end;
 	end;
 end;
+
+function setup_ogre_meat_rework_listener()
+	local ogre_mean_key_original = "wh3_main_ogr_meat"
+	local ogre_mean_key_cai_version = "wh3_dlc26_ogr_meat_CAI"
+	
+	core:add_listener(
+		"test_resource_listener",
+		"PooledResourceChanged",
+		function(context)
+			return context:has_faction() and context:resource():key() == ogre_mean_key_original and  not context:faction():is_human()	
+		end,
+		function(context)
+			local faction = context:faction()
+			local faction_key = faction:name()
+			local resource = context:resource()
+			local amount = context:amount()
+			local factor = context:factor():key()
+			
+			local check_resource = faction:pooled_resource_manager():resource(ogre_mean_key_cai_version)
+			if check_resource then
+				cm:faction_add_pooled_resource(faction_key, ogre_mean_key_cai_version, factor, amount)
+			end
+		end,
+		true
+	)
+end
+
+function setup_path_of_the_butcher()
+	core:add_listener(
+		"path_of_the_butcher_offer_made",
+		"CharacterInitiativeActivationChangedEvent",
+		function(context)
+			return context:initiative():record_key():starts_with("wh3_dlc26_character_initiative_ogr_maw_offering") and not context:character():faction():pooled_resource_manager():resource("ogr_path_of_the_butcher"):is_null_interface()
+		end,
+		function(context)
+			cm:apply_regular_reset_income(context:character():faction():pooled_resource_manager())
+		end,
+		true
+	)
+	
+	core:add_listener(
+		"path_of_the_butcher_character_killed",
+		"CharacterConvalescedOrKilled",
+		function(context)
+			return not context:character():faction():pooled_resource_manager():resource("ogr_path_of_the_butcher"):is_null_interface()
+		end,
+		function(context)
+			cm:apply_regular_reset_income(cm:get_faction(context:character():faction():name()):pooled_resource_manager())
+		end,
+		true
+	)
+end
 
 
 function add_debug_listeners()

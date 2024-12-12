@@ -185,6 +185,7 @@
 					</campaign>
 					<selected_frame this="33D5A474-05C7-4297-8EBFFC4DA4732FCA"/>
 					<exchange_arrow this="1794E05A-E2B2-4353-B03E9586075AE18B"/>
+					<scrap_upgrades_frame this="E97A96F9-3E36-4194-A5297B57BE07F77D"/>
 				</card_image_holder>
 				<dev_heal_holder this="027095B6-8E88-42A5-B2257787C3CF5521">
 					<dev_heal_unit this="B13F297A-731B-473B-ABE6B16C3320B296">
@@ -7748,13 +7749,16 @@
 			allowverticalresize="false"
 			visible="false"
 			priority="1"
-			tooltipslocalised="true"
+			componentleveltooltip="{{tt:ui/campaign ui/tooltip_dlc26_scrap_upgrades}}"
+			tooltiplabel="ComponentTooltip_cbae358e"
 			soundcategory="UI_GBL_TMP_Mouse_Over_Only"
 			uniqueguid="2602AAF2-410A-4F8C-8D10ABFAB0FCA64E"
 			currentstate="9177C061-0695-4A15-A57AFF5CF72BD16A"
 			defaultstate="9177C061-0695-4A15-A57AFF5CF72BD16A">
 			<callbackwithcontextlist>
-				<callback_with_context callback_id="CampaignEffectsBundleIcon"/>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoUnitDetails"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -7764,6 +7768,18 @@
 					this="E05EB660-4990-4678-8FB1A7B20C325304"
 					uniqueguid="E05EB660-4990-4678-8FB1A7B20C325304"
 					imagepath="ui/skins/default/icon_salvage_level_up.png"/>
+				<component_image
+					this="05BE7CB0-CD7C-4FC8-A8453C583AB73CC8"
+					uniqueguid="05BE7CB0-CD7C-4FC8-A8453C583AB73CC8"
+					imagepath="ui/skins/default/dlc26_greenskins_scrap_upgrades/icon_scrap_upgrade_acquired.png"/>
+				<component_image
+					this="7DD2F459-64F4-4E31-982E8EC39F45A4ED"
+					uniqueguid="7DD2F459-64F4-4E31-982E8EC39F45A4ED"
+					imagepath="ui/skins/default/dlc26_greenskins_scrap_upgrades/icon_scrap_upgrade_available.png"/>
+				<component_image
+					this="AEB3E031-B5CF-432F-86B385EFA5C52232"
+					uniqueguid="AEB3E031-B5CF-432F-86B385EFA5C52232"
+					imagepath="ui/skins/default/dlc26_greenskins_scrap_upgrades/icon_scrap_upgrade_fully_upgraded.png"/>
 			</componentimages>
 			<states>
 				<available
@@ -7771,6 +7787,8 @@
 					name="available"
 					width="27"
 					height="22"
+					interactive="true"
+					disabled="true"
 					uniqueguid="AF6A1F9A-BFA3-4D6A-A196C3A1A1676D53">
 					<imagemetrics>
 						<image
@@ -7798,6 +7816,63 @@
 							height="22"/>
 					</imagemetrics>
 				</purchased>
+				<scrap_available
+					this="EEF49B57-B6A6-434F-9DB58F839FE90AB6"
+					name="scrap_available"
+					width="27"
+					height="22"
+					interactive="true"
+					disabled="true"
+					uniqueguid="EEF49B57-B6A6-434F-9DB58F839FE90AB6">
+					<imagemetrics>
+						<image
+							this="DAD1991A-7989-49F8-BC21A929BDBFE368"
+							uniqueguid="DAD1991A-7989-49F8-BC21A929BDBFE368"
+							componentimage="7DD2F459-64F4-4E31-982E8EC39F45A4ED"
+							offset="0.00,-3.00"
+							width="22"
+							height="28"
+							dockpoint="Center Left"/>
+					</imagemetrics>
+				</scrap_available>
+				<scrap_fully_upgraded
+					this="2DAAB6A9-1129-41D2-9F38B0313FEFB2F7"
+					name="scrap_fully_upgraded"
+					width="27"
+					height="22"
+					interactive="true"
+					disabled="true"
+					uniqueguid="2DAAB6A9-1129-41D2-9F38B0313FEFB2F7">
+					<imagemetrics>
+						<image
+							this="ECE36325-D647-42FF-B95B92B4DFB1D536"
+							uniqueguid="ECE36325-D647-42FF-B95B92B4DFB1D536"
+							componentimage="AEB3E031-B5CF-432F-86B385EFA5C52232"
+							offset="0.00,-3.00"
+							width="22"
+							height="28"
+							dockpoint="Center Left"/>
+					</imagemetrics>
+				</scrap_fully_upgraded>
+				<scrap_partial_upgrade
+					this="D0364C10-2C5C-4F43-A5601EABC0A73D4F"
+					name="scrap_partial_upgrade"
+					width="27"
+					height="22"
+					interactive="true"
+					disabled="true"
+					uniqueguid="D0364C10-2C5C-4F43-A5601EABC0A73D4F">
+					<imagemetrics>
+						<image
+							this="94C727BC-0AE7-445A-BC5B3F609F685200"
+							uniqueguid="94C727BC-0AE7-445A-BC5B3F609F685200"
+							componentimage="05BE7CB0-CD7C-4FC8-A8453C583AB73CC8"
+							offset="0.00,-3.00"
+							width="22"
+							height="28"
+							dockpoint="Center Left"/>
+					</imagemetrics>
+				</scrap_partial_upgrade>
 			</states>
 		</upgrade_effect_icon>
 		<bribe_cost
@@ -11424,5 +11499,90 @@
 				</curse>
 			</states>
 		</ostankya_blessing_curse_cat_frame>
+		<scrap_upgrades_frame
+			this="E97A96F9-3E36-4194-A5297B57BE07F77D"
+			id="scrap_upgrades_frame"
+			visible="false"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			tooltipslocalised="true"
+			uniqueguid="E97A96F9-3E36-4194-A5297B57BE07F77D"
+			currentstate="3FE70A3C-E25C-4733-8A24C3737AE20FB6"
+			defaultstate="3FE70A3C-E25C-4733-8A24C3737AE20FB6">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignUnit"
+					context_function_id="( is_scrap_panel_open = Component(&quot;units_panel_scrap_upgrades&quot;, &quot;scrap_upgrades&quot;).IsVisible,&#10;is_applicable_faction = PlayersFaction.CultureContext.IsGreenskins || PlayersFaction.FactionRecordContext.Key == &quot;wh2_dlc16_wef_drycha&quot; || PlayersFaction.FactionRecordContext.Key == &quot;wh_dlc05_wef_argwylon&quot;,&#10;is_this_unit_card_selected_or_has_available_effects_to_purchase = Component(&quot;^2&quot;).IsSelected || CanPurchaseAvailableEffects ) =&gt;&#10;{&#10; is_scrap_panel_open &amp;&amp; is_applicable_faction &amp;&amp; is_this_unit_card_selected_or_has_available_effects_to_purchase&#10;}">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="RefreshUnitSelection"/>
+						<property
+							name="event1"
+							value="UpgradeUnitsRequested"/>
+						<property
+							name="event2"
+							value="CloseUnitUpgradePanel"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoCampaignUnit"
+					context_function_id="Component(&quot;^2&quot;).IsSelected | &quot;selected&quot; | &quot;available&quot;">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="UnitEffectPurchased&#10;"/>
+						<property
+							name="event1"
+							value="UpgradeUnitsRequested"/>
+						<property
+							name="event2"
+							value="RefreshUnitSelection"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="B179D317-8CA4-46FE-9F0A193D66205B0A"
+					uniqueguid="B179D317-8CA4-46FE-9F0A193D66205B0A"
+					imagepath="ui/skins/default/unit_card_selected.png"/>
+			</componentimages>
+			<states>
+				<available
+					this="DB00DF1B-D233-4453-A5CC7BFBA45F5FE2"
+					name="available"
+					width="60"
+					height="130"
+					uniqueguid="DB00DF1B-D233-4453-A5CC7BFBA45F5FE2">
+					<imagemetrics>
+						<image
+							this="AFC1DDDD-829A-441D-8F9EA388839F1080"
+							uniqueguid="AFC1DDDD-829A-441D-8F9EA388839F1080"
+							componentimage="B179D317-8CA4-46FE-9F0A193D66205B0A"
+							width="60"
+							height="130"
+							colour="#A0FF37FF"
+							ui_colour_preset_type_key="morale_steady"/>
+					</imagemetrics>
+				</available>
+				<selected
+					this="3FE70A3C-E25C-4733-8A24C3737AE20FB6"
+					name="selected"
+					width="60"
+					height="130"
+					uniqueguid="3FE70A3C-E25C-4733-8A24C3737AE20FB6">
+					<imagemetrics>
+						<image
+							this="307E82CD-42D7-4B8F-83E2F8C852E496AB"
+							uniqueguid="307E82CD-42D7-4B8F-83E2F8C852E496AB"
+							componentimage="B179D317-8CA4-46FE-9F0A193D66205B0A"
+							width="60"
+							height="130"/>
+					</imagemetrics>
+				</selected>
+			</states>
+		</scrap_upgrades_frame>
 	</components>
 </layout>

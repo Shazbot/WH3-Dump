@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="CanUseUiFeature(&quot;BIG_NAMES&quot;)">
 	<hierarchy>
@@ -20,12 +20,6 @@
 								</list_box>
 							</effect_holder>
 							<dy_header this="80F4763A-9DD4-4DDD-B28130616C1C4ABB"/>
-							<button_holder this="86D44939-080D-4275-90D07E069E6A1223">
-								<button_select this="0D58E910-7E06-4E43-BFA2E5E383042AD6">
-									<button_flame this="EED2B815-79A1-4F32-A5B5E89C5E2B6A65"/>
-									<button_txt this="A3917C2D-5A8A-4E2B-B996AD618E2D7C8B"/>
-								</button_select>
-							</button_holder>
 							<tx_requirements this="65D71EBF-F54C-4494-8C1C98D30B85DAE7">
 								<dy_unlock_text this="A3E7EDA4-0E75-4B42-80B2A97B8FDE0ACD"/>
 							</tx_requirements>
@@ -41,6 +35,10 @@
 							</cooldown_cost_holder>
 						</template_name_entry>
 					</list_box>
+					<dev_text_button this="09660E96-C4F1-4F24-8CFDBBD86C043A0B">
+						<button_txt this="6A7A7687-3416-4704-8DF80E8C859EBDB5"/>
+						<dev_icon this="52461A47-530F-4051-B2412FBA02228722"/>
+					</dev_text_button>
 				</list_clip>
 				<hslider this="15DF224A-DDCA-4468-81ECE93BC3A0735F">
 					<frame_left this="BE94A22E-B131-4CA3-9B3988B0FAC83FEB"/>
@@ -53,120 +51,79 @@
 		</root>
 	</hierarchy>
 	<components>
-		<root
-			this="4F46D56F-5667-45F9-8226E4DD5926CE18"
-			id="root"
-			tooltipslocalised="true"
-			uniqueguid="4F46D56F-5667-45F9-8226E4DD5926CE18"
-			currentstate="EC96CF25-D8C6-4C3B-8F79D10FC6CE9A01"
-			defaultstate="EC96CF25-D8C6-4C3B-8F79D10FC6CE9A01">
-			<componentimages>
-				<component_image
-					this="EB4C89A6-495E-423A-BAE1AF0CEF716DF7"
-					uniqueguid="EB4C89A6-495E-423A-BAE1AF0CEF716DF7"/>
-			</componentimages>
-			<states>
-				<default
-					this="EC96CF25-D8C6-4C3B-8F79D10FC6CE9A01"
-					name="default"
-					width="1600"
-					height="900"
-					uniqueguid="EC96CF25-D8C6-4C3B-8F79D10FC6CE9A01">
-					<imagemetrics>
-						<image
-							this="6525D627-7914-4C8F-887EAD09469BB65F"
-							uniqueguid="6525D627-7914-4C8F-887EAD09469BB65F"
-							componentimage="EB4C89A6-495E-423A-BAE1AF0CEF716DF7"
-							width="1920"
-							height="1080"
-							colour="#1C1C1CFF"/>
-					</imagemetrics>
-				</default>
-			</states>
-		</root>
-		<button_select
-			this="0D58E910-7E06-4E43-BFA2E5E383042AD6"
-			id="button_select"
-			template_id="square_large_text_button"
+		<button_txt
+			this="6A7A7687-3416-4704-8DF80E8C859EBDB5"
+			id="button_txt"
 			part_of_template="true"
-			uniqueguid_in_template="D8275039-5A3B-40C0-974330DBC4409AFD"
-			uniqueguid="0D58E910-7E06-4E43-BFA2E5E383042AD6"
-			dimensions="300.00,51.00"
-			offset="-9.00,14.00"
-			priority="60"
-			sound_category="UI_CAM_CLICK_Ogres_Choose_Name">
+			uniqueguid_in_template="C5314C5F-DB2A-4917-835E17930F5E2573"
+			uniqueguid="6A7A7687-3416-4704-8DF80E8C859EBDB5"
+			dimensions="186.00,29.00"
+			dock_point="Center"
+			offset="0.00,-1.00"
+			priority="100">
 			<state_uniqueguids>
 				<state_uniqueguid
 					name="active"
-					uniqueguid="BC6DA070-65E9-4DE2-8F29E7E8DA867735"/>
+					uniqueguid="4D5237E2-7005-4570-9907811E5DA7B0A8"/>
+			</state_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					text="Re-roll initiatives"
+					text_label="StateText_db70d5c2"
+					is_text_localised="false"/>
+			</localised_texts>
+		</button_txt>
+		<dev_text_button
+			this="09660E96-C4F1-4F24-8CFDBBD86C043A0B"
+			id="dev_text_button"
+			template_id="dev_text_button"
+			is_dev_only="true"
+			part_of_template="true"
+			uniqueguid_in_template="715902FD-2442-4210-8831AAF520A41055"
+			uniqueguid="09660E96-C4F1-4F24-8CFDBBD86C043A0B"
+			dimensions="186.00,29.00"
+			is_visible="false"
+			offset="974.00,4.00"
+			priority="100"
+			sound_category="UI_GBL_TMP_Square_Large_Text_Button_Toggle">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="C376A51E-C9F2-4E69-A81649F124A0A2DF"/>
 				<state_uniqueguid
 					name="down"
-					uniqueguid="4F677A7E-3AFB-4F35-AB09C61EA9A40906"/>
+					uniqueguid="630BA299-8851-4F2E-A0FDFDE46EB8DAAC"/>
 				<state_uniqueguid
 					name="down_off"
-					uniqueguid="4247007C-4976-4104-BE2CB0FE0134C58E"/>
+					uniqueguid="22F68F01-B142-4BA2-BBE69024DCEA77DB"/>
 				<state_uniqueguid
 					name="hover"
-					uniqueguid="25F4AC32-CE56-4868-B327A74D527392DC"/>
+					uniqueguid="EE1647ED-9C2E-4606-BC81FF38644ECA69"/>
 				<state_uniqueguid
 					name="inactive"
-					uniqueguid="EBAE4391-71F4-436B-A3CF01E87C4B5A48"/>
+					uniqueguid="B04ECCF9-41AB-43D7-98315A5544BC9E1C"/>
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui/skins/default/button_square_large_text_pressed.png"
-					uniqueguid="0345183A-DFDA-4BC1-9904870C1FDB6C84"/>
+					name="ui/skins/default/dev/button_rectangular_backplate.png"
+					uniqueguid="C0EF8354-A451-4CAD-BD182A44EC75C273"/>
 				<component_image_uniqueguid
-					name="ui/skins/default/button_square_large_text_active.png"
-					uniqueguid="E453C1D7-5A25-4F6E-9079E10850129D3A"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_square_large_text_hover.png"
-					uniqueguid="5A7661B5-56D9-4396-A97316FEB9A7D0B1"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_square_large_text_inactive.png"
-					uniqueguid="7755B2B2-50AD-4912-BF2A86FE01F5222C"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_square_large_text_underlay.png"
-					uniqueguid="9D2025BE-050F-4832-9ABE34328793C6CD"/>
+					name="ui/skins/default/dev/button_square_hover_highlight.png"
+					uniqueguid="C118A89B-21FD-4B99-BB3FBB5DE0E38F6E"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
-				<callback_with_context callback_id="TextButton"/>
 				<callback_with_context
 					callback_id="ContextCommandLeftClick"
-					context_object_id="CcoCampaignInitiative"
-					context_function_id="Activate"/>
-				<callback_with_context
-					callback_id="ContextInactiveStateSetter"
-					context_object_id="CcoCampaignInitiative"
-					context_function_id="IsLocked">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="CharacterInitiativeActivationChanged"/>
-						<property
-							name="event2"
-							value="PooledResourceTransaction"/>
-						<property
-							name="invert_state"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextTooltipSetter"
-					context_object_id="CcoCampaignInitiative"
-					context_function_id="GetIfElse( IsOnlyOnCooldown, Loc(&quot;ogre_big_name_locked_on_cooldown&quot;) , GetIf(IsLocked, GetIfElse(LockReasons.IsEmpty == false, Format(&quot;%S&#10;&#10;%S&quot;, Loc(&quot;ogre_big_name_locked&quot;), LockReasons), Loc(&quot;ogre_big_name_locked&quot;))) )">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="CharacterInitiativeActivationChanged"/>
-					</child_m_user_properties>
-				</callback_with_context>
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="Do(DevReRollInitiatives, UiMsg(&quot;CharacterInitiativesReRolled&quot;))"/>
 			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="override_sound"
-					value=""/>
-			</user_properties>
 			<localised_texts>
 				<localised_text/>
 				<localised_text
@@ -186,13 +143,10 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui/skins/default/button_square_large_text_pressed.png"/>
-				<element value="ui/skins/default/button_square_large_text_active.png"/>
-				<element value="ui/skins/default/button_square_large_text_hover.png"/>
-				<element value="ui/skins/default/button_square_large_text_inactive.png"/>
-				<element value="ui/skins/default/button_square_large_text_underlay.png"/>
+				<element value="ui/skins/default/dev/button_rectangular_backplate.png"/>
+				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
 			</override_images>
-		</button_select>
+		</dev_text_button>
 		<hslider
 			this="15DF224A-DDCA-4468-81ECE93BC3A0735F"
 			id="hslider"
@@ -287,7 +241,7 @@
 				<callback_with_context
 					callback_id="ContextInactiveStateSetter"
 					context_object_id="CcoCampaignInitiative"
-					context_function_id="IsLocked == false">
+					context_function_id="IsLocked == false || IsActive == true">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -359,7 +313,7 @@
 				<callback_with_context
 					callback_id="ContextInactiveStateSetter"
 					context_object_id="CcoCampaignInitiative"
-					context_function_id="IsLocked == false">
+					context_function_id="IsLocked == false || IsActive == true">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -391,51 +345,6 @@
 				<element value="ui/campaign ui/effect_bundles/army.png"/>
 			</override_images>
 		</template_effect_with_ability>
-		<button_flame
-			this="EED2B815-79A1-4F32-A5B5E89C5E2B6A65"
-			id="button_flame"
-			part_of_template="true"
-			uniqueguid_in_template="43E521B0-0A25-4C22-82FE029058200FF9"
-			uniqueguid="EED2B815-79A1-4F32-A5B5E89C5E2B6A65"
-			dimensions="238.00,28.00"
-			dock_point="Center"
-			offset="0.00,-1.00"
-			priority="100">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="6F77E122-714A-4DD0-98CE3DBDD03719D7"/>
-			</state_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoStaticObject"
-					context_function_id="self.ParentContext.IsMouseOver &amp;&amp; self.ParentContext.IsDisabled == false">
-					<child_m_user_properties>
-						<property
-							name="update_constant"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="disable_override"
-					value="callbacks"/>
-				<property
-					name="disable_override1"
-					value="position"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value=""/>
-			</override_images>
-		</button_flame>
 		<frame_left
 			this="BE94A22E-B131-4CA3-9B3988B0FAC83FEB"
 			id="frame_left"
@@ -474,42 +383,36 @@
 				<element value="ui/skins/default/slider_horizontal_left.png"/>
 			</override_images>
 		</frame_left>
-		<button_txt
-			this="A3917C2D-5A8A-4E2B-B996AD618E2D7C8B"
-			id="button_txt"
+		<dev_icon
+			this="52461A47-530F-4051-B2412FBA02228722"
+			id="dev_icon"
 			part_of_template="true"
-			uniqueguid_in_template="BF9E2DF6-9810-4FAE-97B856F2B15FB826"
-			uniqueguid="A3917C2D-5A8A-4E2B-B996AD618E2D7C8B"
-			dimensions="225.00,51.00"
-			dock_point="Center"
-			priority="60">
+			uniqueguid_in_template="0F4F9F06-4613-496B-A0F05A2B8B88B70D"
+			uniqueguid="52461A47-530F-4051-B2412FBA02228722"
+			dimensions="24.00,24.00"
+			dock_point="Center Left"
+			offset="2.00,0.00"
+			priority="100">
 			<state_uniqueguids>
 				<state_uniqueguid
-					name="active"
-					uniqueguid="77B17567-AB52-4621-8D38BE511D2CEE4C"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="E6CD3F98-4334-4E94-971BB645A5CC178D"/>
+					name="default"
+					uniqueguid="706CEF3E-D2C2-4FD4-9E2403D878E2DB8E"/>
 			</state_uniqueguids>
-			<user_properties>
-				<property
-					name="disable_override"
-					value="instance_resize"/>
-			</user_properties>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/dev_icon.png"
+					uniqueguid="FEE43DB7-8BA6-4D29-942E410822A90CA6"/>
+			</component_image_uniqueguids>
 			<localised_texts>
 				<localised_text/>
 				<localised_text
-					state="active"
-					text="{{tr:character_initiative_activate}}"
-					text_label="StateText_71c11c86"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					text="{{tr:character_initiative_activate}}"
-					text_label="StateText_2958490"
+					state="default"
 					is_text_localised="false"/>
 			</localised_texts>
-		</button_txt>
+			<override_images>
+				<element value="ui/skins/default/dev/dev_icon.png"/>
+			</override_images>
+		</dev_icon>
 		<frame_right
 			this="DA0F97D6-1340-403E-8F20DB035C341D6C"
 			id="frame_right"
@@ -761,41 +664,37 @@
 				<element value="ui/skins/default/slider_horizontal_right_hover.png"/>
 			</override_images>
 		</right>
-		<button_holder
-			this="86D44939-080D-4275-90D07E069E6A1223"
-			id="button_holder"
-			offset="883.00,42.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			docking="Center Right"
-			component_anchor_point="1.00,0.50"
-			priority="60"
+		<root
+			this="4F46D56F-5667-45F9-8226E4DD5926CE18"
+			id="root"
 			tooltipslocalised="true"
-			uniqueguid="86D44939-080D-4275-90D07E069E6A1223"
-			isaspectratiolocked="true"
-			currentstate="F3C83A55-2E13-48C7-A4C3E95A6FC7CD3F"
-			defaultstate="F3C83A55-2E13-48C7-A4C3E95A6FC7CD3F">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoCampaignInitiative"
-					context_function_id="IsActive == false">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="CharacterInitiativeActivationChanged"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
+			uniqueguid="4F46D56F-5667-45F9-8226E4DD5926CE18"
+			currentstate="EC96CF25-D8C6-4C3B-8F79D10FC6CE9A01"
+			defaultstate="EC96CF25-D8C6-4C3B-8F79D10FC6CE9A01">
+			<componentimages>
+				<component_image
+					this="EB4C89A6-495E-423A-BAE1AF0CEF716DF7"
+					uniqueguid="EB4C89A6-495E-423A-BAE1AF0CEF716DF7"/>
+			</componentimages>
 			<states>
 				<default
-					this="F3C83A55-2E13-48C7-A4C3E95A6FC7CD3F"
+					this="EC96CF25-D8C6-4C3B-8F79D10FC6CE9A01"
 					name="default"
-					width="277"
-					height="75"
-					uniqueguid="F3C83A55-2E13-48C7-A4C3E95A6FC7CD3F"/>
+					width="1600"
+					height="900"
+					uniqueguid="EC96CF25-D8C6-4C3B-8F79D10FC6CE9A01">
+					<imagemetrics>
+						<image
+							this="6525D627-7914-4C8F-887EAD09469BB65F"
+							uniqueguid="6525D627-7914-4C8F-887EAD09469BB65F"
+							componentimage="EB4C89A6-495E-423A-BAE1AF0CEF716DF7"
+							width="1920"
+							height="1080"
+							colour="#1C1C1CFF"/>
+					</imagemetrics>
+				</default>
 			</states>
-		</button_holder>
+		</root>
 		<character_details_panel_big_names
 			this="7E4F84AD-5CE1-4438-B8FC12D597739327"
 			id="character_details_panel_big_names"
@@ -1316,11 +1215,10 @@
 		<dy_unlock_text
 			this="A3E7EDA4-0E75-4B42-80B2A97B8FDE0ACD"
 			id="dy_unlock_text"
-			offset="40.00,33.00"
+			offset="40.00,32.00"
 			allowhorizontalresize="false"
-			docking="Bottom Left"
-			dock_offset="40.00,27.00"
-			component_anchor_point="0.00,1.00"
+			docking="Top Left"
+			dock_offset="40.00,32.00"
 			priority="60"
 			tooltipslocalised="true"
 			uniqueguid="A3E7EDA4-0E75-4B42-80B2A97B8FDE0ACD"
@@ -1698,8 +1596,11 @@
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoCampaignCharacter"
-					context_function_id="InitiativeSetList.FirstContext">
+					context_function_id="InitiativeManager.InitiativeSetList(&quot;STANDARD_INITIATIVES&quot;).FirstContext">
 					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CharacterInitiativesReRolled"/>
 						<property
 							name="only_target"
 							value=""/>
@@ -1850,7 +1751,7 @@
 			priority="60"
 			tooltipslocalised="true"
 			uniqueguid="87CE11A3-6A86-4ABA-B17FC1D195AAB5BF"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="1077E127-87E1-4548-871312140E952D6D"
 			defaultstate="1077E127-87E1-4548-871312140E952D6D">
 			<callbackwithcontextlist>
@@ -1875,7 +1776,7 @@
 							value="active"/>
 						<property
 							name="inactive"
-							value="IsLocked"/>
+							value="IsLocked &amp;&amp; IsActive == false"/>
 						<property
 							name="selected"
 							value="IsActive"/>
@@ -2020,7 +1921,7 @@
 							value="unlocked"/>
 						<property
 							name="locked"
-							value="IsLocked &amp;&amp; IsOnlyOnCooldown == false"/>
+							value="IsLocked &amp;&amp; IsOnlyOnCooldown == false &amp;&amp; IsActive == false"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbackwithcontextlist>
