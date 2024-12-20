@@ -201,7 +201,7 @@ function da_plan:initialise()
 			return character:won_battle() and character:faction():name() == self.faction_key and character:is_faction_leader()
 		end,
 		function()
-			cm:faction_add_pooled_resource(self.faction_key, self.planz.resource_key, self.planz.factors.gained, 1)
+			cm:faction_add_pooled_resource(self.faction_key, self.planz.resource_key, self.planz.factors.gained, 2)
 		end,
 		true
 	)

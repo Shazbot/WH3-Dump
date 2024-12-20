@@ -20039,7 +20039,7 @@ khorne_ascendancy:add_advice_key_precondition("wh3_main_camp_advice_khorne_ascen
 
 khorne_ascendancy:add_trigger_condition(
 	"ScriptEventNewGodAscendant",
-	function(context) return context.string == "wh3_main_kho_khorne" end
+	function(context) return context.string == "wh3_main_kho_khorne" and not unholy_manifestations_excluded_factions[cm:get_local_faction_name()] end
 )
 
 function trigger_khorne_ascendancy()
@@ -20075,7 +20075,7 @@ nurgle_ascendancy:add_advice_key_precondition("wh3_main_camp_advice_nurgle_ascen
 
 nurgle_ascendancy:add_trigger_condition(
 	"ScriptEventNewGodAscendant",
-	function(context) return context.string == "wh3_main_nur_nurgle" end
+	function(context) return context.string == "wh3_main_nur_nurgle" and not unholy_manifestations_excluded_factions[cm:get_local_faction_name()] end
 )
 
 function trigger_nurgle_ascendancy()
@@ -20111,7 +20111,7 @@ tzeentch_ascendancy:add_advice_key_precondition("wh3_main_camp_advice_tzeentch_a
 
 tzeentch_ascendancy:add_trigger_condition(
 	"ScriptEventNewGodAscendant",
-	function(context) return context.string == "wh3_main_tze_tzeentch" end
+	function(context) return context.string == "wh3_main_tze_tzeentch" and not unholy_manifestations_excluded_factions[cm:get_local_faction_name()] end
 )
 
 function trigger_tzeentch_ascendancy()
@@ -20147,7 +20147,7 @@ slaanesh_ascendancy:add_advice_key_precondition("wh3_main_camp_advice_slaanesh_a
 
 slaanesh_ascendancy:add_trigger_condition(
 	"ScriptEventNewGodAscendant",
-	function(context) return context.string == "wh3_main_sla_slaanesh" end
+	function(context) return context.string == "wh3_main_sla_slaanesh" and not unholy_manifestations_excluded_factions[cm:get_local_faction_name()] end
 )
 
 function trigger_slaanesh_ascendancy()

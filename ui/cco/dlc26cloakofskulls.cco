@@ -51,7 +51,9 @@ CloakOfSkulls
     {
         ritual.IsAvailable == false || 
         ritual.CanPerformRitualWithAnyValidTarget(performing_character) == false ||
-        performing_character.MilitaryForceContext.IsLayingSiege || 
-        performing_character.SettlementContext.IsUnderSiege
+        (performing_character.MilitaryForceContext && performing_character.MilitaryForceContext.IsLayingSiege) ||
+        (performing_character.MilitaryForceContext && 
+            performing_character.MilitaryForceContext.SettlementContext && 
+            performing_character.MilitaryForceContext.SettlementContext.IsUnderSiege)
     }
 }

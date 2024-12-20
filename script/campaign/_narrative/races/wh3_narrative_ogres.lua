@@ -1046,7 +1046,7 @@ local function ogre_contracts_narrative_loader(faction_key)
 				narrative.get(faction_key, name .. "_camera_scroll_callback"),				
 				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
 				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
-					payload.money_direct(5000)																							
+					payload.money_direct(1000)																							
 				},
 				narrative.get(faction_key, name .. "_trigger_messages") or "StartOgreContractsCompleteMission",													-- script message(s) on which to trigge ]]r when received
 				narrative.get(faction_key, name .. "_on_issued_messages"),																						-- script message(s) to trigger when this narrative event has finished issuing (may be nil)

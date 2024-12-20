@@ -61,9 +61,9 @@ merc_contracts = {
 			[2] = 5, -- % chance of 2 secondary rewards
 		},
 		rewards = {
-			treasury = 15, -- per 1 contract point
-			bonus_treasury = 10, -- per 1 contract point earned over the original target.
-			meat = 4, -- per 1 contract point
+			treasury = 10, -- per 1 contract point
+			bonus_treasury = 5, -- per 1 contract point earned over the original target.
+			meat = 2, -- per 1 contract point
 			effect_bundles = {
 				prefix = "wh3_dlc26_golgfag_contracts_reward_",
 				count = 22 -- the number of bundles in DaVE

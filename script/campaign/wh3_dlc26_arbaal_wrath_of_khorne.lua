@@ -215,6 +215,8 @@ function wrath_of_khorne:initialise()
 			return cm:pending_battle_cache_faction_is_involved(self.faction_key)
 		end,
 		function()
+			local pb = cm:model():pending_battle()
+
 			local function remove_effect_bundles(mf_cqi)
 				local mf = cm:get_military_force_by_cqi(mf_cqi)
 				if not mf then return end
@@ -240,7 +242,7 @@ function wrath_of_khorne:initialise()
 
 			local faction = cm:get_faction(self.faction_key)
 
-			if cm:model():pending_battle():has_been_fought() then
+			if pb:has_been_fought() then
 				if cm:pending_battle_cache_faction_won_battle(self.faction_key) then
 					local arbaal_target_cqis = cm:get_saved_value("arbaal_target_cqis") or {}
 					local arbaal_character_cqi = 0
@@ -313,8 +315,16 @@ function wrath_of_khorne:initialise()
 				if not faction:has_faction_leader() then return end
 
 				local faction_leader = faction:faction_leader()
+				local faction_leader_fm_cqi = faction_leader:family_member():command_queue_index()
 
-				if cm:pending_battle_cache_faction_lost_battle(self.faction_key) and cm:pending_battle_cache_fm_is_involved(faction_leader:family_member():command_queue_index()) then
+				if cm:pending_battle_cache_faction_lost_battle(self.faction_key) and cm:pending_battle_cache_fm_is_involved(faction_leader_fm_cqi) then
+					-- ignore lightning strike battles where arbaal was defending as a secondary character
+					if pb:night_battle() then
+						for i = 1, cm:pending_battle_cache_num_defenders() do
+							if i > 1 and cm:pending_battle_cache_get_defender_fm_cqi(i) == faction_leader_fm_cqi then return end
+						end
+					end
+
 					if faction:is_human() then
 						local dilemma_builder = cm:create_dilemma_builder(self.defeat_dilemma)
 						local payload_builder = cm:create_payload()
@@ -417,7 +427,7 @@ function wrath_of_khorne:generate_challenges(faction, show_mission_issued_event)
 			local num_missions_needed = self.missions_config.number_of_missions_per_type[mission_types[i]] - num_missions
 			local armies_selected = self:get_valid_armies_for_mission_targets(mission_types[i], num_missions_needed)
 
-			out.design(mission_types[i] .. " missions selected: ================================================")
+			out.design("Issuing " .. num_missions_needed .. " " .. mission_types[i] .. " missions. " .. #armies_selected .. " available armies")
 
 			-- trigger all the easy missions from the selected list
 			for j, army in ipairs(armies_selected) do
@@ -562,28 +572,17 @@ function wrath_of_khorne:get_valid_armies_for_mission_targets(strength, num_miss
 		out.design("No need to create new armies and corresponding missions as enough are already available - number of available [" .. strength .. "] missions: [" .. #sorted_armies .. "]")
 	end
 
+	sorted_armies = cm:random_sort(sorted_armies)
+
 	local selected_armies = {}
-
-	-- find the max number of missions to select from the available list of missions provided
-	-- TODO: consider re-writing this random selection
-	local max_missions = math.min(#sorted_armies, self.missions_config.number_of_missions_per_type[strength])
-	out.design("Max number of " .. strength .. " missions: " .. max_missions)
-
-	-- select from the available missions at random
-	for i = 1, max_missions do
-		local random_army = sorted_armies[cm:random_number(max_missions)]
-		table.insert(selected_armies, random_army)
-		-- remove the selected mission from the original list so it can't be selected again
-		for i = 1, #sorted_armies do
-			if sorted_armies[i]:command_queue_index() == random_army:command_queue_index() then
-				table.remove(sorted_armies, i)
-				break
-			end
+	
+	for i = 1, num_missions do
+		local current_army = sorted_armies[i]
+		if current_army then
+			table.insert(selected_armies, current_army)
 		end
-
-		max_missions = max_missions - 1
 	end
-
+	
 	return selected_armies
 end
 

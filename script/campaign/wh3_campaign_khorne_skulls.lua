@@ -441,6 +441,22 @@ function khorne_spawned_armies:setup_listeners()
 		true
 	);
 
+	local function update_blood_host_timer(character)
+		local char_cqi = character:command_queue_index()
+		local bonus_value = cm:get_factions_bonus_value(character:faction(), "kho_spawned_army_post_battle_attrition_immunity_duration_mod")
+		
+		local current_duration = self:get_effect_bundle_duration_remaining(character:military_force())
+		local additional_duration = self.spawned_army_post_battle_bundle_duration + bonus_value
+		
+		if current_duration + additional_duration >= self.spawned_army_bundle_max_duration then
+			additional_duration = self.spawned_army_bundle_max_duration - current_duration
+		end
+		
+		if additional_duration > 0 then
+			cm:apply_effect_bundle_to_characters_force(self.spawned_army_post_battle_bundle_key, char_cqi, additional_duration)
+		end
+	end
+
 	core:add_listener(
 		"CharacterCompletedBattleKhorneSummonedArmy",
 		"CharacterCompletedBattle",
@@ -449,20 +465,20 @@ function khorne_spawned_armies:setup_listeners()
 			return subtype == self.spawned_army_general_subtype or subtype == self.spawned_army_upgraded_general_subtype
 		end,
 		function(context)
-			local character = context:character()
-			local char_cqi = character:command_queue_index()
-			local bonus_value = cm:get_factions_bonus_value(character:faction(), "kho_spawned_army_post_battle_attrition_immunity_duration_mod")
-			
-			local current_duration = self:get_effect_bundle_duration_remaining(character:military_force())
-			local additional_duration = self.spawned_army_post_battle_bundle_duration + bonus_value
-			
-			if current_duration + additional_duration >= self.spawned_army_bundle_max_duration then
-				additional_duration = self.spawned_army_bundle_max_duration - current_duration
-			end
-			
-			if additional_duration > 0 then
-				cm:apply_effect_bundle_to_characters_force(self.spawned_army_post_battle_bundle_key, char_cqi, additional_duration)
-			end
+			update_blood_host_timer(context:character())
+		end,
+		true
+	);
+
+	core:add_listener(
+		"CharacterParticipatedAsSecondaryGeneralInBattleKhorneSummonedArmy",
+		"CharacterParticipatedAsSecondaryGeneralInBattle",
+		function(context)
+			local subtype = context:character():character_subtype_key()
+			return subtype == self.spawned_army_general_subtype or subtype == self.spawned_army_upgraded_general_subtype
+		end,
+		function(context)
+			update_blood_host_timer(context:character())
 		end,
 		true
 	);
