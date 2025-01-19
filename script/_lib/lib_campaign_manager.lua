@@ -10882,7 +10882,10 @@ function campaign_manager:pending_battle_cache_get_attacker_subtype(index)
 	
 	local family_member = cm:get_family_member_by_cqi(self.pbc_attackers[index].fm_cqi)
 	local character_details = family_member:character_details();
-	return character_details:character_subtype_key();
+
+	if not character_details:is_null_interface() then
+		return character_details:character_subtype_key();
+	end;
 end;
 
 

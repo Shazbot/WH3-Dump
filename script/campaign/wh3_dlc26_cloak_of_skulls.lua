@@ -242,24 +242,19 @@ end
 
 function cloak_of_skulls:defeated_character_apply_bonuses(mf_cqis_defeated, skulltaker_character_cqi)
 	local faction = cm:get_faction(self.faction_key)
-	local faction_leader = faction:faction_leader()
 
-	-- bonuses that don't require a winning character
-	if cm:get_factions_bonus_value(faction, "cloak_of_skulls_reveal_vision") > 0 then
-		for _, region in model_pairs(cm:model():world():region_manager():region_list()) do
-			if region:is_abandoned() then
-				cm:make_region_visible_in_shroud(self.faction_key, region:name())
-			end
-		end
-	end
+	-- bonuses that require a winning character
+	local winning_character = cm:get_character_by_cqi(skulltaker_character_cqi)
 
-	local skulls_bonus = cm:get_factions_bonus_value(faction, "cloak_of_skulls_gain_skulls")
+	if not winning_character or not winning_character:has_military_force() then return end
+
+	local skulls_bonus = cm:get_characters_bonus_value(winning_character, "cloak_of_skulls_gain_skulls")
 
 	if skulls_bonus > 0 then
 		cm:faction_add_pooled_resource(self.faction_key, "wh3_main_kho_skulls", "cloak_of_skulls", skulls_bonus)
 	end
 
-	local corruption_bonus = cm:get_factions_bonus_value(faction, "cloak_of_skulls_khorne_corruption")
+	local corruption_bonus = cm:get_characters_bonus_value(winning_character, "cloak_of_skulls_khorne_corruption")
 
 	if corruption_bonus > 0 then
 		for _, faction_province in model_pairs(faction:provinces()) do
@@ -267,7 +262,7 @@ function cloak_of_skulls:defeated_character_apply_bonuses(mf_cqis_defeated, skul
 		end
 	end
 
-	local replenish_bloodhost_bonus = cm:get_factions_bonus_value(faction, "cloak_of_skulls_replenish_bloodhost")
+	local replenish_bloodhost_bonus = cm:get_characters_bonus_value(winning_character, "cloak_of_skulls_replenish_bloodhost")
 
 	if replenish_bloodhost_bonus > 0 then
 		for _, mf in model_pairs(faction:military_force_list()) do
@@ -280,16 +275,19 @@ function cloak_of_skulls:defeated_character_apply_bonuses(mf_cqis_defeated, skul
 		end
 	end
 
-	-- bonuses that require a winning character (can be any lord)
-	local winning_character = cm:get_character_by_cqi(skulltaker_character_cqi)
+	if cm:get_characters_bonus_value(winning_character, "cloak_of_skulls_reveal_vision") > 0 then
+		for _, region in model_pairs(cm:model():world():region_manager():region_list()) do
+			if region:is_abandoned() then
+				cm:make_region_visible_in_shroud(self.faction_key, region:name())
+			end
+		end
+	end
 
-	if not winning_character or not winning_character:has_military_force() then return end
-
-	if cm:get_factions_bonus_value(faction, "kho_spawned_army_skulltaker") > 0 then
+	if cm:get_characters_bonus_value(winning_character, "kho_spawned_army_skulltaker") > 0 then
 		khorne_spawned_armies:spawn_army(winning_character, true)
 	end
 
-	local xp_bonus = cm:get_factions_bonus_value(faction, "cloak_of_skulls_gain_defeated_experience")
+	local xp_bonus = cm:get_characters_bonus_value(winning_character, "cloak_of_skulls_gain_defeated_experience")
 
 	if xp_bonus > 0 then
 		local total_xp = 0
@@ -311,9 +309,9 @@ function cloak_of_skulls:defeated_character_apply_bonuses(mf_cqis_defeated, skul
 		
 		local xp_to_add = math.round(total_xp * (xp_bonus / 100))
 
-		if xp_to_add > 0 then cm:add_agent_experience(cm:char_lookup_str(faction_leader), xp_to_add) end
+		if xp_to_add > 0 then cm:add_agent_experience(cm:char_lookup_str(winning_character), xp_to_add) end
 
-		local shared_xp_bonus = cm:get_factions_bonus_value(faction, "cloak_of_skulls_gain_defeated_experience_spread")
+		local shared_xp_bonus = cm:get_characters_bonus_value(winning_character, "cloak_of_skulls_gain_defeated_experience_spread")
 		
 		if shared_xp_bonus > 0 then
 			xp_to_add = math.round(total_xp * (shared_xp_bonus / 100))
@@ -332,7 +330,7 @@ function cloak_of_skulls:defeated_character_apply_bonuses(mf_cqis_defeated, skul
 		end
 	end
 
-	if cm:get_factions_bonus_value(faction, "cloak_of_skulls_colonise_ruins") > 0 and winning_character:has_region() then
+	if cm:get_characters_bonus_value(winning_character, "cloak_of_skulls_colonise_ruins") > 0 and winning_character:has_region() then
 		for _, region in model_pairs(winning_character:region():province():regions()) do
 			if region:is_abandoned() then
 				cm:transfer_region_to_faction(region:name(), faction:name())
@@ -340,24 +338,19 @@ function cloak_of_skulls:defeated_character_apply_bonuses(mf_cqis_defeated, skul
 		end
 	end
 
-	-- bonuses that require skulltaker to have an army
-	if not faction_leader:has_military_force() then return end
-
-	local faction_leader_mf = faction_leader:military_force()
-
-	local ap_bonus = cm:get_forces_bonus_value(faction_leader_mf, "campaign_movement_range_post_defeat_lord")
+	local ap_bonus = cm:get_characters_bonus_value(winning_character, "campaign_movement_range_post_defeat_lord")
 
 	if ap_bonus > 0 then
-		cm:replenish_action_points(cm:char_lookup_str(faction_leader), (faction_leader:action_points_remaining_percent() + ap_bonus) / 100);
+		cm:replenish_action_points(cm:char_lookup_str(winning_character), (winning_character:action_points_remaining_percent() + ap_bonus) / 100);
 	end
 
-	if cm:get_forces_bonus_value(faction_leader_mf, "cloak_of_skulls_replenish_army") > 0 then
-		for _, unit in model_pairs(faction_leader_mf:unit_list()) do
+	if cm:get_characters_bonus_value(winning_character, "cloak_of_skulls_replenish_army") > 0 then
+		for _, unit in model_pairs(winning_character:military_force():unit_list()) do
 			cm:set_unit_hp_to_unary_of_maximum(unit, 1)
 		end
 	end
 
-	if cm:get_factions_bonus_value(faction, "cloak_of_skulls_move_skull_piles") > 0 then
+	if cm:get_characters_bonus_value(winning_character, "cloak_of_skulls_move_skull_piles") > 0 then
 		local skull_piles = cm:get_saved_value("skull_piles") or {}
 		local indexed_skull_piles = {}
 
@@ -370,7 +363,7 @@ function cloak_of_skulls:defeated_character_apply_bonuses(mf_cqis_defeated, skul
 		for i = 1, #indexed_skull_piles do
 			cm:remove_interactable_campaign_marker(indexed_skull_piles[i])
 
-			local x, y = cm:find_valid_spawn_location_for_character_from_character(self.faction_key, cm:char_lookup_str(faction_leader), false, i * 4)
+			local x, y = cm:find_valid_spawn_location_for_character_from_character(self.faction_key, cm:char_lookup_str(winning_character), false, i * 4)
 			cm:add_interactable_campaign_marker(indexed_skull_piles[i], "wh3_main_kho_skull_pile", x, y, 2)
 		end
 	end
@@ -421,16 +414,20 @@ function cloak_of_skulls:update_military_forces_champions_essence(mf)
 
 			if not general then return end
 
+			local defeated_subtype = cm:get_saved_value("skulltaker_defeated_subtype_" .. general:character_subtype_key())
+
 			cm:pooled_resource_factor_transaction(resource, "base_amount", self.champions_essence_base_amount)
 			cm:pooled_resource_factor_transaction(resource, "lords_rank", 1 * general:rank())
-			if not cm:get_saved_value("skulltaker_defeated_subtype_" .. general:character_subtype_key()) then
+			if not defeated_subtype then
 				cm:pooled_resource_factor_transaction(resource, "lord_type_not_yet_defeated", self.champions_essence_lord_type_not_yet_defeated_amount)
 			end
 			local battles_won = general:battles_won()
 			if battles_won > 0 then
 				cm:pooled_resource_factor_transaction(resource, "battles_won_by_this_lord", 1 * battles_won)
 			end
-			if general:character_details():is_unique() then
+
+			-- apply at the end
+			if not defeated_subtype and general:character_details():is_unique() then
 				cm:pooled_resource_factor_transaction(resource, "immortal_lord", resource:value())
 			end
 		end,

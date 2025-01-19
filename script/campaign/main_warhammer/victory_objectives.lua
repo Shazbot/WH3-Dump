@@ -2423,7 +2423,7 @@ victory_objectives_ie = {
 					-- Destroy nearby Dwarves and Kislev
 					type = "DESTROY_FACTION",
 					conditions = {
-						"faction wh_main_dwf_kraka_drak",
+						"faction wh3_dlc25_dwf_malakai",
 						"faction wh3_main_ksl_ropsmenn_clan",
 						"faction wh3_main_ksl_the_ice_court",
 						"faction wh3_main_ksl_the_great_orthodoxy",
@@ -3286,7 +3286,7 @@ victory_objectives_ie = {
 					type = "DESTROY_FACTION",
 					conditions = {
 						"faction wh3_main_vmp_lahmian_sisterhood",
-						"faction wh_main_dwf_kraka_drak",
+						"faction wh3_dlc25_dwf_malakai",
 						"confederation_valid"
 					}
 				}

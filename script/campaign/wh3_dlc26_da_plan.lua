@@ -312,7 +312,6 @@ function da_plan:trigger_gorbad_victory_missions()
 
 				if mission_data.count >= mission_data.target then
 					mission_data.complete = true
-					cm:complete_scripted_mission_objective(self.faction_key, mission_key, mission_key, true)
 					return true
 				end
 			end,
@@ -351,7 +350,6 @@ function da_plan:trigger_ambush_missions()
 
 					if mission_data.counts[mission_key] >= mission_data.targets[mission_key] then
 						mission_data.complete[mission_key] = true
-						cm:complete_scripted_mission_objective(self.faction_key, mission_key, mission_key, true)
 						return true
 					end
 				end,
@@ -414,7 +412,6 @@ function da_plan:trigger_waaaagh_spell_missions()
 
 						if mission_data.counts[mission_key] >= mission_data.targets[mission_key] then
 							mission_data.complete[mission_key] = true
-							cm:complete_scripted_mission_objective(self.faction_key, mission_key, mission_key, true)
 							return true
 						end
 					end
@@ -453,7 +450,6 @@ function da_plan:trigger_waaagh_missions()
 
 						if mission_data.counts[mission_key] >= mission_data.targets[mission_key] then
 							mission_data.complete[mission_key] = true
-							cm:complete_scripted_mission_objective(self.faction_key, mission_key, mission_key, true)
 							return true
 						end
 					end

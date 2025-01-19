@@ -3796,7 +3796,7 @@
 				<callback_with_context
 					callback_id="List"
 					context_object_id="CcoCampaignInitiativeSet"
-					context_function_id="(selected_button = Component(&quot;holder_list_tabs&quot;).SelectedComponents.FirstContext) =&gt; {&#10; InitiativeList&#10;  .Filter((i) =&gt; i.InitiativeContext.Key.EndsWith(selected_button.ChildIndex))&#10;  .CompareSort((lhs, rhs) =&gt; DaPlan.SortOrderForInitiative(lhs) &lt; DaPlan.SortOrderForInitiative(rhs))&#10;}">
+					context_function_id="(selected_button = Component(&quot;holder_list_tabs&quot;).SelectedComponents.FirstContext) =&gt; {&#10;GetIf(selected_button, (&#10; InitiativeList&#10;  .Filter((i) =&gt; i.InitiativeContext.Key.EndsWith(selected_button.ChildIndex))&#10;  .CompareSort((lhs, rhs) =&gt; DaPlan.SortOrderForInitiative(lhs) &lt; DaPlan.SortOrderForInitiative(rhs))))&#10;}">
 					<child_m_user_properties>
 						<property
 							name="event0"
