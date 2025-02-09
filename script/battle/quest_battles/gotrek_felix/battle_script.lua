@@ -206,6 +206,8 @@ function battle_start_teleport_units()
 	-- Gotrek and Felix being teleported to position
 	friendly_armies.gotrek_felix.army.sunits:item(1).uc:teleport_to_location(v(-170, -105), 90, 20)
 	friendly_armies.gotrek_felix.army.sunits:item(2).uc:teleport_to_location(v(-170, -100), 90, 20)
+	friendly_armies.gotrek_felix.army.sunits:item(1):set_invincible_for_time_proportion(0.4)
+	friendly_armies.gotrek_felix.army.sunits:item(2):set_invincible_for_time_proportion(0.4)
 
 
 end

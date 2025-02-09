@@ -338,7 +338,7 @@ function generate_khorne_ritual_battle_force(character, upgraded)
 	local invasion_1 = invasion_manager:new_invasion("khorne_ritual_battle_invasion", "wh3_main_kho_khorne_qb1", units, {character:logical_position_x(), character:logical_position_y()});
 	invasion_1:set_target("CHARACTER", character:command_queue_index(), faction_name);
 	invasion_1:create_general(false, "wh3_main_kho_herald_of_khorne");
-	invasion_1:apply_effect("wh_main_bundle_military_upkeep_free_force", -1);
+	invasion_1:apply_effect("wh3_dlc26_bundle_military_upkeep_free_force_kho_gg", -1);
 	invasion_1:start_invasion(
 		function(self)
 			core:add_listener(

@@ -184,4 +184,9 @@ Helforge
 	  "DLC23_CATEGORY_WARMAHINES_INITIATIVES" => Helforge.UnitsForInitiativeSet(set).Filter((unit) => Helforge.WarmachineUnits.Contains(unit)) |
 	  Helforge.UnitsForInitiativeSet(set).Filter(IsRenown == false)
   }
+
+  InitiativeIsLocked(CcoCampaignInitiative initiative)
+  {
+    (initiative.IsScriptLocked || initiative.IsLocked) && initiative.IsOnlyOnCooldown == false && initiative.IsActive == false
+  }
 }

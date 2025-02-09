@@ -856,7 +856,7 @@
 				<callback_with_context
 					callback_id="ContextInactiveStateSetter"
 					context_object_id="CcoInitiativeSetCategoryRecord"
-					context_function_id="Helforge.InitiativeSetForCategory(this).InitiativeList.All((IsScriptLocked || IsLocked) &amp;&amp; IsOnlyOnCooldown == false) == false">
+					context_function_id="Helforge.InitiativeSetForCategory(this).InitiativeList.All((initiative) =&gt; Helforge.InitiativeIsLocked(initiative)) == false">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -4100,7 +4100,7 @@
 					<child_m_user_properties>
 						<property
 							name="1.inactive"
-							value="InitiativeList.All((IsScriptLocked || IsLocked) &amp;&amp; IsOnlyOnCooldown == false)"/>
+							value="InitiativeList.All((initiative) =&gt; Helforge.InitiativeIsLocked(initiative))"/>
 						<property
 							name="3.cooldown_selected"
 							value="IsOnCooldown &amp;&amp; self.ChildContext(&quot;square_large_text_tab_toggle&quot;).IsSelected"/>

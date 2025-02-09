@@ -943,7 +943,7 @@ end
 core:add_listener(
 	"attack_button_listener",
 	"ComponentLClickUp",
-	function(context) return context.string == "button_attack" end,
+	function(context) return context.string == "button_attack" and uicomponent_descended_from(UIComponent(context.component), "pre_battle_deployment_panel") end,
 	function()
 		out("STARTING FIRST TUTORIAL BATTLE")
 		

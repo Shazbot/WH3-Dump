@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="CanUseUiFeature(&quot;HELLFORGE&quot;)">
 	<hierarchy>
@@ -1655,7 +1655,7 @@
 				<callback_with_context
 					callback_id="ContextInactiveStateSetter"
 					context_object_id="CcoStaticObject"
-					context_function_id="Helforge.UnitCategoriesList.Any((cat) =&gt;&#10;  Helforge.InitiativeSetForCategory(cat).InitiativeList.All((IsScriptLocked || IsLocked) &amp;&amp; IsOnlyOnCooldown == false) == false&#10;)">
+					context_function_id="Helforge.UnitCategoriesList.Any((cat) =&gt;&#10;  Helforge.InitiativeSetForCategory(cat).InitiativeList.All((initiative) =&gt; Helforge.InitiativeIsLocked(initiative)) == false&#10;)">
 					<child_m_user_properties>
 						<property
 							name="event0"
