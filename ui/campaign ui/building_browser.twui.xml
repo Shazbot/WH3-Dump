@@ -3458,13 +3458,19 @@
 					<child_m_user_properties>
 						<property
 							name="active"
-							value="IsTaxExempt"/>
+							value="IsTaxExempt &amp;&amp; IsLocalPlayersTurn"/>
 						<property
 							name="event0"
 							value="TaxLevelChanged"/>
 						<property
+							name="inactive"
+							value="IsTaxExempt &amp;&amp; (IsLocalPlayersTurn == false)"/>
+						<property
 							name="selected"
-							value="IsTaxExempt == false"/>
+							value="(IsTaxExempt == false) &amp;&amp; IsLocalPlayersTurn"/>
+						<property
+							name="selected_inactive"
+							value="(IsTaxExempt == false) &amp;&amp; (IsLocalPlayersTurn == false)"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context

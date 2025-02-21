@@ -53,7 +53,10 @@ function apply_karak_diplomacy()
 			for i = 1, #human_factions do
 				local current_faction_name = human_factions[i];
 				
-				if current_faction_name ~= "wh_main_dwf_karak_izor" and current_faction_name ~= "wh_main_grn_crooked_moon" then
+				if current_faction_name ~= "wh_main_dwf_karak_izor" and 
+				   current_faction_name ~= "wh_main_grn_crooked_moon" and 
+				   not merc_contracts:is_mercenary_faction(current_faction_name)
+				then
 					cm:force_diplomacy("faction:" .. current_faction_name, "faction:wh_main_grn_necksnappers", "all", true, true, false);
 					cm:force_diplomacy("faction:" .. current_faction_name, "faction:wh_main_grn_necksnappers", "form confederation", false, false, true);
 				end;

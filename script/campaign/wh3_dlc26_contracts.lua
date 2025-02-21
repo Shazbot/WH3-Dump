@@ -293,23 +293,28 @@ merc_contracts = {
 	default_effect_bundle_reward_duration = 7
 }
 
+function merc_contracts:is_mercenary_faction(faction_key)
+	return self.mercenary_factions[faction_key]
+end
 
 function merc_contracts:initialise()
 	self:track_raiding()
 	self:track_agent_actions()
 
-	if cm:is_new_game() then
-		self:set_merc_diplomacy_restrictions()
-	end
+	self:set_merc_diplomacy_restrictions()
 
 	core:add_listener(
 		"MercContractListGenerate",
 		"FactionTurnStart",
 		function(context)
-			return self.mercenary_factions[context:faction():name()]
+			return self:is_mercenary_faction(context:faction():name())
 		end,
 		function(context)
 			local faction_name = context:faction():name()
+			--early out if the faction is not eligible for contracts
+			if cm:is_faction_eligible_to_be_hired_for_war_contract(faction_name) == false then
+				return
+			end
 
 			if cm:turn_number() > 1 then
 				self:generate_contract_list(faction_name)
@@ -549,9 +554,10 @@ function merc_contracts:generate_contract_list(faction_key)
 	for i = 0, met_factions:num_items() - 1 do 
 		local met_faction = met_factions:item_at(i)
 		local excluded_faction = false
+		local client_key = met_faction:name()
 
 		for k, v in ipairs(self.client_exclusion_list) do
-			if met_faction:name() == v or met_faction:culture() == v then
+			if client_key == v or met_faction:culture() == v then
 				excluded_faction = true
 			end
 		end
@@ -569,10 +575,8 @@ function merc_contracts:generate_contract_list(faction_key)
 			end
 
 			if team_target == false then
-				local client_key = met_faction:name()
-
 				if self.active_contracts[faction_key] == nil or client_key ~= self.active_contracts[faction_key].client_name or client_key ~= self.previous_client_key then
-					local contract = self:generate_contract(faction_key, met_faction:name())
+					local contract = self:generate_contract(faction_key, client_key)
 					
 					if contract then
 						table.insert(potential_contracts, contract)
