@@ -48,7 +48,58 @@ campaign_ai_script = {
 	MaxDistance = 5000,
 	FactionToFactionsDiscovered = {},
 	FactionToCoordinates = {},
-	FactionToCoordinatesIterator = 1
+	FactionToCoordinatesIterator = 1,
+
+	kislev_background_income_data = {
+		faction_setup = {
+			{
+				faction_key = "wh3_main_ksl_the_ice_court",
+				effects = {
+					{
+						key = "wh3_main_effect_ksl_ice_court_support_faction",
+						amount = 10,
+						effect_scope = "faction_to_faction_own"
+					}
+				}
+			},
+			{
+				faction_key = "wh3_main_ksl_the_great_orthodoxy",
+				effects = {
+					{
+						key = "wh3_main_effect_ksl_orthodoxy_support_faction",
+						amount = 10,
+						effect_scope = "faction_to_faction_own"
+					}
+				}
+			},
+			{
+				faction_key = "wh3_main_ksl_ursun_revivalists",
+				effects = {
+					{
+						key = "wh3_main_effect_ksl_orthodoxy_support_faction",
+						amount = 5,
+						effect_scope = "faction_to_faction_own"
+					}
+				}
+			},
+			{
+				faction_key = "wh3_dlc24_ksl_daughters_of_the_forest",
+				effects = {
+					{
+						key = "wh3_main_effect_ksl_ice_court_support_faction",
+						amount = 5,
+						effect_scope = "faction_to_faction_own"
+					},
+					{
+						key = "wh3_main_effect_ksl_orthodoxy_support_faction",
+						amount = 5,
+						effect_scope = "faction_to_faction_own"
+					},
+				}
+			},
+		},
+		bundle_key = "wh3_main_ksl_background_support_income_hidden",
+	}
 }
 
 function campaign_ai_script:setup_listeners()
@@ -469,6 +520,25 @@ function campaign_ai_script:nearby_diplomatic_contact(faction)
 		end
 	end
 	self.FactionToCoordinatesIterator = self.FactionToCoordinatesIterator + counter
+end
+
+-- ========================================= KISLEV RELATED FUNCTIONS =========================== --
+
+function campaign_ai_script:kislev_background_income()
+	local data_table = campaign_ai_script.kislev_background_income_data
+	for i, faction_data in ipairs(data_table.faction_setup) do
+		local faction = cm:get_faction(faction_data.faction_key)
+		
+		if faction and not faction:is_human() then 
+			local bundle = cm:create_new_custom_effect_bundle(data_table.bundle_key)
+			if bundle then
+				for e, effect in ipairs(faction_data.effects) do
+					bundle:add_effect(effect.key, effect.effect_scope, effect.amount)
+				end
+				cm:apply_custom_effect_bundle_to_faction(bundle, faction)
+			end
+		end
+	end
 end
 
 --------------------------------------------------------------

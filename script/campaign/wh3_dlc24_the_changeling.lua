@@ -640,7 +640,8 @@ the_changeling_features = {
 								"region wh3_main_chaos_region_shang_wu",
 								"region wh3_main_chaos_region_bridge_of_heaven",
 								"region wh3_main_chaos_region_hanyu_port",
-								"process_listed_regions_only true"
+								"process_listed_regions_only true",
+								"prevent_fail_if_sacked_or_razed_by_other",
 							}
 						},
 					},
@@ -740,7 +741,8 @@ the_changeling_features = {
 								"region wh3_main_combi_region_bamboo_crossing",
 								"region wh3_main_combi_region_shi_long",
 								"region wh3_main_combi_region_hanyu_port",
-								"process_listed_regions_only true"
+								"process_listed_regions_only true",
+								"prevent_fail_if_sacked_or_razed_by_other",
 							}
 						},
 					},
@@ -1185,7 +1187,8 @@ the_changeling_features = {
 								"region wh3_main_combi_region_ka_sabar",
 								"region wh3_main_combi_region_khemri",
 								"region wh3_main_combi_region_wizard_caliphs_palace",
-								"process_listed_regions_only true"
+								"process_listed_regions_only true",
+								"prevent_fail_if_sacked_or_razed_by_other"
 							}
 						},
 					},

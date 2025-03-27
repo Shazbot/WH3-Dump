@@ -1,4 +1,4 @@
-local corruption_province_overrides = {
+corruption_province_overrides = {
 	["wh3_dlc20_combi_province_middle_mountains"] =
 		{
 			["nurgle"] = 25

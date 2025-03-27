@@ -378,9 +378,23 @@ function cloak_of_skulls:cache_champions_essence_pending_battle(mf_cqi)
 
 	local resource = mf:pooled_resource_manager():resource(self.resource_key)
 
-	if resource:is_null_interface() then return end
+	local res_value = 0;
+
+	if resource:is_null_interface() == false then
+		res_value = resource:value();
+	elseif mf:general_character():character_subtype("wh3_main_ksl_ataman") == true then
+		res_value = 5;
+	else
+		return;
+	end
 	
-	cm:set_saved_value("champions_essence_value_" .. mf_cqi, {resource:value(), mf:general_character():rank()})
+	local rank = mf:general_character():rank();
+
+	if rank < 1 then
+		rank = 1;
+	end
+
+	cm:set_saved_value("champions_essence_value_" .. mf_cqi, {res_value, rank})
 end
 
 function cloak_of_skulls:update_all_military_force_champions_essence()

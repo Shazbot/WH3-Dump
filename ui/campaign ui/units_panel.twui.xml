@@ -12,6 +12,7 @@
 						<panel_smoke_t this="A74835EF-B581-4E9B-BDFCF6A172B91E5A"/>
 					</smoke_holder>
 					<da_plan_docker this="9A01DD5C-953B-4B5D-A7809C868BF88666"/>
+					<ksl_force_invocations_panel_docker this="6CE0E596-D595-4C7A-A7FEE85A447093A4"/>
 					<recruitment_docker this="A458AB37-F2B5-4DCA-8E98F2389A244A10">
 						<recruitment_options this="B2E49D17-8B4E-4BBC-965A2BE0074C15AB">
 							<title_docker this="9FFBD85B-9065-4951-8DDABC4BB8828F12">
@@ -1010,6 +1011,10 @@
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context callback_id="CallbackAnimTrigger"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="IsGovernor() == false"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -17472,5 +17477,39 @@
 				</newstate>
 			</states>
 		</ogre_camp_recruitment_panel_docker>
+		<ksl_force_invocations_panel_docker
+			this="6CE0E596-D595-4C7A-A7FEE85A447093A4"
+			id="ksl_force_invocations_panel_docker"
+			offset="333.00,-1.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			docking="Top Center External"
+			component_anchor_point="0.50,1.00"
+			tooltipslocalised="true"
+			uniqueguid="6CE0E596-D595-4C7A-A7FEE85A447093A4"
+			currentstate="340E87D4-6101-4149-B1AD158EEB66C3A4"
+			defaultstate="340E87D4-6101-4149-B1AD158EEB66C3A4">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="ComponentCreator">
+					<child_m_user_properties>
+						<property
+							name="layout"
+							value="ui/campaign ui/kislev_force_rituals"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandGiverOnCreate"
+					context_function_id="self.SetVisible(true)"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="340E87D4-6101-4149-B1AD158EEB66C3A4"
+					name="default"
+					width="1"
+					height="1"
+					uniqueguid="340E87D4-6101-4149-B1AD158EEB66C3A4"/>
+			</states>
+		</ksl_force_invocations_panel_docker>
 	</components>
 </layout>

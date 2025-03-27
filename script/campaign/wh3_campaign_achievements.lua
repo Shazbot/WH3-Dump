@@ -27,7 +27,29 @@ wh3_campaign_achievements = {
 	},
 }
 
-
+WH3_ACHIEVEMENT_TZEENTCH_UNLOCK_ALL_COTW = {
+	wh3_dlc24_tze_the_deceivers = {
+		"wh3_main_tech_tze_0_8",
+		"wh3_main_tech_tze_1_9",
+		"wh3_main_tech_tze_2_3",
+		"wh3_main_tech_tze_2_9",
+		"wh3_main_tech_tze_3_7",
+		"wh3_main_tech_tze_4_1",
+		"wh3_main_tech_tze_4_9",
+		"wh3_main_tech_tze_3_5",
+	},
+	wh3_main_tze_oracles_of_tzeentch = {
+		"wh3_main_tech_tze_0_8",
+		"wh3_main_tech_tze_1_1",
+		"wh3_main_tech_tze_2_3",
+		"wh3_main_tech_tze_2_9",
+		"wh3_main_tech_tze_3_5",
+		"wh3_main_tech_tze_3_7",
+		"wh3_main_tech_tze_4_1",
+		"wh3_main_tech_tze_4_9",
+		"wh3_main_tech_tze_1_9",
+	}
+}
 
 function award_achievement_to_faction(faction_key, achievement_key)
 	if cm:get_local_faction_name(true) == faction_key then
@@ -492,6 +514,26 @@ function start_achievement_listeners()
 					award_achievement_to_faction(owning_faction:name(), "WH3_ACHIEVEMENT_KISLEV_OCCUPY_3_CITIES");
 				end;
 			end;
+		end,
+		true
+	);
+
+	core:add_listener(
+		"WH3_ACHIEVEMENT_TZEENTCH_UNLOCK_ALL_COTW",
+		"ResearchCompleted",
+		function(context)
+			local curr_faction = context:faction()
+			return curr_faction:is_human() and WH3_ACHIEVEMENT_TZEENTCH_UNLOCK_ALL_COTW[curr_faction:name()]
+		end,
+		function(context)
+			local faction_name = context:faction():name()
+			for i = 1, #WH3_ACHIEVEMENT_TZEENTCH_UNLOCK_ALL_COTW[faction_name] do
+				local tech = WH3_ACHIEVEMENT_TZEENTCH_UNLOCK_ALL_COTW[faction_name][i]
+				if not context:faction():has_technology(tech) then
+					return
+				end
+			end
+			award_achievement_to_faction(faction_name, "WH3_ACHIEVEMENT_TZEENTCH_UNLOCK_ALL_COTW")
 		end,
 		true
 	);

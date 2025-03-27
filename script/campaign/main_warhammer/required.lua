@@ -72,6 +72,7 @@ require("wh3_campaign_slaanesh_seductive_influence")
 require("wh3_campaign_daemon_cults")
 require("wh3_campaign_kislev_ice_court")
 require("wh3_campaign_kislev_devotion")
+require("wh3_campaign_kislev_motherland")
 require("wh3_campaign_greater_daemons")
 require("wh3_campaign_ogre_contracts")
 require("wh3_campaign_khorne_skulls")
@@ -249,6 +250,7 @@ require("wh3_dlc26_arbaal_wrath_of_khorne")
 require("wh3_dlc26_da_plan")
 require("wh3_dlc26_ogre_camps")
 require("wh3_dlc26_tyrants_demands")
+require("wh3_dlc26_fragments_of_sorcery")
 
 
 -- Minor Cults

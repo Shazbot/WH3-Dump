@@ -44,6 +44,7 @@ HasDwfTreasuriesTech	Owner.IsTechnologyResearched("wh_main_tech_dwf_civ_1_0")	fa
 HasDwfWarriorGuildTech	Owner.IsTechnologyResearched("wh_main_tech_dwf_mil_1_3")	false
 HasFestusUpgradeTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_nur_festus_buildings")	true
 HasFinalOgreCampTech	Owner.IsTechnologyResearched("wh3_main_tech_ogr_0_2_0")	false
+HasKSLPortSuppliesTech	Owner.IsTechnologyResearched("wh3_main_tech_ksl_3_13")	false
 HasKhoCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_kho_shared_gift_upgrade_corruption")	true
 HasLegendaryGrudgeSkavenComplete	Owner.IsEffectBundleActive("wh3_dlc25_legendary_grudge_skaven_reward") == true	true
 HasMarkedHeroesTech	 Owner.IsTechnologyResearched("wh3_dlc20_chs_kho_valkia_heroes_lords") ||  Owner.IsTechnologyResearched("wh3_dlc20_chs_nur_festus_heroes_lords")  || Owner.IsTechnologyResearched("wh3_dlc20_chs_sla_azazel_heroes_lords") || Owner.IsTechnologyResearched("wh3_dlc20_chs_tze_vilitch_heroes_lords")	true
@@ -67,6 +68,7 @@ HostGDPGreaterThan2000	Region.GDP >= 2000	false
 HostGDPGreaterThan500	Region.GDP >= 500	false
 HostGDPGreaterThan5000	Region.GDP >= 5000	false
 IsAgentPresentOwn	Region.IsAnyOwnAgentPresent(Owner) == true	false
+IsAtamanPresent	Region.IsOwnAgentSubtypePresent("wh3_main_ksl_ataman", Owner)	false
 IsBretonnia	Owner.CultureKey == "wh_main_brt_bretonnia"	true
 IsChampionsFaction	Owner.IsInFactionSet("champions_factions")	true
 IsChaosCampaign	CampaignModelRoot.CampaignKey == "wh3_main_chaos"	true
@@ -137,10 +139,17 @@ KSLHasSupporters	Owner.ModelPooledResourceContext("wh3_main_ksl_followers")	true
 KhorneCorruption100	Region.IsEffectBundleActive("wh3_main_max_corruption_kho_dummy")	false
 KhorneCorruption50	Region.IsEffectBundleActive("wh3_main_max_corruption_kho_dummy") || Region.IsEffectBundleActive("wh3_main_high_corruption_kho_dummy") || Region.IsEffectBundleActive("wh3_main_mid_corruption_kho_dummy")	false
 KhorneCorruption75	Region.IsEffectBundleActive("wh3_main_max_corruption_kho_dummy") || Region.IsEffectBundleActive("wh3_main_high_corruption_kho_dummy")	false
+KislevHasOrthodoxyGrowthBoon	Owner.IsEffectBundleActive("wh3_main_ksl_support_orthodoxy_magic_1_2") == true	false
+KislevHasSettlementAdjacencyBoon	Owner.IsEffectBundleActive("wh3_main_ksl_support_orthodoxy_settlement_2_2") == true	false
+KislevHasSettlementResearchBoon	Owner.IsEffectBundleActive("wh3_main_ksl_support_ice_court_settlement_1_2") == true	false
 MountainClimate	Region.IsEffectBundleActive("wh3_dlc20_climate_suitable_mountain") == true	false
 MountainClimatePresent	Region.IsEffectBundleActive("wh3_dlc20_climate_suitable_mountain") == true	false
+NeglectedIceCourt	Owner.IsEffectBundleActive("wh3_main_ksl_ice_court_neglect") == true	false
+NeglectedOrthodoxy	Owner.IsEffectBundleActive("wh3_main_ksl_orthodoxy_neglect") == true	false
 NotDwarf	Owner.CultureKey != "wh_main_dwf_dwarfs"	false
 NotDwarfHidden	Owner.CultureKey != "wh_main_dwf_dwarfs"	true
+NotNeglectedIceCourt	Owner.IsEffectBundleActive("wh3_main_ksl_ice_court_neglect") == false	false
+NotNeglectedOrthodoxy	Owner.IsEffectBundleActive("wh3_main_ksl_orthodoxy_neglect") == false	false
 NurgleCorruption100	Region.IsEffectBundleActive("wh3_main_max_corruption_nur_dummy")	false
 NurgleCorruption50	Region.IsEffectBundleActive("wh3_main_max_corruption_nur_dummy") || Region.IsEffectBundleActive("wh3_main_high_corruption_nur_dummy") || Region.IsEffectBundleActive("wh3_main_mid_corruption_nur_dummy")	false
 NurgleCorruption75	Region.IsEffectBundleActive("wh3_main_max_corruption_nur_dummy") || Region.IsEffectBundleActive("wh3_main_high_corruption_nur_dummy")	false

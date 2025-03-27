@@ -26,11 +26,12 @@ local spawn_cult_per_turn_chance = 10;
 local spawn_cult_event_per_turn_chance = 20;
 local quicker_event_triggers = false;
 local cult_last_turn = false;
+local cult_debug_output = false;
 
 function add_minor_cults_listeners()
 	out("#### Adding Minor Cults Listeners ####");
 	for i = 1, #MINOR_CULT_LIST do
-		out("\tMinor Cult "..i.." : "..MINOR_CULT_LIST[i].key);
+		out_mc("\tMinor Cult "..i.." : "..MINOR_CULT_LIST[i].key);
 		MINOR_CULT_LIST[i].cult.key = MINOR_CULT_LIST[i].key;
 	end
 
@@ -58,7 +59,7 @@ function add_minor_cults_listeners()
 				local skip_event_turn = true;
 
 				if (cult_last_turn == false) or quicker_event_triggers == true then -- This avoid any chance of spawning/events one turn after another
-					out("MINOR CULTS - WorldStartRound - "..turn_number);
+					out_mc("MINOR CULTS - WorldStartRound - "..turn_number);
 
 					if cm:model():random_percent(spawn_cult_per_turn_chance) then
 						cm:shuffle_table(MINOR_CULT_LIST);
@@ -77,40 +78,40 @@ function add_minor_cults_listeners()
 									MINOR_CULT_REGIONS[region_key] = MINOR_CULT_LIST[i].key;
 									cult_created_this_turn = true;
 									cult_last_turn = true;
-									out("\t"..MINOR_CULT_LIST[i].key .. " - VALID - "..log);
+									out_mc("\t"..MINOR_CULT_LIST[i].key .. " - VALID - "..log);
 									break;
 								else
-									out("\t"..MINOR_CULT_LIST[i].key .. " - INVALID");
+									out_mc("\t"..MINOR_CULT_LIST[i].key .. " - INVALID");
 								end
 							else
-								out("\t"..MINOR_CULT_LIST[i].key .. " - Already Active");
+								out_mc("\t"..MINOR_CULT_LIST[i].key .. " - Already Active");
 							end
 						end
 					else
-						out("\tFailed Spawn Cult Chance ("..spawn_cult_per_turn_chance.."%)");
+						out_mc("\tFailed Spawn Cult Chance ("..spawn_cult_per_turn_chance.."%)");
 					end
 				else
-					out("\tFailed Cult Spawned Last Turn");
+					out_mc("\tFailed Cult Spawned Last Turn");
 					cult_last_turn = false;
 				end
 					
 				if cm:model():random_percent(spawn_cult_event_per_turn_chance) then
 					skip_event_turn = false;
 				else
-					out("\tFailed Spawn Cult Event Chance ("..spawn_cult_event_per_turn_chance.."%)");
+					out_mc("\tFailed Spawn Cult Event Chance ("..spawn_cult_event_per_turn_chance.."%)");
 				end
 
 				cm:shuffle_table(MINOR_CULT_LIST);
 
 				for i = 1, #MINOR_CULT_LIST do
-					out("MINOR CULT - Event - "..MINOR_CULT_LIST[i].key);
-					out("\tCult Active - "..tostring(MINOR_CULT_LIST[i].cult.saved_data.active));
+					out_mc("MINOR CULT - Event - "..MINOR_CULT_LIST[i].key);
+					out_mc("\tCult Active - "..tostring(MINOR_CULT_LIST[i].cult.saved_data.active));
 					if MINOR_CULT_LIST[i].cult.saved_data.active == true then
 						if MINOR_CULT_LIST[i].cult.event_data ~= nil then
-							out("\tEvent Limit - "..MINOR_CULT_LIST[i].cult.saved_data.event_triggers.."/"..MINOR_CULT_LIST[i].cult.event_data.event_limit);
+							out_mc("\tEvent Limit - "..MINOR_CULT_LIST[i].cult.saved_data.event_triggers.."/"..MINOR_CULT_LIST[i].cult.event_data.event_limit);
 
 							if MINOR_CULT_LIST[i].cult.saved_data.event_triggers < MINOR_CULT_LIST[i].cult.event_data.event_limit then
-								out("\tEvent Cooldown - "..MINOR_CULT_LIST[i].cult.saved_data.event_cooldown);
+								out_mc("\tEvent Cooldown - "..MINOR_CULT_LIST[i].cult.saved_data.event_cooldown);
 								
 								if MINOR_CULT_LIST[i].cult.saved_data.event_cooldown > 0 then
 									MINOR_CULT_LIST[i].cult.saved_data.event_cooldown = MINOR_CULT_LIST[i].cult.saved_data.event_cooldown - 1;
@@ -143,11 +144,11 @@ function add_minor_cults_listeners()
 													local background_income = 3000;
 													local trade_value = faction:trade_value();
 													local real_income = faction:income() - trade_value - background_income;
-													out("income - "..faction:income());
-													out("real_income - "..real_income);
+													out_mc("income - "..faction:income());
+													out_mc("real_income - "..real_income);
 
 													local loan_amount = loan_round_to_nearest * math.ceil((real_income * loan_turn_worth) / loan_round_to_nearest);
-													out("loan_amount - "..loan_amount);
+													out_mc("loan_amount - "..loan_amount);
 
 													if loan_amount < 4000 then
 														loan_amount = 4000;
@@ -205,7 +206,7 @@ function add_minor_cults_listeners()
 												MINOR_CULT_LIST[i].cult.saved_data.event_triggers = MINOR_CULT_LIST[i].cult.saved_data.event_triggers + 1;
 											end
 										else
-											out("\tRegion was null interface?");
+											out_mc("\tRegion was null interface?");
 										end
 									end
 								end
@@ -353,82 +354,6 @@ function add_minor_cults_listeners()
 			end,
 			true
 		);
-		
-		core:add_listener(
-			"MinorCults_RegionTurnStart",
-			"RegionTurnStart",
-			true,
-			function(context)
-				local region = context:region();
-
-				if region:is_null_interface() == false and region:is_abandoned() == false then
-					local fsm = region:foreign_slot_manager_for_faction("wh3_main_rogue_minor_cults");
-					local has_illumination_cult = false;
-					local has_order_of_vaul = false;
-
-					if fsm:is_null_interface() == false then
-						local slot_list = fsm:slots();
-						
-						for i = 0, slot_list:num_items() - 1 do
-							local slot = slot_list:item_at(i);
-
-							if slot:is_null_interface() == false and slot:has_building() == true then
-								if slot:building() == "wh3_main_minor_cult_illumination_1" then
-									has_illumination_cult = true;
-								elseif slot:building() == "wh3_main_minor_cult_order_vaul_1" then
-									has_order_of_vaul = true;
-								end
-							end
-						end
-					end
-
-					if has_order_of_vaul == true then
-						-- This buildings effect has a 20% chance of occuring
-						if cm:model():random_percent(20) then 
-							if region:public_order() >= 0 then
-								local region_owner = region:owning_faction();
-								local region_owner_key = region_owner:name();
-								local ancillary_key = get_random_ancillary_key_for_faction(region_owner_key, false, false);
-								out("Giving ancillary to ["..region_owner_key.."] from Order of Vaul - "..ancillary_key);
-								cm:add_ancillary_to_faction(region_owner, ancillary_key, false);
-							end
-						end
-					end
-					
-					if has_illumination_cult == true then
-						-- This buildings effect has a 10% chance of occuring
-						if cm:model():random_percent(10) then 
-							local elector_factions = {
-								"wh_main_emp_empire",
-								"wh_main_emp_averland",
-								"wh_main_emp_hochland",
-								"wh_main_emp_middenland",
-								"wh_main_emp_nordland",
-								"wh_main_emp_ostermark",
-								"wh_main_emp_ostland",
-								"wh_main_emp_stirland",
-								"wh_main_emp_talabecland",
-								"wh_main_emp_wissenland"
-							};
-							cm:shuffle_table(elector_factions);
-
-							for i = 1, #elector_factions do
-								local elector = cm:model():world():faction_by_key(elector_factions[i]);
-
-								if elector:is_null_interface() == false and elector:is_human() == false then
-									if elector:pooled_resource_manager():resource("emp_loyalty"):is_null_interface() == false then
-										cm:faction_add_pooled_resource(elector_factions[i], "emp_loyalty", "buildings", 1);
-										out("Illumination Cult giving "..elector_factions[i].." +1 Fealty");
-										break;
-									end
-								end
-							end
-						end
-					end
-				end
-			end,
-			true
-		);
 
 		core:add_listener(
 			"MinorCults_RegionFactionChangeEvent",
@@ -446,7 +371,7 @@ function add_minor_cults_listeners()
 							if MINOR_CULT_LIST[i].cult.event_data ~= nil then
 								MINOR_CULT_LIST[i].cult.saved_data.event_triggers = MINOR_CULT_LIST[i].cult.event_data.event_limit;
 							end
-							out("Minor Cult: Removing "..MINOR_CULT_LIST[i].key.." from "..region_key);
+							out_mc("Minor Cult: Removing "..MINOR_CULT_LIST[i].key.." from "..region_key);
 							break;
 						end
 					end
@@ -510,14 +435,14 @@ function debug_create_cult(key)
 				if region_key ~= nil then
 					local log = spawn_minor_cult(region_key, i);
 					MINOR_CULT_REGIONS[region_key] = MINOR_CULT_LIST[i].key;
-					out("\t"..MINOR_CULT_LIST[i].key .. " - VALID - "..log);
+					out_mc("\t"..MINOR_CULT_LIST[i].key .. " - VALID - "..log);
 					cult_created_this_turn = true;
 					break;
 				else
-					out("\t"..MINOR_CULT_LIST[i].key .. " - INVALID");
+					out_mc("\t"..MINOR_CULT_LIST[i].key .. " - INVALID");
 				end
 			else
-				out("\t"..MINOR_CULT_LIST[i].key .. " - Already Active");
+				out_mc("\t"..MINOR_CULT_LIST[i].key .. " - Already Active");
 			end
 
 			MINOR_CULT_LIST[i].cult.valid_from_turn = valid_from_turn;
@@ -531,6 +456,12 @@ function debug_max_cult_chance()
 	spawn_cult_per_turn_chance = 100;
 	spawn_cult_event_per_turn_chance = 100;
 	quicker_event_triggers = true;
+end
+
+function out_mc(msg)
+	if cult_debug_output then
+		out(msg);
+	end
 end
 
 cm:add_saving_game_callback(

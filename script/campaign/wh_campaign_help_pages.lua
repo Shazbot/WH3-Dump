@@ -84,7 +84,8 @@ function setup_campaign_help_pages()
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_daemonic_glory", "daemonic_progression");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_plagues_of_nurgle", "nurgle_plagues");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_ice_court", "kislev_ice_court");
-	hpm:register_help_page_to_info_button_mapping("script_link_campaign_motherland", "kislev_winter");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_motherland", "kislev_court_orthodoxy");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_devotion", "kislev_force_rituals");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_atamans", "kislev_atamans");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_contracts", "ogre_bounties");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_meat", "ogre_great_maw");
@@ -1276,7 +1277,8 @@ function setup_campaign_help_pages()
 		hpr_normal("war.camp.hp.atamans.003"),
 		hpr_normal("war.camp.hp.atamans.004"),
 		hpr_normal("war.camp.hp.atamans.005"),
-		hpr_normal("war.camp.hp.atamans.006")
+		hpr_normal("war.camp.hp.atamans.006"),
+		hpr_normal("war.camp.hp.atamans.007")
 	);
 	parser:add_record("campaign_atamans", "script_link_campaign_atamans", "tooltip_campaign_atamans");
 	tp_atamans = tooltip_patcher:new("tooltip_campaign_atamans");
@@ -4116,7 +4118,8 @@ function setup_campaign_help_pages()
 		hpr_normal("war.camp.hp.devotion.003"),
 		hpr_normal("war.camp.hp.devotion.004"),
 		hpr_normal("war.camp.hp.devotion.005"),
-		hpr_normal("war.camp.hp.devotion.006")
+		hpr_normal("war.camp.hp.devotion.006"),
+		hpr_normal("war.camp.hp.devotion.007")
 	
 	);
 	parser:add_record("campaign_devotion", "script_link_campaign_devotion", "tooltip_campaign_devotion");
@@ -4126,7 +4129,7 @@ function setup_campaign_help_pages()
 	tl_devotion = tooltip_listener:new(
 		"tooltip_campaign_devotion", 
 		function() 
-			uim:highlight_devotion(true);
+			uim:highlight_public_order(true);
 		end,
 		function() 
 			uim:unhighlight_all_for_tooltips();
@@ -5521,6 +5524,26 @@ function setup_campaign_help_pages()
 	);
 	
 
+
+	--
+	-- fragments of sorcery
+	--
+
+	hp_fragments_of_sorcery = help_page:new(
+		"script_link_campaign_fragments_of_sorcery",
+		hpr_title("war.camp.hp.fragments_of_sorcery.001"),
+		hpr_leader("war.camp.hp.fragments_of_sorcery.002"),
+		hpr_normal("war.camp.hp.fragments_of_sorcery.003"),
+		hpr_normal("war.camp.hp.fragments_of_sorcery.004"),
+		hpr_normal("war.camp.hp.fragments_of_sorcery.005"),
+		hpr_normal("war.camp.hp.fragments_of_sorcery.006")
+	);
+	parser:add_record("campaign_fragments_of_sorcery", "script_link_campaign_fragments_of_sorcery", "tooltip_campaign_fragments_of_sorcery");
+	tp_fragments_of_sorcery = tooltip_patcher:new("tooltip_campaign_fragments_of_sorcery");
+	tp_fragments_of_sorcery:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_fragments_of_sorcery", "ui_text_replacements_localised_text_hp_campaign_description_fragments_of_sorcery");
+	
+	
+	
 	--
 	-- gardens_of_morr
 	--
@@ -7920,23 +7943,9 @@ function setup_campaign_help_pages()
 		hpr_image("war.camp.hp.image", "UI/help_images/motherland.png"),
 		hpr_leader("war.camp.hp.motherland.002"),
 		hpr_normal("war.camp.hp.motherland.003"),
-
-		hpr_normal_unfaded("war.camp.hp.motherland.004"),
+		hpr_normal("war.camp.hp.motherland.004"),
 		hpr_normal("war.camp.hp.motherland.005"),
-		hpr_normal_unfaded("war.camp.hp.motherland.006"),
-		hpr_normal("war.camp.hp.motherland.007"),
-		hpr_normal_unfaded("war.camp.hp.motherland.008"),
-		hpr_normal("war.camp.hp.motherland.009"),
-		hpr_normal_unfaded("war.camp.hp.motherland.010"),
-		hpr_normal("war.camp.hp.motherland.011"),
-		
-		hpr_section("followers"),
-		hpr_normal_unfaded("war.camp.hp.motherland.012", "followers"),
-		hpr_normal("war.camp.hp.motherland.013", "followers"),
-		hpr_normal("war.camp.hp.motherland.014", "followers"),
-		hpr_normal("war.camp.hp.motherland.015", "followers"),
-		hpr_normal("war.camp.hp.motherland.016", "followers"),
-		hpr_normal("war.camp.hp.motherland.017", "followers")
+		hpr_normal("war.camp.hp.motherland.006")
 	);
 	parser:add_record("campaign_motherland", "script_link_campaign_motherland", "tooltip_campaign_motherland");
 	tp_motherland = tooltip_patcher:new("tooltip_campaign_motherland");

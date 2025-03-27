@@ -65,6 +65,11 @@ cm:add_first_tick_callback_new(
 					faction_intro:perform_intro("main_warhammer", human_factions[i]);
 				end;
 			end;
+
+			if campaign_ai_script then
+				campaign_ai_script:kislev_background_income()
+			end
+			
 		end;
 	end
 );
@@ -281,7 +286,8 @@ function start_game_all_factions()
 	ogre_bounties:setup_ogre_contracts();
 	setup_khorne_skulls();
 	setup_ice_court_ai();
-	setup_kislev_devotion();
+	kislev_devotion:setup_kislev_devotion();
+	setup_kislev_motherland();
 	setup_slaanesh_devotees();
 	recruited_unit_health:initialise()
 	Seductive_Influence:initialise()
@@ -350,6 +356,7 @@ function start_game_all_factions()
 	da_plan:initialise()
 	ogre_camps:initialise()
 	tyrants_demands:initialise()
+	fragments_of_sorcery:initialise()
 
 	-- Update 5.2
 	add_underdeep_listeners();

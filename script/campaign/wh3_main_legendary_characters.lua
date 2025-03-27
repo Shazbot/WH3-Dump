@@ -326,7 +326,10 @@ character_unlocking.character_data = {
 		has_spawned = false,
 		name = "scribes",
 		subtype = "wh3_dlc24_tze_blue_scribes",
-		require_dlc = {"TW_WH3_SHADOWS_OF_CHANGE"},
+		require_dlc = {
+			"TW_WH3_SHADOWS_OF_CHANGE",
+			"TW_WH3_SHADOWS_OF_CHANGE_TZE"	
+		},
 		override_allowed_factions = {
 			main_warhammer = {
 				"wh3_main_tze_oracles_of_tzeentch",
@@ -525,7 +528,10 @@ character_unlocking.character_data = {
 		has_spawned = false,
 		name = "saytang",
 		subtype = "wh3_dlc24_cth_saytang_the_watcher",
-		require_dlc = {"TW_WH3_SHADOWS_OF_CHANGE"},
+		require_dlc = {
+			"TW_WH3_SHADOWS_OF_CHANGE",
+			"TW_WH3_SHADOWS_OF_CHANGE_CTH"	
+		},
 		allowed_cultures = {
 			"wh3_main_cth_cathay"
 		},
@@ -576,7 +582,10 @@ character_unlocking.character_data = {
 		has_spawned = false,
 		name = "leysa",
 		subtype = "wh3_dlc24_ksl_the_golden_knight",
-		require_dlc = {"TW_WH3_SHADOWS_OF_CHANGE"},
+		require_dlc = {
+			"TW_WH3_SHADOWS_OF_CHANGE",
+			"TW_WH3_SHADOWS_OF_CHANGE_KSL"	
+		},
 		allowed_cultures = {
 			"wh3_main_ksl_kislev"
 		},

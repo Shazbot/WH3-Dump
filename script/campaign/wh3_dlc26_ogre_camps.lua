@@ -342,20 +342,23 @@ function ogre_camps:initialise()
 		true
 	)
 
-	-- In order to increase the Camp Tyrant leveling we do give away a Ogre mercenary units discount to every CAI 
-	-- Only if the user is playing as Ogre 
-	local human_ogr = cm:get_human_factions_of_subculture("wh3_main_sc_ogr_ogre_kingdoms")
-	
-	if #human_ogr < 0 then 
-		return
-	end 
 
 	if cm:is_new_game() == true then
-		local factions = cm:model():world():faction_list()
+		-- In order to increase the Camp Tyrant leveling we do give away a Ogre mercenary units discount to every CAI 
+		-- Only if the user is playing as Ogre 
+		local human_ogr = cm:get_human_factions_of_subculture("wh3_main_sc_ogr_ogre_kingdoms");
+		
+		if #human_ogr == 0 then 
+			return; -- There are no human Ogres
+		end 
+
+		local factions = cm:model():world():faction_list();
 	
 		for i = 0, factions:num_items() - 1 do
-			if table.contains(human_ogr, factions:item_at(i):name()) == false then
-				cm:apply_effect_bundle("wh3_dlc26_cai_ogr_mercenaries_discount", factions:item_at(i):name(), 0)
+			local faction = factions:item_at(i);
+
+			if faction:is_human() == false then
+				cm:apply_effect_bundle("wh3_dlc26_cai_ogr_mercenaries_discount", faction:name(), 0);
 			end
 		end
 	end

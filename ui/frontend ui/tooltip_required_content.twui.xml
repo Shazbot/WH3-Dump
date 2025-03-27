@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -309,6 +309,12 @@
 			uniqueguid="7C01BAF2-CFB4-4DC8-AC4D23E047D77F2F"
 			currentstate="AB77C937-6A14-4EA2-A4F4291D6B2E9F02"
 			defaultstate="AB77C937-6A14-4EA2-A4F4291D6B2E9F02">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoRTOwnershipList"
+					context_function_id="CcoRTOwnershipPurchasableList(List : this.List.Filter(OwnershipProductPurchasableRecordList.Size &gt; 0), Name :  this.Name, IsFree : this.IsFree)"/>
+			</callbackwithcontextlist>
 			<states>
 				<newstate
 					this="AB77C937-6A14-4EA2-A4F4291D6B2E9F02"
@@ -376,7 +382,7 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextTextLabel"
-					context_object_id="CcoRTOwnershipList"
+					context_object_id="CcoRTOwnershipPurchasableList"
 					context_function_id="IsFree | Loc(&quot;tooltip_content_alert&quot;) | Loc(&quot;additional_content_required&quot;)"/>
 			</callbackwithcontextlist>
 			<states>
@@ -410,7 +416,7 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextList"
-					context_object_id="CcoRTOwnershipList"
+					context_object_id="CcoRTOwnershipPurchasableList"
 					context_function_id="List"/>
 			</callbackwithcontextlist>
 			<states>
@@ -607,7 +613,7 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextTextLabel"
-					context_object_id="CcoRTOwnershipList"
+					context_object_id="CcoRTOwnershipPurchasableList"
 					context_function_id="List &gt; 1 | Loc(&quot;dlc_permission_collections&quot;, Name) | Loc(&quot;dlc_permission_products&quot;, Name)"/>
 			</callbackwithcontextlist>
 			<states>
@@ -641,7 +647,7 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoRTOwnershipList"
+					context_object_id="CcoRTOwnershipPurchasableList"
 					context_function_id="self.ParentContext.ChildIndex != this.List.Size">
 					<child_m_user_properties>
 						<property

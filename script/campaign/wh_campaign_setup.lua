@@ -2732,22 +2732,6 @@ function apply_default_diplomacy()
 		cm:force_diplomacy("faction:" .. faction:name(), "all", "trade agreement,break trade", false, false, true);
 	end;
 	
-	-- Kislev confederation and war restriction for supporter feature
-	local ice_court_faction_is_human = cm:get_faction("wh3_main_ksl_the_ice_court"):is_human();
-	local orthodoxy_faction_is_human = cm:get_faction("wh3_main_ksl_the_great_orthodoxy"):is_human();
-	
-	cm:force_diplomacy("faction:wh3_main_ksl_the_ice_court", "faction:wh3_main_ksl_the_great_orthodoxy", "war", false, false, true);
-	
-	-- re-enable war when both kislev factions are player controlled
-	if ice_court_faction_is_human and orthodoxy_faction_is_human then
-		cm:force_diplomacy("faction:wh3_main_ksl_the_ice_court", "faction:wh3_main_ksl_the_great_orthodoxy", "war", true, true, true);
-	end;
-	
-	-- player cannot confederate the other kislev faction
-	if ice_court_faction_is_human or orthodoxy_faction_is_human then
-		cm:force_diplomacy("faction:wh3_main_ksl_the_ice_court", "faction:wh3_main_ksl_the_great_orthodoxy", "form confederation", false, false, true);
-	end;
-	
 	-- Kurgan Warband war restriction on Chaos aligned factions
 	local kurgan_warband_war_exceptions = world:lookup_factions_from_faction_set("kurgan_warband_war_exceptions")
 	for _, faction in model_pairs(kurgan_warband_war_exceptions) do

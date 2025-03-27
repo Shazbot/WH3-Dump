@@ -1393,7 +1393,7 @@ local followers = {
 				-- can only be equipped by heroes so not granting for lords
 				return cm:get_saved_value("tech_researched_this_turn_" .. context:character():faction():name()) and cm:model():turn_number() > 1 and context:character():character_type("general") == false;
 			end,
-		["chance"] = 7
+		["chance"] = 3
 	},
 	
 	---------------
@@ -3200,7 +3200,7 @@ local followers = {
 			function(context)
 				return context:character():turns_in_enemy_regions() > 0;
 			end,
-		["chance"] = 8
+		["chance"] = 6
 	},
 	{
 		["follower"] = "wh3_main_anc_follower_ksl_atamans_administrator",
@@ -3210,7 +3210,7 @@ local followers = {
 				local character = context:character();
 				return character:has_region() and character:region():owning_faction() == character:faction();
 			end,
-		["chance"] = 5
+		["chance"] = 4
 	},
 	{
 		["follower"] = "wh3_main_anc_follower_ksl_knights_squire",
@@ -3220,7 +3220,7 @@ local followers = {
 				local character = context:character();
 				return character:won_battle() and cm:char_army_has_unit(character, {"wh3_main_ksl_inf_tzar_guard_0", "wh3_main_ksl_inf_tzar_guard_1"});
 			end,
-		["chance"] = 10
+		["chance"] = 6
 	},
 	{
 		["follower"] = "wh3_main_anc_follower_ksl_knights_ward",
@@ -3230,7 +3230,7 @@ local followers = {
 				local character = context:character();
 				return character:won_battle() and character == context:pending_battle():defender();
 			end,
-		["chance"] = 8
+		["chance"] = 6
 	},
 	{
 		["follower"] = "wh3_main_anc_follower_ksl_kvas_deye",
@@ -3240,7 +3240,7 @@ local followers = {
 				local character = context:character();
 				return character:has_region() and character:region():owning_faction():military_allies_with(character:faction());
 			end,
-		["chance"] = 10
+		["chance"] = 8
 	},
 	{
 		["follower"] = "wh3_main_anc_follower_ksl_nomad_riding_master",
@@ -3268,7 +3268,7 @@ local followers = {
 			function(context)
 				return context:character():character_type("dignitary") and (context:mission_result_success() or context:mission_result_critial_success()) and context:ability() ~= "assist_army";
 			end,
-		["chance"] = 10
+		["chance"] = 8
 	},
 	{
 		["follower"] = "wh3_main_anc_follower_ksl_priest_of_taal",
@@ -3276,7 +3276,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return has_devotion_pooled_resource(character:faction()) and not character:has_ancillary("wh3_main_anc_follower_ksl_priest_of_taal") and cm:character_won_battle_against_culture(character, {"wh_main_chs_chaos", "wh_dlc08_nor_norsca", "wh_dlc03_bst_beastmen", "wh3_main_dae_daemons", "wh3_main_kho_khorne", "wh3_main_nur_nurgle", "wh3_main_sla_slaanesh", "wh3_main_tze_tzeentch"});
+				return not character:has_ancillary("wh3_main_anc_follower_ksl_priest_of_taal") and cm:character_won_battle_against_culture(character, {"wh_main_chs_chaos", "wh_dlc08_nor_norsca", "wh_dlc03_bst_beastmen", "wh3_main_dae_daemons", "wh3_main_kho_khorne", "wh3_main_nur_nurgle", "wh3_main_sla_slaanesh", "wh3_main_tze_tzeentch"});
 			end,
 		["chance"] = 5
 	},
@@ -3287,7 +3287,7 @@ local followers = {
 			function(context)
 				local target_character_culture = context:target_character():faction():culture();
 				local character = context:character();
-				return has_devotion_pooled_resource(character:faction()) and not character:has_ancillary("wh3_main_anc_follower_ksl_priest_of_ursun") and (target_character_culture == "wh_main_chs_chaos" or target_character_culture == "wh_dlc08_nor_norsca" or target_character_culture == "wh_dlc03_bst_beastmen" or target_character_culture == "wh3_main_dae_daemons" or target_character_culture == "wh3_main_kho_khorne" or target_character_culture == "wh3_main_nur_nurgle" or target_character_culture == "wh3_main_sla_slaanesh" or target_character_culture == "wh3_main_tze_tzeentch") and (context:mission_result_success() or context:mission_result_critial_success()) and context:ability() ~= "assist_army";
+				return not character:has_ancillary("wh3_main_anc_follower_ksl_priest_of_ursun") and (target_character_culture == "wh_main_chs_chaos" or target_character_culture == "wh_dlc08_nor_norsca" or target_character_culture == "wh_dlc03_bst_beastmen" or target_character_culture == "wh3_main_dae_daemons" or target_character_culture == "wh3_main_kho_khorne" or target_character_culture == "wh3_main_nur_nurgle" or target_character_culture == "wh3_main_sla_slaanesh" or target_character_culture == "wh3_main_tze_tzeentch") and (context:mission_result_success() or context:mission_result_critial_success()) and context:ability() ~= "assist_army";
 			end,
 		["chance"] = 5
 	},
@@ -3332,7 +3332,7 @@ local followers = {
 				local character = context:character();
 				return character:won_battle() and (cm:count_char_army_has_unit_category(character, "inf_melee") + cm:count_char_army_has_unit_category(character, "inf_ranged")) > 7;
 			end,
-		["chance"] = 20
+		["chance"] = 10
 	},
 	{
 		["follower"] = "wh3_main_anc_follower_ksl_vodka_distiller",
@@ -3711,7 +3711,9 @@ function load_followers()
 				
 				-- daemon prince shares followers, so has a bigger pool, so the chance is reduced for them
 				if character:faction():culture() == "wh3_main_dae_daemons" then
-					chance = math.round(chance * 0.5);
+					chance = math.round(chance * 0.4);
+				else
+					chance = chance * 0.5;
 				end;
 				
 				if core:is_tweaker_set("SCRIPTED_TWEAKER_13") then

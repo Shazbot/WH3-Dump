@@ -41,6 +41,7 @@
 						<character_details_subpanel this="CD71C4B2-14B7-4BDD-B27726EE7AF7B8D1"/>
 						<skills_subpanel this="8E460EA7-FD9E-435C-9166FCFE0B1A23AB"/>
 						<vows_subpanel this="380EB420-5F58-4FD6-85C7A2A51C65E164"/>
+						<fragments_subpanel this="03FE3382-9D69-4291-B06A787E2A0306F2"/>
 						<quests_subpanel this="E955A47B-D76A-4921-93400BC722345BD7"/>
 						<character_initiatives_holder this="BDC97274-E909-4369-90A607ABE64C81DA">
 							<big_names_holder this="BAC86CD1-ACD7-4C69-BD05F592FB13B0BA"/>
@@ -90,23 +91,23 @@
 													</name_icon_parent>
 												</template_stat>
 											</dynamic_stats>
+											<row_header_abilities this="BED44359-D146-4129-B8AF74EED9501DEC">
+												<tx_title this="BB76BBF5-E3AC-4E42-A71DC246CE02E25C"/>
+											</row_header_abilities>
 											<ability_list this="8646C9A0-D87B-474A-9A4BCAFF59AE93A9">
 												<template_ability_icon this="8E159E09-7232-4C82-9915544E883DDB05"/>
 											</ability_list>
+											<abilities this="48DF90A8-6221-4103-BBE9417097336659">
+												<template_ability_category this="A02232B5-8FB4-4C22-8CA5A4DFFA0C3032">
+													<categorised_ability_list this="275FCEA3-DE2B-475E-A63BBE7851AFFA15">
+														<template_ability this="E7A5F1BD-218E-4D68-B8EABF9119343F26">
+															<dy_name this="F75DB7D3-C80C-479A-B577B67AEA881980"/>
+															<ability_icon this="A88981A3-E739-41FB-A40EA9707B2F7898"/>
+														</template_ability>
+													</categorised_ability_list>
+												</template_ability_category>
+											</abilities>
 										</details>
-										<row_header_abilities this="BED44359-D146-4129-B8AF74EED9501DEC">
-											<tx_title this="BB76BBF5-E3AC-4E42-A71DC246CE02E25C"/>
-										</row_header_abilities>
-										<abilities this="48DF90A8-6221-4103-BBE9417097336659">
-											<template_ability_category this="A02232B5-8FB4-4C22-8CA5A4DFFA0C3032">
-												<categorised_ability_list this="275FCEA3-DE2B-475E-A63BBE7851AFFA15">
-													<template_ability this="E7A5F1BD-218E-4D68-B8EABF9119343F26">
-														<dy_name this="F75DB7D3-C80C-479A-B577B67AEA881980"/>
-														<ability_icon this="A88981A3-E739-41FB-A40EA9707B2F7898"/>
-													</template_ability>
-												</categorised_ability_list>
-											</template_ability_category>
-										</abilities>
 										<row_details this="9B901F77-95EB-445E-A989803774E34CCC">
 											<tx_title this="1622F21A-DEC8-46E9-8AB112F3E6EA364E"/>
 										</row_details>
@@ -212,6 +213,11 @@
 							<tx_vows this="D1D7FA4F-B879-4549-AC46E4F4A0FEE109"/>
 							<tab_child this="ED858E6A-A5D3-4832-A3398865A6243228"/>
 						</vows>
+						<fragments this="8E52CB4C-07CD-4E7E-93E06847492410A9">
+							<button_flame this="28B9574E-DF8C-4A1D-8460E078A47579B1"/>
+							<tx_fragments this="BF46DE3A-BA93-430D-B426A16E81E0D54A"/>
+							<tab_child this="ABE19440-C31C-4472-A85F6086C24C7321"/>
+						</fragments>
 						<character_initiatives this="145DFCDC-1FB6-4E31-B1FC3B8F7FBE4216">
 							<button_flame this="5CB0A795-A1DA-4D38-98FFAD80E1F29407"/>
 							<tx_character_initiatives this="9E241B6A-2938-4E45-A541268F5C628E6A"/>
@@ -1842,6 +1848,10 @@
 					callback_id="ContextCommandLeftClick"
 					context_object_id="CcoCampaignCharacter"
 					context_function_id="ShowPrompt(Loc(&quot;details_panel_skills_reset_all&quot;), Loc(&quot;details_panel_skills_reset_all_desc&quot;), Do(ResetAllSkills, self.SetState(&quot;inactive&quot;)))"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="IsGovernor == false"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -2454,6 +2464,165 @@
 				<element value="ui/skins/default/tab_square_large_text_arrow_selected_underlay.png"/>
 			</override_images>
 		</details>
+		<fragments
+			this="8E52CB4C-07CD-4E7E-93E06847492410A9"
+			id="fragments"
+			template_id="square_large_text_tab_toggle"
+			part_of_template="true"
+			uniqueguid_in_template="11E70A54-2310-40EE-8C7304D23F0DD741"
+			uniqueguid="8E52CB4C-07CD-4E7E-93E06847492410A9"
+			dimensions="300.00,103.00"
+			tooltips_localised="false"
+			priority="10"
+			sound_category="UI_GBL_TMP_Square_Large_Text_Tab_Toggle">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="ED2C2263-6BD0-483C-9219DE9C8DB5A8EE"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="048C6DB0-5A41-4F15-BB4D461D140846BD"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="CB40A006-75B1-4C9E-A599A862EC91BA5D"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="28A52936-9AD2-4EDE-9649A569441D0D4D"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="B65CD46B-322D-48D9-8F3B3D78607856CD"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="0AB832AF-63BF-4555-B9AA6B9CD18AFDED"/>
+				<state_uniqueguid
+					name="selected_down"
+					uniqueguid="C6938432-ABEC-4699-B37619011C7145AC"/>
+				<state_uniqueguid
+					name="selected_down_off"
+					uniqueguid="ADAD2E74-E7B7-4915-87F0A14BB0CECEC4"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="702DD527-0308-44FF-B6DA95BCDE09F466"/>
+				<state_uniqueguid
+					name="selected_inactive"
+					uniqueguid="34E4195B-399E-409E-BA47547D0A8A82D3"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_pressed.png"
+					uniqueguid="74F13977-4215-49BF-BED8E997515A55D9"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_active.png"
+					uniqueguid="F2CC904B-76FF-4AFB-A89810FACDFE0D4B"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_hover.png"
+					uniqueguid="305702BB-4F4A-40EF-AD54D68199490646"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_inactive.png"
+					uniqueguid="34EE6375-E79F-42F4-9FCF63E17B6B02FD"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_selected.png"
+					uniqueguid="973AD71A-E23A-4C1F-870A03ADCAAE4CCA"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_selected_hover.png"
+					uniqueguid="77C1CBCB-E43D-4F5D-924CCC9CDCDC629F"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_selected_inactive.png"
+					uniqueguid="B7575364-D83E-400E-82DA843C187AA9A7"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_underlay.png"
+					uniqueguid="04AACE0D-71FF-4968-BCED0784AEC62105"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_selected_underlay.png"
+					uniqueguid="FFCB38CC-9237-42BB-9DB3E58ABD637B32"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_arrow_selected_inactive.png"
+					uniqueguid="37A11070-E9D3-4747-B235A23F1908D5B0"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_arrow_selected_pressed.png"
+					uniqueguid="9722EC08-E956-44FC-80AC521CE6141F50"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_arrow_selected.png"
+					uniqueguid="DE9F6A83-2E0A-4C56-9FF8A58353FB65BB"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_selected_pressed.png"
+					uniqueguid="50F75AF2-7294-4017-B7C682ADDDCBE32B"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_arrow_selected_underlay.png"
+					uniqueguid="6C31CFEB-EBB7-4BE2-A1D76825AB82C38F"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="ButtonGroupButton">
+					<child_m_user_properties>
+						<property
+							name="panel"
+							value="fragments_subpanel"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="AgentSubtypeRecordContext.Key == &quot;wh3_main_tze_kairos&quot;"/>
+				<callback_with_context
+					callback_id="ContextInactiveStateSetter"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="IsScriptLockActive(&quot;disable_character_details_panel_fragments_tab&quot;) == false"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="ui_override"
+					value="disable_character_details_panel_skills_tab"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/tab_square_large_text_pressed.png"/>
+				<element value="ui/skins/default/tab_square_large_text_active.png"/>
+				<element value="ui/skins/default/tab_square_large_text_hover.png"/>
+				<element value="ui/skins/default/tab_square_large_text_inactive.png"/>
+				<element value="ui/skins/default/tab_square_large_text_selected.png"/>
+				<element value="ui/skins/default/tab_square_large_text_selected_hover.png"/>
+				<element value="ui/skins/default/tab_square_large_text_selected_inactive.png"/>
+				<element value="ui/skins/default/tab_square_large_text_underlay.png"/>
+				<element value="ui/skins/default/tab_square_large_text_selected_underlay.png"/>
+				<element value="ui/skins/default/tab_square_large_text_arrow_selected_inactive.png"/>
+				<element value="ui/skins/default/tab_square_large_text_arrow_selected_pressed.png"/>
+				<element value="ui/skins/default/tab_square_large_text_arrow_selected.png"/>
+				<element value="ui/skins/default/tab_square_large_text_selected_pressed.png"/>
+				<element value="ui/skins/default/tab_square_large_text_arrow_selected_underlay.png"/>
+			</override_images>
+		</fragments>
 		<mp_timer
 			this="86323CDF-5A30-46DB-8B7F5B5F74620505"
 			id="mp_timer"
@@ -3399,6 +3568,51 @@
 				<state_uniqueguid
 					name="default"
 					uniqueguid="6FB51048-C40A-4248-B866B9DD24080126"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoStaticObject"
+					context_function_id="self.ParentContext.IsMouseOver &amp;&amp; self.ParentContext.IsDisabled == false">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+				<property
+					name="disable_override1"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+			</override_images>
+		</button_flame>
+		<button_flame
+			this="28B9574E-DF8C-4A1D-8460E078A47579B1"
+			id="button_flame"
+			part_of_template="true"
+			uniqueguid_in_template="27CF7AD8-15DD-40B4-A83F83B081D3546F"
+			uniqueguid="28B9574E-DF8C-4A1D-8460E078A47579B1"
+			dimensions="226.00,28.00"
+			dock_point="Center"
+			offset="0.00,-26.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="F3C49A74-1A2E-45A0-BE9F032A61E9340D"/>
 			</state_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context
@@ -4723,7 +4937,6 @@
 		<template_ability_icon
 			this="8E159E09-7232-4C82-9915544E883DDB05"
 			id="template_ability_icon"
-			offset="0.00,2.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			tooltipslocalised="true"
@@ -4845,9 +5058,9 @@
 		<ability_list
 			this="8646C9A0-D87B-474A-9A4BCAFF59AE93A9"
 			id="ability_list"
-			offset="0.00,62.00"
+			offset="0.00,106.00"
 			allowhorizontalresize="false"
-			allowverticalresize="false"
+			dock_offset="0.00,10.00"
 			priority="46"
 			tooltipslocalised="true"
 			uniqueguid="8646C9A0-D87B-474A-9A4BCAFF59AE93A9"
@@ -4880,15 +5093,16 @@
 					this="B83091CE-FB8B-4940-BB1DF59A3078FDDC"
 					name="NewState"
 					width="300"
+					height="28"
 					uniqueguid="B83091CE-FB8B-4940-BB1DF59A3078FDDC">
 					<imagemetrics>
 						<image
 							this="8D959A85-A7A0-4C3B-8DE3272C6951C02F"
 							uniqueguid="8D959A85-A7A0-4C3B-8DE3272C6951C02F"
 							componentimage="63FB5E8A-AAFF-483C-BAB2C2C78E6B9C2D"
-							offset="-2.00,-12.00"
+							offset="-2.00,-11.00"
 							width="304"
-							height="44"
+							height="39"
 							colour="#FFFFFF00"
 							tile="true"
 							dockpoint="Bottom Center"
@@ -4901,11 +5115,16 @@
 				</newstate>
 			</states>
 			<LayoutEngine
-				type="HorizontalList"
-				allow_overlap="true"
+				type="List"
+				spacing="2.00,1.00"
+				itemsperrow="9"
+				sizetocontent="true"
 				reverse_order="true"
-				is_listview_lookup_enabled="false"
-				vertical_alignment="Center"/>
+				is_listview_lookup_enabled="false">
+				<columnwidths>
+					<column width="40"/>
+				</columnwidths>
+			</LayoutEngine>
 		</ability_list>
 		<details
 			this="BF9E6A5D-2DC1-4D2B-B418B906F5A607DB"
@@ -4936,7 +5155,7 @@
 					this="D834830F-EBED-478D-A180B7A0E6526F0F"
 					name="NewState"
 					width="300"
-					height="104"
+					height="200"
 					uniqueguid="D834830F-EBED-478D-A180B7A0E6526F0F">
 					<imagemetrics>
 						<image
@@ -4945,7 +5164,7 @@
 							componentimage="7669FE0A-1552-49BF-957EE38E6AEB2DDC"
 							offset="-2.00,-12.00"
 							width="304"
-							height="116"
+							height="212"
 							colour="#FFFFFF00"
 							tile="true"
 							dockpoint="Bottom Center"
@@ -5398,9 +5617,10 @@
 		<row_header_abilities
 			this="BED44359-D146-4129-B8AF74EED9501DEC"
 			id="row_header_abilities"
-			offset="0.00,160.00"
+			offset="0.00,72.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
+			dock_offset="0.00,10.00"
 			priority="46"
 			tooltipslocalised="true"
 			soundcategory="UI_GBL_TMP_DropDown_List"
@@ -5900,7 +6120,7 @@
 					this="B43B367C-420E-43D4-BEA39CDA15A37869"
 					name="NewState"
 					width="300"
-					height="749"
+					height="739"
 					uniqueguid="B43B367C-420E-43D4-BEA39CDA15A37869">
 					<component_text
 						texthbehaviour="Never split"
@@ -6725,7 +6945,7 @@
 		<tabgroup
 			this="50FC064B-80A5-4935-8229C53F1FBEEB29"
 			id="TabGroup"
-			offset="54.00,86.00"
+			offset="-95.00,86.00"
 			allowverticalresize="false"
 			docking="Top Center"
 			dock_offset="0.00,86.00"
@@ -6757,7 +6977,7 @@
 				<newstate
 					this="A8E51195-C8B7-48EE-8EF929D1C234484D"
 					name="NewState"
-					width="1492"
+					width="1790"
 					height="55"
 					uniqueguid="A8E51195-C8B7-48EE-8EF929D1C234484D">
 					<component_text
@@ -7327,7 +7547,7 @@
 		<row_details
 			this="9B901F77-95EB-445E-A989803774E34CCC"
 			id="row_details"
-			offset="0.00,266.00"
+			offset="0.00,256.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			priority="46"
@@ -8741,6 +8961,18 @@
 					callback_id="ContextImageSetter"
 					context_object_id="CcoCampaignCharacter"
 					context_function_id="GetIf(IsAgent, CharacterTypeIconPath)"/>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoCampaignCharacter">
+					<child_m_user_properties>
+						<property
+							name="ataman"
+							value="IsGovernor"/>
+						<property
+							name="fallback_state"
+							value="army"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -8758,6 +8990,10 @@
 					this="1BA9FD19-022E-4DAF-924EB5F419C531D2"
 					uniqueguid="1BA9FD19-022E-4DAF-924EB5F419C531D2"
 					imagepath="ui/skins/default/icon_army.png"/>
+				<component_image
+					this="DBCAAC85-C257-48D7-8BC3A0A64E212D51"
+					uniqueguid="DBCAAC85-C257-48D7-8BC3A0A64E212D51"
+					imagepath="ui/skins/warhammer3/kislev_atamans_icon.png"/>
 			</componentimages>
 			<states>
 				<army
@@ -8776,6 +9012,25 @@
 							dockpoint="Center"/>
 					</imagemetrics>
 				</army>
+				<ataman
+					this="C11435C9-62E6-4ECC-90E2263AC1C604C9"
+					name="ataman"
+					width="22"
+					height="22"
+					uniqueguid="C11435C9-62E6-4ECC-90E2263AC1C604C9">
+					<imagemetrics>
+						<image
+							this="B6B79592-4D56-469D-A5F73364BC0DE123"
+							uniqueguid="B6B79592-4D56-469D-A5F73364BC0DE123"
+							componentimage="DBCAAC85-C257-48D7-8BC3A0A64E212D51"
+							offset="-7.00,-7.00"
+							width="36"
+							height="36"
+							dockpoint="Center"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</ataman>
 			</states>
 		</forces_icon>
 		<character_details_subpanel
@@ -10116,7 +10371,7 @@
 		<details_traits_effects_holder
 			this="C4F3F30A-C9FF-4C31-AFF106881F508360"
 			id="details_traits_effects_holder"
-			offset="0.00,308.00"
+			offset="0.00,298.00"
 			allowhorizontalresize="false"
 			priority="40"
 			tooltipslocalised="true"
@@ -10822,8 +11077,9 @@
 		<abilities
 			this="48DF90A8-6221-4103-BBE9417097336659"
 			id="abilities"
-			offset="0.00,202.00"
+			offset="0.00,134.00"
 			allowhorizontalresize="false"
+			dock_offset="0.00,10.00"
 			priority="46"
 			tooltipslocalised="true"
 			uniqueguid="48DF90A8-6221-4103-BBE9417097336659"
@@ -13627,5 +13883,109 @@
 				sizetocontent="true"
 				vertical_alignment="Center"/>
 		</reset_buttons_holder>
+		<fragments_subpanel
+			this="03FE3382-9D69-4291-B06A787E2A0306F2"
+			id="fragments_subpanel"
+			offset="320.00,150.00"
+			visible="false"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="03FE3382-9D69-4291-B06A787E2A0306F2"
+			isrelativeresize="true"
+			currentstate="0D88F040-D3DF-4007-A1C9C59E2D3DC8C4"
+			defaultstate="0D88F040-D3DF-4007-A1C9C59E2D3DC8C4">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ComponentCreator"
+					context_object_id="CcoCampaignCharacter">
+					<child_m_user_properties>
+						<property
+							name="layout"
+							value="ui/campaign ui/character_details_panel_tze_fragments"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="0D88F040-D3DF-4007-A1C9C59E2D3DC8C4"
+					name="NewState"
+					width="1179"
+					height="704"
+					interactive="true"
+					uniqueguid="0D88F040-D3DF-4007-A1C9C59E2D3DC8C4"/>
+			</states>
+		</fragments_subpanel>
+		<tab_child
+			this="ABE19440-C31C-4472-A85F6086C24C7321"
+			id="tab_child"
+			offset="10.00,10.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="ABE19440-C31C-4472-A85F6086C24C7321"
+			currentstate="2E3F9967-F65C-4695-AD6EFF3FBD19D8FA"
+			defaultstate="2E3F9967-F65C-4695-AD6EFF3FBD19D8FA">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+				<property
+					name="dynamic_child_parent"
+					value="fragments"/>
+			</userproperties>
+			<states>
+				<newstate
+					this="2E3F9967-F65C-4695-AD6EFF3FBD19D8FA"
+					name="NewState"
+					width="1210"
+					height="710"
+					uniqueguid="2E3F9967-F65C-4695-AD6EFF3FBD19D8FA"/>
+			</states>
+		</tab_child>
+		<tx_fragments
+			this="BF46DE3A-BA93-430D-B426A16E81E0D54A"
+			id="tx_fragments"
+			offset="58.00,10.00"
+			docking="Top Center"
+			dock_offset="0.00,10.00"
+			component_anchor_point="0.50,0.00"
+			priority="10"
+			tooltipslocalised="true"
+			uniqueguid="BF46DE3A-BA93-430D-B426A16E81E0D54A"
+			currentstate="C1C477DC-E1BD-4B0E-B5A7C22CE7EDF777"
+			defaultstate="C1C477DC-E1BD-4B0E-B5A7C22CE7EDF777">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+				<property
+					name="dynamic_child_parent"
+					value="fragments"/>
+			</userproperties>
+			<states>
+				<newstate
+					this="C1C477DC-E1BD-4B0E-B5A7C22CE7EDF777"
+					name="NewState"
+					width="184"
+					height="28"
+					uniqueguid="C1C477DC-E1BD-4B0E-B5A7C22CE7EDF777">
+					<component_text
+						text="Fragments of Sorcery"
+						textvalign="Center"
+						texthalign="Center"
+						textlocalised="true"
+						textlabel="wh3_main_tze_fragments_title_tx"
+						font_m_font_name="brand_header"
+						font_m_size="16"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_16"
+						text_shader_name="drop_shadow_t0"
+						textshadervars="0.00,1.00,2.00,0.00"/>
+				</newstate>
+			</states>
+		</tx_fragments>
 	</components>
 </layout>

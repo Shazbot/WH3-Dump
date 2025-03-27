@@ -1,0 +1,10 @@
+FragmentsOfSorcery
+{
+	CanUseFeature
+	{
+		# think of it as a character-feature, not a faction-feature #
+		GetIfElse( PlayersFaction.WasConfederated == false,
+			CanUseUiFeature("FRAGMENTS"),
+			PlayersFaction.CharacterList.Filter(AgentSubtypeRecordContext.Key == "wh3_main_tze_kairos").IsEmpty == false )
+	}
+}

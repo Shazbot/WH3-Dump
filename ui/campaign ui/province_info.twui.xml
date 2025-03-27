@@ -198,6 +198,18 @@
 							</mid_part_parent>
 							<spacer this="F02FE072-06B6-4B09-BDC987E971B9723E"/>
 						</frame_devotees>
+						<frame_motherland this="8C6DF3DD-1C0C-442B-A97C1E07D0DA75F6">
+							<header_motherland this="90BD0EF4-B2D8-45F1-AA36F7A6EBD72DAF">
+								<dy_motherland this="1AE7559F-90A8-4997-A1827AFAD7690AFF"/>
+							</header_motherland>
+							<mid_part_parent this="284C5BC4-0C9D-4135-8BE6F4C75F71802B">
+								<motherland_buttonset this="C62AF1A9-7CB0-4834-8018FC3A8EE60CFA">
+									<template_motherland_ritual this="AA7C4A21-AB42-45B9-B549C0CF54F91632"/>
+								</motherland_buttonset>
+								<cooldown_display this="290E307C-4817-4B7D-BE030EEF94BA8023"/>
+							</mid_part_parent>
+							<spacer this="6AA578D8-CD49-4F2C-AF7E6A9990A6EA72"/>
+						</frame_motherland>
 						<frame_slaves this="0298F2C2-3CBA-4B5F-946C81480A935E15">
 							<header_slaves this="AD552C74-6F9F-4895-B6D5B828329585C2">
 								<dy_slaves this="1D0FAB81-F186-4767-AE9DB578D3095CD1"/>
@@ -2627,6 +2639,179 @@
 				<element value=""/>
 			</override_images>
 		</template_devotees_ritual>
+		<template_motherland_ritual
+			this="AA7C4A21-AB42-45B9-B549C0CF54F91632"
+			id="template_motherland_ritual"
+			template_id="square_button_toggle_40"
+			part_of_template="true"
+			uniqueguid_in_template="CE01BA48-5C83-4D09-9632B78D5B52ACCB"
+			uniqueguid="AA7C4A21-AB42-45B9-B549C0CF54F91632"
+			dimensions="40.00,40.00"
+			tooltips_localised="false"
+			priority="45"
+			sound_category="UI_CAM_CLICK_Kislev_Motherland_Invoke">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="412A6510-5699-4140-8058588D280D0DA0"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="17FBFB52-D746-4D09-9419F1FAFA18210C"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="BC38CEE7-450D-4273-9DFF748768A90002"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="EF05207E-628D-4FA0-A46D36588FDE6B97"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="473761D3-D43F-491C-A664DAC0840F1337"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="C6603A05-EAE6-4077-8C7F999B122BB4B4"/>
+				<state_uniqueguid
+					name="selected_down"
+					uniqueguid="7CDC66D6-A25D-4C95-8711EFA338800F3E"/>
+				<state_uniqueguid
+					name="selected_down_off"
+					uniqueguid="8CB165CA-40A3-4ED4-B916B3E993F1C88A"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="4A05F112-BCA6-4BF7-B246CB261D6F8E42"/>
+				<state_uniqueguid
+					name="selected_inactive"
+					uniqueguid="8FA69310-0956-4087-AF4595DB06B65C64"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/wh3_dae_main_sla_slaanesh/devotees_growth_icon.png"
+					uniqueguid="CAAC8E8E-B6BB-421C-9E2FCC02C19393EF"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_square_togle_pressed.png"
+					uniqueguid="129E9FB9-8592-4B35-89D95BAAD04F18EB"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_square_togle_selected_hover.png"
+					uniqueguid="D751813B-9C0A-4FB0-A786465956095ED5"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_square_togle_hover.png"
+					uniqueguid="040781F7-31D5-4829-A22F016B625F81A8"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_square_togle_active.png"
+					uniqueguid="C4FB43DB-C5F6-4734-B2821C2451A41895"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_square_togle_inactive.png"
+					uniqueguid="B5ADCD6D-7C6D-4FEE-A11F84A9610DCD69"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_square_togle_selected.png"
+					uniqueguid="FF08BE28-C498-4BC6-A409C86447995D59"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_square_togle_underlay.png"
+					uniqueguid="33A5B18B-D39F-439B-B5B630176C4A4358"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_square_togle_selected_underlay.png"
+					uniqueguid="23C0ED16-6F47-4C88-8E7E78FF7AE178E3"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_square_togle_selected_inactive.png"
+					uniqueguid="1545C8FA-9DD2-4A1C-A24B91C9996FFDF1"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_square_togle_selected_pressed.png"
+					uniqueguid="B66E9AD6-7307-4C79-9449D7BA89A58CAB"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoCampaignRitual"
+					context_function_id="RitualContext.Icon"/>
+				<callback_with_context
+					callback_id="ContextInactiveStateSetter"
+					context_object_id="CcoCampaignRitual"
+					context_function_id="CanPerformRitual(SelectedSettlement)">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoCampaignRitual"
+					context_function_id="Perform(SelectedSettlement)"/>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignSettlement"/>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoCampaignRitual">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/campaign ui/tooltip_ritual"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="resizable"/>
+				<property
+					name="disable_override0"
+					value="CallbackAnimTrigger"/>
+				<property
+					name="dynamic_image"
+					value="0"/>
+				<property
+					name="override_sound"
+					value=""/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/wh3_dae_main_sla_slaanesh/devotees_growth_icon.png"/>
+				<element value="ui/skins/default/button_square_togle_pressed.png"/>
+				<element value="ui/skins/default/button_square_togle_selected_hover.png"/>
+				<element value="ui/skins/default/button_square_togle_hover.png"/>
+				<element value="ui/skins/default/button_square_togle_active.png"/>
+				<element value="ui/skins/default/button_square_togle_inactive.png"/>
+				<element value="ui/skins/default/button_square_togle_selected.png"/>
+				<element value="ui/skins/default/button_square_togle_underlay.png"/>
+				<element value="ui/skins/default/button_square_togle_selected_underlay.png"/>
+				<element value="ui/skins/default/button_square_togle_selected_inactive.png"/>
+				<element value="ui/skins/default/button_square_togle_selected_pressed.png"/>
+				<element value=""/>
+			</override_images>
+		</template_motherland_ritual>
 		<vslider
 			this="825D8AC6-4A42-4FD2-AB60911C14BC3CE2"
 			id="vslider"
@@ -4548,7 +4733,7 @@
 		<effects
 			this="BB682B0D-42FF-4822-A6DCC3D764DFF447"
 			id="effects"
-			offset="0.00,880.00"
+			offset="0.00,970.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			priority="45"
@@ -4609,7 +4794,7 @@
 		<frame_corruption
 			this="A3F38307-4845-4D09-AC72EE65BF596C80"
 			id="frame_corruption"
-			offset="0.00,788.00"
+			offset="0.00,878.00"
 			allowhorizontalresize="false"
 			priority="45"
 			tooltipslocalised="true"
@@ -5386,7 +5571,7 @@
 		<panel
 			this="46E88B26-FDF7-4B76-930DA5868F0DE6A0"
 			id="panel"
-			offset="-3.00,-489.00"
+			offset="-3.00,-579.00"
 			allowhorizontalresize="false"
 			docking="Bottom Left"
 			dock_offset="-3.00,19.00"
@@ -5415,7 +5600,7 @@
 					this="2CE3110E-BF7A-4889-8A36069AE427B59A"
 					name="NewState"
 					width="254"
-					height="976"
+					height="1066"
 					interactive="true"
 					uniqueguid="2CE3110E-BF7A-4889-8A36069AE427B59A">
 					<imagemetrics>
@@ -5424,7 +5609,7 @@
 							uniqueguid="00344AFD-732B-4C7A-B8745F90796E5EE8"
 							componentimage="82625FD3-E959-46B9-B33DFCC70EE66789"
 							width="254"
-							height="957"
+							height="1045"
 							tile="true"
 							dockpoint="Top Center"
 							margin="50.00,50.00,50.00,50.00"/>
@@ -5447,7 +5632,7 @@
 							componentimage="C650A34F-17E3-4FF5-929FA623F327E401"
 							offset="-9.00,-9.00"
 							width="271"
-							height="977"
+							height="1067"
 							tile="true"
 							margin="80.00,80.00,80.00,80.00"/>
 					</imagemetrics>
@@ -5750,7 +5935,6 @@
 			tooltipslocalised="true"
 			soundcategory="UI_BAT_HUD_Ability_Button"
 			uniqueguid="F1F5FD31-C2F1-4D63-8850E123EE49CCB1"
-			isaspectratiolocked="true"
 			currentstate="F512E243-E9EA-4E4D-BCFBF8F35DC2CCC6"
 			defaultstate="F512E243-E9EA-4E4D-BCFBF8F35DC2CCC6">
 			<callbackwithcontextlist>
@@ -6027,7 +6211,6 @@
 			tooltipslocalised="true"
 			soundcategory="UI_BAT_HUD_Ability_Button"
 			uniqueguid="A5952201-9FAF-4A5C-A95C9A5CA2603778"
-			isaspectratiolocked="true"
 			currentstate="7DE04BF6-132F-4CBA-B3586E6A1A490ACB"
 			defaultstate="7DE04BF6-132F-4CBA-B3586E6A1A490ACB">
 			<callbackwithcontextlist>
@@ -6630,7 +6813,7 @@
 			componentleveltooltip="Control in a province is a measure of population happiness or repression, and must be kept in check to prevent the province degenerating into rebellion.||{{tr:click_to_open_hp}}"
 			tooltiplabel="header_control_Tooltip_ebd5b00"
 			uniqueguid="AEBB424C-69B1-4844-82A3283D00728F33"
-			currentstate="BAC6454C-5D55-4562-8C3AAB9161107460"
+			currentstate="E276DE5B-6909-4325-B563B5896B97E647"
 			defaultstate="BAC6454C-5D55-4562-8C3AAB9161107460">
 			<callbackwithcontextlist>
 				<callback_with_context
@@ -6643,6 +6826,9 @@
 						<property
 							name="fallback_state"
 							value="wh3"/>
+						<property
+							name="kislev"
+							value="CanUseUiFeature(&quot;MOTHERLAND_INVOCATIONS&quot;)"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbackwithcontextlist>
@@ -6657,7 +6843,7 @@
 					this="E276DE5B-6909-4325-B563B5896B97E647"
 					name="chaos_dwarfs"
 					width="158"
-					tooltip="Control in a province is a measure of population happiness or repression, and must be kept in check to prevent the province degenerating into rebellion.\n\n[[col:red]]You will lose [[img:icon_labour]][[/img]]Labour each turn based on your [[img:icon_public_order]][[/img]]Control levels[[/col]]||{{tr:click_to_open_hp}}"
+					tooltip="{{tr:control_tooltip_long}}"
 					tooltiplabel="StateTooltip_632293eav"
 					interactive="true"
 					uniqueguid="E276DE5B-6909-4325-B563B5896B97E647">
@@ -6686,6 +6872,38 @@
 						fontcat_name="header_14"
 						font_colour_override_preset_key="link"/>
 				</chaos_dwarfs>
+				<kislev
+					this="A5817604-174D-44C8-8D8D28039A118830"
+					name="kislev"
+					width="158"
+					tooltiplabel="StateTooltip_632293eav"
+					interactive="true"
+					uniqueguid="A5817604-174D-44C8-8D8D28039A118830">
+					<imagemetrics>
+						<image
+							this="5E24DF01-C985-40DA-8AC3D35EB5D352E8"
+							uniqueguid="5E24DF01-C985-40DA-8AC3D35EB5D352E8"
+							componentimage="84FBB86B-844A-407B-BD2071EA2DD0FB33"
+							offset="-31.00,0.00"
+							width="220"
+							tile="true"
+							dockpoint="Bottom Center"
+							margin="10.00,40.00,10.00,40.00"/>
+					</imagemetrics>
+					<component_text
+						text="[[url:script_link_campaign_devotion]]Devotion[[/url]]"
+						texthalign="Center"
+						textyoffset="7.00,0.00"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_8c955056"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_14"
+						font_colour_override_preset_key="link"/>
+				</kislev>
 				<wh3
 					this="BAC6454C-5D55-4562-8C3AAB9161107460"
 					name="wh3"
@@ -8238,7 +8456,7 @@
 		<frame_slaves
 			this="0298F2C2-3CBA-4B5F-946C81480A935E15"
 			id="frame_slaves"
-			offset="0.00,698.00"
+			offset="0.00,788.00"
 			allowhorizontalresize="false"
 			priority="45"
 			tooltipslocalised="true"
@@ -11875,5 +12093,302 @@
 				</wh3>
 			</states>
 		</header_income>
+		<cooldown_display
+			this="290E307C-4817-4B7D-BE030EEF94BA8023"
+			id="cooldown_display"
+			offset="194.00,3.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			docking="Center Right"
+			dock_offset="5.00,0.00"
+			component_anchor_point="1.00,0.50"
+			priority="60"
+			tooltipslocalised="true"
+			componentleveltooltip="Cooldown duration"
+			tooltiplabel="ComponentTooltip_7ee06289"
+			uniqueguid="290E307C-4817-4B7D-BE030EEF94BA8023"
+			currentstate="49EE5821-1501-4E84-BFDD4FCFA4097E61">
+			<componentimages>
+				<component_image
+					this="31D40D3C-FDA4-48FF-80C3FCE641DFB92D"
+					uniqueguid="31D40D3C-FDA4-48FF-80C3FCE641DFB92D"
+					imagepath="ui/skins/default/icon_banner.png"/>
+				<component_image
+					this="EDADD1CB-CF86-49D7-8722A803931A2F0D"
+					uniqueguid="EDADD1CB-CF86-49D7-8722A803931A2F0D"
+					imagepath="ui/skins/default/icon_cooldown.png"/>
+			</componentimages>
+			<states>
+				<text
+					this="49EE5821-1501-4E84-BFDD4FCFA4097E61"
+					name="text"
+					width="65"
+					height="34"
+					interactive="true"
+					disabled="true"
+					uniqueguid="49EE5821-1501-4E84-BFDD4FCFA4097E61">
+					<imagemetrics>
+						<image
+							this="436D03AC-69D7-4B96-97E8B92078B2BC15"
+							uniqueguid="436D03AC-69D7-4B96-97E8B92078B2BC15"
+							componentimage="31D40D3C-FDA4-48FF-80C3FCE641DFB92D"
+							width="65"
+							height="34"
+							tile="true"
+							margin="0.00,40.00,0.00,10.00"/>
+						<image
+							this="B9C4517C-BA51-4184-97500345A8BCD01C"
+							uniqueguid="B9C4517C-BA51-4184-97500345A8BCD01C"
+							componentimage="EDADD1CB-CF86-49D7-8722A803931A2F0D"
+							offset="-8.00,6.00"
+							width="22"
+							height="22"
+							dockpoint="Center Left"
+							dock_offset="-8.00,0.00"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<component_text
+						text="66"
+						textxoffset="15.00,0.00"
+						textyoffset="10.00,0.00"
+						textlabel="StateText_44cae1b5"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</text>
+			</states>
+		</cooldown_display>
+		<dy_motherland
+			this="1AE7559F-90A8-4997-A1827AFAD7690AFF"
+			id="dy_motherland"
+			offset="49.00,-1.00"
+			docking="Center"
+			dock_offset="0.00,-1.00"
+			component_anchor_point="0.50,0.50"
+			priority="45"
+			tooltipslocalised="true"
+			componentleveltooltip="Invocations of the Motherland allow you to call upon the gods of Kislev to aid this province’s settlements and bolster its armies by mobilising the people’s faith.\n\nYou spend [[img:icon_public_order]][[/img]]Devotion every time you perform a Province or Army Invocation||{{tr:click_to_open_hp}}"
+			tooltiplabel="header_invocations_tooltip"
+			uniqueguid="1AE7559F-90A8-4997-A1827AFAD7690AFF"
+			currentstate="DD09F1DD-E58E-4767-A85130D6362A92EF"
+			defaultstate="DD09F1DD-E58E-4767-A85130D6362A92EF">
+			<states>
+				<newstate
+					this="DD09F1DD-E58E-4767-A85130D6362A92EF"
+					name="NewState"
+					width="155"
+					interactive="true"
+					uniqueguid="DD09F1DD-E58E-4767-A85130D6362A92EF">
+					<component_text
+						text="[[url:script_link_campaign_devotion]]Invocations[[/url]]"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_a85ae6b7"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_14"
+						font_colour_override_preset_key="link"/>
+				</newstate>
+			</states>
+		</dy_motherland>
+		<frame_motherland
+			this="8C6DF3DD-1C0C-442B-A97C1E07D0DA75F6"
+			id="frame_motherland"
+			offset="0.00,700.00"
+			allowhorizontalresize="false"
+			dock_offset="0.00,2.00"
+			priority="45"
+			tooltipslocalised="true"
+			uniqueguid="8C6DF3DD-1C0C-442B-A97C1E07D0DA75F6"
+			currentstate="8E3DAF7C-176A-4AAC-BD51EFFCF109650D"
+			defaultstate="8E3DAF7C-176A-4AAC-BD51EFFCF109650D">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="IsPlayerOwned &amp;&amp; CanUseUiFeature(&quot;MOTHERLAND_INVOCATIONS&quot;)"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="515079A6-EEA3-4B8E-B3E4F5D41DB90486"
+					uniqueguid="515079A6-EEA3-4B8E-B3E4F5D41DB90486"
+					imagepath="ui/skins/default/parchment_divider.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="8E3DAF7C-176A-4AAC-BD51EFFCF109650D"
+					name="default"
+					width="254"
+					height="87"
+					uniqueguid="8E3DAF7C-176A-4AAC-BD51EFFCF109650D">
+					<imagemetrics>
+						<image
+							this="9B7A205A-6E2C-4790-913207C458E423C4"
+							uniqueguid="9B7A205A-6E2C-4790-913207C458E423C4"
+							componentimage="515079A6-EEA3-4B8E-B3E4F5D41DB90486"
+							offset="7.00,8.00"
+							width="240"
+							height="79"
+							tile="true"
+							dockpoint="Bottom Center"
+							margin="30.00,30.00,15.00,30.00"/>
+					</imagemetrics>
+				</default>
+			</states>
+			<LayoutEngine
+				type="List"
+				spacing="0.00,4.00"
+				sizetocontent="true"
+				margins="5.00,5.00">
+				<columnwidths>
+					<column width="254"/>
+				</columnwidths>
+			</LayoutEngine>
+		</frame_motherland>
+		<header_motherland
+			this="90BD0EF4-B2D8-45F1-AA36F7A6EBD72DAF"
+			id="header_motherland"
+			offset="0.00,4.00"
+			allowhorizontalresize="false"
+			dock_offset="0.00,-1.00"
+			priority="45"
+			tooltipslocalised="true"
+			uniqueguid="90BD0EF4-B2D8-45F1-AA36F7A6EBD72DAF"
+			currentstate="6DD42023-D628-49E9-ACCD7F643ED71A39">
+			<componentimages>
+				<component_image
+					this="16D542F7-1CDF-4B0B-AEE8E30A472D592F"
+					uniqueguid="16D542F7-1CDF-4B0B-AEE8E30A472D592F"
+					imagepath="ui/skins/default/parchment_divider_title.png"/>
+			</componentimages>
+			<states>
+				<wh3
+					this="6DD42023-D628-49E9-ACCD7F643ED71A39"
+					name="wh3"
+					width="254"
+					interactive="true"
+					uniqueguid="6DD42023-D628-49E9-ACCD7F643ED71A39">
+					<imagemetrics>
+						<image
+							this="1621EBC2-27CC-4D53-81BC03D6893592ED"
+							uniqueguid="1621EBC2-27CC-4D53-81BC03D6893592ED"
+							componentimage="16D542F7-1CDF-4B0B-AEE8E30A472D592F"
+							offset="17.00,-2.00"
+							width="220"
+							height="34"
+							tile="true"
+							dockpoint="Bottom Center"
+							canresizeheight="false"
+							margin="10.00,40.00,10.00,40.00"/>
+					</imagemetrics>
+				</wh3>
+			</states>
+		</header_motherland>
+		<mid_part_parent
+			this="284C5BC4-0C9D-4135-8BE6F4C75F71802B"
+			id="mid_part_parent"
+			offset="0.00,41.00"
+			priority="45"
+			tooltipslocalised="true"
+			uniqueguid="284C5BC4-0C9D-4135-8BE6F4C75F71802B"
+			currentstate="FCB69299-1648-4188-8BF9C380E2CC1460"
+			defaultstate="FCB69299-1648-4188-8BF9C380E2CC1460">
+			<states>
+				<default
+					this="FCB69299-1648-4188-8BF9C380E2CC1460"
+					name="default"
+					width="254"
+					height="41"
+					uniqueguid="FCB69299-1648-4188-8BF9C380E2CC1460"/>
+			</states>
+		</mid_part_parent>
+		<motherland_buttonset
+			this="C62AF1A9-7CB0-4834-8018FC3A8EE60CFA"
+			id="motherland_buttonset"
+			offset="107.00,1.00"
+			allowverticalresize="false"
+			docking="Center"
+			dock_offset="0.00,2.00"
+			component_anchor_point="0.50,0.50"
+			priority="45"
+			tooltipslocalised="true"
+			uniqueguid="C62AF1A9-7CB0-4834-8018FC3A8EE60CFA"
+			currentstate="003F4A4F-1AD2-4290-9B042FEF10F568EB"
+			defaultstate="003F4A4F-1AD2-4290-9B042FEF10F568EB">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoCampaignFactionProvinceManager"
+					context_function_id="FactionContext.UnlockableRitualList(&quot;MOTHERLAND_RITUAL_PROVINCE&quot;)"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="Allow None Selected"
+					value="0"/>
+				<property
+					name="Single Selection"
+					value="1"/>
+			</userproperties>
+			<states>
+				<newstate
+					this="003F4A4F-1AD2-4290-9B042FEF10F568EB"
+					name="NewState"
+					width="40"
+					height="44"
+					interactive="true"
+					uniqueguid="003F4A4F-1AD2-4290-9B042FEF10F568EB"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"/>
+		</motherland_buttonset>
+		<spacer
+			this="6AA578D8-CD49-4F2C-AF7E6A9990A6EA72"
+			id="spacer"
+			offset="0.00,86.00"
+			allowhorizontalresize="false"
+			visible="false"
+			priority="45"
+			tooltipslocalised="true"
+			uniqueguid="6AA578D8-CD49-4F2C-AF7E6A9990A6EA72"
+			currentstate="8C305332-3EA4-4C25-B65C054E6D321E92"
+			defaultstate="8C305332-3EA4-4C25-B65C054E6D321E92">
+			<componentimages>
+				<component_image
+					this="E53AEF3C-E087-4413-BB8311D5761662EE"
+					uniqueguid="E53AEF3C-E087-4413-BB8311D5761662EE"
+					imagepath="ui/skins/default/separator_skull.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="8C305332-3EA4-4C25-B65C054E6D321E92"
+					name="NewState"
+					width="254"
+					height="8"
+					disabled="true"
+					uniqueguid="8C305332-3EA4-4C25-B65C054E6D321E92">
+					<imagemetrics>
+						<image
+							this="58B383C1-BBDA-461B-866EA52F396055FC"
+							uniqueguid="58B383C1-BBDA-461B-866EA52F396055FC"
+							componentimage="E53AEF3C-E087-4413-BB8311D5761662EE"
+							offset="15.00,-3.00"
+							width="223"
+							height="14"
+							tile="true"
+							dockpoint="Center"
+							canresizeheight="false"
+							margin="0.00,25.00,0.00,25.00"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</spacer>
 	</components>
 </layout>

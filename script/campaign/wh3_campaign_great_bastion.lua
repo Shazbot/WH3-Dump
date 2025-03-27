@@ -456,7 +456,8 @@ function Bastion:great_bastion_start()
 					end
 					
 					for i = 1, (army_vars.army_amount - kurgan_warband:military_force_list():num_items() - 1) do
-						local position = self:get_random_position_for_gate(gate_spawn_list[i])
+						local clampi = math.min(i, #gate_spawn_list);
+						local position = self:get_random_position_for_gate(gate_spawn_list[clampi])
 						self:spawn_army(army_vars.army_size, army_vars.invasion_name, position)
 					end
 					cm:set_saved_value("used_gate_spawns", {})

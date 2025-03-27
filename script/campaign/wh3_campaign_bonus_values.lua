@@ -1,3 +1,156 @@
+-- experience_levels_for_ruin_colonization
+core:add_listener(
+	"experience_levels_for_ruin_colonization",
+	"CharacterPerformsSettlementOccupationDecision",
+	true,
+	function(context)
+		local otype = context:occupation_decision_type();
+
+		if otype == "occupation_decision_colonise" then
+			local faction = context:character():faction();
+			local value = cm:get_factions_bonus_value(faction, "experience_levels_for_ruin_colonization");
+
+			if value > 0 then
+				local char = context:character();
+				cm:add_experience_to_units_commanded_by_character(cm:char_lookup_str(char), 1);
+			end
+		end
+	end,
+	true
+);
+
+-- settle_bonus_control_wasteland
+core:add_listener(
+	"settle_bonus_control_wasteland",
+	"RegionFactionChangeEvent",
+	true,
+	function(context) 
+		local faction = context:region():owning_faction();
+		local value = cm:get_factions_bonus_value(faction, "settle_bonus_control_wasteland");
+
+		if value > 0 then
+			local region = context:region();
+			local climate = region:settlement():get_climate();
+
+			if climate == "climate_chaotic" then
+				local public_order = region:public_order();
+				local new_value = public_order + value;
+				cm:set_public_order_of_province_for_region(region:name(), new_value);
+			end
+		end
+	end,
+	true
+);
+
+-- ruin_colonization_accelerator
+core:add_listener(
+	"ruin_colonization_accelerator",
+	"CharacterPerformsSettlementOccupationDecision",
+	true,
+	function(context)
+		local otype = context:occupation_decision_type();
+
+		if otype == "occupation_decision_colonise" then
+			local faction = context:character():faction();
+			local value = cm:get_factions_bonus_value(faction, "ruin_colonization_accelerator");
+
+			if value > 0 then
+				local region_key = context:garrison_residence():region():name();
+				cm:apply_effect_bundle_to_region("wh3_main_ksl_colonization_speedup", region_key, value);
+			end
+		end
+	end,
+	true
+);
+
+-- post_action_ancillary
+core:add_listener(
+	"agent_action_ancillary_chance_character",
+	"CharacterCharacterTargetAction",
+	true,
+	function (context)
+		local faction = context:character():faction();
+		agent_action_ancillary_chance(faction);
+	end,
+	true
+);
+
+core:add_listener(
+	"agent_action_ancillary_chance_garrison",
+	"CharacterGarrisonTargetAction",
+	true,
+	function(context)
+		local faction = context:character():faction();
+		agent_action_ancillary_chance(faction);
+	end,
+	true
+);
+
+function agent_action_ancillary_chance(faction)
+	local value = cm:get_factions_bonus_value(faction, "post_action_ancillary");
+
+	if cm:model():random_percent(value) then
+		local ancillary_key = get_random_ancillary_key_for_faction(faction:name(), false, false);
+		cm:add_ancillary_to_faction(faction, ancillary_key, false);
+	end
+end
+
+-- ancillary_per_turn_chance
+core:add_listener(
+	"AncillaryChanceFaction",
+	"FactionTurnStart",
+	true,
+	function(context)
+		local faction = context:faction();
+		local value = cm:get_factions_bonus_value(faction, "ancillary_per_turn_chance");
+
+		if cm:model():random_percent(value) then
+			local ancillary_key = get_random_ancillary_key_for_faction(faction:name(), false, false);
+			cm:add_ancillary_to_faction(faction, ancillary_key, false);
+		end
+	end,
+	true
+);
+
+-- elector_fealty_per_turn_chance
+core:add_listener(
+	"ElectorFealtyChanceFaction",
+	"FactionTurnStart",
+	true,
+	function(context)
+		local faction = context:faction();
+		local value = cm:get_factions_bonus_value(faction, "elector_fealty_per_turn_chance");
+
+		if cm:model():random_percent(value) then 
+			local elector_factions = {
+				"wh_main_emp_empire",
+				"wh_main_emp_averland",
+				"wh_main_emp_hochland",
+				"wh_main_emp_middenland",
+				"wh_main_emp_nordland",
+				"wh_main_emp_ostermark",
+				"wh_main_emp_ostland",
+				"wh_main_emp_stirland",
+				"wh_main_emp_talabecland",
+				"wh_main_emp_wissenland"
+			};
+			cm:shuffle_table(elector_factions);
+		
+			for i = 1, #elector_factions do
+				local elector = cm:model():world():faction_by_key(elector_factions[i]);
+		
+				if elector:is_null_interface() == false and elector:is_human() == false then
+					if elector:pooled_resource_manager():resource("emp_loyalty"):is_null_interface() == false then
+						cm:faction_add_pooled_resource(elector_factions[i], "emp_loyalty", "buildings", 1);
+						break;
+					end
+				end
+			end
+		end
+	end,
+	true
+);
+
 core:add_listener(
 	"MaadMapCharacterTurnEnd",
 	"CharacterTurnEnd",
@@ -247,22 +400,21 @@ core:add_listener(
 
 --- Nurgle Tech effect - generate income when building cycles complete
 core:add_listener(
-"income_when_cycle_end",
-"BuildingLifecycleDevelops", 
- function(context)
-	local value = cm:get_regions_bonus_value(context:region(), "cycle_building_completion_earn_income")
-	return value > 0
- end,
-function(context)
-	if context:region():owning_faction():is_human() then
-		local faction = context:region():owning_faction():name()
+	"income_when_cycle_end",
+	"BuildingLifecycleDevelops", 
+	function(context)
 		local value = cm:get_regions_bonus_value(context:region(), "cycle_building_completion_earn_income")
-		cm:treasury_mod(faction, value)
-	end	
-end,
-true
-
-)
+		return value > 0
+	end,
+	function(context)
+		if context:region():owning_faction():is_human() then
+			local faction = context:region():owning_faction():name()
+			local value = cm:get_regions_bonus_value(context:region(), "cycle_building_completion_earn_income")
+			cm:treasury_mod(faction, value)
+		end	
+	end,
+	true
+);
 
 function give_climate_growth(faction)
 	local growth_in_climate_chaotic = cm:get_factions_bonus_value(faction, "growth_in_climate_chaotic");

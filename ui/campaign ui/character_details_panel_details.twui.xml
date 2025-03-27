@@ -1281,7 +1281,7 @@
 				<callback_with_context
 					callback_id="ContextTooltipSetter"
 					context_object_id="CcoCampaignCharacter"
-					context_function_id="(manager = Component(&quot;global_pool&quot;)) =&gt; {manager | manager.CurrentSelection.SelectedObjectList.Any(IsContextValid(SalvageValue)  == false) =&gt; Format(Loc(&quot;ancillary_cannot_salvage_unique&quot;), manager.CurrentSelection.SelectedObjectList.FirstContext(IsContextValid(SalvageValue)  == false).AncillaryRecordContext.RarityName) | Loc(&quot;ancillary_tooltip_salvage&quot;)} ">
+					context_function_id="(manager = Component(&quot;global_pool&quot;)) =&gt; {manager | manager.CurrentSelection.SelectedObjectList.Any(IsContextValid(SalvageValue)  == false) =&gt; Format(Loc(&quot;ancillary_cannot_salvage_unique&quot;), manager.CurrentSelection.SelectedObjectList.FirstContext(IsContextValid(SalvageValue)  == false).AncillaryRecordContext.RarityName) | PlayersFaction.AncillarySalvageTooltip()}">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -13693,7 +13693,7 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoCampaignCharacter"
-					context_function_id="Format(&quot;%+d&quot;, RoundFloat(ToNumber(Component(&quot;global_pool&quot;).CurrentSelection.SelectedObjectList.Sum(SalvageValue.AbsoluteTreasuryChange))))">
+					context_function_id="Format(&quot;%+d&quot;, RoundFloat(ToNumber(Component(&quot;global_pool&quot;).CurrentSelection.SelectedObjectList.Sum(PlayersFaction.AncillarySalvageGain(SalvageValue)))))">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -13703,7 +13703,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignCharacter"
-					context_function_id="Component(&quot;global_pool&quot;).CurrentSelection.SelectedObjectList.Size != 0 &amp;&amp; RoundFloat( ToNumber(Component(&quot;global_pool&quot;).CurrentSelection.SelectedObjectList.Sum(SalvageValue.AbsoluteTreasuryChange))) != 0">
+					context_function_id="Component(&quot;global_pool&quot;).CurrentSelection.SelectedObjectList.Size != 0 &amp;&amp; RoundFloat( ToNumber(Component(&quot;global_pool&quot;).CurrentSelection.SelectedObjectList.Sum(PlayersFaction.AncillarySalvageGain(SalvageValue)))) != 0">
 					<child_m_user_properties>
 						<property
 							name="event0"

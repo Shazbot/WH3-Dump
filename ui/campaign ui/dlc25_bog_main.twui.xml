@@ -1135,6 +1135,21 @@
 			defaultstate="2ADDC0B2-8CA8-41B8-BA3FE7D5020885EA">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="CampaignHUDHiderPanelCallback"/>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignMission"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignMission">
+					<child_m_user_properties>
+						<property
+							name="only_target"
+							value=""/>
+						<property
+							name="target_id"
+							value="legendary_grudges_tab"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -2839,6 +2854,10 @@
 					callback_id="ContextCommandGiverOnCreate"
 					context_object_id="CcoStaticObject"
 					context_function_id="self.SimulateLClick"/>
+				<callback_with_context
+					callback_id="ContextCommandGiverOnContextSet"
+					context_object_id="CcoCampaignMission mission"
+					context_function_id="Do(self.SimulateLClick,&#10;Grudges.ExOpenPageOfLegendaryGrudge(mission))"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property

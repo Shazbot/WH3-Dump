@@ -164,4 +164,17 @@ Grudges
             Do(Grudges.SetCurrentPage(GetIfElse( next_page > Grudges.MaxPages, Grudges.MaxPages, next_page)), UiMsg("refresh_grudge_pages"))
         }
     }
+	
+	ExPageOfLegendaryGrudge(CcoCampaignMission mission)
+	{
+		PlayersFaction.ExBogFullLegendaryGrudgesList.IndexForFirstContext((b) => b == mission) / Grudges.RitualPageCapForSelectedTab + 1
+	}
+	
+	ExOpenPageOfLegendaryGrudge(CcoCampaignMission mission)
+	{
+		(page = Grudges.ExPageOfLegendaryGrudge(mission)) =>
+		{
+			Do(Grudges.SetCurrentPage(page), UiMsg("refresh_grudge_pages"))
+		}
+	}
 }

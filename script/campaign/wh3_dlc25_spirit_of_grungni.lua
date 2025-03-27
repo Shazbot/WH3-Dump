@@ -82,9 +82,12 @@ end
  
 function spirit_of_grungni:setup_spirit_of_grungni_change()
 	local faction_interface = cm:get_faction(self.faction_key)
-	local faction_leader_force_cqi
+	local faction_leader_force_cqi = -1;
 	if not self.is_malakai_confederated then
-		faction_leader_force_cqi = faction_interface:faction_leader():military_force():command_queue_index()
+		local leader = faction_interface:faction_leader();
+		if leader:has_military_force() then
+			faction_leader_force_cqi = leader:military_force():command_queue_index()
+		end
 	else
 		local character_list = faction_interface:character_list()
 		for i = 1, character_list:num_items() do
@@ -97,8 +100,10 @@ function spirit_of_grungni:setup_spirit_of_grungni_change()
 		end
 	end
 	
-	cm:set_force_sphere_of_influence_radius(faction_leader_force_cqi, self.radius_size)
-	self:reapply_spirit_of_grungni_modification(faction_leader_force_cqi)
+	if faction_leader_force_cqi > -1 then
+		cm:set_force_sphere_of_influence_radius(faction_leader_force_cqi, self.radius_size)
+		self:reapply_spirit_of_grungni_modification(faction_leader_force_cqi)
+	end
 end
  
 --------------------------------------------------------------

@@ -1,5 +1,5 @@
 --[[
-Automatically generated via export from C:/Users/build/DaVE_local/branches/warhammer3/patch_6_0/warhammer/raw_data/db
+Automatically generated via export from DaVE
 Edit manually at your own risk
 --]]
 
@@ -311,6 +311,7 @@ ScriptedCharacterUnhidden = {}
 ScriptedCharacterUnhiddenFailed = {}
 ScriptedForceCreated = {}
 SeaTradeRouteRaided = {}
+SettlementClimateChanged = {}
 SettlementDeselected = {}
 SettlementOccupied = {}
 SettlementSelected = {}

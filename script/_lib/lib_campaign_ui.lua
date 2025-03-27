@@ -16,9 +16,9 @@
 
 
 -- List of all panels in the game that are considered fullscreen/blocking. Blocking panels will block interventions, are considered fullscreen by cm:progress_on_blocking_panel_dismissed() and may have other effects in script.
--- As new panels are added to the game they should be added to either this list, or the panels_not_blocking list below. A script warning will be generated if a panel is opened that is not on either list - if this is seen, please add it
+-- As new panels are added to the game they should be added to either this list, or the campaign_ui_panels_not_blocking list below. A script warning will be generated if a panel is opened that is not on either list - if this is seen, please add it
 -- to one of them.
-local panels_blocking = {
+campaign_ui_panels_blocking = {
 
 	-- BASE
 	"diplomacy_dropdown",
@@ -81,6 +81,7 @@ local panels_blocking = {
 	"kislev_winter",
 	"kislev_ice_court",
 	"kislev_atamans",
+	"kislev_court_orthodoxy",
 	"cathay_compass",
 	"cathay_caravans",
 	"daemonic_progression",
@@ -122,7 +123,7 @@ local panels_blocking = {
 
 -- Panels for which a PanelOpenedCampaign event is sent to script, but the panel should not block interventions or be considered by cm:progress_on_blocking_panel_dismissed()
 -- TODO: should events be moved to the blocking list? Or be considered separately?
-local panels_not_blocking = {
+campaign_ui_panels_not_blocking = {
 	"events",
 	"popup_pre_battle",
 	"popup_battle_results",
@@ -162,7 +163,7 @@ campaign_ui_manager = {
 	-- selection listeners
 	--[[
 	panels_open = {},
-	panels_blocking_open = {},
+	campaign_ui_panels_blocking_open = {},
 	]]
 	character_selected_cqi = nil,
 	character_selected_faction = "",
@@ -193,12 +194,12 @@ campaign_ui_manager = {
 	resources_bar_displayed = true,
 	
 	-- list of panels that block interventions
-	panels_blocking = panels_blocking,
-	panels_blocking_lookup = table.indexed_to_lookup(panels_blocking),
+	campaign_ui_panels_blocking = campaign_ui_panels_blocking,
+	campaign_ui_panels_blocking_lookup = table.indexed_to_lookup(campaign_ui_panels_blocking),
 
 	-- list of panels that don't block interventions
-	panels_not_blocking = panels_not_blocking,
-	panels_not_blocking_lookup = table.indexed_to_lookup(panels_not_blocking),
+	campaign_ui_panels_not_blocking = campaign_ui_panels_not_blocking,
+	campaign_ui_panels_not_blocking_lookup = table.indexed_to_lookup(campaign_ui_panels_not_blocking),
 	
 	output_stamp = 0,
 	
@@ -266,7 +267,7 @@ function campaign_ui_manager:new()
 	
 	-- selection listeners
 	ui.panels_open = {};
-	ui.panels_blocking_open = {};
+	ui.campaign_ui_panels_blocking_open = {};
 	
 	-- highlighting
 	ui.highlighted_settlements_vfx = {};
@@ -339,15 +340,15 @@ function campaign_ui_manager:start_campaign_ui_listeners()
 			out.ui("Panel opened " .. panel);
 
 			-- Check that this panel has been added to one of our internal lists
-			if no_panel_warning_issued and not self.panels_blocking_lookup[panel] and not self.panels_not_blocking_lookup[panel] then
-				script_error("WARNING: PanelOpenedCampaign event received for panel with name [" .. tostring(panel) .. "], but this panel has not been added to the panels_blocking or panels_not_blocking list in lib_campaign_ui.lua. Please add it to one of these lists - the blocking list of panels blocks scripted interventions (i.e. prevents normal advice from proceeding), the not-blocking does not. If it dismisses or covers the main UI (e.g. tech, diplomacy) a record will need adding to the overrides list in lib_help_pages.lua too.");
+			if no_panel_warning_issued and not self.campaign_ui_panels_blocking_lookup[panel] and not self.campaign_ui_panels_not_blocking_lookup[panel] then
+				script_error("WARNING: PanelOpenedCampaign event received for panel with name [" .. tostring(panel) .. "], but this panel has not been added to the campaign_ui_panels_blocking or campaign_ui_panels_not_blocking list in lib_campaign_ui.lua. Please add it to one of these lists - the blocking list of panels blocks scripted interventions (i.e. prevents normal advice from proceeding), the not-blocking does not. If it dismisses or covers the main UI (e.g. tech, diplomacy) a record will need adding to the overrides list in lib_help_pages.lua too.");
 				no_panel_warning_issued = false;		-- only issue this script_error once
 			end;
 			
 			self.panels_open[panel] = true;
 
-			if self.panels_blocking_lookup[panel] then
-				self.panels_blocking_open[panel] = true;
+			if self.campaign_ui_panels_blocking_lookup[panel] then
+				self.campaign_ui_panels_blocking_open[panel] = true;
 			end;
 
 			core:trigger_event("ScriptEventPanelOpenedCampaign", panel);
@@ -365,7 +366,7 @@ function campaign_ui_manager:start_campaign_ui_listeners()
 			out.ui("Panel closed " .. panel);
 			
 			self.panels_open[panel] = false;
-			self.panels_blocking_open[panel] = false;
+			self.campaign_ui_panels_blocking_open[panel] = false;
 
 			core:trigger_event("ScriptEventPanelClosedCampaign", panel);
 		end,
@@ -381,7 +382,7 @@ function campaign_ui_manager:start_campaign_ui_listeners()
 		function()
 			out.ui("Player is ending turn - clearing the open panels list");
 			self.panels_open = {};
-			self.panels_blocking_open = {};
+			self.campaign_ui_panels_blocking_open = {};
 		end,
 		false	
 	);
@@ -536,7 +537,7 @@ end;
 --- @desc Blocking panels are panels that block the progress of @intervention (unless they are configured to disregard this).
 --- @r @string open blocking panel
 function campaign_ui_manager:get_open_blocking_panel()
-	local panel_name = table.contains(self.panels_blocking_open, true);
+	local panel_name = table.contains(self.campaign_ui_panels_blocking_open, true);
 	return panel_name;
 end;
 

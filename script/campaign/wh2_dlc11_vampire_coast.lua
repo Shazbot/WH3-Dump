@@ -449,6 +449,22 @@ function add_vampire_coast_listeners()
 			end,
 			true
 		)
+
+		core:add_listener(
+			"thelegendofdickhalfmast",
+			"CharacterCreated",
+			function(context)
+				return context:has_respawned() == false;
+			end,
+			function(context)
+				local character = context:character();
+
+				if character:forename("names_name_169104324") and character:surname("names_name_1078739176") then
+					cm:force_add_trait("character_cqi:"..character:cqi(), "wh2_dlc11_trait_legend", false, 1);
+				end
+			end,
+			true
+		)
 	end
 	
 	core:add_listener(

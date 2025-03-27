@@ -1625,11 +1625,10 @@ victory_objectives_ie = {
 		wh3_main_ksl_the_ice_court = {
 			objectives = {
 				{
-					-- Win over the Ice Court 
 					type = "HAVE_AT_LEAST_X_OF_A_POOLED_RESOURCE",
 					conditions = {
-						"pooled_resource wh3_main_ksl_followers",
-						"total 600"
+						"pooled_resource wh3_main_ksl_support_level_ice_court",
+						"total 10"
 					}
 				}
 			}
@@ -1639,11 +1638,10 @@ victory_objectives_ie = {
 		wh3_main_ksl_the_great_orthodoxy = {
 			objectives = {
 				{
-					-- Win over the Ice Court 
 					type = "HAVE_AT_LEAST_X_OF_A_POOLED_RESOURCE",
 					conditions = {
-						"pooled_resource wh3_main_ksl_followers",
-						"total 600"
+						"pooled_resource wh3_main_ksl_support_level_orthodoxy",
+						"total 10"
 					}
 				},
 				{

@@ -3316,7 +3316,13 @@
 					context_function_id="CanUseUiFeature(&quot;DA_PLAN&quot;) &amp;&amp;&#10;SelectedCharacter.MilitaryForceContext.FactionContext == PlayersFaction"/>
 				<callback_with_context
 					callback_id="ContextPropagator"
-					context_function_id="SelectedCharacter.InitiativeSetList.FirstContext((set) =&gt; set.InitiativeSetContext.Key == &quot;wh3_dlc26_force_initiative_grn_da_plan&quot;)"/>
+					context_function_id="SelectedCharacter.InitiativeSetList.FirstContext((set) =&gt; set.InitiativeSetContext.Key == &quot;wh3_dlc26_force_initiative_grn_da_plan&quot;)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignSelectionChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<states>
 				<default
@@ -4024,6 +4030,18 @@
 						<property
 							name="trigger_on_hide"
 							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandEvent"
+					context_function_id="(slot_holder = Component(&quot;44867987-D524-4CFA-B470D9832E96FB37&quot;)) =&gt; {&#10; slot_holder.SelectFirstVisible&#10;}">
+					<child_m_user_properties>
+						<property
+							name="disable_when_invisible"
+							value=""/>
+						<property
+							name="event0"
+							value="CloseUnitUpgradePanel"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbackwithcontextlist>
@@ -5445,6 +5463,9 @@
 						<property
 							name="Single Selection"
 							value="1"/>
+						<property
+							name="refresh_when_same"
+							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbackwithcontextlist>
@@ -9828,7 +9849,7 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoCampaignInitiative"
-					context_function_id="GetIf(HasInfiniteDuration == false, Duration)"/>
+					context_function_id="GetIfElse(HasInfiniteDuration == false, Duration, &quot;&quot;)"/>
 				<callback_with_context
 					callback_id="ContextStateSetterConditional"
 					context_object_id="CcoCampaignInitiative">

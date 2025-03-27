@@ -49,7 +49,8 @@ campaign_experience_triggers = {
 		"chs_nurgle",
 		"chs_khorne",
 		"saurus",
-		"chd_convoy"
+		"chd_convoy",
+		"ksl_atamans"
 	},
 
 	---bonus values that modify the xp gain from all sources
@@ -69,6 +70,7 @@ campaign_experience_triggers = {
 		def_casters = "experience_for_def_casters",
 		hef_casters = "experience_for_hef_casters",
 		chd_convoy = "experience_for_convoy_masters",
+		ksl_atamans = "experience_for_ksl_atamans"
 	}
 }
 function campaign_experience_triggers:setup_experience_triggers()
@@ -282,6 +284,7 @@ function campaign_experience_triggers:setup_experience_triggers()
 		end,
 		true
 	);
+
 end;
 
 function campaign_experience_triggers:add_assassination_bonus(target_rank)

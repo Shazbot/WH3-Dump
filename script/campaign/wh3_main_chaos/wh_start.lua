@@ -118,6 +118,10 @@ function start_new_game_all_factions()
 		create_starting_armies();
 		initial_compass_cooldown();
 	end;
+	
+	if campaign_ai_script then
+		campaign_ai_script:kislev_background_income()
+	end
 end;
 
 
@@ -152,7 +156,8 @@ function start_game_all_factions()
 	ogre_bounties:setup_ogre_contracts();
 	setup_khorne_skulls();
 	setup_ice_court_ai();
-	setup_kislev_devotion();
+	kislev_devotion:setup_kislev_devotion();
+	setup_kislev_motherland();
 	recruited_unit_health:initialise()
 	setup_slaanesh_devotees();
 	Seductive_Influence:initialise()
@@ -200,6 +205,7 @@ function start_game_all_factions()
 	-- dlc26
 	ogre_camps:initialise()
 	tyrants_demands:initialise()
+	fragments_of_sorcery:initialise()
 
 	-- General
 	character_unlocking:setup_legendary_hero_unlocking();

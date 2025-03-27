@@ -173,12 +173,7 @@ function UpdatePlague(plague_key)
 					end
 				elseif region_plague.life == 0 then
 					-- Plague has died out in this region
-					cm:remove_effect_bundle_from_region(plague.effect, region_key);
-					Remove_Plague_VFX(region_key);
-					CampaignUI.UpdateSettlementEffectIcons();
-					plague.regions[region_key] = nil;
-					Add_Region_Cooldown(plague_key, region_key, PLAGUE_COOLDOWN);
-					print("Region: "..region_key.." - Removing Plague!");
+					RemoveRegionPlague(region_key, plague_key, plague);
 				end
 			end
 		end
@@ -199,6 +194,15 @@ function UpdatePlague(plague_key)
 		print("----------------------");
 		print("");
 	end
+end
+
+function RemoveRegionPlague(region_key, plague_key, plague)
+	cm:remove_effect_bundle_from_region(plague.effect, region_key);
+	Remove_Plague_VFX(region_key);
+	CampaignUI.UpdateSettlementEffectIcons();
+	plague.regions[region_key] = nil;
+	Add_Region_Cooldown(plague_key, region_key, PLAGUE_COOLDOWN);
+	print("Region: "..region_key.." - Removing Plague!");
 end
 
 function GiveRegionPlague(plague_key, region_key, is_abandoned_check)

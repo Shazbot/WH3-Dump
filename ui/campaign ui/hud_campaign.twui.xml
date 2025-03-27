@@ -93,6 +93,7 @@
 										<button_warbands_upgrade this="F1AAE419-51EE-4186-A31E850AE0A54F6B"/>
 										<button_meat_transfer this="55F423CF-CA4D-48DD-B6E5D1F8C9317CBD"/>
 										<button_purchase_unit_upgrades this="09BBBAAB-DD6B-416B-BD3B5E056981765A"/>
+										<button_motherland this="DB93EDFC-E155-4D1E-955985F89C72DFFF"/>
 									</button_group_army>
 									<button_group_army_settled this="AAAE3CC7-F4BA-45E3-856CED285EAFE8B9">
 										<button_show_horde_buildings this="86AB4D99-D50B-4A48-B8570720E45A7D04"/>
@@ -7595,27 +7596,6 @@
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
-					callback_id="ContextCommandEvent"
-					context_function_id="(great_maw_panel = Component(&quot;59C57757-73AF-467C-A511DE8E115ABE91&quot;)) =&gt;{ DoIf(great_maw_panel.IsVisible, great_maw_panel.SetVisible(false)  )}">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="PanelOpened_recruitment_options"/>
-						<property
-							name="event1"
-							value="PanelClosed_units_panel"/>
-						<property
-							name="event2"
-							value="MeatTransferPanelOpen"/>
-						<property
-							name="event3"
-							value="OgreCampRecruitmentPanelOpen"/>
-						<property
-							name="event4"
-							value="CampaignSelectionChanged"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
 					callback_id="ContextInactiveStateSetter"
 					context_object_id="CcoCampaignRitual"
 					context_function_id="RemainingCategoryCooldownForTarget(SelectedCharacter.MilitaryForceContext) &lt;= 0 &amp;&amp; IsLocalPlayersTurn">
@@ -9810,6 +9790,7 @@
 			uniqueguid_in_template="5D80CA64-9284-44B3-A333109B10F096D4"
 			uniqueguid="55F423CF-CA4D-48DD-B6E5D1F8C9317CBD"
 			dimensions="55.00,55.00"
+			is_visible="false"
 			priority="10"
 			sound_category="UI_GBL_TMP_Selection_Locked_Unavailable_Medium">
 			<state_uniqueguids>
@@ -10757,6 +10738,184 @@
 				<element value=""/>
 			</override_images>
 		</button_mortuary_cult>
+		<button_motherland
+			this="DB93EDFC-E155-4D1E-955985F89C72DFFF"
+			id="button_motherland"
+			template_id="square_medium_button_toggle"
+			part_of_template="true"
+			uniqueguid_in_template="5D80CA64-9284-44B3-A333109B10F096D4"
+			uniqueguid="DB93EDFC-E155-4D1E-955985F89C72DFFF"
+			dimensions="55.00,55.00"
+			priority="10"
+			sound_category="UI_GBL_TMP_Round_Small_Button">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="B36929A6-6128-42FE-A2D9B19E4D3B2E9A"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="3C86E0E2-C1E8-48E6-8D7852EF80167505"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="C89FA108-8F29-4414-8C4469E8023AA161"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="9A243028-2814-4D21-A6C7ADD00ABDE7E4"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="5A454C09-2C54-4F9B-963B8AE09E7E3B86"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="71442014-DB6D-4A0B-96EB12951F6EC838"/>
+				<state_uniqueguid
+					name="selected_down"
+					uniqueguid="0DD8CCBA-3332-4D02-9BED15AF236A1AF4"/>
+				<state_uniqueguid
+					name="selected_down_off"
+					uniqueguid="DACC971E-69A5-451F-8A498477536E9342"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="949E9A29-B56A-4184-ACCE5F6F0D6C42B3"/>
+				<state_uniqueguid
+					name="selected_inactive"
+					uniqueguid="2C01095F-8719-4B93-9345AED82CEB81FC"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/wh3_main_ksl_devotion/force_invocations_hud_icon.png"
+					uniqueguid="FB2783D4-5A69-4932-AFC6973FD70114A2"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_selected_inactive.png"
+					uniqueguid="32D43610-1B15-452A-8BCD0FC65FBF3CB3"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_pressed.png"
+					uniqueguid="D7996480-929C-4672-AF8BB3FEA29331D1"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_selected_hover.png"
+					uniqueguid="95DFC1EC-D26A-4A8A-B0188B0DB59C4902"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_hover.png"
+					uniqueguid="3347F112-041F-4A27-86E0636B0F5CD272"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_active.png"
+					uniqueguid="B305069A-C919-4DDC-939F8DFADEE532B2"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_inactive.png"
+					uniqueguid="CEA344E6-5686-46FA-AD0386A5019D574E"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_selected.png"
+					uniqueguid="63CA7989-110A-4898-B6AEA8AEE9E12F04"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_underlay.png"
+					uniqueguid="B59939F3-750C-4599-A0B4AC5E3B65FB2C"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_selected_underlay.png"
+					uniqueguid="762DB93C-2D0F-473E-895A0575F7FD9BE2"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_selected_pressed.png"
+					uniqueguid="49C55384-07CC-4B66-ABF6F779BAD104BC"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="ButtonGroupButton"/>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_function_id="PlayersFaction.UnlockableRitualList.Any(RitualContext.Category == &quot;MOTHERLAND_RITUAL_FORCE&quot;)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignTurnStart"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context callback_id="StatePropagatorCallback"/>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_function_id="(kislev_force_rituals_panel = Component(&quot;F48B970E-460B-47C5-808FC001DB578F6E&quot;)) =&gt;&#10;{DoIfElse(kislev_force_rituals_panel.IsVisible,&#10;kislev_force_rituals_panel.SetVisible(false),&#10;Do(UiMsg(&quot;close_recruitment&quot;), kislev_force_rituals_panel.SetVisible(true)))}"/>
+				<callback_with_context
+					callback_id="ContextCommandEvent"
+					context_function_id="(kislev_force_rituals_panel = Component(&quot;kislev_force_rituals&quot;)) =&gt;&#10;{ self.SetSelectedState(kislev_force_rituals_panel &amp;&amp; kislev_force_rituals_panel.IsVisibleFromRoot) }">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="force_invocations_toggled"/>
+						<property
+							name="event1"
+							value="PanelClosed"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextInactiveStateSetter"
+					context_function_id="SelectedCharacter.IsInMotion == false">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CharacterMoveStartAny"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="resizable"/>
+				<property
+					name="disable_override2"
+					value="CallbackAnimTrigger"/>
+				<property
+					name="dynamic_image"
+					value="0"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text
+					tooltip_label="wh3_main_ksl_invocations_hud_button_tooltip"
+					tooltip_text="Army Invocations||Use local [[img:icon_devotion]][[/img]]Devotion to empower your army by invoking the gods of Kislev."/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					tooltip_label="StateTooltip_88c0a369"
+					tooltip_text="{{tr:tooltip_hud_unit_upgrade_inactive_not_players_turn}}"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/wh3_main_ksl_devotion/force_invocations_hud_icon.png"/>
+				<element value="ui/skins/default/button_basic_selected_inactive.png"/>
+				<element value="ui/skins/default/button_basic_pressed.png"/>
+				<element value="ui/skins/default/button_basic_selected_hover.png"/>
+				<element value="ui/skins/default/button_basic_hover.png"/>
+				<element value="ui/skins/default/button_basic_active.png"/>
+				<element value="ui/skins/default/button_basic_inactive.png"/>
+				<element value="ui/skins/default/button_basic_selected.png"/>
+				<element value="ui/skins/default/button_basic_underlay.png"/>
+				<element value="ui/skins/default/button_basic_selected_underlay.png"/>
+				<element value="ui/skins/default/button_basic_selected_pressed.png"/>
+				<element value=""/>
+			</override_images>
+		</button_motherland>
 		<button_narrative_viewer
 			this="414151DE-A68E-4F16-99FEF2BF6DBC4FC0"
 			id="button_narrative_viewer"
@@ -12198,6 +12357,7 @@
 			uniqueguid_in_template="5D80CA64-9284-44B3-A333109B10F096D4"
 			uniqueguid="09BBBAAB-DD6B-416B-BD3B5E056981765A"
 			dimensions="55.00,55.00"
+			is_visible="false"
 			tooltips_localised="false"
 			priority="10"
 			sound_category="UI_GBL_TMP_Round_Small_Button">
@@ -12289,7 +12449,7 @@
 				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextInactiveStateSetter"
-					context_function_id="Component(&quot;units&quot;, &quot;main_units_panel&quot;).ForceContainsUpgradableUnits">
+					context_function_id="Component(&quot;units&quot;, &quot;main_units_panel&quot;).ForceContainsUpgradableUnits &amp;&amp; IsLocalPlayersTurn">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -12354,6 +12514,8 @@
 					is_text_localised="false"/>
 				<localised_text
 					state="inactive"
+					tooltip_label="StateTooltip_55351820"
+					tooltip_text="{{tr:tooltip_hud_unit_upgrade_inactive_not_players_turn}}"
 					is_text_localised="false"/>
 				<localised_text
 					state="selected"
@@ -14682,7 +14844,7 @@
 							value=""/>
 						<property
 							name="inactive"
-							value="IsLocalPlayersTurn == false"/>
+							value="IsLocalPlayersTurn == false || IsContextValid(PlayersFaction.FactionLeaderContext) == false || PlayersFaction.FactionLeaderContext.IsInLimbo"/>
 						<property
 							name="selected"
 							value="IsHUDPanelOpen(&quot;dlc26_skull_throne&quot;)"/>
@@ -16628,6 +16790,7 @@
 			uniqueguid_in_template="5D80CA64-9284-44B3-A333109B10F096D4"
 			uniqueguid="F1AAE419-51EE-4186-A31E850AE0A54F6B"
 			dimensions="55.00,55.00"
+			is_visible="false"
 			tooltips_localised="false"
 			priority="10"
 			sound_category="UI_GBL_TMP_Square_Medium_Button">
@@ -24310,7 +24473,7 @@
 				<newstate
 					this="F57A7E43-DC06-40B4-BA2A06CF30BD2C9B"
 					name="NewState"
-					width="355"
+					width="237"
 					height="55"
 					uniqueguid="F57A7E43-DC06-40B4-BA2A06CF30BD2C9B"/>
 			</states>
@@ -25317,7 +25480,7 @@
 				<newstate
 					this="15BBAB67-25E4-491B-931C83D637CD435B"
 					name="NewState"
-					width="865"
+					width="747"
 					height="71"
 					interactive="true"
 					uniqueguid="15BBAB67-25E4-491B-931C83D637CD435B">
@@ -25326,7 +25489,7 @@
 							this="F7B28FCC-4463-4A03-92B1D3E77A67E5F1"
 							uniqueguid="F7B28FCC-4463-4A03-92B1D3E77A67E5F1"
 							componentimage="26413E1F-5EC3-408A-8A0CE9B123589CDB"
-							width="865"
+							width="747"
 							height="71"
 							tile="true"
 							margin="0.00,85.00,0.00,85.00"/>
@@ -41498,7 +41661,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoCampaignFaction"
-					context_function_id="( characters = ActiveMissionList.Filter((mission) =&gt; HasZoomLocation &amp;&amp; IsContextValid(TargetCharacterContext)).Transform((mission) =&gt; mission.TargetCharacterContext) ) =&gt;&#10;{&#10;	GetIf( characters.IsEmpty == false, characters.Filter(IsVisible &amp;&amp; ShouldShowOnRadar).Transform((character) =&gt; character.MilitaryForceContext) )&#10;}">
+					context_function_id="( characters = ActiveMissionList.Filter((mission) =&gt; HasZoomLocation &amp;&amp; IsContextValid(TargetCharacterContext)).Transform((mission) =&gt; mission.TargetCharacterContext) ) =&gt;&#10;{&#10; GetIf( characters.IsEmpty == false, characters.Filter(IsVisible &amp;&amp; ShouldShowOnRadar).Transform((character) =&gt; character.MilitaryForceContext) )&#10;}">
 					<child_m_user_properties>
 						<property
 							name="event0"

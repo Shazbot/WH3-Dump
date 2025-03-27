@@ -1,5 +1,8 @@
 mother_ostankya_features = {
 	ostankya_faction = "wh3_dlc24_ksl_daughters_of_the_forest",
+	start_dilemma_key = "wh3_dlc24_ostankya_start_dilemma",
+	dilemma_teleport_chosen = false,
+	chance_to_teleport_home = 0, -- Will leave this for modders if we don't utilize it
 	restricted_kislev_buildings = {
 		"wh3_main_ksl_barracks_1",
 		"wh3_main_ksl_barracks_2",
@@ -13,9 +16,14 @@ mother_ostankya_features = {
 		"wh3_main_ksl_ice_guard_2",
 		"wh3_main_ksl_artillery_1",
 		"wh3_main_ksl_artillery_2",
-		"wh3_main_ksl_gold_1",
-		"wh3_main_ksl_gold_2",
-		"wh3_main_ksl_gold_3"
+		--"wh3_main_ksl_gold_1",
+		--"wh3_main_ksl_gold_2",
+		"wh3_main_ksl_gold_3",
+		"wh3_main_ksl_gold_3a",
+		--"wh3_main_ksl_court_1",
+		--"wh3_main_ksl_court_2",
+		"wh3_main_ksl_court_3",
+		"wh3_main_ksl_court_3a"
 	},
 	regions_to_unlock_buildings = {
 		wh3_main_chaos_region_erengrad = true,
@@ -405,18 +413,72 @@ function mother_ostankya_features:initialise()
 				end
 			end
 			
-			-- trigger any pending hex battle missions
-			if faction:is_human() then
+			if faction:is_human() == true then
+				-- trigger any pending hex battle missions
 				for hex, data in pairs(self.hex_data) do
 					if cm:get_saved_value(hex .. "_mission_triggered") == 1 then
 						cm:trigger_mission(self.ostankya_faction, data.mission[cm:get_campaign_name()], true)
 						cm:set_saved_value(hex .. "_mission_triggered", 2)
 					end
 				end
+
+				-- Player gets teleport dilemma
+				if cm:turn_number() == 2 and cm:get_campaign_name() == "main_warhammer" then
+					cm:trigger_dilemma_raw(self.ostankya_faction, self.start_dilemma_key, true, true);
+				end
+			else
+				if self.chance_to_teleport_home > 0 then
+					if cm:turn_number() == 2 and cm:get_campaign_name() == "main_warhammer" then
+						-- Ostankya AI has a chance to teleport home
+						if cm:model():random_percent(self.chance_to_teleport_home) then
+							self:teleport_to_kislev(false);
+						end
+					end
+				end
 			end
 		end,
 		true
-	)
+	);
+
+	core:add_listener(
+		"OstankyaStartDilemmaChoiceMadeEvent",
+		"DilemmaChoiceMadeEvent",
+		function(context)
+			return context:dilemma() == self.start_dilemma_key;
+		end,
+		function(context)
+			-- First option is to stay in Naggaroth
+			if context:choice() == 0 then
+				local potential_unlocks = {};
+
+				for ingredient, data in pairs(self.ingredient_unlocks) do
+					if not data.start_unlocked then
+						table.insert(potential_unlocks, ingredient);
+					end
+				end
+				cm:shuffle_table(potential_unlocks);
+
+				local faction = cm:get_faction(self.ostankya_faction);
+				local cooking_interface = cm:model():world():cooking_system():faction_cooking_info(faction);
+				local unlock_count = 0;
+				
+				for i = 1, #potential_unlocks do
+					if cooking_interface:is_ingredient_unlocked(potential_unlocks[i]) == false then
+						cm:unlock_cooking_ingredient(faction, potential_unlocks[i]);
+						unlock_count = unlock_count + 1;
+
+						if unlock_count == 2 then
+							break;
+						end
+					end
+				end
+			-- Second option is to move Ostankya
+			elseif context:choice() == 1 then
+				self:teleport_to_kislev(true);
+			end
+		end,
+		true
+	);
 	
 	-- tracks the pooled resource spent
 	core:add_listener(
@@ -602,6 +664,50 @@ function mother_ostankya_features:initialise()
 				for i = 1, #corruption_types do
 					cm:pooled_resource_factor_transaction(prm:resource("wh3_main_corruption_" .. corruption_types[i]), "local_populace", -100)
 				end
+
+
+				if ritual_key == "wh3_dlc24_ritual_ksl_hex_5_empowered" then
+					local remove_plagues = {
+						"wh3_dlc25_nur_random_plague_1_settlement_negative",
+						"wh3_dlc25_nur_random_plague_1_settlement_positive",
+						"wh3_dlc25_nur_random_plague_2_settlement_negative",
+						"wh3_dlc25_nur_random_plague_2_settlement_positive",
+						"wh3_dlc25_nur_random_plague_3_settlement_negative",
+						"wh3_dlc25_nur_random_plague_3_settlement_positive",
+						"wh3_dlc25_nur_random_plague_4_settlement_negative",
+						"wh3_dlc25_nur_random_plague_4_settlement_positive",
+						"wh3_dlc25_nur_random_plague_5_settlement_negative",
+						"wh3_dlc25_nur_random_plague_5_settlement_positive",
+						"wh2_main_bundle_plague_skaven_all",
+						"wh2_main_bundle_plague_skaven_skv",
+						"wh2_main_bundle_plague_skaven_skv_pestilens",
+						"wh3_dlc25_nur_settlement_1_negative",
+						"wh3_dlc25_nur_settlement_1_negative_blessed",
+						"wh3_dlc25_nur_settlement_2_negative",
+						"wh3_dlc25_nur_settlement_2_negative_blessed",
+						"wh3_dlc25_nur_settlement_3_negative",
+						"wh3_dlc25_nur_settlement_3_negative_blessed",
+						"wh3_dlc25_nur_settlement_4_negative",
+						"wh3_dlc25_nur_settlement_4_negative_blessed",
+						"wh3_dlc25_nur_settlement_5_negative",
+						"wh3_dlc25_nur_settlement_5_negative_blessed",
+						"wh3_main_bundle_plague_nurgle_ague_base_enemy_settlement",
+						"wh3_main_bundle_plague_nurgle_ague_base_enemy_settlement_festus",
+						"wh3_main_bundle_plague_nurgle_buboes_base_enemy_settlement",
+						"wh3_main_bundle_plague_nurgle_buboes_base_enemy_settlement_festus",
+						"wh3_main_bundle_plague_nurgle_pox_base_enemy_settlement",
+						"wh3_main_bundle_plague_nurgle_pox_base_enemy_settlement_festus",
+						"wh3_main_bundle_plague_nurgle_rot_base_enemy_settlement",
+						"wh3_main_bundle_plague_nurgle_rot_base_enemy_settlement_festus",
+						"wh3_main_bundle_plague_nurgle_shakes_base_enemy_settlement",
+						"wh3_main_bundle_plague_nurgle_shakes_base_enemy_settlement_festus"
+					};
+
+					for i = 1, #remove_plagues do
+						cm:remove_effect_bundle_from_region(remove_plagues[i], region_name);
+					end
+					RemoveRegionPlague(region_name, NURGLE_PLAGUE_KEY); --DLC08 plague
+				end
 			end
 			
 			-- add persistent vfx if needed
@@ -753,6 +859,97 @@ function mother_ostankya_features:initialise()
 	)
 end
 
+function mother_ostankya_features:teleport_to_kislev(human)
+	local old_enemy = "wh2_main_def_bleak_holds";
+	local new_enemy = "wh_dlc08_nor_goromadny_tribe";
+	local old_region1 = "wh3_main_combi_region_bleak_hold_fortress";
+	local old_region2 = "wh3_main_combi_region_forest_of_arnheim";
+	local new_region = "wh3_main_combi_region_plesk";
+	local new_enemy_region1 = "wh3_main_combi_region_novchozy";
+	local new_enemy_region2 = "wh3_main_combi_region_volksgrad";
+	local nearby_kislev_faction = "wh3_main_ksl_ropsmenn_clan";
+	local nearby_kislev_region = "wh3_main_combi_region_praag";
+
+	cm:disable_event_feed_events(true, "wh_event_category_diplomacy", "", "");
+	-- Make peace with starting enemy
+	cm:force_make_peace(self.ostankya_faction, old_enemy);
+	-- War with new starting enemy
+	cm:force_declare_war(new_enemy, self.ostankya_faction, false, false);
+	cm:disable_event_feed_events(false, "wh_event_category_diplomacy", "", "");
+	
+	cm:disable_event_feed_events(true, "wh_event_category_conquest", "", "");
+	-- Gain the new starting region
+	cm:transfer_region_to_faction(new_region, self.ostankya_faction);
+
+	if human == true then
+		-- New enemy gets an extra region
+		cm:transfer_region_to_faction(new_enemy_region1, new_enemy);
+		cm:transfer_region_to_faction(new_enemy_region2, new_enemy);
+	else
+		-- Helping hand for Ostankya
+		cm:transfer_region_to_faction(new_enemy_region1, new_enemy);
+		cm:transfer_region_to_faction(new_enemy_region2, self.ostankya_faction);
+	end
+
+	-- Peace between your new enemy and their old enemy
+	-- This is to stop their old enemy taking their settlements before you can
+	cm:force_make_peace(nearby_kislev_faction, old_enemy);
+	
+	-- Find new valid teleport pos from the new region
+	local x_pos, y_pos = cm:find_valid_spawn_location_for_character_from_settlement(self.ostankya_faction, new_region, false, true, 5);
+	
+	cm:callback(
+		function()
+			-- Heal the garrison of our new region
+			local new_home = cm:get_region(new_region);
+			cm:heal_garrison(new_home:cqi());
+			-- Replenish the enemies regions
+			local enemy_region1 = cm:get_region(new_enemy_region1);
+			cm:heal_garrison(enemy_region1:cqi());
+			local enemy_region2 = cm:get_region(new_enemy_region2);
+			cm:heal_garrison(enemy_region2:cqi());
+			-- Modify corruption, or leave it for the player to do?
+			--cm:change_corruption_in_province_by(new_home:province_name(), nil, 100, "local_populace");
+			-- Add a new recruitment building
+			cm:instantly_upgrade_building_in_region(new_home:slot_list():item_at(1), "wh3_dlc24_ksl_bears_mother_ostankya_1");
+			-- Abandon our old regions
+			cm:set_region_abandoned(old_region1);
+			cm:transfer_region_to_faction(old_region2, old_enemy);
+			cm:disable_event_feed_events(false, "wh_event_category_conquest", "", "");
+			
+			if human == true then
+				local cx_pos, cy_pos = cm:log_to_dis(x_pos, y_pos);
+				cm:set_camera_position(cx_pos, cy_pos, 13, 0, 10);
+			end
+		end,
+		0.2
+	);
+	
+	-- Move the main army
+	local faction_leader = cm:get_faction(self.ostankya_faction):faction_leader();
+	cm:teleport_to(cm:char_lookup_str(faction_leader), x_pos, y_pos);
+	-- The agent that might not have been put into the army yet
+	local start_char = cm:get_closest_character_to_position_from_faction(self.ostankya_faction, 91, 609, false, false);
+
+	if start_char then
+		x_pos, y_pos = cm:find_valid_spawn_location_for_character_from_settlement(self.ostankya_faction, new_region, false, true, 3);
+		cm:teleport_to(cm:char_lookup_str(start_char), x_pos, y_pos);
+	end
+	
+	-- Complete the outstanding hex mission so it isn't impossible
+	cm:set_active_mission_status_for_faction(cm:get_faction(self.ostankya_faction), "wh3_dlc24_camp_narrative_ie_mother_ostankya_defeat_initial_enemy_01", "SUCCEEDED");
+	cm:set_active_mission_status_for_faction(cm:get_faction(self.ostankya_faction), "wh3_dlc24_camp_narrative_ie_mother_ostankya_complete_province_01", "SUCCEEDED");
+	-- save the choice
+	self.dilemma_teleport_chosen = true
+	-- Remove all Kislev building locks
+	mother_ostankya_features:unlock_buildings();
+	
+	-- Find new position for the ropsmenn clan leader next to prague
+	local rx_pos, ry_pos = cm:find_valid_spawn_location_for_character_from_settlement(nearby_kislev_faction, nearby_kislev_region, false, true, 5);
+	local nearby_faction_leader = cm:get_faction(nearby_kislev_faction):faction_leader();
+	cm:teleport_to(cm:char_lookup_str(nearby_faction_leader), rx_pos, ry_pos);
+end
+
 function mother_ostankya_features:unlock_ingredient(ingredient, hide_incident)
 	local faction = cm:get_faction(self.ostankya_faction)
 	local cooking_interface = cm:model():world():cooking_system():faction_cooking_info(faction)
@@ -814,3 +1011,22 @@ function mother_ostankya_features:unlock_buildings()
 	
 	cm:set_saved_value("ostankya_buildings_unlocked", true)
 end
+
+
+--------------------------------------------------------------
+----------------------- SAVING / LOADING ---------------------
+--------------------------------------------------------------
+
+cm:add_saving_game_callback(
+	function(context)
+		cm:save_named_value("mother_ostankya_features.dilemma_teleport_chosen", mother_ostankya_features.dilemma_teleport_chosen, context)
+	end
+)
+
+cm:add_loading_game_callback(
+	function(context)
+		if cm:is_new_game() == false then
+			mother_ostankya_features.dilemma_teleport_chosen = cm:load_named_value("mother_ostankya_features.dilemma_teleport_chosen", mother_ostankya_features.dilemma_teleport_chosen, context)
+		end
+	end
+)

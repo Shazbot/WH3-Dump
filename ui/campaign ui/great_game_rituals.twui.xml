@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="PlayersFaction.UnlockableRitualList.Any(RitualContext.Category == &quot;GREAT_GAME_1&quot;)">
 	<hierarchy>
@@ -29,6 +29,19 @@
 							<button_info this="3BC59C2D-B5AB-4654-B1D34D7191E9CCAE"/>
 							<button_close this="676DA4BF-2640-435A-A0A2D18601DD6232"/>
 						</button_holder>
+						<public_order_holder this="516BE63B-FEF4-4B4D-B0CE5CF2AA74C882">
+							<bar_back this="33F13A10-DDDF-4B92-AFC1FBCD4ECDF437">
+								<bar_fill this="62EAD518-D09C-4DFD-8A2902FA16F0C5AC"/>
+								<frame this="E0A8719A-63D4-438E-9CD73A70793E529B"/>
+								<divisions this="8617596B-9362-4DC6-AF6CE98302C8DBE6">
+									<segment_list this="F1F2A5EA-4C0D-4FAB-B70DDD06F512E5F3">
+										<template_segment this="034A9752-DF44-4CAC-B54F26260BD01046">
+											<division this="CE4BDC1E-504E-4EA4-A647C8C3D7B1C909"/>
+										</template_segment>
+									</segment_list>
+								</divisions>
+							</bar_back>
+						</public_order_holder>
 					</header>
 					<province_cycler this="87D28507-BABE-4035-8DDBCE94CD26A446">
 						<text_province this="949A3C67-5504-4C3E-AC36F663E78955EA"/>
@@ -2387,7 +2400,7 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ButtonGroup"
-					context_function_id="PlayersFaction.UnlockableRitualList(&quot;GREAT_GAME_1&quot;,  &quot;GREAT_GAME_2&quot;, &quot;GREAT_GAME_3&quot;, &quot;GREAT_GAME_4&quot;).Sort(RitualContext.Key, true)">
+					context_function_id="PlayersFaction.UnlockableRitualList(&quot;MOTHERLAND_RITUAL&quot;, &quot;GREAT_GAME_1&quot;,  &quot;GREAT_GAME_2&quot;, &quot;GREAT_GAME_3&quot;, &quot;GREAT_GAME_4&quot;).Sort(RitualContext.Key, true)">
 					<child_m_user_properties>
 						<property
 							name="Single Selection"
@@ -2399,7 +2412,7 @@
 					context_object_id="CcoCampaignRitual"/>
 				<callback_with_context
 					callback_id="ContextPropagator"
-					context_function_id="PlayersFaction.UnlockableRitualList(&quot;GREAT_GAME_1&quot;,  &quot;GREAT_GAME_2&quot;, &quot;GREAT_GAME_3&quot;, &quot;GREAT_GAME_4&quot;).FirstContext(IsAvailable &amp;&amp; IsOnCooldown == false)">
+					context_function_id="PlayersFaction.UnlockableRitualList(&quot;MOTHERLAND_RITUAL&quot;, &quot;GREAT_GAME_1&quot;,  &quot;GREAT_GAME_2&quot;, &quot;GREAT_GAME_3&quot;, &quot;GREAT_GAME_4&quot;).FirstContext(IsAvailable &amp;&amp; IsOnCooldown == false)">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -2685,7 +2698,7 @@
 			priority="50"
 			tooltipslocalised="true"
 			uniqueguid="1BF4F82E-6080-48EE-B14E5AE4366718AF"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="E3CAF123-0CF4-4BDD-AFD06FB465E21B9E"
 			defaultstate="E3CAF123-0CF4-4BDD-AFD06FB465E21B9E">
 			<callbackwithcontextlist>
@@ -3485,5 +3498,333 @@
 				</newstate>
 			</states>
 		</dy_charges>
+		<bar_back
+			this="33F13A10-DDDF-4B92-AFC1FBCD4ECDF437"
+			id="bar_back"
+			offset="30.00,13.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="60"
+			tooltipslocalised="true"
+			componentleveltooltip="Devotion in the tartet province"
+			tooltiplabel="ComponentTooltip_7f8d62bf"
+			uniqueguid="33F13A10-DDDF-4B92-AFC1FBCD4ECDF437"
+			currentstate="EF515770-540C-4D27-9B94FE9B91D619EB"
+			defaultstate="EF515770-540C-4D27-9B94FE9B91D619EB">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoCampaignCorruptionCounter"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="FD6F28D4-A90D-477E-9A05B4AF91584BC7"
+					uniqueguid="FD6F28D4-A90D-477E-9A05B4AF91584BC7"
+					imagepath="ui/skins/daemon/corruption_bar_frame_back.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="EF515770-540C-4D27-9B94FE9B91D619EB"
+					name="default"
+					width="140"
+					height="20"
+					interactive="true"
+					uniqueguid="EF515770-540C-4D27-9B94FE9B91D619EB">
+					<imagemetrics>
+						<image
+							this="CC1F26A5-50DE-4B35-B163F114F304E29B"
+							uniqueguid="CC1F26A5-50DE-4B35-B163F114F304E29B"
+							componentimage="FD6F28D4-A90D-477E-9A05B4AF91584BC7"
+							offset="-30.00,-14.00"
+							width="200"
+							height="48"
+							dockpoint="Center"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</bar_back>
+		<bar_fill
+			this="62EAD518-D09C-4DFD-8A2902FA16F0C5AC"
+			id="bar_fill"
+			offset="0.00,-2.00"
+			allowverticalresize="false"
+			clipimagestocomponent="true"
+			docking="Center Left"
+			dock_offset="0.00,-2.00"
+			component_anchor_point="0.00,0.50"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="62EAD518-D09C-4DFD-8A2902FA16F0C5AC"
+			currentstate="A980FB3E-5AFB-4157-B01DD78D99B9A1F4"
+			defaultstate="A980FB3E-5AFB-4157-B01DD78D99B9A1F4">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextFillBar"
+					context_object_id="CcoCampaignPublicOrder"
+					context_function_id="Percentage(Balance, 100)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="TargettingInterfaceChanged"/>
+						<property
+							name="event1"
+							value="Tar"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="21ED9214-C54D-41D2-BBA35EA4CFB21C89"
+					uniqueguid="21ED9214-C54D-41D2-BBA35EA4CFB21C89"
+					imagepath="ui/skins/default/survival_wave_bar_fill.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="A980FB3E-5AFB-4157-B01DD78D99B9A1F4"
+					name="default"
+					width="70"
+					height="20"
+					uniqueguid="A980FB3E-5AFB-4157-B01DD78D99B9A1F4">
+					<imagemetrics>
+						<image
+							this="B02589CA-B071-48DA-AD6BB4C9D763B842"
+							uniqueguid="B02589CA-B071-48DA-AD6BB4C9D763B842"
+							componentimage="21ED9214-C54D-41D2-BBA35EA4CFB21C89"
+							offset="0.00,-1.00"
+							width="70"
+							height="24"
+							colour="#F49207FF"
+							dockpoint="Center"
+							dock_offset="0.00,1.00"
+							canresizeheight="false"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</bar_fill>
+		<division
+			this="CE4BDC1E-504E-4EA4-A647C8C3D7B1C909"
+			id="division"
+			offset="0.00,-1.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center Left"
+			component_anchor_point="0.00,0.50"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="CE4BDC1E-504E-4EA4-A647C8C3D7B1C909"
+			currentstate="1AFA8976-BC9D-493B-807C79CA1F17C6B3"
+			defaultstate="1AFA8976-BC9D-493B-807C79CA1F17C6B3">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignCorruptionCounter"
+					context_function_id="self.ParentContext.ChildIndex != 1"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="B50B11C4-DE5A-42AD-9A96E5766A4BEEA0"
+					uniqueguid="B50B11C4-DE5A-42AD-9A96E5766A4BEEA0"
+					imagepath="ui/skins/default/health_bar_damaged_bar.png"/>
+				<component_image
+					this="2E81F04B-F9F4-4F48-BB0311C13DFCDE4D"
+					uniqueguid="2E81F04B-F9F4-4F48-BB0311C13DFCDE4D"
+					imagepath="ui/skins/daemon/corruption_bar_division.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="1AFA8976-BC9D-493B-807C79CA1F17C6B3"
+					name="default"
+					width="5"
+					height="19"
+					uniqueguid="1AFA8976-BC9D-493B-807C79CA1F17C6B3">
+					<imagemetrics>
+						<image
+							this="42BF5453-C385-4228-9CA86707DAD6B53C"
+							uniqueguid="42BF5453-C385-4228-9CA86707DAD6B53C"
+							componentimage="B50B11C4-DE5A-42AD-9A96E5766A4BEEA0"
+							width="5"
+							height="19"
+							colour="#FFFFFF00"
+							canresizeheight="false"
+							canresizewidth="false"/>
+						<image
+							this="66777432-83DB-4786-948968BE11E9CA7B"
+							uniqueguid="66777432-83DB-4786-948968BE11E9CA7B"
+							componentimage="2E81F04B-F9F4-4F48-BB0311C13DFCDE4D"
+							offset="-3.00,-11.00"
+							width="12"
+							height="41"
+							dockpoint="Center"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</division>
+		<divisions
+			this="8617596B-9362-4DC6-AF6CE98302C8DBE6"
+			id="divisions"
+			allowverticalresize="false"
+			docking="Center Left"
+			dock_offset="0.00,-2.00"
+			component_anchor_point="0.00,0.50"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="8617596B-9362-4DC6-AF6CE98302C8DBE6"
+			currentstate="950C80BB-4003-49E6-90CE331F8763E453"
+			defaultstate="950C80BB-4003-49E6-90CE331F8763E453">
+			<states>
+				<default
+					this="950C80BB-4003-49E6-90CE331F8763E453"
+					name="default"
+					width="139"
+					height="16"
+					uniqueguid="950C80BB-4003-49E6-90CE331F8763E453"/>
+			</states>
+		</divisions>
+		<frame
+			this="E0A8719A-63D4-438E-9CD73A70793E529B"
+			id="frame"
+			offset="-30.00,-14.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="E0A8719A-63D4-438E-9CD73A70793E529B"
+			currentstate="A48BED7C-93C2-491B-A2C27CF92212BCE3"
+			defaultstate="A48BED7C-93C2-491B-A2C27CF92212BCE3">
+			<componentimages>
+				<component_image
+					this="FCD7DFFF-448B-4D5E-ADA75CC65B6B8DB3"
+					uniqueguid="FCD7DFFF-448B-4D5E-ADA75CC65B6B8DB3"
+					imagepath="ui/skins/daemon/corruption_bar_frame.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="A48BED7C-93C2-491B-A2C27CF92212BCE3"
+					name="default"
+					width="200"
+					height="48"
+					uniqueguid="A48BED7C-93C2-491B-A2C27CF92212BCE3">
+					<imagemetrics>
+						<image
+							this="5B7C8627-A1BD-495B-98F029B05166256B"
+							uniqueguid="5B7C8627-A1BD-495B-98F029B05166256B"
+							componentimage="FCD7DFFF-448B-4D5E-ADA75CC65B6B8DB3"
+							width="200"
+							height="48"
+							dockpoint="Center"
+							canresizeheight="false"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</frame>
+		<public_order_holder
+			this="516BE63B-FEF4-4B4D-B0CE5CF2AA74C882"
+			id="public_order_holder"
+			offset="245.00,23.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Bottom Center"
+			component_anchor_point="0.50,1.00"
+			priority="60"
+			uniqueguid="516BE63B-FEF4-4B4D-B0CE5CF2AA74C882"
+			currentstate="1B8E5E47-58C2-47E7-969C0F8E66501B72"
+			defaultstate="1B8E5E47-58C2-47E7-969C0F8E66501B72">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_function_id="GetIf(IsOfType(TargettingContext, &quot;CcoCampaignRitualInteraction&quot;), TargettingContext.CurrentTargetContext.CommandingCharacterContext.SettlementContext.ProvinceContext.LocalPlayerProvinceManagerContext.PublicOrderContext)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="TargettingInterfaceChanged"/>
+						<property
+							name="event1"
+							value="TargettingInterfaceTargetSet"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_function_id="CanUseUiFeature(&quot;MOTHERLAND_INVOCATIONS&quot;)"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="1B8E5E47-58C2-47E7-969C0F8E66501B72"
+					name="default"
+					width="200"
+					height="47"
+					uniqueguid="1B8E5E47-58C2-47E7-969C0F8E66501B72"/>
+			</states>
+		</public_order_holder>
+		<segment_list
+			this="F1F2A5EA-4C0D-4FAB-B70DDD06F512E5F3"
+			id="segment_list"
+			allowverticalresize="false"
+			docking="Center Left"
+			component_anchor_point="0.00,0.50"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="F1F2A5EA-4C0D-4FAB-B70DDD06F512E5F3"
+			currentstate="53A92EC4-80BC-4404-83C9A7AB98A3B849"
+			defaultstate="53A92EC4-80BC-4404-83C9A7AB98A3B849">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoCampaignCorruptionCounter"
+					context_function_id="IntervalList.Sort(LowerBound, true)"/>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignCorruptionCounter"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="53A92EC4-80BC-4404-83C9A7AB98A3B849"
+					name="default"
+					width="139"
+					height="16"
+					uniqueguid="53A92EC4-80BC-4404-83C9A7AB98A3B849"/>
+			</states>
+			<LayoutEngine type="HorizontalList"/>
+		</segment_list>
+		<template_segment
+			this="034A9752-DF44-4CAC-B54F26260BD01046"
+			id="template_segment"
+			offset="0.00,1.00"
+			allowverticalresize="false"
+			dock_offset="0.00,1.00"
+			priority="60"
+			uniqueguid="034A9752-DF44-4CAC-B54F26260BD01046"
+			currentstate="8CF898E8-5799-44A0-AC1FC1727867F30B"
+			defaultstate="8CF898E8-5799-44A0-AC1FC1727867F30B">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextCommandGiverOnContextSet"
+					context_object_id="CcoCorruptionCounterIntervalRecord"
+					context_function_id="self.Resize(self.ParentContext.Dimensions.x * SegmentPercentage(StoredContextFromParent(&quot;CcoCampaignCorruptionCounter&quot;).Max), self.Dimensions.y, false)"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCorruptionCounterIntervalRecord"
+					context_function_id="SegmentPercentage(StoredContextFromParent(&quot;CcoCampaignCorruptionCounter&quot;).Max) &gt; 0">
+					<child_m_user_properties>
+						<property
+							name="object_store_events"
+							value="^1"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="8CF898E8-5799-44A0-AC1FC1727867F30B"
+					name="default"
+					width="94"
+					height="16"
+					uniqueguid="8CF898E8-5799-44A0-AC1FC1727867F30B"/>
+			</states>
+		</template_segment>
 	</components>
 </layout>

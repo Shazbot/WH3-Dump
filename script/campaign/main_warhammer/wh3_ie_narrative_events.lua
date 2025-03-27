@@ -106,6 +106,12 @@ local function customise_narrative_event_faction_data_for_campaign(faction_key)
 		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_key", "wh3_dlc24_camp_narrative_ie_mother_ostankya_defeat_initial_enemy_01")
 		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_capture_settlement_mission_key", "wh3_dlc24_camp_narrative_ie_mother_ostankya_capture_settlement_01")
 		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_control_province_mission_key", "wh3_dlc24_camp_narrative_ie_mother_ostankya_complete_province_01")
+		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_query_can_capture_territory_condition", 
+		function() 
+			-- TODO: instead of blocking the entire capture chain we can re-target the missions instead
+			return not mother_ostankya_features.dilemma_teleport_chosen
+		end
+	)
 	end
 	
 	

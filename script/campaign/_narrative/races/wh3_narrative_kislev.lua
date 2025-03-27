@@ -154,32 +154,6 @@ local function kislev_devotion_narrative_loader(faction_key)
 		end;
 	end;
 
-	
-	-----------------------------------------------------------------------------------------------------------
-	--	Invoke Blessing
-	-----------------------------------------------------------------------------------------------------------
-	
-	do
-		local name = "kislev_devotion_event_invoke_blessing";
-		
-		if not narrative.get(faction_key, name .. "_block") then
-			narrative_events.perform_motherland_ritual(
-				name,																																			-- unique name for this narrative event
-				faction_key,																																	-- key of faction to which it applies
-				narrative.get(faction_key, name .. "_advice_key") or shared_prepend_str .. "_motherland_01",													-- key of advice to deliver
-				narrative.get(faction_key, name .. "_mission_key") or shared_prepend_str .. "_invoke_blessing_01",												-- key of mission to deliver
-				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
-				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
-					payload.money(500)																																-- issue money or equivalent
-				},
-				narrative.get(faction_key, name .. "_trigger_messages") or "StartKislevInvokeMotherlandBlessing",												-- script message(s) on which to trigger when received
-				narrative.get(faction_key, name .. "_on_issued_messages"),																						-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
-				narrative.get(faction_key, name .. "_completed_messages") or "StartKislevGainDevotionCountdown",												-- script message(s) to trigger when this mission is completed
-				narrative.get(faction_key, name .. "_inherit_list")																								-- list of other narrative events to inherit rewards from (may be nil)
-			);
-		end;
-	end;
-
 
 	-----------------------------------------------------------------------------------------------------------
 	--	Pre Gain Devotion Turn Countdown Trigger
@@ -297,7 +271,6 @@ local function kislev_devotion_narrative_loader(faction_key)
 				narrative.get(faction_key, name .. "_on_issued_messages") or "",																				-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
 				narrative.get(faction_key, name .. "_completed_messages") or "",																				-- script message(s) to trigger when this mission is completed
 				narrative.get(faction_key, name .. "_inherit_list")	or {																						-- list of other narrative events to inherit rewards from (may be nil)
-					"kislev_devotion_event_invoke_blessing",
 					"kislev_devotion_event_gain_devotion"
 				}
 			);
@@ -492,8 +465,7 @@ local function kislev_devotion_narrative_loader(faction_key)
 				narrative.get(faction_key, name .. "_completed_messages") or "KislevGainMaxSupportersCompleted",												-- script message(s) to trigger when this mission is completed
 				narrative.get(faction_key, name .. "_inherit_list")	or {																						-- list of other narrative events to inherit rewards from (may be nil)
 					"kislev_devotion_event_gain_devotion",
-					"kislev_devotion_event_defeat_chaos_army",
-					"kislev_devotion_event_invoke_blessing"
+					"kislev_devotion_event_defeat_chaos_army"
 				}
 			);
 		end;
@@ -664,7 +636,6 @@ local function kislev_devotion_narrative_loader(faction_key)
 				narrative.get(faction_key, name .. "_inherit_list")	or {																						-- list of other narrative events to inherit rewards from (may be nil)
 					"kislev_devotion_event_gain_devotion",
 					"kislev_devotion_event_defeat_chaos_army",
-					"kislev_devotion_event_invoke_blessing",
 					"kislev_devotion_first_to_fifty_supporters",
 					"kislev_devotion_first_to_max_supporters"
 				}
