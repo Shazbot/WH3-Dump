@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -57,6 +57,26 @@
 		</root>
 	</hierarchy>
 	<components>
+		<battle_articulation_editor
+			this="1C37F7EC-8755-42EE-8BA39EA005139DDF"
+			id="battle_articulation_editor"
+			docking="Top Left"
+			tooltipslocalised="true"
+			uniqueguid="1C37F7EC-8755-42EE-8BA39EA005139DDF"
+			currentstate="A23953B9-95E3-4210-B2E81C16FC27B740"
+			defaultstate="A23953B9-95E3-4210-B2E81C16FC27B740">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="ScreenSizedComponent"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="A23953B9-95E3-4210-B2E81C16FC27B740"
+					name="default"
+					width="1600"
+					height="900"
+					uniqueguid="A23953B9-95E3-4210-B2E81C16FC27B740"/>
+			</states>
+		</battle_articulation_editor>
 		<button_txt
 			this="92A930C7-67F0-48F7-88E5E9AB2BF11212"
 			id="button_txt"
@@ -118,6 +138,39 @@
 					is_text_localised="false"/>
 			</localised_texts>
 		</button_txt>
+		<collision_editor
+			this="7DACA725-A031-45C8-B02729EA19485A16"
+			id="collision_editor"
+			offset="0.00,59.00"
+			priority="100"
+			tooltipslocalised="true"
+			uniqueguid="7DACA725-A031-45C8-B02729EA19485A16"
+			currentstate="9CAE835B-8CA8-4DD8-87DE1D7AF4F48F59"
+			defaultstate="9CAE835B-8CA8-4DD8-87DE1D7AF4F48F59">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoBattleUnit"
+					context_function_id="IsValidContext &amp;&amp; IsContextValid(UnitRecordContext.UnitLandRecordContext.ArticulatedRecordContext)"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="9CAE835B-8CA8-4DD8-87DE1D7AF4F48F59"
+					name="default"
+					width="372"
+					height="278"
+					uniqueguid="9CAE835B-8CA8-4DD8-87DE1D7AF4F48F59"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				spacing="0.00,2.00"
+				itemsperrow="2"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="58"/>
+				</columnwidths>
+			</LayoutEngine>
+		</collision_editor>
 		<dev_button_view_main_unit_record
 			this="F1815210-6BC2-4B25-AE411771678D16CD"
 			id="dev_button_view_main_unit_record"
@@ -191,6 +244,127 @@
 				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
 			</override_images>
 		</dev_button_view_main_unit_record>
+		<dev_icon
+			this="60145016-79A0-43B8-B944F0CD39FB018F"
+			id="dev_icon"
+			part_of_template="true"
+			uniqueguid_in_template="0F4F9F06-4613-496B-A0F05A2B8B88B70D"
+			uniqueguid="60145016-79A0-43B8-B944F0CD39FB018F"
+			dimensions="24.00,24.00"
+			dock_point="Center Left"
+			offset="2.00,0.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="15A04CF0-0906-4841-8971610E4CA9F91C"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/dev_icon.png"
+					uniqueguid="1DA529B3-B1EF-4C71-863975C51AEC97DF"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/dev_icon.png"/>
+			</override_images>
+		</dev_icon>
+		<dev_icon
+			this="94C50286-83D0-4D11-8257581417B36FDC"
+			id="dev_icon"
+			part_of_template="true"
+			uniqueguid_in_template="0F4F9F06-4613-496B-A0F05A2B8B88B70D"
+			uniqueguid="94C50286-83D0-4D11-8257581417B36FDC"
+			dimensions="24.00,24.00"
+			dock_point="Center Left"
+			offset="2.00,0.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="28EB644E-406B-4193-B19F9E66618B8C07"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/dev_icon.png"
+					uniqueguid="5CDA18E6-A30E-4CF6-9454294B7FBF86CE"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/dev_icon.png"/>
+			</override_images>
+		</dev_icon>
+		<dev_porthole_ui_parent
+			this="3BDF9813-A345-4A36-BDDA5C00D74A6BE5"
+			id="dev_porthole_ui_parent"
+			offset="246.00,425.00"
+			docking="Bottom Left"
+			dock_offset="246.00,-128.00"
+			component_anchor_point="0.00,1.00"
+			priority="100"
+			tooltipslocalised="true"
+			uniqueguid="3BDF9813-A345-4A36-BDDA5C00D74A6BE5"
+			currentstate="A3F28126-4369-4103-95D485F0E81F3B1A"
+			defaultstate="A3F28126-4369-4103-95D485F0E81F3B1A">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="ContextInitSelectedUnit"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoBattleUnit"
+					context_function_id="EntityList.FirstContext"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoBattleEntity"
+					context_function_id="EntityRecordContext"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="9924F0A7-A7F9-4CD4-A0D7604C56A3CBD1"
+					uniqueguid="9924F0A7-A7F9-4CD4-A0D7604C56A3CBD1"/>
+			</componentimages>
+			<states>
+				<default
+					this="A3F28126-4369-4103-95D485F0E81F3B1A"
+					name="default"
+					width="470"
+					height="347"
+					interactive="true"
+					uniqueguid="A3F28126-4369-4103-95D485F0E81F3B1A">
+					<imagemetrics>
+						<image
+							this="F004FE8F-CC48-4671-B1CA02517FBDA5B4"
+							uniqueguid="F004FE8F-CC48-4671-B1CA02517FBDA5B4"
+							componentimage="9924F0A7-A7F9-4CD4-A0D7604C56A3CBD1"
+							width="470"
+							height="347"
+							colour="#000000C8"/>
+					</imagemetrics>
+				</default>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true"
+				margins="0.00,10.00">
+				<columnwidths>
+					<column width="73"/>
+				</columnwidths>
+			</LayoutEngine>
+		</dev_porthole_ui_parent>
 		<export_to_dave_button
 			this="11DAAC2B-1914-4611-826A329DA7A4E1D7"
 			id="export_to_dave_button"
@@ -285,211 +459,246 @@
 				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
 			</override_images>
 		</export_to_dave_button>
-		<dev_icon
-			this="94C50286-83D0-4D11-8257581417B36FDC"
-			id="dev_icon"
-			part_of_template="true"
-			uniqueguid_in_template="0F4F9F06-4613-496B-A0F05A2B8B88B70D"
-			uniqueguid="94C50286-83D0-4D11-8257581417B36FDC"
-			dimensions="24.00,24.00"
-			dock_point="Center Left"
-			offset="2.00,0.00"
-			priority="100">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="28EB644E-406B-4193-B19F9E66618B8C07"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/dev/dev_icon.png"
-					uniqueguid="5CDA18E6-A30E-4CF6-9454294B7FBF86CE"/>
-			</component_image_uniqueguids>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/dev/dev_icon.png"/>
-			</override_images>
-		</dev_icon>
-		<dev_icon
-			this="60145016-79A0-43B8-B944F0CD39FB018F"
-			id="dev_icon"
-			part_of_template="true"
-			uniqueguid_in_template="0F4F9F06-4613-496B-A0F05A2B8B88B70D"
-			uniqueguid="60145016-79A0-43B8-B944F0CD39FB018F"
-			dimensions="24.00,24.00"
-			dock_point="Center Left"
-			offset="2.00,0.00"
-			priority="100">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="15A04CF0-0906-4841-8971610E4CA9F91C"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/dev/dev_icon.png"
-					uniqueguid="1DA529B3-B1EF-4C71-863975C51AEC97DF"/>
-			</component_image_uniqueguids>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/dev/dev_icon.png"/>
-			</override_images>
-		</dev_icon>
-		<root
-			this="AEE2C3DF-3B4C-42BF-BF249E0A07A32725"
-			id="root"
-			tooltipslocalised="true"
-			uniqueguid="AEE2C3DF-3B4C-42BF-BF249E0A07A32725"
-			currentstate="E71B6B07-DD2C-45F9-BAFB2ED87C1D6A32"
-			defaultstate="E71B6B07-DD2C-45F9-BAFB2ED87C1D6A32">
-			<componentimages>
-				<component_image
-					this="51286E18-8FB8-42C5-976307BBE58B0074"
-					uniqueguid="51286E18-8FB8-42C5-976307BBE58B0074"/>
-			</componentimages>
-			<states>
-				<default
-					this="E71B6B07-DD2C-45F9-BAFB2ED87C1D6A32"
-					name="default"
-					width="1600"
-					height="900"
-					uniqueguid="E71B6B07-DD2C-45F9-BAFB2ED87C1D6A32">
-					<imagemetrics>
-						<image
-							this="F1C87F04-CB27-4047-B2AFEA8362FD5A20"
-							uniqueguid="F1C87F04-CB27-4047-B2AFEA8362FD5A20"
-							componentimage="51286E18-8FB8-42C5-976307BBE58B0074"
-							width="1600"
-							height="900"
-							colour="#808080FF"/>
-					</imagemetrics>
-				</default>
-			</states>
-		</root>
-		<battle_articulation_editor
-			this="1C37F7EC-8755-42EE-8BA39EA005139DDF"
-			id="battle_articulation_editor"
+		<highlight
+			this="4409A147-BA37-4550-96B0522E24707EA5"
+			id="highlight"
+			allowverticalresize="false"
 			docking="Top Left"
+			priority="1000"
 			tooltipslocalised="true"
-			uniqueguid="1C37F7EC-8755-42EE-8BA39EA005139DDF"
-			currentstate="A23953B9-95E3-4210-B2E81C16FC27B740"
-			defaultstate="A23953B9-95E3-4210-B2E81C16FC27B740">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="ScreenSizedComponent"/>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="A23953B9-95E3-4210-B2E81C16FC27B740"
-					name="default"
-					width="1600"
-					height="900"
-					uniqueguid="A23953B9-95E3-4210-B2E81C16FC27B740"/>
-			</states>
-		</battle_articulation_editor>
-		<collision_editor
-			this="7DACA725-A031-45C8-B02729EA19485A16"
-			id="collision_editor"
-			offset="0.00,59.00"
-			priority="100"
-			tooltipslocalised="true"
-			uniqueguid="7DACA725-A031-45C8-B02729EA19485A16"
-			currentstate="9CAE835B-8CA8-4DD8-87DE1D7AF4F48F59"
-			defaultstate="9CAE835B-8CA8-4DD8-87DE1D7AF4F48F59">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoBattleUnit"
-					context_function_id="IsValidContext &amp;&amp; IsContextValid(UnitRecordContext.UnitLandRecordContext.ArticulatedRecordContext)"/>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="9CAE835B-8CA8-4DD8-87DE1D7AF4F48F59"
-					name="default"
-					width="372"
-					height="278"
-					uniqueguid="9CAE835B-8CA8-4DD8-87DE1D7AF4F48F59"/>
-			</states>
-			<LayoutEngine
-				type="List"
-				spacing="0.00,2.00"
-				itemsperrow="2"
-				sizetocontent="true">
-				<columnwidths>
-					<column width="58"/>
-				</columnwidths>
-			</LayoutEngine>
-		</collision_editor>
-		<dev_porthole_ui_parent
-			this="3BDF9813-A345-4A36-BDDA5C00D74A6BE5"
-			id="dev_porthole_ui_parent"
-			offset="246.00,425.00"
-			docking="Bottom Left"
-			dock_offset="246.00,-128.00"
-			component_anchor_point="0.00,1.00"
-			priority="100"
-			tooltipslocalised="true"
-			uniqueguid="3BDF9813-A345-4A36-BDDA5C00D74A6BE5"
-			currentstate="A3F28126-4369-4103-95D485F0E81F3B1A"
-			defaultstate="A3F28126-4369-4103-95D485F0E81F3B1A">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="ContextInitSelectedUnit"/>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoBattleUnit"
-					context_function_id="EntityList.FirstContext"/>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoBattleEntity"
-					context_function_id="EntityRecordContext"/>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
+			uniqueguid="4409A147-BA37-4550-96B0522E24707EA5"
+			currentstate="DB2C6A9C-50BE-4404-977D71640F6F99A5"
+			defaultstate="DB2C6A9C-50BE-4404-977D71640F6F99A5">
 			<componentimages>
 				<component_image
-					this="9924F0A7-A7F9-4CD4-A0D7604C56A3CBD1"
-					uniqueguid="9924F0A7-A7F9-4CD4-A0D7604C56A3CBD1"/>
+					this="21BEDB8A-D9E4-4A15-BC0CDF914A0F019A"
+					uniqueguid="21BEDB8A-D9E4-4A15-BC0CDF914A0F019A"/>
 			</componentimages>
 			<states>
-				<default
-					this="A3F28126-4369-4103-95D485F0E81F3B1A"
-					name="default"
-					width="470"
-					height="347"
-					interactive="true"
-					uniqueguid="A3F28126-4369-4103-95D485F0E81F3B1A">
+				<newstate
+					this="DB2C6A9C-50BE-4404-977D71640F6F99A5"
+					name="NewState"
+					width="2"
+					height="27"
+					uniqueguid="DB2C6A9C-50BE-4404-977D71640F6F99A5">
 					<imagemetrics>
 						<image
-							this="F004FE8F-CC48-4671-B1CA02517FBDA5B4"
-							uniqueguid="F004FE8F-CC48-4671-B1CA02517FBDA5B4"
-							componentimage="9924F0A7-A7F9-4CD4-A0D7604C56A3CBD1"
-							width="470"
-							height="347"
-							colour="#000000C8"/>
+							this="63074DE1-94B4-4D1F-9FE988F7D2135458"
+							uniqueguid="63074DE1-94B4-4D1F-9FE988F7D2135458"
+							componentimage="21BEDB8A-D9E4-4A15-BC0CDF914A0F019A"
+							width="2"
+							height="27"
+							colour="#FFFFFF64"/>
 					</imagemetrics>
-				</default>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
 			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true"
-				margins="0.00,10.00">
-				<columnwidths>
-					<column width="73"/>
-				</columnwidths>
-			</LayoutEngine>
-		</dev_porthole_ui_parent>
+		</highlight>
+		<highlight
+			this="518B596F-FDBB-4E47-922AA7E81E5CC55B"
+			id="highlight"
+			allowverticalresize="false"
+			docking="Top Left"
+			priority="1000"
+			tooltipslocalised="true"
+			uniqueguid="518B596F-FDBB-4E47-922AA7E81E5CC55B"
+			currentstate="9A0F8AE1-44AF-4F31-AD8545AB156329E1"
+			defaultstate="9A0F8AE1-44AF-4F31-AD8545AB156329E1">
+			<componentimages>
+				<component_image
+					this="2C40DD2C-6DFD-4444-88EACDFC047B9005"
+					uniqueguid="2C40DD2C-6DFD-4444-88EACDFC047B9005"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="9A0F8AE1-44AF-4F31-AD8545AB156329E1"
+					name="NewState"
+					width="2"
+					height="27"
+					uniqueguid="9A0F8AE1-44AF-4F31-AD8545AB156329E1">
+					<imagemetrics>
+						<image
+							this="78D8D1A2-794A-45AE-A8BDEB51254787D3"
+							uniqueguid="78D8D1A2-794A-45AE-A8BDEB51254787D3"
+							componentimage="2C40DD2C-6DFD-4444-88EACDFC047B9005"
+							width="2"
+							height="27"
+							colour="#FFFFFF64"/>
+					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+		</highlight>
+		<highlight
+			this="8675FEF8-1FCD-4CA5-909F8E091A9390DB"
+			id="highlight"
+			allowverticalresize="false"
+			docking="Top Left"
+			priority="1000"
+			tooltipslocalised="true"
+			uniqueguid="8675FEF8-1FCD-4CA5-909F8E091A9390DB"
+			currentstate="5CE90020-B351-4CE9-B4530E52F22ACF3C"
+			defaultstate="5CE90020-B351-4CE9-B4530E52F22ACF3C">
+			<componentimages>
+				<component_image
+					this="E005093E-361C-4E65-8A2DC031E89C61DB"
+					uniqueguid="E005093E-361C-4E65-8A2DC031E89C61DB"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="5CE90020-B351-4CE9-B4530E52F22ACF3C"
+					name="NewState"
+					width="2"
+					height="27"
+					uniqueguid="5CE90020-B351-4CE9-B4530E52F22ACF3C">
+					<imagemetrics>
+						<image
+							this="F008E611-1979-4272-92F754C7C9ADCFB4"
+							uniqueguid="F008E611-1979-4272-92F754C7C9ADCFB4"
+							componentimage="E005093E-361C-4E65-8A2DC031E89C61DB"
+							width="2"
+							height="27"
+							colour="#FFFFFF64"/>
+					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+		</highlight>
+		<highlight
+			this="C92E58AB-D1CA-418C-93E37497DA11BFC1"
+			id="highlight"
+			allowverticalresize="false"
+			docking="Top Left"
+			priority="1000"
+			tooltipslocalised="true"
+			uniqueguid="C92E58AB-D1CA-418C-93E37497DA11BFC1"
+			currentstate="01BB5463-520E-4A6D-8D3B62CB47CBA2AD"
+			defaultstate="01BB5463-520E-4A6D-8D3B62CB47CBA2AD">
+			<componentimages>
+				<component_image
+					this="EC91265F-51ED-4F59-91173B1801CAA7C0"
+					uniqueguid="EC91265F-51ED-4F59-91173B1801CAA7C0"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="01BB5463-520E-4A6D-8D3B62CB47CBA2AD"
+					name="NewState"
+					width="2"
+					height="27"
+					uniqueguid="01BB5463-520E-4A6D-8D3B62CB47CBA2AD">
+					<imagemetrics>
+						<image
+							this="B429CDFE-D47D-488C-9FD7FC3E25290870"
+							uniqueguid="B429CDFE-D47D-488C-9FD7FC3E25290870"
+							componentimage="EC91265F-51ED-4F59-91173B1801CAA7C0"
+							width="2"
+							height="27"
+							colour="#FFFFFF64"/>
+					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+		</highlight>
+		<highlight
+			this="F4F3873D-E550-4797-BC86A47A900A807F"
+			id="highlight"
+			allowverticalresize="false"
+			docking="Top Left"
+			priority="1000"
+			tooltipslocalised="true"
+			uniqueguid="F4F3873D-E550-4797-BC86A47A900A807F"
+			currentstate="EEE42516-3075-43D2-AD23B6B365793F26"
+			defaultstate="EEE42516-3075-43D2-AD23B6B365793F26">
+			<componentimages>
+				<component_image
+					this="D3784013-AF6B-401A-B41151C5325B68DA"
+					uniqueguid="D3784013-AF6B-401A-B41151C5325B68DA"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="EEE42516-3075-43D2-AD23B6B365793F26"
+					name="NewState"
+					width="2"
+					height="27"
+					uniqueguid="EEE42516-3075-43D2-AD23B6B365793F26">
+					<imagemetrics>
+						<image
+							this="7C93C358-B9B1-4817-A210DC0ABA254B5F"
+							uniqueguid="7C93C358-B9B1-4817-A210DC0ABA254B5F"
+							componentimage="D3784013-AF6B-401A-B41151C5325B68DA"
+							width="2"
+							height="27"
+							colour="#FFFFFF64"/>
+					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+		</highlight>
+		<highlight
+			this="FF2C9921-0BE5-4983-B131EE92E2A7155C"
+			id="highlight"
+			allowverticalresize="false"
+			docking="Top Left"
+			priority="1000"
+			tooltipslocalised="true"
+			uniqueguid="FF2C9921-0BE5-4983-B131EE92E2A7155C"
+			currentstate="CB7D86CA-265F-4AA8-9459956511C2B458"
+			defaultstate="CB7D86CA-265F-4AA8-9459956511C2B458">
+			<componentimages>
+				<component_image
+					this="A0CD7F24-5BFB-4449-8BD34FF705C37ED5"
+					uniqueguid="A0CD7F24-5BFB-4449-8BD34FF705C37ED5"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="CB7D86CA-265F-4AA8-9459956511C2B458"
+					name="NewState"
+					width="2"
+					height="27"
+					uniqueguid="CB7D86CA-265F-4AA8-9459956511C2B458">
+					<imagemetrics>
+						<image
+							this="FE64E62D-3889-4D5C-9D9FCE339A694BED"
+							uniqueguid="FE64E62D-3889-4D5C-9D9FCE339A694BED"
+							componentimage="A0CD7F24-5BFB-4449-8BD34FF705C37ED5"
+							width="2"
+							height="27"
+							colour="#FFFFFF64"/>
+					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+		</highlight>
 		<highlight
 			this="205C56A9-4E97-420F-B122E425E29CBF9D"
 			id="highlight"
@@ -571,28 +780,157 @@
 			</states>
 		</highlight>
 		<label
-			this="02FF3B2E-0758-4A06-A582CF531FF9D06C"
+			this="3FFA38E8-F8C4-4054-A102EBBCE4AC6674"
 			id="label"
+			offset="0.00,105.00"
 			allowverticalresize="false"
 			priority="1000"
 			tooltipslocalised="true"
-			uniqueguid="02FF3B2E-0758-4A06-A582CF531FF9D06C"
-			currentstate="644214D0-29A9-4867-A455457BEBFAACB1"
-			defaultstate="644214D0-29A9-4867-A455457BEBFAACB1">
+			uniqueguid="3FFA38E8-F8C4-4054-A102EBBCE4AC6674"
+			currentstate="BCA66A80-33C7-4AB6-8F8287D830ED2E23"
+			defaultstate="BCA66A80-33C7-4AB6-8F8287D830ED2E23">
 			<states>
 				<default
-					this="644214D0-29A9-4867-A455457BEBFAACB1"
+					this="BCA66A80-33C7-4AB6-8F8287D830ED2E23"
 					name="default"
 					width="230"
 					height="33"
-					uniqueguid="644214D0-29A9-4867-A455457BEBFAACB1">
+					uniqueguid="BCA66A80-33C7-4AB6-8F8287D830ED2E23">
 					<component_text
-						text="Node 1 Offset"
+						text="Node 2 Radius"
 						textvalign="Center"
 						texthalign="Right"
 						textxoffset="0.00,4.00"
 						texthbehaviour="Never split"
-						textlabel="StateText_94b4e102"
+						textlabel="StateText_6ef7d8c5"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</default>
+			</states>
+		</label>
+		<label
+			this="461FDDD3-1700-4B2F-B57E55F906387B23"
+			id="label"
+			offset="0.00,175.00"
+			allowverticalresize="false"
+			priority="1000"
+			tooltipslocalised="true"
+			uniqueguid="461FDDD3-1700-4B2F-B57E55F906387B23"
+			currentstate="034220D7-5B68-414A-8BC7BBCED87DB226"
+			defaultstate="034220D7-5B68-414A-8BC7BBCED87DB226">
+			<states>
+				<default
+					this="034220D7-5B68-414A-8BC7BBCED87DB226"
+					name="default"
+					width="230"
+					height="33"
+					uniqueguid="034220D7-5B68-414A-8BC7BBCED87DB226">
+					<component_text
+						text="Node 3 Radius"
+						textvalign="Center"
+						texthalign="Right"
+						textxoffset="0.00,4.00"
+						texthbehaviour="Never split"
+						textlabel="StateText_758b834a"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</default>
+			</states>
+		</label>
+		<label
+			this="AA83AF0E-BA6C-4728-840FD89D14923FAA"
+			id="label"
+			offset="0.00,70.00"
+			allowverticalresize="false"
+			priority="1000"
+			tooltipslocalised="true"
+			uniqueguid="AA83AF0E-BA6C-4728-840FD89D14923FAA"
+			currentstate="7627A03B-F4AE-4796-985E4AE028D7FA54"
+			defaultstate="7627A03B-F4AE-4796-985E4AE028D7FA54">
+			<states>
+				<default
+					this="7627A03B-F4AE-4796-985E4AE028D7FA54"
+					name="default"
+					width="230"
+					height="33"
+					uniqueguid="7627A03B-F4AE-4796-985E4AE028D7FA54">
+					<component_text
+						text="Node 2 Offset"
+						textvalign="Center"
+						texthalign="Right"
+						textxoffset="0.00,4.00"
+						texthbehaviour="Never split"
+						textlabel="StateText_d3c19a19"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</default>
+			</states>
+		</label>
+		<label
+			this="1260F091-F936-4839-8A3ECAFC719AA5EF"
+			id="label"
+			offset="0.00,245.00"
+			allowverticalresize="false"
+			priority="1000"
+			tooltipslocalised="true"
+			uniqueguid="1260F091-F936-4839-8A3ECAFC719AA5EF"
+			currentstate="11669CD7-70A9-4997-94B119BA7E5500AF"
+			defaultstate="11669CD7-70A9-4997-94B119BA7E5500AF">
+			<states>
+				<default
+					this="11669CD7-70A9-4997-94B119BA7E5500AF"
+					name="default"
+					width="230"
+					height="33"
+					uniqueguid="11669CD7-70A9-4997-94B119BA7E5500AF">
+					<component_text
+						text="Head offset"
+						textvalign="Center"
+						texthalign="Right"
+						textxoffset="0.00,4.00"
+						texthbehaviour="Never split"
+						textlabel="StateText_e243733a"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</default>
+			</states>
+		</label>
+		<label
+			this="B9FE8B0E-26AB-4EE2-B0E27AEBBB26591B"
+			id="label"
+			offset="0.00,210.00"
+			allowverticalresize="false"
+			priority="1000"
+			tooltipslocalised="true"
+			uniqueguid="B9FE8B0E-26AB-4EE2-B0E27AEBBB26591B"
+			currentstate="14F5ECEF-A939-4A42-AD0613B9D978C81C"
+			defaultstate="14F5ECEF-A939-4A42-AD0613B9D978C81C">
+			<states>
+				<default
+					this="14F5ECEF-A939-4A42-AD0613B9D978C81C"
+					name="default"
+					width="230"
+					height="33"
+					uniqueguid="14F5ECEF-A939-4A42-AD0613B9D978C81C">
+					<component_text
+						text="Max articulation angle"
+						textvalign="Center"
+						texthalign="Right"
+						textxoffset="0.00,4.00"
+						texthbehaviour="Never split"
+						textlabel="StateText_db243415"
 						font_m_font_name="dev_font"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
@@ -625,6 +963,69 @@
 						textxoffset="0.00,4.00"
 						texthbehaviour="Never split"
 						textlabel="StateText_fb940e7f"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</default>
+			</states>
+		</label>
+		<label
+			this="02FF3B2E-0758-4A06-A582CF531FF9D06C"
+			id="label"
+			allowverticalresize="false"
+			priority="1000"
+			tooltipslocalised="true"
+			uniqueguid="02FF3B2E-0758-4A06-A582CF531FF9D06C"
+			currentstate="644214D0-29A9-4867-A455457BEBFAACB1"
+			defaultstate="644214D0-29A9-4867-A455457BEBFAACB1">
+			<states>
+				<default
+					this="644214D0-29A9-4867-A455457BEBFAACB1"
+					name="default"
+					width="230"
+					height="33"
+					uniqueguid="644214D0-29A9-4867-A455457BEBFAACB1">
+					<component_text
+						text="Node 1 Offset"
+						textvalign="Center"
+						texthalign="Right"
+						textxoffset="0.00,4.00"
+						texthbehaviour="Never split"
+						textlabel="StateText_94b4e102"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</default>
+			</states>
+		</label>
+		<label
+			this="1E174DB0-CD53-4FED-A82C268869FB15CB"
+			id="label"
+			offset="0.00,140.00"
+			allowverticalresize="false"
+			priority="1000"
+			tooltipslocalised="true"
+			uniqueguid="1E174DB0-CD53-4FED-A82C268869FB15CB"
+			currentstate="2ABC68EB-E395-42FC-A7857CBEE00D5C84"
+			defaultstate="2ABC68EB-E395-42FC-A7857CBEE00D5C84">
+			<states>
+				<default
+					this="2ABC68EB-E395-42FC-A7857CBEE00D5C84"
+					name="default"
+					width="230"
+					height="33"
+					uniqueguid="2ABC68EB-E395-42FC-A7857CBEE00D5C84">
+					<component_text
+						text="Node 3 Offset"
+						textvalign="Center"
+						texthalign="Right"
+						textxoffset="0.00,4.00"
+						texthbehaviour="Never split"
+						textlabel="StateText_cc4fdc28"
 						font_m_font_name="dev_font"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
@@ -770,574 +1171,37 @@
 				</active>
 			</states>
 		</label_unit_record_key>
-		<text_input_dist
-			this="CDD85939-06C1-485D-BFC436B1869A7D91"
-			id="text_input_dist"
-			offset="230.00,0.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			priority="1000"
+		<root
+			this="AEE2C3DF-3B4C-42BF-BF249E0A07A32725"
+			id="root"
 			tooltipslocalised="true"
-			uniqueguid="CDD85939-06C1-485D-BFC436B1869A7D91"
-			currentstate="AA38930C-E5B9-48F0-888DA86CEBC7FE52"
-			defaultstate="AA38930C-E5B9-48F0-888DA86CEBC7FE52">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="TextInput"
-					context_object_id="CcoBattleUnit"
-					context_function_id="UnitRecordContext.UnitLandRecordContext.ArticulatedRecordContext.ArticulationNode1Offset"/>
-				<callback_with_context
-					callback_id="ContextCommandTextInputChanged"
-					context_object_id="CcoBattleEntity"
-					context_function_id="DevSetArticulationOffset(1, &quot;%S&quot;)"/>
-			</callbackwithcontextlist>
+			uniqueguid="AEE2C3DF-3B4C-42BF-BF249E0A07A32725"
+			currentstate="E71B6B07-DD2C-45F9-BAFB2ED87C1D6A32"
+			defaultstate="E71B6B07-DD2C-45F9-BAFB2ED87C1D6A32">
 			<componentimages>
 				<component_image
-					this="7A4538F0-8D6C-4746-8D2269C08BF75D13"
-					uniqueguid="7A4538F0-8D6C-4746-8D2269C08BF75D13"
-					imagepath="ui/skins/default/dev/black_frame_2px.png"/>
-				<component_image
-					this="7678A55A-D725-41DE-B058326E3B825D1D"
-					uniqueguid="7678A55A-D725-41DE-B058326E3B825D1D"/>
+					this="51286E18-8FB8-42C5-976307BBE58B0074"
+					uniqueguid="51286E18-8FB8-42C5-976307BBE58B0074"/>
 			</componentimages>
-			<states>
-				<active
-					this="AA38930C-E5B9-48F0-888DA86CEBC7FE52"
-					name="active"
-					width="142"
-					height="33"
-					focustype="Active"
-					interactive="true"
-					uniqueguid="AA38930C-E5B9-48F0-888DA86CEBC7FE52"
-					stateeditordisplaypos="183.00,75.00">
-					<imagemetrics>
-						<image
-							this="740BF92B-4936-4902-97C0B57F4EE72D8A"
-							uniqueguid="740BF92B-4936-4902-97C0B57F4EE72D8A"
-							componentimage="7678A55A-D725-41DE-B058326E3B825D1D"
-							width="142"
-							height="33"
-							colour="#282828FF"/>
-						<image
-							this="627232D3-8833-4AD8-A53534B4F6855197"
-							uniqueguid="627232D3-8833-4AD8-A53534B4F6855197"
-							componentimage="7A4538F0-8D6C-4746-8D2269C08BF75D13"
-							width="142"
-							height="33"
-							margin="10.00,10.00,10.00,10.00"/>
-					</imagemetrics>
-					<component_text
-						textvalign="Center"
-						textxoffset="5.00,0.00"
-						texthbehaviour="Never split"
-						font_m_font_name="dev_font"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="dev_text"/>
-				</active>
-			</states>
-		</text_input_dist>
-		<text_input_theta
-			this="A65BFBB2-4BA0-4AD4-BAC5AD10EE2B8CC0"
-			id="text_input_theta"
-			offset="230.00,35.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			priority="1000"
-			tooltipslocalised="true"
-			uniqueguid="A65BFBB2-4BA0-4AD4-BAC5AD10EE2B8CC0"
-			currentstate="59B07349-D91A-4A07-B7A8CF0B96831601"
-			defaultstate="59B07349-D91A-4A07-B7A8CF0B96831601">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="TextInput"
-					context_object_id="CcoBattleUnit"
-					context_function_id="UnitRecordContext.UnitLandRecordContext.ArticulatedRecordContext.ArticulationNode1Radius"/>
-				<callback_with_context
-					callback_id="ContextCommandTextInputChanged"
-					context_object_id="CcoBattleEntity"
-					context_function_id="DevSetArticulationRadius(1, &quot;%S&quot;)"/>
-			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="F54A94F0-0B4C-44FD-9E8735866E636D82"
-					uniqueguid="F54A94F0-0B4C-44FD-9E8735866E636D82"
-					imagepath="ui/skins/default/dev/black_frame_2px.png"/>
-				<component_image
-					this="7703D4A8-13A3-4014-9624B1A15BCA556F"
-					uniqueguid="7703D4A8-13A3-4014-9624B1A15BCA556F"/>
-			</componentimages>
-			<states>
-				<active
-					this="59B07349-D91A-4A07-B7A8CF0B96831601"
-					name="active"
-					width="142"
-					height="33"
-					focustype="Active"
-					interactive="true"
-					uniqueguid="59B07349-D91A-4A07-B7A8CF0B96831601"
-					stateeditordisplaypos="183.00,75.00">
-					<imagemetrics>
-						<image
-							this="2543BF1C-60BF-423C-9FB7674E8568377E"
-							uniqueguid="2543BF1C-60BF-423C-9FB7674E8568377E"
-							componentimage="7703D4A8-13A3-4014-9624B1A15BCA556F"
-							width="142"
-							height="33"
-							colour="#282828FF"/>
-						<image
-							this="B0D94D05-C7EA-4CFF-8A0CD5477EB39D40"
-							uniqueguid="B0D94D05-C7EA-4CFF-8A0CD5477EB39D40"
-							componentimage="F54A94F0-0B4C-44FD-9E8735866E636D82"
-							width="142"
-							height="33"
-							margin="10.00,10.00,10.00,10.00"/>
-					</imagemetrics>
-					<component_text
-						textvalign="Center"
-						textxoffset="5.00,0.00"
-						texthbehaviour="Never split"
-						font_m_font_name="dev_font"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="dev_text"/>
-				</active>
-			</states>
-		</text_input_theta>
-		<highlight
-			this="8675FEF8-1FCD-4CA5-909F8E091A9390DB"
-			id="highlight"
-			allowverticalresize="false"
-			docking="Top Left"
-			priority="1000"
-			tooltipslocalised="true"
-			uniqueguid="8675FEF8-1FCD-4CA5-909F8E091A9390DB"
-			currentstate="5CE90020-B351-4CE9-B4530E52F22ACF3C"
-			defaultstate="5CE90020-B351-4CE9-B4530E52F22ACF3C">
-			<componentimages>
-				<component_image
-					this="E005093E-361C-4E65-8A2DC031E89C61DB"
-					uniqueguid="E005093E-361C-4E65-8A2DC031E89C61DB"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="5CE90020-B351-4CE9-B4530E52F22ACF3C"
-					name="NewState"
-					width="2"
-					height="27"
-					uniqueguid="5CE90020-B351-4CE9-B4530E52F22ACF3C">
-					<imagemetrics>
-						<image
-							this="F008E611-1979-4272-92F754C7C9ADCFB4"
-							uniqueguid="F008E611-1979-4272-92F754C7C9ADCFB4"
-							componentimage="E005093E-361C-4E65-8A2DC031E89C61DB"
-							width="2"
-							height="27"
-							colour="#FFFFFF64"/>
-					</imagemetrics>
-					<component_text
-						texthbehaviour="Never split"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
-			</states>
-		</highlight>
-		<highlight
-			this="518B596F-FDBB-4E47-922AA7E81E5CC55B"
-			id="highlight"
-			allowverticalresize="false"
-			docking="Top Left"
-			priority="1000"
-			tooltipslocalised="true"
-			uniqueguid="518B596F-FDBB-4E47-922AA7E81E5CC55B"
-			currentstate="9A0F8AE1-44AF-4F31-AD8545AB156329E1"
-			defaultstate="9A0F8AE1-44AF-4F31-AD8545AB156329E1">
-			<componentimages>
-				<component_image
-					this="2C40DD2C-6DFD-4444-88EACDFC047B9005"
-					uniqueguid="2C40DD2C-6DFD-4444-88EACDFC047B9005"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="9A0F8AE1-44AF-4F31-AD8545AB156329E1"
-					name="NewState"
-					width="2"
-					height="27"
-					uniqueguid="9A0F8AE1-44AF-4F31-AD8545AB156329E1">
-					<imagemetrics>
-						<image
-							this="78D8D1A2-794A-45AE-A8BDEB51254787D3"
-							uniqueguid="78D8D1A2-794A-45AE-A8BDEB51254787D3"
-							componentimage="2C40DD2C-6DFD-4444-88EACDFC047B9005"
-							width="2"
-							height="27"
-							colour="#FFFFFF64"/>
-					</imagemetrics>
-					<component_text
-						texthbehaviour="Never split"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
-			</states>
-		</highlight>
-		<highlight
-			this="F4F3873D-E550-4797-BC86A47A900A807F"
-			id="highlight"
-			allowverticalresize="false"
-			docking="Top Left"
-			priority="1000"
-			tooltipslocalised="true"
-			uniqueguid="F4F3873D-E550-4797-BC86A47A900A807F"
-			currentstate="EEE42516-3075-43D2-AD23B6B365793F26"
-			defaultstate="EEE42516-3075-43D2-AD23B6B365793F26">
-			<componentimages>
-				<component_image
-					this="D3784013-AF6B-401A-B41151C5325B68DA"
-					uniqueguid="D3784013-AF6B-401A-B41151C5325B68DA"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="EEE42516-3075-43D2-AD23B6B365793F26"
-					name="NewState"
-					width="2"
-					height="27"
-					uniqueguid="EEE42516-3075-43D2-AD23B6B365793F26">
-					<imagemetrics>
-						<image
-							this="7C93C358-B9B1-4817-A210DC0ABA254B5F"
-							uniqueguid="7C93C358-B9B1-4817-A210DC0ABA254B5F"
-							componentimage="D3784013-AF6B-401A-B41151C5325B68DA"
-							width="2"
-							height="27"
-							colour="#FFFFFF64"/>
-					</imagemetrics>
-					<component_text
-						texthbehaviour="Never split"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
-			</states>
-		</highlight>
-		<highlight
-			this="FF2C9921-0BE5-4983-B131EE92E2A7155C"
-			id="highlight"
-			allowverticalresize="false"
-			docking="Top Left"
-			priority="1000"
-			tooltipslocalised="true"
-			uniqueguid="FF2C9921-0BE5-4983-B131EE92E2A7155C"
-			currentstate="CB7D86CA-265F-4AA8-9459956511C2B458"
-			defaultstate="CB7D86CA-265F-4AA8-9459956511C2B458">
-			<componentimages>
-				<component_image
-					this="A0CD7F24-5BFB-4449-8BD34FF705C37ED5"
-					uniqueguid="A0CD7F24-5BFB-4449-8BD34FF705C37ED5"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="CB7D86CA-265F-4AA8-9459956511C2B458"
-					name="NewState"
-					width="2"
-					height="27"
-					uniqueguid="CB7D86CA-265F-4AA8-9459956511C2B458">
-					<imagemetrics>
-						<image
-							this="FE64E62D-3889-4D5C-9D9FCE339A694BED"
-							uniqueguid="FE64E62D-3889-4D5C-9D9FCE339A694BED"
-							componentimage="A0CD7F24-5BFB-4449-8BD34FF705C37ED5"
-							width="2"
-							height="27"
-							colour="#FFFFFF64"/>
-					</imagemetrics>
-					<component_text
-						texthbehaviour="Never split"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
-			</states>
-		</highlight>
-		<highlight
-			this="C92E58AB-D1CA-418C-93E37497DA11BFC1"
-			id="highlight"
-			allowverticalresize="false"
-			docking="Top Left"
-			priority="1000"
-			tooltipslocalised="true"
-			uniqueguid="C92E58AB-D1CA-418C-93E37497DA11BFC1"
-			currentstate="01BB5463-520E-4A6D-8D3B62CB47CBA2AD"
-			defaultstate="01BB5463-520E-4A6D-8D3B62CB47CBA2AD">
-			<componentimages>
-				<component_image
-					this="EC91265F-51ED-4F59-91173B1801CAA7C0"
-					uniqueguid="EC91265F-51ED-4F59-91173B1801CAA7C0"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="01BB5463-520E-4A6D-8D3B62CB47CBA2AD"
-					name="NewState"
-					width="2"
-					height="27"
-					uniqueguid="01BB5463-520E-4A6D-8D3B62CB47CBA2AD">
-					<imagemetrics>
-						<image
-							this="B429CDFE-D47D-488C-9FD7FC3E25290870"
-							uniqueguid="B429CDFE-D47D-488C-9FD7FC3E25290870"
-							componentimage="EC91265F-51ED-4F59-91173B1801CAA7C0"
-							width="2"
-							height="27"
-							colour="#FFFFFF64"/>
-					</imagemetrics>
-					<component_text
-						texthbehaviour="Never split"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
-			</states>
-		</highlight>
-		<highlight
-			this="4409A147-BA37-4550-96B0522E24707EA5"
-			id="highlight"
-			allowverticalresize="false"
-			docking="Top Left"
-			priority="1000"
-			tooltipslocalised="true"
-			uniqueguid="4409A147-BA37-4550-96B0522E24707EA5"
-			currentstate="DB2C6A9C-50BE-4404-977D71640F6F99A5"
-			defaultstate="DB2C6A9C-50BE-4404-977D71640F6F99A5">
-			<componentimages>
-				<component_image
-					this="21BEDB8A-D9E4-4A15-BC0CDF914A0F019A"
-					uniqueguid="21BEDB8A-D9E4-4A15-BC0CDF914A0F019A"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="DB2C6A9C-50BE-4404-977D71640F6F99A5"
-					name="NewState"
-					width="2"
-					height="27"
-					uniqueguid="DB2C6A9C-50BE-4404-977D71640F6F99A5">
-					<imagemetrics>
-						<image
-							this="63074DE1-94B4-4D1F-9FE988F7D2135458"
-							uniqueguid="63074DE1-94B4-4D1F-9FE988F7D2135458"
-							componentimage="21BEDB8A-D9E4-4A15-BC0CDF914A0F019A"
-							width="2"
-							height="27"
-							colour="#FFFFFF64"/>
-					</imagemetrics>
-					<component_text
-						texthbehaviour="Never split"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
-			</states>
-		</highlight>
-		<label
-			this="AA83AF0E-BA6C-4728-840FD89D14923FAA"
-			id="label"
-			offset="0.00,70.00"
-			allowverticalresize="false"
-			priority="1000"
-			tooltipslocalised="true"
-			uniqueguid="AA83AF0E-BA6C-4728-840FD89D14923FAA"
-			currentstate="7627A03B-F4AE-4796-985E4AE028D7FA54"
-			defaultstate="7627A03B-F4AE-4796-985E4AE028D7FA54">
 			<states>
 				<default
-					this="7627A03B-F4AE-4796-985E4AE028D7FA54"
+					this="E71B6B07-DD2C-45F9-BAFB2ED87C1D6A32"
 					name="default"
-					width="230"
-					height="33"
-					uniqueguid="7627A03B-F4AE-4796-985E4AE028D7FA54">
-					<component_text
-						text="Node 2 Offset"
-						textvalign="Center"
-						texthalign="Right"
-						textxoffset="0.00,4.00"
-						texthbehaviour="Never split"
-						textlabel="StateText_d3c19a19"
-						font_m_font_name="dev_font"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="dev_text"/>
+					width="1600"
+					height="900"
+					uniqueguid="E71B6B07-DD2C-45F9-BAFB2ED87C1D6A32">
+					<imagemetrics>
+						<image
+							this="F1C87F04-CB27-4047-B2AFEA8362FD5A20"
+							uniqueguid="F1C87F04-CB27-4047-B2AFEA8362FD5A20"
+							componentimage="51286E18-8FB8-42C5-976307BBE58B0074"
+							width="1600"
+							height="900"
+							colour="#808080FF"/>
+					</imagemetrics>
 				</default>
 			</states>
-		</label>
-		<label
-			this="3FFA38E8-F8C4-4054-A102EBBCE4AC6674"
-			id="label"
-			offset="0.00,105.00"
-			allowverticalresize="false"
-			priority="1000"
-			tooltipslocalised="true"
-			uniqueguid="3FFA38E8-F8C4-4054-A102EBBCE4AC6674"
-			currentstate="BCA66A80-33C7-4AB6-8F8287D830ED2E23"
-			defaultstate="BCA66A80-33C7-4AB6-8F8287D830ED2E23">
-			<states>
-				<default
-					this="BCA66A80-33C7-4AB6-8F8287D830ED2E23"
-					name="default"
-					width="230"
-					height="33"
-					uniqueguid="BCA66A80-33C7-4AB6-8F8287D830ED2E23">
-					<component_text
-						text="Node 2 Radius"
-						textvalign="Center"
-						texthalign="Right"
-						textxoffset="0.00,4.00"
-						texthbehaviour="Never split"
-						textlabel="StateText_6ef7d8c5"
-						font_m_font_name="dev_font"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="dev_text"/>
-				</default>
-			</states>
-		</label>
-		<label
-			this="1E174DB0-CD53-4FED-A82C268869FB15CB"
-			id="label"
-			offset="0.00,140.00"
-			allowverticalresize="false"
-			priority="1000"
-			tooltipslocalised="true"
-			uniqueguid="1E174DB0-CD53-4FED-A82C268869FB15CB"
-			currentstate="2ABC68EB-E395-42FC-A7857CBEE00D5C84"
-			defaultstate="2ABC68EB-E395-42FC-A7857CBEE00D5C84">
-			<states>
-				<default
-					this="2ABC68EB-E395-42FC-A7857CBEE00D5C84"
-					name="default"
-					width="230"
-					height="33"
-					uniqueguid="2ABC68EB-E395-42FC-A7857CBEE00D5C84">
-					<component_text
-						text="Node 3 Offset"
-						textvalign="Center"
-						texthalign="Right"
-						textxoffset="0.00,4.00"
-						texthbehaviour="Never split"
-						textlabel="StateText_cc4fdc28"
-						font_m_font_name="dev_font"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="dev_text"/>
-				</default>
-			</states>
-		</label>
-		<label
-			this="461FDDD3-1700-4B2F-B57E55F906387B23"
-			id="label"
-			offset="0.00,175.00"
-			allowverticalresize="false"
-			priority="1000"
-			tooltipslocalised="true"
-			uniqueguid="461FDDD3-1700-4B2F-B57E55F906387B23"
-			currentstate="034220D7-5B68-414A-8BC7BBCED87DB226"
-			defaultstate="034220D7-5B68-414A-8BC7BBCED87DB226">
-			<states>
-				<default
-					this="034220D7-5B68-414A-8BC7BBCED87DB226"
-					name="default"
-					width="230"
-					height="33"
-					uniqueguid="034220D7-5B68-414A-8BC7BBCED87DB226">
-					<component_text
-						text="Node 3 Radius"
-						textvalign="Center"
-						texthalign="Right"
-						textxoffset="0.00,4.00"
-						texthbehaviour="Never split"
-						textlabel="StateText_758b834a"
-						font_m_font_name="dev_font"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="dev_text"/>
-				</default>
-			</states>
-		</label>
-		<label
-			this="B9FE8B0E-26AB-4EE2-B0E27AEBBB26591B"
-			id="label"
-			offset="0.00,210.00"
-			allowverticalresize="false"
-			priority="1000"
-			tooltipslocalised="true"
-			uniqueguid="B9FE8B0E-26AB-4EE2-B0E27AEBBB26591B"
-			currentstate="14F5ECEF-A939-4A42-AD0613B9D978C81C"
-			defaultstate="14F5ECEF-A939-4A42-AD0613B9D978C81C">
-			<states>
-				<default
-					this="14F5ECEF-A939-4A42-AD0613B9D978C81C"
-					name="default"
-					width="230"
-					height="33"
-					uniqueguid="14F5ECEF-A939-4A42-AD0613B9D978C81C">
-					<component_text
-						text="Max articulation angle"
-						textvalign="Center"
-						texthalign="Right"
-						textxoffset="0.00,4.00"
-						texthbehaviour="Never split"
-						textlabel="StateText_db243415"
-						font_m_font_name="dev_font"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="dev_text"/>
-				</default>
-			</states>
-		</label>
-		<label
-			this="1260F091-F936-4839-8A3ECAFC719AA5EF"
-			id="label"
-			offset="0.00,245.00"
-			allowverticalresize="false"
-			priority="1000"
-			tooltipslocalised="true"
-			uniqueguid="1260F091-F936-4839-8A3ECAFC719AA5EF"
-			currentstate="11669CD7-70A9-4997-94B119BA7E5500AF"
-			defaultstate="11669CD7-70A9-4997-94B119BA7E5500AF">
-			<states>
-				<default
-					this="11669CD7-70A9-4997-94B119BA7E5500AF"
-					name="default"
-					width="230"
-					height="33"
-					uniqueguid="11669CD7-70A9-4997-94B119BA7E5500AF">
-					<component_text
-						text="Head offset"
-						textvalign="Center"
-						texthalign="Right"
-						textxoffset="0.00,4.00"
-						texthbehaviour="Never split"
-						textlabel="StateText_e243733a"
-						font_m_font_name="dev_font"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="dev_text"/>
-				</default>
-			</states>
-		</label>
+		</root>
 		<text_input_2_offset
 			this="64A239A8-C64A-4670-A5FBFF9119331006"
 			id="text_input_2_offset"
@@ -1678,6 +1542,74 @@
 				</active>
 			</states>
 		</text_input_articulation_angle>
+		<text_input_dist
+			this="CDD85939-06C1-485D-BFC436B1869A7D91"
+			id="text_input_dist"
+			offset="230.00,0.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="1000"
+			tooltipslocalised="true"
+			uniqueguid="CDD85939-06C1-485D-BFC436B1869A7D91"
+			currentstate="AA38930C-E5B9-48F0-888DA86CEBC7FE52"
+			defaultstate="AA38930C-E5B9-48F0-888DA86CEBC7FE52">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="TextInput"
+					context_object_id="CcoBattleUnit"
+					context_function_id="UnitRecordContext.UnitLandRecordContext.ArticulatedRecordContext.ArticulationNode1Offset"/>
+				<callback_with_context
+					callback_id="ContextCommandTextInputChanged"
+					context_object_id="CcoBattleEntity"
+					context_function_id="DevSetArticulationOffset(1, &quot;%S&quot;)"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="7A4538F0-8D6C-4746-8D2269C08BF75D13"
+					uniqueguid="7A4538F0-8D6C-4746-8D2269C08BF75D13"
+					imagepath="ui/skins/default/dev/black_frame_2px.png"/>
+				<component_image
+					this="7678A55A-D725-41DE-B058326E3B825D1D"
+					uniqueguid="7678A55A-D725-41DE-B058326E3B825D1D"/>
+			</componentimages>
+			<states>
+				<active
+					this="AA38930C-E5B9-48F0-888DA86CEBC7FE52"
+					name="active"
+					width="142"
+					height="33"
+					focustype="Active"
+					interactive="true"
+					uniqueguid="AA38930C-E5B9-48F0-888DA86CEBC7FE52"
+					stateeditordisplaypos="183.00,75.00">
+					<imagemetrics>
+						<image
+							this="740BF92B-4936-4902-97C0B57F4EE72D8A"
+							uniqueguid="740BF92B-4936-4902-97C0B57F4EE72D8A"
+							componentimage="7678A55A-D725-41DE-B058326E3B825D1D"
+							width="142"
+							height="33"
+							colour="#282828FF"/>
+						<image
+							this="627232D3-8833-4AD8-A53534B4F6855197"
+							uniqueguid="627232D3-8833-4AD8-A53534B4F6855197"
+							componentimage="7A4538F0-8D6C-4746-8D2269C08BF75D13"
+							width="142"
+							height="33"
+							margin="10.00,10.00,10.00,10.00"/>
+					</imagemetrics>
+					<component_text
+						textvalign="Center"
+						textxoffset="5.00,0.00"
+						texthbehaviour="Never split"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</active>
+			</states>
+		</text_input_dist>
 		<text_input_head_offset
 			this="306E7309-7811-4555-BF9936DBCA1A374F"
 			id="text_input_head_offset"
@@ -1746,5 +1678,73 @@
 				</active>
 			</states>
 		</text_input_head_offset>
+		<text_input_theta
+			this="A65BFBB2-4BA0-4AD4-BAC5AD10EE2B8CC0"
+			id="text_input_theta"
+			offset="230.00,35.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="1000"
+			tooltipslocalised="true"
+			uniqueguid="A65BFBB2-4BA0-4AD4-BAC5AD10EE2B8CC0"
+			currentstate="59B07349-D91A-4A07-B7A8CF0B96831601"
+			defaultstate="59B07349-D91A-4A07-B7A8CF0B96831601">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="TextInput"
+					context_object_id="CcoBattleUnit"
+					context_function_id="UnitRecordContext.UnitLandRecordContext.ArticulatedRecordContext.ArticulationNode1Radius"/>
+				<callback_with_context
+					callback_id="ContextCommandTextInputChanged"
+					context_object_id="CcoBattleEntity"
+					context_function_id="DevSetArticulationRadius(1, &quot;%S&quot;)"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="F54A94F0-0B4C-44FD-9E8735866E636D82"
+					uniqueguid="F54A94F0-0B4C-44FD-9E8735866E636D82"
+					imagepath="ui/skins/default/dev/black_frame_2px.png"/>
+				<component_image
+					this="7703D4A8-13A3-4014-9624B1A15BCA556F"
+					uniqueguid="7703D4A8-13A3-4014-9624B1A15BCA556F"/>
+			</componentimages>
+			<states>
+				<active
+					this="59B07349-D91A-4A07-B7A8CF0B96831601"
+					name="active"
+					width="142"
+					height="33"
+					focustype="Active"
+					interactive="true"
+					uniqueguid="59B07349-D91A-4A07-B7A8CF0B96831601"
+					stateeditordisplaypos="183.00,75.00">
+					<imagemetrics>
+						<image
+							this="2543BF1C-60BF-423C-9FB7674E8568377E"
+							uniqueguid="2543BF1C-60BF-423C-9FB7674E8568377E"
+							componentimage="7703D4A8-13A3-4014-9624B1A15BCA556F"
+							width="142"
+							height="33"
+							colour="#282828FF"/>
+						<image
+							this="B0D94D05-C7EA-4CFF-8A0CD5477EB39D40"
+							uniqueguid="B0D94D05-C7EA-4CFF-8A0CD5477EB39D40"
+							componentimage="F54A94F0-0B4C-44FD-9E8735866E636D82"
+							width="142"
+							height="33"
+							margin="10.00,10.00,10.00,10.00"/>
+					</imagemetrics>
+					<component_text
+						textvalign="Center"
+						textxoffset="5.00,0.00"
+						texthbehaviour="Never split"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</active>
+			</states>
+		</text_input_theta>
 	</components>
 </layout>

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -29,6 +29,80 @@
 		</root>
 	</hierarchy>
 	<components>
+		<auto_resizing_comp
+			this="FA4D4A4D-2538-4313-95B733F28C20A5F5"
+			id="auto_resizing_comp"
+			part_of_template="true"
+			uniqueguid_in_template="9F4A9EBE-A605-40E1-AACEB22402830771"
+			uniqueguid="FA4D4A4D-2538-4313-95B733F28C20A5F5"
+			dimensions="425.00,3.00"
+			dock_point="Center">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="51F9E961-F76B-4FEE-9B24784ED4C8BA02"/>
+			</state_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</auto_resizing_comp>
+		<bar_extents_and_pos
+			this="EFA43A29-911F-41C2-BD29E73F36DF4C60"
+			id="bar_extents_and_pos"
+			part_of_template="true"
+			uniqueguid_in_template="3F331065-E782-467B-804031161278DDBC"
+			uniqueguid="EFA43A29-911F-41C2-BD29E73F36DF4C60"
+			dimensions="425.00,3.00"
+			offset="7.00,8.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="A13EB8B2-F05A-4CC9-A87E9EF01598A5EE"/>
+			</state_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</bar_extents_and_pos>
+		<completed_comp
+			this="8A2D9B9B-D532-4D01-AEDF5A12891060FB"
+			id="completed_comp"
+			part_of_template="true"
+			uniqueguid_in_template="DE8557ED-0386-4BFF-87237559FEB7164F"
+			uniqueguid="8A2D9B9B-D532-4D01-AEDF5A12891060FB"
+			dimensions="425.00,3.00"
+			dock_point="Center">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="0D21E59A-ECD6-44C6-838078536BFE847C"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/sticky_bar_fill.png"
+					uniqueguid="338FDFC5-A0F3-4AE4-94E14BE39D80B3E4"/>
+			</component_image_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+				<element value="ui/skins/default/sticky_bar_fill.png"/>
+			</override_images>
+		</completed_comp>
 		<description
 			this="AE536906-804D-42E8-99F7DF4C59057E88"
 			id="description"
@@ -71,40 +145,53 @@
 				</newstate>
 			</states>
 		</description>
-		<completed_comp
-			this="8A2D9B9B-D532-4D01-AEDF5A12891060FB"
-			id="completed_comp"
-			part_of_template="true"
-			uniqueguid_in_template="DE8557ED-0386-4BFF-87237559FEB7164F"
-			uniqueguid="8A2D9B9B-D532-4D01-AEDF5A12891060FB"
-			dimensions="425.00,3.00"
-			dock_point="Center">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="0D21E59A-ECD6-44C6-838078536BFE847C"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/sticky_bar_fill.png"
-					uniqueguid="338FDFC5-A0F3-4AE4-94E14BE39D80B3E4"/>
-			</component_image_uniqueguids>
-			<user_properties>
-				<property
-					name="disable_override0"
-					value="position"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value=""/>
-				<element value="ui/skins/default/sticky_bar_fill.png"/>
-			</override_images>
-		</completed_comp>
+		<dy_threshold_requirement
+			this="24276DF5-2957-4018-A36A116A6735B481"
+			id="dy_threshold_requirement"
+			offset="0.00,108.00"
+			allowhorizontalresize="false"
+			visible="false"
+			tooltipslocalised="true"
+			uniqueguid="24276DF5-2957-4018-A36A116A6735B481"
+			currentstate="43274685-B91E-48DE-86221729FC7AE8B7"
+			defaultstate="43274685-B91E-48DE-86221729FC7AE8B7">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoPooledResourceThresholdOperationSetRecord"
+					context_function_id="Format(Loc(&quot;effect_bundle_pooled_resource_threshold_operation_requirement&quot;), PooledResourceList.FirstContext.IconPath, LowerBound, PooledResourceList.FirstContext.Name)"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_function_id="IsContextValid(StoredContextFromParent(&quot;CcoPooledResourceThresholdOperationSetRecord&quot;))">
+					<child_m_user_properties>
+						<property
+							name="object_store_events"
+							value="^2"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="43274685-B91E-48DE-86221729FC7AE8B7"
+					name="NewState"
+					width="440"
+					height="26"
+					uniqueguid="43274685-B91E-48DE-86221729FC7AE8B7">
+					<component_text
+						text="dy_threshold_requirement"
+						textvalign="Bottom"
+						textxoffset="12.00,8.00"
+						textyoffset="2.00,8.00"
+						texthbehaviour="Resize"
+						textlabel="dy_threshold_requirement_NewState_Text_93147e2c"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+				</newstate>
+			</states>
+		</dy_threshold_requirement>
 		<effect_list
 			this="D73F7D71-8D39-4259-B567C8B603D0A5AD"
 			id="effect_list"
@@ -136,6 +223,57 @@
 				</columnwidths>
 			</LayoutEngine>
 		</effect_list>
+		<icon
+			this="B7D0C78A-0053-45DB-A8860F7874EDC0EB"
+			id="icon"
+			offset="14.00,0.00"
+			docking="Top Left"
+			dock_offset="14.00,0.00"
+			tooltipslocalised="true"
+			uniqueguid="B7D0C78A-0053-45DB-A8860F7874EDC0EB"
+			currentstate="E801AFB0-8031-4271-8122C02A8ACFE997"
+			defaultstate="E801AFB0-8031-4271-8122C02A8ACFE997">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoEffect"
+					context_function_id="IconPath"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="9844D19E-B4DF-465B-9859EF79CA686053"
+					uniqueguid="9844D19E-B4DF-465B-9859EF79CA686053"
+					imagepath="ui/skins/default/construction_positive.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="E801AFB0-8031-4271-8122C02A8ACFE997"
+					name="NewState"
+					width="50"
+					height="10"
+					uniqueguid="E801AFB0-8031-4271-8122C02A8ACFE997">
+					<imagemetrics>
+						<image
+							this="46B86640-FBF4-4CE9-A798D2901474320F"
+							uniqueguid="46B86640-FBF4-4CE9-A798D2901474320F"
+							componentimage="9844D19E-B4DF-465B-9859EF79CA686053"
+							width="24"
+							height="24"
+							dockpoint="Top Left"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<component_text
+						textxoffset="44.00,6.00"
+						textyoffset="4.00,6.00"
+						texthbehaviour="Resize"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+		</icon>
 		<in_progress_comp
 			this="37D32242-CDDE-4FDC-B6397A24A2CB0A1F"
 			id="in_progress_comp"
@@ -171,72 +309,6 @@
 				<element value="ui/skins/default/sticky_bar_fill.png"/>
 			</override_images>
 		</in_progress_comp>
-		<stick_progress_bar
-			this="43BA71A4-22B3-4122-8C143E413BC4E120"
-			id="stick_progress_bar"
-			template_id="stick_progress_bar"
-			part_of_template="true"
-			uniqueguid_in_template="B5D91471-862C-459A-9117F067B37F7730"
-			uniqueguid="43BA71A4-22B3-4122-8C143E413BC4E120"
-			dimensions="1.00,10.00"
-			is_visible="false">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="CD56AA58-6AED-46CC-AB3A519246A4DDA9"/>
-			</state_uniqueguids>
-			<user_properties>
-				<property
-					name="disable_override1"
-					value="position"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					is_text_localised="false"/>
-			</localised_texts>
-		</stick_progress_bar>
-		<auto_resizing_comp
-			this="FA4D4A4D-2538-4313-95B733F28C20A5F5"
-			id="auto_resizing_comp"
-			part_of_template="true"
-			uniqueguid_in_template="9F4A9EBE-A605-40E1-AACEB22402830771"
-			uniqueguid="FA4D4A4D-2538-4313-95B733F28C20A5F5"
-			dimensions="425.00,3.00"
-			dock_point="Center">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="51F9E961-F76B-4FEE-9B24784ED4C8BA02"/>
-			</state_uniqueguids>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					is_text_localised="false"/>
-			</localised_texts>
-		</auto_resizing_comp>
-		<bar_extents_and_pos
-			this="EFA43A29-911F-41C2-BD29E73F36DF4C60"
-			id="bar_extents_and_pos"
-			part_of_template="true"
-			uniqueguid_in_template="3F331065-E782-467B-804031161278DDBC"
-			uniqueguid="EFA43A29-911F-41C2-BD29E73F36DF4C60"
-			dimensions="425.00,3.00"
-			offset="7.00,8.00">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="A13EB8B2-F05A-4CC9-A87E9EF01598A5EE"/>
-			</state_uniqueguids>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					is_text_localised="false"/>
-			</localised_texts>
-		</bar_extents_and_pos>
 		<list_parent
 			this="83F7F08E-2927-4750-B47E585417C7FDE0"
 			id="list_parent"
@@ -348,6 +420,32 @@
 				</newstate>
 			</states>
 		</root>
+		<stick_progress_bar
+			this="43BA71A4-22B3-4122-8C143E413BC4E120"
+			id="stick_progress_bar"
+			template_id="stick_progress_bar"
+			part_of_template="true"
+			uniqueguid_in_template="B5D91471-862C-459A-9117F067B37F7730"
+			uniqueguid="43BA71A4-22B3-4122-8C143E413BC4E120"
+			dimensions="1.00,10.00"
+			is_visible="false">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="CD56AA58-6AED-46CC-AB3A519246A4DDA9"/>
+			</state_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override1"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</stick_progress_bar>
 		<template_entry
 			this="9EB46AF7-248D-4236-A44B32754FA9AE65"
 			id="template_entry"
@@ -617,57 +715,6 @@
 				</columnwidths>
 			</LayoutEngine>
 		</tooltip_effect_bundle>
-		<icon
-			this="B7D0C78A-0053-45DB-A8860F7874EDC0EB"
-			id="icon"
-			offset="14.00,0.00"
-			docking="Top Left"
-			dock_offset="14.00,0.00"
-			tooltipslocalised="true"
-			uniqueguid="B7D0C78A-0053-45DB-A8860F7874EDC0EB"
-			currentstate="E801AFB0-8031-4271-8122C02A8ACFE997"
-			defaultstate="E801AFB0-8031-4271-8122C02A8ACFE997">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextImageSetter"
-					context_object_id="CcoEffect"
-					context_function_id="IconPath"/>
-			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="9844D19E-B4DF-465B-9859EF79CA686053"
-					uniqueguid="9844D19E-B4DF-465B-9859EF79CA686053"
-					imagepath="ui/skins/default/construction_positive.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="E801AFB0-8031-4271-8122C02A8ACFE997"
-					name="NewState"
-					width="50"
-					height="10"
-					uniqueguid="E801AFB0-8031-4271-8122C02A8ACFE997">
-					<imagemetrics>
-						<image
-							this="46B86640-FBF4-4CE9-A798D2901474320F"
-							uniqueguid="46B86640-FBF4-4CE9-A798D2901474320F"
-							componentimage="9844D19E-B4DF-465B-9859EF79CA686053"
-							width="24"
-							height="24"
-							dockpoint="Top Left"
-							canresizeheight="false"
-							canresizewidth="false"/>
-					</imagemetrics>
-					<component_text
-						textxoffset="44.00,6.00"
-						textyoffset="4.00,6.00"
-						texthbehaviour="Resize"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
-			</states>
-		</icon>
 		<turns_remaining
 			this="EE6B864D-12EC-4A76-8D74DB9D1F75CC97"
 			id="turns_remaining"
@@ -710,52 +757,5 @@
 				</newstate>
 			</states>
 		</turns_remaining>
-		<dy_threshold_requirement
-			this="24276DF5-2957-4018-A36A116A6735B481"
-			id="dy_threshold_requirement"
-			offset="0.00,108.00"
-			allowhorizontalresize="false"
-			visible="false"
-			tooltipslocalised="true"
-			uniqueguid="24276DF5-2957-4018-A36A116A6735B481"
-			currentstate="43274685-B91E-48DE-86221729FC7AE8B7"
-			defaultstate="43274685-B91E-48DE-86221729FC7AE8B7">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoPooledResourceThresholdOperationSetRecord"
-					context_function_id="Format(Loc(&quot;effect_bundle_pooled_resource_threshold_operation_requirement&quot;), PooledResourceList.FirstContext.IconPath, LowerBound, PooledResourceList.FirstContext.Name)"/>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_function_id="IsContextValid(StoredContextFromParent(&quot;CcoPooledResourceThresholdOperationSetRecord&quot;))">
-					<child_m_user_properties>
-						<property
-							name="object_store_events"
-							value="^2"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="43274685-B91E-48DE-86221729FC7AE8B7"
-					name="NewState"
-					width="440"
-					height="26"
-					uniqueguid="43274685-B91E-48DE-86221729FC7AE8B7">
-					<component_text
-						text="dy_threshold_requirement"
-						textvalign="Bottom"
-						textxoffset="12.00,8.00"
-						textyoffset="2.00,8.00"
-						texthbehaviour="Resize"
-						textlabel="dy_threshold_requirement_NewState_Text_93147e2c"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"
-						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
-				</newstate>
-			</states>
-		</dy_threshold_requirement>
 	</components>
 </layout>

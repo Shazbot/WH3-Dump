@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -74,6 +74,66 @@
 					is_text_localised="false"/>
 			</localised_texts>
 		</button_txt>
+		<character_details_panel_quests
+			this="95539A52-8F36-4292-B137ACACA596CDE3"
+			id="character_details_panel_quests"
+			docking="Top Left"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="95539A52-8F36-4292-B137ACACA596CDE3"
+			isrelativeresize="true"
+			currentstate="DF287826-81D5-404C-952499F94AAF16BE"
+			defaultstate="DF287826-81D5-404C-952499F94AAF16BE"
+			comment="chars have no more than 4 quests currently">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="ResizeToFitParent"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="DF287826-81D5-404C-952499F94AAF16BE"
+					name="NewState"
+					width="1179"
+					height="690"
+					uniqueguid="DF287826-81D5-404C-952499F94AAF16BE"/>
+			</states>
+		</character_details_panel_quests>
+		<description
+			this="4B13B614-20EC-4C68-ABA8C50158A60AC2"
+			id="description"
+			offset="0.00,40.00"
+			allowhorizontalresize="false"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="4B13B614-20EC-4C68-ABA8C50158A60AC2"
+			currentstate="7D501FED-096E-437D-B0D16A56D990EB12">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoAncillaryRecord"
+					context_function_id="GetIfElse(ColourText.IsEmpty == false, ColourText, EffectList.FirstContext(IsContextValid(AbilityContext)).AbilityContext.TooltipText)"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="7D501FED-096E-437D-B0D16A56D990EB12"
+					name="NewState"
+					width="380"
+					height="28"
+					uniqueguid="7D501FED-096E-437D-B0D16A56D990EB12">
+					<component_text
+						text="Ability description"
+						textxoffset="12.00,12.00"
+						textyoffset="8.00,4.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_f5d06cbb"
+						font_m_font_name="georgia_italic"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12_italic"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+				</newstate>
+			</states>
+		</description>
 		<dev_button_grant_quest_item
 			this="006D7F51-5FEA-4379-9DD834D5E5610B36"
 			id="dev_button_grant_quest_item"
@@ -142,101 +202,6 @@
 				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
 			</override_images>
 		</dev_button_grant_quest_item>
-		<hslider
-			this="4A026E6D-F287-4532-B8A791C1955EF8BB"
-			id="hslider"
-			template_id="parchment_slider_horizontal"
-			part_of_template="true"
-			uniqueguid_in_template="97E97336-5CB8-4ADE-9BD1230FFDD860F0"
-			uniqueguid="4A026E6D-F287-4532-B8A791C1955EF8BB"
-			dimensions="1025.00,20.00"
-			dock_point="Bottom Center"
-			offset="-4.00,-11.00"
-			priority="60">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="ABFB82CC-E993-4854-9EE6F1840DA9E8A7"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="25C4EAF4-53FE-4782-A7A18C61478151E3"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/slider_horizontal_mid.png"
-					uniqueguid="32AD1559-41F8-40D3-B5271A85B38BFFDD"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context callback_id="HSlider"/>
-			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="Notify"
-					value=""/>
-				<property
-					name="Value"
-					value="0"/>
-				<property
-					name="maxValue"
-					value="100"/>
-				<property
-					name="minValue"
-					value="0"/>
-				<property
-					name="step_size"
-					value="80"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/slider_horizontal_mid.png"/>
-			</override_images>
-		</hslider>
-		<frame_left
-			this="2A64549B-65B2-4718-9E9CC554F8546123"
-			id="frame_left"
-			part_of_template="true"
-			uniqueguid_in_template="01C662C4-D511-47B6-98BFBB0FD645BD52"
-			uniqueguid="2A64549B-65B2-4718-9E9CC554F8546123"
-			dimensions="24.00,20.00"
-			dock_point="Center Left"
-			offset="-23.00,0.00"
-			priority="60">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="NewState"
-					uniqueguid="7CCD906D-BE20-4296-887E39E0E85FA935"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/slider_horizontal_left.png"
-					uniqueguid="40A09574-D82B-4277-A749DA0045E4A7A8"/>
-			</component_image_uniqueguids>
-			<user_properties>
-				<property
-					name="disable_override"
-					value="position"/>
-				<property
-					name="disable_override0"
-					value="resizable"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="NewState"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/slider_horizontal_left.png"/>
-			</override_images>
-		</frame_left>
 		<dev_icon
 			this="ACC5B47B-ACB7-4BC3-AC6026884E522CAE"
 			id="dev_icon"
@@ -267,348 +232,6 @@
 				<element value="ui/skins/default/dev/dev_icon.png"/>
 			</override_images>
 		</dev_icon>
-		<frame_right
-			this="56F2C731-E1E7-46D6-988F4B6D810E1486"
-			id="frame_right"
-			part_of_template="true"
-			uniqueguid_in_template="0801C93C-3865-4106-BB45CC511E0C6A00"
-			uniqueguid="56F2C731-E1E7-46D6-988F4B6D810E1486"
-			dimensions="24.00,19.00"
-			dock_point="Center Right"
-			offset="24.00,0.00"
-			priority="60">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="NewState"
-					uniqueguid="B02FAD3C-9577-4A82-99A381C941E7EDC7"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/slider_horizontal_right.png"
-					uniqueguid="F45DFE1D-7B42-4A43-AF2B86DB9631B1B7"/>
-			</component_image_uniqueguids>
-			<user_properties>
-				<property
-					name="disable_override"
-					value="position"/>
-				<property
-					name="disable_override0"
-					value="resizable"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="NewState"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/slider_horizontal_right.png"/>
-			</override_images>
-		</frame_right>
-		<handle
-			this="F2A184ED-6B7E-4BA5-98AA6E7EF43DE140"
-			id="handle"
-			part_of_template="true"
-			uniqueguid_in_template="0F561FA9-CF2A-479D-BA1EBAAF18451707"
-			uniqueguid="F2A184ED-6B7E-4BA5-98AA6E7EF43DE140"
-			dimensions="39.00,18.00"
-			priority="60"
-			sound_category="UI_GBL_TMP_Slider_Handle">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="1E317E59-416C-4998-84451C3E48352BF1"/>
-				<state_uniqueguid
-					name="down_off"
-					uniqueguid="1A753E3B-96B4-4824-BB8A6AEAF3AD2302"/>
-				<state_uniqueguid
-					name="hover"
-					uniqueguid="AF94B5FF-F643-486D-AE287F3A1A7BB707"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="C6E9F82C-36BB-4C32-9A3034A57D4FDDB1"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/slider_horizontal_handle_underlay.png"
-					uniqueguid="BFCCFE28-EF7B-4A4F-8E3F4081167143B8"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/slider_horizontal_handle.png"
-					uniqueguid="A727EF0F-FB96-4825-AB75C4D04D546C01"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context callback_id="HSliderHandle"/>
-			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="min_size"
-					value="39"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/slider_horizontal_handle_underlay.png"/>
-				<element value="ui/skins/default/slider_horizontal_handle.png"/>
-			</override_images>
-		</handle>
-		<left
-			this="686F1AFC-57EF-4C06-99A92FC6897B6E27"
-			id="left"
-			part_of_template="true"
-			uniqueguid_in_template="B4006F87-7E37-4923-98C5417F4FB2783E"
-			uniqueguid="686F1AFC-57EF-4C06-99A92FC6897B6E27"
-			dimensions="22.00,15.00"
-			dock_point="Center Left"
-			offset="-22.00,0.00"
-			priority="60"
-			sound_category="UI_GBL_TMP_Slider_Arrows">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="099D8B19-5D15-4E45-9134AB90D2988E51"/>
-				<state_uniqueguid
-					name="down"
-					uniqueguid="61E9B290-DAB7-413F-9F0369B2B6CBC495"/>
-				<state_uniqueguid
-					name="down_off"
-					uniqueguid="F4B07702-E8E7-425F-BE33B71D51A89190"/>
-				<state_uniqueguid
-					name="hover"
-					uniqueguid="0D0EF735-68AE-4BF3-8253784660025887"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="D4BB5E3D-6799-4C4E-8BE7E76ABC6C0E6B"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/slider_horizontal_left_active.png"
-					uniqueguid="3EB40359-9A06-42BA-9624ED1F71222655"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/slider_horizontal_left_pressed.png"
-					uniqueguid="F420F7E6-5DFD-4E97-9D3D154CCCF12761"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/slider_horizontal_left_hover.png"
-					uniqueguid="105D8247-E10B-4E37-A676A326B68E6595"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context callback_id="SliderDecrementButton"/>
-			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="disable_override"
-					value="position"/>
-				<property
-					name="disable_override0"
-					value="resizable"/>
-				<property
-					name="stepSize"
-					value="10"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="down"
-					is_text_localised="false"/>
-				<localised_text
-					state="down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/slider_horizontal_left_active.png"/>
-				<element value="ui/skins/default/slider_horizontal_left_pressed.png"/>
-				<element value="ui/skins/default/slider_horizontal_left_hover.png"/>
-			</override_images>
-		</left>
-		<right
-			this="752E9A29-152B-49B5-9BA11EF32CE366CE"
-			id="right"
-			part_of_template="true"
-			uniqueguid_in_template="72E8267F-90BC-44AC-88B94ED8B847BE9A"
-			uniqueguid="752E9A29-152B-49B5-9BA11EF32CE366CE"
-			dimensions="22.00,15.00"
-			dock_point="Center Right"
-			offset="20.00,0.00"
-			priority="60"
-			sound_category="UI_GBL_TMP_Slider_Arrows">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="79EBD553-5047-4AB1-83ECFF539103A5E7"/>
-				<state_uniqueguid
-					name="down"
-					uniqueguid="F64E7312-ED06-4B05-83FD76FA2FA20640"/>
-				<state_uniqueguid
-					name="down_off"
-					uniqueguid="CC8F9BBC-4BD0-41ED-97EEBF2AFC3F53B3"/>
-				<state_uniqueguid
-					name="hover"
-					uniqueguid="503AD600-74B1-41A8-8FF5BBDBD7B7A93B"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="F299182D-286B-4678-9E99CC6B206BEF90"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/slider_horizontal_right_active.png"
-					uniqueguid="6F5911FE-E25F-443F-9A234C8EF719A6D0"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/slider_horizontal_right_pressed.png"
-					uniqueguid="DD664ED8-2223-47E8-877723B2651CBEF6"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/slider_horizontal_right_hover.png"
-					uniqueguid="D5DE5B75-EC62-43C4-AD34BD26B1530BCA"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context callback_id="SliderIncrementButton"/>
-			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="disable_override"
-					value="position"/>
-				<property
-					name="disable_override0"
-					value="resizable"/>
-				<property
-					name="stepSize"
-					value="10"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="down"
-					is_text_localised="false"/>
-				<localised_text
-					state="down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/slider_horizontal_right_active.png"/>
-				<element value="ui/skins/default/slider_horizontal_right_pressed.png"/>
-				<element value="ui/skins/default/slider_horizontal_right_hover.png"/>
-			</override_images>
-		</right>
-		<root
-			this="92858C6B-D2DF-4BA5-944993D9BAD52922"
-			id="root"
-			tooltipslocalised="true"
-			uniqueguid="92858C6B-D2DF-4BA5-944993D9BAD52922"
-			currentstate="FBCD7C13-1009-4CB7-89EE0B7A4F5C0D65"
-			defaultstate="FBCD7C13-1009-4CB7-89EE0B7A4F5C0D65">
-			<componentimages>
-				<component_image
-					this="69F62485-2B40-4100-8ED240A5495D0FB3"
-					uniqueguid="69F62485-2B40-4100-8ED240A5495D0FB3"/>
-			</componentimages>
-			<states>
-				<default
-					this="FBCD7C13-1009-4CB7-89EE0B7A4F5C0D65"
-					name="default"
-					width="1600"
-					height="900"
-					uniqueguid="FBCD7C13-1009-4CB7-89EE0B7A4F5C0D65">
-					<imagemetrics>
-						<image
-							this="5D629594-015D-44C8-B9E2A4229DD66766"
-							uniqueguid="5D629594-015D-44C8-B9E2A4229DD66766"
-							componentimage="69F62485-2B40-4100-8ED240A5495D0FB3"
-							width="1920"
-							height="1080"
-							colour="#1C1C1CFF"/>
-					</imagemetrics>
-				</default>
-			</states>
-		</root>
-		<character_details_panel_quests
-			this="95539A52-8F36-4292-B137ACACA596CDE3"
-			id="character_details_panel_quests"
-			docking="Top Left"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="95539A52-8F36-4292-B137ACACA596CDE3"
-			isrelativeresize="true"
-			currentstate="DF287826-81D5-404C-952499F94AAF16BE"
-			defaultstate="DF287826-81D5-404C-952499F94AAF16BE"
-			comment="chars have no more than 4 quests currently">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="ResizeToFitParent"/>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="DF287826-81D5-404C-952499F94AAF16BE"
-					name="NewState"
-					width="1179"
-					height="690"
-					uniqueguid="DF287826-81D5-404C-952499F94AAF16BE"/>
-			</states>
-		</character_details_panel_quests>
-		<description
-			this="4B13B614-20EC-4C68-ABA8C50158A60AC2"
-			id="description"
-			offset="0.00,40.00"
-			allowhorizontalresize="false"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="4B13B614-20EC-4C68-ABA8C50158A60AC2"
-			currentstate="7D501FED-096E-437D-B0D16A56D990EB12">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoAncillaryRecord"
-					context_function_id="GetIfElse(ColourText.IsEmpty == false, ColourText, EffectList.FirstContext(IsContextValid(AbilityContext)).AbilityContext.TooltipText)"/>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="7D501FED-096E-437D-B0D16A56D990EB12"
-					name="NewState"
-					width="380"
-					height="28"
-					uniqueguid="7D501FED-096E-437D-B0D16A56D990EB12">
-					<component_text
-						text="Ability description"
-						textxoffset="12.00,12.00"
-						textyoffset="8.00,4.00"
-						texthbehaviour="Resize"
-						textlabel="StateText_f5d06cbb"
-						font_m_font_name="georgia_italic"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12_italic"
-						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
-				</newstate>
-			</states>
-		</description>
 		<dy_reward_icon
 			this="994EEF65-244E-48D4-B065A5E2D8F0DEB3"
 			id="dy_reward_icon"
@@ -768,6 +391,275 @@
 				</columnwidths>
 			</LayoutEngine>
 		</effect_list>
+		<frame_left
+			this="2A64549B-65B2-4718-9E9CC554F8546123"
+			id="frame_left"
+			part_of_template="true"
+			uniqueguid_in_template="01C662C4-D511-47B6-98BFBB0FD645BD52"
+			uniqueguid="2A64549B-65B2-4718-9E9CC554F8546123"
+			dimensions="24.00,20.00"
+			dock_point="Center Left"
+			offset="-23.00,0.00"
+			priority="60">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="NewState"
+					uniqueguid="7CCD906D-BE20-4296-887E39E0E85FA935"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_horizontal_left.png"
+					uniqueguid="40A09574-D82B-4277-A749DA0045E4A7A8"/>
+			</component_image_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="position"/>
+				<property
+					name="disable_override0"
+					value="resizable"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="NewState"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/slider_horizontal_left.png"/>
+			</override_images>
+		</frame_left>
+		<frame_right
+			this="56F2C731-E1E7-46D6-988F4B6D810E1486"
+			id="frame_right"
+			part_of_template="true"
+			uniqueguid_in_template="0801C93C-3865-4106-BB45CC511E0C6A00"
+			uniqueguid="56F2C731-E1E7-46D6-988F4B6D810E1486"
+			dimensions="24.00,19.00"
+			dock_point="Center Right"
+			offset="24.00,0.00"
+			priority="60">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="NewState"
+					uniqueguid="B02FAD3C-9577-4A82-99A381C941E7EDC7"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_horizontal_right.png"
+					uniqueguid="F45DFE1D-7B42-4A43-AF2B86DB9631B1B7"/>
+			</component_image_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="position"/>
+				<property
+					name="disable_override0"
+					value="resizable"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="NewState"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/slider_horizontal_right.png"/>
+			</override_images>
+		</frame_right>
+		<handle
+			this="F2A184ED-6B7E-4BA5-98AA6E7EF43DE140"
+			id="handle"
+			part_of_template="true"
+			uniqueguid_in_template="0F561FA9-CF2A-479D-BA1EBAAF18451707"
+			uniqueguid="F2A184ED-6B7E-4BA5-98AA6E7EF43DE140"
+			dimensions="39.00,18.00"
+			priority="60"
+			sound_category="UI_GBL_TMP_Slider_Handle">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="1E317E59-416C-4998-84451C3E48352BF1"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="1A753E3B-96B4-4824-BB8A6AEAF3AD2302"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="AF94B5FF-F643-486D-AE287F3A1A7BB707"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="C6E9F82C-36BB-4C32-9A3034A57D4FDDB1"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_horizontal_handle_underlay.png"
+					uniqueguid="BFCCFE28-EF7B-4A4F-8E3F4081167143B8"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_horizontal_handle.png"
+					uniqueguid="A727EF0F-FB96-4825-AB75C4D04D546C01"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="HSliderHandle"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="min_size"
+					value="39"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/slider_horizontal_handle_underlay.png"/>
+				<element value="ui/skins/default/slider_horizontal_handle.png"/>
+			</override_images>
+		</handle>
+		<hslider
+			this="4A026E6D-F287-4532-B8A791C1955EF8BB"
+			id="hslider"
+			template_id="parchment_slider_horizontal"
+			part_of_template="true"
+			uniqueguid_in_template="97E97336-5CB8-4ADE-9BD1230FFDD860F0"
+			uniqueguid="4A026E6D-F287-4532-B8A791C1955EF8BB"
+			dimensions="1025.00,20.00"
+			dock_point="Bottom Center"
+			offset="-4.00,-11.00"
+			priority="60">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="ABFB82CC-E993-4854-9EE6F1840DA9E8A7"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="25C4EAF4-53FE-4782-A7A18C61478151E3"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_horizontal_mid.png"
+					uniqueguid="32AD1559-41F8-40D3-B5271A85B38BFFDD"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="HSlider"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="Notify"
+					value=""/>
+				<property
+					name="Value"
+					value="0"/>
+				<property
+					name="maxValue"
+					value="100"/>
+				<property
+					name="minValue"
+					value="0"/>
+				<property
+					name="step_size"
+					value="80"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/slider_horizontal_mid.png"/>
+			</override_images>
+		</hslider>
+		<left
+			this="686F1AFC-57EF-4C06-99A92FC6897B6E27"
+			id="left"
+			part_of_template="true"
+			uniqueguid_in_template="B4006F87-7E37-4923-98C5417F4FB2783E"
+			uniqueguid="686F1AFC-57EF-4C06-99A92FC6897B6E27"
+			dimensions="22.00,15.00"
+			dock_point="Center Left"
+			offset="-22.00,0.00"
+			priority="60"
+			sound_category="UI_GBL_TMP_Slider_Arrows">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="099D8B19-5D15-4E45-9134AB90D2988E51"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="61E9B290-DAB7-413F-9F0369B2B6CBC495"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="F4B07702-E8E7-425F-BE33B71D51A89190"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="0D0EF735-68AE-4BF3-8253784660025887"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="D4BB5E3D-6799-4C4E-8BE7E76ABC6C0E6B"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_horizontal_left_active.png"
+					uniqueguid="3EB40359-9A06-42BA-9624ED1F71222655"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_horizontal_left_pressed.png"
+					uniqueguid="F420F7E6-5DFD-4E97-9D3D154CCCF12761"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_horizontal_left_hover.png"
+					uniqueguid="105D8247-E10B-4E37-A676A326B68E6595"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="SliderDecrementButton"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="position"/>
+				<property
+					name="disable_override0"
+					value="resizable"/>
+				<property
+					name="stepSize"
+					value="10"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/slider_horizontal_left_active.png"/>
+				<element value="ui/skins/default/slider_horizontal_left_pressed.png"/>
+				<element value="ui/skins/default/slider_horizontal_left_hover.png"/>
+			</override_images>
+		</left>
 		<listview
 			this="6CEE16C4-0732-4D6D-A924F48440DEF356"
 			id="listview"
@@ -941,6 +833,114 @@
 				</newstate>
 			</states>
 		</rank_required>
+		<right
+			this="752E9A29-152B-49B5-9BA11EF32CE366CE"
+			id="right"
+			part_of_template="true"
+			uniqueguid_in_template="72E8267F-90BC-44AC-88B94ED8B847BE9A"
+			uniqueguid="752E9A29-152B-49B5-9BA11EF32CE366CE"
+			dimensions="22.00,15.00"
+			dock_point="Center Right"
+			offset="20.00,0.00"
+			priority="60"
+			sound_category="UI_GBL_TMP_Slider_Arrows">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="79EBD553-5047-4AB1-83ECFF539103A5E7"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="F64E7312-ED06-4B05-83FD76FA2FA20640"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="CC8F9BBC-4BD0-41ED-97EEBF2AFC3F53B3"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="503AD600-74B1-41A8-8FF5BBDBD7B7A93B"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="F299182D-286B-4678-9E99CC6B206BEF90"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_horizontal_right_active.png"
+					uniqueguid="6F5911FE-E25F-443F-9A234C8EF719A6D0"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_horizontal_right_pressed.png"
+					uniqueguid="DD664ED8-2223-47E8-877723B2651CBEF6"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_horizontal_right_hover.png"
+					uniqueguid="D5DE5B75-EC62-43C4-AD34BD26B1530BCA"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="SliderIncrementButton"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="position"/>
+				<property
+					name="disable_override0"
+					value="resizable"/>
+				<property
+					name="stepSize"
+					value="10"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/slider_horizontal_right_active.png"/>
+				<element value="ui/skins/default/slider_horizontal_right_pressed.png"/>
+				<element value="ui/skins/default/slider_horizontal_right_hover.png"/>
+			</override_images>
+		</right>
+		<root
+			this="92858C6B-D2DF-4BA5-944993D9BAD52922"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="92858C6B-D2DF-4BA5-944993D9BAD52922"
+			currentstate="FBCD7C13-1009-4CB7-89EE0B7A4F5C0D65"
+			defaultstate="FBCD7C13-1009-4CB7-89EE0B7A4F5C0D65">
+			<componentimages>
+				<component_image
+					this="69F62485-2B40-4100-8ED240A5495D0FB3"
+					uniqueguid="69F62485-2B40-4100-8ED240A5495D0FB3"/>
+			</componentimages>
+			<states>
+				<default
+					this="FBCD7C13-1009-4CB7-89EE0B7A4F5C0D65"
+					name="default"
+					width="1600"
+					height="900"
+					uniqueguid="FBCD7C13-1009-4CB7-89EE0B7A4F5C0D65">
+					<imagemetrics>
+						<image
+							this="5D629594-015D-44C8-B9E2A4229DD66766"
+							uniqueguid="5D629594-015D-44C8-B9E2A4229DD66766"
+							componentimage="69F62485-2B40-4100-8ED240A5495D0FB3"
+							width="1920"
+							height="1080"
+							colour="#1C1C1CFF"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</root>
 		<smoke
 			this="57FBF358-1008-4534-A7C344656A5DCAAE"
 			id="smoke"
@@ -984,6 +984,61 @@
 				</default>
 			</states>
 		</smoke>
+		<stamp_complete_anim
+			this="80293CF1-BFAB-416D-A576F2EF80526663"
+			id="stamp_complete_anim"
+			offset="200.00,490.00"
+			docking="Bottom Right"
+			dock_offset="-10.00,0.00"
+			component_anchor_point="1.00,1.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="80293CF1-BFAB-416D-A576F2EF80526663"
+			aspect_ratio_locked_behaviour="Width First"
+			currentstate="0D3EBB29-456F-44C4-8734599A807F5163"
+			defaultstate="0D3EBB29-456F-44C4-8734599A807F5163">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextColourSetter"
+					context_object_id="CcoStaticObject"
+					context_function_id="MainThemeColour"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignMission"
+					context_function_id="IsValidContext &amp;&amp; Completed"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="AA9AF863-B1BD-4FBC-9229AF8B390B7B9F"
+					uniqueguid="AA9AF863-B1BD-4FBC-9229AF8B390B7B9F"
+					imagepath="ui/skins/default/stamp_mission_complete.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="0D3EBB29-456F-44C4-8734599A807F5163"
+					name="NewState"
+					width="170"
+					height="159"
+					uniqueguid="0D3EBB29-456F-44C4-8734599A807F5163">
+					<imagemetrics>
+						<image
+							this="11FD5EEC-869F-4609-930865E6C28AB157"
+							uniqueguid="11FD5EEC-869F-4609-930865E6C28AB157"
+							componentimage="AA9AF863-B1BD-4FBC-9229AF8B390B7B9F"
+							width="170"
+							height="159"
+							colour="#FFFFFF80"/>
+						<image
+							this="CE904685-6225-4B23-AC1694892BD39C98"
+							uniqueguid="CE904685-6225-4B23-AC1694892BD39C98"
+							componentimage="AA9AF863-B1BD-4FBC-9229AF8B390B7B9F"
+							width="170"
+							height="159"
+							colour="#FFFFFF80"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</stamp_complete_anim>
 		<template_effect_entry
 			this="6C4FDD4C-0685-4ACA-B6C141D53F7AF7D7"
 			id="template_effect_entry"
@@ -1374,60 +1429,5 @@
 					uniqueguid="62B47058-6BAB-4E5D-81A5C8A99C86F85B"/>
 			</states>
 		</top_parent>
-		<stamp_complete_anim
-			this="80293CF1-BFAB-416D-A576F2EF80526663"
-			id="stamp_complete_anim"
-			offset="200.00,490.00"
-			docking="Bottom Right"
-			dock_offset="-10.00,0.00"
-			component_anchor_point="1.00,1.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="80293CF1-BFAB-416D-A576F2EF80526663"
-			isaspectratiolocked="true"
-			currentstate="0D3EBB29-456F-44C4-8734599A807F5163"
-			defaultstate="0D3EBB29-456F-44C4-8734599A807F5163">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextColourSetter"
-					context_object_id="CcoStaticObject"
-					context_function_id="MainThemeColour"/>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoCampaignMission"
-					context_function_id="IsValidContext &amp;&amp; Completed"/>
-			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="AA9AF863-B1BD-4FBC-9229AF8B390B7B9F"
-					uniqueguid="AA9AF863-B1BD-4FBC-9229AF8B390B7B9F"
-					imagepath="ui/skins/default/stamp_mission_complete.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="0D3EBB29-456F-44C4-8734599A807F5163"
-					name="NewState"
-					width="170"
-					height="159"
-					uniqueguid="0D3EBB29-456F-44C4-8734599A807F5163">
-					<imagemetrics>
-						<image
-							this="11FD5EEC-869F-4609-930865E6C28AB157"
-							uniqueguid="11FD5EEC-869F-4609-930865E6C28AB157"
-							componentimage="AA9AF863-B1BD-4FBC-9229AF8B390B7B9F"
-							width="170"
-							height="159"
-							colour="#FFFFFF80"/>
-						<image
-							this="CE904685-6225-4B23-AC1694892BD39C98"
-							uniqueguid="CE904685-6225-4B23-AC1694892BD39C98"
-							componentimage="AA9AF863-B1BD-4FBC-9229AF8B390B7B9F"
-							width="170"
-							height="159"
-							colour="#FFFFFF80"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-		</stamp_complete_anim>
 	</components>
 </layout>

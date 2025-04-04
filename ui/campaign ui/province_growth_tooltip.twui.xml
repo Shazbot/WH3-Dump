@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -25,96 +25,73 @@
 		</root>
 	</hierarchy>
 	<components>
-		<root
-			this="363059C2-AD72-4538-811A9ADBE0E0ED8A"
-			id="root"
-			tooltipslocalised="true"
-			uniqueguid="363059C2-AD72-4538-811A9ADBE0E0ED8A"
-			currentstate="D89EECD9-3C64-4201-8AD47940AD042F06"
-			defaultstate="D89EECD9-3C64-4201-8AD47940AD042F06">
-			<componentimages>
-				<component_image
-					this="71CAC5C7-A825-4D31-89A3340816E20E87"
-					uniqueguid="71CAC5C7-A825-4D31-89A3340816E20E87"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="D89EECD9-3C64-4201-8AD47940AD042F06"
-					name="NewState"
-					width="1600"
-					height="900"
-					interactive="true"
-					uniqueguid="D89EECD9-3C64-4201-8AD47940AD042F06">
-					<imagemetrics>
-						<image
-							this="3092184E-5865-4371-BB8357281545586A"
-							uniqueguid="3092184E-5865-4371-BB8357281545586A"
-							componentimage="71CAC5C7-A825-4D31-89A3340816E20E87"
-							width="1280"
-							height="960"
-							colour="#C0C0C0FF"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-		</root>
-		<province_growth_tooltip
-			this="D85B5CF5-4989-4A46-925BAE12D4268408"
-			id="province_growth_tooltip"
-			offset="386.00,102.00"
+		<change_per_turn
+			this="1D88408D-A672-4867-936A5846AF068775"
+			id="change_per_turn"
+			offset="3.00,20.00"
+			allowverticalresize="false"
 			priority="255"
 			tooltipslocalised="true"
-			uniqueguid="D85B5CF5-4989-4A46-925BAE12D4268408"
-			currentstate="065ED856-3066-4863-A07A3EB4A97AC269">
+			uniqueguid="1D88408D-A672-4867-936A5846AF068775"
+			currentstate="399679D6-FFAA-462C-A91C907A3CE4A6AC"
+			defaultstate="399679D6-FFAA-462C-A91C907A3CE4A6AC">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoCampaignFactionProvinceManager"/>
-				<callback_with_context callback_id="CustomTooltip"/>
+					callback_id="ContextTextLabel"
+					context_object_id="any"
+					context_function_id="Format(&quot;(%+d)&quot;, GrowthPerTurn)"/>
 				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoCampaignMilitaryForceHorde"/>
+					callback_id="ContextStateSetterConditional"
+					context_object_id="any">
+					<child_m_user_properties>
+						<property
+							name="negative"
+							value="GrowthPerTurn &lt; 0"/>
+						<property
+							name="positive"
+							value="GrowthPerTurn &gt;= 0"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="896EF393-F9D6-4035-A4F861A70492A1E4"
-					uniqueguid="896EF393-F9D6-4035-A4F861A70492A1E4"
-					imagepath="ui/skins/default/tooltip_frame.png"/>
-			</componentimages>
 			<states>
-				<newstate
-					this="065ED856-3066-4863-A07A3EB4A97AC269"
-					name="NewState"
-					width="366"
-					height="183"
-					uniqueguid="065ED856-3066-4863-A07A3EB4A97AC269">
-					<imagemetrics>
-						<image
-							this="58168D2D-26D1-4105-A475BAD0A95890A5"
-							uniqueguid="58168D2D-26D1-4105-A475BAD0A95890A5"
-							componentimage="896EF393-F9D6-4035-A4F861A70492A1E4"
-							width="366"
-							height="183"
-							tile="true"
-							margin="16.00,20.00,16.00,20.00"/>
-					</imagemetrics>
+				<negative
+					this="BCA7C9B3-B5D2-457C-B5282D541178D853"
+					name="negative"
+					width="33"
+					height="20"
+					uniqueguid="BCA7C9B3-B5D2-457C-B5282D541178D853">
 					<component_text
-						textxoffset="8.00,0.00"
-						textyoffset="6.00,0.00"
+						text="(-99)"
+						textvalign="Center"
+						textyoffset="2.00,2.00"
+						texthbehaviour="Resize"
+						textlabel="change_per_turn_negative_Text_2af60592"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
+						fontcat_name="body_12"
+						font_colour_override_preset_key="green"/>
+				</negative>
+				<positive
+					this="399679D6-FFAA-462C-A91C907A3CE4A6AC"
+					name="positive"
+					width="37"
+					height="20"
+					uniqueguid="399679D6-FFAA-462C-A91C907A3CE4A6AC">
+					<component_text
+						text="(+99)"
+						textvalign="Center"
+						textyoffset="2.00,2.00"
+						texthbehaviour="Resize"
+						textlabel="change_per_turn_positive_Text_1fd614f2"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="green"/>
+				</positive>
 			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true"
-				margins="0.00,8.00">
-				<columnwidths>
-					<column width="366"/>
-				</columnwidths>
-			</LayoutEngine>
-		</province_growth_tooltip>
+		</change_per_turn>
 		<details_info
 			this="DC93F028-C572-4A9F-B3F58D3151B3A875"
 			id="details_info"
@@ -176,30 +153,34 @@
 				</move>
 			</animations>
 		</details_info>
-		<template_item
-			this="F8599AF1-528C-4CD7-976E7E24A4117546"
-			id="template_item"
-			offset="0.00,50.00"
+		<growth_needed_for_surplus_header
+			this="941C9C26-E366-4FEC-95EB43B99B8E914B"
+			id="growth_needed_for_surplus_header"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
 			priority="255"
 			tooltipslocalised="true"
-			uniqueguid="F8599AF1-528C-4CD7-976E7E24A4117546"
-			currentstate="7617BBB5-104B-47E5-BB7495AA5727FDB8">
+			uniqueguid="941C9C26-E366-4FEC-95EB43B99B8E914B"
+			currentstate="19555367-F4BB-4410-8F24E4B562147E12">
 			<states>
 				<newstate
-					this="7617BBB5-104B-47E5-BB7495AA5727FDB8"
+					this="19555367-F4BB-4410-8F24E4B562147E12"
 					name="NewState"
-					width="323"
-					height="24"
-					uniqueguid="7617BBB5-104B-47E5-BB7495AA5727FDB8">
+					width="366"
+					height="50"
+					uniqueguid="19555367-F4BB-4410-8F24E4B562147E12">
 					<component_text
 						textvalign="Center"
+						textxoffset="12.00,0.00"
+						textyoffset="4.00,4.00"
+						texthbehaviour="Never split"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
 						fontcat_name="body_12"/>
 				</newstate>
 			</states>
-		</template_item>
+		</growth_needed_for_surplus_header>
 		<labour_header
 			this="1A7BF5C3-12A3-4A76-A113EA57C0CBB270"
 			id="labour_header"
@@ -269,34 +250,149 @@
 				</columnwidths>
 			</LayoutEngine>
 		</list_for_items>
-		<growth_needed_for_surplus_header
-			this="941C9C26-E366-4FEC-95EB43B99B8E914B"
-			id="growth_needed_for_surplus_header"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
+		<province_growth_tooltip
+			this="D85B5CF5-4989-4A46-925BAE12D4268408"
+			id="province_growth_tooltip"
+			offset="386.00,102.00"
 			priority="255"
 			tooltipslocalised="true"
-			uniqueguid="941C9C26-E366-4FEC-95EB43B99B8E914B"
-			currentstate="19555367-F4BB-4410-8F24E4B562147E12">
+			uniqueguid="D85B5CF5-4989-4A46-925BAE12D4268408"
+			currentstate="065ED856-3066-4863-A07A3EB4A97AC269">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignFactionProvinceManager"/>
+				<callback_with_context callback_id="CustomTooltip"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignMilitaryForceHorde"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="896EF393-F9D6-4035-A4F861A70492A1E4"
+					uniqueguid="896EF393-F9D6-4035-A4F861A70492A1E4"
+					imagepath="ui/skins/default/tooltip_frame.png"/>
+			</componentimages>
 			<states>
 				<newstate
-					this="19555367-F4BB-4410-8F24E4B562147E12"
+					this="065ED856-3066-4863-A07A3EB4A97AC269"
 					name="NewState"
 					width="366"
-					height="50"
-					uniqueguid="19555367-F4BB-4410-8F24E4B562147E12">
+					height="183"
+					uniqueguid="065ED856-3066-4863-A07A3EB4A97AC269">
+					<imagemetrics>
+						<image
+							this="58168D2D-26D1-4105-A475BAD0A95890A5"
+							uniqueguid="58168D2D-26D1-4105-A475BAD0A95890A5"
+							componentimage="896EF393-F9D6-4035-A4F861A70492A1E4"
+							width="366"
+							height="183"
+							tile="true"
+							margin="16.00,20.00,16.00,20.00"/>
+					</imagemetrics>
 					<component_text
-						textvalign="Center"
-						textxoffset="12.00,0.00"
-						textyoffset="4.00,4.00"
-						texthbehaviour="Never split"
+						textxoffset="8.00,0.00"
+						textyoffset="6.00,0.00"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
 						fontcat_name="body_12"/>
 				</newstate>
 			</states>
-		</growth_needed_for_surplus_header>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true"
+				margins="0.00,8.00">
+				<columnwidths>
+					<column width="366"/>
+				</columnwidths>
+			</LayoutEngine>
+		</province_growth_tooltip>
+		<root
+			this="363059C2-AD72-4538-811A9ADBE0E0ED8A"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="363059C2-AD72-4538-811A9ADBE0E0ED8A"
+			currentstate="D89EECD9-3C64-4201-8AD47940AD042F06"
+			defaultstate="D89EECD9-3C64-4201-8AD47940AD042F06">
+			<componentimages>
+				<component_image
+					this="71CAC5C7-A825-4D31-89A3340816E20E87"
+					uniqueguid="71CAC5C7-A825-4D31-89A3340816E20E87"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="D89EECD9-3C64-4201-8AD47940AD042F06"
+					name="NewState"
+					width="1600"
+					height="900"
+					interactive="true"
+					uniqueguid="D89EECD9-3C64-4201-8AD47940AD042F06">
+					<imagemetrics>
+						<image
+							this="3092184E-5865-4371-BB8357281545586A"
+							uniqueguid="3092184E-5865-4371-BB8357281545586A"
+							componentimage="71CAC5C7-A825-4D31-89A3340816E20E87"
+							width="1280"
+							height="960"
+							colour="#C0C0C0FF"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</root>
+		<template_item
+			this="F8599AF1-528C-4CD7-976E7E24A4117546"
+			id="template_item"
+			offset="0.00,50.00"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="F8599AF1-528C-4CD7-976E7E24A4117546"
+			currentstate="7617BBB5-104B-47E5-BB7495AA5727FDB8">
+			<states>
+				<newstate
+					this="7617BBB5-104B-47E5-BB7495AA5727FDB8"
+					name="NewState"
+					width="323"
+					height="24"
+					uniqueguid="7617BBB5-104B-47E5-BB7495AA5727FDB8">
+					<component_text
+						textvalign="Center"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+		</template_item>
+		<title
+			this="42DFA13E-38CA-4EEE-B3DE9994C6509B4B"
+			id="title"
+			docking="Center Left"
+			component_anchor_point="0.00,0.50"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="42DFA13E-38CA-4EEE-B3DE9994C6509B4B"
+			currentstate="9373B356-9B54-4899-AF7C17E914830759">
+			<states>
+				<newstate
+					this="9373B356-9B54-4899-AF7C17E914830759"
+					name="NewState"
+					width="249"
+					height="50"
+					uniqueguid="9373B356-9B54-4899-AF7C17E914830759">
+					<component_text
+						text="Growth needed for [[img:icon_pop_surplus]][[/img]]surplus"
+						textxoffset="12.00,0.00"
+						textyoffset="4.00,4.00"
+						textlocalised="true"
+						textlabel="title_NewState_Text_560046"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+		</title>
 		<title
 			this="FBD80288-8427-47C8-8119181E020AFDA5"
 			id="title"
@@ -333,73 +429,42 @@
 				</newstate>
 			</states>
 		</title>
-		<change_per_turn
-			this="1D88408D-A672-4867-936A5846AF068775"
-			id="change_per_turn"
-			offset="3.00,20.00"
+		<value
+			this="8D4BCCB2-5F7C-4226-8B38C897E16D8DFC"
+			id="value"
 			allowverticalresize="false"
 			priority="255"
 			tooltipslocalised="true"
-			uniqueguid="1D88408D-A672-4867-936A5846AF068775"
-			currentstate="399679D6-FFAA-462C-A91C907A3CE4A6AC"
-			defaultstate="399679D6-FFAA-462C-A91C907A3CE4A6AC">
+			uniqueguid="8D4BCCB2-5F7C-4226-8B38C897E16D8DFC"
+			currentstate="98E8B39F-CCAE-4336-94E569C3AAA073FC"
+			defaultstate="98E8B39F-CCAE-4336-94E569C3AAA073FC">
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="any"
-					context_function_id="Format(&quot;(%+d)&quot;, GrowthPerTurn)"/>
-				<callback_with_context
-					callback_id="ContextStateSetterConditional"
-					context_object_id="any">
-					<child_m_user_properties>
-						<property
-							name="negative"
-							value="GrowthPerTurn &lt; 0"/>
-						<property
-							name="positive"
-							value="GrowthPerTurn &gt;= 0"/>
-					</child_m_user_properties>
-				</callback_with_context>
+					context_function_id="AccumulatedGrowth + &quot;/&quot; + GrowthThresholdForPoint"/>
 			</callbackwithcontextlist>
 			<states>
-				<negative
-					this="BCA7C9B3-B5D2-457C-B5282D541178D853"
-					name="negative"
-					width="33"
+				<default
+					this="98E8B39F-CCAE-4336-94E569C3AAA073FC"
+					name="default"
+					width="40"
 					height="20"
-					uniqueguid="BCA7C9B3-B5D2-457C-B5282D541178D853">
+					uniqueguid="98E8B39F-CCAE-4336-94E569C3AAA073FC">
 					<component_text
-						text="(-99)"
+						text="0/999"
 						textvalign="Center"
+						texthalign="Right"
 						textyoffset="2.00,2.00"
 						texthbehaviour="Resize"
-						textlabel="change_per_turn_negative_Text_2af60592"
+						textlabel="value_default_Text_33ad09d0"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="body_12"
-						font_colour_override_preset_key="green"/>
-				</negative>
-				<positive
-					this="399679D6-FFAA-462C-A91C907A3CE4A6AC"
-					name="positive"
-					width="37"
-					height="20"
-					uniqueguid="399679D6-FFAA-462C-A91C907A3CE4A6AC">
-					<component_text
-						text="(+99)"
-						textvalign="Center"
-						textyoffset="2.00,2.00"
-						texthbehaviour="Resize"
-						textlabel="change_per_turn_positive_Text_1fd614f2"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"
-						font_colour_override_preset_key="green"/>
-				</positive>
+						fontcat_name="body_12"/>
+				</default>
 			</states>
-		</change_per_turn>
+		</value>
 		<value
 			this="FBF5B492-190B-44A8-9BC5672CCF43BFBB"
 			id="value"
@@ -506,70 +571,5 @@
 				</columnwidths>
 			</LayoutEngine>
 		</value_holder>
-		<value
-			this="8D4BCCB2-5F7C-4226-8B38C897E16D8DFC"
-			id="value"
-			allowverticalresize="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="8D4BCCB2-5F7C-4226-8B38C897E16D8DFC"
-			currentstate="98E8B39F-CCAE-4336-94E569C3AAA073FC"
-			defaultstate="98E8B39F-CCAE-4336-94E569C3AAA073FC">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="any"
-					context_function_id="AccumulatedGrowth + &quot;/&quot; + GrowthThresholdForPoint"/>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="98E8B39F-CCAE-4336-94E569C3AAA073FC"
-					name="default"
-					width="40"
-					height="20"
-					uniqueguid="98E8B39F-CCAE-4336-94E569C3AAA073FC">
-					<component_text
-						text="0/999"
-						textvalign="Center"
-						texthalign="Right"
-						textyoffset="2.00,2.00"
-						texthbehaviour="Resize"
-						textlabel="value_default_Text_33ad09d0"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</default>
-			</states>
-		</value>
-		<title
-			this="42DFA13E-38CA-4EEE-B3DE9994C6509B4B"
-			id="title"
-			docking="Center Left"
-			component_anchor_point="0.00,0.50"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="42DFA13E-38CA-4EEE-B3DE9994C6509B4B"
-			currentstate="9373B356-9B54-4899-AF7C17E914830759">
-			<states>
-				<newstate
-					this="9373B356-9B54-4899-AF7C17E914830759"
-					name="NewState"
-					width="249"
-					height="50"
-					uniqueguid="9373B356-9B54-4899-AF7C17E914830759">
-					<component_text
-						text="Growth needed for [[img:icon_pop_surplus]][[/img]]surplus"
-						textxoffset="12.00,0.00"
-						textyoffset="4.00,4.00"
-						textlocalised="true"
-						textlabel="title_NewState_Text_560046"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
-			</states>
-		</title>
 	</components>
 </layout>

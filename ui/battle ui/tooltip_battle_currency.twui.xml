@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -20,38 +20,108 @@
 		</root>
 	</hierarchy>
 	<components>
-		<root
-			this="CD6F7CE7-5F9A-4E1E-B4B652104FE6B0D6"
-			id="root"
+		<dy_desc
+			this="0B18DE27-1FC8-40A4-BB4E5AD81F5EC3DC"
+			id="dy_desc"
+			offset="0.00,42.00"
+			allowhorizontalresize="false"
+			priority="30"
 			tooltipslocalised="true"
-			uniqueguid="CD6F7CE7-5F9A-4E1E-B4B652104FE6B0D6"
-			currentstate="DF3E3456-CAF2-46E9-B5E91D05690118F8"
-			defaultstate="DF3E3456-CAF2-46E9-B5E91D05690118F8">
-			<componentimages>
-				<component_image
-					this="7EFB9DD7-1B6B-4337-8709477DDB526A78"
-					uniqueguid="7EFB9DD7-1B6B-4337-8709477DDB526A78"/>
-			</componentimages>
+			uniqueguid="0B18DE27-1FC8-40A4-BB4E5AD81F5EC3DC"
+			currentstate="4B34512D-D133-4470-A6BDC49463117A35"
+			defaultstate="4B34512D-D133-4470-A6BDC49463117A35">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="ContextStateSetterConditional">
+					<child_m_user_properties>
+						<property
+							name="fallback_state"
+							value="default"/>
+						<property
+							name="trial"
+							value="BattleRoot.IsTrial"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
 			<states>
 				<default
-					this="DF3E3456-CAF2-46E9-B5E91D05690118F8"
+					this="4B34512D-D133-4470-A6BDC49463117A35"
 					name="default"
-					width="1600"
-					height="900"
+					width="310"
+					height="35"
 					interactive="true"
-					uniqueguid="DF3E3456-CAF2-46E9-B5E91D05690118F8">
-					<imagemetrics>
-						<image
-							this="869414A0-533C-4734-A7CAD6C08B645778"
-							uniqueguid="869414A0-533C-4734-A7CAD6C08B645778"
-							componentimage="7EFB9DD7-1B6B-4337-8709477DDB526A78"
-							width="1920"
-							height="1080"
-							colour="#E48080FF"/>
-					</imagemetrics>
+					uniqueguid="4B34512D-D133-4470-A6BDC49463117A35">
+					<component_text
+						text="Scavenge supplies from the battlefield to spend in the battle."
+						textxoffset="10.00,10.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="dy_desc_default_Text_52004e"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+				</default>
+				<trial
+					this="9D11BB98-21A1-4CB4-9A7EEB9D6D0F9972"
+					name="trial"
+					width="310"
+					height="54"
+					uniqueguid="9D11BB98-21A1-4CB4-9A7EEB9D6D0F9972">
+					<component_text
+						text="Defend the Shard to gather Forbidden Knowledge, which can be used to upgrade your army abilities in this battle."
+						textxoffset="10.00,10.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="StateText_f91ad6b0"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+				</trial>
+			</states>
+		</dy_desc>
+		<dy_header
+			this="3C8D2C7F-ADF2-4435-A4C0FF55B1A8365B"
+			id="dy_header"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="30"
+			tooltipslocalised="true"
+			uniqueguid="3C8D2C7F-ADF2-4435-A4C0FF55B1A8365B"
+			currentstate="C7DA1086-EE2D-4302-A52895DEC4467C15"
+			defaultstate="C7DA1086-EE2D-4302-A52895DEC4467C15">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoBattleSecondaryCurrencyTypeRecord"
+					context_function_id="GetIfElse(BattleRoot.IsTrial, Loc(&quot;forbidden_knowledge_points&quot;), UiLocalisedName)"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="C7DA1086-EE2D-4302-A52895DEC4467C15"
+					name="default"
+					width="310"
+					height="40"
+					interactive="true"
+					uniqueguid="C7DA1086-EE2D-4302-A52895DEC4467C15">
+					<component_text
+						text="dt_text"
+						textvalign="Center"
+						texthalign="Center"
+						textxoffset="10.00,0.00"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="victory_points_total_default_Text_78002a"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_14"/>
 				</default>
 			</states>
-		</root>
+		</dy_header>
 		<dy_rate
 			this="19E60F93-416C-40EF-BDFB1F6570D12C43"
 			id="dy_rate"
@@ -194,6 +264,38 @@
 				</columnwidths>
 			</LayoutEngine>
 		</player_victory_point_types_list>
+		<root
+			this="CD6F7CE7-5F9A-4E1E-B4B652104FE6B0D6"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="CD6F7CE7-5F9A-4E1E-B4B652104FE6B0D6"
+			currentstate="DF3E3456-CAF2-46E9-B5E91D05690118F8"
+			defaultstate="DF3E3456-CAF2-46E9-B5E91D05690118F8">
+			<componentimages>
+				<component_image
+					this="7EFB9DD7-1B6B-4337-8709477DDB526A78"
+					uniqueguid="7EFB9DD7-1B6B-4337-8709477DDB526A78"/>
+			</componentimages>
+			<states>
+				<default
+					this="DF3E3456-CAF2-46E9-B5E91D05690118F8"
+					name="default"
+					width="1600"
+					height="900"
+					interactive="true"
+					uniqueguid="DF3E3456-CAF2-46E9-B5E91D05690118F8">
+					<imagemetrics>
+						<image
+							this="869414A0-533C-4734-A7CAD6C08B645778"
+							uniqueguid="869414A0-533C-4734-A7CAD6C08B645778"
+							componentimage="7EFB9DD7-1B6B-4337-8709477DDB526A78"
+							width="1920"
+							height="1080"
+							colour="#E48080FF"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</root>
 		<template_point_category
 			this="0B888410-C0E8-4385-AC459327AA2D7797"
 			id="template_point_category"
@@ -359,108 +461,6 @@
 				</columnwidths>
 			</LayoutEngine>
 		</tooltip_battle_currency>
-		<dy_header
-			this="3C8D2C7F-ADF2-4435-A4C0FF55B1A8365B"
-			id="dy_header"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			priority="30"
-			tooltipslocalised="true"
-			uniqueguid="3C8D2C7F-ADF2-4435-A4C0FF55B1A8365B"
-			currentstate="C7DA1086-EE2D-4302-A52895DEC4467C15"
-			defaultstate="C7DA1086-EE2D-4302-A52895DEC4467C15">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoBattleSecondaryCurrencyTypeRecord"
-					context_function_id="GetIfElse(BattleRoot.IsTrial, Loc(&quot;forbidden_knowledge_points&quot;), UiLocalisedName)"/>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="C7DA1086-EE2D-4302-A52895DEC4467C15"
-					name="default"
-					width="310"
-					height="40"
-					interactive="true"
-					uniqueguid="C7DA1086-EE2D-4302-A52895DEC4467C15">
-					<component_text
-						text="dt_text"
-						textvalign="Center"
-						texthalign="Center"
-						textxoffset="10.00,0.00"
-						texthbehaviour="Never split"
-						textlocalised="true"
-						textlabel="victory_points_total_default_Text_78002a"
-						font_m_font_name="brand_header"
-						font_m_size="14"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="header_14"/>
-				</default>
-			</states>
-		</dy_header>
-		<dy_desc
-			this="0B18DE27-1FC8-40A4-BB4E5AD81F5EC3DC"
-			id="dy_desc"
-			offset="0.00,42.00"
-			allowhorizontalresize="false"
-			priority="30"
-			tooltipslocalised="true"
-			uniqueguid="0B18DE27-1FC8-40A4-BB4E5AD81F5EC3DC"
-			currentstate="4B34512D-D133-4470-A6BDC49463117A35"
-			defaultstate="4B34512D-D133-4470-A6BDC49463117A35">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="ContextStateSetterConditional">
-					<child_m_user_properties>
-						<property
-							name="fallback_state"
-							value="default"/>
-						<property
-							name="trial"
-							value="BattleRoot.IsTrial"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="4B34512D-D133-4470-A6BDC49463117A35"
-					name="default"
-					width="310"
-					height="35"
-					interactive="true"
-					uniqueguid="4B34512D-D133-4470-A6BDC49463117A35">
-					<component_text
-						text="Scavenge supplies from the battlefield to spend in the battle."
-						textxoffset="10.00,10.00"
-						texthbehaviour="Resize"
-						textlocalised="true"
-						textlabel="dy_desc_default_Text_52004e"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"
-						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
-				</default>
-				<trial
-					this="9D11BB98-21A1-4CB4-9A7EEB9D6D0F9972"
-					name="trial"
-					width="310"
-					height="54"
-					uniqueguid="9D11BB98-21A1-4CB4-9A7EEB9D6D0F9972">
-					<component_text
-						text="Defend the Shard to gather Forbidden Knowledge, which can be used to upgrade your army abilities in this battle."
-						textxoffset="10.00,10.00"
-						texthbehaviour="Resize"
-						textlocalised="true"
-						textlabel="StateText_f91ad6b0"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"
-						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
-				</trial>
-			</states>
-		</dy_desc>
 		<tx_rate
 			this="221F3698-19D3-4028-A050479F91DF4728"
 			id="tx_rate"

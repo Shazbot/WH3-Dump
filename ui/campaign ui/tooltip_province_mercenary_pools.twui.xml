@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -18,36 +18,61 @@
 		</root>
 	</hierarchy>
 	<components>
-		<root
-			this="0AED8C52-0096-4F4F-9E726645B9C5F501"
-			id="root"
+		<available_count
+			this="31AC442F-ADD0-4097-9AB5CC107FEACE86"
+			id="available_count"
+			offset="-2.00,49.00"
+			docking="Bottom Left"
+			dock_offset="-2.00,2.00"
+			component_anchor_point="0.00,1.00"
 			tooltipslocalised="true"
-			uniqueguid="0AED8C52-0096-4F4F-9E726645B9C5F501"
-			currentstate="EFD9FE94-16F6-49DA-8FB40712F3749D34"
-			defaultstate="EFD9FE94-16F6-49DA-8FB40712F3749D34">
+			uniqueguid="31AC442F-ADD0-4097-9AB5CC107FEACE86"
+			currentstate="BAA9BA45-F0FB-49FC-949210E23E0C63DF"
+			defaultstate="BAA9BA45-F0FB-49FC-949210E23E0C63DF">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignMercenaryPoolUnit"
+					context_function_id="GetIfElse(AvailableUnitCount &gt; 0 &amp;&amp; HasInfiniteUnitCount == false, AvailableUnitCount, &quot;&quot;)"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignMercenaryPoolUnit"
+					context_function_id="AvailableUnitCount &gt; 0 &amp;&amp; HasInfiniteUnitCount == false"/>
+			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
-					this="A2D0ECCE-3CFB-442D-BE07154491500A1D"
-					uniqueguid="A2D0ECCE-3CFB-442D-BE07154491500A1D"/>
+					this="0FC97B98-2779-4259-B1B56C729D6D5C33"
+					uniqueguid="0FC97B98-2779-4259-B1B56C729D6D5C33"
+					imagepath="ui/skins/default/merc_counter_frame.png"/>
 			</componentimages>
 			<states>
 				<default
-					this="EFD9FE94-16F6-49DA-8FB40712F3749D34"
+					this="BAA9BA45-F0FB-49FC-949210E23E0C63DF"
 					name="default"
-					width="1600"
-					height="900"
-					uniqueguid="EFD9FE94-16F6-49DA-8FB40712F3749D34">
+					width="22"
+					height="22"
+					uniqueguid="BAA9BA45-F0FB-49FC-949210E23E0C63DF">
 					<imagemetrics>
 						<image
-							this="069450FA-44EB-4295-92B8D194BAFDDBB3"
-							uniqueguid="069450FA-44EB-4295-92B8D194BAFDDBB3"
-							componentimage="A2D0ECCE-3CFB-442D-BE07154491500A1D"
-							width="1920"
-							height="1080"/>
+							this="9C315564-3120-4420-B0B406AD39C27687"
+							uniqueguid="9C315564-3120-4420-B0B406AD39C27687"
+							componentimage="0FC97B98-2779-4259-B1B56C729D6D5C33"
+							width="22"
+							height="22"/>
 					</imagemetrics>
+					<component_text
+						text="10"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Never split"
+						textlabel="StateText_5fe30048"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"
+						font_colour_override_preset_key="white"/>
 				</default>
 			</states>
-		</root>
+		</available_count>
 		<header_title
 			this="2B41B96D-D0B4-4E4F-973176D7BEEA5EC5"
 			id="header_title"
@@ -78,87 +103,53 @@
 				</default>
 			</states>
 		</header_title>
-		<no_units
-			this="4F2E7508-3403-4C0A-AB2A181683988D41"
-			id="no_units"
-			offset="0.00,26.00"
-			allowverticalresize="false"
+		<infinity_symbol
+			this="D56A73E4-E96B-41B7-B3FE65EB6FF838C9"
+			id="infinity_symbol"
+			offset="-2.00,49.00"
 			visible="false"
+			docking="Bottom Left"
+			dock_offset="-2.00,2.00"
+			component_anchor_point="0.00,1.00"
 			tooltipslocalised="true"
-			uniqueguid="4F2E7508-3403-4C0A-AB2A181683988D41"
-			currentstate="93245E7D-E864-4433-885F6E224E88C65E"
-			defaultstate="93245E7D-E864-4433-885F6E224E88C65E">
+			uniqueguid="D56A73E4-E96B-41B7-B3FE65EB6FF838C9"
+			currentstate="FCE5153C-BBC7-4E36-8087EC39FDF5CAD0"
+			defaultstate="FCE5153C-BBC7-4E36-8087EC39FDF5CAD0">
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoCampaignProvinceMercenaryPool"
-					context_function_id="IsProvidingMercenaryUnitForFaction(PlayersFaction) == false"/>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="93245E7D-E864-4433-885F6E224E88C65E"
-					name="default"
-					width="432"
-					uniqueguid="93245E7D-E864-4433-885F6E224E88C65E">
-					<component_text
-						text="{{tr:city_info_bar_mercenaries_tooltip_description_no_units}}"
-						textxoffset="8.00,8.00"
-						textyoffset="8.00,0.00"
-						texthbehaviour="Resize"
-						textlabel="StateText_f3d5fe7c"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</default>
-			</states>
-		</no_units>
-		<tooltip_province_mercenary_pools
-			this="FE7BD093-8AAE-456A-BF4A198EAE2CCB61"
-			id="tooltip_province_mercenary_pools"
-			offset="753.00,380.00"
-			tooltipslocalised="true"
-			uniqueguid="FE7BD093-8AAE-456A-BF4A198EAE2CCB61"
-			currentstate="53BFB4C2-A4BE-41D7-8E90A492D542D8CA"
-			defaultstate="53BFB4C2-A4BE-41D7-8E90A492D542D8CA">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="CustomTooltip"/>
+					context_object_id="CcoCampaignMercenaryPoolUnit"
+					context_function_id="HasInfiniteUnitCount"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
-					this="7FD33544-2E76-4723-8473380BB677452A"
-					uniqueguid="7FD33544-2E76-4723-8473380BB677452A"
-					imagepath="ui/skins/default/tooltip_frame.png"/>
+					this="20DB9BAC-EC89-4D9F-AA9DB95F184310C9"
+					uniqueguid="20DB9BAC-EC89-4D9F-AA9DB95F184310C9"
+					imagepath="ui/skins/default/icon_infinity.png"/>
 			</componentimages>
 			<states>
 				<default
-					this="53BFB4C2-A4BE-41D7-8E90A492D542D8CA"
+					this="FCE5153C-BBC7-4E36-8087EC39FDF5CAD0"
 					name="default"
-					width="396"
-					height="115"
-					uniqueguid="53BFB4C2-A4BE-41D7-8E90A492D542D8CA">
+					width="22"
+					height="22"
+					uniqueguid="FCE5153C-BBC7-4E36-8087EC39FDF5CAD0">
 					<imagemetrics>
 						<image
-							this="F897B27B-611E-44FE-A3278E7D8E5FE851"
-							uniqueguid="F897B27B-611E-44FE-A3278E7D8E5FE851"
-							componentimage="7FD33544-2E76-4723-8473380BB677452A"
-							width="396"
-							height="115"
-							tile="true"
-							margin="16.00,20.00,16.00,20.00"/>
+							this="A5C847AE-3D49-4CAB-998383A2F32A2667"
+							uniqueguid="A5C847AE-3D49-4CAB-998383A2F32A2667"
+							componentimage="20DB9BAC-EC89-4D9F-AA9DB95F184310C9"
+							width="22"
+							height="22"/>
 					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
 				</default>
 			</states>
-			<LayoutEngine
-				type="List"
-				spacing="0.00,4.00"
-				sizetocontent="true"
-				horizontal_alignment="Center">
-				<columnwidths>
-					<column width="85"/>
-				</columnwidths>
-			</LayoutEngine>
-		</tooltip_province_mercenary_pools>
+		</infinity_symbol>
 		<mercenaries_card_list
 			this="3782C5C3-1563-42C3-883E1F45FDC29869"
 			id="mercenaries_card_list"
@@ -199,6 +190,71 @@
 				</columnwidths>
 			</LayoutEngine>
 		</mercenaries_card_list>
+		<no_units
+			this="4F2E7508-3403-4C0A-AB2A181683988D41"
+			id="no_units"
+			offset="0.00,26.00"
+			allowverticalresize="false"
+			visible="false"
+			tooltipslocalised="true"
+			uniqueguid="4F2E7508-3403-4C0A-AB2A181683988D41"
+			currentstate="93245E7D-E864-4433-885F6E224E88C65E"
+			defaultstate="93245E7D-E864-4433-885F6E224E88C65E">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignProvinceMercenaryPool"
+					context_function_id="IsProvidingMercenaryUnitForFaction(PlayersFaction) == false"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="93245E7D-E864-4433-885F6E224E88C65E"
+					name="default"
+					width="432"
+					uniqueguid="93245E7D-E864-4433-885F6E224E88C65E">
+					<component_text
+						text="{{tr:city_info_bar_mercenaries_tooltip_description_no_units}}"
+						textxoffset="8.00,8.00"
+						textyoffset="8.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_f3d5fe7c"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</default>
+			</states>
+		</no_units>
+		<root
+			this="0AED8C52-0096-4F4F-9E726645B9C5F501"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="0AED8C52-0096-4F4F-9E726645B9C5F501"
+			currentstate="EFD9FE94-16F6-49DA-8FB40712F3749D34"
+			defaultstate="EFD9FE94-16F6-49DA-8FB40712F3749D34">
+			<componentimages>
+				<component_image
+					this="A2D0ECCE-3CFB-442D-BE07154491500A1D"
+					uniqueguid="A2D0ECCE-3CFB-442D-BE07154491500A1D"/>
+			</componentimages>
+			<states>
+				<default
+					this="EFD9FE94-16F6-49DA-8FB40712F3749D34"
+					name="default"
+					width="1600"
+					height="900"
+					uniqueguid="EFD9FE94-16F6-49DA-8FB40712F3749D34">
+					<imagemetrics>
+						<image
+							this="069450FA-44EB-4295-92B8D194BAFDDBB3"
+							uniqueguid="069450FA-44EB-4295-92B8D194BAFDDBB3"
+							componentimage="A2D0ECCE-3CFB-442D-BE07154491500A1D"
+							width="1920"
+							height="1080"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</root>
 		<template_mercenary_card
 			this="68AEDAA3-22B4-42F4-8FD3B2596EBB865A"
 			id="template_mercenary_card"
@@ -295,107 +351,51 @@
 				</depleted>
 			</states>
 		</template_mercenary_card>
-		<available_count
-			this="31AC442F-ADD0-4097-9AB5CC107FEACE86"
-			id="available_count"
-			offset="-2.00,49.00"
-			docking="Bottom Left"
-			dock_offset="-2.00,2.00"
-			component_anchor_point="0.00,1.00"
+		<tooltip_province_mercenary_pools
+			this="FE7BD093-8AAE-456A-BF4A198EAE2CCB61"
+			id="tooltip_province_mercenary_pools"
+			offset="753.00,380.00"
 			tooltipslocalised="true"
-			uniqueguid="31AC442F-ADD0-4097-9AB5CC107FEACE86"
-			currentstate="BAA9BA45-F0FB-49FC-949210E23E0C63DF"
-			defaultstate="BAA9BA45-F0FB-49FC-949210E23E0C63DF">
+			uniqueguid="FE7BD093-8AAE-456A-BF4A198EAE2CCB61"
+			currentstate="53BFB4C2-A4BE-41D7-8E90A492D542D8CA"
+			defaultstate="53BFB4C2-A4BE-41D7-8E90A492D542D8CA">
 			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoCampaignMercenaryPoolUnit"
-					context_function_id="GetIfElse(AvailableUnitCount &gt; 0 &amp;&amp; HasInfiniteUnitCount == false, AvailableUnitCount, &quot;&quot;)"/>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoCampaignMercenaryPoolUnit"
-					context_function_id="AvailableUnitCount &gt; 0 &amp;&amp; HasInfiniteUnitCount == false"/>
+				<callback_with_context callback_id="CustomTooltip"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
-					this="0FC97B98-2779-4259-B1B56C729D6D5C33"
-					uniqueguid="0FC97B98-2779-4259-B1B56C729D6D5C33"
-					imagepath="ui/skins/default/merc_counter_frame.png"/>
+					this="7FD33544-2E76-4723-8473380BB677452A"
+					uniqueguid="7FD33544-2E76-4723-8473380BB677452A"
+					imagepath="ui/skins/default/tooltip_frame.png"/>
 			</componentimages>
 			<states>
 				<default
-					this="BAA9BA45-F0FB-49FC-949210E23E0C63DF"
+					this="53BFB4C2-A4BE-41D7-8E90A492D542D8CA"
 					name="default"
-					width="22"
-					height="22"
-					uniqueguid="BAA9BA45-F0FB-49FC-949210E23E0C63DF">
+					width="396"
+					height="115"
+					uniqueguid="53BFB4C2-A4BE-41D7-8E90A492D542D8CA">
 					<imagemetrics>
 						<image
-							this="9C315564-3120-4420-B0B406AD39C27687"
-							uniqueguid="9C315564-3120-4420-B0B406AD39C27687"
-							componentimage="0FC97B98-2779-4259-B1B56C729D6D5C33"
-							width="22"
-							height="22"/>
+							this="F897B27B-611E-44FE-A3278E7D8E5FE851"
+							uniqueguid="F897B27B-611E-44FE-A3278E7D8E5FE851"
+							componentimage="7FD33544-2E76-4723-8473380BB677452A"
+							width="396"
+							height="115"
+							tile="true"
+							margin="16.00,20.00,16.00,20.00"/>
 					</imagemetrics>
-					<component_text
-						text="10"
-						textvalign="Center"
-						texthalign="Center"
-						texthbehaviour="Never split"
-						textlabel="StateText_5fe30048"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_10"
-						font_colour_override_preset_key="white"/>
 				</default>
 			</states>
-		</available_count>
-		<infinity_symbol
-			this="D56A73E4-E96B-41B7-B3FE65EB6FF838C9"
-			id="infinity_symbol"
-			offset="-2.00,49.00"
-			visible="false"
-			docking="Bottom Left"
-			dock_offset="-2.00,2.00"
-			component_anchor_point="0.00,1.00"
-			tooltipslocalised="true"
-			uniqueguid="D56A73E4-E96B-41B7-B3FE65EB6FF838C9"
-			currentstate="FCE5153C-BBC7-4E36-8087EC39FDF5CAD0"
-			defaultstate="FCE5153C-BBC7-4E36-8087EC39FDF5CAD0">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoCampaignMercenaryPoolUnit"
-					context_function_id="HasInfiniteUnitCount"/>
-			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="20DB9BAC-EC89-4D9F-AA9DB95F184310C9"
-					uniqueguid="20DB9BAC-EC89-4D9F-AA9DB95F184310C9"
-					imagepath="ui/skins/default/icon_infinity.png"/>
-			</componentimages>
-			<states>
-				<default
-					this="FCE5153C-BBC7-4E36-8087EC39FDF5CAD0"
-					name="default"
-					width="22"
-					height="22"
-					uniqueguid="FCE5153C-BBC7-4E36-8087EC39FDF5CAD0">
-					<imagemetrics>
-						<image
-							this="A5C847AE-3D49-4CAB-998383A2F32A2667"
-							uniqueguid="A5C847AE-3D49-4CAB-998383A2F32A2667"
-							componentimage="20DB9BAC-EC89-4D9F-AA9DB95F184310C9"
-							width="22"
-							height="22"/>
-					</imagemetrics>
-					<component_text
-						texthbehaviour="Never split"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_10"/>
-				</default>
-			</states>
-		</infinity_symbol>
+			<LayoutEngine
+				type="List"
+				spacing="0.00,4.00"
+				sizetocontent="true"
+				horizontal_alignment="Center">
+				<columnwidths>
+					<column width="85"/>
+				</columnwidths>
+			</LayoutEngine>
+		</tooltip_province_mercenary_pools>
 	</components>
 </layout>

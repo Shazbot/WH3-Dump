@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -17,38 +17,166 @@
 		</root>
 	</hierarchy>
 	<components>
-		<root
-			this="771DDF9D-2092-40BE-B94F232761EB2887"
-			id="root"
-			uniqueguid_in_template="771DDF9D-2092-40BE-B94F232761EB2887"
+		<armory_items_holder
+			this="5F1BB7C2-2A8D-4DE3-80B32942E94BD932"
+			id="armory_items_holder"
+			uniqueguid_in_template="5F1BB7C2-2A8D-4DE3-80B32942E94BD932"
+			offset="16.00,0.00"
+			docking="Top Center"
+			component_anchor_point="0.50,0.00"
 			tooltipslocalised="true"
-			uniqueguid="771DDF9D-2092-40BE-B94F232761EB2887"
-			currentstate="3ADD6750-BBDB-44E3-A0FD611EE0BC6074"
-			defaultstate="3ADD6750-BBDB-44E3-A0FD611EE0BC6074">
-			<componentimages>
-				<component_image
-					this="B404D8FE-DEFA-478D-8BFE9EDC8A75A10D"
-					uniqueguid="B404D8FE-DEFA-478D-8BFE9EDC8A75A10D"/>
-			</componentimages>
+			uniqueguid="5F1BB7C2-2A8D-4DE3-80B32942E94BD932"
+			updatewhennotvisible="true"
+			currentstate="C9091E51-4E77-498C-B3FC2605C7A3F4AF"
+			defaultstate="C9091E51-4E77-498C-B3FC2605C7A3F4AF">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoCampaignOperationSetRecord"
+					context_function_id="ArmoryItemList.Sort(Key, true)"/>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignOperationSetRecord"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="disable_override0"
+					value="all"/>
+			</userproperties>
 			<states>
 				<default
-					this="3ADD6750-BBDB-44E3-A0FD611EE0BC6074"
+					this="C9091E51-4E77-498C-B3FC2605C7A3F4AF"
 					name="default"
-					width="1600"
-					height="900"
-					uniqueguid="3ADD6750-BBDB-44E3-A0FD611EE0BC6074">
+					uniqueguid="C9091E51-4E77-498C-B3FC2605C7A3F4AF"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				itemsperrow="2"
+				sizetocontent="true"
+				is_listview_lookup_enabled="false"
+				vertical_alignment="Center"/>
+		</armory_items_holder>
+		<cost
+			this="3CF2FF62-B07D-4D45-8E000E4F7A871167"
+			id="cost"
+			uniqueguid_in_template="3CF2FF62-B07D-4D45-8E000E4F7A871167"
+			offset="13.00,60.00"
+			allowverticalresize="false"
+			docking="Bottom Left"
+			dock_offset="13.00,16.00"
+			component_anchor_point="0.00,1.00"
+			priority="45"
+			tooltipslocalised="true"
+			componentleveltooltip="Glory requirement||This amount of Glory is required to unlock this Daemonic Gift."
+			tooltiplabel="cost_Tooltip_516f498a"
+			uniqueguid="3CF2FF62-B07D-4D45-8E000E4F7A871167"
+			currentstate="74CB2BFB-BD8E-4775-A467529F017EAEA7"
+			defaultstate="74CB2BFB-BD8E-4775-A467529F017EAEA7">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoPooledResourceThresholdOperationSetRecord"
+					context_function_id="LowerBound"/>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoPooledResourceThresholdOperationSetRecord"
+					context_function_id="PooledResourceList.FirstContext.IconPath.Replace(&quot;points.png&quot;,&quot;banner.png&quot;).Replace(&quot;icon_dae&quot;,&quot;points&quot;)"/>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoPooledResourceThresholdOperationSetRecord"
+					context_function_id="GetIfElse(PooledResourceList.FirstContext.Total &gt;= LowerBound, &quot;normal&quot;, &quot;red&quot; )">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="PooledResourceTransaction"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoPooledResourceThresholdOperationSetRecord"
+					context_function_id="ActiveOperationSetList(PlayersFaction).IsEmpty &amp;&amp; ((PooledResourceList.FirstContext.Total &gt;= LowerBound &amp;&amp; IsLockedByAchievement  == false) || self.ParentContext.IsMouseOver || self.ParentContext.IsMouseOverChildren )">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="disable_override0"
+					value="all"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="B997B519-3249-44B2-A7AF177208FECDB2"
+					uniqueguid="B997B519-3249-44B2-A7AF177208FECDB2"
+					imagepath="ui/skins/default/points_khorne_banner.png"/>
+			</componentimages>
+			<states>
+				<normal
+					this="74CB2BFB-BD8E-4775-A467529F017EAEA7"
+					name="normal"
+					width="72"
+					height="20"
+					interactive="true"
+					uniqueguid="74CB2BFB-BD8E-4775-A467529F017EAEA7">
 					<imagemetrics>
 						<image
-							this="18224CCE-D4E2-45CE-BAF4820CC6BC33F7"
-							uniqueguid="18224CCE-D4E2-45CE-BAF4820CC6BC33F7"
-							componentimage="B404D8FE-DEFA-478D-8BFE9EDC8A75A10D"
-							width="1600"
-							height="900"
-							colour="#818181FF"/>
+							this="3EDCF5B4-D5F2-41D6-8C2AA772D31BFF24"
+							uniqueguid="3EDCF5B4-D5F2-41D6-8C2AA772D31BFF24"
+							componentimage="B997B519-3249-44B2-A7AF177208FECDB2"
+							offset="0.00,-4.00"
+							width="72"
+							height="29"
+							tile="true"
+							dockpoint="Center"
+							margin="0.00,15.00,0.00,30.00"/>
 					</imagemetrics>
-				</default>
+					<component_text
+						text="2000"
+						textxoffset="26.00,10.00"
+						textyoffset="4.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="dy_cost_NewSate_Text_2"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</normal>
+				<red
+					this="897935CA-7E9A-4BB5-8A32C250E5ABD78F"
+					name="red"
+					width="72"
+					height="20"
+					interactive="true"
+					uniqueguid="897935CA-7E9A-4BB5-8A32C250E5ABD78F">
+					<imagemetrics>
+						<image
+							this="8A5C51A8-CB4D-47DB-A4D0BB73501CBB8D"
+							uniqueguid="8A5C51A8-CB4D-47DB-A4D0BB73501CBB8D"
+							componentimage="B997B519-3249-44B2-A7AF177208FECDB2"
+							offset="0.00,-4.00"
+							width="72"
+							height="29"
+							tile="true"
+							dockpoint="Center"
+							margin="0.00,15.00,0.00,30.00"/>
+					</imagemetrics>
+					<component_text
+						text="2000"
+						textxoffset="26.00,10.00"
+						textyoffset="4.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="dy_cost_NewSate_Text_2"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
+				</red>
 			</states>
-		</root>
+		</cost>
 		<dae_progression_gift_button
 			this="71A81BB1-951C-43DB-9D0B4148B26F93D0"
 			id="dae_progression_gift_button"
@@ -247,11 +375,11 @@
 					</imagemetrics>
 					<transitionmap>
 						<transition
-							index="3"
-							transition_m_target_state="004E61B9-BE9F-408B-94BA219482A2B952"/>
-						<transition
 							index="1"
 							transition_m_target_state="76F6850E-94DB-4D88-88CC92CDE9C4AFDF"/>
+						<transition
+							index="3"
+							transition_m_target_state="004E61B9-BE9F-408B-94BA219482A2B952"/>
 					</transitionmap>
 					<component_text
 						texthbehaviour="Never split"
@@ -570,6 +698,88 @@
 				</next>
 			</animations>
 		</dae_progression_gift_button>
+		<padlock
+			this="887A241A-5113-49CB-9853FB246BA53533"
+			id="padlock"
+			uniqueguid_in_template="887A241A-5113-49CB-9853FB246BA53533"
+			offset="-8.00,32.00"
+			tooltipslocalised="true"
+			uniqueguid="887A241A-5113-49CB-9853FB246BA53533"
+			currentstate="BA3A259B-99D0-47CF-A60FB3A7A8913D97"
+			defaultstate="BA3A259B-99D0-47CF-A60FB3A7A8913D97">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoPooledResourceThresholdOperationSetRecord"
+					context_function_id="PooledResourceList.FirstContext.Total &lt; LowerBound || IsLockedByAchievement">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="PooledResourceTransaction"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="disable_override0"
+					value="all"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="0D264739-53F9-4EB7-9B6F6C8A3F250021"
+					uniqueguid="0D264739-53F9-4EB7-9B6F6C8A3F250021"
+					imagepath="ui/skins/default/padlock.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="BA3A259B-99D0-47CF-A60FB3A7A8913D97"
+					name="default"
+					height="40"
+					shader_name="set_greyscale_t0"
+					shadervars="1.00,1.00,0.00,0.00"
+					uniqueguid="BA3A259B-99D0-47CF-A60FB3A7A8913D97">
+					<imagemetrics>
+						<image
+							this="D3173163-A981-4AB6-8EC97983A1730FBD"
+							uniqueguid="D3173163-A981-4AB6-8EC97983A1730FBD"
+							componentimage="0D264739-53F9-4EB7-9B6F6C8A3F250021"
+							height="40"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</padlock>
+		<root
+			this="771DDF9D-2092-40BE-B94F232761EB2887"
+			id="root"
+			uniqueguid_in_template="771DDF9D-2092-40BE-B94F232761EB2887"
+			tooltipslocalised="true"
+			uniqueguid="771DDF9D-2092-40BE-B94F232761EB2887"
+			currentstate="3ADD6750-BBDB-44E3-A0FD611EE0BC6074"
+			defaultstate="3ADD6750-BBDB-44E3-A0FD611EE0BC6074">
+			<componentimages>
+				<component_image
+					this="B404D8FE-DEFA-478D-8BFE9EDC8A75A10D"
+					uniqueguid="B404D8FE-DEFA-478D-8BFE9EDC8A75A10D"/>
+			</componentimages>
+			<states>
+				<default
+					this="3ADD6750-BBDB-44E3-A0FD611EE0BC6074"
+					name="default"
+					width="1600"
+					height="900"
+					uniqueguid="3ADD6750-BBDB-44E3-A0FD611EE0BC6074">
+					<imagemetrics>
+						<image
+							this="18224CCE-D4E2-45CE-BAF4820CC6BC33F7"
+							uniqueguid="18224CCE-D4E2-45CE-BAF4820CC6BC33F7"
+							componentimage="B404D8FE-DEFA-478D-8BFE9EDC8A75A10D"
+							width="1600"
+							height="900"
+							colour="#818181FF"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</root>
 		<template_part_icon
 			this="2B88FA44-7125-48A8-B3E0E97EDC8E7D01"
 			id="template_part_icon"
@@ -577,7 +787,7 @@
 			priority="20"
 			uniqueguid="2B88FA44-7125-48A8-B3E0E97EDC8E7D01"
 			updatewhennotvisible="true"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="49B80459-6EB8-4C37-BF0AC8E8008DF76D"
 			defaultstate="49B80459-6EB8-4C37-BF0AC8E8008DF76D">
 			<callbackwithcontextlist>
@@ -728,216 +938,6 @@
 				</selected>
 			</states>
 		</template_part_icon>
-		<armory_items_holder
-			this="5F1BB7C2-2A8D-4DE3-80B32942E94BD932"
-			id="armory_items_holder"
-			uniqueguid_in_template="5F1BB7C2-2A8D-4DE3-80B32942E94BD932"
-			offset="16.00,0.00"
-			docking="Top Center"
-			component_anchor_point="0.50,0.00"
-			tooltipslocalised="true"
-			uniqueguid="5F1BB7C2-2A8D-4DE3-80B32942E94BD932"
-			updatewhennotvisible="true"
-			currentstate="C9091E51-4E77-498C-B3FC2605C7A3F4AF"
-			defaultstate="C9091E51-4E77-498C-B3FC2605C7A3F4AF">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextList"
-					context_object_id="CcoCampaignOperationSetRecord"
-					context_function_id="ArmoryItemList.Sort(Key, true)"/>
-				<callback_with_context
-					callback_id="ContextObjectStore"
-					context_object_id="CcoCampaignOperationSetRecord"/>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="disable_override0"
-					value="all"/>
-			</userproperties>
-			<states>
-				<default
-					this="C9091E51-4E77-498C-B3FC2605C7A3F4AF"
-					name="default"
-					uniqueguid="C9091E51-4E77-498C-B3FC2605C7A3F4AF"/>
-			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				itemsperrow="2"
-				sizetocontent="true"
-				is_listview_lookup_enabled="false"
-				vertical_alignment="Center"/>
-		</armory_items_holder>
-		<cost
-			this="3CF2FF62-B07D-4D45-8E000E4F7A871167"
-			id="cost"
-			uniqueguid_in_template="3CF2FF62-B07D-4D45-8E000E4F7A871167"
-			offset="13.00,60.00"
-			allowverticalresize="false"
-			docking="Bottom Left"
-			dock_offset="13.00,16.00"
-			component_anchor_point="0.00,1.00"
-			priority="45"
-			tooltipslocalised="true"
-			componentleveltooltip="Glory requirement||This amount of Glory is required to unlock this Daemonic Gift."
-			tooltiplabel="cost_Tooltip_516f498a"
-			uniqueguid="3CF2FF62-B07D-4D45-8E000E4F7A871167"
-			currentstate="74CB2BFB-BD8E-4775-A467529F017EAEA7"
-			defaultstate="74CB2BFB-BD8E-4775-A467529F017EAEA7">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoPooledResourceThresholdOperationSetRecord"
-					context_function_id="LowerBound"/>
-				<callback_with_context
-					callback_id="ContextImageSetter"
-					context_object_id="CcoPooledResourceThresholdOperationSetRecord"
-					context_function_id="PooledResourceList.FirstContext.IconPath.Replace(&quot;points.png&quot;,&quot;banner.png&quot;).Replace(&quot;icon_dae&quot;,&quot;points&quot;)"/>
-				<callback_with_context
-					callback_id="ContextStateSetter"
-					context_object_id="CcoPooledResourceThresholdOperationSetRecord"
-					context_function_id="GetIfElse(PooledResourceList.FirstContext.Total &gt;= LowerBound, &quot;normal&quot;, &quot;red&quot; )">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="PooledResourceTransaction"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoPooledResourceThresholdOperationSetRecord"
-					context_function_id="ActiveOperationSetList(PlayersFaction).IsEmpty &amp;&amp; ((PooledResourceList.FirstContext.Total &gt;= LowerBound &amp;&amp; IsLockedByAchievement  == false) || self.ParentContext.IsMouseOver || self.ParentContext.IsMouseOverChildren )">
-					<child_m_user_properties>
-						<property
-							name="update_constant"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="disable_override0"
-					value="all"/>
-			</userproperties>
-			<componentimages>
-				<component_image
-					this="B997B519-3249-44B2-A7AF177208FECDB2"
-					uniqueguid="B997B519-3249-44B2-A7AF177208FECDB2"
-					imagepath="ui/skins/default/points_khorne_banner.png"/>
-			</componentimages>
-			<states>
-				<normal
-					this="74CB2BFB-BD8E-4775-A467529F017EAEA7"
-					name="normal"
-					width="72"
-					height="20"
-					interactive="true"
-					uniqueguid="74CB2BFB-BD8E-4775-A467529F017EAEA7">
-					<imagemetrics>
-						<image
-							this="3EDCF5B4-D5F2-41D6-8C2AA772D31BFF24"
-							uniqueguid="3EDCF5B4-D5F2-41D6-8C2AA772D31BFF24"
-							componentimage="B997B519-3249-44B2-A7AF177208FECDB2"
-							offset="0.00,-4.00"
-							width="72"
-							height="29"
-							tile="true"
-							dockpoint="Center"
-							margin="0.00,15.00,0.00,30.00"/>
-					</imagemetrics>
-					<component_text
-						text="2000"
-						textxoffset="26.00,10.00"
-						textyoffset="4.00,0.00"
-						texthbehaviour="Resize"
-						textlabel="dy_cost_NewSate_Text_2"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</normal>
-				<red
-					this="897935CA-7E9A-4BB5-8A32C250E5ABD78F"
-					name="red"
-					width="72"
-					height="20"
-					interactive="true"
-					uniqueguid="897935CA-7E9A-4BB5-8A32C250E5ABD78F">
-					<imagemetrics>
-						<image
-							this="8A5C51A8-CB4D-47DB-A4D0BB73501CBB8D"
-							uniqueguid="8A5C51A8-CB4D-47DB-A4D0BB73501CBB8D"
-							componentimage="B997B519-3249-44B2-A7AF177208FECDB2"
-							offset="0.00,-4.00"
-							width="72"
-							height="29"
-							tile="true"
-							dockpoint="Center"
-							margin="0.00,15.00,0.00,30.00"/>
-					</imagemetrics>
-					<component_text
-						text="2000"
-						textxoffset="26.00,10.00"
-						textyoffset="4.00,0.00"
-						texthbehaviour="Resize"
-						textlabel="dy_cost_NewSate_Text_2"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"
-						font_colour_override_preset_key="red"/>
-				</red>
-			</states>
-		</cost>
-		<padlock
-			this="887A241A-5113-49CB-9853FB246BA53533"
-			id="padlock"
-			uniqueguid_in_template="887A241A-5113-49CB-9853FB246BA53533"
-			offset="-8.00,32.00"
-			tooltipslocalised="true"
-			uniqueguid="887A241A-5113-49CB-9853FB246BA53533"
-			currentstate="BA3A259B-99D0-47CF-A60FB3A7A8913D97"
-			defaultstate="BA3A259B-99D0-47CF-A60FB3A7A8913D97">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoPooledResourceThresholdOperationSetRecord"
-					context_function_id="PooledResourceList.FirstContext.Total &lt; LowerBound || IsLockedByAchievement">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="PooledResourceTransaction"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="disable_override0"
-					value="all"/>
-			</userproperties>
-			<componentimages>
-				<component_image
-					this="0D264739-53F9-4EB7-9B6F6C8A3F250021"
-					uniqueguid="0D264739-53F9-4EB7-9B6F6C8A3F250021"
-					imagepath="ui/skins/default/padlock.png"/>
-			</componentimages>
-			<states>
-				<default
-					this="BA3A259B-99D0-47CF-A60FB3A7A8913D97"
-					name="default"
-					height="40"
-					shader_name="set_greyscale_t0"
-					shadervars="1.00,1.00,0.00,0.00"
-					uniqueguid="BA3A259B-99D0-47CF-A60FB3A7A8913D97">
-					<imagemetrics>
-						<image
-							this="D3173163-A981-4AB6-8EC97983A1730FBD"
-							uniqueguid="D3173163-A981-4AB6-8EC97983A1730FBD"
-							componentimage="0D264739-53F9-4EB7-9B6F6C8A3F250021"
-							height="40"/>
-					</imagemetrics>
-				</default>
-			</states>
-		</padlock>
 		<tick
 			this="78929C06-6CC6-466F-890153FB506998E6"
 			id="tick"

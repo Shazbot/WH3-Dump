@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="CanUseUiFeature(&quot;BLOODGROUNDS&quot;)">
 	<hierarchy>
@@ -125,6 +125,36 @@
 				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
 			</override_images>
 		</dev_button_add_ruination>
+		<dev_icon
+			this="EC58683E-139D-4890-AEC8DEEA5908500D"
+			id="dev_icon"
+			part_of_template="true"
+			uniqueguid_in_template="0F4F9F06-4613-496B-A0F05A2B8B88B70D"
+			uniqueguid="EC58683E-139D-4890-AEC8DEEA5908500D"
+			dimensions="24.00,24.00"
+			dock_point="Center Left"
+			offset="2.00,0.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="86C46F3B-C555-4683-889BA98CB7C0F9DF"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/dev_icon.png"
+					uniqueguid="FD9363B9-7DCC-4ADE-8947458C10D4818B"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/dev_icon.png"/>
+			</override_images>
+		</dev_icon>
 		<fill
 			this="813E76F3-8369-4498-930941379210855B"
 			id="fill"
@@ -175,36 +205,6 @@
 				</newstate>
 			</states>
 		</fill>
-		<dev_icon
-			this="EC58683E-139D-4890-AEC8DEEA5908500D"
-			id="dev_icon"
-			part_of_template="true"
-			uniqueguid_in_template="0F4F9F06-4613-496B-A0F05A2B8B88B70D"
-			uniqueguid="EC58683E-139D-4890-AEC8DEEA5908500D"
-			dimensions="24.00,24.00"
-			dock_point="Center Left"
-			offset="2.00,0.00"
-			priority="100">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="86C46F3B-C555-4683-889BA98CB7C0F9DF"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/dev/dev_icon.png"
-					uniqueguid="FD9363B9-7DCC-4ADE-8947458C10D4818B"/>
-			</component_image_uniqueguids>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/dev/dev_icon.png"/>
-			</override_images>
-		</dev_icon>
 		<fill_bar
 			this="733E6AB2-589A-4110-BF255A5F53F687DA"
 			id="fill_bar"
@@ -319,6 +319,130 @@
 					uniqueguid="AEF9E3BF-EC86-403A-83F0F4AD379AA3FD"/>
 			</states>
 		</levels_parent>
+		<marks_of_ruination_bar
+			this="32033E36-14E2-4AAB-A555C6BCC4534BE8"
+			id="marks_of_ruination_bar"
+			offset="10.00,10.00"
+			allowverticalresize="false"
+			priority="1"
+			tooltipslocalised="true"
+			uniqueguid="32033E36-14E2-4AAB-A555C6BCC4534BE8"
+			currentstate="2622C21E-7A39-41B3-AFBAE5E0CFFBFB4B"
+			defaultstate="2622C21E-7A39-41B3-AFBAE5E0CFFBFB4B">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="IsValidContext"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoStaticObject"
+					context_function_id="PlayersFaction.PooledResourceContext(&quot;bst_ruination&quot;)"/>
+				<callback_with_context callback_id="RuinationBar"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="9C5001DF-F0C2-4924-84C48F86B098FE23"
+					uniqueguid="9C5001DF-F0C2-4924-84C48F86B098FE23"
+					imagepath="ui/skins/default/beastmen_ruination_bar_bg.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="2622C21E-7A39-41B3-AFBAE5E0CFFBFB4B"
+					name="NewState"
+					width="341"
+					height="51"
+					interactive="true"
+					uniqueguid="2622C21E-7A39-41B3-AFBAE5E0CFFBFB4B">
+					<imagemetrics>
+						<image
+							this="F7E31F8A-F5D4-4DC8-834956D8527BC7FF"
+							uniqueguid="F7E31F8A-F5D4-4DC8-834956D8527BC7FF"
+							componentimage="9C5001DF-F0C2-4924-84C48F86B098FE23"
+							offset="0.00,-23.00"
+							width="341"
+							height="98"
+							dockpoint="Center"
+							canresizeheight="false"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</marks_of_ruination_bar>
+		<numeral
+			this="82D623BD-5760-41B6-8716BAB5DFF2E8BE"
+			id="numeral"
+			offset="-10.00,-20.00"
+			visible="false"
+			docking="Top Left External"
+			dock_offset="10.00,0.00"
+			component_anchor_point="1.00,1.00"
+			priority="1"
+			tooltipslocalised="true"
+			uniqueguid="82D623BD-5760-41B6-8716BAB5DFF2E8BE"
+			currentstate="E1C8B51A-A8D4-45EF-8AB66C95AF39A26F"
+			defaultstate="E1C8B51A-A8D4-45EF-8AB66C95AF39A26F">
+			<componentimages>
+				<component_image
+					this="BAFDC728-01DE-418D-AD088D0D0A0735FB"
+					uniqueguid="BAFDC728-01DE-418D-AD088D0D0A0735FB"
+					imagepath="ui/skins/default/settlement_silver_numeral_1.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="E1C8B51A-A8D4-45EF-8AB66C95AF39A26F"
+					name="NewState"
+					width="20"
+					height="20"
+					uniqueguid="E1C8B51A-A8D4-45EF-8AB66C95AF39A26F">
+					<imagemetrics>
+						<image
+							this="703ADC1F-EAA0-4061-9229B3B127AAC103"
+							uniqueguid="703ADC1F-EAA0-4061-9229B3B127AAC103"
+							componentimage="BAFDC728-01DE-418D-AD088D0D0A0735FB"
+							offset="4.00,0.00"
+							width="12"
+							height="19"
+							dockpoint="Center"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</numeral>
+		<root
+			this="73FE7064-213B-4358-873B2DA98DB9A028"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="73FE7064-213B-4358-873B2DA98DB9A028"
+			currentstate="5872F185-379E-42E7-A9D07C0A52348974"
+			defaultstate="5872F185-379E-42E7-A9D07C0A52348974">
+			<componentimages>
+				<component_image
+					this="DA7642D0-CC15-4E42-8564AAC4AD8D231C"
+					uniqueguid="DA7642D0-CC15-4E42-8564AAC4AD8D231C"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="5872F185-379E-42E7-A9D07C0A52348974"
+					name="NewState"
+					width="1600"
+					height="900"
+					interactive="true"
+					uniqueguid="5872F185-379E-42E7-A9D07C0A52348974">
+					<imagemetrics>
+						<image
+							this="0E560D0C-9C16-4627-827BD49E28ABB169"
+							uniqueguid="0E560D0C-9C16-4627-827BD49E28ABB169"
+							componentimage="DA7642D0-CC15-4E42-8564AAC4AD8D231C"
+							width="1280"
+							height="1024"
+							colour="#F0F0F0FF"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</root>
 		<template_level
 			this="2CD50A2B-B2D2-4B52-9A42FF051759C351"
 			id="template_level"
@@ -501,129 +625,5 @@
 				</on>
 			</states>
 		</template_level>
-		<marks_of_ruination_bar
-			this="32033E36-14E2-4AAB-A555C6BCC4534BE8"
-			id="marks_of_ruination_bar"
-			offset="10.00,10.00"
-			allowverticalresize="false"
-			priority="1"
-			tooltipslocalised="true"
-			uniqueguid="32033E36-14E2-4AAB-A555C6BCC4534BE8"
-			currentstate="2622C21E-7A39-41B3-AFBAE5E0CFFBFB4B"
-			defaultstate="2622C21E-7A39-41B3-AFBAE5E0CFFBFB4B">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoCampaignPooledResource"
-					context_function_id="IsValidContext"/>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoStaticObject"
-					context_function_id="PlayersFaction.PooledResourceContext(&quot;bst_ruination&quot;)"/>
-				<callback_with_context callback_id="RuinationBar"/>
-			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="9C5001DF-F0C2-4924-84C48F86B098FE23"
-					uniqueguid="9C5001DF-F0C2-4924-84C48F86B098FE23"
-					imagepath="ui/skins/default/beastmen_ruination_bar_bg.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="2622C21E-7A39-41B3-AFBAE5E0CFFBFB4B"
-					name="NewState"
-					width="341"
-					height="51"
-					interactive="true"
-					uniqueguid="2622C21E-7A39-41B3-AFBAE5E0CFFBFB4B">
-					<imagemetrics>
-						<image
-							this="F7E31F8A-F5D4-4DC8-834956D8527BC7FF"
-							uniqueguid="F7E31F8A-F5D4-4DC8-834956D8527BC7FF"
-							componentimage="9C5001DF-F0C2-4924-84C48F86B098FE23"
-							offset="0.00,-23.00"
-							width="341"
-							height="98"
-							dockpoint="Center"
-							canresizeheight="false"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-		</marks_of_ruination_bar>
-		<root
-			this="73FE7064-213B-4358-873B2DA98DB9A028"
-			id="root"
-			tooltipslocalised="true"
-			uniqueguid="73FE7064-213B-4358-873B2DA98DB9A028"
-			currentstate="5872F185-379E-42E7-A9D07C0A52348974"
-			defaultstate="5872F185-379E-42E7-A9D07C0A52348974">
-			<componentimages>
-				<component_image
-					this="DA7642D0-CC15-4E42-8564AAC4AD8D231C"
-					uniqueguid="DA7642D0-CC15-4E42-8564AAC4AD8D231C"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="5872F185-379E-42E7-A9D07C0A52348974"
-					name="NewState"
-					width="1600"
-					height="900"
-					interactive="true"
-					uniqueguid="5872F185-379E-42E7-A9D07C0A52348974">
-					<imagemetrics>
-						<image
-							this="0E560D0C-9C16-4627-827BD49E28ABB169"
-							uniqueguid="0E560D0C-9C16-4627-827BD49E28ABB169"
-							componentimage="DA7642D0-CC15-4E42-8564AAC4AD8D231C"
-							width="1280"
-							height="1024"
-							colour="#F0F0F0FF"
-							canresizeheight="false"
-							canresizewidth="false"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-		</root>
-		<numeral
-			this="82D623BD-5760-41B6-8716BAB5DFF2E8BE"
-			id="numeral"
-			offset="-10.00,-20.00"
-			visible="false"
-			docking="Top Left External"
-			dock_offset="10.00,0.00"
-			component_anchor_point="1.00,1.00"
-			priority="1"
-			tooltipslocalised="true"
-			uniqueguid="82D623BD-5760-41B6-8716BAB5DFF2E8BE"
-			currentstate="E1C8B51A-A8D4-45EF-8AB66C95AF39A26F"
-			defaultstate="E1C8B51A-A8D4-45EF-8AB66C95AF39A26F">
-			<componentimages>
-				<component_image
-					this="BAFDC728-01DE-418D-AD088D0D0A0735FB"
-					uniqueguid="BAFDC728-01DE-418D-AD088D0D0A0735FB"
-					imagepath="ui/skins/default/settlement_silver_numeral_1.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="E1C8B51A-A8D4-45EF-8AB66C95AF39A26F"
-					name="NewState"
-					width="20"
-					height="20"
-					uniqueguid="E1C8B51A-A8D4-45EF-8AB66C95AF39A26F">
-					<imagemetrics>
-						<image
-							this="703ADC1F-EAA0-4061-9229B3B127AAC103"
-							uniqueguid="703ADC1F-EAA0-4061-9229B3B127AAC103"
-							componentimage="BAFDC728-01DE-418D-AD088D0D0A0735FB"
-							offset="4.00,0.00"
-							width="12"
-							height="19"
-							dockpoint="Center"
-							canresizeheight="false"
-							canresizewidth="false"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-		</numeral>
 	</components>
 </layout>

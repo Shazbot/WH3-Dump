@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -19,38 +19,6 @@
 		</root>
 	</hierarchy>
 	<components>
-		<root
-			this="A04E4DC4-ECB2-40B1-A6880C4E385DFBE6"
-			id="root"
-			uniqueguid_in_template="A04E4DC4-ECB2-40B1-A6880C4E385DFBE6"
-			tooltipslocalised="true"
-			uniqueguid="A04E4DC4-ECB2-40B1-A6880C4E385DFBE6"
-			currentstate="788AC12D-AD67-4DAB-8877DE37742572DC"
-			defaultstate="788AC12D-AD67-4DAB-8877DE37742572DC">
-			<componentimages>
-				<component_image
-					this="52EF8341-711B-4E2C-99B54017EB4C0FC0"
-					uniqueguid="52EF8341-711B-4E2C-99B54017EB4C0FC0"/>
-			</componentimages>
-			<states>
-				<default
-					this="788AC12D-AD67-4DAB-8877DE37742572DC"
-					name="default"
-					width="1600"
-					height="900"
-					uniqueguid="788AC12D-AD67-4DAB-8877DE37742572DC">
-					<imagemetrics>
-						<image
-							this="1E1D151B-7266-4623-985887F7E185FCF0"
-							uniqueguid="1E1D151B-7266-4623-985887F7E185FCF0"
-							componentimage="52EF8341-711B-4E2C-99B54017EB4C0FC0"
-							width="1600"
-							height="900"
-							colour="#818181FF"/>
-					</imagemetrics>
-				</default>
-			</states>
-		</root>
 		<character_portrait
 			this="EB226E9A-214E-4976-B56859A92F412B32"
 			id="character_portrait"
@@ -212,41 +180,6 @@
 				</newstate>
 			</states>
 		</character_portrait>
-		<rank
-			this="A1F76FC9-14CF-4019-BE67B914C07EBECE"
-			id="rank"
-			template_id="rank_dspl_small"
-			part_of_template="true"
-			uniqueguid_in_template="33752F82-63D1-4182-B01A5182B355CAD9"
-			uniqueguid="A1F76FC9-14CF-4019-BE67B914C07EBECE"
-			dimensions="44.00,44.00"
-			dock_point="Center"
-			priority="60">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="NewState"
-					uniqueguid="1E79CE55-9ED7-43B7-AF21612F8A7FFD49"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/rank_dspl_small_back.png"
-					uniqueguid="63666664-6CBB-4FA0-B383F710CC354628"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context
-					callback_id="CharacterRankCallback"
-					context_object_id="CcoCampaignCharacter"/>
-			</callbacks_with_context>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="NewState"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/rank_dspl_small_back.png"/>
-			</override_images>
-		</rank>
 		<dy_rank
 			this="D3151F8E-1E89-4751-9ABBE298FB70BB9D"
 			id="dy_rank"
@@ -364,6 +297,67 @@
 				<element value="ui/skins/default/pie_test.png"/>
 			</override_images>
 		</piechart>
+		<rank
+			this="A1F76FC9-14CF-4019-BE67B914C07EBECE"
+			id="rank"
+			template_id="rank_dspl_small"
+			part_of_template="true"
+			uniqueguid_in_template="33752F82-63D1-4182-B01A5182B355CAD9"
+			uniqueguid="A1F76FC9-14CF-4019-BE67B914C07EBECE"
+			dimensions="44.00,44.00"
+			dock_point="Center"
+			priority="60">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="NewState"
+					uniqueguid="1E79CE55-9ED7-43B7-AF21612F8A7FFD49"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/rank_dspl_small_back.png"
+					uniqueguid="63666664-6CBB-4FA0-B383F710CC354628"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="CharacterRankCallback"
+					context_object_id="CcoCampaignCharacter"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="NewState"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/rank_dspl_small_back.png"/>
+			</override_images>
+		</rank>
+		<rank_holder
+			this="880AFA38-288C-4B62-8F9DC896F32449D5"
+			id="rank_holder"
+			uniqueguid_in_template="880AFA38-288C-4B62-8F9DC896F32449D5"
+			offset="42.00,63.00"
+			docking="Bottom Center"
+			dock_offset="28.00,0.00"
+			component_anchor_point="0.50,1.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="880AFA38-288C-4B62-8F9DC896F32449D5"
+			currentstate="C6452347-E766-4038-A1E4E9BE1AD40ACA"
+			defaultstate="C6452347-E766-4038-A1E4E9BE1AD40ACA">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="CanCharacterRankUp"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="C6452347-E766-4038-A1E4E9BE1AD40ACA"
+					name="NewState"
+					uniqueguid="C6452347-E766-4038-A1E4E9BE1AD40ACA"/>
+			</states>
+		</rank_holder>
 		<rank_zero
 			this="046E6609-132B-4E2D-91DE4BD5A58989B2"
 			id="rank_zero"
@@ -393,31 +387,37 @@
 				<element value="ui/skins/default/rank_dspl_zero.png"/>
 			</override_images>
 		</rank_zero>
-		<rank_holder
-			this="880AFA38-288C-4B62-8F9DC896F32449D5"
-			id="rank_holder"
-			uniqueguid_in_template="880AFA38-288C-4B62-8F9DC896F32449D5"
-			offset="42.00,63.00"
-			docking="Bottom Center"
-			dock_offset="28.00,0.00"
-			component_anchor_point="0.50,1.00"
-			priority="60"
+		<root
+			this="A04E4DC4-ECB2-40B1-A6880C4E385DFBE6"
+			id="root"
+			uniqueguid_in_template="A04E4DC4-ECB2-40B1-A6880C4E385DFBE6"
 			tooltipslocalised="true"
-			uniqueguid="880AFA38-288C-4B62-8F9DC896F32449D5"
-			currentstate="C6452347-E766-4038-A1E4E9BE1AD40ACA"
-			defaultstate="C6452347-E766-4038-A1E4E9BE1AD40ACA">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoCampaignCharacter"
-					context_function_id="CanCharacterRankUp"/>
-			</callbackwithcontextlist>
+			uniqueguid="A04E4DC4-ECB2-40B1-A6880C4E385DFBE6"
+			currentstate="788AC12D-AD67-4DAB-8877DE37742572DC"
+			defaultstate="788AC12D-AD67-4DAB-8877DE37742572DC">
+			<componentimages>
+				<component_image
+					this="52EF8341-711B-4E2C-99B54017EB4C0FC0"
+					uniqueguid="52EF8341-711B-4E2C-99B54017EB4C0FC0"/>
+			</componentimages>
 			<states>
-				<newstate
-					this="C6452347-E766-4038-A1E4E9BE1AD40ACA"
-					name="NewState"
-					uniqueguid="C6452347-E766-4038-A1E4E9BE1AD40ACA"/>
+				<default
+					this="788AC12D-AD67-4DAB-8877DE37742572DC"
+					name="default"
+					width="1600"
+					height="900"
+					uniqueguid="788AC12D-AD67-4DAB-8877DE37742572DC">
+					<imagemetrics>
+						<image
+							this="1E1D151B-7266-4623-985887F7E185FCF0"
+							uniqueguid="1E1D151B-7266-4623-985887F7E185FCF0"
+							componentimage="52EF8341-711B-4E2C-99B54017EB4C0FC0"
+							width="1600"
+							height="900"
+							colour="#818181FF"/>
+					</imagemetrics>
+				</default>
 			</states>
-		</rank_holder>
+		</root>
 	</components>
 </layout>

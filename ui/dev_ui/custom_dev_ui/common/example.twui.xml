@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -37,64 +37,39 @@
 		</root>
 	</hierarchy>
 	<components>
-		<button_txt
-			this="DA916404-2332-496C-B5FDE4763AF6ACEE"
-			id="button_txt"
-			part_of_template="true"
-			uniqueguid_in_template="D4461AE4-E650-4ACA-964262F821D95036"
-			uniqueguid="DA916404-2332-496C-B5FDE4763AF6ACEE"
-			dimensions="221.00,29.00"
-			dock_point="Center"
-			offset="0.00,-1.00"
-			priority="100">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="8EEA644D-FF2A-4FF1-BF38B4A2954ECC4F"/>
-			</state_uniqueguids>
-			<user_properties>
-				<property
-					name="disable_override"
-					value="instance_resize"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					text="Toggle tweaker"
-					text_label="button_txt_active_Text_65000c"
-					is_text_localised="false"/>
-			</localised_texts>
-		</button_txt>
-		<button_txt
-			this="9EAD6C13-F367-4C18-AC2BEF63253C34EE"
-			id="button_txt"
-			part_of_template="true"
-			uniqueguid_in_template="C5314C5F-DB2A-4917-835E17930F5E2573"
-			uniqueguid="9EAD6C13-F367-4C18-AC2BEF63253C34EE"
-			dimensions="221.00,29.00"
-			dock_point="Center"
-			offset="0.00,-1.00"
-			priority="100">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="0856F1B0-3A5A-4548-877C27A357571C3A"/>
-			</state_uniqueguids>
-			<user_properties>
-				<property
-					name="disable_override"
-					value="instance_resize"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					text="Select specific unit"
-					text_label="button_txt_active_Text_580076"
-					is_text_localised="false"/>
-			</localised_texts>
-		</button_txt>
+		<ability_list
+			this="0DFA3188-E3F4-46FA-92B4FAA39A2098CA"
+			id="ability_list"
+			offset="0.00,31.00"
+			priority="100"
+			tooltipslocalised="true"
+			uniqueguid="0DFA3188-E3F4-46FA-92B4FAA39A2098CA"
+			currentstate="9B1CB084-024F-4197-862F7BFB0FF2E0A0"
+			defaultstate="9B1CB084-024F-4197-862F7BFB0FF2E0A0"
+			comment="Creates list of abilities for units">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoBattleUnit"
+					context_function_id="AbilityList"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="9B1CB084-024F-4197-862F7BFB0FF2E0A0"
+					name="default"
+					width="64"
+					height="64"
+					uniqueguid="9B1CB084-024F-4197-862F7BFB0FF2E0A0"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				itemsperrow="4"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="59"/>
+				</columnwidths>
+			</LayoutEngine>
+		</ability_list>
 		<button_find_context_and_perform_action_example
 			this="9583F05D-E565-4DD1-BBB0480A26C43CB4"
 			id="button_find_context_and_perform_action_example"
@@ -162,6 +137,124 @@
 				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
 			</override_images>
 		</button_find_context_and_perform_action_example>
+		<button_txt
+			this="9EAD6C13-F367-4C18-AC2BEF63253C34EE"
+			id="button_txt"
+			part_of_template="true"
+			uniqueguid_in_template="C5314C5F-DB2A-4917-835E17930F5E2573"
+			uniqueguid="9EAD6C13-F367-4C18-AC2BEF63253C34EE"
+			dimensions="221.00,29.00"
+			dock_point="Center"
+			offset="0.00,-1.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="0856F1B0-3A5A-4548-877C27A357571C3A"/>
+			</state_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					text="Select specific unit"
+					text_label="button_txt_active_Text_580076"
+					is_text_localised="false"/>
+			</localised_texts>
+		</button_txt>
+		<button_txt
+			this="DA916404-2332-496C-B5FDE4763AF6ACEE"
+			id="button_txt"
+			part_of_template="true"
+			uniqueguid_in_template="D4461AE4-E650-4ACA-964262F821D95036"
+			uniqueguid="DA916404-2332-496C-B5FDE4763AF6ACEE"
+			dimensions="221.00,29.00"
+			dock_point="Center"
+			offset="0.00,-1.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="8EEA644D-FF2A-4FF1-BF38B4A2954ECC4F"/>
+			</state_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					text="Toggle tweaker"
+					text_label="button_txt_active_Text_65000c"
+					is_text_localised="false"/>
+			</localised_texts>
+		</button_txt>
+		<dev_icon
+			this="60AA4FAC-D0CA-4FF2-844C7A6080978A4D"
+			id="dev_icon"
+			part_of_template="true"
+			uniqueguid_in_template="1FCF2091-04F8-43FC-A0507D3DE1697C1D"
+			uniqueguid="60AA4FAC-D0CA-4FF2-844C7A6080978A4D"
+			dimensions="24.00,24.00"
+			dock_point="Center Left"
+			offset="2.00,0.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="5B948899-4C65-4C1B-931D7CC8D2C78712"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/dev_icon.png"
+					uniqueguid="F04A282C-F9C4-4277-9809383E960DBF4D"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/dev_icon.png"/>
+			</override_images>
+		</dev_icon>
+		<dev_icon
+			this="6367EFA0-8A85-40DA-B25CB9BEFF67FA2B"
+			id="dev_icon"
+			part_of_template="true"
+			uniqueguid_in_template="0F4F9F06-4613-496B-A0F05A2B8B88B70D"
+			uniqueguid="6367EFA0-8A85-40DA-B25CB9BEFF67FA2B"
+			dimensions="24.00,24.00"
+			dock_point="Center Left"
+			offset="2.00,0.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="D6FD9A0D-E719-40BC-8D77E84BE05E25FB"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/dev_icon.png"
+					uniqueguid="92659958-D42B-407A-A33F03511C5AEA94"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/dev_icon.png"/>
+			</override_images>
+		</dev_icon>
 		<dev_text_button_toggle_tweaker
 			this="589EBD63-B6D0-462B-ACCA4A8E1CA8656E"
 			id="dev_text_button_toggle_tweaker"
@@ -259,66 +352,6 @@
 				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
 			</override_images>
 		</dev_text_button_toggle_tweaker>
-		<dev_icon
-			this="60AA4FAC-D0CA-4FF2-844C7A6080978A4D"
-			id="dev_icon"
-			part_of_template="true"
-			uniqueguid_in_template="1FCF2091-04F8-43FC-A0507D3DE1697C1D"
-			uniqueguid="60AA4FAC-D0CA-4FF2-844C7A6080978A4D"
-			dimensions="24.00,24.00"
-			dock_point="Center Left"
-			offset="2.00,0.00"
-			priority="100">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="5B948899-4C65-4C1B-931D7CC8D2C78712"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/dev/dev_icon.png"
-					uniqueguid="F04A282C-F9C4-4277-9809383E960DBF4D"/>
-			</component_image_uniqueguids>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/dev/dev_icon.png"/>
-			</override_images>
-		</dev_icon>
-		<dev_icon
-			this="6367EFA0-8A85-40DA-B25CB9BEFF67FA2B"
-			id="dev_icon"
-			part_of_template="true"
-			uniqueguid_in_template="0F4F9F06-4613-496B-A0F05A2B8B88B70D"
-			uniqueguid="6367EFA0-8A85-40DA-B25CB9BEFF67FA2B"
-			dimensions="24.00,24.00"
-			dock_point="Center Left"
-			offset="2.00,0.00"
-			priority="100">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="D6FD9A0D-E719-40BC-8D77E84BE05E25FB"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/dev/dev_icon.png"
-					uniqueguid="92659958-D42B-407A-A33F03511C5AEA94"/>
-			</component_image_uniqueguids>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/dev/dev_icon.png"/>
-			</override_images>
-		</dev_icon>
 		<example
 			this="8222D855-8F98-4E75-BEF9E9D2034F1829"
 			id="example"
@@ -338,38 +371,232 @@
 					uniqueguid="BE917BCE-5CF4-484C-979094FD3D28A1CD"/>
 			</states>
 		</example>
-		<root
-			this="96AA1906-FF30-4AAE-92A65AC1DF599C54"
-			id="root"
+		<highlight
+			this="62746246-5BF3-4CFE-8A6B1C556FDEFAA7"
+			id="highlight"
+			allowverticalresize="false"
+			docking="Top Left"
+			priority="1000"
 			tooltipslocalised="true"
-			uniqueguid="96AA1906-FF30-4AAE-92A65AC1DF599C54"
-			currentstate="FC93431F-E260-4BFA-955162BDEF29C256"
-			defaultstate="FC93431F-E260-4BFA-955162BDEF29C256">
+			uniqueguid="62746246-5BF3-4CFE-8A6B1C556FDEFAA7"
+			currentstate="8A5E5717-74B9-44A2-9CA4556DA4E296F1"
+			defaultstate="8A5E5717-74B9-44A2-9CA4556DA4E296F1">
 			<componentimages>
 				<component_image
-					this="4B7835C4-98AE-4AC2-B15354B1454419B0"
-					uniqueguid="4B7835C4-98AE-4AC2-B15354B1454419B0"/>
+					this="3147A0F4-311B-45FD-84A8DBC9CAB56AAC"
+					uniqueguid="3147A0F4-311B-45FD-84A8DBC9CAB56AAC"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="8A5E5717-74B9-44A2-9CA4556DA4E296F1"
+					name="NewState"
+					width="2"
+					height="27"
+					uniqueguid="8A5E5717-74B9-44A2-9CA4556DA4E296F1">
+					<imagemetrics>
+						<image
+							this="4160C93C-4913-4574-982164D27ABD917A"
+							uniqueguid="4160C93C-4913-4574-982164D27ABD917A"
+							componentimage="3147A0F4-311B-45FD-84A8DBC9CAB56AAC"
+							width="2"
+							height="27"
+							colour="#FFFFFF64"/>
+					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+		</highlight>
+		<info_panel_for_selected_unit
+			this="2274A2C8-507F-452F-B1D34AE6A18E6776"
+			id="info_panel_for_selected_unit"
+			offset="0.00,80.00"
+			priority="100"
+			tooltipslocalised="true"
+			uniqueguid="2274A2C8-507F-452F-B1D34AE6A18E6776"
+			currentstate="E61C1BFC-3191-4741-A3820D5C7E7681A7"
+			defaultstate="E61C1BFC-3191-4741-A3820D5C7E7681A7"
+			comment="This panel listens for selection changes and when there is one it gets the context and initialises info on this panel with it">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="ContextSelectionPropagator">
+					<child_m_user_properties>
+						<property
+							name="selection_parent"
+							value="list_with_selection_example"/>
+						<property
+							name="selection_parent_parent"
+							value="selection_example"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoContextSelection"
+					context_function_id="FirstObject"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="AE785EBC-74C1-49A8-B3D02060A05483B1"
+					uniqueguid="AE785EBC-74C1-49A8-B3D02060A05483B1"/>
 			</componentimages>
 			<states>
 				<default
-					this="FC93431F-E260-4BFA-955162BDEF29C256"
+					this="E61C1BFC-3191-4741-A3820D5C7E7681A7"
 					name="default"
-					width="1600"
-					height="900"
-					interactive="true"
-					uniqueguid="FC93431F-E260-4BFA-955162BDEF29C256">
+					width="180"
+					height="95"
+					uniqueguid="E61C1BFC-3191-4741-A3820D5C7E7681A7">
 					<imagemetrics>
 						<image
-							this="406D7C4C-F3D4-486C-84FB44AEB7440C23"
-							uniqueguid="406D7C4C-F3D4-486C-84FB44AEB7440C23"
-							componentimage="4B7835C4-98AE-4AC2-B15354B1454419B0"
-							width="1600"
-							height="900"
-							colour="#F0F0F0FF"/>
+							this="814474D0-7FB8-423A-A4CAD8440FC5BB27"
+							uniqueguid="814474D0-7FB8-423A-A4CAD8440FC5BB27"
+							componentimage="AE785EBC-74C1-49A8-B3D02060A05483B1"
+							width="180"
+							height="95"
+							colour="#00000080"/>
 					</imagemetrics>
 				</default>
 			</states>
-		</root>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="355"/>
+				</columnwidths>
+			</LayoutEngine>
+		</info_panel_for_selected_unit>
+		<label_readme
+			this="EE31BF7D-CDC9-4B26-B39A2F7C7905EFD3"
+			id="label_readme"
+			offset="487.00,0.00"
+			allowhorizontalresize="false"
+			docking="Top Center"
+			component_anchor_point="0.50,0.00"
+			priority="1000"
+			tooltipslocalised="true"
+			uniqueguid="EE31BF7D-CDC9-4B26-B39A2F7C7905EFD3"
+			currentstate="DF686F0E-CF6E-4180-ADC908885F643C4F"
+			defaultstate="DF686F0E-CF6E-4180-ADC908885F643C4F">
+			<componentimages>
+				<component_image
+					this="CAD932BD-5799-4C7B-990827E56190B67A"
+					uniqueguid="CAD932BD-5799-4C7B-990827E56190B67A"/>
+			</componentimages>
+			<states>
+				<default
+					this="DF686F0E-CF6E-4180-ADC908885F643C4F"
+					name="default"
+					width="626"
+					height="101"
+					uniqueguid="DF686F0E-CF6E-4180-ADC908885F643C4F">
+					<imagemetrics>
+						<image
+							this="3F3C09CF-F785-4445-BF74B3E38BE3AC1C"
+							uniqueguid="3F3C09CF-F785-4445-BF74B3E38BE3AC1C"
+							componentimage="CAD932BD-5799-4C7B-990827E56190B67A"
+							width="626"
+							height="101"
+							colour="#00000080"/>
+					</imagemetrics>
+					<component_text
+						text="This layout is used to show examples of how you can set various things up with contexts as a starting point for those learning the context system and wanting to setup their own dev uis. Open it in game, in battle, to see how it works. Each component has an explanation of how it is setup in its comment property"
+						texthbehaviour="Resize"
+						textlabel="label_readme_default_Text_61006f"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</default>
+			</states>
+		</label_readme>
+		<label_text_input
+			this="C6FBED72-6AF2-43F5-AEE26E89B2A0FD9C"
+			id="label_text_input"
+			offset="-210.00,0.00"
+			allowverticalresize="false"
+			docking="Center Left External"
+			component_anchor_point="1.00,0.50"
+			priority="1000"
+			tooltipslocalised="true"
+			uniqueguid="C6FBED72-6AF2-43F5-AEE26E89B2A0FD9C"
+			currentstate="64196EB3-CC1B-4E06-9AA9BC873A932895"
+			defaultstate="64196EB3-CC1B-4E06-9AA9BC873A932895">
+			<componentimages>
+				<component_image
+					this="AA632AF8-0A86-42F8-BD9F810E3A027D72"
+					uniqueguid="AA632AF8-0A86-42F8-BD9F810E3A027D72"/>
+			</componentimages>
+			<states>
+				<default
+					this="64196EB3-CC1B-4E06-9AA9BC873A932895"
+					name="default"
+					width="210"
+					height="33"
+					uniqueguid="64196EB3-CC1B-4E06-9AA9BC873A932895">
+					<imagemetrics>
+						<image
+							this="1BFBED5A-FEBE-41EE-8F38328E8ACD17C0"
+							uniqueguid="1BFBED5A-FEBE-41EE-8F38328E8ACD17C0"
+							componentimage="AA632AF8-0A86-42F8-BD9F810E3A027D72"
+							width="210"
+							height="33"
+							colour="#00000032"/>
+					</imagemetrics>
+					<component_text
+						text="Example tweaker input"
+						textvalign="Center"
+						texthbehaviour="Resize"
+						textlabel="label_text_input_default_Text_110054"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</default>
+			</states>
+		</label_text_input>
+		<label_unit_name
+			this="0BAA88E3-ECED-4635-9F1B0B2F5B4B45FE"
+			id="label_unit_name"
+			allowverticalresize="false"
+			priority="100"
+			tooltipslocalised="true"
+			uniqueguid="0BAA88E3-ECED-4635-9F1B0B2F5B4B45FE"
+			currentstate="1F6A60DD-D835-4AEE-9E29D3E728BDE9C1"
+			defaultstate="1F6A60DD-D835-4AEE-9E29D3E728BDE9C1"
+			comment="Shows selected units name">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoBattleUnit"
+					context_function_id="Name"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="1F6A60DD-D835-4AEE-9E29D3E728BDE9C1"
+					name="default"
+					width="180"
+					height="31"
+					uniqueguid="1F6A60DD-D835-4AEE-9E29D3E728BDE9C1">
+					<component_text
+						text="Selected unit name"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="label_unit_name_default_Text_280000"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</default>
+			</states>
+		</label_unit_name>
 		<list_with_selection_example
 			this="6F687878-861C-4F09-926B9B886328BE20"
 			id="list_with_selection_example"
@@ -408,6 +635,64 @@
 				type="HorizontalList"
 				sizetocontent="true"/>
 		</list_with_selection_example>
+		<root
+			this="96AA1906-FF30-4AAE-92A65AC1DF599C54"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="96AA1906-FF30-4AAE-92A65AC1DF599C54"
+			currentstate="FC93431F-E260-4BFA-955162BDEF29C256"
+			defaultstate="FC93431F-E260-4BFA-955162BDEF29C256">
+			<componentimages>
+				<component_image
+					this="4B7835C4-98AE-4AC2-B15354B1454419B0"
+					uniqueguid="4B7835C4-98AE-4AC2-B15354B1454419B0"/>
+			</componentimages>
+			<states>
+				<default
+					this="FC93431F-E260-4BFA-955162BDEF29C256"
+					name="default"
+					width="1600"
+					height="900"
+					interactive="true"
+					uniqueguid="FC93431F-E260-4BFA-955162BDEF29C256">
+					<imagemetrics>
+						<image
+							this="406D7C4C-F3D4-486C-84FB44AEB7440C23"
+							uniqueguid="406D7C4C-F3D4-486C-84FB44AEB7440C23"
+							componentimage="4B7835C4-98AE-4AC2-B15354B1454419B0"
+							width="1600"
+							height="900"
+							colour="#F0F0F0FF"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</root>
+		<selection_example
+			this="B8035B14-954A-4C36-BE4D86B9025573D8"
+			id="selection_example"
+			offset="169.00,267.00"
+			priority="100"
+			tooltipslocalised="true"
+			uniqueguid="B8035B14-954A-4C36-BE4D86B9025573D8"
+			currentstate="5DB2269E-65C1-4A3D-BC3A57195D61E83C"
+			defaultstate="5DB2269E-65C1-4A3D-BC3A57195D61E83C"
+			comment="Example list creating component for each unit in players army. List engine will automatically position each entry next to each other. We then have selection support, and on selection we initialise another panel with some details of the unit selected">
+			<states>
+				<default
+					this="5DB2269E-65C1-4A3D-BC3A57195D61E83C"
+					name="default"
+					width="180"
+					height="175"
+					uniqueguid="5DB2269E-65C1-4A3D-BC3A57195D61E83C"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="119"/>
+				</columnwidths>
+			</LayoutEngine>
+		</selection_example>
 		<template_2d_unit
 			this="CD4C8B9E-42D7-4AC6-BEEB8896ADBE7259"
 			id="template_2d_unit"
@@ -639,123 +924,49 @@
 				</selected>
 			</states>
 		</template_3d_unit>
-		<world_space_list_example
-			this="E4DD2D97-8B2B-4F10-B06F44E4FD8F165F"
-			id="world_space_list_example"
-			offset="181.00,193.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
+		<template_ability_with_custom_tooltip
+			this="B92DE093-54A4-49EE-BF959E887A691B22"
+			id="template_ability_with_custom_tooltip"
 			priority="100"
-			tooltipslocalised="true"
-			uniqueguid="E4DD2D97-8B2B-4F10-B06F44E4FD8F165F"
-			currentstate="E8EDF787-1A0A-4037-B3DE46FE126D9A16"
-			defaultstate="E8EDF787-1A0A-4037-B3DE46FE126D9A16"
-			comment="Example list creating component for each entry in untis army. No list engine on this as children use ContextWorldSpaceComponent to position themselves in 3d space over their given unit contexts">
+			componentleveltooltip="{{tt:ui/common ui/special_ability_tooltip}}"
+			tooltiplabel="template_ability_with_custom_tooltip_Tooltip_7c001d"
+			uniqueguid="B92DE093-54A4-49EE-BF959E887A691B22"
+			currentstate="0B98C8AC-EE7B-4229-957CEC6F4784C353"
+			defaultstate="0B98C8AC-EE7B-4229-957CEC6F4784C353"
+			comment="Sets image for ability, and has a custom tooltip to show ability info using ContextCustomTooltipStore to pass to custom tooltip layout">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextList"
-					context_object_id="CcoBattleArmy"
-					context_function_id="UnitList"/>
+					callback_id="ContextImageSetter"
+					context_object_id="CcoUnitAbility"
+					context_function_id="IconPath"/>
 				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoStaticObject"
-					context_function_id="PlayerArmy"/>
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoUnitAbility"/>
 			</callbackwithcontextlist>
-			<states>
-				<default
-					this="E8EDF787-1A0A-4037-B3DE46FE126D9A16"
-					name="default"
-					width="1"
-					height="1"
-					uniqueguid="E8EDF787-1A0A-4037-B3DE46FE126D9A16"/>
-			</states>
-		</world_space_list_example>
-		<highlight
-			this="62746246-5BF3-4CFE-8A6B1C556FDEFAA7"
-			id="highlight"
-			allowverticalresize="false"
-			docking="Top Left"
-			priority="1000"
-			tooltipslocalised="true"
-			uniqueguid="62746246-5BF3-4CFE-8A6B1C556FDEFAA7"
-			currentstate="8A5E5717-74B9-44A2-9CA4556DA4E296F1"
-			defaultstate="8A5E5717-74B9-44A2-9CA4556DA4E296F1">
 			<componentimages>
 				<component_image
-					this="3147A0F4-311B-45FD-84A8DBC9CAB56AAC"
-					uniqueguid="3147A0F4-311B-45FD-84A8DBC9CAB56AAC"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="8A5E5717-74B9-44A2-9CA4556DA4E296F1"
-					name="NewState"
-					width="2"
-					height="27"
-					uniqueguid="8A5E5717-74B9-44A2-9CA4556DA4E296F1">
-					<imagemetrics>
-						<image
-							this="4160C93C-4913-4574-982164D27ABD917A"
-							uniqueguid="4160C93C-4913-4574-982164D27ABD917A"
-							componentimage="3147A0F4-311B-45FD-84A8DBC9CAB56AAC"
-							width="2"
-							height="27"
-							colour="#FFFFFF64"/>
-					</imagemetrics>
-					<component_text
-						texthbehaviour="Never split"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
-			</states>
-		</highlight>
-		<label_text_input
-			this="C6FBED72-6AF2-43F5-AEE26E89B2A0FD9C"
-			id="label_text_input"
-			offset="-210.00,0.00"
-			allowverticalresize="false"
-			docking="Center Left External"
-			component_anchor_point="1.00,0.50"
-			priority="1000"
-			tooltipslocalised="true"
-			uniqueguid="C6FBED72-6AF2-43F5-AEE26E89B2A0FD9C"
-			currentstate="64196EB3-CC1B-4E06-9AA9BC873A932895"
-			defaultstate="64196EB3-CC1B-4E06-9AA9BC873A932895">
-			<componentimages>
-				<component_image
-					this="AA632AF8-0A86-42F8-BD9F810E3A027D72"
-					uniqueguid="AA632AF8-0A86-42F8-BD9F810E3A027D72"/>
+					this="7B648649-25F1-4289-B3AB1A09F6141130"
+					uniqueguid="7B648649-25F1-4289-B3AB1A09F6141130"/>
 			</componentimages>
 			<states>
 				<default
-					this="64196EB3-CC1B-4E06-9AA9BC873A932895"
+					this="0B98C8AC-EE7B-4229-957CEC6F4784C353"
 					name="default"
-					width="210"
-					height="33"
-					uniqueguid="64196EB3-CC1B-4E06-9AA9BC873A932895">
+					width="64"
+					height="64"
+					interactive="true"
+					uniqueguid="0B98C8AC-EE7B-4229-957CEC6F4784C353">
 					<imagemetrics>
 						<image
-							this="1BFBED5A-FEBE-41EE-8F38328E8ACD17C0"
-							uniqueguid="1BFBED5A-FEBE-41EE-8F38328E8ACD17C0"
-							componentimage="AA632AF8-0A86-42F8-BD9F810E3A027D72"
-							width="210"
-							height="33"
-							colour="#00000032"/>
+							this="A706E9D6-9B39-4DA8-B15A3005B8290DE6"
+							uniqueguid="A706E9D6-9B39-4DA8-B15A3005B8290DE6"
+							componentimage="7B648649-25F1-4289-B3AB1A09F6141130"
+							width="64"
+							height="64"/>
 					</imagemetrics>
-					<component_text
-						text="Example tweaker input"
-						textvalign="Center"
-						texthbehaviour="Resize"
-						textlabel="label_text_input_default_Text_110054"
-						font_m_font_name="dev_font"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="dev_text"/>
 				</default>
 			</states>
-		</label_text_input>
+		</template_ability_with_custom_tooltip>
 		<text_input_change_tweaker_example
 			this="3BD66334-809F-477D-B352F5E015E44847"
 			id="text_input_change_tweaker_example"
@@ -824,247 +1035,36 @@
 				</active>
 			</states>
 		</text_input_change_tweaker_example>
-		<ability_list
-			this="0DFA3188-E3F4-46FA-92B4FAA39A2098CA"
-			id="ability_list"
-			offset="0.00,31.00"
-			priority="100"
-			tooltipslocalised="true"
-			uniqueguid="0DFA3188-E3F4-46FA-92B4FAA39A2098CA"
-			currentstate="9B1CB084-024F-4197-862F7BFB0FF2E0A0"
-			defaultstate="9B1CB084-024F-4197-862F7BFB0FF2E0A0"
-			comment="Creates list of abilities for units">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextList"
-					context_object_id="CcoBattleUnit"
-					context_function_id="AbilityList"/>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="9B1CB084-024F-4197-862F7BFB0FF2E0A0"
-					name="default"
-					width="64"
-					height="64"
-					uniqueguid="9B1CB084-024F-4197-862F7BFB0FF2E0A0"/>
-			</states>
-			<LayoutEngine
-				type="List"
-				itemsperrow="4"
-				sizetocontent="true">
-				<columnwidths>
-					<column width="59"/>
-				</columnwidths>
-			</LayoutEngine>
-		</ability_list>
-		<info_panel_for_selected_unit
-			this="2274A2C8-507F-452F-B1D34AE6A18E6776"
-			id="info_panel_for_selected_unit"
-			offset="0.00,80.00"
-			priority="100"
-			tooltipslocalised="true"
-			uniqueguid="2274A2C8-507F-452F-B1D34AE6A18E6776"
-			currentstate="E61C1BFC-3191-4741-A3820D5C7E7681A7"
-			defaultstate="E61C1BFC-3191-4741-A3820D5C7E7681A7"
-			comment="This panel listens for selection changes and when there is one it gets the context and initialises info on this panel with it">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="ContextSelectionPropagator">
-					<child_m_user_properties>
-						<property
-							name="selection_parent"
-							value="list_with_selection_example"/>
-						<property
-							name="selection_parent_parent"
-							value="selection_example"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoContextSelection"
-					context_function_id="FirstObject"/>
-			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="AE785EBC-74C1-49A8-B3D02060A05483B1"
-					uniqueguid="AE785EBC-74C1-49A8-B3D02060A05483B1"/>
-			</componentimages>
-			<states>
-				<default
-					this="E61C1BFC-3191-4741-A3820D5C7E7681A7"
-					name="default"
-					width="180"
-					height="95"
-					uniqueguid="E61C1BFC-3191-4741-A3820D5C7E7681A7">
-					<imagemetrics>
-						<image
-							this="814474D0-7FB8-423A-A4CAD8440FC5BB27"
-							uniqueguid="814474D0-7FB8-423A-A4CAD8440FC5BB27"
-							componentimage="AE785EBC-74C1-49A8-B3D02060A05483B1"
-							width="180"
-							height="95"
-							colour="#00000080"/>
-					</imagemetrics>
-				</default>
-			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true">
-				<columnwidths>
-					<column width="355"/>
-				</columnwidths>
-			</LayoutEngine>
-		</info_panel_for_selected_unit>
-		<label_readme
-			this="EE31BF7D-CDC9-4B26-B39A2F7C7905EFD3"
-			id="label_readme"
-			offset="487.00,0.00"
+		<world_space_list_example
+			this="E4DD2D97-8B2B-4F10-B06F44E4FD8F165F"
+			id="world_space_list_example"
+			offset="181.00,193.00"
 			allowhorizontalresize="false"
-			docking="Top Center"
-			component_anchor_point="0.50,0.00"
-			priority="1000"
-			tooltipslocalised="true"
-			uniqueguid="EE31BF7D-CDC9-4B26-B39A2F7C7905EFD3"
-			currentstate="DF686F0E-CF6E-4180-ADC908885F643C4F"
-			defaultstate="DF686F0E-CF6E-4180-ADC908885F643C4F">
-			<componentimages>
-				<component_image
-					this="CAD932BD-5799-4C7B-990827E56190B67A"
-					uniqueguid="CAD932BD-5799-4C7B-990827E56190B67A"/>
-			</componentimages>
-			<states>
-				<default
-					this="DF686F0E-CF6E-4180-ADC908885F643C4F"
-					name="default"
-					width="626"
-					height="101"
-					uniqueguid="DF686F0E-CF6E-4180-ADC908885F643C4F">
-					<imagemetrics>
-						<image
-							this="3F3C09CF-F785-4445-BF74B3E38BE3AC1C"
-							uniqueguid="3F3C09CF-F785-4445-BF74B3E38BE3AC1C"
-							componentimage="CAD932BD-5799-4C7B-990827E56190B67A"
-							width="626"
-							height="101"
-							colour="#00000080"/>
-					</imagemetrics>
-					<component_text
-						text="This layout is used to show examples of how you can set various things up with contexts as a starting point for those learning the context system and wanting to setup their own dev uis. Open it in game, in battle, to see how it works. Each component has an explanation of how it is setup in its comment property"
-						texthbehaviour="Resize"
-						textlabel="label_readme_default_Text_61006f"
-						font_m_font_name="dev_font"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="dev_text"/>
-				</default>
-			</states>
-		</label_readme>
-		<label_unit_name
-			this="0BAA88E3-ECED-4635-9F1B0B2F5B4B45FE"
-			id="label_unit_name"
 			allowverticalresize="false"
 			priority="100"
 			tooltipslocalised="true"
-			uniqueguid="0BAA88E3-ECED-4635-9F1B0B2F5B4B45FE"
-			currentstate="1F6A60DD-D835-4AEE-9E29D3E728BDE9C1"
-			defaultstate="1F6A60DD-D835-4AEE-9E29D3E728BDE9C1"
-			comment="Shows selected units name">
+			uniqueguid="E4DD2D97-8B2B-4F10-B06F44E4FD8F165F"
+			currentstate="E8EDF787-1A0A-4037-B3DE46FE126D9A16"
+			defaultstate="E8EDF787-1A0A-4037-B3DE46FE126D9A16"
+			comment="Example list creating component for each entry in untis army. No list engine on this as children use ContextWorldSpaceComponent to position themselves in 3d space over their given unit contexts">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoBattleUnit"
-					context_function_id="Name"/>
+					callback_id="ContextList"
+					context_object_id="CcoBattleArmy"
+					context_function_id="UnitList"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoStaticObject"
+					context_function_id="PlayerArmy"/>
 			</callbackwithcontextlist>
 			<states>
 				<default
-					this="1F6A60DD-D835-4AEE-9E29D3E728BDE9C1"
+					this="E8EDF787-1A0A-4037-B3DE46FE126D9A16"
 					name="default"
-					width="180"
-					height="31"
-					uniqueguid="1F6A60DD-D835-4AEE-9E29D3E728BDE9C1">
-					<component_text
-						text="Selected unit name"
-						textvalign="Center"
-						texthalign="Center"
-						texthbehaviour="Resize"
-						textlocalised="true"
-						textlabel="label_unit_name_default_Text_280000"
-						font_m_font_name="dev_font"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="dev_text"/>
-				</default>
+					width="1"
+					height="1"
+					uniqueguid="E8EDF787-1A0A-4037-B3DE46FE126D9A16"/>
 			</states>
-		</label_unit_name>
-		<selection_example
-			this="B8035B14-954A-4C36-BE4D86B9025573D8"
-			id="selection_example"
-			offset="169.00,267.00"
-			priority="100"
-			tooltipslocalised="true"
-			uniqueguid="B8035B14-954A-4C36-BE4D86B9025573D8"
-			currentstate="5DB2269E-65C1-4A3D-BC3A57195D61E83C"
-			defaultstate="5DB2269E-65C1-4A3D-BC3A57195D61E83C"
-			comment="Example list creating component for each unit in players army. List engine will automatically position each entry next to each other. We then have selection support, and on selection we initialise another panel with some details of the unit selected">
-			<states>
-				<default
-					this="5DB2269E-65C1-4A3D-BC3A57195D61E83C"
-					name="default"
-					width="180"
-					height="175"
-					uniqueguid="5DB2269E-65C1-4A3D-BC3A57195D61E83C"/>
-			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true">
-				<columnwidths>
-					<column width="119"/>
-				</columnwidths>
-			</LayoutEngine>
-		</selection_example>
-		<template_ability_with_custom_tooltip
-			this="B92DE093-54A4-49EE-BF959E887A691B22"
-			id="template_ability_with_custom_tooltip"
-			priority="100"
-			componentleveltooltip="{{tt:ui/common ui/special_ability_tooltip}}"
-			tooltiplabel="template_ability_with_custom_tooltip_Tooltip_7c001d"
-			uniqueguid="B92DE093-54A4-49EE-BF959E887A691B22"
-			currentstate="0B98C8AC-EE7B-4229-957CEC6F4784C353"
-			defaultstate="0B98C8AC-EE7B-4229-957CEC6F4784C353"
-			comment="Sets image for ability, and has a custom tooltip to show ability info using ContextCustomTooltipStore to pass to custom tooltip layout">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextImageSetter"
-					context_object_id="CcoUnitAbility"
-					context_function_id="IconPath"/>
-				<callback_with_context
-					callback_id="ContextCustomTooltipStore"
-					context_object_id="CcoUnitAbility"/>
-			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="7B648649-25F1-4289-B3AB1A09F6141130"
-					uniqueguid="7B648649-25F1-4289-B3AB1A09F6141130"/>
-			</componentimages>
-			<states>
-				<default
-					this="0B98C8AC-EE7B-4229-957CEC6F4784C353"
-					name="default"
-					width="64"
-					height="64"
-					interactive="true"
-					uniqueguid="0B98C8AC-EE7B-4229-957CEC6F4784C353">
-					<imagemetrics>
-						<image
-							this="A706E9D6-9B39-4DA8-B15A3005B8290DE6"
-							uniqueguid="A706E9D6-9B39-4DA8-B15A3005B8290DE6"
-							componentimage="7B648649-25F1-4289-B3AB1A09F6141130"
-							width="64"
-							height="64"/>
-					</imagemetrics>
-				</default>
-			</states>
-		</template_ability_with_custom_tooltip>
+		</world_space_list_example>
 	</components>
 </layout>

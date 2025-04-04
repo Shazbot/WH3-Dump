@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="PlayersFaction.FactionRecordContext.Key == &quot;wh2_dlc15_hef_imrik&quot;">
 	<hierarchy>
@@ -23,57 +23,114 @@
 		</root>
 	</hierarchy>
 	<components>
-		<tooltip_dragon_taming
-			this="22A2D082-C6A1-4A0C-89BD1B4B0DD2ED8A"
-			id="tooltip_dragon_taming"
+		<dy_advice
+			this="632FA0E8-2E03-4F5D-8FEDBE17D98AED89"
+			id="dy_advice"
+			offset="0.00,370.00"
+			allowhorizontalresize="false"
+			priority="60"
 			tooltipslocalised="true"
-			uniqueguid="22A2D082-C6A1-4A0C-89BD1B4B0DD2ED8A"
-			currentstate="5BD93A4A-F211-4A49-A7FD7344DA45EF8E"
-			defaultstate="5BD93A4A-F211-4A49-A7FD7344DA45EF8E">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="DragonTamingTooltip"/>
-			</callbackwithcontextlist>
+			uniqueguid="632FA0E8-2E03-4F5D-8FEDBE17D98AED89"
+			currentstate="78E1B0CF-0881-4A24-AE578650E6826F93"
+			defaultstate="78E1B0CF-0881-4A24-AE578650E6826F93">
 			<states>
 				<newstate
-					this="5BD93A4A-F211-4A49-A7FD7344DA45EF8E"
+					this="78E1B0CF-0881-4A24-AE578650E6826F93"
 					name="NewState"
 					width="175"
-					height="8"
-					uniqueguid="5BD93A4A-F211-4A49-A7FD7344DA45EF8E"/>
-			</states>
-		</tooltip_dragon_taming>
-		<root
-			this="55D19665-EC9B-4955-AD2F1A24D82A092D"
-			id="root"
-			tooltipslocalised="true"
-			uniqueguid="55D19665-EC9B-4955-AD2F1A24D82A092D"
-			currentstate="7D498886-73DB-4D92-91622138018134BF"
-			defaultstate="7D498886-73DB-4D92-91622138018134BF">
-			<componentimages>
-				<component_image
-					this="B348917D-AF92-4555-9FBAA18F2FF9F317"
-					uniqueguid="B348917D-AF92-4555-9FBAA18F2FF9F317"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="7D498886-73DB-4D92-91622138018134BF"
-					name="NewState"
-					width="1600"
-					height="900"
-					interactive="true"
-					uniqueguid="7D498886-73DB-4D92-91622138018134BF">
-					<imagemetrics>
-						<image
-							this="FE4122D6-1505-4185-AA1B1D96A38E61C6"
-							uniqueguid="FE4122D6-1505-4185-AA1B1D96A38E61C6"
-							componentimage="B348917D-AF92-4555-9FBAA18F2FF9F317"
-							width="1600"
-							height="900"
-							colour="#F0F0F0FF"/>
-					</imagemetrics>
+					height="35"
+					uniqueguid="78E1B0CF-0881-4A24-AE578650E6826F93">
+					<component_text
+						text="Left-click to zoom to Dragon marker"
+						texthalign="Center"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="dy_advice_NewState_Text_73000f"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
 				</newstate>
 			</states>
-		</root>
+		</dy_advice>
+		<dy_flavour
+			this="09F68373-60A4-4C64-BEADB41EFE52C180"
+			id="dy_flavour"
+			offset="3.00,234.00"
+			allowhorizontalresize="false"
+			dock_offset="3.00,0.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="09F68373-60A4-4C64-BEADB41EFE52C180"
+			currentstate="4ED8E5C6-330F-4600-BDFC29372FC4AC98"
+			defaultstate="4ED8E5C6-330F-4600-BDFC29372FC4AC98">
+			<states>
+				<newstate
+					this="4ED8E5C6-330F-4600-BDFC29372FC4AC98"
+					name="NewState"
+					width="168"
+					height="67"
+					uniqueguid="4ED8E5C6-330F-4600-BDFC29372FC4AC98">
+					<component_text
+						text="Nearby events indicate that this Dragon has recently been roaming the surrounding lands."
+						texthalign="Center"
+						textlocalised="true"
+						textlabel="dy_flavour_NewState_Text_610036"
+						font_m_font_name="georgia_italic"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12_italic"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+				</newstate>
+			</states>
+		</dy_flavour>
+		<dy_timer_text
+			this="6E3B8860-92A7-4803-B6D5EE972D871406"
+			id="dy_timer_text"
+			offset="0.00,318.00"
+			allowhorizontalresize="false"
+			priority="60"
+			uniqueguid="6E3B8860-92A7-4803-B6D5EE972D871406"
+			currentstate="5AB2E30B-6D9E-4274-B6FB1D3012693EA7"
+			defaultstate="5AB2E30B-6D9E-4274-B6FB1D3012693EA7">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoScriptObject">
+					<child_m_user_properties>
+						<property
+							name="different_text_per_state"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context callback_id="ContextInitScriptObject"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="script_id"
+					value="dragon_taming_turns_current"/>
+			</userproperties>
+			<states>
+				<newstate
+					this="5AB2E30B-6D9E-4274-B6FB1D3012693EA7"
+					name="NewState"
+					width="175"
+					height="35"
+					uniqueguid="5AB2E30B-6D9E-4274-B6FB1D3012693EA7">
+					<component_text
+						text="{{CcoScriptObject:Floor(NumericValue)}} turns remaining"
+						texthalign="Center"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="dy_timer_text_NewState_Text_5a007e"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+		</dy_timer_text>
 		<dy_type
 			this="78F2753D-43DF-42F2-85FD372D31367F36"
 			id="dy_type"
@@ -161,6 +218,76 @@
 				</newstate>
 			</states>
 		</portrait>
+		<portrait_holder
+			this="ACF1F523-2559-439F-A76BDBE742F2E007"
+			id="portrait_holder"
+			offset="0.00,52.00"
+			allowverticalresize="false"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="ACF1F523-2559-439F-A76BDBE742F2E007"
+			currentstate="560D2F1B-EB6A-4110-86E49666B71030E2"
+			defaultstate="560D2F1B-EB6A-4110-86E49666B71030E2">
+			<states>
+				<newstate
+					this="560D2F1B-EB6A-4110-86E49666B71030E2"
+					name="NewState"
+					width="175"
+					height="130"
+					uniqueguid="560D2F1B-EB6A-4110-86E49666B71030E2"/>
+			</states>
+		</portrait_holder>
+		<root
+			this="55D19665-EC9B-4955-AD2F1A24D82A092D"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="55D19665-EC9B-4955-AD2F1A24D82A092D"
+			currentstate="7D498886-73DB-4D92-91622138018134BF"
+			defaultstate="7D498886-73DB-4D92-91622138018134BF">
+			<componentimages>
+				<component_image
+					this="B348917D-AF92-4555-9FBAA18F2FF9F317"
+					uniqueguid="B348917D-AF92-4555-9FBAA18F2FF9F317"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="7D498886-73DB-4D92-91622138018134BF"
+					name="NewState"
+					width="1600"
+					height="900"
+					interactive="true"
+					uniqueguid="7D498886-73DB-4D92-91622138018134BF">
+					<imagemetrics>
+						<image
+							this="FE4122D6-1505-4185-AA1B1D96A38E61C6"
+							uniqueguid="FE4122D6-1505-4185-AA1B1D96A38E61C6"
+							componentimage="B348917D-AF92-4555-9FBAA18F2FF9F317"
+							width="1600"
+							height="900"
+							colour="#F0F0F0FF"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</root>
+		<tooltip_dragon_taming
+			this="22A2D082-C6A1-4A0C-89BD1B4B0DD2ED8A"
+			id="tooltip_dragon_taming"
+			tooltipslocalised="true"
+			uniqueguid="22A2D082-C6A1-4A0C-89BD1B4B0DD2ED8A"
+			currentstate="5BD93A4A-F211-4A49-A7FD7344DA45EF8E"
+			defaultstate="5BD93A4A-F211-4A49-A7FD7344DA45EF8E">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="DragonTamingTooltip"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="5BD93A4A-F211-4A49-A7FD7344DA45EF8E"
+					name="NewState"
+					width="175"
+					height="8"
+					uniqueguid="5BD93A4A-F211-4A49-A7FD7344DA45EF8E"/>
+			</states>
+		</tooltip_dragon_taming>
 		<unit
 			this="9D7534AE-C088-45EB-80FA0DE376279A01"
 			id="unit"
@@ -465,132 +592,5 @@
 				</tech_lab>
 			</states>
 		</unit_cat_frame>
-		<dy_advice
-			this="632FA0E8-2E03-4F5D-8FEDBE17D98AED89"
-			id="dy_advice"
-			offset="0.00,370.00"
-			allowhorizontalresize="false"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="632FA0E8-2E03-4F5D-8FEDBE17D98AED89"
-			currentstate="78E1B0CF-0881-4A24-AE578650E6826F93"
-			defaultstate="78E1B0CF-0881-4A24-AE578650E6826F93">
-			<states>
-				<newstate
-					this="78E1B0CF-0881-4A24-AE578650E6826F93"
-					name="NewState"
-					width="175"
-					height="35"
-					uniqueguid="78E1B0CF-0881-4A24-AE578650E6826F93">
-					<component_text
-						text="Left-click to zoom to Dragon marker"
-						texthalign="Center"
-						texthbehaviour="Resize"
-						textlocalised="true"
-						textlabel="dy_advice_NewState_Text_73000f"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
-			</states>
-		</dy_advice>
-		<dy_flavour
-			this="09F68373-60A4-4C64-BEADB41EFE52C180"
-			id="dy_flavour"
-			offset="3.00,234.00"
-			allowhorizontalresize="false"
-			dock_offset="3.00,0.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="09F68373-60A4-4C64-BEADB41EFE52C180"
-			currentstate="4ED8E5C6-330F-4600-BDFC29372FC4AC98"
-			defaultstate="4ED8E5C6-330F-4600-BDFC29372FC4AC98">
-			<states>
-				<newstate
-					this="4ED8E5C6-330F-4600-BDFC29372FC4AC98"
-					name="NewState"
-					width="168"
-					height="67"
-					uniqueguid="4ED8E5C6-330F-4600-BDFC29372FC4AC98">
-					<component_text
-						text="Nearby events indicate that this Dragon has recently been roaming the surrounding lands."
-						texthalign="Center"
-						textlocalised="true"
-						textlabel="dy_flavour_NewState_Text_610036"
-						font_m_font_name="georgia_italic"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12_italic"
-						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
-				</newstate>
-			</states>
-		</dy_flavour>
-		<dy_timer_text
-			this="6E3B8860-92A7-4803-B6D5EE972D871406"
-			id="dy_timer_text"
-			offset="0.00,318.00"
-			allowhorizontalresize="false"
-			priority="60"
-			uniqueguid="6E3B8860-92A7-4803-B6D5EE972D871406"
-			currentstate="5AB2E30B-6D9E-4274-B6FB1D3012693EA7"
-			defaultstate="5AB2E30B-6D9E-4274-B6FB1D3012693EA7">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoScriptObject">
-					<child_m_user_properties>
-						<property
-							name="different_text_per_state"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context callback_id="ContextInitScriptObject"/>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="script_id"
-					value="dragon_taming_turns_current"/>
-			</userproperties>
-			<states>
-				<newstate
-					this="5AB2E30B-6D9E-4274-B6FB1D3012693EA7"
-					name="NewState"
-					width="175"
-					height="35"
-					uniqueguid="5AB2E30B-6D9E-4274-B6FB1D3012693EA7">
-					<component_text
-						text="{{CcoScriptObject:Floor(NumericValue)}} turns remaining"
-						texthalign="Center"
-						texthbehaviour="Resize"
-						textlocalised="true"
-						textlabel="dy_timer_text_NewState_Text_5a007e"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
-			</states>
-		</dy_timer_text>
-		<portrait_holder
-			this="ACF1F523-2559-439F-A76BDBE742F2E007"
-			id="portrait_holder"
-			offset="0.00,52.00"
-			allowverticalresize="false"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="ACF1F523-2559-439F-A76BDBE742F2E007"
-			currentstate="560D2F1B-EB6A-4110-86E49666B71030E2"
-			defaultstate="560D2F1B-EB6A-4110-86E49666B71030E2">
-			<states>
-				<newstate
-					this="560D2F1B-EB6A-4110-86E49666B71030E2"
-					name="NewState"
-					width="175"
-					height="130"
-					uniqueguid="560D2F1B-EB6A-4110-86E49666B71030E2"/>
-			</states>
-		</portrait_holder>
 	</components>
 </layout>

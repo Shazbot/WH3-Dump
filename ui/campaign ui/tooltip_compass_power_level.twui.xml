@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="PlayersFaction.IsCampaignFeatureAvailable(&quot;winds_of_magic_compass&quot;)">
 	<hierarchy>
@@ -43,37 +43,6 @@
 		</root>
 	</hierarchy>
 	<components>
-		<root
-			this="581B6E6B-189D-417D-8553801FC77BB9D3"
-			id="root"
-			tooltipslocalised="true"
-			uniqueguid="581B6E6B-189D-417D-8553801FC77BB9D3"
-			currentstate="5388E999-0613-47BA-89582BE4D15946EF"
-			defaultstate="5388E999-0613-47BA-89582BE4D15946EF">
-			<componentimages>
-				<component_image
-					this="66103FF1-874E-4B24-A8A99F98E9C5DA88"
-					uniqueguid="66103FF1-874E-4B24-A8A99F98E9C5DA88"/>
-			</componentimages>
-			<states>
-				<default
-					this="5388E999-0613-47BA-89582BE4D15946EF"
-					name="default"
-					width="1600"
-					height="900"
-					uniqueguid="5388E999-0613-47BA-89582BE4D15946EF">
-					<imagemetrics>
-						<image
-							this="BAFF7585-77B2-470F-BC06D02EA47ADC37"
-							uniqueguid="BAFF7585-77B2-470F-BC06D02EA47ADC37"
-							componentimage="66103FF1-874E-4B24-A8A99F98E9C5DA88"
-							width="1920"
-							height="1080"
-							colour="#1C1C1CFF"/>
-					</imagemetrics>
-				</default>
-			</states>
-		</root>
 		<dy_heading_textbox
 			this="09EE5762-6C0B-4E7A-920FD09179E922A9"
 			id="dy_heading_textbox"
@@ -106,6 +75,46 @@
 				</newstate>
 			</states>
 		</dy_heading_textbox>
+		<dy_threshold
+			this="60F52E5F-3B9C-4A2B-94D1466562D51C67"
+			id="dy_threshold"
+			offset="0.00,256.00"
+			allowverticalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="60F52E5F-3B9C-4A2B-94D1466562D51C67"
+			updatewhennotvisible="true"
+			currentstate="DD1FA1DC-2CC0-4DC5-8A5FFF3B33F853E5"
+			defaultstate="DD1FA1DC-2CC0-4DC5-8A5FFF3B33F853E5">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignWomCompassPowerLevelRange"
+					context_function_id="Format(Loc(&quot;wom_compass_power_level_range&quot;), MinLevel, MaxLevel)"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="DD1FA1DC-2CC0-4DC5-8A5FFF3B33F853E5"
+					name="NewState"
+					width="321"
+					height="24"
+					interactive="true"
+					uniqueguid="DD1FA1DC-2CC0-4DC5-8A5FFF3B33F853E5">
+					<component_text
+						text="dy_range: 9 - 10"
+						textvalign="Center"
+						texthalign="Center"
+						textxoffset="12.00,12.00"
+						textyoffset="0.00,4.00"
+						texthbehaviour="Never split"
+						textlabel="StateText_24a6095d"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+		</dy_threshold>
 		<dy_total
 			this="8E8D33E2-1409-4B34-8D099C49E8F6672B"
 			id="dy_total"
@@ -147,86 +156,6 @@
 				</newstate>
 			</states>
 		</dy_total>
-		<dy_value
-			this="11A9403C-25F9-4EC3-9DF69B1BEF99FE12"
-			id="dy_value"
-			offset="270.00,-5.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			docking="Center Right"
-			component_anchor_point="1.00,0.50"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="11A9403C-25F9-4EC3-9DF69B1BEF99FE12"
-			currentstate="C2213530-6523-406E-BD63A03F86ACB415"
-			defaultstate="C2213530-6523-406E-BD63A03F86ACB415">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoStringValue"
-					context_function_id="RoundFloat(MaxNumericValue(IntValue, 0))"/>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="C2213530-6523-406E-BD63A03F86ACB415"
-					name="default"
-					width="40"
-					height="24"
-					interactive="true"
-					uniqueguid="C2213530-6523-406E-BD63A03F86ACB415">
-					<component_text
-						text="99"
-						textvalign="Center"
-						texthbehaviour="Never split"
-						textlocalised="true"
-						textlabel="StateText_550d6592"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_10"/>
-				</default>
-			</states>
-		</dy_value>
-		<dy_value
-			this="B38E2769-A65B-4734-9A5F01461902FE3D"
-			id="dy_value"
-			offset="270.00,0.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			docking="Center Right"
-			component_anchor_point="1.00,0.50"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="B38E2769-A65B-4734-9A5F01461902FE3D"
-			currentstate="D04DF402-0155-4C78-8C758BE2C0D68272"
-			defaultstate="D04DF402-0155-4C78-8C758BE2C0D68272">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoCampaignPooledResource"
-					context_function_id="PositivePendingFactorTotal"/>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="D04DF402-0155-4C78-8C758BE2C0D68272"
-					name="NewState"
-					width="40"
-					height="24"
-					interactive="true"
-					uniqueguid="D04DF402-0155-4C78-8C758BE2C0D68272">
-					<component_text
-						text="99"
-						textvalign="Center"
-						texthbehaviour="Never split"
-						textlocalised="true"
-						textlabel="StateText_550d6592"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"
-						font_colour_override_preset_key="green"/>
-				</newstate>
-			</states>
-		</dy_value>
 		<dy_value
 			this="709569F7-5E2E-4B81-92FB778BCA93ADE7"
 			id="dy_value"
@@ -307,6 +236,86 @@
 				</newstate>
 			</states>
 		</dy_value>
+		<dy_value
+			this="11A9403C-25F9-4EC3-9DF69B1BEF99FE12"
+			id="dy_value"
+			offset="270.00,-5.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center Right"
+			component_anchor_point="1.00,0.50"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="11A9403C-25F9-4EC3-9DF69B1BEF99FE12"
+			currentstate="C2213530-6523-406E-BD63A03F86ACB415"
+			defaultstate="C2213530-6523-406E-BD63A03F86ACB415">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoStringValue"
+					context_function_id="RoundFloat(MaxNumericValue(IntValue, 0))"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="C2213530-6523-406E-BD63A03F86ACB415"
+					name="default"
+					width="40"
+					height="24"
+					interactive="true"
+					uniqueguid="C2213530-6523-406E-BD63A03F86ACB415">
+					<component_text
+						text="99"
+						textvalign="Center"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_550d6592"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
+				</default>
+			</states>
+		</dy_value>
+		<dy_value
+			this="B38E2769-A65B-4734-9A5F01461902FE3D"
+			id="dy_value"
+			offset="270.00,0.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center Right"
+			component_anchor_point="1.00,0.50"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="B38E2769-A65B-4734-9A5F01461902FE3D"
+			currentstate="D04DF402-0155-4C78-8C758BE2C0D68272"
+			defaultstate="D04DF402-0155-4C78-8C758BE2C0D68272">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="PositivePendingFactorTotal"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="D04DF402-0155-4C78-8C758BE2C0D68272"
+					name="NewState"
+					width="40"
+					height="24"
+					interactive="true"
+					uniqueguid="D04DF402-0155-4C78-8C758BE2C0D68272">
+					<component_text
+						text="99"
+						textvalign="Center"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_550d6592"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="green"/>
+				</newstate>
+			</states>
+		</dy_value>
 		<effect_list
 			this="F42EC5C8-D502-4768-8F08154B1D64C344"
 			id="effect_list"
@@ -357,46 +366,6 @@
 			</LayoutEngine>
 		</effect_list>
 		<factor_list
-			this="273A200B-96E9-4A0A-A8B85885D973AEAA"
-			id="factor_list"
-			offset="0.00,27.00"
-			clipchildren="true"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="273A200B-96E9-4A0A-A8B85885D973AEAA"
-			currentstate="8C490DD8-5ED8-49FE-B192556746BB424F">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextList"
-					context_object_id="CcoCampaignWomCompassDirection"
-					context_function_id="FactorList.Filter(IntValue &gt; 0)"/>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="8C490DD8-5ED8-49FE-B192556746BB424F"
-					name="NewState"
-					width="310"
-					height="15"
-					uniqueguid="8C490DD8-5ED8-49FE-B192556746BB424F">
-					<component_text
-						textxoffset="8.00,0.00"
-						textyoffset="6.00,0.00"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
-			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true"
-				margins="0.00,2.00">
-				<columnwidths>
-					<column width="340"/>
-				</columnwidths>
-			</LayoutEngine>
-		</factor_list>
-		<factor_list
 			this="880B2216-7267-46E9-8EF91E1DDAF60167"
 			id="factor_list"
 			offset="0.00,23.00"
@@ -418,6 +387,46 @@
 					width="310"
 					height="26"
 					uniqueguid="D48DD08A-9895-4BBA-8FBE1983F9CC4AB1">
+					<component_text
+						textxoffset="8.00,0.00"
+						textyoffset="6.00,0.00"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true"
+				margins="0.00,2.00">
+				<columnwidths>
+					<column width="340"/>
+				</columnwidths>
+			</LayoutEngine>
+		</factor_list>
+		<factor_list
+			this="273A200B-96E9-4A0A-A8B85885D973AEAA"
+			id="factor_list"
+			offset="0.00,27.00"
+			clipchildren="true"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="273A200B-96E9-4A0A-A8B85885D973AEAA"
+			currentstate="8C490DD8-5ED8-49FE-B192556746BB424F">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoCampaignWomCompassDirection"
+					context_function_id="FactorList.Filter(IntValue &gt; 0)"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="8C490DD8-5ED8-49FE-B192556746BB424F"
+					name="NewState"
+					width="310"
+					height="15"
+					uniqueguid="8C490DD8-5ED8-49FE-B192556746BB424F">
 					<component_text
 						textxoffset="8.00,0.00"
 						textyoffset="6.00,0.00"
@@ -472,6 +481,37 @@
 			</states>
 		</instructions>
 		<list_header
+			this="C7542CC2-0E54-41B0-82C13F3959B6338E"
+			id="list_header"
+			allowverticalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="C7542CC2-0E54-41B0-82C13F3959B6338E"
+			updatewhennotvisible="true"
+			currentstate="632BB264-6D2F-4DBE-A3BFD75D2D636301"
+			defaultstate="632BB264-6D2F-4DBE-A3BFD75D2D636301">
+			<states>
+				<newstate
+					this="632BB264-6D2F-4DBE-A3BFD75D2D636301"
+					name="NewState"
+					width="73"
+					height="23"
+					interactive="true"
+					uniqueguid="632BB264-6D2F-4DBE-A3BFD75D2D636301">
+					<component_text
+						text="Decrease"
+						textxoffset="15.00,8.00"
+						textyoffset="2.00,5.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="StateText_a0a3c4a7"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
+				</newstate>
+			</states>
+		</list_header>
+		<list_header
 			this="2F92EE89-1888-418F-ADC638C684C37D30"
 			id="list_header"
 			offset="0.00,4.00"
@@ -497,37 +537,6 @@
 						texthbehaviour="Resize"
 						textlocalised="true"
 						textlabel="StateText_52268038"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_10"/>
-				</newstate>
-			</states>
-		</list_header>
-		<list_header
-			this="C7542CC2-0E54-41B0-82C13F3959B6338E"
-			id="list_header"
-			allowverticalresize="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="C7542CC2-0E54-41B0-82C13F3959B6338E"
-			updatewhennotvisible="true"
-			currentstate="632BB264-6D2F-4DBE-A3BFD75D2D636301"
-			defaultstate="632BB264-6D2F-4DBE-A3BFD75D2D636301">
-			<states>
-				<newstate
-					this="632BB264-6D2F-4DBE-A3BFD75D2D636301"
-					name="NewState"
-					width="73"
-					height="23"
-					interactive="true"
-					uniqueguid="632BB264-6D2F-4DBE-A3BFD75D2D636301">
-					<component_text
-						text="Decrease"
-						textxoffset="15.00,8.00"
-						textyoffset="2.00,5.00"
-						texthbehaviour="Resize"
-						textlocalised="true"
-						textlabel="StateText_a0a3c4a7"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
 						fontcat_name="body_10"/>
@@ -663,6 +672,73 @@
 				</columnwidths>
 			</LayoutEngine>
 		</positive_list>
+		<root
+			this="581B6E6B-189D-417D-8553801FC77BB9D3"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="581B6E6B-189D-417D-8553801FC77BB9D3"
+			currentstate="5388E999-0613-47BA-89582BE4D15946EF"
+			defaultstate="5388E999-0613-47BA-89582BE4D15946EF">
+			<componentimages>
+				<component_image
+					this="66103FF1-874E-4B24-A8A99F98E9C5DA88"
+					uniqueguid="66103FF1-874E-4B24-A8A99F98E9C5DA88"/>
+			</componentimages>
+			<states>
+				<default
+					this="5388E999-0613-47BA-89582BE4D15946EF"
+					name="default"
+					width="1600"
+					height="900"
+					uniqueguid="5388E999-0613-47BA-89582BE4D15946EF">
+					<imagemetrics>
+						<image
+							this="BAFF7585-77B2-470F-BC06D02EA47ADC37"
+							uniqueguid="BAFF7585-77B2-470F-BC06D02EA47ADC37"
+							componentimage="66103FF1-874E-4B24-A8A99F98E9C5DA88"
+							width="1920"
+							height="1080"
+							colour="#1C1C1CFF"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</root>
+		<seond_separator
+			this="E7F2CD57-8AA0-4C63-8B3D2395770ED07C"
+			id="seond_separator"
+			offset="0.00,240.00"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="E7F2CD57-8AA0-4C63-8B3D2395770ED07C"
+			currentstate="55F8BF0A-3296-4517-AD1E687857B1544F"
+			defaultstate="55F8BF0A-3296-4517-AD1E687857B1544F">
+			<componentimages>
+				<component_image
+					this="1A8B5B1F-9F71-4856-B0B54AA255DF656D"
+					uniqueguid="1A8B5B1F-9F71-4856-B0B54AA255DF656D"
+					imagepath="ui/skins/default/separator_skull.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="55F8BF0A-3296-4517-AD1E687857B1544F"
+					name="NewState"
+					width="320"
+					height="16"
+					uniqueguid="55F8BF0A-3296-4517-AD1E687857B1544F">
+					<imagemetrics>
+						<image
+							this="E373F01B-D7CE-4D0D-A965E19E44F4EFDD"
+							uniqueguid="E373F01B-D7CE-4D0D-A965E19E44F4EFDD"
+							componentimage="1A8B5B1F-9F71-4856-B0B54AA255DF656D"
+							offset="7.00,0.00"
+							width="311"
+							height="14"
+							tile="true"
+							margin="0.00,50.00,0.00,45.00"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</seond_separator>
 		<seperator
 			this="11965D25-135C-41BF-95C3A47421FF6091"
 			id="seperator"
@@ -762,43 +838,6 @@
 			</states>
 		</template_effect>
 		<template_entry
-			this="862F8111-E31E-41BA-854AC7AC8BFECC56"
-			id="template_entry"
-			allowhorizontalresize="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="862F8111-E31E-41BA-854AC7AC8BFECC56"
-			updatewhennotvisible="true"
-			currentstate="0F753291-54C7-4A2C-8779429021D55CE2"
-			defaultstate="0F753291-54C7-4A2C-8779429021D55CE2">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoStringValue"
-					context_function_id="StringValue"/>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="0F753291-54C7-4A2C-8779429021D55CE2"
-					name="NewState"
-					width="310"
-					height="13"
-					interactive="true"
-					uniqueguid="0F753291-54C7-4A2C-8779429021D55CE2">
-					<component_text
-						text="dy_factor_name"
-						textvalign="Center"
-						textxoffset="36.00,12.00"
-						textyoffset="0.00,4.00"
-						texthbehaviour="Resize"
-						textlabel="template_entry_NewState_Text_48005f"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_10"/>
-				</newstate>
-			</states>
-		</template_entry>
-		<template_entry
 			this="73EE040A-AF89-42D6-A0D00A6F996A220F"
 			id="template_entry"
 			allowhorizontalresize="false"
@@ -829,6 +868,43 @@
 						textxoffset="36.00,12.00"
 						textyoffset="0.00,4.00"
 						texthbehaviour="Never split"
+						textlabel="template_entry_NewState_Text_48005f"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
+				</newstate>
+			</states>
+		</template_entry>
+		<template_entry
+			this="862F8111-E31E-41BA-854AC7AC8BFECC56"
+			id="template_entry"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="862F8111-E31E-41BA-854AC7AC8BFECC56"
+			updatewhennotvisible="true"
+			currentstate="0F753291-54C7-4A2C-8779429021D55CE2"
+			defaultstate="0F753291-54C7-4A2C-8779429021D55CE2">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoStringValue"
+					context_function_id="StringValue"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="0F753291-54C7-4A2C-8779429021D55CE2"
+					name="NewState"
+					width="310"
+					height="13"
+					interactive="true"
+					uniqueguid="0F753291-54C7-4A2C-8779429021D55CE2">
+					<component_text
+						text="dy_factor_name"
+						textvalign="Center"
+						textxoffset="36.00,12.00"
+						textyoffset="0.00,4.00"
+						texthbehaviour="Resize"
 						textlabel="template_entry_NewState_Text_48005f"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
@@ -907,42 +983,6 @@
 			</LayoutEngine>
 		</tooltip_compass_power_level>
 		<total
-			this="ADF64727-0F59-4F31-82DF5AB7ED3F1FAD"
-			id="total"
-			offset="0.00,49.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			visible="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="ADF64727-0F59-4F31-82DF5AB7ED3F1FAD"
-			updatewhennotvisible="true"
-			currentstate="BC9BAEF4-30C4-4C3B-9EF6A5740FF44AE3"
-			defaultstate="BC9BAEF4-30C4-4C3B-9EF6A5740FF44AE3">
-			<states>
-				<newstate
-					this="BC9BAEF4-30C4-4C3B-9EF6A5740FF44AE3"
-					name="NewState"
-					width="310"
-					height="24"
-					interactive="true"
-					uniqueguid="BC9BAEF4-30C4-4C3B-9EF6A5740FF44AE3">
-					<component_text
-						text="Total"
-						textvalign="Center"
-						textxoffset="20.00,12.00"
-						textyoffset="0.00,4.00"
-						texthbehaviour="Never split"
-						textlocalised="true"
-						textlabel="title_default_Text_e004c"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
-			</states>
-		</total>
-		<total
 			this="9C950413-4CC9-4DE6-A328AD1CA292D416"
 			id="total"
 			offset="0.00,49.00"
@@ -978,81 +1018,41 @@
 				</newstate>
 			</states>
 		</total>
-		<dy_threshold
-			this="60F52E5F-3B9C-4A2B-94D1466562D51C67"
-			id="dy_threshold"
-			offset="0.00,256.00"
+		<total
+			this="ADF64727-0F59-4F31-82DF5AB7ED3F1FAD"
+			id="total"
+			offset="0.00,49.00"
+			allowhorizontalresize="false"
 			allowverticalresize="false"
+			visible="false"
 			priority="255"
 			tooltipslocalised="true"
-			uniqueguid="60F52E5F-3B9C-4A2B-94D1466562D51C67"
+			uniqueguid="ADF64727-0F59-4F31-82DF5AB7ED3F1FAD"
 			updatewhennotvisible="true"
-			currentstate="DD1FA1DC-2CC0-4DC5-8A5FFF3B33F853E5"
-			defaultstate="DD1FA1DC-2CC0-4DC5-8A5FFF3B33F853E5">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoCampaignWomCompassPowerLevelRange"
-					context_function_id="Format(Loc(&quot;wom_compass_power_level_range&quot;), MinLevel, MaxLevel)"/>
-			</callbackwithcontextlist>
+			currentstate="BC9BAEF4-30C4-4C3B-9EF6A5740FF44AE3"
+			defaultstate="BC9BAEF4-30C4-4C3B-9EF6A5740FF44AE3">
 			<states>
 				<newstate
-					this="DD1FA1DC-2CC0-4DC5-8A5FFF3B33F853E5"
+					this="BC9BAEF4-30C4-4C3B-9EF6A5740FF44AE3"
 					name="NewState"
-					width="321"
+					width="310"
 					height="24"
 					interactive="true"
-					uniqueguid="DD1FA1DC-2CC0-4DC5-8A5FFF3B33F853E5">
+					uniqueguid="BC9BAEF4-30C4-4C3B-9EF6A5740FF44AE3">
 					<component_text
-						text="dy_range: 9 - 10"
+						text="Total"
 						textvalign="Center"
-						texthalign="Center"
-						textxoffset="12.00,12.00"
+						textxoffset="20.00,12.00"
 						textyoffset="0.00,4.00"
 						texthbehaviour="Never split"
-						textlabel="StateText_24a6095d"
+						textlocalised="true"
+						textlabel="title_default_Text_e004c"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
 						fontcat_name="body_12"/>
 				</newstate>
 			</states>
-		</dy_threshold>
-		<seond_separator
-			this="E7F2CD57-8AA0-4C63-8B3D2395770ED07C"
-			id="seond_separator"
-			offset="0.00,240.00"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="E7F2CD57-8AA0-4C63-8B3D2395770ED07C"
-			currentstate="55F8BF0A-3296-4517-AD1E687857B1544F"
-			defaultstate="55F8BF0A-3296-4517-AD1E687857B1544F">
-			<componentimages>
-				<component_image
-					this="1A8B5B1F-9F71-4856-B0B54AA255DF656D"
-					uniqueguid="1A8B5B1F-9F71-4856-B0B54AA255DF656D"
-					imagepath="ui/skins/default/separator_skull.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="55F8BF0A-3296-4517-AD1E687857B1544F"
-					name="NewState"
-					width="320"
-					height="16"
-					uniqueguid="55F8BF0A-3296-4517-AD1E687857B1544F">
-					<imagemetrics>
-						<image
-							this="E373F01B-D7CE-4D0D-A965E19E44F4EFDD"
-							uniqueguid="E373F01B-D7CE-4D0D-A965E19E44F4EFDD"
-							componentimage="1A8B5B1F-9F71-4856-B0B54AA255DF656D"
-							offset="7.00,0.00"
-							width="311"
-							height="14"
-							tile="true"
-							margin="0.00,50.00,0.00,45.00"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-		</seond_separator>
+		</total>
 	</components>
 </layout>

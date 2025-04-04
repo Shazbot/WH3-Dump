@@ -1,10 +1,12 @@
 kislev_devotion = {
 	devotion_amount_per_force_ritual = 50,
-	devotion_amount_per_province_ritual = 50
+	devotion_amount_per_province_ritual = 50,
+	devotion_amount_required_for_invoking = 25 -- the minimum devotion level needed to perform invocations. (this is separate from the cost)
 } 
 
 function kislev_devotion:setup_kislev_devotion()
 	common.set_context_value("kislev_devotion_amount_per_ritual", self.devotion_amount_per_force_ritual);
+	common.set_context_value("kislev_devotion_ui_required_amount", self.devotion_amount_required_for_invoking);
 
 	-- set public order after ritual is performed
 	core:add_listener(

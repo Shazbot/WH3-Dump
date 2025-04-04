@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="CampaignRoot.IsMultiplayer">
 	<hierarchy>
@@ -18,37 +18,6 @@
 		</root>
 	</hierarchy>
 	<components>
-		<root
-			this="4A825E24-5972-4EC9-8C5615AC564B31DD"
-			id="root"
-			tooltipslocalised="true"
-			uniqueguid="4A825E24-5972-4EC9-8C5615AC564B31DD"
-			currentstate="B4361EBE-8816-4D05-99C390475DEA7BDD"
-			defaultstate="B4361EBE-8816-4D05-99C390475DEA7BDD">
-			<componentimages>
-				<component_image
-					this="FABADEBA-C8D7-4381-88DF6664E90D246D"
-					uniqueguid="FABADEBA-C8D7-4381-88DF6664E90D246D"/>
-			</componentimages>
-			<states>
-				<default
-					this="B4361EBE-8816-4D05-99C390475DEA7BDD"
-					name="default"
-					width="1600"
-					height="900"
-					uniqueguid="B4361EBE-8816-4D05-99C390475DEA7BDD">
-					<imagemetrics>
-						<image
-							this="D5062BDD-C7A1-4C7E-9ECD9A483E5E8FB1"
-							uniqueguid="D5062BDD-C7A1-4C7E-9ECD9A483E5E8FB1"
-							componentimage="FABADEBA-C8D7-4381-88DF6664E90D246D"
-							width="1920"
-							height="1080"
-							colour="#828282FF"/>
-					</imagemetrics>
-				</default>
-			</states>
-		</root>
 		<icon_faction
 			this="9A67BA63-87C0-4D67-8B05FED839DBC77D"
 			id="icon_faction"
@@ -92,6 +61,154 @@
 				</newstate>
 			</states>
 		</icon_faction>
+		<icon_pending_action
+			this="31C17252-9FCF-45D6-85BA0B37A5868F60"
+			id="icon_pending_action"
+			offset="229.00,-2.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			priority="100"
+			tooltipslocalised="true"
+			uniqueguid="31C17252-9FCF-45D6-85BA0B37A5868F60"
+			currentstate="5EFC3806-9512-4DC5-8F6188C3E7105278"
+			defaultstate="5EFC3806-9512-4DC5-8F6188C3E7105278">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignFaction"
+					context_function_id="IsSimultaneousTurns &amp;&amp; CampaignRoot.PendingActionContext.InvolvedFactionList.Contains(this)">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value="1000"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoCampaignPendingAction"
+					context_function_id="Description + &quot;&#10;&#10;&quot; + InvolvedFactionList.Filter(IsHuman).JoinString(Format(&quot;%S (%S)&quot;, NameWithIcon, NetworkPlayerContext.Name), &quot;&#10;&quot;)">
+					<child_m_user_properties>
+						<property
+							name="suppress_localise_asserts"
+							value=""/>
+						<property
+							name="update_constant"
+							value="1000"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoNetworkPlayer"
+					context_function_id="CurrentGameCampaignFactionContext"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoStaticObject"
+					context_function_id="CampaignRoot.PendingActionContext"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="disable_override"
+					value="position"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="38E23C8D-607A-4A08-A182ACEFF3992DBC"
+					uniqueguid="38E23C8D-607A-4A08-A182ACEFF3992DBC"
+					imagepath="ui/skins/default/icon_mpc_pending_action.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="5EFC3806-9512-4DC5-8F6188C3E7105278"
+					name="default"
+					width="30"
+					height="30"
+					tooltip="Player has ended turn"
+					tooltiplabel="StateTooltip_23627486"
+					interactive="true"
+					disabled="true"
+					shader_name="glow_pulse_t0"
+					uniqueguid="5EFC3806-9512-4DC5-8F6188C3E7105278">
+					<imagemetrics>
+						<image
+							this="9C588E36-6FAB-4B47-9500CC98581CBE88"
+							uniqueguid="9C588E36-6FAB-4B47-9500CC98581CBE88"
+							componentimage="38E23C8D-607A-4A08-A182ACEFF3992DBC"
+							width="30"
+							height="30"/>
+					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</default>
+			</states>
+		</icon_pending_action>
+		<icon_ready
+			this="11656ABF-0809-47A9-AF72BC001C678CB8"
+			id="icon_ready"
+			offset="229.00,-1.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			priority="100"
+			tooltipslocalised="true"
+			uniqueguid="11656ABF-0809-47A9-AF72BC001C678CB8"
+			currentstate="241BFEEE-729E-427D-A52D859F9C24BB17"
+			defaultstate="241BFEEE-729E-427D-A52D859F9C24BB17">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoNetworkPlayer"
+					context_function_id="CurrentGameCampaignFactionContext"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignFaction"
+					context_function_id="IsFactionReadyToEndTurn &amp;&amp; IsFactionsTurn &amp;&amp; IsSimultaneousTurns"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="disable_override"
+					value="position"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="565CC7E5-893F-4989-BC944DFAEB35C9A9"
+					uniqueguid="565CC7E5-893F-4989-BC944DFAEB35C9A9"
+					imagepath="ui/skins/default/icon_check_green.png"/>
+			</componentimages>
+			<states>
+				<ready_to_end_turn
+					this="241BFEEE-729E-427D-A52D859F9C24BB17"
+					name="ready_to_end_turn"
+					width="31"
+					height="28"
+					tooltip="Player has ended turn"
+					tooltiplabel="icon_ready_ready_to_end_turn_Tooltip_8a8aa383"
+					interactive="true"
+					disabled="true"
+					uniqueguid="241BFEEE-729E-427D-A52D859F9C24BB17">
+					<imagemetrics>
+						<image
+							this="B72DA846-B155-456A-A74CC71AC38DDB2B"
+							uniqueguid="B72DA846-B155-456A-A74CC71AC38DDB2B"
+							componentimage="565CC7E5-893F-4989-BC944DFAEB35C9A9"
+							width="30"
+							height="29"
+							dockpoint="Center"
+							aspect_ratio_locked_behaviour="Width First"/>
+					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</ready_to_end_turn>
+			</states>
+		</icon_ready>
 		<label_player
 			this="584986C9-07C2-4A5E-B36C64B07091D9CC"
 			id="label_player"
@@ -135,6 +252,59 @@
 				</default>
 			</states>
 		</label_player>
+		<label_score
+			this="BCD0CD60-4A3B-4279-AC9CAC873B94E8C8"
+			id="label_score"
+			offset="196.00,-3.00"
+			allowverticalresize="false"
+			priority="50"
+			tooltipslocalised="true"
+			componentleveltooltip="Score"
+			tooltiplabel="label_score_Tooltip_655bb8e1"
+			uniqueguid="BCD0CD60-4A3B-4279-AC9CAC873B94E8C8"
+			currentstate="E8EE0CCE-72AE-40D8-955886759E584215"
+			defaultstate="E8EE0CCE-72AE-40D8-955886759E584215">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoNetworkPlayer"
+					context_function_id="Format(Loc(&quot;mp_tol_score&quot;) + RoundFloat(SharedStateReadFloat(Format(&quot;ToL_score_%S&quot;, CurrentGameCampaignFactionContext.FactionRecordContext.Key)))+ &quot;/&quot;+RoundFloat(SharedStateReadFloat(Format(&quot;ToL_score_to_win&quot;)))+ &quot; (+&quot; + RoundFloat(SharedStateReadFloat(Format(&quot;ToL_pending_score_%S&quot;, CurrentGameCampaignFactionContext.FactionRecordContext.Key)))+&quot;)&quot;)"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoNetworkPlayer"
+					context_function_id="IsTimeOfLegendsCampaign &amp;&amp; SharedStateReadFloat(Format(&quot;ToL_score_%S&quot;, CurrentGameCampaignFactionContext.FactionRecordContext.Key)) &gt;= 0"/>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_function_id="Format(Loc(&quot;mp_tol_scoring_rules&quot;))"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="event0"
+					value="UnitRemovedFromUIAny"/>
+			</userproperties>
+			<states>
+				<default
+					this="E8EE0CCE-72AE-40D8-955886759E584215"
+					name="default"
+					width="31"
+					interactive="true"
+					disabled="true"
+					uniqueguid="E8EE0CCE-72AE-40D8-955886759E584215">
+					<component_text
+						text="000"
+						textvalign="Center"
+						textxoffset="0.00,4.00"
+						texthbehaviour="Resize"
+						textlabel="label_score_default_Text_9bee4ea2"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						text_shader_name="text_outline_t0"
+						textshadervars="0.00,0.00,0.00,1.00"/>
+				</default>
+			</states>
+		</label_score>
 		<mp_player_list
 			this="8339CA8C-AA41-4657-AFEC8A2FC7841B72"
 			id="mp_player_list"
@@ -182,6 +352,88 @@
 				</columnwidths>
 			</LayoutEngine>
 		</mp_player_list>
+		<player_icon
+			this="7DC226E5-09FD-4D30-8702816DF517E50A"
+			id="player_icon"
+			offset="0.00,36.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			priority="65"
+			tooltipslocalised="true"
+			uniqueguid="7DC226E5-09FD-4D30-8702816DF517E50A"
+			currentstate="874FFAB1-86DE-4AD5-BED7EABC367DE9EF"
+			marked_for_deletion="true">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="NetworkPlayerImage"
+					context_object_id="CcoNetworkPlayer"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+				<property
+					name="dynamic_child_parent"
+					value="template_dropdown_entry"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="B4D030EB-74DD-4BB3-979636D1017B9BE4"
+					uniqueguid="B4D030EB-74DD-4BB3-979636D1017B9BE4"
+					imagepath="ui/skins/default/avatar_offline_small.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="874FFAB1-86DE-4AD5-BED7EABC367DE9EF"
+					name="NewState"
+					width="22.0000057"
+					height="22"
+					interactive="true"
+					disabled="true"
+					uniqueguid="874FFAB1-86DE-4AD5-BED7EABC367DE9EF">
+					<imagemetrics>
+						<image
+							this="B31FE758-A9C9-4997-A2233E3E61982981"
+							uniqueguid="B31FE758-A9C9-4997-A2233E3E61982981"
+							componentimage="B4D030EB-74DD-4BB3-979636D1017B9BE4"
+							width="22"
+							height="22"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</player_icon>
+		<root
+			this="4A825E24-5972-4EC9-8C5615AC564B31DD"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="4A825E24-5972-4EC9-8C5615AC564B31DD"
+			currentstate="B4361EBE-8816-4D05-99C390475DEA7BDD"
+			defaultstate="B4361EBE-8816-4D05-99C390475DEA7BDD">
+			<componentimages>
+				<component_image
+					this="FABADEBA-C8D7-4381-88DF6664E90D246D"
+					uniqueguid="FABADEBA-C8D7-4381-88DF6664E90D246D"/>
+			</componentimages>
+			<states>
+				<default
+					this="B4361EBE-8816-4D05-99C390475DEA7BDD"
+					name="default"
+					width="1600"
+					height="900"
+					uniqueguid="B4361EBE-8816-4D05-99C390475DEA7BDD">
+					<imagemetrics>
+						<image
+							this="D5062BDD-C7A1-4C7E-9ECD9A483E5E8FB1"
+							uniqueguid="D5062BDD-C7A1-4C7E-9ECD9A483E5E8FB1"
+							componentimage="FABADEBA-C8D7-4381-88DF6664E90D246D"
+							width="1920"
+							height="1080"
+							colour="#828282FF"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</root>
 		<template_entry
 			this="99D1BD2D-0B85-437C-A36D446BDD53F150"
 			id="template_entry"
@@ -266,11 +518,11 @@
 					</imagemetrics>
 					<transitionmap>
 						<transition
-							index="3"
-							transition_m_target_state="1AC6F645-33C7-4E65-AEA9B010E57745CE"/>
-						<transition
 							index="1"
 							transition_m_target_state="616C0FF6-0453-4800-AEF0274F16ED6228"/>
+						<transition
+							index="3"
+							transition_m_target_state="1AC6F645-33C7-4E65-AEA9B010E57745CE"/>
 					</transitionmap>
 					<component_text
 						textvalign="Center"
@@ -357,257 +609,5 @@
 				margins="0.00,18.00"
 				vertical_alignment="Center"/>
 		</template_entry>
-		<player_icon
-			this="7DC226E5-09FD-4D30-8702816DF517E50A"
-			id="player_icon"
-			offset="0.00,36.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			visible="false"
-			priority="65"
-			tooltipslocalised="true"
-			uniqueguid="7DC226E5-09FD-4D30-8702816DF517E50A"
-			currentstate="874FFAB1-86DE-4AD5-BED7EABC367DE9EF"
-			marked_for_deletion="true">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="NetworkPlayerImage"
-					context_object_id="CcoNetworkPlayer"/>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-				<property
-					name="dynamic_child_parent"
-					value="template_dropdown_entry"/>
-			</userproperties>
-			<componentimages>
-				<component_image
-					this="B4D030EB-74DD-4BB3-979636D1017B9BE4"
-					uniqueguid="B4D030EB-74DD-4BB3-979636D1017B9BE4"
-					imagepath="ui/skins/default/avatar_offline_small.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="874FFAB1-86DE-4AD5-BED7EABC367DE9EF"
-					name="NewState"
-					width="22.0000057"
-					height="22"
-					interactive="true"
-					disabled="true"
-					uniqueguid="874FFAB1-86DE-4AD5-BED7EABC367DE9EF">
-					<imagemetrics>
-						<image
-							this="B31FE758-A9C9-4997-A2233E3E61982981"
-							uniqueguid="B31FE758-A9C9-4997-A2233E3E61982981"
-							componentimage="B4D030EB-74DD-4BB3-979636D1017B9BE4"
-							width="22"
-							height="22"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-		</player_icon>
-		<icon_ready
-			this="11656ABF-0809-47A9-AF72BC001C678CB8"
-			id="icon_ready"
-			offset="229.00,-1.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			visible="false"
-			priority="100"
-			tooltipslocalised="true"
-			uniqueguid="11656ABF-0809-47A9-AF72BC001C678CB8"
-			currentstate="241BFEEE-729E-427D-A52D859F9C24BB17"
-			defaultstate="241BFEEE-729E-427D-A52D859F9C24BB17">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoNetworkPlayer"
-					context_function_id="CurrentGameCampaignFactionContext"/>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoCampaignFaction"
-					context_function_id="IsFactionReadyToEndTurn &amp;&amp; IsFactionsTurn &amp;&amp; IsSimultaneousTurns"/>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="disable_override"
-					value="position"/>
-			</userproperties>
-			<componentimages>
-				<component_image
-					this="565CC7E5-893F-4989-BC944DFAEB35C9A9"
-					uniqueguid="565CC7E5-893F-4989-BC944DFAEB35C9A9"
-					imagepath="ui/skins/default/icon_check_green.png"/>
-			</componentimages>
-			<states>
-				<ready_to_end_turn
-					this="241BFEEE-729E-427D-A52D859F9C24BB17"
-					name="ready_to_end_turn"
-					width="31"
-					height="28"
-					tooltip="Player has ended turn"
-					tooltiplabel="icon_ready_ready_to_end_turn_Tooltip_8a8aa383"
-					interactive="true"
-					disabled="true"
-					uniqueguid="241BFEEE-729E-427D-A52D859F9C24BB17">
-					<imagemetrics>
-						<image
-							this="B72DA846-B155-456A-A74CC71AC38DDB2B"
-							uniqueguid="B72DA846-B155-456A-A74CC71AC38DDB2B"
-							componentimage="565CC7E5-893F-4989-BC944DFAEB35C9A9"
-							width="30"
-							height="29"
-							dockpoint="Center"
-							isaspectratiolocked="true"/>
-					</imagemetrics>
-					<component_text
-						texthbehaviour="Never split"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</ready_to_end_turn>
-			</states>
-		</icon_ready>
-		<label_score
-			this="BCD0CD60-4A3B-4279-AC9CAC873B94E8C8"
-			id="label_score"
-			offset="196.00,-3.00"
-			allowverticalresize="false"
-			priority="50"
-			tooltipslocalised="true"
-			componentleveltooltip="Score"
-			tooltiplabel="label_score_Tooltip_655bb8e1"
-			uniqueguid="BCD0CD60-4A3B-4279-AC9CAC873B94E8C8"
-			currentstate="E8EE0CCE-72AE-40D8-955886759E584215"
-			defaultstate="E8EE0CCE-72AE-40D8-955886759E584215">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoNetworkPlayer"
-					context_function_id="Format(Loc(&quot;mp_tol_score&quot;) + RoundFloat(SharedStateReadFloat(Format(&quot;ToL_score_%S&quot;, CurrentGameCampaignFactionContext.FactionRecordContext.Key)))+ &quot;/&quot;+RoundFloat(SharedStateReadFloat(Format(&quot;ToL_score_to_win&quot;)))+ &quot; (+&quot; + RoundFloat(SharedStateReadFloat(Format(&quot;ToL_pending_score_%S&quot;, CurrentGameCampaignFactionContext.FactionRecordContext.Key)))+&quot;)&quot;)"/>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoNetworkPlayer"
-					context_function_id="IsTimeOfLegendsCampaign &amp;&amp; SharedStateReadFloat(Format(&quot;ToL_score_%S&quot;, CurrentGameCampaignFactionContext.FactionRecordContext.Key)) &gt;= 0"/>
-				<callback_with_context
-					callback_id="ContextTooltipSetter"
-					context_function_id="Format(Loc(&quot;mp_tol_scoring_rules&quot;))"/>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="event0"
-					value="UnitRemovedFromUIAny"/>
-			</userproperties>
-			<states>
-				<default
-					this="E8EE0CCE-72AE-40D8-955886759E584215"
-					name="default"
-					width="31"
-					interactive="true"
-					disabled="true"
-					uniqueguid="E8EE0CCE-72AE-40D8-955886759E584215">
-					<component_text
-						text="000"
-						textvalign="Center"
-						textxoffset="0.00,4.00"
-						texthbehaviour="Resize"
-						textlabel="label_score_default_Text_9bee4ea2"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"
-						text_shader_name="text_outline_t0"
-						textshadervars="0.00,0.00,0.00,1.00"/>
-				</default>
-			</states>
-		</label_score>
-		<icon_pending_action
-			this="31C17252-9FCF-45D6-85BA0B37A5868F60"
-			id="icon_pending_action"
-			offset="229.00,-2.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			visible="false"
-			priority="100"
-			tooltipslocalised="true"
-			uniqueguid="31C17252-9FCF-45D6-85BA0B37A5868F60"
-			currentstate="5EFC3806-9512-4DC5-8F6188C3E7105278"
-			defaultstate="5EFC3806-9512-4DC5-8F6188C3E7105278">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoCampaignFaction"
-					context_function_id="IsSimultaneousTurns &amp;&amp; CampaignRoot.PendingActionContext.InvolvedFactionList.Contains(this)">
-					<child_m_user_properties>
-						<property
-							name="update_constant"
-							value="1000"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextTooltipSetter"
-					context_object_id="CcoCampaignPendingAction"
-					context_function_id="Description + &quot;&#10;&#10;&quot; + InvolvedFactionList.Filter(IsHuman).JoinString(Format(&quot;%S (%S)&quot;, NameWithIcon, NetworkPlayerContext.Name), &quot;&#10;&quot;)">
-					<child_m_user_properties>
-						<property
-							name="suppress_localise_asserts"
-							value=""/>
-						<property
-							name="update_constant"
-							value="1000"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoNetworkPlayer"
-					context_function_id="CurrentGameCampaignFactionContext"/>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoStaticObject"
-					context_function_id="CampaignRoot.PendingActionContext"/>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="disable_override"
-					value="position"/>
-			</userproperties>
-			<componentimages>
-				<component_image
-					this="38E23C8D-607A-4A08-A182ACEFF3992DBC"
-					uniqueguid="38E23C8D-607A-4A08-A182ACEFF3992DBC"
-					imagepath="ui/skins/default/icon_mpc_pending_action.png"/>
-			</componentimages>
-			<states>
-				<default
-					this="5EFC3806-9512-4DC5-8F6188C3E7105278"
-					name="default"
-					width="30"
-					height="30"
-					tooltip="Player has ended turn"
-					tooltiplabel="StateTooltip_23627486"
-					interactive="true"
-					disabled="true"
-					shader_name="glow_pulse_t0"
-					uniqueguid="5EFC3806-9512-4DC5-8F6188C3E7105278">
-					<imagemetrics>
-						<image
-							this="9C588E36-6FAB-4B47-9500CC98581CBE88"
-							uniqueguid="9C588E36-6FAB-4B47-9500CC98581CBE88"
-							componentimage="38E23C8D-607A-4A08-A182ACEFF3992DBC"
-							width="30"
-							height="30"/>
-					</imagemetrics>
-					<component_text
-						texthbehaviour="Never split"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</default>
-			</states>
-		</icon_pending_action>
 	</components>
 </layout>

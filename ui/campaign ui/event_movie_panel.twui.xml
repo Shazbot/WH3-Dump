@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -26,37 +26,51 @@
 		</root>
 	</hierarchy>
 	<components>
-		<root
-			this="B7D4297E-E6DE-4E3A-BDF703F310A1F281"
-			id="root"
-			tooltipslocalised="true"
-			uniqueguid="B7D4297E-E6DE-4E3A-BDF703F310A1F281"
-			currentstate="2244C8A6-FD1C-4839-91114FF2613FFD97">
-			<componentimages>
-				<component_image
-					this="19E8CBB0-7BF7-4DB2-A4FE4B15A0E4C748"
-					uniqueguid="19E8CBB0-7BF7-4DB2-A4FE4B15A0E4C748"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="2244C8A6-FD1C-4839-91114FF2613FFD97"
-					name="NewState"
-					width="1600"
-					height="900"
-					interactive="true"
-					uniqueguid="2244C8A6-FD1C-4839-91114FF2613FFD97">
-					<imagemetrics>
-						<image
-							this="032D7DD0-D0A7-482F-AF130C24146E9826"
-							uniqueguid="032D7DD0-D0A7-482F-AF130C24146E9826"
-							componentimage="19E8CBB0-7BF7-4DB2-A4FE4B15A0E4C748"
-							width="1280"
-							height="1024"
-							colour="#BEFFBBFF"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-		</root>
+		<button_flame
+			this="4D83661F-925A-4E7B-99A21F9C4269ED7A"
+			id="button_flame"
+			part_of_template="true"
+			uniqueguid_in_template="43E521B0-0A25-4C22-82FE029058200FF9"
+			uniqueguid="4D83661F-925A-4E7B-99A21F9C4269ED7A"
+			dimensions="210.00,28.00"
+			dock_point="Center"
+			offset="0.00,-1.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="4297454D-BA8F-44E8-99FF72EA2D73FF3B"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoStaticObject"
+					context_function_id="self.ParentContext.IsMouseOver &amp;&amp; self.ParentContext.IsDisabled == false">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="callbacks"/>
+				<property
+					name="disable_override1"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+			</override_images>
+		</button_flame>
 		<button_ok
 			this="293C65C4-F70F-428B-915F69E97752B7DC"
 			id="button_ok"
@@ -163,157 +177,6 @@
 				<element value=""/>
 			</override_images>
 		</button_ok>
-		<panel_title
-			this="3CEF5FB0-B1D0-49E7-BEA6C19B0F633500"
-			id="panel_title"
-			template_id="panel_title"
-			part_of_template="true"
-			uniqueguid_in_template="94CFD847-4974-4957-B0800EB7BA0DD999"
-			uniqueguid="3CEF5FB0-B1D0-49E7-BEA6C19B0F633500"
-			dimensions="700.00,59.00"
-			dock_point="Top Center"
-			offset="0.00,-24.00"
-			priority="60">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="NewState"
-					uniqueguid="7F53B6DE-80A0-4810-B0282848319A7C54"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/panel_title.png"
-					uniqueguid="E1863366-998E-4701-9BE5C7CF6DD49B45"/>
-			</component_image_uniqueguids>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="NewState"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/panel_title.png"/>
-			</override_images>
-		</panel_title>
-		<text_button
-			this="ADAFA027-2CDA-4FDC-89B196333DEB642C"
-			id="text_button"
-			template_id="square_large_text_button"
-			part_of_template="true"
-			uniqueguid_in_template="D8275039-5A3B-40C0-974330DBC4409AFD"
-			uniqueguid="ADAFA027-2CDA-4FDC-89B196333DEB642C"
-			dimensions="272.00,51.00"
-			dock_point="Center"
-			is_visible="false"
-			sound_category="UI_GBL_TMP_Square_Large_Text_Button">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="6763BF8D-6839-414B-A572F524F81ADF45"/>
-				<state_uniqueguid
-					name="down"
-					uniqueguid="BBF95BA8-AE7D-44DB-A9617096C0A508DD"/>
-				<state_uniqueguid
-					name="down_off"
-					uniqueguid="6A0FC640-B361-473E-9CC4167669E0F603"/>
-				<state_uniqueguid
-					name="hover"
-					uniqueguid="A3C57007-6F09-4C0A-A8738D7CE18D5C5A"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="2A5878C7-939A-4197-BCC4B68B917FF0B8"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_square_large_text_pressed.png"
-					uniqueguid="86C0AC5B-A29B-4D94-92D374628F502390"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_square_large_text_active.png"
-					uniqueguid="8EDD3A05-B1E6-46F3-924BE110E6EB2059"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_square_large_text_hover.png"
-					uniqueguid="55EEAE3A-5598-4B8F-8EB02031B53E04BD"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_square_large_text_inactive.png"
-					uniqueguid="3A763969-5EAE-4100-97D96D56A94F3FCC"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_square_large_text_underlay.png"
-					uniqueguid="E3EB31F5-E602-49D2-8C8083ADE09DB733"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context callback_id="TextButton"/>
-				<callback_with_context callback_id="StatePropagatorCallback"/>
-			</callbacks_with_context>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="down"
-					is_text_localised="false"/>
-				<localised_text
-					state="down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/button_square_large_text_pressed.png"/>
-				<element value="ui/skins/default/button_square_large_text_active.png"/>
-				<element value="ui/skins/default/button_square_large_text_hover.png"/>
-				<element value="ui/skins/default/button_square_large_text_inactive.png"/>
-				<element value="ui/skins/default/button_square_large_text_underlay.png"/>
-			</override_images>
-		</text_button>
-		<button_flame
-			this="4D83661F-925A-4E7B-99A21F9C4269ED7A"
-			id="button_flame"
-			part_of_template="true"
-			uniqueguid_in_template="43E521B0-0A25-4C22-82FE029058200FF9"
-			uniqueguid="4D83661F-925A-4E7B-99A21F9C4269ED7A"
-			dimensions="210.00,28.00"
-			dock_point="Center"
-			offset="0.00,-1.00"
-			priority="100">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="4297454D-BA8F-44E8-99FF72EA2D73FF3B"/>
-			</state_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoStaticObject"
-					context_function_id="self.ParentContext.IsMouseOver &amp;&amp; self.ParentContext.IsDisabled == false">
-					<child_m_user_properties>
-						<property
-							name="update_constant"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="disable_override"
-					value="callbacks"/>
-				<property
-					name="disable_override1"
-					value="position"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value=""/>
-			</override_images>
-		</button_flame>
 		<button_txt
 			this="C17FFB1D-1319-4EF7-8C818DE3933DD826"
 			id="button_txt"
@@ -349,6 +212,48 @@
 					is_text_localised="false"/>
 			</localised_texts>
 		</button_txt>
+		<dy_title
+			this="1FA9E5DA-DEE8-43EF-9FBB570E4D85D676"
+			id="dy_title"
+			offset="146.00,15.00"
+			docking="Center"
+			dock_offset="0.00,1.00"
+			component_anchor_point="0.50,0.50"
+			priority="55"
+			tooltipslocalised="true"
+			uniqueguid="1FA9E5DA-DEE8-43EF-9FBB570E4D85D676"
+			currentstate="CD127A07-3087-4432-A9015566C6A83FC9">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+				<property
+					name="dynamic_child_parent"
+					value="panel_title"/>
+			</userproperties>
+			<states>
+				<newstate
+					this="CD127A07-3087-4432-A9015566C6A83FC9"
+					name="NewState"
+					width="408"
+					height="30"
+					uniqueguid="CD127A07-3087-4432-A9015566C6A83FC9">
+					<component_text
+						text="dy_title"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Never split"
+						textlabel="dy_title_NewState_Text_1c003e"
+						font_m_font_name="la_gioconda_uppercase"
+						font_m_size="18"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_18_bold"
+						text_shader_name="drop_shadow_t0"
+						textshadervars="0.00,1.00,2.00,0.00"/>
+				</newstate>
+			</states>
+		</dy_title>
 		<event_movie_panel
 			this="6F4E2B5A-D8D3-49B8-AEED045BB395EC94"
 			id="event_movie_panel"
@@ -442,48 +347,85 @@
 				</columnwidths>
 			</LayoutEngine>
 		</event_movie_panel>
-		<dy_title
-			this="1FA9E5DA-DEE8-43EF-9FBB570E4D85D676"
-			id="dy_title"
-			offset="146.00,15.00"
+		<footer
+			this="68C1C6A7-8382-409C-8999DF58DEB2D098"
+			id="footer"
+			offset="15.00,490.00"
+			priority="55"
+			tooltipslocalised="true"
+			uniqueguid="68C1C6A7-8382-409C-8999DF58DEB2D098"
+			currentstate="0249B8BA-7FBA-49A8-8C2833354CB64C75"
+			defaultstate="0249B8BA-7FBA-49A8-8C2833354CB64C75">
+			<states>
+				<default
+					this="0249B8BA-7FBA-49A8-8C2833354CB64C75"
+					name="default"
+					width="800"
+					height="60"
+					interactive="true"
+					uniqueguid="0249B8BA-7FBA-49A8-8C2833354CB64C75"/>
+			</states>
+		</footer>
+		<frame
+			this="9FAE80AC-3688-4330-AF77319FAA9EC0D9"
+			id="frame"
+			offset="-3.00,-3.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
 			docking="Center"
-			dock_offset="0.00,1.00"
 			component_anchor_point="0.50,0.50"
 			priority="55"
 			tooltipslocalised="true"
-			uniqueguid="1FA9E5DA-DEE8-43EF-9FBB570E4D85D676"
-			currentstate="CD127A07-3087-4432-A9015566C6A83FC9">
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-				<property
-					name="dynamic_child_parent"
-					value="panel_title"/>
-			</userproperties>
+			uniqueguid="9FAE80AC-3688-4330-AF77319FAA9EC0D9"
+			currentstate="121753A9-F17B-45C2-9CAF6ECD513F3FBA"
+			defaultstate="121753A9-F17B-45C2-9CAF6ECD513F3FBA">
+			<componentimages>
+				<component_image
+					this="DBF2332E-8A14-4D8C-8BF980D31E50BFAA"
+					uniqueguid="DBF2332E-8A14-4D8C-8BF980D31E50BFAA"
+					imagepath="ui/skins/default/panel_back_inner_frame.png"/>
+			</componentimages>
 			<states>
-				<newstate
-					this="CD127A07-3087-4432-A9015566C6A83FC9"
-					name="NewState"
-					width="408"
-					height="30"
-					uniqueguid="CD127A07-3087-4432-A9015566C6A83FC9">
-					<component_text
-						text="dy_title"
-						textvalign="Center"
-						texthalign="Center"
-						texthbehaviour="Never split"
-						textlabel="dy_title_NewState_Text_1c003e"
-						font_m_font_name="la_gioconda_uppercase"
-						font_m_size="18"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="header_18_bold"
-						text_shader_name="drop_shadow_t0"
-						textshadervars="0.00,1.00,2.00,0.00"/>
-				</newstate>
+				<default
+					this="121753A9-F17B-45C2-9CAF6ECD513F3FBA"
+					name="default"
+					width="806"
+					height="456"
+					interactive="true"
+					uniqueguid="121753A9-F17B-45C2-9CAF6ECD513F3FBA">
+					<imagemetrics>
+						<image
+							this="D4EB4358-9B4F-44EA-8CB1927CE85B257F"
+							uniqueguid="D4EB4358-9B4F-44EA-8CB1927CE85B257F"
+							componentimage="DBF2332E-8A14-4D8C-8BF980D31E50BFAA"
+							width="806"
+							height="456"
+							tile="true"
+							dockpoint="Center"
+							margin="10.00,10.00,10.00,10.00"/>
+					</imagemetrics>
+				</default>
 			</states>
-		</dy_title>
+		</frame>
+		<header
+			this="E3D4C95C-BF92-49E5-85BFFBCC725A4378"
+			id="header"
+			offset="15.00,0.00"
+			priority="55"
+			tooltipslocalised="true"
+			uniqueguid="E3D4C95C-BF92-49E5-85BFFBCC725A4378"
+			currentstate="6A19758E-8EDC-46FA-B7833D2C40E92F9D"
+			defaultstate="6A19758E-8EDC-46FA-B7833D2C40E92F9D">
+			<states>
+				<default
+					this="6A19758E-8EDC-46FA-B7833D2C40E92F9D"
+					name="default"
+					width="800"
+					height="40"
+					interactive="true"
+					uniqueguid="6A19758E-8EDC-46FA-B7833D2C40E92F9D"/>
+			</states>
+		</header>
 		<movie_window
 			this="FD22FC44-D662-4D2D-B798A03F84953ECF"
 			id="movie_window"
@@ -521,44 +463,68 @@
 				</newstate>
 			</states>
 		</movie_window>
-		<footer
-			this="68C1C6A7-8382-409C-8999DF58DEB2D098"
-			id="footer"
-			offset="15.00,490.00"
-			priority="55"
+		<panel_title
+			this="3CEF5FB0-B1D0-49E7-BEA6C19B0F633500"
+			id="panel_title"
+			template_id="panel_title"
+			part_of_template="true"
+			uniqueguid_in_template="94CFD847-4974-4957-B0800EB7BA0DD999"
+			uniqueguid="3CEF5FB0-B1D0-49E7-BEA6C19B0F633500"
+			dimensions="700.00,59.00"
+			dock_point="Top Center"
+			offset="0.00,-24.00"
+			priority="60">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="NewState"
+					uniqueguid="7F53B6DE-80A0-4810-B0282848319A7C54"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/panel_title.png"
+					uniqueguid="E1863366-998E-4701-9BE5C7CF6DD49B45"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="NewState"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/panel_title.png"/>
+			</override_images>
+		</panel_title>
+		<root
+			this="B7D4297E-E6DE-4E3A-BDF703F310A1F281"
+			id="root"
 			tooltipslocalised="true"
-			uniqueguid="68C1C6A7-8382-409C-8999DF58DEB2D098"
-			currentstate="0249B8BA-7FBA-49A8-8C2833354CB64C75"
-			defaultstate="0249B8BA-7FBA-49A8-8C2833354CB64C75">
+			uniqueguid="B7D4297E-E6DE-4E3A-BDF703F310A1F281"
+			currentstate="2244C8A6-FD1C-4839-91114FF2613FFD97">
+			<componentimages>
+				<component_image
+					this="19E8CBB0-7BF7-4DB2-A4FE4B15A0E4C748"
+					uniqueguid="19E8CBB0-7BF7-4DB2-A4FE4B15A0E4C748"/>
+			</componentimages>
 			<states>
-				<default
-					this="0249B8BA-7FBA-49A8-8C2833354CB64C75"
-					name="default"
-					width="800"
-					height="60"
+				<newstate
+					this="2244C8A6-FD1C-4839-91114FF2613FFD97"
+					name="NewState"
+					width="1600"
+					height="900"
 					interactive="true"
-					uniqueguid="0249B8BA-7FBA-49A8-8C2833354CB64C75"/>
+					uniqueguid="2244C8A6-FD1C-4839-91114FF2613FFD97">
+					<imagemetrics>
+						<image
+							this="032D7DD0-D0A7-482F-AF130C24146E9826"
+							uniqueguid="032D7DD0-D0A7-482F-AF130C24146E9826"
+							componentimage="19E8CBB0-7BF7-4DB2-A4FE4B15A0E4C748"
+							width="1280"
+							height="1024"
+							colour="#BEFFBBFF"/>
+					</imagemetrics>
+				</newstate>
 			</states>
-		</footer>
-		<header
-			this="E3D4C95C-BF92-49E5-85BFFBCC725A4378"
-			id="header"
-			offset="15.00,0.00"
-			priority="55"
-			tooltipslocalised="true"
-			uniqueguid="E3D4C95C-BF92-49E5-85BFFBCC725A4378"
-			currentstate="6A19758E-8EDC-46FA-B7833D2C40E92F9D"
-			defaultstate="6A19758E-8EDC-46FA-B7833D2C40E92F9D">
-			<states>
-				<default
-					this="6A19758E-8EDC-46FA-B7833D2C40E92F9D"
-					name="default"
-					width="800"
-					height="40"
-					interactive="true"
-					uniqueguid="6A19758E-8EDC-46FA-B7833D2C40E92F9D"/>
-			</states>
-		</header>
+		</root>
 		<textbox
 			this="9F1C0177-C82D-4025-A340C391B645AB2C"
 			id="textbox"
@@ -605,46 +571,80 @@
 				</default>
 			</states>
 		</textbox>
-		<frame
-			this="9FAE80AC-3688-4330-AF77319FAA9EC0D9"
-			id="frame"
-			offset="-3.00,-3.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			docking="Center"
-			component_anchor_point="0.50,0.50"
-			priority="55"
-			tooltipslocalised="true"
-			uniqueguid="9FAE80AC-3688-4330-AF77319FAA9EC0D9"
-			currentstate="121753A9-F17B-45C2-9CAF6ECD513F3FBA"
-			defaultstate="121753A9-F17B-45C2-9CAF6ECD513F3FBA">
-			<componentimages>
-				<component_image
-					this="DBF2332E-8A14-4D8C-8BF980D31E50BFAA"
-					uniqueguid="DBF2332E-8A14-4D8C-8BF980D31E50BFAA"
-					imagepath="ui/skins/default/panel_back_inner_frame.png"/>
-			</componentimages>
-			<states>
-				<default
-					this="121753A9-F17B-45C2-9CAF6ECD513F3FBA"
-					name="default"
-					width="806"
-					height="456"
-					interactive="true"
-					uniqueguid="121753A9-F17B-45C2-9CAF6ECD513F3FBA">
-					<imagemetrics>
-						<image
-							this="D4EB4358-9B4F-44EA-8CB1927CE85B257F"
-							uniqueguid="D4EB4358-9B4F-44EA-8CB1927CE85B257F"
-							componentimage="DBF2332E-8A14-4D8C-8BF980D31E50BFAA"
-							width="806"
-							height="456"
-							tile="true"
-							dockpoint="Center"
-							margin="10.00,10.00,10.00,10.00"/>
-					</imagemetrics>
-				</default>
-			</states>
-		</frame>
+		<text_button
+			this="ADAFA027-2CDA-4FDC-89B196333DEB642C"
+			id="text_button"
+			template_id="square_large_text_button"
+			part_of_template="true"
+			uniqueguid_in_template="D8275039-5A3B-40C0-974330DBC4409AFD"
+			uniqueguid="ADAFA027-2CDA-4FDC-89B196333DEB642C"
+			dimensions="272.00,51.00"
+			dock_point="Center"
+			is_visible="false"
+			sound_category="UI_GBL_TMP_Square_Large_Text_Button">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="6763BF8D-6839-414B-A572F524F81ADF45"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="BBF95BA8-AE7D-44DB-A9617096C0A508DD"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="6A0FC640-B361-473E-9CC4167669E0F603"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="A3C57007-6F09-4C0A-A8738D7CE18D5C5A"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="2A5878C7-939A-4197-BCC4B68B917FF0B8"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_square_large_text_pressed.png"
+					uniqueguid="86C0AC5B-A29B-4D94-92D374628F502390"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_square_large_text_active.png"
+					uniqueguid="8EDD3A05-B1E6-46F3-924BE110E6EB2059"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_square_large_text_hover.png"
+					uniqueguid="55EEAE3A-5598-4B8F-8EB02031B53E04BD"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_square_large_text_inactive.png"
+					uniqueguid="3A763969-5EAE-4100-97D96D56A94F3FCC"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_square_large_text_underlay.png"
+					uniqueguid="E3EB31F5-E602-49D2-8C8083ADE09DB733"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="TextButton"/>
+				<callback_with_context callback_id="StatePropagatorCallback"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/button_square_large_text_pressed.png"/>
+				<element value="ui/skins/default/button_square_large_text_active.png"/>
+				<element value="ui/skins/default/button_square_large_text_hover.png"/>
+				<element value="ui/skins/default/button_square_large_text_inactive.png"/>
+				<element value="ui/skins/default/button_square_large_text_underlay.png"/>
+			</override_images>
+		</text_button>
 	</components>
 </layout>

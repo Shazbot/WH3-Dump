@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="PlayersFaction.IsCampaignFeatureAvailable(&quot;diplomatic_manipulation&quot;)">
 	<hierarchy>
@@ -25,38 +25,6 @@
 		</root>
 	</hierarchy>
 	<components>
-		<root
-			this="844B0982-1808-4E46-9512668884C5A549"
-			id="root"
-			tooltipslocalised="true"
-			uniqueguid="844B0982-1808-4E46-9512668884C5A549"
-			currentstate="309C4922-BA86-4353-B09DBB0A6253CED2"
-			defaultstate="309C4922-BA86-4353-B09DBB0A6253CED2">
-			<componentimages>
-				<component_image
-					this="7A101B79-AAF1-4A87-AAC771FE734B98EA"
-					uniqueguid="7A101B79-AAF1-4A87-AAC771FE734B98EA"/>
-			</componentimages>
-			<states>
-				<default
-					this="309C4922-BA86-4353-B09DBB0A6253CED2"
-					name="default"
-					width="1600"
-					height="900"
-					interactive="true"
-					uniqueguid="309C4922-BA86-4353-B09DBB0A6253CED2">
-					<imagemetrics>
-						<image
-							this="43EADF9E-9F35-45C6-8DC441A397FE7F8C"
-							uniqueguid="43EADF9E-9F35-45C6-8DC441A397FE7F8C"
-							componentimage="7A101B79-AAF1-4A87-AAC771FE734B98EA"
-							width="1920"
-							height="1080"
-							colour="#1C1C1CFF"/>
-					</imagemetrics>
-				</default>
-			</states>
-		</root>
 		<dy_desc
 			this="300D886B-55FB-49DD-B7D80B7450AD7B5F"
 			id="dy_desc"
@@ -136,6 +104,46 @@
 				</newstate>
 			</states>
 		</dy_heading_textbox>
+		<dy_target
+			this="8D363ECA-F04A-4055-BB9ADC72E25E3EF0"
+			id="dy_target"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="8D363ECA-F04A-4055-BB9ADC72E25E3EF0"
+			updatewhennotvisible="true"
+			currentstate="C8D0FEF6-F249-465D-B78E7DB1A9F30367"
+			defaultstate="C8D0FEF6-F249-465D-B78E7DB1A9F30367">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoPair"
+					context_function_id="GetIfElse(IsOfType (First, &quot;CcoCampaignFaction&quot;), Format(&quot;%S %S&quot;, First.NameWithIcon, Format (Loc(&quot;rituals_arrow_tooltip_in_progress_turns_remaining&quot;), Second)), Format(&quot;%S (%S) %S&quot;, First.Name, First.FactionContext.NameWithIcon, Format (Loc(&quot;rituals_arrow_tooltip_in_progress_turns_remaining&quot;), Second)))"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="C8D0FEF6-F249-465D-B78E7DB1A9F30367"
+					name="NewState"
+					width="386"
+					height="24"
+					interactive="true"
+					uniqueguid="C8D0FEF6-F249-465D-B78E7DB1A9F30367">
+					<component_text
+						text="dy_target"
+						textvalign="Center"
+						textxoffset="12.00,12.00"
+						textyoffset="4.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="dy_target_NewState_Text_c6f4a40f"
+						font_m_font_name="georgia_italic"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12_italic"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+				</newstate>
+			</states>
+		</dy_target>
 		<effect_bundle_list
 			this="B2CF3576-EBAD-41A4-96E07CD704CA3CCE"
 			id="effect_bundle_list"
@@ -251,6 +259,70 @@
 				</columnwidths>
 			</LayoutEngine>
 		</list_parent>
+		<root
+			this="844B0982-1808-4E46-9512668884C5A549"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="844B0982-1808-4E46-9512668884C5A549"
+			currentstate="309C4922-BA86-4353-B09DBB0A6253CED2"
+			defaultstate="309C4922-BA86-4353-B09DBB0A6253CED2">
+			<componentimages>
+				<component_image
+					this="7A101B79-AAF1-4A87-AAC771FE734B98EA"
+					uniqueguid="7A101B79-AAF1-4A87-AAC771FE734B98EA"/>
+			</componentimages>
+			<states>
+				<default
+					this="309C4922-BA86-4353-B09DBB0A6253CED2"
+					name="default"
+					width="1600"
+					height="900"
+					interactive="true"
+					uniqueguid="309C4922-BA86-4353-B09DBB0A6253CED2">
+					<imagemetrics>
+						<image
+							this="43EADF9E-9F35-45C6-8DC441A397FE7F8C"
+							uniqueguid="43EADF9E-9F35-45C6-8DC441A397FE7F8C"
+							componentimage="7A101B79-AAF1-4A87-AAC771FE734B98EA"
+							width="1920"
+							height="1080"
+							colour="#1C1C1CFF"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</root>
+		<target_list
+			this="F8181DDF-49B4-4B8F-9FF60DE589429B1D"
+			id="target_list"
+			offset="0.00,36.00"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="F8181DDF-49B4-4B8F-9FF60DE589429B1D"
+			currentstate="84EBAA87-27E0-4690-B380F157342E0745"
+			defaultstate="84EBAA87-27E0-4690-B380F157342E0745">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoCampaignRitual"
+					context_function_id="CompletedRitualTargetAndDurationList"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="84EBAA87-27E0-4690-B380F157342E0745"
+					name="default"
+					width="386"
+					height="48"
+					uniqueguid="84EBAA87-27E0-4690-B380F157342E0745"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="386"/>
+				</columnwidths>
+			</LayoutEngine>
+		</target_list>
 		<template_bundle
 			this="11BE82A5-3A95-42D2-AAE3CC3896A894F5"
 			id="template_bundle"
@@ -356,6 +428,32 @@
 				</newstate>
 			</states>
 		</template_effect>
+		<template_target_holder
+			this="08AF35F0-4CBA-4CCF-83F77134CC03D69F"
+			id="template_target_holder"
+			offset="0.00,24.00"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="08AF35F0-4CBA-4CCF-83F77134CC03D69F"
+			currentstate="65B25B0D-311D-48EF-ACA5F4963E17E428"
+			defaultstate="65B25B0D-311D-48EF-ACA5F4963E17E428">
+			<states>
+				<default
+					this="65B25B0D-311D-48EF-ACA5F4963E17E428"
+					name="default"
+					width="386"
+					height="24"
+					uniqueguid="65B25B0D-311D-48EF-ACA5F4963E17E428"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="386"/>
+				</columnwidths>
+			</LayoutEngine>
+		</template_target_holder>
 		<tooltip_cotw_active_ritual
 			this="DF91389D-CB81-4204-89B5088314974FCB"
 			id="tooltip_cotw_active_ritual"
@@ -406,104 +504,6 @@
 				</columnwidths>
 			</LayoutEngine>
 		</tooltip_cotw_active_ritual>
-		<dy_target
-			this="8D363ECA-F04A-4055-BB9ADC72E25E3EF0"
-			id="dy_target"
-			allowhorizontalresize="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="8D363ECA-F04A-4055-BB9ADC72E25E3EF0"
-			updatewhennotvisible="true"
-			currentstate="C8D0FEF6-F249-465D-B78E7DB1A9F30367"
-			defaultstate="C8D0FEF6-F249-465D-B78E7DB1A9F30367">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoPair"
-					context_function_id="GetIfElse(IsOfType (First, &quot;CcoCampaignFaction&quot;), Format(&quot;%S %S&quot;, First.NameWithIcon, Format (Loc(&quot;rituals_arrow_tooltip_in_progress_turns_remaining&quot;), Second)), Format(&quot;%S (%S) %S&quot;, First.Name, First.FactionContext.NameWithIcon, Format (Loc(&quot;rituals_arrow_tooltip_in_progress_turns_remaining&quot;), Second)))"/>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="C8D0FEF6-F249-465D-B78E7DB1A9F30367"
-					name="NewState"
-					width="386"
-					height="24"
-					interactive="true"
-					uniqueguid="C8D0FEF6-F249-465D-B78E7DB1A9F30367">
-					<component_text
-						text="dy_target"
-						textvalign="Center"
-						textxoffset="12.00,12.00"
-						textyoffset="4.00,0.00"
-						texthbehaviour="Resize"
-						textlabel="dy_target_NewState_Text_c6f4a40f"
-						font_m_font_name="georgia_italic"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12_italic"
-						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
-				</newstate>
-			</states>
-		</dy_target>
-		<template_target_holder
-			this="08AF35F0-4CBA-4CCF-83F77134CC03D69F"
-			id="template_target_holder"
-			offset="0.00,24.00"
-			allowhorizontalresize="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="08AF35F0-4CBA-4CCF-83F77134CC03D69F"
-			currentstate="65B25B0D-311D-48EF-ACA5F4963E17E428"
-			defaultstate="65B25B0D-311D-48EF-ACA5F4963E17E428">
-			<states>
-				<default
-					this="65B25B0D-311D-48EF-ACA5F4963E17E428"
-					name="default"
-					width="386"
-					height="24"
-					uniqueguid="65B25B0D-311D-48EF-ACA5F4963E17E428"/>
-			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true">
-				<columnwidths>
-					<column width="386"/>
-				</columnwidths>
-			</LayoutEngine>
-		</template_target_holder>
-		<target_list
-			this="F8181DDF-49B4-4B8F-9FF60DE589429B1D"
-			id="target_list"
-			offset="0.00,36.00"
-			allowhorizontalresize="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="F8181DDF-49B4-4B8F-9FF60DE589429B1D"
-			currentstate="84EBAA87-27E0-4690-B380F157342E0745"
-			defaultstate="84EBAA87-27E0-4690-B380F157342E0745">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextList"
-					context_object_id="CcoCampaignRitual"
-					context_function_id="CompletedRitualTargetAndDurationList"/>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="84EBAA87-27E0-4690-B380F157342E0745"
-					name="default"
-					width="386"
-					height="48"
-					uniqueguid="84EBAA87-27E0-4690-B380F157342E0745"/>
-			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true">
-				<columnwidths>
-					<column width="386"/>
-				</columnwidths>
-			</LayoutEngine>
-		</target_list>
 		<tx_current_target
 			this="67056540-8F0C-4019-935A32B571F6F2BE"
 			id="tx_current_target"

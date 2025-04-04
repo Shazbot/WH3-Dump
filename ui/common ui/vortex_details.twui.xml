@@ -34,103 +34,163 @@
 		</root>
 	</hierarchy>
 	<components>
-		<root
-			this="C3EB6010-3E95-476D-9DD16E25B8DADB25"
-			id="root"
+		<contact_label
+			this="B4E351DD-89B0-4372-9476A2D3F760A88C"
+			id="contact_label"
+			allowverticalresize="false"
+			priority="255"
 			tooltipslocalised="true"
-			uniqueguid="C3EB6010-3E95-476D-9DD16E25B8DADB25"
-			currentstate="7725579E-0718-44F5-A1829239EC1B097F"
-			defaultstate="7725579E-0718-44F5-A1829239EC1B097F">
-			<componentimages>
-				<component_image
-					this="58373347-8FC7-4C1B-926654CBF25CE78D"
-					uniqueguid="58373347-8FC7-4C1B-926654CBF25CE78D"/>
-			</componentimages>
+			uniqueguid="B4E351DD-89B0-4372-9476A2D3F760A88C"
+			currentstate="06CA19C1-10B7-409D-A7F02DE0D4DEB1A8"
+			defaultstate="06CA19C1-10B7-409D-A7F02DE0D4DEB1A8">
 			<states>
-				<default
-					this="7725579E-0718-44F5-A1829239EC1B097F"
-					name="default"
-					width="1600"
-					height="900"
-					uniqueguid="7725579E-0718-44F5-A1829239EC1B097F">
-					<imagemetrics>
-						<image
-							this="D249BF2A-B3AD-4F44-BB4211734D8FF6B0"
-							uniqueguid="D249BF2A-B3AD-4F44-BB4211734D8FF6B0"
-							componentimage="58373347-8FC7-4C1B-926654CBF25CE78D"
-							width="1600"
-							height="900"
-							colour="#808080FF"
-							ui_colour_preset_type_key="alliance_destroyed"/>
-					</imagemetrics>
-				</default>
+				<false
+					this="06CA19C1-10B7-409D-A7F02DE0D4DEB1A8"
+					name="false"
+					width="190"
+					height="24"
+					uniqueguid="06CA19C1-10B7-409D-A7F02DE0D4DEB1A8">
+					<component_text
+						text="Contact:"
+						textvalign="Center"
+						textxoffset="20.00,0.00"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_3821f394"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</false>
 			</states>
-		</root>
-		<vortex_details
-			this="534A6C66-9037-4DCD-9AC21B4226480653"
-			id="vortex_details"
-			offset="349.00,510.00"
+		</contact_label>
+		<contact_value
+			this="604DD495-D0CE-4C4D-8B16151DD0DFEB6A"
+			id="contact_value"
+			offset="195.00,0.00"
+			allowhorizontalresize="false"
+			priority="255"
 			tooltipslocalised="true"
-			uniqueguid="534A6C66-9037-4DCD-9AC21B4226480653"
-			currentstate="EB9827E6-7A73-4B35-85F76F46EAC79F74"
-			defaultstate="EB9827E6-7A73-4B35-85F76F46EAC79F74">
+			uniqueguid="604DD495-D0CE-4C4D-8B16151DD0DFEB6A"
+			currentstate="157C3F33-2D1C-4F5B-97B94625FB935BA7"
+			defaultstate="157C3F33-2D1C-4F5B-97B94625FB935BA7">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoBattleVortexRecord"/>
+					callback_id="ContextTextLabel"
+					context_object_id="CcoSpecialAbilityPhaseRecord"
+					context_function_id="OnscreenName"/>
+			</callbackwithcontextlist>
+			<states>
+				<false
+					this="157C3F33-2D1C-4F5B-97B94625FB935BA7"
+					name="false"
+					width="156"
+					height="24"
+					uniqueguid="157C3F33-2D1C-4F5B-97B94625FB935BA7">
+					<component_text
+						text="Value"
+						textvalign="Center"
+						textyoffset="4.00,0.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="StateText_d56c09c2"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
+				</false>
+			</states>
+		</contact_value>
+		<duration_value
+			this="2129476B-5C50-4FED-956AB42DFC831B90"
+			id="duration_value"
+			offset="195.00,0.00"
+			allowverticalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="2129476B-5C50-4FED-956AB42DFC831B90"
+			currentstate="A47A8342-F9BB-42B3-B7C0C51AB44EC7C6"
+			defaultstate="A47A8342-F9BB-42B3-B7C0C51AB44EC7C6">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoBattleVortexRecord"
+					context_function_id="Duration &gt; 0"/>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoBattleVortexRecord"
+					context_function_id="RoundFloat(Duration) + Loc(&quot;seconds_abbreviated&quot;)"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
-					this="EB9827E6-7A73-4B35-85F76F46EAC79F74"
+					this="A47A8342-F9BB-42B3-B7C0C51AB44EC7C6"
 					name="NewState"
-					width="360"
-					height="139"
-					uniqueguid="EB9827E6-7A73-4B35-85F76F46EAC79F74">
+					width="90"
+					height="24"
+					interactive="true"
+					uniqueguid="A47A8342-F9BB-42B3-B7C0C51AB44EC7C6">
 					<component_text
+						text="22"
+						textvalign="Center"
 						texthbehaviour="Never split"
+						textlabel="duration_value_NewState_Text_c3a3c7ef"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
 						fontcat_name="body_12"/>
 				</newstate>
 			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true">
-				<columnwidths>
-					<column width="44"/>
-				</columnwidths>
-			</LayoutEngine>
-		</vortex_details>
-		<label_vortex_dps
-			this="3FA81644-889D-4F90-8DB6FF55C0FED449"
-			id="label_vortex_dps"
-			offset="195.00,0.00"
+		</duration_value>
+		<ignition_icon
+			this="2A6A7D5E-CEA4-417F-AFCF17B1DA5DB89E"
+			id="ignition_icon"
+			offset="277.00,0.00"
+			allowhorizontalresize="false"
 			allowverticalresize="false"
 			priority="255"
 			tooltipslocalised="true"
-			uniqueguid="3FA81644-889D-4F90-8DB6FF55C0FED449"
-			currentstate="8BCBBCB9-1D56-4099-A996F8420858751A"
-			defaultstate="8BCBBCB9-1D56-4099-A996F8420858751A">
+			uniqueguid="2A6A7D5E-CEA4-417F-AFCF17B1DA5DB89E"
+			currentstate="67EF29F6-9672-491F-AE0E377DAD4011EA"
+			defaultstate="67EF29F6-9672-491F-AE0E377DAD4011EA">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextTextLabel"
+					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBattleVortexRecord"
-					context_function_id="RoundFloat(AbilityApplyIntensity(Damage) + AbilityApplyIntensity(DamageAP))"/>
+					context_function_id="IgnitionAmount &gt; 0.0"/>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_function_id="Loc(&quot;modifier_icon_tooltip_flaming&quot;)"/>
 			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="619D7946-628D-493D-A741763009D6FCF6"
+					uniqueguid="619D7946-628D-493D-A741763009D6FCF6"
+					imagepath="ui/skins/default/modifier_icon_flaming.png"/>
+			</componentimages>
 			<states>
 				<default
-					this="8BCBBCB9-1D56-4099-A996F8420858751A"
+					this="67EF29F6-9672-491F-AE0E377DAD4011EA"
 					name="default"
-					width="29"
+					width="16"
 					height="24"
-					uniqueguid="8BCBBCB9-1D56-4099-A996F8420858751A">
+					interactive="true"
+					uniqueguid="67EF29F6-9672-491F-AE0E377DAD4011EA">
+					<imagemetrics>
+						<image
+							this="6260E2C0-0958-4334-AD395CCEC7FBFD52"
+							uniqueguid="6260E2C0-0958-4334-AD395CCEC7FBFD52"
+							componentimage="619D7946-628D-493D-A741763009D6FCF6"
+							offset="0.00,4.00"
+							width="16"
+							height="16"
+							dockpoint="Center"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
 					<component_text
-						text="999"
 						textvalign="Center"
 						textxoffset="0.00,2.00"
-						texthbehaviour="Resize"
-						textlabel="label_cooldown_default_Text_390000"
+						texthbehaviour="Never split"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
@@ -138,7 +198,101 @@
 						font_colour_override_preset_key="fe_white"/>
 				</default>
 			</states>
-		</label_vortex_dps>
+		</ignition_icon>
+		<label_vortex_ap
+			this="47655EDA-F84B-4D4A-A5F3B146E35EBEB2"
+			id="label_vortex_ap"
+			offset="229.00,0.00"
+			allowverticalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="47655EDA-F84B-4D4A-A5F3B146E35EBEB2"
+			currentstate="CC98774F-8BAB-41E6-9E3CA5BEDA8EB421"
+			defaultstate="CC98774F-8BAB-41E6-9E3CA5BEDA8EB421">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoBattleVortexRecord"
+					context_function_id="Format(&quot;(%d%[[img:ui/skins/default/modifier_icon_armour_piercing.png]][[/img]])&quot;, ArmourPiercingPercentage)"/>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_function_id="Loc(&quot;modifier_icon_tooltip_armour_piercing&quot;)"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="suppress_localise_asserts"
+					value=""/>
+			</userproperties>
+			<states>
+				<default
+					this="CC98774F-8BAB-41E6-9E3CA5BEDA8EB421"
+					name="default"
+					width="43"
+					height="24"
+					interactive="true"
+					uniqueguid="CC98774F-8BAB-41E6-9E3CA5BEDA8EB421">
+					<component_text
+						text="(ap%)"
+						textvalign="Center"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="StateText_1556a929"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="fe_white"/>
+				</default>
+			</states>
+		</label_vortex_ap>
+		<label_vortex_contact_parent
+			this="51F8063B-6B67-480C-9C0C168DAA0F3423"
+			id="label_vortex_contact_parent"
+			offset="0.00,115.00"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="51F8063B-6B67-480C-9C0C168DAA0F3423"
+			currentstate="218B9F36-9186-4275-A10555B0FBAFFD73"
+			defaultstate="218B9F36-9186-4275-A10555B0FBAFFD73">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoBattleVortexRecord"
+					context_function_id="ContactEffectPhaseContext"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoBattleVortexRecord"
+					context_function_id="ContactEffectPhaseContext"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="218B9F36-9186-4275-A10555B0FBAFFD73"
+					name="default"
+					width="360"
+					height="24"
+					uniqueguid="218B9F36-9186-4275-A10555B0FBAFFD73">
+					<component_text
+						textvalign="Center"
+						texthalign="Right"
+						textxoffset="0.00,2.00"
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</default>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				spacing="5.00,0.00"
+				sizetocontent="true"/>
+		</label_vortex_contact_parent>
 		<label_vortex_damage_header
 			this="BF5B0FE5-2ADB-4912-B4C7773B2AD2E311"
 			id="label_vortex_damage_header"
@@ -246,6 +400,43 @@
 				type="HorizontalList"
 				spacing="5.00,0.00"/>
 		</label_vortex_damage_parent>
+		<label_vortex_dps
+			this="3FA81644-889D-4F90-8DB6FF55C0FED449"
+			id="label_vortex_dps"
+			offset="195.00,0.00"
+			allowverticalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="3FA81644-889D-4F90-8DB6FF55C0FED449"
+			currentstate="8BCBBCB9-1D56-4099-A996F8420858751A"
+			defaultstate="8BCBBCB9-1D56-4099-A996F8420858751A">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoBattleVortexRecord"
+					context_function_id="RoundFloat(AbilityApplyIntensity(Damage) + AbilityApplyIntensity(DamageAP))"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="8BCBBCB9-1D56-4099-A996F8420858751A"
+					name="default"
+					width="29"
+					height="24"
+					uniqueguid="8BCBBCB9-1D56-4099-A996F8420858751A">
+					<component_text
+						text="999"
+						textvalign="Center"
+						textxoffset="0.00,2.00"
+						texthbehaviour="Resize"
+						textlabel="label_cooldown_default_Text_390000"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="fe_white"/>
+				</default>
+			</states>
+		</label_vortex_dps>
 		<label_vortex_movespeed_parent
 			this="0DC65D66-1646-4F21-B760EFE8D6EE7D5B"
 			id="label_vortex_movespeed_parent"
@@ -327,73 +518,6 @@
 				</false>
 			</states>
 		</label_vortex_ms>
-		<movementspeed_label
-			this="95C3C520-6B46-4210-95E3C9FBA175C422"
-			id="movementspeed_label"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="95C3C520-6B46-4210-95E3C9FBA175C422"
-			currentstate="F3B981CB-E6AF-4432-B3111E19D9AFD5DB"
-			defaultstate="F3B981CB-E6AF-4432-B3111E19D9AFD5DB">
-			<states>
-				<default
-					this="F3B981CB-E6AF-4432-B3111E19D9AFD5DB"
-					name="default"
-					width="190"
-					height="24"
-					uniqueguid="F3B981CB-E6AF-4432-B3111E19D9AFD5DB">
-					<component_text
-						text="Movement Speed:"
-						textvalign="Center"
-						textxoffset="20.00,0.00"
-						texthbehaviour="Never split"
-						textlocalised="true"
-						textlabel="StateText_9e0f0bbf"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</default>
-			</states>
-		</movementspeed_label>
-		<vortex_size_value
-			this="825915C4-54B5-4AEE-8E1F4D88FB6F1E62"
-			id="vortex_size_value"
-			offset="195.00,0.00"
-			allowverticalresize="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="825915C4-54B5-4AEE-8E1F4D88FB6F1E62"
-			currentstate="093BD38A-C503-4448-805DA049E0F79E56"
-			defaultstate="093BD38A-C503-4448-805DA049E0F79E56">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoBattleVortexRecord"
-					context_function_id="RoundFloat(GetIfElse(IsCircle, GoalRadius, GoalHeight * 2)) + Loc(&quot;metre_abbreviation&quot;)"/>
-			</callbackwithcontextlist>
-			<states>
-				<false
-					this="093BD38A-C503-4448-805DA049E0F79E56"
-					name="false"
-					width="90"
-					height="24"
-					uniqueguid="093BD38A-C503-4448-805DA049E0F79E56">
-					<component_text
-						text="999"
-						textvalign="Center"
-						textxoffset="0.00,2.00"
-						texthbehaviour="Never split"
-						textlabel="label_cooldown_default_Text_390000"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</false>
-			</states>
-		</vortex_size_value>
 		<label_vortex_size_parent
 			this="8B5531FE-9D84-4767-984E9BF42A31DDE5"
 			id="label_vortex_size_parent"
@@ -439,343 +563,6 @@
 				type="HorizontalList"
 				spacing="5.00,0.00"/>
 		</label_vortex_size_parent>
-		<vortex_size_label
-			this="7D8BB56F-86F5-4504-BFFE81811641DE57"
-			id="vortex_size_label"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="7D8BB56F-86F5-4504-BFFE81811641DE57"
-			currentstate="7D696862-2196-420F-8E4F1D6DE62845CD"
-			defaultstate="7D696862-2196-420F-8E4F1D6DE62845CD">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextStateSetter"
-					context_object_id="CcoBattleVortexRecord"
-					context_function_id="GetIfElse(IsCircle, &quot;radius&quot;, &quot;length&quot;)"/>
-			</callbackwithcontextlist>
-			<states>
-				<length
-					this="67A48585-EAC3-4966-A4FFC1A826982FBE"
-					name="length"
-					width="190"
-					height="24"
-					uniqueguid="67A48585-EAC3-4966-A4FFC1A826982FBE">
-					<component_text
-						text="Length:"
-						textvalign="Center"
-						textxoffset="20.00,0.00"
-						texthbehaviour="Never split"
-						textlocalised="true"
-						textlabel="StateText_5a8d7a8e"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</length>
-				<radius
-					this="7D696862-2196-420F-8E4F1D6DE62845CD"
-					name="radius"
-					width="190"
-					height="24"
-					uniqueguid="7D696862-2196-420F-8E4F1D6DE62845CD">
-					<component_text
-						text="Radius:"
-						textvalign="Center"
-						textxoffset="20.00,0.00"
-						texthbehaviour="Never split"
-						textlocalised="true"
-						textlabel="StateText_a31eb8d9"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</radius>
-			</states>
-		</vortex_size_label>
-		<contact_label
-			this="B4E351DD-89B0-4372-9476A2D3F760A88C"
-			id="contact_label"
-			allowverticalresize="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="B4E351DD-89B0-4372-9476A2D3F760A88C"
-			currentstate="06CA19C1-10B7-409D-A7F02DE0D4DEB1A8"
-			defaultstate="06CA19C1-10B7-409D-A7F02DE0D4DEB1A8">
-			<states>
-				<false
-					this="06CA19C1-10B7-409D-A7F02DE0D4DEB1A8"
-					name="false"
-					width="190"
-					height="24"
-					uniqueguid="06CA19C1-10B7-409D-A7F02DE0D4DEB1A8">
-					<component_text
-						text="Contact:"
-						textvalign="Center"
-						textxoffset="20.00,0.00"
-						texthbehaviour="Never split"
-						textlocalised="true"
-						textlabel="StateText_3821f394"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</false>
-			</states>
-		</contact_label>
-		<label_vortex_contact_parent
-			this="51F8063B-6B67-480C-9C0C168DAA0F3423"
-			id="label_vortex_contact_parent"
-			offset="0.00,115.00"
-			allowhorizontalresize="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="51F8063B-6B67-480C-9C0C168DAA0F3423"
-			currentstate="218B9F36-9186-4275-A10555B0FBAFFD73"
-			defaultstate="218B9F36-9186-4275-A10555B0FBAFFD73">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoBattleVortexRecord"
-					context_function_id="ContactEffectPhaseContext"/>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoBattleVortexRecord"
-					context_function_id="ContactEffectPhaseContext"/>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="218B9F36-9186-4275-A10555B0FBAFFD73"
-					name="default"
-					width="360"
-					height="24"
-					uniqueguid="218B9F36-9186-4275-A10555B0FBAFFD73">
-					<component_text
-						textvalign="Center"
-						texthalign="Right"
-						textxoffset="0.00,2.00"
-						texthbehaviour="Never split"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</default>
-			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				spacing="5.00,0.00"
-				sizetocontent="true"/>
-		</label_vortex_contact_parent>
-		<vortex_duration_label
-			this="F947F19C-DCEE-46F6-89FE9C2066D714BA"
-			id="vortex_duration_label"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			tooltipslocalised="true"
-			uniqueguid="F947F19C-DCEE-46F6-89FE9C2066D714BA"
-			currentstate="19EDE776-14F1-4BDB-85CFC016ED930E98"
-			defaultstate="19EDE776-14F1-4BDB-85CFC016ED930E98">
-			<states>
-				<newstate
-					this="19EDE776-14F1-4BDB-85CFC016ED930E98"
-					name="NewState"
-					width="190"
-					height="24"
-					interactive="true"
-					uniqueguid="19EDE776-14F1-4BDB-85CFC016ED930E98">
-					<component_text
-						text="Duration:"
-						textvalign="Center"
-						textxoffset="20.00,0.00"
-						textyoffset="4.00,0.00"
-						texthbehaviour="Never split"
-						textlocalised="true"
-						textlabel="StateText_41f8f3b0"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
-			</states>
-		</vortex_duration_label>
-		<duration_value
-			this="2129476B-5C50-4FED-956AB42DFC831B90"
-			id="duration_value"
-			offset="195.00,0.00"
-			allowverticalresize="false"
-			tooltipslocalised="true"
-			uniqueguid="2129476B-5C50-4FED-956AB42DFC831B90"
-			currentstate="A47A8342-F9BB-42B3-B7C0C51AB44EC7C6"
-			defaultstate="A47A8342-F9BB-42B3-B7C0C51AB44EC7C6">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoBattleVortexRecord"
-					context_function_id="Duration &gt; 0"/>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoBattleVortexRecord"
-					context_function_id="RoundFloat(Duration) + Loc(&quot;seconds_abbreviated&quot;)"/>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="A47A8342-F9BB-42B3-B7C0C51AB44EC7C6"
-					name="NewState"
-					width="90"
-					height="24"
-					interactive="true"
-					uniqueguid="A47A8342-F9BB-42B3-B7C0C51AB44EC7C6">
-					<component_text
-						text="22"
-						textvalign="Center"
-						texthbehaviour="Never split"
-						textlabel="duration_value_NewState_Text_c3a3c7ef"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
-			</states>
-		</duration_value>
-		<vortex_duration_parent
-			this="DA365010-C8EA-46AB-A9664D105BA1296D"
-			id="vortex_duration_parent"
-			offset="0.00,43.00"
-			allowhorizontalresize="false"
-			tooltipslocalised="true"
-			uniqueguid="DA365010-C8EA-46AB-A9664D105BA1296D"
-			currentstate="A44C340E-F0F8-447F-B0D33DDC9CD9EC96"
-			defaultstate="A44C340E-F0F8-447F-B0D33DDC9CD9EC96">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoBattleVortexRecord"
-					context_function_id="Duration &gt;= 1"/>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="A44C340E-F0F8-447F-B0D33DDC9CD9EC96"
-					name="NewState"
-					width="360"
-					height="24"
-					interactive="true"
-					uniqueguid="A44C340E-F0F8-447F-B0D33DDC9CD9EC96">
-					<component_text
-						textvalign="Center"
-						texthalign="Right"
-						texthbehaviour="Never split"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
-			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				spacing="5.00,0.00"/>
-		</vortex_duration_parent>
-		<contact_value
-			this="604DD495-D0CE-4C4D-8B16151DD0DFEB6A"
-			id="contact_value"
-			offset="195.00,0.00"
-			allowhorizontalresize="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="604DD495-D0CE-4C4D-8B16151DD0DFEB6A"
-			currentstate="157C3F33-2D1C-4F5B-97B94625FB935BA7"
-			defaultstate="157C3F33-2D1C-4F5B-97B94625FB935BA7">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoSpecialAbilityPhaseRecord"
-					context_function_id="OnscreenName"/>
-			</callbackwithcontextlist>
-			<states>
-				<false
-					this="157C3F33-2D1C-4F5B-97B94625FB935BA7"
-					name="false"
-					width="156"
-					height="24"
-					uniqueguid="157C3F33-2D1C-4F5B-97B94625FB935BA7">
-					<component_text
-						text="Value"
-						textvalign="Center"
-						textyoffset="4.00,0.00"
-						texthbehaviour="Resize"
-						textlocalised="true"
-						textlabel="StateText_d56c09c2"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"
-						font_colour_override_preset_key="red"/>
-				</false>
-			</states>
-		</contact_value>
-		<ignition_icon
-			this="2A6A7D5E-CEA4-417F-AFCF17B1DA5DB89E"
-			id="ignition_icon"
-			offset="277.00,0.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="2A6A7D5E-CEA4-417F-AFCF17B1DA5DB89E"
-			currentstate="67EF29F6-9672-491F-AE0E377DAD4011EA"
-			defaultstate="67EF29F6-9672-491F-AE0E377DAD4011EA">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoBattleVortexRecord"
-					context_function_id="IgnitionAmount &gt; 0.0"/>
-				<callback_with_context
-					callback_id="ContextTooltipSetter"
-					context_function_id="Loc(&quot;modifier_icon_tooltip_flaming&quot;)"/>
-			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="619D7946-628D-493D-A741763009D6FCF6"
-					uniqueguid="619D7946-628D-493D-A741763009D6FCF6"
-					imagepath="ui/skins/default/modifier_icon_flaming.png"/>
-			</componentimages>
-			<states>
-				<default
-					this="67EF29F6-9672-491F-AE0E377DAD4011EA"
-					name="default"
-					width="16"
-					height="24"
-					interactive="true"
-					uniqueguid="67EF29F6-9672-491F-AE0E377DAD4011EA">
-					<imagemetrics>
-						<image
-							this="6260E2C0-0958-4334-AD395CCEC7FBFD52"
-							uniqueguid="6260E2C0-0958-4334-AD395CCEC7FBFD52"
-							componentimage="619D7946-628D-493D-A741763009D6FCF6"
-							offset="0.00,4.00"
-							width="16"
-							height="16"
-							dockpoint="Center"
-							canresizeheight="false"
-							canresizewidth="false"/>
-					</imagemetrics>
-					<component_text
-						textvalign="Center"
-						textxoffset="0.00,2.00"
-						texthbehaviour="Never split"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"
-						font_colour_override_preset_key="fe_white"/>
-				</default>
-			</states>
-		</ignition_icon>
 		<magic_icon
 			this="9FADD6F3-652C-4CE1-BE3017E05157C69A"
 			id="magic_icon"
@@ -834,52 +621,174 @@
 				</default>
 			</states>
 		</magic_icon>
-		<label_vortex_ap
-			this="47655EDA-F84B-4D4A-A5F3B146E35EBEB2"
-			id="label_vortex_ap"
-			offset="229.00,0.00"
+		<movementspeed_label
+			this="95C3C520-6B46-4210-95E3C9FBA175C422"
+			id="movementspeed_label"
+			allowhorizontalresize="false"
 			allowverticalresize="false"
 			priority="255"
 			tooltipslocalised="true"
-			uniqueguid="47655EDA-F84B-4D4A-A5F3B146E35EBEB2"
-			currentstate="CC98774F-8BAB-41E6-9E3CA5BEDA8EB421"
-			defaultstate="CC98774F-8BAB-41E6-9E3CA5BEDA8EB421">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoBattleVortexRecord"
-					context_function_id="Format(&quot;(%d%[[img:ui/skins/default/modifier_icon_armour_piercing.png]][[/img]])&quot;, ArmourPiercingPercentage)"/>
-				<callback_with_context
-					callback_id="ContextTooltipSetter"
-					context_function_id="Loc(&quot;modifier_icon_tooltip_armour_piercing&quot;)"/>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="suppress_localise_asserts"
-					value=""/>
-			</userproperties>
+			uniqueguid="95C3C520-6B46-4210-95E3C9FBA175C422"
+			currentstate="F3B981CB-E6AF-4432-B3111E19D9AFD5DB"
+			defaultstate="F3B981CB-E6AF-4432-B3111E19D9AFD5DB">
 			<states>
 				<default
-					this="CC98774F-8BAB-41E6-9E3CA5BEDA8EB421"
+					this="F3B981CB-E6AF-4432-B3111E19D9AFD5DB"
 					name="default"
-					width="43"
+					width="190"
 					height="24"
-					interactive="true"
-					uniqueguid="CC98774F-8BAB-41E6-9E3CA5BEDA8EB421">
+					uniqueguid="F3B981CB-E6AF-4432-B3111E19D9AFD5DB">
 					<component_text
-						text="(ap%)"
+						text="Movement Speed:"
 						textvalign="Center"
-						texthbehaviour="Resize"
+						textxoffset="20.00,0.00"
+						texthbehaviour="Never split"
 						textlocalised="true"
-						textlabel="StateText_1556a929"
+						textlabel="StateText_9e0f0bbf"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
-						fontcat_name="body_12"
-						font_colour_override_preset_key="fe_white"/>
+						fontcat_name="body_12"/>
 				</default>
 			</states>
-		</label_vortex_ap>
+		</movementspeed_label>
+		<root
+			this="C3EB6010-3E95-476D-9DD16E25B8DADB25"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="C3EB6010-3E95-476D-9DD16E25B8DADB25"
+			currentstate="7725579E-0718-44F5-A1829239EC1B097F"
+			defaultstate="7725579E-0718-44F5-A1829239EC1B097F">
+			<componentimages>
+				<component_image
+					this="58373347-8FC7-4C1B-926654CBF25CE78D"
+					uniqueguid="58373347-8FC7-4C1B-926654CBF25CE78D"/>
+			</componentimages>
+			<states>
+				<default
+					this="7725579E-0718-44F5-A1829239EC1B097F"
+					name="default"
+					width="1600"
+					height="900"
+					uniqueguid="7725579E-0718-44F5-A1829239EC1B097F">
+					<imagemetrics>
+						<image
+							this="D249BF2A-B3AD-4F44-BB4211734D8FF6B0"
+							uniqueguid="D249BF2A-B3AD-4F44-BB4211734D8FF6B0"
+							componentimage="58373347-8FC7-4C1B-926654CBF25CE78D"
+							width="1600"
+							height="900"
+							colour="#808080FF"
+							ui_colour_preset_type_key="alliance_destroyed"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</root>
+		<vortex_details
+			this="534A6C66-9037-4DCD-9AC21B4226480653"
+			id="vortex_details"
+			offset="349.00,510.00"
+			tooltipslocalised="true"
+			uniqueguid="534A6C66-9037-4DCD-9AC21B4226480653"
+			currentstate="EB9827E6-7A73-4B35-85F76F46EAC79F74"
+			defaultstate="EB9827E6-7A73-4B35-85F76F46EAC79F74">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoBattleVortexRecord"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="EB9827E6-7A73-4B35-85F76F46EAC79F74"
+					name="NewState"
+					width="360"
+					height="139"
+					uniqueguid="EB9827E6-7A73-4B35-85F76F46EAC79F74">
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="44"/>
+				</columnwidths>
+			</LayoutEngine>
+		</vortex_details>
+		<vortex_duration_label
+			this="F947F19C-DCEE-46F6-89FE9C2066D714BA"
+			id="vortex_duration_label"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="F947F19C-DCEE-46F6-89FE9C2066D714BA"
+			currentstate="19EDE776-14F1-4BDB-85CFC016ED930E98"
+			defaultstate="19EDE776-14F1-4BDB-85CFC016ED930E98">
+			<states>
+				<newstate
+					this="19EDE776-14F1-4BDB-85CFC016ED930E98"
+					name="NewState"
+					width="190"
+					height="24"
+					interactive="true"
+					uniqueguid="19EDE776-14F1-4BDB-85CFC016ED930E98">
+					<component_text
+						text="Duration:"
+						textvalign="Center"
+						textxoffset="20.00,0.00"
+						textyoffset="4.00,0.00"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_41f8f3b0"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+		</vortex_duration_label>
+		<vortex_duration_parent
+			this="DA365010-C8EA-46AB-A9664D105BA1296D"
+			id="vortex_duration_parent"
+			offset="0.00,43.00"
+			allowhorizontalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="DA365010-C8EA-46AB-A9664D105BA1296D"
+			currentstate="A44C340E-F0F8-447F-B0D33DDC9CD9EC96"
+			defaultstate="A44C340E-F0F8-447F-B0D33DDC9CD9EC96">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoBattleVortexRecord"
+					context_function_id="Duration &gt;= 1"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="A44C340E-F0F8-447F-B0D33DDC9CD9EC96"
+					name="NewState"
+					width="360"
+					height="24"
+					interactive="true"
+					uniqueguid="A44C340E-F0F8-447F-B0D33DDC9CD9EC96">
+					<component_text
+						textvalign="Center"
+						texthalign="Right"
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				spacing="5.00,0.00"/>
+		</vortex_duration_parent>
 		<vortex_header
 			this="10D507A2-1766-4798-AF5669A7FE039EE4"
 			id="vortex_header"
@@ -917,5 +826,96 @@
 				</default>
 			</states>
 		</vortex_header>
+		<vortex_size_label
+			this="7D8BB56F-86F5-4504-BFFE81811641DE57"
+			id="vortex_size_label"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="7D8BB56F-86F5-4504-BFFE81811641DE57"
+			currentstate="7D696862-2196-420F-8E4F1D6DE62845CD"
+			defaultstate="7D696862-2196-420F-8E4F1D6DE62845CD">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoBattleVortexRecord"
+					context_function_id="GetIfElse(IsCircle, &quot;radius&quot;, &quot;length&quot;)"/>
+			</callbackwithcontextlist>
+			<states>
+				<length
+					this="67A48585-EAC3-4966-A4FFC1A826982FBE"
+					name="length"
+					width="190"
+					height="24"
+					uniqueguid="67A48585-EAC3-4966-A4FFC1A826982FBE">
+					<component_text
+						text="Length:"
+						textvalign="Center"
+						textxoffset="20.00,0.00"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_5a8d7a8e"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</length>
+				<radius
+					this="7D696862-2196-420F-8E4F1D6DE62845CD"
+					name="radius"
+					width="190"
+					height="24"
+					uniqueguid="7D696862-2196-420F-8E4F1D6DE62845CD">
+					<component_text
+						text="Radius:"
+						textvalign="Center"
+						textxoffset="20.00,0.00"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_a31eb8d9"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</radius>
+			</states>
+		</vortex_size_label>
+		<vortex_size_value
+			this="825915C4-54B5-4AEE-8E1F4D88FB6F1E62"
+			id="vortex_size_value"
+			offset="195.00,0.00"
+			allowverticalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="825915C4-54B5-4AEE-8E1F4D88FB6F1E62"
+			currentstate="093BD38A-C503-4448-805DA049E0F79E56"
+			defaultstate="093BD38A-C503-4448-805DA049E0F79E56">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoBattleVortexRecord"
+					context_function_id="RoundFloat(GetIfElse(IsCircle, GoalRadius, GoalHeight * 2)) + Loc(&quot;metre_abbreviation&quot;)"/>
+			</callbackwithcontextlist>
+			<states>
+				<false
+					this="093BD38A-C503-4448-805DA049E0F79E56"
+					name="false"
+					width="90"
+					height="24"
+					uniqueguid="093BD38A-C503-4448-805DA049E0F79E56">
+					<component_text
+						text="999"
+						textvalign="Center"
+						textxoffset="0.00,2.00"
+						texthbehaviour="Never split"
+						textlabel="label_cooldown_default_Text_390000"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</false>
+			</states>
+		</vortex_size_value>
 	</components>
 </layout>

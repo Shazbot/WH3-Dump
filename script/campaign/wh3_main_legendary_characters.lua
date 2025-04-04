@@ -1632,7 +1632,7 @@ function character_unlocking:spawn_hero(faction_name, character, spawn_character
 			end
 		end
 		
-		if character_info.mission_incidents ~= nil and faction:is_human() then -- Trigger optional incidents
+		if character_info.mission_incidents ~= nil and faction:is_human() and character_info.mission_incidents[faction_name] then -- Trigger optional incidents
 			cm:trigger_incident(faction_name, character_info.mission_incidents[faction_name], true, true)
 		end
 	end

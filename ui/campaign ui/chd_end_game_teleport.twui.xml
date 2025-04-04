@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="PrefAsBool(&quot;enable_end_game_settings&quot;) &amp;&amp; SharedStateReadBool(&quot;endgame_will_of_hashut&quot;)">
 	<hierarchy>
@@ -99,37 +99,6 @@
 		</root>
 	</hierarchy>
 	<components>
-		<root
-			this="B217C8AD-F94D-43CF-9B69AC6262CFDE24"
-			id="root"
-			tooltipslocalised="true"
-			uniqueguid="B217C8AD-F94D-43CF-9B69AC6262CFDE24"
-			currentstate="2FEBE554-7A76-4E0F-90BAAD18FF049B2A"
-			defaultstate="2FEBE554-7A76-4E0F-90BAAD18FF049B2A">
-			<componentimages>
-				<component_image
-					this="22B45E58-A8D3-4282-AF8EF5CF4AD0C215"
-					uniqueguid="22B45E58-A8D3-4282-AF8EF5CF4AD0C215"/>
-			</componentimages>
-			<states>
-				<default
-					this="2FEBE554-7A76-4E0F-90BAAD18FF049B2A"
-					name="default"
-					width="1600"
-					height="900"
-					uniqueguid="2FEBE554-7A76-4E0F-90BAAD18FF049B2A">
-					<imagemetrics>
-						<image
-							this="AB70BB24-C5DE-49D7-8A1746F49C33657B"
-							uniqueguid="AB70BB24-C5DE-49D7-8A1746F49C33657B"
-							componentimage="22B45E58-A8D3-4282-AF8EF5CF4AD0C215"
-							width="1600"
-							height="900"
-							colour="#1C1C1CFF"/>
-					</imagemetrics>
-				</default>
-			</states>
-		</root>
 		<attitude
 			this="ABA1ED22-ED84-4A23-99D8AB3958B7AC76"
 			id="attitude"
@@ -346,6 +315,29 @@
 				</_6>
 			</states>
 		</attitude>
+		<blocker
+			this="B0F34D83-B457-4A8F-8DE5F4142536D4B0"
+			id="blocker"
+			offset="0.00,103.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Bottom Center"
+			component_anchor_point="0.50,1.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="B0F34D83-B457-4A8F-8DE5F4142536D4B0"
+			currentstate="CAE9E713-E4F4-4DFF-AC87331DB1323363"
+			defaultstate="CAE9E713-E4F4-4DFF-AC87331DB1323363">
+			<states>
+				<default
+					this="CAE9E713-E4F4-4DFF-AC87331DB1323363"
+					name="default"
+					width="450"
+					height="2"
+					interactive="true"
+					uniqueguid="CAE9E713-E4F4-4DFF-AC87331DB1323363"/>
+			</states>
+		</blocker>
 		<button_decline
 			this="7F2E4759-6A4E-462E-B0EBA238FFF343F2"
 			id="button_decline"
@@ -568,110 +560,96 @@
 				<element value="ui/skins/default/fe_tab_text_selected_underlay.png"/>
 			</override_images>
 		</button_decline>
-		<button_info
-			this="2B79CAB5-A578-425E-AE2F29F1F53AB59A"
-			id="button_info"
-			template_id="round_extra_small_button"
+		<button_flame
+			this="0B007FC7-092C-4AE3-8283735FF63F387C"
+			id="button_flame"
 			part_of_template="true"
-			uniqueguid_in_template="052608B0-D9E2-46D2-926D0B182C32BBB6"
-			uniqueguid="2B79CAB5-A578-425E-AE2F29F1F53AB59A"
-			dimensions="30.00,30.00"
-			dock_point="Top Right"
-			offset="8.00,9.00"
-			priority="60"
-			sound_category="UI_GBL_TMP_Round_Small_Button">
+			uniqueguid_in_template="38F2919D-A92B-47B9-A64143C61404A0F8"
+			uniqueguid="0B007FC7-092C-4AE3-8283735FF63F387C"
+			dimensions="236.00,28.00"
+			dock_point="Top Center"
+			offset="0.00,11.00"
+			priority="100">
 			<state_uniqueguids>
 				<state_uniqueguid
-					name="active"
-					uniqueguid="A45C3F32-2250-42D8-9ADB25AA48A60C0D"/>
-				<state_uniqueguid
-					name="down"
-					uniqueguid="3C27DEEF-8504-4286-891FE8191AB0D17B"/>
-				<state_uniqueguid
-					name="down_off"
-					uniqueguid="D9E5BB8E-4BEA-4C51-9C74FE3A3A7F5EBB"/>
-				<state_uniqueguid
-					name="hover"
-					uniqueguid="E803FE1E-82A3-41D3-80A35B5D07793DF4"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="76DCE7C0-16E8-4B54-A921CEB209C404BD"/>
+					name="default"
+					uniqueguid="B35B8415-C0E2-47A0-95E7766DF12E5EAC"/>
 			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/icon_question_mark.png"
-					uniqueguid="0B174FEE-1B93-43D5-85E1A9752489A528"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_round_small_pressed.png"
-					uniqueguid="82ECEC41-9922-43B7-82A7799F24BB1436"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_round_small_hover.png"
-					uniqueguid="2C78175D-B324-42A0-AF990D167622654A"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_round_small_active.png"
-					uniqueguid="9E42FAF5-C4DD-493A-A2BFE0E54F6A4B98"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_round_small_inactive.png"
-					uniqueguid="50B51CBB-2C2D-4949-81EBB1C7C7A7B058"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/button_round_small_underlay.png"
-					uniqueguid="B9A948BC-F983-41DC-A44B8F770EEE39B3"/>
-			</component_image_uniqueguids>
 			<callbacks_with_context>
-				<callback_with_context callback_id="Button"/>
-				<callback_with_context callback_id="StatePropagatorCallback">
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoStaticObject"
+					context_function_id="self.ParentContext.IsMouseOver &amp;&amp; self.ParentContext.IsDisabled == false &amp;&amp; self.ParentContext.IsSelected == false">
 					<child_m_user_properties>
 						<property
-							name="use_transitions"
+							name="update_constant"
 							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextCommandLeftClick"
-					context_function_id="ShowEncyclopedia(&quot;PROVINCE_OVERVIEW_PANEL&quot;)"/>
-				<callback_with_context callback_id="CallbackAnimTrigger"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
 					name="disable_override"
-					value="resizable"/>
+					value="callbacks"/>
 				<property
-					name="disable_override0"
-					value="CallbackAnimTrigger"/>
-				<property
-					name="dynamic_image"
-					value="0"/>
+					name="disable_override1"
+					value="position"/>
 			</user_properties>
 			<localised_texts>
+				<localised_text/>
 				<localised_text
-					tooltip_label="ComponentTooltip_dccc8aa4"
-					tooltip_text="{{tr:help_pages}}"/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="down"
-					is_text_localised="false"/>
-				<localised_text
-					state="down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
+					state="default"
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui/skins/default/icon_question_mark.png"/>
-				<element value="ui/skins/default/button_round_small_pressed.png"/>
-				<element value="ui/skins/default/button_round_small_hover.png"/>
-				<element value="ui/skins/default/button_round_small_active.png"/>
-				<element value="ui/skins/default/button_round_small_inactive.png"/>
-				<element value="ui/skins/default/button_round_small_underlay.png"/>
 				<element value=""/>
 			</override_images>
-		</button_info>
+		</button_flame>
+		<button_flame
+			this="2DF736CA-ED36-467F-824DB54A185DA8D4"
+			id="button_flame"
+			part_of_template="true"
+			uniqueguid_in_template="38F2919D-A92B-47B9-A64143C61404A0F8"
+			uniqueguid="2DF736CA-ED36-467F-824DB54A185DA8D4"
+			dimensions="236.00,28.00"
+			dock_point="Top Center"
+			offset="0.00,11.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="EF503F74-BFDC-4886-997CF084E9DBB7A8"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoStaticObject"
+					context_function_id="self.ParentContext.IsMouseOver &amp;&amp; self.ParentContext.IsDisabled == false &amp;&amp; self.ParentContext.IsSelected == false">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="callbacks"/>
+				<property
+					name="disable_override1"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+			</override_images>
+		</button_flame>
 		<button_info
 			this="B7B802ED-0606-49D0-A75DD1B37504A44F"
 			id="button_info"
@@ -776,6 +754,136 @@
 				<element value=""/>
 			</override_images>
 		</button_info>
+		<button_info
+			this="2B79CAB5-A578-425E-AE2F29F1F53AB59A"
+			id="button_info"
+			template_id="round_extra_small_button"
+			part_of_template="true"
+			uniqueguid_in_template="052608B0-D9E2-46D2-926D0B182C32BBB6"
+			uniqueguid="2B79CAB5-A578-425E-AE2F29F1F53AB59A"
+			dimensions="30.00,30.00"
+			dock_point="Top Right"
+			offset="8.00,9.00"
+			priority="60"
+			sound_category="UI_GBL_TMP_Round_Small_Button">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="A45C3F32-2250-42D8-9ADB25AA48A60C0D"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="3C27DEEF-8504-4286-891FE8191AB0D17B"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="D9E5BB8E-4BEA-4C51-9C74FE3A3A7F5EBB"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="E803FE1E-82A3-41D3-80A35B5D07793DF4"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="76DCE7C0-16E8-4B54-A921CEB209C404BD"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/icon_question_mark.png"
+					uniqueguid="0B174FEE-1B93-43D5-85E1A9752489A528"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_pressed.png"
+					uniqueguid="82ECEC41-9922-43B7-82A7799F24BB1436"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_hover.png"
+					uniqueguid="2C78175D-B324-42A0-AF990D167622654A"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_active.png"
+					uniqueguid="9E42FAF5-C4DD-493A-A2BFE0E54F6A4B98"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_inactive.png"
+					uniqueguid="50B51CBB-2C2D-4949-81EBB1C7C7A7B058"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_underlay.png"
+					uniqueguid="B9A948BC-F983-41DC-A44B8F770EEE39B3"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="Button"/>
+				<callback_with_context callback_id="StatePropagatorCallback">
+					<child_m_user_properties>
+						<property
+							name="use_transitions"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_function_id="ShowEncyclopedia(&quot;PROVINCE_OVERVIEW_PANEL&quot;)"/>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="resizable"/>
+				<property
+					name="disable_override0"
+					value="CallbackAnimTrigger"/>
+				<property
+					name="dynamic_image"
+					value="0"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text
+					tooltip_label="ComponentTooltip_dccc8aa4"
+					tooltip_text="{{tr:help_pages}}"/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/icon_question_mark.png"/>
+				<element value="ui/skins/default/button_round_small_pressed.png"/>
+				<element value="ui/skins/default/button_round_small_hover.png"/>
+				<element value="ui/skins/default/button_round_small_active.png"/>
+				<element value="ui/skins/default/button_round_small_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_underlay.png"/>
+				<element value=""/>
+			</override_images>
+		</button_info>
+		<button_set_holder
+			this="B71C2EB1-B1EF-4D41-9F833F3200DD78E3"
+			id="button_set_holder"
+			offset="366.00,11.00"
+			allowverticalresize="false"
+			docking="Center"
+			dock_offset="0.00,8.00"
+			component_anchor_point="0.50,0.50"
+			priority="10"
+			tooltipslocalised="true"
+			uniqueguid="B71C2EB1-B1EF-4D41-9F833F3200DD78E3"
+			currentstate="7718283B-9FB4-4A14-A5CC9BA9B72DED7F"
+			defaultstate="7718283B-9FB4-4A14-A5CC9BA9B72DED7F">
+			<states>
+				<default
+					this="7718283B-9FB4-4A14-A5CC9BA9B72DED7F"
+					name="default"
+					width="310"
+					height="51"
+					uniqueguid="7718283B-9FB4-4A14-A5CC9BA9B72DED7F"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"
+				vertical_alignment="Center"/>
+		</button_set_holder>
 		<button_teleport_confirm
 			this="6F979402-FB8F-4D70-9AF9BE6674B124F1"
 			id="button_teleport_confirm"
@@ -933,805 +1041,6 @@
 				<element value="ui/skins/default/fe_tab_text_selected_underlay.png"/>
 			</override_images>
 		</button_teleport_confirm>
-		<dy_text
-			this="19474499-95CA-4414-BEA49C0E48AD2EB5"
-			id="dy_text"
-			part_of_template="true"
-			uniqueguid_in_template="B86868B7-BCBD-4ED3-AC76441F884AE2EF"
-			uniqueguid="19474499-95CA-4414-BEA49C0E48AD2EB5"
-			dimensions="236.00,84.00"
-			dock_point="Center Left"
-			offset="8.00,0.00"
-			priority="50">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="1C8DA8E7-A30B-4970-86C5AB378FF2D344"/>
-			</state_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoStaticObject"
-					context_function_id="Loc(&quot;endgame_hashut_panel_action&quot;)"/>
-			</callbacks_with_context>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					text="dy_text"
-					text_label="StateText_70219377"
-					is_text_localised="false"/>
-			</localised_texts>
-		</dy_text>
-		<button_flame
-			this="0B007FC7-092C-4AE3-8283735FF63F387C"
-			id="button_flame"
-			part_of_template="true"
-			uniqueguid_in_template="38F2919D-A92B-47B9-A64143C61404A0F8"
-			uniqueguid="0B007FC7-092C-4AE3-8283735FF63F387C"
-			dimensions="236.00,28.00"
-			dock_point="Top Center"
-			offset="0.00,11.00"
-			priority="100">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="B35B8415-C0E2-47A0-95E7766DF12E5EAC"/>
-			</state_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoStaticObject"
-					context_function_id="self.ParentContext.IsMouseOver &amp;&amp; self.ParentContext.IsDisabled == false &amp;&amp; self.ParentContext.IsSelected == false">
-					<child_m_user_properties>
-						<property
-							name="update_constant"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="disable_override"
-					value="callbacks"/>
-				<property
-					name="disable_override1"
-					value="position"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value=""/>
-			</override_images>
-		</button_flame>
-		<button_flame
-			this="2DF736CA-ED36-467F-824DB54A185DA8D4"
-			id="button_flame"
-			part_of_template="true"
-			uniqueguid_in_template="38F2919D-A92B-47B9-A64143C61404A0F8"
-			uniqueguid="2DF736CA-ED36-467F-824DB54A185DA8D4"
-			dimensions="236.00,28.00"
-			dock_point="Top Center"
-			offset="0.00,11.00"
-			priority="100">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="EF503F74-BFDC-4886-997CF084E9DBB7A8"/>
-			</state_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoStaticObject"
-					context_function_id="self.ParentContext.IsMouseOver &amp;&amp; self.ParentContext.IsDisabled == false &amp;&amp; self.ParentContext.IsSelected == false">
-					<child_m_user_properties>
-						<property
-							name="update_constant"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="disable_override"
-					value="callbacks"/>
-				<property
-					name="disable_override1"
-					value="position"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value=""/>
-			</override_images>
-		</button_flame>
-		<mouseon_blocker
-			this="0E7E0232-8F2A-48C0-9AFED83282168542"
-			id="mouseon_blocker"
-			part_of_template="true"
-			uniqueguid_in_template="096A500B-B45D-4F29-B6840B90058CD5C2"
-			uniqueguid="0E7E0232-8F2A-48C0-9AFED83282168542"
-			dimensions="320.00,2.00"
-			dock_point="Bottom Center"
-			priority="50">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="A7F36DAE-DC5D-4EDF-BE09C85E5AB0E39D"/>
-			</state_uniqueguids>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					is_text_localised="false"/>
-			</localised_texts>
-		</mouseon_blocker>
-		<dy_pooled_resource
-			this="D747EAAC-D303-4C5E-A5BAF21A4704E8C9"
-			id="dy_pooled_resource"
-			part_of_template="true"
-			uniqueguid_in_template="FFED84CE-7B77-46B9-A06CA819DD3F3FC9"
-			uniqueguid="D747EAAC-D303-4C5E-A5BAF21A4704E8C9"
-			dimensions="65.00,34.00"
-			dock_point="Bottom Right"
-			is_visible="false"
-			offset="10.00,5.00"
-			priority="50">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="6F485D02-A45A-4D0B-B9AF3ACD02E8A937"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="C509B9E0-A68B-4181-BB1DB8177B899C27"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/icon_banner.png"
-					uniqueguid="304FEA0D-45CB-4349-9946441F92D6125D"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/icon_devotion.png"
-					uniqueguid="B9F98D55-B880-46F9-9E0712F3FD41BBCB"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoCampaignResourceTransaction"
-					context_function_id="PooledResourceTransactionList.FirstContext.AbsoluteValue"/>
-				<callback_with_context
-					callback_id="ContextInactiveStateSetter"
-					context_object_id="CcoCampaignResourceTransaction"
-					context_function_id="PlayersFaction.PooledResourceManagerContext.CanAfford(this)">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="PooledResourceTransaction"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoCampaignRitual"
-					context_function_id="ResourceTransactionContext">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="PooledResourceTransaction"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbacks_with_context>
-			<localised_texts>
-				<localised_text
-					tooltip_label="ComponentTooltip_d9c79b96"
-					tooltip_text="Devotion cost"/>
-				<localised_text
-					state="active"
-					text="x"
-					text_label="StateText_4510a9c2"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					text="x"
-					text_label="StateText_dd75c6d4"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/icon_banner.png"/>
-				<element value="ui/skins/default/icon_devotion.png"/>
-			</override_images>
-		</dy_pooled_resource>
-		<eye_left
-			this="49262709-938C-4209-ADDA957EAE615D8F"
-			id="eye_left"
-			part_of_template="true"
-			uniqueguid_in_template="A4095177-97A3-4D7D-83E1951E4F9723A4"
-			uniqueguid="49262709-938C-4209-ADDA957EAE615D8F"
-			dimensions="30.00,51.00"
-			dock_point="Center Left"
-			priority="10">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="C27125F0-D530-4F31-B94339C996B3E1DD"/>
-				<state_uniqueguid
-					name="down"
-					uniqueguid="59DC6023-82DB-4B1A-826D1548348BBA68"/>
-				<state_uniqueguid
-					name="down_off"
-					uniqueguid="80224882-6CD9-448D-AAC83A6F602AFA98"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="9F1CACE7-5B68-4E21-B665AE63A0734FE1"/>
-				<state_uniqueguid
-					name="selected"
-					uniqueguid="0D4D5ACD-926F-4310-86B6F5B771E97AF9"/>
-				<state_uniqueguid
-					name="selected_hover"
-					uniqueguid="EA139931-4D02-4E1A-B9C43C83709B130C"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/fe_tab_text_eye.png"
-					uniqueguid="3049947F-58C9-4AF9-A33AC7C185026D36"/>
-			</component_image_uniqueguids>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="down"
-					is_text_localised="false"/>
-				<localised_text
-					state="down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_hover"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/fe_tab_text_eye.png"/>
-			</override_images>
-		</eye_left>
-		<eye_left
-			this="73FDA7D6-41D6-4B42-877C35E5008ADB06"
-			id="eye_left"
-			part_of_template="true"
-			uniqueguid_in_template="A4095177-97A3-4D7D-83E1951E4F9723A4"
-			uniqueguid="73FDA7D6-41D6-4B42-877C35E5008ADB06"
-			dimensions="30.00,51.00"
-			dock_point="Center Left"
-			priority="10">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="721E61BF-FD89-40FB-B5872F8A10F20C16"/>
-				<state_uniqueguid
-					name="down"
-					uniqueguid="479F27D3-3387-4797-B9F0D3E10E2B6EC5"/>
-				<state_uniqueguid
-					name="down_off"
-					uniqueguid="66CC326A-446D-4921-B31B2EEC9BD1707C"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="EE61387F-F7F1-4B12-A364EBAC3BB4ED30"/>
-				<state_uniqueguid
-					name="selected"
-					uniqueguid="77AAA48A-C3C6-447F-AFCB4D99BC0A8C13"/>
-				<state_uniqueguid
-					name="selected_hover"
-					uniqueguid="D4272284-EFD1-45D2-B7EE446691CC571E"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/fe_tab_text_eye.png"
-					uniqueguid="5EF1DAE3-DD50-42FF-ACD7953A1297FA2B"/>
-			</component_image_uniqueguids>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="down"
-					is_text_localised="false"/>
-				<localised_text
-					state="down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_hover"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/fe_tab_text_eye.png"/>
-			</override_images>
-		</eye_left>
-		<eye_right
-			this="D2528D61-735C-4FEA-9092B32517CCCEEC"
-			id="eye_right"
-			part_of_template="true"
-			uniqueguid_in_template="98E63C53-8532-46E4-A9F539ED9B57E015"
-			uniqueguid="D2528D61-735C-4FEA-9092B32517CCCEEC"
-			dimensions="30.00,51.00"
-			dock_point="Center Right"
-			priority="10">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="FE87056A-C136-4B13-A764C489BE9CC44B"/>
-				<state_uniqueguid
-					name="down"
-					uniqueguid="DB7D1642-DE0D-4C7F-AEE4A26B67D4A3AE"/>
-				<state_uniqueguid
-					name="down_off"
-					uniqueguid="17943D29-5BE0-42E7-B8919514F8E4C023"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="8156ABF5-0213-4247-AD01EE1675594095"/>
-				<state_uniqueguid
-					name="selected"
-					uniqueguid="149BEDA9-E273-4B61-A2381F05265D0E41"/>
-				<state_uniqueguid
-					name="selected_hover"
-					uniqueguid="97664405-ED50-4939-9338E8EC0FDC73B7"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/fe_tab_text_eye.png"
-					uniqueguid="1AB60095-8271-4CE4-96FDD526F0F5955B"/>
-			</component_image_uniqueguids>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="down"
-					is_text_localised="false"/>
-				<localised_text
-					state="down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_hover"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/fe_tab_text_eye.png"/>
-			</override_images>
-		</eye_right>
-		<eye_right
-			this="CCC644F3-3FA0-4E05-B70067E76DE166B4"
-			id="eye_right"
-			part_of_template="true"
-			uniqueguid_in_template="98E63C53-8532-46E4-A9F539ED9B57E015"
-			uniqueguid="CCC644F3-3FA0-4E05-B70067E76DE166B4"
-			dimensions="30.00,51.00"
-			dock_point="Center Right"
-			priority="10">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="5FD8AABA-63DB-48CF-88E7AFCD0EE9529F"/>
-				<state_uniqueguid
-					name="down"
-					uniqueguid="96209454-750F-4047-A4E1C65CF4B9A673"/>
-				<state_uniqueguid
-					name="down_off"
-					uniqueguid="E27D13B2-11AA-404B-BAF63BF700BD0921"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="31D2E3D6-9BD1-4184-BB138CDE1B0164FD"/>
-				<state_uniqueguid
-					name="selected"
-					uniqueguid="82D3F37C-0353-4F8F-879A5A47D5A118E5"/>
-				<state_uniqueguid
-					name="selected_hover"
-					uniqueguid="D4861EE5-420A-449D-9FBDC6CC78287FD9"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/fe_tab_text_eye.png"
-					uniqueguid="A52E9350-85B6-483D-B0C55DEC9A7E78FE"/>
-			</component_image_uniqueguids>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="down"
-					is_text_localised="false"/>
-				<localised_text
-					state="down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_hover"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/fe_tab_text_eye.png"/>
-			</override_images>
-		</eye_right>
-		<teleport_sea_lane
-			this="54713AA5-BBB2-41E6-9F70FD8453E986F3"
-			id="teleport_sea_lane"
-			template_id="rift_entry"
-			part_of_template="true"
-			uniqueguid_in_template="6989F485-E26B-4764-A3326D66F88AC396"
-			uniqueguid="54713AA5-BBB2-41E6-9F70FD8453E986F3"
-			dimensions="386.00,105.00"
-			dock_point="Center"
-			priority="50"
-			sound_category="UI_CAM_HUD_DLC23_Panel_End_Game_Portal_Traverse">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="5C0CE86D-E11D-42C8-92585FA2F6D40924"/>
-				<state_uniqueguid
-					name="down"
-					uniqueguid="2569B9D5-2C84-4511-A64506D1921EBE7C"/>
-				<state_uniqueguid
-					name="down_off"
-					uniqueguid="6C17C354-1746-4385-94557D696F0E3F9A"/>
-				<state_uniqueguid
-					name="hover"
-					uniqueguid="152915C0-88B8-4DF0-A5570612B0455483"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="7CBD4825-1F2D-4857-9C56D8B30CE8D5FB"/>
-				<state_uniqueguid
-					name="selected"
-					uniqueguid="55A76908-B680-4D6A-88B1E1C9A94BCA0A"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/selectable_non_button_frame_normal.png"
-					uniqueguid="76FBFA58-066B-4126-9DDCB74DDAA9EBE6"/>
-				<component_image_uniqueguid
-					name="ui/skins/wh3_main_ksl_kislev/selectable_non_button_hover_gradient.png"
-					uniqueguid="F89176E3-3A3A-4AF3-9243B95D45A71181"/>
-				<component_image_uniqueguid
-					name="ui/skins/wh3_main_ksl_kislev/selectable_non_button_frame_selected.png"
-					uniqueguid="08804E9D-639D-422B-85D36E19D6054DF0"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/building_frame_selected.png"
-					uniqueguid="A5EEE74D-B308-415F-A06A1387BF023BB9"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/selectable_non_button_tile_bg.png"
-					uniqueguid="724BCFB8-2F17-4720-B38269D3F750753F"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/chd_end_game_teleport.png"
-					uniqueguid="DF9EB784-6CC0-4A2B-AC26E48EBBE9360B"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context
-					callback_id="ContextEventBroadcaster"
-					context_object_id="CcoCampaignCharacterTeleportationSystem">
-					<child_m_user_properties>
-						<property
-							name="lclick"
-							value="OpenTeleportPanel"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextCommandLeftClick"
-					context_object_id="CcoCampaignCharacterTeleportationSystem"
-					context_function_id="Do(TeleportToNode(CampaignRoot.OpenTeleportationNodeList.Filter((x) =&gt; this.CanTeleportToNode(x)).FirstContext), TeleportationInteractionContext.SourceCharacterContext.ZoomTo, CloseCurrentHUDPanel)"/>
-				<callback_with_context
-					callback_id="ContextInactiveStateSetter"
-					context_object_id="CcoCampaignCharacterTeleportationSystem"
-					context_function_id="CanCharacterTeleport &amp;&amp; IsContextValid(StoredContext(&quot;CcoTeleportationNetworkNodeRecord&quot;)) &amp;&amp; InteractingNodeContext.TeleportationTemplateContext.Key.Contains(&quot;_neutral&quot;) == false">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="CampaignTreasuryChanged"/>
-						<property
-							name="object_store_events"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextTooltipSetter"
-					context_object_id="CcoCampaignCharacterTeleportationSystem"
-					context_function_id="this | CanCharacterTeleport == false =&gt; Loc(&quot;cannot_teleport_sea_lanes&quot;) | IsContextValid(StoredContext(&quot;CcoTeleportationNetworkNodeRecord&quot;)) == false =&gt; Loc(&quot;cannot_teleport_sea_lane_no_sea_lanes_available&quot;) | TeleportationCost(StoredContext(&quot;CcoTeleportationNetworkNodeRecord&quot;).TeleportationTemplateContext) &gt; 0 &amp;&amp; CharacterContext.FactionContext.PooledResourceManagerContext.CanAfford(TeleportationCost(StoredContext(&quot;CcoTeleportationNetworkNodeRecord&quot;).TeleportationTemplateContext)) == false  =&gt; Loc(&quot;rituals_ritual_status_insufficient_gold&quot;) |  InteractingNodeContext.TeleportationTemplateContext.Key.Contains(&quot;_neutral&quot;) =&gt; Loc(&quot;sea_lanes_not_claimed&quot;) | Loc(&quot;endgame_hashut_traverse_tooltip&quot;)">
-					<child_m_user_properties>
-						<property
-							name="object_store_events"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context callback_id="CallbackAnimTrigger"/>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoCampaignCharacterTeleportationSystem"
-					context_function_id="CampaignRoot.OpenTeleportationNodeList.FirstContext((x) =&gt; x != this.InteractingNodeContext &amp;&amp; x.TeleportationTemplateContext.Key.Contains(&quot;_realm&quot;) == false )"/>
-				<callback_with_context
-					callback_id="ContextObjectStore"
-					context_object_id="CcoTeleportationNetworkNodeRecord"/>
-			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="dynamic_image"
-					value="6"/>
-				<property
-					name="override_sound"
-					value=""/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="down"
-					is_text_localised="false"/>
-				<localised_text
-					state="down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/selectable_non_button_frame_normal.png"/>
-				<element value=""/>
-				<element value="ui/skins/wh3_main_ksl_kislev/selectable_non_button_hover_gradient.png"/>
-				<element value="ui/skins/wh3_main_ksl_kislev/selectable_non_button_frame_selected.png"/>
-				<element value="ui/skins/default/building_frame_selected.png"/>
-				<element value="ui/skins/default/selectable_non_button_tile_bg.png"/>
-				<element value="ui/skins/default/chd_end_game_teleport.png"/>
-			</override_images>
-		</teleport_sea_lane>
-		<dy_cost
-			this="F5569713-B289-469F-AAEBCCA1C29A1079"
-			id="dy_cost"
-			part_of_template="true"
-			uniqueguid_in_template="BC44AB2B-CC0C-4A24-934B9D89653F1E1F"
-			uniqueguid="F5569713-B289-469F-AAEBCCA1C29A1079"
-			dimensions="64.00,29.00"
-			dock_point="Bottom Right"
-			offset="10.00,8.00"
-			priority="50">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="normal"
-					uniqueguid="B0DE96BA-B9E8-434E-A2E95BAB88189F9C"/>
-				<state_uniqueguid
-					name="red"
-					uniqueguid="37004642-A04E-485D-8C7EEFEDBD8FE8AA"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/icon_treasury.png"
-					uniqueguid="409F8BD0-177E-47D4-B712D518DA401031"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/icon_banner_bg.png"
-					uniqueguid="7E1FAF2C-D526-4B01-B44FB800EE121482"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/red_text_banner_shadow.png"
-					uniqueguid="EA2B8B00-44F6-494A-9AA302901E76D1DD"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoCampaignCharacterTeleportationSystem"
-					context_function_id="TeleportationCost(StoredContext(&quot;CcoTeleportationNetworkNodeRecord&quot;).TeleportationTemplateContext).AbsoluteTreasuryChange">
-					<child_m_user_properties>
-						<property
-							name="object_store_events"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextObjectStore"
-					context_object_id="CcoTeleportationNetworkNodeRecord"/>
-				<callback_with_context
-					callback_id="ContextStateSetter"
-					context_object_id="CcoCampaignCharacterTeleportationSystem"
-					context_function_id="GetIfElse(CharacterContext.FactionContext.PooledResourceManagerContext.CanAfford(TeleportationCost(StoredContext(&quot;CcoTeleportationNetworkNodeRecord&quot;).TeleportationTemplateContext)), &quot;normal&quot;, &quot;red&quot; )">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="CampaignTreasuryChanged"/>
-						<property
-							name="object_store_events"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoCampaignCharacterTeleportationSystem"
-					context_function_id="TeleportationCost(StoredContext(&quot;CcoTeleportationNetworkNodeRecord&quot;).TeleportationTemplateContext).AbsoluteTreasuryChange &gt; 0"/>
-			</callbacks_with_context>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="normal"
-					text="2000"
-					text_label="StateText_122423b7"
-					is_text_localised="false"/>
-				<localised_text
-					state="red"
-					text="2000"
-					text_label="StateText_e074a7d"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/icon_treasury.png"/>
-				<element value="ui/skins/default/icon_banner_bg.png"/>
-				<element value="ui/skins/default/red_text_banner_shadow.png"/>
-			</override_images>
-		</dy_cost>
-		<template_faction_entry
-			this="A8506356-9747-4F6C-A4D1C4F4EFB0607B"
-			id="template_faction_entry"
-			part_of_template="true"
-			uniqueguid_in_template="651594CD-2B68-4281-81E64837727BAB3B"
-			uniqueguid="A8506356-9747-4F6C-A4D1C4F4EFB0607B"
-			dimensions="24.00,24.00"
-			priority="50">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="317767EF-BC4A-4354-9BD2F4828524E5E6"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/flags/wh_main_emp_empire/mon_24.png"
-					uniqueguid="880C873C-6EFD-4238-87B2C72FA92A88E0"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context
-					callback_id="ContextImageSetter"
-					context_object_id="CcoCampaignFaction"
-					context_function_id="FactionFlagSmall"/>
-				<callback_with_context
-					callback_id="ContextTooltipSetter"
-					context_object_id="CcoCampaignFaction"
-					context_function_id="Format(Loc(&quot;rift_realm_faction_tooltip&quot;), Name)"/>
-			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="disable_override0"
-					value="ContextImageSetter"/>
-				<property
-					name="disable_override1"
-					value="ContextTooltipSetter"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/flags/wh_main_emp_empire/mon_24.png"/>
-			</override_images>
-		</template_faction_entry>
-		<faction_list
-			this="5F6ADA5A-82CD-45F6-BAF254278F92B44A"
-			id="faction_list"
-			part_of_template="true"
-			uniqueguid_in_template="652463B3-26C4-4EC1-B3534AE8ABA32981"
-			uniqueguid="5F6ADA5A-82CD-45F6-BAF254278F92B44A"
-			dimensions="24.00,24.00"
-			dock_point="Top Right"
-			is_visible="false"
-			offset="-2.00,2.00"
-			priority="50">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="F738C595-EFF7-41C6-96CAAA00D7DC9870"/>
-			</state_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context
-					callback_id="ContextList"
-					context_object_id="CcoCampaignRoot"
-					context_function_id="Join(FactionList.Filter(IsHuman == false &amp;&amp; IsDead == false &amp;&amp; IsContextValid(PooledResourceContext(&quot;wh3_main_realm_complete_khorne&quot;))).Distinct(CultureContext), FactionList.Filter(IsHuman &amp;&amp; IsDead == false &amp;&amp; IsContextValid(PooledResourceContext(&quot;wh3_main_realm_complete_khorne&quot;)))).Sort( PooledResourceContext(&quot;wh3_main_realm_complete_khorne&quot;).Total + PooledResourceContext(&quot;wh3_main_realm_complete_nurgle&quot;).Total + PooledResourceContext(&quot;wh3_main_realm_complete_slaanesh&quot;).Total + PooledResourceContext(&quot;wh3_main_realm_complete_tzeentch&quot;).Total )"/>
-				<callback_with_context callback_id="ContextInitCampaignRoot"/>
-			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="disable_override0"
-					value="ContextList"/>
-				<property
-					name="disable_override1"
-					value="ContextInitCampaignRoot"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					is_text_localised="false"/>
-			</localised_texts>
-		</faction_list>
-		<blocker
-			this="B0F34D83-B457-4A8F-8DE5F4142536D4B0"
-			id="blocker"
-			offset="0.00,103.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			docking="Bottom Center"
-			component_anchor_point="0.50,1.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="B0F34D83-B457-4A8F-8DE5F4142536D4B0"
-			currentstate="CAE9E713-E4F4-4DFF-AC87331DB1323363"
-			defaultstate="CAE9E713-E4F4-4DFF-AC87331DB1323363">
-			<states>
-				<default
-					this="CAE9E713-E4F4-4DFF-AC87331DB1323363"
-					name="default"
-					width="450"
-					height="2"
-					interactive="true"
-					uniqueguid="CAE9E713-E4F4-4DFF-AC87331DB1323363"/>
-			</states>
-		</blocker>
-		<button_set_holder
-			this="B71C2EB1-B1EF-4D41-9F833F3200DD78E3"
-			id="button_set_holder"
-			offset="366.00,11.00"
-			allowverticalresize="false"
-			docking="Center"
-			dock_offset="0.00,8.00"
-			component_anchor_point="0.50,0.50"
-			priority="10"
-			tooltipslocalised="true"
-			uniqueguid="B71C2EB1-B1EF-4D41-9F833F3200DD78E3"
-			currentstate="7718283B-9FB4-4A14-A5CC9BA9B72DED7F"
-			defaultstate="7718283B-9FB4-4A14-A5CC9BA9B72DED7F">
-			<states>
-				<default
-					this="7718283B-9FB4-4A14-A5CC9BA9B72DED7F"
-					name="default"
-					width="310"
-					height="51"
-					uniqueguid="7718283B-9FB4-4A14-A5CC9BA9B72DED7F"/>
-			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				sizetocontent="true"
-				vertical_alignment="Center"/>
-		</button_set_holder>
 		<chd_end_game_panel
 			this="14578530-A184-4DA4-9C27B5EB64F64724"
 			id="chd_end_game_panel"
@@ -2429,41 +1738,86 @@
 				</red>
 			</states>
 		</dy_cost>
-		<dy_faction
-			this="327F3C78-2520-458B-AA90355968B8BCB2"
-			id="dy_faction"
-			offset="74.00,0.00"
-			priority="50"
-			tooltipslocalised="true"
-			uniqueguid="327F3C78-2520-458B-AA90355968B8BCB2"
-			currentstate="E2427DF5-B501-4206-A97BE56302AC4662"
-			defaultstate="E2427DF5-B501-4206-A97BE56302AC4662">
-			<callbackwithcontextlist>
+		<dy_cost
+			this="F5569713-B289-469F-AAEBCCA1C29A1079"
+			id="dy_cost"
+			part_of_template="true"
+			uniqueguid_in_template="BC44AB2B-CC0C-4A24-934B9D89653F1E1F"
+			uniqueguid="F5569713-B289-469F-AAEBCCA1C29A1079"
+			dimensions="64.00,29.00"
+			dock_point="Bottom Right"
+			offset="10.00,8.00"
+			priority="50">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="normal"
+					uniqueguid="B0DE96BA-B9E8-434E-A2E95BAB88189F9C"/>
+				<state_uniqueguid
+					name="red"
+					uniqueguid="37004642-A04E-485D-8C7EEFEDBD8FE8AA"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/icon_treasury.png"
+					uniqueguid="409F8BD0-177E-47D4-B712D518DA401031"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/icon_banner_bg.png"
+					uniqueguid="7E1FAF2C-D526-4B01-B44FB800EE121482"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/red_text_banner_shadow.png"
+					uniqueguid="EA2B8B00-44F6-494A-9AA302901E76D1DD"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
 				<callback_with_context
 					callback_id="ContextTextLabel"
-					context_object_id="CcoCampaignFaction"
-					context_function_id="Name"/>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="E2427DF5-B501-4206-A97BE56302AC4662"
-					name="default"
-					width="250"
-					height="30"
-					uniqueguid="E2427DF5-B501-4206-A97BE56302AC4662">
-					<component_text
-						text="dy_faction"
-						textvalign="Center"
-						texthbehaviour="Never split"
-						textlabel="StateText_6e51dcfd"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"
-						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
-				</default>
-			</states>
-		</dy_faction>
+					context_object_id="CcoCampaignCharacterTeleportationSystem"
+					context_function_id="TeleportationCost(StoredContext(&quot;CcoTeleportationNetworkNodeRecord&quot;).TeleportationTemplateContext).AbsoluteTreasuryChange">
+					<child_m_user_properties>
+						<property
+							name="object_store_events"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoTeleportationNetworkNodeRecord"/>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoCampaignCharacterTeleportationSystem"
+					context_function_id="GetIfElse(CharacterContext.FactionContext.PooledResourceManagerContext.CanAfford(TeleportationCost(StoredContext(&quot;CcoTeleportationNetworkNodeRecord&quot;).TeleportationTemplateContext)), &quot;normal&quot;, &quot;red&quot; )">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignTreasuryChanged"/>
+						<property
+							name="object_store_events"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignCharacterTeleportationSystem"
+					context_function_id="TeleportationCost(StoredContext(&quot;CcoTeleportationNetworkNodeRecord&quot;).TeleportationTemplateContext).AbsoluteTreasuryChange &gt; 0"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="normal"
+					text="2000"
+					text_label="StateText_122423b7"
+					is_text_localised="false"/>
+				<localised_text
+					state="red"
+					text="2000"
+					text_label="StateText_e074a7d"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/icon_treasury.png"/>
+				<element value="ui/skins/default/icon_banner_bg.png"/>
+				<element value="ui/skins/default/red_text_banner_shadow.png"/>
+			</override_images>
+		</dy_cost>
 		<dy_faction
 			this="068C9BC9-8262-46E4-88F1710E8C28DC93"
 			id="dy_faction"
@@ -2514,6 +1868,41 @@
 						texthbehaviour="Never split"
 						textlocalised="true"
 						textlabel="StateText_b1ccedcd"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+				</default>
+			</states>
+		</dy_faction>
+		<dy_faction
+			this="327F3C78-2520-458B-AA90355968B8BCB2"
+			id="dy_faction"
+			offset="74.00,0.00"
+			priority="50"
+			tooltipslocalised="true"
+			uniqueguid="327F3C78-2520-458B-AA90355968B8BCB2"
+			currentstate="E2427DF5-B501-4206-A97BE56302AC4662"
+			defaultstate="E2427DF5-B501-4206-A97BE56302AC4662">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignFaction"
+					context_function_id="Name"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="E2427DF5-B501-4206-A97BE56302AC4662"
+					name="default"
+					width="250"
+					height="30"
+					uniqueguid="E2427DF5-B501-4206-A97BE56302AC4662">
+					<component_text
+						text="dy_faction"
+						textvalign="Center"
+						texthbehaviour="Never split"
+						textlabel="StateText_6e51dcfd"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
@@ -2586,6 +1975,79 @@
 				</normal>
 			</states>
 		</dy_icon>
+		<dy_pooled_resource
+			this="D747EAAC-D303-4C5E-A5BAF21A4704E8C9"
+			id="dy_pooled_resource"
+			part_of_template="true"
+			uniqueguid_in_template="FFED84CE-7B77-46B9-A06CA819DD3F3FC9"
+			uniqueguid="D747EAAC-D303-4C5E-A5BAF21A4704E8C9"
+			dimensions="65.00,34.00"
+			dock_point="Bottom Right"
+			is_visible="false"
+			offset="10.00,5.00"
+			priority="50">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="6F485D02-A45A-4D0B-B9AF3ACD02E8A937"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="C509B9E0-A68B-4181-BB1DB8177B899C27"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/icon_banner.png"
+					uniqueguid="304FEA0D-45CB-4349-9946441F92D6125D"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/icon_devotion.png"
+					uniqueguid="B9F98D55-B880-46F9-9E0712F3FD41BBCB"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignResourceTransaction"
+					context_function_id="PooledResourceTransactionList.FirstContext.AbsoluteValue"/>
+				<callback_with_context
+					callback_id="ContextInactiveStateSetter"
+					context_object_id="CcoCampaignResourceTransaction"
+					context_function_id="PlayersFaction.PooledResourceManagerContext.CanAfford(this)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="PooledResourceTransaction"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignRitual"
+					context_function_id="ResourceTransactionContext">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="PooledResourceTransaction"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text
+					tooltip_label="ComponentTooltip_d9c79b96"
+					tooltip_text="Devotion cost"/>
+				<localised_text
+					state="active"
+					text="x"
+					text_label="StateText_4510a9c2"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					text="x"
+					text_label="StateText_dd75c6d4"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/icon_banner.png"/>
+				<element value="ui/skins/default/icon_devotion.png"/>
+			</override_images>
+		</dy_pooled_resource>
 		<dy_province
 			this="083A71CF-20C2-4C28-8D2614B8183F31DD"
 			id="dy_province"
@@ -2741,6 +2203,272 @@
 				</red>
 			</states>
 		</dy_resource_cost>
+		<dy_text
+			this="19474499-95CA-4414-BEA49C0E48AD2EB5"
+			id="dy_text"
+			part_of_template="true"
+			uniqueguid_in_template="B86868B7-BCBD-4ED3-AC76441F884AE2EF"
+			uniqueguid="19474499-95CA-4414-BEA49C0E48AD2EB5"
+			dimensions="236.00,84.00"
+			dock_point="Center Left"
+			offset="8.00,0.00"
+			priority="50">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="1C8DA8E7-A30B-4970-86C5AB378FF2D344"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoStaticObject"
+					context_function_id="Loc(&quot;endgame_hashut_panel_action&quot;)"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					text="dy_text"
+					text_label="StateText_70219377"
+					is_text_localised="false"/>
+			</localised_texts>
+		</dy_text>
+		<eye_left
+			this="49262709-938C-4209-ADDA957EAE615D8F"
+			id="eye_left"
+			part_of_template="true"
+			uniqueguid_in_template="A4095177-97A3-4D7D-83E1951E4F9723A4"
+			uniqueguid="49262709-938C-4209-ADDA957EAE615D8F"
+			dimensions="30.00,51.00"
+			dock_point="Center Left"
+			priority="10">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="C27125F0-D530-4F31-B94339C996B3E1DD"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="59DC6023-82DB-4B1A-826D1548348BBA68"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="80224882-6CD9-448D-AAC83A6F602AFA98"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="9F1CACE7-5B68-4E21-B665AE63A0734FE1"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="0D4D5ACD-926F-4310-86B6F5B771E97AF9"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="EA139931-4D02-4E1A-B9C43C83709B130C"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/fe_tab_text_eye.png"
+					uniqueguid="3049947F-58C9-4AF9-A33AC7C185026D36"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/fe_tab_text_eye.png"/>
+			</override_images>
+		</eye_left>
+		<eye_left
+			this="73FDA7D6-41D6-4B42-877C35E5008ADB06"
+			id="eye_left"
+			part_of_template="true"
+			uniqueguid_in_template="A4095177-97A3-4D7D-83E1951E4F9723A4"
+			uniqueguid="73FDA7D6-41D6-4B42-877C35E5008ADB06"
+			dimensions="30.00,51.00"
+			dock_point="Center Left"
+			priority="10">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="721E61BF-FD89-40FB-B5872F8A10F20C16"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="479F27D3-3387-4797-B9F0D3E10E2B6EC5"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="66CC326A-446D-4921-B31B2EEC9BD1707C"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="EE61387F-F7F1-4B12-A364EBAC3BB4ED30"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="77AAA48A-C3C6-447F-AFCB4D99BC0A8C13"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="D4272284-EFD1-45D2-B7EE446691CC571E"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/fe_tab_text_eye.png"
+					uniqueguid="5EF1DAE3-DD50-42FF-ACD7953A1297FA2B"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/fe_tab_text_eye.png"/>
+			</override_images>
+		</eye_left>
+		<eye_right
+			this="CCC644F3-3FA0-4E05-B70067E76DE166B4"
+			id="eye_right"
+			part_of_template="true"
+			uniqueguid_in_template="98E63C53-8532-46E4-A9F539ED9B57E015"
+			uniqueguid="CCC644F3-3FA0-4E05-B70067E76DE166B4"
+			dimensions="30.00,51.00"
+			dock_point="Center Right"
+			priority="10">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="5FD8AABA-63DB-48CF-88E7AFCD0EE9529F"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="96209454-750F-4047-A4E1C65CF4B9A673"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="E27D13B2-11AA-404B-BAF63BF700BD0921"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="31D2E3D6-9BD1-4184-BB138CDE1B0164FD"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="82D3F37C-0353-4F8F-879A5A47D5A118E5"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="D4861EE5-420A-449D-9FBDC6CC78287FD9"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/fe_tab_text_eye.png"
+					uniqueguid="A52E9350-85B6-483D-B0C55DEC9A7E78FE"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/fe_tab_text_eye.png"/>
+			</override_images>
+		</eye_right>
+		<eye_right
+			this="D2528D61-735C-4FEA-9092B32517CCCEEC"
+			id="eye_right"
+			part_of_template="true"
+			uniqueguid_in_template="98E63C53-8532-46E4-A9F539ED9B57E015"
+			uniqueguid="D2528D61-735C-4FEA-9092B32517CCCEEC"
+			dimensions="30.00,51.00"
+			dock_point="Center Right"
+			priority="10">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="FE87056A-C136-4B13-A764C489BE9CC44B"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="DB7D1642-DE0D-4C7F-AEE4A26B67D4A3AE"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="17943D29-5BE0-42E7-B8919514F8E4C023"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="8156ABF5-0213-4247-AD01EE1675594095"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="149BEDA9-E273-4B61-A2381F05265D0E41"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="97664405-ED50-4939-9338E8EC0FDC73B7"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/fe_tab_text_eye.png"
+					uniqueguid="1AB60095-8271-4CE4-96FDD526F0F5955B"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/fe_tab_text_eye.png"/>
+			</override_images>
+		</eye_right>
 		<faction_holder
 			this="4746FD09-12DE-4D08-BA9678D8DB11645A"
 			id="faction_holder"
@@ -2783,6 +2511,44 @@
 				spacing="10.00,0.00"
 				sizetocontent="true"/>
 		</faction_holder>
+		<faction_list
+			this="5F6ADA5A-82CD-45F6-BAF254278F92B44A"
+			id="faction_list"
+			part_of_template="true"
+			uniqueguid_in_template="652463B3-26C4-4EC1-B3534AE8ABA32981"
+			uniqueguid="5F6ADA5A-82CD-45F6-BAF254278F92B44A"
+			dimensions="24.00,24.00"
+			dock_point="Top Right"
+			is_visible="false"
+			offset="-2.00,2.00"
+			priority="50">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="F738C595-EFF7-41C6-96CAAA00D7DC9870"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoCampaignRoot"
+					context_function_id="Join(FactionList.Filter(IsHuman == false &amp;&amp; IsDead == false &amp;&amp; IsContextValid(PooledResourceContext(&quot;wh3_main_realm_complete_khorne&quot;))).Distinct(CultureContext), FactionList.Filter(IsHuman &amp;&amp; IsDead == false &amp;&amp; IsContextValid(PooledResourceContext(&quot;wh3_main_realm_complete_khorne&quot;)))).Sort( PooledResourceContext(&quot;wh3_main_realm_complete_khorne&quot;).Total + PooledResourceContext(&quot;wh3_main_realm_complete_nurgle&quot;).Total + PooledResourceContext(&quot;wh3_main_realm_complete_slaanesh&quot;).Total + PooledResourceContext(&quot;wh3_main_realm_complete_tzeentch&quot;).Total )"/>
+				<callback_with_context callback_id="ContextInitCampaignRoot"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="ContextList"/>
+				<property
+					name="disable_override1"
+					value="ContextInitCampaignRoot"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</faction_list>
 		<faction_parent
 			this="3D6EF291-DB39-4361-9FFAFEF77ED86265"
 			id="faction_parent"
@@ -2866,24 +2632,6 @@
 			</states>
 		</faction_symbol>
 		<header
-			this="CE8E5CD2-64E1-4C83-8F7F14EA8281CFB5"
-			id="header"
-			offset="14.00,0.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="CE8E5CD2-64E1-4C83-8F7F14EA8281CFB5"
-			currentstate="132ABC8B-EAB2-462B-A6A1381BB4611E1B"
-			defaultstate="132ABC8B-EAB2-462B-A6A1381BB4611E1B">
-			<states>
-				<newstate
-					this="132ABC8B-EAB2-462B-A6A1381BB4611E1B"
-					name="NewState"
-					width="896"
-					height="10"
-					uniqueguid="132ABC8B-EAB2-462B-A6A1381BB4611E1B"/>
-			</states>
-		</header>
-		<header
 			this="A8CF31E2-F917-4DD2-AB86D1099827F7CC"
 			id="header"
 			offset="12.00,0.00"
@@ -2899,6 +2647,24 @@
 					width="606"
 					height="34"
 					uniqueguid="2A970811-A569-4CF6-A4DA36AF6E9AB9CF"/>
+			</states>
+		</header>
+		<header
+			this="CE8E5CD2-64E1-4C83-8F7F14EA8281CFB5"
+			id="header"
+			offset="14.00,0.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="CE8E5CD2-64E1-4C83-8F7F14EA8281CFB5"
+			currentstate="132ABC8B-EAB2-462B-A6A1381BB4611E1B"
+			defaultstate="132ABC8B-EAB2-462B-A6A1381BB4611E1B">
+			<states>
+				<newstate
+					this="132ABC8B-EAB2-462B-A6A1381BB4611E1B"
+					name="NewState"
+					width="896"
+					height="10"
+					uniqueguid="132ABC8B-EAB2-462B-A6A1381BB4611E1B"/>
 			</states>
 		</header>
 		<icon_list
@@ -2937,6 +2703,27 @@
 					uniqueguid="FA816039-A6AC-4F6B-BDD8BBED1465A945"/>
 			</states>
 		</icon_list>
+		<mouseon_blocker
+			this="0E7E0232-8F2A-48C0-9AFED83282168542"
+			id="mouseon_blocker"
+			part_of_template="true"
+			uniqueguid_in_template="096A500B-B45D-4F29-B6840B90058CD5C2"
+			uniqueguid="0E7E0232-8F2A-48C0-9AFED83282168542"
+			dimensions="320.00,2.00"
+			dock_point="Bottom Center"
+			priority="50">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="A7F36DAE-DC5D-4EDF-BE09C85E5AB0E39D"/>
+			</state_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</mouseon_blocker>
 		<no_faction
 			this="E8F6244E-1104-4AFE-90E06C62D67F6017"
 			id="no_faction"
@@ -3476,6 +3263,37 @@
 				spacing="10.00,0.00"
 				sizetocontent="true"/>
 		</province_holder>
+		<root
+			this="B217C8AD-F94D-43CF-9B69AC6262CFDE24"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="B217C8AD-F94D-43CF-9B69AC6262CFDE24"
+			currentstate="2FEBE554-7A76-4E0F-90BAAD18FF049B2A"
+			defaultstate="2FEBE554-7A76-4E0F-90BAAD18FF049B2A">
+			<componentimages>
+				<component_image
+					this="22B45E58-A8D3-4282-AF8EF5CF4AD0C215"
+					uniqueguid="22B45E58-A8D3-4282-AF8EF5CF4AD0C215"/>
+			</componentimages>
+			<states>
+				<default
+					this="2FEBE554-7A76-4E0F-90BAAD18FF049B2A"
+					name="default"
+					width="1600"
+					height="900"
+					uniqueguid="2FEBE554-7A76-4E0F-90BAAD18FF049B2A">
+					<imagemetrics>
+						<image
+							this="AB70BB24-C5DE-49D7-8A1746F49C33657B"
+							uniqueguid="AB70BB24-C5DE-49D7-8A1746F49C33657B"
+							componentimage="22B45E58-A8D3-4282-AF8EF5CF4AD0C215"
+							width="1600"
+							height="900"
+							colour="#1C1C1CFF"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</root>
 		<sea_lane_map_icon
 			this="D7D21F9F-EE9D-4DD3-A932BE49F20EE61F"
 			id="sea_lane_map_icon"
@@ -3488,7 +3306,7 @@
 			priority="10"
 			soundcategory="UI_CAM_CLICK_Rifts_Select_Rift"
 			uniqueguid="D7D21F9F-EE9D-4DD3-A932BE49F20EE61F"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="F7FA55CD-AD96-4D89-932B52AEFEC12097"
 			defaultstate="F7FA55CD-AD96-4D89-932B52AEFEC12097">
 			<callbackwithcontextlist>
@@ -3579,11 +3397,11 @@
 					</imagemetrics>
 					<transitionmap>
 						<transition
-							index="3"
-							transition_m_target_state="25B4EC7E-3D76-4314-ABFE51FEB842A836"/>
-						<transition
 							index="1"
 							transition_m_target_state="D3165A32-01E4-4F23-826712A17220B04A"/>
+						<transition
+							index="3"
+							transition_m_target_state="25B4EC7E-3D76-4314-ABFE51FEB842A836"/>
 					</transitionmap>
 				</down>
 				<down_off
@@ -3687,7 +3505,7 @@
 			priority="10"
 			tooltipslocalised="true"
 			uniqueguid="ADAD1EA8-F8B8-4D12-95759A0052221117"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="C2AF638B-EEAA-49A6-A6AD811D0187F09D"
 			defaultstate="C2AF638B-EEAA-49A6-A6AD811D0187F09D">
 			<callbackwithcontextlist>
@@ -3726,7 +3544,7 @@
 							width="100"
 							height="100"
 							dockpoint="Center"
-							isaspectratiolocked="true"/>
+							aspect_ratio_locked_behaviour="Width First"/>
 					</imagemetrics>
 				</default>
 			</states>
@@ -3987,6 +3805,188 @@
 				</columnwidths>
 			</LayoutEngine>
 		</teleport_panel>
+		<teleport_sea_lane
+			this="54713AA5-BBB2-41E6-9F70FD8453E986F3"
+			id="teleport_sea_lane"
+			template_id="rift_entry"
+			part_of_template="true"
+			uniqueguid_in_template="6989F485-E26B-4764-A3326D66F88AC396"
+			uniqueguid="54713AA5-BBB2-41E6-9F70FD8453E986F3"
+			dimensions="386.00,105.00"
+			dock_point="Center"
+			priority="50"
+			sound_category="UI_CAM_HUD_DLC23_Panel_End_Game_Portal_Traverse">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="5C0CE86D-E11D-42C8-92585FA2F6D40924"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="2569B9D5-2C84-4511-A64506D1921EBE7C"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="6C17C354-1746-4385-94557D696F0E3F9A"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="152915C0-88B8-4DF0-A5570612B0455483"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="7CBD4825-1F2D-4857-9C56D8B30CE8D5FB"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="55A76908-B680-4D6A-88B1E1C9A94BCA0A"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/selectable_non_button_frame_normal.png"
+					uniqueguid="76FBFA58-066B-4126-9DDCB74DDAA9EBE6"/>
+				<component_image_uniqueguid
+					name="ui/skins/wh3_main_ksl_kislev/selectable_non_button_hover_gradient.png"
+					uniqueguid="F89176E3-3A3A-4AF3-9243B95D45A71181"/>
+				<component_image_uniqueguid
+					name="ui/skins/wh3_main_ksl_kislev/selectable_non_button_frame_selected.png"
+					uniqueguid="08804E9D-639D-422B-85D36E19D6054DF0"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/building_frame_selected.png"
+					uniqueguid="A5EEE74D-B308-415F-A06A1387BF023BB9"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/selectable_non_button_tile_bg.png"
+					uniqueguid="724BCFB8-2F17-4720-B38269D3F750753F"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/chd_end_game_teleport.png"
+					uniqueguid="DF9EB784-6CC0-4A2B-AC26E48EBBE9360B"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextEventBroadcaster"
+					context_object_id="CcoCampaignCharacterTeleportationSystem">
+					<child_m_user_properties>
+						<property
+							name="lclick"
+							value="OpenTeleportPanel"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoCampaignCharacterTeleportationSystem"
+					context_function_id="Do(TeleportToNode(CampaignRoot.OpenTeleportationNodeList.Filter((x) =&gt; this.CanTeleportToNode(x)).FirstContext), TeleportationInteractionContext.SourceCharacterContext.ZoomTo, CloseCurrentHUDPanel)"/>
+				<callback_with_context
+					callback_id="ContextInactiveStateSetter"
+					context_object_id="CcoCampaignCharacterTeleportationSystem"
+					context_function_id="CanCharacterTeleport &amp;&amp; IsContextValid(StoredContext(&quot;CcoTeleportationNetworkNodeRecord&quot;)) &amp;&amp; InteractingNodeContext.TeleportationTemplateContext.Key.Contains(&quot;_neutral&quot;) == false">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignTreasuryChanged"/>
+						<property
+							name="object_store_events"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoCampaignCharacterTeleportationSystem"
+					context_function_id="this | CanCharacterTeleport == false =&gt; Loc(&quot;cannot_teleport_sea_lanes&quot;) | IsContextValid(StoredContext(&quot;CcoTeleportationNetworkNodeRecord&quot;)) == false =&gt; Loc(&quot;cannot_teleport_sea_lane_no_sea_lanes_available&quot;) | TeleportationCost(StoredContext(&quot;CcoTeleportationNetworkNodeRecord&quot;).TeleportationTemplateContext) &gt; 0 &amp;&amp; CharacterContext.FactionContext.PooledResourceManagerContext.CanAfford(TeleportationCost(StoredContext(&quot;CcoTeleportationNetworkNodeRecord&quot;).TeleportationTemplateContext)) == false  =&gt; Loc(&quot;rituals_ritual_status_insufficient_gold&quot;) |  InteractingNodeContext.TeleportationTemplateContext.Key.Contains(&quot;_neutral&quot;) =&gt; Loc(&quot;sea_lanes_not_claimed&quot;) | Loc(&quot;endgame_hashut_traverse_tooltip&quot;)">
+					<child_m_user_properties>
+						<property
+							name="object_store_events"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignCharacterTeleportationSystem"
+					context_function_id="CampaignRoot.OpenTeleportationNodeList.FirstContext((x) =&gt; x != this.InteractingNodeContext &amp;&amp; x.TeleportationTemplateContext.Key.Contains(&quot;_realm&quot;) == false )"/>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoTeleportationNetworkNodeRecord"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="dynamic_image"
+					value="6"/>
+				<property
+					name="override_sound"
+					value=""/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/selectable_non_button_frame_normal.png"/>
+				<element value=""/>
+				<element value="ui/skins/wh3_main_ksl_kislev/selectable_non_button_hover_gradient.png"/>
+				<element value="ui/skins/wh3_main_ksl_kislev/selectable_non_button_frame_selected.png"/>
+				<element value="ui/skins/default/building_frame_selected.png"/>
+				<element value="ui/skins/default/selectable_non_button_tile_bg.png"/>
+				<element value="ui/skins/default/chd_end_game_teleport.png"/>
+			</override_images>
+		</teleport_sea_lane>
+		<template_faction_entry
+			this="A8506356-9747-4F6C-A4D1C4F4EFB0607B"
+			id="template_faction_entry"
+			part_of_template="true"
+			uniqueguid_in_template="651594CD-2B68-4281-81E64837727BAB3B"
+			uniqueguid="A8506356-9747-4F6C-A4D1C4F4EFB0607B"
+			dimensions="24.00,24.00"
+			priority="50">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="317767EF-BC4A-4354-9BD2F4828524E5E6"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/flags/wh_main_emp_empire/mon_24.png"
+					uniqueguid="880C873C-6EFD-4238-87B2C72FA92A88E0"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoCampaignFaction"
+					context_function_id="FactionFlagSmall"/>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoCampaignFaction"
+					context_function_id="Format(Loc(&quot;rift_realm_faction_tooltip&quot;), Name)"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="ContextImageSetter"/>
+				<property
+					name="disable_override1"
+					value="ContextTooltipSetter"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/flags/wh_main_emp_empire/mon_24.png"/>
+			</override_images>
+		</template_faction_entry>
 		<template_sea_lane_icon_holder
 			this="62E9C41A-D697-4D7C-B2E898D9333EB274"
 			id="template_sea_lane_icon_holder"
@@ -4113,63 +4113,6 @@
 			</states>
 		</time_icon>
 		<tx
-			this="1BC62805-14DF-43DC-BA79C9DB0B331B71"
-			id="tx"
-			docking="Center"
-			component_anchor_point="0.50,0.50"
-			priority="10"
-			tooltipslocalised="true"
-			uniqueguid="1BC62805-14DF-43DC-BA79C9DB0B331B71"
-			currentstate="5EC7E698-6D35-4B90-924C87496AF554AA"
-			defaultstate="5EC7E698-6D35-4B90-924C87496AF554AA">
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<active
-					this="5EC7E698-6D35-4B90-924C87496AF554AA"
-					name="active"
-					width="310"
-					height="51"
-					uniqueguid="5EC7E698-6D35-4B90-924C87496AF554AA">
-					<component_text
-						text="Traverse Sea"
-						textvalign="Center"
-						texthalign="Center"
-						texthbehaviour="Never split"
-						textlocalised="true"
-						textlabel="StateText_6a44c50b"
-						font_m_font_name="brand_header"
-						font_m_size="14"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="header_14"/>
-				</active>
-				<inactive
-					this="E9A387B9-0F17-48DF-9319D6E416FC87C2"
-					name="inactive"
-					width="310"
-					height="51"
-					uniqueguid="E9A387B9-0F17-48DF-9319D6E416FC87C2">
-					<component_text
-						text="Traverse Sea"
-						textvalign="Center"
-						texthalign="Center"
-						texthbehaviour="Never split"
-						textlocalised="true"
-						textlabel="StateText_5c966a7f"
-						font_m_font_name="brand_header"
-						font_m_size="14"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="header_14"
-						font_colour_override_preset_key="ui_font_inactive_grey"/>
-				</inactive>
-			</states>
-		</tx>
-		<tx
 			this="9B7308BF-40C1-4F39-A715542EBA5110B1"
 			id="tx"
 			docking="Center"
@@ -4230,6 +4173,95 @@
 				</inactive>
 			</states>
 		</tx>
+		<tx
+			this="1BC62805-14DF-43DC-BA79C9DB0B331B71"
+			id="tx"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="10"
+			tooltipslocalised="true"
+			uniqueguid="1BC62805-14DF-43DC-BA79C9DB0B331B71"
+			currentstate="5EC7E698-6D35-4B90-924C87496AF554AA"
+			defaultstate="5EC7E698-6D35-4B90-924C87496AF554AA">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<active
+					this="5EC7E698-6D35-4B90-924C87496AF554AA"
+					name="active"
+					width="310"
+					height="51"
+					uniqueguid="5EC7E698-6D35-4B90-924C87496AF554AA">
+					<component_text
+						text="Traverse Sea"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_6a44c50b"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_14"/>
+				</active>
+				<inactive
+					this="E9A387B9-0F17-48DF-9319D6E416FC87C2"
+					name="inactive"
+					width="310"
+					height="51"
+					uniqueguid="E9A387B9-0F17-48DF-9319D6E416FC87C2">
+					<component_text
+						text="Traverse Sea"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_5c966a7f"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_14"
+						font_colour_override_preset_key="ui_font_inactive_grey"/>
+				</inactive>
+			</states>
+		</tx>
+		<tx_descr
+			this="49D86C15-598A-430F-A4534CB94E1D4A5D"
+			id="tx_descr"
+			offset="12.00,34.00"
+			visible="false"
+			priority="50"
+			tooltipslocalised="true"
+			uniqueguid="49D86C15-598A-430F-A4534CB94E1D4A5D"
+			currentstate="CB4471F0-B74F-4F70-BF1C04CFA3F29A5A"
+			defaultstate="CB4471F0-B74F-4F70-BF1C04CFA3F29A5A">
+			<states>
+				<default
+					this="CB4471F0-B74F-4F70-BF1C04CFA3F29A5A"
+					name="default"
+					width="606"
+					height="60"
+					uniqueguid="CB4471F0-B74F-4F70-BF1C04CFA3F29A5A">
+					<component_text
+						text="[PH] Sea Lane short flavour text"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Never split"
+						textlabel="StateText_4acc42f5"
+						font_m_font_name="georgia_italic"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12_italic"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+				</default>
+			</states>
+		</tx_descr>
 		<tx_descr
 			this="A642EF7D-B16B-4411-9DC1035A5E60ACBB"
 			id="tx_descr"
@@ -4259,38 +4291,6 @@
 						texthalign="Center"
 						texthbehaviour="Never split"
 						textlabel="StateText_497468a0"
-						font_m_font_name="georgia_italic"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12_italic"
-						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
-				</default>
-			</states>
-		</tx_descr>
-		<tx_descr
-			this="49D86C15-598A-430F-A4534CB94E1D4A5D"
-			id="tx_descr"
-			offset="12.00,34.00"
-			visible="false"
-			priority="50"
-			tooltipslocalised="true"
-			uniqueguid="49D86C15-598A-430F-A4534CB94E1D4A5D"
-			currentstate="CB4471F0-B74F-4F70-BF1C04CFA3F29A5A"
-			defaultstate="CB4471F0-B74F-4F70-BF1C04CFA3F29A5A">
-			<states>
-				<default
-					this="CB4471F0-B74F-4F70-BF1C04CFA3F29A5A"
-					name="default"
-					width="606"
-					height="60"
-					uniqueguid="CB4471F0-B74F-4F70-BF1C04CFA3F29A5A">
-					<component_text
-						text="[PH] Sea Lane short flavour text"
-						textvalign="Center"
-						texthalign="Center"
-						texthbehaviour="Never split"
-						textlabel="StateText_4acc42f5"
 						font_m_font_name="georgia_italic"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
@@ -4390,6 +4390,51 @@
 			</states>
 		</tx_province>
 		<tx_title
+			this="5016BB0A-B687-4396-8DE379D8201AD904"
+			id="tx_title"
+			offset="136.00,14.00"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="5016BB0A-B687-4396-8DE379D8201AD904"
+			currentstate="E3E643F1-15AB-4BF2-AE178EDA872EC3E5"
+			defaultstate="E3E643F1-15AB-4BF2-AE178EDA872EC3E5">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+				<property
+					name="dynamic_child_parent"
+					value="panel_title"/>
+			</userproperties>
+			<states>
+				<default
+					this="E3E643F1-15AB-4BF2-AE178EDA872EC3E5"
+					name="default"
+					width="271"
+					height="30"
+					interactive="true"
+					disabled="true"
+					uniqueguid="E3E643F1-15AB-4BF2-AE178EDA872EC3E5">
+					<component_text
+						text="Traverse the Tunnel"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_724ce75b"
+						font_m_font_name="la_gioconda_uppercase"
+						font_m_size="18"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_18_bold"
+						text_shader_name="drop_shadow_t0"
+						textshadervars="-0.02,1.00,2.00,0.00"/>
+				</default>
+			</states>
+		</tx_title>
+		<tx_title
 			this="73297BBA-212C-47C4-B4F5AB75A2907292"
 			id="tx_title"
 			offset="136.00,14.00"
@@ -4428,51 +4473,6 @@
 						texthalign="Center"
 						texthbehaviour="Never split"
 						textlabel="StateText_39fe6ce8"
-						font_m_font_name="la_gioconda_uppercase"
-						font_m_size="18"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="header_18_bold"
-						text_shader_name="drop_shadow_t0"
-						textshadervars="-0.02,1.00,2.00,0.00"/>
-				</default>
-			</states>
-		</tx_title>
-		<tx_title
-			this="5016BB0A-B687-4396-8DE379D8201AD904"
-			id="tx_title"
-			offset="136.00,14.00"
-			docking="Center"
-			component_anchor_point="0.50,0.50"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="5016BB0A-B687-4396-8DE379D8201AD904"
-			currentstate="E3E643F1-15AB-4BF2-AE178EDA872EC3E5"
-			defaultstate="E3E643F1-15AB-4BF2-AE178EDA872EC3E5">
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-				<property
-					name="dynamic_child_parent"
-					value="panel_title"/>
-			</userproperties>
-			<states>
-				<default
-					this="E3E643F1-15AB-4BF2-AE178EDA872EC3E5"
-					name="default"
-					width="271"
-					height="30"
-					interactive="true"
-					disabled="true"
-					uniqueguid="E3E643F1-15AB-4BF2-AE178EDA872EC3E5">
-					<component_text
-						text="Traverse the Tunnel"
-						textvalign="Center"
-						texthalign="Center"
-						texthbehaviour="Never split"
-						textlocalised="true"
-						textlabel="StateText_724ce75b"
 						font_m_font_name="la_gioconda_uppercase"
 						font_m_size="18"
 						font_m_colour="#FFF8D7FF"

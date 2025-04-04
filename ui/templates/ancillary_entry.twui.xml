@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -21,38 +21,6 @@
 		</root>
 	</hierarchy>
 	<components>
-		<root
-			this="46D1CC2D-584E-4B0B-A20E1B86BE2CE87C"
-			id="root"
-			uniqueguid_in_template="46D1CC2D-584E-4B0B-A20E1B86BE2CE87C"
-			tooltipslocalised="true"
-			uniqueguid="46D1CC2D-584E-4B0B-A20E1B86BE2CE87C"
-			currentstate="7C87B4F0-CF40-448D-B18163798C555E6E"
-			defaultstate="7C87B4F0-CF40-448D-B18163798C555E6E">
-			<componentimages>
-				<component_image
-					this="A3C2165F-D434-417D-977D22EDACCE496B"
-					uniqueguid="A3C2165F-D434-417D-977D22EDACCE496B"/>
-			</componentimages>
-			<states>
-				<default
-					this="7C87B4F0-CF40-448D-B18163798C555E6E"
-					name="default"
-					width="1600"
-					height="900"
-					uniqueguid="7C87B4F0-CF40-448D-B18163798C555E6E">
-					<imagemetrics>
-						<image
-							this="7B8A11C2-0602-4436-AB272A45392CDCAA"
-							uniqueguid="7B8A11C2-0602-4436-AB272A45392CDCAA"
-							componentimage="A3C2165F-D434-417D-977D22EDACCE496B"
-							width="1920"
-							height="1080"
-							colour="#1C1C1CFF"/>
-					</imagemetrics>
-				</default>
-			</states>
-		</root>
 		<ancillary_entry
 			this="B1685FB7-F22D-4A4B-967AE3AC74EC98B4"
 			id="ancillary_entry"
@@ -65,7 +33,7 @@
 			tooltipslocalised="true"
 			soundcategory="UI_CAM_CLICK_Character_Details_Ancillaries"
 			uniqueguid="B1685FB7-F22D-4A4B-967AE3AC74EC98B4"
-			currentstate="4608BB25-DD2A-4A74-81483392EB341E79"
+			currentstate="9EF80C93-1D58-4490-83DD8464E8035EEE"
 			defaultstate="9EF80C93-1D58-4490-83DD8464E8035EEE">
 			<callbackwithcontextlist>
 				<callback_with_context
@@ -916,6 +884,66 @@
 				</uncommon>
 			</states>
 		</equipment_items_frame>
+		<forces_icon
+			this="8E441238-928A-4D0D-91BCA0F15AB4CB16"
+			id="forces_icon"
+			uniqueguid_in_template="8E441238-928A-4D0D-91BCA0F15AB4CB16"
+			offset="-2.00,33.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Bottom Left"
+			dock_offset="-2.00,1.00"
+			component_anchor_point="0.00,1.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="8E441238-928A-4D0D-91BCA0F15AB4CB16"
+			currentstate="1E014C23-45AF-44AD-B71168A5ED8CF432"
+			defaultstate="1E014C23-45AF-44AD-B71168A5ED8CF432">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoCampaignAncillary"
+					context_function_id="GetIfElse(CharacterEquippedToContext.IsAgent, CharacterEquippedToContext.CharacterTypeIconPath,  AddDefaultSkinPath(&quot;icon_army.png&quot;))"/>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoCampaignAncillary"
+					context_function_id="CharacterEquippedToContext.Name + &quot;||&quot; + CharacterEquippedToContext.CharacterTypeName"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="disable_override0"
+					value="ContextImageSetter"/>
+				<property
+					name="disable_override1"
+					value="ContextTooltipSetter"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="3B1997AE-C9FA-4B38-BA1754A8DBFDF680"
+					uniqueguid="3B1997AE-C9FA-4B38-BA1754A8DBFDF680"
+					imagepath="ui/skins/default/icon_army.png"/>
+			</componentimages>
+			<states>
+				<army
+					this="1E014C23-45AF-44AD-B71168A5ED8CF432"
+					name="army"
+					width="18"
+					height="18"
+					interactive="true"
+					disabled="true"
+					uniqueguid="1E014C23-45AF-44AD-B71168A5ED8CF432">
+					<imagemetrics>
+						<image
+							this="005646ED-D0F0-4261-A6EBA204EE95EB67"
+							uniqueguid="005646ED-D0F0-4261-A6EBA204EE95EB67"
+							componentimage="3B1997AE-C9FA-4B38-BA1754A8DBFDF680"
+							width="18"
+							height="18"
+							dockpoint="Center"/>
+					</imagemetrics>
+				</army>
+			</states>
+		</forces_icon>
 		<magic_effect
 			this="1F7BCAF9-6C1A-4276-924DF84BBFCF3676"
 			id="magic_effect"
@@ -929,7 +957,7 @@
 			priority="60"
 			tooltipslocalised="true"
 			uniqueguid="1F7BCAF9-6C1A-4276-924DF84BBFCF3676"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			currentstate="8E59F672-0BD5-4114-A316617C2989FE47"
 			defaultstate="8E59F672-0BD5-4114-A316617C2989FE47">
 			<componentimages>
@@ -1108,65 +1136,37 @@
 				</show>
 			</animations>
 		</magic_effect>
-		<forces_icon
-			this="8E441238-928A-4D0D-91BCA0F15AB4CB16"
-			id="forces_icon"
-			uniqueguid_in_template="8E441238-928A-4D0D-91BCA0F15AB4CB16"
-			offset="-2.00,33.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			docking="Bottom Left"
-			dock_offset="-2.00,1.00"
-			component_anchor_point="0.00,1.00"
-			priority="60"
+		<root
+			this="46D1CC2D-584E-4B0B-A20E1B86BE2CE87C"
+			id="root"
+			uniqueguid_in_template="46D1CC2D-584E-4B0B-A20E1B86BE2CE87C"
 			tooltipslocalised="true"
-			uniqueguid="8E441238-928A-4D0D-91BCA0F15AB4CB16"
-			currentstate="1E014C23-45AF-44AD-B71168A5ED8CF432"
-			defaultstate="1E014C23-45AF-44AD-B71168A5ED8CF432">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextImageSetter"
-					context_object_id="CcoCampaignAncillary"
-					context_function_id="GetIfElse(CharacterEquippedToContext.IsAgent, CharacterEquippedToContext.CharacterTypeIconPath,  AddDefaultSkinPath(&quot;icon_army.png&quot;))"/>
-				<callback_with_context
-					callback_id="ContextTooltipSetter"
-					context_object_id="CcoCampaignAncillary"
-					context_function_id="CharacterEquippedToContext.Name + &quot;||&quot; + CharacterEquippedToContext.CharacterTypeName"/>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="disable_override0"
-					value="ContextImageSetter"/>
-				<property
-					name="disable_override1"
-					value="ContextTooltipSetter"/>
-			</userproperties>
+			uniqueguid="46D1CC2D-584E-4B0B-A20E1B86BE2CE87C"
+			currentstate="7C87B4F0-CF40-448D-B18163798C555E6E"
+			defaultstate="7C87B4F0-CF40-448D-B18163798C555E6E">
 			<componentimages>
 				<component_image
-					this="3B1997AE-C9FA-4B38-BA1754A8DBFDF680"
-					uniqueguid="3B1997AE-C9FA-4B38-BA1754A8DBFDF680"
-					imagepath="ui/skins/default/icon_army.png"/>
+					this="A3C2165F-D434-417D-977D22EDACCE496B"
+					uniqueguid="A3C2165F-D434-417D-977D22EDACCE496B"/>
 			</componentimages>
 			<states>
-				<army
-					this="1E014C23-45AF-44AD-B71168A5ED8CF432"
-					name="army"
-					width="18"
-					height="18"
-					interactive="true"
-					disabled="true"
-					uniqueguid="1E014C23-45AF-44AD-B71168A5ED8CF432">
+				<default
+					this="7C87B4F0-CF40-448D-B18163798C555E6E"
+					name="default"
+					width="1600"
+					height="900"
+					uniqueguid="7C87B4F0-CF40-448D-B18163798C555E6E">
 					<imagemetrics>
 						<image
-							this="005646ED-D0F0-4261-A6EBA204EE95EB67"
-							uniqueguid="005646ED-D0F0-4261-A6EBA204EE95EB67"
-							componentimage="3B1997AE-C9FA-4B38-BA1754A8DBFDF680"
-							width="18"
-							height="18"
-							dockpoint="Center"/>
+							this="7B8A11C2-0602-4436-AB272A45392CDCAA"
+							uniqueguid="7B8A11C2-0602-4436-AB272A45392CDCAA"
+							componentimage="A3C2165F-D434-417D-977D22EDACCE496B"
+							width="1920"
+							height="1080"
+							colour="#1C1C1CFF"/>
 					</imagemetrics>
-				</army>
+				</default>
 			</states>
-		</forces_icon>
+		</root>
 	</components>
 </layout>

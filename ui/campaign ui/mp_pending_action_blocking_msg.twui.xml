@@ -24,37 +24,6 @@
 		</root>
 	</hierarchy>
 	<components>
-		<root
-			this="2CA19ECB-BB83-4BC6-A551E5E1F66CDE39"
-			id="root"
-			tooltipslocalised="true"
-			uniqueguid="2CA19ECB-BB83-4BC6-A551E5E1F66CDE39"
-			currentstate="F00498AE-9F36-4377-A66156EA3D5516E0">
-			<componentimages>
-				<component_image
-					this="94E8DE59-D159-4B17-9AFBCC3E301ECB68"
-					uniqueguid="94E8DE59-D159-4B17-9AFBCC3E301ECB68"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="F00498AE-9F36-4377-A66156EA3D5516E0"
-					name="NewState"
-					width="1600"
-					height="900"
-					interactive="true"
-					uniqueguid="F00498AE-9F36-4377-A66156EA3D5516E0">
-					<imagemetrics>
-						<image
-							this="5DF30F50-75BF-4981-81D9C75DEBE11006"
-							uniqueguid="5DF30F50-75BF-4981-81D9C75DEBE11006"
-							componentimage="94E8DE59-D159-4B17-9AFBCC3E301ECB68"
-							width="1280"
-							height="960"
-							colour="#BEFFBBFF"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-		</root>
 		<button_zoom
 			this="0DBE874E-33B5-4419-A72F305E8EFFDB6E"
 			id="button_zoom"
@@ -159,6 +128,119 @@
 				<element value=""/>
 			</override_images>
 		</button_zoom>
+		<dy_text
+			this="E438F169-C71A-49F9-937E3B7AF68020EE"
+			id="DY_text"
+			offset="0.00,1.00"
+			allowhorizontalresize="false"
+			priority="250"
+			tooltipslocalised="true"
+			uniqueguid="E438F169-C71A-49F9-937E3B7AF68020EE"
+			currentstate="745B8B97-36DF-4C96-850406ADA4A30356">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignPendingAction"
+					context_function_id="Description">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value="1000"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="min_text_height"
+					value="200"/>
+			</userproperties>
+			<states>
+				<newstate
+					this="745B8B97-36DF-4C96-850406ADA4A30356"
+					name="NewState"
+					width="535"
+					height="154"
+					uniqueguid="745B8B97-36DF-4C96-850406ADA4A30356">
+					<component_text
+						text="dy_text"
+						textvalign="Center"
+						texthalign="Center"
+						textlabel="StateText_33edd9e9"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+				</newstate>
+			</states>
+		</dy_text>
+		<header_involved_factions
+			this="82A5AD64-4DD1-4CA7-B165D45072BF156A"
+			id="header_involved_factions"
+			offset="210.00,155.00"
+			allowverticalresize="false"
+			priority="250"
+			tooltipslocalised="true"
+			uniqueguid="82A5AD64-4DD1-4CA7-B165D45072BF156A"
+			currentstate="43FD6F0C-BE3A-4D0C-BC184B3892DC6FD7"
+			defaultstate="43FD6F0C-BE3A-4D0C-BC184B3892DC6FD7">
+			<states>
+				<default
+					this="43FD6F0C-BE3A-4D0C-BC184B3892DC6FD7"
+					name="default"
+					width="115"
+					height="29"
+					uniqueguid="43FD6F0C-BE3A-4D0C-BC184B3892DC6FD7">
+					<component_text
+						text="Involved players:"
+						textvalign="Center"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="StateText_5c3ba226"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</default>
+			</states>
+		</header_involved_factions>
+		<involved_faction_list
+			this="4696F030-CE9E-4109-B45DEC9AF06567F9"
+			id="involved_faction_list"
+			offset="143.00,184.00"
+			priority="250"
+			tooltipslocalised="true"
+			uniqueguid="4696F030-CE9E-4109-B45DEC9AF06567F9"
+			currentstate="DDBA1B2A-D639-44E6-B005CADCD354964D"
+			defaultstate="DDBA1B2A-D639-44E6-B005CADCD354964D">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoCampaignPendingAction"
+					context_function_id="InvolvedFactionList.Filter(IsHuman &amp;&amp; IsPlayersFaction == false)">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value="1000"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="DDBA1B2A-D639-44E6-B005CADCD354964D"
+					name="default"
+					width="249"
+					height="29"
+					uniqueguid="DDBA1B2A-D639-44E6-B005CADCD354964D"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="70"/>
+				</columnwidths>
+			</LayoutEngine>
+		</involved_faction_list>
 		<mp_pending_action_blocking_msg
 			this="34232DF1-95CD-4853-A478C96EEB66CE56"
 			id="mp_pending_action_blocking_msg"
@@ -283,89 +365,6 @@
 				</columnwidths>
 			</LayoutEngine>
 		</mp_pending_action_blocking_msg>
-		<dy_text
-			this="E438F169-C71A-49F9-937E3B7AF68020EE"
-			id="DY_text"
-			offset="0.00,1.00"
-			allowhorizontalresize="false"
-			priority="250"
-			tooltipslocalised="true"
-			uniqueguid="E438F169-C71A-49F9-937E3B7AF68020EE"
-			currentstate="745B8B97-36DF-4C96-850406ADA4A30356">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoCampaignPendingAction"
-					context_function_id="Description">
-					<child_m_user_properties>
-						<property
-							name="update_constant"
-							value="1000"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="min_text_height"
-					value="200"/>
-			</userproperties>
-			<states>
-				<newstate
-					this="745B8B97-36DF-4C96-850406ADA4A30356"
-					name="NewState"
-					width="535"
-					height="154"
-					uniqueguid="745B8B97-36DF-4C96-850406ADA4A30356">
-					<component_text
-						text="dy_text"
-						textvalign="Center"
-						texthalign="Center"
-						textlabel="StateText_33edd9e9"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"
-						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
-				</newstate>
-			</states>
-		</dy_text>
-		<involved_faction_list
-			this="4696F030-CE9E-4109-B45DEC9AF06567F9"
-			id="involved_faction_list"
-			offset="143.00,184.00"
-			priority="250"
-			tooltipslocalised="true"
-			uniqueguid="4696F030-CE9E-4109-B45DEC9AF06567F9"
-			currentstate="DDBA1B2A-D639-44E6-B005CADCD354964D"
-			defaultstate="DDBA1B2A-D639-44E6-B005CADCD354964D">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextList"
-					context_object_id="CcoCampaignPendingAction"
-					context_function_id="InvolvedFactionList.Filter(IsHuman &amp;&amp; IsPlayersFaction == false)">
-					<child_m_user_properties>
-						<property
-							name="update_constant"
-							value="1000"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="DDBA1B2A-D639-44E6-B005CADCD354964D"
-					name="default"
-					width="249"
-					height="29"
-					uniqueguid="DDBA1B2A-D639-44E6-B005CADCD354964D"/>
-			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true">
-				<columnwidths>
-					<column width="70"/>
-				</columnwidths>
-			</LayoutEngine>
-		</involved_faction_list>
 		<panel_smoke_t
 			this="C4DC7719-692A-4DDA-812B38E6442940EA"
 			id="panel_smoke_t"
@@ -527,6 +526,37 @@
 				</default>
 			</states>
 		</panel_smoke_t>
+		<root
+			this="2CA19ECB-BB83-4BC6-A551E5E1F66CDE39"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="2CA19ECB-BB83-4BC6-A551E5E1F66CDE39"
+			currentstate="F00498AE-9F36-4377-A66156EA3D5516E0">
+			<componentimages>
+				<component_image
+					this="94E8DE59-D159-4B17-9AFBCC3E301ECB68"
+					uniqueguid="94E8DE59-D159-4B17-9AFBCC3E301ECB68"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="F00498AE-9F36-4377-A66156EA3D5516E0"
+					name="NewState"
+					width="1600"
+					height="900"
+					interactive="true"
+					uniqueguid="F00498AE-9F36-4377-A66156EA3D5516E0">
+					<imagemetrics>
+						<image
+							this="5DF30F50-75BF-4981-81D9C75DEBE11006"
+							uniqueguid="5DF30F50-75BF-4981-81D9C75DEBE11006"
+							componentimage="94E8DE59-D159-4B17-9AFBCC3E301ECB68"
+							width="1280"
+							height="960"
+							colour="#BEFFBBFF"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</root>
 		<smoke_holder
 			this="A1E7A656-6D11-40DD-802347AF6C7C543E"
 			id="smoke_holder"
@@ -707,35 +737,5 @@
 					uniqueguid="F1FCB33C-53E3-4EC3-A20A44B8EC4D13EC"/>
 			</states>
 		</zoom_parent>
-		<header_involved_factions
-			this="82A5AD64-4DD1-4CA7-B165D45072BF156A"
-			id="header_involved_factions"
-			offset="210.00,155.00"
-			allowverticalresize="false"
-			priority="250"
-			tooltipslocalised="true"
-			uniqueguid="82A5AD64-4DD1-4CA7-B165D45072BF156A"
-			currentstate="43FD6F0C-BE3A-4D0C-BC184B3892DC6FD7"
-			defaultstate="43FD6F0C-BE3A-4D0C-BC184B3892DC6FD7">
-			<states>
-				<default
-					this="43FD6F0C-BE3A-4D0C-BC184B3892DC6FD7"
-					name="default"
-					width="115"
-					height="29"
-					uniqueguid="43FD6F0C-BE3A-4D0C-BC184B3892DC6FD7">
-					<component_text
-						text="Involved players:"
-						textvalign="Center"
-						texthbehaviour="Resize"
-						textlocalised="true"
-						textlabel="StateText_5c3ba226"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</default>
-			</states>
-		</header_involved_factions>
 	</components>
 </layout>

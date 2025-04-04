@@ -1573,7 +1573,7 @@ function Worldroots:complete_ritual(forest, faction_key)
 		cm:add_scripted_composite_scene_to_settlement("ritual_finished", self.ritual_finished_vfx_key, cm:get_region(forest.glade_region_key), 0, 0, true, true, true)
 	end
 	
-	if cm:get_local_faction_name(true) == faction_key then
+	if not cm:is_multiplayer() and cm:get_local_faction_name(true) == faction_key then
 		cm:scroll_camera_with_cutscene_to_settlement(
 			3,
 			function()

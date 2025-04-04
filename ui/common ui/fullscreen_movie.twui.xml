@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -12,85 +12,6 @@
 		</root>
 	</hierarchy>
 	<components>
-		<root
-			this="C39FD694-0F0D-4FCF-83DAA8382675F843"
-			id="root"
-			tooltipslocalised="true"
-			uniqueguid="C39FD694-0F0D-4FCF-83DAA8382675F843"
-			currentstate="239352A1-A97D-4524-9DC5DEC4708BF2D0"
-			defaultstate="239352A1-A97D-4524-9DC5DEC4708BF2D0">
-			<componentimages>
-				<component_image
-					this="1986AC6F-7862-47B3-A6490A2F13F2AEFB"
-					uniqueguid="1986AC6F-7862-47B3-A6490A2F13F2AEFB"/>
-			</componentimages>
-			<states>
-				<default
-					this="239352A1-A97D-4524-9DC5DEC4708BF2D0"
-					name="default"
-					width="1600"
-					height="900"
-					uniqueguid="239352A1-A97D-4524-9DC5DEC4708BF2D0">
-					<imagemetrics>
-						<image
-							this="C5C2AD31-F7D0-47B7-A23FBD1841BAF6E2"
-							uniqueguid="C5C2AD31-F7D0-47B7-A23FBD1841BAF6E2"
-							componentimage="1986AC6F-7862-47B3-A6490A2F13F2AEFB"
-							width="1920"
-							height="1080"
-							colour="#1C1C1CFF"/>
-					</imagemetrics>
-				</default>
-			</states>
-		</root>
-		<fullscreen_movie
-			this="C6F830C2-273B-4EA6-AA3BA7C7AB1ACA5D"
-			id="fullscreen_movie"
-			docking="Center"
-			component_anchor_point="0.50,0.50"
-			priority="10"
-			tooltipslocalised="true"
-			uniqueguid="C6F830C2-273B-4EA6-AA3BA7C7AB1ACA5D"
-			updatewhennotvisible="true"
-			currentstate="42618D3F-DA12-467F-AB1144FEDCB6A027"
-			defaultstate="42618D3F-DA12-467F-AB1144FEDCB6A027"
-			comment="Plays a specified movied, created usually with PlayFullscreenMovie global func. Resizes to correct size, is topmost, handles escape key and destyroys self when done">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="EscapeKeyHandler"/>
-				<callback_with_context callback_id="ScreenSizedComponent"/>
-				<callback_with_context callback_id="TopmostObjectCallback"/>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="42618D3F-DA12-467F-AB1144FEDCB6A027"
-					name="NewState"
-					width="1600"
-					height="900"
-					interactive="true"
-					uniqueguid="42618D3F-DA12-467F-AB1144FEDCB6A027"/>
-			</states>
-			<animations>
-				<escape id="escape">
-					<frames>
-						<frame
-							interpolationtime="0"
-							targetmetrics_m_colour="#000000FF"
-							targetmetrics_m_height="900"
-							targetmetrics_m_width="1600">
-							<triggers>
-								<trigger
-									trigger_component="82C3D015-B745-4B10-ADB7973C7BC64974"
-									trigger_animation="escape"/>
-							</triggers>
-						</frame>
-						<frame
-							targetmetrics_m_colour="#000000FF"
-							targetmetrics_m_height="900"
-							targetmetrics_m_width="1600"/>
-					</frames>
-				</escape>
-			</animations>
-		</fullscreen_movie>
 		<fader
 			this="82C3D015-B745-4B10-ADB7973C7BC64974"
 			id="fader"
@@ -171,6 +92,54 @@
 				</escape>
 			</animations>
 		</fader>
+		<fullscreen_movie
+			this="C6F830C2-273B-4EA6-AA3BA7C7AB1ACA5D"
+			id="fullscreen_movie"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="10"
+			tooltipslocalised="true"
+			uniqueguid="C6F830C2-273B-4EA6-AA3BA7C7AB1ACA5D"
+			updatewhennotvisible="true"
+			currentstate="42618D3F-DA12-467F-AB1144FEDCB6A027"
+			defaultstate="42618D3F-DA12-467F-AB1144FEDCB6A027"
+			comment="Plays a specified movied, created usually with PlayFullscreenMovie global func. Resizes to correct size, is topmost, handles escape key and destyroys self when done">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="EscapeKeyHandler"/>
+				<callback_with_context callback_id="ScreenSizedComponent"/>
+				<callback_with_context callback_id="TopmostObjectCallback"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="42618D3F-DA12-467F-AB1144FEDCB6A027"
+					name="NewState"
+					width="1600"
+					height="900"
+					interactive="true"
+					uniqueguid="42618D3F-DA12-467F-AB1144FEDCB6A027"/>
+			</states>
+			<animations>
+				<escape id="escape">
+					<frames>
+						<frame
+							interpolationtime="0"
+							targetmetrics_m_colour="#000000FF"
+							targetmetrics_m_height="900"
+							targetmetrics_m_width="1600">
+							<triggers>
+								<trigger
+									trigger_component="82C3D015-B745-4B10-ADB7973C7BC64974"
+									trigger_animation="escape"/>
+							</triggers>
+						</frame>
+						<frame
+							targetmetrics_m_colour="#000000FF"
+							targetmetrics_m_height="900"
+							targetmetrics_m_width="1600"/>
+					</frames>
+				</escape>
+			</animations>
+		</fullscreen_movie>
 		<movie
 			this="EACF82C9-5F70-4FCE-A7D815FABB82C227"
 			id="movie"
@@ -261,5 +230,36 @@
 				</destroy>
 			</animations>
 		</movie>
+		<root
+			this="C39FD694-0F0D-4FCF-83DAA8382675F843"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="C39FD694-0F0D-4FCF-83DAA8382675F843"
+			currentstate="239352A1-A97D-4524-9DC5DEC4708BF2D0"
+			defaultstate="239352A1-A97D-4524-9DC5DEC4708BF2D0">
+			<componentimages>
+				<component_image
+					this="1986AC6F-7862-47B3-A6490A2F13F2AEFB"
+					uniqueguid="1986AC6F-7862-47B3-A6490A2F13F2AEFB"/>
+			</componentimages>
+			<states>
+				<default
+					this="239352A1-A97D-4524-9DC5DEC4708BF2D0"
+					name="default"
+					width="1600"
+					height="900"
+					uniqueguid="239352A1-A97D-4524-9DC5DEC4708BF2D0">
+					<imagemetrics>
+						<image
+							this="C5C2AD31-F7D0-47B7-A23FBD1841BAF6E2"
+							uniqueguid="C5C2AD31-F7D0-47B7-A23FBD1841BAF6E2"
+							componentimage="1986AC6F-7862-47B3-A6490A2F13F2AEFB"
+							width="1920"
+							height="1080"
+							colour="#1C1C1CFF"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</root>
 	</components>
 </layout>

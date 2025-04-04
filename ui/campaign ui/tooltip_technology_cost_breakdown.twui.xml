@@ -25,41 +25,10 @@
 		</root>
 	</hierarchy>
 	<components>
-		<root
-			this="C5062D2A-9234-45A2-9D3DE5E45C1C29E0"
-			id="root"
-			tooltipslocalised="true"
-			uniqueguid="C5062D2A-9234-45A2-9D3DE5E45C1C29E0"
-			currentstate="55EB5011-EB0F-4C8B-811AA9CAC02249F4"
-			defaultstate="55EB5011-EB0F-4C8B-811AA9CAC02249F4">
-			<componentimages>
-				<component_image
-					this="D9B15950-CF75-4B1A-BDB0DCE1EF260FE7"
-					uniqueguid="D9B15950-CF75-4B1A-BDB0DCE1EF260FE7"/>
-			</componentimages>
-			<states>
-				<default
-					this="55EB5011-EB0F-4C8B-811AA9CAC02249F4"
-					name="default"
-					width="1600"
-					height="900"
-					uniqueguid="55EB5011-EB0F-4C8B-811AA9CAC02249F4">
-					<imagemetrics>
-						<image
-							this="1B4113B3-4CED-4097-ACCDE00A541FFE35"
-							uniqueguid="1B4113B3-4CED-4097-ACCDE00A541FFE35"
-							componentimage="D9B15950-CF75-4B1A-BDB0DCE1EF260FE7"
-							width="1920"
-							height="1080"
-							colour="#1C1C1CFF"/>
-					</imagemetrics>
-				</default>
-			</states>
-		</root>
 		<breakdown
 			this="1BB24641-F025-4556-90B0551ED417ED50"
 			id="breakdown"
-			offset="10.00,98.00"
+			offset="10.00,117.00"
 			tooltipslocalised="true"
 			uniqueguid="1BB24641-F025-4556-90B0551ED417ED50"
 			currentstate="CB58114F-DC99-4D00-A59ABF40438B01F2"
@@ -96,10 +65,10 @@
 					this="1F1AF4A4-F7A3-4952-8A69676A4AFE4AE8"
 					name="NewState"
 					width="290"
-					height="58"
+					height="77"
 					uniqueguid="1F1AF4A4-F7A3-4952-8A69676A4AFE4AE8">
 					<component_text
-						text="This is how long it will take to complete this technology based on the cost minus any surplus points"
+						text="How many Research Points this Technology will cost to research, modified by your current Research Point Surplus."
 						textxoffset="0.00,8.00"
 						textyoffset="2.00,2.00"
 						texthbehaviour="Resize"
@@ -113,6 +82,77 @@
 				</newstate>
 			</states>
 		</description>
+		<dy_value
+			this="64038CD9-400C-4F1C-9B3C2F78702F3051"
+			id="dy_value"
+			offset="220.00,0.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center Right External"
+			component_anchor_point="-0.00,0.50"
+			tooltipslocalised="true"
+			uniqueguid="64038CD9-400C-4F1C-9B3C2F78702F3051"
+			currentstate="464A71AE-B71F-460F-9232B0DC11D5A3BD"
+			defaultstate="464A71AE-B71F-460F-9232B0DC11D5A3BD">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignTechnology"
+					context_function_id="RoundFloat(MaxNumericValue(ResearchPointsCost - FactionContext.TechnologyResearchPointSurplus, 0))"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="464A71AE-B71F-460F-9232B0DC11D5A3BD"
+					name="default"
+					width="82"
+					height="26"
+					uniqueguid="464A71AE-B71F-460F-9232B0DC11D5A3BD">
+					<component_text
+						text="1000"
+						textyoffset="4.00,6.00"
+						texthbehaviour="Slip by character"
+						textlabel="StateText_a7e77c85"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</default>
+				<green
+					this="99CF1F3B-D11B-4396-942EA8C2F7951E77"
+					name="green"
+					width="82"
+					height="26"
+					uniqueguid="99CF1F3B-D11B-4396-942EA8C2F7951E77">
+					<component_text
+						text="1000"
+						textyoffset="4.00,6.00"
+						texthbehaviour="Slip by character"
+						textlabel="StateText_48733bcf"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="green"/>
+				</green>
+				<red
+					this="DB685822-71F2-4A21-8546E2ED56BA2C1F"
+					name="red"
+					width="82"
+					height="26"
+					uniqueguid="DB685822-71F2-4A21-8546E2ED56BA2C1F">
+					<component_text
+						text="1000"
+						textyoffset="4.00,6.00"
+						texthbehaviour="Slip by character"
+						textlabel="StateText_4c9ae7a"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
+				</red>
+			</states>
+		</dy_value>
 		<dy_value
 			this="941129EC-E83B-4263-8655C3199C1B0E4B"
 			id="dy_value"
@@ -255,77 +295,6 @@
 				</red>
 			</states>
 		</dy_value>
-		<dy_value
-			this="64038CD9-400C-4F1C-9B3C2F78702F3051"
-			id="dy_value"
-			offset="220.00,0.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			docking="Center Right External"
-			component_anchor_point="-0.00,0.50"
-			tooltipslocalised="true"
-			uniqueguid="64038CD9-400C-4F1C-9B3C2F78702F3051"
-			currentstate="464A71AE-B71F-460F-9232B0DC11D5A3BD"
-			defaultstate="464A71AE-B71F-460F-9232B0DC11D5A3BD">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoCampaignTechnology"
-					context_function_id="RoundFloat(MaxNumericValue(ResearchPointsCost - FactionContext.TechnologyResearchPointSurplus, 0))"/>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="464A71AE-B71F-460F-9232B0DC11D5A3BD"
-					name="default"
-					width="82"
-					height="26"
-					uniqueguid="464A71AE-B71F-460F-9232B0DC11D5A3BD">
-					<component_text
-						text="1000"
-						textyoffset="4.00,6.00"
-						texthbehaviour="Slip by character"
-						textlabel="StateText_a7e77c85"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</default>
-				<green
-					this="99CF1F3B-D11B-4396-942EA8C2F7951E77"
-					name="green"
-					width="82"
-					height="26"
-					uniqueguid="99CF1F3B-D11B-4396-942EA8C2F7951E77">
-					<component_text
-						text="1000"
-						textyoffset="4.00,6.00"
-						texthbehaviour="Slip by character"
-						textlabel="StateText_48733bcf"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"
-						font_colour_override_preset_key="green"/>
-				</green>
-				<red
-					this="DB685822-71F2-4A21-8546E2ED56BA2C1F"
-					name="red"
-					width="82"
-					height="26"
-					uniqueguid="DB685822-71F2-4A21-8546E2ED56BA2C1F">
-					<component_text
-						text="1000"
-						textyoffset="4.00,6.00"
-						texthbehaviour="Slip by character"
-						textlabel="StateText_4c9ae7a"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"
-						font_colour_override_preset_key="red"/>
-				</red>
-			</states>
-		</dy_value>
 		<list_parent
 			this="359F5C58-13C9-486C-A230832B763D03EB"
 			id="list_parent"
@@ -338,7 +307,7 @@
 					this="9E4D77DE-3C69-468D-A1CC5491FC8B6CC5"
 					name="NewState"
 					width="322"
-					height="190"
+					height="209"
 					uniqueguid="9E4D77DE-3C69-468D-A1CC5491FC8B6CC5"/>
 			</states>
 			<animations>
@@ -408,7 +377,7 @@
 					height="26"
 					uniqueguid="A194869F-316C-4203-927A456486AF7B63">
 					<component_text
-						text="Research Point Cost"
+						text="Base Research Point Cost"
 						textxoffset="4.00,6.00"
 						textyoffset="4.00,6.00"
 						texthbehaviour="Slip by character"
@@ -452,6 +421,37 @@
 				</newstate>
 			</states>
 		</research_point_surplus>
+		<root
+			this="C5062D2A-9234-45A2-9D3DE5E45C1C29E0"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="C5062D2A-9234-45A2-9D3DE5E45C1C29E0"
+			currentstate="55EB5011-EB0F-4C8B-811AA9CAC02249F4"
+			defaultstate="55EB5011-EB0F-4C8B-811AA9CAC02249F4">
+			<componentimages>
+				<component_image
+					this="D9B15950-CF75-4B1A-BDB0DCE1EF260FE7"
+					uniqueguid="D9B15950-CF75-4B1A-BDB0DCE1EF260FE7"/>
+			</componentimages>
+			<states>
+				<default
+					this="55EB5011-EB0F-4C8B-811AA9CAC02249F4"
+					name="default"
+					width="1600"
+					height="900"
+					uniqueguid="55EB5011-EB0F-4C8B-811AA9CAC02249F4">
+					<imagemetrics>
+						<image
+							this="1B4113B3-4CED-4097-ACCDE00A541FFE35"
+							uniqueguid="1B4113B3-4CED-4097-ACCDE00A541FFE35"
+							componentimage="D9B15950-CF75-4B1A-BDB0DCE1EF260FE7"
+							width="1920"
+							height="1080"
+							colour="#1C1C1CFF"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</root>
 		<title
 			this="1685F31B-3DBB-46B5-84DF89BFD2E75D34"
 			id="title"
@@ -509,7 +509,7 @@
 					this="CBE67ADE-38CB-4005-984F136CC61E7BFE"
 					name="NewState"
 					width="322"
-					height="190"
+					height="209"
 					uniqueguid="CBE67ADE-38CB-4005-984F136CC61E7BFE">
 					<imagemetrics>
 						<image
@@ -517,7 +517,7 @@
 							uniqueguid="0987A15C-0C2B-4A03-91CF477714A531A2"
 							componentimage="F0F4AEDE-B00C-4EFC-AB3C02E79258DB67"
 							width="322"
-							height="190"
+							height="209"
 							tile="true"
 							margin="16.00,20.00,16.00,20.00"/>
 					</imagemetrics>
@@ -549,7 +549,7 @@
 					height="26"
 					uniqueguid="44A0F1C2-4E67-4925-BBDEC41B3B541DC3">
 					<component_text
-						text="Research Point Cost"
+						text="Final Research Point Cost"
 						textxoffset="4.00,6.00"
 						textyoffset="4.00,6.00"
 						texthbehaviour="Slip by character"

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -16,6 +16,136 @@
 		</root>
 	</hierarchy>
 	<components>
+		<corruption_list
+			this="77563C1B-6C8D-4BC6-85E0EE9620AACCA1"
+			id="corruption_list"
+			offset="0.00,36.00"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="77563C1B-6C8D-4BC6-85E0EE9620AACCA1"
+			currentstate="9E67D282-DEFB-42F6-A09CCA77C07AEAAA"
+			defaultstate="9E67D282-DEFB-42F6-A09CCA77C07AEAAA">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoCampaignProvince"
+					context_function_id="PooledResourceList.Sort(SortOrder, true)"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="9E67D282-DEFB-42F6-A09CCA77C07AEAAA"
+					name="default"
+					width="328"
+					height="28"
+					uniqueguid="9E67D282-DEFB-42F6-A09CCA77C07AEAAA"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				spacing="0.00,8.00"
+				sizetocontent="true"
+				margins="0.00,12.00">
+				<columnwidths>
+					<column width="32"/>
+				</columnwidths>
+			</LayoutEngine>
+		</corruption_list>
+		<dy_heading_textbox
+			this="7899B069-A968-4338-ABEFE969E6656F70"
+			id="dy_heading_textbox"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="7899B069-A968-4338-ABEFE969E6656F70"
+			updatewhennotvisible="true"
+			currentstate="940F1550-07F4-4E4E-A25C840A43756E9E"
+			defaultstate="940F1550-07F4-4E4E-A25C840A43756E9E">
+			<states>
+				<newstate
+					this="940F1550-07F4-4E4E-A25C840A43756E9E"
+					name="NewState"
+					width="321"
+					interactive="true"
+					uniqueguid="940F1550-07F4-4E4E-A25C840A43756E9E">
+					<component_text
+						text="Corruption Details"
+						texthalign="Center"
+						textyoffset="8.00,6.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="dy_heading_textbox_NewState_Text_45d7492a"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_14"/>
+				</newstate>
+			</states>
+		</dy_heading_textbox>
+		<dy_value
+			this="D87DED7C-9963-4256-81B8225A48D337B2"
+			id="dy_value"
+			offset="258.00,0.00"
+			allowverticalresize="false"
+			docking="Center Right"
+			component_anchor_point="1.00,0.50"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="D87DED7C-9963-4256-81B8225A48D337B2"
+			updatewhennotvisible="true"
+			currentstate="2A114A6D-8E65-472A-B376FF7DEB11E41B"
+			defaultstate="2A114A6D-8E65-472A-B376FF7DEB11E41B">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="Format(&quot;%d / 100&quot;, Total)"/>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="GetIfElse(Total == 0, &quot;positive&quot;, &quot;negative&quot;)"/>
+			</callbackwithcontextlist>
+			<states>
+				<negative
+					this="5DABD3F8-1261-48DF-BD2CA0BFEF2B5B18"
+					name="negative"
+					width="70"
+					height="16"
+					interactive="true"
+					uniqueguid="5DABD3F8-1261-48DF-BD2CA0BFEF2B5B18">
+					<component_text
+						text="99"
+						textvalign="Center"
+						textxoffset="40.00,12.00"
+						textyoffset="0.00,4.00"
+						texthbehaviour="Resize"
+						textlabel="dy_value_NewState_Text_f12643d8"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
+				</negative>
+				<positive
+					this="2A114A6D-8E65-472A-B376FF7DEB11E41B"
+					name="positive"
+					width="70"
+					height="16"
+					interactive="true"
+					uniqueguid="2A114A6D-8E65-472A-B376FF7DEB11E41B">
+					<component_text
+						text="99"
+						textvalign="Center"
+						textxoffset="40.00,12.00"
+						textyoffset="0.00,4.00"
+						texthbehaviour="Resize"
+						textlabel="dy_value_NewState_Text_f12643d8"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</positive>
+			</states>
+		</dy_value>
 		<root
 			this="DCAD44EF-2523-4F85-A39DF0EFD329574B"
 			id="root"
@@ -109,136 +239,6 @@
 				</newstate>
 			</states>
 		</template_corruption>
-		<dy_value
-			this="D87DED7C-9963-4256-81B8225A48D337B2"
-			id="dy_value"
-			offset="258.00,0.00"
-			allowverticalresize="false"
-			docking="Center Right"
-			component_anchor_point="1.00,0.50"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="D87DED7C-9963-4256-81B8225A48D337B2"
-			updatewhennotvisible="true"
-			currentstate="2A114A6D-8E65-472A-B376FF7DEB11E41B"
-			defaultstate="2A114A6D-8E65-472A-B376FF7DEB11E41B">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoCampaignPooledResource"
-					context_function_id="Format(&quot;%d / 100&quot;, Total)"/>
-				<callback_with_context
-					callback_id="ContextStateSetter"
-					context_object_id="CcoCampaignPooledResource"
-					context_function_id="GetIfElse(Total == 0, &quot;positive&quot;, &quot;negative&quot;)"/>
-			</callbackwithcontextlist>
-			<states>
-				<negative
-					this="5DABD3F8-1261-48DF-BD2CA0BFEF2B5B18"
-					name="negative"
-					width="70"
-					height="16"
-					interactive="true"
-					uniqueguid="5DABD3F8-1261-48DF-BD2CA0BFEF2B5B18">
-					<component_text
-						text="99"
-						textvalign="Center"
-						textxoffset="40.00,12.00"
-						textyoffset="0.00,4.00"
-						texthbehaviour="Resize"
-						textlabel="dy_value_NewState_Text_f12643d8"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"
-						font_colour_override_preset_key="red"/>
-				</negative>
-				<positive
-					this="2A114A6D-8E65-472A-B376FF7DEB11E41B"
-					name="positive"
-					width="70"
-					height="16"
-					interactive="true"
-					uniqueguid="2A114A6D-8E65-472A-B376FF7DEB11E41B">
-					<component_text
-						text="99"
-						textvalign="Center"
-						textxoffset="40.00,12.00"
-						textyoffset="0.00,4.00"
-						texthbehaviour="Resize"
-						textlabel="dy_value_NewState_Text_f12643d8"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</positive>
-			</states>
-		</dy_value>
-		<dy_heading_textbox
-			this="7899B069-A968-4338-ABEFE969E6656F70"
-			id="dy_heading_textbox"
-			allowhorizontalresize="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="7899B069-A968-4338-ABEFE969E6656F70"
-			updatewhennotvisible="true"
-			currentstate="940F1550-07F4-4E4E-A25C840A43756E9E"
-			defaultstate="940F1550-07F4-4E4E-A25C840A43756E9E">
-			<states>
-				<newstate
-					this="940F1550-07F4-4E4E-A25C840A43756E9E"
-					name="NewState"
-					width="321"
-					interactive="true"
-					uniqueguid="940F1550-07F4-4E4E-A25C840A43756E9E">
-					<component_text
-						text="Corruption Details"
-						texthalign="Center"
-						textyoffset="8.00,6.00"
-						texthbehaviour="Resize"
-						textlocalised="true"
-						textlabel="dy_heading_textbox_NewState_Text_45d7492a"
-						font_m_font_name="brand_header"
-						font_m_size="14"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="header_14"/>
-				</newstate>
-			</states>
-		</dy_heading_textbox>
-		<corruption_list
-			this="77563C1B-6C8D-4BC6-85E0EE9620AACCA1"
-			id="corruption_list"
-			offset="0.00,36.00"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="77563C1B-6C8D-4BC6-85E0EE9620AACCA1"
-			currentstate="9E67D282-DEFB-42F6-A09CCA77C07AEAAA"
-			defaultstate="9E67D282-DEFB-42F6-A09CCA77C07AEAAA">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextList"
-					context_object_id="CcoCampaignProvince"
-					context_function_id="PooledResourceList.Sort(SortOrder, true)"/>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="9E67D282-DEFB-42F6-A09CCA77C07AEAAA"
-					name="default"
-					width="328"
-					height="28"
-					uniqueguid="9E67D282-DEFB-42F6-A09CCA77C07AEAAA"/>
-			</states>
-			<LayoutEngine
-				type="List"
-				spacing="0.00,8.00"
-				sizetocontent="true"
-				margins="0.00,12.00">
-				<columnwidths>
-					<column width="32"/>
-				</columnwidths>
-			</LayoutEngine>
-		</corruption_list>
 		<tooltip_corruption_total
 			this="34E04F54-DB27-46DB-BF655930CFCC57D6"
 			id="tooltip_corruption_total"

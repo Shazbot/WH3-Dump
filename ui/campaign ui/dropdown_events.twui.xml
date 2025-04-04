@@ -61,37 +61,173 @@
 		</root>
 	</hierarchy>
 	<components>
-		<root
-			this="39BE80D8-9DF8-4C97-84B606E0BCC18B8D"
-			id="root"
-			tooltipslocalised="true"
-			uniqueguid="39BE80D8-9DF8-4C97-84B606E0BCC18B8D"
-			currentstate="5D0A05AD-56DF-41BA-8A573388E2F44B6D">
-			<componentimages>
-				<component_image
-					this="7282CA84-F7F4-4B73-B92CF8763B93D38B"
-					uniqueguid="7282CA84-F7F4-4B73-B92CF8763B93D38B"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="5D0A05AD-56DF-41BA-8A573388E2F44B6D"
-					name="NewState"
-					width="1600"
-					height="900"
-					interactive="true"
-					uniqueguid="5D0A05AD-56DF-41BA-8A573388E2F44B6D">
-					<imagemetrics>
-						<image
-							this="D8042B5D-2757-4F2E-856C0EB0AA0592FD"
-							uniqueguid="D8042B5D-2757-4F2E-856C0EB0AA0592FD"
-							componentimage="7282CA84-F7F4-4B73-B92CF8763B93D38B"
-							width="1280"
-							height="1024"
-							colour="#7F7F7FFF"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-		</root>
+		<bottom
+			this="107CE3EB-F815-4ACA-B03B7DFA9EC51F2A"
+			id="bottom"
+			part_of_template="true"
+			uniqueguid_in_template="14EE31B8-28AF-4A50-93B1E0AF78E85719"
+			uniqueguid="107CE3EB-F815-4ACA-B03B7DFA9EC51F2A"
+			dimensions="15.00,22.00"
+			dock_point="Bottom Center"
+			offset="1.00,21.00"
+			priority="45"
+			sound_category="UI_GBL_TMP_Slider_Arrows">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="4ABA4F41-C3DE-49A9-B2DF68A5E6A33D61"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="378BA587-33CA-495D-9113B93C1B5687B8"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="1CA6D7F8-1220-4988-97EFF17AF64A3403"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="9A664649-FF1E-4C6F-9E7429127D0A2D8F"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="A84BEA93-868D-4E3B-9F180AC3EE797420"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_vertical_bottom_active.png"
+					uniqueguid="FA53DC62-8D61-413E-9EFEBB1570ECE9DA"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_vertical_bottom_pressed.png"
+					uniqueguid="EF23EBD8-DEBC-4D81-9476B2AF2F7EBEA0"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_vertical_bottom_hover.png"
+					uniqueguid="B88A1490-2E14-45E1-AC27F183D2602B91"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="SliderIncrementButton"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="position"/>
+				<property
+					name="disable_override0"
+					value="resizable"/>
+				<property
+					name="stepSize"
+					value="10"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/slider_vertical_bottom_active.png"/>
+				<element value="ui/skins/default/slider_vertical_bottom_pressed.png"/>
+				<element value="ui/skins/default/slider_vertical_bottom_hover.png"/>
+			</override_images>
+		</bottom>
+		<button_flame
+			this="6A88A2AB-EE45-44F2-BBF1CFB49FA8F2B4"
+			id="button_flame"
+			part_of_template="true"
+			uniqueguid_in_template="6FE1FC0F-5802-42C4-86FAF6182751A40E"
+			uniqueguid="6A88A2AB-EE45-44F2-BBF1CFB49FA8F2B4"
+			dimensions="220.00,22.00"
+			dock_point="Center"
+			offset="0.00,1.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="D2AEAEEE-1143-4EEE-B83F29002A7C1B7B"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoStaticObject"
+					context_function_id="self.ParentContext.IsMouseOver &amp;&amp; self.ParentContext.IsDisabled == false">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+				<property
+					name="disable_override1"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+			</override_images>
+		</button_flame>
+		<button_flame
+			this="7DD3BC24-C984-4DE2-927A77C6DD0A723F"
+			id="button_flame"
+			part_of_template="true"
+			uniqueguid_in_template="6FE1FC0F-5802-42C4-86FAF6182751A40E"
+			uniqueguid="7DD3BC24-C984-4DE2-927A77C6DD0A723F"
+			dimensions="220.00,22.00"
+			dock_point="Center"
+			offset="0.00,1.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="B5BF9ABB-3C86-496A-8CBD875F6B0438FE"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoStaticObject"
+					context_function_id="self.ParentContext.IsMouseOver &amp;&amp; self.ParentContext.IsDisabled == false">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+				<property
+					name="disable_override1"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+			</override_images>
+		</button_flame>
 		<button_instant_open_settings
 			this="A5126B5A-A9D6-4C99-A699BF623CCE2B90"
 			id="button_instant_open_settings"
@@ -265,6 +401,78 @@
 				<element value=""/>
 			</override_images>
 		</button_instant_open_settings>
+		<button_txt
+			this="6E29EE78-AC0D-4F3F-9897035AC52182ED"
+			id="button_txt"
+			part_of_template="true"
+			uniqueguid_in_template="D6A2E4B6-1214-40BA-BA74C40191E39905"
+			uniqueguid="6E29EE78-AC0D-4F3F-9897035AC52182ED"
+			dimensions="197.00,30.00"
+			dock_point="Center"
+			priority="50">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="0EE13318-9710-40C4-B8EE234FFC5E9746"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="E5ABE984-DA70-48FE-9693F090F7CA0E22"/>
+			</state_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text
+					text="Enable all"
+					text_label="ComponentText_691a4467"/>
+				<localised_text
+					state="active"
+					text="Enable all"
+					text_label="StateText_d0a6c0a3"/>
+				<localised_text
+					state="inactive"
+					text="Enable all"
+					text_label="StateText_a7f90494"/>
+			</localised_texts>
+		</button_txt>
+		<button_txt
+			this="AE90D1A9-C5E2-4638-A173BC3AD7B36F0C"
+			id="button_txt"
+			part_of_template="true"
+			uniqueguid_in_template="D6A2E4B6-1214-40BA-BA74C40191E39905"
+			uniqueguid="AE90D1A9-C5E2-4638-A173BC3AD7B36F0C"
+			dimensions="197.00,30.00"
+			dock_point="Center"
+			priority="50">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="847C6C0C-8401-4890-AFBC09D061C8ECD6"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="9C66C788-F049-4478-B3E0922AB8A138FB"/>
+			</state_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text
+					text="Disable all"
+					text_label="ComponentText_de8f243"/>
+				<localised_text
+					state="active"
+					text="Disable all"
+					text_label="StateText_6291e7ac"/>
+				<localised_text
+					state="inactive"
+					text="Disable all"
+					text_label="StateText_5882a257"/>
+			</localised_texts>
+		</button_txt>
 		<checkbox_toggle
 			this="69295C83-6008-4E86-B570E3BDCD22FAD3"
 			id="checkbox_toggle"
@@ -481,6 +689,188 @@
 				<element value="ui/skins/default/square_medium_text_underlay.png"/>
 			</override_images>
 		</disable_all_button>
+		<dropdown_events
+			this="B5E98517-13F1-4B16-AFDC631FFDF49238"
+			id="dropdown_events"
+			offset="1308.00,35.00"
+			docking="Top Right"
+			dock_offset="0.00,35.00"
+			component_anchor_point="1.00,0.00"
+			tooltipslocalised="true"
+			uniqueguid="B5E98517-13F1-4B16-AFDC631FFDF49238"
+			currentstate="122C2CA3-E453-48BB-89CA84E1E042BA99"
+			defaultstate="122C2CA3-E453-48BB-89CA84E1E042BA99">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="PanelTabEvents"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="botton_padding"
+					value="8"/>
+				<property
+					name="listview_id"
+					value="null"/>
+				<property
+					name="offset_x"
+					value="0"/>
+				<property
+					name="offset_y"
+					value="-23"/>
+				<property
+					name="resize_anim_index"
+					value="1"/>
+				<property
+					name="resize_anim_panel_min"
+					value="60"/>
+				<property
+					name="top_padding"
+					value="70"/>
+			</userproperties>
+			<states>
+				<newstate
+					this="122C2CA3-E453-48BB-89CA84E1E042BA99"
+					name="NewState"
+					width="292"
+					height="482"
+					uniqueguid="122C2CA3-E453-48BB-89CA84E1E042BA99"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true"
+				secondary_margins="0.00,2.00"
+				margins="6.00,0.00">
+				<columnwidths>
+					<column width="64"/>
+				</columnwidths>
+			</LayoutEngine>
+		</dropdown_events>
+		<dy_text
+			this="41AF0499-5994-44F5-B3D99DCC289AFE3B"
+			id="dy_text"
+			offset="-209.00,4.00"
+			docking="Center Left External"
+			component_anchor_point="1.00,0.50"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="41AF0499-5994-44F5-B3D99DCC289AFE3B"
+			currentstate="AC964684-4151-42D6-B4B5374A91EDBA39"
+			defaultstate="AC964684-4151-42D6-B4B5374A91EDBA39">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoEventFeedCategoryRecord"
+					context_function_id="Name"/>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_function_id="self.ParentContext.SimulateLClick"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+				<property
+					name="dynamic_child_parent"
+					value="checkbox_toggle"/>
+			</userproperties>
+			<states>
+				<newstate
+					this="AC964684-4151-42D6-B4B5374A91EDBA39"
+					name="NewState"
+					width="209"
+					height="24"
+					interactive="true"
+					uniqueguid="AC964684-4151-42D6-B4B5374A91EDBA39">
+					<component_text
+						text="dy_setting"
+						textvalign="Center"
+						textxoffset="12.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="StateText_719b11d1"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+				</newstate>
+			</states>
+		</dy_text>
+		<dy_title
+			this="50DAAA43-DACB-4D33-A809B5A2005A2399"
+			id="dy_title"
+			offset="58.00,0.00"
+			allowhorizontalresize="false"
+			docking="Center Right"
+			component_anchor_point="1.00,0.50"
+			priority="1"
+			tooltipslocalised="true"
+			uniqueguid="50DAAA43-DACB-4D33-A809B5A2005A2399"
+			currentstate="9345257B-B212-4CB2-9D65939ABA65B3F3"
+			defaultstate="9345257B-B212-4CB2-9D65939ABA65B3F3">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignEventFeedMessageDetails"
+					context_function_id="Format(&quot;%s&#10;%s&quot;, Title, PrimaryDetail )">
+					<child_m_user_properties>
+						<property
+							name="suppress_localise_asserts"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoCampaignEventFeedMessageDetails"
+					context_function_id="GetIfElse( IsRead, &quot;read&quot;,&quot;unread&quot; )">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="ReadStatusUpdated"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="min_text_height"
+					value="55"/>
+			</userproperties>
+			<states>
+				<read
+					this="F0A099B3-7884-429A-807862FB878BBC7E"
+					name="read"
+					width="198"
+					height="55"
+					uniqueguid="F0A099B3-7884-429A-807862FB878BBC7E">
+					<component_text
+						text="dy_event_message_name"
+						textvalign="Center"
+						textyoffset="4.00,4.00"
+						texthbehaviour="Resize"
+						textlabel="dy_title_NewState_Text_330068"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_brown_faded"/>
+				</read>
+				<unread
+					this="9345257B-B212-4CB2-9D65939ABA65B3F3"
+					name="unread"
+					width="198"
+					height="55"
+					uniqueguid="9345257B-B212-4CB2-9D65939ABA65B3F3">
+					<component_text
+						text="dy_event dy_event"
+						textvalign="Center"
+						textyoffset="4.00,4.00"
+						texthbehaviour="Resize"
+						textlabel="dy_title_unread_Text_e8d077f3"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+				</unread>
+			</states>
+		</dy_title>
 		<enable_all_button
 			this="96840B3E-315D-46C4-A3B48F7B97A2637A"
 			id="enable_all_button"
@@ -558,298 +948,174 @@
 				<element value="ui/skins/default/square_medium_text_underlay.png"/>
 			</override_images>
 		</enable_all_button>
-		<vslider
-			this="911223C2-C0E3-4DD9-90E6F001667C4AB6"
-			id="vslider"
-			template_id="parchment_slider_vertical"
-			part_of_template="true"
-			uniqueguid_in_template="6C253EE7-62DB-42FC-967ED9468F399339"
-			uniqueguid="911223C2-C0E3-4DD9-90E6F001667C4AB6"
-			dimensions="20.00,373.00"
-			dock_point="Center Left"
-			priority="20">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="ACF22157-8D13-4BD0-83EAE7E10224FFB3"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="A970B069-B4D9-4FA7-83361465F3196BB2"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/slider_vertical_mid.png"
-					uniqueguid="B378C28D-DF6D-4A8E-9BC4016F0D5EB60A"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context callback_id="VSlider"/>
-			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="Notify"
-					value=""/>
-				<property
-					name="Value"
-					value="0"/>
-				<property
-					name="maxValue"
-					value="100"/>
-				<property
-					name="minValue"
-					value="0"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/slider_vertical_mid.png"/>
-			</override_images>
-		</vslider>
-		<bottom
-			this="107CE3EB-F815-4ACA-B03B7DFA9EC51F2A"
-			id="bottom"
-			part_of_template="true"
-			uniqueguid_in_template="14EE31B8-28AF-4A50-93B1E0AF78E85719"
-			uniqueguid="107CE3EB-F815-4ACA-B03B7DFA9EC51F2A"
-			dimensions="15.00,22.00"
-			dock_point="Bottom Center"
-			offset="1.00,21.00"
+		<events_list
+			this="BBCB17DE-1725-43EE-9453E95A3EBEEEAF"
+			id="events_list"
+			offset="0.00,34.00"
+			allowhorizontalresize="false"
 			priority="45"
-			sound_category="UI_GBL_TMP_Slider_Arrows">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="4ABA4F41-C3DE-49A9-B2DF68A5E6A33D61"/>
-				<state_uniqueguid
-					name="down"
-					uniqueguid="378BA587-33CA-495D-9113B93C1B5687B8"/>
-				<state_uniqueguid
-					name="down_off"
-					uniqueguid="1CA6D7F8-1220-4988-97EFF17AF64A3403"/>
-				<state_uniqueguid
-					name="hover"
-					uniqueguid="9A664649-FF1E-4C6F-9E7429127D0A2D8F"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="A84BEA93-868D-4E3B-9F180AC3EE797420"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/slider_vertical_bottom_active.png"
-					uniqueguid="FA53DC62-8D61-413E-9EFEBB1570ECE9DA"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/slider_vertical_bottom_pressed.png"
-					uniqueguid="EF23EBD8-DEBC-4D81-9476B2AF2F7EBEA0"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/slider_vertical_bottom_hover.png"
-					uniqueguid="B88A1490-2E14-45E1-AC27F183D2602B91"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context callback_id="SliderIncrementButton"/>
-			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="disable_override"
-					value="position"/>
-				<property
-					name="disable_override0"
-					value="resizable"/>
-				<property
-					name="stepSize"
-					value="10"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="down"
-					is_text_localised="false"/>
-				<localised_text
-					state="down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/slider_vertical_bottom_active.png"/>
-				<element value="ui/skins/default/slider_vertical_bottom_pressed.png"/>
-				<element value="ui/skins/default/slider_vertical_bottom_hover.png"/>
-			</override_images>
-		</bottom>
-		<button_txt
-			this="6E29EE78-AC0D-4F3F-9897035AC52182ED"
-			id="button_txt"
-			part_of_template="true"
-			uniqueguid_in_template="D6A2E4B6-1214-40BA-BA74C40191E39905"
-			uniqueguid="6E29EE78-AC0D-4F3F-9897035AC52182ED"
-			dimensions="197.00,30.00"
-			dock_point="Center"
-			priority="50">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="0EE13318-9710-40C4-B8EE234FFC5E9746"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="E5ABE984-DA70-48FE-9693F090F7CA0E22"/>
-			</state_uniqueguids>
-			<user_properties>
-				<property
-					name="disable_override"
-					value="instance_resize"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text
-					text="Enable all"
-					text_label="ComponentText_691a4467"/>
-				<localised_text
-					state="active"
-					text="Enable all"
-					text_label="StateText_d0a6c0a3"/>
-				<localised_text
-					state="inactive"
-					text="Enable all"
-					text_label="StateText_a7f90494"/>
-			</localised_texts>
-		</button_txt>
-		<button_txt
-			this="AE90D1A9-C5E2-4638-A173BC3AD7B36F0C"
-			id="button_txt"
-			part_of_template="true"
-			uniqueguid_in_template="D6A2E4B6-1214-40BA-BA74C40191E39905"
-			uniqueguid="AE90D1A9-C5E2-4638-A173BC3AD7B36F0C"
-			dimensions="197.00,30.00"
-			dock_point="Center"
-			priority="50">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="847C6C0C-8401-4890-AFBC09D061C8ECD6"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="9C66C788-F049-4478-B3E0922AB8A138FB"/>
-			</state_uniqueguids>
-			<user_properties>
-				<property
-					name="disable_override"
-					value="instance_resize"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text
-					text="Disable all"
-					text_label="ComponentText_de8f243"/>
-				<localised_text
-					state="active"
-					text="Disable all"
-					text_label="StateText_6291e7ac"/>
-				<localised_text
-					state="inactive"
-					text="Disable all"
-					text_label="StateText_5882a257"/>
-			</localised_texts>
-		</button_txt>
-		<button_flame
-			this="6A88A2AB-EE45-44F2-BBF1CFB49FA8F2B4"
-			id="button_flame"
-			part_of_template="true"
-			uniqueguid_in_template="6FE1FC0F-5802-42C4-86FAF6182751A40E"
-			uniqueguid="6A88A2AB-EE45-44F2-BBF1CFB49FA8F2B4"
-			dimensions="220.00,22.00"
-			dock_point="Center"
-			offset="0.00,1.00"
-			priority="100">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="D2AEAEEE-1143-4EEE-B83F29002A7C1B7B"/>
-			</state_uniqueguids>
-			<callbacks_with_context>
+			uniqueguid="BBCB17DE-1725-43EE-9453E95A3EBEEEAF"
+			currentstate="0A7C4DBF-BCB7-4F7C-BEA3B3D834E120D0"
+			defaultstate="0A7C4DBF-BCB7-4F7C-BEA3B3D834E120D0"
+			comment="if the header is selected or about to be selected ( down always leads to selected )">
+			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoStaticObject"
-					context_function_id="self.ParentContext.IsMouseOver &amp;&amp; self.ParentContext.IsDisabled == false">
+					callback_id="ContextList"
+					context_object_id="CcoCampaignEventFeedGroup"
+					context_function_id="EventList">
 					<child_m_user_properties>
 						<property
-							name="update_constant"
+							name="dont_recreate"
 							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
-			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="disable_override"
-					value="instance_resize"/>
-				<property
-					name="disable_override1"
-					value="position"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value=""/>
-			</override_images>
-		</button_flame>
-		<button_flame
-			this="7DD3BC24-C984-4DE2-927A77C6DD0A723F"
-			id="button_flame"
-			part_of_template="true"
-			uniqueguid_in_template="6FE1FC0F-5802-42C4-86FAF6182751A40E"
-			uniqueguid="7DD3BC24-C984-4DE2-927A77C6DD0A723F"
-			dimensions="220.00,22.00"
-			dock_point="Center"
-			offset="0.00,1.00"
-			priority="100">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="B5BF9ABB-3C86-496A-8CBD875F6B0438FE"/>
-			</state_uniqueguids>
-			<callbacks_with_context>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoStaticObject"
-					context_function_id="self.ParentContext.IsMouseOver &amp;&amp; self.ParentContext.IsDisabled == false">
+					context_object_id="CcoComponent"
+					context_function_id="CurrentState == &quot;selected&quot; || CurrentState == &quot;down&quot;"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="0A7C4DBF-BCB7-4F7C-BEA3B3D834E120D0"
+					name="default"
+					width="256"
+					height="55"
+					uniqueguid="0A7C4DBF-BCB7-4F7C-BEA3B3D834E120D0"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				spacing="0.00,15.00"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="424"/>
+				</columnwidths>
+			</LayoutEngine>
+		</events_list>
+		<event_instant_open_settings
+			this="5F77686B-884F-42D3-A8C17FDB1812AF98"
+			id="event_instant_open_settings"
+			offset="31.00,51.00"
+			allowhorizontalresize="false"
+			docking="Bottom Center External"
+			dock_offset="14.00,50.00"
+			component_anchor_point="0.50,-0.00"
+			priority="50"
+			tooltipslocalised="true"
+			uniqueguid="5F77686B-884F-42D3-A8C17FDB1812AF98"
+			updatewhennotvisible="true"
+			currentstate="A9A060CC-E8CB-4360-8C51C614EA4B253D"
+			defaultstate="A9A060CC-E8CB-4360-8C51C614EA4B253D">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="MouseClickHideCallback">
 					<child_m_user_properties>
 						<property
-							name="update_constant"
+							name="condition"
+							value="CurrentMouseOverComponentContext.Id != &quot;button_instant_open_settings&quot;"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandGiverOnVisibilityChanged"
+					context_function_id="UiMsg(&quot;reset_settings_button&quot;)">
+					<child_m_user_properties>
+						<property
+							name="on_hide"
 							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
-			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="disable_override"
-					value="instance_resize"/>
-				<property
-					name="disable_override1"
-					value="position"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value=""/>
-			</override_images>
-		</button_flame>
+				<callback_with_context callback_id="ContextInitPlayerFaction"/>
+				<callback_with_context callback_id="TopmostObjectCallback"/>
+				<callback_with_context
+					callback_id="ContextCommandEvent"
+					context_function_id="self.SetVisible(false)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="PanelOpened"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="10B6420C-9B63-4498-86194B297006CBD9"
+					uniqueguid="10B6420C-9B63-4498-86194B297006CBD9"
+					imagepath="ui/skins/default/tooltip_frame.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="A9A060CC-E8CB-4360-8C51C614EA4B253D"
+					name="NewState"
+					width="250"
+					height="120"
+					interactive="true"
+					uniqueguid="A9A060CC-E8CB-4360-8C51C614EA4B253D">
+					<imagemetrics>
+						<image
+							this="7544DD63-8BC7-44F0-B846B304B98678A5"
+							uniqueguid="7544DD63-8BC7-44F0-B846B304B98678A5"
+							componentimage="10B6420C-9B63-4498-86194B297006CBD9"
+							width="250"
+							height="120"
+							tile="true"
+							margin="16.00,20.00,16.00,20.00"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+			<animations>
+				<show id="show">
+					<frames>
+						<frame
+							interpolationtime="0"
+							targetmetrics_m_height="60"
+							targetmetrics_m_width="250"
+							targetmetrics_m_offset="-21.00,-120.00">
+							<triggers>
+								<trigger
+									trigger_component="5F77686B-884F-42D3-A8C17FDB1812AF98"
+									trigger_property="Visibility true"/>
+							</triggers>
+						</frame>
+					</frames>
+				</show>
+				<hide id="hide">
+					<frames>
+						<frame
+							interpolationtime="0"
+							targetmetrics_m_height="60"
+							targetmetrics_m_width="250"
+							targetmetrics_m_offset="-21.00,-120.00">
+							<triggers>
+								<trigger
+									trigger_component="5F77686B-884F-42D3-A8C17FDB1812AF98"
+									trigger_property="Visibility false"/>
+							</triggers>
+						</frame>
+					</frames>
+				</hide>
+				<oncreate id="OnCreate">
+					<frames>
+						<frame
+							interpolationtime="0"
+							targetmetrics_m_height="60"
+							targetmetrics_m_width="250"
+							targetmetrics_m_offset="-21.00,-120.00">
+							<triggers>
+								<trigger
+									trigger_component="5F77686B-884F-42D3-A8C17FDB1812AF98"
+									trigger_property="Visibility false"/>
+							</triggers>
+						</frame>
+					</frames>
+				</oncreate>
+			</animations>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true"
+				margins="10.00,10.00">
+				<columnwidths>
+					<column width="250"/>
+				</columnwidths>
+			</LayoutEngine>
+		</event_instant_open_settings>
 		<frame_bottom
 			this="8979D002-EBEC-4113-968E0B57B88D17E2"
 			id="frame_bottom"
@@ -986,216 +1252,6 @@
 				<element value="ui/skins/default/slider_vertical_handle_underlay.png"/>
 			</override_images>
 		</handle>
-		<top
-			this="E091CCB9-F157-4195-AA0BAF0F72F52F33"
-			id="top"
-			part_of_template="true"
-			uniqueguid_in_template="BEE2A27D-90CE-46BB-A4B29AD04E9B9ED0"
-			uniqueguid="E091CCB9-F157-4195-AA0BAF0F72F52F33"
-			dimensions="15.00,22.00"
-			dock_point="Top Center"
-			offset="1.00,-23.00"
-			priority="45"
-			sound_category="UI_GBL_TMP_Slider_Arrows">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="BBA1A7EC-8BA9-40F4-9CD3D66AC34639E7"/>
-				<state_uniqueguid
-					name="down"
-					uniqueguid="93395A33-61BA-4425-9BCDE7B4C4CBA822"/>
-				<state_uniqueguid
-					name="down_off"
-					uniqueguid="B7D705F9-B794-4FC4-9DA7DD1A635F254B"/>
-				<state_uniqueguid
-					name="hover"
-					uniqueguid="E4747C47-181C-4CCD-81D8062B75CE3BF9"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="63EBA9D4-4B8E-43C9-91C658E85F8F6665"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/slider_vertical_top_active.png"
-					uniqueguid="10E902D4-DEDB-4464-B47A314860F9157F"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/slider_vertical_top_pressed.png"
-					uniqueguid="88CEA4C5-E2BF-4E2B-8168872FB85156F9"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/slider_vertical_top_hover.png"
-					uniqueguid="0FC3141A-503A-44EA-8F035DF8209D978F"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context callback_id="SliderDecrementButton"/>
-			</callbacks_with_context>
-			<user_properties>
-				<property
-					name="disable_override"
-					value="position"/>
-				<property
-					name="disable_override0"
-					value="resizable"/>
-				<property
-					name="stepSize"
-					value="10"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="down"
-					is_text_localised="false"/>
-				<localised_text
-					state="down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/slider_vertical_top_active.png"/>
-				<element value="ui/skins/default/slider_vertical_top_pressed.png"/>
-				<element value="ui/skins/default/slider_vertical_top_hover.png"/>
-			</override_images>
-		</top>
-		<dropdown_events
-			this="B5E98517-13F1-4B16-AFDC631FFDF49238"
-			id="dropdown_events"
-			offset="1308.00,35.00"
-			docking="Top Right"
-			dock_offset="0.00,35.00"
-			component_anchor_point="1.00,0.00"
-			tooltipslocalised="true"
-			uniqueguid="B5E98517-13F1-4B16-AFDC631FFDF49238"
-			currentstate="122C2CA3-E453-48BB-89CA84E1E042BA99"
-			defaultstate="122C2CA3-E453-48BB-89CA84E1E042BA99">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="PanelTabEvents"/>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="botton_padding"
-					value="8"/>
-				<property
-					name="listview_id"
-					value="null"/>
-				<property
-					name="offset_x"
-					value="0"/>
-				<property
-					name="offset_y"
-					value="-23"/>
-				<property
-					name="resize_anim_index"
-					value="1"/>
-				<property
-					name="resize_anim_panel_min"
-					value="60"/>
-				<property
-					name="top_padding"
-					value="70"/>
-			</userproperties>
-			<states>
-				<newstate
-					this="122C2CA3-E453-48BB-89CA84E1E042BA99"
-					name="NewState"
-					width="292"
-					height="482"
-					uniqueguid="122C2CA3-E453-48BB-89CA84E1E042BA99"/>
-			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true"
-				secondary_margins="0.00,2.00"
-				margins="6.00,0.00">
-				<columnwidths>
-					<column width="64"/>
-				</columnwidths>
-			</LayoutEngine>
-		</dropdown_events>
-		<dy_title
-			this="50DAAA43-DACB-4D33-A809B5A2005A2399"
-			id="dy_title"
-			offset="58.00,0.00"
-			allowhorizontalresize="false"
-			docking="Center Right"
-			component_anchor_point="1.00,0.50"
-			priority="1"
-			tooltipslocalised="true"
-			uniqueguid="50DAAA43-DACB-4D33-A809B5A2005A2399"
-			currentstate="9345257B-B212-4CB2-9D65939ABA65B3F3"
-			defaultstate="9345257B-B212-4CB2-9D65939ABA65B3F3">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoCampaignEventFeedMessageDetails"
-					context_function_id="Format(&quot;%s&#10;%s&quot;, Title, PrimaryDetail )">
-					<child_m_user_properties>
-						<property
-							name="suppress_localise_asserts"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextStateSetter"
-					context_object_id="CcoCampaignEventFeedMessageDetails"
-					context_function_id="GetIfElse( IsRead, &quot;read&quot;,&quot;unread&quot; )">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="ReadStatusUpdated"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="min_text_height"
-					value="55"/>
-			</userproperties>
-			<states>
-				<read
-					this="F0A099B3-7884-429A-807862FB878BBC7E"
-					name="read"
-					width="198"
-					height="55"
-					uniqueguid="F0A099B3-7884-429A-807862FB878BBC7E">
-					<component_text
-						text="dy_event_message_name"
-						textvalign="Center"
-						textyoffset="4.00,4.00"
-						texthbehaviour="Resize"
-						textlabel="dy_title_NewState_Text_330068"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"
-						font_colour_override_preset_key="ui_font_brown_faded"/>
-				</read>
-				<unread
-					this="9345257B-B212-4CB2-9D65939ABA65B3F3"
-					name="unread"
-					width="198"
-					height="55"
-					uniqueguid="9345257B-B212-4CB2-9D65939ABA65B3F3">
-					<component_text
-						text="dy_event dy_event"
-						textvalign="Center"
-						textyoffset="4.00,4.00"
-						texthbehaviour="Resize"
-						textlabel="dy_title_unread_Text_e8d077f3"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"
-						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
-				</unread>
-			</states>
-		</dy_title>
 		<hbar
 			this="18591046-E141-4C7E-8A06FFC101277D52"
 			id="hbar"
@@ -1235,6 +1291,26 @@
 				</newstate>
 			</states>
 		</hbar>
+		<header
+			this="409425E8-72DF-4FDE-9BC13E60EE5B56AA"
+			id="header"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="45"
+			tooltipslocalised="true"
+			uniqueguid="409425E8-72DF-4FDE-9BC13E60EE5B56AA"
+			currentstate="83F065F1-E517-4D76-87C357C81F194BEB"
+			defaultstate="83F065F1-E517-4D76-87C357C81F194BEB">
+			<states>
+				<newstate
+					this="83F065F1-E517-4D76-87C357C81F194BEB"
+					name="NewState"
+					width="290"
+					height="40"
+					interactive="true"
+					uniqueguid="83F065F1-E517-4D76-87C357C81F194BEB"/>
+			</states>
+		</header>
 		<listview
 			this="F7D16D69-35C8-45C1-9FF9EAFFEEB6DB93"
 			id="listview"
@@ -1353,6 +1429,42 @@
 				</columnwidths>
 			</LayoutEngine>
 		</list_clip>
+		<notification_settings_list
+			this="C77F4279-019B-4782-B0E1CFC5D4094FF9"
+			id="notification_settings_list"
+			offset="0.00,10.00"
+			allowhorizontalresize="false"
+			priority="50"
+			tooltipslocalised="true"
+			uniqueguid="C77F4279-019B-4782-B0E1CFC5D4094FF9"
+			updatewhennotvisible="true"
+			currentstate="E264F60F-D845-4894-87AC7C0F3F694214"
+			defaultstate="E264F60F-D845-4894-87AC7C0F3F694214">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoEventFeedCategoryRecord"
+					context_function_id="RecordList.Filter(Key != &quot;wh_event_category_world&quot;)"/>
+				<callback_with_context
+					callback_id="ContextInitDatabaseRecord"
+					context_object_id="CcoEventFeedCategoryRecord"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="E264F60F-D845-4894-87AC7C0F3F694214"
+					name="NewState"
+					width="250"
+					interactive="true"
+					uniqueguid="E264F60F-D845-4894-87AC7C0F3F694214"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="250"/>
+				</columnwidths>
+			</LayoutEngine>
+		</notification_settings_list>
 		<panel
 			this="0E46C489-EE2D-4C2F-B6E4DD1B84DE8F72"
 			id="panel"
@@ -1469,293 +1581,194 @@
 				</columnwidths>
 			</LayoutEngine>
 		</panel>
-		<template_row
-			this="C5871A03-0AB3-49E2-A2B9694D214617D0"
-			id="template_row"
-			allowhorizontalresize="false"
-			priority="10"
-			tooltipslocalised="true"
-			soundcategory="UI_CAM_HUD_Generic_Click"
-			uniqueguid="C5871A03-0AB3-49E2-A2B9694D214617D0"
-			currentstate="BE4D7B84-F02A-4B7D-AED4B1475DFB26D6"
-			defaultstate="BE4D7B84-F02A-4B7D-AED4B1475DFB26D6"
-			comment="The icon component will be dynamically be appended by EventMessageIcon callback">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="EventMessageIcon"
-					context_object_id="CcoCampaignEventFeedMessageDetails"/>
-				<callback_with_context
-					callback_id="ContextCommandLeftClick"
-					context_object_id="CcoCampaignEventFeedMessageDetails"
-					context_function_id="ZoomTo"/>
-				<callback_with_context
-					callback_id="ContextCommandMouseOn"
-					context_object_id="CcoCampaignEventFeedMessageDetails"
-					context_function_id="MarkAsRead"/>
-				<callback_with_context callback_id="ResizeToFitTarget">
-					<child_m_user_properties>
-						<property
-							name="target"
-							value="dy_title"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="9498D917-5A7A-4DF4-B837F6C29B2D6520"
-					uniqueguid="9498D917-5A7A-4DF4-B837F6C29B2D6520"
-					imagepath="ui/skins/default/parchment_row_pressed.png"/>
-				<component_image
-					this="66C9FE42-0C29-4879-9D6E9C312739C588"
-					uniqueguid="66C9FE42-0C29-4879-9D6E9C312739C588"
-					imagepath="ui/skins/default/parchment_row_pressed_underline.png"/>
-				<component_image
-					this="CACD7D3A-B0AF-4E82-86D39D13D87A5A16"
-					uniqueguid="CACD7D3A-B0AF-4E82-86D39D13D87A5A16"
-					imagepath="ui/skins/default/parchment_row_selected.png"/>
-				<component_image
-					this="4AD4E16C-9B00-4DA1-AB7A1B86A4AD4FC6"
-					uniqueguid="4AD4E16C-9B00-4DA1-AB7A1B86A4AD4FC6"
-					imagepath="ui/skins/default/parchment_row_selected_underline.png"/>
-			</componentimages>
-			<states>
-				<down
-					this="CDCD874A-556B-4983-B39D8679BC5560AC"
-					name="down"
-					width="256"
-					height="55"
-					interactive="true"
-					uniqueguid="CDCD874A-556B-4983-B39D8679BC5560AC"
-					stateeditordisplaypos="107.00,303.00">
-					<imagemetrics>
-						<image
-							this="C29CB6C1-C065-43F0-8E1087530645EB0B"
-							uniqueguid="C29CB6C1-C065-43F0-8E1087530645EB0B"
-							componentimage="9498D917-5A7A-4DF4-B837F6C29B2D6520"
-							width="256"
-							height="55"/>
-						<image
-							this="790EEB5E-EDF5-487C-A08A0FC971B51C15"
-							uniqueguid="790EEB5E-EDF5-487C-A08A0FC971B51C15"
-							componentimage="66C9FE42-0C29-4879-9D6E9C312739C588"
-							offset="0.00,29.00"
-							width="256"
-							height="31"
-							dockpoint="Bottom Center"
-							dock_offset="0.00,5.00"
-							canresizeheight="false"/>
-					</imagemetrics>
-					<transitionmap>
-						<transition
-							index="3"
-							transition_m_target_state="3C90E209-853F-4B9D-AF9CCDF9BBBBC909"
-							transition_m_interpolation_property_mask="64"/>
-						<transition
-							index="1"
-							transition_m_target_state="793222A7-D59C-495E-9CB3CDFDE77974ED"
-							transition_m_interpolation_property_mask="64"/>
-					</transitionmap>
-				</down>
-				<down_off
-					this="793222A7-D59C-495E-9CB3CDFDE77974ED"
-					name="down_off"
-					width="256"
-					height="55"
-					interactive="true"
-					uniqueguid="793222A7-D59C-495E-9CB3CDFDE77974ED"
-					stateeditordisplaypos="186.00,215.00">
-					<transitionmap>
-						<transition
-							transition_m_target_state="CDCD874A-556B-4983-B39D8679BC5560AC"
-							transition_m_interpolation_property_mask="64"/>
-						<transition
-							index="8"
-							transition_m_target_state="BE4D7B84-F02A-4B7D-AED4B1475DFB26D6"/>
-					</transitionmap>
-				</down_off>
-				<hover
-					this="3C90E209-853F-4B9D-AF9CCDF9BBBBC909"
-					name="hover"
-					width="256"
-					height="55"
-					interactive="true"
-					uniqueguid="3C90E209-853F-4B9D-AF9CCDF9BBBBC909"
-					stateeditordisplaypos="40.00,207.00">
-					<imagemetrics>
-						<image
-							this="28C3B874-B9AD-4549-B5072A7636C941C2"
-							uniqueguid="28C3B874-B9AD-4549-B5072A7636C941C2"
-							componentimage="CACD7D3A-B0AF-4E82-86D39D13D87A5A16"
-							width="256"
-							height="55"/>
-						<image
-							this="F15A8E91-8976-453B-8507FE7619768DD5"
-							uniqueguid="F15A8E91-8976-453B-8507FE7619768DD5"
-							componentimage="4AD4E16C-9B00-4DA1-AB7A1B86A4AD4FC6"
-							offset="0.00,29.00"
-							width="256"
-							height="28"
-							dockpoint="Bottom Center"
-							dock_offset="0.00,2.00"
-							margin="10.00,5.00,25.00,5.00"/>
-					</imagemetrics>
-					<transitionmap>
-						<transition
-							index="1"
-							transition_m_target_state="BE4D7B84-F02A-4B7D-AED4B1475DFB26D6"
-							transition_m_transition_time="100"
-							transition_m_interpolation_property_mask="64"/>
-						<transition
-							index="2"
-							transition_m_target_state="CDCD874A-556B-4983-B39D8679BC5560AC"
-							transition_m_interpolation_property_mask="64"/>
-					</transitionmap>
-				</hover>
-				<selected
-					this="02152EFC-74AA-4899-B3EC5ED9A89BB2D7"
-					name="selected"
-					width="256"
-					height="55"
-					interactive="true"
-					uniqueguid="02152EFC-74AA-4899-B3EC5ED9A89BB2D7"
-					stateeditordisplaypos="259.00,204.00">
-					<imagemetrics>
-						<image
-							this="5E23A44B-582F-4529-AE3335787251073C"
-							uniqueguid="5E23A44B-582F-4529-AE3335787251073C"
-							componentimage="CACD7D3A-B0AF-4E82-86D39D13D87A5A16"
-							width="256"
-							height="55"/>
-						<image
-							this="FC71FE0D-25C9-4864-8665FE5DAF6B1052"
-							uniqueguid="FC71FE0D-25C9-4864-8665FE5DAF6B1052"
-							componentimage="4AD4E16C-9B00-4DA1-AB7A1B86A4AD4FC6"
-							offset="0.00,29.00"
-							width="256"
-							height="31"
-							dockpoint="Bottom Center"
-							dock_offset="0.00,5.00"
-							canresizeheight="false"/>
-					</imagemetrics>
-				</selected>
-				<unselected
-					this="BE4D7B84-F02A-4B7D-AED4B1475DFB26D6"
-					name="unselected"
-					width="256"
-					height="55"
-					interactive="true"
-					uniqueguid="BE4D7B84-F02A-4B7D-AED4B1475DFB26D6"
-					stateeditordisplaypos="112.00,91.00">
-					<transitionmap>
-						<transition
-							transition_m_target_state="3C90E209-853F-4B9D-AF9CCDF9BBBBC909"
-							transition_m_transition_time="100"
-							transition_m_interpolation_property_mask="64"/>
-					</transitionmap>
-				</unselected>
-			</states>
-		</template_row>
-		<tx_title
-			this="F153E4A9-F3D6-40C1-9F6BCA862E0BFC69"
-			id="tx_title"
-			offset="0.00,10.00"
+		<panel_smoke_t
+			this="C3029DD8-21E1-4F82-94E436DD62CF5ECC"
+			id="panel_smoke_t"
+			offset="9.00,8.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			docking="Top Center"
-			dock_offset="0.00,10.00"
+			dock_offset="1.00,8.00"
 			component_anchor_point="0.50,0.00"
-			priority="45"
+			priority="100"
 			tooltipslocalised="true"
-			uniqueguid="F153E4A9-F3D6-40C1-9F6BCA862E0BFC69"
-			currentstate="01F58BF2-D459-4E8F-828CF49D68AF84C0"
-			defaultstate="01F58BF2-D459-4E8F-828CF49D68AF84C0">
-			<states>
-				<newstate
-					this="01F58BF2-D459-4E8F-828CF49D68AF84C0"
-					name="NewState"
-					width="290"
-					height="24"
-					interactive="true"
-					uniqueguid="01F58BF2-D459-4E8F-828CF49D68AF84C0">
-					<component_text
-						text="Event Messages"
-						textvalign="Center"
-						texthalign="Center"
-						textlocalised="true"
-						textlabel="tab_events_Tooltip_3a006e"
-						font_m_font_name="brand_header"
-						font_m_size="14"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="header_14"
-						font_colour_override_preset_key="link"
-						textshadervars="0.00,1.00,2.00,0.00"/>
-				</newstate>
-			</states>
-		</tx_title>
-		<header
-			this="409425E8-72DF-4FDE-9BC13E60EE5B56AA"
-			id="header"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			priority="45"
-			tooltipslocalised="true"
-			uniqueguid="409425E8-72DF-4FDE-9BC13E60EE5B56AA"
-			currentstate="83F065F1-E517-4D76-87C357C81F194BEB"
-			defaultstate="83F065F1-E517-4D76-87C357C81F194BEB">
-			<states>
-				<newstate
-					this="83F065F1-E517-4D76-87C357C81F194BEB"
-					name="NewState"
-					width="290"
-					height="40"
-					interactive="true"
-					uniqueguid="83F065F1-E517-4D76-87C357C81F194BEB"/>
-			</states>
-		</header>
-		<events_list
-			this="BBCB17DE-1725-43EE-9453E95A3EBEEEAF"
-			id="events_list"
-			offset="0.00,34.00"
-			allowhorizontalresize="false"
-			priority="45"
-			uniqueguid="BBCB17DE-1725-43EE-9453E95A3EBEEEAF"
-			currentstate="0A7C4DBF-BCB7-4F7C-BEA3B3D834E120D0"
-			defaultstate="0A7C4DBF-BCB7-4F7C-BEA3B3D834E120D0"
-			comment="if the header is selected or about to be selected ( down always leads to selected )">
+			uniqueguid="C3029DD8-21E1-4F82-94E436DD62CF5ECC"
+			currentstate="32436FDB-161D-484F-BDE8A2CBC895C888"
+			defaultstate="32436FDB-161D-484F-BDE8A2CBC895C888">
 			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextList"
-					context_object_id="CcoCampaignEventFeedGroup"
-					context_function_id="EventList">
-					<child_m_user_properties>
-						<property
-							name="dont_recreate"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoComponent"
-					context_function_id="CurrentState == &quot;selected&quot; || CurrentState == &quot;down&quot;"/>
+				<callback_with_context callback_id="ResizeToFitParent"/>
 			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="84CB6EB3-234A-46E6-92A49290F86A9931"
+					uniqueguid="84CB6EB3-234A-46E6-92A49290F86A9931"/>
+			</componentimages>
 			<states>
 				<default
-					this="0A7C4DBF-BCB7-4F7C-BEA3B3D834E120D0"
+					this="32436FDB-161D-484F-BDE8A2CBC895C888"
 					name="default"
-					width="256"
-					height="55"
-					uniqueguid="0A7C4DBF-BCB7-4F7C-BEA3B3D834E120D0"/>
+					width="274"
+					height="216"
+					material_name="ui/effects/materials/magic_flame.xml.material"
+					uniqueguid="32436FDB-161D-484F-BDE8A2CBC895C888">
+					<imagemetrics>
+						<image
+							this="C29FF808-67F5-4E26-BA2D5CC69936A9EF"
+							uniqueguid="C29FF808-67F5-4E26-BA2D5CC69936A9EF"
+							componentimage="84CB6EB3-234A-46E6-92A49290F86A9931"
+							width="274"
+							height="216"/>
+					</imagemetrics>
+					<material_m_parameter_overrides>
+						<property
+							name="distortion_strength"
+							x="0.200000003"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="true"/>
+						<property
+							name="flow_speed"
+							x="-0.00999999978"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="true"/>
+						<property
+							name="sparkle_distortion"
+							x="0.100000001"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="false"/>
+						<property
+							name="sparkle_ro"
+							x="0"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="false"/>
+						<property
+							name="sparkle_speed1"
+							x="0.150000006"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="false"/>
+						<property
+							name="sparkle_speed2"
+							x="0.100000001"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="false"/>
+						<property
+							name="sparkle_strength"
+							x="0"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="true"/>
+						<property
+							name="sparkle_tiling"
+							x="2"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="false"/>
+						<property
+							name="uv_distortion_pan"
+							x="0.100000001"
+							y="0.100000001"
+							z="0"
+							w="0"
+							is_override_of_default="true"/>
+						<property
+							name="u_tiling"
+							x="8"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="false"/>
+						<property
+							name="v_tiling"
+							x="5"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="false"/>
+						<property
+							name="heat_percent"
+							x="1"
+							y="0"
+							z="0"
+							w="0"
+							is_override_of_default="false"/>
+					</material_m_parameter_overrides>
+					<material_m_texture_overrides>
+						<property
+							slot_id="t_xml_effect_colours"
+							filepath="ui\effects\textures\effect_panel_smoke.dds"
+							is_override_of_default="true"/>
+						<property
+							slot_id="t_xml_heat_mask"
+							filepath="ui\effects\textures\panel_smoke_heat_DU.dds"
+							is_override_of_default="true"/>
+						<property
+							slot_id="t_xml_shape_flow"
+							filepath="ui\effects\textures\magic_flame_flow_UD.dds"
+							is_override_of_default="true"/>
+						<property
+							slot_id="t_xml_uv_distortion"
+							filepath="commontextures\cloud_shadow_02.dds"
+							is_override_of_default="false"/>
+						<property
+							slot_id="t_xml_uv_element"
+							filepath="commontextures\default_noise1.dds"
+							is_override_of_default="false"/>
+						<property
+							slot_id="t_xml_general_mask"
+							filepath="commontextures\default_white.dds"
+							is_override_of_default="false"/>
+						<property
+							slot_id="t_xml_sparkle1"
+							filepath="commontextures\volumetric_noise.dds"
+							is_override_of_default="false"/>
+					</material_m_texture_overrides>
+				</default>
 			</states>
-			<LayoutEngine
-				type="List"
-				spacing="0.00,15.00"
-				sizetocontent="true">
-				<columnwidths>
-					<column width="424"/>
-				</columnwidths>
-			</LayoutEngine>
-		</events_list>
+		</panel_smoke_t>
+		<root
+			this="39BE80D8-9DF8-4C97-84B606E0BCC18B8D"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="39BE80D8-9DF8-4C97-84B606E0BCC18B8D"
+			currentstate="5D0A05AD-56DF-41BA-8A573388E2F44B6D">
+			<componentimages>
+				<component_image
+					this="7282CA84-F7F4-4B73-B92CF8763B93D38B"
+					uniqueguid="7282CA84-F7F4-4B73-B92CF8763B93D38B"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="5D0A05AD-56DF-41BA-8A573388E2F44B6D"
+					name="NewState"
+					width="1600"
+					height="900"
+					interactive="true"
+					uniqueguid="5D0A05AD-56DF-41BA-8A573388E2F44B6D">
+					<imagemetrics>
+						<image
+							this="D8042B5D-2757-4F2E-856C0EB0AA0592FD"
+							uniqueguid="D8042B5D-2757-4F2E-856C0EB0AA0592FD"
+							componentimage="7282CA84-F7F4-4B73-B92CF8763B93D38B"
+							width="1280"
+							height="1024"
+							colour="#7F7F7FFF"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</root>
 		<row_header
 			this="B76BC5E2-EA8F-48B7-841EB86D88ACDBB5"
 			id="row_header"
@@ -1925,13 +1938,13 @@
 					</imagemetrics>
 					<transitionmap>
 						<transition
-							index="3"
-							transition_m_target_state="BEABE2D9-F861-453C-AC8068A6FDFC66A4"/>
-						<transition
 							index="1"
 							transition_m_target_state="47282535-393E-4E2A-B4A888F1062F5297"
 							transition_m_transition_time="200"
 							transition_m_interpolation_property_mask="64"/>
+						<transition
+							index="3"
+							transition_m_target_state="BEABE2D9-F861-453C-AC8068A6FDFC66A4"/>
 					</transitionmap>
 					<component_text
 						text="dy_TITLE"
@@ -2172,13 +2185,13 @@
 					</imagemetrics>
 					<transitionmap>
 						<transition
-							index="3"
-							transition_m_target_state="40FB049B-AC80-41E0-9B9599675936BB19"/>
-						<transition
 							index="1"
 							transition_m_target_state="368B8C11-BFC4-40DE-A48C49C364610710"
 							transition_m_transition_time="200"
 							transition_m_interpolation_property_mask="64"/>
+						<transition
+							index="3"
+							transition_m_target_state="40FB049B-AC80-41E0-9B9599675936BB19"/>
 					</transitionmap>
 					<component_text
 						text="dy_TITLE"
@@ -2341,191 +2354,27 @@
 				</selected_inactive>
 			</states>
 		</row_header>
-		<template_event_group
-			this="1EF4A74B-7C36-48B3-B293CBC588DE4430"
-			id="template_event_group"
-			offset="10.00,5.00"
-			allowhorizontalresize="false"
-			priority="45"
-			tooltipslocalised="true"
-			soundcategory="UI_GBL_TMP_DropDown_List"
-			uniqueguid="1EF4A74B-7C36-48B3-B293CBC588DE4430"
-			currentstate="5C752D0B-204D-4B98-8262C4FE14B05A70"
-			defaultstate="5C752D0B-204D-4B98-8262C4FE14B05A70">
-			<states>
-				<default
-					this="5C752D0B-204D-4B98-8262C4FE14B05A70"
-					name="default"
-					width="258"
-					height="89"
-					interactive="true"
-					uniqueguid="5C752D0B-204D-4B98-8262C4FE14B05A70"/>
-			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true">
-				<columnwidths>
-					<column width="834"/>
-				</columnwidths>
-			</LayoutEngine>
-		</template_event_group>
-		<panel_smoke_t
-			this="C3029DD8-21E1-4F82-94E436DD62CF5ECC"
-			id="panel_smoke_t"
-			offset="9.00,8.00"
+		<settings_holder
+			this="1B97643A-DC64-4C9E-9A6210C5508645B2"
+			id="settings_holder"
+			offset="6.00,6.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
-			docking="Top Center"
-			dock_offset="1.00,8.00"
-			component_anchor_point="0.50,0.00"
-			priority="100"
+			dock_offset="6.00,0.00"
+			priority="50"
 			tooltipslocalised="true"
-			uniqueguid="C3029DD8-21E1-4F82-94E436DD62CF5ECC"
-			currentstate="32436FDB-161D-484F-BDE8A2CBC895C888"
-			defaultstate="32436FDB-161D-484F-BDE8A2CBC895C888">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="ResizeToFitParent"/>
-			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="84CB6EB3-234A-46E6-92A49290F86A9931"
-					uniqueguid="84CB6EB3-234A-46E6-92A49290F86A9931"/>
-			</componentimages>
+			uniqueguid="1B97643A-DC64-4C9E-9A6210C5508645B2"
+			currentstate="910FDD9F-A83A-4926-BDCBF014F13333CC"
+			defaultstate="910FDD9F-A83A-4926-BDCBF014F13333CC">
 			<states>
 				<default
-					this="32436FDB-161D-484F-BDE8A2CBC895C888"
+					this="910FDD9F-A83A-4926-BDCBF014F13333CC"
 					name="default"
-					width="274"
-					height="216"
-					material_name="ui/effects/materials/magic_flame.xml.material"
-					uniqueguid="32436FDB-161D-484F-BDE8A2CBC895C888">
-					<imagemetrics>
-						<image
-							this="C29FF808-67F5-4E26-BA2D5CC69936A9EF"
-							uniqueguid="C29FF808-67F5-4E26-BA2D5CC69936A9EF"
-							componentimage="84CB6EB3-234A-46E6-92A49290F86A9931"
-							width="274"
-							height="216"/>
-					</imagemetrics>
-					<material_m_parameter_overrides>
-						<property
-							name="distortion_strength"
-							x="0.200000003"
-							y="0"
-							z="0"
-							w="0"
-							is_override_of_default="true"/>
-						<property
-							name="flow_speed"
-							x="-0.00999999978"
-							y="0"
-							z="0"
-							w="0"
-							is_override_of_default="true"/>
-						<property
-							name="sparkle_distortion"
-							x="0.100000001"
-							y="0"
-							z="0"
-							w="0"
-							is_override_of_default="false"/>
-						<property
-							name="sparkle_ro"
-							x="0"
-							y="0"
-							z="0"
-							w="0"
-							is_override_of_default="false"/>
-						<property
-							name="sparkle_speed1"
-							x="0.150000006"
-							y="0"
-							z="0"
-							w="0"
-							is_override_of_default="false"/>
-						<property
-							name="sparkle_speed2"
-							x="0.100000001"
-							y="0"
-							z="0"
-							w="0"
-							is_override_of_default="false"/>
-						<property
-							name="sparkle_strength"
-							x="0"
-							y="0"
-							z="0"
-							w="0"
-							is_override_of_default="true"/>
-						<property
-							name="sparkle_tiling"
-							x="2"
-							y="0"
-							z="0"
-							w="0"
-							is_override_of_default="false"/>
-						<property
-							name="uv_distortion_pan"
-							x="0.100000001"
-							y="0.100000001"
-							z="0"
-							w="0"
-							is_override_of_default="true"/>
-						<property
-							name="u_tiling"
-							x="8"
-							y="0"
-							z="0"
-							w="0"
-							is_override_of_default="false"/>
-						<property
-							name="v_tiling"
-							x="5"
-							y="0"
-							z="0"
-							w="0"
-							is_override_of_default="false"/>
-						<property
-							name="heat_percent"
-							x="1"
-							y="0"
-							z="0"
-							w="0"
-							is_override_of_default="false"/>
-					</material_m_parameter_overrides>
-					<material_m_texture_overrides>
-						<property
-							slot_id="t_xml_effect_colours"
-							filepath="ui\effects\textures\effect_panel_smoke.dds"
-							is_override_of_default="true"/>
-						<property
-							slot_id="t_xml_heat_mask"
-							filepath="ui\effects\textures\panel_smoke_heat_DU.dds"
-							is_override_of_default="true"/>
-						<property
-							slot_id="t_xml_shape_flow"
-							filepath="ui\effects\textures\magic_flame_flow_UD.dds"
-							is_override_of_default="true"/>
-						<property
-							slot_id="t_xml_uv_distortion"
-							filepath="commontextures\cloud_shadow_02.dds"
-							is_override_of_default="false"/>
-						<property
-							slot_id="t_xml_uv_element"
-							filepath="commontextures\default_noise1.dds"
-							is_override_of_default="false"/>
-						<property
-							slot_id="t_xml_general_mask"
-							filepath="commontextures\default_white.dds"
-							is_override_of_default="false"/>
-						<property
-							slot_id="t_xml_sparkle1"
-							filepath="commontextures\volumetric_noise.dds"
-							is_override_of_default="false"/>
-					</material_m_texture_overrides>
-				</default>
+					width="284"
+					height="1"
+					uniqueguid="910FDD9F-A83A-4926-BDCBF014F13333CC"/>
 			</states>
-		</panel_smoke_t>
+		</settings_holder>
 		<slider_parent
 			this="AA603B75-76F8-4D1E-B2DADB72D0EB6F05"
 			id="slider_parent"
@@ -2582,216 +2431,220 @@
 					uniqueguid="768FD458-04F6-4A6C-B9B09A8E3305CE00"/>
 			</states>
 		</slider_parent>
-		<dy_text
-			this="41AF0499-5994-44F5-B3D99DCC289AFE3B"
-			id="dy_text"
-			offset="-209.00,4.00"
-			docking="Center Left External"
-			component_anchor_point="1.00,0.50"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="41AF0499-5994-44F5-B3D99DCC289AFE3B"
-			currentstate="AC964684-4151-42D6-B4B5374A91EDBA39"
-			defaultstate="AC964684-4151-42D6-B4B5374A91EDBA39">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoEventFeedCategoryRecord"
-					context_function_id="Name"/>
-				<callback_with_context
-					callback_id="ContextCommandLeftClick"
-					context_function_id="self.ParentContext.SimulateLClick"/>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-				<property
-					name="dynamic_child_parent"
-					value="checkbox_toggle"/>
-			</userproperties>
-			<states>
-				<newstate
-					this="AC964684-4151-42D6-B4B5374A91EDBA39"
-					name="NewState"
-					width="209"
-					height="24"
-					interactive="true"
-					uniqueguid="AC964684-4151-42D6-B4B5374A91EDBA39">
-					<component_text
-						text="dy_setting"
-						textvalign="Center"
-						textxoffset="12.00,0.00"
-						texthbehaviour="Never split"
-						textlabel="StateText_719b11d1"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_10"
-						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
-				</newstate>
-			</states>
-		</dy_text>
-		<event_instant_open_settings
-			this="5F77686B-884F-42D3-A8C17FDB1812AF98"
-			id="event_instant_open_settings"
-			offset="31.00,51.00"
+		<template_event_group
+			this="1EF4A74B-7C36-48B3-B293CBC588DE4430"
+			id="template_event_group"
+			offset="10.00,5.00"
 			allowhorizontalresize="false"
-			docking="Bottom Center External"
-			dock_offset="14.00,50.00"
-			component_anchor_point="0.50,-0.00"
-			priority="50"
+			priority="45"
 			tooltipslocalised="true"
-			uniqueguid="5F77686B-884F-42D3-A8C17FDB1812AF98"
-			updatewhennotvisible="true"
-			currentstate="A9A060CC-E8CB-4360-8C51C614EA4B253D"
-			defaultstate="A9A060CC-E8CB-4360-8C51C614EA4B253D">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="MouseClickHideCallback">
-					<child_m_user_properties>
-						<property
-							name="condition"
-							value="CurrentMouseOverComponentContext.Id != &quot;button_instant_open_settings&quot;"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextCommandGiverOnVisibilityChanged"
-					context_function_id="UiMsg(&quot;reset_settings_button&quot;)">
-					<child_m_user_properties>
-						<property
-							name="on_hide"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context callback_id="ContextInitPlayerFaction"/>
-				<callback_with_context callback_id="TopmostObjectCallback"/>
-				<callback_with_context
-					callback_id="ContextCommandEvent"
-					context_function_id="self.SetVisible(false)">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="PanelOpened"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="10B6420C-9B63-4498-86194B297006CBD9"
-					uniqueguid="10B6420C-9B63-4498-86194B297006CBD9"
-					imagepath="ui/skins/default/tooltip_frame.png"/>
-			</componentimages>
+			soundcategory="UI_GBL_TMP_DropDown_List"
+			uniqueguid="1EF4A74B-7C36-48B3-B293CBC588DE4430"
+			currentstate="5C752D0B-204D-4B98-8262C4FE14B05A70"
+			defaultstate="5C752D0B-204D-4B98-8262C4FE14B05A70">
 			<states>
-				<newstate
-					this="A9A060CC-E8CB-4360-8C51C614EA4B253D"
-					name="NewState"
-					width="250"
-					height="120"
+				<default
+					this="5C752D0B-204D-4B98-8262C4FE14B05A70"
+					name="default"
+					width="258"
+					height="89"
 					interactive="true"
-					uniqueguid="A9A060CC-E8CB-4360-8C51C614EA4B253D">
-					<imagemetrics>
-						<image
-							this="7544DD63-8BC7-44F0-B846B304B98678A5"
-							uniqueguid="7544DD63-8BC7-44F0-B846B304B98678A5"
-							componentimage="10B6420C-9B63-4498-86194B297006CBD9"
-							width="250"
-							height="120"
-							tile="true"
-							margin="16.00,20.00,16.00,20.00"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-			<animations>
-				<show id="show">
-					<frames>
-						<frame
-							interpolationtime="0"
-							targetmetrics_m_height="60"
-							targetmetrics_m_width="250"
-							targetmetrics_m_offset="-21.00,-120.00">
-							<triggers>
-								<trigger
-									trigger_component="5F77686B-884F-42D3-A8C17FDB1812AF98"
-									trigger_property="Visibility true"/>
-							</triggers>
-						</frame>
-					</frames>
-				</show>
-				<hide id="hide">
-					<frames>
-						<frame
-							interpolationtime="0"
-							targetmetrics_m_height="60"
-							targetmetrics_m_width="250"
-							targetmetrics_m_offset="-21.00,-120.00">
-							<triggers>
-								<trigger
-									trigger_component="5F77686B-884F-42D3-A8C17FDB1812AF98"
-									trigger_property="Visibility false"/>
-							</triggers>
-						</frame>
-					</frames>
-				</hide>
-				<oncreate id="OnCreate">
-					<frames>
-						<frame
-							interpolationtime="0"
-							targetmetrics_m_height="60"
-							targetmetrics_m_width="250"
-							targetmetrics_m_offset="-21.00,-120.00">
-							<triggers>
-								<trigger
-									trigger_component="5F77686B-884F-42D3-A8C17FDB1812AF98"
-									trigger_property="Visibility false"/>
-							</triggers>
-						</frame>
-					</frames>
-				</oncreate>
-			</animations>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true"
-				margins="10.00,10.00">
-				<columnwidths>
-					<column width="250"/>
-				</columnwidths>
-			</LayoutEngine>
-		</event_instant_open_settings>
-		<notification_settings_list
-			this="C77F4279-019B-4782-B0E1CFC5D4094FF9"
-			id="notification_settings_list"
-			offset="0.00,10.00"
-			allowhorizontalresize="false"
-			priority="50"
-			tooltipslocalised="true"
-			uniqueguid="C77F4279-019B-4782-B0E1CFC5D4094FF9"
-			updatewhennotvisible="true"
-			currentstate="E264F60F-D845-4894-87AC7C0F3F694214"
-			defaultstate="E264F60F-D845-4894-87AC7C0F3F694214">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextList"
-					context_object_id="CcoEventFeedCategoryRecord"
-					context_function_id="RecordList.Filter(Key != &quot;wh_event_category_world&quot;)"/>
-				<callback_with_context
-					callback_id="ContextInitDatabaseRecord"
-					context_object_id="CcoEventFeedCategoryRecord"/>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="E264F60F-D845-4894-87AC7C0F3F694214"
-					name="NewState"
-					width="250"
-					interactive="true"
-					uniqueguid="E264F60F-D845-4894-87AC7C0F3F694214"/>
+					uniqueguid="5C752D0B-204D-4B98-8262C4FE14B05A70"/>
 			</states>
 			<LayoutEngine
 				type="List"
 				sizetocontent="true">
 				<columnwidths>
-					<column width="250"/>
+					<column width="834"/>
 				</columnwidths>
 			</LayoutEngine>
-		</notification_settings_list>
+		</template_event_group>
+		<template_row
+			this="C5871A03-0AB3-49E2-A2B9694D214617D0"
+			id="template_row"
+			allowhorizontalresize="false"
+			priority="10"
+			tooltipslocalised="true"
+			soundcategory="UI_CAM_HUD_Generic_Click"
+			uniqueguid="C5871A03-0AB3-49E2-A2B9694D214617D0"
+			currentstate="BE4D7B84-F02A-4B7D-AED4B1475DFB26D6"
+			defaultstate="BE4D7B84-F02A-4B7D-AED4B1475DFB26D6"
+			comment="The icon component will be dynamically be appended by EventMessageIcon callback">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="EventMessageIcon"
+					context_object_id="CcoCampaignEventFeedMessageDetails"/>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoCampaignEventFeedMessageDetails"
+					context_function_id="ZoomTo"/>
+				<callback_with_context
+					callback_id="ContextCommandMouseOn"
+					context_object_id="CcoCampaignEventFeedMessageDetails"
+					context_function_id="MarkAsRead"/>
+				<callback_with_context callback_id="ResizeToFitTarget">
+					<child_m_user_properties>
+						<property
+							name="target"
+							value="dy_title"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="9498D917-5A7A-4DF4-B837F6C29B2D6520"
+					uniqueguid="9498D917-5A7A-4DF4-B837F6C29B2D6520"
+					imagepath="ui/skins/default/parchment_row_pressed.png"/>
+				<component_image
+					this="66C9FE42-0C29-4879-9D6E9C312739C588"
+					uniqueguid="66C9FE42-0C29-4879-9D6E9C312739C588"
+					imagepath="ui/skins/default/parchment_row_pressed_underline.png"/>
+				<component_image
+					this="CACD7D3A-B0AF-4E82-86D39D13D87A5A16"
+					uniqueguid="CACD7D3A-B0AF-4E82-86D39D13D87A5A16"
+					imagepath="ui/skins/default/parchment_row_selected.png"/>
+				<component_image
+					this="4AD4E16C-9B00-4DA1-AB7A1B86A4AD4FC6"
+					uniqueguid="4AD4E16C-9B00-4DA1-AB7A1B86A4AD4FC6"
+					imagepath="ui/skins/default/parchment_row_selected_underline.png"/>
+			</componentimages>
+			<states>
+				<down
+					this="CDCD874A-556B-4983-B39D8679BC5560AC"
+					name="down"
+					width="256"
+					height="55"
+					interactive="true"
+					uniqueguid="CDCD874A-556B-4983-B39D8679BC5560AC"
+					stateeditordisplaypos="107.00,303.00">
+					<imagemetrics>
+						<image
+							this="C29CB6C1-C065-43F0-8E1087530645EB0B"
+							uniqueguid="C29CB6C1-C065-43F0-8E1087530645EB0B"
+							componentimage="9498D917-5A7A-4DF4-B837F6C29B2D6520"
+							width="256"
+							height="55"/>
+						<image
+							this="790EEB5E-EDF5-487C-A08A0FC971B51C15"
+							uniqueguid="790EEB5E-EDF5-487C-A08A0FC971B51C15"
+							componentimage="66C9FE42-0C29-4879-9D6E9C312739C588"
+							offset="0.00,29.00"
+							width="256"
+							height="31"
+							dockpoint="Bottom Center"
+							dock_offset="0.00,5.00"
+							canresizeheight="false"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="793222A7-D59C-495E-9CB3CDFDE77974ED"
+							transition_m_interpolation_property_mask="64"/>
+						<transition
+							index="3"
+							transition_m_target_state="3C90E209-853F-4B9D-AF9CCDF9BBBBC909"
+							transition_m_interpolation_property_mask="64"/>
+					</transitionmap>
+				</down>
+				<down_off
+					this="793222A7-D59C-495E-9CB3CDFDE77974ED"
+					name="down_off"
+					width="256"
+					height="55"
+					interactive="true"
+					uniqueguid="793222A7-D59C-495E-9CB3CDFDE77974ED"
+					stateeditordisplaypos="186.00,215.00">
+					<transitionmap>
+						<transition
+							transition_m_target_state="CDCD874A-556B-4983-B39D8679BC5560AC"
+							transition_m_interpolation_property_mask="64"/>
+						<transition
+							index="8"
+							transition_m_target_state="BE4D7B84-F02A-4B7D-AED4B1475DFB26D6"/>
+					</transitionmap>
+				</down_off>
+				<hover
+					this="3C90E209-853F-4B9D-AF9CCDF9BBBBC909"
+					name="hover"
+					width="256"
+					height="55"
+					interactive="true"
+					uniqueguid="3C90E209-853F-4B9D-AF9CCDF9BBBBC909"
+					stateeditordisplaypos="40.00,207.00">
+					<imagemetrics>
+						<image
+							this="28C3B874-B9AD-4549-B5072A7636C941C2"
+							uniqueguid="28C3B874-B9AD-4549-B5072A7636C941C2"
+							componentimage="CACD7D3A-B0AF-4E82-86D39D13D87A5A16"
+							width="256"
+							height="55"/>
+						<image
+							this="F15A8E91-8976-453B-8507FE7619768DD5"
+							uniqueguid="F15A8E91-8976-453B-8507FE7619768DD5"
+							componentimage="4AD4E16C-9B00-4DA1-AB7A1B86A4AD4FC6"
+							offset="0.00,29.00"
+							width="256"
+							height="28"
+							dockpoint="Bottom Center"
+							dock_offset="0.00,2.00"
+							margin="10.00,5.00,25.00,5.00"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="BE4D7B84-F02A-4B7D-AED4B1475DFB26D6"
+							transition_m_transition_time="100"
+							transition_m_interpolation_property_mask="64"/>
+						<transition
+							index="2"
+							transition_m_target_state="CDCD874A-556B-4983-B39D8679BC5560AC"
+							transition_m_interpolation_property_mask="64"/>
+					</transitionmap>
+				</hover>
+				<selected
+					this="02152EFC-74AA-4899-B3EC5ED9A89BB2D7"
+					name="selected"
+					width="256"
+					height="55"
+					interactive="true"
+					uniqueguid="02152EFC-74AA-4899-B3EC5ED9A89BB2D7"
+					stateeditordisplaypos="259.00,204.00">
+					<imagemetrics>
+						<image
+							this="5E23A44B-582F-4529-AE3335787251073C"
+							uniqueguid="5E23A44B-582F-4529-AE3335787251073C"
+							componentimage="CACD7D3A-B0AF-4E82-86D39D13D87A5A16"
+							width="256"
+							height="55"/>
+						<image
+							this="FC71FE0D-25C9-4864-8665FE5DAF6B1052"
+							uniqueguid="FC71FE0D-25C9-4864-8665FE5DAF6B1052"
+							componentimage="4AD4E16C-9B00-4DA1-AB7A1B86A4AD4FC6"
+							offset="0.00,29.00"
+							width="256"
+							height="31"
+							dockpoint="Bottom Center"
+							dock_offset="0.00,5.00"
+							canresizeheight="false"/>
+					</imagemetrics>
+				</selected>
+				<unselected
+					this="BE4D7B84-F02A-4B7D-AED4B1475DFB26D6"
+					name="unselected"
+					width="256"
+					height="55"
+					interactive="true"
+					uniqueguid="BE4D7B84-F02A-4B7D-AED4B1475DFB26D6"
+					stateeditordisplaypos="112.00,91.00">
+					<transitionmap>
+						<transition
+							transition_m_target_state="3C90E209-853F-4B9D-AF9CCDF9BBBBC909"
+							transition_m_transition_time="100"
+							transition_m_interpolation_property_mask="64"/>
+					</transitionmap>
+				</unselected>
+			</states>
+		</template_row>
 		<template_setting
 			this="FFAEC27E-21FB-4FC8-8B839CAB5137C6B3"
 			id="template_setting"
@@ -2811,26 +2664,173 @@
 					uniqueguid="07061B5B-1082-4DF4-8BD1AF758ECCA134"/>
 			</states>
 		</template_setting>
-		<settings_holder
-			this="1B97643A-DC64-4C9E-9A6210C5508645B2"
-			id="settings_holder"
-			offset="6.00,6.00"
+		<top
+			this="E091CCB9-F157-4195-AA0BAF0F72F52F33"
+			id="top"
+			part_of_template="true"
+			uniqueguid_in_template="BEE2A27D-90CE-46BB-A4B29AD04E9B9ED0"
+			uniqueguid="E091CCB9-F157-4195-AA0BAF0F72F52F33"
+			dimensions="15.00,22.00"
+			dock_point="Top Center"
+			offset="1.00,-23.00"
+			priority="45"
+			sound_category="UI_GBL_TMP_Slider_Arrows">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="BBA1A7EC-8BA9-40F4-9CD3D66AC34639E7"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="93395A33-61BA-4425-9BCDE7B4C4CBA822"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="B7D705F9-B794-4FC4-9DA7DD1A635F254B"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="E4747C47-181C-4CCD-81D8062B75CE3BF9"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="63EBA9D4-4B8E-43C9-91C658E85F8F6665"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_vertical_top_active.png"
+					uniqueguid="10E902D4-DEDB-4464-B47A314860F9157F"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_vertical_top_pressed.png"
+					uniqueguid="88CEA4C5-E2BF-4E2B-8168872FB85156F9"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_vertical_top_hover.png"
+					uniqueguid="0FC3141A-503A-44EA-8F035DF8209D978F"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="SliderDecrementButton"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="position"/>
+				<property
+					name="disable_override0"
+					value="resizable"/>
+				<property
+					name="stepSize"
+					value="10"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/slider_vertical_top_active.png"/>
+				<element value="ui/skins/default/slider_vertical_top_pressed.png"/>
+				<element value="ui/skins/default/slider_vertical_top_hover.png"/>
+			</override_images>
+		</top>
+		<tx_title
+			this="F153E4A9-F3D6-40C1-9F6BCA862E0BFC69"
+			id="tx_title"
+			offset="0.00,10.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
-			dock_offset="6.00,0.00"
-			priority="50"
+			docking="Top Center"
+			dock_offset="0.00,10.00"
+			component_anchor_point="0.50,0.00"
+			priority="45"
 			tooltipslocalised="true"
-			uniqueguid="1B97643A-DC64-4C9E-9A6210C5508645B2"
-			currentstate="910FDD9F-A83A-4926-BDCBF014F13333CC"
-			defaultstate="910FDD9F-A83A-4926-BDCBF014F13333CC">
+			uniqueguid="F153E4A9-F3D6-40C1-9F6BCA862E0BFC69"
+			currentstate="01F58BF2-D459-4E8F-828CF49D68AF84C0"
+			defaultstate="01F58BF2-D459-4E8F-828CF49D68AF84C0">
 			<states>
-				<default
-					this="910FDD9F-A83A-4926-BDCBF014F13333CC"
-					name="default"
-					width="284"
-					height="1"
-					uniqueguid="910FDD9F-A83A-4926-BDCBF014F13333CC"/>
+				<newstate
+					this="01F58BF2-D459-4E8F-828CF49D68AF84C0"
+					name="NewState"
+					width="290"
+					height="24"
+					interactive="true"
+					uniqueguid="01F58BF2-D459-4E8F-828CF49D68AF84C0">
+					<component_text
+						text="Event Messages"
+						textvalign="Center"
+						texthalign="Center"
+						textlocalised="true"
+						textlabel="tab_events_Tooltip_3a006e"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_14"
+						font_colour_override_preset_key="link"
+						textshadervars="0.00,1.00,2.00,0.00"/>
+				</newstate>
 			</states>
-		</settings_holder>
+		</tx_title>
+		<vslider
+			this="911223C2-C0E3-4DD9-90E6F001667C4AB6"
+			id="vslider"
+			template_id="parchment_slider_vertical"
+			part_of_template="true"
+			uniqueguid_in_template="6C253EE7-62DB-42FC-967ED9468F399339"
+			uniqueguid="911223C2-C0E3-4DD9-90E6F001667C4AB6"
+			dimensions="20.00,373.00"
+			dock_point="Center Left"
+			priority="20">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="ACF22157-8D13-4BD0-83EAE7E10224FFB3"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="A970B069-B4D9-4FA7-83361465F3196BB2"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_vertical_mid.png"
+					uniqueguid="B378C28D-DF6D-4A8E-9BC4016F0D5EB60A"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="VSlider"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="Notify"
+					value=""/>
+				<property
+					name="Value"
+					value="0"/>
+				<property
+					name="maxValue"
+					value="100"/>
+				<property
+					name="minValue"
+					value="0"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/slider_vertical_mid.png"/>
+			</override_images>
+		</vslider>
 	</components>
 </layout>

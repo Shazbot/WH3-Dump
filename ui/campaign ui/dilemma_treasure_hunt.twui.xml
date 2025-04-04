@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -30,48 +30,6 @@
 		</root>
 	</hierarchy>
 	<components>
-		<header
-			this="E8A2BCB9-0C70-43A3-86734CA7B76B07B1"
-			id="header"
-			offset="191.00,-22.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			docking="Top Center"
-			dock_offset="0.00,-22.00"
-			component_anchor_point="0.50,0.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="E8A2BCB9-0C70-43A3-86734CA7B76B07B1"
-			currentstate="D543276C-F17B-4B45-8A6133C3E2B52A21"
-			defaultstate="D543276C-F17B-4B45-8A6133C3E2B52A21">
-			<componentimages>
-				<component_image
-					this="31B54ED2-1A8A-473F-B6FDD8295BBAF547"
-					uniqueguid="31B54ED2-1A8A-473F-B6FDD8295BBAF547"
-					imagepath="ui/skins/default/panel_title.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="D543276C-F17B-4B45-8A6133C3E2B52A21"
-					name="NewState"
-					width="635"
-					height="59"
-					uniqueguid="D543276C-F17B-4B45-8A6133C3E2B52A21">
-					<imagemetrics>
-						<image
-							this="C41670F9-D03D-4518-92B6406B7EFA313D"
-							uniqueguid="C41670F9-D03D-4518-92B6406B7EFA313D"
-							componentimage="31B54ED2-1A8A-473F-B6FDD8295BBAF547"
-							offset="-20.00,0.00"
-							width="675"
-							height="59"
-							tile="true"
-							dockpoint="Center"
-							margin="0.00,165.00,0.00,165.00"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-		</header>
 		<choice_button
 			this="F8CEEBA0-7A6A-407D-AFFE3BCF1DAB2433"
 			id="choice_button"
@@ -240,11 +198,11 @@
 					</imagemetrics>
 					<transitionmap>
 						<transition
-							index="3"
-							transition_m_target_state="2BC17057-900C-4B89-86B5B75054A7501F"/>
-						<transition
 							index="1"
 							transition_m_target_state="E1DD6997-3444-4F19-A1DF2D7FC414246F"/>
+						<transition
+							index="3"
+							transition_m_target_state="2BC17057-900C-4B89-86B5B75054A7501F"/>
 					</transitionmap>
 				</down>
 				<down_off
@@ -406,6 +364,75 @@
 				</glow>
 			</animations>
 		</choice_button>
+		<dilemma_list
+			this="90B5EC75-7344-4360-B9F1E49C03A88584"
+			id="dilemma_list"
+			offset="386.00,610.00"
+			docking="Bottom Center"
+			dock_offset="0.00,-21.00"
+			component_anchor_point="0.50,1.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="90B5EC75-7344-4360-B9F1E49C03A88584"
+			currentstate="D5411960-EBF0-4241-A27A2941AC5C903A"
+			defaultstate="D5411960-EBF0-4241-A27A2941AC5C903A">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignEventDilemma"/>
+				<callback_with_context
+					callback_id="ScriptTag"
+					context_function_id="&quot;c_dilemma_treasure_hunt_choice_parent&quot;"/>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoCampaignEventDilemma"
+					context_function_id="ChoiceDetailList"/>
+				<callback_with_context
+					callback_id="ContextCommandGiverOnContextSet"
+					context_object_id="CcoCampaignEventDilemma"
+					context_function_id="self.TriggerAnimation(&quot;show&quot;)"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="D5411960-EBF0-4241-A27A2941AC5C903A"
+					name="NewState"
+					width="245"
+					height="117"
+					interactive="true"
+					uniqueguid="D5411960-EBF0-4241-A27A2941AC5C903A"/>
+			</states>
+			<animations>
+				<show
+					id="show"
+					propagate="true">
+					<frames>
+						<frame
+							interpolationtime="0"
+							targetmetrics_m_height="91"
+							targetmetrics_m_width="528"/>
+						<frame
+							interpolationtime="0"
+							targetmetrics_m_height="91"
+							targetmetrics_m_width="528"/>
+					</frames>
+				</show>
+				<oncreate
+					id="OnCreate"
+					propagate="true">
+					<frames>
+						<frame
+							interpolationtime="0"
+							interpolationpropertymask="64"
+							targetmetrics_m_colour="#FFFFFF00"
+							targetmetrics_m_height="91"
+							targetmetrics_m_width="528"/>
+					</frames>
+				</oncreate>
+			</animations>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"/>
+		</dilemma_list>
 		<dilemma_treasure_hunt
 			this="58B4E5C0-7BF9-4462-92DE42F48146B90F"
 			id="dilemma_treasure_hunt"
@@ -497,104 +524,6 @@
 				</newstate>
 			</states>
 		</dilemma_treasure_hunt>
-		<dilemma_list
-			this="90B5EC75-7344-4360-B9F1E49C03A88584"
-			id="dilemma_list"
-			offset="386.00,610.00"
-			docking="Bottom Center"
-			dock_offset="0.00,-21.00"
-			component_anchor_point="0.50,1.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="90B5EC75-7344-4360-B9F1E49C03A88584"
-			currentstate="D5411960-EBF0-4241-A27A2941AC5C903A"
-			defaultstate="D5411960-EBF0-4241-A27A2941AC5C903A">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextObjectStore"
-					context_object_id="CcoCampaignEventDilemma"/>
-				<callback_with_context
-					callback_id="ScriptTag"
-					context_function_id="&quot;c_dilemma_treasure_hunt_choice_parent&quot;"/>
-				<callback_with_context
-					callback_id="ContextList"
-					context_object_id="CcoCampaignEventDilemma"
-					context_function_id="ChoiceDetailList"/>
-				<callback_with_context
-					callback_id="ContextCommandGiverOnContextSet"
-					context_object_id="CcoCampaignEventDilemma"
-					context_function_id="self.TriggerAnimation(&quot;show&quot;)"/>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="D5411960-EBF0-4241-A27A2941AC5C903A"
-					name="NewState"
-					width="245"
-					height="117"
-					interactive="true"
-					uniqueguid="D5411960-EBF0-4241-A27A2941AC5C903A"/>
-			</states>
-			<animations>
-				<show
-					id="show"
-					propagate="true">
-					<frames>
-						<frame
-							interpolationtime="0"
-							targetmetrics_m_height="91"
-							targetmetrics_m_width="528"/>
-						<frame
-							interpolationtime="0"
-							targetmetrics_m_height="91"
-							targetmetrics_m_width="528"/>
-					</frames>
-				</show>
-				<oncreate
-					id="OnCreate"
-					propagate="true">
-					<frames>
-						<frame
-							interpolationtime="0"
-							interpolationpropertymask="64"
-							targetmetrics_m_colour="#FFFFFF00"
-							targetmetrics_m_height="91"
-							targetmetrics_m_width="528"/>
-					</frames>
-				</oncreate>
-			</animations>
-			<LayoutEngine
-				type="HorizontalList"
-				sizetocontent="true"/>
-		</dilemma_list>
-		<template_choice
-			this="EBC488B3-326B-40AC-A434DC6E31C5E775"
-			id="template_choice"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="EBC488B3-326B-40AC-A434DC6E31C5E775"
-			currentstate="5ECE6DB6-75BD-4722-821235A13B33A4B3"
-			defaultstate="5ECE6DB6-75BD-4722-821235A13B33A4B3">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_function_id="StoredContextFromParent(&quot;CcoCampaignEventDilemma&quot;)">
-					<child_m_user_properties>
-						<property
-							name="object_store_events"
-							value="^1"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="5ECE6DB6-75BD-4722-821235A13B33A4B3"
-					name="NewState"
-					width="245"
-					height="117"
-					interactive="true"
-					uniqueguid="5ECE6DB6-75BD-4722-821235A13B33A4B3"/>
-			</states>
-		</template_choice>
 		<dy_details_text
 			this="510B5832-7BD3-417F-843D7495A47BE836"
 			id="dy_details_text"
@@ -719,89 +648,6 @@
 				</newstate>
 			</states>
 		</dy_event_picture>
-		<pic_frame
-			this="D21653DA-4D82-4925-8428B607A7336AFC"
-			id="pic_frame"
-			offset="-2.00,-2.00"
-			clipchildren="true"
-			docking="Center"
-			component_anchor_point="0.50,0.50"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="D21653DA-4D82-4925-8428B607A7336AFC"
-			currentstate="EE5C856D-697C-4513-A2BED0F229240795">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextImageSetter"
-					context_object_id="CcoCampaignEventFeedMessageDetails"
-					context_function_id="ImagePath"/>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="Margin"
-					value=""/>
-			</userproperties>
-			<componentimages>
-				<component_image
-					this="091BD572-B6B3-4C29-886415299CB94E5B"
-					uniqueguid="091BD572-B6B3-4C29-886415299CB94E5B"
-					imagepath="ui/skins/default/panel_back_inner_frame.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="EE5C856D-697C-4513-A2BED0F229240795"
-					name="NewState"
-					width="985"
-					height="432"
-					interactive="true"
-					uniqueguid="EE5C856D-697C-4513-A2BED0F229240795">
-					<imagemetrics>
-						<image
-							this="8DE122A7-515F-4E5D-B14ED9E4FD0B8F65"
-							uniqueguid="8DE122A7-515F-4E5D-B14ED9E4FD0B8F65"
-							componentimage="091BD572-B6B3-4C29-886415299CB94E5B"
-							offset="-2.00,-2.00"
-							width="990"
-							height="436"
-							tile="true"
-							dockpoint="Center"
-							margin="30.00,40.00,30.00,40.00"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-		</pic_frame>
-		<root
-			this="8C5356FD-0D24-454E-847ACE876CAEEBED"
-			id="root"
-			tooltipslocalised="true"
-			uniqueguid="8C5356FD-0D24-454E-847ACE876CAEEBED"
-			currentstate="CC6130AE-541A-4548-97706DB42A6CD77A"
-			defaultstate="CC6130AE-541A-4548-97706DB42A6CD77A">
-			<componentimages>
-				<component_image
-					this="BFCC33AA-799A-4C7D-94D8535C90BEA8E2"
-					uniqueguid="BFCC33AA-799A-4C7D-94D8535C90BEA8E2"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="CC6130AE-541A-4548-97706DB42A6CD77A"
-					name="NewState"
-					width="1600"
-					height="900"
-					interactive="true"
-					uniqueguid="CC6130AE-541A-4548-97706DB42A6CD77A">
-					<imagemetrics>
-						<image
-							this="B37BFEB0-8A9F-4765-BBF3F258906091C9"
-							uniqueguid="B37BFEB0-8A9F-4765-BBF3F258906091C9"
-							componentimage="BFCC33AA-799A-4C7D-94D8535C90BEA8E2"
-							width="1600"
-							height="900"
-							colour="#F0F0F0FF"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-		</root>
 		<dy_header
 			this="11D5E62F-215F-40E3-B1506A1978FF9B1F"
 			id="dy_header"
@@ -906,6 +752,131 @@
 				</newstate>
 			</states>
 		</dy_overlay_picture>
+		<header
+			this="E8A2BCB9-0C70-43A3-86734CA7B76B07B1"
+			id="header"
+			offset="191.00,-22.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Top Center"
+			dock_offset="0.00,-22.00"
+			component_anchor_point="0.50,0.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="E8A2BCB9-0C70-43A3-86734CA7B76B07B1"
+			currentstate="D543276C-F17B-4B45-8A6133C3E2B52A21"
+			defaultstate="D543276C-F17B-4B45-8A6133C3E2B52A21">
+			<componentimages>
+				<component_image
+					this="31B54ED2-1A8A-473F-B6FDD8295BBAF547"
+					uniqueguid="31B54ED2-1A8A-473F-B6FDD8295BBAF547"
+					imagepath="ui/skins/default/panel_title.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="D543276C-F17B-4B45-8A6133C3E2B52A21"
+					name="NewState"
+					width="635"
+					height="59"
+					uniqueguid="D543276C-F17B-4B45-8A6133C3E2B52A21">
+					<imagemetrics>
+						<image
+							this="C41670F9-D03D-4518-92B6406B7EFA313D"
+							uniqueguid="C41670F9-D03D-4518-92B6406B7EFA313D"
+							componentimage="31B54ED2-1A8A-473F-B6FDD8295BBAF547"
+							offset="-20.00,0.00"
+							width="675"
+							height="59"
+							tile="true"
+							dockpoint="Center"
+							margin="0.00,165.00,0.00,165.00"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</header>
+		<pic_frame
+			this="D21653DA-4D82-4925-8428B607A7336AFC"
+			id="pic_frame"
+			offset="-2.00,-2.00"
+			clipchildren="true"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="D21653DA-4D82-4925-8428B607A7336AFC"
+			currentstate="EE5C856D-697C-4513-A2BED0F229240795">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoCampaignEventFeedMessageDetails"
+					context_function_id="ImagePath"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="Margin"
+					value=""/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="091BD572-B6B3-4C29-886415299CB94E5B"
+					uniqueguid="091BD572-B6B3-4C29-886415299CB94E5B"
+					imagepath="ui/skins/default/panel_back_inner_frame.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="EE5C856D-697C-4513-A2BED0F229240795"
+					name="NewState"
+					width="985"
+					height="432"
+					interactive="true"
+					uniqueguid="EE5C856D-697C-4513-A2BED0F229240795">
+					<imagemetrics>
+						<image
+							this="8DE122A7-515F-4E5D-B14ED9E4FD0B8F65"
+							uniqueguid="8DE122A7-515F-4E5D-B14ED9E4FD0B8F65"
+							componentimage="091BD572-B6B3-4C29-886415299CB94E5B"
+							offset="-2.00,-2.00"
+							width="990"
+							height="436"
+							tile="true"
+							dockpoint="Center"
+							margin="30.00,40.00,30.00,40.00"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</pic_frame>
+		<root
+			this="8C5356FD-0D24-454E-847ACE876CAEEBED"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="8C5356FD-0D24-454E-847ACE876CAEEBED"
+			currentstate="CC6130AE-541A-4548-97706DB42A6CD77A"
+			defaultstate="CC6130AE-541A-4548-97706DB42A6CD77A">
+			<componentimages>
+				<component_image
+					this="BFCC33AA-799A-4C7D-94D8535C90BEA8E2"
+					uniqueguid="BFCC33AA-799A-4C7D-94D8535C90BEA8E2"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="CC6130AE-541A-4548-97706DB42A6CD77A"
+					name="NewState"
+					width="1600"
+					height="900"
+					interactive="true"
+					uniqueguid="CC6130AE-541A-4548-97706DB42A6CD77A">
+					<imagemetrics>
+						<image
+							this="B37BFEB0-8A9F-4765-BBF3F258906091C9"
+							uniqueguid="B37BFEB0-8A9F-4765-BBF3F258906091C9"
+							componentimage="BFCC33AA-799A-4C7D-94D8535C90BEA8E2"
+							width="1600"
+							height="900"
+							colour="#F0F0F0FF"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</root>
 		<smoke_clip_parent
 			this="C16F5501-4491-4E31-9D19963BEDB5D619"
 			id="smoke_clip_parent"
@@ -945,7 +916,7 @@
 			priority="60"
 			tooltipslocalised="true"
 			uniqueguid="09ABD30F-13E2-4891-999B44D3530E5322"
-			isaspectratiolocked="true"
+			aspect_ratio_locked_behaviour="Width First"
 			isrelativeresize="true"
 			currentstate="793450B3-D3D1-4A04-96D75678BE4EB9D0"
 			defaultstate="793450B3-D3D1-4A04-96D75678BE4EB9D0">
@@ -1034,46 +1005,6 @@
 				</wh3>
 			</states>
 		</smoke_overlay>
-		<template_symbol
-			this="EF909D11-7011-4EF5-848D36F8038A9E10"
-			id="template_symbol"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="EF909D11-7011-4EF5-848D36F8038A9E10"
-			currentstate="80EB3964-7373-4C93-8A972F607CBD11A8"
-			defaultstate="80EB3964-7373-4C93-8A972F607CBD11A8">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextImageSetter"
-					context_object_id="CcoString"
-					context_function_id="Value"/>
-			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="9463D972-1FF7-4E87-B5081969F876F647"
-					uniqueguid="9463D972-1FF7-4E87-B5081969F876F647"
-					imagepath="ui/campaign ui/treasure_hunt_puzzle/symbols/p3_ch_blue.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="80EB3964-7373-4C93-8A972F607CBD11A8"
-					name="NewState"
-					width="50"
-					height="50"
-					uniqueguid="80EB3964-7373-4C93-8A972F607CBD11A8">
-					<imagemetrics>
-						<image
-							this="83B1FD75-0124-41A2-94DED01E7B4D8C72"
-							uniqueguid="83B1FD75-0124-41A2-94DED01E7B4D8C72"
-							componentimage="9463D972-1FF7-4E87-B5081969F876F647"
-							width="50"
-							height="50"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-		</template_symbol>
 		<symbol_list
 			this="B55A1A46-2F4E-4199-90EA42AFCD7CD072"
 			id="symbol_list"
@@ -1125,5 +1056,74 @@
 				spacing="4.00,0.00"
 				sizetocontent="true"/>
 		</symbol_list>
+		<template_choice
+			this="EBC488B3-326B-40AC-A434DC6E31C5E775"
+			id="template_choice"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="EBC488B3-326B-40AC-A434DC6E31C5E775"
+			currentstate="5ECE6DB6-75BD-4722-821235A13B33A4B3"
+			defaultstate="5ECE6DB6-75BD-4722-821235A13B33A4B3">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_function_id="StoredContextFromParent(&quot;CcoCampaignEventDilemma&quot;)">
+					<child_m_user_properties>
+						<property
+							name="object_store_events"
+							value="^1"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="5ECE6DB6-75BD-4722-821235A13B33A4B3"
+					name="NewState"
+					width="245"
+					height="117"
+					interactive="true"
+					uniqueguid="5ECE6DB6-75BD-4722-821235A13B33A4B3"/>
+			</states>
+		</template_choice>
+		<template_symbol
+			this="EF909D11-7011-4EF5-848D36F8038A9E10"
+			id="template_symbol"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="EF909D11-7011-4EF5-848D36F8038A9E10"
+			currentstate="80EB3964-7373-4C93-8A972F607CBD11A8"
+			defaultstate="80EB3964-7373-4C93-8A972F607CBD11A8">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoString"
+					context_function_id="Value"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="9463D972-1FF7-4E87-B5081969F876F647"
+					uniqueguid="9463D972-1FF7-4E87-B5081969F876F647"
+					imagepath="ui/campaign ui/treasure_hunt_puzzle/symbols/p3_ch_blue.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="80EB3964-7373-4C93-8A972F607CBD11A8"
+					name="NewState"
+					width="50"
+					height="50"
+					uniqueguid="80EB3964-7373-4C93-8A972F607CBD11A8">
+					<imagemetrics>
+						<image
+							this="83B1FD75-0124-41A2-94DED01E7B4D8C72"
+							uniqueguid="83B1FD75-0124-41A2-94DED01E7B4D8C72"
+							componentimage="9463D972-1FF7-4E87-B5081969F876F647"
+							width="50"
+							height="50"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</template_symbol>
 	</components>
 </layout>

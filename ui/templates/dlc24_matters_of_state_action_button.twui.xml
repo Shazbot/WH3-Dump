@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -22,37 +22,6 @@
 		</root>
 	</hierarchy>
 	<components>
-		<root
-			this="FDEE89BA-922E-46BC-96646E750D0646B4"
-			id="root"
-			tooltipslocalised="true"
-			uniqueguid="FDEE89BA-922E-46BC-96646E750D0646B4"
-			currentstate="46D43632-FB4D-4CA0-A495F0DF364B4481"
-			defaultstate="46D43632-FB4D-4CA0-A495F0DF364B4481">
-			<componentimages>
-				<component_image
-					this="AE03FEB1-C714-4263-872B8CD2963E3394"
-					uniqueguid="AE03FEB1-C714-4263-872B8CD2963E3394"/>
-			</componentimages>
-			<states>
-				<default
-					this="46D43632-FB4D-4CA0-A495F0DF364B4481"
-					name="default"
-					width="1600"
-					height="900"
-					uniqueguid="46D43632-FB4D-4CA0-A495F0DF364B4481">
-					<imagemetrics>
-						<image
-							this="19105869-F622-4906-9A821EE1012370EA"
-							uniqueguid="19105869-F622-4906-9A821EE1012370EA"
-							componentimage="AE03FEB1-C714-4263-872B8CD2963E3394"
-							width="1600"
-							height="900"
-							colour="#1C1C1CFF"/>
-					</imagemetrics>
-				</default>
-			</states>
-		</root>
 		<dlc24_matters_of_state_action_button
 			this="E1CAE459-0D30-4B5F-994EF7B3C508194F"
 			id="dlc24_matters_of_state_action_button"
@@ -88,11 +57,11 @@
 					stateeditordisplaypos="40.00,20.00">
 					<transitionmap>
 						<transition
-							index="3"
-							transition_m_target_state="9797D024-ADEB-4EFE-9D4D84D8F8BDD277"/>
-						<transition
 							index="1"
 							transition_m_target_state="9F72FC57-9D70-4F96-A7A3ACC724C4D4AA"/>
+						<transition
+							index="3"
+							transition_m_target_state="9797D024-ADEB-4EFE-9D4D84D8F8BDD277"/>
 					</transitionmap>
 				</down>
 				<down_off
@@ -162,11 +131,11 @@
 					stateeditordisplaypos="40.00,20.00">
 					<transitionmap>
 						<transition
-							index="3"
-							transition_m_target_state="09B9D84E-A14C-46D7-AF4D8017365D651C"/>
-						<transition
 							index="1"
 							transition_m_target_state="35361A34-4206-4CCB-A31E6C55D495F666"/>
+						<transition
+							index="3"
+							transition_m_target_state="09B9D84E-A14C-46D7-AF4D8017365D651C"/>
 					</transitionmap>
 				</selected_down>
 				<selected_down_off
@@ -274,6 +243,83 @@
 				</inactive>
 			</states>
 		</dy_action_name>
+		<dy_cooldown
+			this="0A8AE870-AFB4-4895-BE2414790DEF83FB"
+			id="dy_cooldown"
+			uniqueguid_in_template="0A8AE870-AFB4-4895-BE2414790DEF83FB"
+			offset="-10.00,16.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center Left"
+			dock_offset="-10.00,1.00"
+			component_anchor_point="0.00,0.50"
+			priority="50"
+			tooltipslocalised="true"
+			uniqueguid="0A8AE870-AFB4-4895-BE2414790DEF83FB"
+			currentstate="4172CF46-262E-492A-BC604123903E6902"
+			defaultstate="4172CF46-262E-492A-BC604123903E6902">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignRitual"
+					context_function_id="RemainingCooldown"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignRitual"
+					context_function_id="IsOnCooldown"/>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoCampaignRitual"
+					context_function_id="Format(Loc(&quot;ritual_cooldown&quot;), RemainingCooldown)"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="disable_override0"
+					value="callbacks"/>
+				<property
+					name="disable_override1"
+					value="position"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="035D3AFA-623B-4597-8008839357483686"
+					uniqueguid="035D3AFA-623B-4597-8008839357483686"
+					imagepath="ui/skins/default/icon_banner.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="4172CF46-262E-492A-BC604123903E6902"
+					name="default"
+					width="45"
+					height="34"
+					interactive="true"
+					disabled="true"
+					uniqueguid="4172CF46-262E-492A-BC604123903E6902">
+					<imagemetrics>
+						<image
+							this="B85AFCCA-D764-42E6-959EF15414AA034E"
+							uniqueguid="B85AFCCA-D764-42E6-959EF15414AA034E"
+							componentimage="035D3AFA-623B-4597-8008839357483686"
+							offset="0.00,-1.00"
+							width="45"
+							height="34"
+							tile="true"
+							margin="0.00,40.00,0.00,10.00"/>
+					</imagemetrics>
+					<component_text
+						text="8"
+						textvalign="Center"
+						textxoffset="12.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_36503efe"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						textshadervars="0.00,1.00,2.00,0.00"/>
+				</default>
+			</states>
+		</dy_cooldown>
 		<holder_action_container
 			this="686F1DBC-A270-4C0C-9EFCC44869BB4A47"
 			id="holder_action_container"
@@ -443,11 +489,11 @@
 					</imagemetrics>
 					<transitionmap>
 						<transition
-							index="3"
-							transition_m_target_state="763D0552-10DA-4BEC-A7B8398A6886692B"/>
-						<transition
 							index="1"
 							transition_m_target_state="82DAF9F0-1C23-467E-A2DB92C829C9988C"/>
+						<transition
+							index="3"
+							transition_m_target_state="763D0552-10DA-4BEC-A7B8398A6886692B"/>
 					</transitionmap>
 				</down>
 				<down_off
@@ -610,11 +656,11 @@
 					</imagemetrics>
 					<transitionmap>
 						<transition
-							index="3"
-							transition_m_target_state="CF98042C-68DB-496C-84108661B7A1B737"/>
-						<transition
 							index="1"
 							transition_m_target_state="59691728-6F86-41DA-A036CAC0A4F875BD"/>
+						<transition
+							index="3"
+							transition_m_target_state="CF98042C-68DB-496C-84108661B7A1B737"/>
 					</transitionmap>
 				</selected_down>
 				<selected_down_off
@@ -908,6 +954,85 @@
 				</positive>
 			</states>
 		</resource_icon>
+		<resource_icon
+			this="349E25C2-3086-424D-9E9CD415DA528A48"
+			id="resource_icon"
+			uniqueguid_in_template="349E25C2-3086-424D-9E9CD415DA528A48"
+			offset="-12.00,2.00"
+			docking="Center Left External"
+			dock_offset="7.00,-1.00"
+			component_anchor_point="1.00,0.50"
+			priority="50"
+			tooltipslocalised="true"
+			uniqueguid="349E25C2-3086-424D-9E9CD415DA528A48"
+			currentstate="FAF6BED5-513C-4A03-9A4C3E1364E27D7B"
+			defaultstate="FAF6BED5-513C-4A03-9A4C3E1364E27D7B">
+			<userproperties>
+				<property
+					name="disable_override0"
+					value="callbacks"/>
+				<property
+					name="disable_override1"
+					value="position"/>
+				<property
+					name="disable_override2"
+					value="instance_resize"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="00BD263B-7E83-4256-87924C8C6B44C285"
+					uniqueguid="00BD263B-7E83-4256-87924C8C6B44C285"
+					imagepath="ui/skins/default/icon_hourglass.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="FAF6BED5-513C-4A03-9A4C3E1364E27D7B"
+					name="default"
+					width="19"
+					height="27"
+					uniqueguid="FAF6BED5-513C-4A03-9A4C3E1364E27D7B">
+					<imagemetrics>
+						<image
+							this="F2583627-A10B-4542-B542BAE967BD2BD1"
+							uniqueguid="F2583627-A10B-4542-B542BAE967BD2BD1"
+							componentimage="00BD263B-7E83-4256-87924C8C6B44C285"
+							width="19"
+							height="27"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</resource_icon>
+		<root
+			this="FDEE89BA-922E-46BC-96646E750D0646B4"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="FDEE89BA-922E-46BC-96646E750D0646B4"
+			currentstate="46D43632-FB4D-4CA0-A495F0DF364B4481"
+			defaultstate="46D43632-FB4D-4CA0-A495F0DF364B4481">
+			<componentimages>
+				<component_image
+					this="AE03FEB1-C714-4263-872B8CD2963E3394"
+					uniqueguid="AE03FEB1-C714-4263-872B8CD2963E3394"/>
+			</componentimages>
+			<states>
+				<default
+					this="46D43632-FB4D-4CA0-A495F0DF364B4481"
+					name="default"
+					width="1600"
+					height="900"
+					uniqueguid="46D43632-FB4D-4CA0-A495F0DF364B4481">
+					<imagemetrics>
+						<image
+							this="19105869-F622-4906-9A821EE1012370EA"
+							uniqueguid="19105869-F622-4906-9A821EE1012370EA"
+							componentimage="AE03FEB1-C714-4263-872B8CD2963E3394"
+							width="1600"
+							height="900"
+							colour="#1C1C1CFF"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</root>
 		<template_resource_cost
 			this="0F04D3D9-BE77-466A-952A8294C5B3A5C8"
 			id="template_resource_cost"
@@ -1013,130 +1138,5 @@
 				</red>
 			</states>
 		</template_resource_cost>
-		<dy_cooldown
-			this="0A8AE870-AFB4-4895-BE2414790DEF83FB"
-			id="dy_cooldown"
-			uniqueguid_in_template="0A8AE870-AFB4-4895-BE2414790DEF83FB"
-			offset="-10.00,16.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			docking="Center Left"
-			dock_offset="-10.00,1.00"
-			component_anchor_point="0.00,0.50"
-			priority="50"
-			tooltipslocalised="true"
-			uniqueguid="0A8AE870-AFB4-4895-BE2414790DEF83FB"
-			currentstate="4172CF46-262E-492A-BC604123903E6902"
-			defaultstate="4172CF46-262E-492A-BC604123903E6902">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoCampaignRitual"
-					context_function_id="RemainingCooldown"/>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoCampaignRitual"
-					context_function_id="IsOnCooldown"/>
-				<callback_with_context
-					callback_id="ContextTooltipSetter"
-					context_object_id="CcoCampaignRitual"
-					context_function_id="Format(Loc(&quot;ritual_cooldown&quot;), RemainingCooldown)"/>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="disable_override0"
-					value="callbacks"/>
-				<property
-					name="disable_override1"
-					value="position"/>
-			</userproperties>
-			<componentimages>
-				<component_image
-					this="035D3AFA-623B-4597-8008839357483686"
-					uniqueguid="035D3AFA-623B-4597-8008839357483686"
-					imagepath="ui/skins/default/icon_banner.png"/>
-			</componentimages>
-			<states>
-				<default
-					this="4172CF46-262E-492A-BC604123903E6902"
-					name="default"
-					width="45"
-					height="34"
-					interactive="true"
-					disabled="true"
-					uniqueguid="4172CF46-262E-492A-BC604123903E6902">
-					<imagemetrics>
-						<image
-							this="B85AFCCA-D764-42E6-959EF15414AA034E"
-							uniqueguid="B85AFCCA-D764-42E6-959EF15414AA034E"
-							componentimage="035D3AFA-623B-4597-8008839357483686"
-							offset="0.00,-1.00"
-							width="45"
-							height="34"
-							tile="true"
-							margin="0.00,40.00,0.00,10.00"/>
-					</imagemetrics>
-					<component_text
-						text="8"
-						textvalign="Center"
-						textxoffset="12.00,0.00"
-						texthbehaviour="Resize"
-						textlabel="StateText_36503efe"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"
-						textshadervars="0.00,1.00,2.00,0.00"/>
-				</default>
-			</states>
-		</dy_cooldown>
-		<resource_icon
-			this="349E25C2-3086-424D-9E9CD415DA528A48"
-			id="resource_icon"
-			uniqueguid_in_template="349E25C2-3086-424D-9E9CD415DA528A48"
-			offset="-12.00,2.00"
-			docking="Center Left External"
-			dock_offset="7.00,-1.00"
-			component_anchor_point="1.00,0.50"
-			priority="50"
-			tooltipslocalised="true"
-			uniqueguid="349E25C2-3086-424D-9E9CD415DA528A48"
-			currentstate="FAF6BED5-513C-4A03-9A4C3E1364E27D7B"
-			defaultstate="FAF6BED5-513C-4A03-9A4C3E1364E27D7B">
-			<userproperties>
-				<property
-					name="disable_override0"
-					value="callbacks"/>
-				<property
-					name="disable_override1"
-					value="position"/>
-				<property
-					name="disable_override2"
-					value="instance_resize"/>
-			</userproperties>
-			<componentimages>
-				<component_image
-					this="00BD263B-7E83-4256-87924C8C6B44C285"
-					uniqueguid="00BD263B-7E83-4256-87924C8C6B44C285"
-					imagepath="ui/skins/default/icon_hourglass.png"/>
-			</componentimages>
-			<states>
-				<default
-					this="FAF6BED5-513C-4A03-9A4C3E1364E27D7B"
-					name="default"
-					width="19"
-					height="27"
-					uniqueguid="FAF6BED5-513C-4A03-9A4C3E1364E27D7B">
-					<imagemetrics>
-						<image
-							this="F2583627-A10B-4542-B542BAE967BD2BD1"
-							uniqueguid="F2583627-A10B-4542-B542BAE967BD2BD1"
-							componentimage="00BD263B-7E83-4256-87924C8C6B44C285"
-							width="19"
-							height="27"/>
-					</imagemetrics>
-				</default>
-			</states>
-		</resource_icon>
 	</components>
 </layout>

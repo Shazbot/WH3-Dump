@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -31,61 +31,65 @@
 		</root>
 	</hierarchy>
 	<components>
-		<skin_test
-			this="8DC8F8DF-602D-455E-BCC4741584B7661D"
-			id="skin_test"
-			docking="Center"
-			component_anchor_point="0.50,0.50"
-			priority="1000"
+		<bottom
+			this="936206F1-B6C9-4F68-8B5A436A5422768B"
+			id="bottom"
+			offset="7.00,390.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			docking="Bottom Left"
+			dock_offset="7.00,13.00"
+			component_anchor_point="0.00,1.00"
+			priority="999999"
 			tooltipslocalised="true"
-			uniqueguid="8DC8F8DF-602D-455E-BCC4741584B7661D"
-			currentstate="969B5D50-0A80-4A37-8AA7FF0558695CAB"
-			defaultstate="969B5D50-0A80-4A37-8AA7FF0558695CAB"
-			comment="Creates button for each available skin in game and then pressing the buttons changes the UI skin so can quickly test different skins in game">
+			soundcategory="UI_GBL_TMP_Slider_Arrows"
+			uniqueguid="936206F1-B6C9-4F68-8B5A436A5422768B"
+			currentstate="4E8999BF-F557-475E-82F356AD76D6CF33">
 			<callbackwithcontextlist>
-				<callback_with_context callback_id="ScreenSizedComponent"/>
+				<callback_with_context callback_id="SliderIncrementButton"/>
 			</callbackwithcontextlist>
-			<states>
-				<default
-					this="969B5D50-0A80-4A37-8AA7FF0558695CAB"
-					name="default"
-					width="1600"
-					height="900"
-					uniqueguid="969B5D50-0A80-4A37-8AA7FF0558695CAB"/>
-			</states>
-		</skin_test>
-		<root
-			this="D9C2D659-E552-4DD6-B69C218CBEE69644"
-			id="root"
-			tooltipslocalised="true"
-			uniqueguid="D9C2D659-E552-4DD6-B69C218CBEE69644"
-			currentstate="C6736380-098E-491D-92156B03195875BE"
-			defaultstate="C6736380-098E-491D-92156B03195875BE">
+			<userproperties>
+				<property
+					name="disable_override"
+					value="position"/>
+				<property
+					name="stepSize"
+					value="10"/>
+			</userproperties>
 			<componentimages>
 				<component_image
-					this="EB176C7B-01B9-4C12-B78ACAE321F5E634"
-					uniqueguid="EB176C7B-01B9-4C12-B78ACAE321F5E634"/>
+					this="0AE147BE-07AF-4528-9B650812380CD1B5"
+					uniqueguid="0AE147BE-07AF-4528-9B650812380CD1B5"
+					imagepath="ui/skins/default/slider_arrow_normal.png"/>
 			</componentimages>
 			<states>
-				<default
-					this="C6736380-098E-491D-92156B03195875BE"
-					name="default"
-					width="1600"
-					height="900"
+				<newstate
+					this="4E8999BF-F557-475E-82F356AD76D6CF33"
+					name="NewState"
+					width="15"
+					height="13"
 					interactive="true"
-					uniqueguid="C6736380-098E-491D-92156B03195875BE">
+					pixelcollision="true"
+					uniqueguid="4E8999BF-F557-475E-82F356AD76D6CF33"
+					stateeditordisplaypos="34.00,39.00">
 					<imagemetrics>
 						<image
-							this="DDAB958D-D7DE-495C-AC448C01217368A2"
-							uniqueguid="DDAB958D-D7DE-495C-AC448C01217368A2"
-							componentimage="EB176C7B-01B9-4C12-B78ACAE321F5E634"
-							width="1600"
-							height="900"
-							colour="#F0F0F0FF"/>
+							this="AE727130-3FFA-441E-95524ECE71392DA0"
+							uniqueguid="AE727130-3FFA-441E-95524ECE71392DA0"
+							componentimage="0AE147BE-07AF-4528-9B650812380CD1B5"
+							width="15"
+							height="16"
+							y_flipped="true"/>
 					</imagemetrics>
-				</default>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
 			</states>
-		</root>
+		</bottom>
 		<dropdown_skin
 			this="44FFB101-7C77-4197-AC9B10527E069E6F"
 			id="dropdown_skin"
@@ -238,11 +242,11 @@
 					</imagemetrics>
 					<transitionmap>
 						<transition
-							index="3"
-							transition_m_target_state="EB549B64-DBDF-4AA2-9F1BA0FE863062D6"/>
-						<transition
 							index="1"
 							transition_m_target_state="57098F23-BCF1-4ECC-8C52C3586A79CABD"/>
+						<transition
+							index="3"
+							transition_m_target_state="EB549B64-DBDF-4AA2-9F1BA0FE863062D6"/>
 					</transitionmap>
 					<component_text
 						font_m_size="12"
@@ -488,11 +492,11 @@
 					</imagemetrics>
 					<transitionmap>
 						<transition
-							index="3"
-							transition_m_target_state="0199EB24-3258-4AD0-880D6D18C3EF8775"/>
-						<transition
 							index="1"
 							transition_m_target_state="13F1B221-263A-4AAF-9A7BFE857C974702"/>
+						<transition
+							index="3"
+							transition_m_target_state="0199EB24-3258-4AD0-880D6D18C3EF8775"/>
 					</transitionmap>
 					<component_text
 						font_m_size="12"
@@ -691,6 +695,61 @@
 				</newstate>
 			</states>
 		</dy_label>
+		<handle
+			this="B6E83CA9-2DF4-4ADF-A956338321919BD8"
+			id="handle"
+			offset="10.00,27.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			moveable="Movable XP"
+			docking="Top Center"
+			dock_offset="0.00,27.00"
+			component_anchor_point="0.50,0.00"
+			priority="999999"
+			tooltipslocalised="true"
+			soundcategory="UI_GBL_TMP_Slider_Handle"
+			uniqueguid="B6E83CA9-2DF4-4ADF-A956338321919BD8"
+			currentstate="14D430EC-7AC3-4BFE-A3A1FB50C218625E">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="VSliderHandle"/>
+				<callback_with_context callback_id="TopmostWhenDraggingCallback"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="min_size"
+					value="10"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="EA51B294-E577-45CA-8A7FE0C782B185C7"
+					uniqueguid="EA51B294-E577-45CA-8A7FE0C782B185C7"
+					imagepath="ui/skins/default/dev/bar_fill_vertical.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="14D430EC-7AC3-4BFE-A3A1FB50C218625E"
+					name="NewState"
+					width="8"
+					height="22"
+					interactive="true"
+					uniqueguid="14D430EC-7AC3-4BFE-A3A1FB50C218625E"
+					stateeditordisplaypos="-842150464.00,-842150464.00">
+					<imagemetrics>
+						<image
+							this="16B676C3-CECA-4186-AE157FB13EC52214"
+							uniqueguid="16B676C3-CECA-4186-AE157FB13EC52214"
+							componentimage="EA51B294-E577-45CA-8A7FE0C782B185C7"
+							width="8"
+							height="22"/>
+					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+		</handle>
 		<icon_holder
 			this="03CE24B5-3C44-40E4-9DDA61B6D80CC98B"
 			id="icon_holder"
@@ -820,6 +879,34 @@
 				</newstate>
 			</states>
 		</label_current_skin>
+		<listview
+			this="EC77ABD2-F079-4A1F-AA3D690C17DB3AA5"
+			id="listview"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="999999"
+			tooltipslocalised="true"
+			uniqueguid="EC77ABD2-F079-4A1F-AA3D690C17DB3AA5"
+			currentstate="59E36E92-9151-4006-87376C4F91BB8715">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="Listview">
+					<child_m_user_properties>
+						<property
+							name="dont_reset"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="59E36E92-9151-4006-87376C4F91BB8715"
+					name="NewState"
+					width="241"
+					height="386"
+					interactive="true"
+					uniqueguid="59E36E92-9151-4006-87376C4F91BB8715"/>
+			</states>
+		</listview>
 		<list_box
 			this="51F01B66-4D89-406D-839239C78B1336E9"
 			id="list_box"
@@ -854,6 +941,25 @@
 				</columnwidths>
 			</LayoutEngine>
 		</list_box>
+		<list_clip
+			this="53D066ED-61D0-483E-B4FA37960A77944B"
+			id="list_clip"
+			clipchildren="true"
+			priority="999999"
+			tooltipslocalised="true"
+			uniqueguid="53D066ED-61D0-483E-B4FA37960A77944B"
+			currentstate="7F4C8A97-A652-4521-9CFA5D7BC88F3767">
+			<states>
+				<newstate
+					this="7F4C8A97-A652-4521-9CFA5D7BC88F3767"
+					name="NewState"
+					width="241"
+					height="386"
+					shader_name="border_alpha_blend"
+					shadervars="0.00,5.00,0.00,5.00"
+					uniqueguid="7F4C8A97-A652-4521-9CFA5D7BC88F3767"/>
+			</states>
+		</list_clip>
 		<popup_menu
 			this="6998F484-2248-4E56-9556819BF62EE479"
 			id="popup_menu"
@@ -903,6 +1009,61 @@
 				</columnwidths>
 			</LayoutEngine>
 		</popup_menu>
+		<root
+			this="D9C2D659-E552-4DD6-B69C218CBEE69644"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="D9C2D659-E552-4DD6-B69C218CBEE69644"
+			currentstate="C6736380-098E-491D-92156B03195875BE"
+			defaultstate="C6736380-098E-491D-92156B03195875BE">
+			<componentimages>
+				<component_image
+					this="EB176C7B-01B9-4C12-B78ACAE321F5E634"
+					uniqueguid="EB176C7B-01B9-4C12-B78ACAE321F5E634"/>
+			</componentimages>
+			<states>
+				<default
+					this="C6736380-098E-491D-92156B03195875BE"
+					name="default"
+					width="1600"
+					height="900"
+					interactive="true"
+					uniqueguid="C6736380-098E-491D-92156B03195875BE">
+					<imagemetrics>
+						<image
+							this="DDAB958D-D7DE-495C-AC448C01217368A2"
+							uniqueguid="DDAB958D-D7DE-495C-AC448C01217368A2"
+							componentimage="EB176C7B-01B9-4C12-B78ACAE321F5E634"
+							width="1600"
+							height="900"
+							colour="#F0F0F0FF"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</root>
+		<skin_test
+			this="8DC8F8DF-602D-455E-BCC4741584B7661D"
+			id="skin_test"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="1000"
+			tooltipslocalised="true"
+			uniqueguid="8DC8F8DF-602D-455E-BCC4741584B7661D"
+			currentstate="969B5D50-0A80-4A37-8AA7FF0558695CAB"
+			defaultstate="969B5D50-0A80-4A37-8AA7FF0558695CAB"
+			comment="Creates button for each available skin in game and then pressing the buttons changes the UI skin so can quickly test different skins in game">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="ScreenSizedComponent"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="969B5D50-0A80-4A37-8AA7FF0558695CAB"
+					name="default"
+					width="1600"
+					height="900"
+					uniqueguid="969B5D50-0A80-4A37-8AA7FF0558695CAB"/>
+			</states>
+		</skin_test>
 		<template_dropdown_entry
 			this="1599531D-A3EA-4895-9180CC1AE643C232"
 			id="template_dropdown_entry"
@@ -1034,167 +1195,6 @@
 				type="HorizontalList"
 				min_dimensions="230.00,0.00"/>
 		</template_dropdown_entry>
-		<bottom
-			this="936206F1-B6C9-4F68-8B5A436A5422768B"
-			id="bottom"
-			offset="7.00,390.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			visible="false"
-			docking="Bottom Left"
-			dock_offset="7.00,13.00"
-			component_anchor_point="0.00,1.00"
-			priority="999999"
-			tooltipslocalised="true"
-			soundcategory="UI_GBL_TMP_Slider_Arrows"
-			uniqueguid="936206F1-B6C9-4F68-8B5A436A5422768B"
-			currentstate="4E8999BF-F557-475E-82F356AD76D6CF33">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="SliderIncrementButton"/>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="disable_override"
-					value="position"/>
-				<property
-					name="stepSize"
-					value="10"/>
-			</userproperties>
-			<componentimages>
-				<component_image
-					this="0AE147BE-07AF-4528-9B650812380CD1B5"
-					uniqueguid="0AE147BE-07AF-4528-9B650812380CD1B5"
-					imagepath="ui/skins/default/slider_arrow_normal.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="4E8999BF-F557-475E-82F356AD76D6CF33"
-					name="NewState"
-					width="15"
-					height="13"
-					interactive="true"
-					pixelcollision="true"
-					uniqueguid="4E8999BF-F557-475E-82F356AD76D6CF33"
-					stateeditordisplaypos="34.00,39.00">
-					<imagemetrics>
-						<image
-							this="AE727130-3FFA-441E-95524ECE71392DA0"
-							uniqueguid="AE727130-3FFA-441E-95524ECE71392DA0"
-							componentimage="0AE147BE-07AF-4528-9B650812380CD1B5"
-							width="15"
-							height="16"
-							y_flipped="true"/>
-					</imagemetrics>
-					<component_text
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
-			</states>
-		</bottom>
-		<handle
-			this="B6E83CA9-2DF4-4ADF-A956338321919BD8"
-			id="handle"
-			offset="10.00,27.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			moveable="Movable XP"
-			docking="Top Center"
-			dock_offset="0.00,27.00"
-			component_anchor_point="0.50,0.00"
-			priority="999999"
-			tooltipslocalised="true"
-			soundcategory="UI_GBL_TMP_Slider_Handle"
-			uniqueguid="B6E83CA9-2DF4-4ADF-A956338321919BD8"
-			currentstate="14D430EC-7AC3-4BFE-A3A1FB50C218625E">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="VSliderHandle"/>
-				<callback_with_context callback_id="TopmostWhenDraggingCallback"/>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="min_size"
-					value="10"/>
-			</userproperties>
-			<componentimages>
-				<component_image
-					this="EA51B294-E577-45CA-8A7FE0C782B185C7"
-					uniqueguid="EA51B294-E577-45CA-8A7FE0C782B185C7"
-					imagepath="ui/skins/default/dev/bar_fill_vertical.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="14D430EC-7AC3-4BFE-A3A1FB50C218625E"
-					name="NewState"
-					width="8"
-					height="22"
-					interactive="true"
-					uniqueguid="14D430EC-7AC3-4BFE-A3A1FB50C218625E"
-					stateeditordisplaypos="-842150464.00,-842150464.00">
-					<imagemetrics>
-						<image
-							this="16B676C3-CECA-4186-AE157FB13EC52214"
-							uniqueguid="16B676C3-CECA-4186-AE157FB13EC52214"
-							componentimage="EA51B294-E577-45CA-8A7FE0C782B185C7"
-							width="8"
-							height="22"/>
-					</imagemetrics>
-					<component_text
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
-			</states>
-		</handle>
-		<listview
-			this="EC77ABD2-F079-4A1F-AA3D690C17DB3AA5"
-			id="listview"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			priority="999999"
-			tooltipslocalised="true"
-			uniqueguid="EC77ABD2-F079-4A1F-AA3D690C17DB3AA5"
-			currentstate="59E36E92-9151-4006-87376C4F91BB8715">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="Listview">
-					<child_m_user_properties>
-						<property
-							name="dont_reset"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="59E36E92-9151-4006-87376C4F91BB8715"
-					name="NewState"
-					width="241"
-					height="386"
-					interactive="true"
-					uniqueguid="59E36E92-9151-4006-87376C4F91BB8715"/>
-			</states>
-		</listview>
-		<list_clip
-			this="53D066ED-61D0-483E-B4FA37960A77944B"
-			id="list_clip"
-			clipchildren="true"
-			priority="999999"
-			tooltipslocalised="true"
-			uniqueguid="53D066ED-61D0-483E-B4FA37960A77944B"
-			currentstate="7F4C8A97-A652-4521-9CFA5D7BC88F3767">
-			<states>
-				<newstate
-					this="7F4C8A97-A652-4521-9CFA5D7BC88F3767"
-					name="NewState"
-					width="241"
-					height="386"
-					shader_name="border_alpha_blend"
-					shadervars="0.00,5.00,0.00,5.00"
-					uniqueguid="7F4C8A97-A652-4521-9CFA5D7BC88F3767"/>
-			</states>
-		</list_clip>
 		<top
 			this="AD88F0C9-C2E5-486F-BFAA6281E5536E86"
 			id="top"

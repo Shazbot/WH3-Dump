@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -109,68 +109,696 @@
 					uniqueguid="90045834-BEA2-4E08-AC6F6D0D3544FA1B"/>
 			</states>
 		</battle_ai_team>
+		<button_expand_unit_info
+			this="22590906-CF04-467B-927AB9B5B9153D54"
+			id="button_expand_unit_info"
+			offset="0.00,32.00"
+			allowverticalresize="false"
+			priority="999999"
+			tooltipslocalised="true"
+			soundcategory="UI_GBL_TMP_Generic_Click"
+			uniqueguid="22590906-CF04-467B-927AB9B5B9153D54"
+			currentstate="441B129F-1006-46CD-AC70FEF9AD98CEE3"
+			defaultstate="441B129F-1006-46CD-AC70FEF9AD98CEE3">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="TogglePanelButton">
+					<child_m_user_properties>
+						<property
+							name="invert_state"
+							value="1"/>
+						<property
+							name="starts_showing"
+							value="1"/>
+						<property
+							name="toggle_panel"
+							value="dev_unit_info_parent"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="override_sound"
+					value=""/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="EC6DA2AB-C7F6-42F3-B91BEC9482BCAB7B"
+					uniqueguid="EC6DA2AB-C7F6-42F3-B91BEC9482BCAB7B"
+					imagepath="ui/skins/default/dev/button_header_min.png"/>
+				<component_image
+					this="9F25F725-23CD-42CC-9BE277AF6E4A586B"
+					uniqueguid="9F25F725-23CD-42CC-9BE277AF6E4A586B"
+					imagepath="ui/skins/default/dev/button_header_max.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="441B129F-1006-46CD-AC70FEF9AD98CEE3"
+					name="active"
+					width="188"
+					height="37"
+					interactive="true"
+					shader_name="brighten_t0"
+					uniqueguid="441B129F-1006-46CD-AC70FEF9AD98CEE3"
+					stateeditordisplaypos="20.00,24.00">
+					<imagemetrics>
+						<image
+							this="A288B442-EAF1-4279-9C8C39E1CC040906"
+							uniqueguid="A288B442-EAF1-4279-9C8C39E1CC040906"
+							componentimage="EC6DA2AB-C7F6-42F3-B91BEC9482BCAB7B"
+							offset="0.00,5.00"
+							width="25"
+							height="26"
+							dockpoint="Center Left"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							transition_m_target_state="DD0B8965-069D-4A74-A72DD9E575666ACF"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+					</transitionmap>
+				</active>
+				<down
+					this="2CF44F88-6A19-4386-A7C159CC2F8C0666"
+					name="down"
+					width="188"
+					height="37"
+					interactive="true"
+					uniqueguid="2CF44F88-6A19-4386-A7C159CC2F8C0666"
+					stateeditordisplaypos="145.00,219.00">
+					<imagemetrics>
+						<image
+							this="1FB29866-C046-42E9-9085122486AE1591"
+							uniqueguid="1FB29866-C046-42E9-9085122486AE1591"
+							componentimage="EC6DA2AB-C7F6-42F3-B91BEC9482BCAB7B"
+							offset="0.00,5.00"
+							width="25"
+							height="26"
+							dockpoint="Center Left"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="65536916-46AA-46A6-AB4A5AD722814938"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+						<transition
+							index="3"
+							transition_m_target_state="04F01C7F-2F51-4496-977244F9946BEF98"/>
+					</transitionmap>
+				</down>
+				<down_off
+					this="65536916-46AA-46A6-AB4A5AD722814938"
+					name="down_off"
+					width="188"
+					height="37"
+					interactive="true"
+					uniqueguid="65536916-46AA-46A6-AB4A5AD722814938"
+					stateeditordisplaypos="29.00,319.00">
+					<imagemetrics>
+						<image
+							this="8802322F-F8D5-4F8E-93B5A0A118250AD3"
+							uniqueguid="8802322F-F8D5-4F8E-93B5A0A118250AD3"
+							componentimage="EC6DA2AB-C7F6-42F3-B91BEC9482BCAB7B"
+							offset="0.00,5.00"
+							width="25"
+							height="26"
+							dockpoint="Center Left"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							transition_m_target_state="2CF44F88-6A19-4386-A7C159CC2F8C0666"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+						<transition
+							index="8"
+							transition_m_target_state="441B129F-1006-46CD-AC70FEF9AD98CEE3"/>
+					</transitionmap>
+				</down_off>
+				<hover
+					this="DD0B8965-069D-4A74-A72DD9E575666ACF"
+					name="hover"
+					width="188"
+					height="37"
+					interactive="true"
+					shader_name="brighten_t0"
+					shadervars="0.50,0.00,0.00,0.00"
+					uniqueguid="DD0B8965-069D-4A74-A72DD9E575666ACF"
+					stateeditordisplaypos="137.00,126.00">
+					<imagemetrics>
+						<image
+							this="107F9A81-8B4B-4126-A36D448EC0865B20"
+							uniqueguid="107F9A81-8B4B-4126-A36D448EC0865B20"
+							componentimage="EC6DA2AB-C7F6-42F3-B91BEC9482BCAB7B"
+							offset="0.00,5.00"
+							width="25"
+							height="26"
+							dockpoint="Center Left"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="441B129F-1006-46CD-AC70FEF9AD98CEE3"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+						<transition
+							index="2"
+							transition_m_target_state="2CF44F88-6A19-4386-A7C159CC2F8C0666"/>
+					</transitionmap>
+				</hover>
+				<inactive
+					this="1C21B8EF-E3BB-46CC-A0AE4D6D73B5A401"
+					name="inactive"
+					width="188"
+					height="37"
+					shadervars="1.00,0.50,0.00,0.00"
+					uniqueguid="1C21B8EF-E3BB-46CC-A0AE4D6D73B5A401">
+					<imagemetrics>
+						<image
+							this="5E2EA782-B5E7-407C-8FACA99C2BAFD38E"
+							uniqueguid="5E2EA782-B5E7-407C-8FACA99C2BAFD38E"
+							componentimage="EC6DA2AB-C7F6-42F3-B91BEC9482BCAB7B"
+							offset="0.00,5.00"
+							width="25"
+							height="26"
+							colour="#FFFFFF80"
+							dockpoint="Center Left"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</inactive>
+				<leaf
+					this="0057AFC9-91B1-4DB3-9FB9351EF23D667A"
+					name="leaf"
+					width="188"
+					height="37"
+					interactive="true"
+					shader_name="brighten_t0"
+					uniqueguid="0057AFC9-91B1-4DB3-9FB9351EF23D667A"
+					stateeditordisplaypos="20.00,24.00"/>
+				<selected
+					this="F48D6ABB-0F1D-404F-99152F2339AACA50"
+					name="selected"
+					width="188"
+					height="37"
+					interactive="true"
+					shader_name="brighten_t0"
+					uniqueguid="F48D6ABB-0F1D-404F-99152F2339AACA50"
+					stateeditordisplaypos="401.00,333.00">
+					<imagemetrics>
+						<image
+							this="AB1435DF-6F29-4549-ACDBB2D4F4F74EDA"
+							uniqueguid="AB1435DF-6F29-4549-ACDBB2D4F4F74EDA"
+							componentimage="9F25F725-23CD-42CC-9BE277AF6E4A586B"
+							offset="0.00,5.00"
+							width="25"
+							height="26"
+							dockpoint="Center Left"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							transition_m_target_state="04F01C7F-2F51-4496-977244F9946BEF98"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+					</transitionmap>
+				</selected>
+				<selected_down
+					this="2F15229C-5299-4A55-BCE594C86EDC47A4"
+					name="selected_down"
+					width="188"
+					height="37"
+					interactive="true"
+					uniqueguid="2F15229C-5299-4A55-BCE594C86EDC47A4"
+					stateeditordisplaypos="268.00,120.00">
+					<imagemetrics>
+						<image
+							this="8DB6F17F-0C93-443B-A02F14B7E8560904"
+							uniqueguid="8DB6F17F-0C93-443B-A02F14B7E8560904"
+							componentimage="9F25F725-23CD-42CC-9BE277AF6E4A586B"
+							offset="0.00,5.00"
+							width="25"
+							height="26"
+							dockpoint="Center Left"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="6D10514A-A103-458F-95F3CF50948E1B97"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+						<transition
+							index="3"
+							transition_m_target_state="DD0B8965-069D-4A74-A72DD9E575666ACF"/>
+					</transitionmap>
+				</selected_down>
+				<selected_down_off
+					this="6D10514A-A103-458F-95F3CF50948E1B97"
+					name="selected_down_off"
+					width="188"
+					height="37"
+					interactive="true"
+					uniqueguid="6D10514A-A103-458F-95F3CF50948E1B97"
+					stateeditordisplaypos="384.00,21.00">
+					<imagemetrics>
+						<image
+							this="F3B9FD35-9264-46FE-89F6852DD49DF093"
+							uniqueguid="F3B9FD35-9264-46FE-89F6852DD49DF093"
+							componentimage="9F25F725-23CD-42CC-9BE277AF6E4A586B"
+							offset="0.00,5.00"
+							width="25"
+							height="26"
+							dockpoint="Center Left"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							transition_m_target_state="2F15229C-5299-4A55-BCE594C86EDC47A4"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+						<transition
+							index="8"
+							transition_m_target_state="F48D6ABB-0F1D-404F-99152F2339AACA50"/>
+					</transitionmap>
+				</selected_down_off>
+				<selected_hover
+					this="04F01C7F-2F51-4496-977244F9946BEF98"
+					name="selected_hover"
+					width="188"
+					height="37"
+					interactive="true"
+					shader_name="brighten_t0"
+					shadervars="0.50,0.00,0.00,0.00"
+					uniqueguid="04F01C7F-2F51-4496-977244F9946BEF98"
+					stateeditordisplaypos="269.00,216.00">
+					<imagemetrics>
+						<image
+							this="704C275F-4C5B-46E6-B5F70F9BC2AEEC91"
+							uniqueguid="704C275F-4C5B-46E6-B5F70F9BC2AEEC91"
+							componentimage="9F25F725-23CD-42CC-9BE277AF6E4A586B"
+							offset="0.00,5.00"
+							width="25"
+							height="26"
+							dockpoint="Center Left"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="F48D6ABB-0F1D-404F-99152F2339AACA50"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+						<transition
+							index="2"
+							transition_m_target_state="2F15229C-5299-4A55-BCE594C86EDC47A4"/>
+					</transitionmap>
+				</selected_hover>
+				<selected_inactive
+					this="5D769E36-AB92-4504-A9278C3E2268C39C"
+					name="selected_inactive"
+					width="188"
+					height="37"
+					shadervars="1.00,0.50,0.00,0.00"
+					uniqueguid="5D769E36-AB92-4504-A9278C3E2268C39C">
+					<imagemetrics>
+						<image
+							this="978A0CA6-974A-47C9-AC2ACAE8AC61BDC2"
+							uniqueguid="978A0CA6-974A-47C9-AC2ACAE8AC61BDC2"
+							componentimage="9F25F725-23CD-42CC-9BE277AF6E4A586B"
+							offset="0.00,5.00"
+							width="25"
+							height="26"
+							colour="#FFFFFF80"
+							dockpoint="Center Left"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</selected_inactive>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"
+				margins="30.00,60.00"/>
+		</button_expand_unit_info>
+		<checkbox_active_abilities
+			this="5118AF17-3327-4C8C-B3024449C60B6F63"
+			id="checkbox_active_abilities"
+			offset="16.00,448.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="5118AF17-3327-4C8C-B3024449C60B6F63"
+			currentstate="FB8CCB1C-1C82-45A7-9BA1BB96A6C21866"
+			defaultstate="FB8CCB1C-1C82-45A7-9BA1BB96A6C21866">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="FB8CCB1C-1C82-45A7-9BA1BB96A6C21866"
+					name="default"
+					width="564"
+					uniqueguid="FB8CCB1C-1C82-45A7-9BA1BB96A6C21866"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"
+				vertical_alignment="Center"/>
+		</checkbox_active_abilities>
+		<checkbox_command_info
+			this="9DD755A4-A53D-46BE-92E631859F15E18C"
+			id="checkbox_command_info"
+			offset="16.00,32.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="9DD755A4-A53D-46BE-92E631859F15E18C"
+			currentstate="1F45D5F1-D70D-4A77-8D04DECE3E30C349"
+			defaultstate="1F45D5F1-D70D-4A77-8D04DECE3E30C349">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="1F45D5F1-D70D-4A77-8D04DECE3E30C349"
+					name="default"
+					width="494"
+					uniqueguid="1F45D5F1-D70D-4A77-8D04DECE3E30C349"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"
+				vertical_alignment="Center"/>
+		</checkbox_command_info>
+		<checkbox_cp
+			this="E3BE0CBC-AA4C-4612-8535C48EE2DD008B"
+			id="checkbox_cp"
+			offset="16.00,128.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="E3BE0CBC-AA4C-4612-8535C48EE2DD008B"
+			currentstate="9D0FA8D3-FF48-4F0A-9E3D2587371AED00"
+			defaultstate="9D0FA8D3-FF48-4F0A-9E3D2587371AED00">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="9D0FA8D3-FF48-4F0A-9E3D2587371AED00"
+					name="default"
+					width="484"
+					uniqueguid="9D0FA8D3-FF48-4F0A-9E3D2587371AED00"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"
+				vertical_alignment="Center"/>
+		</checkbox_cp>
+		<checkbox_enable_ai_display
+			this="966B4C8F-12D2-4704-89B9F8526FF9A83C"
+			id="checkbox_enable_ai_display"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="966B4C8F-12D2-4704-89B9F8526FF9A83C"
+			currentstate="EC920E69-BBE9-4A1D-AF8128192F05CCD7"
+			defaultstate="EC920E69-BBE9-4A1D-AF8128192F05CCD7">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="EC920E69-BBE9-4A1D-AF8128192F05CCD7"
+					name="default"
+					width="344"
+					uniqueguid="EC920E69-BBE9-4A1D-AF8128192F05CCD7"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"
+				vertical_alignment="Center"/>
+		</checkbox_enable_ai_display>
+		<checkbox_enable_unit_display
+			this="B2948564-C768-42F1-A84789F305B3AB39"
+			id="checkbox_enable_unit_display"
+			offset="16.00,0.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="B2948564-C768-42F1-A84789F305B3AB39"
+			currentstate="6F8D5ADB-2117-436E-8CF30076F0AAA73F"
+			defaultstate="6F8D5ADB-2117-436E-8CF30076F0AAA73F">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="6F8D5ADB-2117-436E-8CF30076F0AAA73F"
+					name="default"
+					width="414"
+					uniqueguid="6F8D5ADB-2117-436E-8CF30076F0AAA73F"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"
+				vertical_alignment="Center"/>
+		</checkbox_enable_unit_display>
+		<checkbox_local_planner
+			this="D92ED34C-FC59-420E-9E98A76A06A4D1D5"
+			id="checkbox_local_planner"
+			offset="16.00,192.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="D92ED34C-FC59-420E-9E98A76A06A4D1D5"
+			currentstate="6352F016-3682-49B8-8774622EEE41992E"
+			defaultstate="6352F016-3682-49B8-8774622EEE41992E">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="6352F016-3682-49B8-8774622EEE41992E"
+					name="default"
+					width="454"
+					uniqueguid="6352F016-3682-49B8-8774622EEE41992E"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"
+				vertical_alignment="Center"/>
+		</checkbox_local_planner>
+		<checkbox_melee_hint
+			this="7DBBA6B5-1590-4BAB-9FE6F72325AE5E3A"
+			id="checkbox_melee_hint"
+			offset="16.00,224.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="7DBBA6B5-1590-4BAB-9FE6F72325AE5E3A"
+			currentstate="E5669658-6288-4C69-89514A1D9C2854C0"
+			defaultstate="E5669658-6288-4C69-89514A1D9C2854C0">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="E5669658-6288-4C69-89514A1D9C2854C0"
+					name="default"
+					width="424"
+					uniqueguid="E5669658-6288-4C69-89514A1D9C2854C0"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"
+				vertical_alignment="Center"/>
+		</checkbox_melee_hint>
+		<checkbox_objective
+			this="30B1E933-4A0F-4333-B9E89614F846A5CD"
+			id="checkbox_objective"
+			offset="16.00,256.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="30B1E933-4A0F-4333-B9E89614F846A5CD"
+			currentstate="F0802367-07B4-4F14-B3FE19DFE9176011"
+			defaultstate="F0802367-07B4-4F14-B3FE19DFE9176011">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="F0802367-07B4-4F14-B3FE19DFE9176011"
+					name="default"
+					width="414"
+					uniqueguid="F0802367-07B4-4F14-B3FE19DFE9176011"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"
+				vertical_alignment="Center"/>
+		</checkbox_objective>
+		<checkbox_script
+			this="F3BF4BD1-1C4B-4C8E-96947705E2368DFB"
+			id="checkbox_script"
+			offset="16.00,160.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="F3BF4BD1-1C4B-4C8E-96947705E2368DFB"
+			currentstate="7CA11BE5-DBB9-4E88-BFA6C07ED6399D97"
+			defaultstate="7CA11BE5-DBB9-4E88-BFA6C07ED6399D97">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="7CA11BE5-DBB9-4E88-BFA6C07ED6399D97"
+					name="default"
+					width="464"
+					uniqueguid="7CA11BE5-DBB9-4E88-BFA6C07ED6399D97"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"
+				vertical_alignment="Center"/>
+		</checkbox_script>
+		<checkbox_show_all
+			this="072889AA-D5F0-4DB6-B941ACEF60582F99"
+			id="checkbox_show_all"
+			offset="16.00,0.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="072889AA-D5F0-4DB6-B941ACEF60582F99"
+			currentstate="39BE12EC-6E5F-4B8E-84AFE5F70A927956"
+			defaultstate="39BE12EC-6E5F-4B8E-84AFE5F70A927956">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="39BE12EC-6E5F-4B8E-84AFE5F70A927956"
+					name="default"
+					width="454"
+					uniqueguid="39BE12EC-6E5F-4B8E-84AFE5F70A927956"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"
+				vertical_alignment="Center"/>
+		</checkbox_show_all>
+		<checkbox_sub_task_type
+			this="09807F3B-5927-4D90-8A5AC1129D52E3B9"
+			id="checkbox_sub_task_type"
+			offset="16.00,384.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="09807F3B-5927-4D90-8A5AC1129D52E3B9"
+			currentstate="00D94AA6-53A8-42E5-9B7277AB43A25409"
+			defaultstate="00D94AA6-53A8-42E5-9B7277AB43A25409">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="00D94AA6-53A8-42E5-9B7277AB43A25409"
+					name="default"
+					width="454"
+					uniqueguid="00D94AA6-53A8-42E5-9B7277AB43A25409"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"
+				vertical_alignment="Center"/>
+		</checkbox_sub_task_type>
 		<checkbox_toggle
-			this="139855FC-FF99-47DD-A92F215B57FF3FFD"
+			this="4B02028B-A6C8-4D54-83C53EC995F366DC"
 			id="checkbox_toggle"
 			template_id="checkbox_toggle"
 			part_of_template="true"
 			uniqueguid_in_template="7F83FB2C-D99A-49C3-9E182FC5C1CDFF35"
-			uniqueguid="139855FC-FF99-47DD-A92F215B57FF3FFD"
+			uniqueguid="4B02028B-A6C8-4D54-83C53EC995F366DC"
 			dimensions="34.00,32.00"
 			priority="60"
 			sound_category="UI_GBL_TMP_CheckBox">
 			<state_uniqueguids>
 				<state_uniqueguid
 					name="active"
-					uniqueguid="453B4E7A-41EF-4C70-A6620623F271FB2B"/>
+					uniqueguid="24735DCC-8378-4931-92CBF00F1DAA2382"/>
 				<state_uniqueguid
 					name="down"
-					uniqueguid="E57AA837-CEEA-4205-9971FFE2001B70D8"/>
+					uniqueguid="7FAEF314-D20F-477E-8C7C16B46412439F"/>
 				<state_uniqueguid
 					name="down_off"
-					uniqueguid="02EFE3C0-7986-4589-85C203769E1DDDC4"/>
+					uniqueguid="1FB0994C-CF9F-40C9-9F3205F20D6C0ACB"/>
 				<state_uniqueguid
 					name="hover"
-					uniqueguid="C54CFBF5-F7BE-493B-B57DFBCF970B7A0A"/>
+					uniqueguid="725430A6-78E8-4285-9DCDF51CB23AF815"/>
 				<state_uniqueguid
 					name="inactive"
-					uniqueguid="F6BDE935-4FCD-4834-B493F7CA7ABFE2E7"/>
+					uniqueguid="F60D2F96-66D8-4366-B51267C9644713FA"/>
 				<state_uniqueguid
 					name="selected"
-					uniqueguid="84F26B00-0D1A-4FC2-81E6528456365CB0"/>
+					uniqueguid="9F50D1B5-D50D-4BB8-BD7F3D56AEE0A935"/>
 				<state_uniqueguid
 					name="selected_down"
-					uniqueguid="31BCE218-1FA0-4DB5-8472C87A4FDB957A"/>
+					uniqueguid="796998E7-13D3-4C1B-B5AF7412AF2433C4"/>
 				<state_uniqueguid
 					name="selected_down_off"
-					uniqueguid="292E0FE2-1890-409B-A0D58E0154D94962"/>
+					uniqueguid="4427999B-3D50-4B4F-8C5F16FC4ED1D7D6"/>
 				<state_uniqueguid
 					name="selected_hover"
-					uniqueguid="C9503B26-509A-4169-B7C8E7E81A2576CD"/>
+					uniqueguid="ACA5D23D-F9DE-4118-B2C5AF9F0830B47B"/>
 				<state_uniqueguid
 					name="selected_inactive"
-					uniqueguid="1B2F984C-C4C0-4ADB-9501D17E34DCD406"/>
+					uniqueguid="6E5BFA50-9F08-4E2A-9B0076A95C461676"/>
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
 					name="ui/skins/default/checkbox_active.png"
-					uniqueguid="CDE87331-74A7-4E3A-A878888EDC91492D"/>
+					uniqueguid="1FCC9C45-6E4A-45DC-B7E75AD79AA0CF50"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/checkbox_hover.png"
-					uniqueguid="9380ADB8-63ED-43F8-90E2E24C5A68B2D9"/>
+					uniqueguid="D1C14CF4-6685-406A-90B79ABF0F25069A"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/checkbox_selected.png"
-					uniqueguid="16BD49C9-0602-41D5-A6B4B7A29826D325"/>
+					uniqueguid="4C97BF1F-3705-4347-B6F7A6C7CB49FEBD"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/checkbox_selected_hover.png"
-					uniqueguid="F6FBB48C-699D-443F-919A77C909318D18"/>
+					uniqueguid="327DE368-C84E-4484-902F90033B446CE3"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context callback_id="ButtonToggleTweaker">
 					<child_m_user_properties>
 						<property
 							name="tweaker"
-							value="BATTLE_AI_DEBUG_DISPLAY_ENABLED"/>
+							value="BATTLE_AI_DEBUG_DISPLAY_UNIT_COMMAND_UNIT_INFO"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbacks_with_context>
@@ -320,6 +948,111 @@
 			</override_images>
 		</checkbox_toggle>
 		<checkbox_toggle
+			this="659B46A7-BE52-46DA-95748F3B2F8372F8"
+			id="checkbox_toggle"
+			template_id="checkbox_toggle"
+			part_of_template="true"
+			uniqueguid_in_template="7F83FB2C-D99A-49C3-9E182FC5C1CDFF35"
+			uniqueguid="659B46A7-BE52-46DA-95748F3B2F8372F8"
+			dimensions="34.00,32.00"
+			priority="60"
+			sound_category="UI_GBL_TMP_CheckBox">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="319A0CDF-B842-4481-948B61C2F9AAB649"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="B7F8493D-6486-40C5-83D78DD373C61340"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="CECB571E-4E66-435F-BA7C27F54042CE98"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="03954D3B-1D27-466C-908695876FBA09C0"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="67666B69-684F-4026-94FC70CDF6DA2BED"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="9BCFF72E-E017-4955-8B745B8582AAF6FF"/>
+				<state_uniqueguid
+					name="selected_down"
+					uniqueguid="3DE60979-DF2B-4132-90C37756778D5271"/>
+				<state_uniqueguid
+					name="selected_down_off"
+					uniqueguid="8C171EFF-5635-4446-B2B823A2B5B1CCCA"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="41B75D9C-AB67-43E5-A6EED7E9CBFAE957"/>
+				<state_uniqueguid
+					name="selected_inactive"
+					uniqueguid="AE09AF95-29DB-452B-AAAE6360C44922E9"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_active.png"
+					uniqueguid="DF2EFE71-5CE1-47F4-9BC1041DDE3979BA"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_hover.png"
+					uniqueguid="3DE1003A-7127-4D71-B81FA34CA07D7363"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_selected.png"
+					uniqueguid="D5B8F995-0931-4A42-9F058E65001EDF6A"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_selected_hover.png"
+					uniqueguid="14A5C47D-0ACA-45FC-96BAE41025AADE79"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="ButtonToggleTweaker">
+					<child_m_user_properties>
+						<property
+							name="tweaker"
+							value="BATTLE_AI_DEBUG_DISPLAY_UNIT_OBJECTIVE"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/checkbox_active.png"/>
+				<element value="ui/skins/default/checkbox_hover.png"/>
+				<element value="ui/skins/default/checkbox_selected.png"/>
+				<element value="ui/skins/default/checkbox_selected_hover.png"/>
+			</override_images>
+		</checkbox_toggle>
+		<checkbox_toggle
 			this="7C41A709-0E4F-46D9-AA51EEE956D3C61D"
 			id="checkbox_toggle"
 			template_id="checkbox_toggle"
@@ -381,216 +1114,6 @@
 						<property
 							name="tweaker"
 							value="BATTLE_AI_DEBUG_DISPLAY_SHOW_UNIT_INFO_ALL"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbacks_with_context>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="down"
-					is_text_localised="false"/>
-				<localised_text
-					state="down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_down"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_inactive"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/checkbox_active.png"/>
-				<element value="ui/skins/default/checkbox_hover.png"/>
-				<element value="ui/skins/default/checkbox_selected.png"/>
-				<element value="ui/skins/default/checkbox_selected_hover.png"/>
-			</override_images>
-		</checkbox_toggle>
-		<checkbox_toggle
-			this="4B02028B-A6C8-4D54-83C53EC995F366DC"
-			id="checkbox_toggle"
-			template_id="checkbox_toggle"
-			part_of_template="true"
-			uniqueguid_in_template="7F83FB2C-D99A-49C3-9E182FC5C1CDFF35"
-			uniqueguid="4B02028B-A6C8-4D54-83C53EC995F366DC"
-			dimensions="34.00,32.00"
-			priority="60"
-			sound_category="UI_GBL_TMP_CheckBox">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="24735DCC-8378-4931-92CBF00F1DAA2382"/>
-				<state_uniqueguid
-					name="down"
-					uniqueguid="7FAEF314-D20F-477E-8C7C16B46412439F"/>
-				<state_uniqueguid
-					name="down_off"
-					uniqueguid="1FB0994C-CF9F-40C9-9F3205F20D6C0ACB"/>
-				<state_uniqueguid
-					name="hover"
-					uniqueguid="725430A6-78E8-4285-9DCDF51CB23AF815"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="F60D2F96-66D8-4366-B51267C9644713FA"/>
-				<state_uniqueguid
-					name="selected"
-					uniqueguid="9F50D1B5-D50D-4BB8-BD7F3D56AEE0A935"/>
-				<state_uniqueguid
-					name="selected_down"
-					uniqueguid="796998E7-13D3-4C1B-B5AF7412AF2433C4"/>
-				<state_uniqueguid
-					name="selected_down_off"
-					uniqueguid="4427999B-3D50-4B4F-8C5F16FC4ED1D7D6"/>
-				<state_uniqueguid
-					name="selected_hover"
-					uniqueguid="ACA5D23D-F9DE-4118-B2C5AF9F0830B47B"/>
-				<state_uniqueguid
-					name="selected_inactive"
-					uniqueguid="6E5BFA50-9F08-4E2A-9B0076A95C461676"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_active.png"
-					uniqueguid="1FCC9C45-6E4A-45DC-B7E75AD79AA0CF50"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_hover.png"
-					uniqueguid="D1C14CF4-6685-406A-90B79ABF0F25069A"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_selected.png"
-					uniqueguid="4C97BF1F-3705-4347-B6F7A6C7CB49FEBD"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_selected_hover.png"
-					uniqueguid="327DE368-C84E-4484-902F90033B446CE3"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context callback_id="ButtonToggleTweaker">
-					<child_m_user_properties>
-						<property
-							name="tweaker"
-							value="BATTLE_AI_DEBUG_DISPLAY_UNIT_COMMAND_UNIT_INFO"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbacks_with_context>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="down"
-					is_text_localised="false"/>
-				<localised_text
-					state="down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_down"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_inactive"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/checkbox_active.png"/>
-				<element value="ui/skins/default/checkbox_hover.png"/>
-				<element value="ui/skins/default/checkbox_selected.png"/>
-				<element value="ui/skins/default/checkbox_selected_hover.png"/>
-			</override_images>
-		</checkbox_toggle>
-		<checkbox_toggle
-			this="C5225CD8-D0C7-4939-B687FFCC007C4556"
-			id="checkbox_toggle"
-			template_id="checkbox_toggle"
-			part_of_template="true"
-			uniqueguid_in_template="7F83FB2C-D99A-49C3-9E182FC5C1CDFF35"
-			uniqueguid="C5225CD8-D0C7-4939-B687FFCC007C4556"
-			dimensions="34.00,32.00"
-			priority="60"
-			sound_category="UI_GBL_TMP_CheckBox">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="30557DC2-28F3-43CB-8B1DF38539465833"/>
-				<state_uniqueguid
-					name="down"
-					uniqueguid="7FF2D38E-16F8-4FA7-BCD126C46B2BCD46"/>
-				<state_uniqueguid
-					name="down_off"
-					uniqueguid="F006FF29-451D-450F-ACFCD670DD7A8803"/>
-				<state_uniqueguid
-					name="hover"
-					uniqueguid="75989466-8A35-4585-9134B6949B0E9EF5"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="AD27B746-416C-4CEF-9CA2D9EAADB09A1F"/>
-				<state_uniqueguid
-					name="selected"
-					uniqueguid="C55529D2-3BA3-42CA-BAC28360FF31D317"/>
-				<state_uniqueguid
-					name="selected_down"
-					uniqueguid="A75653D8-4F75-4EB0-96107CA891F32875"/>
-				<state_uniqueguid
-					name="selected_down_off"
-					uniqueguid="50BBD97D-5732-46DB-81C88D2E8831B1F7"/>
-				<state_uniqueguid
-					name="selected_hover"
-					uniqueguid="7E5918DC-F93D-4496-8AA86C3DF3D7E829"/>
-				<state_uniqueguid
-					name="selected_inactive"
-					uniqueguid="122B3C9B-66D9-4141-8EB2843CE7362D45"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_active.png"
-					uniqueguid="39522BB8-5D56-46B2-BF1E4865B04A9BB0"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_hover.png"
-					uniqueguid="F05BEB42-0DA3-46EB-B893062CA6282A46"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_selected.png"
-					uniqueguid="8B3AB0E4-8A74-45AF-B890C43EEC712C85"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_selected_hover.png"
-					uniqueguid="1F93F933-6E82-4FD4-82C78CC221603EAB"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context callback_id="ButtonToggleTweaker">
-					<child_m_user_properties>
-						<property
-							name="tweaker"
-							value="BATTLE_AI_DEBUG_DISPLAY_UNIT_ID"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbacks_with_context>
@@ -740,592 +1263,67 @@
 			</override_images>
 		</checkbox_toggle>
 		<checkbox_toggle
-			this="291C052C-95D3-49FC-A8574B0E70A1C272"
+			this="99F3A86B-2152-4EF5-B51718940EC9D8CC"
 			id="checkbox_toggle"
 			template_id="checkbox_toggle"
 			part_of_template="true"
 			uniqueguid_in_template="7F83FB2C-D99A-49C3-9E182FC5C1CDFF35"
-			uniqueguid="291C052C-95D3-49FC-A8574B0E70A1C272"
+			uniqueguid="99F3A86B-2152-4EF5-B51718940EC9D8CC"
 			dimensions="34.00,32.00"
 			priority="60"
 			sound_category="UI_GBL_TMP_CheckBox">
 			<state_uniqueguids>
 				<state_uniqueguid
 					name="active"
-					uniqueguid="80A8FC6E-E869-4ABB-AC478EDFA8836164"/>
+					uniqueguid="FF79B4C7-3B4E-4D7D-82C2C40159D695AA"/>
 				<state_uniqueguid
 					name="down"
-					uniqueguid="087BDF19-DD98-4419-A40CC1DD79200401"/>
+					uniqueguid="8976C6FC-A531-43EF-80B771CCA37D3891"/>
 				<state_uniqueguid
 					name="down_off"
-					uniqueguid="414F958A-81BB-477E-AC25AD75161CC0B4"/>
+					uniqueguid="602C2B1D-381F-4DBA-B1F94EE5BD8A70EE"/>
 				<state_uniqueguid
 					name="hover"
-					uniqueguid="BC99105E-DE5A-4E9E-A3A7D2F07507FDF5"/>
+					uniqueguid="5734039D-C0CE-4CF6-AA8C87D40839C352"/>
 				<state_uniqueguid
 					name="inactive"
-					uniqueguid="E6DA233B-183D-4FC0-93D8E45EFA3D49AF"/>
+					uniqueguid="0B5D2F88-2A42-4999-8A45EBD5CDBBD3F8"/>
 				<state_uniqueguid
 					name="selected"
-					uniqueguid="5A8C93B2-F940-4CBE-A30B2034964082D7"/>
+					uniqueguid="A5C630AE-C51B-4E6B-8BD4293753C383CC"/>
 				<state_uniqueguid
 					name="selected_down"
-					uniqueguid="C4768216-AA67-436E-91335569BB35544D"/>
+					uniqueguid="B8A974CF-794B-4B29-BC9B4D92C0F67626"/>
 				<state_uniqueguid
 					name="selected_down_off"
-					uniqueguid="87A4AE9E-AFE7-4E20-A545034DCA2C23D3"/>
+					uniqueguid="9D20A53C-E46D-4DD6-BDBFDB3F8A9BA519"/>
 				<state_uniqueguid
 					name="selected_hover"
-					uniqueguid="6787C253-4002-4BDC-AF4B42D9123BA3C2"/>
+					uniqueguid="4B0EDB7F-5FC6-489E-9F60A4AB190768C7"/>
 				<state_uniqueguid
 					name="selected_inactive"
-					uniqueguid="5399E4E3-6F7C-455B-914722C26C4F37AD"/>
+					uniqueguid="F0D0C059-7B08-487D-8CD8799E281D2FE5"/>
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
 					name="ui/skins/default/checkbox_active.png"
-					uniqueguid="55DC0AD9-E525-4E01-97C63CA184EBF210"/>
+					uniqueguid="345E2019-FBBC-4946-9132A099889CF8EA"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/checkbox_hover.png"
-					uniqueguid="6FE588A2-E5F6-47A4-83D25D614DF1DB30"/>
+					uniqueguid="5D5B91AA-92D2-408E-B1E809E8C2448ECC"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/checkbox_selected.png"
-					uniqueguid="A47667EF-D602-41FD-B4E6AC20C4DCDDCF"/>
+					uniqueguid="4B983C68-1130-4C3D-A04512934BE6D633"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/checkbox_selected_hover.png"
-					uniqueguid="6D57B9A1-89FF-4700-9E17FBB460BBC753"/>
+					uniqueguid="1A5BD598-84A4-495D-B4DC4A7CBBE31537"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context callback_id="ButtonToggleTweaker">
 					<child_m_user_properties>
 						<property
 							name="tweaker"
-							value="BATTLE_AI_DEBUG_DISPLAY_UNIT_COMBAT_POTENTIAL"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbacks_with_context>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="down"
-					is_text_localised="false"/>
-				<localised_text
-					state="down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_down"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_inactive"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/checkbox_active.png"/>
-				<element value="ui/skins/default/checkbox_hover.png"/>
-				<element value="ui/skins/default/checkbox_selected.png"/>
-				<element value="ui/skins/default/checkbox_selected_hover.png"/>
-			</override_images>
-		</checkbox_toggle>
-		<checkbox_toggle
-			this="D3058CF1-5B39-4A79-BC2C89E0314799D7"
-			id="checkbox_toggle"
-			template_id="checkbox_toggle"
-			part_of_template="true"
-			uniqueguid_in_template="7F83FB2C-D99A-49C3-9E182FC5C1CDFF35"
-			uniqueguid="D3058CF1-5B39-4A79-BC2C89E0314799D7"
-			dimensions="34.00,32.00"
-			priority="60"
-			sound_category="UI_GBL_TMP_CheckBox">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="EA365336-CB1F-4150-95AE1C243B25F9AB"/>
-				<state_uniqueguid
-					name="down"
-					uniqueguid="F394D74E-91B8-46E1-908FE2F75C5BA745"/>
-				<state_uniqueguid
-					name="down_off"
-					uniqueguid="F7B00E77-5296-4562-B684D7F1F9A347FC"/>
-				<state_uniqueguid
-					name="hover"
-					uniqueguid="0DDC1891-054F-4A97-9BD0117D8EEA65C5"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="64117A38-4361-4F7C-B2F4E16D655A86E9"/>
-				<state_uniqueguid
-					name="selected"
-					uniqueguid="29F96ED2-0EB7-4B1B-93C643B7BEF17EC2"/>
-				<state_uniqueguid
-					name="selected_down"
-					uniqueguid="2E17723E-2190-43CE-89C8BF2EC527602E"/>
-				<state_uniqueguid
-					name="selected_down_off"
-					uniqueguid="121E3E1B-AF0B-4CFF-821327613F81C51E"/>
-				<state_uniqueguid
-					name="selected_hover"
-					uniqueguid="9F9E9671-EB21-4304-81335F5259014381"/>
-				<state_uniqueguid
-					name="selected_inactive"
-					uniqueguid="C99B1854-8CBB-46C7-A011D22BF80158CC"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_active.png"
-					uniqueguid="CFA64F46-8F5A-451D-97BB7CB8BCF74169"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_hover.png"
-					uniqueguid="EE5B7D60-6237-4BFA-9F1030F7FC332236"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_selected.png"
-					uniqueguid="8CE751B3-F3E6-4A2C-80A184C188BACD2C"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_selected_hover.png"
-					uniqueguid="F3F188DB-8DA0-4191-818A30B275CB6274"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context callback_id="ButtonToggleTweaker">
-					<child_m_user_properties>
-						<property
-							name="tweaker"
-							value="BATTLE_AI_DEBUG_DISPLAY_UNIT_SCRIPT_CONTROL"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbacks_with_context>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="down"
-					is_text_localised="false"/>
-				<localised_text
-					state="down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_down"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_inactive"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/checkbox_active.png"/>
-				<element value="ui/skins/default/checkbox_hover.png"/>
-				<element value="ui/skins/default/checkbox_selected.png"/>
-				<element value="ui/skins/default/checkbox_selected_hover.png"/>
-			</override_images>
-		</checkbox_toggle>
-		<checkbox_toggle
-			this="0309D53A-D5FC-47AA-9885EF1384DC71C6"
-			id="checkbox_toggle"
-			template_id="checkbox_toggle"
-			part_of_template="true"
-			uniqueguid_in_template="7F83FB2C-D99A-49C3-9E182FC5C1CDFF35"
-			uniqueguid="0309D53A-D5FC-47AA-9885EF1384DC71C6"
-			dimensions="34.00,32.00"
-			priority="60"
-			sound_category="UI_GBL_TMP_CheckBox">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="0EE2DC05-D213-466F-98FFFAD0FE05516D"/>
-				<state_uniqueguid
-					name="down"
-					uniqueguid="FABCBAEC-97BE-45AB-BA272D086D8549C8"/>
-				<state_uniqueguid
-					name="down_off"
-					uniqueguid="3EDD0EE4-EC13-452C-B9B4C19CF5E991F1"/>
-				<state_uniqueguid
-					name="hover"
-					uniqueguid="B8B80BA9-36F3-4CE0-BBD731263B4945B1"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="AF3AC4C0-0352-40EA-BB712CBDB93170B5"/>
-				<state_uniqueguid
-					name="selected"
-					uniqueguid="9ADA9B73-1A66-422B-B0E7A1CBD02F2A34"/>
-				<state_uniqueguid
-					name="selected_down"
-					uniqueguid="B2BEFEFB-3C08-48AE-A1B80E8AF56F8D64"/>
-				<state_uniqueguid
-					name="selected_down_off"
-					uniqueguid="CF4EBC5D-531E-4F8C-B1BF533987751F15"/>
-				<state_uniqueguid
-					name="selected_hover"
-					uniqueguid="9DE1077E-065A-4A3E-B838EE8721FB4F7A"/>
-				<state_uniqueguid
-					name="selected_inactive"
-					uniqueguid="EB451279-CDA3-4681-A14899605E2E31E8"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_active.png"
-					uniqueguid="75435AA3-A32B-4280-ACFA94B9614556C3"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_hover.png"
-					uniqueguid="2CA930C4-D39A-46AC-875E13C8C68AD352"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_selected.png"
-					uniqueguid="0D29CD51-49B6-46A4-934B9812D82CD4FB"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_selected_hover.png"
-					uniqueguid="8AAA6D91-B4C9-4DD9-800F6C8A360DD9F2"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context callback_id="ButtonToggleTweaker">
-					<child_m_user_properties>
-						<property
-							name="tweaker"
-							value="BATTLE_AI_DEBUG_DISPLAY_UNIT_LOCAL_PLANNER"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbacks_with_context>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="down"
-					is_text_localised="false"/>
-				<localised_text
-					state="down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_down"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_inactive"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/checkbox_active.png"/>
-				<element value="ui/skins/default/checkbox_hover.png"/>
-				<element value="ui/skins/default/checkbox_selected.png"/>
-				<element value="ui/skins/default/checkbox_selected_hover.png"/>
-			</override_images>
-		</checkbox_toggle>
-		<checkbox_toggle
-			this="2AF0ECDD-252B-46B2-95EF0612C52354CD"
-			id="checkbox_toggle"
-			template_id="checkbox_toggle"
-			part_of_template="true"
-			uniqueguid_in_template="7F83FB2C-D99A-49C3-9E182FC5C1CDFF35"
-			uniqueguid="2AF0ECDD-252B-46B2-95EF0612C52354CD"
-			dimensions="34.00,32.00"
-			priority="60"
-			sound_category="UI_GBL_TMP_CheckBox">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="87B9D541-9181-4E13-8D30770EC26B1F7B"/>
-				<state_uniqueguid
-					name="down"
-					uniqueguid="FB4ADAE8-67BF-4E61-AB8283854D5A97B1"/>
-				<state_uniqueguid
-					name="down_off"
-					uniqueguid="1D22E85E-32E2-4864-BB6C614E5C8C900A"/>
-				<state_uniqueguid
-					name="hover"
-					uniqueguid="280C1236-5018-4D26-983C18409EBEC093"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="2E5F4054-B817-43F1-BCFAF6E6B3B9C556"/>
-				<state_uniqueguid
-					name="selected"
-					uniqueguid="B6479358-5C3B-40E8-853AE6350F2C0F2D"/>
-				<state_uniqueguid
-					name="selected_down"
-					uniqueguid="42A909E2-22D0-4372-BD1CFD480626BB08"/>
-				<state_uniqueguid
-					name="selected_down_off"
-					uniqueguid="3C5A4DBC-B652-41BB-A142FCDBB4AC40BE"/>
-				<state_uniqueguid
-					name="selected_hover"
-					uniqueguid="0FC2E539-6B2C-4156-9D399239134C9A3B"/>
-				<state_uniqueguid
-					name="selected_inactive"
-					uniqueguid="745E6708-94A7-46F4-9A40E87AEEE4B6EB"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_active.png"
-					uniqueguid="42104D9F-4D37-4B4F-A9E6BE59DE206EDD"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_hover.png"
-					uniqueguid="2333D9B4-B7D0-4337-B05C6FFF9C07FC7C"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_selected.png"
-					uniqueguid="4E31DDE1-CD3D-40F6-A9759807657BC26A"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_selected_hover.png"
-					uniqueguid="AA9C3C9D-6E47-4317-91CA707C8AEA6D28"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context callback_id="ButtonToggleTweaker">
-					<child_m_user_properties>
-						<property
-							name="tweaker"
-							value="BATTLE_AI_DEBUG_DISPLAY_UNIT_MELEE_HINT"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbacks_with_context>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="down"
-					is_text_localised="false"/>
-				<localised_text
-					state="down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_down"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_inactive"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/checkbox_active.png"/>
-				<element value="ui/skins/default/checkbox_hover.png"/>
-				<element value="ui/skins/default/checkbox_selected.png"/>
-				<element value="ui/skins/default/checkbox_selected_hover.png"/>
-			</override_images>
-		</checkbox_toggle>
-		<checkbox_toggle
-			this="659B46A7-BE52-46DA-95748F3B2F8372F8"
-			id="checkbox_toggle"
-			template_id="checkbox_toggle"
-			part_of_template="true"
-			uniqueguid_in_template="7F83FB2C-D99A-49C3-9E182FC5C1CDFF35"
-			uniqueguid="659B46A7-BE52-46DA-95748F3B2F8372F8"
-			dimensions="34.00,32.00"
-			priority="60"
-			sound_category="UI_GBL_TMP_CheckBox">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="319A0CDF-B842-4481-948B61C2F9AAB649"/>
-				<state_uniqueguid
-					name="down"
-					uniqueguid="B7F8493D-6486-40C5-83D78DD373C61340"/>
-				<state_uniqueguid
-					name="down_off"
-					uniqueguid="CECB571E-4E66-435F-BA7C27F54042CE98"/>
-				<state_uniqueguid
-					name="hover"
-					uniqueguid="03954D3B-1D27-466C-908695876FBA09C0"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="67666B69-684F-4026-94FC70CDF6DA2BED"/>
-				<state_uniqueguid
-					name="selected"
-					uniqueguid="9BCFF72E-E017-4955-8B745B8582AAF6FF"/>
-				<state_uniqueguid
-					name="selected_down"
-					uniqueguid="3DE60979-DF2B-4132-90C37756778D5271"/>
-				<state_uniqueguid
-					name="selected_down_off"
-					uniqueguid="8C171EFF-5635-4446-B2B823A2B5B1CCCA"/>
-				<state_uniqueguid
-					name="selected_hover"
-					uniqueguid="41B75D9C-AB67-43E5-A6EED7E9CBFAE957"/>
-				<state_uniqueguid
-					name="selected_inactive"
-					uniqueguid="AE09AF95-29DB-452B-AAAE6360C44922E9"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_active.png"
-					uniqueguid="DF2EFE71-5CE1-47F4-9BC1041DDE3979BA"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_hover.png"
-					uniqueguid="3DE1003A-7127-4D71-B81FA34CA07D7363"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_selected.png"
-					uniqueguid="D5B8F995-0931-4A42-9F058E65001EDF6A"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_selected_hover.png"
-					uniqueguid="14A5C47D-0ACA-45FC-96BAE41025AADE79"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context callback_id="ButtonToggleTweaker">
-					<child_m_user_properties>
-						<property
-							name="tweaker"
-							value="BATTLE_AI_DEBUG_DISPLAY_UNIT_OBJECTIVE"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbacks_with_context>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					is_text_localised="false"/>
-				<localised_text
-					state="down"
-					is_text_localised="false"/>
-				<localised_text
-					state="down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_down"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_down_off"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_hover"
-					is_text_localised="false"/>
-				<localised_text
-					state="selected_inactive"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/skins/default/checkbox_active.png"/>
-				<element value="ui/skins/default/checkbox_hover.png"/>
-				<element value="ui/skins/default/checkbox_selected.png"/>
-				<element value="ui/skins/default/checkbox_selected_hover.png"/>
-			</override_images>
-		</checkbox_toggle>
-		<checkbox_toggle
-			this="F91A5679-CEB7-414D-B4C9916C4C0EC444"
-			id="checkbox_toggle"
-			template_id="checkbox_toggle"
-			part_of_template="true"
-			uniqueguid_in_template="7F83FB2C-D99A-49C3-9E182FC5C1CDFF35"
-			uniqueguid="F91A5679-CEB7-414D-B4C9916C4C0EC444"
-			dimensions="34.00,32.00"
-			priority="60"
-			sound_category="UI_GBL_TMP_CheckBox">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="3AA211EF-9383-4A89-B26F7FD92AC956B5"/>
-				<state_uniqueguid
-					name="down"
-					uniqueguid="DC9B38CA-9178-4E51-8B2A2C6A07608157"/>
-				<state_uniqueguid
-					name="down_off"
-					uniqueguid="0365891F-B686-435A-84390CA66FF822A5"/>
-				<state_uniqueguid
-					name="hover"
-					uniqueguid="BC18B7CB-8B9D-4CFD-A7332A3F5C30ADC3"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="644E4B51-6848-4FEF-86A8498963950A94"/>
-				<state_uniqueguid
-					name="selected"
-					uniqueguid="7576C665-1E5E-4159-B34467428BA3FB99"/>
-				<state_uniqueguid
-					name="selected_down"
-					uniqueguid="FF720A03-D740-4CDD-A433E8060FBAAC2B"/>
-				<state_uniqueguid
-					name="selected_down_off"
-					uniqueguid="94A9F6ED-DF64-4F43-ADAE0CA26E3A56ED"/>
-				<state_uniqueguid
-					name="selected_hover"
-					uniqueguid="829181B0-3B5F-4D67-B6CFD06ECCB74E11"/>
-				<state_uniqueguid
-					name="selected_inactive"
-					uniqueguid="AED073CB-22F5-46AB-82BB36A7745B9CDE"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_active.png"
-					uniqueguid="86DADC9C-7681-49AF-8933867726A23545"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_hover.png"
-					uniqueguid="2855D09A-384E-4D22-9A068E994F48241D"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_selected.png"
-					uniqueguid="AEAFDE85-2E95-4B15-93F7458E5710A95A"/>
-				<component_image_uniqueguid
-					name="ui/skins/default/checkbox_selected_hover.png"
-					uniqueguid="CF228CBA-21E5-4CE3-BFF5EBB0378D6CAD"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context callback_id="ButtonToggleTweaker">
-					<child_m_user_properties>
-						<property
-							name="tweaker"
-							value="BATTLE_AI_DEBUG_DISPLAY_UNIT_DETACHMENT"/>
+							value="BATTLE_AI_DEBUG_DISPLAY_UNIT_ORDER"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbacks_with_context>
@@ -1475,67 +1473,67 @@
 			</override_images>
 		</checkbox_toggle>
 		<checkbox_toggle
-			this="F6FB12D5-D1AF-498A-B2E186278C9EAE01"
+			this="B316B187-4872-4C78-8A0ED4F793E65E51"
 			id="checkbox_toggle"
 			template_id="checkbox_toggle"
 			part_of_template="true"
 			uniqueguid_in_template="7F83FB2C-D99A-49C3-9E182FC5C1CDFF35"
-			uniqueguid="F6FB12D5-D1AF-498A-B2E186278C9EAE01"
+			uniqueguid="B316B187-4872-4C78-8A0ED4F793E65E51"
 			dimensions="34.00,32.00"
 			priority="60"
 			sound_category="UI_GBL_TMP_CheckBox">
 			<state_uniqueguids>
 				<state_uniqueguid
 					name="active"
-					uniqueguid="B722C488-92E1-4B35-80D8CAB68F2353F3"/>
+					uniqueguid="F993243D-C057-4D06-B7121302C76DD356"/>
 				<state_uniqueguid
 					name="down"
-					uniqueguid="08FBDE81-88E1-46CE-B012927EE2BF83E0"/>
+					uniqueguid="B69DEE2E-5800-4037-8B94D7979EB2E0E5"/>
 				<state_uniqueguid
 					name="down_off"
-					uniqueguid="E248350D-D7D8-413F-ADD1A0B4010706CC"/>
+					uniqueguid="0400AD64-8316-408F-92FC9FC9BEC55B7E"/>
 				<state_uniqueguid
 					name="hover"
-					uniqueguid="CFADF53A-0A08-42B4-AE72A23FE9D61DE7"/>
+					uniqueguid="2459F9B0-ED21-4DE6-ADF9A59538BA2D23"/>
 				<state_uniqueguid
 					name="inactive"
-					uniqueguid="818B2CDB-3329-4707-920F5376B90AC2EA"/>
+					uniqueguid="896F73BC-3EBF-4F88-8A322587046D6C52"/>
 				<state_uniqueguid
 					name="selected"
-					uniqueguid="426EF5FE-8982-4739-A93D11A8FDC524DB"/>
+					uniqueguid="33547181-99CE-40BC-AD6373936F0F2B1E"/>
 				<state_uniqueguid
 					name="selected_down"
-					uniqueguid="4E73A133-23DE-48B5-86A982F0B7826B8A"/>
+					uniqueguid="D684EF8B-81F0-4C7A-91204EA1CE3B8312"/>
 				<state_uniqueguid
 					name="selected_down_off"
-					uniqueguid="55301E13-2564-43AA-A6DA88A8D3708911"/>
+					uniqueguid="08FD6BB2-0B21-4E75-B88FE5918A34F7A9"/>
 				<state_uniqueguid
 					name="selected_hover"
-					uniqueguid="9D5A869C-DC9B-4ACA-AF33A8747C58A767"/>
+					uniqueguid="AA44DEB5-BD05-4598-BBBF46E9F7419DEC"/>
 				<state_uniqueguid
 					name="selected_inactive"
-					uniqueguid="59BE6895-EC6C-4F7F-83AF0621A7ECB6C1"/>
+					uniqueguid="EB2C8750-9FDA-4FA4-9146A59026268967"/>
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
 					name="ui/skins/default/checkbox_active.png"
-					uniqueguid="6CA6A31E-8BD8-457A-86F91D4C098669AE"/>
+					uniqueguid="3A3BC083-B740-430E-AD2B08F5360FD4C8"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/checkbox_hover.png"
-					uniqueguid="D16A5127-2968-4163-A83B780537FFE7EC"/>
+					uniqueguid="58D7966A-446E-47D8-876D703FB9D509F1"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/checkbox_selected.png"
-					uniqueguid="B69B5DCD-E638-469C-B03995F55AC1CFD7"/>
+					uniqueguid="4F7CBE84-53AD-4C7E-B6606416EB2367ED"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/checkbox_selected_hover.png"
-					uniqueguid="641F5827-5BA6-440C-9A6C6E27118C01E9"/>
+					uniqueguid="C1B0CCCD-8A59-4A74-8539356B35B60100"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context callback_id="ButtonToggleTweaker">
 					<child_m_user_properties>
 						<property
 							name="tweaker"
-							value="BATTLE_AI_DEBUG_DISPLAY_UNIT_PULLING_BACK"/>
+							value="BATTLE_AI_DEBUG_DISPLAY_UNIT_ACTIVE_SPECIAL_ABILITIES"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbacks_with_context>
@@ -1685,67 +1683,67 @@
 			</override_images>
 		</checkbox_toggle>
 		<checkbox_toggle
-			this="99F3A86B-2152-4EF5-B51718940EC9D8CC"
+			this="139855FC-FF99-47DD-A92F215B57FF3FFD"
 			id="checkbox_toggle"
 			template_id="checkbox_toggle"
 			part_of_template="true"
 			uniqueguid_in_template="7F83FB2C-D99A-49C3-9E182FC5C1CDFF35"
-			uniqueguid="99F3A86B-2152-4EF5-B51718940EC9D8CC"
+			uniqueguid="139855FC-FF99-47DD-A92F215B57FF3FFD"
 			dimensions="34.00,32.00"
 			priority="60"
 			sound_category="UI_GBL_TMP_CheckBox">
 			<state_uniqueguids>
 				<state_uniqueguid
 					name="active"
-					uniqueguid="FF79B4C7-3B4E-4D7D-82C2C40159D695AA"/>
+					uniqueguid="453B4E7A-41EF-4C70-A6620623F271FB2B"/>
 				<state_uniqueguid
 					name="down"
-					uniqueguid="8976C6FC-A531-43EF-80B771CCA37D3891"/>
+					uniqueguid="E57AA837-CEEA-4205-9971FFE2001B70D8"/>
 				<state_uniqueguid
 					name="down_off"
-					uniqueguid="602C2B1D-381F-4DBA-B1F94EE5BD8A70EE"/>
+					uniqueguid="02EFE3C0-7986-4589-85C203769E1DDDC4"/>
 				<state_uniqueguid
 					name="hover"
-					uniqueguid="5734039D-C0CE-4CF6-AA8C87D40839C352"/>
+					uniqueguid="C54CFBF5-F7BE-493B-B57DFBCF970B7A0A"/>
 				<state_uniqueguid
 					name="inactive"
-					uniqueguid="0B5D2F88-2A42-4999-8A45EBD5CDBBD3F8"/>
+					uniqueguid="F6BDE935-4FCD-4834-B493F7CA7ABFE2E7"/>
 				<state_uniqueguid
 					name="selected"
-					uniqueguid="A5C630AE-C51B-4E6B-8BD4293753C383CC"/>
+					uniqueguid="84F26B00-0D1A-4FC2-81E6528456365CB0"/>
 				<state_uniqueguid
 					name="selected_down"
-					uniqueguid="B8A974CF-794B-4B29-BC9B4D92C0F67626"/>
+					uniqueguid="31BCE218-1FA0-4DB5-8472C87A4FDB957A"/>
 				<state_uniqueguid
 					name="selected_down_off"
-					uniqueguid="9D20A53C-E46D-4DD6-BDBFDB3F8A9BA519"/>
+					uniqueguid="292E0FE2-1890-409B-A0D58E0154D94962"/>
 				<state_uniqueguid
 					name="selected_hover"
-					uniqueguid="4B0EDB7F-5FC6-489E-9F60A4AB190768C7"/>
+					uniqueguid="C9503B26-509A-4169-B7C8E7E81A2576CD"/>
 				<state_uniqueguid
 					name="selected_inactive"
-					uniqueguid="F0D0C059-7B08-487D-8CD8799E281D2FE5"/>
+					uniqueguid="1B2F984C-C4C0-4ADB-9501D17E34DCD406"/>
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
 					name="ui/skins/default/checkbox_active.png"
-					uniqueguid="345E2019-FBBC-4946-9132A099889CF8EA"/>
+					uniqueguid="CDE87331-74A7-4E3A-A878888EDC91492D"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/checkbox_hover.png"
-					uniqueguid="5D5B91AA-92D2-408E-B1E809E8C2448ECC"/>
+					uniqueguid="9380ADB8-63ED-43F8-90E2E24C5A68B2D9"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/checkbox_selected.png"
-					uniqueguid="4B983C68-1130-4C3D-A04512934BE6D633"/>
+					uniqueguid="16BD49C9-0602-41D5-A6B4B7A29826D325"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/checkbox_selected_hover.png"
-					uniqueguid="1A5BD598-84A4-495D-B4DC4A7CBBE31537"/>
+					uniqueguid="F6FBB48C-699D-443F-919A77C909318D18"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context callback_id="ButtonToggleTweaker">
 					<child_m_user_properties>
 						<property
 							name="tweaker"
-							value="BATTLE_AI_DEBUG_DISPLAY_UNIT_ORDER"/>
+							value="BATTLE_AI_DEBUG_DISPLAY_ENABLED"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbacks_with_context>
@@ -1790,67 +1788,67 @@
 			</override_images>
 		</checkbox_toggle>
 		<checkbox_toggle
-			this="B316B187-4872-4C78-8A0ED4F793E65E51"
+			this="C5225CD8-D0C7-4939-B687FFCC007C4556"
 			id="checkbox_toggle"
 			template_id="checkbox_toggle"
 			part_of_template="true"
 			uniqueguid_in_template="7F83FB2C-D99A-49C3-9E182FC5C1CDFF35"
-			uniqueguid="B316B187-4872-4C78-8A0ED4F793E65E51"
+			uniqueguid="C5225CD8-D0C7-4939-B687FFCC007C4556"
 			dimensions="34.00,32.00"
 			priority="60"
 			sound_category="UI_GBL_TMP_CheckBox">
 			<state_uniqueguids>
 				<state_uniqueguid
 					name="active"
-					uniqueguid="F993243D-C057-4D06-B7121302C76DD356"/>
+					uniqueguid="30557DC2-28F3-43CB-8B1DF38539465833"/>
 				<state_uniqueguid
 					name="down"
-					uniqueguid="B69DEE2E-5800-4037-8B94D7979EB2E0E5"/>
+					uniqueguid="7FF2D38E-16F8-4FA7-BCD126C46B2BCD46"/>
 				<state_uniqueguid
 					name="down_off"
-					uniqueguid="0400AD64-8316-408F-92FC9FC9BEC55B7E"/>
+					uniqueguid="F006FF29-451D-450F-ACFCD670DD7A8803"/>
 				<state_uniqueguid
 					name="hover"
-					uniqueguid="2459F9B0-ED21-4DE6-ADF9A59538BA2D23"/>
+					uniqueguid="75989466-8A35-4585-9134B6949B0E9EF5"/>
 				<state_uniqueguid
 					name="inactive"
-					uniqueguid="896F73BC-3EBF-4F88-8A322587046D6C52"/>
+					uniqueguid="AD27B746-416C-4CEF-9CA2D9EAADB09A1F"/>
 				<state_uniqueguid
 					name="selected"
-					uniqueguid="33547181-99CE-40BC-AD6373936F0F2B1E"/>
+					uniqueguid="C55529D2-3BA3-42CA-BAC28360FF31D317"/>
 				<state_uniqueguid
 					name="selected_down"
-					uniqueguid="D684EF8B-81F0-4C7A-91204EA1CE3B8312"/>
+					uniqueguid="A75653D8-4F75-4EB0-96107CA891F32875"/>
 				<state_uniqueguid
 					name="selected_down_off"
-					uniqueguid="08FD6BB2-0B21-4E75-B88FE5918A34F7A9"/>
+					uniqueguid="50BBD97D-5732-46DB-81C88D2E8831B1F7"/>
 				<state_uniqueguid
 					name="selected_hover"
-					uniqueguid="AA44DEB5-BD05-4598-BBBF46E9F7419DEC"/>
+					uniqueguid="7E5918DC-F93D-4496-8AA86C3DF3D7E829"/>
 				<state_uniqueguid
 					name="selected_inactive"
-					uniqueguid="EB2C8750-9FDA-4FA4-9146A59026268967"/>
+					uniqueguid="122B3C9B-66D9-4141-8EB2843CE7362D45"/>
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
 					name="ui/skins/default/checkbox_active.png"
-					uniqueguid="3A3BC083-B740-430E-AD2B08F5360FD4C8"/>
+					uniqueguid="39522BB8-5D56-46B2-BF1E4865B04A9BB0"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/checkbox_hover.png"
-					uniqueguid="58D7966A-446E-47D8-876D703FB9D509F1"/>
+					uniqueguid="F05BEB42-0DA3-46EB-B893062CA6282A46"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/checkbox_selected.png"
-					uniqueguid="4F7CBE84-53AD-4C7E-B6606416EB2367ED"/>
+					uniqueguid="8B3AB0E4-8A74-45AF-B890C43EEC712C85"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/checkbox_selected_hover.png"
-					uniqueguid="C1B0CCCD-8A59-4A74-8539356B35B60100"/>
+					uniqueguid="1F93F933-6E82-4FD4-82C78CC221603EAB"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context callback_id="ButtonToggleTweaker">
 					<child_m_user_properties>
 						<property
 							name="tweaker"
-							value="BATTLE_AI_DEBUG_DISPLAY_UNIT_ACTIVE_SPECIAL_ABILITIES"/>
+							value="BATTLE_AI_DEBUG_DISPLAY_UNIT_ID"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbacks_with_context>
@@ -1894,15 +1892,645 @@
 				<element value="ui/skins/default/checkbox_selected_hover.png"/>
 			</override_images>
 		</checkbox_toggle>
-		<list_parent
-			this="3FD07A92-7CDA-46D6-91271ED67D111172"
-			id="list_parent"
-			offset="24.00,24.00"
+		<checkbox_toggle
+			this="D3058CF1-5B39-4A79-BC2C89E0314799D7"
+			id="checkbox_toggle"
+			template_id="checkbox_toggle"
+			part_of_template="true"
+			uniqueguid_in_template="7F83FB2C-D99A-49C3-9E182FC5C1CDFF35"
+			uniqueguid="D3058CF1-5B39-4A79-BC2C89E0314799D7"
+			dimensions="34.00,32.00"
+			priority="60"
+			sound_category="UI_GBL_TMP_CheckBox">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="EA365336-CB1F-4150-95AE1C243B25F9AB"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="F394D74E-91B8-46E1-908FE2F75C5BA745"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="F7B00E77-5296-4562-B684D7F1F9A347FC"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="0DDC1891-054F-4A97-9BD0117D8EEA65C5"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="64117A38-4361-4F7C-B2F4E16D655A86E9"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="29F96ED2-0EB7-4B1B-93C643B7BEF17EC2"/>
+				<state_uniqueguid
+					name="selected_down"
+					uniqueguid="2E17723E-2190-43CE-89C8BF2EC527602E"/>
+				<state_uniqueguid
+					name="selected_down_off"
+					uniqueguid="121E3E1B-AF0B-4CFF-821327613F81C51E"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="9F9E9671-EB21-4304-81335F5259014381"/>
+				<state_uniqueguid
+					name="selected_inactive"
+					uniqueguid="C99B1854-8CBB-46C7-A011D22BF80158CC"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_active.png"
+					uniqueguid="CFA64F46-8F5A-451D-97BB7CB8BCF74169"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_hover.png"
+					uniqueguid="EE5B7D60-6237-4BFA-9F1030F7FC332236"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_selected.png"
+					uniqueguid="8CE751B3-F3E6-4A2C-80A184C188BACD2C"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_selected_hover.png"
+					uniqueguid="F3F188DB-8DA0-4191-818A30B275CB6274"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="ButtonToggleTweaker">
+					<child_m_user_properties>
+						<property
+							name="tweaker"
+							value="BATTLE_AI_DEBUG_DISPLAY_UNIT_SCRIPT_CONTROL"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/checkbox_active.png"/>
+				<element value="ui/skins/default/checkbox_hover.png"/>
+				<element value="ui/skins/default/checkbox_selected.png"/>
+				<element value="ui/skins/default/checkbox_selected_hover.png"/>
+			</override_images>
+		</checkbox_toggle>
+		<checkbox_toggle
+			this="F6FB12D5-D1AF-498A-B2E186278C9EAE01"
+			id="checkbox_toggle"
+			template_id="checkbox_toggle"
+			part_of_template="true"
+			uniqueguid_in_template="7F83FB2C-D99A-49C3-9E182FC5C1CDFF35"
+			uniqueguid="F6FB12D5-D1AF-498A-B2E186278C9EAE01"
+			dimensions="34.00,32.00"
+			priority="60"
+			sound_category="UI_GBL_TMP_CheckBox">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="B722C488-92E1-4B35-80D8CAB68F2353F3"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="08FBDE81-88E1-46CE-B012927EE2BF83E0"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="E248350D-D7D8-413F-ADD1A0B4010706CC"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="CFADF53A-0A08-42B4-AE72A23FE9D61DE7"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="818B2CDB-3329-4707-920F5376B90AC2EA"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="426EF5FE-8982-4739-A93D11A8FDC524DB"/>
+				<state_uniqueguid
+					name="selected_down"
+					uniqueguid="4E73A133-23DE-48B5-86A982F0B7826B8A"/>
+				<state_uniqueguid
+					name="selected_down_off"
+					uniqueguid="55301E13-2564-43AA-A6DA88A8D3708911"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="9D5A869C-DC9B-4ACA-AF33A8747C58A767"/>
+				<state_uniqueguid
+					name="selected_inactive"
+					uniqueguid="59BE6895-EC6C-4F7F-83AF0621A7ECB6C1"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_active.png"
+					uniqueguid="6CA6A31E-8BD8-457A-86F91D4C098669AE"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_hover.png"
+					uniqueguid="D16A5127-2968-4163-A83B780537FFE7EC"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_selected.png"
+					uniqueguid="B69B5DCD-E638-469C-B03995F55AC1CFD7"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_selected_hover.png"
+					uniqueguid="641F5827-5BA6-440C-9A6C6E27118C01E9"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="ButtonToggleTweaker">
+					<child_m_user_properties>
+						<property
+							name="tweaker"
+							value="BATTLE_AI_DEBUG_DISPLAY_UNIT_PULLING_BACK"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/checkbox_active.png"/>
+				<element value="ui/skins/default/checkbox_hover.png"/>
+				<element value="ui/skins/default/checkbox_selected.png"/>
+				<element value="ui/skins/default/checkbox_selected_hover.png"/>
+			</override_images>
+		</checkbox_toggle>
+		<checkbox_toggle
+			this="F91A5679-CEB7-414D-B4C9916C4C0EC444"
+			id="checkbox_toggle"
+			template_id="checkbox_toggle"
+			part_of_template="true"
+			uniqueguid_in_template="7F83FB2C-D99A-49C3-9E182FC5C1CDFF35"
+			uniqueguid="F91A5679-CEB7-414D-B4C9916C4C0EC444"
+			dimensions="34.00,32.00"
+			priority="60"
+			sound_category="UI_GBL_TMP_CheckBox">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="3AA211EF-9383-4A89-B26F7FD92AC956B5"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="DC9B38CA-9178-4E51-8B2A2C6A07608157"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="0365891F-B686-435A-84390CA66FF822A5"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="BC18B7CB-8B9D-4CFD-A7332A3F5C30ADC3"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="644E4B51-6848-4FEF-86A8498963950A94"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="7576C665-1E5E-4159-B34467428BA3FB99"/>
+				<state_uniqueguid
+					name="selected_down"
+					uniqueguid="FF720A03-D740-4CDD-A433E8060FBAAC2B"/>
+				<state_uniqueguid
+					name="selected_down_off"
+					uniqueguid="94A9F6ED-DF64-4F43-ADAE0CA26E3A56ED"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="829181B0-3B5F-4D67-B6CFD06ECCB74E11"/>
+				<state_uniqueguid
+					name="selected_inactive"
+					uniqueguid="AED073CB-22F5-46AB-82BB36A7745B9CDE"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_active.png"
+					uniqueguid="86DADC9C-7681-49AF-8933867726A23545"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_hover.png"
+					uniqueguid="2855D09A-384E-4D22-9A068E994F48241D"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_selected.png"
+					uniqueguid="AEAFDE85-2E95-4B15-93F7458E5710A95A"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_selected_hover.png"
+					uniqueguid="CF228CBA-21E5-4CE3-BFF5EBB0378D6CAD"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="ButtonToggleTweaker">
+					<child_m_user_properties>
+						<property
+							name="tweaker"
+							value="BATTLE_AI_DEBUG_DISPLAY_UNIT_DETACHMENT"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/checkbox_active.png"/>
+				<element value="ui/skins/default/checkbox_hover.png"/>
+				<element value="ui/skins/default/checkbox_selected.png"/>
+				<element value="ui/skins/default/checkbox_selected_hover.png"/>
+			</override_images>
+		</checkbox_toggle>
+		<checkbox_toggle
+			this="0309D53A-D5FC-47AA-9885EF1384DC71C6"
+			id="checkbox_toggle"
+			template_id="checkbox_toggle"
+			part_of_template="true"
+			uniqueguid_in_template="7F83FB2C-D99A-49C3-9E182FC5C1CDFF35"
+			uniqueguid="0309D53A-D5FC-47AA-9885EF1384DC71C6"
+			dimensions="34.00,32.00"
+			priority="60"
+			sound_category="UI_GBL_TMP_CheckBox">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="0EE2DC05-D213-466F-98FFFAD0FE05516D"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="FABCBAEC-97BE-45AB-BA272D086D8549C8"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="3EDD0EE4-EC13-452C-B9B4C19CF5E991F1"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="B8B80BA9-36F3-4CE0-BBD731263B4945B1"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="AF3AC4C0-0352-40EA-BB712CBDB93170B5"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="9ADA9B73-1A66-422B-B0E7A1CBD02F2A34"/>
+				<state_uniqueguid
+					name="selected_down"
+					uniqueguid="B2BEFEFB-3C08-48AE-A1B80E8AF56F8D64"/>
+				<state_uniqueguid
+					name="selected_down_off"
+					uniqueguid="CF4EBC5D-531E-4F8C-B1BF533987751F15"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="9DE1077E-065A-4A3E-B838EE8721FB4F7A"/>
+				<state_uniqueguid
+					name="selected_inactive"
+					uniqueguid="EB451279-CDA3-4681-A14899605E2E31E8"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_active.png"
+					uniqueguid="75435AA3-A32B-4280-ACFA94B9614556C3"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_hover.png"
+					uniqueguid="2CA930C4-D39A-46AC-875E13C8C68AD352"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_selected.png"
+					uniqueguid="0D29CD51-49B6-46A4-934B9812D82CD4FB"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_selected_hover.png"
+					uniqueguid="8AAA6D91-B4C9-4DD9-800F6C8A360DD9F2"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="ButtonToggleTweaker">
+					<child_m_user_properties>
+						<property
+							name="tweaker"
+							value="BATTLE_AI_DEBUG_DISPLAY_UNIT_LOCAL_PLANNER"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/checkbox_active.png"/>
+				<element value="ui/skins/default/checkbox_hover.png"/>
+				<element value="ui/skins/default/checkbox_selected.png"/>
+				<element value="ui/skins/default/checkbox_selected_hover.png"/>
+			</override_images>
+		</checkbox_toggle>
+		<checkbox_toggle
+			this="291C052C-95D3-49FC-A8574B0E70A1C272"
+			id="checkbox_toggle"
+			template_id="checkbox_toggle"
+			part_of_template="true"
+			uniqueguid_in_template="7F83FB2C-D99A-49C3-9E182FC5C1CDFF35"
+			uniqueguid="291C052C-95D3-49FC-A8574B0E70A1C272"
+			dimensions="34.00,32.00"
+			priority="60"
+			sound_category="UI_GBL_TMP_CheckBox">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="80A8FC6E-E869-4ABB-AC478EDFA8836164"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="087BDF19-DD98-4419-A40CC1DD79200401"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="414F958A-81BB-477E-AC25AD75161CC0B4"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="BC99105E-DE5A-4E9E-A3A7D2F07507FDF5"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="E6DA233B-183D-4FC0-93D8E45EFA3D49AF"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="5A8C93B2-F940-4CBE-A30B2034964082D7"/>
+				<state_uniqueguid
+					name="selected_down"
+					uniqueguid="C4768216-AA67-436E-91335569BB35544D"/>
+				<state_uniqueguid
+					name="selected_down_off"
+					uniqueguid="87A4AE9E-AFE7-4E20-A545034DCA2C23D3"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="6787C253-4002-4BDC-AF4B42D9123BA3C2"/>
+				<state_uniqueguid
+					name="selected_inactive"
+					uniqueguid="5399E4E3-6F7C-455B-914722C26C4F37AD"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_active.png"
+					uniqueguid="55DC0AD9-E525-4E01-97C63CA184EBF210"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_hover.png"
+					uniqueguid="6FE588A2-E5F6-47A4-83D25D614DF1DB30"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_selected.png"
+					uniqueguid="A47667EF-D602-41FD-B4E6AC20C4DCDDCF"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_selected_hover.png"
+					uniqueguid="6D57B9A1-89FF-4700-9E17FBB460BBC753"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="ButtonToggleTweaker">
+					<child_m_user_properties>
+						<property
+							name="tweaker"
+							value="BATTLE_AI_DEBUG_DISPLAY_UNIT_COMBAT_POTENTIAL"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/checkbox_active.png"/>
+				<element value="ui/skins/default/checkbox_hover.png"/>
+				<element value="ui/skins/default/checkbox_selected.png"/>
+				<element value="ui/skins/default/checkbox_selected_hover.png"/>
+			</override_images>
+		</checkbox_toggle>
+		<checkbox_toggle
+			this="2AF0ECDD-252B-46B2-95EF0612C52354CD"
+			id="checkbox_toggle"
+			template_id="checkbox_toggle"
+			part_of_template="true"
+			uniqueguid_in_template="7F83FB2C-D99A-49C3-9E182FC5C1CDFF35"
+			uniqueguid="2AF0ECDD-252B-46B2-95EF0612C52354CD"
+			dimensions="34.00,32.00"
+			priority="60"
+			sound_category="UI_GBL_TMP_CheckBox">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="87B9D541-9181-4E13-8D30770EC26B1F7B"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="FB4ADAE8-67BF-4E61-AB8283854D5A97B1"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="1D22E85E-32E2-4864-BB6C614E5C8C900A"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="280C1236-5018-4D26-983C18409EBEC093"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="2E5F4054-B817-43F1-BCFAF6E6B3B9C556"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="B6479358-5C3B-40E8-853AE6350F2C0F2D"/>
+				<state_uniqueguid
+					name="selected_down"
+					uniqueguid="42A909E2-22D0-4372-BD1CFD480626BB08"/>
+				<state_uniqueguid
+					name="selected_down_off"
+					uniqueguid="3C5A4DBC-B652-41BB-A142FCDBB4AC40BE"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="0FC2E539-6B2C-4156-9D399239134C9A3B"/>
+				<state_uniqueguid
+					name="selected_inactive"
+					uniqueguid="745E6708-94A7-46F4-9A40E87AEEE4B6EB"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_active.png"
+					uniqueguid="42104D9F-4D37-4B4F-A9E6BE59DE206EDD"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_hover.png"
+					uniqueguid="2333D9B4-B7D0-4337-B05C6FFF9C07FC7C"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_selected.png"
+					uniqueguid="4E31DDE1-CD3D-40F6-A9759807657BC26A"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_selected_hover.png"
+					uniqueguid="AA9C3C9D-6E47-4317-91CA707C8AEA6D28"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="ButtonToggleTweaker">
+					<child_m_user_properties>
+						<property
+							name="tweaker"
+							value="BATTLE_AI_DEBUG_DISPLAY_UNIT_MELEE_HINT"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/checkbox_active.png"/>
+				<element value="ui/skins/default/checkbox_hover.png"/>
+				<element value="ui/skins/default/checkbox_selected.png"/>
+				<element value="ui/skins/default/checkbox_selected_hover.png"/>
+			</override_images>
+		</checkbox_toggle>
+		<checkbox_unit_detachment
+			this="6CC0D047-6BFF-44C9-A02AE42CFD3551EB"
+			id="checkbox_unit_detachment"
+			offset="16.00,288.00"
 			priority="60"
 			tooltipslocalised="true"
-			uniqueguid="3FD07A92-7CDA-46D6-91271ED67D111172"
-			currentstate="F6781709-D8C6-4052-A38462D29E8387B9"
-			defaultstate="F6781709-D8C6-4052-A38462D29E8387B9">
+			uniqueguid="6CC0D047-6BFF-44C9-A02AE42CFD3551EB"
+			currentstate="A9C2922E-F9FB-45E1-B49AD85468DB4E29"
+			defaultstate="A9C2922E-F9FB-45E1-B49AD85468DB4E29">
 			<userproperties>
 				<property
 					name="dynamic_child"
@@ -1910,20 +2538,172 @@
 			</userproperties>
 			<states>
 				<default
-					this="F6781709-D8C6-4052-A38462D29E8387B9"
+					this="A9C2922E-F9FB-45E1-B49AD85468DB4E29"
+					name="default"
+					width="424"
+					uniqueguid="A9C2922E-F9FB-45E1-B49AD85468DB4E29"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"
+				vertical_alignment="Center"/>
+		</checkbox_unit_detachment>
+		<checkbox_unit_id
+			this="4191DE46-AC56-4569-8FFCEE5194BF3066"
+			id="checkbox_unit_id"
+			offset="16.00,64.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="4191DE46-AC56-4569-8FFCEE5194BF3066"
+			currentstate="3B66B7BF-9179-4B21-8F845419E82EE514"
+			defaultstate="3B66B7BF-9179-4B21-8F845419E82EE514">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="3B66B7BF-9179-4B21-8F845419E82EE514"
+					name="default"
+					width="344"
+					uniqueguid="3B66B7BF-9179-4B21-8F845419E82EE514"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"
+				vertical_alignment="Center"/>
+		</checkbox_unit_id>
+		<checkbox_unit_name
+			this="AD6C92F6-B626-448F-81E7AC0C308464BE"
+			id="checkbox_unit_name"
+			offset="16.00,96.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="AD6C92F6-B626-448F-81E7AC0C308464BE"
+			currentstate="C9B62987-85A6-4FC6-A7E4B395C37C94BF"
+			defaultstate="C9B62987-85A6-4FC6-A7E4B395C37C94BF">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="C9B62987-85A6-4FC6-A7E4B395C37C94BF"
+					name="default"
+					width="364"
+					uniqueguid="C9B62987-85A6-4FC6-A7E4B395C37C94BF"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"
+				vertical_alignment="Center"/>
+		</checkbox_unit_name>
+		<checkbox_unit_order
+			this="B6277CFE-6EE9-42DC-9A6C108F1F8048AB"
+			id="checkbox_unit_order"
+			offset="16.00,416.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="B6277CFE-6EE9-42DC-9A6C108F1F8048AB"
+			currentstate="60EE70A2-C575-4AC9-B4568D539EF413D1"
+			defaultstate="60EE70A2-C575-4AC9-B4568D539EF413D1">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="60EE70A2-C575-4AC9-B4568D539EF413D1"
+					name="default"
+					width="374"
+					uniqueguid="60EE70A2-C575-4AC9-B4568D539EF413D1"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"
+				vertical_alignment="Center"/>
+		</checkbox_unit_order>
+		<checkbox_unit_pulling_back
+			this="9D9D6618-ECBC-47BF-B40768C5C9BED709"
+			id="checkbox_unit_pulling_back"
+			offset="16.00,352.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="9D9D6618-ECBC-47BF-B40768C5C9BED709"
+			currentstate="8E8F5733-E6DF-4AB0-82C52F69F8B47010"
+			defaultstate="8E8F5733-E6DF-4AB0-82C52F69F8B47010">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="8E8F5733-E6DF-4AB0-82C52F69F8B47010"
+					name="default"
+					width="444"
+					uniqueguid="8E8F5733-E6DF-4AB0-82C52F69F8B47010"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"
+				vertical_alignment="Center"/>
+		</checkbox_unit_pulling_back>
+		<checkbox_unit_tactic
+			this="00A4EEEB-F365-40DF-ADE770D982FDA1C0"
+			id="checkbox_unit_tactic"
+			offset="16.00,320.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="00A4EEEB-F365-40DF-ADE770D982FDA1C0"
+			currentstate="A5C98C73-09A0-4B9C-B95452BDCCA67440"
+			defaultstate="A5C98C73-09A0-4B9C-B95452BDCCA67440">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="A5C98C73-09A0-4B9C-B95452BDCCA67440"
+					name="default"
+					width="384"
+					uniqueguid="A5C98C73-09A0-4B9C-B95452BDCCA67440"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"
+				vertical_alignment="Center"/>
+		</checkbox_unit_tactic>
+		<dev_unit_info_parent
+			this="E830698A-B5BD-4804-80EFCC2E05DA74DC"
+			id="dev_unit_info_parent"
+			offset="0.00,69.00"
+			priority="999999"
+			tooltipslocalised="true"
+			uniqueguid="E830698A-B5BD-4804-80EFCC2E05DA74DC"
+			currentstate="81E167AA-C986-4720-9DEB0B830B4CD557"
+			defaultstate="81E167AA-C986-4720-9DEB0B830B4CD557">
+			<states>
+				<default
+					this="81E167AA-C986-4720-9DEB0B830B4CD557"
 					name="default"
 					width="596"
-					height="581"
-					uniqueguid="F6781709-D8C6-4052-A38462D29E8387B9"/>
+					height="512"
+					uniqueguid="81E167AA-C986-4720-9DEB0B830B4CD557"/>
 			</states>
 			<LayoutEngine
 				type="List"
-				sizetocontent="true">
+				sizetocontent="true"
+				secondary_margins="16.00,0.00">
 				<columnwidths>
-					<column width="45"/>
+					<column width="54"/>
 				</columnwidths>
 			</LayoutEngine>
-		</list_parent>
+		</dev_unit_info_parent>
 		<draggable_menu_parent
 			this="8F572417-0E95-4744-BE2E4B14399CCE8D"
 			id="draggable_menu_parent"
@@ -2003,99 +2783,16 @@
 				</columnwidths>
 			</LayoutEngine>
 		</draggable_menu_parent>
-		<root
-			this="4D7833FA-5854-40E1-9AF602DED76E9C83"
-			id="root"
-			tooltipslocalised="true"
-			uniqueguid="4D7833FA-5854-40E1-9AF602DED76E9C83"
-			currentstate="AD561F2B-F5E1-4911-BD09406A59A6970E"
-			defaultstate="AD561F2B-F5E1-4911-BD09406A59A6970E">
-			<componentimages>
-				<component_image
-					this="9041AEDF-1452-49F3-B78F62B517C730AA"
-					uniqueguid="9041AEDF-1452-49F3-B78F62B517C730AA"/>
-			</componentimages>
-			<states>
-				<default
-					this="AD561F2B-F5E1-4911-BD09406A59A6970E"
-					name="default"
-					width="1600"
-					height="900"
-					uniqueguid="AD561F2B-F5E1-4911-BD09406A59A6970E">
-					<imagemetrics>
-						<image
-							this="1B509541-2428-4D97-AECCA01DA0A2EA1F"
-							uniqueguid="1B509541-2428-4D97-AECCA01DA0A2EA1F"
-							componentimage="9041AEDF-1452-49F3-B78F62B517C730AA"
-							width="1600"
-							height="900"
-							colour="#F0F0F0FF"/>
-					</imagemetrics>
-				</default>
-			</states>
-		</root>
-		<checkbox_show_all
-			this="072889AA-D5F0-4DB6-B941ACEF60582F99"
-			id="checkbox_show_all"
-			offset="16.00,0.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="072889AA-D5F0-4DB6-B941ACEF60582F99"
-			currentstate="39BE12EC-6E5F-4B8E-84AFE5F70A927956"
-			defaultstate="39BE12EC-6E5F-4B8E-84AFE5F70A927956">
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="39BE12EC-6E5F-4B8E-84AFE5F70A927956"
-					name="default"
-					width="454"
-					uniqueguid="39BE12EC-6E5F-4B8E-84AFE5F70A927956"/>
-			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				sizetocontent="true"
-				vertical_alignment="Center"/>
-		</checkbox_show_all>
-		<checkbox_unit_name
-			this="AD6C92F6-B626-448F-81E7AC0C308464BE"
-			id="checkbox_unit_name"
-			offset="16.00,96.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="AD6C92F6-B626-448F-81E7AC0C308464BE"
-			currentstate="C9B62987-85A6-4FC6-A7E4B395C37C94BF"
-			defaultstate="C9B62987-85A6-4FC6-A7E4B395C37C94BF">
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="C9B62987-85A6-4FC6-A7E4B395C37C94BF"
-					name="default"
-					width="364"
-					uniqueguid="C9B62987-85A6-4FC6-A7E4B395C37C94BF"/>
-			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				sizetocontent="true"
-				vertical_alignment="Center"/>
-		</checkbox_unit_name>
 		<label
-			this="01DB87D4-2C3E-4E85-AF62C0AAC9751F51"
+			this="3D3D4009-D917-4A13-B4C72FDC96FE08FA"
 			id="label"
 			offset="34.00,8.00"
 			allowverticalresize="false"
 			priority="60"
 			tooltipslocalised="true"
-			uniqueguid="01DB87D4-2C3E-4E85-AF62C0AAC9751F51"
-			currentstate="3903215A-3A62-4C51-B1D99DFABBE00ECD"
-			defaultstate="3903215A-3A62-4C51-B1D99DFABBE00ECD">
+			uniqueguid="3D3D4009-D917-4A13-B4C72FDC96FE08FA"
+			currentstate="BD9B2054-F52D-426C-9E0D2EFF58CC25BC"
+			defaultstate="BD9B2054-F52D-426C-9E0D2EFF58CC25BC">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="CallbackRedirector">
 					<child_m_user_properties>
@@ -2115,756 +2812,16 @@
 			</userproperties>
 			<states>
 				<default
-					this="3903215A-3A62-4C51-B1D99DFABBE00ECD"
+					this="BD9B2054-F52D-426C-9E0D2EFF58CC25BC"
 					name="default"
 					width="420"
 					height="16"
 					interactive="true"
-					uniqueguid="3903215A-3A62-4C51-B1D99DFABBE00ECD">
+					uniqueguid="BD9B2054-F52D-426C-9E0D2EFF58CC25BC">
 					<component_text
-						text="BATTLE_AI_DEBUG_DISPLAY_SHOW_UNIT_INFO_ALL"
+						text="BATTLE_AI_DEBUG_DISPLAY_UNIT_SUB_TASK_TYPE"
 						texthbehaviour="Resize"
-						textlabel="label_default_Text_56004a"
-						font_m_font_name="dev_font"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="dev_text"/>
-				</default>
-			</states>
-		</label>
-		<label
-			this="9189C06E-F0DB-4EEF-80AF5A4F380E3C1C"
-			id="label"
-			offset="34.00,8.00"
-			allowverticalresize="false"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="9189C06E-F0DB-4EEF-80AF5A4F380E3C1C"
-			currentstate="25013142-D752-455D-A2C9EC31D832DC1B"
-			defaultstate="25013142-D752-455D-A2C9EC31D832DC1B">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="CallbackRedirector">
-					<child_m_user_properties>
-						<property
-							name="parent_id"
-							value="^1"/>
-						<property
-							name="target_id"
-							value="checkbox_toggle"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="25013142-D752-455D-A2C9EC31D832DC1B"
-					name="default"
-					width="330"
-					height="16"
-					interactive="true"
-					uniqueguid="25013142-D752-455D-A2C9EC31D832DC1B">
-					<component_text
-						text="BATTLE_AI_DEBUG_DISPLAY_UNIT_NAME"
-						texthbehaviour="Resize"
-						textlabel="label_default_Text_1f0048"
-						font_m_font_name="dev_font"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="dev_text"/>
-				</default>
-			</states>
-		</label>
-		<checkbox_active_abilities
-			this="5118AF17-3327-4C8C-B3024449C60B6F63"
-			id="checkbox_active_abilities"
-			offset="16.00,448.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="5118AF17-3327-4C8C-B3024449C60B6F63"
-			currentstate="FB8CCB1C-1C82-45A7-9BA1BB96A6C21866"
-			defaultstate="FB8CCB1C-1C82-45A7-9BA1BB96A6C21866">
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="FB8CCB1C-1C82-45A7-9BA1BB96A6C21866"
-					name="default"
-					width="564"
-					uniqueguid="FB8CCB1C-1C82-45A7-9BA1BB96A6C21866"/>
-			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				sizetocontent="true"
-				vertical_alignment="Center"/>
-		</checkbox_active_abilities>
-		<checkbox_command_info
-			this="9DD755A4-A53D-46BE-92E631859F15E18C"
-			id="checkbox_command_info"
-			offset="16.00,32.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="9DD755A4-A53D-46BE-92E631859F15E18C"
-			currentstate="1F45D5F1-D70D-4A77-8D04DECE3E30C349"
-			defaultstate="1F45D5F1-D70D-4A77-8D04DECE3E30C349">
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="1F45D5F1-D70D-4A77-8D04DECE3E30C349"
-					name="default"
-					width="494"
-					uniqueguid="1F45D5F1-D70D-4A77-8D04DECE3E30C349"/>
-			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				sizetocontent="true"
-				vertical_alignment="Center"/>
-		</checkbox_command_info>
-		<checkbox_cp
-			this="E3BE0CBC-AA4C-4612-8535C48EE2DD008B"
-			id="checkbox_cp"
-			offset="16.00,128.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="E3BE0CBC-AA4C-4612-8535C48EE2DD008B"
-			currentstate="9D0FA8D3-FF48-4F0A-9E3D2587371AED00"
-			defaultstate="9D0FA8D3-FF48-4F0A-9E3D2587371AED00">
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="9D0FA8D3-FF48-4F0A-9E3D2587371AED00"
-					name="default"
-					width="484"
-					uniqueguid="9D0FA8D3-FF48-4F0A-9E3D2587371AED00"/>
-			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				sizetocontent="true"
-				vertical_alignment="Center"/>
-		</checkbox_cp>
-		<checkbox_enable_unit_display
-			this="B2948564-C768-42F1-A84789F305B3AB39"
-			id="checkbox_enable_unit_display"
-			offset="16.00,0.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="B2948564-C768-42F1-A84789F305B3AB39"
-			currentstate="6F8D5ADB-2117-436E-8CF30076F0AAA73F"
-			defaultstate="6F8D5ADB-2117-436E-8CF30076F0AAA73F">
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="6F8D5ADB-2117-436E-8CF30076F0AAA73F"
-					name="default"
-					width="414"
-					uniqueguid="6F8D5ADB-2117-436E-8CF30076F0AAA73F"/>
-			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				sizetocontent="true"
-				vertical_alignment="Center"/>
-		</checkbox_enable_unit_display>
-		<checkbox_local_planner
-			this="D92ED34C-FC59-420E-9E98A76A06A4D1D5"
-			id="checkbox_local_planner"
-			offset="16.00,192.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="D92ED34C-FC59-420E-9E98A76A06A4D1D5"
-			currentstate="6352F016-3682-49B8-8774622EEE41992E"
-			defaultstate="6352F016-3682-49B8-8774622EEE41992E">
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="6352F016-3682-49B8-8774622EEE41992E"
-					name="default"
-					width="454"
-					uniqueguid="6352F016-3682-49B8-8774622EEE41992E"/>
-			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				sizetocontent="true"
-				vertical_alignment="Center"/>
-		</checkbox_local_planner>
-		<checkbox_melee_hint
-			this="7DBBA6B5-1590-4BAB-9FE6F72325AE5E3A"
-			id="checkbox_melee_hint"
-			offset="16.00,224.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="7DBBA6B5-1590-4BAB-9FE6F72325AE5E3A"
-			currentstate="E5669658-6288-4C69-89514A1D9C2854C0"
-			defaultstate="E5669658-6288-4C69-89514A1D9C2854C0">
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="E5669658-6288-4C69-89514A1D9C2854C0"
-					name="default"
-					width="424"
-					uniqueguid="E5669658-6288-4C69-89514A1D9C2854C0"/>
-			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				sizetocontent="true"
-				vertical_alignment="Center"/>
-		</checkbox_melee_hint>
-		<checkbox_objective
-			this="30B1E933-4A0F-4333-B9E89614F846A5CD"
-			id="checkbox_objective"
-			offset="16.00,256.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="30B1E933-4A0F-4333-B9E89614F846A5CD"
-			currentstate="F0802367-07B4-4F14-B3FE19DFE9176011"
-			defaultstate="F0802367-07B4-4F14-B3FE19DFE9176011">
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="F0802367-07B4-4F14-B3FE19DFE9176011"
-					name="default"
-					width="414"
-					uniqueguid="F0802367-07B4-4F14-B3FE19DFE9176011"/>
-			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				sizetocontent="true"
-				vertical_alignment="Center"/>
-		</checkbox_objective>
-		<checkbox_script
-			this="F3BF4BD1-1C4B-4C8E-96947705E2368DFB"
-			id="checkbox_script"
-			offset="16.00,160.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="F3BF4BD1-1C4B-4C8E-96947705E2368DFB"
-			currentstate="7CA11BE5-DBB9-4E88-BFA6C07ED6399D97"
-			defaultstate="7CA11BE5-DBB9-4E88-BFA6C07ED6399D97">
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="7CA11BE5-DBB9-4E88-BFA6C07ED6399D97"
-					name="default"
-					width="464"
-					uniqueguid="7CA11BE5-DBB9-4E88-BFA6C07ED6399D97"/>
-			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				sizetocontent="true"
-				vertical_alignment="Center"/>
-		</checkbox_script>
-		<checkbox_sub_task_type
-			this="09807F3B-5927-4D90-8A5AC1129D52E3B9"
-			id="checkbox_sub_task_type"
-			offset="16.00,384.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="09807F3B-5927-4D90-8A5AC1129D52E3B9"
-			currentstate="00D94AA6-53A8-42E5-9B7277AB43A25409"
-			defaultstate="00D94AA6-53A8-42E5-9B7277AB43A25409">
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="00D94AA6-53A8-42E5-9B7277AB43A25409"
-					name="default"
-					width="454"
-					uniqueguid="00D94AA6-53A8-42E5-9B7277AB43A25409"/>
-			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				sizetocontent="true"
-				vertical_alignment="Center"/>
-		</checkbox_sub_task_type>
-		<checkbox_unit_detachment
-			this="6CC0D047-6BFF-44C9-A02AE42CFD3551EB"
-			id="checkbox_unit_detachment"
-			offset="16.00,288.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="6CC0D047-6BFF-44C9-A02AE42CFD3551EB"
-			currentstate="A9C2922E-F9FB-45E1-B49AD85468DB4E29"
-			defaultstate="A9C2922E-F9FB-45E1-B49AD85468DB4E29">
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="A9C2922E-F9FB-45E1-B49AD85468DB4E29"
-					name="default"
-					width="424"
-					uniqueguid="A9C2922E-F9FB-45E1-B49AD85468DB4E29"/>
-			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				sizetocontent="true"
-				vertical_alignment="Center"/>
-		</checkbox_unit_detachment>
-		<checkbox_unit_id
-			this="4191DE46-AC56-4569-8FFCEE5194BF3066"
-			id="checkbox_unit_id"
-			offset="16.00,64.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="4191DE46-AC56-4569-8FFCEE5194BF3066"
-			currentstate="3B66B7BF-9179-4B21-8F845419E82EE514"
-			defaultstate="3B66B7BF-9179-4B21-8F845419E82EE514">
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="3B66B7BF-9179-4B21-8F845419E82EE514"
-					name="default"
-					width="344"
-					uniqueguid="3B66B7BF-9179-4B21-8F845419E82EE514"/>
-			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				sizetocontent="true"
-				vertical_alignment="Center"/>
-		</checkbox_unit_id>
-		<checkbox_unit_order
-			this="B6277CFE-6EE9-42DC-9A6C108F1F8048AB"
-			id="checkbox_unit_order"
-			offset="16.00,416.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="B6277CFE-6EE9-42DC-9A6C108F1F8048AB"
-			currentstate="60EE70A2-C575-4AC9-B4568D539EF413D1"
-			defaultstate="60EE70A2-C575-4AC9-B4568D539EF413D1">
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="60EE70A2-C575-4AC9-B4568D539EF413D1"
-					name="default"
-					width="374"
-					uniqueguid="60EE70A2-C575-4AC9-B4568D539EF413D1"/>
-			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				sizetocontent="true"
-				vertical_alignment="Center"/>
-		</checkbox_unit_order>
-		<checkbox_unit_pulling_back
-			this="9D9D6618-ECBC-47BF-B40768C5C9BED709"
-			id="checkbox_unit_pulling_back"
-			offset="16.00,352.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="9D9D6618-ECBC-47BF-B40768C5C9BED709"
-			currentstate="8E8F5733-E6DF-4AB0-82C52F69F8B47010"
-			defaultstate="8E8F5733-E6DF-4AB0-82C52F69F8B47010">
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="8E8F5733-E6DF-4AB0-82C52F69F8B47010"
-					name="default"
-					width="444"
-					uniqueguid="8E8F5733-E6DF-4AB0-82C52F69F8B47010"/>
-			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				sizetocontent="true"
-				vertical_alignment="Center"/>
-		</checkbox_unit_pulling_back>
-		<checkbox_unit_tactic
-			this="00A4EEEB-F365-40DF-ADE770D982FDA1C0"
-			id="checkbox_unit_tactic"
-			offset="16.00,320.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="00A4EEEB-F365-40DF-ADE770D982FDA1C0"
-			currentstate="A5C98C73-09A0-4B9C-B95452BDCCA67440"
-			defaultstate="A5C98C73-09A0-4B9C-B95452BDCCA67440">
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="A5C98C73-09A0-4B9C-B95452BDCCA67440"
-					name="default"
-					width="384"
-					uniqueguid="A5C98C73-09A0-4B9C-B95452BDCCA67440"/>
-			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				sizetocontent="true"
-				vertical_alignment="Center"/>
-		</checkbox_unit_tactic>
-		<label
-			this="EA69EC1F-19A2-456B-94B53787B3BC0969"
-			id="label"
-			offset="34.00,8.00"
-			allowverticalresize="false"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="EA69EC1F-19A2-456B-94B53787B3BC0969"
-			currentstate="BCE45C48-E40C-401C-B96B687D1D1A3558"
-			defaultstate="BCE45C48-E40C-401C-B96B687D1D1A3558">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="CallbackRedirector">
-					<child_m_user_properties>
-						<property
-							name="parent_id"
-							value="^1"/>
-						<property
-							name="target_id"
-							value="checkbox_toggle"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="BCE45C48-E40C-401C-B96B687D1D1A3558"
-					name="default"
-					width="380"
-					height="16"
-					interactive="true"
-					uniqueguid="BCE45C48-E40C-401C-B96B687D1D1A3558">
-					<component_text
-						text="BATTLE_AI_DEBUG_DISPLAY_SHOW_UNIT_INFO"
-						texthbehaviour="Resize"
-						textlabel="label_default_Text_5b0059"
-						font_m_font_name="dev_font"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="dev_text"/>
-				</default>
-			</states>
-		</label>
-		<label
-			this="57B83CE6-8FC8-42EC-923F13956D501995"
-			id="label"
-			offset="34.00,8.00"
-			allowverticalresize="false"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="57B83CE6-8FC8-42EC-923F13956D501995"
-			currentstate="42A6E403-C685-45BC-81DDCC764D56A8F6"
-			defaultstate="42A6E403-C685-45BC-81DDCC764D56A8F6">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="CallbackRedirector">
-					<child_m_user_properties>
-						<property
-							name="parent_id"
-							value="^1"/>
-						<property
-							name="target_id"
-							value="checkbox_toggle"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="42A6E403-C685-45BC-81DDCC764D56A8F6"
-					name="default"
-					width="460"
-					height="16"
-					interactive="true"
-					uniqueguid="42A6E403-C685-45BC-81DDCC764D56A8F6">
-					<component_text
-						text="BATTLE_AI_DEBUG_DISPLAY_UNIT_COMMAND_UNIT_INFO"
-						texthbehaviour="Resize"
-						textlabel="label_default_Text_55004a"
-						font_m_font_name="dev_font"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="dev_text"/>
-				</default>
-			</states>
-		</label>
-		<label
-			this="4D8ADE32-A371-4D8D-A9CDF1EAC642F2F9"
-			id="label"
-			offset="34.00,8.00"
-			allowverticalresize="false"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="4D8ADE32-A371-4D8D-A9CDF1EAC642F2F9"
-			currentstate="51829196-010E-4749-92FC3C6D4EEF090D"
-			defaultstate="51829196-010E-4749-92FC3C6D4EEF090D">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="CallbackRedirector">
-					<child_m_user_properties>
-						<property
-							name="parent_id"
-							value="^1"/>
-						<property
-							name="target_id"
-							value="checkbox_toggle"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="51829196-010E-4749-92FC3C6D4EEF090D"
-					name="default"
-					width="310"
-					height="16"
-					interactive="true"
-					uniqueguid="51829196-010E-4749-92FC3C6D4EEF090D">
-					<component_text
-						text="BATTLE_AI_DEBUG_DISPLAY_UNIT_ID"
-						texthbehaviour="Resize"
-						textlabel="label_default_Text_550008"
-						font_m_font_name="dev_font"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="dev_text"/>
-				</default>
-			</states>
-		</label>
-		<label
-			this="D905BA21-29B8-4231-B191447C4CC7269E"
-			id="label"
-			offset="34.00,8.00"
-			allowverticalresize="false"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="D905BA21-29B8-4231-B191447C4CC7269E"
-			currentstate="1A91D8BE-7547-41A0-A983016232B7CB9F"
-			defaultstate="1A91D8BE-7547-41A0-A983016232B7CB9F">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="CallbackRedirector">
-					<child_m_user_properties>
-						<property
-							name="parent_id"
-							value="^1"/>
-						<property
-							name="target_id"
-							value="checkbox_toggle"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="1A91D8BE-7547-41A0-A983016232B7CB9F"
-					name="default"
-					width="450"
-					height="16"
-					interactive="true"
-					uniqueguid="1A91D8BE-7547-41A0-A983016232B7CB9F">
-					<component_text
-						text="BATTLE_AI_DEBUG_DISPLAY_UNIT_COMBAT_POTENTIAL"
-						texthbehaviour="Resize"
-						textlabel="label_default_Text_13005a"
-						font_m_font_name="dev_font"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="dev_text"/>
-				</default>
-			</states>
-		</label>
-		<label
-			this="E6F464ED-5C05-49B2-BF322CEFD2C53E97"
-			id="label"
-			offset="34.00,8.00"
-			allowverticalresize="false"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="E6F464ED-5C05-49B2-BF322CEFD2C53E97"
-			currentstate="15B38A24-22DC-4C79-915BFB2DA9F19874"
-			defaultstate="15B38A24-22DC-4C79-915BFB2DA9F19874">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="CallbackRedirector">
-					<child_m_user_properties>
-						<property
-							name="parent_id"
-							value="^1"/>
-						<property
-							name="target_id"
-							value="checkbox_toggle"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="15B38A24-22DC-4C79-915BFB2DA9F19874"
-					name="default"
-					width="430"
-					height="16"
-					interactive="true"
-					uniqueguid="15B38A24-22DC-4C79-915BFB2DA9F19874">
-					<component_text
-						text="BATTLE_AI_DEBUG_DISPLAY_UNIT_SCRIPT_CONTROL"
-						texthbehaviour="Resize"
-						textlabel="label_default_Text_460001"
-						font_m_font_name="dev_font"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="dev_text"/>
-				</default>
-			</states>
-		</label>
-		<label
-			this="31969469-3586-4379-BD325F294D3A3C79"
-			id="label"
-			offset="34.00,8.00"
-			allowverticalresize="false"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="31969469-3586-4379-BD325F294D3A3C79"
-			currentstate="6A55E9BF-208F-45CB-A2D9762FB7C0F589"
-			defaultstate="6A55E9BF-208F-45CB-A2D9762FB7C0F589">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="CallbackRedirector">
-					<child_m_user_properties>
-						<property
-							name="parent_id"
-							value="^1"/>
-						<property
-							name="target_id"
-							value="checkbox_toggle"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="6A55E9BF-208F-45CB-A2D9762FB7C0F589"
-					name="default"
-					width="420"
-					height="16"
-					interactive="true"
-					uniqueguid="6A55E9BF-208F-45CB-A2D9762FB7C0F589">
-					<component_text
-						text="BATTLE_AI_DEBUG_DISPLAY_UNIT_LOCAL_PLANNER"
-						texthbehaviour="Resize"
-						textlabel="label_default_Text_52005a"
-						font_m_font_name="dev_font"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="dev_text"/>
-				</default>
-			</states>
-		</label>
-		<label
-			this="799CD91B-9079-4990-B38C12FDD248308C"
-			id="label"
-			offset="34.00,8.00"
-			allowverticalresize="false"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="799CD91B-9079-4990-B38C12FDD248308C"
-			currentstate="A1D6296F-F533-4306-8E992AEEF76E248B"
-			defaultstate="A1D6296F-F533-4306-8E992AEEF76E248B">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="CallbackRedirector">
-					<child_m_user_properties>
-						<property
-							name="parent_id"
-							value="^1"/>
-						<property
-							name="target_id"
-							value="checkbox_toggle"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="A1D6296F-F533-4306-8E992AEEF76E248B"
-					name="default"
-					width="390"
-					height="16"
-					interactive="true"
-					uniqueguid="A1D6296F-F533-4306-8E992AEEF76E248B">
-					<component_text
-						text="BATTLE_AI_DEBUG_DISPLAY_UNIT_MELEE_HINT"
-						texthbehaviour="Resize"
-						textlabel="label_default_Text_5e000e"
+						textlabel="label_default_Text_490048"
 						font_m_font_name="dev_font"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
@@ -2921,53 +2878,6 @@
 			</states>
 		</label>
 		<label
-			this="257ED583-8788-4E07-BF4E2E34475662A0"
-			id="label"
-			offset="34.00,8.00"
-			allowverticalresize="false"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="257ED583-8788-4E07-BF4E2E34475662A0"
-			currentstate="E17F99F4-99FC-44D2-907897BC7B949B25"
-			defaultstate="E17F99F4-99FC-44D2-907897BC7B949B25">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="CallbackRedirector">
-					<child_m_user_properties>
-						<property
-							name="parent_id"
-							value="^1"/>
-						<property
-							name="target_id"
-							value="checkbox_toggle"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="E17F99F4-99FC-44D2-907897BC7B949B25"
-					name="default"
-					width="390"
-					height="16"
-					interactive="true"
-					uniqueguid="E17F99F4-99FC-44D2-907897BC7B949B25">
-					<component_text
-						text="BATTLE_AI_DEBUG_DISPLAY_UNIT_DETACHMENT"
-						texthbehaviour="Resize"
-						textlabel="label_default_Text_4c0011"
-						font_m_font_name="dev_font"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="dev_text"/>
-				</default>
-			</states>
-		</label>
-		<label
 			this="4CEFBA70-7D18-49BF-BBE817B0935C9498"
 			id="label"
 			offset="34.00,8.00"
@@ -3006,6 +2916,335 @@
 						text="BATTLE_AI_DEBUG_DISPLAY_UNIT_TACTIC"
 						texthbehaviour="Resize"
 						textlabel="label_default_Text_42001a"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</default>
+			</states>
+		</label>
+		<label
+			this="4D8ADE32-A371-4D8D-A9CDF1EAC642F2F9"
+			id="label"
+			offset="34.00,8.00"
+			allowverticalresize="false"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="4D8ADE32-A371-4D8D-A9CDF1EAC642F2F9"
+			currentstate="51829196-010E-4749-92FC3C6D4EEF090D"
+			defaultstate="51829196-010E-4749-92FC3C6D4EEF090D">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="CallbackRedirector">
+					<child_m_user_properties>
+						<property
+							name="parent_id"
+							value="^1"/>
+						<property
+							name="target_id"
+							value="checkbox_toggle"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="51829196-010E-4749-92FC3C6D4EEF090D"
+					name="default"
+					width="310"
+					height="16"
+					interactive="true"
+					uniqueguid="51829196-010E-4749-92FC3C6D4EEF090D">
+					<component_text
+						text="BATTLE_AI_DEBUG_DISPLAY_UNIT_ID"
+						texthbehaviour="Resize"
+						textlabel="label_default_Text_550008"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</default>
+			</states>
+		</label>
+		<label
+			this="57B83CE6-8FC8-42EC-923F13956D501995"
+			id="label"
+			offset="34.00,8.00"
+			allowverticalresize="false"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="57B83CE6-8FC8-42EC-923F13956D501995"
+			currentstate="42A6E403-C685-45BC-81DDCC764D56A8F6"
+			defaultstate="42A6E403-C685-45BC-81DDCC764D56A8F6">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="CallbackRedirector">
+					<child_m_user_properties>
+						<property
+							name="parent_id"
+							value="^1"/>
+						<property
+							name="target_id"
+							value="checkbox_toggle"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="42A6E403-C685-45BC-81DDCC764D56A8F6"
+					name="default"
+					width="460"
+					height="16"
+					interactive="true"
+					uniqueguid="42A6E403-C685-45BC-81DDCC764D56A8F6">
+					<component_text
+						text="BATTLE_AI_DEBUG_DISPLAY_UNIT_COMMAND_UNIT_INFO"
+						texthbehaviour="Resize"
+						textlabel="label_default_Text_55004a"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</default>
+			</states>
+		</label>
+		<label
+			this="799CD91B-9079-4990-B38C12FDD248308C"
+			id="label"
+			offset="34.00,8.00"
+			allowverticalresize="false"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="799CD91B-9079-4990-B38C12FDD248308C"
+			currentstate="A1D6296F-F533-4306-8E992AEEF76E248B"
+			defaultstate="A1D6296F-F533-4306-8E992AEEF76E248B">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="CallbackRedirector">
+					<child_m_user_properties>
+						<property
+							name="parent_id"
+							value="^1"/>
+						<property
+							name="target_id"
+							value="checkbox_toggle"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="A1D6296F-F533-4306-8E992AEEF76E248B"
+					name="default"
+					width="390"
+					height="16"
+					interactive="true"
+					uniqueguid="A1D6296F-F533-4306-8E992AEEF76E248B">
+					<component_text
+						text="BATTLE_AI_DEBUG_DISPLAY_UNIT_MELEE_HINT"
+						texthbehaviour="Resize"
+						textlabel="label_default_Text_5e000e"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</default>
+			</states>
+		</label>
+		<label
+			this="9189C06E-F0DB-4EEF-80AF5A4F380E3C1C"
+			id="label"
+			offset="34.00,8.00"
+			allowverticalresize="false"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="9189C06E-F0DB-4EEF-80AF5A4F380E3C1C"
+			currentstate="25013142-D752-455D-A2C9EC31D832DC1B"
+			defaultstate="25013142-D752-455D-A2C9EC31D832DC1B">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="CallbackRedirector">
+					<child_m_user_properties>
+						<property
+							name="parent_id"
+							value="^1"/>
+						<property
+							name="target_id"
+							value="checkbox_toggle"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="25013142-D752-455D-A2C9EC31D832DC1B"
+					name="default"
+					width="330"
+					height="16"
+					interactive="true"
+					uniqueguid="25013142-D752-455D-A2C9EC31D832DC1B">
+					<component_text
+						text="BATTLE_AI_DEBUG_DISPLAY_UNIT_NAME"
+						texthbehaviour="Resize"
+						textlabel="label_default_Text_1f0048"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</default>
+			</states>
+		</label>
+		<label
+			this="01DB87D4-2C3E-4E85-AF62C0AAC9751F51"
+			id="label"
+			offset="34.00,8.00"
+			allowverticalresize="false"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="01DB87D4-2C3E-4E85-AF62C0AAC9751F51"
+			currentstate="3903215A-3A62-4C51-B1D99DFABBE00ECD"
+			defaultstate="3903215A-3A62-4C51-B1D99DFABBE00ECD">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="CallbackRedirector">
+					<child_m_user_properties>
+						<property
+							name="parent_id"
+							value="^1"/>
+						<property
+							name="target_id"
+							value="checkbox_toggle"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="3903215A-3A62-4C51-B1D99DFABBE00ECD"
+					name="default"
+					width="420"
+					height="16"
+					interactive="true"
+					uniqueguid="3903215A-3A62-4C51-B1D99DFABBE00ECD">
+					<component_text
+						text="BATTLE_AI_DEBUG_DISPLAY_SHOW_UNIT_INFO_ALL"
+						texthbehaviour="Resize"
+						textlabel="label_default_Text_56004a"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</default>
+			</states>
+		</label>
+		<label
+			this="CBB1BC58-6D55-4257-87F9C57C158ACE6B"
+			id="label"
+			offset="34.00,8.00"
+			allowverticalresize="false"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="CBB1BC58-6D55-4257-87F9C57C158ACE6B"
+			currentstate="2B92D5C8-BCCD-4CD4-9EE7D7601D75543F"
+			defaultstate="2B92D5C8-BCCD-4CD4-9EE7D7601D75543F">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="CallbackRedirector">
+					<child_m_user_properties>
+						<property
+							name="parent_id"
+							value="^1"/>
+						<property
+							name="target_id"
+							value="checkbox_toggle"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="2B92D5C8-BCCD-4CD4-9EE7D7601D75543F"
+					name="default"
+					width="530"
+					height="16"
+					interactive="true"
+					uniqueguid="2B92D5C8-BCCD-4CD4-9EE7D7601D75543F">
+					<component_text
+						text="BATTLE_AI_DEBUG_DISPLAY_UNIT_ACTIVE_SPECIAL_ABILITIES"
+						texthbehaviour="Resize"
+						textlabel="label_default_Text_12004b"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</default>
+			</states>
+		</label>
+		<label
+			this="D905BA21-29B8-4231-B191447C4CC7269E"
+			id="label"
+			offset="34.00,8.00"
+			allowverticalresize="false"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="D905BA21-29B8-4231-B191447C4CC7269E"
+			currentstate="1A91D8BE-7547-41A0-A983016232B7CB9F"
+			defaultstate="1A91D8BE-7547-41A0-A983016232B7CB9F">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="CallbackRedirector">
+					<child_m_user_properties>
+						<property
+							name="parent_id"
+							value="^1"/>
+						<property
+							name="target_id"
+							value="checkbox_toggle"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="1A91D8BE-7547-41A0-A983016232B7CB9F"
+					name="default"
+					width="450"
+					height="16"
+					interactive="true"
+					uniqueguid="1A91D8BE-7547-41A0-A983016232B7CB9F">
+					<component_text
+						text="BATTLE_AI_DEBUG_DISPLAY_UNIT_COMBAT_POTENTIAL"
+						texthbehaviour="Resize"
+						textlabel="label_default_Text_13005a"
 						font_m_font_name="dev_font"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
@@ -3062,15 +3301,15 @@
 			</states>
 		</label>
 		<label
-			this="3D3D4009-D917-4A13-B4C72FDC96FE08FA"
+			this="E6F464ED-5C05-49B2-BF322CEFD2C53E97"
 			id="label"
 			offset="34.00,8.00"
 			allowverticalresize="false"
 			priority="60"
 			tooltipslocalised="true"
-			uniqueguid="3D3D4009-D917-4A13-B4C72FDC96FE08FA"
-			currentstate="BD9B2054-F52D-426C-9E0D2EFF58CC25BC"
-			defaultstate="BD9B2054-F52D-426C-9E0D2EFF58CC25BC">
+			uniqueguid="E6F464ED-5C05-49B2-BF322CEFD2C53E97"
+			currentstate="15B38A24-22DC-4C79-915BFB2DA9F19874"
+			defaultstate="15B38A24-22DC-4C79-915BFB2DA9F19874">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="CallbackRedirector">
 					<child_m_user_properties>
@@ -3090,16 +3329,157 @@
 			</userproperties>
 			<states>
 				<default
-					this="BD9B2054-F52D-426C-9E0D2EFF58CC25BC"
+					this="15B38A24-22DC-4C79-915BFB2DA9F19874"
 					name="default"
-					width="420"
+					width="430"
 					height="16"
 					interactive="true"
-					uniqueguid="BD9B2054-F52D-426C-9E0D2EFF58CC25BC">
+					uniqueguid="15B38A24-22DC-4C79-915BFB2DA9F19874">
 					<component_text
-						text="BATTLE_AI_DEBUG_DISPLAY_UNIT_SUB_TASK_TYPE"
+						text="BATTLE_AI_DEBUG_DISPLAY_UNIT_SCRIPT_CONTROL"
 						texthbehaviour="Resize"
-						textlabel="label_default_Text_490048"
+						textlabel="label_default_Text_460001"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</default>
+			</states>
+		</label>
+		<label
+			this="EA69EC1F-19A2-456B-94B53787B3BC0969"
+			id="label"
+			offset="34.00,8.00"
+			allowverticalresize="false"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="EA69EC1F-19A2-456B-94B53787B3BC0969"
+			currentstate="BCE45C48-E40C-401C-B96B687D1D1A3558"
+			defaultstate="BCE45C48-E40C-401C-B96B687D1D1A3558">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="CallbackRedirector">
+					<child_m_user_properties>
+						<property
+							name="parent_id"
+							value="^1"/>
+						<property
+							name="target_id"
+							value="checkbox_toggle"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="BCE45C48-E40C-401C-B96B687D1D1A3558"
+					name="default"
+					width="380"
+					height="16"
+					interactive="true"
+					uniqueguid="BCE45C48-E40C-401C-B96B687D1D1A3558">
+					<component_text
+						text="BATTLE_AI_DEBUG_DISPLAY_SHOW_UNIT_INFO"
+						texthbehaviour="Resize"
+						textlabel="label_default_Text_5b0059"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</default>
+			</states>
+		</label>
+		<label
+			this="EB1A5DBE-48D8-4D22-A3BD38A7B58DD1D9"
+			id="label"
+			offset="34.00,8.00"
+			allowverticalresize="false"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="EB1A5DBE-48D8-4D22-A3BD38A7B58DD1D9"
+			currentstate="9A570306-7243-44A9-BA880EBBAD2885A9"
+			defaultstate="9A570306-7243-44A9-BA880EBBAD2885A9">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="CallbackRedirector">
+					<child_m_user_properties>
+						<property
+							name="parent_id"
+							value="^1"/>
+						<property
+							name="target_id"
+							value="checkbox_toggle"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="9A570306-7243-44A9-BA880EBBAD2885A9"
+					name="default"
+					width="310"
+					height="16"
+					interactive="true"
+					uniqueguid="9A570306-7243-44A9-BA880EBBAD2885A9">
+					<component_text
+						text="BATTLE_AI_DEBUG_DISPLAY_ENABLED"
+						texthbehaviour="Resize"
+						textlabel="label_default_Text_4f0003"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</default>
+			</states>
+		</label>
+		<label
+			this="257ED583-8788-4E07-BF4E2E34475662A0"
+			id="label"
+			offset="34.00,8.00"
+			allowverticalresize="false"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="257ED583-8788-4E07-BF4E2E34475662A0"
+			currentstate="E17F99F4-99FC-44D2-907897BC7B949B25"
+			defaultstate="E17F99F4-99FC-44D2-907897BC7B949B25">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="CallbackRedirector">
+					<child_m_user_properties>
+						<property
+							name="parent_id"
+							value="^1"/>
+						<property
+							name="target_id"
+							value="checkbox_toggle"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="E17F99F4-99FC-44D2-907897BC7B949B25"
+					name="default"
+					width="390"
+					height="16"
+					interactive="true"
+					uniqueguid="E17F99F4-99FC-44D2-907897BC7B949B25">
+					<component_text
+						text="BATTLE_AI_DEBUG_DISPLAY_UNIT_DETACHMENT"
+						texthbehaviour="Resize"
+						textlabel="label_default_Text_4c0011"
 						font_m_font_name="dev_font"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
@@ -3156,15 +3536,15 @@
 			</states>
 		</label>
 		<label
-			this="CBB1BC58-6D55-4257-87F9C57C158ACE6B"
+			this="31969469-3586-4379-BD325F294D3A3C79"
 			id="label"
 			offset="34.00,8.00"
 			allowverticalresize="false"
 			priority="60"
 			tooltipslocalised="true"
-			uniqueguid="CBB1BC58-6D55-4257-87F9C57C158ACE6B"
-			currentstate="2B92D5C8-BCCD-4CD4-9EE7D7601D75543F"
-			defaultstate="2B92D5C8-BCCD-4CD4-9EE7D7601D75543F">
+			uniqueguid="31969469-3586-4379-BD325F294D3A3C79"
+			currentstate="6A55E9BF-208F-45CB-A2D9762FB7C0F589"
+			defaultstate="6A55E9BF-208F-45CB-A2D9762FB7C0F589">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="CallbackRedirector">
 					<child_m_user_properties>
@@ -3184,483 +3564,16 @@
 			</userproperties>
 			<states>
 				<default
-					this="2B92D5C8-BCCD-4CD4-9EE7D7601D75543F"
+					this="6A55E9BF-208F-45CB-A2D9762FB7C0F589"
 					name="default"
-					width="530"
+					width="420"
 					height="16"
 					interactive="true"
-					uniqueguid="2B92D5C8-BCCD-4CD4-9EE7D7601D75543F">
+					uniqueguid="6A55E9BF-208F-45CB-A2D9762FB7C0F589">
 					<component_text
-						text="BATTLE_AI_DEBUG_DISPLAY_UNIT_ACTIVE_SPECIAL_ABILITIES"
+						text="BATTLE_AI_DEBUG_DISPLAY_UNIT_LOCAL_PLANNER"
 						texthbehaviour="Resize"
-						textlabel="label_default_Text_12004b"
-						font_m_font_name="dev_font"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="dev_text"/>
-				</default>
-			</states>
-		</label>
-		<list_unit_info_parent
-			this="CD3B3801-EF09-4E40-8420035F53D29A51"
-			id="list_unit_info_parent"
-			offset="16.00,32.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="CD3B3801-EF09-4E40-8420035F53D29A51"
-			currentstate="A100995D-BA50-4E69-8C02F37561B47B51"
-			defaultstate="A100995D-BA50-4E69-8C02F37561B47B51">
-			<states>
-				<default
-					this="A100995D-BA50-4E69-8C02F37561B47B51"
-					name="default"
-					width="580"
-					height="480"
-					uniqueguid="A100995D-BA50-4E69-8C02F37561B47B51"/>
-			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true"
-				secondary_margins="16.00,0.00">
-				<columnwidths>
-					<column width="32"/>
-				</columnwidths>
-			</LayoutEngine>
-		</list_unit_info_parent>
-		<button_expand_unit_info
-			this="22590906-CF04-467B-927AB9B5B9153D54"
-			id="button_expand_unit_info"
-			offset="0.00,32.00"
-			allowverticalresize="false"
-			priority="999999"
-			tooltipslocalised="true"
-			soundcategory="UI_GBL_TMP_Generic_Click"
-			uniqueguid="22590906-CF04-467B-927AB9B5B9153D54"
-			currentstate="441B129F-1006-46CD-AC70FEF9AD98CEE3"
-			defaultstate="441B129F-1006-46CD-AC70FEF9AD98CEE3">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="TogglePanelButton">
-					<child_m_user_properties>
-						<property
-							name="invert_state"
-							value="1"/>
-						<property
-							name="starts_showing"
-							value="1"/>
-						<property
-							name="toggle_panel"
-							value="dev_unit_info_parent"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="override_sound"
-					value=""/>
-			</userproperties>
-			<componentimages>
-				<component_image
-					this="EC6DA2AB-C7F6-42F3-B91BEC9482BCAB7B"
-					uniqueguid="EC6DA2AB-C7F6-42F3-B91BEC9482BCAB7B"
-					imagepath="ui/skins/default/dev/button_header_min.png"/>
-				<component_image
-					this="9F25F725-23CD-42CC-9BE277AF6E4A586B"
-					uniqueguid="9F25F725-23CD-42CC-9BE277AF6E4A586B"
-					imagepath="ui/skins/default/dev/button_header_max.png"/>
-			</componentimages>
-			<states>
-				<active
-					this="441B129F-1006-46CD-AC70FEF9AD98CEE3"
-					name="active"
-					width="188"
-					height="37"
-					interactive="true"
-					shader_name="brighten_t0"
-					uniqueguid="441B129F-1006-46CD-AC70FEF9AD98CEE3"
-					stateeditordisplaypos="20.00,24.00">
-					<imagemetrics>
-						<image
-							this="A288B442-EAF1-4279-9C8C39E1CC040906"
-							uniqueguid="A288B442-EAF1-4279-9C8C39E1CC040906"
-							componentimage="EC6DA2AB-C7F6-42F3-B91BEC9482BCAB7B"
-							offset="0.00,5.00"
-							width="25"
-							height="26"
-							dockpoint="Center Left"
-							canresizeheight="false"
-							canresizewidth="false"/>
-					</imagemetrics>
-					<transitionmap>
-						<transition
-							transition_m_target_state="DD0B8965-069D-4A74-A72DD9E575666ACF"
-							transition_m_transition_time="200"
-							transition_m_interpolation_property_mask="64"/>
-					</transitionmap>
-				</active>
-				<down
-					this="2CF44F88-6A19-4386-A7C159CC2F8C0666"
-					name="down"
-					width="188"
-					height="37"
-					interactive="true"
-					uniqueguid="2CF44F88-6A19-4386-A7C159CC2F8C0666"
-					stateeditordisplaypos="145.00,219.00">
-					<imagemetrics>
-						<image
-							this="1FB29866-C046-42E9-9085122486AE1591"
-							uniqueguid="1FB29866-C046-42E9-9085122486AE1591"
-							componentimage="EC6DA2AB-C7F6-42F3-B91BEC9482BCAB7B"
-							offset="0.00,5.00"
-							width="25"
-							height="26"
-							dockpoint="Center Left"
-							canresizeheight="false"
-							canresizewidth="false"/>
-					</imagemetrics>
-					<transitionmap>
-						<transition
-							index="3"
-							transition_m_target_state="04F01C7F-2F51-4496-977244F9946BEF98"/>
-						<transition
-							index="1"
-							transition_m_target_state="65536916-46AA-46A6-AB4A5AD722814938"
-							transition_m_transition_time="200"
-							transition_m_interpolation_property_mask="64"/>
-					</transitionmap>
-				</down>
-				<down_off
-					this="65536916-46AA-46A6-AB4A5AD722814938"
-					name="down_off"
-					width="188"
-					height="37"
-					interactive="true"
-					uniqueguid="65536916-46AA-46A6-AB4A5AD722814938"
-					stateeditordisplaypos="29.00,319.00">
-					<imagemetrics>
-						<image
-							this="8802322F-F8D5-4F8E-93B5A0A118250AD3"
-							uniqueguid="8802322F-F8D5-4F8E-93B5A0A118250AD3"
-							componentimage="EC6DA2AB-C7F6-42F3-B91BEC9482BCAB7B"
-							offset="0.00,5.00"
-							width="25"
-							height="26"
-							dockpoint="Center Left"
-							canresizeheight="false"
-							canresizewidth="false"/>
-					</imagemetrics>
-					<transitionmap>
-						<transition
-							transition_m_target_state="2CF44F88-6A19-4386-A7C159CC2F8C0666"
-							transition_m_transition_time="200"
-							transition_m_interpolation_property_mask="64"/>
-						<transition
-							index="8"
-							transition_m_target_state="441B129F-1006-46CD-AC70FEF9AD98CEE3"/>
-					</transitionmap>
-				</down_off>
-				<hover
-					this="DD0B8965-069D-4A74-A72DD9E575666ACF"
-					name="hover"
-					width="188"
-					height="37"
-					interactive="true"
-					shader_name="brighten_t0"
-					shadervars="0.50,0.00,0.00,0.00"
-					uniqueguid="DD0B8965-069D-4A74-A72DD9E575666ACF"
-					stateeditordisplaypos="137.00,126.00">
-					<imagemetrics>
-						<image
-							this="107F9A81-8B4B-4126-A36D448EC0865B20"
-							uniqueguid="107F9A81-8B4B-4126-A36D448EC0865B20"
-							componentimage="EC6DA2AB-C7F6-42F3-B91BEC9482BCAB7B"
-							offset="0.00,5.00"
-							width="25"
-							height="26"
-							dockpoint="Center Left"
-							canresizeheight="false"
-							canresizewidth="false"/>
-					</imagemetrics>
-					<transitionmap>
-						<transition
-							index="1"
-							transition_m_target_state="441B129F-1006-46CD-AC70FEF9AD98CEE3"
-							transition_m_transition_time="200"
-							transition_m_interpolation_property_mask="64"/>
-						<transition
-							index="2"
-							transition_m_target_state="2CF44F88-6A19-4386-A7C159CC2F8C0666"/>
-					</transitionmap>
-				</hover>
-				<inactive
-					this="1C21B8EF-E3BB-46CC-A0AE4D6D73B5A401"
-					name="inactive"
-					width="188"
-					height="37"
-					shadervars="1.00,0.50,0.00,0.00"
-					uniqueguid="1C21B8EF-E3BB-46CC-A0AE4D6D73B5A401">
-					<imagemetrics>
-						<image
-							this="5E2EA782-B5E7-407C-8FACA99C2BAFD38E"
-							uniqueguid="5E2EA782-B5E7-407C-8FACA99C2BAFD38E"
-							componentimage="EC6DA2AB-C7F6-42F3-B91BEC9482BCAB7B"
-							offset="0.00,5.00"
-							width="25"
-							height="26"
-							colour="#FFFFFF80"
-							dockpoint="Center Left"
-							canresizeheight="false"
-							canresizewidth="false"/>
-					</imagemetrics>
-				</inactive>
-				<leaf
-					this="0057AFC9-91B1-4DB3-9FB9351EF23D667A"
-					name="leaf"
-					width="188"
-					height="37"
-					interactive="true"
-					shader_name="brighten_t0"
-					uniqueguid="0057AFC9-91B1-4DB3-9FB9351EF23D667A"
-					stateeditordisplaypos="20.00,24.00"/>
-				<selected
-					this="F48D6ABB-0F1D-404F-99152F2339AACA50"
-					name="selected"
-					width="188"
-					height="37"
-					interactive="true"
-					shader_name="brighten_t0"
-					uniqueguid="F48D6ABB-0F1D-404F-99152F2339AACA50"
-					stateeditordisplaypos="401.00,333.00">
-					<imagemetrics>
-						<image
-							this="AB1435DF-6F29-4549-ACDBB2D4F4F74EDA"
-							uniqueguid="AB1435DF-6F29-4549-ACDBB2D4F4F74EDA"
-							componentimage="9F25F725-23CD-42CC-9BE277AF6E4A586B"
-							offset="0.00,5.00"
-							width="25"
-							height="26"
-							dockpoint="Center Left"
-							canresizeheight="false"
-							canresizewidth="false"/>
-					</imagemetrics>
-					<transitionmap>
-						<transition
-							transition_m_target_state="04F01C7F-2F51-4496-977244F9946BEF98"
-							transition_m_transition_time="200"
-							transition_m_interpolation_property_mask="64"/>
-					</transitionmap>
-				</selected>
-				<selected_down
-					this="2F15229C-5299-4A55-BCE594C86EDC47A4"
-					name="selected_down"
-					width="188"
-					height="37"
-					interactive="true"
-					uniqueguid="2F15229C-5299-4A55-BCE594C86EDC47A4"
-					stateeditordisplaypos="268.00,120.00">
-					<imagemetrics>
-						<image
-							this="8DB6F17F-0C93-443B-A02F14B7E8560904"
-							uniqueguid="8DB6F17F-0C93-443B-A02F14B7E8560904"
-							componentimage="9F25F725-23CD-42CC-9BE277AF6E4A586B"
-							offset="0.00,5.00"
-							width="25"
-							height="26"
-							dockpoint="Center Left"
-							canresizeheight="false"
-							canresizewidth="false"/>
-					</imagemetrics>
-					<transitionmap>
-						<transition
-							index="3"
-							transition_m_target_state="DD0B8965-069D-4A74-A72DD9E575666ACF"/>
-						<transition
-							index="1"
-							transition_m_target_state="6D10514A-A103-458F-95F3CF50948E1B97"
-							transition_m_transition_time="200"
-							transition_m_interpolation_property_mask="64"/>
-					</transitionmap>
-				</selected_down>
-				<selected_down_off
-					this="6D10514A-A103-458F-95F3CF50948E1B97"
-					name="selected_down_off"
-					width="188"
-					height="37"
-					interactive="true"
-					uniqueguid="6D10514A-A103-458F-95F3CF50948E1B97"
-					stateeditordisplaypos="384.00,21.00">
-					<imagemetrics>
-						<image
-							this="F3B9FD35-9264-46FE-89F6852DD49DF093"
-							uniqueguid="F3B9FD35-9264-46FE-89F6852DD49DF093"
-							componentimage="9F25F725-23CD-42CC-9BE277AF6E4A586B"
-							offset="0.00,5.00"
-							width="25"
-							height="26"
-							dockpoint="Center Left"
-							canresizeheight="false"
-							canresizewidth="false"/>
-					</imagemetrics>
-					<transitionmap>
-						<transition
-							transition_m_target_state="2F15229C-5299-4A55-BCE594C86EDC47A4"
-							transition_m_transition_time="200"
-							transition_m_interpolation_property_mask="64"/>
-						<transition
-							index="8"
-							transition_m_target_state="F48D6ABB-0F1D-404F-99152F2339AACA50"/>
-					</transitionmap>
-				</selected_down_off>
-				<selected_hover
-					this="04F01C7F-2F51-4496-977244F9946BEF98"
-					name="selected_hover"
-					width="188"
-					height="37"
-					interactive="true"
-					shader_name="brighten_t0"
-					shadervars="0.50,0.00,0.00,0.00"
-					uniqueguid="04F01C7F-2F51-4496-977244F9946BEF98"
-					stateeditordisplaypos="269.00,216.00">
-					<imagemetrics>
-						<image
-							this="704C275F-4C5B-46E6-B5F70F9BC2AEEC91"
-							uniqueguid="704C275F-4C5B-46E6-B5F70F9BC2AEEC91"
-							componentimage="9F25F725-23CD-42CC-9BE277AF6E4A586B"
-							offset="0.00,5.00"
-							width="25"
-							height="26"
-							dockpoint="Center Left"
-							canresizeheight="false"
-							canresizewidth="false"/>
-					</imagemetrics>
-					<transitionmap>
-						<transition
-							index="1"
-							transition_m_target_state="F48D6ABB-0F1D-404F-99152F2339AACA50"
-							transition_m_transition_time="200"
-							transition_m_interpolation_property_mask="64"/>
-						<transition
-							index="2"
-							transition_m_target_state="2F15229C-5299-4A55-BCE594C86EDC47A4"/>
-					</transitionmap>
-				</selected_hover>
-				<selected_inactive
-					this="5D769E36-AB92-4504-A9278C3E2268C39C"
-					name="selected_inactive"
-					width="188"
-					height="37"
-					shadervars="1.00,0.50,0.00,0.00"
-					uniqueguid="5D769E36-AB92-4504-A9278C3E2268C39C">
-					<imagemetrics>
-						<image
-							this="978A0CA6-974A-47C9-AC2ACAE8AC61BDC2"
-							uniqueguid="978A0CA6-974A-47C9-AC2ACAE8AC61BDC2"
-							componentimage="9F25F725-23CD-42CC-9BE277AF6E4A586B"
-							offset="0.00,5.00"
-							width="25"
-							height="26"
-							colour="#FFFFFF80"
-							dockpoint="Center Left"
-							canresizeheight="false"
-							canresizewidth="false"/>
-					</imagemetrics>
-				</selected_inactive>
-			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				sizetocontent="true"
-				margins="30.00,60.00"/>
-		</button_expand_unit_info>
-		<checkbox_enable_ai_display
-			this="966B4C8F-12D2-4704-89B9F8526FF9A83C"
-			id="checkbox_enable_ai_display"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="966B4C8F-12D2-4704-89B9F8526FF9A83C"
-			currentstate="EC920E69-BBE9-4A1D-AF8128192F05CCD7"
-			defaultstate="EC920E69-BBE9-4A1D-AF8128192F05CCD7">
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="EC920E69-BBE9-4A1D-AF8128192F05CCD7"
-					name="default"
-					width="344"
-					uniqueguid="EC920E69-BBE9-4A1D-AF8128192F05CCD7"/>
-			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				sizetocontent="true"
-				vertical_alignment="Center"/>
-		</checkbox_enable_ai_display>
-		<dev_unit_info_parent
-			this="E830698A-B5BD-4804-80EFCC2E05DA74DC"
-			id="dev_unit_info_parent"
-			offset="0.00,69.00"
-			priority="999999"
-			tooltipslocalised="true"
-			uniqueguid="E830698A-B5BD-4804-80EFCC2E05DA74DC"
-			currentstate="81E167AA-C986-4720-9DEB0B830B4CD557"
-			defaultstate="81E167AA-C986-4720-9DEB0B830B4CD557">
-			<states>
-				<default
-					this="81E167AA-C986-4720-9DEB0B830B4CD557"
-					name="default"
-					width="596"
-					height="512"
-					uniqueguid="81E167AA-C986-4720-9DEB0B830B4CD557"/>
-			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true"
-				secondary_margins="16.00,0.00">
-				<columnwidths>
-					<column width="54"/>
-				</columnwidths>
-			</LayoutEngine>
-		</dev_unit_info_parent>
-		<label
-			this="EB1A5DBE-48D8-4D22-A3BD38A7B58DD1D9"
-			id="label"
-			offset="34.00,8.00"
-			allowverticalresize="false"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="EB1A5DBE-48D8-4D22-A3BD38A7B58DD1D9"
-			currentstate="9A570306-7243-44A9-BA880EBBAD2885A9"
-			defaultstate="9A570306-7243-44A9-BA880EBBAD2885A9">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="CallbackRedirector">
-					<child_m_user_properties>
-						<property
-							name="parent_id"
-							value="^1"/>
-						<property
-							name="target_id"
-							value="checkbox_toggle"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="dynamic_child"
-					value="1"/>
-			</userproperties>
-			<states>
-				<default
-					this="9A570306-7243-44A9-BA880EBBAD2885A9"
-					name="default"
-					width="310"
-					height="16"
-					interactive="true"
-					uniqueguid="9A570306-7243-44A9-BA880EBBAD2885A9">
-					<component_text
-						text="BATTLE_AI_DEBUG_DISPLAY_ENABLED"
-						texthbehaviour="Resize"
-						textlabel="label_default_Text_4f0003"
+						textlabel="label_default_Text_52005a"
 						font_m_font_name="dev_font"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
@@ -3715,5 +3628,92 @@
 				</not_selected_component>
 			</states>
 		</label_expanding_header>
+		<list_parent
+			this="3FD07A92-7CDA-46D6-91271ED67D111172"
+			id="list_parent"
+			offset="24.00,24.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="3FD07A92-7CDA-46D6-91271ED67D111172"
+			currentstate="F6781709-D8C6-4052-A38462D29E8387B9"
+			defaultstate="F6781709-D8C6-4052-A38462D29E8387B9">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<states>
+				<default
+					this="F6781709-D8C6-4052-A38462D29E8387B9"
+					name="default"
+					width="596"
+					height="581"
+					uniqueguid="F6781709-D8C6-4052-A38462D29E8387B9"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="45"/>
+				</columnwidths>
+			</LayoutEngine>
+		</list_parent>
+		<list_unit_info_parent
+			this="CD3B3801-EF09-4E40-8420035F53D29A51"
+			id="list_unit_info_parent"
+			offset="16.00,32.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="CD3B3801-EF09-4E40-8420035F53D29A51"
+			currentstate="A100995D-BA50-4E69-8C02F37561B47B51"
+			defaultstate="A100995D-BA50-4E69-8C02F37561B47B51">
+			<states>
+				<default
+					this="A100995D-BA50-4E69-8C02F37561B47B51"
+					name="default"
+					width="580"
+					height="480"
+					uniqueguid="A100995D-BA50-4E69-8C02F37561B47B51"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true"
+				secondary_margins="16.00,0.00">
+				<columnwidths>
+					<column width="32"/>
+				</columnwidths>
+			</LayoutEngine>
+		</list_unit_info_parent>
+		<root
+			this="4D7833FA-5854-40E1-9AF602DED76E9C83"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="4D7833FA-5854-40E1-9AF602DED76E9C83"
+			currentstate="AD561F2B-F5E1-4911-BD09406A59A6970E"
+			defaultstate="AD561F2B-F5E1-4911-BD09406A59A6970E">
+			<componentimages>
+				<component_image
+					this="9041AEDF-1452-49F3-B78F62B517C730AA"
+					uniqueguid="9041AEDF-1452-49F3-B78F62B517C730AA"/>
+			</componentimages>
+			<states>
+				<default
+					this="AD561F2B-F5E1-4911-BD09406A59A6970E"
+					name="default"
+					width="1600"
+					height="900"
+					uniqueguid="AD561F2B-F5E1-4911-BD09406A59A6970E">
+					<imagemetrics>
+						<image
+							this="1B509541-2428-4D97-AECCA01DA0A2EA1F"
+							uniqueguid="1B509541-2428-4D97-AECCA01DA0A2EA1F"
+							componentimage="9041AEDF-1452-49F3-B78F62B517C730AA"
+							width="1600"
+							height="900"
+							colour="#F0F0F0FF"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</root>
 	</components>
 </layout>

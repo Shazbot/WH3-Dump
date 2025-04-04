@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -16,6 +16,60 @@
 		</root>
 	</hierarchy>
 	<components>
+		<bonuses_list_parent
+			this="D4B67948-7766-4F42-B142DE28A6D06EED"
+			id="bonuses_list_parent"
+			offset="12.00,120.00"
+			allowhorizontalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="D4B67948-7766-4F42-B142DE28A6D06EED"
+			currentstate="A3D8AE0F-17B1-4A9B-9E9176780969BE78"
+			defaultstate="A3D8AE0F-17B1-4A9B-9E9176780969BE78">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="List"
+					context_object_id="CcoReignOfChaosRecord"
+					context_function_id="RecordList.Filter(BattleRoot.PlayerArmyContext.GodWeighting(GodType) &gt; 0.0)">
+					<child_m_user_properties>
+						<property
+							name="condition_func0"
+							value="Tier == Floor(ToNumber(self.ParentContext.GetProperty(&quot;test_index&quot;)))"/>
+						<property
+							name="event0"
+							value="roc_update_bonuses_list"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextInitDatabaseRecord"
+					context_object_id="CcoReignOfChaosRecord"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="A3D8AE0F-17B1-4A9B-9E9176780969BE78"
+					name="NewState"
+					width="194"
+					height="24"
+					interactive="true"
+					uniqueguid="A3D8AE0F-17B1-4A9B-9E9176780969BE78">
+					<component_text
+						textxoffset="4.00,4.00"
+						textyoffset="4.00,4.00"
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true"
+				secondary_margins="25.00,0.00">
+				<columnwidths>
+					<column width="600"/>
+				</columnwidths>
+			</LayoutEngine>
+		</bonuses_list_parent>
 		<header
 			this="2BBE5464-F18B-47BF-833A2D0854311969"
 			id="header"
@@ -145,111 +199,6 @@
 				</default>
 			</states>
 		</root>
-		<tooltip_reign_of_chaos
-			this="F264B4BA-87DD-4816-8D2C9C841E4186D1"
-			id="tooltip_reign_of_chaos"
-			offset="10.00,10.00"
-			allowhorizontalresize="false"
-			tooltipslocalised="true"
-			uniqueguid="F264B4BA-87DD-4816-8D2C9C841E4186D1"
-			currentstate="1509EA43-5CEC-4AF6-9AB74639C5B7DCE0"
-			defaultstate="1509EA43-5CEC-4AF6-9AB74639C5B7DCE0">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="CustomTooltip"/>
-				<callback_with_context
-					callback_id="ContextCommandGiverOnVisibilityChanged"
-					context_function_id="Do(self.SetProperty(&quot;test_index&quot;, self.TooltipParent.ParentContext.ParentContext.GetProperty(&quot;ability_index&quot;)), UiMsg(&quot;roc_update_bonuses_list&quot;))"/>
-			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="7CA80BA7-FD19-40B7-BC95BF4221345B1F"
-					uniqueguid="7CA80BA7-FD19-40B7-BC95BF4221345B1F"
-					imagepath="ui/skins/default/tooltip_frame.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="1509EA43-5CEC-4AF6-9AB74639C5B7DCE0"
-					name="NewState"
-					width="416"
-					height="156"
-					uniqueguid="1509EA43-5CEC-4AF6-9AB74639C5B7DCE0">
-					<imagemetrics>
-						<image
-							this="7D926C8A-7690-46F8-AECDA76CC686FA56"
-							uniqueguid="7D926C8A-7690-46F8-AECDA76CC686FA56"
-							componentimage="7CA80BA7-FD19-40B7-BC95BF4221345B1F"
-							width="416"
-							height="156"
-							tile="true"
-							margin="16.00,20.00,16.00,20.00"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-			<LayoutEngine
-				type="List"
-				spacing="0.00,10.00"
-				sizetocontent="true"
-				secondary_margins="12.00,12.00"
-				margins="12.00,12.00">
-				<columnwidths>
-					<column width="200"/>
-				</columnwidths>
-			</LayoutEngine>
-		</tooltip_reign_of_chaos>
-		<bonuses_list_parent
-			this="D4B67948-7766-4F42-B142DE28A6D06EED"
-			id="bonuses_list_parent"
-			offset="12.00,120.00"
-			allowhorizontalresize="false"
-			tooltipslocalised="true"
-			uniqueguid="D4B67948-7766-4F42-B142DE28A6D06EED"
-			currentstate="A3D8AE0F-17B1-4A9B-9E9176780969BE78"
-			defaultstate="A3D8AE0F-17B1-4A9B-9E9176780969BE78">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="List"
-					context_object_id="CcoReignOfChaosRecord"
-					context_function_id="RecordList.Filter(BattleRoot.PlayerArmyContext.GodWeighting(GodType) &gt; 0.0)">
-					<child_m_user_properties>
-						<property
-							name="condition_func0"
-							value="Tier == Floor(ToNumber(self.ParentContext.GetProperty(&quot;test_index&quot;)))"/>
-						<property
-							name="event0"
-							value="roc_update_bonuses_list"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextInitDatabaseRecord"
-					context_object_id="CcoReignOfChaosRecord"/>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="A3D8AE0F-17B1-4A9B-9E9176780969BE78"
-					name="NewState"
-					width="194"
-					height="24"
-					interactive="true"
-					uniqueguid="A3D8AE0F-17B1-4A9B-9E9176780969BE78">
-					<component_text
-						textxoffset="4.00,4.00"
-						textyoffset="4.00,4.00"
-						texthbehaviour="Never split"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
-			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true"
-				secondary_margins="25.00,0.00">
-				<columnwidths>
-					<column width="600"/>
-				</columnwidths>
-			</LayoutEngine>
-		</bonuses_list_parent>
 		<template_bonus
 			this="CA8D104E-B624-449A-82E5CB86D95AEB74"
 			id="template_bonus"
@@ -308,5 +257,56 @@
 				</newstate>
 			</states>
 		</template_bonus>
+		<tooltip_reign_of_chaos
+			this="F264B4BA-87DD-4816-8D2C9C841E4186D1"
+			id="tooltip_reign_of_chaos"
+			offset="10.00,10.00"
+			allowhorizontalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="F264B4BA-87DD-4816-8D2C9C841E4186D1"
+			currentstate="1509EA43-5CEC-4AF6-9AB74639C5B7DCE0"
+			defaultstate="1509EA43-5CEC-4AF6-9AB74639C5B7DCE0">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="CustomTooltip"/>
+				<callback_with_context
+					callback_id="ContextCommandGiverOnVisibilityChanged"
+					context_function_id="Do(self.SetProperty(&quot;test_index&quot;, self.TooltipParent.ParentContext.ParentContext.GetProperty(&quot;ability_index&quot;)), UiMsg(&quot;roc_update_bonuses_list&quot;))"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="7CA80BA7-FD19-40B7-BC95BF4221345B1F"
+					uniqueguid="7CA80BA7-FD19-40B7-BC95BF4221345B1F"
+					imagepath="ui/skins/default/tooltip_frame.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="1509EA43-5CEC-4AF6-9AB74639C5B7DCE0"
+					name="NewState"
+					width="416"
+					height="156"
+					uniqueguid="1509EA43-5CEC-4AF6-9AB74639C5B7DCE0">
+					<imagemetrics>
+						<image
+							this="7D926C8A-7690-46F8-AECDA76CC686FA56"
+							uniqueguid="7D926C8A-7690-46F8-AECDA76CC686FA56"
+							componentimage="7CA80BA7-FD19-40B7-BC95BF4221345B1F"
+							width="416"
+							height="156"
+							tile="true"
+							margin="16.00,20.00,16.00,20.00"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+			<LayoutEngine
+				type="List"
+				spacing="0.00,10.00"
+				sizetocontent="true"
+				secondary_margins="12.00,12.00"
+				margins="12.00,12.00">
+				<columnwidths>
+					<column width="200"/>
+				</columnwidths>
+			</LayoutEngine>
+		</tooltip_reign_of_chaos>
 	</components>
 </layout>

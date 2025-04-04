@@ -20,37 +20,6 @@
 		</root>
 	</hierarchy>
 	<components>
-		<root
-			this="5DCA2AFC-3C63-47D9-8358AB96D872EC40"
-			id="root"
-			tooltipslocalised="true"
-			uniqueguid="5DCA2AFC-3C63-47D9-8358AB96D872EC40"
-			currentstate="5050B91B-5CF3-44F4-BC1A06E3A5C4A2CE"
-			defaultstate="5050B91B-5CF3-44F4-BC1A06E3A5C4A2CE">
-			<componentimages>
-				<component_image
-					this="6E81A681-3C09-45BA-996A1AF4AC5EE1DE"
-					uniqueguid="6E81A681-3C09-45BA-996A1AF4AC5EE1DE"/>
-			</componentimages>
-			<states>
-				<default
-					this="5050B91B-5CF3-44F4-BC1A06E3A5C4A2CE"
-					name="default"
-					width="1600"
-					height="900"
-					uniqueguid="5050B91B-5CF3-44F4-BC1A06E3A5C4A2CE">
-					<imagemetrics>
-						<image
-							this="0D373B52-EFDB-4271-8FB922EC4C61EC89"
-							uniqueguid="0D373B52-EFDB-4271-8FB922EC4C61EC89"
-							componentimage="6E81A681-3C09-45BA-996A1AF4AC5EE1DE"
-							width="1920"
-							height="1080"
-							colour="#1C1C1CFF"/>
-					</imagemetrics>
-				</default>
-			</states>
-		</root>
 		<dy_fealty
 			this="52988AFB-548E-4DA1-B4CDD5410BB728F6"
 			id="dy_fealty"
@@ -139,6 +108,44 @@
 				</default>
 			</states>
 		</dy_fealty_required>
+		<dy_fight_battle
+			this="7BE59EB4-0826-439B-B5C7C2FD2C8D0895"
+			id="dy_fight_battle"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			component_level_text="tx_fight_battle"
+			text_label="ComponentText_bf7dd80c"
+			uniqueguid="7BE59EB4-0826-439B-B5C7C2FD2C8D0895"
+			currentstate="31CFA736-E49D-4573-A4DFF79B10279482"
+			defaultstate="31CFA736-E49D-4573-A4DFF79B10279482">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoEffectBundle"
+					context_function_id="Description"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="31CFA736-E49D-4573-A4DFF79B10279482"
+					name="default"
+					width="340"
+					height="26"
+					uniqueguid="31CFA736-E49D-4573-A4DFF79B10279482">
+					<component_text
+						textvalign="Center"
+						textxoffset="12.00,8.00"
+						textyoffset="5.00,5.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="StateText_1d66f362"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</default>
+			</states>
+		</dy_fight_battle>
 		<dy_increase_fealty
 			this="EB00F93E-8B85-4473-A40A1ADED92FEDC6"
 			id="dy_increase_fealty"
@@ -222,6 +229,45 @@
 				</default>
 			</states>
 		</dy_name>
+		<final_battle_holder
+			this="04C3917B-FABF-46BF-BC5CFCFF1CE49AE1"
+			id="final_battle_holder"
+			offset="0.00,120.00"
+			allowhorizontalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="04C3917B-FABF-46BF-BC5CFCFF1CE49AE1"
+			currentstate="649C757D-F887-4938-B976290F6A081357"
+			defaultstate="649C757D-F887-4938-B976290F6A081357">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignRitual"
+					context_function_id="Chieftains.DeferenceBundleListFromBase(this).LastContext"/>
+				<callback_with_context
+					callback_id="ContextPropagationBlocker"
+					context_object_id="CcoEffectBundle"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignRitual"
+					context_function_id="IsContextValid(Chieftains.QuestBattleMissionFromBase(this)) &amp;&amp; Chieftains.QuestBattleMissionCompleted(this) == false"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="649C757D-F887-4938-B976290F6A081357"
+					name="NewState"
+					width="340"
+					height="52"
+					uniqueguid="649C757D-F887-4938-B976290F6A081357"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true"
+				horizontal_alignment="Center">
+				<columnwidths>
+					<column width="417"/>
+				</columnwidths>
+			</LayoutEngine>
+		</final_battle_holder>
 		<list_parent
 			this="F7881158-4880-4DB8-8F0372BF446F3ADC"
 			id="list_parent"
@@ -296,6 +342,73 @@
 				</columnwidths>
 			</LayoutEngine>
 		</list_parent>
+		<root
+			this="5DCA2AFC-3C63-47D9-8358AB96D872EC40"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="5DCA2AFC-3C63-47D9-8358AB96D872EC40"
+			currentstate="5050B91B-5CF3-44F4-BC1A06E3A5C4A2CE"
+			defaultstate="5050B91B-5CF3-44F4-BC1A06E3A5C4A2CE">
+			<componentimages>
+				<component_image
+					this="6E81A681-3C09-45BA-996A1AF4AC5EE1DE"
+					uniqueguid="6E81A681-3C09-45BA-996A1AF4AC5EE1DE"/>
+			</componentimages>
+			<states>
+				<default
+					this="5050B91B-5CF3-44F4-BC1A06E3A5C4A2CE"
+					name="default"
+					width="1600"
+					height="900"
+					uniqueguid="5050B91B-5CF3-44F4-BC1A06E3A5C4A2CE">
+					<imagemetrics>
+						<image
+							this="0D373B52-EFDB-4271-8FB922EC4C61EC89"
+							uniqueguid="0D373B52-EFDB-4271-8FB922EC4C61EC89"
+							componentimage="6E81A681-3C09-45BA-996A1AF4AC5EE1DE"
+							width="1920"
+							height="1080"
+							colour="#1C1C1CFF"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</root>
+		<text_rewards
+			this="EBA933F7-01CE-4ECD-90E9C0F23B192298"
+			id="text_rewards"
+			offset="8.00,26.00"
+			allowhorizontalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="EBA933F7-01CE-4ECD-90E9C0F23B192298"
+			currentstate="D331DFA7-0BC5-404A-BD1D35605E61B59F"
+			defaultstate="D331DFA7-0BC5-404A-BD1D35605E61B59F">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoEffectBundle"
+					context_function_id="Loc(Key).Replace(&quot;&#10;(&quot;, &quot; (&quot;)"/>
+			</callbackwithcontextlist>
+			<states>
+				<active
+					this="D331DFA7-0BC5-404A-BD1D35605E61B59F"
+					name="active"
+					width="325"
+					height="26"
+					uniqueguid="D331DFA7-0BC5-404A-BD1D35605E61B59F">
+					<component_text
+						text="Lorem ipsum dolor sit amet"
+						textxoffset="5.00,5.00"
+						textyoffset="5.00,5.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_63b2c1f4"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="green"/>
+				</active>
+			</states>
+		</text_rewards>
 		<tooltip_dlc25_chieftains_resource_bar
 			this="34B70A8F-0716-4800-B076E8B8BF7A0D20"
 			id="tooltip_dlc25_chieftains_resource_bar"
@@ -354,118 +467,5 @@
 				</columnwidths>
 			</LayoutEngine>
 		</tooltip_dlc25_chieftains_resource_bar>
-		<dy_fight_battle
-			this="7BE59EB4-0826-439B-B5C7C2FD2C8D0895"
-			id="dy_fight_battle"
-			allowhorizontalresize="false"
-			priority="255"
-			tooltipslocalised="true"
-			component_level_text="tx_fight_battle"
-			text_label="ComponentText_bf7dd80c"
-			uniqueguid="7BE59EB4-0826-439B-B5C7C2FD2C8D0895"
-			currentstate="31CFA736-E49D-4573-A4DFF79B10279482"
-			defaultstate="31CFA736-E49D-4573-A4DFF79B10279482">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoEffectBundle"
-					context_function_id="Description"/>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="31CFA736-E49D-4573-A4DFF79B10279482"
-					name="default"
-					width="340"
-					height="26"
-					uniqueguid="31CFA736-E49D-4573-A4DFF79B10279482">
-					<component_text
-						textvalign="Center"
-						textxoffset="12.00,8.00"
-						textyoffset="5.00,5.00"
-						texthbehaviour="Resize"
-						textlocalised="true"
-						textlabel="StateText_1d66f362"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</default>
-			</states>
-		</dy_fight_battle>
-		<final_battle_holder
-			this="04C3917B-FABF-46BF-BC5CFCFF1CE49AE1"
-			id="final_battle_holder"
-			offset="0.00,120.00"
-			allowhorizontalresize="false"
-			tooltipslocalised="true"
-			uniqueguid="04C3917B-FABF-46BF-BC5CFCFF1CE49AE1"
-			currentstate="649C757D-F887-4938-B976290F6A081357"
-			defaultstate="649C757D-F887-4938-B976290F6A081357">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoCampaignRitual"
-					context_function_id="Chieftains.DeferenceBundleListFromBase(this).LastContext"/>
-				<callback_with_context
-					callback_id="ContextPropagationBlocker"
-					context_object_id="CcoEffectBundle"/>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoCampaignRitual"
-					context_function_id="IsContextValid(Chieftains.QuestBattleMissionFromBase(this)) &amp;&amp; Chieftains.QuestBattleMissionCompleted(this) == false"/>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="649C757D-F887-4938-B976290F6A081357"
-					name="NewState"
-					width="340"
-					height="52"
-					uniqueguid="649C757D-F887-4938-B976290F6A081357"/>
-			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true"
-				horizontal_alignment="Center">
-				<columnwidths>
-					<column width="417"/>
-				</columnwidths>
-			</LayoutEngine>
-		</final_battle_holder>
-		<text_rewards
-			this="EBA933F7-01CE-4ECD-90E9C0F23B192298"
-			id="text_rewards"
-			offset="8.00,26.00"
-			allowhorizontalresize="false"
-			tooltipslocalised="true"
-			uniqueguid="EBA933F7-01CE-4ECD-90E9C0F23B192298"
-			currentstate="D331DFA7-0BC5-404A-BD1D35605E61B59F"
-			defaultstate="D331DFA7-0BC5-404A-BD1D35605E61B59F">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoEffectBundle"
-					context_function_id="Loc(Key).Replace(&quot;&#10;(&quot;, &quot; (&quot;)"/>
-			</callbackwithcontextlist>
-			<states>
-				<active
-					this="D331DFA7-0BC5-404A-BD1D35605E61B59F"
-					name="active"
-					width="325"
-					height="26"
-					uniqueguid="D331DFA7-0BC5-404A-BD1D35605E61B59F">
-					<component_text
-						text="Lorem ipsum dolor sit amet"
-						textxoffset="5.00,5.00"
-						textyoffset="5.00,5.00"
-						texthbehaviour="Resize"
-						textlabel="StateText_63b2c1f4"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"
-						font_colour_override_preset_key="green"/>
-				</active>
-			</states>
-		</text_rewards>
 	</components>
 </layout>

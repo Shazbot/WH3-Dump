@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -15,27 +15,89 @@
 		</root>
 	</hierarchy>
 	<components>
-		<save_loader
-			this="4C7896D4-CC03-45D5-9A31FC8AC4F7CC11"
-			id="save_loader"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
+		<button_parent
+			this="DD74E548-C7A8-43A1-86BAE1FC8674B29C"
+			id="button_parent"
+			offset="268.00,6.00"
 			docking="Top Left"
-			priority="1000"
+			dock_offset="268.00,6.00"
 			tooltipslocalised="true"
-			uniqueguid="4C7896D4-CC03-45D5-9A31FC8AC4F7CC11"
-			currentstate="544A9472-15F2-4DF3-87E4608595079F23"
-			defaultstate="544A9472-15F2-4DF3-87E4608595079F23"
-			comment="This shows all saves in working_data/testdata/campaign_saves and allows to load them (from campaign and frontend)">
+			uniqueguid="DD74E548-C7A8-43A1-86BAE1FC8674B29C"
+			currentstate="24543250-A3B4-453D-82F479E174035924"
+			defaultstate="24543250-A3B4-453D-82F479E174035924">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoStaticObject"
+					context_function_id="DirectoryFileList(&quot;testdata/campaign_saves/&quot;, &quot;*&quot;, true)">
+					<child_m_user_properties>
+						<property
+							name="sort_fund"
+							value="StringValue"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
 			<states>
 				<default
-					this="544A9472-15F2-4DF3-87E4608595079F23"
+					this="24543250-A3B4-453D-82F479E174035924"
 					name="default"
-					width="1600"
-					height="900"
-					uniqueguid="544A9472-15F2-4DF3-87E4608595079F23"/>
+					width="221"
+					height="51"
+					uniqueguid="24543250-A3B4-453D-82F479E174035924"/>
 			</states>
-		</save_loader>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="93"/>
+				</columnwidths>
+			</LayoutEngine>
+		</button_parent>
+		<button_txt
+			this="A0F2930F-5F98-4BB6-9E46101B62381895"
+			id="button_txt"
+			offset="0.00,2.00"
+			allowverticalresize="false"
+			docking="Center"
+			dock_offset="0.00,-1.00"
+			component_anchor_point="0.50,0.50"
+			tooltipslocalised="true"
+			uniqueguid="A0F2930F-5F98-4BB6-9E46101B62381895"
+			isrelativeresize="true"
+			currentstate="8A5AA7A4-D1B8-4174-9987C562D8B3A392"
+			defaultstate="8A5AA7A4-D1B8-4174-9987C562D8B3A392">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoString"
+					context_function_id="Value.RemoveFilepathDirectory.RemoveFilepathExtension"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+			</userproperties>
+			<states>
+				<active
+					this="8A5AA7A4-D1B8-4174-9987C562D8B3A392"
+					name="active"
+					width="221"
+					height="44"
+					uniqueguid="8A5AA7A4-D1B8-4174-9987C562D8B3A392">
+					<component_text
+						text="Save game name"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Never split"
+						textlabel="button_txt_active_Text_2a0002"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_button_text"/>
+				</active>
+			</states>
+		</button_txt>
 		<root
 			this="DE9C1849-8D0C-48C8-8727ACA2175F3EE4"
 			id="root"
@@ -68,6 +130,27 @@
 				</default>
 			</states>
 		</root>
+		<save_loader
+			this="4C7896D4-CC03-45D5-9A31FC8AC4F7CC11"
+			id="save_loader"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Top Left"
+			priority="1000"
+			tooltipslocalised="true"
+			uniqueguid="4C7896D4-CC03-45D5-9A31FC8AC4F7CC11"
+			currentstate="544A9472-15F2-4DF3-87E4608595079F23"
+			defaultstate="544A9472-15F2-4DF3-87E4608595079F23"
+			comment="This shows all saves in working_data/testdata/campaign_saves and allows to load them (from campaign and frontend)">
+			<states>
+				<default
+					this="544A9472-15F2-4DF3-87E4608595079F23"
+					name="default"
+					width="1600"
+					height="900"
+					uniqueguid="544A9472-15F2-4DF3-87E4608595079F23"/>
+			</states>
+		</save_loader>
 		<template_button_load
 			this="F2BD7D3C-367D-409C-BD76C379F09B99DE"
 			id="template_button_load"
@@ -155,11 +238,11 @@
 					</imagemetrics>
 					<transitionmap>
 						<transition
-							index="3"
-							transition_m_target_state="9880697D-47D5-463C-861CE7CED1A5971B"/>
-						<transition
 							index="1"
 							transition_m_target_state="83CB3861-99B3-4CB5-AA725009815643E2"/>
+						<transition
+							index="3"
+							transition_m_target_state="9880697D-47D5-463C-861CE7CED1A5971B"/>
 					</transitionmap>
 					<component_text
 						font_m_size="12"
@@ -319,11 +402,11 @@
 					</imagemetrics>
 					<transitionmap>
 						<transition
-							index="3"
-							transition_m_target_state="CC26ED86-FB0D-4FC8-A5668148313D723D"/>
-						<transition
 							index="1"
 							transition_m_target_state="854259E7-E0E0-42ED-BFA2EB808856EF6F"/>
+						<transition
+							index="3"
+							transition_m_target_state="CC26ED86-FB0D-4FC8-A5668148313D723D"/>
 					</transitionmap>
 					<component_text
 						font_m_size="12"
@@ -433,88 +516,5 @@
 				</selected_inactive>
 			</states>
 		</template_button_load>
-		<button_parent
-			this="DD74E548-C7A8-43A1-86BAE1FC8674B29C"
-			id="button_parent"
-			offset="268.00,6.00"
-			docking="Top Left"
-			dock_offset="268.00,6.00"
-			tooltipslocalised="true"
-			uniqueguid="DD74E548-C7A8-43A1-86BAE1FC8674B29C"
-			currentstate="24543250-A3B4-453D-82F479E174035924"
-			defaultstate="24543250-A3B4-453D-82F479E174035924">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextList"
-					context_object_id="CcoStaticObject"
-					context_function_id="DirectoryFileList(&quot;testdata/campaign_saves/&quot;, &quot;*&quot;, true)">
-					<child_m_user_properties>
-						<property
-							name="sort_fund"
-							value="StringValue"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="24543250-A3B4-453D-82F479E174035924"
-					name="default"
-					width="221"
-					height="51"
-					uniqueguid="24543250-A3B4-453D-82F479E174035924"/>
-			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true">
-				<columnwidths>
-					<column width="93"/>
-				</columnwidths>
-			</LayoutEngine>
-		</button_parent>
-		<button_txt
-			this="A0F2930F-5F98-4BB6-9E46101B62381895"
-			id="button_txt"
-			offset="0.00,2.00"
-			allowverticalresize="false"
-			docking="Center"
-			dock_offset="0.00,-1.00"
-			component_anchor_point="0.50,0.50"
-			tooltipslocalised="true"
-			uniqueguid="A0F2930F-5F98-4BB6-9E46101B62381895"
-			isrelativeresize="true"
-			currentstate="8A5AA7A4-D1B8-4174-9987C562D8B3A392"
-			defaultstate="8A5AA7A4-D1B8-4174-9987C562D8B3A392">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoString"
-					context_function_id="Value.RemoveFilepathDirectory.RemoveFilepathExtension"/>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="disable_override"
-					value="instance_resize"/>
-			</userproperties>
-			<states>
-				<active
-					this="8A5AA7A4-D1B8-4174-9987C562D8B3A392"
-					name="active"
-					width="221"
-					height="44"
-					uniqueguid="8A5AA7A4-D1B8-4174-9987C562D8B3A392">
-					<component_text
-						text="Save game name"
-						textvalign="Center"
-						texthalign="Center"
-						texthbehaviour="Never split"
-						textlabel="button_txt_active_Text_2a0002"
-						font_m_font_name="dev_font"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="1"
-						fontcat_name="dev_button_text"/>
-				</active>
-			</states>
-		</button_txt>
 	</components>
 </layout>

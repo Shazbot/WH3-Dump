@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="CanUseUiFeature(&quot;WITCHES_HUT&quot;)">
 	<hierarchy>
@@ -31,37 +31,6 @@
 		</root>
 	</hierarchy>
 	<components>
-		<root
-			this="6FB054F4-8424-48C0-835D6643BB3C0A38"
-			id="root"
-			tooltipslocalised="true"
-			uniqueguid="6FB054F4-8424-48C0-835D6643BB3C0A38"
-			currentstate="57E45150-6E3E-48BB-9239BB444BC3B9D2"
-			defaultstate="57E45150-6E3E-48BB-9239BB444BC3B9D2">
-			<componentimages>
-				<component_image
-					this="9273C13C-71E6-4CCA-87B70333288ADD65"
-					uniqueguid="9273C13C-71E6-4CCA-87B70333288ADD65"/>
-			</componentimages>
-			<states>
-				<default
-					this="57E45150-6E3E-48BB-9239BB444BC3B9D2"
-					name="default"
-					width="1600"
-					height="900"
-					uniqueguid="57E45150-6E3E-48BB-9239BB444BC3B9D2">
-					<imagemetrics>
-						<image
-							this="01B4A25B-5C94-4FA5-B489D1ECCADC91F4"
-							uniqueguid="01B4A25B-5C94-4FA5-B489D1ECCADC91F4"
-							componentimage="9273C13C-71E6-4CCA-87B70333288ADD65"
-							width="1920"
-							height="1080"
-							colour="#1C1C1CFF"/>
-					</imagemetrics>
-				</default>
-			</states>
-		</root>
 		<allied_effects
 			this="21B089B6-A4CA-43D2-936126CA70FF1334"
 			id="allied_effects"
@@ -94,208 +63,43 @@
 				</columnwidths>
 			</LayoutEngine>
 		</allied_effects>
-		<completed_comp
-			this="3B85E1BE-9DAE-4C67-829C2A1AD934E574"
-			id="completed_comp"
-			part_of_template="true"
-			uniqueguid_in_template="DE8557ED-0386-4BFF-87237559FEB7164F"
-			uniqueguid="3B85E1BE-9DAE-4C67-829C2A1AD934E574"
-			dimensions="335.00,3.00"
-			dock_point="Center"
-			priority="255">
-			<state_uniqueguids>
-				<state_uniqueguid
+		<allied_title
+			this="7230BFA3-35E4-4BA1-8FB6FA71A5C8C57A"
+			id="allied_title"
+			offset="0.00,56.00"
+			allowverticalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="7230BFA3-35E4-4BA1-8FB6FA71A5C8C57A"
+			currentstate="742A4612-876A-4900-9EFE78B4DF58A9B9"
+			defaultstate="742A4612-876A-4900-9EFE78B4DF58A9B9">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCookingIngredientRecord"
+					context_function_id="EnemyUnitEffectsContext.Effects.IsEmpty == false &amp;&amp; AlliedUnitEffectsContext.Effects.IsEmpty == false"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="742A4612-876A-4900-9EFE78B4DF58A9B9"
 					name="default"
-					uniqueguid="B2FA4717-408B-4569-A401DB795F63382E"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/sticky_bar_fill.png"
-					uniqueguid="5ECDC941-4BA1-4CFD-89E6B9535471EC98"/>
-			</component_image_uniqueguids>
-			<user_properties>
-				<property
-					name="disable_override0"
-					value="position"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value=""/>
-				<element value="ui/skins/default/sticky_bar_fill.png"/>
-			</override_images>
-		</completed_comp>
-		<template_effect_entry
-			this="0EA922CC-0B5F-4925-89D03A89027C5293"
-			id="template_effect_entry"
-			template_id="effect_entry"
-			part_of_template="true"
-			uniqueguid_in_template="3E69DCBB-2825-43D2-9835F3502CEDF749"
-			uniqueguid="0EA922CC-0B5F-4925-89D03A89027C5293"
-			dimensions="320.00,30.00"
-			offset="10.00,0.00"
-			priority="255">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="F60CFB93-62D4-41FB-B52DE16EE4D954D8"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="7998FD4B-E554-4DF7-A05AD31DE1A2D222"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/campaign ui/effect_bundles/army.png"
-					uniqueguid="1AB907A4-A5CE-485B-9E60D2DEA1566AD3"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoEffect"
-					context_function_id="LocalisedText"/>
-				<callback_with_context
-					callback_id="ContextImageSetter"
-					context_object_id="CcoEffect"
-					context_function_id="IconPath"/>
-				<callback_with_context
-					callback_id="AbilityEffectIcon"
-					context_object_id="CcoEffect"/>
-			</callbacks_with_context>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					text="dy_effect"
-					text_label="StateText_bebd9fd5"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					text="dy_effect"
-					text_label="StateText_e245dcda"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/campaign ui/effect_bundles/army.png"/>
-			</override_images>
-		</template_effect_entry>
-		<template_effect_entry
-			this="06E1D58A-9D7C-4687-B363BDD70F4321F5"
-			id="template_effect_entry"
-			template_id="effect_entry"
-			part_of_template="true"
-			uniqueguid_in_template="3E69DCBB-2825-43D2-9835F3502CEDF749"
-			uniqueguid="06E1D58A-9D7C-4687-B363BDD70F4321F5"
-			dimensions="320.00,30.00"
-			offset="10.00,0.00"
-			priority="255">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="59B90691-E224-4188-96C62DBB44665AD8"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="B42E510F-7A35-488F-BA818814C10FE561"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/campaign ui/effect_bundles/army.png"
-					uniqueguid="4FAF8F27-FA6C-4EB4-91BDD02774635476"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoEffect"
-					context_function_id="LocalisedText"/>
-				<callback_with_context
-					callback_id="ContextImageSetter"
-					context_object_id="CcoEffect"
-					context_function_id="IconPath"/>
-				<callback_with_context
-					callback_id="AbilityEffectIcon"
-					context_object_id="CcoEffect"/>
-			</callbacks_with_context>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					text="dy_effect"
-					text_label="StateText_382fe48f"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					text="dy_effect"
-					text_label="StateText_c7c45ca2"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/campaign ui/effect_bundles/army.png"/>
-			</override_images>
-		</template_effect_entry>
-		<in_progress_comp
-			this="732A2C44-471D-46AC-905494D3B6A5FD7C"
-			id="in_progress_comp"
-			part_of_template="true"
-			uniqueguid_in_template="598D2980-2D81-4431-B8372E64160B25BB"
-			uniqueguid="732A2C44-471D-46AC-905494D3B6A5FD7C"
-			dimensions="335.00,3.00"
-			dock_point="Center"
-			priority="255">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="DE3380FA-F5B4-45D9-87B97CF04FEB1DD9"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/sticky_bar_fill.png"
-					uniqueguid="80282DEE-DE5C-440A-8C00585E86A532C4"/>
-			</component_image_uniqueguids>
-			<user_properties>
-				<property
-					name="disable_override0"
-					value="position"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value=""/>
-				<element value="ui/skins/default/sticky_bar_fill.png"/>
-			</override_images>
-		</in_progress_comp>
-		<stick_progress_bar
-			this="595318EF-F891-4A9F-9797115722E79ED0"
-			id="stick_progress_bar"
-			template_id="stick_progress_bar"
-			part_of_template="true"
-			uniqueguid_in_template="B5D91471-862C-459A-9117F067B37F7730"
-			uniqueguid="595318EF-F891-4A9F-9797115722E79ED0"
-			dimensions="1.00,10.00"
-			priority="255">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="3E28F53B-D669-47E1-92ACA1FFE8F916E2"/>
-			</state_uniqueguids>
-			<user_properties>
-				<property
-					name="disable_override1"
-					value="position"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					is_text_localised="false"/>
-			</localised_texts>
-		</stick_progress_bar>
+					width="340"
+					height="35"
+					uniqueguid="742A4612-876A-4900-9EFE78B4DF58A9B9">
+					<component_text
+						text="Effect when used to create a blessing:"
+						textvalign="Center"
+						textxoffset="12.00,8.00"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_394c9ac2"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</default>
+			</states>
+		</allied_title>
 		<auto_resizing_comp
 			this="EAF89C73-8495-46DC-B4BED4D1A4535074"
 			id="auto_resizing_comp"
@@ -338,43 +142,6 @@
 					is_text_localised="false"/>
 			</localised_texts>
 		</bar_extents_and_pos>
-		<allied_title
-			this="7230BFA3-35E4-4BA1-8FB6FA71A5C8C57A"
-			id="allied_title"
-			offset="0.00,56.00"
-			allowverticalresize="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="7230BFA3-35E4-4BA1-8FB6FA71A5C8C57A"
-			currentstate="742A4612-876A-4900-9EFE78B4DF58A9B9"
-			defaultstate="742A4612-876A-4900-9EFE78B4DF58A9B9">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoCookingIngredientRecord"
-					context_function_id="EnemyUnitEffectsContext.Effects.IsEmpty == false &amp;&amp; AlliedUnitEffectsContext.Effects.IsEmpty == false"/>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="742A4612-876A-4900-9EFE78B4DF58A9B9"
-					name="default"
-					width="340"
-					height="35"
-					uniqueguid="742A4612-876A-4900-9EFE78B4DF58A9B9">
-					<component_text
-						text="Effect when used to create a blessing:"
-						textvalign="Center"
-						textxoffset="12.00,8.00"
-						texthbehaviour="Never split"
-						textlocalised="true"
-						textlabel="StateText_394c9ac2"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</default>
-			</states>
-		</allied_title>
 		<bottom_padding
 			this="C685D0F9-EDEB-472F-B60FA9E12BD9AC18"
 			id="bottom_padding"
@@ -395,6 +162,41 @@
 					uniqueguid="EEC5EEAB-0A04-4372-9A6D3219E1CEE2B4"/>
 			</states>
 		</bottom_padding>
+		<completed_comp
+			this="3B85E1BE-9DAE-4C67-829C2A1AD934E574"
+			id="completed_comp"
+			part_of_template="true"
+			uniqueguid_in_template="DE8557ED-0386-4BFF-87237559FEB7164F"
+			uniqueguid="3B85E1BE-9DAE-4C67-829C2A1AD934E574"
+			dimensions="335.00,3.00"
+			dock_point="Center"
+			priority="255">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="B2FA4717-408B-4569-A401DB795F63382E"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/sticky_bar_fill.png"
+					uniqueguid="5ECDC941-4BA1-4CFD-89E6B9535471EC98"/>
+			</component_image_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+				<element value="ui/skins/default/sticky_bar_fill.png"/>
+			</override_images>
+		</completed_comp>
 		<dx_unlock_condition_text
 			this="544E55A7-6B82-4BCA-B9476719B6D0D37C"
 			id="dx_unlock_condition_text"
@@ -626,6 +428,204 @@
 				</default>
 			</states>
 		</enemy_title>
+		<in_progress_comp
+			this="732A2C44-471D-46AC-905494D3B6A5FD7C"
+			id="in_progress_comp"
+			part_of_template="true"
+			uniqueguid_in_template="598D2980-2D81-4431-B8372E64160B25BB"
+			uniqueguid="732A2C44-471D-46AC-905494D3B6A5FD7C"
+			dimensions="335.00,3.00"
+			dock_point="Center"
+			priority="255">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="DE3380FA-F5B4-45D9-87B97CF04FEB1DD9"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/sticky_bar_fill.png"
+					uniqueguid="80282DEE-DE5C-440A-8C00585E86A532C4"/>
+			</component_image_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+				<element value="ui/skins/default/sticky_bar_fill.png"/>
+			</override_images>
+		</in_progress_comp>
+		<root
+			this="6FB054F4-8424-48C0-835D6643BB3C0A38"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="6FB054F4-8424-48C0-835D6643BB3C0A38"
+			currentstate="57E45150-6E3E-48BB-9239BB444BC3B9D2"
+			defaultstate="57E45150-6E3E-48BB-9239BB444BC3B9D2">
+			<componentimages>
+				<component_image
+					this="9273C13C-71E6-4CCA-87B70333288ADD65"
+					uniqueguid="9273C13C-71E6-4CCA-87B70333288ADD65"/>
+			</componentimages>
+			<states>
+				<default
+					this="57E45150-6E3E-48BB-9239BB444BC3B9D2"
+					name="default"
+					width="1600"
+					height="900"
+					uniqueguid="57E45150-6E3E-48BB-9239BB444BC3B9D2">
+					<imagemetrics>
+						<image
+							this="01B4A25B-5C94-4FA5-B489D1ECCADC91F4"
+							uniqueguid="01B4A25B-5C94-4FA5-B489D1ECCADC91F4"
+							componentimage="9273C13C-71E6-4CCA-87B70333288ADD65"
+							width="1920"
+							height="1080"
+							colour="#1C1C1CFF"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</root>
+		<stick_progress_bar
+			this="595318EF-F891-4A9F-9797115722E79ED0"
+			id="stick_progress_bar"
+			template_id="stick_progress_bar"
+			part_of_template="true"
+			uniqueguid_in_template="B5D91471-862C-459A-9117F067B37F7730"
+			uniqueguid="595318EF-F891-4A9F-9797115722E79ED0"
+			dimensions="1.00,10.00"
+			priority="255">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="3E28F53B-D669-47E1-92ACA1FFE8F916E2"/>
+			</state_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override1"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</stick_progress_bar>
+		<template_effect_entry
+			this="06E1D58A-9D7C-4687-B363BDD70F4321F5"
+			id="template_effect_entry"
+			template_id="effect_entry"
+			part_of_template="true"
+			uniqueguid_in_template="3E69DCBB-2825-43D2-9835F3502CEDF749"
+			uniqueguid="06E1D58A-9D7C-4687-B363BDD70F4321F5"
+			dimensions="320.00,30.00"
+			offset="10.00,0.00"
+			priority="255">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="59B90691-E224-4188-96C62DBB44665AD8"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="B42E510F-7A35-488F-BA818814C10FE561"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/campaign ui/effect_bundles/army.png"
+					uniqueguid="4FAF8F27-FA6C-4EB4-91BDD02774635476"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoEffect"
+					context_function_id="LocalisedText"/>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoEffect"
+					context_function_id="IconPath"/>
+				<callback_with_context
+					callback_id="AbilityEffectIcon"
+					context_object_id="CcoEffect"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					text="dy_effect"
+					text_label="StateText_382fe48f"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					text="dy_effect"
+					text_label="StateText_c7c45ca2"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/campaign ui/effect_bundles/army.png"/>
+			</override_images>
+		</template_effect_entry>
+		<template_effect_entry
+			this="0EA922CC-0B5F-4925-89D03A89027C5293"
+			id="template_effect_entry"
+			template_id="effect_entry"
+			part_of_template="true"
+			uniqueguid_in_template="3E69DCBB-2825-43D2-9835F3502CEDF749"
+			uniqueguid="0EA922CC-0B5F-4925-89D03A89027C5293"
+			dimensions="320.00,30.00"
+			offset="10.00,0.00"
+			priority="255">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="F60CFB93-62D4-41FB-B52DE16EE4D954D8"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="7998FD4B-E554-4DF7-A05AD31DE1A2D222"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/campaign ui/effect_bundles/army.png"
+					uniqueguid="1AB907A4-A5CE-485B-9E60D2DEA1566AD3"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoEffect"
+					context_function_id="LocalisedText"/>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoEffect"
+					context_function_id="IconPath"/>
+				<callback_with_context
+					callback_id="AbilityEffectIcon"
+					context_object_id="CcoEffect"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					text="dy_effect"
+					text_label="StateText_bebd9fd5"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					text="dy_effect"
+					text_label="StateText_e245dcda"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/campaign ui/effect_bundles/army.png"/>
+			</override_images>
+		</template_effect_entry>
 		<tooltip_dlc24_witches_hut_ingredient
 			this="83D7057D-F053-4B5E-9577ED9AD202805F"
 			id="tooltip_dlc24_witches_hut_ingredient"

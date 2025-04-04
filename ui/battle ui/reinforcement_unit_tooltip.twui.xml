@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -30,60 +30,112 @@
 		</root>
 	</hierarchy>
 	<components>
-		<root
-			this="C4A50CBA-7CD8-4778-BA1DBEC6E94AD53E"
-			id="root"
+		<allegiance
+			this="8CA39641-EA51-4CE0-8939070871966683"
+			id="allegiance"
+			offset="-15.00,-21.00"
+			allowverticalresize="false"
+			docking="Top Left"
+			dock_offset="-15.00,-21.00"
+			priority="10"
 			tooltipslocalised="true"
-			uniqueguid="C4A50CBA-7CD8-4778-BA1DBEC6E94AD53E"
-			currentstate="2A245F19-255A-43BD-B65AE21EAAB1EEEE">
+			uniqueguid="8CA39641-EA51-4CE0-8939070871966683"
+			currentstate="0CD6B770-EFEC-48C3-90AAB1745EE40281"
+			defaultstate="0CD6B770-EFEC-48C3-90AAB1745EE40281">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="ResizeToFitTarget">
+					<child_m_user_properties>
+						<property
+							name="parent_id"
+							value="^4"/>
+						<property
+							name="target"
+							value="tooltip"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextColourSetter"
+					context_object_id="CcoBattleUnit"
+					context_function_id="AllianceColour"/>
+			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
-					this="C251421B-296B-4113-9DA04EF83BF08843"
-					uniqueguid="C251421B-296B-4113-9DA04EF83BF08843"/>
+					this="D17CA3C3-C43E-4A7B-9F325AEDB0C72864"
+					uniqueguid="D17CA3C3-C43E-4A7B-9F325AEDB0C72864"
+					imagepath="ui/skins/default/tooltip_header.png"/>
 			</componentimages>
 			<states>
 				<newstate
-					this="2A245F19-255A-43BD-B65AE21EAAB1EEEE"
+					this="0CD6B770-EFEC-48C3-90AAB1745EE40281"
 					name="NewState"
-					width="1600"
-					height="900"
-					interactive="true"
-					uniqueguid="2A245F19-255A-43BD-B65AE21EAAB1EEEE">
+					width="332"
+					height="43"
+					uniqueguid="0CD6B770-EFEC-48C3-90AAB1745EE40281">
 					<imagemetrics>
 						<image
-							this="A9918E4C-7399-4DFD-A078A3471E9A2095"
-							uniqueguid="A9918E4C-7399-4DFD-A078A3471E9A2095"
-							componentimage="C251421B-296B-4113-9DA04EF83BF08843"
-							width="1280"
-							height="960"
-							colour="#7F7F7FFF"/>
+							this="1825C12E-760F-4140-B08EA670FE14F74C"
+							uniqueguid="1825C12E-760F-4140-B08EA670FE14F74C"
+							componentimage="D17CA3C3-C43E-4A7B-9F325AEDB0C72864"
+							width="332"
+							height="39"
+							tile="true"
+							margin="0.00,30.00,0.00,80.00"/>
 					</imagemetrics>
 				</newstate>
 			</states>
-		</root>
-		<top_bar
-			this="933858DC-A8A2-47C7-B8531A5C1483BD9E"
-			id="top_bar"
-			allowverticalresize="false"
+		</allegiance>
+		<allegiance_holder
+			this="00DA38E7-6AE3-4103-8AB4618B87A4EFEA"
+			id="allegiance_holder"
+			offset="15.00,21.00"
 			priority="10"
 			tooltipslocalised="true"
-			uniqueguid="933858DC-A8A2-47C7-B8531A5C1483BD9E"
-			currentstate="FC5FF038-4197-43C9-AECA641C55957EF0"
-			defaultstate="FC5FF038-4197-43C9-AECA641C55957EF0">
+			uniqueguid="00DA38E7-6AE3-4103-8AB4618B87A4EFEA"
+			currentstate="9FCDE91D-EE8C-4F38-8A0612BAD5239E3C"
+			defaultstate="9FCDE91D-EE8C-4F38-8A0612BAD5239E3C"
+			comment="This is so can have allegiance background resizing to fit the whole tooltip">
 			<states>
-				<newstate
-					this="FC5FF038-4197-43C9-AECA641C55957EF0"
-					name="NewState"
-					width="205"
-					height="43"
-					uniqueguid="FC5FF038-4197-43C9-AECA641C55957EF0"/>
+				<default
+					this="9FCDE91D-EE8C-4F38-8A0612BAD5239E3C"
+					name="default"
+					width="1"
+					height="1"
+					uniqueguid="9FCDE91D-EE8C-4F38-8A0612BAD5239E3C"/>
+			</states>
+		</allegiance_holder>
+		<effect_list_creator
+			this="E7A00098-30B4-4F34-AD71037DD9FA8519"
+			id="effect_list_creator"
+			priority="30"
+			tooltipslocalised="true"
+			uniqueguid="E7A00098-30B4-4F34-AD71037DD9FA8519"
+			currentstate="216598C0-2231-4E82-95E39A25BCC5792D"
+			defaultstate="216598C0-2231-4E82-95E39A25BCC5792D">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="ComponentCreator">
+					<child_m_user_properties>
+						<property
+							name="layout"
+							value="ui/battle ui/unit_active_effects"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="216598C0-2231-4E82-95E39A25BCC5792D"
+					name="default"
+					width="1"
+					height="1"
+					uniqueguid="216598C0-2231-4E82-95E39A25BCC5792D"/>
 			</states>
 			<LayoutEngine
-				type="HorizontalList"
-				sizetocontent="true"
-				margins="15.00,60.00"
-				vertical_alignment="Center"/>
-		</top_bar>
+				type="List"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="23"/>
+				</columnwidths>
+			</LayoutEngine>
+		</effect_list_creator>
 		<icon_category
 			this="E1736244-99AF-414C-AB3F39A59FF8E592"
 			id="icon_category"
@@ -639,204 +691,6 @@
 				</default>
 			</states>
 		</mon_crest>
-		<text
-			this="30319F89-BEE0-4198-9B95CDA22BF8FF21"
-			id="text"
-			offset="34.00,0.00"
-			allowverticalresize="false"
-			priority="30"
-			tooltipslocalised="true"
-			uniqueguid="30319F89-BEE0-4198-9B95CDA22BF8FF21"
-			currentstate="FDD9AB45-D872-4D71-BB23D048A027E89F"
-			defaultstate="FDD9AB45-D872-4D71-BB23D048A027E89F">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoBattleUnit"
-					context_function_id="UnitRecordContext.CategoryName"/>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="FDD9AB45-D872-4D71-BB23D048A027E89F"
-					name="NewState"
-					width="78"
-					height="24"
-					uniqueguid="FDD9AB45-D872-4D71-BB23D048A027E89F">
-					<component_text
-						text="Description"
-						textvalign="Center"
-						texthbehaviour="Resize"
-						textlabel="text_NewState_Text_740032"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"
-						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
-				</newstate>
-			</states>
-		</text>
-		<txt_name
-			this="30A8178E-D5D1-4199-B1F5C6072079B26F"
-			id="txt_name"
-			offset="48.00,7.00"
-			allowverticalresize="false"
-			priority="30"
-			tooltipslocalised="true"
-			uniqueguid="30A8178E-D5D1-4199-B1F5C6072079B26F"
-			currentstate="313ADCD2-7467-4036-ABB5656898949EF2"
-			defaultstate="313ADCD2-7467-4036-ABB5656898949EF2">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoBattleUnit"
-					context_function_id="Name"/>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="313ADCD2-7467-4036-ABB5656898949EF2"
-					name="default"
-					width="73"
-					height="29"
-					uniqueguid="313ADCD2-7467-4036-ABB5656898949EF2">
-					<component_text
-						text="Unit name"
-						textxoffset="2.00,0.00"
-						textyoffset="8.00,0.00"
-						texthbehaviour="Resize"
-						textlabel="txt_name_NewState_Text_310022"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"
-						text_shader_name="text_outline_t0"
-						textshadervars="0.00,0.00,0.00,1.00"/>
-				</default>
-				<double_line
-					this="26C47FAB-E629-4B93-833B2A00E79725A4"
-					name="double_line"
-					width="60"
-					height="29"
-					uniqueguid="26C47FAB-E629-4B93-833B2A00E79725A4">
-					<component_text
-						text="Unit name"
-						textvalign="Center"
-						textxoffset="2.00,0.00"
-						texthbehaviour="Resize"
-						textlabel="txt_name_NewState_Text_310022"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_10"
-						text_shader_name="text_outline_t0"
-						textshadervars="0.00,0.00,0.00,1.00"/>
-				</double_line>
-			</states>
-		</txt_name>
-		<effect_list_creator
-			this="E7A00098-30B4-4F34-AD71037DD9FA8519"
-			id="effect_list_creator"
-			priority="30"
-			tooltipslocalised="true"
-			uniqueguid="E7A00098-30B4-4F34-AD71037DD9FA8519"
-			currentstate="216598C0-2231-4E82-95E39A25BCC5792D"
-			defaultstate="216598C0-2231-4E82-95E39A25BCC5792D">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="ComponentCreator">
-					<child_m_user_properties>
-						<property
-							name="layout"
-							value="ui/battle ui/unit_active_effects"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="216598C0-2231-4E82-95E39A25BCC5792D"
-					name="default"
-					width="1"
-					height="1"
-					uniqueguid="216598C0-2231-4E82-95E39A25BCC5792D"/>
-			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true">
-				<columnwidths>
-					<column width="23"/>
-				</columnwidths>
-			</LayoutEngine>
-		</effect_list_creator>
-		<allegiance
-			this="8CA39641-EA51-4CE0-8939070871966683"
-			id="allegiance"
-			offset="-15.00,-21.00"
-			allowverticalresize="false"
-			docking="Top Left"
-			dock_offset="-15.00,-21.00"
-			priority="10"
-			tooltipslocalised="true"
-			uniqueguid="8CA39641-EA51-4CE0-8939070871966683"
-			currentstate="0CD6B770-EFEC-48C3-90AAB1745EE40281"
-			defaultstate="0CD6B770-EFEC-48C3-90AAB1745EE40281">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="ResizeToFitTarget">
-					<child_m_user_properties>
-						<property
-							name="parent_id"
-							value="^4"/>
-						<property
-							name="target"
-							value="tooltip"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextColourSetter"
-					context_object_id="CcoBattleUnit"
-					context_function_id="AllianceColour"/>
-			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="D17CA3C3-C43E-4A7B-9F325AEDB0C72864"
-					uniqueguid="D17CA3C3-C43E-4A7B-9F325AEDB0C72864"
-					imagepath="ui/skins/default/tooltip_header.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="0CD6B770-EFEC-48C3-90AAB1745EE40281"
-					name="NewState"
-					width="332"
-					height="43"
-					uniqueguid="0CD6B770-EFEC-48C3-90AAB1745EE40281">
-					<imagemetrics>
-						<image
-							this="1825C12E-760F-4140-B08EA670FE14F74C"
-							uniqueguid="1825C12E-760F-4140-B08EA670FE14F74C"
-							componentimage="D17CA3C3-C43E-4A7B-9F325AEDB0C72864"
-							width="332"
-							height="39"
-							tile="true"
-							margin="0.00,30.00,0.00,80.00"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-		</allegiance>
-		<allegiance_holder
-			this="00DA38E7-6AE3-4103-8AB4618B87A4EFEA"
-			id="allegiance_holder"
-			offset="15.00,21.00"
-			priority="10"
-			tooltipslocalised="true"
-			uniqueguid="00DA38E7-6AE3-4103-8AB4618B87A4EFEA"
-			currentstate="9FCDE91D-EE8C-4F38-8A0612BAD5239E3C"
-			defaultstate="9FCDE91D-EE8C-4F38-8A0612BAD5239E3C"
-			comment="This is so can have allegiance background resizing to fit the whole tooltip">
-			<states>
-				<default
-					this="9FCDE91D-EE8C-4F38-8A0612BAD5239E3C"
-					name="default"
-					width="1"
-					height="1"
-					uniqueguid="9FCDE91D-EE8C-4F38-8A0612BAD5239E3C"/>
-			</states>
-		</allegiance_holder>
 		<reinforcement_unit_tooltip
 			this="CED39C11-3854-4B1D-82906EA8EB817324"
 			id="reinforcement_unit_tooltip"
@@ -926,6 +780,73 @@
 				</columnwidths>
 			</LayoutEngine>
 		</reinforcement_unit_tooltip>
+		<root
+			this="C4A50CBA-7CD8-4778-BA1DBEC6E94AD53E"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="C4A50CBA-7CD8-4778-BA1DBEC6E94AD53E"
+			currentstate="2A245F19-255A-43BD-B65AE21EAAB1EEEE">
+			<componentimages>
+				<component_image
+					this="C251421B-296B-4113-9DA04EF83BF08843"
+					uniqueguid="C251421B-296B-4113-9DA04EF83BF08843"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="2A245F19-255A-43BD-B65AE21EAAB1EEEE"
+					name="NewState"
+					width="1600"
+					height="900"
+					interactive="true"
+					uniqueguid="2A245F19-255A-43BD-B65AE21EAAB1EEEE">
+					<imagemetrics>
+						<image
+							this="A9918E4C-7399-4DFD-A078A3471E9A2095"
+							uniqueguid="A9918E4C-7399-4DFD-A078A3471E9A2095"
+							componentimage="C251421B-296B-4113-9DA04EF83BF08843"
+							width="1280"
+							height="960"
+							colour="#7F7F7FFF"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</root>
+		<text
+			this="30319F89-BEE0-4198-9B95CDA22BF8FF21"
+			id="text"
+			offset="34.00,0.00"
+			allowverticalresize="false"
+			priority="30"
+			tooltipslocalised="true"
+			uniqueguid="30319F89-BEE0-4198-9B95CDA22BF8FF21"
+			currentstate="FDD9AB45-D872-4D71-BB23D048A027E89F"
+			defaultstate="FDD9AB45-D872-4D71-BB23D048A027E89F">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoBattleUnit"
+					context_function_id="UnitRecordContext.CategoryName"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="FDD9AB45-D872-4D71-BB23D048A027E89F"
+					name="NewState"
+					width="78"
+					height="24"
+					uniqueguid="FDD9AB45-D872-4D71-BB23D048A027E89F">
+					<component_text
+						text="Description"
+						textvalign="Center"
+						texthbehaviour="Resize"
+						textlabel="text_NewState_Text_740032"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+				</newstate>
+			</states>
+		</text>
 		<tooltip
 			this="23D60A4F-7CB7-4E92-8AF23BFC38E3875A"
 			id="tooltip"
@@ -975,5 +896,84 @@
 				</columnwidths>
 			</LayoutEngine>
 		</tooltip>
+		<top_bar
+			this="933858DC-A8A2-47C7-B8531A5C1483BD9E"
+			id="top_bar"
+			allowverticalresize="false"
+			priority="10"
+			tooltipslocalised="true"
+			uniqueguid="933858DC-A8A2-47C7-B8531A5C1483BD9E"
+			currentstate="FC5FF038-4197-43C9-AECA641C55957EF0"
+			defaultstate="FC5FF038-4197-43C9-AECA641C55957EF0">
+			<states>
+				<newstate
+					this="FC5FF038-4197-43C9-AECA641C55957EF0"
+					name="NewState"
+					width="205"
+					height="43"
+					uniqueguid="FC5FF038-4197-43C9-AECA641C55957EF0"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"
+				margins="15.00,60.00"
+				vertical_alignment="Center"/>
+		</top_bar>
+		<txt_name
+			this="30A8178E-D5D1-4199-B1F5C6072079B26F"
+			id="txt_name"
+			offset="48.00,7.00"
+			allowverticalresize="false"
+			priority="30"
+			tooltipslocalised="true"
+			uniqueguid="30A8178E-D5D1-4199-B1F5C6072079B26F"
+			currentstate="313ADCD2-7467-4036-ABB5656898949EF2"
+			defaultstate="313ADCD2-7467-4036-ABB5656898949EF2">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoBattleUnit"
+					context_function_id="Name"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="313ADCD2-7467-4036-ABB5656898949EF2"
+					name="default"
+					width="73"
+					height="29"
+					uniqueguid="313ADCD2-7467-4036-ABB5656898949EF2">
+					<component_text
+						text="Unit name"
+						textxoffset="2.00,0.00"
+						textyoffset="8.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="txt_name_NewState_Text_310022"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						text_shader_name="text_outline_t0"
+						textshadervars="0.00,0.00,0.00,1.00"/>
+				</default>
+				<double_line
+					this="26C47FAB-E629-4B93-833B2A00E79725A4"
+					name="double_line"
+					width="60"
+					height="29"
+					uniqueguid="26C47FAB-E629-4B93-833B2A00E79725A4">
+					<component_text
+						text="Unit name"
+						textvalign="Center"
+						textxoffset="2.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="txt_name_NewState_Text_310022"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"
+						text_shader_name="text_outline_t0"
+						textshadervars="0.00,0.00,0.00,1.00"/>
+				</double_line>
+			</states>
+		</txt_name>
 	</components>
 </layout>

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="PlayersFaction.IsCampaignFeatureAvailable(&quot;winds_of_magic_compass&quot;) ">
 	<hierarchy>
@@ -56,234 +56,43 @@
 		</root>
 	</hierarchy>
 	<components>
-		<root
-			this="A0ED61C9-9CB7-4E20-B21B4C8A407EA38C"
-			id="root"
+		<active_effects
+			this="C07A07CF-30C5-4229-8E289EC0B91146FA"
+			id="active_effects"
+			offset="0.00,130.00"
+			allowhorizontalresize="false"
 			tooltipslocalised="true"
-			uniqueguid="A0ED61C9-9CB7-4E20-B21B4C8A407EA38C"
-			currentstate="ECC02651-F597-43A7-8C3D7EA698A3D22C"
-			defaultstate="ECC02651-F597-43A7-8C3D7EA698A3D22C">
-			<componentimages>
-				<component_image
-					this="63BA1CF3-9740-42B9-AFDB67FB7BBF0A87"
-					uniqueguid="63BA1CF3-9740-42B9-AFDB67FB7BBF0A87"/>
-			</componentimages>
+			uniqueguid="C07A07CF-30C5-4229-8E289EC0B91146FA"
+			currentstate="E3732A7A-EBEE-42BE-A41DDF2148917531"
+			defaultstate="E3732A7A-EBEE-42BE-A41DDF2148917531">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoCampaignWomCompassDirection"
+					context_function_id="SelectionEffectList">
+					<child_m_user_properties>
+						<property
+							name="hide_if_empty"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
 			<states>
-				<default
-					this="ECC02651-F597-43A7-8C3D7EA698A3D22C"
-					name="default"
-					width="1600"
-					height="900"
-					uniqueguid="ECC02651-F597-43A7-8C3D7EA698A3D22C">
-					<imagemetrics>
-						<image
-							this="1B66B86F-A898-4C64-8274900DE24ABA43"
-							uniqueguid="1B66B86F-A898-4C64-8274900DE24ABA43"
-							componentimage="63BA1CF3-9740-42B9-AFDB67FB7BBF0A87"
-							width="1920"
-							height="1080"
-							colour="#1C1C1CFF"/>
-					</imagemetrics>
-				</default>
+				<newstate
+					this="E3732A7A-EBEE-42BE-A41DDF2148917531"
+					name="NewState"
+					width="340"
+					height="66"
+					uniqueguid="E3732A7A-EBEE-42BE-A41DDF2148917531"/>
 			</states>
-		</root>
-		<completed_comp
-			this="88441B52-9AB9-434D-BEE4FD4B018D1E4E"
-			id="completed_comp"
-			part_of_template="true"
-			uniqueguid_in_template="DE8557ED-0386-4BFF-87237559FEB7164F"
-			uniqueguid="88441B52-9AB9-434D-BEE4FD4B018D1E4E"
-			dimensions="370.00,3.00"
-			dock_point="Center">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="D2AC3049-DFEE-4D6E-AB592C4B95A2010C"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/sticky_bar_fill.png"
-					uniqueguid="1639EDD6-E1E6-4902-A2DE46A2B175FBE8"/>
-			</component_image_uniqueguids>
-			<user_properties>
-				<property
-					name="disable_override0"
-					value="position"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value=""/>
-				<element value="ui/skins/default/sticky_bar_fill.png"/>
-			</override_images>
-		</completed_comp>
-		<template_effect_entry
-			this="64361770-E699-4313-8EDAAC269F399654"
-			id="template_effect_entry"
-			template_id="effect_entry"
-			part_of_template="true"
-			uniqueguid_in_template="3E69DCBB-2825-43D2-9835F3502CEDF749"
-			uniqueguid="64361770-E699-4313-8EDAAC269F399654"
-			dimensions="356.00,30.00"
-			offset="10.00,0.00">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="DAD43045-FF32-4890-BF28AD1D1BD8604F"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="0A11B39B-AFCD-45A8-A5BD029125DD6A36"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/campaign ui/effect_bundles/army.png"
-					uniqueguid="7ADB78C0-2441-45DA-BF6DFC6FF880DCD6"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoEffect"
-					context_function_id="LocalisedText"/>
-				<callback_with_context
-					callback_id="ContextImageSetter"
-					context_object_id="CcoEffect"
-					context_function_id="IconPath"/>
-				<callback_with_context
-					callback_id="AbilityEffectIcon"
-					context_object_id="CcoEffect"/>
-			</callbacks_with_context>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					text="dy_effect"
-					text_label="StateText_43fda43b"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					text="dy_effect"
-					text_label="StateText_6be19eab"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/campaign ui/effect_bundles/army.png"/>
-			</override_images>
-		</template_effect_entry>
-		<template_effect_entry
-			this="3E69DCBB-2825-43D2-9835F3502CEDF749"
-			id="template_effect_entry"
-			template_id="effect_entry"
-			part_of_template="true"
-			uniqueguid_in_template="3E69DCBB-2825-43D2-9835F3502CEDF749"
-			uniqueguid="3E69DCBB-2825-43D2-9835F3502CEDF749"
-			dimensions="356.00,30.00"
-			offset="10.00,0.00">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="active"
-					uniqueguid="43E1B79F-EEBD-43BA-94FB51C5C928E244"/>
-				<state_uniqueguid
-					name="inactive"
-					uniqueguid="E4242B82-4259-4428-8153D5AE24805901"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/campaign ui/effect_bundles/army.png"
-					uniqueguid="BF30B6F4-D076-4B0D-9C07396FE84389AF"/>
-			</component_image_uniqueguids>
-			<callbacks_with_context>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoEffect"
-					context_function_id="LocalisedText"/>
-				<callback_with_context
-					callback_id="ContextImageSetter"
-					context_object_id="CcoEffect"
-					context_function_id="IconPath"/>
-				<callback_with_context
-					callback_id="AbilityEffectIcon"
-					context_object_id="CcoEffect"/>
-			</callbacks_with_context>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="active"
-					text="dy_effect"
-					text_label="effect_entry_deafult_Text_230ba41e"
-					is_text_localised="false"/>
-				<localised_text
-					state="inactive"
-					text="dy_effect"
-					text_label="effect_entry_deafult_Text_230ba41e"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value="ui/campaign ui/effect_bundles/army.png"/>
-			</override_images>
-		</template_effect_entry>
-		<in_progress_comp
-			this="E44D4205-BF3F-4EBB-BA0B921AA1BE98CB"
-			id="in_progress_comp"
-			part_of_template="true"
-			uniqueguid_in_template="598D2980-2D81-4431-B8372E64160B25BB"
-			uniqueguid="E44D4205-BF3F-4EBB-BA0B921AA1BE98CB"
-			dimensions="370.00,3.00"
-			dock_point="Center">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="E291E0C0-850D-4D84-89C142C39282BD87"/>
-			</state_uniqueguids>
-			<component_image_uniqueguids>
-				<component_image_uniqueguid
-					name="ui/skins/default/sticky_bar_fill.png"
-					uniqueguid="13B8301E-75D2-4360-841E8059866A1B0A"/>
-			</component_image_uniqueguids>
-			<user_properties>
-				<property
-					name="disable_override0"
-					value="position"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					is_text_localised="false"/>
-			</localised_texts>
-			<override_images>
-				<element value=""/>
-				<element value="ui/skins/default/sticky_bar_fill.png"/>
-			</override_images>
-		</in_progress_comp>
-		<stick_progress_bar
-			this="866EE825-8171-4372-8DCA60AB9703A35B"
-			id="stick_progress_bar"
-			template_id="stick_progress_bar"
-			part_of_template="true"
-			uniqueguid_in_template="B5D91471-862C-459A-9117F067B37F7730"
-			uniqueguid="866EE825-8171-4372-8DCA60AB9703A35B"
-			dimensions="1.00,10.00">
-			<state_uniqueguids>
-				<state_uniqueguid
-					name="default"
-					uniqueguid="3A931DC0-62AE-44BC-8CD29E70516A2D9E"/>
-			</state_uniqueguids>
-			<user_properties>
-				<property
-					name="disable_override1"
-					value="position"/>
-			</user_properties>
-			<localised_texts>
-				<localised_text/>
-				<localised_text
-					state="default"
-					is_text_localised="false"/>
-			</localised_texts>
-		</stick_progress_bar>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="440"/>
+				</columnwidths>
+			</LayoutEngine>
+		</active_effects>
 		<auto_resizing_comp
 			this="BBEEC904-7A3A-4464-95CC05C758650BE2"
 			id="auto_resizing_comp"
@@ -324,43 +133,39 @@
 					is_text_localised="false"/>
 			</localised_texts>
 		</bar_extents_and_pos>
-		<active_effects
-			this="C07A07CF-30C5-4229-8E289EC0B91146FA"
-			id="active_effects"
-			offset="0.00,130.00"
+		<bonus_objectives
+			this="2FC90094-2D8A-4CDC-8CB596C5C6AB57A6"
+			id="bonus_objectives"
+			offset="0.00,58.00"
 			allowhorizontalresize="false"
+			visible="false"
+			priority="255"
 			tooltipslocalised="true"
-			uniqueguid="C07A07CF-30C5-4229-8E289EC0B91146FA"
-			currentstate="E3732A7A-EBEE-42BE-A41DDF2148917531"
-			defaultstate="E3732A7A-EBEE-42BE-A41DDF2148917531">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextList"
-					context_object_id="CcoCampaignWomCompassDirection"
-					context_function_id="SelectionEffectList">
-					<child_m_user_properties>
-						<property
-							name="hide_if_empty"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
+			uniqueguid="2FC90094-2D8A-4CDC-8CB596C5C6AB57A6"
+			updatewhennotvisible="true"
+			currentstate="698C3C1D-FA08-404C-BB9AE6D6598F412B"
+			defaultstate="698C3C1D-FA08-404C-BB9AE6D6598F412B">
 			<states>
 				<newstate
-					this="E3732A7A-EBEE-42BE-A41DDF2148917531"
+					this="698C3C1D-FA08-404C-BB9AE6D6598F412B"
 					name="NewState"
-					width="340"
-					height="66"
-					uniqueguid="E3732A7A-EBEE-42BE-A41DDF2148917531"/>
+					width="360"
+					height="31"
+					uniqueguid="698C3C1D-FA08-404C-BB9AE6D6598F412B">
+					<component_text
+						text="dy_bonus_objective"
+						textxoffset="5.00,5.00"
+						textyoffset="5.00,10.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_29eb3b75"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+				</newstate>
 			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true">
-				<columnwidths>
-					<column width="440"/>
-				</columnwidths>
-			</LayoutEngine>
-		</active_effects>
+		</bonus_objectives>
 		<bottom_padding
 			this="7BDC6126-6CB7-4C4F-B79E6E15FAED9C11"
 			id="bottom_padding"
@@ -381,6 +186,40 @@
 					uniqueguid="5E3F5FE5-D869-4C79-97232FE588FA02CE"/>
 			</states>
 		</bottom_padding>
+		<completed_comp
+			this="88441B52-9AB9-434D-BEE4FD4B018D1E4E"
+			id="completed_comp"
+			part_of_template="true"
+			uniqueguid_in_template="DE8557ED-0386-4BFF-87237559FEB7164F"
+			uniqueguid="88441B52-9AB9-434D-BEE4FD4B018D1E4E"
+			dimensions="370.00,3.00"
+			dock_point="Center">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="D2AC3049-DFEE-4D6E-AB592C4B95A2010C"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/sticky_bar_fill.png"
+					uniqueguid="1639EDD6-E1E6-4902-A2DE46A2B175FBE8"/>
+			</component_image_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+				<element value="ui/skins/default/sticky_bar_fill.png"/>
+			</override_images>
+		</completed_comp>
 		<direction_detials
 			this="673C8037-9F18-4F6D-8362CF4227D5460D"
 			id="direction_detials"
@@ -477,271 +316,6 @@
 				</default>
 			</states>
 		</dy_explanation_text>
-		<power_level_effects
-			this="1769A9EB-70D9-4C17-8B67B4B1058FFE6F"
-			id="power_level_effects"
-			offset="0.00,45.00"
-			allowhorizontalresize="false"
-			tooltipslocalised="true"
-			uniqueguid="1769A9EB-70D9-4C17-8B67B4B1058FFE6F"
-			currentstate="8965A352-FB51-4665-AF6748F9FC024CFB"
-			defaultstate="8965A352-FB51-4665-AF6748F9FC024CFB">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextList"
-					context_object_id="CcoCampaignWomCompassDirection"
-					context_function_id="PowerLevelEffectList">
-					<child_m_user_properties>
-						<property
-							name="hide_if_empty"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="8965A352-FB51-4665-AF6748F9FC024CFB"
-					name="NewState"
-					width="378"
-					height="85"
-					uniqueguid="8965A352-FB51-4665-AF6748F9FC024CFB"/>
-			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true">
-				<columnwidths>
-					<column width="440"/>
-				</columnwidths>
-			</LayoutEngine>
-		</power_level_effects>
-		<seperator
-			this="8D8F4EF0-9D56-47B9-BF8AD5FDFEB8896E"
-			id="seperator"
-			offset="0.00,196.00"
-			allowverticalresize="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="8D8F4EF0-9D56-47B9-BF8AD5FDFEB8896E"
-			currentstate="0B27F42F-AE74-4DC1-BEF3353B9E9C643B"
-			defaultstate="0B27F42F-AE74-4DC1-BEF3353B9E9C643B">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoCampaignWomCompassDirection"
-					context_function_id="CanFactionSetDirection(PlayersFaction) &amp;&amp; IsContextValid(self.ParentContext.ParentContext.StoredContext(&quot;CcoCampaignFactionWomCompass&quot;))">
-					<child_m_user_properties>
-						<property
-							name="object_store_events"
-							value="^2"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="46C95432-E8BF-4238-B8E2060D740FCFDD"
-					uniqueguid="46C95432-E8BF-4238-B8E2060D740FCFDD"
-					imagepath="ui/skins/default/separator_skull.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="0B27F42F-AE74-4DC1-BEF3353B9E9C643B"
-					name="NewState"
-					width="370"
-					height="16"
-					uniqueguid="0B27F42F-AE74-4DC1-BEF3353B9E9C643B">
-					<imagemetrics>
-						<image
-							this="D2A6B3E6-17CE-4375-AEC4956D37ED9F45"
-							uniqueguid="D2A6B3E6-17CE-4375-AEC4956D37ED9F45"
-							componentimage="46C95432-E8BF-4238-B8E2060D740FCFDD"
-							offset="7.00,0.00"
-							width="360"
-							height="14"
-							tile="true"
-							margin="0.00,50.00,0.00,45.00"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-		</seperator>
-		<title
-			this="E40E5CA1-5B8B-46AA-8F99FF4403242037"
-			id="title"
-			offset="0.00,10.00"
-			allowverticalresize="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="E40E5CA1-5B8B-46AA-8F99FF4403242037"
-			currentstate="8E294E6C-73A3-43F4-A9086ABA66F9DB9A"
-			defaultstate="8E294E6C-73A3-43F4-A9086ABA66F9DB9A">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoCampaignWomCompassDirection"
-					context_function_id="Title"/>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="8E294E6C-73A3-43F4-A9086ABA66F9DB9A"
-					name="default"
-					width="378"
-					height="35"
-					uniqueguid="8E294E6C-73A3-43F4-A9086ABA66F9DB9A">
-					<component_text
-						text="dy_text"
-						textvalign="Center"
-						texthalign="Center"
-						textxoffset="8.00,8.00"
-						texthbehaviour="Never split"
-						textlabel="StateText_14bedd6e"
-						font_m_font_name="brand_header"
-						font_m_size="14"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="header_14"/>
-				</default>
-			</states>
-		</title>
-		<title
-			this="D4329BD6-8DA5-4909-A99AC38C31620789"
-			id="title"
-			allowhorizontalresize="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="D4329BD6-8DA5-4909-A99AC38C31620789"
-			currentstate="BD5B9EF0-FEE4-488D-932C018FA465C1A4"
-			defaultstate="BD5B9EF0-FEE4-488D-932C018FA465C1A4">
-			<states>
-				<default
-					this="BD5B9EF0-FEE4-488D-932C018FA465C1A4"
-					name="default"
-					width="371"
-					height="55"
-					uniqueguid="BD5B9EF0-FEE4-488D-932C018FA465C1A4">
-					<component_text
-						text="Strength determined by energy reserve (always active):"
-						textvalign="Center"
-						textxoffset="12.00,15.00"
-						textyoffset="10.00,10.00"
-						texthbehaviour="Resize"
-						textlocalised="true"
-						textlabel="StateText_9d9143cc"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</default>
-			</states>
-		</title>
-		<title
-			this="CC6BF2E7-0188-490D-955974DF1BB6A54E"
-			id="title"
-			allowhorizontalresize="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="CC6BF2E7-0188-490D-955974DF1BB6A54E"
-			currentstate="948AB57C-4DB5-44B0-85035D2FA59A0080"
-			defaultstate="948AB57C-4DB5-44B0-85035D2FA59A0080">
-			<states>
-				<default
-					this="948AB57C-4DB5-44B0-85035D2FA59A0080"
-					name="default"
-					width="365"
-					height="36"
-					uniqueguid="948AB57C-4DB5-44B0-85035D2FA59A0080">
-					<component_text
-						text="Active when direction is set:"
-						textvalign="Center"
-						textxoffset="12.00,15.00"
-						textyoffset="10.00,10.00"
-						texthbehaviour="Resize"
-						textlocalised="true"
-						textlabel="StateText_bcad1661"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</default>
-			</states>
-		</title>
-		<tooltip_dlc24_compass_direction
-			this="7611FA3B-E915-40F7-8D2F30FFE0CA9515"
-			id="tooltip_dlc24_compass_direction"
-			offset="10.00,10.00"
-			allowhorizontalresize="false"
-			tooltipslocalised="true"
-			uniqueguid="7611FA3B-E915-40F7-8D2F30FFE0CA9515"
-			currentstate="AD4AAA9B-99B2-47F0-BB6D85A5E26DDEF8"
-			defaultstate="AD4AAA9B-99B2-47F0-BB6D85A5E26DDEF8"
-			comment="Use &quot;empty&quot; state if you don't want the tooltip background to show (for creating this tooltip inside another tooltip)">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoCampaignWomCompassDirection"
-					context_function_id="self.ParentContext.StoredContext(&quot;CcoCampaignFactionWomCompass&quot;)"/>
-				<callback_with_context
-					callback_id="ContextObjectStore"
-					context_object_id="CcoCampaignFactionWomCompass"/>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="AD4AAA9B-99B2-47F0-BB6D85A5E26DDEF8"
-					name="default"
-					width="378"
-					height="415"
-					interactive="true"
-					uniqueguid="AD4AAA9B-99B2-47F0-BB6D85A5E26DDEF8"/>
-			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true">
-				<columnwidths>
-					<column width="280"/>
-				</columnwidths>
-			</LayoutEngine>
-		</tooltip_dlc24_compass_direction>
-		<separator
-			this="836CEBFF-1494-484C-AB9C8CB0A7A50399"
-			id="separator"
-			offset="0.00,238.00"
-			allowverticalresize="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="836CEBFF-1494-484C-AB9C8CB0A7A50399"
-			currentstate="852DB39E-24A4-4E6C-9A88D2F7895EB6AE"
-			defaultstate="852DB39E-24A4-4E6C-9A88D2F7895EB6AE">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoCampaignWomCompassDirection"
-					context_function_id="PlayersFaction.FactionWomCompassContext.IsDirectionLocked(this) || CanFactionSetDirection(PlayersFaction) == false"/>
-			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="8665A7F3-6CAB-41A1-9314BB9DCD9B5E51"
-					uniqueguid="8665A7F3-6CAB-41A1-9314BB9DCD9B5E51"
-					imagepath="ui/skins/default/separator_skull.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="852DB39E-24A4-4E6C-9A88D2F7895EB6AE"
-					name="NewState"
-					width="370"
-					height="16"
-					uniqueguid="852DB39E-24A4-4E6C-9A88D2F7895EB6AE">
-					<imagemetrics>
-						<image
-							this="88EF7F75-3FC0-40C5-99D1899C9B14A9CD"
-							uniqueguid="88EF7F75-3FC0-40C5-99D1899C9B14A9CD"
-							componentimage="8665A7F3-6CAB-41A1-9314BB9DCD9B5E51"
-							offset="7.00,0.00"
-							width="361"
-							height="14"
-							tile="true"
-							margin="0.00,50.00,0.00,45.00"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-		</separator>
 		<dy_faction_cannot_use
 			this="2763309D-4BB4-419F-B9F155E265A4CAB6"
 			id="dy_faction_cannot_use"
@@ -785,80 +359,6 @@
 				</default>
 			</states>
 		</dy_faction_cannot_use>
-		<unlock_reason
-			this="46594683-0507-4B4B-B63BBD96A5984E36"
-			id="unlock_reason"
-			offset="0.00,252.00"
-			allowhorizontalresize="false"
-			visible="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="46594683-0507-4B4B-B63BBD96A5984E36"
-			currentstate="23C4E989-0A7E-40B6-83BBA23C46F7C150"
-			defaultstate="23C4E989-0A7E-40B6-83BBA23C46F7C150">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoCampaignWomCompassDirection"
-					context_function_id="CanFactionSetDirection(PlayersFaction) &amp;&amp; PlayersFaction.FactionWomCompassContext.IsDirectionLocked(this)"/>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="23C4E989-0A7E-40B6-83BBA23C46F7C150"
-					name="default"
-					width="340"
-					height="26"
-					interactive="true"
-					uniqueguid="23C4E989-0A7E-40B6-83BBA23C46F7C150">
-					<component_text
-						text="Wu Xing Compass direction is locked."
-						textvalign="Center"
-						textxoffset="12.00,15.00"
-						textyoffset="5.00,5.00"
-						texthbehaviour="Resize"
-						textlocalised="true"
-						textlabel="StateText_41ae3271"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"
-						font_colour_override_preset_key="red"/>
-				</default>
-			</states>
-		</unlock_reason>
-		<bonus_objectives
-			this="2FC90094-2D8A-4CDC-8CB596C5C6AB57A6"
-			id="bonus_objectives"
-			offset="0.00,58.00"
-			allowhorizontalresize="false"
-			visible="false"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="2FC90094-2D8A-4CDC-8CB596C5C6AB57A6"
-			updatewhennotvisible="true"
-			currentstate="698C3C1D-FA08-404C-BB9AE6D6598F412B"
-			defaultstate="698C3C1D-FA08-404C-BB9AE6D6598F412B">
-			<states>
-				<newstate
-					this="698C3C1D-FA08-404C-BB9AE6D6598F412B"
-					name="NewState"
-					width="360"
-					height="31"
-					uniqueguid="698C3C1D-FA08-404C-BB9AE6D6598F412B">
-					<component_text
-						text="dy_bonus_objective"
-						textxoffset="5.00,5.00"
-						textyoffset="5.00,10.00"
-						texthbehaviour="Resize"
-						textlabel="StateText_29eb3b75"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"
-						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
-				</newstate>
-			</states>
-		</bonus_objectives>
 		<dy_objective
 			this="9E98650D-096C-4BBA-8E88E8E0643AE333"
 			id="dy_objective"
@@ -1078,6 +578,40 @@
 				</incomplete>
 			</states>
 		</icon_complete>
+		<in_progress_comp
+			this="E44D4205-BF3F-4EBB-BA0B921AA1BE98CB"
+			id="in_progress_comp"
+			part_of_template="true"
+			uniqueguid_in_template="598D2980-2D81-4431-B8372E64160B25BB"
+			uniqueguid="E44D4205-BF3F-4EBB-BA0B921AA1BE98CB"
+			dimensions="370.00,3.00"
+			dock_point="Center">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="E291E0C0-850D-4D84-89C142C39282BD87"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/sticky_bar_fill.png"
+					uniqueguid="13B8301E-75D2-4360-841E8059866A1B0A"/>
+			</component_image_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+				<element value="ui/skins/default/sticky_bar_fill.png"/>
+			</override_images>
+		</in_progress_comp>
 		<left_click_label
 			this="2A570CC1-6037-49D5-898D160416230285"
 			id="left_click_label"
@@ -1260,6 +794,43 @@
 				</columnwidths>
 			</LayoutEngine>
 		</objective_list>
+		<power_level_effects
+			this="1769A9EB-70D9-4C17-8B67B4B1058FFE6F"
+			id="power_level_effects"
+			offset="0.00,45.00"
+			allowhorizontalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="1769A9EB-70D9-4C17-8B67B4B1058FFE6F"
+			currentstate="8965A352-FB51-4665-AF6748F9FC024CFB"
+			defaultstate="8965A352-FB51-4665-AF6748F9FC024CFB">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoCampaignWomCompassDirection"
+					context_function_id="PowerLevelEffectList">
+					<child_m_user_properties>
+						<property
+							name="hide_if_empty"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="8965A352-FB51-4665-AF6748F9FC024CFB"
+					name="NewState"
+					width="378"
+					height="85"
+					uniqueguid="8965A352-FB51-4665-AF6748F9FC024CFB"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="440"/>
+				</columnwidths>
+			</LayoutEngine>
+		</power_level_effects>
 		<requirements_list
 			this="12E6D335-A059-4AA1-B82420080AF996B5"
 			id="requirements_list"
@@ -1302,6 +873,258 @@
 				</columnwidths>
 			</LayoutEngine>
 		</requirements_list>
+		<root
+			this="A0ED61C9-9CB7-4E20-B21B4C8A407EA38C"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="A0ED61C9-9CB7-4E20-B21B4C8A407EA38C"
+			currentstate="ECC02651-F597-43A7-8C3D7EA698A3D22C"
+			defaultstate="ECC02651-F597-43A7-8C3D7EA698A3D22C">
+			<componentimages>
+				<component_image
+					this="63BA1CF3-9740-42B9-AFDB67FB7BBF0A87"
+					uniqueguid="63BA1CF3-9740-42B9-AFDB67FB7BBF0A87"/>
+			</componentimages>
+			<states>
+				<default
+					this="ECC02651-F597-43A7-8C3D7EA698A3D22C"
+					name="default"
+					width="1600"
+					height="900"
+					uniqueguid="ECC02651-F597-43A7-8C3D7EA698A3D22C">
+					<imagemetrics>
+						<image
+							this="1B66B86F-A898-4C64-8274900DE24ABA43"
+							uniqueguid="1B66B86F-A898-4C64-8274900DE24ABA43"
+							componentimage="63BA1CF3-9740-42B9-AFDB67FB7BBF0A87"
+							width="1920"
+							height="1080"
+							colour="#1C1C1CFF"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</root>
+		<separator
+			this="836CEBFF-1494-484C-AB9C8CB0A7A50399"
+			id="separator"
+			offset="0.00,238.00"
+			allowverticalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="836CEBFF-1494-484C-AB9C8CB0A7A50399"
+			currentstate="852DB39E-24A4-4E6C-9A88D2F7895EB6AE"
+			defaultstate="852DB39E-24A4-4E6C-9A88D2F7895EB6AE">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignWomCompassDirection"
+					context_function_id="PlayersFaction.FactionWomCompassContext.IsDirectionLocked(this) || CanFactionSetDirection(PlayersFaction) == false"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="8665A7F3-6CAB-41A1-9314BB9DCD9B5E51"
+					uniqueguid="8665A7F3-6CAB-41A1-9314BB9DCD9B5E51"
+					imagepath="ui/skins/default/separator_skull.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="852DB39E-24A4-4E6C-9A88D2F7895EB6AE"
+					name="NewState"
+					width="370"
+					height="16"
+					uniqueguid="852DB39E-24A4-4E6C-9A88D2F7895EB6AE">
+					<imagemetrics>
+						<image
+							this="88EF7F75-3FC0-40C5-99D1899C9B14A9CD"
+							uniqueguid="88EF7F75-3FC0-40C5-99D1899C9B14A9CD"
+							componentimage="8665A7F3-6CAB-41A1-9314BB9DCD9B5E51"
+							offset="7.00,0.00"
+							width="361"
+							height="14"
+							tile="true"
+							margin="0.00,50.00,0.00,45.00"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</separator>
+		<seperator
+			this="8D8F4EF0-9D56-47B9-BF8AD5FDFEB8896E"
+			id="seperator"
+			offset="0.00,196.00"
+			allowverticalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="8D8F4EF0-9D56-47B9-BF8AD5FDFEB8896E"
+			currentstate="0B27F42F-AE74-4DC1-BEF3353B9E9C643B"
+			defaultstate="0B27F42F-AE74-4DC1-BEF3353B9E9C643B">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignWomCompassDirection"
+					context_function_id="CanFactionSetDirection(PlayersFaction) &amp;&amp; IsContextValid(self.ParentContext.ParentContext.StoredContext(&quot;CcoCampaignFactionWomCompass&quot;))">
+					<child_m_user_properties>
+						<property
+							name="object_store_events"
+							value="^2"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="46C95432-E8BF-4238-B8E2060D740FCFDD"
+					uniqueguid="46C95432-E8BF-4238-B8E2060D740FCFDD"
+					imagepath="ui/skins/default/separator_skull.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="0B27F42F-AE74-4DC1-BEF3353B9E9C643B"
+					name="NewState"
+					width="370"
+					height="16"
+					uniqueguid="0B27F42F-AE74-4DC1-BEF3353B9E9C643B">
+					<imagemetrics>
+						<image
+							this="D2A6B3E6-17CE-4375-AEC4956D37ED9F45"
+							uniqueguid="D2A6B3E6-17CE-4375-AEC4956D37ED9F45"
+							componentimage="46C95432-E8BF-4238-B8E2060D740FCFDD"
+							offset="7.00,0.00"
+							width="360"
+							height="14"
+							tile="true"
+							margin="0.00,50.00,0.00,45.00"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</seperator>
+		<stick_progress_bar
+			this="866EE825-8171-4372-8DCA60AB9703A35B"
+			id="stick_progress_bar"
+			template_id="stick_progress_bar"
+			part_of_template="true"
+			uniqueguid_in_template="B5D91471-862C-459A-9117F067B37F7730"
+			uniqueguid="866EE825-8171-4372-8DCA60AB9703A35B"
+			dimensions="1.00,10.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="3A931DC0-62AE-44BC-8CD29E70516A2D9E"/>
+			</state_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override1"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+		</stick_progress_bar>
+		<template_effect_entry
+			this="3E69DCBB-2825-43D2-9835F3502CEDF749"
+			id="template_effect_entry"
+			template_id="effect_entry"
+			part_of_template="true"
+			uniqueguid_in_template="3E69DCBB-2825-43D2-9835F3502CEDF749"
+			uniqueguid="3E69DCBB-2825-43D2-9835F3502CEDF749"
+			dimensions="356.00,30.00"
+			offset="10.00,0.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="43E1B79F-EEBD-43BA-94FB51C5C928E244"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="E4242B82-4259-4428-8153D5AE24805901"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/campaign ui/effect_bundles/army.png"
+					uniqueguid="BF30B6F4-D076-4B0D-9C07396FE84389AF"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoEffect"
+					context_function_id="LocalisedText"/>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoEffect"
+					context_function_id="IconPath"/>
+				<callback_with_context
+					callback_id="AbilityEffectIcon"
+					context_object_id="CcoEffect"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					text="dy_effect"
+					text_label="effect_entry_deafult_Text_230ba41e"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					text="dy_effect"
+					text_label="effect_entry_deafult_Text_230ba41e"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/campaign ui/effect_bundles/army.png"/>
+			</override_images>
+		</template_effect_entry>
+		<template_effect_entry
+			this="64361770-E699-4313-8EDAAC269F399654"
+			id="template_effect_entry"
+			template_id="effect_entry"
+			part_of_template="true"
+			uniqueguid_in_template="3E69DCBB-2825-43D2-9835F3502CEDF749"
+			uniqueguid="64361770-E699-4313-8EDAAC269F399654"
+			dimensions="356.00,30.00"
+			offset="10.00,0.00">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="DAD43045-FF32-4890-BF28AD1D1BD8604F"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="0A11B39B-AFCD-45A8-A5BD029125DD6A36"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/campaign ui/effect_bundles/army.png"
+					uniqueguid="7ADB78C0-2441-45DA-BF6DFC6FF880DCD6"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoEffect"
+					context_function_id="LocalisedText"/>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoEffect"
+					context_function_id="IconPath"/>
+				<callback_with_context
+					callback_id="AbilityEffectIcon"
+					context_object_id="CcoEffect"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					text="dy_effect"
+					text_label="StateText_43fda43b"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					text="dy_effect"
+					text_label="StateText_6be19eab"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/campaign ui/effect_bundles/army.png"/>
+			</override_images>
+		</template_effect_entry>
 		<template_objective
 			this="21DB20E2-1CCF-4AC5-A5FB5A21EC5A7D05"
 			id="template_objective"
@@ -1436,11 +1259,11 @@
 					</imagemetrics>
 					<transitionmap>
 						<transition
-							index="3"
-							transition_m_target_state="BBDD1221-5B88-41C7-ACA26527777CEA3A"/>
-						<transition
 							index="1"
 							transition_m_target_state="80DC7D1A-4F95-4C9B-98303C7E0D2FAB9A"/>
+						<transition
+							index="3"
+							transition_m_target_state="BBDD1221-5B88-41C7-ACA26527777CEA3A"/>
 					</transitionmap>
 					<component_text
 						textvalign="Center"
@@ -1548,6 +1371,142 @@
 				</inactive>
 			</states>
 		</template_requirement>
+		<title
+			this="CC6BF2E7-0188-490D-955974DF1BB6A54E"
+			id="title"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="CC6BF2E7-0188-490D-955974DF1BB6A54E"
+			currentstate="948AB57C-4DB5-44B0-85035D2FA59A0080"
+			defaultstate="948AB57C-4DB5-44B0-85035D2FA59A0080">
+			<states>
+				<default
+					this="948AB57C-4DB5-44B0-85035D2FA59A0080"
+					name="default"
+					width="365"
+					height="36"
+					uniqueguid="948AB57C-4DB5-44B0-85035D2FA59A0080">
+					<component_text
+						text="Active when direction is set:"
+						textvalign="Center"
+						textxoffset="12.00,15.00"
+						textyoffset="10.00,10.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="StateText_bcad1661"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</default>
+			</states>
+		</title>
+		<title
+			this="D4329BD6-8DA5-4909-A99AC38C31620789"
+			id="title"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="D4329BD6-8DA5-4909-A99AC38C31620789"
+			currentstate="BD5B9EF0-FEE4-488D-932C018FA465C1A4"
+			defaultstate="BD5B9EF0-FEE4-488D-932C018FA465C1A4">
+			<states>
+				<default
+					this="BD5B9EF0-FEE4-488D-932C018FA465C1A4"
+					name="default"
+					width="371"
+					height="55"
+					uniqueguid="BD5B9EF0-FEE4-488D-932C018FA465C1A4">
+					<component_text
+						text="Strength determined by energy reserve (always active):"
+						textvalign="Center"
+						textxoffset="12.00,15.00"
+						textyoffset="10.00,10.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="StateText_9d9143cc"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</default>
+			</states>
+		</title>
+		<title
+			this="E40E5CA1-5B8B-46AA-8F99FF4403242037"
+			id="title"
+			offset="0.00,10.00"
+			allowverticalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="E40E5CA1-5B8B-46AA-8F99FF4403242037"
+			currentstate="8E294E6C-73A3-43F4-A9086ABA66F9DB9A"
+			defaultstate="8E294E6C-73A3-43F4-A9086ABA66F9DB9A">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignWomCompassDirection"
+					context_function_id="Title"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="8E294E6C-73A3-43F4-A9086ABA66F9DB9A"
+					name="default"
+					width="378"
+					height="35"
+					uniqueguid="8E294E6C-73A3-43F4-A9086ABA66F9DB9A">
+					<component_text
+						text="dy_text"
+						textvalign="Center"
+						texthalign="Center"
+						textxoffset="8.00,8.00"
+						texthbehaviour="Never split"
+						textlabel="StateText_14bedd6e"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_14"/>
+				</default>
+			</states>
+		</title>
+		<tooltip_dlc24_compass_direction
+			this="7611FA3B-E915-40F7-8D2F30FFE0CA9515"
+			id="tooltip_dlc24_compass_direction"
+			offset="10.00,10.00"
+			allowhorizontalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="7611FA3B-E915-40F7-8D2F30FFE0CA9515"
+			currentstate="AD4AAA9B-99B2-47F0-BB6D85A5E26DDEF8"
+			defaultstate="AD4AAA9B-99B2-47F0-BB6D85A5E26DDEF8"
+			comment="Use &quot;empty&quot; state if you don't want the tooltip background to show (for creating this tooltip inside another tooltip)">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignWomCompassDirection"
+					context_function_id="self.ParentContext.StoredContext(&quot;CcoCampaignFactionWomCompass&quot;)"/>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignFactionWomCompass"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="AD4AAA9B-99B2-47F0-BB6D85A5E26DDEF8"
+					name="default"
+					width="378"
+					height="415"
+					interactive="true"
+					uniqueguid="AD4AAA9B-99B2-47F0-BB6D85A5E26DDEF8"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="280"/>
+				</columnwidths>
+			</LayoutEngine>
+		</tooltip_dlc24_compass_direction>
 		<turns_icon
 			this="02106714-3776-4D87-8F9B9EAE00BFCB46"
 			id="turns_icon"
@@ -1619,5 +1578,46 @@
 				</newstate>
 			</states>
 		</tx_turns>
+		<unlock_reason
+			this="46594683-0507-4B4B-B63BBD96A5984E36"
+			id="unlock_reason"
+			offset="0.00,252.00"
+			allowhorizontalresize="false"
+			visible="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="46594683-0507-4B4B-B63BBD96A5984E36"
+			currentstate="23C4E989-0A7E-40B6-83BBA23C46F7C150"
+			defaultstate="23C4E989-0A7E-40B6-83BBA23C46F7C150">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignWomCompassDirection"
+					context_function_id="CanFactionSetDirection(PlayersFaction) &amp;&amp; PlayersFaction.FactionWomCompassContext.IsDirectionLocked(this)"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="23C4E989-0A7E-40B6-83BBA23C46F7C150"
+					name="default"
+					width="340"
+					height="26"
+					interactive="true"
+					uniqueguid="23C4E989-0A7E-40B6-83BBA23C46F7C150">
+					<component_text
+						text="Wu Xing Compass direction is locked."
+						textvalign="Center"
+						textxoffset="12.00,15.00"
+						textyoffset="5.00,5.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="StateText_41ae3271"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
+				</default>
+			</states>
+		</unlock_reason>
 	</components>
 </layout>

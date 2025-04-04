@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout
-	version="141"
+	version="142"
 	comment=""
 	precache_condition="">
 	<hierarchy>
@@ -37,91 +37,6 @@
 		</root>
 	</hierarchy>
 	<components>
-		<root
-			this="739B8FCD-9CA7-4874-99FA5CE268C6484B"
-			id="root"
-			tooltipslocalised="true"
-			uniqueguid="739B8FCD-9CA7-4874-99FA5CE268C6484B"
-			currentstate="95833332-EFB5-492A-AC149787BA482CE2"
-			defaultstate="95833332-EFB5-492A-AC149787BA482CE2">
-			<componentimages>
-				<component_image
-					this="094E0717-F2DC-4DD1-80513F7F0AEC901F"
-					uniqueguid="094E0717-F2DC-4DD1-80513F7F0AEC901F"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="95833332-EFB5-492A-AC149787BA482CE2"
-					name="NewState"
-					width="1600"
-					height="900"
-					interactive="true"
-					uniqueguid="95833332-EFB5-492A-AC149787BA482CE2">
-					<imagemetrics>
-						<image
-							this="EB1A289F-0FD5-449E-B8CDF0DB55D982F4"
-							uniqueguid="EB1A289F-0FD5-449E-B8CDF0DB55D982F4"
-							componentimage="094E0717-F2DC-4DD1-80513F7F0AEC901F"
-							width="1280"
-							height="960"
-							colour="#C0C0C0FF"/>
-					</imagemetrics>
-				</newstate>
-			</states>
-		</root>
-		<tooltip_chaos_realm_traits
-			this="E5939B44-38FE-4886-8F7B9DC23316F8BB"
-			id="tooltip_chaos_realm_traits"
-			offset="386.00,99.00"
-			clipchildren="true"
-			priority="255"
-			tooltipslocalised="true"
-			uniqueguid="E5939B44-38FE-4886-8F7B9DC23316F8BB"
-			currentstate="90D75D73-AD1A-45A0-998DF9491BCAF392">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="CustomTooltip"/>
-			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="43BD709F-B4AD-4609-83D77DD863568739"
-					uniqueguid="43BD709F-B4AD-4609-83D77DD863568739"
-					imagepath="ui/skins/default/tooltip_frame.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="90D75D73-AD1A-45A0-998DF9491BCAF392"
-					name="NewState"
-					width="340"
-					height="337"
-					uniqueguid="90D75D73-AD1A-45A0-998DF9491BCAF392">
-					<imagemetrics>
-						<image
-							this="FC5D15D7-CCDD-4C6F-8BF5FA891900CA8B"
-							uniqueguid="FC5D15D7-CCDD-4C6F-8BF5FA891900CA8B"
-							componentimage="43BD709F-B4AD-4609-83D77DD863568739"
-							width="340"
-							height="337"
-							tile="true"
-							margin="16.00,20.00,16.00,20.00"/>
-					</imagemetrics>
-					<component_text
-						textxoffset="8.00,0.00"
-						textyoffset="6.00,0.00"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</newstate>
-			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true"
-				margins="0.00,4.00">
-				<columnwidths>
-					<column width="354"/>
-				</columnwidths>
-			</LayoutEngine>
-		</tooltip_chaos_realm_traits>
 		<ability_group
 			this="AA7410F7-CA5A-47FC-BB8CC015F3BFE533"
 			id="ability_group"
@@ -569,6 +484,45 @@
 				</default>
 			</states>
 		</label_ability_group_name>
+		<label_description
+			this="FCD59FC8-89D2-4C7E-90FA3F5753D5A92C"
+			id="label_description"
+			offset="0.00,30.00"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="FCD59FC8-89D2-4C7E-90FA3F5753D5A92C"
+			currentstate="0F0F7D99-3BDD-48F8-BFF5F78C9D287D99">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCharacterTraitLevelRecord"
+					context_function_id="FlavourDescription"/>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoAgentSubtypeRecord"
+					context_function_id="DescriptionTextOverride"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="0F0F7D99-3BDD-48F8-BFF5F78C9D287D99"
+					name="NewState"
+					width="340"
+					height="26"
+					uniqueguid="0F0F7D99-3BDD-48F8-BFF5F78C9D287D99">
+					<component_text
+						text="{{tr:chaos_realm_trait_explanation}}"
+						textxoffset="12.00,8.00"
+						textyoffset="5.00,5.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_2edd04"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+		</label_description>
 		<label_title
 			this="3407D26F-81EA-4DE7-9B34E11110066621"
 			id="label_title"
@@ -681,6 +635,38 @@
 				</columnwidths>
 			</LayoutEngine>
 		</lore_entry>
+		<root
+			this="739B8FCD-9CA7-4874-99FA5CE268C6484B"
+			id="root"
+			tooltipslocalised="true"
+			uniqueguid="739B8FCD-9CA7-4874-99FA5CE268C6484B"
+			currentstate="95833332-EFB5-492A-AC149787BA482CE2"
+			defaultstate="95833332-EFB5-492A-AC149787BA482CE2">
+			<componentimages>
+				<component_image
+					this="094E0717-F2DC-4DD1-80513F7F0AEC901F"
+					uniqueguid="094E0717-F2DC-4DD1-80513F7F0AEC901F"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="95833332-EFB5-492A-AC149787BA482CE2"
+					name="NewState"
+					width="1600"
+					height="900"
+					interactive="true"
+					uniqueguid="95833332-EFB5-492A-AC149787BA482CE2">
+					<imagemetrics>
+						<image
+							this="EB1A289F-0FD5-449E-B8CDF0DB55D982F4"
+							uniqueguid="EB1A289F-0FD5-449E-B8CDF0DB55D982F4"
+							componentimage="094E0717-F2DC-4DD1-80513F7F0AEC901F"
+							width="1280"
+							height="960"
+							colour="#C0C0C0FF"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</root>
 		<template_ability_group_ability
 			this="9D1B1041-F72B-4AD7-869E4C92F672262E"
 			id="template_ability_group_ability"
@@ -895,44 +881,58 @@
 				</columnwidths>
 			</LayoutEngine>
 		</template_trait>
-		<label_description
-			this="FCD59FC8-89D2-4C7E-90FA3F5753D5A92C"
-			id="label_description"
-			offset="0.00,30.00"
-			allowhorizontalresize="false"
+		<tooltip_chaos_realm_traits
+			this="E5939B44-38FE-4886-8F7B9DC23316F8BB"
+			id="tooltip_chaos_realm_traits"
+			offset="386.00,99.00"
+			clipchildren="true"
 			priority="255"
 			tooltipslocalised="true"
-			uniqueguid="FCD59FC8-89D2-4C7E-90FA3F5753D5A92C"
-			currentstate="0F0F7D99-3BDD-48F8-BFF5F78C9D287D99">
+			uniqueguid="E5939B44-38FE-4886-8F7B9DC23316F8BB"
+			currentstate="90D75D73-AD1A-45A0-998DF9491BCAF392">
 			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoCharacterTraitLevelRecord"
-					context_function_id="FlavourDescription"/>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoAgentSubtypeRecord"
-					context_function_id="DescriptionTextOverride"/>
+				<callback_with_context callback_id="CustomTooltip"/>
 			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="43BD709F-B4AD-4609-83D77DD863568739"
+					uniqueguid="43BD709F-B4AD-4609-83D77DD863568739"
+					imagepath="ui/skins/default/tooltip_frame.png"/>
+			</componentimages>
 			<states>
 				<newstate
-					this="0F0F7D99-3BDD-48F8-BFF5F78C9D287D99"
+					this="90D75D73-AD1A-45A0-998DF9491BCAF392"
 					name="NewState"
 					width="340"
-					height="26"
-					uniqueguid="0F0F7D99-3BDD-48F8-BFF5F78C9D287D99">
+					height="337"
+					uniqueguid="90D75D73-AD1A-45A0-998DF9491BCAF392">
+					<imagemetrics>
+						<image
+							this="FC5D15D7-CCDD-4C6F-8BF5FA891900CA8B"
+							uniqueguid="FC5D15D7-CCDD-4C6F-8BF5FA891900CA8B"
+							componentimage="43BD709F-B4AD-4609-83D77DD863568739"
+							width="340"
+							height="337"
+							tile="true"
+							margin="16.00,20.00,16.00,20.00"/>
+					</imagemetrics>
 					<component_text
-						text="{{tr:chaos_realm_trait_explanation}}"
-						textxoffset="12.00,8.00"
-						textyoffset="5.00,5.00"
-						texthbehaviour="Resize"
-						textlabel="StateText_2edd04"
+						textxoffset="8.00,0.00"
+						textyoffset="6.00,0.00"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
 						fontcat_name="body_12"/>
 				</newstate>
 			</states>
-		</label_description>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true"
+				margins="0.00,4.00">
+				<columnwidths>
+					<column width="354"/>
+				</columnwidths>
+			</LayoutEngine>
+		</tooltip_chaos_realm_traits>
 	</components>
 </layout>
