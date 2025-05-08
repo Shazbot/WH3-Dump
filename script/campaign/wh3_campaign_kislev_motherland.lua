@@ -448,11 +448,17 @@ function apply_kislev_support_effect(faction, effect, level)
 end
 
 function SetCourtDifferenceAllowedContext()
-	local local_player = cm:get_faction(cm:get_local_faction_name(true));
-	local level_orthodoxy_warning = cm:get_factions_bonus_value(local_player, "allowed_orthodoxy_level_difference");
-	local level_ice_court_warning = cm:get_factions_bonus_value(local_player, "allowed_ice_court_level_difference");
-	common.set_context_value("level_orthodoxy_warning", level_orthodoxy_warning - 1);
-	common.set_context_value("level_ice_court_warning", level_ice_court_warning - 1);
+	local local_faction = cm:get_local_faction(true)
+	if local_faction == false or local_faction:is_null_interface() then
+		-- no local faction means we are in an autorun
+		return
+	end
+	if local_faction:subculture() == kislev_subculture_key then
+		local level_orthodoxy_warning = cm:get_factions_bonus_value(local_faction, "allowed_orthodoxy_level_difference");
+		local level_ice_court_warning = cm:get_factions_bonus_value(local_faction, "allowed_ice_court_level_difference");
+		common.set_context_value("level_orthodoxy_warning", level_orthodoxy_warning - 1);
+		common.set_context_value("level_ice_court_warning", level_ice_court_warning - 1);
+	end
 end
 
 function IsKislevButNotOrthodoxy(faction)

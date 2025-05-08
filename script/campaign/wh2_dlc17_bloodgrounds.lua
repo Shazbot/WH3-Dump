@@ -57,6 +57,7 @@ Bloodgrounds = {
 	----BLOODGROUNDS BUILDINGS AND BUNDLES
 	bloodground_effect_bundle_key = "wh2_dlc17_effect_bundle_bloodgrounds",
 	defiled_bloodground_effect_bundle_key = "wh3_dlc26_block_occupation_beastmen",
+	bloodground_block_beastmen_capture_effect_bundle_key = "wh3_dlc26_block_beastmen_from_capturing",
 
 	bloodgrounds_bundles_to_buildings = { --- make sure any bloodground-scoped effects match up between the building effects and the effect bundles
 		wh2_dlc17_bundle_bst_bloodground_building_spells = {
@@ -540,8 +541,10 @@ function Bloodgrounds:update_effect_bundles_for_bloodgrounds()
 
 		if bloodground.pending_removal then
 			table.insert(bundles_to_remove, self.bloodground_effect_bundle_key)
+			table.insert(bundles_to_remove, self.bloodground_block_beastmen_capture_effect_bundle_key)
 		else
 			table.insert(bundles_to_apply, self.bloodground_effect_bundle_key)
+			table.insert(bundles_to_apply, self.bloodground_block_beastmen_capture_effect_bundle_key)
 		end
 
 	
