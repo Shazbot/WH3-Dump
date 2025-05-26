@@ -10,80 +10,54 @@ ogre_camps = {
 	factions = {
 		wh3_main_ogr_disciples_of_the_maw = {
 			faction_key = "wh3_main_ogr_disciples_of_the_maw",
-			cap_pos = {{631, 519}, {617, 520}, {639, 514}},
-			home_region = "wh3_main_combi_region_karak_angazhar",
 			unit_list = "wh3_main_ogr_inf_gnoblars_0,wh3_main_ogr_inf_gnoblars_0,wh3_main_ogr_inf_ogres_0,wh3_main_ogr_inf_gnoblars_1,wh3_main_ogr_mon_sabretusk_pack_0",
 		},
 		wh3_main_ogr_goldtooth = {
 			faction_key = "wh3_main_ogr_goldtooth",
-			cap_pos = {{1011, 504}, {1029, 479}},
-			home_region = "wh3_main_combi_region_great_hall_of_greasus",
 			unit_list = "wh3_main_ogr_inf_gnoblars_0,wh3_main_ogr_inf_gnoblars_0,wh3_main_ogr_inf_ogres_0,wh3_main_ogr_inf_gnoblars_1,wh3_main_ogr_mon_sabretusk_pack_0",
 		},
 		wh3_dlc26_ogr_golgfag = {
 			faction_key = "wh3_dlc26_ogr_golgfag",
-			cap_pos = {},
-			home_region = "",
 			unit_list = "wh3_main_ogr_inf_gnoblars_0,wh3_main_ogr_inf_gnoblars_0,wh3_main_ogr_inf_ogres_0,wh3_main_ogr_inf_gnoblars_1,wh3_main_ogr_mon_sabretusk_pack_0",
 		}, 
 		wh3_main_ogr_sons_of_the_mountain = {
 			faction_key = "wh3_main_ogr_sons_of_the_mountain",
-			cap_pos = {{1004, 540}, {1049, 539}},
-			home_region = "wh3_main_combi_region_amblepeak",
 			unit_list = "wh3_main_ogr_inf_gnoblars_0,wh3_main_ogr_inf_gnoblars_0,wh3_main_ogr_inf_ogres_0,wh3_main_ogr_inf_gnoblars_1,wh3_main_ogr_mon_sabretusk_pack_0",
 		},
 		wh3_main_ogr_thunderguts = {
 			faction_key = "wh3_main_ogr_thunderguts",
-			cap_pos = {{966, 445}, {984, 448}},
-			home_region = "wh3_main_combi_region_pigbarter",
 			unit_list = "wh3_main_ogr_inf_gnoblars_0,wh3_main_ogr_inf_gnoblars_0,wh3_main_ogr_inf_ogres_0,wh3_main_ogr_inf_gnoblars_1,wh3_main_ogr_mon_sabretusk_pack_0",
 		},
 		wh3_main_ogr_rock_skulls = {
 			faction_key = "wh3_main_ogr_rock_skulls",
-			cap_pos = {{745, 662}, {772, 676}},
-			home_region = "wh3_main_combi_region_karak_ungor",
 			unit_list = "wh3_main_ogr_inf_gnoblars_0,wh3_main_ogr_inf_gnoblars_0,wh3_main_ogr_inf_ogres_0,wh3_main_ogr_inf_gnoblars_1,wh3_main_ogr_mon_sabretusk_pack_0",
 		},
 		wh3_main_ogr_lazarghs = {
 			faction_key = "wh3_main_ogr_lazarghs",
-			cap_pos = {{869, 760}, {881, 774}, {869, 752}},
-			home_region = "wh3_main_combi_region_karak_dum",
 			unit_list = "wh3_main_ogr_inf_gnoblars_0,wh3_main_ogr_inf_gnoblars_0,wh3_main_ogr_inf_ogres_0,wh3_main_ogr_inf_gnoblars_1,wh3_main_ogr_mon_sabretusk_pack_0",
 		},
 		wh3_main_ogr_sabreskin = {
 			faction_key = "wh3_main_ogr_sabreskin",
-			cap_pos = {{917, 692}, {954, 703}},
-			home_region = "wh3_main_chaos_region_sabre_mountain",
 			unit_list = "wh3_main_ogr_inf_gnoblars_0,wh3_main_ogr_inf_gnoblars_0,wh3_main_ogr_inf_ogres_0,wh3_main_ogr_inf_gnoblars_1,wh3_main_ogr_mon_sabretusk_pack_0",
 		},
 		wh3_main_ogr_fulg = {
 			faction_key = "wh3_main_ogr_fulg",
-			cap_pos = {{1011, 670}, {1021, 642}},
-			home_region = "wh3_main_combi_region_karak_vrag",
 			unit_list = "wh3_main_ogr_inf_gnoblars_0,wh3_main_ogr_inf_gnoblars_0,wh3_main_ogr_inf_ogres_0,wh3_main_ogr_inf_gnoblars_1,wh3_main_ogr_mon_sabretusk_pack_0",
 		},
 		wh3_main_ogr_blood_guzzlers = {
 			faction_key = "wh3_main_ogr_blood_guzzlers",
-			cap_pos = {{1047, 612}, {1049, 687}, {1026, 601}},
-			home_region = "wh3_main_combi_region_bloodpeak",
 			unit_list = "wh3_main_ogr_inf_gnoblars_0,wh3_main_ogr_inf_gnoblars_0,wh3_main_ogr_inf_ogres_0,wh3_main_ogr_inf_gnoblars_1,wh3_main_ogr_mon_sabretusk_pack_0",
 		},
 		wh3_main_ogr_crossed_clubs = {
 			faction_key = "wh3_main_ogr_crossed_clubs",
-			cap_pos = {{1064, 529}, {1078, 506}, {1058, 504}},
-			home_region = "wh3_main_combi_region_the_maw_gate",
 			unit_list = "wh3_main_ogr_inf_gnoblars_0,wh3_main_ogr_inf_gnoblars_0,wh3_main_ogr_inf_ogres_0,wh3_main_ogr_inf_gnoblars_1,wh3_main_ogr_mon_sabretusk_pack_0",
 		},
 		wh3_main_ogr_fleshgreeders = {
 			faction_key = "wh3_main_ogr_fleshgreeders",
-			cap_pos = {{1009, 720}, {1036, 728}, {1017, 739}},
-			home_region = "wh3_main_combi_region_the_challenge_stone",
 			unit_list = "wh3_main_ogr_inf_gnoblars_0,wh3_main_ogr_inf_gnoblars_0,wh3_main_ogr_inf_ogres_0,wh3_main_ogr_inf_gnoblars_1,wh3_main_ogr_mon_sabretusk_pack_0",
 		},
 		wh3_main_ogr_mountaineaters = {
 			faction_key = "wh3_main_ogr_mountaineaters",
-			cap_pos = {{1065, 629}, {1068, 595}, {1071, 602}},
-			home_region = "wh3_main_combi_region_yhetee_peak",
 			unit_list = "wh3_main_ogr_inf_gnoblars_0,wh3_main_ogr_inf_gnoblars_0,wh3_main_ogr_inf_ogres_0,wh3_main_ogr_inf_gnoblars_1,wh3_main_ogr_mon_sabretusk_pack_0",
 		},
 	},
@@ -135,16 +109,6 @@ function ogre_camps:initialise()
 				return
 			end 
 
-			-- Do we own our home region ?
-			-- If we do, our first camp is built at a handpicked location near the Capital 
-			local owns_home_region = false  
-			for i = 0, faction:region_list():num_items() - 1 do
-				local region = faction:region_list():item_at(i)
-				if region:name() == faction_data.home_region then 
-					owns_home_region = true
-				end
-			end
-
 			local faction_alternative_meat = faction:pooled_resource_manager():resource(ogre_camps.alternative_meat_resource) 
 			if faction_alternative_meat:value() < ogre_camps.camp_base_cost then 
 				return 
@@ -158,7 +122,7 @@ function ogre_camps:initialise()
 			end
 
 			-- Once we have both a force and a pooled resource manager, spawn the camp
-			if current_camps == 0 and owns_home_region == true then 
+			if current_camps <= 0 then 
 				ogre_camps:spawn_camp(true, faction_data, force)
 			else
 				ogre_camps:spawn_camp(false, faction_data, force)
@@ -374,13 +338,13 @@ function ogre_camps:spawn_camp(is_first_camp, faction_data, force)
 	end
 
 	local region_key = region:name()
-
+	
 	-- if first camp, spawn near capital, except for Golgfag 
-	if is_first_camp or not faction_data.faction_key == "wh3_dlc26_ogr_golgfag" then 
-		local pos = faction_data.cap_pos[cm:model():random_int(1, #faction_data.cap_pos)]
-		pos_x = pos[1]
-		pos_y = pos[2]
-		region_key = faction_data.home_region
+	if is_first_camp and capital or not faction_data.faction_key == "wh3_dlc26_ogr_golgfag" then 
+		local capital = cm:get_faction(faction_data.faction_key):home_region():settlement()
+		local cap_x = capital:logical_position_x()
+		local cap_y = capital:logical_position_y()
+		pos_x, pos_y = cm:find_valid_spawn_location_for_character_from_position(faction_data.faction_key, cap_x, cap_y, true, 6)
 	else
 		pos_x, pos_y = cm:find_valid_spawn_location_for_character_from_position(faction_data.faction_key, pos_x, pos_y, true, 10)
 	end
