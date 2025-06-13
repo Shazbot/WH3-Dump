@@ -217,6 +217,9 @@ gb:message_on_time_offset("vmp_rush_pls", 6000);
 -------------------------------------------- ORDERS ---------------------------------------------
 -------------------------------------------------------------------------------------------------
 
+ga_ai_cst_reinforce_01:set_visible_to_all(true);
+ga_ai_cst_reinforce_02:set_visible_to_all(true);
+
 ga_ai_vmp_main:rush_on_message("vmp_rush");
 -- ga_ai_vmp_main:attack_force_on_message("vmp_rush_pls", ga_player)
 ga_ai_vmp_main:message_on_casualties("vmp_wounded", 0.25)
@@ -238,6 +241,7 @@ ga_ai_cst_reinforce_01:deploy_at_random_intervals_on_message(
 );
 
 ga_ai_cst_reinforce_01:message_on_any_deployed("reinforcements_01_in");
+ga_ai_cst_reinforce_01:set_always_visible_on_message("reinforcements_01_in", false, true);
 ga_ai_cst_reinforce_01:rush_on_message("reinforcements_01_in");
 ga_ai_cst_reinforce_01:message_on_casualties("reinforcements_01_defeated", 0.95)
 
@@ -256,6 +260,7 @@ ga_ai_cst_reinforce_02:deploy_at_random_intervals_on_message(
 );
 
 ga_ai_cst_reinforce_02:message_on_any_deployed("reinforcements_02_in");
+ga_ai_cst_reinforce_02:set_always_visible_on_message("reinforcements_01_in", false, true);
 ga_ai_cst_reinforce_02:rush_on_message("reinforcements_02_in");
 ga_ai_cst_reinforce_02:message_on_casualties("reinforcements_02_defeated", 0.95)
 

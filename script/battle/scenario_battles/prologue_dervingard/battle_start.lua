@@ -421,6 +421,9 @@ do
 	bm:disable_shortcut("toggle_group", true);
 	bm:disable_groups(true);
 	bm:disable_formations(true)
+	tactical_map = find_uicomponent(core:get_ui_root(),"button_tactical_map")
+	tactical_map:SetState("inactive")
+	bm:enable_camera_movement(false)
 
 	local function disable_group_shortcuts(value)
 		bm:disable_shortcut("usegroup1", value);
@@ -438,20 +441,22 @@ do
 
 	local function start_group_st()
 		
+		bm:steal_input_focus(true, true)
 		local uic_review_DY = find_uicomponent(core:get_ui_root(), "hud_battle", "battle_orders", "battle_orders_pane", "card_panel_docker", "cards_panel", "review_DY")
 		local uic_orders_parent = find_uicomponent(core:get_ui_root(), "battle_orders", "orders_parent")
 		local uic_button_menu = find_uicomponent(core:get_ui_root(), "menu_bar", "button_menu")
+		tactical_map = find_uicomponent(core:get_ui_root(),"button_tactical_map")
 
 		local st = scripted_tour:new(
 			"scripted_tour_groups",
-			function() uic_button_menu:SetDisabled(false); bm:show_start_battle_button(true); bm:release_escape_key(); bm:release_input_focus() end
+			function() uic_button_menu:SetDisabled(false); bm:show_start_battle_button(true); bm:release_escape_key(); bm:release_input_focus()
+				tactical_map:SetState("active")
+			end
 		)
-		st:set_allow_camera_movement()
-
 		st:action(
 			function()
 				out("Starting 'scripted_tour_groups_action_1'")
-				
+				bm:steal_input_focus(true, true)
 				core:hide_fullscreen_highlight()
 				core:show_fullscreen_highlight_around_components(10, false, true, uic_review_DY, uic_orders_parent)
 
@@ -624,7 +629,7 @@ do
 
 		bm:clear_selection()
 		bm:steal_escape_key()
-		bm:steal_input_focus()
+		bm:steal_input_focus(true, true)
 		uic_button_menu:SetDisabled(true)
 
 		st:start("scripted_tour_groups_action_1")

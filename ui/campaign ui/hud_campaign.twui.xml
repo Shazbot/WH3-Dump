@@ -16319,7 +16319,7 @@
 					context_function_id="(kislev_force_rituals_panel = Component(&quot;F48B970E-460B-47C5-808FC001DB578F6E&quot;)) =&gt;&#10;{DoIfElse(kislev_force_rituals_panel.IsVisible,&#10;kislev_force_rituals_panel.SetVisible(false),&#10;Do(UiMsg(&quot;close_recruitment&quot;), kislev_force_rituals_panel.SetVisible(true)))}"/>
 				<callback_with_context
 					callback_id="ContextCommandEvent"
-					context_function_id="(kislev_force_rituals_panel = Component(&quot;kislev_force_rituals&quot;)) =&gt;&#10;{ self.SetSelectedState(kislev_force_rituals_panel &amp;&amp; kislev_force_rituals_panel.IsVisibleFromRoot) }">
+					context_function_id="(kislev_force_rituals_panel = Component(&quot;kislev_force_rituals&quot;)) =&gt;&#10;{ DoIf(self.CurrentState != &quot;inactive&quot;,self.SetSelectedState(kislev_force_rituals_panel &amp;&amp; kislev_force_rituals_panel.IsVisibleFromRoot)) }">
 					<child_m_user_properties>
 						<property
 							name="event0"

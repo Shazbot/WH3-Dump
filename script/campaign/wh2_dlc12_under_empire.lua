@@ -177,7 +177,19 @@ function add_under_empire_listeners()
 		"underempire_ForeignSlotManagerDiscoveredEvent",
 		"ForeignSlotManagerDiscoveredEvent",
 		function(context)
-			return context:owner():culture() == skaven_culture;
+			-- Validate that the object discovered is a Skaven under-city
+			local foreign_culture = context:owner():culture() 
+			if foreign_culture ~= skaven_culture then
+				return false
+			end
+
+			-- Validate that the discoverer owns the region
+			local region_owner = context:slot_manager():region():owning_faction()
+			if region_owner ~= context:discoveree() then
+				return false
+			end
+
+			return true
 		end,
 		function(context)
 			local faction = context:owner();

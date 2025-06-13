@@ -153,7 +153,9 @@ function PrologueScriptedTourSettlementPanel()
 		"settlement_panel_button_press",
 		"ComponentLClickUp",
 		function(context) 
-			return context.string == "button_info" and uicomponent_descended_from(UIComponent(context.component), "settlement_panel");
+			if cm:is_local_players_turn() then
+				return context.string == "button_info" and uicomponent_descended_from(UIComponent(context.component), "settlement_panel"); 
+			end 
 		end,
 		function()
 

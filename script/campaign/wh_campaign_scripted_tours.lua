@@ -857,6 +857,11 @@ function skill_point_panel_opened()
 	character_skills_tour_enable_character_details_panel_skills_tab_button(false);
 	character_skills_tour_enable_character_details_panel_quests_tab_button(false);
 	
+    local character_stats = find_uicomponent(core:get_ui_root(), "character_details_panel", "character_context_parent", "tab_panels", "stats_effects_holder", "unit_information_listview", "list_clip", "list_box", "row_header_stats")
+	if character_stats:CurrentState() == "selected" then 
+		character_stats:SimulateLClick();
+	end 
+
 	cm:callback(
 		function()
 			character_skills_tour_enable_character_details_panel_replace_lord_button(false);
@@ -1495,6 +1500,11 @@ function complete_character_details_tour()
 	
 	character_skill_points_tour_lock_ui(false);
 	
+	local character_stats = find_uicomponent(core:get_ui_root(), "character_details_panel", "character_context_parent", "tab_panels", "stats_effects_holder", "unit_information_listview", "list_clip", "list_box", "row_header_stats")
+    if character_stats:CurrentState() ~= "selected" then
+        character_stats:SimulateLClick();
+    end
+
 	core:add_listener(
 		"skill_point_panel_closed",
 		"PanelClosedCampaign",
@@ -5316,9 +5326,17 @@ scripted_emp_college_of_magic_tour = {
 in_kho_skull_throne_tour = intervention:new(
 	"in_kho_skull_throne_tour",			 								-- string name
 	0, 																	-- cost
-	function() 															-- trigger callback
-		out("#### "..scripted_kho_skull_throne_tour.id.." ####")
-		ui_scripted_tour:construct_tour(scripted_kho_skull_throne_tour, in_kho_skull_throne_tour)
+	function()
+		cm:callback(function()
+			local uic = find_uicomponent("dlc26_skull_throne", "body", "rituals_holder")
+			if uic and uic:Visible() then
+				out("#### "..scripted_kho_skull_throne_tour.id.." ####")
+				ui_scripted_tour:construct_tour(scripted_kho_skull_throne_tour, in_kho_skull_throne_tour)
+				in_kho_skull_throne_tour:set_should_lock_ui()
+			elseif not uic or not uic:Visible() then
+				in_kho_skull_throne_tour:cancel()
+			end
+		end,	0.1)													-- trigger callback
 	end,					
 	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
 )

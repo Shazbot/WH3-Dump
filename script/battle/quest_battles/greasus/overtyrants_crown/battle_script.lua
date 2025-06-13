@@ -232,9 +232,8 @@ ga_attacker_hidden:message_on_casualties("reinforce_1", 0.1);
 
 --Enemy Reinforcements (North West - Large Force)
 ga_reinforcements_01:reinforce_on_message("reinforce_1");
-ga_reinforcements_01:defend_on_message("reinforce_1", -250, 350, 40, 20000);
 ga_reinforcements_01:message_on_deployed("reinforcements_deployed_1");
-ga_reinforcements_01:release_on_message("reinforcements_deployed_1");
+ga_reinforcements_01:attack_force_on_message("reinforcements_deployed_1", ga_defender_01);
 ga_reinforcements_01:message_on_casualties("reinforce_2", 0.2);
 
 --Enemy Reinforcements (North - Small Force)
