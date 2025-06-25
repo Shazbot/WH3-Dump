@@ -8438,7 +8438,7 @@
 				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextCommandEvent"
-					context_function_id="BattleRoot.ZoomToPosition(Component(&quot;B31F885A-6C20-4E4E-AAD2E9970B9602E0&quot;).CurrentSelection.FirstObject.Position)">
+					context_function_id="self.GetProperty(&quot;zoom_to_position&quot;) == &quot;1&quot; | Do(self.SetProperty(&quot;zoom_to_position&quot;, &quot;0&quot;), BattleRoot.ZoomToPosition(Component(&quot;B31F885A-6C20-4E4E-AAD2E9970B9602E0&quot;).CurrentSelection.FirstObject.Position))">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -8522,6 +8522,9 @@
 							value="toggle_reinforcement_point"/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandDblLeftClick"
+					context_function_id="Do(self.SetProperty(&quot;is_pinned&quot;, &quot;1&quot;), self.SetProperty(&quot;zoom_to_position&quot;, &quot;1&quot;), UiMsg(&quot;pin_reinforcement_point&quot;))"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property

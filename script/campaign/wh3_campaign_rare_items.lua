@@ -70,15 +70,13 @@ rare_items = {
 		culture_restriction = nil,
 		item_restriction = nil
 	},
-	--[[ Cut temporarily
 	{
-		item = "wh3_main_anc_enchanted_item_chalice_of_malfleur",
-		weight = 5,
+		item = "wh3_main_anc_arcane_item_chalice_of_malfleur",
+		weight = 3,
 		culture_requirement = nil,
 		culture_restriction = nil,
 		item_restriction = nil
 	},
-	]]--
 	{
 		item = "wh3_main_anc_enchanted_item_book_of_khorne_1",
 		weight = 3,
@@ -231,6 +229,10 @@ function drop_book_of_khorne(context)
 		if cm:model():random_percent(book_of_khorne_drop_chance) then
 			local next_volume = book_volume_equipped + 1;
 			local next_volume_key = "wh3_main_anc_enchanted_item_book_of_khorne_"..next_volume;
+
+			if character:faction():culture() == "wh3_main_kho_khorne" then
+				next_volume_key = next_volume_key.."_k";
+			end
 
 			if cm:model():world():ancillary_exists(next_volume_key) == false then
 				common.ancillary(next_volume_key, 100, context);

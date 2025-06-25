@@ -52,7 +52,7 @@ core:add_ui_created_callback(
 		start_campaign_launch_listener();
 		
 		-- this flag can be set by autotest scripts
-		if not _G.suppress_intro_movie then
+		if not _G.suppress_intro_movie and frontend.game_intro_video_enabled() then
 			frontend.register_scripted_startup_movie("gam_int");
 		end;
 
