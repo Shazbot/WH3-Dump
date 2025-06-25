@@ -85,17 +85,16 @@ core:add_listener(
 
 function attempt_to_award_random_magical_item(context)
 	if not cm:model():campaign_name("wh3_main_prologue") then
-		-- don't award a magical item if it is a quest battle
+		-- Don't award a magical item if it is a quest battle
 		local a_char_cqi, a_mf_cqi, a_faction_name = cm:pending_battle_cache_get_attacker(1);
 		local d_char_cqi, d_mf_cqi, d_faction_name = cm:pending_battle_cache_get_defender(1);
-		
 		local attacker = cm:get_faction(a_faction_name);
 		local defender = cm:get_faction(d_faction_name);
 		
 		if (attacker and attacker:is_quest_battle_faction()) or (defender and defender:is_quest_battle_faction()) then
 			out.traits("attempt_to_award_random_magical_item() called, but it is a quest battle. Not going to award anything.");
 			return;
-		end;
+		end
 		
 		local index = 0;
 		
@@ -103,12 +102,13 @@ function attempt_to_award_random_magical_item(context)
 		local faction = character:faction();
 		local faction_is_human = faction:is_human();
 		local faction_name = faction:name();
+		local faction_leader = character:is_faction_leader();
 		
 		if character:is_caster() or cm:general_has_caster_embedded_in_army(character) then
 			index = cm:random_number(7); -- this will weigh slightly towards arcane items when the character is a caster (6 or higher)
 		else
 			index = cm:random_number(5); -- don't drop arcane items if the character involved is not a caster
-		end;
+		end
 		
 		local new_ancillary_category_list;
 		local new_ancillary_list;
@@ -125,7 +125,7 @@ function attempt_to_award_random_magical_item(context)
 			new_ancillary_category_list = ancillary_list.weapon;
 		else
 			new_ancillary_category_list = ancillary_list.arcane_item;
-		end;
+		end
 		
 		-- get the list of ancillaries based on the rarity
 		local rarity_roll = cm:random_number(100);
@@ -139,7 +139,7 @@ function attempt_to_award_random_magical_item(context)
 			new_ancillary_list = new_ancillary_category_list.uncommon;
 		else
 			new_ancillary_list = new_ancillary_category_list.common;
-		end;
+		end
 
 		-- Copy the ancillary list, so that changes to it do not destroy the source data
 		new_ancillary_list = table.copy(new_ancillary_list);
@@ -147,7 +147,7 @@ function attempt_to_award_random_magical_item(context)
 		local pb = context:pending_battle();
 		local model = pb:model();
 		local campaign_difficulty = model:difficulty_level();
-		local chance = 40;
+		local chance = 10;
 		local char_bv = cm:get_characters_bonus_value(character, "post_battle_ancillary_drop_chance_mod");
 		local faction_bv = cm:get_factions_bonus_value(character:faction(), "post_battle_ancillary_drop_chance_mod");
 		local mf_bv = cm:get_forces_bonus_value(character:military_force(), "post_battle_ancillary_drop_chance_mod");
@@ -156,32 +156,26 @@ function attempt_to_award_random_magical_item(context)
 		local bv_chance = char_bv + faction_bv + mf_bv;
 		chance = chance + bv_chance;
 		
-		-- mod the chance based on campaign difficulty (only if singleplayer)
-		local campaign_difficulty_mod = 0
-		if model:is_multiplayer() then
-			-- in mp, modify as if playing on normal difficulty
-			campaign_difficulty_mod = 6;
-		elseif faction_is_human then							-- player
+		if faction_leader == true then
+			chance = chance + 10;
+		end
+		
+		-- mod the AI drop chance based on campaign difficulty (only if singleplayer)
+		local campaign_difficulty_mod = 0;
+
+		if not model:is_multiplayer() then
 			if campaign_difficulty == 1 then					-- easy
-				campaign_difficulty_mod = 8;
+				campaign_difficulty_mod = -3;
 			elseif campaign_difficulty == 0 then				-- normal
-				campaign_difficulty_mod = 6;
+				campaign_difficulty_mod = 0;
 			elseif campaign_difficulty == -1 then				-- hard
-				campaign_difficulty_mod = 4;
-			elseif campaign_difficulty == -2 then				-- very hard
-				campaign_difficulty_mod = 2;
-			end;
-		else													-- AI
-			if campaign_difficulty == 0 then					-- normal
-				campaign_difficulty_mod = 2;
-			elseif campaign_difficulty == -1 then				-- hard
-				campaign_difficulty_mod = 4;
+				campaign_difficulty_mod = 3;
 			elseif campaign_difficulty == -2 then				-- very hard
 				campaign_difficulty_mod = 6;
 			else												-- legendary
-				campaign_difficulty_mod = 8;
-			end;
-		end;
+				campaign_difficulty_mod = 9;
+			end
+		end
 
 		chance = chance + campaign_difficulty_mod;
 		
@@ -202,47 +196,88 @@ function attempt_to_award_random_magical_item(context)
 				victory_type_mod = 4;
 			elseif pb:defender_battle_result() == "heroic_victory" then
 				victory_type_mod = 6;
-			end;
-		end;
+			end
+		end
 		
-		chance = math.min(chance + victory_type_mod, 100)
-		
+		chance = math.min(chance + victory_type_mod, 100);
+
 		local roll = cm:random_number(100);
 		
 		if core:is_tweaker_set("FORCE_ANCILLARY_DROP_POST_BATTLE") then
 			roll = 1;
-		end;
+		end
 		
 		out.traits("Rolled a " .. roll .. " to assign an ancillary with a chance of " .. chance .. " for a character belonging to the faction " .. faction_name);
 		
 		if roll <= chance then
-			new_ancillary_list = cm:random_sort(new_ancillary_list)
+			new_ancillary_list = cm:random_sort(new_ancillary_list);
 			
 			for i = 1, #new_ancillary_list do
-				local current_ancillary_key = new_ancillary_list[i]
+				local current_ancillary_key = new_ancillary_list[i];
 				
 				if ancillary_is_available_to_faction(current_ancillary_key, faction_name) then
-					common.ancillary(current_ancillary_key, 100, context)
-					break
+					if faction_is_human then
+						local drop_chance = calculate_ancillary_drop_chance(faction, current_ancillary_key);
+
+						if cm:model():random_percent(drop_chance) then
+							common.ancillary(current_ancillary_key, 100, context);
+							break;
+						end
+					else
+						common.ancillary(current_ancillary_key, 100, context);
+						break;
+					end
 				end
 			end
-		end;
+		end
 
 		if faction_is_human then
 			common.dev_ui_log_drop_chance(roll, chance, bv_chance, campaign_difficulty_mod, victory_type_mod);
-		end;
-	end;
-end;
+		end
+	end
+end
+
+function count_items(item_key)
+	local faction = cm:get_faction(cm:get_local_faction_name(true));
+	local number_of_item_owned = faction:num_ancillaries_owned(item_key);
+	local number_of_item_equipped = number_of_item_equipped_in_faction(faction, item_key);
+	print("Total Item Count: "..number_of_item_owned);
+	print("Number Equipped: "..number_of_item_equipped);
+	local drop_chance = calculate_ancillary_drop_chance(faction, item_key);
+	print("Drop Chance: "..drop_chance);
+end
+
+function calculate_ancillary_drop_chance(faction, item_key)
+	local number_of_item_owned = faction:num_ancillaries_owned(item_key);
+	local number_of_item_equipped = number_of_item_equipped_in_faction(faction, item_key);
+
+	local drop_chance = 100 - (number_of_item_owned * 50) + (number_of_item_equipped * 50);
+	drop_chance = math.min(math.max(drop_chance, 0), 100);
+	return drop_chance;
+end
+
+function number_of_item_equipped_in_faction(faction, item_key)
+	if faction:ancillary_exists(item_key) == false then
+		return 0;
+	end
+
+	local equipped_item_count = 0;
+
+	for _, character in model_pairs(faction:character_list()) do
+		if character:has_ancillary(item_key) then
+			equipped_item_count = equipped_item_count + 1;
+		end
+	end
+	return equipped_item_count;
+end
 
 
 function ancillary_is_available_to_faction(ancillary, faction_key)
 	if faction_key == "rebels" then
-		return false
+		return false;
 	end
-
-	return cco("CcoAncillaryRecord", ancillary):Call("CanFactionUseAncillary(DatabaseRecordContext(\"CcoFactionRecord\", \"" .. faction_key .. "\"))")
+	return cco("CcoAncillaryRecord", ancillary):Call("CanFactionUseAncillary(DatabaseRecordContext(\"CcoFactionRecord\", \"" .. faction_key .. "\"))");
 end
-
 
 
 function get_random_ancillary_key_for_faction(faction_key, specified_category, rarity)

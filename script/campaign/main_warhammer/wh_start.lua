@@ -22,6 +22,7 @@ cm:add_pre_first_tick_callback(
 		
 		load_followers();
 		load_rare_items();
+		item_fusing_listener();
 	end
 );
 
@@ -533,3 +534,74 @@ function add_great_desert_sandstorm_listener()
 		true
 	);
 end
+
+-------------------------------------------------------
+--	Faction potential bonus for big factions - intended to help factions that have started growing to continue to grow
+-------------------------------------------------------
+
+local faction_potential_increase_for_big_factions_amount = 150
+local faction_potential_increase_for_big_factions_num_factions = 10
+local faction_potential_increase_for_big_factions_turn = 35
+
+core:add_listener(
+	"RoundStart_add_faction_potential_to_big_factions",
+	"WorldStartRound",
+	function(context)
+		return cm:model():turn_number() == faction_potential_increase_for_big_factions_turn
+	end, 
+	function(context)
+		local factions_list = context:world():faction_list()
+		local factions_to_regions = {}
+		for i = 0, factions_list:num_items() - 1 do
+			local curr_faction = factions_list:item_at(i)
+			if not curr_faction:is_human() then
+				local temp = {}
+				temp.faction_key = curr_faction:name()
+				temp.num_regions = curr_faction:region_list():num_items()
+				table.insert(factions_to_regions, temp)
+			end
+		end
+		
+		table.sort(factions_to_regions, function(f1, f2) return f1.num_regions > f2.num_regions end)
+		
+		for i = 1, faction_potential_increase_for_big_factions_num_factions do
+			local faction_table = factions_to_regions[i]
+			if faction_table and faction_table.faction_key then
+				cm:faction_set_potential_modifier(cm:get_faction(faction_table.faction_key), faction_potential_increase_for_big_factions_amount)
+				out.design("RoundStart_add_faction_potential_to_big_factions: Added " .. faction_potential_increase_for_big_factions_amount .. " potential to " .. faction_table.faction_key)
+			end
+		end
+	end,
+	false
+)
+
+-------------------------------------------------------
+--	Set faction script context to override task management system variable profiles
+-------------------------------------------------------
+
+local tms_variable_profile_num_regions_zeta = 30
+local tms_variable_profile_zeta_key = "cai_faction_script_context_zeta"
+local tms_variable_profile_num_regions_epsilon = 15
+local tms_variable_profile_epsilon_key = "cai_faction_script_context_epsilon"
+
+core:add_listener(
+	"FactionTurnStart_set_tms_variable_profile_override",
+	"FactionTurnStart",
+	function(context)
+		return not context:faction():is_human() and not context:faction():is_rebel()
+	end, 
+	function(context)
+		local faction = context:faction()
+		local faction_key = faction:name()
+		local num_regions = faction:region_list():num_items()
+		if num_regions >= tms_variable_profile_num_regions_epsilon and num_regions < tms_variable_profile_num_regions_zeta then
+			cm:cai_set_faction_script_context(faction_key, tms_variable_profile_epsilon_key)
+			out.design("FactionTurnStart_set_tms_variable_profile_override: Set " .. faction_key .. " to epsilon profile")
+		elseif num_regions >= tms_variable_profile_num_regions_zeta then
+			cm:cai_set_faction_script_context(faction_key, tms_variable_profile_zeta_key)
+			out.design("FactionTurnStart_set_tms_variable_profile_override: Set " .. faction_key .. " to zeta profile")
+		end
+		
+	end,
+	true
+)

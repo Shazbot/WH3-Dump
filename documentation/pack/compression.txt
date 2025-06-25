@@ -1,0 +1,26 @@
+If you want to compress the files in your mod packs you can use one of the supported compression formats.
+There are two flags which can be specified in rules.bob files which can be used to turn on compression for particular files: Compressed and CompressionType.
+	- Compressed flag specifies whether you want those files to get compressed or not. Possible values: true/false
+	- CompressionType flag specifies the concrete compression type to use. Possible values: ZSTD/LZ4
+
+For example if you want to compress with LZ4 use this:
+
+[Pack]
+...
+	Compressed = true
+	CompressionType = LZ4
+...
+
+and if you want to compress with ZSTD us this:
+
+[Pack]
+...
+	Compressed = true
+	CompressionType = ZSTD
+...
+
+
+Certain types of resources should not be compressed and compression support is not guaranteed for them:
+	- audio files - no benefit for compression
+	- video files (*.ca_vp8) - no benefit for compression
+	- models (*.rigid_model_v2) - careful, may add load overhead in certain cases, prefer LZ4 if absolutely needed

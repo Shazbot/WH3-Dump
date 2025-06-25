@@ -108,31 +108,13 @@ function start_achievement_listeners()
 
 	core:add_listener(
 		"WH3_ACHIEVEMENT_KISLEV_MOTHERLAND",
-		"RitualStartedEvent",
+		"IncidentOccuredEvent",
 		true,
 		function(context)
-			local faction = context:performing_faction();
+			local faction = context:faction();
 			
-			if faction:is_human() and faction:culture() == "wh3_main_ksl_kislev" then
-				local faction_name = faction:name();
-				local ritual_key = context:ritual():ritual_key():gsub("_upgraded", "");
-				
-				cm:set_saved_value(faction_name .. ritual_key, true);
-				
-				local rituals = {
-					"wh3_main_ritual_ksl_winter_dazh",
-					"wh3_main_ritual_ksl_winter_salyak",
-					"wh3_main_ritual_ksl_winter_tor",
-					"wh3_main_ritual_ksl_winter_ursun"
-				};
-				
-				for i = 1, #rituals do
-					if not cm:get_saved_value(faction_name .. rituals[i]) then
-						return false;
-					end;
-				end;
-				
-				award_achievement_to_faction(faction_name, "WH3_ACHIEVEMENT_KISLEV_MOTHERLAND");
+			if faction:is_human() and context:dilemma() == "wh3_main_incident_ksl_boon_cost" then
+				award_achievement_to_faction(faction:name(), "WH3_ACHIEVEMENT_KISLEV_MOTHERLAND");
 			end;
 		end,
 		true

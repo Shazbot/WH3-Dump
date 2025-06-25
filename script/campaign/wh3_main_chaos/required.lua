@@ -62,6 +62,7 @@ require("wh2_campaign_quest_battle_helper");
 require("wh3_boris");
 require("wh3_campaign_followers");
 require("wh3_campaign_rare_items");
+require("wh3_campaign_item_fusing");
 require("wh3_campaign_corruption");
 require("wh3_campaign_ai");
 require("wh3_campaign_great_bastion");

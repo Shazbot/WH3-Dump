@@ -43,6 +43,7 @@ cm:add_pre_first_tick_callback(
 		
 		load_followers();
 		load_rare_items();
+		item_fusing_listener();
 		
 		-- only load faction scripts if we have a local faction		
 		if not cm:tol_campaign_key() then

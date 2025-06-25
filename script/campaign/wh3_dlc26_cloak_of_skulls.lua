@@ -332,7 +332,7 @@ function cloak_of_skulls:defeated_character_apply_bonuses(mf_cqis_defeated, skul
 
 	if cm:get_characters_bonus_value(winning_character, "cloak_of_skulls_colonise_ruins") > 0 and winning_character:has_region() then
 		for _, region in model_pairs(winning_character:region():province():regions()) do
-			if region:is_abandoned() then
+			if region:is_abandoned() and start_region:has_effect_bundle("wh3_main_book_of_khorne_block_occupation") == false then
 				cm:transfer_region_to_faction(region:name(), faction:name())
 			end
 		end

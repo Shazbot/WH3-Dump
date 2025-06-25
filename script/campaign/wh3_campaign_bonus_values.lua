@@ -1419,14 +1419,14 @@ core:add_listener(
 	function(context)
 		local region_list = context:world():region_manager():region_list()
 		for i, start_region in model_pairs(region_list) do	
-			if cm:get_regions_bonus_value(start_region, "settlement_spread_to_province_ruin_chance") > 0 and not start_region:has_effect_bundle("wh2_dlc17_effect_bundle_defiled_bloodgrounds") then
+			if cm:get_regions_bonus_value(start_region, "settlement_spread_to_province_ruin_chance") > 0 and start_region:has_effect_bundle("wh2_dlc17_effect_bundle_defiled_bloodgrounds") == false and start_region:has_effect_bundle("wh3_main_book_of_khorne_block_occupation") == false then
 				local owner_key = start_region:owning_faction():name()
 				local province_regions = start_region:province():regions()
 				local source_spread_chance = cm:get_regions_bonus_value(start_region, "settlement_spread_to_province_ruin_chance") + cm:get_provinces_bonus_value(start_region:faction_province(), "settlement_spread_to_province_ruin_chance")
 				local tracker_bundle_key = "wh3_main_bundle_ruin_spread_chance_modifier"
 
 				for i, target_region in model_pairs(province_regions) do
-					if target_region:is_abandoned() then
+					if target_region:is_abandoned() == true then
 						local target_bonus = cm:get_regions_bonus_value(target_region, "settlement_spread_to_province_ruin_chance_target_bonus")
 						local spread_chance = target_bonus + source_spread_chance
 						local roll = cm:random_number()

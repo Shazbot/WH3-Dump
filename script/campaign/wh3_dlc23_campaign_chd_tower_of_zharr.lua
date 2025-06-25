@@ -7,7 +7,7 @@ tower_of_zharr = {
 	districts_to_unlock_tier = 2,
 
 
-	banners_and_followers_counter_reset = 3,
+	banners_and_followers_counter_reset = 6,
 	banners_and_followers_list = {
 		"wh3_dlc23_anc_banner_chd_banner_of_the_khanate",
 		"wh3_dlc23_anc_banner_chd_eye_of_hashut",

@@ -14,6 +14,7 @@ AdviceIssued = {}
 AdviceLevelChanged = {}
 AdviceNavigated = {}
 AdviceSuperseded = {}
+AncillariesFused = {}
 AreaCameraEntered = {}
 AreaEntered = {}
 AreaExited = {}

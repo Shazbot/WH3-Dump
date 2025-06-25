@@ -770,9 +770,9 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:faction():has_technology("wh_main_tech_chs_main_3") and character:battles_fought() > 3;
+				return character:battles_fought() > 3;
 			end,
-		["chance"] = 10
+		["chance"] = 2
 	},
 	{
 		["follower"] = "wh_dlc01_anc_follower_chaos_slave_master",
@@ -3707,22 +3707,19 @@ function load_followers()
 			followers[i].condition,
 			function(context)
 				local character = context:character();
-				local chance = followers[i].chance;
-				
-				-- daemon prince shares followers, so has a bigger pool, so the chance is reduced for them
-				if character:faction():culture() == "wh3_main_dae_daemons" then
-					chance = math.round(chance * 0.4);
-				else
-					chance = chance * 0.5;
-				end;
+				local base_chance = followers[i].chance;
+				local drop_chance = calculate_ancillary_drop_chance(character:faction(), followers[i].follower) / 100;
+				local true_chance = base_chance * drop_chance;
 				
 				if core:is_tweaker_set("SCRIPTED_TWEAKER_13") then
-					chance = 100;
-				end;
+					true_chance = 100;
+				end
 				
-				if not character:character_type("colonel") and not character:character_subtype("wh_dlc07_brt_green_knight") and not character:character_subtype("wh2_dlc10_hef_shadow_walker") and cm:random_number(100) <= chance then
-					cm:force_add_ancillary(context:character(), followers[i].follower, false, false);
-				end;
+				if cm:model():random_percent(true_chance) then
+					if not character:character_type("colonel") and not character:character_subtype("wh_dlc07_brt_green_knight") and not character:character_subtype("wh2_dlc10_hef_shadow_walker") then
+						cm:force_add_ancillary(context:character(), followers[i].follower, false, false);
+					end
+				end
 			end,
 			true
 		);

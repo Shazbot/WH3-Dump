@@ -11,6 +11,7 @@
 --  - First Turn behaviour for AI major factions in the IE map
 --  - Functions to improve chaos dwarf occupation logic
 -- 	- Functions to trigger the AI has got a bunch of settlements incidents and give the victory effect bundles to those factions.
+--	- Handles the application of customization options
 --
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -99,7 +100,17 @@ campaign_ai_script = {
 			},
 		},
 		bundle_key = "wh3_main_ksl_background_support_income_hidden",
-	}
+	},
+
+	ai_minor_faction_potential = {
+		target_potential_types = {
+			combi_minor_strong = 40,
+			combi_minor_survivor = 40,
+		},
+	},
+	ai_extra_aggro = {
+		target_global_script_context = "cai_global_script_context_special_1",
+	},
 }
 
 function campaign_ai_script:setup_listeners()
@@ -118,7 +129,6 @@ function campaign_ai_script:setup_listeners()
 			function(context)
 				local faction = context:faction()
 				local faction_name = faction:name()
-				cm:cai_set_global_script_context("cai_global_script_context_alpha")
 				cm:cai_disable_movement_for_faction(faction_name)
 				self:embed_starting_hero(faction)
 				self:fight_starting_battles(faction)
@@ -541,6 +551,32 @@ function campaign_ai_script:kislev_background_income()
 	end
 end
 
+-- ========================================= CUSTOMIZATION =========================== --
+
+cm:add_first_tick_callback(
+	function()
+		local ssm = cm:model():shared_states_manager()
+		local minor_potential = ssm:get_state_as_bool_value("ai_minor_faction_potential")
+
+		if minor_potential == false then
+			local faction_list = cm:model():world():faction_list()
+			local config = campaign_ai_script.ai_minor_faction_potential
+			for i = 0, faction_list:num_items() - 1 do
+				local faction = faction_list:item_at(i)
+				local override_amount = config.target_potential_types[faction:faction_potential_type()]
+				if not faction:is_human() and not faction:is_rebel() and is_number(override_amount) then
+					cm:faction_set_total_potential_override_value(faction, true, override_amount)
+				end
+			end
+		end
+
+		local extra_aggro = ssm:get_state_as_bool_value("ai_extra_aggro")
+		if extra_aggro == true then
+			local config = campaign_ai_script.ai_extra_aggro
+			cm:cai_set_global_script_context(config.target_global_script_context)
+		end
+	end
+)
 --------------------------------------------------------------
 ----------------------- SAVING / LOADING ---------------------
 --------------------------------------------------------------
