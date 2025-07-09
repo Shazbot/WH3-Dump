@@ -5,98 +5,98 @@ rare_items = {
 		weight = 5,
 		culture_requirement = nil,
 		culture_restriction = nil,
-		item_restriction = nil
+		item_restrictions = nil
 	},
 	{
 		item = "wh3_main_anc_enchanted_item_aldreds_casket",
 		weight = 5,
 		culture_requirement = nil,
 		culture_restriction = nil,
-		item_restriction = nil
+		item_restrictions = nil
 	},
 	{
 		item = "wh3_main_anc_enchanted_item_idol_zak_aloooog",
 		weight = 5,
 		culture_requirement = "wh_main_grn_greenskins",
 		culture_restriction = nil,
-		item_restriction = nil
+		item_restrictions = nil
 	},
 	{
 		item = "wh3_main_anc_enchanted_item_maads_map",
 		weight = 5,
 		culture_requirement = nil,
 		culture_restriction = nil,
-		item_restriction = nil
+		item_restrictions = nil
 	},
 	{
 		item = "wh3_main_anc_weapon_cynatcian",
 		weight = 5,
 		culture_requirement = nil,
 		culture_restriction = nil,
-		item_restriction = nil
+		item_restrictions = nil
 	},
 	{
 		item = "wh3_main_anc_weapon_elthraician",
 		weight = 5,
 		culture_requirement = nil,
 		culture_restriction = nil,
-		item_restriction = nil
+		item_restrictions = nil
 	},
 	{
 		item = "wh3_main_anc_armour_accursed_armour",
 		weight = 5,
 		culture_requirement = nil,
 		culture_restriction = nil,
-		item_restriction = nil
+		item_restrictions = nil
 	},
 	{
 		item = "wh3_main_anc_armour_briarsheath",
 		weight = 5,
 		culture_requirement = nil,
 		culture_restriction = nil,
-		item_restriction = nil
+		item_restrictions = nil
 	},
 	{
 		item = "wh3_main_anc_armour_scintillating_shield",
 		weight = 5,
 		culture_requirement = nil,
 		culture_restriction = nil,
-		item_restriction = nil
+		item_restrictions = nil
 	},
 	{
 		item = "wh3_main_anc_weapon_wyrmslayer_sword",
 		weight = 5,
 		culture_requirement = nil,
 		culture_restriction = nil,
-		item_restriction = nil
+		item_restrictions = nil
 	},
 	{
 		item = "wh3_main_anc_arcane_item_chalice_of_malfleur",
 		weight = 3,
 		culture_requirement = nil,
 		culture_restriction = nil,
-		item_restriction = nil
+		item_restrictions = nil
 	},
 	{
 		item = "wh3_main_anc_enchanted_item_book_of_khorne_1",
 		weight = 3,
 		culture_requirement = nil,
 		culture_restriction = "wh3_main_kho_khorne",
-		item_restriction = "wh3_main_anc_enchanted_item_book_of_khorne_1_k"
+		item_restrictions = {"wh3_main_anc_enchanted_item_book_of_khorne", "wh3_main_anc_enchanted_item_book_of_khorne_k", "wh3_main_anc_enchanted_item_book_of_khorne_1", "wh3_main_anc_enchanted_item_book_of_khorne_1_k"}
 	},
 	{
 		item = "wh3_main_anc_enchanted_item_book_of_khorne_1_k",
 		weight = 3,
 		culture_requirement = "wh3_main_kho_khorne",
 		culture_restriction = nil,
-		item_restriction = "wh3_main_anc_enchanted_item_book_of_khorne_1"
+		item_restrictions = {"wh3_main_anc_enchanted_item_book_of_khorne", "wh3_main_anc_enchanted_item_book_of_khorne_k", "wh3_main_anc_enchanted_item_book_of_khorne_1", "wh3_main_anc_enchanted_item_book_of_khorne_1_k"}
 	},
 	{
 		item = "wh2_main_anc_weapon_the_fellblade",
 		weight = 1,
 		culture_requirement = nil,
 		culture_restriction = nil,
-		item_restriction = nil
+		item_restrictions = nil
 	}
 };
 
@@ -142,7 +142,19 @@ function attempt_drop_rare_item_for_faction(faction)
 	
 	for i = 1, #rare_items do
 		if cm:model():world():ancillary_exists(rare_items[i].item) == false then -- Rares can only exist once
-			if rare_items[i].item_restriction == nil or cm:model():world():ancillary_exists(rare_items[i].item_restriction) == false then -- Make sure the item that may restrict this item doesn't exist
+			local allowed_via_item_restriction = true;
+
+			if rare_items[i].item_restrictions then
+				for j = 1, #rare_items[i].item_restrictions do
+					if cm:model():world():ancillary_exists(rare_items[i].item_restrictions[j]) == true then
+						-- If any of these exist then we can't drop this item
+						allowed_via_item_restriction = false;
+						break;
+					end
+				end
+			end
+			
+			if allowed_via_item_restriction == true then
 				if rare_items[i].culture_requirement == nil or faction:culture() == rare_items[i].culture_requirement then
 					if rare_items[i].culture_restriction == nil or faction:culture() ~= rare_items[i].culture_restriction then
 						possible_items:add_item(rare_items[i].item, rare_items[i].weight);

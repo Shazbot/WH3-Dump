@@ -163,7 +163,7 @@ function college_of_magic:initialise()
 
 			local defender = context:pending_battle():defender()
 			if defender:faction():name() == self.faction_key then
-				table.insert(self.current_mf_cqis, attacker:military_force():command_queue_index())
+				table.insert(self.current_mf_cqis, defender:military_force():command_queue_index())
 				gelt_faction_in_battle = true
 			end
 
@@ -182,7 +182,7 @@ function college_of_magic:initialise()
 				local defender = defender_list:item_at(i)
 
 				if defender:faction():name() == self.faction_key then
-					table.insert(self.current_mf_cqis, attacker:military_force():command_queue_index())
+					table.insert(self.current_mf_cqis, defender:military_force():command_queue_index())
 					gelt_faction_in_battle = true
 				end
 			end

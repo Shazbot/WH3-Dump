@@ -496,7 +496,7 @@ function play_reveal_cutscene()
 	cutscene_reveal:add_cinematic_trigger_listener(
 		"wh3_main_camp_narrative_chs_nurgle_battle_intro_06", 
 			function()
-				cutscene_intro:play_sound(new_sfx("play_wh3_main_camp_narrative_chs_nurgle_battle_intro_06_1"));
+				cutscene_reveal:play_sound(new_sfx("play_wh3_main_camp_narrative_chs_nurgle_battle_intro_06_1"));
 				bm:show_subtitle("wh3_main_camp_narrative_chs_nurgle_battle_intro_06", false, true);
 			end
 	);
