@@ -97,11 +97,11 @@ ga_enemy_army_morghur_main:attack_on_message("01_intro_cutscene_end", 60000);
 ga_enemy_army_morghur_main:message_on_proximity_to_enemy("morghur_under_attack", 30);
 ga_enemy_army_morghur_main:release_on_message("morghur_under_attack");
 
-ga_enemy_army_morghur_fast_beasts:attack_on_message("01_intro_cutscene_end", 20000);
+ga_enemy_army_morghur_fast_beasts:attack_force_on_message("01_intro_cutscene_end", ga_taurox, 20000)
 ga_enemy_army_morghur_fast_beasts:rout_over_time_on_message("morghur_dead", 10000);
 ga_enemy_army_morghur_fast_beasts:release_on_message("morghur_under_attack");
 
-ga_enemy_army_morghur_patrol_pigs:attack_on_message("01_intro_cutscene_end", 20000);
+ga_enemy_army_morghur_patrol_pigs:attack_force_on_message("01_intro_cutscene_end", ga_taurox, 20000)
 ga_enemy_army_morghur_patrol_pigs:rout_over_time_on_message("morghur_dead", 10000);
 ga_enemy_army_morghur_patrol_pigs:release_on_message("morghur_under_attack");
 
@@ -161,6 +161,7 @@ ga_enemy_army_oxyotl_main:message_on_proximity_to_enemy("lzd_sighted", 30);
 ga_ally_great_bray_01:reinforce_on_message("morghur_total_dead");
 --ga_ally_great_bray_01:move_to_position_on_message("brays_move", v(307.922, 295.457));
 ga_ally_great_bray_01:release_on_message("lzd_sighted");
+ga_ally_great_bray_01:attack_force_on_message("01_intro_cutscene_end", ga_ally_prison_guards_01, 20000)
 
 -- Great Bray 02
 ga_ally_great_bray_02:reinforce_on_message("morghur_total_dead");

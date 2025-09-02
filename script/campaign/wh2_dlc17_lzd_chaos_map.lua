@@ -2524,6 +2524,26 @@ local function oxyotl_setup_mission_markers_listener()
 	)
 end
 
+local function oxyotl_teleport_to_capital_listener()
+	core:add_listener(
+	"TravelToCapital",
+	"ComponentLClickUp",
+	function(context)
+		return context.string == "travel_button" and uicomponent_descended_from(UIComponent(context.component), "oxyotl_threat_map");
+	end,
+	function(context) 
+		local oxyotl_faction_interface = cm:model():world():faction_by_key(m_oxyotl_faction_key)
+		if oxyotl_faction_interface:has_home_region() then
+			oxyotl_faction_interface_name = cm:model():world():faction_by_key(m_oxyotl_faction_key):name()
+			capital = cm:get_faction(m_oxyotl_faction_key):home_region():settlement()
+			home_settlement = capital:region():name();
+			cm:scroll_camera_to_region(oxyotl_faction_interface_name, home_settlement, 1)
+		end
+	end,
+	true
+	)
+end 
+
 function add_oxyotl_threat_map_listeners()
 	local oxyotl_faction = cm:get_faction(m_oxyotl_faction_key)
 	
@@ -2546,6 +2566,7 @@ function add_oxyotl_threat_map_listeners()
 			oxyotl_threat_map_mission_success_listener()
 			oxyotl_threat_map_mission_cancelled_listener()
 			oxyotl_threat_map_mission_failed_listener()
+			oxyotl_teleport_to_capital_listener()
 		else
 			-- AI behaviour
 			oxyotl_remove_tresspass_listener()

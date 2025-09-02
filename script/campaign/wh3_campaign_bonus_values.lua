@@ -1,3 +1,215 @@
+-- chance to kill unit in army
+core:add_listener(
+	"random_unit_killed_per_turn_chance",
+	"CharacterTurnStart",
+	true,
+	function(context)
+		local character = context:character();
+
+		if character:is_null_interface() == false and character:has_military_force() == true and character:character_type("general") == true then
+			local force = character:military_force();
+			local value = cm:get_forces_bonus_value(force, "random_unit_killed_per_turn_chance");
+
+			if value > 0 and cm:model():random_percent(value) then
+				local unit_list = force:unit_list();
+
+				if unit_list:num_items() >= 2 then
+					local possible_units = weighted_list:new();
+
+					for i = 1, unit_list:num_items() - 1 do
+						local unit = unit_list:item_at(i);
+						possible_units:add_item(unit:unit_key(), 1);
+					end
+
+					if #possible_units.items > 0 then
+						local selected_unit, index = possible_units:weighted_select();
+						local general_lookup_str = cm:char_lookup_str(character);
+						cm:remove_unit_from_character(general_lookup_str, selected_unit);
+					end
+				end
+			end
+		end
+	end,
+	true
+);
+
+-- chance to raze the region if it has no buildings
+core:add_listener(
+	"raze_region_with_no_buildings_chance",
+	"RegionTurnStart",
+	true,
+	function(context)
+		local region = context:region();
+
+		if region:is_abandoned() == false then
+			local value = cm:get_regions_bonus_value(region, "raze_region_with_no_buildings_chance");
+
+			if value > 0 and cm:model():random_percent(value) then
+				local settlement = region:settlement();
+				local slot_list = settlement:active_secondary_slots();
+
+				if slot_list:num_items() >= 1 then
+					for i = 0, slot_list:num_items() - 1 do
+						local current_slot = slot_list:item_at(i);
+
+						if current_slot:has_building() == true and current_slot:type() ~= "port" then
+							return true;
+						end
+					end
+				end
+				
+				cm:callback(
+					function()
+						cm:set_region_abandoned(region:name());
+					end,
+					0.5
+				);
+			end
+		end
+	end,
+	true
+);
+
+-- chance to demolish building in region
+core:add_listener(
+	"random_building_destroyed_per_turn_chance",
+	"RegionTurnStart",
+	true,
+	function(context)
+		local region = context:region();
+
+		if region:is_abandoned() == false then
+			local value = cm:get_regions_bonus_value(region, "random_building_destroyed_per_turn_chance");
+
+			if value > 0 and cm:model():random_percent(value) then
+				local possible_buildings = weighted_list:new();
+				local settlement = region:settlement();
+				local slot_list = settlement:active_secondary_slots();
+
+				for i = 0, slot_list:num_items() - 1 do
+					local current_slot = slot_list:item_at(i);
+					
+					if current_slot:type() ~= "port" then
+						if current_slot:has_building() == true then
+							possible_buildings:add_item(current_slot, 1);
+						end
+					end
+				end
+				
+				if #possible_buildings.items > 0 then
+					local selected_slot, index = possible_buildings:weighted_select();
+					cm:instantly_dismantle_building_in_region(selected_slot);
+				end
+			end
+		end
+	end,
+	true
+);
+
+-- chance to spawn Slaanesh cult in your regions
+core:add_listener(
+	"AncillaryChanceFaction",
+	"FactionTurnStart",
+	true,
+	function(context)
+		local faction = context:faction();
+		local value = cm:get_factions_bonus_value(faction, "slaanesh_cult_spawned_in_own_territory_chance");
+
+		if value > 0 and cm:model():random_percent(value) then
+			local possible_regions = weighted_list:new();
+			local region_list = faction:region_list();
+
+			local cult_faction = cm:get_faction("wh3_main_sla_seducers_of_slaanesh");
+
+			if cult_faction == nill or cult_faction:is_null_interface() == true or cult_faction:is_human() == true then
+				cult_faction = cm:get_faction("wh3_main_sla_rapturous_excess");
+				
+				if cult_faction == nill or cult_faction:is_null_interface() == true or cult_faction:is_human() == true then
+					cult_faction = cm:get_faction("wh3_main_sla_subtle_torture");
+
+					if cult_faction == nill or cult_faction:is_null_interface() == true or cult_faction:is_human() == true then
+						cult_faction = cm:get_faction("wh3_dlc20_sla_keepers_of_bliss");
+					end
+				end
+			end
+
+			for i = 0, region_list:num_items() - 1 do
+				local possible_region = region_list:item_at(i);
+				local slot_manager = possible_region:foreign_slot_manager_for_faction(cult_faction:name());
+
+				if possible_region:is_abandoned() == false and slot_manager:is_null_interface() == true then
+					possible_regions:add_item(possible_region, 1);
+				end
+			end
+
+			if #possible_regions.items > 0 then
+				local selected_region, index = possible_regions:weighted_select();
+				cm:add_foreign_slot_set_to_region_for_faction(cult_faction:command_queue_index(), selected_region:cqi(), "wh3_main_slot_set_sla_cult");
+			end
+		end
+	end,
+	true
+);
+
+-- chance to raze random regions per turn
+core:add_listener(
+	"raze_region_chance",
+	"RegionTurnStart",
+	true,
+	function(context)
+		local region = context:region();
+		local region_owner = region:owning_faction();
+		local raze_chance = cm:get_regions_bonus_value(region, "raze_region_in_province_chance");
+
+		if raze_chance > 0 and cm:model():random_percent(raze_chance) then
+			local possible_regions = weighted_list:new();
+			local region_list = region:province():regions();
+
+			for i = 0, region_list:num_items() - 1 do
+				local possible_region = region_list:item_at(i);
+
+				if possible_region:is_abandoned() == false and possible_region:cqi() ~= region:cqi() then
+					possible_regions:add_item(possible_region, 1);
+				end
+			end
+
+			if #possible_regions.items > 0 then
+				local selected_region, index = possible_regions:weighted_select();
+				cm:set_region_abandoned(selected_region:name());
+				core:trigger_event("ScriptEventRazedRegionProvinceBonusValue", region_owner, selected_region);
+				return true;
+			end
+		end
+
+		local world_raze_chance = cm:get_regions_bonus_value(region, "raze_region_in_world_chance");
+
+		if world_raze_chance > 0 and cm:model():random_percent(world_raze_chance) then
+			local possible_regions = weighted_list:new();
+			local region_list = cm:model():world():region_manager():region_list();
+
+			for i = 0, region_list:num_items() - 1 do
+				local possible_region = region_list:item_at(i);
+
+				if possible_region:is_abandoned() == false and possible_region:cqi() ~= region:cqi() then
+					local possible_region_owner = possible_region:owning_faction();
+
+					if region_owner:at_war_with(possible_region_owner) == false then
+						possible_regions:add_item(possible_region, 1);
+					end
+				end
+			end
+
+			if #possible_regions.items > 0 then
+				local selected_region, index = possible_regions:weighted_select();
+				cm:set_region_abandoned(selected_region:name());
+				core:trigger_event("ScriptEventRazedRegionWorldwideBonusValue", region_owner, selected_region);
+				return true;
+			end
+		end
+	end,
+	true
+);
+
 -- experience_levels_for_ruin_colonization
 core:add_listener(
 	"experience_levels_for_ruin_colonization",
@@ -104,7 +316,7 @@ core:add_listener(
 		local faction = context:faction();
 		local value = cm:get_factions_bonus_value(faction, "ancillary_per_turn_chance");
 
-		if cm:model():random_percent(value) then
+		if value > 0 and cm:model():random_percent(value) then
 			local ancillary_key = get_random_ancillary_key_for_faction(faction:name(), false, false);
 			cm:add_ancillary_to_faction(faction, ancillary_key, false);
 		end
@@ -121,7 +333,7 @@ core:add_listener(
 		local faction = context:faction();
 		local value = cm:get_factions_bonus_value(faction, "elector_fealty_per_turn_chance");
 
-		if cm:model():random_percent(value) then 
+		if value > 0 and cm:model():random_percent(value) then 
 			local elector_factions = {
 				"wh_main_emp_empire",
 				"wh_main_emp_averland",
@@ -1084,6 +1296,31 @@ core:add_listener(
 						local result = cm:teleport_military_force_to(faction_leader:military_force(), x, y)
 						out("\tTeleporting: "..tostring(result));
 					end
+				end
+			end
+		end
+	end,
+	true
+);
+
+-- create a random nurgle plague in the settlement per turn
+core:add_listener(
+	"create_random_nurgle_plague_per_turn",
+	"RegionTurnStart",
+	true,
+	function(context)
+		local region = context:region();
+
+		if region:is_abandoned() == false then
+			local plague_chance = cm:get_regions_bonus_value(region, "create_random_nurgle_plague_per_turn");
+
+			if plague_chance > 0 and cm:model():random_percent(plague_chance) then
+				local current_plague = region:get_plague_if_infected();
+
+				if current_plague:is_null_interface() then
+					local minor_cult = cm:model():world():faction_by_key("wh3_main_rogue_minor_cults"); -- HACK: Plagues need an owner, currently the only place this bonus value is used is from them
+					local selected_plague = "wh3_dlc25_nur_random_plague_"..cm:random_number(5);
+					cm:spawn_plague_at_settlement(minor_cult, region:settlement(), selected_plague);
 				end
 			end
 		end

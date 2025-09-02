@@ -106,6 +106,9 @@ campaign_ai_script = {
 		target_potential_types = {
 			combi_minor_strong = 40,
 			combi_minor_survivor = 40,
+			minor = -25,
+			minor_weak = -25,
+			minor_strong = 50,
 		},
 	},
 	ai_extra_aggro = {

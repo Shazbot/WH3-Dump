@@ -1841,8 +1841,10 @@ function Worldroots:end_avelorn_invasion()
 	local gaean_vale_key = Worldroots.forests["gaean_vale"].glade_region_key
 	
 	local gaean_vale_invasion = invasion_manager:get_invasion("gaean_vale_invasion")
-	gaean_vale_invasion:release()
-	cm:cai_enable_targeting_against_settlement("settlement:" .. gaean_vale_key)
+	if gaean_vale_invasion then
+		gaean_vale_invasion:release()
+		cm:cai_enable_targeting_against_settlement("settlement:" .. gaean_vale_key)
+	end 
 end
 
 ----------------------

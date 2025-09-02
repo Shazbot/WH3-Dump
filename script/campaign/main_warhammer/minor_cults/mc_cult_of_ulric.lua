@@ -1,6 +1,5 @@
 local minor_cult = {
 	key = "",
-	faction_key = "wh3_main_rogue_minor_cults",
 	slot_key = "wh3_main_slot_set_minor_cult_9",
 	intro_incident_key = "wh3_main_minor_cult_intro",
 	effect_bundle = nil,
@@ -24,11 +23,12 @@ local minor_cult = {
 	},
 	valid_from_turn = 5,
 	chance_if_valid = 5,
+	complete_on_removal = true,
 	event_data = nil,
-	saved_data = {active = false, region_key = "", event_cooldown = 0, event_triggers = 0}
+	saved_data = {status = 0, region_key = "", event_cooldown = 0, event_triggers = 0}
 };
 
-function minor_cult:is_valid(MINOR_CULT_REGIONS)
+function minor_cult:is_valid()
 	local debug_validity = true;
 
 	if debug_validity == true then
@@ -52,7 +52,7 @@ function minor_cult:is_valid(MINOR_CULT_REGIONS)
 			if current_region:is_null_interface() == false and current_region:is_abandoned() == false then
 				local owner = current_region:owning_faction();
 
-				if owner:is_null_interface() == false and owner:is_human() == true then
+				if owner:is_null_interface() == false and owner:is_human() == true and owner:is_factions_turn() == true then
 					local current_subculture = owner:subculture();
 
 					if self.valid_subcultures[current_subculture] ~= nil then
@@ -61,7 +61,7 @@ function minor_cult:is_valid(MINOR_CULT_REGIONS)
 						out("\tFAIL - FORCED REGION SUBCULTURE - "..current_subculture);
 					end
 				elseif debug_validity == true then
-					out("\tFAIL - FORCED REGION OWNER AI/NULL");
+					out("\tFAIL - FORCED REGION OWNER AI/NOT TURN/NULL");
 				end
 			elseif debug_validity == true then
 				out("\tFAIL - FORCED REGION RAZED/NULL");
@@ -78,7 +78,7 @@ function minor_cult:is_valid(MINOR_CULT_REGIONS)
 			if current_region:is_null_interface() == false and current_region:is_abandoned() == false then
 				local owner = current_region:owning_faction();
 
-				if owner:is_null_interface() == false and owner:is_human() == true then
+				if owner:is_null_interface() == false and owner:is_human() == true and owner:is_factions_turn() == true then
 					if self.valid_subcultures[owner:subculture()] ~= nil then
 						local valid = true;
 

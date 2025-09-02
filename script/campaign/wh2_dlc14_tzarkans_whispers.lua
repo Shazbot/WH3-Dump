@@ -436,7 +436,7 @@ function tzarkan_generate_raze_mission(tzarkan_faction)
 	local region_list = {};
 	local num_targets = cm:random_number(tazrkan_raze_mission_max_targets, tazrkan_raze_mission_min_targets);
 
-	if tazrkan_raze_mission_max_distance > 0 then
+	if tazrkan_raze_mission_max_distance > 0 and faction_leader:has_military_force() == true then
 		region_list = get_regions_within_distance_of_character(faction_leader, tazrkan_raze_mission_max_distance, true, false);
 	else
 		region_list = get_border_regions_of_faction(tzarkan_faction, true, false);

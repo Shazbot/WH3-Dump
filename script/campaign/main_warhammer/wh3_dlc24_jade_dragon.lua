@@ -15,7 +15,8 @@ function jade_dragon_start:initialise()
 			"jade_dragon_start_dilemma",
 			"GarrisonOccupiedEvent",
 			function(context)
-				return not cm:get_saved_value("jade_dragon_start_dilemma_issued") and context:character():character_subtype(self.subtype) and context:garrison_residence():region():name() == self.start_region and cm:is_region_owned_by_faction(self.shang_wu_region, self.faction) and cm:turn_number() < 25
+				local character_subtype = context:character():character_subtype_key()
+				return not cm:get_saved_value("jade_dragon_start_dilemma_issued") and context:character():character_subtype(character_subtype) and context:garrison_residence():region():name() == self.start_region and cm:is_region_owned_by_faction(self.shang_wu_region, self.faction) and cm:turn_number() < 25
 			end,
 			function(context)
 				cm:trigger_dilemma(self.faction, self.dilemma)

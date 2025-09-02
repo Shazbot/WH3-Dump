@@ -195,7 +195,8 @@ core:add_listener(
 		CheckPostBattlePrologueProgress()
 		--clear the prebattle camera
 		cm:clear_prebattle_display_configuration_override();
-
+		-- Disble the esc_menu button
+		uim:override("esc_menu"):set_allowed(false)
 		-- Disble the end turn button
 		uim:override("end_turn"):set_allowed(false);
 
@@ -775,7 +776,7 @@ core:add_listener(
 	"LoadingScreenDismissed",
 	true,
 	function()
-		uim:override("esc_menu"):set_allowed(true);
+		uim:override("esc_menu"):set_allowed(false); 
 		
 		if prologue_load_check == "after_recruit_button" then
 			-- Disable the end turn button

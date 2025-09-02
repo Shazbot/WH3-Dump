@@ -520,37 +520,41 @@ function matters_of_state:ritual_completed_event(ritual)
 		local target_garrison = cm:get_armed_citizenry_from_garrison(ritual:ritual_target():get_target_region():garrison_residence())
 		local pos_x, pos_y = cm:find_valid_spawn_location_for_character_from_settlement(self.faction_string, target_region, false, true, 10)
 		
-		if not target_garrison:is_null_interface() then
-		local garrison_units = target_garrison:unit_list()
-		local army_units_string = ""
-		
-		for i=0,garrison_units:num_items()-1 do
-			unit = garrison_units:item_at(i)
-			if unit:unit_class() ~= "com" then -- We do not include lord and hero units in the deployed army
-				cm:set_unit_hp_to_unary_of_maximum(unit, 0.1) --the garrison is out fighting on the campaign map, so we nuke the garrison to represent that!
-				army_units_string = army_units_string .. unit:unit_key() .. ","
-			end
-		end
+		if target_garrison == false then 
+			cm:faction_add_pooled_resource(self.faction_string, "wh3_dlc24_cth_mos_steel", self.default_resource_factor, 5)
+		else 
+			if not target_garrison:is_null_interface() then
+				local garrison_units = target_garrison:unit_list()
+				local army_units_string = ""
+				
+				for i=0,garrison_units:num_items()-1 do
+					unit = garrison_units:item_at(i)
+					if unit:unit_class() ~= "com" then -- We do not include lord and hero units in the deployed army
+						cm:set_unit_hp_to_unary_of_maximum(unit, 0.1) --the garrison is out fighting on the campaign map, so we nuke the garrison to represent that!
+						army_units_string = army_units_string .. unit:unit_key() .. ","
+					end
+				end
 
-		cm:create_force_with_general(
-			self.faction_string,
-			army_units_string,
-			target_region,
-			pos_x,
-			pos_y,
-			"general",
-			"wh3_dlc24_cth_lord_magistrate_reserves",
-			"",
-			"",
-			"",
-			"",
-			false,
-			function(cqi)
-				cm:apply_effect_bundle_to_characters_force("wh3_dlc24_ritual_cth_mos_steel_settlement_generate_temporary_army", cqi, 0);
-				cm:replenish_action_points(cm:char_lookup_str(cqi))
+				cm:create_force_with_general(
+					self.faction_string,
+					army_units_string,
+					target_region,
+					pos_x,
+					pos_y,
+					"general",
+					"wh3_dlc24_cth_lord_magistrate_reserves",
+					"",
+					"",
+					"",
+					"",
+					false,
+					function(cqi)
+						cm:apply_effect_bundle_to_characters_force("wh3_dlc24_ritual_cth_mos_steel_settlement_generate_temporary_army", cqi, 0);
+						cm:replenish_action_points(cm:char_lookup_str(cqi))
+					end
+				)
 			end
-		)
-		end
+		end 
 	end
 
 	if ritual_key == self.rituals.refresh_ap_of_armies then

@@ -46,10 +46,10 @@
 							<effect_window this="CCF0B2CC-CDF5-4717-BAB409C85D774E03">
 								<dy_text this="3EC7DDE7-75B5-48E8-B589CF2BCA46B380"/>
 								<merc_list this="5B4F2C0C-8118-45DC-8556799A85DAC03B">
-									<template_unit_effect this="9921C92A-6B96-45E3-9EF2959941B1DB41">
+									<template_merc this="9921C92A-6B96-45E3-9EF2959941B1DB41">
 										<dy_type this="F8F6A1E0-F211-4BA4-8483D2EBF6E8FDC4"/>
 										<portrait this="9512814B-C7DE-46AB-B67ECE6ACE250E99"/>
-									</template_unit_effect>
+									</template_merc>
 								</merc_list>
 								<agent_list this="91175383-4A63-4D41-87AA6491F73C384A">
 									<template_agent_effect this="32F20CE7-6651-4A6A-BFAD610FAA602DBA">
@@ -174,7 +174,7 @@
 		<agent_list
 			this="91175383-4A63-4D41-87AA6491F73C384A"
 			id="agent_list"
-			offset="0.00,217.00"
+			offset="138.00,202.00"
 			priority="50"
 			tooltipslocalised="true"
 			uniqueguid="91175383-4A63-4D41-87AA6491F73C384A"
@@ -196,14 +196,16 @@
 				<newstate
 					this="00814526-B046-4E3E-88AEBCF7BA72CEF9"
 					name="NewState"
-					width="335"
-					height="215"
+					width="60"
+					height="130"
 					interactive="true"
 					uniqueguid="00814526-B046-4E3E-88AEBCF7BA72CEF9"/>
 			</states>
 			<LayoutEngine
 				type="List"
-				sizetocontent="true">
+				itemsperrow="5"
+				sizetocontent="true"
+				horizontal_alignment="Center">
 				<columnwidths>
 					<column width="368"/>
 				</columnwidths>
@@ -1789,7 +1791,7 @@
 		<dy_text
 			this="3EC7DDE7-75B5-48E8-B589CF2BCA46B380"
 			id="dy_text"
-			offset="0.00,9.00"
+			offset="1.00,9.00"
 			allowhorizontalresize="false"
 			priority="60"
 			tooltipslocalised="true"
@@ -1948,9 +1950,10 @@
 		<dy_type
 			this="01DC78A0-5255-4B62-8ACFCA55DF4683D6"
 			id="dy_type"
-			offset="17.00,163.00"
+			offset="-120.00,78.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
+			visible="false"
 			docking="Bottom Center"
 			dock_offset="0.00,-24.00"
 			component_anchor_point="0.50,1.00"
@@ -1990,9 +1993,10 @@
 		<dy_type
 			this="F8F6A1E0-F211-4BA4-8483D2EBF6E8FDC4"
 			id="dy_type"
-			offset="17.00,129.00"
+			offset="-120.00,102.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
+			visible="false"
 			docking="Bottom Center"
 			component_anchor_point="0.50,1.00"
 			priority="60"
@@ -2130,7 +2134,7 @@
 		<effect_list
 			this="99DFF75C-04DE-457B-884DF176B919332F"
 			id="effect_list"
-			offset="0.00,432.00"
+			offset="0.00,332.00"
 			priority="50"
 			tooltipslocalised="true"
 			uniqueguid="99DFF75C-04DE-457B-884DF176B919332F"
@@ -2177,12 +2181,6 @@
 			uniqueguid="CCF0B2CC-CDF5-4717-BAB409C85D774E03"
 			currentstate="FD27BABA-BD69-4E74-9926A99450CFB66A"
 			defaultstate="FD27BABA-BD69-4E74-9926A99450CFB66A">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="#ContextList"
-					context_object_id="CcoCampaignRitual"
-					context_function_id="RitualContext.CompletionPayloadContext.EffectBundleList.Transform(EffectList)"/>
-			</callbackwithcontextlist>
 			<states>
 				<newstate
 					this="FD27BABA-BD69-4E74-9926A99450CFB66A"
@@ -2194,7 +2192,8 @@
 			</states>
 			<LayoutEngine
 				type="List"
-				margins="9.00,0.00">
+				margins="9.00,0.00"
+				horizontal_alignment="Center">
 				<columnwidths>
 					<column width="368"/>
 				</columnwidths>
@@ -2926,7 +2925,7 @@
 		<merc_list
 			this="5B4F2C0C-8118-45DC-8556799A85DAC03B"
 			id="merc_list"
-			offset="0.00,60.00"
+			offset="138.00,60.00"
 			priority="50"
 			tooltipslocalised="true"
 			uniqueguid="5B4F2C0C-8118-45DC-8556799A85DAC03B"
@@ -2936,7 +2935,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoCampaignRitual"
-					context_function_id="RitualContext.CompletionPayloadContext.MercenarySpawnsList">
+					context_function_id="RitualContext.CompletionPayloadContext.MercenarySpawnsList.Transform( (mercenary_spawn) =&gt; mercenary_spawn.SpawnableUnitContext )">
 					<child_m_user_properties>
 						<property
 							name="hide_if_empty"
@@ -2948,14 +2947,17 @@
 				<newstate
 					this="D539772A-A20E-4212-B25958FA4DD1765A"
 					name="NewState"
-					width="335"
-					height="157"
+					width="60"
+					height="142"
 					interactive="true"
 					uniqueguid="D539772A-A20E-4212-B25958FA4DD1765A"/>
 			</states>
 			<LayoutEngine
 				type="List"
-				sizetocontent="true">
+				itemsperrow="5"
+				sizetocontent="true"
+				margins="0.00,12.00"
+				horizontal_alignment="Center">
 				<columnwidths>
 					<column width="368"/>
 				</columnwidths>
@@ -3339,11 +3341,9 @@
 		<portrait
 			this="913CB28A-8BCA-49FF-92C30C183E5E809B"
 			id="portrait"
-			offset="137.00,28.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			docking="Top Center"
-			dock_offset="0.00,28.00"
 			component_anchor_point="0.50,0.00"
 			priority="60"
 			tooltipslocalised="true"
@@ -3403,7 +3403,6 @@
 		<portrait
 			this="9512814B-C7DE-46AB-B67ECE6ACE250E99"
 			id="portrait"
-			offset="137.00,0.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			docking="Top Center"
@@ -3602,8 +3601,6 @@
 		<template_agent_effect
 			this="32F20CE7-6651-4A6A-BFAD610FAA602DBA"
 			id="template_agent_effect"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
 			priority="60"
 			tooltipslocalised="true"
 			uniqueguid="32F20CE7-6651-4A6A-BFAD610FAA602DBA"
@@ -3619,8 +3616,8 @@
 				<newstate
 					this="83570FD8-06F3-4880-A99BBA97829EB453"
 					name="NewState"
-					width="335"
-					height="215"
+					width="60"
+					height="130"
 					interactive="true"
 					uniqueguid="83570FD8-06F3-4880-A99BBA97829EB453"/>
 			</states>
@@ -3666,6 +3663,32 @@
 				</newstate>
 			</states>
 		</template_effect>
+		<template_merc
+			this="9921C92A-6B96-45E3-9EF2959941B1DB41"
+			id="template_merc"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="9921C92A-6B96-45E3-9EF2959941B1DB41"
+			currentstate="783AF1F9-B6F2-4ED1-BD7F3AB3D50938D7"
+			defaultstate="783AF1F9-B6F2-4ED1-BD7F3AB3D50938D7">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="#ContextPropagator"
+					context_object_id="CcoRitualPayloadSpawnMercenaryRecord"
+					context_function_id="SpawnableUnitContext"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="783AF1F9-B6F2-4ED1-BD7F3AB3D50938D7"
+					name="NewState"
+					width="60"
+					height="130"
+					interactive="true"
+					uniqueguid="783AF1F9-B6F2-4ED1-BD7F3AB3D50938D7"/>
+			</states>
+		</template_merc>
 		<template_particle
 			this="232C410D-02BC-42ED-B9E8FF987A6964D8"
 			id="template_particle"
@@ -3800,31 +3823,6 @@
 				</newstate>
 			</states>
 		</template_ritual>
-		<template_unit_effect
-			this="9921C92A-6B96-45E3-9EF2959941B1DB41"
-			id="template_unit_effect"
-			allowhorizontalresize="false"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="9921C92A-6B96-45E3-9EF2959941B1DB41"
-			currentstate="783AF1F9-B6F2-4ED1-BD7F3AB3D50938D7"
-			defaultstate="783AF1F9-B6F2-4ED1-BD7F3AB3D50938D7">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoRitualPayloadSpawnMercenaryRecord"
-					context_function_id="SpawnableUnitContext"/>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="783AF1F9-B6F2-4ED1-BD7F3AB3D50938D7"
-					name="NewState"
-					width="335"
-					height="157"
-					interactive="true"
-					uniqueguid="783AF1F9-B6F2-4ED1-BD7F3AB3D50938D7"/>
-			</states>
-		</template_unit_effect>
 		<textview
 			this="BBE1B9FD-7590-465D-8BAEDF3D8AE47A5C"
 			id="TextView"

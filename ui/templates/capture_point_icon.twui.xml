@@ -20,6 +20,10 @@
 							<icon_fill this="7781EF12-85CF-480B-AC007ECDA4B00DF7"/>
 						</fill_container>
 					</icon>
+					<owner_indicator this="DE2D61A7-4C48-467C-9312E6623FEC4110">
+						<icon_owner this="68E051A5-89A4-4493-9A8CEE743AFCAB67"/>
+						<icon_contested this="38DFA1A3-E28E-4B61-A987088C77B38427"/>
+					</owner_indicator>
 					<contested_arrow_up this="F94176CC-BAE6-4357-83BC669F2F797771"/>
 					<contested_arrow_down this="734D62BE-E4B7-4167-89197C0E73A7966B"/>
 					<dev_capture_parent this="5DDFDAC4-8781-4CA2-B664C46605CAF459">
@@ -798,6 +802,42 @@
 				</glow>
 			</states>
 		</icon>
+		<icon_contested
+			this="38DFA1A3-E28E-4B61-A987088C77B38427"
+			id="icon_contested"
+			uniqueguid_in_template="38DFA1A3-E28E-4B61-A987088C77B38427"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			tooltipslocalised="true"
+			componentleveltooltip="Contested"
+			tooltiplabel="ComponentTooltip_b9a0f6ad"
+			uniqueguid="38DFA1A3-E28E-4B61-A987088C77B38427"
+			currentstate="15CDED2C-5399-43FF-97C704C15229598B"
+			defaultstate="15CDED2C-5399-43FF-97C704C15229598B">
+			<componentimages>
+				<component_image
+					this="9AF40980-BDCB-44E7-B50A68DDBCB1A129"
+					uniqueguid="9AF40980-BDCB-44E7-B50A68DDBCB1A129"
+					imagepath="ui/battle ui/capture_point_icons/capture_point_indicator_contested.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="15CDED2C-5399-43FF-97C704C15229598B"
+					name="default"
+					disabled="true"
+					uniqueguid="15CDED2C-5399-43FF-97C704C15229598B">
+					<imagemetrics>
+						<image
+							this="B2EE993B-AFCB-477A-8AFFE6EABE6B7378"
+							uniqueguid="B2EE993B-AFCB-477A-8AFFE6EABE6B7378"
+							componentimage="9AF40980-BDCB-44E7-B50A68DDBCB1A129"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</icon_contested>
 		<icon_fill
 			this="7781EF12-85CF-480B-AC007ECDA4B00DF7"
 			id="icon_fill"
@@ -908,6 +948,67 @@
 				</glow>
 			</states>
 		</icon_fill>
+		<icon_owner
+			this="68E051A5-89A4-4493-9A8CEE743AFCAB67"
+			id="icon_owner"
+			uniqueguid_in_template="68E051A5-89A4-4493-9A8CEE743AFCAB67"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			tooltipslocalised="true"
+			componentleveltooltip="Owner"
+			tooltiplabel="ComponentTooltip_f23887e1"
+			uniqueguid="68E051A5-89A4-4493-9A8CEE743AFCAB67"
+			currentstate="8DAE41E6-D51A-4309-AC8B8DB435226E91"
+			defaultstate="8DAE41E6-D51A-4309-AC8B8DB435226E91">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="OwnerIconPath">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CaptureLocationStateChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoBattleCapturePoint"
+					context_function_id="OwnerIconPath != &quot;&quot;">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CaptureLocationStateChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="75C7A537-6CAC-4BC3-8CE26C96B448F9F8"
+					uniqueguid="75C7A537-6CAC-4BC3-8CE26C96B448F9F8"
+					imagepath="ui/flags/template_flag/mon_24.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="8DAE41E6-D51A-4309-AC8B8DB435226E91"
+					name="default"
+					disabled="true"
+					uniqueguid="8DAE41E6-D51A-4309-AC8B8DB435226E91">
+					<imagemetrics>
+						<image
+							this="C64B9DBC-0693-417C-92D582C27DCB419D"
+							uniqueguid="C64B9DBC-0693-417C-92D582C27DCB419D"
+							componentimage="75C7A537-6CAC-4BC3-8CE26C96B448F9F8"
+							offset="4.00,4.00"
+							width="24"
+							height="24"
+							dockpoint="Center"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</icon_owner>
 		<line_segment
 			this="9DCCD64D-9473-4B84-86658CD20D162B70"
 			id="line_segment"
@@ -1227,6 +1328,27 @@
 				</default>
 			</states>
 		</lock_timer>
+		<owner_indicator
+			this="DE2D61A7-4C48-467C-9312E6623FEC4110"
+			id="owner_indicator"
+			uniqueguid_in_template="DE2D61A7-4C48-467C-9312E6623FEC4110"
+			offset="9.00,-36.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Top Center External"
+			dock_offset="0.00,-4.00"
+			component_anchor_point="0.50,1.00"
+			tooltipslocalised="true"
+			uniqueguid="DE2D61A7-4C48-467C-9312E6623FEC4110"
+			currentstate="60F345FF-7BFA-4EE3-90FE8FDF1436B19E"
+			defaultstate="60F345FF-7BFA-4EE3-90FE8FDF1436B19E">
+			<states>
+				<default
+					this="60F345FF-7BFA-4EE3-90FE8FDF1436B19E"
+					name="default"
+					uniqueguid="60F345FF-7BFA-4EE3-90FE8FDF1436B19E"/>
+			</states>
+		</owner_indicator>
 		<root
 			this="16DC873E-01A4-4FC9-9A72AD42A53B1C3D"
 			id="root"

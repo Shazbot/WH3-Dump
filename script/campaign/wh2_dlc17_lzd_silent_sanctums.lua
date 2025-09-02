@@ -452,6 +452,7 @@ cm:add_saving_game_callback(
 		cm:save_named_value("oxy_gems_first_gems", m_first_sanctum_point_gained, context)
 		cm:save_named_value("oxy_gems_first_sanctum", m_first_sanctum_constructed, context)
 		cm:save_named_value("oxy_current_teleport_region", m_current_transport_building_region, context)
+		cm:save_named_value("oxy_ambush_power_level", m_sanctum_ambush_config.ambush_current_power_level, context)
 	end
 )
 
@@ -461,6 +462,7 @@ cm:add_loading_game_callback(
 			m_first_sanctum_point_gained = cm:load_named_value("oxy_gems_first_gems", m_first_sanctum_point_gained, context)
 			m_first_sanctum_constructed = cm:load_named_value("oxy_gems_first_sanctum", m_first_sanctum_constructed, context)
 			m_current_transport_building_region = cm:load_named_value("oxy_current_teleport_region", m_current_transport_building_region, context)
+			m_sanctum_ambush_config.ambush_current_power_level = cm:load_named_value("oxy_ambush_power_level", m_sanctum_ambush_config.ambush_current_power_level, context)
 		end
 	end
 )

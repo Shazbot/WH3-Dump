@@ -3,17 +3,20 @@ subjugation = {
 		["wh_dlc08_nor_norsca"] = true,
 		["wh_main_grn_greenskins"] = true,
 		["wh3_main_ogr_ogre_kingdoms"] = true,
+		["wh2_dlc09_tmb_tomb_kings"] = true,
 	},
 	dilemmas = {
 		execute = {
 			["wh_dlc08_nor_norsca"] = "wh2_dlc08_nor_confederate_generic",
 			["wh_main_grn_greenskins"] = "wh2_main_grn_confederate_wh2_dlc15_grn_generic",
-			["wh3_main_ogr_ogre_kingdoms"] = "wh3_dlc26_ogr_confederate_generic"
+			["wh3_main_ogr_ogre_kingdoms"] = "wh3_dlc26_ogr_confederate_generic",
+			["wh2_dlc09_tmb_tomb_kings"] = "wh3_main_tmb_execution"
 		},
 		no_execute = {
 			["wh_dlc08_nor_norsca"] = "wh2_dlc08_nor_confederate_generic_no_execution",
 			["wh_main_grn_greenskins"] = "wh2_main_grn_confederate_wh2_dlc15_grn_generic_no_execution",
-			["wh3_main_ogr_ogre_kingdoms"] = "wh3_dlc26_ogr_confederate_generic_no_execution"
+			["wh3_main_ogr_ogre_kingdoms"] = "wh3_dlc26_ogr_confederate_generic_no_execution",
+			["wh2_dlc09_tmb_tomb_kings"] = "wh3_main_tmb_confederate"
 		}
 	},
 	invalid_factions = {
@@ -25,7 +28,23 @@ subjugation = {
 		wh_main_nor_norsca_separatists = true,
 		wh_main_nor_norsca_separatists_sorcerer_lord = true,
 		wh2_dlc13_grn_greenskins_invasion = true,
-		wh3_main_ogr_ogre_kingdoms_invasion = true
+		wh3_main_ogr_ogre_kingdoms_invasion = true,
+		wh2_dlc09_tmb_khemri = true,
+		wh2_dlc09_tmb_followers_of_nagash = true,
+		wh2_dlc09_tmb_numas = true,
+		wh2_dlc09_tmb_the_sentinels = true,
+		wh2_dlc09_tmb_rakaph_dynasty = true,
+		wh2_dlc09_tmb_dune_kingdoms = true,
+		wh2_dlc09_tmb_tombking_qb1 = true,
+		wh2_dlc09_tmb_tombking_qb2 = true,
+		wh2_dlc09_tmb_tombking_qb3 = true,
+		wh2_dlc09_tmb_tombking_qb4 = true,
+		wh2_dlc09_tmb_tombking_qb_exiles_of_nehek = true,
+		wh2_dlc09_tmb_tombking_qb_followers_of_nagash = true,
+		wh2_dlc09_tmb_tombking_qb_khemri = true,
+		wh2_dlc09_tmb_tombking_qb_lybaras = true
+
+
 	}
 }
 

@@ -13,6 +13,7 @@ gb = generated_battle:new(
 	false                                      	-- debug mode
 );
 
+bm:setup_victory_callback(function() check_win() end);
 
 --generated_cutscene:add_element(sfx_name, subtitle, camera, min_length, wait_for_vo, wait_for_camera, loop_camera)
 	gc:add_element(nil, nil, "gc_medium_absolute_bloodpine_church_01_to_absolute_bloodpine_church_02", 6000, false, false, false);
@@ -38,12 +39,13 @@ Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
 
 
 -------ARMY SETUP-------
+
+player_army = gb:get_army(gb:get_player_alliance_num(), 1) -- Player army
 ga_ai_01 = gb:get_army(gb:get_non_player_alliance_num(), 1); -- Initial Force of Middenheim
 ga_ai_02 = gb:get_army(gb:get_non_player_alliance_num(), 2); -- Reinforcements Secessionists
 
 -------OBJECTIVES-------
 gb:set_objective_on_message("deployment_started", "wh_main_qb_emp_karl_franz_intro_main_objective");
-gb:set_objective_on_message("deployment_started", "wh_main_qb_emp_karl_franz_intro_second_objective");
 gb:complete_objective_on_message("initial_army_defeated", "wh_main_qb_emp_karl_franz_intro_main_objective");
 
 -------HINTS-------
@@ -55,13 +57,54 @@ gb:queue_help_on_message("initial_army_defeated", "wh_main_qb_emp_karl_franz_int
 
 -------ORDERS-------
 ga_ai_01:message_on_rout_proportion("initial_army_defeated", 0.7);
-
+ga_ai_01:rout_over_time_on_message("initial_army_defeated")
 ga_ai_02:reinforce_on_message("initial_army_defeated");
--- Queued attack orders to we can make sure it get's given as early as possible.
-ga_ai_02:attack_on_message("initial_army_defeated", 20000);
-ga_ai_02:attack_on_message("initial_army_defeated", 30000);
-ga_ai_02:attack_on_message("initial_army_defeated", 40000);
+ga_ai_02:attack_force_on_message("initial_army_defeated", player_army)
+gb:set_objective_on_message("initial_army_defeated", "wh_main_qb_emp_karl_franz_intro_second_objective", 6000);
 
+	bm:watch(
+		function()
+			return is_shattered_or_dead(ga_ai_01.sunits)
+		end,
+		0,
+		function()
+			gb:complete_objective_on_message("initial_army_defeated", "wh_main_qb_emp_karl_franz_intro_main_objective");
+			gb:set_objective_on_message("initial_army_defeated", "wh_main_qb_emp_karl_franz_intro_second_objective");
+		end
+	)
 
+	bm:watch(
+		function()
+			return is_shattered_or_dead(ga_ai_02.sunits)
+		end,
+		0,
+		function()
+			bm:complete_objective("wh_main_qb_emp_karl_franz_intro_second_objective");
+			bm:end_battle()
+			bm:change_victory_countdown_limit(0)
+		end
+	)
 
+	bm:watch(
+		function()
+			return is_shattered_or_dead(player_army.sunits)
+		end,
+		0,
+		function()
+			bm:fail_objective("wh_main_qb_emp_karl_franz_intro_main_objective")
+			bm:fail_objective("wh_main_qb_emp_karl_franz_intro_second_objective");
+			bm:end_battle()
+			bm:change_victory_countdown_limit(0)
+		end
+	)
 
+function check_win()
+	local player_army = bm:get_scriptunits_for_local_players_army();
+	local karl_franz = player_army:get_general_sunit();
+	if bm:victorious_alliance() == karl_franz.alliance_num then
+		-- Stop end battle.
+		gb:stop_end_battle(true)
+	else
+		bm:end_battle()
+	end
+end

@@ -32,7 +32,7 @@ ga_ai_02 = gb:get_army(gb:get_non_player_alliance_num(1), 1, "boss");
 -- ga_ai_03 = gb:get_army(gb:get_non_player_alliance_num(1), 3);
 
 
-
+stormvermin_units = ga_ai_01.sunits:get_sunit_by_type("wh2_main_skv_inf_stormvermin_0")
 
 
 -------OBJECTIVES-------
@@ -64,3 +64,34 @@ ga_ai_02:message_on_casualties("hurt",0.95);
 
 
 
+if ga_ai_02 then
+	bm:watch(
+		function()
+			return is_shattered_or_dead(ga_ai_02.sunits:item(1))
+		end,
+		0,
+		function()
+			bm:out("*** boss is shattered or dead! ***")
+			bm:complete_objective("wh_dlc08_qb_monster_hunt_objective");
+			bm:complete_objective("wh_dlc08_qb_monster_hunt_objective_11_1");
+			gb.sm:trigger_message("boss_dead")
+		end
+	)
+end
+
+if ga_ai_01 then 
+		bm:watch(
+		function()
+			return is_shattered_or_dead(ga_ai_01.sunits)
+		end,
+		0,
+		function()
+			bm:out("*** units are shattered or dead! ***")
+			bm:complete_objective("wh_dlc08_qb_monster_hunt_objective_11_0");
+			gb.sm:trigger_message("stormvermin_units_dead")
+		end
+	)
+end 	
+
+gb:message_on_all_messages_received("mission_complete", "boss_dead", "stormvermin_units_dead");
+ga_player_01:force_victory_on_message("mission_complete", 10000); 

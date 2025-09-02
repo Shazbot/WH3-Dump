@@ -617,7 +617,7 @@ prologue_intervention_income:add_trigger_condition(
 
 prologue_intervention_income:set_should_prevent_saving_game()
 prologue_intervention_income:set_should_lock_ui(true)
-prologue_intervention_income:set_wait_for_fullscreen_panel_dismissed(false)
+prologue_intervention_income:set_wait_for_fullscreen_panel_dismissed(true)
 
 function prologue_income_intervention()
 
@@ -4545,6 +4545,7 @@ function prologue_units_panel_intervention()
 			core:show_fullscreen_highlight_around_components(5, false, false, uic_main_units_panel)
 
 			cm:steal_user_input(false);
+			allow_hotkeys(false)
 
 			out("STARTING AN ACTION 2 IN TOUR 2") 
 			local text_pointer_test_units_panel = text_pointer:new_from_component(
@@ -5377,6 +5378,8 @@ prologue_intervention_diplomacy:add_trigger_condition(
 );
 prologue_intervention_diplomacy:set_should_prevent_saving_game()
 prologue_intervention_diplomacy:set_must_trigger(true)
+prologue_intervention_diplomacy:set_should_lock_ui()
+prologue_intervention_diplomacy:set_wait_for_fullscreen_panel_dismissed(true)
 
 function prologue_diplomacy_intervention()
 

@@ -19,23 +19,66 @@ MINOR_CULT_LIST = {
 	{key = "mc_grail_knight_grave", cult = nil},
 	{key = "mc_assassins", cult = nil},
 	{key = "mc_cult_of_possessed", cult = nil},
+	-- BATCH 2
+	{key = "mc_carnival_of_chaos", cult = nil},
+	{key = "mc_warpstone_meteor", cult = nil},
+	{key = "mc_dwarf_builders", cult = nil},
+	{key = "mc_forge_of_hashut", cult = nil},
+	{key = "mc_ogre_mercs", cult = nil},
+	{key = "mc_unearthed_tomb", cult = nil},
+	{key = "mc_spawning_pool", cult = nil},
+	{key = "mc_crimson_plague", cult = nil, shared_state_key = "endgame_minor_cult_crimson_plague"},
+	{key = "mc_sartosan_vault", cult = nil},
+	{key = "mc_cathayan_caravan", cult = nil},
+	{key = "mc_peg_street_pawnshop", cult = nil},
+	{key = "mc_purple_hand", cult = nil},
+	{key = "mc_underworld_sea", cult = nil},
+	{key = "mc_doomsphere", cult = nil, shared_state_key = "endgame_minor_cult_doomsphere"},
+	{key = "mc_dark_gift", cult = nil},
+	{key = "mc_chaos_portal", cult = nil},
+	{key = "mc_crimson_skull", cult = nil, shared_state_key = "endgame_minor_cult_crimson_skull"},
+	{key = "mc_cult_of_pleasure", cult = nil},
+	{key = "mc_the_cabal", cult = nil, shared_state_key = "endgame_minor_cult_cabal", disable_in_MP = true},
+	{key = "mc_elven_enclave", cult = nil}
+};
+local status_to_string = {
+	[-1] = "COMPLETED",
+	[0] = "NOT_STARTED",
+	[1] = "STARTED",
+	[2] = "EVENTS_ONLY"
 };
 
-local MINOR_CULT_REGIONS = {};
+MINOR_CULT_REGIONS = {};
+local minor_cult_faction_key = "wh3_main_rogue_minor_cults";
 local spawn_cult_per_turn_chance = 10;
-local spawn_cult_event_per_turn_chance = 20;
-local quicker_event_triggers = false;
 local cult_last_turn = false;
-local cult_debug_output = false;
+local cult_debug_output = true;
 
 function add_minor_cults_listeners()
 	out("#### Adding Minor Cults Listeners ####");
 	for i = 1, #MINOR_CULT_LIST do
 		out_mc("\tMinor Cult "..i.." : "..MINOR_CULT_LIST[i].key);
 		MINOR_CULT_LIST[i].cult.key = MINOR_CULT_LIST[i].key;
+
+		if MINOR_CULT_LIST[i].shared_state_key ~= nil then
+			local should_use = cm:model():shared_states_manager():get_state_as_bool_value(MINOR_CULT_LIST[i].shared_state_key);
+
+			if should_use == false then
+				MINOR_CULT_LIST[i].cult.saved_data.status = -1;
+				out_mc("\t\tFrontend Setting Required: "..MINOR_CULT_LIST[i].shared_state_key.."  [Disabled]");
+			else
+				out_mc("\t\tFrontend Setting Required: "..MINOR_CULT_LIST[i].shared_state_key.."  [Enabled]");
+			end
+		end
+		if MINOR_CULT_LIST[i].disable_in_MP ~= nil and cm:is_multiplayer() then
+			if MINOR_CULT_LIST[i].disable_in_MP == true then
+				MINOR_CULT_LIST[i].cult.saved_data.status = -1;
+				out_mc("\t\tDisabled in Multiplayer");
+			end
+		end
 	end
 
-	local minor_cult = cm:model():world():faction_by_key("wh3_main_rogue_minor_cults");
+	local minor_cult = cm:model():world():faction_by_key(minor_cult_faction_key);
 
 	if minor_cult:is_null_interface() == false then -- If the faction isn't in the startpos it's likely an old save and we can't use the feature
 		cm:force_diplomacy("faction:wh3_main_rogue_minor_cults", "all", "all", false, false, true);
@@ -47,44 +90,58 @@ function add_minor_cults_listeners()
 			cm:foreign_slot_set_reveal_to_faction(region:owning_faction(), cult);
 		end
 		
+		for i = 1, #MINOR_CULT_LIST do
+			if MINOR_CULT_LIST[i].cult.saved_data.status >= 0 then
+				if MINOR_CULT_LIST[i].cult.custom_listeners ~= nil then
+					MINOR_CULT_LIST[i].cult:custom_listeners();
+				end
+			end
+		end
+		
 		-- Each turn we get all non-triggered minor cults into a table, shuffle the table, iterate through and trigger the first valid one
+		-- We do this on FactionBeginTurnPhaseNormal for each player each round because the buildings have many scripted effects which trigger
+		-- on events like RegionTurnStart, meaning spawning too early can allow the effects to trigger on the same turn we create the minor cult (bad)
+		-- Hence we choose the latest event possible which is TurnPhaseNormal to let all other events go first before any spawning
+		-- This is MP safe because minor cults can only spawn in the players (whose turn it is) regions, meaning we can never be in a state where
+		-- a minor cult has spawned in a players regions whose turn has not yet started fully
 		core:add_listener(
-			"MinorCults_WorldStartRound",
-			"WorldStartRound",
-			true,
+			"MinorCults_FactionBeginTurnPhaseNormal",
+			"FactionBeginTurnPhaseNormal",
+			function(context)
+				return context:faction():is_human() and context:faction():is_factions_turn();
+			end,
 			function(context)
 				local turn_number = cm:turn_number();
 				local cult_created_this_turn = false;
 				local event_triggered_this_turn = false;
-				local skip_event_turn = true;
 
-				if (cult_last_turn == false) or quicker_event_triggers == true then -- This avoid any chance of spawning/events one turn after another
-					out_mc("MINOR CULTS - WorldStartRound - "..turn_number);
+				if cult_last_turn == false then -- This avoid any chance of spawning/events one turn after another
+					out_mc("MINOR CULTS - TurnStart - "..turn_number);
 
 					if cm:model():random_percent(spawn_cult_per_turn_chance) then
 						cm:shuffle_table(MINOR_CULT_LIST);
 
 						for i = 1, #MINOR_CULT_LIST do
-							if MINOR_CULT_LIST[i].cult.saved_data.active == false then
+							local cult_status = MINOR_CULT_LIST[i].cult.saved_data.status;
+							out_mc(MINOR_CULT_LIST[i].key.." - STATUS - "..status_to_string[cult_status].." ("..tostring(cult_status)..")");
+
+							if cult_status == 0 then
 								local region_key = MINOR_CULT_LIST[i].cult:is_valid(MINOR_CULT_REGIONS);
 
 								if region_key ~= nil then
-									local log = spawn_minor_cult(region_key, i);
-
-									if MINOR_CULT_LIST[i].cult.event_data ~= nil then
-										MINOR_CULT_LIST[i].cult.saved_data.event_cooldown = MINOR_CULT_LIST[i].cult.event_data.event_initial_delay;
-									end
+									local spawned, log = spawn_minor_cult(region_key, i);
 									
-									MINOR_CULT_REGIONS[region_key] = MINOR_CULT_LIST[i].key;
-									cult_created_this_turn = true;
-									cult_last_turn = true;
-									out_mc("\t"..MINOR_CULT_LIST[i].key .. " - VALID - "..log);
-									break;
+									if spawned == true then
+										cult_created_this_turn = true;
+										cult_last_turn = true;
+										out_mc("\t"..MINOR_CULT_LIST[i].key .. " - VALID - "..log);
+										break;
+									else
+										out_mc("\t"..MINOR_CULT_LIST[i].key .. " - FAILED - "..log);
+									end
 								else
 									out_mc("\t"..MINOR_CULT_LIST[i].key .. " - INVALID");
 								end
-							else
-								out_mc("\t"..MINOR_CULT_LIST[i].key .. " - Already Active");
 							end
 						end
 					else
@@ -94,19 +151,15 @@ function add_minor_cults_listeners()
 					out_mc("\tFailed Cult Spawned Last Turn");
 					cult_last_turn = false;
 				end
-					
-				if cm:model():random_percent(spawn_cult_event_per_turn_chance) then
-					skip_event_turn = false;
-				else
-					out_mc("\tFailed Spawn Cult Event Chance ("..spawn_cult_event_per_turn_chance.."%)");
-				end
 
 				cm:shuffle_table(MINOR_CULT_LIST);
 
 				for i = 1, #MINOR_CULT_LIST do
 					out_mc("MINOR CULT - Event - "..MINOR_CULT_LIST[i].key);
-					out_mc("\tCult Active - "..tostring(MINOR_CULT_LIST[i].cult.saved_data.active));
-					if MINOR_CULT_LIST[i].cult.saved_data.active == true then
+					local cult_status = MINOR_CULT_LIST[i].cult.saved_data.status;
+					out_mc("\tSTATUS - "..status_to_string[cult_status].." ("..tostring(cult_status)..")");
+					
+					if MINOR_CULT_LIST[i].cult.saved_data.status > 0 then
 						if MINOR_CULT_LIST[i].cult.event_data ~= nil then
 							out_mc("\tEvent Limit - "..MINOR_CULT_LIST[i].cult.saved_data.event_triggers.."/"..MINOR_CULT_LIST[i].cult.event_data.event_limit);
 
@@ -123,90 +176,24 @@ function add_minor_cults_listeners()
 										local region = cm:model():world():region_manager():region_by_key(MINOR_CULT_LIST[i].cult.saved_data.region_key);
 
 										if region:is_null_interface() == false then
-											local region_cqi = region:cqi();
-											local faction = region:owning_faction();
-											local faction_cqi = faction:command_queue_index();
+											if event_triggered_this_turn == false or MINOR_CULT_LIST[i].cult.event_data.force_trigger then
+												local faction = region:owning_faction();
 
-											if MINOR_CULT_LIST[i].key == "mc_dwarf_miners" and event_triggered_this_turn == false and skip_event_turn == false then
-												-- Dwarf Mining Company
-												cm:trigger_dilemma_with_targets(faction_cqi, "wh3_main_minor_cult_earthquake", 0, 0, 0, 0, region_cqi, 0);
-												triggered = true;
-												
-											elseif MINOR_CULT_LIST[i].key == "mc_cult_of_haendryk" and event_triggered_this_turn == false and skip_event_turn == false then
-												-- Cult of Haendryk
-												if faction:net_income() >= 500 then
-													-- We're going to ask for half the players gross income over 11 turns as payment
-													-- The loan amount given will be 10 turns worth of this rounded up
-													local loan_turn_term = 11;
-													local loan_turn_worth = 10;
-													local loan_round_to_nearest = 100;
-
-													local background_income = 3000;
-													local trade_value = faction:trade_value();
-													local real_income = faction:income() - trade_value - background_income;
-													out_mc("income - "..faction:income());
-													out_mc("real_income - "..real_income);
-
-													local loan_amount = loan_round_to_nearest * math.ceil((real_income * loan_turn_worth) / loan_round_to_nearest);
-													out_mc("loan_amount - "..loan_amount);
-
-													if loan_amount < 4000 then
-														loan_amount = 4000;
-													end
-
-													-- CUSTOM DILEMMA
-													local dilemma_builder = cm:create_dilemma_builder("wh3_main_minor_cult_loan");
-													local payload_builder = cm:create_payload();
-
-													local loan_effect_bundle = cm:create_new_custom_effect_bundle("wh3_main_minor_cult_loan");
-													loan_effect_bundle:add_effect("wh_main_effect_economy_gdp_mod_all", "faction_to_region_own", -100);
-													loan_effect_bundle:add_effect("wh2_main_effect_agent_action_passive_boost_income_effect_negative", "faction_to_region_own", -1000);
-													loan_effect_bundle:add_effect("wh_main_effect_economy_trade_tariff_mod", "faction_to_faction_own", -100);
-													loan_effect_bundle:set_duration(loan_turn_term);
-
-													payload_builder:treasury_adjustment(loan_amount);
-													payload_builder:effect_bundle_to_faction(loan_effect_bundle);
-													dilemma_builder:add_choice_payload("FIRST", payload_builder);
-													payload_builder:clear();
-
-													payload_builder:text_display("dummy_do_nothing");
-													dilemma_builder:add_choice_payload("SECOND", payload_builder);
-													payload_builder:clear();
-
-													cm:launch_custom_dilemma_from_builder(dilemma_builder, faction);
-													triggered = true;
+												if MINOR_CULT_LIST[i].cult.custom_event ~= nil then
+													triggered = MINOR_CULT_LIST[i].cult:custom_event(faction, region, minor_cult);
+													out("\tTriggering custom event - Triggered: "..tostring(triggered));
+												else
+													out_mc("\tEvent data exists but no custom_event declared");
 												end
-
-											elseif MINOR_CULT_LIST[i].key == "mc_cult_of_yellow_fang" then
-												-- Cult of the Yellow Fang
-												local skaven_corruption = cm:get_corruption_value_in_region(region, "wh3_main_corruption_skaven");
-
-												if skaven_corruption >= 100 then
-													cm:trigger_incident_with_targets(faction_cqi, "wh3_main_minor_cult_skaven", 0, 0, 0, 0, region_cqi, 0);
-													-- Remove the Cult after this event
-													local cult_cqi = cm:model():world():faction_by_key("wh3_main_rogue_minor_cults"):command_queue_index();
-													cm:remove_faction_foreign_slots_from_region(cult_cqi, region_cqi);
-													triggered = true;
-												end
-
-											elseif MINOR_CULT_LIST[i].key == "mc_cult_of_exquisite_cadaver" and event_triggered_this_turn == false and skip_event_turn == false then
-												-- Cult of the Exquisite Cadaver
-												cm:trigger_incident_with_targets(faction_cqi, "wh3_main_minor_cult_wine", 0, 0, 0, 0, region_cqi, 0);
-												triggered = true;
-
-											elseif MINOR_CULT_LIST[i].key == "mc_tilean_traders" and event_triggered_this_turn == false and skip_event_turn == false then
-												-- Tilean Trading Company
-												cm:trigger_dilemma_with_targets(faction_cqi, "wh3_main_minor_cult_settlement_sale", 0, 0, 0, 0, region_cqi, 0);
-												triggered = true;
 											end
-
+											
 											if triggered == true then
 												event_triggered_this_turn = true;
 												MINOR_CULT_LIST[i].cult.saved_data.event_cooldown = MINOR_CULT_LIST[i].cult.event_data.event_cooldown;
 												MINOR_CULT_LIST[i].cult.saved_data.event_triggers = MINOR_CULT_LIST[i].cult.saved_data.event_triggers + 1;
 											end
 										else
-											out_mc("\tRegion was null interface?");
+											out_mc("\tRegion was null interface");
 										end
 									end
 								end
@@ -235,19 +222,9 @@ function add_minor_cults_listeners()
 
 					for i = 1, #MINOR_CULT_LIST do
 						if MINOR_CULT_LIST[i].key == cult_key then
-
-							if cult_key == "mc_black_ark" then
-								local char_list = remover:character_list();
-
-								for j = 0, char_list:num_items() - 1 do
-									local character = char_list:item_at(j);
-									
-									if character:has_region() and character:region():name() == region_key then
-										cm:add_agent_experience(cm:char_lookup_str(character), 5000, false);
-									end
-								end
-							elseif cult_key == "mc_cult_of_myrmidia" then
-								cm:trigger_incident_with_targets(remover:command_queue_index(), "wh3_main_minor_cult_myrmidia", 0, 0, 0, 0, region:cqi(), 0);
+							-- If there is a removal event, trigger it
+							if MINOR_CULT_LIST[i].cult.removal_event ~= nil then
+								MINOR_CULT_LIST[i].cult:removal_event(remover, region);
 							end
 							
 							if MINOR_CULT_LIST[i].cult.effect_bundle ~= nil then
@@ -256,37 +233,8 @@ function add_minor_cults_listeners()
 							if MINOR_CULT_LIST[i].cult.event_data ~= nil then
 								MINOR_CULT_LIST[i].cult.saved_data.event_triggers = MINOR_CULT_LIST[i].cult.event_data.event_limit;
 							end
-							break;
-						end
-					end
-				end
-			end,
-			true
-		);
-
-		core:add_listener(
-			"MinorCults_DilemmaChoiceMadeEvent",
-			"DilemmaChoiceMadeEvent",
-			true,
-			function(context)
-				if context:dilemma() == "wh3_main_minor_cult_settlement_sale" then
-					for i = 1, #MINOR_CULT_LIST do
-						if MINOR_CULT_LIST[i].key == "mc_tilean_traders" then
-							if context:choice() == 0 then
-								-- Transfer region to Tilea
-								cm:transfer_region_to_faction(MINOR_CULT_LIST[i].cult.saved_data.region_key, "wh_main_teb_tilea")
-							end
-							break;
-						end
-					end
-				elseif context:dilemma() == "wh3_main_minor_cult_earthquake" then
-					for i = 1, #MINOR_CULT_LIST do
-						if MINOR_CULT_LIST[i].key == "mc_dwarf_miners" then
-							if context:choice() == 1 then
-								-- Remove Dwarfs
-								local region = cm:get_region(MINOR_CULT_LIST[i].cult.saved_data.region_key);
-								local faction = cm:model():world():faction_by_key(MINOR_CULT_LIST[i].cult.faction_key);
-								cm:remove_faction_foreign_slots_from_region(faction:command_queue_index(), region:cqi());
+							if MINOR_CULT_LIST[i].cult.complete_on_removal == true then
+								MINOR_CULT_LIST[i].cult.saved_data.status = -1;
 							end
 							break;
 						end
@@ -303,49 +251,27 @@ function add_minor_cults_listeners()
 			function(context)
 				local character = context:character();
 
-				if character:has_ancillary("wh3_main_anc_enchanted_item_dreamwine") == false then
-					-- Start trying to remove the trait
-					if character:has_trait("wh3_trait_dreamwine") then
-						if cm:model():random_percent(10) then
-							cm:force_remove_trait("character_cqi:"..character:command_queue_index(),"wh3_trait_dreamwine");
-						end
-					end
-				else
-					-- Give the trait when wine is equipped
-					if cm:model():random_percent(5) then
-						campaign_traits:give_trait(character, "wh3_trait_dreamwine", 1, 100);
-					end
-				end
-
 				if character:has_region() == true then
 					local region = character:region();
 					local fsm = region:foreign_slot_manager_for_faction("wh3_main_rogue_minor_cults");
 
 					if fsm:is_null_interface() == false then
-						local chance = 5;
-						
-						if character:in_settlement() then
-							chance = 20;
-						end
+						-- A character is in a minor cult region, find the cult associated with that region, query if it has a character_in_region function
+						local region_key = region:name();
 
-						if cm:model():random_percent(chance) then
-							local slot_list = fsm:slots();
-							
-							for i = 0, slot_list:num_items() - 1 do
-								local slot = slot_list:item_at(i);
+						if MINOR_CULT_REGIONS[region_key] ~= nil then
+							local cult_key = MINOR_CULT_REGIONS[region_key];
 
-								if slot:is_null_interface() == false and slot:has_building() == true then
-									if slot:building() == "wh3_main_minor_cult_grail_knight_grave_1" then
-										if region:public_order() >= 75 then
-											if character:faction():subculture() ~= "wh_main_sc_brt_bretonnia" then
-												campaign_traits:give_trait(character, "wh3_trait_blessing_of_the_lady", 1, 100);
-											end
+							for i = 1, #MINOR_CULT_LIST do
+								if MINOR_CULT_LIST[i].key == cult_key then
+									if MINOR_CULT_LIST[i].cult.saved_data.status == 1 then
+										-- If there is a character event, trigger it
+										if MINOR_CULT_LIST[i].cult.character_in_region ~= nil then
+											local slot_list = fsm:slots();
+											local triggered = MINOR_CULT_LIST[i].cult:character_in_region(character, region, slot_list);
 										end
-										break;
-									elseif slot:building() == "wh3_main_minor_cult_assassins_hideout_1" then
-										campaign_traits:give_trait(character, "wh3_trait_assassins_training", 1, 100);
-										break;
 									end
+									break;
 								end
 							end
 						end
@@ -363,13 +289,17 @@ function add_minor_cults_listeners()
 				local region = context:region();
 				local region_key = region:name();
 				
-				for i = 1, #MINOR_CULT_LIST do
-					if MINOR_CULT_LIST[i].cult.saved_data.active == true then
+				if MINOR_CULT_REGIONS[region_key] ~= nil then
+					for i = 1, #MINOR_CULT_LIST do
 						if MINOR_CULT_LIST[i].cult.saved_data.region_key == region_key then
-							local faction = cm:model():world():faction_by_key(MINOR_CULT_LIST[i].cult.faction_key);
+							local faction = cm:model():world():faction_by_key(minor_cult_faction_key);
 							cm:remove_faction_foreign_slots_from_region(faction:command_queue_index(), region:cqi());
+
 							if MINOR_CULT_LIST[i].cult.event_data ~= nil then
 								MINOR_CULT_LIST[i].cult.saved_data.event_triggers = MINOR_CULT_LIST[i].cult.event_data.event_limit;
+							end
+							if MINOR_CULT_LIST[i].cult.effect_bundle ~= nil then
+								cm:remove_effect_bundle_from_region(MINOR_CULT_LIST[i].cult.effect_bundle, region_key);
 							end
 							out_mc("Minor Cult: Removing "..MINOR_CULT_LIST[i].key.." from "..region_key);
 							break;
@@ -379,27 +309,108 @@ function add_minor_cults_listeners()
 			end,
 			true
 		);
+
+		core:add_listener(
+			"MinorCults_ScriptEventHumanFactionTurnStart",
+			"ScriptEventHumanFactionTurnStart",
+			function(context)
+				return cm:is_new_game();
+			end,
+			function(context)
+				local faction = context:faction();
+				local capital = "wh3_main_combi_region_altdorf";
+
+				if faction:has_home_region() == true then
+					capital = faction:home_region():name();
+				end
+
+				--spawn_minor_cult_by_key(capital, "mc_carnival_of_chaos");
+				--spawn_minor_cult_by_key(capital, "mc_warpstone_meteor");
+				--spawn_minor_cult_by_key(capital, "mc_dwarf_builders");
+				--spawn_minor_cult_by_key(capital, "mc_forge_of_hashut");
+				--spawn_minor_cult_by_key(capital, "mc_ogre_mercs");
+				--spawn_minor_cult_by_key("wh3_main_combi_region_khemri", "mc_unearthed_tomb");
+				--spawn_minor_cult_by_key("wh3_main_combi_region_itza", "mc_spawning_pool");
+				--spawn_minor_cult_by_key(capital, "mc_crimson_plague");
+				--spawn_minor_cult_by_key(capital, "mc_sartosan_vault");
+				--spawn_minor_cult_by_key(capital, "mc_cathayan_caravan");
+				--spawn_minor_cult_by_key(capital, "mc_peg_street_pawnshop");
+				--spawn_minor_cult_by_key(capital, "mc_purple_hand");
+				--spawn_minor_cult_by_key("wh3_main_combi_region_naggarond", "mc_underworld_sea");
+				--spawn_minor_cult_by_key(capital, "mc_doomsphere");
+				--spawn_minor_cult_by_key(capital, "mc_dark_gift");
+				--spawn_minor_cult_by_key(capital, "mc_chaos_portal");
+				--spawn_minor_cult_by_key(capital, "mc_crimson_skull");
+				--spawn_minor_cult_by_key(capital, "mc_cult_of_pleasure");
+				--spawn_minor_cult_by_key(capital, "mc_the_cabal");
+				--spawn_minor_cult_by_key(capital, "mc_elven_enclave");
+				
+				--[[
+				spawn_minor_cult_by_key("wh3_main_combi_region_altdorf", "mc_purple_hand");
+				cm:transfer_region_to_faction("wh3_main_combi_region_eilhart", "wh_main_emp_empire");
+				spawn_minor_cult_by_key("wh3_main_combi_region_eilhart", "mc_the_cabal");
+				cm:transfer_region_to_faction("wh3_main_combi_region_grunburg", "wh_main_emp_empire");
+				spawn_minor_cult_by_key("wh3_main_combi_region_grunburg", "mc_crimson_plague");
+				cm:transfer_region_to_faction("wh3_main_combi_region_ubersreik", "wh_main_emp_empire");
+				spawn_minor_cult_by_key("wh3_main_combi_region_ubersreik", "mc_dark_gift");
+				]]--
+			end,
+			false
+		);
 	end
 end
 
 function spawn_minor_cult(region_key, cult_index)
-	local region = cm:get_region(region_key);
-	local mcf = cm:model():world():faction_by_key(MINOR_CULT_LIST[cult_index].cult.faction_key);
-	cm:add_foreign_slot_set_to_region_for_faction(mcf:command_queue_index(), region:cqi(), MINOR_CULT_LIST[cult_index].cult.slot_key);
+	if MINOR_CULT_LIST[cult_index].cult.saved_data.status == 0 then
+		local spawn_log = "";
+		local region = cm:get_region(region_key);
+		local mcf = cm:model():world():faction_by_key(minor_cult_faction_key);
+		cm:add_foreign_slot_set_to_region_for_faction(mcf:command_queue_index(), region:cqi(), MINOR_CULT_LIST[cult_index].cult.slot_key);
 
-	local slot_manager = region:foreign_slot_manager_for_faction(MINOR_CULT_LIST[cult_index].cult.faction_key);
-	cm:foreign_slot_set_reveal_to_faction(region:owning_faction(), slot_manager);
+		local slot_manager = region:foreign_slot_manager_for_faction(minor_cult_faction_key);
+		cm:foreign_slot_set_reveal_to_faction(region:owning_faction(), slot_manager);
 
-	if MINOR_CULT_LIST[cult_index].cult.effect_bundle ~= nil then
-		cm:apply_effect_bundle_to_region(MINOR_CULT_LIST[cult_index].cult.effect_bundle, region_key, 0);
+		if MINOR_CULT_LIST[cult_index].cult.effect_bundle ~= nil then
+			cm:apply_effect_bundle_to_region(MINOR_CULT_LIST[cult_index].cult.effect_bundle, region_key, 0);
+		end
+
+		MINOR_CULT_LIST[cult_index].cult.saved_data.status = 1;
+		MINOR_CULT_LIST[cult_index].cult.saved_data.region_key = region_key;
+		MINOR_CULT_REGIONS[region_key] = MINOR_CULT_LIST[cult_index].key;
+
+		if MINOR_CULT_LIST[cult_index].cult.event_data ~= nil then
+			MINOR_CULT_LIST[cult_index].cult.saved_data.event_cooldown = MINOR_CULT_LIST[cult_index].cult.event_data.event_initial_delay;
+		end
+
+		if MINOR_CULT_LIST[cult_index].cult.creation_event ~= nil then
+			local turn_number = cm:turn_number();
+			local triggered = MINOR_CULT_LIST[cult_index].cult:creation_event(region_key, turn_number);
+
+			if triggered == true then
+				spawn_log = spawn_log.." - Creation event = Triggered";
+			else
+				spawn_log = spawn_log.." - Creation event = Not Triggered";
+			end
+		end
+		
+		local faction_cqi = region:owning_faction():command_queue_index();
+		cm:trigger_incident_with_targets(faction_cqi, MINOR_CULT_LIST[cult_index].cult.intro_incident_key, 0, 0, 0, 0, region:cqi(), 0);
+		return true, MINOR_CULT_LIST[cult_index].cult.key.." - "..MINOR_CULT_LIST[cult_index].cult.slot_key.." - "..region_key..spawn_log;
+	else
+		local spawn_log = "spawn_minor_cult failed due to status - "..tostring(MINOR_CULT_LIST[cult_index].cult.saved_data.status);
+		out_mc(spawn_log);
+		return false, spawn_log;
 	end
+	return false, "ERROR";
+end
 
-	MINOR_CULT_LIST[cult_index].cult.saved_data.active = true;
-	MINOR_CULT_LIST[cult_index].cult.saved_data.region_key = region_key;
-	
-	local faction_cqi = region:owning_faction():command_queue_index();
-	cm:trigger_incident_with_targets(faction_cqi, MINOR_CULT_LIST[cult_index].cult.intro_incident_key, 0, 0, 0, 0, region:cqi(), 0);
-	return MINOR_CULT_LIST[cult_index].cult.key.." - "..MINOR_CULT_LIST[cult_index].cult.slot_key.." - "..region_key;
+function spawn_minor_cult_by_key(region_key, cult_key)
+	for i = 1, #MINOR_CULT_LIST do
+		if MINOR_CULT_LIST[i].key == cult_key then
+			spawn_minor_cult(region_key, i);
+			break;
+		end
+	end
 end
 
 function debug_minor_cult_events()
@@ -429,7 +440,7 @@ function debug_create_cult(key)
 			MINOR_CULT_LIST[i].cult.valid_from_turn = 0;
 			MINOR_CULT_LIST[i].cult.chance_if_valid = 100;
 
-			if MINOR_CULT_LIST[i].cult.saved_data.active == false then
+			if MINOR_CULT_LIST[i].cult.saved_data.status == 0 then
 				local region_key = MINOR_CULT_LIST[i].cult:is_valid(MINOR_CULT_REGIONS);
 
 				if region_key ~= nil then
@@ -442,7 +453,7 @@ function debug_create_cult(key)
 					out_mc("\t"..MINOR_CULT_LIST[i].key .. " - INVALID");
 				end
 			else
-				out_mc("\t"..MINOR_CULT_LIST[i].key .. " - Already Active");
+				out_mc("\t"..MINOR_CULT_LIST[i].key .. " - FAILED - Status: "..tostring(MINOR_CULT_LIST[i].cult.saved_data.status));
 			end
 
 			MINOR_CULT_LIST[i].cult.valid_from_turn = valid_from_turn;
@@ -450,12 +461,6 @@ function debug_create_cult(key)
 			break;
 		end
 	end
-end
-
-function debug_max_cult_chance()
-	spawn_cult_per_turn_chance = 100;
-	spawn_cult_event_per_turn_chance = 100;
-	quicker_event_triggers = true;
 end
 
 function out_mc(msg)
@@ -480,6 +485,18 @@ cm:add_loading_game_callback(
 
 		for i = 1, #MINOR_CULT_LIST do
 			MINOR_CULT_LIST[i].cult.saved_data = cm:load_named_value("MinorCult_"..MINOR_CULT_LIST[i].key, MINOR_CULT_LIST[i].cult.saved_data, context);
+
+			-- PATCH 6.3 POST-LOAD FIXUP
+			if MINOR_CULT_LIST[i].cult.saved_data.status == nil then
+				out("Minor Cult "..i.." - "..MINOR_CULT_LIST[i].key.." - Post-Load Fixup - Patch 6.3")
+				if MINOR_CULT_LIST[i].cult.saved_data.active ~= nil then
+					if MINOR_CULT_LIST[i].cult.saved_data.active == true then
+						MINOR_CULT_LIST[i].cult.saved_data.status = 1;
+					else
+						MINOR_CULT_LIST[i].cult.saved_data.status = 0;
+					end
+				end
+			end
 		end
 	end
 );

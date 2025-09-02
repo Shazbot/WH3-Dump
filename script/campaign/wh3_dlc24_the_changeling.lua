@@ -1787,7 +1787,7 @@ function the_changeling_features:initialise()
 			self:change_composite_scene_in_region(foreign_slots:item_at(i):region(), true)
 		end
 	else
-		self.schemes.schemes_complete = cm:get_saved_value("the_changeling_schemes_complete")
+		self.schemes.schemes_complete = cm:get_saved_value("the_changeling_schemes_complete") or {}
 		self.schemes.grand_scheme_objectives = cm:get_saved_value("the_changeling_schemes_grand_scheme_objectives")
 		self.formless_horror.unlocked_agent_subtypes = cm:get_saved_value("the_changeling_agent_subtypes_unlocked") or {}
 	end
@@ -1837,7 +1837,8 @@ function the_changeling_features:initialise()
 			for cult_index = 0, cults:num_items() - 1 do
 				local cult = cults:item_at(cult_index)
 				local region = cult:region()
-
+				local owning_faction_region_cqi = region:owning_faction():command_queue_index()
+				cm:add_trespass_permission(faction:command_queue_index(), owning_faction_region_cqi)
 				-- reveal cult if changeling has no armies
 				if has_no_armies and not region:is_abandoned() then
 					cm:foreign_slot_set_reveal_to_faction(region:owning_faction(), cult)
@@ -2123,7 +2124,8 @@ function the_changeling_features:initialise()
 		end,
 		function(context)
 			local region = context:region()
-
+			local owning_faction_region_cqi = region:owning_faction():command_queue_index()
+			cm:add_trespass_permission(faction:command_queue_index(), owning_faction_region_cqi)
 			self:change_composite_scene_in_region(region, true)
 			self:check_cult_creation_scheme(region)
 			local trickster_cultist = cm:get_saved_value("the_changeling_cultist_agent_action_key")
@@ -2142,13 +2144,20 @@ function the_changeling_features:initialise()
 
 	-- Add trespass immunity to The Changeling's characters
 	core:add_listener(
-		"the_changeling_trespass_immunity",
-		"CharacterCreated",
+	"the_changeling_trespass_immunity",
+	"CharacterRecruited",
 		function(context)
+			local character = context:character()
 			return context:character():faction():name() == self.faction_key
 		end,
 		function(context)
-			cm:set_character_excluded_from_trespassing(context:character(), true)
+			local character = context:character()
+			faction = cm:get_faction(self.faction_key) 
+			local character_list = faction:character_list()
+			for i = 0,  character_list:num_items() - 1 do
+				local character = character_list:item_at(i)
+				cm:set_character_excluded_from_trespassing(character, true)	
+			end
 		end,
 		true
 	)
@@ -4023,3 +4032,20 @@ function the_changeling_features:grand_scheme_ulthuan()
 	-- Move the camera to the middle of Ulthuan
 	self:start_camera_cutscene("wh3_main_combi_region_shrine_of_asuryan", "wh3_dlc24_story_panel_the_changeling_ulthuan_grand")
 end
+
+	core:add_listener(
+		"Changeling_Confederation_add_trespass",
+		"FactionJoinsConfederation",
+		function(context)
+			return context:confederation():name() == the_changeling_features.faction_key or context:faction():name() == the_changeling_features.faction_key
+		end,
+		function(context)
+			local confederation = context:confederation()
+			local character_list = confederation:character_list()
+			for i = 0,  character_list:num_items() - 1 do
+				local character = character_list:item_at(i)
+				cm:set_character_excluded_from_trespassing(character, true)				
+			end
+		end,
+		true
+	)

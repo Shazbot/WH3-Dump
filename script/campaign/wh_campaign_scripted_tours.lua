@@ -1005,7 +1005,8 @@ function start_skill_point_task()
 	local uic_table = uic_character_details_panel:InterfaceFunction("GetAllSkillComponents");
 	local available_count = 0;
 	local available_skills_cards = {};
-	
+	local already_selected_skill = false;
+
 	for i = 1, #uic_table do
 		-- For each component name, find the corresponding component 
 		local component = find_uicomponent(uic_character_details_panel, uic_table[i]);
@@ -1016,22 +1017,30 @@ function start_skill_point_task()
 			if card:CurrentState() == "available" then
 				pulse_uicomponent(component, true, 3, true);
 				table.insert(available_skills_cards, card);
+			elseif card:CurrentState() == "maxed" or card:CurrentState() == "maxed_hover" then
+				already_selected_skill = true;
+				break;
 			end
 		end
 	end;
 	
 	-- if there are no available skill points, then complete immediately
-	if #available_skills_cards == 0 then
+	if #available_skills_cards == 0 or already_selected_skill then
 		skill_point_task_complete();
 		return;
 	end;
 	
 	cm:set_objective("wh2.camp.spend_skill_point.001");
 	
+	local skill_point_applied = false;
+
 	core:add_listener(
 		"skill_point_task",
 		"ComponentLClickUp", 
 		function(context)
+			if skill_point_applied then
+				return false;
+			end
 			local uic = UIComponent(context.component);
 			output_uicomponent(uic)
 			for i = 1, #available_skills_cards do
@@ -1042,9 +1051,23 @@ function start_skill_point_task()
 		end,
 		function(context)
 			skill_point_task_complete(true);
+			skill_point_applied = true;
 		end,
 		false
 	);
+
+	core:add_listener(
+		"skill_entry_state_change",
+		"ContextTriggerEvent",
+		function(context)
+			return skill_point_applied == false and context.string == "skill_point_used";
+		end,
+		function(context)
+			skill_point_task_complete(true);
+			skill_point_applied = true;
+		end,
+		true
+	)
 end
 
 
@@ -3871,8 +3894,10 @@ in_chd_hellforge_armoury_tour:add_trigger_condition(
 	"PanelOpenedCampaign",
 	function(context)
 		if context.string == "hellforge_panel_main" then
+			local chaos_dwarfs_forge_back_button = find_uicomponent("hellforge_panel_main", "button_close_holder", "button_ok");
 			local armoury_tab = find_uicomponent(core:get_ui_root(), "hellforge_panel_main", "tab_unit_caps")
 			if armoury_tab and armoury_tab:Visible() then
+				chaos_dwarfs_forge_back_button:SetState("inactive")	
 				return true
 			end
 		end
@@ -4944,6 +4969,7 @@ in_emp_gunnery_school_tour:add_trigger_condition(
 	function(context)
 		local panel = find_uicomponent(core:get_ui_root(), "dlc25_don_main")
 		if panel and panel:Visible() then
+			cm:steal_user_input(true)
 			return true
 		end
 	end
@@ -5721,18 +5747,18 @@ scripted_kho_wrath_of_khorne_tour = {
 in_ogr_meat_transfer_tour = intervention:new(
 	"in_ogr_meat_transfer_tour",			 						-- string name
 	0, 																	-- cost
-	function() 
+	function()
 		cm:callback(function()
-			if find_uicomponent(core:get_ui_root(), "units_panel", "main_units_panel", "meat_transfer_docker", "dlc26_ogr_meat_transfer"):VisibleFromRoot() then
-
-			out("#### "..scripted_ogr_meat_transfer_tour.id.." ####")
-			
-			ui_scripted_tour:construct_tour(scripted_ogr_meat_transfer_tour, in_ogr_meat_transfer_tour)
-			else 
+			local uic = find_uicomponent(core:get_ui_root(), "units_panel", "main_units_panel", "meat_transfer_docker", "dlc26_ogr_meat_transfer")
+			if uic and uic:Visible() then
+				out("#### "..scripted_ogr_meat_transfer_tour.id.." ####")
+				ui_scripted_tour:construct_tour(scripted_ogr_meat_transfer_tour, in_ogr_meat_transfer_tour)
+				in_ogr_meat_transfer_tour:set_should_lock_ui()
+				cm:steal_escape_key(true) 
+			elseif not uic or not uic:Visible() then
 				in_ogr_meat_transfer_tour:cancel()
-
 			end
-		end,	0.2)															-- trigger callback
+		end,	0.1)					
 	end,					
 	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
 )
@@ -5913,11 +5939,17 @@ in_ogr_contracts_tour = intervention:new(
 	0, 																	-- cost
 	function() 
 		cm:callback(function()
+			if find_uicomponent(core:get_ui_root(), "hud_campaign", "faction_buttons_docker", "button_group_management", "button_ogre_war_contracts"):VisibleFromRoot() then
+			cm:steal_user_input(true)
 			out("#### "..scripted_ogr_contracts_tour.id.." ####")
-			
+			ui_scripted_tour:toggle_shortcuts(false)
 			ui_scripted_tour:construct_tour(scripted_ogr_contracts_tour, in_ogr_contracts_tour)
-		end,
-		0.2)															-- trigger callback
+
+			else 
+				in_ogr_contracts_tour:cancel()
+
+			end
+		end, 0.1)															-- trigger callback
 	end,					
 	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
 )
@@ -5926,7 +5958,11 @@ in_ogr_contracts_tour:set_wait_for_fullscreen_panel_dismissed(false)
 in_ogr_contracts_tour:set_should_lock_ui()
 in_ogr_contracts_tour:add_trigger_condition(
 	"ScriptEventCampaignIntroComplete",
-	true
+	function(context)
+		ui_scripted_tour:toggle_shortcuts(false)
+		cm:steal_user_input(true)
+		return true
+	end 
 )
 
 scripted_ogr_contracts_tour = {
@@ -6166,11 +6202,15 @@ in_grn_da_plan_tour = intervention:new(
 	0, 																	-- cost
 	function() 
 		cm:callback(function()
-			out("#### "..scripted_grn_da_plan_tour.id.." ####")
+			if find_uicomponent(core:get_ui_root(), "parent_army_slots"):VisibleFromRoot() then
+
+				out("#### "..scripted_grn_da_plan_tour.id.." ####")
 			
-			ui_scripted_tour:construct_tour(scripted_grn_da_plan_tour, in_grn_da_plan_tour)
-		end,
-		0.2)															-- trigger callback
+				ui_scripted_tour:construct_tour(scripted_grn_da_plan_tour, in_grn_da_plan_tour)
+			else 
+				in_grn_da_plan_tour:cancel()
+			end
+		end, 0.1)															-- trigger callback
 	end,					
 	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
 )
@@ -6178,10 +6218,13 @@ in_grn_da_plan_tour:add_advice_key_precondition("wh3.dlc26.camp.advice.grn.da_pl
 in_grn_da_plan_tour:set_wait_for_fullscreen_panel_dismissed(false)
 in_grn_da_plan_tour:set_should_lock_ui()
 in_grn_da_plan_tour:add_trigger_condition(
-	"CharacterSelected",
+	"PanelOpenedCampaign",
 	function(context)
-		return context:character():character_subtype_key() == "wh3_dlc26_grn_gorbad_ironclaw"
-	end
+		if context.string == "units_panel" then
+			cm:steal_escape_key(true)
+			return true
+		end 
+	end 
 )
 
 scripted_grn_da_plan_tour = {
@@ -6387,7 +6430,12 @@ function ui_scripted_tour:construct_tour(tour, intervention)
 			if tour.advice_string then
 				cm:show_advice(tour.advice_string, true)
 			end
-			
+
+			local chaos_dwarfs_forge_back_button = find_uicomponent("hellforge_panel_main", "button_close_holder", "button_ok");
+			if chaos_dwarfs_forge_back_button and chaos_dwarfs_forge_back_button:Visible() == true then
+				chaos_dwarfs_forge_back_button:SetState("active")	
+			end 
+
 			nt:restore_scripted_tour_controls_priority()
 			intervention:complete()
 		end,

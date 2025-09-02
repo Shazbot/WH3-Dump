@@ -347,9 +347,10 @@ function nurgle_plagues:plague_listeners()
 			local faction = context:faction()
 			local pbu = self.plague_button_unlock	
 			local unlock_info = pbu[faction:name()]
-
 			local pr_changed = context:resource():key()
 			local pr = faction:pooled_resource_manager():resource(self.pr_key)
+			local amount = context:amount()
+			local factor = context:factor():key()
 
 			if pr_changed == self.pr_key then
 				local amount_changed = context:amount()
@@ -358,7 +359,9 @@ function nurgle_plagues:plague_listeners()
 				end
 			end
 			if unlock_info.infections_gained >= self.pr_required_to_unlock then
-				self:toggle_plagues_button(faction, unlock_info, false, true)				
+				if factor ~= "buildings" and amount == 200 then
+					self:toggle_plagues_button(faction, unlock_info, false, true)
+				end 				
 			end
 			common.set_context_value("unlock_plague_button_" .. faction:name(), unlock_info.infections_gained)
 		end,

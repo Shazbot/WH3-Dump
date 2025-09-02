@@ -7,7 +7,7 @@ item_fusing_pairings = {
 	}
 	]]--
 };
-chance_to_fuse_unique_item = 10;
+base_chance_to_fuse_unique_item = 10;
 local fuse_fail_item = "wh3_main_anc_enchanted_item_scrap";
 
 function item_fusing_listener()
@@ -42,7 +42,10 @@ function item_fusing_listener()
 			out("\tNext Uniqueness: "..next_uniqueness);
 
 			if next_uniqueness == "unique" and faction:is_human() == true then
-				if cm:model():random_percent(chance_to_fuse_unique_item) then
+				local fusing_chance = cm:get_factions_bonus_value(faction, "unique_item_fusing_chance");
+				fusing_chance = fusing_chance + base_chance_to_fuse_unique_item;
+				
+				if cm:model():random_percent(fusing_chance) then
 					local rare_item = attempt_drop_rare_item_for_faction(faction);
 					cm:trigger_ancillary_fused_report(faction, rare_item, item1_key, item2_key);
 					out("Fusing Success - "..rare_item);

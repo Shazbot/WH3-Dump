@@ -35,10 +35,12 @@ function end_scripted_tour_prologue (tour, block_saving, release_user_input, rel
 end
 
 function skip_all_scripted_tours()
-	core:trigger_event("ScriptEventSkipAllScriptedTours");
-	core:hide_fullscreen_highlight();
-	cm:steal_user_input(false);
-	out("TRYING TO SKIP!")
+	if not cm:model():shared_states_manager():get_state_as_bool_value("prologue_tutorial_on") then 
+		core:trigger_event("ScriptEventSkipAllScriptedTours");
+		core:hide_fullscreen_highlight();
+		cm:steal_user_input(false);
+		out("TRYING TO SKIP!")
+	end 
 end
 
 ----------------------------
@@ -781,14 +783,14 @@ function PrologueScriptedTourUnitsPanel()
 
 			local uic_button_help = find_uicomponent(core:get_ui_root(), "units_panel", "main_units_panel", "button_info")
 			uic_button_help:SetDisabled(true);
-			
+			allow_hotkeys(false) 
 			local uic_units_panel = find_uicomponent(core:get_ui_root(), "units_panel");
-			
+
 			local tour_units_panel = scripted_tour:new(
 				"test_tour_units_panel",
-				function() uic_button_help:SetDisabled(false); out("FINISHED Units panel tour") core:remove_listener("Cancelling_Units_panel_tour"); end
+				function() uic_button_help:SetDisabled(false); out("FINISHED Units panel tour") core:remove_listener("Cancelling_Units_panel_tour") allow_hotkeys(true) ; end
 			);
-			
+
 			tour_units_panel:add_fullscreen_highlight("main_units_panel");
 			tour_units_panel:set_should_dismiss_advice_on_completion(false);
 			tour_units_panel:set_show_skip_button(false);
@@ -800,6 +802,7 @@ function PrologueScriptedTourUnitsPanel()
 					return context.string == "units_panel" 
 				end,
 				function()
+					allow_hotkeys(true) 
 					skip_all_scripted_tours();
 				end,
 				false
@@ -1723,7 +1726,7 @@ function PrologueScriptedTourDiplomacy()
 		function()
 			completely_lock_input(true)
 			allow_hotkeys(false)
-
+			cm:steal_escape_key(true)
 			local uic_faction_panel
 			local uic_offers_panel
 			local st = scripted_tour:new("st", function() completely_lock_input(false); allow_hotkeys(true) end)

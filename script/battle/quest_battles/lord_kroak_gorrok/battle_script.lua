@@ -204,8 +204,7 @@ ga_enemy_reinforcements_2:release_on_message("reinforce_2_release");
 --kroak orders
 ga_player_reinf_01:reinforce_on_message("kroak_guardians", 10);
 ga_player_reinf_02:reinforce_on_message("kroak", 1);
-ga_player_reinf_01:release_on_message("kroak_guardians_release");
-ga_player_reinf_02:release_on_message("kroak_release");
+ga_player_reinf_02:attack_on_message("kroak_guardians")
 
 
 

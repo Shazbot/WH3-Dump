@@ -1,4 +1,4 @@
-local tomb_king_max_crafted_armies = 25;
+local tomb_king_max_crafted_armies = 30;
 local tomb_king_difficulty_modifiers = {
 	["HUMAN"] = {
 		["easy"] = "wh2_dlc09_tomb_king_difficulty_player_easy",
@@ -22,13 +22,16 @@ local book_rogue_armies = {
 	["wh2_dlc09_rogue_black_creek_raiders"] = true,
 	["wh2_dlc09_rogue_eyes_of_the_jungle"] = true,
 	["wh2_dlc09_rogue_dwellers_of_zardok"] = true,
-	["wh2_dlc09_rogue_pilgrims_of_myrmidia"] = true
+	["wh2_dlc09_rogue_pilgrims_of_myrmidia"] = true,
+	["wh3_main_rogue_shrouded_wanderers_of_undead"] = true
 };
 
 function add_tomb_kings_listeners()
 	out("#### Adding Tomb Kings Listeners ####");
 	-- Tomb King difficulty modifiers
 	setup_tomb_king_difficulty_modifiers();
+	-- Lock confederation rituals towards human players
+	lock_tomb_kings_confederation_for_human_factions()
 
 	-- Mortuary Cult army crafting
 	core:add_listener(
@@ -53,6 +56,8 @@ function add_tomb_kings_listeners()
 	-- Khatep's agent starts with XP
 	if cm:is_new_game() then
 		cm:add_agent_experience("faction:wh2_dlc09_tmb_exiles_of_nehek,forename:1825567976", 3000);
+	-- Disable peace between Lahmian sisterhood and Khalida
+		cm:force_diplomacy("faction:wh2_dlc09_tmb_lybaras", "faction:wh3_main_vmp_lahmian_sisterhood", "peace", false, false, true);
 	end
 end
 
@@ -131,6 +136,23 @@ function setup_tomb_king_difficulty_modifiers()
 				
 				if faction:is_quest_battle_faction() == false and faction:has_effect_bundle(difficulty_effect) == false then
 					cm:apply_effect_bundle(difficulty_effect, faction:name(), 0);
+				end
+			end
+		end
+	end
+end
+
+function lock_tomb_kings_confederation_for_human_factions()
+	local model = cm:model():world()
+	local lock_factions = model:lookup_factions_from_faction_set("anc_set_exclusive_tomb_kings")
+	for _, faction in model_pairs(lock_factions) do
+		if not faction:is_null_interface() and faction:is_human() then
+			for _, secondary_faction in model_pairs(lock_factions) do
+				if not secondary_faction:is_null_interface() and secondary_faction:is_human() then
+					if faction:name() ~= secondary_faction:name() then 
+						cm:lock_ritual(faction, "wh3_main_tmb_confederate_khalida")
+						cm:lock_ritual(faction, "wh3_main_tmb_confederate_khatep")
+					end
 				end
 			end
 		end

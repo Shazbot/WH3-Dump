@@ -18,6 +18,7 @@ function gardens_of_morr:initialise()
 	self:setup_constructed_incident()
 	self:setup_destroyed_incident()
 	self:elspeth_teleported()
+	self:gardens_of_morr_dismante_event()
 end
 
 function gardens_of_morr:setup_panel_unlock_incident()
@@ -51,6 +52,7 @@ function gardens_of_morr:setup_constructed_incident()
 			cm:add_trespass_permission(player_cqi, owner_cqi)
 
 			cm:trigger_incident_with_targets(player_cqi, self.constructed.incident, 0, 0, 0, 0, ritual_region:cqi(), 0)
+			self:count_gardens_of_morr()
 		end,
 		true
 	)
@@ -66,6 +68,7 @@ function gardens_of_morr:setup_destroyed_incident()
 		end,
 		function(context)
 			self:launch_destroyed_incident()
+			self:count_gardens_of_morr()
 		end,
 		true
 	)
@@ -86,6 +89,7 @@ function gardens_of_morr:setup_destroyed_incident()
 		end,
 		function(context)
 			self:launch_destroyed_incident()
+			self:count_gardens_of_morr()
 		end,
 		true
 	)
@@ -166,6 +170,30 @@ function gardens_of_morr:elspeth_teleported()
 	)
 end
 
+function gardens_of_morr:count_gardens_of_morr()
+	local count = 0
+	for _ in pairs(self.current_regions) do count = count + 1 
+		if count > 6 then
+			cm:lock_ritual(self.constructed.ritual)
+		end
+	end 
+end 	
+--  tower_action_buttons > button_destroy
+
+function gardens_of_morr:gardens_of_morr_dismante_event()
+	core:add_listener(
+		"GOMDestroyComponentLClickUp",
+		"ComponentLClickUp",
+		function(context)					
+			return context.string == "button_destroy" and uicomponent_descended_from(UIComponent(context.component), "dlc25_black_towers");
+		end,
+		function(context)
+			self:launch_destroyed_incident()
+			self:count_gardens_of_morr()
+		end,
+		true
+	);
+end 
 
 
 --------------------- SAVE/LOAD ---------------------

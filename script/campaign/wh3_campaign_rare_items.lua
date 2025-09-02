@@ -5,98 +5,130 @@ rare_items = {
 		weight = 5,
 		culture_requirement = nil,
 		culture_restriction = nil,
-		item_restrictions = nil
+		faction_culture_override = nil,
+		item_restrictions = nil,
+		effect_bundle_restriction = nil
 	},
 	{
 		item = "wh3_main_anc_enchanted_item_aldreds_casket",
 		weight = 5,
 		culture_requirement = nil,
 		culture_restriction = nil,
-		item_restrictions = nil
+		faction_culture_override = nil,
+		item_restrictions = nil,
+		effect_bundle_restriction = nil
 	},
 	{
 		item = "wh3_main_anc_enchanted_item_idol_zak_aloooog",
 		weight = 5,
 		culture_requirement = "wh_main_grn_greenskins",
 		culture_restriction = nil,
-		item_restrictions = nil
+		faction_culture_override = nil,
+		item_restrictions = nil,
+		effect_bundle_restriction = nil
 	},
 	{
 		item = "wh3_main_anc_enchanted_item_maads_map",
 		weight = 5,
 		culture_requirement = nil,
 		culture_restriction = nil,
-		item_restrictions = nil
+		faction_culture_override = nil,
+		item_restrictions = nil,
+		effect_bundle_restriction = nil
 	},
 	{
 		item = "wh3_main_anc_weapon_cynatcian",
 		weight = 5,
 		culture_requirement = nil,
 		culture_restriction = nil,
-		item_restrictions = nil
+		faction_culture_override = nil,
+		item_restrictions = nil,
+		effect_bundle_restriction = nil
 	},
 	{
 		item = "wh3_main_anc_weapon_elthraician",
 		weight = 5,
 		culture_requirement = nil,
 		culture_restriction = nil,
-		item_restrictions = nil
+		faction_culture_override = nil,
+		item_restrictions = nil,
+		effect_bundle_restriction = nil
 	},
 	{
 		item = "wh3_main_anc_armour_accursed_armour",
 		weight = 5,
 		culture_requirement = nil,
 		culture_restriction = nil,
-		item_restrictions = nil
+		faction_culture_override = nil,
+		item_restrictions = nil,
+		effect_bundle_restriction = nil
 	},
 	{
 		item = "wh3_main_anc_armour_briarsheath",
 		weight = 5,
 		culture_requirement = nil,
 		culture_restriction = nil,
-		item_restrictions = nil
+		faction_culture_override = nil,
+		item_restrictions = nil,
+		effect_bundle_restriction = nil
 	},
 	{
 		item = "wh3_main_anc_armour_scintillating_shield",
 		weight = 5,
 		culture_requirement = nil,
 		culture_restriction = nil,
-		item_restrictions = nil
+		faction_culture_override = nil,
+		item_restrictions = nil,
+		effect_bundle_restriction = nil
 	},
 	{
 		item = "wh3_main_anc_weapon_wyrmslayer_sword",
 		weight = 5,
 		culture_requirement = nil,
 		culture_restriction = nil,
-		item_restrictions = nil
+		faction_culture_override = nil,
+		item_restrictions = nil,
+		effect_bundle_restriction = nil
 	},
 	{
 		item = "wh3_main_anc_arcane_item_chalice_of_malfleur",
 		weight = 3,
 		culture_requirement = nil,
 		culture_restriction = nil,
-		item_restrictions = nil
+		faction_culture_override = nil,
+		item_restrictions = nil,
+		effect_bundle_restriction = nil
 	},
 	{
 		item = "wh3_main_anc_enchanted_item_book_of_khorne_1",
 		weight = 3,
 		culture_requirement = nil,
 		culture_restriction = "wh3_main_kho_khorne",
-		item_restrictions = {"wh3_main_anc_enchanted_item_book_of_khorne", "wh3_main_anc_enchanted_item_book_of_khorne_k", "wh3_main_anc_enchanted_item_book_of_khorne_1", "wh3_main_anc_enchanted_item_book_of_khorne_1_k"}
+		faction_culture_override = {
+			["wh3_dlc20_chs_valkia"] = false
+		},
+		item_restrictions = {"wh3_main_anc_enchanted_item_book_of_khorne", "wh3_main_anc_enchanted_item_book_of_khorne_k", "wh3_main_anc_enchanted_item_book_of_khorne_1", "wh3_main_anc_enchanted_item_book_of_khorne_1_k"},
+		effect_bundle_restriction = "wh3_main_bundle_book_of_khorne"
 	},
 	{
 		item = "wh3_main_anc_enchanted_item_book_of_khorne_1_k",
 		weight = 3,
 		culture_requirement = "wh3_main_kho_khorne",
 		culture_restriction = nil,
-		item_restrictions = {"wh3_main_anc_enchanted_item_book_of_khorne", "wh3_main_anc_enchanted_item_book_of_khorne_k", "wh3_main_anc_enchanted_item_book_of_khorne_1", "wh3_main_anc_enchanted_item_book_of_khorne_1_k"}
+		faction_culture_override = {
+			["wh3_dlc20_chs_valkia"] = true
+		},
+		item_restrictions = {"wh3_main_anc_enchanted_item_book_of_khorne", "wh3_main_anc_enchanted_item_book_of_khorne_k", "wh3_main_anc_enchanted_item_book_of_khorne_1", "wh3_main_anc_enchanted_item_book_of_khorne_1_k"},
+		effect_bundle_restriction = "wh3_main_bundle_book_of_khorne"
 	},
 	{
 		item = "wh2_main_anc_weapon_the_fellblade",
 		weight = 1,
 		culture_requirement = nil,
 		culture_restriction = nil,
-		item_restrictions = nil
+		faction_culture_override = nil,
+		item_restrictions = nil,
+		effect_bundle_restriction = nil
 	}
 };
 
@@ -138,11 +170,13 @@ function load_rare_items()
 end
 
 function attempt_drop_rare_item_for_faction(faction)
+	local faction_key = faction:name();
 	local possible_items = weighted_list:new();
 	
 	for i = 1, #rare_items do
 		if cm:model():world():ancillary_exists(rare_items[i].item) == false then -- Rares can only exist once
 			local allowed_via_item_restriction = true;
+			local allowed_via_effect_restriction = true;
 
 			if rare_items[i].item_restrictions then
 				for j = 1, #rare_items[i].item_restrictions do
@@ -153,11 +187,30 @@ function attempt_drop_rare_item_for_faction(faction)
 					end
 				end
 			end
+
+			if rare_items[i].effect_bundle_restriction then
+				if faction:has_effect_bundle(rare_items[i].effect_bundle_restriction) == true then
+					-- If this faction has this effect bundle don't drop this item
+					allowed_via_effect_restriction = false;
+				end
+			end
 			
-			if allowed_via_item_restriction == true then
-				if rare_items[i].culture_requirement == nil or faction:culture() == rare_items[i].culture_requirement then
-					if rare_items[i].culture_restriction == nil or faction:culture() ~= rare_items[i].culture_restriction then
+			if allowed_via_item_restriction == true and allowed_via_effect_restriction == true then
+				out(rare_items[i].item.." - ");
+				if rare_items[i].faction_culture_override and rare_items[i].faction_culture_override[faction_key] ~= nil then
+					out("1")
+					-- This faction has an override to either allow or disallow the item regardless of culture settings
+					if rare_items[i].faction_culture_override[faction_key] == true then
 						possible_items:add_item(rare_items[i].item, rare_items[i].weight);
+					end
+				else
+					out("2")
+					-- Standard culture restrictions
+					if rare_items[i].culture_requirement == nil or faction:culture() == rare_items[i].culture_requirement then
+					out("3")
+						if rare_items[i].culture_restriction == nil or faction:culture() ~= rare_items[i].culture_restriction then
+							possible_items:add_item(rare_items[i].item, rare_items[i].weight);
+						end
 					end
 				end
 			end
@@ -165,7 +218,7 @@ function attempt_drop_rare_item_for_faction(faction)
 	end
 
 	if #possible_items.items > 0 then
-		out("attempt_drop_rare_item_for_faction - "..#possible_items.items);
+		out("possible items "..#possible_items.items)
 		local selected_item, index = possible_items:weighted_select();
 		cm:add_ancillary_to_faction(faction, selected_item, false);
 		return selected_item;

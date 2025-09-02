@@ -227,7 +227,6 @@ character_unlocking.character_data = {
 		has_spawned = false,
 		name = "ulrika",
 		subtype = "wh3_dlc23_neu_ulrika",
-		require_dlc = {"TW_WH3_ULRIKA_FREE"},
 		allowed_cultures = {
 			"wh3_main_ksl_kislev",
 			"wh_main_emp_empire"
@@ -298,7 +297,6 @@ character_unlocking.character_data = {
 		has_spawned = false,
 		name = "harald",
 		subtype = "wh3_pro11_chs_cha_harald_hammerstorm",
-		require_dlc = {"TW_WH3_PRO11_HARALD_HAMMERSTORM"},
 		allowed_cultures = {
 			"wh_main_chs_chaos"
 		},
@@ -419,7 +417,6 @@ character_unlocking.character_data = {
 		has_spawned = false,
 		name = "aekold",
 		subtype = "wh3_dlc24_tze_aekold_helbrass",
-		require_dlc = {"TW_WH3_AEKOLD_FREE"},
 		override_allowed_factions = {
 			main_warhammer = {
 				"wh3_main_tze_oracles_of_tzeentch",
@@ -648,7 +645,6 @@ character_unlocking.character_data = {
 		has_spawned = false,
 		name = "karanak",
 		subtype = "wh3_pro12_kho_cha_karanak",
-		require_dlc = {"TW_WH3_PRO12_KARANAK"},
 		override_allowed_factions = {
 			main_warhammer = {
 				"wh3_dlc20_chs_valkia",
@@ -742,7 +738,7 @@ character_unlocking.character_data = {
 		subtype = "wh3_dlc25_neu_gotrek_hero",
 		require_dlc = {
 			"TW_WH3_THRONES_OF_DECAY_DWF",
-			"TW_WH2_GOTREK_FELIX",
+			"TW_WH2_BASE_GAME",
 		},
 		additional_subtype = "wh2_pro08_neu_felix",
 		starting_owner_faction = "wh3_dlc25_dwf_malakai", -- Including this will spawn the hero for the faction when starting as them

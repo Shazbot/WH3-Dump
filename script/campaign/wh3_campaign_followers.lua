@@ -318,7 +318,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:faction():has_technology("wh2_main_tech_lzd_4_4") and character:has_region() and character:turns_in_own_regions() >= 1 and (cm:region_has_chain_or_superchain(character:region(), "wh_main_sch_settlement_major") or (cm:region_has_chain_or_superchain(character:region(), "wh_main_sch_settlement_major_coast")));
+				return character:faction():has_technology("wh2_main_tech_lzd_4_4") and character:has_region() and character:turns_in_own_regions() >= 1 and (cm:region_has_chain_or_superchain(character:region(), "wh_main_sch_main_settlement") or (cm:region_has_chain_or_superchain(character:region(), "wh_main_sch_settlement_major_coast")));
 			end,
 		["chance"] = 10
 	},
@@ -424,7 +424,7 @@ local followers = {
 		["condition"] =
 			function(context)
 				local character = context:character();
-				return character:faction():has_technology("wh2_main_tech_lzd_4_6") and character:has_region() and character:turns_in_own_regions() >= 1 and (cm:region_has_chain_or_superchain(character:region(), "wh_main_sch_settlement_major") or cm:region_has_chain_or_superchain(character:region(), "wh_main_sch_settlement_major_coast"));
+				return character:faction():has_technology("wh2_main_tech_lzd_4_6") and character:has_region() and character:turns_in_own_regions() >= 1 and (cm:region_has_chain_or_superchain(character:region(), "wh_main_sch_main_settlement") or cm:region_has_chain_or_superchain(character:region(), "wh_main_sch_settlement_major_coast"));
 			end,
 		["chance"] = 10
 	},

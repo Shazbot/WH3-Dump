@@ -62,7 +62,8 @@ core:add_listener(
 function books_of_nagash_3_replenishment(context, effect)
 	local character = context:character();
 	local char_cqi = character:command_queue_index();
-	local duration = 10;
+	local region_key = character:region():name();
+	local duration = 5;
 	
 	cm:remove_effect_bundle_from_characters_force("wh2_dlc09_books_of_nagash_reward_3_army", char_cqi);
 	cm:remove_effect_bundle_from_characters_force("wh3_main_books_of_nagash_mannfred_studied_reward_3_army", char_cqi);
@@ -70,7 +71,8 @@ function books_of_nagash_3_replenishment(context, effect)
 
 	cm:apply_effect_bundle_to_characters_force(effect, char_cqi, duration);
 	cm:trigger_incident(character:faction():name(),"wh2_dlc09_incident_tmb_sand_storm_spawned", true);
-	cm:create_storm_for_region(character:region():name(), 1, duration, "land_storm");
+	cm:create_storm_for_region(region_key, 1, duration, "land_storm");
+	cm:apply_effect_bundle_to_region("wh3_main_bundle_tomb_king_storm_dummy", region_key, duration);
 end
 
 
@@ -136,7 +138,7 @@ core:add_listener(
 			if faction:culture() == "wh2_dlc09_tmb_tomb_kings" then
 				local faction_name = faction:name();
 				
-				cm:pooled_resource_mod(faction:command_queue_index(), "tmb_canopic_jars", "other", 400);
+				cm:pooled_resource_mod(faction:command_queue_index(), "tmb_canopic_jars", "other", 1500);
 				cm:remove_event_restricted_unit_record_for_faction("wh2_dlc09_tmb_mon_necrosphinx_ror", faction_name);
 			end
 		end

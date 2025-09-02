@@ -6147,6 +6147,9 @@
 							name="clear_on_empty"
 							value=""/>
 						<property
+							name="context_to_clear"
+							value="CcoCampaignMission"/>
+						<property
 							name="event0"
 							value="MissionIssued"/>
 						<property
@@ -6157,11 +6160,14 @@
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoCampaignCharacter"
-					context_function_id="PlayersFaction.ActiveMissionList.Filter((mission) =&gt; HasZoomLocation &amp;&amp;  IsQuest == false &amp;&amp; (Component(&quot;03864E19-EAB8-49E8-8A2EC45D3D4CAE01&quot;).ShouldShowMission(mission))).FirstContext(CharacterContextAtSettlementObjectiveDisplayPosition == this)">
+					context_function_id="PlayersFaction.ActiveMissionList.Filter((mission) =&gt; HasZoomLocation &amp;&amp;  IsQuest == false &amp;&amp; (Component(&quot;03864E19-EAB8-49E8-8A2EC45D3D4CAE01&quot;).ShouldShowMission(mission))).FirstContext(CharacterContextAtSettlementObjectiveDisplayPosition == this || CharacterContextAtObjectiveDisplayPosition == this)">
 					<child_m_user_properties>
 						<property
 							name="clear_on_empty"
 							value=""/>
+						<property
+							name="context_to_clear"
+							value="CcoCampaignMission"/>
 						<property
 							name="event0"
 							value="MissionIssued"/>

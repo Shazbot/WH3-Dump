@@ -84,7 +84,8 @@ regiments_of_renown = {
 		"wh2_dlc15_grn_mon_rogue_idol_ror_0",
 		"wh2_dlc15_grn_veh_snotling_pump_wagon_ror_0",
 		"wh3_dlc26_grn_art_bolt_throwa_ror",
-		"wh3_dlc26_grn_mon_colossal_squig_ror"
+		"wh3_dlc26_grn_mon_colossal_squig_ror",
+		"wh3_dlc26_grn_inf_rugluds_armoured_orcs"
 	},
 	-------------------
 	---- BRETONNIA ----

@@ -1,6 +1,5 @@
 local minor_cult = {
 	key = "",
-	faction_key = "wh3_main_rogue_minor_cults",
 	slot_key = "wh3_main_slot_set_minor_cult_7",
 	intro_incident_key = "wh3_main_minor_cult_intro",
 	effect_bundle = nil,
@@ -16,11 +15,54 @@ local minor_cult = {
 	valid_provinces = nil,
 	valid_from_turn = 5,
 	chance_if_valid = 15,
-	event_data = {event_chance_per_turn = 20, event_cooldown = 20, event_limit = 3, event_initial_delay = 5},
-	saved_data = {active = false, region_key = "", event_cooldown = 0, event_triggers = 0}
+	complete_on_removal = true,
+	event_data = {event_chance_per_turn = 20, event_cooldown = 20, event_limit = 3, event_initial_delay = 5, force_trigger = false},
+	saved_data = {status = 0, region_key = "", event_cooldown = 0, event_triggers = 0}
 };
 
-function minor_cult:is_valid(MINOR_CULT_REGIONS)
+function minor_cult:custom_event(faction, region, cult_faction)
+	if faction:net_income() >= 500 then
+		-- We're going to ask for half the players gross income over 11 turns as payment
+		-- The loan amount given will be 10 turns worth of this rounded up
+		local loan_turn_term = 11;
+		local loan_turn_worth = 10;
+		local loan_round_to_nearest = 100;
+
+		local background_income = 3000;
+		local trade_value = faction:trade_value();
+		local real_income = faction:income() - trade_value - background_income;
+		local loan_amount = loan_round_to_nearest * math.ceil((real_income * loan_turn_worth) / loan_round_to_nearest);
+
+		if loan_amount < 4000 then
+			loan_amount = 4000;
+		end
+
+		-- CUSTOM DILEMMA
+		local dilemma_builder = cm:create_dilemma_builder("wh3_main_minor_cult_loan");
+		local payload_builder = cm:create_payload();
+
+		local loan_effect_bundle = cm:create_new_custom_effect_bundle("wh3_main_minor_cult_loan");
+		loan_effect_bundle:add_effect("wh_main_effect_economy_gdp_mod_all", "faction_to_region_own", -100);
+		loan_effect_bundle:add_effect("wh2_main_effect_agent_action_passive_boost_income_effect_negative", "faction_to_region_own", -1000);
+		loan_effect_bundle:add_effect("wh_main_effect_economy_trade_tariff_mod", "faction_to_faction_own", -100);
+		loan_effect_bundle:set_duration(loan_turn_term);
+
+		payload_builder:treasury_adjustment(loan_amount);
+		payload_builder:effect_bundle_to_faction(loan_effect_bundle);
+		dilemma_builder:add_choice_payload("FIRST", payload_builder);
+		payload_builder:clear();
+
+		payload_builder:text_display("dummy_do_nothing");
+		dilemma_builder:add_choice_payload("SECOND", payload_builder);
+		payload_builder:clear();
+
+		cm:launch_custom_dilemma_from_builder(dilemma_builder, faction);
+		return true;
+	end
+	return false;
+end
+
+function minor_cult:is_valid()
 	local debug_validity = true;
 
 	if debug_validity == true then
@@ -44,7 +86,7 @@ function minor_cult:is_valid(MINOR_CULT_REGIONS)
 			if current_region:is_null_interface() == false and current_region:is_abandoned() == false then
 				local owner = current_region:owning_faction();
 
-				if owner:is_null_interface() == false and owner:is_human() == true then
+				if owner:is_null_interface() == false and owner:is_human() == true and owner:is_factions_turn() == true then
 					local current_subculture = owner:subculture();
 
 					if self.valid_subcultures[current_subculture] ~= nil then
@@ -53,7 +95,7 @@ function minor_cult:is_valid(MINOR_CULT_REGIONS)
 						out("\tFAIL - FORCED REGION SUBCULTURE - "..current_subculture);
 					end
 				elseif debug_validity == true then
-					out("\tFAIL - FORCED REGION OWNER AI/NULL");
+					out("\tFAIL - FORCED REGION OWNER AI/NOT TURN/NULL");
 				end
 			elseif debug_validity == true then
 				out("\tFAIL - FORCED REGION RAZED/NULL");
@@ -70,7 +112,7 @@ function minor_cult:is_valid(MINOR_CULT_REGIONS)
 			if current_region:is_null_interface() == false and current_region:is_abandoned() == false then
 				local owner = current_region:owning_faction();
 
-				if owner:is_null_interface() == false and owner:is_human() == true then
+				if owner:is_null_interface() == false and owner:is_human() == true and owner:is_factions_turn() == true then
 					if self.valid_subcultures[owner:subculture()] ~= nil then
 						local valid = true;
 

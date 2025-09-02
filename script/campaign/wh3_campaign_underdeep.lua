@@ -173,7 +173,9 @@ function add_underdeep_listeners()
 			end
 
 			if key == "wh3_main_underdeep_dwf_main_karak_eight_peaks_3" then
-				cm:trigger_dilemma(faction:name(), "wh3_main_dwf_move_capital_eight_peaks");
+				if faction:is_human() then
+					cm:trigger_dilemma(faction:name(), "wh3_main_dwf_move_capital_eight_peaks");
+				end 
 			end
 		end,
 		true

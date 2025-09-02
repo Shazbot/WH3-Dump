@@ -742,9 +742,9 @@ function start_confederation_listeners()
 				wh_dlc08_sc_nor_norsca = true,
 				wh_main_sc_grn_greenskins = true,
 				wh3_main_sc_ksl_kislev = true,
-				
+				wh2_dlc14_brt_chevaliers_de_lyonesse = true,
 				--Specific factions within a subculture that are limited
-				wh2_dlc14_brt_chevaliers_de_lyonesse = false,
+
 			}
 			
 			-- excludes Wood Elves, Beastmen, Norsca, Greenskins, Bretonnia (excluding Chevs de Leonesse), Kislev - they can confederate as often as they like but only if they aren't AI

@@ -193,7 +193,9 @@ end;
 -------------------------------------------------------------------------------------------------
 --Stopping enemy from firing until the cutscene is done
 ga_player:change_behaviour_active_on_message("battle_started", "fire_at_will", false, false);
+ga_player:set_invincible_on_message("battle_started",true);
 ga_player:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true);
+ga_player:set_invincible_on_message("01_intro_cutscene_end",false);
 
 ga_beastmen_main:change_behaviour_active_on_message("battle_started", "fire_at_will", false, false);
 ga_beastmen_main:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true);
@@ -234,4 +236,3 @@ gb:set_objective_on_message("01_intro_cutscene_end", "wh3_dlc20_qb_chs_festus_pe
 
 gb:queue_help_on_message("01_intro_cutscene_end", "wh3_dlc20_qb_chs_festus_pestilent_potions_start_battle", 7000, 2000, 0);
 gb:queue_help_on_message("01_intro_cutscene_end", "wh3_dlc20_qb_chs_festus_pestilent_potions_cygors", 7000, 2000, 30000);
-

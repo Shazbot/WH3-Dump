@@ -41,6 +41,37 @@ local function disable_naviable_tour_controls(value, wait_on_set_state)
 	out("Setting naviable controls to disabled: "..tostring(value))
 end
 
+-- Disables the tour controls except for close button. If this is called straight away in a section, you will need a wait before setting state.
+local function disable_naviable_tour_controls_without_button_close(value, wait_on_set_state)
+	local wait_time = 0
+	local uic_1 = find_uicomponent("scripted_tour_controls", "scripted_tour_next_button")
+	local uic_2 = find_uicomponent("scripted_tour_controls", "scripted_tour_prev_button")
+
+	-- Set wait time.
+	if wait_on_set_state then wait_time = 0.1 end
+
+	if uic_1 and uic_2 then 
+		uic_1:SetDisabled(value)
+		uic_2:SetDisabled(value)
+		
+		cm:callback(
+			function()
+				if value then
+					uic_1:SetState("inactive")
+					uic_2:SetState("inactive")
+				else
+					uic_1:SetState("active")
+					uic_2:SetState("active")
+				end
+			end,
+			wait_time
+		)
+
+	end
+
+	out("Setting naviable controls to disabled except button close: "..tostring(value))
+end
+
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
 -- DEMON PRINCE CUSTOMISATION
@@ -56,6 +87,7 @@ in_daemon_prince_customisation = intervention:new(
 	BOOL_INTERVENTIONS_DEBUG	 													-- show debug output
 )
 in_daemon_prince_customisation:set_must_trigger()
+in_daemon_prince_customisation:set_wait_for_fullscreen_panel_dismissed(true)
 in_daemon_prince_customisation:set_should_lock_ui()
 in_daemon_prince_customisation:add_precondition(function() return cm:get_local_faction_name() == "wh3_main_dae_daemon_prince" and not in_daemon_prince_customisation:has_ever_triggered() end)
 in_daemon_prince_customisation:add_trigger_condition(
@@ -3019,7 +3051,16 @@ in_formless_horror:add_precondition(function() return not in_formless_horror:has
 in_formless_horror:add_trigger_condition(
 	"ScriptEventChangelingGainsForm",
 	function(context)
-		return not core:is_advice_level_minimal() and context:faction() == cm:get_local_faction()
+		local character_list = cm:get_faction(cm:get_local_faction_name()):character_list();
+		for i = 0,  character_list:num_items() - 1 do
+			local character = character_list:item_at(i)
+			local subtype_key = character:character_subtype_key()
+			if subtype_key == "wh3_dlc24_tze_the_changeling" then
+				if character_list:item_at(i):is_wounded() == false then 
+					return not core:is_advice_level_minimal() and context:faction() == cm:get_local_faction()
+				end 
+			end 
+		end 
 	end
 )
 
@@ -3077,10 +3118,16 @@ function trigger_in_formless_horror()
 			infotext:cache_and_set_detached_infotext_priority(1500, true)
 			
 			nt_formless_horror:cache_and_set_scripted_tour_controls_priority(1500, true)
-			
-			-- Select and zoom to changeling
-			common.call_context_command("CcoCampaignCharacter", cm:get_local_faction():faction_leader():command_queue_index(), "SelectAndZoom(false)")
-			
+			local character_list = cm:get_faction(cm:get_local_faction_name()):character_list();
+			for i = 0,  character_list:num_items() - 1 do
+				local character = character_list:item_at(i)
+				local subtype_key = character:character_subtype_key()
+				if subtype_key == "wh3_dlc24_tze_the_changeling" then
+					local changeling_cqi = character_list:item_at(i):cqi()
+					-- Select and zoom to changeling
+					common.call_context_command("CcoCampaignCharacter", changeling_cqi, "SelectAndZoom(false)")
+				end
+			end
 			-- Disable escape key and shortcuts.
 			cm:steal_escape_key(true)
 			common.enable_all_shortcuts(false)
@@ -3124,6 +3171,7 @@ function trigger_in_formless_horror()
 	-- Create action of section
 	nts_formless_horror_form:action(
 		function()
+			disable_naviable_tour_controls_without_button_close(true, true)
 			-- If this is still in the next section (the character details panel), close it.
 			if cm:get_campaign_ui_manager():is_panel_open("character_details_panel") then
 				local uic_button_ok = find_uicomponent("character_details_panel", "button_ok")
@@ -3136,7 +3184,8 @@ function trigger_in_formless_horror()
 			end
 			
 			local uic = find_uicomponent("hud_campaign", "info_panel_holder", "button_no_form")
-			
+			local uic_selected_form = find_uicomponent("hud_campaign", "info_panel_holder",	"button_selected_form")
+
 			local tp = text_pointer:new_from_component(
 				"tp_formless_horror_form",
 				"bottom",
@@ -3169,7 +3218,27 @@ function trigger_in_formless_horror()
 				function(context)
 					return context.string == uic:Id() 
 				end,
-				function() nt_formless_horror:start_next_section() end,
+				function() 
+					nt_formless_horror:start_next_section()
+					if cm:get_campaign_ui_manager():is_panel_open("character_details_panel") then
+						disable_naviable_tour_controls(false,false)
+					end 
+				end,
+				false
+			)
+
+			core:add_listener(
+				"ComponentLClickUpTargetButtonSelectedForm",
+				"ComponentLClickUp",
+				function(context)
+					return context.string == uic_selected_form:Id() 
+				end,
+				function() 
+					nt_formless_horror:start_next_section()
+					if cm:get_campaign_ui_manager():is_panel_open("character_details_panel") then 
+						disable_naviable_tour_controls(false,false)
+					end 
+				end,
 				false
 			)
 			

@@ -11,7 +11,8 @@ merc_contracts = {
 		"wh3_main_sla_slaanesh",
 		"wh3_main_tze_tzeentch",
 		"wh_dlc03_bst_beastmen",
-		"wh_main_chs_chaos"
+		"wh_main_chs_chaos",
+		"wh2_dlc13_lzd_spirits_of_the_jungle"
 	},
 	golgfag_faction_key = "wh3_dlc26_ogr_golgfag",
 	previous_client_key = false,
@@ -349,6 +350,8 @@ function merc_contracts:initialise()
 				local target_faction = targets:item_at(i):name()
 				cm:cai_add_diplomatic_event(target_faction, client_name, "PAST_EVENT_NEGATIVE_MAJOR") -- CHANGE THIS TO A NEW EVENT "Hired Mercenaries"
 				table.insert(target_factions, target_faction)
+				cm:force_diplomacy("faction:"..target_faction, "all", "form confederation", true, false, false)
+				cm:force_diplomacy("all", "faction:"..target_faction, "form confederation", false, false, false)
 			end
 
 			local contract_details = {
@@ -500,6 +503,8 @@ function merc_contracts:repair_relations(merc_faction, targets)
 	for i = 0, targets:num_items() - 1 do
 		local target_faction = targets:item_at(i):name()
 		cm:cai_add_diplomatic_event(target_faction, merc_faction, "PAST_EVENT_POSITIVE_MAJOR") -- CHANGE THIS TO A NEW EVENT "Contract Complete"
+		cm:force_diplomacy("faction:"..target_faction, "all", "form confederation", true, true, true)
+		cm:force_diplomacy("all", "faction:"..target_faction, "form confederation", true, true, true)
 	end
 end
 

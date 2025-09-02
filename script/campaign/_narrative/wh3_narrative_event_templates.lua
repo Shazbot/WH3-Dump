@@ -1334,7 +1334,7 @@ end;
 
 local function construct_narrative_event_defeat_enemy_army(unique_name, faction_key, advice_key, mission_key, enemy_faction_key, target_char_cqi, mission_issuer, mission_rewards, trigger_messages, on_issued_messages, on_completed_messages, inherit_list)
 	
-	if not validate.is_string(enemy_faction_key) then
+	if not enemy_faction_key or not validate.is_string(enemy_faction_key) then
 		return false;
 	end;
 

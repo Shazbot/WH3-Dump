@@ -1038,7 +1038,7 @@ function cutscene:start()
 		bm:out("Attempting to start cutscene " .. self.name .. " but the escape menu is open - waiting until it closes");
 		core:add_listener(
 			self.name .. "_wait_for_esc_menu",
-			"ScriptEventPanelClosedCampaign",
+			"ScriptEventPanelClosedBattle",
 			function(context)
 				return context.string == "esc_menu";
 			end,

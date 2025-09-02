@@ -3,7 +3,9 @@ patrol_me_eyes_of_the_jungle = {{x = 568, y = 291}, {x = 534, y = 304}, {x = 500
 patrol_me_dwellers_of_zardok = {{x = 113, y = 800}, {x = 88, y = 843}, {x = 64, y = 800}};
 patrol_me_dwellers_of_zardok_settra = {{x = 676, y = 655}, {x = 623, y = 612}, {x = 659, y = 574}};
 patrol_me_dwellers_of_zardok_khalida = {{x = 640, y = 443}, {x = 688, y = 423}};
-patrol_me_pilgrims_of_myrmidia = {{x = 363, y = 574}, {x = 259, y = 468}, {x = 158, y = 572}, {x = 276, y = 679}};
+patrol_ie_pilgrims_of_myrmidia_khalida = {{x = 363, y = 574}, {x = 259, y = 468}, {x = 158, y = 572}, {x = 276, y = 679}};
+patrol_me_pilgrims_of_myrmidia = {{x = 896, y = 300}, {x = 259, y = 468}, {x = 158, y = 572}, {x = 276, y = 679}};
+patrol_ie_shrouded_wanderers_of_undead = {{x = 650, y = 200}, {x = 600, y = 200}, {x = 650, y = 200}, {x = 600, y = 200}};
 
 book_objective_list_faction_grand = {
 	----------------------------
@@ -13,11 +15,11 @@ book_objective_list_faction_grand = {
 		{objective = "CAPTURE_REGIONS", target = "wh3_main_combi_region_lahmia"},
 		{objective = "CAPTURE_REGIONS", target = "wh3_main_combi_region_skavenblight"},
 		{objective = "CAPTURE_REGIONS", target = "wh3_main_combi_region_karak_eight_peaks"},
-		{objective = "CAPTURE_REGIONS", target = "wh3_main_combi_region_white_tower_of_hoeth"},
+		{objective = "CAPTURE_REGIONS", target = "wh3_main_combi_region_black_pyramid_of_nagash"},
 		{objective = "ENGAGE_FORCE", target = "wh2_dlc09_rogue_black_creek_raiders", pos = {x = 191, y = 275}, patrol = patrol_me_black_creek_raiders},
 		{objective = "ENGAGE_FORCE", target = "wh2_dlc09_rogue_eyes_of_the_jungle", pos = {x = 500, y = 255}, patrol = patrol_me_eyes_of_the_jungle},
 		{objective = "ENGAGE_FORCE", target = "wh2_dlc09_rogue_dwellers_of_zardok", pos = {x = 698, y = 611}, patrol = patrol_me_dwellers_of_zardok_settra},
-		{objective = "ENGAGE_FORCE", target = "wh2_dlc09_rogue_pilgrims_of_myrmidia", pos = {x = 276, y = 679}, patrol = patrol_me_pilgrims_of_myrmidia}
+		{objective = "ENGAGE_FORCE", target = "wh3_main_rogue_shrouded_wanderers_of_undead", pos = {x = 650, y = 200}, patrol = patrol_ie_shrouded_wanderers_of_undead}
 	},
 	----------------------------
 	---------- ARKHAN ----------
@@ -26,7 +28,7 @@ book_objective_list_faction_grand = {
 		{objective = "CAPTURE_REGIONS", target = "wh3_main_combi_region_temple_of_skulls"},
 		{objective = "CAPTURE_REGIONS", target = "wh3_main_combi_region_skavenblight"},
 		{objective = "CAPTURE_REGIONS", target = "wh3_main_combi_region_karak_eight_peaks"},
-		{objective = "CAPTURE_REGIONS", target = "wh3_main_combi_region_white_tower_of_hoeth"},
+		{objective = "CAPTURE_REGIONS", target = "wh3_main_combi_region_black_pyramid_of_nagash"},
 		{objective = "ENGAGE_FORCE", target = "wh2_dlc09_rogue_black_creek_raiders", pos = {x = 191, y = 275}, patrol = patrol_me_black_creek_raiders},
 		{objective = "ENGAGE_FORCE", target = "wh2_dlc09_rogue_eyes_of_the_jungle", pos = {x = 500, y = 255}, patrol = patrol_me_eyes_of_the_jungle},
 		{objective = "ENGAGE_FORCE", target = "wh2_dlc09_rogue_dwellers_of_zardok", pos = {x = 698, y = 611}, patrol = patrol_me_dwellers_of_zardok_settra},
@@ -37,13 +39,13 @@ book_objective_list_faction_grand = {
 	-----------------------------
 	["wh2_dlc09_tmb_lybaras"] = {
 		{objective = "CAPTURE_REGIONS", target = "wh3_main_combi_region_lost_plateau"},
-		{objective = "CAPTURE_REGIONS", target = "wh3_main_combi_region_mousillon"},
+		{objective = "CAPTURE_REGIONS", target = "wh3_main_combi_region_sartosa"},
 		{objective = "CAPTURE_REGIONS", target = "wh3_main_combi_region_castle_drakenhof"},
-		{objective = "CAPTURE_REGIONS", target = "wh3_main_combi_region_white_tower_of_hoeth"},
+		{objective = "CAPTURE_REGIONS", target = "wh3_main_combi_region_black_pyramid_of_nagash"},
 		{objective = "ENGAGE_FORCE", target = "wh2_dlc09_rogue_black_creek_raiders", pos = {x = 191, y = 275}, patrol = patrol_me_black_creek_raiders},
 		{objective = "ENGAGE_FORCE", target = "wh2_dlc09_rogue_eyes_of_the_jungle", pos = {x = 500, y = 255}, patrol = patrol_me_eyes_of_the_jungle},
 		{objective = "ENGAGE_FORCE", target = "wh2_dlc09_rogue_dwellers_of_zardok", pos = {x = 741, y = 463}, patrol = patrol_me_dwellers_of_zardok_khalida},
-		{objective = "ENGAGE_FORCE", target = "wh2_dlc09_rogue_pilgrims_of_myrmidia", pos = {x = 276, y = 679}, patrol = patrol_me_pilgrims_of_myrmidia}
+		{objective = "ENGAGE_FORCE", target = "wh2_dlc09_rogue_pilgrims_of_myrmidia", pos = {x = 896, y = 375}, patrol = patrol_ie_pilgrims_of_myrmidia_khalida}
 	},
 	----------------------------
 	---------- KHATEP ----------
@@ -80,7 +82,7 @@ book_objective_list_faction_grand = {
 		{objective = "CAPTURE_REGIONS", target = "wh3_main_combi_region_lahmia"},
 		{objective = "CAPTURE_REGIONS", target = "wh3_main_combi_region_skavenblight"},
 		{objective = "CAPTURE_REGIONS", target = "wh3_main_combi_region_karak_eight_peaks"},
-		{objective = "CAPTURE_REGIONS", target = "wh3_main_combi_region_white_tower_of_hoeth"},
+		{objective = "CAPTURE_REGIONS", target = "wh3_main_combi_region_black_pyramid_of_nagash"},
 		{objective = "ENGAGE_FORCE", target = "wh2_dlc09_rogue_black_creek_raiders", pos = {x = 191, y = 275}, patrol = patrol_me_black_creek_raiders},
 		{objective = "ENGAGE_FORCE", target = "wh2_dlc09_rogue_eyes_of_the_jungle", pos = {x = 500, y = 255}, patrol = patrol_me_eyes_of_the_jungle},
 		{objective = "ENGAGE_FORCE", target = "wh2_dlc09_rogue_dwellers_of_zardok", pos = {x = 698, y = 611}, patrol = patrol_me_dwellers_of_zardok_settra},

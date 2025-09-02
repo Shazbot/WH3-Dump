@@ -1732,10 +1732,10 @@ function campaign_manager:process_table_save(tab)
 end;
 
 
-local string_saving_char_limit = 65535;
+local string_saving_char_limit = 100000000;
 
 function campaign_manager:process_string_save(name, str, context)
-	-- We have a character limit of 65535 on our strings. If this string is shorter than this then just go ahead and save it.
+	-- We have a character limit of 100000000 on our strings. If this string is shorter than this then just go ahead and save it.
 	local str_len = str:len();
 	if str_len <= string_saving_char_limit then
 		return self.game_interface:save_named_value(name, str, context);

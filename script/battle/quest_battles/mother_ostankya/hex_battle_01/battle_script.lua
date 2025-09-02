@@ -87,19 +87,26 @@ ga_ai_ally_boss:rush_on_message("start");
 
 ga_ai_ally_boss:message_on_rout_proportion("forest_lost",1.0);
 
-gb:add_listener(
-	"forest_lost",
-	function()
-		if ga_player_01.sunits:are_any_active_on_battlefield() == true then
-			ga_player_01.sunits:rout_over_time(10000);
-		end;
+if ally_boss then
+	bm:watch(
+		function()
+			return is_routing_or_dead(ally_boss, true, true)
+		end,
+		0,
+		function()
+			gb:fail_objective_on_message("forest_lost", "wh3_dlc24_ksl_hex_01_objective_02")
+			gb:queue_help_on_message("forest_lost", "wh3_dlc24_ksl_hex_01_hint_03");
+
+			if ga_player_01.sunits:are_any_active_on_battlefield() == true then
+				ga_player_01.sunits:rout_over_time(10000);
+			end;
 		
-		if ga_ai_ally_01.sunits:are_any_active_on_battlefield() == true then
-			ga_ai_ally_01.sunits:rout_over_time(10000);
-		end;
-	end,
-	true
-);
+			if ga_ai_ally_01.sunits:are_any_active_on_battlefield() == true then
+				ga_ai_ally_01.sunits:rout_over_time(10000);
+			end;
+		end
+	)
+end
 
 gb:message_on_all_messages_received("forest_taken", "keepers_dead", "keepers_reinforce_dead");
 
@@ -157,11 +164,11 @@ gb:set_locatable_objective_callback_on_message(
 );
 
 gb:complete_objective_on_message("forest_taken", "wh3_dlc24_ksl_hex_01_objective_02");
-gb:fail_objective_on_message("forest_lost", "wh3_dlc24_ksl_hex_01_objective_02")
+
 
 gb:queue_help_on_message("start", "wh3_dlc24_ksl_hex_01_hint_01");
 gb:queue_help_on_message("oak_reinforce_in", "wh3_dlc24_ksl_hex_01_hint_02");
-gb:queue_help_on_message("forest_lost", "wh3_dlc24_ksl_hex_01_hint_03");
+
 
 -------------------------------------------------------------------------------------------------
 --------------------------------------------- MISC ----------------------------------------------

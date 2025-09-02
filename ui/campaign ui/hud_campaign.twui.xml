@@ -5529,7 +5529,7 @@
 				<callback_with_context callback_id="StatePropagatorCallback"/>
 				<callback_with_context
 					callback_id="ContextCommandLeftClick"
-					context_function_id="ToggleHUDPanel(&quot;tzeentch_changing_of_ways&quot;)"/>
+					context_function_id="DoIf(IsLocalPlayersTurn, ToggleHUDPanel(&quot;tzeentch_changing_of_ways&quot;))"/>
 				<callback_with_context callback_id="ContextStateSetterConditional">
 					<child_m_user_properties>
 						<property
@@ -6323,7 +6323,7 @@
 				<callback_with_context callback_id="StatePropagatorCallback"/>
 				<callback_with_context
 					callback_id="ContextCommandLeftClick"
-					context_function_id="ToggleHUDPanel(&quot;dlc25_college_of_magic&quot;)"/>
+					context_function_id="DoIf(IsLocalPlayersTurn, ToggleHUDPanel(&quot;dlc25_college_of_magic&quot;))"/>
 				<callback_with_context callback_id="ContextStateSetterConditional">
 					<child_m_user_properties>
 						<property
@@ -35253,7 +35253,7 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextList"
-					context_function_id="PlayersFaction.ActiveMissionList.Filter((mission) =&gt; HasZoomLocation &amp;&amp; (Component(&quot;03864E19-EAB8-49E8-8A2EC45D3D4CAE01&quot;).ShouldShowMission(mission) || ExIsPieceOfEight || ExIsScheme || ExIsLegendaryGrudge) &amp;&amp; IsQuest == false &amp;&amp; IsContextValid(TargetCharacterContext) == false &amp;&amp; IsObjectiveOverSettlementWithGarrisonedArmy == false)">
+					context_function_id="PlayersFaction.ActiveMissionList.Filter((mission) =&gt; HasZoomLocation &amp;&amp; (Component(&quot;03864E19-EAB8-49E8-8A2EC45D3D4CAE01&quot;).ShouldShowMission(mission) || ExIsPieceOfEight || ExIsScheme || ExIsLegendaryGrudge) &amp;&amp; IsQuest == false &amp;&amp; IsContextValid(TargetCharacterContext) == false &amp;&amp; IsObjectiveOverSettlementWithGarrisonedArmy == false &amp;&amp; IsContextValid(CharacterContextAtObjectiveDisplayPosition) == false)">
 					<child_m_user_properties>
 						<property
 							name="event0"

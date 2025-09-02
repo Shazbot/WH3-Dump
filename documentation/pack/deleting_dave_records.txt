@@ -1,0 +1,32 @@
+You should now be able to create a new table twad_key_deletes. A table with two fields:
+
+Table_name: the name of the table you wish to delete a record from.
+Key: the key of the record you wish to delete.
+
+Some examples for reference:
+
+ ----------------------------------------------------------------------------------------------------------------------------------
+| Table name                                     | Key                                                                             |
+ ----------------------------------------------------------------------------------------------------------------------------------
+| effects                                        | Wh_main_effect_province_growth_building                                         |
+ ----------------------------------------------------------------------------------------------------------------------------------
+| armed_citizenry_units_to_unit_groups_junctions | 635892873                                                                       |
+ ----------------------------------------------------------------------------------------------------------------------------------
+| building_effects_junction                      | Wh_main_special_settlement_altdorf_1_empwh_main_effect_province_growth_building |
+ ----------------------------------------------------------------------------------------------------------------------------------
+
+ 
+Note that last table – the key is a concatenated key! Some tables, like most junction tables, don’t have a single “key field” but instead takes the values of a number of fields and smashes them together to generate a key. (Fun fact, in rPFM, the yellow columns are key field columns).
+
+ 
+
+Some general notes on how this table works:
+
+It respects the load order, records can be re-added after deletion and edited records can then be deleted.
+It accepts “invalid records” without crashing.
+It allows you to delete new records added by other mods (assuming they are loaded first)
+It will allow you to delete records that have dependencies. This will cause a crash so be careful!
+It will also allow you to delete records that have script dependencies. This may not crash the game initially, but cause script breaks. So again, be careful!
+If you’re not the most confident database modder, we’d recommend sticking to deleting junction table records at first. (building effects junctions, effect bundle to effects junctions) these are far less likely to cause issues.
+
+We’ve worked with the author of rPFM to ensure it supports this new table and once updated, should be able to add this table like any other. They’ve also created a feature which will aim to convert data core tables from older mods into the new format. We’d recommend you check out their documentation for more information.

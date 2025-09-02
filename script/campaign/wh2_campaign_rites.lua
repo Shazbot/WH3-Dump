@@ -698,13 +698,14 @@ function rite_unlock_listeners()
 		{
 			["culture"] = "wh2_dlc09_tmb_tomb_kings",
 			["rite_name"] = "wh2_dlc09_ritual_tmb_khsar",
-			["event_name"] = "GarrisonOccupiedEvent",
+			["event_name"] = "RegionFactionChangeEvent",
 			["condition"] =
-				function(context, faction_name)
-					local faction = context:character():faction();
-					
-					return faction:name() == faction_name and faction:region_list():num_items() >= 3;
-				end,
+			function(context, faction_name)
+				local faction = context:region():owning_faction()	
+				local owning_faction = context:region():owning_faction() == faction_name
+			
+				return faction:name() == faction_name and faction:region_list():num_items() >= 3;	
+			end,
 			["show_unlock_message"] = true
 		},
 		-----------

@@ -20,6 +20,15 @@
 					</dy_income>
 					<tx_ this="384AE7C6-D880-437F-83E61D7E7405E8EA"/>
 				</treasury_holder>
+				<sacred_spawning_resource_holder this="1B4CEC52-031C-4B2A-9F0F68DE57973C53">
+					<sacred_spawning_effect this="8F351834-349D-4D6E-8B1B8D3001B49819">
+						<sacred_spawning_icon this="A9825EC0-B417-4C01-949D7A97F4860DF1"/>
+						<dev_button_add this="42188657-8FEE-48B2-8273B101E597E070">
+							<button_txt this="9B1DFCA2-E9F1-494C-8A1364EE90C9B1FF"/>
+							<dev_icon this="4CC409A7-BC02-4871-9683FC69E509D8BE"/>
+						</dev_button_add>
+					</sacred_spawning_effect>
+				</sacred_spawning_resource_holder>
 				<ikit_resources this="8A08C912-D126-40C9-956EC0EC85247FD4">
 					<dy_reactor_cores this="5921A15C-E1DC-4BDC-9F38708AC2BB6BF2">
 						<cores_icon this="3D4C2903-8C92-445B-90885631725EFFB4"/>
@@ -905,7 +914,8 @@
 		<arcane_essays_holder
 			this="77795A1B-AB28-40C3-AECBECA85D007499"
 			id="arcane_essays_holder"
-			offset="646.00,0.00"
+			offset="580.00,0.00"
+			visible="false"
 			priority="1"
 			uniqueguid="77795A1B-AB28-40C3-AECBECA85D007499"
 			currentstate="34A426AF-70B5-4E07-864152641F4E0B5E"
@@ -4646,6 +4656,41 @@
 			</localised_texts>
 		</button_txt>
 		<button_txt
+			this="9B1DFCA2-E9F1-494C-8A1364EE90C9B1FF"
+			id="button_txt"
+			part_of_template="true"
+			uniqueguid_in_template="C5314C5F-DB2A-4917-835E17930F5E2573"
+			uniqueguid="9B1DFCA2-E9F1-494C-8A1364EE90C9B1FF"
+			dimensions="108.00,29.00"
+			dock_point="Center"
+			offset="0.00,-1.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="746F1F5A-94D2-4702-977E3AA2F9B217C0"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="&quot;+&quot; + Name"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					text="dy_resource"
+					text_label="StateText_1ec62461"
+					is_text_localised="false"/>
+			</localised_texts>
+		</button_txt>
+		<button_txt
 			this="A26B25EE-0AA6-4D26-B4CB106AC5D9047A"
 			id="button_txt"
 			part_of_template="true"
@@ -5487,7 +5532,7 @@
 		<chd_resource_holder
 			this="478D997A-0C9A-4195-BBE3014EACB45DC1"
 			id="chd_resource_holder"
-			offset="378.00,0.00"
+			offset="444.00,0.00"
 			allowverticalresize="false"
 			priority="1"
 			uniqueguid="478D997A-0C9A-4195-BBE3014EACB45DC1"
@@ -6961,6 +7006,74 @@
 					uniqueguid="45E00E5C-FF84-4407-9FBD0B016480DBAF"/>
 			</states>
 		</defence_of_yvresse_holder>
+		<dev_button_add
+			this="42188657-8FEE-48B2-8273B101E597E070"
+			id="dev_button_add"
+			template_id="dev_text_button"
+			is_dev_only="true"
+			part_of_template="true"
+			uniqueguid_in_template="715902FD-2442-4210-8831AAF520A41055"
+			uniqueguid="42188657-8FEE-48B2-8273B101E597E070"
+			dimensions="108.00,29.00"
+			dock_point="Bottom Center External"
+			is_visible="false"
+			offset="0.00,4.00"
+			priority="1"
+			sound_category="UI_GBL_TMP_Square_Large_Text_Button_Toggle">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="05406487-9E89-4FC6-84574D662AA1E86E"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="B3008008-FFFB-4593-9B9EF4F5D31E4807"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="E28F7791-2F7E-4C74-A8B873109B807ED1"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="7B2628DB-B7CF-4B0E-B449C2D59D93FC1C"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="D6E5AA3A-2E5B-49DB-8881B1FA70677666"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/button_rectangular_backplate.png"
+					uniqueguid="4B72CB78-550A-4822-9FDCAB7897CE65D1"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/button_square_hover_highlight.png"
+					uniqueguid="55B199CB-9020-49D4-99604298C727EA1E"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="DevAddAmount(1000)"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/button_rectangular_backplate.png"/>
+				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
+			</override_images>
+		</dev_button_add>
 		<dev_button_add
 			this="8B2AE13A-C489-40F2-B25A25FE003A677B"
 			id="dev_button_add"
@@ -9413,6 +9526,36 @@
 			</override_images>
 		</dev_icon>
 		<dev_icon
+			this="4CC409A7-BC02-4871-9683FC69E509D8BE"
+			id="dev_icon"
+			part_of_template="true"
+			uniqueguid_in_template="0F4F9F06-4613-496B-A0F05A2B8B88B70D"
+			uniqueguid="4CC409A7-BC02-4871-9683FC69E509D8BE"
+			dimensions="24.00,24.00"
+			dock_point="Center Left"
+			offset="2.00,0.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="6476CD6C-7144-4421-91C0C47EA4285765"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/dev_icon.png"
+					uniqueguid="E57B5087-202A-49F3-B6416F238D44D748"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/dev_icon.png"/>
+			</override_images>
+		</dev_icon>
+		<dev_icon
 			this="4D2F9E1F-0A6F-4A02-B84FB311E85D41E0"
 			id="dev_icon"
 			part_of_template="true"
@@ -10820,7 +10963,7 @@
 		<dwf_malakai_adventures
 			this="3FF55BE7-A42C-4010-AB7F91379C857BD3"
 			id="dwf_malakai_adventures"
-			offset="2008.00,0.00"
+			offset="874.00,0.00"
 			priority="1"
 			tooltipslocalised="true"
 			uniqueguid="3FF55BE7-A42C-4010-AB7F91379C857BD3"
@@ -10857,7 +11000,7 @@
 		<dwf_underdeeps
 			this="38AB43EF-5BAD-4698-BC3C568B18B68CC6"
 			id="dwf_underdeeps"
-			offset="510.00,0.00"
+			offset="576.00,0.00"
 			allowverticalresize="false"
 			priority="1"
 			uniqueguid="38AB43EF-5BAD-4698-BC3C568B18B68CC6"
@@ -15315,7 +15458,8 @@
 		<grn_da_plan_planz
 			this="E79DD8BE-8D37-4399-81B27484FC3A0A90"
 			id="grn_da_plan_planz"
-			offset="712.00,0.00"
+			offset="580.00,0.00"
+			visible="false"
 			priority="1"
 			uniqueguid="E79DD8BE-8D37-4399-81B27484FC3A0A90"
 			currentstate="8F0D867B-6EA0-4FCD-BC1530716B46C0DC"
@@ -15523,7 +15667,7 @@
 		<grom_dish_effect_holder
 			this="732BB448-721F-4ED0-8FA2E0795A82577A"
 			id="grom_dish_effect_holder"
-			offset="1781.00,5.00"
+			offset="647.00,5.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			dock_offset="0.00,5.00"
@@ -16015,7 +16159,7 @@
 		<grudge_cycles_holder
 			this="B33AE4EA-73B5-4504-9AA568B0334B9543"
 			id="grudge_cycles_holder"
-			offset="1219.00,4.00"
+			offset="646.00,4.00"
 			dock_offset="0.00,4.00"
 			priority="1"
 			tooltipslocalised="true"
@@ -16146,7 +16290,7 @@
 		<grudge_holder
 			this="BC1458E6-AD54-42B9-9070497E7876431A"
 			id="grudge_holder"
-			offset="1137.00,0.00"
+			offset="646.00,0.00"
 			visible="false"
 			priority="1"
 			uniqueguid="BC1458E6-AD54-42B9-9070497E7876431A"
@@ -16383,7 +16527,7 @@
 		<herdstone_shard_holder
 			this="16715134-D5A2-4474-9F830C4BB34AF5E2"
 			id="herdstone_shard_holder"
-			offset="298.00,0.00"
+			offset="364.00,0.00"
 			allowverticalresize="false"
 			priority="1"
 			tooltipslocalised="true"
@@ -16612,7 +16756,7 @@
 		<hud_campaign_resource_bar_default
 			this="B889BC11-EB7D-4C49-91E7FBB3A9185DA5"
 			id="hud_campaign_resource_bar_default"
-			offset="-745.00,-4.00"
+			offset="145.00,-4.00"
 			allowverticalresize="false"
 			docking="Top Center"
 			dock_offset="-20.00,-4.00"
@@ -16661,7 +16805,7 @@
 				<alt
 					this="B2CAF4B7-4848-45EB-BA7043AB0A01F370"
 					name="alt"
-					width="3051"
+					width="1269"
 					height="67"
 					interactive="true"
 					pixelcollision="true"
@@ -16671,8 +16815,8 @@
 							this="DFBA1096-A050-44AB-8B777DC0BF2D89CA"
 							uniqueguid="DFBA1096-A050-44AB-8B777DC0BF2D89CA"
 							componentimage="4BABAF11-4ED8-4969-A1982DF54A18DCE7"
-							offset="69.00,0.00"
-							width="2912"
+							offset="29.00,0.00"
+							width="1211"
 							height="67"
 							tile="true"
 							dockpoint="Top Center"
@@ -16682,7 +16826,7 @@
 				<default
 					this="FA98244F-AAE7-4931-8AED652E15B46861"
 					name="default"
-					width="3051"
+					width="1269"
 					height="67"
 					interactive="true"
 					pixelcollision="true"
@@ -16692,8 +16836,8 @@
 							this="8C5F422A-FF74-459C-87F13AEEF5E148EC"
 							uniqueguid="8C5F422A-FF74-459C-87F13AEEF5E148EC"
 							componentimage="3A455397-5FD3-400F-8BB2885ADB8A2C86"
-							offset="69.00,0.00"
-							width="2912"
+							offset="29.00,0.00"
+							width="1211"
 							height="67"
 							tile="true"
 							dockpoint="Top Center"
@@ -18058,7 +18202,7 @@
 		<ikit_resources
 			this="8A08C912-D126-40C9-956EC0EC85247FD4"
 			id="ikit_resources"
-			offset="298.00,0.00"
+			offset="364.00,0.00"
 			allowverticalresize="false"
 			visible="false"
 			priority="51"
@@ -18149,9 +18293,10 @@
 		<imperial_authority_holder
 			this="F4BC52DF-71FC-4105-B951A32CEC4FF414"
 			id="imperial_authority_holder"
-			offset="999.00,0.00"
+			offset="580.00,0.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
+			visible="false"
 			priority="1"
 			tooltipslocalised="true"
 			uniqueguid="F4BC52DF-71FC-4105-B951A32CEC4FF414"
@@ -18181,9 +18326,10 @@
 		<imperial_authority_new_holder
 			this="2576E8C1-1A70-4257-B8C7255C34A57ABF"
 			id="imperial_authority_new_holder"
-			offset="794.00,0.00"
+			offset="580.00,0.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
+			visible="false"
 			priority="1"
 			tooltipslocalised="true"
 			uniqueguid="2576E8C1-1A70-4257-B8C7255C34A57ABF"
@@ -18219,9 +18365,10 @@
 		<imperial_supplies_holder
 			this="E41DBF82-94BA-4684-89C0A6E47A69F12E"
 			id="imperial_supplies_holder"
-			offset="1339.00,0.00"
+			offset="580.00,0.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
+			visible="false"
 			priority="1"
 			tooltipslocalised="true"
 			uniqueguid="E41DBF82-94BA-4684-89C0A6E47A69F12E"
@@ -21075,7 +21222,8 @@
 		<nemesis_crown_holder
 			this="451EA7EA-A52B-4561-9AFA37BF3175F106"
 			id="nemesis_crown_holder"
-			offset="2681.00,0.00"
+			offset="1052.00,0.00"
+			visible="false"
 			priority="1"
 			tooltipslocalised="true"
 			uniqueguid="451EA7EA-A52B-4561-9AFA37BF3175F106"
@@ -21795,7 +21943,7 @@
 		<oxyotl_silent_sanctum_holder
 			this="96817D68-81C5-42BD-9D1EDD31B5E30A58"
 			id="oxyotl_silent_sanctum_holder"
-			offset="1299.00,0.00"
+			offset="2124.00,0.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			visible="false"
@@ -22387,7 +22535,8 @@
 		<prestige_holder
 			this="7F915887-A26D-4329-8BE5DF95870DADFA"
 			id="prestige_holder"
-			offset="1218.00,0.00"
+			offset="578.00,0.00"
+			visible="false"
 			dock_offset="-2.00,0.00"
 			priority="1"
 			uniqueguid="7F915887-A26D-4329-8BE5DF95870DADFA"
@@ -23154,6 +23303,7 @@
 			this="A131F4C1-67A8-4636-BD4F5D2FB697AB0D"
 			id="research_and_development_holder"
 			offset="580.00,0.00"
+			visible="false"
 			priority="1"
 			uniqueguid="A131F4C1-67A8-4636-BD4F5D2FB697AB0D"
 			currentstate="51AB0620-4B23-40CF-9CA6D56D1DB067BF"
@@ -23161,7 +23311,8 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoCampaignPooledResource"/>
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="IsValidContext"/>
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_function_id="PlayersFaction.PooledResourceContext(&quot;wh3_dlc25_emp_research&quot;)"/>
@@ -23181,8 +23332,9 @@
 		<right_spacer_bretonnia
 			this="A369E0C8-26AF-4486-B485A5D40E1B4B57"
 			id="right spacer_bretonnia"
-			offset="2565.00,0.00"
+			offset="1052.00,0.00"
 			allowverticalresize="false"
+			visible="false"
 			priority="1"
 			tooltipslocalised="true"
 			uniqueguid="A369E0C8-26AF-4486-B485A5D40E1B4B57"
@@ -23315,8 +23467,9 @@
 		<right_spacer_tomb_kings
 			this="10F287C6-8EB6-4E88-8D139902466EDF3D"
 			id="right_spacer_tomb_kings"
-			offset="2253.00,0.00"
+			offset="1052.00,0.00"
 			allowverticalresize="false"
+			visible="false"
 			priority="1"
 			tooltipslocalised="true"
 			uniqueguid="10F287C6-8EB6-4E88-8D139902466EDF3D"
@@ -23416,6 +23569,157 @@
 				type="HorizontalList"
 				sizetocontent="true"/>
 		</ruination_bar_holder>
+		<sacred_spawning_effect
+			this="8F351834-349D-4D6E-8B1B8D3001B49819"
+			id="sacred_spawning_effect"
+			allowverticalresize="false"
+			priority="1"
+			componentleveltooltip="{{tt:ui/campaign ui/tooltip_pooled_resource_breakdown}}"
+			tooltiplabel="ComponentTooltip_d5d8795a"
+			uniqueguid="8F351834-349D-4D6E-8B1B8D3001B49819"
+			currentstate="8181718B-E43D-4129-A3CA45BEC2CF7931"
+			defaultstate="8181718B-E43D-4129-A3CA45BEC2CF7931">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="Total">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="PooledResourceTransaction"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoCampaignPooledResource"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="allow_value_override"
+					value=""/>
+			</userproperties>
+			<states>
+				<newstate
+					this="8181718B-E43D-4129-A3CA45BEC2CF7931"
+					name="NewState"
+					width="66"
+					height="37"
+					interactive="true"
+					uniqueguid="8181718B-E43D-4129-A3CA45BEC2CF7931">
+					<component_text
+						text="5000"
+						textxoffset="26.00,4.00"
+						textyoffset="16.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_86e07567"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						text_shader_name="drop_shadow_t0"
+						textshadervars="-1.00,-1.00,1.00,0.00"/>
+				</newstate>
+			</states>
+			<animations>
+				<flash_update
+					id="flash_update"
+					propagate="true">
+					<frames>
+						<frame
+							interpolationtime="0"
+							interpolationpropertymask="3"
+							targetmetrics_m_height="37"
+							targetmetrics_m_width="64"
+							is_movement_absolute="true"/>
+						<frame
+							interpolationtime="200"
+							interpolationpropertymask="3"
+							targetmetrics_m_colour="#FFFF00FF"
+							targetmetrics_m_height="37"
+							targetmetrics_m_width="64"
+							targetmetrics_m_offset="0.00,-4.00"
+							is_movement_absolute="true"/>
+						<frame
+							interpolationtime="200"
+							interpolationpropertymask="3"
+							targetmetrics_m_colour="#FFF8D7FF"
+							targetmetrics_m_height="37"
+							targetmetrics_m_width="64"
+							is_movement_absolute="true"/>
+					</frames>
+				</flash_update>
+			</animations>
+		</sacred_spawning_effect>
+		<sacred_spawning_icon
+			this="A9825EC0-B417-4C01-949D7A97F4860DF1"
+			id="sacred_spawning_icon"
+			offset="0.00,10.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Bottom Left"
+			dock_offset="0.00,-1.00"
+			component_anchor_point="0.00,1.00"
+			priority="1"
+			tooltipslocalised="true"
+			uniqueguid="A9825EC0-B417-4C01-949D7A97F4860DF1"
+			currentstate="100688E0-065B-42AA-8BDB9B505874054A"
+			defaultstate="100688E0-065B-42AA-8BDB9B505874054A">
+			<componentimages>
+				<component_image
+					this="D79198C8-E445-4018-BEF3CDE5F35B877B"
+					uniqueguid="D79198C8-E445-4018-BEF3CDE5F35B877B"
+					imagepath="ui/campaign ui/effect_bundles/blessed_spawning_resource.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="100688E0-065B-42AA-8BDB9B505874054A"
+					name="NewState"
+					width="26"
+					height="26"
+					uniqueguid="100688E0-065B-42AA-8BDB9B505874054A">
+					<imagemetrics>
+						<image
+							this="1E0ED488-41E7-4F63-BA60A90CE916EF39"
+							uniqueguid="1E0ED488-41E7-4F63-BA60A90CE916EF39"
+							componentimage="D79198C8-E445-4018-BEF3CDE5F35B877B"
+							width="26"
+							height="26"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</sacred_spawning_icon>
+		<sacred_spawning_resource_holder
+			this="1B4CEC52-031C-4B2A-9F0F68DE57973C53"
+			id="sacred_spawning_resource_holder"
+			offset="298.00,0.00"
+			priority="1"
+			uniqueguid="1B4CEC52-031C-4B2A-9F0F68DE57973C53"
+			currentstate="117850F6-F2B8-49A0-9530E7591C737601"
+			defaultstate="117850F6-F2B8-49A0-9530E7591C737601">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="IsValidContext"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_function_id="PlayersFaction.PooledResourceContext(&quot;wh3_main_lzd_sacred_spawning&quot;)"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="117850F6-F2B8-49A0-9530E7591C737601"
+					name="default"
+					width="66"
+					height="37"
+					uniqueguid="117850F6-F2B8-49A0-9530E7591C737601"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"/>
+		</sacred_spawning_resource_holder>
 		<scrap_holder
 			this="1955A02B-4699-4C17-BE219783906F44F4"
 			id="scrap_holder"
@@ -25285,8 +25589,9 @@
 		<slave_holder
 			this="7AEB686D-5637-49D0-B34E0146404DF560"
 			id="slave_holder"
-			offset="1659.00,0.00"
+			offset="580.00,0.00"
 			allowverticalresize="false"
+			visible="false"
 			priority="1"
 			tooltipslocalised="true"
 			uniqueguid="7AEB686D-5637-49D0-B34E0146404DF560"

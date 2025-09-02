@@ -40,7 +40,7 @@ function add_gotrek_felix_listeners()
 	out("#### Adding Gotrek & Felix Listeners ####")
 	
 	if cm:is_new_game() then
-		if cm:get_local_faction(true) and cm:is_dlc_flag_enabled_by_everyone("TW_WH2_GOTREK_FELIX") then
+		if cm:get_local_faction(true) and cm:is_dlc_flag_enabled_by_everyone("TW_WH2_BASE_GAME") then
 			gotrek_details.ai_only = false
 			gotrek_details.state = gotrek_state.building
 			gotrek_details.cooldown = 0

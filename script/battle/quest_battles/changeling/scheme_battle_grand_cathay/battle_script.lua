@@ -320,4 +320,4 @@ gb:queue_help_on_message("skv_ally_01_in", "wh3_dlc24_tze_changeling_theatre_sch
 --------------------------------------------- VICTORY -------------------------------------------
 -------------------------------------------------------------------------------------------------
 
-ga_player_01:force_victory_on_message("game_over", 5000);
+ga_player_01:force_victory_on_message("cth_dead", 5000);

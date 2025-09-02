@@ -158,6 +158,8 @@ function setup_daemon_cults()
 			for cult_index = 0, cults:num_items() - 1 do
 				local cult = cults:item_at(cult_index);
 				local region = cult:region();
+				local region_name = cult:region():name()
+				cm:make_region_visible_in_shroud(faction_key, region_name)
 
 				-- Demolish Cult Effect
 				local slots = cult:slots();

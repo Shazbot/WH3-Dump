@@ -115,6 +115,19 @@
 								<checkbox_ai_extra_aggro this="E49FDF68-7415-4BDF-B2D87C4D17B926EA">
 									<dy_label this="8A107981-42DA-427D-8FDBC8924735A13F"/>
 								</checkbox_ai_extra_aggro>
+								<ai_anti_player_bias this="DBB10BBB-5161-4728-993505499F37C0D6">
+									<tx_label this="896E1526-7E37-4477-B6769D1B1777AC1E"/>
+									<ai_anti_player_bias_slider this="CECBFB45-5628-4C07-89C1309BB00F9007">
+										<frame_left this="D6CD97EC-B9CB-4BE5-B7D1BB54B8E3024E"/>
+										<frame_right this="F3CC8FC2-C4A3-4A6E-BFDAE7B7E3654439"/>
+										<handle this="D0DA45CE-0E6C-4E58-ABBE4261E703C517"/>
+										<left this="DBF3CAFE-2EA2-4836-93A9B0237E08D5A0"/>
+										<right this="E7EAEC70-A7A3-4E19-BC537CFFBE165180"/>
+									</ai_anti_player_bias_slider>
+									<scale_percentage_tx this="A352A512-2B98-4590-8E32D0626B528CBC">
+										<highlight this="4D37AF73-04F7-4CB8-8CC94433E3B1DA5F"/>
+									</scale_percentage_tx>
+								</ai_anti_player_bias>
 							</settings_list>
 							<listview this="E1508CE0-B8F6-4E3A-AAD765F3842A23DD">
 								<list_clip this="7089FC44-68DE-4B25-A3880B9662DA2EBB">
@@ -385,6 +398,150 @@
 		</root>
 	</hierarchy>
 	<components>
+		<ai_anti_player_bias
+			this="DBB10BBB-5161-4728-993505499F37C0D6"
+			id="ai_anti_player_bias"
+			offset="-247.00,316.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			dock_offset="-247.00,0.00"
+			uniqueguid="DBB10BBB-5161-4728-993505499F37C0D6"
+			currentstate="3915853C-BB8D-4389-93A2C656ED590C90"
+			defaultstate="3915853C-BB8D-4389-93A2C656ED590C90">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoMPCampaignLobby"
+					context_function_id="FindContext(&quot;CcoMultiplayerCampaignSettingRecord&quot;, &quot;ai_anti_player_bias&quot;)"/>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoMPCampaignSettings"/>
+				<callback_with_context
+					callback_id="ContextInactiveStateSetter"
+					context_object_id="CcoMultiplayerCampaignSettingRecord"
+					context_function_id="StoredContextFromParent(&quot;CcoMPCampaignSettings&quot;).CanChangeSetting(this)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="MPLobbyOnCampaignParamsChanged"/>
+						<property
+							name="event1"
+							value="MPLobbyOnHostMigrated"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<states>
+				<active
+					this="3915853C-BB8D-4389-93A2C656ED590C90"
+					name="active"
+					width="323"
+					height="40"
+					tooltip="{{tr:multiplayer_campaign_settings_localised_tooltip_ai_anti_player_bias}}"
+					tooltiplabel="StateTooltip_a9ec9040"
+					interactive="true"
+					uniqueguid="3915853C-BB8D-4389-93A2C656ED590C90"/>
+				<inactive
+					this="FC239B92-8245-4B31-B944784F13B5A1D0"
+					name="inactive"
+					width="323"
+					height="40"
+					uniqueguid="FC239B92-8245-4B31-B944784F13B5A1D0"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				spacing="30.00,0.00"
+				sizetocontent="true"
+				vertical_alignment="Center"/>
+		</ai_anti_player_bias>
+		<ai_anti_player_bias_slider
+			this="CECBFB45-5628-4C07-89C1309BB00F9007"
+			id="ai_anti_player_bias_slider"
+			template_id="panel_slider_horizontal"
+			part_of_template="true"
+			uniqueguid_in_template="FC457A20-45F6-4299-9140D634E46D7FE1"
+			uniqueguid="CECBFB45-5628-4C07-89C1309BB00F9007"
+			dimensions="100.00,20.00"
+			tooltips_localised="false"
+			priority="67">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="04CDCD44-B796-4FC4-AC74D079C85AA85E"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="5D46D910-BE78-49F6-9D737CA6D3EB660D"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_horizontal_mid.png"
+					uniqueguid="50A8C445-7602-40F6-AF8E4C55264B3901"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="HSlider"
+					context_object_id="CcoMultiplayerCampaignSettingRecord setting"
+					context_function_id="StoredContextFromParent(&quot;CcoMPCampaignSettings&quot;).GetCurrentNumberForSetting(setting)">
+					<child_m_user_properties>
+						<property
+							name="always_visible"
+							value="1"/>
+						<property
+							name="target_display_component"
+							value="scale_percentage_tx"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoMultiplayerCampaignSettingRecord"
+					context_function_id="LocalisedTooltip"/>
+				<callback_with_context
+					callback_id="ContextCommandEvent"
+					context_object_id="CcoMultiplayerCampaignSettingRecord setting"
+					context_function_id="StoredContextFromParent(&quot;CcoMPCampaignSettings&quot;).SetNumberForSetting(self.Value, setting)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="SliderValueChanged_ai_anti_player_bias_slider"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="Notify"
+					value=""/>
+				<property
+					name="SnapToValues"
+					value="true"/>
+				<property
+					name="Value"
+					value="100"/>
+				<property
+					name="maxValue"
+					value="120"/>
+				<property
+					name="minValue"
+					value="90"/>
+				<property
+					name="step_size"
+					value="10"/>
+				<property
+					name="TabOrder"
+					value="1"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/slider_horizontal_mid.png"/>
+			</override_images>
+		</ai_anti_player_bias_slider>
 		<ai_stat_mod_holder
 			this="46F6519F-E4E2-4ACD-A5CFA5922939926E"
 			id="ai_stat_mod_holder"
@@ -3602,10 +3759,6 @@
 					callback_id="ContextPropagator"
 					context_object_id="CcoMPCampaignLobby"
 					context_function_id="FindContext(&quot;CcoMultiplayerCampaignSettingRecord&quot;, &quot;ai_extra_aggro&quot;)"/>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoMPCampaignLobby"
-					context_function_id="CampaignStartInfoContext.CampaignMapPlayableAreaRecordContext.CampaignKey == &quot;wh3_main_combi&quot;"/>
 			</callbacks_with_context>
 			<localised_texts>
 				<localised_text/>
@@ -3738,10 +3891,6 @@
 					callback_id="ContextPropagator"
 					context_object_id="CcoMPCampaignLobby"
 					context_function_id="FindContext(&quot;CcoMultiplayerCampaignSettingRecord&quot;, &quot;ai_minor_faction_potential&quot;)"/>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoMPCampaignLobby"
-					context_function_id="CampaignStartInfoContext.CampaignMapPlayableAreaRecordContext.CampaignKey == &quot;wh3_main_combi&quot;"/>
 			</callbacks_with_context>
 			<localised_texts>
 				<localised_text/>
@@ -4742,7 +4891,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoMultiplayerCampaignSettingRecord"
-					context_function_id="RecordList.Filter(IsPerPlayerSetting == false &amp;&amp; Key != &quot;campaign_difficulty&quot; &amp;&amp; Key != &quot;character_loading&quot; &amp;&amp; Key != &quot;realm_of_chaos&quot; &amp;&amp; Key != &quot;enable_sea_lanes&quot; &amp;&amp; Key != &quot;enable_end_game&quot; &amp;&amp; Key != &quot;ironman_mode&quot; &amp;&amp; Key != &quot;ai_minor_faction_potential&quot; &amp;&amp; Key != &quot;ai_extra_aggro&quot;)"/>
+					context_function_id="RecordList.Filter(IsPerPlayerSetting == false &amp;&amp; Key != &quot;campaign_difficulty&quot; &amp;&amp; Key != &quot;character_loading&quot; &amp;&amp; Key != &quot;realm_of_chaos&quot; &amp;&amp; Key != &quot;enable_sea_lanes&quot; &amp;&amp; Key != &quot;enable_end_game&quot; &amp;&amp; Key != &quot;ironman_mode&quot; &amp;&amp; Key != &quot;ai_minor_faction_potential&quot; &amp;&amp; Key != &quot;ai_extra_aggro&quot; &amp;&amp; Key != &quot;ai_anti_player_bias&quot;)"/>
 				<callback_with_context
 					callback_id="ContextObjectStore"
 					context_object_id="CcoMPCampaignSettings"/>
@@ -6672,6 +6821,50 @@
 				<element value="ui/skins/default/panel_slider_horizontal_left.png"/>
 			</override_images>
 		</frame_left>
+		<frame_left
+			this="D6CD97EC-B9CB-4BE5-B7D1BB54B8E3024E"
+			id="frame_left"
+			part_of_template="true"
+			uniqueguid_in_template="A3AE9505-267C-460C-8BCDBF7D1022334B"
+			uniqueguid="D6CD97EC-B9CB-4BE5-B7D1BB54B8E3024E"
+			dimensions="28.00,25.00"
+			dock_point="Center Left External"
+			offset="1.00,0.00"
+			priority="67">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="B4401412-8C40-493F-8EDEEEA9176BDB03"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="4C4A202B-C07F-4055-9E3AEB423FEA52CE"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/panel_slider_horizontal_left.png"
+					uniqueguid="EBFA1375-6AC2-47D5-81762B556575E706"/>
+			</component_image_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="position"/>
+				<property
+					name="disable_override0"
+					value="resizable"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/panel_slider_horizontal_left.png"/>
+			</override_images>
+		</frame_left>
 		<frame_right
 			this="CAB0C914-837E-4630-8B589E3A3DE313FE"
 			id="frame_right"
@@ -6693,6 +6886,49 @@
 				<component_image_uniqueguid
 					name="ui/skins/default/panel_slider_horizontal_right.png"
 					uniqueguid="AD4DFE67-FAF1-4B64-881B893F20CBDC91"/>
+			</component_image_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="position"/>
+				<property
+					name="disable_override0"
+					value="resizable"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/panel_slider_horizontal_right.png"/>
+			</override_images>
+		</frame_right>
+		<frame_right
+			this="F3CC8FC2-C4A3-4A6E-BFDAE7B7E3654439"
+			id="frame_right"
+			part_of_template="true"
+			uniqueguid_in_template="8AB6653E-BA9D-4E0A-8624659F5EE89CE9"
+			uniqueguid="F3CC8FC2-C4A3-4A6E-BFDAE7B7E3654439"
+			dimensions="29.00,25.00"
+			dock_point="Center Right External"
+			priority="67">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="D68A6156-04B1-457F-9630D395A3A04BAE"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="CF790CB6-7D44-4808-B93DE6B27404B312"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/panel_slider_horizontal_right.png"
+					uniqueguid="2F6B761B-8F75-47DD-A13529C4576F0425"/>
 			</component_image_uniqueguids>
 			<user_properties>
 				<property
@@ -7617,6 +7853,73 @@
 			</override_images>
 		</handle>
 		<handle
+			this="D0DA45CE-0E6C-4E58-ABBE4261E703C517"
+			id="handle"
+			part_of_template="true"
+			uniqueguid_in_template="51744703-473E-4651-845DB01529737BD0"
+			uniqueguid="D0DA45CE-0E6C-4E58-ABBE4261E703C517"
+			dimensions="18.00,35.00"
+			offset="0.00,-7.00"
+			priority="67"
+			sound_category="UI_GBL_TMP_Slider_Handle">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="E30BF06C-0369-4115-AAC6C7982E5B3110"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="0089042D-E3D4-49AC-835528409C90849B"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="0EE59A0F-0E37-4D77-BAAC474F443B2630"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="61FB5A17-10BC-4336-BECD601D35BC52FF"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_vertical_handle.png"
+					uniqueguid="34125EEC-15F4-4E29-B43246FCD1067123"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_vertical_handle_underlay.png"
+					uniqueguid="F6201C09-4F52-4BDC-A4714C66BB231CA5"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="HSliderHandle"/>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoPair"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_function_id="MakePair(self.ParentContext.Value, 0)">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/slider_vertical_handle.png"/>
+				<element value="ui/skins/default/slider_vertical_handle_underlay.png"/>
+			</override_images>
+		</handle>
+		<handle
 			this="D47DB209-277A-4EEB-B8818FA61C5142C0"
 			id="handle"
 			part_of_template="true"
@@ -7722,6 +8025,40 @@
 				</alliance>
 			</states>
 		</header>
+		<highlight
+			this="4D37AF73-04F7-4CB8-8CC94433E3B1DA5F"
+			id="highlight"
+			allowverticalresize="false"
+			docking="Top Left"
+			priority="999999"
+			tooltipslocalised="true"
+			uniqueguid="4D37AF73-04F7-4CB8-8CC94433E3B1DA5F"
+			currentstate="2720290B-5711-4D48-9F1B30FBC802B23D"
+			defaultstate="2720290B-5711-4D48-9F1B30FBC802B23D">
+			<componentimages>
+				<component_image
+					this="DB1ABD38-43FD-4560-A5F2BF64B73D39C9"
+					uniqueguid="DB1ABD38-43FD-4560-A5F2BF64B73D39C9"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="2720290B-5711-4D48-9F1B30FBC802B23D"
+					name="NewState"
+					width="21"
+					height="24"
+					uniqueguid="2720290B-5711-4D48-9F1B30FBC802B23D">
+					<imagemetrics>
+						<image
+							this="88C32046-8540-457A-99D91C37C814A027"
+							uniqueguid="88C32046-8540-457A-99D91C37C814A027"
+							componentimage="DB1ABD38-43FD-4560-A5F2BF64B73D39C9"
+							width="21"
+							height="24"
+							colour="#FFFFFF64"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</highlight>
 		<highlight
 			this="6075710C-482B-4AFE-98C54222D20661AC"
 			id="highlight"
@@ -9580,6 +9917,90 @@
 						fontcat_name="body_12"/>
 				</inactive>
 			</states>
+		</left>
+		<left
+			this="DBF3CAFE-2EA2-4836-93A9B0237E08D5A0"
+			id="left"
+			part_of_template="true"
+			uniqueguid_in_template="A56C8E0A-1E64-451C-90B89EA6EE81176E"
+			uniqueguid="DBF3CAFE-2EA2-4836-93A9B0237E08D5A0"
+			dimensions="21.00,21.00"
+			dock_point="Center Left External"
+			offset="-4.00,-1.00"
+			priority="67"
+			sound_category="UI_GBL_TMP_Slider_Arrows">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="4BD57E56-41CA-4242-9709C023F7FCCDBA"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="8F7D23F2-44A9-47C1-813C7ECF36976BA6"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="852282E3-4B59-4C8A-B256A634BE804D3D"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="84733B5F-486F-4193-AB73604BC8E64A5A"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="00DBE714-D935-4E2E-859097DDA0467ADE"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/panel_slider_vertical_bottom_active.png"
+					uniqueguid="B58AF160-F80B-4D1B-A7DEC91A8A05436D"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/panel_slider_vertical_bottom_pressed.png"
+					uniqueguid="79AFF73E-522E-4616-98748CE4A893FC65"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/panel_slider_vertical_bottom_hover.png"
+					uniqueguid="2F5F583A-341C-4A68-A13BE44CD19EDC01"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/panel_slider_vertical_bottom_inactive.png"
+					uniqueguid="8C3151BB-C45C-4DBA-909F30722A2CE174"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="SliderDecrementButton"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="position"/>
+				<property
+					name="disable_override0"
+					value="resizable"/>
+				<property
+					name="stepSize"
+					value="1"/>
+				<property
+					name="update_frequency_ms"
+					value="200"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/panel_slider_vertical_bottom_active.png"/>
+				<element value="ui/skins/default/panel_slider_vertical_bottom_pressed.png"/>
+				<element value="ui/skins/default/panel_slider_vertical_bottom_hover.png"/>
+				<element value="ui/skins/default/panel_slider_vertical_bottom_inactive.png"/>
+			</override_images>
 		</left>
 		<left
 			this="F325EAAE-8D10-4870-A1C0E8C07B7C6E69"
@@ -13145,6 +13566,90 @@
 				</inactive>
 			</states>
 		</right>
+		<right
+			this="E7EAEC70-A7A3-4E19-BC537CFFBE165180"
+			id="right"
+			part_of_template="true"
+			uniqueguid_in_template="0C7C26D2-B48D-4B8F-A90D69F91240C2EF"
+			uniqueguid="E7EAEC70-A7A3-4E19-BC537CFFBE165180"
+			dimensions="21.00,21.00"
+			dock_point="Center Right"
+			offset="24.00,-1.00"
+			priority="67"
+			sound_category="UI_GBL_TMP_Slider_Arrows">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="BEEDF713-B41A-4629-9B66812032117411"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="D52B6E00-FEF5-4B53-B1985E228979CC75"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="C209A7F0-17EC-4C75-902A3B6FFE5A641F"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="22307D5E-B62A-482D-AC26C6154F144484"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="B8D5D383-3D86-4DDB-B76BD58C7F9335BF"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/panel_slider_vertical_top_active.png"
+					uniqueguid="C9B4C5B0-3CC0-4FD9-9DF3CDFDB51E341C"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/panel_slider_vertical_top_pressed.png"
+					uniqueguid="7E895CB6-94FE-4F94-B3BDCD139F4E02E7"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/panel_slider_vertical_top_hover.png"
+					uniqueguid="52732AA3-B979-4025-9950F8446D0E7CEB"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/panel_slider_vertical_top_inactive.png"
+					uniqueguid="FE1909AD-CD10-4553-BCE6A380C3E3329B"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="SliderIncrementButton"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="position"/>
+				<property
+					name="disable_override0"
+					value="resizable"/>
+				<property
+					name="stepSize"
+					value="1"/>
+				<property
+					name="update_frequency_ms"
+					value="200"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/panel_slider_vertical_top_active.png"/>
+				<element value="ui/skins/default/panel_slider_vertical_top_pressed.png"/>
+				<element value="ui/skins/default/panel_slider_vertical_top_hover.png"/>
+				<element value="ui/skins/default/panel_slider_vertical_top_inactive.png"/>
+			</override_images>
+		</right>
 		<root
 			this="695B0DAE-3A94-4A92-B9DFA46F36FC3AC4"
 			id="root"
@@ -13261,6 +13766,62 @@
 						font_m_leading="3"
 						fontcat_name="body_12"/>
 				</inactive>
+			</states>
+		</scale_percentage_tx>
+		<scale_percentage_tx
+			this="A352A512-2B98-4590-8E32D0626B528CBC"
+			id="scale_percentage_tx"
+			offset="407.00,8.00"
+			priority="65"
+			uniqueguid="A352A512-2B98-4590-8E32D0626B528CBC"
+			currentstate="646C7DDF-4FF7-4A23-B962E4CA5355B708"
+			defaultstate="646C7DDF-4FF7-4A23-B962E4CA5355B708">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextCommandGiverOnContextSet"
+					context_object_id="CcoSliderValueContext"
+					context_function_id="self.SetValue(SliderValue)"/>
+				<callback_with_context callback_id="NumericalInput"/>
+				<callback_with_context
+					callback_id="ContextCommandTextInputEnterPressed"
+					context_object_id="CcoStaticObject"
+					context_function_id="Component(&quot;ai_anti_player_bias_slider&quot;, &quot;^1&quot; ).SetValue(self.GetValue())"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="9DA0F930-0C1F-4BF1-88F4F68370DDBC5D"
+					uniqueguid="9DA0F930-0C1F-4BF1-88F4F68370DDBC5D"
+					imagepath="ui/skins/default/frame_text.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="646C7DDF-4FF7-4A23-B962E4CA5355B708"
+					name="NewState"
+					width="35"
+					height="24"
+					interactive="true"
+					uniqueguid="646C7DDF-4FF7-4A23-B962E4CA5355B708">
+					<imagemetrics>
+						<image
+							this="C0562B91-014F-42B6-BA57EC8E01D0E54F"
+							uniqueguid="C0562B91-014F-42B6-BA57EC8E01D0E54F"
+							componentimage="9DA0F930-0C1F-4BF1-88F4F68370DDBC5D"
+							width="35"
+							height="24"
+							tile="true"
+							margin="4.00,4.00,4.00,4.00"/>
+					</imagemetrics>
+					<component_text
+						text="2.22"
+						textvalign="Center"
+						texthalign="Center"
+						textlocalised="true"
+						textlabel="StateText_b8ff95fd"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
 			</states>
 		</scale_percentage_tx>
 		<selected_context_display
@@ -16633,6 +17194,48 @@
 				</newstate>
 			</states>
 		</tx_header>
+		<tx_label
+			this="896E1526-7E37-4477-B6769D1B1777AC1E"
+			id="tx_label"
+			offset="0.00,5.00"
+			component_anchor_point="1.00,0.50"
+			priority="10"
+			tooltipslocalised="true"
+			uniqueguid="896E1526-7E37-4477-B6769D1B1777AC1E"
+			currentstate="326F061F-9EFC-4A78-B05B0D10EADC2576">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoMultiplayerCampaignSettingRecord"
+					context_function_id="LocalisedName"/>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoMultiplayerCampaignSettingRecord"
+					context_function_id="LocalisedTooltip"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="326F061F-9EFC-4A78-B05B0D10EADC2576"
+					name="NewState"
+					width="247"
+					height="30"
+					focustype="Active"
+					interactive="true"
+					disabled="true"
+					uniqueguid="326F061F-9EFC-4A78-B05B0D10EADC2576">
+					<component_text
+						text="dy label"
+						textvalign="Center"
+						textlocalised="true"
+						textlabel="StateText_41dd4014"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+				</newstate>
+			</states>
+		</tx_label>
 		<tx_teams
 			this="95ED66DA-2E7A-4DDA-8924F465F28CF4BA"
 			id="tx_teams"
