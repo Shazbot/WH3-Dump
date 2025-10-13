@@ -31,11 +31,11 @@ MINOR_CULT_LIST = {
 	{key = "mc_sartosan_vault", cult = nil},
 	{key = "mc_cathayan_caravan", cult = nil},
 	{key = "mc_peg_street_pawnshop", cult = nil},
-	{key = "mc_purple_hand", cult = nil},
+	{key = "mc_purple_hand", cult = nil, shared_state_key = "endgame_minor_cult_purple_hand"},
 	{key = "mc_underworld_sea", cult = nil},
 	{key = "mc_doomsphere", cult = nil, shared_state_key = "endgame_minor_cult_doomsphere"},
 	{key = "mc_dark_gift", cult = nil},
-	{key = "mc_chaos_portal", cult = nil},
+	{key = "mc_chaos_portal", cult = nil, shared_state_key = "endgame_minor_cult_chaos_portal"},
 	{key = "mc_crimson_skull", cult = nil, shared_state_key = "endgame_minor_cult_crimson_skull"},
 	{key = "mc_cult_of_pleasure", cult = nil},
 	{key = "mc_the_cabal", cult = nil, shared_state_key = "endgame_minor_cult_cabal", disable_in_MP = true},
@@ -50,7 +50,8 @@ local status_to_string = {
 
 MINOR_CULT_REGIONS = {};
 local minor_cult_faction_key = "wh3_main_rogue_minor_cults";
-local spawn_cult_per_turn_chance = 10;
+local spawn_cult_per_turn_chance = 8;
+local allow_ai_cults = false; -- WIP, don't enable yet
 local cult_last_turn = false;
 local cult_debug_output = true;
 
@@ -88,6 +89,10 @@ function add_minor_cults_listeners()
 			local cult = cults:item_at(cult_index);
 			local region = cult:region();
 			cm:foreign_slot_set_reveal_to_faction(region:owning_faction(), cult);
+
+			if allow_ai_cults == true then
+				-- TODO: Reveal to all human players also
+			end
 		end
 		
 		for i = 1, #MINOR_CULT_LIST do
@@ -108,11 +113,11 @@ function add_minor_cults_listeners()
 			"MinorCults_FactionBeginTurnPhaseNormal",
 			"FactionBeginTurnPhaseNormal",
 			function(context)
-				return context:faction():is_human() and context:faction():is_factions_turn();
+				local faction = context:faction();
+				return (faction:is_human() or (allow_ai_cults == true and faction:has_home_region() == true)) and faction:is_factions_turn();
 			end,
 			function(context)
 				local turn_number = cm:turn_number();
-				local cult_created_this_turn = false;
 				local event_triggered_this_turn = false;
 
 				if cult_last_turn == false then -- This avoid any chance of spawning/events one turn after another
@@ -132,7 +137,6 @@ function add_minor_cults_listeners()
 									local spawned, log = spawn_minor_cult(region_key, i);
 									
 									if spawned == true then
-										cult_created_this_turn = true;
 										cult_last_turn = true;
 										out_mc("\t"..MINOR_CULT_LIST[i].key .. " - VALID - "..log);
 										break;
@@ -145,10 +149,10 @@ function add_minor_cults_listeners()
 							end
 						end
 					else
-						out_mc("\tFailed Spawn Cult Chance ("..spawn_cult_per_turn_chance.."%)");
+						out_mc("\tFailed - Spawn Cult Chance ("..spawn_cult_per_turn_chance.."%)");
 					end
 				else
-					out_mc("\tFailed Cult Spawned Last Turn");
+					out_mc("\tFailed - Cult Spawned Last Turn");
 					cult_last_turn = false;
 				end
 
@@ -176,7 +180,7 @@ function add_minor_cults_listeners()
 										local region = cm:model():world():region_manager():region_by_key(MINOR_CULT_LIST[i].cult.saved_data.region_key);
 
 										if region:is_null_interface() == false then
-											if event_triggered_this_turn == false or MINOR_CULT_LIST[i].cult.event_data.force_trigger then
+											if (event_triggered_this_turn == false and cult_last_turn == false) or MINOR_CULT_LIST[i].cult.event_data.force_trigger then
 												local faction = region:owning_faction();
 
 												if MINOR_CULT_LIST[i].cult.custom_event ~= nil then
@@ -310,6 +314,7 @@ function add_minor_cults_listeners()
 			true
 		);
 
+		-- Debug listener to easily spawn cults
 		core:add_listener(
 			"MinorCults_ScriptEventHumanFactionTurnStart",
 			"ScriptEventHumanFactionTurnStart",
@@ -344,16 +349,6 @@ function add_minor_cults_listeners()
 				--spawn_minor_cult_by_key(capital, "mc_cult_of_pleasure");
 				--spawn_minor_cult_by_key(capital, "mc_the_cabal");
 				--spawn_minor_cult_by_key(capital, "mc_elven_enclave");
-				
-				--[[
-				spawn_minor_cult_by_key("wh3_main_combi_region_altdorf", "mc_purple_hand");
-				cm:transfer_region_to_faction("wh3_main_combi_region_eilhart", "wh_main_emp_empire");
-				spawn_minor_cult_by_key("wh3_main_combi_region_eilhart", "mc_the_cabal");
-				cm:transfer_region_to_faction("wh3_main_combi_region_grunburg", "wh_main_emp_empire");
-				spawn_minor_cult_by_key("wh3_main_combi_region_grunburg", "mc_crimson_plague");
-				cm:transfer_region_to_faction("wh3_main_combi_region_ubersreik", "wh_main_emp_empire");
-				spawn_minor_cult_by_key("wh3_main_combi_region_ubersreik", "mc_dark_gift");
-				]]--
 			end,
 			false
 		);
@@ -447,7 +442,6 @@ function debug_create_cult(key)
 					local log = spawn_minor_cult(region_key, i);
 					MINOR_CULT_REGIONS[region_key] = MINOR_CULT_LIST[i].key;
 					out_mc("\t"..MINOR_CULT_LIST[i].key .. " - VALID - "..log);
-					cult_created_this_turn = true;
 					break;
 				else
 					out_mc("\t"..MINOR_CULT_LIST[i].key .. " - INVALID");

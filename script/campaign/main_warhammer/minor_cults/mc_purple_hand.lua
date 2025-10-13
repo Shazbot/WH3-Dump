@@ -65,7 +65,7 @@ function minor_cult:custom_event(faction, region, cult_faction)
 				self:remove_cult(cult_faction);
 				self:spawn_hidden_cults(region, worldwide_cult_chance);
 				local region_cqi = region:cqi();
-				cm:trigger_incident_with_targets(faction_cqi, "wh3_main_minor_cult_purple_hand_cult_completed", 0, 0, 0, 0, region_cqi, 0);
+				cm:trigger_incident_with_targets(faction_cqi, "wh3_main_minor_cult_purple_hand_cult_complete", 0, 0, 0, 0, region_cqi, 0);
 				self.saved_data.status = -1;
 			else
 				-- Notify player of the new cult
@@ -74,7 +74,7 @@ function minor_cult:custom_event(faction, region, cult_faction)
 				if new_cult_region ~= nil then
 					region_cqi = new_cult_region:cqi();
 				end
-				cm:trigger_incident_with_targets(faction_cqi, "wh3_main_minor_cult_purple_hand_cult_spread", 0, 0, 0, 0, region_cqi, 0);
+				cm:trigger_dilemma_with_targets(faction_cqi, "wh3_main_minor_cult_purple_hand_cult_spread", 0, 0, 0, 0, region_cqi, 0);
 				self:update_existing_cult(region, amount_spread);
 			end
 			return true;

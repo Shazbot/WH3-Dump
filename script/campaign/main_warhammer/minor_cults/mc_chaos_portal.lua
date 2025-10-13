@@ -35,7 +35,7 @@ local minor_cult = {
 	},
 	force_region = nil,
 	valid_provinces = nil,
-	valid_from_turn = 5,
+	valid_from_turn = 15,
 	chance_if_valid = 5,
 	complete_on_removal = true,
 	event_data = nil,
