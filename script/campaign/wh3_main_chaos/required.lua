@@ -126,6 +126,9 @@ require("wh3_dlc26_ogre_camps")
 require("wh3_dlc26_tyrants_demands")
 require("wh3_dlc26_fragments_of_sorcery")
 
+-- DLC27
+require("wh3_dlc27_pre_battle_challenges")
+require("wh3_dlc27_nor_pillaging")
 
 -- Game systems
 require("victory_objectives");

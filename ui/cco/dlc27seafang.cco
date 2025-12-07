@@ -1,0 +1,26 @@
+Seafang
+{
+	GetWulfrikContext()
+	{
+		PlayersFaction.CharacterList.FirstContext(AgentSubtypeRecordContext.Key == "wh_dlc08_nor_wulfrik")
+	}
+
+	IsWulfrikGarrisonedInSettlement(CcoCampaignSettlement settlement, CcoCampaignCharacter wulfrik_context)
+	{
+		wulfrik_context.IsAlive && wulfrik_context.IsGarrisoned && settlement.GarrisonForceContext == wulfrik_context.MilitaryForceContext
+	}
+
+	IsWulfrikNearbySettlement(CcoCampaignSettlement settlement, CcoCampaignCharacter wulfrik_context)
+	{
+		wulfrik_context.IsAlive && wulfrik_context.IsClosestToSettlement(settlement)
+	}
+
+	IsSettlementValidTargetForSeafangTeleport(CcoCampaignSettlement)
+	{
+		(teleport_ritual = PlayersFaction.RitualContextForKey("wh3_dlc27_ritual_wulfrik_teleport")) =>
+		{
+			teleport_ritual.CanPayloadBeCreated(this) &&
+			teleport_ritual.CanPayloadBeCarriedOut(this)
+		}
+	}
+}

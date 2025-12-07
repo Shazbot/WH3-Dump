@@ -3,7 +3,13 @@ NORSCA_ADVICE = {};
 NORSCA_LEGENDARY_LORDS = {
 	wh_dlc08_nor_wulfrik = true,
 	wh_dlc08_nor_throgg = true,
+	wh3_dlc27_nor_sayl_the_faithless = true,
 };
+NORSCA_FACTION_KEYS = {
+	wulfrik = "wh_dlc08_nor_norsca",
+	throgg = "wh_dlc08_nor_wintertooth",
+	sayl = "wh3_dlc27_nor_sayl",
+}
 
 function Add_Norsca_Listeners()
 	out("#### Adding Norsca Listeners ####");
@@ -30,8 +36,10 @@ function Norsca_Settlement_Captured(context)
 	if context.string == "settlement_captured" then
 		local turn_faction = cm:whose_turn_is_it_single();
 		
-		if turn_faction:is_null_interface() == false and turn_faction:is_human() == true and turn_faction:subculture() == NORSCA_SUBCULTURE then
+		if turn_faction:is_null_interface() == false and turn_faction:is_human() == true and turn_faction:subculture() == NORSCA_SUBCULTURE and turn_faction:name() ~= NORSCA_FACTION_KEYS.sayl then
 			Play_Norsca_Advice("dlc08.camp.advice.nor.gods.001", norsca_info_text_gods);
+		elseif turn_faction:region_list():num_items() >= cm:campaign_var_int_value("nor_dark_allegiance_unlock_settlement_requirement") then
+			Play_Norsca_Advice("dlc27.camp.advice.nor.gods.sayl.001", norsca_info_text_gods_sayl);
 		end
 	end
 end
@@ -70,12 +78,16 @@ function Norsca_CharacterEntersGarrison(context)
 end
 
 norsca_info_text_gods = {"war.camp.prelude.nor.gods.info_001", "war.camp.prelude.nor.gods.info_002", "war.camp.prelude.nor.gods.info_003"};
+norsca_info_text_gods_sayl = {"dlc27.war.camp.prelude.nor.gods.sayl.info_001", "dlc27.war.camp.prelude.nor.gods.sayl.info_002", "dlc27.war.camp.prelude.nor.gods.sayl.info_003"};
 norsca_info_text_confederation = {"war.camp.prelude.nor.confederation.info_001", "war.camp.prelude.nor.confederation.info_002", "war.camp.prelude.nor.confederation.info_003"};
 norsca_info_text_monsters = {"war.camp.prelude.nor.monsters.info_001", "war.camp.prelude.nor.monsters.info_002", "war.camp.prelude.nor.monsters.info_003"};
 
-function Play_Norsca_Advice(advice, infotext)
+function Play_Norsca_Advice(advice, infotext, ignore_advice_level)
+	if ignore_advice_level == nil then
+		ignore_advice_level = false
+	end
 	if cm:model():is_multiplayer() == false then
-		if common.get_advice_level() >= 1 then
+		if common.get_advice_level() >= 1 or ignore_advice_level then
 			local turn_faction = cm:whose_turn_is_it_single();
 			
 			if turn_faction:is_null_interface() == false and turn_faction:is_human() == true and turn_faction:subculture() == NORSCA_SUBCULTURE then
@@ -121,3 +133,61 @@ cm:add_loading_game_callback(
 		NORSCA_ADVICE = cm:load_named_value("NORSCA_ADVICE", {}, context);
 	end
 );
+
+
+-- Wulfrik campaign start actions 
+wulfrik_campaign_start = {
+	wulfrik_faction = "wh_dlc08_nor_norsca",
+	start_dilemma_key = "wh3_dlc27_nor_wulfrik_start_dilemma",
+	-- each dilemma choice will reveal a set of predefined coastal regions
+	choice_to_region_mapping = {
+		[0] = {"wh3_main_combi_region_marienburg"},
+		[1] = {"wh3_main_combi_region_castle_alexandronov","wh3_main_combi_region_erengrad"},
+		[2] = {"wh3_main_combi_region_bordeleaux"},
+		[3] = {"wh3_main_combi_region_karond_kar","wh3_main_combi_region_nagrar"}
+	}
+}
+
+function wulfrik_campaign_start:initialise()
+	local wulfrik_faction_obj = cm:get_faction(self.wulfrik_faction)
+	if not wulfrik_faction_obj then return false end
+
+	-- start of turn trigger the following
+	core:add_listener(
+		"wulfrik_reveal_locations_dilemma_trigger",
+		"FactionTurnStart",
+		function(context)
+			return context:faction():name() == self.wulfrik_faction
+		end,
+		function(context)
+			local faction = context:faction()
+
+			-- on turn 5 wulfrik receives his dilemma to reveal shroud on a region
+			if faction:is_human() == true then
+				if cm:turn_number() == 5 and cm:get_campaign_name() == "main_warhammer" then
+					cm:trigger_dilemma(self.wulfrik_faction, self.start_dilemma_key);
+				end
+			end
+
+		end,
+		true
+	)
+
+	-- listen to a choice being made on the above dilemma
+	core:add_listener(
+		"wulfrik_reveal_dilemma_choice_made",
+		"DilemmaChoiceMadeEvent",
+		function(context)
+			return context:dilemma() == self.start_dilemma_key
+		end,
+		function(context)
+			local choice = context:choice()
+			local regions_to_reveal = self.choice_to_region_mapping[choice]
+			-- for each region in the choice made we make it visible
+			for _, region_key in ipairs(regions_to_reveal) do
+				cm:make_region_visible_in_shroud(self.wulfrik_faction, region_key)
+			end
+		end,
+		true
+	)
+end

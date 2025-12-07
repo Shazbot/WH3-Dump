@@ -1,0 +1,208 @@
+CampaignSelect
+{
+	GetChosenCultureSorting
+	{
+		PrefAsInt("ui_campaign_select_culture_select_chosen_sorting")
+	}
+	
+	SetChosenCultureSorting(Int i)
+	{
+		( x = SetPrefAsInt("ui_campaign_select_culture_select_chosen_sorting", i) )=>
+		{
+			i
+		}
+	}
+
+	ToggleCultureSorting()
+	{
+		( undefined = 0, default = 1, ownership = 2 )=>
+		{
+			Do
+			(
+				DoIfElse
+				(
+					IsUsingDefaultSorting,
+					SetChosenCultureSorting(ownership),
+					SetChosenCultureSorting(default)
+				),
+				UiMsg("OnToggleCutureSorting")
+			)
+		}
+	}
+
+	GetOwnershipProductRecord_RealmOfChaos
+	{
+		FindContext("CcoOwnershipProductRecord", "TW_WH3_ROC_UPDATE")
+	}
+	
+	GetOwnershipProductRecord_WH2
+	{
+		FindContext("CcoOwnershipProductRecord", "TW_WH2_BASE_GAME")
+	}
+
+	GetOwnershipProductRecord_WH1
+	{
+		FindContext("CcoOwnershipProductRecord", "TW_WH1_BASE_GAME")
+	}
+
+	IsWh1Owned
+	{
+		GetOwnershipProductRecord_WH1.IsOwned
+	}
+
+	IsWh2Owned
+	{
+		GetOwnershipProductRecord_WH2.IsOwned
+	}
+
+	IsOriginalWh3Owned
+	{
+		GetOwnershipProductRecord_RealmOfChaos.IsOwned
+	}
+
+	DetectCultureSorting
+	{
+		( default = 1, ownership = 2,  roc = GetOwnershipProductRecord_RealmOfChaos)=>
+		{
+			GetIfElse
+			(
+				roc.IsOwned == false,
+				SetChosenCultureSorting(ownership),
+				SetChosenCultureSorting(default)
+			)
+		}
+	}
+
+	IsUsingDefaultSorting
+	{
+		( current = GetChosenCultureSorting, undefined = 0, default = 1, ownership = 2 )=>
+		{
+			GetIfElse
+			(
+				current == undefined,
+				DetectCultureSorting == default,
+				current == default
+			)
+		}
+	}
+
+	CultureList(CcoCampaignStartInfo info)
+	{
+		GetIfElse
+		(
+			IsUsingDefaultSorting,
+			info.CultureList,
+			Join
+			(
+				info.OwnedCultureList,
+				info.UnownedCultureList.Sort
+				( (culture) =>
+					info.LordListForFaction(culture)
+					.All
+					(
+						FactionRecordContext.OwnershipProductRequirementList.All
+						(
+							OwnershipProductRecordList.Any
+							(
+								IsOwned == false && IsFlc
+							)
+						)
+					)
+				)
+			)
+		)
+	}
+
+	IsImmortalEmpireCampaignMap(CcoCampaignMapPlayableAreaRecord record)
+	{
+		record.CampaignKey == "wh3_main_combi"
+	}
+
+	CampaignSelectScreen
+	{
+		Component("29DFE441-5B64-4758-844CE8F6FB4090FE")
+	}
+
+	IsFirstTimeUserExperience
+	{
+		CampaignSelectScreen.IsFirstTime
+	}
+
+	StoredFactionLeaderContext
+	{
+		CampaignSelectScreen.StoredContext("CcoFrontendFactionLeaderRecord")
+	}
+
+	StoredCampaignStartInfo
+	{
+		# This is an awkard way of getting the stored campaign start info but #
+		# this is how this layout works and the same can be seen all over it #
+		StoredContext("CcoCampaignStartInfo", "button_list", "campaign_select_new")
+	}
+
+	RecommendedWh1FrontendFactionLeaderKey
+	{
+		"wh_main_political_party_empire_balthasar"
+	}
+
+	RecommendedWh2FrontendFactionLeaderKey
+	{
+		"wh2_main_political_party_hef_tyrion"
+	}
+
+	RecommendedWh3FrontendFactionLeaderKey
+	{
+		"wh3_main_political_party_cth_the_northern_provinces"
+	}
+
+	IsRecommendedWh1FrontendFactionLeader(CcoFrontendFactionLeader leader)
+	{
+		leader.FrontendFactionLeaderRecordContext.Key == RecommendedWh1FrontendFactionLeaderKey
+	}
+
+	IsRecommendedWh2FrontendFactionLeader(CcoFrontendFactionLeader leader)
+	{
+		leader.FrontendFactionLeaderRecordContext.Key == RecommendedWh2FrontendFactionLeaderKey
+	}
+
+	IsRecommendedWh3FrontendFactionLeader(CcoFrontendFactionLeader leader)
+	{
+		leader.FrontendFactionLeaderRecordContext.Key == RecommendedWh3FrontendFactionLeaderKey
+	}
+
+	IsRecommendedFactionLeader(CcoFrontendFactionLeader leader)
+	{
+		(
+			start_info = StoredCampaignStartInfo,
+			is_ie_map  = GetIfElse
+			(
+				IsContextValid(start_info),
+				IsImmortalEmpireCampaignMap(start_info.CampaignMapPlayableAreaRecordContext),
+				false
+			)
+		) =>
+		{
+			GetIfElse
+			(
+				is_ie_map && IsFirstTimeUserExperience,
+				GetIfElse
+				(
+					IsOriginalWh3Owned,
+					IsRecommendedWh3FrontendFactionLeader(leader),
+					GetIfElse
+					(
+						IsWh2Owned,
+						IsRecommendedWh2FrontendFactionLeader(leader),
+						GetIfElse
+						(
+							IsWh1Owned,
+							IsRecommendedWh1FrontendFactionLeader(leader),
+							false
+						)
+					)
+				),
+				leader.FrontendFactionLeaderRecordContext.Difficulty == "easy"
+			)
+		}
+	}
+}

@@ -418,6 +418,21 @@ function campaign_experience_triggers:add_experience(context, is_general, value,
 	end
 	
 	local amount_to_add = value * mod
+
+	--Sayl Altar XP 'stealing' bonus value
+	local xp_theft_bv = cm:get_characters_bonus_value(character, "sayl_altar_experience_theft")
+	if xp_theft_bv > 0 and not character:character_subtype("wh3_dlc27_nor_sayl_the_faithless") then
+		local stolen_xp_amount = amount_to_add * (xp_theft_bv/100)
+		amount_to_add = amount_to_add - stolen_xp_amount
+		
+		local sayl_faction = cm:get_faction("wh3_dlc27_nor_sayl")
+		if sayl_faction then
+			local sayl_character = sayl_faction:faction_leader()
+			if sayl_character then
+				cm:add_agent_experience(cm:char_lookup_str(sayl_character:cqi()), stolen_xp_amount, false)
+			end
+		end
+	end
 	
 	if amount_to_add > 0 then
 		cm:get_game_interface():add_agent_experience(cm:char_lookup_str(character), amount_to_add);

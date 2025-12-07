@@ -48,6 +48,8 @@ sword_of_khaine = {
 		wh2_main_sc_def_dark_elves = true, 
 		wh2_main_sc_hef_high_elves = true
 	},
+	excluded_elven_factions = {
+	},
 	ai_chance_to_lose_sword = 5 -- % chance per turn the AI has to lose the sword. Checked each turn if growth_time has passed and sword can't level up
 }
 
@@ -167,7 +169,7 @@ function sword_of_khaine:set_sword_button_state()
 	local faction_symbol = find_uicomponent(core:get_ui_root(), "sword_of_khaine", "faction_symbol");
 	local ui_fire_vfx = false
 	
-	if self.owner.faction and self.owner.faction ~= "rebels" then
+	if self.owner.faction and self.owner.faction ~= "" and self.owner.faction ~= "rebels" then
 		-- Someone controls the shrine and it's not the generic rebels faction
 		local cqi = cm:get_faction(self.owner.faction):command_queue_index();
 		faction_symbol:SetVisible(true);
@@ -353,7 +355,9 @@ function sword_of_khaine:set_sword_owner(cqi, limited_to_elven, awarded_via_dile
 end;
 
 function sword_of_khaine:faction_is_elven(faction)
-	if not faction then return false end
+	if not faction or self.excluded_elven_factions[faction:name()] ~= nil  then 
+		return false 
+	end
 
 	local subculture = faction:subculture();
 	
@@ -488,7 +492,10 @@ function sword_of_khaine:add_listeners()
 		"sword_of_khaine_CharacterRazedSettlement",
 		"CharacterRazedSettlement",
 		function(context)
-			return context:character():region():name() == self.region_key;
+			local razed_gr_interface = context:garrison_residence()
+			return razed_gr_interface:is_settlement() and 
+				razed_gr_interface:region():is_null_interface() == false and 
+				razed_gr_interface:region():name() == self.region_key;
 		end,
 		function(context)
 			find_uicomponent(core:get_ui_root(), "sword_of_khaine", "faction_symbol"):SetVisible(false);

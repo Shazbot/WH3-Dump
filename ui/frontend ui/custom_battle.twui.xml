@@ -136,10 +136,6 @@
 									<enemy_bar_parent this="814330A3-755D-4D31-83552B49B3C1CC2A">
 										<enemy_bar this="E5313F59-8644-41AA-8C22B0AA868E06E8"/>
 									</enemy_bar_parent>
-									<button_show_autoresolve_results this="F1AD81EF-8D15-48F6-8FF0C36137E5C1B1">
-										<button_txt this="3A0FBF5F-B9EB-4C91-BB62212E17344CA0"/>
-										<dev_icon this="8E6AC0D2-62E8-461B-AA0F809E3ED4D5C2"/>
-									</button_show_autoresolve_results>
 								</autoresolve_display>
 							</faction_holder>
 							<roster_holder this="327C3EF4-6C32-4723-BEECC110A394C28E">
@@ -531,6 +527,10 @@
 					<copy_of_line_smoke2 this="39101C21-6CFC-43EB-8D139020F4825DF3">
 						<smoke this="4F5B1671-7B12-4109-B4DE6332A36DE53A"/>
 					</copy_of_line_smoke2>
+					<button_show_autoresolve_results this="F1AD81EF-8D15-48F6-8FF0C36137E5C1B1">
+						<button_txt this="3A0FBF5F-B9EB-4C91-BB62212E17344CA0"/>
+						<dev_icon this="8E6AC0D2-62E8-461B-AA0F809E3ED4D5C2"/>
+					</button_show_autoresolve_results>
 				</ready_parent>
 				<popup_waiting this="8891496B-2CBC-4A7A-A2E61DCBE536E66A">
 					<background this="F1DBA5DE-BF7A-4C72-AC747A844221A5E4">
@@ -6611,8 +6611,8 @@
 			uniqueguid_in_template="715902FD-2442-4210-8831AAF520A41055"
 			uniqueguid="F1AD81EF-8D15-48F6-8FF0C36137E5C1B1"
 			dimensions="175.00,29.00"
+			dock_point="Top Center"
 			is_visible="false"
-			offset="119.00,-70.00"
 			priority="100"
 			sound_category="UI_GBL_TMP_Square_Large_Text_Button_Toggle">
 			<state_uniqueguids>
@@ -17130,7 +17130,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCultureRecord"
-					context_function_id="(factions = StoredContextFromParent(&quot;CcoCustomBattlePlayerSlot&quot;).FactionsForCulture(this).Filter(OwnershipProductRequirementList.IsEmpty == false)) =&gt; { (this.Key.Contains(&quot;wh3_main_&quot;) == false || IsOgreKingdoms) &amp;&amp; factions.IsEmpty == false &amp;&amp; factions.All(OwnershipProductRequirementList.All(OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc == false)))}"/>
+					context_function_id="(factions = StoredContextFromParent(&quot;CcoCustomBattlePlayerSlot&quot;).FactionsForCulture(this).Filter(OwnershipProductRequirementList.IsEmpty == false)) =&gt; {factions.IsEmpty == false &amp;&amp; factions.All(OwnershipProductRequirementList.All(OwnershipProductRecordList.Any(IsOwned == false &amp;&amp; IsFlc == false)))}"/>
 				<callback_with_context
 					callback_id="#ContextLayoutTooltip"
 					context_object_id="CcoCultureRecord"
@@ -27249,7 +27249,7 @@
 			tooltipslocalised="true"
 			soundcategory="UI_GBL_TMP_Unit_Card"
 			uniqueguid="B56B2644-92E1-4538-9681865D117298CD"
-			currentstate="976E2F7B-C095-4BA6-887ADC3E27E2697C"
+			currentstate="8A2CF2D8-C173-4108-B7CAE12C518197C5"
 			defaultstate="976E2F7B-C095-4BA6-887ADC3E27E2697C"
 			comment="ScottB: The ContextPropagator that passes own context to self for unit record is to make it refresh when change selection, in the event that the list itself isnt refreshed when changed character selection">
 			<callbackwithcontextlist>
@@ -27618,7 +27618,7 @@
 							width="45"
 							height="108"
 							dockpoint="Center"
-							shadertechnique_vars="1.00,1.00,0.00,0.00"
+							shadertechnique_vars="0.70,1.00,0.00,0.00"
 							shader_name="set_greyscale_t0"/>
 						<image
 							this="D09BF869-1CAF-4CD0-B3563CDF63CA6388"
@@ -27638,7 +27638,7 @@
 							componentimage="F0FCD11C-366C-4C15-9CF5C89EB2721737"
 							width="45"
 							height="108"
-							colour="#666666C8"/>
+							colour="#66666650"/>
 						<image
 							this="5FED21C3-5ECA-4D6B-BEDBE7A402BEAB86"
 							uniqueguid="5FED21C3-5ECA-4D6B-BEDBE7A402BEAB86"
@@ -27652,9 +27652,11 @@
 							this="CA2FC1F9-9100-4A1E-8A88BF6C6721C732"
 							uniqueguid="CA2FC1F9-9100-4A1E-8A88BF6C6721C732"
 							componentimage="D2C97B90-F86E-46FD-BF8EF6655A42DD9B"
-							offset="6.00,34.00"
-							height="40"
-							dockpoint="Center"
+							offset="0.00,40.00"
+							width="22"
+							height="28"
+							colour="#FFFFFF00"
+							dockpoint="Center Left"
 							canresizeheight="false"
 							canresizewidth="false"/>
 					</imagemetrics>

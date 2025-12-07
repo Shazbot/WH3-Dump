@@ -10,6 +10,7 @@ skarsniks_locked_buildings = {
 	"wh_main_grn_military_1",
 	"wh_main_grn_military_2",
 	"wh_main_grn_military_3",
+	"wh_main_grn_boars_2",
 	"wh3_dlc26_grn_boars_3",
 	"wh_dlc06_grn_boars_2_skarsnik",
 	"wh3_dlc26_grn_boars_3_skarsnik",
@@ -192,7 +193,6 @@ function eight_peaks_setup()
 	--Add Skarsnik building restriction on the Orc recruitment chain
 	for i = 1, #skarsniks_locked_buildings do
 		cm:add_event_restricted_building_record_for_faction(skarsniks_locked_buildings[i], skarsnik_faction_name, "skarsnik_building_lock")
-		CampaignUI.AddUnitToBlacklist("wh_main_grn_cav_orc_boar_boyz")
 	end
 
 	if skarsnik and skarsnik:is_human() then
@@ -482,10 +482,8 @@ function eight_peaks_check(karak_owner)
 	out("\twh_dlc06_skarsnik_karak_owned_" .. tostring(skarsnik_owner));
 	cm:apply_effect_bundle("wh_dlc06_skarsnik_karak_owned_" .. tostring(skarsnik_owner), "wh_main_grn_crooked_moon", 0);
 	if skarsnik_owner == true then
-		out(" DEBUG Skarsnik owns the Karak ")
 		for i = 1, #skarsniks_locked_buildings do
 			cm:remove_event_restricted_building_record_for_faction(skarsniks_locked_buildings[i], skarsnik_faction_name)
-			CampaignUI.ClearUnitBlacklist()
 		end
 	else
 		for i = 1, #skarsniks_locked_buildings do

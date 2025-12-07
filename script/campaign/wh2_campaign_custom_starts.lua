@@ -317,6 +317,19 @@ custom_starts.start_data.me_custom_start_factions = {
 			{"secondary_slot_change", "wh3_main_combi_region_deaths_head_monoliths", 0, "wh2_main_lzd_skinks_1"},
 		}
 	},
+	-----------------------
+	------ Wulfrik -----
+	-----------------------
+	-- In any game where Wulfrik is AI-controlled he will start near his capital - .
+	{
+		if_ai = "wh_dlc08_nor_norsca",
+		changes = {
+			{"teleport_character_faction_leader", "wh_dlc08_nor_norsca", 416, 792},
+			{"teleport_character", "wh_dlc08_nor_norsca", 151, 478, 422, 792, false},
+			{"force_diplomacy", "wh_dlc08_nor_norsca", "wh_main_nor_bjornling", "war"},
+			{"force_diplomacy", "wh_dlc08_nor_norsca", "wh2_main_emp_new_world_colonies", "peace"},
+		}
+	},
 }
 
 function custom_starts:add_campaign_custom_start_listeners()

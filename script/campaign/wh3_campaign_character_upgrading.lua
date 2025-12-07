@@ -16,6 +16,10 @@ CUS.initiative_to_agent_junctions = {
 		type = "champion",
 		subtype = "wh3_dlc20_chs_exalted_hero_mnur"
 	},
+	wh3_dlc27_character_initiative_devote_exalted_hero_to_slaanesh = {
+		type = "champion",
+		subtype = "wh3_dlc27_chs_exalted_hero_msla"
+	},
 	wh3_dlc24_character_initiative_devote_exalted_hero_to_tzeentch = {
 		type = "champion",
 		subtype = "wh3_dlc24_chs_exalted_hero_mtze"
@@ -67,6 +71,14 @@ CUS.initiative_to_agent_junctions = {
 	wh3_dlc20_character_initiative_devote_sorceror_lord_to_nurgle_nurgle = {
 		type = "general",
 		subtype = "wh3_dlc20_chs_sorcerer_lord_nurgle_mnur"
+	},
+	wh3_dlc27_character_initiative_devote_sorceror_lord_to_slaanesh_shadows = {
+		type = "general",
+		subtype = "wh3_dlc27_chs_sorcerer_lord_shadows_msla"
+	},
+	wh3_dlc27_character_initiative_devote_sorceror_lord_to_slaanesh_slaanesh = {
+		type = "general",
+		subtype = "wh3_dlc27_chs_sorcerer_lord_slaanesh_msla"
 	},
 	wh3_dlc20_character_initiative_devote_sorceror_lord_to_tzeentch_metal = {
 		type = "general", 
@@ -128,6 +140,9 @@ CUS.subtypes_to_xp_bonus_values = {
 	wh3_dlc20_chs_sorcerer_lord_nurgle_mnur = "char_upgrade_level_preserved_nur",
 	wh3_dlc20_chs_sorcerer_lord_metal_mtze = "char_upgrade_level_preserved_tze",
 	wh3_dlc20_chs_sorcerer_lord_tzeentch_mtze = "char_upgrade_level_preserved_tze",
+	wh3_dlc27_chs_sorcerer_lord_shadows_msla = "char_upgrade_level_preserved_sla",
+	wh3_dlc27_chs_sorcerer_lord_slaanesh_msla = "char_upgrade_level_preserved_sla",
+	wh3_dlc27_chs_exalted_hero_msla = "char_upgrade_level_preserved_sla",
 }
 
 CUS.subtypes_to_composite_scenes = {
@@ -154,7 +169,9 @@ CUS.subtypes_to_composite_scenes = {
 	wh3_main_sla_exalted_keeper_of_secrets_slaanesh= "wh3_campaign_chaos_upgrade_daemons",
 	wh3_main_tze_exalted_lord_of_change_metal = "wh3_campaign_chaos_upgrade_daemons",
 	wh3_main_tze_exalted_lord_of_change_tzeentch = "wh3_campaign_chaos_upgrade_daemons",
-
+	wh3_dlc27_chs_sorcerer_lord_shadows_msla = "wh3_campaign_chaos_upgrade_daemons",
+	wh3_dlc27_chs_sorcerer_lord_slaanesh_msla = "wh3_campaign_chaos_upgrade_daemons",
+	wh3_dlc27_chs_exalted_hero_msla = "wh3_campaign_chaos_upgrade_daemons",
 }
 
 --apply the following tint states when this subtype is created. Intensity of colour will be randomly picked between chosen values.
@@ -235,7 +252,13 @@ CUS.subtype_to_bonus_traits = {
 	},
 	wh_dlc07_chs_sorcerer_lord_shadow = {
 		default = "wh3_dlc20_legacy_trait_sorcerer_shadows",
-		wh3_dlc20_chs_daemon_prince_slaanesh = "wh3_dlc20_legacy_trait_sorcerer_shadows_to_shadows_msla",
+		wh3_dlc27_chs_sorcerer_lord_shadows_msla = "wh3_dlc27_legacy_trait_sorcerer_lord_shadows_to_shadows_msla",
+	},
+	wh3_dlc27_chs_sorcerer_lord_shadows_msla = {
+		default = "wh3_dlc27_legacy_trait_sorcerer_lord_shadows_sla_to_daemon_prince",
+	},
+	wh3_dlc27_chs_sorcerer_lord_slaanesh_msla = {
+		default = "wh3_dlc27_legacy_trait_sorcerer_lord_slaanesh_sla_to_daemon_prince",
 	},
 	--Sorcerers
 	wh_dlc07_chs_chaos_sorcerer_shadow = {

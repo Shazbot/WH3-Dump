@@ -657,6 +657,11 @@ local function slaanesh_gifts_of_slaanesh_narrative_loader(faction_key)
 
 	do
 		local name = "slaanesh_gift_of_slaanesh_event_spread_gift";
+		local character_tags = {
+			"wh3_main_character_tag_gift_of_slaanesh",
+			"wh3_dlc27_character_tag_gift_of_slaanesh_dechala",
+			"wh3_dlc27_character_tag_gift_of_slaanesh_masque",
+		}
 
 		if not narrative.get(faction_key, name .. "_block") then
 			narrative_events.generic(
@@ -669,8 +674,13 @@ local function slaanesh_gifts_of_slaanesh_narrative_loader(faction_key)
 					{
 						event = "FactionCharacterTagAddedEvent",
 						condition =	function(context)
-							local tag_record_key = context:tag_entry():tag_record_key();
-							return context:tagging_faction():name() == faction_key and tag_record_key == "wh3_main_character_tag_gift_of_slaanesh";
+							if context:tagging_faction():name() ~= faction_key then
+								return false
+							end
+
+							local tag_record_key = context:tag_entry():tag_record_key()
+							local is_valid_character_tag = table.find(character_tags, tag_record_key) ~= nil
+							return is_valid_character_tag
 						end
 					}
 				},

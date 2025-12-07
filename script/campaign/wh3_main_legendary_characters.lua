@@ -737,8 +737,9 @@ character_unlocking.character_data = {
 		name = "gotrek_and_felix",
 		subtype = "wh3_dlc25_neu_gotrek_hero",
 		require_dlc = {
-			"TW_WH3_THRONES_OF_DECAY_DWF",
+			"TW_WH1_BASE_GAME",
 			"TW_WH2_BASE_GAME",
+			"TW_WH3_BASE_GAME",
 		},
 		additional_subtype = "wh2_pro08_neu_felix",
 		starting_owner_faction = "wh3_dlc25_dwf_malakai", -- Including this will spawn the hero for the faction when starting as them
@@ -1086,6 +1087,148 @@ character_unlocking.character_data = {
 			}
 		}
 	},
+	styrkaar = {
+		-- Slaanesh players will get a mission to unlock Styrkaar once their faction leader reaches rank 10
+		--If there are no Slaanesh players, the strongest Slaanesh faction will get Styrkaar after 30 turns
+		unlock_rank = 11,
+		ai_unlock_turn = 30,
+		has_spawned = false,
+		name = "styrkaar",
+		require_dlc = {"TW_WH3_TIDES_OF_TORMENT_SLA"},
+		subtype = "wh3_dlc27_sla_styrkaar_the_sortsvinaer",
+		override_allowed_factions = {
+			"wh3_dlc20_chs_kholek",
+			"wh_main_chs_chaos",
+			"wh3_main_chs_shadow_legion",
+			"wh3_dlc20_chs_sigvald",
+			"wh3_dlc27_sla_masque_of_slaanesh",
+			"wh3_dlc27_sla_the_tormentors",
+			"wh3_main_sla_seducers_of_slaanesh"
+		},
+		factions_involved = {},
+		starting_mission_keys = "wh3_dlc27_ie_sla_styrkaar_stage_1",
+		final_mission_key = "wh3_dlc27_ie_sla_styrkaar_stage_2",
+		ancillaries = {
+			"wh3_dlc27_anc_weapon_caress_of_agony",
+			"wh3_dlc27_anc_armour_perverse_plate",
+			"wh3_dlc27_anc_enchanted_item_banner_of_depravity",
+		},
+		mission_chain_keys = {
+			main_warhammer = {
+				"wh3_dlc27_ie_sla_styrkaar_stage_1",
+				"wh3_dlc27_ie_sla_styrkaar_stage_2",
+			},
+			wh3_main_chaos = {
+				"wh3_dlc27_ie_sla_styrkaar_stage_1",
+				"wh3_dlc27_ie_sla_styrkaar_stage_2",
+			}
+		}
+	},
+	caradryan = {
+		-- High Elf players will get a mission to unlock Caradryan once their faction leader reaches rank 10
+		-- If there are no High Elf players, the strongest High Elf faction will get Caradryan after 30 turns
+		unlock_rank = 10,
+		ai_unlock_turn = 30,
+		has_spawned = false,
+		name = "caradryan",
+		require_dlc = {"TW_WH3_TIDES_OF_TORMENT_HEF"},
+		subtype = "wh3_dlc27_hef_caradryan",
+		override_allowed_factions = {
+			"wh2_main_hef_eataine",
+			"wh2_main_hef_order_of_loremasters",
+			"wh2_main_hef_avelorn",
+			"wh2_main_hef_nagarythe",
+			"wh2_main_hef_yvresse",
+			"wh2_dlc15_hef_imrik"
+		},
+		factions_involved = {},
+		starting_mission_keys = "wh3_dlc27_mission_hef_caradryan_unlock_stage_1",
+		final_mission_key = "wh3_dlc27_mission_hef_caradryan_unlock_stage_2",
+		ancillaries = {
+			"wh3_dlc27_anc_weapon_the_phoenix_blade",
+		},
+		mission_chain_keys = {
+			main_warhammer = {
+				"wh3_dlc27_mission_hef_caradryan_unlock_stage_1",
+				"wh3_dlc27_mission_hef_caradryan_unlock_stage_2"
+			},
+			wh3_main_chaos = {
+				"wh3_dlc27_mission_hef_caradryan_unlock_stage_1",
+				"wh3_dlc27_mission_hef_caradryan_unlock_stage_2"
+			}
+		}
+	},
+	caradryan_aislinn = {
+		-- High Elf players will get a mission to unlock Caradryan once their faction leader reaches rank 10
+		-- If there are no High Elf players, the strongest High Elf faction will get Caradryan after 30 turns
+		-- This is a copy of the Caradryan chain specifically for Aislinn, as it requires a different building
+		unlock_rank = 10,
+		ai_unlock_turn = 30,
+		has_spawned = false,
+		name = "caradryan_aislinn",
+		require_dlc = {"TW_WH3_TIDES_OF_TORMENT_HEF"},
+		subtype = "wh3_dlc27_hef_caradryan",
+		override_allowed_factions = {
+			"wh3_dlc27_hef_aislinn"
+		},
+		factions_involved = {},
+		starting_mission_keys = "wh3_dlc27_mission_hef_caradryan_unlock_stage_1_aislinn",
+		final_mission_key = "wh3_dlc27_mission_hef_caradryan_unlock_stage_2",
+		ancillaries = {
+			"wh3_dlc27_anc_weapon_the_phoenix_blade",
+		},
+		mission_chain_keys = {
+			main_warhammer = {
+				"wh3_dlc27_mission_hef_caradryan_unlock_stage_1_aislinn",
+				"wh3_dlc27_mission_hef_caradryan_unlock_stage_2"
+			},
+			wh3_main_chaos = {
+				"wh3_dlc27_mission_hef_caradryan_unlock_stage_1_aislinn",
+				"wh3_dlc27_mission_hef_caradryan_unlock_stage_2"
+			}
+		}
+	},
+	beorg_bearstruck = {
+		-- Sayl players will get a mission to unlock Beorg Bearstruck once their faction leader reaches rank 8.
+		-- If there are no human Empire players, Beorg Bearstruck spawns on turn 20 for Sayls faction.
+		unlock_rank = 8,
+		ai_unlock_turn = 20,
+		has_spawned = false,
+		name = "beorg",
+		require_dlc = {"TW_WH3_TIDES_OF_TORMENT_NOR"},
+		subtype = "wh3_dlc27_nor_beorg_bearstruck",
+		--priority_faction = "wh3_dlc27_nor_sayl",			-- This sets it so that if a human player is playing as the specified faction only they can get Beorg Bearstruck
+		priority_ai_faction = "wh3_dlc27_nor_sayl",			-- This sets is so that if there is no human empire player then the specified AI faction gets them
+		override_allowed_factions = {
+			"wh3_dlc20_chs_kholek",
+			"wh_main_chs_chaos",
+			"wh3_main_chs_shadow_legion",
+			"wh3_dlc20_chs_sigvald",
+			"wh3_dlc27_nor_sayl",
+			"wh_dlc08_nor_wintertooth",
+			"wh_dlc08_nor_norsca",
+			"wh3_dlc20_chs_valkia",
+			"wh3_dlc20_chs_azazel",
+			"wh3_dlc20_chs_festus",
+			"wh3_dlc20_chs_vilitch"
+		},
+		factions_involved = {},
+		starting_mission_keys = "wh3_dlc27_nor_beorg_bearstruck_unlock_1",
+		final_mission_key = "wh3_dlc27_nor_beorg_bearstruck_unlock_2",
+		ancillaries = {
+			"wh3_dlc27_anc_talisman_bear_fang_talisman",
+		},
+		mission_chain_keys = {
+			main_warhammer = {
+				"wh3_dlc27_nor_beorg_bearstruck_unlock_1",
+				"wh3_dlc27_nor_beorg_bearstruck_unlock_2",
+			},
+			wh3_main_chaos = {
+				"wh3_dlc27_nor_beorg_bearstruck_unlock_1",
+				"wh3_dlc27_nor_beorg_bearstruck_unlock_2",
+			}
+		}
+	},			
 }
 
 -- build a numerically indexed list of character keys
@@ -1363,7 +1506,10 @@ function character_unlocking:ai_unlock_by_turn(character)
 			if character_info.has_spawned == false then
 				local ai_faction = self:get_strongest_ai_faction_available_to_character(character)
 				if character_info.priority_ai_faction ~= nil then
-					ai_faction = character_info.priority_ai_faction
+					local priority_ai_faction = cm:get_faction(character_info.priority_ai_faction)
+					if priority_ai_faction and priority_ai_faction:is_null_interface() == false then
+						ai_faction = character_info.priority_ai_faction
+					end
 				end
 
 				self:spawn_hero(ai_faction, character)
@@ -1544,7 +1690,7 @@ end
 function character_unlocking:spawn_hero(faction_name, character, spawn_character_cqi)
 	local character_info = self.character_data[character]
 	local faction = cm:get_faction(faction_name)
-	if character_info.has_spawned == false then
+	if character_info.has_spawned == false and faction and faction:is_null_interface() == false then
 		character_info.has_spawned = true
 		local character_ancillaries = character_info.name .. "GiveAncillaries"
 		

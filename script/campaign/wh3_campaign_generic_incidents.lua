@@ -62,7 +62,10 @@ core:add_listener(
 				local incident_mapping = {
 					["wh3_main_ritual_sla_pleasure_arena"] = "wh3_main_incident_ritual_sla_pleasure_arena",
 					["wh3_main_ritual_sla_pleasure_hunt"] = "wh3_main_incident_ritual_sla_pleasure_hunt",
-					["wh3_main_ritual_sla_pleasure_party"] = "wh3_main_incident_ritual_sla_pleasure_party"
+					["wh3_main_ritual_sla_pleasure_party"] = "wh3_main_incident_ritual_sla_pleasure_party",
+					["wh3_dlc27_ritual_sla_dechala_pleasure_arena"] = "wh3_main_incident_ritual_sla_pleasure_arena",
+					["wh3_dlc27_ritual_sla_dechala_pleasure_hunt"] = "wh3_main_incident_ritual_sla_pleasure_hunt",
+					["wh3_dlc27_ritual_sla_dechala_pleasure_party"] = "wh3_main_incident_ritual_sla_pleasure_party"
 				};
 				
 				cm:trigger_incident_with_targets(performing_faction_cqi, incident_mapping[ritual_key], 0, 0, 0, 0, ritual:ritual_target():get_target_region():cqi(), 0);

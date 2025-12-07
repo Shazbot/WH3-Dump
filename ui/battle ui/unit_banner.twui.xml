@@ -19,6 +19,10 @@
 						<button_txt this="394060E5-FB98-44D8-BE91FD9EF0209DE9"/>
 						<dev_icon this="114306DE-3F15-414A-99C822DC3E4B176A"/>
 					</dev_text_button_toggle>
+					<dev_button_reduce_health this="5584B084-B666-4824-A6E5512CB4F75D58">
+						<button_txt this="67F6EBFA-AE16-4C65-A9789E05006F7666"/>
+						<dev_icon this="A8B186A3-D538-4E70-82FABDBA7D2485C4"/>
+					</dev_button_reduce_health>
 				</dev_buttons_parent>
 				<modular_parent this="34794CE5-FD3D-4C48-BAAA3B951EA0FD48">
 					<script_ping_parent this="68A523F4-4436-4742-835B2F3B053668EF"/>
@@ -819,6 +823,35 @@
 			</localised_texts>
 		</button_txt>
 		<button_txt
+			this="67F6EBFA-AE16-4C65-A9789E05006F7666"
+			id="button_txt"
+			part_of_template="true"
+			uniqueguid_in_template="C5314C5F-DB2A-4917-835E17930F5E2573"
+			uniqueguid="67F6EBFA-AE16-4C65-A9789E05006F7666"
+			dimensions="120.00,29.00"
+			dock_point="Center"
+			offset="0.00,-1.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="EA36DD13-B672-452C-B3EC2F39635CDE8E"/>
+			</state_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					text="Damage 10%"
+					text_label="StateText_239661ae"
+					is_text_localised="false"/>
+			</localised_texts>
+		</button_txt>
+		<button_txt
 			this="B0220901-C53B-4B3A-9A09BC604A2AB125"
 			id="button_txt"
 			part_of_template="true"
@@ -1547,7 +1580,7 @@
 			this="85BD63E5-D5BD-4804-832D1A2F20C5C1EA"
 			id="dev_buttons_parent"
 			is_dev_only="true"
-			offset="48.00,-6.00"
+			offset="48.00,-20.00"
 			visible="false"
 			docking="Center Right External"
 			component_anchor_point="-0.00,0.50"
@@ -1565,7 +1598,7 @@
 					this="B3D3F2D4-5C96-40E6-A9A1D7B28D2DCF44"
 					name="default"
 					width="156"
-					height="87"
+					height="116"
 					uniqueguid="B3D3F2D4-5C96-40E6-A9A1D7B28D2DCF44"/>
 			</states>
 			<LayoutEngine
@@ -1639,6 +1672,69 @@
 				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
 			</override_images>
 		</dev_button_kill>
+		<dev_button_reduce_health
+			this="5584B084-B666-4824-A6E5512CB4F75D58"
+			id="dev_button_reduce_health"
+			template_id="dev_text_button"
+			part_of_template="true"
+			uniqueguid_in_template="715902FD-2442-4210-8831AAF520A41055"
+			uniqueguid="5584B084-B666-4824-A6E5512CB4F75D58"
+			dimensions="120.00,29.00"
+			sound_category="UI_GBL_TMP_Square_Large_Text_Button_Toggle">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="F44F2493-A062-42DF-BB2E54A7D6368070"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="091DA2CB-157A-4FA6-A9EEBA31D9FDF643"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="72412DDF-8346-4EA6-ADCF1B03565E256F"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="A22B0EF5-6677-440D-AB45B7B066D5ACDD"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="C995698D-8AA4-4547-8E3D65D34C623010"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/button_rectangular_backplate.png"
+					uniqueguid="5C31AA4B-E3F5-4E92-BDAA08EB5B8E5743"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/button_square_hover_highlight.png"
+					uniqueguid="52AFC570-652F-41B4-87EF18CD2B479CD6"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoBattleUnit"
+					context_function_id="DevReduceHitpointsPerc(10)"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/button_rectangular_backplate.png"/>
+				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
+			</override_images>
+		</dev_button_reduce_health>
 		<dev_button_respawn
 			this="5CC53264-5531-4C9B-87629DA1254BD345"
 			id="dev_button_respawn"
@@ -1702,6 +1798,36 @@
 				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
 			</override_images>
 		</dev_button_respawn>
+		<dev_icon
+			this="A8B186A3-D538-4E70-82FABDBA7D2485C4"
+			id="dev_icon"
+			part_of_template="true"
+			uniqueguid_in_template="0F4F9F06-4613-496B-A0F05A2B8B88B70D"
+			uniqueguid="A8B186A3-D538-4E70-82FABDBA7D2485C4"
+			dimensions="24.00,24.00"
+			dock_point="Center Left"
+			offset="2.00,0.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="E76C94F3-4543-4D71-9BFC8336F7619B78"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/dev_icon.png"
+					uniqueguid="6409F02D-FB74-481C-B77752B7B7DA42C1"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/dev_icon.png"/>
+			</override_images>
+		</dev_icon>
 		<dev_icon
 			this="114306DE-3F15-414A-99C822DC3E4B176A"
 			id="dev_icon"

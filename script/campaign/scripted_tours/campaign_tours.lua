@@ -89,7 +89,7 @@ in_daemon_prince_customisation = intervention:new(
 in_daemon_prince_customisation:set_must_trigger()
 in_daemon_prince_customisation:set_wait_for_fullscreen_panel_dismissed(true)
 in_daemon_prince_customisation:set_should_lock_ui()
-in_daemon_prince_customisation:add_precondition(function() return cm:get_local_faction_name() == "wh3_main_dae_daemon_prince" and not in_daemon_prince_customisation:has_ever_triggered() end)
+in_daemon_prince_customisation:add_precondition(function() return cm:get_local_faction_name() == "wh3_main_dae_daemon_prince" and cm:get_faction("wh3_main_dae_daemon_prince"):faction_leader():is_wounded() == false and not in_daemon_prince_customisation:has_ever_triggered() end)
 in_daemon_prince_customisation:add_trigger_condition(
 "PanelClosedCampaign",
 function(context)
@@ -4211,7 +4211,7 @@ core:add_listener(
 	true,
 	function()
 		-- Campaign tours will only start once and not in multiplayer games or autoruns
-		if not cm:is_multiplayer() and cm:get_local_faction(true) and not cm:get_saved_value("campaign_tours_started") then
+		if not cm:is_multiplayer() and cm:has_local_faction() and not cm:get_saved_value("campaign_tours_started") then
 			in_daemon_prince_customisation:start()
 			in_changing_of_the_ways:start()
 			in_caravans:start()

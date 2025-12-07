@@ -277,7 +277,7 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoGroupPooledResourceEffectRecord"
-					context_function_id="Format(&quot;%d/%d&quot;, RoundFloat(MinNumericValue(StoredContext(&quot;CcoCampaignPooledResource&quot;).Total, LowerBound)), LowerBound)"/>
+					context_function_id="GetIf(LowerBound &gt; 0, Format(&quot;%d/%d %S&quot;, StoredContext(&quot;CcoCampaignPooledResource&quot;).Total, LowerBound, Loc(&quot;norsca_god_allegiance_tooltip&quot;)))"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -950,7 +950,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoGroupPooledResourceEffectRecord"
-					context_function_id="UpperBound == StoredContextFromParent(&quot;CcoCampaignPooledResource&quot;).Max"/>
+					context_function_id="LowerBound == StoredContextFromParent(&quot;CcoCampaignPooledResource&quot;).Max"/>
 			</callbackwithcontextlist>
 			<states>
 				<default

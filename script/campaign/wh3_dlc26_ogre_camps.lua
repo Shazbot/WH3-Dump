@@ -372,12 +372,10 @@ function ogre_camps:spawn_camp(is_first_camp, faction_data, force)
 				cm:set_force_sphere_of_influence_radius(cqi, 35)
 				
 				cm:add_growth_points_to_horde(mf_interface, 50)
-				cm:add_building_to_force(mf_interface:command_queue_index(), 
-					{"wh3_main_ogr_camp_town_centre_2",
-					"wh3_main_ogr_camp_hunting_1",
-					"wh3_main_ogr_camp_growth_1"
-					}
-				)
+				-- Add starting buildings to the camp
+				cm:add_building_to_force(mf_interface:command_queue_index(), "wh3_main_ogr_camp_town_centre_2")
+				cm:add_building_to_force(mf_interface:command_queue_index(), "wh3_main_ogr_camp_hunting_1")
+				cm:add_building_to_force(mf_interface:command_queue_index(), "wh3_main_ogr_camp_growth_1")
 			end
 		);
 end

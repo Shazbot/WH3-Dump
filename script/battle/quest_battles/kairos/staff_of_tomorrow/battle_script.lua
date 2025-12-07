@@ -187,6 +187,8 @@ ga_attacker_01:change_behaviour_active_on_message("01_intro_cutscene_end", "fire
 
 ga_defender_01:change_behaviour_active_on_message("battle_started", "fire_at_will", false, false);
 ga_defender_01:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true);
+ga_defender_01:defend_on_message("battle_started", 25.5, 112.8892364502, 621.5)
+ga_defender_01:rush_on_message("01_intro_cutscene_end", 500)
 
 --defender_01
 ga_defender_01:message_on_commander_dead_or_shattered("kairos_past_dead"); 

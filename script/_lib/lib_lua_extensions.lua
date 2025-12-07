@@ -880,9 +880,12 @@ end;
 
 
 --- @section Traversal Using Iterators
---- @desc The iterator functions <code>ipairs</code> and <code>pairs</code> are available for iterating over tables where standard traversal may not be possible or desirable.
+--- @desc The iterator functions <code>ipairs</code>, <code>pairs</code> and <code>dpairs</code> are available for iterating over tables where standard traversal may not be possible or desirable.
 --- @desc The <code>ipairs</code> iterator behaves much the same as traversing over a table in numeric sequence. The main difference is that local variables for the key and optionally the value are automatically created. The <code>ipairs</code> iterator stops at the first integer key to which a value is not assigned.
 --- @desc Unlike <code>ipairs</code> and numeric traversal, the <code>pairs</code> iterator allows traversal over all elements in a table, regardless of key type or any "gaps" in the data. The main caveat to usage is that the order of traversal is not defined, and can change between iteration instances. As such, the <code>pairs</code> iterator is unsafe to use in multiplayer scripts as two different machines will traverse the same table in different orders.
+--- @desc Also provided within the scripting libraries are:
+--- @desc <code>dpairs</code>, which is a deterministic version of pairs. This eliminates the problem of not being able to use pairs in multiplayer, but is written in lua and is quite computationally slow, so use this sparingly.</li>
+
 --- @new_example ipairs example
 --- @example t = { [1] = "first", [2] = "second", [3] = "third", [5] = "fifth" } 		-- gap at 4
 --- @example for key, value in ipairs(t) do
@@ -914,6 +917,89 @@ end;
 --- @result key: true, value: this has a boolean key
 --- @result key: 10, value: tenth
 
+--- @function dpairs
+--- @desc An iterator function, a deterministic equivalent of pairs. It is used in the same way, but it iterates over the table in a deterministic way, which makes it safe for use in multiplayer.
+--- @desc Note that iteration using this function would be slower, so don't use it with large tables in performance-critical code! However, for the general usage in gameplay model or UI code with not many entries, it should be fine. Still, be mindful of the perfomance.
+--- @desc It works by first iterating over all keys of the given table (using pairs), compiling the keys of the same type in separate tables. Then it sorts those tables and finally going through their contents (keys), table by table.
+--- @desc <code>dpairs</code> requires that all keys within the @table are @number or @string values.
+--- @p @table subject table
+--- @r @function iterator function
+--- @r @table subject table
+--- @r @nil starting index value
+--
+--- @new_example dpairs example
+--- @desc Note how the order of the output is not arbitrary, numerical keys before string keys.
+--- @example t = { 3, 2, 1, colour = "black", monster = "dragons", {}, "dragons", index = 5 }
+--- @example t[11] = 6
+--- @example t[12] = 7
+--- @example for k, v in dpairs(t) do
+--- @example 	print(tostring(k) .. " " .. tostring(v))
+--- @example end
+--- @result 1 3
+--- @result 2 2
+--- @result 3 1
+--- @result 4 table: 0x85bc50
+--- @result 5 dragons
+--- @result 11 6
+--- @result 12 7
+--- @result colour black
+--- @result index 5
+--- @result monster dragons
+function dpairs(t)
+	-- First, get all keys of the supportd types into sorted arrays via insertion sorting.
+	local numerical_keys = {}
+	local string_keys = {}
+	for k, v in pairs(t) do
+		if is_number(k) then
+			local _, insert_index = table.binary_search(numerical_keys, k)
+			table.insert(numerical_keys, insert_index or (#numerical_keys + 1), k)
+		elseif is_string(k) then
+			local _, insert_index = table.binary_search(string_keys, k, string.byte_less_than)
+			table.insert(string_keys, insert_index or (#string_keys + 1), k)
+		else
+			out("dpairs used with a table containing a key of an unsupported type: " .. type(k))
+		end
+	end
+
+	-- Cache the lengths. I am not sure how the length operator behaves, but it won't hurt to cache them - the tables will not change from now on.
+	local numerical_keys_len = #numerical_keys
+	local string_keys_len = #string_keys
+
+	local iter_index	-- This is used in order to avoid searching for the key in the tables on subsequent calls.
+
+	local iter = function(t, k)
+		if is_nil(k) then	-- This is the initial call. Return the first value, numerical keys before string keys.
+			if numerical_keys_len > 0 then
+				iter_index = 1
+				return numerical_keys[1], t[numerical_keys[1]]	-- There is at least one value with a numeric key, return it.
+			elseif string_keys_len > 0 then
+				iter_index = 1
+				return string_keys[1], t[string_keys[1]]	-- There is no value with a numerical key, but there is at least one value with a string key, return it.
+			else
+				return nil	-- The table is empty. Return nil to signify it.
+			end
+		elseif is_number(k) then	-- A value with a numerical key was just iterated. Return the next such value or, if there are no more, the first value with a string key, or if there are no such either, signify the end of the table.
+			if iter_index < numerical_keys_len then
+				iter_index = iter_index + 1
+				return numerical_keys[iter_index], t[numerical_keys[iter_index]]	-- There are more values with a numerical key, return the next one.
+			elseif string_keys_len > 0 then
+				iter_index = 1
+				return string_keys[1], t[string_keys[1]]	-- There are no more values with a numerical keys, but there is at least one value with a string key, return it.
+			else
+				return nil	-- This is the end of the table. Return nil to signify it.
+			end
+		elseif is_string(k) then	-- A value with a string key was just iterated. Return the next such value or, if there are no more, signify the end of the table.
+			if iter_index < string_keys_len then
+				iter_index = iter_index + 1
+				return string_keys[iter_index], t[string_keys[iter_index]]	-- There are more values with string keys, return the next one.
+			else
+				return nil	-- This is the end of the table. Return nil to signify it.
+			end
+		end
+	end
+
+	return iter, t, nil
+end
 
 --- @section Table Library
 --- @desc Lua provides a library of operations that can be performed on tables, listed below. More detailed information about these functions may be found on the dedicated page on <code>lua-users.org</code> <a href="http://lua-users.org/wiki/TablesTutorial">here</a>.
@@ -1123,6 +1209,301 @@ function table.contains(t, obj)
 end;
 
 
+--- @function find
+--- @desc Returns the first occurance of an object and its index inside an indexed table of the provided object, if find is not a function, or the first object for which find returns a true value if find is a function. Returns nil, nil otherwise.
+--- @p table subject table
+--- @p object or function find
+--- @r object the first occurance or satisfying ojbect in the table, or nil if an object is not found.
+--- @r index index of the first occurance or satisfying ojbect in the table, or nil if an object is not found.
+function table.find(t, find)
+	local is_function = is_function(find)
+	for i = 1, #t do
+		if is_function and find(t[i]) or t[i] == find then
+			return t[i], i
+		end
+	end
+	return nil, nil
+end
+
+
+--- @function find_extremum
+--- @desc  Returns the extremum among the elements of an indexed numerical table (such as minimum or maximum) and its infex.
+--- @p table subject table 
+--- @p function compare
+--- @r value The extremum in the table, such as minimum or maximum, or nil if the table is empty.
+--- @r index The index in the table of the extremum, such as minimum or maximum, or nil if the table is empty.
+function table.find_extremum(t, comp)
+    if #t == 0 then
+		return nil    
+	end
+	res_index = 1    
+	for i = 2, #t do        
+		if not comp(t[res_index], t[i]) then
+			res_index = i
+		end    
+	end    
+	return t[res_index], res_index
+end
+
+
+--- @function append
+--- @desc Append the contents of the indexed table destination with the contents of the index table source.
+--- @p destination destination table
+--- @p source source table
+--- @r destination table
+function table.append(destination, source)
+	for i = 1, #source do
+		table.insert(destination, source[i])
+	end
+	return destination
+end
+
+
+--- @function erase
+--- @desc Erase from the indexed table all occurances of the supplied object. Optionally, erase only the first element. Returns true if any elements were erased.
+--- @p table subject table
+--- @p object object
+--- @p [opt=false] first_only object
+--- @r boolean table contained object
+function table.erase(t, obj, first_only)
+	local initial_count = #t
+	local i = 1
+	while i <= #t do
+		if t[i] == obj then
+			table.remove(t, i)
+			if first_only then
+				return true
+			end
+		else
+			i = i + 1
+		end
+	end
+	return #t < initial_count
+end
+
+
+--- @function erase_if
+--- @desc Erase from the indexed table all elements that fullfil the supplied predicate. Optionally, erase only the first element. Returns true if any elements were removed.
+--- @p table subject table
+--- @p filter filter function
+--- @p [opt=false] first_only object
+--- @r boolean table contained elements that fullfilled the filter
+function table.erase_if(t, filter, first_only)
+	local initial_count = #t
+	local i = 1
+	while i <= #t do
+		if filter(t[i]) then
+			table.remove(t, i)
+			if first_only then
+				return true
+			end
+		else
+			i = i + 1
+		end
+	end
+	return #t < initial_count
+end
+
+
+--- @function add_unique
+--- @desc Add to the end of the indexed table the supplied element, but only if it did not already exist inside it. Returns true if the table did not contain the object and it was added.
+--- @p table subject table
+--- @p object object
+--- @r boolean table did not contain object
+function table.add_unique(t, obj)
+	for i = 1, #t do
+		if t[i] == obj then
+			return false
+		end;
+	end;
+	table.insert(t, obj)
+	return true
+end
+
+
+--- @function stable_sort
+--- @desc Stable sort the contents of the indexed table using the provided comp function. A very simple and inefficient not-in-place way to do this, but probably OK for small tables.
+--- @p table subject table
+--- @p comp comparison function
+--- @p [opt=false] in_place A flag whether the operation should be done in-place. Slower than to simply assign to the result, but could be useful if working with a passed as a parameter table.
+--- @r sorted table
+function table.stable_sort(t, comp, in_place)
+	if not is_table(t) then
+		script_error("ERROR: table_stable_sort() called but supplied list [" .. tostring(t) .. "] is not a table");
+		return {}
+	end
+
+	if #t <= 1 then
+		return t
+	end
+
+	local a = {}
+	a[1] = t[1]
+	for i = 2, #t do
+		for j = 1, #a do
+			-- t[i] < a[j]
+			if comp(t[i], a[j]) then
+				table.insert(a, j, t[i])
+				break
+			end
+		end
+		if #a < i then
+			table.insert(a, t[i])
+		end
+	end
+
+	if in_place then
+		-- Now we have the sorted table in a. First clear t, then insert into it every element from a in the sorted order.
+		while #t > 0 do
+			table.remove(t)
+		end
+		for i, e in ipairs(a) do
+			table.insert(t, e)
+		end
+		return t
+	end
+	
+	return a
+end
+
+
+--- @function accumulate
+--- @desc Accumulate the contents of the indexed table using the provided op function or + if no function is provided.
+--- @p table subject table
+--- @p obj initial value
+--- @p [opt=+] op operator function, taking as first argument the so far accumulated value and as second argument the next element of the table. If not provided, + is used
+--- @r accumulated value of the table
+function table.accumulate(t, initial_value, op)
+	local is_function = is_function(op)
+	local value = initial_value
+	for i = 1, #t do
+		if is_function then
+			value = op(value, t[i])
+		else
+			value = value + t[i]
+		end
+	end
+	return value
+end
+
+
+--- @function read_only
+--- @desc Prevents to edit a table
+--- @p table subject table
+function table.read_only (t)
+	local proxy = {}
+	local mt = {       -- create metatable
+		__index = t,
+		__newindex = function (t,k,v)
+			error("cant edit a read-only table", 2)
+		end
+	}
+	setmetatable(proxy, mt)
+	return proxy
+end
+
+--- @function print
+--- @desc Iterates through the table and prints it in the console
+--- @p node - the table we want to print
+function table.print(node)
+	-- for better visibility of the _debug.print function, if someone searches printing tables specifically
+	_debug.print(node)
+end
+
+
+--- @function size
+--- @desc Returns the amount of elements in the table
+--- @p t: the supplied table
+--- @p [opt=1] table_dimension: if positive integer N then consider t as an N-dimensional table and recurse accordingly (N-1 times) to find its length, if true then recurse infinitely-deep
+--- @p seen: the function should NOT be called with a value for this parameter; it is nil by default and it is used as a safeguard against infinite recursion and cyclical tables
+--- @r integer size of the table, or nil if error
+function table.size(t, table_dimension, seen)
+	local local_seen = nil
+	if table_dimension == true then
+		local_seen = seen or {}
+		if local_seen[t] then
+			return 0
+		end
+		local_seen[t] = true
+	end
+
+	if table_dimension == 0 then
+		return 1
+	elseif not is_table(t) and (table_dimension ~= true or not is_number(table_dimension)) then
+		script_error("ERROR: table.size() called but provided argument is not a table.");
+		return
+	elseif is_number(table_dimension) and (not is_integer(table_dimension) or table_dimension < 0) then
+		script_error("ERROR: table.size() called with invalid `table_dimension` argument: " .. table_dimension .. ".");
+		return
+	end
+
+	if table_dimension == nil then
+		table_dimension = 1
+	end
+
+	local size = 0
+	for _, element in next, t do
+		if is_table(element) then
+			if table_dimension == true then
+				size = size + table.size(element, true, local_seen)
+			elseif table_dimension > 0 then
+				size = size + table.size(element, table_dimension - 1, local_seen)
+			end
+		else
+			size = size + 1
+		end
+	end
+	return size
+end
+
+--- @function binary_search
+--- @desc Searches for a given value in the supplied sorted indexed table using binary search (which has log2 complexity).
+--- @p @table table, The table to search the value in. It must be indexed table already sorted using the comparison function.
+--- @p value value, The value to search the table for.
+--- @p [opt=less-than-comparison] @function comparison function, Comparison function used also for the sorting. If not provided operator less-than is used.
+--- @r @boolean is the given value present in the table
+--- @r @number index of an occurence of the value if it is present (not necessary the first one, if more than one are present), or where the value should be inserted in order to keep the table sorted
+function table.binary_search(t, value, comp)
+	if table.is_empty(t) then
+		return false, 1
+	end
+
+	comp = comp or function(lhs, rhs) return lhs < rhs end
+
+	return table.binary_search_interval(t, 1, #t, value, comp)
+end
+
+
+--- @function binary_search_interval
+--- @desc Searches for a given value in a subinterval of the supplied sorted indexed table using binary search (which has log2 complexity).
+--- @p @table table
+--- @p @number first subinterval index
+--- @p @number last subinterval index
+--- @p value value
+--- @p @function comparison function, Comparison function used also for the sorting.
+--- @r @boolean is the given value present in the table
+--- @r @number index of an occurence of the value if it is present in the given interval (not necessary the first one, if more than one are present), or where the value should be inserted in order to keep the table sorted
+function table.binary_search_interval(t, first, last, value, comp)
+	local size = last - first
+	local dist = math.floor(size / 2)
+	if comp(value, t[first + dist]) then
+		-- If the distance is 0, we compared with the first element, which is greater than the searched value. So the searched value should be inserted in place of the first element.
+		if dist == 0 then
+			return false, first
+		else
+			return table.binary_search_interval(t, first, first + dist - 1, value, comp)
+		end
+	elseif comp(t[first + dist], value) then
+		if first == last then
+			return false, first + 1
+		else
+			return table.binary_search_interval(t, first + dist + 1, last, value, comp)
+		end
+	else
+		return true, first + dist
+	end
+end
+
 --- @function is_empty
 --- @desc Returns whether the supplied table is empty.
 --- @p @table table, Subject table.
@@ -1246,6 +1627,26 @@ function table.indexed_to_lookup(t)
 	end;
 	return retval;
 end;
+
+
+--- @function indices
+--- @desc Returns another table containing all the indices of the supplied table. Useful for e.g. shuffling just the indices of a table in order to get a subset of random elements from it
+--- @p @table the table to get the indices for
+--- @example t = {"oranges", "apples", "strawberries"}
+--- @example indices = table.indices(t)
+--- @result indices is the table: {1, 2, 3}
+function table.indices(t)
+	if not validate.is_table(t) then
+		return false
+	end
+
+	local indices_table = {}
+	for i = 1, #t do
+		table.insert(indices_table, i)
+	end
+
+	return indices_table
+end
 
 
 -- Comparison method used to sort tables during merging in a way that supports mod-compatibility.

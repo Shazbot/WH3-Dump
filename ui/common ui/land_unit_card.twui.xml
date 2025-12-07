@@ -9,6 +9,8 @@
 				<card_image_holder this="963FB6B8-E30A-423C-AB5B3B16C5659C1B">
 					<upgrade_effect_icon this="2602AAF2-410A-4F8C-8D10ABFAB0FCA64E"/>
 					<waaagh_unit_marker this="E2311FF4-30C4-42C2-A1CC9227D199C14F"/>
+					<dlc27_sla_daemonic_attraction_marker this="B6216044-4DC2-4A23-91A6E63A652DB842"/>
+					<kinfolk_tag this="0AE53D30-3FAF-4537-B70FAEACDB6CB1A8"/>
 					<augment_instability_effect this="B6934591-357C-4DBC-A5228080900FCAF6"/>
 					<hellforge_display_holder this="33816F42-CE16-499D-A7A89092F36A169B">
 						<dy_number this="F53F8048-3CB4-4248-B02E1D004E935CFB"/>
@@ -152,6 +154,12 @@
 						<applied_dish_list this="AC63469A-DF7D-44F4-B31A2663A67FCE7D">
 							<template_dish this="E38E07B0-85BE-4808-BB5D74A33BF97625"/>
 						</applied_dish_list>
+						<missing_dish this="D6B0E3A2-3904-417F-8B5E61816CA6CE6B"/>
+						<applied_mark_list this="BCC9237E-4FC0-4579-A3CA66775807ED94">
+							<template_mark this="A1F9FC98-B32A-4975-8FF1AD562F7DF7B7">
+								<mark_state this="AF1C700A-4B5C-460E-B73A0672C07E6123"/>
+							</template_mark>
+						</applied_mark_list>
 						<label_kills this="78D3242B-A88A-4BD7-824F877E7F0B05B0"/>
 					</common_list>
 					<campaign this="6C304AFF-8900-4D10-AEB63E734FF4BA54">
@@ -176,12 +184,19 @@
 						<slaanesh_promise_overlay this="80234D92-7BC0-4F11-80FAC510A6DDAEA7">
 							<smoke this="318102FC-52B2-4632-8E3C4FBBFE25BF8B"/>
 						</slaanesh_promise_overlay>
+						<dlc27_dechala_corrupt_units this="9C76C247-CDF1-4ADC-A6240DAF8A57E67B">
+							<smoke this="1F1F95FE-AF0B-4EB0-A131C3AF353D8875"/>
+						</dlc27_dechala_corrupt_units>
 						<merc_overlay this="8AFE25F2-9708-4341-B99110A3FE9D025D">
 							<smoke this="FAADFE39-3A01-4829-BAF8DD4389EDA607"/>
 						</merc_overlay>
 						<faction_icon this="C2E4E95F-E466-443F-9BABA3B081BCCD1C"/>
 						<magic_effect_sla_seduction this="26EB7234-ECDC-419F-900C2A7DD29C4C82"/>
 						<square_small_toggle_plus_minus this="953BA8D1-201A-4722-92A69B091462196F"/>
+						<corrupt_units_overlay this="BA5CD906-6893-4A43-94727E8EA2A6FA0F">
+							<smoke this="FF384A2E-BAEB-485C-8E1B382213CCB4A7"/>
+						</corrupt_units_overlay>
+						<corrupt_units_cost this="F5443563-7ACE-4E5C-8B02B1C01ECA514F"/>
 					</campaign>
 					<selected_frame this="33D5A474-05C7-4297-8EBFFC4DA4732FCA"/>
 					<exchange_arrow this="1794E05A-E2B2-4353-B03E9586075AE18B"/>
@@ -619,6 +634,51 @@
 				max_length="45"
 				allow_overlap="true"/>
 		</applied_dish_list>
+		<applied_mark_list
+			this="BCC9237E-4FC0-4579-A3CA66775807ED94"
+			id="applied_mark_list"
+			offset="26.00,27.00"
+			allowverticalresize="false"
+			visible="false"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="BCC9237E-4FC0-4579-A3CA66775807ED94"
+			currentstate="A81F6159-2A9A-4B51-851BBACD1C02F8B6"
+			defaultstate="A81F6159-2A9A-4B51-851BBACD1C02F8B6">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoUnitDetails"
+					context_function_id="#SetupUnitContext.AppliedDishList">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CookingDishApplied"/>
+						<property
+							name="hide_if_empty"
+							value=""/>
+						<property
+							name="stored_object_to_pass0"
+							value="CcoCampaignUnit"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignUnit"/>
+			</callbackwithcontextlist>
+			<states>
+				<blessing
+					this="A81F6159-2A9A-4B51-851BBACD1C02F8B6"
+					name="blessing"
+					height="33"
+					uniqueguid="A81F6159-2A9A-4B51-851BBACD1C02F8B6"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"
+				max_length="45"
+				allow_overlap="true"/>
+		</applied_mark_list>
 		<augment_display_holder
 			this="86A90121-85F8-4261-BFAF810C429A5CCF"
 			id="augment_display_holder"
@@ -2973,6 +3033,187 @@
 				</newstate>
 			</states>
 		</copy_of_upgradable>
+		<corrupt_units_cost
+			this="F5443563-7ACE-4E5C-8B02B1C01ECA514F"
+			id="corrupt_units_cost"
+			offset="-4.00,112.00"
+			allowverticalresize="false"
+			visible="false"
+			docking="Bottom Left"
+			dock_offset="-4.00,0.00"
+			component_anchor_point="0.00,1.00"
+			tooltipslocalised="true"
+			componentleveltooltip="Corruption cost"
+			tooltiplabel="wh3_dlc27_sla_corrupt_units_cost_tooltip_tx"
+			uniqueguid="F5443563-7ACE-4E5C-8B02B1C01ECA514F"
+			currentstate="9E345566-34C6-4100-8C4C8C8E83360A2D"
+			defaultstate="9E345566-34C6-4100-8C4C8C8E83360A2D">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="TopmostObjectCallback"
+					context_function_id="self.Position.y &lt;  self.ParentContext(&quot;list_clip&quot;).Position.y + self.ParentContext(&quot;list_clip&quot;).Dimensions.y">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="update_topmost"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandGiverOnVisibilityChanged"
+					context_function_id="UiMsg(&quot;update_topmost&quot;)">
+					<child_m_user_properties>
+						<property
+							name="local_visibility_only"
+							value=""/>
+						<property
+							name="on_hide_and_show"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="65610CCB-EE66-4709-888BAEE06B842115"
+					uniqueguid="65610CCB-EE66-4709-888BAEE06B842115"
+					imagepath="ui/skins/default/icon_banner_bg.png"/>
+				<component_image
+					this="6662EDAD-A101-408C-9CBD04E83E4BE8B0"
+					uniqueguid="6662EDAD-A101-408C-9CBD04E83E4BE8B0"
+					imagepath="ui/skins/default/red_text_banner_shadow.png"/>
+				<component_image
+					this="18EC3E24-B126-4F94-9B1ABE71B8A37A6D"
+					uniqueguid="18EC3E24-B126-4F94-9B1ABE71B8A37A6D"
+					imagepath="ui/skins/default/icon_treasury.png"/>
+			</componentimages>
+			<states>
+				<normal
+					this="9E345566-34C6-4100-8C4C8C8E83360A2D"
+					name="normal"
+					width="70"
+					height="18"
+					interactive="true"
+					disabled="true"
+					uniqueguid="9E345566-34C6-4100-8C4C8C8E83360A2D">
+					<imagemetrics>
+						<image
+							this="678A1711-80CF-4E41-B77628604C5A2234"
+							uniqueguid="678A1711-80CF-4E41-B77628604C5A2234"
+							componentimage="65610CCB-EE66-4709-888BAEE06B842115"
+							offset="0.00,-5.00"
+							width="70"
+							height="29"
+							tile="true"
+							dockpoint="Center"
+							margin="0.00,15.00,0.00,0.00"/>
+						<image
+							this="C6C4896A-A742-415F-827594E90C804C10"
+							uniqueguid="C6C4896A-A742-415F-827594E90C804C10"
+							componentimage="18EC3E24-B126-4F94-9B1ABE71B8A37A6D"
+							offset="0.00,-5.00"
+							width="28"
+							height="28"
+							dockpoint="Center Left"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<component_text
+						text="2000"
+						textxoffset="26.00,8.00"
+						textyoffset="2.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_32f22f95"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						textshadervars="0.00,2.00,1.00,0.00"/>
+				</normal>
+				<red
+					this="66DF5F84-21AB-491C-A9E6F66F8A61B056"
+					name="red"
+					width="70"
+					height="18"
+					interactive="true"
+					disabled="true"
+					uniqueguid="66DF5F84-21AB-491C-A9E6F66F8A61B056">
+					<imagemetrics>
+						<image
+							this="0B934E1F-6C88-490A-B950BDADD6CBA843"
+							uniqueguid="0B934E1F-6C88-490A-B950BDADD6CBA843"
+							componentimage="65610CCB-EE66-4709-888BAEE06B842115"
+							offset="0.00,-5.00"
+							width="70"
+							height="29"
+							tile="true"
+							dockpoint="Center"
+							margin="0.00,15.00,0.00,0.00"/>
+						<image
+							this="8A37BA70-8F8F-4539-86D4402DFBBBD67A"
+							uniqueguid="8A37BA70-8F8F-4539-86D4402DFBBBD67A"
+							componentimage="6662EDAD-A101-408C-9CBD04E83E4BE8B0"
+							width="70"
+							height="18"/>
+						<image
+							this="73676212-A898-4487-B91FDFB02EE6840E"
+							uniqueguid="73676212-A898-4487-B91FDFB02EE6840E"
+							componentimage="18EC3E24-B126-4F94-9B1ABE71B8A37A6D"
+							offset="0.00,-5.00"
+							width="28"
+							height="28"
+							dockpoint="Center Left"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<component_text
+						text="2000"
+						textxoffset="26.00,8.00"
+						textyoffset="2.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_15ff40f8"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"
+						textshadervars="0.00,2.00,1.00,0.00"/>
+				</red>
+			</states>
+		</corrupt_units_cost>
+		<corrupt_units_overlay
+			this="BA5CD906-6893-4A43-94727E8EA2A6FA0F"
+			id="corrupt_units_overlay"
+			visible="false"
+			clipchildren="true"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			tooltipslocalised="true"
+			uniqueguid="BA5CD906-6893-4A43-94727E8EA2A6FA0F"
+			currentstate="A6895391-9773-472C-AD5AFD03947138CF"
+			defaultstate="A6895391-9773-472C-AD5AFD03947138CF">
+			<componentimages>
+				<component_image
+					this="4DE7C4EB-E1D5-4932-9758F002BAB8485F"
+					uniqueguid="4DE7C4EB-E1D5-4932-9758F002BAB8485F"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="A6895391-9773-472C-AD5AFD03947138CF"
+					name="NewState"
+					width="60"
+					height="130"
+					uniqueguid="A6895391-9773-472C-AD5AFD03947138CF">
+					<imagemetrics>
+						<image
+							this="9F534B55-6CD7-47D6-905E463338D69FA9"
+							uniqueguid="9F534B55-6CD7-47D6-905E463338D69FA9"
+							componentimage="4DE7C4EB-E1D5-4932-9758F002BAB8485F"
+							width="60"
+							height="130"
+							colour="#DE40FF82"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</corrupt_units_overlay>
 		<crumbling_overlay
 			this="C55E2317-81EF-4633-B0933BCE04489EF1"
 			id="crumbling_overlay"
@@ -3561,6 +3802,144 @@
 					uniqueguid="8B466469-99A7-4225-A0C35C4EE8A81F7B"/>
 			</states>
 		</dev_xp_up_holder>
+		<dlc27_dechala_corrupt_units
+			this="9C76C247-CDF1-4ADC-A6240DAF8A57E67B"
+			id="dlc27_dechala_corrupt_units"
+			visible="false"
+			clipchildren="true"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			tooltipslocalised="true"
+			uniqueguid="9C76C247-CDF1-4ADC-A6240DAF8A57E67B"
+			maskimage="352D43BE-AB2F-4A53-B09D1819F629D956"
+			currentstate="7A5CBC40-9BFB-49A3-BB1E9FE78A1A62C4"
+			defaultstate="7A5CBC40-9BFB-49A3-BB1E9FE78A1A62C4">
+			<componentimages>
+				<component_image
+					this="BD24EBA2-843F-4CBF-9FB43B73FBC031EF"
+					uniqueguid="BD24EBA2-843F-4CBF-9FB43B73FBC031EF"/>
+				<component_image
+					this="352D43BE-AB2F-4A53-B09D1819F629D956"
+					uniqueguid="352D43BE-AB2F-4A53-B09D1819F629D956"
+					imagepath="ui/skins/default/dlc27_sla_decadence/corrupt_units_unit_card_mask.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="ACC409E3-3708-4775-A281E06546C1DC62"
+					name="active"
+					width="60"
+					height="130"
+					uniqueguid="ACC409E3-3708-4775-A281E06546C1DC62">
+					<imagemetrics>
+						<image
+							this="F61C005C-E97D-4E09-9E53621842EE8F95"
+							uniqueguid="F61C005C-E97D-4E09-9E53621842EE8F95"
+							componentimage="BD24EBA2-843F-4CBF-9FB43B73FBC031EF"
+							width="60"
+							height="130"
+							colour="#DE40FF82"/>
+						<image
+							this="CCF31D42-B2D8-49D2-905FCFBA989CD06F"
+							uniqueguid="CCF31D42-B2D8-49D2-905FCFBA989CD06F"
+							componentimage="BD24EBA2-843F-4CBF-9FB43B73FBC031EF"
+							width="60"
+							height="130"
+							colour="#DE40FF82"/>
+						<image
+							this="7BB60C2D-49B6-43CD-A9ED3877AE61D24D"
+							uniqueguid="7BB60C2D-49B6-43CD-A9ED3877AE61D24D"
+							componentimage="352D43BE-AB2F-4A53-B09D1819F629D956"
+							width="60"
+							height="130"/>
+					</imagemetrics>
+				</active>
+				<selected
+					this="7A5CBC40-9BFB-49A3-BB1E9FE78A1A62C4"
+					name="selected"
+					width="60"
+					height="130"
+					uniqueguid="7A5CBC40-9BFB-49A3-BB1E9FE78A1A62C4">
+					<imagemetrics>
+						<image
+							this="7654D18E-5802-4865-9EEA31CE56EF202C"
+							uniqueguid="7654D18E-5802-4865-9EEA31CE56EF202C"
+							componentimage="BD24EBA2-843F-4CBF-9FB43B73FBC031EF"
+							width="60"
+							height="130"
+							colour="#DE40FF64"/>
+					</imagemetrics>
+				</selected>
+			</states>
+		</dlc27_dechala_corrupt_units>
+		<dlc27_sla_daemonic_attraction_marker
+			this="B6216044-4DC2-4A23-91A6E63A652DB842"
+			id="dlc27_sla_daemonic_attraction_marker"
+			offset="4.00,84.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="1"
+			soundcategory="UI_GBL_TMP_Mouse_Over_Only"
+			uniqueguid="B6216044-4DC2-4A23-91A6E63A652DB842"
+			currentstate="5F0246A6-95F0-4B8E-A2DB890137B89C7D"
+			defaultstate="5F0246A6-95F0-4B8E-A2DB890137B89C7D">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoUnitDetails details"
+					context_function_id="details.IsUnitInSet(&quot;wh3_dlc27_sla_daemonic_attraction_dechala&quot;)"/>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoMainUnitRecord">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/common ui/tooltip_dlc27_dechala_daemonic_influence_unit_effects"/>
+						<property
+							name="stored_object_to_pass0"
+							value="CcoMainUnitRecord"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoMainUnitRecord"
+					context_function_id="UnitDetailsContext"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="C84CB17D-B732-4324-AC1CBF2E466E2DA0"
+					uniqueguid="C84CB17D-B732-4324-AC1CBF2E466E2DA0"
+					imagepath="ui/skins/default/dlc27_sla_decadence/wh3_dlc27_daemonic_attraction_marker.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="5F0246A6-95F0-4B8E-A2DB890137B89C7D"
+					name="NewState"
+					width="27"
+					height="22"
+					interactive="true"
+					uniqueguid="5F0246A6-95F0-4B8E-A2DB890137B89C7D">
+					<imagemetrics>
+						<image
+							this="EB17F3A1-F8C4-494A-BC6244EFDF3FF798"
+							uniqueguid="EB17F3A1-F8C4-494A-BC6244EFDF3FF798"
+							componentimage="C84CB17D-B732-4324-AC1CBF2E466E2DA0"
+							offset="-2.00,-5.00"
+							width="26"
+							dockpoint="Center"
+							dock_offset="-2.00,0.00"
+							canresizeheight="false"
+							canresizewidth="false"
+							aspect_ratio_locked_behaviour="Width First"/>
+						<image
+							this="0F3F0478-322B-4B46-9B1EAD646870483E"
+							uniqueguid="0F3F0478-322B-4B46-9B1EAD646870483E"
+							componentimage="C84CB17D-B732-4324-AC1CBF2E466E2DA0"
+							width="34"
+							height="40"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</dlc27_sla_daemonic_attraction_marker>
 		<dy_icon
 			this="5E4FE953-8D04-4105-B4D1617B7FD38E11"
 			id="dy_icon"
@@ -6086,6 +6465,93 @@
 				</newstate>
 			</states>
 		</icon_unspottable>
+		<kinfolk_tag
+			this="0AE53D30-3FAF-4537-B70FAEACDB6CB1A8"
+			id="kinfolk_tag"
+			offset="29.00,84.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Top Right"
+			dock_offset="-4.00,84.00"
+			component_anchor_point="1.00,0.00"
+			priority="1"
+			tooltipslocalised="true"
+			soundcategory="UI_GBL_TMP_Mouse_Over_Only"
+			uniqueguid="0AE53D30-3FAF-4537-B70FAEACDB6CB1A8"
+			currentstate="EA652991-0250-4B46-9E74B96F7ECC86DF"
+			defaultstate="EA652991-0250-4B46-9E74B96F7ECC86DF">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTrashOnCondition"
+					context_object_id="CcoUnitDetails"
+					context_function_id="CanUseUiFeature(&quot;CALL_UP_THE_TROLLS&quot;) == false || IsUnitInSet(&quot;wh3_dlc27_nor_kinfolk_units&quot;) == false"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoUnitDetails"
+					context_function_id="IsContextValid(CampaignRoot) &amp;&amp; CanUseUiFeature(&quot;CALL_UP_THE_TROLLS&quot;) &amp;&amp; IsUnitInSet(&quot;wh3_dlc27_nor_kinfolk_units&quot;) &amp;&amp; IsPartOfTransportArmy == false &amp;&amp; FactionContext.IsHuman"/>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoUnitDetails details"
+					context_function_id="( char = SelectedOrContainedCharacter ) =&gt;&#10;{&#10; GetIfElse(details.IsUnitInSet(&quot;wh3_dlc27_nor_kinfolk_units&quot;) &amp;&amp; details.IsPartOfTransportArmy == false &amp;&amp; IsContextValid(char) &amp;&amp;  char.FactionContext.EffectBundleUnfilteredList().Filter(Key == &quot;wh3_dlc27_bundle_nor_throgg_trollkind_troll_call_dummy&quot;).IsEmpty() == true, &quot;active&quot;, &quot;inactive&quot;)&#10;}">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="RitualComplete"/>
+						<property
+							name="event1"
+							value="EffectsListUpdated"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="952484B8-2B9B-45E9-BA398167CE0E0A9F"
+					uniqueguid="952484B8-2B9B-45E9-BA398167CE0E0A9F"
+					imagepath="ui/skins/default/dlc27_nor_troll_expansion/troll_kinfolk_unit.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="EA652991-0250-4B46-9E74B96F7ECC86DF"
+					name="active"
+					width="27"
+					height="22"
+					tooltip="This unit generates Trollkind for every turn it is in your army."
+					tooltiplabel="wh3_dlc27_nor_troll_expansion_unit_resource_contribution_tooltip"
+					interactive="true"
+					disabled="true"
+					uniqueguid="EA652991-0250-4B46-9E74B96F7ECC86DF">
+					<imagemetrics>
+						<image
+							this="FF859C16-0914-4ECB-827F947DC9255C8C"
+							uniqueguid="FF859C16-0914-4ECB-827F947DC9255C8C"
+							componentimage="952484B8-2B9B-45E9-BA398167CE0E0A9F"
+							width="27"
+							height="22"/>
+					</imagemetrics>
+				</active>
+				<inactive
+					this="B76DB99C-8EB6-42B8-900AE2C6AE7DB11A"
+					name="inactive"
+					width="27"
+					height="22"
+					tooltip="Trollkind contribution is stopped during &quot;Call the Monstrous Horde&quot;."
+					tooltiplabel="wh3_dlc27_nor_troll_expansion_unit_resource_warning_tooltip"
+					interactive="true"
+					disabled="true"
+					shader_name="set_greyscale_t0"
+					shadervars="0.80,1.00,0.00,0.00"
+					uniqueguid="B76DB99C-8EB6-42B8-900AE2C6AE7DB11A">
+					<imagemetrics>
+						<image
+							this="F1856BD9-C675-4694-A71D8B3039C61E4E"
+							uniqueguid="F1856BD9-C675-4694-A71D8B3039C61E4E"
+							componentimage="952484B8-2B9B-45E9-BA398167CE0E0A9F"
+							width="27"
+							height="22"/>
+					</imagemetrics>
+				</inactive>
+			</states>
+		</kinfolk_tag>
 		<label_kills
 			this="78D3242B-A88A-4BD7-824F877E7F0B05B0"
 			id="label_kills"
@@ -6852,6 +7318,113 @@
 				</hide>
 			</animations>
 		</magic_effect_sla_seduction>
+		<mark_state
+			this="AF1C700A-4B5C-460E-B73A0672C07E6123"
+			id="mark_state"
+			offset="1.00,14.00"
+			docking="Bottom Center"
+			dock_offset="0.00,2.00"
+			component_anchor_point="0.50,1.00"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="AF1C700A-4B5C-460E-B73A0672C07E6123"
+			currentstate="F2131F56-C71E-465F-B67ED35D3AFBC4B0"
+			defaultstate="F2131F56-C71E-465F-B67ED35D3AFBC4B0">
+			<componentimages>
+				<component_image
+					this="11051AB6-1109-41E7-99DDCAFEB2930B6E"
+					uniqueguid="11051AB6-1109-41E7-99DDCAFEB2930B6E"/>
+			</componentimages>
+			<states>
+				<tier_1
+					this="F2131F56-C71E-465F-B67ED35D3AFBC4B0"
+					name="tier_1"
+					width="29"
+					height="21"
+					uniqueguid="F2131F56-C71E-465F-B67ED35D3AFBC4B0">
+					<imagemetrics>
+						<image
+							this="87A9853A-072D-44CF-8A781E84A42497FA"
+							uniqueguid="87A9853A-072D-44CF-8A781E84A42497FA"
+							componentimage="11051AB6-1109-41E7-99DDCAFEB2930B6E"
+							offset="11.00,11.00"
+							width="6"
+							height="10"
+							colour="#FFED00FF"
+							dockpoint="Bottom Center"
+							ui_colour_preset_type_key="cooking_ingredients_group_5"/>
+					</imagemetrics>
+				</tier_1>
+				<tier_2
+					this="90DAD4C7-E6BA-444C-A1B6FA96432DD1A3"
+					name="tier_2"
+					width="29"
+					height="21"
+					uniqueguid="90DAD4C7-E6BA-444C-A1B6FA96432DD1A3">
+					<imagemetrics>
+						<image
+							this="675AB3B3-15EA-4EB8-8C205D60D1E82406"
+							uniqueguid="675AB3B3-15EA-4EB8-8C205D60D1E82406"
+							componentimage="11051AB6-1109-41E7-99DDCAFEB2930B6E"
+							offset="0.00,5.00"
+							width="6"
+							height="10"
+							colour="#FFED00FF"
+							dockpoint="Center Left"
+							ui_colour_preset_type_key="cooking_ingredients_group_5"/>
+						<image
+							this="451C321F-2624-43DE-A9FD0A81923FED53"
+							uniqueguid="451C321F-2624-43DE-A9FD0A81923FED53"
+							componentimage="11051AB6-1109-41E7-99DDCAFEB2930B6E"
+							offset="23.00,5.00"
+							width="6"
+							height="10"
+							colour="#FFED00FF"
+							dockpoint="Center Right"
+							ui_colour_preset_type_key="cooking_ingredients_group_5"/>
+					</imagemetrics>
+				</tier_2>
+				<tier_3
+					this="060AF258-1BD1-42F9-ABDE0FCA9C4E4BC7"
+					name="tier_3"
+					width="29"
+					height="21"
+					uniqueguid="060AF258-1BD1-42F9-ABDE0FCA9C4E4BC7">
+					<imagemetrics>
+						<image
+							this="64B20B35-1F61-4AC2-B140C751E361BE34"
+							uniqueguid="64B20B35-1F61-4AC2-B140C751E361BE34"
+							componentimage="11051AB6-1109-41E7-99DDCAFEB2930B6E"
+							offset="11.00,11.00"
+							width="6"
+							height="10"
+							colour="#FFED00FF"
+							dockpoint="Bottom Center"
+							ui_colour_preset_type_key="cooking_ingredients_group_5"/>
+						<image
+							this="CE2BEC10-DE85-44E5-8ED5EDA6743B558A"
+							uniqueguid="CE2BEC10-DE85-44E5-8ED5EDA6743B558A"
+							componentimage="11051AB6-1109-41E7-99DDCAFEB2930B6E"
+							offset="23.00,5.00"
+							width="6"
+							height="10"
+							colour="#FFED00FF"
+							dockpoint="Center Right"
+							ui_colour_preset_type_key="cooking_ingredients_group_5"/>
+						<image
+							this="2802F232-5F51-458F-8F0D8852C09DAC37"
+							uniqueguid="2802F232-5F51-458F-8F0D8852C09DAC37"
+							componentimage="11051AB6-1109-41E7-99DDCAFEB2930B6E"
+							offset="0.00,5.00"
+							width="6"
+							height="10"
+							colour="#FFED00FF"
+							dockpoint="Center Left"
+							ui_colour_preset_type_key="cooking_ingredients_group_5"/>
+					</imagemetrics>
+				</tier_3>
+			</states>
+		</mark_state>
 		<merc_overlay
 			this="8AFE25F2-9708-4341-B99110A3FE9D025D"
 			id="merc_overlay"
@@ -6888,6 +7461,178 @@
 				</newstate>
 			</states>
 		</merc_overlay>
+		<missing_dish
+			this="D6B0E3A2-3904-417F-8B5E61816CA6CE6B"
+			id="missing_dish"
+			offset="26.00,27.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			priority="60"
+			soundcategory="UI_CAM_HUD_PreBattle_Banner_Unassign"
+			uniqueguid="D6B0E3A2-3904-417F-8B5E61816CA6CE6B"
+			currentstate="2525F4A0-EB44-4076-8AFF187BA80CAD5C"
+			defaultstate="2525F4A0-EB44-4076-8AFF187BA80CAD5C">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="Button"/>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoCookingRecipeRecord"
+					context_function_id="Icon"/>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoCookingRecipeRecord">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/common ui/tooltip_crafted_item_unit_effects"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignUnit"
+					context_function_id="IsContextValid(MissingCookingDishContext)"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignUnit"
+					context_function_id="MissingCookingDishContext"/>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoCampaignUnit"
+					context_function_id="Do(RemoveMissingCookingDish, self.SetVisible(false))"/>
+				<callback_with_context
+					callback_id="ContextCommandRightClick"
+					context_object_id="CcoCampaignUnit"
+					context_function_id="Do(RemoveMissingCookingDish, self.SetVisible(false))"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="B70A7C42-FD6C-47B6-B809A20195A49618"
+					uniqueguid="B70A7C42-FD6C-47B6-B809A20195A49618"
+					imagepath="ui/skins/default/dlc24_ostankya_recipes/wh3_dlc24_recipe_frostwyverns_toil.png"/>
+				<component_image
+					this="2A8914C2-A472-4098-987E319A961C8A75"
+					uniqueguid="2A8914C2-A472-4098-987E319A961C8A75"
+					imagepath="ui/skins/default/dlc24_ostankya_witchs_hut/witchs_recipes_dropshadow.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="DE8355C6-5551-4B7F-95124EE2D6C9A625"
+					name="active"
+					height="33"
+					interactive="true"
+					pixelcollision="true"
+					shader_name="brighten_t0"
+					shadervars="1.00,0.00,0.00,0.00"
+					uniqueguid="DE8355C6-5551-4B7F-95124EE2D6C9A625"
+					stateeditordisplaypos="131.00,79.00">
+					<imagemetrics>
+						<image
+							this="69AC70BB-ED1A-4B18-99A20F0FB3AE8885"
+							uniqueguid="69AC70BB-ED1A-4B18-99A20F0FB3AE8885"
+							componentimage="2A8914C2-A472-4098-987E319A961C8A75"
+							offset="-3.00,-3.00"
+							width="38"
+							height="39"
+							dockpoint="Center"
+							aspect_ratio_locked_behaviour="Width First"/>
+						<image
+							this="8365AD8E-D169-498B-BF6133D571242496"
+							uniqueguid="8365AD8E-D169-498B-BF6133D571242496"
+							componentimage="B70A7C42-FD6C-47B6-B809A20195A49618"
+							height="33"
+							shadertechnique_vars="1.00,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition transition_m_target_state="134916CB-B9B5-48EE-B7D5AE92C7A2875F"/>
+					</transitionmap>
+				</active>
+				<glow
+					this="6C073A43-1B39-480E-8D5A98D3F5CD9FAE"
+					name="glow"
+					height="33"
+					interactive="true"
+					pixelcollision="true"
+					shader_name="glow_pulse_t0"
+					uniqueguid="6C073A43-1B39-480E-8D5A98D3F5CD9FAE">
+					<imagemetrics>
+						<image
+							this="68325ABD-DDA3-402C-99E4D5546284DE78"
+							uniqueguid="68325ABD-DDA3-402C-99E4D5546284DE78"
+							componentimage="2A8914C2-A472-4098-987E319A961C8A75"
+							offset="-3.00,-3.00"
+							width="38"
+							height="39"
+							dockpoint="Center"
+							aspect_ratio_locked_behaviour="Width First"/>
+						<image
+							this="183C0DE9-4AB6-4A3D-A75459FB6E2AF18F"
+							uniqueguid="183C0DE9-4AB6-4A3D-A75459FB6E2AF18F"
+							componentimage="B70A7C42-FD6C-47B6-B809A20195A49618"
+							height="33"/>
+					</imagemetrics>
+				</glow>
+				<hover
+					this="134916CB-B9B5-48EE-B7D5AE92C7A2875F"
+					name="hover"
+					height="33"
+					interactive="true"
+					pixelcollision="true"
+					shader_name="brighten_t0"
+					shadervars="2.00,0.00,0.00,0.00"
+					uniqueguid="134916CB-B9B5-48EE-B7D5AE92C7A2875F"
+					stateeditordisplaypos="238.00,162.00">
+					<imagemetrics>
+						<image
+							this="733A1B51-17B3-40E2-B4F1E0EE3BF3FB3C"
+							uniqueguid="733A1B51-17B3-40E2-B4F1E0EE3BF3FB3C"
+							componentimage="2A8914C2-A472-4098-987E319A961C8A75"
+							offset="-3.00,-3.00"
+							width="38"
+							height="39"
+							dockpoint="Center"
+							aspect_ratio_locked_behaviour="Width First"/>
+						<image
+							this="79FB6636-3C5B-4A87-BD3DC18F348AFD0E"
+							uniqueguid="79FB6636-3C5B-4A87-BD3DC18F348AFD0E"
+							componentimage="B70A7C42-FD6C-47B6-B809A20195A49618"
+							height="33"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="DE8355C6-5551-4B7F-95124EE2D6C9A625"/>
+					</transitionmap>
+				</hover>
+				<inactive
+					this="2525F4A0-EB44-4076-8AFF187BA80CAD5C"
+					name="inactive"
+					height="33"
+					interactive="true"
+					pixelcollision="true"
+					shader_name="set_greyscale_t0"
+					shadervars="1.00,1.00,0.00,0.00"
+					uniqueguid="2525F4A0-EB44-4076-8AFF187BA80CAD5C">
+					<imagemetrics>
+						<image
+							this="E20EA114-58E5-40B7-A998F4B8E028DBAE"
+							uniqueguid="E20EA114-58E5-40B7-A998F4B8E028DBAE"
+							componentimage="2A8914C2-A472-4098-987E319A961C8A75"
+							offset="-3.00,-3.00"
+							width="38"
+							height="39"
+							dockpoint="Center"
+							aspect_ratio_locked_behaviour="Width First"/>
+						<image
+							this="D5388404-D729-441C-AAA5C2277D45BB0D"
+							uniqueguid="D5388404-D729-441C-AAA5C2277D45BB0D"
+							componentimage="B70A7C42-FD6C-47B6-B809A20195A49618"
+							height="33"/>
+					</imagemetrics>
+				</inactive>
+			</states>
+		</missing_dish>
 		<non_infinite_parent
 			this="51B89B41-4888-404B-942FBCE5140EDB36"
 			id="non_infinite_parent"
@@ -8792,6 +9537,88 @@
 			</states>
 		</smoke>
 		<smoke
+			this="FF384A2E-BAEB-485C-8E1B382213CCB4A7"
+			id="smoke"
+			offset="-35.00,0.00"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			tooltipslocalised="true"
+			uniqueguid="FF384A2E-BAEB-485C-8E1B382213CCB4A7"
+			aspect_ratio_locked_behaviour="Width First"
+			currentstate="27A51503-3930-4C8E-A1006DA721219B5E"
+			defaultstate="27A51503-3930-4C8E-A1006DA721219B5E">
+			<componentimages>
+				<component_image
+					this="166C961E-C745-4BA0-9C4AC120B8BF3339"
+					uniqueguid="166C961E-C745-4BA0-9C4AC120B8BF3339"
+					imagepath="ui/skins/default/panel_leather_tile_grey.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="27A51503-3930-4C8E-A1006DA721219B5E"
+					name="NewState"
+					width="130"
+					height="130"
+					shader_name="smoke_overlay_t0"
+					shadervars="1.00,0.00,0.00,0.00"
+					uniqueguid="27A51503-3930-4C8E-A1006DA721219B5E">
+					<imagemetrics>
+						<image
+							this="9C551DBD-D473-4776-BF17E8449E797FB0"
+							uniqueguid="9C551DBD-D473-4776-BF17E8449E797FB0"
+							componentimage="166C961E-C745-4BA0-9C4AC120B8BF3339"
+							width="130"
+							height="130"
+							colour="#FFFFFF96"
+							tile="true"
+							margin="25.00,25.00,25.00,25.00"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</smoke>
+		<smoke
+			this="1F1F95FE-AF0B-4EB0-A131C3AF353D8875"
+			id="smoke"
+			offset="-35.00,0.00"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			tooltipslocalised="true"
+			uniqueguid="1F1F95FE-AF0B-4EB0-A131C3AF353D8875"
+			aspect_ratio_locked_behaviour="Width First"
+			currentstate="E7007AAB-56D0-4F7C-975565093C1B0BCA"
+			defaultstate="E7007AAB-56D0-4F7C-975565093C1B0BCA">
+			<componentimages>
+				<component_image
+					this="178AE983-AA42-44E1-9A5005A2A816C77C"
+					uniqueguid="178AE983-AA42-44E1-9A5005A2A816C77C"
+					imagepath="ui/skins/default/panel_leather_tile_grey.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="E7007AAB-56D0-4F7C-975565093C1B0BCA"
+					name="NewState"
+					width="130"
+					height="130"
+					shader_name="smoke_overlay_t0"
+					shadervars="2.00,5.00,0.00,0.00"
+					uniqueguid="E7007AAB-56D0-4F7C-975565093C1B0BCA">
+					<imagemetrics>
+						<image
+							this="642FFE00-177F-4281-97C73CB5692C4A73"
+							uniqueguid="642FFE00-177F-4281-97C73CB5692C4A73"
+							componentimage="178AE983-AA42-44E1-9A5005A2A816C77C"
+							offset="-6.00,-26.00"
+							width="142"
+							height="182"
+							colour="#FFFFFF96"
+							tile="true"
+							dockpoint="Center"
+							margin="25.00,25.00,25.00,25.00"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</smoke>
+		<smoke
 			this="318102FC-52B2-4632-8E3C4FBBFE25BF8B"
 			id="smoke"
 			offset="-35.00,0.00"
@@ -9637,7 +10464,7 @@
 					<child_m_user_properties>
 						<property
 							name="layout_path"
-							value="ui/common ui/tooltip_dlc24_witches_hut_cooking_dish"/>
+							value="ui/common ui/tooltip_crafted_item_unit_effects"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
@@ -9780,6 +10607,106 @@
 				</inactive>
 			</states>
 		</template_dish>
+		<template_mark
+			this="A1F9FC98-B32A-4975-8FF1AD562F7DF7B7"
+			id="template_mark"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="60"
+			soundcategory="UI_CAM_HUD_PreBattle_Banner_Unassign"
+			uniqueguid="A1F9FC98-B32A-4975-8FF1AD562F7DF7B7"
+			currentstate="F62A9A64-032F-4BC2-88657DC8CE4BBDF0"
+			defaultstate="F62A9A64-032F-4BC2-88657DC8CE4BBDF0">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="Button"/>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_function_id="#Icon"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_function_id="#"/>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_function_id="#">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/common ui/tooltip_dlc27_sla_marks_of_cruelty"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="0EB980E4-839E-4B54-B846039DB540A09F"
+					uniqueguid="0EB980E4-839E-4B54-B846039DB540A09F"
+					imagepath="ui/skins/default/dlc27_sla_marks_of_cruelty/marks_icons/icon_mark_vindictiveness_name_ph.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="F62A9A64-032F-4BC2-88657DC8CE4BBDF0"
+					name="active"
+					height="33"
+					interactive="true"
+					pixelcollision="true"
+					shader_name="brighten_t0"
+					shadervars="1.00,0.00,0.00,0.00"
+					uniqueguid="F62A9A64-032F-4BC2-88657DC8CE4BBDF0"
+					stateeditordisplaypos="131.00,79.00">
+					<imagemetrics>
+						<image
+							this="7D12DDB9-2D17-4147-A9EF6A4DF455F526"
+							uniqueguid="7D12DDB9-2D17-4147-A9EF6A4DF455F526"
+							componentimage="0EB980E4-839E-4B54-B846039DB540A09F"
+							height="33"
+							shadertechnique_vars="1.00,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition transition_m_target_state="DCC5EE97-A615-426C-BAA5C5CDD419FF78"/>
+					</transitionmap>
+				</active>
+				<hover
+					this="DCC5EE97-A615-426C-BAA5C5CDD419FF78"
+					name="hover"
+					height="33"
+					interactive="true"
+					pixelcollision="true"
+					shader_name="brighten_t0"
+					shadervars="2.00,0.00,0.00,0.00"
+					uniqueguid="DCC5EE97-A615-426C-BAA5C5CDD419FF78"
+					stateeditordisplaypos="238.00,162.00">
+					<imagemetrics>
+						<image
+							this="7E6EF627-7005-48D2-974C1B991C2417EC"
+							uniqueguid="7E6EF627-7005-48D2-974C1B991C2417EC"
+							componentimage="0EB980E4-839E-4B54-B846039DB540A09F"
+							height="33"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="F62A9A64-032F-4BC2-88657DC8CE4BBDF0"/>
+					</transitionmap>
+				</hover>
+				<inactive
+					this="C408BB5B-B8A9-43BA-B1E2450DC27E9D89"
+					name="inactive"
+					height="33"
+					interactive="true"
+					pixelcollision="true"
+					shader_name="set_greyscale_t0"
+					shadervars="1.00,1.00,0.00,0.00"
+					uniqueguid="C408BB5B-B8A9-43BA-B1E2450DC27E9D89">
+					<imagemetrics>
+						<image
+							this="3EB5DB67-82BD-42F3-B71C6BBC1B0535A1"
+							uniqueguid="3EB5DB67-82BD-42F3-B71C6BBC1B0535A1"
+							componentimage="0EB980E4-839E-4B54-B846039DB540A09F"
+							height="33"/>
+					</imagemetrics>
+				</inactive>
+			</states>
+		</template_mark>
 		<template_particle
 			this="445074D9-FAD8-45EA-86EDC4D61F63DB34"
 			id="template_particle"
@@ -10973,6 +11900,10 @@
 					this="F5E91A1F-711D-42DA-A1201150DAFE5B45"
 					uniqueguid="F5E91A1F-711D-42DA-A1201150DAFE5B45"
 					imagepath="ui/skins/default/unit_card_semicircle_chieftain.png"/>
+				<component_image
+					this="ADB1725E-23C9-437A-B1083D15A58FBFD8"
+					uniqueguid="ADB1725E-23C9-437A-B1083D15A58FBFD8"
+					imagepath="ui/skins/default/dlc27_sla_decadence/unit_card_semicircle_daemonic_attraction.png"/>
 			</componentimages>
 			<states>
 				<blessed_spawning
@@ -11026,6 +11957,23 @@
 							dockpoint="Bottom Center"/>
 					</imagemetrics>
 				</crafted>
+				<dechala_daemonic_attraction
+					this="D8499410-3A38-4524-AB1BEE07EA5C10EA"
+					name="dechala_daemonic_attraction"
+					width="36"
+					height="36"
+					uniqueguid="D8499410-3A38-4524-AB1BEE07EA5C10EA">
+					<imagemetrics>
+						<image
+							this="BF48674A-54C0-47F5-AF2EFF9C121B230E"
+							uniqueguid="BF48674A-54C0-47F5-AF2EFF9C121B230E"
+							componentimage="ADB1725E-23C9-437A-B1083D15A58FBFD8"
+							offset="-9.00,1.00"
+							width="55"
+							height="35"
+							dockpoint="Bottom Center"/>
+					</imagemetrics>
+				</dechala_daemonic_attraction>
 				<default
 					this="90F9B0FE-A8F7-4E92-ACF3AE5EEF7D30CF"
 					name="default"
@@ -11537,7 +12485,6 @@
 			offset="4.00,84.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
-			visible="false"
 			priority="1"
 			tooltipslocalised="true"
 			soundcategory="UI_GBL_TMP_Mouse_Over_Only"
@@ -11546,23 +12493,35 @@
 			defaultstate="5DC080F5-1FAD-40B4-B687B0E3DD9F3E57">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextTooltipSetter"
-					context_object_id="CcoStaticObject"
-					context_function_id="Loc(&quot;wagh_unit_marker_tooltip&quot;)"/>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoUnitDetails"
-					context_function_id="IsPartOfTransportArmy"/>
-				<callback_with_context
 					callback_id="ContextTrashOnCondition"
 					context_object_id="CcoUnitDetails"
 					context_function_id="IsContextValid(BattleUnitContext) &amp;&amp; IsPartOfTransportArmy == false"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoUnitDetails"
+					context_function_id="IsPartOfTransportArmy &amp;&amp; !CanUseUiFeature(&quot;SAYL_MANIPULATIONS&quot;)"/>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoUnitDetails">
+					<child_m_user_properties>
+						<property
+							name="fallback_state"
+							value="NewState"/>
+						<property
+							name="trolls_army_marker"
+							value="FactionContext.FactionRecordContext.Key == &quot;wh_dlc08_nor_wintertooth&quot;"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
 					this="01CE40F9-C036-48AA-97F96DC45826F2CE"
 					uniqueguid="01CE40F9-C036-48AA-97F96DC45826F2CE"
 					imagepath="ui/skins/default/waaagh_army_marker.png"/>
+				<component_image
+					this="495D5401-0E2C-47F5-8717E4C7514DAFF1"
+					uniqueguid="495D5401-0E2C-47F5-8717E4C7514DAFF1"
+					imagepath="ui/skins/default/dlc27_nor_troll_expansion/marker_trolls_army.png"/>
 			</componentimages>
 			<states>
 				<newstate
@@ -11570,6 +12529,8 @@
 					name="NewState"
 					width="27"
 					height="22"
+					tooltip="{{tr:random_localisation_strings_string_wagh_unit_marker_tooltip}}"
+					tooltiplabel="wagh_unit_marker_tooltip"
 					interactive="true"
 					disabled="true"
 					uniqueguid="5DC080F5-1FAD-40B4-B687B0E3DD9F3E57">
@@ -11582,6 +12543,25 @@
 							height="22"/>
 					</imagemetrics>
 				</newstate>
+				<trolls_army_marker
+					this="8AE4CF40-372D-4D83-A60CE362BB865EC2"
+					name="trolls_army_marker"
+					width="27"
+					height="22"
+					tooltip="Monstrous Horde Unit||This unit has responded to the Monstrous Horde and will only be present for the duration of it."
+					tooltiplabel="wh3_dlc27_nor_call_up_the_trolls_army_unit_tooltip"
+					interactive="true"
+					disabled="true"
+					uniqueguid="8AE4CF40-372D-4D83-A60CE362BB865EC2">
+					<imagemetrics>
+						<image
+							this="95D8E616-F421-4FB8-B3C0F33DFA5D6E77"
+							uniqueguid="95D8E616-F421-4FB8-B3C0F33DFA5D6E77"
+							componentimage="495D5401-0E2C-47F5-8717E4C7514DAFF1"
+							width="26"
+							height="22"/>
+					</imagemetrics>
+				</trolls_army_marker>
 			</states>
 		</waaagh_unit_marker>
 	</components>

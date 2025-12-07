@@ -1,11 +1,14 @@
 item_fusing_pairings = {
-	--[[
 	{
-		item1 = "ham",
-		item2 = "bread",
-		result = "sandwich"
+		item1 = "wh3_main_anc_enchanted_item_scrap",
+		item2 = "wh3_main_anc_enchanted_item_scrap",
+		result = "wh3_main_anc_enchanted_item_scrap_upgraded"
+	},
+	{
+		item1 = "wh3_main_anc_enchanted_item_scrap_upgraded",
+		item2 = "wh3_main_anc_enchanted_item_scrap_upgraded",
+		result = "RANDOM_UNIQUE"
 	}
-	]]--
 };
 base_chance_to_fuse_unique_item = 10;
 local fuse_fail_item = "wh3_main_anc_enchanted_item_scrap";
@@ -31,9 +34,17 @@ function item_fusing_listener()
 
 			for _, pairing in ipairs(item_fusing_pairings) do
 				if (item1_key == pairing.item1 and item2_key == pairing.item2) or (item1_key == pairing.item2 and item2_key == pairing.item1) then
-					out("Fusing Pairing Found: "..pairing.result);
-					cm:add_ancillary_to_faction(faction, pairing.result, false);
-					cm:trigger_ancillary_fused_report(faction, pairing.result, item1_key, item2_key);
+					local item_result = pairing.result;
+					out("Fusing Pairing Found: "..item_result);
+
+					if item_result == "RANDOM_UNIQUE" then
+						item_result = attempt_drop_rare_item_for_faction(faction);
+						out("\tNew Unique: "..item_result);
+					else
+						cm:add_ancillary_to_faction(faction, item_result, false);
+					end
+
+					cm:trigger_ancillary_fused_report(faction, item_result, item1_key, item2_key);
 					return true;
 				end
 			end

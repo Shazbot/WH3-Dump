@@ -1,0 +1,17 @@
+WhiteTower
+{
+	GetTargetCriteriaText()
+	{
+		(current_target = TargettingContext.CurrentTargetContext,
+		 ritual = self.StoredContext("CcoCampaignRitual")) =>
+		{
+			GetIfElse(IsContextValid(current_target), 
+				Format("%s([[img:%S]][[/img]]%s)", 
+					current_target.Name,  
+					current_target.FactionFlagSmall, 
+					current_target.FactionName), 
+				GetIf(IsContextValid(ritual), ritual.TargetCriteriaText(true))
+			)
+		}
+	}
+}

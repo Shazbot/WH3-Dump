@@ -167,6 +167,61 @@ function lohkir_arks:add_lokhir_listeners()
 			function(context) self:adjust_blarks_in_pool(context) end,
 			true
 		);
+			
+		--Lokhir Felheart ritual that spends slaves, counts Black Arks and grants treasury
+		core:add_listener(
+			"lokhir_slave_for_treasury_completed",
+			"RitualCompletedEvent",
+			function(context)
+				return context:ritual():ritual_key() == "wh3_main_ritual_def_lokhir_slave_3"
+			end,
+			function(context)
+				local faction_forces = context:performing_faction():military_force_list()
+				local gdp = 0
+				for i = 1, faction_forces:num_items() - 1 do
+					if faction_forces:item_at(i):force_type():key() == "SEA_LOCKED_HORDE" then
+						gdp = 500 + gdp
+					end
+				end
+				if gdp > 0 then
+					cm:treasury_mod(context:performing_faction():name(), gdp);
+				end
+			end,
+			true
+		);
+
+		--Lokhir Felheart loses all ap after using Black Ark teleport
+		core:add_listener(
+			"lokhir_black_ark_teleport_lose_ap",
+			"RitualStartedEvent",
+			function(context)
+				return context:ritual():ritual_key() == "wh3_dlc27_black_ark_teleport"
+			end,
+			function(context)
+				local character_list = context:ritual():characters_who_performed()
+				for i = 0, character_list:num_items() - 1 do
+					local general_lookup = cm:char_lookup_str(character_list:item_at(i):character())
+					-- setting the performing general's ap to 0, before they teleport on the next turn
+					cm:replenish_action_points(general_lookup, 0)
+				end
+			end,
+			true
+		);
+
+		--If Lokhir finished mission chain to occupy each of the Eastern Isles, they gain access to Aislinn's unique Sea Lanes
+		--If the lanes aren't opened yet, he opens them with access for both of them
+		core:add_listener(
+			"lokhir_mission_control_eastern_isles_succeeded",
+			"MissionSucceeded",
+			function(context)
+				return context:mission():mission_record_key() == "wh3_dlc27_def_blessed_dread_control_eastern_isles"
+			end,
+			function(context)
+				sea_lanes:close_aislinn_nodes() --if Aislinn has already opened the nodes
+				sea_lanes:open_lokhir_nodes() -- Lokhir nodes are for both Aislinn and Lokhir
+			end,
+			true
+		);
 	end;
 end
 

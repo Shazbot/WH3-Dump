@@ -69,6 +69,10 @@ cm:add_first_tick_callback_new(
 
 			if campaign_ai_script then
 				campaign_ai_script:kislev_background_income()
+				campaign_ai_script:aislinn_background_income()
+				campaign_ai_script:teclis_background_income()
+				campaign_ai_script:throgg_background_income()
+				campaign_ai_script:dechala_background_income()
 			end
 			
 		end;
@@ -190,7 +194,7 @@ function start_game_all_factions()
 	-- DLC08 Norsca Features
 	out("==== Norsca ====");
 	Add_Norsca_Listeners();
-	Add_Norscan_Gods_Listeners();
+	norscan_gods:initialise()
 	Add_Nurgle_Plague_Listeners();
 	
 	-- DLC09 Tomb Kings Features
@@ -202,7 +206,7 @@ function start_game_all_factions()
 	
 	-- DLC10 Queen & Crone Features
 	out("==== Queen & Crone ====");
-	add_alarielle_listeners();
+	alarielle:add_alarielle_listeners();
 	death_night:add_hellebron_listeners();
 	add_alith_anar_listeners();
 	sword_of_khaine:initialise();
@@ -359,6 +363,33 @@ function start_game_all_factions()
 	tyrants_demands:initialise()
 	fragments_of_sorcery:initialise()
 
+	-- dlc27
+	pre_battle_challenges:initialise()
+	monster_hunt:initialize()
+	eternal_dance:initialise()
+	asur_domination:initialise()
+	aislinn_narrative:initialise()
+	aislinn_war:initialise()
+	asur_dilemmas:initialise()
+	norsca_kinfolk:initialise()
+	settlement_exploitation:initialise()
+	hef_intrigue_at_the_court:initialise()
+	valiant_imperatives:initialise()
+	nor_pillaging:initialise()
+	nor_treacheries:initialise()
+	nor_generic:initialise()
+	sayl_narrative:initialise()
+	sayl_manipulation:initialise()
+	secrets_of_the_white_tower:initialise()
+	dechala_narrative:initialise()
+	marks_of_cruelty:initialise()
+	wulfrik_campaign_start:initialise()
+	wulfrik_start:initialise()
+	dragonships:initialise()
+	dechala_daemonic_influence:initialize()
+	dechala_daemonic_units:initialise()
+
+
 	-- Update 5.2
 	add_underdeep_listeners();
 	add_minor_cults_listeners();
@@ -514,6 +545,24 @@ cm:add_first_tick_callback_new(function()
 	-- removes the -5 natural high elf resistance from this faction.
 	hef_trait:remove_effect_by_key("wh3_main_effect_pooled_resource_seductive_influence_culture")
 	cm:apply_custom_effect_bundle_to_faction(hef_trait, cm:get_faction(saphery_faction_key))
+	
+	-- Masque and Dechala starting cults 
+	local masque = cm:get_faction("wh3_dlc27_sla_masque_of_slaanesh"):command_queue_index()
+	local masque_region = cm:get_region("wh3_main_combi_region_gorssel"):cqi()
+	local masque_foreign_slot = cm:add_foreign_slot_set_to_region_for_faction(masque, masque_region, "wh3_main_slot_set_sla_cult")
+	local masque_slot = masque_foreign_slot:slots():item_at(0)
+	cm:foreign_slot_instantly_upgrade_building(masque_slot, "wh3_main_sla_cult_1")
+
+	local masque = cm:get_faction("wh3_dlc27_sla_masque_of_slaanesh"):command_queue_index()
+	local masque_region = cm:get_region("wh3_main_combi_region_karak_azul"):cqi()
+	local masque_foreign_slot = cm:add_foreign_slot_set_to_region_for_faction(masque, masque_region, "wh3_main_slot_set_sla_cult")
+	local masque_slot = masque_foreign_slot:slots():item_at(0)
+
+	local tormentor = cm:get_faction("wh3_dlc27_sla_the_tormentors"):command_queue_index()
+	local tormentor_region = cm:get_region("wh3_main_combi_region_bamboo_crossing"):cqi()
+	local tormentor_foreign_slot = cm:add_foreign_slot_set_to_region_for_faction(tormentor, tormentor_region, "wh3_dlc27_slot_set_sla_cult_dechala")
+	local tormentor_slot = tormentor_foreign_slot:slots():item_at(0)
+	cm:foreign_slot_instantly_upgrade_building(tormentor_slot, "wh3_dlc27_sla_dechala_cult_corruption_1")
 end)
 
 --- Great desert of araby permanent sandstorm===

@@ -736,6 +736,7 @@ function start_confederation_listeners()
 			
 			local not_limited_confederation_factions = {
 				--cultures or subcultures which are not limited when the player
+				wh2_main_hef_high_elves = true,
 				wh_dlc03_bst_beastmen = true,
 				wh_dlc05_wef_wood_elves = true,
 				wh_main_brt_bretonnia = true,
@@ -1468,7 +1469,12 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 			pic = 800;
 		-- Throgg
 		elseif faction_name == "wh_dlc08_nor_wintertooth" then
-			secondary_detail = "event_feed_strings_text_wh_dlc08_event_feed_string_scripted_event_intro_norsca_secondary_detail";
+			secondary_detail = "event_feed_strings_text_wh3_dlc27_scripted_event_how_they_play_throgg_secondary_detail";
+			pic = 800;
+		-- Sayl
+		elseif faction_name == "wh3_dlc27_nor_sayl" then
+			title = "event_feed_strings_text_wh3_scripted_event_path_to_victory_title"
+			secondary_detail = "event_feed_strings_text_wh3_dlc27_scripted_event_how_they_play_sayl_secondary_detail";
 			pic = 800;
 		------------------------
 		-- PRO2 - Isabella
@@ -1542,6 +1548,12 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 		elseif faction_name == "wh2_dlc15_hef_imrik" then
 			secondary_detail = "event_feed_strings_text_wh2_scripted_event_how_they_play_caledor_secondary_detail";
 			pic = 796;
+
+		-- Aislinn
+		elseif faction_name == "wh3_dlc27_hef_aislinn" then
+			secondary_detail = "event_feed_strings_text_wh3_dlc27_scripted_event_how_they_play_aislinn_secondary_detail";
+			pic = 771;
+
 
 		------------------------
 		-- Dark Elves
@@ -1815,6 +1827,17 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 		elseif faction_name == "wh3_dlc23_chd_astragoth" or faction_name == "wh3_dlc23_chd_legion_of_azgorh" or faction_name == "wh3_dlc23_chd_zhatan" then
 			secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_chaos_dwarfs_secondary_detail";
 			pic = 597;
+		
+		------------------------
+		-- Slaanesh
+		------------------------
+		
+		elseif faction_name == "wh3_dlc27_sla_the_tormentors" then
+			secondary_detail = "event_feed_strings_text_wh3_dlc27_scripted_event_how_they_play_dechala_secondary_detail";
+			pic = 13;
+		elseif faction_name == "wh3_dlc27_sla_masque_of_slaanesh" then
+			secondary_detail = "event_feed_strings_text_wh3_dlc27_scripted_event_how_they_play_masque_secondary_detail";
+			pic = 13;
 		else
 			script_error("ERROR: show_how_to_play_event() called but couldn't recognise supplied faction name [" .. faction_name .. "]. Please add it to script/campaign/wh_campaign_setup.lua");
 			
@@ -2325,7 +2348,8 @@ local sea_region_effect_buildings = {
 };
 
 local sea_region_effect_techs = {
-	"wh2_main_tech_hef_5_06"
+	"wh2_main_tech_hef_5_04",
+	"wh3_dlc27_tech_hef_aislinn_5_00"
 };
 
 function sea_region_shroud_effect_listener()
@@ -2755,7 +2779,42 @@ function apply_default_diplomacy()
 	if cm:get_faction("wh2_dlc09_tmb_khemri") then
 		cm:force_diplomacy("all", "faction:wh2_dlc09_tmb_khemri", "vassal", false, false, false);
 	end;
+	-- nobody can vassalize the HEF faction that owns Aislinn confederations. HEF Faction and Aislinn can't declare war on each other
+	if cm:get_faction("wh3_dlc27_hef_aislinn_confederation_owner") then
+		cm:force_diplomacy("all", "faction:wh3_dlc27_hef_aislinn_confederation_owner", "form confederation", false, false, false);
+		cm:force_diplomacy("faction:wh3_dlc27_hef_aislinn_confederation_owner", "faction:wh3_dlc27_hef_aislinn", "war", false, false, true)
+	end
 	
+	-- Kholek can't vassalize the Avags, to prevent Sayl disruptions
+	if cm:get_faction("wh3_dlc27_nor_sayl") then
+		cm:force_diplomacy("all", "faction:wh3_dlc27_nor_avags", "vassal", false, false, false)
+	end
+
+	-- The masque can't deal with her generated army
+	if cm:get_faction("wh3_dlc27_sla_masque_of_slaanesh") then
+		cm:force_diplomacy("faction:wh3_dlc27_sla_masque_of_slaanesh", "faction:wh3_dlc27_rogue_unholy_pageant", "all", false, false, false)
+	end
+
+	-- Restrict HEF playable factions from confederating with each other
+	local hef_playable_factions = world:lookup_factions_from_faction_set("hef_playable_factions")
+	local human_hef_faction = false
+	-- Check if there are any human HEF factions
+	for _, faction in model_pairs(hef_playable_factions) do
+		if faction:is_human() then
+			human_hef_faction = true
+		end
+	end
+	-- If there are any human HEF factions block confederation between the Legendary Lords
+	if human_hef_faction then
+		for _, source_faction in model_pairs(hef_playable_factions) do
+			for __, target_faction in model_pairs(hef_playable_factions) do
+				if source_faction ~= target_faction then
+					cm:force_diplomacy("faction:" .. source_faction:name(), "faction:" .. target_faction:name(), "form confederation", false, false, true)
+				end
+			end
+		end
+	end
+
 	-- loop through all human factions to lock off diplomacy options that can't be locked using the system above
 	local human_player_keys = cm:get_human_factions();
 	local is_multiplayer = cm:is_multiplayer();

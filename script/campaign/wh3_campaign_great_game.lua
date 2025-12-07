@@ -1,4 +1,5 @@
 local belakor_faction_key = "wh3_main_chs_shadow_legion";
+local dechala_faction_key = "wh3_dlc27_sla_the_tormentors"
 
 function chaos_get_culture_prefix(culture)
 	if culture == "wh3_main_cth_cathay" then
@@ -490,6 +491,10 @@ function unlock_gg_rituals(gg_level, faction, use_upgraded_rituals)
 	
 	for i = 1, 4 do
 		local ritual_key = "wh3_main_ritual_" .. culture .. "_gg_" .. i;
+		-- dechala has custom rituals for levels 2 and 3 so we add the extra suffix to the key
+		if faction:name() == dechala_faction_key and (i == 2 or i == 3 or i == 4) then
+			ritual_key = ritual_key .. "_dechala" 
+		end
 		
 		if (gg_level and i <= gg_level) or is_belakor then
 			if use_upgraded_rituals or (is_belakor and belakor_ritual_mapping[i] == current_ascended_god) then

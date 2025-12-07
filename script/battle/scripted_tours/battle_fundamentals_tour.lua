@@ -495,7 +495,7 @@ do
 				end
 			);
 		end,
-		0
+		5
 	);
 
 	nts_intro:action(
@@ -870,7 +870,7 @@ do
 				"restore_camera"
 			);
 		end,
-		0
+		5
 	);
 
 	-- Show unit proxies
@@ -986,7 +986,7 @@ do
 	-------------------------------------------------
 
 	infotext:set_state_override("wh3_main_st_battle_fundamentals_0071", "battle_controls_attacking");
-	
+
 	local nts_attacking;
 	nts_attacking = st_helper.navigable_tour_section_battle_factory(
 		"attacking",										-- section name
@@ -1210,6 +1210,7 @@ do
 	-- actions
 	nts_attacking:action(
 		function()
+
 			-- Fade camera to black and enable cinematic ui
 			cam:fade(true, 0.5);
 			bm:enable_cinematic_ui(true, false, false);
@@ -1335,14 +1336,13 @@ do
 						function()
 							setup_animated_arrows();
 							draw_animated_arrows();
-
 							nts_attacking:add_skip_action(
 								function()
 									remove_animated_arrows();
 								end
 							);
 						end,
-						nil,
+						0,
 						"nts_attacking_show_animated_arrows"
 					);
 
@@ -1353,6 +1353,8 @@ do
 					);
 				end
 			);
+
+			
 
 			cutscene_enemy_attack:set_should_enable_cinematic_camera(false);
 
@@ -1378,15 +1380,19 @@ do
 
 					cutscene_enemy_attack:play_sound(sfx);
 
+
 					bm:progress_on_sound_effect_finished(
 						"battle_fundamentals_attack",
 						sfx, 
 						function()
+
+							--is_active()
 							cutscene_enemy_attack:skip();
 						end,
 						1000,												-- post VO finishing delay
 						5000												-- min playing time
 					);
+				
 				end,
 				1000
 			);
@@ -1453,7 +1459,7 @@ do
 				nts_flanking:add_skip_action(stop_advance_tour_if_combatants_rout_monitor);
 			end;
 		end,
-		0
+		5
 	);
 	
 	nts_flanking:action(
@@ -1494,7 +1500,7 @@ do
 				nts_morale:add_skip_action(stop_advance_tour_if_combatants_rout_monitor);
 			end;
 		end,
-		0
+		5
 	);
 	
 
@@ -1526,7 +1532,7 @@ do
 				nts_routing:add_skip_action(stop_advance_tour_if_combatants_rout_monitor);
 			end;
 		end,
-		0
+		5
 	);
 
 
@@ -1797,7 +1803,7 @@ do
 							end;
 						end,
 						1000,												-- post VO finishing delay
-						10000												-- min playing time
+						10000												-- min playing time											
 					);
 				end,
 				1500

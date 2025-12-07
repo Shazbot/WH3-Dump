@@ -245,14 +245,27 @@ end;
 
 
 
+local function file_exists(path)
+	local file = io.open(path, "r")
+	if file then
+		file:close()
+		return true
+	else
+		return false
+	end
+end
+
 
 local function define_docgen_data()
 
 	-- set up some paths
 	local path_from_binaries_to_script_folder = "../../warhammer/working_data/script/";
 	local path_from_binaries_to_common_folder = "../../common/";
-
-
+	
+	if not file_exists(path_from_binaries_to_script_folder .. "docgen.lua") then
+		path_from_binaries_to_script_folder = "../../../warhammer/working_data/script/";
+		path_from_binaries_to_common_folder = "../../../common/";
+	end
 	---------------------------------------------------------
 	-- Common Data
 	---------------------------------------------------------

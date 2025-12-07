@@ -359,37 +359,40 @@ function setup_realms()
 					-- offer a dilemma to the player to jump into the forge to meet the AI immediately
 					if not is_human and not cm:get_saved_value("intercept_forge_dilemma_active") then
 						local human_factions = cm:get_human_factions();
-						-- in multiplayer, only offer the dilemma to the host
-						local first_human = cm:get_faction(human_factions[1]);
-						local x, y = cm:find_valid_spawn_location_for_character_from_position(human_factions[1], forge_of_souls_dest_x, forge_of_souls_dest_y, true);
-						
-						if x > 0 and first_human:has_faction_leader() then
-							local faction_leader = first_human:faction_leader();
-							local has_garrison_residence = faction_leader:has_garrison_residence();
+						-- there can be no humans in auto tests
+						if is_table(human_factions) and #human_factions > 0 then
+							-- in multiplayer, only offer the dilemma to the host
+							local first_human = cm:get_faction(human_factions[1]);
+							local x, y = cm:find_valid_spawn_location_for_character_from_position(human_factions[1], forge_of_souls_dest_x, forge_of_souls_dest_y, true);
 							
-							if faction_leader:has_military_force() and (is_faction_in_realm(first_human) or (faction_leader:has_region() and not has_garrison_residence) or (has_garrison_residence and not faction_leader:garrison_residence():is_under_siege())) then
-								local first_human_cqi = first_human:command_queue_index();
+							if x > 0 and first_human:has_faction_leader() then
+								local faction_leader = first_human:faction_leader();
+								local has_garrison_residence = faction_leader:has_garrison_residence();
 								
-								cm:trigger_dilemma_with_targets(first_human_cqi, "wh3_main_dilemma_forge_of_souls_entered", faction:command_queue_index(), first_human_cqi, 0, faction_leader:military_force():command_queue_index(), 0, 0);
-								cm:set_saved_value("intercept_forge_dilemma_active", true);
-								
-								core:add_listener(
-									"intercept_forge_dilemma_choice",
-									"DilemmaChoiceMadeEvent",
-									function(context)
-										return context:dilemma() == "wh3_main_dilemma_forge_of_souls_entered";
-									end,
-									function(context)
-										cm:set_saved_value("intercept_forge_dilemma_active", false);
-										
-										if context:choice() == 0 then
-											cm:teleport_to(cm:char_lookup_str(faction_leader), x, y);
-											local camera_x, camera_y = cm:log_to_dis(x, y);
-											cm:scroll_camera_from_current(true, 1, {camera_x, camera_y, 13, 0, 10});
-										end;
-									end,
-									false
-								);
+								if faction_leader:has_military_force() and (is_faction_in_realm(first_human) or (faction_leader:has_region() and not has_garrison_residence) or (has_garrison_residence and not faction_leader:garrison_residence():is_under_siege())) then
+									local first_human_cqi = first_human:command_queue_index();
+									
+									cm:trigger_dilemma_with_targets(first_human_cqi, "wh3_main_dilemma_forge_of_souls_entered", faction:command_queue_index(), first_human_cqi, 0, faction_leader:military_force():command_queue_index(), 0, 0);
+									cm:set_saved_value("intercept_forge_dilemma_active", true);
+									
+									core:add_listener(
+										"intercept_forge_dilemma_choice",
+										"DilemmaChoiceMadeEvent",
+										function(context)
+											return context:dilemma() == "wh3_main_dilemma_forge_of_souls_entered";
+										end,
+										function(context)
+											cm:set_saved_value("intercept_forge_dilemma_active", false);
+											
+											if context:choice() == 0 then
+												cm:teleport_to(cm:char_lookup_str(faction_leader), x, y);
+												local camera_x, camera_y = cm:log_to_dis(x, y);
+												cm:scroll_camera_from_current(true, 1, {camera_x, camera_y, 13, 0, 10});
+											end;
+										end,
+										false
+									);
+								end;
 							end;
 						end;
 					end;

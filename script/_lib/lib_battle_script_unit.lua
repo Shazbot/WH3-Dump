@@ -875,8 +875,11 @@ end;
 --- @desc <i>"defend", "dismount", "fire_at_will", "skirmish", "change_formation_spacing", "drop_siege_equipment", "release_animals", "disembark_from_ship", "board_ship"</i>
 --- @p string behaviour name
 --- @p boolean activate
-function script_unit:change_behaviour_active(behaviour, value, should_release)
-	self.uc:change_behaviour_active(behaviour, value);
+--- @p boolean [opt=false] release, Release script control afterwards
+--- @p boolean [opt=true] should play vo, Should play the voice-over for this behaviour change.
+function script_unit:change_behaviour_active(behaviour, value, should_release, should_play_vo)
+	local should_play_vo = (should_play_vo ~= false)
+	self.uc:change_behaviour_active(behaviour, value, should_play_vo);
 	if should_release then
 		self.uc:release_control();
 	end;
@@ -1026,8 +1029,9 @@ end;
 --- @function set_invisible_to_all
 --- @desc Makes the unit invisible. This is an unembellished wrapper for an underlying code function.
 --- @p boolean is hidden
-function script_unit:set_invisible_to_all(visible, update_ui)
-	return self.uc:set_invisible_to_all(visible, update_ui);
+--- @p boolean remove from ui, also removes the unit from any unit groups
+function script_unit:set_invisible_to_all(visible, remove_from_ui)
+	return self.uc:set_invisible_to_all(visible, remove_from_ui);
 end;
 
 

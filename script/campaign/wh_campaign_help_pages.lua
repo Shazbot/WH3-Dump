@@ -34,6 +34,8 @@ function setup_campaign_help_pages()
 	
 	-- first argument is the help page link name, second is a unique parent name of the button (doesn't have to be immediate parent)
 	-- Supply an optional third parameter - this should be a function that returns true or false
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_the_eternal_dance", "sla_eternal_dance_repetoire_holder");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_the_eternal_dance", "sla_eternal_dance_subpanel");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_province_overview_panel", "settlement_panel");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_war_coordination", "war_coordination_panel");		-- needs to be above "diplomacy_dropdown"
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_faction_summary_screen", "clan");
@@ -122,7 +124,20 @@ function setup_campaign_help_pages()
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_ogre_camps", "dlc26_character_panel_camps");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_mercenary_contracts", "dlc26_ogre_war_contracts");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_da_plan", "dlc26_da_plan");
-
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_marks_of_vindictiveness", "marks_vindictiveness_holder");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_wulfrik_seafang_teleport", "dlc27_seafang_overlays");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_secrets_of_the_white_tower", "dlc27_hef_secrets_of_the_white_tower");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_valiant_imperatives", "dlc27_hef_valiant_imperatives");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_dragonships", "dlc27_hef_capacity_resources");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_tormentors_tributes", "dlc27_sla_marks_of_cruelty");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_throgg_troll_king", "nor_throgg_troll_expansion_widget");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_patrons_of_the_realms", "dlc27_hef_intrigue_court");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_asur_domination", "dlc27_hef_asur_domination");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_asur_domination", "dlc27_settlement_captured_gift_faction_choice");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_sayl_manipulations", "dlc27_nor_sayl_manipulations");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_sayl_dark_ritual", "dlc27_nor_aethyr_winds");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_thralls", "dlc27_sla_dechala_thralls_economy_panel")
+	
 	hpm:register_help_page_to_info_button_mapping(
 		"script_link_campaign_intrigue_at_the_court",
 		"intrigue_panel",
@@ -4040,10 +4055,6 @@ function setup_campaign_help_pages()
 		hpr_normal_unfaded("war.camp.hp.devotees.008", "chaos_cults"),
 		hpr_normal("war.camp.hp.devotees.009", "chaos_cults"),
 
-		hpr_section("seductive_influence"),
-		hpr_normal_unfaded("war.camp.hp.devotees.010", "seductive_influence"),
-		hpr_normal("war.camp.hp.devotees.011", "seductive_influence"),
-
 		hpr_section("pleasurable_acts"),
 		hpr_normal_unfaded("war.camp.hp.devotees.012", "pleasurable_acts"),
 		hpr_normal("war.camp.hp.devotees.013", "pleasurable_acts")
@@ -5855,7 +5866,8 @@ function setup_campaign_help_pages()
 		hpr_normal("war.camp.hp.gods.003"),
 		hpr_normal("war.camp.hp.gods.004"),
 		hpr_normal("war.camp.hp.gods.005"),
-		hpr_normal("war.camp.hp.gods.006")
+		hpr_normal("war.camp.hp.gods.006"),
+		hpr_normal("war.camp.hp.gods.007")
 	);
 	parser:add_record("campaign_gods", "script_link_campaign_gods", "tooltip_campaign_gods");
 	tp_gods = tooltip_patcher:new("tooltip_campaign_gods");
@@ -7014,7 +7026,9 @@ function setup_campaign_help_pages()
 		hpr_leader("war.camp.hp.influence.002"),
 		hpr_normal("war.camp.hp.influence.003"),
 		hpr_normal("war.camp.hp.influence.004"),
-		hpr_normal("war.camp.hp.influence.005")
+		hpr_normal("war.camp.hp.influence.005"),
+		hpr_normal("war.camp.hp.influence.006"),
+		hpr_normal("war.camp.hp.influence.007")
 	);
 	parser:add_record("campaign_influence", "script_link_campaign_influence", "tooltip_campaign_influence");
 	tp_influence = tooltip_patcher:new("tooltip_campaign_influence");
@@ -7782,7 +7796,8 @@ function setup_campaign_help_pages()
 		hpr_normal("war.camp.hp.monsters.003"),
 		hpr_normal("war.camp.hp.monsters.004"),
 		hpr_normal("war.camp.hp.monsters.005"),
-		hpr_normal("war.camp.hp.monsters.006")
+		hpr_normal("war.camp.hp.monsters.006"),
+		hpr_normal("war.camp.hp.monsters.007")
 	);
 	parser:add_record("campaign_monsters", "script_link_campaign_monsters", "tooltip_campaign_monsters");
 	tp_monsters = tooltip_patcher:new("tooltip_campaign_monsters");
@@ -10493,14 +10508,10 @@ function setup_campaign_help_pages()
 		hpr_bulleted("war.camp.hp.seductive_influence.006"),
 		hpr_bulleted("war.camp.hp.seductive_influence.007"),
 		hpr_bulleted("war.camp.hp.seductive_influence.008"),
+		hpr_normal("war.camp.hp.seductive_influence.015"),
 		hpr_normal("war.camp.hp.seductive_influence.009"),
 		hpr_normal("war.camp.hp.seductive_influence.010"),
-		hpr_normal("war.camp.hp.seductive_influence.011"),
-
-		hpr_section("liberation"),
-		hpr_normal_unfaded("war.camp.hp.seductive_influence.012", "liberation"),
-		hpr_normal("war.camp.hp.seductive_influence.013", "liberation"),
-		hpr_normal("war.camp.hp.seductive_influence.014", "liberation")
+		hpr_normal("war.camp.hp.seductive_influence.011")
 	);
 	parser:add_record("campaign_seductive_influence", "script_link_campaign_seductive_influence", "tooltip_campaign_seductive_influence");
 	tp_seductive_influence = tooltip_patcher:new("tooltip_campaign_seductive_influence");
@@ -11052,18 +11063,19 @@ function setup_campaign_help_pages()
 		hpr_title("war.camp.hp.slaanesh.001"),
 		hpr_image("war.camp.hp.image", "UI/help_images/slaanesh.png"),
 		hpr_leader("war.camp.hp.slaanesh.002"),
-
-		hpr_section("seductive_influence"),
-		hpr_normal_unfaded("war.camp.hp.slaanesh.003", "seductive_influence"),
-		hpr_normal("war.camp.hp.slaanesh.004", "seductive_influence"),
 		
 		hpr_section("devotees"),
 		hpr_normal_unfaded("war.camp.hp.slaanesh.005", "devotees"),
 		hpr_normal("war.camp.hp.slaanesh.006", "devotees"),
-
+		
 		hpr_section("seduction"),
 		hpr_normal_unfaded("war.camp.hp.slaanesh.007", "seduction"),
 		hpr_normal("war.camp.hp.slaanesh.008", "seduction"),
+
+		hpr_section("liberation"),
+		hpr_normal_unfaded("war.camp.hp.seductive_influence.012", "liberation"),
+		hpr_normal("war.camp.hp.seductive_influence.013", "liberation"),
+		hpr_normal("war.camp.hp.seductive_influence.014", "liberation"),
 
 		hpr_section("gifts"),
 		hpr_normal_unfaded("war.camp.hp.slaanesh.009", "gifts"),
@@ -11826,6 +11838,58 @@ function setup_campaign_help_pages()
 	tp_terrain_types = tooltip_patcher:new("tooltip_campaign_terrain_types");
 	tp_terrain_types:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_terrain_types", "ui_text_replacements_localised_text_hp_campaign_description_terrain_types");
 
+	
+	--
+	-- thralls
+	--
+
+	hp_thralls = help_page:new(
+		"script_link_campaign_thralls",
+		hpr_title("war.camp.hp.thralls.001"),
+		hpr_leader("war.camp.hp.thralls.002"),
+		hpr_normal("war.camp.hp.thralls.003"),
+		hpr_normal("war.camp.hp.thralls.004"),
+		hpr_normal("war.camp.hp.thralls.005"),
+		hpr_normal("war.camp.hp.thralls.006"),
+		hpr_normal("war.camp.hp.thralls.007")
+	);
+	parser:add_record("campaign_thralls", "script_link_campaign_thralls", "tooltip_campaign_thralls");
+	tp_thralls = tooltip_patcher:new("tooltip_campaign_thralls");
+	tp_thralls:set_layout_data(
+		"tooltip_title_and_text", 
+		"ui_text_replacements_localised_text_hp_campaign_title_thralls", 
+		"ui_text_replacements_localised_text_hp_campaign_description_thralls"
+	);
+
+	tl_thralls = tooltip_listener:new(
+		"tooltip_campaign_thralls", 
+		function() 
+			uim:highlight_thralls(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+
+
+	--
+	-- thralls_link
+	--
+	
+	parser:add_record("campaign_thralls_link", "script_link_campaign_thralls_link", "tooltip_campaign_thralls_link");
+	tp_thralls_link = tooltip_patcher:new("tooltip_campaign_thralls_link");
+	tp_thralls_link:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_campaign_title_thralls_link");
+	
+	tl_thralls_link = tooltip_listener:new(
+		"tooltip_campaign_thralls_link",
+		function()
+			uim:highlight_thralls(true);
+		end,
+		function()
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
 
 
 	--
@@ -13623,7 +13687,361 @@ function setup_campaign_help_pages()
 	tp_zones_of_control = tooltip_patcher:new("tooltip_campaign_zones_of_control");
 	tp_zones_of_control:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_zones_of_control", "ui_text_replacements_localised_text_hp_campaign_description_zones_of_control");
 
+	--
+	-- marks_of_vindictiveness
+	--
 	
+	hp_marks_of_vindictiveness = help_page:new(
+		"script_link_campaign_marks_of_vindictiveness",
+		hpr_title("war.camp.hp.marks_of_vindictiveness.001"),
+		hpr_leader("war.camp.hp.marks_of_vindictiveness.002"),
+		hpr_normal("war.camp.hp.tormentors_tributes.003"),
+		hpr_normal("war.camp.hp.tormentors_tributes.005")
+	);
+	parser:add_record("campaign_marks_of_vindictiveness", "script_link_campaign_marks_of_vindictiveness", "tooltip_campaign_marks_of_vindictiveness");
+	tp_marks_of_vindictiveness = tooltip_patcher:new("tooltip_campaign_marks_of_vindictiveness");
+	tp_marks_of_vindictiveness:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_marks_of_vindictiveness", "ui_text_replacements_localised_text_hp_campaign_description_marks_of_vindictiveness");
+	
+
+	--
+	-- wulfrik
+	--
+	
+	hp_wulfrik_seafang_teleport = help_page:new(
+		"script_link_campaign_wulfrik_seafang_teleport",
+		hpr_title("war.camp.hp.wulfrik_seafang_teleport.001"),
+		hpr_leader("war.camp.hp.wulfrik_seafang_teleport.002"),
+		hpr_normal("war.camp.hp.wulfrik_seafang_teleport.003"),
+		hpr_normal("war.camp.hp.wulfrik_seafang_teleport.004"),
+		hpr_normal("war.camp.hp.wulfrik_seafang_teleport.005"),
+		hpr_normal("war.camp.hp.wulfrik_seafang_teleport.006")
+	);
+	parser:add_record("campaign_wulfrik_seafang_teleport", "script_link_campaign_wulfrik_seafang_teleport", "tooltip_campaign_wulfrik_seafang_teleport");
+	tp_wulfrik_seafang_teleport = tooltip_patcher:new("tooltip_campaign_wulfrik_seafang_teleport");
+	tp_wulfrik_seafang_teleport:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_wulfrik_seafang_teleport", "ui_text_replacements_localised_text_hp_campaign_description_wulfrik_seafang_teleport");
+
+	tp_wulfrik_seafang_teleport = tooltip_listener:new(
+		"tooltip_campaign_wulfrik_seafang_teleport", 
+		function() 
+			uim:highlight_seafang_teleport(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+	
+	--
+	-- dlc27_hef_valiant_imperatives
+	--
+	
+	hp_valiant_imperatives = help_page:new(
+		"script_link_campaign_valiant_imperatives",
+		hpr_title("war.camp.hp.valiant_imperatives.001"),
+		hpr_leader("war.camp.hp.valiant_imperatives.002"),
+		hpr_normal("war.camp.hp.valiant_imperatives.003"),
+		hpr_normal("war.camp.hp.valiant_imperatives.004")
+	);
+	parser:add_record("campaign_valiant_imperatives", "script_link_campaign_valiant_imperatives", "tooltip_campaign_valiant_imperatives");
+	tp_valiant_imperatives = tooltip_patcher:new("tooltip_campaign_valiant_imperatives");
+	tp_valiant_imperatives:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_valiant_imperatives", "ui_text_replacements_localised_text_hp_campaign_description_valiant_imperatives");
+
+	tp_valiant_imperatives = tooltip_listener:new(
+		"tooltip_campaign_valiant_imperatives", 
+		function() 
+			uim:highlight_valiant_imperatives(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+		
+
+	--
+	-- secrets_of_the_white_tower
+	--
+	
+	hp_secrets_of_the_white_tower = help_page:new(
+		"script_link_campaign_secrets_of_the_white_tower",
+		hpr_title("war.camp.hp.secrets_of_the_white_tower.001"),
+		hpr_leader("war.camp.hp.secrets_of_the_white_tower.002"),
+		hpr_normal("war.camp.hp.secrets_of_the_white_tower.003"),
+		hpr_normal("war.camp.hp.secrets_of_the_white_tower.004"),
+		hpr_normal("war.camp.hp.secrets_of_the_white_tower.005"),
+		hpr_normal("war.camp.hp.secrets_of_the_white_tower.006")
+	);
+	parser:add_record("campaign_secrets_of_the_white_tower", "script_link_campaign_secrets_of_the_white_tower", "tooltip_campaign_secrets_of_the_white_tower");
+	tp_secrets_of_the_white_tower = tooltip_patcher:new("tooltip_campaign_secrets_of_the_white_tower");
+	tp_secrets_of_the_white_tower:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_secrets_of_the_white_tower", "ui_text_replacements_localised_text_hp_campaign_description_secrets_of_the_white_tower");
+
+	tp_secrets_of_the_white_tower = tooltip_listener:new(
+		"tooltip_campaign_secrets_of_the_white_tower", 
+		function() 
+			uim:highlight_secrets_of_the_white_tower(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+
+	--
+	-- dragonships
+	--
+	
+	hp_dragonships = help_page:new(
+		"script_link_campaign_dragonships",
+		hpr_title("war.camp.hp.dragonships.001"),
+		hpr_leader("war.camp.hp.dragonships.002"),
+		hpr_normal("war.camp.hp.dragonships.003"),
+		hpr_normal("war.camp.hp.dragonships.004"),
+		hpr_normal("war.camp.hp.dragonships.005"),
+		hpr_normal("war.camp.hp.dragonships.006"),
+		hpr_normal("war.camp.hp.dragonships.007")
+	);
+	parser:add_record("campaign_dragonships", "script_link_campaign_dragonships", "tooltip_campaign_dragonships");
+	tp_dragonships = tooltip_patcher:new("tooltip_campaign_dragonships");
+	tp_dragonships:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_dragonships", "ui_text_replacements_localised_text_hp_campaign_description_dragonships");
+
+	tp_dragonships = tooltip_listener:new(
+		"tooltip_campaign_dragonships", 
+		function() 
+			uim:highlight_dragonships(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+	
+	--
+	-- Tormentor's tributes
+	--
+	
+	hp_tormentors_tributes = help_page:new(
+		"script_link_campaign_tormentors_tributes",
+		hpr_title("war.camp.hp.tormentors_tributes.001"),
+		hpr_leader("war.camp.hp.tormentors_tributes.002"),
+		hpr_normal("war.camp.hp.tormentors_tributes.003"),
+		hpr_normal("war.camp.hp.tormentors_tributes.004"),
+		hpr_normal("war.camp.hp.tormentors_tributes.005"),
+		hpr_normal("war.camp.hp.tormentors_tributes.006"),
+		hpr_normal("war.camp.hp.tormentors_tributes.007")
+	);
+	parser:add_record("campaign_tormentors_tributes", "script_link_campaign_tormentors_tributes", "tooltip_campaign_tormentors_tributes");
+	tp_tormentors_tributes = tooltip_patcher:new("tooltip_campaign_tormentors_tributes");
+	tp_tormentors_tributes:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_tormentors_tributes", "ui_text_replacements_localised_text_hp_campaign_description_tormentors_tributes");
+
+	tp_tormentors_tributes = tooltip_listener:new(
+		"tooltip_campaign_tormentors_tributes", 
+		function() 
+			uim:highlight_tormentors_tributes(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+	
+	--
+	-- dlc27 Sayl Manipulations
+	--
+
+	hp_sayl_manipulations = help_page:new(
+		"script_link_campaign_sayl_manipulations",
+		hpr_title("war.camp.hp.manipulations.001"),
+		hpr_leader("war.camp.hp.manipulations.002"),
+		hpr_normal("war.camp.hp.manipulations.003"),
+		hpr_normal("war.camp.hp.manipulations.004"),
+		hpr_normal("war.camp.hp.manipulations.005"),
+		hpr_normal("war.camp.hp.manipulations.006"),
+		hpr_normal("war.camp.hp.manipulations.007")
+	);
+	parser:add_record("campaign_sayl_manipulations", "script_link_campaign_sayl_manipulations", "tooltip_campaign_sayl_manipulations");
+	tp_sayl_manipulations = tooltip_patcher:new("tooltip_campaign_sayl_manipulations");
+	tp_sayl_manipulations:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_manipulations", "ui_text_replacements_localised_text_hp_campaign_description_manipulations");
+
+	tp_sayl_manipulations = tooltip_listener:new(
+		"tooltip_campaign_sayl_manipulations", 
+		function() 
+			uim:highlight_manipulations_button(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+	--
+	-- Throgg Troll King
+	--
+	
+	hp_throgg_troll_king = help_page:new(
+		"script_link_campaign_throgg_troll_king",
+		hpr_title("war.camp.hp.throgg_troll_king.001"),
+		hpr_leader("war.camp.hp.throgg_troll_king.002"),
+		hpr_normal("war.camp.hp.throgg_troll_king.003"),
+		hpr_normal("war.camp.hp.throgg_troll_king.004"),
+		hpr_normal("war.camp.hp.throgg_troll_king.005"),
+		hpr_normal("war.camp.hp.throgg_troll_king.006"),
+		hpr_normal("war.camp.hp.throgg_troll_king.007")
+	);
+	parser:add_record("campaign_throgg_troll_king", "script_link_campaign_throgg_troll_king", "tooltip_campaign_throgg_troll_king");
+	tp_throgg_troll_king = tooltip_patcher:new("tooltip_campaign_throgg_troll_king");
+	tp_throgg_troll_king:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_throgg_troll_king", "ui_text_replacements_localised_text_hp_campaign_description_throgg_troll_king");
+
+	tp_throgg_troll_king = tooltip_listener:new(
+		"tooltip_campaign_throgg_troll_king", 
+		function() 
+			uim:highlight_throgg_call_up(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+	--
+	-- dlc27 Sayl Dark Ritual
+	--
+
+	hp_sayl_dark_ritual = help_page:new(
+		"script_link_campaign_sayl_dark_ritual",
+		hpr_title("war.camp.hp.dark_ritual.001"),
+		hpr_leader("war.camp.hp.dark_ritual.002"),
+		hpr_normal("war.camp.hp.dark_ritual.003"),
+		hpr_normal("war.camp.hp.dark_ritual.004"),
+		hpr_normal("war.camp.hp.dark_ritual.005"),
+		hpr_normal("war.camp.hp.dark_ritual.006"),
+		hpr_normal("war.camp.hp.dark_ritual.007")
+	);
+	parser:add_record("campaign_sayl_dark_ritual", "script_link_campaign_sayl_dark_ritual", "tooltip_campaign_sayl_dark_ritual");
+	tp_sayl_dark_ritual = tooltip_patcher:new("tooltip_campaign_sayl_dark_ritual");
+	tp_sayl_dark_ritual:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_dark_ritual", "advice_info_texts_localised_text_war.camp.hp.dark_ritual.002");
+
+	tp_sayl_dark_ritual = tooltip_listener:new(
+		"tooltip_campaign_sayl_dark_ritual", 
+		function() 
+			uim:highlight_sayl_dark_ritual(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+	--
+	-- Patrons of the Realms
+	--
+
+	hp_patrons_of_the_realms = help_page:new(
+		"script_link_campaign_patrons_of_the_realms",
+		hpr_title("war.camp.hp.patrons_realms.001"),
+		hpr_leader("war.camp.hp.patrons_realms.002"),
+		hpr_normal("war.camp.hp.patrons_realms.003"),
+		hpr_normal("war.camp.hp.patrons_realms.004"),
+		hpr_normal("war.camp.hp.patrons_realms.005"),
+		hpr_normal("war.camp.hp.patrons_realms.006"),
+		hpr_normal("war.camp.hp.patrons_realms.007")
+	);
+	parser:add_record("campaign_patrons_of_the_realms", "script_link_campaign_patrons_of_the_realms", "tooltip_campaign_patrons_of_the_realms");
+	tp_patrons_of_the_realms = tooltip_patcher:new("tooltip_campaign_patrons_of_the_realms");
+	tp_patrons_of_the_realms:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_patrons_of_the_realms", "ui_text_replacements_localised_text_hp_campaign_description_patrons_of_the_realms");
+
+	tl_patrons_of_the_realms = tooltip_listener:new(
+		"tooltip_campaign_patrons_of_the_realms", 
+		function() 
+			uim:highlight_patron_of_the_realms(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+	--
+	-- Asur Domination
+	--
+
+	hp_asur_domination = help_page:new(
+		"script_link_campaign_asur_domination",
+		hpr_title("war.camp.hp.asur_domination.001"),
+		hpr_leader("war.camp.hp.asur_domination.002"),
+		hpr_normal("war.camp.hp.asur_domination.003"),
+		hpr_normal("war.camp.hp.asur_domination.004"),
+		hpr_normal("war.camp.hp.asur_domination.005"),
+		hpr_normal("war.camp.hp.asur_domination.006")
+	);
+	parser:add_record("campaign_asur_domination", "script_link_campaign_asur_domination", "tooltip_campaign_asur_domination");
+	tp_asur_domination = tooltip_patcher:new("tooltip_campaign_asur_domination");
+	tp_asur_domination:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_asur_domination", "ui_text_replacements_localised_text_hp_campaign_description_asur_domination");
+
+	tl_asur_domination = tooltip_listener:new(
+		"tooltip_campaign_asur_domination", 
+		function() 
+			uim:highlight_asur_domination(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+	--
+	-- The Eternal Dance
+	--
+
+	hp_the_eternal_dance = help_page:new(
+		"script_link_campaign_the_eternal_dance",
+		hpr_title("war.camp.hp.eternal_dance.001"),
+		hpr_leader("war.camp.hp.eternal_dance.002"),
+		hpr_normal("war.camp.hp.eternal_dance.003"),
+		hpr_normal("war.camp.hp.eternal_dance.004"),
+		hpr_normal("war.camp.hp.eternal_dance.005"),
+		hpr_normal("war.camp.hp.eternal_dance.006"),
+		hpr_normal("war.camp.hp.eternal_dance.007")
+	);
+	parser:add_record("campaign_the_eternal_dance", "script_link_campaign_the_eternal_dance", "tooltip_campaign_the_eternal_dance");
+	tp_the_eternal_dance = tooltip_patcher:new("tooltip_campaign_the_eternal_dance");
+	tp_the_eternal_dance:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_the_eternal_dance", "ui_text_replacements_localised_text_hp_campaign_description_the_eternal_dance");
+
+	tl_the_eternal_dance = tooltip_listener:new(
+		"tooltip_campaign_the_eternal_dance", 
+		function() 
+			uim:highlight_the_eternal_dance(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+	--
+	-- Mist Landing
+	--
+
+	hp_mist_landing = help_page:new(
+		"script_link_campaign_mist_landing",
+		hpr_title("war.camp.hp.mist_landing.001"),
+		hpr_leader("war.camp.hp.mist_landing.002"),
+		hpr_normal("war.camp.hp.mist_landing.003"),
+		hpr_normal("war.camp.hp.mist_landing.004"),
+		hpr_normal("war.camp.hp.mist_landing.005")
+	);
+	parser:add_record("campaign_mist_landing", "script_link_campaign_mist_landing", "tooltip_campaign_mist_landing");
+	tp_mist_landing = tooltip_patcher:new("tooltip_campaign_mist_landing");
+	tp_mist_landing:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_mist_landing", "ui_text_replacements_localised_text_hp_campaign_description_mist_landing");
+
+
+	--
+	-- Norsca Marauding
+	--
+	hp_marauding = help_page:new(
+		"script_link_campaign_marauding",
+		hpr_title("war.camp.hp.marauding.001"),
+		hpr_leader("war.camp.hp.marauding.002"),
+		hpr_normal("war.camp.hp.marauding.003"),
+		hpr_normal("war.camp.hp.marauding.004"),
+		hpr_normal("war.camp.hp.marauding.005"),
+		hpr_normal("war.camp.hp.marauding.006"),
+		hpr_normal("war.camp.hp.marauding.007")
+	);
+	parser:add_record("campaign_marauding", "script_link_campaign_marauding", "tooltip_campaign_marauding");
+	tp_marauding = tooltip_patcher:new("tooltip_campaign_marauding");
+	tp_marauding:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_marauding", "ui_text_replacements_localised_text_hp_campaign_description_marauding");
+
+
 end;
 
 

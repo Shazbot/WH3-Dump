@@ -200,27 +200,27 @@ end;
 -------------------------------------------------------------------------------------------------
 --Stopping enemy from firing until the cutscene is done
 ga_player:change_behaviour_active_on_message("battle_started", "fire_at_will", false, false);
-ga_player:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true);
+ga_player:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true, false);
 
 ga_wood_elf_rush:change_behaviour_active_on_message("battle_started", "fire_at_will", false, false);
-ga_wood_elf_rush:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true);
+ga_wood_elf_rush:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true, false);
 ga_wood_elf_chokepoint_large:change_behaviour_active_on_message("battle_started", "fire_at_will", false, false);
-ga_wood_elf_chokepoint_large:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true);
+ga_wood_elf_chokepoint_large:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true, false);
 ga_wood_elf_wizard_guards_left:change_behaviour_active_on_message("battle_started", "fire_at_will", false, false);
-ga_wood_elf_wizard_guards_left:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true);
+ga_wood_elf_wizard_guards_left:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true, false);
 ga_wood_elf_wizard_guards_right:change_behaviour_active_on_message("battle_started", "fire_at_will", false, false);
-ga_wood_elf_wizard_guards_right:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true);
+ga_wood_elf_wizard_guards_right:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true, false);
 ga_wood_elf_spellweaver:change_behaviour_active_on_message("battle_started", "fire_at_will", false, false);
-ga_wood_elf_spellweaver:change_behaviour_active_on_message("release_wizards", "fire_at_will", true, true);
+ga_wood_elf_spellweaver:change_behaviour_active_on_message("release_wizards", "fire_at_will", true, true, false);
 
 ga_high_elf_chokepoint_large:change_behaviour_active_on_message("battle_started", "fire_at_will", false, false);
-ga_high_elf_chokepoint_large:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true);
+ga_high_elf_chokepoint_large:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true, false);
 ga_high_elf_wizard_guards:change_behaviour_active_on_message("battle_started", "fire_at_will", false, false);
-ga_high_elf_wizard_guards:change_behaviour_active_on_message("release_wizards", "fire_at_will", true, true);
+ga_high_elf_wizard_guards:change_behaviour_active_on_message("release_wizards", "fire_at_will", true, true, false);
 ga_high_elf_arch_mage:change_behaviour_active_on_message("battle_started", "fire_at_will", false, false);
-ga_high_elf_arch_mage:change_behaviour_active_on_message("release_wizards", "fire_at_will", true, true);
+ga_high_elf_arch_mage:change_behaviour_active_on_message("release_wizards", "fire_at_will", true, true, false);
 ga_high_elf_mage:change_behaviour_active_on_message("battle_started", "fire_at_will", false, false);
-ga_high_elf_mage:change_behaviour_active_on_message("release_wizards", "fire_at_will", true, true);
+ga_high_elf_mage:change_behaviour_active_on_message("release_wizards", "fire_at_will", true, true, false);
 
 
 --Defend Chokepoint Large

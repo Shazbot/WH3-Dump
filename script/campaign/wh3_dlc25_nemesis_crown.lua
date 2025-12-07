@@ -49,7 +49,7 @@ nemesis_crown = {
 		["wh3_main_sc_nur_nurgle"] 			=  "_nur",
 		["wh3_main_sc_ogr_ogre_kingdoms"] 	=  "_ogr",
 		["wh2_main_sc_skv_skaven"] 			=  "_skv",
-		["wh3_main_sc_sla_slaanesh"] 		=  "_sla",
+		["wh3_main_sc_sla_slaanesh"]		=  "_sla",
 		["wh_main_sc_emp_empire"] 			=  "_emp",
 		["wh2_dlc09_sc_tmb_tomb_kings"] 	=  "_tmb",
 		["wh3_main_sc_tze_tzeentch"] 		=  "_tze",
@@ -57,6 +57,9 @@ nemesis_crown = {
 		["wh_main_sc_vmp_vampire_counts"] 	=  "_vmp",
 		["wh_main_sc_chs_chaos"] 			=  "_chs",
 		["wh_dlc05_sc_wef_wood_elves"] 		=  "_wef",
+	},
+	faction_bundle_suffixes = {
+		["wh3_dlc27_sla_the_tormentors"] 	=  "_dechala",
 	},
 	
 	--spawn locations table follows this makeup{theatre, region_key, hint, x, y}
@@ -273,9 +276,13 @@ end
 -- Returns the correct effect bundle when removing and applying effect bundles
 function nemesis_crown:generate_effect_bundle_key(character)
 	local crown = self.crown_data
-	local subculture = character:faction():subculture()
+	local faction = character:faction()
+	local faction_name = faction:name()
+	local subculture = faction:subculture()
 
-	if self.subculture_bundle_suffixes[subculture] ~= nil then
+	if self.faction_bundle_suffixes[faction_name] ~= nil then
+		return self.effect_bundle_prefix .. tostring(crown.current_level) .. self.faction_bundle_suffixes[faction_name]
+	elseif self.subculture_bundle_suffixes[subculture] ~= nil then
 		return self.effect_bundle_prefix .. tostring(crown.current_level) .. self.subculture_bundle_suffixes[subculture]
 	else
 		return self.effect_bundle_prefix .. tostring(crown.current_level)
@@ -330,9 +337,14 @@ function nemesis_crown:update_context_values()
 		if not faction then return end
 
 		local subculture = faction:subculture()
+		local faction_name = faction:name()
 		local subculture_suffix = self.subculture_bundle_suffixes[subculture]
-		
-		if subculture_suffix ~= nil then
+		local faction_suffix = self.faction_bundle_suffixes[faction_name]
+
+		if faction_suffix ~= nil then
+			common.set_context_value("nemesis_crown_current_effect_bundle_key", self.effect_bundle_prefix .. tostring(crown.current_level) .. faction_suffix)
+			common.set_context_value("nemesis_crown_next_effect_bundle_key", self.effect_bundle_prefix .. tostring(crown.current_level + 1) .. faction_suffix)
+		elseif subculture_suffix ~= nil then
 			common.set_context_value("nemesis_crown_current_effect_bundle_key", self.effect_bundle_prefix .. tostring(crown.current_level) .. subculture_suffix)
 			common.set_context_value("nemesis_crown_next_effect_bundle_key", self.effect_bundle_prefix .. tostring(crown.current_level + 1) .. subculture_suffix)
 		else
@@ -432,6 +444,10 @@ function nemesis_crown:ai_crown_choice()
 		end
 	end
 
+end
+
+function nemesis_crown:create_marker_key(num)
+	return "nemesis_crown_marker_" .. tostring(num)
 end
 
 function nemesis_crown:crown_spawn_region(human_factions, is_debug_spawn)
@@ -547,7 +563,7 @@ function nemesis_crown:marker_and_battle_listeners(human_factions)
 			local faction = context:faction()
 			local faction_name = faction:name()
 			local character_list = faction:character_list()
-			local nemesis_marker_key = "nemesis_crown_marker_" .. tostring(crown.crown_marker_key_counter)
+			local nemesis_marker_key = self:create_marker_key(crown.crown_marker_key_counter)
 
 			for i = 0, character_list:num_items()- 1 do
 				local character = character_list:item_at(i)
@@ -583,18 +599,12 @@ function nemesis_crown:marker_and_battle_listeners(human_factions)
 							nemesis_marker:is_persistent(false)
 							nemesis_marker:spawn_at_location(spawn_location.coords.x, spawn_location.coords.y, false)
 
+							-- all spawned markers are despawned at once when one is interacted with
+							-- that is why this won't work in the usual way
+							nemesis_marker:despawn_on_interaction(false)
+
 							cm:set_saved_value("NemesisCrown_LocationDiscovered", true)
-
-							core:add_listener(
-								"NemesisCrown_RemoveMarker",
-								"ScriptEvent_RemoveNemesisCrownMarkers",
-								true,
-								function(context)										
-									nemesis_marker:despawn_all()
-								end,
-								true
-							)
-
+							
 							crown.crown_marker_key_counter = crown.crown_marker_key_counter + 1
 						end
 					end
@@ -663,8 +673,8 @@ function nemesis_crown:marker_and_battle_listeners(human_factions)
 			self:update_context_values()
 			self:update_shared_state_values()
 
-			--remove marker for all players now that one has been triggered
-			core:trigger_event("ScriptEvent_RemoveNemesisCrownMarkers")
+			-- remove the markers for all players now that one has been triggered
+			self:despawn_all_markers()
 		end,
 		true
 	)
@@ -769,10 +779,11 @@ function nemesis_crown:marker_and_battle_listeners(human_factions)
 				
 				for i = 1, #human_factions do
 					cm:trigger_incident_with_targets(cm:get_faction(human_factions[i]):command_queue_index(), incident_key, cm:get_faction(crown.owner_faction_key):command_queue_index(), 0, character_cqi, 0, 0, 0)
-					core:trigger_event("ScriptEvent_RemoveNemesisCrownMarkers")
 				end
 
 				cm:add_character_vfx(character_cqi, self.vfx.character, true)
+				
+				self:despawn_all_markers()
 			end
 		end,
 		true
@@ -850,8 +861,9 @@ function nemesis_crown:script_event_listeners(human_factions)
 
 				for i = 1, #human_factions do
 					cm:trigger_incident_with_targets(cm:get_faction(human_factions[i]):command_queue_index(), self.claimed_ai, cm:get_faction(crown.owner_faction_key):command_queue_index(), 0, cm:get_family_member_by_cqi(crown.owner_fm_cqi):character():command_queue_index(), 0, 0, 0)
-					core:trigger_event("ScriptEvent_RemoveNemesisCrownMarkers")
 				end
+
+				self:despawn_all_markers()
 			end
 
 		end,
@@ -872,6 +884,21 @@ function nemesis_crown:script_event_listeners(human_factions)
 		false
 	)
 
+end
+
+function nemesis_crown:despawn_all_markers()
+	-- the keys of the spawned markers should be starting at 1 and up to the count
+	-- note that there is no key for the current counter value, hence the -1 below
+	for i = 1, self.crown_data.crown_marker_key_counter - 1 do
+		local marker_key = self:create_marker_key(i)
+		local marker = Interactive_Marker_Manager:get_marker(marker_key)
+		if marker then
+			marker:despawn_all()
+		end
+	end
+
+	-- reset the counter now
+	self.crown_data.crown_marker_key_counter = 1
 end
 
 --single function call for QA to debug spawn the nemesis crown
@@ -970,4 +997,3 @@ cm:add_loading_game_callback(
 		end
 	end
 )
-

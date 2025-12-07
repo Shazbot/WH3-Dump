@@ -1477,7 +1477,7 @@ function mission_manager:start_listeners()
 			mission_key .. "_success_listener",
 			"MissionSucceeded",
 			function(context) return context:mission():mission_record_key() == mission_key and context:faction():name() == faction_name end,
-			function()
+			function(context)
 				out("~~~ MissionManager for mission [" .. mission_key .. "] and faction [" .. faction_name .. "] has received a MissionSucceeded event - this mission has been completed successfully");
 				self:complete();
 				if is_function(self.success_callback) then
@@ -1492,6 +1492,9 @@ function mission_manager:start_listeners()
 						);
 					end;
 				end;
+
+				-- custom event to be triggered after all the other MissionSucceeded events and callbacks have been resolved.
+				core:trigger_custom_event("ScriptedEventMissionSucceededPostSuccessCallback", {faction = context:faction(), mission = context:mission()})
 			end,
 			false
 		);
@@ -2545,6 +2548,18 @@ function payload.champions_essence(amount)
 	end;
 	
 	return payload.pooled_resource_mission_payload("wh3_dlc26_kho_champions_essence_faction", "missions", amount);
+end;
+
+--- @function Thralls
+--- @desc Returns a payload string which defines a Thralls for a Dechala (Slaanesh) string mission definition. No kind of equivalence is looked up.
+--- @p @number amount
+--- @r @string payload string
+function payload.thralls(amount)
+	if not validate.is_positive_number(amount) then
+		return false;
+	end;
+	
+	return payload.pooled_resource_mission_payload("wh3_dlc27_sla_thralls", "other", amount);
 end;
 
 

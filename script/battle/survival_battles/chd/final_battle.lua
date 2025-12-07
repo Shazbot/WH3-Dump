@@ -520,9 +520,13 @@ function play_mid_cutscene()
 				ga_player_03.sunits:set_invisible_to_all(true);
 				ga_player_04.sunits:set_invisible_to_all(true);
 			end
-			
-			bm:stop_terrain_composite_scene(drill_move_down);	
-			bm:start_terrain_composite_scene(drill_down_idle, nil, 0);	
+
+			if bm.composite_scenes_currently_active[drill_move_down] then
+				bm:stop_terrain_composite_scene(drill_move_down);	
+			end
+			if not bm.composite_scenes_currently_active[drill_down_idle] then
+				bm:start_terrain_composite_scene(drill_down_idle, nil, 0);
+			end
 		end, 
 		10
 	);
@@ -1038,8 +1042,12 @@ gb:add_listener(
 gb:add_listener(
 	"timer_01",
 	function()
-		bm:stop_terrain_composite_scene(drill_move_down);	
-		bm:start_terrain_composite_scene(drill_down_idle, nil, 0);
+		if bm.composite_scenes_currently_active[drill_move_down] then
+			bm:stop_terrain_composite_scene(drill_move_down);	
+		end
+		if not bm.composite_scenes_currently_active[drill_down_idle] then
+			bm:start_terrain_composite_scene(drill_down_idle, nil, 0);
+		end
 	end,
 	true
 );

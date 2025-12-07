@@ -47,11 +47,15 @@ campaign_traits = {
 			["wh2_main_trait_corrupted_chaos"] = {
 				"wh2_main_def_cult_of_pleasure",
 				"wh2_main_def_cult_of_pleasure_separatists",
+				"wh3_dlc27_sla_masque_of_slaanesh",
+				"wh3_dlc27_sla_the_tormentors",
 				"wh2_dlc13_lzd_spirits_of_the_jungle",
 				"wh2_dlc17_lzd_oxyotl"},
 			["wh3_main_trait_corrupted_slaanesh"] = {
 				"wh2_main_def_cult_of_pleasure",
-				"wh2_main_def_cult_of_pleasure_separatists"
+				"wh2_main_def_cult_of_pleasure_separatists",
+				"wh3_dlc27_sla_masque_of_slaanesh",
+				"wh3_dlc27_sla_the_tormentors"
 			},
 			["wh2_main_trait_sacking"] = {"wh2_dlc13_lzd_spirits_of_the_jungle"}
 		}
@@ -158,7 +162,11 @@ campaign_traits = {
 		["wh3_dlc26_kho_skulltaker"] = 				"wh3_dlc26_trait_defeated_skulltaker",					-- Skulltaker
 		["wh3_dlc26_kho_arbaal_the_undefeated"] = 	"wh3_dlc26_trait_defeated_arbaal",						-- Arbaal the Undefeated
 		["wh3_dlc26_ogr_golgfag_maneater"] 		= 	"wh3_dlc26_trait_defeated_golgfag",						-- Golgfag Maneater
-		["wh3_dlc26_grn_gorbad_ironclaw"] 		= 	"wh3_dlc26_trait_defeated_gorbad"						-- Gorbad Ironclaw
+		["wh3_dlc26_grn_gorbad_ironclaw"] 		= 	"wh3_dlc26_trait_defeated_gorbad",						-- Gorbad Ironclaw
+		["wh3_dlc27_sla_dechala"] 		= 			"wh3_dlc27_trait_defeated_dechala",						-- Dechala
+		["wh3_dlc27_sla_masque_of_slaanesh"] 	= 	"wh3_dlc27_trait_defeated_the_masque",					-- The Masque
+		["wh3_dlc27_hef_aislinn"] =                 "wh3_dlc27_trait_defeated_aislinn",	                    -- Sea Lord Aislinn
+		["wh3_dlc27_nor_sayl_the_faithless"] 	  = "wh3_dlc27_trait_defeated_sayl", 						-- Sayl the Faithless
 	},
 	subcultures_trait_keys = {
 		["wh_main_sc_chs_chaos"] = "chaos",
@@ -247,7 +255,21 @@ campaign_traits = {
 		["Hinder Replenishment"] = "wh2_main_trait_agent_action_hinder_replenishment",
 		["Steal Technology"] = "wh2_main_trait_agent_action_steal_technology",
 		["Wound"] = "wh2_main_trait_agent_action_wound"
-	}
+	},
+
+	custom_traits = {
+		destroy_black_arks = {
+			allowed_types = {
+				wh3_dlc27_hef_aislinn = true,
+			},
+			black_ark_force_type = "SEA_LOCKED_HORDE",
+			subculture = "wh2_main_sc_def_dark_elves",
+			convalescence_cause = 4, -- unknown cause
+			death_type = 0, -- alive
+			awarded_points = 1,
+			trait_key = "wh3_dlc27_trait_hef_aislinn_destroyed_black_arks",
+		},
+	},
 }
 
 ------------------------------------------------------------------------------
@@ -1043,6 +1065,47 @@ function (context)
 		end
 	end
 end
+
+-------------------------------
+----- DESTROY BLACK ARKS ------
+-------------------------------
+events.CharacterCompletedBattle[#events.CharacterCompletedBattle+1] =
+function (context)
+	if not cm:char_is_general_with_army(context:character())
+		or not campaign_traits.custom_traits.destroy_black_arks.allowed_types[context:character():character_subtype_key()]
+		or not context:character():won_battle()
+	then
+		return
+	end
+
+	local pb = context:pending_battle()
+	if pb:defender():military_force():force_type():key() == campaign_traits.custom_traits.destroy_black_arks.black_ark_force_type
+		and pb:defender():faction():subculture() == campaign_traits.custom_traits.destroy_black_arks.subculture
+		and pb:defender():convalesence_cause() == campaign_traits.custom_traits.destroy_black_arks.convalescence_cause
+		and pb:defender():death_type() == campaign_traits.custom_traits.destroy_black_arks.death_type
+	then
+		campaign_traits:give_trait(context:character(), campaign_traits.custom_traits.destroy_black_arks.trait_key, campaign_traits.custom_traits.destroy_black_arks.awarded_points);
+	elseif pb:attacker():military_force():force_type():key() == campaign_traits.custom_traits.destroy_black_arks.black_ark_force_type
+		and pb:attacker():faction():subculture() == campaign_traits.custom_traits.destroy_black_arks.subculture
+		and pb:attacker():convalesence_cause() == campaign_traits.custom_traits.destroy_black_arks.convalescence_cause
+		and pb:attacker():death_type() == campaign_traits.custom_traits.destroy_black_arks.death_type
+	then
+		campaign_traits:give_trait(context:character(), campaign_traits.custom_traits.destroy_black_arks.trait_key, campaign_traits.custom_traits.destroy_black_arks.awarded_points);
+	end
+end
+
+-------------------------------
+----- LOSE WOUNDED TRAIT ------
+-------------------------------
+events.CharacterTurnStart[#events.CharacterTurnStart+1] =
+function (context)
+	local character = context:character();
+	
+	if character:has_trait("wh3_dlc27_nor_monster_hunts_wounded") then
+		campaign_traits:give_trait(character, "wh3_dlc27_nor_monster_hunts_wounded", -1, 5);
+	end
+end
+
 
 --------------------------------------------------------------
 ----------------------- SAVING / LOADING ---------------------

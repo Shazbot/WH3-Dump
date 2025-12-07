@@ -62,6 +62,7 @@ require("wh3_main_legendary_characters")
 require("wh3_campaign_faction_initiative_unlocks")
 require("wh3_campaign_ai")
 require("wh3_campaign_set_piece_battle_abilities")
+require("wh3_campaign_sally_out_garrisons")
 
 ---- faction and race features
 require("wh2_campaign_blessed_spawnings")
@@ -253,6 +254,30 @@ require("wh3_dlc26_ogre_camps")
 require("wh3_dlc26_tyrants_demands")
 require("wh3_dlc26_fragments_of_sorcery")
 
+-- DLC27
+require("wh3_dlc27_pre_battle_challenges")
+require("wh3_dlc27_eternal_dance")
+require("wh3_dlc27_asur_domination")
+require("wh3_dlc27_nor_kinfolk")
+require("wh3_dlc27_dechala_decadence")
+require("wh3_dlc27_dechala_settlement_exploitation")
+require("wh3_dlc27_dechala_marks_of_cruelty")
+require("wh3_dlc27_sayl_narrative")
+require("wh3_dlc27_intrigue_at_the_court")
+require("wh3_dlc27_nor_pillaging")
+require("wh3_dlc27_nor_treacheries")
+require("wh3_dlc27_nor_sayl_manipulation")
+require("wh3_dlc27_nor_generic")
+require("wh3_dlc27_secrets_of_the_white_tower")
+require("wh3_dlc27_valiant_imperatives")
+require("wh3_dlc27_aislinn")
+require("wh3_dlc27_aislinn_war")
+require("wh3_dlc27_asur_dilemmas")
+require("wh3_dlc27_dechala_narrative")
+require("wh3_dlc27_wulfrik_start")
+require("wh3_dlc27_dragonship")
+require("wh3_dlc27_dechala_daemonic_influence")
+require("wh3_dlc27_dechala_daemonic_units")
 
 -- Minor Cults
 require("wh3_campaign_minor_cults");

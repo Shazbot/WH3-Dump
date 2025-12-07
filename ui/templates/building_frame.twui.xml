@@ -33,6 +33,11 @@
 						<button_expand_slot this="17D8E318-47F0-4097-84B342E53344A870"/>
 					</frame_expand_slot>
 					<icon_duplicate this="023605F7-A929-4551-BC876A104B6EC58F"/>
+					<unlocks_tech_icon this="CF65763C-C5F8-4A85-93D972B77A9BBB16"/>
+					<dev_points this="7DF4F944-69E4-4F73-9F64BFFE1C0636F2">
+						<dy_growth_pts this="DE7153A3-7EE6-4BE9-ACC7F2E767D6D506"/>
+						<dy_num_points_required this="81C04180-C1F8-40DD-A34F66B1402B3C96"/>
+					</dev_points>
 					<mouseover_parent this="88FF3A73-624A-4528-88CD8BC56661C13A">
 						<turns_corner this="8556F811-5C61-47BE-9CC8B8786010CA0F"/>
 						<upgrade_box this="7835A874-1FCE-4843-B488AA5EA9A2DB82">
@@ -54,7 +59,6 @@
 							</template_agent_entry_parent>
 						</agent_list>
 					</units_list>
-					<unlocks_tech_icon this="CF65763C-C5F8-4A85-93D972B77A9BBB16"/>
 					<pointer this="8EA2AFA5-F135-489B-BF8FE011982CFA84"/>
 					<upgradable this="699423C7-7B5E-4F8A-9AB319FBA53104C4">
 						<smoke_particle_emitter this="26082724-F31C-4C52-A16C9D660C132263">
@@ -63,10 +67,6 @@
 						<icon this="427EB7F3-3926-417B-8D7A59AC76537633"/>
 						<glow this="9B54DEFB-2DE8-4D37-BEAB786DD1055209"/>
 					</upgradable>
-					<dev_points this="7DF4F944-69E4-4F73-9F64BFFE1C0636F2">
-						<dy_growth_pts this="DE7153A3-7EE6-4BE9-ACC7F2E767D6D506"/>
-						<dy_num_points_required this="81C04180-C1F8-40DD-A34F66B1402B3C96"/>
-					</dev_points>
 					<mercenary_unit_list this="BD7563C2-2DAA-4632-933A9160C45EDB15">
 						<template_merc_entry_parent this="5EB0F94D-8DDD-49EF-BB89492D2054DD89">
 							<merc_context this="2B2EDBE0-9A1C-47D1-81A5BDEA14B7E2A1">
@@ -496,6 +496,7 @@
 					width="72"
 					height="20"
 					interactive="true"
+					disabled="true"
 					uniqueguid="62927D1F-7FA0-4BD3-9FB5181223FBEB9B">
 					<imagemetrics>
 						<image
@@ -536,6 +537,7 @@
 					width="72"
 					height="20"
 					interactive="true"
+					disabled="true"
 					uniqueguid="59E36DF5-6345-44FE-8D52C4ED14DC8045">
 					<imagemetrics>
 						<image
@@ -2937,7 +2939,7 @@
 							value="normal"/>
 						<property
 							name="red"
-							value="GetIfElse(Buildings.StoredSettlementOrForce, Buildings.StoredSettlementOrForce.PooledResourceManagerContext.CanAffordPooledResourceCost(ResourceCostContext(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;))), true) == false"/>
+							value="CanAffordResourceCostForSlot(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;)) == false"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
@@ -2993,6 +2995,7 @@
 					width="65"
 					height="26"
 					interactive="true"
+					disabled="true"
 					uniqueguid="1EABD682-CC33-409A-9B158671F1A69B4D">
 					<imagemetrics>
 						<image
@@ -3033,6 +3036,7 @@
 					width="65"
 					height="26"
 					interactive="true"
+					disabled="true"
 					uniqueguid="3FA7BBFC-498C-4BBA-B4D52CDF1935176C">
 					<imagemetrics>
 						<image
@@ -4657,7 +4661,9 @@
 							componentimage="B3AF98FF-999F-496D-AECA1849B4268D9A"
 							width="74"
 							height="74"
-							colour="#FFFFFF80"/>
+							colour="#FFFFFF80"
+							shadertechnique_vars="1.00,1.00,0.00,0.00"
+							shader_name="set_greyscale_t0"/>
 						<image
 							this="451D9646-9FAA-4D97-9CF5DE6FA9886C7C"
 							uniqueguid="451D9646-9FAA-4D97-9CF5DE6FA9886C7C"
@@ -4996,8 +5002,23 @@
 			currentstate="C34F8A1C-2D9D-45C8-9ECC653145992B50"
 			defaultstate="C34F8A1C-2D9D-45C8-9ECC653145992B50">
 			<callbackwithcontextlist>
-				<callback_with_context callback_id="TechRequiredCallbackInterface"/>
+				<callback_with_context
+					callback_id="TechRequiredCallbackInterface"
+					context_object_id="CcoBuildingLevelRecord"
+					context_function_id="RequiredTechnologiesList"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoBuildingLevelRecord"
+					context_function_id="IsLockedByAnyTech"/>
 			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="disable_override0"
+					value="TechRequiredCallbackInterface"/>
+				<property
+					name="disable_override1"
+					value="ContextVisibilitySetter"/>
+			</userproperties>
 			<componentimages>
 				<component_image
 					this="B41B365F-2337-4483-A0F508537C79D07A"

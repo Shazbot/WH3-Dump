@@ -12,7 +12,8 @@ merc_contracts = {
 		"wh3_main_tze_tzeentch",
 		"wh_dlc03_bst_beastmen",
 		"wh_main_chs_chaos",
-		"wh2_dlc13_lzd_spirits_of_the_jungle"
+		"wh2_dlc13_lzd_spirits_of_the_jungle",
+		"wh3_dlc27_hef_aislinn"
 	},
 	golgfag_faction_key = "wh3_dlc26_ogr_golgfag",
 	previous_client_key = false,
@@ -311,7 +312,8 @@ function merc_contracts:initialise()
 			return self:is_mercenary_faction(context:faction():name())
 		end,
 		function(context)
-			local faction_name = context:faction():name()
+			local faction_interface = context:faction()
+			local faction_name = faction_interface:name()
 			--early out if the faction is not eligible for contracts
 			if cm:is_faction_eligible_to_be_hired_for_war_contract(faction_name) == false then
 				return
@@ -321,7 +323,7 @@ function merc_contracts:initialise()
 				self:generate_contract_list(faction_name)
 			elseif(faction_name == self.golgfag_faction_key) then
 				-- Golgfag turn 1 setup.
-				self:generate_golgfag_starting_contracts()
+				self:generate_golgfag_starting_contracts(faction_interface:is_human())
 			end
 		end,
 		true
@@ -616,9 +618,13 @@ function merc_contracts:generate_contract_list(faction_key)
 	end
 end
 
-function merc_contracts:generate_golgfag_starting_contracts()
+function merc_contracts:generate_golgfag_starting_contracts(is_human)
 	self:generate_contract(self.golgfag_faction_key, "wh_main_emp_ostland", 250, 6, true)
-	self:generate_contract(self.golgfag_faction_key, "wh_main_emp_nordland", 250, 6, true)
+	if is_human then
+		-- Generate a contract for Golgfag with Nordland only if Golgfag is human, since he is now set up to be at war with them from turn 1 if he is not human.
+		-- See AIGolgfagWarDeclaration event listener.
+		self:generate_contract(self.golgfag_faction_key, "wh_main_emp_nordland", 250, 6, true)
+	end
 end
 
 function merc_contracts:generate_contract(faction_key, client_key, target_override, duration_override, launch)

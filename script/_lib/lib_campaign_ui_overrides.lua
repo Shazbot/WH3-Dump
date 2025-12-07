@@ -345,6 +345,7 @@ function campaign_ui_manager:load_ui_overrides()
 		-- parchment_overlay
 		-- campaign_flags
 		-- campaign_flags_strength_bars
+		-- aethyr_winds_progress_bar
 
 
 		
@@ -3817,6 +3818,28 @@ function campaign_ui_manager:load_ui_overrides()
 		end,
 		function()
 			cm:override_ui("disable_wrath_of_khorne_button", false);
+		end
+	)
+
+	--------------------------------------
+	-- aethyr_winds_progress_bar 
+	--------------------------------------
+
+	ui_overrides.aethyr_winds_progress_bar = ui_override:new(
+		"aethyr_winds_progress_bar",
+		function()
+			local dark_ritual_main_element = find_uicomponent(core:get_ui_root(), "arcane_power_holder", "icon_holder");
+			cm:override_ui("hide_aethyr_winds_progress_bar", true);
+			if dark_ritual_main_element then
+				dark_ritual_main_element:SetState("locked");
+			end
+		end,
+		function()
+			local dark_ritual_main_element = find_uicomponent(core:get_ui_root(), "arcane_power_holder", "icon_holder");
+			cm:override_ui("hide_aethyr_winds_progress_bar", false);
+			if dark_ritual_main_element then
+				dark_ritual_main_element:SetState("default");
+			end
 		end
 	)
 	

@@ -1,0 +1,233 @@
+AsurDomination
+{
+    GetSeaPatrolTrackResourcesList(CcoCampaignFaction faction)
+    {
+        faction.PooledResourceList.Filter((resource) => 
+            { resource.Key == "wh3_dlc27_hef_aislinn_focus_colonies_progress" || 
+                resource.Key == "wh3_dlc27_hef_aislinn_focus_dragonships_progress" || 
+                resource.Key == "wh3_dlc27_hef_aislinn_focus_outposts_progress"
+            } 
+        ).Sort(SortOrder, true)
+    }
+
+    CurrentlyPlayingAnimation()
+    {
+        self.ChildContext("left_button_holder").CurrentAnimation.IsEmpty == false || 
+        self.ChildContext("right_button_holder").CurrentAnimation.IsEmpty == false
+    }
+
+    CanPlayShowAnimation()
+    {
+        self.GetProperty("showing_initiatives") == "0"
+    }
+
+    CanPlayHideAnimation()
+    {
+        self.GetProperty("showing_initiatives") == "1" &&
+        SharedStateReadBool(Format("sea_patrol_track_%d_pinned", self.ChildIndex)) == false
+    }
+
+    TryPlayShowAnimation()
+    {
+        DoIf(AsurDomination.CanPlayShowAnimation, 
+            ForceAnimationForHolders("show"))
+    }
+
+    TryPlayHideAnimation()
+    {
+        DoIf(AsurDomination.CanPlayHideAnimation,
+            AsurDomination.ForceAnimationForHolders("hide"))
+    }
+
+    ForceAnimationForHolders(String animation)
+    {
+        Do(self.ChildContext("left_button_holder").TriggerAnimation(animation),
+            self.ChildContext("right_button_holder").TriggerAnimation(animation),
+            self.SetProperty("showing_initiatives", animation == "show" | "1" | "0")
+        )
+    }
+
+    ShowInitiativeButtons()
+    {
+        Do(
+            DoIf(AsurDomination.CurrentlyPlayingAnimation,
+                self.ChildContext("left_button_holder").FinishCurrentAnimationInstantly,
+                self.ChildContext("right_button_holder").FinishCurrentAnimationInstantly),
+            AsurDomination.TryPlayShowAnimation
+        )
+    }
+
+    HideInitiativeButtons()
+    {
+        Do(
+            DoIf(AsurDomination.CurrentlyPlayingAnimation,
+                self.ChildContext("left_button_holder").FinishCurrentAnimationInstantly,
+                self.ChildContext("right_button_holder").FinishCurrentAnimationInstantly),
+            AsurDomination.TryPlayHideAnimation
+        )
+    }
+
+    HasAnyPurchasableInitiatives(CcoCampaignFaction faction)
+    {
+        (focus_resource = PlayersFaction.PooledResourceContext("wh3_dlc27_hef_aislinn_focus")) =>
+        {
+            PlayersFaction.InitiativeSetWithExpendedPooledResourceCost(focus_resource).InitiativeList.Any(IsLocked == false && CostContext.CanAffordResourceTransaction(focus_resource))
+        }
+    }
+
+    TogglePinnedStateForSeaPatrolTrack(CcoComponent sea_patrol_track_component)
+    {
+        (shared_state_key = Format("sea_patrol_track_%d_pinned", sea_patrol_track_component.ChildIndex)) => { 
+            SharedStateWriteBool(shared_state_key, !SharedStateReadBool(shared_state_key))
+        }   
+    }
+
+    TogglePinnedStateForSeaPatrolTrackConditional(CcoComponent sea_patrol_track_component, Bool condition)
+    {
+        (shared_state_key = Format("sea_patrol_track_%d_pinned", sea_patrol_track_component.ChildIndex),
+         is_currently_pinned = SharedStateReadBool(shared_state_key)) => {
+            DoIf(is_currently_pinned != condition, SharedStateWriteBool(shared_state_key, condition))
+        }   
+    }
+
+    ShouldLeaderButtonBeInactive(CcoCampaignPooledResourceTrackedFaction tracked_faction)
+    {
+        (tracked_faction.WasConfederatedByTrackingFaction == false &&
+            (tracked_faction.FactionContext.IsDead || 
+            tracked_faction.FactionContext.IsEnemy)) || 
+        tracked_faction.GetUnlockedDilemmas.IsEmpty ||
+        PlayersFaction.RitualManagerContext.IsRitualCategoryOnCooldown("ASUR_DOMINATION_DILEMMAS")
+    }
+
+    GetDragonshipSubtypeRecords
+    {
+        Join(DatabaseRecordContext("CcoAgentSubtypeRecord", "wh3_dlc27_hef_aislinn"),
+             DatabaseRecordContext("CcoAgentSubtypeRecord", "wh3_dlc27_hef_dragonship_captain_01"),
+             DatabaseRecordContext("CcoAgentSubtypeRecord", "wh3_dlc27_hef_dragonship_captain_02"),
+             DatabaseRecordContext("CcoAgentSubtypeRecord", "wh3_dlc27_hef_dragonship_captain_03"),
+             DatabaseRecordContext("CcoAgentSubtypeRecord", "wh3_dlc27_hef_dragonship_captain_04"),
+             DatabaseRecordContext("CcoAgentSubtypeRecord", "wh3_dlc27_hef_dragonship_captain_05"))
+    }
+
+    GetDragonshipCap
+    {
+        AsurDomination.GetDragonshipSubtypeRecords.Filter((subtype) => 
+        {
+            # we filter out the last dragonship from being shown until you've earned it from the final battle #
+            subtype.Key != "wh3_dlc27_hef_dragonship_captain_05" || AsurDomination.IsLastDragonshipUnlocked(PlayersFaction)
+        }).Size
+    }
+
+    GetColoniesProgressRewardAgentSubtype
+    {
+        PlayersFaction.EntitySharedStateReadString("wh3_dlc27_hef_aislinn_focus_colonies_2")
+    }
+
+    GetDragonshipsProgressRewardAgentSubtype
+    {
+        PlayersFaction.EntitySharedStateReadString("wh3_dlc27_hef_aislinn_focus_dragonships_2")
+    }
+
+    GetOutpostsProgressRewardAgentSubtype
+    {
+        PlayersFaction.EntitySharedStateReadString("wh3_dlc27_hef_aislinn_focus_outposts_2")
+    }
+
+    GetCurrentDragonshipCount(CcoCampaignFaction faction)
+    {
+        faction.AgentSubtypeCount(DatabaseRecordContext("CcoAgentSubtypeRecord", "wh3_dlc27_hef_dragonship_captain_01")) +
+        faction.AgentSubtypeCount(DatabaseRecordContext("CcoAgentSubtypeRecord", "wh3_dlc27_hef_dragonship_captain_02")) +
+        faction.AgentSubtypeCount(DatabaseRecordContext("CcoAgentSubtypeRecord", "wh3_dlc27_hef_dragonship_captain_03")) +
+        faction.AgentSubtypeCount(DatabaseRecordContext("CcoAgentSubtypeRecord", "wh3_dlc27_hef_dragonship_captain_04")) +
+        faction.AgentSubtypeCount(DatabaseRecordContext("CcoAgentSubtypeRecord", "wh3_dlc27_hef_dragonship_captain_05")) +
+        faction.AgentSubtypeCount(DatabaseRecordContext("CcoAgentSubtypeRecord", "wh3_dlc27_hef_aislinn"))
+    }
+
+    GetRecruitableDragonships(CcoCampaignFaction faction)
+    {
+        AsurDomination.GetDragonshipSubtypeRecords.Transform((subtype) => faction.CharacterRecruitmentPoolEntriesForAgentSubtype(subtype)).Transform(CharacterContext)
+    }
+
+    GetRecruitedDragonships(CcoCampaignFaction faction)
+    {
+        faction.CharacterList.Filter((character) => AsurDomination.GetDragonshipSubtypeRecords.Contains(character.AgentSubtypeRecordContext))
+    }
+
+    GetDragonshipCharacters(CcoCampaignFaction faction)
+    {
+        Join(AsurDomination.GetRecruitableDragonships(faction), AsurDomination.GetRecruitedDragonships(faction))
+    }
+
+    GetDragonshipCharacterFromSubtype(CcoCampaignFaction faction, CcoAgentSubtypeRecord subtype)
+    {
+        AsurDomination.GetDragonshipCharacters(faction).FirstContext((character) => character.AgentSubtypeRecordContext.Key == subtype.Key)
+    }
+
+    IsDragonshipRecruited(CcoCampaignFaction faction, CcoAgentSubtypeRecord subtype)
+    {
+        AsurDomination.GetRecruitedDragonships(faction).Any(AgentSubtypeRecordContext.Key == subtype.Key)
+    }
+
+    IsDragonshipRecruitable(CcoCampaignFaction faction, CcoAgentSubtypeRecord subtype)
+    {
+        AsurDomination.GetRecruitableDragonships(faction).Any(AgentSubtypeRecordContext.Key == subtype.Key)
+    }
+
+    GetSortedRecruitableDragonships(CcoCampaignFaction faction)
+    {
+       AsurDomination.GetDragonshipSubtypeRecords.Filter(
+        (subtype) => 
+        {
+            AsurDomination.IsDragonshipRecruited(faction, subtype) || AsurDomination.IsDragonshipRecruitable(faction, subtype)
+        }).Sort(
+        (subtype) =>
+        {
+            GetIfElse(AsurDomination.IsDragonshipRecruited(faction, subtype), 2, 0) +
+            GetIfElse(AsurDomination.IsDragonshipRecruitable(faction, subtype), 1, 0)
+        }
+       )
+    }
+
+    GetLockedDragonships(CcoCampaignFaction faction)
+    {
+       AsurDomination.GetDragonshipSubtypeRecords.Filter((subtype) => 
+        {
+            AsurDomination.IsDragonshipRecruited(faction, subtype) == false && 
+            AsurDomination.IsDragonshipRecruitable(faction, subtype) == false && 
+            subtype.Key != "wh3_dlc27_hef_dragonship_captain_05"
+        })
+    }
+
+    GetDragonshipRequirementString(CcoAgentSubtypeRecord subtype)
+    {
+        GetIfElse(AsurDomination.GetColoniesProgressRewardAgentSubtype == subtype.Key,
+            Loc("colony_lock_reason_dedication"),
+            GetIfElse(AsurDomination.GetDragonshipsProgressRewardAgentSubtype == subtype.Key, 
+                Loc("dragonship_lock_reason_dedication"), 
+                GetIfElse(AsurDomination.GetOutpostsProgressRewardAgentSubtype == subtype.Key,
+                    Loc("outpost_lock_reason_dedication"),
+                    GetIf(IsContextValid(self.StoredContextFromParent("CcoInitiativeRecord")),
+                        Loc("admiral_training_lock_reason_dedication", self.StoredContextFromParent("CcoInitiativeRecord").Name)
+                    )
+                )
+            )
+        )
+    }
+
+    IsLastDragonshipUnlocked(CcoCampaignFaction faction)
+    {
+        (dragonship = DatabaseRecordContext("CcoAgentSubtypeRecord", "wh3_dlc27_hef_dragonship_captain_05")) => 
+        {
+            AsurDomination.IsDragonshipRecruited(faction, dragonship) || AsurDomination.IsDragonshipRecruitable(faction, dragonship)
+        }
+    }
+
+    TryCreateDragonshipCelebrationAnimation(CcoCampaignPooledResource resource)
+    {
+        (dragonship_unlock_threshold = Join(resource.AvailableThresholdSetList, resource.ActiveThresholdSetList).Sort(Key, true).At(1).LowerBound) => {
+            DoIf(ToNumber(self.GetProperty(Format("%S_total_at_panel_open", resource.Key))) < dragonship_unlock_threshold && resource.Total == dragonship_unlock_threshold, 
+                CreateComponent("ui/campaign ui/dlc27_hef_dragonships_animation", RootComponent)
+            )
+        }
+    }
+}

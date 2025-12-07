@@ -5659,11 +5659,11 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoCampaignCharacter"
-					context_function_id="GetIfElse ( IsWounded, TurnsToResurrection, TurnsLockedInLimbo )"/>
+					context_function_id="GetIfElse( IsContextValid(this),&#10; GetIfElse ( IsWounded, TurnsToResurrection, TurnsLockedInLimbo ),&#10; &quot;&quot; )"/>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignCharacter"
-					context_function_id="IsWounded || TurnsLockedInLimbo != 0"/>
+					context_function_id="GetIfElse( IsContextValid(this), IsWounded || TurnsLockedInLimbo != 0, false)"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -7932,7 +7932,7 @@
 				<callback_with_context
 					callback_id="ContextInactiveStateSetter"
 					context_object_id="CcoCampaignCharacter"
-					context_function_id="IsWounded == false &amp;&amp; TurnsLockedInLimbo == 0"/>
+					context_function_id="GetIfElse( IsContextValid(this), IsWounded == false &amp;&amp; TurnsLockedInLimbo == 0, false )"/>
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoCampaignCharacter">

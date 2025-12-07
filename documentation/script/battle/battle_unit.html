@@ -141,6 +141,7 @@
 							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:rear_threat">rear_threat</a></li>
 							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:current_target">current_target</a></li>
 							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_on_top_of_platform">is_on_top_of_platform</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_on_top_of_wall">is_on_top_of_wall</a></li>
 							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_controllable">is_controllable</a></li>
 							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_deploying">is_deploying</a></li>
 							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_deployed">is_deployed</a></li>
@@ -177,6 +178,9 @@
 							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:select_in_ui">select_in_ui</a></li>
 							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:highlight">highlight</a></li>
 							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:mark_as_ally">mark_as_ally</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_firing_at_will_on_top_of_wall">is_firing_at_will_on_top_of_wall</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:is_climbing_ladder">is_climbing_ladder</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:battle_unit:can_climb_walls">can_climb_walls</a></li>
 					</ul>
 
 				</ul>
@@ -1617,6 +1621,20 @@
 					</dl>
 					<dl class="function">
 						<dt>
+							<a name="function:battle_unit:is_on_top_of_wall"><h3 class="function_name"><strong><code>unit:is_on_top_of_wall()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is currently on the top of a wall.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is on wall</li>
+							</ol>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
 							<a name="function:battle_unit:is_controllable"><h3 class="function_name"><strong><code>unit:is_controllable()</code></strong></h3></a>
 						</dt>
 						<dd>
@@ -2138,13 +2156,63 @@
 				<p><li><code>has_slaanesh_mark</code></li></p>
 				<p><li><code>hasnt_slaanesh_mark</code></li></p>
 				<p><li><code>has_tzeentch_mark</code></li></p>
-				<p><li><code>hasnt_tzeentch_mark</code></li></ul></p>
-				<p><li><code>unit_is_expendable</code></li></ul></p>
-				<p><li><code>unit_is_not_expendable</code></li></ul></p>
-				<p><li><code>unit_has_contempt</code></li></ul></p>
-				<p><li><code>unit_does_not_have_contempt</code></li></ul></p>
-				<p><li><code>unit_in_water</code></li></ul></p>
-				<p><li><code>unit_is_not_in_water</code></li></ul></p>
+				<p><li><code>hasnt_tzeentch_mark</code></li></p>
+				<p><li><code>unit_is_expendable</code></li></p>
+				<p><li><code>unit_is_not_expendable</code></li></p>
+				<p><li><code>unit_has_contempt</code></li></p>
+				<p><li><code>unit_does_not_have_contempt</code></li></p>
+				<p><li><code>unit_in_water</code></li></p>
+				<p><li><code>unit_is_not_in_water</code></li></p>
+				<p><li><code>enemy_daemonic_in_intercept_range</code></li></p>
+				<p><li><code>no_enemy_daemonic_in_intercept_range</code></li></p>
+				<p><li><code>enemy_undead_in_intercept_range</code></li></p>
+				<p><li><code>no_enemy_undead_in_intercept_range</code></li></p>
+				<p><li><code>enemy_spellcaster_in_intercept_range</code></li></p>
+				<p><li><code>no_enemy_spellcaster_in_intercept_range</code></li></p>
+				<p><li><code>enemy_terror_unit_in_intercept_range</code></li></p>
+				<p><li><code>no_enemy_terror_unit_in_intercept_range</code></li></p>
+				<p><li><code>unit_is_squig_herd</code></li></p>
+				<p><li><code>unit_is_not_squig_herd</code></li></p>
+				<p><li><code>unit_is_goblin_infantry</code></li></p>
+				<p><li><code>unit_is_not_goblin_infantry</code></li></p>
+				<p><li><code>unit_is_boar_cavalry</code></li></p>
+				<p><li><code>unit_is_not_boar_cavalry</code></li></p>
+				<p><li><code>unit_is_night_goblin_archer</code></li></p>
+				<p><li><code>unit_is_not_night_goblin_archer</code></li></p>
+				<p><li><code>squig_herd_allies_in_intercept_range</code></li></p>
+				<p><li><code>squig_herd_allies_not_in_intercept_range</code></li></p>
+				<p><li><code>squig_herd_enemies_in_intercept_range</code></li></p>
+				<p><li><code>squig_herd_enemies_not_in_intercept_range</code></li></p>
+				<p><li><code>orc_infantry_allies_in_intercept_range</code></li></p>
+				<p><li><code>orc_infantry_allies_not_in_intercept_range</code></li></p>
+				<p><li><code>orc_infantry_enemies_in_intercept_range</code></li></p>
+				<p><li><code>orc_infantry_enemies_not_in_intercept_range</code></li></p>
+				<p><li><code>fanatic_allies_in_intercept_range</code></li></p>
+				<p><li><code>fanatic_allies_not_in_intercept_range</code></li></p>
+				<p><li><code>fanatic_enemies_in_intercept_range</code></li></p>
+				<p><li><code>fanatic_enemies_not_in_intercept_range</code></li></p>
+				<p><li><code>nasty_skulker_allies_in_intercept_range</code></li></p>
+				<p><li><code>nasty_skulker_allies_not_in_intercept_range</code></li></p>
+				<p><li><code>nasty_skulker_enemies_in_intercept_range</code></li></p>
+				<p><li><code>nasty_skulker_enemies_not_in_intercept_range</code></li></p>
+				<p><li><code>troll_allies_in_intercept_range</code></li></p>
+				<p><li><code>troll_allies_not_in_intercept_range</code></li></p>
+				<p><li><code>troll_enemies_in_intercept_range</code></li></p>
+				<p><li><code>troll_enemies_not_in_intercept_range</code></li></p>
+				<p><li><code>spider_allies_in_intercept_range</code></li></p>
+				<p><li><code>spider_allies_not_in_intercept_range</code></li></p>
+				<p><li><code>spider_enemies_in_intercept_range</code></li></p>
+				<p><li><code>spider_enemies_not_in_intercept_range</code></li></p>
+				<p><li><code>is_on_fire</code></li></p>
+				<p><li><code>is_not_on_fire</code></li></p>
+				<p><li><code>is_under_missile_fire</code></li></p>
+				<p><li><code>is_not_under_missile_fire</code></li></p>
+				<p><li><code>is_under_bow_fire</code></li></p>
+				<p><li><code>is_not_under_bow_fire</code></li></p>
+				<p><li><code>is_under_gun_fire</code></li></p>
+				<p><li><code>is_not_under_gun_fire</code></li></p>
+				<p><li><code>unit_is_terror_causing</code></li></p>
+				<p><li><code>unit_is_not_terror_causing</code></li></ul></p>
 				<p>Not all flags will be supported by each game.</p>
 				<div class="section_body">
 					<dl class="function">
@@ -2635,6 +2703,48 @@
 							</ol>
 						</dd>
 					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_firing_at_will_on_top_of_wall"><h3 class="function_name"><strong><code>unit:is_firing_at_will_on_top_of_wall()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is firing-at-will while on top of wall.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is_firing_at_will_on_top_of_wall</li>
+							</ol>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:is_climbing_ladder"><h3 class="function_name"><strong><code>unit:is_climbing_ladder()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit is currently climbing ladder.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> </li>
+							</ol>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:battle_unit:can_climb_walls"><h3 class="function_name"><strong><code>unit:can_climb_walls()</code></strong></h3></a>
+						</dt>
+						<dd>
+							Returns whether the unit can climb walls.
+
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> </li>
+							</ol>
+						</dd>
+					</dl>
 				</div>
 
 
@@ -2642,7 +2752,7 @@
 
 		</div>
 
-		<div id="about">Last updated 7/9/2024 11:45:05 AM</div>
+		<div id="about">Last updated 11/18/2025 9:25:24 AM</div>
 
 	</div>
 

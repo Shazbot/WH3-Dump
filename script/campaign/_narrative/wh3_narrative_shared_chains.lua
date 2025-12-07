@@ -2440,6 +2440,13 @@ end;
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
 
+-- Table contains force types, which do not count as a newly hired army for the purposes of completing narrative missions  
+second_army_banned_force_types = {
+	"ARMY_PILLAGING"
+}
+
+
+
 local function start_narrative_shared_chain_raising_armies(faction_key)
 
 	-- output header
@@ -2658,7 +2665,7 @@ local function start_narrative_shared_chain_raising_armies(faction_key)
 						event = "MilitaryForceCreated",
 						condition =	function(context)
 							local mf = context:military_force_created();
-							return not mf:is_armed_citizenry() and mf:faction():name() == faction_key;
+							return not mf:is_armed_citizenry() and mf:faction():name() == faction_key and not table.contains(second_army_banned_force_types, mf:force_type():key());
 						end
 					}
 				},
@@ -4496,6 +4503,25 @@ local function start_narrative_events_shared_for_faction(faction_key)
 				name,																																			-- unique name for narrative event
 				faction_key,																																	-- key of faction to which it applies
 				narrative.get(faction_key, name .. "_trigger_messages") or "StartHowTheyPlay",																	-- script message(s) on which to trigger when received
+				narrative.get(faction_key, name .. "_on_issued_messages") or "StartPostHowTheyPlay"																--	script message(s) on which to trigger when received
+			);
+		end;
+	end;
+
+	-----------------------------------------------------------------------------------------------------------
+	--	Post How They Play
+	-----------------------------------------------------------------------------------------------------------
+
+	-- Triggers after the how-they-play event for the player's faction, after the intro cutscene is finished.
+	do
+		local name = "post_how_they_play";
+
+		if not narrative.get(faction_key, "suppress_post_how_they_play_event") then
+			narrative_events.interval(
+				name,																																			-- unique name for narrative event
+				faction_key,																																	-- key of faction to which it applies
+				narrative.get(faction_key, name .. "_interval") or 0.5,																							-- interval to wait in s
+				narrative.get(faction_key, name .. "_trigger_messages") or "StartPostHowTheyPlay",																-- script message(s) on which to trigger when received
 				narrative.get(faction_key, name .. "_on_issued_messages") or "StartNarrativeEvents"																-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
 			);
 		end;

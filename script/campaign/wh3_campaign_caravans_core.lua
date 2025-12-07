@@ -1076,7 +1076,7 @@ function caravans:cleanup_post_battle()
 	if self.enemy_force_cqi and self.enemy_force_cqi > 0 then
 		local mf = cm:get_military_force_by_cqi(self.enemy_force_cqi)
 
-		if mf then
+		if mf and not mf:faction():is_human() then
 			cm:kill_all_armies_for_faction(mf:faction())
 		end
 	end
@@ -1393,7 +1393,7 @@ function caravans:get_best_ogre_faction(self_faction)
 	if not factions:is_empty() then
 		for i=0, factions:num_items() -1 do
 			faction = factions:item_at(i);
-			if faction:subculture()=="wh3_main_sc_ogr_ogre_kingdoms" and faction:name()~="wh3_main_ogr_ogre_kingdoms_qb1" then
+			if faction:subculture()=="wh3_main_sc_ogr_ogre_kingdoms" and not faction:is_human() and faction:name()~="wh3_main_ogr_ogre_kingdoms_qb1" then
 				if faction:diplomatic_standing_with(self_faction) > high_score and faction:diplomatic_standing_with(self_faction) <= max_score then
 					high_score = faction:diplomatic_standing_with(self_faction);
 					high_score_faction = faction;

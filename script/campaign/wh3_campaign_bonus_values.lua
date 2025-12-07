@@ -1,3 +1,36 @@
+-- upgrade aislinn units on research
+core:add_listener(
+	"aislinn_tech_unit_upgrade",
+	"ResearchCompleted", 
+	function(context)
+		return context:technology() == "wh3_dlc27_tech_hef_aislinn_6_11";
+	end,
+	function(context)
+		local faction = context:faction();
+		local military_force_list = faction:military_force_list();
+			
+		for i = 0, military_force_list:num_items() - 1 do
+			local mf = military_force_list:item_at(i);
+
+			if mf:is_armed_citizenry() == false then
+				local unit_list = mf:unit_list();
+
+				for j = 0, unit_list:num_items() - 1 do
+					local unit = unit_list:item_at(j);
+					local unit_key = unit:unit_key();
+
+					if unit_key == "wh2_main_hef_inf_lothern_sea_guard_0" then
+						cm:convert_unit(unit:command_queue_index(), "wh2_main_hef_inf_lothern_sea_guard_1");
+					elseif unit_key == "wh2_main_hef_inf_archers_0" then
+						cm:convert_unit(unit:command_queue_index(), "wh2_main_hef_inf_archers_1");
+					end
+				end
+			end
+		end
+	end,
+	true
+);
+
 -- chance to kill unit in army
 core:add_listener(
 	"random_unit_killed_per_turn_chance",
@@ -121,13 +154,13 @@ core:add_listener(
 
 			local cult_faction = cm:get_faction("wh3_main_sla_seducers_of_slaanesh");
 
-			if cult_faction == nill or cult_faction:is_null_interface() == true or cult_faction:is_human() == true then
+			if cult_faction == nil or cult_faction:is_null_interface() == true or cult_faction:is_human() == true then
 				cult_faction = cm:get_faction("wh3_main_sla_rapturous_excess");
 				
-				if cult_faction == nill or cult_faction:is_null_interface() == true or cult_faction:is_human() == true then
+				if cult_faction == nil or cult_faction:is_null_interface() == true or cult_faction:is_human() == true then
 					cult_faction = cm:get_faction("wh3_main_sla_subtle_torture");
 
-					if cult_faction == nill or cult_faction:is_null_interface() == true or cult_faction:is_human() == true then
+					if cult_faction == nil or cult_faction:is_null_interface() == true or cult_faction:is_human() == true then
 						cult_faction = cm:get_faction("wh3_dlc20_sla_keepers_of_bliss");
 					end
 				end
@@ -208,6 +241,25 @@ core:add_listener(
 		end
 	end,
 	true
+);
+
+core:add_listener(
+	"sea_lanes_character_arrived_bonus",
+	"TeleportationNetworkMoveCompleted",
+	true,
+	function(context)
+		if context:character():is_null_interface() == false and context:character():character():is_null_interface() == false then
+			local character = context:character():character();
+			local value = cm:get_factions_bonus_value(character:faction(), "sea_lane_exit_movement_points");
+
+			if value > 0 then
+				local character_cqi = character:command_queue_index();
+				local ap = value / 100;
+				cm:replenish_action_points(cm:char_lookup_str(character_cqi), ap);
+			end
+		end
+	end,
+	true	
 );
 
 -- experience_levels_for_ruin_colonization
@@ -415,34 +467,48 @@ core:add_listener(
 		return context:faction():ancillary_exists("wh3_main_anc_weapon_elthraician") and context:faction():ancillary_exists("wh3_main_anc_weapon_cynatcian");
 	end,
 	function(context)
-		if cm:model():random_percent(5) then
-			local elthraician_character = nil;
-			local elthraician_region = -1;
-			local cynatcian_character = nil;
-			local cynatcian_region = -2;
-			local faction = context:faction();
-			local char_list = faction:character_list();
+		local chance_percent_per_ancillary = 5
 
-			for i = 0, char_list:num_items() - 1 do
-				local char = char_list:item_at(i);
-				
-				if char:has_ancillary("wh3_main_anc_weapon_elthraician") == true then
-					if char:has_region() == true then
-						elthraician_character = char;
-						elthraician_region = char:region():cqi();
-					end
-				elseif char:has_ancillary("wh3_main_anc_weapon_cynatcian") == true then
-					if char:has_region() == true then
-						cynatcian_character = char;
-						cynatcian_region = char:region():cqi();
-					end
+		local elthraician_character = nil;
+		local elthraician_region = -1;
+		local cynatcian_character = nil;
+		local cynatcian_region = -2;
+		local faction = context:faction();
+		local char_list = faction:character_list();
+
+		for i = 0, char_list:num_items() - 1 do
+			local char = char_list:item_at(i);
+			
+			if char:has_ancillary("wh3_main_anc_weapon_elthraician") == true then
+				if char:has_region() == true then
+					elthraician_character = char;
+					elthraician_region = char:region():cqi();
 				end
 			end
-
-			if elthraician_region == cynatcian_region then
-				campaign_traits:give_trait(elthraician_character, "wh3_trait_sister_swords", 1, 100);
-				campaign_traits:give_trait(cynatcian_character, "wh3_trait_sister_swords", 1, 100);
+			if char:has_ancillary("wh3_main_anc_weapon_cynatcian") == true then
+				if char:has_region() == true then
+					cynatcian_character = char;
+					cynatcian_region = char:region():cqi();
+				end
 			end
+		end
+
+		if elthraician_character == nil or cynatcian_character == nil then
+			return
+		end
+
+		local is_same_character = elthraician_character == cynatcian_character
+		local chance_percent = is_same_character and chance_percent_per_ancillary * 2 or chance_percent_per_ancillary
+		if not cm:model():random_percent(chance_percent) then
+			return
+		end
+		
+		local trait_id = "wh3_trait_sister_swords"
+		if elthraician_character == cynatcian_character then
+			campaign_traits:give_trait(elthraician_character, trait_id, 1, 100);
+		elseif elthraician_region == cynatcian_region then
+			campaign_traits:give_trait(elthraician_character, trait_id, 1, 100);
+			campaign_traits:give_trait(cynatcian_character, trait_id, 1, 100);
 		end
 	end,
 	true
@@ -1211,7 +1277,7 @@ core:add_listener(
 	true
 );
 
--- spawn a disciple army when a faction starts their turn with this bonus value. will only work if the army has the effect bundle wh3_main_ritual_sla_gg_4
+-- spawn a disciple army when a faction starts their turn with this bonus value. will only work if the army has the effect bundle wh3_main_ritual_sla_gg_4 or wh3_main_ritual_sla_gg_4_upgraded
 core:add_listener(
 	"create_disciple_army_character",
 	"FactionTurnStart",
@@ -1225,8 +1291,9 @@ core:add_listener(
 		
 		for i = 0, mf_list:num_items() - 1 do
 			local current_mf = mf_list:item_at(i);
-			
-			if current_mf:has_effect_bundle("wh3_main_ritual_sla_gg_4") and current_mf:has_general() then
+			local has_effect_bundle = current_mf:has_effect_bundle("wh3_main_ritual_sla_gg_4") or 
+										current_mf:has_effect_bundle("wh3_main_ritual_sla_gg_4_upgraded")
+			if has_effect_bundle and current_mf:has_general() then
 				local character = current_mf:general_character();
 				local x, y = cm:find_valid_spawn_location_for_character_from_character(faction_name, cm:char_lookup_str(character:command_queue_index()), true, 4);
 				
@@ -1386,6 +1453,35 @@ core:add_listener(
 	end,
 	true
 );
+
+-- apply province winds of magic strength level
+core:add_listener(
+	"winds_of_magic_level_in_province",
+	"WorldStartRound",
+	true,
+	function(context)
+		local province_list = context:world():province_list()
+		
+		for i = 0, province_list:num_items() - 1 do
+			local province = province_list:item_at(i)
+			local faction_province = province:capital_region():faction_province()
+			local blowing = cm:get_provinces_bonus_value(faction_province, "winds_of_magic_level_blowing_in_province")
+			local strong = cm:get_provinces_bonus_value(faction_province,"winds_of_magic_level_strong_in_province")
+			local tempestuous = cm:get_provinces_bonus_value(faction_province, "winds_of_magic_level_tempestuous_in_province")
+			--make sure that we never lower the wind of magic level in province, check what current level is first
+			local current_wind_level = cm:get_winds_of_magic_in_area_for_region(province:capital_region())
+			if tempestuous > 0 and current_wind_level < 4 then
+				cm:force_winds_of_magic_change(province:key(), "wom_strength_4")
+			elseif strong > 0 and current_wind_level < 3 then
+				cm:force_winds_of_magic_change(province:key(), "wom_strength_3")
+			elseif strong > 0 and current_wind_level < 2 then
+				cm:force_winds_of_magic_change(province:key(), "wom_strength_2")
+			end
+		end
+	end,
+	true
+)
+
 
 -- add khorne skulls when a battle is fought in this province
 core:add_listener(
@@ -2630,6 +2726,106 @@ core:add_listener(
 
 		for _, character in model_pairs(pb:secondary_defenders()) do
 			remove_bundles(character)
+		end
+	end,
+	true
+)
+
+core:add_listener(
+	"replenish_force_post_battle_win",
+	"CharacterCompletedBattle",
+	function(context)
+		return context:character():won_battle()
+	end,
+	function(context)
+		local character = context:character()
+		local bonus_value = cm:get_characters_bonus_value(character, "replenish_force_post_battle_win")
+
+		if bonus_value > 0 and character:has_military_force() then
+			for _, unit in model_pairs(character:military_force():unit_list()) do
+				local health_to_set = (unit:percentage_proportion_of_full_strength() + bonus_value) / 100
+				cm:set_unit_hp_to_unary_of_maximum(unit, math.min(health_to_set, 1))
+			end
+		end
+
+	end,
+	true
+)
+
+core:add_listener(
+	"research_bonus_post_battle_win",
+	"CharacterCompletedBattle",
+	function(context)
+		return context:character():won_battle()
+	end,
+	function(context)
+		local character = context:character()
+		local immediate_research_points_bonus_value = cm:get_characters_bonus_value(character, "research_bonus_post_battle_win")
+		local research_rate_bonus_value = cm:get_characters_bonus_value(character, "research_rate_bonus_post_battle_win")
+
+		if immediate_research_points_bonus_value > 0 then
+			cm:grant_research_points(character:faction():name(), immediate_research_points_bonus_value)
+		end
+
+		if research_rate_bonus_value > 0 then
+			cm:grant_research_rate_points(character:faction():name(), research_rate_bonus_value)
+		end
+	end,
+	true
+)
+
+core:add_listener(
+	"experience_bonus_post_battle_win",
+	"CharacterCompletedBattle",
+	function(context)
+		return context:character():won_battle()
+	end,
+	function(context)
+		local character = context:character()		
+				
+		--check if character has a military force
+		if character:has_military_force() then
+			local character_force = character:military_force()
+			local force_bonus_value = cm:get_forces_bonus_value(character_force, "experience_bonus_post_battle_win")
+
+			--check if the bonus value is being applied at force level
+			if force_bonus_value > 0 then
+				for _, mf_ch in model_pairs(character:military_force():character_list()) do
+					cm:add_agent_experience(cm:char_lookup_str(mf_ch:cqi()), force_bonus_value, false)
+				end
+			end
+		end
+
+		local character_bonus_value = cm:get_characters_bonus_value(character, "experience_bonus_post_battle_win")
+		--check if bonus value is applied at character level
+		if character_bonus_value > 0 then
+			cm:add_agent_experience(cm:char_lookup_str(character:cqi()), character_bonus_value, false)
+		end
+	end,
+	true
+)
+
+core:add_listener(
+	"foreign_slot_damage_settlement_garrison_percentage",
+	"FactionTurnStart",
+	function(context)
+		local fsm = context:faction():foreign_slot_managers()
+		return not fsm:is_empty()
+	end,
+	function(context)
+		local faction = context:faction()
+		local fsm = faction:foreign_slot_managers()
+
+		for i = 0, fsm:num_items() - 1 do
+			local slot_region = fsm:item_at(i):region()
+
+			-- check for garrison damage
+			local damage_scripted_value = cm:get_regions_bonus_value(slot_region, "foreign_slot_damage_settlement_garrison_percentage") / 100
+
+			if damage_scripted_value > 0 then
+				local garrison_residence = slot_region:garrison_residence()
+				cm:sabotage_garrison_army(garrison_residence, damage_scripted_value)
+			end
 		end
 	end,
 	true

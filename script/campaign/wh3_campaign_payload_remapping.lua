@@ -440,3 +440,23 @@ local function mother_ostankya_spirit_essence_money_equivalence_mapping(money_va
 end
 
 payload.add_money_equivalence_mapping("wh3_dlc24_ksl_daughters_of_the_forest", mother_ostankya_spirit_essence_money_equivalence_mapping);
+
+
+
+-------------------------------------------------
+-------------------------------------------------
+-- THRALLS
+-- For Dechalas faction
+-------------------------------------------------
+-------------------------------------------------
+
+local function dechala_thrall_money_equivalence_mapping(money_value, faction_key, params)
+
+	-- 1/4 of the money is re-allocated to thralls (at 1/10th the original money value)
+	local thralls_value = money_value * 0.1;
+	money_value = money_value * 0.75;
+	
+	return payload.money_direct(money_value) .. ";" .. payload.thralls(thralls_value)
+end
+
+payload.add_money_equivalence_mapping("wh3_dlc27_sla_the_tormentors", dechala_thrall_money_equivalence_mapping);

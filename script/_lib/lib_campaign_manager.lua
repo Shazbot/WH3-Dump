@@ -55,6 +55,45 @@ for c = 1, #corruption_types do
 	corruption_types_set[corruption_types[c]] = true;
 end;
 
+local convalesence_types_to_string = 
+{
+	[0] = "assassination",
+	[1] = "conversion",
+	[2] = "hunted_down",
+	[3] = "battle",
+	[4] = "unknown",
+	[5] = "imprisoned",
+	[6] = "retirement",
+	[7] = "starting_general_replaced",
+	[8] = "ritual_performance",
+	[9] = "province_governorship_change",
+}
+
+local death_types_to_string = 
+{
+	[0] = "alive",
+	[1] = "killed_in_action",
+	[2] = "assassinated",
+	[3] = "old_age",
+	[4] = "infant_mortality",
+	[5] = "executed",
+	[6] = "rejected",
+	[7] = "advanced",
+	[8] = "convalescing",
+	[9] = "persuaded",
+	[10] = "hunted_down",
+	[11] = "destroyed_after_defection",
+	[12] = "diead_at_sea",
+	[13] = "disbanded",
+	[14] = "desease",
+	[15] = "child_birth",
+	[16] = "family_character_clean_up",
+	[17] = "waaagh_over",
+	[18] = "waaagh_disbands",
+	[19] = "quest_battle_over",
+	[20] = "performing_ritual",
+	[21] = "dead_in_startpos",
+}
 
 campaign_manager = {				-- default values should not be nil, otherwise they'll fail if looked up
 	name = "",
@@ -302,6 +341,7 @@ function campaign_manager:new(name)
 	cm.long_savegame_strings_map = {};
 	cm.long_savegame_strings_lookup = {};
 	cm.mission_managers = {};
+	cm.mission_managers_indexed = {}
 	cm.turn_countdown_events = {};
 	cm.notify_on_character_movement_active_monitors = {};
 	cm.linear_sequence_configurations = {};
@@ -1571,11 +1611,25 @@ end;
 
 
 
+-----------------------------------------------------------------------------
+--- @section Index Functions
+--- @desc These are functions that map some enums values to strings for ease of use
+-----------------------------------------------------------------------------
+function campaign_manager:convalesence_cause_to_string(cause)
+	if convalesence_types_to_string[cause] == nil then
+		return;
+	end;
 
+	return convalesence_types_to_string[cause];
+end;
 
+function campaign_manager:death_type_to_string(death_type)
+	if death_types_to_string[death_type] == nil then
+		return;
+	end;
 
-
-
+	return death_types_to_string[death_type];
+end;
 
 
 
@@ -1814,6 +1868,20 @@ function campaign_manager:set_saved_value(name, value)
 	
 	self.saved_values[name] = value;
 end;
+
+
+
+--- @function clear_saved_value
+--- @desc Clear a saved value so that it will no longer be saved
+--- @p string name, Value name.
+function campaign_manager:clear_saved_value(name)
+	if not is_string(name) then
+		script_error("ERROR: clear_saved_value() called but supplied name [" .. tostring(name) .. "] is not a string")
+		return false
+	end;
+
+	self.saved_values[name] = nil
+end
 
 
 -- validates a table for set_saved_value by making sure that it does not contain a string containing a colon
@@ -4994,7 +5062,6 @@ function campaign_manager:get_garrison_commander_of_region(region)
 	end;
 end;
 
-
 --- @function get_closest_character_to_position_from_faction
 --- @desc Returns the character within the supplied faction that's closest to the supplied logical co-ordinates. If the is-display-coordinates flag is set then the supplied co-ordinates should be display co-ordinates instead.
 --- @p object faction, Faction specifier. This can be a faction object or a string faction name.
@@ -5233,6 +5300,24 @@ function campaign_manager:get_general_at_position_all_factions(x, y)
 	
 	return false;
 end;
+
+--- @function get_character_by_startpos_id
+--- @desc Returns a character by it's startpos id. If no character with the supplied startpos id is found then <code>false</code> is returned.
+--- @p string startpos_id
+--- @r character character
+function campaign_manager:get_character_by_startpos_id(startpos_id)
+	if not is_string(startpos_id) then
+		startpos_id = tostring(startpos_id)
+	end
+	
+	local model = self:model()
+	local character = model:lookup_character_by_startpos_id(startpos_id)
+	if character:is_null_interface() == false then
+		return character
+	end
+
+	return false
+end
 
 
 --- @function get_character_by_cqi
@@ -6545,6 +6630,7 @@ end;
 --- @p boolean make faction leader, Make the spawned character the faction leader.
 --- @p [opt=nil] function success callback, Callback to call once the force is created. The callback will be passed the created military force leader's cqi as a single argument.
 --- @p [opt=false] boolean force diplomatic discovery, forces the created faction to have diplomatic discovery - set to true if you expect the faction to automatically declare war on factions it meets once spawned.
+--- @p [opt=false] boolean no background trait, When true this will make it so the character spawned doesn't have any initial traits.
 --- @example cm:create_force_with_general(
 --- @example 	"wh_main_dwf_dwarfs",
 --- @example 	"wh_main_dwf_inf_hammerers,wh_main_dwf_inf_longbeards_1,wh_main_dwf_inf_quarrellers_0,wh_main_dwf_inf_quarrellers_0",
@@ -6563,7 +6649,7 @@ end;
 --- @example 		out("Force created with char cqi: " .. cqi);
 --- @example 	end
 --- @example );
-function campaign_manager:create_force_with_general(faction_key, unit_list, region_key, x, y, agent_type, agent_subtype, forename, clan_name, family_name, other_name, make_faction_leader, success_callback, force_diplomatic_discovery)
+function campaign_manager:create_force_with_general(faction_key, unit_list, region_key, x, y, agent_type, agent_subtype, forename, clan_name, family_name, other_name, make_faction_leader, success_callback, force_diplomatic_discovery, no_background_trait)
 	if not is_string(faction_key) then
 		script_error("ERROR: create_force_with_general() called but supplied faction key [" .. tostring(faction_key) .. "] is not a string");
 		return;
@@ -6644,6 +6730,8 @@ function campaign_manager:create_force_with_general(faction_key, unit_list, regi
 	end;
 	
 	force_diplomatic_discovery = not not force_diplomatic_discovery;
+
+	no_background_trait = not not no_background_trait;
 	
 	-- this is now generated internally, rather than being passed in from the calling function
 	local id = tostring(core:get_unique_counter());
@@ -6676,11 +6764,12 @@ function campaign_manager:create_force_with_general(faction_key, unit_list, regi
 	out("id: " .. id);
 	out("make_faction_leader: " .. tostring(make_faction_leader));
 	out("force_diplomatic_discovery: " .. tostring(force_diplomatic_discovery));
+	out("no_background_trait: " .. tostring(no_background_trait));
 	
 	out.dec_tab();
 	
 	-- make the call to create the force
-	self.game_interface:create_force_with_general(faction_key, unit_list, region_key, x, y, agent_type, agent_subtype, forename, clan_name, family_name, other_name, id, make_faction_leader, force_diplomatic_discovery);
+	self.game_interface:create_force_with_general(faction_key, unit_list, region_key, x, y, agent_type, agent_subtype, forename, clan_name, family_name, other_name, id, make_faction_leader, force_diplomatic_discovery, no_background_trait);
 end;
 
 
@@ -8751,26 +8840,12 @@ function campaign_manager:get_armed_citizenry_from_garrison(garrison, naval_forc
 
 	-- return land force or naval force, depending on what the value of this flag is
 	naval_force_only = not not naval_force_only;
-	
-	local mf_list = garrison:faction():military_force_list();
-	
-	for i = 0, mf_list:num_items() - 1 do
-		local current_mf = mf_list:item_at(i);
-		
-		if current_mf:is_armed_citizenry() and current_mf:garrison_residence() == garrison then
-			if naval_force_only then
-				if current_mf:is_navy() then
-					return current_mf;
-				end;
-			else
-				if current_mf:is_army() then
-					return current_mf;
-				end;
-			end;
-		end;
-	end;
-	
-	return false;
+
+	if naval_force_only then
+		return garrison:armed_citizenry_navy()
+	else
+		return garrison:armed_citizenry_army()
+	end
 end;
 
 
@@ -9150,6 +9225,35 @@ function campaign_manager:force_gold_value(force)
 	return force_value;
 end
 
+
+
+--- @function get_force_logical_position(force)
+--- @desc Returns the logical position of the force
+--- @p military_force military force
+--- @r number pair, logical x and y coordinates
+function campaign_manager:get_force_logical_position(military_force)
+	if not is_militaryforce(military_force) then
+		script_error("ERROR: get_force_logical_position() called but supplied military force [" .. tostring(military_force) .. "] is not a military force object")
+		return -1, -1
+	end
+
+	if military_force:has_general() then
+		local general = military_force:general_character()
+		pos_x = general:logical_position_x()
+		pos_y = general:logical_position_y()
+		return pos_x, pos_y
+	end
+
+	local characters = military_force:character_list()
+	if not characters:is_empty() then
+		local character = characters:item_at(0)
+		pos_x = character:logical_position_x()
+		pos_y = character:logical_position_y()
+		return pos_x, pos_y
+	end
+
+	return -1, -1
+end
 
 
 
@@ -10406,6 +10510,57 @@ end;
 
 
 
+-----------------------------------------------------------------------------
+--- @section Pending Battle
+-----------------------------------------------------------------------------
+
+--- @function get_pending_battle_winners_and_losers
+--- @desc Returns two lists - of the winner characters and loser characters from the pending battle. This includes both the main and secondary participants.
+--- @desc If the battle has not been fought or is a draw, the returned lists will be empty
+--- @p pending_battle pending battle
+--- @r Lists of attackers and losers
+function campaign_manager:get_pending_battle_winners_and_losers(pending_battle)
+	if not pending_battle:has_been_fought() or pending_battle:is_draw() then
+		return {}, {}
+	end
+
+	local main_winner = nil
+	local secondary_winners = nil
+	local main_loser = nil
+	local secondary_losers = nil
+	if pending_battle:attacker_won() then
+		main_winner = pending_battle:attacker()
+		secondary_winners = pending_battle:secondary_attackers();
+		main_loser = pending_battle:defender()
+		secondary_losers = pending_battle:secondary_defenders();
+	elseif pending_battle:defender_won() then
+		main_winner = pending_battle:defender()
+		secondary_winners = pending_battle:secondary_defenders();
+		main_loser = pending_battle:attacker()
+		secondary_losers = pending_battle:secondary_attackers();
+	else
+		return {}, {}
+	end
+
+	local winners = { main_winner }
+	for i = 0, secondary_winners:num_items() - 1 do
+		table.insert(winners, secondary_winners:item_at(i))
+	end
+
+	local losers = { main_loser }
+	for i = 0, secondary_losers:num_items() - 1 do
+		table.insert(losers, secondary_losers:item_at(i))
+	end
+
+	return winners, losers
+end
+
+
+
+
+
+
+
 
 
 
@@ -11335,7 +11490,15 @@ end;
 --- @p @string culture key
 --- @r @boolean culture was involved
 function campaign_manager:pending_battle_cache_culture_is_involved(culture_name)
-	return self:pending_battle_cache_culture_is_attacker(culture_name) or self:pending_battle_cache_culture_is_defender(culture_name);
+	if type(culture_name) == "table" then
+		for i = 1, #culture_name do
+			if self:pending_battle_cache_culture_is_attacker(culture_name[i]) or self:pending_battle_cache_culture_is_defender(culture_name[i]) then
+				return true;
+			end;
+		end;
+	else
+		return self:pending_battle_cache_culture_is_attacker(culture_name) or self:pending_battle_cache_culture_is_defender(culture_name);
+	end;
 end;
 
 
@@ -12779,7 +12942,7 @@ function campaign_manager:show_subtitle(key, full_key_supplied, should_force)
 
 	-- create the subtitles component if it doesn't already exist
 	if not self.subtitles_component_created then
-		ui_root:CreateComponent("scripted_subtitles", "UI/Campaign UI/scripted_subtitles.twui.xml");
+		ui_root:CreateComponent("scripted_subtitles", "UI/Common UI/scripted_subtitles.twui.xml");
 		self.subtitles_component_created = true;
 	end;
 	
@@ -14840,6 +15003,65 @@ function campaign_manager:remove_effect_bundle_from_region(bundle_key, region_ke
 end;
 
 
+--- @function build_and_apply_custom_effect_bundle_to_faction
+--- @desc First removes the supplied custom effect bundle from the faction if it exists and then rebuilds it with provided effects and applies it again.
+--- @p table parameters, table containing all parameters for the function:
+--[[
+	--- @p string or faction interface faction - faction key or FACTION_SCRIPT_INTERFACE for the faction we want to perform operations on
+	--- @p string effect_bundle_key - effect bundle key from the effect bundles table
+	--- @p table effects - key-value pair table containing the keys of the effects we want in the bundle and their values 
+		-- e.g ["wh3_dlc27_effect_hef_favour_resourse_max_mod"] = -85
+	--- @p [opt=true] @boolean overwrite_current_bundle - whether to overwrite the existing bundle if we have one with the same key, defaults to true
+	--- @p [opt=0] @number duration - optional duration for the effect bundle, defaults to 0
+]]
+function campaign_manager:build_and_apply_custom_effect_bundle_to_faction(parameters)
+	if not is_table(parameters) then
+		script_error("ERROR: build_and_apply_custom_effect_bundle_to_faction() called but supplied parameters [" .. tostring(parameters) .. "] is not a table")
+		return false
+	end
+
+	if not is_string(parameters.effect_bundle_key) then
+		script_error("ERROR: build_and_apply_custom_effect_bundle_to_faction() called but supplied effect_bundle_key [" .. tostring(parameters.effect_bundle_key) .. "] is not a string")
+		return false
+	end
+
+	if not is_table(parameters.effects) then
+		script_error("ERROR: build_and_apply_custom_effect_bundle_to_faction() called but supplied effects [" .. tostring(parameters.effects) .. "] is not a table")
+		return false
+	end
+
+	local faction_interface = parameters.faction
+	if is_string(parameters.faction) then
+		faction_interface = cm:get_faction(parameters.faction)
+	end
+
+	if not is_faction(faction_interface) then
+		script_error("ERROR: build_and_apply_custom_effect_bundle_to_faction() called but supplied faction [" .. tostring(parameters.faction) .. "] is not a valid faction interface or faction key")
+		return false
+	end
+
+	local overwrite_current_bundle = parameters.overwrite_current_bundle or true
+	if not overwrite_current_bundle and faction_interface:has_effect_bundle(parameters.effect_bundle_key) then
+		return false
+	end
+
+	local effect_bundle = cm:create_new_custom_effect_bundle(parameters.effect_bundle_key)
+	if not effect_bundle or effect_bundle:is_null_interface() then
+		script_error("ERROR: build_and_apply_custom_effect_bundle_to_faction() called but supplied effect bundle [" .. tostring(parameters.effect_bundle_key) .. "] could not be found")
+		return false
+	end
+
+	local effects = effect_bundle:effects()
+	for i = 0, effects:num_items() - 1 do
+		local effect = effects:item_at(i)
+		if parameters.effects[effect:key()] then
+			effect_bundle:set_effect_value(effect, parameters.effects[effect:key()])
+		end
+	end
+
+	effect_bundle:set_duration(parameters.duration or 0)
+	cm:apply_custom_effect_bundle_to_faction(effect_bundle, faction_interface)
+end
 
 
 
@@ -15034,7 +15256,8 @@ end;
 --- @p string faction key, Faction B key
 --- @p boolean invite faction a allies, Invite faction A's allies to the war
 --- @p boolean invite faction b allies, Invite faction B's allies to the war
-function campaign_manager:force_declare_war(faction_a_name, faction_b_name, invite_faction_a_allies, invite_faction_b_allies)
+--- [opt=false] boolean Do not create event feed messages
+function campaign_manager:force_declare_war(faction_a_name, faction_b_name, invite_faction_a_allies, invite_faction_b_allies, suppress_war_messages)
 	if not is_string(faction_a_name) then
 		script_error("ERROR: force_declare_war() called but supplied faction_a_name string [" .. tostring(faction_a_name) .. "] is not a string");
 		return false;
@@ -15067,6 +15290,10 @@ function campaign_manager:force_declare_war(faction_a_name, faction_b_name, invi
 		script_error("ERROR: force_declare_war() called but supplied faction_b_name string [" .. tostring(faction_b_name) .. "] could not be used to find a valid faction");
 		return false;
 	end;
+
+	if suppress_war_messages == nil then
+		suppress_war_messages = false
+	end
 	
 	out.design("* force_declare_war() called");
 	out.design("\tforcing war between:");
@@ -15091,7 +15318,7 @@ function campaign_manager:force_declare_war(faction_a_name, faction_b_name, invi
 		out.design("\tinviting [" .. tostring(faction_b_name) .. "] allies");
 	end;
 	
-	self.game_interface:force_declare_war(faction_a_name, faction_b_name, invite_faction_a_allies, invite_faction_b_allies);
+	self.game_interface:force_declare_war(faction_a_name, faction_b_name, invite_faction_a_allies, invite_faction_b_allies, suppress_war_messages);
 end;
 
 
@@ -15992,6 +16219,32 @@ function campaign_manager:register_mission_manager(mission_manager)
 	return true;
 end;
 
+-- used when a mission needs to start from the start
+function campaign_manager:unregister_mission_manager(mission_manager)
+	if not is_missionmanager(mission_manager) then
+		script_error("ERROR: unregister_mission_manager() called but supplied mission manager [" .. tostring(mission_manager) .. "] is not a mission manager");
+		return false;
+	end;
+
+	local faction_name = mission_manager.faction_name;
+	local mission_key = mission_manager.mission_key;
+
+	if not self:get_mission_manager(faction_name, mission_key) then
+		script_error("ERROR: unregister_mission_manager() called but supplied mission manager for faction [" .. faction_name .. "] with key [" .. mission_key .. "] is not registered");
+		return false;
+	end;
+
+	self.mission_managers[faction_name][mission_key] = nil;
+	-- not sure we need to remove it from self.mission_managers_indexed - it keeps the info for the previous attempt and result at the mission
+	local mission_managers_indexed = self.mission_managers_indexed;
+	for i = 1, #mission_managers_indexed do
+		local current_mm = mission_managers_indexed[i];
+		if current_mm.faction_name == faction_name and current_mm.mission_key == mission_key then
+			table.remove(mission_managers_indexed, i);
+			return;
+		end;
+	end;
+end;
 
 --	handles the saving of mission managers to the savegame
 function campaign_manager:get_mission_managers_for_saving_game()
@@ -16024,22 +16277,40 @@ function campaign_manager:setup_mission_managers_post_first_tick(mission_manager
 		local mission_key = current_record.mission_key;
 		local persistent_values = current_record.persistent_values;
 		
-		if mission_managers[faction_name] then
-			local mm = mission_managers[faction_name][mission_key];
-			if mm then
-				for key, value in pairs(persistent_values) do
-					mm:set_persistent_value(key, value);
-				end;
-				mm:trigger_from_savegame(current_record.started, current_record.completed);
-			-- Throw a script error, unless the mission record indicates that the mission has been started and completed, in which case we assume it's safe to ignore
+		-- the narative events with mission would have triggered the creation of mission managers before this logic, so first check for pre existance of missions and augment the logic if needed
+		local existing_mission_manager = cm:get_mission_manager(faction_name, mission_key)
+		if existing_mission_manager then
+			for key, value in pairs(persistent_values) do
+				existing_mission_manager:set_persistent_value(key, value)
+			end
+			existing_mission_manager:trigger_from_savegame(current_record.started, current_record.completed)
+		-- Throw a script error, unless the mission record indicates that the mission has been started and completed, in which case we assume it's safe to ignore
+		else --setup a mission from the save without expecting it to be pre registered this mission will potentially not have callbacks so make sure to check it out in some other manager
+			local new_mission_manager = mission_manager:new(
+															current_record.faction_name,
+															current_record.mission_key,
+															nil,
+															nil,
+															nil,
+															nil
+															)
+
+			cm:register_mission_manager(new_mission_manager)		-- since the mission has no callbacks you ll have to register it manually
+			new_mission_manager.is_registered = true
+			if mission_managers[new_mission_manager.faction_name] then
+				local created_mission_manager = mission_managers[new_mission_manager.faction_name][new_mission_manager.mission_key]
+				if created_mission_manager then
+					for key, value in pairs(current_record.persistent_values) do
+						created_mission_manager:set_persistent_value(key, value)
+					end
+					created_mission_manager:trigger_from_savegame(current_record.started, current_record.completed)
+				end
 			elseif not (current_record.started and current_record.completed) then
-				script_error("WARNING: attempting to set up mission manager on the first tick after loading the game but we couldn't find any declared mission managers for faction [" .. tostring(faction_name) .. "] with mission key ["  .. tostring(mission_key) .. "]. Mission managers should be declared during script startup. Will proceed, but this indicates some kind of script/savegame mismatch");
-			end;
-		else
-			script_error("WARNING: attempting to set up mission manager on the first tick after loading the game but we couldn't find any declared mission managers for faction [" .. tostring(faction_name) .. "]. Mission managers should be declared during script startup. Will proceed, but this indicates some kind of script/savegame mismatch");
-		end;
-	end;
-end;
+				script_error("WARNING: attempting to set up mission manager on the first tick after loading the game but we couldn't find any declared mission managers for faction [" .. tostring(faction_name) .. "] with mission key ["  .. tostring(mission_key) .. "]. Mission managers should be declared during script startup. Will proceed, but this indicates some kind of script/savegame mismatch")
+			end
+		end
+	end
+end
 
 
 --- @function suppress_all_event_feed_messages

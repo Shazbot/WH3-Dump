@@ -52,6 +52,16 @@ greater_daemons = {
 			dilemma = "wh3_dlc20_dilemma_daemon_prince_ascension",
 			incident = "wh3_dlc20_incident_daemon_prince_ascension"
 		},
+		wh3_dlc27_chs_sorcerer_lord_slaanesh_msla= {
+			agent = "wh3_dlc20_chs_daemon_prince_slaanesh",
+			dilemma = "wh3_dlc20_dilemma_daemon_prince_ascension",
+			incident = "wh3_dlc20_incident_daemon_prince_ascension"
+		},
+		wh3_dlc27_chs_sorcerer_lord_shadows_msla= {
+			agent = "wh3_dlc20_chs_daemon_prince_slaanesh",
+			dilemma = "wh3_dlc20_dilemma_daemon_prince_ascension",
+			incident = "wh3_dlc20_incident_daemon_prince_ascension"
+		},
 		wh3_dlc24_chs_lord_mtze = {
 			agent = "wh3_dlc20_chs_daemon_prince_tzeentch",
 			dilemma = "wh3_dlc20_dilemma_daemon_prince_ascension",

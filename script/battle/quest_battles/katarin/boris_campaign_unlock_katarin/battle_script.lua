@@ -269,11 +269,11 @@ battle_start_teleport_units();
 -------------------------------------------------------------------------------------------------
 --Stopping player from firing until the cutscene is done
 ga_attacker_01:change_behaviour_active_on_message("battle_started", "fire_at_will", false, false);
-ga_attacker_01:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true);
+ga_attacker_01:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true, false);
 
 --Stopping enemy from firing until the cutscene is done
 ga_defender_centre_blue_horrors:change_behaviour_active_on_message("battle_started", "fire_at_will", false, false);
-ga_defender_centre_blue_horrors:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true);
+ga_defender_centre_blue_horrors:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true, false);
 
 
 --Enemy set to defend positions

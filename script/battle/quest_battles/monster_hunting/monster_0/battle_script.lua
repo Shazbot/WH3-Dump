@@ -45,7 +45,6 @@ ga_ai_04 = gb:get_army(gb:get_non_player_alliance_num(1), 3);
 -------OBJECTIVES-------
 gb:queue_help_on_message("battle_started", "wh_dlc08_qb_monster_hunt_0_hint_objective");
 gb:queue_help_on_message("released_for_a_while", "wh_dlc08_qb_monster_hunt_0_hint_boss_ability");
-gb:queue_help_on_message("hurt", "wh_dlc08_qb_monster_hunt_0_hint_boss_gone");
 gb:set_objective_on_message("deployment_started", "wh_dlc08_qb_monster_hunt_objective");
 gb:set_objective_on_message("deployment_started", "wh_dlc08_qb_monster_hunt_objective_0_1");
 gb:set_objective_on_message("deployment_started", "wh_dlc08_qb_monster_hunt_objective_0_0");
@@ -67,5 +66,14 @@ ga_ai_04:reinforce_on_message("release_boss",20000);
 -- ga_ai_02:message_on_any_deployed("cavelry_arrived");
 
 
-
-
+if ga_ai_02 then
+	bm:watch(
+	function()
+		return is_shattered_or_dead(ga_ai_02.sunits:item(1))
+	end,
+	0,
+	function()
+		bm:queue_help_message("wh_dlc08_qb_monster_hunt_0_hint_boss_gone", 5000, 100, true);
+	end
+	)
+end

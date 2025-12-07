@@ -206,10 +206,10 @@ battle_start_teleport_units();
 
 --Stopping player from firing until the cutscene is done
 ga_attacker_01:change_behaviour_active_on_message("battle_started", "fire_at_will", false, false);
-ga_attacker_01:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true);
+ga_attacker_01:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true, false);
 
 ga_defender_01:change_behaviour_active_on_message("battle_started", "fire_at_will", false, false);
-ga_defender_01:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true);
+ga_defender_01:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true, false);
 
 --Enemy Main Army 
 ga_defender_01:attack_on_message("01_intro_cutscene_end");

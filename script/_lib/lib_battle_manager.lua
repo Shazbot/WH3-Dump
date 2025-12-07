@@ -176,6 +176,15 @@ function battle_manager:new()
 			end;
 		end;
 	end;
+
+	-- set up script failure warning context
+	common.set_context_value("SCRIPT_FAILED_THIS_SESSION", 0)
+	-- overwrite the script_error implemention of all_scripted so the context value is also set
+	local old_script_error = script_error
+	script_error = function(msg, stack_level_modifier, suppress_assert)
+		common.set_context_value("SCRIPT_FAILED_THIS_SESSION", 1)
+		old_script_error(msg, stack_level_modifier, suppress_assert)
+	end
 	
 	core:add_static_object("battle_manager", bm);
 	
@@ -3236,7 +3245,7 @@ function battle_manager:show_subtitle(key, full_key_supplied, should_force)
 
 	-- create the subtitles component if it doesn't already exist
 	if not self.subtitles_component_created then
-		ui_root:CreateComponent("scripted_subtitles", "UI/Campaign UI/scripted_subtitles.twui.xml");
+		ui_root:CreateComponent("scripted_subtitles", "UI/Common UI/scripted_subtitles.twui.xml");
 		self.subtitles_component_created = true;
 	end;
 	

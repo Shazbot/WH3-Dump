@@ -1,0 +1,307 @@
+IntrigueCourt
+{
+	EffectBundleForPatronageSlot(CcoCampaignProvince province)
+    {
+        DatabaseRecordsForKeys("CcoPatronageSlotRecord", 
+            Format("%S%d", province.Key, Floor(MaxNumericValue(1, province.EntitySharedStateReadFloat("patronage_slot_current_occupied_rank"))))).FirstContext.EffectBundle
+    }
+
+    EffectBundleForPatronageSlotAtRank(CcoCampaignProvince province, Int rank)
+    {
+        DatabaseRecordsForKeys("CcoPatronageSlotRecord", 
+            Format("%S%d", province.Key, rank)).FirstContext.EffectBundle
+    }
+
+    CanTakeOrThreatenSlot(CcoCampaignRitual ritual, CcoCampaignProvince province)
+    {
+        (character = self.StoredContext("CcoCampaignCharacter")) => {
+            ritual.CanPerformRitual(province.CapitalSettlementContext, character) && 
+                province.EntitySharedStateReadBool("patronage_slot_locked_for_occupation") == false &&
+                IntrigueCourt.CanOccupyMoreSlots(character.FactionContext) && 
+                IntrigueCourt.IsSlotTemporarilyImmune(province) == false
+        }
+    }
+
+    CanIncreaseStanding(CcoCampaignRitual ritual, CcoCampaignProvince province, CcoCampaignCharacter character)
+    {
+        (character = self.StoredContext("CcoCampaignCharacter")) => {
+            ritual.CanPerformRitual(province.CapitalSettlementContext, character) && 
+            province.EntitySharedStateReadBool("patronage_slot_locked_for_upgrade") == false &&
+            character.IsAlive && character.IsWounded == false
+        }
+    }
+
+    CanKickLord(CcoCampaignCharacter character)
+    {
+        character.IsAlive && character.IsWounded == false
+    }
+
+    CanSwapLord(CcoCampaignRitual ritual, CcoCampaignProvince province)
+    {
+        (occupying_lord = CharacterFromFamilyMemberCQI(province.EntitySharedStateReadFloat("patronage_slot_occupying_fm_cqi"))) =>
+        {
+            ritual.IsOnCooldown == false && occupying_lord.IsAlive && occupying_lord.IsWounded == false && IsContextValid(self.StoredContext("CcoCampaignCharacter"))
+        }
+    }
+
+    IsCharacterInactive(CcoCampaignCharacter character, CcoCampaignProvince province)
+    {
+        IntrigueCourt.IsCharacterOnCooldown(character) || 
+        IntrigueCourt.IsSlotLocked(province) ||
+        (IntrigueCourt.CanOccupyMoreSlots(character.FactionContext) == false && IntrigueCourt.IsSlotOccupiedByPlayerFaction(province) == false) ||
+        character.IsAlive == false || character.IsWounded
+    }
+
+    IsCharacterOnCooldown(CcoCampaignCharacter character)
+    {
+        character.FamilyMemberSharedStateReadBool("on_cooldown_for_patronage_slots")
+    }
+
+    ShouldShowOccupySlotButton(CcoCampaignProvince province)
+    {
+       IntrigueCourt.IsSlotAvailable(province) || (IntrigueCourt.IsSlotAtMaxRank(province) == false && IntrigueCourt.IsSlotOccupiedByHumanFaction(province) == false)
+    }
+
+    ShouldShowIncreaseStandingButton(CcoCampaignProvince province)
+    {
+        (character = self.StoredContext("CcoCampaignCharacter")) => { 
+            character.FactionContext == PlayersFaction && IntrigueCourt.IsSlotAtMaxRank(province) == false 
+        }
+    }
+
+    ShouldShowThreatenSlotButton(CcoCampaignProvince province)
+    {
+        IntrigueCourt.IsSlotAtMaxRank(province) == false && IntrigueCourt.IsSlotOccupiedByHumanFaction(province) && IntrigueCourt.IsSlotOccupiedByPlayerFaction(province) == false
+    }
+
+    IsSlotAtMaxRank(CcoCampaignProvince province)
+    {
+        province.EntitySharedStateReadFloat("patronage_slot_current_occupied_rank") == province.EntitySharedStateReadFloat("patronage_slot_max_occupied_rank")
+    }
+
+    MaxRankForSlot(CcoCampaignProvince province)
+    {
+        province.EntitySharedStateReadFloat("patronage_slot_max_occupied_rank")
+    }
+
+    IsSlotOccupiedByHumanFaction(CcoCampaignProvince province)
+    {
+        (fm_cqi = province.EntitySharedStateReadFloat("patronage_slot_occupying_fm_cqi")) => {
+            fm_cqi > 0 && CharacterFromFamilyMemberCQI(fm_cqi).FactionContext.IsHuman
+        }
+    }
+
+    IsSlotOccupiedByPlayerFaction(CcoCampaignProvince province)
+    {
+        (fm_cqi = province.EntitySharedStateReadFloat("patronage_slot_occupying_fm_cqi")) => {
+            fm_cqi > 0 && CharacterFromFamilyMemberCQI(fm_cqi).FactionContext == PlayersFaction
+        }
+    }
+
+    IsSlotOccupied(CcoCampaignProvince province)
+    {
+        province.EntitySharedStateReadFloat("patronage_slot_occupying_fm_cqi") > 0
+    }
+
+    IsSlotAvailable(CcoCampaignProvince province)
+    {
+        province.EntitySharedStateReadBool("patronage_slot_locked_for_occupation") == false && 
+        province.EntitySharedStateReadFloat("patronage_slot_occupying_fm_cqi") <= 0
+    }
+
+    IsSlotLocked(CcoCampaignProvince province)
+    {
+        province.EntitySharedStateReadBool("patronage_slot_locked_for_occupation")
+    }
+
+    IsSlotThreatened(CcoCampaignProvince province)
+    {
+        province.EntitySharedStateReadFloat("patronage_slot_threatened_by") > 0
+    }
+
+    ThreateningCharacterContext(CcoCampaignProvince province)
+    {
+        (fm_cqi = province.EntitySharedStateReadFloat("patronage_slot_threatened_by")) =>
+        {
+            fm_cqi > 0 && CharacterFromFamilyMemberCQI(fm_cqi)
+        }
+    }
+
+    ThreateningFactionName(CcoCampaignProvince province)
+    {
+        (fm_cqi = province.EntitySharedStateReadFloat("patronage_slot_threatened_by")) =>
+        {
+            fm_cqi > 0 && CharacterFromFamilyMemberCQI(fm_cqi).FactionContext.NameWithIcon
+        }
+    }
+
+    ThreateningFactionContext(CcoCampaignProvince province)
+    {
+        (fm_cqi = province.EntitySharedStateReadFloat("patronage_slot_threatened_by")) =>
+        {
+            fm_cqi > 0 && CharacterFromFamilyMemberCQI(fm_cqi).FactionContext
+        }
+    }
+
+    DoesCharacterOccupyAnySlot(CcoCampaignCharacter character)
+    {
+        character.FamilyMemberSharedStateReadBool("currently_occupies_any_patronage_slot")
+    }
+
+    DoesCharacterThreatenAnySlot(CcoCampaignCharacter character)
+    {
+        character.FamilyMemberSharedStateReadBool("currently_threatens_any_patronage_slot")
+    }
+
+    EligibleGeneralsList(CcoCampaignFaction faction)
+    {
+        faction.GeneralsList.Filter((character) => IntrigueCourt.DoesCharacterOccupyAnySlot(character) == false && 
+            IntrigueCourt.DoesCharacterThreatenAnySlot(character) == false &&
+            (IsContextValid(character.MilitaryForceContext) == false || character.MilitaryForceContext.HasPlaceholderCharacter == false) &&
+            # exclude characters that are generals of loaned armies #
+            (IsContextValid(character.MilitaryForceContext) == false || IsContextValid(character.MilitaryForceContext.FactionLoanedFromContext) == false))
+    }
+
+    CanOccupyMoreSlots(CcoCampaignFaction faction)
+    {
+        faction.EntitySharedStateReadFloat("patronage_slots_occupied") < faction.EntitySharedStateReadFloat("patronage_slots_occupied_limit")
+    }
+
+    ClearSelectedCharacterFromList()
+    {
+        self.ParentContext("panel_frame").ChildContext("court_panel").ClearSelection
+    }
+
+    TryGetSelectedProvinceContextForLordTemplate()
+    {
+        # this is used on create for each lord template button in the list of lords #
+        # since if you kick a lord from a position its component gets recreated in the list #
+        # but it won't get the CcoCampaignProvince context of the selected province via ContextSelectionPropagator again unless you click on a different province #
+        # because the selected province hasn't changed since the last time the lord component was created #
+        
+        (current_selected_province = self.ParentContext("court_confederate_panel").CurrentSelection.SelectedObjectList.FirstContext) => 
+        { 
+            DoIf(IsContextValid(current_selected_province), self.PropagateContext(current_selected_province)) 
+        }
+    }
+
+    IsOccupyRitual(CcoCampaignRitual ritual)
+    {
+        ritual.RitualContext.Category == "HEF_COURT_ACTION_TAKE_PATRONAGE"
+    }
+
+    IsConfederateRitual(CcoCampaignRitual ritual)
+    {
+        ritual.RitualContext.Category == "HEF_COURT_ACTION_COURT_UNITY"
+    }
+
+    IsThreatenRitual(CcoCampaignRitual ritual)
+    {
+        ritual.RitualContext.Category == "HEF_COURT_ACTION_THREATEN_PATRONAGE"
+    }
+
+    IsSwapRitual(CcoCampaignRitual ritual)
+    {
+        ritual.RitualContext.Category == "HEF_COURT_ACTION_SWAP_LORD"
+    }
+
+    IsIncreaseStandingRitual(CcoCampaignRitual ritual)
+    {
+        ritual.RitualContext.Category == "HEF_COURT_ACTION_INCREASE_STANDING"
+    }
+
+    NumOfConfederationRequirementsForFaction(CcoCampaignFaction faction)
+    {
+        # the +1 is here to account for the required favour resource effect #
+        faction.AssociatedPatronProvincesList.Size + 1
+    }
+
+    NumOfRequiredPatronageSlotsAcquired(CcoCampaignFaction faction)
+    {
+        faction.AssociatedPatronProvincesList.Filter((province) => IntrigueCourt.IsSlotAtMaxRank(province) && IntrigueCourt.IsSlotOccupiedByPlayerFaction(province)).Size
+    }
+
+    NumOfConfederationRequirementsMetForFaction(CcoCampaignFaction faction)
+    {
+        (num_of_acquired_patronage_slots = IntrigueCourt.NumOfRequiredPatronageSlotsAcquired(faction)) =>
+        {
+            GetIfElse(DoesPlayerHaveRequiredFavourToPerformConfederation, num_of_acquired_patronage_slots + 1, num_of_acquired_patronage_slots)
+        }
+    }
+
+    DoesPlayerHaveRequiredNumberOfElvenColonySettlements()
+    {
+        PlayersFaction.EntitySharedStateReadFloat("num_of_elven_colony_settlements_for_faction") >= CampaignVariableIntValue("aislinn_required_num_elven_colonies_for_confederation")
+    }
+
+    NumOfRequirementsMetForPlayerToConfederateAislinn()
+    {
+        GetIfElse(DoesPlayerHaveRequiredFavourToPerformConfederation, (DoesPlayerHaveRequiredNumberOfElvenColonySettlements | 1 | 0) + 1, DoesPlayerHaveRequiredNumberOfElvenColonySettlements | 1 | 0)
+    }
+
+    DoesPlayerHaveRequiredFavourToPerformConfederation()
+    {
+        PlayersFaction.EntitySharedStateReadBool("has_required_favour_tier_to_perform_confederation")
+    }
+
+    TogglePatronFactionHighlight(CcoCampaignFaction patron_faction)
+    {
+        (patron_faction_list_component = self.ParentContext("court_confederate_panel").ChildContext("factions_list").ChildList.Filter(Id.Contains(patron_faction.FactionRecordContext.Key)).FirstContext,
+         highlight_component = patron_faction_list_component.ChildContext("highlighted")) =>
+        {
+            highlight_component.SetVisible(highlight_component.IsVisible == false)
+        }
+    }
+
+    TogglePatronProvinceSlotsHighlight(CcoCampaignFaction patron_faction)
+    {
+        self.ParentContext("court_confederate_panel").ChildContext("court_positions_holder").ChildList.ForEach(
+            (component) => {
+                DoIf(component.StoredContext("CcoCampaignFaction").FactionRecordContext.Key == patron_faction.FactionRecordContext.Key, 
+                    DoIfElse(component.CurrentState.Contains("highlighted"), 
+                        component.SetState("default"), 
+                        component.SetState("highlighted")
+                    )
+                )
+            }
+        )
+    }
+
+    ToggleSingleProvinceHighlight(CcoCampaignProvince province)
+    {
+        self.ParentContext("court_confederate_panel").ChildContext("court_positions_holder").ChildList.ForEach(
+            (component) => {
+                DoIf(component.Id == province.Key, 
+                    DoIfElse(component.CurrentState.Contains("highlighted"), 
+                        component.SetState("default"), 
+                        component.SetState("highlighted")
+                    )
+                )
+            }
+        )
+    }
+
+    IsSlotTemporarilyImmune(CcoCampaignProvince province)
+    {
+        province.EntitySharedStateValueExists("temporary_immunity_duration_for_slot")
+    }
+
+    GetTemporaryImmunityDurationForSlot(CcoCampaignProvince province)
+    {
+        Floor(province.EntitySharedStateReadFloat("temporary_immunity_duration_for_slot"))
+    }
+
+    GetFactionsToConfederate()
+    {
+        (aislinn_faction = FactionContextFromKey("wh3_dlc27_hef_aislinn"),
+         other_factions_list = DatabaseRecords("CcoPatronFactionToAssociatedProvincesRecord").Distinct(PatronFactionKey).Filter(
+                PatronFactionContext.IsHuman == false && PatronFactionContext.IsIdleHuman == false).Transform(PatronFactionContext)
+        ) =>
+        {
+            GetIfElse(aislinn_faction.IsHuman == false && aislinn_faction.IsIdleHuman == false,
+                Join(aislinn_faction, other_factions_list),
+                other_factions_list
+            )
+        }
+    }
+}

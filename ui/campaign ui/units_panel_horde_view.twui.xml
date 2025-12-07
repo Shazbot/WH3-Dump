@@ -82,7 +82,7 @@
 								<mercenary_unit_list this="FEB6D746-542F-4CEB-A3DA11ADCCDB15FD">
 									<template_merc_entry_parent this="3A40D47B-9783-4740-8349A1F13D4695B8">
 										<merc_context this="FFB376A5-0614-4489-B620912A583606B0">
-											<amount this="B0F837CE-5674-4484-ADE068EA2ACA616D"/>
+											<amount this="AD0C83E2-F1CE-4E7E-8C2D752BE788BD14"/>
 										</merc_context>
 									</template_merc_entry_parent>
 								</mercenary_unit_list>
@@ -201,26 +201,26 @@
 			</localised_texts>
 		</agent_list>
 		<amount
-			this="B0F837CE-5674-4484-ADE068EA2ACA616D"
+			this="AD0C83E2-F1CE-4E7E-8C2D752BE788BD14"
 			id="amount"
 			part_of_template="true"
 			uniqueguid_in_template="CA61A5A8-A1F4-4A2D-A5F865CFA33F824D"
-			uniqueguid="B0F837CE-5674-4484-ADE068EA2ACA616D"
+			uniqueguid="AD0C83E2-F1CE-4E7E-8C2D752BE788BD14"
 			dimensions="22.00,22.00"
 			dock_point="Bottom Center"
 			offset="-3.00,3.00">
 			<state_uniqueguids>
 				<state_uniqueguid
 					name="active"
-					uniqueguid="71C6868B-5DAB-4D48-BC1EE5F1342C4326"/>
+					uniqueguid="20B4C3B1-569A-464A-83EAB881C677926F"/>
 				<state_uniqueguid
 					name="hover"
-					uniqueguid="4AA0D4CD-28CE-4B1F-8357B15BE0E9D58E"/>
+					uniqueguid="CB605DE6-A4BD-4238-92F014E0E133A033"/>
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
 					name="ui/skins/default/small_unit_card_corner_holder.png"
-					uniqueguid="AC4607B7-F6A0-41F4-9E3561A0D6A37FC0"/>
+					uniqueguid="274DCD86-D28E-4132-81A80FCF61B15083"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context
@@ -1647,7 +1647,7 @@
 							value="normal"/>
 						<property
 							name="red"
-							value="GetIfElse(Buildings.StoredSettlementOrForce, Buildings.StoredSettlementOrForce.PooledResourceManagerContext.CanAffordPooledResourceCost(ResourceCostContext(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;))), true) == false"/>
+							value="CanAffordResourceCostForSlot(StoredContextFromParent(&quot;CcoCampaignBuildingSlot&quot;)) == false"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
@@ -3144,8 +3144,20 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBuildingLevelRecord"
-					context_function_id="RequiredTechnologiesList.Size &gt; 0"/>
+					context_function_id="IsLockedByAnyTech"/>
+				<callback_with_context
+					callback_id="TechRequiredCallbackInterface"
+					context_object_id="CcoBuildingLevelRecord"
+					context_function_id="RequiredTechnologiesList"/>
 			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="TechRequiredCallbackInterface"/>
+				<property
+					name="disable_override1"
+					value="ContextVisibilitySetter"/>
+			</user_properties>
 			<localised_texts>
 				<localised_text
 					tooltip_label="ComponentTooltip_af3a485f"

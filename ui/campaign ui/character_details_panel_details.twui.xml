@@ -97,8 +97,9 @@
 													</empty_slot>
 													<ancillary_entry this="7D87438D-D749-4302-A9F06B660605CD2A">
 														<magic_effect this="863DDD29-C84A-41C6-A6412D6DC755C9F2"/>
-														<equipment_items_frame this="E0820864-B51A-410F-86BC843EC9796D2D">
-															<dy_icon this="66061F5C-92E0-4BC5-AE94C3E37F62E87B"/>
+														<equipment_items_frame this="17A87E23-D8D8-4C33-8197422173CAAD20">
+															<dy_icon this="CDA7E583-DA93-45DA-94A1C234152B688C"/>
+															<dy_alert_icon this="847100C4-A107-488D-ABB966B968241B56"/>
 														</equipment_items_frame>
 														<cooldown this="888964DD-7E74-4DEE-A85C4B469E8EEEAC"/>
 														<assigned_char_portrait this="321014DC-2F51-4ABC-A2A450C505245BA7"/>
@@ -4415,6 +4416,59 @@
 			</states>
 		</dropdown_sort>
 		<dy_alert_icon
+			this="847100C4-A107-488D-ABB966B968241B56"
+			id="dy_alert_icon"
+			docking="Top Left"
+			priority="60"
+			tooltipslocalised="true"
+			componentleveltooltip="An item of higher rarity is available."
+			tooltiplabel="ComponentTooltip_6595e00b"
+			uniqueguid="847100C4-A107-488D-ABB966B968241B56"
+			currentstate="756C4D47-A802-4D39-A26ABCBE47845CAB"
+			defaultstate="756C4D47-A802-4D39-A26ABCBE47845CAB">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="FactionContext.AncillaryList.Filter(StoredContextFromParent(&quot;CcoAncillariesCategoryRecord&quot;) == AncillaryRecordContext.CategoryContext &amp;&amp; IsContextValid(CharacterEquippedToContext) == false).Any( StoredContextFromParent(&quot;CcoCampaignAncillary&quot;).AncillaryRecordContext.UniquenessRecordContext.Max &lt; AncillaryRecordContext.UniquenessRecordContext.Max &amp;&amp; CanCharacterEquip(SelectedOrContainedCharacter))">
+					<child_m_user_properties>
+						<property
+							name="object_store_events"
+							value="^2"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="BA193DB3-3ABD-44D4-96E929C0F07C6116"
+					uniqueguid="BA193DB3-3ABD-44D4-96E929C0F07C6116"
+					imagepath="ui/skins/default/icon_alert_message.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="756C4D47-A802-4D39-A26ABCBE47845CAB"
+					name="default"
+					width="24"
+					height="24"
+					interactive="true"
+					uniqueguid="756C4D47-A802-4D39-A26ABCBE47845CAB">
+					<imagemetrics>
+						<image
+							this="4A21101E-D495-491A-899E0C83DA677A57"
+							uniqueguid="4A21101E-D495-491A-899E0C83DA677A57"
+							componentimage="BA193DB3-3ABD-44D4-96E929C0F07C6116"
+							width="24"
+							height="24"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</dy_alert_icon>
+		<dy_alert_icon
 			this="C620609F-F8D5-457F-BD7C7C92AECA05D8"
 			id="dy_alert_icon"
 			docking="Top Left"
@@ -4571,69 +4625,6 @@
 				</newstate>
 			</states>
 		</dy_description>
-		<dy_icon
-			this="66061F5C-92E0-4BC5-AE94C3E37F62E87B"
-			id="dy_icon"
-			docking="Center"
-			component_anchor_point="0.50,0.50"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="66061F5C-92E0-4BC5-AE94C3E37F62E87B"
-			currentstate="C334D221-E6D4-4EF0-A3BAFF6B387E5B22"
-			defaultstate="C334D221-E6D4-4EF0-A3BAFF6B387E5B22">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextImageSetter"
-					context_object_id="CcoCampaignAncillary"
-					context_function_id="IconPath"/>
-				<callback_with_context
-					callback_id="ContextStateSetter"
-					context_object_id="CcoAncillaryRecord"
-					context_function_id="IconState"/>
-			</callbackwithcontextlist>
-			<componentimages>
-				<component_image
-					this="271557CE-7E16-4413-82CA4F23FD6715AE"
-					uniqueguid="271557CE-7E16-4413-82CA4F23FD6715AE"
-					imagepath="ui/skins/default/equipment_items_weapon.png"/>
-			</componentimages>
-			<states>
-				<default
-					this="C334D221-E6D4-4EF0-A3BAFF6B387E5B22"
-					name="default"
-					width="77"
-					height="79"
-					shader_name="brighten_t0"
-					uniqueguid="C334D221-E6D4-4EF0-A3BAFF6B387E5B22">
-					<imagemetrics>
-						<image
-							this="A79DEBE9-DF12-46F9-97A8EE9C788E93A3"
-							uniqueguid="A79DEBE9-DF12-46F9-97A8EE9C788E93A3"
-							componentimage="271557CE-7E16-4413-82CA4F23FD6715AE"
-							width="77"
-							height="79"/>
-					</imagemetrics>
-				</default>
-				<round
-					this="B33AEF47-6591-4EF9-BACEE4C6B795272D"
-					name="round"
-					width="77"
-					height="79"
-					shader_name="brighten_t0"
-					uniqueguid="B33AEF47-6591-4EF9-BACEE4C6B795272D">
-					<imagemetrics>
-						<image
-							this="B6340D36-5A0E-4553-A3F9612079DF9DD8"
-							uniqueguid="B6340D36-5A0E-4553-A3F9612079DF9DD8"
-							componentimage="271557CE-7E16-4413-82CA4F23FD6715AE"
-							offset="16.00,17.00"
-							width="45"
-							height="44"
-							dockpoint="Center"/>
-					</imagemetrics>
-				</round>
-			</states>
-		</dy_icon>
 		<dy_icon
 			this="6FB73CED-7E73-4867-9B27CBDB2890E100"
 			id="dy_icon"
@@ -4831,6 +4822,70 @@
 							offset="16.00,16.00"
 							width="44"
 							height="44"/>
+					</imagemetrics>
+				</round>
+			</states>
+		</dy_icon>
+		<dy_icon
+			this="CDA7E583-DA93-45DA-94A1C234152B688C"
+			id="dy_icon"
+			uniqueguid_in_template="680B51A2-F0F9-455E-A61F00998C6F16C3"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="CDA7E583-DA93-45DA-94A1C234152B688C"
+			currentstate="37518C9C-4254-4554-AD84231AFE7FADC1"
+			defaultstate="37518C9C-4254-4554-AD84231AFE7FADC1">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoCampaignAncillary"
+					context_function_id="IconPath"/>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoAncillaryRecord"
+					context_function_id="IconState"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="E7C07997-EF73-4F9D-A91E083B5557D461"
+					uniqueguid="E7C07997-EF73-4F9D-A91E083B5557D461"
+					imagepath="ui/skins/default/equipment_items_weapon.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="37518C9C-4254-4554-AD84231AFE7FADC1"
+					name="default"
+					width="77"
+					height="79"
+					shader_name="brighten_t0"
+					uniqueguid="37518C9C-4254-4554-AD84231AFE7FADC1">
+					<imagemetrics>
+						<image
+							this="6449612B-C4DE-46F3-B7C2085163ED80B2"
+							uniqueguid="6449612B-C4DE-46F3-B7C2085163ED80B2"
+							componentimage="E7C07997-EF73-4F9D-A91E083B5557D461"
+							width="77"
+							height="79"/>
+					</imagemetrics>
+				</default>
+				<round
+					this="B259B96F-7755-4915-ACB93A95DE6E4985"
+					name="round"
+					width="77"
+					height="79"
+					shader_name="brighten_t0"
+					uniqueguid="B259B96F-7755-4915-ACB93A95DE6E4985">
+					<imagemetrics>
+						<image
+							this="745C0552-ECCD-4A5B-A2E15CE94A293833"
+							uniqueguid="745C0552-ECCD-4A5B-A2E15CE94A293833"
+							componentimage="E7C07997-EF73-4F9D-A91E083B5557D461"
+							offset="16.00,17.00"
+							width="45"
+							height="45"
+							dockpoint="Center"/>
 					</imagemetrics>
 				</round>
 			</states>
@@ -6169,7 +6224,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoAncillariesCategoryRecord"
-					context_function_id="IsContextValid(StoredContextFromParent( &quot;CcoCampaignAncillary&quot;)) == false || self.ParentContext.ParentContext. ChildContext(&quot;ancillary_entry&quot;).CurrentState == &quot;dragged&quot;">
+					context_function_id="IsContextValid(StoredContext( &quot;CcoCampaignAncillary&quot;)) == false || self.ParentContext.ParentContext. ChildContext(&quot;ancillary_entry&quot;).CurrentState == &quot;dragged&quot;">
 					<child_m_user_properties>
 						<property
 							name="update_constant"
@@ -7368,117 +7423,175 @@
 			</override_images>
 		</equipment_items_frame>
 		<equipment_items_frame
-			this="E0820864-B51A-410F-86BC843EC9796D2D"
+			this="17A87E23-D8D8-4C33-8197422173CAAD20"
 			id="equipment_items_frame"
-			offset="-13.00,-14.00"
+			uniqueguid_in_template="FD2ED649-11A0-4EBC-9BF4A42665E1885B"
+			offset="-10.00,-14.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
-			docking="Center"
-			component_anchor_point="0.50,0.50"
+			docking="Center Left"
+			dock_offset="-10.00,0.00"
+			component_anchor_point="0.00,0.50"
 			priority="60"
 			tooltipslocalised="true"
-			uniqueguid="E0820864-B51A-410F-86BC843EC9796D2D"
-			currentstate="12CEB9B0-A282-4511-9FE761AC9CC2003C"
-			defaultstate="12CEB9B0-A282-4511-9FE761AC9CC2003C">
+			uniqueguid="17A87E23-D8D8-4C33-8197422173CAAD20"
+			currentstate="286EFF59-209B-47FC-90D43EAB7A4DD21F"
+			defaultstate="286EFF59-209B-47FC-90D43EAB7A4DD21F">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoAncillaryRecord"
+					context_function_id="FrameState">
+					<child_m_user_properties>
+						<property
+							name="fallback_state"
+							value="default"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
-					this="164F4ADE-192F-4E6A-B6D2CC3E5DB1D326"
-					uniqueguid="164F4ADE-192F-4E6A-B6D2CC3E5DB1D326"
+					this="B4F73FB7-96D6-447D-AFF0F5E053AD5353"
+					uniqueguid="B4F73FB7-96D6-447D-AFF0F5E053AD5353"
 					imagepath="ui/skins/default/equipment_items_frame.png"/>
 				<component_image
-					this="A4E484D1-61E7-45E7-9A5CA4C54D086135"
-					uniqueguid="A4E484D1-61E7-45E7-9A5CA4C54D086135"
+					this="0473551F-3D34-472E-870F43EBAB1CEB3F"
+					uniqueguid="0473551F-3D34-472E-870F43EBAB1CEB3F"
 					imagepath="ui/skins/default/item_frame.png"/>
+				<component_image
+					this="96DE4823-D19C-4299-881FFAF2115EE24E"
+					uniqueguid="96DE4823-D19C-4299-881FFAF2115EE24E"
+					imagepath="ui/skins/default/equipment_items_frame_common.png"/>
+				<component_image
+					this="1E7D9259-D3BF-4D23-B55D35AA63B1AE83"
+					uniqueguid="1E7D9259-D3BF-4D23-B55D35AA63B1AE83"
+					imagepath="ui/skins/default/equipment_items_frame_uncommon.png"/>
+				<component_image
+					this="271412FB-D982-4EE9-8448B4292EEA6000"
+					uniqueguid="271412FB-D982-4EE9-8448B4292EEA6000"
+					imagepath="ui/skins/default/equipment_items_frame_legendary.png"/>
+				<component_image
+					this="06C4313B-5A80-4F9A-BA10D22ACE60C27C"
+					uniqueguid="06C4313B-5A80-4F9A-BA10D22ACE60C27C"
+					imagepath="ui/skins/default/equipment_items_frame_rare.png"/>
+				<component_image
+					this="193000ED-284D-47EE-A6273C43FDF9764D"
+					uniqueguid="193000ED-284D-47EE-A6273C43FDF9764D"
+					imagepath="ui/skins/default/equipment_items_frame_crafted.png"/>
 			</componentimages>
 			<states>
-				<active
-					this="12CEB9B0-A282-4511-9FE761AC9CC2003C"
-					name="active"
+				<common
+					this="26AE3281-780C-475C-8C3A3E859BDE000D"
+					name="common"
 					width="77"
 					height="79"
-					uniqueguid="12CEB9B0-A282-4511-9FE761AC9CC2003C">
+					uniqueguid="26AE3281-780C-475C-8C3A3E859BDE000D">
 					<imagemetrics>
 						<image
-							this="B9EA558F-9770-4D66-98B65E24A19F4001"
-							uniqueguid="B9EA558F-9770-4D66-98B65E24A19F4001"
-							componentimage="164F4ADE-192F-4E6A-B6D2CC3E5DB1D326"
-							width="77"
-							height="79"/>
-						<image
-							this="180E25B2-1BDE-4FF2-884EDB6A7A14A522"
-							uniqueguid="180E25B2-1BDE-4FF2-884EDB6A7A14A522"
-							componentimage="A4E484D1-61E7-45E7-9A5CA4C54D086135"
+							this="771C0AF2-B41E-4D9C-B12EA66F1983F166"
+							uniqueguid="771C0AF2-B41E-4D9C-B12EA66F1983F166"
+							componentimage="96DE4823-D19C-4299-881FFAF2115EE24E"
 							width="77"
 							height="79"/>
 					</imagemetrics>
-				</active>
-				<dragged
-					this="4B9107F3-86E8-4BAA-873E34E0EBF22EE8"
-					name="dragged"
+				</common>
+				<crafted
+					this="05C88CC3-A762-448E-990BBCC54DB70AB3"
+					name="crafted"
 					width="77"
 					height="79"
-					shader_name="glow_pulse_t0"
-					uniqueguid="4B9107F3-86E8-4BAA-873E34E0EBF22EE8">
+					uniqueguid="05C88CC3-A762-448E-990BBCC54DB70AB3">
 					<imagemetrics>
 						<image
-							this="F8712766-E267-4A7F-87F22F9BF5805AA6"
-							uniqueguid="F8712766-E267-4A7F-87F22F9BF5805AA6"
-							componentimage="164F4ADE-192F-4E6A-B6D2CC3E5DB1D326"
-							width="77"
-							height="79"/>
-						<image
-							this="FF7888E3-215D-43A0-BFAAC24D03E6CFAF"
-							uniqueguid="FF7888E3-215D-43A0-BFAAC24D03E6CFAF"
-							componentimage="A4E484D1-61E7-45E7-9A5CA4C54D086135"
+							this="93C0367A-5FC5-4E99-90321838506067AA"
+							uniqueguid="93C0367A-5FC5-4E99-90321838506067AA"
+							componentimage="193000ED-284D-47EE-A6273C43FDF9764D"
 							width="77"
 							height="79"/>
 					</imagemetrics>
-				</dragged>
-				<glow
-					this="AEC26AC7-B019-4B97-AB71034DB3A8B826"
-					name="glow"
+				</crafted>
+				<default
+					this="286EFF59-209B-47FC-90D43EAB7A4DD21F"
+					name="default"
 					width="77"
 					height="79"
-					shader_name="glow_pulse_t0"
-					uniqueguid="AEC26AC7-B019-4B97-AB71034DB3A8B826">
+					uniqueguid="286EFF59-209B-47FC-90D43EAB7A4DD21F">
 					<imagemetrics>
 						<image
-							this="AF340423-AF4F-41F8-81F157D077A353A0"
-							uniqueguid="AF340423-AF4F-41F8-81F157D077A353A0"
-							componentimage="164F4ADE-192F-4E6A-B6D2CC3E5DB1D326"
+							this="5BFBF5E6-5EBC-4419-9C2D0ADFDD04FF9E"
+							uniqueguid="5BFBF5E6-5EBC-4419-9C2D0ADFDD04FF9E"
+							componentimage="B4F73FB7-96D6-447D-AFF0F5E053AD5353"
 							width="77"
-							height="79"/>
+							height="79"
+							colour="#FFFFFF00"/>
+					</imagemetrics>
+				</default>
+				<legendary
+					this="439C1AAC-FC30-41BC-A3B7905B06CDDA8C"
+					name="legendary"
+					width="77"
+					height="79"
+					uniqueguid="439C1AAC-FC30-41BC-A3B7905B06CDDA8C">
+					<imagemetrics>
 						<image
-							this="15F1C838-C849-49FC-82602D336215D63F"
-							uniqueguid="15F1C838-C849-49FC-82602D336215D63F"
-							componentimage="A4E484D1-61E7-45E7-9A5CA4C54D086135"
+							this="093EB9E8-7E3B-41AB-9616778C7177F16F"
+							uniqueguid="093EB9E8-7E3B-41AB-9616778C7177F16F"
+							componentimage="271412FB-D982-4EE9-8448B4292EEA6000"
 							width="77"
 							height="79"/>
 					</imagemetrics>
-				</glow>
-				<inactive
-					this="83102EE9-BDB4-4868-A0B6C260FFDFE70B"
-					name="inactive"
+				</legendary>
+				<rare
+					this="063AC8DD-0892-4048-8CEAB53E365440D7"
+					name="rare"
 					width="77"
 					height="79"
-					shader_name="set_greyscale_t0"
-					shadervars="1.00,1.00,0.00,0.00"
-					uniqueguid="83102EE9-BDB4-4868-A0B6C260FFDFE70B">
+					uniqueguid="063AC8DD-0892-4048-8CEAB53E365440D7">
 					<imagemetrics>
 						<image
-							this="0410705C-2B71-4CC3-BEC530FD2CA71D75"
-							uniqueguid="0410705C-2B71-4CC3-BEC530FD2CA71D75"
-							componentimage="164F4ADE-192F-4E6A-B6D2CC3E5DB1D326"
-							width="77"
-							height="79"/>
-						<image
-							this="201A22B4-CDD9-410E-B2583236568CFA0B"
-							uniqueguid="201A22B4-CDD9-410E-B2583236568CFA0B"
-							componentimage="A4E484D1-61E7-45E7-9A5CA4C54D086135"
+							this="B9071A26-7C55-46A8-8AC97AC452B8D47F"
+							uniqueguid="B9071A26-7C55-46A8-8AC97AC452B8D47F"
+							componentimage="06C4313B-5A80-4F9A-BA10D22ACE60C27C"
 							width="77"
 							height="79"/>
 					</imagemetrics>
-				</inactive>
+				</rare>
+				<round
+					this="1CB0A3ED-1D40-4F41-8DCEB5E9667F01EF"
+					name="round"
+					width="77"
+					height="79"
+					uniqueguid="1CB0A3ED-1D40-4F41-8DCEB5E9667F01EF">
+					<imagemetrics>
+						<image
+							this="796D3EEA-D9A7-4F0F-965EAE3817C8693C"
+							uniqueguid="796D3EEA-D9A7-4F0F-965EAE3817C8693C"
+							componentimage="B4F73FB7-96D6-447D-AFF0F5E053AD5353"
+							width="77"
+							height="79"/>
+						<image
+							this="493A016F-7DBB-43A3-963DFBC05DF0FB0E"
+							uniqueguid="493A016F-7DBB-43A3-963DFBC05DF0FB0E"
+							componentimage="0473551F-3D34-472E-870F43EBAB1CEB3F"
+							width="77"
+							height="79"/>
+					</imagemetrics>
+				</round>
+				<uncommon
+					this="8925DB5F-C4C9-4294-A1299CA41B7F0492"
+					name="uncommon"
+					width="77"
+					height="79"
+					uniqueguid="8925DB5F-C4C9-4294-A1299CA41B7F0492">
+					<imagemetrics>
+						<image
+							this="EA54869F-3110-4B1C-AB6FAFFA5CA69BDC"
+							uniqueguid="EA54869F-3110-4B1C-AB6FAFFA5CA69BDC"
+							componentimage="1E7D9259-D3BF-4D23-B55D35AA63B1AE83"
+							width="77"
+							height="79"/>
+					</imagemetrics>
+				</uncommon>
 			</states>
 		</equipment_items_frame>
 		<equipment_items_frame

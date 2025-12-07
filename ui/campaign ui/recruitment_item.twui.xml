@@ -54,6 +54,8 @@
 						<dy_number this="AD2ED597-8ABF-454D-8122DC7891CD5161"/>
 					</hellforge_display_holder>
 					<da_plan_tracked_tactic this="DA0BE46B-2324-4D59-A2EFCC3FBA5FA30D"/>
+					<kinfolk_tag this="0BBF330F-3E88-4092-B908406393BD6CD7"/>
+					<dlc27_sla_daemonic_attraction_marker this="8AA3FD1D-5806-439D-B6B4E040F43BC357"/>
 				</unit_icon>
 				<external_holder this="D0A9E0F2-C897-4473-8669F5B5BF3B3E33">
 					<upkeepcost this="78C08E51-9B60-4897-B7D86C246CAAE127">
@@ -1008,10 +1010,6 @@
 			defaultstate="21019328-579E-4B7A-9A0A7C98E2AC2E1B">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoMainUnitRecord unit"
-					context_function_id="SelectedCharacter.TacticsManager.GetPinnedTactics.Filter(InitiativeContext.RequiredUnits.Contains(unit)).Size &gt; 0"/>
-				<callback_with_context
 					callback_id="ContextLayoutTooltip"
 					context_object_id="CcoMainUnitRecord">
 					<child_m_user_properties>
@@ -1084,6 +1082,72 @@
 				</res_rom_grain>
 			</states>
 		</disabled_script>
+		<dlc27_sla_daemonic_attraction_marker
+			this="8AA3FD1D-5806-439D-B6B4E040F43BC357"
+			id="dlc27_sla_daemonic_attraction_marker"
+			offset="6.00,90.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Bottom Left"
+			dock_offset="6.00,-24.00"
+			component_anchor_point="0.00,1.00"
+			priority="1"
+			soundcategory="UI_GBL_TMP_Mouse_Over_Only"
+			uniqueguid="8AA3FD1D-5806-439D-B6B4E040F43BC357"
+			currentstate="985440C6-F6D2-4A4F-A3928E109A886535"
+			defaultstate="985440C6-F6D2-4A4F-A3928E109A886535">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoUnitDetails details"
+					context_function_id="details.IsUnitInSet(&quot;wh3_dlc27_sla_daemonic_attraction_dechala&quot;)"/>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoMainUnitRecord">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/common ui/tooltip_dlc27_dechala_daemonic_influence_unit_effects"/>
+						<property
+							name="stored_object_to_pass0"
+							value="CcoMainUnitRecord"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoMainUnitRecord"
+					context_function_id="UnitDetailsContext"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="2F77A287-77C9-41C6-8DF6D97ADFC73EF7"
+					uniqueguid="2F77A287-77C9-41C6-8DF6D97ADFC73EF7"
+					imagepath="ui/skins/default/dlc27_sla_decadence/wh3_dlc27_daemonic_attraction_marker.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="985440C6-F6D2-4A4F-A3928E109A886535"
+					name="NewState"
+					width="27"
+					height="22"
+					interactive="true"
+					uniqueguid="985440C6-F6D2-4A4F-A3928E109A886535">
+					<imagemetrics>
+						<image
+							this="23030511-DE3C-43BA-A043EF146EF61D9E"
+							uniqueguid="23030511-DE3C-43BA-A043EF146EF61D9E"
+							componentimage="2F77A287-77C9-41C6-8DF6D97ADFC73EF7"
+							offset="-2.00,-5.00"
+							width="26"
+							dockpoint="Center"
+							dock_offset="-2.00,0.00"
+							canresizeheight="false"
+							canresizewidth="false"
+							aspect_ratio_locked_behaviour="Width First"/>
+					</imagemetrics>
+				</newstate>
+			</states>
+		</dlc27_sla_daemonic_attraction_marker>
 		<dy_number
 			this="AD2ED597-8ABF-454D-8122DC7891CD5161"
 			id="dy_number"
@@ -2298,6 +2362,84 @@
 				</yin>
 			</states>
 		</icon_harmony>
+		<kinfolk_tag
+			this="0BBF330F-3E88-4092-B908406393BD6CD7"
+			id="kinfolk_tag"
+			offset="35.00,84.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Top Right"
+			dock_offset="-4.00,84.00"
+			component_anchor_point="1.00,0.00"
+			priority="1"
+			tooltipslocalised="true"
+			soundcategory="UI_GBL_TMP_Mouse_Over_Only"
+			uniqueguid="0BBF330F-3E88-4092-B908406393BD6CD7"
+			currentstate="B85C622B-E42C-4093-87E27C8FC500FE5D"
+			defaultstate="B85C622B-E42C-4093-87E27C8FC500FE5D">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoUnitDetails details"
+					context_function_id="details.IsUnitInSet(&quot;wh3_dlc27_nor_kinfolk_units&quot;)"/>
+				<callback_with_context
+					callback_id="ContextTrashOnCondition"
+					context_object_id="CcoUnitDetails"
+					context_function_id="CanUseUiFeature(&quot;CALL_UP_THE_TROLLS&quot;) == false || IsUnitInSet(&quot;wh3_dlc27_nor_kinfolk_units&quot;) == false"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoMainUnitRecord"
+					context_function_id="UnitDetailsContext"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="26DA902D-E461-45AB-AF3FAEC9EBD0CC88"
+					uniqueguid="26DA902D-E461-45AB-AF3FAEC9EBD0CC88"
+					imagepath="ui/skins/default/dlc27_nor_troll_expansion/troll_kinfolk_unit.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="B85C622B-E42C-4093-87E27C8FC500FE5D"
+					name="active"
+					width="27"
+					height="22"
+					tooltip="This unit generates Trollkind for every turn it is in your army."
+					tooltiplabel="wh3_dlc27_nor_troll_expansion_unit_resource_contribution_tooltip"
+					interactive="true"
+					disabled="true"
+					uniqueguid="B85C622B-E42C-4093-87E27C8FC500FE5D">
+					<imagemetrics>
+						<image
+							this="1A0B870E-0FE3-4CE8-9A10CCFB25C5ACEA"
+							uniqueguid="1A0B870E-0FE3-4CE8-9A10CCFB25C5ACEA"
+							componentimage="26DA902D-E461-45AB-AF3FAEC9EBD0CC88"
+							width="26"
+							height="22"/>
+					</imagemetrics>
+				</active>
+				<inactive
+					this="4CB604F9-7F61-481E-A9C1C89A0572C210"
+					name="inactive"
+					width="27"
+					height="22"
+					tooltip="Trollkind contribution is stopped during &quot;Call the Monstrous Horde&quot;."
+					tooltiplabel="wh3_dlc27_nor_troll_expansion_unit_resource_warning_tooltip"
+					interactive="true"
+					disabled="true"
+					shader_name="set_greyscale_t0"
+					shadervars="0.80,1.00,0.00,0.00"
+					uniqueguid="4CB604F9-7F61-481E-A9C1C89A0572C210">
+					<imagemetrics>
+						<image
+							this="B343F23D-9363-4C1C-A6C06AE05F10093D"
+							uniqueguid="B343F23D-9363-4C1C-A6C06AE05F10093D"
+							componentimage="26DA902D-E461-45AB-AF3FAEC9EBD0CC88"
+							width="26"
+							height="22"/>
+					</imagemetrics>
+				</inactive>
+			</states>
+		</kinfolk_tag>
 		<list_cat_holder
 			this="498FCC5E-5614-45EE-B2DF54BEF79B8092"
 			id="list_cat_holder"
@@ -3703,6 +3845,10 @@
 					this="667C5B73-9A85-405F-8EDE74BCE7466445"
 					uniqueguid="667C5B73-9A85-405F-8EDE74BCE7466445"
 					imagepath="ui/skins/default/unit_card_semicircle_chieftain.png"/>
+				<component_image
+					this="D3A6935C-07F0-4235-B7DC7E26F0C6D11D"
+					uniqueguid="D3A6935C-07F0-4235-B7DC7E26F0C6D11D"
+					imagepath="ui/skins/default/dlc27_sla_decadence/unit_card_semicircle_daemonic_attraction.png"/>
 			</componentimages>
 			<states>
 				<blessed_spawning
@@ -3756,6 +3902,25 @@
 							dockpoint="Bottom Center"/>
 					</imagemetrics>
 				</crafted>
+				<dechala_daemonic_attraction
+					this="AB0D6898-DA65-435F-9BC406C95FD636B5"
+					name="dechala_daemonic_attraction"
+					width="48"
+					height="36"
+					uniqueguid="AB0D6898-DA65-435F-9BC406C95FD636B5">
+					<imagemetrics>
+						<image
+							this="89BBE3A8-DBBD-4F43-8098982C2B5E0D4E"
+							uniqueguid="89BBE3A8-DBBD-4F43-8098982C2B5E0D4E"
+							componentimage="D3A6935C-07F0-4235-B7DC7E26F0C6D11D"
+							offset="-3.00,1.00"
+							width="55"
+							height="35"
+							dockpoint="Bottom Center"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</dechala_daemonic_attraction>
 				<default
 					this="8DEC8306-F935-4BFF-9347D4284B6D50D1"
 					name="default"

@@ -55,3 +55,4 @@ end;
 
 -- Ensure that these narrative events are started for any player-controlled faction matching the culture
 narrative.add_loader_for_culture("wh2_main_hef_high_elves", start_high_elves_narrative_events);
+narrative.add_exception_faction("wh3_dlc27_hef_aislinn");

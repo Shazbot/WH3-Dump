@@ -91,6 +91,9 @@
 					<li><a href="#class:campaign_mission">Campaign Mission</a><img alt="Loaded in Campaign" style="float:right; margin-right:1em;" src="../images/loaded_in_campaign.png" height="10" width="10" /></li>
 					<ul>
 					</ul>
+					<li><a href="#class:campaign_mission_list">Campaign Mission List</a><img alt="Loaded in Campaign" style="float:right; margin-right:1em;" src="../images/loaded_in_campaign.png" height="10" width="10" /></li>
+					<ul>
+					</ul>
 					<li><a href="#class:campaign_payload_builder">Campaign Payload Builder</a><img alt="Loaded in Campaign" style="float:right; margin-right:1em;" src="../images/loaded_in_campaign.png" height="10" width="10" /></li>
 					<ul>
 					</ul>
@@ -705,7 +708,6 @@
 						<li><a href=../scripting_doc.html#BONUS_VALUES_SCRIPT_INTERFACEunit_caste_value><code>unit_caste_value</code></a></li>
 						<li><a href=../scripting_doc.html#BONUS_VALUES_SCRIPT_INTERFACEmain_unit_value><code>main_unit_value</code></a></li>
 						<li><a href=../scripting_doc.html#BONUS_VALUES_SCRIPT_INTERFACEbattlefield_deployable_siege_item_value><code>battlefield_deployable_siege_item_value</code></a></li>
-						<li><a href=../scripting_doc.html#BONUS_VALUES_SCRIPT_INTERFACEtechnology_category_value><code>technology_category_value</code></a></li>
 						<li><a href=../scripting_doc.html#BONUS_VALUES_SCRIPT_INTERFACEtechnology_value><code>technology_value</code></a></li>
 						<li><a href=../scripting_doc.html#BONUS_VALUES_SCRIPT_INTERFACEaction_results_additional_outcome_value><code>action_results_additional_outcome_value</code></a></li>
 						<li><a href=../scripting_doc.html#BONUS_VALUES_SCRIPT_INTERFACEprovince_initiative_effect_value><code>province_initiative_effect_value</code></a></li>
@@ -833,7 +835,7 @@
 
 
 				<a name="class:campaign_mission"><h1 class="content_header">Campaign Mission</h1></a>
-				<p>A campaign mission script interface represents an active mission in campaign. Not currently used.</p>
+				<p>A campaign mission script interface represents an active mission in campaign.</p>
 				<div class="model_hierarchy_list">
 					<a href=../scripting_doc.html#CAMPAIGN_MISSION_SCRIPT_INTERFACE><code>CAMPAIGN_MISSION_SCRIPT_INTERFACE</code></a>
 					<ul class="model_hierarchy_list">
@@ -842,6 +844,19 @@
 						<li><a href=../scripting_doc.html#CAMPAIGN_MISSION_SCRIPT_INTERFACEfaction><code>faction</code></a></li>
 						<li><a href=../scripting_doc.html#CAMPAIGN_MISSION_SCRIPT_INTERFACEmission_record_key><code>mission_record_key</code></a></li>
 						<li><a href=../scripting_doc.html#CAMPAIGN_MISSION_SCRIPT_INTERFACEmission_issuer_record_key><code>mission_issuer_record_key</code></a></li>
+					</ul>
+				</div>
+				<hr class="superblock_divider" />
+
+
+				<a name="class:campaign_mission_list"><h1 class="content_header">Campaign Mission List</h1></a>
+				<p>A list of <code><a href="#class:campaign_mission">campaign_mission</a></code> script interfaces, provided by a <code><a href="#class:faction">faction</a></code> script interface.</p>
+				<div class="model_hierarchy_list">
+					<a href=../scripting_doc.html#CAMPAIGN_MISSION_LIST_SCRIPT_INTERFACE><code>CAMPAIGN_MISSION_LIST_SCRIPT_INTERFACE</code></a>
+					<ul class="model_hierarchy_list">
+						<li><a href=../scripting_doc.html#CAMPAIGN_MISSION_LIST_SCRIPT_INTERFACEnum_items><code>num_items</code></a></li>
+						<li><a href=../scripting_doc.html#CAMPAIGN_MISSION_LIST_SCRIPT_INTERFACEitem_at><code>item_at</code></a></li>
+						<li><a href=../scripting_doc.html#CAMPAIGN_MISSION_LIST_SCRIPT_INTERFACEis_empty><code>is_empty</code></a></li>
 					</ul>
 				</div>
 				<hr class="superblock_divider" />
@@ -870,6 +885,7 @@
 						<li><a href=../scripting_doc.html#CAMPAIGN_PAYLOAD_BUILDER_SCRIPT_INTERFACEcharacter_trait_change><code>character_trait_change</code></a></li>
 						<li><a href=../scripting_doc.html#CAMPAIGN_PAYLOAD_BUILDER_SCRIPT_INTERFACEcomponents_from_record><code>components_from_record</code></a></li>
 						<li><a href=../scripting_doc.html#CAMPAIGN_PAYLOAD_BUILDER_SCRIPT_INTERFACEdamage_army><code>damage_army</code></a></li>
+						<li><a href=../scripting_doc.html#CAMPAIGN_PAYLOAD_BUILDER_SCRIPT_INTERFACEdamage_army_non_character_units><code>damage_army_non_character_units</code></a></li>
 						<li><a href=../scripting_doc.html#CAMPAIGN_PAYLOAD_BUILDER_SCRIPT_INTERFACEdamage_buildings><code>damage_buildings</code></a></li>
 						<li><a href=../scripting_doc.html#CAMPAIGN_PAYLOAD_BUILDER_SCRIPT_INTERFACEdamage_buildings_home_region><code>damage_buildings_home_region</code></a></li>
 						<li><a href=../scripting_doc.html#CAMPAIGN_PAYLOAD_BUILDER_SCRIPT_INTERFACEdamage_character><code>damage_character</code></a></li>
@@ -1112,8 +1128,8 @@
 						<li><a href=../scripting_doc.html#INITIATIVE_SCRIPT_INTERFACEis_null_interface><code>is_null_interface</code></a></li>
 						<li><a href=../scripting_doc.html#INITIATIVE_SCRIPT_INTERFACErecord_key><code>record_key</code></a></li>
 						<li><a href=../scripting_doc.html#INITIATIVE_SCRIPT_INTERFACEduration><code>duration</code></a></li>
-						<li><a href=../scripting_doc.html#INITIATIVE_SCRIPT_INTERFACEhas_infinite_duration><code>has_infinite_duration</code></a></li>
 						<li><a href=../scripting_doc.html#INITIATIVE_SCRIPT_INTERFACEis_script_locked><code>is_script_locked</code></a></li>
+						<li><a href=../scripting_doc.html#INITIATIVE_SCRIPT_INTERFACEis_active><code>is_active</code></a></li>
 					</ul>
 				</div>
 				<hr class="superblock_divider" />
@@ -1204,6 +1220,7 @@
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEhas_garrison_residence><code>has_garrison_residence</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEhas_region><code>has_region</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEhas_military_force><code>has_military_force</code></a></li>
+						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEhas_transported_military_force><code>has_transported_military_force</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEmodel><code>model</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEgarrison_residence><code>garrison_residence</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEfaction><code>faction</code></a></li>
@@ -1211,6 +1228,7 @@
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEsea_region><code>sea_region</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEregion_data><code>region_data</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEmilitary_force><code>military_force</code></a></li>
+						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEtransported_military_force><code>transported_military_force</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEforename><code>forename</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEsurname><code>surname</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEget_forename><code>get_forename</code></a></li>
@@ -1231,6 +1249,7 @@
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEall_traits><code>all_traits</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEtrait_points><code>trait_points</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEhas_ancillary><code>has_ancillary</code></a></li>
+						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEhas_ancillary_set><code>has_ancillary_set</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEbattles_fought><code>battles_fought</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEaction_points_remaining_percent><code>action_points_remaining_percent</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEaction_points_per_turn><code>action_points_per_turn</code></a></li>
@@ -1274,6 +1293,7 @@
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEhas_skill><code>has_skill</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEbackground_skill><code>background_skill</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEis_hidden><code>is_hidden</code></a></li>
+						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEis_hidden_from_faction_in_garrison><code>is_hidden_from_faction_in_garrison</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEis_deployed><code>is_deployed</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEhas_recruited_mercenaries><code>has_recruited_mercenaries</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACErouted_in_battle><code>routed_in_battle</code></a></li>
@@ -1304,6 +1324,10 @@
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEbonus_values><code>bonus_values</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEis_loaned><code>is_loaned</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEtry_get_agent_plague_components><code>try_get_agent_plague_components</code></a></li>
+						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEcompute_convalesence_time><code>compute_convalesence_time</code></a></li>
+						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEconvalesence_cause><code>convalesence_cause</code></a></li>
+						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEdeath_type><code>death_type</code></a></li>
+						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEis_alive><code>is_alive</code></a></li>
 					</ul>
 				</div>
 				<hr class="superblock_divider" />
@@ -1578,6 +1602,7 @@
 						<li><a href=../scripting_doc.html#FACTION_RITUALS_SCRIPT_INTERFACEis_null_interface><code>is_null_interface</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_RITUALS_SCRIPT_INTERFACEactive_rituals><code>active_rituals</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_RITUALS_SCRIPT_INTERFACEritual_status><code>ritual_status</code></a></li>
+						<li><a href=../scripting_doc.html#FACTION_RITUALS_SCRIPT_INTERFACEritual_category_cooldown><code>ritual_category_cooldown</code></a></li>
 					</ul>
 				</div>
 				<hr class="superblock_divider" />
@@ -1590,8 +1615,10 @@
 					<ul class="model_hierarchy_list">
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEis_null_interface><code>is_null_interface</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEregion_list><code>region_list</code></a></li>
+						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEnum_regions><code>num_regions</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEcharacter_list><code>character_list</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEmilitary_force_list><code>military_force_list</code></a></li>
+						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEtransported_military_force_list><code>transported_military_force_list</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEmodel><code>model</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEis_factions_turn><code>is_factions_turn</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEis_human><code>is_human</code></a></li>
@@ -1605,7 +1632,9 @@
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEstarted_war_this_turn><code>started_war_this_turn</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEended_war_this_turn><code>ended_war_this_turn</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEancillary_exists><code>ancillary_exists</code></a></li>
+						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEnum_ancillaries_owned><code>num_ancillaries_owned</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEnum_allies><code>num_allies</code></a></li>
+						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEis_known_faction><code>is_known_faction</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEat_war><code>at_war</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEallied_with><code>allied_with</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEnon_aggression_pact_with><code>non_aggression_pact_with</code></a></li>
@@ -1669,6 +1698,8 @@
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEget_food_factor_multiplier><code>get_food_factor_multiplier</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEunique_agents><code>unique_agents</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEhas_effect_bundle><code>has_effect_bundle</code></a></li>
+						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEget_effect_bundle><code>get_effect_bundle</code></a></li>
+						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEhas_resource_effect_bundle><code>has_resource_effect_bundle</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEhas_rituals><code>has_rituals</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACErituals><code>rituals</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEhas_faction_slaves><code>has_faction_slaves</code></a></li>
@@ -1710,6 +1741,11 @@
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEunits_recruited_in_set><code>units_recruited_in_set</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEmercenary_pool><code>mercenary_pool</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEplagues><code>plagues</code></a></li>
+						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEactive_missions><code>active_missions</code></a></li>
+						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEfaction_potential_type><code>faction_potential_type</code></a></li>
+						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEfaction_potential_value><code>faction_potential_value</code></a></li>
+						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEtrending_diplomatic_attitude_towards><code>trending_diplomatic_attitude_towards</code></a></li>
+						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEinfluence><code>influence</code></a></li>
 					</ul>
 				</div>
 				<hr class="superblock_divider" />
@@ -1739,6 +1775,7 @@
 						<li><a href=../scripting_doc.html#FAMILY_MEMBER_SCRIPT_INTERFACEcharacter_details><code>character_details</code></a></li>
 						<li><a href=../scripting_doc.html#FAMILY_MEMBER_SCRIPT_INTERFACEarmory><code>armory</code></a></li>
 						<li><a href=../scripting_doc.html#FAMILY_MEMBER_SCRIPT_INTERFACEcharacter><code>character</code></a></li>
+						<li><a href=../scripting_doc.html#FAMILY_MEMBER_SCRIPT_INTERFACEprevious_faction><code>previous_faction</code></a></li>
 					</ul>
 				</div>
 				<hr class="superblock_divider" />
@@ -1821,6 +1858,8 @@
 						<li><a href=../scripting_doc.html#GARRISON_RESIDENCE_SCRIPT_INTERFACEfaction><code>faction</code></a></li>
 						<li><a href=../scripting_doc.html#GARRISON_RESIDENCE_SCRIPT_INTERFACEarmy><code>army</code></a></li>
 						<li><a href=../scripting_doc.html#GARRISON_RESIDENCE_SCRIPT_INTERFACEnavy><code>navy</code></a></li>
+						<li><a href=../scripting_doc.html#GARRISON_RESIDENCE_SCRIPT_INTERFACEarmed_citizenry_army><code>armed_citizenry_army</code></a></li>
+						<li><a href=../scripting_doc.html#GARRISON_RESIDENCE_SCRIPT_INTERFACEarmed_citizenry_navy><code>armed_citizenry_navy</code></a></li>
 						<li><a href=../scripting_doc.html#GARRISON_RESIDENCE_SCRIPT_INTERFACEregion><code>region</code></a></li>
 						<li><a href=../scripting_doc.html#GARRISON_RESIDENCE_SCRIPT_INTERFACEbuildings><code>buildings</code></a></li>
 						<li><a href=../scripting_doc.html#GARRISON_RESIDENCE_SCRIPT_INTERFACEunit_count><code>unit_count</code></a></li>
@@ -1889,6 +1928,11 @@
 						<li><a href=../scripting_doc.html#MILITARY_FORCE_SCRIPT_INTERFACEgeneral_character><code>general_character</code></a></li>
 						<li><a href=../scripting_doc.html#MILITARY_FORCE_SCRIPT_INTERFACEfaction><code>faction</code></a></li>
 						<li><a href=../scripting_doc.html#MILITARY_FORCE_SCRIPT_INTERFACEhas_garrison_residence><code>has_garrison_residence</code></a></li>
+						<li><a href=../scripting_doc.html#MILITARY_FORCE_SCRIPT_INTERFACEhas_transported_army><code>has_transported_army</code></a></li>
+						<li><a href=../scripting_doc.html#MILITARY_FORCE_SCRIPT_INTERFACEis_transported_army><code>is_transported_army</code></a></li>
+						<li><a href=../scripting_doc.html#MILITARY_FORCE_SCRIPT_INTERFACEget_transported_army_key><code>get_transported_army_key</code></a></li>
+						<li><a href=../scripting_doc.html#MILITARY_FORCE_SCRIPT_INTERFACEhas_limited_lifespan><code>has_limited_lifespan</code></a></li>
+						<li><a href=../scripting_doc.html#MILITARY_FORCE_SCRIPT_INTERFACEremaining_lifespan><code>remaining_lifespan</code></a></li>
 						<li><a href=../scripting_doc.html#MILITARY_FORCE_SCRIPT_INTERFACEgarrison_residence><code>garrison_residence</code></a></li>
 						<li><a href=../scripting_doc.html#MILITARY_FORCE_SCRIPT_INTERFACEhorde_details><code>horde_details</code></a></li>
 						<li><a href=../scripting_doc.html#MILITARY_FORCE_SCRIPT_INTERFACEcontains_mercenaries><code>contains_mercenaries</code></a></li>
@@ -1917,6 +1961,7 @@
 						<li><a href=../scripting_doc.html#MILITARY_FORCE_SCRIPT_INTERFACEmercenary_pool><code>mercenary_pool</code></a></li>
 						<li><a href=../scripting_doc.html#MILITARY_FORCE_SCRIPT_INTERFACEget_plague_if_infected><code>get_plague_if_infected</code></a></li>
 						<li><a href=../scripting_doc.html#MILITARY_FORCE_SCRIPT_INTERFACEtry_get_military_force_plague><code>try_get_military_force_plague</code></a></li>
+						<li><a href=../scripting_doc.html#MILITARY_FORCE_SCRIPT_INTERFACEget_nearest_enemy_military_force><code>get_nearest_enemy_military_force</code></a></li>
 					</ul>
 				</div>
 				<hr class="superblock_divider" />
@@ -2190,6 +2235,7 @@
 						<li><a href=../scripting_doc.html#PENDING_BATTLE_SCRIPT_INTERFACEdisplay_position><code>display_position</code></a></li>
 						<li><a href=../scripting_doc.html#PENDING_BATTLE_SCRIPT_INTERFACEis_auto_resolved><code>is_auto_resolved</code></a></li>
 						<li><a href=../scripting_doc.html#PENDING_BATTLE_SCRIPT_INTERFACEended_with_withdraw><code>ended_with_withdraw</code></a></li>
+						<li><a href=../scripting_doc.html#PENDING_BATTLE_SCRIPT_INTERFACEquest_mission_key><code>quest_mission_key</code></a></li>
 					</ul>
 				</div>
 				<hr class="superblock_divider" />
@@ -2319,6 +2365,7 @@
 						<li><a href=../scripting_doc.html#POOLED_RESOURCE_SCRIPT_INTERFACEpercentage_of_capacity><code>percentage_of_capacity</code></a></li>
 						<li><a href=../scripting_doc.html#POOLED_RESOURCE_SCRIPT_INTERFACEminimum_value><code>minimum_value</code></a></li>
 						<li><a href=../scripting_doc.html#POOLED_RESOURCE_SCRIPT_INTERFACEmaximum_value><code>maximum_value</code></a></li>
+						<li><a href=../scripting_doc.html#POOLED_RESOURCE_SCRIPT_INTERFACEinitial_maximum><code>initial_maximum</code></a></li>
 						<li><a href=../scripting_doc.html#POOLED_RESOURCE_SCRIPT_INTERFACEactive_effect><code>active_effect</code></a></li>
 						<li><a href=../scripting_doc.html#POOLED_RESOURCE_SCRIPT_INTERFACEnumber_of_effect_types><code>number_of_effect_types</code></a></li>
 						<li><a href=../scripting_doc.html#POOLED_RESOURCE_SCRIPT_INTERFACEfactors><code>factors</code></a></li>
@@ -2487,6 +2534,7 @@
 						<li><a href=../scripting_doc.html#REGION_SCRIPT_INTERFACEis_contained_in_region_group><code>is_contained_in_region_group</code></a></li>
 						<li><a href=../scripting_doc.html#REGION_SCRIPT_INTERFACEget_plague_if_infected><code>get_plague_if_infected</code></a></li>
 						<li><a href=../scripting_doc.html#REGION_SCRIPT_INTERFACEcharacters_in_region><code>characters_in_region</code></a></li>
+						<li><a href=../scripting_doc.html#REGION_SCRIPT_INTERFACEdevelopment_points><code>development_points</code></a></li>
 					</ul>
 				</div>
 				<hr class="superblock_divider" />
@@ -2875,6 +2923,8 @@
 						<li><a href=../scripting_doc.html#SETTLEMENT_SCRIPT_INTERFACEslot_list><code>slot_list</code></a></li>
 						<li><a href=../scripting_doc.html#SETTLEMENT_SCRIPT_INTERFACEis_port><code>is_port</code></a></li>
 						<li><a href=../scripting_doc.html#SETTLEMENT_SCRIPT_INTERFACEget_climate><code>get_climate</code></a></li>
+						<li><a href=../scripting_doc.html#SETTLEMENT_SCRIPT_INTERFACEis_climate_overriden><code>is_climate_overriden</code></a></li>
+						<li><a href=../scripting_doc.html#SETTLEMENT_SCRIPT_INTERFACEget_original_climate><code>get_original_climate</code></a></li>
 						<li><a href=../scripting_doc.html#SETTLEMENT_SCRIPT_INTERFACEdisplay_primary_building_chain><code>display_primary_building_chain</code></a></li>
 						<li><a href=../scripting_doc.html#SETTLEMENT_SCRIPT_INTERFACEprimary_building_chain><code>primary_building_chain</code></a></li>
 						<li><a href=../scripting_doc.html#SETTLEMENT_SCRIPT_INTERFACEprimary_slot><code>primary_slot</code></a></li>
@@ -2883,6 +2933,7 @@
 						<li><a href=../scripting_doc.html#SETTLEMENT_SCRIPT_INTERFACEfirst_empty_active_secondary_slot><code>first_empty_active_secondary_slot</code></a></li>
 						<li><a href=../scripting_doc.html#SETTLEMENT_SCRIPT_INTERFACEis_walled_settlement><code>is_walled_settlement</code></a></li>
 						<li><a href=../scripting_doc.html#SETTLEMENT_SCRIPT_INTERFACEnumber_of_wall_breaches><code>number_of_wall_breaches</code></a></li>
+						<li><a href=../scripting_doc.html#SETTLEMENT_SCRIPT_INTERFACEsettlement_type_key><code>settlement_type_key</code></a></li>
 					</ul>
 				</div>
 				<hr class="superblock_divider" />
@@ -3140,6 +3191,12 @@
 						<li><a href=../scripting_doc.html#UNIT_SCRIPT_INTERFACEget_unit_purchasable_effects><code>get_unit_purchasable_effects</code></a></li>
 						<li><a href=../scripting_doc.html#UNIT_SCRIPT_INTERFACEget_unit_purchased_effects><code>get_unit_purchased_effects</code></a></li>
 						<li><a href=../scripting_doc.html#UNIT_SCRIPT_INTERFACEcan_unpurchase_effect><code>can_unpurchase_effect</code></a></li>
+						<li><a href=../scripting_doc.html#UNIT_SCRIPT_INTERFACErecruitment_source_key><code>recruitment_source_key</code></a></li>
+						<li><a href=../scripting_doc.html#UNIT_SCRIPT_INTERFACEorigin_faction><code>origin_faction</code></a></li>
+						<li><a href=../scripting_doc.html#UNIT_SCRIPT_INTERFACEorigin_character><code>origin_character</code></a></li>
+						<li><a href=../scripting_doc.html#UNIT_SCRIPT_INTERFACEis_unit_in_set><code>is_unit_in_set</code></a></li>
+						<li><a href=../scripting_doc.html#UNIT_SCRIPT_INTERFACEunit_record_missile_cp><code>unit_record_missile_cp</code></a></li>
+						<li><a href=../scripting_doc.html#UNIT_SCRIPT_INTERFACEunit_record_melee_cp><code>unit_record_melee_cp</code></a></li>
 					</ul>
 				</div>
 				<hr class="superblock_divider" />
@@ -3204,6 +3261,7 @@
 						<li><a href=../scripting_doc.html#WORLD_SCRIPT_INTERFACEcooking_system><code>cooking_system</code></a></li>
 						<li><a href=../scripting_doc.html#WORLD_SCRIPT_INTERFACEfaction_character_tagging_system><code>faction_character_tagging_system</code></a></li>
 						<li><a href=../scripting_doc.html#WORLD_SCRIPT_INTERFACEcaravans_system><code>caravans_system</code></a></li>
+						<li><a href=../scripting_doc.html#WORLD_SCRIPT_INTERFACEwar_contracts_system><code>war_contracts_system</code></a></li>
 						<li><a href=../scripting_doc.html#WORLD_SCRIPT_INTERFACElookup_route_network><code>lookup_route_network</code></a></li>
 						<li><a href=../scripting_doc.html#WORLD_SCRIPT_INTERFACEwinds_of_magic_compass><code>winds_of_magic_compass</code></a></li>
 						<li><a href=../scripting_doc.html#WORLD_SCRIPT_INTERFACEcharacters_owning_ancillary><code>characters_owning_ancillary</code></a></li>
@@ -3211,6 +3269,7 @@
 						<li><a href=../scripting_doc.html#WORLD_SCRIPT_INTERFACEfaction_strength_rank><code>faction_strength_rank</code></a></li>
 						<li><a href=../scripting_doc.html#WORLD_SCRIPT_INTERFACElookup_factions_from_faction_set><code>lookup_factions_from_faction_set</code></a></li>
 						<li><a href=../scripting_doc.html#WORLD_SCRIPT_INTERFACElookup_regions_from_region_group><code>lookup_regions_from_region_group</code></a></li>
+						<li><a href=../scripting_doc.html#WORLD_SCRIPT_INTERFACEfaction_settlement_cap_get><code>faction_settlement_cap_get</code></a></li>
 					</ul>
 				</div>
 
@@ -3218,7 +3277,7 @@
 
 		</div>
 
-		<div id="about">Last updated 7/9/2024 11:45:04 AM</div>
+		<div id="about">Last updated 11/18/2025 9:25:24 AM</div>
 
 	</div>
 

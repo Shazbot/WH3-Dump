@@ -31,7 +31,16 @@ local faction_to_cult = {
 	["wh3_dlc25_nur_tamurkhan"] = {
 		cult = "wh3_main_slot_set_nur_cult",
 		bonus_value = "nurgle_cult_adjacent_region_expansion_chance"
+	},
+	["wh3_dlc27_sla_the_tormentors"] = {
+		cult = "wh3_dlc27_slot_set_sla_cult_dechala",
+		bonus_value = "slaanesh_cult_adjacent_region_expansion_chance"
+	},
+	["wh3_dlc27_sla_masque_of_slaanesh"] = {
+		cult = "wh3_main_slot_set_sla_cult",
+		bonus_value = "slaanesh_cult_adjacent_region_expansion_chance"
 	}
+
 };
 local buildings_that_destroy_cult = {
 	["wh3_main_kho_cult_4"] = true,
@@ -45,7 +54,10 @@ local buildings_that_destroy_cult = {
 	["wh3_main_sla_cult_teleport"] = true,
 	["wh3_main_tze_cult_4"] = true,
 	["wh3_main_tze_cult_special"] = true,
-	["wh3_main_tze_cult_teleport"] = true
+	["wh3_main_tze_cult_teleport"] = true,
+	["wh3_dlc27_sla_dechala_cult_teleport"] = true,
+	["wh3_dlc27_sla_cult_special_masque"] = true,
+	["wh3_dlc27_sla_dechala_cult_special"] = true
 };
 
 function setup_daemon_cults()

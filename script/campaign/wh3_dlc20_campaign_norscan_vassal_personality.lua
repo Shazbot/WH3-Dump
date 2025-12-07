@@ -12,11 +12,17 @@ norscan_homeland = {
 norscan_homeland.personalities = {
 	wh3_main_chaos = {
 		vassal_personality_key = "wh3_norsca_vassal",
-		base_personality_key = "wh3_norsca_minor",
+		base_personality_key_default = "wh3_norsca_minor",
+		base_personality_key = {}
 	},
 	wh3_main_combi = {
 		vassal_personality_key = "wh3_combi_norsca_vassal",
-		base_personality_key = "wh3_combi_norsca_minor",
+		base_personality_key_default = "wh3_combi_norsca_minor",
+		base_personality_key = {
+			["wh3_dlc27_nor_sayl"] = "wh3_combi_norsca_dolgan",
+			["wh_dlc08_nor_wintertooth"] = "wh3_combi_norsca_throgg",
+			["wh_dlc08_nor_norsca"] = "wh3_combi_norsca_wulfrik",
+		}
 	},
 }
 
@@ -75,6 +81,10 @@ function norscan_homeland:change_personality(faction_name, is_vassal)
 	if is_vassal then
 		cm:force_change_cai_faction_personality(faction_name, self.personalities[campaign_name].vassal_personality_key)
 	else
-		cm:force_change_cai_faction_personality(faction_name, self.personalities[campaign_name].base_personality_key)
+		local personality_key = self.personalities[campaign_name].base_personality_key[faction_name]
+		if not personality_key or personality_key == "" then
+			personality_key = self.personalities[campaign_name].base_personality_key_default
+		end
+		cm:force_change_cai_faction_personality(faction_name, personality_key)
 	end
 end

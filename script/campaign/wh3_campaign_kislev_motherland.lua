@@ -348,22 +348,6 @@ function setup_kislev_motherland()
 		end,
 		true
 	);
-
-	core:add_listener(
-		"CharacterFinishedMovingEventAtamanAP",
-		"CharacterFinishedMovingEvent",
-		function(context)
-			local character = context:character();
-			return character:has_region() == true and character:is_wounded() == false and character:character_subtype("wh3_main_ksl_ataman");
-		end,
-		function(context)
-			-- We refresh Ataman AP because there shouldn't ever be a time they can't move/attack even though they do use AP
-			local character = context:character();
-			local character_cqi = character:command_queue_index();
-			cm:replenish_action_points(cm:char_lookup_str(character_cqi));
-		end,
-		true
-	);
 end
 
 function calculate_kislev_support_state(faction)
@@ -448,7 +432,7 @@ function apply_kislev_support_effect(faction, effect, level)
 end
 
 function SetCourtDifferenceAllowedContext()
-	local local_faction = cm:get_local_faction(true)
+	local local_faction = cm:has_local_faction() and cm:get_local_faction(true)
 	if local_faction == false or local_faction:is_null_interface() then
 		-- no local faction means we are in an autorun
 		return

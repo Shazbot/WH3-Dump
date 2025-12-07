@@ -3552,7 +3552,10 @@ end
 --- @p @string behaviour, Behaviour to activate or deactivate. See documentation on @script_unit:change_behaviour_active for a list of valid values.
 --- @p [opt=true] @boolean activate, Should activate behaviour.
 --- @p [opt=false] @boolean release, Release script control afterwards.
-function generated_army:change_behaviour_active_on_message(message, behaviour, activate, should_release)
+--- @p [opt=true] @boolean should play vo, Should play the voice-over for this behaviour change.
+function generated_army:change_behaviour_active_on_message(message, behaviour, activate, should_release, should_play_vo)
+	local should_play_vo = (should_play_vo ~= false)
+	
 	if not is_string(message) then
 		script_error(self.id .. " ERROR: change_behaviour_active_on_message() called but supplied message [" .. tostring(message) .. "] is not a string");
 		return false;
@@ -3566,8 +3569,8 @@ function generated_army:change_behaviour_active_on_message(message, behaviour, a
 	self.sm:add_listener(
 		message,
 		function()
-			bm:out(self.id .. " responding to message " .. message .. ", setting behaviour " .. behaviour .. " for all units to " .. tostring(activate));
-			self.sunits:change_behaviour_active(behaviour, activate, should_release);
+			bm:out(self.id .. " responding to message " .. message .. ", setting behaviour " .. behaviour .. " for all units to " .. tostring(activate) .. ", should play vo is " .. tostring(should_play_vo));
+			self.sunits:change_behaviour_active(behaviour, activate, should_release, should_play_vo);
 		end
 	);
 end;
@@ -5408,7 +5411,8 @@ function generated_battle:enqueue_cutscene_elements(cutscene_intro, gc)
 			self:finish_cutscene(cutscene_intro, gc);
 			
 		end, 
-		gc:iterate_timer()
+		gc:iterate_timer(),
+		true
 	);
 	
 	

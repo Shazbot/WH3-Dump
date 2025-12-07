@@ -47,6 +47,7 @@
 							<big_names_holder this="BAC86CD1-ACD7-4C69-BD05F592FB13B0BA"/>
 							<path_to_glory_holder this="E064ED63-2D17-4BEC-838A9AB496F7E7E8"/>
 						</character_initiatives_holder>
+						<sla_eternal_dance_subpanel this="455DAC25-48EC-4DF5-BA675233E6F4D627"/>
 						<stats_effects_holder this="58F0006A-43C6-4364-951D79F29C74598C">
 							<unit_information_listview this="BF8A02FD-75A3-46A7-AD295B324A87E5AC">
 								<list_clip this="6180B188-1D2D-4092-8774C6F560E7BCED">
@@ -218,6 +219,11 @@
 							<tx_fragments this="BF46DE3A-BA93-430D-B426A16E81E0D54A"/>
 							<tab_child this="ABE19440-C31C-4472-A85F6086C24C7321"/>
 						</fragments>
+						<eternal_dance this="685B0AF6-CCC7-404B-9283EDB513D1FAB0">
+							<button_flame this="586C6D37-8890-4C3D-BBE8AC6A028FB0A4"/>
+							<tx_eternal_dance this="41BADC2C-157D-4A82-B7575E611376E0ED"/>
+							<tab_child this="FC1D6AA5-6CB3-434D-8854A4DB234E2B7A"/>
+						</eternal_dance>
 						<character_initiatives this="145DFCDC-1FB6-4E31-B1FC3B8F7FBE4216">
 							<button_flame this="5CB0A795-A1DA-4D38-98FFAD80E1F29407"/>
 							<tx_character_initiatives this="9E241B6A-2938-4E45-A541268F5C628E6A"/>
@@ -3652,6 +3658,51 @@
 			</override_images>
 		</button_flame>
 		<button_flame
+			this="586C6D37-8890-4C3D-BBE8AC6A028FB0A4"
+			id="button_flame"
+			part_of_template="true"
+			uniqueguid_in_template="27CF7AD8-15DD-40B4-A83F83B081D3546F"
+			uniqueguid="586C6D37-8890-4C3D-BBE8AC6A028FB0A4"
+			dimensions="226.00,28.00"
+			dock_point="Center"
+			offset="0.00,-26.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="53F460F1-B6F6-4598-A2B09CFC56B01E73"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoStaticObject"
+					context_function_id="self.ParentContext.IsMouseOver &amp;&amp; self.ParentContext.IsDisabled == false">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+				<property
+					name="disable_override1"
+					value="position"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+			</override_images>
+		</button_flame>
+		<button_flame
 			this="5CB0A795-A1DA-4D38-98FFAD80E1F29407"
 			id="button_flame"
 			part_of_template="true"
@@ -5177,6 +5228,7 @@
 			this="CD71C4B2-14B7-4BDD-B27726EE7AF7B8D1"
 			id="character_details_subpanel"
 			offset="320.00,150.00"
+			visible="false"
 			clipchildren="true"
 			tooltipslocalised="true"
 			uniqueguid="CD71C4B2-14B7-4BDD-B27726EE7AF7B8D1"
@@ -6809,6 +6861,161 @@
 					is_text_localised="false"/>
 			</localised_texts>
 		</dy_value>
+		<eternal_dance
+			this="685B0AF6-CCC7-404B-9283EDB513D1FAB0"
+			id="eternal_dance"
+			template_id="square_large_text_tab_toggle"
+			part_of_template="true"
+			uniqueguid_in_template="11E70A54-2310-40EE-8C7304D23F0DD741"
+			uniqueguid="685B0AF6-CCC7-404B-9283EDB513D1FAB0"
+			dimensions="300.00,103.00"
+			tooltips_localised="false"
+			priority="10"
+			sound_category="UI_GBL_TMP_Square_Large_Text_Tab_Toggle">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="9EA673A7-682F-428D-B579D8FE88C809A0"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="32230B9B-E2B0-4868-B42E8E77C02AE63C"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="6B04D5E7-9F55-48DE-B32CF4975C4A0B21"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="4742EF74-8195-47ED-9D55068359BC22AA"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="9E01425C-CC2E-439C-80053EA755145905"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="02259FF1-D9B3-4704-B0FA0CD7D52C10A4"/>
+				<state_uniqueguid
+					name="selected_down"
+					uniqueguid="7AC99A7B-328E-4F06-B6D90111B0F45368"/>
+				<state_uniqueguid
+					name="selected_down_off"
+					uniqueguid="D881F014-BBE9-43A6-AFB1919C4E32FCB1"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="C0045B16-AA72-4920-A2D91DDC3213A7C6"/>
+				<state_uniqueguid
+					name="selected_inactive"
+					uniqueguid="BDC75D84-84EE-4E39-9825358ECF3E4054"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_pressed.png"
+					uniqueguid="3C86ABC4-05C0-40B5-BF64C4971C401543"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_active.png"
+					uniqueguid="6698B63D-E921-47D4-84AF9A506981AEEB"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_hover.png"
+					uniqueguid="0A4B5166-8D17-475E-82FCE766C3F72658"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_inactive.png"
+					uniqueguid="44FF8BF1-275D-4FAA-BA118D0CE23F6EA0"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_selected.png"
+					uniqueguid="C59EFC98-A667-414B-9E41F149604614C5"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_selected_hover.png"
+					uniqueguid="2B9964BA-242A-490C-AE2C7D580E4605D4"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_selected_inactive.png"
+					uniqueguid="0342C724-B082-4478-8663FE32766CAD39"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_underlay.png"
+					uniqueguid="E5743DB2-6013-48E8-839E3577FE8C6939"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_selected_underlay.png"
+					uniqueguid="38A26754-DD6F-4DBE-9AB97DB07D3E021C"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_arrow_selected_inactive.png"
+					uniqueguid="8EFBB793-2D01-463F-90C867176629A909"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_arrow_selected_pressed.png"
+					uniqueguid="EFB07127-BBE3-452C-ADCECDD5D8F209C6"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_arrow_selected.png"
+					uniqueguid="5528EE74-9102-4CE7-BF88C8F5728B3975"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_selected_pressed.png"
+					uniqueguid="A1A5A6EA-1343-4B1F-B8515620D479E7EF"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/tab_square_large_text_arrow_selected_underlay.png"
+					uniqueguid="22B86C94-21D0-4C42-9AD3733290A6D444"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="ButtonGroupButton">
+					<child_m_user_properties>
+						<property
+							name="panel"
+							value="sla_eternal_dance_subpanel"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="IsAgent() == false &amp;&amp; CanUseUiFeature(&quot;ETERNAL_DANCE&quot;)"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="ui_override"
+					value="disable_character_details_panel_skills_tab"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/tab_square_large_text_pressed.png"/>
+				<element value="ui/skins/default/tab_square_large_text_active.png"/>
+				<element value="ui/skins/default/tab_square_large_text_hover.png"/>
+				<element value="ui/skins/default/tab_square_large_text_inactive.png"/>
+				<element value="ui/skins/default/tab_square_large_text_selected.png"/>
+				<element value="ui/skins/default/tab_square_large_text_selected_hover.png"/>
+				<element value="ui/skins/default/tab_square_large_text_selected_inactive.png"/>
+				<element value="ui/skins/default/tab_square_large_text_underlay.png"/>
+				<element value="ui/skins/default/tab_square_large_text_selected_underlay.png"/>
+				<element value="ui/skins/default/tab_square_large_text_arrow_selected_inactive.png"/>
+				<element value="ui/skins/default/tab_square_large_text_arrow_selected_pressed.png"/>
+				<element value="ui/skins/default/tab_square_large_text_arrow_selected.png"/>
+				<element value="ui/skins/default/tab_square_large_text_selected_pressed.png"/>
+				<element value="ui/skins/default/tab_square_large_text_arrow_selected_underlay.png"/>
+			</override_images>
+		</eternal_dance>
 		<experience
 			this="67A01EEE-ACE9-4AC0-B8E11679C536DA78"
 			id="experience"
@@ -7103,7 +7310,7 @@
 		<formless_horror_subpanel
 			this="55FB4617-2E25-4C93-BEA3A71CE64B7797"
 			id="formless_horror_subpanel"
-			offset="10.00,150.00"
+			offset="7.00,147.00"
 			visible="false"
 			dock_offset="-3.00,-3.00"
 			priority="60"
@@ -7310,7 +7517,7 @@
 		<fragments_subpanel
 			this="03FE3382-9D69-4291-B06A787E2A0306F2"
 			id="fragments_subpanel"
-			offset="320.00,150.00"
+			offset="1610.00,150.00"
 			visible="false"
 			priority="60"
 			tooltipslocalised="true"
@@ -11582,6 +11789,39 @@
 					uniqueguid="6F43D452-1E36-4585-A87E44342BD7D960"/>
 			</states>
 		</skill_pts_holder>
+		<sla_eternal_dance_subpanel
+			this="455DAC25-48EC-4DF5-BA675233E6F4D627"
+			id="sla_eternal_dance_subpanel"
+			offset="1910.00,150.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="455DAC25-48EC-4DF5-BA675233E6F4D627"
+			isrelativeresize="true"
+			currentstate="E15E6382-8D80-452C-9538F77551AD43E9"
+			defaultstate="E15E6382-8D80-452C-9538F77551AD43E9">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ComponentCreator"
+					context_object_id="CcoCampaignCharacter">
+					<child_m_user_properties>
+						<property
+							name="create_condition"
+							value="CanUseUiFeature(&quot;ETERNAL_DANCE&quot;)"/>
+						<property
+							name="layout"
+							value="ui/campaign ui/dlc27_sla_the_eternal_dance_character_panel"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="E15E6382-8D80-452C-9538F77551AD43E9"
+					name="default"
+					width="1280"
+					height="690"
+					uniqueguid="E15E6382-8D80-452C-9538F77551AD43E9"/>
+			</states>
+		</sla_eternal_dance_subpanel>
 		<smoke
 			this="5CB8E0EF-6E10-4581-89C58C5FE25E7F76"
 			id="smoke"
@@ -11771,7 +12011,7 @@
 		<stats_effects_holder
 			this="58F0006A-43C6-4364-951D79F29C74598C"
 			id="stats_effects_holder"
-			offset="10.00,150.00"
+			offset="1600.00,150.00"
 			allowhorizontalresize="false"
 			priority="60"
 			tooltipslocalised="true"
@@ -11930,7 +12170,7 @@
 		<tabgroup
 			this="50FC064B-80A5-4935-8229C53F1FBEEB29"
 			id="TabGroup"
-			offset="-95.00,86.00"
+			offset="-244.00,86.00"
 			allowverticalresize="false"
 			docking="Top Center"
 			dock_offset="0.00,86.00"
@@ -11962,7 +12202,7 @@
 				<newstate
 					this="A8E51195-C8B7-48EE-8EF929D1C234484D"
 					name="NewState"
-					width="1790"
+					width="2088"
 					height="55"
 					uniqueguid="A8E51195-C8B7-48EE-8EF929D1C234484D">
 					<component_text
@@ -12091,6 +12331,35 @@
 					width="1210"
 					height="710"
 					uniqueguid="39BAA1C9-6ADF-4502-822A56384547C870"/>
+			</states>
+		</tab_child>
+		<tab_child
+			this="FC1D6AA5-6CB3-434D-8854A4DB234E2B7A"
+			id="tab_child"
+			offset="10.00,10.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="FC1D6AA5-6CB3-434D-8854A4DB234E2B7A"
+			currentstate="31A41ADA-6FAA-4401-81918936B95806DC"
+			defaultstate="31A41ADA-6FAA-4401-81918936B95806DC">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+				<property
+					name="dynamic_child_parent"
+					value="fragments"/>
+			</userproperties>
+			<states>
+				<newstate
+					this="31A41ADA-6FAA-4401-81918936B95806DC"
+					name="NewState"
+					width="1210"
+					height="710"
+					uniqueguid="31A41ADA-6FAA-4401-81918936B95806DC"/>
 			</states>
 		</tab_child>
 		<tab_panels
@@ -13051,6 +13320,48 @@
 				</newstate>
 			</states>
 		</tx_details>
+		<tx_eternal_dance
+			this="41BADC2C-157D-4A82-B7575E611376E0ED"
+			id="tx_eternal_dance"
+			offset="58.00,10.00"
+			docking="Top Center"
+			dock_offset="0.00,10.00"
+			component_anchor_point="0.50,0.00"
+			priority="10"
+			tooltipslocalised="true"
+			uniqueguid="41BADC2C-157D-4A82-B7575E611376E0ED"
+			currentstate="EE61F439-FEC2-49E3-AD232E9F4204C679"
+			defaultstate="EE61F439-FEC2-49E3-AD232E9F4204C679">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+				<property
+					name="dynamic_child_parent"
+					value="fragments"/>
+			</userproperties>
+			<states>
+				<newstate
+					this="EE61F439-FEC2-49E3-AD232E9F4204C679"
+					name="NewState"
+					width="184"
+					height="28"
+					uniqueguid="EE61F439-FEC2-49E3-AD232E9F4204C679">
+					<component_text
+						text="{{tr:ui_text_replacements_localised_text_wh3_dlc27_eternal_dance_panel_title}}"
+						textvalign="Center"
+						texthalign="Center"
+						textlabel="StateText_aff0cf65"
+						font_m_font_name="brand_header"
+						font_m_size="16"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_16"
+						text_shader_name="drop_shadow_t0"
+						textshadervars="0.00,1.00,2.00,0.00"/>
+				</newstate>
+			</states>
+		</tx_eternal_dance>
 		<tx_formless_horror
 			this="156FF55C-EBD5-4A9D-B04F0A4480142AEE"
 			id="tx_formless_horror"

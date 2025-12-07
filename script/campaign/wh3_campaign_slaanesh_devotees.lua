@@ -1,12 +1,21 @@
 local public_order_to_reduce_by = 50;
 
+local config = {
+	scripted_bonus_values = {
+		block_replenishment = {
+			sbv = "foreign_slot_block_settlement_garrison_replenish_nkari",
+			effect_bundle = "wh3_dlc27_bundle_no_replenishment_force",
+		}
+	}
+}
+
 function setup_slaanesh_devotees()
 	common.set_context_value("public_order_to_reduce_by", public_order_to_reduce_by);
 	
 	-- restore the value if we're loading a save file
 	local local_faction = cm:get_local_faction_name(true);
 	
-	if local_faction and cm:get_faction(local_faction):culture() == "wh3_main_sla_slaanesh" then
+	if local_faction and local_faction ~= "wh3_dlc27_sla_the_tormentors" and cm:get_faction(local_faction):culture() == "wh3_main_sla_slaanesh" then
 		local saved_devotees_to_add = cm:get_saved_value("devotees_to_add");
 		
 		if saved_devotees_to_add and saved_devotees_to_add > 0 then
@@ -21,7 +30,7 @@ function setup_slaanesh_devotees()
 		function(context)
 			local pb = context:pending_battle();
 			
-			return pb:siege_battle() and pb:has_attacker() and pb:attacker():faction():culture() == "wh3_main_sla_slaanesh";
+			return pb:siege_battle() and pb:has_attacker() and pb:attacker():faction():culture() == "wh3_main_sla_slaanesh" and pb:attacker():faction():name() ~= "wh3_dlc27_sla_the_tormentors";
 		end,
 		function(context)
 			local pb = context:pending_battle();
@@ -70,7 +79,9 @@ function setup_slaanesh_devotees()
 		"slaanesh_character_loots_settlement",
 		"CharacterLootedSettlement",
 		function(context)
-			return context:character():faction():culture() == "wh3_main_sla_slaanesh";
+			local character_faction = context:character():faction()
+
+			return character_faction:culture() == "wh3_main_sla_slaanesh" and character_faction:name() ~= "wh3_dlc27_sla_the_tormentors"
 		end,
 		function(context)
 			award_devotees_after_capture(context, false);
@@ -83,7 +94,9 @@ function setup_slaanesh_devotees()
 		"slaanesh_character_loots_settlement",
 		"CharacterSackedSettlement",
 		function(context)
-			return context:character():faction():culture() == "wh3_main_sla_slaanesh";
+			local character_faction = context:character():faction()
+
+			return character_faction:culture() == "wh3_main_sla_slaanesh" and character_faction:name() ~= "wh3_dlc27_sla_the_tormentors"
 		end,
 		function(context)
 			award_devotees_after_capture(context, true);
@@ -114,7 +127,7 @@ function setup_slaanesh_devotees()
 		"RitualCompletedEvent",
 		function(context)
 			local faction = context:performing_faction();
-			return context:ritual():ritual_key() == "wh3_main_ritual_sla_create_cults";
+			return context:ritual():ritual_key() == "wh3_main_ritual_sla_create_cults" or context:ritual():ritual_key() == "wh3_dlc27_ritual_sla_create_cults_dechala";
 		end,
 		function(context)
 			local faction = context:performing_faction();
@@ -146,12 +159,18 @@ function setup_slaanesh_devotees()
 			end;
 			
 			valid_region_list = cm:random_sort(valid_region_list);
-			local faction_cqi = faction:command_queue_index();
-			
+
 			for i = 1, math.min(3, #valid_region_list) do
-				local fs = cm:add_foreign_slot_set_to_region_for_faction(faction_cqi, valid_region_list[i], "wh3_main_slot_set_sla_cult");
+				local faction_cqi = faction:command_queue_index();
+
+				local fs = false
+				if context:ritual():ritual_key() == "wh3_dlc27_ritual_sla_create_cults_dechala" then
+					fs = cm:add_foreign_slot_set_to_region_for_faction(faction_cqi, valid_region_list[i], "wh3_dlc27_slot_set_sla_cult_dechala");
+				else
+					fs = cm:add_foreign_slot_set_to_region_for_faction(faction_cqi, valid_region_list[i], "wh3_main_slot_set_sla_cult");
+				end
 				local region = fs:region();
-				
+
 				cm:trigger_incident_with_targets(faction_cqi, "wh3_main_incident_cult_created", 0, 0, 0, 0, region:cqi(), region:settlement():cqi());
 			end;
 		end,
@@ -204,7 +223,7 @@ function setup_slaanesh_devotees()
 	for i = 1, #human_factions do
 		local current_human_faction = cm:get_faction(human_factions[i]);
 		
-		if current_human_faction:culture() == "wh3_main_sla_slaanesh" then
+		if current_human_faction:culture() == "wh3_main_sla_slaanesh" and current_human_faction:name() ~= "wh3_dlc27_sla_the_tormentors" then
 			local mf_list = current_human_faction:military_force_list();
 			
 			for j = 0, mf_list:num_items() - 1 do
@@ -224,7 +243,7 @@ function setup_slaanesh_devotees()
 		function(context)
 			local faction = context:military_force():faction();
 			
-			return faction:is_human() and faction:culture() == "wh3_main_sla_slaanesh";
+			return faction:is_human() and faction:culture() == "wh3_main_sla_slaanesh" and faction:name() ~= "wh3_dlc27_sla_the_tormentors";
 		end,
 		function(context)
 			local mf = context:military_force();
@@ -246,7 +265,7 @@ function setup_slaanesh_devotees()
 			local character = context:character();
 			local faction = character:faction();
 			
-			return faction:is_human() and faction:culture() == "wh3_main_sla_slaanesh" and cm:char_is_general_with_army(character) and character:military_force():active_stance() == "MILITARY_FORCE_ACTIVE_STANCE_TYPE_LAND_RAID";
+			return faction:is_human() and faction:culture() == "wh3_main_sla_slaanesh" and faction:name() ~= "wh3_dlc27_sla_the_tormentors" and cm:char_is_general_with_army(character) and character:military_force():active_stance() == "MILITARY_FORCE_ACTIVE_STANCE_TYPE_LAND_RAID";
 		end,
 		function(context)
 			calculate_slaanesh_raiding_devotees(context:character():military_force());
@@ -259,7 +278,8 @@ function setup_slaanesh_devotees()
 		"slaanesh_raiding_add_devotees",
 		"FactionTurnStart",
 		function(context)
-			return context:faction():culture() == "wh3_main_sla_slaanesh";
+			local faction = context:faction();
+			return faction:culture() == "wh3_main_sla_slaanesh" and faction:name() ~= "wh3_dlc27_sla_the_tormentors";
 		end,
 		function(context)
 			local faction = context:faction();
@@ -279,4 +299,110 @@ function setup_slaanesh_devotees()
 		end,
 		true
 	);
-end;
+
+	-- create cult on ritual trigger
+	core:add_listener(
+		"create_cult_in_settlement",
+		"RitualStartedEvent",
+		function(context)
+			local ritual_key = context:ritual():ritual_key()
+			local ritual_list = {
+				"wh3_main_ritual_sla_gg_2",
+				"wh3_main_ritual_sla_gg_2_upgraded"
+			}
+			
+			if table.contains(ritual_list, ritual_key) then
+				return true 
+			end
+
+			return false
+		end,
+		function(context)
+			local faction = context:performing_faction()
+			local faction_cqi = faction:command_queue_index();
+			local target_region = context:ritual_target_region()
+
+			cm:trigger_incident_with_targets(faction_cqi, "wh3_main_incident_cult_created", 0, 0, 0, 0, target_region:cqi(), target_region:settlement():cqi());
+
+		end,
+		true
+	);
+
+
+	-- Cult building effect - block garrison replenishment - N'Kari only
+	core:add_listener(
+		"block_garrison_replenish",
+		"FactionTurnStart",
+		function(context)
+			local fsm = context:faction():foreign_slot_managers()
+			return not fsm:is_empty() and context:faction():name() == "wh3_main_sla_seducers_of_slaanesh"
+		end,
+		function(context)
+			local faction = context:faction()
+			local fsm = faction:foreign_slot_managers()
+
+			for i = 0, fsm:num_items() - 1 do
+				local slot_region = fsm:item_at(i):region()
+				local region_value = cm:get_regions_bonus_value(slot_region, config.scripted_bonus_values.block_replenishment.sbv)
+
+				if region_value > 0 then
+					local garrison_residence_interface = slot_region:garrison_residence()
+					if garrison_residence_interface and garrison_residence_interface:is_null_interface() == false then
+						local garrison_mf = cm:get_armed_citizenry_from_garrison(garrison_residence_interface)
+						local effect_bundle = config.scripted_bonus_values.block_replenishment.effect_bundle
+
+						if garrison_mf and garrison_mf:is_null_interface() == false and not garrison_mf:has_effect_bundle(effect_bundle) then
+							local garrison_mf_cqi = garrison_mf:command_queue_index()
+							cm:apply_effect_bundle_to_force(effect_bundle, garrison_mf_cqi, 0)
+						end
+					end
+				end
+			end
+		end,
+		true
+	);
+
+	local function remove_block_garrison_replenish_on_loss(region)
+		local block_replenish_scripted_value = cm:get_regions_bonus_value(region, config.scripted_bonus_values.block_replenishment.sbv)
+
+		if block_replenish_scripted_value <= 0 then
+			local garrison_residence_interface = region:garrison_residence()
+			if garrison_residence_interface and garrison_residence_interface:is_null_interface() == false then
+				local garrison_mf = cm:get_armed_citizenry_from_garrison(garrison_residence_interface)
+				local effect_bundle = config.scripted_bonus_values.block_replenishment.effect_bundle
+
+				if garrison_mf and garrison_mf:is_null_interface() == false and garrison_mf:has_effect_bundle(effect_bundle) then
+					local garrison_mf_cqi = garrison_mf:command_queue_index()
+					cm:remove_effect_bundle_from_force(effect_bundle, garrison_mf_cqi)
+				end
+			end
+		end
+	end
+
+	core:add_listener(
+		"remove_block_garrison_replenish_building_loss",
+		"ForeignSlotBuildingDismantledEvent",
+		function(context)
+			return context:slot_manager():faction():name() == "wh3_main_sla_seducers_of_slaanesh"
+		end,
+		function(context)
+			local region = context:slot_manager():region()
+			remove_block_garrison_replenish_on_loss(region)
+		end,
+		true
+	);
+
+	core:add_listener(
+		"remove_block_garrison_replenish_fsm_loss",
+		"ForeignSlotManagerRemovedEvent",
+		function(context)
+			return context:owner():name() == "wh3_main_sla_seducers_of_slaanesh"
+		end,
+		function(context)
+			local region = context:region()
+			remove_block_garrison_replenish_on_loss(region)
+		end,
+		true
+	);
+	
+end

@@ -15,11 +15,11 @@ load_script_libraries();
 bm:camera():fade(true, 0);
 
 gb = generated_battle:new(
-	true,                                      		-- screen starts black
-	true,                                      		-- prevent deployment for player
-	false,                                      	-- prevent deployment for ai
+	true, -- screen starts black
+	true, -- prevent deployment for player
+	false, -- prevent deployment for ai
 	function() end_deployment_phase() end,          -- intro cutscene function
-	false                                      		-- debug mode
+	false -- debug mode
 );
 
 --preload stuttering fix
@@ -38,29 +38,29 @@ wh3_main_sfx_03 = new_sfx("play_wh3_main_qb_sla_nkari_the_sea_of_dreams_03");
 -------------------------------------------------------------------------------------------------
 function end_deployment_phase()
 	bm:out("\tend_deployment_phase() called");
-		
+
 	local cam = bm:camera();
-	
+
 	-- REMOVE ME
 	cam:fade(true, 0);
-	
+
 	-- declare cutscene
 	local cutscene_intro = cutscene:new_from_cindyscene(
-		"cutscene_intro", 																-- unique string name for cutscene
-		ga_attacker_01.sunits,															-- unitcontroller over player's army
+		"cutscene_intro", -- unique string name for cutscene
+		ga_attacker_01.sunits, -- unitcontroller over player's army
 		function() intro_cutscene_end() end,											-- what to call when cutscene is finished
-		"script/battle/quest_battles/_cutscene/managers/wss.CindySceneManager",			-- path to cindyscene
-		0,																				-- blend in time (s)
-		2																				-- blend out time (s)
+		"script/battle/quest_battles/_cutscene/managers/wss.CindySceneManager", -- path to cindyscene
+		0, -- blend in time (s)
+		2 -- blend out time (s)
 	);
-	
+
 	local player_units_hidden = false;
-	
+
 	-- set up subtitles
 	local subtitles = cutscene_intro:subtitles();
 	subtitles:set_alignment("bottom_centre");
 	subtitles:clear();
-	
+
 	-- skip callback
 	cutscene_intro:set_skippable(
 		true, 
@@ -68,16 +68,16 @@ function end_deployment_phase()
 			local cam = bm:camera();
 			cam:fade(true, 0);
 			bm:stop_cindy_playback(true);
-			
-			if player_units_hidden then
-				ga_attacker_01:set_enabled(false)
+
+		if player_units_hidden then
+			ga_attacker_01:set_enabled(false)
 			end;
 						
 			bm:callback(function() cam:fade(false, 0.5) end, 500);
 			bm:hide_subtitles();
 		end
 	);
-	
+
 
 	-- set up actions on cutscene
 	cutscene_intro:action(function() cam:fade(false, 1) end, 1000);
@@ -98,9 +98,9 @@ function end_deployment_phase()
 		end, 
 		50
 	);	
-	
+
 	-- Voiceover and Subtitles --
-	
+
 	-- You are in my way, Asur. Move aside and I may grant you a gift rarely bequeathed on my other playthings… a quick and mildly-painful death.
 	cutscene_intro:add_cinematic_trigger_listener(
 		"wh3_main_qb_sla_nkari_the_sea_of_dreams_01", 
@@ -155,9 +155,9 @@ ga_defender_01 = gb:get_army(gb:get_non_player_alliance_num(), "defender_1");
 function battle_start_teleport_units()
 	bm:out("\tbattle_start_teleport_units() called");
 
------------------------------------ Player Deployment Setup ------------------------------------
+	----------------------------------- Player Deployment Setup ------------------------------------
 
---N'Kari
+	--N'Kari
 ga_attacker_01.sunits:item(1).uc:teleport_to_location(v(6.98, -202.56), 352.94, 4.40);
 
 end;
@@ -167,8 +167,8 @@ battle_start_teleport_units();
 -------------------------------------------- ORDERS ---------------------------------------------
 -------------------------------------------------------------------------------------------------
 --Stopping units from firing until the cutscene is done
-ga_attacker_01:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true);
-ga_defender_01:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true);
+ga_attacker_01:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true, false)
+ga_defender_01:change_behaviour_active_on_message("01_intro_cutscene_end", "fire_at_will", true, true, false)
 
 -------------------------------------------------------------------------------------------------
 ------------------------------------------- OBJECTIVES ------------------------------------------

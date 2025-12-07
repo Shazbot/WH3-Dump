@@ -1,22 +1,36 @@
-key	require_foreign_slot_set_present	require_subculture_foreign_slots_present	required_subculture	own	targets_ruins	ui_info	require_war_declaration_ability	require_walls_present	require_foreign_slot_set_not_present	minimum_settlement_level	diplomacy_status	require_not_at_war	permitted_faction_set	require_foreign_slot_set_type_present	require_foreign_slot_set_type_not_present	targets_besieged	require_active_war_contract
-#ritual_region_target_criterias_tables;8;db/ritual_region_target_criterias_tables/data__																	
-ritual_target_region				False	False	region_foreign	false	Undefined		0		false				Undefined	false
-ritual_target_region_all_exclude_allies_and_self				False	False	region	false	Undefined		0	exclude_self_and_allies	false				Undefined	false
-ritual_target_region_any				Undefined	Undefined	region_any	false	Undefined		0		false				Undefined	false
-ritual_target_region_can_declare_war				False	False		true	Undefined		0		false				Undefined	false
-ritual_target_region_emp_not_war			wh_main_sc_emp_empire	Undefined	False		false	Undefined		0		true				Undefined	false
-ritual_target_region_emp_not_war_not_own			wh_main_sc_emp_empire	False	False		false	Undefined		0		true				Undefined	false
-ritual_target_region_emp_not_war_require_black_tower			wh_main_sc_emp_empire	Undefined	False		false	Undefined		0		true		BLACK_TOWER		Undefined	false
-ritual_target_region_emp_not_war_require_no_black_tower			wh_main_sc_emp_empire	Undefined	False		false	Undefined		0		true			BLACK_TOWER	Undefined	false
-ritual_target_region_enemy				False	False	region_enemy	false	Undefined		0	enemies	false				Undefined	false
-ritual_target_region_enemy_walls				False	Undefined	region_enemy_walled	false	True		0	enemies	false				Undefined	false
-ritual_target_region_including_ruins				False	Undefined		false	Undefined		0		false				Undefined	false
-ritual_target_region_lzd_silent_sanctum				Undefined	Undefined		false	Undefined	wh2_dlc17_slot_set_silent_sanctum	0		false				Undefined	false
-ritual_target_region_only_ruins				False	True		false	Undefined		0		false	all_except_skaven_culture			Undefined	false
-ritual_target_region_own				True	False	region_own	false	Undefined		0		false				Undefined	false
-ritual_target_region_own_not_under_siege				True	False	region_own	false	Undefined		0		false				False	false
-ritual_target_region_own_tier_3_major_settlement				True	False	region_own_tier_3_major	false	Undefined		3		false				Undefined	false
-ritual_target_region_skv			wh2_main_sc_skv_skaven	False	Undefined	skv_under_empire	false	Undefined		0		false				Undefined	false
-ritual_target_region_skv_under_empire		wh2_main_sc_skv_skaven		False	Undefined	skv_under_empire	false	Undefined		0		false				Undefined	false
-ritual_target_region_tyrants_demands				False	False	region_foreign	false	Undefined	wh3_dlc26_slot_set_tyrants_demands	0		false				Undefined	false
-ritual_target_region_war_contract_client				Undefined	Undefined		false	Undefined		0		false				Undefined	true
+key	require_foreign_slot_set_present	require_subculture_foreign_slots_present	required_subculture	own	targets_ruins	ui_info	require_war_declaration_ability	require_walls_present	require_foreign_slot_set_not_present	minimum_settlement_level	diplomacy_status	require_not_at_war	permitted_faction_set	require_foreign_slot_set_type_present	require_foreign_slot_set_type_not_present	targets_besieged	require_active_war_contract	required_subculture_for_other_regions_in_province	require_slot_type	is_human	context_requirement
+#ritual_region_target_criterias_tables;12;db/ritual_region_target_criterias_tables/data__																					
+ritual_target_all_regions_in_province_hef			wh2_main_sc_hef_high_elves	Undefined	Undefined		false	Undefined		0		false				Undefined	false	wh2_main_sc_hef_high_elves		Undefined	
+ritual_target_region				False	False	region_foreign	false	Undefined		0		false				Undefined	false			Undefined	
+ritual_target_region_all_exclude_allies_and_self				False	False	region	false	Undefined		0	exclude_self_and_allies	false				Undefined	false			Undefined	
+ritual_target_region_all_excluding_self_and_ruins				False	False	region_any_but_self	false	Undefined		0		false				Undefined	false			Undefined	
+ritual_target_region_all_excluding_self_and_ruins_no_lures				False	False	region	false	Undefined		0		false			COB_LURE	Undefined	false			Undefined	
+ritual_target_region_all_excluding_self_and_ruins_with_lures				Undefined	False	region	false	Undefined		0		false		COB_LURE		Undefined	false			Undefined	
+ritual_target_region_all_excluding_self_ruins_enemies_and_cults				False	False	region_neutral_ally	false	Undefined	wh3_main_slot_set_sla_cult	0		true				Undefined	false			Undefined	
+ritual_target_region_all_excluding_self_ruins_enemies_and_cults_dechala				False	False	region_neutral_ally_no_cults	false	Undefined	wh3_dlc27_slot_set_sla_cult_dechala	0		true				Undefined	false			Undefined	
+ritual_target_region_all_excluding_self_ruins_enemies_and_treacheries				False	False	region_neutral_ally	false	Undefined	wh3_dlc27_nor_trap	0		true			COB_LURE	Undefined	false			Undefined	
+ritual_target_region_any				Undefined	Undefined	region_any	false	Undefined		0		false				Undefined	false			Undefined	
+ritual_target_region_any_port				Undefined	Undefined	region_any_port	false	Undefined		0		false				Undefined	false		port	Undefined	
+ritual_target_region_can_declare_war				False	False		true	Undefined		0		false				Undefined	false			Undefined	
+ritual_target_region_chd			wh3_dlc23_sc_chd_chaos_dwarfs	False	Undefined		false	Undefined		0	exclude_self_and_allies	false				Undefined	false			Undefined	
+ritual_target_region_chs			wh_main_sc_chs_chaos	False	Undefined		false	Undefined		0	exclude_self_and_allies	false				Undefined	false			Undefined	
+ritual_target_region_emp_not_war			wh_main_sc_emp_empire	Undefined	False		false	Undefined		0		true				Undefined	false			Undefined	
+ritual_target_region_emp_not_war_not_own			wh_main_sc_emp_empire	False	False		false	Undefined		0		true				Undefined	false			Undefined	
+ritual_target_region_emp_not_war_require_black_tower			wh_main_sc_emp_empire	Undefined	False		false	Undefined		0		true		BLACK_TOWER		Undefined	false			Undefined	
+ritual_target_region_emp_not_war_require_no_black_tower			wh_main_sc_emp_empire	Undefined	False		false	Undefined		0		true			BLACK_TOWER	Undefined	false			Undefined	
+ritual_target_region_enemy				False	False	region_enemy	false	Undefined		0	enemies	false				Undefined	false			Undefined	
+ritual_target_region_enemy_walls				False	Undefined	region_enemy_walled	false	True		0	enemies	false				Undefined	false			Undefined	
+ritual_target_region_hef			wh2_main_sc_hef_high_elves	Undefined	False		false	Undefined		0		false				Undefined	false			Undefined	
+ritual_target_region_hef_not_at_war			wh2_main_sc_hef_high_elves	Undefined	False	region_hef_no_war	false	Undefined		0		true				Undefined	false			Undefined	
+ritual_target_region_hef_not_at_war_or_besieged			wh2_main_sc_hef_high_elves	Undefined	False	region_hef_no_war_or_siege	false	Undefined		0		true				False	false			Undefined	
+ritual_target_region_including_ruins				False	Undefined		false	Undefined		0		false				Undefined	false			Undefined	
+ritual_target_region_lzd_silent_sanctum				Undefined	Undefined		false	Undefined	wh2_dlc17_slot_set_silent_sanctum	0		false				Undefined	false			Undefined	
+ritual_target_region_nor			wh_dlc08_sc_nor_norsca	False	Undefined		false	Undefined		0	exclude_self_and_allies	false				Undefined	false			Undefined	
+ritual_target_region_only_ruins				False	True		false	Undefined		0		false	all_except_skaven_culture			Undefined	false			Undefined	
+ritual_target_region_own				True	False	region_own	false	Undefined		0		false				Undefined	false			Undefined	
+ritual_target_region_own_not_under_siege				True	False	region_own	false	Undefined		0		false				False	false			Undefined	
+ritual_target_region_own_tier_3_major_settlement				True	False	region_own_tier_3_major	false	Undefined		3		false				Undefined	false			Undefined	
+ritual_target_region_skv			wh2_main_sc_skv_skaven	False	Undefined	skv_under_empire	false	Undefined		0		false				Undefined	false			Undefined	
+ritual_target_region_skv_under_empire		wh2_main_sc_skv_skaven		False	Undefined	skv_under_empire	false	Undefined		0		false				Undefined	false			Undefined	
+ritual_target_region_tyrants_demands				False	False	region_foreign	false	Undefined	wh3_dlc26_slot_set_tyrants_demands	0		false				Undefined	false			Undefined	
+ritual_target_region_war_contract_client				Undefined	Undefined		false	Undefined		0		false				Undefined	true			Undefined	

@@ -51,7 +51,8 @@ ga_player_ally:defend_on_message("battle_started", -88, 40, 40);
 ga_ai_01:message_on_casualties("hurt",0.2);
 ga_ai_01:attack_on_message("battle_started");
 ga_ai_02:reinforce_on_message("hurt",1000);
-ga_ai_02:attack_on_message("hurt");
+ga_ai_02:message_on_deployed("ga_ai_02_in");
+ga_ai_02:rush_on_message("ga_ai_02_in");
 
 -- ga_ai_01:message_on_casualties("hurt",0.10);
 -- ga_ai_02:reinforce_on_message("hurt",20000);

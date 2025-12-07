@@ -208,6 +208,10 @@ function start_game_all_factions()
 	tyrants_demands:initialise()
 	fragments_of_sorcery:initialise()
 
+	-- dlc27
+	pre_battle_challenges:initialise()
+	nor_pillaging:initialise()
+
 	-- General
 	character_unlocking:setup_legendary_hero_unlocking();
 	campaign_ai_script:setup_listeners();

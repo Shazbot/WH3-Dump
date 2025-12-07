@@ -153,25 +153,26 @@ function imperial_authority:get_authority_value(faction_key)
 		end
 	end
 
-	if correct_culture_count == 0 or #self.empire_regions == 0 then
-		return 0
-	else
-		local authority_value = math.floor((correct_culture_count / #self.empire_regions) * 100)
-		local authority_level
-		out.design("-------------------------------------------------")
-		out.design("Faction: "..faction_key)
-		out.design(settlement_culture.." Region Count: "..correct_culture_count)
-		out.design("Region Max: "..#self.empire_regions)
-		out.design("Authority percentage: "..authority_value)
-
-		for level, range in ipairs(self.ranges) do
-			if authority_value >= range.min and authority_value <= range.max then
-				authority_level = level
-			end
-		end
-
-		return authority_value, authority_level
+	local authority_value = 0
+	if #self.empire_regions > 0 then
+		authority_value = math.floor((correct_culture_count / #self.empire_regions) * 100)
 	end
+
+	out.design("-------------------------------------------------")
+	out.design("Faction: "..faction_key)
+	out.design(settlement_culture.." Region Count: "..correct_culture_count)
+	out.design("Region Max: "..#self.empire_regions)
+	out.design("Authority percentage: "..authority_value)
+
+	for level, range in ipairs(self.ranges) do
+		if authority_value >= range.min and authority_value <= range.max then
+			return authority_value, level
+		end
+	end
+
+	-- If the ranges are properly defined, to fully cover the [0, 100] interval, then we should never reach this return.
+	script_error("[Imperial Authority] ERROR: Authority value []" .. tostring(authority_value) .. "] does not fall in any authority range!")
+	return authority_value, 1	-- Returning level 1, as this is to be used as an array index.
 end
 
 function imperial_authority:apply_faction_effects_to_empire_regions(faction_key)

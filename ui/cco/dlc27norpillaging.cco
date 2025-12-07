@@ -1,0 +1,20 @@
+NorPillaging
+{
+	GetAllUniquePillageAncillaries()
+	{
+		PlayersFaction.EntitySharedStateReadString("pillage_unique_ancillaries").Split(";").Transform(
+			(key) => DatabaseRecordContext("CcoAncillaryRecord", key))
+	}
+	
+	GetOwnedUniquePillageAncillaries()
+	{
+		GetAllUniquePillageAncillaries.Filter(
+			(ancillary_record) => PlayersFaction.AncillaryList.Transform(AncillaryRecordContext).Contains(ancillary_record))
+	}
+
+	GetUnownedUniquePillageAncillaries()
+	{
+		GetAllUniquePillageAncillaries.Filter(
+			(ancillary_record) => PlayersFaction.AncillaryList.Transform(AncillaryRecordContext).Contains(ancillary_record) == false)
+	}
+}

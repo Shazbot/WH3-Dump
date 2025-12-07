@@ -216,6 +216,9 @@ function q_setup()
 		["wh_dlc08_nor_throgg"] = {
 			{"mission", "wh_dlc08_anc_enchanted_item_wintertooth_crown", "wh3_main_ie_qb_nor_throgg_wintertooth_crown", nil, "war.camp.advice.quests.001"},
 		},
+		["wh3_dlc27_nor_sayl_the_faithless"] = {
+			{"mission", "wh3_dlc27_anc_weapon_the_viperous_staff", "wh3_dlc27_ie_qb_nor_sayl_tower_of_ashshair"},
+		},
 		
 		----------------------
 		----- HIGH ELVES -----
@@ -246,6 +249,9 @@ function q_setup()
 		},
 		["wh2_dlc15_hef_imrik"] = {
 			{"mission", "wh2_dlc15_anc_armour_armour_of_caledor", "wh3_main_ie_qb_hef_imrik_armour_of_caledor", nil, "war.camp.advice.quests.001"},
+		},
+		["wh3_dlc27_hef_aislinn"] = {
+			{"mission", "wh3_dlc27_anc_enchanted_item_mask_of_the_merlord", "wh3_dlc27_ie_qb_hef_aislinn_honor_among_admirals"},
 		},
 		
 		----------------------
@@ -448,7 +454,12 @@ function q_setup()
 		["wh3_main_sla_nkari"] = {
 			{"mission", "wh3_main_anc_weapon_witstealer_sword", "wh3_main_ie_qb_sla_nkari_witstealer_sword", nil, "wh3_main_camp_quest_nkari_witstealer_sword_001"}
 		},
-
+		["wh3_dlc27_sla_dechala"] = {
+			{"mission", "wh3_dlc27_anc_enchanted_item_elixir_of_damnation", "wh3_dlc27_qb_ie_sla_dechala_elixir_of_damnation"}
+		},
+		["wh3_dlc27_sla_masque_of_slaanesh"] = {
+			{"mission", "wh3_dlc27_anc_enchanted_item_staff_of_the_masque", "wh3_dlc27_ie_qb_sla_masque_pantomime_of_seduction"}
+		},
 		----------------------
 		------- TZEENCH ------
 		----------------------

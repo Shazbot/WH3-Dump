@@ -62,6 +62,7 @@ cutscene = {
 	restore_cam_time = -1,
 	suppress_unit_vo = true,
 	should_disable_unit_ids = true,
+	stop_all_vo_on_start = false,
 	close_advisor_on_start = true,
 	close_advisor_on_end = true,
 	wait_for_advisor_on_end = false,
@@ -833,6 +834,24 @@ function cutscene:suppress_unit_voices(value)
 end;
 
 
+--- @function stop_all_vo_on_start
+--- @desc Sets whether to stop all playing voice-over when the cutscene starts. By default this is not done.
+--- @p boolean stop playing voice-over on start
+function cutscene:set_stop_all_vo_on_start(should_stop)
+	if not is_boolean(should_stop) then
+		script_error(self.name .. " ERROR: set_stop_all_vo_on_start() called but supplied should_stop [" .. tostring(should_stop) .. "] is not a boolean")
+		return false
+	end
+
+	if self.is_running then
+		script_error(self.name .. " ERROR: trying to configure the stopping of all voice-over on a running cutscene")
+		return false
+	end
+
+	self.stop_all_vo_on_start = should_stop
+end
+
+
 --- @function set_should_enable_cinematic_camera
 --- @desc Sets whether to enable the cinematic camera during the cutscene. By default it is enabled, but it can be disabled by supplying <code>false</code> as an argument to this function. The cinematic camera allows the camera to clip through terrain, so disable cinematic camera in circumstances where the path of the camera cannot be guaranteed (e.g. panning from a position relative to a unit to a fixed position, if there's a risk there'll be a hill in the way).
 --- @p [opt=true] boolean enable cinematic camera
@@ -1150,6 +1169,10 @@ function cutscene:start()
 		bm:suppress_unit_voices(true);
 		bm:suppress_unit_musicians(true);
 	end;
+
+	if self.stop_all_vo_on_start then
+		bm:stop_all_vo()
+	end
 	
 	if self.should_disable_unit_ids then
 		bm:enable_unit_ids(false);
@@ -1700,6 +1723,8 @@ function cutscene:release(was_skipped)
 	
 	bm:out("Ending cutscene " .. tostring(self.name));
 	self.is_running = false;
+	-- remove pending actions
+	bm:remove_process(self.name);
 	
 	-- the cutscene may have been delayed due to waiting for stuff, if so inform the user
 	if self.wait_offset > 0 then

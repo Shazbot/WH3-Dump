@@ -36,46 +36,66 @@ unholy_manifestations_excluded_factions = {
 
 
 local locked_unholy_manifestation_keys = {
-	wh3_main_kho_khorne = {
-		-- "wh3_main_ritual_kho_gg_1_upgraded",
-		-- "wh3_main_ritual_kho_gg_1",
-		"wh3_main_ritual_kho_gg_2_upgraded",
-		"wh3_main_ritual_kho_gg_2",
-		"wh3_main_ritual_kho_gg_3_upgraded",
-		"wh3_main_ritual_kho_gg_3",
-		"wh3_main_ritual_kho_gg_4_upgraded",
-		"wh3_main_ritual_kho_gg_4"
+
+	[1] = {
+		faction_key = nil,
+		culture_key = "wh3_main_sla_slaanesh",
+		rituals = {
+			-- "wh3_main_ritual_sla_gg_1_upgraded",
+			-- "wh3_main_ritual_sla_gg_1",
+			"wh3_main_ritual_sla_gg_2_upgraded",
+			"wh3_main_ritual_sla_gg_2",
+			"wh3_main_ritual_sla_gg_3_upgraded",
+			"wh3_main_ritual_sla_gg_3",
+			"wh3_main_ritual_sla_gg_4_upgraded",
+			"wh3_main_ritual_sla_gg_4",
+		},
 	},
-	wh3_main_nur_nurgle = {
-		-- "wh3_main_ritual_nur_gg_1_upgraded",
-		-- "wh3_main_ritual_nur_gg_1",
-		"wh3_main_ritual_nur_gg_2_upgraded",
-		"wh3_main_ritual_nur_gg_2",
-		"wh3_main_ritual_nur_gg_3_upgraded",
-		"wh3_main_ritual_nur_gg_3",
-		"wh3_main_ritual_nur_gg_4_upgraded",
-		"wh3_main_ritual_nur_gg_4"
+
+	[2] = {
+		faction_key = nil,
+		culture_key = "wh3_main_kho_khorne",
+		rituals = {
+			-- "wh3_main_ritual_kho_gg_1_upgraded",
+			-- "wh3_main_ritual_kho_gg_1",
+			"wh3_main_ritual_kho_gg_2_upgraded",
+			"wh3_main_ritual_kho_gg_2",
+			"wh3_main_ritual_kho_gg_3_upgraded",
+			"wh3_main_ritual_kho_gg_3",
+			"wh3_main_ritual_kho_gg_4_upgraded",
+			"wh3_main_ritual_kho_gg_4"
+		},
 	},
-	wh3_main_sla_slaanesh = {
-		-- "wh3_main_ritual_sla_gg_1_upgraded",
-		-- "wh3_main_ritual_sla_gg_1",
-		"wh3_main_ritual_sla_gg_2_upgraded",
-		"wh3_main_ritual_sla_gg_2",
-		"wh3_main_ritual_sla_gg_3_upgraded",
-		"wh3_main_ritual_sla_gg_3",
-		"wh3_main_ritual_sla_gg_4_upgraded",
-		"wh3_main_ritual_sla_gg_4"
+
+	[3] = {
+		faction_key = nil,
+		culture_key = "wh3_main_nur_nurgle",
+		rituals = {
+			-- "wh3_main_ritual_nur_gg_1_upgraded",
+			-- "wh3_main_ritual_nur_gg_1",
+			"wh3_main_ritual_nur_gg_2_upgraded",
+			"wh3_main_ritual_nur_gg_2",
+			"wh3_main_ritual_nur_gg_3_upgraded",
+			"wh3_main_ritual_nur_gg_3",
+			"wh3_main_ritual_nur_gg_4_upgraded",
+			"wh3_main_ritual_nur_gg_4"
+		},
 	},
-	wh3_main_tze_tzeentch = {
-		-- "wh3_main_ritual_tze_gg_1_upgraded",
-		-- "wh3_main_ritual_tze_gg_1",
-		"wh3_main_ritual_tze_gg_2_upgraded",
-		"wh3_main_ritual_tze_gg_2",
-		"wh3_main_ritual_tze_gg_3_upgraded",
-		"wh3_main_ritual_tze_gg_3",
-		"wh3_main_ritual_tze_gg_4_upgraded",
-		"wh3_main_ritual_tze_gg_4"
-	}
+
+	[4] = {
+		faction_key = nil,
+		culture_key = "wh3_main_tze_tzeentch",
+		rituals = {
+			-- "wh3_main_ritual_tze_gg_1_upgraded",
+			-- "wh3_main_ritual_tze_gg_1",
+			"wh3_main_ritual_tze_gg_2_upgraded",
+			"wh3_main_ritual_tze_gg_2",
+			"wh3_main_ritual_tze_gg_3_upgraded",
+			"wh3_main_ritual_tze_gg_3",
+			"wh3_main_ritual_tze_gg_4_upgraded",
+			"wh3_main_ritual_tze_gg_4"
+		},
+	},
 };
 
 local function unlock_unholy_manifestation_condition(context, faction_key)
@@ -83,16 +103,22 @@ local function unlock_unholy_manifestation_condition(context, faction_key)
 
 		local faction = context:faction();
 		local rituals = faction:rituals();
-		local locked_ums = locked_unholy_manifestation_keys[faction:culture()];
 
-		for i = 1, #locked_ums do
-			local ritual_name = locked_ums[i];
-			if not rituals:ritual_status(ritual_name):script_locked() then
-				return true;
-			end;
-		end;
-	end;
-end;
+		for idx, restriction_data in ipairs(locked_unholy_manifestation_keys) do
+			local property = restriction_data.faction_key ~= nil and "faction_key" or "culture_key"
+			local value_to_check = restriction_data.faction_key ~= nil and faction_key or faction:culture()
+
+			if (restriction_data[property] == value_to_check) then
+				for i = 1, #restriction_data.rituals do
+					local ritual_name = restriction_data.rituals[i];
+					if not rituals:ritual_status(ritual_name):script_locked() then
+						return true;
+					end
+				end
+			end
+		end
+	end
+end
 
 
 
@@ -285,7 +311,6 @@ function great_game_narrative_loader(faction_key, chaos_type, chaos_corruption_t
 	
 	do
 		local name = chaos_type_lower .. "_great_game_event_unlock_unholy_manifestation";
-		
 		if not narrative.get(faction_key, name .. "_block") then
 			narrative_events.generic(
 				name,																																			-- unique name for this narrative event

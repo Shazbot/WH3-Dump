@@ -614,7 +614,7 @@ end;
 
 local function parse_history_page_for_tooltips(im)
 	-- get the actual infotext list
-	local uic_infotext = im.uic_infotext;
+	local uic_infotext = get_infotext_manager():get_infotext_panel()
 	
 	for i = 0, uic_infotext:ChildCount() - 1 do	
 		local uic_entry = UIComponent(uic_infotext:Find(i));
@@ -746,7 +746,7 @@ function infotext_manager:show_infotext_for_advice_from_history(advice_key)
 	local uic_infotext = self.uic_infotext;
 
 	for i = 1, #infotext_list do
-		if not find_uicomponent(uic_advice_interface, infotext_list[i]) then
+		if not find_uicomponent(uic_advice_interface or "", infotext_list[i]) then
 			self:add_infotext_entry(infotext_list[i], false);
 		end;
 	end;

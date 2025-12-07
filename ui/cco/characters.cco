@@ -2,6 +2,32 @@ CcoCampaignCharacter
 {
 	ExCharacterDetailsInitiativeSetList
 	{
-		InitiativeSetList.Filter(InitiativeSetContext.CategoryContext.Key != "DLC26_DA_PLAN" && InitiativeSetContext.CategoryContext.Key != "OFFER_TO_THE_MAW" && InitiativeSetContext.CategoryContext.Key != "KAIROS_FRAGMENTS_OF_SORCERY")
+		InitiativeSetList.Filter
+		(
+			InitiativeSetContext.CategoryContext.Key != "DLC26_DA_PLAN" 
+			&& InitiativeSetContext.CategoryContext.Key != "OFFER_TO_THE_MAW" 
+			&& InitiativeSetContext.CategoryContext.Key != "KAIROS_FRAGMENTS_OF_SORCERY"
+			&& InitiativeSetContext.CategoryContext.Key.Contains("ETERNAL_DANCE") == false
+		)
 	}	
+	
+	ExSelectMissionToShowForCharacter
+	{
+		GetIf
+		(
+			!MilitaryForceContext.IsLayingAmbush,
+			PlayersFaction.ActiveMissionList.Filter
+			(
+				(mission) => 
+					HasZoomLocation
+					&& IsQuest == false
+					&& (Component("hud_campaign").ShouldShowMission(mission))
+			).FirstContext
+			(
+				CharacterContextAtSettlementObjectiveDisplayPosition == this
+				|| CharacterContextAtObjectiveDisplayPosition(-2.5) == this
+				|| TargetCharacterContext == this
+			)
+		)
+	}
 }

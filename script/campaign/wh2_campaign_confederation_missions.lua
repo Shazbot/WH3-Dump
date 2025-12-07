@@ -20,6 +20,19 @@ confed_missions_data = {
 		dilemma_completed = false --- saved variable, please leave as false
 	},
 
+	["teclis_saphery"] = {
+		factions = "wh2_main_hef_order_of_loremasters",
+		target_faction = "wh2_main_hef_saphery",
+		disable_diplomatic_confed = true,
+		disable_cai_targeting = true,
+		turn_number = 2,
+		mission_key = "wh3_dlc27_teclis_saphery_confederation_mission",
+		dilemma_key = "wh3_dlc27_hef_teclis_confederation_saphery",
+		confed_choices = {true,true,false,false},
+		mission_generated = {},
+		dilemma_completed = false
+	},
+
 	---WOOD ELVES---
 	["wood_elves_talsyn"] = {
 		factions = {"wh_dlc05_wef_argwylon","wh2_dlc16_wef_sisters_of_twilight"},

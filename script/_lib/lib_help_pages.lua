@@ -570,7 +570,37 @@ local help_panel_position_overrides_campaign = {
 	dlc26_cloak_of_skulls = {
 		["x"] = -5,
 		["y"] = 5
-	}
+	},
+
+	dlc27_seafang_overlays = {
+		["x"] = -5,
+		["y"] = 5
+	},
+	
+	dlc27_sla_marks_of_cruelty = {
+		["x"] = -5,
+		["y"] = 5
+	},
+	
+	dlc27_hef_asur_domination = {
+		["x"] = -5,
+		["y"] = 90
+	},
+	
+	dlc27_hef_intrigue_court = {
+		["x"] = -5,
+		["y"] = 90
+	},
+
+	dlc27_settlement_captured_gift_faction_choice = {
+		["x"] = 5,
+		["y"] = 5,
+	},
+	
+	settlement_captured = {
+		["x"] = -5,
+		["y"] = "middle"
+	},
 };
 
 

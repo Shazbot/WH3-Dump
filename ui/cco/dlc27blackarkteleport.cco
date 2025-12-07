@@ -1,0 +1,25 @@
+BlackArkTeleport
+{
+    TeleportTooltip(CcoCampaignRitual ritual, CcoCampaignCharacter performing_character)
+	{
+		Loc("wh3_dlc27_black_ark_teleport_active")
+		+ 
+        GetIfElse(ritual.IsValidContext && ritual.IsOnCooldown, "{{tr:new_paragraph}}" + Loc("wh3_dlc26_cloak_of_skulls_teleport_tooltip_cooldown"),
+        GetIfElse(performing_character.MilitaryForceContext.IsLayingSiege || performing_character.SettlementContext.IsUnderSiege, "{{tr:new_paragraph}}" + Loc("teleport_ritual_unable_reason_siege"),
+        GetIfElse(ritual.RitualInteractionContext.IsTargettingActive, "{{tr:new_paragraph}}" + Loc("wh3_dlc26_cloak_of_skulls_teleport_tooltip_exit"),
+        GetIfElse(ritual.IsValidContext == false || ritual.IsAvailable == false, "{{tr:new_paragraph}}" +  Loc("wh3_dlc27_black_ark_teleport_inactive"),
+        GetIfElse(ritual.CanPerformRitualWithAnyValidTarget(performing_character) == false, "{{tr:new_paragraph}}" + ritual.InvalidReasonForRitualWithAnyValidTarget(performing_character),
+        GetIf(performing_character.ActionPointPercent < 1, "{{tr:new_paragraph}}" + Loc("wh3_dlc27_black_ark_teleport_not_enough_ap")))))))
+	}
+
+    IsTeleportLocked(CcoCampaignRitual ritual, CcoCampaignCharacter performing_character)
+    {
+        ritual.IsAvailable == false || 
+        ritual.CanPerformRitualWithAnyValidTarget(performing_character) == false ||
+        performing_character.ActionPointPercent < 1 ||
+        (performing_character.MilitaryForceContext && performing_character.MilitaryForceContext.IsLayingSiege) ||
+        (performing_character.MilitaryForceContext && 
+            performing_character.MilitaryForceContext.SettlementContext && 
+            performing_character.MilitaryForceContext.SettlementContext.IsUnderSiege)
+    }
+}

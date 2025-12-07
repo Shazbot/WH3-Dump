@@ -102,6 +102,64 @@ campaign_ai_script = {
 		bundle_key = "wh3_main_ksl_background_support_income_hidden",
 	},
 
+	aislinn_extra_background_resources_data = {
+		faction_key = "wh3_dlc27_hef_aislinn",
+		effects = {
+			{
+				key = "wh3_dlc27_effect_hef_aislinn_focus_ai_only",
+				amount = 100,
+				effect_scope = "faction_to_faction_own"
+			},
+			{
+				key = "wh3_dlc27_effect_hef_aislinn_naval_supplies_ai_only",
+				amount = 150,
+				effect_scope = "faction_to_faction_own"
+			},
+			{
+				key = "wh3_dlc27_effect_hef_aislinn_dragonship_growth_ai_only",
+				amount = 8,
+				effect_scope = "faction_to_force_own"
+			},
+		},
+		bundle_key = "wh3_dlc27_hef_aislinn_background_ai_extra_resources_hidden",
+	},
+
+	teclis_extra_background_resources_data = {
+		faction_key = "wh2_main_hef_order_of_loremasters",
+		effects = {
+			{
+				key = "wh3_dlc27_effect_hef_teclis_scrolls_of_knowledge_ai_only",
+				amount = 100,
+				effect_scope = "faction_to_faction_own"
+			},
+		},
+		bundle_key = "wh3_dlc27_hef_teclis_background_ai_extra_resources_hidden",
+	},
+
+	throgg_extra_background_resource_data = {
+		faction_key = "wh_dlc08_nor_wintertooth",
+		effects = {
+			{
+				key = "wh3_dlc27_effect_nor_throgg_kinfolk_ai_only", 
+				amount = 7,
+				effect_scope = "faction_to_faction_own"
+			},
+		},
+			bundle_key = "wh3_dlc27_nor_throgg_background_ai_extra_resources_hidden",
+	},
+
+	dechala_extra_background_resource_data = {
+		faction_key = "wh3_dlc27_sla_the_tormentors",
+		effects = {
+			{
+				key = "wh3_dlc27_effect_sla_dechala_thralls_ai_only", 
+				amount = 220,
+				effect_scope = "faction_to_faction_own"
+			},
+		},
+			bundle_key = "wh3_dlc27_sla_dechala_background_ai_extra_resources_hidden",
+	},
+	
 	ai_minor_faction_potential = {
 		target_potential_types = {
 			combi_minor_strong = 40,
@@ -114,6 +172,18 @@ campaign_ai_script = {
 	ai_extra_aggro = {
 		target_global_script_context = "cai_global_script_context_special_1",
 	},
+	sayl_difficulty_level_restrictred_rituals = {
+		ritual_list = {
+			"wh3_dlc27_sayl_manipulations_force_bundle",
+			"wh3_dlc27_sayl_manipulations_force_damage",
+			"wh3_dlc27_sayl_manipulations_force_movement",
+			"wh3_dlc27_sayl_manipulations_force_rebel",
+			"wh3_dlc27_sayl_manipulations_region_destroy",
+			"wh3_dlc27_sayl_manipulations_region_foreign",
+			"wh3_dlc27_sayl_manipulations_region_garrison",
+		},
+		min_difficulty = -1, -- HARD and above, -2 is VERY HARD, -3 is LEGENDARY
+	}
 }
 
 function campaign_ai_script:setup_listeners()
@@ -183,6 +253,66 @@ function campaign_ai_script:setup_listeners()
 			end,
 			function(context)
 				self:process_faux_victory(context:faction())
+			end,
+			true
+		)
+
+		core:add_listener(
+			"AIGolgfagWarDeclaration",
+			"FactionTurnStart",
+			function(context)
+				local faction = context:faction()
+				return cm:turn_number() == 1 and faction:name() == "wh3_dlc26_ogr_golgfag" and not faction:is_human()
+			end,
+			function(context)
+				-- the diplomacy AI takes a while to do this, so we force it instead
+				cm:force_declare_war("wh3_dlc26_ogr_golgfag", "wh_main_emp_nordland", false, false)
+				core:remove_listener("AIGolgfagWarDeclaration")
+			end,
+			true
+		)
+
+		core:add_listener(
+			"Sayl_PoolResCheckAIUnlocks",
+			"FactionTurnStart",
+			function(context)
+				local faction = context:faction()
+				return faction:name() == sayl_manipulation.config.faction_key and not faction:is_human()
+			end,
+			function(context)
+				-- AI sayl handles thing slightly differently - no missions, just unlocks manipulation rituals based on region count
+				local sayl_faction = context:faction()
+				local difficulty = cm:model():combined_difficulty_level()
+
+				for level,tier_config in dpairs(sayl_manipulation.config.ritual_unlock_levels) do
+					if sayl_faction:region_list():num_items() >= tier_config.ai_region_count then
+						local ritual_list = tier_config.rituals
+						for i = 1, #ritual_list do
+							local current_ritual = ritual_list[i]
+							local difficulty_restricted = table.contains(campaign_ai_script.sayl_difficulty_level_restrictred_rituals.ritual_list, current_ritual)
+							
+							if (difficulty_restricted == false) or (difficulty_restricted and difficulty <= campaign_ai_script.sayl_difficulty_level_restrictred_rituals.min_difficulty) then
+								cm:unlock_ritual(sayl_faction, current_ritual, 0)
+							end
+						end
+					end
+				end
+			end,
+			true
+		)
+
+		core:add_listener(
+			"AIDechalaTechnologyDaemonicUnitsUnlock",
+			"FactionTurnStart",
+			function(context)
+				local faction = context:faction()
+				return not faction:is_human() and faction:name() == dechala_daemonic_units.config.faction_key and cm:turn_number() >= dechala_daemonic_units.config.ai_unlock_turn
+			end,
+			function(context)
+				cm:instantly_research_technology(dechala_daemonic_units.config.faction_key, dechala_daemonic_units.config.technology_key, false)
+				for _, unit_key in ipairs(dechala_daemonic_units.config.units) do
+					cm:remove_event_restricted_unit_record_for_faction(unit_key, dechala_daemonic_units.config.faction_key)
+				end
 			end,
 			true
 		)
@@ -551,6 +681,70 @@ function campaign_ai_script:kislev_background_income()
 				end
 				cm:apply_custom_effect_bundle_to_faction(bundle, faction)
 			end
+		end
+	end
+end
+
+-- ========================================= AISLINN BACKGROUND INCOME =========================== --
+
+function campaign_ai_script:aislinn_background_income()
+	local data_table = campaign_ai_script.aislinn_extra_background_resources_data
+	local faction = cm:get_faction(data_table.faction_key)	
+	if faction and not faction:is_human() then 
+		local bundle = cm:create_new_custom_effect_bundle(data_table.bundle_key)
+		if bundle then
+			for e, effect in ipairs(data_table.effects) do
+				bundle:add_effect(effect.key, effect.effect_scope, effect.amount)
+			end
+			cm:apply_custom_effect_bundle_to_faction(bundle, faction)
+		end
+	end
+end
+
+-- ========================================= TECLIS BACKGROUND INCOME =========================== --
+
+function campaign_ai_script:teclis_background_income()
+	local data_table = campaign_ai_script.teclis_extra_background_resources_data
+	local faction = cm:get_faction(data_table.faction_key)	
+	if faction and not faction:is_human() then 
+		local bundle = cm:create_new_custom_effect_bundle(data_table.bundle_key)
+		if bundle then
+			for e, effect in ipairs(data_table.effects) do
+				bundle:add_effect(effect.key, effect.effect_scope, effect.amount)
+			end
+			cm:apply_custom_effect_bundle_to_faction(bundle, faction)
+		end
+	end
+end
+
+-- ========================================= THROGG BACKGROUND INCOME =========================== --
+
+function campaign_ai_script:throgg_background_income()
+	local data_table = campaign_ai_script.throgg_extra_background_resource_data
+	local faction = cm:get_faction(data_table.faction_key)	
+	if faction and not faction:is_human() then 
+		local bundle = cm:create_new_custom_effect_bundle(data_table.bundle_key)
+		if bundle then
+			for e, effect in ipairs(data_table.effects) do
+				bundle:add_effect(effect.key, effect.effect_scope, effect.amount)
+			end
+			cm:apply_custom_effect_bundle_to_faction(bundle, faction)
+		end
+	end
+end
+
+-- ========================================= DECHALA BACKGROUND INCOME =========================== --
+
+function campaign_ai_script:dechala_background_income()
+	local data_table = campaign_ai_script.dechala_extra_background_resource_data
+	local faction = cm:get_faction(data_table.faction_key)	
+	if faction and not faction:is_human() then 
+		local bundle = cm:create_new_custom_effect_bundle(data_table.bundle_key)
+		if bundle then
+			for e, effect in ipairs(data_table.effects) do
+				bundle:add_effect(effect.key, effect.effect_scope, effect.amount)
+			end
+			cm:apply_custom_effect_bundle_to_faction(bundle, faction)
 		end
 	end
 end

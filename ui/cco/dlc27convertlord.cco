@@ -1,0 +1,23 @@
+ConvertLord
+{
+    ConvertLordTooltip(CcoCampaignRitual ritual, CcoCampaignCharacter performing_character)
+	{
+		Loc("wh3_dlc27_convert_lord_active", GetIfElse(ritual.IsValidContext && ritual.ExpendedResourceTransactionContext.IsValidContext, ritual.ExpendedResourceTransactionContext.PooledResourceTransactionList.FirstContext.AbsoluteValue, 0))
+		+ 
+        GetIfElse(ritual.IsValidContext && ritual.IsOnCooldown, "{{tr:new_paragraph}}" + Loc("wh3_dlc27_convert_lord_tooltip_cooldown"),
+        GetIfElse(performing_character.MilitaryForceContext.IsLayingSiege || performing_character.SettlementContext.IsUnderSiege, "{{tr:new_paragraph}}" + Loc("wh3_dlc27_convert_lord_inactive_siege"),
+        GetIfElse(ritual.RitualInteractionContext.IsTargettingActive, "{{tr:new_paragraph}}" + Loc("wh3_dlc27_convert_lord_cancel"),
+        GetIfElse(ritual.IsValidContext == false || ritual.IsAvailable == false, "{{tr:new_paragraph}}" +  Loc("wh3_dlc27_convert_lord_inactive"),
+        GetIf(ritual.CanPerformRitualWithAnyValidTarget(performing_character) == false, "{{tr:new_paragraph}}" + ritual.InvalidReasonForRitualWithAnyValidTarget(performing_character))))))
+	}
+
+    IsConvertLordLocked(CcoCampaignRitual ritual, CcoCampaignCharacter performing_character)
+    {
+        ritual.IsAvailable == false || 
+        ritual.CanPerformRitualWithAnyValidTarget(performing_character) == false ||
+        (performing_character.MilitaryForceContext && performing_character.MilitaryForceContext.IsLayingSiege) ||
+        (performing_character.MilitaryForceContext && 
+            performing_character.MilitaryForceContext.SettlementContext && 
+            performing_character.MilitaryForceContext.SettlementContext.IsUnderSiege)
+    }
+}

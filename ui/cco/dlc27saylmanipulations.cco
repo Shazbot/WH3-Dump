@@ -1,0 +1,77 @@
+SaylManipulations
+{
+	GetMaxManipulationCostForTier(Int tier)
+	{
+		Floor(PlayersFaction.EntitySharedStateReadFloat(Format("max_cost_tier_%d", tier)))
+	}
+
+	GetNextAttentionResetTurn()
+	{
+		GetIfElse(Floor(PlayersFaction.EntitySharedStateReadFloat("sayl_attention_reset_next_turn")) != -1,
+		 Floor(PlayersFaction.EntitySharedStateReadFloat("sayl_attention_reset_next_turn")), 0)
+	}
+
+	GetAttentionThresholds(CcoCampaignPooledResource pooled_resource)
+	{
+		Join(pooled_resource.AvailableThresholdSetList, pooled_resource.ActiveThresholdSetList).Sort(Key, true)
+	}
+
+	GetCurrentAttentionThreshold(CcoCampaignPooledResource pooled_resource)
+	{
+		GetAttentionThresholds(pooled_resource).Reverse.IndexForFirstContext(pooled_resource.Total >= LowerBound)
+	}
+
+	GetAttentionFillPercent(CcoCampaignPooledResource pooled_resource, CcoPooledResourceThresholdOperationSetRecord threshold)
+	{
+		(current_index = self.ParentContext.ChildIndex - 1,
+		previous_index = self.ParentContext.ChildIndex - 2) =>
+		{
+			GetIfElse(current_index < 1,
+			pooled_resource.PercentageOfCapacity(pooled_resource.Min, threshold.LowerBound),
+			pooled_resource.PercentageOfCapacity(GetAttentionThresholds(pooled_resource).At(previous_index).LowerBound, threshold.LowerBound))
+		}
+	}
+
+	GetFactionTargetRituals()
+	{
+		PlayersFaction.RitualManagerContext.UnlockableRitualList.Filter(RitualContext.Category == "SAYL_FACTION")
+	}
+
+	GetRegionTargetRituals()
+	{
+		PlayersFaction.RitualManagerContext.UnlockableRitualList.Filter(RitualContext.Category == "SAYL_REGION")
+	}
+
+	GetForceTargetRituals()
+	{
+		PlayersFaction.RitualManagerContext.UnlockableRitualList.Filter(RitualContext.Category == "SAYL_FORCE")
+	}
+
+	GetSelfTargetRituals()
+	{
+		PlayersFaction.RitualManagerContext.UnlockableRitualList.Filter(RitualContext.Category == "SAYL_SELF")
+	}
+
+	GetManipulationRituals()
+	{
+		Join(GetFactionTargetRituals, GetRegionTargetRituals, GetForceTargetRituals, GetSelfTargetRituals).Sort(RitualContext.SortOrder, true)
+	}
+
+	IsTierUnlocked(Int tier)
+	{
+		GetFactionTargetRituals.FirstContext(RitualContext.SortOrder == tier).IsAvailable
+	}
+
+	IsManipulationRitualUnlocked(CcoCampaignRitual ritual)
+	{
+		ritual.FactionContext.EntitySharedStateReadBool("unlocked_manipulation_" + ritual.RitualContext.Key)
+	}
+	
+	GetRitualChainIndex(CcoCampaignRitual ritual)
+	{
+		GetIfElse(ritual.RitualContext.Category == "SAYL_FACTION", 1,
+		GetIfElse(ritual.RitualContext.Category == "SAYL_REGION", 2,
+		GetIfElse(ritual.RitualContext.Category == "SAYL_FORCE", 3, 4
+		)))
+	}
+}

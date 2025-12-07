@@ -356,8 +356,13 @@ end
 function invasion:remove_target()
 	out.invasions("Invasion: Removing Target for '"..self.key.."'");
 	self.target_type = "NONE";
-	self.target = nil;
-	self.target_faction = nil;
+	-- someone may handle the event and set a new target
+	core:trigger_event("ScriptEventInvasionNoTarget", self.key);
+	if self.target_type == "NONE" then
+		-- nobody set a new target form the event
+		self.target = nil;
+		self.target_faction = nil;
+	end
 end
 
 --- @function add_aggro_radius
@@ -926,6 +931,12 @@ function invasion:advance()
 					if distance_from_target < 2 then
 						out.invasions("\tArrived at Location!");
 						self.target_type = "NONE";
+						-- someone may handle the event and set a new target
+						core:trigger_event("ScriptEventInvasionNoTarget", self.key);
+						if self.target_type ~= "NONE" then
+							-- someone set a new target - we try again with the new target
+							self:advance()
+						end
 					else
 						out.invasions("\tMoving...");
 						cm:move_to_queued(general_lookup, self.target.x, self.target.y);
@@ -947,8 +958,16 @@ function invasion:advance()
 						cm:replenish_action_points(general_lookup);
 						cm:attack_queued(general_lookup, target_character_lookup);
 					else
-						out.invasions("\tCouldn't find target... releasing force!");
 						self.target_type = "NONE";
+						-- someone may handle the event and set a new target
+						core:trigger_event("ScriptEventInvasionNoTarget", self.key);
+						if self.target_type == "NONE" then
+							-- nobody set a new target form the event
+							out.invasions("\tCouldn't find target... releasing force!");
+						else
+							-- we try again with the new target
+							self:advance()
+						end
 					end
 				elseif self.target_type == "REGION" then
 					-----------------------------------------------------------------------------------
@@ -978,13 +997,29 @@ function invasion:advance()
 								self.target_faction = region_owner;
 								cm:force_declare_war(self.faction, self.target_faction, true, true);
 							else
-								out.invasions("\ttarget_owner_abort is "..tostring(self.target_owner_abort).." - Aborting Invasion!");
 								self.target_type = "NONE";
+								-- someone may handle the event and set a new target
+								core:trigger_event("ScriptEventInvasionNoTarget", self.key);
+								if self.target_type == "NONE" then
+									-- nobody set a new target form the event
+									out.invasions("\ttarget_owner_abort is "..tostring(self.target_owner_abort).." - Aborting Invasion!");
+								else
+									-- we try again with the new target
+									self:advance()
+								end
 							end
 						end
 					else
-						out.invasions("\tCouldn't find target... releasing force!");
 						self.target_type = "NONE";
+						-- someone may handle the event and set a new target
+						core:trigger_event("ScriptEventInvasionNoTarget", self.key);
+						if self.target_type == "NONE" then
+							-- nobody set a new target form the event
+							out.invasions("\tCouldn't find target... releasing force!");
+						else
+							-- we try again with the new target
+							self:advance()
+						end
 					end
 				elseif self.target_type == "FORCE" then
 					-------------------------------------------------------------------------------
@@ -1007,8 +1042,16 @@ function invasion:advance()
 							cm:attack_queued(general_lookup, enemy_general_lookup);
 						end
 					else
-						out.invasions("\tCouldn't find target... releasing force!");
 						self.target_type = "NONE";
+						-- someone may handle the event and set a new target
+						core:trigger_event("ScriptEventInvasionNoTarget", self.key);
+						if self.target_type == "NONE" then
+							-- nobody set a new target form the event
+							out.invasions("\tCouldn't find target... releasing force!");
+						else
+							-- we try again with the new target
+							self:advance()
+						end
 					end
 				elseif self.target_type == "PATROL" then
 					------------------------------------------------------------------------------------
@@ -1030,7 +1073,15 @@ function invasion:advance()
 							if self.stop_at_end == true then
 								out.invasions("\t\t\tStopping!");
 								self.target_type = "NONE";
-								self.patrol_position = 0;
+								-- someone may handle the event and set a new target
+								core:trigger_event("ScriptEventInvasionNoTarget", self.key);
+								if self.target_type == "NONE" then
+									-- nobody set a new target form the event
+									self.patrol_position = 0;
+								else
+									-- we try again with the new target
+									self:advance()
+								end
 							else
 								self.patrol_position = 1;
 								out.invasions("\t\t\tRestarting patrol and moving... #"..self.patrol_position.." ["..self.target[self.patrol_position].x..", "..self.target[self.patrol_position].y.."]");
@@ -1041,9 +1092,17 @@ function invasion:advance()
 							out.invasions("\t\tMoving to next patrol point... #"..self.patrol_position.." ["..self.target[self.patrol_position].x..", "..self.target[self.patrol_position].y.."]");
 							cm:move_to_queued(general_lookup, self.target[self.patrol_position].x, self.target[self.patrol_position].y);
 						else
-							out.invasions("\t\t\tAborting?!");
 							self.target_type = "NONE";
-							self.patrol_position = 0;
+							-- someone may handle the event and set a new target
+							core:trigger_event("ScriptEventInvasionNoTarget", self.key);
+							if self.target_type == "NONE" then
+								-- nobody set a new target form the event
+								out.invasions("\t\t\tAborting?!");
+								self.patrol_position = 0;
+							else
+								-- we try again with the new target
+								self:advance()
+							end
 						end
 					else
 						out.invasions("\tMoving... #"..self.patrol_position.." ["..self.target[self.patrol_position].x..", "..self.target[self.patrol_position].y.."]");
@@ -1092,7 +1151,15 @@ function invasion:advance()
 			self:attempt_respawn();
 		else
 			self.target_type = "NONE";
-			should_remove = true;
+			-- someone may handle the event and set a new target
+			core:trigger_event("ScriptEventInvasionNoTarget", self.key);
+			if self.target_type == "NONE" then
+				-- nobody set a new target form the event
+				should_remove = true;
+			else
+				-- we try again with the new target
+				self:advance()
+			end
 		end
 	end
 	

@@ -72,6 +72,37 @@ function rite_unlock_listeners()
 				end,
 			["show_unlock_message"] = true
 		},
+		---------------------
+		-- hoeth (greater) --
+		---------------------
+		{
+			["culture"] = "wh2_main_hef_high_elves",
+			["rite_name"] = "wh3_dlc27_ritual_hef_hoeth_greater",
+			["event_name"] = "BuildingCompleted",
+			["condition"] =
+				function(context, faction_name)
+					local building = context:building();
+					
+					return building:faction():name() == faction_name and building:name() == "wh2_main_hef_mages_1";
+				end,
+			["show_unlock_message"] = true
+		},
+		{
+			["culture"] = "wh2_main_hef_high_elves",
+			["rite_name"] = "wh3_dlc27_ritual_hef_hoeth_greater",
+			["event_name"] = "GarrisonOccupiedEvent",
+			["condition"] =
+				function(context, faction_name)
+					local region = context:garrison_residence():region();
+					
+					return context:character():faction():name() == faction_name and (
+						region:building_exists("wh2_main_hef_mages_1") or
+						region:building_exists("wh2_main_hef_mages_2") or
+						region:building_exists("wh2_main_hef_mages_3")
+					);
+				end,
+			["show_unlock_message"] = true
+		},
 		----------
 		-- isha --
 		----------
@@ -82,12 +113,25 @@ function rite_unlock_listeners()
 			["condition"] =
 				function(context, faction_name)
 					local faction = context:character():faction();
-					
-					return faction:name() == faction_name and faction:region_list():num_items() >= 3;
+					local region_count = faction:region_list():num_items()
+					local foreign_slots_count = faction:foreign_slot_managers():num_items()
+					return faction:name() == faction_name and region_count + foreign_slots_count >= 3;
 				end,
 			["show_unlock_message"] = true
 		},
-
+		{
+			["culture"] = "wh2_main_hef_high_elves",
+			["rite_name"] = "wh2_main_ritual_hef_isha",
+			["event_name"] = "ForeignSlotManagerCreatedEvent",
+			["condition"] =
+				function(context, faction_name)
+					local faction = context:requesting_faction();
+					local region_count = faction:region_list():num_items()
+					local foreign_slots_count = faction:foreign_slot_managers():num_items()
+					return faction:name() == faction_name and region_count + foreign_slots_count >= 3;
+				end,
+			["show_unlock_message"] = true
+		},
 		--------------------
 		-- isha (greater) --
 		--------------------
@@ -103,6 +147,23 @@ function rite_unlock_listeners()
 				end,
 			["show_unlock_message"] = true
 		},
+
+		---------------------------
+		-- mathlann (high elves) --
+		---------------------------
+		{
+			["culture"] = "wh2_main_hef_high_elves",
+			["rite_name"] = "wh3_dlc27_ritual_hef_mathlann",
+			["event_name"] = "GarrisonOccupiedEvent",
+			["condition"] =
+				function(context, faction_name)
+					local faction = context:character():faction();
+					
+					return faction:name() == faction_name and faction:region_list():num_items() >= 2;
+				end,
+			["show_unlock_message"] = true
+		},
+
 		---------------
 		-- morai heg --
 		---------------
@@ -269,9 +330,9 @@ function rite_unlock_listeners()
 				end,
 			["show_unlock_message"] = true
 		},
-		--------------
-		-- mathlann --
-		--------------
+		---------------------------
+		-- mathlann (dark elves) --
+		---------------------------
 		{
 			["culture"] = "wh2_main_def_dark_elves",
 			["rite_name"] = "wh2_main_ritual_def_mathlann",
@@ -596,7 +657,7 @@ function rite_unlock_listeners()
 					local unit = context:unit();
 					local unit_count = cm:get_saved_value("rite_sotek_unit_count_" .. faction_name) or 0;
 					
-					if unit:faction():name() == faction_name and string.find(unit:unit_key(), "_skink") and string.find(unit:unit_key(), "_inf_") then
+					if unit:faction():name() == faction_name and unit:is_unit_in_set("wh2_dlc_17_lzd_rite_of_sotek") then
 						unit_count = unit_count + 1;		
 						cm:set_saved_value("rite_sotek_unit_count_" .. faction_name, unit_count);
 					end;
@@ -1121,16 +1182,20 @@ function rite_unlock_listeners()
 		local current_faction = cm:get_faction(human_factions[i])
 		for j = 1, #rite_templates do
 			local current_rite_template = rite_templates[j];
-			if current_faction:culture() == current_rite_template.culture and not current_faction:rituals():ritual_status(current_rite_template.rite_name):disabled() then
-				cm:lock_ritual(current_faction, current_rite_template.rite_name)
-				local rite = rite_unlock:new(
-					current_rite_template.rite_name,
-					current_rite_template.event_name,
-					current_rite_template.condition,
-					current_rite_template.show_unlock_message
-				)
-				
-				rite:start(human_factions[i]);
+			local ritual_status = current_faction:rituals():ritual_status(current_rite_template.rite_name);
+
+			if ritual_status:is_null_interface() == false then
+				if current_faction:culture() == current_rite_template.culture and ritual_status:disabled() == false then
+					cm:lock_ritual(current_faction, current_rite_template.rite_name)
+					local rite = rite_unlock:new(
+						current_rite_template.rite_name,
+						current_rite_template.event_name,
+						current_rite_template.condition,
+						current_rite_template.show_unlock_message
+					)
+					
+					rite:start(human_factions[i]);
+				end;
 			end;
 		end;
 	end;
@@ -1562,7 +1627,7 @@ function rite_agent_spawn(faction_key, type_key, subtype_key)
 					function()
 						cm:replenish_action_points(cm:char_lookup_str(character));
 						
-						if cm:get_local_faction(true) == faction_key then
+						if cm:has_local_faction() and cm:get_local_faction(true) == faction_key then
 							cm:scroll_camera_from_current(false, 1, {character:display_position_x(), character:display_position_y(), 14.7, 0.0, 12.0});
 						end;
 					end,

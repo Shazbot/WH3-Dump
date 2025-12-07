@@ -18,15 +18,24 @@ Seductive_Influence = {
 	force_vassal_ritual_category = "FORCE_VASSAL",
 
 	---SUBCULTURE CONSTANTS
-	slaanesh_faction_set_key = "slaaneshi_factions", -- DB faction set that contains Slaaneshi subculture plus any others we want (e.g. Azazel, Sigvald)
-	slaanesh_factions = {}, -- populated automatically on startup as a model list
+	seductive_faction_set_key = "wh3_dcl27_seductive_influence", -- DB faction set that contains the factions with access to this feature (some Slaaneshi culture factions plus any others we want (e.g. Azazel, Sigvald))
+	seductive_factions = {}, -- populated automatically on startup as a model list
 	seducible_factions_set_key = "slaanesh_seducible_factions",
 	seducible_factions = {},-- populated automatically on startup as a model list
 
+	-- FACTION KEYS - SI Available factions only
+	nkari_faction_key = "wh3_main_sla_seducers_of_slaanesh",
+
+	-- RITUAL KEY
+	nkari_convert_lord = {
+		ritual_key = "wh3_dlc27_convert_lord",
+		percent_army_to_lose = 25,
+		incident_key = "wh3_dlc27_incident_nkari_convert_lord",
+	},
 }
 
 function Seductive_Influence:initialise()
-	self.slaanesh_factions = cm:model():world():lookup_factions_from_faction_set(self.slaanesh_faction_set_key)
+	self.seductive_factions = cm:model():world():lookup_factions_from_faction_set(self.seductive_faction_set_key)
 	self.seducible_factions = cm:model():world():lookup_factions_from_faction_set(self.seducible_factions_set_key)
 
 	self:setup_faction_turn_start_listeners()
@@ -52,10 +61,10 @@ function Seductive_Influence:setup_faction_turn_start_listeners()
 		);
 	end
 
-	for k, faction_interface in model_pairs(self.slaanesh_factions) do
+	for k, faction_interface in model_pairs(self.seductive_factions) do
 		local faction_key = faction_interface:name()
 		cm:add_faction_turn_start_listener_by_name(
-			"slaanesh_faction_turn_start_" .. faction_key,
+			"seductive_faction_turn_start_" .. faction_key,
 			faction_key,
 			function(context)
 				self:apply_regular_diplomatic_seduction(context:faction())
@@ -81,6 +90,81 @@ function Seductive_Influence:setup_resource_threshold_listeners()
 
 			if new_effect == self.SI_vassal_unlock_threshold and not faction:is_vassal() then
 				self:fire_vassal_available_incident(faction_key)
+			end
+		end,
+		true
+	)
+
+	core:add_listener(
+		"nkari_convert_lord_ritual",
+		"RitualCompletedEvent",
+		function(context)
+			return context:ritual():ritual_key() == self.nkari_convert_lord.ritual_key
+		end,
+		function(context)
+			local tf = context:ritual_target_force()
+			local tf_character = tf:general_character()
+	
+			if not tf_character:is_null_interface() then
+				local tf_unit_list = tf:unit_list()
+				local tf_units_number = tf_unit_list:num_items()
+				local tf_units_to_lose = math.max(0, math.ceil(tf_units_number * (self.nkari_convert_lord.percent_army_to_lose / 100) ) )
+				local unit_list = nil
+
+				if tf_units_to_lose ~= 0 then
+					local tf_unit_list_cqi = {}
+
+					for i = 1, tf_units_number - 1 do
+						local unit = tf_unit_list:item_at(i)
+						if unit:unit_caste() ~= "hero" or unit:unit_caste() ~= "lord" then
+							table.insert(tf_unit_list_cqi, unit:command_queue_index())
+						end
+					end
+
+					if #tf_unit_list_cqi ~= 0 then
+						cm:shuffle_table(tf_unit_list_cqi)
+
+						for i = 1, math.min(tf_units_to_lose, #tf_unit_list_cqi) do
+							cm:remove_unit_by_cqi(tf_unit_list_cqi[i])
+						end
+
+						random_army_manager:remove_force("converted_lord_army")
+						random_army_manager:new_force("converted_lord_army")
+						random_army_manager:add_unit("converted_lord_army", "wh3_main_sla_inf_marauders_0", 10)
+						random_army_manager:add_unit("converted_lord_army", "wh3_main_sla_inf_marauders_1", 10)
+						random_army_manager:add_unit("converted_lord_army", "wh3_main_sla_inf_marauders_2", 10)
+						random_army_manager:add_unit("converted_lord_army", "wh3_dlc20_chs_inf_chaos_warriors_msla_hellscourges", 5)
+
+						unit_list = random_army_manager:generate_force("converted_lord_army", tf_units_to_lose, false)
+					end
+				end
+				
+				local nkari_character = context:performing_faction():faction_leader()
+				local x, y = cm:find_valid_spawn_location_for_character_from_character(self.nkari_faction_key, cm:char_lookup_str(nkari_character), false, 5)
+
+				if x > 0 then
+					cm:create_force_with_general(
+						self.nkari_faction_key,
+						unit_list,
+						cm:model():world():region_manager():region_list():item_at(1):name(),
+						x,
+						y,
+						"general",
+						"wh3_dlc20_chs_lord_msla",
+						"",
+						"",
+						"",
+						"",
+						false,
+						function(cqi)
+							cm:apply_effect_bundle_to_characters_force("wh3_dlc27_bundle_force_converted_lord_nkari", cqi, 0);
+						end
+					);
+				end
+
+				local tf_character_cqi = tf_character:command_queue_index()
+				cm:trigger_incident_with_targets(cm:get_faction(self.nkari_faction_key):command_queue_index(), self.nkari_convert_lord.incident_key, 0, 0, tf_character_cqi, 0, 0, 0)
+				cm:kill_character(tf_character_cqi, false)
 			end
 		end,
 		true
@@ -166,7 +250,7 @@ function Seductive_Influence:setup_battle_and_occupation_listeners()
 		"slaanesh_post_battle_pooled_resource",
 		"CharacterCompletedBattle",
 		function(context)
-			return cm:pending_battle_cache_faction_set_member_is_involved(self.slaanesh_faction_set_key) 
+			return cm:pending_battle_cache_faction_set_member_is_involved(self.seductive_faction_set_key) 
 		end,
 		function(context)
 			local num_attackers = cm:pending_battle_cache_num_attackers()
@@ -213,7 +297,7 @@ function Seductive_Influence:faction_is_seducible(faction_interface)
 end
 
 function Seductive_Influence:faction_is_slaanesh(faction_interface)
-	return is_faction(faction_interface) and not faction_interface:is_null_interface() and faction_interface:is_contained_in_faction_set(self.slaanesh_faction_set_key)
+	return is_faction(faction_interface) and not faction_interface:is_null_interface() and faction_interface:is_contained_in_faction_set(self.seductive_faction_set_key)
 end
 
 

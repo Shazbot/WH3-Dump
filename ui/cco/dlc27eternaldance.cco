@@ -1,0 +1,569 @@
+EternalDance
+{
+	GetInitiativeSetCategoryRecords()
+	{
+		Join(
+			DatabaseRecordContext("CcoInitiativeSetCategoryRecord", "ETERNAL_DANCE_OF_EXCESS_INITIATIVES"),
+			DatabaseRecordContext("CcoInitiativeSetCategoryRecord", "ETERNAL_DANCE_OF_ENVY_INITIATIVES"),
+			DatabaseRecordContext("CcoInitiativeSetCategoryRecord", "ETERNAL_DANCE_OF_GREED_INITIATIVES"),
+			DatabaseRecordContext("CcoInitiativeSetCategoryRecord", "ETERNAL_DANCE_OF_PRIDE_INITIATIVES")
+		)
+	}
+	
+	RitualKeyForInitiativeSetCategoryRecord(CcoInitiativeSetCategoryRecord initiative_set_category)
+	{
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_GREED_INITIATIVES", "wh3_dlc27_sla_ritual_dance_of_greed_performed",
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_ENVY_INITIATIVES", "wh3_dlc27_sla_ritual_dance_of_envy_performed",
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_EXCESS_INITIATIVES", "wh3_dlc27_sla_ritual_dance_of_excess_performed",
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_PRIDE_INITIATIVES", "wh3_dlc27_sla_ritual_dance_of_pride_performed",
+		""
+		))))
+	}
+	
+	CooldownEffectBundleKeyForInitiativeSetCategoryRecord(CcoInitiativeSetCategoryRecord initiative_set_category)
+	{
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_EXCESS_INITIATIVES", "wh3_dlc27_bundle_sla_eternal_dance_of_excess_cooldown_force",
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_ENVY_INITIATIVES", "wh3_dlc27_bundle_sla_eternal_dance_of_envy_cooldown_force",
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_GREED_INITIATIVES", "wh3_dlc27_bundle_sla_eternal_dance_of_greed_cooldown_force",
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_PRIDE_INITIATIVES", "wh3_dlc27_bundle_sla_eternal_dance_of_pride_cooldown_force",
+		""
+		))))
+	}
+	
+	InnateEffectBundleKeyForInitiativeSetCategoryRecord(CcoInitiativeSetCategoryRecord initiative_set_category)
+	{
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_EXCESS_INITIATIVES", "wh3_dlc27_bundle_sla_dance_of_excess_innate",
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_ENVY_INITIATIVES", "wh3_dlc27_bundle_sla_dance_of_envy_innate",
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_GREED_INITIATIVES", "wh3_dlc27_bundle_sla_dance_of_greed_innate",
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_PRIDE_INITIATIVES", "wh3_dlc27_bundle_sla_dance_of_pride_innate",
+		""
+		))))
+	}
+	
+	DanceCompleteEffectBundleKeyForInitiativeSetCategoryRecord(CcoInitiativeSetCategoryRecord initiative_set_category)
+	{
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_EXCESS_INITIATIVES", "wh3_dlc27_bundle_sla_eternal_dance_repertoire_1",
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_ENVY_INITIATIVES", "wh3_dlc27_bundle_sla_eternal_dance_repertoire_2",
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_GREED_INITIATIVES", "wh3_dlc27_bundle_sla_eternal_dance_repertoire_3",
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_PRIDE_INITIATIVES", "wh3_dlc27_bundle_sla_eternal_dance_repertoire_4",
+		""
+		))))
+	}
+	
+	DanceCompleteRitualKeyForInitiativeSetCategoryRecord(CcoInitiativeSetCategoryRecord initiative_set_category)
+	{
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_EXCESS_INITIATIVES", "wh3_dlc27_sla_ritual_masque_of_reforging",
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_ENVY_INITIATIVES", "wh3_dlc27_sla_ritual_masque_of_displacement",
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_GREED_INITIATIVES", "wh3_dlc27_sla_ritual_masque_of_destruction",
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_PRIDE_INITIATIVES", "wh3_dlc27_sla_ritual_masque_of_attraction",
+		""
+		))))
+	}
+	
+	DanceLockEffectBundleKeyForInitiativeSetCategoryRecord(CcoInitiativeSetCategoryRecord initiative_set_category)
+	{
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_EXCESS_INITIATIVES", "",
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_ENVY_INITIATIVES", "",
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_GREED_INITIATIVES", "",
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_PRIDE_INITIATIVES", "wh3_dlc27_bundle_sla_dance_of_pride_locking_force",
+		""
+		))))
+	}
+	
+	DescriptionForInitiativeSetCategoryRecord(CcoInitiativeSetCategoryRecord initiative_set_category)
+	{
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_EXCESS_INITIATIVES", "{{tr:ui_text_replacements_localised_text_wh3_dlc27_eternal_dance_dance_of_slaughter_technical_description}}",
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_ENVY_INITIATIVES", "{{tr:ui_text_replacements_localised_text_wh3_dlc27_eternal_dance_symphony_of_excess_technical_description}}",
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_GREED_INITIATIVES", "{{tr:ui_text_replacements_localised_text_wh3_dlc27_eternal_dance_purifying_pageant_technical_description}}",
+		GetIfElse(initiative_set_category.Key == "ETERNAL_DANCE_OF_PRIDE_INITIATIVES", "{{tr:ui_text_replacements_localised_text_wh3_dlc27_eternal_dance_crescendo_of_ecstasy_technical_description}}",
+		"{{tr:ui_text_replacements_localised_text_wh3_dlc27_eternal_dance_select_a_dance_description}}"
+		))))
+	}
+	
+	HasEnoughResourceToPerformFinishedDanceRitual(CcoCampaignCharacter character)
+	{
+		character.ExEternalDance_GetResourceAmount >= 3500
+	}
+	
+	FinishedDanceRitualTooltipParams(CcoCampaignCharacter character)
+	{
+		GetIfElse
+		(
+			character.ExEternalDance_HasSelectedDance == false,
+			CcoRT_CustomLockReason
+			(
+				Text: "To Be Localised: Select a dance"
+			),
+			GetIfElse
+			(
+				character.ExEternalDance_IsSelectedDanceFinished == false,
+				CcoRT_CustomLockReason
+				(
+					Text: "{{tr:ui_text_replacements_localised_text_wh3_dlc27_eternal_dance_dance_unlock_5}}"
+				),
+				GetIfElse
+				(
+					EternalDance.HasEnoughResourceToPerformFinishedDanceRitual(character) == false,
+					CcoRT_CustomLockReason
+					(
+						Text: "{{tr:ui_text_replacements_localised_text_wh3_dlc27_eternal_dance_dance_unlock_6}}"
+					),
+					CcoRT_CustomLockReason
+					(
+						Text: ""
+					)
+				)
+			)
+		)
+	}
+
+
+	PerformDancePanelButtonTooltip(CcoCampaignCharacter character, CcoInitiativeSetCategoryRecord initiative_set_category)
+	{
+		GetIfElse
+		(
+			character.ExEternalDance_IsDanceOnCooldown(initiative_set_category),
+			"{{tr:uied_component_texts_localised_string_dy_cooldown_Tooltip_4b0014}}",
+			GetIfElse 
+			(	
+				character.InitiativeManager.IsInitiativeSetCategoryDisabled(initiative_set_category), 
+				"{{tr:ui_text_replacements_localised_text_wh3_dlc27_eternal_dance_dance_unlock_3}}", "{{tr:ui_text_replacements_localised_text_wh3_dlc27_eternal_dance_selection_tooltip_action_tx}}" + initiative_set_category.DisplayName
+			) 
+		)
+			
+	}
+	
+	GetDanceCompleteEffectBundleContext(CcoInitiativeSetCategoryRecord initiative_set_category)
+	{
+		(bundle_key = EternalDance.DanceCompleteEffectBundleKeyForInitiativeSetCategoryRecord(initiative_set_category)) =>
+		{
+			GetIf(bundle_key != "", DatabaseRecordContext("CcoEffectBundle", bundle_key))
+		}
+	}
+
+	GetTempoSearchStringDeterminedByGroupPooledResourceEffectRecord(CcoGroupPooledResourceEffectRecord group_pooled_resource_record)
+	{
+		group_pooled_resource_record.EffectBundle.Key.Replace("wh3_dlc27_bundle_sla_", "")
+	}
+	
+	GetTempoLevelByGroupPooledResourceEffectRecord(CcoGroupPooledResourceEffectRecord group_pooled_resource_record)
+	{
+		group_pooled_resource_record.EffectBundle.Key.Replace("wh3_dlc27_bundle_sla_tempo_", "")
+	}
+	
+	GetCurrentGroupPooledResourceRecordContext(CcoCampaignCharacter character)
+	{
+		character.MilitaryForceContext.PooledResourceContext("wh3_dlc27_sla_tempo").CurrentGroupPooledResourceEffectContext("ABSOLUTE_VALUE")
+	}
+	
+	GetCharacterTempoLevel(CcoCampaignCharacter character)
+	{
+		(group_pooled_resource_record = EternalDance.GetCurrentGroupPooledResourceRecordContext(character)) =>
+		{
+			EternalDance.GetTempoLevelByGroupPooledResourceEffectRecord(group_pooled_resource_record)
+		}
+	}
+
+	IsLoadDanceInactive(CcoEternalDanceInstanceData char_dance, CcoEternalDanceInstanceData selected_dance)
+	{
+		char_dance.CategoryRecord.Key != selected_dance.CategoryRecord.Key ||
+		GetIfElse
+		(
+			char_dance.IsDanceFinished, 
+			GetIfElse
+			(
+				PlayersFaction.InitiativeManager.IsSavedPresetPresentForInitiativeSetCategory(char_dance.CategoryRecord),
+				SelectedCharacter.InitiativeManager.IsPresetForExclusiveCategorySaved,
+				true
+			),
+			false)
+	}
+
+	IsCharacterRepertoireRecorded(CcoCampaignCharacter character)
+	{
+		character.InitiativeManager.IsPresetForExclusiveCategorySaved("eternal_dance_categories")
+	}
+	
+	GetTextForChangeDanceConfirmationDlg(CcoCampaignCharacter character, CcoInitiativeSetCategoryRecord initiative_set_category)
+	{
+		(formatting_text = "{{tr:campaign_localised_strings_string_wh3_dlc27_eternal_dance_dialogue_perform_dance_msg}}",
+		 current_dance = character.ExEternalDance_SelectedDanceCategoryRecord,
+		 dissonance_duration = character.FamilyMemberSharedStateReadString("dissonance_effect_duration_ui_shared_state"),
+		 transferred_tempo_percentage = character.FamilyMemberSharedStateReadString("transferred_tempo_percentage_ui_shared_state"),
+		 cooldown_turns = character.ExEternalDance_GetDanceCooldownEffectBundleUponChangeDance(initiative_set_category),
+		 clarification = GetIfElse
+				(
+					EternalDance.IsCharacterRepertoireRecorded(character),
+					"{{tr:campaign_localised_strings_string_wh3_dlc27_eternal_dance_dialogue_perform_dance_msg_in_repertoire_clarification}}",
+					"{{tr:campaign_localised_strings_string_wh3_dlc27_eternal_dance_dialogue_perform_dance_msg_not_in_repertoire_clarification}}"
+				)
+		) =>
+		{
+			Format(formatting_text, current_dance.DisplayName, cooldown_turns, dissonance_duration, transferred_tempo_percentage, clarification)
+		}
+		
+	}
+	
+	GetTitleForChangeDanceConfirmationDlg()
+	{
+		"{{tr:campaign_localised_strings_string_wh3_dlc27_eternal_dance_dialogue_perform_dance_title}}"
+	}
+	
+	TryChangeDance(CcoCampaignCharacter character, CcoInitiativeSetCategoryRecord initiative_set_category)
+	{
+		(current_dance = character.ExEternalDance_SelectedDanceCategoryRecord) =>
+		{
+			DoIf
+			(
+				IsContextValid(current_dance) == false || current_dance.Key != initiative_set_category.Key,
+				DoIfElse
+				(
+					IsContextValid(current_dance) == false,
+					Do(
+						character.InitiativeManager.SetInitiativeSetCategoryPreset(initiative_set_category),
+						UiMsg("DanceChanged"),
+						UiMsg('trigger_dance_btn_perform_visual_feedback' + initiative_set_category.Key)
+					),
+					ShowPrompt
+					(
+						EternalDance.GetTitleForChangeDanceConfirmationDlg,
+						EternalDance.GetTextForChangeDanceConfirmationDlg(character, initiative_set_category),
+						Do(
+							SelectedCharacter.InitiativeManager.SetInitiativeSetCategoryPreset(this),
+							UiMsg("DanceChanged"),
+							UiMsg('trigger_dance_btn_perform_visual_feedback' + this.Key)
+						),
+						"",
+						"",
+						"",
+						initiative_set_category,
+						"",
+						false
+					)
+				)
+			)
+		}
+	}
+
+	GetTextForTempoLevelTooltipTitle(CcoCampaignCharacter character, CcoGroupPooledResourceEffectRecord group)
+	{
+		(formatting_text = "{{tr:campaign_localised_strings_string_wh3_dlc27_eternal_dance_tempo_node_tooltip_title}}",
+		threshold = group.LowerBound,
+		initiative_set_name = character.ExEternalDance_SelectedDanceInitiativeSetForTierDeterminedByGroupPooledResourceEffectRecord(group).InitiativeSetContext.Name
+		) =>
+		{
+			Format(formatting_text, threshold, initiative_set_name)
+		}
+	}
+
+	
+
+	
+}
+
+CcoCampaignFaction
+{
+	ExEternalDance_RitualContextForInitiativeSetCategory(CcoInitiativeSetCategoryRecord initiative_set_category)
+	{
+		(ritual_key = EternalDance.RitualKeyForInitiativeSetCategoryRecord(initiative_set_category)) =>
+		{
+			GetIf(ritual_key != "", RitualContextForKey(ritual_key))
+		}
+	}
+	
+	ExEternalDance_RitualContextForFinishedInitiativeSetCategory(CcoInitiativeSetCategoryRecord initiative_set_category)
+	{
+		(ritual_key = EternalDance.RitualKeyForFinishedInitiativeSetCategoryRecord(initiative_set_category)) =>
+		{
+			GetIf(ritual_key != "", RitualContextForKey(ritual_key))
+		}
+	}
+	
+	ExEternalDance_FinishedDancesList
+	{
+		GeneralsList
+		.Filter(ExEternalDance_IsSelectedDanceFinished)
+		.Transform(ExEternalDance_SelectedDanceCategoryRecord)
+		.Distinct
+	}
+	
+	ExEternalDance_UnfinishedDancesCount
+	{
+		3 - ExEternalDance_FinishedDancesList.Size
+	}
+}
+
+CcoCampaignCharacter
+{
+	ExEternalDance_GetResourceAmount
+	{
+		MilitaryForceContext.PooledResourceContext("wh3_dlc27_sla_tempo").Total
+	}
+	
+	ExEternalDance_SelectedDanceCategoryRecord
+	{
+		InitiativeManager.GetActiveCategoryFromMutuallyExclusiveSet("eternal_dance_categories")
+	}
+	
+	ExEternalDance_SelectedDanceRitualContext
+	{
+		(initiative_set_category = ExEternalDance_SelectedDanceCategoryRecord) =>
+		{
+			GetIf(IsContextValid(initiative_set_category), FactionContext.ExEternalDance_RitualContextForInitiativeSetCategory(initiative_set_category))
+		}
+	}
+	
+	ExEternalDance_SelectedDanceInitiativeSetList
+	{
+		(initiative_set_category = ExEternalDance_SelectedDanceCategoryRecord) =>
+		{
+			GetIf(IsContextValid(initiative_set_category), InitiativeManager.InitiativeSetList(initiative_set_category.Key))
+		}
+	}
+	
+	ExEternalDance_SelectedDanceInitiativeSetForTierDeterminedByGroupPooledResourceEffectRecord(CcoGroupPooledResourceEffectRecord group_pooled_resource_record)
+	{
+		(initiative_set_category = ExEternalDance_SelectedDanceCategoryRecord,
+		search_key = EternalDance.GetTempoSearchStringDeterminedByGroupPooledResourceEffectRecord(group_pooled_resource_record)) =>
+		{
+			GetIf(IsContextValid(initiative_set_category), InitiativeManager.GetInitiativeSetInCategoryUsingSearchKey(initiative_set_category, search_key))
+		}
+	}
+
+	ExEternalDance_SelectedDanceCanPickInitiativeForTierDeterminedByGroupPooledResourceEffectRecord(CcoGroupPooledResourceEffectRecord group_pooled_resource_record)
+	{
+		(initiative_sets = ExEternalDance_SelectedDanceInitiativeSetList,
+		tempo = EternalDance.GetTempoLevelByGroupPooledResourceEffectRecord(group_pooled_resource_record)) =>
+		{
+			GetIfElse(tempo == "1", true,
+			GetIfElse(tempo == "2", initiative_sets.Filter(InitiativeSetContext.Key.Contains("tempo_1")).All(ChosenInitiatives.IsEmpty == false),
+			GetIfElse(tempo == "3", Join(initiative_sets.Filter(InitiativeSetContext.Key.Contains("tempo_1")),
+									initiative_sets.Filter(InitiativeSetContext.Key.Contains("tempo_2")))
+									.All(ChosenInitiatives.IsEmpty == false),
+			GetIfElse(tempo == "4", Join(initiative_sets.Filter(InitiativeSetContext.Key.Contains("tempo_1")),
+									initiative_sets.Filter(InitiativeSetContext.Key.Contains("tempo_2")),
+									initiative_sets.Filter(InitiativeSetContext.Key.Contains("tempo_3")))
+									.All(ChosenInitiatives.IsEmpty == false),
+			false
+			))))
+		}
+	}
+	
+	ExEternalDance_SelectedDanceLastTierInitiativeSet
+	{
+		(initiative_set_category = ExEternalDance_SelectedDanceCategoryRecord) =>
+		{
+			GetIf(IsContextValid(initiative_set_category), InitiativeManager.GetInitiativeSetInCategoryUsingSearchKey(initiative_set_category, "tempo_4"))
+		}
+	}
+	
+	ExEternalDance_SelectedDanceLastTierFirstActiveInitiative
+	{
+		(initiative_set = ExEternalDance_SelectedDanceLastTierInitiativeSet) =>
+		{
+			GetIf(IsContextValid(initiative_set), initiative_set.ChosenInitiatives.FirstContext)
+		}
+	}
+	
+	ExEternalDance_FinishedDanceRitualContext
+	{
+		(initiative_set_category = ExEternalDance_SelectedDanceCategoryRecord) =>
+		{
+			GetIf
+			(
+				IsContextValid(initiative_set_category) && EternalDance.DanceCompleteRitualKeyForInitiativeSetCategoryRecord(initiative_set_category) != "", 
+				FactionContext.RitualContextForKey(EternalDance.DanceCompleteRitualKeyForInitiativeSetCategoryRecord(initiative_set_category), true)
+			)
+		}
+	}
+
+	
+	ExEternalDance_GetDanceAppliedCooldownEffectBundle(CcoInitiativeSetCategoryRecord initiative_set_category)
+	{
+		(bundle_key = EternalDance.CooldownEffectBundleKeyForInitiativeSetCategoryRecord(initiative_set_category)) =>
+		{
+			GetIf(bundle_key != "" && IsContextValid(MilitaryForceContext), MilitaryForceContext.EffectBundleUnfilteredList().Filter(Key == bundle_key).FirstContext)
+		}
+	}
+	
+	ExEternalDance_GetDanceCooldownEffectBundleUponChangeDance(CcoInitiativeSetCategoryRecord initiative_set_category)
+	{
+		5
+	}
+	
+	ExEternalDance_GetDanceInnateEffectBundle(CcoInitiativeSetCategoryRecord initiative_set_category)
+	{
+		(bundle_key = EternalDance.InnateEffectBundleKeyForInitiativeSetCategoryRecord(initiative_set_category)) =>
+		{
+			GetIf(bundle_key != "", DatabaseRecordContext("CcoEffectBundle", bundle_key))
+		}
+	}
+	
+	ExEternalDance_IsDanceOnCooldown(CcoInitiativeSetCategoryRecord initiative_set_category)
+	{
+		(cooldown_bundle_key = EternalDance.CooldownEffectBundleKeyForInitiativeSetCategoryRecord(initiative_set_category)) =>
+		{
+			GetIf(cooldown_bundle_key != "" && IsContextValid(MilitaryForceContext), MilitaryForceContext.IsEffectBundleActive(cooldown_bundle_key))
+		}
+	}
+	
+	ExEternalDance_DanceCooldownTurnRemaining(CcoInitiativeSetCategoryRecord initiative_set_category)
+	{
+		(effect_bunndle = ExEternalDance_GetDanceAppliedCooldownEffectBundle(initiative_set_category)) =>
+		{
+			GetIfElse(IsContextValid(effect_bunndle), effect_bunndle.TurnsRemaining, -99)
+		}
+	}
+	
+	ExEternalDance_IsDanceLocked(CcoInitiativeSetCategoryRecord initiative_set_category)
+	{
+		ExEternalDance_IsDanceOnCooldown(initiative_set_category) || InitiativeManager.IsInitiativeSetCategoryDisabled(initiative_set_category)
+	}
+	
+	ExEternalDance_IsDanceSelected(CcoInitiativeSetCategoryRecord initiative_set_category)
+	{
+		(selected_initiative_set_category = ExEternalDance_SelectedDanceCategoryRecord) =>
+		{
+			IsContextValid(selected_initiative_set_category) && selected_initiative_set_category.Key == initiative_set_category.Key
+		}
+	}
+	
+	ExEternalDance_HasSelectedDance
+	{
+		(initiative_set_category = ExEternalDance_SelectedDanceCategoryRecord) =>
+		{
+			IsContextValid(initiative_set_category)
+		}
+	}
+	
+	ExEternalDance_IsSelectedDanceFinished
+	{
+		(initiative_set_category = ExEternalDance_SelectedDanceCategoryRecord) =>
+		{
+			IsContextValid(initiative_set_category) && InitiativeManager.IsPresetForInitiativeSetCategoryFinished(initiative_set_category)
+		}
+	}
+	
+	ExEternalDance_ChosenInitiativesForCategory(CcoInitiativeSetCategoryRecord initiative_set_category)
+	{
+		InitiativeManager.InitiativeSetList(initiative_set_category.Key)
+						.Transform
+						(
+							(initiative_set) =>	initiative_set.ChosenInitiatives
+						)
+	}
+	
+	ExEternalDance_EffectsForDance(CcoInitiativeSetCategoryRecord initiative_set_category)
+	{
+		(selected_initiative_set_category = ExEternalDance_SelectedDanceCategoryRecord) =>
+		{
+			GetIfElse
+			(
+				IsContextValid(selected_initiative_set_category) && selected_initiative_set_category.Key == initiative_set_category.Key,
+				Join
+				(
+					InitiativeManager.InitiativeSetList(initiative_set_category.Key)
+						.Transform((initiative_set) =>
+							GetIfElse
+							(
+								initiative_set.ActiveInitiatives.IsEmpty,
+								initiative_set.ChosenInitiatives,
+								initiative_set.ActiveInitiatives
+							)
+						)
+						.Transform((initiative) =>
+							initiative.EffectsProvided
+						),
+					ExEternalDance_GetDanceInnateEffectBundle(initiative_set_category).EffectList
+				),
+				ExEternalDance_GetDanceInnateEffectBundle(initiative_set_category).EffectList
+			)
+		}
+	}
+	
+	ExEternalDance_InitiativeSets(CcoInitiativeSetCategoryRecord initiative_set_category)
+	{
+		(selected_initiative_set_category = ExEternalDance_SelectedDanceCategoryRecord) =>
+		{
+			GetIf
+			(
+				IsContextValid(selected_initiative_set_category) && selected_initiative_set_category.Key == initiative_set_category.Key,
+				InitiativeManager.InitiativeSetList(initiative_set_category.Key).Filter(ActiveInitiatives.IsEmpty == false || ChosenInitiatives.IsEmpty == false)
+			)
+		}
+	}
+	
+	ExEternalDance_UnlockDance(CcoInitiativeSetCategoryRecord initiative_set_category)
+	{
+		(bundle_key = EternalDance.DanceLockEffectBundleKeyForInitiativeSetCategoryRecord(initiative_set_category)) =>
+		{
+			DoIf(bundle_key != "" && IsContextValid(MilitaryForceContext), MilitaryForceContext.DevRemoveEffectBundle(bundle_key))
+		}
+	}
+	
+	ExEternalDance_ResetDanceChangeCooldown(CcoInitiativeSetCategoryRecord initiative_set_category)
+	{
+		(bundle_key = EternalDance.CooldownEffectBundleKeyForInitiativeSetCategoryRecord(initiative_set_category)) =>
+		{
+			DoIf
+			(
+				bundle_key != "" && IsContextValid(MilitaryForceContext), 
+				Do
+				(
+					MilitaryForceContext.DevRemoveEffectBundle(bundle_key)
+				)
+			)
+		}
+	}
+}
+
+EternalDancePanel
+{
+	UpdateDancesButonGroupOnSelectionChange(CcoComponent button_group, CcoCampaignCharacter character)
+	{
+		DoIf
+		(
+			character.ExEternalDance_HasSelectedDance == false,
+			button_group.ClearSelection
+		)
+	}
+	
+	dance_theme
+	{
+		Component("ED6D31A7-9FBF-4D6C-8E673ECA61FA35FE")
+	}
+	
+	dance_effects
+	{
+		Component("3B952B3F-5FF1-4C97-B0A2531996494E88")
+	}
+	
+	SyncDanceDetailsState(CcoComponent button_effects_toggle)
+	{
+		Do
+		(
+			dance_theme.SetVisible(button_effects_toggle.IsSelected == false),
+			dance_effects.SetVisible(button_effects_toggle.IsSelected == true)
+		)
+	}
+
+	CalcDanceDetailsState(CcoComponent button_effects_toggle)
+	{
+		(character = SelectedCharacter) =>
+		{
+			DoIfElse
+			(
+				character.ExEternalDance_HasSelectedDance 
+				&& character.ExEternalDance_ChosenInitiativesForCategory(character.ExEternalDance_SelectedDanceCategoryRecord).Size > 0,
+				Do(
+					button_effects_toggle.SetState("selected"),
+					SyncDanceDetailsState(button_effects_toggle)
+				),
+				Do(
+					button_effects_toggle.SetState("active"),
+					SyncDanceDetailsState(button_effects_toggle)
+				)
+			)
+		}
+	}
+}

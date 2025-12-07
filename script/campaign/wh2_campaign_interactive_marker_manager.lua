@@ -85,7 +85,7 @@ function marker:despawn_on_interaction(should_despawn, opt_dilemma_choices)
 		opt_dilemma_choices = {opt_dilemma_choices}
 	end
 	
-	self.despawn_settings = {should_despawn = true, dilemma_choices = opt_dilemma_choices}
+	self.despawn_settings = {should_despawn = should_despawn, dilemma_choices = opt_dilemma_choices}
 end
 
 ---add a dilemma to trigger when interacting with the marker

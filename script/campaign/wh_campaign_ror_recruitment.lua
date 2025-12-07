@@ -123,7 +123,10 @@ regiments_of_renown = {
 		"wh2_dlc10_hef_inf_the_storm_riders_ror_0",
 		"wh2_dlc15_hef_inf_archers_ror_0",
 		"wh2_dlc15_hef_mon_arcane_phoenix_ror_0",
-		"wh2_dlc15_hef_mon_war_lions_of_chrace_ror_0"
+		"wh2_dlc15_hef_mon_war_lions_of_chrace_ror_0",
+		"wh3_dlc27_hef_inf_ships_company_ror",
+		"wh3_dlc27_hef_mon_merwyrm_ror",
+		"wh3_dlc27_hef_inf_swordmasters_of_hoeth_ror"
 	},
 	--------------------
 	---- DARK ELVES ----
@@ -255,7 +258,11 @@ regiments_of_renown = {
 		"wh3_twa08_sla_mon_keeper_of_secrets_0_ror",
 		"wh_pro04_chs_inf_chaos_warriors_ror_0",
 		"wh3_dlc20_chs_cav_chaos_chariot_msla_ror",
-		"wh3_twa10_sla_inf_marauders_spears_ror"
+		"wh3_twa10_sla_inf_marauders_spears_ror",
+		"wh3_dlc27_nor_cav_marauder_horsemen_ror",
+		"wh3_dlc27_sla_mon_champions_of_slaanesh_ror",
+		"wh3_dlc27_sla_mon_preyton_ror"
+		
 	},
 	------------------
 	---- TZEENTCH ----
@@ -334,7 +341,12 @@ regiments_of_renown = {
 		"wh_pro04_nor_mon_fimir_ror_0",
 		"wh_pro04_nor_mon_skinwolves_ror_0",
 		"wh_pro04_nor_mon_war_mammoth_ror_0",
-		"wh_pro04_nor_mon_marauder_warwolves_ror_0"
+		"wh_pro04_nor_mon_marauder_warwolves_ror_0",
+		"wh3_dlc27_nor_inf_chaos_marauders_great_weapons_ror",
+		"wh3_dlc27_nor_cav_marauder_horsemen_ror",
+		"wh3_dlc27_nor_cav_chaos_chariot_ror",
+		"wh3_dlc27_sla_mon_preyton_ror",
+		"wh3_dlc27_nor_mon_chimera_ror"
 	},
 	---------------------------
 	---- WARRIORS OF CHAOS ----

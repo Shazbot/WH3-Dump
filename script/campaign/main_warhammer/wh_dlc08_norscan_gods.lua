@@ -1,199 +1,373 @@
-NORSCA_REWARD_CHARACTER_TYPES = {
-	agent = "agent",
-	general = "general"
-}
+--[[
+###	STILL TO DO ###
+	- rework victory conditions
+	- add cutscenes for the invasions?
+	- add special reward bundle if rejecting all champions
+]]--
 
-NORSCAN_REWARDS = {
-	khorne = {
-		character = {
-			type = NORSCA_REWARD_CHARACTER_TYPES.agent,
-			subtype = "wh3_main_ie_nor_killgore_slaymaim",
-			spawn_rank = 25
-		}
+norscan_gods = {
+	allegiance_factions = {
+		["wh_dlc08_nor_norsca"] 		= {crow_dilemma_spawned = false, eagle_dilemma_spawned = false, hound_dilemma_spawned = false, serpent_dilemma_spawned = false, champion_spawned = false},
+		["wh_dlc08_nor_wintertooth"] 	= {crow_dilemma_spawned = false, eagle_dilemma_spawned = false, hound_dilemma_spawned = false, serpent_dilemma_spawned = false, champion_spawned = false},
+
 	},
-	slaanesh = {
-		character = {
-			type = NORSCA_REWARD_CHARACTER_TYPES.agent,
-			subtype = "wh_dlc08_nor_kihar",
-			spawn_rank = 25,
-		}
+	allegiance_gods_pooled_resources = {
+		crow 	= "nor_progress_crow",
+		eagle 	= "nor_progress_eagle",
+		hound 	= "nor_progress_hound",
+		serpent = "nor_progress_serpent",
 	},
-	tzeentch = {
-		character = {
-			type = NORSCA_REWARD_CHARACTER_TYPES.general,
-			ids = {
-				wh_dlc08_nor_norsca = "1641404268",
-				wh_dlc08_nor_wintertooth = "136640584",
-			},
-			subtype = "wh_dlc08_nor_arzik",
-			spawn_rank = 25
-		}
+	allegiance_factor = "buildings",
+	--THESE NEED TO MATCH THE DATA THRESHOLDS
+	allegiance_thresholds = {5, 10, 15},	
+	allegiance_advice_prefix = "dlc08.camp.advice.nor.",
+	allegiance_advice_tracker = {
+		["wh_dlc08_nor_norsca"] = {
+			["general"] 	= {first_altar_advice 	= false, champion_advice  = false},
+			["khorne"] 		= {advice_one_heard 	= false, advice_two_heard = false, advice_three_heard = false},
+			["nurgle"] 		= {advice_one_heard 	= false, advice_two_heard = false, advice_three_heard = false},
+			["slaanesh"] 	= {advice_one_heard 	= false, advice_two_heard = false, advice_three_heard = false},
+			["tzeentch"] 	= {advice_one_heard 	= false, advice_two_heard = false, advice_three_heard = false},
+		},
+		["wh_dlc08_nor_wintertooth"] = {
+			["general"] 	= {first_altar_advice 	= false, champion_advice  = false},
+			["khorne"] 		= {advice_one_heard 	= false, advice_two_heard = false, advice_three_heard = false},
+			["nurgle"] 		= {advice_one_heard 	= false, advice_two_heard = false, advice_three_heard = false},
+			["slaanesh"] 	= {advice_one_heard 	= false, advice_two_heard = false, advice_three_heard = false},
+			["tzeentch"] 	= {advice_one_heard 	= false, advice_two_heard = false, advice_three_heard = false},
+		},
 	},
-	nurgle = {
-		character = {
-			type = NORSCA_REWARD_CHARACTER_TYPES.general,
-			ids = {
-				wh_dlc08_nor_norsca = "1666706152",
-				wh_dlc08_nor_wintertooth = "1373379564",
-			},
-			subtype = "wh3_main_ie_nor_burplesmirk_spewpit",
-			spawn_rank = 25
-		}
-	}
+
+
+	dilemma_key_prefix = "wh3_dlc27_nor_champion_",
+	dilemma_champion_agent_type = {
+		agent = "agent",
+		general = "general"
+	},
+	dilemma_champion_reward = {
+		crow = {
+			character = {
+				type = "general",
+				ids = {
+					wh_dlc08_nor_norsca = "1666706152",
+					wh_dlc08_nor_wintertooth = "1373379564",
+				},
+				subtype = "wh3_main_ie_nor_burplesmirk_spewpit",
+				spawn_rank = 25
+			}
+		},
+		eagle = {
+			character = {
+				type = "general",
+				ids = {
+					wh_dlc08_nor_norsca = "1641404268",
+					wh_dlc08_nor_wintertooth = "136640584",
+				},
+				subtype = "wh_dlc08_nor_arzik",
+				spawn_rank = 25
+			}
+		},
+		hound = {
+			character = {
+				type = "agent",
+				subtype = "wh3_main_ie_nor_killgore_slaymaim",
+				spawn_rank = 25
+			}
+		},
+		serpent = {
+			character = {
+				type = "agent",
+				subtype = "wh_dlc08_nor_kihar",
+				spawn_rank = 25,
+			}
+		},
+		
+	},
+
+	challenger_faction_prefix = "wh_dlc08_chs_chaos_challenger_",
+	challenger_faction_keys = {
+		"wh_dlc08_chs_chaos_challenger_khorne",
+		"wh_dlc08_chs_chaos_challenger_nurgle",
+		"wh_dlc08_chs_chaos_challenger_slaanesh",
+		"wh_dlc08_chs_chaos_challenger_tzeentch"
+	},
+	challenger_details = {
+		["khorne"] = {agent_subtype = "wh_dlc08_chs_challenger_khorne", forename = "names_name_635561999", clan_name = "", family_name = "", other_name = "", effect_bundle = "wh_main_bundle_military_upkeep_free_force_special_character_unbreakable"},
+		["nurgle"] = {agent_subtype = "wh_dlc08_chs_challenger_nurgle", forename = "names_name_327875186", clan_name = "", family_name = "", other_name = "", effect_bundle = "wh_main_bundle_military_upkeep_free_force_special_character_unbreakable"},
+		["slaanesh"] = {agent_subtype = "wh_dlc08_chs_challenger_slaanesh", forename = "names_name_1572470675", clan_name = "", family_name = "", other_name = "", effect_bundle = "wh_main_bundle_military_upkeep_free_force_special_character_unbreakable"},
+		["tzeentch"] = {agent_subtype = "wh_dlc08_nor_arzik", forename = "names_name_1019189048", clan_name = "", family_name = "", other_name = "", effect_bundle = "wh_main_bundle_military_upkeep_free_force_special_character_unbreakable"}
+	},
+	challenger_units = {
+		["khorne"] 		= 	{chosen_shield = "wh3_dlc20_chs_inf_chosen_mkho", chosen_special = "wh3_dlc20_chs_inf_chosen_mkho_dualweapons", 	knight = "wh3_dlc20_chs_cav_chaos_knights_mkho", 	spawn = "wh3_main_kho_mon_spawn_of_khorne_0", 			daemon = "wh3_main_kho_inf_bloodletters_0"},
+		["nurgle"] 		= 	{chosen_shield = "wh3_dlc20_chs_inf_chosen_mnur", chosen_special = "wh3_dlc20_chs_inf_chosen_mnur_greatweapons", 	knight = "wh3_dlc20_chs_cav_chaos_knights_mnur", 	spawn = "wh3_main_nur_mon_spawn_of_nurgle_0_warriors", 	daemon = "wh3_main_nur_inf_plaguebearers_0"},
+		["slaanesh"] 	= 	{chosen_shield = "wh3_dlc20_chs_inf_chosen_msla", chosen_special = "wh3_dlc20_chs_inf_chosen_msla_hellscourges", 	knight = "wh3_dlc20_chs_cav_chaos_knights_msla", 	spawn = "wh3_main_sla_mon_spawn_of_slaanesh_0", 		daemon = "wh3_main_sla_inf_daemonette_0"},
+		["tzeentch"] 	= 	{chosen_shield = "wh3_dlc20_chs_inf_chosen_mtze", chosen_special = "wh3_dlc20_chs_inf_chosen_mtze_halberds", 		knight = "wh3_main_tze_cav_chaos_knights_0", 		spawn = "wh3_main_tze_mon_spawn_of_tzeentch_0", 		daemon = "wh3_main_tze_inf_blue_horrors_0"},
+	},
+	challenger_spawn_distance_min_key = "nor_allegiance_challenger_spawn_distance_min",
+	challenger_spawn_distance_max_key = "nor_allegiance_challenger_spawn_distance_max",
+
+	god_conversion_table = {
+		crow 	= "nurgle",
+		eagle 	= "tzeentch",
+		hound 	= "khorne",
+		serpent = "slaanesh",
+	},
+	rivalry_conversion_table = {
+		nurgle 		= "tzeentch",
+		tzeentch 	= "nurgle",
+		khorne 		= "slaanesh",
+		slaanesh 	= "khorne",
+	},
+
+	allegiance_ultimate_refusal_mission = "wh3_dlc27_nor_allegiance_ultimate_refusal",
+	allegiance_challenger_destroy_mission = "wh3_dlc27_nor_allegiance_challenger_destroy",
+	allegiance_increase_dedication_to_norscan_god_mission = "wh3_dlc27_nor_allegiance_increase_dedication_to_god",
+	allegiance_increase_dedication_to_norscan_god_mission_turn = 2,
+	allegiance_increase_dedication_to_norscan_god_mission_pool_res_requirement = 2,
 }
 
-NORSCAN_GODS = {
-	--[[
-	["wh_dlc08_nor_norsca"] = {
-		["khorne"] = {favour = 0, aligned = false, spawned = false, defeated = false, final = false, challenger_cqi = -1, challenger_force_cqi = -1}
-	}
-	]]
-}
 
-NORSCAN_FAVOUR_GAIN = 6
-CHAPTER_1_FAVOUR_REQUIREMENT = 30
-CHAPTER_2_FAVOUR_REQUIREMENT = 60
-CHAPTER_3_FAVOUR_REQUIREMENT = 100
-NORSCAN_CHALLENGER_FACTION_PREFIX = "wh_dlc08_chs_chaos_challenger_"
-NORSCA_AVAILABLE_SPAWN_LOCATIONS = {}	-- Runtime tracker of available spawn locations, as spawn locations are made unavailable once something has spawned on them.
 
-NORSCA_SPAWN_LOCATIONS = {	-- Startup config of spawn locations. On a new game, this is copied into the runtime NORSCA_AVAILABLE_SPAWN_LOCATIONS.
-	{398, 824},
-	{472, 869},
-	{646, 870},
-	{771, 801},
-}
 
-GOD_KEY_TO_POOLED_RESOURCE = {
-	khorne = "nor_progress_hound",
-	slaanesh = "nor_progress_serpent",
-	tzeentch = "nor_progress_eagle",
-	nurgle = "nor_progress_crow",
-}
 
-GOD_KEY_TO_CHALLENGER_DETAILS = {
-	["khorne"] = {agent_subtype = "wh_dlc08_chs_challenger_khorne", forename = "names_name_635561999", clan_name = "", family_name = "", other_name = "", effect_bundle = "wh_main_bundle_military_upkeep_free_force_special_character_unbreakable"},
-	["slaanesh"] = {agent_subtype = "wh_dlc08_chs_challenger_slaanesh", forename = "names_name_1572470675", clan_name = "", family_name = "", other_name = "", effect_bundle = "wh_main_bundle_military_upkeep_free_force_special_character_unbreakable"},
-	["nurgle"] = {agent_subtype = "wh_dlc08_chs_challenger_nurgle", forename = "names_name_327875186", clan_name = "", family_name = "", other_name = "", effect_bundle = "wh_main_bundle_military_upkeep_free_force_special_character_unbreakable"},
-	["tzeentch"] = {agent_subtype = "wh_dlc08_nor_arzik", forename = "names_name_1019189048", clan_name = "", family_name = "", other_name = "", effect_bundle = "wh_main_bundle_military_upkeep_free_force_special_character_unbreakable"}
-}
 
-CHAOS_CHALLENGER_FACTION_KEY_LOOKUP = {
-	"wh_dlc08_chs_chaos_challenger_khorne",
-	"wh_dlc08_chs_chaos_challenger_nurgle",
-	"wh_dlc08_chs_chaos_challenger_slaanesh",
-	"wh_dlc08_chs_chaos_challenger_tzeentch"
-}
+function norscan_gods:initialise()
 
-function Add_Norscan_Gods_Listeners()
-	out("#### Adding Norscan Gods Listeners ####")
-	
-	for i = 1, #CHAOS_CHALLENGER_FACTION_KEY_LOOKUP do
-		cm:add_faction_turn_start_listener_by_name(
-			"Norsca_ChallengerTurnStart",
-			CHAOS_CHALLENGER_FACTION_KEY_LOOKUP[i],
-			function(context)
-				cm:force_diplomacy("faction:" .. context:faction():name(), "all", "all", false, false, true)
-			end,
-			true
-		)
+
+	if cm:is_new_game() then
+		self:setup_champion_locks()
 	end
 
-	local human_factions = cm:get_human_factions()
-	
-	for i = 1, #human_factions do
-		local faction_key = human_factions[i]
-		local faction = cm:get_faction(faction_key)
-		
-		if faction:subculture() == "wh_dlc08_sc_nor_norsca" then
-			out("\t\t" .. faction_key .. ":")
 
-			if NORSCAN_GODS[faction_key] == nil then
-				NORSCAN_GODS[faction_key] = {}
+	core:add_listener(
+		"AllegianceTracker_CharacterPerformsSettlementOccupationDecision",
+		"CharacterPerformsSettlementOccupationDecision",
+		true,
+		function(context)
+			local character_faction_name = context:character():faction():name()
+			local previous_owner_name = context:previous_owner()
+
+			if self.allegiance_factions[previous_owner_name] then
+				self:update_allegiance_pooled_resources(previous_owner_name)
+				self:process_allegiance(previous_owner_name)
+			end
+
+			if self.allegiance_factions[character_faction_name] then
+				self:update_allegiance_pooled_resources(character_faction_name)
+				self:process_allegiance(character_faction_name)	
 			end
 				
-			for god_key, pooled_resource in pairs(GOD_KEY_TO_POOLED_RESOURCE) do
-				if NORSCAN_GODS[faction_key][god_key] == nil then
-					NORSCAN_GODS[faction_key][god_key] = {
-						aligned = false,
-						spawned = false,
-						defeated = false,
-						final = false,
-						challenger_cqi = -1,
-						challenger_force_cqi = -1,
-						mission_record = "",
-					}
-				end
+		end,
+		true
+	)
+
+	core:add_listener(
+		"AllegianceTracker_FactionAboutToStartTurn",
+		"FactionAboutToStartTurn",
+		function(context)
+			return self.allegiance_factions[context:faction():name()] ~= nil
+		end,
+		function(context)
+			self:update_allegiance_pooled_resources(context:faction():name())
+		end,
+		true
+	)
+
+	core:add_listener(
+		"AllegianceTracker_FactionTurnStart",
+		"FactionTurnStart",
+		function(context)
+			return self.allegiance_factions[context:faction():name()] ~= nil
+		end,
+		function(context)
+			self:process_allegiance(context:faction():name())
+		end,
+		true
+	)
+
+	core:add_listener(
+		"AllegianceChampion_DilemmaChoiceMadeEvent",
+		"DilemmaChoiceMadeEvent",
+		function(context)
+			return string.find(context:dilemma(), self.dilemma_key_prefix)
+		end,
+		function(context)
+			self:champion_dilemma_handler(context:faction():name(), context:dilemma(), context:choice())	
+		end,
+		true
+	)
+
+	core:add_listener(
+		"AllegianceChampionMaxTierReachedCheat_ContextTriggerEvent",
+		"ContextTriggerEvent",
+		true,
+		function(context)
+			if not context.string:starts_with("norsca_god_favour_max_tier_reached_cheat") then
+				return
 			end
-			
-			cm:add_pooled_resource_changed_listener_by_faction(
-				"NorscaPRChanged",
-				faction_key,
-				function(context)
-					for god_key, pooled_resource in pairs(GOD_KEY_TO_POOLED_RESOURCE) do
-						if context:resource():key() == pooled_resource then
-							Check_God_Favour_Win_Conditions(faction_key, god_key)
-						end
-					end
-				end,
-				true
-			)
-		end
+
+			local faction_key = cm:get_local_faction_name(true)
+			self:update_allegiance_pooled_resources(faction_key, true)
+			self:process_allegiance(faction_key)
+		end,
+		true
+	)
+
+end
+
+
+function norscan_gods:update_allegiance_pooled_resources(faction_name, cheat_forced)
+	local faction = cm:get_faction(faction_name)
+	if faction == nil or faction:is_null_interface() then
+		return
 	end
-	
-	core:add_listener(
-		"mission_succeeded_norsca_challenger_mission_check",
-		"MissionSucceeded",
-		true,
-		function(context)
-			ChallengerMissionCheck(context:faction():name(), context:mission():mission_record_key())
-		end,
-		true
-	)
-	
-	core:add_listener(
-		"mission_cancelled_norsca_challenger_mission_check",
-		"MissionCancelled",
-		true,
-		function(context)
-			-- Player can kill coop partners challengers, aborting the mission
-			ChallengerMissionCheck(context:faction():name(), context:mission():mission_record_key())
-		end,
-		true
-	)
-	
-	-- Uses random army manager
-	Setup_Challenger_Armies()
-	
-	-- Remove the challenger armies
-	if cm:is_new_game() then
-		-- Challenger spawn locations
-		NORSCA_AVAILABLE_SPAWN_LOCATIONS = table.copy(NORSCA_SPAWN_LOCATIONS)
-	
-		Remove_Norscan_Challengers()
-		Norsca_SetupRewardGenerals()
-		
-		-- Norsca Monster Hunt Rewards
-		---only lock the frost wyrm for Throgg and the Mammoth for Wulfrik if there's a human Norsca faction, otherwise let the AI recruit them freely.
-		if cm:are_any_factions_human(nil, "wh_dlc08_nor_norsca") then
-			cm:add_event_restricted_unit_record_for_faction("wh_dlc08_nor_mon_war_mammoth_ror_1", "wh_dlc08_nor_norsca", "norsca_monster_hunt_ror_unlock")
-			cm:add_event_restricted_unit_record_for_faction("wh_dlc08_nor_mon_frost_wyrm_ror_0", "wh_dlc08_nor_wintertooth", "norsca_monster_hunt_ror_unlock")
-		end
 
-		cm:add_event_restricted_unit_record_for_faction("wh_dlc08_nor_mon_war_mammoth_ror_1", "wh_dlc08_nor_wintertooth", "norsca_monster_hunt_ror_unlock")
-		cm:add_event_restricted_unit_record_for_faction("wh_dlc08_nor_mon_frost_wyrm_ror_0", "wh_dlc08_nor_norsca", "norsca_monster_hunt_ror_unlock")
-
-		NorscaChallengersSpawned:start()
+	for _, res_key in dpairs(self.allegiance_gods_pooled_resources) do
+		self:update_allegiance_pooled_resource(faction, res_key, cheat_forced)
 	end
 end
 
+function norscan_gods:process_allegiance(faction_name)
+	local faction = cm:get_faction(faction_name)
+	if faction == nil or faction:is_null_interface() then
+		return
+	end
+
+	for god, res_key in dpairs(self.allegiance_gods_pooled_resources) do
+		local god_favour = self:get_pooled_resource_value(faction, res_key)
+
+		self:trigger_allegiance_advice_dilemma(faction_name, god, god_favour)
+	end
+end
+
+function norscan_gods:update_allegiance_pooled_resource(faction, resource_key, cheat_forced)
+	local bonus_value = resource_key .. "_count"
+
+	-- for cheats we query the pooled resource of the corresponding god
+	local god_favour = cheat_forced and self:get_pooled_resource_value(faction, resource_key) or cm:get_factions_bonus_value(faction, bonus_value)
+	if not cheat_forced then
+		local faction_key = faction:name()
+		cm:faction_add_pooled_resource(faction_key, resource_key, self.allegiance_factor, -99999)
+		cm:faction_add_pooled_resource(faction_key, resource_key, self.allegiance_factor, god_favour)
+	end
+
+	return self:get_pooled_resource_value(faction, resource_key)
+end
+
+function norscan_gods:get_pooled_resource_value(faction, resource_key)
+	if faction == nil or faction:is_null_interface() then
+		return 0
+	end
+
+	return faction:pooled_resource_manager():resource(resource_key):value()
+end
+
+function norscan_gods:trigger_allegiance_advice_dilemma(faction_name, god, god_favour)
+	local advice_faction = self.allegiance_advice_tracker[faction_name]
+	local dilemma_faction = self.allegiance_factions[faction_name]
+	local chaos_god = self.god_conversion_table[god]
+
+	--check if god_favour reaches the upper allegiance limit and that no champion has already been selected
+	if god_favour >= self.allegiance_thresholds[3] and dilemma_faction.champion_spawned == false then
+		self:spawn_top_tier_allegiance_dilemma(faction_name, god, chaos_god)
+	elseif god_favour >= self.allegiance_thresholds[2] and advice_faction[chaos_god].advice_two_heard == false then
+		--play advice for threshold two for correct god
+		self:advice_handler(faction_name, 2, chaos_god)
+
+	elseif god_favour >= self.allegiance_thresholds[1] and advice_faction[chaos_god].advice_one_heard == false then
+		--play advice for threshold one for correct god
+		self:advice_handler(faction_name, 1, chaos_god)
+	elseif god_favour >= 1 and advice_faction["general"].first_altar_advice == false then
+		local advice_key = self.allegiance_advice_prefix .. "gods.002"
+		--call function in wh_dlc08_norsca.lua
+		Play_Norsca_Advice(advice_key, norsca_info_text_gods, true)
+		advice_faction["general"].first_altar_advice = true
+	end
+end
+
+function norscan_gods:spawn_top_tier_allegiance_dilemma(faction_name, god, chaos_god)
+	local dilemma_faction = self.allegiance_factions[faction_name]
+
+	-- check if current god dilemma has already been spawned
+	local dilemma_spawned_key = god .. "_dilemma_spawned"
+	if dilemma_faction[dilemma_spawned_key] then
+		return
+	end
+
+	-- dont need to check if advice heard before as the dilemma check ensures this only runs once
+	-- play advice for threshold three for correct god
+	self:advice_handler(faction_name, 3, chaos_god)
+
+	local dilemma_key = self.dilemma_key_prefix .. god
+	cm:trigger_dilemma(faction_name, dilemma_key)
+
+	-- mark dilemma as spawned
+	if string.find(dilemma_key, god) then
+		dilemma_faction[dilemma_spawned_key] = true
+	end
+end
+
+function norscan_gods:champion_dilemma_handler(faction_name, dilemma_key, choice)
+
+	local dilemma_god = nil
+	local dilemma_faction = self.allegiance_factions[faction_name] 
+
+	for god, _ in dpairs(self.dilemma_champion_reward) do
+		if string.find(dilemma_key, god) then
+			dilemma_god = god
+		end
+	end
+
+	--spawn champion, set champion spawned to true and trigger invasion
+	if choice == 0 then
+		if dilemma_god ~= nil then
+			self:spawn_champion(faction_name, dilemma_god)
+			dilemma_faction.champion_spawned = true
+			
+			--trigger invasion of rival god's followers
+			local chaos_god = self.god_conversion_table[dilemma_god]
+			local rival_god = self.rivalry_conversion_table[chaos_god]
+
+			self:spawn_champion_invasion(faction_name, rival_god)
+			self:destroy_single_challenger_mission(faction_name, rival_god)
+		end
+	else
+
+		--check if all dilemmas have been rejected
+		local champion_rejected_count = 0	
+		if dilemma_faction.crow_dilemma_spawned then
+			champion_rejected_count = champion_rejected_count + 1
+		end
+		if dilemma_faction.eagle_dilemma_spawned then
+			champion_rejected_count = champion_rejected_count + 1
+		end
+		if dilemma_faction.hound_dilemma_spawned then
+			champion_rejected_count = champion_rejected_count + 1
+		end
+		if dilemma_faction.serpent_dilemma_spawned then
+			champion_rejected_count = champion_rejected_count + 1
+		end
+		
+		--if all 4 dilemma champions rejected then trigger all invasions
+		if champion_rejected_count >= 4 then
+			--trigger invasions from all chaos gods
+			for chaos_god, _ in dpairs(self.rivalry_conversion_table) do
+				self:spawn_champion_invasion(faction_name, chaos_god)
+			end
+			self:destroy_challenger_forces_mission(faction_name)
+		end
+
+	end
+
+end
+
 -- Lock recruitment, and do other startup operations to the generals that you can unlock with Devotion to the Gods.
-function Norsca_SetupRewardGenerals()
+function norscan_gods:setup_champion_locks()
 	-- When locking the generals, do so in an alphabetically ordered way to avoid desynchs.
 	local sorted_general_ids = {}
-	for _, reward_table in pairs(NORSCAN_REWARDS) do
-		if reward_table.character ~= nil and reward_table.character.type == NORSCA_REWARD_CHARACTER_TYPES.general then
-			for faction_key, general_id in pairs(reward_table.character.ids) do
+	for _, reward_table in dpairs(self.dilemma_champion_reward) do
+		if reward_table.character ~= nil and reward_table.character.type == self.dilemma_champion_agent_type.general then
+			for faction_key, general_id in dpairs(reward_table.character.ids) do
 				table.insert(sorted_general_ids, { id = general_id, faction_key = faction_key, raw_table = reward_table.character })
 			end
 		end
@@ -209,6 +383,253 @@ function Norsca_SetupRewardGenerals()
 		cm:lock_starting_character_recruitment(sorted_general_ids[g].id, sorted_general_ids[g].faction_key)
 	end
 end
+
+-- Spawn agent or unlock general
+function norscan_gods:spawn_champion(faction_name, god_key)
+	local reward_table = self.dilemma_champion_reward[god_key].character
+	local faction_cqi = cm:get_faction(faction_name):command_queue_index()
+
+	if reward_table.type == self.dilemma_champion_agent_type.general then
+		if reward_table.ids[faction_name] == nil then
+			script_error(string.format("ERROR: Could not give final reward (a general) for devotion to god '%s' to faction '%s' because this faction did not have character start pos ID of this general. All playable Norsca factions must have each unlockable general given to them in start_pos_characters, the ID of which must be specified in this script.",
+				god_key, faction_name))
+		else
+			cm:unlock_starting_character_recruitment(reward_table.ids[faction_name], faction_name)
+		end
+	elseif reward_table.type == self.dilemma_champion_agent_type.agent then
+		core:add_listener(
+			"Norsca_UniqueAgentSpawned",
+			"UniqueAgentSpawned",
+			true,
+			function(context)
+				local character_interface = context:unique_agent_details():character()
+				local char_lookup_str = cm:char_lookup_str(character_interface)
+				local spawn_rank = reward_table.spawn_rank or 0
+				
+				if character_interface:rank() < spawn_rank then
+					cm:add_agent_experience(char_lookup_str, spawn_rank, true)
+				end
+				
+				if reward_table.ancillaries ~= nil then
+					for a = 1, #reward_table.ancillaries do
+						cm:force_add_ancillary(character_interface, reward_table.ancillaries[a], false, true)
+					end
+				end
+				
+				cm:replenish_action_points(char_lookup_str)
+				CampaignUI.ClearSelection()
+			end,
+			false
+		)
+		
+		cm:spawn_unique_agent(faction_cqi, reward_table.subtype, false)
+
+		local advice_faction = self.allegiance_advice_tracker[faction_name]
+		if advice_faction["general"].champion_advice == false then
+			local advice_key = self.allegiance_advice_prefix .. "champions.001"
+			--call function in wh_dlc08_norsca.lua
+			Play_Norsca_Advice(advice_key, nil, true)
+			advice_faction["general"].champion_advice = true
+		end
+	end
+end
+
+function norscan_gods:spawn_champion_invasion(target_faction_key, chaos_god)
+	local invasion_key = "invasion_"..target_faction_key.."_"..chaos_god
+	local unit_list = self:create_challenger_force(chaos_god)
+
+
+	local target_faction = cm:model():world():faction_by_key(target_faction_key)
+	local target_faction_leader = target_faction:faction_leader()
+	local target_faction_capital_key = target_faction:home_region():name()
+
+	local x,y
+	local challenger_spawn_distance_min = cm:campaign_var_int_value(self.challenger_spawn_distance_min_key)
+	local challenger_spawn_distance_max = cm:campaign_var_int_value(self.challenger_spawn_distance_max_key)
+	local challenger_spawn_distance = cm:random_number(challenger_spawn_distance_max, challenger_spawn_distance_min)
+	if target_faction_leader:is_null_interface() == false and target_faction_leader:has_military_force() == true and target_faction_leader:has_region() then
+		x, y = cm:find_valid_spawn_location_for_character_from_character(target_faction_key, cm:char_lookup_str(target_faction_leader), false, challenger_spawn_distance)
+	else
+		x,y = cm:find_valid_spawn_location_for_character_from_settlement(target_faction_key, target_faction_capital_key, false, true, challenger_spawn_distance)
+	end
+	local coordinates = {x, y}	
+	local challenger_invasion = invasion_manager:new_invasion(invasion_key, self.challenger_faction_prefix..chaos_god, unit_list, coordinates)
+
+	if not cm:is_multiplayer() then
+		if target_faction:is_null_interface() == false and target_faction:has_faction_leader() == true then
+			if target_faction_leader:is_null_interface() == false and target_faction_leader:has_military_force() == true then
+				local target_faction_leader_cqi = target_faction_leader:command_queue_index()
+				challenger_invasion:set_target("CHARACTER", target_faction_leader_cqi, target_faction_key)
+			else
+				challenger_invasion:set_target("NONE", nil, target_faction_key)
+			end
+		end
+		
+		-- Add army XP based on difficulty in SP
+		local difficulty = cm:model():difficulty_level()
+		
+		if difficulty == -1 then
+			-- Hard
+			challenger_invasion:add_unit_experience(1)
+		elseif difficulty == -2 then
+			-- Very Hard
+			challenger_invasion:add_unit_experience(2)
+		elseif difficulty == -3 then
+			-- Legendary
+			challenger_invasion:add_unit_experience(3)
+		end
+	end
+	
+	-- Set up the General
+	local challenger_details = self.challenger_details
+	challenger_invasion:create_general(false, challenger_details[chaos_god].agent_subtype, challenger_details[chaos_god].forename, challenger_details[chaos_god].clan_name, challenger_details[chaos_god].family_name, challenger_details[chaos_god].other_name)
+	challenger_invasion:add_character_experience(30, true) -- Level 30
+	challenger_invasion:apply_effect(challenger_details[chaos_god].effect_bundle, -1)
+	challenger_invasion:start_invasion(true, true, false, false)
+
+end
+
+-- Setup challenger forces based on god connection
+function norscan_gods:create_challenger_force(chaos_god)
+
+	local ram = random_army_manager
+	local ram_name = "challenger_"..chaos_god
+	ram:remove_force(ram_name)
+	ram:new_force(ram_name)
+		
+	--add 5 shared units regardless of which god is called
+	ram:add_mandatory_unit(ram_name, "wh_main_chs_mon_giant", 2)	
+	ram:add_mandatory_unit(ram_name, "wh_dlc01_chs_mon_dragon_ogre_shaggoth", 1)
+	ram:add_mandatory_unit(ram_name, "wh_main_chs_art_hellcannon", 2)
+
+	--add 14 aligned units based on which chaos god is selected
+	local god_units = self.challenger_units
+
+	ram:add_mandatory_unit(ram_name, god_units[chaos_god].chosen_shield, 3)
+	ram:add_mandatory_unit(ram_name, god_units[chaos_god].chosen_special, 2)
+	ram:add_mandatory_unit(ram_name, god_units[chaos_god].knight, 3)
+	ram:add_mandatory_unit(ram_name, god_units[chaos_god].spawn, 3)
+	ram:add_mandatory_unit(ram_name, god_units[chaos_god].daemon, 3)
+
+	return ram:generate_force(ram_name, 19, false)
+end
+
+-- Play the correct advice based on Allegiance threshold and Chaos God
+function norscan_gods:advice_handler(faction_name, threshold_level, chaos_god)
+
+	local advice_faction = self.allegiance_advice_tracker[faction_name]
+	local advice_key = self.allegiance_advice_prefix .. "gods_" .. chaos_god ..".00" .. threshold_level
+	
+	--set advice booleans to true
+	if threshold_level == 3 then
+		advice_faction[chaos_god].advice_three_heard = true
+	elseif threshold_level == 2 then
+		advice_faction[chaos_god].advice_two_heard = true
+	elseif threshold_level == 1 then
+		advice_faction[chaos_god].advice_one_heard = true
+	end
+
+	--call function in wh_dlc08_norsca.lua
+	Play_Norsca_Advice(advice_key, nil, true)
+end
+
+function norscan_gods:destroy_challenger_forces_mission(faction_name)
+	local mm = mission_manager:new(faction_name, self.allegiance_ultimate_refusal_mission)
+				
+	mm:add_new_objective("DESTROY_FACTION")
+
+	mm:add_condition("faction wh_dlc08_chs_chaos_challenger_khorne")
+	mm:add_condition("faction wh_dlc08_chs_chaos_challenger_nurgle")
+	mm:add_condition("faction wh_dlc08_chs_chaos_challenger_slaanesh")
+	mm:add_condition("faction wh_dlc08_chs_chaos_challenger_tzeentch")
+	mm:add_condition("confederation_valid")
+
+	mm:add_payload("effect_bundle{bundle_key wh3_dlc27_bundle_nor_allegiance_ultimate_refusal;turns 0;}");
+	mm:add_payload("text_display dummy_wh3_dlc27_nor_allegiance_ultimate_refusal_mission");
+
+	mm:set_mission_issuer("CLAN_ELDERS")
+
+	mm:trigger()
+end
+
+function norscan_gods:destroy_single_challenger_mission(faction_name, rival_god)
+	local mm = mission_manager:new(faction_name, self.allegiance_challenger_destroy_mission)
+				
+	mm:add_new_objective("DESTROY_FACTION")
+
+	mm:add_condition("faction wh_dlc08_chs_chaos_challenger_" .. rival_god)
+	mm:add_condition("confederation_valid")
+
+	mm:add_payload("effect_bundle{bundle_key wh3_dlc27_bundle_nor_allegiance_victory_against_rival;turns 0;}");
+
+	mm:set_mission_issuer("CLAN_ELDERS")
+
+	mm:trigger()
+end
+
+function norscan_gods:mission_increase_dedication_to_norscan_god(faction_name)
+	local mm = mission_manager:new(faction_name, self.allegiance_increase_dedication_to_norscan_god_mission)				
+	mm:set_mission_issuer("CLAN_ELDERS");
+	mm:add_new_objective("SCRIPTED");
+	mm:add_condition("script_key " .. "wh3_dlc27_nor_allegiance_increase_dedication_to_god")
+	mm:add_condition("override_text mission_text_text_wh3_dlc27_nor_allegiance_increase_dedication_to_god");
+	mm:add_payload("money 1000");
+	mm:trigger();
+end
+
+core:add_listener(
+	"Norsca_God_Dedication_Mission_Start",
+	"FactionTurnStart",
+	function(context)
+		return norscan_gods.allegiance_factions[context:faction():name()] ~= nil
+	end,
+	function(context)
+		local faction = context:faction()
+		local faction_is_human = faction:is_human()
+		if faction_is_human and cm:model():turn_number() == norscan_gods.allegiance_increase_dedication_to_norscan_god_mission_turn then 
+			norscan_gods:mission_increase_dedication_to_norscan_god(context:faction():name())
+		end
+	end,
+	true
+)
+
+core:add_listener(
+	"Norsca_God_Dedication_Mission_Completion",
+	"PooledResourceChanged",
+	function(context)
+    local faction = context:faction();
+		return string.find(context:resource():key(), "nor_progress_") and context:resource():value() >= norscan_gods.allegiance_increase_dedication_to_norscan_god_mission_pool_res_requirement and faction:is_human()
+    end,
+	function(context)
+		local faction = context:faction()
+		if faction:active_missions(norscan_gods.allegiance_increase_dedication_to_norscan_god_mission) then
+			cm:complete_scripted_mission_objective(faction:name(), norscan_gods.allegiance_increase_dedication_to_norscan_god_mission, norscan_gods.allegiance_increase_dedication_to_norscan_god_mission, true)	
+		end
+	end,
+	true
+);
+
+--------------------------------------------------------------
+----------------------- SAVING / LOADING ---------------------
+--------------------------------------------------------------
+
+cm:add_saving_game_callback(
+	function(context)
+		cm:save_named_value("AllegianceFactions", norscan_gods.allegiance_factions, context)
+		cm:save_named_value("AllegianceAdvice", norscan_gods.allegiance_advice_tracker, context)
+	end
+)
+cm:add_loading_game_callback(
+	function(context)
+		if cm:is_new_game() == false then
+			norscan_gods.allegiance_factions = cm:load_named_value("AllegianceFactions", norscan_gods.allegiance_factions, context)
+			norscan_gods.allegiance_advice_tracker = cm:load_named_value("AllegianceAdvice", norscan_gods.allegiance_advice_tracker, context)
+		end
+	end
+)
+
+
+--[[
 
 function Check_God_Favour_Win_Conditions(faction_key, god_key)
 	if NORSCAN_GODS[faction_key] ~= nil and cm:get_faction(faction_key) then
@@ -231,104 +652,6 @@ function Check_God_Favour_Win_Conditions(faction_key, god_key)
 		end
 	end	
 end
-
-function Trigger_God_Challengers(faction_key, god_key)
-	if Has_Aligned_With_God(faction_key) then
-		return false
-	end
-
-	local lowest_god = god_key
-	local lowest_value = 999999
-
-	for key, data in pairs(NORSCAN_GODS[faction_key]) do
-		if key == god_key then
-			-- This is your chosen god!
-			data.aligned = true
-		else
-			-- This is an enemy god!
-			data.aligned = false
-			
-			local favour = cm:get_faction(faction_key):pooled_resource_manager():resource(GOD_KEY_TO_POOLED_RESOURCE[key]):value()	
-			
-			if favour <= lowest_value then
-				lowest_god = key
-				lowest_value = favour
-			end
-		end
-	end
-	
-	-- The God with the worst relation becomes the final quest battle
-	NORSCAN_GODS[faction_key][lowest_god].final = true
-		
-	local wars_to_do = {}
-	local challengers_spawned = {}
-	local missions_to_spawn = {}
-	local is_mp = cm:is_multiplayer()
-
-	if #NORSCA_AVAILABLE_SPAWN_LOCATIONS < 1 then
-		out("There were no Norsca spawn locations?! Adding some...")
-		NORSCA_AVAILABLE_SPAWN_LOCATIONS = table.copy(NORSCA_SPAWN_LOCATIONS)
-	end
-	
-	for key, data in pairs(NORSCAN_GODS[faction_key]) do
-		if data.aligned == false then
-			if data.final == false then
-				out("\n#######################################################\n Spawn_Challenger("..faction_key..", "..key..", "..tostring(is_mp)..")\n#######################################################\n")
-				local spawn_pos, mission_key = Spawn_Challenger(faction_key, key, is_mp)
-				table.insert(wars_to_do, key)
-				table.insert(challengers_spawned, spawn_pos)
-				table.insert(missions_to_spawn, mission_key)
-				data.spawned = true
-			end
-		end
-	end
-	
-	out("MP Challenger missions to spawn: "..#missions_to_spawn)
-	
-	if is_mp then
-		cm:force_declare_war(NORSCAN_CHALLENGER_FACTION_PREFIX..wars_to_do[1], faction_key, false, false)
-		
-		core:add_listener(
-			"Norsca_FactionLeaderDeclaresWar",
-			"FactionLeaderDeclaresWar",
-			function(context) return context:character():faction():name() == NORSCAN_CHALLENGER_FACTION_PREFIX..wars_to_do[1] end,
-			function(context)
-				cm:force_declare_war(NORSCAN_CHALLENGER_FACTION_PREFIX..wars_to_do[2], faction_key, false, false)
-			end,
-			false
-		)
-	end
-	
-	if #challengers_spawned > 0 then
-		if cm:is_multiplayer() == false then
-			out("++++ TRIGGER: ScriptEventNorscaChallengersSpawned")
-			
-			if not NorscaChallengersSpawned.is_started then
-				NorscaChallengersSpawned:start()
-			end
-			
-			NorscaChallengersSpawned.faction_key = faction_key
-			NorscaChallengersSpawned.god_key = god_key
-			NorscaChallengersSpawned.challengers_spawned = challengers_spawned
-			NorscaChallengersSpawned.missions_to_spawn = missions_to_spawn
-			core:trigger_event("ScriptEventNorscaChallengersSpawned")
-		else
-			cm:callback(
-				function()
-					for i = 1, #missions_to_spawn do
-						out("Triggering MP Challenger mission: "..missions_to_spawn[i])
-						cm:trigger_mission(faction_key, missions_to_spawn[i], true)
-					end
-				end,
-				1
-			)
-		end
-	end
-end
-
-NorscaChallengersSpawned = intervention:new("NorscaChallengersSpawned", 0, function() ChallengerCutscenePlay() end, BOOL_INTERVENTIONS_DEBUG)
-NorscaChallengersSpawned:add_trigger_condition("ScriptEventNorscaChallengersSpawned", true)
-NorscaChallengersSpawned:set_should_lock_ui(true)
 
 function ChallengerCutscenePlay()
 	local god_key = NorscaChallengersSpawned.god_key
@@ -463,204 +786,10 @@ function ChallengerCutsceneEnd()
 	NorscaChallengersSpawned:complete()
 end
 
-function Spawn_Challenger(faction_key, god_key, is_mp)
-	local invasion_key = "invasion_"..faction_key.."_"..god_key
-	local random_spawn_num = cm:random_number(#NORSCA_AVAILABLE_SPAWN_LOCATIONS)
-	local random_spawn = NORSCA_AVAILABLE_SPAWN_LOCATIONS[random_spawn_num]
-	local mission_spawn = nil
-	table.remove(NORSCA_AVAILABLE_SPAWN_LOCATIONS, random_spawn_num)
-	
-	local ram = random_army_manager
-	local unit_list = ram:generate_force("challenger_"..god_key, 19)
-	
-	local target_faction = cm:model():world():faction_by_key(faction_key)
-	local challenger_invasion = invasion_manager:new_invasion(invasion_key, NORSCAN_CHALLENGER_FACTION_PREFIX..god_key, unit_list, random_spawn)
-	
-	if not is_mp then
-		if target_faction:is_null_interface() == false and target_faction:has_faction_leader() == true then
-			local faction_leader = target_faction:faction_leader()
-			if faction_leader:is_null_interface() == false and faction_leader:has_military_force() == true then
-				local faction_leader_cqi = faction_leader:command_queue_index()
-				challenger_invasion:set_target("CHARACTER", faction_leader_cqi, faction_key)
-			else
-				challenger_invasion:set_target("NONE", nil, faction_key)
-			end
-		end
-		
-		-- Add army XP based on difficulty in SP
-		local difficulty = cm:model():difficulty_level()
-		
-		if difficulty == -1 then
-			-- Hard
-			challenger_invasion:add_unit_experience(1)
-		elseif difficulty == -2 then
-			-- Very Hard
-			challenger_invasion:add_unit_experience(2)
-		elseif difficulty == -3 then
-			-- Legendary
-			challenger_invasion:add_unit_experience(3)
-		end
-	end
-	
-	-- Set up the General
-	challenger_invasion:create_general(false, GOD_KEY_TO_CHALLENGER_DETAILS[god_key].agent_subtype, GOD_KEY_TO_CHALLENGER_DETAILS[god_key].forename, GOD_KEY_TO_CHALLENGER_DETAILS[god_key].clan_name, GOD_KEY_TO_CHALLENGER_DETAILS[god_key].family_name, GOD_KEY_TO_CHALLENGER_DETAILS[god_key].other_name)
-	
-	challenger_invasion:add_character_experience(30, true) -- Level 30
-	
-	challenger_invasion:apply_effect(GOD_KEY_TO_CHALLENGER_DETAILS[god_key].effect_bundle, -1)
-	
-	challenger_invasion:start_invasion(
-		function(self)
-			local force = self:get_force()
-			local force_cqi = force:command_queue_index()
-			local force_leader_cqi = force:general_character():command_queue_index()
-		
-			NORSCAN_GODS[faction_key][god_key].challenger_cqi = force_cqi
-			NORSCAN_GODS[faction_key][god_key].challenger_force_cqi = force_leader_cqi
-			NORSCAN_GODS[faction_key][god_key].mission_record = "wh_dlc08_kill_challenger_"..god_key
-			
-			out("Preventing "..NORSCAN_CHALLENGER_FACTION_PREFIX..god_key.." diplomacy [all] with [all]")
-			cm:force_diplomacy("faction:"..NORSCAN_CHALLENGER_FACTION_PREFIX..god_key, "all", "all", false, false, true)
-		end,
-		not is_mp
-	)
-	return random_spawn, "wh_dlc08_kill_challenger_"..god_key
-end
-
-function Trigger_Final_Challenger(faction_key)
-	if NORSCAN_GODS[faction_key] ~= nil then
-		for key, data in pairs(NORSCAN_GODS[faction_key]) do
-			if data.final == true then
-				cm:trigger_mission(faction_key, "wh_dlc08_qb_chs_final_battle_"..key, true)
-				Play_Norsca_Advice("dlc08.camp.advice.nor.champions.002")
-				data.spawned = true
-				break
-			end
-		end
-	end
-end
-
-function ChallengerMissionCheck(faction_key, mission_key)
-	----------------------------------------------------
-	---- ALLEGIANCE TO THE GODS - VICTORY CONDITION ----
-	----------------------------------------------------
-	if mission_key == "wh_dlc08_qb_chs_final_battle_khorne" or mission_key == "wh_dlc08_qb_chs_final_battle_nurgle" or mission_key == "wh_dlc08_qb_chs_final_battle_slaanesh" or mission_key == "wh_dlc08_qb_chs_final_battle_tzeentch" then
-		if cm:is_multiplayer() == false then
-			cm:complete_scripted_mission_objective(faction_key, "wh_main_short_victory", "defeat_chaos_gods_challengers", true)
-			cm:complete_scripted_mission_objective(faction_key, "wh_main_long_victory", "defeat_chaos_gods_challengers", true)
-		end
-	--------------------------------------------------------
-	---- DEFEATED CHAOS CHALLENGERS - VICTORY CONDITION ----
-	--------------------------------------------------------
-	elseif NORSCAN_GODS[faction_key] ~= nil then
-		for god_key, data in pairs(NORSCAN_GODS[faction_key]) do
-			if data.mission_record == mission_key then
-				data.defeated = true
-				local defeated_challengers = Has_Defeated_All_Challengers(faction_key)
-				
-				if defeated_challengers == true then
-					Trigger_Final_Challenger(faction_key)
-				end
-				break
-			end
-		end
-	end
-end
-
-function Give_Final_God_Reward(faction_key, god_key)
-	local reward_table = NORSCAN_REWARDS[god_key].character
-	local faction_cqi = cm:get_faction(faction_key):command_queue_index()
-
-	if reward_table.type == NORSCA_REWARD_CHARACTER_TYPES.general then
-		if reward_table.ids[faction_key] == nil then
-			script_error(string.format("ERROR: Could not give final reward (a general) for devotion to god '%s' to faction '%s' because this faction did not have character start pos ID of this general. All playable Norsca factions must have each unlockable general given to them in start_pos_characters, the ID of which must be specified in this script.",
-				god_key, faction_key))
-		else
-			cm:unlock_starting_character_recruitment(reward_table.ids[faction_key], faction_key)
-		end
-	elseif reward_table.type == NORSCA_REWARD_CHARACTER_TYPES.agent then
-		core:add_listener(
-			"Norsca_UniqueAgentSpawned",
-			"UniqueAgentSpawned",
-			true,
-			function(context)
-				local character_interface = context:unique_agent_details():character()
-				local char_lookup_str = cm:char_lookup_str(character_interface)
-				local spawn_rank = reward_table.spawn_rank or 0
-				
-				if character_interface:rank() < spawn_rank then
-					cm:add_agent_experience(char_lookup_str, spawn_rank, true)
-				end
-				
-				if reward_table.ancillaries ~= nil then
-					for a = 1, #reward_table.ancillaries do
-						cm:force_add_ancillary(character_interface, reward_table.ancillaries[a], false, true)
-					end
-				end
-				
-				cm:replenish_action_points(char_lookup_str)
-				CampaignUI.ClearSelection()
-			end,
-			false
-		)
-		
-		cm:spawn_unique_agent(faction_cqi, reward_table.subtype, false)
-	end
-end
-
-function Has_Defeated_All_Challengers(faction_key)
-	local at_least_one_spawned = false
-	if NORSCAN_GODS[faction_key] ~= nil then
-		for god_key, data in pairs(NORSCAN_GODS[faction_key]) do
-			if data.spawned == true then
-				if data.defeated == false then
-					return false
-				else
-					at_least_one_spawned = true
-				end
-			end
-		end
-	end
-	return at_least_one_spawned
-end
-
-function Has_Aligned_With_God(faction_key)
-	if NORSCAN_GODS[faction_key] ~= nil then
-		for god_key, data in pairs(NORSCAN_GODS[faction_key]) do
-			if data.aligned == true then
-				return true
-			end
-		end
-	end
-	return false
-end
-
-function Setup_Challenger_Armies()
-	local ram = random_army_manager
-	
-	for god_key, pooled_resource in pairs(GOD_KEY_TO_POOLED_RESOURCE) do
-		ram:new_force("challenger_"..god_key)
-		
-		ram:add_unit("challenger_"..god_key, "wh_main_chs_inf_chaos_warriors_0", 1)
-		ram:add_mandatory_unit("challenger_"..god_key, "wh_main_chs_inf_chaos_warriors_0", 4)
-		ram:add_mandatory_unit("challenger_"..god_key, "wh_main_chs_inf_chaos_warriors_1", 2)
-		
-		ram:add_mandatory_unit("challenger_"..god_key, "wh_main_chs_inf_chosen_0", 2)
-		ram:add_mandatory_unit("challenger_"..god_key, "wh_main_chs_inf_chosen_1", 2)
-		
-		ram:add_mandatory_unit("challenger_"..god_key, "wh_main_chs_cav_chaos_knights_0", 2)
-		ram:add_mandatory_unit("challenger_"..god_key, "wh_main_chs_art_hellcannon", 2)
-		
-		ram:add_mandatory_unit("challenger_"..god_key, "wh_main_chs_mon_chaos_spawn", 2)
-		ram:add_mandatory_unit("challenger_"..god_key, "wh_main_chs_mon_trolls", 2)
-		ram:add_mandatory_unit("challenger_"..god_key, "wh_main_chs_mon_giant", 1)
-	end
-end
-
 function Remove_Norscan_Challengers()
 	cm:disable_event_feed_events(true, "wh_event_category_diplomacy", "", "")
 	
-	for god_key, pooled_resource in pairs(GOD_KEY_TO_POOLED_RESOURCE) do
+	for god_key, pooled_resource in dpairs(GOD_KEY_TO_POOLED_RESOURCE) do
 		local target_faction = cm:model():world():faction_by_key(NORSCAN_CHALLENGER_FACTION_PREFIX..god_key)
 		
 		if target_faction:is_null_interface() == false and target_faction:has_faction_leader() == true then
@@ -677,19 +806,4 @@ function Remove_Norscan_Challengers()
 	)
 end
 
---------------------------------------------------------------
------------------------ SAVING / LOADING ---------------------
---------------------------------------------------------------
-cm:add_saving_game_callback(
-	function(context)
-		cm:save_named_value("NORSCAN_GODS", NORSCAN_GODS, context)
-		cm:save_named_value("NORSCA_AVAILABLE_SPAWN_LOCATIONS", NORSCA_AVAILABLE_SPAWN_LOCATIONS, context)
-	end
-)
-
-cm:add_loading_game_callback(
-	function(context)
-		NORSCAN_GODS = cm:load_named_value("NORSCAN_GODS", {}, context)
-		NORSCA_AVAILABLE_SPAWN_LOCATIONS = cm:load_named_value("NORSCA_AVAILABLE_SPAWN_LOCATIONS", {}, context)
-	end
-)
+]]

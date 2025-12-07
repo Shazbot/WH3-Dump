@@ -36,6 +36,8 @@
 												<wh2_main_skv_skaven this="CCB39360-0EEC-4B9E-BD6D2D22342122B5"/>
 												<wh3_main_dae_cult this="A1866F0B-54D7-4CD3-8F9B77DB958E2433"/>
 												<discovered_icon this="F741334C-F7A4-4089-BCF9E56E3ABBEF45"/>
+												<wh3_dlc27_sayl_manipulation_slot this="1F4B6E28-37D9-4AD0-9912C713D4F571C1"/>
+												<wh3_dlc27_aislinn_foreign_slot this="62567ACE-FD26-400E-A7AFC945F9573007"/>
 											</foreign_slot_holder>
 										</outpost_and_foreign_slot_holder>
 										<icon_harmony this="1677FB64-1E8F-499E-A3015C42A7CBB7CA">
@@ -64,6 +66,8 @@
 												<wh2_dlc11_cst_vampire_coast this="B93EE8FA-1B37-40C3-9175AF4216D0284A"/>
 												<wh2_main_skv_skaven this="DF212390-CE21-4B80-B19100D70644027B"/>
 												<wh3_main_dae_cult this="812B77C1-3A99-485D-B70B0164BCF7F225"/>
+												<wh3_dlc27_aislinn_foreign_slot this="8501DA73-AFA8-4449-B2A7338DB9313985"/>
+												<wh3_dlc27_sayl_manipulation_slot this="829DF303-3DA0-495F-BDE6104E4C7CC945"/>
 											</foreign_slot_holder>
 										</outpost_and_foreign_slot_holder>
 										<region_name this="B83DB510-3E08-48FC-B90874E2F7BE3677"/>
@@ -5324,6 +5328,7 @@
 			offset="0.00,3.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
+			visible="false"
 			priority="10"
 			componentleveltooltip="{{tr:pirate_cove_provinces_dropdown_tooltip}}"
 			tooltiplabel="icon_pirate_cove_Tooltip_1c0023"
@@ -5455,7 +5460,7 @@
 		<wh2_main_skv_skaven
 			this="DF212390-CE21-4B80-B19100D70644027B"
 			id="wh2_main_skv_skaven"
-			offset="205.00,2.00"
+			offset="5.00,2.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			visible="false"
@@ -5543,12 +5548,371 @@
 				</owned_discovered>
 			</states>
 		</wh2_main_skv_skaven>
+		<wh3_dlc27_aislinn_foreign_slot
+			this="62567ACE-FD26-400E-A7AFC945F9573007"
+			id="wh3_dlc27_aislinn_foreign_slot"
+			offset="8.00,2.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			priority="10"
+			componentleveltooltip="{{tr:dropdown_regions_cult_tooltip}}"
+			tooltiplabel="ComponentTooltip_8909cc4d"
+			uniqueguid="62567ACE-FD26-400E-A7AFC945F9573007"
+			currentstate="A6E0BDDD-473C-4CCD-B5782B017BF2AAF5"
+			defaultstate="A6E0BDDD-473C-4CCD-B5782B017BF2AAF5">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignFaction"
+					context_function_id="FactionRecordContext.Key == &quot;wh3_dlc27_hef_aislinn&quot;"/>
+				<callback_with_context callback_id="ContextInitPlayerFaction"/>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoCampaignProvince">
+					<child_m_user_properties>
+						<property
+							name="fallback_state"
+							value="default"/>
+						<property
+							name="owned_discovered"
+							value="SettlementList.Any((x) =&gt; HostileForeignSlotList(PlayersFaction).Any(ForeignSlotDiscoveredByFaction(x.FactionContext)))"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="6A344985-5BA5-4E8E-B7F5C6EEA1BD9C0D"
+					uniqueguid="6A344985-5BA5-4E8E-B7F5C6EEA1BD9C0D"
+					imagepath="ui/skins/default/dlc27_hef_asur_domination/icon_foreign_slot.png"/>
+				<component_image
+					this="9526AECA-B77B-42B7-A62946AB9EC2B524"
+					uniqueguid="9526AECA-B77B-42B7-A62946AB9EC2B524"
+					imagepath="ui/skins/default/icon_status_alert_high_24px.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="A6E0BDDD-473C-4CCD-B5782B017BF2AAF5"
+					name="default"
+					width="26"
+					height="26"
+					interactive="true"
+					uniqueguid="A6E0BDDD-473C-4CCD-B5782B017BF2AAF5">
+					<imagemetrics>
+						<image
+							this="826B3EE6-9782-4AFF-BA5EA77DE0BE3ED9"
+							uniqueguid="826B3EE6-9782-4AFF-BA5EA77DE0BE3ED9"
+							componentimage="6A344985-5BA5-4E8E-B7F5C6EEA1BD9C0D"
+							offset="-6.00,-6.00"
+							width="38"
+							height="38"
+							dockpoint="Center"/>
+					</imagemetrics>
+				</default>
+				<owned_discovered
+					this="8D67185D-3FAF-4F13-89889D67B0611DBE"
+					name="owned_discovered"
+					width="26"
+					height="26"
+					interactive="true"
+					uniqueguid="8D67185D-3FAF-4F13-89889D67B0611DBE">
+					<imagemetrics>
+						<image
+							this="46EFA4EE-924E-4DA9-9225546A43D82F99"
+							uniqueguid="46EFA4EE-924E-4DA9-9225546A43D82F99"
+							componentimage="6A344985-5BA5-4E8E-B7F5C6EEA1BD9C0D"
+							offset="-6.00,-6.00"
+							width="38"
+							height="38"
+							dockpoint="Center"/>
+						<image
+							this="E04A5662-B989-4681-89B00B4975B33207"
+							uniqueguid="E04A5662-B989-4681-89B00B4975B33207"
+							componentimage="9526AECA-B77B-42B7-A62946AB9EC2B524"
+							offset="8.00,7.00"
+							width="24"
+							height="24"
+							dockpoint="Bottom Right"
+							dock_offset="6.00,5.00"/>
+					</imagemetrics>
+				</owned_discovered>
+			</states>
+		</wh3_dlc27_aislinn_foreign_slot>
+		<wh3_dlc27_aislinn_foreign_slot
+			this="8501DA73-AFA8-4449-B2A7338DB9313985"
+			id="wh3_dlc27_aislinn_foreign_slot"
+			offset="5.00,2.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			priority="10"
+			tooltipslocalised="true"
+			componentleveltooltip="You own an Outpost in this settlement"
+			tooltiplabel="wh3_dlc27_hef_asur_domination_outpost_owned_tooltip"
+			uniqueguid="8501DA73-AFA8-4449-B2A7338DB9313985"
+			currentstate="47EF7CE9-AB6C-4590-8BBC51D2D250AD90"
+			defaultstate="47EF7CE9-AB6C-4590-8BBC51D2D250AD90">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignFaction"
+					context_function_id="FactionRecordContext.Key == &quot;wh3_dlc27_hef_aislinn&quot;"/>
+				<callback_with_context callback_id="ContextInitPlayerFaction"/>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoCampaignProvince">
+					<child_m_user_properties>
+						<property
+							name="fallback_state"
+							value="default"/>
+						<property
+							name="owned_discovered"
+							value="SettlementList.Any((x) =&gt; HostileForeignSlotList(PlayersFaction).Any(ForeignSlotDiscoveredByFaction(x.FactionContext)))"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="A1599044-BA94-44AF-90E896FE89FDF248"
+					uniqueguid="A1599044-BA94-44AF-90E896FE89FDF248"
+					imagepath="ui/skins/default/icon_status_alert_high_24px.png"/>
+				<component_image
+					this="2A341871-AE93-4A65-87D1307A3AEF5EE6"
+					uniqueguid="2A341871-AE93-4A65-87D1307A3AEF5EE6"
+					imagepath="ui/skins/default/dlc27_hef_asur_domination/icon_foreign_slot.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="47EF7CE9-AB6C-4590-8BBC51D2D250AD90"
+					name="default"
+					width="26"
+					height="26"
+					interactive="true"
+					uniqueguid="47EF7CE9-AB6C-4590-8BBC51D2D250AD90">
+					<imagemetrics>
+						<image
+							this="3457B02A-E518-4A1E-B6E51D1E2D897868"
+							uniqueguid="3457B02A-E518-4A1E-B6E51D1E2D897868"
+							componentimage="2A341871-AE93-4A65-87D1307A3AEF5EE6"
+							offset="-6.00,-6.00"
+							width="38"
+							height="38"
+							dockpoint="Center"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</default>
+				<owned_discovered
+					this="F33F0A27-88A2-4E70-877C0CE45314FFA6"
+					name="owned_discovered"
+					width="26"
+					height="26"
+					interactive="true"
+					uniqueguid="F33F0A27-88A2-4E70-877C0CE45314FFA6">
+					<imagemetrics>
+						<image
+							this="26A7FE20-A313-4E8E-B254CCBA2331259B"
+							uniqueguid="26A7FE20-A313-4E8E-B254CCBA2331259B"
+							componentimage="2A341871-AE93-4A65-87D1307A3AEF5EE6"
+							offset="-6.00,-6.00"
+							width="38"
+							height="38"
+							dockpoint="Center"
+							canresizeheight="false"
+							canresizewidth="false"/>
+						<image
+							this="A12F1F9E-2C8E-4114-A44B135C3BE28672"
+							uniqueguid="A12F1F9E-2C8E-4114-A44B135C3BE28672"
+							componentimage="A1599044-BA94-44AF-90E896FE89FDF248"
+							offset="8.00,7.00"
+							width="24"
+							height="24"
+							dockpoint="Bottom Right"
+							dock_offset="6.00,5.00"/>
+					</imagemetrics>
+				</owned_discovered>
+			</states>
+		</wh3_dlc27_aislinn_foreign_slot>
+		<wh3_dlc27_sayl_manipulation_slot
+			this="829DF303-3DA0-495F-BDE6104E4C7CC945"
+			id="wh3_dlc27_sayl_manipulation_slot"
+			offset="0.00,2.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="10"
+			componentleveltooltip="{{tr:dropdown_regions_cult_tooltip}}"
+			tooltiplabel="ComponentTooltip_9ce9b127"
+			uniqueguid="829DF303-3DA0-495F-BDE6104E4C7CC945"
+			currentstate="FC0219D1-D2BA-4EDE-9E84EABF92D67A81"
+			defaultstate="FC0219D1-D2BA-4EDE-9E84EABF92D67A81">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignFaction"
+					context_function_id="FactionRecordContext.Key == &quot;wh3_dlc27_nor_sayl&quot;"/>
+				<callback_with_context callback_id="ContextInitPlayerFaction"/>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoCampaignProvince">
+					<child_m_user_properties>
+						<property
+							name="fallback_state"
+							value="default"/>
+						<property
+							name="owned_discovered"
+							value="SettlementList.Any((x) =&gt; HostileForeignSlotList(PlayersFaction).Any(ForeignSlotDiscoveredByFaction(x.FactionContext)))"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="5A11A153-6B32-4B0E-8261E1317783203D"
+					uniqueguid="5A11A153-6B32-4B0E-8261E1317783203D"
+					imagepath="ui/skins/default/dlc27_nor_sayl_manipulations/wh3_dlc27_icon_manipulations.png"/>
+				<component_image
+					this="FD7E1DDF-263D-4D7B-97BC20196B418EBF"
+					uniqueguid="FD7E1DDF-263D-4D7B-97BC20196B418EBF"
+					imagepath="ui/skins/default/icon_status_alert_high_24px.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="FC0219D1-D2BA-4EDE-9E84EABF92D67A81"
+					name="default"
+					width="26"
+					height="26"
+					interactive="true"
+					uniqueguid="FC0219D1-D2BA-4EDE-9E84EABF92D67A81">
+					<imagemetrics>
+						<image
+							this="13C0ED60-CAD5-40AC-9170B385412F6A27"
+							uniqueguid="13C0ED60-CAD5-40AC-9170B385412F6A27"
+							componentimage="5A11A153-6B32-4B0E-8261E1317783203D"
+							width="26"
+							height="26"
+							dockpoint="Center"/>
+					</imagemetrics>
+				</default>
+				<owned_discovered
+					this="CAE3FD14-E667-48C1-A14CE9F6743D2CBE"
+					name="owned_discovered"
+					width="26"
+					height="26"
+					interactive="true"
+					uniqueguid="CAE3FD14-E667-48C1-A14CE9F6743D2CBE">
+					<imagemetrics>
+						<image
+							this="3A4803D0-7BF9-4EA8-9265BC04741CF4B8"
+							uniqueguid="3A4803D0-7BF9-4EA8-9265BC04741CF4B8"
+							componentimage="5A11A153-6B32-4B0E-8261E1317783203D"
+							width="26"
+							height="26"
+							dockpoint="Center"/>
+						<image
+							this="F64D263D-0F80-4CB7-B90F502790034453"
+							uniqueguid="F64D263D-0F80-4CB7-B90F502790034453"
+							componentimage="FD7E1DDF-263D-4D7B-97BC20196B418EBF"
+							offset="8.00,7.00"
+							width="24"
+							height="24"
+							dockpoint="Bottom Right"
+							dock_offset="6.00,5.00"/>
+					</imagemetrics>
+				</owned_discovered>
+			</states>
+		</wh3_dlc27_sayl_manipulation_slot>
+		<wh3_dlc27_sayl_manipulation_slot
+			this="1F4B6E28-37D9-4AD0-9912C713D4F571C1"
+			id="wh3_dlc27_sayl_manipulation_slot"
+			offset="0.00,2.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="10"
+			componentleveltooltip="{{tr:dropdown_regions_cult_tooltip_wh3_dlc27_nor_sayl}}"
+			tooltiplabel="ComponentTooltip_f5e14b10"
+			uniqueguid="1F4B6E28-37D9-4AD0-9912C713D4F571C1"
+			currentstate="97DC9338-56B0-4D94-9C595AC792C00F34"
+			defaultstate="97DC9338-56B0-4D94-9C595AC792C00F34">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignFaction"
+					context_function_id="FactionRecordContext.Key == &quot;wh3_dlc27_nor_sayl&quot;"/>
+				<callback_with_context callback_id="ContextInitPlayerFaction"/>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoCampaignProvince">
+					<child_m_user_properties>
+						<property
+							name="fallback_state"
+							value="default"/>
+						<property
+							name="owned_discovered"
+							value="SettlementList.Any((x) =&gt; HostileForeignSlotList(PlayersFaction).Any(ForeignSlotDiscoveredByFaction(x.FactionContext)))"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="E3006307-6F0B-4156-9E283D5B27E5FE7A"
+					uniqueguid="E3006307-6F0B-4156-9E283D5B27E5FE7A"
+					imagepath="ui/skins/default/dlc27_nor_sayl_manipulations/wh3_dlc27_icon_manipulations.png"/>
+				<component_image
+					this="9CB6DD45-8DAF-4E7C-A342524888AD49F8"
+					uniqueguid="9CB6DD45-8DAF-4E7C-A342524888AD49F8"
+					imagepath="ui/skins/default/icon_status_alert_high_24px.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="97DC9338-56B0-4D94-9C595AC792C00F34"
+					name="default"
+					width="26"
+					height="26"
+					interactive="true"
+					uniqueguid="97DC9338-56B0-4D94-9C595AC792C00F34">
+					<imagemetrics>
+						<image
+							this="7399CD37-324F-4D74-9F14ECDD4A07E4A5"
+							uniqueguid="7399CD37-324F-4D74-9F14ECDD4A07E4A5"
+							componentimage="E3006307-6F0B-4156-9E283D5B27E5FE7A"
+							width="26"
+							height="26"/>
+					</imagemetrics>
+				</default>
+				<owned_discovered
+					this="644E4B4B-39A5-48FB-B40CE1737E848018"
+					name="owned_discovered"
+					width="26"
+					height="26"
+					interactive="true"
+					uniqueguid="644E4B4B-39A5-48FB-B40CE1737E848018">
+					<imagemetrics>
+						<image
+							this="105E037A-6E1D-4C51-8B97503610B27058"
+							uniqueguid="105E037A-6E1D-4C51-8B97503610B27058"
+							componentimage="E3006307-6F0B-4156-9E283D5B27E5FE7A"
+							width="26"
+							height="26"
+							dockpoint="Center"/>
+						<image
+							this="3D3F4A0F-129B-401D-8C585F2A90AE54DA"
+							uniqueguid="3D3F4A0F-129B-401D-8C585F2A90AE54DA"
+							componentimage="9CB6DD45-8DAF-4E7C-A342524888AD49F8"
+							offset="8.00,7.00"
+							width="24"
+							height="24"
+							dockpoint="Bottom Right"
+							dock_offset="6.00,5.00"/>
+					</imagemetrics>
+				</owned_discovered>
+			</states>
+		</wh3_dlc27_sayl_manipulation_slot>
 		<wh3_main_dae_cult
 			this="812B77C1-3A99-485D-B70B0164BCF7F225"
 			id="wh3_main_dae_cult"
-			offset="4.00,2.00"
+			offset="5.00,2.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
+			visible="false"
 			priority="10"
 			componentleveltooltip="{{tr:dropdown_regions_cult_tooltip}}"
 			tooltiplabel="ComponentTooltip_e8739b28"

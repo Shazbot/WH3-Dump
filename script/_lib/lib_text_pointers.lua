@@ -1080,7 +1080,15 @@ function text_pointer:show(force_display)
 
 		if not localised_text or localised_text == "" then
 			script_error(self.name .. " ERROR: show() attempted to look up localised text with key [" .. override_text .. "] but no text with this key could be found in the database");
-			return false;
+			-- uses text_pointers_use_localisation_keys_for_missing_texts tweaker to determine whether to show the key or not
+			if common.text_pointers_using_localisation_keys_for_missing_texts() then
+				localised_text = "[" .. override_text .. "]";
+			elseif not core:is_debug_config() then
+				-- when not in debug config, just use a full stop to avoid empty text boxes and softlocks.
+				localised_text = ".";
+			else
+				return false;
+			end
 		end;
 		
 		if pointer_display_mode == "worldspace" then

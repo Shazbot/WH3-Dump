@@ -159,7 +159,7 @@ function endgame:update_campaign_settings()
 	self.settings.endgame_enabled = ssm:get_state_as_bool_value("enable_end_game_settings")
 
 	-- Disable the endgame if the player has turned it off or it's an AI only autorun
-	if self.settings.endgame_enabled == false or not cm:get_local_faction(true) or cm:is_benchmark_mode() then
+	if self.settings.endgame_enabled == false or not cm:has_local_faction() or cm:is_benchmark_mode() then
 		return
 	end
 	

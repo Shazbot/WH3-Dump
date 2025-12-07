@@ -11,7 +11,8 @@ encounter_sea_location_set = {
 			{1364, 634}, {1373, 537}, {1402, 414}, {1254, 452}, {1212, 502}, {1236, 302}, {925, 132}, {934, 373}, {801, 387}, {830, 257},
 			{ 767, 150}, { 667,  77}, { 565,  57}, { 592, 135}, { 504, 152}, { 514, 232}, {863,  40}, {788,  77}, {465,  94}, {359,  89},
 			{ 273,  64}, { 166,  28}, { 162,  99}, { 103, 148}, {  35, 217}, {  15, 275}, { 45, 353}, { 28, 400}, { 78, 410}, { 38, 444},
-			{  14, 520}, { 394, 145}
+			{  14, 520}, { 394, 145}, {946, 117}, {960, 106}, {938, 123}, {984, 163}
+
 		},
 		{
 			{ 153, 779}, {236, 775}, {294, 818}, { 355, 716}, { 264, 437}, { 223, 504}, { 399, 854}, { 559, 891}, { 189, 678}, { 683, 879},
@@ -24,7 +25,7 @@ encounter_sea_location_set = {
 			{  27, 478}, { 66, 385}, { 20, 299}, {  92, 186}, { 186,  68}, { 332,  72}, { 301, 147}, { 256, 196}, { 412, 152}, { 420,  83},
 			{ 521,  68}, {560, 116}, {491, 153}, { 478, 229}, { 613,  46}, { 807,  73}, { 895,  38}, { 984,  95}, { 977, 211}, { 782, 148},
 			{ 870, 252}, {852, 358}, {943, 386}, {1050, 338}, {1138, 226}, {1323, 411}, {1238, 501}, {1393, 488}, {1374, 605}, {1368, 654},
-			{1407, 413}, {937, 283}
+			{1407, 413}, {937, 283}, {946, 117}, {960, 106}, {938, 123}, {984, 163}
 		}
 	},
 	
@@ -245,7 +246,7 @@ function setup_encounters_at_sea_listeners()
 					-- the dilemma is only triggered if the character is in default stance, otherwise a generic event fires and the encounter isn't removed
 					if mf:active_stance() == "MILITARY_FORCE_ACTIVE_STANCE_TYPE_DEFAULT" then
 						cm:cancel_actions_for(character);
-						dilemma_triggered = cm:trigger_dilemma_with_targets(faction_cqi, encounter_events_battle_details[battle_incident][1], faction_cqi, 0, character:command_queue_index(), mf:command_queue_index(), 0, 0);
+						dilemma_triggered = cm:trigger_dilemma_with_targets(faction_cqi, encounter_events_battle_details[battle_incident][1], faction_cqi, 0, character:command_queue_index(), mf:command_queue_index(), 0, 0, nil, true);
 					else
 						remove_encounter = false;
 						
@@ -261,7 +262,7 @@ function setup_encounters_at_sea_listeners()
 						);	
 					end;
 				else
-					dilemma_triggered = cm:trigger_dilemma_with_targets(faction_cqi, active_encounter["event"], faction_cqi, 0, character:command_queue_index(), mf:command_queue_index(), 0, 0);
+					dilemma_triggered = cm:trigger_dilemma_with_targets(faction_cqi, active_encounter["event"], faction_cqi, 0, character:command_queue_index(), mf:command_queue_index(), 0, 0, nil, true);
 				end;
 				
 				-- handle followup events after making a dilemma choice

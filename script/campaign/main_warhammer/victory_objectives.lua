@@ -554,6 +554,7 @@ victory_objectives_ie = {
 				}
 			}
 		},
+		--[[
 		wh2_main_sc_def_dark_elves = {
 			alignment = "dark_elves",
 			objectives = {
@@ -588,7 +589,8 @@ victory_objectives_ie = {
 				}
 			}
 		},
-		wh_dlc08_sc_nor_norsca = {
+		]]
+		--[[ wh_dlc08_sc_nor_norsca = {
 			alignment = "chaos",
 			objectives = {
 				{
@@ -608,7 +610,7 @@ victory_objectives_ie = {
 					}
 				}
 			}
-		},
+		}, ]]
 		wh_dlc03_sc_bst_beastmen = {
 			alignment = "chaos",
 			objectives = {
@@ -1035,14 +1037,38 @@ victory_objectives_ie = {
 		wh2_main_hef_eataine = {
 			objectives = {
 				{
+					-- Use Champions of Ulthuan Feature 
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_tyrion_champions_of_ulthuan_short_victory",
+						"script_key champions_of_ulthuan_short",
+						"total 15",
+						"count 0",
+						"count_completion"
+					}
+				},
+				{
 					-- Beat up the primary dark elves
 					type = "DESTROY_FACTION",
 					conditions = {
-						"faction wh2_main_def_cult_of_pleasure",
+						"faction wh2_main_def_cult_of_excess",
 						"faction wh2_main_def_naggarond",
 						"confederation_valid"
 					}
 				}
+			},
+			long_objectives = {
+				{
+					-- Use Champions of Ulthuan Feature 
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_tyrion_champions_of_ulthuan_long_victory",
+						"script_key champions_of_ulthuan_long",
+						"total 30",
+						"count 0",
+						"count_completion"
+					}
+				},
 			}
 		},
 
@@ -1050,18 +1076,40 @@ victory_objectives_ie = {
 		wh2_main_hef_order_of_loremasters = {
 			objectives = {
 				{
+					-- Use Secrets of White Tower Feature 
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_teclis_secrets_of_white_tower_short_victory",
+						"script_key secrets_of_white_tower_short",
+						"total 10",
+						"count 0",
+						"count_completion"
+					}
+				},
+				{
 					-- Mount an offensive on the bordering Southern Chaos factions
 					type = "DESTROY_FACTION",
 					conditions = {
 						"faction wh3_main_tze_sarthoraels_watchers",
 						"faction wh3_main_skv_clan_morbidus",
 						"faction wh3_main_tze_oracles_of_tzeentch",
-						"faction wh3_main_nur_bubonic_swarm",
+						"faction wh_main_grn_orcs_of_the_bloody_hand",
 						"confederation_valid"
 					}
 				}
 			},
 			long_objectives = {
+				{
+					-- Use Secrets of White Tower Feature 
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_teclis_secrets_of_white_tower_long_victory",
+						"script_key secrets_of_white_tower_long",
+						"total 20",
+						"count 0",
+						"count_completion"
+					}
+				},
 				{
 					-- Control at least 6 of the Elven Colony ports
 					type = "CONTROL_N_REGIONS_FROM",
@@ -1091,12 +1139,50 @@ victory_objectives_ie = {
 					type = "DESTROY_FACTION",
 					conditions = {
 						"faction wh2_main_def_scourge_of_khaine",
-						"faction wh2_main_def_cult_of_excess",
 						"faction wh3_main_sla_seducers_of_slaanesh",
+						"faction wh2_dlc15_grn_skull_crag",
 						"confederation_valid"
 					}
 				}
-			}
+			},
+			long_objectives = {
+				{
+					-- High Elves & allies control Ulthuan
+					type = "CONTROL_N_PROVINCES_INCLUDING",
+					conditions = {
+						"total 15",
+						"province wh3_main_combi_province_eataine",
+						"province wh3_main_combi_province_caledor",
+						"province wh3_main_combi_province_tiranoc",
+						"province wh3_main_combi_province_ellyrion",
+						"province wh3_main_combi_province_nagarythe",
+						"province wh3_main_combi_province_avelorn",
+						"province wh3_main_combi_province_chrace",
+						"province wh3_main_combi_province_cothique",
+						"province wh3_main_combi_province_saphery",
+						"province wh3_main_combi_province_northern_yvresse",
+						"province wh3_main_combi_province_southern_yvresse",
+						"province wh3_main_combi_province_eagle_gate",
+						"province wh3_main_combi_province_griffon_gate",
+						"province wh3_main_combi_province_unicorn_gate",
+						"province wh3_main_combi_province_phoenix_gate"
+					}
+				},
+				{
+					-- Eliminate the threats around Ulthuan
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh2_main_def_cult_of_pleasure",
+						"faction wh2_dlc11_cst_noctilus",
+						"faction wh3_main_chs_shadow_legion",
+						"faction wh2_dlc11_cst_the_drowned",
+						"faction wh2_dlc15_grn_broken_axe",
+						"faction wh_dlc08_nor_norsca",
+						"confederation_valid"
+					}
+				}
+			},
+			no_subculture_objective = true
 		},
 
 		-- Alith Anar
@@ -1106,6 +1192,7 @@ victory_objectives_ie = {
 					-- Destroy Malekith
 					type = "DESTROY_FACTION",
 					conditions = {
+						"faction wh2_main_def_karond_kar",
 						"faction wh2_main_def_naggarond",
 						"confederation_valid"
 					}
@@ -1138,8 +1225,7 @@ victory_objectives_ie = {
 					conditions = {
 						"faction wh_main_grn_top_knotz", 
 						"faction wh_main_grn_teef_snatchaz",
-						"faction wh_main_grn_orcs_of_the_bloody_hand",
-						"faction wh3_main_kho_exiles_of_khorne",
+						"faction wh3_dlc26_grn_gorbad_ironclaw",
 						"confederation_valid"
 					}
 				},
@@ -1205,7 +1291,7 @@ victory_objectives_ie = {
 					type = "DESTROY_FACTION",
 					conditions = {
 						"faction wh2_main_skv_clan_mors",
-						"faction wh_main_grn_orcs_of_the_bloody_hand",
+						"faction wh3_dlc26_grn_gorbad_ironclaw",
 						"faction wh3_main_kho_exiles_of_khorne",
 						"confederation_valid"
 					}
@@ -1220,6 +1306,149 @@ victory_objectives_ie = {
 				}
 			},
 			no_subculture_objective = true
+		},
+
+		-- Aislinn
+		wh3_dlc27_hef_aislinn = {
+			objectives = {
+				{
+					type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
+					conditions = {
+						"total 30"
+					}
+				},
+				{
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_wh3_dlc27_mission_hef_aislinn_dragonships_short_victory",
+						"script_key wh3_dlc27_mission_hef_aislinn_dragonships_short_victory",
+						"total 3",
+						"count 1",
+						"count_completion"
+					}
+				},
+				{
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_wh3_dlc27_mis_activity_establish_colonies",
+						"script_key wh3_dlc27_mission_hef_aislinn_establish_colonies",
+						"total 3",
+						"count 0",
+						"count_completion"
+					}
+				},
+				{
+				 	-- Defeat early pirate
+				 	type = "DESTROY_FACTION",
+				 	conditions = {
+						"faction wh3_main_cst_dread_rock_privateers",
+						"confederation_valid"
+				 	}
+				},
+				{
+					type = "OWN_N_REGIONS_INCLUDING",
+					conditions = {
+						"override_text mission_text_text_wh3_dlc27_mission_narrative_hef_aislinn_colonies",
+						"region wh3_main_combi_region_tower_of_the_sun",
+						"region wh3_main_combi_region_tower_of_the_stars",
+						"region wh3_main_combi_region_tor_elasor",
+						"total 3",
+						"subculture wh2_main_sc_hef_high_elves" -- optional other owner of the region to be valid.
+					}
+				},
+				--[[
+				{
+					-- Build the initial colony landmarks
+					type = "CONSTRUCT_N_BUILDINGS_FROM",
+					conditions = {
+						"total 3",
+						"building_level wh3_dlc27_hef_special_colony_tor_elasor",
+						"building_level wh3_dlc27_hef_special_colony_tower_of_the_stars",
+						"building_level wh3_dlc27_hef_special_colony_tower_of_the_sun"
+					}
+				}
+				]]--
+			},
+			long_objectives = {
+				{
+				 	-- Defeat all threats to Ulthuan and Vampire Coast
+				 	type = "DESTROY_FACTION",
+				 	conditions = {
+						"faction wh3_main_cst_dread_rock_privateers",
+				 		"faction wh2_dlc11_cst_vampire_coast",
+				 		"faction wh2_dlc11_cst_pirates_of_sartosa",
+				 		"faction wh2_dlc11_def_the_blessed_dread",
+						"confederation_valid"
+				 	}
+				},
+				{
+					type = "OWN_N_REGIONS_INCLUDING",
+					conditions = {
+						"override_text mission_text_text_wh3_dlc27_mission_narrative_hef_aislinn_colonies",
+						"region wh3_main_combi_region_fortress_of_dawn",
+						"region wh3_main_combi_region_tower_of_the_sun",
+						"region wh3_main_combi_region_tower_of_the_stars",
+						"region wh3_main_combi_region_tor_elasor",
+						"region wh3_main_combi_region_gronti_mingol",
+						"region wh3_main_combi_region_citadel_of_dusk",
+						"region wh3_main_combi_region_the_star_tower",
+						"region wh3_main_combi_region_great_turtle_isle",
+						"region wh3_main_combi_region_arnheim",
+						"total 9",
+						"subculture wh2_main_sc_hef_high_elves" -- optional other owner of the region to be valid.
+					}
+				},
+				--[[
+				{
+					-- Build the colony landmarks
+					type = "CONSTRUCT_N_BUILDINGS_FROM",
+					conditions = {
+						"total 9",
+						"building_level wh3_dlc27_hef_special_colony_arnheim",
+						"building_level wh3_dlc27_hef_special_colony_citadel_of_dusk",
+						"building_level wh3_dlc27_hef_special_colony_fortress_of_dawn",
+						"building_level wh3_dlc27_hef_special_colony_great_turtle_isle",
+						"building_level wh3_dlc27_hef_special_colony_gronti_mingol",
+						"building_level wh3_dlc27_hef_special_colony_the_star_tower",
+						"building_level wh3_dlc27_hef_special_colony_tor_elasor",
+						"building_level wh3_dlc27_hef_special_colony_tower_of_the_stars",
+						"building_level wh3_dlc27_hef_special_colony_tower_of_the_sun"
+					}
+				},
+				]]--
+				{
+					type = "FIGHT_SET_PIECE_BATTLE",
+					conditions = {
+						"set_piece_battle wh3_dlc27_qb_hef_aislinn_final_battle"
+					}
+				},
+--[[ 
+				{
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_wh3_dlc27_mission_hef_aislinn_dragonships_long_victory",
+						"script_key wh3_dlc27_mission_hef_aislinn_dragonships_long_victory",
+						"total 4",
+						"count 0",
+						"count_completion"
+					}
+				},
+				{
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_wh3_dlc27_mission_narrative_hef_aislinn_black_fleet",
+						"script_key wh3_dlc27_mission_narrative_hef_aislinn_black_fleet",
+						"total 6",
+						"count 0"
+					}
+				},
+				 ]]--
+			},
+			wh_main_long_victory = {
+				payload_bundle = "wh3_dlc27_ie_victory_objective_aislinn_long"	
+			},
+			no_subculture_objective = true,
+			no_alignment_objective = true
 		},
 		
 		-- Belegar Ironhammer
@@ -2404,13 +2633,44 @@ victory_objectives_ie = {
 		wh_dlc08_nor_norsca = {
 			objectives = {
 				{
-					-- Obtain level 2 favour with any god
+					-- reach tier 3 with any of the gods.
 					type = "SCRIPTED",
 					conditions = {
-						"override_text mission_text_text_mis_activity_attain_god_favour_2", 
-						"script_key attain_chaos_god_favour_lvl_2"
+						"script_key attain_chaos_god_favour_lvl_3",
+						"override_text mission_text_text_mis_activity_attain_chaos_god_favour"
 					}
-				}
+				},
+				{
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_wh3_dlc27_mission_norsca_defeat_lords_victory_condition",
+						"script_key wh3_dlc27_mission_norsca_defeat_lords_short_victory",
+						"total 15",
+						"count 0",
+						"count_completion"
+					}
+				},
+				
+			},
+			long_objectives = {
+					{
+						-- reach tier 4 with any of the gods.
+						type = "SCRIPTED",
+						conditions = {
+							"script_key attain_chaos_god_favour_lvl_4",
+							"override_text mission_text_text_mis_activity_attain_god_favour_4"
+						}
+					},
+					{
+						type = "SCRIPTED",
+						conditions = {
+							"override_text mission_text_text_wh3_dlc27_mission_norsca_defeat_lords_victory_condition",
+							"script_key wh3_dlc27_mission_norsca_defeat_lords_long_victory",
+							"total 30",
+							"count 0",
+							"count_completion"
+						}
+					},
 			}
 		},
 
@@ -2418,16 +2678,50 @@ victory_objectives_ie = {
 		wh_dlc08_nor_wintertooth = {
 			objectives = {
 				{
-					-- Destroy nearby Dwarves and Kislev
-					type = "DESTROY_FACTION",
+					type = "SCRIPTED",
 					conditions = {
-						"faction wh3_dlc25_dwf_malakai",
-						"faction wh3_main_ksl_ropsmenn_clan",
-						"faction wh3_main_ksl_the_ice_court",
-						"faction wh3_main_ksl_the_great_orthodoxy",
-						"confederation_valid"
+						"override_text mission_text_text_mis_activity_reach_troll_domains",
+						"script_key reach_troll_domains"
 					}
-				}
+				},
+				{
+					-- Defeat monster hunts
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_wh3_dlc27_throgg_defeat_monsters",
+						"script_key throgg_win_monster_hunts",
+						"total 4",
+						"count 0",
+						"count_completion"
+					}
+				},
+			},
+			long_objectives = {
+				{
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_mis_activity_reach_troll_empire",
+						"script_key reach_troll_empire"
+					}
+				},
+				{
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_wh3_dlc27_mis_activity_ultimate_monster_hunter",
+						"script_key ultimate_monster_hunter"
+					}
+				},
+				{
+					-- Defeat monster hunts
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_wh3_dlc27_throgg_capture_troll_dens",
+						"script_key throgg_capture_troll_dens",
+						"total 3",
+						"count 0",
+						"count_completion"
+					}
+				},
 			}
 		},
 
@@ -2471,7 +2765,7 @@ victory_objectives_ie = {
 					}
 				},
 				{
-					-- Hold The Galleon�s Graveyard 
+					-- Hold The Galleon?s Graveyard 
 					type = "CONTROL_N_REGIONS_FROM",
 					conditions = {
 						"total 1",
@@ -2633,6 +2927,27 @@ victory_objectives_ie = {
 						"region wh3_main_combi_region_lothern"
 					}
 				}
+			},
+			long_objectives = {
+				{
+					-- Тake over a large percent of Ulthuan
+					type = "CONTROL_N_PROVINCES_INCLUDING",
+					conditions = {
+						"total 8",
+						"province wh3_main_combi_province_eataine",
+						"province wh3_main_combi_province_caledor",
+						"province wh3_main_combi_province_tiranoc",
+						"province wh3_main_combi_province_ellyrion",
+						"province wh3_main_combi_province_nagarythe",
+						"province wh3_main_combi_province_avelorn",
+						"province wh3_main_combi_province_chrace",
+						"province wh3_main_combi_province_cothique",
+						"province wh3_main_combi_province_saphery",
+						"province wh3_main_combi_province_northern_yvresse",
+						"province wh3_main_combi_province_southern_yvresse",
+						"override_text mission_text_text_mis_activity_control_n_provinces_ulthuan"
+					}
+				}
 			}
 		},
 
@@ -2644,6 +2959,35 @@ victory_objectives_ie = {
 					type = "DESTROY_FACTION",
 					conditions = {
 						"faction wh2_main_def_har_ganeth",
+						"confederation_valid"
+					}
+				}
+			},
+			long_objectives = {
+				{
+					-- Тake over a large percent of Ulthuan
+					type = "CONTROL_N_PROVINCES_INCLUDING",
+					conditions = {
+						"total 6",
+						"province wh3_main_combi_province_eataine",
+						"province wh3_main_combi_province_caledor",
+						"province wh3_main_combi_province_tiranoc",
+						"province wh3_main_combi_province_ellyrion",
+						"province wh3_main_combi_province_nagarythe",
+						"province wh3_main_combi_province_avelorn",
+						"province wh3_main_combi_province_chrace",
+						"province wh3_main_combi_province_cothique",
+						"province wh3_main_combi_province_saphery",
+						"province wh3_main_combi_province_northern_yvresse",
+						"province wh3_main_combi_province_southern_yvresse",
+						"override_text mission_text_text_mis_activity_control_n_provinces_ulthuan"
+					}
+				},
+				{
+					-- Destroy Alarielle
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh2_main_hef_avelorn",
 						"confederation_valid"
 					}
 				}
@@ -2670,6 +3014,35 @@ victory_objectives_ie = {
 						"override_text mission_text_text_mis_activity_control_n_regions_quintex"
 					}
 				}
+			},
+			long_objectives = {
+				{
+					-- Тake over a large percent of Ulthuan
+					type = "CONTROL_N_PROVINCES_INCLUDING",
+					conditions = {
+						"total 6",
+						"province wh3_main_combi_province_eataine",
+						"province wh3_main_combi_province_caledor",
+						"province wh3_main_combi_province_tiranoc",
+						"province wh3_main_combi_province_ellyrion",
+						"province wh3_main_combi_province_nagarythe",
+						"province wh3_main_combi_province_avelorn",
+						"province wh3_main_combi_province_chrace",
+						"province wh3_main_combi_province_cothique",
+						"province wh3_main_combi_province_saphery",
+						"province wh3_main_combi_province_northern_yvresse",
+						"province wh3_main_combi_province_southern_yvresse",
+						"override_text mission_text_text_mis_activity_control_n_provinces_ulthuan"
+					}
+				},
+				{
+					-- Destroy Morathi
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh2_main_hef_nagarythe",
+						"confederation_valid"
+					}
+				}
 			}
 		},
 
@@ -2677,7 +3050,7 @@ victory_objectives_ie = {
 		wh2_dlc11_def_the_blessed_dread = {
 			objectives = {
 				{
-				-- Control 5 / 7 of the key Cathayan coastal regions
+				-- Control 5 / 9 of the key Cathayan coastal regions 
 					type = "CONTROL_N_REGIONS_FROM",
 					conditions = {
 						"total 5",
@@ -2688,7 +3061,49 @@ victory_objectives_ie = {
 						"region wh3_main_combi_region_beichai",
 						"region wh3_main_combi_region_zhanshi",
 						"region wh3_main_combi_region_li_zhu",
+						"region wh3_main_combi_region_fu_chow",
+						"region wh3_main_combi_region_dai_cheng",
 						"override_text mission_text_text_mis_activity_control_n_regions_cathayan_ports"
+					}
+				},
+				{
+					-- Control the Eastern Isles province
+					type = "CONTROL_N_REGIONS_FROM",
+					conditions = {
+						"total 3",
+						"region wh3_main_combi_region_tor_elasor",
+						"region wh3_main_combi_region_tower_of_the_sun",
+						"region wh3_main_combi_region_tower_of_the_stars",
+						"override_text mission_text_text_mis_activity_control_n_regions_eastern_isles"
+					}
+				}
+			},
+			long_objectives = {
+				{
+					-- Destroy Aislinn
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh3_dlc27_hef_aislinn",
+						"confederation_valid"
+					}
+				},
+				{
+					-- Тake over a large percent of Ulthuan
+					type = "CONTROL_N_PROVINCES_INCLUDING",
+					conditions = {
+						"total 3",
+						"province wh3_main_combi_province_eataine",
+						"province wh3_main_combi_province_caledor",
+						"province wh3_main_combi_province_tiranoc",
+						"province wh3_main_combi_province_ellyrion",
+						"province wh3_main_combi_province_nagarythe",
+						"province wh3_main_combi_province_avelorn",
+						"province wh3_main_combi_province_chrace",
+						"province wh3_main_combi_province_cothique",
+						"province wh3_main_combi_province_saphery",
+						"province wh3_main_combi_province_northern_yvresse",
+						"province wh3_main_combi_province_southern_yvresse",
+						"override_text mission_text_text_mis_activity_control_n_provinces_ulthuan"
 					}
 				}
 			}
@@ -2698,13 +3113,42 @@ victory_objectives_ie = {
 		 wh2_main_def_hag_graef = {
 			objectives = {
 				{
-					-- Obtain the Swarpsword of Khaine
+					-- Obtain the Warpsword of Khaine
 					type = "SCRIPTED",
 					conditions = {
 						"override_text mission_text_text_mis_activity_complete_warpsword_of_khaine",
 						"script_key warpsword_of_khaine_obtained"
 					}
 				}
+			},
+			long_objectives = {
+				{
+					-- Тake over a large percent of Ulthuan
+					type = "CONTROL_N_PROVINCES_INCLUDING",
+					conditions = {
+						"total 6",
+						"province wh3_main_combi_province_eataine",
+						"province wh3_main_combi_province_caledor",
+						"province wh3_main_combi_province_tiranoc",
+						"province wh3_main_combi_province_ellyrion",
+						"province wh3_main_combi_province_nagarythe",
+						"province wh3_main_combi_province_avelorn",
+						"province wh3_main_combi_province_chrace",
+						"province wh3_main_combi_province_cothique",
+						"province wh3_main_combi_province_saphery",
+						"province wh3_main_combi_province_northern_yvresse",
+						"province wh3_main_combi_province_southern_yvresse",
+						"override_text mission_text_text_mis_activity_control_n_provinces_ulthuan"
+					}
+				},
+				{
+					-- Destroy Tyrion
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh2_main_hef_eataine",
+						"confederation_valid"
+					}
+				},
 			}
 		},
 
@@ -2725,6 +3169,36 @@ victory_objectives_ie = {
 					conditions = {
 						"total 1",
 						"province wh3_main_combi_province_the_turtle_isles"
+					}
+				}
+			},
+			long_objectives = {
+				{
+					-- Тake over a large percent of Ulthuan
+					type = "CONTROL_N_PROVINCES_INCLUDING",
+					conditions = {
+						"total 3",
+						"province wh3_main_combi_province_eataine",
+						"province wh3_main_combi_province_caledor",
+						"province wh3_main_combi_province_tiranoc",
+						"province wh3_main_combi_province_ellyrion",
+						"province wh3_main_combi_province_nagarythe",
+						"province wh3_main_combi_province_avelorn",
+						"province wh3_main_combi_province_chrace",
+						"province wh3_main_combi_province_cothique",
+						"province wh3_main_combi_province_saphery",
+						"province wh3_main_combi_province_northern_yvresse",
+						"province wh3_main_combi_province_southern_yvresse",
+						"override_text mission_text_text_mis_activity_control_n_provinces_ulthuan"
+					}
+				},
+				{
+					-- Destroy Mazdamundi and Gor-Rok
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh2_main_lzd_hexoatl",
+						"faction wh2_main_lzd_itza",
+						"confederation_valid"
 					}
 				}
 			}
@@ -3313,12 +3787,255 @@ victory_objectives_ie = {
 				}
 			}
 		},
+		
+		--The Masque
+		wh3_dlc27_sla_masque_of_slaanesh = {
+			objectives = {
+				{
+					-- Destroy nearby factions
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh2_dlc13_emp_the_huntmarshals_expedition",
+						"confederation_valid"
+					}
+				},
+				{
+					type = "CONTROL_N_PROVINCES_INCLUDING",
+					conditions = {
+						"total 3",
+						"province wh3_main_combi_province_jungles_of_green_mist",
+						"province wh3_main_combi_province_aymara_swamps",
+						"province wh3_main_combi_province_the_creeping_jungle",
+						"province wh3_main_combi_province_scorpion_coast",
+						"province wh3_main_combi_province_the_gwangee_valley",
+						"override_text mission_text_text_mis_activity_control_n_provinces_including_big_list",
+					}
+				},
+				{
+					type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
+					conditions = {
+						"total 30",
+					}
+				},
+				{
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_wh3_dlc27_mission_masque_tempo_short_victory",
+						"script_key wh3_dlc27_mission_masque_tempo_short_victory",
+						"total 4",
+						"count 0",
+						"count_completion"
+					}
+				},
+			},
+			long_objectives = {
+				{
+					-- Destroy nearby factions
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh3_dlc24_cth_the_celestial_court",
+						"faction wh2_main_lzd_hexoatl",
+						"faction wh2_main_lzd_itza",
+						"confederation_valid"
+					}
+				},
+				{
+					type = "CONTROL_N_PROVINCES_INCLUDING",
+					conditions = {
+						"total 6",
+						"province wh3_main_combi_province_titan_peaks",
+						"province wh3_main_combi_province_the_isthmus_coast",
+						"province wh3_main_combi_province_isthmus_of_lustria",
+						"province wh3_main_combi_province_jungles_of_pahualaxa",
+						"province wh3_main_combi_province_aymara_swamps",						
+						"province wh3_main_combi_province_the_gwangee_valley",
+						"province wh3_main_combi_province_the_turtle_isles",
+						"province wh3_main_combi_province_river_qurveza",
+						"province wh3_main_combi_province_mosquito_swamps",
+						"province wh3_main_combi_province_vampire_coast",
+						"province wh3_main_combi_province_the_lost_valley",
+						"override_text mission_text_text_mis_activity_control_n_provinces_including_big_list",
+					}
+				},
+				{
+					type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
+					conditions = {
+						"total 60",
+					}
+				},
+				{
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_wh3_dlc27_mission_masque_tempo_long_victory",
+						"script_key wh3_dlc27_mission_masque_tempo_long_victory",
+						"total 40",
+						"count 0",
+						"count_completion"
+					}
+				},
+			},
+			no_subculture_objective = true,
+			no_alignment_objective = true
+			},
+			
+		--Dechala
+		wh3_dlc27_sla_the_tormentors = {
+			objectives = {
+				{
+					-- Destroy nearby factions
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh3_main_cth_burning_wind_nomads",
+						"faction wh3_main_cth_the_jade_custodians",
+						"confederation_valid",
+						"vassalization_valid"
+					}
+				},
+				{
+					type = "CONTROL_N_PROVINCES_INCLUDING",
+					conditions = {
+						"total 4",
+						"province wh3_main_combi_province_cathayan_hinterlands",
+						"province wh3_main_combi_province_serpent_estuary",
+						"province wh3_main_combi_province_the_great_canal",
+						"province wh3_main_combi_province_mount_li",
+						"province wh3_main_combi_province_nongchang_basin",
+						"override_text mission_text_text_mis_activity_control_n_provinces_including_big_list",
+					}
+				},
+				{
+					type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
+					conditions = {
+						"total 30",
+					}
+				},
+				{
+					type = "CONSTRUCT_N_BUILDINGS_FROM",
+					conditions = {
+						"total 1",
+						"building_level wh3_dlc27_sla_dec_palace_settlement_5",
+						"override_text mission_text_text_wh3_dlc27_mission_sla_dechala_establish_pleasure_palace_short_victory",
+					}
+				},
+			},
+			long_objectives = {
+				{
+					-- Destroy nearby factions
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh2_main_skv_clan_eshin",
+						"faction wh3_main_cth_the_northern_provinces",
+						"faction wh3_main_cth_the_western_provinces",
+						"confederation_valid"
+					}
+				},
+				{
+					type = "CONTROL_N_PROVINCES_INCLUDING",
+					conditions = {
+						"total 7",
+						"province wh3_main_combi_province_broken_lands_of_tian_li",
+						"province wh3_main_combi_province_wastelands_of_jinshen",
+						"province wh3_main_combi_province_warpstone_desert",
+						"province wh3_main_combi_province_forests_of_the_moon",
+						"province wh3_main_combi_province_jade_river_delta",
+						"province wh3_main_combi_province_plains_of_xen",
+						"province wh3_main_combi_province_imperial_road",
+						"province wh3_main_combi_province_lands_of_stone_and_steel",
+						"province wh3_main_combi_province_gunpowder_road",
+						"province wh3_main_combi_province_ivory_road",
+						"province wh3_main_combi_province_gnoblar_country",
+						"province wh3_main_combi_province_celestial_riverlands",
+						"province wh3_main_combi_province_celestial_lake",
+						"override_text mission_text_text_mis_activity_control_n_provinces_including_big_list",
+					}
+				},
+				{
+					type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
+					conditions = {
+						"total 60",
+					}
+				},
+				{
+					type = "FIGHT_SET_PIECE_BATTLE",
+					conditions = {
+						"set_piece_battle wh3_dlc27_qb_sla_dechala_final_battle"
+					}
+				},
+			},
+			no_subculture_objective = true,
+			no_alignment_objective = true
+		},
 
+		--Sayl
+		wh3_dlc27_nor_sayl = {
+			objectives = {
+				{
+					type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
+					conditions = {
+						"total 30",
+					}
+				},
+				{
+					-- Use Manipulations
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_sayl_manipulations_short_victory",
+						"script_key manipulations_short",
+						"total 6",
+						"count 0",
+						"count_completion"
+					}
+				},
+				{
+					type = "FIGHT_SET_PIECE_BATTLE",
+					conditions = {
+						"set_piece_battle wh3_dlc27_qb_nor_sayl_winds_of_magic_hef_fire_metal"
+					}
+				},
+			},
+			long_objectives = {
+				{
+					-- Consolidate the East of the map
+					type = "OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS",
+					conditions = {
+						"total 60"
+					}
+				},
+				{
+					-- Use Manipulations
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_sayl_manipulations_long_victory",
+						"script_key manipulations_long",
+						"total 12",
+						"count 0",
+						"count_completion"
+					}
+				},			
+				{
+					type = "FIGHT_SET_PIECE_BATTLE",
+					conditions = {
+						"set_piece_battle wh3_dlc27_qb_nor_sayl_final_battle"
+					}
+				},
+			},
+			no_subculture_objective = true,
+			no_alignment_objective = true
+			},
 	},
 	-- used to track gelts unique ritual objective
 	gelt_unique_rituals = {},
 
-	gorbad_unique_initiatives = {}
+	sayl_unique_rituals = {},
+
+	gorbad_unique_initiatives = {},
+
+	masque_data = {
+		turn_counter = 0,
+		tempo_4_initiatives = {}
+	},
+
+	throgg_data = {}
 }
 
 -- This function creates the victory missions for all playable factions
@@ -3505,25 +4222,27 @@ end
 function victory_objectives_ie:create_long_objective(mm, faction_subculture_key, faction_key)
 
 	local objectives = {}
+	local faction_table = self.factions[faction_key]
 
-	if self.factions[faction_key] and self.factions[faction_key].long_objectives then
-		for _,objective in pairs(self.factions[faction_key].long_objectives) do 
-			table.insert(objectives,objective)
+	if faction_table then
+		local used_long_objectives = cm:is_multiplayer() and faction_table.long_mp_objectives or faction_table.long_objectives
+
+		if used_long_objectives then
+			for _,objective in pairs(used_long_objectives) do 
+					table.insert(objectives,objective)
+			end
+		end
+
+		if self.subcultures[faction_subculture_key] and faction_table.no_subculture_objective ~= true then
+			for _,objective in pairs(self.subcultures[faction_subculture_key].objectives) do 
+				table.insert(objectives,objective)
+			end
+		end
+
+		if #objectives > 0 then
+			self:add_objectives(mm, objectives, faction_key)
 		end
 	end
-
-	if self.subcultures[faction_subculture_key] and (self.factions[faction_key] and self.factions[faction_key].no_subculture_objective ~= true) then
-		 for _,objective in pairs(self.subcultures[faction_subculture_key].objectives) do 
-			table.insert(objectives,objective)
-		end
-	end
-
-	if #objectives > 0 then
-		
-		self:add_objectives(mm, objectives, faction_key)
-	
-	end
-		
 end
 
 -- Unlike other victories with dynamic objective types, domination is a generic control half the map (so it should support allies/vassals)
@@ -4142,6 +4861,352 @@ function victory_objectives_ie:add_scripted_victory_listeners()
 		)
 	end
 
+	-- Tyrion
+	-- Champions of Ulthuan
+	local tyrion_faction_key = "wh2_main_hef_eataine"
+	if cm:get_faction(tyrion_faction_key):is_human() then
+		core:add_listener(
+			"IEVictoryConditionShortVictoryTyrionSecrets",
+			"RitualCompletedEvent",
+			function(context)
+				local category = context:ritual():ritual_category()
+				local tyrion_ritual_categories = {
+					"TYRION_IMPERATIVE_ALLIANCE",
+					"TYRION_IMPERATIVE_HEIR",
+				}
+
+				return table.contains(tyrion_ritual_categories, category)
+			end,
+			function(context)
+				cm:increase_scripted_mission_count("wh_main_short_victory", "champions_of_ulthuan_short", 1)
+				cm:increase_scripted_mission_count("wh_main_long_victory", "champions_of_ulthuan_long", 1)
+			end,
+			true
+		)
+	end
+
+	-- Teclis
+	-- Secrets of White Tower
+	local teclis_faction_key = "wh2_main_hef_order_of_loremasters"
+	if cm:get_faction(teclis_faction_key):is_human() then
+		core:add_listener(
+			"IEVictoryConditionShortVictoryTeclisSecrets",
+			"RitualCompletedEvent",
+			function(context)
+				local category = context:ritual():ritual_category()
+				local teclis_ritual_categories = {
+					"SWT_BEING",
+					"SWT_BRILLIANCE",
+					"SWT_DARKNESS",
+					"SWT_LOREMASTER",
+					"SWT_OBLIVION",
+				}
+
+				return table.contains(teclis_ritual_categories, category)
+			end,
+			function(context)
+				cm:increase_scripted_mission_count("wh_main_short_victory", "secrets_of_white_tower_short", 1)
+				cm:increase_scripted_mission_count("wh_main_long_victory", "secrets_of_white_tower_long", 1)
+			end,
+			true
+		)
+	end
+
+	-- Aislinn
+	local aislinn_faction_key = "wh3_dlc27_hef_aislinn"
+	if cm:get_faction(aislinn_faction_key) and cm:get_faction(aislinn_faction_key):is_human() then
+		core:add_listener(
+			"aislin_victory_objectives_listener",
+			"ScriptEventNewDragonShipUnlocked",
+			true,
+			function(context)
+				cm:increase_scripted_mission_count("wh_main_short_victory", "wh3_dlc27_mission_hef_aislinn_dragonships_short_victory", 1)
+				cm:increase_scripted_mission_count("wh_main_long_victory", "wh3_dlc27_mission_hef_aislinn_dragonships_long_victory", 1)
+			end,
+			true
+		)
+		core:add_listener(
+			"aislin_victory_objectives_listener_establish_colonies",
+			"CharacterPerformsSettlementOccupationDecision",
+			function(context)
+				local colonise_options = {
+					["1212349371"] = true,
+					["556969995"] = true,
+					["1044297972"] = true,
+					["1156478547"] = true,
+					["1636165653"] = true,
+					["1545063178"] = true
+				}
+				return context:character():faction():name() == aislinn_faction_key and colonise_options[context:occupation_decision()]
+			end,
+			function(context)
+				cm:increase_scripted_mission_count("wh_main_short_victory", "wh3_dlc27_mission_hef_aislinn_establish_colonies", 1)
+			end,
+			true
+		)
+	end
+
+	-- Dechala
+	local dechala_faction_key = "wh3_dlc27_sla_the_tormentors"
+	if cm:get_faction(dechala_faction_key) and cm:get_faction(dechala_faction_key):is_human() then
+		core:add_listener(
+			"dechala_settlement_exploitation_victory_objectives",
+			"FactionTurnStart",
+			function(context)
+				return context:faction():name() == dechala_faction_key
+			end,
+			function(context)
+				local faction = context:faction()
+				local region_list = faction:region_list()
+
+				for i = 0, region_list:num_items() - 1 do
+					local region = region_list:item_at(i)
+					local region_key = region:name()
+					local pooled_resource_manager = region:pooled_resource_manager()
+					local resources = pooled_resource_manager:resources()
+
+					for i = 0, resources:num_items() - 1 do 
+						local resource = resources:item_at(i)
+
+						if not resource:is_null_interface() and resource:key() == "wh3_dlc27_sla_thralls_region" then
+							if resource:value() <= 0 and not settlement_exploitation.exploited_regions_data[region_key] then
+								settlement_exploitation.exploited_regions_data[region_key] = true
+								cm:increase_scripted_mission_count("wh_main_short_victory", "wh3_dlc27_mission_dechala_exploitation_short_victory", 1)
+								cm:increase_scripted_mission_count("wh_main_long_victory", "wh3_dlc27_mission_dechala_exploitation_long_victory", 1)
+							end
+						end
+					end
+				end
+			end,
+			true
+		);
+	end
+
+	-- Masque of Slaanesh reaching tempo four with all dances
+	local masque_faction_key = "wh3_dlc27_sla_masque_of_slaanesh"
+	if cm:get_faction(masque_faction_key) and cm:get_faction(masque_faction_key):is_human() then
+		core:add_listener(
+			"masque_short_victory_objectives_listener",
+			"CharacterInitiativeActivationChangedEvent",
+			function(context)
+				return string.find(context:initiative():record_key(), "tempo_4_ritual")
+			end,
+			function(context)
+
+				local initiative = context:initiative():record_key()
+				for i = 1, #victory_objectives_ie.masque_data.tempo_4_initiatives do 
+					if initiative == victory_objectives_ie.masque_data.tempo_4_initiatives[i] then
+						return false
+					end
+				end
+
+				table.insert(victory_objectives_ie.masque_data.tempo_4_initiatives, initiative)
+				cm:increase_scripted_mission_count("wh_main_short_victory", "wh3_dlc27_mission_masque_tempo_short_victory", 1)	
+			end,
+			true
+		)
+
+		-- Masque : keep at least one army at max tempo for X turns, does not need to be consecutive turns
+		core:add_listener(
+			"masque_long_victory_objectives_listener",
+			"FactionTurnEnd",
+			function(context)
+				return context:faction():name() == masque_faction_key
+			end,
+			function(context)
+				local military_force_list = context:faction():military_force_list()
+
+				for i = 0, military_force_list:num_items() - 1 do 
+					local military_force = military_force_list:item_at(i)
+					if eternal_dance:GetCurrentTempoLevel(military_force) >= 4 and victory_objectives_ie.masque_data.turn_counter < 40 then
+						cm:increase_scripted_mission_count("wh_main_long_victory", "wh3_dlc27_mission_masque_tempo_long_victory", 1)
+						victory_objectives_ie.masque_data.turn_counter = victory_objectives_ie.masque_data.turn_counter + 1
+						if victory_objectives_ie.masque_data.turn_counter == 40 then
+							cm:complete_scripted_mission_objective(masque_faction_key, "wh_main_long_victory", "wh3_dlc27_mission_masque_tempo_long_victory", true)
+						end
+						return
+					end
+				end
+			end,
+			true
+		)
+	end
+
+	-- Sayl Manipulations
+	local sayl_faction_key = "wh3_dlc27_nor_sayl"
+	local sayl_faction = cm:get_faction(sayl_faction_key)
+	if sayl_faction and sayl_faction:is_null_interface() == false and sayl_faction:is_human() then
+		core:add_listener(
+			"IEVictoryConditionShortVictorySaylManipulations",
+			"RitualCompletedEvent",
+			function(context)
+				return context:ritual():ritual_key():starts_with("wh3_dlc27_sayl_manipulations_")
+			end,
+			function(context)
+				local ritual_key = context:ritual():ritual_key()
+				if self.sayl_unique_rituals[ritual_key] == nil then
+					self.sayl_unique_rituals[ritual_key] = true
+					cm:increase_scripted_mission_count("wh_main_short_victory", "manipulations_short", 1)
+					cm:increase_scripted_mission_count("wh_main_long_victory", "manipulations_long", 1)
+				end
+			end,
+			true
+		)
+	end
+
+	--Throgg
+	local throgg_faction_key = "wh_dlc08_nor_wintertooth"
+	if cm:get_faction(throgg_faction_key) and cm:get_faction(throgg_faction_key):is_human() then 
+		core:add_listener(
+			"throgg_victory_objective_achieved_troll_expansion",
+			"PooledResourceEffectChangedEvent",
+			function(context) 
+				--Check if Throll's expansion resource has changed.  
+				return context:resource():key() == norsca_kinfolk_config.expansion_resource_key;
+			end,
+			function(context)
+				local next_effect = context:new_effect() 
+				local faction_key = context:faction():name()
+
+				-- Milestone 3 for short victory, Milestone 6 for long victory.
+				if string.match(next_effect, norsca_kinfolk_config.victory_objectives.long_victory) then 
+					cm:complete_scripted_mission_objective(faction_key, "wh_main_long_victory", "reach_troll_empire", true)
+
+				elseif string.match(next_effect, norsca_kinfolk_config.victory_objectives.short_victory) then
+					cm:complete_scripted_mission_objective(faction_key, "wh_main_short_victory", "reach_troll_domains", true)	
+				end
+
+			end,
+			true
+		);
+
+
+		-- Complete Monster Hunts
+		core:add_listener(
+			"IEVictoryConditionThroggHunts",
+			"MissionSucceeded",
+			function(context)
+				local mission = context:mission()
+				if not mission then return false end
+
+				local key = mission:mission_record_key()
+				if not key then return false end  -- safely exit if nil
+
+				return string.find(key, "_qb_nor_monster_hunt_")
+					or (string.find(key, "nor_monster_hunt_taming_") and string.find(key, "stage_2"))
+			end,
+			function(context)
+				cm:increase_scripted_mission_count("wh_main_short_victory", "throgg_win_monster_hunts", 1)
+			end,
+			true
+		)
+
+		core:add_listener(
+			"throgg_victory_objective_ultimate_monster_hunter",
+			"ScriptEventUltimateMonsterHunterActivated",
+			function(context)  
+				return context.string == throgg_faction_key
+			end,
+			function(context)
+				cm:complete_scripted_mission_objective(throgg_faction_key, "wh_main_long_victory", "ultimate_monster_hunter", true)
+			end,
+			true
+		)
+
+		core:add_listener(
+			"throgg_victory_objective_capture_troll_dens",
+			"RegionFactionChangeEvent",
+			function(context)
+				return context:region():resource_exists("res_bile_trolls")
+					or context:region():resource_exists("res_chaos_trolls")
+					or context:region():resource_exists("res_river_trolls")
+					or context:region():resource_exists("res_stone_trolls")
+			end,
+			function(context)
+				local region = context:region()
+				if region:owning_faction():name() == throgg_faction_key then
+					cm:increase_scripted_mission_count("wh_main_long_victory", "throgg_capture_troll_dens", 1)
+				elseif context:previous_faction():name() == throgg_faction_key then
+					cm:increase_scripted_mission_count("wh_main_long_victory", "throgg_capture_troll_dens", -1)
+				end
+			end,
+			true
+		)
+		
+		
+
+
+		
+	end
+
+	-- Wulfrik
+	local wulfirk_faction_key = "wh_dlc08_nor_norsca"
+	if cm:get_faction(wulfirk_faction_key) and cm:get_faction(wulfirk_faction_key):is_human() then 
+		core:add_listener(
+			"WulfrikVC_PooledResourceEffectChangedEvent",
+			"PooledResourceEffectChangedEvent",
+			function(context) 
+				return string.find(context:resource():key(), "nor_progress_") and context:faction():is_human()
+			end,
+			function(context)
+				if string.find(context:new_effect(), "_3") then 
+					cm:complete_scripted_mission_objective(context:faction():name(), "wh_main_short_victory", "attain_chaos_god_favour_lvl_3", true)
+				elseif string.find(context:new_effect(), "_4") then 
+					cm:complete_scripted_mission_objective(context:faction():name(), "wh_main_long_victory", "attain_chaos_god_favour_lvl_4", true)
+				end
+			end,
+			true
+		)
+
+		-- Win battles against subcultures
+		core:add_listener(
+			"WulfrikVC_BattleConflictFinished",
+			"BattleConflictFinished",
+			function(context)
+				local pb = context:pending_battle()
+				return pb:attacker():faction():name() == wulfirk_faction_key or pb:defender():faction():name() == wulfirk_faction_key
+			end,
+			function(context)
+				local pb = context:pending_battle()
+				local attacker_faction = pb:attacker():faction()
+				local defender_faction = pb:defender():faction()
+				local winner = pb:attacker_won() and attacker_faction or defender_faction
+				local defeated = not pb:attacker_won() and attacker_faction or defender_faction
+				local winner_faction_key = winner:name()
+				local defeated_character = not pb:attacker_won() and pb:attacker() or pb:defender()
+				local secondary_defeated_characters = not pb:attacker_won() and pb:secondary_attackers() or pb:secondary_defenders()
+
+				local cultures_to_defeat = {
+					["wh_main_emp_empire"] = true,
+					["wh2_main_lzd_lizardmen"] = true,
+					["wh2_main_hef_high_elves"] = true,
+					["wh_main_brt_bretonnia"] = true,
+					["wh2_main_def_dark_elves"] = true
+				}
+
+				local characters_defeated = 0
+
+				if winner_faction_key == wulfirk_faction_key and cultures_to_defeat[defeated:culture()] then
+					if defeated_character:character_type("general") then 
+						characters_defeated = characters_defeated + 1
+					end
+
+					for i = 0, secondary_defeated_characters:num_items() - 1 do
+						local curr_char = secondary_defeated_characters:item_at(i)
+						if curr_char:character_type("general") then 
+							characters_defeated = characters_defeated + 1
+						end
+					end
+
+					cm:increase_scripted_mission_count("wh_main_short_victory", "wh3_dlc27_mission_norsca_defeat_lords_short_victory", characters_defeated)
+					cm:increase_scripted_mission_count("wh_main_long_victory", "wh3_dlc27_mission_norsca_defeat_lords_long_victory", characters_defeated)
+				end
+			end,
+			true
+		)
+
+	end
+
 end
 
 --------------------- SAVE/LOAD ---------------------
@@ -4149,7 +5214,10 @@ end
 cm:add_saving_game_callback(
 	function(context)
 		cm:save_named_value("victory_objectives_ie.gelt_unique_rituals", victory_objectives_ie.gelt_unique_rituals, context)
+		cm:save_named_value("victory_objectives_ie.sayl_unique_rituals", victory_objectives_ie.sayl_unique_rituals, context)
 		cm:save_named_value("victory_objectives_ie.gorbad_unique_initiatives", victory_objectives_ie.gorbad_unique_initiatives, context, true)
+		cm:save_named_value("victory_objectives_ie.masque_data", victory_objectives_ie.masque_data, context)
+		cm:save_named_value("victory_objectives_ie.throgg_data", victory_objectives_ie.throgg_data, context)
 	end
 )
 
@@ -4157,7 +5225,10 @@ cm:add_loading_game_callback(
 	function(context)
 		if not cm:is_new_game() then
 			victory_objectives_ie.gelt_unique_rituals = cm:load_named_value("victory_objectives_ie.gelt_unique_rituals", victory_objectives_ie.gelt_unique_rituals, context)
+			victory_objectives_ie.sayl_unique_rituals = cm:load_named_value("victory_objectives_ie.sayl_unique_rituals", victory_objectives_ie.sayl_unique_rituals, context)
 			victory_objectives_ie.gorbad_unique_initiatives = cm:load_named_value("victory_objectives_ie.gorbad_unique_initiatives", victory_objectives_ie.gorbad_unique_initiatives, context, true)
+			victory_objectives_ie.masque_data = cm:load_named_value("victory_objectives_ie.masque_data", victory_objectives_ie.masque_data, context)
+			victory_objectives_ie.throgg_data = cm:load_named_value("victory_objectives_ie.throgg_data", victory_objectives_ie.throgg_data, context)
 		end
 	end
 )

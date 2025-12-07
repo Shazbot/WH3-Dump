@@ -128,7 +128,9 @@
 					<invisible_parent_until_skinned this="9A8DECD5-7518-477F-AF5C398B46CD5244">
 						<button_toggle_radar this="90513103-1654-488D-A54CB15D72E9E9F3"/>
 					</invisible_parent_until_skinned>
-					<button_tactical_map this="3ECCBA98-1194-487F-8291B812FD19EDDE"/>
+					<button_tactical_map this="3ECCBA98-1194-487F-8291B812FD19EDDE">
+						<script_failure this="F280594A-7FEB-43CD-BD00A0ACA15691D1"/>
+					</button_tactical_map>
 				</radar_holder>
 				<battle_orders this="3CC5ED2E-CF47-4857-9EC127D06BFF918C">
 					<compass_shortcut_handler this="16BA4474-670C-4CE5-A76967135C0370E7"/>
@@ -313,10 +315,12 @@
 						<button_slot4 this="115CC276-0D57-4FF6-90874D71249155E0"/>
 						<button_slot5 this="4115E150-3B91-4AC6-87E723D80581F7A2"/>
 						<button_slot6 this="959EADDC-291B-4C1B-93F4BAC5A267D147"/>
-						<button_slot7 this="EED1A7FF-F121-4C54-AAD6B6CAB2AA3600"/>
-						<button_slot8 this="6806CB9F-4639-45AA-8E0BA6FBC0A2CEB0"/>
-						<button_slot9 this="5FB75515-EF64-4884-B6786367F1A0EF91"/>
 					</ability_parent>
+					<ability_page_parent this="10FE3FAD-B1C7-41BD-9BDA4C3AA613A26F">
+						<button_prev_page this="63589686-7575-4C69-9570FAA6A737437C"/>
+						<button_next_page this="BC9E91DF-97AD-410D-82399869DB67A85C"/>
+						<dy_page this="010175FE-6260-42CA-8D9454262C08D28B"/>
+					</ability_page_parent>
 					<button_toggle_infopanel this="1751BDDA-241A-43F3-9D44B2904789D2CC"/>
 					<button_gift_unit this="D611BE8A-B755-43D5-85326D8A7201DBC8">
 						<button_flame this="05E0ED86-2A39-4A15-9562B908CD54D0C0"/>
@@ -706,6 +710,28 @@
 		</root>
 	</hierarchy>
 	<components>
+		<ability_page_parent
+			this="10FE3FAD-B1C7-41BD-9BDA4C3AA613A26F"
+			id="ability_page_parent"
+			offset="69.00,197.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Bottom Center"
+			dock_offset="-8.00,-8.00"
+			component_anchor_point="0.50,1.00"
+			tooltipslocalised="true"
+			uniqueguid="10FE3FAD-B1C7-41BD-9BDA4C3AA613A26F"
+			currentstate="F6AA2313-504D-4A53-8B93DA9B0742979A"
+			defaultstate="F6AA2313-504D-4A53-8B93DA9B0742979A">
+			<states>
+				<newstate
+					this="F6AA2313-504D-4A53-8B93DA9B0742979A"
+					name="NewState"
+					width="94"
+					height="53"
+					uniqueguid="F6AA2313-504D-4A53-8B93DA9B0742979A"/>
+			</states>
+		</ability_page_parent>
 		<ability_parent
 			this="109A9CC2-DF7E-4BB6-A72892D32D1AF05F"
 			id="ability_parent"
@@ -730,12 +756,6 @@
 					height="164"
 					uniqueguid="0A4CDA73-A00B-40C8-82FF032B8CD4B61F"/>
 			</states>
-			<LayoutEngine
-				type="RadialList"
-				starting_angle="1.57079601"
-				spacing="0.785398006"
-				radius="100"
-				clockwise="true"/>
 		</ability_parent>
 		<adc_button
 			this="FF1BC8DC-1EB0-4D06-94F61193BFE3E433"
@@ -7553,6 +7573,243 @@
 				</inactive>
 			</states>
 		</button_next_lore>
+		<button_next_page
+			this="BC9E91DF-97AD-410D-82399869DB67A85C"
+			id="button_next_page"
+			offset="45.00,4.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center Right"
+			component_anchor_point="1.00,0.50"
+			priority="50"
+			tooltipslocalised="true"
+			componentleveltooltip="Select Next"
+			tooltiplabel="ComponentTooltip_1c5fe364"
+			soundcategory="UI_GBL_TMP_Arrow_Next"
+			uniqueguid="BC9E91DF-97AD-410D-82399869DB67A85C"
+			currentstate="1E2D0D1E-FEF4-48DA-ACA1460785468C3C"
+			defaultstate="1E2D0D1E-FEF4-48DA-ACA1460785468C3C">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="Button"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="647BBC51-E535-46A2-A6D8B90CADEDC34D"
+					uniqueguid="647BBC51-E535-46A2-A6D8B90CADEDC34D"
+					imagepath="ui/skins/default/button_cycle_arrow_inactive.png"/>
+				<component_image
+					this="901159E6-F0C0-4193-865813E25A276E15"
+					uniqueguid="901159E6-F0C0-4193-865813E25A276E15"
+					imagepath="ui/skins/default/button_cycle_arrow_active.png"/>
+				<component_image
+					this="1BCDED67-AF41-4963-AAB3B7086DEC20F5"
+					uniqueguid="1BCDED67-AF41-4963-AAB3B7086DEC20F5"
+					imagepath="ui/skins/default/button_cycle_arrow_hover.png"/>
+				<component_image
+					this="6FC3D3A8-DD27-4C2C-B542B428443A22F7"
+					uniqueguid="6FC3D3A8-DD27-4C2C-B542B428443A22F7"
+					imagepath="ui/skins/default/button_cycle_arrow_pressed.png"/>
+				<component_image
+					this="80203AF1-7102-452D-ACFDA987D62B8458"
+					uniqueguid="80203AF1-7102-452D-ACFDA987D62B8458"
+					imagepath="ui/skins/default/button_cycle_arrow_underlay.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="1E2D0D1E-FEF4-48DA-ACA1460785468C3C"
+					name="active"
+					width="49"
+					height="45"
+					interactive="true"
+					pixelcollision="true"
+					uniqueguid="1E2D0D1E-FEF4-48DA-ACA1460785468C3C"
+					stateeditordisplaypos="53.00,149.00">
+					<imagemetrics>
+						<image
+							this="5D0EC965-1645-48FA-ADC4F519ABBD8414"
+							uniqueguid="5D0EC965-1645-48FA-ADC4F519ABBD8414"
+							componentimage="80203AF1-7102-452D-ACFDA987D62B8458"
+							width="49"
+							height="45"
+							x_flipped="true"/>
+						<image
+							this="A0BEF25D-D3B9-41CE-A877C73A14C4BD47"
+							uniqueguid="A0BEF25D-D3B9-41CE-A877C73A14C4BD47"
+							componentimage="901159E6-F0C0-4193-865813E25A276E15"
+							width="49"
+							height="45"
+							x_flipped="true"/>
+						<image
+							this="191874F7-138D-4E96-BCE3F91C989344D6"
+							uniqueguid="191874F7-138D-4E96-BCE3F91C989344D6"
+							componentimage="1BCDED67-AF41-4963-AAB3B7086DEC20F5"
+							width="49"
+							height="45"
+							colour="#FFFFFF00"
+							x_flipped="true"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							transition_m_target_state="C7D00854-3133-48E0-A8D3A4208DFB0BBB"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+						<transition
+							index="1"
+							transition_m_target_state="9695786D-CA8E-44CE-90CF6797DA57D021"/>
+						<transition
+							index="2"
+							transition_m_target_state="4831D1C5-8612-44EF-9E34FD65AC38345A"/>
+					</transitionmap>
+				</active>
+				<down
+					this="4831D1C5-8612-44EF-9E34FD65AC38345A"
+					name="down"
+					width="49"
+					height="45"
+					interactive="true"
+					pixelcollision="true"
+					uniqueguid="4831D1C5-8612-44EF-9E34FD65AC38345A"
+					stateeditordisplaypos="360.00,147.00">
+					<imagemetrics>
+						<image
+							this="9AE11841-4466-4E40-A3DF91A06905977F"
+							uniqueguid="9AE11841-4466-4E40-A3DF91A06905977F"
+							componentimage="80203AF1-7102-452D-ACFDA987D62B8458"
+							width="49"
+							height="45"
+							x_flipped="true"/>
+						<image
+							this="C1CD268B-DD8F-4AF3-80C9CCB5A0E81EE0"
+							uniqueguid="C1CD268B-DD8F-4AF3-80C9CCB5A0E81EE0"
+							componentimage="6FC3D3A8-DD27-4C2C-B542B428443A22F7"
+							width="49"
+							height="45"
+							x_flipped="true"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="9695786D-CA8E-44CE-90CF6797DA57D021"/>
+						<transition
+							index="3"
+							transition_m_target_state="C7D00854-3133-48E0-A8D3A4208DFB0BBB"/>
+					</transitionmap>
+				</down>
+				<down_off
+					this="9695786D-CA8E-44CE-90CF6797DA57D021"
+					name="down_off"
+					width="49"
+					height="45"
+					interactive="true"
+					pixelcollision="true"
+					uniqueguid="9695786D-CA8E-44CE-90CF6797DA57D021"
+					stateeditordisplaypos="222.00,267.00">
+					<imagemetrics>
+						<image
+							this="3CA61513-ED2A-4636-B4B594BFB06D7756"
+							uniqueguid="3CA61513-ED2A-4636-B4B594BFB06D7756"
+							componentimage="80203AF1-7102-452D-ACFDA987D62B8458"
+							width="49"
+							height="45"
+							x_flipped="true"/>
+						<image
+							this="A0186C01-1FC4-4A7A-BD6D28CDAA995851"
+							uniqueguid="A0186C01-1FC4-4A7A-BD6D28CDAA995851"
+							componentimage="6FC3D3A8-DD27-4C2C-B542B428443A22F7"
+							width="49"
+							height="45"
+							colour="#FFFFFF00"
+							x_flipped="true"/>
+						<image
+							this="A070111D-3DB3-48D0-97937127AD06CB11"
+							uniqueguid="A070111D-3DB3-48D0-97937127AD06CB11"
+							componentimage="901159E6-F0C0-4193-865813E25A276E15"
+							offset="0.00,1.00"
+							width="49"
+							height="45"
+							x_flipped="true"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition transition_m_target_state="4831D1C5-8612-44EF-9E34FD65AC38345A"/>
+						<transition
+							index="8"
+							transition_m_target_state="1E2D0D1E-FEF4-48DA-ACA1460785468C3C"/>
+					</transitionmap>
+				</down_off>
+				<hover
+					this="C7D00854-3133-48E0-A8D3A4208DFB0BBB"
+					name="hover"
+					width="49"
+					height="45"
+					interactive="true"
+					pixelcollision="true"
+					uniqueguid="C7D00854-3133-48E0-A8D3A4208DFB0BBB"
+					stateeditordisplaypos="213.00,20.00">
+					<imagemetrics>
+						<image
+							this="12E226D1-42C3-4B5F-9A4A74D271FC45CD"
+							uniqueguid="12E226D1-42C3-4B5F-9A4A74D271FC45CD"
+							componentimage="80203AF1-7102-452D-ACFDA987D62B8458"
+							width="49"
+							height="45"
+							x_flipped="true"/>
+						<image
+							this="1304C8A3-E42C-4632-B3AB8A33F9429677"
+							uniqueguid="1304C8A3-E42C-4632-B3AB8A33F9429677"
+							componentimage="901159E6-F0C0-4193-865813E25A276E15"
+							width="49"
+							height="45"
+							colour="#FFFFFF00"
+							x_flipped="true"/>
+						<image
+							this="5466956B-BC2C-48E2-A67CD7B3BC060C5E"
+							uniqueguid="5466956B-BC2C-48E2-A67CD7B3BC060C5E"
+							componentimage="1BCDED67-AF41-4963-AAB3B7086DEC20F5"
+							width="49"
+							height="45"
+							x_flipped="true"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="1E2D0D1E-FEF4-48DA-ACA1460785468C3C"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+						<transition
+							index="2"
+							transition_m_target_state="4831D1C5-8612-44EF-9E34FD65AC38345A"
+							transition_m_transition_time="10"
+							transition_m_interpolation_property_mask="64"/>
+					</transitionmap>
+				</hover>
+				<inactive
+					this="4C5CB1F4-599E-4F46-97DC243E334B8E28"
+					name="inactive"
+					width="49"
+					height="45"
+					interactive="true"
+					disabled="true"
+					pixelcollision="true"
+					uniqueguid="4C5CB1F4-599E-4F46-97DC243E334B8E28">
+					<imagemetrics>
+						<image
+							this="9BFD2C33-4594-4330-92F7D25A2BEF00E7"
+							uniqueguid="9BFD2C33-4594-4330-92F7D25A2BEF00E7"
+							componentimage="80203AF1-7102-452D-ACFDA987D62B8458"
+							width="49"
+							height="45"
+							x_flipped="true"/>
+						<image
+							this="249FB09E-1B24-4BB5-A3D664E1FE9D864D"
+							uniqueguid="249FB09E-1B24-4BB5-A3D664E1FE9D864D"
+							componentimage="647BBC51-E535-46A2-A6D8B90CADEDC34D"
+							width="49"
+							height="45"
+							x_flipped="true"/>
+					</imagemetrics>
+				</inactive>
+			</states>
+		</button_next_page>
 		<button_order1
 			this="73EBE6C0-C6C6-43E5-BCDA8930AD9E46A5"
 			id="button_order1"
@@ -8416,6 +8673,230 @@
 				</inactive>
 			</states>
 		</button_prev_lore>
+		<button_prev_page
+			this="63589686-7575-4C69-9570FAA6A737437C"
+			id="button_prev_page"
+			offset="0.00,4.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center Left"
+			component_anchor_point="0.00,0.50"
+			priority="50"
+			tooltipslocalised="true"
+			componentleveltooltip="Select Previous"
+			tooltiplabel="ComponentTooltip_19e2d4ad"
+			soundcategory="UI_GBL_TMP_Arrow_Previous"
+			uniqueguid="63589686-7575-4C69-9570FAA6A737437C"
+			currentstate="26D2F1CE-BBF9-456B-B41CEA0E04E251D5"
+			defaultstate="26D2F1CE-BBF9-456B-B41CEA0E04E251D5">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="Button"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="46A6F08A-A229-4DC3-BE82591DCC0BFE1E"
+					uniqueguid="46A6F08A-A229-4DC3-BE82591DCC0BFE1E"
+					imagepath="ui/skins/default/button_cycle_arrow_inactive.png"/>
+				<component_image
+					this="525C7464-5E80-4EB9-A03150D78840563F"
+					uniqueguid="525C7464-5E80-4EB9-A03150D78840563F"
+					imagepath="ui/skins/default/button_cycle_arrow_active.png"/>
+				<component_image
+					this="816C32FD-C3FF-434A-9C60EC779090BD0F"
+					uniqueguid="816C32FD-C3FF-434A-9C60EC779090BD0F"
+					imagepath="ui/skins/default/button_cycle_arrow_hover.png"/>
+				<component_image
+					this="D2BE2502-05C2-47B9-8128FB42BE0AAB40"
+					uniqueguid="D2BE2502-05C2-47B9-8128FB42BE0AAB40"
+					imagepath="ui/skins/default/button_cycle_arrow_pressed.png"/>
+				<component_image
+					this="F21B3159-682B-47B0-9E44B73513365861"
+					uniqueguid="F21B3159-682B-47B0-9E44B73513365861"
+					imagepath="ui/skins/default/button_cycle_arrow_underlay.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="26D2F1CE-BBF9-456B-B41CEA0E04E251D5"
+					name="active"
+					width="49"
+					height="45"
+					interactive="true"
+					pixelcollision="true"
+					uniqueguid="26D2F1CE-BBF9-456B-B41CEA0E04E251D5"
+					stateeditordisplaypos="53.00,149.00">
+					<imagemetrics>
+						<image
+							this="5A559A0F-68DB-4FC0-A3856B6E34588864"
+							uniqueguid="5A559A0F-68DB-4FC0-A3856B6E34588864"
+							componentimage="F21B3159-682B-47B0-9E44B73513365861"
+							width="49"
+							height="45"/>
+						<image
+							this="73B8B4C7-7F17-4BF3-BA7930A1C7F13062"
+							uniqueguid="73B8B4C7-7F17-4BF3-BA7930A1C7F13062"
+							componentimage="525C7464-5E80-4EB9-A03150D78840563F"
+							width="49"
+							height="45"/>
+						<image
+							this="F2C51762-8393-4886-BDE42388EE75DC5D"
+							uniqueguid="F2C51762-8393-4886-BDE42388EE75DC5D"
+							componentimage="816C32FD-C3FF-434A-9C60EC779090BD0F"
+							width="49"
+							height="45"
+							colour="#FFFFFF00"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							transition_m_target_state="DB725723-FE28-4941-99F466F7BB24AC28"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+						<transition
+							index="1"
+							transition_m_target_state="E93ABAF6-2220-4E93-B64D9FC89DF906DD"/>
+						<transition
+							index="2"
+							transition_m_target_state="678F137F-AFE0-422D-81E91D0C38017A74"/>
+					</transitionmap>
+				</active>
+				<down
+					this="678F137F-AFE0-422D-81E91D0C38017A74"
+					name="down"
+					width="49"
+					height="45"
+					interactive="true"
+					pixelcollision="true"
+					uniqueguid="678F137F-AFE0-422D-81E91D0C38017A74"
+					stateeditordisplaypos="360.00,147.00">
+					<imagemetrics>
+						<image
+							this="9586A49D-61BE-430E-A2E0D29F5FC3F7CE"
+							uniqueguid="9586A49D-61BE-430E-A2E0D29F5FC3F7CE"
+							componentimage="F21B3159-682B-47B0-9E44B73513365861"
+							width="49"
+							height="45"/>
+						<image
+							this="0DF16851-9E2C-4218-A4BCF9716D1A163E"
+							uniqueguid="0DF16851-9E2C-4218-A4BCF9716D1A163E"
+							componentimage="D2BE2502-05C2-47B9-8128FB42BE0AAB40"
+							width="49"
+							height="45"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="E93ABAF6-2220-4E93-B64D9FC89DF906DD"/>
+						<transition
+							index="3"
+							transition_m_target_state="DB725723-FE28-4941-99F466F7BB24AC28"/>
+					</transitionmap>
+				</down>
+				<down_off
+					this="E93ABAF6-2220-4E93-B64D9FC89DF906DD"
+					name="down_off"
+					width="49"
+					height="45"
+					interactive="true"
+					pixelcollision="true"
+					uniqueguid="E93ABAF6-2220-4E93-B64D9FC89DF906DD"
+					stateeditordisplaypos="222.00,267.00">
+					<imagemetrics>
+						<image
+							this="81B507D6-BEC3-4915-966E1441929B8422"
+							uniqueguid="81B507D6-BEC3-4915-966E1441929B8422"
+							componentimage="F21B3159-682B-47B0-9E44B73513365861"
+							width="49"
+							height="45"/>
+						<image
+							this="7C225412-047F-48EB-8FF8DF5328C291BC"
+							uniqueguid="7C225412-047F-48EB-8FF8DF5328C291BC"
+							componentimage="D2BE2502-05C2-47B9-8128FB42BE0AAB40"
+							width="49"
+							height="45"
+							colour="#FFFFFF00"/>
+						<image
+							this="46E94758-F9D4-4C2D-A1FAC9A31B86053F"
+							uniqueguid="46E94758-F9D4-4C2D-A1FAC9A31B86053F"
+							componentimage="525C7464-5E80-4EB9-A03150D78840563F"
+							offset="0.00,1.00"
+							width="49"
+							height="45"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition transition_m_target_state="678F137F-AFE0-422D-81E91D0C38017A74"/>
+						<transition
+							index="8"
+							transition_m_target_state="26D2F1CE-BBF9-456B-B41CEA0E04E251D5"/>
+					</transitionmap>
+				</down_off>
+				<hover
+					this="DB725723-FE28-4941-99F466F7BB24AC28"
+					name="hover"
+					width="49"
+					height="45"
+					interactive="true"
+					pixelcollision="true"
+					uniqueguid="DB725723-FE28-4941-99F466F7BB24AC28"
+					stateeditordisplaypos="213.00,20.00">
+					<imagemetrics>
+						<image
+							this="DEE13A06-0E6E-40B2-A63966A1C42BC4FD"
+							uniqueguid="DEE13A06-0E6E-40B2-A63966A1C42BC4FD"
+							componentimage="F21B3159-682B-47B0-9E44B73513365861"
+							width="49"
+							height="45"/>
+						<image
+							this="6581F969-2547-41FD-80438C31287BE651"
+							uniqueguid="6581F969-2547-41FD-80438C31287BE651"
+							componentimage="525C7464-5E80-4EB9-A03150D78840563F"
+							width="49"
+							height="45"
+							colour="#FFFFFF00"/>
+						<image
+							this="DC986C1F-A255-43AF-BFBE838CC121D887"
+							uniqueguid="DC986C1F-A255-43AF-BFBE838CC121D887"
+							componentimage="816C32FD-C3FF-434A-9C60EC779090BD0F"
+							width="49"
+							height="45"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="26D2F1CE-BBF9-456B-B41CEA0E04E251D5"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+						<transition
+							index="2"
+							transition_m_target_state="678F137F-AFE0-422D-81E91D0C38017A74"
+							transition_m_transition_time="10"
+							transition_m_interpolation_property_mask="64"/>
+					</transitionmap>
+				</hover>
+				<inactive
+					this="386556C7-B78B-4FD4-859F6DF6116B1FA1"
+					name="inactive"
+					width="49"
+					height="45"
+					interactive="true"
+					disabled="true"
+					pixelcollision="true"
+					uniqueguid="386556C7-B78B-4FD4-859F6DF6116B1FA1">
+					<imagemetrics>
+						<image
+							this="0220130C-E3CC-4288-AB55590AE9E5252C"
+							uniqueguid="0220130C-E3CC-4288-AB55590AE9E5252C"
+							componentimage="F21B3159-682B-47B0-9E44B73513365861"
+							width="49"
+							height="45"/>
+						<image
+							this="71630C11-605A-45F9-B802262BD4B69EBA"
+							uniqueguid="71630C11-605A-45F9-B802262BD4B69EBA"
+							componentimage="46A6F08A-A229-4DC3-BE82591DCC0BFE1E"
+							width="49"
+							height="45"/>
+					</imagemetrics>
+				</inactive>
+			</states>
+		</button_prev_page>
 		<button_reinforcements
 			this="F3A5790D-5385-4B73-ADD99A0CBC12D75C"
 			id="button_reinforcements"
@@ -9378,9 +9859,12 @@
 		<button_slot1
 			this="0D9E2127-9C00-4EC3-81C66C15D5ECCCE7"
 			id="button_slot1"
-			offset="46.00,-54.00"
+			offset="48.00,-54.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
+			docking="Top Center External"
+			dock_offset="2.00,18.00"
+			component_anchor_point="0.50,1.00"
 			tooltipslocalised="true"
 			uniqueguid="0D9E2127-9C00-4EC3-81C66C15D5ECCCE7"
 			currentstate="D28C965F-9640-46ED-848AB17728686C25"
@@ -9433,9 +9917,12 @@
 		<button_slot2
 			this="7ADC3C1F-F4D3-4E09-97ACE85B356AAB66"
 			id="button_slot2"
-			offset="117.00,-25.00"
+			offset="118.00,-24.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
+			docking="Top Right"
+			dock_offset="26.00,-24.00"
+			component_anchor_point="1.00,0.00"
 			tooltipslocalised="true"
 			uniqueguid="7ADC3C1F-F4D3-4E09-97ACE85B356AAB66"
 			currentstate="2449D133-E1F9-4372-A7366A9DB46E9761"
@@ -9559,9 +10046,12 @@
 		<button_slot3
 			this="9D754F5F-6D94-4A3C-BC966A97231FD362"
 			id="button_slot3"
-			offset="146.00,46.00"
+			offset="146.00,48.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
+			docking="Center Right"
+			dock_offset="54.00,2.00"
+			component_anchor_point="1.00,0.50"
 			tooltipslocalised="true"
 			uniqueguid="9D754F5F-6D94-4A3C-BC966A97231FD362"
 			currentstate="E6FDEDD4-B0E9-4037-9DDD1DA6A4738FCE"
@@ -9649,9 +10139,12 @@
 		<button_slot4
 			this="115CC276-0D57-4FF6-90874D71249155E0"
 			id="button_slot4"
-			offset="117.00,117.00"
+			offset="114.00,118.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
+			docking="Bottom Right"
+			dock_offset="22.00,26.00"
+			component_anchor_point="1.00,1.00"
 			tooltipslocalised="true"
 			uniqueguid="115CC276-0D57-4FF6-90874D71249155E0"
 			currentstate="A5A63194-3EA7-4C82-BF8A812E622D55ED"
@@ -9668,9 +10161,11 @@
 		<button_slot5
 			this="4115E150-3B91-4AC6-87E723D80581F7A2"
 			id="button_slot5"
-			offset="46.00,146.00"
+			offset="-20.00,-22.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
+			docking="Top Left"
+			dock_offset="-20.00,-22.00"
 			tooltipslocalised="true"
 			uniqueguid="4115E150-3B91-4AC6-87E723D80581F7A2"
 			currentstate="71776A70-A326-4378-A9FD9DC0F0849F3A"
@@ -9760,9 +10255,12 @@
 		<button_slot6
 			this="959EADDC-291B-4C1B-93F4BAC5A267D147"
 			id="button_slot6"
-			offset="-25.00,117.00"
+			offset="-46.00,50.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
+			docking="Center Left"
+			dock_offset="-46.00,4.00"
+			component_anchor_point="0.00,0.50"
 			tooltipslocalised="true"
 			uniqueguid="959EADDC-291B-4C1B-93F4BAC5A267D147"
 			currentstate="D5273134-EBB9-4282-B91180D94683296C"
@@ -9776,63 +10274,6 @@
 					uniqueguid="D5273134-EBB9-4282-B91180D94683296C"/>
 			</states>
 		</button_slot6>
-		<button_slot7
-			this="EED1A7FF-F121-4C54-AAD6B6CAB2AA3600"
-			id="button_slot7"
-			offset="-54.00,46.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			tooltipslocalised="true"
-			uniqueguid="EED1A7FF-F121-4C54-AAD6B6CAB2AA3600"
-			currentstate="9EA89858-95ED-4ED4-89270872EED5B23F"
-			defaultstate="9EA89858-95ED-4ED4-89270872EED5B23F">
-			<states>
-				<newstate
-					this="9EA89858-95ED-4ED4-89270872EED5B23F"
-					name="NewState"
-					width="72"
-					height="72"
-					uniqueguid="9EA89858-95ED-4ED4-89270872EED5B23F"/>
-			</states>
-		</button_slot7>
-		<button_slot8
-			this="6806CB9F-4639-45AA-8E0BA6FBC0A2CEB0"
-			id="button_slot8"
-			offset="-25.00,-25.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			tooltipslocalised="true"
-			uniqueguid="6806CB9F-4639-45AA-8E0BA6FBC0A2CEB0"
-			currentstate="CF090922-7C55-4C09-8F04490C85BE0CBC"
-			defaultstate="CF090922-7C55-4C09-8F04490C85BE0CBC">
-			<states>
-				<newstate
-					this="CF090922-7C55-4C09-8F04490C85BE0CBC"
-					name="NewState"
-					width="72"
-					height="72"
-					uniqueguid="CF090922-7C55-4C09-8F04490C85BE0CBC"/>
-			</states>
-		</button_slot8>
-		<button_slot9
-			this="5FB75515-EF64-4884-B6786367F1A0EF91"
-			id="button_slot9"
-			offset="46.00,-54.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			tooltipslocalised="true"
-			uniqueguid="5FB75515-EF64-4884-B6786367F1A0EF91"
-			currentstate="CB21D199-D4CD-4994-BC5217734130AFDE"
-			defaultstate="CB21D199-D4CD-4994-BC5217734130AFDE">
-			<states>
-				<newstate
-					this="CB21D199-D4CD-4994-BC5217734130AFDE"
-					name="NewState"
-					width="72"
-					height="72"
-					uniqueguid="CB21D199-D4CD-4994-BC5217734130AFDE"/>
-			</states>
-		</button_slot9>
 		<button_spell
 			this="4147CDFC-B4BC-41ED-A5AB14E6AC77DBAB"
 			id="button_spell"
@@ -18120,6 +18561,55 @@
 				</default>
 			</states>
 		</dy_name>
+		<dy_page
+			this="010175FE-6260-42CA-8D9454262C08D28B"
+			id="dy_page"
+			offset="30.00,10.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center"
+			dock_offset="0.00,1.00"
+			component_anchor_point="0.50,0.50"
+			tooltipslocalised="true"
+			uniqueguid="010175FE-6260-42CA-8D9454262C08D28B"
+			currentstate="F1F6E19A-47D2-4ABB-A5E30DF0A97C5F8A"
+			defaultstate="F1F6E19A-47D2-4ABB-A5E30DF0A97C5F8A">
+			<componentimages>
+				<component_image
+					this="61B17FA4-A763-4FAB-AECFBB6C9CF1B36D"
+					uniqueguid="61B17FA4-A763-4FAB-AECFBB6C9CF1B36D"
+					imagepath="ui/skins/default/unit_cat_holder_round.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="F1F6E19A-47D2-4ABB-A5E30DF0A97C5F8A"
+					name="NewState"
+					width="34"
+					height="34"
+					interactive="true"
+					uniqueguid="F1F6E19A-47D2-4ABB-A5E30DF0A97C5F8A">
+					<imagemetrics>
+						<image
+							this="BB0B0F21-16A1-4802-ACEBE7DF6A2D66AF"
+							uniqueguid="BB0B0F21-16A1-4802-ACEBE7DF6A2D66AF"
+							componentimage="61B17FA4-A763-4FAB-AECFBB6C9CF1B36D"
+							offset="0.00,-1.00"
+							width="34"
+							height="34"/>
+					</imagemetrics>
+					<component_text
+						text="2"
+						textvalign="Center"
+						texthalign="Center"
+						textlabel="StateText_49341bcb"
+						font_m_font_name="brand_header"
+						font_m_size="16"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_16"/>
+				</newstate>
+			</states>
+		</dy_page>
 		<dy_player_steam_image
 			this="D3BD0627-3C54-4E5A-803239F524AE85B5"
 			id="dy_player_steam_image"
@@ -33556,6 +34046,65 @@
 				</slide_down>
 			</animations>
 		</sa_dial>
+		<script_failure
+			this="F280594A-7FEB-43CD-BD00A0ACA15691D1"
+			id="script_failure"
+			offset="-359.00,108.00"
+			priority="1"
+			tooltipslocalised="true"
+			componentleveltooltip="LUA has failed since battle start! These warnings can be disabled by deactivating the Enable Context Viewer setting in the Options menu."
+			tooltiplabel="ComponentTooltip_e13f0295"
+			uniqueguid="F280594A-7FEB-43CD-BD00A0ACA15691D1"
+			aspect_ratio_locked_behaviour="Width First"
+			currentstate="449FC0B3-ABCE-4BE4-BA676409BFF5F7FE"
+			defaultstate="449FC0B3-ABCE-4BE4-BA676409BFF5F7FE">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoScriptObject"
+					context_function_id="NumericValue !=0 &amp;&amp; PrefAsBool(&quot;enable_context_viewer&quot;)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="ScriptObjectValueUpdated"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_function_id="ScriptObjectContext(&quot;SCRIPT_FAILED_THIS_SESSION&quot;)"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="85049ABE-A360-4670-8F80F2625E620D8B"
+					uniqueguid="85049ABE-A360-4670-8F80F2625E620D8B"
+					imagepath="ui/skins/default/build_frame_cross.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="449FC0B3-ABCE-4BE4-BA676409BFF5F7FE"
+					name="default"
+					width="162"
+					height="162"
+					interactive="true"
+					disabled="true"
+					shader_name="glow_pulse_t0"
+					uniqueguid="449FC0B3-ABCE-4BE4-BA676409BFF5F7FE">
+					<imagemetrics>
+						<image
+							this="E4E49FF6-2A4F-4146-9934F46AD13C83B3"
+							uniqueguid="E4E49FF6-2A4F-4146-9934F46AD13C83B3"
+							componentimage="85049ABE-A360-4670-8F80F2625E620D8B"
+							width="162"
+							height="162"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</script_failure>
 		<segment_list
 			this="E0619EF9-ED12-463C-98C6EA9180C32AFC"
 			id="segment_list"

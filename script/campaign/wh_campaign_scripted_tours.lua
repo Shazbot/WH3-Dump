@@ -50,6 +50,14 @@ function start_scripted_tours()
 			in_ogr_camps_tour:start()
 		end
 
+		if cm:are_any_factions_human(nil, "wh_dlc08_nor_norsca") then
+			in_nor_monstrous_arcanum_tour:start()
+		end
+
+		if cm:are_any_factions_human(nil, "wh2_main_hef_high_elves") then
+			in_hef_patrons_of_ulthuan_tour:start()
+			in_hef_patrons_of_ulthuan_text_pointer_tour:start()
+		end 	
 
 		-- factions
 
@@ -106,6 +114,51 @@ function start_scripted_tours()
 		if gorbad_interface and gorbad_interface:is_human() then
 			in_grn_da_plan_tour:start()
 		end
+	
+		local aislinn_interface = cm:get_faction("wh3_dlc27_hef_aislinn")
+		if aislinn_interface and aislinn_interface:is_human() then
+			in_hef_asur_domination_tour:start()
+			in_hef_esblish_colony_tour:start()
+			in_hef_establish_outpost_tour:start()
+		end	
+
+		local masque_interface = cm:get_faction("wh3_dlc27_sla_masque_of_slaanesh")
+		if masque_interface and masque_interface:is_human() then
+			in_sla_masque_the_eternal_dance_text_pointer_tour:start()
+			in_sla_masque_the_eternal_dance_tour:start()
+		end	
+		
+		local dechala_interface = cm:get_faction("wh3_dlc27_sla_the_tormentors")
+		if dechala_interface and dechala_interface:is_human() then
+			in_sla_dechala_marks_of_vindictiveness_tour:start()
+			in_sla_dechala_corrupt_units_tour:start()
+			in_sla_dechala_minor_occupation_tour:start()
+			in_sla_dechala_pleasure_palace_tour:start()
+			in_sla_minor_settlement_thrall_camp_tour:start()
+			in_sla_major_settlement_pleasure_palace_tour:start()
+		end	
+
+		local throgg_interface = cm:get_faction("wh_dlc08_nor_wintertooth")
+		if throgg_interface and throgg_interface:is_human() and throgg_interface:is_null_interface() == false then
+			in_nor_monstrous_arcanum_text_pointer_throgg_tour:start()
+			in_nor_allegiance_tour:start()
+			in_nor_marauding_actions_text_pointer_tour_throgg:start()
+		end 
+
+		local wulfric_interface = cm:get_faction("wh_dlc08_nor_norsca")
+		if wulfric_interface and wulfric_interface:is_human() and wulfric_interface:is_null_interface() == false then
+			in_nor_monstrous_arcanum_text_pointer_tour:start() 
+			in_nor_allegiance_tour:start()
+			in_nor_marauding_actions_text_pointer_tour_wulfric:start()
+		end 
+
+		local sayl_interface = cm:get_faction("wh3_dlc27_nor_sayl")
+		if sayl_interface and sayl_interface:is_human() and sayl_interface:is_null_interface() == false then
+			in_nor_monstrous_arcanum_text_pointer_tour:start()
+			in_nor_marauding_actions_text_pointer_tour_sayl:start()
+			in_nor_sayl_manipulations_text_pointer:start()
+			in_nor_sayl_manipulations:start()
+		end		
 	end
 end
 
@@ -690,6 +743,11 @@ function character_selected_skill_point_advice_tour()
 	out("#### character_selected_skill_point_advice_tour() ####");
 	
 	character_skill_points_tour_lock_ui(true);
+	ui_scripted_tour:toggle_shortcuts(false)
+	local champion_of_ulthuan = find_uicomponent(core:get_ui_root(), "button_valiant_imperatives")
+	if champion_of_ulthuan and champion_of_ulthuan:Visible() == true then
+		champion_of_ulthuan:SetDisabled(true)	
+	end 
 	
 	local objective_key = "wh2.camp.army_selection_advice.001";
 	
@@ -798,7 +856,8 @@ function start_info_button_advice()
 			
 			-- dismiss fullscreen highlight
 			core:hide_fullscreen_highlight();
-			
+			core:show_fullscreen_highlight_around_components(25, false, true, uic_skill_button)
+
 			-- enable skill button
 			uic_skill_button:SetDisabled(false);
 			
@@ -832,7 +891,7 @@ function skill_point_advice_closed(uic_info_button)
 		function(context) return context.string == "character_details_panel" end,
 		function(context)
 			cm:remove_callback("skill_button_highlight");
-			
+			core:hide_fullscreen_highlight();
 			-- re-enable the details button at this point
 			uic_info_button:SetDisabled(false);
 			
@@ -848,7 +907,7 @@ end
 
 function skill_point_panel_opened()
 	out("#### skill_point_panel_opened() ####");
-		
+	ui_scripted_tour:toggle_shortcuts(true)	
 	cm:complete_objective("wh2.camp.open_character_panel_advice.001");
 	
 	-- disable certain buttons
@@ -856,6 +915,14 @@ function skill_point_panel_opened()
 	character_skills_tour_enable_character_details_panel_details_tab_button(false);
 	character_skills_tour_enable_character_details_panel_skills_tab_button(false);
 	character_skills_tour_enable_character_details_panel_quests_tab_button(false);
+	character_skills_tour_enable_character_details_panel_vow_tab_button(false)
+	character_skills_tour_enable_character_details_panel_big_names_tab_button(false)	
+	character_skills_tour_enable_character_details_panel_eternal_dance_tab_button(false);
+	character_skills_tour_enable_character_details_panel_formless_horror_tab_button(false);
+	character_skills_tour_enable_character_details_panel_fragments_tab_button(false);
+
+	kairos_fragments = find_uicomponent(core:get_ui_root(), "fragments");
+	kairos_fragments:SetDisabled(true)
 	
     local character_stats = find_uicomponent(core:get_ui_root(), "character_details_panel", "character_context_parent", "tab_panels", "stats_effects_holder", "unit_information_listview", "list_clip", "list_box", "row_header_stats")
 	if character_stats:CurrentState() == "selected" then 
@@ -1096,6 +1163,25 @@ function character_skills_tour_enable_character_details_panel_quests_tab_button(
 	set_component_active_with_parent(value, core:get_ui_root(), "character_details_panel", "TabGroup", "quests");
 end;
 
+function character_skills_tour_enable_character_details_panel_eternal_dance_tab_button(value)
+	set_component_active_with_parent(value, core:get_ui_root(), "character_details_panel", "TabGroup", "eternal_dance");
+end;
+
+function character_skills_tour_enable_character_details_panel_fragments_tab_button(value)
+	set_component_active_with_parent(value, core:get_ui_root(), "character_details_panel", "TabGroup", "fragments");
+end;
+
+function character_skills_tour_enable_character_details_panel_formless_horror_tab_button(value)
+	set_component_active_with_parent(value, core:get_ui_root(), "character_details_panel", "TabGroup", "changeling_formless_horror");
+end;
+
+function character_skills_tour_enable_character_details_panel_vow_tab_button(value)
+	set_component_active_with_parent(value, core:get_ui_root(), "character_details_panel", "TabGroup", "vows");
+end;
+
+function character_skills_tour_enable_character_details_panel_big_names_tab_button(value)
+	set_component_active_with_parent(value, core:get_ui_root(), "character_details_panel", "TabGroup", "character_initiatives");
+end;
 
 function character_skills_tour_enable_character_details_panel_replace_lord_button(value)
 	if value == false then
@@ -1515,12 +1601,25 @@ function complete_character_details_tour()
 	-- re-enable UI
 	character_skills_tour_enable_character_details_panel_close_button(true);
 	character_skills_tour_enable_character_details_panel_details_tab_button(true);
-	character_skills_tour_enable_character_details_panel_skills_tab_button(true);	
-	character_skills_tour_enable_character_details_panel_quests_tab_button(true);	
+	character_skills_tour_enable_character_details_panel_skills_tab_button(true);
+	character_skills_tour_enable_character_details_panel_quests_tab_button(true);
+	character_skills_tour_enable_character_details_panel_eternal_dance_tab_button(true);
+	character_skills_tour_enable_character_details_panel_fragments_tab_button(true);
+	character_skills_tour_enable_character_details_panel_formless_horror_tab_button(true);
+	character_skills_tour_enable_character_details_panel_vow_tab_button(true)
+	character_skills_tour_enable_character_details_panel_big_names_tab_button(true)		
 	character_skills_tour_enable_character_details_panel_replace_lord_button(true);
 	character_skills_tour_enable_character_details_panel_rename_button(true);
 	character_skills_tour_enable_character_details_panel_save_button(true);
 	
+	kairos_fragments = find_uicomponent(core:get_ui_root(), "fragments");
+	kairos_fragments:SetDisabled(false)
+
+	local champion_of_ulthuan = find_uicomponent(core:get_ui_root(), "button_valiant_imperatives")
+	if champion_of_ulthuan and champion_of_ulthuan:Visible() == true then
+		champion_of_ulthuan:SetDisabled(false)	
+	end
+
 	character_skill_points_tour_lock_ui(false);
 	
 	local character_stats = find_uicomponent(core:get_ui_root(), "character_details_panel", "character_context_parent", "tab_panels", "stats_effects_holder", "unit_information_listview", "list_clip", "list_box", "row_header_stats")
@@ -3749,7 +3848,8 @@ in_chd_industry_tour = intervention:new(
 	function() 
 		cm:callback(function()
 			-- need to check if industry frame is visible after a small delay as there's a small animation when opening this panel where it's not visible at first.
-			if find_uicomponent(core:get_ui_root(), "hud_campaign", "info_panel_holder", "frame_industry"):VisibleFromRoot() then
+			local uic = find_uicomponent(core:get_ui_root(), "hud_campaign", "info_panel_holder", "frame_industry")
+			if uic and uic:VisibleFromRoot() then
 				out("#### "..scripted_chd_industry_tour.id.." ####")
 				ui_scripted_tour:construct_tour(scripted_chd_industry_tour, in_chd_industry_tour)
 			else
@@ -5939,7 +6039,8 @@ in_ogr_contracts_tour = intervention:new(
 	0, 																	-- cost
 	function() 
 		cm:callback(function()
-			if find_uicomponent(core:get_ui_root(), "hud_campaign", "faction_buttons_docker", "button_group_management", "button_ogre_war_contracts"):VisibleFromRoot() then
+			local uic = find_uicomponent(core:get_ui_root(), "hud_campaign", "faction_buttons_docker", "button_group_management", "button_ogre_war_contracts")
+			if uic and uic:VisibleFromRoot() then
 			cm:steal_user_input(true)
 			out("#### "..scripted_ogr_contracts_tour.id.." ####")
 			ui_scripted_tour:toggle_shortcuts(false)
@@ -6121,7 +6222,8 @@ in_ogr_camps_tour = intervention:new(
 	0, 																	-- cost
 	function() 
 		cm:callback(function()
-			if find_uicomponent(core:get_ui_root(), "hud_campaign", "info_panel_holder", "primary_info_panel_holder", "info_panel_background", "CharacterInfoPopup", "character_info_parent", "camp_teleport_holder", "camp_teleport_button"):VisibleFromRoot() then
+			local uic = find_uicomponent(core:get_ui_root(), "hud_campaign", "info_panel_holder", "primary_info_panel_holder", "info_panel_background", "CharacterInfoPopup", "character_info_parent", "camp_teleport_holder", "camp_teleport_button")
+			if uic and uic:VisibleFromRoot() then
 
 				out("#### "..scripted_ogr_camp_tour.id.." ####")
 			
@@ -6202,7 +6304,8 @@ in_grn_da_plan_tour = intervention:new(
 	0, 																	-- cost
 	function() 
 		cm:callback(function()
-			if find_uicomponent(core:get_ui_root(), "parent_army_slots"):VisibleFromRoot() then
+			local found_component = find_uicomponent(core:get_ui_root(), "parent_army_slots")
+			if found_component and found_component:VisibleFromRoot() then
 
 				out("#### "..scripted_grn_da_plan_tour.id.." ####")
 			
@@ -6267,7 +6370,7 @@ scripted_grn_da_plan_tour = {
 			size = 350,
 			length = 50
 		},
-		click_on_navigate = function() return find_uicomponent(core:get_ui_root(), "CcoCampaignInitiativeSet146wh3_dlc26_force_initiative_grn_da_plan")	end,
+		click_on_navigate = function() return find_uicomponent(core:get_ui_root(), "CcoCampaignInitiativeSet150wh3_dlc26_force_initiative_grn_da_plan")	end,
 	},
 	{
 		id = "grn_da_plan_4",
@@ -6356,7 +6459,1960 @@ scripted_grn_da_plan_tour = {
 	}
 }
 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- HEF Asur Domination
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+in_hef_asur_domination_tour = intervention:new(
+	"in_hef_asur_domination_tour",			 						-- string name
+	0, 																	-- cost
+	function() 
+		local uic = find_uicomponent(core:get_ui_root(), "dlc27_hef_asur_domination", "sea_patrol_tracks_holder")
+		if uic and uic:Visible() then 
+			out("#### "..scripted_hef_asur_domination_tour.id.." ####")
+			stop_moving_all_player_characters("wh3_dlc27_hef_aislinn")
+			ui_scripted_tour:construct_tour(scripted_hef_asur_domination_tour, in_hef_asur_domination_tour)
+		elseif not uic or not uic:Visible() then 
+			in_hef_asur_domination_tour:cancel()
+		end
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_hef_asur_domination_tour:add_precondition(function() return not common.get_advice_history_string_seen("hef_asur_domination_scripted_tour") end)
+in_hef_asur_domination_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_hef_asur_domination_tour:set_should_lock_ui(true)
+in_hef_asur_domination_tour:set_reduce_pause_before_triggering(true)
+in_hef_asur_domination_tour:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		if context.string == "dlc27_hef_asur_domination" then
+			common.set_advice_history_string_seen("hef_asur_domination_scripted_tour")
+			return true
+		end 
+	end
+) 
+
+scripted_hef_asur_domination_tour = {
+	id = "in_hef_asur_domination_tour",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_asur_domination",
+
+	{
+		id = "hef_asur_domination_1",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc27_hef_asur_domination", "sea_patrol_tracks_holder") end
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_hef_asur_domination_1",
+			direction = "top",
+			size = 550,
+			length = 50
+		}
+	},
+
+	{
+		id = "hef_asur_domination_2",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "progress_resource_holder", "wheel_parent", "tier_holder") end
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_hef_asur_domination_2",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+
+		click_on_navigate = function() return find_uicomponent(core:get_ui_root(), "dlc27_hef_asur_domination", "factions_effects_holder", "tabs_holder", "tab_effects")	end,
+	},
+
+	{
+		id = "hef_asur_domination_3",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "active_effects_panel") end
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_hef_asur_domination_3",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+		click_on_navigate = function() return find_uicomponent(core:get_ui_root(), "dlc27_hef_asur_domination", "factions_effects_holder", "tabs_holder", "tab_factions")	end,
+	},
+
+	{
+		id = "hef_asur_domination_4",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "factions_effects_holder") end
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_hef_asur_domination_4",
+			direction = "bottom",
+			size = 550,
+			length = 50
+		}
+	},
+
+		{
+		id = "hef_asur_domination_5",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "activate_button") end
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_hef_asur_domination_5",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- SLA The Eternal Dance
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_sla_masque_the_eternal_dance_text_pointer_tour = intervention:new(
+	"in_sla_masque_the_eternal_dance_text_pointer_tour",			 						-- string name
+	0, 																	-- cost
+	function()
+		cm:callback(function()
+			local uic = find_uicomponent(core:get_ui_root(), "button_no_dance")
+			if uic and uic:Visible() and uic:CurrentState() == "active" then
+				ui_scripted_tour:toggle_shortcuts(false)
+				masque_dance_text_pointer()
+			else
+				in_sla_masque_the_eternal_dance_text_pointer_tour:complete()
+			end
+		end, 0.1)	 
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_sla_masque_the_eternal_dance_text_pointer_tour:add_precondition(function() return not common.get_advice_history_string_seen("eternal_dance_test_pointer_tour_complete") end)
+in_sla_masque_the_eternal_dance_text_pointer_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_sla_masque_the_eternal_dance_text_pointer_tour:set_should_lock_ui(true)
+in_sla_masque_the_eternal_dance_text_pointer_tour:set_reduce_pause_before_triggering(true)
+in_sla_masque_the_eternal_dance_text_pointer_tour:add_trigger_condition(
+	"CharacterSelected",
+	function(context)
+		local character = context:character()
+        return character:character_subtype_key() == "wh3_dlc27_sla_masque_of_slaanesh" or character:character_subtype_key() == "wh3_main_sla_herald_of_slaanesh_shadow" 
+		or character:character_subtype_key() == "wh3_main_sla_herald_of_slaanesh_slaanesh"
+	end 
+)
+
+function masque_dance_text_pointer()
+	local uic = find_uicomponent(core:get_ui_root(), "button_no_dance")
+	local info_size_x, info_size_y = uic:Dimensions()
+	local info_pos_x, info_pos_y = uic:Position();
+	if uic and uic:Visible() then 
+		highlight_component(true, true, "button_no_dance")		
+		core:show_fullscreen_highlight_around_components(30, false, false, uic)
+		local tp_dance = text_pointer:new("tp_masque_no_dance", "bottom", 70, info_pos_x + (info_size_x / 2) +1, (info_pos_y + (info_size_y / 2)) -50);
+		tp_dance:add_component_text("text", "ui_text_replacements_localised_text_wh3_dlc27_text_pointer_sla_the_eternal_dance_1")
+		tp_dance:set_style("semitransparent")
+		tp_dance:set_topmost(true)
+		tp_dance:set_highlight_close_button(0.5)
+		tp_dance:do_not_release_escape_key(true)
+		tp_dance:set_close_button_callback(function() core:hide_fullscreen_highlight(); 
+			tp_dance:hide()
+			highlight_component(false, false, "button_no_dance")
+			in_sla_masque_the_eternal_dance_text_pointer_tour:complete()
+			ui_scripted_tour:toggle_shortcuts(true)
+			common.set_advice_history_string_seen("eternal_dance_test_pointer_tour_complete")
+		end)
+		tp_dance:show()		
+	end 
+end 
+
+in_sla_masque_the_eternal_dance_tour = intervention:new(
+	"in_sla_masque_the_eternal_dance_tour",			 						-- string name
+	0, 																	-- cost
+	function() 
+		cm:callback(function()
+			local uic = find_uicomponent(core:get_ui_root(), "dlc27_sla_the_eternal_dance_character_panel", "panel_frame", "layout_container", "sidebar_left")
+			if uic and uic:Visible() then 
+				out("#### "..scripted_sla_masque_the_eternal_dance_tour.id.." ####")
+				ui_scripted_tour:construct_tour(scripted_sla_masque_the_eternal_dance_tour, in_sla_masque_the_eternal_dance_tour)
+			elseif not uic or not uic:Visible() then 
+				in_sla_masque_the_eternal_dance_tour:cancel()
+			end
+		end, 0.1)															-- trigger callback
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_sla_masque_the_eternal_dance_tour:add_precondition(function() return not common.get_advice_history_string_seen("eternal_dance_tour_complete") end)
+in_sla_masque_the_eternal_dance_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_sla_masque_the_eternal_dance_tour:set_should_lock_ui()
+in_sla_masque_the_eternal_dance_tour:set_reduce_pause_before_triggering(true)
+in_sla_masque_the_eternal_dance_tour:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		local panel = find_uicomponent(core:get_ui_root(), "dlc27_sla_the_eternal_dance_character_panel")
+		local eternal_dance_tab = find_uicomponent(core:get_ui_root(), "eternal_dance")
+		if panel and panel:Visible() then
+			if eternal_dance_tab and eternal_dance_tab:Visible() then
+				panel_tab = find_uicomponent(core:get_ui_root(), "eternal_dance")
+				panel_tab:SimulateLClick()
+				uic = find_uicomponent(core:get_ui_root(), "btn_dance_excess") 
+				uic:SimulateLClick()
+				common.set_advice_history_string_seen("eternal_dance_tour_complete")
+				return true
+			end 
+		end
+	end 
+)
+
+scripted_sla_masque_the_eternal_dance_tour = {
+	id = "in_sla_masque_the_eternal_dance_tour",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_the_eternal_dance",
+
+	{
+		id = "sla_the_eternal_dance_1", 
+		highlight = {
+			function()
+				return find_uicomponent(core:get_ui_root(), "sla_eternal_dance_subpanel", "dlc27_sla_the_eternal_dance_character_panel", "panel_frame") 
+			end
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_sla_the_eternal_dance_3",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+		click_on_navigate = function() return find_uicomponent(core:get_ui_root(), "btn_dance_excess")	end,
+	},
+
+	{
+		id = "sla_the_eternal_dance_2",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dance_tabs_details") end
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_sla_the_eternal_dance_4",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+	},
+
+	{
+		id = "sla_the_eternal_dance_3",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "tempo_bar") end
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_sla_the_eternal_dance_5",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+
+	},
+
+		{
+		id = "sla_the_eternal_dance_4",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "step_list_contianer") end
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_sla_the_eternal_dance_6",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+
+	},
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- HEF Patrons of Ulthuan 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_hef_patrons_of_ulthuan_text_pointer_tour = intervention:new(
+    "in_hef_patrons_of_ulthuan_text_pointer_tour",                                  -- string name
+    0,                                                                  -- cost
+    function()
+        uic = find_uicomponent(core:get_ui_root(), "button_hef_intrigue_at_the_court")
+        if uic and uic:Visible() and uic:CurrentState() == "active" then
+            ui_scripted_tour:toggle_shortcuts(false)
+            patrons_ulthuan_text_pointer()
+        else
+            in_hef_patrons_of_ulthuan_text_pointer_tour:complete()
+        end
+ 
+    end,                    
+ 
+    BOOL_INTERVENTIONS_DEBUG                                            -- show debug output
+ 
+)
+
+in_hef_patrons_of_ulthuan_text_pointer_tour:add_precondition(function() return not common.get_advice_history_string_seen("hef_patrons_of_ulthuan_text_pointer_tour") end)
+in_hef_patrons_of_ulthuan_text_pointer_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_hef_patrons_of_ulthuan_text_pointer_tour:set_should_lock_ui()
+in_hef_patrons_of_ulthuan_text_pointer_tour:add_trigger_condition(
+    "FactionTurnStart",
+    function(context)
+        if cm:turn_number() == hef_intrigue_at_the_court.config.patrons_of_ulthuan_mission_key_turn then
+			common.set_advice_history_string_seen("hef_patrons_of_ulthuan_text_pointer_tour")
+            return true
+        end
+    end
+)
+ 
+function patrons_ulthuan_text_pointer()
+    uic = find_uicomponent(core:get_ui_root(), "button_hef_intrigue_at_the_court")
+	local info_size_x, info_size_y = uic:Dimensions()
+	local info_pos_x, info_pos_y = uic:Position();
+    if uic and uic:Visible() then
+        core:show_fullscreen_highlight_around_components(25, false, false, uic)
+ 		local tp = text_pointer:new("tp_patrons_of_ulthuan", "top", 70, info_pos_x + (info_size_x / 2) +1, (info_pos_y + (info_size_y / 2)) +25);
+        tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_dlc27_text_pointer_hef_patrons_of_ulthuan_text_pointer")
+        tp:set_style("semitransparent")
+        tp:set_topmost(true)
+        tp:set_highlight_close_button(0.5)
+        tp:set_close_button_callback(function() core:hide_fullscreen_highlight();
+            tp:hide()
+            in_hef_patrons_of_ulthuan_text_pointer_tour:complete()
+            ui_scripted_tour:toggle_shortcuts(true)
+        end)
+        tp:show()      
+    end
+end
+
+in_hef_patrons_of_ulthuan_tour = intervention:new(
+	"in_hef_patrons_of_ulthuan_tour",			 							-- string name
+	0, 																	-- cost
+	function()
+		uic = find_uicomponent("court_map")
+			if uic and uic:VisibleFromRoot() then
+				out("#### "..scripted_hef_patrons_of_ulthuan_tour.id.." ####")
+				ui_scripted_tour:construct_tour(scripted_hef_patrons_of_ulthuan_tour, in_hef_patrons_of_ulthuan_tour)
+				local high_elves_facions = {
+					"wh3_dlc27_hef_aislinn",
+					"wh2_dlc15_hef_imrik",
+					"wh2_main_hef_eataine",
+					"wh2_main_hef_nagarythe",
+					"wh2_main_hef_order_of_loremasters",
+					"wh2_main_hef_yvresse",
+					"wh2_main_hef_avelorn"
+					}
+				for i = 1, #high_elves_facions do
+					local faction_key = high_elves_facions[i]
+					local faction = cm:get_faction(faction_key):name()
+					local faction_interface = cm:get_faction(faction_key)
+					if faction and faction_interface:is_null_interface() == false then 
+						stop_moving_all_player_characters(faction)
+					end 	
+				end 			
+			else
+				in_hef_patrons_of_ulthuan_tour:cancel()
+			end
+	end,
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_hef_patrons_of_ulthuan_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_hef_patrons_of_ulthuan_tour") end)
+in_hef_patrons_of_ulthuan_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_hef_patrons_of_ulthuan_tour:set_should_lock_ui()
+in_hef_patrons_of_ulthuan_tour:set_reduce_pause_before_triggering(true)
+in_hef_patrons_of_ulthuan_tour:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		local panel = find_uicomponent(core:get_ui_root(), "court_map")
+		if panel and panel:Visible() then
+			common.set_advice_history_string_seen("in_hef_patrons_of_ulthuan_tour")
+			return true
+		end 
+	end
+)
+
+scripted_hef_patrons_of_ulthuan_tour = {
+	id = "in_hef_patrons_of_ulthuan_tour",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_patrons_of_ulthuan",
+
+	{
+		id = "in_hef_patrons_of_ulthuan_tour_1",
+		highlight = {
+			function() return find_uicomponent("court_map") end
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_hef_patrons_of_ulthuan_1",
+			direction = "left",
+			size = 350,
+			length = 25
+		}
+	},
+
+	{
+		id = "in_hef_patrons_of_ulthuan_tour_2",
+		highlight = {
+			function() return find_uicomponent("court_positions_holder", "wh3_main_combi_province_ellyrion") end
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_hef_patrons_of_ulthuan_2",
+			direction = "bottom",
+			size = 350,
+			length = 25
+		},
+		click_on_navigate = function() return find_uicomponent(core:get_ui_root(), "wh3_main_combi_province_ellyrion") end
+	},
+
+	{
+		id = "in_hef_patrons_of_ulthuan_tour_3",
+		highlight = {
+			function() return find_uicomponent("court_panel") end
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_hef_patrons_of_ulthuan_3",
+			direction = "bottom",
+			size = 550,
+			length = 25
+		},
+		click_on_navigate = function() return find_uicomponent(core:get_ui_root(), "tab_court") end,
+	},
+
+	{
+		id = "in_hef_patrons_of_ulthuan_tour_4",
+		highlight = {
+			function() return find_uicomponent("tier_holder") end
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_hef_patrons_of_ulthuan_4",
+			direction = "left",
+			size = 350,
+			length = 25
+		},
+		click_on_navigate = function() return find_uicomponent(core:get_ui_root(), "tab_confederate") end,
+	},
+
+	{ 
+		id = "in_hef_patrons_of_ulthuan_tour_5",
+		highlight = {
+			function() return find_uicomponent( "confederate_panel", "factions_holder") end
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_hef_patrons_of_ulthuan_5",
+			direction = "right",
+			size = 550,
+			length = 25
+		},		
+	},
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- SLA Tormentor's Tributes
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_sla_dechala_marks_of_vindictiveness_tour = intervention:new(
+	"in_sla_dechala_marks_of_vindictiveness_tour",			 						-- string name
+	0, 																	-- cost
+	function() 
+		cm:callback(function()
+			local uic = find_uicomponent(core:get_ui_root(), "dlc27_sla_marks_of_cruelty")
+			if uic and uic:Visible() then
+				ui_scripted_tour:toggle_shortcuts(true)
+				out("#### "..scripted_sla_dechala_marks_of_vindictiveness_tour.id.." ####")
+				ui_scripted_tour:construct_tour(scripted_sla_dechala_marks_of_vindictiveness_tour, in_sla_dechala_marks_of_vindictiveness_tour)
+			else 
+				in_sla_dechala_marks_of_vindictiveness_tour:cancel()
+			end
+		end, 0.1)															-- trigger callback
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_sla_dechala_marks_of_vindictiveness_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_sla_dechala_marks_of_vindictiveness_tour") end)
+in_sla_dechala_marks_of_vindictiveness_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_sla_dechala_marks_of_vindictiveness_tour:set_should_lock_ui()
+in_sla_dechala_marks_of_vindictiveness_tour:set_reduce_pause_before_triggering(true)
+in_sla_dechala_marks_of_vindictiveness_tour:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function()
+		local panel = find_uicomponent(core:get_ui_root(), "vindictiveness_holder")
+		if panel and panel:Visible() then
+			highlight_component(false, false, "button_marks_of_cruelty")
+			ui_scripted_tour:toggle_shortcuts(false)			
+			common.set_advice_history_string_seen("in_sla_dechala_marks_of_vindictiveness_tour")
+			return true
+		end
+	end
+)
+
+scripted_sla_dechala_marks_of_vindictiveness_tour = {
+	id = "in_sla_dechala_marks_of_vindictiveness_tour",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_marks_of_vindictiveness",
+
+	{
+		id = "in_sla_dechala_marks_of_vindictiveness_tour_1",
+		highlight = {
+			function() return find_uicomponent("vindictiveness_holder") end
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_sla_tormetors_tributes_1",
+			direction = "left",
+			size = 350,
+			length = 25
+		},
+	},
+
+	{
+		id = "in_sla_dechala_marks_of_vindictiveness_tour_2",
+		highlight = {
+			function() return find_uicomponent("gifts_list") end
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_sla_tormetors_tributes_2",
+			direction = "bottom",
+			size = 350,
+			length = 25
+		}
+	},
+
+	{
+		id = "in_sla_dechala_marks_of_vindictiveness_tour_3",
+		highlight = {
+			function() return find_uicomponent("imports_list") end
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_sla_tormetors_tributes_3",
+			direction = "bottom",
+			size = 350,
+			length = 25
+		}
+	},
+}	
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- SLA Corrupt Units Pre-Battle
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_sla_dechala_corrupt_units_tour = intervention:new(
+	"in_sla_dechala_corrupt_units_tour",			 						-- string name
+	0, 																	-- cost
+	function()
+		dechala_pre_battle()
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_sla_dechala_corrupt_units_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_sla_dechala_corrupt_units_tour") end)
+in_sla_dechala_corrupt_units_tour:set_wait_for_battle_complete(false);
+in_sla_dechala_corrupt_units_tour:set_should_lock_ui(true);
+in_sla_dechala_corrupt_units_tour:set_wait_for_fullscreen_panel_dismissed(false);
+in_sla_dechala_corrupt_units_tour:set_reduce_pause_before_triggering(true);
+in_sla_dechala_corrupt_units_tour:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		if not cm:is_multiplayer() then
+			if context.string == "popup_pre_battle" then
+				if cm:turn_number() <= 1 then
+					local enemy_unit_1 = find_uicomponent(core:get_ui_root(), "popup_pre_battle", "enemy_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units", "unit_1")
+					if enemy_unit_1 and enemy_unit_1:Visible() == true then
+						common.set_advice_history_string_seen("in_sla_dechala_corrupt_units_tour") 
+						cm:steal_escape_key(true)
+						local uic_army = find_uicomponent(core:get_ui_root(), "popup_pre_battle", "enemy_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units")
+						local uic = find_uicomponent(core:get_ui_root(), "popup_pre_battle", "enemy_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units","unit_1")
+						core:show_fullscreen_highlight_around_components(30, false, false, uic_army)
+						local tp = text_pointer:new_from_component(
+						"tp_scripted_tour2",
+						"bottom",
+						100, 
+						uic,
+						1, 
+						0
+						)	
+						tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_dlc27_text_pointer_sla_pre_battle_corrupt_units")
+						tp:set_style("semitransparent")
+						tp:set_topmost(true)
+						tp:set_highlight_close_button(0.5)
+						tp:set_close_button_callback(function() core:hide_fullscreen_highlight();
+							highlight_component(true, true, "popup_pre_battle", "enemy_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units", "unit_1") 
+							core:show_fullscreen_highlight_around_components(25, false, true, enemy_unit_1);
+							in_sla_dechala_corrupt_units_tour:complete();
+							cm:steal_escape_key(true)
+							tp:hide()
+						end)
+						tp:show()		
+						return  true 
+					end 
+				end 
+			end 
+			return false 
+		end
+	end 
+)
+
+function pre_battle_text_pointer_thralls()
+ 	local uic = find_uicomponent(core:get_ui_root(), "popup_pre_battle", "enemy_combatants_panel", "army", "units_and_banners_parent", "dlc27_dechala_corrupt_holder", "info_holder", "dy_cost")
+	local tp = text_pointer:new_from_component(
+	"tp_scripted_tour_pre_battle_thralls",
+	"bottom",
+	100, 
+	uic,
+	1, 
+	0
+	)	
+	tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_dlc27_text_pointer_sla_pre_battle_thralls_cost")
+	tp:set_style("semitransparent")
+	tp:set_topmost(true)
+	tp:set_highlight_close_button(0.5)
+	tp:set_close_button_callback(function() core:hide_fullscreen_highlight();
+		tp:hide()
+		cm:steal_escape_key(false)
+		local enemy_unit_1 = find_uicomponent(core:get_ui_root(), "popup_pre_battle", "enemy_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units", "unit_1")
+		enemy_unit_1:SimulateLClick()
+	end)
+	tp:show()
+end
+
+function dechala_pre_battle()
+	out(" ### Pre-battle Corrupt units ###")
+
+	core:add_listener(
+		"PanelOpenedCampaign_Dechala_pre_battle_click_on_unit",
+		"ComponentLClickUp",
+		function(context) 
+			return context.string == "unit_1" and uicomponent_descended_from(UIComponent(context.component), "enemy_combatants_panel");
+		end,
+		function()
+			core:hide_fullscreen_highlight();
+			pre_battle_text_pointer_thralls()
+			highlight_component(false, false, "popup_pre_battle", "enemy_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units", "unit_1")
+		end,
+		false	
+	)
+
+	core:add_listener(
+		"PanelOpenedCampaign_Dechala_Pre_Battle_Corrupt_Unit_Close",
+		"PanelClosedCampaign",
+		function(context) 
+			return context.string == "popup_pre_battle"  
+		end,
+		function()
+			core:hide_all_text_pointers()
+		end,
+		false
+	);
+
+	core:add_listener(
+		"PanelOpenedCampaign_Dechala_Corrupt_Unit",
+		"ComponentLClickUp",
+		function(context) 
+			return context.string == "button_corrupt" and uicomponent_descended_from(UIComponent(context.component), "dlc27_dechala_corrupt_holder");
+		end,
+		function()
+			core:hide_all_text_pointers()
+		end,
+		false	
+	)
+end
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- SLA Thrall 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_sla_dechala_minor_occupation_tour = intervention:new(
+	"in_sla_dechala_minor_occupation_tour",			 					-- string name
+	5, 																	-- cost
+	function() thrall_settlement_scripted_tour() end,					-- trigger callback
+	BOOL_INTERVENTIONS_DEBUG	 	
+
+)
+
+in_sla_dechala_minor_occupation_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_sla_dechala_minor_occupation_tour") end)
+in_sla_dechala_minor_occupation_tour:set_wait_for_fullscreen_panel_dismissed(true)
+in_sla_dechala_minor_occupation_tour:set_wait_for_battle_complete(false)
+in_sla_dechala_minor_occupation_tour:set_should_lock_ui(false)
+in_sla_dechala_minor_occupation_tour:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		if not cm:is_multiplayer() then
+			if context.string == "settlement_captured" then
+				local dechala_faction = cm:get_faction("wh3_dlc27_sla_the_tormentors");
+				if dechala_faction:is_null_interface() == false then 
+					for settlement_level = 1, 3 do 
+						if cm:faction_contains_building(dechala_faction, "wh3_dlc27_sla_dec_thrall_camp_settlement_" .. settlement_level) == false then 
+							if find_uicomponent(core:get_ui_root(), "settlement_captured", "1218317010") and not find_uicomponent(core:get_ui_root(), "settlement_captured", "1084419564") then 
+								local war_pit = find_uicomponent("1489372626","option_button");
+								local sack = find_uicomponent("1091624345","option_button"); 
+								local raze = find_uicomponent("2099100715","option_button");
+								local do_nothing = find_uicomponent("60518285","option_button"); 
+								if war_pit and war_pit:Visible() == true then
+									war_pit:SetState("inactive")
+								end
+								if sack and sack:Visible() == true then
+									sack:SetState("inactive")
+								end
+								if raze and raze:Visible() == true then
+									raze:SetState("inactive")
+								end
+								if do_nothing and do_nothing:Visible() == true then 
+									do_nothing:SetState("inactive")
+								end
+								dechala_pleasure_thrall_settlement_text_pointer()
+								if cm:pending_battle_cache_faction_is_attacker("wh3_dlc27_sla_the_tormentors") then 				
+									return true
+								end 
+							end
+						end 
+					end 	
+				end 	
+			end	
+		end
+	end	
+)
+
+function dechala_pleasure_thrall_settlement_text_pointer()
+	local uic = find_uicomponent(core:get_ui_root(), "1218317010")
+	core:show_fullscreen_highlight_around_components(10, false, false, uic)
+	local tp = text_pointer:new_from_component(
+	"tp_scripted_tour",
+	"left",
+	100, 
+	uic,
+	1, 
+	0
+	)	
+	tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_dlc27_text_pointer_sla_thrall_settlement")
+	tp:set_style("semitransparent")
+	tp:set_topmost(true)
+	tp:set_highlight_close_button(0.5)
+	tp:set_close_button_callback(function() core:hide_fullscreen_highlight(); 
+	tp:hide()
+		end)
+	tp:show()
+end 
+
+function thrall_settlement_scripted_tour()
+	out(" ### THRALL SCRIPTED TOUR ###")
+	
+	core:add_listener(
+		"Thrall_Camp_Completion_Check",
+		"CharacterPerformsSettlementOccupationDecision",
+		function(context)
+			return context:character():faction():name() == "wh3_dlc27_sla_the_tormentors" and context:occupation_decision() == "1218317010"
+		end,
+		function(context)
+			common.set_advice_history_string_seen("in_sla_dechala_minor_occupation_tour")
+			in_sla_dechala_minor_occupation_tour:complete()
+		end,
+		false
+	)
+end 	
+
+in_sla_minor_settlement_thrall_camp_tour = intervention:new(
+	"in_sla_minor_settlement_thrall_camp_tour",			 							-- string name
+	0, 																	-- cost
+	function() 	
+		cm:callback(function()
+			local uic = find_uicomponent(core:get_ui_root(), "CcoCampaignSettlementwh3_main_combi_region_mountain_pass", "thralls_region_resource_holder")
+			if uic and uic:Visible() then
+				common.set_advice_history_string_seen("in_sla_minor_settlement_thrall_camp_tour")
+				out("#### "..scripted_sla_minor_settlement_thrall_camp_tour.id.." ####")
+				ui_scripted_tour:construct_tour(scripted_sla_minor_settlement_thrall_camp_tour, in_sla_minor_settlement_thrall_camp_tour)
+			else
+				in_sla_minor_settlement_thrall_camp_tour:cancel()
+			end		
+		end, 0.1)
+	end,					
+	BOOL_INTERVENTIONS_DEBUG									-- show debug output
+)
+
+in_sla_minor_settlement_thrall_camp_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_sla_minor_settlement_thrall_camp_tour") end)
+in_sla_minor_settlement_thrall_camp_tour:set_wait_for_fullscreen_panel_dismissed(true)
+in_sla_minor_settlement_thrall_camp_tour:set_should_lock_ui()
+in_sla_minor_settlement_thrall_camp_tour:set_reduce_pause_before_triggering(true)
+in_sla_minor_settlement_thrall_camp_tour:add_trigger_condition(
+	"SettlementSelected",
+	function(context)
+		local uic = find_uicomponent(core:get_ui_root(), "CcoCampaignSettlementwh3_main_combi_region_mountain_pass", "thralls_region_resource_holder")
+		local region = context:garrison_residence():region();
+		if not cm:is_multiplayer() then 	
+			if region:owning_faction():name() == "wh3_dlc27_sla_the_tormentors" and region:name() == "wh3_main_combi_region_mountain_pass" 
+				and region:slot_list():item_at(0):building():chain() == "wh3_dlc27_sla_dec_thrall_camp_settlement" 
+			then
+				return true
+			end
+		end		
+	end
+)
+
+scripted_sla_minor_settlement_thrall_camp_tour = {
+	id = "sla_minor_settlement_thrall_camp_tour",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_thrall_camp",
+
+	{
+		id = "in_sla_minor_settlement_thrall_camp_tour_1",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "CcoCampaignSettlementwh3_main_combi_region_mountain_pass", "thralls_region_resource_holder", "thralls_resource", "value_holder" ) end, 
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_sla_thrall_camp_1",
+			direction = "left",
+			size = 350,
+			length = 50
+		},
+	},
+
+	{
+		id = "in_sla_minor_settlement_thrall_camp_tour_2",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "CcoCampaignBuildingSlotregion_slot_1581", "slot_entry", "square_building_button") end, 
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_sla_thrall_camp_2",
+			direction = "left",
+			size = 350,
+			length = 50
+		},
+	},
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- SLA Palace establishment
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_sla_dechala_pleasure_palace_tour = intervention:new(
+	"in_sla_dechala_pleasure_palace_tour",			 							-- string name
+	5, 																	-- cost
+	function() palace_of_settlement_scripted_tour() end,					-- trigger callback
+	BOOL_INTERVENTIONS_DEBUG		 										-- show debug output
+)
+
+in_sla_dechala_pleasure_palace_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_sla_dechala_pleasure_palace_tour") end)
+in_sla_dechala_pleasure_palace_tour:set_wait_for_fullscreen_panel_dismissed(true)
+in_sla_dechala_pleasure_palace_tour:set_wait_for_battle_complete(false)
+in_sla_dechala_pleasure_palace_tour:set_should_lock_ui(false)
+in_sla_dechala_pleasure_palace_tour:set_player_turn_only(false)
+in_sla_dechala_pleasure_palace_tour:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		local establish_pleasure_palace = find_uicomponent(core:get_ui_root(), "1084419564", "option_button")
+		if not cm:is_multiplayer() then  
+			if context.string == "settlement_captured" then
+				local dechala_faction = cm:get_faction("wh3_dlc27_sla_the_tormentors");
+				if dechala_faction:is_null_interface() == false then 
+					if dechala_faction:pooled_resource_manager():resource("wh3_dlc27_sla_pleaure_palace_available"):value() >= 1 then 	
+						for settlement_level = 1, 5 do 
+							if cm:faction_contains_building(dechala_faction, "wh3_dlc27_sla_dec_palace_settlement_" .. settlement_level) == false then 
+								if find_uicomponent(core:get_ui_root(), "settlement_captured", "1084419564") then
+									dechala_pleasure_palace_text_pointer() 
+									local thrall_camp = find_uicomponent("1218317010","option_button");
+									local war_pit = find_uicomponent("1489372626","option_button");
+									local sack = find_uicomponent("1091624345","option_button"); 
+									local raze = find_uicomponent("2099100715","option_button");
+									local do_nothing = find_uicomponent("60518285", "option_button");
+									if thrall_camp and thrall_camp:Visible() == true then
+										thrall_camp:SetState("inactive") 
+									end
+									if war_pit and war_pit:Visible() == true then
+										war_pit:SetState("inactive")
+									end
+									if sack and sack:Visible() == true then
+										sack:SetState("inactive")
+									end	
+									if raze and raze:Visible() == true then
+										raze:SetState("inactive")
+									end
+									if do_nothing and do_nothing:Visible() == true then
+										do_nothing:SetState("inactive")
+									end
+									if cm:pending_battle_cache_faction_is_attacker("wh3_dlc27_sla_the_tormentors") then 				
+										return true
+									end 
+								end 	
+							end 
+						end 
+					end
+				end 
+			end
+		end	
+	end 		
+)
+
+function dechala_pleasure_palace_text_pointer()
+	local uic_parent = find_uicomponent(core:get_ui_root(), "settlement_captured", "1084419564")
+	local uic = find_uicomponent(core:get_ui_root(), "1084419564")
+	core:show_fullscreen_highlight_around_components(10, false, false, uic_parent)
+	local tp = text_pointer:new_from_component(
+	"tp_scripted_tour",
+	"left",
+	100, 
+	uic,
+	1, 
+	0
+	)	
+	tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_dlc27_text_pointer_sla_pleasure_palace")
+	tp:set_style("semitransparent")
+	tp:set_topmost(true)
+	tp:set_highlight_close_button(0.5)
+	tp:set_close_button_callback(function() core:hide_fullscreen_highlight(); 
+		tp:hide()
+	end)
+	tp:show()
+end 
+
+function palace_of_settlement_scripted_tour()
+	out(" ### Palace of Pleasure ###")
+	
+	core:add_listener(
+		"Dechala_Post_Settlement_Occupation_complete_tour",
+		"CharacterPerformsSettlementOccupationDecision",
+		function(context)
+			return context:character():faction():name() == "wh3_dlc27_sla_the_tormentors" and context:occupation_decision() == "1084419564"
+		end,
+		function(context)
+			core:hide_all_text_pointers()
+			common.set_advice_history_string_seen("in_sla_dechala_pleasure_palace_tour")
+			in_sla_dechala_pleasure_palace_tour:complete()
+		end,
+		false
+	)
+end 
+
+in_sla_major_settlement_pleasure_palace_tour = intervention:new(
+	"in_sla_major_settlement_pleasure_palace_tour",			 							-- string name
+	0, 																	-- cost
+	function()
+		cm:callback(function() 	
+		local uic = find_uicomponent(core:get_ui_root(), "CcoCampaignSettlementwh3_main_combi_region_gateway_to_khuresh", "settlement_view")
+		if uic and uic:Visible() then
+			common.set_advice_history_string_seen("in_sla_major_settlement_pleasure_palace_tour") 
+			out("#### "..scripted_sla_major_settlement_pleasure_palace_tour.id.." ####")
+			ui_scripted_tour:construct_tour(scripted_sla_major_settlement_pleasure_palace_tour, in_sla_major_settlement_pleasure_palace_tour)
+		elseif not uic or not uic:Visible() then 
+			in_sla_major_settlement_pleasure_palace_tour:cancel()
+		end	
+		end, 0.1)
+	end,					
+	BOOL_INTERVENTIONS_DEBUG									-- show debug output
+)
+
+in_sla_major_settlement_pleasure_palace_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_sla_major_settlement_pleasure_palace_tour") end)
+in_sla_major_settlement_pleasure_palace_tour:set_wait_for_fullscreen_panel_dismissed(true)
+in_sla_major_settlement_pleasure_palace_tour:set_should_lock_ui(true)
+in_sla_major_settlement_pleasure_palace_tour:set_reduce_pause_before_triggering(true)
+in_sla_major_settlement_pleasure_palace_tour:add_trigger_condition(
+	"SettlementSelected",
+	function(context)
+		local uic = find_uicomponent(core:get_ui_root(), "CcoCampaignSettlementwh3_main_combi_region_gateway_to_khuresh")
+		local region = context:garrison_residence():region();
+		if not cm:is_multiplayer() then	
+			if region:owning_faction():name() == "wh3_dlc27_sla_the_tormentors" and region:name() == "wh3_main_combi_region_gateway_to_khuresh" 
+				and region:slot_list():item_at(0):building():chain() == "wh3_dlc27_sla_dec_palace_settlement" and uic and uic:Visible() 
+			then 
+				return true 
+			end
+		end	 
+	end
+)
+
+scripted_sla_major_settlement_pleasure_palace_tour = {
+	id = "in_sla_major_settlement_pleasure_palace_tour",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_pleasure_palace",
+
+	{
+		id = "in_sla_major_settlement_pleasure_palace_tour_1",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "CcoCampaignSettlementwh3_main_combi_region_gateway_to_khuresh") end, 
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_sla_pleasure_palace_1",
+			direction = "left",
+			size = 350,
+			length = 50
+		},
+	},
+
+	{
+		id = "in_sla_major_settlement_pleasure_palace_tour_2",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "CcoCampaignBuildingSlotregion_slot_695") end, 
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_sla_pleasure_palace_2",
+			direction = "left",
+			size = 350,
+			length = 50
+		},
+	},
+
+	{
+		id = "in_sla_major_settlement_pleasure_palace_tour_3",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "holder_decadence_value") end, 
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_sla_pleasure_palace_3",
+			direction = "top",
+			size = 350,
+			length = 50
+		},
+	},
+
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Nor Allegiance 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_nor_allegiance_tour = intervention:new(
+	"in_nor_allegiance_tour",			 							-- string name
+	0, 																	-- cost
+	function()
+		cm:callback(function()
+		local altar_button = find_uicomponent(core:get_ui_root(), "button_show_allegiance_choices")
+			if altar_button and altar_button:Visible() then 
+				out("#### "..scripted_nor_allegiance_tour.id.." ####")
+				ui_scripted_tour:construct_tour(scripted_nor_allegiance_tour, in_nor_allegiance_tour)
+			elseif not altar_button or not altar_button:Visible() then 
+				in_nor_allegiance_tour:cancel()			
+			end 
+		end, 0.1)
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_nor_allegiance_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_nor_allegiance_tour") end)
+in_nor_allegiance_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_nor_allegiance_tour:set_wait_for_battle_complete(false)
+in_nor_allegiance_tour:set_should_lock_ui()
+in_nor_allegiance_tour:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		if not cm:is_multiplayer() then 
+			if context.string == "settlement_captured" then
+				if find_uicomponent(core:get_ui_root(), "button_show_allegiance_choices") then
+					common.set_advice_history_string_seen("in_nor_allegiance_tour")
+					return true
+				end
+			end
+		end
+	end
+)
+
+scripted_nor_allegiance_tour = {
+	id = "in_nor_allegiance_tour",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_the_allegiance",
+
+	{
+		id = "in_nor_allegiance_tour_1",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "button_show_allegiance_choices") end, -- Dedicate Altar 
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_nor_allegiance_1",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+		click_on_navigate = function() return find_uicomponent(core:get_ui_root(), "button_show_allegiance_choices") end,
+	},
+
+	{
+		id = "in_nor_allegiance_tour_2",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "button_nor_allegiance") end, -- Dedicate to Chaos God 
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_nor_allegiance_2",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+		click_on_navigate = function() return find_uicomponent(core:get_ui_root(), "button_show_allegiance_choices") end,
+	},
+
+	{
+		id = "in_nor_allegiance_tour_3",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "norsca_gods_frame") end, -- Chaos God Favour
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_nor_allegiance_3",
+			direction = "top",
+			size = 350,
+			length = 50
+		}
+	},
+
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Nor The Monstrous Arcanum
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_nor_monstrous_arcanum_text_pointer_tour = intervention:new(
+	"in_nor_monstrous_arcanum_text_pointer_tour",			 						-- string name
+	0, 																	-- cost
+	function()
+		monstrous_arcanum_text_pointer()
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_nor_monstrous_arcanum_text_pointer_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_nor_monstrous_arcanum_text_pointer_tour") end)
+in_nor_monstrous_arcanum_text_pointer_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_nor_monstrous_arcanum_text_pointer_tour:set_should_lock_ui()
+in_nor_monstrous_arcanum_text_pointer_tour:add_trigger_condition(
+	"FactionTurnStart",
+	function(context)
+		if cm:turn_number() == 8 then
+			ui_scripted_tour:toggle_shortcuts(false)
+			common.set_advice_history_string_seen("in_nor_monstrous_arcanum_text_pointer_tour")
+			return true
+		end 
+	end 
+)
+
+function monstrous_arcanum_text_pointer()
+	local uic = find_uicomponent(core:get_ui_root(), "button_monsters")
+	local info_size_x, info_size_y = uic:Dimensions()
+	local info_pos_x, info_pos_y = uic:Position();
+	core:show_fullscreen_highlight_around_components(25, false, false, uic)
+	local tp = text_pointer:new("tp_monstrous_arcanum", "right", 70, info_pos_x + (info_size_x / 2) - 20, (info_pos_y + (info_size_y / 2)) +5);	
+	tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_dlc27_text_pointer_nor_monstrous_arcanum_unlock_text_pointer")
+	tp:set_style("semitransparent")
+	tp:set_topmost(true)
+	tp:set_highlight_close_button(0.5)
+	tp:set_close_button_callback(function() core:hide_fullscreen_highlight(); 
+		tp:hide()
+		in_nor_monstrous_arcanum_text_pointer_tour:complete()
+		ui_scripted_tour:toggle_shortcuts(true)
+	end)
+	tp:show()		
+end 
+
+in_nor_monstrous_arcanum_text_pointer_throgg_tour = intervention:new(
+	"in_nor_monstrous_arcanum_text_pointer_throgg_tour",			 						-- string name
+	0, 																	-- cost
+	function()
+		monstrous_arcanum_text_pointer_throgg()
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_nor_monstrous_arcanum_text_pointer_throgg_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_nor_monstrous_arcanum_text_pointer_throgg_tour") end)
+in_nor_monstrous_arcanum_text_pointer_throgg_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_nor_monstrous_arcanum_text_pointer_throgg_tour:set_should_lock_ui()
+in_nor_monstrous_arcanum_text_pointer_throgg_tour:add_trigger_condition(
+	"FactionTurnStart",
+	function(context)
+		if cm:turn_number() == 5 then
+			ui_scripted_tour:toggle_shortcuts(false)
+			common.set_advice_history_string_seen("in_nor_monstrous_arcanum_text_pointer_throgg_tour")
+			return true
+		end 
+	end 
+)
+
+function monstrous_arcanum_text_pointer_throgg()
+	local uic = find_uicomponent(core:get_ui_root(), "button_monsters")
+	local info_size_x, info_size_y = uic:Dimensions()
+	local info_pos_x, info_pos_y = uic:Position();
+	core:show_fullscreen_highlight_around_components(25, false, false, uic)
+	local tp = text_pointer:new("tp_monstrous_arcanum", "right", 70, info_pos_x + (info_size_x / 2) - 20, (info_pos_y + (info_size_y / 2)) +5);
+	tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_dlc27_text_pointer_nor_monstrous_arcanum_unlock_text_pointer")
+	tp:set_style("semitransparent")
+	tp:set_topmost(true)
+	tp:set_highlight_close_button(0.5)
+	tp:set_close_button_callback(function() core:hide_fullscreen_highlight(); 
+		tp:hide()
+		in_nor_monstrous_arcanum_text_pointer_throgg_tour:complete()
+		ui_scripted_tour:toggle_shortcuts(true)
+	end)
+	tp:show()		
+end 
+
+in_nor_monstrous_arcanum_tour = intervention:new(
+	"in_nor_monstrous_arcanum_tour",			 							-- string name
+	0, 																	-- cost
+	function()
+		cm:callback(function()
+			local uic = find_uicomponent(core:get_ui_root(), "taming_hunts_ror_tab")
+			if uic and uic:VisibleFromRoot() then
+				out("#### "..scripted_nor_monstrous_arcanum_tour.id.." ####")
+				ui_scripted_tour:construct_tour(scripted_nor_monstrous_arcanum_tour, in_nor_monstrous_arcanum_tour)
+				cm:steal_user_input(false)
+			else
+				in_nor_monstrous_arcanum_tour:cancel()
+			end
+		end, 0.1)
+	end,					
+	BOOL_INTERVENTIONS_DEBUG									-- show debug output
+)
+
+in_nor_monstrous_arcanum_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_nor_monstrous_arcanum_tour") end)
+in_nor_monstrous_arcanum_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_nor_monstrous_arcanum_tour:set_should_lock_ui(true)
+in_nor_monstrous_arcanum_tour:set_reduce_pause_before_triggering(true)
+in_nor_monstrous_arcanum_tour:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		local panel = find_uicomponent(core:get_ui_root(), "book_of_monster_hunts")
+	 	if panel and panel:Visible() then
+			common.set_advice_history_string_seen("in_nor_monstrous_arcanum_tour")
+			cm:steal_escape_key(true)
+			cm:steal_user_input(true)
+			return true
+		end 
+	end
+)
+
+scripted_nor_monstrous_arcanum_tour = {
+	id = "in_nor_monstrous_arcanum_tour",
+	localised_name = "ui_text_replacements_localised_text_wh3_dlc27_hp_campaign_title_monstrous_arcanum",
+
+	{
+		id = "in_nor_monstrous_arcanum_tour_1",
+		highlight = {
+			function() 
+			local component = find_uicomponent(core:get_ui_root(), "taming_hunts_ror_tab")
+				component:SimulateLClick()
+			end,
+			function() return find_uicomponent(core:get_ui_root(), "taming_hunts_ror_tab") end, 			
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_nor_monstrous_arcanum_1",
+			direction = "left",
+			size = 350,
+			length = 200
+		},
+	},
+
+	{
+		id = "in_nor_monstrous_arcanum_tour_2",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "taming_hunts_ma_tab") end, 
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_nor_monstrous_arcanum_2",
+			direction = "left",
+			size = 350,
+			length = 200
+		},
+	},
+
+	{
+		id = "in_nor_monstrous_arcanum_tour_3",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "trophy_hunts_tab") end, 
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_nor_monstrous_arcanum_3",
+			direction = "left",
+			size = 350,
+			length = 50
+		},
+		click_on_navigate = function() return find_uicomponent(core:get_ui_root(), "taming_hunts_ror_tab") end,
+		navigation_delay = 1
+	},
+
+	{
+		id = "in_nor_monstrous_arcanum_tour_4",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "hunts_list") end, 
+			 
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_nor_monstrous_arcanum_4",
+			direction = "left",
+			size = 350,
+			length = 50
+		},
+		click_on_navigate = function() return find_uicomponent(core:get_ui_root(),  "hunt_entry_0", "monster_portrait") end,
+		navigation_delay = 1
+	},
+
+	{
+		id = "in_nor_monstrous_arcanum_tour_5",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "normal_view") end, 
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_nor_monstrous_arcanum_5",
+			direction = "left",
+			size = 350,
+			length = 50
+		},
+	},
+
+	{
+		id = "in_nor_monstrous_arcanum_tour_6",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "button_character_selected") end, 
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_nor_monstrous_arcanum_6",
+			direction = "left",
+			size = 350,
+			length = 50
+		},
+	},
+
+	{
+		id = "in_nor_monstrous_arcanum_tour_7",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "umh_tab") end, 
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_nor_monstrous_arcanum_7",
+			direction = "left",
+			size = 350,
+			length = 50
+		},
+	},
+}	
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- HEF Establish Colony
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_hef_esblish_colony_tour = intervention:new(
+	"in_hef_esblish_colony_tour",			 							-- string name
+	0, 																	-- cost
+	function()
+		cm:callback(function()											-- trigger callback
+			local establish_colony_button_minor_settlement = find_uicomponent(core:get_ui_root(), "1156478547", "option_button")
+			local establish_coloy_button_major_settlement = find_uicomponent(core:get_ui_root(), "556969995", "option_button")
+			if establish_colony_button_minor_settlement and establish_colony_button_minor_settlement:Visible() then 
+				out("#### "..scripted_hef_esblish_colony_tour.id.." ####")
+				ui_scripted_tour:construct_tour(scripted_hef_esblish_colony_tour, in_hef_esblish_colony_tour)
+			elseif establish_coloy_button_major_settlement and establish_coloy_button_major_settlement:Visible() then
+				out("#### "..scripted_hef_esblish_colony_tour.id.." ####")
+				ui_scripted_tour:construct_tour(scripted_hef_esblish_colony_tour, in_hef_esblish_colony_tour)			
+			else
+				in_hef_esblish_colony_tour:cancel()
+			end 
+		end, 0.1)
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+
+in_hef_esblish_colony_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_hef_esblish_colony_tour") end)
+in_hef_esblish_colony_tour:set_wait_for_fullscreen_panel_dismissed(true)
+in_hef_esblish_colony_tour:set_wait_for_battle_complete(false)
+in_hef_esblish_colony_tour:set_should_lock_ui(false)
+in_hef_esblish_colony_tour:set_reduce_pause_before_triggering(true)
+in_hef_esblish_colony_tour:set_player_turn_only(false)
+in_hef_esblish_colony_tour:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		if not cm:is_multiplayer() then
+			if context.string == "settlement_captured" then
+				local establish_colony_button_minor_settlement = find_uicomponent(core:get_ui_root(), "1156478547", "option_button")
+				local establish_coloy_button_major_settlement = find_uicomponent(core:get_ui_root(), "556969995", "option_button")
+				local aislinn_faction = cm:get_faction("wh3_dlc27_hef_aislinn");
+				if aislinn_faction:is_null_interface() == false then
+					if establish_colony_button_minor_settlement and establish_colony_button_minor_settlement:Visible() and establish_colony_button_minor_settlement:CurrentState() == "active" then
+						for major_settlement_level = 1, 5 do 
+							if cm:faction_contains_building(aislinn_faction, "wh3_dlc27_hef_colony_settlement_major_" .. major_settlement_level) == false then 
+								for minor_settlement_level = 1, 3 do 
+									if cm:faction_contains_building(aislinn_faction, "wh3_dlc27_hef_colony_settlement_minor_" .. minor_settlement_level) == false then 
+										common.set_advice_history_string_seen("in_hef_esblish_colony_tour")
+										if cm:pending_battle_cache_faction_is_attacker("wh3_dlc27_hef_aislinn") then
+										return true
+									end
+								end
+							end
+						end					
+					end
+					elseif establish_coloy_button_major_settlement and establish_coloy_button_major_settlement:Visible() and establish_coloy_button_major_settlement:CurrentState() == "active" then
+						for major_settlement_level = 1, 5 do 
+							if cm:faction_contains_building(aislinn_faction, "wh3_dlc27_hef_colony_settlement_major_" .. major_settlement_level) == false then 
+								for minor_settlement_level = 1, 3 do 
+									if cm:faction_contains_building(aislinn_faction, "wh3_dlc27_hef_colony_settlement_minor_" .. minor_settlement_level) == false then 
+										common.set_advice_history_string_seen("in_hef_esblish_colony_tour")
+										if cm:pending_battle_cache_faction_is_attacker("wh3_dlc27_hef_aislinn") then
+											return true
+										end
+									end
+								end
+							end
+						end
+					end
+				end
+			end	
+			return false
+		end
+	end	
+)
+
+scripted_hef_esblish_colony_tour = {
+	id = "in_hef_esblish_colony_tour",
+	localised_name = "ui_text_replacements_localised_text_wh3_dlc27_hp_campaign_title_hef_establish_colony",
+
+	{
+		id = "in_hef_esblish_colony_tour_1",
+		highlight = {
+			function()
+				local establish_colony_button_minor_settlement = find_uicomponent(core:get_ui_root(), "1156478547", "option_button")
+				local establish_coloy_button_major_settlement = find_uicomponent(core:get_ui_root(), "556969995", "option_button")
+				if establish_colony_button_minor_settlement and establish_colony_button_minor_settlement:Visible() then 
+					return find_uicomponent(core:get_ui_root(), "1156478547", "option_button")
+				elseif establish_coloy_button_major_settlement and establish_coloy_button_major_settlement:Visible() then
+					return find_uicomponent(core:get_ui_root(), "556969995", "option_button")
+				end
+			end,
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_hef_establish_colony_text_pointer_1",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "in_hef_esblish_colony_tour_2",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc27_hef_elven_colonies") end,
+			function() return find_uicomponent(core:get_ui_root(), "dy_elven_colonies") end
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_hef_establish_colony_text_pointer_2",
+			direction = "top",
+			size = 350,
+			length = 50
+		}
+	},
+}	
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Nor Marauding Actions text pointer
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_nor_marauding_actions_text_pointer_tour_wulfric = intervention:new(
+    "in_nor_marauding_actions_text_pointer_tour_wulfric",                                  -- string name
+    0,                                                                 			   -- cost
+    function()
+		local uic = find_uicomponent(core:get_ui_root(), "marauding_buttonset")
+		if uic and uic:VisibleFromRoot() then
+ 	    	nor_marauding_actions_text_pointer_wulfric()
+		else 
+			in_nor_marauding_actions_text_pointer_tour_wulfric:cancel()
+		end
+    end,                    
+ 
+    BOOL_INTERVENTIONS_DEBUG                                            -- show debug output
+ 
+)
+
+in_nor_marauding_actions_text_pointer_tour_wulfric:add_precondition(function() return not common.get_advice_history_string_seen("in_nor_marauding_actions_text_pointer_tour_wulfric") end)
+in_nor_marauding_actions_text_pointer_tour_wulfric:set_wait_for_fullscreen_panel_dismissed(false)
+in_nor_marauding_actions_text_pointer_tour_wulfric:set_should_lock_ui(true)
+in_nor_marauding_actions_text_pointer_tour_wulfric:add_precondition(function() return not in_nor_marauding_actions_text_pointer_tour_wulfric:has_ever_triggered() and not cm:get_saved_value("nor_marauding_actions_text_wulfric") end)
+in_nor_marauding_actions_text_pointer_tour_wulfric:add_trigger_condition(
+	"SettlementSelected",
+	function(context)
+		local region = context:garrison_residence():region();	
+		return region:owning_faction():name() == "wh_dlc08_nor_norsca"
+	end
+)
+
+function nor_marauding_actions_text_pointer_wulfric()
+    uic = find_uicomponent(core:get_ui_root(), "marauding_buttonset")
+    if uic and uic:Visible() then
+		ui_scripted_tour:toggle_shortcuts(false)
+        core:show_fullscreen_highlight_around_components(25, false, false, uic)
+        local tp = text_pointer:new_from_component(
+        "marauding_actions_text_pointer",
+        "left",
+        100,
+        uic,
+        1,
+        0
+        )  
+ 
+        tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_dlc27_text_pointer_nor_marauding_actions")
+        tp:set_style("semitransparent")
+        tp:set_topmost(true)
+        tp:set_highlight_close_button(0.5)
+        tp:set_close_button_callback(function() core:hide_fullscreen_highlight();
+            tp:hide()
+			common.set_advice_history_string_seen("in_nor_marauding_actions_text_pointer_tour_wulfric")
+			cm:set_saved_value("nor_marauding_actions_text_wulfric", true) 
+            in_nor_marauding_actions_text_pointer_tour_wulfric:complete()
+            ui_scripted_tour:toggle_shortcuts(true)
+        end)
+        tp:show()      	
+	end
+end
+ 
+in_nor_marauding_actions_text_pointer_tour_throgg = intervention:new(
+    "in_nor_marauding_actions_text_pointer_tour_throgg",                                  -- string name
+    0,                                                                 			   -- cost
+    function()
+		local uic = find_uicomponent(core:get_ui_root(), "marauding_buttonset")
+		if uic and uic:VisibleFromRoot() then
+			nor_marauding_actions_text_pointer_throgg()
+		else
+			in_nor_marauding_actions_text_pointer_tour_throgg:cancel()
+		end 	
+    end,                    
+ 
+    BOOL_INTERVENTIONS_DEBUG                                            -- show debug output
+ 
+)
+
+in_nor_marauding_actions_text_pointer_tour_throgg:add_precondition(function() return not common.get_advice_history_string_seen("in_nor_marauding_actions_text_pointer_tour_throgg") end)
+in_nor_marauding_actions_text_pointer_tour_throgg:set_wait_for_fullscreen_panel_dismissed(false)
+in_nor_marauding_actions_text_pointer_tour_throgg:set_should_lock_ui(true)
+in_nor_marauding_actions_text_pointer_tour_throgg:add_precondition(function() return not in_nor_marauding_actions_text_pointer_tour_throgg:has_ever_triggered() and not cm:get_saved_value("nor_marauding_actions_text_pointer_tour_throgg") end)
+in_nor_marauding_actions_text_pointer_tour_throgg:add_trigger_condition(
+	"SettlementSelected",
+	function(context)
+		local region = context:garrison_residence():region();	
+		return region:owning_faction():name() == "wh_dlc08_nor_wintertooth"
+	end
+)
+
+function nor_marauding_actions_text_pointer_throgg()
+    uic = find_uicomponent(core:get_ui_root(), "marauding_buttonset")
+    if uic and uic:Visible() then
+		ui_scripted_tour:toggle_shortcuts(false)
+        core:show_fullscreen_highlight_around_components(25, false, false, uic)
+        local tp = text_pointer:new_from_component(
+        "marauding_actions_text_pointer",
+        "left",
+        100,
+        uic,
+        1,
+        0
+        )  
+ 
+        tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_dlc27_text_pointer_nor_marauding_actions")
+        tp:set_style("semitransparent")
+        tp:set_topmost(true)
+        tp:set_highlight_close_button(0.5)
+        tp:set_close_button_callback(function() core:hide_fullscreen_highlight();
+            tp:hide()
+			common.set_advice_history_string_seen("in_nor_marauding_actions_text_pointer_tour_throgg")
+			cm:set_saved_value("nor_marauding_actions_text_pointer_tour_throgg", true) 
+            in_nor_marauding_actions_text_pointer_tour_throgg:complete()
+            ui_scripted_tour:toggle_shortcuts(true)
+        end)
+        tp:show()      	
+	end
+end
+
+
+in_nor_marauding_actions_text_pointer_tour_sayl = intervention:new(
+    "in_nor_marauding_actions_text_pointer_tour_sayl",                                  -- string name
+    0,                                                                 			   -- cost
+    function()
+		cm:callback(function()
+			local uic = find_uicomponent(core:get_ui_root(), "marauding_buttonset")
+			if uic and uic:VisibleFromRoot() then
+				nor_marauding_actions_text_pointer_sayl()
+			else
+				in_nor_marauding_actions_text_pointer_tour_sayl:cancel()
+			end
+		end, 0.1)
+	end,                    
+ 
+    BOOL_INTERVENTIONS_DEBUG                                            -- show debug output
+ 
+)
+
+in_nor_marauding_actions_text_pointer_tour_sayl:add_precondition(function() return not common.get_advice_history_string_seen("in_nor_marauding_actions_text_pointer_tour_sayl") end)
+in_nor_marauding_actions_text_pointer_tour_sayl:set_wait_for_fullscreen_panel_dismissed(false)
+in_nor_marauding_actions_text_pointer_tour_sayl:set_should_lock_ui(true)
+in_nor_marauding_actions_text_pointer_tour_sayl:add_precondition(function() return not in_nor_marauding_actions_text_pointer_tour_sayl:has_ever_triggered() and not cm:get_saved_value("nor_marauding_actions_text_pointer_tour_sayl") end)
+in_nor_marauding_actions_text_pointer_tour_sayl:add_trigger_condition(
+	"SettlementSelected",
+	function(context)
+		local region = context:garrison_residence():region();	
+		return region:owning_faction():name() == "wh3_dlc27_nor_sayl"
+	end
+)
+
+function nor_marauding_actions_text_pointer_sayl()
+    uic = find_uicomponent(core:get_ui_root(), "marauding_buttonset")
+    if uic and uic:Visible() then
+		ui_scripted_tour:toggle_shortcuts(false)
+        core:show_fullscreen_highlight_around_components(25, false, false, uic)
+        local tp = text_pointer:new_from_component(
+        "marauding_actions_text_pointer",
+        "left",
+        100,
+        uic,
+        1,
+        0
+        )  
+ 
+        tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_dlc27_text_pointer_nor_marauding_actions")
+        tp:set_style("semitransparent")
+        tp:set_topmost(true)
+        tp:set_highlight_close_button(0.5)
+        tp:set_close_button_callback(function() core:hide_fullscreen_highlight();
+            tp:hide()
+			common.set_advice_history_string_seen("in_nor_marauding_actions_text_pointer_tour_sayl")
+			cm:set_saved_value("nor_marauding_actions_text_pointer_tour_sayl", true) 
+            in_nor_marauding_actions_text_pointer_tour_sayl:complete()
+            ui_scripted_tour:toggle_shortcuts(true)
+        end)
+        tp:show()      	
+	end
+end
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- HEF Establish Ouposts
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_hef_establish_outpost_tour = intervention:new(
+	"in_hef_establish_outpost_tour",			 							-- string name
+	0, 																	-- cost
+	function()
+		aislinn_outposts()
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_hef_establish_outpost_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_hef_establish_outpost_tour") and not in_hef_establish_outpost_tour:has_ever_triggered() end)
+in_hef_establish_outpost_tour:set_wait_for_battle_complete(false);
+in_hef_establish_outpost_tour:set_should_lock_ui(false);
+in_hef_establish_outpost_tour:set_wait_for_fullscreen_panel_dismissed(true);
+in_hef_establish_outpost_tour:set_reduce_pause_before_triggering(true);
+in_hef_establish_outpost_tour:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		if not cm:is_multiplayer() then
+ 			if context.string == "settlement_captured" then
+			local establish_colony_button_minor_settlement = find_uicomponent(core:get_ui_root(), "1156478547", "option_button")
+			local aislinn_faction = cm:get_faction("wh3_dlc27_hef_aislinn");
+				if aislinn_faction:is_null_interface() == false then 
+					if establish_colony_button_minor_settlement and establish_colony_button_minor_settlement:CurrentState() ~= "active" then 
+						local sack = find_uicomponent("1078","option_button"); 
+						local raze = find_uicomponent("1070","option_button");
+						local do_nothing = find_uicomponent("1051", "option_button");
+						local choose_gift_faction_button = find_uicomponent("choose_gift_faction_button")
+						if sack and sack:Visible() == true then
+							sack:SetState("inactive")
+						end	
+						if raze and raze:Visible() == true then
+							raze:SetState("inactive")
+						end
+						if do_nothing and do_nothing:Visible() == true then
+							do_nothing:SetState("inactive")
+						end		
+						if choose_gift_faction_button and choose_gift_faction_button:Visible() == true then
+							choose_gift_faction_button:SetState("inactive")
+						end				
+						if cm:pending_battle_cache_faction_is_attacker("wh3_dlc27_hef_aislinn") then
+							common.get_advice_history_string_seen("in_hef_establish_outpost_tour")			
+							return true
+						end
+					end
+				end 			
+			end
+		end
+	end 	 			
+	)
+
+function outpost_tour_completion()
+	core:add_listener(
+		"Aislinn_Outpost_Scripted_Tour_Completed",
+		"CharacterPerformsSettlementOccupationDecision",
+		function(context)
+			return context:character():faction():name() == "wh3_dlc27_hef_aislinn"
+					and (context:occupation_decision() == "2050244199" or context:occupation_decision() == "96128829")
+		end,
+		function(context)			
+			common.set_advice_history_string_seen("in_hef_establish_outpost_tour")
+			in_hef_establish_outpost_tour:complete()
+		end,
+		false
+	)
+end	
+
+function settlement_option_highlight()
+	local establish_colony = find_uicomponent(core:get_ui_root(), "2050244199", "option_button")
+	highlight_component(true, true, "2050244199", "option_button")	
+	core:show_fullscreen_highlight_around_components(25, false, false, establish_colony);
+	local info_size_x, info_size_y = establish_colony:Dimensions()
+	local info_pos_x, info_pos_y = establish_colony:Position();
+	local tp = text_pointer:new("tp_scripted_tour_establish_outpost", "bottom", 60, info_pos_x + (info_size_x / 2) +1, (info_pos_y + (info_size_y / 2)) -15);
+	tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_dlc27_text_pointer_hef_create_outpost")
+	tp:set_style("semitransparent")
+	tp:set_topmost(true)
+	tp:set_highlight_close_button(0.5)
+	tp:set_close_button_callback(function() core:hide_fullscreen_highlight();
+		tp:hide()
+		highlight_component(false, false, "2050244199", "option_button")
+		outpost_tour_completion()
+	end)
+	tp:show()
+end
+
+function aislinn_faction_list()
+	core:add_listener(
+	"Aislinn_Establish_Outpost_LClick",
+	"ComponentLClickUp",
+	function(context)
+	return context.string:starts_with("wh2_");
+	end,
+	function()
+		local ineligible_button = find_uicomponent("tab_ineligible")
+		if ineligible_button and ineligible_button:Visible() == true then
+			ineligible_button:SetState("active")
+		end	
+		cm:steal_escape_key(false)
+		core:hide_all_text_pointers()
+		core:hide_fullscreen_highlight();
+		settlement_option_highlight()
+	end,
+	false
+	)
+end
+
+function aislinn_faction_list_description()
+	local ineligible_button = find_uicomponent("tab_ineligible")
+	if ineligible_button and ineligible_button:Visible() == true then
+		ineligible_button:SetState("inactive")
+	end	
+	cm:steal_escape_key(true)
+	local uic = find_uicomponent(core:get_ui_root(), "faction_list_parent", "eligible_factions_listview")
+	core:show_fullscreen_highlight_around_components(25, false, true, uic);
+	local tp = text_pointer:new_from_component(
+	"tp_scripted_tour_eligible_factions",
+	"left",
+	100, 
+	uic,
+	1, 
+	0
+	)
+	tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_dlc27_text_pointer_hef_faction_list")
+	tp:set_style("semitransparent")
+	tp:set_topmost(true)
+	tp:set_highlight_close_button(0.5)
+	tp:set_close_button_callback(function()
+	tp:hide()
+	cm:steal_escape_key(true)
+	end)
+	tp:show()
+end
+
+function open_aislinn_faction_list()
+	core:add_listener(
+	"Aislinn_Establish_Outpost_LClick",
+	"ComponentLClickUp",
+	function(context)
+	return context.string == "choose_gift_faction_button" and uicomponent_descended_from(UIComponent(context.component), "settlement_captured");
+	end,
+	function()
+		cm:steal_escape_key(true)
+		highlight_component(false, false, "choose_gift_faction_button")
+		aislinn_faction_list_description()
+		aislinn_faction_list()
+	end,
+	false
+	)
+end
+
+function aislinn_outposts()
+	local choose_gift_faction_button = find_uicomponent("choose_gift_faction_button")
+	if choose_gift_faction_button and choose_gift_faction_button:Visible() == true then
+		choose_gift_faction_button:SetState("active")
+	end		
+	highlight_component(true, true, "choose_gift_faction_button")
+	local uic_siege_panel = find_uicomponent(core:get_ui_root(), "choose_gift_faction_button")
+	core:show_fullscreen_highlight_around_components(25, false, false, uic_siege_panel);
+	local uic = find_uicomponent(core:get_ui_root(), "choose_gift_faction_button")
+	local info_size_x, info_size_y = uic:Dimensions()
+	local info_pos_x, info_pos_y = uic:Position();
+	local tp = text_pointer:new("tp_scripted_tour_establish_outpost", "left", 100, info_pos_x + (info_size_x / 2) +100, (info_pos_y + (info_size_y / 2)) -15);
+	tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_dlc27_text_pointer_hef_dedicate_outpost")
+	tp:set_style("semitransparent")
+	tp:set_topmost(true)
+	tp:set_highlight_close_button(0.5)
+	tp:set_close_button_callback(function() core:hide_fullscreen_highlight();
+	tp:hide()
+	open_aislinn_faction_list()
+	cm:steal_escape_key(true)
+	end)
+	tp:show()
+end
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Nor Sayl Manipulations
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_nor_sayl_manipulations_text_pointer = intervention:new(
+    "in_nor_sayl_manipulations_text_pointer",                                  -- string name
+    0,                                                                 			   -- cost
+    function()
+		local uic = find_uicomponent(core:get_ui_root(), "button_sayl_manipulations")
+		if uic and uic:Visible() then
+        	nor_sayl_manipulations_text_pointer()
+		end
+    end,                    
+ 
+    BOOL_INTERVENTIONS_DEBUG                                            -- show debug output
+ 
+)
+
+in_nor_sayl_manipulations_text_pointer:add_precondition(function() return not common.get_advice_history_string_seen("in_nor_sayl_manipulations_text_pointer") and not in_nor_sayl_manipulations_text_pointer:has_ever_triggered() end)
+in_nor_sayl_manipulations_text_pointer:set_wait_for_fullscreen_panel_dismissed(true)
+in_nor_sayl_manipulations_text_pointer:set_should_lock_ui(true)
+in_nor_sayl_manipulations_text_pointer:add_trigger_condition(
+	"FactionTurnStart",
+	function(context)
+		if cm:turn_number() == 2 then
+			ui_scripted_tour:toggle_shortcuts(false)
+			common.set_advice_history_string_seen("in_nor_sayl_manipulations_text_pointer")
+			return true
+		end 
+	end
+)
+
+function nor_sayl_manipulations_text_pointer()
+    uic = find_uicomponent(core:get_ui_root(), "button_sayl_manipulations")
+	local info_size_x, info_size_y = uic:Dimensions()
+	local info_pos_x, info_pos_y = uic:Position();
+    if uic and uic:Visible() then
+		ui_scripted_tour:toggle_shortcuts(false)
+        core:show_fullscreen_highlight_around_components(25, false, false, uic)
+		local tp = text_pointer:new("manipulations_text_pointer", "right", 70, info_pos_x + (info_size_x / 2) - 20, (info_pos_y + (info_size_y / 2)) + 5);
+        tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_dlc27_text_pointer_nor_manipulations_text_pointer")
+        tp:set_style("semitransparent")
+        tp:set_topmost(true)
+        tp:set_highlight_close_button(0.5)
+        tp:set_close_button_callback(function() core:hide_fullscreen_highlight();
+            tp:hide()
+			common.set_advice_history_string_seen("in_nor_marauding_actions_text_pointer_tour_sayl")
+            in_nor_sayl_manipulations_text_pointer:complete()
+            ui_scripted_tour:toggle_shortcuts(true)
+        end)
+        tp:show()      	
+	end
+end
+
+in_nor_sayl_manipulations = intervention:new(
+	"in_nor_sayl_manipulations",			 							-- string name
+	0, 																	-- cost
+	function()
+		cm:callback(function()											-- trigger callback
+		local uic_panel = find_uicomponent(core:get_ui_root(), "dlc27_nor_sayl_manipulations", "panel_container")
+			if uic_panel and uic_panel:Visible() then
+				cm:steal_escape_key(false)
+				ui_scripted_tour:toggle_shortcuts(true) 
+				out("#### "..scripted_nor_sayl_manipulations.id.." ####")
+				ui_scripted_tour:construct_tour(scripted_nor_sayl_manipulations, in_nor_sayl_manipulations)
+			else
+				cm:steal_escape_key(false)
+				ui_scripted_tour:toggle_shortcuts(true) 
+				in_nor_sayl_manipulations:cancel()
+			end 
+		end, 0.1)
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_nor_sayl_manipulations:add_precondition(function() return not common.get_advice_history_string_seen("in_nor_sayl_manipulations") end)
+in_nor_sayl_manipulations:set_wait_for_fullscreen_panel_dismissed(false)
+in_nor_sayl_manipulations:set_should_lock_ui(true)
+in_nor_sayl_manipulations:set_reduce_pause_before_triggering(true)
+in_nor_sayl_manipulations:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		local panel = find_uicomponent(core:get_ui_root(), "dlc27_nor_sayl_manipulations", "panel_container")
+	 	if panel and panel:Visible() then
+			cm:steal_escape_key(true)
+			ui_scripted_tour:toggle_shortcuts(false)
+			common.set_advice_history_string_seen("in_nor_sayl_manipulations")
+			return true
+		end 
+	end
+)
+
+scripted_nor_sayl_manipulations = {
+	id = "in_nor_sayl_manipulations",
+	localised_name = "ui_text_replacements_localised_text_wh3_dlc27_hp_campaign_title_nor_manipulations",
+
+	{
+		id = "in_nor_sayl_manipulations_1",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "rituals") end,
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_nor_manipulations_text_pointer_1",
+			direction = "left",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "in_nor_sayl_manipulations_2",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "CcoCampaignRitual103wh3_dlc27_sayl_manipulations_faction_vision") end,
+			function() return find_uicomponent(core:get_ui_root(), "CcoCampaignRitual103wh3_dlc27_sayl_manipulations_region_spoils") end,
+			function() return find_uicomponent(core:get_ui_root(), "CcoCampaignRitual103wh3_dlc27_sayl_manipulations_force_bundle") end,
+			function() return find_uicomponent(core:get_ui_root(), "CcoCampaignRitual103wh3_dlc27_sayl_manipulations_self_magic") end,
+			
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_nor_manipulations_text_pointer_2",
+			direction = "left",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "in_nor_sayl_manipulations_3",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "button_perform") end,
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_nor_manipulations_text_pointer_3",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "in_nor_sayl_manipulations_4", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "main_panel_holder", "attention_tracker", "fill_bar_radial") end,
+		},
+		text_box = {
+			text = "wh3_dlc27_text_pointer_nor_manipulations_text_pointer_4",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+}
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -6434,6 +8490,117 @@ function ui_scripted_tour:construct_tour(tour, intervention)
 			local chaos_dwarfs_forge_back_button = find_uicomponent("hellforge_panel_main", "button_close_holder", "button_ok");
 			if chaos_dwarfs_forge_back_button and chaos_dwarfs_forge_back_button:Visible() == true then
 				chaos_dwarfs_forge_back_button:SetState("active")	
+			end 
+
+			local army_state_default = find_uicomponent("hud_campaign", "BL_parent", "land_stance_button_stack", "button_MILITARY_FORCE_ACTIVE_STANCE_TYPE_DEFAULT");
+			if army_state_default and army_state_default:Visible() == true then
+				army_state_default:SetState("active")	
+			end 
+			
+			local army_state_channeling = find_uicomponent("hud_campaign", "BL_parent", "land_stance_button_stack", "button_MILITARY_FORCE_ACTIVE_STANCE_TYPE_CHANNELING");
+			if army_state_channeling and army_state_channeling:Visible() == true then
+				army_state_channeling:SetState("active")	
+			end 
+
+			local army_state_camp = find_uicomponent("hud_campaign", "BL_parent", "land_stance_button_stack", "button_MILITARY_FORCE_ACTIVE_STANCE_TYPE_SET_CAMP");
+			if army_state_camp and army_state_camp:Visible() == true then
+				army_state_camp:SetState("active")	
+			end 
+
+			local army_state_raid = find_uicomponent("hud_campaign", "BL_parent", "land_stance_button_stack", "button_MILITARY_FORCE_ACTIVE_STANCE_TYPE_LAND_RAID");
+			if army_state_raid and army_state_raid:Visible() == true then
+				army_state_raid:SetState("active")	
+			end 
+
+			local army_state_ambush = find_uicomponent("hud_campaign", "BL_parent", "land_stance_button_stack", "button_MILITARY_FORCE_ACTIVE_STANCE_TYPE_AMBUSH");
+			if army_state_ambush and army_state_ambush:Visible() == true then
+				army_state_ambush:SetState("active")	
+			end 
+			 
+			local army_state_world_roots = find_uicomponent("hud_campaign", "BL_parent", "land_stance_button_stack", "button_MILITARY_FORCE_ACTIVE_STANCE_TYPE_TUNNELING");
+			if army_state_world_roots and army_state_world_roots:Visible() == true then
+				army_state_world_roots:SetState("active")	
+			end 
+
+			local army_state_march = find_uicomponent("hud_campaign", "BL_parent", "land_stance_button_stack", "button_MILITARY_FORCE_ACTIVE_STANCE_TYPE_MARCH");
+			if army_state_march and army_state_march:Visible() == true then
+				army_state_march:SetState("active")	
+			end 
+
+			local army_state_camp_raiding = find_uicomponent("hud_campaign", "BL_parent", "land_stance_button_stack", "button_MILITARY_FORCE_ACTIVE_STANCE_TYPE_SET_CAMP_RAIDING");
+			if army_state_camp_raiding and army_state_camp_raiding:Visible() == true then
+				army_state_camp_raiding:SetState("active")	
+			end 
+
+			local dechala_marks_tour = find_uicomponent("dlc27_sla_marks_of_cruelty")
+			if dechala_marks_tour and dechala_marks_tour:Visible() == true then
+				if not cm:is_multiplayer() 
+				then 
+					local dechala_faction = cm:get_faction("wh3_dlc27_sla_the_tormentors");
+					if dechala_faction:pooled_resource_manager():resource("wh3_dlc27_sla_decadence"):value() >= 200 then  
+						local mark_coy_denial = find_uicomponent("wh3_dlc27_sla_marks_of_vindictiveness_coy_denial") 
+						local mark_the_scent_of_despair = find_uicomponent("wh3_dlc27_sla_marks_of_vindictiveness_the_scent_of_despair")
+						local mark_slothful_indolence = find_uicomponent("wh3_dlc27_sla_marks_of_vindictiveness_slothful_indolence")
+						local mark_ecstasy_of_pain = find_uicomponent("wh3_dlc27_sla_marks_of_vindictiveness_ecstasy_of_pain")
+						local mark_heed_the_lash = find_uicomponent("wh3_dlc27_sla_marks_of_vindictiveness_heed_the_lash")
+						local mark_upgrade = find_uicomponent("button_upgrade")
+						local close_button = find_uicomponent("dlc27_sla_marks_of_cruelty", "panel_main", "button_close_holder", "button_close")				
+						mark_coy_denial:SetState("inactive") 
+						mark_the_scent_of_despair:SetState("inactive")
+						mark_slothful_indolence:SetState("inactive")
+						mark_ecstasy_of_pain:SetState("inactive")
+						mark_heed_the_lash:SetState("inactive")
+						close_button:SetDisabled(true)
+						mark_upgrade:SetDisabled(true)
+						dechala_marks_listeners()
+						dechala_pre_battle_marks()
+					end
+				end	 
+			end	
+
+			local monstrous_arcanum = find_uicomponent("book_of_monster_hunts")
+			if monstrous_arcanum and monstrous_arcanum:Visible() == true then
+				local components = find_uicomponent("active_hunt_tab");
+				if components and components:Visible() == true then
+					core:add_listener(
+					"Norsca_Monstrous_Arcanum_Text_Pointer_Active_Hunt",
+					"PanelOpenedCampaign",
+					function(context)					
+						return context.string == "book_of_monster_hunts"
+					end,
+					function()
+						local highlight = find_uicomponent("fullscreen_highlight")
+						if not highlight or not highlight:Visible() then 
+							local components = find_uicomponent("active_hunt_tab");
+							local info_size_x, info_size_y = components:Dimensions()
+							local info_pos_x, info_pos_y = components:Position();
+ 							components:SimulateLClick()
+							local tp = text_pointer:new("tp_active_hunt", "left", 150, info_pos_x + (info_size_x / 2) +60, (info_pos_y + (info_size_y / 2)) +25);
+							tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_dlc27_text_pointer_nor_monstrous_arcanum_text_pointer_for_active_hunt") 
+							tp:set_style("semitransparent")
+							tp:set_topmost(true)
+							tp:set_highlight_close_button(0.5)
+							tp:set_close_button_callback(function()
+							tp:hide()
+								end)
+							tp:show()					
+						end 
+					end,
+					false
+				);				
+				end 
+			
+				core:add_listener(
+				"Scripted_Book_Of_Monster_Hunts_Panel_Closed",
+				"PanelClosedCampaign",
+				function(context) 
+					return context.string == "book_of_monster_hunts"  
+				end,
+				function()
+					core:hide_all_text_pointers()
+				end,
+				true
+				);			
 			end 
 
 			nt:restore_scripted_tour_controls_priority()
@@ -6679,4 +8846,419 @@ function ui_scripted_tour:find_valid_child_component(parent_component, ignore_co
 		end
 	end
 	return false
+end
+
+-- Additional Listeners 
+
+function dechala_marks_listeners()
+	highlight_component(true, true, "dlc27_sla_marks_of_cruelty", "panel_main", "content", "marks_section", "vindictiveness_holder", "vindictiveness_list", "mark_holder1", "wh3_dlc27_sla_marks_of_vindictiveness_supreme_ascendancy")
+	cm:steal_escape_key(true)
+	
+	local offerings_holder = find_uicomponent("dlc27_sla_marks_of_cruelty", "content", "marks_section", "gifts_holder", "gifts_list")
+	local spoils_holder = find_uicomponent("dlc27_sla_marks_of_cruelty", "content", "marks_section", "gifts_holder", "imports_list")
+
+	for i = 0, offerings_holder:ChildCount() - 1 do
+		local uic_child = UIComponent(offerings_holder:Find(i))
+		uic_child:SetInteractive(false)
+		uic_child:SetState("inactive")
+	end
+	for i = 0, spoils_holder:ChildCount() - 1 do
+		local uic_child = UIComponent(spoils_holder:Find(i))
+		uic_child:SetInteractive(false)
+		uic_child:SetState("inactive")
+	end
+
+	core:add_listener(
+		"Scripted_Tour_Supreme_Ascendancy_Buy",
+		"ComponentLClickUp",
+		function(context)					
+			return context.string == "wh3_dlc27_sla_marks_of_vindictiveness_supreme_ascendancy" and uicomponent_descended_from(UIComponent(context.component), "mark_holder1");
+		end,
+		function(context)
+			highlight_component(false, false, "dlc27_sla_marks_of_cruelty", "panel_main", "content", "marks_section", "vindictiveness_holder", "vindictiveness_list", "mark_holder1", "wh3_dlc27_sla_marks_of_vindictiveness_supreme_ascendancy")
+			highlight_component(true, true, "dlc27_sla_marks_of_cruelty", "panel_main", "content", "info_section", "list_clip", "list_box", "mark_info", "upgrade_components", "button_purchase")
+			highlight_component(false, false, "button_marks_of_cruelty")
+			local button_purchase = find_uicomponent("dlc27_sla_marks_of_cruelty", "panel_main", "content", "info_section", "list_clip", "list_box", "mark_info", "upgrade_components", "button_purchase")
+			core:show_fullscreen_highlight_around_components(25, false, true, button_purchase)
+		end,
+		false
+	)
+
+	core:add_listener(
+		"Scripted_Tour_Marks_of_Cruelty_Panel_Closed",
+		"PanelClosedCampaign",
+		function(context) 
+			return context.string == "dlc27_sla_marks_of_cruelty"  
+		end,
+		function()
+			local mark_coy_denial = find_uicomponent("wh3_dlc27_sla_marks_of_vindictiveness_coy_denial") 
+			local mark_the_scent_of_despair = find_uicomponent("wh3_dlc27_sla_marks_of_vindictiveness_the_scent_of_despair")
+			local mark_slothful_indolence = find_uicomponent("wh3_dlc27_sla_marks_of_vindictiveness_slothful_indolence")
+			local mark_ecstasy_of_pain = find_uicomponent("wh3_dlc27_sla_marks_of_vindictiveness_ecstasy_of_pain")
+			local mark_heed_the_lash = find_uicomponent("wh3_dlc27_sla_marks_of_vindictiveness_heed_the_lash")
+			local mark_upgrade = find_uicomponent("button_upgrade")
+			local close_button = find_uicomponent("dlc27_sla_marks_of_cruelty", "panel_main", "button_close_holder", "button_close")	
+			mark_coy_denial:SetState("active") 
+			mark_the_scent_of_despair:SetState("active")
+			mark_slothful_indolence:SetState("active")
+			mark_ecstasy_of_pain:SetState("active")
+			mark_heed_the_lash:SetState("active")
+			mark_upgrade:SetDisabled(false)
+			close_button:SetDisabled(false)
+			highlight_component(false, false, "dlc27_sla_marks_of_cruelty", "panel_main", "content", "info_section", "list_clip", "list_box", "mark_info", "upgrade_components", "button_purchase")
+			highlight_component(false, false, "dlc27_sla_marks_of_cruelty", "panel_main", "content", "marks_section", "vindictiveness_holder", "vindictiveness_list", "mark_holder1", "wh3_dlc27_sla_marks_of_vindictiveness_supreme_ascendancy")			
+		end,
+		false
+	);
+
+	core:add_listener(
+		"Scripted_Tour_Remove_Highlight_Purchase",
+		"ComponentLClickUp",
+		function(context)					
+			return context.string == "button_purchase" and uicomponent_descended_from(UIComponent(context.component), "upgrade_components");
+		end,
+		function(context)
+			local mark_coy_denial = find_uicomponent("wh3_dlc27_sla_marks_of_vindictiveness_coy_denial") 
+			local mark_the_scent_of_despair = find_uicomponent("wh3_dlc27_sla_marks_of_vindictiveness_the_scent_of_despair")
+			local mark_slothful_indolence = find_uicomponent("wh3_dlc27_sla_marks_of_vindictiveness_slothful_indolence")
+			local mark_ecstasy_of_pain = find_uicomponent("wh3_dlc27_sla_marks_of_vindictiveness_ecstasy_of_pain")
+			local mark_heed_the_lash = find_uicomponent("wh3_dlc27_sla_marks_of_vindictiveness_heed_the_lash")
+			local close_button = find_uicomponent("dlc27_sla_marks_of_cruelty", "panel_main", "button_close_holder", "button_close")
+			local mark_upgrade = find_uicomponent("button_upgrade")
+			mark_coy_denial:SetState("active") 
+			mark_the_scent_of_despair:SetState("active")
+			mark_slothful_indolence:SetState("active")
+			mark_ecstasy_of_pain:SetState("active")
+			mark_heed_the_lash:SetState("active")
+			close_button:SetDisabled(false)
+			mark_upgrade:SetDisabled(false)
+
+			local offerings_holder = find_uicomponent("dlc27_sla_marks_of_cruelty", "content", "marks_section", "gifts_holder", "gifts_list")
+			local spoils_holder = find_uicomponent("dlc27_sla_marks_of_cruelty", "content", "marks_section", "gifts_holder", "imports_list")
+
+			for i = 0, offerings_holder:ChildCount() - 1 do
+				local uic_child = UIComponent(offerings_holder:Find(i))
+				uic_child:SetInteractive(true)
+				uic_child:SetState("active")
+			end
+			for i = 0, spoils_holder:ChildCount() - 1 do
+				local uic_child = UIComponent(spoils_holder:Find(i))
+				uic_child:SetInteractive(true)
+				uic_child:SetState("active")
+			end
+			highlight_component(false, false, "dlc27_sla_marks_of_cruelty", "panel_main", "content", "info_section", "list_clip", "list_box", "mark_info", "upgrade_components", "button_purchase")
+			cm:steal_escape_key(false)
+			core:hide_fullscreen_highlight();
+		end,
+		false
+	)
+end	
+
+	core:add_listener(
+		"DechalaScriptedTourThrallsPoolRes_ResourceChanged",
+		"PooledResourceChanged",
+		function(context)
+			local pr = context:resource()
+			local faction = context:faction()
+			return pr:key() == "wh3_dlc27_sla_decadence" and pr:value() >= 200 and faction:is_human()
+		end,
+		function(context)
+			local faction = context:faction()
+			highlight_component(true, true, "button_marks_of_cruelty")
+			cm:callback(function()
+				highlight_component(false, false, "button_marks_of_cruelty")
+			end, 3)
+			core:remove_listener("DechalaScriptedTourThrallsPoolRes_RegularIncome")
+		end,
+		false
+	)
+
+	core:add_listener(
+		"DechalaScriptedTourThrallsPoolRes_RegularIncome",
+		"PooledResourceRegularIncome",
+		function(context)
+			local pr = context:resource()
+			local faction = context:faction()
+			return pr:key() == "wh3_dlc27_sla_decadence" and pr:value() >= 200 and faction:is_human()
+		end,
+		function(context)
+			local faction = context:faction()
+			highlight_component(true, true, "button_marks_of_cruelty")
+			cm:callback(function()
+				highlight_component(false, false, "button_marks_of_cruelty")
+			end, 3)
+			core:remove_listener("DechalaScriptedTourThrallsPoolRes_ResourceChanged")
+		end,
+		false
+	)
+
+-- Additional functions
+
+function dechala_pre_battle_marks()
+	out(" ### Pre-battle Marks ###")
+	core:add_listener(
+		"PanelOpenedCampaign_Dechala_pre_battle_screen",
+		"PanelOpenedCampaign",
+		function(context) 
+			return context.string == "popup_pre_battle" 
+		end,
+		function()
+			components = find_uicomponent("ancillaries_and_dishes_holder", "marks_vindictiveness_holder", "marks_listview", "list_clip", "list_box")
+			highlight_component(true, true, "ancillaries_and_dishes_holder", "marks_vindictiveness_holder", "marks_listview", "list_clip", "list_box")
+			local tp = text_pointer:new_from_component(
+				"tp_scripted_tour",
+				"bottom",
+				25,
+				components,
+				0.5,
+				0
+			)
+			tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_dlc27_text_pointer_sla_pre_battle_marks") 
+			tp:set_style("semitransparent")
+			tp:set_topmost(true)
+			tp:set_highlight_close_button(0.5)
+			tp:set_close_button_callback(function() core:hide_fullscreen_highlight(); 
+				tp:hide()
+				highlight_component(false, false, "ancillaries_and_dishes_holder", "marks_vindictiveness_holder", "marks_listview", "list_clip", "list_box")
+				end)
+			tp:show()					
+			end,
+		false
+	)
+
+	core:add_listener(
+		"PanelOpenedCampaign_Dechala_pre_battle_closed_marks",
+		"PanelClosedCampaign",
+		function(context) 
+			return context.string == "popup_pre_battle"  
+		end,
+		function()
+			highlight_component(false, false, "ancillaries_and_dishes_holder", "marks_vindictiveness_holder", "marks_listview", "list_clip", "list_box")
+			highlight_component(false, false, "popup_pre_battle", "allies_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units")
+			core:remove_listener("PanelOpenedCampaign_Dechala_pre_battle_screen")
+			core:remove_listener("Dechala_Click_Mark")
+		end,
+		false
+	);
+
+	core:add_listener(
+		"PanelOpenedCampaign_Dechala_pre_battle_closed_marks_retreat",
+		"PanelClosedCampaign",
+		function(context) 
+			return context.string == "button_retreat" and uicomponent_descended_from(UIComponent(context.component), "pre_battle_deployment_panel");
+		end,
+		function()
+			highlight_component(false, false, "ancillaries_and_dishes_holder", "marks_vindictiveness_holder", "marks_listview", "list_clip", "list_box")
+			highlight_component(false, false, "popup_pre_battle", "allies_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units")
+			core:remove_listener("PanelOpenedCampaign_Dechala_pre_battle_screen")
+			core:remove_listener("Dechala_Click_Mark")
+		end,
+		false
+	);
+
+	core:add_listener(
+		"Dechala_Click_Mark_Vindictiveness_Ascendancy",
+		"ComponentLClickUp",
+		function(context)					
+			return context.string == "CcoCookingRecipeRecordwh3_dlc27_recipe_mark_of_vindictiveness_ascendancy" and uicomponent_descended_from(UIComponent(context.component), "marks_vindictiveness_holder");
+		end,
+		function()
+			highlight_component(false, false, "ancillaries_and_dishes_holder", "marks_vindictiveness_holder", "marks_listview", "list_clip", "list_box")
+			highlight_component(true, true, "popup_pre_battle", "allies_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units")		
+		
+			cm:callback(function()
+				highlight_component(false, false, "popup_pre_battle", "allies_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units")		 
+			end, 0.5)
+		end,
+		false
+	);
+
+	core:add_listener(
+		"Dechala_Click_Mark_Vindictiveness_Denial",
+		"ComponentLClickUp",
+		function(context)					
+			return context.string == "CcoCookingRecipeRecordwh3_dlc27_recipe_mark_of_vindictiveness_denial" and uicomponent_descended_from(UIComponent(context.component), "marks_vindictiveness_holder");
+		end,
+		function()
+			highlight_component(false, false, "ancillaries_and_dishes_holder", "marks_vindictiveness_holder", "marks_listview", "list_clip", "list_box")
+			highlight_component(true, true, "popup_pre_battle", "allies_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units")		
+		
+			cm:callback(function()
+				highlight_component(false, false, "popup_pre_battle", "allies_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units")		 
+			end, 0.5)
+		end,
+		false
+	);
+
+	core:add_listener(
+		"Dechala_Click_Mark_Vindictiveness_Indolence",
+		"ComponentLClickUp",
+		function(context)					
+			return context.string == "CcoCookingRecipeRecordwh3_dlc27_recipe_mark_of_vindictiveness_indolence" and uicomponent_descended_from(UIComponent(context.component), "marks_vindictiveness_holder");
+		end,
+		function()
+			highlight_component(false, false, "ancillaries_and_dishes_holder", "marks_vindictiveness_holder", "marks_listview", "list_clip", "list_box")
+			highlight_component(true, true, "popup_pre_battle", "allies_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units")		
+		
+			cm:callback(function()
+				highlight_component(false, false, "popup_pre_battle", "allies_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units")		 
+			end, 0.5)
+		end,
+		false
+	);
+
+	core:add_listener(
+		"Dechala_Click_Mark_Vindictiveness_Pain",
+		"ComponentLClickUp",
+		function(context)					
+			return context.string == "CcoCookingRecipeRecordwh3_dlc27_recipe_mark_of_vindictiveness_pain" and uicomponent_descended_from(UIComponent(context.component), "marks_vindictiveness_holder");
+		end,
+		function()
+			highlight_component(false, false, "ancillaries_and_dishes_holder", "marks_vindictiveness_holder", "marks_listview", "list_clip", "list_box")
+			highlight_component(true, true, "popup_pre_battle", "allies_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units")		
+		
+			cm:callback(function()
+				highlight_component(false, false, "popup_pre_battle", "allies_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units")		 
+			end, 0.5)
+		end,
+		false
+	);
+
+	core:add_listener(
+		"Dechala_Click_Mark_Vindictiveness_Despair",
+		"ComponentLClickUp",
+		function(context)					
+			return context.string == "CcoCookingRecipeRecordwh3_dlc27_recipe_mark_of_vindictiveness_despair" and uicomponent_descended_from(UIComponent(context.component), "marks_vindictiveness_holder");
+		end,
+		function()
+			highlight_component(false, false, "ancillaries_and_dishes_holder", "marks_vindictiveness_holder", "marks_listview", "list_clip", "list_box")
+			highlight_component(true, true, "popup_pre_battle", "allies_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units")		
+		
+			cm:callback(function()
+				highlight_component(false, false, "popup_pre_battle", "allies_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units")		 
+			end, 0.5)
+		end,
+		false
+	);
+
+	core:add_listener(
+		"Dechala_Click_Mark_Vindictiveness_Lash",
+		"ComponentLClickUp",
+		function(context)					
+			return context.string == "CcoCookingRecipeRecordwh3_dlc27_recipe_mark_of_vindictiveness_lash" and uicomponent_descended_from(UIComponent(context.component), "marks_vindictiveness_holder");
+		end,
+		function()
+			highlight_component(false, false, "ancillaries_and_dishes_holder", "marks_vindictiveness_holder", "marks_listview", "list_clip", "list_box")
+			highlight_component(true, true, "popup_pre_battle", "allies_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units")		
+		
+			cm:callback(function()
+				highlight_component(false, false, "popup_pre_battle", "allies_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units")		 
+			end, 0.5)
+		end,
+		false
+	);
+	
+	core:add_listener(
+	"Dechala_Mark_Click_Auto_resolve_remove_text_pointer",
+	"ComponentLClickUp",
+	function(context)
+		return context.string == "button_autoresolve" and uicomponent_descended_from(UIComponent(context.component), "pre_battle_deployment_panel");
+	end,
+	function(context)	
+		core:hide_all_text_pointers()
+		highlight_component(false, false, "ancillaries_and_dishes_holder", "marks_vindictiveness_holder", "marks_listview", "list_clip", "list_box")
+		highlight_component(false, false, "popup_pre_battle", "allies_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units")
+		core:remove_listener("PanelOpenedCampaign_Dechala_pre_battle_screen")
+		core:remove_listener("Dechala_Click_Mark")	
+	end,
+	false
+	)	
+
+	core:add_listener(
+	"Dechala_Mark_Click_Auto_resolve_remove_text_pointer_retreat",
+	"ComponentLClickUp",
+	function(context)
+		return context.string == "button_retreat" and uicomponent_descended_from(UIComponent(context.component), "pre_battle_deployment_panel");
+	end,
+	function(context)	
+		core:hide_all_text_pointers()
+		highlight_component(false, false, "ancillaries_and_dishes_holder", "marks_vindictiveness_holder", "marks_listview", "list_clip", "list_box")
+		highlight_component(false, false, "popup_pre_battle", "allies_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units")
+		core:remove_listener("PanelOpenedCampaign_Dechala_pre_battle_screen")
+		core:remove_listener("Dechala_Click_Mark")
+	end,
+	false
+	)	
+
+end
+
+core:add_listener(
+		"PanelOpenedCampaign_Wulfric_Occupy_Settlement",
+		"PanelOpenedCampaign",
+		function(context) 
+			return context.string == "settlement_captured"
+		end,
+		function()
+		local wulfric_faction = cm:get_faction("wh_dlc08_nor_norsca")
+			if wulfric_faction and wulfric_faction:is_null_interface() == false and wulfric_faction:is_human() and not cm:get_saved_value("wulfric_settlement_captured")
+			then
+ 				local components = find_uicomponent("652221506");
+				if components and components:Visible() == true then
+					local tp = text_pointer:new_from_component(
+					"tp_wulfric_settlement",
+					"bottom",
+					30,
+					components,
+					0.5,
+					0
+					)
+					tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_dlc27_text_pointer_wulfric_occupy_settlement") 
+					tp:set_style("semitransparent")
+					tp:set_topmost(true)
+					tp:set_highlight_close_button(0.5)
+					tp:set_close_button_callback(
+						function()
+							tp:hide()
+						end
+					);
+					cm:callback(
+						function()
+							tp:show();
+							cm:set_saved_value("wulfric_settlement_captured")
+						end,
+						0.3
+					);
+				end 
+			end 	
+		end,
+	false
+)
+
+core:add_listener(
+    "PanelCLosedCampaign_Wulfric_Occupy_Settlement",
+    "PanelClosedCampaign",
+    function(context)
+        return context.string == "settlement_captured"
+    end,
+    function()
+        local wulfric_faction = cm:get_faction("wh_dlc08_nor_norsca")
+        if wulfric_faction and wulfric_faction:is_null_interface() == false and wulfric_faction:is_human() then
+            core:hide_all_text_pointers()
+        end
+    end,
+    false  
+)
+
+function stop_moving_all_player_characters(faction_name)
+	
+	local character_list = cm:get_faction(faction_name):character_list()
+		for i = 0, character_list:num_items() - 1 do
+		cm:is_character_moving(
+			character_list:item_at(i):cqi(), 
+			function()
+				cm:move_character(character_list:item_at(i):cqi(), character_list:item_at(i):logical_position_x(), character_list:item_at(i):logical_position_y())
+			end, 
+			function() end
+		)
+	end
 end

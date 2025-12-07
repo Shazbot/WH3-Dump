@@ -26,12 +26,28 @@ function Forced_Battle_Manager:trigger_forced_battle_with_generated_army(
 	opt_general_level,
 	opt_effect_bundle,
 	opt_player_is_generated_force,
-	opt_forced_battle_key_override
+	opt_forced_battle_key_override,
+	opt_use_pre_generated_template
 	)
-
+	
 	local forced_battle_key = opt_forced_battle_key_override or generated_force_template.."_forced_battle"
 	local forced_battle = Forced_Battle_Manager:setup_new_battle(forced_battle_key)
-	local generated_force =  WH_Random_Army_Generator:generate_random_army(forced_battle_key, generated_force_template, generated_force_size, generated_force_power, true, false)
+	
+	local generated_force
+	
+	-- Check if we use previously generated force template or we want to generate
+	if opt_use_pre_generated_template then
+		local ram = random_army_manager
+		if ram:get_force_by_key(generated_force_template) then
+			generated_force = ram:generate_force(generated_force_template, generated_force_size, false)
+		else
+			script_error("Error: trying to generate a force with a previously generated template but no such template exists.")
+			return false
+		end
+	else
+		generated_force =  WH_Random_Army_Generator:generate_random_army(forced_battle_key, generated_force_template, generated_force_size, generated_force_power, true, false)
+	end
+
 	forced_battle:add_new_force(forced_battle_key, generated_force, generated_force_faction, destroy_generated_force_after_battle, opt_effect_bundle, opt_general_subtype,opt_general_level)
 
 	local attacker = target_force_cqi
@@ -114,7 +130,7 @@ end
 ---force needs a unique ref
 ---if opt_destroy_after_battle is set to false, the force will persist if it survives the forced battle.
 ---an effect bundle can be assigned to the force that will be applied on spawn
-function forced_battle:add_new_force(force_key, unit_list, faction_key, destroy_after_battle, opt_effect_bundle,opt_general_subtype,opt_general_level)
+function forced_battle:add_new_force(force_key, unit_list, faction_key, destroy_after_battle, opt_effect_bundle,opt_general_subtype,opt_general_level, opt_general_forename, opt_general_surname)
 	local force_list = self.force_list
 	
 	if not is_string(force_key) then
@@ -157,6 +173,8 @@ function forced_battle:add_new_force(force_key, unit_list, faction_key, destroy_
 	end
 
 	new_force.general_subtype = opt_general_subtype or nil
+	new_force.general_forename = opt_general_forename or ""
+	new_force.general_surname = opt_general_surname or ""
 
 	if new_force.general_subtype  ~= nil and not is_string(new_force.general_subtype ) then
 		script_error("ERROR: Forced Battle Manager: new forced battle force "..force_key.." has been given an general_subtype parameter, but parameter is not a string")
@@ -181,7 +199,8 @@ end
 --- x/y coordinates only required if target force is a created force
 --- attacking forces must be able to attack (not garrisoned or in a stance)
 --- defaults to not an ambush. Be wary of using ambushes if they can occur on tiles without the correct ambush setup (e.g. sea tiles, settlement maps)
-function forced_battle:trigger_battle(attacker_force, target_force, opt_target_x, opt_target_y, opt_is_ambush)
+--- opt_force_regular_battle will trigger an attack of opportunity but make the pre-battle UI display it as a regular battle
+function forced_battle:trigger_battle(attacker_force, target_force, opt_target_x, opt_target_y, opt_is_ambush, opt_force_regular_battle)
 
 	self.target = {}
 	self.attacker = {}
@@ -248,6 +267,7 @@ function forced_battle:trigger_battle(attacker_force, target_force, opt_target_x
 	end
 
 	self.is_ambush = opt_is_ambush or false
+	self.force_regular_battle = opt_force_regular_battle or false
 
 
 
@@ -413,7 +433,7 @@ function forced_battle:forced_battle_stage_2()
 			true,
 				function()
 					cm:callback(function()
-						cm:force_attack_of_opportunity(self.attacker.cqi, self.target.cqi, self.is_ambush)
+						cm:force_attack_of_opportunity(self.attacker.cqi, self.target.cqi, self.is_ambush, self.force_regular_battle)
 					end, 0.05)
 				end,
 			false
@@ -424,7 +444,7 @@ function forced_battle:forced_battle_stage_2()
 			cm:force_declare_war(attacker_faction:name(), target_faction:name(),false,false)
 		else
 			cm:callback(function()
-				cm:force_attack_of_opportunity(self.attacker.cqi, self.target.cqi, self.is_ambush)
+				cm:force_attack_of_opportunity(self.attacker.cqi, self.target.cqi, self.is_ambush, self.force_regular_battle)
 			end, 0.05)
 		end
 	
@@ -444,7 +464,7 @@ function forced_battle:spawn_generated_force(force_key, x, y)
 
 	local forced_battle_force = invasion_manager:new_invasion(force.key,force.faction_key, force.unit_list,{new_x, new_y})
 	if force.general_subtype ~= nil then
-		forced_battle_force:create_general(false, force.general_subtype)
+		forced_battle_force:create_general(false, force.general_subtype, force.general_forename or "", "", force.general_surname or "")
 	end
 	if force.general_level ~= nil then
 		forced_battle_force:add_character_experience(force.general_level, true)

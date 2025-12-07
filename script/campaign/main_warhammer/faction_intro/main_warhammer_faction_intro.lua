@@ -290,8 +290,8 @@ data.faction_intros = {
 	--------------------
 	wh_dlc08_nor_norsca = faction_intro_data:new{
 		preset = data.intro_presets.standard,
-		cam_cutscene_start = {x = 292.087036, y = 613.246582, d = 22.373718, b = 0.0, h = 62.854267,},
-		cam_gameplay_start = {x = 292.087036, y = 609.878967, d = 5.863022, b = 0, h = 7.007546,},
+		cam_cutscene_start = {x = 102, y = 362.770111, d = 22.373718, b = 0.0, h = 62.854267,},
+		cam_gameplay_start = {x = 102, y = 362.770111, d = 8.227218, b = 0, h = 8.007546,},
 		advice_line = "wh3_dlc21_ie_camp_nor_wulfrik_intro_01",
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},
@@ -303,6 +303,15 @@ data.faction_intros = {
 		advice_line = "wh3_dlc21_ie_camp_nor_throgg_intro_01",
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},
+
+	wh3_dlc27_nor_sayl = faction_intro_data:new{
+		preset = data.intro_presets.standard,
+		cam_cutscene_start = {x = 841.128418, y = 558.952209,	d = 6.163025, b = 0,	h = 65.018692,},
+		cam_gameplay_start = {x = 840.790283, y = 567.603516,	d = 13.122073, b = 0, h = 10.959585,},
+		advice_line = "wh3_dlc27_ie_camp_nor_sayl_intro_01",
+		cutscene_style = data.cutscene_styles.zoom_in_and_speak,
+		fullscreen_movie = "warhammer3/nor/sayl_intro"
+	},	
 
 	wh3_dlc20_chs_azazel = faction_intro_data:new{
 		preset = data.intro_presets.standard,
@@ -361,6 +370,14 @@ data.faction_intros = {
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},
 
+	wh3_dlc27_hef_aislinn = faction_intro_data:new{
+		preset = data.intro_presets.standard,
+		cam_cutscene_start = {x = 604, y = 64.5, d = 22.432037, b = 0.0, h = 65.031822,},
+		cam_gameplay_start = {x = 605.24176, y = 65.059349, d = 12.343021, b = 0, h = 9.5318,},
+		advice_line = "wh3_dlc27_ie_camp_hef_aislinn_intro_01",
+		cutscene_style = data.cutscene_styles.zoom_in_and_speak,
+		fullscreen_movie = "warhammer3/hef/aislinn_intro"
+	},
 
 	--------------------
 	-------EMPIRE-------
@@ -699,6 +716,14 @@ data.faction_intros = {
 		fullscreen_movie = "warhammer3/kho/skulltaker_intro"
 	},
 
+	wh3_dlc27_sla_masque_of_slaanesh = faction_intro_data:new{
+		preset = data.intro_presets.standard,
+		cam_cutscene_start = {x = 44.29175, y = 256.292493,	d = 28.640884, b = 0,	h = 68.461643,},
+		cam_gameplay_start = {x = 45.290344, y = 245.298386,	d = 5.53924, b = 0, h = 4.601885},
+		advice_line = "wh3_dlc27_ie_camp_sla_masque_intro_01",
+		cutscene_style = data.cutscene_styles.zoom_in_and_speak,
+	},
+	
 
 	--------------------
 	-------KHEMRI-------
@@ -1004,6 +1029,14 @@ data.faction_intros = {
 		cam_gameplay_start = {x = 886.934021, y = 282.235626,	d = 8.666168, b = 0, h = 10.348305,},
 		advice_line = "wh3_dlc21_ie_camp_lzd_nakai_intro_01",
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
+	},
+	wh3_dlc27_sla_the_tormentors = faction_intro_data:new{
+		preset = data.intro_presets.standard,
+		cam_cutscene_start = {x = 890, y = 255,	d = 20.938446, b = 0.0,	h = 50.247318,},
+		cam_gameplay_start = {x = 899, y = 253,	d = 8.666168, b = 0, h = 10.348305,},
+		advice_line = "wh3_dlc27_ie_camp_sla_dechala_intro_01",
+		cutscene_style = data.cutscene_styles.zoom_in_and_speak,
+		fullscreen_movie = "warhammer3/sla/dechala_intro"
 	}
 }
 

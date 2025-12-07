@@ -102,6 +102,10 @@ custom_loading_screens_no_intro = {
 	["2026198078"] = "wh3_dlc25_nur_epidemius_gc",
 	["1835770988"] = "wh3_dlc26_kho_skulltaker_gc",
 	["1851003875"] = "wh3_dlc26_kho_arbaal_gc",
+	["1966959262"] = "wh3_dlc27_sla_dechala_gc",
+	["1182940351"] = "wh3_dlc27_sla_masque_gc",
+	["2092142160"] = "wh3_dlc27_hef_aislinn_gc",
+	["1176817909"] = "wh3_dlc27_nor_sayl_gc",
 	
 	-- chaos map
 	["780864164"] = "wh3_main_ksl_the_ice_court",

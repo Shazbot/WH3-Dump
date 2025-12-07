@@ -535,8 +535,16 @@ local function add_narrative_data_for_playable_faction(faction_key)
 		narrative.add_data_for_faction(faction_key, "shared_technology_chain_block", true); -- daemon prince has no technology
 	end;
 	
-	
-	
+
+	-- HIGH ELVES
+
+	-- Teclis
+
+	if faction_key == "wh2_main_hef_order_of_loremasters" then
+		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_control_province_mission_key", "wh3_dlc27_teclis_saphery_confederation_mission"); -- Teclis has a unique mission for obtaining his first province, so this mission chain is not needed
+		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_control_province_mission_rewards", {payload.money(1500, faction_key), payload.pooled_resource_mission_payload("wh3_dlc27_hef_scrolls_of_power", "wh3_dlc27_hef_scrolls_of_power_other", 50)});
+		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_control_province_block", true);
+	end;
 	
 	
 	-- BEASTMEN
@@ -750,6 +758,272 @@ local function add_narrative_data_for_playable_faction(faction_key)
 	-- Gorbad
 	if faction_key == "wh3_dlc26_grn_gorbad_ironclaw" then
 		narrative.add_data_for_faction(faction_key, "greenskins_da_plan_trigger_campaign_start_equip_tactic_block", false)
+	end
+
+
+	--SLAANESH
+
+	--Dechala
+	if faction_key == "wh3_dlc27_sla_the_tormentors" then
+		narrative.add_data_for_faction(faction_key, "slaanesh_gift_of_slaanesh_earn_devotees_from_gifts_block", true);
+		narrative.add_data_for_faction(faction_key, "slaanesh_devotees_event_gain_devotees_block", true);
+		narrative.add_data_for_faction(faction_key, "slaanesh_devotees_trigger_expert_on_devotees_block", true);
+		narrative.add_data_for_faction(faction_key, "slaanesh_devotees_event_gain_many_devotees_block", true);
+		narrative.add_data_for_faction(faction_key, "slaanesh_seductive_influence_advice_query_block", true);
+		narrative.add_data_for_faction(faction_key, "slaanesh_seductive_influence_query_has_unlocked_option_block", true);
+		narrative.add_data_for_faction(faction_key, "slaanesh_seductive_influence_unlock_diplomatic_option_block", true);
+		narrative.add_data_for_faction(faction_key, "slaanesh_seductive_influence_trigger_expert_on_options_unlocked_block", true);
+		narrative.add_data_for_faction(faction_key, "slaanesh_seductive_influence_earn_max_influence_block", true);
+		narrative.add_data_for_faction(faction_key, "slaanesh_seduction_event_seduce_unit_block", true);
+		narrative.add_data_for_faction(faction_key, "slaanesh_seduction_research_seduction_technology_block", true);
+	end
+
+
+	-- The Masque of Slaanesh
+	if faction_key == "wh3_dlc27_sla_masque_of_slaanesh" then
+
+		narrative.add_data_for_faction(faction_key, "slaanesh_seductive_influence_query_has_unlocked_option_block", true);
+		narrative.add_data_for_faction(faction_key, "slaanesh_seductive_influence_unlock_diplomatic_option_block", true);
+		narrative.add_data_for_faction(faction_key, "slaanesh_seductive_influence_trigger_expert_on_options_unlocked_block", true);
+		narrative.add_data_for_faction(faction_key, "slaanesh_seductive_influence_earn_max_influence_block", true);
+		
+		local tempo_level_threshold = 2
+
+		local tempo_initiatives_keys_level_1_substring = "wh3_dlc27_eternal_dance_tempo_1"
+
+		local tempo_initiatives_keys_level_3_army_abilities_substring = "wh3_dlc27_eternal_dance_tempo_3_ability"
+
+		local tempo_initiatives_keys_level_4_substring = "wh3_dlc27_eternal_dance_tempo_4"
+
+		local tempo_rituals_keys_substring = "wh3_dlc27_sla_ritual_masque_of"
+
+
+		-- Reach Tempo level 2
+		do
+			local name = "masque_tempo_level_2";
+			
+			if not narrative.get(faction_key, name .. "_block") then
+				narrative_triggers.generic( --TODO: This trigger doesnt work
+					name,																																			-- unique name for this narrative trigger
+					faction_key,																																	-- key of faction to which it applies
+					narrative.get(faction_key, name .. "_start_messages") or "StartNarrativeEvents",																-- script message(s) on which to start
+					narrative.get(faction_key, name .. "_target_messages") or "MasqueLevel1TempoReached",											-- target message(s) to trigger
+					narrative.get(faction_key, name .. "_cancel_messages"),																							-- script message(s) on which to cancel
+					narrative.get(faction_key, name .. "_event") or "CharacterInitiativeActivationChangedEvent",																-- event name
+					narrative.get(faction_key, name .. "_condition") or																								-- event condition
+						function(context)
+							-- Return true if the player has unlocked level 1 of Masque's Tempo
+							return string.find(context:initiative():record_key(), tempo_initiatives_keys_level_1_substring)
+						end,
+					narrative.get(faction_key, name .. "_immediate") or true																						-- trigger immediately or via intervention
+				);
+
+				narrative_events.generic(
+					name,																																			-- unique name for this narrative event
+					faction_key,																																	-- key of faction to which it applies
+					narrative.get(faction_key, name .. "_advice_key"),																								-- key of advice to deliver
+					narrative.get(faction_key, name .. "_mission_key") or "wh3_dlc27_camp_narrative_sla_masque_up_tempo_01",					-- key of mission to deliver
+					narrative.get(faction_key, name .. "_mission_text") or "wh3_dlc27_mission_narrative_sla_masque_up_tempo_01",						-- key of mission objective text
+					narrative.get(faction_key, name .. "_event_listeners") or {																						-- event/condition listeners
+						{
+							event = "EternalDanceTempoThresholdUpgraded",
+							condition =	function(context)
+								-- Return true when the player has unlocked level 2 of Masque's Tempo
+								if context.stored_table.general:faction():name() == faction_key then 
+									return context.stored_table.tempo_level >= tempo_level_threshold 
+								end
+							end
+						}
+					},
+					narrative.get(faction_key, name .. "_camera_scroll_callback"),																			-- camera scroll callback
+					narrative.get(faction_key, name .. "_mission_issuer"),																					-- mission issuer (can be nil in which case default is used)
+					narrative.get(faction_key, name .. "_mission_rewards") or {
+						payload.money(500),
+						payload.ancillary_mission_payload(faction_key, "general", "common")
+					},
+					narrative.get(faction_key, name .. "_trigger_messages") or "MasqueLevel1TempoReached",
+					narrative.get(faction_key, name .. "_on_issued_messages") or "MasqueLevel2TempoStarted",										-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
+					narrative.get(faction_key, name .. "_completed_messages") or "MasqueLevel2TempoCompleted",										-- script message(s) to trigger when this mission is completed
+					narrative.get(faction_key, name .. "_inherit_list")																						-- list of other narrative events to inherit rewards from (may be nil)
+				);
+			end;
+
+		end;
+
+		-- Choose an army ability, triggered on reaching Tempo level 3
+		do
+			local name = "masque_tempo_level_3";
+			
+			if not narrative.get(faction_key, name .. "_block") then
+				narrative_events.generic(
+					name,																																			-- unique name for this narrative event
+					faction_key,																																	-- key of faction to which it applies
+					narrative.get(faction_key, name .. "_advice_key"),																								-- key of advice to deliver
+					narrative.get(faction_key, name .. "_mission_key") or "wh3_dlc27_camp_narrative_sla_masque_up_tempo_02",					-- key of mission to deliver
+					narrative.get(faction_key, name .. "_mission_text") or "wh3_dlc27_mission_narrative_sla_masque_up_tempo_02",						-- key of mission objective text
+					narrative.get(faction_key, name .. "_event_listeners") or {																						-- event/condition listeners
+						{
+							event = "CharacterInitiativeActivationChangedEvent",
+							condition =	function(context)
+
+								return string.find(context:initiative():record_key(), tempo_initiatives_keys_level_3_army_abilities_substring)
+							end
+						}
+					},
+					narrative.get(faction_key, name .. "_camera_scroll_callback"),																			-- camera scroll callback
+					narrative.get(faction_key, name .. "_mission_issuer"),																					-- mission issuer (can be nil in which case default is used)
+					narrative.get(faction_key, name .. "_mission_rewards") or {
+						payload.money(1000),
+						payload.ancillary_mission_payload(faction_key, "arcane_item", "common")
+					},
+					narrative.get(faction_key, name .. "_trigger_messages") or "MasqueLevel2TempoCompleted",
+					narrative.get(faction_key, name .. "_on_issued_messages") or "MasqueLevel3TempoStarted",										-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
+					narrative.get(faction_key, name .. "_completed_messages") or "MasqueLevel3TempoCompleted",										-- script message(s) to trigger when this mission is completed
+					narrative.get(faction_key, name .. "_inherit_list")																						-- list of other narrative events to inherit rewards from (may be nil)
+				);
+			end;
+
+		end;
+
+		do
+			local name = "masque_tempo_level_4";
+			
+			if not narrative.get(faction_key, name .. "_block") then
+				narrative_events.generic(
+					name,																																			-- unique name for this narrative event
+					faction_key,																																	-- key of faction to which it applies
+					narrative.get(faction_key, name .. "_advice_key"),																								-- key of advice to deliver
+					narrative.get(faction_key, name .. "_mission_key") or "wh3_dlc27_camp_narrative_sla_masque_up_tempo_03",					-- key of mission to deliver
+					narrative.get(faction_key, name .. "_mission_text") or "wh3_dlc27_mission_narrative_sla_masque_up_tempo_03",						-- key of mission objective text
+					narrative.get(faction_key, name .. "_event_listeners") or {																						-- event/condition listeners
+						{
+							event = "CharacterInitiativeActivationChangedEvent",
+							condition =	function(context)
+								return string.find(context:initiative():record_key(), tempo_initiatives_keys_level_4_substring)
+							end
+						}
+					},
+					narrative.get(faction_key, name .. "_camera_scroll_callback"),																			-- camera scroll callback
+					narrative.get(faction_key, name .. "_mission_issuer"),																					-- mission issuer (can be nil in which case default is used)
+					narrative.get(faction_key, name .. "_mission_rewards") or {
+						payload.money(1250),
+						payload.ancillary_mission_payload(faction_key, "arcane_item", "uncommon")
+					},														-- script message(s) on which to trigger when received
+					narrative.get(faction_key, name .. "_trigger_messages") or "MasqueLevel3TempoCompleted",
+					narrative.get(faction_key, name .. "_on_issued_messages") or "MasqueLevel4TempoStarted",										-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
+					narrative.get(faction_key, name .. "_completed_messages") or "MasqueLevel4TempoCompleted",										-- script message(s) to trigger when this mission is completed
+					narrative.get(faction_key, name .. "_inherit_list")																						-- list of other narrative events to inherit rewards from (may be nil)
+				);
+			end;
+
+		end;
+
+		do
+			local name = "masque_tempo_ritual_cast";
+			
+			if not narrative.get(faction_key, name .. "_block") then
+				narrative_events.generic(
+					name,																																			-- unique name for this narrative event
+					faction_key,																																	-- key of faction to which it applies
+					narrative.get(faction_key, name .. "_advice_key"),																								-- key of advice to deliver
+					narrative.get(faction_key, name .. "_mission_key") or "wh3_dlc27_camp_narrative_sla_masque_up_tempo_04",					-- key of mission to deliver
+					narrative.get(faction_key, name .. "_mission_text") or "wh3_dlc27_mission_narrative_sla_masque_up_tempo_04",						-- key of mission objective text
+					narrative.get(faction_key, name .. "_event_listeners") or {																						-- event/condition listeners
+						{
+							event = "RitualEvent",
+							condition =	function(context)
+								return string.find(context:initiative():record_key(), tempo_rituals_keys_substring)
+							end
+						}
+					},
+					narrative.get(faction_key, name .. "_camera_scroll_callback"),																			-- camera scroll callback
+					narrative.get(faction_key, name .. "_mission_issuer"),																					-- mission issuer (can be nil in which case default is used)
+					narrative.get(faction_key, name .. "_mission_rewards") or {
+						payload.money(1500),
+						payload.ancillary_mission_payload(faction_key, "general", "uncommon")
+					},															
+					narrative.get(faction_key, name .. "_trigger_messages") or "MasqueLevel4TempoCompleted",								-- script message(s) on which to trigger when received
+					narrative.get(faction_key, name .. "_on_issued_messages") or "MasqueLevel4Ritual",										-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
+					narrative.get(faction_key, name .. "_completed_messages") or "MasqueLevel4RitualCompleted",										-- script message(s) to trigger when this mission is completed
+					narrative.get(faction_key, name .. "_inherit_list")																						-- list of other narrative events to inherit rewards from (may be nil)
+				);
+			end;
+
+		end;
+	end
+	--Throgg
+	if faction_key == "wh_dlc08_nor_wintertooth" then
+		--[[ trigger Trollkind mission on turn 2
+		do
+			local name = "wh3_dlc27_wintertooth_trollkind_trigger";
+
+			if not narrative.get(faction_key, name .. "_block") then
+				narrative_triggers.turn_countdown(
+				name,																																			-- unique name for this narrative trigger
+				faction_key,																																	-- key of faction to which it applies
+				narrative.get(faction_key, name .. "_start_messages") or "DefeatInitialEnemyCompleted",															-- script message(s) on which to start
+				narrative.get(faction_key, name .. "_completed_messages") or "StartWintertoothTrollkindMission",												-- target message(s) to trigger
+				narrative.get(faction_key, name .. "_cancel_messages"),																							-- script message(s) on which to cancel
+				narrative.get(faction_key, name .. "_num_turns") or 2,																							-- num turns to wait
+				narrative.get(faction_key, name .. "_immediate") or true																						-- trigger immediately
+			);
+			end;
+		end;]]
+		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_capture_settlement_completed_messages", {"StartSettlementCapturedChainFull", "StartWintertoothTrollkindMission"})
+		do
+			local name = "wh3_dlc27_wintertooth_trollkin_resource";
+
+			if not narrative.get(faction_key, name .. "_block") then
+				narrative_events.gain_pooled_resource_scripted(
+				name,																																			-- unique name for this narrative event
+				faction_key,																																	-- key of faction to which it applies
+				narrative.get(faction_key, name .. "_advice_key"),																								-- key of advice to deliver
+				narrative.get(faction_key, name .. "_mission_key") or "wh3_dlc27_wintertooth_trollkin_resource_01",												-- key of mission to deliver
+				narrative.get(faction_key, name .. "_mission_text") or "wh3_dlc27_narrative_mission_description_wintertooth_trollkin_resource",								-- key of mission objective text
+				narrative.get(faction_key, name .. "_pooled_resources") or "wh3_dlc27_nor_kinfolk",																	-- pooled resource(s)
+				narrative.get(faction_key, name .. "_lower_threshold") or 30,																					-- lower threshold value
+				narrative.get(faction_key, name .. "_upper_threshold"),																							-- upper threshold value
+				narrative.get(faction_key, name .. "_is_additive") or false,																					-- is additive (value of all resources counts towards total)
+				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
+				narrative.get(faction_key, name .. "_mission_rewards") or {
+						payload.money(1000),
+						payload.text_display("dummy_wh3_dlc27_wintertooth_trollkind_dilemma")
+				},
+				narrative.get(faction_key, name .. "_trigger_messages") or "StartWintertoothTrollkindMission",															-- script message(s) on which to trigger when received
+				narrative.get(faction_key, name .. "_on_issued_messages"),																						-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
+				narrative.get(faction_key, name .. "_completed_messages"),																						-- script message(s) to trigger when this mission is completed
+				narrative.get(faction_key, name .. "_inherit_list")																								-- list of other narrative events to inherit rewards from (may be nil)
+			);
+			end;
+		end;
+	end
+	-- Lokhir Felheart
+	if faction_key == "wh2_dlc11_def_the_blessed_dread" then
+		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_control_two_provinces_completed_messages", {"SettlementCapturedCaptureTwoProvincesCompleted", "StartSettlementCapturedChainTransitionToExpert", "StartEasternIslesChain"})
+		do
+			local name = "wh3_dlc27_def_blessed_dread_control_eastern_isles"
+			if not narrative.get(faction_key, name .. "_block") then
+			narrative_events.control_provinces(
+				name,																																			-- unique name for this narrative event
+				faction_key,																																	-- key of faction to which it applies
+				narrative.get(faction_key, name .. "_advice_key"),																								-- key of advice to deliver
+				narrative.get(faction_key, name .. "_mission_key") or "wh3_dlc27_def_blessed_dread_control_eastern_isles",										-- key of mission to deliver
+				narrative.get(faction_key, name .. "_num_provinces") or 1,																						-- number of provinces
+				narrative.get(faction_key, name .. "_province_keys") or "wh3_main_combi_province_eastern_colonies",																							-- opt list of province keys
+				narrative.get(faction_key, name .. "_camera_target"),																							-- target to move camera to (can be string region/faction key, char cqi, table with x/y display positions, or nil)
+				narrative.get(faction_key, name .. "_mission_issuer"),																							-- mission issuer (can be nil in which case default is used)
+				narrative.get(faction_key, name .. "_mission_rewards") or {																						-- mission rewards
+					payload.money(1000),																															-- issue money or equivalent
+					payload.slaves(400),
+					payload.text_display("dummy_wh3_dlc27_blessed_dread_sea_lanes_unlocked")
+				},
+				narrative.get(faction_key, name .. "_trigger_messages") or "StartEasternIslesChain",															-- script message(s) on which to trigger when received
+				narrative.get(faction_key, name .. "_on_issued_messages"),																						-- script message(s) to trigger when this narrative event has finished issuing (may be nil)
+				narrative.get(faction_key, name .. "_completed_messages"),
+				narrative.get(faction_key, name .. "_inherit_list")																								-- list of other narrative events to inherit rewards from (may be nil)
+			);
+			end
+		end
 	end
 end;
 
