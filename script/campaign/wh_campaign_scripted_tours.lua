@@ -8535,7 +8535,8 @@ function ui_scripted_tour:construct_tour(tour, intervention)
 			local dechala_marks_tour = find_uicomponent("dlc27_sla_marks_of_cruelty")
 			if dechala_marks_tour and dechala_marks_tour:Visible() == true then
 				if not cm:is_multiplayer() 
-				then 
+				then
+					cm:override_ui("disable_fullscreen_panel_closing", true) 
 					local dechala_faction = cm:get_faction("wh3_dlc27_sla_the_tormentors");
 					if dechala_faction:pooled_resource_manager():resource("wh3_dlc27_sla_decadence"):value() >= 200 then  
 						local mark_coy_denial = find_uicomponent("wh3_dlc27_sla_marks_of_vindictiveness_coy_denial") 
@@ -8948,6 +8949,7 @@ function dechala_marks_listeners()
 			end
 			highlight_component(false, false, "dlc27_sla_marks_of_cruelty", "panel_main", "content", "info_section", "list_clip", "list_box", "mark_info", "upgrade_components", "button_purchase")
 			cm:steal_escape_key(false)
+			cm:override_ui("disable_fullscreen_panel_closing", false)
 			core:hide_fullscreen_highlight();
 		end,
 		false

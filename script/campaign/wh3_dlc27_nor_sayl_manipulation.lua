@@ -2166,7 +2166,7 @@ function sayl_manipulation:spawn_dilemma_invasion(invasion_data, dilemma_key)
 			cm:awaken_faction_from_death(invasion_faction)
 		end
 
-		cm:force_declare_war(invasion_faction, self.config.faction_key, false, false)
+		cm:force_declare_war(faction_key, self.config.faction_key, false, false)
 
 		invasion:create_general(faction_leader, general_subtype)
 		if not sayl_char:is_wounded() and sayl_char:has_military_force() and sayl_char:has_region() then

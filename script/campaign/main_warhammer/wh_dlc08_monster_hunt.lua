@@ -2933,7 +2933,12 @@ monster_hunt =
 			listener .. mission_key,
 			function(context)
 				local triggering_faction_key = context.string
-				return triggering_faction_key == faction_key
+				-- complete the mission asap, otherwise the marker might linger for a second and it is possible to interact with it again
+				if triggering_faction_key == faction_key then
+					cm:complete_scripted_mission_objective(faction_key, mission_key, mission_key .. "_1", true)
+					return true
+				end
+				return false
 			end
 		)
 		
@@ -2946,7 +2951,12 @@ monster_hunt =
 				"ScriptEventMonsterHuntStageAdvanceBattle_" .. quest_battle_mission_key,
 				function(context)
 					local triggering_faction_key = context.string
-					return triggering_faction_key == faction_key
+					-- complete the mission asap, otherwise the marker might linger for a second and it is possible to interact with it again
+					if triggering_faction_key == faction_key then
+						cm:complete_scripted_mission_objective(faction_key, quest_battle_mission_key, quest_battle_mission_key .. "_1", true)
+						return true
+					end
+					return false
 				end
 			)
 		end
