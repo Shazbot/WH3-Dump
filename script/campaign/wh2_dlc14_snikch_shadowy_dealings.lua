@@ -403,6 +403,40 @@ function dust_AI_action(faction, action)
 	end
 end
 
+local function DustGetRitualSceneType(ritual)
+	local ritual_key = ritual:ritual_key();
+	local target_type = ritual:ritual_target():target_type();
+	if dust_composite_scene_overrides[target_type] ~= nil and dust_composite_scene_overrides[target_type][ritual_key] ~= nil then
+		return dust_composite_scene_overrides[target_type][ritual_key];
+	else
+		return dust_default_composite_scene
+	end
+end
+
+local function DustCompleteRitualAtPosition(ritual, performing_faction, scene_key, position_obj, target_region)
+	-- Note: target_region can be nil
+	local scene_type = DustGetRitualSceneType(ritual)
+	local log_x = position_obj:logical_position_x();
+	local log_y = position_obj:logical_position_y();
+	local dis_x = position_obj:display_position_x();
+	local dis_y = position_obj:display_position_y();
+	dist_ShowCutscene(scene_key, performing_faction, ritual, scene_type, log_x, log_y, dis_x, dis_y, target_region);
+	table.insert(dust_actions, scene_key);
+end
+
+local function DustCompleteRitualForRegion(ritual, performing_faction, target_region)	
+	local region_key = target_region:name();
+	local settlement = target_region:settlement();
+	local comp_scene = "dust_"..region_key;
+	DustCompleteRitualAtPosition(ritual, performing_faction, comp_scene, settlement, target_region)
+end
+
+local function DustCompleteRitualForCharacter(ritual, performing_faction, target_character)
+	local cqi = target_character:command_queue_index();
+	local comp_scene = "dust_"..cqi;
+	DustCompleteRitualAtPosition(ritual, performing_faction, comp_scene, target_character, nil)
+end
+
 function dust_RitualsCompletedAndDelayedEvent(context)
 	local ritual_list = context:rituals();
 
@@ -415,11 +449,7 @@ function dust_RitualsCompletedAndDelayedEvent(context)
 			local faction = ritual:characters_who_performed():item_at(0):character():faction(); -- This is horrific
 			local ritual_target = ritual:ritual_target();
 			local target_type = ritual_target:target_type();
-			local scene_type = dust_default_composite_scene;
-			
-			if dust_composite_scene_overrides[target_type] ~= nil and dust_composite_scene_overrides[target_type][ritual_key] ~= nil then
-				scene_type = dust_composite_scene_overrides[target_type][ritual_key];
-			end
+			local scene_type = DustGetRitualSceneType(ritual)
 
 			if target_type == "FACTION" then
 				-- FACTION
@@ -427,23 +457,16 @@ function dust_RitualsCompletedAndDelayedEvent(context)
 
 				if target_faction:is_null_interface() == false and target_faction:is_dead() == false then
 					if target_faction:has_home_region() == true then
-						local region = target_faction:home_region();
-						local region_key = region:name();
-						local settlement = region:settlement();
-						local settlement_key = "settlement:"..region_key;
-						local comp_scene = "dust_"..region_key;
-						local scene_type = dust_default_composite_scene;
-						local log_x = settlement:logical_position_x();
-						local log_y = settlement:logical_position_y();
-						local dis_x = settlement:display_position_x();
-						local dis_y = settlement:display_position_y();
-						
-						if dust_composite_scene_overrides[target_type] ~= nil and dust_composite_scene_overrides[target_type][ritual_key] ~= nil then
-							scene_type = dust_composite_scene_overrides[target_type][ritual_key];
-						end
-						
-						dist_ShowCutscene(comp_scene, faction, ritual, scene_type, log_x, log_y, dis_x, dis_y, region);
-						table.insert(dust_actions, comp_scene);
+						local capital = target_faction:home_region()
+						DustCompleteRitualForRegion(ritual, faction, capital)
+					elseif target_faction:has_faction_leader() then
+						local leader = target_faction:faction_leader()
+						DustCompleteRitualForCharacter(ritual, faction, leader)
+					elseif not target_faction:character_list():is_empty() then
+						local any_character = target_faction:character_list():item_at(0)
+						DustCompleteRitualForCharacter(ritual, faction, any_character)
+					else
+						script_error("ERROR: ritual=" .. ritual_key .. " failed for ritual_target=" .. ritual_target:target_record_key())
 					end
 				end
 			elseif target_type == "REGION" then
@@ -451,43 +474,14 @@ function dust_RitualsCompletedAndDelayedEvent(context)
 				local target_region = ritual_target:get_target_region();
 				
 				if target_region:is_null_interface() == false then
-					local region_key = target_region:name();
-					local settlement = target_region:settlement();
-					local settlement_key = "settlement:"..region_key;
-					local comp_scene = "dust_"..region_key;
-					local scene_type = dust_default_composite_scene;
-					local log_x = settlement:logical_position_x();
-					local log_y = settlement:logical_position_y();
-					local dis_x = settlement:display_position_x();
-					local dis_y = settlement:display_position_y();
-					
-					if dust_composite_scene_overrides[target_type] ~= nil and dust_composite_scene_overrides[target_type][ritual_key] ~= nil then
-						scene_type = dust_composite_scene_overrides[target_type][ritual_key];
-					end
-					
-					dist_ShowCutscene(comp_scene, faction, ritual, scene_type, log_x, log_y, dis_x, dis_y, target_region);
-					table.insert(dust_actions, comp_scene);
+					DustCompleteRitualForRegion(ritual, faction, target_region)
 				end
 			elseif target_type == "MILITARY_FORCE" then
 				-- FORCE
 				local target_force = ritual_target:get_target_force();
 
 				if target_force:is_null_interface() == false and target_force:has_general() == true then
-					local general = target_force:general_character();
-					local cqi = general:command_queue_index();
-					local comp_scene = "dust_"..cqi;
-					local scene_type = dust_default_composite_scene;
-					local log_x = general:logical_position_x();
-					local log_y = general:logical_position_y();
-					local dis_x = general:display_position_x();
-					local dis_y = general:display_position_y();
-						
-					if dust_composite_scene_overrides[target_type] ~= nil and dust_composite_scene_overrides[target_type][ritual_key] ~= nil then
-						scene_type = dust_composite_scene_overrides[target_type][ritual_key];
-					end
-					
-					dist_ShowCutscene(comp_scene, faction, ritual, scene_type, log_x, log_y, dis_x, dis_y, nil);
-					table.insert(dust_actions, comp_scene);
+					DustCompleteRitualForCharacter(ritual, faction, target_force:general_character())
 				end
 			end
 		end

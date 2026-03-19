@@ -44,7 +44,7 @@ function add_beast_tech_lock_listeners()
 	-- Starts the tech lock and unlock listeners if any of the Beastmen factions are human
 	-- Checks if its a new game so this does not always lock the techs.
 	if cm:is_new_game() == true then
-		local faction_list = cm:model():world():faction_list();
+		local faction_list = cm:get_faction_list();
 		
 		for i = 1, faction_list:num_items() - 1 do
 			local current_faction = faction_list:item_at(i);

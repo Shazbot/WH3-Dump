@@ -398,7 +398,8 @@ function sword_of_khaine:is_character_valid_to_equip_sword(character)
 		DISCIPLE_ARMY = true,
 		OGRE_CAMP = true,
 		CARAVAN = true,
-		CONVOY = true
+		CONVOY = true,
+		BLOOD_HOST_ARMY = true,
 	};
 	
 	if not character:is_null_interface() and cm:char_is_general_with_army(character) then
@@ -453,6 +454,8 @@ function sword_of_khaine:add_listeners()
 		"FactionJoinsConfederation",
 		true,
 		function()
+			self.owner.ready, self.owner.faction = self:check_shrine_state_and_owner()
+			self:set_sword_button_state();
 			self:validate_sword_owner();
 		end,
 		true

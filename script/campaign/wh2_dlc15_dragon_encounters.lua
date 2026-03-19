@@ -2,6 +2,7 @@ local imrik_faction = "wh2_dlc15_hef_imrik";
 local dragon_target_force_cqi = 0;
 local dragon_target_cqi = 0;
 local current_dilemma = "";
+local invasion_key = "dragon_army"
 
 local dragon_turns_spawn_timer = 11;
 local dragon_marker_cooldown = 15;
@@ -335,7 +336,8 @@ end;
 function spawn_dragon_campaign_army(loc, force, faction_drag, size)
 	local unit_list = random_army_manager:generate_force(force, size);
 	local index = cm:random_number(#generic_army_effect);
-	local army_dragon = invasion_manager:new_invasion("dragon_army", faction_drag, unit_list, loc);
+	invasion_manager:kill_invasion_by_key(invasion_key) -- the invasion should not exist when we're trying to create it; this code was added to fix broken saves 	
+	local army_dragon = invasion_manager:new_invasion(invasion_key, faction_drag, unit_list, loc)
 	army_dragon.target = imrik_faction;
 	army_dragon.human = false;
 	army_dragon:apply_effect(generic_army_effect[index], 0);
@@ -405,7 +407,7 @@ function setup_dragon_post_battle_listener()
 				end;
 			end;
 			
-			local dragon_invasion = invasion_manager:get_invasion("dragon_army");
+			local dragon_invasion = invasion_manager:get_invasion(invasion_key);
 			
 			if found_encounter_faction_indx > 0 and dragon_invasion then
 				dragon_invasion:kill();

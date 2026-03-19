@@ -1537,7 +1537,7 @@ core:add_listener(
 	end,
 	function(context)
 		local output_generated = false;
-		local faction_list = context:world():faction_list();
+		local faction_list = cm:get_faction_list();
 		
 		for i = 0, faction_list:num_items() - 1 do
 			local character_list = faction_list:item_at(i):character_list();
@@ -2373,7 +2373,7 @@ if cm:get_campaign_name() ~= "wh3_main_prologue" then
 			return context:faction():name() == mother_ostankya_features.ostankya_faction
 		end,
 		function()
-			for _, faction in model_pairs(cm:model():world():faction_list()) do
+			for _, faction in model_pairs(cm:get_faction_list()) do
 				local bv = cm:get_factions_bonus_value(faction, "create_disciple_army_mother_ostankya")
 				
 				if bv > 0 then
@@ -2433,7 +2433,7 @@ if cm:get_campaign_name() ~= "wh3_main_prologue" then
 			local yuan_siphon_bundle = "wh3_dlc24_ritual_cth_mos_stone_faction_steal_background_income_self"
 			local yuan_faction = context:faction()
 
-			for _, faction in model_pairs(cm:model():world():faction_list()) do
+			for _, faction in model_pairs(cm:get_faction_list()) do
 				local bv = cm:get_factions_bonus_value(faction, "steal_gdp_for_yuan_bo")
 
 				if bv > 0 then

@@ -58,7 +58,11 @@ subjugation = {
 		wh2_dlc09_tmb_tombking_qb_exiles_of_nehek = true,
 		wh2_dlc09_tmb_tombking_qb_followers_of_nagash = true,
 		wh2_dlc09_tmb_tombking_qb_khemri = true,
-		wh2_dlc09_tmb_tombking_qb_lybaras = true
+		wh2_dlc09_tmb_tombking_qb_lybaras = true,
+		wh_dlc08_chs_chaos_challenger_khorne = true, 
+		wh_dlc08_chs_chaos_challenger_tzeentch = true,
+		wh_dlc08_chs_chaos_challenger_nurgle = true,
+		wh_dlc08_chs_chaos_challenger_slaanesh = true
 	}
 }
 
@@ -149,14 +153,6 @@ function subjugation:trigger_confederation_dilemma(winner_fm, loser_fm)
 
 		if winner_faction:is_human() then
 			local winner_name = winner_faction:name()
-			if merc_contracts and merc_contracts.active_contracts[winner_name] then
-				for _, target_faction in pairs(merc_contracts.active_contracts[winner_name].targets) do
-					if target_faction == loser_faction_name then
-						-- don't launch subjugation dilemma if losing faction was a contract target.
-						return false
-					end
-				end
-			end
 
 			cm:trigger_dilemma_with_targets(
 				winner_faction:command_queue_index(),
@@ -457,6 +453,13 @@ function subjugation:trigger_chaos_lord_dilemma(winner_fm, loser_fm, execute)
 
 		if loser_faction:can_be_human() then
 			dilemma = self.norsca_chaos_dilemmas.no_execute["wh_dlc08_nor_norsca"]
+		end
+
+		local loser_faction_name = loser_faction:name()
+
+		if self.invalid_factions[loser_faction_name] or loser_faction:is_human() or loser_character:is_faction_leader() == false or self:is_valid_confederation_target(loser_faction) == false then
+			-- not a valid confederation target
+			return
 		end
 
 		if winner_faction:is_human() then

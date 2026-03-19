@@ -94,7 +94,7 @@ function infamy:add_infamy_listeners()
 end
 
 function infamy:log_playable_pirate_leader_cqis()
-	local faction_list = cm:model():world():faction_list()
+	local faction_list = cm:get_faction_list()
 	
 	for _, current_faction in model_pairs(faction_list) do
 		if self:is_faction_playable_vampire_coast(current_faction) and current_faction:has_faction_leader() then
@@ -107,7 +107,7 @@ function infamy:setup_initial_infamy_levels()
 	local human_vampire_coast = false
 	local start_infamy = 200
 	
-	local faction_list = cm:model():world():faction_list()
+	local faction_list = cm:get_faction_list()
 	
 	for _, current_faction in model_pairs(faction_list) do
 		if self:is_faction_playable_vampire_coast(current_faction) then
@@ -184,7 +184,7 @@ function infamy:launch_shanty_mission(player_faction_key, target, target_is_huma
 
 		if(self.player_shanty_missions_active[target_shanty_level][player_faction_key]) then
 			-- player is currently on this mission tier (new or existing). Update the mission targets with latest pirates who already own the verse.
-			local faction_list = cm:model():world():faction_list()
+			local faction_list = cm:get_faction_list()
 			
 			for _, current_faction in model_pairs(faction_list) do
 				if self:is_faction_playable_vampire_coast(current_faction) then
@@ -255,7 +255,7 @@ function infamy:mission_success_listeners(context)
 			end	
 
 			-- a pirate has cleared a shanty level, launch mp shanty mission for that tier for all other player pirates who haven't reached that tier yet
-			local faction_list = cm:model():world():faction_list()
+			local faction_list = cm:get_faction_list()
 
 			for _, current_faction in model_pairs(faction_list) do
 				if self:is_faction_playable_vampire_coast(current_faction) then
@@ -313,7 +313,7 @@ function infamy:shanty_multiplayer_mission_completion_listener()
 
 						if(is_string(mission_key) and string.find(mission_key, "player")) then
 							-- One of the battle winners is on a shanty mission
-							local faction_list = cm:model():world():faction_list()
+							local faction_list = cm:get_faction_list()
 
 							for _, current_faction in model_pairs(faction_list) do
 								if self:is_faction_playable_vampire_coast(current_faction) then
@@ -357,7 +357,7 @@ function infamy:shanty_multiplayer_mission_completion_listener()
 
 			if(self.player_shanty_levels[proposer] and self.player_shanty_levels[recipient]) then
 				-- Both factions are pirates
-				local faction_list = cm:model():world():faction_list()
+				local faction_list = cm:get_faction_list()
 
 				for _, current_faction in model_pairs(faction_list) do
 					if self:is_faction_playable_vampire_coast(current_faction) then
@@ -396,7 +396,7 @@ function infamy:shanty_multiplayer_mission_completion_listener()
 				local mission_key = self.player_shanty_missions_active[i][faction_name]
 
 				if(is_string(mission_key) and string.find(mission_key, "player")) then
-					local faction_list = cm:model():world():faction_list()
+					local faction_list = cm:get_faction_list()
 
 					for _, current_faction in model_pairs(faction_list) do
 						if self:is_faction_playable_vampire_coast(current_faction) then
@@ -467,7 +467,7 @@ function infamy:update_ui()
 		end
 		
 		-- Add the real faction pirates who have infamy
-		local faction_list = cm:model():world():faction_list()
+		local faction_list = cm:get_faction_list()
 		
 		for i = 0, faction_list:num_items() - 1 do
 			local faction = faction_list:item_at(i)

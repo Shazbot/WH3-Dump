@@ -44,6 +44,22 @@ IntrigueCourt
         }
     }
 
+    CanProtectPatronage(CcoCampaignRitual ritual, CcoCampaignProvince province)
+    {
+        (occupying_lord = CharacterFromFamilyMemberCQI(province.EntitySharedStateReadFloat("patronage_slot_occupying_fm_cqi"))) =>
+        {
+            (occupying_lord.IsAlive && occupying_lord.IsWounded == false) && ritual.CanAffordInfluenceCost
+        }
+    }
+
+    CanEngageInIntrigue(CcoCampaignProvince province)
+    {
+        (occupying_lord = CharacterFromFamilyMemberCQI(province.EntitySharedStateReadFloat("patronage_slot_occupying_fm_cqi"))) =>
+        {
+            occupying_lord.IsAlive && occupying_lord.IsWounded == false
+        }
+    }
+
     IsCharacterInactive(CcoCampaignCharacter character, CcoCampaignProvince province)
     {
         IntrigueCourt.IsCharacterOnCooldown(character) || 

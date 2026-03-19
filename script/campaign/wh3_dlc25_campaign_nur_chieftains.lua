@@ -638,7 +638,20 @@ function nur_chieftains:start_deference_listeners()
 							if deference_value >= self[chieftain_type].deference_value_tier_3 then
 								cm:remove_effect_bundle(self[chieftain_type].t1_bundle, self.faction)
 								cm:remove_effect_bundle(self[chieftain_type].t2_bundle, self.faction)
-								cm:apply_effect_bundle(self[chieftain_type].t3_bundle, self.faction, 0)
+
+								if faction:is_human() then
+									cm:apply_effect_bundle(self[chieftain_type].t3_bundle, self.faction, 0)
+									--launches the Devoted mission which is hidden from the player by the UI
+									if cm:get_campaign_name() == "main_warhammer" then
+										cm:trigger_mission(self.faction, self[chieftain_type].qb_mission_ie, true)
+									else
+										cm:trigger_mission(self.faction, self[chieftain_type].qb_mission_roc, true)
+									end
+								else
+									-- AI has no mission manager, just give it the final reward
+									cm:apply_effect_bundle(self[chieftain_type].t4_bundle, self.faction, 0)
+								end
+
 								cm:force_add_trait(cm:char_lookup_str(chieftain_cqi), self[chieftain_type].trait, 1)
 								cm:trigger_incident(self.faction, self[chieftain_type].incident_deference_t3, true)
 								cm:unlock_ritual(faction, self[chieftain_type].unit_rituals[3], 0)
@@ -652,13 +665,6 @@ function nur_chieftains:start_deference_listeners()
 										cm:force_add_trait(cm:char_lookup_str(chieftain_cqi), self[chieftain_type].trait, 1)
 										cm:force_add_trait(cm:char_lookup_str(chieftain_cqi), self[chieftain_type].trait, 1)
 									end
-								end
-
-								--launches the Devoted mission which is hidden from the player by the UI
-								if cm:get_campaign_name() == "main_warhammer" then
-									cm:trigger_mission(self.faction, self[chieftain_type].qb_mission_ie, true)
-								else
-									cm:trigger_mission(self.faction, self[chieftain_type].qb_mission_roc, true)
 								end
 								
 								--progress feature chieftain unlocks 2/3

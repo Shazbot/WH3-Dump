@@ -316,7 +316,7 @@ function ogre_camps:initialise()
 			return; -- There are no human Ogres
 		end 
 
-		local factions = cm:model():world():faction_list();
+		local factions = cm:get_faction_list();
 	
 		for i = 0, factions:num_items() - 1 do
 			local faction = factions:item_at(i);

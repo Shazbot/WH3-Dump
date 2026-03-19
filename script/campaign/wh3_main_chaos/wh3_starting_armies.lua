@@ -179,3 +179,36 @@ function create_starting_armies()
 		end;
 	end;
 end;
+
+core:add_listener(
+	"Wh3ChaosStartingArmies_FactionJoinsConfederation",
+	"FactionJoinsConfederation",
+	function(context)
+		return cm:get_campaign_name() == "wh3_main_chaos"
+	end,
+	function(context)
+		local target_faction_key = context:faction():name()
+
+		local is_starting_army = false
+
+		for i = 1, #armies do
+			local faction_key = armies[i].enemy_faction
+			if faction_key == target_faction_key then
+				is_starting_army = true
+			end
+		end
+
+		if not is_starting_army then
+			return
+		end
+
+		local characters = context:confederation():character_list()
+		for j = 0, characters:num_items() - 1 do
+			local character = characters:item_at(j)
+			if character and not character:is_null_interface() and character:has_military_force() and character:military_force():has_effect_bundle("wh3_main_bundle_military_upkeep_free_force_no_movement") then
+				cm:remove_effect_bundle_from_characters_force("wh3_main_bundle_military_upkeep_free_force_no_movement", character:command_queue_index())
+			end
+		end
+	end,
+	true
+)

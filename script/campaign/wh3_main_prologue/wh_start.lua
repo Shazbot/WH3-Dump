@@ -136,7 +136,7 @@ end;
 function setup_all_factions_at_war()
 	out(" *** Setting every faction at war with every other faction");
 	
-	local faction_list = cm:model():world():faction_list();
+	local faction_list = cm:get_faction_list();
 	for i = 0, faction_list:num_items() - 1 do
 		if faction_list:item_at(i):name() ~= "wh3_prologue_ksl_kislev_survivors" then
 			set_faction_at_war_with_all_other_factions(faction_list:item_at(i):name());
@@ -148,7 +148,7 @@ end;
 -- ally each player with one non-player faction at random
 function setup_random_alliances_player_competitive_1v1()
 	
-	local faction_list = cm:model():world():faction_list();
+	local faction_list = cm:get_faction_list();
 	
 	-- get a list of non-human factions
 	local non_human_factions = {};
@@ -221,7 +221,7 @@ function set_faction_at_war_with_all_other_factions(faction_name, exception_list
 		return;
 	end;
 
-	local faction_list = cm:model():world():faction_list();
+	local faction_list = cm:get_faction_list();
 	
 	if not is_table(exception_list) then
 		exception_list = {exception_list};

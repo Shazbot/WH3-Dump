@@ -46,7 +46,7 @@ local technologies_list = {
 
 function disable_features()
 
-	local faction_list = cm:model():world():faction_list();
+	local faction_list = cm:get_faction_list();
 	local game_interface = cm:get_game_interface();
 	
 

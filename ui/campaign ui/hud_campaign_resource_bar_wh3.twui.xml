@@ -126,14 +126,6 @@
 							<dev_icon this="4A3F039F-98CB-4611-8627F1ADE3345794"/>
 						</dev_button_add_grimoires>
 					</dy_tzeentch_grimoires>
-					<kairos_spells_activation this="66B6E862-750A-4B2A-A2CB8FB3102FA9C4">
-						<common_1_slot this="7441F984-712D-4F0B-A9BAE95C48AB8302"/>
-						<common_2_slot this="CAD7583B-C5D4-41CF-A95DBB3D4AEC0C50"/>
-						<uncommon_1_slot this="988C0D82-429B-45A7-9DEA204B55F2D521"/>
-						<uncommon_2_slot this="E8A3A19E-5A46-465F-9F46313B700461CB"/>
-						<rare_1_slot this="953A9D93-6AAE-4267-97CDF50A6344E2ED"/>
-						<rare_2_slot this="818405A9-F643-4564-B6F11DE0C90053F2"/>
-					</kairos_spells_activation>
 				</tze_grimoires_holder>
 				<cult_supplies_resource_holder this="584A52D0-343E-4968-B0CDB93238AA8F56">
 					<dy_cult_supplies this="13C0055E-18D2-42A2-AA027AF09DF2ECE6">
@@ -5889,132 +5881,6 @@
 				</newstate>
 			</states>
 		</chs_souls_icon>
-		<common_1_slot
-			this="7441F984-712D-4F0B-A9BAE95C48AB8302"
-			id="common_1_slot"
-			offset="65.00,-94.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			docking="Top Right"
-			dock_offset="160.00,-94.00"
-			component_anchor_point="1.00,0.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="7441F984-712D-4F0B-A9BAE95C48AB8302"
-			currentstate="D7215A32-86A2-4858-8C290866FCF8ED5D"
-			defaultstate="D7215A32-86A2-4858-8C290866FCF8ED5D">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextPropertySetter"
-					context_object_id="CcoCampaignCharacter"
-					context_function_id="1">
-					<child_m_user_properties>
-						<property
-							name="context_prop"
-							value="unlocked_at_rank"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextPropertySetter"
-					context_object_id="CcoCampaignCharacter"
-					context_function_id="&quot;common&quot;">
-					<child_m_user_properties>
-						<property
-							name="context_prop"
-							value="rarity"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextPropertySetter"
-					context_object_id="CcoCampaignCharacter"
-					context_function_id="&quot;wh3_main_character_initiative_set_kairos_spells_common_1&quot;">
-					<child_m_user_properties>
-						<property
-							name="context_prop"
-							value="kairos_initiative_set_key"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoCampaignInitiativeManager"
-					context_function_id="InitiativeSetList(&quot;KAIROS_FRAGMENTS_OF_SORCERY&quot;).Filter(InitiativeSetContext.Key == &quot;wh3_main_character_initiative_set_kairos_spells_common_1&quot;).FirstContext"/>
-				<callback_with_context
-					callback_id="ContextCommandGiverOnContextSet"
-					context_object_id="CcoCampaignInitiativeSet initiative_set, CcoCampaignCharacter character"
-					context_function_id="#assigning initiatives upon rank reached#&#10;DoIf( initiative_set.ActiveInitiatives.IsEmpty &amp;&amp; character.Rank &gt;= self.GetProperty(&quot;unlocked_at_rank&quot;),&#10; initiative_set.InitiativeList.Filter( StringContains(InitiativeContext.Key, &quot;tzeentch&quot;) ).FirstContext.Activate(0) )"/>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="D7215A32-86A2-4858-8C290866FCF8ED5D"
-					name="default"
-					width="96"
-					height="96"
-					uniqueguid="D7215A32-86A2-4858-8C290866FCF8ED5D"/>
-			</states>
-		</common_1_slot>
-		<common_2_slot
-			this="CAD7583B-C5D4-41CF-A95DBB3D4AEC0C50"
-			id="common_2_slot"
-			offset="-47.00,-184.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			docking="Top Center"
-			dock_offset="0.00,-184.00"
-			component_anchor_point="0.50,0.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="CAD7583B-C5D4-41CF-A95DBB3D4AEC0C50"
-			currentstate="7F9C51CE-50D6-442D-B4991BCA86C03422"
-			defaultstate="7F9C51CE-50D6-442D-B4991BCA86C03422">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextPropertySetter"
-					context_object_id="CcoCampaignCharacter"
-					context_function_id="1">
-					<child_m_user_properties>
-						<property
-							name="context_prop"
-							value="unlocked_at_rank"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextPropertySetter"
-					context_object_id="CcoCampaignCharacter"
-					context_function_id="&quot;common&quot;">
-					<child_m_user_properties>
-						<property
-							name="context_prop"
-							value="rarity"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextPropertySetter"
-					context_object_id="CcoCampaignCharacter"
-					context_function_id="&quot;wh3_main_character_initiative_set_kairos_spells_common_2&quot;">
-					<child_m_user_properties>
-						<property
-							name="context_prop"
-							value="kairos_initiative_set_key"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoCampaignInitiativeManager"
-					context_function_id="InitiativeSetList(&quot;KAIROS_FRAGMENTS_OF_SORCERY&quot;).Filter(InitiativeSetContext.Key == &quot;wh3_main_character_initiative_set_kairos_spells_common_2&quot;).FirstContext"/>
-				<callback_with_context
-					callback_id="ContextCommandGiverOnContextSet"
-					context_object_id="CcoCampaignInitiativeSet initiative_set, CcoCampaignCharacter character"
-					context_function_id="#assigning initiatives upon rank reached#&#10;DoIf( initiative_set.ActiveInitiatives.IsEmpty &amp;&amp; character.Rank &gt;= self.GetProperty(&quot;unlocked_at_rank&quot;),&#10; initiative_set.InitiativeList.Filter( StringContains(InitiativeContext.Key, &quot;tzeentch&quot;) ).FirstContext.Activate(0) )"/>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="7F9C51CE-50D6-442D-B4991BCA86C03422"
-					name="default"
-					width="96"
-					height="96"
-					uniqueguid="7F9C51CE-50D6-442D-B4991BCA86C03422"/>
-			</states>
-		</common_2_slot>
 		<compass
 			this="7F3BF62A-D8AE-41C7-92414784163A9A83"
 			id="compass"
@@ -13599,7 +13465,13 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoCampaignPooledResource"
-					context_function_id="Total"/>
+					context_function_id="Total">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="PooledResourceTransaction"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoCampaignFaction"
@@ -15112,7 +14984,13 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoCampaignPooledResource"
-					context_function_id="Total"/>
+					context_function_id="Total">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="PooledResourceTransaction"/>
+					</child_m_user_properties>
+				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoCampaignFaction"
@@ -24473,53 +24351,6 @@
 				sizetocontent="true"
 				margins="55.00,55.00"/>
 		</jade_compass_directions>
-		<kairos_spells_activation
-			this="66B6E862-750A-4B2A-A2CB8FB3102FA9C4"
-			id="kairos_spells_activation"
-			offset="72.00,0.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="66B6E862-750A-4B2A-A2CB8FB3102FA9C4"
-			currentstate="CEFD9580-4DA9-441B-9E57ADAD70FE7E62"
-			defaultstate="CEFD9580-4DA9-441B-9E57ADAD70FE7E62">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTrashOnCondition"
-					context_function_id="CanUseUiFeature(&quot;FRAGMENTS&quot;) == false"/>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoCampaignFaction"
-					context_function_id="#get Kairos#&#10;GetIfElse( WasConfederated == false, FactionLeaderContext, CharacterList.Filter(AgentSubtypeRecordContext.Key == &quot;wh3_main_tze_kairos&quot;).FirstContext )">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="CharacterRankUp"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoCampaignFaction"
-					context_function_id="( kairos_character = GetIfElse( WasConfederated == false, FactionLeaderContext, CharacterList.Filter(AgentSubtypeRecordContext.Key == &quot;wh3_main_tze_kairos&quot;).FirstContext ) ) =&gt;&#10;{&#10; GetIf( IsContextValid(kairos_character), kairos_character.InitiativeManager )&#10;}">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="CharacterRankUp"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="CEFD9580-4DA9-441B-9E57ADAD70FE7E62"
-					name="default"
-					width="1"
-					height="100"
-					disabled="true"
-					pixelcollision="true"
-					uniqueguid="CEFD9580-4DA9-441B-9E57ADAD70FE7E62"/>
-			</states>
-		</kairos_spells_activation>
 		<khorne_skulls_icon
 			this="F400F9E0-1093-4209-8D2A3ED23DD5FB87"
 			id="khorne_skulls_icon"
@@ -27404,132 +27235,6 @@
 				</flash_update>
 			</animations>
 		</pooled_resource>
-		<rare_1_slot
-			this="953A9D93-6AAE-4267-97CDF50A6344E2ED"
-			id="rare_1_slot"
-			offset="-47.00,188.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			docking="Bottom Center"
-			dock_offset="0.00,184.00"
-			component_anchor_point="0.50,1.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="953A9D93-6AAE-4267-97CDF50A6344E2ED"
-			currentstate="4107C178-2BF7-4177-988079B6F835EF2A"
-			defaultstate="4107C178-2BF7-4177-988079B6F835EF2A">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextPropertySetter"
-					context_object_id="CcoCampaignCharacter"
-					context_function_id="15">
-					<child_m_user_properties>
-						<property
-							name="context_prop"
-							value="unlocked_at_rank"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextPropertySetter"
-					context_object_id="CcoCampaignCharacter"
-					context_function_id="&quot;rare&quot;">
-					<child_m_user_properties>
-						<property
-							name="context_prop"
-							value="rarity"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextPropertySetter"
-					context_object_id="CcoCampaignCharacter"
-					context_function_id="&quot;wh3_main_character_initiative_set_kairos_spells_rare_1&quot;">
-					<child_m_user_properties>
-						<property
-							name="context_prop"
-							value="kairos_initiative_set_key"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoCampaignInitiativeManager"
-					context_function_id="InitiativeSetList(&quot;KAIROS_FRAGMENTS_OF_SORCERY&quot;).Filter(InitiativeSetContext.Key == &quot;wh3_main_character_initiative_set_kairos_spells_rare_1&quot;).FirstContext"/>
-				<callback_with_context
-					callback_id="ContextCommandGiverOnContextSet"
-					context_object_id="CcoCampaignInitiativeSet initiative_set, CcoCampaignCharacter character"
-					context_function_id="#assigning initiatives upon rank reached#&#10;DoIf( initiative_set.ActiveInitiatives.IsEmpty &amp;&amp; character.Rank &gt;= self.GetProperty(&quot;unlocked_at_rank&quot;),&#10; initiative_set.InitiativeList.Filter( StringContains(InitiativeContext.Key, &quot;tzeentch&quot;) ).FirstContext.Activate(0) )"/>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="4107C178-2BF7-4177-988079B6F835EF2A"
-					name="default"
-					width="96"
-					height="96"
-					uniqueguid="4107C178-2BF7-4177-988079B6F835EF2A"/>
-			</states>
-		</rare_1_slot>
-		<rare_2_slot
-			this="818405A9-F643-4564-B6F11DE0C90053F2"
-			id="rare_2_slot"
-			offset="65.00,98.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			docking="Bottom Right"
-			dock_offset="160.00,94.00"
-			component_anchor_point="1.00,1.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="818405A9-F643-4564-B6F11DE0C90053F2"
-			currentstate="4217CAA4-22E1-429A-8292B55AF7F22E45"
-			defaultstate="4217CAA4-22E1-429A-8292B55AF7F22E45">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextPropertySetter"
-					context_object_id="CcoCampaignCharacter"
-					context_function_id="20">
-					<child_m_user_properties>
-						<property
-							name="context_prop"
-							value="unlocked_at_rank"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextPropertySetter"
-					context_object_id="CcoCampaignCharacter"
-					context_function_id="&quot;rare&quot;">
-					<child_m_user_properties>
-						<property
-							name="context_prop"
-							value="rarity"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextPropertySetter"
-					context_object_id="CcoCampaignCharacter"
-					context_function_id="&quot;wh3_main_character_initiative_set_kairos_spells_rare_2&quot;">
-					<child_m_user_properties>
-						<property
-							name="context_prop"
-							value="kairos_initiative_set_key"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoCampaignInitiativeManager"
-					context_function_id="InitiativeSetList(&quot;KAIROS_FRAGMENTS_OF_SORCERY&quot;).Filter(InitiativeSetContext.Key == &quot;wh3_main_character_initiative_set_kairos_spells_rare_2&quot;).FirstContext"/>
-				<callback_with_context
-					callback_id="ContextCommandGiverOnContextSet"
-					context_object_id="CcoCampaignInitiativeSet initiative_set, CcoCampaignCharacter character"
-					context_function_id="#assigning initiatives upon rank reached#&#10;DoIf( initiative_set.ActiveInitiatives.IsEmpty &amp;&amp; character.Rank &gt;= self.GetProperty(&quot;unlocked_at_rank&quot;),&#10; initiative_set.InitiativeList.Filter( StringContains(InitiativeContext.Key, &quot;tzeentch&quot;) ).FirstContext.Activate(0) )"/>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="4217CAA4-22E1-429A-8292B55AF7F22E45"
-					name="default"
-					width="96"
-					height="96"
-					uniqueguid="4217CAA4-22E1-429A-8292B55AF7F22E45"/>
-			</states>
-		</rare_2_slot>
 		<realm_icon
 			this="4D30D7A0-0B83-4669-9AE7EBCB5E30D089"
 			id="realm_icon"
@@ -32110,8 +31815,8 @@
 				<default
 					this="F5BA75FA-51F9-4600-B416C8EB8255BBCC"
 					name="default"
-					width="73"
-					height="100"
+					width="72"
+					height="37"
 					uniqueguid="F5BA75FA-51F9-4600-B416C8EB8255BBCC"/>
 			</states>
 			<LayoutEngine
@@ -32221,131 +31926,6 @@
 					uniqueguid="FDC8F086-F60F-4778-B1DCD74B702BF103"/>
 			</states>
 		</tze_schemes_progression>
-		<uncommon_1_slot
-			this="988C0D82-429B-45A7-9DEA204B55F2D521"
-			id="uncommon_1_slot"
-			offset="-160.00,-94.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			docking="Top Left"
-			dock_offset="-160.00,-94.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="988C0D82-429B-45A7-9DEA204B55F2D521"
-			currentstate="F039038A-4AE5-4A41-9F453F7AFE96C19D"
-			defaultstate="F039038A-4AE5-4A41-9F453F7AFE96C19D">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextPropertySetter"
-					context_object_id="CcoCampaignCharacter"
-					context_function_id="5">
-					<child_m_user_properties>
-						<property
-							name="context_prop"
-							value="unlocked_at_rank"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextPropertySetter"
-					context_object_id="CcoCampaignCharacter"
-					context_function_id="&quot;uncommon&quot;">
-					<child_m_user_properties>
-						<property
-							name="context_prop"
-							value="rarity"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextPropertySetter"
-					context_object_id="CcoCampaignCharacter"
-					context_function_id="&quot;wh3_main_character_initiative_set_kairos_spells_uncommon_1&quot;">
-					<child_m_user_properties>
-						<property
-							name="context_prop"
-							value="kairos_initiative_set_key"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoCampaignInitiativeManager"
-					context_function_id="InitiativeSetList(&quot;KAIROS_FRAGMENTS_OF_SORCERY&quot;).Filter(InitiativeSetContext.Key == &quot;wh3_main_character_initiative_set_kairos_spells_uncommon_1&quot;).FirstContext"/>
-				<callback_with_context
-					callback_id="ContextCommandGiverOnContextSet"
-					context_object_id="CcoCampaignInitiativeSet initiative_set, CcoCampaignCharacter character"
-					context_function_id="#assigning initiatives upon rank reached#&#10;DoIf( initiative_set.ActiveInitiatives.IsEmpty &amp;&amp; character.Rank &gt;= self.GetProperty(&quot;unlocked_at_rank&quot;),&#10; initiative_set.InitiativeList.Filter( StringContains(InitiativeContext.Key, &quot;tzeentch&quot;) ).FirstContext.Activate(0) )"/>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="F039038A-4AE5-4A41-9F453F7AFE96C19D"
-					name="default"
-					width="96"
-					height="96"
-					uniqueguid="F039038A-4AE5-4A41-9F453F7AFE96C19D"/>
-			</states>
-		</uncommon_1_slot>
-		<uncommon_2_slot
-			this="E8A3A19E-5A46-465F-9F46313B700461CB"
-			id="uncommon_2_slot"
-			offset="-160.00,98.00"
-			allowhorizontalresize="false"
-			allowverticalresize="false"
-			docking="Bottom Left"
-			dock_offset="-160.00,94.00"
-			component_anchor_point="0.00,1.00"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="E8A3A19E-5A46-465F-9F46313B700461CB"
-			currentstate="E6320D49-F610-4B1D-BCD7E548B72A2382"
-			defaultstate="E6320D49-F610-4B1D-BCD7E548B72A2382">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextPropertySetter"
-					context_object_id="CcoCampaignCharacter"
-					context_function_id="10">
-					<child_m_user_properties>
-						<property
-							name="context_prop"
-							value="unlocked_at_rank"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextPropertySetter"
-					context_object_id="CcoCampaignCharacter"
-					context_function_id="&quot;uncommon&quot;">
-					<child_m_user_properties>
-						<property
-							name="context_prop"
-							value="rarity"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextPropertySetter"
-					context_object_id="CcoCampaignCharacter"
-					context_function_id="&quot;wh3_main_character_initiative_set_kairos_spells_uncommon_2&quot;">
-					<child_m_user_properties>
-						<property
-							name="context_prop"
-							value="kairos_initiative_set_key"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoCampaignInitiativeManager"
-					context_function_id="InitiativeSetList(&quot;KAIROS_FRAGMENTS_OF_SORCERY&quot;).Filter(InitiativeSetContext.Key == &quot;wh3_main_character_initiative_set_kairos_spells_uncommon_2&quot;).FirstContext"/>
-				<callback_with_context
-					callback_id="ContextCommandGiverOnContextSet"
-					context_object_id="CcoCampaignInitiativeSet initiative_set, CcoCampaignCharacter character"
-					context_function_id="#assigning initiatives upon rank reached#&#10;DoIf( initiative_set.ActiveInitiatives.IsEmpty &amp;&amp; character.Rank &gt;= self.GetProperty(&quot;unlocked_at_rank&quot;),&#10; initiative_set.InitiativeList.Filter( StringContains(InitiativeContext.Key, &quot;tzeentch&quot;) ).FirstContext.Activate(0) )"/>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="E6320D49-F610-4B1D-BCD7E548B72A2382"
-					name="default"
-					width="96"
-					height="96"
-					uniqueguid="E6320D49-F610-4B1D-BCD7E548B72A2382"/>
-			</states>
-		</uncommon_2_slot>
 		<upkeep_tooltip_hover
 			this="1570060D-7A81-4392-A1B6076EB0C86A66"
 			id="upkeep_tooltip_hover"

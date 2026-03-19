@@ -103,7 +103,7 @@ function minor_cult:faction_plague(region, cult_faction)
 	local region_list = region:owning_faction():region_list();
 	local infected_regions = 1;
 
-	cm:spawn_plague_at_settlement(cult_faction, region():settlement(), "wh3_main_crimson_plague_faction");
+	cm:spawn_plague_at_settlement(cult_faction, region:settlement(), "wh3_main_crimson_plague_faction");
 	out("Spawning Crimson Plague [FACTION]");
 	
 	for r = 0, region_list:num_items() - 1 do

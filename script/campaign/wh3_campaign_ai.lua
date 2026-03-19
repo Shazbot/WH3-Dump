@@ -588,12 +588,20 @@ function campaign_ai_script:process_faux_victory(faction)
 	local bundle = victory_objectives_ie.alignments[faction_alignment][mission_key].payload_bundle
 	local ancillary = victory_objectives_ie.alignments[faction_alignment][mission_key].payload_ancillary
 
-	if ancillary == nil then
+	if bundle then
 		cm:apply_effect_bundle(bundle, faction_key, 0)
 	end	
 		
-	if bundle == nil then
-		cm:add_ancillary_to_faction(faction, ancillary, true)
+	if ancillary then
+		if is_string(ancillary) then
+			cm:add_ancillary_to_faction(faction, ancillary, true)
+		elseif is_table(ancillary) then
+			for i, value in ipairs(ancillary) do
+				if value then
+					cm:add_ancillary_to_faction(faction, value, true)
+				end
+			end
+		end
 	end
 	
 	local faction_cqi = faction:command_queue_index()
@@ -757,7 +765,7 @@ cm:add_first_tick_callback(
 		local minor_potential = ssm:get_state_as_bool_value("ai_minor_faction_potential")
 
 		if minor_potential == false then
-			local faction_list = cm:model():world():faction_list()
+			local faction_list = cm:get_faction_list()
 			local config = campaign_ai_script.ai_minor_faction_potential
 			for i = 0, faction_list:num_items() - 1 do
 				local faction = faction_list:item_at(i)

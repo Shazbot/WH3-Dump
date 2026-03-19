@@ -99,40 +99,51 @@ function sea_lanes:character_arrived_incident_listener()
 		"TeleportationNetworkMoveCompleted",
 		true,
 		function(context)
-			if context:character():is_null_interface() == false and context:character():character():is_null_interface() == false then
-				local character = context:character():character();
-				local faction = character:faction();
-				local from_record = context:from_record();
+			if context:character():is_null_interface()
+				or context:character():character():is_null_interface()
+				or context:from_record():is_null_interface() then
+				return
+			end
 
-				if from_record:is_null_interface() == false then
-					local template_key = from_record:template_key();
-					local instant_move_bv = cm:get_factions_bonus_value(faction, "instant_sea_lane_travel");
+			local character = context:character():character();
+			local faction = character:faction();
+			local from_record = context:from_record();
 
-					if instant_move_bv == 0 then
-						if sea_lanes.nodes[template_key] then
-							local faction_cqi = faction:command_queue_index();
-							local character_cqi = character:command_queue_index();
-							cm:trigger_incident_with_targets(faction_cqi, self.incident_key, 0, 0, character_cqi, 0, 0, 0);
-						end
-					else
-						-- Some factions can instantly use sea lanes so we should move the camera and not trigger the incident
-						-- Bonus value is reusable but we need to check here which teleport nodes are actually used as some don't need camera movement
-						if sea_lanes.nodes[template_key] then
-							local x, y, d, b, h = cm:get_camera_position();
-							x = character:display_position_x();
-							y = character:display_position_y();
-							cm:set_camera_position(x, y, d, b, h);
-						else
-							for i = 1, #sea_lanes.aislinn_nodes do
-								if sea_lanes.aislinn_nodes[i].template == template_key then
-									local x, y, d, b, h = cm:get_camera_position();
-									x = character:display_position_x();
-									y = character:display_position_y();
-									cm:set_camera_position(x, y, d, b, h);
-									break;
-								end
-							end
-						end
+			local template_key = from_record:template_key();
+			local instant_move_bv = cm:get_factions_bonus_value(faction, "instant_sea_lane_travel");
+
+			if instant_move_bv == 0 then
+				if sea_lanes.nodes[template_key] then
+					local faction_cqi = faction:command_queue_index();
+					local character_cqi = character:command_queue_index();
+					cm:trigger_incident_with_targets(faction_cqi, self.incident_key, 0, 0, character_cqi, 0, 0, 0);
+				end
+
+				return
+			end
+
+			-- Some factions can instantly use sea lanes so we should move the camera and not trigger the incident
+			-- Bonus value is reusable but we need to check here which teleport nodes are actually used as some don't need camera movement
+
+			-- only move the camera for the local player if their faction has teleported
+			local faction_key = faction:name()
+			if faction_key ~= cm:get_local_faction_name(true) then
+				return
+			end
+
+			if sea_lanes.nodes[template_key] then
+				local x, y, d, b, h = cm:get_camera_position();
+				x = character:display_position_x();
+				y = character:display_position_y();
+				cm:set_camera_position(x, y, d, b, h);
+			else
+				for i = 1, #sea_lanes.aislinn_nodes do
+					if sea_lanes.aislinn_nodes[i].template == template_key then
+						local x, y, d, b, h = cm:get_camera_position();
+						x = character:display_position_x();
+						y = character:display_position_y();
+						cm:set_camera_position(x, y, d, b, h);
+						break;
 					end
 				end
 			end

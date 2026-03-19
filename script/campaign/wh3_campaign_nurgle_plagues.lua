@@ -32,7 +32,15 @@ nurgle_plagues = {
 	festus_symptom_key_append = "_festus",
 
 	hidden_force_effect = "wh3_dlc25_nur_base_hidden_epidemius_force",
-	hidden_region_effect = "wh3_dlc25_nur_base_hidden_epidemius_region",
+
+	region_negative_bundle_list = {
+		"wh3_dlc25_nur_random_plague_1_settlement_negative",
+		"wh3_dlc25_nur_random_plague_2_settlement_negative",
+		"wh3_dlc25_nur_random_plague_3_settlement_negative",
+		"wh3_dlc25_nur_random_plague_4_settlement_negative",
+		"wh3_dlc25_nur_random_plague_5_settlement_negative"
+	},
+
 	force_bundle_list = {
 		"wh3_dlc25_epidemius_plague_bundle_1_scripted",
 		"wh3_dlc25_epidemius_plague_bundle_2_scripted",
@@ -67,12 +75,14 @@ nurgle_plagues = {
 	plagues_unlocked_incident = "wh3_dlc25_nur_plagues_feature_unlocked",
 	disable_plagues_key = "disable_nurgle_plagues_button",
 
+	bonus_value_random_nurgle_plague_adjacent = "create_random_nurgle_plague_adjacent",
+	bonus_value_random_nurgle_plague = "create_random_nurgle_plague",
 }
 
 
 function nurgle_plagues:initialise()
 
-	local faction_list = cm:model():world():faction_list()
+	local faction_list = cm:get_faction_list()
 	--if its a new game select the starting plague component to be unlocked
 	if cm:is_new_game() then
 		for i = 0, faction_list:num_items() - 1 do
@@ -511,17 +521,19 @@ function nurgle_plagues:count_plagues_on_non_nurgle_targets()
 	local plague_count_settlements = 0
 	local non_nurgle_forces_plagued = {}
 	
-	local faction_list = cm:model():world():faction_list()
+	local faction_list = cm:get_faction_list()
 	for i = 0, faction_list:num_items() - 1 do
-		local force_list = faction_list:item_at(i):military_force_list()
-		local region_list = faction_list:item_at(i):region_list()
+		local faction = faction_list:item_at(i)
+		local force_list = faction:military_force_list()
+		local region_list = faction:region_list()
 		if not region_list:is_empty() then 
 			for j = 0, region_list:num_items() -1 do
 				local region = region_list:item_at(j)
 				local region_garrison = region:garrison_residence()
 				local plague = region:get_plague_if_infected()
 				if not plague:is_null_interface() then
-					if region:has_effect_bundle(self.hidden_region_effect) and plague:creator_faction():name() == self.epidemius_faction then
+					local has_effect_bundle = self:has_negative_region_bundle(region)
+					if has_effect_bundle and plague:creator_faction():name() == self.epidemius_faction then
 						plague_count_settlements = plague_count_settlements + 1
 						table.insert(non_nurgle_forces_plagued, region_garrison:command_queue_index())
 					end
@@ -550,6 +562,18 @@ function nurgle_plagues:count_plagues_on_non_nurgle_targets()
 	cm:faction_add_pooled_resource(self.epidemius_faction, self.epidemius_pooled_resource, self.epidemius_pooled_resource_factor_settlements, plague_count_settlements)
 
 
+end
+
+function nurgle_plagues:has_negative_region_bundle(region)
+	local bundle_keys = self.region_negative_bundle_list
+	for i = 1, #bundle_keys do
+		local bundle_key = bundle_keys[i]
+		if region:has_effect_bundle(bundle_key) then
+			return true
+		end
+	end
+
+	return false
 end
 
 function nurgle_plagues:apply_effect_bundles_to_non_nurgle_targets(plague_count, force_list)
@@ -627,6 +651,16 @@ cm:add_loading_game_callback(
 		if not cm:is_new_game() then
 			nurgle_plagues.plague_faction_info = cm:load_named_value("NurglePlagues_PlagueFactionInfo", nurgle_plagues.plague_faction_info, context)
 			nurgle_plagues.plague_button_unlock = cm:load_named_value("NurglePlagues_PlagueButtonInfo", nurgle_plagues.plague_button_unlock, context)
+
+			core:add_listener(
+				"Plauges_FirstTickAfterWorldCreated",
+				"FirstTickAfterWorldCreated",
+				true,
+				function()
+					nurgle_plagues:count_plagues_on_non_nurgle_targets()
+				end,
+				false
+			)
 		end
 	end
 )

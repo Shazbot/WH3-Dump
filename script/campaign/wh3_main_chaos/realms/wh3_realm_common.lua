@@ -296,7 +296,7 @@ function setup_realms()
 					local region_data = character:region_data();
 					local character_in_area = false;
 					local world = cm:model():world();
-					local faction_list = world:faction_list();
+					local faction_list = cm:get_faction_list();
 					
 					for i = 0, faction_list:num_items() - 1 do
 						local current_faction = faction_list:item_at(i);
@@ -956,7 +956,7 @@ function setup_realms()
 						);
 						
 						-- remove any other factions from the forge too
-						local faction_list = cm:model():world():faction_list();
+						local faction_list = cm:get_faction_list();
 						local timer = 0;
 						
 						for i = 0, faction_list:num_items() - 1 do
@@ -1058,7 +1058,7 @@ function setup_realms()
 	
 	-- reset any context values and ensure the forge of souls rift is open if necessary
 	local world = cm:model():world();
-	local faction_list = world:faction_list();
+	local faction_list = cm:get_faction_list();
 	local is_forge_rift_closed = world:teleportation_network_system():lookup_network("wh3_main_teleportation_network_chaos"):is_node_closed("wh3_main_chaos_forge_of_souls");
 	
 	for i = 0, faction_list:num_items() - 1 do
@@ -1353,7 +1353,7 @@ function setup_realms()
 				
 				cm:remove_hex_area_trigger("ai_final_battle_location");
 				
-				local faction_list = cm:model():world():faction_list();
+				local faction_list = cm:get_faction_list();
 				local timer = 0;
 				
 				for i = 0, faction_list:num_items() - 1 do
@@ -1426,7 +1426,7 @@ function setup_realms()
 			local world = cm:model():world();
 			local open_nodes = world:teleportation_network_system():lookup_network("wh3_main_teleportation_network_chaos"):open_nodes();
 			local anything_spawned = false;
-			local faction_list = world:faction_list();
+			local faction_list = cm:get_faction_list();
 			
 			local human_factions = cm:get_human_factions();
 			local highest_realm_count = 0;
@@ -1900,7 +1900,7 @@ end;
 
 function open_initial_nodes()
 	-- ensure that a rift is open in each playable factions home province first
-	local faction_list = cm:model():world():faction_list();
+	local faction_list = cm:get_faction_list();
 	-- get the valid templates for opening nodes with
 	local templates = {};
 	for k, v in pairs(realm_mapping) do
@@ -2572,7 +2572,7 @@ function close_realm(faction_name, realm_to_close)
 	
 	-- return armies in the realm back to where they originally teleported from
 	local world = cm:model():world();
-	local faction_list = world:faction_list();
+	local faction_list = cm:get_faction_list();
 	local timer = 0;
 	
 	for i = 0, faction_list:num_items() - 1 do
@@ -3078,7 +3078,7 @@ function update_shared_states()
 	local number_of_ai_factions_in_slaanesh_realm = 0;
 	local number_of_ai_factions_in_tzeentch_realm = 0;
 	
-	local faction_list = model:world():faction_list();
+	local faction_list = cm:get_faction_list();
 	
 	for i = 0, faction_list:num_items() - 1 do
 		local current_faction = faction_list:item_at(i);

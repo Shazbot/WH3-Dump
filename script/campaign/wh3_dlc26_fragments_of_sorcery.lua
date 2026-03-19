@@ -55,23 +55,6 @@ end
 
 function fragments_of_sorcery:add_listeners()
 	core:add_listener(
-		"FragmentsOfSorcery_FactionJoinsConfederation",
-		"FactionJoinsConfederation",
-		true,
-		function(context)
-			local characters = context:confederation():character_list()
-			for i = 0, characters:num_items() - 1 do
-				local character = characters:item_at(i)
-				if character:character_subtype_key() == self.config.target_character_subtype_key then
-					self:initialise_default_spells(character)
-					break
-				end
-			end
-		end,
-		true
-	)
-
-	core:add_listener(
 		"FragmentsOfSorcery_CharacterSkillPointAllocated",
 		"CharacterSkillPointAllocated",
 		true,
@@ -103,7 +86,7 @@ function fragments_of_sorcery:initialise_default_spells(character)
 							cm:toggle_initiative_script_locked(initiative_set, initiative_key, false)
 						end
 
-						cm:toggle_initiative_active(initiative_set, initiative_key, true, 0)
+						cm:toggle_initiative_active(initiative_set, initiative_key, true)
 						break
 					end
 				end

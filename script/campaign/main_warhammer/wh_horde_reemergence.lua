@@ -101,7 +101,7 @@ function add_horde_reemergence_listeners()
 		end,
 		function()
 			local factions_dead = {}
-			local faction_list = cm:model():world():faction_list()
+			local faction_list = cm:get_faction_list()
 			
 			for i = 0, faction_list:num_items() - 1 do
 				local current_faction = faction_list:item_at(i)
@@ -162,7 +162,7 @@ function attempt_to_spawn_scripted_army(faction_name)
 	else
 		-- autorun - pick a random playable faction to target
 		local playable_factions = {}
-		local faction_list = cm:model():world():faction_list()
+		local faction_list = cm:get_faction_list()
 		
 		for i = 0, faction_list:num_items() - 1 do
 			local current_faction = faction_list:item_at(i)

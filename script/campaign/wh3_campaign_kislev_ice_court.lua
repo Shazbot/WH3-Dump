@@ -33,7 +33,7 @@ local kislev_culture = "wh3_main_ksl_kislev";
 function setup_ice_court_ai()
 	-- assign random traits to characters in the start pos
 	if cm:is_new_game() then
-		local faction_list = cm:model():world():faction_list();
+		local faction_list = cm:get_faction_list();
 		
 		for i = 0, faction_list:num_items() - 1 do
 			local current_faction = faction_list:item_at(i);

@@ -625,8 +625,7 @@ function tower_of_zharr:district_complete_check(seat)
 			district.complete_status = true
 
 			--apply district effect bundle to all chaos dwarf factions
-			local model = cm:model()
-			local faction_list = model:world():faction_list()
+			local faction_list = cm:get_faction_list()
 
 			for i = 0, faction_list:num_items() -1 do
 				local current_faction = faction_list:item_at(i)

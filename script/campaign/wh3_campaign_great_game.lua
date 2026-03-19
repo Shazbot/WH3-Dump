@@ -82,7 +82,7 @@ function great_game_start()
 			local most_armies = 0;
 			local most_money = 0;
 			
-			local faction_list = cm:model():world():faction_list();
+			local faction_list = cm:get_faction_list();
 			
 			for i = 1, #gods do
 				if current_ascended_god ~= gods[i] then
@@ -454,7 +454,7 @@ function update_available_rituals(interval_string, counter)
 		return false;
 	end;
 	
-	local faction_list = cm:model():world():faction_list();
+	local faction_list = cm:get_faction_list();
 	local current_ascended_god = cm:get_saved_value("great_game_ascendant_god") or "";
 	
 	for i = 0, faction_list:num_items() - 1 do

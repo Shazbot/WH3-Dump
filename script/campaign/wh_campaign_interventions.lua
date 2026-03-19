@@ -9690,7 +9690,7 @@ in_black_arks:add_trigger_condition(
 		local local_faction = cm:get_local_faction_name();
 	
 		-- go through all def factions, find any black ark among them, and see if any of these are visible to the player
-		local faction_list = cm:model():world():faction_list();
+		local faction_list = cm:get_faction_list();
 		
 		for i = 0, faction_list:num_items() - 1 do
 			local current_faction = faction_list:item_at(i);
@@ -20873,7 +20873,7 @@ in_request_foreign_army:add_trigger_condition(
 	"ScriptEventPlayerFactionTurnStart",
 	function()
 		local player_faction = cm:get_local_faction()
-		local all_factions_list = cm:model():world():faction_list()
+		local all_factions_list = cm:get_faction_list()
 
 		for i = 0, all_factions_list:num_items() - 1 do
 			if all_factions_list:item_at(i) ~= player_faction and all_factions_list:item_at(i):military_allies_with(player_faction) then

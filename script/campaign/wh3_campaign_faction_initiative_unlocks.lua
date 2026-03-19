@@ -119,7 +119,7 @@ faction_initiatives_unlocker.event_templates = {
 
 
 function faction_initiatives_unlocker:initiatives_unlocker_listeners()
-	local factions = cm:model():world():faction_list()
+	local factions = cm:get_faction_list()
 	
 	for _, current_faction in model_pairs(factions) do
 		if self.initiative_cultures[current_faction:culture()]then

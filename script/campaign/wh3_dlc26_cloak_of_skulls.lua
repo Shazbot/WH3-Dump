@@ -266,7 +266,7 @@ function cloak_of_skulls:defeated_character_apply_bonuses(mf_cqis_defeated, skul
 
 	if replenish_bloodhost_bonus > 0 then
 		for _, mf in model_pairs(faction:military_force_list()) do
-			if mf:force_type():key() == "DISCIPLE_ARMY" then
+			if mf:force_type():key() == "BLOOD_HOST_ARMY" then
 				for _, unit in model_pairs(mf:unit_list()) do
 					local health_to_set = (unit:percentage_proportion_of_full_strength() + replenish_bloodhost_bonus) / 100
 					cm:set_unit_hp_to_unary_of_maximum(unit, math.min(health_to_set, 1))
@@ -398,7 +398,7 @@ function cloak_of_skulls:cache_champions_essence_pending_battle(mf_cqi)
 end
 
 function cloak_of_skulls:update_all_military_force_champions_essence()
-	for _, faction in model_pairs(cm:model():world():faction_list()) do
+	for _, faction in model_pairs(cm:get_faction_list()) do
 		for _, mf in model_pairs(faction:military_force_list()) do
 			if mf:has_general() then
 				self:update_military_forces_champions_essence(mf)

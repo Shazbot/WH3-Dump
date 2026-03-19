@@ -760,7 +760,7 @@ cm:add_first_tick_callback_new(
 				"wh3_main_tze_flaming_scribes",
 			};
 			
-			local faction_list = cm:model():world():faction_list();
+			local faction_list = cm:get_faction_list();
 			for i = 0, faction_list:num_items() - 1 do
 				local current_faction = faction_list:item_at(i);
 				

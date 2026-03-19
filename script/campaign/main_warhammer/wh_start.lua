@@ -599,7 +599,7 @@ core:add_listener(
 		return cm:model():turn_number() == faction_potential_increase_for_big_factions_turn
 	end, 
 	function(context)
-		local factions_list = context:world():faction_list()
+		local factions_list = cm:get_faction_list()
 		local factions_to_regions = {}
 		for i = 0, factions_list:num_items() - 1 do
 			local curr_faction = factions_list:item_at(i)

@@ -1384,7 +1384,7 @@ function caravans:reward_item_check(faction, region_key, caravan_master)
 end
 
 function caravans:get_best_ogre_faction(self_faction)
-	local factions = cm:get_faction(self_faction):factions_met(); --cm:model():world():faction_list();
+	local factions = cm:get_faction(self_faction):factions_met(); --cm:get_faction_list();
 	local faction = nil;
 	local high_score = -500;
 	local high_score_faction = nil;

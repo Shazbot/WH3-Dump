@@ -127,7 +127,7 @@ function setup_wh_campaign(generic_battle_script_path_override)
 	-- AI Beastmen armies can get stuck in encampment stance attempting to
 	-- replenish losses that they suffer from low army morale attrition
 	-- Mitch, 04/07/16
-	local faction_list = cm:model():world():faction_list();
+	local faction_list = cm:get_faction_list();
 	
 	for i = 0, faction_list:num_items() - 1 do
 		local current_faction = faction_list:item_at(i);
@@ -988,7 +988,7 @@ end
 
 --- disables declarations of war against a specific faction and adds it to the register of human vassals
 function disable_wars_against_human_vassal(faction_key, is_disable)
-	for _, faction in model_pairs(cm:model():world():faction_list()) do
+	for _, faction in model_pairs(cm:get_faction_list()) do
 		local current_faction_key = faction:name()
 		
 		if current_faction_key ~= faction_key and not faction:is_human() then
@@ -1094,6 +1094,7 @@ local forcetype_upkeep_exclusions = {
 	CARAVAN = true,
 	CONVOY = true,
 	SUPPORT_ARMY = true,
+	BLOOD_HOST_ARMY = true,
 };
 
 -- These are armies we consider 'non typical' and which shouldn't be counter when querying how many active armies a faction has.
@@ -1298,7 +1299,7 @@ function blood_pack_incidents_listener()
 					cm:trigger_incident(human_factions[i], incident_key)
 				end
 
-				local faction_list = cm:model():world():faction_list()
+				local faction_list = cm:get_faction_list()
 				
 				for i = 0, faction_list:num_items() - 1 do
 					local faction = faction_list:item_at(i)
@@ -2080,6 +2081,7 @@ function set_up_rank_up_listener(quests, subtype, infotext)
 					cutscene:set_disable_settlement_labels(false);
 					cutscene:set_dismiss_advice_on_end(false);
 					cutscene:set_restore_shroud(false);
+					cutscene:set_restore_ui(true);
 					
 					-- make the target region visible if we have one
 					if current_region_key then
@@ -2224,7 +2226,7 @@ function set_up_backup_mission(origin_mission, backup_mission, subtype)
 			
 			-- get the character's faction name, it might have changed if they've been confederated
 			local faction_name = nil;
-			local faction_list = cm:model():world():faction_list();
+			local faction_list = cm:get_faction_list();
 			
 			for i = 0, faction_list:num_items() - 1 do
 				local current_faction = faction_list:item_at(i);
@@ -2349,7 +2351,7 @@ local sea_region_effect_buildings = {
 
 local sea_region_effect_techs = {
 	"wh2_main_tech_hef_5_04",
-	"wh3_dlc27_tech_hef_aislinn_5_00"
+	"wh3_dlc27_tech_hef_aislinn_5_04"
 };
 
 function sea_region_shroud_effect_listener()
@@ -2783,6 +2785,7 @@ function apply_default_diplomacy()
 	if cm:get_faction("wh3_dlc27_hef_aislinn_confederation_owner") then
 		cm:force_diplomacy("all", "faction:wh3_dlc27_hef_aislinn_confederation_owner", "form confederation", false, false, false);
 		cm:force_diplomacy("faction:wh3_dlc27_hef_aislinn_confederation_owner", "faction:wh3_dlc27_hef_aislinn", "war", false, false, true)
+		cm:force_diplomacy("all", "faction:wh3_dlc27_hef_aislinn_confederation_owner", "vassal", false, false, false)
 	end
 	
 	-- Kholek can't vassalize the Avags, to prevent Sayl disruptions

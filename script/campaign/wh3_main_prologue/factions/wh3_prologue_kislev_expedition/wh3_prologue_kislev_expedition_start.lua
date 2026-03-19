@@ -570,7 +570,7 @@ function AddDeathListeners()
 			"CharacterConvalescedOrKilledLegendaryLord",
 			"CharacterConvalescedOrKilled", 
 			function(context)
-				return prologue_check_progression["legendary_lord_death"] == false and context:character():character_type_key() == "general" and context:character():is_faction_leader() and context:character():faction():name() == prologue_player_faction and context:character():military_force():unit_list():is_empty()
+				return prologue_check_progression["legendary_lord_death"] == false and context:character():character_type_key() == "general" and context:character():is_faction_leader() and context:character():faction():name() == prologue_player_faction and context:character():is_wounded() == true and context:character():has_military_force() == false
 			end,
 			function()
 				if cm:model():is_player_turn() then
@@ -625,7 +625,7 @@ function AddDeathListeners()
 			"CharacterConvalescedOrKilledLord",
 			"CharacterConvalescedOrKilled", 
 			function(context)
-				if prologue_check_progression["lord_death"] == false and context:character():character_type_key() == "general" and not context:character():is_faction_leader() and context:character():faction():name() == prologue_player_faction and context:character():age() > 0 and context:character():military_force():unit_list():is_empty() then
+				if prologue_check_progression["lord_death"] == false and context:character():character_type_key() == "general" and not context:character():is_faction_leader() and context:character():faction():name() == prologue_player_faction and context:character():is_wounded() == true and context:character():has_military_force() == false then
 					return true
 				end
 			end,
@@ -1662,7 +1662,7 @@ if prologue_check_progression["dervingard_battle_complete"] == true then
 end
 
 function PrologueSetUpDiplomacy()
-	local faction_list = cm:model():world():faction_list();
+	local faction_list = cm:get_faction_list();
 	
 	out("CAN DECLARE WAR")
 	cm:force_diplomacy("faction:"..prologue_player_faction, "all", "war", true, true, false)
@@ -1920,7 +1920,7 @@ end
 function stop_ai_settlement_growth(value)
 
 	local player_faction = cm:get_local_faction()
-	local faction_list = cm:model():world():faction_list()
+	local faction_list = cm:get_faction_list()
 	
 	if value then
 		for i = 0, faction_list:num_items() - 1 do

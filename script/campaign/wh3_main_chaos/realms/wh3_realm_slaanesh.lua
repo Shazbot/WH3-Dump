@@ -801,7 +801,7 @@ function setup_realm_slaanesh(entering_faction)
 end;
 
 function remove_slaanesh_ancillary(ancillary_key)
-	local faction_list = cm:model():world():faction_list();
+	local faction_list = cm:get_faction_list();
 	
 	for i = 0, faction_list:num_items() - 1 do
 		local current_faction = faction_list:item_at(i);

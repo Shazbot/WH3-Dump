@@ -1103,7 +1103,8 @@ character_unlocking.character_data = {
 			"wh3_dlc20_chs_sigvald",
 			"wh3_dlc27_sla_masque_of_slaanesh",
 			"wh3_dlc27_sla_the_tormentors",
-			"wh3_main_sla_seducers_of_slaanesh"
+			"wh3_main_sla_seducers_of_slaanesh",
+			"wh3_dlc20_chs_azazel"
 		},
 		factions_involved = {},
 		starting_mission_keys = "wh3_dlc27_ie_sla_styrkaar_stage_1",
@@ -2003,7 +2004,7 @@ end
 function character_unlocking:get_allowed_factions_for_culture(culture, non_playable_factions_allowed)
 	local available_factions = {}
 
-	for _, current_faction in model_pairs(cm:model():world():faction_list()) do
+	for _, current_faction in model_pairs(cm:get_faction_list()) do
 		if current_faction:culture() == culture then
 			if non_playable_factions_allowed then
 				table.insert(available_factions, current_faction:name())
@@ -2054,25 +2055,43 @@ function character_unlocking:get_mission_key(mission_keys, faction_name)
 	end
 end
 
-function character_unlocking:cancel_missions_for_other_players(completing_faction, character, character_mission_success_listener)
-	local character_info = self.character_data[character]
-	local campaign_name = cm:get_campaign_name()
+function character_unlocking:cancel_missions_for_faction(faction_key, character_info, character_mission_success_listener)
+	if character_info.mission_chain_keys ~= nil then
+		local campaign_name = cm:get_campaign_name()
+		for _, mission_key in ipairs(character_info.mission_chain_keys[campaign_name]) do
+			cm:cancel_custom_mission(faction_key, mission_key)
+		end
+	else
+		cm:cancel_custom_mission(faction_key, self:get_mission_key(character_info.starting_mission_keys, faction_key))
+	end
+
+	if character_mission_success_listener then
+		core:remove_listener(faction_key .. character_mission_success_listener)
+	end
+end
+
+function character_unlocking:cancel_mission_for_character_info(character_info, completing_faction, character_mission_success_listener)
 	for i = 1, #character_info.allowed_factions do
 		local faction = character_info.allowed_factions[i]
 		if character_info.factions_involved[faction] and faction ~= completing_faction then
-			if character_info.mission_chain_keys ~= nil then
-				for _, mission_key in ipairs(character_info.mission_chain_keys[campaign_name]) do
-					cm:cancel_custom_mission(faction, mission_key)
-				end
-			else
-				cm:cancel_custom_mission(faction, self:get_mission_key(character_info.starting_mission_keys, faction))
-			end
-			if character_mission_success_listener then
-				core:remove_listener(faction .. character_mission_success_listener)
-			end
+			self:cancel_missions_for_faction(faction, character_info, character_mission_success_listener)
 		end
 	end
-	character_info.has_spawned = true
+end
+
+function character_unlocking:cancel_missions_for_other_players(completing_faction, character, character_mission_success_listener)
+	local character_info = self.character_data[character]
+
+	-- there may be more than one character data setup configured to
+	-- spawn the same hero - so go around and cancel all missions for it
+	local agent_subtype = character_info.subtype
+	for _, current_character_info in dpairs(self.character_data) do
+		local current_subtype = current_character_info.subtype
+		if current_subtype == agent_subtype then
+			self:cancel_mission_for_character_info(current_character_info, completing_faction, character_mission_success_listener)
+			current_character_info.has_spawned = true
+		end
+	end
 end
 
 

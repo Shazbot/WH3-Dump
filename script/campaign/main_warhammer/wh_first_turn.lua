@@ -3065,7 +3065,7 @@ end
 
 -- save the chosen legendary lords so we don't unlock them again later
 function store_starting_generals()
-	local faction_list = cm:model():world():faction_list();
+	local faction_list = cm:get_faction_list();
 	local count = 1;
 	
 	for i = 0, faction_list:num_items() - 1 do
@@ -3093,7 +3093,7 @@ end;
 -- when unlocking starting generals, as a fail safe, ensure that they do not have a military force (are present on the map) before trying to unlock them
 -- otherwise catastrophic failures may occur.
 function char_with_forename_has_no_military_force(forename)
-	local faction_list = cm:model():world():faction_list();
+	local faction_list = cm:get_faction_list();
 	
 	for i = 0, faction_list:num_items() - 1 do
 		local current_faction = faction_list:item_at(i);

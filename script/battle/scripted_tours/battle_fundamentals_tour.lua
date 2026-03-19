@@ -51,7 +51,7 @@ do
 	-- validation rules for this navigable tour
 	nt_battle_fundamentals:add_validation_rule(
 		function()
-			return core:is_battle()
+			return core:is_battle() and not navigable_tour_section:is_playing()
 		end,
 		"random_localisation_strings_string_scripted_tour_invalid_not_battle"
 	);
@@ -98,11 +98,7 @@ do
 		end,
 		"random_localisation_strings_string_scripted_tour_invalid_insufficient_enemy_units"
 	);
-	
-	
-	
-	
-	
+
 	-- Work out what units we will use, and where we will use them, at the start of the battle if this battle is suitable
 	if is_battle_type_suitable_for_battle_fundamentals_scripted_tour() and not bm:is_multiplayer() then
 

@@ -300,7 +300,7 @@ cm:add_first_tick_callback_new(
 			cm:set_script_state("ToL_score_to_win", score_goal);
 			
 			--Skip AI factions
-			local all_factions = cm:model():world():faction_list();
+			local all_factions = cm:get_faction_list();
 			for i = 0, all_factions:num_items()-1 do
 				local faction = all_factions:item_at(i);
 				if faction:is_human() == false then

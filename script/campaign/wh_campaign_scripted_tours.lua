@@ -6580,7 +6580,7 @@ in_sla_masque_the_eternal_dance_text_pointer_tour = intervention:new(
 	function()
 		cm:callback(function()
 			local uic = find_uicomponent(core:get_ui_root(), "button_no_dance")
-			if uic and uic:Visible() and uic:CurrentState() == "active" then
+			if uic and uic:VisibleFromRoot() and uic:CurrentState() == "active" then
 				ui_scripted_tour:toggle_shortcuts(false)
 				masque_dance_text_pointer()
 			else
@@ -6601,14 +6601,25 @@ in_sla_masque_the_eternal_dance_text_pointer_tour:add_trigger_condition(
 		local character = context:character()
         return character:character_subtype_key() == "wh3_dlc27_sla_masque_of_slaanesh" or character:character_subtype_key() == "wh3_main_sla_herald_of_slaanesh_shadow" 
 		or character:character_subtype_key() == "wh3_main_sla_herald_of_slaanesh_slaanesh"
-	end 
+	end
+)	
+in_sla_masque_the_eternal_dance_text_pointer_tour:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		if context.string == "units_panel" then
+			local uic = find_uicomponent(core:get_ui_root(), "button_no_dance")
+			if uic and uic:VisibleFromRoot() and uic:CurrentState() == "active" then
+				return true
+			end	
+		end
+	end			
 )
 
 function masque_dance_text_pointer()
 	local uic = find_uicomponent(core:get_ui_root(), "button_no_dance")
 	local info_size_x, info_size_y = uic:Dimensions()
 	local info_pos_x, info_pos_y = uic:Position();
-	if uic and uic:Visible() then 
+	if uic and uic:Visible() then
 		highlight_component(true, true, "button_no_dance")		
 		core:show_fullscreen_highlight_around_components(30, false, false, uic)
 		local tp_dance = text_pointer:new("tp_masque_no_dance", "bottom", 70, info_pos_x + (info_size_x / 2) +1, (info_pos_y + (info_size_y / 2)) -50);
@@ -6694,9 +6705,9 @@ scripted_sla_masque_the_eternal_dance_tour = {
 		},
 		text_box = {
 			text = "wh3_dlc27_text_pointer_sla_the_eternal_dance_4",
-			direction = "bottom",
-			size = 350,
-			length = 50
+			direction = "right",
+			size = 200,
+			length = 20
 		},
 	},
 
@@ -6707,7 +6718,7 @@ scripted_sla_masque_the_eternal_dance_tour = {
 		},
 		text_box = {
 			text = "wh3_dlc27_text_pointer_sla_the_eternal_dance_5",
-			direction = "bottom",
+			direction = "right",
 			size = 350,
 			length = 50
 		},
@@ -6721,7 +6732,7 @@ scripted_sla_masque_the_eternal_dance_tour = {
 		},
 		text_box = {
 			text = "wh3_dlc27_text_pointer_sla_the_eternal_dance_6",
-			direction = "bottom",
+			direction = "right",
 			size = 350,
 			length = 50
 		},
@@ -7018,7 +7029,11 @@ in_sla_dechala_corrupt_units_tour:add_trigger_condition(
 			if context.string == "popup_pre_battle" then
 				if cm:turn_number() <= 1 then
 					local enemy_unit_1 = find_uicomponent(core:get_ui_root(), "popup_pre_battle", "enemy_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units", "unit_1")
+					local enemy_unit_2 = find_uicomponent(core:get_ui_root(), "popup_pre_battle", "enemy_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units", "unit_2")
 					if enemy_unit_1 and enemy_unit_1:Visible() == true then
+						if enemy_unit_2 and enemy_unit_2:Visible() == true then
+							enemy_unit_2:SetDisabled(true)
+						end 
 						common.set_advice_history_string_seen("in_sla_dechala_corrupt_units_tour") 
 						cm:steal_escape_key(true)
 						local uic_army = find_uicomponent(core:get_ui_root(), "popup_pre_battle", "enemy_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units")
@@ -7038,7 +7053,7 @@ in_sla_dechala_corrupt_units_tour:add_trigger_condition(
 						tp:set_highlight_close_button(0.5)
 						tp:set_close_button_callback(function() core:hide_fullscreen_highlight();
 							highlight_component(true, true, "popup_pre_battle", "enemy_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units", "unit_1") 
-							core:show_fullscreen_highlight_around_components(25, false, true, enemy_unit_1);
+							core:show_fullscreen_highlight_around_components(0, false, true, enemy_unit_1);
 							in_sla_dechala_corrupt_units_tour:complete();
 							cm:steal_escape_key(true)
 							tp:hide()
@@ -7086,6 +7101,10 @@ function dechala_pre_battle()
 			return context.string == "unit_1" and uicomponent_descended_from(UIComponent(context.component), "enemy_combatants_panel");
 		end,
 		function()
+			local enemy_unit_2 = find_uicomponent(core:get_ui_root(), "popup_pre_battle", "enemy_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units", "unit_2")
+			if enemy_unit_2 and enemy_unit_2:Visible() == true then
+				enemy_unit_2:SetDisabled(false)
+			end			
 			core:hide_fullscreen_highlight();
 			pre_battle_text_pointer_thralls()
 			highlight_component(false, false, "popup_pre_battle", "enemy_combatants_panel", "army", "units_and_banners_parent", "units_window", "listview", "list_clip", "list_box", "commander_header_0", "units", "unit_1")
@@ -7127,13 +7146,12 @@ end
 in_sla_dechala_minor_occupation_tour = intervention:new(
 	"in_sla_dechala_minor_occupation_tour",			 					-- string name
 	5, 																	-- cost
-	function() thrall_settlement_scripted_tour() end,					-- trigger callback
+	function() dechala_pleasure_thrall_settlement_text_pointer() end,	-- trigger callback
 	BOOL_INTERVENTIONS_DEBUG	 	
-
 )
 
 in_sla_dechala_minor_occupation_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_sla_dechala_minor_occupation_tour") end)
-in_sla_dechala_minor_occupation_tour:set_wait_for_fullscreen_panel_dismissed(true)
+in_sla_dechala_minor_occupation_tour:set_wait_for_fullscreen_panel_dismissed(false)
 in_sla_dechala_minor_occupation_tour:set_wait_for_battle_complete(false)
 in_sla_dechala_minor_occupation_tour:set_should_lock_ui(false)
 in_sla_dechala_minor_occupation_tour:add_trigger_condition(
@@ -7149,7 +7167,10 @@ in_sla_dechala_minor_occupation_tour:add_trigger_condition(
 								local war_pit = find_uicomponent("1489372626","option_button");
 								local sack = find_uicomponent("1091624345","option_button"); 
 								local raze = find_uicomponent("2099100715","option_button");
-								local do_nothing = find_uicomponent("60518285","option_button"); 
+								local do_nothing = find_uicomponent("60518285","option_button");
+								local thrall_camp = find_uicomponent("1218317010", "option_button");
+								local subjugate = find_uicomponent("957000480", "option_button");
+								local liberate = find_uicomponent("1560616607", "option_button");
 								if war_pit and war_pit:Visible() == true then
 									war_pit:SetState("inactive")
 								end
@@ -7162,11 +7183,17 @@ in_sla_dechala_minor_occupation_tour:add_trigger_condition(
 								if do_nothing and do_nothing:Visible() == true then 
 									do_nothing:SetState("inactive")
 								end
-								dechala_pleasure_thrall_settlement_text_pointer()
-								if cm:pending_battle_cache_faction_is_attacker("wh3_dlc27_sla_the_tormentors") then 				
-									return true
-								end 
-							end
+								if thrall_camp and thrall_camp:Visible() == true then
+									thrall_camp:SetState("inactive")
+								end
+								if subjugate and subjugate:Visible() == true then
+									subjugate:SetState("inactive")
+								end
+								if liberate and liberate:Visible() == true then
+									liberate:SetState("inactive")
+								end
+								return true
+ 							end
 						end 
 					end 	
 				end 	
@@ -7176,6 +7203,7 @@ in_sla_dechala_minor_occupation_tour:add_trigger_condition(
 )
 
 function dechala_pleasure_thrall_settlement_text_pointer()
+	local thrall_camp = find_uicomponent("1218317010", "option_button");
 	local uic = find_uicomponent(core:get_ui_root(), "1218317010")
 	core:show_fullscreen_highlight_around_components(10, false, false, uic)
 	local tp = text_pointer:new_from_component(
@@ -7192,6 +7220,11 @@ function dechala_pleasure_thrall_settlement_text_pointer()
 	tp:set_highlight_close_button(0.5)
 	tp:set_close_button_callback(function() core:hide_fullscreen_highlight(); 
 	tp:hide()
+		in_sla_dechala_minor_occupation_tour:complete()
+		if thrall_camp and thrall_camp:Visible() == true then
+			thrall_camp:SetState("active")
+		end	
+		thrall_settlement_scripted_tour()
 		end)
 	tp:show()
 end 
@@ -7207,7 +7240,6 @@ function thrall_settlement_scripted_tour()
 		end,
 		function(context)
 			common.set_advice_history_string_seen("in_sla_dechala_minor_occupation_tour")
-			in_sla_dechala_minor_occupation_tour:complete()
 		end,
 		false
 	)
@@ -7224,6 +7256,7 @@ in_sla_minor_settlement_thrall_camp_tour = intervention:new(
 				out("#### "..scripted_sla_minor_settlement_thrall_camp_tour.id.." ####")
 				ui_scripted_tour:construct_tour(scripted_sla_minor_settlement_thrall_camp_tour, in_sla_minor_settlement_thrall_camp_tour)
 			else
+				cm:steal_escape_key(false)
 				in_sla_minor_settlement_thrall_camp_tour:cancel()
 			end		
 		end, 0.1)
@@ -7244,6 +7277,7 @@ in_sla_minor_settlement_thrall_camp_tour:add_trigger_condition(
 			if region:owning_faction():name() == "wh3_dlc27_sla_the_tormentors" and region:name() == "wh3_main_combi_region_mountain_pass" 
 				and region:slot_list():item_at(0):building():chain() == "wh3_dlc27_sla_dec_thrall_camp_settlement" 
 			then
+				cm:steal_escape_key(true)
 				return true
 			end
 		end		
@@ -7290,12 +7324,12 @@ scripted_sla_minor_settlement_thrall_camp_tour = {
 in_sla_dechala_pleasure_palace_tour = intervention:new(
 	"in_sla_dechala_pleasure_palace_tour",			 							-- string name
 	5, 																	-- cost
-	function() palace_of_settlement_scripted_tour() end,					-- trigger callback
+	function() dechala_pleasure_palace_text_pointer()  end,					-- trigger callback
 	BOOL_INTERVENTIONS_DEBUG		 										-- show debug output
 )
 
 in_sla_dechala_pleasure_palace_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_sla_dechala_pleasure_palace_tour") end)
-in_sla_dechala_pleasure_palace_tour:set_wait_for_fullscreen_panel_dismissed(true)
+in_sla_dechala_pleasure_palace_tour:set_wait_for_fullscreen_panel_dismissed(false)
 in_sla_dechala_pleasure_palace_tour:set_wait_for_battle_complete(false)
 in_sla_dechala_pleasure_palace_tour:set_should_lock_ui(false)
 in_sla_dechala_pleasure_palace_tour:set_player_turn_only(false)
@@ -7311,12 +7345,14 @@ in_sla_dechala_pleasure_palace_tour:add_trigger_condition(
 						for settlement_level = 1, 5 do 
 							if cm:faction_contains_building(dechala_faction, "wh3_dlc27_sla_dec_palace_settlement_" .. settlement_level) == false then 
 								if find_uicomponent(core:get_ui_root(), "settlement_captured", "1084419564") then
-									dechala_pleasure_palace_text_pointer() 
 									local thrall_camp = find_uicomponent("1218317010","option_button");
 									local war_pit = find_uicomponent("1489372626","option_button");
 									local sack = find_uicomponent("1091624345","option_button"); 
 									local raze = find_uicomponent("2099100715","option_button");
 									local do_nothing = find_uicomponent("60518285", "option_button");
+									local pleasure_palace = find_uicomponent("1084419564", "option_button")
+									local subjugate = find_uicomponent("957000480", "option_button");
+									local liberate = find_uicomponent("1560616607", "option_button");
 									if thrall_camp and thrall_camp:Visible() == true then
 										thrall_camp:SetState("inactive") 
 									end
@@ -7332,9 +7368,16 @@ in_sla_dechala_pleasure_palace_tour:add_trigger_condition(
 									if do_nothing and do_nothing:Visible() == true then
 										do_nothing:SetState("inactive")
 									end
-									if cm:pending_battle_cache_faction_is_attacker("wh3_dlc27_sla_the_tormentors") then 				
-										return true
+									if pleasure_palace and pleasure_palace:Visible() == true then
+										pleasure_palace:SetState("inactive")
+									end
+									if subjugate and subjugate:Visible() == true then
+										subjugate:SetState("inactive")
+									end
+									if liberate and liberate:Visible() == true then
+										liberate:SetState("inactive")
 									end 
+									return true
 								end 	
 							end 
 						end 
@@ -7346,11 +7389,12 @@ in_sla_dechala_pleasure_palace_tour:add_trigger_condition(
 )
 
 function dechala_pleasure_palace_text_pointer()
+	local pleasure_palace = find_uicomponent("1084419564", "option_button")
 	local uic_parent = find_uicomponent(core:get_ui_root(), "settlement_captured", "1084419564")
 	local uic = find_uicomponent(core:get_ui_root(), "1084419564")
 	core:show_fullscreen_highlight_around_components(10, false, false, uic_parent)
 	local tp = text_pointer:new_from_component(
-	"tp_scripted_tour",
+	"tp_dechala_capture_pleasure_palace",
 	"left",
 	100, 
 	uic,
@@ -7361,7 +7405,12 @@ function dechala_pleasure_palace_text_pointer()
 	tp:set_style("semitransparent")
 	tp:set_topmost(true)
 	tp:set_highlight_close_button(0.5)
-	tp:set_close_button_callback(function() core:hide_fullscreen_highlight(); 
+	tp:set_close_button_callback(function() core:hide_fullscreen_highlight();
+		in_sla_dechala_pleasure_palace_tour:complete()
+		if pleasure_palace and pleasure_palace:Visible() == true then
+			pleasure_palace:SetState("active")
+		end
+		palace_of_settlement_scripted_tour() 
 		tp:hide()
 	end)
 	tp:show()
@@ -7379,7 +7428,6 @@ function palace_of_settlement_scripted_tour()
 		function(context)
 			core:hide_all_text_pointers()
 			common.set_advice_history_string_seen("in_sla_dechala_pleasure_palace_tour")
-			in_sla_dechala_pleasure_palace_tour:complete()
 		end,
 		false
 	)
@@ -7395,7 +7443,8 @@ in_sla_major_settlement_pleasure_palace_tour = intervention:new(
 			common.set_advice_history_string_seen("in_sla_major_settlement_pleasure_palace_tour") 
 			out("#### "..scripted_sla_major_settlement_pleasure_palace_tour.id.." ####")
 			ui_scripted_tour:construct_tour(scripted_sla_major_settlement_pleasure_palace_tour, in_sla_major_settlement_pleasure_palace_tour)
-		elseif not uic or not uic:Visible() then 
+		elseif not uic or not uic:Visible() then
+			cm:steal_escape_key(false) 
 			in_sla_major_settlement_pleasure_palace_tour:cancel()
 		end	
 		end, 0.1)
@@ -7415,7 +7464,8 @@ in_sla_major_settlement_pleasure_palace_tour:add_trigger_condition(
 		if not cm:is_multiplayer() then	
 			if region:owning_faction():name() == "wh3_dlc27_sla_the_tormentors" and region:name() == "wh3_main_combi_region_gateway_to_khuresh" 
 				and region:slot_list():item_at(0):building():chain() == "wh3_dlc27_sla_dec_palace_settlement" and uic and uic:Visible() 
-			then 
+			then
+				cm:steal_escape_key(true)
 				return true 
 			end
 		end	 
@@ -8198,7 +8248,7 @@ function aislinn_faction_list_description()
 	end	
 	cm:steal_escape_key(true)
 	local uic = find_uicomponent(core:get_ui_root(), "faction_list_parent", "eligible_factions_listview")
-	core:show_fullscreen_highlight_around_components(25, false, true, uic);
+	core:show_fullscreen_highlight_around_components(12, false, true, uic);
 	local tp = text_pointer:new_from_component(
 	"tp_scripted_tour_eligible_factions",
 	"left",
@@ -8408,7 +8458,7 @@ scripted_nor_sayl_manipulations = {
 		text_box = {
 			text = "wh3_dlc27_text_pointer_nor_manipulations_text_pointer_4",
 			direction = "bottom",
-			size = 350,
+			size = 450,
 			length = 50
 		}
 	},
@@ -8535,10 +8585,10 @@ function ui_scripted_tour:construct_tour(tour, intervention)
 			local dechala_marks_tour = find_uicomponent("dlc27_sla_marks_of_cruelty")
 			if dechala_marks_tour and dechala_marks_tour:Visible() == true then
 				if not cm:is_multiplayer() 
-				then
-					cm:override_ui("disable_fullscreen_panel_closing", true) 
+				then					
 					local dechala_faction = cm:get_faction("wh3_dlc27_sla_the_tormentors");
-					if dechala_faction:pooled_resource_manager():resource("wh3_dlc27_sla_decadence"):value() >= 200 then  
+					if dechala_faction:pooled_resource_manager():resource("wh3_dlc27_sla_decadence"):value() >= 200 then
+						cm:override_ui("disable_fullscreen_panel_closing", true)  
 						local mark_coy_denial = find_uicomponent("wh3_dlc27_sla_marks_of_vindictiveness_coy_denial") 
 						local mark_the_scent_of_despair = find_uicomponent("wh3_dlc27_sla_marks_of_vindictiveness_the_scent_of_despair")
 						local mark_slothful_indolence = find_uicomponent("wh3_dlc27_sla_marks_of_vindictiveness_slothful_indolence")
@@ -8852,8 +8902,7 @@ end
 -- Additional Listeners 
 
 function dechala_marks_listeners()
-	highlight_component(true, true, "dlc27_sla_marks_of_cruelty", "panel_main", "content", "marks_section", "vindictiveness_holder", "vindictiveness_list", "mark_holder1", "wh3_dlc27_sla_marks_of_vindictiveness_supreme_ascendancy")
-	cm:steal_escape_key(true)
+	highlight_component(true, true, "dlc27_sla_marks_of_cruelty", "panel_main", "content", "marks_section", "vindictiveness_holder", "vindictiveness_list", "mark_holder1", "wh3_dlc27_sla_marks_of_vindictiveness_supreme_ascendancy")	
 	
 	local offerings_holder = find_uicomponent("dlc27_sla_marks_of_cruelty", "content", "marks_section", "gifts_holder", "gifts_list")
 	local spoils_holder = find_uicomponent("dlc27_sla_marks_of_cruelty", "content", "marks_section", "gifts_holder", "imports_list")
@@ -8985,11 +9034,14 @@ end
 		end,
 		function(context)
 			local faction = context:faction()
-			highlight_component(true, true, "button_marks_of_cruelty")
-			cm:callback(function()
-				highlight_component(false, false, "button_marks_of_cruelty")
-			end, 3)
-			core:remove_listener("DechalaScriptedTourThrallsPoolRes_ResourceChanged")
+			if faction:is_null_interface() == false and faction:is_human() and not cm:get_saved_value("dechala_pool_res_check") then
+				highlight_component(true, true, "button_marks_of_cruelty")
+				cm:callback(function()
+					highlight_component(false, false, "button_marks_of_cruelty")
+				end, 3)
+				core:remove_listener("DechalaScriptedTourThrallsPoolRes_ResourceChanged")
+				cm:set_saved_value("dechala_pool_res_check", true)
+			end
 		end,
 		false
 	)
@@ -9195,7 +9247,7 @@ function dechala_pre_battle_marks()
 end
 
 core:add_listener(
-		"PanelOpenedCampaign_Wulfric_Occupy_Settlement",
+		"Wulfric_Occupy_Settlement_Text_Pointer",
 		"PanelOpenedCampaign",
 		function(context) 
 			return context.string == "settlement_captured"
@@ -9205,6 +9257,7 @@ core:add_listener(
 			if wulfric_faction and wulfric_faction:is_null_interface() == false and wulfric_faction:is_human() and not cm:get_saved_value("wulfric_settlement_captured")
 			then
  				local components = find_uicomponent("652221506");
+				core:remove_listener("Wulfric_Occupy_Settlement_Text_Pointer")
 				if components and components:Visible() == true then
 					local tp = text_pointer:new_from_component(
 					"tp_wulfric_settlement",
@@ -9226,7 +9279,7 @@ core:add_listener(
 					cm:callback(
 						function()
 							tp:show();
-							cm:set_saved_value("wulfric_settlement_captured")
+							cm:set_saved_value("wulfric_settlement_captured", true)
 						end,
 						0.3
 					);

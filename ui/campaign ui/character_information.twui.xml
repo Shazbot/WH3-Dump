@@ -10650,6 +10650,7 @@
 				<default
 					this="856BDB1A-23DC-40AB-80374DD4034AF721"
 					name="default"
+					interactive="true"
 					uniqueguid="856BDB1A-23DC-40AB-80374DD4034AF721">
 					<imagemetrics>
 						<image
@@ -10782,6 +10783,8 @@
 				<default
 					this="6748D020-2173-435C-B0A6EB0B36ECBFD7"
 					name="default"
+					interactive="true"
+					pixelcollision="true"
 					uniqueguid="6748D020-2173-435C-B0A6EB0B36ECBFD7">
 					<imagemetrics>
 						<image
@@ -10907,6 +10910,7 @@
 				<default
 					this="66569261-061B-4265-82E26094A2F18957"
 					name="default"
+					interactive="true"
 					uniqueguid="66569261-061B-4265-82E26094A2F18957">
 					<imagemetrics>
 						<image
@@ -16160,6 +16164,15 @@
 			defaultstate="15294009-8808-4E33-9F3D7CC1A946CA96">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="Button"/>
+				<callback_with_context
+					callback_id="ContextInactiveStateSetter"
+					context_function_id="(character = SelectedOrContainedCharacter) =&gt; IsContextValid(character) &amp;&amp; character.CanOpenCharacterDetails">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignCharacterSelectedAny"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -17486,7 +17499,6 @@
 					width="62"
 					height="34"
 					interactive="true"
-					disabled="true"
 					uniqueguid="C46C7ED5-CD5E-4C30-8989B370D4C90AD9">
 					<imagemetrics>
 						<image
@@ -17582,7 +17594,6 @@
 					width="62"
 					height="34"
 					interactive="true"
-					disabled="true"
 					uniqueguid="EAF62516-3A52-49B5-A73F4B8D0B4C715A">
 					<imagemetrics>
 						<image

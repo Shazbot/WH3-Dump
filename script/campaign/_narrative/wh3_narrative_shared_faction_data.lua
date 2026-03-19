@@ -786,6 +786,7 @@ local function add_narrative_data_for_playable_faction(faction_key)
 		narrative.add_data_for_faction(faction_key, "slaanesh_seductive_influence_unlock_diplomatic_option_block", true);
 		narrative.add_data_for_faction(faction_key, "slaanesh_seductive_influence_trigger_expert_on_options_unlocked_block", true);
 		narrative.add_data_for_faction(faction_key, "slaanesh_seductive_influence_earn_max_influence_block", true);
+		narrative.add_data_for_faction(faction_key, "slaanesh_seduction_research_seduction_technology_technologies", "wh3_dlc27_tech_sla_enticing_visage");
 		
 		local tempo_level_threshold = 2
 

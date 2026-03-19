@@ -569,7 +569,7 @@ function assassination_pick_random_factions(amount, faction_type, optional_subcu
 	elseif faction_type == "at_war" then
 		faction_list = assassin:factions_at_war_with();
 	else
-		faction_list = cm:model():world():faction_list();
+		faction_list = cm:get_faction_list();
 	end
 	
 	out.design("\tFaction List: " .. faction_list:num_items());

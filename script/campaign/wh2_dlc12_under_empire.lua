@@ -434,7 +434,7 @@ function spawn_random_under_empire(spawn_amount)
 		end
 	end
 	
-	local faction_list = world:faction_list();
+	local faction_list = cm:get_faction_list();
 	local skaven_ai_factions = {};
 	
 	for i = 0, faction_list:num_items() - 1 do

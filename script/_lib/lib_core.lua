@@ -2517,6 +2517,9 @@ end;
 --- @r uicomponent loading screen uicomponent
 function core_object:get_loading_screen()
 	local ui_root = self:get_ui_root();
+	if not ui_root then
+		return "", false;
+	end;
 		
 	local all_loading_screen_names = {
 		"battle",
@@ -2545,7 +2548,7 @@ function core_object:get_loading_screen()
 		end;
 	end;
 
-	return false;
+	return "", false;
 end;
 
 
@@ -2678,7 +2681,7 @@ end;
 --- @p uicomponent uicomponent
 --- @p function callback
 function core_object:progress_on_uicomponent_animation_finished(uicomponent, callback)
-	if uicomponent:IsValid() then 
+	if uicomponent and uicomponent:IsValid() then 
 		local anim_id = uicomponent:CurrentAnimationId();
 
 		if anim_id and anim_id ~= "" then

@@ -1688,7 +1688,7 @@ initiative_templates = {
 };
 
 function initiative_unlock_listeners()
-	local factions = cm:model():world():faction_list();
+	local factions = cm:get_faction_list();
 	
 	for _, current_faction in model_pairs(factions) do
 		if initiative_cultures[current_faction:culture()]then

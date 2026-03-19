@@ -874,7 +874,7 @@ function reset_khorne_realm_points(faction)
 			cm:faction_add_pooled_resource(faction:name(), "wh3_main_khorne_realm_points", "other", - khorne_realm_points:value());
 		end;
 	else
-		local faction_list = cm:model():world():faction_list();
+		local faction_list = cm:get_faction_list();
 		
 		for i = 0, faction_list:num_items() - 1 do
 			reset_khorne_realm_points(faction_list:item_at(i));

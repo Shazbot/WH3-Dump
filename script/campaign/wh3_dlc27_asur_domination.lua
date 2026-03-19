@@ -5,6 +5,7 @@ asur_domination =
 		restrictions_icon_asur_domination = "ui/skins/default/dlc27_hef_asur_domination/icon_assur_domination_button.png",
 		restrictions_redirection_path_asur_domination = "ui/campaign ui/dlc27_hef_asur_domination",
 		aislinn_faction_key = "wh3_dlc27_hef_aislinn",
+		aislinn_confederation_owner_faction_key = "wh3_dlc27_hef_aislinn_confederation_owner",
 		rituals_category_key = "ASUR_DOMINATION_DILEMMAS",
 		occupation_decision = "occupation_decision_gift_to_another_faction",
 		dilemma_available_event_config = {
@@ -51,6 +52,7 @@ asur_domination =
 			"wh2_main_hef_nagarythe",
 			"wh2_main_hef_order_of_loremasters",
 			"wh2_main_hef_yvresse",
+			"wh3_dlc27_hef_aislinn_confederation_owner",
 		},
 		diplomatic_bonus =
 		{
@@ -99,7 +101,7 @@ asur_domination =
 		dragonship_building_locks = {
 			{building = "wh3_dlc27_hef_dragonship_aoe_3b", lock_reason = "aislinn_lock_reason_dragonship", unlock = "wh3_dlc27_asur_domination_focus_dragonships_01", show_unlock_in_ui = true},
 			{building = "wh3_dlc27_hef_dragonship_navigation_3b", lock_reason = "aislinn_lock_reason_dragonship", unlock = "wh3_dlc27_asur_domination_focus_dragonships_02", show_unlock_in_ui = true},
-			{building = "wh3_dlc27_hef_dragonship_navigation_4b", lock_reason = "aislinn_lock_reason_dragonship", unlock = "wh3_dlc27_asur_domination_focus_dragonships_02", show_unlock_in_ui = false},
+			{building = "wh3_dlc27_hef_dragonship_navigation_4b", lock_reason = "aislinn_lock_reason_dragonship", unlock = "wh3_dlc27_asur_domination_focus_dragonships_02", show_unlock_in_ui = true},
 			{building = "wh3_dlc27_hef_dragonship_respite_3b", lock_reason = "aislinn_lock_reason_dragonship", unlock = "wh3_dlc27_asur_domination_focus_dragonships_03", show_unlock_in_ui = true},
 			{building = "wh3_dlc27_hef_dragonship_extra_2a", lock_reason = "aislinn_lock_reason_dragonship", unlock = "wh3_dlc27_asur_domination_focus_dragonships_04", show_unlock_in_ui = true},
 			{building = "wh3_dlc27_hef_dragonship_extra_2b", lock_reason = "aislinn_lock_reason_dragonship", unlock = "wh3_dlc27_asur_domination_focus_dragonships_04", show_unlock_in_ui = true},
@@ -113,28 +115,28 @@ asur_domination =
 			{building = "wh3_dlc27_hef_sea_patrol_outpost_defence_garrison_3d", lock_reason = "aislinn_lock_reason_outpost", unlock = "wh3_dlc27_asur_domination_focus_outposts_02", show_unlock_in_ui = true},
 			{building = "wh3_dlc27_hef_sea_patrol_outpost_defence_garrison_3e", lock_reason = "aislinn_lock_reason_outpost", unlock = "wh3_dlc27_asur_domination_focus_outposts_02", show_unlock_in_ui = true},
 			{building = "wh3_dlc27_hef_sea_patrol_outpost_income_branch_2a", lock_reason = "aislinn_lock_reason_outpost", unlock = "wh3_dlc27_asur_domination_focus_outposts_03", show_unlock_in_ui = true},
-			{building = "wh3_dlc27_hef_sea_patrol_outpost_income_branch_3a", lock_reason = "aislinn_lock_reason_outpost", unlock = "wh3_dlc27_asur_domination_focus_outposts_03", show_unlock_in_ui = false},
+			{building = "wh3_dlc27_hef_sea_patrol_outpost_income_branch_3a", lock_reason = "aislinn_lock_reason_outpost", unlock = "wh3_dlc27_asur_domination_focus_outposts_03", show_unlock_in_ui = true},
 			{building = "wh3_dlc27_hef_sea_patrol_outpost_income_branch_2b", lock_reason = "aislinn_lock_reason_outpost", unlock = "wh3_dlc27_asur_domination_focus_outposts_04", show_unlock_in_ui = true},
-			{building = "wh3_dlc27_hef_sea_patrol_outpost_income_branch_3b", lock_reason = "aislinn_lock_reason_outpost", unlock = "wh3_dlc27_asur_domination_focus_outposts_04", show_unlock_in_ui = false},
+			{building = "wh3_dlc27_hef_sea_patrol_outpost_income_branch_3b", lock_reason = "aislinn_lock_reason_outpost", unlock = "wh3_dlc27_asur_domination_focus_outposts_04", show_unlock_in_ui = true},
 			{building = "wh3_dlc27_hef_sea_patrol_outpost_income_branch_2d", lock_reason = "aislinn_lock_reason_outpost", unlock = "wh3_dlc27_asur_domination_focus_outposts_05", show_unlock_in_ui = true},
-			{building = "wh3_dlc27_hef_sea_patrol_outpost_income_branch_3d", lock_reason = "aislinn_lock_reason_outpost", unlock = "wh3_dlc27_asur_domination_focus_outposts_05", show_unlock_in_ui = false},
+			{building = "wh3_dlc27_hef_sea_patrol_outpost_income_branch_3d", lock_reason = "aislinn_lock_reason_outpost", unlock = "wh3_dlc27_asur_domination_focus_outposts_05", show_unlock_in_ui = true},
 			{building = "wh3_dlc27_hef_sea_patrol_outpost_defence_garrison_3a", lock_reason = "aislinn_lock_reason_outpost", unlock = "wh3_dlc27_asur_domination_focus_outposts_06", show_unlock_in_ui = true},
-			{building = "wh3_dlc27_hef_sea_patrol_outpost_defence_garrison_3b", lock_reason = "aislinn_lock_reason_outpost", unlock = "wh3_dlc27_asur_domination_focus_outposts_06", show_unlock_in_ui = false},
+			{building = "wh3_dlc27_hef_sea_patrol_outpost_defence_garrison_3b", lock_reason = "aislinn_lock_reason_outpost", unlock = "wh3_dlc27_asur_domination_focus_outposts_06", show_unlock_in_ui = true},
 			{building = "wh3_dlc27_hef_sea_patrol_outpost_income_branch_2e", lock_reason = "aislinn_lock_reason_outpost", unlock = "wh3_dlc27_asur_domination_focus_outposts_07", show_unlock_in_ui = true},
-			{building = "wh3_dlc27_hef_sea_patrol_outpost_income_branch_3e", lock_reason = "aislinn_lock_reason_outpost", unlock = "wh3_dlc27_asur_domination_focus_outposts_07", show_unlock_in_ui = false}
+			{building = "wh3_dlc27_hef_sea_patrol_outpost_income_branch_3e", lock_reason = "aislinn_lock_reason_outpost", unlock = "wh3_dlc27_asur_domination_focus_outposts_07", show_unlock_in_ui = true}
 		},
 		colony_building_locks = {
 			{building = "wh3_dlc27_hef_colony_dragonship_supplies_cost_2", lock_reason = "aislinn_lock_reason_colony", unlock = "wh3_dlc27_asur_domination_focus_colonies_01", show_unlock_in_ui = true},
-			{building = "wh3_dlc27_hef_colony_dragonship_supplies_cost_3", lock_reason = "aislinn_lock_reason_colony", unlock = "wh3_dlc27_asur_domination_focus_colonies_01", show_unlock_in_ui = false},
+			{building = "wh3_dlc27_hef_colony_dragonship_supplies_cost_3", lock_reason = "aislinn_lock_reason_colony", unlock = "wh3_dlc27_asur_domination_focus_colonies_01", show_unlock_in_ui = true},
 			{building = "wh3_dlc27_hef_colony_dragonship_supplies_income_2b", lock_reason = "aislinn_lock_reason_colony", unlock = "wh3_dlc27_asur_domination_focus_colonies_02", show_unlock_in_ui = true},
-			{building = "wh3_dlc27_hef_colony_dragonship_supplies_income_3b", lock_reason = "aislinn_lock_reason_colony", unlock = "wh3_dlc27_asur_domination_focus_colonies_02", show_unlock_in_ui = false},
+			{building = "wh3_dlc27_hef_colony_dragonship_supplies_income_3b", lock_reason = "aislinn_lock_reason_colony", unlock = "wh3_dlc27_asur_domination_focus_colonies_02", show_unlock_in_ui = true},
 			{building = "wh3_dlc27_hef_colony_economy_market_2", lock_reason = "aislinn_lock_reason_colony", unlock = "wh3_dlc27_asur_domination_focus_colonies_03", show_unlock_in_ui = true},
-			{building = "wh3_dlc27_hef_colony_economy_market_3", lock_reason = "aislinn_lock_reason_colony", unlock = "wh3_dlc27_asur_domination_focus_colonies_03", show_unlock_in_ui = false},
+			{building = "wh3_dlc27_hef_colony_economy_market_3", lock_reason = "aislinn_lock_reason_colony", unlock = "wh3_dlc27_asur_domination_focus_colonies_03", show_unlock_in_ui = true},
 			{building = "wh3_dlc27_hef_colony_defence_sea_guard_1", lock_reason = "aislinn_lock_reason_colony", unlock = "wh3_dlc27_asur_domination_focus_colonies_05", show_unlock_in_ui = true},
-			{building = "wh3_dlc27_hef_colony_defence_sea_guard_2", lock_reason = "aislinn_lock_reason_colony", unlock = "wh3_dlc27_asur_domination_focus_colonies_05", show_unlock_in_ui = false},
-			{building = "wh3_dlc27_hef_colony_defence_sea_guard_3", lock_reason = "aislinn_lock_reason_colony", unlock = "wh3_dlc27_asur_domination_focus_colonies_05", show_unlock_in_ui = false},
+			{building = "wh3_dlc27_hef_colony_defence_sea_guard_2", lock_reason = "aislinn_lock_reason_colony", unlock = "wh3_dlc27_asur_domination_focus_colonies_05", show_unlock_in_ui = true},
+			{building = "wh3_dlc27_hef_colony_defence_sea_guard_3", lock_reason = "aislinn_lock_reason_colony", unlock = "wh3_dlc27_asur_domination_focus_colonies_05", show_unlock_in_ui = true},
 			{building = "wh3_dlc27_hef_colony_economy_trade_2", lock_reason = "aislinn_lock_reason_colony", unlock = "wh3_dlc27_asur_domination_focus_colonies_06", show_unlock_in_ui = true},
-			{building = "wh3_dlc27_hef_colony_economy_trade_3", lock_reason = "aislinn_lock_reason_colony", unlock = "wh3_dlc27_asur_domination_focus_colonies_06", show_unlock_in_ui = false},
+			{building = "wh3_dlc27_hef_colony_economy_trade_3", lock_reason = "aislinn_lock_reason_colony", unlock = "wh3_dlc27_asur_domination_focus_colonies_06", show_unlock_in_ui = true},
 			{building = "wh3_dlc27_hef_colony_recruitment_barracks_4", lock_reason = "aislinn_lock_reason_colony", unlock = "wh3_dlc27_asur_domination_focus_colonies_07", show_unlock_in_ui = true},
 			{building = "wh3_dlc27_hef_colony_recruitment_stables_3", lock_reason = "aislinn_lock_reason_colony", unlock = "wh3_dlc27_asur_domination_focus_colonies_07", show_unlock_in_ui = true},
 			{building = "wh3_dlc27_hef_colony_recruitment_artillery_3", lock_reason = "aislinn_lock_reason_colony", unlock = "wh3_dlc27_asur_domination_focus_colonies_07", show_unlock_in_ui = true}
@@ -227,6 +229,12 @@ function asur_domination:initialise()
 		end
 
 		cm:override_ui(self.config.button_ui_override_key, true)
+
+		-- in case the United Maritime Patrol are already present at game start, we force the alliance immediately
+		local aislinn_confederation_owner_faction = cm:get_faction(self.config.aislinn_confederation_owner_faction_key)
+		if aislinn_confederation_owner_faction:is_null_interface() == false and aislinn_confederation_owner_faction:is_dead() == false then
+			cm:force_alliance(self.config.aislinn_faction_key, self.config.aislinn_confederation_owner_faction_key, true)
+		end
 	end
 end
 
@@ -577,6 +585,24 @@ function asur_domination:add_listeners()
 		end,
 		true
 	);
+
+	core:add_listener(
+		"FactionAwokenFromDeath_AsurDomination",
+		"FactionAwokenFromDeath",
+		true,
+		function(context)
+			local awakened_faction = context:faction()
+			if awakened_faction:name() ~= self.config.aislinn_confederation_owner_faction_key then
+				return
+			end
+			
+			local aislinn_faction_interface = cm:get_faction(self.config.aislinn_faction_key)
+			if aislinn_faction_interface:is_null_interface() == false and aislinn_faction_interface:is_dead() == false then
+				cm:force_alliance(self.config.aislinn_faction_key, self.config.aislinn_confederation_owner_faction_key, true)
+			end
+		end,
+		true
+	)
 end
 
 function asur_domination:spawn_dragonship_in_pool(subtype)

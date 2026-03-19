@@ -5255,7 +5255,7 @@
 			offset="10.00,11.00"
 			priority="60"
 			tooltipslocalised="true"
-			componentleveltooltip="Sea Patrol Outposts||Shows how many Sea Patrol outposts you hold in settlements gifted to this faction. More outposts unlock additional dilemma options with this leader.\n\n[[col:yellow]]Outposts are lost if those settlements fall to a foreign culture or if you go to war with the faction.[[/col]]"
+			componentleveltooltip="Sea Patrol Outposts||Shows how many Sea Patrol outposts you've established in settlements gifted to this faction. More outposts unlock additional dilemma options with this leader."
 			tooltiplabel="wh3_dlc27_hef_asur_domination_gifted_settlements_title"
 			uniqueguid="AF4DCBFB-18BD-4630-A897CDEB53D803E3"
 			currentstate="B1838CF3-81C2-4433-90F4E61D0FF60222"
@@ -5588,8 +5588,8 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoCampaignFaction"
-					context_function_id="AsurDomination.HasAnyPurchasableInitiatives(this)">
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="AsurDomination.HasAnyPurchasableInitiativesFromSetWithResource(this)">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -9816,8 +9816,8 @@
 				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextCommandEvent"
-					context_object_id="CcoCampaignFaction"
-					context_function_id="AsurDomination.TogglePinnedStateForSeaPatrolTrackConditional(self, AsurDomination.HasAnyPurchasableInitiatives(this))">
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="AsurDomination.TogglePinnedStateForSeaPatrolTrackConditional(self, AsurDomination.HasAnyPurchasableInitiativesFromSetWithResource(this))">
 					<child_m_user_properties>
 						<property
 							name="event0"

@@ -2838,8 +2838,8 @@
 					context_function_id="IsPrimary &amp;&amp;  BuildingContext.BuildingLevelRecordContext.PrimarySlotBuildingLevelRequirement &gt; 0  &amp;&amp; BuildingContext.IsDamaged == false  &amp;&amp; SettlementContext.SettlementType !=  &quot;wh3_dlc27_dechala_war_pit&quot; &amp;&amp; SettlementContext.SettlementType != &quot;wh3_dlc27_dechala_pleasure_palace&quot;&#10;&amp;&amp; SettlementContext.CanConvertToSettlementType(&quot;wh3_dlc27_dechala_war_pit&quot;)"/>
 				<callback_with_context
 					callback_id="ContextCommandLeftClick"
-					context_object_id="CcoCampaignSettlement"
-					context_function_id="MarkForTypeConversion(&quot;wh3_dlc27_dechala_war_pit&quot;, 1)"/>
+					context_object_id="CcoCampaignSettlement settlement, CcoCampaignBuildingSlot slot"
+					context_function_id="settlement.MarkForTypeConversion(&quot;wh3_dlc27_dechala_war_pit&quot;, slot.ExPreviousBuildingLevelNumber)"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -8630,7 +8630,7 @@
 							value="level.DoesBuildingExceedCap(slot)"/>
 						<property
 							name="cannot_build_ever"
-							value="level.IsEpisodicRestricted(slot) || level.PrimarySlotBuildingLevelRequirement &gt; slot.PrimarySlotContext.PlayerVariantBuildingChainContext.MaximumLevel || slot.BuildingRequirementsMet(level) == false"/>
+							value="Buildings.SelectedSettlementOrHordeContext.BuildingCanEverBeBuilt(level, slot) == false"/>
 						<property
 							name="fallback_state"
 							value="greyed"/>

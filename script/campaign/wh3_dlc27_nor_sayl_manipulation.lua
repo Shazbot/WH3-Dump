@@ -176,18 +176,20 @@ sayl_manipulation_config = {
 				local config = sayl_manipulation_config
 				local military_force = context:ritual_target_force()
 				local units_list = military_force:unit_list()
+				local character_list = military_force:character_list()
 				local rebel_units = {}
 				for i = 0, units_list:num_items() - 1 do
 					local unit = units_list:item_at(i)
 					if unit:unit_caste() ~= "hero" and unit:unit_caste() ~= "lord" then
 						table.insert(rebel_units, { key = unit:unit_key(), cqi = unit:command_queue_index() })
-					else
-						local char = cm:get_character_by_cqi(unit:command_queue_index())
-						if char then 
-							local convalescence_time = math.max(config.manipulation_rebel_min_convalescence_time, char:compute_convalesence_time());
-							cm:wound_character(cm:char_lookup_str(char:command_queue_index()), convalescence_time);
-						end
 					end 
+				end
+				for i = character_list:num_items() - 1, 0, -1 do
+					local character = character_list:item_at(i)
+					if character:is_null_interface() == false then
+						local convalescence_time = math.max(config.manipulation_rebel_min_convalescence_time, character:compute_convalesence_time())
+						cm:wound_character(cm:char_lookup_str(character:command_queue_index()), convalescence_time)
+					end
 				end
 				local total_rebel_units = math.round(#rebel_units * sayl_manipulation_config.manipulation_rebel_units_percentage)
 				if total_rebel_units == 0 then
@@ -1697,8 +1699,7 @@ sayl_manipulation.dynamic_data = {}
 
 -- Diplomacy lock helpers
 function sayl_manipulation:lock_faction_diplomacy(faction_key, turns)
-	local world = cm:model():world()
-	local fl = world:faction_list()
+	local fl = cm:get_faction_list()
 	for i = 0, fl:num_items() - 1 do
 		local other = fl:item_at(i)
 		if not other:is_dead() then
@@ -1715,8 +1716,7 @@ function sayl_manipulation:lock_faction_diplomacy(faction_key, turns)
 end
 
 function sayl_manipulation:unlock_faction_diplomacy(faction_key)
-	local world = cm:model():world()
-	local fl = world:faction_list()
+	local fl = cm:get_faction_list()
 	for i = 0, fl:num_items() - 1 do
 		local other = fl:item_at(i)
 		if not other:is_dead() then
@@ -2126,6 +2126,7 @@ end
 function sayl_manipulation:trigger_dilemma_for_attention_level(current_level)
 	local random_dilemma_index = cm:random_number(#self.config.attention_thresholds[current_level].dilemmas)
 	cm:trigger_dilemma(self.config.faction_key, self.config.attention_thresholds[current_level].dilemmas[random_dilemma_index])
+	CampaignUI.CloseCurrentHUDPanel()
 end
 
 function sayl_manipulation:spawn_dilemma_invasion(invasion_data, dilemma_key)

@@ -671,7 +671,7 @@
 				<callback_with_context
 					callback_id="ContextCommandLeftClick"
 					context_object_id="CcoCampaignBuildingSlot"
-					context_function_id="(confirmation = Component(&quot;C471BB49-B4A9-4A84-A78C887C2F7B6A8A&quot;)) =&gt; { DoIf(self.CurrentState != &quot;inactive&quot;, confirmation.PropagateContext(this); confirmation.SetVisible(true))}"/>
+					context_function_id="(confirmation = Component(&quot;C471BB49-B4A9-4A84-A78C887C2F7B6A8A&quot;)) =&gt; { &#10;	DoIf(&#10;		self.CurrentState != &quot;inactive&quot; &amp;&amp; IsPanelOpen(&quot;diplomacy_dropdown&quot;) == false, &#10;			confirmation.PropagateContext(this);&#10;			confirmation.SetVisible(true)&#10;	)&#10;}"/>
 				<callback_with_context
 					callback_id="ContextObjectStore"
 					context_object_id="CcoCampaignBuildingSlot"/>

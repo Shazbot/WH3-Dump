@@ -340,9 +340,11 @@ function hef_intrigue_at_the_court:initialise()
 	if cm:is_new_game() then
 		self:set_locked_slots_at_game_start()
 		self:set_starting_occupied_slots()
-		self:set_initial_favour_tier_required_for_confederation_for_factions()
 		self:setup_aislinn_confederation_requirements()
 	end
+
+	self:set_initial_favour_tier_required_for_confederation_for_factions()
+	self:set_initial_patronage_slots_occupied_limit_for_factions()
 
 	-- add listeners for patronage actions
 	core:add_listener(
@@ -416,9 +418,6 @@ function hef_intrigue_at_the_court:initialise()
 			self:progress_temporary_immunity_duration_for_faction(faction_interface:name())
 
 			if cm:turn_number() == 1 then
-				local slot_limit = cm:get_factions_bonus_value(faction_interface, self.config.patronage_slots_bonus_value_key)
-				cm:set_script_state(faction_interface, "patronage_slots_occupied_limit", slot_limit)
-
 				cm:override_ui(self.config.button_ui_override_key, true)
 			end
 
@@ -626,8 +625,8 @@ function hef_intrigue_at_the_court:initialise()
 			-- the bonus value changes with pooled resource thresholds so we update the shared state value for it
 			-- shared state is used so we can have easy access to this value in the UI
 			local faction_interface = context:faction()
-			local slot_limit = cm:get_factions_bonus_value(faction_interface, self.config.patronage_slots_bonus_value_key)
-			cm:set_script_state(faction_interface, "patronage_slots_occupied_limit", slot_limit)
+			local slot_limit_bv = self:get_current_patronage_slot_limit_bonus_value_for_faction(faction_interface)
+			self:set_patronage_slots_occupied_limit_for_faction(faction_interface, slot_limit_bv)
 		end,
 		true
 	)
@@ -766,7 +765,7 @@ function hef_intrigue_at_the_court:initialise()
 end
 
 function hef_intrigue_at_the_court:populate_hef_factions()
-	local faction_list = cm:model():world():faction_list()
+	local faction_list = cm:get_faction_list()
 	for i = 0, faction_list:num_items() - 1 do
 		local current_faction = faction_list:item_at(i)
 		if current_faction:culture() == self.config.high_elf_culture_key then
@@ -860,8 +859,26 @@ end
 function hef_intrigue_at_the_court:set_initial_favour_tier_required_for_confederation_for_factions()
 	for i = 1, #self.config.high_elf_faction_list - 1 do
 		local current_faction = cm:get_faction(self.config.high_elf_faction_list[i])
-		if current_faction then
-			self:set_required_favour_tier_for_faction_to_perform_confederation(current_faction, self.config.confederation_requirements_config.initial_favour_tier_required_for_confederation)
+		if current_faction and current_faction:is_null_interface() == false then
+			local current_required_tier_for_faction = self:get_required_favour_tier_for_faction_to_perform_confederation(current_faction)
+			-- current tier should be 0 when starting a new game or when loading an old save file from before 7.0.0
+			if current_required_tier_for_faction <= 0 then
+				self:set_required_favour_tier_for_faction_to_perform_confederation(current_faction, self.config.confederation_requirements_config.initial_favour_tier_required_for_confederation)
+			end
+		end
+	end
+end
+
+function hef_intrigue_at_the_court:set_initial_patronage_slots_occupied_limit_for_factions()
+	for i = 1, #self.config.high_elf_faction_list - 1 do
+		local current_faction = cm:get_faction(self.config.high_elf_faction_list[i])
+		if current_faction and current_faction:is_null_interface() == false then
+			local currently_set_slot_limit = self:get_patronage_slots_occupied_limit_for_faction(current_faction)
+			-- current slot limit should be 0 when starting a new game or when loading an old save file from before 7.0.0
+			if currently_set_slot_limit <= 0 then
+				local slot_limit_bv = self:get_current_patronage_slot_limit_bonus_value_for_faction(current_faction)
+				self:set_patronage_slots_occupied_limit_for_faction(current_faction, slot_limit_bv)
+			end
 		end
 	end
 end
@@ -869,7 +886,7 @@ end
 function hef_intrigue_at_the_court:setup_aislinn_confederation_requirements()
 	for i = 1, #self.config.high_elf_faction_list - 1 do
 		local current_faction = cm:get_faction(self.config.high_elf_faction_list[i])
-		if current_faction then
+		if current_faction and current_faction:is_null_interface() == false then
 			self:lock_aislinn_confederation_ritual_for_faction(current_faction)
 			local current_faction_starting_num_of_elven_colony_settlements = 0
 			-- some high elf faction start off with "elven conoly" type settlements already in their posession so we should update the shared state for that
@@ -1278,7 +1295,7 @@ function hef_intrigue_at_the_court:is_family_member_occupying_any_patronage_slot
 	return cm:model():shared_states_manager():get_state_as_bool_value(fm_interface, "currently_occupies_any_patronage_slot")
 end
 
-function hef_intrigue_at_the_court:get_current_patronage_slot_limit_for_faction(faction_interface)
+function hef_intrigue_at_the_court:get_current_patronage_slot_limit_bonus_value_for_faction(faction_interface)
 	return cm:get_factions_bonus_value(faction_interface, self.config.patronage_slots_bonus_value_key)
 end
 
@@ -1309,6 +1326,19 @@ end
 
 function hef_intrigue_at_the_court:set_required_favour_tier_for_faction_to_perform_confederation(faction_interface, tier_required)
 	cm:set_script_state(faction_interface, "required_favour_tier_for_faction_to_perform_confederation", tier_required)
+end
+
+function hef_intrigue_at_the_court:get_patronage_slots_occupied_limit_for_faction(faction_interface)
+	local slot_limit = cm:model():shared_states_manager():get_state_as_float_value(faction_interface, "patronage_slots_occupied_limit");
+	if slot_limit == nil then
+		return 0
+	end
+
+	return slot_limit
+end
+
+function hef_intrigue_at_the_court:set_patronage_slots_occupied_limit_for_faction(faction_interface, slot_limit)
+	cm:set_script_state(faction_interface, "patronage_slots_occupied_limit", slot_limit)
 end
 
 function hef_intrigue_at_the_court:faction_has_required_favour_tier_to_perform_confederation(faction_interface)
@@ -1441,7 +1471,7 @@ function hef_intrigue_at_the_court:can_take_patronage_in_province(province_inter
 
 	local is_character_on_cooldown_for_this_turn = self:is_character_on_cooldown_for_slot(character:family_member())
 
-	local current_patronage_slot_limit_for_faction = self:get_current_patronage_slot_limit_for_faction(character:faction())
+	local current_patronage_slot_limit_for_faction = self:get_current_patronage_slot_limit_bonus_value_for_faction(character:faction())
 	local num_of_currently_occupied_slots = self:get_number_of_slots_occupied_by_faction(character:faction())
 
 	if self:is_slot_immune(province_interface) or
@@ -1615,7 +1645,7 @@ function hef_intrigue_at_the_court:update_favour_resource_maximum()
 	local new_blocked_amount_breakdown = self:calculate_max_favour_blocked_amount()
 	-- apply to all factions that have the resource
 	local bundle_key = self.config.max_favour_reduction_config.effect_bundle_key
-	local faction_list = cm:model():world():faction_list()
+	local faction_list = cm:get_faction_list()
 	for i = 0, faction_list:num_items() - 1 do
 		local current_faction = faction_list:item_at(i)
 		if current_faction:pooled_resource_manager():resource(self.config.favour_pooled_resource_key):is_null_interface() == false then
@@ -1659,7 +1689,7 @@ function hef_intrigue_at_the_court:cai_take_or_threaten_slot(faction)
 	if faction == nil then
 		return
 	end
-	local current_patronage_slot_limit_for_faction = self:get_current_patronage_slot_limit_for_faction(faction)
+	local current_patronage_slot_limit_for_faction = self:get_current_patronage_slot_limit_bonus_value_for_faction(faction)
 	local num_of_currently_occupied_slots = self:get_number_of_slots_occupied_by_faction(faction)
 	
 	if current_patronage_slot_limit_for_faction == num_of_currently_occupied_slots or num_of_currently_occupied_slots > faction:num_generals() then

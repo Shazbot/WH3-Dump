@@ -278,7 +278,7 @@ function aislinn_narrative:add_listeners()
 		"AislinnReenablePirateMovement",
 		"FactionTurnEnd",
 		function(context)
-			return cm:turn_number() == 1 and context:faction():name() == self.faction_key
+			return cm:turn_number() == 5 and context:faction():name() == self.faction_key
 		end,
 		function(context)
 			cm:enable_movement_for_faction(self.pirate_faction_key)

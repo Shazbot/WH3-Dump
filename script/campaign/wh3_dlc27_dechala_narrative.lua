@@ -50,6 +50,13 @@ function dechala_narrative:initialise()
 			);
 		end
 		self:add_listeners();
+
+		-- mission 5 fixup if mission was aborted.
+		if self.saved.narrative_state == 5 and not self:any_cathay_factions_alive() then
+			self:trigger_sixth_mission()
+			self.saved.narrative_state = 6
+		end
+
 	end
 end
 
@@ -152,9 +159,10 @@ function dechala_narrative:trigger_eight_mission()
 end
 
 function dechala_narrative:any_cathay_factions_alive()
+	local dechala_faction = cm:get_faction(self.faction_key)
 	local cathay_factions = cm:get_factions_by_subculture("wh3_main_sc_cth_cathay")
 	for i, faction in ipairs(cathay_factions) do
-		if faction and not faction:is_dead() then
+		if faction and not faction:is_dead() and not faction:is_rebel() and not faction:is_ally_vassal_or_client_state_of(dechala_faction) then
 			return true
 		end
 	end

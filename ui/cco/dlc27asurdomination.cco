@@ -69,9 +69,14 @@ AsurDomination
 
     HasAnyPurchasableInitiatives(CcoCampaignFaction faction)
     {
+        AsurDomination.GetSeaPatrolTrackResourcesList(faction).Any((resource) => AsurDomination.HasAnyPurchasableInitiativesFromSetWithResource(resource))
+    }
+
+    HasAnyPurchasableInitiativesFromSetWithResource(CcoCampaignPooledResource resource)
+    {
         (focus_resource = PlayersFaction.PooledResourceContext("wh3_dlc27_hef_aislinn_focus")) =>
         {
-            PlayersFaction.InitiativeSetWithExpendedPooledResourceCost(focus_resource).InitiativeList.Any(IsLocked == false && CostContext.CanAffordResourceTransaction(focus_resource))
+            PlayersFaction.InitiativeSetWithExpendedPooledResourceCost(resource).InitiativeList.Any(IsLocked == false && CostContext.CanAffordResourceTransaction(focus_resource))
         }
     }
 

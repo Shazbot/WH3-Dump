@@ -19,7 +19,7 @@ function Add_Wood_Elves_Listeners()
 	out("#### Adding Wood Elves Listeners ####");
 	
 	-- A.I Wood Elves cannot declare war on other Wood Elves
-	local faction_list = cm:model():world():faction_list();
+	local faction_list = cm:get_faction_list();
 	
 	for i = 0, faction_list:num_items() - 1 do
 		local current_faction = faction_list:item_at(i);

@@ -222,6 +222,22 @@
 					</loot_value>
 					<reward_frame this="08F0EA3A-A613-4671-AF4E12BB550B3D96"/>
 				</challenge_failed_animation>
+				<dev_test_anims this="0EAE0FF0-351C-419C-8C9900C91182C77D">
+					<dev_show_anim_buttons this="BBF491D7-2B15-437C-8DB667C2CF4858F9">
+						<button_txt this="0DA9FA5D-E9DF-4293-BF6D4EC6F51A2C7B"/>
+						<dev_icon this="44FB3364-B71D-412C-8EC38F7FED6A2A98"/>
+					</dev_show_anim_buttons>
+					<dev_test_anims_buttons this="13600987-8E9A-4CEA-A3D58ECD36779F9B">
+						<dev_button_initial_anim this="87C46380-A0E9-4911-8EC892574F56B82B">
+							<button_txt this="AFC450DC-EDBA-4638-AFD0E7A9C7456D2A"/>
+							<dev_icon this="F10468ED-1AFB-4120-B895E5E86FB74357"/>
+						</dev_button_initial_anim>
+						<dev_button_unit_saving_animation this="4D5382B7-15D9-4267-B61B9BE261074C1A">
+							<button_txt this="A6906AE3-4EFB-4D16-9DC67C9D94388822"/>
+							<dev_icon this="E2455B70-64B7-4EAA-96D63A8405FBE764"/>
+						</dev_button_unit_saving_animation>
+					</dev_test_anims_buttons>
+				</dev_test_anims>
 			</post_battle_rewards>
 		</root>
 	</hierarchy>
@@ -1685,18 +1701,22 @@
 			priority="45"
 			tooltipslocalised="true"
 			uniqueguid="FB5BA2C4-00C3-4D9C-BCD892D77C130184"
-			currentstate="E4A164C2-B3D2-45F6-93060122799B52ED"
-			defaultstate="E4A164C2-B3D2-45F6-93060122799B52ED">
+			currentstate="8E95F31F-6F81-482B-A80A8FD60E3818CB"
+			defaultstate="8E95F31F-6F81-482B-A80A8FD60E3818CB">
 			<componentimages>
 				<component_image
 					this="F8348488-1494-487D-95F2AAD874FD7955"
 					uniqueguid="F8348488-1494-487D-95F2AAD874FD7955"
 					imagepath="ui/skins/default/reward_frame_ph.png"/>
+				<component_image
+					this="E02FCD98-F6B8-4389-8466EF934608FAD0"
+					uniqueguid="E02FCD98-F6B8-4389-8466EF934608FAD0"
+					imagepath="ui/skins/default/reward_frame.png"/>
 			</componentimages>
 			<states>
-				<newstate
+				<daemonic
 					this="E4A164C2-B3D2-45F6-93060122799B52ED"
-					name="NewState"
+					name="daemonic"
 					width="423"
 					height="234"
 					interactive="true"
@@ -1720,7 +1740,59 @@
 						fontcat_name="header_24_bold"
 						text_shader_name="drop_shadow_t0"
 						textshadervars="-2.00,-2.00,1.00,0.00"/>
-				</newstate>
+				</daemonic>
+				<tomb_kings
+					this="6FF73F59-6EE8-479E-A9E4A9A422E29FF9"
+					name="tomb_kings"
+					width="423"
+					height="234"
+					shader_name="brighten_t0"
+					uniqueguid="6FF73F59-6EE8-479E-A9E4A9A422E29FF9">
+					<imagemetrics>
+						<image
+							this="3848C3DB-3887-4B5C-88463BD069BC5741"
+							uniqueguid="3848C3DB-3887-4B5C-88463BD069BC5741"
+							componentimage="E02FCD98-F6B8-4389-8466EF934608FAD0"
+							width="423"
+							height="234"/>
+					</imagemetrics>
+					<component_text
+						textvalign="Center"
+						texthalign="Center"
+						font_m_font_name="la_gioconda_uppercase"
+						font_m_size="24"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_24_bold"
+						text_shader_name="drop_shadow_t0"
+						textshadervars="-2.00,-2.00,1.00,0.00"/>
+				</tomb_kings>
+				<undead
+					this="8E95F31F-6F81-482B-A80A8FD60E3818CB"
+					name="undead"
+					width="423"
+					height="234"
+					shader_name="brighten_t0"
+					uniqueguid="8E95F31F-6F81-482B-A80A8FD60E3818CB">
+					<imagemetrics>
+						<image
+							this="CFC99B90-8124-4A91-BD92B328D9CF8E03"
+							uniqueguid="CFC99B90-8124-4A91-BD92B328D9CF8E03"
+							componentimage="F8348488-1494-487D-95F2AAD874FD7955"
+							width="423"
+							height="234"/>
+					</imagemetrics>
+					<component_text
+						textvalign="Center"
+						texthalign="Center"
+						font_m_font_name="la_gioconda_uppercase"
+						font_m_size="24"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_24_bold"
+						text_shader_name="drop_shadow_t0"
+						textshadervars="-2.00,-2.00,1.00,0.00"/>
+				</undead>
 			</states>
 			<animations>
 				<show id="show">
@@ -2439,6 +2511,93 @@
 					uniqueguid="1B2DBC4E-A0AA-41C9-9C01DAC5EE551AB2"/>
 			</states>
 		</bst_dread>
+		<button_txt
+			this="0DA9FA5D-E9DF-4293-BF6D4EC6F51A2C7B"
+			id="button_txt"
+			part_of_template="true"
+			uniqueguid_in_template="C5314C5F-DB2A-4917-835E17930F5E2573"
+			uniqueguid="0DA9FA5D-E9DF-4293-BF6D4EC6F51A2C7B"
+			dimensions="221.00,29.00"
+			dock_point="Center"
+			offset="0.00,-1.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="23D49E54-0617-47BE-A6EEE90777384483"/>
+			</state_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					text="check reward anims"
+					text_label="StateText_98ce57fd"
+					is_text_localised="false"/>
+			</localised_texts>
+		</button_txt>
+		<button_txt
+			this="A6906AE3-4EFB-4D16-9DC67C9D94388822"
+			id="button_txt"
+			part_of_template="true"
+			uniqueguid_in_template="C5314C5F-DB2A-4917-835E17930F5E2573"
+			uniqueguid="A6906AE3-4EFB-4D16-9DC67C9D94388822"
+			dimensions="221.00,29.00"
+			dock_point="Center"
+			offset="0.00,-1.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="9EB8282D-0CDC-4632-B7523F369B65DF18"/>
+			</state_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					text="unit_saving_animation"
+					text_label="StateText_dae6d0bc"
+					is_text_localised="false"/>
+			</localised_texts>
+		</button_txt>
+		<button_txt
+			this="AFC450DC-EDBA-4638-AFD0E7A9C7456D2A"
+			id="button_txt"
+			part_of_template="true"
+			uniqueguid_in_template="C5314C5F-DB2A-4917-835E17930F5E2573"
+			uniqueguid="AFC450DC-EDBA-4638-AFD0E7A9C7456D2A"
+			dimensions="221.00,29.00"
+			dock_point="Center"
+			offset="0.00,-1.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="1B27A7F5-41E8-4024-B39E299C8C513543"/>
+			</state_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					text="Initial anim"
+					text_label="StateText_542ca2b2"
+					is_text_localised="false"/>
+			</localised_texts>
+		</button_txt>
 		<challenge_failed_animation
 			this="A3CC04C4-DB06-46C7-9C4AA6E010708149"
 			id="challenge_failed_animation"
@@ -2747,6 +2906,342 @@
 					uniqueguid="C599070A-38C2-47B5-B34FDDA641A80A5D"/>
 			</states>
 		</def_slaves>
+		<dev_button_initial_anim
+			this="87C46380-A0E9-4911-8EC892574F56B82B"
+			id="dev_button_initial_anim"
+			template_id="dev_text_button"
+			part_of_template="true"
+			uniqueguid_in_template="715902FD-2442-4210-8831AAF520A41055"
+			uniqueguid="87C46380-A0E9-4911-8EC892574F56B82B"
+			dimensions="221.00,29.00"
+			priority="100"
+			sound_category="UI_GBL_TMP_Square_Large_Text_Button_Toggle">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="25E8120C-7259-48FC-8E79715C94867B89"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="E0DCD80F-D903-42D3-86E42DBB196D9260"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="F46B144D-3DC3-480F-B7EAB800146AB75C"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="39FA235C-2441-4DE1-AB36507BC0C06230"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="640D5845-22B8-4E5B-925DC7255BCA35A4"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/button_rectangular_backplate.png"
+					uniqueguid="B800306D-FA2D-42CB-A66780B95CD6D0AC"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/button_square_hover_highlight.png"
+					uniqueguid="C56D402D-53A8-4A18-A01AD4B25F823D4F"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_function_id="self.ParentContext(&quot;popup_battle_results&quot;).DevRunPostBattleRewardAnim(&quot;initial_anim&quot;)"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/button_rectangular_backplate.png"/>
+				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
+			</override_images>
+		</dev_button_initial_anim>
+		<dev_button_unit_saving_animation
+			this="4D5382B7-15D9-4267-B61B9BE261074C1A"
+			id="dev_button_unit_saving_animation"
+			template_id="dev_text_button"
+			part_of_template="true"
+			uniqueguid_in_template="715902FD-2442-4210-8831AAF520A41055"
+			uniqueguid="4D5382B7-15D9-4267-B61B9BE261074C1A"
+			dimensions="221.00,29.00"
+			priority="100"
+			sound_category="UI_GBL_TMP_Square_Large_Text_Button_Toggle">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="E531DECC-383B-43A2-8A95B4A78B21CEBF"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="0FFDA2F2-B953-45E7-B06282BD71AB56DC"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="B4148D18-A042-4D9E-AEEA34EE47C1E67E"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="74C2E472-EC8C-4FAB-8F52E2F168FAF4B8"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="DDAB8479-7360-4DE2-AB70449F3DED9653"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/button_rectangular_backplate.png"
+					uniqueguid="E2F3EAFC-68A0-403C-ADDB93333E597E3A"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/button_square_hover_highlight.png"
+					uniqueguid="8011E7A5-6E6B-4BCA-A6F514E5BC5659CC"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_function_id="self.ParentContext(&quot;popup_battle_results&quot;).DevRunPostBattleRewardAnim(&quot;unit_saving_animation&quot;)"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/button_rectangular_backplate.png"/>
+				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
+			</override_images>
+		</dev_button_unit_saving_animation>
+		<dev_icon
+			this="44FB3364-B71D-412C-8EC38F7FED6A2A98"
+			id="dev_icon"
+			part_of_template="true"
+			uniqueguid_in_template="0F4F9F06-4613-496B-A0F05A2B8B88B70D"
+			uniqueguid="44FB3364-B71D-412C-8EC38F7FED6A2A98"
+			dimensions="24.00,24.00"
+			dock_point="Center Left"
+			offset="2.00,0.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="4A50A2EB-E38B-4546-A2A6166395AD9397"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/dev_icon.png"
+					uniqueguid="9A6AC29C-C1F9-4451-9104B43E813714A9"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/dev_icon.png"/>
+			</override_images>
+		</dev_icon>
+		<dev_icon
+			this="E2455B70-64B7-4EAA-96D63A8405FBE764"
+			id="dev_icon"
+			part_of_template="true"
+			uniqueguid_in_template="0F4F9F06-4613-496B-A0F05A2B8B88B70D"
+			uniqueguid="E2455B70-64B7-4EAA-96D63A8405FBE764"
+			dimensions="24.00,24.00"
+			dock_point="Center Left"
+			offset="2.00,0.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="B69B6829-762E-4C83-A009942BE1F9A038"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/dev_icon.png"
+					uniqueguid="AC784C08-1ED0-459D-BF27D7650717F000"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/dev_icon.png"/>
+			</override_images>
+		</dev_icon>
+		<dev_icon
+			this="F10468ED-1AFB-4120-B895E5E86FB74357"
+			id="dev_icon"
+			part_of_template="true"
+			uniqueguid_in_template="0F4F9F06-4613-496B-A0F05A2B8B88B70D"
+			uniqueguid="F10468ED-1AFB-4120-B895E5E86FB74357"
+			dimensions="24.00,24.00"
+			dock_point="Center Left"
+			offset="2.00,0.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="2B18F224-1EB1-4FC7-89A965F3412BBB0D"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/dev_icon.png"
+					uniqueguid="6D75B8E9-5BB2-42EF-84BC7D1E0F4E7D19"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/dev_icon.png"/>
+			</override_images>
+		</dev_icon>
+		<dev_show_anim_buttons
+			this="BBF491D7-2B15-437C-8DB667C2CF4858F9"
+			id="dev_show_anim_buttons"
+			template_id="dev_text_button"
+			part_of_template="true"
+			uniqueguid_in_template="715902FD-2442-4210-8831AAF520A41055"
+			uniqueguid="BBF491D7-2B15-437C-8DB667C2CF4858F9"
+			dimensions="221.00,29.00"
+			priority="100"
+			sound_category="UI_GBL_TMP_Square_Large_Text_Button_Toggle">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="31CF0FD4-0A19-4168-A72A24EF767FEBAE"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="B4966B36-B6F4-4EE0-AB1C77C1598A16DB"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="F8FF0792-1F10-4ACF-B5049FFFABA2D97E"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="E5AEB9E7-60EC-47F4-865B5AE2D40276BF"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="F8B01DFC-395D-4017-930C0A0456ABB69C"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/button_rectangular_backplate.png"
+					uniqueguid="712C2A44-3286-495A-A5410D106971A7EB"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/button_square_hover_highlight.png"
+					uniqueguid="A8BD459B-B73B-4FB7-9665EF5300486910"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_function_id="self.ParentContext.ChildContext(&quot;dev_test_anims_buttons&quot;).ToggleVisibility"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/button_rectangular_backplate.png"/>
+				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
+			</override_images>
+		</dev_show_anim_buttons>
+		<dev_test_anims
+			this="0EAE0FF0-351C-419C-8C9900C91182C77D"
+			id="dev_test_anims"
+			is_dev_only="true"
+			offset="101.00,100.00"
+			visible="false"
+			docking="Top Center"
+			dock_offset="0.00,100.00"
+			component_anchor_point="0.50,0.00"
+			priority="45"
+			tooltipslocalised="true"
+			uniqueguid="0EAE0FF0-351C-419C-8C9900C91182C77D"
+			currentstate="5BC0F70E-798A-431E-BF2193ED52B334D7"
+			defaultstate="5BC0F70E-798A-431E-BF2193ED52B334D7">
+			<states>
+				<default
+					this="5BC0F70E-798A-431E-BF2193ED52B334D7"
+					name="default"
+					width="221"
+					height="29"
+					uniqueguid="5BC0F70E-798A-431E-BF2193ED52B334D7"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="32"/>
+				</columnwidths>
+			</LayoutEngine>
+		</dev_test_anims>
+		<dev_test_anims_buttons
+			this="13600987-8E9A-4CEA-A3D58ECD36779F9B"
+			id="dev_test_anims_buttons"
+			offset="50.00,29.00"
+			visible="false"
+			dock_offset="50.00,0.00"
+			priority="45"
+			tooltipslocalised="true"
+			uniqueguid="13600987-8E9A-4CEA-A3D58ECD36779F9B"
+			currentstate="56FCAA0E-0A0C-4CCC-B1CA90D9501BBA59"
+			defaultstate="56FCAA0E-0A0C-4CCC-B1CA90D9501BBA59">
+			<states>
+				<default
+					this="56FCAA0E-0A0C-4CCC-B1CA90D9501BBA59"
+					name="default"
+					width="221"
+					height="58"
+					uniqueguid="56FCAA0E-0A0C-4CCC-B1CA90D9501BBA59"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="32"/>
+				</columnwidths>
+			</LayoutEngine>
+		</dev_test_anims_buttons>
 		<dy_quest_battle
 			this="B376CFB3-FFCF-479A-9BEFE09D40071FF0"
 			id="dy_quest_battle"
@@ -3299,19 +3794,6 @@
 			isrelativeresize="true"
 			currentstate="713EEF81-25AE-4D1B-8147CAA911A069D5"
 			defaultstate="713EEF81-25AE-4D1B-8147CAA911A069D5">
-			<callbackwithcontextlist>
-				<callback_with_context callback_id="ContextStateSetterConditional">
-					<child_m_user_properties>
-						<property
-							name="daemonic"
-							value="IsContextValid(PlayersFaction) &amp;&amp; PlayersFaction.IsCampaignFeatureAvailable(&quot;daemonic_unit_saving_postbattle&quot;)"/>
-						<property
-							name="fallback_state"
-							value="undead"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context callback_id="StatePropagatorCallback"/>
-			</callbackwithcontextlist>
 			<userproperties>
 				<property
 					name="show_animation_offset_x"
@@ -3327,6 +3809,12 @@
 					width="423"
 					height="234"
 					uniqueguid="AA4951F6-1E78-4C97-8009B53E496C40A3"/>
+				<tomb_kings
+					this="F65555B9-E4A0-4898-81555C00DBB6A2F4"
+					name="tomb_kings"
+					width="423"
+					height="234"
+					uniqueguid="F65555B9-E4A0-4898-81555C00DBB6A2F4"/>
 				<undead
 					this="713EEF81-25AE-4D1B-8147CAA911A069D5"
 					name="undead"
@@ -5131,6 +5619,27 @@
 						text_shader_name="drop_shadow_t0"
 						textshadervars="-2.00,-2.00,1.00,0.00"/>
 				</daemonic>
+				<tomb_kings
+					this="6AE76D11-65C1-4C8A-BEAE8863FDA6588B"
+					name="tomb_kings"
+					width="191"
+					height="42"
+					uniqueguid="6AE76D11-65C1-4C8A-BEAE8863FDA6588B">
+					<component_text
+						text="Constructs Reforged!"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="wh3_dlc27_tmb_constructs_reforged"
+						font_m_font_name="brand_header"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_12"
+						text_shader_name="drop_shadow_t0"
+						textshadervars="-2.00,-2.00,1.00,0.00"/>
+				</tomb_kings>
 				<undead
 					this="58CAF23A-76CB-4DFD-B2F370602850A213"
 					name="undead"
@@ -6584,6 +7093,21 @@
 							height="234"/>
 					</imagemetrics>
 				</daemonic>
+				<tomb_kings
+					this="588D5EDF-B066-4766-89BD0C39F23598D1"
+					name="tomb_kings"
+					width="423"
+					height="234"
+					uniqueguid="588D5EDF-B066-4766-89BD0C39F23598D1">
+					<imagemetrics>
+						<image
+							this="0F783582-CD77-47C8-A825D193B0ACC7D8"
+							uniqueguid="0F783582-CD77-47C8-A825D193B0ACC7D8"
+							componentimage="E8EC0B4E-B7DA-4010-A76A46C9CB0E6C22"
+							width="423"
+							height="234"/>
+					</imagemetrics>
+				</tomb_kings>
 				<undead
 					this="F437C018-D330-4B06-BEE8A9644C6D68AA"
 					name="undead"
@@ -8344,6 +8868,10 @@
 					this="0289FC01-5B28-4646-B1CA1F244A360AE5"
 					uniqueguid="0289FC01-5B28-4646-B1CA1F244A360AE5"
 					imagepath="ui/skins/default/reward_daemons_reforged.png"/>
+				<component_image
+					this="24E2720B-F894-4EEB-A84AF318AC4BAAE1"
+					uniqueguid="24E2720B-F894-4EEB-A84AF318AC4BAAE1"
+					imagepath="ui/skins/default/reward_restoration_tomb_kings.png"/>
 			</componentimages>
 			<states>
 				<daemonic
@@ -8361,6 +8889,21 @@
 							height="234"/>
 					</imagemetrics>
 				</daemonic>
+				<tomb_kings
+					this="CC646C75-E725-4EBA-B97D786C0664F67F"
+					name="tomb_kings"
+					width="423"
+					height="234"
+					uniqueguid="CC646C75-E725-4EBA-B97D786C0664F67F">
+					<imagemetrics>
+						<image
+							this="322D36B9-0886-4890-92002CF130FE0DEF"
+							uniqueguid="322D36B9-0886-4890-92002CF130FE0DEF"
+							componentimage="24E2720B-F894-4EEB-A84AF318AC4BAAE1"
+							width="423"
+							height="234"/>
+					</imagemetrics>
+				</tomb_kings>
 				<undead
 					this="4CD91AC3-420F-461F-B142F6F0BD4A9F81"
 					name="undead"
@@ -12613,6 +13156,20 @@
 				<callback_with_context
 					callback_id="ContextCommandGiverOnCreate"
 					context_function_id="self.SetVisible(false)"/>
+				<callback_with_context callback_id="ContextStateSetterConditional">
+					<child_m_user_properties>
+						<property
+							name="daemonic"
+							value="IsContextValid(PlayersFaction) &amp;&amp; PlayersFaction.IsCampaignFeatureAvailable(&quot;daemonic_unit_saving_postbattle&quot;)"/>
+						<property
+							name="fallback_state"
+							value="undead"/>
+						<property
+							name="tomb_kings"
+							value="IsContextValid(PlayersFaction) &amp;&amp; PlayersFaction.IsCampaignFeatureAvailable(&quot;construct_unit_saving_postbattle&quot;)"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context callback_id="StatePropagatorCallback"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -12623,13 +13180,25 @@
 					value="0"/>
 			</userproperties>
 			<states>
-				<newstate
+				<daemonic
 					this="1375009E-7C95-47FA-BF94C586E59CC554"
-					name="NewState"
+					name="daemonic"
 					width="423"
 					height="234"
 					interactive="true"
 					uniqueguid="1375009E-7C95-47FA-BF94C586E59CC554"/>
+				<tomb_kings
+					this="C11D16ED-B442-42B8-B1BDED48F71F07A4"
+					name="tomb_kings"
+					width="423"
+					height="234"
+					uniqueguid="C11D16ED-B442-42B8-B1BDED48F71F07A4"/>
+				<undead
+					this="200B4D14-D909-4AD9-B2FF7E4AC6880400"
+					name="undead"
+					width="423"
+					height="234"
+					uniqueguid="200B4D14-D909-4AD9-B2FF7E4AC6880400"/>
 			</states>
 			<animations>
 				<show

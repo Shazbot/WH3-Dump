@@ -111,7 +111,7 @@ function books_of_nagash_war_declared(context)
 end
 
 function setup_tomb_king_difficulty_modifiers()
-	local faction_list = cm:model():world():faction_list();
+	local faction_list = cm:get_faction_list();
 	
 	for i = 0, faction_list:num_items() - 1 do
 		local faction = faction_list:item_at(i);

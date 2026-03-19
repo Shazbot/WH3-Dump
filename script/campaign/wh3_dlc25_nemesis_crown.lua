@@ -226,7 +226,7 @@ end
 function nemesis_crown:get_closest_legendary_lord_from_position(x,y)
 	local closest_distance = false
 	local closest_character = false
-	local faction_list = cm:model():world():faction_list()
+	local faction_list = cm:get_faction_list()
 
 	for i = 0,  faction_list:num_items() - 1 do
 		local current_faction = faction_list:item_at(i);
@@ -620,7 +620,7 @@ function nemesis_crown:marker_and_battle_listeners(human_factions)
 		true,
 		function(context)
 			local character = context:character()
-			local faction_list = cm:model():world():faction_list()
+			local faction_list = cm:get_faction_list()
 
 			Forced_Battle_Manager:trigger_forced_battle_with_generated_army(
 				character:military_force():command_queue_index(),

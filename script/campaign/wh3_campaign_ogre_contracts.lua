@@ -33,7 +33,8 @@ ogre_bounties = {
 		DISCIPLE_ARMY = true,
 		OGRE_CAMP = true,
 		CARAVAN = true,
-		CONVOY = true
+		CONVOY = true,
+		BLOOD_HOST_ARMY = true,
 	},
 	ogre_culture = "wh3_main_ogr_ogre_kingdoms",
 	num_contracts = 3,

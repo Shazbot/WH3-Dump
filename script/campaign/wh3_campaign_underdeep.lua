@@ -22,7 +22,7 @@ underdeep_zharr_naggrund_key = "wh3_main_combi_region_zharr_naggrund";
 function add_underdeep_listeners()
 	out("#### Adding Underdeep Listeners ####");
 	if cm:is_new_game() == true then
-		local faction_list = cm:model():world():faction_list();
+		local faction_list = cm:get_faction_list();
 		
 		for i = 0, faction_list:num_items() - 1 do
 			local faction = faction_list:item_at(i);
@@ -49,7 +49,7 @@ function add_underdeep_listeners()
 	end
 
 	-- Lock the drinking hall behind technology
-	local faction_list = cm:model():world():faction_list();
+	local faction_list = cm:get_faction_list();
 	
 	for i = 0, faction_list:num_items() - 1 do
 		local faction = faction_list:item_at(i);

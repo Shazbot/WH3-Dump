@@ -159,23 +159,21 @@ function gunnery_school:initialise()
 		end
 	end
 
-	if cm:is_new_game() then
-		core:add_listener(
-			"GunnerySchoolInitialise",
-			"FactionTurnStart",
-			function(context)
-				return context:faction():name() == self.faction_key and context:faction():is_human()
-			end,
-			function(context)
-				self:trigger_state_missions(1)
+	core:add_listener(
+		"GunnerySchoolInitialise",
+		"FactionTurnStart",
+		function(context)
+			return context:faction():name() == self.faction_key and context:faction():is_human() and self:are_initial_missions_triggered() == false
+		end,
+		function(context)
+			self:trigger_state_missions(1)
 
-				for unit, tooltip in pairs(self.locked_states) do
-					cm:add_event_restricted_unit_record_for_faction(unit, self.faction_key, tooltip)
-				end
-			end,
-			false
-		);
-	end
+			for unit, tooltip in pairs(self.locked_states) do
+				cm:add_event_restricted_unit_record_for_faction(unit, self.faction_key, tooltip)
+			end
+		end,
+		false
+	);
 
 	self:setup_incidents()
 end
@@ -318,6 +316,19 @@ function gunnery_school:trigger_state_missions(stage_number)
 			cm:trigger_mission(self.faction_key, key, true)
 		end
 	end
+end
+
+function gunnery_school:are_initial_missions_triggered()
+	local faction = cm:get_faction(self.faction_key)
+	if is_nil(faction) or faction:is_null_interface() then
+		return false
+	end
+	for _, key in ipairs(self.progression_unlocks[1].mission_keys) do
+		if not cm:mission_has_been_issued_for_faction(faction, key) then
+			return false
+		end
+	end
+	return true
 end
 
 

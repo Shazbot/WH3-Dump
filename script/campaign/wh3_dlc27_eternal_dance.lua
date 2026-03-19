@@ -135,10 +135,10 @@ eternal_dance = {
 
 	-- The penalty we apply to the tempo of the force when switching dance, in percentage 
 	dance_switching_penalties = {
-		0.90,	-- Tempo Level 1 -> 10% penalty  
-		0.70,
+		0.50,	-- Tempo Level 1 -> 10% penalty  
 		0.50,
-		0.30,
+		0.50,
+		0.50,
 	},
 
 	tech_bonuses = {
@@ -190,27 +190,22 @@ function eternal_dance:initialise()
 			local force = char:military_force()
 			local registered_general = eternal_dance:GetRegisteredGeneral(char)
 
-			if force == nil or registered_general == nil then 
-				return
-			end
+			if registered_general and registered_general.current_dance then
+				-- if character wounded, either by replace or death, remove and reset (if in progress) the dance
+				cm:remove_initiative_set_category_preset(registered_general.current_dance, char:command_queue_index(), true)
 
-			-- if character wounded, either by replace or death, remove and reset (if in progress) the dance
-			cm:remove_initiative_set_category_preset(registered_general.current_dance, char:command_queue_index(), true)
+				if force and not force:is_null_interface() then
+					-- remove innate dance bundle 
+					if force:has_effect_bundle(eternal_dance.dance_data[registered_general.current_dance].innate_bundle_key) then
+						cm:remove_effect_bundle_from_force(eternal_dance.dance_data[registered_general.current_dance].innate_bundle_key, force:command_queue_index())
+					end
 
-			-- remove innate dance bundle 
-			if registered_general.current_dance and force:is_null_interface() == false then
-				if force:has_effect_bundle(eternal_dance.dance_data[registered_general.current_dance].innate_bundle_key) then
-					cm:remove_effect_bundle_from_force(eternal_dance.dance_data[registered_general.current_dance].innate_bundle_key, force:command_queue_index())
+					-- if killed set tempo to 0.
+					if char:convalesence_cause() ~= eternal_dance.character_replaced_convalesence_cause and char:death_type() ~= eternal_dance.character_replaced_death_type then
+						local resource = force:pooled_resource_manager():resource(eternal_dance.pooled_resource_key)
+						cm:pooled_resource_factor_transaction(resource, eternal_dance.pooled_resource_factor_key_fatigue, -resource:value())
+					end
 				end
-			end
-
-			-- if killed set tempo to 0.
-			if registered_general.current_dance ~= nil and
-				char:convalesence_cause() ~= eternal_dance.character_replaced_convalesence_cause and
-				char:death_type() ~= eternal_dance.character_replaced_death_type
-			then
-				local resource = char:military_force():pooled_resource_manager():resource(eternal_dance.pooled_resource_key)
-				cm:pooled_resource_factor_transaction(resource, eternal_dance.pooled_resource_factor_key_fatigue, -resource:value())
 			end
 
 			eternal_dance:UpdateFactionForcesDanceLock(context:character():faction())
@@ -243,6 +238,21 @@ function eternal_dance:initialise()
 				end
 			end
 			eternal_dance:UpdateTechBonuses()
+		end,
+		true
+	)
+
+	-- Force has a new general -> trigger dissonance and make the force pay the penalty
+	core:add_listener(
+		"EternalDance_GeneralChanged",
+		"CharacterReplacingGeneral",
+		function(context)
+			local ngeneral = context:character()
+			return ngeneral:faction():name() == eternal_dance.faction_key and ngeneral:character_type_key() == "general" and ngeneral:character_subtype_key() ~= "wh3_main_sla_herald_of_slaanesh_slaanesh_disciple_army"
+		end,
+		function(context)
+			local force = context:character():military_force()
+			eternal_dance:apply_tempo_penalty(force)
 		end,
 		true
 	)
@@ -331,23 +341,11 @@ function eternal_dance:initialise()
 				log("Found Dancing general! Changing dance: " .. registered_general.current_dance .. " -> " .. dance)
 				log("Applying tempo penalty, removing old dance effects, setting cooldown and applying dissonance...")
 
-				local force_resource_manager = force:pooled_resource_manager():resource(eternal_dance.pooled_resource_key)
-				local tempo_level = eternal_dance:GetCurrentTempoLevel(force)
-				local tempo_penalty = eternal_dance.dance_switching_penalties[tempo_level]
-				local penalty_amount = (tempo_penalty * force_resource_manager:value())
-
 				-- remove dance bundle
 				if force:has_effect_bundle(eternal_dance.dance_data[registered_general.current_dance].innate_bundle_key) then
 					cm:remove_effect_bundle_from_force(eternal_dance.dance_data[registered_general.current_dance].innate_bundle_key, force:command_queue_index())
 				end
 
-				-- Lose tempo. If the technology is unlocked, reduce by X% the amount of tempo lost 
-				if eternal_dance.tech_bonuses.transfer_loss_bonus > 0 then
-					penalty_amount = penalty_amount - (penalty_amount * eternal_dance.tech_bonuses.transfer_loss_bonus)
-				end
-
-				cm:pooled_resource_factor_transaction(force_resource_manager, eternal_dance.pooled_resource_factor_key_penalty, - penalty_amount)
-				
 				--Prepare and trigger the dance change ritual. This sets the dance we change from on cooldown 
 				local ritual_key = eternal_dance.dance_data[registered_general.current_dance].performed_ritual
 				local ritual_setup = cm:create_new_ritual_setup(force:faction(), ritual_key);
@@ -357,11 +355,7 @@ function eternal_dance:initialise()
 					cm:perform_ritual_with_setup(ritual_setup);
 				end
 
-				--Trigger the dissonance effect 
-				eternal_dance.dancing_characters_fatigue_data[idx].is_dissonant = true
-				eternal_dance.dancing_characters_fatigue_data[idx].dissonance_duration = tempo_level - eternal_dance.tech_bonuses.dissonance_duration
-				eternal_dance.dancing_characters_fatigue_data[idx].current_dissonance_duration = 0
-				cm:apply_effect_bundle_to_force(eternal_dance.dissonance_effect_bundle_key, force:command_queue_index(), eternal_dance.dancing_characters_fatigue_data[idx].dissonance_duration)
+				eternal_dance:apply_tempo_penalty(force)
 			end
 
 			-- if we dont have a registered general, register one...
@@ -685,13 +679,9 @@ function eternal_dance:perform_masque_of_attraction(ritual_target, performing_fa
 		cm:awaken_faction_from_death(new_faction_object)
 	end
 
-	local general_object = targeted_force:general_character()
-	if general_object:character_type("colonel") then
-		cm:replace_general_in_force(targeted_force, eternal_dance.masque_of_attraction_transfer_genereal_type)
-	end
+	cm:replace_general_in_force(targeted_force, eternal_dance.masque_of_attraction_transfer_genereal_type)
 
 	-- we create an invasion object to manage the force from Lua
-	local general_character = targeted_force:general_character()
 	local invasion_key = "force_" .. targeted_force:command_queue_index() .. "_GONE_MAD"
 	local invasion_object = invasion_manager:new_invasion_from_existing_force(invasion_key, targeted_force)
 
@@ -778,6 +768,29 @@ function eternal_dance:perform_masque_of_reforging(ritual_target)
 	--log("MASQUE OF REFORGING! Applying resurect demons for 1 battle...")
 	--cm:apply_effect_bundle_to_characters_force(eternal_dance.final_rituals.masque_of_reforging_effect_bundle, ritual_target:get_target_force():general_character():command_queue_index(), 0)
 	--table.insert(eternal_dance.characters_reforging, #eternal_dance.characters_reforging + 1, ritual_target:get_target_force():general_character():command_queue_index())
+end
+
+-- Apply the tempo penalty that occurs when : general gets replaced, dance is switched
+-- Apply the dissonance effect along with the penalty
+function eternal_dance:apply_tempo_penalty(target_force)
+	local force_resource_manager = target_force:pooled_resource_manager():resource(eternal_dance.pooled_resource_key)
+	local tempo_level = eternal_dance:GetCurrentTempoLevel(target_force)
+	local tempo_penalty = eternal_dance.dance_switching_penalties[tempo_level]
+	local penalty_amount = (tempo_penalty * force_resource_manager:value())
+
+	-- Lose tempo. If the technology is unlocked, reduce by X% the amount of tempo lost 
+	if eternal_dance.tech_bonuses.transfer_loss_bonus > 0 then
+		penalty_amount = penalty_amount - (penalty_amount * eternal_dance.tech_bonuses.transfer_loss_bonus)
+	end
+
+	cm:pooled_resource_factor_transaction(force_resource_manager, eternal_dance.pooled_resource_factor_key_penalty, - penalty_amount)
+	
+	--Trigger the dissonance effect 
+	local registered_general = eternal_dance:GetRegisteredGeneral(target_force:general_character())
+	registered_general.is_dissonant = true
+	registered_general.dissonance_duration = tempo_level - eternal_dance.tech_bonuses.dissonance_duration
+	registered_general.current_dissonance_duration = 0
+	cm:apply_effect_bundle_to_force(eternal_dance.dissonance_effect_bundle_key, target_force:command_queue_index(), registered_general.dissonance_duration)
 end
 
 function eternal_dance:GetCurrentTempoLevel(mil_force)
@@ -868,24 +881,27 @@ end
 
 function eternal_dance:UpdateGeneralsFatigue()
 	for index, item in ipairs(eternal_dance.dancing_characters_fatigue_data) do
-		local force = cm:get_character_by_cqi(item.general_cqi):military_force()
+		local character = cm:get_character_by_cqi(item.general_cqi)
+		if character and character:is_null_interface() == false then
+			local force = character:military_force()
+			if force and force:is_null_interface() == false then
+				if item.is_dissonant == true then
+					item.current_dissonance_duration = item.current_dissonance_duration + 1
+					-- We keep the fatigue at 0 for the whole duration of the dissonance. 
+					item.current_fatigue_turn = 1
 
-		if item.is_dissonant == true then
-			item.current_dissonance_duration = item.current_dissonance_duration + 1
-			-- We keep the fatigue at 0 for the whole duration of the dissonance. 
-			item.current_fatigue_turn = 1
+					if item.current_dissonance_duration >= item.dissonance_duration then 
+						item.is_dissonant = false
+						item.dissonance_duration = 0
+						item.current_dissonance_duration = 0
+						cm:remove_effect_bundle_from_force(eternal_dance.dissonance_effect_bundle_key, force:command_queue_index())
+					end
 
-			if item.current_dissonance_duration >= item.dissonance_duration then 
-				item.is_dissonant = false
-				item.dissonance_duration = 0
-				item.current_dissonance_duration = 0
-				cm:remove_effect_bundle_from_force(eternal_dance.dissonance_effect_bundle_key, force:command_queue_index())
+					-- No need to compute the fatigue as its 0 for a duration, so we return
+					return
+				end
 			end
-
-			-- No need to compute the fatigue as its 0 for a duration, so we return
-			return
 		end
-
 		-- Handle fatigue incrementation
 		if cm:turn_number() > 1 then 
 			-- Fatigue may be delayed via tech tree bonus
@@ -1135,9 +1151,11 @@ function eternal_dance:CAI_ChoseTempoInitiative(character)
 	end
 	
 	local all_init_in_set = init_set:all_initiatives()
-	local selected_init = all_init_in_set:item_at(cm:random_number(all_init_in_set:num_items() - 1, 0))
-	cm:toggle_initiative_active(init_set, selected_init:record_key(), true)
-	eternal_dance:CAI_UpdateSharedStateValues(character)
+	if all_init_in_set:num_items() > 0 then
+		local selected_init = all_init_in_set:item_at(cm:random_number(all_init_in_set:num_items() - 1, 0))
+		cm:toggle_initiative_active(init_set, selected_init:record_key(), true)
+		eternal_dance:CAI_UpdateSharedStateValues(character)
+	end
 end
 
 function eternal_dance:CAI_UpdateSharedStateValues(character)

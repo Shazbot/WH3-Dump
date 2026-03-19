@@ -66,7 +66,7 @@ function spawn_characters_for_animators()
 		local start_y = 133;
 		local cultures_created = {};
 		
-		local faction_list = cm:model():world():faction_list();
+		local faction_list = cm:get_faction_list();
 		local row = 0;
 		
 		for i = 0, faction_list:num_items() - 1 do

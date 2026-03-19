@@ -136,7 +136,7 @@ function cult_of_sotek:start_prophecy_2()
 	local lizardmen_faction_list = {}
 	local skaven_faction_list = {}
 	
-	local faction_list = cm:model():world():faction_list()
+	local faction_list = cm:get_faction_list()
 	
 	for i = 0, faction_list:num_items() - 1 do
 		if (faction_list:item_at(i):subculture() == "wh2_main_sc_lzd_lizardmen") and (faction_list:item_at(i):is_dead() == false) then

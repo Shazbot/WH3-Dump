@@ -31,7 +31,8 @@ local shared_prepend_str = shared_narrative_event_prepend_str;
 unholy_manifestations_excluded_factions = {
 	wh3_dlc24_tze_the_deceivers = true,
 	wh3_dlc25_nur_tamurkhan = true,
-	wh3_dlc26_kho_arbaal = true
+	wh3_dlc26_kho_arbaal = true,
+	wh3_dlc27_sla_the_tormentors = true,
 }
 
 
@@ -118,6 +119,7 @@ local function unlock_unholy_manifestation_condition(context, faction_key)
 			end
 		end
 	end
+	return false
 end
 
 

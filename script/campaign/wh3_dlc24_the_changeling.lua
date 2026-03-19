@@ -2413,7 +2413,7 @@ function the_changeling_features:initialise()
 
 					-- Spawn beastmen in wood elf capitals around the world
 					if mission_key == "wh3_dlc24_mission_schemes_bretonnia_minor_5" then
-						for _, potential_faction in model_pairs(cm:model():world():faction_list()) do
+						for _, potential_faction in model_pairs(cm:get_faction_list()) do
 							if potential_faction:subculture() == "wh_dlc05_sc_wef_wood_elves" and not potential_faction:is_dead() and not potential_faction:was_confederated() and potential_faction:has_home_region() then
 								local home_region = potential_faction:home_region()
 								cm:force_rebellion_with_faction(home_region, "wh_dlc03_bst_beastmen_rebels", 19, true, false) 
@@ -2876,7 +2876,7 @@ function the_changeling_features:trigger_scripted_mission(mission_list)
 	end
 	
 	-- missions that require faction leaders
-	for _, faction in model_pairs(cm:model():world():faction_list()) do
+	for _, faction in model_pairs(cm:get_faction_list()) do
 		if not faction:is_dead() and faction:has_faction_leader() then
 			local faction_leader = faction:faction_leader()
 			local faction_leader_subtype = faction_leader:character_subtype_key()

@@ -166,8 +166,8 @@ function norsca_kinfolk:initialise()
 	)
 
 	core:add_listener(
-		"norsca_kinfolk_TransportedMilitaryForceExpired",
-		"TransportedMilitaryForceExpired",
+		"norsca_kinfolk_MilitaryForceDestroyed",
+		"MilitaryForceDestroyed",
 		function(context)
 			-- applies only when the faction already has this scripted bonus value
 			return context:military_force():faction():name() == norsca_kinfolk.config.faction_key
@@ -175,11 +175,17 @@ function norsca_kinfolk:initialise()
 		end,
 		function(context)
 			local destroyed_force = context:military_force()
-			local destroyed_army_key = destroyed_force:get_transported_army_key()
-			local destroyed_army_key_cqi = context:military_force():general_character():cqi()
-			local faction = destroyed_force:faction()
-			cm:trigger_incident_with_targets(faction:command_queue_index(), norsca_kinfolk.config.kinfolk_army_destroyed, 0, 0, destroyed_army_key_cqi, destroyed_army_key_cqi, 0, 0);
+			if not destroyed_force:is_transported_army() then
+				return
+			end
 
+			local destroyed_army_cqi = destroyed_force:command_queue_index()
+			local destroyed_faction_cqi = destroyed_force:faction():command_queue_index()
+
+			-- show event_feed informational incident in the EVENT FEED about the trollkind transported army's destruction
+			cm:trigger_incident_with_targets(destroyed_faction_cqi, norsca_kinfolk.config.kinfolk_army_destroyed, 0, 0, 0, destroyed_army_cqi, 0, 0)
+
+			local destroyed_army_key = destroyed_force:get_transported_army_key()
 			if not table.contains(norsca_kinfolk.config.ritual_to_transported_army_keys, destroyed_army_key) then
 				return
 			end
@@ -198,12 +204,32 @@ function norsca_kinfolk:initialise()
 					end
 				end
 			end
-			
+
 			-- since this is a call up the trolls transported army, remove the stop-kinfolk accumulation effect bundle
 			cm:remove_effect_bundle(norsca_kinfolk.config.kinfolk_stop_gain_effect_bundle_key, norsca_kinfolk.config.faction_key)
 		end,
 		true
-	);
+	)
+
+	core:add_listener(
+		"norsca_kinfolk_TransportedMilitaryForceExpired",
+		"TransportedMilitaryForceExpired",
+		function(context)
+			return context:military_force():faction():name() == norsca_kinfolk.config.faction_key
+				and context:military_force():faction():bonus_values():scripted_value(norsca_kinfolk.config.kinfolk_stop_gain_bonus_value, "value") <= 0
+		end,
+		function(context)
+			local destroyed_force = context:military_force()
+			local destroyed_army_cqi = destroyed_force:command_queue_index()
+			local destroyed_faction_cqi = destroyed_force:faction():command_queue_index()
+
+			-- show informational incident in the EVENT FEED about the trollkind transported army's destruction
+			cm:trigger_incident_with_targets(destroyed_faction_cqi, norsca_kinfolk.config.kinfolk_army_destroyed, 0, 0, 0, destroyed_army_cqi, 0, 0)
+
+			-- the effect bundle norsca_kinfolk.config.kinfolk_stop_gain_effect_bundle_key is removed at this point
+		end,
+		true
+	)
 
 	core:add_listener(
 		"norsca_kinfolk_UnitCreated",

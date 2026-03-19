@@ -3804,9 +3804,17 @@ function prologue_lord_recruit_intervention()
 	uim:override("settlement_panel_lord_recruit_with_button_hidden"):set_allowed(true);
 	allow_hotkeys(false)
 
-	local closest_region = cm:get_closest_settlement_from_faction_to_position(prologue_player_faction, cm:model():world():faction_by_key(prologue_player_faction):faction_leader():logical_position_x(), cm:model():world():faction_by_key(prologue_player_faction):faction_leader():logical_position_y())
-	common.call_context_command("CcoCampaignSettlement", closest_region:cqi(), "Select(false)");
-	completely_lock_input(true)
+    if cm:model():world():faction_by_key(prologue_player_faction):faction_leader():is_wounded() == false then
+		local closest_region = cm:get_closest_settlement_from_faction_to_position(prologue_player_faction, cm:model():world():faction_by_key(prologue_player_faction):faction_leader():logical_position_x(), cm:model():world():faction_by_key(prologue_player_faction):faction_leader():logical_position_y())
+		common.call_context_command("CcoCampaignSettlement", closest_region:cqi(), "Select(false)");
+		completely_lock_input(true)
+	elseif cm:model():world():faction_by_key(prologue_player_faction):faction_leader():is_wounded() == true then		
+		local faction_interface = cm:get_faction(prologue_player_faction)
+		if faction_interface:has_home_region() then
+			local capital = cm:get_faction(prologue_player_faction):home_region():settlement()
+			common.call_context_command("CcoCampaignSettlement", capital:cqi(), "Select(false)");
+		end
+	end	
 
 	cm:disable_event_feed_events(false, "", "", "character_ready_for_duty_starting_general"); 
 

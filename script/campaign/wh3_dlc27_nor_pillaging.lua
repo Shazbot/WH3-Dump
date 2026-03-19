@@ -277,7 +277,7 @@ end
 
 -- Reset for ALL factions (for testing cheats)
 function nor_pillaging:reset_ancillary_limits_all()
-	local factions = cm:model():world():faction_list()
+	local factions = cm:get_faction_list()
 	for i = 0, factions:num_items() - 1 do
 		local f = factions:item_at(i)
 		self:reset_ancillary_limits_for_faction(f)

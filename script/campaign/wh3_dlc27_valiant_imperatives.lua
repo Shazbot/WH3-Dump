@@ -277,7 +277,7 @@ function valiant_imperatives:ritual_completed_event(performed)
 	if ritual_key == self.rituals.force_loan_and_teleport then
 		local target_force_commander = ritual_target:get_target_force():general_character() 
 		local tyrion = performing_faction:faction_leader()
-		if tyrion:has_region() and not tyrion:is_wounded() then -- if tyrion is alive on the map
+		if tyrion:has_region() or tyrion:is_at_sea() then -- if tyrion is on the map
 			local x,y = cm:find_valid_spawn_location_for_character_from_character(ritual_faction_name, cm:char_lookup_str(tyrion), true, 5) -- find a valid spawn location near Tyrion's force
 			cm:teleport_military_force_to(target_force_commander:military_force(), x, y)
 		end

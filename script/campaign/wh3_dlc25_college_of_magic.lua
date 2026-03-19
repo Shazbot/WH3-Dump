@@ -336,7 +336,7 @@ function college_of_magic:damage_enemy_forces(force)
 end
 
 function college_of_magic:get_enemy_military_force_list_in_region(region)
-	local faction_list = cm:model():world():faction_list()
+	local faction_list = cm:get_faction_list()
 	local enemy_force_list = {}
 	local player_faction = cm:get_faction(self.faction_key)
 

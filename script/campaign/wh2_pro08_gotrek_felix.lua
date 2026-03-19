@@ -62,7 +62,7 @@ function add_gotrek_felix_listeners()
 end
 
 function gotrek_find_available_ai_faction()
-	local faction_list = cm:model():world():faction_list()
+	local faction_list = cm:get_faction_list()
 	local possible_factions = {}
 	
 	for i = 0, faction_list:num_items() - 1 do

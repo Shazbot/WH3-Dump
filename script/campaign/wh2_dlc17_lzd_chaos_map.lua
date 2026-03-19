@@ -1576,7 +1576,7 @@ end
 
 local function generate_mission_region_table(culture_table, difficulty)
 	local trimmed_region_list = {}
-	local faction_list = cm:model():world():faction_list()
+	local faction_list = cm:get_faction_list()
 
 	for i = 0, faction_list:num_items() - 1 do
 		-- generate a list of all cultural regions that aren't in blocked regions
@@ -1607,7 +1607,7 @@ end
 
 local function generate_mission_army_table(culture_table, difficulty)
 	local trimmed_army_list = {}
-	local faction_list = cm:model():world():faction_list()
+	local faction_list = cm:get_faction_list()
 
 	for i = 0, faction_list:num_items() - 1 do
 		local faction = faction_list:item_at(i)

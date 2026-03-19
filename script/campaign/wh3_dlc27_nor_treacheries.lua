@@ -1,6 +1,5 @@
 nor_treacheries_config = {
 	faction_key = "wh3_dlc27_nor_sayl",
-	faction_cqi = 103,
 	corruption_key = "wh3_main_corruption_chaos",
 	sayl_treachery_per_faction_limit = 3, 			-- Max amount of traps per faction
 	sayl_treachery_max_faction_limit = 4, 			-- Max amount of factions we can set traps on
@@ -435,16 +434,23 @@ function nor_treacheries:add_listeners()
 		end,
 		function(context)
 			local region = context:region()
-			local new_owner = region:owning_faction()
+			local new_faction = region:owning_faction()
+			if not new_faction or new_faction:is_null_interface() then
+				return
+			end
+
 			local previous_faction = context:previous_faction()
-			local sayl_faction = cm:get_faction(self.config.faction_key)
-
-			if new_owner:name() == self.config.faction_key then
-				local fsm = region:foreign_slot_manager_for_faction(self.config.faction_key)
-
-				if fsm:is_null_interface() == false then
-					nor_treacheries:occupied_settlement_spread_treacheries(nor_treacheries.activations, region, sayl_faction, previous_faction)	
-				end
+			
+			local fsm = region:foreign_slot_manager_for_faction(self.config.faction_key)
+			if not fsm or fsm:is_null_interface() then
+				return
+			end
+			
+			if new_faction:name() == self.config.faction_key then
+				local sayl_faction = cm:get_faction(self.config.faction_key)
+				nor_treacheries:occupied_settlement_spread_treacheries(nor_treacheries.activations, region, sayl_faction, previous_faction)	
+			else
+				nor_treacheries:destroy_foreign_slot(region:name())
 			end
 		end,
 		true
@@ -476,12 +482,7 @@ function nor_treacheries:add_listeners()
 					local fsm = region:foreign_slot_manager_for_faction(sayl_faction_key)
 	
 					if not fsm:is_null_interface() then 
-						if not is_table(nor_treacheries.dynamic_data.regions_to_clear) then
-							nor_treacheries.dynamic_data.regions_to_clear = {}
-						end
-
-						table.insert(nor_treacheries.dynamic_data.regions_to_clear, region:name())
-						nor_treacheries:destroy_foreign_slots()
+						nor_treacheries:destroy_foreign_slot(region:name())
 					end
 				end
 			end
@@ -558,7 +559,6 @@ end
 
 function nor_treacheries:trigger_treachery_activations(treacheries, region, sayl_faction, previous_faction) 
 	for key, data in dpairs(treacheries) do 
-		local faction_bundle = cm:create_new_custom_effect_bundle()
 		local scripted_bonus_value = cm:get_regions_bonus_value(region:name(), key)
 		if scripted_bonus_value ~= 0 then
 			if data.callback and is_function(data.callback) then
@@ -573,11 +573,6 @@ function nor_treacheries:trigger_treachery_activations(treacheries, region, sayl
 		end
 	end
 
-	if not is_table(nor_treacheries.dynamic_data.regions_to_clear) then
-		nor_treacheries.dynamic_data.regions_to_clear = {}
-	end
-
-	table.insert(nor_treacheries.dynamic_data.regions_to_clear, region:name())
 	nor_treacheries.dynamic_data.faction_cqi = sayl_faction:command_queue_index()
 
 	if nor_treacheries.dynamic_data.should_spawn_infiltrator_army then 
@@ -585,8 +580,16 @@ function nor_treacheries:trigger_treachery_activations(treacheries, region, sayl
 		nor_treacheries.dynamic_data.should_spawn_infiltrator_army = false
 	end
 
-	nor_treacheries:destroy_foreign_slots()
+	nor_treacheries:destroy_foreign_slot(region:name())
+end
 
+function nor_treacheries:destroy_foreign_slot(region_key)
+	if not is_table(nor_treacheries.dynamic_data.regions_to_clear) then
+		nor_treacheries.dynamic_data.regions_to_clear = {}
+	end
+
+	table.insert(nor_treacheries.dynamic_data.regions_to_clear, region_key)
+	nor_treacheries:destroy_foreign_slots()
 end
 
 -- Destroy the foreign slot with delay to prevent race conditions

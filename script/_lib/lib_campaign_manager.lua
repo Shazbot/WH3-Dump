@@ -2353,7 +2353,7 @@ function campaign_manager:first_tick(context)
 
 	-- build a list of human factions, and work out which faction is local
 	do
-		local faction_list = model:world():faction_list();
+		local faction_list = cm:get_faction_list();
 		local subcultures_present_on_first_turn = {}
 
 		for i = 0, faction_list:num_items() - 1 do
@@ -3856,6 +3856,20 @@ end;
 --- @section General Querying
 ----------------------------------------------------------------------------
 
+--- @function get_faction_list
+--- @desc Returns a script interface wrapping a list of script interfaces for ALL factions
+--- @r @FACTION_LIST_SCRIPT_INTERFACE all factions
+function campaign_manager:get_faction_list()
+	if self.faction_list == nil then
+		-- a list returned by faction_list holds faction script interfaces. 
+		-- if someone gets the list in a local variable and returns one or more of its elements, the garbage collector may delete the list AND all its elements at any time
+		-- and suddenly the returned elements will be garbled even on the same frame!!!
+		-- this is why we cache the list here
+		-- THIS SHOULD BE THE ONLY PLACE THAT ACCESSES IT
+		self.faction_list = cm:model():world():faction_list();
+	end
+	return self.faction_list
+end;
 
 --- @function is_faction_human
 --- @desc Returns whether the specified faction is human.
@@ -3971,7 +3985,7 @@ function campaign_manager:get_factions_by_filter(condition)
 
 	local retval = {};
 
-	local faction_list = self:model():world():faction_list();
+	local faction_list = self:get_faction_list();
 	for _, faction in model_pairs(faction_list) do
 		if condition(faction) then
 			table.insert(retval, faction);
@@ -4088,7 +4102,7 @@ function campaign_manager:are_any_factions_human_or_ai(faction_list, culture, su
 	end;
 
 	if faction_list == nil then
-		faction_list = cm:model():world():faction_list();
+		faction_list = cm:get_faction_list();
 
 		-- It's important that we move elements out of the 'faction_list_interface' (zero-based and no indexer) and into a regular lua table.
 		local one_based_list = {};
@@ -4412,7 +4426,7 @@ function campaign_manager:is_subculture_in_campaign(subculture, factions_present
 	end;
 
 	if factions_present_now then
-		local faction_list = cm:model():world():faction_list()
+		local faction_list = cm:get_faction_list()
 		
 		for i = 0, faction_list:num_items() - 1 do
 			if faction_list:item_at(i):subculture() == subculture then
@@ -5278,7 +5292,7 @@ end;
 --- @p number y, Logical y co-ordinate.
 --- @r character general character
 function campaign_manager:get_general_at_position_all_factions(x, y)
-	local faction_list = cm:model():world():faction_list();
+	local faction_list = cm:get_faction_list();
 	
 	for i = 0, faction_list:num_items() - 1 do
 		local faction = faction_list:item_at(i);
@@ -7803,8 +7817,11 @@ end;
 --- @p [opt=false] boolean by_level, If set to true, the level/rank can be supplied instead of an exact amount of experience which is looked up from a table in the campaign manager
 function campaign_manager:add_agent_experience(char_str, exp_to_give, by_level)
 	if by_level then
-		exp_to_give = self.character_xp_per_level[math.min(exp_to_give, #self.character_xp_per_level)];
-	end;
+		local desired_rank = math.min(exp_to_give, #self.character_xp_per_level)
+		out("add_agent_experience() called, char_str is " .. tostring(char_str) .. " and desired rank is " .. tostring(desired_rank));
+		self.game_interface:level_up_agent_rank(char_str, desired_rank)
+		return
+	end
 	
 	out("add_agent_experience() called, char_str is " .. tostring(char_str) .. " and experience to give is " .. tostring(exp_to_give));
 	return self.game_interface:add_agent_experience(char_str, exp_to_give);
@@ -8157,7 +8174,7 @@ function campaign_manager:get_trespasser_list_for_faction(faction)
 	-- go through all factions. If the current faction is at war with the specified faction, go through the
 	-- current faction's military force leaders. If the character is in the subject faction's territory, note
 	-- that character's cqi and faction in the table to return.
-	local faction_list = faction:model():world():faction_list();
+	local faction_list = cm:get_faction_list();
 	
 	for i = 0, faction_list:num_items() - 1 do
 		local current_faction = faction_list:item_at(i);
@@ -8254,7 +8271,7 @@ function campaign_manager:faction_of_culture_is_alive(culture_key)
 		return false;
 	end;
 
-	local faction_list = cm:model():world():faction_list();
+	local faction_list = cm:get_faction_list();
 	
 	for i = 0, faction_list:num_items() - 1 do
 		local faction = faction_list:item_at(i);
@@ -8280,7 +8297,7 @@ function campaign_manager:faction_of_subculture_is_alive(subculture_key)
 		return false;
 	end;
 
-	local faction_list = cm:model():world():faction_list();
+	local faction_list = cm:get_faction_list();
 	
 	for i = 0, faction_list:num_items() - 1 do
 		local faction = faction_list:item_at(i);

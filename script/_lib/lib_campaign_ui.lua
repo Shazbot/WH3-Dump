@@ -1794,7 +1794,7 @@ function campaign_ui_manager:highlight_all_characters_near_camera(value, radius,
 	local cm = self.cm;
 	
 	if value then
-		local faction_list = cm:model():world():faction_list();
+		local faction_list = cm:get_faction_list();
 		local cam_x, cam_y, cam_d, cam_b, cam_h = cm:get_camera_position();
 		local radius_squared = radius * radius;
 		

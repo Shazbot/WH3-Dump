@@ -410,7 +410,7 @@ function Add_ROR_Locks()
 	output_ror("########## ADDING R.O.R LOCKS ##########");
 	
 	local human_factions = cm:get_human_factions();
-	local faction_list = cm:model():world():faction_list();
+	local faction_list = cm:get_faction_list();
 	
 	for i = 1, #indexed_subcultures do
 		local subculture = indexed_subcultures[i]
@@ -473,7 +473,7 @@ function Lock_Units_In_Subculture_For_Everyone_But(subculture, faction)
 	output_ror("---- Locking ROR ----");
 	output_ror("Selecting '"..faction.."' as the main faction of the '"..subculture.."' subculture!");
 	
-	local faction_list = cm:model():world():faction_list();
+	local faction_list = cm:get_faction_list();
 	
 	for i = 0, faction_list:num_items() - 1 do
 		local current_faction = faction_list:item_at(i);

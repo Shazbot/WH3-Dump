@@ -231,7 +231,7 @@ end
 
 ---- Internal - Validates a set of coordinates by testing if a character is standing at that location
 function invasion_manager:is_valid_position(x, y)
-	local faction_list = cm:model():world():faction_list();
+	local faction_list = cm:get_faction_list();
 	
 	for i = 0, faction_list:num_items() - 1 do
 		local faction = faction_list:item_at(i);
@@ -426,7 +426,9 @@ end
 --- @p string clan_name, The name key of this characters clan name
 --- @p string family_name, The name key of this characters family name
 --- @p string other_name, The name key of this characters other name
-function invasion:create_general(make_faction_leader, agent_subtype, forename, clan_name, family_name, other_name)
+--- @p bool disable_movement Whether to disable movement for the character
+--- @p bool already_retreated Whether to set its force as already retreated
+function invasion:create_general(make_faction_leader, agent_subtype, forename, clan_name, family_name, other_name, disable_movement, already_retreated)
 	local agent_type = "general";
 	make_faction_leader = make_faction_leader or false;
 	agent_subtype = agent_subtype or "default";
@@ -435,7 +437,7 @@ function invasion:create_general(make_faction_leader, agent_subtype, forename, c
 	family_name = family_name or "";
 	other_name = other_name or "";
 	
-	self.new_general = {agent_type = agent_type, agent_subtype = agent_subtype, forename = forename, clan_name = clan_name, family_name = family_name, other_name = other_name, make_faction_leader = make_faction_leader};
+	self.new_general = {agent_type = agent_type, agent_subtype = agent_subtype, forename = forename, clan_name = clan_name, family_name = family_name, other_name = other_name, disable_movement = disable_movement, already_retreated = already_retreated, make_faction_leader = make_faction_leader};
 	self.general_cqi = nil;
 end
 
@@ -613,7 +615,7 @@ function invasion:start_invasion(callback_function, declare_war, invite_attacker
 			if self.new_general ~= nil then
 				out.invasions("\t\tCreating force with new general!");
 				cm:create_force_with_general(self.faction, self.unit_list, temp_region, x, y, self.new_general.agent_type, self.new_general.agent_subtype, self.new_general.forename, self.new_general.clan_name, self.new_general.family_name, self.new_general.other_name, self.new_general.make_faction_leader,
-				function(cqi) self:force_created(cqi, declare_war, invite_attacker_allies, invite_defender_allies) end, allow_diplomatic_discovery);
+				function(cqi) self:force_created(cqi, declare_war, invite_attacker_allies, invite_defender_allies, false, self.new_general.disable_movement, self.new_general.already_retreated) end, allow_diplomatic_discovery);
 			elseif self.general_cqi == nil then
 				cm:create_force_with_full_diplomatic_discovery(self.faction, self.unit_list, temp_region, x, y, true,
 				function(cqi) self:force_created(cqi, declare_war, invite_attacker_allies, invite_defender_allies) end, false);
@@ -640,7 +642,7 @@ function invasion:start_invasion(callback_function, declare_war, invite_attacker
 end
 
 ---- Internal - Function called when the force of the invasion is spawned
-function invasion:force_created(general_cqi, declare_war, invite_attacker_allies, invite_defender_allies, was_respawn)
+function invasion:force_created(general_cqi, declare_war, invite_attacker_allies, invite_defender_allies, was_respawn, disable_movement, already_retreated)
 	self.general_cqi = general_cqi;
 	self.declare_war = declare_war;
 	self.invite_attacker_allies = invite_attacker_allies;
@@ -652,6 +654,15 @@ function invasion:force_created(general_cqi, declare_war, invite_attacker_allies
 	
 	if self.target_type ~= "NONE" then
 		cm:cai_disable_movement_for_character("character_cqi:"..general_cqi);
+		if disable_movement then
+			cm:disable_movement_for_character(cm:char_lookup_str(general_cqi))
+		end
+		if already_retreated then
+			local force = cm:force_from_general_cqi(general_cqi)
+			if force and not force:is_null_interface() then
+				cm:set_force_has_retreated_this_turn(force)
+			end
+		end
 		
 		if self.target_type == "PATROL" then
 			self.patrol_position = 1;

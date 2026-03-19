@@ -320,7 +320,15 @@ function grudge_cycle:initialise()
 end
 
 function grudge_cycle:setup()
-	local faction_list = cm:get_factions_by_culture(self.cultures.dwarf)
+	local faction_list = {}
+	local world_faction_list = cm:get_faction_list()
+	for i = 0, world_faction_list:num_items() -1 do
+		local faction = world_faction_list:item_at(i)
+		if faction:culture() == self.cultures.dwarf then
+			table.insert(faction_list, faction)
+		end
+	end
+
 	local world = cm:model():world()
 	local campaign_name = cm:get_campaign_name()
 	local starting_grudge_level = 0
@@ -457,7 +465,7 @@ function grudge_cycle:get_world_grudges()
 
 	local world = cm:model():world()
 	local region_list = world:region_manager():region_list()
-	local faction_list = world:faction_list()
+	local faction_list = cm:get_faction_list()
 
 	for i = 0, region_list:num_items() - 1 do
 		local region = region_list:item_at(i)

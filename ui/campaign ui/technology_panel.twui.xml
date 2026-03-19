@@ -443,19 +443,19 @@
 			defaultstate="28A3A9E2-D2B5-494E-9F71892429F6ED1E">
 			<callbackwithcontextlist>
 				<callback_with_context
-					callback_id="ContextInactiveStateSetter"
+					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoTechnologyUiGroupRecord"
-					context_function_id="TopMostTechnology.TechnologyManagerContext.CanResearchAnyTechInUiGroup(this)">
+					context_function_id="BackgroundImage.IsEmpty"/>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoTechnologyUiGroupRecord"
+					context_function_id="GetIfElse(TopMostTechnology.TechnologyManagerContext.HasResearchedAllTechInUiGroup(this), &quot;inactive&quot;, &quot;active&quot;)">
 					<child_m_user_properties>
 						<property
 							name="event0"
 							value="CampaignTechnologyStateChangeAny"/>
 					</child_m_user_properties>
 				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoTechnologyUiGroupRecord"
-					context_function_id="BackgroundImage.IsEmpty"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -822,9 +822,9 @@
 					context_object_id="CcoTechnologyUiGroupRecord"
 					context_function_id="Name"/>
 				<callback_with_context
-					callback_id="ContextInactiveStateSetter"
+					callback_id="ContextStateSetter"
 					context_object_id="CcoTechnologyUiGroupRecord"
-					context_function_id="TopMostTechnology.TechnologyManagerContext.CanResearchAnyTechInUiGroup(this)">
+					context_function_id="GetIfElse(TopMostTechnology.TechnologyManagerContext.HasResearchedAllTechInUiGroup(this), &quot;inactive&quot;, &quot;active&quot;)">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -4444,19 +4444,19 @@
 					context_object_id="CcoTechnologyUiGroupRecord"
 					context_function_id="AddDefaultSkinPath( BackgroundImage)"/>
 				<callback_with_context
-					callback_id="ContextInactiveStateSetter"
+					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoTechnologyUiGroupRecord"
-					context_function_id="TopMostTechnology.TechnologyManagerContext.CanResearchAnyTechInUiGroup(this)">
+					context_function_id="BackgroundImage.IsEmpty == false"/>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoTechnologyUiGroupRecord"
+					context_function_id="GetIfElse(TopMostTechnology.TechnologyManagerContext.HasResearchedAllTechInUiGroup(this), &quot;inactive&quot;, &quot;active&quot;)">
 					<child_m_user_properties>
 						<property
 							name="event0"
 							value="CampaignTechnologyStateChangeAny"/>
 					</child_m_user_properties>
 				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoTechnologyUiGroupRecord"
-					context_function_id="BackgroundImage.IsEmpty == false"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property

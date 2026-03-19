@@ -7,4 +7,17 @@ FragmentsOfSorcery
 			CanUseUiFeature("FRAGMENTS"),
 			PlayersFaction.CharacterList.Filter(AgentSubtypeRecordContext.Key == "wh3_main_tze_kairos").IsEmpty == false )
 	}
+	
+	ActivateItem
+	{
+		#activating the initiative/spell/effect/ability for this slot and hiding this dlc26_fragments_abilities_selector#
+		(template_layout_parent_component = self.ParentContext.ParentContext,
+			black_overlay_component = Component("08795FD3-D435-4911-9245BB2E79B38EA8").ParentContext.ChildList.Filter(Id == "black_overlay").FirstContext,
+			stored_initiative_context = self.StoredContext("CcoCampaignInitiative")) =>
+		{
+			DoIfElse( stored_initiative_context.IsActive,
+				Do( template_layout_parent_component.SetVisible(false), black_overlay_component.SetVisible(false) ),
+				Do( template_layout_parent_component.SetVisible(false), black_overlay_component.SetVisible(false), stored_initiative_context.Activate() ) )
+		}
+	}
 }

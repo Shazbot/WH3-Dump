@@ -325,7 +325,7 @@ function cult_declare_random_war(faction_key)
 			local pick = valid_met_factions[rand];
 			cm:force_declare_war(faction_key, pick, false, false);
 		else
-			local all_factions = cm:model():world():faction_list();
+			local all_factions = cm:get_faction_list();
 			local valid_factions = cult_valid_faction_war_table(faction, all_factions);
 
 			if #valid_factions > 0 then

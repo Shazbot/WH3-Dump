@@ -130,7 +130,7 @@ end
 ---force needs a unique ref
 ---if opt_destroy_after_battle is set to false, the force will persist if it survives the forced battle.
 ---an effect bundle can be assigned to the force that will be applied on spawn
-function forced_battle:add_new_force(force_key, unit_list, faction_key, destroy_after_battle, opt_effect_bundle,opt_general_subtype,opt_general_level, opt_general_forename, opt_general_surname)
+function forced_battle:add_new_force(force_key, unit_list, faction_key, destroy_after_battle, opt_effect_bundle,opt_general_subtype,opt_general_level, opt_general_forename, opt_general_surname, opt_disable_movement, opt_already_retreated)
 	local force_list = self.force_list
 	
 	if not is_string(force_key) then
@@ -161,7 +161,7 @@ function forced_battle:add_new_force(force_key, unit_list, faction_key, destroy_
 	new_force.destroy_after_battle = destroy_after_battle
 
 	if not is_boolean(new_force.destroy_after_battle) then
-		script_error("ERROR: Forced Battle Manager: new forced battle force "..force_key.." destroy_after battle is not a bool")
+		script_error("ERROR: Forced Battle Manager: new forced battle force "..force_key.." destroy_after_battle is not a bool")
 		return false
 	end
 
@@ -175,6 +175,18 @@ function forced_battle:add_new_force(force_key, unit_list, faction_key, destroy_
 	new_force.general_subtype = opt_general_subtype or nil
 	new_force.general_forename = opt_general_forename or ""
 	new_force.general_surname = opt_general_surname or ""
+
+	new_force.disable_movement = opt_disable_movement or false
+	if not is_boolean(new_force.disable_movement) then
+		script_error("ERROR: Forced Battle Manager: new forced battle force "..force_key.." disable_movement is not a bool")
+		return false
+	end
+
+	new_force.already_retreated = opt_already_retreated or false
+	if not is_boolean(new_force.already_retreated) then
+		script_error("ERROR: Forced Battle Manager: new forced battle force "..force_key.." already_retreated is not a bool")
+		return false
+	end
 
 	if new_force.general_subtype  ~= nil and not is_string(new_force.general_subtype ) then
 		script_error("ERROR: Forced Battle Manager: new forced battle force "..force_key.." has been given an general_subtype parameter, but parameter is not a string")
@@ -232,6 +244,8 @@ function forced_battle:trigger_battle(attacker_force, target_force, opt_target_x
 		self.target.force_key = target_force
 		self.target.is_existing = false
 		self.target.destroy_after_battle = self.force_list[target_force].destroy_after_battle	
+		self.target.disable_movement = self.force_list[target_force].disable_movement
+		self.target.already_retreated = self.force_list[target_force].already_retreated
 	else
 		script_error("ERROR: Force Battle Manager: trying to trigger forced battle but supplied target_force: "..target_force.." is not number or string")
 		return false
@@ -464,7 +478,7 @@ function forced_battle:spawn_generated_force(force_key, x, y)
 
 	local forced_battle_force = invasion_manager:new_invasion(force.key,force.faction_key, force.unit_list,{new_x, new_y})
 	if force.general_subtype ~= nil then
-		forced_battle_force:create_general(false, force.general_subtype, force.general_forename or "", "", force.general_surname or "")
+		forced_battle_force:create_general(false, force.general_subtype, force.general_forename or "", "", force.general_surname or "", "", force.disable_movement, force.already_retreated)
 	end
 	if force.general_level ~= nil then
 		forced_battle_force:add_character_experience(force.general_level, true)

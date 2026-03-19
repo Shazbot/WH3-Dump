@@ -226,28 +226,41 @@ monster_hunt =
 				stages = {"once"},
 				-- Cooldown after completing a stage from this tier
 				cooldown = 4,
-				-- How many hunts from the previous tier are needed to unlock this tier
-				hunts_to_unlock = 0,
-				-- Which stage is needed to be completed to progress in unlocking the next tier and Ultimate Monster Hunter
-				min_hunt_stage_for_tier_unlock = 1,
+				unlock_requirements =
+				{
+					-- tier to look into for completed hunts
+					tier = 0,
+					-- which stage is needed to be completed
+					min_stage = 0,
+					-- how many hunts from the specified tier are needed to unlock this tier
+					count = 0
+				},
 			},
 			-- Tier 2 - Taming Hunts Monster Arcanum
 			{
 				stages = {"once", "replayable"},
 				cooldown = 4,
-				hunts_to_unlock = 1,
-				min_hunt_stage_for_tier_unlock = 1,
+				unlock_requirements =
+				{
+					tier = 1,
+					min_stage = 1,
+					count = 1
+				},
 			},
 			-- Tier 3 - Trophy hunts
 			{
 				stages = {"once"},
 				cooldown = 4,
-				hunts_to_unlock = 3,
-				-- How many hunts from the last tier are needed to unlock the  Ultimate Monster Hunter
-				hunts_for_umh = 5,
-				min_hunt_stage_for_tier_unlock = 1,
+				unlock_requirements =
+				{
+					tier = 2,
+					min_stage = 1,
+					count = 3
+				},
 			},
 		},
+
+		umh_required_hunts_by_tier_count = {1, 3, 5},
 
 		-- For locking/unlocking the mechanic in the UI
 		turn_to_unlock =
@@ -2633,48 +2646,56 @@ monster_hunt =
 
 	-- Convert saves from previous version of the mechanic
 	convert_saves = function()
+		-- we do not want to show an event message for aborting all the old missions
+		local event_id = "faction_event_mission_aborted"
+		cm:disable_event_feed_events(true, "", "", event_id)
+
 		for faction_key, data in dpairs(monster_hunt.persistent) do
 			if data.monster_hunt_0 then
+				monster_hunt.convert_old_save_for_faction(faction_key, data)
+			end
+		end
 
-				local hunts_to_complete = {}
-				
-				for _, hunt_data in dpairs(data) do
-					if hunt_data.state == "in_progress" then
-						cm:cancel_custom_mission(faction_key, hunt_data.qb)
+		cm:disable_event_feed_events(false, "", "", event_id)
+	end,
 
-						if cm:is_multiplayer() then
-							cm:cancel_custom_mission(faction_key, hunt_data.mpc_mission)
-						else
-							cm:cancel_custom_mission(faction_key, hunt_data.mission)
+	convert_old_save_for_faction = function(faction_key, old_faction_data)
+		local hunts_to_complete = {}
+		
+		for _, hunt_data in dpairs(old_faction_data) do
+			if hunt_data.state == "in_progress" then
+				cm:cancel_custom_mission(faction_key, hunt_data.qb)
+
+				if cm:is_multiplayer() then
+					cm:cancel_custom_mission(faction_key, hunt_data.mpc_mission)
+				else
+					cm:cancel_custom_mission(faction_key, hunt_data.mission)
+				end
+			elseif hunt_data.state == "completed" then
+				-- cannot match by monster, so match them by ancillary reward
+				local ancillary_key = hunt_data.reward
+				local found = false
+				for tier, tier_data in ipairs(monster_hunt.config.tiers) do
+					for _, hunt_data in ipairs(tier_data) do
+						if hunt_data.reward_stage_1_ancillary and hunt_data.reward_stage_1_ancillary == ancillary_key then
+							table.insert(hunts_to_complete, hunt_data.key)
+							found = true
+							break
 						end
-					elseif hunt_data.state == "completed" then
-						-- cannot match by monster, so match them by ancillary reward
-						local ancillary_key = hunt_data.reward
-						local found = false
-						for tier, tier_data in ipairs(monster_hunt.config.tiers) do
-							for _, hunt_data in ipairs(tier_data) do
-								if hunt_data.reward_stage_1_ancillary and hunt_data.reward_stage_1_ancillary == ancillary_key then
-									table.insert(hunts_to_complete, hunt_data.key)
-									found = true
-									break
-								end
-							end
-							if found then
-								break
-							end
-						end
-						
+					end
+					if found then
+						break
 					end
 				end
-
-				-- delete the old data for the faction, get_faction_persistent_data will generate the new one
-				monster_hunt.persistent[faction_key] = nil
-
-				local faction_persistent_data = monster_hunt.get_faction_persistent_data(faction_key)
-				for _, hunt_key in ipairs(hunts_to_complete) do
-					faction_persistent_data.hunt_states[hunt_key].is_completed = true
-				end
 			end
+		end
+
+		-- delete the old data for the faction, get_faction_persistent_data will generate the new one
+		monster_hunt.persistent[faction_key] = nil
+
+		local faction_persistent_data = monster_hunt.get_faction_persistent_data(faction_key)
+		for _, hunt_key in ipairs(hunts_to_complete) do
+			faction_persistent_data.hunt_states[hunt_key].is_completed = true
 		end
 	end,
 
@@ -2853,12 +2874,6 @@ monster_hunt =
 		faction_persistent_data.ultimate_monster_hunter_performed = true
 		cm:trigger_incident(faction_key, monster_hunt.config.ultimate_monster_hunter_rewards[faction_key].incident, true, true)
 		core:trigger_event("ScriptEventUltimateMonsterHunterActivated", faction_key)
-
-		local panel = UIComponent(monster_hunt.panel)
-		if panel then
-			panel:InterfaceFunction("PlayVoiceEvent", "campaign_vo_nor_monstrous_arcanum_ceremony")
-			panel:InterfaceFunction("OnUltimateMonsterHunterActivated", faction_key)
-		end
 	end,
 
 	get_mission_key = function(hunt_key, stage, is_quest_battle)
@@ -3165,6 +3180,7 @@ monster_hunt =
 						min_ap_cost = distances_table[i] * character_ap,
 						max_ap_cost = (distances_table[i] + 1.0 / segments) * character_ap, 
 						climate_keys = climates,
+						are_zocs_passable = false,
 						override_initial_x = initial_x,
 						override_initial_y = initial_y,
 					}
@@ -3314,7 +3330,7 @@ monster_hunt =
 		faction_persistent_data.active_hunt = nil
 
 		if tier < #monster_hunt.config.tier_config
-			and monster_hunt.get_hunts_for_tier_unlock(faction_key, tier + 1) >= monster_hunt.config.tier_config[tier + 1].hunts_to_unlock 
+			and monster_hunt.get_hunts_for_tier_unlock(faction_key, tier + 1) >= monster_hunt.config.tier_config[tier + 1].unlock_requirements.count 
 		then
 			faction_persistent_data.tier_unlocked[tier + 1] = true
 		elseif faction_persistent_data.ultimate_monster_hunter_performed == false 
@@ -3360,7 +3376,7 @@ monster_hunt =
 
 		for _, current_monster_hunt_data in ipairs(monster_hunt.config.tiers[tier - 1]) do
 			local hunt_states = faction_persistent_data.hunt_states[current_monster_hunt_data.key]
-			if hunt_states.last_completed_stage >= monster_hunt.config.tier_config[tier].min_hunt_stage_for_tier_unlock then
+			if hunt_states.last_completed_stage >= monster_hunt.config.tier_config[tier].unlock_requirements.min_stage then
 				count = count + 1
 			end
 		end
@@ -3380,7 +3396,8 @@ monster_hunt =
 			end
 		end
 
-		return monster_hunt.config.tier_config[last_tier_idx].hunts_for_umh <= count
+		local required_count = monster_hunt.config.umh_required_hunts_by_tier_count[last_tier_idx] or 0
+		return count >= required_count
 	end,
 
 	init_ui = function(context)
@@ -3468,12 +3485,13 @@ monster_hunt =
 	end,
 
 	update_tier_states = function(faction_key)
-		local is_current_stage_replayable = false
+		local tiers_config = monster_hunt.config.tier_config
+
 		local faction_persistent_data = monster_hunt.get_faction_persistent_data(faction_key)
 		replayable_stages = {}
-		for tier = 1, #monster_hunt.config.tier_config do
+		for tier = 1, #tiers_config do
 			local found = false
-			for idx, stage_type in ipairs(monster_hunt.config.tier_config[tier].stages) do
+			for idx, stage_type in ipairs(tiers_config[tier].stages) do
 				if stage_type == "replayable" then
 					table.insert(replayable_stages, idx)
 					found = true
@@ -3485,31 +3503,32 @@ monster_hunt =
 			end
 		end
 		
-		local min_stages_for_tier_unlock = {}
-		local hunts_to_unlock_next_tier = {}
-		for tier = 1, #monster_hunt.config.tier_config do
-			table.insert(min_stages_for_tier_unlock, monster_hunt.config.tier_config[tier].min_hunt_stage_for_tier_unlock)
-			if tier > 1 then
-				table.insert(hunts_to_unlock_next_tier, monster_hunt.config.tier_config[tier].hunts_to_unlock)
-
-				if tier < #monster_hunt.config.tier_config and monster_hunt.get_hunts_for_tier_unlock(faction_key, tier) >= monster_hunt.config.tier_config[tier + 1].hunts_to_unlock then
-					monster_hunt.persistent[faction_key].tier_unlocked[tier + 1] = true
-				end
-			end
+		
+		-- split the unlock requirements to several lists, for easier sending to the engine
+		local tier_unlock_requirements_tier = {}
+		local tier_unlock_requirements_min_stage = {}
+		local tier_unlock_requirements_count = {}
+		for tier = 1, #tiers_config do
+			local tier_config = tiers_config[tier]
+			local requirements = tier_config.unlock_requirements
+			table.insert(tier_unlock_requirements_tier, requirements.tier)
+			table.insert(tier_unlock_requirements_min_stage, requirements.min_stage)
+			table.insert(tier_unlock_requirements_count, requirements.count)
 		end
-		table.insert(hunts_to_unlock_next_tier, monster_hunt.config.tier_config[#monster_hunt.config.tier_config].hunts_for_umh)
-
+		
 		UIComponent(monster_hunt.panel):InterfaceFunction("SetTierStates",
 		{
 			tier_unlocked = monster_hunt.persistent[faction_key].tier_unlocked,
-			min_stages_for_tier_unlock = min_stages_for_tier_unlock,
-			hunts_to_unlock_next_tier = hunts_to_unlock_next_tier,
+			tier_unlock_requirements_tier = tier_unlock_requirements_tier,
+			tier_unlock_requirements_min_stage = tier_unlock_requirements_min_stage,
+			tier_unlock_requirements_count = tier_unlock_requirements_count,
 			replayable_stages = replayable_stages,
 			active_hunt = monster_hunt.persistent[faction_key].active_hunt or "",
 			hunter_cqi = monster_hunt.persistent[faction_key].hunter_cqi or -1,
 			current_stage = monster_hunt.get_current_stage(faction_key),
 			marker_position_x = faction_persistent_data.marker_position_x or -1,
 			marker_position_y = faction_persistent_data.marker_position_y or -1,
+			ultimate_monster_hunt_required_hunts_by_tier = monster_hunt.config.umh_required_hunts_by_tier_count,
 			ultimate_monster_hunter_performed = faction_persistent_data.ultimate_monster_hunter_performed and 1 or 0,
 			ultimate_monster_hunter_effect_bundle = monster_hunt.config.ultimate_monster_hunter_rewards[faction_key].effect_bundle,
 			has_panel_been_opened = monster_hunt.ui_persistent.has_panel_been_opened and 1 or 0
@@ -3894,14 +3913,16 @@ core:add_listener(
 			if is_quest_battle or is_generated_battle then
 				if (is_player_attacker and attacker:won_battle()) or (is_player_defender and defender:won_battle()) then
 					core:trigger_event("ScriptEventMonsterHuntStageAdvanceBattle_" .. faction_persistent_data.active_mission, faction_key)
-				else
+				-- Quest battle markers remain on defeat by themselves
+				elseif not is_quest_battle then
 					cm:callback(function() monster_hunt.revert_marker(faction_key) end, 0.1)
 				end
 				faction_persistent_data.has_started_generated_battle = false
 				if is_generated_battle and faction_key == cm:get_local_faction_name(true) then
 					cm:override_ui("disable_prebattle_autoresolve_monster_hunt", false)
 
-					local callback_delay = 3
+					-- The large delay is because of the diplomacy_faction_destroyed message
+					local callback_delay = 10
 					cm:disable_event_feed_events(true, "", "", "diplomacy_faction_destroyed")
 					cm:disable_event_feed_events(true, "", "", "character_dies_battle")
 					cm:callback(function() cm:disable_event_feed_events(false, "", "", "diplomacy_faction_destroyed") end, callback_delay)
@@ -3998,7 +4019,12 @@ core:add_listener(
 					army_data.general_agent_subtype,
 					nil,
 					hunt_states.general_forename,
-					hunt_states.general_surname)
+					hunt_states.general_surname,
+					-- disable movement for the general
+					true,
+					-- Set force to have already retreated
+					true
+				)
 				
 				local attacker = character:military_force():command_queue_index()
 				local defender = forced_battle_key
@@ -4084,6 +4110,18 @@ core:add_listener(
 	end,
 	function(context)
 		monster_hunt.init_ui(context)
+	end,
+	true
+)
+
+core:add_listener(
+	"MonsterHuntBookPanelClosedListener",
+	"PanelClosedCampaign",
+	function(context) 
+		return context.string == "book_of_monster_hunts" 
+	end,
+	function(context)
+		monster_hunt.panel = nil
 	end,
 	true
 )
@@ -4295,7 +4333,7 @@ core:add_listener (
 	"FirstTickAfterNewCampaignStarted",
 	true,
 	function(context)
-		local faction_list = context:model():world():faction_list()
+		local faction_list = cm:get_faction_list()
 
 		for i = 0, faction_list:num_items() - 1 do
 			local faction = faction_list:item_at(i)

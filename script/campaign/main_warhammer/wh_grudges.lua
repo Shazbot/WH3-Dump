@@ -275,7 +275,7 @@ function launch_debug_grudges()
 	if #human_dwarf_factions == 0 then
 		out("WARNING: No players are Dwarf factions. Withg no human Dwarfs, we can't generate any grudge missions for debugging.");
 	else
-		local all_factions = cm:model():world():faction_list();
+		local all_factions = cm:get_faction_list();
 		local covered_cultures = {};
 		for f = 0, all_factions:num_items() - 1 do
 			local faction = all_factions:item_at(f);

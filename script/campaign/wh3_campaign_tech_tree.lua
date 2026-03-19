@@ -42,7 +42,7 @@ scripted_technology_tree = {
 		wh3_main_combi_region_zharr_naggrund = {
 			wh3_main_ie_tech_nor_darklands_hate_chaos_dwarfs = {culture = "wh_dlc08_nor_norsca", allow_allies = false}
 		},
-		wh3_main_chaos_region_kislev = {
+		wh3_main_combi_region_kislev = {
 			wh3_main_ie_tech_nor_oldworld_hate_kislev = {culture = "wh_dlc08_nor_norsca", allow_allies = false},
 		},
 		wh3_main_combi_region_wei_jin = {
@@ -440,7 +440,7 @@ function scripted_technology_tree:toggle_technology(technologies, region_owner)
 	end
 	
 	-- lock the technology for every other faction, excluding allies if needed, of that culture
-	local faction_list = cm:model():world():faction_list()
+	local faction_list = cm:get_faction_list()
 	
 	for _, current_faction in model_pairs(faction_list) do
 		local current_faction_culture = current_faction:culture()
@@ -500,7 +500,7 @@ cm:add_loading_game_callback(
 					function(context)
 						-- check whether there is a saved wins count for each faction and
 						-- if so, set the count in the new format
-						local faction_list = context:world():faction_list()
+						local faction_list = cm:get_faction_list()
 						for _, faction in model_pairs(faction_list) do
 							local faction_key = faction:name()
 							local saved_key = faction_key .. "_won_battles_tech"
