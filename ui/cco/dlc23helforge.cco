@@ -25,6 +25,7 @@ Helforge
 	  .UnitSetsFromAllSourcesList
 	  .Transform(UnitsInSetList)
 	  .Distinct
+	  .Filter((unit) => PlayersFaction.FactionRecordContext.IsUnitPossibleToRecruit(unit))
   }
   
   UnitsForInitiativeSetCategory(CcoInitiativeSetCategoryRecord category)

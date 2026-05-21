@@ -233,7 +233,7 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			if caravan_force_unit_list:num_items() > 1 then
 				random_unit = caravan_force_unit_list:item_at(cm:random_number(caravan_force_unit_list:num_items()-1,1)):unit_key();
 				
-				if random_unit == "wh3_main_cth_cha_lord_caravan_master" or random_unit == "wh3_main_cth_cha_lord_magistrate_0" then
+				if random_unit == "wh3_main_cth_cha_lord_caravan_master" or random_unit == "wh3_main_cth_cha_lord_magistrate_0" or random_unit == "wh3_cp1_cth_cha_sawai" then
 					random_unit = "NONE";
 				end
 				out.design("Random unit to be eaten: "..random_unit);
@@ -351,8 +351,11 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 		function(event_conditions,caravan_handle)
 			
 			out.design("genericShortcut action called")
-			local dilemma_list = {"wh3_main_dilemma_cth_caravan_1A", "wh3_main_dilemma_cth_caravan_1B"}
-			local dilemma_name = dilemma_list[cm:random_number(#dilemma_list)];
+
+			local variations = {"A","B","C"};
+			local choice = variations[cm:random_number(#variations,1)]
+			
+			local dilemma_name = "wh3_main_dilemma_cth_caravan_1"..choice;
 			
 			--Decode the string into arguments-- Need to specify the argument encoding
 			--none to decode
@@ -360,6 +363,8 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			--Trigger dilemma to be handled by above function
 			local faction_key = caravan_handle:caravan_force():faction():name();
 			local force_cqi = caravan_handle:caravan_force():command_queue_index();
+			local cargo_values = {-50,-75,-100}
+			local cargo_variation = cargo_values[cm:random_number(#cargo_values,1)]
 			
 			caravans:attach_battle_to_dilemma(
 				dilemma_name,
@@ -370,6 +375,9 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 				nil,
 				{
 					function()
+						if choice == "B" then
+							cm:set_caravan_cargo(caravan_handle, caravan_handle:cargo() + cargo_variation)
+						end
 						cm:move_caravan(caravan_handle);
 					end,
 					1
@@ -384,7 +392,22 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			dilemma_builder:add_choice_payload("FIRST", payload_builder);
 			payload_builder:clear();
 			
-			payload_builder:treasury_adjustment(math.floor(-500*((100+scout_skill)/100)));
+			if choice == "B" then
+				local cargo_bundle = cm:create_new_custom_effect_bundle("wh3_main_dilemma_cth_caravan_2_b");
+				cargo_bundle:add_effect("wh3_main_effect_caravan_cargo_DUMMY", "force_to_force_own", cargo_variation);
+				cargo_bundle:set_duration(0);
+
+				payload_builder:effect_bundle_to_force(caravan_handle:caravan_force(), cargo_bundle);
+			elseif choice == "C" then
+				local attrition = cm:create_new_custom_effect_bundle("wh3_cp1_dilemma_cth_caravan_1_c");
+				attrition:add_effect("wh_main_effect_campaign_enable_attrition", "force_to_force_own", 500);
+				attrition:set_duration(3);
+				
+				payload_builder:effect_bundle_to_force(caravan_handle:caravan_force(), attrition);
+			else
+				payload_builder:treasury_adjustment(math.floor(-500*((100+scout_skill)/100)));
+			end
+
 			payload_builder:text_display("dummy_wh3_main_dilemma_cth_caravan_1A_second");
 			dilemma_builder:add_choice_payload("SECOND", payload_builder);
 			
@@ -404,7 +427,13 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			local probability = 1;
 			
 			local caravan_force = world_conditions["caravan"]:caravan_force();
-			local hero_list = {"wh3_main_ogr_cha_hunter_0","wh_main_emp_cha_captain_0","wh2_main_hef_cha_noble_0","wh3_dlc25_dwf_cha_dragon_slayer"}
+			local hero_list = {"wh3_main_ogr_cha_hunter_0",
+								"wh_main_emp_cha_captain_0",
+								"wh2_main_hef_cha_noble_0",
+								"wh3_dlc25_dwf_cha_dragon_slayer",
+								"wh3_cp1_cth_cha_clawspeaker_beasts",
+								"wh3_cp1_cth_cha_clawspeaker_life",
+								"wh3_cp1_cth_cha_clawspeaker_shadows"}
 			
 			if not cm:military_force_contains_unit_type_from_list(caravan_force, hero_list) then
 				out.design("No characters - increase probability")
@@ -423,8 +452,8 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 		function(event_conditions,caravan_handle)
 			out.design("genericCharacter action called")
 			
-			local AorB = {"A","B"};
-			local choice = AorB[cm:random_number(#AorB,1)]
+			local variations = {"A","B","C"};
+			local choice = variations[cm:random_number(#variations,1)]
 			
 			local dilemma_name = "wh3_main_dilemma_cth_caravan_3"..choice;
 			
@@ -438,10 +467,22 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 				nil,
 				false,
 				nil,
-				nil
+				nil,
+				{
+					function()
+						if choice == "C" then
+							cm:set_caravan_cargo(caravan_handle, caravan_handle:cargo() - 100)
+						end
+					end,
+					1
+				}
 			);
 
 			local hero_list = {"wh3_main_ogr_cha_hunter_0","wh_main_emp_cha_captain_0","wh2_main_hef_cha_noble_0","wh3_dlc25_dwf_cha_dragon_slayer"};
+			local clawspeaker_list = {"wh3_cp1_cth_cha_clawspeaker_beasts","wh3_cp1_cth_cha_clawspeaker_life","wh3_cp1_cth_cha_clawspeaker_shadows"};
+			
+			local hero_choice = clawspeaker_list[cm:random_number(#clawspeaker_list,1)]
+			table.insert(hero_list, hero_choice)
 			
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
 			local payload_builder = cm:create_payload();
@@ -452,7 +493,13 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			
 			if choice == "B" then
 				payload_builder:treasury_adjustment(-500);
+			elseif choice == "C" then
+				local cargo_bundle = cm:create_new_custom_effect_bundle("wh3_main_dilemma_cth_caravan_2_b");
+				cargo_bundle:add_effect("wh3_main_effect_caravan_cargo_DUMMY", "force_to_force_own", -100);
+				cargo_bundle:set_duration(0);
+				payload_builder:effect_bundle_to_force(caravan_handle:caravan_force(), cargo_bundle);
 			end
+
 			payload_builder:add_unit(caravan_handle:caravan_force(), hero_list[cm:random_number(#hero_list)], 1, 0);
 			dilemma_builder:add_choice_payload("SECOND", payload_builder);
 			payload_builder:clear();
@@ -524,6 +571,72 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			cargo_bundle:set_duration(0);
 			
 			payload_builder:effect_bundle_to_force(caravan_handle:caravan_force(), cargo_bundle);
+			dilemma_builder:add_choice_payload("SECOND", payload_builder);
+			
+			dilemma_builder:add_target("default", caravan_handle:caravan_force());
+			
+			out.design("Triggering dilemma:"..dilemma_name)
+			cm:launch_custom_dilemma_from_builder(dilemma_builder, caravan_handle:caravan_force():faction());
+		end,
+		false
+	},
+	["genericCargoDelay"] = 
+		--returns its probability [1]
+		{function(world_conditions)
+			
+			local eventname = "genericCargoDelay".."?";
+			local caravan_force = world_conditions["caravan"]:caravan_force();
+			
+			local probability = 4;
+			
+			if cm:military_force_average_strength(caravan_force) == 100 and world_conditions["caravan"]:cargo() >= 1000 then
+				probability = 0
+			end
+			
+			return {probability,eventname}
+		end,
+		--enacts everything for the event: creates battle, fires dilemma etc. [2]
+		function(event_conditions,caravan_handle)
+			
+			out.design("genericCargoDelay action called")
+			local dilemma_name = "wh3_main_dilemma_cth_caravan_2C";
+			
+			--Decode the string into arguments-- Need to specify the argument encoding
+			-- nothing
+
+			--Trigger dilemma to be handled by above function
+			local faction_cqi = caravan_handle:caravan_force():faction():command_queue_index();
+			local force_cqi = caravan_handle:caravan_force():command_queue_index();
+			
+			caravans:attach_battle_to_dilemma(
+				dilemma_name,
+				caravan_handle,
+				nil,
+				false,
+				nil,
+				nil,
+				{
+					function()
+						cm:set_caravan_cargo(caravan_handle, caravan_handle:cargo() + 200)
+					end,
+					1
+				},
+				1
+			);
+				
+			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
+			local payload_builder = cm:create_payload();
+
+			payload_builder:text_display("dummy_wh3_main_dilemma_cth_caravan_1A_first");
+			dilemma_builder:add_choice_payload("FIRST", payload_builder);
+			payload_builder:clear();
+			
+			local cargo_bundle = cm:create_new_custom_effect_bundle("wh3_main_dilemma_cth_caravan_2_b");
+			cargo_bundle:add_effect("wh3_main_effect_caravan_cargo_DUMMY", "force_to_force_own", 200);
+			cargo_bundle:set_duration(0);
+			payload_builder:effect_bundle_to_force(caravan_handle:caravan_force(), cargo_bundle);
+			
+			payload_builder:text_display("dummy_wh3_main_dilemma_cth_caravan_battle_1B_second");
 			dilemma_builder:add_choice_payload("SECOND", payload_builder);
 			
 			dilemma_builder:add_target("default", caravan_handle:caravan_force());
@@ -636,14 +749,24 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
 			local payload_builder = cm:create_payload();
 			
-			local ranged_list = {"wh3_main_cth_inf_jade_warrior_crossbowmen_0","wh3_main_cth_inf_jade_warrior_crossbowmen_1","wh3_main_cth_inf_peasant_archers_0","wh3_main_ksl_inf_streltsi_0"};
-			local melee_list = {"wh3_main_cth_inf_jade_warriors_0","wh3_main_cth_inf_jade_warriors_1","wh3_main_cth_inf_peasant_spearmen_1"};
+			local ranged_list = {"wh3_main_cth_inf_jade_warrior_crossbowmen_0","wh3_main_cth_inf_jade_warrior_crossbowmen_1","wh3_main_cth_inf_peasant_archers_0","wh3_main_ksl_inf_streltsi_0","wh3_cp1_cth_inf_stalkers_throwing_disc"};
+			local melee_list = {"wh3_main_cth_inf_jade_warriors_0","wh3_main_cth_inf_jade_warriors_1","wh3_main_cth_inf_peasant_spearmen_1","wh3_cp1_cth_inf_tiger_warriors_dual_axe"};
+			local unit_to_add_range = ranged_list[cm:random_number(#ranged_list,1)]
+			local unit_to_add_melee = melee_list[cm:random_number(#melee_list,1)]
 			
-			payload_builder:add_unit(caravan_handle:caravan_force(), ranged_list[cm:random_number(#ranged_list,1)], 2, 0);
+			local range_qnty = 2
+			if unit_to_add_range == "wh3_cp1_cth_inf_stalkers_throwing_disc" then
+				range_qnty = 1
+			end
+			payload_builder:add_unit(caravan_handle:caravan_force(), unit_to_add_range, range_qnty, 0, true);
 			dilemma_builder:add_choice_payload("FIRST", payload_builder);
 			payload_builder:clear();
 			
-			payload_builder:add_unit(caravan_handle:caravan_force(), melee_list[cm:random_number(#melee_list,1)], 3, 0);
+			local melee_qnty = 3
+			if unit_to_add_melee == "wh3_cp1_cth_inf_tiger_warriors_dual_axe" then
+				melee_qnty = 2
+			end
+			payload_builder:add_unit(caravan_handle:caravan_force(), unit_to_add_melee, melee_qnty, 0, true);
 			dilemma_builder:add_choice_payload("SECOND", payload_builder);
 			
 			dilemma_builder:add_target("default", caravan_handle:caravan_force());
@@ -687,15 +810,92 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
 			local payload_builder = cm:create_payload();
 			
-			local ranged_list = {"wh3_main_cth_inf_jade_warrior_crossbowmen_0","wh3_main_cth_inf_jade_warrior_crossbowmen_1","wh3_main_cth_inf_peasant_archers_0"};
-			local melee_list = {"wh3_main_cth_inf_jade_warriors_0","wh3_main_cth_inf_jade_warriors_1","wh3_main_cth_inf_peasant_spearmen_1","wh3_main_ogr_inf_ogres_0"};
+			local ranged_list = {"wh3_main_cth_inf_jade_warrior_crossbowmen_0","wh3_main_cth_inf_jade_warrior_crossbowmen_1","wh3_main_cth_inf_peasant_archers_0","wh3_cp1_cth_inf_stalkers_throwing_disc"};
+			local melee_list = {"wh3_main_cth_inf_jade_warriors_0","wh3_main_cth_inf_jade_warriors_1","wh3_main_cth_inf_peasant_spearmen_1","wh3_main_ogr_inf_ogres_0","wh3_cp1_cth_inf_tiger_warriors_dual_axe"};
+			local unit_to_add_range = ranged_list[cm:random_number(#ranged_list,1)]
+			local unit_to_add_melee = melee_list[cm:random_number(#melee_list,1)]
 			
-			payload_builder:add_unit(caravan_handle:caravan_force(), ranged_list[cm:random_number(#ranged_list,1)], 3, 0);
+			local range_qnty = 2
+			if unit_to_add_range == "wh3_cp1_cth_inf_stalkers_throwing_disc" then
+				range_qnty = 1
+			end
+			payload_builder:add_unit(caravan_handle:caravan_force(), unit_to_add_range, range_qnty, 0, true);
 			dilemma_builder:add_choice_payload("SECOND", payload_builder);
 			payload_builder:clear();
 			
-			payload_builder:add_unit(caravan_handle:caravan_force(), melee_list[cm:random_number(#melee_list,1)], 2, 0);
+			local melee_qnty = 3
+			if unit_to_add_melee == "wh3_cp1_cth_inf_tiger_warriors_dual_axe" then
+				melee_qnty = 2
+			end
+			payload_builder:add_unit(caravan_handle:caravan_force(), unit_to_add_melee, melee_qnty, 0, true);
 			dilemma_builder:add_choice_payload("FIRST", payload_builder);
+			
+			dilemma_builder:add_target("default", caravan_handle:caravan_force());
+			
+			out.design("Triggering dilemma:"..dilemma_name)
+			cm:launch_custom_dilemma_from_builder(dilemma_builder, caravan_handle:caravan_force():faction());
+			
+		end,
+		false
+	},
+	["recruitmentChoiceC"] = 
+		--returns its probability [1]
+		{function(world_conditions)
+			
+			local eventname = "recruitmentChoiceC".."?";
+			local army_size = world_conditions["caravan"]:caravan_force():unit_list():num_items()
+			
+			local probability = math.floor((20 - army_size)/2);
+			
+			return {probability,eventname}
+		end,
+		--enacts everything for the event: creates battle, fires dilemma etc. [2]
+		function(event_conditions,caravan_handle)
+			
+			out.design("recruitmentChoiceC action called")
+			local dilemma_name = "wh3_main_dilemma_cth_caravan_4C";
+			
+			--Decode the string into arguments-- Need to specify the argument encoding
+			--none to decode
+			
+			caravans:attach_battle_to_dilemma(
+				dilemma_name,
+				caravan_handle,
+				nil,
+				false,
+				nil,
+				nil,
+				nil
+			);
+			
+			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
+			local payload_builder = cm:create_payload();
+			
+			local ranged_list = {"wh3_main_cth_inf_jade_warrior_crossbowmen_0","wh3_main_cth_inf_jade_warrior_crossbowmen_1","wh3_cp1_cth_inf_stalkers_throwing_disc"};
+			local melee_list = {"wh3_main_cth_inf_jade_warriors_0","wh3_main_cth_inf_jade_warriors_1","wh3_cp1_cth_inf_tiger_warriors_dual_axe"};
+			local unit_to_add_range = ranged_list[cm:random_number(#ranged_list,1)]
+			local unit_to_add_melee = melee_list[cm:random_number(#melee_list,1)]
+			
+			local range_qnty = 2
+			if unit_to_add_range == "wh3_cp1_cth_inf_stalkers_throwing_disc" then
+				range_qnty = 1
+			end
+			payload_builder:treasury_adjustment(-900);
+			payload_builder:add_unit(caravan_handle:caravan_force(), unit_to_add_range, range_qnty, 0, true);
+			dilemma_builder:add_choice_payload("FIRST", payload_builder);
+			payload_builder:clear();
+			
+			local melee_qnty = 3
+			if unit_to_add_melee == "wh3_cp1_cth_inf_tiger_warriors_dual_axe" then
+				melee_qnty = 2
+			end
+			payload_builder:treasury_adjustment(-750);
+			payload_builder:add_unit(caravan_handle:caravan_force(), unit_to_add_melee, melee_qnty, 0, true);
+			dilemma_builder:add_choice_payload("SECOND", payload_builder);
+			payload_builder:clear();
+
+			payload_builder:text_display("dummy_wh3_main_dilemma_cth_caravan_1A_first");
+			dilemma_builder:add_choice_payload("THIRD", payload_builder);
 			
 			dilemma_builder:add_target("default", caravan_handle:caravan_force());
 			
@@ -760,7 +960,7 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			local num_units = caravan_handle:caravan_force():unit_list():num_items()
 		
 			if num_units < 20 then
-				payload_builder:add_unit(caravan_handle:caravan_force(), "wh3_main_cth_inf_dragon_guard_0", math.min(3, 20 - num_units), 9);
+				payload_builder:add_unit(caravan_handle:caravan_force(), "wh3_main_cth_inf_dragon_guard_0", math.min(3, 20 - num_units), 9, true);
 			end
 			
 			dilemma_builder:add_choice_payload("SECOND", payload_builder);
@@ -782,10 +982,10 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			
 			local random_unit ="NONE";
 			if caravan_force_unit_list:num_items() > 1 then
-				random_unit = caravan_force_unit_list:item_at(cm:random_number(caravan_force_unit_list:num_items()-1,0)):unit_key();
+				random_unit = caravan_force_unit_list:item_at(cm:random_number(caravan_force_unit_list:num_items()-1,1)):unit_key();
 				
-				if random_unit == "wh3_main_cth_cha_lord_caravan_master" then
-					random_unit ="NONE";
+				if random_unit == "wh3_main_cth_cha_lord_caravan_master" or random_unit == "wh3_main_cth_cha_lord_magistrate_0" or random_unit == "wh3_cp1_cth_cha_sawai" then
+					random_unit = "NONE";
 				end
 				out.design("Random unit to be killed: "..random_unit);
 			end;
@@ -853,6 +1053,115 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			
 			dilemma_builder:add_choice_payload("FIRST", payload_builder);
 			
+			payload_builder:clear();
+			
+			--Lose soldiers - coward trait?
+			local random_unit = decoded_args[2];
+			payload_builder:remove_unit(caravan:caravan_force(), random_unit);
+			dilemma_builder:add_choice_payload("SECOND", payload_builder);
+			
+			out.design("Triggering dilemma:"..dilemma_name)
+			dilemma_builder:add_target("default", cm:get_military_force_by_cqi(enemy_force_cqi));
+			dilemma_builder:add_target("target_military_1", caravan:caravan_force());
+			
+			cm:launch_custom_dilemma_from_builder(dilemma_builder, caravan_handle:caravan_force():faction());
+		end,
+		true
+	},
+	["chorfEncounter"] = 
+		--returns its probability [1]
+		{function(world_conditions)
+			
+			--Pick random unit
+			local caravan_force_unit_list = world_conditions["caravan"]:caravan_force():unit_list()
+			
+			local random_unit ="NONE";
+			if caravan_force_unit_list:num_items() > 1 then
+				random_unit = caravan_force_unit_list:item_at(cm:random_number(caravan_force_unit_list:num_items()-1,1)):unit_key();
+				
+				if random_unit == "wh3_main_cth_cha_lord_caravan_master" or random_unit == "wh3_main_cth_cha_lord_magistrate_0" or random_unit == "wh3_cp1_cth_cha_sawai" then
+					random_unit = "NONE";
+				end
+				out.design("Random unit to be killed: "..random_unit);
+			end;
+			
+			local bandit_threat = world_conditions["bandit_threat"];
+			local event_region = world_conditions["event_region"];
+			local enemy_faction = event_region:owning_faction();
+			local expected_culture = "wh3_dlc23_chd_chaos_dwarfs"
+
+			local enemy_faction_name = enemy_faction:name();
+			if enemy_faction_name == "rebels" or enemy_faction:culture() ~= expected_culture then
+				enemy_faction_name = "wh3_dlc23_chd_chaos_dwarfs_qb1";
+			end
+			
+			--Construct targets
+			local eventname = "chorfEncounter".."?"
+				..event_region:name().."*"
+				..random_unit.."*"
+				..enemy_faction_name.."*"
+				..tostring(bandit_threat).."*";
+				
+			
+			--Calculate probability
+			local probability = math.floor(bandit_threat/10) + 1;
+
+			local chorf_factions = cm:get_factions_by_culture(expected_culture)
+			for _, faction in ipairs(chorf_factions) do
+				local is_owned = cm:is_region_owned_by_faction(event_region:name(), faction:name())
+				if is_owned then
+					probability = probability + 3
+				end
+
+				local is_adjacent = cm:region_adjacent_to_faction(event_region, faction)
+				if is_adjacent then
+					probability = probability + 3
+				end
+			end
+			
+			local caravan_faction = world_conditions["faction"];
+			if enemy_faction:name() == caravan_faction:name() then
+				probability = 0;
+			end;
+			
+			return {probability,eventname}
+		end,
+		--enacts everything for the event: creates battle, fires dilemma etc. [2]
+		function(event_conditions,caravan_handle)
+			
+			out.design("chorfEncounter action called")
+			local dilemma_name = "wh3_main_dilemma_cth_caravan_battle_5";
+			local caravan = caravan_handle;
+			
+			--Decode the string into arguments-- Need to specify the argument encoding
+			local decoded_args = caravans:read_out_event_params(event_conditions,3);
+			
+			local is_ambush = false;
+			local target_faction;
+			local enemy_faction = decoded_args[3];
+			local target_region = decoded_args[1];
+			
+			local bandit_threat = tonumber(decoded_args[4]);
+			local attacking_force = caravans:generate_attackers(bandit_threat,"crv_chaos_dwarfs")
+			
+			--Battle to option 1, eat unit to 2
+			local enemy_force_cqi = caravans:attach_battle_to_dilemma(
+				dilemma_name,
+				caravan,
+				{attacking_force, 0},
+				is_ambush,
+				enemy_faction,
+				target_region,
+				nil
+			);
+		
+			--Trigger dilemma to be handled by above function
+			local dilemma_builder = cm:create_dilemma_builder(dilemma_name);
+			local payload_builder = cm:create_payload();
+			
+			--Setup Payload
+			payload_builder:text_display("dummy_convoy_ambush_first");
+			dilemma_builder:add_choice_payload("FIRST", payload_builder);
 			payload_builder:clear();
 			
 			--Lose soldiers - coward trait?
@@ -939,3 +1248,26 @@ random_army_manager:new_force("daemon_incursion_late");
 random_army_manager:add_mandatory_unit("daemon_incursion_late", "wh3_main_kho_inf_bloodletters_0", 4);
 random_army_manager:add_mandatory_unit("daemon_incursion_late", "wh3_main_kho_inf_chaos_warhounds_0", 4);
 random_army_manager:add_mandatory_unit("daemon_incursion_late", "wh3_main_kho_cav_gorebeast_chariot", 2);
+
+-- Chaos Dwarf Army
+random_army_manager:new_force("crv_chaos_dwarfs");
+random_army_manager:add_mandatory_unit("crv_chaos_dwarfs", "wh3_dlc23_chd_inf_hobgoblin_cutthroats", 1);
+random_army_manager:add_mandatory_unit("crv_chaos_dwarfs", "wh3_dlc23_chd_inf_chaos_dwarf_warriors", 2);
+random_army_manager:add_mandatory_unit("crv_chaos_dwarfs", "wh3_dlc23_chd_cav_hobgoblin_wolf_raiders_spears", 1);
+random_army_manager:add_unit("crv_chaos_dwarfs", "wh3_dlc23_chd_inf_hobgoblin_cutthroats", 1);
+random_army_manager:add_unit("crv_chaos_dwarfs", "wh3_dlc23_chd_inf_hobgoblin_archers", 1);
+
+random_army_manager:new_force("crv_chaos_dwarfs_mid");
+random_army_manager:add_mandatory_unit("crv_chaos_dwarfs_mid", "wh3_dlc23_chd_inf_hobgoblin_cutthroats", 2);
+random_army_manager:add_mandatory_unit("crv_chaos_dwarfs_mid", "wh3_dlc23_chd_inf_chaos_dwarf_warriors", 3);
+random_army_manager:add_mandatory_unit("crv_chaos_dwarfs_mid", "wh3_dlc23_chd_cav_hobgoblin_wolf_raiders_spears", 2);
+random_army_manager:add_unit("crv_chaos_dwarfs_mid", "wh3_dlc23_chd_inf_hobgoblin_cutthroats", 1);
+random_army_manager:add_unit("crv_chaos_dwarfs_mid", "wh3_dlc23_chd_inf_hobgoblin_archers", 1);
+
+random_army_manager:new_force("crv_chaos_dwarfs_late");
+random_army_manager:add_mandatory_unit("crv_chaos_dwarfs_late", "wh3_dlc23_chd_inf_hobgoblin_archers", 2);
+random_army_manager:add_mandatory_unit("crv_chaos_dwarfs_late", "wh3_dlc23_chd_inf_chaos_dwarf_warriors", 2);
+random_army_manager:add_mandatory_unit("crv_chaos_dwarfs_late", "wh3_dlc23_chd_inf_infernal_guard", 2);
+random_army_manager:add_mandatory_unit("crv_chaos_dwarfs_late", "wh3_dlc23_chd_cav_hobgoblin_wolf_raiders_spears", 2);
+random_army_manager:add_unit("crv_chaos_dwarfs_late", "wh3_dlc23_chd_inf_hobgoblin_cutthroats", 1);
+random_army_manager:add_unit("crv_chaos_dwarfs_late", "wh3_dlc23_chd_inf_hobgoblin_archers", 1);

@@ -354,7 +354,7 @@ function CUS:convert_character(character, new_type, new_subtype, opt_inherited_l
 		character_surname = character:get_surname(),
 		parent_force = character:embedded_in_military_force(),
 		subtype = character:character_subtype_key(),
-		traits = character:all_traits(),
+		traits = character:character_details():all_traits(),
 		ap = character:action_points_remaining_percent()
 	}
 
@@ -397,10 +397,10 @@ function CUS:update_new_character(old_char_details, new_char_interface, level_pr
 		end
 	end
 
-	if traits_to_copy then
+	if traits_to_copy ~= nil then
 		for i =1, #traits_to_copy do
 			local trait_to_copy = traits_to_copy[i]
-			cm:force_add_trait(new_char_lookup, trait_to_copy)
+			cm:force_add_trait_to_character_details(new_char_interface:character_details(), trait_to_copy)
 		end
 	end
 

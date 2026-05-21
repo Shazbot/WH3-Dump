@@ -95,6 +95,7 @@ function setup_campaign_help_pages()
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_compass", "cathay_compass");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_compass", "dlc24_jade_compass");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_ivory_road", "cathay_caravans");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_bhashiva_caravans", "cp1_cth_bhashiva_caravans");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_military_convoys", "military_convoys");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_chaos_rifts", "rifts_panel");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_chaos_rifts", "teleport_panel");
@@ -137,6 +138,9 @@ function setup_campaign_help_pages()
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_sayl_manipulations", "dlc27_nor_sayl_manipulations");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_sayl_dark_ritual", "dlc27_nor_aethyr_winds");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_thralls", "dlc27_sla_dechala_thralls_economy_panel")
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_tiger_court", "cp1_cth_tiger_court")
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_armies_of_shang_yang", "cp1_cth_armies_of_shang_yang")
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_armies_of_shang_yang", "cp1_cth_shang_yang")
 	
 	hpm:register_help_page_to_info_button_mapping(
 		"script_link_campaign_intrigue_at_the_court",
@@ -478,6 +482,20 @@ function setup_campaign_help_pages()
 			return false;
 		end
 	);
+
+	hpm:register_help_page_to_info_button_mapping(
+		"script_link_campaign_bhashiva_caravans", 
+		"character_panel",
+		function()
+			local uic_bhashiva_caravan_button = find_uicomponent(ui_root, "button_bhashiva_caravan")
+			
+			if uic_bhashiva_caravan_button and uic_bhashiva_caravan_button:CurrentState() == "selected" then
+				return true
+			end
+			
+			return false
+		end
+	)
 
 	hpm:register_help_page_to_info_button_mapping(
 		"script_link_campaign_mortuary_cult", 
@@ -7250,6 +7268,73 @@ function setup_campaign_help_pages()
 	
 	tl_ivory_road_panel = tooltip_listener:new(
 		"tooltip_campaign_ivory_road_panel", 
+		function() 
+			uim:highlight_ivory_road(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+	--
+	-- bhashiva_caravans
+	--
+
+	hp_bhashiva_caravans = help_page:new(
+		"script_link_campaign_bhashiva_caravans",
+		hpr_title("war.camp.hp.ivory_road.001"),
+		hpr_leader("war.camp.hp.ivory_road.002"),
+		hpr_normal("war.camp.hp.ivory_road.003"),
+		hpr_normal("war.camp.hp.ivory_road.004"),
+		hpr_normal("war.camp.hp.ivory_road.005"),
+		hpr_normal("war.camp.hp.ivory_road.006"),
+		hpr_normal("war.camp.hp.ivory_road.007")
+	);
+	parser:add_record("campaign_bhashiva_caravans", "script_link_campaign_bhashiva_caravans", "tooltip_campaign_bhashiva_caravans");
+	hp_bhashiva_caravans = tooltip_patcher:new("tooltip_campaign_bhashiva_caravans");
+	hp_bhashiva_caravans:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_ivory_road", "ui_text_replacements_localised_text_hp_campaign_description_ivory_road");
+
+	tl_bhashiva_caravans = tooltip_listener:new(
+		"tooltip_campaign_bhashiva_caravans", 
+		function() 
+			uim:highlight_ivory_road(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+
+
+	--
+	-- bhashiva_caravans_link
+	--
+
+	parser:add_record("campaign_bhashiva_caravans_link", "script_link_campaign_bhashiva_caravans_link", "tooltip_campaign_bhashiva_caravans_link");
+	tp_bhashiva_caravans_link = tooltip_patcher:new("tooltip_campaign_bhashiva_caravans_link");
+	tp_bhashiva_caravans_link:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_campaign_title_ivory_road_link");
+	
+	tl_bhashiva_caravans_link = tooltip_listener:new(
+		"tooltip_campaign_bhashiva_caravans_link",
+		function()
+			uim:highlight_ivory_road(true);
+		end,
+		function()
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+
+	--
+	-- bhashiva_caravans_panel
+	--
+
+	parser:add_record("campaign_bhashiva_caravans_panel", "script_link_campaign_bhashiva_caravans_panel", "tooltip_campaign_bhashiva_caravans_panel");
+	tp_ivory_road_panel = tooltip_patcher:new("tooltip_campaign_bhashiva_caravans_panel");
+	tp_ivory_road_panel:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_campaign_description_ivory_road_panel");
+	
+	tl_ivory_road_panel = tooltip_listener:new(
+		"tooltip_campaign_bhashiva_caravans_panel", 
 		function() 
 			uim:highlight_ivory_road(true);
 		end,
@@ -14041,6 +14126,101 @@ function setup_campaign_help_pages()
 	tp_marauding = tooltip_patcher:new("tooltip_campaign_marauding");
 	tp_marauding:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_marauding", "ui_text_replacements_localised_text_hp_campaign_description_marauding");
 
+	--
+	-- The Tiger Court
+	--
+
+	hp_tiger_court = help_page:new(
+		"script_link_campaign_tiger_court",
+		hpr_title("war.camp.hp.tiger_court.001"),
+		hpr_leader("war.camp.hp.tiger_court.002"),
+		hpr_normal("war.camp.hp.tiger_court.003"),
+		hpr_normal("war.camp.hp.tiger_court.004"),
+		hpr_normal("war.camp.hp.tiger_court.005"),
+		hpr_normal("war.camp.hp.tiger_court.006"),
+		hpr_normal("war.camp.hp.tiger_court.007")
+	);
+	parser:add_record("campaign_tiger_court", "script_link_campaign_tiger_court", "tooltip_campaign_tiger_court");
+	tp_tiger_court = tooltip_patcher:new("tooltip_campaign_tiger_court");
+	tp_tiger_court:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_tiger_court", "ui_text_replacements_localised_text_hp_campaign_description_tiger_court");
+	
+	tl_tiger_court = tooltip_listener:new(
+		"tooltip_campaign_tiger_court", 
+		function() 
+			uim:highlight_tiger_court(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+	
+	
+	--
+	-- The Tiger Court link
+	--
+
+	parser:add_record("campaign_tiger_court_link", "script_link_campaign_tiger_court_link", "tooltip_campaign_tiger_court_link");
+	tp_tiger_court_link = tooltip_patcher:new("tooltip_campaign_tiger_court_link");
+	tp_tiger_court_link:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_campaign_title_tiger_court_link");
+	
+	tl_tiger_court_link = tooltip_listener:new(
+		"tooltip_campaign_tiger_court_link",
+		function() 
+			uim:highlight_tiger_court(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+	
+
+	--
+	-- The Armies of Shang-Yang
+	--
+
+	hp_armies_of_shang_yang = help_page:new(
+		"script_link_campaign_armies_of_shang_yang",
+		hpr_title("war.camp.hp.armies_of_shang_yang.001"),
+		hpr_leader("war.camp.hp.armies_of_shang_yang.002"),
+		hpr_normal("war.camp.hp.armies_of_shang_yang.003"),
+		hpr_normal("war.camp.hp.armies_of_shang_yang.004"),
+		hpr_normal("war.camp.hp.armies_of_shang_yang.005"),
+		hpr_normal("war.camp.hp.armies_of_shang_yang.006"),
+		hpr_normal("war.camp.hp.armies_of_shang_yang.007")
+		
+	);
+	parser:add_record("campaign_armies_of_shang_yang", "script_link_campaign_armies_of_shang_yang", "tooltip_campaign_armies_of_shang_yang");
+	tp_armies_of_shang_yang = tooltip_patcher:new("tooltip_campaign_armies_of_shang_yang");
+	tp_armies_of_shang_yang:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_armies_of_shang_yang", "ui_text_replacements_localised_text_hp_campaign_description_armies_of_shang_yang");
+
+	tl_armies_of_shang_yang = tooltip_listener:new(
+		"tooltip_campaign_armies_of_shang_yang", 
+		function() 
+			uim:highlight_armies_of_shang_yang(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+	--
+	-- The Armies of Shang-Yang link
+	--
+
+	parser:add_record("campaign_armies_of_shang_yang_link", "script_link_campaign_armies_of_shang_yang_link", "tooltip_campaign_armies_of_shang_yang_link");
+	tp_armies_of_shang_yang_link = tooltip_patcher:new("tooltip_campaign_armies_of_shang_yang_link");
+	tp_armies_of_shang_yang_link:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_campaign_title_armies_of_shang_yang_link");
+	
+	tl_armies_of_shang_yang_link = tooltip_listener:new(
+		"tooltip_campaign_armies_of_shang_yang_link",
+		function() 
+			uim:highlight_armies_of_shang_yang(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+	
 
 end;
 

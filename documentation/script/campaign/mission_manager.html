@@ -65,6 +65,9 @@
 							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:set_should_whitelist">set_should_whitelist</a></li>
 							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:set_show_mission">set_show_mission</a></li>
 							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:set_victory_mission">set_victory_mission</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:set_all_objectives_are_primary">set_all_objectives_are_primary</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:set_is_pending_mission">set_is_pending_mission</a></li>
+							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:set_pending_mission_issuing_faction_name">set_pending_mission_issuing_faction_name</a></li>
 						<li>&emsp;&emsp;<a href="#section:mission_manager:Startup Callbacks">Startup Callbacks</a></li>
 							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:add_first_time_trigger_callback">add_first_time_trigger_callback</a></li>
 							<li>&emsp;&emsp;&emsp;&emsp;<a href="#function:mission_manager:add_each_time_trigger_callback">add_each_time_trigger_callback</a></li>
@@ -333,7 +336,7 @@
 							<ol>
 								<li><code>mission_manager</code> Mission manager object</li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 110</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 113</p>
 						</dd>
 					</dl>
 				</div>
@@ -399,7 +402,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 236</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 239</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -434,7 +437,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 248</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 251</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -470,7 +473,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 260</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 263</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -506,7 +509,113 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 273</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 276</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:set_all_objectives_are_primary"><h3 class="function_name"><strong><code>mission_manager:set_all_objectives_are_primary([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">all objectives are primary</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Specifies that all objectives should be primary objectives. By default, the first objective added is the primary objective and any subsequent ones are secondary/bonus objectives. <br />
+							This function changes this so that all objectives are primary objectives. This affects how the objectives are displayed in the UI and how the mission string is generated.
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>all objectives are primary</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 288</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:set_is_pending_mission"><h3 class="function_name"><strong><code>mission_manager:set_is_pending_mission([<code><a href="lua.html#class:boolean">boolean</a></code> </strong></code><i class="parameter">mission is pending</i><code><strong>])</code></strong></h3></a>
+						</dt>
+						<dd>
+							Specifies whether the mission should be constructed as a pending mission. By default this is false. <br />
+							Pending missions are not immmediately active but have to be explicitly activated in some way, most likely via player input
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:boolean">boolean</a></code></code></p>
+									</td>
+									<td>
+										<p><i>optional, default value=true</i></p>
+										<p>mission is pending</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 300</p>
+						</dd>
+					</dl>
+					<dl class="function">
+						<dt>
+							<a name="function:mission_manager:set_pending_mission_issuing_faction_name"><h3 class="function_name"><strong><code>mission_manager:set_pending_mission_issuing_faction_name(<code><a href="lua.html#class:string">string</a></code> </strong></code><i class="parameter">faction name</i><code><strong>)</code></strong></h3></a>
+						</dt>
+						<dd>
+							Specifies the faction name for the issuing faction when issuing a pending mission
+
+							<h4>Parameters:</h4>
+							<table class="parameter_list">
+								<colgroup>
+									<col style="width: 3%;">
+									<col style="width: 12%;">
+									<col style="width: 85%;">
+								</colgroup>
+								<tr>
+									<td>
+										<p><strong>1</strong></p>
+									</td>
+									<td>
+										<p><code><code><a href="lua.html#class:string">string</a></code></code></p>
+									</td>
+									<td>
+										<p>faction name</p>
+									</td>
+								</tr>
+							</table>
+
+							<h4>Returns:</h4>
+							<ol>
+								<li><code>nil</code></li>
+							</ol>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 312</p>
 						</dd>
 					</dl>
 				</div>
@@ -548,7 +657,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 292</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 328</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -582,7 +691,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 305</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 341</p>
 						</dd>
 					</dl>
 				</div>
@@ -633,7 +742,7 @@
 							<div id="example_code"><code>
 								 mm:add_new_objective("CONSTRUCT_N_BUILDINGS_FROM")<br />
 							</code></div>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 354</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 390</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -673,7 +782,7 @@
 								 mm:add_condition("total 1")<br />
 								 mm:add_condition("building_level wh_main_emp_port_2")<br />
 							</code></div>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 377</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 413</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -740,7 +849,7 @@
 							<div id="example_code"><code>
 								 mm:add_payload("effect_bundle{bundle_key wh_dlc06_bundle_eight_peaks_recapture;turns 0;}")<br />
 							</code></div>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 420</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 456</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -774,7 +883,7 @@
 							<ol>
 								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> payloads successfully added</li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 470</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 506</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -828,7 +937,7 @@
 							<div id="example_code"><code>
 								 mm:add_failure_payload("effect_bundle{bundle_key wh_dlc06_bundle_eight_peaks_recapture;turns 0;}")<br />
 							</code></div>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 495</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 531</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -862,7 +971,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 520</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 556</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -896,7 +1005,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 538</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 574</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -935,7 +1044,7 @@
 							<div id="example_code"><code>
 								 mm:set_turn_limit(5)<br />
 							</code></div>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 556</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 592</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -974,7 +1083,7 @@
 							<div id="example_code"><code>
 								 mm:set_chapter(1)<br />
 							</code></div>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 571</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 607</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1008,7 +1117,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 586</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 622</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1053,7 +1162,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 599</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 635</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1087,7 +1196,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 613</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 649</p>
 						</dd>
 					</dl>
 				</div>
@@ -1181,7 +1290,7 @@
 								 &emsp;&emsp;&emsp;&emsp;end;<br />
 								 );<br />
 							</code></div>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 644</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 680</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1239,7 +1348,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 716</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 752</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1297,7 +1406,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 727</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 763</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1333,7 +1442,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 807</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 843</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1369,7 +1478,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 816</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 852</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1440,7 +1549,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 851</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 887</p>
 						</dd>
 					</dl>
 				</div>
@@ -1536,7 +1645,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 953</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 989</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1551,7 +1660,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 973</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1009</p>
 						</dd>
 					</dl>
 				</div>
@@ -1575,7 +1684,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 994</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1030</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1590,7 +1699,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1005</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1041</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1625,7 +1734,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1016</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1052</p>
 						</dd>
 					</dl>
 				</div>
@@ -1648,7 +1757,7 @@
 							<ol>
 								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is triggered</li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1047</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1083</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1663,7 +1772,7 @@
 							<ol>
 								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is active</li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1055</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1091</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1678,7 +1787,7 @@
 							<ol>
 								<li><code><code><a href="lua.html#class:boolean">boolean</a></code></code> is completed</li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1063</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1099</p>
 						</dd>
 					</dl>
 				</div>
@@ -1701,7 +1810,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1090</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1126</p>
 						</dd>
 					</dl>
 				</div>
@@ -1756,7 +1865,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1113</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1149</p>
 						</dd>
 					</dl>
 					<dl class="function">
@@ -1771,7 +1880,7 @@
 							<ol>
 								<li><code>nil</code></li>
 							</ol>
-							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1643</p>
+							<p class="file_comment">defined in ../../../warhammer/working_data/script/_lib/lib_campaign_mission_manager.lua, line 1778</p>
 						</dd>
 					</dl>
 				</div>
@@ -1781,7 +1890,7 @@
 
 		</div>
 
-		<div id="about">Last updated 11/18/2025 9:25:24 AM</div>
+		<div id="about">Last updated 4/24/2026 10:08:00 AM</div>
 
 	</div>
 

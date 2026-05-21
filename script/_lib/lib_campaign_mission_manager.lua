@@ -73,6 +73,9 @@ mission_manager = {
 	scripted_objectives_unique_counter = 0,
 	show_mission = true,
 	victory_mission = false,
+	all_objectives_are_primary = false,
+	is_pending_mission = false,
+	pending_mission_issuing_faction_name = "",
 	
 	-- for scripted mission types
 	scripted_objectives = {},
@@ -282,7 +285,40 @@ function mission_manager:set_victory_mission(value)
 	end;
 end;
 
+--- @function set_all_objectives_are_primary
+--- @desc Specifies that all objectives should be primary objectives. By default, the first objective added is the primary objective and any subsequent ones are secondary/bonus objectives. 
+--- @desc This function changes this so that all objectives are primary objectives. This affects how the objectives are displayed in the UI and how the mission string is generated.
+--- @p [opt=true] @boolean all objectives are primary
+function mission_manager:set_all_objectives_are_primary(value)
+	if value == false then
+		self.all_objectives_are_primary = false
+	else
+		self.all_objectives_are_primary = true
+	end
+end
 
+--- @function set_is_pending_mission
+--- @desc Specifies whether the mission should be constructed as a pending mission. By default this is false. 
+--- @desc Pending missions are not immmediately active but have to be explicitly activated in some way, most likely via player input
+--- @p [opt=true] @boolean mission is pending
+function mission_manager:set_is_pending_mission(value)
+	if value == false then
+		self.is_pending_mission = false
+	else
+		self.is_pending_mission = true
+	end
+end
+
+--- @function set_pending_mission_issuing_faction_name
+--- @desc Specifies the faction name for the issuing faction when issuing a pending mission
+--- @p @string faction name
+function mission_manager:set_pending_mission_issuing_faction_name(faction_name)
+	if not is_string(faction_name) then
+		script_error("ERROR: mission_manager:set_pending_mission_issuing_faction_name() called but supplied faction name [" .. tostring(faction_name) .. "] is not a string")
+		return false
+	end
+	self.pending_mission_issuing_faction_name = faction_name
+end
 
 ----------------------------------------------------------------------------
 --- @section Startup Callbacks
@@ -1137,6 +1173,8 @@ function mission_manager:trigger(dismiss_callback, delay)
 		local mission_string = false;
 		if self.victory_mission then 
 			mission_string = self:construct_victory_objective_mission_string()
+		elseif self.all_objectives_are_primary then
+			mission_string = self:construct_all_primary_objectives_mission_string()
 		else			
 			mission_string = self:construct_mission_string();
 		end
@@ -1434,6 +1472,81 @@ function mission_manager:construct_victory_objective_mission_string()
 	return mission_string;
 end;
 
+-- internal function to construct the mission string we will be triggering with, all objectives go in the primary block
+function mission_manager:construct_all_primary_objectives_mission_string()
+	if #self.objectives == 0 then
+		script_error("ERROR: construct_all_primary_objectives_mission_string() called on mission manager with key [" .. self.mission_key .. "] but we have no objectives to add");
+		return false;
+	end;
+	
+	local mission_string = false;
+	local payload_added = false;
+	
+	mission_string = "mission{key " .. self.mission_key .. ";issuer " .. self.mission_issuer;
+
+	if self.victory_type then
+		mission_string = mission_string .. ";victory_type " .. self.victory_type;
+	end
+	
+	if self.turn_limit then
+		mission_string = mission_string .. ";turn_limit " .. self.turn_limit;
+	end;
+
+	mission_string = mission_string .. ";primary_objectives_and_payload{";
+	
+	for i = 1, #self.objectives do
+		local current_objective = self.objectives[i];
+		
+		-- data checking
+		if not current_objective.objective_type then
+			script_error("ERROR: construct_victory_objective_mission_string() called on mission manager with key [" .. self.mission_key .. "] but objective [" .. i .. "] has no type (how can this be?)");
+			return false;
+		end;
+		
+		-- optional heading/decription key overrides
+		if current_objective.heading then
+			mission_string = mission_string .. "heading " .. current_objective.heading .. ";";
+		end;
+		
+		if current_objective.description then
+			mission_string = mission_string .. "description " .. current_objective.description .. ";";
+		end;
+		
+		mission_string = mission_string .. "objective{type " .. current_objective.objective_type .. ";";
+		
+		for j = 1, #current_objective.conditions do
+			mission_string = mission_string .. current_objective.conditions[j] .. ";";
+		end;
+		
+		-- payloads
+		if #current_objective.payloads > 0 then
+			payload_added = true;
+			mission_string = mission_string .. "}payload{";
+			
+			for j = 1, #current_objective.payloads do
+				local payload_string = current_objective.payloads[j];
+				
+				-- don't add a semicolon if the last character of the payload string is "}"
+				if string.sub(payload_string, string.len(payload_string)) == "}" then
+					mission_string = mission_string .. payload_string;
+				else
+					mission_string = mission_string .. payload_string .. ";";
+				end;
+			end;
+		end
+
+		mission_string = mission_string .. "}";
+	end;
+
+	if not payload_added then
+		script_error("ERROR: construct_all_primary_objectives_mission_string() called on mission manager with key [" .. self.mission_key .. "] but no payload has been added");
+		return false;
+	end;
+
+	mission_string = mission_string .. "}}"
+	
+	return mission_string;
+end
 
 -- internal function to trigger from a constructed string
 function mission_manager:trigger_from_string()
@@ -1441,6 +1554,28 @@ function mission_manager:trigger_from_string()
 	
 	out("++ mission manager triggering mission from string:");
 	
+	if self.is_pending_mission then
+		if self.pending_mission_issuing_faction_name == "" then
+			script_error("ERROR: mission_manager:trigger_from_string() called on mission manager with pending mission [" .. self.mission_key .. "] but no issuing faction name has been set")
+			return false
+		end
+
+		local issuing_faction_interface = cm:get_faction(self.pending_mission_issuing_faction_name)
+		if not issuing_faction_interface then
+			script_error("ERROR: mission_manager:trigger_from_string() called but couldn't find a pending mission issuing faction with supplied name [" .. self.pending_mission_issuing_faction_name .. "]")
+			return false
+		end
+
+		local mission_faction_interface = cm:get_faction(self.faction_name)
+		if not issuing_faction_interface then
+			script_error("ERROR: mission_manager:trigger_from_string() called but couldn't find a faction with supplied name [" .. self.faction_name .. "]")
+			return false
+		end
+
+		cm:add_custom_pending_mission_from_string(mission_faction_interface, issuing_faction_interface, mission_string)
+		return
+	end
+
 	if self:should_cancel_before_issuing() then
 		cm:cancel_custom_mission(self.faction_name, self.mission_key);
 	end;
@@ -2560,6 +2695,18 @@ function payload.thralls(amount)
 	end;
 	
 	return payload.pooled_resource_mission_payload("wh3_dlc27_sla_thralls", "other", amount);
+end;
+
+--- @function iron_favour
+--- @desc Returns a payload string which defines Iron Favour resource for a Bhashiva (Grand Cathay) string mission definition. No kind of equivalence is looked up.
+--- @p @number amount
+--- @r @string payload string
+function payload.iron_favour(amount)
+	if not validate.is_positive_number(amount) then
+		return false;
+	end;
+	
+	return payload.pooled_resource_mission_payload("wh3_cp1_cth_iron_favour", "missions", amount);
 end;
 
 

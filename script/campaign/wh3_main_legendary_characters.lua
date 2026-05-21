@@ -546,6 +546,9 @@ character_unlocking.character_data = {
 				["main_warhammer"] = "wh3_dlc24_mis_ie_cth_saytang_unlock_01",
 				["wh3_main_chaos"] = "wh3_dlc24_mis_cth_saytang_unlock_01"
 			},
+			wh3_cp1_cth_tiger_warriors = {
+				["main_warhammer"] = "wh3_dlc24_mis_ie_cth_saytang_unlock_01",
+			},
 		},
 		ancillaries = {
 			"wh3_dlc24_anc_weapon_wind_bow"
@@ -1229,6 +1232,50 @@ character_unlocking.character_data = {
 				"wh3_dlc27_nor_beorg_bearstruck_unlock_2",
 			}
 		}
+	},
+	taoyan = {
+		-- Cathayan players will get a mission to unlock Taoyan once their faction leader reaches rank 13.
+		-- If there are no human Cathayan players the strongest Cathay faction will get Taoyan after 30 turns
+		unlock_rank = 8,
+		ai_unlock_turn = 20,
+		has_spawned = false,
+		name = "taoyan",
+		subtype = "wh3_cp1_cth_cha_taoyan",
+		allowed_cultures = {
+			"wh3_main_cth_cathay"
+		},
+		factions_involved = {},
+		starting_mission_keys = {
+			wh3_dlc24_cth_the_celestial_court = {
+				["main_warhammer"] = "wh3_cp1_cth_taoyan_unlock_1",
+				["wh3_main_chaos"] = "wh3_cp1_cth_taoyan_unlock_1"
+			},
+			wh3_main_cth_the_northern_provinces = {
+				["main_warhammer"] = "wh3_cp1_cth_taoyan_unlock_1",
+				["wh3_main_chaos"] = "wh3_cp1_cth_taoyan_unlock_1"
+			},
+			wh3_main_cth_the_western_provinces = {
+				["main_warhammer"] = "wh3_cp1_cth_taoyan_unlock_1",
+				["wh3_main_chaos"] = "wh3_cp1_cth_taoyan_unlock_1"
+			},
+			wh3_cp1_cth_tiger_warriors = {
+				["main_warhammer"] = "wh3_cp1_cth_taoyan_unlock_1",
+			},
+		},
+		final_mission_key = "wh3_cp1_cth_taoyan_unlock_2",
+		ancillaries = {
+			"wh3_cp1_anc_weapon_tyrants_talon"
+		},
+		mission_chain_keys = {
+			main_warhammer = {
+				"wh3_cp1_cth_taoyan_unlock_1",
+				"wh3_cp1_cth_taoyan_unlock_2",
+			},
+			wh3_main_chaos = {
+				"wh3_cp1_cth_taoyan_unlock_1",
+				"wh3_cp1_cth_taoyan_unlock_2",
+			}
+		},
 	},			
 }
 

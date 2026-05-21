@@ -164,9 +164,10 @@ campaign_traits = {
 		["wh3_dlc26_ogr_golgfag_maneater"] 		= 	"wh3_dlc26_trait_defeated_golgfag",						-- Golgfag Maneater
 		["wh3_dlc26_grn_gorbad_ironclaw"] 		= 	"wh3_dlc26_trait_defeated_gorbad",						-- Gorbad Ironclaw
 		["wh3_dlc27_sla_dechala"] 		= 			"wh3_dlc27_trait_defeated_dechala",						-- Dechala
-		["wh3_dlc27_sla_masque_of_slaanesh"] 	= 	"wh3_dlc27_trait_defeated_the_masque",					-- The Masque
+		["wh3_dlc27_sla_masque_of_slaanesh"] =	 	"wh3_dlc27_trait_defeated_the_masque",					-- The Masque
 		["wh3_dlc27_hef_aislinn"] =                 "wh3_dlc27_trait_defeated_aislinn",	                    -- Sea Lord Aislinn
-		["wh3_dlc27_nor_sayl_the_faithless"] 	  = "wh3_dlc27_trait_defeated_sayl", 						-- Sayl the Faithless
+		["wh3_dlc27_nor_sayl_the_faithless"] =		"wh3_dlc27_trait_defeated_sayl", 						-- Sayl the Faithless
+		["wh3_cp1_cth_bhashiva"] = 					"wh3_cp1_trait_defeated_bhashiva",						-- Bhashiva
 	},
 	subcultures_trait_keys = {
 		["wh_main_sc_chs_chaos"] = "chaos",

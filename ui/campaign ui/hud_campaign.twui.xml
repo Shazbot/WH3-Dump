@@ -94,6 +94,7 @@
 										<button_monster_pen_pool this="CC7C4347-B158-4826-BFBBF4D77D3A5FD1"/>
 										<button_warbands_upgrade this="F1AAE419-51EE-4186-A31E850AE0A54F6B"/>
 										<button_meat_transfer this="55F423CF-CA4D-48DD-B6E5D1F8C9317CBD"/>
+										<button_unit_banners this="E638508E-5B6F-43EE-B8CD3FBED959FBE5"/>
 										<button_purchase_unit_upgrades this="09BBBAAB-DD6B-416B-BD3B5E056981765A"/>
 										<button_motherland this="DB93EDFC-E155-4D1E-955985F89C72DFFF"/>
 									</button_group_army>
@@ -489,6 +490,15 @@
 							<label_num_rituals_available this="CEFD00E6-3FD6-4D9F-8DA2AC4CE0D2D678"/>
 							<alert_icon this="2A5CD283-7D01-4ACC-820100BD42B15389"/>
 						</button_sayl_manipulations>
+						<button_bhashiva_caravan this="76E464D2-74E5-4E51-82423C7F5281A627"/>
+						<button_tiger_mercenaries this="50D5C5C2-529A-49D3-A0A77B05E2ED4D59">
+							<label_num_factions_available this="50C77F40-7835-4F4C-A2FA61945EC101A6"/>
+							<alert_icon this="D194CA5F-91C4-410F-A122710467A25E4C"/>
+						</button_tiger_mercenaries>
+						<button_tiger_court this="26E8D7F9-8840-4D2E-BF24F6C17B782334">
+							<label_num_factions_available this="6555A5BE-7934-4287-BC295B82EF263ECC"/>
+							<alert_icon this="D4CDBEF2-0E23-4D7E-9CE944486DC487B4"/>
+						</button_tiger_court>
 					</button_group_management>
 					<end_turn_docker this="BD55859B-B21D-4B5F-A53EF5039BCD9F95">
 						<end_turn_timer this="E4B24F4C-45B7-4E4E-8361D3A30033E4BC"/>
@@ -1601,6 +1611,123 @@
 							this="FA24CAAF-2142-4FCD-87F18F5CC6EBB96A"
 							uniqueguid="FA24CAAF-2142-4FCD-87F18F5CC6EBB96A"
 							componentimage="771957B1-29CF-4084-8D33922E8DA4AF84"
+							width="24"
+							height="24"
+							dockpoint="Center"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</alert_icon>
+		<alert_icon
+			this="D194CA5F-91C4-410F-A122710467A25E4C"
+			id="alert_icon"
+			offset="31.00,0.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			docking="Top Right"
+			component_anchor_point="1.00,0.00"
+			priority="1"
+			tooltipslocalised="true"
+			componentleveltooltip="New content available"
+			tooltiplabel="ComponentTooltip_96e340e9"
+			uniqueguid="D194CA5F-91C4-410F-A122710467A25E4C"
+			currentstate="C29BEEE8-054D-4162-B4F1D952E20D90DF"
+			defaultstate="C29BEEE8-054D-4162-B4F1D952E20D90DF">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoStaticObject"
+					context_function_id="TigerMercenaries.ShouldShowHUDNotificationIcon">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="SharedStateChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="can_show_alert"
+					value="1"/>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="70E57322-79EE-42BE-9AB2BF18232FB73F"
+					uniqueguid="70E57322-79EE-42BE-9AB2BF18232FB73F"
+					imagepath="ui/skins/default/icon_alert_message.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="C29BEEE8-054D-4162-B4F1D952E20D90DF"
+					name="default"
+					width="24"
+					height="24"
+					interactive="true"
+					disabled="true"
+					shader_name="glow_pulse_t0"
+					uniqueguid="C29BEEE8-054D-4162-B4F1D952E20D90DF">
+					<imagemetrics>
+						<image
+							this="55561AB5-075D-45EB-A4976734B9794B79"
+							uniqueguid="55561AB5-075D-45EB-A4976734B9794B79"
+							componentimage="70E57322-79EE-42BE-9AB2BF18232FB73F"
+							width="24"
+							height="24"
+							dockpoint="Center"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</alert_icon>
+		<alert_icon
+			this="D4CDBEF2-0E23-4D7E-9CE944486DC487B4"
+			id="alert_icon"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			docking="Top Left"
+			priority="1"
+			uniqueguid="D4CDBEF2-0E23-4D7E-9CE944486DC487B4"
+			currentstate="A3E7ED07-16E0-4CE1-9EF96F94A6A3E19A"
+			defaultstate="A3E7ED07-16E0-4CE1-9EF96F94A6A3E19A">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoStaticObject"
+					context_function_id="false"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="can_show_alert"
+					value="1"/>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="35806FCA-64D0-4C2F-A3C75BF1023849D4"
+					uniqueguid="35806FCA-64D0-4C2F-A3C75BF1023849D4"
+					imagepath="ui/skins/default/icon_alert_message.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="A3E7ED07-16E0-4CE1-9EF96F94A6A3E19A"
+					name="default"
+					width="24"
+					height="24"
+					interactive="true"
+					disabled="true"
+					shader_name="glow_pulse_t0"
+					uniqueguid="A3E7ED07-16E0-4CE1-9EF96F94A6A3E19A">
+					<imagemetrics>
+						<image
+							this="63AB17EC-205B-4A72-B2EE1877B8D8F99A"
+							uniqueguid="63AB17EC-205B-4A72-B2EE1877B8D8F99A"
+							componentimage="35806FCA-64D0-4C2F-A3C75BF1023849D4"
 							width="24"
 							height="24"
 							dockpoint="Center"/>
@@ -4394,6 +4521,199 @@
 				<element value=""/>
 			</override_images>
 		</button_beastmen_panel>
+		<button_bhashiva_caravan
+			this="76E464D2-74E5-4E51-82423C7F5281A627"
+			id="button_bhashiva_caravan"
+			template_id="round_hud_button_toggle"
+			part_of_template="true"
+			uniqueguid_in_template="458D70B0-C64B-4305-A2955C1A0732C8F9"
+			uniqueguid="76E464D2-74E5-4E51-82423C7F5281A627"
+			dimensions="55.00,55.00"
+			sound_category="UI_GBL_TMP_Round_Large_Button_Toggle">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="1FD654C0-1D68-4671-B4ACD3A4D3356062"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="4E779006-FE63-4916-8F0C88E69A3373DE"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="685E37DF-5AD1-4EF7-898ADCC1B6F4D8A3"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="B7125B9F-909E-4DA9-B70C427BECF11CCE"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="4CA7C932-E42C-4D33-A4F501BEFEC84DA5"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="75D5681B-89CB-42CD-8FCA8B33B99B010D"/>
+				<state_uniqueguid
+					name="selected_down"
+					uniqueguid="7EBF08BA-00E4-478B-8D7703A5EC904605"/>
+				<state_uniqueguid
+					name="selected_down_off"
+					uniqueguid="E90F86D1-BCFA-4FCF-B0FC79C8A3BBD31A"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="0B57B15C-E14C-4B4D-8EB0684D635FBB62"/>
+				<state_uniqueguid
+					name="selected_inactive"
+					uniqueguid="8CF665AB-C0AD-4D81-A425ED45836657BC"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/wh3_main_cth_cathay/ivory_road_caravan_icon.png"
+					uniqueguid="866EC33A-3FFB-40B5-AF4653606E43A4A3"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_selected_inactive.png"
+					uniqueguid="3C458241-2CB5-436F-91567A8E170DDDA0"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_pressed.png"
+					uniqueguid="53006191-F84B-4478-A60037E8AEFAE671"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_selected_hover.png"
+					uniqueguid="90340DFA-51ED-478B-ADC78D5FBDA5D441"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_hover.png"
+					uniqueguid="0533552A-06A8-41AE-A2E3866E22475D90"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_active.png"
+					uniqueguid="EAAD4869-9DAF-46EE-BCB5D922F2ABEEE8"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_inactive.png"
+					uniqueguid="AD8DC988-D4AF-4D60-91AE0E3FF98592FF"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_selected.png"
+					uniqueguid="B18B92F2-08CD-47B2-BE9ABAE865C7D79E"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_selected_pressed.png"
+					uniqueguid="49B9B66A-FE56-4863-82A88691B419394C"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_frame_back.png"
+					uniqueguid="80AD0E67-BE84-450E-981500609F29FAA5"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="Button"/>
+				<callback_with_context callback_id="StatePropagatorCallback"/>
+				<callback_with_context
+					callback_id="ContextPanelInitialiser"
+					context_object_id="CcoCampaignFactionCaravans">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/campaign ui/cp1_cth_bhashiva_caravans"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context callback_id="ContextStateSetterConditional">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="PanelClosed_cp1_cth_bhashiva_caravans"/>
+						<property
+							name="event1"
+							value="PanelOpened_cp1_cth_bhashiva_caravans"/>
+						<property
+							name="fallback_state"
+							value="active"/>
+						<property
+							name="handle_button_states"
+							value=""/>
+						<property
+							name="inactive"
+							value="IsLocalPlayersTurn == false"/>
+						<property
+							name="selected"
+							value="IsPanelOpen(&quot;cp1_cth_bhashiva_caravans&quot;)"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_function_id="PlayersFaction.FactionCaravansContext"/>
+				<callback_with_context
+					callback_id="ContextCommandEvent"
+					context_function_id="Do(DoIf(IsHUDPanelOpen(&quot;character_panel&quot;) || IsHUDPanelOpen(&quot;units_panel&quot;), CloseCurrentHUDPanel))">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="PanelClosed_cp1_cth_bhashiva_caravans"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandEvent"
+					context_function_id="DoIf(IsPanelOpen(&quot;cp1_cth_bhashiva_caravans&quot;), ClosePanel(&quot;cp1_cth_bhashiva_caravans&quot;))">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="PanelOpened_settlement_panel"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>
+				<callback_with_context
+					callback_id="ContextTrashOnCondition"
+					context_function_id="CanUseUiFeature(&quot;TIGER_MERCENARIES&quot;) == false"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="CallbackAnimTrigger"/>
+				<property
+					name="dynamic_image"
+					value="0"/>
+				<property
+					name="override_sound"
+					value=""/>
+			</user_properties>
+			<localised_texts>
+				<localised_text
+					tooltip_label="wh3_cp1_cth_caravans_button_tooltip"
+					tooltip_text="Ivory Road||Protect Caravans dispatched along the Ivory Road. Each route provides its own risks and rewards."/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/wh3_main_cth_cathay/ivory_road_caravan_icon.png"/>
+				<element value="ui/skins/default/button_round_hud_selected_inactive.png"/>
+				<element value="ui/skins/default/button_round_hud_pressed.png"/>
+				<element value="ui/skins/default/button_round_hud_selected_hover.png"/>
+				<element value="ui/skins/default/button_round_hud_hover.png"/>
+				<element value="ui/skins/default/button_round_hud_active.png"/>
+				<element value="ui/skins/default/button_round_hud_inactive.png"/>
+				<element value="ui/skins/default/button_round_hud_selected.png"/>
+				<element value="ui/skins/default/button_round_hud_selected_pressed.png"/>
+				<element value="ui/skins/default/button_round_hud_frame_back.png"/>
+				<element value=""/>
+			</override_images>
+		</button_bhashiva_caravan>
 		<button_black_tower
 			this="12201BC7-DB6F-4B60-9ECF72ED9489C745"
 			id="button_black_tower"
@@ -5614,7 +5934,7 @@
 				<callback_with_context callback_id="CallbackAnimTrigger"/>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
-					context_function_id="CanUseUiFeature(&quot;CARAVANS&quot;) &amp;&amp; IsContextValid(PlayersFaction.FactionCaravansContext)"/>
+					context_function_id="CanUseUiFeature(&quot;CARAVANS&quot;) &amp;&amp; IsContextValid(PlayersFaction.FactionCaravansContext) &amp;&amp; CanUseUiFeature(&quot;TIGER_MERCENARIES&quot;) == false"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -9457,7 +9777,7 @@
 		<button_diplomacy
 			this="6B164D67-1CCE-4DFA-843764B8C45E344F"
 			id="button_diplomacy"
-			offset="-89.00,28.00"
+			offset="-126.00,48.00"
 			soundcategory="UI_GBL_TMP_Round_Large_Button_Toggle"
 			uniqueguid="6B164D67-1CCE-4DFA-843764B8C45E344F"
 			currentstate="4587E7B1-BCBB-4BD8-9E6E8497FD9D9862"
@@ -13360,7 +13680,7 @@
 				<newstate
 					this="F57A7E43-DC06-40B4-BA2A06CF30BD2C9B"
 					name="NewState"
-					width="237"
+					width="355"
 					height="55"
 					uniqueguid="F57A7E43-DC06-40B4-BA2A06CF30BD2C9B"/>
 			</states>
@@ -17868,7 +18188,7 @@
 							value="active"/>
 						<property
 							name="inactive"
-							value="IsLocalPlayersTurn == false || IsScriptLockActive(&quot;disable_nurgle_plagues_buttonI&quot;)"/>
+							value="IsLocalPlayersTurn == false || IsScriptLockActive(&quot;disable_nurgle_plagues_button&quot;)"/>
 						<property
 							name="selected"
 							value="IsPanelOpen(&quot;nurgle_plagues&quot;) "/>
@@ -19398,7 +19718,6 @@
 			uniqueguid_in_template="5D80CA64-9284-44B3-A333109B10F096D4"
 			uniqueguid="09BBBAAB-DD6B-416B-BD3B5E056981765A"
 			dimensions="55.00,55.00"
-			is_visible="false"
 			tooltips_localised="false"
 			priority="10"
 			sound_category="UI_GBL_TMP_Round_Small_Button">
@@ -24251,7 +24570,7 @@
 				<newstate
 					this="15BBAB67-25E4-491B-931C83D637CD435B"
 					name="NewState"
-					width="747"
+					width="865"
 					height="71"
 					interactive="true"
 					uniqueguid="15BBAB67-25E4-491B-931C83D637CD435B">
@@ -24260,7 +24579,7 @@
 							this="F7B28FCC-4463-4A03-92B1D3E77A67E5F1"
 							uniqueguid="F7B28FCC-4463-4A03-92B1D3E77A67E5F1"
 							componentimage="26413E1F-5EC3-408A-8A0CE9B123589CDB"
-							width="747"
+							width="865"
 							height="71"
 							tile="true"
 							margin="0.00,85.00,0.00,85.00"/>
@@ -26330,6 +26649,371 @@
 				<element value=""/>
 			</override_images>
 		</button_tick>
+		<button_tiger_court
+			this="26E8D7F9-8840-4D2E-BF24F6C17B782334"
+			id="button_tiger_court"
+			template_id="round_hud_button_toggle"
+			part_of_template="true"
+			uniqueguid_in_template="458D70B0-C64B-4305-A2955C1A0732C8F9"
+			uniqueguid="26E8D7F9-8840-4D2E-BF24F6C17B782334"
+			dimensions="55.00,55.00"
+			tooltips_localised="false"
+			sound_category="UI_GBL_TMP_Round_Large_Button_Toggle">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="63667828-32EE-46DB-AE9A16E9CCBD9568"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="8F936F71-A59C-4F37-90084D5F92642EAB"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="FD1098B3-ED29-47EE-8892021FB1B1240C"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="9A95F2E2-3399-41C5-8B8FDAD7617316B8"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="B25FBB4A-71FA-4DED-93EFF2469DE2A24A"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="37FD1A65-BFE6-4241-9F195EF117D9DF13"/>
+				<state_uniqueguid
+					name="selected_down"
+					uniqueguid="A6D5069F-E497-4E10-905320DCCECC500C"/>
+				<state_uniqueguid
+					name="selected_down_off"
+					uniqueguid="2115BC9F-7002-423F-B14FF30967B0F2F6"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="7787B44F-B78F-4CD3-B6D7A517F782ADB4"/>
+				<state_uniqueguid
+					name="selected_inactive"
+					uniqueguid="4CC3BDE4-6AA2-47CF-AAF4BFDDD0B1AF92"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/cp1_cth_tiger_court/icon_hud_tiger_court.png"
+					uniqueguid="B90A02F3-B711-4084-9C17B8F2AAD4A1C1"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_selected_inactive.png"
+					uniqueguid="F4A89E27-E29D-47A6-8166DBCC3D5BF0C9"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_pressed.png"
+					uniqueguid="16F03B2A-43E2-42F8-97CCFF729007A99B"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_selected_hover.png"
+					uniqueguid="5F71001D-4B80-4FC7-AFD2391BC3813867"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_hover.png"
+					uniqueguid="A3BB4F19-6389-4039-B964EA016034E63B"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_active.png"
+					uniqueguid="550D55A7-38FA-40C9-8200AA23A5B789D6"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_inactive.png"
+					uniqueguid="47872DCF-9021-422B-A245D2C22A7F4548"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_selected.png"
+					uniqueguid="89DC0BAB-1BC2-4EAB-B5DF1E8FEE611C8D"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_selected_pressed.png"
+					uniqueguid="E98A9237-92A6-437F-BEF921983CAF5E96"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_frame_back.png"
+					uniqueguid="97C3292E-24D5-4286-8CEE17EA0D6C4974"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="Button"/>
+				<callback_with_context callback_id="StatePropagatorCallback"/>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>
+				<callback_with_context
+					callback_id="ContextTrashOnCondition"
+					context_function_id="CanUseUiFeature(&quot;TIGER_MERCENARIES&quot;) == false"/>
+				<callback_with_context callback_id="ContextStateSetterConditional">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="PanelClosed_cp1_cth_tiger_court"/>
+						<property
+							name="event1"
+							value="PanelOpened_cp1_cth_tiger_court"/>
+						<property
+							name="event2"
+							value="CampaignTurnStart"/>
+						<property
+							name="event3"
+							value="PooledResourceTransaction"/>
+						<property
+							name="fallback_state"
+							value="active"/>
+						<property
+							name="inactive"
+							value="IsLocalPlayersTurn == false || TigerCourt.IsUnlocked == false"/>
+						<property
+							name="selected"
+							value="IsPanelOpen(&quot;cp1_cth_tiger_court&quot;)"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context callback_id="ContextPanelInitialiser">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/campaign ui/cp1_cth_tiger_court"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_function_id="Loc(&quot;wh3_cp1_tiger_court_button_tooltip&quot;) + GetIf(TigerCourt.IsUnlocked == false,  Loc(&quot;wh3_cp1_tiger_court_button_locked_tooltip&quot;))">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="PooledResourceTransaction"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="CallbackAnimTrigger"/>
+				<property
+					name="dynamic_image"
+					value="0"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/cp1_cth_tiger_court/icon_hud_tiger_court.png"/>
+				<element value="ui/skins/default/button_round_hud_selected_inactive.png"/>
+				<element value="ui/skins/default/button_round_hud_pressed.png"/>
+				<element value="ui/skins/default/button_round_hud_selected_hover.png"/>
+				<element value="ui/skins/default/button_round_hud_hover.png"/>
+				<element value="ui/skins/default/button_round_hud_active.png"/>
+				<element value="ui/skins/default/button_round_hud_inactive.png"/>
+				<element value="ui/skins/default/button_round_hud_selected.png"/>
+				<element value="ui/skins/default/button_round_hud_selected_pressed.png"/>
+				<element value="ui/skins/default/button_round_hud_frame_back.png"/>
+				<element value=""/>
+			</override_images>
+		</button_tiger_court>
+		<button_tiger_mercenaries
+			this="50D5C5C2-529A-49D3-A0A77B05E2ED4D59"
+			id="button_tiger_mercenaries"
+			template_id="round_hud_button_toggle"
+			part_of_template="true"
+			uniqueguid_in_template="458D70B0-C64B-4305-A2955C1A0732C8F9"
+			uniqueguid="50D5C5C2-529A-49D3-A0A77B05E2ED4D59"
+			dimensions="55.00,55.00"
+			tooltips_localised="false"
+			sound_category="UI_GBL_TMP_Round_Large_Button_Toggle">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="0DF6C229-6DD8-4F95-A47C8DEF906B8638"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="69D6C243-3E29-4A04-B1B017F65EED12D4"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="148E8A95-7821-455A-893EC4CDBA67E710"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="F86BEABD-F662-451C-8CF0C3F152126D8C"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="9E228057-3FBB-4260-9F3AC1BE03DD901A"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="7E803210-4DE6-4F5A-823464F3370083B1"/>
+				<state_uniqueguid
+					name="selected_down"
+					uniqueguid="650C505E-3131-451C-B45705AB9B18358D"/>
+				<state_uniqueguid
+					name="selected_down_off"
+					uniqueguid="E5B0D53B-0D3D-4A67-ADD929DEC25A736E"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="AE20120F-23FD-4443-96D3C89BB5795CF2"/>
+				<state_uniqueguid
+					name="selected_inactive"
+					uniqueguid="D4C88F27-B3EA-4D8B-9642CCBBB5C09BB5"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/cp1_cth_shang_yang/icon_hud_armies_shang_yang.png"
+					uniqueguid="2FCEC198-AA14-4F78-91A8EF0C7577F1FB"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_selected_inactive.png"
+					uniqueguid="E27E7D5C-727D-4945-98149CF591D4FABC"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_pressed.png"
+					uniqueguid="D30F9F70-43A2-46D8-A28C82480E214E66"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_selected_hover.png"
+					uniqueguid="B4B0E33F-9011-4546-8E9DE4DEC2CE5412"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_hover.png"
+					uniqueguid="0AB41C68-A209-4D77-92F1970964BA4813"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_active.png"
+					uniqueguid="E34016CA-32F7-488B-98E3E74A33B61C6D"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_inactive.png"
+					uniqueguid="71DBD157-9DCA-4818-95DECBCC00378A01"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_selected.png"
+					uniqueguid="B5BBB40D-EEDA-4AD4-AC64ED21CB8B8242"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_selected_pressed.png"
+					uniqueguid="76EA4139-DE39-440A-95ABD3890B4682FA"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_hud_frame_back.png"
+					uniqueguid="1A8CF15F-9B7F-4C89-9CFAC6B4930F10A1"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="Button"/>
+				<callback_with_context callback_id="StatePropagatorCallback"/>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>
+				<callback_with_context
+					callback_id="ContextTrashOnCondition"
+					context_function_id="CanUseUiFeature(&quot;TIGER_MERCENARIES&quot;) == false"/>
+				<callback_with_context callback_id="ContextStateSetterConditional">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="PanelClosed_cp1_cth_shang_yang"/>
+						<property
+							name="event1"
+							value="PanelOpened_cp1_cth_shang_yang"/>
+						<property
+							name="event2"
+							value="CampaignTurnStart"/>
+						<property
+							name="event3"
+							value="PooledResourceTransaction"/>
+						<property
+							name="fallback_state"
+							value="active"/>
+						<property
+							name="inactive"
+							value="IsLocalPlayersTurn == false || TigerMercenaries.IsUnlocked == false"/>
+						<property
+							name="selected"
+							value="IsPanelOpen(&quot;cp1_cth_shang_yang&quot;)"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context callback_id="ContextPanelInitialiser">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/campaign ui/cp1_cth_shang_yang"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_function_id="Loc(&quot;wh3_cp1_shang_yang_button_tooltip&quot;) + GetIf(TigerMercenaries.IsUnlocked == false,  Loc(&quot;wh3_cp1_shang_yang_button_locked_tooltip&quot;))">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="PooledResourceTransaction"/>
+						<property
+							name="event1"
+							value="PanelClosed_cp1_cth_shang_yang"/>
+						<property
+							name="event2"
+							value="PanelOpened_cp1_cth_shang_yang"/>
+						<property
+							name="event3"
+							value="CampaignTurnStart"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override0"
+					value="CallbackAnimTrigger"/>
+				<property
+					name="dynamic_image"
+					value="0"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/cp1_cth_shang_yang/icon_hud_armies_shang_yang.png"/>
+				<element value="ui/skins/default/button_round_hud_selected_inactive.png"/>
+				<element value="ui/skins/default/button_round_hud_pressed.png"/>
+				<element value="ui/skins/default/button_round_hud_selected_hover.png"/>
+				<element value="ui/skins/default/button_round_hud_hover.png"/>
+				<element value="ui/skins/default/button_round_hud_active.png"/>
+				<element value="ui/skins/default/button_round_hud_inactive.png"/>
+				<element value="ui/skins/default/button_round_hud_selected.png"/>
+				<element value="ui/skins/default/button_round_hud_selected_pressed.png"/>
+				<element value="ui/skins/default/button_round_hud_frame_back.png"/>
+				<element value=""/>
+			</override_images>
+		</button_tiger_mercenaries>
 		<button_toggle_info_panel
 			this="AD198804-45DD-400B-82B592CEC13C166E"
 			id="button_toggle_info_panel"
@@ -27586,6 +28270,212 @@
 				<element value=""/>
 			</override_images>
 		</button_tyrants_demands>
+		<button_unit_banners
+			this="E638508E-5B6F-43EE-B8CD3FBED959FBE5"
+			id="button_unit_banners"
+			template_id="square_medium_button_toggle"
+			part_of_template="true"
+			uniqueguid_in_template="5D80CA64-9284-44B3-A333109B10F096D4"
+			uniqueguid="E638508E-5B6F-43EE-B8CD3FBED959FBE5"
+			dimensions="55.00,55.00"
+			tooltips_localised="false"
+			priority="10"
+			sound_category="UI_GBL_TMP_Round_Small_Button">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="674BC993-80D2-4138-91A20D19E860650E"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="36403C80-B6D1-4D9F-BBC0D488CE1698D2"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="DC6F0230-7715-4E57-8B8538C754661E18"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="68009708-B00B-4FFA-BFB6E37A5BA52A38"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="A173D20D-C6C9-4D1B-B0562519F14C5800"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="0FEE8D95-8AB0-4F96-9B03BBB53359BB24"/>
+				<state_uniqueguid
+					name="selected_down"
+					uniqueguid="CE40AD09-E0F3-4993-BDA9F9313B99C165"/>
+				<state_uniqueguid
+					name="selected_down_off"
+					uniqueguid="C30A757B-2528-4394-81EB7A9CF0CF0F79"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="554821F5-5727-4EFA-A6A2074A21C4E483"/>
+				<state_uniqueguid
+					name="selected_inactive"
+					uniqueguid="6987ABDF-5607-4F6F-80AFEA8CB665F08D"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/cp1_cth_shang_yang_banners/icon_shang_yang_banners.png"
+					uniqueguid="E9C6345F-F8CD-4BFC-82A66198E594FB3C"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_selected_inactive.png"
+					uniqueguid="85F93763-9920-4B3C-B3F62368431127E8"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_pressed.png"
+					uniqueguid="6AE585B7-DE51-4EA8-866A638CC98AC6EA"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_selected_hover.png"
+					uniqueguid="A1B9BD82-B815-47A6-8BB370B318C6AC02"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_hover.png"
+					uniqueguid="9D369B4A-62F8-47D4-972036B99023BC65"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_active.png"
+					uniqueguid="10DA70E8-B671-49BE-AD1E3A034CDF5FF5"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_inactive.png"
+					uniqueguid="9BB2BA85-3C04-4CEC-B5EE335586F04D14"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_selected.png"
+					uniqueguid="11D5C211-303E-4553-AB86BCC719D6F41A"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_underlay.png"
+					uniqueguid="29EE2F13-3F49-4ADC-8A8E5F8670D06E6C"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_selected_underlay.png"
+					uniqueguid="EE6772C8-55A1-4EAC-ABEB8735A36B187E"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_selected_pressed.png"
+					uniqueguid="34AF8A2E-7C81-4BDF-8DF808C07E0A6A61"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="ButtonGroupButton"/>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>
+				<callback_with_context
+					callback_id="ContextTrashOnCondition"
+					context_object_id="CcoStaticObject"
+					context_function_id="CanUseUiFeature(&quot;TIGER_MERCENARIES&quot;) == false">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignCharacterSelectedAny"/>
+						<property
+							name="event1"
+							value="WarCoordinationStateChanged"/>
+						<property
+							name="event2"
+							value="MilitaryForceFactionChangeAny"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextInactiveStateSetter"
+					context_function_id="Component(&quot;units&quot;, &quot;main_units_panel&quot;).ForceContainsUpgradableUnits &amp;&amp; IsLocalPlayersTurn &amp;&amp; TigerMercenaries.IsUnlocked">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignCharacterSelectedAny"/>
+						<property
+							name="event1"
+							value="CampaignUnitRecruited"/>
+						<property
+							name="event2"
+							value="PooledResourceTransaction"/>
+						<property
+							name="event3"
+							value="CampaignMilitaryForceDetailsChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context callback_id="StatePropagatorCallback">
+					<child_m_user_properties>
+						<property
+							name="use_transitions"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandEvent"
+					context_function_id="DoIf(self.CurrentState != &quot;inactive&quot;, self.SetSelectedState(false))">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CloseUnitUpgradePanel"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_function_id="StringGet(&quot;ui_text_replacements_localised_text_wh3_cp1_shang_yang_banners_panel_button_tooltip&quot;) + GetIf(TigerMercenaries.IsUnlocked &amp;&amp; IsLocalPlayersTurn == false, StringGet(&quot;ui_text_replacements_localised_text_wh3_cp1_shang_yang_banner_panel_button_inactive_disclaimer&quot;)) + GetIf(TigerMercenaries.IsUnlocked == false, StringGet(&quot;ui_text_replacements_localised_text_wh3_cp1_shang_yang_banner_insignia_locked_tooltip&quot;)) + GetIf(Component(&quot;units&quot;, &quot;main_units_panel&quot;).ForceContainsUpgradableUnits == false, Loc(&quot;wh3_cp1_insignia_panel_inactive_button_no_available_units_tooltip&quot;))">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignCharacterSelectedAny"/>
+						<property
+							name="event1"
+							value="CampaignUnitRecruited"/>
+						<property
+							name="event2"
+							value="PooledResourceTransaction"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="resizable"/>
+				<property
+					name="disable_override2"
+					value="CallbackAnimTrigger"/>
+				<property
+					name="dynamic_image"
+					value="0"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/cp1_cth_shang_yang_banners/icon_shang_yang_banners.png"/>
+				<element value="ui/skins/default/button_basic_selected_inactive.png"/>
+				<element value="ui/skins/default/button_basic_pressed.png"/>
+				<element value="ui/skins/default/button_basic_selected_hover.png"/>
+				<element value="ui/skins/default/button_basic_hover.png"/>
+				<element value="ui/skins/default/button_basic_active.png"/>
+				<element value="ui/skins/default/button_basic_inactive.png"/>
+				<element value="ui/skins/default/button_basic_selected.png"/>
+				<element value="ui/skins/default/button_basic_underlay.png"/>
+				<element value="ui/skins/default/button_basic_selected_underlay.png"/>
+				<element value="ui/skins/default/button_basic_selected_pressed.png"/>
+				<element value=""/>
+			</override_images>
+		</button_unit_banners>
 		<button_unmark
 			this="EA0F5CAC-0B2F-47A6-B932901A982F52B7"
 			id="button_unmark"
@@ -31891,6 +32781,9 @@
 						<property
 							name="filtered_mission_category_31"
 							value="da_plan"/>
+						<property
+							name="filtered_mission_category_32"
+							value="armies_of_shang_yang"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
@@ -34800,6 +35693,134 @@
 				</newstate>
 			</states>
 		</label_num_empty_slots>
+		<label_num_factions_available
+			this="50C77F40-7835-4F4C-A2FA61945EC101A6"
+			id="label_num_factions_available"
+			offset="27.00,-22.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center"
+			dock_offset="21.00,-29.00"
+			component_anchor_point="0.50,0.50"
+			uniqueguid="50C77F40-7835-4F4C-A2FA61945EC101A6"
+			currentstate="EA7E333F-B831-412F-92E9C2F173FBF358"
+			defaultstate="EA7E333F-B831-412F-92E9C2F173FBF358">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_function_id="false"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="335CFCA4-6E19-4A07-9CD3D9BC8309CDE7"
+					uniqueguid="335CFCA4-6E19-4A07-9CD3D9BC8309CDE7"
+					imagepath="ui/skins/default/spell_dial_grudges_display.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="EA7E333F-B831-412F-92E9C2F173FBF358"
+					name="NewState"
+					width="42"
+					height="41"
+					interactive="true"
+					disabled="true"
+					pixelcollision="true"
+					uniqueguid="EA7E333F-B831-412F-92E9C2F173FBF358">
+					<imagemetrics>
+						<image
+							this="43F9DD22-71F1-462A-899266B5AA17546E"
+							uniqueguid="43F9DD22-71F1-462A-899266B5AA17546E"
+							componentimage="335CFCA4-6E19-4A07-9CD3D9BC8309CDE7"
+							offset="0.00,-1.00"
+							width="42"
+							height="41"
+							dockpoint="Center"
+							dock_offset="0.00,-1.00"/>
+					</imagemetrics>
+					<component_text
+						text="999"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_2dfe8886"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"
+						text_shader_name="drop_shadow_t0"
+						textshadervars="0.00,1.00,2.00,0.00"/>
+				</newstate>
+			</states>
+		</label_num_factions_available>
+		<label_num_factions_available
+			this="6555A5BE-7934-4287-BC295B82EF263ECC"
+			id="label_num_factions_available"
+			offset="27.00,-22.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center"
+			dock_offset="21.00,-29.00"
+			component_anchor_point="0.50,0.50"
+			uniqueguid="6555A5BE-7934-4287-BC295B82EF263ECC"
+			currentstate="A6EB9B9B-312D-4BDD-BC55D943E546930D"
+			defaultstate="A6EB9B9B-312D-4BDD-BC55D943E546930D">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_function_id="false"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="AABDC19B-4E7E-4611-9A2D6B36831D45D6"
+					uniqueguid="AABDC19B-4E7E-4611-9A2D6B36831D45D6"
+					imagepath="ui/skins/default/spell_dial_grudges_display.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="A6EB9B9B-312D-4BDD-BC55D943E546930D"
+					name="NewState"
+					width="42"
+					height="41"
+					interactive="true"
+					disabled="true"
+					pixelcollision="true"
+					uniqueguid="A6EB9B9B-312D-4BDD-BC55D943E546930D">
+					<imagemetrics>
+						<image
+							this="FC3BF06E-1CA7-4765-ADEF9E369C703357"
+							uniqueguid="FC3BF06E-1CA7-4765-ADEF9E369C703357"
+							componentimage="AABDC19B-4E7E-4611-9A2D6B36831D45D6"
+							offset="0.00,-1.00"
+							width="42"
+							height="41"
+							dockpoint="Center"
+							dock_offset="0.00,-1.00"/>
+					</imagemetrics>
+					<component_text
+						text="999"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Never split"
+						textlocalised="true"
+						textlabel="StateText_1761b474"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"
+						text_shader_name="drop_shadow_t0"
+						textshadervars="0.00,1.00,2.00,0.00"/>
+				</newstate>
+			</states>
+		</label_num_factions_available>
 		<label_num_factions_available
 			this="2153B292-867E-40D0-852D7EC88BC437E4"
 			id="label_num_factions_available"
@@ -42920,7 +43941,7 @@
 				<callback_with_context
 					callback_id="ContextAdoptOnCondition"
 					context_object_id="CcoRTCaravan"
-					context_function_id="Component(&quot;cathay_caravans&quot;, &quot;root&quot;).IsVisibleFromRoot">
+					context_function_id="Component(&quot;cathay_caravans&quot;, &quot;root&quot;).IsVisibleFromRoot || Component(&quot;cp1_cth_bhashiva_caravans&quot;, &quot;root&quot;).IsVisibleFromRoot">
 					<child_m_user_properties>
 						<property
 							name="parent_false"

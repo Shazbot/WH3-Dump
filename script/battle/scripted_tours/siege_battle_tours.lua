@@ -491,7 +491,9 @@ do
 	-- add end actions
 	nt_siege_defence:end_action(
 		function()
-			st_helper.setup_tour_end(nt_siege_defence);
+			if nt_siege_defence.is_running then
+				st_helper.setup_tour_end(nt_siege_defence);
+			end
 		end
 	);
 end;
@@ -954,7 +956,9 @@ do
 	-- add end actions
 	nt_siege_battle_attack:end_action(
 		function()
-			st_helper.setup_tour_end(nt_siege_battle_attack);
+			if nt_siege_battle_attack.is_running then
+				st_helper.setup_tour_end(nt_siege_battle_attack);
+			end
 		end
 	);
 end;
@@ -1258,7 +1262,9 @@ do
 	-- add end actions
 	nt_minor_settlement_defence:end_action(
 		function()
-			st_helper.setup_tour_end(nt_minor_settlement_defence);
+			if nt_minor_settlement_defence.is_running then
+				st_helper.setup_tour_end(nt_minor_settlement_defence);
+			end
 		end
 	);
 end;
@@ -1530,45 +1536,10 @@ do
 	-- add end actions
 	nt_minor_settlement_attack:end_action(
 		function()
-			-- Re-enable orders
-			bm:disable_orders(false);
-
-			-- Re-enable grouping/formations
-			bm:disable_groups(false);
-			bm:disable_formations(false);
-
-			-- Re-attach infotext to advisor
-			bm:attach_to_advisor(true);
-
-			-- Re-enable bits of the UI we didn't want
-			bm:disable_help_page_button(false);
-			bm:disable_tactical_map(false);
-			bm:disable_unit_camera(false);
-			bm:disable_unit_details_panel(false);
-			bm:show_top_bar(true);
-			bm:show_army_panel(true);
-			bm:show_radar_frame(true);
-			bm:show_army_abilities(true);
-			bm:show_ui_options_panel(true);
-			bm:enable_spell_browser_button(true);
-			bm:show_winds_of_magic_panel(true);
-			bm:show_portrait_panel(true);
-
-			core:restore_integer_preference("ui_leaf_clipping");
-			core:restore_boolean_preference("ui_mouse_scroll");
-			core:restore_integer_preference("ui_selection_markers");
-			core:restore_integer_preference("ui_unit_select_outlines");
-
-			local hpm = get_help_page_manager();
-			hpm:show_title_bar_buttons(true);
-			hpm:hide_panel();
-			hpm:related_panel_closed("float_top_right");
-
-			-- Re-enable pausing and time updating, and allow battle speed to be changed
-			bm:disable_pausing(false);
-			bm:disable_time_speed_controls(false);
-			bm:change_conflict_time_update_overridden(false);
-		end
+			if nt_minor_settlement_attack.is_running then
+				st_helper.setup_tour_end(nt_minor_settlement_attack);
+			end
+		end	
 	);
 
 end;

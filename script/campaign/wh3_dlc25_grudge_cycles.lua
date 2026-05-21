@@ -540,7 +540,7 @@ function grudge_cycle:track_trespass()
 				local char = char_list[i]
 				local char_faction = char:faction()
 
-				if char_faction:culture() ~= self.cultures.dwarf then
+				if not is_nil(char_faction) and not char_faction:is_null_interface() and char_faction:culture() ~= self.cultures.dwarf then
 					local mf = char:military_force()
 					local stance = mf:active_stance()
 

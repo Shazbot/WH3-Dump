@@ -279,6 +279,12 @@ require("wh3_dlc27_dragonship")
 require("wh3_dlc27_dechala_daemonic_influence")
 require("wh3_dlc27_dechala_daemonic_units")
 
+-- CP1
+require("wh3_cp1_tiger_mercenaries")
+require("wh3_cp1_tiger_court")
+require("wh3_cp1_iron_favour")
+require("wh3_cp1_bhashiva")
+
 -- Minor Cults
 require("wh3_campaign_minor_cults");
 for i = 1, #MINOR_CULT_LIST do

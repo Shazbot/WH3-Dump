@@ -1,0 +1,157 @@
+TigerCourt
+{
+    IsUnlocked
+    {
+        PlayersFaction.EntitySharedStateReadBool("tiger_court_unlocked")
+    }
+    
+    GetRelicsPooledResource
+    {
+        PlayersFaction.PooledResourceContext("wh3_cp1_cth_relics")
+    }
+
+    GetPathPooledResources
+    {
+        PlayersFaction.EntitySharedStateReadString("tiger_court_path_list").Split(";").Transform(
+			(key) => PlayersFaction.PooledResourceContext(key))
+    }
+
+    GetPathUpgradeRitual(CcoCampaignPooledResource pr)
+    {
+        (ritual_category_key = PlayersFaction.EntitySharedStateReadString(Format("tiger_court_ritual_category_for_upgrades:%S", pr.Key))) =>
+        {
+            PlayersFaction.RitualManagerContext.RitualChainContextFromCategory(ritual_category_key).FirstContext.NextInChainContext
+        }
+    }
+
+    GetBannerIndexForPath(CcoCampaignPooledResource pr)
+    {
+        TigerCourt.GetPathPooledResources.IndexForFirstContext(Key == pr.Key) + 1
+    }
+
+    GetRitualForPath(CcoCampaignPooledResource pr)
+    {
+        (ritual_key = PlayersFaction.EntitySharedStateReadString(Format("tiger_court_ritual_for_path:%S", pr.Key))) =>
+        {
+            PlayersFaction.RitualManagerContext.RitualContext(DatabaseRecordContext("CcoRitualRecord", ritual_key))
+        }
+    }
+
+    GetPathThresholds(CcoCampaignPooledResource pr)
+    {
+        pr.EffectList("ABSOLUTE_VALUE").Filter(
+            Key != "wh3_cp1_cth_court_bhashiva_level_0" &&
+            Key != "wh3_cp1_cth_court_military_level_0" &&
+            Key != "wh3_cp1_cth_court_spiritual_level_0")
+    }
+
+    GetCurrentTierIndex(CcoCampaignPooledResource pr)
+    {
+        (current_effect_context = pr.CurrentGroupPooledResourceEffectContext("ABSOLUTE_VALUE"),
+        current_index = pr.EffectList("ABSOLUTE_VALUE").IndexForFirstContext(Key == current_effect_context.Key)) => 
+        {
+            GetIfElse(current_index != -1, current_index + 1, 0)
+        }
+    }
+
+    GetCurrentTierEffectBundle(CcoCampaignPooledResource pr)
+    {
+        pr.CurrentGroupPooledResourceEffectContext("ABSOLUTE_VALUE").EffectBundle
+    }
+
+    GetCurrentTierFilteredEffectsList(CcoCampaignPooledResource pr, String filter)
+    {
+        (current_effect_bundle = pr.CurrentGroupPooledResourceEffectContext("ABSOLUTE_VALUE").EffectBundle) =>
+        {
+            GetIf(IsContextValid(current_effect_bundle), current_effect_bundle.EffectList.Filter(EffectKey.Contains(filter)))
+        }
+    }
+
+    GetNextTierFilteredEffectsList(CcoCampaignPooledResource pr, String filter)
+    {
+        (current_effect_bundle = pr.CurrentGroupPooledResourceEffectContext("ABSOLUTE_VALUE").EffectBundle,
+        next_effect_bundle = pr.NextGroupPooledResourceEffectContext("ABSOLUTE_VALUE").EffectBundle,
+        filter_effects = GetIf(IsContextValid(current_effect_bundle), current_effect_bundle.EffectList.Transform(EffectKey))) =>
+        {
+            GetIf(IsContextValid(next_effect_bundle),
+                next_effect_bundle.EffectList.Filter((new_effect) =>
+                    new_effect.EffectKey.Contains(filter) &&
+                    (IsContextValid(current_effect_bundle) == false ||
+                    filter_effects.Filter((key) => key.Contains(new_effect.EffectKey)).IsEmpty)))
+        }
+    }
+
+    GetNextTierEffectBundle(CcoCampaignPooledResource pr)
+    {
+        pr.NextGroupPooledResourceEffectContext("ABSOLUTE_VALUE").EffectBundle
+    }
+
+    HasAnyActiveEffects(CcoCampaignPooledResource pr, String filter)
+    {
+        (current_effect_bundle = pr.CurrentGroupPooledResourceEffectContext("ABSOLUTE_VALUE").EffectBundle) =>
+        {
+            IsContextValid(current_effect_bundle) && TigerCourt.GetCurrentTierFilteredEffectsList(pr, filter).IsEmpty == false
+        }
+    }
+
+    HasAnyNewEffectsInNextTier(CcoCampaignPooledResource pr, String filter)
+    {
+        (next_effect_bundle = pr.NextGroupPooledResourceEffectContext("ABSOLUTE_VALUE").EffectBundle) =>
+        {
+            IsContextValid(next_effect_bundle) && TigerCourt.GetNextTierFilteredEffectsList(pr, filter).IsEmpty == false
+        }
+    }
+
+    HasAnyShownEffects(CcoCampaignPooledResource pr, String filter)
+    {
+        TigerCourt.HasAnyActiveEffects(pr, filter) || TigerCourt.HasAnyNewEffectsInNextTier(pr, filter)
+    }
+
+    GetCurrentTierEffectBundlesSplit(CcoEffectBundle original_bundle)
+    {
+        GetIfElse(
+            original_bundle.Key == "wh3_cp1_cth_bundle_tiger_court_kamau_0" ||
+            original_bundle.Key == "wh3_cp1_cth_bundle_tiger_court_thousand_gods_0" ||
+            original_bundle.Key == "wh3_cp1_cth_bundle_tiger_court_white_tiger_0",
+            DatabaseRecordContext("CcoEffectBundle", original_bundle.Key + "_base"),
+            GetIfElse(
+                original_bundle.Key == "wh3_cp1_cth_bundle_tiger_court_kamau_1" ||
+                original_bundle.Key == "wh3_cp1_cth_bundle_tiger_court_thousand_gods_1" ||
+                original_bundle.Key == "wh3_cp1_cth_bundle_tiger_court_white_tiger_1",
+                Join(
+                    DatabaseRecordContext("CcoEffectBundle", original_bundle.Key + "_base")),
+                Join(
+                    DatabaseRecordContext("CcoEffectBundle", original_bundle.Key + "_base"),
+                    DatabaseRecordContext("CcoEffectBundle", original_bundle.Key + "_yang"),
+                    DatabaseRecordContext("CcoEffectBundle", original_bundle.Key + "_yin"))))
+    }
+
+    GetInitiativeSetForPath(CcoCampaignPooledResource pr)
+    {
+        (set_key = PlayersFaction.EntitySharedStateReadString(Format("tiger_court_initiative_set_for_path:%S", pr.Key))) =>
+        {
+            PlayersFaction.InitiativeSetList.FirstContext((set) => set.InitiativeSetContext.Key == set_key)
+        }
+    }
+
+    GetActiveEffectsFromInitiativesForPath(CcoCampaignPooledResource pr)
+    {
+        (initiative_set = TigerCourt.GetInitiativeSetForPath(pr)) =>
+        {
+            GetIf(IsContextValid(initiative_set), initiative_set.ActiveInitiatives.Transform((initiative) => initiative.EffectsProvided))
+        }
+    }
+
+    ShouldShowCampaignAbilities(CcoCampaignCharacter character)
+    {
+        character.FactionContext.IsPlayersFaction
+        && (character.AgentSubtypeRecordContext.Key == "wh3_cp1_cth_bhashiva" || character.AgentSubtypeRecordContext.Key == "wh3_cp1_cth_sawai")
+        && character.FactionContext.FactionRecordContext.Key == "wh3_cp1_cth_tiger_warriors"
+    }
+
+    GetCampaignAbilities(CcoCampaignCharacter character)
+    {
+        Join(character.FactionContext.RitualManagerContext.AvailableRitualList.Filter(RitualContext.Category == "CP1_COURT_RITUAL"),
+        character.FactionContext.RitualManagerContext.UnlockableRitualList.Filter(RitualContext.Category == "CP1_COURT_RITUAL")).Distinct.Sort(RitualContext.SortOrder, true)
+    }
+}

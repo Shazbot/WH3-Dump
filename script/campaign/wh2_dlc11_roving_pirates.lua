@@ -157,7 +157,7 @@ function roving_pirates:add_roving_pirates_listeners()
 		roving_pirates:setup_roving_pirates()
 		
 		-- Lock all ROR
-		local faction_list = cm:model():world():faction_list()
+		local faction_list = cm:get_faction_list()
 		
 		for _, current_faction in model_pairs(faction_list) do
 			if infamy:is_faction_playable_vampire_coast(current_faction) then
@@ -241,7 +241,7 @@ function roving_pirates:setup_roving_pirates()
 		
 		-- Trigger Piece of Eight missions
 		if pirate.item_owned == "piece_of_eight" and cm:are_any_factions_human(nil, "wh2_dlc11_cst_vampire_coast") then
-			local faction_list = cm:model():world():faction_list()
+			local faction_list = cm:get_faction_list()
 			
 			for _, current_faction in model_pairs(faction_list) do
 				if infamy:is_faction_playable_vampire_coast(current_faction) then
@@ -351,7 +351,7 @@ function roving_pirates:piece_of_eight_respawn(context)
 			if invasion_general:faction():name() == pirate.faction_key and pirate.item_owned == "piece_of_eight" then
 				
 				-- Go through all human pirates, and if they aren't in the complete table give them the mission
-				local faction_list = cm:model():world():faction_list()
+				local faction_list = cm:get_faction_list()
 				
 				for _, current_faction in model_pairs(faction_list) do
 					if infamy:is_faction_playable_vampire_coast(current_faction) then

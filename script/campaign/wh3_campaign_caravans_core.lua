@@ -234,6 +234,135 @@ caravans.traits_to_units = {
 		"wh_main_emp_inf_crossbowmen"
 	},
 
+	["wh3_cp1_skill_innate_cth_caravan_sawai_alchemy"] = {
+		"wh3_main_cth_cha_alchemist_0",
+		"wh3_main_cth_inf_peasant_archers_0",
+		"wh3_main_cth_inf_peasant_archers_0",
+		"wh3_main_cth_inf_peasant_spearmen_1",
+		"wh3_main_cth_inf_peasant_spearmen_1",
+		"wh3_cp1_cth_inf_tiger_warriors_dual_axe",
+		"wh3_cp1_cth_inf_tiger_warriors_dual_axe",
+		"wh3_cp1_cth_inf_stalkers_throwing_disc"
+	},
+
+	["wh3_cp1_skill_innate_cth_caravan_sawai_artillery"] = {
+		"wh3_main_cth_inf_peasant_archers_0",
+		"wh3_main_cth_inf_peasant_archers_0",
+		"wh3_main_cth_inf_peasant_spearmen_1",
+		"wh3_cp1_cth_inf_tiger_warriors_dual_axe",
+		"wh3_cp1_cth_inf_tiger_warriors_dual_axe",
+		"wh3_main_cth_art_grand_cannon_0",
+		"wh3_main_cth_art_grand_cannon_0"
+	},
+
+	["wh3_cp1_skill_innate_cth_caravan_sawai_cavalry"] = {
+		"wh3_main_cth_inf_peasant_archers_0",
+		"wh3_main_cth_inf_peasant_archers_0",
+		"wh3_main_cth_inf_peasant_spearmen_1",
+		"wh3_cp1_cth_inf_tiger_warriors_dual_axe",
+		"wh3_cp1_cth_inf_tiger_warriors_dual_axe",
+		"wh3_main_cth_cav_jade_lancers_0",
+		"wh3_main_cth_cav_jade_lancers_0",
+		"wh3_main_cth_cav_peasant_horsemen_0",
+		"wh3_main_cth_cav_peasant_horsemen_0"
+	},
+
+	["wh3_cp1_skill_innate_cth_caravan_sawai_celestial"] = {
+		"wh3_main_cth_inf_peasant_archers_0",
+		"wh3_main_cth_inf_peasant_archers_0",
+		"wh3_main_cth_inf_peasant_spearmen_1",
+		"wh3_cp1_cth_inf_tiger_warriors_dual_axe",
+		"wh3_cp1_cth_inf_tiger_warriors_dual_axe",
+		"wh3_main_cth_cav_peasant_horsemen_0",
+		"wh3_main_cth_cav_peasant_horsemen_0",
+		"wh3_main_cth_cav_jade_longma_riders_0"
+	},
+
+	["wh3_cp1_skill_innate_cth_caravan_sawai_clawspeaker"] = {
+		"wh3_cp1_cth_cha_clawspeaker_beasts",
+		"wh3_main_cth_inf_peasant_archers_0",
+		"wh3_main_cth_inf_peasant_archers_0",
+		"wh3_main_cth_inf_peasant_spearmen_1",
+		"wh3_main_cth_inf_peasant_spearmen_1",
+		"wh3_cp1_cth_inf_tiger_warriors_dual_axe",
+		"wh3_cp1_cth_inf_tiger_warriors_dual_axe",
+		"wh3_cp1_cth_inf_stalkers_throwing_disc"
+	},
+
+	["wh3_cp1_skill_innate_cth_caravan_sawai_gunpowder"] = {
+		"wh3_main_cth_inf_peasant_spearmen_1",
+		"wh3_main_cth_inf_peasant_spearmen_1",
+		"wh3_cp1_cth_inf_tiger_warriors_dual_axe",
+		"wh3_cp1_cth_inf_tiger_warriors_dual_axe",
+		"wh3_main_cth_inf_iron_hail_gunners_0",
+		"wh3_main_cth_inf_iron_hail_gunners_0",
+		"wh3_main_cth_inf_crane_gunners_0"
+	},
+
+	["wh3_cp1_skill_innate_cth_caravan_sawai_jade"] = {
+		"wh3_main_cth_inf_jade_warrior_crossbowmen_0",
+		"wh3_main_cth_inf_jade_warrior_crossbowmen_0",
+		"wh3_main_cth_inf_jade_warriors_0",
+		"wh3_main_cth_inf_jade_warriors_0",
+		"wh3_main_cth_inf_jade_warriors_1",
+		"wh3_cp1_cth_inf_tiger_warriors_dual_axe",
+		"wh3_cp1_cth_inf_stalkers_throwing_disc"
+	},
+
+	["wh3_cp1_skill_innate_cth_caravan_sawai_peasants"] = {
+		"wh3_main_cth_inf_peasant_archers_0",
+		"wh3_main_cth_inf_peasant_archers_0",
+		"wh3_main_cth_inf_peasant_archers_0",
+		"wh3_main_cth_inf_peasant_archers_0",
+		"wh3_main_cth_inf_peasant_spearmen_1",
+		"wh3_main_cth_inf_peasant_spearmen_1",
+		"wh3_main_cth_inf_peasant_spearmen_1",
+		"wh3_main_cth_inf_peasant_spearmen_1",
+		"wh3_cp1_cth_inf_tiger_warriors_dual_axe",
+		"wh3_cp1_cth_inf_stalkers_throwing_disc"
+	},
+
+	["wh3_cp1_skill_innate_cth_caravan_sawai_ranged"] = {
+		"wh3_main_cth_inf_peasant_archers_0",
+		"wh3_main_cth_inf_peasant_archers_0",
+		"wh3_cp1_cth_inf_stalkers_throwing_disc",
+		"wh3_cp1_cth_inf_stalkers_throwing_disc",
+		"wh3_main_cth_inf_jade_warrior_crossbowmen_0",
+		"wh3_main_cth_inf_peasant_spearmen_1",
+		"wh3_main_cth_inf_peasant_spearmen_1",
+		"wh3_cp1_cth_inf_tiger_warriors_dual_axe"
+	},
+
+	["wh3_cp1_skill_innate_cth_caravan_sawai_sky"] = {
+		"wh3_main_cth_inf_peasant_archers_0",
+		"wh3_main_cth_inf_peasant_spearmen_1",
+		"wh3_main_cth_inf_peasant_spearmen_1",
+		"wh3_cp1_cth_inf_tiger_warriors_dual_axe",
+		"wh3_cp1_cth_inf_tiger_warriors_dual_axe",
+		"wh3_cp1_cth_inf_stalkers_throwing_disc",
+		"wh3_main_cth_veh_sky_lantern_0",
+		"wh3_main_cth_veh_sky_lantern_0"
+	},
+
+	["wh3_cp1_skill_innate_cth_caravan_sawai_tigers"] = {
+		"wh3_cp1_cth_inf_tiger_warriors_dual_axe",
+		"wh3_cp1_cth_inf_tiger_warriors_dual_axe",
+		"wh3_cp1_cth_inf_tiger_warriors_dual_axe",
+		"wh3_cp1_cth_inf_stalkers_throwing_disc",
+		"wh3_cp1_cth_inf_stalkers_throwing_disc",
+		"wh3_cp1_cth_inf_iron_claw_guandao"
+	},
+
+	["wh3_cp1_skill_innate_cth_caravan_sawai_veteran"] = {
+		{"wh3_main_cth_inf_peasant_archers_0", 4},
+		{"wh3_main_cth_inf_peasant_spearmen_1", 3},
+		{"wh3_main_cth_inf_peasant_spearmen_1", 3},
+		{"wh3_cp1_cth_inf_tiger_warriors_dual_axe", 2},
+		{"wh3_cp1_cth_inf_tiger_warriors_dual_axe", 2},
+		{"wh3_cp1_cth_inf_stalkers_throwing_disc", 3},
+		{"wh3_cp1_cth_inf_stalkers_throwing_disc", 4}
+	},
+
 	---CHAOS DWARFS
 	["wh3_dlc23_skill_innate_chd_convoy_overseer_bull_centaur_master"] = {
 		"wh3_dlc23_chd_inf_chaos_dwarf_warriors",
@@ -413,7 +542,39 @@ caravans.reward_list = {
 		wh3_main_combi_region_karond_kar 							= {"wh3_dlc23_anc_convoy_spiked_whip", "wh3_dlc23_chd_convoy_unique_completed_karond_kar", "wh2_main_def_mon_war_hydra"},
 
 		wh3_main_combi_region_wizard_caliphs_palace 				= {"wh3_dlc23_anc_convoy_eternal_servant", "wh3_dlc23_chd_convoy_unique_completed_wizard_caliphs_palace", "wh2_dlc09_tmb_veh_khemrian_warsphinx_0"}
-	}
+	},
+
+	-- factions
+	wh3_cp1_cth_tiger_warriors = {
+		wh3_main_chaos_region_frozen_landing     	= {"wh3_main_anc_caravan_frost_wyrm_skull", "wh3_cp1_cth_caravan_completed_frozen_landing", "wh3_main_ksl_mon_snow_leopard_0", "iron_favor"},
+		wh3_main_combi_region_frozen_landing		= {"wh3_main_anc_caravan_frost_wyrm_skull", "wh3_cp1_cth_caravan_completed_frozen_landing", "wh3_main_ksl_mon_snow_leopard_0", "iron_favor"},
+
+		wh3_main_chaos_region_shattered_stone_bay	= {"wh3_main_anc_caravan_sky_titan_relic", "wh3_cp1_cth_caravan_completed_stone_bay", "wh3_main_ogr_veh_ironblaster_0", "iron_favor"},
+
+		wh3_main_chaos_region_novchozy            	= {"wh3_main_anc_caravan_frozen_pendant", "wh3_cp1_cth_caravan_completed_novchozy", "wh3_dlc24_ksl_mon_the_things_in_the_woods", "iron_favor"},
+
+		wh3_main_chaos_region_erengrad           	= {"wh3_main_anc_caravan_gryphon_legion_lance", "wh3_cp1_cth_caravan_completed_erengrad", "wh3_dlc24_ksl_inf_akshina_ambushers", "iron_favor"},
+		wh3_main_combi_region_erengrad				= {"wh3_main_anc_caravan_gryphon_legion_lance", "wh3_cp1_cth_caravan_completed_erengrad", "wh3_dlc24_ksl_inf_akshina_ambushers", "iron_favor"},
+
+		wh3_main_chaos_region_castle_drakenhof   	= {"wh3_main_anc_caravan_von_carstein_blade", "wh3_cp1_cth_caravan_completed_castle_drakenhof", "wh2_dlc13_emp_inf_huntsmen_0", "iron_favor"},
+		wh3_main_combi_region_castle_drakenhof		= {"wh3_main_anc_caravan_von_carstein_blade", "wh3_cp1_cth_caravan_completed_castle_drakenhof", "wh2_dlc13_emp_inf_huntsmen_0", "iron_favor"},
+
+		wh3_main_chaos_region_altdorf            	= {"wh3_main_anc_caravan_luminark_lens", "wh3_cp1_cth_caravan_completed_altdorf", "wh_main_emp_cav_pistoliers_1", "iron_favor"},
+		wh3_main_combi_region_altdorf				= {"wh3_main_anc_caravan_luminark_lens", "wh3_cp1_cth_caravan_completed_altdorf", "wh_main_emp_cav_pistoliers_1", "iron_favor"},
+
+		wh3_main_chaos_region_marienburg          	= {"wh3_main_anc_caravan_warrant_of_trade", "wh3_cp1_cth_caravan_completed_marienburg", "wh_main_emp_art_great_cannon", "iron_favor"},
+		wh3_main_combi_region_marienburg			= {"wh3_main_anc_caravan_warrant_of_trade", "wh3_cp1_cth_caravan_completed_marienburg", "wh_main_emp_art_great_cannon", "iron_favor"},
+
+		wh3_main_combi_region_karaz_a_karak			= {"wh2_dlc10_dwf_anc_talisman_the_ankor_chain_caravan", "wh3_cp1_cth_caravan_completed_karaz_a_karak", "wh_main_dwf_veh_gyrocopter_0", "iron_favor"},
+
+		wh3_main_combi_region_myrmidens				= {"wh3_main_anc_caravan_grant_of_land", "wh3_cp1_cth_caravan_completed_tilea", "wh3_dlc25_dwf_inf_slayer_pirates", "iron_favor"},
+
+		wh3_main_combi_region_barak_varr			= {"wh2_dlc10_dwf_anc_armour_starmetal_plate_caravan", "wh3_cp1_cth_caravan_completed_barak_varr", "wh_main_dwf_art_organ_gun", "iron_favor"},
+
+		wh3_main_combi_region_gisoreux				= {"wh3_main_anc_caravan_mantle_of_damsel_elena", "wh3_cp1_cth_caravan_completed_gisoreux", "wh_dlc07_brt_cav_questing_knights_0", "iron_favor"},
+
+		wh3_main_combi_region_nuln					= {"wh3_dlc25_anc_weapon_experimental_explosive_caravan", "wh3_cp1_cth_caravan_completed_nuln", "wh_main_emp_art_helstorm_rocket_battery", "iron_favor"}
+	},
 }
 
 -- ancillaries that don't have an associated end region so are awarded at random when a caravan completes
@@ -434,6 +595,13 @@ caravans.special_reward_list = {
 			{"wh3_main_anc_caravan_spy_in_court", "wh3_main_cth_caravan_completed_estalia"},
 			{"wh3_main_anc_caravan_sky_titan_relic", "wh3_main_cth_caravan_completed_ind"},
 			{"wh3_main_anc_caravan_frozen_pendant", "wh3_main_cth_caravan_completed_ind"}
+		},
+		wh3_cp1_cth_tiger_warriors = {
+			{"wh3_main_anc_caravan_bejewelled_dagger", "wh3_cp1_cth_caravan_completed_ind"},
+			{"wh3_main_anc_caravan_statue_of_zharr", "wh3_cp1_cth_caravan_completed_karaz_a_karak"},
+			{"wh3_main_anc_caravan_spy_in_court", "wh3_cp1_cth_caravan_completed_estalia"},
+			{"wh3_main_anc_caravan_sky_titan_relic", "wh3_mcp1cth_caravan_completed_ind"},
+			{"wh3_main_anc_caravan_frozen_pendant", "wh3_cp1_cth_caravan_completed_ind"}
 		}
 	}
 }
@@ -480,6 +648,12 @@ caravans.journey_durations = {
 		["wh3_main_combi_region_wizard_caliphs_palace"]				= 11,
 		["wh3_main_combi_region_karond_kar"]						= 14
 	}
+}
+
+caravans.payload_iron_favor = {
+	key = "wh3_cp1_cth_iron_favour",
+	factor = "caravan_escort",
+	amount = 150
 }
 
 ------------------
@@ -691,7 +865,19 @@ function caravans:initialise()
 			local value = math.floor(-cargo/18)
 			local faction = self.culture_to_faction[context:faction():culture()];
 			cm:callback(function()self:adjust_end_node_value(region_name, value, "add", faction) end, 5);
-						
+
+			-- if the settlement has relics steal them
+			local relics_settlement_resource = region:pooled_resource_manager():resource("wh3_cp1_cth_relics_settlements")
+			if faction_key == "wh3_cp1_cth_tiger_warriors" and not relics_settlement_resource:is_null_interface() then
+				local relics_amount = relics_settlement_resource:value()
+				if relics_amount > 0 then
+					cm:entity_transfer_pooled_resource(
+						region, "wh3_cp1_cth_relics_settlements_other", -- from
+						context:caravan_master():character():faction(), "wh3_cp1_cth_bhashiva_relics_ivory_road", -- to
+						relics_amount
+					)
+				end
+			end
 		end,
 		true
 	);
@@ -739,11 +925,17 @@ function caravans:initialise()
 			return context:faction():culture() == "wh3_dlc23_chd_chaos_dwarfs"
 		end,
 		function(context)
-			local region = context:position():node():region_key()
-			local culture = context:faction():culture()
+			local position = context:position()
+			if position and not position:is_null_interface() then
+				local node = position:node()
+				if node and not node:is_null_interface() then
+					local region = context:position():node():region_key()
+					local culture = context:faction():culture()
 
-			if(culture == "wh3_dlc23_chd_chaos_dwarfs") then
-				caravans:adjust_end_node_value(region, nil, "duration", "chaos_dwarfs", true)
+					if(culture == "wh3_dlc23_chd_chaos_dwarfs") then
+						caravans:adjust_end_node_value(region, nil, "duration", "chaos_dwarfs", true)
+					end
+				end
 			end
 		end,
 		true
@@ -1254,16 +1446,18 @@ function caravans:adjust_end_node_value(region_name, value, operation, culture_n
 		local duration = self.journey_durations[cm:get_campaign_name()][region_name]
 		local percentage_mod = self.deal_duration_mods[duration]
 
-		if apply_variance then
-			-- apply a random variance between 0.9 and 1.2
-			variance = cm:random_number(120, 90) / 100
-			percentage_mod = math.floor(percentage_mod * variance)
+		if percentage_mod then
+			if apply_variance then
+				-- apply a random variance between 0.9 and 1.2
+				variance = cm:random_number(120, 90) / 100
+				percentage_mod = math.floor(percentage_mod * variance)
+			end
+
+			cargo_value_bundle:add_effect("wh3_main_effect_caravan_cargo_value_regions", "region_to_region_own", percentage_mod)
+
+			temp_end_nodes[culture_name][region_name] = percentage_mod;
+			cm:set_saved_value("ivory_road_demand", temp_end_nodes);
 		end
-
-		cargo_value_bundle:add_effect("wh3_main_effect_caravan_cargo_value_regions", "region_to_region_own", percentage_mod)
-
-		temp_end_nodes[culture_name][region_name] = percentage_mod;
-		cm:set_saved_value("ivory_road_demand", temp_end_nodes);
 	end
 	
 	if region:has_effect_bundle("wh3_main_ivory_road_end_node_value") then
@@ -1301,6 +1495,23 @@ function caravans:generate_attackers(bandit_threat, force_name)
 		end
 		
 		return random_army_manager:generate_force(force_name, 5, false);
+	end
+
+	local caravan_encounter =
+	{
+		crv_chaos_dwarfs = true,
+	}
+
+	if caravan_encounter[force_name] then
+		if cm:turn_number() < 40 then
+			return random_army_manager:generate_force(force_name, 6, false);
+		elseif cm:turn_number() >= 50 then
+			force_name = force_name.."_mid"
+			return random_army_manager:generate_force(force_name, 10, false);
+		elseif cm:turn_number() >= 70 then
+			force_name = force_name.."_late"
+			return random_army_manager:generate_force(force_name, 12, false);
+		end
 	end
 
 	if bandit_threat < 50 then
@@ -1341,12 +1552,24 @@ end
 
 function caravans:reward_item_check(faction, region_key, caravan_master)
 	local culture = faction:culture()
+	local faction_name = faction:name()
 	local reward = self.reward_list[culture][region_key]
+
+	-- faction specific override
+	if self.reward_list[faction_name] and self.reward_list[faction_name][region_key] then
+		reward = self.reward_list[faction_name][region_key]
+	end
 
 	-- get a different ancillary if the faction already owns it
 	if faction:ancillary_exists(reward[1]) then
 		if cm:random_number(5) == 1 then
-			local item_list = self.special_reward_list[cm:model():campaign_name_key()][culture]
+			local campaign_key = cm:model():campaign_name_key()
+			local item_list = self.special_reward_list[campaign_key][culture]
+
+			-- faction specific override.
+			if self.special_reward_list[campaign_key] and self.special_reward_list[campaign_key][faction_name] then
+				item_list = self.special_reward_list[campaign_key][faction_name]
+			end
 
 			if item_list then
 				reward = item_list[cm:random_number(#item_list)]
@@ -1361,7 +1584,8 @@ function caravans:reward_item_check(faction, region_key, caravan_master)
 	end
 	
 	local character = caravan_master:character()
-	local payload_builder = cm:create_payload();
+	local payload_builder = cm:create_payload()
+	local iron_favor = self.payload_iron_favor;
 	
 	payload_builder:character_ancillary_gain(character, reward[1], false)
 	
@@ -1369,6 +1593,10 @@ function caravans:reward_item_check(faction, region_key, caravan_master)
 		payload_builder:add_unit(character:military_force(), reward[3], 1 + cm:get_factions_bonus_value(faction, "chd_convoy_additional_unit_reward_scripted"), 0)
 	end
 	
+	if reward[4] then
+		payload_builder:faction_pooled_resource_transaction(iron_favor.key, iron_favor.factor, iron_favor.amount, false)
+	end
+
 	cm:trigger_custom_incident_with_targets(
 		faction:command_queue_index(),
 		reward[2],

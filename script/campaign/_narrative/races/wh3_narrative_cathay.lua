@@ -239,6 +239,11 @@ end;
 
 local function cathay_compass_narrative_loader(faction_key)
 
+	if faction_key == "wh3_cp1_cth_tiger_warriors" then
+		-- Bhashiva has no access to the compass
+		return false
+	end
+
 	-- output header
 	narrative.output_chain_header("cathay compass", faction_key);
 

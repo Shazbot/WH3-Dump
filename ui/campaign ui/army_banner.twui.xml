@@ -113,6 +113,20 @@
 							<chaos_realm_effect this="7D13B900-335B-40EF-A85C7895A0068EFC">
 								<vfx this="25D3B850-E115-4228-B3BE85D9635D131F"/>
 							</chaos_realm_effect>
+							<cp1_tiger_court_ability_list this="BFF71E70-6A41-465B-87289C68359C20AE">
+								<cp1_marked_prey this="428EF30A-B151-47D3-94DFDCE476A25CC2">
+									<dy_duration this="C81A2AD7-91BE-4392-86A5A890A353752A"/>
+								</cp1_marked_prey>
+								<cp1_teachings_of_kamau this="ADC8CBC5-20F9-48E8-AC800E8B43580B42">
+									<dy_duration this="EBD8791E-68D2-4793-9D5852F736BADF85"/>
+								</cp1_teachings_of_kamau>
+								<cp1_prophecy_of_the_white_tiger this="03FD1E4C-9B4C-4B65-8392FCBD8F24308D">
+									<dy_duration this="FA4B683E-3C85-455E-9960D8D72661AD29"/>
+								</cp1_prophecy_of_the_white_tiger>
+								<cp1_thousant_gods this="514C9208-3C1F-49E9-B0BB7EAF60D4348A">
+									<dy_duration this="45A970C4-16FC-40C0-AAF732CD36A15DE1"/>
+								</cp1_thousant_gods>
+							</cp1_tiger_court_ability_list>
 							<caravan_cargo this="CE6DFC38-6F05-4DF8-BBE6A721ECFF3F8E"/>
 							<hidden_army this="E143D98F-DF7F-4500-BF8CE4CDFE1EE57A"/>
 							<grudge_holder this="08859023-DA8A-4488-83A75564A7ABD925">
@@ -151,6 +165,15 @@
 								<background this="E87D4DC6-8B1F-415B-9AF29BB9FE7B7FF0"/>
 								<icon_dance this="B8B3B0C7-0925-4B7B-B7695BE77C6A31EC"/>
 							</dlc27_sla_eternal_dance_tracker>
+							<cp1_iron_favour_holder this="113DF6A9-1062-4683-94D5B3B562A034DC">
+								<iron_favour_effect this="47775EA2-C28D-4EA9-9982930726229326"/>
+								<label_iron_favour_points this="38251EB1-63D1-4D2D-BED98553473D4B5F">
+									<dev_button_add_iron_favour this="3F7E42AD-BB81-40E7-BB8E6E5F3EDC6422">
+										<button_txt this="688194F3-BF1D-40C6-B2A5B584D69F0CCE"/>
+										<dev_icon this="898C380A-EFD7-4E9A-9E401303F99FBD68"/>
+									</dev_button_add_iron_favour>
+								</label_iron_favour_points>
+							</cp1_iron_favour_holder>
 						</status_bar>
 						<icon_available_war_coord_target this="A8D06B81-3796-49E4-A39C26A2A2D2CDEA">
 							<event_pulse_parent this="CF444A40-2A0D-4618-991969051163B64C">
@@ -1481,6 +1504,41 @@
 			</animations>
 		</button_trespass_warning>
 		<button_txt
+			this="688194F3-BF1D-40C6-B2A5B584D69F0CCE"
+			id="button_txt"
+			part_of_template="true"
+			uniqueguid_in_template="C5314C5F-DB2A-4917-835E17930F5E2573"
+			uniqueguid="688194F3-BF1D-40C6-B2A5B584D69F0CCE"
+			dimensions="108.00,29.00"
+			dock_point="Center"
+			offset="0.00,-1.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="FAD7CFFF-C716-4CF4-AFA4379B5F28FAB8"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="&quot;+&quot; + Name"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					text="dy_resource"
+					text_label="StateText_b41c6db2"
+					is_text_localised="false"/>
+			</localised_texts>
+		</button_txt>
+		<button_txt
 			this="7EDFEF88-1FE2-46DE-8E7643B0EB0D6BF1"
 			id="button_txt"
 			part_of_template="true"
@@ -1611,7 +1669,7 @@
 		<caravan_cargo
 			this="CE6DFC38-6F05-4DF8-BBE6A721ECFF3F8E"
 			id="caravan_cargo"
-			offset="1237.00,-5.00"
+			offset="1427.00,-5.00"
 			allowverticalresize="false"
 			priority="1"
 			tooltipslocalised="true"
@@ -1830,7 +1888,7 @@
 		<chaos_realm_effect
 			this="7D13B900-335B-40EF-A85C7895A0068EFC"
 			id="chaos_realm_effect"
-			offset="977.00,-8.00"
+			offset="1237.00,-8.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			visible="false"
@@ -2501,6 +2559,477 @@
 				</default>
 			</states>
 		</contract_points_tracker>
+		<cp1_iron_favour_holder
+			this="113DF6A9-1062-4683-94D5B3B562A034DC"
+			id="cp1_iron_favour_holder"
+			offset="1915.00,-7.00"
+			allowverticalresize="false"
+			priority="1"
+			componentleveltooltip="{{tt:ui/campaign ui/tooltip_pooled_resource_breakdown}}"
+			tooltiplabel="ComponentTooltip_4f84881a"
+			soundcategory="UI_GBL_TMP_Round_Small_Button"
+			uniqueguid="113DF6A9-1062-4683-94D5B3B562A034DC"
+			currentstate="593116B4-CB17-492E-B6EF49D9566061DB"
+			defaultstate="593116B4-CB17-492E-B6EF49D9566061DB">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTrashOnCondition"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="CanUseUiFeature(&quot;TIGER_MERCENARIES&quot;) == false"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="MilitaryForceContext.PooledResourceContext(&quot;wh3_cp1_cth_iron_favour_enemy_armies&quot;)"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="Total &gt; 0">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="FactionDiplomacyChangeAny"/>
+						<property
+							name="update_when_parent_invisible"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoCampaignPooledResource"/>
+			</callbackwithcontextlist>
+			<states>
+				<positive
+					this="593116B4-CB17-492E-B6EF49D9566061DB"
+					name="positive"
+					width="80"
+					height="37"
+					interactive="true"
+					disabled="true"
+					uniqueguid="593116B4-CB17-492E-B6EF49D9566061DB">
+					<component_text
+						textxoffset="28.00,4.00"
+						textyoffset="16.00,0.00"
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						text_shader_name="drop_shadow_t0"
+						textshadervars="0.00,-1.00,2.00,0.00"/>
+				</positive>
+			</states>
+			<animations>
+				<flash_update
+					id="flash_update"
+					propagate="true">
+					<frames>
+						<frame
+							interpolationtime="0"
+							interpolationpropertymask="3"
+							targetmetrics_m_height="37"
+							targetmetrics_m_width="64"/>
+						<frame
+							interpolationtime="200"
+							interpolationpropertymask="3"
+							targetmetrics_m_colour="#FFFF00FF"
+							targetmetrics_m_height="37"
+							targetmetrics_m_width="64"
+							targetmetrics_m_offset="0.00,-4.00"/>
+						<frame
+							interpolationtime="200"
+							interpolationpropertymask="3"
+							targetmetrics_m_colour="#FFF8D7FF"
+							targetmetrics_m_height="37"
+							targetmetrics_m_width="64"
+							targetmetrics_m_offset="0.00,4.00"/>
+					</frames>
+				</flash_update>
+			</animations>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"
+				margins="4.00,4.00"/>
+		</cp1_iron_favour_holder>
+		<cp1_marked_prey
+			this="428EF30A-B151-47D3-94DFDCE476A25CC2"
+			id="cp1_marked_prey"
+			offset="12.00,-13.00"
+			uniqueguid="428EF30A-B151-47D3-94DFDCE476A25CC2"
+			aspect_ratio_locked_behaviour="Smallest"
+			currentstate="BB9F8079-0083-47F0-8244E73B10C99E1F"
+			defaultstate="BB9F8079-0083-47F0-8244E73B10C99E1F">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="MilitaryForceContext().IsEffectBundleActive(&quot;wh3_cp1_bundle_cth_marked_prey&quot;)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignTurnStart"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="MilitaryForceContext().EffectBundleList.FirstContext(Key == &quot;wh3_cp1_bundle_cth_marked_prey&quot;)">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="UI/Common UI/tooltip_effect_bundle"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="F5F87C3C-0BB5-42A9-A3AA1D5AB021D5A7"
+					uniqueguid="F5F87C3C-0BB5-42A9-A3AA1D5AB021D5A7"
+					imagepath="ui/skins/default/cp1_cth_tiger_court/wh3_cp1_tiger_court_bundle_marked_prey.png"/>
+				<component_image
+					this="46E40870-D431-4798-A1DEB76C2CE55455"
+					uniqueguid="46E40870-D431-4798-A1DEB76C2CE55455"
+					imagepath="ui/skins/default/cp1_cth_tiger_court/top_bar_tier_inactive_bg.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="BB9F8079-0083-47F0-8244E73B10C99E1F"
+					name="active"
+					width="28"
+					height="28"
+					interactive="true"
+					disabled="true"
+					pixelcollision="true"
+					uniqueguid="BB9F8079-0083-47F0-8244E73B10C99E1F">
+					<imagemetrics>
+						<image
+							this="AA1D871C-39C2-4980-A8E405E625FEB7F9"
+							uniqueguid="AA1D871C-39C2-4980-A8E405E625FEB7F9"
+							componentimage="46E40870-D431-4798-A1DEB76C2CE55455"
+							offset="-16.00,-16.00"
+							width="60"
+							height="60"
+							dockpoint="Center"
+							shadertechnique_vars="-0.40,0.00,0.00,0.00"
+							aspect_ratio_locked_behaviour="Width First"
+							shader_name="brighten_t0"/>
+						<image
+							this="D0DACD86-3D31-4095-9DD3B31A14234E25"
+							uniqueguid="D0DACD86-3D31-4095-9DD3B31A14234E25"
+							componentimage="F5F87C3C-0BB5-42A9-A3AA1D5AB021D5A7"
+							offset="-4.00,-6.00"
+							width="36"
+							height="36"
+							dockpoint="Center"
+							dock_offset="0.00,-2.00"
+							aspect_ratio_locked_behaviour="Width First"/>
+					</imagemetrics>
+				</active>
+			</states>
+		</cp1_marked_prey>
+		<cp1_prophecy_of_the_white_tiger
+			this="03FD1E4C-9B4C-4B65-8392FCBD8F24308D"
+			id="cp1_prophecy_of_the_white_tiger"
+			offset="104.00,-13.00"
+			uniqueguid="03FD1E4C-9B4C-4B65-8392FCBD8F24308D"
+			aspect_ratio_locked_behaviour="Width First"
+			currentstate="AEBCBB77-1BD8-433D-B60F33186042AFE6"
+			defaultstate="AEBCBB77-1BD8-433D-B60F33186042AFE6">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="MilitaryForceContext().IsEffectBundleActive(&quot;wh3_cp1_bundle_cth_ritual_court_bhashiva_payload&quot;)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="RitualComplete"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="MilitaryForceContext().EffectBundleList.FirstContext(Key == &quot;wh3_cp1_bundle_cth_ritual_court_bhashiva_payload&quot;)">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="UI/Common UI/tooltip_effect_bundle"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="0F52E983-22B7-429B-8084CE842CD64BD9"
+					uniqueguid="0F52E983-22B7-429B-8084CE842CD64BD9"
+					imagepath="ui/skins/default/cp1_cth_tiger_court/wh3_cp1_tiger_court_ability_white_tiger.png"/>
+				<component_image
+					this="14E41BF8-5C4B-40FC-A1B94AE0BAE2BE49"
+					uniqueguid="14E41BF8-5C4B-40FC-A1B94AE0BAE2BE49"
+					imagepath="ui/skins/default/cp1_cth_tiger_court/top_bar_tier_inactive_bg.png"/>
+				<component_image
+					this="171E158E-8CEB-4059-B42EEB7F6BE461CF"
+					uniqueguid="171E158E-8CEB-4059-B42EEB7F6BE461CF"
+					imagepath="ui/skins/default/som_ability_frame_lable_circle.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="AEBCBB77-1BD8-433D-B60F33186042AFE6"
+					name="active"
+					width="28"
+					height="28"
+					interactive="true"
+					disabled="true"
+					pixelcollision="true"
+					uniqueguid="AEBCBB77-1BD8-433D-B60F33186042AFE6">
+					<imagemetrics>
+						<image
+							this="785C0BFA-01D9-4902-B9443B361FFA50EC"
+							uniqueguid="785C0BFA-01D9-4902-B9443B361FFA50EC"
+							componentimage="14E41BF8-5C4B-40FC-A1B94AE0BAE2BE49"
+							offset="-16.00,-16.00"
+							width="60"
+							height="60"
+							dockpoint="Center"
+							shadertechnique_vars="-0.40,0.00,0.00,0.00"
+							aspect_ratio_locked_behaviour="Width First"
+							shader_name="brighten_t0"/>
+						<image
+							this="0D2FA0F8-7DDB-40AB-B5522983D0EE377A"
+							uniqueguid="0D2FA0F8-7DDB-40AB-B5522983D0EE377A"
+							componentimage="171E158E-8CEB-4059-B42EEB7F6BE461CF"
+							offset="-2.00,-2.00"
+							width="33"
+							height="33"
+							colour="#00000050"
+							dockpoint="Center"/>
+						<image
+							this="2109C742-B7A3-4EAB-830FCBB050870823"
+							uniqueguid="2109C742-B7A3-4EAB-830FCBB050870823"
+							componentimage="0F52E983-22B7-429B-8084CE842CD64BD9"
+							offset="-7.00,-11.00"
+							width="42"
+							height="42"
+							colour="#FFDCABFF"
+							dockpoint="Center"
+							dock_offset="0.00,-4.00"
+							aspect_ratio_locked_behaviour="Width First"/>
+					</imagemetrics>
+				</active>
+			</states>
+		</cp1_prophecy_of_the_white_tiger>
+		<cp1_teachings_of_kamau
+			this="ADC8CBC5-20F9-48E8-AC800E8B43580B42"
+			id="cp1_teachings_of_kamau"
+			offset="58.00,-13.00"
+			uniqueguid="ADC8CBC5-20F9-48E8-AC800E8B43580B42"
+			aspect_ratio_locked_behaviour="Width First"
+			currentstate="24C0EC4B-4284-4624-B061C8A5431008C7"
+			defaultstate="24C0EC4B-4284-4624-B061C8A5431008C7">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="MilitaryForceContext().IsEffectBundleActive(&quot;wh3_cp1_bundle_cth_ritual_court_military_payload&quot;)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="RitualComplete"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="MilitaryForceContext().EffectBundleList.FirstContext(Key == &quot;wh3_cp1_bundle_cth_ritual_court_military_payload&quot;)">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="UI/Common UI/tooltip_effect_bundle"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="2D3B9186-21C8-4004-8C1EF551403E4FC9"
+					uniqueguid="2D3B9186-21C8-4004-8C1EF551403E4FC9"
+					imagepath="ui/skins/default/cp1_cth_tiger_court/wh3_cp1_tiger_court_ability_kamau.png"/>
+				<component_image
+					this="B0CF8682-EDAD-48BF-9BF0EF1B0E55D445"
+					uniqueguid="B0CF8682-EDAD-48BF-9BF0EF1B0E55D445"
+					imagepath="ui/skins/default/cp1_cth_tiger_court/top_bar_tier_inactive_bg.png"/>
+				<component_image
+					this="C7DF0DEC-4BC3-4215-A186EB6B4DC9E07E"
+					uniqueguid="C7DF0DEC-4BC3-4215-A186EB6B4DC9E07E"
+					imagepath="ui/skins/default/som_ability_frame_lable_circle.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="24C0EC4B-4284-4624-B061C8A5431008C7"
+					name="active"
+					width="28"
+					height="28"
+					interactive="true"
+					disabled="true"
+					pixelcollision="true"
+					uniqueguid="24C0EC4B-4284-4624-B061C8A5431008C7">
+					<imagemetrics>
+						<image
+							this="BDB897EC-CF63-4831-A58365830634BC3A"
+							uniqueguid="BDB897EC-CF63-4831-A58365830634BC3A"
+							componentimage="B0CF8682-EDAD-48BF-9BF0EF1B0E55D445"
+							offset="-16.00,-16.00"
+							width="60"
+							height="60"
+							dockpoint="Center"
+							shadertechnique_vars="-0.40,0.00,0.00,0.00"
+							aspect_ratio_locked_behaviour="Width First"
+							shader_name="brighten_t0"/>
+						<image
+							this="4F2DF9B0-C431-47A3-827F8F7DA8FB9261"
+							uniqueguid="4F2DF9B0-C431-47A3-827F8F7DA8FB9261"
+							componentimage="C7DF0DEC-4BC3-4215-A186EB6B4DC9E07E"
+							offset="-3.00,-3.00"
+							width="34"
+							height="34"
+							colour="#00000050"
+							dockpoint="Center"/>
+						<image
+							this="C9C65F96-1D2A-4445-9B2AE54806A118B6"
+							uniqueguid="C9C65F96-1D2A-4445-9B2AE54806A118B6"
+							componentimage="2D3B9186-21C8-4004-8C1EF551403E4FC9"
+							offset="-10.00,-17.00"
+							width="48"
+							height="48"
+							colour="#FFDCABFF"
+							dockpoint="Center"
+							dock_offset="0.00,-7.00"
+							aspect_ratio_locked_behaviour="Width First"/>
+					</imagemetrics>
+				</active>
+			</states>
+		</cp1_teachings_of_kamau>
+		<cp1_thousant_gods
+			this="514C9208-3C1F-49E9-B0BB7EAF60D4348A"
+			id="cp1_thousant_gods"
+			offset="150.00,-13.00"
+			uniqueguid="514C9208-3C1F-49E9-B0BB7EAF60D4348A"
+			aspect_ratio_locked_behaviour="Width First"
+			currentstate="87F016EB-29C0-4613-92E213F00EBFF4F9"
+			defaultstate="87F016EB-29C0-4613-92E213F00EBFF4F9">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="MilitaryForceContext().IsEffectBundleActive(&quot;wh3_cp1_bundle_cth_ritual_court_spiritual_payload&quot;)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignShroudUpdated"/>
+						<property
+							name="event1"
+							value="RitualComplete"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="MilitaryForceContext().EffectBundleList.FirstContext(Key == &quot;wh3_cp1_bundle_cth_ritual_court_spiritual_payload&quot;)">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="UI/Common UI/tooltip_effect_bundle"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="5E50AD6D-4F66-4CF3-9A760DE4ADEC5E08"
+					uniqueguid="5E50AD6D-4F66-4CF3-9A760DE4ADEC5E08"
+					imagepath="ui/skins/default/cp1_cth_tiger_court/wh3_cp1_tiger_court_ability_thousand_gods.png"/>
+				<component_image
+					this="E08121D7-A53D-4ABE-A9F0D59BE987938E"
+					uniqueguid="E08121D7-A53D-4ABE-A9F0D59BE987938E"
+					imagepath="ui/skins/default/cp1_cth_tiger_court/top_bar_tier_inactive_bg.png"/>
+				<component_image
+					this="39232F64-983C-43F8-A869FE05208880EB"
+					uniqueguid="39232F64-983C-43F8-A869FE05208880EB"
+					imagepath="ui/skins/default/som_ability_frame_lable_circle.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="87F016EB-29C0-4613-92E213F00EBFF4F9"
+					name="active"
+					width="28"
+					height="28"
+					interactive="true"
+					disabled="true"
+					pixelcollision="true"
+					uniqueguid="87F016EB-29C0-4613-92E213F00EBFF4F9">
+					<imagemetrics>
+						<image
+							this="9FD734B6-AD6C-47D5-819914D05DD5CE9F"
+							uniqueguid="9FD734B6-AD6C-47D5-819914D05DD5CE9F"
+							componentimage="E08121D7-A53D-4ABE-A9F0D59BE987938E"
+							offset="-16.00,-16.00"
+							width="60"
+							height="60"
+							dockpoint="Center"
+							shadertechnique_vars="-0.40,0.00,0.00,0.00"
+							aspect_ratio_locked_behaviour="Width First"
+							shader_name="brighten_t0"/>
+						<image
+							this="D6347FD8-BBAF-430F-9867F0B4852CF034"
+							uniqueguid="D6347FD8-BBAF-430F-9867F0B4852CF034"
+							componentimage="39232F64-983C-43F8-A869FE05208880EB"
+							offset="-3.00,-3.00"
+							width="34"
+							height="34"
+							colour="#00000050"
+							dockpoint="Center"/>
+						<image
+							this="28F778D7-8C18-46E2-A1CC712BF7CD2AB6"
+							uniqueguid="28F778D7-8C18-46E2-A1CC712BF7CD2AB6"
+							componentimage="5E50AD6D-4F66-4CF3-9A760DE4ADEC5E08"
+							offset="-5.00,-8.00"
+							width="38"
+							height="38"
+							colour="#FFDCABFF"
+							dockpoint="Center"
+							dock_offset="0.00,-3.00"
+							aspect_ratio_locked_behaviour="Width First"/>
+					</imagemetrics>
+				</active>
+			</states>
+		</cp1_thousant_gods>
+		<cp1_tiger_court_ability_list
+			this="BFF71E70-6A41-465B-87289C68359C20AE"
+			id="cp1_tiger_court_ability_list"
+			offset="1237.00,-3.00"
+			allowverticalresize="false"
+			tooltipslocalised="true"
+			uniqueguid="BFF71E70-6A41-465B-87289C68359C20AE"
+			currentstate="1C14168F-7BA9-46CB-A2C92EAEC6EA5376"
+			defaultstate="1C14168F-7BA9-46CB-A2C92EAEC6EA5376">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="true"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="1C14168F-7BA9-46CB-A2C92EAEC6EA5376"
+					name="default"
+					width="190"
+					height="30"
+					uniqueguid="1C14168F-7BA9-46CB-A2C92EAEC6EA5376"/>
+			</states>
+			<LayoutEngine
+				type="HorizontalList"
+				spacing="18.00,0.00"
+				sizetocontent="true"
+				secondary_margins="0.00,15.00"
+				margins="12.00,12.00"
+				vertical_alignment="Bottom"/>
+		</cp1_tiger_court_ability_list>
 		<dev_button_add_confidence
 			this="C2E1459A-E250-4487-B77FDF547507075A"
 			id="dev_button_add_confidence"
@@ -2636,6 +3165,73 @@
 				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
 			</override_images>
 		</dev_button_add_grudge>
+		<dev_button_add_iron_favour
+			this="3F7E42AD-BB81-40E7-BB8E6E5F3EDC6422"
+			id="dev_button_add_iron_favour"
+			template_id="dev_text_button"
+			is_dev_only="true"
+			part_of_template="true"
+			uniqueguid_in_template="715902FD-2442-4210-8831AAF520A41055"
+			uniqueguid="3F7E42AD-BB81-40E7-BB8E6E5F3EDC6422"
+			dimensions="108.00,29.00"
+			is_visible="false"
+			offset="-14.00,33.00"
+			priority="1"
+			sound_category="UI_GBL_TMP_Square_Large_Text_Button_Toggle">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="755F0D69-E73E-44EB-9DE198E8766F409F"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="E0566FC3-42AF-49B2-B9234318BCBC1650"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="D0654F8D-F676-4D12-937AE64761DD55CA"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="864C994E-96DF-4909-B18B6BDA52D8AEE6"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="2628C57F-2A13-494D-BC53EAFCCD394037"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/button_rectangular_backplate.png"
+					uniqueguid="C58DB27B-ED82-4151-B7FBC791FD780B29"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/button_square_hover_highlight.png"
+					uniqueguid="95DCD151-66E1-47EC-8E0B45BE9DE88C2D"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="DevAddAmount(100)"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/button_rectangular_backplate.png"/>
+				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
+			</override_images>
+		</dev_button_add_iron_favour>
 		<dev_button_add_spoils
 			this="77891569-7E52-4F25-BE8C1F203B5F534E"
 			id="dev_button_add_spoils"
@@ -2857,6 +3453,36 @@
 				</hover>
 			</states>
 		</dev_faction_icon_for_minimal_mode>
+		<dev_icon
+			this="898C380A-EFD7-4E9A-9E401303F99FBD68"
+			id="dev_icon"
+			part_of_template="true"
+			uniqueguid_in_template="0F4F9F06-4613-496B-A0F05A2B8B88B70D"
+			uniqueguid="898C380A-EFD7-4E9A-9E401303F99FBD68"
+			dimensions="24.00,24.00"
+			dock_point="Center Left"
+			offset="2.00,0.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="4843A03C-163B-4BDF-A9A07AA116968CE8"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/dev_icon.png"
+					uniqueguid="C5DAB36C-3173-4CFE-82ACB0DE590D5444"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/dev_icon.png"/>
+			</override_images>
+		</dev_icon>
 		<dev_icon
 			this="D60EBEC6-DE90-4172-BE2BB6C420E0CD43"
 			id="dev_icon"
@@ -3309,7 +3935,7 @@
 		<dlc27_nor_seafang_army_marker
 			this="4946169D-8C99-4887-AF218E5ACA4F5021"
 			id="dlc27_nor_seafang_army_marker"
-			offset="1439.00,-5.00"
+			offset="1629.00,-5.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			priority="1"
@@ -3422,7 +4048,7 @@
 		<dlc27_nor_spoils_holder
 			this="F8059DEA-FA49-4D0C-AD7C47B7A482BFD4"
 			id="dlc27_nor_spoils_holder"
-			offset="1553.00,-7.00"
+			offset="1743.00,-7.00"
 			allowverticalresize="false"
 			priority="1"
 			componentleveltooltip="{{tt:ui/campaign ui/tooltip_pooled_resource_breakdown}}"
@@ -3514,7 +4140,7 @@
 			this="492059A9-7C4F-4DCE-9CFFC52E362E738C"
 			id="dlc27_sla_eternal_dance_tracker"
 			uniqueguid_in_template="37940B8A-DD24-435C-85A274A578A90ED2"
-			offset="1673.00,-10.00"
+			offset="1863.00,-10.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			dock_offset="0.00,-2.00"
@@ -3572,7 +4198,7 @@
 			this="B40A4C37-BE59-49F5-9D9A8B300C625F5F"
 			id="dlc27_sla_tempo_tracker"
 			uniqueguid_in_template="37940B8A-DD24-435C-85A274A578A90ED2"
-			offset="1633.00,-10.00"
+			offset="1823.00,-10.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			dock_offset="0.00,-2.00"
@@ -3695,6 +4321,318 @@
 				</default>
 			</states>
 		</dy_champions_essence>
+		<dy_duration
+			this="45A970C4-16FC-40C0-AAF732CD36A15DE1"
+			id="dy_duration"
+			offset="-10.00,25.00"
+			allowverticalresize="false"
+			docking="Bottom Center External"
+			dock_offset="2.00,-3.00"
+			component_anchor_point="0.50,-0.00"
+			uniqueguid="45A970C4-16FC-40C0-AAF732CD36A15DE1"
+			currentstate="E6458612-340F-45BF-BFB7D37F574B8BDF"
+			defaultstate="E6458612-340F-45BF-BFB7D37F574B8BDF">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="MilitaryForceContext.EffectBundleList.FirstContext(Key.StartsWith(&quot;wh3_cp1_bundle_cth_ritual_court_spiritual_payload&quot;)).TurnsRemaining"/>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="MilitaryForceContext().EffectBundleList.FirstContext(Key == &quot;wh3_cp1_bundle_cth_ritual_court_spiritual_payload&quot;)">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="UI/Common UI/tooltip_effect_bundle"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="disable_override0"
+					value="ContextTextLabel"/>
+				<property
+					name="dynamic_child_parent"
+					value="button_perform"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="CA974EE3-8ADB-4CE6-A266D9ECD438093F"
+					uniqueguid="CA974EE3-8ADB-4CE6-A266D9ECD438093F"
+					imagepath="ui/skins/default/turns_banner.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="E6458612-340F-45BF-BFB7D37F574B8BDF"
+					name="default"
+					width="53"
+					height="20"
+					interactive="true"
+					disabled="true"
+					uniqueguid="E6458612-340F-45BF-BFB7D37F574B8BDF">
+					<imagemetrics>
+						<image
+							this="3812D0FC-DA13-4476-B5D0CFAFEF875460"
+							uniqueguid="3812D0FC-DA13-4476-B5D0CFAFEF875460"
+							componentimage="CA974EE3-8ADB-4CE6-A266D9ECD438093F"
+							offset="0.00,-8.00"
+							width="58"
+							height="34"
+							tile="true"
+							dockpoint="Center"
+							dock_offset="2.00,-1.00"
+							canresizeheight="false"
+							margin="0.00,22.00,0.00,22.00"/>
+					</imagemetrics>
+					<component_text
+						text="8"
+						textvalign="Center"
+						texthalign="Center"
+						textxoffset="22.00,22.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_42d9632f"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</default>
+			</states>
+		</dy_duration>
+		<dy_duration
+			this="C81A2AD7-91BE-4392-86A5A890A353752A"
+			id="dy_duration"
+			offset="-10.00,25.00"
+			allowverticalresize="false"
+			docking="Bottom Center External"
+			dock_offset="2.00,-3.00"
+			component_anchor_point="0.50,-0.00"
+			uniqueguid="C81A2AD7-91BE-4392-86A5A890A353752A"
+			currentstate="A403FEC3-8DB2-489A-BA1B76A570D89B24"
+			defaultstate="A403FEC3-8DB2-489A-BA1B76A570D89B24">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="MilitaryForceContext.EffectBundleList.FirstContext(Key.StartsWith(&quot;wh3_cp1_bundle_cth_marked_prey&quot;)).TurnsRemaining"/>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="MilitaryForceContext().EffectBundleList.FirstContext(Key == &quot;wh3_cp1_bundle_cth_marked_prey&quot;)">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="UI/Common UI/tooltip_effect_bundle"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="disable_override0"
+					value="ContextTextLabel"/>
+				<property
+					name="dynamic_child_parent"
+					value="button_perform"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="FD799154-A39A-4EF7-8A7338548A87138A"
+					uniqueguid="FD799154-A39A-4EF7-8A7338548A87138A"
+					imagepath="ui/skins/default/turns_banner.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="A403FEC3-8DB2-489A-BA1B76A570D89B24"
+					name="default"
+					width="53"
+					height="20"
+					interactive="true"
+					disabled="true"
+					uniqueguid="A403FEC3-8DB2-489A-BA1B76A570D89B24">
+					<imagemetrics>
+						<image
+							this="BB286D75-6ED4-4FD5-A799C984B040AD4C"
+							uniqueguid="BB286D75-6ED4-4FD5-A799C984B040AD4C"
+							componentimage="FD799154-A39A-4EF7-8A7338548A87138A"
+							offset="0.00,-8.00"
+							width="58"
+							height="34"
+							tile="true"
+							dockpoint="Center"
+							dock_offset="2.00,-1.00"
+							canresizeheight="false"
+							margin="0.00,22.00,0.00,22.00"/>
+					</imagemetrics>
+					<component_text
+						text="8"
+						textvalign="Center"
+						texthalign="Center"
+						textxoffset="22.00,22.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_cc969932"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</default>
+			</states>
+		</dy_duration>
+		<dy_duration
+			this="EBD8791E-68D2-4793-9D5852F736BADF85"
+			id="dy_duration"
+			offset="-10.00,25.00"
+			allowverticalresize="false"
+			docking="Bottom Center External"
+			dock_offset="2.00,-3.00"
+			component_anchor_point="0.50,-0.00"
+			uniqueguid="EBD8791E-68D2-4793-9D5852F736BADF85"
+			currentstate="0F6BCE6D-3787-489F-89A48FB6F8DE5C51"
+			defaultstate="0F6BCE6D-3787-489F-89A48FB6F8DE5C51">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="MilitaryForceContext.EffectBundleList.FirstContext(Key.StartsWith(&quot;wh3_cp1_bundle_cth_ritual_court_military_payload&quot;)).TurnsRemaining"/>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="MilitaryForceContext().EffectBundleList.FirstContext(Key == &quot;wh3_cp1_bundle_cth_ritual_court_military_payload&quot;)">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="UI/Common UI/tooltip_effect_bundle"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="disable_override0"
+					value="ContextTextLabel"/>
+				<property
+					name="dynamic_child_parent"
+					value="button_perform"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="272226AA-7E15-484D-992F0F5E4EF2D9BA"
+					uniqueguid="272226AA-7E15-484D-992F0F5E4EF2D9BA"
+					imagepath="ui/skins/default/turns_banner.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="0F6BCE6D-3787-489F-89A48FB6F8DE5C51"
+					name="default"
+					width="53"
+					height="20"
+					interactive="true"
+					disabled="true"
+					uniqueguid="0F6BCE6D-3787-489F-89A48FB6F8DE5C51">
+					<imagemetrics>
+						<image
+							this="126C8C6E-332B-4D98-A9E8A00DD59BB998"
+							uniqueguid="126C8C6E-332B-4D98-A9E8A00DD59BB998"
+							componentimage="272226AA-7E15-484D-992F0F5E4EF2D9BA"
+							offset="0.00,-8.00"
+							width="58"
+							height="34"
+							tile="true"
+							dockpoint="Center"
+							dock_offset="2.00,-1.00"
+							canresizeheight="false"
+							margin="0.00,22.00,0.00,22.00"/>
+					</imagemetrics>
+					<component_text
+						text="8"
+						textvalign="Center"
+						texthalign="Center"
+						textxoffset="22.00,22.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_72991f6"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</default>
+			</states>
+		</dy_duration>
+		<dy_duration
+			this="FA4B683E-3C85-455E-9960D8D72661AD29"
+			id="dy_duration"
+			offset="-10.00,25.00"
+			allowverticalresize="false"
+			docking="Bottom Center External"
+			dock_offset="2.00,-3.00"
+			component_anchor_point="0.50,-0.00"
+			uniqueguid="FA4B683E-3C85-455E-9960D8D72661AD29"
+			currentstate="AAB9F87F-0BD6-412D-A17313388A64B4F4"
+			defaultstate="AAB9F87F-0BD6-412D-A17313388A64B4F4">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="MilitaryForceContext.EffectBundleList.FirstContext(Key.StartsWith(&quot;wh3_cp1_bundle_cth_ritual_court_bhashiva_payload&quot;)).TurnsRemaining"/>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="MilitaryForceContext().EffectBundleList.FirstContext(Key == &quot;wh3_cp1_bundle_cth_ritual_court_bhashiva_payload&quot;)">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="UI/Common UI/tooltip_effect_bundle"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="disable_override0"
+					value="ContextTextLabel"/>
+				<property
+					name="dynamic_child_parent"
+					value="button_perform"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="7291F9A7-AE4B-480B-BC9E8D4AF0EA81B9"
+					uniqueguid="7291F9A7-AE4B-480B-BC9E8D4AF0EA81B9"
+					imagepath="ui/skins/default/turns_banner.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="AAB9F87F-0BD6-412D-A17313388A64B4F4"
+					name="default"
+					width="53"
+					height="20"
+					interactive="true"
+					disabled="true"
+					uniqueguid="AAB9F87F-0BD6-412D-A17313388A64B4F4">
+					<imagemetrics>
+						<image
+							this="B18AA6BA-361A-4B58-AB28FD4F800376BF"
+							uniqueguid="B18AA6BA-361A-4B58-AB28FD4F800376BF"
+							componentimage="7291F9A7-AE4B-480B-BC9E8D4AF0EA81B9"
+							offset="0.00,-8.00"
+							width="58"
+							height="34"
+							tile="true"
+							dockpoint="Center"
+							dock_offset="2.00,-1.00"
+							canresizeheight="false"
+							margin="0.00,22.00,0.00,22.00"/>
+					</imagemetrics>
+					<component_text
+						text="8"
+						textvalign="Center"
+						texthalign="Center"
+						textxoffset="22.00,22.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_98a82c24"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</default>
+			</states>
+		</dy_duration>
 		<dy_meat
 			this="DBE725FA-B7AB-4DA6-B64A9C58D2A2CC89"
 			id="dy_meat"
@@ -5513,7 +6451,7 @@
 		<grudge_holder
 			this="08859023-DA8A-4488-83A75564A7ABD925"
 			id="grudge_holder"
-			offset="1359.00,-7.00"
+			offset="1549.00,-7.00"
 			allowverticalresize="false"
 			priority="1"
 			componentleveltooltip="{{tt:ui/campaign ui/tooltip_pooled_resource_breakdown}}"
@@ -5604,7 +6542,7 @@
 		<hidden_army
 			this="E143D98F-DF7F-4500-BF8CE4CDFE1EE57A"
 			id="hidden_army"
-			offset="1329.00,-3.00"
+			offset="1519.00,-3.00"
 			tooltipslocalised="true"
 			componentleveltooltip="This army is hidden from enemies"
 			tooltiplabel="ComponentTooltip_aa812eb"
@@ -5631,7 +6569,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignCharacter"
-					context_function_id="FactionContext.FactionRecordContext.Key == &quot;wh3_dlc24_tze_the_deceivers&quot;"/>
+					context_function_id="FactionContext.FactionRecordContext.Key == &quot;wh3_dlc24_tze_the_deceivers&quot; || (FactionContext.FactionRecordContext.Key == &quot;wh3_cp1_cth_tiger_warriors&quot; &amp;&amp; MilitaryForceContext.IsHiddenToEnemies)"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -5694,7 +6632,7 @@
 			allowverticalresize="false"
 			tooltipslocalised="true"
 			uniqueguid="B766CA93-320A-4215-9A34045E538EEC59"
-			currentstate="4E947883-4AD4-4E21-988B669FFBD898F9"
+			currentstate="E543D04B-C5ED-4390-A67361D9C4AA3591"
 			defaultstate="E543D04B-C5ED-4390-A67361D9C4AA3591"
 			marked_for_deletion="true">
 			<componentimages>
@@ -7410,7 +8348,7 @@
 					name="NewState"
 					width="80"
 					height="28"
-					tooltip="Turns remaining until this army's service expires."
+					tooltip="Turns remaining until this army's service expires"
 					tooltiplabel="wh3_dlc27_expiring_armies_counter_tooltip_tx"
 					interactive="true"
 					disabled="true"
@@ -7475,6 +8413,75 @@
 				</default>
 			</states>
 		</immune_icon>
+		<iron_favour_effect
+			this="47775EA2-C28D-4EA9-9982930726229326"
+			id="iron_favour_effect"
+			offset="4.00,0.00"
+			allowverticalresize="false"
+			visible="false"
+			priority="1"
+			componentleveltooltip="{{tt:ui/campaign ui/tooltip_pooled_resource_breakdown}}"
+			tooltiplabel="ComponentTooltip_efa2e19d"
+			uniqueguid="47775EA2-C28D-4EA9-9982930726229326"
+			currentstate="19A88092-9CC4-4EA1-9F0366D3DD5BC02B"
+			defaultstate="19A88092-9CC4-4EA1-9F0366D3DD5BC02B">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextCustomTooltipStore"
+					context_object_id="CcoCampaignPooledResource"/>
+			</callbackwithcontextlist>
+			<states>
+				<positive
+					this="19A88092-9CC4-4EA1-9F0366D3DD5BC02B"
+					name="positive"
+					width="1"
+					height="37"
+					interactive="true"
+					uniqueguid="19A88092-9CC4-4EA1-9F0366D3DD5BC02B">
+					<component_text
+						textxoffset="28.00,4.00"
+						textyoffset="16.00,0.00"
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						text_shader_name="drop_shadow_t0"
+						textshadervars="0.00,-1.00,2.00,0.00"/>
+				</positive>
+			</states>
+			<animations>
+				<flash_update
+					id="flash_update"
+					propagate="true">
+					<frames>
+						<frame
+							interpolationtime="0"
+							interpolationpropertymask="3"
+							targetmetrics_m_height="37"
+							targetmetrics_m_width="64"/>
+						<frame
+							interpolationtime="200"
+							interpolationpropertymask="3"
+							targetmetrics_m_colour="#FFFF00FF"
+							targetmetrics_m_height="37"
+							targetmetrics_m_width="64"
+							targetmetrics_m_offset="0.00,-4.00"/>
+						<frame
+							interpolationtime="200"
+							interpolationpropertymask="3"
+							targetmetrics_m_colour="#FFF8D7FF"
+							targetmetrics_m_height="37"
+							targetmetrics_m_width="64"
+							targetmetrics_m_offset="0.00,4.00"/>
+					</frames>
+				</flash_update>
+			</animations>
+			<LayoutEngine
+				type="HorizontalList"
+				sizetocontent="true"
+				secondary_margins="10.00,0.00"/>
+		</iron_favour_effect>
 		<khr_cloak_skulls_teleport_essence_holder
 			this="6A12A927-738F-4848-A183C1D475AAB87A"
 			id="khr_cloak_skulls_teleport_essence_holder"
@@ -7655,10 +8662,101 @@
 				</newstate>
 			</states>
 		</label_grudge_points>
+		<label_iron_favour_points
+			this="38251EB1-63D1-4D2D-BED98553473D4B5F"
+			id="label_iron_favour_points"
+			offset="4.00,4.00"
+			allowverticalresize="false"
+			dock_offset="0.00,4.00"
+			priority="1"
+			tooltipslocalised="true"
+			uniqueguid="38251EB1-63D1-4D2D-BED98553473D4B5F"
+			currentstate="2BA418AB-4F44-4D52-877E2425B7ECBAEE"
+			defaultstate="2BA418AB-4F44-4D52-877E2425B7ECBAEE">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="Total">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignTurnStart"/>
+						<property
+							name="event1"
+							value="PooledResourceTransaction"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoCampaignPooledResource"
+					context_function_id="IconPath">
+					<child_m_user_properties>
+						<property
+							name="image_index"
+							value="1"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="9568144F-4C56-4DBA-957A55DA255BE70B"
+					uniqueguid="9568144F-4C56-4DBA-957A55DA255BE70B"
+					imagepath="ui/skins/default/icon_banner_bg.png"/>
+				<component_image
+					this="298E0984-C118-44CE-80A585D5B42B2385"
+					uniqueguid="298E0984-C118-44CE-80A585D5B42B2385"
+					imagepath="ui/skins/default/icon_grudge_points.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="2BA418AB-4F44-4D52-877E2425B7ECBAEE"
+					name="NewState"
+					width="72"
+					height="26"
+					disabled="true"
+					uniqueguid="2BA418AB-4F44-4D52-877E2425B7ECBAEE">
+					<imagemetrics>
+						<image
+							this="676A9B2C-823A-4FD4-B6717042794FA187"
+							uniqueguid="676A9B2C-823A-4FD4-B6717042794FA187"
+							componentimage="9568144F-4C56-4DBA-957A55DA255BE70B"
+							offset="6.00,-1.00"
+							width="62"
+							height="29"
+							tile="true"
+							dockpoint="Center Left"
+							dock_offset="6.00,0.00"
+							canresizeheight="false"
+							margin="0.00,40.00,0.00,10.00"/>
+						<image
+							this="A99EE210-4137-4CAA-8A74F5F36A79914F"
+							uniqueguid="A99EE210-4137-4CAA-8A74F5F36A79914F"
+							componentimage="298E0984-C118-44CE-80A585D5B42B2385"
+							width="26"
+							height="26"
+							dockpoint="Center Left"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<component_text
+						text="99%"
+						textxoffset="26.00,12.00"
+						textyoffset="6.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_a1ad5c08"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						textshadervars="2.00,2.00,1.00,0.00"/>
+				</newstate>
+			</states>
+		</label_iron_favour_points>
 		<limited_lifespan_counter
 			this="3F3FB9C9-C0E7-4221-A541CD601E2A0323"
 			id="limited_lifespan_counter"
-			offset="1473.00,0.00"
+			offset="1663.00,0.00"
 			allowverticalresize="false"
 			uniqueguid="3F3FB9C9-C0E7-4221-A541CD601E2A0323"
 			currentstate="6D3E7C17-3D92-4492-A02A3FB17479075A"
@@ -9369,7 +10467,7 @@
 		<status_bar
 			this="04E12E2A-5516-4E84-BF6EC2D62615D6D6"
 			id="status_bar"
-			offset="-805.00,104.00"
+			offset="-940.00,104.00"
 			allowverticalresize="false"
 			tooltipslocalised="true"
 			uniqueguid="04E12E2A-5516-4E84-BF6EC2D62615D6D6"
@@ -9385,7 +10483,7 @@
 				<newstate
 					this="A73D7A8E-CC3A-4922-8CEA92A0658E1EA4"
 					name="NewState"
-					width="1725"
+					width="1995"
 					height="24"
 					uniqueguid="A73D7A8E-CC3A-4922-8CEA92A0658E1EA4"/>
 			</states>

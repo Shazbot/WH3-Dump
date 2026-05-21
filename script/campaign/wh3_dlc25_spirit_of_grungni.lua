@@ -90,7 +90,7 @@ function spirit_of_grungni:setup_spirit_of_grungni_change()
 		end
 	else
 		local character_list = faction_interface:character_list()
-		for i = 1, character_list:num_items() do
+		for i = 0, character_list:num_items() - 1 do
 			local character_item = character_list:item_at(i)
 			if character_item:forename("names_name_1197662411") then
 				if character_item:has_military_force() then

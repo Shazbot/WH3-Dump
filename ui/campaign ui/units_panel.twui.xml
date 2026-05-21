@@ -243,6 +243,7 @@
 							<footer this="5FB3FD35-E4F2-47C9-86E748AAB09F160B"/>
 						</recruitment_options>
 					</recruitment_docker>
+					<shang_yang_banners this="8B20FB55-3B48-4594-9F28989CE117CCFD"/>
 					<scrap_upgrades this="0635F89C-149A-420C-8959901959875350"/>
 					<meat_transfer_docker this="3308AA80-C921-4582-B5D11D7E5E14D3F8"/>
 					<graw_maw_docker this="61BDEB30-3D5F-4161-B32B8C0D7CA52D62"/>
@@ -2419,7 +2420,7 @@
 				<callback_with_context callback_id="Button"/>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
-					context_function_id="IsPanelOpen(&quot;cathay_caravans&quot;) == false &amp;&amp; IsPanelOpen(&quot;military_convoys&quot;) == false">
+					context_function_id="IsPanelOpen(&quot;cathay_caravans&quot;) == false &amp;&amp; IsPanelOpen(&quot;military_convoys&quot;) == false &amp;&amp; IsPanelOpen(&quot;cp1_cth_bhashiva_caravans&quot;) == false">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -2433,6 +2434,12 @@
 						<property
 							name="event3"
 							value="PanelOpened_military_convoys"/>
+						<property
+							name="event4"
+							value="PanelClosed_cp1_cth_bhashiva_caravans"/>
+						<property
+							name="event5"
+							value="PanelOpened_cp1_cth_bhashiva_caravans"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbacks_with_context>
@@ -2513,7 +2520,7 @@
 				<callback_with_context callback_id="Button"/>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
-					context_function_id="IsPanelOpen(&quot;cathay_caravans&quot;) == false &amp;&amp; IsPanelOpen(&quot;military_convoys&quot;) == false">
+					context_function_id="IsPanelOpen(&quot;cathay_caravans&quot;) == false &amp;&amp; IsPanelOpen(&quot;military_convoys&quot;) == false &amp;&amp; IsPanelOpen(&quot;cp1_cth_bhashiva_caravans&quot;) == false">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -2527,6 +2534,12 @@
 						<property
 							name="event3"
 							value="PanelOpened_military_convoys"/>
+						<property
+							name="event4"
+							value="PanelClosed_cp1_cth_bhashiva_caravans"/>
+						<property
+							name="event5"
+							value="PanelOpened_cp1_cth_bhashiva_caravans"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbacks_with_context>
@@ -15850,6 +15863,9 @@
 							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTrashOnCondition"
+					context_function_id="CanUseUiFeature(&quot;TIGER_MERCENARIES&quot;)"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -15867,6 +15883,131 @@
 				</newstate>
 			</states>
 		</scrap_upgrades>
+		<shang_yang_banners
+			this="8B20FB55-3B48-4594-9F28989CE117CCFD"
+			id="shang_yang_banners"
+			offset="-305.00,-437.00"
+			allowhorizontalresize="false"
+			visible="false"
+			docking="Top Center External"
+			dock_offset="0.00,-14.00"
+			component_anchor_point="0.50,1.00"
+			tooltipslocalised="true"
+			uniqueguid="8B20FB55-3B48-4594-9F28989CE117CCFD"
+			updatewhennotvisible="true"
+			currentstate="F3EB59B4-6301-4A25-9DD23F9968E66098"
+			defaultstate="F3EB59B4-6301-4A25-9DD23F9968E66098"
+			comment="please do not make this invisible">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextCommandGiverOnCreate"
+					context_function_id="self.SetVisible(false)"/>
+				<callback_with_context callback_id="ComponentCreator">
+					<child_m_user_properties>
+						<property
+							name="layout"
+							value="ui/campaign ui/units_panel_shang_yang_banners"/>
+						<property
+							name="visibility_based"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoStaticObject"
+					context_function_id="(unit_context = Component(&quot;units&quot;, &quot;main_units_panel&quot;).TryEnsureUpgradableUnitsSelected) =&gt; { GetIfElse(unit_context.IsValidContext, unit_context, UiMsg(&quot;CloseUnitUpgradePanel&quot;)) }">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="UpgradeUnitsRequested"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignUnit"
+					context_function_id="IsValidContext"/>
+				<callback_with_context
+					callback_id="ContextClearer"
+					context_object_id="CcoStaticObject">
+					<child_m_user_properties>
+						<property
+							name="context_to_clear"
+							value="CcoCampaignUnit"/>
+						<property
+							name="event0"
+							value="CloseUnitUpgradePanel"/>
+						<property
+							name="react_only_to_events"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoStaticObject"
+					context_function_id="(unit_context = Component(&quot;units&quot;, &quot;main_units_panel&quot;).UpgradingUnitsContextList.LastContext) =&gt; &#10;{&#10; GetIfElse( unit_context.PurchasableEffectsList.IsEmpty == false &amp;&amp; unit_context.IsLoaned == false &amp;&amp; Component(&quot;units_panel_shang_yang_banners&quot;, &quot;shang_yang_banners&quot;).IsVisible() &amp;&amp; Component(&quot;units&quot;, &quot;main_units_panel&quot;).UpgradingUnitsContextList.All(IconPath == unit_context.IconPath), unit_context, UiMsg(&quot;CloseUnitUpgradePanel&quot;) )&#10;}">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="RefreshUnitSelection"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandEvent"
+					context_function_id="UiMsg(&quot;CloseUnitUpgradePanel&quot;)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="WaaaghViewSelected"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandEvent"
+					context_object_id="CcoStaticObject"
+					context_function_id="CloseUnitRecruitmentPanel">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="UpgradeUnitsRequested"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextUISFXTrigger"
+					context_function_id="&quot;UI_CAM_HUD_Greenskins_Scrap_Upgrades_Panel_Open&quot;">
+					<child_m_user_properties>
+						<property
+							name="trigger_on_show"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextUISFXTrigger"
+					context_function_id="&quot;UI_CAM_HUD_Greenskins_Scrap_Upgrades_Panel_Close&quot;">
+					<child_m_user_properties>
+						<property
+							name="trigger_on_hide"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTrashOnCondition"
+					context_function_id="CanUseUiFeature(&quot;TIGER_MERCENARIES&quot;) == false"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="F3EB59B4-6301-4A25-9DD23F9968E66098"
+					name="NewState"
+					width="1278"
+					height="423"
+					uniqueguid="F3EB59B4-6301-4A25-9DD23F9968E66098">
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
+				</newstate>
+			</states>
+		</shang_yang_banners>
 		<smoke_clip_parent
 			this="51A2003E-E5F9-4C28-AE92048CC052F153"
 			id="smoke_clip_parent"

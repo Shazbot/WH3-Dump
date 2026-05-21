@@ -171,7 +171,7 @@ function imperial_authority:get_authority_value(faction_key)
 	end
 
 	-- If the ranges are properly defined, to fully cover the [0, 100] interval, then we should never reach this return.
-	script_error("[Imperial Authority] ERROR: Authority value []" .. tostring(authority_value) .. "] does not fall in any authority range!")
+	script_error("[Imperial Authority] ERROR: Authority value [" .. tostring(authority_value) .. "] does not fall in any authority range!")
 	return authority_value, 1	-- Returning level 1, as this is to be used as an array index.
 end
 

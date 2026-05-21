@@ -106,6 +106,7 @@ custom_loading_screens_no_intro = {
 	["1182940351"] = "wh3_dlc27_sla_masque_gc",
 	["2092142160"] = "wh3_dlc27_hef_aislinn_gc",
 	["1176817909"] = "wh3_dlc27_nor_sayl_gc",
+	["1017046606"] = "wh3_cp1_cth_tiger_warriors_gc",
 	
 	-- chaos map
 	["780864164"] = "wh3_main_ksl_the_ice_court",

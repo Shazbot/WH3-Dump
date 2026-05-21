@@ -1291,6 +1291,444 @@ function trigger_in_caravans()
 end
 
 
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+-- BHASHIVA CARAVANS
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+
+
+-- intervention declaration
+in_bhashiva_caravans = intervention:new(
+	"in_bhashiva_caravans",												-- string name
+	20,	 														-- cost
+	function() trigger_in_bhashiva_caravans() end,						-- trigger callback
+	BOOL_INTERVENTIONS_DEBUG	 								-- show debug output
+)
+in_bhashiva_caravans:set_must_trigger()
+in_bhashiva_caravans:set_should_lock_ui()
+in_bhashiva_caravans:add_precondition(function() return cm:get_local_faction_name() == "wh3_cp1_cth_tiger_warriors" and not cm:get_saved_value("bhashiva_caravans_tour_complete") end)
+in_bhashiva_caravans:add_trigger_condition("PanelOpenedCampaign", function(context) return context.string == "cp1_cth_bhashiva_caravans" end)
+in_bhashiva_caravans:set_wait_for_fullscreen_panel_dismissed(false)
+in_bhashiva_caravans:add_advice_key_precondition("wh3.dlc26.camp.advice.cth.ivory_road.001")
+
+function trigger_in_bhashiva_caravans()
+
+	-- Cancel tour if panel is not open.
+	if not cm:get_campaign_ui_manager():is_panel_open("cp1_cth_bhashiva_caravans") then
+		in_bhashiva_caravans:cancel()
+		return
+	end
+
+	-- Save whether to highlight dispatch button on end.
+	local highlight_dispatch_on_end = false
+
+	nt_caravans = navigable_tour:new(
+		"caravans", -- unique name 																
+		function() cm:set_saved_value("bhashiva_caravans_tour_complete", true) end, -- end callback
+		"ui_text_replacements_localised_text_wh3_campaign_caravans_navigable_tour_title" -- title string
+	)
+
+	nt_caravans:start_action(
+		function()
+			-- Removes the listener that disables interventions on closing panel.
+			core:remove_listener("PanelClosedCampaignCathayCaravans")
+
+			-- Dismiss advice.
+			cm:dismiss_advice()
+			
+			infotext:attach_to_advisor(false) -- Unattach infotext to advisor
+			nt_caravans:set_tour_controls_above_infotext(true) -- This must be called after infotext is unattached
+			infotext:cache_and_set_detached_infotext_priority(1500, true)
+			nt_caravans:cache_and_set_scripted_tour_controls_priority(1500, true)
+
+			-- Disable escape key and shortcuts.
+			cm:steal_escape_key(true)
+			common.enable_all_shortcuts(false)
+			cm:steal_user_input(true)
+
+			-- Stop dispatch button from being highlighted
+			local uic_reserves_list = find_uicomponent("cp1_cth_bhashiva_caravans", "caravans_panel", "reserves_listview", "reserves_list")
+			if uic_reserves_list:GetContextObject("CcoCampaignFactionCaravans"):Call("ActiveCaravanList.Size") == 0 then
+				highlight_dispatch_on_end = true
+				local uic = find_uicomponent("cp1_cth_bhashiva_caravans", "caravans_panel", "dispatch_holder", "button_dispatch")
+				if uic then
+					uic:StopPulseHighlight()
+				end
+			end
+		end,
+		0
+	)
+
+	nt_caravans:end_action( -- Called when the tour ends
+		function() 
+			if highlight_dispatch_on_end then
+				local uic = find_uicomponent("cp1_cth_bhashiva_caravans", "caravans_panel", "dispatch_holder", "button_dispatch")
+				if uic then
+					uic:StartPulseHighlight()
+				end
+			end
+
+			infotext:attach_to_advisor(true) -- Reattach infotext to advisor
+			infotext:restore_detatched_infotext_priority()
+			
+			-- Clean up escape key steal and shortcuts.
+			cm:steal_escape_key(false)
+			common.enable_all_shortcuts(true)
+			cm:steal_user_input(false)
+
+			cm:show_advice("wh3.dlc26.camp.advice.cth.ivory_road.001", true) -- empty advice that is just used to not play the tour twice
+			
+			nt_caravans:restore_scripted_tour_controls_priority()
+			in_bhashiva_caravans:complete()
+		end,
+		0
+	)
+
+
+
+	-- Create navigable tour section.
+	local nts_caravans_panel = navigable_tour_section:new(
+		"caravans_panel", -- name of tour section
+		false -- activate controls on start
+	)
+
+	
+	-- Create action of section
+	nts_caravans_panel:action(
+		function()
+			-- Highlight componenets
+			local uic = find_uicomponent("cp1_cth_bhashiva_caravans", "caravans_panel")
+			core:show_fullscreen_highlight_around_components(5, false, true, uic)
+
+			-- Point at component.
+			local tp = text_pointer:new_from_component(
+				"tp_scripted_tour",
+				"left",
+				50,
+				uic,
+				1,
+				0.5
+			)
+			tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_campaign_caravans_panel")
+			tp:set_style("semitransparent")
+			tp:set_topmost(true)
+			tp:set_highlight_close_button(0.5)
+			tp:do_not_release_escape_key(true)
+			tp:show()
+
+			-- Responsible for cleaning up the action after the player moves forward.
+			nts_caravans_panel:add_skip_action(
+				function()
+					tp:hide(true)
+					core:hide_fullscreen_highlight()
+
+					-- Steal input to block actions during transition.
+					cm:steal_user_input(true)
+				end
+			)
+		end,
+		0 -- Interval to start action after section starts.
+	)
+	
+
+
+	-- Create navigable tour section.
+	local nts_list_of_caravans = navigable_tour_section:new(
+		"list_of_caravans", -- name of tour section
+		false -- activate controls on start
+	)
+
+	-- Create action of section
+	nts_list_of_caravans:action(
+		function()
+
+			-- Highlight componenets
+			local uic = find_uicomponent("cp1_cth_bhashiva_caravans", "reserves_listview")
+			local uic_2 = find_uicomponent("cp1_cth_bhashiva_caravans", "caravans_panel")
+			local uic_3 = find_child_uicomponent_by_index(uic_2, 2)
+			core:show_fullscreen_highlight_around_components(5, false, true, uic, uic_3)
+
+			-- Point at component.
+			local tp = text_pointer:new_from_component(
+				"tp_scripted_tour",
+				"left",
+				50,
+				uic,
+				1,
+				0.5
+			)
+			tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_campaign_list_of_caravans")
+			tp:set_style("semitransparent")
+			tp:set_topmost(true)
+			tp:set_highlight_close_button(0.5)
+			tp:do_not_release_escape_key(true)
+			tp:show()
+			
+			-- Responsible for cleaning up the action after the player moves forward.
+			nts_list_of_caravans:add_skip_action(
+				function()
+					tp:hide(true)
+					core:hide_fullscreen_highlight()
+
+					-- Steal input to block actions during transition.
+					cm:steal_user_input(true)
+				end
+			)
+		end,
+		0 -- Interval to start action after section starts.
+	)
+
+
+	
+	-- Create navigable tour section.
+	local nts_dispatch_caravan = navigable_tour_section:new(
+		"dispatch_caravan", -- name of tour section
+		false -- activate controls on start
+	)
+
+	-- Create action of section
+	nts_dispatch_caravan:action(
+		function()
+			-- Highlight componenets
+			local uic = find_uicomponent("cp1_cth_bhashiva_caravans", "dispatch_holder")
+			core:show_fullscreen_highlight_around_components(5, false, true, uic)
+
+			-- Point at component.
+			local tp = text_pointer:new_from_component(
+				"tp_scripted_tour",
+				"left",
+				50,
+				uic,
+				1,
+				0.5
+			)
+			tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_campaign_caravan_cargo")
+			tp:set_style("semitransparent")
+			tp:set_topmost(true)
+			tp:set_highlight_close_button(0.5)
+			tp:do_not_release_escape_key(true)
+			tp:show()
+
+			-- Responsible for cleaning up the action after the player moves forward.
+			nts_dispatch_caravan:add_skip_action(
+				function()
+					tp:hide(true)
+					core:hide_fullscreen_highlight()
+
+					-- Steal input to block actions during transition.
+					cm:steal_user_input(true)
+				end
+			)
+		end,
+		0 -- Interval to start action after section starts.
+	)
+
+
+
+	-- Create navigable tour section.
+	local nts_caravan_start = navigable_tour_section:new(
+		"caravan_start", -- name of tour section
+		false -- activate controls on start
+	)
+
+	-- Create action of section
+	nts_caravan_start:action(
+		function()
+			-- Disable tour controls until cam moved.
+			disable_naviable_tour_controls(true, true)
+
+			-- Scroll camera to first section.
+			local x = 612.5
+			local y = 367.5
+			if cm:get_campaign_name() == "main_warhammer" then
+				 x = 741.1
+				 y = 436.2
+			end
+			cm:scroll_camera_from_current(true, 1.5, {x, y, 0.95, 0, 99.8})
+
+			cm:callback(
+				function()
+					disable_naviable_tour_controls(false)
+				end, 
+				2
+			)
+			
+			-- Add text panel
+			infotext:add_infotext(
+				"wh3_main_st_campaign_caravans_caravan_start_title",
+				"wh3_main_st_campaign_caravans_caravan_start_explanation"
+			)
+
+			-- Responsible for cleaning up the action after the player moves forward.
+			nts_caravan_start:add_skip_action(
+				function()
+					infotext:clear_infotext()
+
+					-- Steal input to block actions during transition.
+					cm:steal_user_input(true)
+				end
+			)
+		end,
+		0 -- Interval to start action after section starts.
+	)
+
+
+
+	-- Create navigable tour section.
+	local nts_caravan_route = navigable_tour_section:new(
+		"caravan_route", -- name of tour section
+		false -- activate controls on start
+	)
+
+	-- Create action of section
+	nts_caravan_route:action(
+		function()
+			-- Disable tour controls until cam moved.
+			disable_naviable_tour_controls(true, true)
+
+			-- Scroll camera to first section.
+			local x = 588.9
+			local y = 290.2
+			if cm:get_campaign_name() == "main_warhammer" then
+				 x = 689.5
+				 y = 385.5
+			end
+			cm:scroll_camera_from_current(true, 1.5, {x, y, 0.95, 0, 99.8})
+
+			cm:callback(
+				function()
+					disable_naviable_tour_controls(false)
+				end, 
+				2
+			)
+			
+			-- Add text panel
+			infotext:add_infotext(
+				"wh3_main_st_campaign_caravans_caravan_route_start",
+				"wh3_main_st_campaign_caravans_caravan_route_explanation"
+			)
+
+			-- Responsible for cleaning up the action after the player moves forward.
+			nts_caravan_route:add_skip_action(
+				function()
+					infotext:clear_infotext()
+
+					-- Steal input to block actions during transition.
+					cm:steal_user_input(true)
+				end
+			)
+		end,
+		0 -- Interval to start action after section starts.
+	)
+
+
+
+	-- Create navigable tour section.
+	local nts_caravan_destination = navigable_tour_section:new(
+		"caravan_destination", -- name of tour section
+		false -- activate controls on start
+	)
+
+	-- Create action of section
+	nts_caravan_destination:action(
+		function()
+			-- Disable tour controls until cam moved.
+			disable_naviable_tour_controls(true, true)
+
+			-- Scroll camera to first section.
+			local x = 398.5
+			local y = 210.6
+			if cm:get_campaign_name() == "main_warhammer" then
+				 x = 493.2
+				 y = 420
+			end
+			cm:scroll_camera_from_current(true, 2, {x, y, 0.95, 0, 99.8})
+			
+			cm:callback(
+				function()
+					disable_naviable_tour_controls(false)
+				end, 
+				2.5
+			)
+			
+			-- Add text panel
+			infotext:add_infotext(
+				"wh3_main_st_campaign_caravans_caravan_destination_title",
+				"wh3_main_st_campaign_caravans_caravan_destination_explanation"
+			)
+
+			-- Responsible for cleaning up the action after the player moves forward.
+			nts_caravan_destination:add_skip_action(
+				function()
+					infotext:clear_infotext()
+
+					-- Steal input to block actions during transition.
+					cm:steal_user_input(true)
+				end
+			)
+		end,
+		0 -- Interval to start action after section starts.
+	)
+
+
+
+	-- Create navigable tour section.
+	local nts_caravan_close = navigable_tour_section:new(
+		"caravan_close", -- name of tour section
+		false -- activate controls on start
+	)
+
+	-- Create action of section
+	nts_caravan_close:action(
+		function()
+			-- Highlight componenets
+			local uic = find_uicomponent("cp1_cth_bhashiva_caravans", "caravans_panel", "dispatch_holder", "button_dispatch")
+			core:show_fullscreen_highlight_around_components(5, false, true, uic)
+
+			-- Point at component.
+			local tp = text_pointer:new_from_component(
+				"tp_scripted_tour",
+				"left",
+				50,
+				uic,
+				1,
+				0.5
+			)
+			tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_campaign_caravan_close")
+			tp:set_style("semitransparent")
+			tp:set_topmost(true)
+			tp:set_highlight_close_button(0.5)
+			tp:do_not_release_escape_key(true)
+			tp:show()
+
+			-- Responsible for cleaning up the action after the player moves forward.
+			nts_caravan_close:add_skip_action(
+				function()
+					tp:hide(true)
+					core:hide_fullscreen_highlight()
+
+					-- Steal input to block actions during transition.
+					cm:steal_user_input(true)
+				end
+			)
+		end,
+		0 -- Interval to start action after section starts.
+	)
+
+
+
+	-- Adding navigable tour sections in order of playback.
+	nt_caravans:add_navigable_section(nts_caravans_panel)
+	nt_caravans:add_navigable_section(nts_list_of_caravans)
+	nt_caravans:add_navigable_section(nts_dispatch_caravan)
+	nt_caravans:add_navigable_section(nts_caravan_start)
+	nt_caravans:add_navigable_section(nts_caravan_route)
+	nt_caravans:add_navigable_section(nts_caravan_destination)
+	nt_caravans:add_navigable_section(nts_caravan_close)
+	nt_caravans:start()
+end
+
 
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
@@ -4218,6 +4656,7 @@ core:add_listener(
 			in_daemon_prince_customisation:start()
 			in_changing_of_the_ways:start()
 			in_caravans:start()
+			in_bhashiva_caravans:start()
 			in_end_turn_camera:start()
 			in_witchs_hut:start()
 			in_hexes:start()

@@ -744,8 +744,20 @@ initiative_templates = {
 				
 				if character:won_battle() then
 					local pb = cm:model():pending_battle()
-					return (pb:has_attacker() and pb:attacker() == character and cm:get_saved_value("big_name_defender_spellcaster")) or (pb:has_defender() and pb:defender() == character and cm:get_saved_value("big_name_attacker_spellcaster"))
+					if pb:has_attacker() and cm:get_saved_value("big_name_defender_spellcaster") then
+						local attacker = pb:attacker()
+						if attacker == character or (character:is_embedded_in_military_force() and attacker == character:embedded_in_military_force():general_character()) then
+							return true
+						end
+					end
+					if pb:has_defender() and cm:get_saved_value("big_name_attacker_spellcaster") then
+						local defender = pb:defender()
+						if defender == character or (character:is_embedded_in_military_force() and defender == character:embedded_in_military_force():general_character()) then
+							return true
+						end
+					end
 				end
+				return false
 			end,
 		["grant_immediately"] = true
 	},

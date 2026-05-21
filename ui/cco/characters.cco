@@ -24,9 +24,18 @@ CcoCampaignCharacter
 					&& (Component("hud_campaign").ShouldShowMission(mission))
 			).FirstContext
 			(
-				CharacterContextAtSettlementObjectiveDisplayPosition == this
-				|| CharacterContextAtObjectiveDisplayPosition(-2.5) == this
-				|| TargetCharacterContext == this
+				GetIfElse(
+					IsContextValid(TargetCharacterContext),
+					TargetCharacterContext == this,
+					GetIfElse(
+						IsContextValid(TargetSettlementContext),
+						CharacterContextAtSettlementObjectiveDisplayPosition == this,
+						GetIf(
+							MissionDefinitionContext.HasCurrentTargetFaction(this.FactionContext.FactionRecordContext),
+							CharacterContextAtObjectiveDisplayPosition(-2.5) == this || CharacterContextAtSettlementObjectiveDisplayPosition == this
+						)
+					)
+				)
 			)
 		)
 	}

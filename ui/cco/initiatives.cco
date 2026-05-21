@@ -1,0 +1,23 @@
+CcoCampaignInitiativeSet
+{
+	ExGetFirstAvailableOrLastCompletedInitiativeInSet
+	{
+		(initiatives = InitiativeListSorted.Reverse,
+		active_initiative = initiatives.FirstContext(IsActive),
+        next_initiative = initiatives.NextContext(active_initiative),
+        first_initiative = initiatives.FirstContext,
+		last_initiative = initiatives.LastContext) => 
+        {
+            GetIfElse(IsContextValid(active_initiative) == false, first_initiative, GetIfElse(next_initiative != first_initiative, next_initiative, last_initiative))
+        }
+	}
+}
+
+CcoCampaignInitiative
+{
+	ExCanBeActivated
+	{
+		IsLocked == false && IsActive == false && IsOnCooldown == false &&
+            PlayersFaction.PooledResourceManagerContext.CanAffordSpecificPooledResourceCost(CostContext.PooledResourceTransactionList.FirstContext)
+	}
+}

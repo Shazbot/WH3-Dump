@@ -183,6 +183,16 @@ campaign_ai_script = {
 			"wh3_dlc27_sayl_manipulations_region_garrison",
 		},
 		min_difficulty = -1, -- HARD and above, -2 is VERY HARD, -3 is LEGENDARY
+	},
+
+	bhashiva_potential_overrides = {
+		faction_key = "wh3_cp1_cth_tiger_warriors",
+		potential_data = {
+			{
+				faction_key = "wh3_main_cth_the_western_provinces",
+				override_amount = 210
+			}
+		}
 	}
 }
 
@@ -780,6 +790,17 @@ cm:add_first_tick_callback(
 		if extra_aggro == true then
 			local config = campaign_ai_script.ai_extra_aggro
 			cm:cai_set_global_script_context(config.target_global_script_context)
+		end
+
+		-- If player is Bhashiva, modify the potentials of the listed factions.
+		local bhashiva_faction = cm:get_faction(campaign_ai_script.bhashiva_potential_overrides.faction_key)
+		if bhashiva_faction and bhashiva_faction:is_human() then
+			for i, data in ipairs(campaign_ai_script.bhashiva_potential_overrides.potential_data) do
+				local curr_faction = cm:get_faction(data.faction_key)
+				if curr_faction and not curr_faction:is_human() then
+					cm:faction_set_total_potential_override_value(curr_faction, true, data.override_amount)
+				end
+			end
 		end
 	end
 )

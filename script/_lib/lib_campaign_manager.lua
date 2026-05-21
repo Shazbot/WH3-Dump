@@ -6236,9 +6236,10 @@ end;
 --- @p faction faction, Faction script interface.
 --- @p number x, Logical x position.
 --- @p number y, Logical y position.
+--- @p [opt=nil] function filter callback, Callback to filter out specific characters.
 --- @r character closest character
 --- @r @number closest character distance
-function campaign_manager:get_closest_character_from_faction(faction, x, y)
+function campaign_manager:get_closest_character_from_faction(faction, x, y, character_filter_condition)
 	if is_string(faction) then
 		faction = cm:get_faction(faction)
 	end
@@ -6248,6 +6249,11 @@ function campaign_manager:get_closest_character_from_faction(faction, x, y)
 		return false
 	end
 
+	if not is_function(character_filter_condition) and not is_nil(character_filter_condition) then
+		script_error("ERROR: get_closest_character_from_faction() called but supplied character_filter_condition callback [" .. tostring(character_filter_condition) .. "] is not a function or nil");
+		return false
+	end;
+
 	local closest_distance = false;
 	local closest_character = false;
 	
@@ -6255,12 +6261,14 @@ function campaign_manager:get_closest_character_from_faction(faction, x, y)
 	
 	for i = 0, char_list:num_items() - 1 do
 		local current_char = char_list:item_at(i);
-		
-		local current_distance = distance_squared(x, y, current_char:logical_position_x(), current_char:logical_position_y());
-		if closest_distance == false or current_distance < closest_distance then
-			closest_distance = current_distance;
-			closest_character = current_char;
-		end;
+		local is_valid = is_nil(character_filter_condition) or character_filter_condition(current_char)
+		if is_valid then
+			local current_distance = distance_squared(x, y, current_char:logical_position_x(), current_char:logical_position_y());
+			if closest_distance == false or current_distance < closest_distance then
+				closest_distance = current_distance;
+				closest_character = current_char;
+			end;
+		end
 	end;
 	
 	return closest_character, closest_distance;	

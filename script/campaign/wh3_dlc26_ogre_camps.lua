@@ -369,7 +369,7 @@ function ogre_camps:spawn_camp(is_first_camp, faction_data, force)
 			function(cqi)
 				local mf_interface = cm:get_character_by_cqi(cqi):military_force()
 				cm:force_character_force_into_stance(cm:char_lookup_str(cqi), "MILITARY_FORCE_ACTIVE_STANCE_TYPE_FIXED_CAMP")
-				cm:set_force_sphere_of_influence_radius(cqi, 35)
+				cm:set_force_sphere_of_influence_radius(mf_interface:command_queue_index(), 35)
 				
 				cm:add_growth_points_to_horde(mf_interface, 50)
 				-- Add starting buildings to the camp

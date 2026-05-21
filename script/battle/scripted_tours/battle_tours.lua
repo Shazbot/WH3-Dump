@@ -49,7 +49,7 @@ do
 	-- validation rules for this navigable tour
 	nt_deployment:add_validation_rule(
 		function()
-			return core:is_battle()
+			return core:is_battle() and not navigable_tour_section:is_playing()
 		end,
 		"random_localisation_strings_string_scripted_tour_invalid_not_battle"
 	);
@@ -302,10 +302,16 @@ do
 	-- add end actions
 	nt_deployment:end_action(
 		function()
+			bm:stop_advisor_queue(true);
+			bm:clear_infotext();
 			bm:disable_orders(false);
 			-- Re-enable grouping/formations
 			bm:disable_groups(false);
 			bm:disable_formations(false);
+
+			-- Show start battle button/advisor progress button
+			bm:show_start_battle_button(true);
+			show_advisor_progress_button(true);
 
 			-- Re-attach infotext to advisor
 			bm:attach_to_advisor(true);
@@ -378,7 +384,7 @@ do
 	-- validation rules for this navigable tour
 	nt_unit_types:add_validation_rule(
 		function()
-			return core:is_battle()
+			return core:is_battle() and not navigable_tour_section:is_playing()
 		end,
 		"random_localisation_strings_string_scripted_tour_invalid_not_battle"
 	);

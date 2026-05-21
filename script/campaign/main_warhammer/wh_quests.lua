@@ -406,6 +406,10 @@ function q_setup()
 			{"mission", "wh3_dlc24_anc_armour_armour_of_the_dragons_gaze", "wh3_dlc24_qb_cth_yuan_bo_armour_of_the_dragons_gaze"},
 			{"mission", "wh3_dlc24_anc_weapon_the_dragons_fang", "wh3_dlc24_ie_qb_cth_yuan_bo_dragons_fang", nil, "wh3_dlc24_yuan_bo_cam_quest_mission.001"}
 		},
+		["wh3_cp1_cth_bhashiva"] = {
+			{"mission", "wh3_cp1_anc_enchanted_item_heavens_gate", "wh3_cp1_qb_ie_cth_bhashiva_heavens_gate"},
+			{"mission", "wh3_cp1_anc_weapon_blades_of_shang_yang", "wh3_cp1_qb_ie_cth_bhashiva_blades_of_shang_yang"}
+		},
 
 		----------------------
 		---- OGRE KINGDOMS ---

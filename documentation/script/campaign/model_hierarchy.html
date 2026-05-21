@@ -575,7 +575,7 @@
 				<h4>Example - Accessing the model directly:</h4>
 				<div id="example_code"><code>
 					 local model = cm:model();<br />
-					 out("There are currently " .. model:world():faction_list():num_items() .. " factions in the game");<br />
+					 out("There are currently " .. cm:get_faction_list():num_items() .. " factions in the game");<br />
 				</code></div>
 				<div id="example_result"><code>
 					There are currently 108 factions in the game<br />
@@ -1155,11 +1155,15 @@
 					<ul class="model_hierarchy_list">
 						<li><a href=../scripting_doc.html#INITIATIVE_SET_SCRIPT_INTERFACEis_null_interface><code>is_null_interface</code></a></li>
 						<li><a href=../scripting_doc.html#INITIATIVE_SET_SCRIPT_INTERFACEall_initiatives><code>all_initiatives</code></a></li>
+						<li><a href=../scripting_doc.html#INITIATIVE_SET_SCRIPT_INTERFACEall_initiatives_sorted><code>all_initiatives_sorted</code></a></li>
 						<li><a href=../scripting_doc.html#INITIATIVE_SET_SCRIPT_INTERFACEactive_initiatives><code>active_initiatives</code></a></li>
+						<li><a href=../scripting_doc.html#INITIATIVE_SET_SCRIPT_INTERFACEactive_initiatives_sorted><code>active_initiatives_sorted</code></a></li>
 						<li><a href=../scripting_doc.html#INITIATIVE_SET_SCRIPT_INTERFACElookup_initiative_by_key><code>lookup_initiative_by_key</code></a></li>
 						<li><a href=../scripting_doc.html#INITIATIVE_SET_SCRIPT_INTERFACEinitiative_status_by_key><code>initiative_status_by_key</code></a></li>
 						<li><a href=../scripting_doc.html#INITIATIVE_SET_SCRIPT_INTERFACEinitiative_status><code>initiative_status</code></a></li>
 						<li><a href=../scripting_doc.html#INITIATIVE_SET_SCRIPT_INTERFACEcooldown_remaining><code>cooldown_remaining</code></a></li>
+						<li><a href=../scripting_doc.html#INITIATIVE_SET_SCRIPT_INTERFACEcategory_key><code>category_key</code></a></li>
+						<li><a href=../scripting_doc.html#INITIATIVE_SET_SCRIPT_INTERFACErecord_key><code>record_key</code></a></li>
 					</ul>
 				</div>
 				<hr class="superblock_divider" />
@@ -1219,6 +1223,7 @@
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEis_null_interface><code>is_null_interface</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEhas_garrison_residence><code>has_garrison_residence</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEhas_region><code>has_region</code></a></li>
+						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEhas_sea_region><code>has_sea_region</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEhas_military_force><code>has_military_force</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEhas_transported_military_force><code>has_transported_military_force</code></a></li>
 						<li><a href=../scripting_doc.html#CHARACTER_SCRIPT_INTERFACEmodel><code>model</code></a></li>
@@ -1603,6 +1608,8 @@
 						<li><a href=../scripting_doc.html#FACTION_RITUALS_SCRIPT_INTERFACEactive_rituals><code>active_rituals</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_RITUALS_SCRIPT_INTERFACEritual_status><code>ritual_status</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_RITUALS_SCRIPT_INTERFACEritual_category_cooldown><code>ritual_category_cooldown</code></a></li>
+						<li><a href=../scripting_doc.html#FACTION_RITUALS_SCRIPT_INTERFACEget_tracked_cost_uses><code>get_tracked_cost_uses</code></a></li>
+						<li><a href=../scripting_doc.html#FACTION_RITUALS_SCRIPT_INTERFACEis_using_tracked_scaled_cost><code>is_using_tracked_scaled_cost</code></a></li>
 					</ul>
 				</div>
 				<hr class="superblock_divider" />
@@ -1742,6 +1749,7 @@
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEmercenary_pool><code>mercenary_pool</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEplagues><code>plagues</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEactive_missions><code>active_missions</code></a></li>
+						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEpending_missions><code>pending_missions</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEfaction_potential_type><code>faction_potential_type</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEfaction_potential_value><code>faction_potential_value</code></a></li>
 						<li><a href=../scripting_doc.html#FACTION_SCRIPT_INTERFACEtrending_diplomatic_attitude_towards><code>trending_diplomatic_attitude_towards</code></a></li>
@@ -1962,6 +1970,7 @@
 						<li><a href=../scripting_doc.html#MILITARY_FORCE_SCRIPT_INTERFACEget_plague_if_infected><code>get_plague_if_infected</code></a></li>
 						<li><a href=../scripting_doc.html#MILITARY_FORCE_SCRIPT_INTERFACEtry_get_military_force_plague><code>try_get_military_force_plague</code></a></li>
 						<li><a href=../scripting_doc.html#MILITARY_FORCE_SCRIPT_INTERFACEget_nearest_enemy_military_force><code>get_nearest_enemy_military_force</code></a></li>
+						<li><a href=../scripting_doc.html#MILITARY_FORCE_SCRIPT_INTERFACEget_unit_action_points_always_zero_this_turn><code>get_unit_action_points_always_zero_this_turn</code></a></li>
 					</ul>
 				</div>
 				<hr class="superblock_divider" />
@@ -2131,25 +2140,31 @@
 						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEtarget_faction_status><code>target_faction_status</code></a></li>
 						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEtarget_region_status><code>target_region_status</code></a></li>
 						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEtarget_force_status><code>target_force_status</code></a></li>
+						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEtarget_character_status><code>target_character_status</code></a></li>
 						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEtarget_type><code>target_type</code></a></li>
 						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEtarget_record_key><code>target_record_key</code></a></li>
 						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEget_target_faction><code>get_target_faction</code></a></li>
 						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEget_target_region><code>get_target_region</code></a></li>
 						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEget_target_force><code>get_target_force</code></a></li>
+						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEget_target_character><code>get_target_character</code></a></li>
 						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEis_faction_valid_target><code>is_faction_valid_target</code></a></li>
 						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEis_region_valid_target><code>is_region_valid_target</code></a></li>
 						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEis_force_valid_target><code>is_force_valid_target</code></a></li>
+						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEis_character_valid_target><code>is_character_valid_target</code></a></li>
 						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEcan_target_self><code>can_target_self</code></a></li>
 						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEstatus_for_faction_target><code>status_for_faction_target</code></a></li>
 						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEstatus_for_region_target><code>status_for_region_target</code></a></li>
 						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEstatus_for_force_target><code>status_for_force_target</code></a></li>
+						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEstatus_for_character_target><code>status_for_character_target</code></a></li>
 						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEget_all_valid_target_forces_in_faction><code>get_all_valid_target_forces_in_faction</code></a></li>
 						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEget_all_valid_target_regions_in_faction><code>get_all_valid_target_regions_in_faction</code></a></li>
+						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEget_all_valid_target_characters_in_faction><code>get_all_valid_target_characters_in_faction</code></a></li>
 						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEget_all_valid_target_factions><code>get_all_valid_target_factions</code></a></li>
 						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEclear><code>clear</code></a></li>
 						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEset_target_faction><code>set_target_faction</code></a></li>
 						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEset_target_region><code>set_target_region</code></a></li>
 						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEset_target_force><code>set_target_force</code></a></li>
+						<li><a href=../scripting_doc.html#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEset_target_character><code>set_target_character</code></a></li>
 					</ul>
 				</div>
 				<hr class="superblock_divider" />
@@ -2717,20 +2732,25 @@
 						<li><a href=../scripting_doc.html#RITUAL_TARGET_SCRIPT_INTERFACEtarget_faction_status><code>target_faction_status</code></a></li>
 						<li><a href=../scripting_doc.html#RITUAL_TARGET_SCRIPT_INTERFACEtarget_region_status><code>target_region_status</code></a></li>
 						<li><a href=../scripting_doc.html#RITUAL_TARGET_SCRIPT_INTERFACEtarget_force_status><code>target_force_status</code></a></li>
+						<li><a href=../scripting_doc.html#RITUAL_TARGET_SCRIPT_INTERFACEtarget_character_status><code>target_character_status</code></a></li>
 						<li><a href=../scripting_doc.html#RITUAL_TARGET_SCRIPT_INTERFACEtarget_type><code>target_type</code></a></li>
 						<li><a href=../scripting_doc.html#RITUAL_TARGET_SCRIPT_INTERFACEtarget_record_key><code>target_record_key</code></a></li>
 						<li><a href=../scripting_doc.html#RITUAL_TARGET_SCRIPT_INTERFACEget_target_faction><code>get_target_faction</code></a></li>
 						<li><a href=../scripting_doc.html#RITUAL_TARGET_SCRIPT_INTERFACEget_target_region><code>get_target_region</code></a></li>
 						<li><a href=../scripting_doc.html#RITUAL_TARGET_SCRIPT_INTERFACEget_target_force><code>get_target_force</code></a></li>
+						<li><a href=../scripting_doc.html#RITUAL_TARGET_SCRIPT_INTERFACEget_target_character><code>get_target_character</code></a></li>
 						<li><a href=../scripting_doc.html#RITUAL_TARGET_SCRIPT_INTERFACEis_faction_valid_target><code>is_faction_valid_target</code></a></li>
 						<li><a href=../scripting_doc.html#RITUAL_TARGET_SCRIPT_INTERFACEis_region_valid_target><code>is_region_valid_target</code></a></li>
 						<li><a href=../scripting_doc.html#RITUAL_TARGET_SCRIPT_INTERFACEis_force_valid_target><code>is_force_valid_target</code></a></li>
+						<li><a href=../scripting_doc.html#RITUAL_TARGET_SCRIPT_INTERFACEis_character_valid_target><code>is_character_valid_target</code></a></li>
 						<li><a href=../scripting_doc.html#RITUAL_TARGET_SCRIPT_INTERFACEcan_target_self><code>can_target_self</code></a></li>
 						<li><a href=../scripting_doc.html#RITUAL_TARGET_SCRIPT_INTERFACEstatus_for_faction_target><code>status_for_faction_target</code></a></li>
 						<li><a href=../scripting_doc.html#RITUAL_TARGET_SCRIPT_INTERFACEstatus_for_region_target><code>status_for_region_target</code></a></li>
 						<li><a href=../scripting_doc.html#RITUAL_TARGET_SCRIPT_INTERFACEstatus_for_force_target><code>status_for_force_target</code></a></li>
+						<li><a href=../scripting_doc.html#RITUAL_TARGET_SCRIPT_INTERFACEstatus_for_character_target><code>status_for_character_target</code></a></li>
 						<li><a href=../scripting_doc.html#RITUAL_TARGET_SCRIPT_INTERFACEget_all_valid_target_forces_in_faction><code>get_all_valid_target_forces_in_faction</code></a></li>
 						<li><a href=../scripting_doc.html#RITUAL_TARGET_SCRIPT_INTERFACEget_all_valid_target_regions_in_faction><code>get_all_valid_target_regions_in_faction</code></a></li>
+						<li><a href=../scripting_doc.html#RITUAL_TARGET_SCRIPT_INTERFACEget_all_valid_target_characters_in_faction><code>get_all_valid_target_characters_in_faction</code></a></li>
 						<li><a href=../scripting_doc.html#RITUAL_TARGET_SCRIPT_INTERFACEget_all_valid_target_factions><code>get_all_valid_target_factions</code></a></li>
 					</ul>
 				</div>
@@ -2898,6 +2918,7 @@
 						<li><a href=../scripting_doc.html#SEA_REGION_SCRIPT_INTERFACEmodel><code>model</code></a></li>
 						<li><a href=../scripting_doc.html#SEA_REGION_SCRIPT_INTERFACEname><code>name</code></a></li>
 						<li><a href=../scripting_doc.html#SEA_REGION_SCRIPT_INTERFACEregion_data_interface><code>region_data_interface</code></a></li>
+						<li><a href=../scripting_doc.html#SEA_REGION_SCRIPT_INTERFACEcharacters_in_sea_region><code>characters_in_sea_region</code></a></li>
 					</ul>
 				</div>
 				<hr class="superblock_divider" />
@@ -3174,6 +3195,7 @@
 						<li><a href=../scripting_doc.html#UNIT_SCRIPT_INTERFACEmodel><code>model</code></a></li>
 						<li><a href=../scripting_doc.html#UNIT_SCRIPT_INTERFACEforce_commander><code>force_commander</code></a></li>
 						<li><a href=../scripting_doc.html#UNIT_SCRIPT_INTERFACEunit_commander><code>unit_commander</code></a></li>
+						<li><a href=../scripting_doc.html#UNIT_SCRIPT_INTERFACEassociated_character><code>associated_character</code></a></li>
 						<li><a href=../scripting_doc.html#UNIT_SCRIPT_INTERFACEmilitary_force><code>military_force</code></a></li>
 						<li><a href=../scripting_doc.html#UNIT_SCRIPT_INTERFACEunit_key><code>unit_key</code></a></li>
 						<li><a href=../scripting_doc.html#UNIT_SCRIPT_INTERFACEunit_category><code>unit_category</code></a></li>
@@ -3277,7 +3299,7 @@
 
 		</div>
 
-		<div id="about">Last updated 11/18/2025 9:25:24 AM</div>
+		<div id="about">Last updated 4/24/2026 10:08:00 AM</div>
 
 	</div>
 

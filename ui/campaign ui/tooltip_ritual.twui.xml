@@ -44,12 +44,14 @@
 					<dy_global_cooldown_on_activation this="CEC93A80-D870-4648-AF12B12A53FCECAE"/>
 					<dy_cooldown_target_settlement this="304C40A5-10BD-4690-8C2100FECD9677FA"/>
 					<label_script_lock this="4AABB66C-3FE7-4761-8FC41559EAB547B3"/>
+					<cp1_ability_locked this="1C552301-74E9-499F-8E45CF31F07516B6"/>
 					<label_seat_usurped this="7BEFC72E-AEC5-44FC-B03FDCDD285949EC"/>
 					<label_claimed_seat this="2C1C1B97-5E1A-4DF2-BC0197E28F4353E0"/>
 					<cannot_confederate_human this="E7E902FE-A193-454A-B9EA759A0B123E14"/>
 					<cannot_confederate_already_confed this="C0AA5198-A5FB-439A-98F456126A9E4F8A"/>
 					<cannot_confederate_dead_faction this="0E56F210-FA4B-48A7-B895121E249B7657"/>
 					<confederate_faction_dead_only_lord this="2E623CBC-83A9-4E00-9FB5ED4BBE22FEFE"/>
+					<dy_target_criteria_text this="BD2785D2-8A4D-4A2B-8E453F9A2CAC2486"/>
 					<dy_target_invalid_text this="F0B5136E-97B3-4750-82FFF1F9411CBDF2"/>
 					<ascension_already_complete this="5F622119-C535-48E2-B282391AD5F5E9C9"/>
 					<dy_desc this="0F83601D-0385-4906-9E5EF4D4D19DB17F"/>
@@ -323,7 +325,7 @@
 		<blood_ex_nihilo_restriction
 			this="080DAB0F-64F1-4E8B-9BF59AF12FE2088F"
 			id="blood_ex_nihilo_restriction"
-			offset="0.00,1034.00"
+			offset="0.00,1109.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -369,7 +371,7 @@
 		<cannot_confederate_already_confed
 			this="C0AA5198-A5FB-439A-98F456126A9E4F8A"
 			id="cannot_confederate_already_confed"
-			offset="0.00,532.00"
+			offset="0.00,579.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -410,7 +412,7 @@
 		<cannot_confederate_dead_faction
 			this="0E56F210-FA4B-48A7-B895121E249B7657"
 			id="cannot_confederate_dead_faction"
-			offset="0.00,579.00"
+			offset="0.00,626.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -451,7 +453,7 @@
 		<cannot_confederate_human
 			this="E7E902FE-A193-454A-B9EA759A0B123E14"
 			id="cannot_confederate_human"
-			offset="0.00,485.00"
+			offset="0.00,532.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -628,7 +630,7 @@
 		<confederate_faction_dead_only_lord
 			this="2E623CBC-83A9-4E00-9FB5ED4BBE22FEFE"
 			id="confederate_faction_dead_only_lord"
-			offset="0.00,626.00"
+			offset="0.00,673.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -668,7 +670,7 @@
 		<copy_of_dy_target_invalid_text
 			this="F110B53A-02E8-42AE-A4F05C673167DAA2"
 			id="copy_of_dy_target_invalid_text"
-			offset="0.00,1198.00"
+			offset="0.00,1273.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -679,11 +681,11 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextTextLabel"
-					context_object_id="CcoCampaignRitual ritual, CcoCampaignCharacter character"
+					context_object_id="CcoCampaignRitual ritual"
 					context_function_id="ritual.InvalidReasonForRitualWithAnyValidTarget(SelectedCharacter)"/>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoCampaignRitual ritual, CcoCampaignCharacter character"
+					context_object_id="CcoCampaignRitual ritual"
 					context_function_id="ritual.CanPerformRitualWithAnyValidTarget(SelectedCharacter) == false &amp;&amp; ritual.IsOnCooldown == false"/>
 			</callbackwithcontextlist>
 			<states>
@@ -709,10 +711,60 @@
 				</newstate>
 			</states>
 		</copy_of_dy_target_invalid_text>
+		<cp1_ability_locked
+			this="1C552301-74E9-499F-8E45CF31F07516B6"
+			id="cp1_ability_locked"
+			offset="0.00,429.00"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="1C552301-74E9-499F-8E45CF31F07516B6"
+			updatewhennotvisible="true"
+			currentstate="B5142896-5F9E-484E-A2ABB282637CE772"
+			defaultstate="B5142896-5F9E-484E-A2ABB282637CE772">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignRitual"
+					context_function_id="IsAvailable == false">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="SharedStateChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTrashOnCondition"
+					context_function_id="CanUseUiFeature(&quot;TIGER_MERCENARIES&quot;) == false"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="B5142896-5F9E-484E-A2ABB282637CE772"
+					name="NewState"
+					width="386"
+					height="43"
+					interactive="true"
+					uniqueguid="B5142896-5F9E-484E-A2ABB282637CE772">
+					<component_text
+						text="Gain access to this ability by enacting the required Oath in the Tiger Court"
+						textvalign="Center"
+						textxoffset="12.00,12.00"
+						textyoffset="4.00,0.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="wh3_cp1_cth_tiger_court_campaign_ability_locked_warning_tooltip"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
+				</newstate>
+			</states>
+		</cp1_ability_locked>
 		<dy_cast_time
 			this="77472F33-7946-44AD-A6E6C3CA510B0BD6"
 			id="dy_cast_time"
-			offset="0.00,776.00"
+			offset="0.00,851.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -1384,7 +1436,7 @@
 		<dy_desc
 			this="0F83601D-0385-4906-9E5EF4D4D19DB17F"
 			id="dy_desc"
-			offset="0.00,720.00"
+			offset="0.00,795.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -1475,7 +1527,7 @@
 		<dy_force_target
 			this="01A07656-0AE1-4B49-BCE631B9E3C83A30"
 			id="dy_force_target"
-			offset="0.00,1090.00"
+			offset="0.00,1165.00"
 			allowverticalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -1602,7 +1654,7 @@
 		<dy_locked_reason
 			this="70803457-B383-4F95-8F08506A136CC17B"
 			id="dy_locked_reason"
-			offset="0.00,1170.00"
+			offset="0.00,1245.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2026,7 +2078,7 @@
 		<dy_settlement_target
 			this="D07E70EC-F286-4783-8257035601B4604C"
 			id="dy_settlement_target"
-			offset="0.00,1130.00"
+			offset="0.00,1205.00"
 			allowverticalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2066,7 +2118,7 @@
 		<dy_spirit_essence_requirement
 			this="A4AEA048-18BB-4BBF-A0D3EE8BE2864F29"
 			id="dy_spirit_essence_requirement"
-			offset="0.00,1062.00"
+			offset="0.00,1137.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2107,10 +2159,54 @@
 				</newstate>
 			</states>
 		</dy_spirit_essence_requirement>
+		<dy_target_criteria_text
+			this="BD2785D2-8A4D-4A2B-8E453F9A2CAC2486"
+			id="dy_target_criteria_text"
+			offset="0.00,739.00"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="BD2785D2-8A4D-4A2B-8E453F9A2CAC2486"
+			updatewhennotvisible="true"
+			currentstate="F59B6B36-9801-44F4-BA9FC92500967150"
+			defaultstate="F59B6B36-9801-44F4-BA9FC92500967150">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignRitual"
+					context_function_id="TargetCriteriaText"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignRitual"
+					context_function_id="CanUseUiFeature(&quot;TIGER_MERCENARIES&quot;) &amp;&amp; TargetCriteriaText.IsEmpty == false"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="F59B6B36-9801-44F4-BA9FC92500967150"
+					name="NewState"
+					width="386"
+					height="24"
+					interactive="true"
+					uniqueguid="F59B6B36-9801-44F4-BA9FC92500967150">
+					<component_text
+						text="[ph] target criteria"
+						textvalign="Center"
+						textxoffset="12.00,12.00"
+						textyoffset="4.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_91450c26"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="yellow"/>
+				</newstate>
+			</states>
+		</dy_target_criteria_text>
 		<dy_target_invalid_text
 			this="F0B5136E-97B3-4750-82FFF1F9411CBDF2"
 			id="dy_target_invalid_text"
-			offset="0.00,692.00"
+			offset="0.00,767.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2156,7 +2252,7 @@
 		<dy_turns_remaining
 			this="5759A40C-950C-4AC6-85F2EF1F69944F29"
 			id="dy_turns_remaining"
-			offset="0.00,748.00"
+			offset="0.00,823.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2201,7 +2297,7 @@
 		<effects_holder
 			this="B35E7E66-2600-466B-9550DA9FD49B99E8"
 			id="effects_holder"
-			offset="0.00,804.00"
+			offset="0.00,879.00"
 			priority="255"
 			tooltipslocalised="true"
 			uniqueguid="B35E7E66-2600-466B-9550DA9FD49B99E8"
@@ -2357,7 +2453,7 @@
 		<label_claimed_seat
 			this="2C1C1B97-5E1A-4DF2-BC0197E28F4353E0"
 			id="label_claimed_seat"
-			offset="0.00,457.00"
+			offset="0.00,504.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2530,7 +2626,7 @@
 		<label_seat_usurped
 			this="7BEFC72E-AEC5-44FC-B03FDCDD285949EC"
 			id="label_seat_usurped"
-			offset="0.00,429.00"
+			offset="0.00,476.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2590,7 +2686,7 @@
 					this="56606790-7623-46ED-A1F085F0E9E2B15D"
 					name="NewState"
 					width="386"
-					height="1226"
+					height="1301"
 					uniqueguid="56606790-7623-46ED-A1F085F0E9E2B15D">
 					<imagemetrics>
 						<image
@@ -2598,7 +2694,7 @@
 							uniqueguid="3655AFCC-A410-4480-B010FD3DDC8E676F"
 							componentimage="201E1334-8C23-417D-896543D910C578FC"
 							width="386"
-							height="1226"
+							height="1301"
 							tile="true"
 							margin="16.00,20.00,16.00,20.00"/>
 					</imagemetrics>
@@ -3635,7 +3731,7 @@
 					this="CFDC406A-C9F6-42A8-A26C5C07A9D91A86"
 					name="NewState"
 					width="386"
-					height="1234"
+					height="1309"
 					uniqueguid="CFDC406A-C9F6-42A8-A26C5C07A9D91A86">
 					<component_text
 						textxoffset="8.00,0.00"
@@ -3804,7 +3900,7 @@
 		<unit_holder
 			this="28A2E511-8367-4B93-A2A1C63086C00419"
 			id="unit_holder"
-			offset="0.00,948.00"
+			offset="0.00,1023.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"

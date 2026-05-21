@@ -1,0 +1,149 @@
+TigerMercenaries
+{
+    IsUnlocked
+    {
+        PlayersFaction.EntitySharedStateReadBool("tiger_merc_unlocked")
+    }
+    
+    GetMercenaryTypes
+    {
+        PlayersFaction.EntitySharedStateReadString("tiger_merc_groups_list").Split(";").Transform(
+			(key) => DatabaseRecordContext("CcoRitualCategoryGroupRecord", key))
+    }
+
+    GetUpgradesList
+    {
+        (initiative_sets = PlayersFaction.InitiativeSetList.Filter(InitiativeSetContext.CategoryContext.Key == "CP1_CTH_TIGER_BUILDINGS")) =>
+        {
+            initiative_sets.Sort(InitiativeSetContext.Key, true).Take(initiative_sets.Size - 1)
+        }
+    }
+
+    GetIronFavourPooledResource
+    {
+        PlayersFaction.PooledResourceContext("wh3_cp1_cth_iron_favour")
+    }
+
+    GetRitualsForCategory(CcoRitualCategoryRecord category)
+    {
+        category.RitualListForManager(PlayersFaction.RitualManagerContext).Sort(RitualContext.SortOrder, true)
+    }
+
+    GetUnitUpgradeEffectBundleForRitual(CcoCampaignRitual ritual)
+    {
+        (effect_bundle_key = ritual.RitualContext.Key + "_bundle") =>
+        {
+            DatabaseRecordContext("CcoEffectBundle", effect_bundle_key)
+        }
+    }
+
+    ShouldCategoryBeSelected(CcoRitualCategoryRecord category)
+    {
+        GetIfElse(
+            PlayersFaction.EntitySharedStateReadString("tiger_merc_redirection_target") == "", 
+            category.Id == Component("hud_campaign").GetProperty("last_category_selected") || Component("hud_campaign").GetProperty("last_category_selected") == "",
+            category.RitualListForManager(PlayersFaction.RitualManagerContext).Any(RitualContext.Key == PlayersFaction.EntitySharedStateReadString("tiger_merc_redirection_target")))
+    }
+
+    GetUnitsForCategory(CcoRitualCategoryRecord category)
+    {
+        PlayersFaction.EntitySharedStateReadString(Format("units_for_category:%S", category.Id)).Split(";").Transform(
+			(unit_key) => DatabaseRecordContext("CcoMainUnitRecord", unit_key)).Filter(IsOwned)
+    }
+
+    GetFlavourForCategory(CcoRitualCategoryRecord category)
+    {
+        PlayersFaction.EntitySharedStateReadString(Format("flavour_for_category:%S", category.Id))
+    }
+
+    IsUnitUnlocked(CcoRitualCategoryRecord category)
+    {
+        (rituals = TigerMercenaries.GetRitualsForCategory(category)) =>
+        {
+            rituals.IsEmpty == false && rituals[0].IsAvailable
+        }
+    }
+
+    GetRequiredTierForCategory(CcoRitualCategoryRecord category)
+    {
+        Floor(PlayersFaction.EntitySharedStateReadFloat(Format("tiger_merc_get_required_tier_for_category:%S", category.Id)))
+    }
+
+    UnlockedUnitsCountForGroup(CcoRitualCategoryGroupRecord group)
+    {
+        group.CategoryList.Count((category) => TigerMercenaries.IsUnitUnlocked(category))
+    }
+
+    GetUnitCapacityUpgradeForCategory(CcoRitualCategoryRecord category)
+    {
+        (ritual_key = PlayersFaction.EntitySharedStateReadString(Format("unit_capacity_upgrade_for_category:%S", category.Id))) =>
+        {
+            PlayersFaction.RitualManagerContext.RitualContext(DatabaseRecordContext("CcoRitualRecord", ritual_key))
+        }
+    }
+
+    StagesList
+    {
+        DatabaseRecords("CcoProphecyOfSotekStageRecord")
+        .Filter((s) => s.TooltipType == "tiger_mercenaries")
+        .Sort((s) => s.Order, true)
+    }
+
+    CurrentStageIndex
+    {
+        TigerMercenaries.StagesList.Count((s, missions = s.ExRequiredCampaignMissionsList) => missions.IsEmpty == false && missions.All((m) => m.Completed))
+    }
+    
+    IsStageComplete(CcoProphecyOfSotekStageRecord stage)
+    {
+        TigerMercenaries.CurrentStageIndex > TigerMercenaries.StagesList.IndexForFirstContext((c) => c == stage)
+    }
+    
+    IsStageActive(CcoProphecyOfSotekStageRecord stage)
+    {
+        (stage_idx = TigerMercenaries.StagesList.IndexForFirstContext((c) => c == stage),
+        current_stage_idx = TigerMercenaries.CurrentStageIndex) => 
+        {
+            (current_stage_idx == 0 && stage_idx == 0) || (current_stage_idx != 0 && current_stage_idx == stage_idx)
+        }
+    }
+
+    GetActiveStage
+    {
+        (stage = TigerMercenaries.StagesList.FirstContext((stage) => TigerMercenaries.IsStageActive(stage))) =>
+        {
+            GetIfElse(IsContextValid(stage), stage, TigerMercenaries.StagesList.LastContext)
+        }
+    }
+
+    GetTierRequiredForRitual(CcoCampaignRitual ritual)
+    {
+        Floor(PlayersFaction.EntitySharedStateReadFloat(Format("tiger_merc_required_tier_for_ritual:%S", ritual.RitualContext.Key)))
+    }
+
+    ShouldShowUpgradeNotificationIcon(CcoCampaignRitual ritual)
+    {
+        PlayersFaction.EntitySharedStateReadBool(Format("tiger_merc_should_show_notification_for_upgrade:%S", ritual.RitualContext.Key))
+    }
+
+    ShouldShowHUDNotificationIcon
+    {
+        PlayersFaction.EntitySharedStateReadBool("tiger_merc_should_show_ui_notification_for_hud") ||
+        PlayersFaction.EntitySharedStateReadBool("zhaos_goals_should_show_ui_notification_for_hud")
+    }
+
+    ShouldShowCategoryNotificationIcon(CcoRitualCategoryRecord category)
+    {
+        PlayersFaction.EntitySharedStateReadBool(Format("tiger_merc_should_show_notification_for_category:%S", category.Id))
+    }
+
+    ShouldShowMissionTabNotification
+    {
+        PlayersFaction.EntitySharedStateReadBool("zhaos_goals_should_show_ui_notification_for_hud")
+    }
+
+    ShouldShowNotificationForMission(CcoCampaignMission mission)
+    {
+        PlayersFaction.EntitySharedStateReadBool(Format("zhaos_goals_should_show_notification_for_category:%S", mission.MissionRecordContext.Key))
+    }
+}

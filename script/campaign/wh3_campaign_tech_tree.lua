@@ -66,24 +66,26 @@ scripted_technology_tree = {
 
 	},
 	ancillary_mapping = {
-		wh2_dlc11_tech_cst_firearms_07 =	{ancillary = "wh2_dlc11_anc_follower_cst_powder_monkey", count = 1},
-		wh2_dlc11_tech_cst_firearms_08 =	{ancillary = "wh2_dlc11_anc_follower_cst_master_gunner", count = 1},
-		wh2_dlc11_tech_cst_firearms_09 =	{ancillary = "wh2_dlc11_anc_magic_standard_throwing_bombs", count = 1},
-		wh2_dlc11_tech_cst_vampiric_10 =	{ancillary = "wh2_dlc11_anc_magic_standard_spell_of_the_necromancers_apprentice", count = 1},
-		wh2_dlc11_tech_cst_vampiric_11 =	{ancillary = "wh2_dlc11_anc_magic_standard_skull_and_crossbones", count = 1},
-		wh2_dlc11_tech_cst_vampiric_12 =	{ancillary = "wh2_dlc11_anc_follower_cst_carpenter", count = 1},
-		wh2_dlc11_tech_cst_command_10 =		{ancillary = "wh2_dlc11_anc_follower_cst_quartermaster", count = 1},
-		wh2_dlc11_tech_cst_command_11 =		{ancillary = "wh2_dlc11_anc_follower_cst_first_mate", count = 1},
-		wh2_dlc11_tech_cst_command_12 =		{ancillary = "wh2_dlc11_anc_follower_cst_sea_artist", count = 1},
-		wh3_main_tech_cth_2 =				{ancillary = "wh3_main_anc_magic_standard_banner_of_feng_shi", count = 1},
-		wh3_main_tech_cth_22 =				{ancillary = "wh3_main_anc_magic_standard_banner_of_the_moon_empress", count = 1},
-		wh3_main_tech_cth_50 =				{ancillary = "wh3_main_anc_magic_standard_the_great_celestial_banner", count = 1},
-		wh3_main_tech_cth_65 =				{ancillary = "wh3_main_anc_magic_standard_banner_of_the_empress_eye", count = 1},
-		wh3_main_tech_kho_1_5 =				{ancillary = "wh3_main_anc_magic_standard_blood_feasters_banner", count = 1},
-		wh3_main_tech_kho_3_5 =				{ancillary = "wh3_main_anc_magic_standard_trophy_of_killers", count = 1},
-		wh3_main_tech_kho_4_3 =				{ancillary = "wh3_main_anc_magic_standard_khornes_gift", count = 1},
-		wh3_main_tech_kho_6_2 =				{ancillary = "wh3_main_anc_magic_standard_lifetaker_banner", count = 1},
-		wh3_main_tech_ksl_4_14 =			{ancillary = "wh3_main_anc_magic_standard_banner_of_the_orthodoxy", count = 3}
+		wh2_dlc11_tech_cst_firearms_07 =	{ancillaries = {"wh2_dlc11_anc_follower_cst_powder_monkey"}, count = 1},
+		wh2_dlc11_tech_cst_firearms_08 =	{ancillaries = {"wh2_dlc11_anc_follower_cst_master_gunner"}, count = 1},
+		wh2_dlc11_tech_cst_firearms_09 =	{ancillaries = {"wh2_dlc11_anc_magic_standard_throwing_bombs"}, count = 1},
+		wh2_dlc11_tech_cst_vampiric_10 =	{ancillaries = {"wh2_dlc11_anc_magic_standard_spell_of_the_necromancers_apprentice"}, count = 1},
+		wh2_dlc11_tech_cst_vampiric_11 =	{ancillaries = {"wh2_dlc11_anc_magic_standard_skull_and_crossbones"}, count = 1},
+		wh2_dlc11_tech_cst_vampiric_12 =	{ancillaries = {"wh2_dlc11_anc_follower_cst_carpenter"}, count = 1},
+		wh2_dlc11_tech_cst_command_10 =		{ancillaries = {"wh2_dlc11_anc_follower_cst_quartermaster"}, count = 1},
+		wh2_dlc11_tech_cst_command_11 =		{ancillaries = {"wh2_dlc11_anc_follower_cst_first_mate"}, count = 1},
+		wh2_dlc11_tech_cst_command_12 =		{ancillaries = {"wh2_dlc11_anc_follower_cst_sea_artist"}, count = 1},
+		wh3_main_tech_cth_2 =				{ancillaries = {"wh3_main_anc_magic_standard_banner_of_feng_shi"}, count = 1},
+		wh3_main_tech_cth_22 =				{ancillaries = {"wh3_main_anc_magic_standard_banner_of_the_moon_empress"}, count = 1},
+		wh3_main_tech_cth_50 =				{ancillaries = {
+			"wh3_main_anc_magic_standard_the_great_celestial_banner",
+			"wh3_main_anc_magic_standard_banner_of_the_empress_eye"
+		}, count = 1},
+		wh3_main_tech_kho_1_5 =				{ancillaries = {"wh3_main_anc_magic_standard_blood_feasters_banner"}, count = 1},
+		wh3_main_tech_kho_3_5 =				{ancillaries = {"wh3_main_anc_magic_standard_trophy_of_killers"}, count = 1},
+		wh3_main_tech_kho_4_3 =				{ancillaries = {"wh3_main_anc_magic_standard_khornes_gift"}, count = 1},
+		wh3_main_tech_kho_6_2 =				{ancillaries = {"wh3_main_anc_magic_standard_lifetaker_banner"}, count = 1},
+		wh3_main_tech_ksl_4_14 =			{ancillaries = {"wh3_main_anc_magic_standard_banner_of_the_orthodoxy"}, count = 3}
 	},
 	khorne_techs_battle_wins = {
 		wh3_main_tech_kho_1_4 = {culture = "wh3_main_kho_khorne", value = 5},
@@ -217,11 +219,14 @@ function scripted_technology_tree:start_technology_listeners()
 			local ancillary_map = self.ancillary_mapping[context:technology()]
 				
 			if ancillary_map then
-				local ancillary = ancillary_map.ancillary
+				local ancillaries = ancillary_map.ancillaries
 				local count = ancillary_map.count
 				
-				for i = 1, count do
-				cm:add_ancillary_to_faction(context:faction(), ancillary, false)
+				for ancillary_index = 1, #ancillaries do
+					local ancillary = ancillaries[ancillary_index]
+					for i = 1, count do
+						cm:add_ancillary_to_faction(context:faction(), ancillary, false)
+					end
 				end
 			end
 		end,

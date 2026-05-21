@@ -967,7 +967,15 @@ data.faction_intros = {
 		cutscene_style = data.cutscene_styles.zoom_in_and_speak
 	},
 
-
+	wh3_cp1_cth_tiger_warriors = faction_intro_data:new{
+		preset = data.intro_presets.standard,
+		cam_cutscene_start = {x = 710.379333, y = 450.978058,	d = 26.320759, b = 0.0,	h = 58.995426,},
+		cam_gameplay_start = {x = 712.404297, y = 433.444977,	d = 11.989166, b = 0, h = 10.104043,},
+		advice_line = "wh3_cp1_ie_camp_cth_bhashiva_intro_01",
+		cutscene_style = data.cutscene_styles.zoom_in_and_speak,
+		fullscreen_movie = "warhammer3/cth/bhashiva_intro"
+	},
+	
 	--------------------
 	--NORTHERN CATHAY---
 	--------------------

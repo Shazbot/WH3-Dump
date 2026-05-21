@@ -159,6 +159,14 @@ function start_scripted_tours()
 			in_nor_sayl_manipulations_text_pointer:start()
 			in_nor_sayl_manipulations:start()
 		end		
+	
+		local bhashiva_interface = cm:get_faction("wh3_cp1_cth_tiger_warriors")
+		if bhashiva_interface and bhashiva_interface:is_human() and bhashiva_interface:is_null_interface() == false then
+			in_tiger_warriors_tiger_court:start()
+			in_tiger_warriors_armies_of_shang_yang:start()
+			in_tiger_court_text_pointer:start()
+			in_armies_of_shang_yang_text_pointer:start()
+		end
 	end
 end
 
@@ -7439,11 +7447,11 @@ in_sla_major_settlement_pleasure_palace_tour = intervention:new(
 	function()
 		cm:callback(function() 	
 		local uic = find_uicomponent(core:get_ui_root(), "CcoCampaignSettlementwh3_main_combi_region_gateway_to_khuresh", "settlement_view")
-		if uic and uic:Visible() then
+		if uic and uic:VisibleFromRoot() then
 			common.set_advice_history_string_seen("in_sla_major_settlement_pleasure_palace_tour") 
 			out("#### "..scripted_sla_major_settlement_pleasure_palace_tour.id.." ####")
 			ui_scripted_tour:construct_tour(scripted_sla_major_settlement_pleasure_palace_tour, in_sla_major_settlement_pleasure_palace_tour)
-		elseif not uic or not uic:Visible() then
+		elseif not uic or not uic:VisibleFromRoot() then
 			cm:steal_escape_key(false) 
 			in_sla_major_settlement_pleasure_palace_tour:cancel()
 		end	
@@ -8463,6 +8471,360 @@ scripted_nor_sayl_manipulations = {
 		}
 	},
 }
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Tiger Warriors Tiger Court
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_tiger_warriors_tiger_court = intervention:new(
+	"in_tiger_warriors_tiger_court",			 					-- string name
+	0, 																	-- cost
+	function() 															-- trigger callback
+		cm:callback(function()
+		local tiger_court_main_holder = find_uicomponent(core:get_ui_root(), "cp1_cth_tiger_court", "main_content_holder")
+			if tiger_court_main_holder and tiger_court_main_holder:Visible() then 
+				out("#### "..scripted_tiger_warriors_tiger_court_tour.id.." ####")
+				ui_scripted_tour:construct_tour(scripted_tiger_warriors_tiger_court_tour, in_tiger_warriors_tiger_court)
+			elseif not tiger_court_main_holder or not tiger_court_main_holder:Visible() then
+				in_tiger_warriors_tiger_court:cancel()			
+			end 
+		end, 0.1)	
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_tiger_warriors_tiger_court:add_precondition(function() return not common.get_advice_history_string_seen("in_tiger_warriors_tiger_court") end)
+in_tiger_warriors_tiger_court:set_wait_for_fullscreen_panel_dismissed(false)
+in_tiger_warriors_tiger_court:set_should_lock_ui(false)
+in_tiger_warriors_tiger_court:set_reduce_pause_before_triggering(true)
+in_tiger_warriors_tiger_court:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		if context.string == "cp1_cth_tiger_court" then
+			return true
+		end 
+	end
+)
+in_tiger_warriors_tiger_court:set_completion_callback(
+	function()
+		common.set_advice_history_string_seen("in_tiger_warriors_tiger_court")
+	end
+);
+
+scripted_tiger_warriors_tiger_court_tour = {
+	id = "in_tiger_warriors_tiger_court",
+	localised_name = "ui_text_replacements_localised_text_wh3_cp1_hp_campaign_title_tiger_warriors_tiger_court",
+
+	{
+		id = "in_tiger_warriors_tiger_court_1",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "main_content_holder", "positions_left") end,
+		},
+		text_box = {
+			text = "wh3_cp1_text_pointer_tiger_court_text_pointer_banners",
+			direction = "left",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "in_tiger_warriors_tiger_court_2", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "parent_list_holder") end,
+		},
+		text_box = {
+			text = "wh3_cp1_text_pointer_tiger_court_text_pointer_1",
+			direction = "right",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "in_tiger_warriors_tiger_court_3", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "button_show_choices") end,
+		},
+		text_box = {
+			text = "wh3_cp1_text_pointer_tiger_court_text_pointer_2",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Armies of Shang-Yang
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_tiger_warriors_armies_of_shang_yang = intervention:new(
+	"in_tiger_warriors_armies_of_shang_yang",			 					-- string name
+	0, 																	-- cost
+	function()
+		cm:callback(function() 															-- trigger callback
+			local shang_yang_main_holder = find_uicomponent(core:get_ui_root(), "cp1_cth_shang_yang", "panel_holder_animation")
+			if shang_yang_main_holder and shang_yang_main_holder:Visible() then
+				out("#### "..scripted_tiger_warriors_armies_of_shang_yang.id.." ####")
+				ui_scripted_tour:construct_tour(scripted_tiger_warriors_armies_of_shang_yang, in_tiger_warriors_armies_of_shang_yang)
+			elseif not shang_yang_main_holder or not shang_yang_main_holder:Visible() then
+				in_tiger_warriors_armies_of_shang_yang:cancel()			
+			end
+		end, 0.1)
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_tiger_warriors_armies_of_shang_yang:add_precondition(function() return not common.get_advice_history_string_seen("in_tiger_warriors_armies_of_shang_yang") end)
+in_tiger_warriors_armies_of_shang_yang:set_wait_for_fullscreen_panel_dismissed(false)
+in_tiger_warriors_armies_of_shang_yang:set_should_lock_ui(false)
+in_tiger_warriors_armies_of_shang_yang:set_reduce_pause_before_triggering(true)
+in_tiger_warriors_armies_of_shang_yang:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		if context.string == "cp1_cth_shang_yang" then
+			return true
+		end 
+	end
+)
+in_tiger_warriors_armies_of_shang_yang:set_completion_callback(
+	function()
+		common.set_advice_history_string_seen("in_tiger_warriors_armies_of_shang_yang")
+	end
+);
+
+scripted_tiger_warriors_armies_of_shang_yang = {
+	id = "in_tiger_warriors_armies_of_shang_yang",
+	localised_name = "ui_text_replacements_localised_text_wh3_cp1_hp_campaign_title_tiger_warriors_armies_of_shang_yang",
+
+	{
+		id = "in_tiger_warriors_armies_of_shang_yang_1", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "top_bar_container") end,
+		},
+		text_box = {
+			text = "wh3_cp1_text_pointer_armies_of_shang_yang_text_pointer_1",
+			direction = "top",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "in_tiger_warriors_armies_of_shang_yang_2", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "tab_upgrades") end,
+		},
+		text_box = {
+			text = "wh3_cp1_text_pointer_armies_of_shang_yang_text_pointer_2",
+			direction = "top",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "in_tiger_warriors_armies_of_shang_yang_3",  
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "button_tab_holder", "tab_units") end,
+		},
+		text_box = {
+			text = "wh3_cp1_text_pointer_armies_of_shang_yang_text_pointer_3",
+			direction = "top",
+			size = 350,
+			length = 50
+		},
+		
+	},
+	
+	{
+		id = "in_tiger_warriors_armies_of_shang_yang_4",  
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "frame_bar") end,
+		},
+		text_box = {
+			text = "wh3_cp1_text_pointer_armies_of_shang_yang_text_pointer_4",
+			direction = "left",
+			size = 350,
+			length = 50
+		},
+	},
+
+	{ 
+		id = "in_tiger_warriors_armies_of_shang_yang_5",  
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dy_army_cap") end,
+
+		},
+		text_box = {
+			text = "wh3_cp1_text_pointer_armies_of_shang_yang_text_pointer_5",
+			direction = "left",
+
+			size = 350,
+			length = 50
+		},
+	},
+
+	{
+		id = "in_tiger_warriors_armies_of_shang_yang_6",  
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "category_list") end,
+		},
+		text_box = {
+			text = "wh3_cp1_text_pointer_armies_of_shang_yang_text_pointer_6",
+			direction = "top",
+			size = 350,
+			length = 50
+		},
+		click_on_navigate = function() return find_uicomponent(core:get_ui_root(), "CcoRitualCategoryRecordCP1_TW_GROUP_1_UNITS_JADE_INFANTRY", "units_list") end,
+	},
+
+	{
+		id = "in_tiger_warriors_armies_of_shang_yang_7",  
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "recruitment_cap_holder") end,
+		},
+		text_box = {
+			text = "wh3_cp1_text_pointer_armies_of_shang_yang_text_pointer_7",
+			direction = "right",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "in_tiger_warriors_armies_of_shang_yang_8",  
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "unit_info_holder") end,
+		},
+		text_box = {
+			text = "wh3_cp1_text_pointer_armies_of_shang_yang_text_pointer_8",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----  Tiger Court Textpointer
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_tiger_court_text_pointer = intervention:new(
+	"in_tiger_court_text_pointer",			 						-- string name
+	0, 																	-- cost
+	function() 
+		tiger_court_text_pointer()																			
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_tiger_court_text_pointer:add_precondition(function() return not common.get_advice_history_string_seen("in_tiger_warriors_tiger_court") end)
+in_tiger_court_text_pointer:set_wait_for_fullscreen_panel_dismissed(false)
+in_tiger_court_text_pointer:take_priority_over_intervention("in_armies_of_shang_yang_text_pointer")
+in_tiger_court_text_pointer:add_trigger_condition(
+	"MissionSucceeded",
+	function(context) 
+		return context:mission():mission_record_key() == bhashiva_campaign_config.optional_mission_data.first.key
+	end
+)
+
+function tiger_court_text_pointer()
+	local components = find_uicomponent("button_tiger_court");  	
+	core:show_fullscreen_highlight_around_components(15, false, false, components);
+	local tp = text_pointer:new_from_component(
+	"tp_button_tiger_court",
+	"right",
+	50,
+	components,
+	0.1,
+	0.5
+	)
+	tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_cp1_text_pointer_tiger_court_text_unlocked") 
+	tp:set_style("semitransparent")
+	tp:set_topmost(true)
+	tp:set_highlight_close_button(0.5)
+	tp:set_close_button_callback(
+		function()
+			core:hide_fullscreen_highlight();
+			tp:hide()
+			components:SimulateLClick();
+		end
+	);
+	cm:callback(
+		function()
+			tp:show();
+			in_tiger_court_text_pointer:complete()			
+		end,
+		0.3
+	);
+end
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----  Armies of Shang Yang Textpointer
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_armies_of_shang_yang_text_pointer = intervention:new(
+	"in_armies_of_shang_yang_text_pointer",			 						-- string name
+	0, 																	-- cost
+	function() 
+		armies_of_shang_yang_text_pointer()																			
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_armies_of_shang_yang_text_pointer:add_precondition(function() return not common.get_advice_history_string_seen("in_tiger_warriors_armies_of_shang_yang_text_pointer") end)
+in_armies_of_shang_yang_text_pointer:set_wait_for_fullscreen_panel_dismissed(true)
+in_armies_of_shang_yang_text_pointer:add_trigger_condition(
+	"PooledResourceChanged",
+	function(context) 
+		local pr = context:resource()
+		return pr:key() == "wh3_cp1_cth_iron_favour" and pr:value() >= 200 and context:faction():is_human()
+	end
+)
+
+function armies_of_shang_yang_text_pointer()
+	local components = find_uicomponent("button_tiger_mercenaries");  
+	common.set_advice_history_string_seen("in_tiger_warriors_armies_of_shang_yang_text_pointer")
+	core:show_fullscreen_highlight_around_components(15, false, false, components);
+	local tp = text_pointer:new_from_component(
+	"tp_button_tiger_mercenaries",
+	"right",
+	45,
+	components,
+	0.1,
+	0.5
+	)
+	tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_cp1_text_pointer_armies_of_shang_yang_text_unlocked") 
+	tp:set_style("semitransparent")
+	tp:set_topmost(true)
+	tp:set_highlight_close_button(0.5)
+	tp:set_close_button_callback(
+		function()
+			core:hide_fullscreen_highlight(); 
+			tp:hide()
+			components:SimulateLClick();					
+		end
+	);
+	cm:callback(
+		function()
+			tp:show();
+			in_armies_of_shang_yang_text_pointer:complete()
+		end,
+		0.3
+	);
+end
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

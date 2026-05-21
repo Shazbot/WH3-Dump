@@ -491,6 +491,18 @@ local help_panel_position_overrides_campaign = {
 		["x"] = -5,
 		["y"] = 5
 	},
+	cp1_cth_bhashiva_caravans = {
+		["x"] = -5,
+		["y"] = 5
+	},
+	cp1_cth_shang_yang = {
+		["x"] = -5,
+		["y"] = -5
+	},
+	cp1_cth_tiger_court = {
+		["x"] = -5,
+		["y"] = -5
+	},
 	daemonic_progression = {
 		["x"] = -5,
 		["y"] = -5

@@ -1026,6 +1026,18 @@ local function add_narrative_data_for_playable_faction(faction_key)
 			end
 		end
 	end
+	-- Bhashiva
+	if faction_key == "wh3_cp1_cth_tiger_warriors" then
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_key", "wh3_cp1_camp_narrative_ie_bhashiva_defeat_initial_enemy_01");
+		narrative.add_data_for_faction(faction_key, "shared_event_defeat_initial_enemy_mission_rewards", 																		-- mission reward
+			{
+				payload.money(500, faction_key),
+				payload.ancillary_mission_payload(faction_key, false, "common"),
+			}
+		);
+		-- narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_capture_settlement_mission_key", "wh3_cp1_camp_narrative_ie_bhashiva_capture_settlement_01");
+		narrative.add_data_for_faction(faction_key, "shared_settlement_capture_event_capture_settlement_block", true)
+	end
 end;
 
 

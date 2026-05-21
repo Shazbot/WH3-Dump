@@ -129,6 +129,7 @@
 <dt><a href="#EventFeedEventRecordedEvent">EventFeedEventRecordedEvent</a></dt>
 <dt><a href="#FactionAboutToEndTurn">FactionAboutToEndTurn</a></dt>
 <dt><a href="#FactionAboutToStartTurn">FactionAboutToStartTurn</a></dt>
+<dt><a href="#FactionAwokenFromDeath">FactionAwokenFromDeath</a></dt>
 <dt><a href="#FactionBecomesActiveHuman">FactionBecomesActiveHuman</a></dt>
 <dt><a href="#FactionBecomesIdleHuman">FactionBecomesIdleHuman</a></dt>
 <dt><a href="#FactionBecomesLiberationVassal">FactionBecomesLiberationVassal</a></dt>
@@ -408,6 +409,7 @@
 <dt><a href="#RITUAL_PERFORMING_CHARACTER_STATUS_SCRIPT_INTERFACE">RITUAL_PERFORMING_CHARACTER_STATUS_SCRIPT_INTERFACE</a></dt>
 <dt><a href="#RITUAL_SETUP_SCRIPT_INTERFACE">RITUAL_SETUP_SCRIPT_INTERFACE</a></dt>
 <dt><a href="#RITUAL_STATUS_SCRIPT_INTERFACE">RITUAL_STATUS_SCRIPT_INTERFACE</a></dt>
+<dt><a href="#RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACE">RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACE</a></dt>
 <dt><a href="#RITUAL_TARGET_FACTION_STATUS_SCRIPT_INTERFACE">RITUAL_TARGET_FACTION_STATUS_SCRIPT_INTERFACE</a></dt>
 <dt><a href="#RITUAL_TARGET_MILITARY_FORCE_STATUS_SCRIPT_INTERFACE">RITUAL_TARGET_MILITARY_FORCE_STATUS_SCRIPT_INTERFACE</a></dt>
 <dt><a href="#RITUAL_TARGET_REGION_STATUS_SCRIPT_INTERFACE">RITUAL_TARGET_REGION_STATUS_SCRIPT_INTERFACE</a></dt>
@@ -1570,6 +1572,8 @@
 </dl>
 <br></dd>
 <dd><h4><a name="FactionAboutToStartTurn">FactionAboutToStartTurn</a></h4>
+</dd>
+<dd><h4><a name="FactionAwokenFromDeath">FactionAwokenFromDeath</a></h4>
 </dd>
 <dd><h4><a name="FactionBecomesActiveHuman">FactionBecomesActiveHuman</a></h4>
 <dl><dd>Function Name: faction</dd>
@@ -4669,7 +4673,7 @@
 <br>
 <dd>Function: <a name="CAMPAIGN_PAYLOAD_BUILDER_SCRIPT_INTERFACEadd_unit">add_unit</a></dd>
 <dd>Description: Add units to a military force</dd>
-<dd>Parameters: <a href="#MILITARY_FORCE_SCRIPT_INTERFACE">MILITARY_FORCE_SCRIPT_INTERFACE</a> target_force, String main_unit_key, card32 amount, card8 xp</dd>
+<dd>Parameters: <a href="#MILITARY_FORCE_SCRIPT_INTERFACE">MILITARY_FORCE_SCRIPT_INTERFACE</a> target_force, String main_unit_key, card32 amount, card8 xp, (optional)bool ignore_unit_cap</dd>
 <dd>Return: bool</dd>
 <br>
 <dd>Function: <a name="CAMPAIGN_PAYLOAD_BUILDER_SCRIPT_INTERFACEdestroy_unit">destroy_unit</a></dd>
@@ -5197,6 +5201,7 @@
 <dd><a href="#CHARACTER_SCRIPT_INTERFACEcommand_queue_index">command_queue_index</a></dd>
 <dd><a href="#CHARACTER_SCRIPT_INTERFACEhas_garrison_residence">has_garrison_residence</a></dd>
 <dd><a href="#CHARACTER_SCRIPT_INTERFACEhas_region">has_region</a></dd>
+<dd><a href="#CHARACTER_SCRIPT_INTERFACEhas_sea_region">has_sea_region</a></dd>
 <dd><a href="#CHARACTER_SCRIPT_INTERFACEhas_military_force">has_military_force</a></dd>
 <dd><a href="#CHARACTER_SCRIPT_INTERFACEhas_transported_military_force">has_transported_military_force</a></dd>
 <dd><a href="#CHARACTER_SCRIPT_INTERFACEmodel">model</a></dd>
@@ -5323,6 +5328,11 @@
 <dd>Function: <a name="CHARACTER_SCRIPT_INTERFACEhas_region">has_region</a></dd>
 <dd>Description: Is the character in a valid region?</dd>
 <dd>Parameters: has_region()</dd>
+<dd>Return: bool</dd>
+<br>
+<dd>Function: <a name="CHARACTER_SCRIPT_INTERFACEhas_sea_region">has_sea_region</a></dd>
+<dd>Description: Is the character in a valid sea region?</dd>
+<dd>Parameters: has_sea_region()</dd>
 <dd>Return: bool</dd>
 <br>
 <dd>Function: <a name="CHARACTER_SCRIPT_INTERFACEhas_military_force">has_military_force</a></dd>
@@ -7844,11 +7854,15 @@
 <br>
 <dd><a href="#INITIATIVE_SET_SCRIPT_INTERFACEis_null_interface">is_null_interface</a></dd>
 <dd><a href="#INITIATIVE_SET_SCRIPT_INTERFACEall_initiatives">all_initiatives</a></dd>
+<dd><a href="#INITIATIVE_SET_SCRIPT_INTERFACEall_initiatives_sorted">all_initiatives_sorted</a></dd>
 <dd><a href="#INITIATIVE_SET_SCRIPT_INTERFACEactive_initiatives">active_initiatives</a></dd>
+<dd><a href="#INITIATIVE_SET_SCRIPT_INTERFACEactive_initiatives_sorted">active_initiatives_sorted</a></dd>
 <dd><a href="#INITIATIVE_SET_SCRIPT_INTERFACElookup_initiative_by_key">lookup_initiative_by_key</a></dd>
 <dd><a href="#INITIATIVE_SET_SCRIPT_INTERFACEinitiative_status_by_key">initiative_status_by_key</a></dd>
 <dd><a href="#INITIATIVE_SET_SCRIPT_INTERFACEinitiative_status">initiative_status</a></dd>
 <dd><a href="#INITIATIVE_SET_SCRIPT_INTERFACEcooldown_remaining">cooldown_remaining</a></dd>
+<dd><a href="#INITIATIVE_SET_SCRIPT_INTERFACEcategory_key">category_key</a></dd>
+<dd><a href="#INITIATIVE_SET_SCRIPT_INTERFACErecord_key">record_key</a></dd>
 <br><dd>Function: <a name="INITIATIVE_SET_SCRIPT_INTERFACEis_null_interface">is_null_interface</a></dd>
 <dd>Description: Is this the null script interface</dd>
 <dd>Parameters: is_null_interface()</dd>
@@ -7859,9 +7873,19 @@
 <dd>Parameters: all_initiatives()</dd>
 <dd>Return: <a href="#INITIATIVE_LIST_SCRIPT_INTERFACE">INITIATIVE_LIST_SCRIPT_INTERFACE</a></dd>
 <br>
+<dd>Function: <a name="INITIATIVE_SET_SCRIPT_INTERFACEall_initiatives_sorted">all_initiatives_sorted</a></dd>
+<dd>Description: Returns a sorted list of every initiative in this set</dd>
+<dd>Parameters: all_initiatives_sorted()</dd>
+<dd>Return: <a href="#INITIATIVE_LIST_SCRIPT_INTERFACE">INITIATIVE_LIST_SCRIPT_INTERFACE</a></dd>
+<br>
 <dd>Function: <a name="INITIATIVE_SET_SCRIPT_INTERFACEactive_initiatives">active_initiatives</a></dd>
 <dd>Description: Returns a list of all active initiatives in this set</dd>
 <dd>Parameters: active_initiatives()</dd>
+<dd>Return: <a href="#INITIATIVE_LIST_SCRIPT_INTERFACE">INITIATIVE_LIST_SCRIPT_INTERFACE</a></dd>
+<br>
+<dd>Function: <a name="INITIATIVE_SET_SCRIPT_INTERFACEactive_initiatives_sorted">active_initiatives_sorted</a></dd>
+<dd>Description: Returns a sorted list of all active initiatives in this set</dd>
+<dd>Parameters: active_initiatives_sorted()</dd>
 <dd>Return: <a href="#INITIATIVE_LIST_SCRIPT_INTERFACE">INITIATIVE_LIST_SCRIPT_INTERFACE</a></dd>
 <br>
 <dd>Function: <a name="INITIATIVE_SET_SCRIPT_INTERFACElookup_initiative_by_key">lookup_initiative_by_key</a></dd>
@@ -7883,6 +7907,16 @@
 <dd>Description: Number of rounds that the initiative set is on cooldown for. Zero if it's not on cooldown</dd>
 <dd>Parameters: cooldown_remaining()</dd>
 <dd>Return: card32</dd>
+<br>
+<dd>Function: <a name="INITIATIVE_SET_SCRIPT_INTERFACEcategory_key">category_key</a></dd>
+<dd>Description: The key of the initiative's category</dd>
+<dd>Parameters: category_key()</dd>
+<dd>Return: String</dd>
+<br>
+<dd>Function: <a name="INITIATIVE_SET_SCRIPT_INTERFACErecord_key">record_key</a></dd>
+<dd>Description: The key of the initiative set</dd>
+<dd>Parameters: record_key()</dd>
+<dd>Return: String</dd>
 <br>
 <h4><a name="INITIATIVE_STATUS_SCRIPT_INTERFACE">INITIATIVE_STATUS_SCRIPT_INTERFACE</a></h4>
 <dd>Description: Status of an initiative. Status is from the time this interface is returned</dd>
@@ -8093,6 +8127,7 @@
 <dd><a href="#MILITARY_FORCE_SCRIPT_INTERFACEget_plague_if_infected">get_plague_if_infected</a></dd>
 <dd><a href="#MILITARY_FORCE_SCRIPT_INTERFACEtry_get_military_force_plague">try_get_military_force_plague</a></dd>
 <dd><a href="#MILITARY_FORCE_SCRIPT_INTERFACEget_nearest_enemy_military_force">get_nearest_enemy_military_force</a></dd>
+<dd><a href="#MILITARY_FORCE_SCRIPT_INTERFACEget_unit_action_points_always_zero_this_turn">get_unit_action_points_always_zero_this_turn</a></dd>
 <br><dd>Function: <a name="MILITARY_FORCE_SCRIPT_INTERFACEis_null_interface">is_null_interface</a></dd>
 <dd>Description: Is this the null script interface</dd>
 <dd>Parameters: is_null_interface()</dd>
@@ -8312,6 +8347,11 @@
 <dd>Description: Returns the closest military force</dd>
 <dd>Parameters: get_nearest_enemy_military_force(bool include_garrisons,bool check_entire_world)</dd>
 <dd>Return: <a href="#MILITARY_FORCE_SCRIPT_INTERFACE">MILITARY_FORCE_SCRIPT_INTERFACE</a></dd>
+<br>
+<dd>Function: <a name="MILITARY_FORCE_SCRIPT_INTERFACEget_unit_action_points_always_zero_this_turn">get_unit_action_points_always_zero_this_turn</a></dd>
+<dd>Description: Returns whether the m_action_points_always_zero flag is set for units in this force, meaning they won't be able to gain AP this turn</dd>
+<dd>Parameters: get_unit_action_points_always_zero_this_turn()</dd>
+<dd>Return: bool</dd>
 <br>
 <h4><a name="MILITARY_FORCE_SLOT_LIST_SCRIPT_INTERFACE">MILITARY_FORCE_SLOT_LIST_SCRIPT_INTERFACE</a></h4>
 <dd>Description: A list of military force slots</dd>
@@ -8864,25 +8904,31 @@
 <dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEtarget_faction_status">target_faction_status</a></dd>
 <dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEtarget_region_status">target_region_status</a></dd>
 <dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEtarget_force_status">target_force_status</a></dd>
+<dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEtarget_character_status">target_character_status</a></dd>
 <dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEtarget_type">target_type</a></dd>
 <dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEtarget_record_key">target_record_key</a></dd>
 <dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEget_target_faction">get_target_faction</a></dd>
 <dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEget_target_region">get_target_region</a></dd>
 <dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEget_target_force">get_target_force</a></dd>
+<dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEget_target_character">get_target_character</a></dd>
 <dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEis_faction_valid_target">is_faction_valid_target</a></dd>
 <dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEis_region_valid_target">is_region_valid_target</a></dd>
 <dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEis_force_valid_target">is_force_valid_target</a></dd>
+<dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEis_character_valid_target">is_character_valid_target</a></dd>
 <dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEcan_target_self">can_target_self</a></dd>
 <dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEstatus_for_faction_target">status_for_faction_target</a></dd>
 <dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEstatus_for_region_target">status_for_region_target</a></dd>
 <dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEstatus_for_force_target">status_for_force_target</a></dd>
+<dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEstatus_for_character_target">status_for_character_target</a></dd>
 <dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEget_all_valid_target_forces_in_faction">get_all_valid_target_forces_in_faction</a></dd>
 <dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEget_all_valid_target_regions_in_faction">get_all_valid_target_regions_in_faction</a></dd>
+<dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEget_all_valid_target_characters_in_faction">get_all_valid_target_characters_in_faction</a></dd>
 <dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEget_all_valid_target_factions">get_all_valid_target_factions</a></dd>
 <dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEclear">clear</a></dd>
 <dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEset_target_faction">set_target_faction</a></dd>
 <dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEset_target_region">set_target_region</a></dd>
 <dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEset_target_force">set_target_force</a></dd>
+<dd><a href="#MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEset_target_character">set_target_character</a></dd>
 <br><dd>Function: <a name="MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEis_null_interface">is_null_interface</a></dd>
 <dd>Description: Is this the null script interface</dd>
 <dd>Parameters: is_null_interface()</dd>
@@ -8907,6 +8953,11 @@
 <dd>Description: Get the status of the current target force</dd>
 <dd>Parameters: target_force_status()</dd>
 <dd>Return: <a href="#RITUAL_TARGET_MILITARY_FORCE_STATUS_SCRIPT_INTERFACE">RITUAL_TARGET_MILITARY_FORCE_STATUS_SCRIPT_INTERFACE</a></dd>
+<br>
+<dd>Function: <a name="MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEtarget_character_status">target_character_status</a></dd>
+<dd>Description: Get the status of the current target character</dd>
+<dd>Parameters: target_character_status()</dd>
+<dd>Return: <a href="#RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACE">RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACE</a></dd>
 <br>
 <dd>Function: <a name="MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEtarget_type">target_type</a></dd>
 <dd>Description: Get the target type</dd>
@@ -8933,6 +8984,11 @@
 <dd>Parameters: get_target_force()</dd>
 <dd>Return: <a href="#MILITARY_FORCE_SCRIPT_INTERFACE">MILITARY_FORCE_SCRIPT_INTERFACE</a></dd>
 <br>
+<dd>Function: <a name="MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEget_target_character">get_target_character</a></dd>
+<dd>Description: Attempt to get the target character. May be null</dd>
+<dd>Parameters: get_target_character()</dd>
+<dd>Return: <a href="#CHARACTER_SCRIPT_INTERFACE">CHARACTER_SCRIPT_INTERFACE</a></dd>
+<br>
 <dd>Function: <a name="MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEis_faction_valid_target">is_faction_valid_target</a></dd>
 <dd>Description: Is the specified faction a valid target?</dd>
 <dd>Parameters: is_faction_valid_target(FACTION_SCRIPT_INTERFACE faction)</dd>
@@ -8946,6 +9002,11 @@
 <dd>Function: <a name="MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEis_force_valid_target">is_force_valid_target</a></dd>
 <dd>Description: Is the specified force a valid target?</dd>
 <dd>Parameters: is_region_valid_target(REGION_SCRIPT_INTERFACE faction)</dd>
+<dd>Return: bool</dd>
+<br>
+<dd>Function: <a name="MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEis_character_valid_target">is_character_valid_target</a></dd>
+<dd>Description: Is the specified character a valid target?</dd>
+<dd>Parameters: is_character_valid_target(CHARACTER_SCRIPT_INTERFACE character)</dd>
 <dd>Return: bool</dd>
 <br>
 <dd>Function: <a name="MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEcan_target_self">can_target_self</a></dd>
@@ -8968,6 +9029,11 @@
 <dd>Parameters: status_for_force_target(MILITARY_FORCE_SCRIPT_INTERFACE force)</dd>
 <dd>Return: <a href="#RITUAL_TARGET_MILITARY_FORCE_STATUS_SCRIPT_INTERFACE">RITUAL_TARGET_MILITARY_FORCE_STATUS_SCRIPT_INTERFACE</a></dd>
 <br>
+<dd>Function: <a name="MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEstatus_for_character_target">status_for_character_target</a></dd>
+<dd>Description: Status for the provided character.</dd>
+<dd>Parameters: status_for_character_target(CHARACTER_SCRIPT_INTERFACE character)</dd>
+<dd>Return: <a href="#RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACE">RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACE</a></dd>
+<br>
 <dd>Function: <a name="MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEget_all_valid_target_forces_in_faction">get_all_valid_target_forces_in_faction</a></dd>
 <dd>Description: Get a list of all of the forces that can be targeted by this ritual, in the specified faction.</dd>
 <dd>Parameters: get_all_valid_target_forces_in_faction(FACTION_SCRIPT_INTERFACE faction)</dd>
@@ -8977,6 +9043,11 @@
 <dd>Description: Get a list of all of the regions that can be targeted by this ritual, in the specified faction.</dd>
 <dd>Parameters: get_all_valid_target_regions_in_faction(FACTION_SCRIPT_INTERFACE faction)</dd>
 <dd>Return: <a href="#REGION_LIST_SCRIPT_INTERFACE">REGION_LIST_SCRIPT_INTERFACE</a></dd>
+<br>
+<dd>Function: <a name="MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEget_all_valid_target_characters_in_faction">get_all_valid_target_characters_in_faction</a></dd>
+<dd>Description: Get a list of all of the characters that can be targeted by this ritual, in the specified faction.</dd>
+<dd>Parameters: get_all_valid_target_characters_in_faction(FACTION_SCRIPT_INTERFACE faction)</dd>
+<dd>Return: <a href="#CHARACTER_LIST_SCRIPT_INTERFACE">CHARACTER_LIST_SCRIPT_INTERFACE</a></dd>
 <br>
 <dd>Function: <a name="MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEget_all_valid_target_factions">get_all_valid_target_factions</a></dd>
 <dd>Description: Get a list of all of the factions that can be targeted by this ritual.</dd>
@@ -9001,6 +9072,11 @@
 <dd>Function: <a name="MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEset_target_force">set_target_force</a></dd>
 <dd>Description: Attempt to set the target force</dd>
 <dd>Parameters: set_target_force(MILITARY_FORCE_SCRIPT_INTERFACE target)</dd>
+<dd>Return: bool</dd>
+<br>
+<dd>Function: <a name="MODIFY_RITUAL_TARGET_SCRIPT_INTERFACEset_target_character">set_target_character</a></dd>
+<dd>Description: Attempt to set the target character</dd>
+<dd>Parameters: set_target_character(CHARACTER_SCRIPT_INTERFACE target)</dd>
 <dd>Return: bool</dd>
 <br>
 <h4><a name="NULL_SCRIPT_INTERFACE">NULL_SCRIPT_INTERFACE</a></h4>
@@ -10548,6 +10624,111 @@
 <dd>Parameters: blocked_by_pending_action()</dd>
 <dd>Return: bool</dd>
 <br>
+<h4><a name="RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACE">RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACE</a></h4>
+<dd>Description: Ritual Target Character Status Script Interface</dd>
+<br>
+<dd><a href="#RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEis_null_interface">is_null_interface</a></dd>
+<dd><a href="#RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEvalid">valid</a></dd>
+<dd><a href="#RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEwrong_type">wrong_type</a></dd>
+<dd><a href="#RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEno_target">no_target</a></dd>
+<dd><a href="#RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEnot_own">not_own</a></dd>
+<dd><a href="#RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEis_own">is_own</a></dd>
+<dd><a href="#RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEinvalid_subculture">invalid_subculture</a></dd>
+<dd><a href="#RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEinvalid_agent_type">invalid_agent_type</a></dd>
+<dd><a href="#RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEinvalid_agent_subtype">invalid_agent_subtype</a></dd>
+<dd><a href="#RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACElevel_too_low">level_too_low</a></dd>
+<dd><a href="#RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEnot_embedded">not_embedded</a></dd>
+<dd><a href="#RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEis_embedded">is_embedded</a></dd>
+<dd><a href="#RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEtarget_not_visible">target_not_visible</a></dd>
+<dd><a href="#RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEinvalid_target_is_not_human">invalid_target_is_not_human</a></dd>
+<dd><a href="#RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEinvalid_target_is_human">invalid_target_is_human</a></dd>
+<dd><a href="#RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEperforming_character_is_in_different_region">performing_character_is_in_different_region</a></dd>
+<dd><a href="#RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEperforming_character_is_in_same_region">performing_character_is_in_same_region</a></dd>
+<br><dd>Function: <a name="RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEis_null_interface">is_null_interface</a></dd>
+<dd>Description: Is this the null script interface</dd>
+<dd>Parameters: is_null_interface()</dd>
+<dd>Return: bool</dd>
+<br>
+<dd>Function: <a name="RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEvalid">valid</a></dd>
+<dd>Description: No invalid flags are currently set</dd>
+<dd>Parameters: valid()</dd>
+<dd>Return: bool</dd>
+<br>
+<dd>Function: <a name="RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEwrong_type">wrong_type</a></dd>
+<dd>Description: This is not a character target</dd>
+<dd>Parameters: wrong_type()</dd>
+<dd>Return: bool</dd>
+<br>
+<dd>Function: <a name="RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEno_target">no_target</a></dd>
+<dd>Description: There is currently no target set</dd>
+<dd>Parameters: no_target()</dd>
+<dd>Return: bool</dd>
+<br>
+<dd>Function: <a name="RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEnot_own">not_own</a></dd>
+<dd>Description: This character is not owned by you, and it must be to perform this ritual.</dd>
+<dd>Parameters: not_own()</dd>
+<dd>Return: bool</dd>
+<br>
+<dd>Function: <a name="RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEis_own">is_own</a></dd>
+<dd>Description: This character is owned by you, and it must not be to perform this ritual.</dd>
+<dd>Parameters: is_own()</dd>
+<dd>Return: bool</dd>
+<br>
+<dd>Function: <a name="RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEinvalid_subculture">invalid_subculture</a></dd>
+<dd>Description: This character is not the correct subculture.</dd>
+<dd>Parameters: invalid_subculture()</dd>
+<dd>Return: bool</dd>
+<br>
+<dd>Function: <a name="RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEinvalid_agent_type">invalid_agent_type</a></dd>
+<dd>Description: This character is not the correct agent type.</dd>
+<dd>Parameters: invalid_agent_type()</dd>
+<dd>Return: bool</dd>
+<br>
+<dd>Function: <a name="RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEinvalid_agent_subtype">invalid_agent_subtype</a></dd>
+<dd>Description: This character is not the correct agent subtype.</dd>
+<dd>Parameters: invalid_agent_subtype()</dd>
+<dd>Return: bool</dd>
+<br>
+<dd>Function: <a name="RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACElevel_too_low">level_too_low</a></dd>
+<dd>Description: This character's level is too low.</dd>
+<dd>Parameters: level_too_low()</dd>
+<dd>Return: bool</dd>
+<br>
+<dd>Function: <a name="RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEnot_embedded">not_embedded</a></dd>
+<dd>Description: This character is not embedded, and it must be to perform this ritual.</dd>
+<dd>Parameters: not_embedded()</dd>
+<dd>Return: bool</dd>
+<br>
+<dd>Function: <a name="RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEis_embedded">is_embedded</a></dd>
+<dd>Description: This character is embedded, and it must not be to perform this ritual.</dd>
+<dd>Parameters: is_embedded()</dd>
+<dd>Return: bool</dd>
+<br>
+<dd>Function: <a name="RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEtarget_not_visible">target_not_visible</a></dd>
+<dd>Description: This character is not visible to you.</dd>
+<dd>Parameters: target_not_visible()</dd>
+<dd>Return: bool</dd>
+<br>
+<dd>Function: <a name="RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEinvalid_target_is_not_human">invalid_target_is_not_human</a></dd>
+<dd>Description: This character is not human, and the ritual may only target human characters.</dd>
+<dd>Parameters: invalid_target_is_not_human()</dd>
+<dd>Return: bool</dd>
+<br>
+<dd>Function: <a name="RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEinvalid_target_is_human">invalid_target_is_human</a></dd>
+<dd>Description: This character is human, and the ritual may only target non-human characters.</dd>
+<dd>Parameters: invalid_target_is_human()</dd>
+<dd>Return: bool</dd>
+<br>
+<dd>Function: <a name="RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEperforming_character_is_in_different_region">performing_character_is_in_different_region</a></dd>
+<dd>Description: The performing character is in a different region to the target character, and the ritual requires them to be in the same region.</dd>
+<dd>Parameters: performing_character_is_in_different_region()</dd>
+<dd>Return: bool</dd>
+<br>
+<dd>Function: <a name="RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACEperforming_character_is_in_same_region">performing_character_is_in_same_region</a></dd>
+<dd>Description: The performing character is in the same region as the target character, and the ritual requires them to be in different regions.</dd>
+<dd>Parameters: performing_character_is_in_same_region()</dd>
+<dd>Return: bool</dd>
+<br>
 <h4><a name="RITUAL_TARGET_FACTION_STATUS_SCRIPT_INTERFACE">RITUAL_TARGET_FACTION_STATUS_SCRIPT_INTERFACE</a></h4>
 <dd>Description: Ritual Target Faction Status Script Interface</dd>
 <br>
@@ -10757,20 +10938,25 @@
 <dd><a href="#RITUAL_TARGET_SCRIPT_INTERFACEtarget_faction_status">target_faction_status</a></dd>
 <dd><a href="#RITUAL_TARGET_SCRIPT_INTERFACEtarget_region_status">target_region_status</a></dd>
 <dd><a href="#RITUAL_TARGET_SCRIPT_INTERFACEtarget_force_status">target_force_status</a></dd>
+<dd><a href="#RITUAL_TARGET_SCRIPT_INTERFACEtarget_character_status">target_character_status</a></dd>
 <dd><a href="#RITUAL_TARGET_SCRIPT_INTERFACEtarget_type">target_type</a></dd>
 <dd><a href="#RITUAL_TARGET_SCRIPT_INTERFACEtarget_record_key">target_record_key</a></dd>
 <dd><a href="#RITUAL_TARGET_SCRIPT_INTERFACEget_target_faction">get_target_faction</a></dd>
 <dd><a href="#RITUAL_TARGET_SCRIPT_INTERFACEget_target_region">get_target_region</a></dd>
 <dd><a href="#RITUAL_TARGET_SCRIPT_INTERFACEget_target_force">get_target_force</a></dd>
+<dd><a href="#RITUAL_TARGET_SCRIPT_INTERFACEget_target_character">get_target_character</a></dd>
 <dd><a href="#RITUAL_TARGET_SCRIPT_INTERFACEis_faction_valid_target">is_faction_valid_target</a></dd>
 <dd><a href="#RITUAL_TARGET_SCRIPT_INTERFACEis_region_valid_target">is_region_valid_target</a></dd>
 <dd><a href="#RITUAL_TARGET_SCRIPT_INTERFACEis_force_valid_target">is_force_valid_target</a></dd>
+<dd><a href="#RITUAL_TARGET_SCRIPT_INTERFACEis_character_valid_target">is_character_valid_target</a></dd>
 <dd><a href="#RITUAL_TARGET_SCRIPT_INTERFACEcan_target_self">can_target_self</a></dd>
 <dd><a href="#RITUAL_TARGET_SCRIPT_INTERFACEstatus_for_faction_target">status_for_faction_target</a></dd>
 <dd><a href="#RITUAL_TARGET_SCRIPT_INTERFACEstatus_for_region_target">status_for_region_target</a></dd>
 <dd><a href="#RITUAL_TARGET_SCRIPT_INTERFACEstatus_for_force_target">status_for_force_target</a></dd>
+<dd><a href="#RITUAL_TARGET_SCRIPT_INTERFACEstatus_for_character_target">status_for_character_target</a></dd>
 <dd><a href="#RITUAL_TARGET_SCRIPT_INTERFACEget_all_valid_target_forces_in_faction">get_all_valid_target_forces_in_faction</a></dd>
 <dd><a href="#RITUAL_TARGET_SCRIPT_INTERFACEget_all_valid_target_regions_in_faction">get_all_valid_target_regions_in_faction</a></dd>
+<dd><a href="#RITUAL_TARGET_SCRIPT_INTERFACEget_all_valid_target_characters_in_faction">get_all_valid_target_characters_in_faction</a></dd>
 <dd><a href="#RITUAL_TARGET_SCRIPT_INTERFACEget_all_valid_target_factions">get_all_valid_target_factions</a></dd>
 <br><dd>Function: <a name="RITUAL_TARGET_SCRIPT_INTERFACEis_null_interface">is_null_interface</a></dd>
 <dd>Description: Is this the null script interface</dd>
@@ -10797,6 +10983,11 @@
 <dd>Parameters: target_force_status()</dd>
 <dd>Return: <a href="#RITUAL_TARGET_MILITARY_FORCE_STATUS_SCRIPT_INTERFACE">RITUAL_TARGET_MILITARY_FORCE_STATUS_SCRIPT_INTERFACE</a></dd>
 <br>
+<dd>Function: <a name="RITUAL_TARGET_SCRIPT_INTERFACEtarget_character_status">target_character_status</a></dd>
+<dd>Description: Get the status of the current target character</dd>
+<dd>Parameters: target_character_status()</dd>
+<dd>Return: <a href="#RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACE">RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACE</a></dd>
+<br>
 <dd>Function: <a name="RITUAL_TARGET_SCRIPT_INTERFACEtarget_type">target_type</a></dd>
 <dd>Description: Get the target type</dd>
 <dd>Parameters: target_type()</dd>
@@ -10822,6 +11013,11 @@
 <dd>Parameters: get_target_force()</dd>
 <dd>Return: <a href="#MILITARY_FORCE_SCRIPT_INTERFACE">MILITARY_FORCE_SCRIPT_INTERFACE</a></dd>
 <br>
+<dd>Function: <a name="RITUAL_TARGET_SCRIPT_INTERFACEget_target_character">get_target_character</a></dd>
+<dd>Description: Attempt to get the target character. May be null</dd>
+<dd>Parameters: get_target_character()</dd>
+<dd>Return: <a href="#CHARACTER_SCRIPT_INTERFACE">CHARACTER_SCRIPT_INTERFACE</a></dd>
+<br>
 <dd>Function: <a name="RITUAL_TARGET_SCRIPT_INTERFACEis_faction_valid_target">is_faction_valid_target</a></dd>
 <dd>Description: Is the specified faction a valid target?</dd>
 <dd>Parameters: is_faction_valid_target(FACTION_SCRIPT_INTERFACE faction)</dd>
@@ -10835,6 +11031,11 @@
 <dd>Function: <a name="RITUAL_TARGET_SCRIPT_INTERFACEis_force_valid_target">is_force_valid_target</a></dd>
 <dd>Description: Is the specified force a valid target?</dd>
 <dd>Parameters: is_region_valid_target(REGION_SCRIPT_INTERFACE faction)</dd>
+<dd>Return: bool</dd>
+<br>
+<dd>Function: <a name="RITUAL_TARGET_SCRIPT_INTERFACEis_character_valid_target">is_character_valid_target</a></dd>
+<dd>Description: Is the specified character a valid target?</dd>
+<dd>Parameters: is_character_valid_target(CHARACTER_SCRIPT_INTERFACE character)</dd>
 <dd>Return: bool</dd>
 <br>
 <dd>Function: <a name="RITUAL_TARGET_SCRIPT_INTERFACEcan_target_self">can_target_self</a></dd>
@@ -10857,6 +11058,11 @@
 <dd>Parameters: status_for_force_target(MILITARY_FORCE_SCRIPT_INTERFACE force)</dd>
 <dd>Return: <a href="#RITUAL_TARGET_MILITARY_FORCE_STATUS_SCRIPT_INTERFACE">RITUAL_TARGET_MILITARY_FORCE_STATUS_SCRIPT_INTERFACE</a></dd>
 <br>
+<dd>Function: <a name="RITUAL_TARGET_SCRIPT_INTERFACEstatus_for_character_target">status_for_character_target</a></dd>
+<dd>Description: Status for the provided character.</dd>
+<dd>Parameters: status_for_character_target(CHARACTER_SCRIPT_INTERFACE character)</dd>
+<dd>Return: <a href="#RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACE">RITUAL_TARGET_CHARACTER_STATUS_SCRIPT_INTERFACE</a></dd>
+<br>
 <dd>Function: <a name="RITUAL_TARGET_SCRIPT_INTERFACEget_all_valid_target_forces_in_faction">get_all_valid_target_forces_in_faction</a></dd>
 <dd>Description: Get a list of all of the forces that can be targeted by this ritual, in the specified faction.</dd>
 <dd>Parameters: get_all_valid_target_forces_in_faction(FACTION_SCRIPT_INTERFACE faction)</dd>
@@ -10866,6 +11072,11 @@
 <dd>Description: Get a list of all of the regions that can be targeted by this ritual, in the specified faction.</dd>
 <dd>Parameters: get_all_valid_target_regions_in_faction(FACTION_SCRIPT_INTERFACE faction)</dd>
 <dd>Return: <a href="#REGION_LIST_SCRIPT_INTERFACE">REGION_LIST_SCRIPT_INTERFACE</a></dd>
+<br>
+<dd>Function: <a name="RITUAL_TARGET_SCRIPT_INTERFACEget_all_valid_target_characters_in_faction">get_all_valid_target_characters_in_faction</a></dd>
+<dd>Description: Get a list of all of the characters that can be targeted by this ritual, in the specified faction.</dd>
+<dd>Parameters: get_all_valid_target_characters_in_faction(FACTION_SCRIPT_INTERFACE faction)</dd>
+<dd>Return: <a href="#CHARACTER_LIST_SCRIPT_INTERFACE">CHARACTER_LIST_SCRIPT_INTERFACE</a></dd>
 <br>
 <dd>Function: <a name="RITUAL_TARGET_SCRIPT_INTERFACEget_all_valid_target_factions">get_all_valid_target_factions</a></dd>
 <dd>Description: Get a list of all of the factions that can be targeted by this ritual.</dd>
@@ -11266,6 +11477,7 @@
 <dd><a href="#SEA_REGION_SCRIPT_INTERFACEmodel">model</a></dd>
 <dd><a href="#SEA_REGION_SCRIPT_INTERFACEname">name</a></dd>
 <dd><a href="#SEA_REGION_SCRIPT_INTERFACEregion_data_interface">region_data_interface</a></dd>
+<dd><a href="#SEA_REGION_SCRIPT_INTERFACEcharacters_in_sea_region">characters_in_sea_region</a></dd>
 <br><dd>Function: <a name="SEA_REGION_SCRIPT_INTERFACEis_null_interface">is_null_interface</a></dd>
 <dd>Description: Is this the null script interface</dd>
 <dd>Parameters: is_null_interface()</dd>
@@ -11285,6 +11497,11 @@
 <dd>Description: Gets the REGION_DATA interface of the region</dd>
 <dd>Parameters: region_data_interface()</dd>
 <dd>Return: <a href="#REGION_DATA_SCRIPT_INTERFACE">REGION_DATA_SCRIPT_INTERFACE</a></dd>
+<br>
+<dd>Function: <a name="SEA_REGION_SCRIPT_INTERFACEcharacters_in_sea_region">characters_in_sea_region</a></dd>
+<dd>Description: Returns all characters in the sea region</dd>
+<dd>Parameters: characters_in_sea_region</dd>
+<dd>Return: <a href="#CHARACTER_LIST_SCRIPT_INTERFACE">CHARACTER_LIST_SCRIPT_INTERFACE</a></dd>
 <br>
 <h4><a name="SETTLEMENT_SCRIPT_INTERFACE">SETTLEMENT_SCRIPT_INTERFACE</a></h4>
 <dd>Description: Settlement script interface</dd>
@@ -11940,6 +12157,7 @@
 <dd><a href="#UNIT_SCRIPT_INTERFACEmodel">model</a></dd>
 <dd><a href="#UNIT_SCRIPT_INTERFACEforce_commander">force_commander</a></dd>
 <dd><a href="#UNIT_SCRIPT_INTERFACEunit_commander">unit_commander</a></dd>
+<dd><a href="#UNIT_SCRIPT_INTERFACEassociated_character">associated_character</a></dd>
 <dd><a href="#UNIT_SCRIPT_INTERFACEmilitary_force">military_force</a></dd>
 <dd><a href="#UNIT_SCRIPT_INTERFACEfaction">faction</a></dd>
 <dd><a href="#UNIT_SCRIPT_INTERFACEunit_key">unit_key</a></dd>
@@ -12005,6 +12223,11 @@
 <dd>Description: Returns the unit commander if one exists</dd>
 <dd>Parameters: unit_commander()</dd>
 <dd>Return: <a href="#CHARACTER_SCRIPT_INTERFACE">CHARACTER_SCRIPT_INTERFACE</a> (or <a href="#NULL_SCRIPT_INTERFACE">NULL_SCRIPT_INTERFACE</a> unit doesn't have a unit commander)</dd>
+<br>
+<dd>Function: <a name="UNIT_SCRIPT_INTERFACEassociated_character">associated_character</a></dd>
+<dd>Description: Returns the character for this unit if one exists (an agent)</dd>
+<dd>Parameters: associated_character()</dd>
+<dd>Return: <a href="#CHARACTER_SCRIPT_INTERFACE">CHARACTER_SCRIPT_INTERFACE</a> (or <a href="#NULL_SCRIPT_INTERFACE">NULL_SCRIPT_INTERFACE</a> unit doesn't have an associated character)</dd>
 <br>
 <dd>Function: <a name="UNIT_SCRIPT_INTERFACEmilitary_force">military_force</a></dd>
 <dd>Description: Returns the military force containing this unit</dd>

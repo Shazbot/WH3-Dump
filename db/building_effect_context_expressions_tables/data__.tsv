@@ -1,346 +1,373 @@
-key	expression	display_only_active_effects
-#building_effect_context_expressions_tables;1;db/building_effect_context_expressions_tables/data__		
-AislinnBuiltInColony	Region.Owner.RecordKey == "wh3_dlc27_hef_aislinn"	false
-AislinnBuiltInOutpost	Region.Owner.RecordKey != "wh3_dlc27_hef_aislinn"	false
-AislinnColonyInProvince	Province.Regions.Any((r) => r.Owner.RecordKey == "wh3_dlc27_hef_aislinn")	false
-AislinnConfederated	Owner.IsEffectBundleActive("wh3_dlc27_confederated_aislinn")	false
-AllegianceCrowMax	Owner.ModelPooledResourceContext("nor_progress_crow").Total >= 15	false
-AllegianceEagleMax	Owner.ModelPooledResourceContext("nor_progress_eagle").Total >= 15	false
-AllegianceHoundMax	Owner.ModelPooledResourceContext("nor_progress_hound").Total >= 15	false
-AllegianceSerpentMax	Owner.ModelPooledResourceContext("nor_progress_serpent").Total >= 15	false
-AnyProvinceRegionRazed	Province.Regions.Any((r) => r.IsAbandoned == true)	false
-CHDRawMaterialsGreaterThan125	Owner.ModelPooledResourceContext("wh3_dlc23_chd_raw_materials").Total >= 125	false
-CHDRawMaterialsGreaterThan150	Owner.ModelPooledResourceContext("wh3_dlc23_chd_raw_materials").Total >= 150	false
-CHDRawMaterialsGreaterThan250	Owner.ModelPooledResourceContext("wh3_dlc23_chd_raw_materials").Total >= 250	false
-CHDRawMaterialsGreaterThan50	Owner.ModelPooledResourceContext("wh3_dlc23_chd_raw_materials").Total >= 50	false
-CHDRawMaterialsGreaterThan75	Owner.ModelPooledResourceContext("wh3_dlc23_chd_raw_materials").Total >= 75	false
-ChaosUndCorruption100	Region.Province.PooledResourceContextForKey("wh3_main_corruption_chaos").Total >= 100	false
-ChaosUndCorruption50	Region.Province.PooledResourceContextForKey("wh3_main_corruption_chaos").Total >= 50	false
-ChaosUndCorruption75	Region.Province.PooledResourceContextForKey("wh3_main_corruption_chaos").Total >= 75	false
-DEFSlavesGreaterThan100	Owner.ModelPooledResourceContext("def_slaves").Total >= 100	false
-DEFSlavesGreaterThan1000	Owner.ModelPooledResourceContext("def_slaves").Total >= 1000	false
-DEFSlavesGreaterThan150	Owner.ModelPooledResourceContext("def_slaves").Total >= 150	false
-DEFSlavesGreaterThan200	Owner.ModelPooledResourceContext("def_slaves").Total >= 200	false
-DevPointGreatThan5	Region.DevelopmentPoints >= 5	false
-DwarfHidden	Owner.CultureKey == "wh_main_dwf_dwarfs"	true
-DwfLowRegionCount	Owner.IsEffectBundleActive("wh3_main_bundle_dwarf_low_settlement_count_dummy")	false
-EveryProvinceRegionRazed	Province.Regions.Size == (Province.Regions.Count(IsAbandoned) + 1)	false
-FactionHasTrade	Owner.IsInFactionSet("factions_without_trade") == false	true
-FactionIsSeducible	Region.Owner.IsInFactionSet("slaanesh_seducible_factions") && Owner.RecordKeyIsOneOf("wh3_main_sla_seducers_of_slaanesh")	true
-FavouredCorruptionKhorne	Owner.IsInFactionSet("FavouredCorruptionKhorne") == true	true
-FavouredCorruptionNone	Owner.IsInFactionSet("FavouredCorruptionNone") == true	true
-FavouredCorruptionNurgle	Owner.IsInFactionSet("FavouredCorruptionNurgle") == true	true
-FavouredCorruptionSkaven	Owner.IsInFactionSet("FavouredCorruptionSkaven") == true	true
-FavouredCorruptionSlaanesh	Owner.IsInFactionSet("FavouredCorruptionSlaanesh") == true	true
-FavouredCorruptionTzeentch	Owner.IsInFactionSet("FavouredCorruptionTzeentch") == true	true
-FavouredCorruptionUndivided	Owner.IsInFactionSet("FavouredCorruptionUndivided") == true	true
-FavouredCorruptionVampiric	Owner.IsInFactionSet("FavouredCorruptionVampiric") == true	true
-GDPGreaterThan300	Region.GDP >= 300	false
-GrowthGreaterThan200	Region.Growth >= 200	false
-GrowthGreaterThan200DPare5	Region.GrowthPerTurn >= 200 || Region.DevelopmentPoints >= 5	false
-GrowthPerTurnGreaterThan200	Region.GrowthPerTurn >= 200	false
-HasAzazelUpgradeTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_sla_azazel_buildings")	true
-HasCHDChaosCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_sorcery_2")	false
-HasCHDHashutInfluenceTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_sorcery_17")	false
-HasCHDLogisticsTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_industry_16")	false
-HasCHDResourceArmamentsTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_industry_17")	false
-HasCHDResourceIncomeTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_industry_18")	false
-HasCHDResourceRawMaterialsTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_industry_9")	false
-HasCHDScavengerIncomeTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_industry_13")	false
-HasCHDTowerInfluenceTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_sorcery_20")	false
-HasDechalaPalaceRitual1	Owner.IsEffectBundleActive("wh3_dlc27_dechala_ritual_palace_1") == true	false
-HasDechalaPalaceRitual2	Owner.IsEffectBundleActive("wh3_dlc27_dechala_ritual_palace_2") == true	false
-HasDechalaPalaceRitual3	Owner.IsEffectBundleActive("wh3_dlc27_dechala_ritual_palace_3") == true	false
-HasDechalaPalaceRitual4	Owner.IsEffectBundleActive("wh3_dlc27_dechala_ritual_palace_4") == true	false
-HasDechalaPalaceRitual5	Owner.IsEffectBundleActive("wh3_dlc27_dechala_ritual_palace_5") == true	false
-HasDechalaPalaceRitual6	Owner.IsEffectBundleActive("wh3_dlc27_dechala_ritual_palace_6") == true	false
-HasDwfConstructionGuildTech	Owner.IsTechnologyResearched("wh_main_tech_dwf_civ_6_2")	false
-HasDwfToolmakerGuildTech	Owner.IsTechnologyResearched("wh_main_tech_dwf_civ_2_0")	false
-HasDwfTreasuriesTech	Owner.IsTechnologyResearched("wh_main_tech_dwf_civ_1_0")	false
-HasDwfWarriorGuildTech	Owner.IsTechnologyResearched("wh_main_tech_dwf_mil_1_3")	false
-HasFestusUpgradeTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_nur_festus_buildings")	true
-HasFinalOgreCampTech	Owner.IsTechnologyResearched("wh3_main_tech_ogr_0_2_0")	false
-HasFirstDynastyTech	Owner.IsTechnologyResearched("wh2_dlc09_tech_tmb_faction_target_1")	false
-HasHEFDragonshipRecruitTech	Owner.IsTechnologyResearched("wh3_dlc27_tech_hef_aislinn_6_07")	false
-HasKSLPortSuppliesTech	Owner.IsTechnologyResearched("wh3_main_tech_ksl_3_13")	false
-HasKhoCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_kho_shared_gift_upgrade_corruption")	true
-HasLegendaryGrudgeSkavenComplete	Owner.IsEffectBundleActive("wh3_dlc25_legendary_grudge_skaven_reward") == true	true
-HasLzdElderTech	Owner.IsTechnologyResearched("wh2_main_tech_lzd_order_6")	false
-HasLzdGPTech	Owner.IsTechnologyResearched("wh2_main_tech_lzd_0_2")	false
-HasMarkedHeroesTech	 Owner.IsTechnologyResearched("wh3_dlc20_chs_kho_valkia_heroes_lords") ||  Owner.IsTechnologyResearched("wh3_dlc20_chs_nur_festus_heroes_lords")  || Owner.IsTechnologyResearched("wh3_dlc20_chs_sla_azazel_heroes_lords") || Owner.IsTechnologyResearched("wh3_dlc20_chs_tze_vilitch_heroes_lords")	true
-HasNORSayl01Tech	Owner.IsTechnologyResearched("wh3_dlc27_tech_nor_ship_faction_sayl_betrayal")	false
-HasNotToZFactoryConclaveSeat	Owner.IsEffectBundleActive("wh3_dlc23_ritual_chd_toz_slot_t2_industry_2") == false	true
-HasNotUpgradedMegaMortar	Owner.IsEffectBundleActive("wh3_dlc23_ritual_chd_toz_slot_t2_military_2") == false	true
-HasNurCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_nur_shared_gift_upgrade_corruption")	true
-HasNurGarrisonAbilityTech	Owner.IsTechnologyResearched("wh3_main_tech_nur_growth_25")	false
-HasOgreTechButchersApron	Owner.IsTechnologyResearched("wh3_main_tech_ogr_2_10_0")	false
-HasOgreTechSkyTitanDefences	Owner.IsTechnologyResearched("wh3_main_tech_ogr_2_7_1")	false
-HasPatron2Tech	Owner.IsTechnologyResearched("wh2_dlc09_tech_tmb_dynasty_2")	false
-HasPatron4Tech	Owner.IsTechnologyResearched("wh2_dlc09_tech_tmb_dynasty_4")	false
-HasPatron5Tech	Owner.IsTechnologyResearched("wh2_dlc09_tech_tmb_dynasty_5")	false
-HasPatron6Tech	Owner.IsTechnologyResearched("wh2_dlc09_tech_tmb_dynasty_6")	false
-HasSlaCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_sla_shared_gift_upgrade_corruption")	true
-HasSlaCultTech	Owner.IsTechnologyResearched("wh3_dlc27_tech_sla_delicious_agony")	true
-HasToZFactoryConclaveSeat	Owner.IsEffectBundleActive("wh3_dlc23_ritual_chd_toz_slot_t2_industry_2") == true	true
-HasTzeCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_tze_shared_gift_upgrade_corruption")	true
-HasUndCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_und_shared_corruption")	true
-HasUpgradedMegaMortar	Owner.IsEffectBundleActive("wh3_dlc23_ritual_chd_toz_slot_t2_military_2") == true	true
-HasValkiaUpgradeTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_kho_valkia_buildings")	true
-HasVilitchUpgradeTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_tze_vilitch_buildings")	true
-HasWoCGenBuildingTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_und_shared_building")	false
-HostGDPGreaterThan1000	Region.GDP >= 1000	false
-HostGDPGreaterThan1500	Region.GDP >= 1500	false
-HostGDPGreaterThan2000	Region.GDP >= 2000	false
-HostGDPGreaterThan500	Region.GDP >= 500	false
-HostGDPGreaterThan5000	Region.GDP >= 5000	false
-IsAgentPresentOwn	Region.IsAnyOwnAgentPresent(Owner) == true	false
-IsAtamanPresent	Region.IsOwnAgentSubtypePresent("wh3_main_ksl_ataman", Owner)	false
-IsBretonnia	Owner.CultureKey == "wh_main_brt_bretonnia"	true
-IsChampionsFaction	Owner.IsInFactionSet("champions_factions")	true
-IsChaosCampaign	CampaignModelRoot.CampaignKey == "wh3_main_chaos"	true
-IsChaosCampaignAndKugath	CampaignModelRoot.CampaignKey == "wh3_main_chaos" && Owner.RecordKeyIsOneOf("wh3_main_nur_poxmakers_of_nurgle")	true
-IsDragonshipPresent	Province.IsAgentSubtypePresent("wh3_dlc27_hef_dragonship_captain_01") || Province.IsAgentSubtypePresent("wh3_dlc27_hef_dragonship_captain_02") || Province.IsAgentSubtypePresent("wh3_dlc27_hef_dragonship_captain_03") || Province.IsAgentSubtypePresent("wh3_dlc27_hef_dragonship_captain_04") || Province.IsAgentSubtypePresent("wh3_dlc27_hef_dragonship_captain_05") || Province.IsAgentSubtypePresent("wh3_dlc27_hef_aislinn")	false
-IsElspethPresent	Region.IsOwnAgentSubtypePresent("wh3_dlc25_emp_elspeth_von_draken", Owner)	false
-IsElvenColony	Region.HasResource("res_location_colony") == true	false
-IsFactionAislinn	Owner.RecordKeyIsOneOf("wh3_dlc27_hef_aislinn")	true
-IsFactionAstragoth	Owner.RecordKeyIsOneOf("wh3_dlc23_chd_astragoth")	true
-IsFactionAzazel	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_azazel")	true
-IsFactionAzazelOrSigvald	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_azazel", "wh3_dlc20_chs_sigvald")	true
-IsFactionClanMoulder	Owner.RecordKeyIsOneOf("wh2_main_skv_clan_moulder")	true
-IsFactionDrazhoath	Owner.RecordKeyIsOneOf("wh3_dlc23_chd_legion_of_azgorh")	true
-IsFactionDrycha	Owner.RecordKeyIsOneOf("wh2_dlc16_wef_drycha")	true
-IsFactionEataine	Owner.RecordKeyIsOneOf("wh2_main_hef_eataine")	true
-IsFactionFestus	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_festus")	true
-IsFactionGelt	Owner.RecordKeyIsOneOf("wh2_dlc13_emp_golden_order")	true
-IsFactionGreasus	Owner.RecordKeyIsOneOf("wh3_main_ogr_goldtooth")	true
-IsFactionJadeDragon	Owner.RecordKeyIsOneOf("wh3_dlc24_cth_the_celestial_court")	true
-IsFactionMalus	Owner.RecordKeyIsOneOf("wh2_main_def_hag_graef")	true
-IsFactionMasque	Owner.RecordKeyIsOneOf("wh3_dlc27_sla_masque_of_slaanesh")	true
-IsFactionMorathi	Owner.RecordKeyIsOneOf("wh2_main_def_cult_of_pleasure")	true
-IsFactionMotherOstankya	Owner.RecordKeyIsOneOf("wh3_dlc24_ksl_daughters_of_the_forest")	true
-IsFactionNotAislinn	Owner.RecordKeyIsOneOf("wh3_dlc27_hef_aislinn") == false	true
-IsFactionNotDrycha	Owner.RecordKeyIsOneOf("wh2_dlc16_wef_drycha") == false	true
-IsFactionNotMorathi	Owner.RecordKeyIsOneOf("wh2_main_def_cult_of_pleasure") == false	true
-IsFactionNotRitual	Owner.RecordKeyIsOneOf("wh2_dlc17_lzd_oxyotl", "wh2_dlc12_lzd_cult_of_sotek") == false	true
-IsFactionRogueChaos	Owner.RecordKeyIsOneOf("wh2_dlc09_rogue_dwellers_of_zardok", "wh2_main_rogue_abominations", "wh2_dlc11_cst_rogue_the_churning_gulf_raiders", "wh2_main_rogue_hung_warband", "wh3_main_rogue_shadow_legion", "wh3_main_rogue_kurgan_warband", "wh3_main_rogue_the_challenge_stone_pact")	true
-IsFactionRogueKhorne	Owner.RecordKeyIsOneOf("wh3_main_rogue_doombreeds_followers", "wh3_main_rogue_legion_of_gorehath", "wh3_main_rogue_the_bloody_harvest")	true
-IsFactionRogueNurgle	Owner.RecordKeyIsOneOf("wh3_main_rogue_scaberaxs_gluttons", "wh3_main_rogue_the_glothal_brood", "wh3_main_rogue_the_putrid_swarm")	true
-IsFactionRogueSkaven	Owner.RecordKeyIsOneOf("wh2_dlc11_cst_rogue_grey_point_scuttlers", "wh2_main_rogue_morrsliebs_howlers")	true
-IsFactionRogueSlaanesh	Owner.RecordKeyIsOneOf("wh3_main_rogue_the_baleful_princes_muses", "wh3_main_rogue_the_convent", "wh3_main_rogue_the_pleasure_tide")	true
-IsFactionRogueTzeentch	Owner.RecordKeyIsOneOf("wh3_main_rogue_scriveners_of_fate", "wh3_main_rogue_argfluxs_pyrocasters", "wh3_main_rogue_the_fluxion_host")	true
-IsFactionRogueVampiric	Owner.RecordKeyIsOneOf("wh2_dlc11_cst_shanty_shark_straight_seadogs", "wh2_dlc11_cst_rogue_terrors_of_the_dark_straights", "wh2_main_rogue_vmp_heirs_of_mourkain", "wh2_main_rogue_scourge_of_aquitaine", "wh2_main_rogue_the_wandering_dead")	true
-IsFactionSotek	Owner.RecordKeyIsOneOf("wh2_dlc12_lzd_cult_of_sotek")	true
-IsFactionTamurkhan	Owner.RecordKeyIsOneOf("wh3_dlc25_nur_tamurkhan")	true
-IsFactionTeclis	Owner.RecordKeyIsOneOf("wh2_main_hef_order_of_loremasters")	true
-IsFactionValkia	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_valkia")	true
-IsFactionVilitch	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_vilitch")	true
-IsFactionWissenland	Owner.RecordKeyIsOneOf("wh_main_emp_wissenland")	true
-IsFactionWurrzag	Owner.RecordKeyIsOneOf("wh_main_grn_orcs_of_the_bloody_hand")	true
-IsFactionYvresse	Owner.RecordKeyIsOneOf("wh2_main_hef_yvresse")	true
-IsFactionZhatan	Owner.RecordKeyIsOneOf("wh3_dlc23_chd_zhatan")	true
-IsGeneralPresentEnemy	Region.IsAnyEnemyMilitaryForcePresent(Owner) == true	false
-IsGeneralPresentInProvince	Province.IsAnyMilitaryForcePresent == true	false
-IsGeneralPresentOwn	Region.IsOwnMilitaryForcePresent(Owner) == true	false
-IsImmortalEmpires	CampaignModelRoot.CampaignKey == "wh3_main_combi"	true
-IsJadeDragonCommercialDistrict	Region.IsEffectBundleActive("wh3_dlc24_ritual_cth_mos_steel_settlement_type_switch_commercial") == true	true
-IsJadeDragonFortressCity	Region.IsEffectBundleActive("wh3_dlc24_ritual_cth_mos_stone_settlement_type_switch_fortress") == true	true
-IsKarlFranz	Owner.RecordKeyIsOneOf("wh_main_emp_empire")	true
-IsKhalida	Owner.RecordKeyIsOneOf("wh2_dlc09_tmb_lybaras")	true
-IsKholek	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_kholek")	true
-IsKroqGar	Owner.RecordKeyIsOneOf("wh2_main_lzd_last_defenders")	true
-IsMasterEngineerNotPresent	Region.IsOwnAgentSubtypePresent("wh_main_dwf_master_engineer") == false && Region.IsOwnAgentSubtypePresent("wh_dlc06_dwf_master_engineer_ghost") == false	false
-IsMasterEngineerPresent	Region.IsOwnAgentSubtypePresent("wh_main_dwf_master_engineer") || Region.IsOwnAgentSubtypePresent("wh_dlc06_dwf_master_engineer_ghost")	false
-IsNOTUniqueRegionOrFort	Region.RecordKeyIsOneOf("wh3_main_chaos_region_altdorf","wh3_main_combi_region_altdorf","wh3_main_combi_region_lothern","wh3_main_combi_region_hexoatl","wh3_main_combi_region_itza","wh3_main_combi_region_khemri","wh3_main_chaos_region_castle_drakenhof","wh3_main_combi_region_castle_drakenhof","wh3_main_combi_region_couronne","wh3_main_combi_region_miragliano","wh3_main_combi_region_naggarond","wh3_main_combi_region_skavenblight","wh3_main_chaos_region_hell_pit","wh3_main_combi_region_hell_pit","wh3_main_combi_region_karaz_a_karak","wh3_main_combi_region_karak_eight_peaks","wh3_main_combi_region_massif_orcal","wh3_main_chaos_region_kislev","wh3_main_combi_region_kislev","wh3_main_chaos_region_praag","wh3_main_combi_region_praag","wh3_main_chaos_region_erengrad","wh3_main_combi_region_erengrad","wh3_main_combi_region_the_awakening","wh3_main_combi_region_sartosa","wh3_main_combi_region_the_galleons_graveyard") == false	true
-IsNOTUniqueRegionOrFortForEmpire	Region.RecordKeyIsOneOf("wh3_main_chaos_region_altdorf","wh3_main_combi_region_altdorf","wh3_main_combi_region_khemri","wh3_main_chaos_region_castle_drakenhof","wh3_main_combi_region_castle_drakenhof","wh3_main_combi_region_couronne","wh3_main_combi_region_miragliano","wh3_main_combi_region_naggarond","wh3_main_combi_region_skavenblight","wh3_main_chaos_region_hell_pit","wh3_main_combi_region_hell_pit","wh3_main_combi_region_karaz_a_karak","wh3_main_combi_region_karak_eight_peaks","wh3_main_combi_region_massif_orcal","wh3_main_combi_region_the_awakening","wh3_main_combi_region_sartosa","wh3_main_combi_region_the_galleons_graveyard") == false	true
-IsNotChampionsFaction	Owner.IsInFactionSet("champions_factions") == false	true
-IsNotChampionsOrSigvaldFaction	Owner.IsInFactionSet("champions_factions") == false && Owner.RecordKeyIsOneOf("wh3_dlc20_chs_sigvald") == false	true
-IsNotChaosDwarfs	Region.Owner.CultureKey != "wh3_dlc23_chd_chaos_dwarfs"	true
-IsNotFactionFestus	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_festus") == false	true
-IsNotKroqGar	Owner.RecordKeyIsOneOf("wh2_main_lzd_last_defenders") == false	true
-IsOwnerNorsca	Region.Owner.CultureKey == "wh_dlc08_nor_norsca"	true
-IsOwnershipProductGotrekFelixUnlocked	Owner.IsOwnershipProductUnlocked("TW_WH2_GOTREK_FELIX") == true	true
-IsOwnershipProductTidesOfTormentNorscaUnlocked	Owner.IsOwnershipProductUnlocked("TW_WH3_TIDES_OF_TORMENT_NOR") == true	true
-IsOwnershipProductTidesOfTormentSlaaneshUnlocked	Owner.IsOwnershipProductUnlocked("TW_WH3_TIDES_OF_TORMENT_SLA") == true	true
-IsOxyotl	Owner.RecordKeyIsOneOf("wh2_dlc17_lzd_oxyotl")	true
-IsRegionBeastmen	Region.Owner.CultureKey == "wh_dlc03_bst_beastmen"	true
-IsRegionChaosDwarfs	Region.Owner.CultureKey == "wh3_dlc23_chd_chaos_dwarfs"	true
-IsRegionKarakEightPeaks	Region.RecordKeyIsOneOf("wh3_main_combi_region_karak_eight_peaks") == true	false
-IsRegionNorChdChs	Region.Owner.CultureKey == "wh_dlc08_nor_norsca" || Region.Owner.CultureKey == "wh3_dlc23_chd_chaos_dwarfs" || Region.Owner.CultureKey == "wh_main_chs_chaos"	true
-IsRegionNorsca	Region.Owner.CultureKey == "wh_dlc08_nor_norsca"	false
-IsRegionNotAbandoned	Region.IsAbandoned == false	true
-IsRegionNotPort	Region.IsPort == false	false
-IsRegionNotTombKing	Region.Owner.CultureKey != "wh2_dlc09_tmb_tomb_kings"	true
-IsRegionNotVampireCoast	Region.Owner.CultureKey != "wh2_dlc11_cst_vampire_coast"	true
-IsRegionPort	Region.IsPort == true	false
-IsRegionProvinceCapital	Region.IsProvinceCapital == true	false
-IsRegionSkavenblight	Region.RecordKeyIsOneOf("wh3_main_combi_region_skavenblight") == true	false
-IsRegionTombKing	Region.Owner.CultureKey == "wh2_dlc09_tmb_tomb_kings"	true
-IsRegionVampireCoast	Region.Owner.CultureKey == "wh2_dlc11_cst_vampire_coast"	true
-IsRegionVampireCounts	Region.Owner.CultureKey == "wh_main_vmp_vampire_counts"	true
-IsRegionZharrNaggrund	Region.RecordKeyIsOneOf("wh3_main_chaos_region_zharr_naggrund", "wh3_main_combi_region_zharr_naggrund") == true	false
-IsSPChaosCampaign	CampaignModelRoot.CampaignKey == "wh3_main_chaos" && CampaignModelRoot.IsMultiplayer == false	true
-KSLHasDevotion	Owner.ModelPooledResourceContext("wh3_main_ksl_devotion")	true
-KSLHasSupporters	Owner.ModelPooledResourceContext("wh3_main_ksl_followers")	true
-KhorneCorruption100	Region.Province.PooledResourceContextForKey("wh3_main_corruption_khorne").Total >= 100	false
-KhorneCorruption50	Region.Province.PooledResourceContextForKey("wh3_main_corruption_khorne").Total >= 50	false
-KhorneCorruption75	Region.Province.PooledResourceContextForKey("wh3_main_corruption_khorne").Total >= 75	false
-KhorneCorruptionLessThan50	Region.Province.PooledResourceContextForKey("wh3_main_corruption_khorne").Total < 50	false
-KislevHasOrthodoxyGrowthBoon	Owner.IsEffectBundleActive("wh3_main_ksl_support_orthodoxy_magic_1_2") == true	false
-KislevHasSettlementAdjacencyBoon	Owner.IsEffectBundleActive("wh3_main_ksl_support_orthodoxy_settlement_2_2") == true	false
-KislevHasSettlementResearchBoon	Owner.IsEffectBundleActive("wh3_main_ksl_support_ice_court_settlement_1_2") == true	false
-MaxAllegianceAllChampionsRejected	Owner.IsEffectBundleActive("wh3_dlc27_bundle_nor_allegiance_ultimate_refusal")  == true	true
-MinorCultCabalPower1_1	true	false
-MinorCultCabalPower1_2	true	false
-MinorCultCabalPower1_3	true	false
-MinorCultCabalPower1_4	true	false
-MinorCultCabalPower1_5	true	false
-MinorCultCabalPower1_6	true	false
-MinorCultCabalPower1_7	true	false
-MinorCultCabalPower1_8	true	false
-MinorCultCabalPower1_9	true	false
-MinorCultCabalPower2	false	false
-MinorCultCabalPower2_On	true	false
-MinorCultCabalPower3	false	false
-MinorCultCabalPower3_On	true	false
-MinorCultCabalPower4	false	false
-MinorCultCabalPower4_On	true	false
-MinorCultCabalPower5	false	false
-MinorCultCabalPower5_On	true	false
-MountainClimate	Region.IsEffectBundleActive("wh3_dlc20_climate_suitable_mountain") == true	false
-MountainClimatePresent	Region.IsEffectBundleActive("wh3_dlc20_climate_suitable_mountain") == true	false
-NORCrowTier1	Owner.ModelPooledResourceContext("nor_progress_crow").Total < 5	true
-NORCrowTier2	Owner.ModelPooledResourceContext("nor_progress_crow").Total >= 5 && Owner.ModelPooledResourceContext("nor_progress_crow").Total < 10	true
-NORCrowTier3	Owner.ModelPooledResourceContext("nor_progress_crow").Total >= 10 && Owner.ModelPooledResourceContext("nor_progress_crow").Total < 15	true
-NORCrowTier4	Owner.ModelPooledResourceContext("nor_progress_crow").Total >=15	true
-NOREagleTier1	Owner.ModelPooledResourceContext("nor_progress_eagle").Total < 5	true
-NOREagleTier2	Owner.ModelPooledResourceContext("nor_progress_eagle").Total >= 5 && Owner.ModelPooledResourceContext("nor_progress_eagle").Total < 10	true
-NOREagleTier3	Owner.ModelPooledResourceContext("nor_progress_eagle").Total >= 10 && Owner.ModelPooledResourceContext("nor_progress_eagle").Total < 15	true
-NOREagleTier4	Owner.ModelPooledResourceContext("nor_progress_eagle").Total >=15	true
-NORHoundTier1	Owner.ModelPooledResourceContext("nor_progress_hound").Total < 5	true
-NORHoundTier2	Owner.ModelPooledResourceContext("nor_progress_hound").Total >= 5 && Owner.ModelPooledResourceContext("nor_progress_hound").Total < 10	true
-NORHoundTier3	Owner.ModelPooledResourceContext("nor_progress_hound").Total >= 10 && Owner.ModelPooledResourceContext("nor_progress_hound").Total < 15	true
-NORHoundTier4	Owner.ModelPooledResourceContext("nor_progress_hound").Total >=15	true
-NORSaylTier1	Owner.ModelPooledResourceContext("wh3_dlc27_nor_sayl_dark_ritual").Total < 4	true
-NORSaylTier2	Owner.ModelPooledResourceContext("wh3_dlc27_nor_sayl_dark_ritual").Total >= 4 && Owner.ModelPooledResourceContext("wh3_dlc27_nor_sayl_dark_ritual").Total < 10	true
-NORSaylTier3	Owner.ModelPooledResourceContext("wh3_dlc27_nor_sayl_dark_ritual").Total >= 10 && Owner.ModelPooledResourceContext("wh3_dlc27_nor_sayl_dark_ritual").Total < 18	true
-NORSaylTier4	Owner.ModelPooledResourceContext("wh3_dlc27_nor_sayl_dark_ritual").Total >= 18 && Owner.ModelPooledResourceContext("wh3_dlc27_nor_sayl_dark_ritual").Total < 30	true
-NORSaylTier5	Owner.ModelPooledResourceContext("wh3_dlc27_nor_sayl_dark_ritual").Total >=30	true
-NORSerpentTier1	Owner.ModelPooledResourceContext("nor_progress_serpent").Total < 5	true
-NORSerpentTier2	Owner.ModelPooledResourceContext("nor_progress_serpent").Total >= 5 && Owner.ModelPooledResourceContext("nor_progress_serpent").Total < 10	true
-NORSerpentTier3	Owner.ModelPooledResourceContext("nor_progress_serpent").Total >= 10 && Owner.ModelPooledResourceContext("nor_progress_serpent").Total < 15	true
-NORSerpentTier4	Owner.ModelPooledResourceContext("nor_progress_serpent").Total >=15	true
-NeglectedIceCourt	Owner.IsEffectBundleActive("wh3_main_ksl_ice_court_neglect") == true	false
-NeglectedOrthodoxy	Owner.IsEffectBundleActive("wh3_main_ksl_orthodoxy_neglect") == true	false
-NotDwarf	Owner.CultureKey != "wh_main_dwf_dwarfs"	false
-NotDwarfHidden	Owner.CultureKey != "wh_main_dwf_dwarfs"	true
-NotNeglectedIceCourt	Owner.IsEffectBundleActive("wh3_main_ksl_ice_court_neglect") == false	false
-NotNeglectedOrthodoxy	Owner.IsEffectBundleActive("wh3_main_ksl_orthodoxy_neglect") == false	false
-NotRegionHasPlague	Region.IsEffectBundleActive("wh3_main_plague_present_dummy") == false	false
-NotRegionOwnerFavouredCorruptionKhorne	Region.Owner.IsInFactionSet("FavouredCorruptionKhorne") == false	true
-NotRegionOwnerFavouredCorruptionNone	Region.Owner.IsInFactionSet("FavouredCorruptionNone") == false	true
-NotRegionOwnerFavouredCorruptionNurgle	Region.Owner.IsInFactionSet("FavouredCorruptionNurgle") == false	true
-NotRegionOwnerFavouredCorruptionSkaven	Region.Owner.IsInFactionSet("FavouredCorruptionSkaven") == false	true
-NotRegionOwnerFavouredCorruptionSlaanesh	Region.Owner.IsInFactionSet("FavouredCorruptionSlaanesh") == false	true
-NotRegionOwnerFavouredCorruptionTzeentch	Region.Owner.IsInFactionSet("FavouredCorruptionTzeentch") == false	true
-NotRegionOwnerFavouredCorruptionUndivided	Region.Owner.IsInFactionSet("FavouredCorruptionUndivided") == false	true
-NotRegionOwnerFavouredCorruptionVampiric	Region.Owner.IsInFactionSet("FavouredCorruptionVampiric") == false	true
-NurgleCorruption100	Region.Province.PooledResourceContextForKey("wh3_main_corruption_nurgle").Total >= 100	false
-NurgleCorruption50	Region.Province.PooledResourceContextForKey("wh3_main_corruption_nurgle").Total >= 50	false
-NurgleCorruption75	Region.Province.PooledResourceContextForKey("wh3_main_corruption_nurgle").Total >= 75	false
-OwnerIsDechala	Owner.RecordKeyIsOneOf("wh3_dlc27_sla_the_tormentors") == true	true
-OwnerIsNotDechala	Owner.RecordKeyIsOneOf("wh3_dlc27_sla_the_tormentors") == false	true
-PawnbrokerSoldOut	Region.IsEffectBundleActive("wh3_main_pawnbroker_sold_out_dummy")	false
-ProvinceIsFullyOwned	Province.IsFactionOwnerOfEntireProvince(Owner) == true	false
-ProvinceIsFullyOwnedByRegionOwner	Province.IsFactionOwnerOfEntireProvince(Region.Owner) == true	false
-ProvinceIsNotFullyOwned	Province.IsFactionOwnerOfEntireProvince(Owner) == false	false
-PublicOrder100	Region.PublicOrder > 99	false
-PublicOrderGreaterThan-25	Region.PublicOrder >= -25	false
-PublicOrderGreaterThan-50	Region.PublicOrder >= -50	false
-PublicOrderGreaterThan0	Region.PublicOrder >= 0	false
-PublicOrderGreaterThan20	Region.PublicOrder >= 20	false
-PublicOrderGreaterThan25	Region.PublicOrder >= 25	false
-PublicOrderGreaterThan50	Region.PublicOrder >= 50	false
-PublicOrderGreaterThan75	Region.PublicOrder >= 75	false
-PublicOrderGreaterThan90	Region.PublicOrder >= 90	false
-PublicOrderLessThan-40	Region.PublicOrder < -40	false
-PublicOrderLessThan-50	Region.PublicOrder < -50	false
-PublicOrderLessThan0	Region.PublicOrder < 0	false
-PublicOrderLessThan25	Region.PublicOrder <= 25	false
-PurpleHandRemoved	Region.IsEffectBundleActive("wh3_main_minor_cult_purple_hand_removed")	false
-RegionAdjacentElvenColony	Region.IsEffectBundleActive("wh3_main_adjacent_elven_colony_dummy")	false
-RegionDechalaNotPermanent	Region.EntitySharedStateReadBool("settlement_exploitation_permanent") == false	false
-RegionDechalaPermanent	Region.EntitySharedStateReadBool("settlement_exploitation_permanent") == true	false
-RegionHasAdjacentDwarfFaction	Region.IsEffectBundleActive("wh3_main_adjacent_dwarf_dummy")	false
-RegionHasAnyTradeResource	Region.HasResource("res_dyes") || Region.HasResource("res_animals") || Region.HasResource("res_rom_furs") || Region.HasResource("res_gems") || Region.HasResource("res_gold") || Region.HasResource("res_rom_iron") || Region.HasResource("res_ivory") || Region.HasResource("res_rom_marble") || Region.HasResource("res_medicine") || Region.HasResource("res_obsidian") || Region.HasResource("res_rom_oil") || Region.HasResource("res_rom_textiles") || Region.HasResource("res_rom_lead") || Region.HasResource("res_spices") || Region.HasResource("res_rom_wine") || Region.HasResource("res_rom_timber")	false
-RegionHasPlague	Region.IsEffectBundleActive("wh3_main_plague_present_dummy")	false
-RegionHasResourceDyes	Region.HasResource("res_dyes") == true	true
-RegionHasResourceExoticAnimals	Region.HasResource("res_animals") == true	true
-RegionHasResourceFurs	Region.HasResource("res_rom_furs") == true	true
-RegionHasResourceGems	Region.HasResource("res_gems") == true	true
-RegionHasResourceGold	Region.HasResource("res_gold") == true	true
-RegionHasResourceIron	Region.HasResource("res_rom_iron") == true	true
-RegionHasResourceIvory	Region.HasResource("res_ivory") == true	true
-RegionHasResourceMarble	Region.HasResource("res_rom_marble") == true	true
-RegionHasResourceMedicine	Region.HasResource("res_medicine") == true	true
-RegionHasResourceObsidian	Region.HasResource("res_obsidian") == true	true
-RegionHasResourcePastures	Region.HasResource("res_rom_oil") == true	true
-RegionHasResourcePottery	Region.HasResource("res_rom_textiles") == true	true
-RegionHasResourceSalt	Region.HasResource("res_rom_lead") == true	true
-RegionHasResourceSpices	Region.HasResource("res_spices") == true	true
-RegionHasResourceWine	Region.HasResource("res_rom_wine") == true	true
-RegionHasResourceWood	Region.HasResource("res_rom_timber") == true	true
-RegionIsFactionCapital	Region.IsHomeRegion == true	false
-RegionOwnerDarkElves	Region.Owner.SubcultureIsOneOf("wh2_main_sc_def_dark_elves") == true	true
-RegionOwnerFavouredCorruptionKhorne	Region.Owner.IsInFactionSet("FavouredCorruptionKhorne") == true	true
-RegionOwnerFavouredCorruptionNone	Region.Owner.IsInFactionSet("FavouredCorruptionNone") == true	true
-RegionOwnerFavouredCorruptionNurgle	Region.Owner.IsInFactionSet("FavouredCorruptionNurgle") == true	true
-RegionOwnerFavouredCorruptionSkaven	Region.Owner.IsInFactionSet("FavouredCorruptionSkaven") == true	true
-RegionOwnerFavouredCorruptionSlaanesh	Region.Owner.IsInFactionSet("FavouredCorruptionSlaanesh") == true	true
-RegionOwnerFavouredCorruptionTzeentch	Region.Owner.IsInFactionSet("FavouredCorruptionTzeentch") == true	true
-RegionOwnerFavouredCorruptionUndivided	Region.Owner.IsInFactionSet("FavouredCorruptionUndivided") == true	true
-RegionOwnerFavouredCorruptionVampiric	Region.Owner.IsInFactionSet("FavouredCorruptionVampiric") == true	true
-RegionOwnerNotDarkElves	Region.Owner.SubcultureIsOneOf("wh2_main_sc_def_dark_elves") == false	true
-RegionThrallsAbove30percent	Region.ModelPooledResourceContext("wh3_dlc27_sla_thralls_region").PercentageOfCapacity > 30	false
-RegionThrallsAbove70percent	Region.ModelPooledResourceContext("wh3_dlc27_sla_thralls_region").PercentageOfCapacity > 70	false
-RegionThrallsAboveZero	Region.ModelPooledResourceContext("wh3_dlc27_sla_thralls_region").PercentageOfCapacity > 0	false
-RegionThrallsBelow0percent	Region.ModelPooledResourceContext("wh3_dlc27_sla_thralls_region").PercentageOfCapacity = 0	false
-RegionThrallsBelow30percent	Region.ModelPooledResourceContext("wh3_dlc27_sla_thralls_region").PercentageOfCapacity < 30	false
-RegionThrallsBelow70percent	Region.ModelPooledResourceContext("wh3_dlc27_sla_thralls_region").PercentageOfCapacity < 70	false
-SaylFinalBattleCompleted	Owner.IsEffectBundleActive("wh3_dlc27_sayl_final_bundle") == true	false
-SaylNarrativeT1	Owner.IsEffectBundleActive("wh3_dlc27_nor_sayl_narrative_t1") == true	false
-SaylNarrativeT2	Owner.IsEffectBundleActive("wh3_dlc27_nor_sayl_narrative_t2") == true	false
-SaylNarrativeT3	Owner.IsEffectBundleActive("wh3_dlc27_nor_sayl_narrative_t3") == true	false
-SaylNarrativeT4	Owner.IsEffectBundleActive("wh3_dlc27_nor_sayl_narrative_t4") == true	false
-SaylTreacheryDeclareWar	true	false
-SaylTreacheryDeclareWarAfter	true	false
-SeaRegionJungleCoasts	Army.SeaRegion.BelongsToRegionGroup("wh3_main_combi_sea_regions_jungle_coasts")	false
-SeaRegionNaggarondSeas	Army.SeaRegion.BelongsToRegionGroup("wh3_main_combi_sea_regions_naggarond_seas")	false
-SeaRegionNorthernSeas	Army.SeaRegion.BelongsToRegionGroup("wh3_main_combi_sea_regions_northern_seas")	false
-SeaRegionOpenSea	Army.SeaRegion.BelongsToRegionGroup("wh3_main_combi_sea_regions_open_sea")	false
-SeaRegionRiver	Army.SeaRegion.BelongsToRegionGroup("wh3_main_combi_all_rivers")	false
-SeaRegionUlthuanEasternIsles	Army.SeaRegion.BelongsToRegionGroup("wh3_main_combi_sea_regions_ulthuan_eastern_isles")	false
-SkavenCorruption0Dummy	Region.Province.PooledResourceContextForKey("wh3_main_corruption_skaven").Total == 0	false
-SkavenCorruption100	Region.Province.PooledResourceContextForKey("wh3_main_corruption_skaven").Total >= 100	false
-SkavenCorruption100Dummy	Region.Province.PooledResourceContextForKey("wh3_main_corruption_skaven").Total >= 100	false
-SkavenCorruption50	Region.Province.PooledResourceContextForKey("wh3_main_corruption_skaven").Total >= 50	false
-SkavenCorruption75	Region.Province.PooledResourceContextForKey("wh3_main_corruption_skaven").Total >= 75	false
-SlaaneshCorruption100	Region.Province.PooledResourceContextForKey("wh3_main_corruption_slaanesh").Total >= 100	false
-SlaaneshCorruption50	Region.Province.PooledResourceContextForKey("wh3_main_corruption_slaanesh").Total >= 50	false
-SlaaneshCorruption75	Region.Province.PooledResourceContextForKey("wh3_main_corruption_slaanesh").Total >= 75	false
-SlaaneshCorruptionLessThan100	Region.Province.PooledResourceContextForKey("wh3_main_corruption_slaanesh").Total < 100	false
-StanceIsDragonshipExpansion	Army.CurrentStanceKey == "MILITARY_FORCE_ACTIVE_STANCE_TYPE_PATROL"	false
-ThroggBuildingsHasStopTrollkindResourceBonusValue	Owner.IsEffectBundleActive("wh3_dlc27_bundle_nor_throgg_trollkind_troll_call_dummy") == false	false
-TreasuryGreaterThan5000	Owner.Treasury >5000	false
-TreasuryLessThan2000	Owner.Treasury < 2000	false
-TreasuryMoreThan2000	Owner.Treasury >= 2000	false
-TzeentchCorruption100	Region.Province.PooledResourceContextForKey("wh3_main_corruption_tzeentch").Total >= 100	false
-TzeentchCorruption50	Region.Province.PooledResourceContextForKey("wh3_main_corruption_tzeentch").Total >= 50	false
-TzeentchCorruption75	Region.Province.PooledResourceContextForKey("wh3_main_corruption_tzeentch").Total >= 75	false
-TzeentchCorruptionLessThan50	Region.Province.PooledResourceContextForKey("wh3_main_corruption_tzeentch").Total < 50	false
-UnitRecruitedProvinceDummy	true	false
-VampiricCorruption100	Region.Province.PooledResourceContextForKey("wh3_main_corruption_vampiric").Total >= 100	false
-VampiricCorruption50	Region.Province.PooledResourceContextForKey("wh3_main_corruption_vampiric").Total >= 50	false
-VampiricCorruption75	Region.Province.PooledResourceContextForKey("wh3_main_corruption_vampiric").Total >= 75	false
-WallEffect	Region.IsOriginatingSubcultureOneOf("wh_dlc05_sc_wef_wood_elves","wh3_main_sc_ogr_ogre_kingdoms","wh_dlc08_sc_nor_norsca") == false	false
-WoMGreaterThan3	Region.WindsOfMagicStrengthLevel >= 3	false
-WoMGreaterThan4	Region.WindsOfMagicStrengthLevel >= 4	false
+key	expression	display_only_active_effects	always_show_display_text
+#building_effect_context_expressions_tables;2;db/building_effect_context_expressions_tables/data__			
+AislinnBuiltInColony	Region.Owner.RecordKey == "wh3_dlc27_hef_aislinn"	false	false
+AislinnBuiltInOutpost	Region.Owner.RecordKey != "wh3_dlc27_hef_aislinn"	false	false
+AislinnColonyInProvince	Province.Regions.Any((r) => r.Owner.RecordKey == "wh3_dlc27_hef_aislinn")	false	false
+AislinnConfederated	Owner.IsEffectBundleActive("wh3_dlc27_confederated_aislinn")	false	false
+AllegianceCrowMax	Owner.ModelPooledResourceContext("nor_progress_crow").Total >= 15	false	false
+AllegianceEagleMax	Owner.ModelPooledResourceContext("nor_progress_eagle").Total >= 15	false	false
+AllegianceHoundMax	Owner.ModelPooledResourceContext("nor_progress_hound").Total >= 15	false	false
+AllegianceSerpentMax	Owner.ModelPooledResourceContext("nor_progress_serpent").Total >= 15	false	false
+AnyProvinceRegionRazed	Province.Regions.Any((r) => r.IsAbandoned == true)	false	false
+CHDRawMaterialsGreaterThan125	Owner.ModelPooledResourceContext("wh3_dlc23_chd_raw_materials").Total >= 125	false	false
+CHDRawMaterialsGreaterThan150	Owner.ModelPooledResourceContext("wh3_dlc23_chd_raw_materials").Total >= 150	false	false
+CHDRawMaterialsGreaterThan250	Owner.ModelPooledResourceContext("wh3_dlc23_chd_raw_materials").Total >= 250	false	false
+CHDRawMaterialsGreaterThan50	Owner.ModelPooledResourceContext("wh3_dlc23_chd_raw_materials").Total >= 50	false	false
+CHDRawMaterialsGreaterThan75	Owner.ModelPooledResourceContext("wh3_dlc23_chd_raw_materials").Total >= 75	false	false
+ChaosUndCorruption100	Region.Province.PooledResourceContextForKey("wh3_main_corruption_chaos").Total >= 100	false	false
+ChaosUndCorruption50	Region.Province.PooledResourceContextForKey("wh3_main_corruption_chaos").Total >= 50	false	false
+ChaosUndCorruption75	Region.Province.PooledResourceContextForKey("wh3_main_corruption_chaos").Total >= 75	false	false
+DEFSlavesGreaterThan100	Owner.ModelPooledResourceContext("def_slaves").Total >= 100	false	false
+DEFSlavesGreaterThan1000	Owner.ModelPooledResourceContext("def_slaves").Total >= 1000	false	false
+DEFSlavesGreaterThan150	Owner.ModelPooledResourceContext("def_slaves").Total >= 150	false	false
+DEFSlavesGreaterThan200	Owner.ModelPooledResourceContext("def_slaves").Total >= 200	false	false
+DevPointGreatThan5	Region.DevelopmentPoints >= 5	false	false
+DwarfHidden	Owner.CultureKey == "wh_main_dwf_dwarfs"	true	false
+DwfLowRegionCount	Owner.IsEffectBundleActive("wh3_main_bundle_dwarf_low_settlement_count_dummy")	false	false
+EveryProvinceRegionRazed	Province.Regions.Size == (Province.Regions.Count(IsAbandoned) + 1)	false	false
+FactionHasTrade	Owner.IsInFactionSet("factions_without_trade") == false	true	false
+FactionIsSeducible	Region.Owner.IsInFactionSet("slaanesh_seducible_factions") && Owner.RecordKeyIsOneOf("wh3_main_sla_seducers_of_slaanesh")	true	false
+FavouredCorruptionKhorne	Owner.IsInFactionSet("FavouredCorruptionKhorne") == true	true	false
+FavouredCorruptionNone	Owner.IsInFactionSet("FavouredCorruptionNone") == true	true	false
+FavouredCorruptionNurgle	Owner.IsInFactionSet("FavouredCorruptionNurgle") == true	true	false
+FavouredCorruptionSkaven	Owner.IsInFactionSet("FavouredCorruptionSkaven") == true	true	false
+FavouredCorruptionSlaanesh	Owner.IsInFactionSet("FavouredCorruptionSlaanesh") == true	true	false
+FavouredCorruptionTzeentch	Owner.IsInFactionSet("FavouredCorruptionTzeentch") == true	true	false
+FavouredCorruptionUndivided	Owner.IsInFactionSet("FavouredCorruptionUndivided") == true	true	false
+FavouredCorruptionVampiric	Owner.IsInFactionSet("FavouredCorruptionVampiric") == true	true	false
+GDPGreaterThan300	Region.GDP >= 300	false	false
+GrowthGreaterThan200	Region.Growth >= 200	false	false
+GrowthGreaterThan200DPare5	Region.GrowthPerTurn >= 200 || Region.DevelopmentPoints >= 5	false	false
+GrowthPerTurnGreaterThan200	Region.GrowthPerTurn >= 200	false	false
+HasAzazelUpgradeTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_sla_azazel_buildings")	true	false
+HasCHDChaosCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_sorcery_2")	false	false
+HasCHDHashutInfluenceTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_sorcery_17")	false	false
+HasCHDLogisticsTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_industry_16")	false	false
+HasCHDResourceArmamentsTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_industry_17")	false	false
+HasCHDResourceIncomeTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_industry_18")	false	false
+HasCHDResourceRawMaterialsTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_industry_9")	false	false
+HasCHDScavengerIncomeTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_industry_13")	false	false
+HasCHDTowerInfluenceTech	Owner.IsTechnologyResearched("wh3_dlc23_tech_chd_sorcery_20")	false	false
+HasClayScryingTech	Owner.IsTechnologyResearched("wh3_main_tech_cth_62")	false	false
+HasDechalaPalaceRitual1	Owner.IsEffectBundleActive("wh3_dlc27_dechala_ritual_palace_1") == true	false	false
+HasDechalaPalaceRitual2	Owner.IsEffectBundleActive("wh3_dlc27_dechala_ritual_palace_2") == true	false	false
+HasDechalaPalaceRitual3	Owner.IsEffectBundleActive("wh3_dlc27_dechala_ritual_palace_3") == true	false	false
+HasDechalaPalaceRitual4	Owner.IsEffectBundleActive("wh3_dlc27_dechala_ritual_palace_4") == true	false	false
+HasDechalaPalaceRitual5	Owner.IsEffectBundleActive("wh3_dlc27_dechala_ritual_palace_5") == true	false	false
+HasDechalaPalaceRitual6	Owner.IsEffectBundleActive("wh3_dlc27_dechala_ritual_palace_6") == true	false	false
+HasDwfConstructionGuildTech	Owner.IsTechnologyResearched("wh_main_tech_dwf_civ_6_2")	false	false
+HasDwfToolmakerGuildTech	Owner.IsTechnologyResearched("wh_main_tech_dwf_civ_2_0")	false	false
+HasDwfTreasuriesTech	Owner.IsTechnologyResearched("wh_main_tech_dwf_civ_1_0")	false	false
+HasDwfWarriorGuildTech	Owner.IsTechnologyResearched("wh_main_tech_dwf_mil_1_3")	false	false
+HasFestusUpgradeTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_nur_festus_buildings")	true	false
+HasFinalOgreCampTech	Owner.IsTechnologyResearched("wh3_main_tech_ogr_0_2_0")	false	false
+HasFirstDynastyTech	Owner.IsTechnologyResearched("wh2_dlc09_tech_tmb_faction_target_1")	false	false
+HasHEFDragonshipRecruitTech	Owner.IsTechnologyResearched("wh3_dlc27_tech_hef_aislinn_6_07")	false	false
+HasKSLPortSuppliesTech	Owner.IsTechnologyResearched("wh3_main_tech_ksl_3_13")	false	false
+HasKhoCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_kho_shared_gift_upgrade_corruption")	true	false
+HasLegendaryGrudgeSkavenComplete	Owner.IsEffectBundleActive("wh3_dlc25_legendary_grudge_skaven_reward") == true	true	false
+HasLzdElderTech	Owner.IsTechnologyResearched("wh2_main_tech_lzd_order_6")	false	false
+HasLzdGPTech	Owner.IsTechnologyResearched("wh2_main_tech_lzd_0_2")	false	false
+HasMarkedHeroesTech	 Owner.IsTechnologyResearched("wh3_dlc20_chs_kho_valkia_heroes_lords") ||  Owner.IsTechnologyResearched("wh3_dlc20_chs_nur_festus_heroes_lords")  || Owner.IsTechnologyResearched("wh3_dlc20_chs_sla_azazel_heroes_lords") || Owner.IsTechnologyResearched("wh3_dlc20_chs_tze_vilitch_heroes_lords")	true	false
+HasMoonWoodTech	Owner.IsTechnologyResearched("wh3_main_tech_cth_42")	false	false
+HasNORSayl01Tech	Owner.IsTechnologyResearched("wh3_dlc27_tech_nor_ship_faction_sayl_betrayal")	false	false
+HasNanGauForgesTech	Owner.IsTechnologyResearched("wh3_main_tech_cth_37") && Region.FactionProvinceManager.PooledResourceContextForKey("wh3_dlc24_cth_province_harmony").Total < 0	false	false
+HasNotToZFactoryConclaveSeat	Owner.IsEffectBundleActive("wh3_dlc23_ritual_chd_toz_slot_t2_industry_2") == false	true	false
+HasNotUpgradedMegaMortar	Owner.IsEffectBundleActive("wh3_dlc23_ritual_chd_toz_slot_t2_military_2") == false	true	false
+HasNurCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_nur_shared_gift_upgrade_corruption")	true	false
+HasNurGarrisonAbilityTech	Owner.IsTechnologyResearched("wh3_main_tech_nur_growth_25")	false	false
+HasOgreTechButchersApron	Owner.IsTechnologyResearched("wh3_main_tech_ogr_2_10_0")	false	false
+HasOgreTechSkyTitanDefences	Owner.IsTechnologyResearched("wh3_main_tech_ogr_2_7_1")	false	false
+HasPatron2Tech	Owner.IsTechnologyResearched("wh2_dlc09_tech_tmb_dynasty_2")	false	false
+HasPatron4Tech	Owner.IsTechnologyResearched("wh2_dlc09_tech_tmb_dynasty_4")	false	false
+HasPatron5Tech	Owner.IsTechnologyResearched("wh2_dlc09_tech_tmb_dynasty_5")	false	false
+HasPatron6Tech	Owner.IsTechnologyResearched("wh2_dlc09_tech_tmb_dynasty_6")	false	false
+HasSlaCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_sla_shared_gift_upgrade_corruption")	true	false
+HasSlaCultTech	Owner.IsTechnologyResearched("wh3_dlc27_tech_sla_delicious_agony")	true	false
+HasToZFactoryConclaveSeat	Owner.IsEffectBundleActive("wh3_dlc23_ritual_chd_toz_slot_t2_industry_2") == true	true	false
+HasTzeCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_tze_shared_gift_upgrade_corruption")	true	false
+HasUndCorruptionTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_und_shared_corruption")	true	false
+HasUpgradedMegaMortar	Owner.IsEffectBundleActive("wh3_dlc23_ritual_chd_toz_slot_t2_military_2") == true	true	false
+HasValkiaUpgradeTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_kho_valkia_buildings")	true	false
+HasVilitchUpgradeTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_tze_vilitch_buildings")	true	false
+HasWoCGenBuildingTech	Owner.IsTechnologyResearched("wh3_dlc20_chs_und_shared_building")	false	false
+HasYangKilnTech	Owner.IsTechnologyResearched("wh3_main_tech_cth_27") && Region.FactionProvinceManager.PooledResourceContextForKey("wh3_dlc24_cth_province_harmony").Total > 0	false	false
+HostGDPGreaterThan1000	Region.GDP >= 1000	false	false
+HostGDPGreaterThan1500	Region.GDP >= 1500	false	false
+HostGDPGreaterThan2000	Region.GDP >= 2000	false	false
+HostGDPGreaterThan500	Region.GDP >= 500	false	false
+HostGDPGreaterThan5000	Region.GDP >= 5000	false	false
+IsAgentPresentOwn	Region.IsAnyOwnAgentPresent(Owner) == true	false	false
+IsAtamanPresent	Region.IsOwnAgentSubtypePresent("wh3_main_ksl_ataman", Owner)	false	false
+IsBretonnia	Owner.CultureKey == "wh_main_brt_bretonnia"	true	false
+IsChampionsFaction	Owner.IsInFactionSet("champions_factions")	true	false
+IsChaosCampaign	CampaignModelRoot.CampaignKey == "wh3_main_chaos"	true	false
+IsChaosCampaignAndKugath	CampaignModelRoot.CampaignKey == "wh3_main_chaos" && Owner.RecordKeyIsOneOf("wh3_main_nur_poxmakers_of_nurgle")	true	false
+IsChaosWastesTechResearched	Owner.IsTechnologyResearched("wh3_main_tech_cth_39") && Region.IsEffectBundleActive("wh3_dlc20_climate_uninhabitable_chaotic") == true	true	false
+IsDragonshipPresent	Province.IsAgentSubtypePresent("wh3_dlc27_hef_dragonship_captain_01") || Province.IsAgentSubtypePresent("wh3_dlc27_hef_dragonship_captain_02") || Province.IsAgentSubtypePresent("wh3_dlc27_hef_dragonship_captain_03") || Province.IsAgentSubtypePresent("wh3_dlc27_hef_dragonship_captain_04") || Province.IsAgentSubtypePresent("wh3_dlc27_hef_dragonship_captain_05") || Province.IsAgentSubtypePresent("wh3_dlc27_hef_aislinn")	false	false
+IsElspethPresent	Region.IsOwnAgentSubtypePresent("wh3_dlc25_emp_elspeth_von_draken", Owner)	false	false
+IsElvenColony	Region.HasResource("res_location_colony") == true	false	false
+IsFactionAislinn	Owner.RecordKeyIsOneOf("wh3_dlc27_hef_aislinn")	true	false
+IsFactionAstragoth	Owner.RecordKeyIsOneOf("wh3_dlc23_chd_astragoth")	true	false
+IsFactionAzazel	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_azazel")	true	false
+IsFactionAzazelOrSigvald	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_azazel", "wh3_dlc20_chs_sigvald")	true	false
+IsFactionClanMoulder	Owner.RecordKeyIsOneOf("wh2_main_skv_clan_moulder")	true	false
+IsFactionDrazhoath	Owner.RecordKeyIsOneOf("wh3_dlc23_chd_legion_of_azgorh")	true	false
+IsFactionDrycha	Owner.RecordKeyIsOneOf("wh2_dlc16_wef_drycha")	true	false
+IsFactionEataine	Owner.RecordKeyIsOneOf("wh2_main_hef_eataine")	true	false
+IsFactionFestus	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_festus")	true	false
+IsFactionGelt	Owner.RecordKeyIsOneOf("wh2_dlc13_emp_golden_order")	true	false
+IsFactionGreasus	Owner.RecordKeyIsOneOf("wh3_main_ogr_goldtooth")	true	false
+IsFactionJadeDragon	Owner.RecordKeyIsOneOf("wh3_dlc24_cth_the_celestial_court")	true	false
+IsFactionMalus	Owner.RecordKeyIsOneOf("wh2_main_def_hag_graef")	true	false
+IsFactionMasque	Owner.RecordKeyIsOneOf("wh3_dlc27_sla_masque_of_slaanesh")	true	false
+IsFactionMorathi	Owner.RecordKeyIsOneOf("wh2_main_def_cult_of_pleasure")	true	false
+IsFactionMotherOstankya	Owner.RecordKeyIsOneOf("wh3_dlc24_ksl_daughters_of_the_forest")	true	false
+IsFactionNotAislinn	Owner.RecordKeyIsOneOf("wh3_dlc27_hef_aislinn") == false	true	false
+IsFactionNotDrycha	Owner.RecordKeyIsOneOf("wh2_dlc16_wef_drycha") == false	true	false
+IsFactionNotMorathi	Owner.RecordKeyIsOneOf("wh2_main_def_cult_of_pleasure") == false	true	false
+IsFactionNotRitual	Owner.RecordKeyIsOneOf("wh2_dlc17_lzd_oxyotl", "wh2_dlc12_lzd_cult_of_sotek") == false	true	false
+IsFactionRogueChaos	Owner.RecordKeyIsOneOf("wh2_dlc09_rogue_dwellers_of_zardok", "wh2_main_rogue_abominations", "wh2_dlc11_cst_rogue_the_churning_gulf_raiders", "wh2_main_rogue_hung_warband", "wh3_main_rogue_shadow_legion", "wh3_main_rogue_kurgan_warband", "wh3_main_rogue_the_challenge_stone_pact")	true	false
+IsFactionRogueKhorne	Owner.RecordKeyIsOneOf("wh3_main_rogue_doombreeds_followers", "wh3_main_rogue_legion_of_gorehath", "wh3_main_rogue_the_bloody_harvest")	true	false
+IsFactionRogueNurgle	Owner.RecordKeyIsOneOf("wh3_main_rogue_scaberaxs_gluttons", "wh3_main_rogue_the_glothal_brood", "wh3_main_rogue_the_putrid_swarm")	true	false
+IsFactionRogueSkaven	Owner.RecordKeyIsOneOf("wh2_dlc11_cst_rogue_grey_point_scuttlers", "wh2_main_rogue_morrsliebs_howlers")	true	false
+IsFactionRogueSlaanesh	Owner.RecordKeyIsOneOf("wh3_main_rogue_the_baleful_princes_muses", "wh3_main_rogue_the_convent", "wh3_main_rogue_the_pleasure_tide")	true	false
+IsFactionRogueTzeentch	Owner.RecordKeyIsOneOf("wh3_main_rogue_scriveners_of_fate", "wh3_main_rogue_argfluxs_pyrocasters", "wh3_main_rogue_the_fluxion_host")	true	false
+IsFactionRogueVampiric	Owner.RecordKeyIsOneOf("wh2_dlc11_cst_shanty_shark_straight_seadogs", "wh2_dlc11_cst_rogue_terrors_of_the_dark_straights", "wh2_main_rogue_vmp_heirs_of_mourkain", "wh2_main_rogue_scourge_of_aquitaine", "wh2_main_rogue_the_wandering_dead")	true	false
+IsFactionSotek	Owner.RecordKeyIsOneOf("wh2_dlc12_lzd_cult_of_sotek")	true	false
+IsFactionTamurkhan	Owner.RecordKeyIsOneOf("wh3_dlc25_nur_tamurkhan")	true	false
+IsFactionTeclis	Owner.RecordKeyIsOneOf("wh2_main_hef_order_of_loremasters")	true	false
+IsFactionValkia	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_valkia")	true	false
+IsFactionVilitch	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_vilitch")	true	false
+IsFactionWissenland	Owner.RecordKeyIsOneOf("wh_main_emp_wissenland")	true	false
+IsFactionWurrzag	Owner.RecordKeyIsOneOf("wh_main_grn_orcs_of_the_bloody_hand")	true	false
+IsFactionYvresse	Owner.RecordKeyIsOneOf("wh2_main_hef_yvresse")	true	false
+IsFactionZhatan	Owner.RecordKeyIsOneOf("wh3_dlc23_chd_zhatan")	true	false
+IsGeneralPresentEnemy	Region.IsAnyEnemyMilitaryForcePresent(Owner) == true	false	false
+IsGeneralPresentInProvince	Province.IsAnyMilitaryForcePresent == true	false	false
+IsGeneralPresentOwn	Region.IsOwnMilitaryForcePresent(Owner) == true	false	false
+IsImmortalEmpires	CampaignModelRoot.CampaignKey == "wh3_main_combi"	true	false
+IsJadeDragonCommercialDistrict	Region.IsEffectBundleActive("wh3_dlc24_ritual_cth_mos_steel_settlement_type_switch_commercial") == true	true	false
+IsJadeDragonFortressCity	Region.IsEffectBundleActive("wh3_dlc24_ritual_cth_mos_stone_settlement_type_switch_fortress") == true	true	false
+IsKarlFranz	Owner.RecordKeyIsOneOf("wh_main_emp_empire")	true	false
+IsKhalida	Owner.RecordKeyIsOneOf("wh2_dlc09_tmb_lybaras")	true	false
+IsKholek	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_kholek")	true	false
+IsKroqGar	Owner.RecordKeyIsOneOf("wh2_main_lzd_last_defenders")	true	false
+IsMasterEngineerNotPresent	Region.IsOwnAgentSubtypePresent("wh_main_dwf_master_engineer") == false && Region.IsOwnAgentSubtypePresent("wh_dlc06_dwf_master_engineer_ghost") == false	false	false
+IsMasterEngineerPresent	Region.IsOwnAgentSubtypePresent("wh_main_dwf_master_engineer") || Region.IsOwnAgentSubtypePresent("wh_dlc06_dwf_master_engineer_ghost")	false	false
+IsNOTUniqueRegionOrFort	Region.RecordKeyIsOneOf("wh3_main_chaos_region_altdorf","wh3_main_combi_region_altdorf","wh3_main_combi_region_lothern","wh3_main_combi_region_hexoatl","wh3_main_combi_region_itza","wh3_main_combi_region_khemri","wh3_main_chaos_region_castle_drakenhof","wh3_main_combi_region_castle_drakenhof","wh3_main_combi_region_couronne","wh3_main_combi_region_miragliano","wh3_main_combi_region_naggarond","wh3_main_combi_region_skavenblight","wh3_main_chaos_region_hell_pit","wh3_main_combi_region_hell_pit","wh3_main_combi_region_karaz_a_karak","wh3_main_combi_region_karak_eight_peaks","wh3_main_combi_region_massif_orcal","wh3_main_chaos_region_kislev","wh3_main_combi_region_kislev","wh3_main_chaos_region_praag","wh3_main_combi_region_praag","wh3_main_chaos_region_erengrad","wh3_main_combi_region_erengrad","wh3_main_combi_region_the_awakening","wh3_main_combi_region_sartosa","wh3_main_combi_region_the_galleons_graveyard") == false	true	false
+IsNOTUniqueRegionOrFortForEmpire	Region.RecordKeyIsOneOf("wh3_main_chaos_region_altdorf","wh3_main_combi_region_altdorf","wh3_main_combi_region_khemri","wh3_main_chaos_region_castle_drakenhof","wh3_main_combi_region_castle_drakenhof","wh3_main_combi_region_couronne","wh3_main_combi_region_miragliano","wh3_main_combi_region_naggarond","wh3_main_combi_region_skavenblight","wh3_main_chaos_region_hell_pit","wh3_main_combi_region_hell_pit","wh3_main_combi_region_karaz_a_karak","wh3_main_combi_region_karak_eight_peaks","wh3_main_combi_region_massif_orcal","wh3_main_combi_region_the_awakening","wh3_main_combi_region_sartosa","wh3_main_combi_region_the_galleons_graveyard") == false	true	false
+IsNotChampionsFaction	Owner.IsInFactionSet("champions_factions") == false	true	false
+IsNotChampionsOrSigvaldFaction	Owner.IsInFactionSet("champions_factions") == false && Owner.RecordKeyIsOneOf("wh3_dlc20_chs_sigvald") == false	true	false
+IsNotChaosDwarfs	Region.Owner.CultureKey != "wh3_dlc23_chd_chaos_dwarfs"	true	false
+IsNotFactionFestus	Owner.RecordKeyIsOneOf("wh3_dlc20_chs_festus") == false	true	false
+IsNotKroqGar	Owner.RecordKeyIsOneOf("wh2_main_lzd_last_defenders") == false	true	false
+IsOwnerNorsca	Region.Owner.CultureKey == "wh_dlc08_nor_norsca"	true	false
+IsOwnershipProductGotrekFelixUnlocked	Owner.IsOwnershipProductUnlocked("TW_WH2_GOTREK_FELIX") == true	true	false
+IsOwnershipProductTidesOfTormentNorscaUnlocked	Owner.IsOwnershipProductUnlocked("TW_WH3_TIDES_OF_TORMENT_NOR") == true	true	false
+IsOwnershipProductTidesOfTormentSlaaneshUnlocked	Owner.IsOwnershipProductUnlocked("TW_WH3_TIDES_OF_TORMENT_SLA") == true	true	false
+IsOxyotl	Owner.RecordKeyIsOneOf("wh2_dlc17_lzd_oxyotl")	true	false
+IsRegionBeastmen	Region.Owner.CultureKey == "wh_dlc03_bst_beastmen"	true	false
+IsRegionChaosDwarfs	Region.Owner.CultureKey == "wh3_dlc23_chd_chaos_dwarfs"	true	false
+IsRegionKarakEightPeaks	Region.RecordKeyIsOneOf("wh3_main_combi_region_karak_eight_peaks") == true	false	false
+IsRegionNorChdChs	Region.Owner.CultureKey == "wh_dlc08_nor_norsca" || Region.Owner.CultureKey == "wh3_dlc23_chd_chaos_dwarfs" || Region.Owner.CultureKey == "wh_main_chs_chaos"	true	false
+IsRegionNorsca	Region.Owner.CultureKey == "wh_dlc08_nor_norsca"	false	false
+IsRegionNotAbandoned	Region.IsAbandoned == false	true	false
+IsRegionNotPort	Region.IsPort == false	false	false
+IsRegionNotTombKing	Region.Owner.CultureKey != "wh2_dlc09_tmb_tomb_kings"	true	false
+IsRegionNotVampireCoast	Region.Owner.CultureKey != "wh2_dlc11_cst_vampire_coast"	true	false
+IsRegionPort	Region.IsPort == true	false	false
+IsRegionProvinceCapital	Region.IsProvinceCapital == true	false	false
+IsRegionSkavenblight	Region.RecordKeyIsOneOf("wh3_main_combi_region_skavenblight") == true	false	false
+IsRegionTombKing	Region.Owner.CultureKey == "wh2_dlc09_tmb_tomb_kings"	true	false
+IsRegionVampireCoast	Region.Owner.CultureKey == "wh2_dlc11_cst_vampire_coast"	true	false
+IsRegionVampireCounts	Region.Owner.CultureKey == "wh_main_vmp_vampire_counts"	true	false
+IsRegionZharrNaggrund	Region.RecordKeyIsOneOf("wh3_main_chaos_region_zharr_naggrund", "wh3_main_combi_region_zharr_naggrund") == true	false	false
+IsSPChaosCampaign	CampaignModelRoot.CampaignKey == "wh3_main_chaos" && CampaignModelRoot.IsMultiplayer == false	true	false
+KSLHasDevotion	Owner.ModelPooledResourceContext("wh3_main_ksl_devotion")	true	false
+KSLHasSupporters	Owner.ModelPooledResourceContext("wh3_main_ksl_followers")	true	false
+KhorneCorruption100	Region.Province.PooledResourceContextForKey("wh3_main_corruption_khorne").Total >= 100	false	false
+KhorneCorruption50	Region.Province.PooledResourceContextForKey("wh3_main_corruption_khorne").Total >= 50	false	false
+KhorneCorruption75	Region.Province.PooledResourceContextForKey("wh3_main_corruption_khorne").Total >= 75	false	false
+KhorneCorruptionLessThan50	Region.Province.PooledResourceContextForKey("wh3_main_corruption_khorne").Total < 50	false	false
+KislevHasOrthodoxyGrowthBoon	Owner.IsEffectBundleActive("wh3_main_ksl_support_orthodoxy_magic_1_2") == true	false	false
+KislevHasSettlementAdjacencyBoon	Owner.IsEffectBundleActive("wh3_main_ksl_support_orthodoxy_settlement_2_2") == true	false	false
+KislevHasSettlementResearchBoon	Owner.IsEffectBundleActive("wh3_main_ksl_support_ice_court_settlement_1_2") == true	false	false
+MaxAllegianceAllChampionsRejected	Owner.IsEffectBundleActive("wh3_dlc27_bundle_nor_allegiance_ultimate_refusal")  == true	true	false
+MinorCultCabalPower1_1	true	false	false
+MinorCultCabalPower1_2	true	false	false
+MinorCultCabalPower1_3	true	false	false
+MinorCultCabalPower1_4	true	false	false
+MinorCultCabalPower1_5	true	false	false
+MinorCultCabalPower1_6	true	false	false
+MinorCultCabalPower1_7	true	false	false
+MinorCultCabalPower1_8	true	false	false
+MinorCultCabalPower1_9	true	false	false
+MinorCultCabalPower2	false	false	false
+MinorCultCabalPower2_On	true	false	false
+MinorCultCabalPower3	false	false	false
+MinorCultCabalPower3_On	true	false	false
+MinorCultCabalPower4	false	false	false
+MinorCultCabalPower4_On	true	false	false
+MinorCultCabalPower5	false	false	false
+MinorCultCabalPower5_On	true	false	false
+MountainClimate	Region.IsEffectBundleActive("wh3_dlc20_climate_suitable_mountain") == true	false	false
+MountainClimatePresent	Region.IsEffectBundleActive("wh3_dlc20_climate_suitable_mountain") == true	false	false
+NORCrowTier1	Owner.ModelPooledResourceContext("nor_progress_crow").Total < 5	true	false
+NORCrowTier2	Owner.ModelPooledResourceContext("nor_progress_crow").Total >= 5 && Owner.ModelPooledResourceContext("nor_progress_crow").Total < 10	true	false
+NORCrowTier3	Owner.ModelPooledResourceContext("nor_progress_crow").Total >= 10 && Owner.ModelPooledResourceContext("nor_progress_crow").Total < 15	true	false
+NORCrowTier4	Owner.ModelPooledResourceContext("nor_progress_crow").Total >=15	true	false
+NOREagleTier1	Owner.ModelPooledResourceContext("nor_progress_eagle").Total < 5	true	false
+NOREagleTier2	Owner.ModelPooledResourceContext("nor_progress_eagle").Total >= 5 && Owner.ModelPooledResourceContext("nor_progress_eagle").Total < 10	true	false
+NOREagleTier3	Owner.ModelPooledResourceContext("nor_progress_eagle").Total >= 10 && Owner.ModelPooledResourceContext("nor_progress_eagle").Total < 15	true	false
+NOREagleTier4	Owner.ModelPooledResourceContext("nor_progress_eagle").Total >=15	true	false
+NORHoundTier1	Owner.ModelPooledResourceContext("nor_progress_hound").Total < 5	true	false
+NORHoundTier2	Owner.ModelPooledResourceContext("nor_progress_hound").Total >= 5 && Owner.ModelPooledResourceContext("nor_progress_hound").Total < 10	true	false
+NORHoundTier3	Owner.ModelPooledResourceContext("nor_progress_hound").Total >= 10 && Owner.ModelPooledResourceContext("nor_progress_hound").Total < 15	true	false
+NORHoundTier4	Owner.ModelPooledResourceContext("nor_progress_hound").Total >=15	true	false
+NORSaylTier1	Owner.ModelPooledResourceContext("wh3_dlc27_nor_sayl_dark_ritual").Total < 4	true	false
+NORSaylTier2	Owner.ModelPooledResourceContext("wh3_dlc27_nor_sayl_dark_ritual").Total >= 4 && Owner.ModelPooledResourceContext("wh3_dlc27_nor_sayl_dark_ritual").Total < 10	true	false
+NORSaylTier3	Owner.ModelPooledResourceContext("wh3_dlc27_nor_sayl_dark_ritual").Total >= 10 && Owner.ModelPooledResourceContext("wh3_dlc27_nor_sayl_dark_ritual").Total < 18	true	false
+NORSaylTier4	Owner.ModelPooledResourceContext("wh3_dlc27_nor_sayl_dark_ritual").Total >= 18 && Owner.ModelPooledResourceContext("wh3_dlc27_nor_sayl_dark_ritual").Total < 30	true	false
+NORSaylTier5	Owner.ModelPooledResourceContext("wh3_dlc27_nor_sayl_dark_ritual").Total >=30	true	false
+NORSerpentTier1	Owner.ModelPooledResourceContext("nor_progress_serpent").Total < 5	true	false
+NORSerpentTier2	Owner.ModelPooledResourceContext("nor_progress_serpent").Total >= 5 && Owner.ModelPooledResourceContext("nor_progress_serpent").Total < 10	true	false
+NORSerpentTier3	Owner.ModelPooledResourceContext("nor_progress_serpent").Total >= 10 && Owner.ModelPooledResourceContext("nor_progress_serpent").Total < 15	true	false
+NORSerpentTier4	Owner.ModelPooledResourceContext("nor_progress_serpent").Total >=15	true	false
+NeglectedIceCourt	Owner.IsEffectBundleActive("wh3_main_ksl_ice_court_neglect") == true	false	false
+NeglectedOrthodoxy	Owner.IsEffectBundleActive("wh3_main_ksl_orthodoxy_neglect") == true	false	false
+NotDwarf	Owner.CultureKey != "wh_main_dwf_dwarfs"	false	false
+NotDwarfHidden	Owner.CultureKey != "wh_main_dwf_dwarfs"	true	false
+NotNeglectedIceCourt	Owner.IsEffectBundleActive("wh3_main_ksl_ice_court_neglect") == false	false	false
+NotNeglectedOrthodoxy	Owner.IsEffectBundleActive("wh3_main_ksl_orthodoxy_neglect") == false	false	false
+NotRegionHasPlague	Region.IsEffectBundleActive("wh3_main_plague_present_dummy") == false	false	false
+NotRegionOwnerFavouredCorruptionKhorne	Region.Owner.IsInFactionSet("FavouredCorruptionKhorne") == false	true	false
+NotRegionOwnerFavouredCorruptionNone	Region.Owner.IsInFactionSet("FavouredCorruptionNone") == false	true	false
+NotRegionOwnerFavouredCorruptionNurgle	Region.Owner.IsInFactionSet("FavouredCorruptionNurgle") == false	true	false
+NotRegionOwnerFavouredCorruptionSkaven	Region.Owner.IsInFactionSet("FavouredCorruptionSkaven") == false	true	false
+NotRegionOwnerFavouredCorruptionSlaanesh	Region.Owner.IsInFactionSet("FavouredCorruptionSlaanesh") == false	true	false
+NotRegionOwnerFavouredCorruptionTzeentch	Region.Owner.IsInFactionSet("FavouredCorruptionTzeentch") == false	true	false
+NotRegionOwnerFavouredCorruptionUndivided	Region.Owner.IsInFactionSet("FavouredCorruptionUndivided") == false	true	false
+NotRegionOwnerFavouredCorruptionVampiric	Region.Owner.IsInFactionSet("FavouredCorruptionVampiric") == false	true	false
+NurgleCorruption100	Region.Province.PooledResourceContextForKey("wh3_main_corruption_nurgle").Total >= 100	false	false
+NurgleCorruption50	Region.Province.PooledResourceContextForKey("wh3_main_corruption_nurgle").Total >= 50	false	false
+NurgleCorruption75	Region.Province.PooledResourceContextForKey("wh3_main_corruption_nurgle").Total >= 75	false	false
+OwnerIsDechala	Owner.RecordKeyIsOneOf("wh3_dlc27_sla_the_tormentors") == true	true	false
+OwnerIsNotBhashiva	Owner.RecordKeyIsOneOf("wh3_cp1_cth_tiger_warriors") == false	true	false
+OwnerIsNotDechala	Owner.RecordKeyIsOneOf("wh3_dlc27_sla_the_tormentors") == false	true	false
+PawnbrokerSoldOut	Region.IsEffectBundleActive("wh3_main_pawnbroker_sold_out_dummy")	false	false
+ProvinceIsFullyOwned	Province.IsFactionOwnerOfEntireProvince(Owner) == true	false	false
+ProvinceIsFullyOwnedByRegionOwner	Province.IsFactionOwnerOfEntireProvince(Region.Owner) == true	false	false
+ProvinceIsNotFullyOwned	Province.IsFactionOwnerOfEntireProvince(Owner) == false	false	false
+PublicOrder100	Region.PublicOrder > 99	false	false
+PublicOrderGreaterThan-25	Region.PublicOrder >= -25	false	false
+PublicOrderGreaterThan-50	Region.PublicOrder >= -50	false	false
+PublicOrderGreaterThan0	Region.PublicOrder >= 0	false	false
+PublicOrderGreaterThan20	Region.PublicOrder >= 20	false	false
+PublicOrderGreaterThan25	Region.PublicOrder >= 25	false	false
+PublicOrderGreaterThan50	Region.PublicOrder >= 50	false	false
+PublicOrderGreaterThan75	Region.PublicOrder >= 75	false	false
+PublicOrderGreaterThan90	Region.PublicOrder >= 90	false	false
+PublicOrderLessThan-40	Region.PublicOrder < -40	false	false
+PublicOrderLessThan-50	Region.PublicOrder < -50	false	false
+PublicOrderLessThan0	Region.PublicOrder < 0	false	false
+PublicOrderLessThan25	Region.PublicOrder <= 25	false	false
+PurpleHandRemoved	Region.IsEffectBundleActive("wh3_main_minor_cult_purple_hand_removed")	false	false
+RegionAdjacentElvenColony	Region.IsEffectBundleActive("wh3_main_adjacent_elven_colony_dummy")	false	false
+RegionDechalaNotPermanent	Region.EntitySharedStateReadBool("settlement_exploitation_permanent") == false	false	false
+RegionDechalaPermanent	Region.EntitySharedStateReadBool("settlement_exploitation_permanent") == true	false	false
+RegionHasAdjacentDwarfFaction	Region.IsEffectBundleActive("wh3_main_adjacent_dwarf_dummy")	false	false
+RegionHasAnyTradeResource	Region.HasResource("res_dyes") || Region.HasResource("res_animals") || Region.HasResource("res_rom_furs") || Region.HasResource("res_gems") || Region.HasResource("res_gold") || Region.HasResource("res_rom_iron") || Region.HasResource("res_ivory") || Region.HasResource("res_rom_marble") || Region.HasResource("res_medicine") || Region.HasResource("res_obsidian") || Region.HasResource("res_rom_oil") || Region.HasResource("res_rom_textiles") || Region.HasResource("res_rom_lead") || Region.HasResource("res_spices") || Region.HasResource("res_rom_wine") || Region.HasResource("res_rom_timber")	false	false
+RegionHasPlague	Region.IsEffectBundleActive("wh3_main_plague_present_dummy")	false	false
+RegionHasResourceDyes	Region.HasResource("res_dyes") == true	true	false
+RegionHasResourceExoticAnimals	Region.HasResource("res_animals") == true	true	false
+RegionHasResourceFurs	Region.HasResource("res_rom_furs") == true	true	false
+RegionHasResourceGems	Region.HasResource("res_gems") == true	true	false
+RegionHasResourceGold	Region.HasResource("res_gold") == true	true	false
+RegionHasResourceIron	Region.HasResource("res_rom_iron") == true	true	false
+RegionHasResourceIvory	Region.HasResource("res_ivory") == true	true	false
+RegionHasResourceMarble	Region.HasResource("res_rom_marble") == true	true	false
+RegionHasResourceMedicine	Region.HasResource("res_medicine") == true	true	false
+RegionHasResourceObsidian	Region.HasResource("res_obsidian") == true	true	false
+RegionHasResourcePastures	Region.HasResource("res_rom_oil") == true	true	false
+RegionHasResourcePottery	Region.HasResource("res_rom_textiles") == true	true	false
+RegionHasResourceSalt	Region.HasResource("res_rom_lead") == true	true	false
+RegionHasResourceSpices	Region.HasResource("res_spices") == true	true	false
+RegionHasResourceWine	Region.HasResource("res_rom_wine") == true	true	false
+RegionHasResourceWood	Region.HasResource("res_rom_timber") == true	true	false
+RegionIsFactionCapital	Region.IsHomeRegion == true	false	false
+RegionOwnerDarkElves	Region.Owner.SubcultureIsOneOf("wh2_main_sc_def_dark_elves") == true	true	false
+RegionOwnerFavouredCorruptionKhorne	Region.Owner.IsInFactionSet("FavouredCorruptionKhorne") == true	true	false
+RegionOwnerFavouredCorruptionNone	Region.Owner.IsInFactionSet("FavouredCorruptionNone") == true	true	false
+RegionOwnerFavouredCorruptionNurgle	Region.Owner.IsInFactionSet("FavouredCorruptionNurgle") == true	true	false
+RegionOwnerFavouredCorruptionSkaven	Region.Owner.IsInFactionSet("FavouredCorruptionSkaven") == true	true	false
+RegionOwnerFavouredCorruptionSlaanesh	Region.Owner.IsInFactionSet("FavouredCorruptionSlaanesh") == true	true	false
+RegionOwnerFavouredCorruptionTzeentch	Region.Owner.IsInFactionSet("FavouredCorruptionTzeentch") == true	true	false
+RegionOwnerFavouredCorruptionUndivided	Region.Owner.IsInFactionSet("FavouredCorruptionUndivided") == true	true	false
+RegionOwnerFavouredCorruptionVampiric	Region.Owner.IsInFactionSet("FavouredCorruptionVampiric") == true	true	false
+RegionOwnerNotDarkElves	Region.Owner.SubcultureIsOneOf("wh2_main_sc_def_dark_elves") == false	true	false
+RegionThrallsAbove30percent	Region.ModelPooledResourceContext("wh3_dlc27_sla_thralls_region").PercentageOfCapacity > 30	false	false
+RegionThrallsAbove70percent	Region.ModelPooledResourceContext("wh3_dlc27_sla_thralls_region").PercentageOfCapacity > 70	false	false
+RegionThrallsAboveZero	Region.ModelPooledResourceContext("wh3_dlc27_sla_thralls_region").PercentageOfCapacity > 0	false	false
+RegionThrallsBelow0percent	Region.ModelPooledResourceContext("wh3_dlc27_sla_thralls_region").PercentageOfCapacity = 0	false	false
+RegionThrallsBelow30percent	Region.ModelPooledResourceContext("wh3_dlc27_sla_thralls_region").PercentageOfCapacity < 30	false	false
+RegionThrallsBelow70percent	Region.ModelPooledResourceContext("wh3_dlc27_sla_thralls_region").PercentageOfCapacity < 70	false	false
+SaylFinalBattleCompleted	Owner.IsEffectBundleActive("wh3_dlc27_sayl_final_bundle") == true	false	false
+SaylNarrativeT1	Owner.IsEffectBundleActive("wh3_dlc27_nor_sayl_narrative_t1") == true	false	false
+SaylNarrativeT2	Owner.IsEffectBundleActive("wh3_dlc27_nor_sayl_narrative_t2") == true	false	false
+SaylNarrativeT3	Owner.IsEffectBundleActive("wh3_dlc27_nor_sayl_narrative_t3") == true	false	false
+SaylNarrativeT4	Owner.IsEffectBundleActive("wh3_dlc27_nor_sayl_narrative_t4") == true	false	false
+SaylTreacheryDeclareWar	true	false	false
+SaylTreacheryDeclareWarAfter	true	false	false
+SeaRegionJungleCoasts	Army.SeaRegion.BelongsToRegionGroup("wh3_main_combi_sea_regions_jungle_coasts")	false	false
+SeaRegionNaggarondSeas	Army.SeaRegion.BelongsToRegionGroup("wh3_main_combi_sea_regions_naggarond_seas")	false	false
+SeaRegionNorthernSeas	Army.SeaRegion.BelongsToRegionGroup("wh3_main_combi_sea_regions_northern_seas")	false	false
+SeaRegionOpenSea	Army.SeaRegion.BelongsToRegionGroup("wh3_main_combi_sea_regions_open_sea")	false	false
+SeaRegionRiver	Army.SeaRegion.BelongsToRegionGroup("wh3_main_combi_all_rivers")	false	false
+SeaRegionUlthuanEasternIsles	Army.SeaRegion.BelongsToRegionGroup("wh3_main_combi_sea_regions_ulthuan_eastern_isles")	false	false
+SkavenCorruption0Dummy	Region.Province.PooledResourceContextForKey("wh3_main_corruption_skaven").Total == 0	false	false
+SkavenCorruption100	Region.Province.PooledResourceContextForKey("wh3_main_corruption_skaven").Total >= 100	false	false
+SkavenCorruption100Dummy	Region.Province.PooledResourceContextForKey("wh3_main_corruption_skaven").Total >= 100	false	false
+SkavenCorruption50	Region.Province.PooledResourceContextForKey("wh3_main_corruption_skaven").Total >= 50	false	false
+SkavenCorruption75	Region.Province.PooledResourceContextForKey("wh3_main_corruption_skaven").Total >= 75	false	false
+SlaaneshCorruption100	Region.Province.PooledResourceContextForKey("wh3_main_corruption_slaanesh").Total >= 100	false	false
+SlaaneshCorruption50	Region.Province.PooledResourceContextForKey("wh3_main_corruption_slaanesh").Total >= 50	false	false
+SlaaneshCorruption75	Region.Province.PooledResourceContextForKey("wh3_main_corruption_slaanesh").Total >= 75	false	false
+SlaaneshCorruptionLessThan100	Region.Province.PooledResourceContextForKey("wh3_main_corruption_slaanesh").Total < 100	false	false
+StanceIsDragonshipExpansion	Army.CurrentStanceKey == "MILITARY_FORCE_ACTIVE_STANCE_TYPE_PATROL"	false	false
+ThroggBuildingsHasStopTrollkindResourceBonusValue	Owner.IsEffectBundleActive("wh3_dlc27_bundle_nor_throgg_trollkind_troll_call_dummy") == false	false	false
+TreasuryGreaterThan5000	Owner.Treasury >5000	false	false
+TreasuryLessThan2000	Owner.Treasury < 2000	false	false
+TreasuryMoreThan2000	Owner.Treasury >= 2000	false	false
+TzeentchCorruption100	Region.Province.PooledResourceContextForKey("wh3_main_corruption_tzeentch").Total >= 100	false	false
+TzeentchCorruption50	Region.Province.PooledResourceContextForKey("wh3_main_corruption_tzeentch").Total >= 50	false	false
+TzeentchCorruption75	Region.Province.PooledResourceContextForKey("wh3_main_corruption_tzeentch").Total >= 75	false	false
+TzeentchCorruptionLessThan50	Region.Province.PooledResourceContextForKey("wh3_main_corruption_tzeentch").Total < 50	false	false
+UnitRecruitedProvinceDummy	true	false	false
+VampiricCorruption100	Region.Province.PooledResourceContextForKey("wh3_main_corruption_vampiric").Total >= 100	false	false
+VampiricCorruption50	Region.Province.PooledResourceContextForKey("wh3_main_corruption_vampiric").Total >= 50	false	false
+VampiricCorruption75	Region.Province.PooledResourceContextForKey("wh3_main_corruption_vampiric").Total >= 75	false	false
+WallEffect	Region.IsOriginatingSubcultureOneOf("wh_dlc05_sc_wef_wood_elves","wh3_main_sc_ogr_ogre_kingdoms","wh_dlc08_sc_nor_norsca") == false	false	false
+WoMGreaterThan3	Region.WindsOfMagicStrengthLevel >= 3	false	false
+WoMGreaterThan4	Region.WindsOfMagicStrengthLevel >= 4	false	false
+armies_sy_initiative_alchemists	Owner.InitiativeManagerContext.InitiativeSetContext("wh3_cp1_cth_initiative_set_aosy_military_buildings").InitiativeContext("wh3_cp1_feature_initiatives_cth_buildings_machines").IsActive	false	true
+armies_sy_initiative_celestial_forge	Owner.InitiativeManagerContext.InitiativeSetContext("wh3_cp1_cth_initiative_set_aosy_military_buildings").InitiativeContext("wh3_cp1_feature_initiatives_cth_buildings_celestial").IsActive	false	true
+armies_sy_initiative_gunpowder	Owner.InitiativeManagerContext.InitiativeSetContext("wh3_cp1_cth_initiative_set_aosy_military_buildings").InitiativeContext("wh3_cp1_feature_initiatives_cth_buildings_gun").IsActive	false	true
+armies_sy_initiative_jade_armoury	Owner.InitiativeManagerContext.InitiativeSetContext("wh3_cp1_cth_initiative_set_aosy_military_buildings").InitiativeContext("wh3_cp1_feature_initiatives_cth_buildings_jade").IsActive	false	true
+tiger_court_bhashiva_passive_1	Owner.ModelPooledResourceContext("wh3_cp1_cth_court_bhashiva").Total >= 1 && Owner.ModelPooledResourceContext("wh3_cp1_cth_court_bhashiva").Total <= 8	false	false
+tiger_court_bhashiva_passive_3	Owner.ModelPooledResourceContext("wh3_cp1_cth_court_bhashiva").Total >= 17 && Owner.ModelPooledResourceContext("wh3_cp1_cth_court_bhashiva").Total <= 24	false	false
+tiger_court_bhashiva_passive_4	Owner.ModelPooledResourceContext("wh3_cp1_cth_court_bhashiva").Total >= 25 && Owner.ModelPooledResourceContext("wh3_cp1_cth_court_bhashiva").Total <= 32	false	false
+tiger_court_bhashiva_passive_5	Owner.ModelPooledResourceContext("wh3_cp1_cth_court_bhashiva").Total >= 33 && Owner.ModelPooledResourceContext("wh3_cp1_cth_court_bhashiva").Total <= 40	false	false
+tiger_court_bhashiva_passive_from_t3	Owner.ModelPooledResourceContext("wh3_cp1_cth_court_bhashiva").Total >= 17	false	false
+tiger_court_military_passive_1	Owner.ModelPooledResourceContext("wh3_cp1_cth_court_military").Total >= 1 && Owner.ModelPooledResourceContext("wh3_cp1_cth_court_military").Total <= 8	true	true
+tiger_court_military_passive_3	Owner.ModelPooledResourceContext("wh3_cp1_cth_court_military").Total >= 17 && Owner.ModelPooledResourceContext("wh3_cp1_cth_court_military").Total <= 24	false	true
+tiger_court_military_passive_4	Owner.ModelPooledResourceContext("wh3_cp1_cth_court_military").Total >= 25 && Owner.ModelPooledResourceContext("wh3_cp1_cth_court_military").Total <= 32	false	true
+tiger_court_military_passive_5	Owner.ModelPooledResourceContext("wh3_cp1_cth_court_military").Total >= 33 && Owner.ModelPooledResourceContext("wh3_cp1_cth_court_military").Total <= 40	false	true
+tiger_court_military_passive_from_t3	Owner.ModelPooledResourceContext("wh3_cp1_cth_court_military").Total >= 17	false	true
+tiger_court_spiritual_passive_1	Owner.ModelPooledResourceContext("wh3_cp1_cth_court_spiritual").Total >= 1 && Owner.ModelPooledResourceContext("wh3_cp1_cth_court_spiritual").Total <= 8	true	true
+tiger_court_spiritual_passive_3	Owner.ModelPooledResourceContext("wh3_cp1_cth_court_spiritual").Total >= 17 && Owner.ModelPooledResourceContext("wh3_cp1_cth_court_spiritual").Total <= 24	false	true
+tiger_court_spiritual_passive_4	Owner.ModelPooledResourceContext("wh3_cp1_cth_court_spiritual").Total >= 25 && Owner.ModelPooledResourceContext("wh3_cp1_cth_court_spiritual").Total <= 32	false	true
+tiger_court_spiritual_passive_5	Owner.ModelPooledResourceContext("wh3_cp1_cth_court_spiritual").Total >= 33 && Owner.ModelPooledResourceContext("wh3_cp1_cth_court_spiritual").Total <= 40	false	true
+tiger_court_spiritual_passive_from_t3	Owner.ModelPooledResourceContext("wh3_cp1_cth_court_spiritual").Total >= 17	false	true
+tiger_court_spiritual_passive_from_t3_hidden	Owner.ModelPooledResourceContext("wh3_cp1_cth_court_spiritual").Total >= 17 && Region.IsAnyEnemyMilitaryForcePresent() == false && Region.IsAnyEnemyAgentPresent() == false	false	false
+wh3_cp1_IsRelics	Owner.RecordKeyIsOneOf("wh3_cp1_cth_tiger_warriors") && Region.HasResource("res_relics") == true	true	true

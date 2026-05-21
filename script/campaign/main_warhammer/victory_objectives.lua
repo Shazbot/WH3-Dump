@@ -2343,63 +2343,63 @@ victory_objectives_ie = {
 			}
 		},
 	
-			-- Yuan Bo, The Jade Dragon
-			wh3_dlc24_cth_the_celestial_court = {
-				objectives = {
-					{
-						-- Complete 2 of the 4 astromantic relays
-						type = "SCRIPTED",
-						conditions = {
-							"script_key empower_compass",
-							"override_text mission_text_text_wh3_dlc24_victory_complete_astromantic_relays"
-						}
+		-- Yuan Bo, The Jade Dragon
+		wh3_dlc24_cth_the_celestial_court = {
+			objectives = {
+				{
+					-- Complete 2 of the 4 astromantic relays
+					type = "SCRIPTED",
+					conditions = {
+						"script_key empower_compass",
+						"override_text mission_text_text_wh3_dlc24_victory_complete_astromantic_relays"
 					}
-				},
-				long_objectives = {
-					{
-						-- Complete the north astromantic relay
-						type = "SCRIPTED",
-						conditions = {
-							"script_key empower_compass_north",
-							"override_text  mission_text_text_wh3_dlc24_victory_complete_astromantic_relays_north_ie"
-						}
-					},
-					{
-						-- Complete the east astromantic relay
-						type = "SCRIPTED",
-						conditions = {
-							"script_key empower_compass_east",
-							"override_text  mission_text_text_wh3_dlc24_victory_complete_astromantic_relays_east_ie"
-						}
-					},
-					{
-						-- Complete the south astromantic relay
-						type = "SCRIPTED",
-						conditions = {
-							"script_key empower_compass_south",
-							"override_text  mission_text_text_wh3_dlc24_victory_complete_astromantic_relays_south_ie"
-						}
-					},
-					{
-						-- Complete the west astromantic relay
-						type = "SCRIPTED",
-						conditions = {
-							"script_key empower_compass_west",
-							"override_text  mission_text_text_wh3_dlc24_victory_complete_astromantic_relays_west_ie"
-						}
-					},
-					{
-						-- win the final battle
-						type = "SCRIPTED",
-						conditions = {
-							"script_key final_battle",
-							"override_text mission_text_text_wh3_dlc24_victory_yuan_bo_final_battle"
-						}
-					}
-				},
-				no_alignment_objective = true,
-				no_subculture_objective = true
+				}
 			},
+			long_objectives = {
+				{
+					-- Complete the north astromantic relay
+					type = "SCRIPTED",
+					conditions = {
+						"script_key empower_compass_north",
+						"override_text  mission_text_text_wh3_dlc24_victory_complete_astromantic_relays_north_ie"
+					}
+				},
+				{
+					-- Complete the east astromantic relay
+					type = "SCRIPTED",
+					conditions = {
+						"script_key empower_compass_east",
+						"override_text  mission_text_text_wh3_dlc24_victory_complete_astromantic_relays_east_ie"
+					}
+				},
+				{
+					-- Complete the south astromantic relay
+					type = "SCRIPTED",
+					conditions = {
+						"script_key empower_compass_south",
+						"override_text  mission_text_text_wh3_dlc24_victory_complete_astromantic_relays_south_ie"
+					}
+				},
+				{
+					-- Complete the west astromantic relay
+					type = "SCRIPTED",
+					conditions = {
+						"script_key empower_compass_west",
+						"override_text  mission_text_text_wh3_dlc24_victory_complete_astromantic_relays_west_ie"
+					}
+				},
+				{
+					-- win the final battle
+					type = "SCRIPTED",
+					conditions = {
+						"script_key final_battle",
+						"override_text mission_text_text_wh3_dlc24_victory_yuan_bo_final_battle"
+					}
+				}
+			},
+			no_alignment_objective = true,
+			no_subculture_objective = true
+		},
 	
 
 		--Grimgor Ironhide
@@ -4058,6 +4058,107 @@ victory_objectives_ie = {
 			no_subculture_objective = true,
 			no_alignment_objective = true
 			},
+
+		--Bhashiva
+		wh3_cp1_cth_tiger_warriors = {
+			objectives = {
+				{
+					-- Tiger Court Max Level Reached
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_wh3_cp1_bhashiva_tiger_court_short_victory",
+						"script_key bhashiva_tiger_court_short_victory",
+						"total 1",
+						"count 0",
+						"count_completion"
+					}
+				},
+				{
+					-- Zhao Ming missions completed
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_wh3_cp1_bhashiva_zhao_goals_short_victory",
+						"script_key bhashiva_zhao_goals_short_victory",
+						"total 4",
+						"count 0",
+						"count_completion"
+					}
+				},
+				{
+					-- Spend Iron Favour
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_wh3_cp1_bhashiva_iron_favour_short_victory",
+						"script_key bhashiva_iron_favour_spent_short_victory",
+						"total 1500",
+						"count 0",
+						"count_completion"
+					}
+				},
+				{
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh3_main_ogr_mountaineaters",
+						"faction wh3_main_ogr_sons_of_the_mountain",
+						"faction wh_main_grn_greenskins",
+						"faction wh3_main_ogr_fulg",
+						"confederation_valid"
+					}
+				},
+			},
+			long_objectives = {
+				{
+					-- Tiger Court Max Level Reached
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_wh3_cp1_bhashiva_tiger_court_long_victory",
+						"script_key bhashiva_tiger_court_long_victory",
+						"total 2",
+						"count 0",
+						"count_completion"
+					}
+				},
+				{
+					-- Zhao Ming missions completed
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_wh3_cp1_bhashiva_zhao_goals_long_victory",
+						"script_key bhashiva_zhao_goals_long_victory",
+						"total 10",
+						"count 0",
+						"count_completion"
+					}
+				},
+				{
+					-- Spend Iron Favour
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_wh3_cp1_bhashiva_iron_favour_long_victory",
+						"script_key bhashiva_iron_favour_spent_long_victory",
+						"total 3000",
+						"count 0",
+						"count_completion"
+					}
+				},
+				{
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh3_dlc23_chd_minor_faction",
+						"faction wh3_dlc23_chd_legion_of_azgorh",
+						"faction wh3_dlc23_chd_conclave",
+						"confederation_valid"
+					}
+				},
+--				{
+--					type = "FIGHT_SET_PIECE_BATTLE",
+--					conditions = {
+--						"set_piece_battle wh3_cp1_qb_cth_bhashiva_heavens_gate"
+--					}
+--				},
+			},
+			no_subculture_objective = true,
+			no_alignment_objective = true
+		}
 	},
 	-- used to track gelts unique ritual objective
 	gelt_unique_rituals = {},
@@ -4071,7 +4172,7 @@ victory_objectives_ie = {
 		tempo_4_initiatives = {}
 	},
 
-	throgg_data = {}
+	throgg_data = {},
 }
 
 -- This function creates the victory missions for all playable factions
@@ -5241,6 +5342,108 @@ function victory_objectives_ie:add_scripted_victory_listeners()
 			true
 		)
 
+	end
+
+	-- Bhashiva Spend Relics
+	local bhashiva_faction_key = "wh3_cp1_cth_tiger_warriors"
+	if cm:get_faction(bhashiva_faction_key) and cm:get_faction(bhashiva_faction_key):is_human() then
+		local current_relics_spent_key = "current_relics_resource_spent_" 
+		core:add_listener(
+			"Tiger_Warriors_Relics_Spent",
+			"PooledResourceChanged",
+			function(context)
+				return context:resource():key() == tiger_mercenaries_config.relics_pooled_resource and context:amount() < 0
+			end,
+			function(context)
+				local amount = context:amount()
+				local faction_relics_spent = current_relics_spent_key .. context:faction():name()
+				local total_spent = cm:get_saved_value(faction_relics_spent) or 0
+				total_spent = total_spent + (-amount)
+
+				cm:increase_scripted_mission_count("wh_main_short_victory", "bhashiva_relics_spent_short_victory", total_spent)
+				cm:increase_scripted_mission_count("wh_main_long_victory", "bhashiva_relics_spent_long_victory", total_spent)
+			end,
+			true
+		)
+
+		local current_iron_favour_spent_key = "current_iron_favour_resource_spent_" 
+		core:add_listener(
+			"Tiger_Warriors_Iron_Favour_Spent",
+			"PooledResourceChanged",
+			function(context)
+				return context:resource():key() == iron_favour.resources.iron_favour_faction and context:amount() < 0
+			end,
+			function(context)
+				local amount = context:amount()
+				local faction_iron_favour_spent = current_iron_favour_spent_key .. context:faction():name()
+				local total_spent = cm:get_saved_value(faction_iron_favour_spent) or 0
+				total_spent = total_spent + (-amount)
+
+				cm:increase_scripted_mission_count("wh_main_short_victory", "bhashiva_iron_favour_spent_short_victory", total_spent)
+				cm:increase_scripted_mission_count("wh_main_long_victory", "bhashiva_iron_favour_spent_long_victory", total_spent)
+			end,
+			true
+		)
+
+		core:add_listener(
+			"Tiger_Warriors_Caravans_Completed",
+			"ScriptEventCaravanCompleted",
+			function(context) return context:faction():name() == bhashiva_faction_key end,
+			function(context)
+				cm:increase_scripted_mission_count("wh_main_short_victory", "bhashiva_caravans_completed_short_victory", 1)
+				cm:increase_scripted_mission_count("wh_main_long_victory", "bhashiva_caravans_completed_long_victory", 1)
+			end,
+			true
+		)
+		
+		core:add_listener(
+			"Bhashiva_Court_Resource_Short_Long_Victory_Objective",
+			"PooledResourceChanged",
+			function(context)
+				return string.find(context:resource():key(), "wh3_cp1_cth_court") and context:faction():name() == "wh3_cp1_cth_tiger_warriors"
+			end,
+			function(context)
+				local pool_res_court = context:resource()
+				local pool_res_court_key = pool_res_court:key()
+				local court_res_value = pool_res_court:value()
+				local court_res_max = pool_res_court:maximum_value()
+				local has_resoruce_reached_max_value = cm:get_saved_value("court_max_value" .. pool_res_court_key) or false
+				local num_resources_maxed_out = cm:get_saved_value("court_num_res_maxed_out") or 0
+
+				if court_res_value == court_res_max then
+					if not has_resoruce_reached_max_value then
+						cm:set_saved_value("court_max_value" .. pool_res_court_key, true)
+						cm:increase_scripted_mission_count("wh_main_short_victory", "bhashiva_tiger_court_short_victory", 1)
+						cm:increase_scripted_mission_count("wh_main_long_victory", "bhashiva_tiger_court_long_victory", 1)
+					end
+				end
+			end,
+			true
+		)
+
+		core:add_listener(
+			"Bhashiva_Zhaos_Goals_Short_Long_Victory_Objective",
+			"MissionSucceeded",
+			function(context)
+				local mission_key = context:mission():mission_record_key()
+				local faction_key = context:faction():name()
+
+				if faction_key == "wh3_cp1_cth_tiger_warriors" then
+					if string.find(mission_key, "wh3_cp1_camp_cth_enemies_of_cathay_1") or
+					string.find(mission_key, "wh3_cp1_camp_cth_enemies_of_cathay_2") or
+					string.find(mission_key, "wh3_cp1_camp_cth_enemies_of_cathay_3") then
+						return true
+					else
+						return false
+					end
+				end
+			end,
+			function(context)
+				cm:increase_scripted_mission_count("wh_main_short_victory", "bhashiva_zhao_goals_short_victory", 1)
+				cm:increase_scripted_mission_count("wh_main_long_victory", "bhashiva_zhao_goals_long_victory", 1)
+			end,
+			true
+		)
 	end
 
 end

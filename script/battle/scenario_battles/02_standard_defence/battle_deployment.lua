@@ -542,8 +542,6 @@ function deployment_ap_bar_tour()
 				true
 			);
 
-			ap_time_limit:set_style("minimalist_dont_close");
-
 			ap_time_limit:show();
 		end,
 		1000

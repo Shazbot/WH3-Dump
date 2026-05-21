@@ -882,6 +882,8 @@ function start_confederation_listeners()
 					cm:force_diplomacy("subculture:wh2_main_sc_hef_high_elves","faction:wh2_main_hef_yvresse","form confederation", false, true, false);
 				end
 			end
+
+			apply_persistent_diplomacy_states()
 		end,
 		true
 	);
@@ -1785,6 +1787,11 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 			title = "event_feed_strings_text_wh3_scripted_event_path_to_victory_title";
 			secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_cathay_yuan_bo_secondary_detail";
 			pic = 40;
+		elseif faction_name == "wh3_cp1_cth_tiger_warriors" then
+			title = "event_feed_strings_text_wh3_scripted_event_path_to_victory_title";
+			secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_cathay_bhashiva_secondary_detail";
+			pic = 41;
+
 		
 		------------------------
 		-- WH3 DLC
@@ -2841,7 +2848,29 @@ function apply_default_diplomacy()
 			end;
 		end;
 	end;
+
+	apply_persistent_diplomacy_states()
 end;
+
+function apply_persistent_diplomacy_states()
+	-- Restrict Bhashiva declaring war on Zhao, unless both factions are human. Then we block both of them declaring war on each other.
+	local bhashiva_faction_key = "wh3_cp1_cth_tiger_warriors"
+	local zhao_faction_key = "wh3_main_cth_the_western_provinces"
+	local bhashiva_faction = cm:get_faction(bhashiva_faction_key)
+	local zhao_faction = cm:get_faction(zhao_faction_key)
+
+	if bhashiva_faction and zhao_faction then
+		cm:set_script_state("is_any_human_player_bhashiva", bhashiva_faction:is_human())
+		cm:set_script_state(zhao_faction, "is_zhao_faction", true)
+		cm:force_diplomacy("faction:" .. bhashiva_faction_key, "faction:" .. zhao_faction_key, "form confederation", false, false, false, true)
+
+		if bhashiva_faction:is_human() and zhao_faction:is_human() then
+			cm:force_diplomacy("faction:" .. bhashiva_faction_key, "faction:" .. zhao_faction_key, "war", false, false, true)
+		else
+			cm:force_diplomacy("faction:" .. bhashiva_faction_key, "faction:" .. zhao_faction_key, "war", false, false, false)
+		end
+	end
+end
 
 function setup_ogre_meat_rework_listener()
 	local ogre_mean_key_original = "wh3_main_ogr_meat"

@@ -5491,6 +5491,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"campaign_manager:get_faction_list()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:get_faction_list"
+		}
+	},
+	{
 		term:"campaign_manager:is_faction_human()",
 		envs:{
 			campaign:"campaign/campaign_manager.html#function:campaign_manager:is_faction_human"
@@ -7915,6 +7921,24 @@ var all_terms = [
 		}
 	},
 	{
+		term:"mission_manager:set_all_objectives_are_primary()",
+		envs:{
+			campaign:"campaign/mission_manager.html#function:mission_manager:set_all_objectives_are_primary"
+		}
+	},
+	{
+		term:"mission_manager:set_is_pending_mission()",
+		envs:{
+			campaign:"campaign/mission_manager.html#function:mission_manager:set_is_pending_mission"
+		}
+	},
+	{
+		term:"mission_manager:set_pending_mission_issuing_faction_name()",
+		envs:{
+			campaign:"campaign/mission_manager.html#function:mission_manager:set_pending_mission_issuing_faction_name"
+		}
+	},
+	{
 		term:"mission_manager:add_first_time_trigger_callback()",
 		envs:{
 			campaign:"campaign/mission_manager.html#function:mission_manager:add_first_time_trigger_callback"
@@ -8314,6 +8338,12 @@ var all_terms = [
 		term:"payload.Thralls()",
 		envs:{
 			campaign:"campaign/payload.html#function:payload:Thralls"
+		}
+	},
+	{
+		term:"payload.iron_favour()",
+		envs:{
+			campaign:"campaign/payload.html#function:payload:iron_favour"
 		}
 	},
 	{
@@ -9724,6 +9754,18 @@ var all_terms = [
 		term:"campaign_ui_manager:highlight_the_eternal_dance()",
 		envs:{
 			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_the_eternal_dance"
+		}
+	},
+	{
+		term:"campaign_ui_manager:highlight_tiger_court()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_tiger_court"
+		}
+	},
+	{
+		term:"campaign_ui_manager:highlight_armies_of_shang_yang()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_armies_of_shang_yang"
 		}
 	},
 	{
@@ -19672,6 +19714,12 @@ var all_terms = [
 		term:"campaignui.ClosePanel()",
 		envs:{
 			campaign:"campaign/campaignui.html#function:campaignui:ClosePanel"
+		}
+	},
+	{
+		term:"campaignui.CloseCurrentHUDPanel()",
+		envs:{
+			campaign:"campaign/campaignui.html#function:campaignui:CloseCurrentHUDPanel"
 		}
 	},
 	{

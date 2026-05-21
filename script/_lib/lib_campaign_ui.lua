@@ -126,6 +126,9 @@ campaign_ui_panels_blocking = {
 	"dlc27_hef_asur_domination",
 	"dlc27_seafang_overlays",
 	"dlc27_sla_marks_of_cruelty",
+	"cp1_cth_shang_yang",
+	"cp1_cth_bhashiva_caravans",
+	"cp1_cth_tiger_court"
 };
 
 -- Panels for which a PanelOpenedCampaign event is sent to script, but the panel should not block interventions or be considered by cm:progress_on_blocking_panel_dismissed()
@@ -6512,6 +6515,52 @@ function campaign_ui_manager:highlight_the_eternal_dance(value, pulse_strength, 
 	return highlight_visible_component(value, true, "hud_campaign", "resources_bar_holder", "resources_bar", "sla_eternal_dance_repetoire_holder")
 end;
 
+--- @function highlight_tiger_court
+--- @desc Highlights the tormentors tributes button. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
+--- @p [opt=false] boolean show highlight, Show highlight.
+--- @p [opt=nil] number pulse strength override, Pulse Strength Override. Default is 10 for smaller components such as buttons, and 5 for larger components such as panels. Set a higher number for a more pronounced pulsing.
+--- @p [opt=false] boolean force highlight, Forces the highlight to show even if the <code>help_page_link_highlighting</code> ui override is set.
+function campaign_ui_manager:highlight_tiger_court(value, pulse_strength, force_highlight)
+	if not self.help_page_link_highlighting_permitted and not force_highlight then
+		return;
+	end;
+
+	local uic = find_uicomponent(core:get_ui_root(), "hud_campaign", "faction_buttons_docker", "button_group_management", "button_tiger_court");
+	
+	if uic and uic:Visible(true) then
+		pulse_uicomponent(uic, value, pulse_strength or self.button_pulse_strength);
+		if value then
+			table.insert(self.unhighlight_action_list, function() self:highlight_tiger_court(false, pulse_strength, force_highlight) end);
+		end;
+		return true;
+	end;
+	
+	return false;
+end;
+
+--- @function highlight_armies_of_shang_yang
+--- @desc Highlights the tormentors tributes button. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
+--- @p [opt=false] boolean show highlight, Show highlight.
+--- @p [opt=nil] number pulse strength override, Pulse Strength Override. Default is 10 for smaller components such as buttons, and 5 for larger components such as panels. Set a higher number for a more pronounced pulsing.
+--- @p [opt=false] boolean force highlight, Forces the highlight to show even if the <code>help_page_link_highlighting</code> ui override is set.
+function campaign_ui_manager:highlight_armies_of_shang_yang(value, pulse_strength, force_highlight)
+	if not self.help_page_link_highlighting_permitted and not force_highlight then
+		return;
+	end;
+
+	local uic = find_uicomponent(core:get_ui_root(), "hud_campaign", "faction_buttons_docker", "button_group_management", "button_tiger_mercenaries");
+	
+	if uic and uic:Visible(true) then
+		pulse_uicomponent(uic, value, pulse_strength or self.button_pulse_strength);
+		if value then
+			table.insert(self.unhighlight_action_list, function() self:highlight_armies_of_shang_yang(false, pulse_strength, force_highlight) end);
+		end;
+		return true;
+	end;
+	
+	return false;
+end;
+
 --- @function highlight_mortuary_cult_button
 --- @desc Highlights the mortuary cult button. Best practise is to use @campaign_ui_manager:unhighlight_all_for_tooltips to cancel the highlight later.
 --- @p [opt=false] boolean show highlight, Show highlight.
@@ -10528,6 +10577,9 @@ function campaign_ui_manager:highlight_ivory_road(value, pulse_strength, force_h
 	local pulse_strength_to_use = pulse_strength or self.panel_pulse_strength;
 	
 	local uic_panel = find_uicomponent(ui_root, "cathay_caravans", "caravans_panel");
+	if not uic_panel then
+		uic_panel = find_uicomponent(ui_root, "cp1_cth_bhashiva_caravans", "caravans_panel")
+	end
 	if uic_panel and uic_panel:Visible(true) then
 		pulse_uicomponent(uic_panel, value, pulse_strength_to_use, true);
 		
@@ -10536,6 +10588,9 @@ function campaign_ui_manager:highlight_ivory_road(value, pulse_strength, force_h
 		end;
 	else
 		local uic_button = find_uicomponent(ui_root, "hud_campaign", "faction_buttons_docker", "button_caravan");
+		if not uic_button then
+			uic_button = find_uicomponent(ui_root, "hud_campaign", "faction_buttons_docker", "button_bhashiva_caravan")
+		end
 		if uic_button and uic_button:Visible(true) then
 			pulse_uicomponent(uic_button, value, pulse_strength_to_use or self.panel_pulse_strength, true);
 			

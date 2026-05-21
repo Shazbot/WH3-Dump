@@ -236,6 +236,9 @@ tower_of_zharr.district_specialties = {
 	INDUSTRY	=	{current_owner = nil, 	specialty_seat_counter = 0, effect_bundle_key = "wh3_dlc23_chd_toz_district_specialty_industry_"},
 	MILITARY	=	{current_owner = nil, 	specialty_seat_counter = 0, effect_bundle_key = "wh3_dlc23_chd_toz_district_specialty_military_"},
 }
+tower_of_zharr.district_specialties_counter_max_effect = 9	-- The counter which gives the maximum effect bundle.
+															-- Note: Ideally this should be a field in the table above, but since it is being saved/loaded enlarge,
+															-- it is much simpler to have it as a separate variable. At the moment, all district specialties have the same amount of effect bundles.
 
 tower_of_zharr.scripted_rituals = {
 	wh3_dlc23_ritual_chd_toz_slot_t1_industry_2 = {
@@ -557,11 +560,11 @@ function tower_of_zharr:initialise()
 
 			if ritual_key == "wh3_dlc23_ritual_chd_toz_slot_t3_sorcery_1" or ritual_key == "wh3_dlc23_ritual_chd_toz_slot_t3_military_2" or ritual_key == "wh3_dlc23_ritual_chd_toz_slot_t3_industry_2" then
 				self:specialty_district_ownership(ritual_key, seat.current_owner)
-			else 
-				--check if the owner has specialty affinity with district type
-				self:specialty_district_modifier(district_type, seat.current_owner, true)
+			elseif seat.current_owner ~= previous_owner then
 				--check if the previous owner has specialty affinity with district type
 				self:specialty_district_modifier(district_type, previous_owner, false)
+				--check if the owner has specialty affinity with district type
+				self:specialty_district_modifier(district_type, seat.current_owner, true)
 			end
 
 			--call function to handle the scripted ritual payloads
@@ -750,6 +753,14 @@ function tower_of_zharr:specialty_district_modifier(district_key, faction_name, 
 
 			local new_counter = specialty_district.specialty_seat_counter
 			local effect_bundle_prefix = specialty_district.effect_bundle_key
+
+			-- Cap the counter so we have a corresponding effect bundle.
+			previous_counter = math.min(previous_counter, self.district_specialties_counter_max_effect)
+			new_counter = math.min(new_counter, self.district_specialties_counter_max_effect)
+
+			if previous_counter == new_counter then
+				return	-- There is no change in the effect bundle, as both are at the maximum level.
+			end
 
 			if previous_counter > 0 then
 				--remove previous effect_bundle 

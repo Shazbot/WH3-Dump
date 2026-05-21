@@ -389,6 +389,12 @@ function start_game_all_factions()
 	dechala_daemonic_influence:initialize()
 	dechala_daemonic_units:initialise()
 
+	-- CP1
+	tiger_mercenaries:initialise()
+	tiger_court:initialise()
+	iron_favour:initialise()
+	bhashiva_campaign:initialise()
+
 
 	-- Update 5.2
 	add_underdeep_listeners();

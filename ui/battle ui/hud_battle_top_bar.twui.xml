@@ -155,14 +155,29 @@
 						<mastery_of_elemental_winds_frame this="06EFFBFB-C015-434E-B0C5EF0111BB87B7"/>
 						<mastery_of_elemental_winds_icon this="61691274-C863-42A8-9A78C4984E028D04"/>
 					</mastery_of_elemental_winds_holder>
-					<dev_button_win this="375F8AA3-D3B6-4379-8C9AC81D06B96469">
-						<button_txt this="C207ED71-520B-4278-878DF42C9A9036F8"/>
-						<dev_icon this="4647C626-4465-41F2-8EEBCE254CB92E59"/>
-					</dev_button_win>
-					<dev_button_lose this="7C7B0EB7-9331-4691-B72D37ED67E7DE72">
-						<button_txt this="5AAD8782-0B87-47BF-9A16F7567335A1B5"/>
-						<dev_icon this="87A7E856-905C-4AF9-BB312CAE93A442AB"/>
-					</dev_button_lose>
+					<dev_end_battle this="678AEEAF-06F6-4635-A7F80459157D5350">
+						<dev_button_win this="375F8AA3-D3B6-4379-8C9AC81D06B96469">
+							<button_txt this="C207ED71-520B-4278-878DF42C9A9036F8"/>
+							<dev_icon this="4647C626-4465-41F2-8EEBCE254CB92E59"/>
+						</dev_button_win>
+						<dev_button_lose this="7C7B0EB7-9331-4691-B72D37ED67E7DE72">
+							<button_txt this="5AAD8782-0B87-47BF-9A16F7567335A1B5"/>
+							<dev_icon this="87A7E856-905C-4AF9-BB312CAE93A442AB"/>
+						</dev_button_lose>
+						<dev_button_win_with this="4D37B6A4-905A-4B4A-856716EB9B10CDB6">
+							<button_txt this="C03C2816-8892-4ADE-A6264D9EA319E09E"/>
+							<dev_icon this="6B9541B6-7B97-47D2-AFD24F7FDB1D33EC"/>
+						</dev_button_win_with>
+						<dev_button_loose_with this="F7287755-2A3B-4DDC-B2CA85942F6B9356">
+							<button_txt this="9B902E5B-4926-4479-9C7DBF41A054CE59"/>
+							<dev_icon this="EE21FEE7-362E-4C72-8B93E23CB91CBC08"/>
+						</dev_button_loose_with>
+						<dev_win_with_condition_list this="9C360187-2B75-4C26-BE423D7769F9B16C">
+							<template_win_condition this="ED0DBB61-6516-4E6B-B1D3612F38B10E5B">
+								<button_txt this="08273261-7B0A-4D11-BD8714ECC6D63272"/>
+							</template_win_condition>
+						</dev_win_with_condition_list>
+					</dev_end_battle>
 				</docked_holder>
 				<disembark_timer this="B5B3C2AA-68BD-473E-8F50F532B5769AA6"/>
 				<outnumbered_timer this="0382BDE3-0E78-426B-BF4D4E6156828DD0"/>
@@ -1008,6 +1023,57 @@
 			</states>
 		</bg>
 		<button_txt
+			this="08273261-7B0A-4D11-BD8714ECC6D63272"
+			id="button_txt"
+			uniqueguid_in_template="C5314C5F-DB2A-4917-835E17930F5E2573"
+			offset="0.00,-1.00"
+			docking="Center"
+			dock_offset="0.00,-1.00"
+			component_anchor_point="0.50,0.50"
+			priority="100"
+			tooltipslocalised="true"
+			uniqueguid="08273261-7B0A-4D11-BD8714ECC6D63272"
+			isrelativeresize="true"
+			currentstate="A1625957-6ED7-4DB7-9A8EF62BCEA0F380"
+			defaultstate="A1625957-6ED7-4DB7-9A8EF62BCEA0F380">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoStringValue"
+					context_function_id="GetIfElse(&#10;StoredContextFromParent(&quot;CcoBattleAlliance&quot;).Id == PlayerAlliance.Id,&#10;Format(&quot;Win - %s&quot;, StringValue),&#10;Format(&quot;Lose - %s&quot;, StringValue)&#10;)"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+				<property
+					name="suppress_localise_asserts"
+					value=""/>
+			</userproperties>
+			<states>
+				<active
+					this="A1625957-6ED7-4DB7-9A8EF62BCEA0F380"
+					name="active"
+					width="300"
+					height="29"
+					uniqueguid="A1625957-6ED7-4DB7-9A8EF62BCEA0F380">
+					<component_text
+						text="..."
+						textvalign="Center"
+						textxoffset="28.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="StateText_10a854da"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_button_text"
+						font_colour_override_preset_key="fabulous_pink"
+						textshadervars="0.50,1.00,1.00,0.00"/>
+				</active>
+			</states>
+		</button_txt>
+		<button_txt
 			this="5AAD8782-0B87-47BF-9A16F7567335A1B5"
 			id="button_txt"
 			part_of_template="true"
@@ -1033,6 +1099,64 @@
 					state="active"
 					text="Lose"
 					text_label="StateText_3cf00683"
+					is_text_localised="false"/>
+			</localised_texts>
+		</button_txt>
+		<button_txt
+			this="9B902E5B-4926-4479-9C7DBF41A054CE59"
+			id="button_txt"
+			part_of_template="true"
+			uniqueguid_in_template="C5314C5F-DB2A-4917-835E17930F5E2573"
+			uniqueguid="9B902E5B-4926-4479-9C7DBF41A054CE59"
+			dimensions="61.00,29.00"
+			dock_point="Center"
+			offset="0.00,-1.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="913FB203-8C92-4007-B4BEA752BD147AE2"/>
+			</state_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					text="+"
+					text_label="StateText_b12dcab2"
+					is_text_localised="false"/>
+			</localised_texts>
+		</button_txt>
+		<button_txt
+			this="C03C2816-8892-4ADE-A6264D9EA319E09E"
+			id="button_txt"
+			part_of_template="true"
+			uniqueguid_in_template="C5314C5F-DB2A-4917-835E17930F5E2573"
+			uniqueguid="C03C2816-8892-4ADE-A6264D9EA319E09E"
+			dimensions="61.00,29.00"
+			dock_point="Center"
+			offset="0.00,-1.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="6D6A22DF-D165-4361-96192CCDBA7F97F5"/>
+			</state_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					text="+"
+					text_label="StateText_dc2eb896"
 					is_text_localised="false"/>
 			</localised_texts>
 		</button_txt>
@@ -1809,6 +1933,75 @@
 				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
 			</override_images>
 		</dev_button_add_trial_score>
+		<dev_button_loose_with
+			this="F7287755-2A3B-4DDC-B2CA85942F6B9356"
+			id="dev_button_loose_with"
+			template_id="dev_text_button"
+			is_dev_only="true"
+			part_of_template="true"
+			uniqueguid_in_template="715902FD-2442-4210-8831AAF520A41055"
+			uniqueguid="F7287755-2A3B-4DDC-B2CA85942F6B9356"
+			dimensions="61.00,29.00"
+			dock_point="Bottom Right"
+			tooltips_localised="false"
+			priority="100"
+			sound_category="UI_GBL_TMP_Square_Large_Text_Button_Toggle">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="FB639849-87AD-4ED1-BAA9E1C26B7BAA4C"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="E02FF592-1AC6-47AA-9FCFB44C9D363C5F"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="8A677335-48C2-4458-8C47B4A8D71FA580"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="C93D0DDB-BC02-4658-B327C4C7C37E4D4F"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="024A9A68-6EF7-4598-812633EA693D093B"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/button_rectangular_backplate.png"
+					uniqueguid="6262D604-94DC-4733-AE5D00C9200784CC"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/button_square_hover_highlight.png"
+					uniqueguid="C7E76629-89C4-4F3D-A29EB9A23107B066"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoStaticObject"
+					context_function_id="(c = Component(&quot;9C360187-2B75-4C26-BE423D7769F9B16C&quot;)) =&gt;&#10;{&#10;Do(&#10;c.SetContext(EnemyAlliance),&#10;c.SetVisible(c.IsVisible == false),&#10;UiMsg(&quot;on_dev_end_game_button&quot;)&#10;)&#10;}"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text
+					tooltip_label="ComponentTooltip_cc969f5"
+					tooltip_text="Force wins battle with specific condition (must finish deployment first!)"/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/button_rectangular_backplate.png"/>
+				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
+			</override_images>
+		</dev_button_loose_with>
 		<dev_button_lose
 			this="7C7B0EB7-9331-4691-B72D37ED67E7DE72"
 			id="dev_button_lose"
@@ -1818,7 +2011,7 @@
 			uniqueguid_in_template="715902FD-2442-4210-8831AAF520A41055"
 			uniqueguid="7C7B0EB7-9331-4691-B72D37ED67E7DE72"
 			dimensions="70.00,29.00"
-			is_visible="false"
+			dock_point="Top Right"
 			tooltips_localised="false"
 			priority="100"
 			sound_category="UI_GBL_TMP_Square_Large_Text_Button_Toggle">
@@ -1954,7 +2147,7 @@
 			uniqueguid_in_template="715902FD-2442-4210-8831AAF520A41055"
 			uniqueguid="375F8AA3-D3B6-4379-8C9AC81D06B96469"
 			dimensions="61.00,29.00"
-			is_visible="false"
+			dock_point="Top Left"
 			priority="100"
 			sound_category="UI_GBL_TMP_Square_Large_Text_Button_Toggle">
 			<state_uniqueguids>
@@ -2013,6 +2206,93 @@
 				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
 			</override_images>
 		</dev_button_win>
+		<dev_button_win_with
+			this="4D37B6A4-905A-4B4A-856716EB9B10CDB6"
+			id="dev_button_win_with"
+			template_id="dev_text_button"
+			is_dev_only="true"
+			part_of_template="true"
+			uniqueguid_in_template="715902FD-2442-4210-8831AAF520A41055"
+			uniqueguid="4D37B6A4-905A-4B4A-856716EB9B10CDB6"
+			dimensions="61.00,29.00"
+			dock_point="Bottom Left"
+			tooltips_localised="false"
+			priority="100"
+			sound_category="UI_GBL_TMP_Square_Large_Text_Button_Toggle">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="9D273D2A-1FE8-4005-A0E459E678A08AFD"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="57CB9EEE-F82D-4BF6-81D1AB8EDDF56746"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="A7214DCD-8701-4E03-B8DBCEE67CF91DF3"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="E07F599A-02AF-47CF-8680F7E67ADDB2C3"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="BE8374F5-BA5F-4EE1-975898E11419BA56"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/button_rectangular_backplate.png"
+					uniqueguid="060061C1-03C2-4E8D-B3211F548D818FB3"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/button_square_hover_highlight.png"
+					uniqueguid="C32A2F30-411E-40DE-9015326187E30C7A"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoStaticObject"
+					context_function_id="(c = Component(&quot;9C360187-2B75-4C26-BE423D7769F9B16C&quot;)) =&gt;&#10;{&#10;Do(&#10;c.SetContext(PlayerAlliance),&#10;c.SetVisible(c.IsVisible == false),&#10;UiMsg(&quot;on_dev_end_game_button&quot;)&#10;)&#10;}"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text
+					tooltip_label="ComponentTooltip_7687f27a"
+					tooltip_text="Force wins battle with specific condition (must finish deployment first!)"/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/button_rectangular_backplate.png"/>
+				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
+			</override_images>
+		</dev_button_win_with>
+		<dev_end_battle
+			this="678AEEAF-06F6-4635-A7F80459157D5350"
+			id="dev_end_battle"
+			is_dev_only="true"
+			offset="1910.00,0.00"
+			tooltipslocalised="true"
+			uniqueguid="678AEEAF-06F6-4635-A7F80459157D5350"
+			currentstate="B02392C3-DCAF-4397-9FFCFC7EC9B56832"
+			defaultstate="B02392C3-DCAF-4397-9FFCFC7EC9B56832">
+			<states>
+				<default
+					this="B02392C3-DCAF-4397-9FFCFC7EC9B56832"
+					name="default"
+					width="130"
+					height="60"
+					uniqueguid="B02392C3-DCAF-4397-9FFCFC7EC9B56832"/>
+			</states>
+		</dev_end_battle>
 		<dev_icon
 			this="4647C626-4465-41F2-8EEBCE254CB92E59"
 			id="dev_icon"
@@ -2062,6 +2342,36 @@
 				<component_image_uniqueguid
 					name="ui/skins/default/dev/dev_icon.png"
 					uniqueguid="45FC6E57-9F42-41C0-B1BEE9F1525F457D"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/dev_icon.png"/>
+			</override_images>
+		</dev_icon>
+		<dev_icon
+			this="6B9541B6-7B97-47D2-AFD24F7FDB1D33EC"
+			id="dev_icon"
+			part_of_template="true"
+			uniqueguid_in_template="0F4F9F06-4613-496B-A0F05A2B8B88B70D"
+			uniqueguid="6B9541B6-7B97-47D2-AFD24F7FDB1D33EC"
+			dimensions="24.00,24.00"
+			dock_point="Center Left"
+			offset="2.00,0.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="0391C59E-1440-459D-A3ECD8C85B930EC1"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/dev_icon.png"
+					uniqueguid="782393FA-C72D-432F-AE9DFA6B81B75FC5"/>
 			</component_image_uniqueguids>
 			<localised_texts>
 				<localised_text/>
@@ -2163,6 +2473,77 @@
 				<element value="ui/skins/default/dev/dev_icon.png"/>
 			</override_images>
 		</dev_icon>
+		<dev_icon
+			this="EE21FEE7-362E-4C72-8B93E23CB91CBC08"
+			id="dev_icon"
+			part_of_template="true"
+			uniqueguid_in_template="0F4F9F06-4613-496B-A0F05A2B8B88B70D"
+			uniqueguid="EE21FEE7-362E-4C72-8B93E23CB91CBC08"
+			dimensions="24.00,24.00"
+			dock_point="Center Left"
+			offset="2.00,0.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="D9CCE89E-8D80-42D8-801501FD87CA4CA6"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/dev_icon.png"
+					uniqueguid="0751B0C8-B855-426D-B254E8D36E34FAF9"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/dev_icon.png"/>
+			</override_images>
+		</dev_icon>
+		<dev_win_with_condition_list
+			this="9C360187-2B75-4C26-BE423D7769F9B16C"
+			id="dev_win_with_condition_list"
+			offset="-85.00,60.00"
+			visible="false"
+			docking="Bottom Center External"
+			component_anchor_point="0.50,-0.00"
+			tooltipslocalised="true"
+			uniqueguid="9C360187-2B75-4C26-BE423D7769F9B16C"
+			currentstate="933BF457-D925-43B9-B746BB57DDAC8815"
+			defaultstate="933BF457-D925-43B9-B746BB57DDAC8815">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_function_id="BattleVictoryMeans">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="on_dev_end_game_button"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoBattleAlliance"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="933BF457-D925-43B9-B746BB57DDAC8815"
+					name="default"
+					width="300"
+					height="29"
+					uniqueguid="933BF457-D925-43B9-B746BB57DDAC8815"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="32"/>
+				</columnwidths>
+			</LayoutEngine>
+		</dev_win_with_condition_list>
 		<disembark_timer
 			this="B5B3C2AA-68BD-473E-8F50F532B5769AA6"
 			id="disembark_timer"
@@ -2262,7 +2643,7 @@
 		<docked_holder
 			this="ACC5D87B-26DD-4BE0-96DEC1D2A17DD8A5"
 			id="docked_holder"
-			offset="-798.00,12.00"
+			offset="-868.00,12.00"
 			allowverticalresize="false"
 			docking="Top Center"
 			dock_offset="0.00,12.00"
@@ -2292,7 +2673,7 @@
 				<newstate
 					this="B360758B-FB1F-4ABE-B46206C61628F261"
 					name="NewState"
-					width="2040"
+					width="2180"
 					height="29"
 					pixelcollision="true"
 					uniqueguid="B360758B-FB1F-4ABE-B46206C61628F261">
@@ -2302,7 +2683,7 @@
 							uniqueguid="4CE95040-1B9D-4A46-B03F63473DA3E15A"
 							componentimage="FD4F4453-1BEE-4F15-A07A8AF101627C8F"
 							offset="0.00,-14.00"
-							width="2040"
+							width="2180"
 							height="67"
 							tile="true"
 							dockpoint="Top Center"
@@ -6198,6 +6579,195 @@
 					uniqueguid="29A1B09A-B823-4A7C-B3E77DCBF29BCC73"/>
 			</states>
 		</template_capture_point_icon>
+		<template_win_condition
+			this="ED0DBB61-6516-4E6B-B1D3612F38B10E5B"
+			id="template_win_condition"
+			uniqueguid_in_template="715902FD-2442-4210-8831AAF520A41055"
+			allowverticalresize="false"
+			priority="100"
+			soundcategory="UI_GBL_TMP_Square_Large_Text_Button_Toggle"
+			uniqueguid="ED0DBB61-6516-4E6B-B1D3612F38B10E5B"
+			currentstate="9A856673-0EA5-4AE3-9E472B97F88E939C"
+			defaultstate="9A856673-0EA5-4AE3-9E472B97F88E939C">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoStaticObject"
+					context_function_id="Do(&#10;RunCLI(Format(&quot;force_battle_victory_with_means %d %s&quot;, StoredContextFromParent(&quot;CcoBattleAlliance&quot;).Id, self.GetProperty(&quot;bvm&quot;) )),&#10;self.ParentContext.SetVisible(false)&#10;)"/>
+				<callback_with_context
+					callback_id="ContextCommandGiverOnContextSet"
+					context_object_id="CcoStringValue"
+					context_function_id="self.SetProperty(&quot;bvm&quot;, StringValue)"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="77969A71-99C6-43F7-A06311784C6E1D70"
+					uniqueguid="77969A71-99C6-43F7-A06311784C6E1D70"
+					imagepath="ui/skins/default/dev/button_rectangular_backplate.png"/>
+				<component_image
+					this="F6554CA4-B0C1-444C-A16D2F9A03189C25"
+					uniqueguid="F6554CA4-B0C1-444C-A16D2F9A03189C25"
+					imagepath="ui/skins/default/dev/button_square_hover_highlight.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="9A856673-0EA5-4AE3-9E472B97F88E939C"
+					name="active"
+					width="300"
+					height="29"
+					interactive="true"
+					uniqueguid="9A856673-0EA5-4AE3-9E472B97F88E939C"
+					stateeditordisplaypos="40.00,24.00">
+					<imagemetrics>
+						<image
+							this="2610EB1F-EDD4-43FD-A0C1BF1660E86CC5"
+							uniqueguid="2610EB1F-EDD4-43FD-A0C1BF1660E86CC5"
+							componentimage="77969A71-99C6-43F7-A06311784C6E1D70"
+							width="300"
+							height="29"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							transition_m_target_state="E3DAC4E6-7AFF-4846-A0ACEC8030A6B398"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</active>
+				<down
+					this="2006441F-7DED-4AFA-854EE79006700566"
+					name="down"
+					width="300"
+					height="29"
+					interactive="true"
+					uniqueguid="2006441F-7DED-4AFA-854EE79006700566"
+					stateeditordisplaypos="145.00,219.00">
+					<imagemetrics>
+						<image
+							this="B3678353-8DC7-4953-A8A4ADFC5D8D0715"
+							uniqueguid="B3678353-8DC7-4953-A8A4ADFC5D8D0715"
+							componentimage="77969A71-99C6-43F7-A06311784C6E1D70"
+							width="300"
+							height="29"/>
+						<image
+							this="D59BA4D3-4F92-4AA0-823B67E89946AD0D"
+							uniqueguid="D59BA4D3-4F92-4AA0-823B67E89946AD0D"
+							componentimage="F6554CA4-B0C1-444C-A16D2F9A03189C25"
+							width="300"
+							height="29"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="87D40A3F-5C7E-4237-A100147D90DA21F3"/>
+						<transition
+							index="3"
+							transition_m_target_state="E3DAC4E6-7AFF-4846-A0ACEC8030A6B398"/>
+					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						textshadervars="0.30,0.00,0.00,0.00"/>
+				</down>
+				<down_off
+					this="87D40A3F-5C7E-4237-A100147D90DA21F3"
+					name="down_off"
+					width="300"
+					height="29"
+					interactive="true"
+					uniqueguid="87D40A3F-5C7E-4237-A100147D90DA21F3"
+					stateeditordisplaypos="40.00,319.00">
+					<imagemetrics>
+						<image
+							this="15F34860-5619-43E3-A054379573C59AC4"
+							uniqueguid="15F34860-5619-43E3-A054379573C59AC4"
+							componentimage="77969A71-99C6-43F7-A06311784C6E1D70"
+							width="300"
+							height="29"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition transition_m_target_state="2006441F-7DED-4AFA-854EE79006700566"/>
+						<transition
+							index="3"
+							transition_m_target_state="9A856673-0EA5-4AE3-9E472B97F88E939C"/>
+					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</down_off>
+				<hover
+					this="E3DAC4E6-7AFF-4846-A0ACEC8030A6B398"
+					name="hover"
+					width="300"
+					height="29"
+					interactive="true"
+					shader_name="brighten_t0"
+					shadervars="1.00,0.00,0.00,0.00"
+					uniqueguid="E3DAC4E6-7AFF-4846-A0ACEC8030A6B398"
+					stateeditordisplaypos="137.00,126.00">
+					<imagemetrics>
+						<image
+							this="0933E6D1-A2D0-4374-8CE93C3DEC099065"
+							uniqueguid="0933E6D1-A2D0-4374-8CE93C3DEC099065"
+							componentimage="77969A71-99C6-43F7-A06311784C6E1D70"
+							width="300"
+							height="29"/>
+						<image
+							this="226AC990-8440-4F91-936028E772F5AB39"
+							uniqueguid="226AC990-8440-4F91-936028E772F5AB39"
+							componentimage="F6554CA4-B0C1-444C-A16D2F9A03189C25"
+							width="300"
+							height="29"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="9A856673-0EA5-4AE3-9E472B97F88E939C"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+						<transition
+							index="2"
+							transition_m_target_state="2006441F-7DED-4AFA-854EE79006700566"/>
+					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						textshadervars="0.30,0.00,0.00,0.00"/>
+				</hover>
+				<inactive
+					this="828F8CCA-EF39-4EE6-ABAB26E5F7C370A0"
+					name="inactive"
+					width="300"
+					height="29"
+					interactive="true"
+					disabled="true"
+					uniqueguid="828F8CCA-EF39-4EE6-ABAB26E5F7C370A0">
+					<imagemetrics>
+						<image
+							this="29B3C8F4-0915-410D-B74C5BAE9B4A2339"
+							uniqueguid="29B3C8F4-0915-410D-B74C5BAE9B4A2339"
+							componentimage="77969A71-99C6-43F7-A06311784C6E1D70"
+							width="300"
+							height="29"/>
+					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</inactive>
+			</states>
+		</template_win_condition>
 		<trials_score_display
 			this="20F4B698-5E77-4833-AC975625870A1739"
 			id="trials_score_display"
