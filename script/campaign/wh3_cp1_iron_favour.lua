@@ -73,6 +73,9 @@ iron_favour = {
 		["wh_main_grn_greenskins"] = 26,
 		["wh2_main_skv_skaven"] = 34,
 		["wh_dlc03_bst_beastmen"] = 26,
+		["wh_main_vmp_vampire_counts"] = 26,
+		["wh2_dlc11_cst_vampire_coast"] = 20,
+		["wh2_main_def_dark_elves"] = 26,
 	},
 
 	enemy_factions_favour = { -- add factions outside of normal enemy cultures
@@ -93,22 +96,28 @@ iron_favour = {
 		"wh_main_grn_greenskins",
 		"wh2_main_skv_skaven",
 		"wh_dlc03_bst_beastmen",
+		"wh_main_vmp_vampire_counts",
+		"wh2_dlc11_cst_vampire_coast",
+		"wh2_main_def_dark_elves",	
 	},
 
 	iron_favour_culture_modifiers = {
+		wh3_dlc23_chd_chaos_dwarfs = iron_favour_culture_modifier_values.high,
+		wh3_main_ogr_ogre_kingdoms = iron_favour_culture_modifier_values.high,
+		wh3_main_tze_tzeentch = iron_favour_culture_modifier_values.high,
 		wh3_main_dae_daemons = iron_favour_culture_modifier_values.medium,
 		wh3_main_kho_khorne =  iron_favour_culture_modifier_values.medium,
 		wh3_main_sla_slaanesh = iron_favour_culture_modifier_values.medium,
-		wh3_main_tze_tzeentch = iron_favour_culture_modifier_values.high,
 		wh3_main_nur_nurgle = iron_favour_culture_modifier_values.medium,
 		wh_main_chs_chaos = iron_favour_culture_modifier_values.medium,
-		wh3_dlc23_chd_chaos_dwarfs = iron_favour_culture_modifier_values.high,
 		wh_dlc08_nor_norsca = iron_favour_culture_modifier_values.low,
-		wh3_main_ogr_ogre_kingdoms = iron_favour_culture_modifier_values.high,
 		wh_main_grn_greenskins = iron_favour_culture_modifier_values.low,
 		wh2_main_skv_skaven = iron_favour_culture_modifier_values.medium,
 		wh_dlc03_bst_beastmen = iron_favour_culture_modifier_values.medium,
 		wh3_main_cth_cathay = iron_favour_culture_modifier_values.low,
+		wh_main_vmp_vampire_counts = iron_favour_culture_modifier_values.medium,
+		wh2_dlc11_cst_vampire_coast = iron_favour_culture_modifier_values.low,
+		wh2_main_def_dark_elves = iron_favour_culture_modifier_values.low,
 	},
 
 	iron_favour_settlement_decay = 2,
@@ -132,7 +141,7 @@ iron_favour = {
 			{
 				type = "money",			
 				weight = 40,
-				minimal = 750,
+				minimal = 1000,
 			},
 			{
 				type = "iron_favour",
@@ -151,25 +160,14 @@ iron_favour = {
 			},
 			{
 				type = "units",
-				weight = 60,
+				weight = 70,
 			},
 		},
 		unit_rewards = {
 			{
 				units = {
 					"wh3_main_cth_inf_jade_warriors_1",
-				},
-				weight = 60,
-				double = 60 -- chance to get a second
-			},{
-				units = {
 					"wh3_main_cth_inf_jade_warrior_crossbowmen_1",
-				},
-				weight = 60,
-				double = 60 -- chance to get a second
-			},
-			{
-				units = {
 					"wh3_main_cth_inf_iron_hail_gunners_0",
 				},
 				weight = 60,
@@ -178,8 +176,9 @@ iron_favour = {
 			{
 				units = {
 					"wh3_main_cth_inf_grenadiers",
+					"wh3_dlc24_cth_inf_onyx_crowmen",
 				},
-				weight = 25,
+				weight = 40,
 				double = 60 -- chance to get a second
 			},
 			{
@@ -187,17 +186,16 @@ iron_favour = {
 					"wh3_main_cth_inf_dragon_guard_0",
 					"wh3_main_cth_inf_dragon_guard_crossbowmen_0",
 				},
-				weight = 25,
-				double = 25 -- chance to get a second
+				weight = 30,
+				double = 40 -- chance to get a second
 			},
 			{
 				units = {
 					"wh3_dlc24_cth_mon_jade_lion",
 					"wh3_dlc24_cth_mon_jet_lion",
-					"wh3_dlc24_cth_inf_onyx_crowmen",
 				},
-				weight = 25,
-				double = 40 -- chance to get a second
+				weight = 30,
+				double = 30 -- chance to get a second
 			},
 			{
 				units = {
@@ -218,7 +216,7 @@ iron_favour = {
 			{
 				weight = 10,
 				reward_rank = 0,
-				iron_favour_add = 30,
+				iron_favour_add = 40,
 				type = "win_fights_vs_culture",
 				objective_scope = "culture",
 				target = "armies",
@@ -238,7 +236,7 @@ iron_favour = {
 			{
 				weight = 10,
 				reward_rank = 0,
-				iron_favour_add = 30,
+				iron_favour_add = 40,
 				type = "win_settlement_battles",
 				objective_scope = "culture",
 				target = "settlements",
@@ -258,7 +256,7 @@ iron_favour = {
 			{
 				weight = 20,
 				reward_rank = 4,
-				iron_favour_add = 45,
+				iron_favour_add = 60,
 				type = "destroy_faction",
 				objective_scope = "faction",
 				objectives = {
@@ -270,7 +268,7 @@ iron_favour = {
 				},
 			},
 			{
-				weight = 40,
+				weight = 50,
 				reward_rank = 1,
 				type = "kill_faction_leader",
 				objective_scope = "single_entity",
@@ -284,7 +282,7 @@ iron_favour = {
 				},
 			},
 			{
-				weight = 40,
+				weight = 50,
 				reward_rank = 1,
 				type = "capture_settlement",
 				objective_scope = "single_entity",
@@ -344,10 +342,11 @@ iron_favour = {
 	lost_settlements = {}, -- used to negate iron favour exploit with settlements
 
 	mission_target_find_max_tries = 25,
-	mission_payload_min_distance = 1200,
-	mission_payload_max_distance = 4000,
+	mission_payload_min_distance = 1250,
+	mission_payload_max_distance = 5250,
 	pending_missions_turns_duration_before_reroll = 5,
 	turns_left_until_reroll_shared_state_key_prefix = "zhaos_goals_turns_left_until_reroll_",
+	pending_mission_invalidated_shared_state_key_prefix = "zhaos_goals_pending_mission_invalidated_",
 }
 
 function iron_favour:initialise()
@@ -424,7 +423,7 @@ function iron_favour:generate_mission(mission_key)
 	
 	-- we use copy here to avoid modifying the config tables for the objectives
 	local random_mission_data = table.copy(self:weighted_random(self.mission_setup.objectives))
-	local maximum_distance = 1250
+	local maximum_distance = 1500
 	
 	self.target_list = {}
 
@@ -464,14 +463,18 @@ function iron_favour:generate_mission(mission_key)
 	local valid_target_subculture = valid_target_faction:subculture()
 
 	local full_mission_key = mission_key .. "_" .. random_mission_data.type
+	random_mission_data.objective_faction = valid_target_faction:name()
+	random_mission_data.objective_culture = valid_target_culture
+	random_mission_data.objective_subculture = valid_target_subculture
+	random_mission_data.turns_until_reroll = self.pending_missions_turns_duration_before_reroll
+
+	local mission_created = self:handle_scripted_mission_trigger(random_mission_data, full_mission_key, true)
+	if not mission_created then
+		return
+	end
+
 	self.current_active_and_pending_mission_data[full_mission_key] = random_mission_data
 	random_mission_data = nil
-	self.current_active_and_pending_mission_data[full_mission_key].objective_faction = valid_target_faction:name()
-	self.current_active_and_pending_mission_data[full_mission_key].objective_culture = valid_target_culture
-	self.current_active_and_pending_mission_data[full_mission_key].objective_subculture = valid_target_subculture
-	self.current_active_and_pending_mission_data[full_mission_key].turns_until_reroll = self.pending_missions_turns_duration_before_reroll
-
-	self:handle_scripted_mission_trigger(self.current_active_and_pending_mission_data[full_mission_key], full_mission_key, true)
 
 	local bhashiva_faction = cm:get_faction(self.bhashiva_faction)
 	cm:set_script_state(bhashiva_faction, self.should_show_ui_notification_for_hud_key, true)
@@ -537,8 +540,9 @@ function iron_favour:get_num_of_generals_of_culture_in_range(faction_key, cultur
 	for i = 0, faction_list:num_items() - 1 do
 		local current_faction = faction_list:item_at(i)
 		local curr_faction_cqi = current_faction:command_queue_index()
+		local is_allied_with = faction:allied_with(current_faction)
 		
-		if current_faction:culture() == culture_key then		
+		if current_faction:culture() == culture_key and not is_allied_with then		
 			local char_list = current_faction:character_list()
 			
 			for j = 0, char_list:num_items() - 1 do
@@ -593,19 +597,19 @@ function iron_favour:get_eligible_army()
 end
 
 function iron_favour:handle_scripted_mission_trigger(mission_data, mission_key, should_trigger)
+	local mission_created = false
 	if mission_data.type == "win_fights_vs_culture" then
-		self:setup_win_battles_against_culture(mission_data, mission_key, should_trigger)
+		mission_created = self:setup_win_battles_against_culture(mission_data, mission_key, should_trigger)
 	elseif mission_data.type == "win_settlement_battles" then
-		self:setup_win_settlement_battles(mission_data, mission_key, should_trigger)
-	elseif mission_data.type == "fight_faction" then
-		self:setup_fight_battles_against_faction(mission_data, mission_key, should_trigger)
+		mission_created = self:setup_win_settlement_battles(mission_data, mission_key, should_trigger)
 	elseif mission_data.type == "destroy_faction" then
-		self:setup_destroy_faction(mission_data, mission_key, should_trigger)
+		mission_created = self:setup_destroy_faction(mission_data, mission_key, should_trigger)
 	elseif mission_data.type == "kill_faction_leader" then
-		self:setup_eliminate_faction_leader(mission_data, mission_key, should_trigger)
+		mission_created = self:setup_eliminate_faction_leader(mission_data, mission_key, should_trigger)
 	elseif mission_data.type == "capture_settlement" then
-		self:setup_capture_settlement(mission_data, mission_key, should_trigger)
+		mission_created = self:setup_capture_settlement(mission_data, mission_key, should_trigger)
 	end
+	return mission_created
 end
 
 function iron_favour:handle_scripted_mission_reissue()
@@ -616,80 +620,98 @@ function iron_favour:handle_scripted_mission_reissue()
 	end
 end
 
-function iron_favour:setup_mission_payload(mm, mission_setup_data, distance, remove_basic_rewards)
+function iron_favour:setup_mission_payload(mm, mission_setup_data, distance, treasury, favour)
 	local reward_rank = mission_setup_data.reward_rank or 0
 	
 	local function choose_main_rewards()
 		local base_reward_structure = self.reward_structure.basic_resources
-		local reward = self:weighted_random(base_reward_structure)
-		local money_value = 0
-		local iron_favour_value = 0
+		local treasury_value = 0
+		local favour_value = 0
 		local bonus = (reward_rank * 0.25) + 1
 		local turn_number = cm:turn_number()
 	
-		if not reward then
-			return
-		end
-	
-		if reward.type == "money" or reward.type == "mixed" then
-			money_value = math.max(math.round((math.sqrt(distance) * 20) / 10 + (bonus * turn_number)) * 10, base_reward_structure[1].minimal)
-			if reward.type == "mixed" then
-				money_value = math.round(money_value * 0.75)
+		if treasury == true then
+			treasury_value = math.max(math.round((math.sqrt(distance) * 16) / 4 + (bonus * turn_number)) * 10, base_reward_structure[1].minimal)
+			if favour == true then
+				treasury_value = math.round(treasury_value * 0.85)
 			end
 		end
 	
-		if reward.type == "iron_favour" or reward.type == "mixed" then
-			iron_favour_value = math.max(math.round(((math.sqrt(distance) * 40) / 10) + (bonus * turn_number)), base_reward_structure[2].minimal)
-			if reward.type == "mixed" then
-				iron_favour_value = math.round(iron_favour_value * 0.75)
+		if favour == true then
+			favour_value = math.max(math.round(((math.sqrt(distance) * 40) / 10) + (bonus * turn_number)), base_reward_structure[2].minimal)
+			if treasury == true then
+				favour_value = math.round(favour_value * 0.7)
 			end
 		end
 		
-		return money_value, iron_favour_value
+		return treasury_value, favour_value
 	end
 
+	local function add_ancillary_to_rewards()
+		local ancillary_key = nil
+
+		ancillary_key = get_random_ancillary_key_for_faction(self.bhashiva_faction, nil)
+
+		if ancillary_key then
+			mm:add_payload("add_ancillary_to_faction_pool {ancillary_key " .. ancillary_key .. ";}")
+		end
+	end
+
+	local function add_units_to_rewards(force_amount)
+		local unit_selected, amount = nil, 1
+		local unit_list = self.reward_structure.unit_rewards
+		local unit_group = self:weighted_random(unit_list)
+		
+		if not force_amount then
+			local double_amount = cm:random_number(100, 1)
+		
+			if double_amount <= unit_group.double then
+				amount = 2
+			end
+		end
+
+		unit_selected = cm:random_number(#unit_group.units, 1)
+
+		mm:add_payload("add_mercenary_to_faction_pool{unit_key " .. unit_group.units[unit_selected] .. ";amount " .. amount .. ";}")
+	end
 
 	-- generate basic reward setup
-	if remove_basic_rewards ~= true then
-		local money, iron_favour = choose_main_rewards()
+	if treasury == true or favour == true then
+		local treasury_value, favour_value = choose_main_rewards()
 
-		if money ~= 0 then
-			mm:add_payload(payload.money(money))
+		if treasury_value ~= 0 then
+			mm:add_payload(payload.money(treasury_value))
 		end
 	
-		if iron_favour ~= 0 then
-			mm:add_payload(payload.iron_favour(iron_favour))
+		if favour_value ~= 0 then
+			mm:add_payload(payload.iron_favour(favour_value))
 		end
 	end
 		
 	-- advanced rewards
 	if reward_rank > 0 then
-		local second_reward = cm:random_number(1 + reward_rank, 1) >= 2
+		local reward_types = self.reward_structure.additional_rewards
+		local ancillary_drop = cm:random_number(100, 1) <= reward_types[1].weight
+		local unit_drop = cm:random_number(100, 1) <= reward_types[2].weight
+		local second_reward = cm:random_number(2 + reward_rank, 1) >= 3
 
-		if second_reward then
-			local reward_types = self.reward_structure.additional_rewards
-			local reward = self:weighted_random(reward_types)
+		if unit_drop then
+			add_units_to_rewards()
 
-			if reward.type == "ancillary" then
-				local ancillary_key = get_random_ancillary_key_for_faction(self.bhashiva_faction, nil)
-				
-				if ancillary_key then
-					mm:add_payload("add_ancillary_to_faction_pool {ancillary_key " .. ancillary_key .. ";}")
+			if second_reward then
+				local reward = self:weighted_random(reward_types)
+
+				if reward.type == "units" then 
+					add_units_to_rewards(true)
+				elseif reward.type == "ancillary" then
+					add_ancillary_to_rewards()
 				end
-			elseif reward.type == "units" then
-				local unit_list = self.reward_structure.unit_rewards
-				local reward = self:weighted_random(unit_list)
-				local amount = 1
+			end
+		elseif ancillary_drop then
+			add_ancillary_to_rewards()
 
-				local double_amount = cm:random_number(100, 1)
-				
-				if double_amount <= reward.double then
-					amount = 2
-				end
-
-				local unit_selection = cm:random_number(#reward.units, 1)
-
-				mm:add_payload("add_mercenary_to_faction_pool{unit_key " .. reward.units[unit_selection] .. ";amount " .. amount .. ";}")
+			if second_reward then
+				add_units_to_rewards(true)
 			end
 		end
 	end
@@ -764,10 +786,19 @@ function iron_favour:setup_win_battles_against_culture(mission_setup_data, missi
 	mm:add_condition("script_key " .. mission_key)
 	mm:add_condition("override_text " .. mission_setup_data.objectives[2].objective_text .. "_" .. mission_setup_data.objective_subculture)
 
-	local distance = cm:random_number(self.mission_payload_max_distance, self.mission_payload_min_distance) -- to add proper measure later
+	local distance = self.mission_payload_min_distance
+	local faction_list = cm:get_factions_by_subculture(mission_setup_data.objective_subculture)
 
-	local remove_basic_rewards = true
-	self:setup_mission_payload(mm, mission_setup_data, distance, remove_basic_rewards)
+	if not is_empty_table(faction_list) then
+		local faction_count = #faction_list
+		local current_distance = math.floor(self.mission_payload_max_distance - 125 * faction_count)
+
+		if current_distance > distance then
+			distance = current_distance
+		end
+	end
+
+	self:setup_mission_payload(mm, mission_setup_data, distance, false, false)
 
 	mm:add_payload("text_display dummy_wh3_cp1_cth_iron_favour_armies")
 	mm:set_is_pending_mission(true)
@@ -776,6 +807,8 @@ function iron_favour:setup_win_battles_against_culture(mission_setup_data, missi
 	if should_trigger then mm:trigger() end
 	
 	self:updated_scripted_objective_count(mm, timer_objective_key, mission_setup_data.objectives[1].objective_save_key, mission_setup_data.objectives[1].objective_required_amount)
+
+	return true
 end
 
 function iron_favour:setup_win_settlement_battles(mission_setup_data, mission_key, should_trigger)
@@ -830,10 +863,19 @@ function iron_favour:setup_win_settlement_battles(mission_setup_data, mission_ke
 		self:reset_objective_saved_data(mission_setup_data.objectives[2], mm, objective_key)
 	end
 
-	local distance = cm:random_number(self.mission_payload_max_distance, self.mission_payload_min_distance) -- to add proper measure later
+	local distance = self.mission_payload_min_distance
+	local faction_list = cm:get_factions_by_subculture(mission_setup_data.objective_subculture)
 
-	local remove_basic_rewards = true
-	self:setup_mission_payload(mm, mission_setup_data, distance, remove_basic_rewards)
+	if not is_empty_table(faction_list) then
+		local faction_count = #faction_list
+		local mod_mult = math.floor(self.mission_payload_max_distance - 125 * faction_count)
+
+		if mod_mult > distance then
+			distance = mod_mult
+		end
+	end
+
+	self:setup_mission_payload(mm, mission_setup_data, distance, false, false)
 
 	mm:add_payload("text_display dummy_wh3_cp1_cth_iron_favour_settlements")
 	mm:set_is_pending_mission(true)
@@ -843,53 +885,8 @@ function iron_favour:setup_win_settlement_battles(mission_setup_data, mission_ke
 
 	self:updated_scripted_objective_count(mm, objective_key, mission_setup_data.objectives[2].objective_save_key, mission_setup_data.objectives[2].objective_required_amount)
 	self:updated_scripted_objective_count(mm, timer_objective_key, mission_setup_data.objectives[1].objective_save_key, mission_setup_data.objectives[1].objective_required_amount)
-end
 
-function iron_favour:setup_fight_battles_against_faction(mission_setup_data, mission_key, should_trigger)
-	local mm = mission_manager:new(self.bhashiva_faction, mission_key)
-	local timer_objective_key = "mission_text_text_" .. mission_setup_data.objectives[1].objective_text
-	
-	mm:set_mission_issuer(self.mission_setup.mission_issuer)
-	mm:set_all_objectives_are_primary()
-
-	local bhashiva_faction_key = self.bhashiva_faction
-	mm:add_new_scripted_objective(
-		timer_objective_key,
-		"FactionTurnStart",
-		function(context)
-			local bhashiva_faction_interface = cm:get_faction(bhashiva_faction_key)
-			if context:faction():name() == bhashiva_faction_key and cm:mission_is_active_for_faction(bhashiva_faction_interface, mission_key) then
-				if self:update_and_check_required_number_for_objective(mission_setup_data.objectives[1], mm, timer_objective_key) then
-					mm:force_scripted_objective_success(timer_objective_key)
-					cm:set_active_mission_status_for_faction(bhashiva_faction_interface, mission_key, "SUCCEEDED")
-					return true
-				end
-			end
-			return false
-		end,
-		timer_objective_key
-	)
-
-	if should_trigger then
-		-- we do this here so that when we re-trigger the mission with the same key our scripted objective timer will reset
-		self:reset_objective_saved_data(mission_setup_data.objectives[1], mm, timer_objective_key)
-	end
-
-	mm:add_new_objective("DEFEAT_N_ARMIES_OF_FACTION")
-	mm:add_condition("faction " .. mission_setup_data.objective_faction)
-	mm:add_condition("total " .. mission_setup_data.objectives[2].objective_required_amount)
-
-	local distance = cm:random_number(self.mission_payload_max_distance, self.mission_payload_min_distance) -- to add proper measure later
-
-	self:setup_mission_payload(mm, mission_setup_data, distance)
-
-	mm:set_is_pending_mission(true)
-	mm:set_pending_mission_issuing_faction_name(self.bhashiva_faction)
-	
-	if should_trigger then mm:trigger() end
-
-	self:updated_scripted_objective_count(mm, timer_objective_key, mission_setup_data.objectives[1].objective_save_key, mission_setup_data.objectives[1].objective_required_amount)
-
+	return true
 end
 
 function iron_favour:setup_destroy_faction(mission_setup_data, mission_key, should_trigger)
@@ -902,15 +899,40 @@ function iron_favour:setup_destroy_faction(mission_setup_data, mission_key, shou
 	mm:add_condition("faction " .. mission_setup_data.objective_faction)
 	mm:add_condition("confederation_valid")
 
-	local distance = cm:random_number(self.mission_payload_max_distance, self.mission_payload_min_distance) -- to add proper measure later
+	local target_faction = cm:get_faction(mission_setup_data.objective_faction)
+	local distance = self.mission_payload_min_distance
 
-	self:setup_mission_payload(mm, mission_setup_data, distance)
+	if not target_faction:is_null_interface() then
+		local home_region = target_faction:home_region()
+
+		if not home_region:is_null_interface() then
+			local target_x, target_y = cm:settlement_logical_pos(home_region:settlement():key())
+			local own_force = cm:get_closest_military_force_from_faction(self.bhashiva_faction, target_x, target_y)
+
+			if own_force and not own_force:general_character():is_null_interface() then
+				local own_force_x = own_force:general_character():logical_position_x() or 0
+				local own_force_y = own_force:general_character():logical_position_y() or 0
+				local current_distance = distance_squared(target_x, target_y, own_force_x, own_force_y)
+
+				if current_distance > distance then
+					distance = current_distance
+				end
+			end
+		end
+	end
+
+	local settlement_num = target_faction:num_regions() or 1
+
+	distance = distance * (1 + settlement_num * 0.15)
+	self:setup_mission_payload(mm, mission_setup_data, distance, true, false)
 
 	mm:add_payload("text_display dummy_wh3_cp1_cth_iron_favour_all")
 	mm:set_is_pending_mission(true)
 	mm:set_pending_mission_issuing_faction_name(self.bhashiva_faction)
 	
 	if should_trigger then mm:trigger() end
+
+	return true
 end
 
 function iron_favour:setup_eliminate_faction_leader(mission_setup_data, mission_key, should_trigger)
@@ -934,14 +956,28 @@ function iron_favour:setup_eliminate_faction_leader(mission_setup_data, mission_
 	mm:add_new_objective("KILL_CHARACTER_BY_ANY_MEANS")
 	mm:add_condition("family_member " .. faction_leader_fm_cqi)
 
-	local distance = cm:random_number(self.mission_payload_max_distance, self.mission_payload_min_distance) -- to add proper measure later
+	local target_x, target_y =  cm:char_logical_pos(faction_leader_character)
+	local own_force = cm:get_closest_military_force_from_faction(self.bhashiva_faction, target_x, target_y)
+	local distance = self.mission_payload_min_distance
 
-	self:setup_mission_payload(mm, mission_setup_data, distance)
+	if own_force and not own_force:general_character():is_null_interface() then
+		local own_force_x = own_force:general_character():logical_position_x() or 0
+		local own_force_y = own_force:general_character():logical_position_y() or 0
+		local current_distance = distance_squared(target_x, target_y, own_force_x, own_force_y)
+
+		if current_distance > distance then
+			distance = current_distance
+		end
+	end
+
+	self:setup_mission_payload(mm, mission_setup_data, distance, false, true)
 
 	mm:set_is_pending_mission(true)
 	mm:set_pending_mission_issuing_faction_name(self.bhashiva_faction)
 	
 	if should_trigger then mm:trigger() end
+
+	return true
 end
 
 function iron_favour:setup_capture_settlement(mission_setup_data, mission_key, should_trigger)
@@ -956,7 +992,7 @@ function iron_favour:setup_capture_settlement(mission_setup_data, mission_key, s
 	local target_region_list = target_faction:region_list()
 	local own_faction_region_list = faction:region_list()
 	local mission_distance = 0
-	local target = ""
+	local target_region = nil
 
 	local objs_to_test_distance = faction:military_force_list()
 	
@@ -975,7 +1011,7 @@ function iron_favour:setup_capture_settlement(mission_setup_data, mission_key, s
 		local current_region_key = current_region:name()
 		local current_settlement = current_region:settlement()
 		
-		if not self.used_region_targets[target_faction:name() .. current_region_key] then
+		if not self.used_region_targets[target_faction:name() .. "_" .. current_region_key] then
 			local settlement_x = current_settlement:logical_position_x()
 			local settlement_y = current_settlement:logical_position_y()
 
@@ -995,26 +1031,36 @@ function iron_favour:setup_capture_settlement(mission_setup_data, mission_key, s
 				local distance = distance_squared(settlement_x, settlement_y, x, y)
 
 				if distance < closest_distance then
-					target = current_region_key
+					target_region = current_region
 					closest_distance = distance
 				end
 			end
 		end
 	end
 
-	if target ~= "" then
-		self.used_region_targets[target_faction:name() .. target] = true
+	if target_region ~= nil then
+		-- Check if the region you are being assigned is the one you are sieging.
+		local target_garrison_residence = target_region:garrison_residence()
+		if target_garrison_residence:is_under_siege() then
+			local sieging_character = target_garrison_residence:besieging_character()
+			if not sieging_character:is_null_interface() and sieging_character:faction():name() == faction_key then
+				return false
+			end
+		end
+
+		local target_region_key = target_region:name()
+		self.used_region_targets[target_faction:name() .. "_" .. target_region_key] = true
 		
 		mm:add_new_objective("CAPTURE_REGIONS")
-		mm:add_condition("region " .. target)
-		self.current_active_and_pending_mission_data[mission_key].objective_region = target
+		mm:add_condition("region " .. target_region_key)
+		mission_setup_data.objective_region = target_region_key
 
 		mission_distance = closest_distance
 	else
-		return
+		return false
 	end
 
-	self:setup_mission_payload(mm, mission_setup_data, mission_distance)
+	self:setup_mission_payload(mm, mission_setup_data, mission_distance, true, true)
 
 	mm:set_is_pending_mission(true)
 	mm:set_pending_mission_issuing_faction_name(self.bhashiva_faction)
@@ -1022,6 +1068,8 @@ function iron_favour:setup_capture_settlement(mission_setup_data, mission_key, s
 	if should_trigger then 
 		mm:trigger()
 	end
+
+	return true
 end
 
 function iron_favour:add_listeners()
@@ -1212,6 +1260,31 @@ function iron_favour:add_listeners()
 				cm:set_script_state(bhashiva_faction_interface, self.should_show_ui_notification_for_mission_prefix .. mission_key, false)
 				-- if we've seen the alert for a specific mission we should have also seen the hud one
 				cm:set_script_state(bhashiva_faction_interface, self.should_show_ui_notification_for_hud_key, false)
+			end
+		end,
+		true
+	)
+
+	core:add_listener(
+		"ZhaoGoalsRegionFactionChangeEvent",
+		"RegionFactionChangeEvent",
+		function(context)
+			local previous_faction_key = context:previous_faction():name()
+			local bhashiva_key = self.bhashiva_faction
+			local bhashiva_faction = cm:get_faction(bhashiva_key)
+
+			if previous_faction_key ~= bhashiva_key and bhashiva_faction and bhashiva_faction:is_human() then
+				return true
+			else
+				return false
+			end
+		end,
+		function(context)
+			local previous_faction = context:previous_faction():name()
+			local region = context:region():name()
+
+			if self.used_region_targets[previous_faction .. "_" .. region] then
+				self.used_region_targets[previous_faction .. "_" .. region] = nil
 			end
 		end,
 		true
@@ -1538,10 +1611,13 @@ function iron_favour:favour_to_iron_favour()
 						local faction = mf:faction()
 
 						if faction:is_rebel() == false then
-							local value = mf:pooled_resource_manager():resource(self.resources.favour_army):value() or loser.favour
-							favour = favour + value
-
-							self:assign_favour(mf, self.factors.army_prefix..self.factors.other, -value) --clear favour from losers
+							local resource = mf:pooled_resource_manager():resource(self.resources.favour_army)
+							
+							if resource:is_null_interface() == false then
+								local value = resource:value() or loser.favour
+								favour = favour + value
+								self:assign_favour(mf, self.factors.army_prefix..self.factors.other, -value) --clear favour from losers
+							end
 						end
 					else
 						-- mf was wiped out or is an armed citizenry, just cache the pending battle saved favour
@@ -1662,7 +1738,7 @@ function iron_favour:favour_to_iron_favour()
 					and self:is_pending_mission_invalidated_by_faction_death(mission_data, dying_faction_interface)
 					and cm:mission_is_active_for_faction(bhashiva_faction_interface, key) == false
 				then
-					self:clear_pending_mission_data(bhashiva_faction_interface, key)
+					self:invalidate_pending_mission(bhashiva_faction_interface, key)
 				end
 			end
 		end,
@@ -1685,7 +1761,7 @@ function iron_favour:favour_to_iron_favour()
 					and self:is_pending_mission_invalidated_by_character_death(mission_data, dying_character_interface)
 					and cm:mission_is_active_for_faction(bhashiva_faction_interface, key) == false
 				then
-					self:clear_pending_mission_data(bhashiva_faction_interface, key)
+					self:invalidate_pending_mission(bhashiva_faction_interface, key)
 				end
 			end
 		end,
@@ -1709,7 +1785,7 @@ function iron_favour:favour_to_iron_favour()
 					and self:is_pending_mission_invalidated_by_region_faction_change(mission_data, region_interface:name())
 					and cm:mission_is_active_for_faction(bhashiva_faction_interface, key) == false
 				then
-					self:clear_pending_mission_data(bhashiva_faction_interface, key)
+					self:invalidate_pending_mission(bhashiva_faction_interface, key)
 				end
 			end
 		end,
@@ -1803,8 +1879,6 @@ function iron_favour:try_refill_missions(faction_interface)
 		table.insert(current_active_or_pending_mission_keys, pending_mission:mission_record_key())
 	end
 
-	self.used_region_targets = {}
-
 	-- generate missions for the ones we don't currently have as pending or active
 	for i = 1, #self.base_mission_keys do
 		local base_mission_key = self.base_mission_keys[i]
@@ -1812,7 +1886,13 @@ function iron_favour:try_refill_missions(faction_interface)
 		for j = 1, #current_active_or_pending_mission_keys do
 			local active_or_pending_mission_key = current_active_or_pending_mission_keys[j]
 			if string.find(active_or_pending_mission_key, base_mission_key) then
-				should_generate_mission = false
+				local mission_data = self.current_active_and_pending_mission_data[active_or_pending_mission_key]
+				if mission_data and mission_data.invalidated then
+					self:clear_pending_mission_data(faction_interface, active_or_pending_mission_key)
+				else
+					should_generate_mission = false
+				end
+				break
 			end
 		end
 
@@ -1885,6 +1965,11 @@ function iron_favour:progress_turns_until_reroll_for_pending_missions(bhashiva_f
 	end
 end
 
+function iron_favour:invalidate_pending_mission(faction_interface, mission_key)
+	self.current_active_and_pending_mission_data[mission_key].invalidated = true
+	cm:set_script_state(faction_interface, self.pending_mission_invalidated_shared_state_key_prefix .. mission_key, true)
+end
+
 function iron_favour:clear_pending_mission_data(faction_interface, mission_key)
 	if not faction_interface or faction_interface:is_null_interface() then
 		script_error("ERROR: clear_pending_mission_data() called but supplied argument for faction_interface is invalid.");
@@ -1897,6 +1982,9 @@ function iron_favour:clear_pending_mission_data(faction_interface, mission_key)
 	end
 
 	cm:discard_pending_mission(faction_interface, mission_key)
+	if self.current_active_and_pending_mission_data[mission_key].invalidated then
+		cm:remove_script_state(faction_interface, self.pending_mission_invalidated_shared_state_key_prefix .. mission_key)
+	end
 	self.current_active_and_pending_mission_data[mission_key] = {}
 	cm:remove_script_state(faction_interface, self.turns_left_until_reroll_shared_state_key_prefix .. mission_key)
 end

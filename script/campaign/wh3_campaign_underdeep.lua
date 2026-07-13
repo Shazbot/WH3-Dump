@@ -375,6 +375,7 @@ function add_underdeep_listeners()
 					if slot:is_null_interface() == false and slot:has_building() == true then
 						if slot:building():name() == "wh3_main_DWARFS_underdeep_1" or slot:building():name() == "wh3_main_DWARFS_underdeep_2" then
 							cm:region_slot_instantly_dismantle_building(slot);
+							cm:remove_faction_foreign_slots_from_region(previous_faction:command_queue_index(), region:cqi());
 							break;
 						end
 					end

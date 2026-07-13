@@ -871,6 +871,7 @@ in_caravans:set_should_lock_ui()
 in_caravans:add_precondition(function() return cm:get_local_faction_subculture() == "wh3_main_sc_cth_cathay" and not cm:get_saved_value("caravan_tour_complete") end)
 in_caravans:add_trigger_condition("PanelOpenedCampaign", function(context) return context.string == "cathay_caravans" and not core:is_advice_level_minimal() end)
 in_caravans:set_wait_for_fullscreen_panel_dismissed(false)
+in_caravans:set_reduce_pause_before_triggering(true)
 in_caravans:add_advice_key_precondition("wh3.dlc26.camp.advice.cth.ivory_road.001")
 
 function trigger_in_caravans()
@@ -942,6 +943,21 @@ function trigger_in_caravans()
 			
 			nt_caravans:restore_scripted_tour_controls_priority()
 			in_caravans:complete()
+
+			core:add_listener(
+				"Caravan_Scripted_Tour_Closed",
+				"PanelClosedCampaign",
+				function(context) 
+					return context.string == "cathay_caravans" 
+				end,
+				function()
+					local uic = find_uicomponent("cathay_caravans", "caravans_panel", "dispatch_holder", "button_dispatch")
+					if uic then
+						uic:StopPulseHighlight()
+					end 
+				end,
+				false
+			);
 		end,
 		0
 	)
@@ -1310,6 +1326,7 @@ in_bhashiva_caravans:set_should_lock_ui()
 in_bhashiva_caravans:add_precondition(function() return cm:get_local_faction_name() == "wh3_cp1_cth_tiger_warriors" and not cm:get_saved_value("bhashiva_caravans_tour_complete") end)
 in_bhashiva_caravans:add_trigger_condition("PanelOpenedCampaign", function(context) return context.string == "cp1_cth_bhashiva_caravans" end)
 in_bhashiva_caravans:set_wait_for_fullscreen_panel_dismissed(false)
+in_bhashiva_caravans:set_reduce_pause_before_triggering(true)
 in_bhashiva_caravans:add_advice_key_precondition("wh3.dlc26.camp.advice.cth.ivory_road.001")
 
 function trigger_in_bhashiva_caravans()
@@ -1381,6 +1398,21 @@ function trigger_in_bhashiva_caravans()
 			
 			nt_caravans:restore_scripted_tour_controls_priority()
 			in_bhashiva_caravans:complete()
+
+			core:add_listener(
+				"Bhashiva_Caravan_Scripted_Tour_Closed",
+				"PanelClosedCampaign",
+				function(context) 
+					return context.string == "cp1_cth_bhashiva_caravans" 
+				end,
+				function()
+					local uic = find_uicomponent("cp1_cth_bhashiva_caravans", "caravans_panel", "dispatch_holder", "button_dispatch")
+					if uic then
+						uic:StopPulseHighlight()
+					end 
+				end,
+				false
+			);
 		end,
 		0
 	)

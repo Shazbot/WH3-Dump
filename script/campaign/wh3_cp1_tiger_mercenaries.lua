@@ -429,6 +429,7 @@ tiger_mercenaries.dynamic_data = {}
 function tiger_mercenaries:initialise()
 	if is_empty_table(self.dynamic_data) then
 		self.dynamic_data.current_tier = 1
+		self.dynamic_data.cai_turn_to_unlock_next_tier = 1
 	end
 
 	if cm:is_new_game() then
@@ -980,7 +981,46 @@ function tiger_mercenaries:add_unit_purchase_effect_listeners()
 			cm:faction_add_pooled_resource(faction, resource, "other", 1)
 		end,
 		true
-	);
+	)
+
+	core:add_listener(
+		"tiger_merc_refund_unit_upgrade_when_destroyed_from_merge",
+		"UnitMergedAndDestroyed",
+		function(context)
+			local faction = context:unit():faction()
+			return faction:name() == self.config.faction_key and faction:is_human()
+		end,
+		function(context)
+			tiger_mercenaries:handle_unit_purchased_effect_lost(context:unit())
+		end,
+		true
+	)
+
+	core:add_listener(
+		"tiger_merc_refund_unit_upgrade_when_destroyed_from_disband",
+		"UnitDisbanded",
+		function(context)
+			local faction = context:unit():faction()
+			return faction:name() == self.config.faction_key and faction:is_human()
+		end,
+		function(context)
+			tiger_mercenaries:handle_unit_purchased_effect_lost(context:unit())
+		end,
+		true
+	)
+
+	core:add_listener(
+		"tiger_merc_refund_unit_upgrade_when_destroyed",
+		"UnitAboutToBeDestroyedByBattle",
+		function(context)
+			local faction = context:unit():faction()
+			return faction:name() == self.config.faction_key and faction:is_human()
+		end,
+		function(context)
+			tiger_mercenaries:handle_unit_purchased_effect_lost(context:unit())
+		end,
+		true
+	)
 end
 
 function tiger_mercenaries:handle_ai_tier_unlock(faction)
@@ -1024,7 +1064,17 @@ end
 --------------------------------------------------------------
 ---------------------------- UTIL ----------------------------
 --------------------------------------------------------------
----
+
+function tiger_mercenaries:handle_unit_purchased_effect_lost(unit)
+	local purchased_effects = unit:get_unit_purchased_effects()
+	for i = 0, purchased_effects:num_items() - 1 do
+		local purchased_effect = purchased_effects:item_at(i)
+		local record_key = purchased_effect:record_key()
+		local resource = string.gsub(record_key, "_upgrade", "_resource")
+		cm:faction_add_pooled_resource(self.config.faction_key, resource, "other", 1)
+	end
+end
+
 function tiger_mercenaries:get_faction_bundle_by_key(faction_interface, bundle_key)
 	local effect_bundle_list = faction_interface:effect_bundles()
 
@@ -1168,6 +1218,8 @@ cm:add_loading_game_callback(
 	function(context)
 		if cm:is_new_game() == false then
 			tiger_mercenaries.dynamic_data = cm:load_named_value("TigerMercenariesDynamicData", tiger_mercenaries.dynamic_data, context)
+			tiger_mercenaries.dynamic_data.current_tier = tiger_mercenaries.dynamic_data.current_tier or 1
+			tiger_mercenaries.dynamic_data.cai_turn_to_unlock_next_tier = tiger_mercenaries.dynamic_data.cai_turn_to_unlock_next_tier or 1
 		end
 	end
 )

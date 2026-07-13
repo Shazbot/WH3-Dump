@@ -4311,6 +4311,9 @@ core:add_listener (
 					end
 				end
 			end
+			if is_empty_table(available_hunts) then
+				return	-- All hunts have been completed.
+			end
 
 			local rand = cm:random_number(#available_hunts, 1)
 			local selected_hunt = available_hunts[rand]

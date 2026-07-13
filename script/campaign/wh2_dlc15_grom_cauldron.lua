@@ -13,7 +13,10 @@ local ingredients_data = {
 		ancillaries_required = {
 			wh2_pro09_anc_mount_grn_black_orc_big_boss_war_boar = true,
 			wh_main_anc_mount_grn_orc_warboss_war_boar = true,
-			wh_main_anc_mount_grn_wizard_orc_shaman_war_boar = true
+			wh_main_anc_mount_grn_wizard_orc_shaman_war_boar = true,
+			wh3_dlc26_anc_mount_grn_gorbad_ironclaw_gnarla = true,
+			wh3_dlc26_anc_mount_grn_savage_orc_great_shaman_war_boar = true,
+			wh_dlc06_anc_mount_grn_wurrzag_spleenrippa = true
 		}
 	},
 	wh2_dlc15_goblin = {
@@ -405,7 +408,8 @@ local ingredients_data = {
 		units_to_recruit = {
 			wh_main_grn_mon_arachnarok_spider_0 = true,
 			wh_dlc06_grn_mon_venom_queen_0 = true,
-			wh2_dlc15_grn_mon_arachnarok_spider_waaagh_0 = true
+			wh2_dlc15_grn_mon_arachnarok_spider_waaagh_0 = true,
+			wh3_dlc26_grn_mon_arachnarok_spider_flinger = true
 		}
 	}
 }
@@ -466,7 +470,7 @@ local food_challenge_requirements = {
 	["wh2_dlc15_objective_override_grom_food_merchant_1"] = {ingredients = {"wh2_dlc15_bat"}, recipes = {"wh2_dlc15_food_dish_1", "wh2_dlc15_food_dish_3"}},
 	["wh2_dlc15_objective_override_grom_food_merchant_2"] = {ingredients = {"wh2_dlc15_boar", "wh2_dlc15_lion"}, recipes = {"wh2_dlc15_food_dish_7"}},
 	["wh2_dlc15_objective_override_grom_food_merchant_3"] = {ingredients = {"wh2_dlc15_pepper", "wh2_dlc15_stinky"}, recipes = {"wh2_dlc15_food_dish_8"}},
-	["wh2_dlc15_objective_override_grom_food_merchant_4"] = {ingredients = {"wh2_dlc15_clams", "wh2_dlc15_gold_fish", "wh2_dlc15_tentacle", "wh2_dlc15_milk"}, recipes = {"wh2_dlc15_food_dish_9"}},
+	["wh2_dlc15_objective_override_grom_food_merchant_4"] = {ingredients = {"wh2_dlc15_clams", "wh2_dlc15_gold_fish", "wh2_dlc15_tentacle"}, recipes = {"wh2_dlc15_food_dish_9"}},
 	["wh2_dlc15_objective_override_grom_food_merchant_7"] = {recipes = {"wh2_dlc15_food_dish_2", "wh2_dlc15_food_special_dish_5"}},
 	["wh2_dlc15_objective_override_grom_food_merchant_8"] = {recipes = {"wh2_dlc15_food_dish_7", "wh2_dlc15_food_dish_9"}},
 	["wh2_dlc15_objective_override_grom_food_merchant_9"] = {recipes = {"wh2_dlc15_food_dish_4", "wh2_dlc15_food_dish_6", "wh2_dlc15_food_special_dish_2", "wh2_dlc15_food_special_dish_3"}},
@@ -1027,7 +1031,7 @@ function setup_food_challenge_listener()
 					end
 				end
 				
-				if matching_ingredients >= #ingredients_check_list then
+				if matching_ingredients > 0 then
 					ingredients_cooked = true
 				end
 			end

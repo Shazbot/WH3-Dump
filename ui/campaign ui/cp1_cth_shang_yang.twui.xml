@@ -348,7 +348,7 @@
 				<callback_with_context
 					callback_id="ContextInactiveStateSetter"
 					context_object_id="CcoCampaignFaction"
-					context_function_id="ActiveMissionList.Filter(MissionRecordContext.EventCategoryContext.Type == &quot;zhaos_will&quot;).IsEmpty">
+					context_function_id="ActiveMissionList.Filter((category = MissionRecordContext.EventCategoryContext) =&gt; GetIfElse(IsContextValid(category), category.Type == &quot;zhaos_will&quot;, false)).IsEmpty">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -1331,7 +1331,7 @@
 			<localised_texts>
 				<localised_text
 					tooltip_label="wh3_cp1_cth_shang_yang_decline_mission_btn_tooltip"
-					tooltip_text="Decline Mission||A new Mission will be issued next turn."/>
+					tooltip_text="Decline Mission||A new mission will be issued next turn."/>
 				<localised_text
 					state="active"
 					is_text_localised="false"/>
@@ -6378,7 +6378,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoCampaignFaction"
-					context_function_id="Join(PendingMissionList, MissionList.Filter(BecameInactiveThisTurn || CompletionStatus == 0)).Filter(MissionRecordContext.EventCategoryContext.Type == &quot;zhaos_will&quot;).Sort(MissionRecordContext.Key, true)">
+					context_function_id="Join(PendingMissionList, MissionList.Filter(BecameInactiveThisTurn || CompletionStatus == 0)).Filter((category = MissionRecordContext.EventCategoryContext) =&gt; GetIfElse(IsContextValid(category),&#10;category.Type == &quot;zhaos_will&quot;, false)).Sort(MissionRecordContext.Key, true)">
 					<child_m_user_properties>
 						<property
 							name="stored_object_to_pass0"
@@ -7039,10 +7039,10 @@
 					<child_m_user_properties>
 						<property
 							name="cancelled"
-							value="CompletionStatus == 2"/>
+							value="CompletionStatus == 2 || FactionContext.EntitySharedStateReadBool(Format(&quot;zhaos_goals_pending_mission_invalidated_%S&quot;, MissionRecordContext.Key))"/>
 						<property
 							name="completed"
-							value="Completed"/>
+							value="Completed &amp;&amp; (FactionContext.EntitySharedStateReadBool(Format(&quot;zhaos_goals_pending_mission_invalidated_%S&quot;, MissionRecordContext.Key)) == false)"/>
 						<property
 							name="expired"
 							value="CompletionStatus == 3"/>
@@ -7303,7 +7303,7 @@
 			<localised_texts>
 				<localised_text
 					tooltip_label="wh3_cp1_cth_shang_yang_units_tab_tooltip"
-					tooltip_text="Warriors of Shang-Yang who march beside the Tiger Warriors gradually adopt their predatory discipline, learning to strike swiftly and hone their instincts, once thought exclusive to the White Tiger’s mercenary host. Through shared battle, even traditional Cathayan formations unlock new abilities that mirror the Tigers’ legendary speed, precision, and ferocity."/>
+					tooltip_text="Shang Yang’s Warhold||Warriors of Shang-Yang who march beside the Tiger Warriors can adopt their legendary speed, precision and ferocity, as enabled by their unique Insignia. {{tr:ui_text_replacements_localised_text_wh3_cp1_text_pointer_armies_of_shang_yang_text_pointer_8}}"/>
 				<localised_text
 					state="active"
 					is_text_localised="false"/>
@@ -7412,6 +7412,15 @@
 					callback_id="ContextCommandLeftClick"
 					context_object_id="CcoStaticObject"
 					context_function_id="Do(self.ChildContext(&quot;alert_icon&quot;).SetVisible(false), DoIf(self.ParentContext(&quot;panel_holder_animation&quot;).ChildContext(&quot;upgrades_panel&quot;).IsVisible == false, UiMsg(&quot;tab_opened&quot;)))"/>
+				<callback_with_context
+					callback_id="ContextCommandEvent"
+					context_function_id="self.SimulateLClick">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="zhao_ming_tab_requested"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -7427,7 +7436,7 @@
 			<localised_texts>
 				<localised_text
 					tooltip_label="wh3_cp1_cth_shang_yang_zhao_ming_goals_tab_tooltip"
-					tooltip_text="Select and undertake a variety of important missions for Zhao Ming. Gaining Iron Favour and other rewards from the Iron Dragon"/>
+					tooltip_text="Zhao Ming’s Goals||{{tr:ui_text_replacements_localised_text_hp_campaign_point_4_armies_of_shang_yang}}"/>
 				<localised_text
 					state="active"
 					is_text_localised="false"/>
@@ -10001,7 +10010,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignFaction faction, CcoCampaignMission mission"
-					context_function_id="faction.EntitySharedStateValueExists(Format(&quot;zhaos_goals_turns_left_until_reroll_%S&quot;, mission.MissionRecordContext.Key)) &amp;&amp; mission.CompletionStatus == 4">
+					context_function_id="faction.EntitySharedStateValueExists(Format(&quot;zhaos_goals_turns_left_until_reroll_%S&quot;, mission.MissionRecordContext.Key)) &amp;&amp; (FactionContext.EntitySharedStateReadBool(Format(&quot;zhaos_goals_pending_mission_invalidated_%S&quot;, MissionRecordContext.Key)) == false) &amp;&amp; mission.CompletionStatus == 4">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -10140,7 +10149,7 @@
 					interactive="true"
 					uniqueguid="F7C67D2F-B99B-41C4-B1FE7E8878AE405F">
 					<component_text
-						text="Bound by oath to the Iron Dragon Zhao Ming, Bhashiva, Lord of Shang‑Yang, is tasked with enacting the Dragon’s will. Fulfilling these mandates grants Iron Favour, which can be spent within the Armies of Shang‑Yang to strengthen Bhashiva’s forces and unlock rewards bestowed by the Master of the Iron Winds."
+						text="Bound by oath to Zhao Ming, Bhashiva is tasked as a Lord of Shang-Yang to enact the Dragon’s will. Fulfilling these mandates grants [[img:icon_iron_favour]][[//img]]Iron Favour, which can be spent within Shang-Yang’s Warhold to strengthen Bhashiva’s forces and unlock rewards bestowed by the Master of the Iron Winds."
 						textvalign="Center"
 						texthalign="Center"
 						textxoffset="15.00,15.00"

@@ -627,7 +627,7 @@ gb:set_objective_on_message("knifey_dead", "wh3_cp1_qb_cth_bhashiva_heavens_gate
 -- ---------------------------------------- Victory ------------------------------------------------
 -- -------------------------------------------------------------------------------------------------
 
-dechunga_army:message_on_commander_death("dechunga_dead") -- On death, message is created for the garrison commander
+dechunga_army:message_on_commander_dead_or_routing("dechunga_dead") -- On death, message is created for the garrison commander
 gb:queue_help_on_message("dechunga_dead", "wh3_cp1_qb_cth_bhashiva_heavens_gate_bhashiva_obj2_victory") -- Success message
 gb:complete_objective_on_message("dechunga_dead", "wh3_cp1_qb_cth_bhashiva_heavens_gate_bhashiva_obj2", 1000) -- Sets the objective as complete
 

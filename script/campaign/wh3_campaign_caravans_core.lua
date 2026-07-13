@@ -867,16 +867,27 @@ function caravans:initialise()
 			cm:callback(function()self:adjust_end_node_value(region_name, value, "add", faction) end, 5);
 
 			-- if the settlement has relics steal them
-			local relics_settlement_resource = region:pooled_resource_manager():resource("wh3_cp1_cth_relics_settlements")
-			if faction_key == "wh3_cp1_cth_tiger_warriors" and not relics_settlement_resource:is_null_interface() then
-				local relics_amount = relics_settlement_resource:value()
-				if relics_amount > 0 then
-					cm:entity_transfer_pooled_resource(
-						region, "wh3_cp1_cth_relics_settlements_other", -- from
-						context:caravan_master():character():faction(), "wh3_cp1_cth_bhashiva_relics_ivory_road", -- to
-						relics_amount
-					)
-				end
+			if faction_key ~= "wh3_cp1_cth_tiger_warriors" then
+				return
+			end
+
+			local pooled_resource_manager = region:pooled_resource_manager()
+			if not is_pooledresourcemanager(pooled_resource_manager) then
+				return
+			end
+
+			 local relics_settlement_resource = pooled_resource_manager:resource("wh3_cp1_cth_relics_settlements")
+			 if not is_pooledresource(relics_settlement_resource) then
+				return
+			end
+
+			local relics_amount = relics_settlement_resource:value()
+			if relics_amount > 0 then
+				cm:entity_transfer_pooled_resource(
+					region, "wh3_cp1_cth_relics_settlements_other", -- from
+					context:caravan_master():character():faction(), "wh3_cp1_cth_bhashiva_relics_ivory_road", -- to
+					relics_amount
+				)
 			end
 		end,
 		true

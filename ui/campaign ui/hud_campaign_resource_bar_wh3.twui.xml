@@ -7494,7 +7494,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignFaction"
-					context_function_id="ActiveMissionList.Filter(MissionRecordContext.EventCategoryContext.Type == &quot;zhaos_will&quot;).IsEmpty == false">
+					context_function_id="ActiveMissionList.Filter((category = MissionRecordContext.EventCategoryContext) =&gt; GetIfElse(IsContextValid(category), category.Type == &quot;zhaos_will&quot;, false)).IsEmpty == false">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -22764,7 +22764,6 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
-					context_object_id="CcoCampaignRoot"
 					context_function_id="IsLocalPlayersTurn &amp;&amp; IsScriptLockActive(&quot;hide_resources_bar&quot;) == false">
 					<child_m_user_properties>
 						<property

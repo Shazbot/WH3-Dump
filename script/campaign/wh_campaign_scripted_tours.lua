@@ -6328,6 +6328,7 @@ in_grn_da_plan_tour = intervention:new(
 in_grn_da_plan_tour:add_advice_key_precondition("wh3.dlc26.camp.advice.grn.da_plan.001")
 in_grn_da_plan_tour:set_wait_for_fullscreen_panel_dismissed(false)
 in_grn_da_plan_tour:set_should_lock_ui()
+in_grn_da_plan_tour:set_reduce_pause_before_triggering(true)
 in_grn_da_plan_tour:add_trigger_condition(
 	"PanelOpenedCampaign",
 	function(context)
@@ -6378,7 +6379,7 @@ scripted_grn_da_plan_tour = {
 			size = 350,
 			length = 50
 		},
-		click_on_navigate = function() return find_uicomponent(core:get_ui_root(), "CcoCampaignInitiativeSet150wh3_dlc26_force_initiative_grn_da_plan")	end,
+		click_on_navigate = function() return find_uicomponent(core:get_ui_root(), "CcoCampaignInitiativeSet152wh3_dlc26_force_initiative_grn_da_plan")	end,
 	},
 	{
 		id = "grn_da_plan_4",
@@ -7461,7 +7462,7 @@ in_sla_major_settlement_pleasure_palace_tour = intervention:new(
 )
 
 in_sla_major_settlement_pleasure_palace_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_sla_major_settlement_pleasure_palace_tour") end)
-in_sla_major_settlement_pleasure_palace_tour:set_wait_for_fullscreen_panel_dismissed(true)
+in_sla_major_settlement_pleasure_palace_tour:set_wait_for_fullscreen_panel_dismissed(false)
 in_sla_major_settlement_pleasure_palace_tour:set_should_lock_ui(true)
 in_sla_major_settlement_pleasure_palace_tour:set_reduce_pause_before_triggering(true)
 in_sla_major_settlement_pleasure_palace_tour:add_trigger_condition(
@@ -8510,6 +8511,7 @@ in_tiger_warriors_tiger_court:add_trigger_condition(
 in_tiger_warriors_tiger_court:set_completion_callback(
 	function()
 		common.set_advice_history_string_seen("in_tiger_warriors_tiger_court")
+		core:hide_fullscreen_highlight()
 	end
 );
 
@@ -8596,6 +8598,7 @@ in_tiger_warriors_armies_of_shang_yang:add_trigger_condition(
 in_tiger_warriors_armies_of_shang_yang:set_completion_callback(
 	function()
 		common.set_advice_history_string_seen("in_tiger_warriors_armies_of_shang_yang")
+		core:hide_fullscreen_highlight()
 	end
 );
 
@@ -8723,12 +8726,13 @@ in_tiger_court_text_pointer = intervention:new(
 	"in_tiger_court_text_pointer",			 						-- string name
 	0, 																	-- cost
 	function() 
-		tiger_court_text_pointer()																			
+		tiger_court_text_pointer()
+		ui_scripted_tour:toggle_shortcuts(false)																			
 	end,					
 	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
 )
 
-in_tiger_court_text_pointer:add_precondition(function() return not common.get_advice_history_string_seen("in_tiger_warriors_tiger_court") end)
+in_tiger_court_text_pointer:add_precondition(function() return not common.get_advice_history_string_seen("in_tiger_warriors_tiger_court_text_pointer") and not in_tiger_court_text_pointer:has_ever_triggered() end)
 in_tiger_court_text_pointer:set_wait_for_fullscreen_panel_dismissed(false)
 in_tiger_court_text_pointer:take_priority_over_intervention("in_armies_of_shang_yang_text_pointer")
 in_tiger_court_text_pointer:add_trigger_condition(
@@ -8739,7 +8743,8 @@ in_tiger_court_text_pointer:add_trigger_condition(
 )
 
 function tiger_court_text_pointer()
-	local components = find_uicomponent("button_tiger_court");  	
+	local components = find_uicomponent("button_tiger_court");
+	common.set_advice_history_string_seen("in_tiger_warriors_tiger_court_text_pointer")  	
 	core:show_fullscreen_highlight_around_components(15, false, false, components);
 	local tp = text_pointer:new_from_component(
 	"tp_button_tiger_court",
@@ -8755,6 +8760,7 @@ function tiger_court_text_pointer()
 	tp:set_highlight_close_button(0.5)
 	tp:set_close_button_callback(
 		function()
+			ui_scripted_tour:toggle_shortcuts(true)
 			core:hide_fullscreen_highlight();
 			tp:hide()
 			components:SimulateLClick();
@@ -8779,18 +8785,34 @@ in_armies_of_shang_yang_text_pointer = intervention:new(
 	"in_armies_of_shang_yang_text_pointer",			 						-- string name
 	0, 																	-- cost
 	function() 
-		armies_of_shang_yang_text_pointer()																			
+		armies_of_shang_yang_text_pointer()
+		ui_scripted_tour:toggle_shortcuts(false)																			
 	end,					
 	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
 )
 
-in_armies_of_shang_yang_text_pointer:add_precondition(function() return not common.get_advice_history_string_seen("in_tiger_warriors_armies_of_shang_yang_text_pointer") end)
+in_armies_of_shang_yang_text_pointer:add_precondition(function() return not common.get_advice_history_string_seen("in_tiger_warriors_armies_of_shang_yang_text_pointer") and not in_armies_of_shang_yang_text_pointer:has_ever_triggered() end)
 in_armies_of_shang_yang_text_pointer:set_wait_for_fullscreen_panel_dismissed(true)
+local should_trigger_aosy = false
 in_armies_of_shang_yang_text_pointer:add_trigger_condition(
-	"PooledResourceChanged",
+	"MissionSucceeded",
 	function(context) 
-		local pr = context:resource()
-		return pr:key() == "wh3_cp1_cth_iron_favour" and pr:value() >= 200 and context:faction():is_human()
+		local mission_record_key = context:mission():mission_record_key()
+		local mission_completed = mission_record_key == tiger_mercenaries_config.progression_unlocks[1].mission_keys[1]
+		if in_tiger_court_text_pointer:has_ever_triggered() == false and mission_completed then
+			-- tiger court has not triggered even though the relics have been reached
+			-- early out, because it should take priority over this
+			should_trigger_aosy = true
+			return false
+		end
+		return mission_completed
+	end
+)
+
+in_armies_of_shang_yang_text_pointer:add_trigger_condition(
+	"PanelClosedCampaign", 
+	function(context) 
+		return should_trigger_aosy and (context.string == "popup_pre_battle" or context.string == "events")
 	end
 )
 
@@ -8812,6 +8834,7 @@ function armies_of_shang_yang_text_pointer()
 	tp:set_highlight_close_button(0.5)
 	tp:set_close_button_callback(
 		function()
+			ui_scripted_tour:toggle_shortcuts(true)
 			core:hide_fullscreen_highlight(); 
 			tp:hide()
 			components:SimulateLClick();					

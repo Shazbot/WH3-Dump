@@ -363,6 +363,7 @@ UITrigger = {}
 UngarrisonedFort = {}
 UniqueAgentDespawned = {}
 UniqueAgentSpawned = {}
+UnitAboutToBeDestroyedByBattle = {}
 UnitBeingCharged = {}
 UnitCompletedBattle = {}
 UnitConverted = {}

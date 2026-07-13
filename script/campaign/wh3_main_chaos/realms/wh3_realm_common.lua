@@ -246,6 +246,38 @@ function setup_realms()
 		end,
 		true
 	);
+
+	core:add_listener(
+		"Ursun_Roar_Blocks_Shortcuts",
+		"IncidentOccuredEvent",
+		true,
+		function(context)
+			if context:dilemma() == "wh3_main_story_panel_ursuns_roar" then
+				ui_scripted_tour:toggle_shortcuts(false)
+			end
+		end,
+		true
+	);
+
+	core:add_listener(
+		"Ursun_Roar_Unblock_Shortcuts",
+		"IncidentOccuredEvent",
+		true,
+		function(context)
+			if context:dilemma() == "wh3_main_story_panel_ursuns_roar" then
+				core:add_listener(
+					"Ursun_Roar_Panel_Closed",
+					"PanelClosedCampaign",
+					true,
+					function()
+						ui_scripted_tour:toggle_shortcuts(true)
+					end,
+					true
+				)
+			end
+		end,
+		true
+	);
 	
 	-- restore cleanup listener if saved on pre battle screen
 	if cm:get_saved_value("rift_closure_battle_active") then

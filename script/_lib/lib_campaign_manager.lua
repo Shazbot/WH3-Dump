@@ -102,7 +102,6 @@ campaign_manager = {				-- default values should not be nil, otherwise they'll f
 	cinematic_interface = false,
 	tm = false,															-- timer manager
 	factions = {},
-	model_is_created = false,
 	game_is_running = false,
 	is_processing_ui_created_callbacks = false,
 	is_processing_first_tick_callbacks = false,
@@ -472,9 +471,6 @@ function campaign_manager:new(name)
 		"WorldCreated",
 		true,
 		function(context)
-
-			cm.model_is_created = true;
-
 			local model = cm:model();
 			local is_multiplayer_campaign =	model:is_multiplayer();
 			cm.is_multiplayer_campaign = is_multiplayer_campaign;
@@ -2008,7 +2004,7 @@ function campaign_manager:log_event_error(event_name, error, traceback, establis
 	local faction_list_table = {};
 	local turn_number;
 
-	if self.model_is_created then
+	if self.model() then
 		turn_number = self:turn_number();
 
 		local faction_list = cm:whose_turn_is_it();	
@@ -4154,7 +4150,7 @@ function campaign_manager:whose_turn_is_it_single()
 		return false;
 	end;
 
-	if self.model_is_created then
+	if self:model() then
 		return self:model():world():whose_turn_is_it():item_at(0);
 	else
 		script_error("ERROR: an attempt was made to call whose_turn_is_it_single() before the model was created - this call needs to happen later in the loading sequence");
@@ -4167,7 +4163,7 @@ end;
 --- @desc Returns a list of all factions whose turn it is currently. This can be used in singleplayer or multiplayer.
 --- @r @faction_list faction list
 function campaign_manager:whose_turn_is_it()
-	if self.model_is_created then
+	if self:model() then
 		return self:model():world():whose_turn_is_it();
 	else
 		script_error("ERROR: an attempt was made to call whose_turn_is_it() before the model was created - this call needs to happen later in the loading sequence");
@@ -4208,7 +4204,7 @@ end;
 --- @desc Returns true if the campaign is multiplayer.
 --- @r boolean is multiplayer campaign
 function campaign_manager:is_multiplayer()
-	if not self.model_is_created then
+	if not self:model() then
 		script_error(self.name .. " ERROR: is_multiplayer() called before the model has been created!");
 		return false;
 	end;
@@ -4224,7 +4220,7 @@ end;
 function campaign_manager:is_new_game()
 	if not self.game_is_loaded then
 		-- If the model has been created but the game not loaded, that strongly suggests we are processing the startpos - return true
-		if self.model_is_created then
+		if self:model() then
 			return true;
 		end;
 
@@ -4256,7 +4252,7 @@ end;
 --- @desc Returns a handle to the game model at any time (after the game has been created). See the @model_hierarchy pages for more information about game model interfaces such as @model.
 --- @r @model model
 function campaign_manager:model()
-	if self.model_is_created then
+	if self.game_interface:model() then
 		return self.game_interface:model();
 	else
 		script_error("ERROR: an attempt was made to call model() before the model was created - this call needs to happen later in the loading sequence");

@@ -696,7 +696,7 @@ initiative_templates = {
 					local attacker_char_cqi, attacker_mf_cqi, attacker_faction_name = cm:pending_battle_cache_get_attacker(1)
 					
 					if defender_faction_name == character_faction_name and pb:has_defender() then
-						defender_char_list = pb:defender():military_force():character_list()
+						local defender_char_list = pb:defender():military_force():character_list()
 
 						for i = 0, defender_char_list:num_items() - 1 do
 							local temp_character = defender_char_list:item_at(i)
@@ -706,8 +706,7 @@ initiative_templates = {
 						end
 						
 					elseif attacker_faction_name == character_faction_name and pb:has_attacker() then
-						
-						attacker_char_list = pb:attacker():military_force():character_list()
+						local attacker_char_list = pb:attacker():military_force():character_list()
 
 						for i = 0, attacker_char_list:num_items() - 1 do
 							local temp_character = attacker_char_list:item_at(i)
@@ -1172,7 +1171,7 @@ initiative_templates = {
 					local num_friendly_casters = 0
 
 					if defender_faction_name == character_faction_name and pb:has_attacker() then
-						defender_char_list = pb:defender():military_force():character_list()
+						local defender_char_list = pb:defender():military_force():character_list()
 
 						for i = 0, defender_char_list:num_items() - 1 do
 							local temp_character = defender_char_list:item_at(i)
@@ -1182,7 +1181,7 @@ initiative_templates = {
 						end
 						
 					elseif attacker_faction_name == character_faction_name and pb:has_defender() then
-						attacker_char_list = pb:attacker():military_force():character_list()
+						local attacker_char_list = pb:attacker():military_force():character_list()
 
 						for i = 0, attacker_char_list:num_items() - 1 do
 							local temp_character = attacker_char_list:item_at(i)
@@ -1216,30 +1215,15 @@ initiative_templates = {
 					local defender_char_cqi, defender_mf_cqi, defender_faction_name = cm:pending_battle_cache_get_defender(1);
 					local attacker_char_cqi, attacker_mf_cqi, attacker_faction_name = cm:pending_battle_cache_get_attacker(1);
 					
-					local num_enemy_characters = 0
+					local num_enemy_characters = false
 
 					if defender_faction_name == character_faction_name and pb:has_attacker() then
-						attacker_char_list = pb:attacker():military_force():character_list()
-
-						for i = 0, attacker_char_list:num_items() - 1 do
-							local temp_character = attacker_char_list:item_at(i)
-							if temp_character:is_caster() then
-								num_enemy_characters = num_enemy_characters + 1
-							end
-						end
-						
+						num_enemy_characters = cm:get_saved_value("attacker_more_than_2_characters")
 					elseif attacker_faction_name == character_faction_name and pb:has_defender() then
-						defender_char_list = pb:defender():military_force():character_list()
-
-						for i = 0, defender_char_list:num_items() - 1 do
-							local temp_character = defender_char_list:item_at(i)
-							if temp_character:is_caster() then
-								num_enemy_characters = num_enemy_characters + 1
-							end
-						end
+						num_enemy_characters = cm:get_saved_value("defender_more_than_2_characters")
 					end;
 
-					return num_enemy_characters >2
+					return num_enemy_characters
 				end;
 			end,
 		["grant_immediately"] = true
@@ -1853,19 +1837,31 @@ function initiative_unlock:start(cqi)
 	end
 	
 	core:add_listener(
-		"big_name_pending_battle",
+		"initiative_pending_battle_cache",
 		"PendingBattle",
 		true,
 		function(context)
 			cm:set_saved_value("big_name_attacker_spellcaster", false)
 			cm:set_saved_value("big_name_defender_spellcaster", false)
+			cm:set_saved_value("attacker_more_than_2_characters", false)
+			cm:set_saved_value("defender_more_than_2_characters", false)
 
 			local pb = cm:model():pending_battle()
+			local chs_involved = cm:pending_battle_cache_subculture_is_involved("wh_main_sc_chs_chaos")
+
 			if pb:has_attacker() then
 				local attacker = pb:attacker()
 				
 				if attacker:is_caster() and attacker:faction():subculture() ~= "wh_main_sc_dwf_dwarfs" then
 					cm:set_saved_value("big_name_attacker_spellcaster", true)
+				end
+
+				if chs_involved then
+					local attacker_characters_count = pb:attacker():military_force():character_list():num_items()
+						
+					if attacker_characters_count > 2 then
+						cm:set_saved_value("attacker_more_than_2_characters", true)
+					end
 				end
 			end
 
@@ -1874,6 +1870,14 @@ function initiative_unlock:start(cqi)
 				
 				if defender:is_caster() and defender:faction():subculture() ~= "wh_main_sc_dwf_dwarfs" then
 					cm:set_saved_value("big_name_defender_spellcaster", true)
+				end
+
+				if chs_involved then
+					local defender_characters_count = pb:defender():military_force():character_list():num_items()
+						
+					if defender_characters_count > 2 then
+						cm:set_saved_value("defender_more_than_2_characters", true)
+					end
 				end
 			end
 		end,

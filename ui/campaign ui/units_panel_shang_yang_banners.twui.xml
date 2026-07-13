@@ -1085,6 +1085,12 @@
 						<property
 							name="event4"
 							value="UnitEffectUnpurchased"/>
+						<property
+							name="event5"
+							value="RefreshUnitUpgradeSelection"/>
+						<property
+							name="event6"
+							value="upgrade_selection_changed"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
@@ -1405,7 +1411,7 @@
 				<callback_with_context
 					callback_id="ContextStateSetter"
 					context_object_id="CcoUnitPurchasableEffectRecord"
-					context_function_id="#this callback is set here instead of the template_unit_upgrade parent component to avoid an assert with conflicting state setting happening on the ContextSelectableItem. States explanation: activated: all selected units have the upgrade; inactive: no unit can get the upgrade; active/hover: some units can get the upgrade#&#10;( units = Component(&quot;units&quot;, &quot;main_units_panel&quot;).UpgradingUnitsContextList,&#10;selectable_component = self.ParentContext) =&gt;&#10;{&#10; GetIfElse( units.Any(CanUpgrade(this)),&#10;  GetIfElse( selectable_component.IsMouseOver, &quot;hover&quot;, &quot;active&quot; ),&#10;  GetIfElse( units.All(HasPurchasedEffect(this)), &quot;activated&quot;, &quot;inactive&quot; ) )&#10;}">
+					context_function_id="#this callback is set here instead of the template_unit_upgrade parent component to avoid an assert with conflicting state setting happening on the ContextSelectableItem. States explanation: activated: all selected units have the upgrade; inactive: no unit can get the upgrade; active/hover: some units can get the upgrade#&#10;( units = Component(&quot;units&quot;, &quot;main_units_panel&quot;).UpgradingUnitsContextList,&#10;selectable_component = self.ParentContext) =&gt;&#10;{&#10;  GetIf(units.IsEmpty == false, GetIfElse( units.Any(CanUpgrade(this)),&#10;  GetIfElse( selectable_component.IsMouseOver, &quot;hover&quot;, &quot;active&quot; ),&#10;  GetIfElse( units.All(HasPurchasedEffect(this)), &quot;activated&quot;, &quot;inactive&quot; ) ) )&#10;}">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -2493,6 +2499,9 @@
 							name="event1"
 							value="RefreshUnitSelection"/>
 						<property
+							name="event2"
+							value="RefreshUnitUpgradeSelection"/>
+						<property
 							name="selection_parent"
 							value="banner_upgrades_parent"/>
 						<property
@@ -2514,12 +2523,6 @@
 						<property
 							name="event2"
 							value="UnitEffectUnpurchased"/>
-						<property
-							name="event3"
-							value="RefreshUnitSelection"/>
-						<property
-							name="event4"
-							value="CampaignCharacterSelectedAny"/>
 						<property
 							name="react_only_to_events"
 							value=""/>
@@ -5559,9 +5562,6 @@
 						<property
 							name="event0"
 							value="PanelClosed_units_panel"/>
-						<property
-							name="event1"
-							value="CampaignCharacterSelectedAny"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context

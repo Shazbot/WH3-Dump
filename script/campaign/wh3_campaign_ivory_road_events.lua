@@ -756,7 +756,7 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			
 			local range_qnty = 2
 			if unit_to_add_range == "wh3_cp1_cth_inf_stalkers_throwing_disc" then
-				range_qnty = 1
+				range_qnty = 2
 			end
 			payload_builder:add_unit(caravan_handle:caravan_force(), unit_to_add_range, range_qnty, 0, true);
 			dilemma_builder:add_choice_payload("FIRST", payload_builder);
@@ -817,7 +817,7 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			
 			local range_qnty = 2
 			if unit_to_add_range == "wh3_cp1_cth_inf_stalkers_throwing_disc" then
-				range_qnty = 1
+				range_qnty = 2
 			end
 			payload_builder:add_unit(caravan_handle:caravan_force(), unit_to_add_range, range_qnty, 0, true);
 			dilemma_builder:add_choice_payload("SECOND", payload_builder);
@@ -878,9 +878,9 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			
 			local range_qnty = 2
 			if unit_to_add_range == "wh3_cp1_cth_inf_stalkers_throwing_disc" then
-				range_qnty = 1
+				range_qnty = 2
 			end
-			payload_builder:treasury_adjustment(-900);
+			payload_builder:treasury_adjustment(-750);
 			payload_builder:add_unit(caravan_handle:caravan_force(), unit_to_add_range, range_qnty, 0, true);
 			dilemma_builder:add_choice_payload("FIRST", payload_builder);
 			payload_builder:clear();
@@ -1090,10 +1090,7 @@ caravans.event_tables["wh3_main_cth_cathay"] = {
 			local enemy_faction = event_region:owning_faction();
 			local expected_culture = "wh3_dlc23_chd_chaos_dwarfs"
 
-			local enemy_faction_name = enemy_faction:name();
-			if enemy_faction_name == "rebels" or enemy_faction:culture() ~= expected_culture then
-				enemy_faction_name = "wh3_dlc23_chd_chaos_dwarfs_qb1";
-			end
+			local enemy_faction_name = "wh3_dlc23_chd_chaos_dwarfs_qb1";
 			
 			--Construct targets
 			local eventname = "chorfEncounter".."?"

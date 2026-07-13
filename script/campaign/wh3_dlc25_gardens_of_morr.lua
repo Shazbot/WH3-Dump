@@ -10,7 +10,8 @@ gardens_of_morr = {
 		ritual = "wh3_dlc25_emp_ritual_elspeth_teleport",
 		incident = "wh3_dlc25_incident_gom_teleport"
 	},
-	current_regions = {}
+	current_regions = {},
+	max_gardens_constructed_allowed = 5
 }
 
 function gardens_of_morr:initialise()
@@ -19,6 +20,7 @@ function gardens_of_morr:initialise()
 	self:setup_destroyed_incident()
 	self:elspeth_teleported()
 	self:gardens_of_morr_dismante_event()
+	self:refresh_gardens_of_morr_availability()
 end
 
 function gardens_of_morr:setup_panel_unlock_incident()
@@ -52,7 +54,7 @@ function gardens_of_morr:setup_constructed_incident()
 			cm:add_trespass_permission(player_cqi, owner_cqi)
 
 			cm:trigger_incident_with_targets(player_cqi, self.constructed.incident, 0, 0, 0, 0, ritual_region:cqi(), 0)
-			self:count_gardens_of_morr()
+			self:refresh_gardens_of_morr_availability()
 		end,
 		true
 	)
@@ -68,7 +70,7 @@ function gardens_of_morr:setup_destroyed_incident()
 		end,
 		function(context)
 			self:launch_destroyed_incident()
-			self:count_gardens_of_morr()
+			self:refresh_gardens_of_morr_availability()
 		end,
 		true
 	)
@@ -89,7 +91,7 @@ function gardens_of_morr:setup_destroyed_incident()
 		end,
 		function(context)
 			self:launch_destroyed_incident()
-			self:count_gardens_of_morr()
+			self:refresh_gardens_of_morr_availability()
 		end,
 		true
 	)
@@ -170,26 +172,41 @@ function gardens_of_morr:elspeth_teleported()
 	)
 end
 
-function gardens_of_morr:count_gardens_of_morr()
-	local count = 0
-	for _ in pairs(self.current_regions) do count = count + 1 
-		if count > 6 then
-			cm:lock_ritual(self.constructed.ritual)
-		end
-	end 
+function gardens_of_morr:refresh_gardens_of_morr_availability()
+	local faction = cm:get_faction(self.faction_key)
+	if is_nil(faction) or faction:is_null_interface() then
+		return
+	end
+	if #self.current_regions >= self.max_gardens_constructed_allowed then
+		cm:lock_ritual(faction, self.constructed.ritual)
+	else
+		cm:unlock_ritual(faction, self.constructed.ritual)
+	end
 end 	
 --  tower_action_buttons > button_destroy
 
 function gardens_of_morr:gardens_of_morr_dismante_event()
 	core:add_listener(
-		"GOMDestroyComponentLClickUp",
-		"ComponentLClickUp",
-		function(context)					
-			return context.string == "button_destroy" and uicomponent_descended_from(UIComponent(context.component), "dlc25_black_towers");
+		"GOMDismantled",
+		"ForeignSlotManagerRemovedEvent",
+		function(context)
+			if context:owner():name() ~= self.faction_key then
+				return
+			end
+			
+			local region_key = context:region():name()
+
+			for k, region in pairs(self.current_regions) do
+				if region_key == region.name then
+					return true
+				end
+			end
+
+			return false
 		end,
 		function(context)
 			self:launch_destroyed_incident()
-			self:count_gardens_of_morr()
+			self:refresh_gardens_of_morr_availability()
 		end,
 		true
 	);

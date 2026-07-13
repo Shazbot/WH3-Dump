@@ -1227,7 +1227,7 @@ function invasion:find_aggro_target() -- TODO: might want to return the weakest 
 					if force:is_armed_citizenry() == false and force:has_general() == true then
 						local enemy_general = force:general_character();
 						
-						if enemy_general:is_at_sea() == at_sea then
+						if enemy_general:is_at_sea() == at_sea and cm:model():character_can_ever_reach_character(general, enemy_general) then
 							if self.aggro_radius < 1 then
 								if self.aggro_radius == 0 or cm:character_can_reach_character(general, enemy_general) then
 									return enemy_general:command_queue_index(), self.aggro_targets[i];

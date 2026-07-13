@@ -119,6 +119,21 @@ function setup_daemon_cults()
 				local region_owner = region:owning_faction():name();
 				cm:treasury_mod(region_owner, 5000);
 				cm:faction_add_pooled_resource(region_owner, "wh3_main_sla_seductive_influence", "cults", 200);
+
+			-- MASQUE MAGUS
+			elseif building_key == "wh3_dlc27_sla_cult_special_masque" then
+				local region = slot_manager:region();
+				local region_owner = region:owning_faction():name();
+				cm:treasury_mod(region_owner, 5000);
+				cm:faction_add_pooled_resource(faction_key, "wh3_main_sla_devotees", "cults", 1000);
+
+			-- DECHALA MAGUS
+			elseif building_key == "wh3_dlc27_sla_dechala_cult_special" then
+				local region = slot_manager:region();
+				local region_owner = region:owning_faction():name();
+				cm:treasury_mod(region_owner, 5000);
+				cm:faction_add_pooled_resource(faction_key, "wh3_dlc27_sla_decadence", "cults", 1000);
+
 			elseif building_key == "wh3_main_cult_magus_trial_2" then
 				-- Spawn Cult Magus depending on Culture
 				local region_key = slot_manager:region():name();

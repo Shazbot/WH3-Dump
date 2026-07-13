@@ -141,6 +141,8 @@ function setup_campaign_help_pages()
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_tiger_court", "cp1_cth_tiger_court")
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_armies_of_shang_yang", "cp1_cth_armies_of_shang_yang")
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_armies_of_shang_yang", "cp1_cth_shang_yang")
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_twitch_integration", "twitch_settings_panel")
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_twitch_integration", "twitch_unit_name_raffle_panel")
 	
 	hpm:register_help_page_to_info_button_mapping(
 		"script_link_campaign_intrigue_at_the_court",
@@ -2614,6 +2616,31 @@ function setup_campaign_help_pages()
 
 
 
+	--
+	-- twitch_integration
+	--
+
+	hp_twitch_integration = help_page:new(
+		"script_link_campaign_twitch_integration",
+		hpr_title("war.camp.hp.twitch.integration.info_001"),
+		hpr_leader("war.camp.hp.twitch.integration.info_002"),
+		hpr_normal("war.camp.hp.twitch.integration.info_003"),
+		hpr_section("dilemma_poll"),
+		hpr_normal_unfaded("war.camp.hp.twitch.integration.info_004", "dilemma_poll"),
+		hpr_normal("war.camp.hp.twitch.integration.info_005", "dilemma_poll"),
+		hpr_normal("war.camp.hp.twitch.integration.info_006", "dilemma_poll"),
+		hpr_section("naming_raffle"),
+		hpr_normal_unfaded("war.camp.hp.twitch.integration.info_007", "naming_raffle"),
+		hpr_normal("war.camp.hp.twitch.integration.info_008", "naming_raffle"),
+		hpr_normal("war.camp.hp.twitch.integration.info_009", "naming_raffle"),
+		hpr_normal("war.camp.hp.twitch.integration.info_010", "naming_raffle")
+	);
+	parser:add_record("campaign_twitch_integration", "script_link_campaign_twitch_integration", "tooltip_campaign_twitch_integration");
+	tp_twitch_integration = tooltip_patcher:new("tooltip_campaign_twitch_integration");
+	tp_twitch_integration:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_twitch_integration_header", "ui_text_replacements_localised_text_hp_campaign_twitch_integration_description");
+	
+	
+	
 	--
 	-- chaos_cults
 	--

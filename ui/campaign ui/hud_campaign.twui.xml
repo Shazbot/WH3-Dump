@@ -97,6 +97,7 @@
 										<button_unit_banners this="E638508E-5B6F-43EE-B8CD3FBED959FBE5"/>
 										<button_purchase_unit_upgrades this="09BBBAAB-DD6B-416B-BD3B5E056981765A"/>
 										<button_motherland this="DB93EDFC-E155-4D1E-955985F89C72DFFF"/>
+										<button_twitch_unit_raffle this="CBE14247-E67B-43BD-88AD2800D2E351CA"/>
 									</button_group_army>
 									<button_group_army_settled this="AAAE3CC7-F4BA-45E3-856CED285EAFE8B9">
 										<button_show_horde_buildings this="86AB4D99-D50B-4A48-B8570720E45A7D04"/>
@@ -553,6 +554,8 @@
 				<resources_bar_holder this="4F016ACD-C6B2-4692-B1A381E0D546A0FF"/>
 				<offscreen_icon_creator this="3B9D06B2-5046-4080-B0465BD6C152B505"/>
 				<search_panel_holder this="8D54AC72-A4CE-45C7-848D21B0DC174D87"/>
+				<twitch_settings_panel_holder this="7ADC4082-239D-42F6-BC0927A8E40F0B83"/>
+				<twitch_notification_popup_holder this="BD019519-5849-462D-AE460954110617BD"/>
 				<rush_confirmation_holder this="C471BB49-B4A9-4A84-A78C887C2F7B6A8A">
 					<dialogue_box this="C6056FCD-DA94-4DBC-828575441A73A717">
 						<smoke_holder this="A0DF70D8-2FD3-4AF7-862226C17D52FBFE">
@@ -13680,7 +13683,7 @@
 				<newstate
 					this="F57A7E43-DC06-40B4-BA2A06CF30BD2C9B"
 					name="NewState"
-					width="355"
+					width="414"
 					height="55"
 					uniqueguid="F57A7E43-DC06-40B4-BA2A06CF30BD2C9B"/>
 			</states>
@@ -24570,7 +24573,7 @@
 				<newstate
 					this="15BBAB67-25E4-491B-931C83D637CD435B"
 					name="NewState"
-					width="865"
+					width="924"
 					height="71"
 					interactive="true"
 					uniqueguid="15BBAB67-25E4-491B-931C83D637CD435B">
@@ -24579,7 +24582,7 @@
 							this="F7B28FCC-4463-4A03-92B1D3E77A67E5F1"
 							uniqueguid="F7B28FCC-4463-4A03-92B1D3E77A67E5F1"
 							componentimage="26413E1F-5EC3-408A-8A0CE9B123589CDB"
-							width="865"
+							width="924"
 							height="71"
 							tile="true"
 							margin="0.00,85.00,0.00,85.00"/>
@@ -27790,6 +27793,212 @@
 				<element value=""/>
 			</override_images>
 		</button_treasure_hunts>
+		<button_twitch_unit_raffle
+			this="CBE14247-E67B-43BD-88AD2800D2E351CA"
+			id="button_twitch_unit_raffle"
+			template_id="square_medium_button_toggle"
+			part_of_template="true"
+			uniqueguid_in_template="5D80CA64-9284-44B3-A333109B10F096D4"
+			uniqueguid="CBE14247-E67B-43BD-88AD2800D2E351CA"
+			dimensions="55.00,55.00"
+			tooltips_localised="false"
+			priority="10"
+			sound_category="UI_GBL_TMP_Round_Small_Button">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="13E7395F-B954-4C84-B7AD593E517BC19A"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="99448017-BA32-4B96-9766EDC6C7CF675F"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="08FBE15F-9AA5-4114-B6A25DEBE6053D02"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="79E9CE79-296D-4A40-B46209E21D0066F6"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="78F84169-32C5-4118-BF376593A3143647"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="A110CB20-4B0D-4E65-84C58CE479992DB1"/>
+				<state_uniqueguid
+					name="selected_down"
+					uniqueguid="B497F432-FB2B-49A7-ADFEDD9C322BCA38"/>
+				<state_uniqueguid
+					name="selected_down_off"
+					uniqueguid="1930D33B-D22F-439E-A1F0FB8C07A9C88D"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="7989B767-ACCE-48EC-B0A03D5A9B673B40"/>
+				<state_uniqueguid
+					name="selected_inactive"
+					uniqueguid="62C8AC23-FB27-4546-8BD7FB11348C7294"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/twitch_integration/icon_twitch_logo.png"
+					uniqueguid="440FBA21-9E19-4495-AA1727164AF4C57E"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_selected_inactive.png"
+					uniqueguid="245020AA-24D4-49FF-A243B357394E2632"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_pressed.png"
+					uniqueguid="7F3A1B37-9A18-4DBE-BF116585E3FBDC06"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_selected_hover.png"
+					uniqueguid="B6319BE5-D952-417F-8DCA66C07F36354D"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_hover.png"
+					uniqueguid="AA914ACF-8E41-4642-879C642709A4CA8E"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_active.png"
+					uniqueguid="F1379873-7BC4-4A3C-B8A7921AA5723D1B"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_inactive.png"
+					uniqueguid="359B2E80-4282-46E4-8F3E6D4F7D61A39D"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_selected.png"
+					uniqueguid="7DF86120-6CFF-4DB4-A7AA15C762E4D0AD"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_underlay.png"
+					uniqueguid="E7A30DA9-D74A-4D61-838234755E1BF746"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_selected_underlay.png"
+					uniqueguid="9ACECE65-6A80-4BF0-8D28FB50E85EEE72"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_basic_selected_pressed.png"
+					uniqueguid="DBC0DD9A-C24E-4503-B983E22F628EBB5D"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="ButtonGroupButton"/>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>
+				<callback_with_context
+					callback_id="ContextCommandEvent"
+					context_object_id="CcoServiceManager manager"
+					context_function_id="DoIf(Component(&quot;twitch_unit_name_raffle_panel&quot;).IsVisible &amp;&amp; manager.IsLive == false, self.SimulateLClick)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="StatusServiceConnectionStatusChange"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoGameCore game_core, CcoCampaignCharacter character"
+					context_function_id="IsContextValid(game_core.ServiceManagerContext) &amp;&amp; game_core.ServiceManagerContext.IsLive &amp;&amp; character.MilitaryForceContext.CanRenameAnyUnit">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignTurnStart"/>
+						<property
+							name="event1"
+							value="AuthServiceTokenChange"/>
+						<property
+							name="event2"
+							value="StatusServiceConnectionInfoUpdate"/>
+						<property
+							name="event3"
+							value="StatusServiceConnectionStatusChange"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoGameCore"
+					context_function_id="ServiceManagerContext"/>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_function_id="(twitch_unit_name_raffle_panel = Component(&quot;twitch_unit_name_raffle_panel&quot;)) =&gt;&#10;{DoIfElse(twitch_unit_name_raffle_panel.IsVisible,&#10;twitch_unit_name_raffle_panel.SetVisible(false),&#10;Do(UiMsg(&quot;close_recruitment&quot;), twitch_unit_name_raffle_panel.SetVisible(true)))}"/>
+				<callback_with_context
+					callback_id="ContextInactiveStateSetter"
+					context_object_id="CcoServiceManager"
+					context_function_id="SelectedCharacter.IsInMotion == false &amp;&amp; (IsRaffleStateIdle &amp;&amp; HasRaffleData == false)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CharacterMoveStartAny"/>
+						<property
+							name="event1"
+							value="RaffleServiceRaffleStart"/>
+						<property
+							name="event2"
+							value="RaffleServiceRaffleEnd"/>
+						<property
+							name="event3"
+							value="RaffleServiceRaffleDataClear"/>
+						<property
+							name="event4"
+							value="StatusServiceConnectionStatusChange"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_function_id="SelectedCharacter"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="resizable"/>
+				<property
+					name="disable_override2"
+					value="CallbackAnimTrigger"/>
+				<property
+					name="dynamic_image"
+					value="0"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text
+					tooltip_label="ComponentTooltip_c2bee939"
+					tooltip_text="{{tr:uied_component_texts_localised_string_wh3_cp1_twitch_integration_name_raffle_title}}"/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					tooltip_label="StateTooltip_5d4864af"
+					tooltip_text="{{tr:tooltip_hud_unit_upgrade_inactive_not_players_turn}}"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/twitch_integration/icon_twitch_logo.png"/>
+				<element value="ui/skins/default/button_basic_selected_inactive.png"/>
+				<element value="ui/skins/default/button_basic_pressed.png"/>
+				<element value="ui/skins/default/button_basic_selected_hover.png"/>
+				<element value="ui/skins/default/button_basic_hover.png"/>
+				<element value="ui/skins/default/button_basic_active.png"/>
+				<element value="ui/skins/default/button_basic_inactive.png"/>
+				<element value="ui/skins/default/button_basic_selected.png"/>
+				<element value="ui/skins/default/button_basic_underlay.png"/>
+				<element value="ui/skins/default/button_basic_selected_underlay.png"/>
+				<element value="ui/skins/default/button_basic_selected_pressed.png"/>
+				<element value=""/>
+			</override_images>
+		</button_twitch_unit_raffle>
 		<button_txt
 			this="5F5C9395-F502-4134-B48C04A785486447"
 			id="button_txt"
@@ -32789,6 +32998,11 @@
 				<callback_with_context
 					callback_id="ContextCommandGiverOnCreate"
 					context_function_id="UiMsg(&quot;hud_created&quot;)"/>
+				<callback_with_context callback_id="ContextInitGameCore"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoGameCore"
+					context_function_id="ServiceManagerContext"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -43827,6 +44041,128 @@
 				</newstate>
 			</states>
 		</turns_icon>
+		<twitch_notification_popup_holder
+			this="BD019519-5849-462D-AE460954110617BD"
+			id="twitch_notification_popup_holder"
+			offset="0.00,20.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			priority="44"
+			tooltipslocalised="true"
+			uniqueguid="BD019519-5849-462D-AE460954110617BD"
+			currentstate="F73FA206-EC31-44C5-803C7262DCD1697D"
+			defaultstate="F73FA206-EC31-44C5-803C7262DCD1697D">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="ComponentCreator">
+					<child_m_user_properties>
+						<property
+							name="layout"
+							value="ui/common ui/twitch_notification_popup"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoGameCore"
+					context_function_id="ServiceManagerContext"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoServiceManager"
+					context_function_id="HasPollData || HasRaffleData || (IsLive &amp;&amp; (IsPollStateActive || IsRaffleStateActive))">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="VotingServicePollStart"/>
+						<property
+							name="event1"
+							value="VotingServicePollDataClear"/>
+						<property
+							name="event2"
+							value="RaffleServiceRaffleStart"/>
+						<property
+							name="event3"
+							value="RaffleServiceRaffleDataClear"/>
+						<property
+							name="event4"
+							value="StatusServiceConnectionStatusChange"/>
+						<property
+							name="event5"
+							value="VotingServicePollEnd"/>
+						<property
+							name="event6"
+							value="RaffleServiceRaffleEnd"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context callback_id="TopmostObjectCallback"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="F73FA206-EC31-44C5-803C7262DCD1697D"
+					name="NewState"
+					width="18"
+					height="18"
+					uniqueguid="F73FA206-EC31-44C5-803C7262DCD1697D"/>
+			</states>
+		</twitch_notification_popup_holder>
+		<twitch_settings_panel_holder
+			this="7ADC4082-239D-42F6-BC0927A8E40F0B83"
+			id="twitch_settings_panel_holder"
+			offset="10.00,10.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			priority="45"
+			tooltipslocalised="true"
+			uniqueguid="7ADC4082-239D-42F6-BC0927A8E40F0B83"
+			currentstate="FC2352FE-835E-4B9D-AEBB65B188F4FF3B"
+			defaultstate="FC2352FE-835E-4B9D-AEBB65B188F4FF3B">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="ComponentCreator">
+					<child_m_user_properties>
+						<property
+							name="layout"
+							value="ui/campaign ui/twitch_settings_panel"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context callback_id="TopmostObjectCallback"/>
+				<callback_with_context callback_id="EscapeKeyHandler"/>
+				<callback_with_context
+					callback_id="ContextCommandEvent"
+					context_object_id="CcoServiceManager manager"
+					context_function_id="DoIf(self.IsVisible &amp;&amp; manager.IsLive == false, self.SetVisible(false))">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="StatusServiceConnectionStatusChange"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="FC2352FE-835E-4B9D-AEBB65B188F4FF3B"
+					name="NewState"
+					width="18"
+					height="18"
+					uniqueguid="FC2352FE-835E-4B9D-AEBB65B188F4FF3B"/>
+			</states>
+			<animations>
+				<escape id="escape">
+					<frames>
+						<frame
+							interpolationtime="0"
+							targetmetrics_m_height="18"
+							targetmetrics_m_width="18"
+							targetmetrics_m_offset="10.00,10.00">
+							<triggers>
+								<trigger
+									trigger_component="7ADC4082-239D-42F6-BC0927A8E40F0B83"
+									trigger_property="Visibility false"/>
+							</triggers>
+						</frame>
+					</frames>
+				</escape>
+			</animations>
+		</twitch_settings_panel_holder>
 		<under_menu_bar_list_parent
 			this="6AF0A66E-C8B2-4FDC-9C65570800CCE437"
 			id="under_menu_bar_list_parent"

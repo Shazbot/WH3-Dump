@@ -895,7 +895,7 @@ local function customise_narrative_event_faction_data_for_campaign()
 					payload.money(20000, faction_key),
 					payload.agent_for_faction(
 						faction_key,
-						"dignitary",
+						"runesmith",
 						"wh3_main_kho_cultist"
 					)
 				}

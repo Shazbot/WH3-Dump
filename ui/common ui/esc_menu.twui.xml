@@ -99,6 +99,14 @@
 									<icon this="6C1AC6D9-1AB2-408F-BA906DD2C040AF69"/>
 									<frame this="AFB3EF66-AD4D-4DF8-B115E06250C77193"/>
 								</button_controls>
+								<button_twitch this="945FA0E6-5767-4382-90ACDEEF31FCC2FE">
+									<panel_smoke this="0C4BF212-657C-4BD6-9601F1AC68812154"/>
+									<button_flame this="A9101139-C1EF-4C75-AF3A27400BE8F683"/>
+									<background_text this="7240046B-1FA0-48AB-AA95AF5A1738A60A"/>
+									<button_txt this="494484A0-E371-4B6B-8D5FA3034023E1C2"/>
+									<icon this="AF3359E2-E3C0-4AB0-A2EE4A7573DB8105"/>
+									<frame this="31D4D5A2-CB80-4C60-89F690A122D0E039"/>
+								</button_twitch>
 							</frame_options>
 							<frame_quit this="1D02E7BC-4F26-4CA7-8011D13401FCEF2B">
 								<button_quit this="0C2223E2-677B-4BA4-AA651DE7C9FA27F2">
@@ -657,6 +665,56 @@
 				<state_uniqueguid
 					name="selected_hover"
 					uniqueguid="7606E96F-4DB1-4207-AC4512B201A826CF"/>
+			</state_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+			</override_images>
+		</background_text>
+		<background_text
+			this="7240046B-1FA0-48AB-AA95AF5A1738A60A"
+			id="background_text"
+			part_of_template="true"
+			uniqueguid_in_template="21C9F54D-27D6-4F21-9A69E607F5B3B231"
+			uniqueguid="7240046B-1FA0-48AB-AA95AF5A1738A60A"
+			dimensions="95.00,38.00"
+			dock_point="Bottom Center"
+			is_visible="false"
+			offset="0.00,-4.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="D36A44E7-E3A1-42A2-827183CD4C45D5E2"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="03D47D8D-CFBC-45CB-8F9782078190E860"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="062DD58E-7430-4F18-A09AA6619F693E51"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="79B96223-0A97-4CDF-89F5586A71CEE4AF"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="0C8AFE8B-6E59-489F-B72119BB9EB69382"/>
 			</state_uniqueguids>
 			<localised_texts>
 				<localised_text/>
@@ -2763,6 +2821,49 @@
 			</override_images>
 		</button_flame>
 		<button_flame
+			this="A9101139-C1EF-4C75-AF3A27400BE8F683"
+			id="button_flame"
+			part_of_template="true"
+			uniqueguid_in_template="C82CB197-48BE-4599-AD9F919CF90D33B8"
+			uniqueguid="A9101139-C1EF-4C75-AF3A27400BE8F683"
+			dimensions="90.00,90.00"
+			dock_point="Bottom Center"
+			is_visible="false"
+			layout_transition="Common UI/load_save_game"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="F21376C7-02EF-497D-90249FF99D678428"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoStaticObject"
+					context_function_id="self.ParentContext.IsMouseOver &amp;&amp; self.ParentContext.IsDisabled == false">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="callbacks"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+			</override_images>
+		</button_flame>
+		<button_flame
 			this="B24EAB90-9279-40D7-87CE128544B370A5"
 			id="button_flame"
 			part_of_template="true"
@@ -3571,6 +3672,138 @@
 				<element value="ui/skins/default/fe_flat_button_bg.png"/>
 			</override_images>
 		</button_save>
+		<button_twitch
+			this="945FA0E6-5767-4382-90ACDEEF31FCC2FE"
+			id="button_twitch"
+			template_id="fe_small_square_button"
+			part_of_template="true"
+			uniqueguid_in_template="9B6E1890-E2E6-4110-BC5B4B71E1313B38"
+			uniqueguid="945FA0E6-5767-4382-90ACDEEF31FCC2FE"
+			dimensions="90.00,90.00"
+			layout_transition="Common UI/options_twitch"
+			priority="100"
+			sound_category="UI_GBL_TMP_MODULAR_Large_Button">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="30D8D1D6-8332-43AA-B6582D63BB09845E"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="0D485ABA-4492-486C-A329CBC600FBC52A"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="AB43908C-16C3-4466-88DCB88746E1B6F1"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="6D431E23-5C41-41F9-9D4DA21A77276AE3"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="7A5DDAC9-CFA8-46EB-90BF293600189736"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="5638BADF-2F3A-4504-9599EADF97B9DA6D"/>
+				<state_uniqueguid
+					name="selected_inactive"
+					uniqueguid="D367A9AF-2D78-40ED-85B958F5A254F036"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/fe_flat_button_bg.png"
+					uniqueguid="D10FAEEC-7CE2-4B0C-BAE7C45CB8E4C8BE"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="ButtonGroupButton"/>
+				<callback_with_context callback_id="StatePropagatorCallback"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoGameCore"
+					context_function_id="IsContextValid(ServiceManagerContext)"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="dynamic_image"
+					value="1"/>
+				<property
+					name="override_sound"
+					value=""/>
+				<property
+					name="frame_name"
+					value="ui/sprite_anims/ae_smoke/ae_smoke"/>
+				<property
+					name="last_frame"
+					value="149"/>
+				<property
+					name="loops"
+					value="-1"/>
+				<property
+					name="pre_cache"
+					value="1"/>
+				<property
+					name="randomise_start_frame"
+					value="0"/>
+				<property
+					name="reverse"
+					value="0"/>
+				<property
+					name="time_per_frame"
+					value="30"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/fe_flat_button_bg.png"/>
+			</override_images>
+		</button_twitch>
+		<button_txt
+			this="494484A0-E371-4B6B-8D5FA3034023E1C2"
+			id="button_txt"
+			part_of_template="true"
+			uniqueguid_in_template="72973309-6AD6-42C3-8B3DE130AD6EE742"
+			uniqueguid="494484A0-E371-4B6B-8D5FA3034023E1C2"
+			dimensions="89.00,40.00"
+			dock_point="Bottom Center"
+			offset="0.00,-4.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="4B12AF91-8995-4FC4-914294889B4DE55E"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="5DB92F87-ED8B-413F-9BA2E384CE447A6B"/>
+			</state_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+		</button_txt>
 		<button_txt
 			this="60EF837E-0FF0-4774-B4C93984D6DB5C25"
 			id="button_txt"
@@ -7841,6 +8074,7 @@
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context callback_id="TopmostObjectCallback"/>
+				<callback_with_context callback_id="ContextInitGameCore"/>
 			</callbackwithcontextlist>
 			<states>
 				<default
@@ -8659,6 +8893,80 @@
 				<component_image_uniqueguid
 					name="ui/skins/default/fe_flat_button_selected.png"
 					uniqueguid="321CF8F1-9ECE-4CB5-BDE0DFC721E02127"/>
+			</component_image_uniqueguids>
+			<user_properties>
+				<property
+					name="override_sound"
+					value=""/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/fe_flat_button.png"/>
+				<element value="ui/skins/default/fe_flat_button_selected.png"/>
+			</override_images>
+		</frame>
+		<frame
+			this="31D4D5A2-CB80-4C60-89F690A122D0E039"
+			id="frame"
+			part_of_template="true"
+			uniqueguid_in_template="467EE5F7-B976-476A-9B5A8D780A94BEE6"
+			uniqueguid="31D4D5A2-CB80-4C60-89F690A122D0E039"
+			dimensions="90.00,90.00"
+			dock_point="Center"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="E64AE790-8667-4095-81D8445FDB321A27"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="EEA3E57D-0B97-454B-9E59C49B3DECD7FC"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="1E28409F-58E3-4BC3-B17AC5F8AF521013"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="2887D6CA-478F-4D6A-8DEA45C277E171EE"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="524AF6FA-7C00-4C9F-99964B4AC922F99C"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="07BB9477-A252-4B67-A11EF5E23BFF0A88"/>
+				<state_uniqueguid
+					name="selected_inactive"
+					uniqueguid="26165737-83E2-4F29-A860E9EE5F219BEC"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/fe_flat_button.png"
+					uniqueguid="20225812-7DB6-4998-82A1E5189296EE87"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/fe_flat_button_selected.png"
+					uniqueguid="2B0A1788-66CF-4157-A48A56872F08C96E"/>
 			</component_image_uniqueguids>
 			<user_properties>
 				<property
@@ -9872,6 +10180,81 @@
 			</override_images>
 		</icon>
 		<icon
+			this="AF3359E2-E3C0-4AB0-A2EE4A7573DB8105"
+			id="icon"
+			part_of_template="true"
+			uniqueguid_in_template="25291DEB-9506-4A02-94E9653AD171404E"
+			uniqueguid="AF3359E2-E3C0-4AB0-A2EE4A7573DB8105"
+			dimensions="96.00,100.00"
+			dock_point="Center"
+			layout_transition="Common UI/load_save_game"
+			priority="100"
+			sound_category="UI_FE_HUD_Main_Menu_Drop_Down">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="7A629510-E33E-4E1E-82874A5777FE4F29"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="D80FFB8E-BE66-47C3-B5AEB82089FAF0F1"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="51D81CC3-4D88-4969-B4A0E9FEE396A88C"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="BFE2401E-49A8-4EA8-9D3ED9F805D3F3AD"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="93831EF9-DC81-4F33-BE9DA25670772E9E"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="01CC3F91-9B2F-46A6-AE5523D874EF3972"/>
+				<state_uniqueguid
+					name="selected_inactive"
+					uniqueguid="7E0368F2-122A-4702-BCFEFA3392662B52"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/twitch_integration/icon_twitch_logo.png"
+					uniqueguid="7D6F236E-317D-4163-A152B6DAE883E038"/>
+			</component_image_uniqueguids>
+			<user_properties>
+				<property
+					name="dynamic_image"
+					value="0"/>
+				<property
+					name="override_sound"
+					value=""/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/twitch_integration/icon_twitch_logo.png"/>
+			</override_images>
+		</icon>
+		<icon
 			this="F7511B04-3454-49A7-BCEAE6968167FE4A"
 			id="icon"
 			part_of_template="true"
@@ -10849,6 +11232,30 @@
 				<state_uniqueguid
 					name="default"
 					uniqueguid="1A0A42CB-2113-4190-B72011D0B1AAAFA4"/>
+			</state_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+			</override_images>
+		</panel_smoke>
+		<panel_smoke
+			this="0C4BF212-657C-4BD6-9601F1AC68812154"
+			id="panel_smoke"
+			part_of_template="true"
+			uniqueguid_in_template="32628274-46E9-4052-B8752F280F7F45D8"
+			uniqueguid="0C4BF212-657C-4BD6-9601F1AC68812154"
+			dimensions="90.00,90.00"
+			dock_point="Bottom Center"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="EF3375C1-078B-486B-9B71EEFB448B7D77"/>
 			</state_uniqueguids>
 			<localised_texts>
 				<localised_text/>

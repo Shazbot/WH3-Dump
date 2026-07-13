@@ -96,6 +96,7 @@ function tiger_court:initialise()
 	tiger_court:add_ritual_listeners()
 	tiger_court:add_pooled_resource_listeners()
 	tiger_court:add_battle_listeners()
+	tiger_court:refresh_relics_vfx()
 end
 
 function tiger_court:initialise_shared_states()
@@ -463,6 +464,37 @@ core:add_listener(
 	end,
 	true
 )
+
+function tiger_court:refresh_relics_vfx()
+	local is_player_bhashiva = cm:get_local_faction_name(true) == self.config.faction_key
+	if not is_player_bhashiva then
+		return
+	end
+
+	local relics_regions = {
+		regions_with_relics_group_starting = bhashiva_campaign_config.regions_with_relics_group_starting,
+		regions_with_relics_group_mountains = bhashiva_campaign_config.regions_with_relics_group_mountains,
+		regions_with_relics_group_ivory_roads = bhashiva_campaign_config.regions_with_relics_group_ivory_roads,
+	}
+
+	for _, region_set in pairs(relics_regions) do
+		local region_list_si = cm:model():world():lookup_regions_from_region_group(region_set)
+		if is_regionlist(region_list_si) then
+			for i = 0, region_list_si:num_items() - 1 do
+				local region = region_list_si:item_at(i)
+				local relics_value = bhashiva_campaign:get_relics_resource_value_for_region(region)
+				if relics_value then
+					if relics_value > 0 then 
+						cm:add_garrison_residence_vfx(region:cqi(), self.config.relics_vfx_key, false)
+					else
+						cm:remove_garrison_residence_vfx(region:cqi(), self.config.relics_vfx_key)
+					end
+				end
+			end
+		end
+	end
+end
+
 --------------------------------------------------------------
 ---------------------------- UTIL ----------------------------
 --------------------------------------------------------------

@@ -968,7 +968,22 @@ function is_foreignslot(value)
 end;
 
 
+--- @function is_pooledresourcemanager
+--- @desc Returns true if the supplied value is a pooled resource manager interface, false otherwise.
+--- @p value value
+--- @r @boolean is pooled resource manager
+function is_pooledresourcemanager(value)
+	return string.sub(tostring(value), 1, 40) == "POOLED_RESOURCE_MANAGER_SCRIPT_INTERFACE";
+end;
 
+
+--- @function is_pooledresource
+--- @desc Returns true if the supplied value is a pooled resource interface, false otherwise.
+--- @p value value
+--- @r @boolean is pooled resource
+function is_pooledresource(value)
+	return string.sub(tostring(value), 1, 32) == "POOLED_RESOURCE_SCRIPT_INTERFACE";
+end;
 
 
 

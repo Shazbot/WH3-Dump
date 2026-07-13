@@ -294,6 +294,11 @@ function add_minor_cults_listeners()
 				local region_key = region:name();
 				
 				if MINOR_CULT_REGIONS[region_key] ~= nil then
+					if string.find(MINOR_CULT_REGIONS[region_key], "_extra") then
+						local faction = cm:model():world():faction_by_key(minor_cult_faction_key);
+						cm:remove_faction_foreign_slots_from_region(faction:command_queue_index(), region:cqi());
+						return
+					end
 					for i = 1, #MINOR_CULT_LIST do
 						if MINOR_CULT_LIST[i].cult.saved_data.region_key == region_key then
 							local faction = cm:model():world():faction_by_key(minor_cult_faction_key);

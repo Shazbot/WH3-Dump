@@ -2072,9 +2072,17 @@ end;
 --- @desc Removes and stops any event listeners with the specified name.
 --- @p string listener name
 function core_object:remove_listener(name_to_remove)
+	local removed_listeners = {}
 	for event_name, listeners in pairs(self.event_listeners) do
 		for i = #listeners, 1, -1 do
 			if listeners[i].name == name_to_remove then
+				if removed_listeners[name_to_remove] then
+					script_error("WARNING: Multiple listeners [" .. tostring(#removed_listeners[name_to_remove]) .. "] with the name [" .. name_to_remove .. "] are being removed in the same call to remove_listener(), which may cause instability. Please check the callstacks of the listeners for event [" .. event_name .. "] to find the culprit.")
+					table.insert(removed_listeners[name_to_remove], listeners[i])
+				else
+					removed_listeners[name_to_remove] = { listeners[i] }
+				end
+
 				table.remove(listeners, i);
 			end;
 		end;

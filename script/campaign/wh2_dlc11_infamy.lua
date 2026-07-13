@@ -233,20 +233,23 @@ function infamy:mission_success_listeners(context)
 
 			for i = 3, 1, -1 do
 				-- we check missions in reverse order to ensure the player only gets the top level of reward and not every tier of reward if they had a few missions stacked up.
-				if(mission_key == self.player_shanty_mission_key..i) then
+				if (mission_key == self.player_shanty_mission_key..i) then
 					-- target was other players
 					shanty_level = i
 					break
-				elseif(mission_key == self.shanty_mission_key..i) then
+				elseif (mission_key == self.shanty_mission_key..i) then
 					-- target was original ai target
 					shanty_level = i
 					self:kill_shanty_faction(i)
 					break
-				else
-					script_error("ERROR: Mission key :"..mission_key.." does not match expected sea shanty mission key prefix")
 				end
 			end
-			
+
+			if not shanty_level then
+				script_error("ERROR: Mission key :"..mission_key.." does not match expected sea shanty mission key prefix")
+				return
+			end
+
 			self.player_shanty_missions_active[shanty_level][faction_name] = false
 
 			if(self.player_shanty_levels[faction_name] < shanty_level) then

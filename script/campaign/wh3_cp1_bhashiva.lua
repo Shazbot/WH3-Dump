@@ -243,8 +243,8 @@ bhashiva_campaign_config = {
 				monster_high = "wh3_main_nur_cav_plague_drones_0",
 			},
 		},
-		distance_min = 4,
-		distance_max = 11,
+		distance_min = 5,
+		distance_max = 15,
 	},
 
 	key_variables = {
@@ -475,8 +475,8 @@ function bhashiva_campaign:add_listeners()
 			local relics_faction_factor_id = self.config.relics.factor_settlements_id
 
 			-- relics rewards processing
-			local region_resource = region_si:pooled_resource_manager():resource("wh3_cp1_cth_relics_settlements")
-			if region_resource and region_resource:value() ~= 0 then
+			local region_resource_value = self:get_relics_resource_value_for_region(region_si)
+			if region_resource_value and region_resource_value ~= 0 then
 				cm:entity_transfer_pooled_resource(region_si, relics_region_factor_id, faction_si, relics_faction_factor_id, 1)
 
 				if self.config.key_variables.narrative_state.main == 0 then -- narrative settlement trackers, check if player captures other relics than the intended ones
@@ -497,38 +497,6 @@ function bhashiva_campaign:add_listeners()
 		true
 	)
 
-	-- MarkerInteracted
-	core:add_listener(
-		"BhashivaNarrativeMarkerInteracted",
-		"MarkerInteracted",
-		function(context)
-			local marker_id = context:marker_id()
-			if not string.find(marker_id, "narrative_ie_bhashiva") then
-				return false
-			end
-
-			local character = context:family_member():character()
-			-- Heroes cannot interact with markers, just lords
-			if not character:has_military_force() then
-				return false
-			end
-
-			return true
-		end,
-		function(context)
-			local marker_id = context:marker_id()
-			local mission_data = self.config.mission_data
-			local faction_key = self.config.faction_key
-
-			for i, mission in pairs(mission_data) do
-				if marker_id == "marker_" .. mission.key then
-					cm:complete_scripted_mission_objective(faction_key, mission.key, mission.condition_script, true)
-				end
-			end
-		end,
-		true
-	)
-
 	core:add_listener(
 		"BhashivaNarrativeIncidentEvent",
 		"IncidentOccuredEvent",
@@ -542,17 +510,52 @@ function bhashiva_campaign:add_listeners()
 		function(context)
 			-- reveal relics incident
 			if context:dilemma() == self.config.incident_data.reveal_relics then
-				core:add_listener(
-					"BhashivaNarrativeRelicsIncidentClosed",
-					"PanelClosedCampaign",
-					true,
+				cm:callback(
 					function()
-						local local_faction = cm:get_local_faction(true)
-						if is_nil(local_faction) or local_faction:is_null_interface() then
-							return
-						end
-						local local_faction_cqi = local_faction:command_queue_index()
-						CampaignUI.TriggerCampaignScriptEvent(local_faction_cqi, "reveal_relics_incident_selected")
+						core:add_listener(
+							"BhashivaNarrativeRelicsIncidentClosed",
+							"PanelClosedCampaign",
+							true,
+							function()
+								local local_faction = cm:get_local_faction(true)
+								if is_nil(local_faction) or local_faction:is_null_interface() then
+									return
+								end
+								local local_faction_cqi = local_faction:command_queue_index()
+								CampaignUI.TriggerCampaignScriptEvent(local_faction_cqi, "reveal_relics_incident_selected")
+							end,
+							false
+						)
+					end,
+					0.5
+				)
+			end
+		end,
+		true
+	)
+
+	core:add_listener(
+		"BhashivaNarrativeIncidentChainEvent",
+		"IncidentOccuredEvent",
+		function(context)
+			local faction_si = cm:get_faction(self.config.faction_key)
+
+			if is_faction(faction_si) and context:faction() == faction_si and faction_si:is_human() then
+				return true
+			end
+		end,
+		function(context)
+
+			if context:dilemma() == self.config.incident_data.narrative_start then
+				ui_scripted_tour:toggle_shortcuts(false)
+				core:add_listener(
+					"BhashivaNarrativeChainIncidentClosed",
+					"ComponentLClickUp",
+					function(context)
+						return context.string == "text_button"
+					end,
+					function()
+						ui_scripted_tour:toggle_shortcuts(true)
 					end,
 					false
 				)
@@ -845,10 +848,12 @@ function bhashiva_campaign:trigger_mission(mission_data, faction_key, reissue)
 							self:updated_scripted_objective_count(mm, objective_key, objective_value, expected_value, 0.5)
 
 							if objective_value >= mission_data.condition_value then
-								cm:set_active_mission_status_for_faction(cm:get_faction(faction_key), mission_data.key, "SUCCEEDED")
+								return true
 							end
 						end
 					end
+
+					return false
 				end,
 				mission_data.condition_script
 			)
@@ -863,26 +868,48 @@ function bhashiva_campaign:trigger_mission(mission_data, faction_key, reissue)
 
 			mm:add_new_scripted_objective(
 				objective_key,
+				"MarkerInteracted",
+				function(context)
+					local marker_id = context:marker_id()
+					if not string.find(marker_id, "narrative_ie_bhashiva") then
+						return false
+					end
+
+					local character = context:family_member():character()
+					-- Heroes cannot interact with markers, just lords
+					if not character:has_military_force() then
+						return false
+					end
+
+					return true
+				end,
+				mission_data.condition_script
+			)
+
+			mm:add_scripted_objective_failure_condition(
 				"FactionTurnStart",
 				function(context)
 					local faction_key = self.config.faction_key
 					local faction_si = cm:get_faction(faction_key)
+
 					if context:faction():name() == faction_key and cm:mission_is_active_for_faction(faction_si, mission_data.key) then
 						objective_value = objective_value - 1
 						self.config.key_variables.mission_variables.markers_spawned[mission_data.key] = objective_value
 
 						self:updated_scripted_objective_count(mm, objective_key, objective_value, nil)
-						
+
 						if objective_value == 0 then
-							cm:set_active_mission_status_for_faction(cm:get_faction(faction_key), mission_data.key, "CANCELLED")
 							if mission_data.difficulty then
 								mission_data.difficulty = 2
 							end
 							self:trigger_next_mission(mission_data)
+
+							return true
 						end
 					end
-				end,
-				mission_data.condition_script
+
+					return false
+				end
 			)
 
 			self:updated_scripted_objective_count(mm, objective_key, objective_value, nil, 0.5)
@@ -1134,28 +1161,6 @@ function bhashiva_campaign:spawn_campaign_marker_from_character(mission_key, fac
 	end
 end
 
-function bhashiva_campaign:find_army_spawn_location_from_position(invasion_faction_key, pos_x, pos_y, distance_min, distance_max)
-	local distance_x = cm:random_number(distance_max, distance_min)
-	if cm:random_number(100, 1) > 50 then
-		distance_x = distance_x * -1
-	end
-	pos_x = pos_x + distance_x
-
-	local distance_y = cm:random_number(distance_max, distance_min)
-	if cm:random_number(100, 1) > 50 then
-		distance_y = distance_y * -1
-	end
-	pos_y = pos_y + distance_y
-
-	local spawn_x, spawn_y = cm:find_valid_spawn_location_for_army_from_position(invasion_faction_key, pos_x, pos_y, true)
-
-	if spawn_x == -1 then
-		spawn_x, spawn_y = cm:find_valid_spawn_location_for_army_from_position(invasion_faction_key, pos_x, pos_y, false)
-	end
-
-	return spawn_x, spawn_y
-end
-
 function bhashiva_campaign:spawn_chaos_army_from_position(mission_data, faction_key)
 	local mission_key = mission_data.key
 	local chaos_god = mission_data.chaos_god
@@ -1179,14 +1184,18 @@ function bhashiva_campaign:spawn_chaos_army_from_position(mission_data, faction_
 	local spawn_x = -1
 	local spawn_y = -1
 	local tries = 0
-	local max_tries = 10
+	local max_tries = 3
 	while spawn_x == -1 and tries < max_tries do
-		spawn_x, spawn_y = self:find_army_spawn_location_from_position(invasion_faction_key, marker_x, marker_y, distance_min, distance_max)
+		local distance = cm:random_number(distance_max, distance_min)
+		spawn_x, spawn_y = cm:find_valid_spawn_location_for_character_from_position("rebels", marker_x, marker_y, true, distance)
+		if spawn_x == -1 then
+			spawn_x, spawn_y = cm:find_valid_spawn_location_for_character_from_position("rebels", marker_x, marker_y, false, distance)
+		end
 		tries = tries + 1
 	end
 	if spawn_x == -1 then
 		-- Fallback: Since we've pinged the marker, it should be valid...
-		spawn_x, spawn_y = self:find_army_spawn_location_from_position(invasion_faction_key, marker_x, marker_y, 0, 0)
+		spawn_x, spawn_y = cm:find_valid_spawn_location_for_character_from_position("rebels", marker_x, marker_y, false, 0)
 		if spawn_x == -1 then
 			-- ...but you never know!
 			script_error("ERROR: Failed to spawn army for invasion " .. invasion_key)
@@ -1335,13 +1344,12 @@ function bhashiva_campaign:assign_settlement_relics(settlement_list, factor, val
 	local region_list_si = cm:model():world():lookup_regions_from_region_group(settlement_list)
 	local faction_si = cm:get_faction(self.config.faction_key)
 
-	if region_list_si then
+	if is_regionlist(region_list_si) then
 		for i = 0, region_list_si:num_items() - 1 do
 			local region = region_list_si:item_at(i)
-			local relics_value = region:pooled_resource_manager():resource("wh3_cp1_cth_relics_settlements"):value()
-
-			if region then
-				if region:owning_faction() ~= faction_si then
+			if region:owning_faction() ~= faction_si then
+				local relics_value = self:get_relics_resource_value_for_region(region)
+				if relics_value then
 					if value > 0 then
 						cm:entity_add_pooled_resource_transaction(region, factor, value)
 					elseif value < 0 and relics_value > 0 then
@@ -1402,23 +1410,37 @@ function bhashiva_campaign:handle_regular_relics_reminder()
 	local region_list_si = cm:model():world():lookup_regions_from_region_group(starting_relic_regions)
 	local faction_si = cm:get_faction(self.config.faction_key)
 
-	if region_list_si and region_list_si:num_items() > 1 then
+	if is_regionlist(region_list_si) and region_list_si:num_items() > 1 then
 		for i = 0, region_list_si:num_items() - 1 do
-			local random_roll = cm:random_number(region_list_si:num_items())
+			local random_roll = cm:random_number(region_list_si:num_items() - 1, 0)
 			local region_si = region_list_si:item_at(random_roll)
-			if region_si then
-				local relics_value = region_si:pooled_resource_manager():resource("wh3_cp1_cth_relics_settlements"):value()
-				if relics_value > 0 then
-					local reveal_region = {region_si:name()}
-
-					cm:trigger_incident_with_targets(faction_cqi, self.config.incident_data.relics_reminder, 0, 0, 0, 0, region_si:cqi(), 0)
-					self:reveal_regions(reveal_region)
-
-					return
-				end
+			local relics_value = self:get_relics_resource_value_for_region(region_si)
+			if relics_value and relics_value > 0 then
+				local reveal_region = {region_si:name()}
+				cm:trigger_incident_with_targets(faction_cqi, self.config.incident_data.relics_reminder, 0, 0, 0, 0, region_si:cqi(), 0)
+				self:reveal_regions(reveal_region)
+				return
 			end
 		end
 	end
+end
+
+function bhashiva_campaign:get_relics_resource_value_for_region(region_si)
+	if not is_region(region_si) then
+		return nil
+	end
+
+	local pooled_resource_manager = region_si:pooled_resource_manager()
+	if not is_pooledresourcemanager(pooled_resource_manager) then
+		return nil
+	end
+
+	local region_resource = pooled_resource_manager:resource(self.config.relics_region.key)
+	if not is_pooledresource(region_resource) then
+		return nil
+	end
+
+	return region_resource:value()
 end
 
 --------------------------------------------------------------

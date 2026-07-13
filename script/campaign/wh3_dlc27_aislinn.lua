@@ -19,7 +19,8 @@ aislinn_narrative = {
 	triggered_sea_lanes = false,
 	ai_aislinn_unlock_turn = 9,
 	ai_aislinn_unlock_chance = 25,
-	ai_aislinn_unlocked = false
+	ai_aislinn_unlocked = false,
+	ai_aislinn_to_declare_war_on_clan_spittel = false,
 };
 
 function aislinn_narrative:initialise()
@@ -171,6 +172,11 @@ function aislinn_narrative:add_ai_listeners()
 			local faction = context:faction();
 			local turn_number = cm:turn_number();
 
+			if self.ai_aislinn_to_declare_war_on_clan_spittel then
+				cm:force_declare_war(self.faction_key, "wh2_dlc11_cst_vampire_coast", true, true);
+				self.ai_aislinn_to_declare_war_on_clan_spittel = false;
+			end
+
 			if self.ai_aislinn_unlocked == false then
 				if turn_number >= self.ai_aislinn_unlock_turn and cm:model():random_percent(self.ai_aislinn_unlock_chance) then
 					out("aislinn unlocked via turn - "..turn_number)
@@ -182,8 +188,11 @@ function aislinn_narrative:add_ai_listeners()
 					cm:zero_action_points(ch_str);
 					cm:teleport_to(ch_str, 295, 243);
 
+					-- If Aislinn declares war on two factions at once, if both are allies/vassals to the same human faction
+					-- we would end up with multiple pending actions about joining allies wars, which causes softlocks.
+					-- Because of that, declare war on the second faction on the following turn.
+					self.ai_aislinn_to_declare_war_on_clan_spittel = true;
 					cm:force_declare_war(self.faction_key, "wh2_dlc11_cst_vampire_coast", true, true);
-					cm:force_declare_war(self.faction_key, "wh2_main_skv_clan_spittel", true, true);
 					cm:force_diplomacy("faction:"..self.faction_key, "all", "war", true, true, false);
 				elseif faction:factions_at_war_with():is_empty() == false then
 					out("aislinn unlocked via war - "..turn_number)
@@ -675,6 +684,7 @@ cm:add_saving_game_callback(
 		cm:save_named_value("aislinn_trigger_final_battle_turn", aislinn_narrative.trigger_final_battle_turn, context);
 		cm:save_named_value("aislinn_triggered_sea_lanes", aislinn_narrative.triggered_sea_lanes, context);
 		cm:save_named_value("aislinn_ai_aislinn_unlocked", aislinn_narrative.ai_aislinn_unlocked, context);
+		cm:save_named_value("aislinn_ai_aislinn_to_declare_war_on_clan_spittel", aislinn_narrative.ai_aislinn_to_declare_war_on_clan_spittel, context);
 	end
 );
 cm:add_loading_game_callback(
@@ -686,6 +696,7 @@ cm:add_loading_game_callback(
 			aislinn_narrative.trigger_final_battle_turn = cm:load_named_value("aislinn_trigger_final_battle_turn", aislinn_narrative.trigger_final_battle_turn, context);
 			aislinn_narrative.triggered_sea_lanes = cm:load_named_value("aislinn_triggered_sea_lanes", aislinn_narrative.triggered_sea_lanes, context);
 			aislinn_narrative.ai_aislinn_unlocked = cm:load_named_value("aislinn_ai_aislinn_unlocked", aislinn_narrative.ai_aislinn_unlocked, context);
+			aislinn_narrative.ai_aislinn_to_declare_war_on_clan_spittel = cm:load_named_value("aislinn_ai_aislinn_to_declare_war_on_clan_spittel", aislinn_narrative.ai_aislinn_to_declare_war_on_clan_spittel, context);
 
 			if aislinn_narrative.narrative_state == 7 then
 				aislinn_narrative:set_ally_strings();

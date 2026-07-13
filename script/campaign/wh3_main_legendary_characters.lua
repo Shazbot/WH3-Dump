@@ -769,7 +769,8 @@ character_unlocking.character_data = {
 				"wh3_main_dwf_the_ancestral_throng",
 				"wh2_dlc17_dwf_thorek_ironbrow",
 				"wh_main_dwf_karak_izor",
-				"wh_main_dwf_karak_kadrin"
+				"wh_main_dwf_karak_kadrin",
+				"wh3_cp1_cth_tiger_warriors"
 			},
 			wh3_main_chaos = {
 				"wh_main_emp_wissenland",
@@ -856,6 +857,9 @@ character_unlocking.character_data = {
 			wh_main_dwf_karak_kadrin = {
 				["main_warhammer"] = "wh3_dlc25_qb_gotrek_felix_ie_ungrim"
 			},
+			wh3_cp1_cth_tiger_warriors = {
+				["main_warhammer"] = "wh3_cp1_qb_gotrek_felix_ie_bhashiva"
+			},
 		},
 		ancillaries = {
 			"wh2_pro08_anc_weapon_gotrek_axe",
@@ -885,7 +889,8 @@ character_unlocking.character_data = {
 				"wh3_dlc25_qb_gotrek_felix_ie_ungrim",
 				"wh3_dlc25_qb_gotrek_felix_ie_volkmar",
 				"wh3_dlc25_qb_gotrek_felix_ie_yuan_bo",
-				"wh3_dlc25_qb_gotrek_felix_ie_zhao_ming"
+				"wh3_dlc25_qb_gotrek_felix_ie_zhao_ming",
+				"wh3_cp1_qb_gotrek_felix_ie_bhashiva"
 			},
 			wh3_main_chaos = {
 				"wh3_dlc25_qb_gotrek_felix_chaos_boris",

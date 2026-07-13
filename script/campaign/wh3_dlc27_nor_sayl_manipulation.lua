@@ -283,12 +283,33 @@ end
 		},
 		["wh3_dlc27_sayl_manipulations_faction_war"] = {
 			callback = function(context)
+				local sayl_faction = cm:get_faction(sayl_manipulation_config.faction_key)
 				local faction = context:ritual_target_faction()
 				for i = 0, faction:factions_met():num_items() - 1 do
 					local known_faction = faction:factions_met():item_at(i)
 					local faction_whitelisted = sayl_manipulation.config.manipulation_war_whitelist_targets[faction:name()] == known_faction:name()
-					if not known_faction:is_human() and not faction_whitelisted then
-						cm:force_declare_war(faction:name(), known_faction:name(), false, false)
+					if not faction_whitelisted and not known_faction:is_dead() and not faction:at_war_with(known_faction) then
+						-- We have issues with multiple pending actions about wars involving humans, like joining a vassal's war. We must avoid those.
+						-- (Note that due to the campaign variables diplomacy_*_must_be_invited_into_*_wars (for example diplomacy_military_allies_must_be_invited_into_offensive_wars),
+						-- this is currently valid only for vassals/masters and not military/defensive allies. For those, the "do not invite allies" flag is respected)
+						-- Do not declare war on Sayl, his human allies or any of their vassals.
+						-- Declare war on all other masters of vassals that we should declare war on.
+						local main_or_master_faction = known_faction
+						local is_vassal = false
+						if known_faction:is_vassal() then
+							main_or_master_faction = known_faction:master()
+							is_vassal = true
+						end
+						if not main_or_master_faction:is_human()
+							or (main_or_master_faction ~= sayl_faction and not main_or_master_faction:allies_with(sayl_faction))
+						then
+							if is_vassal then
+								-- If the faction is a vassal, declare war on their master instead. This should drag the vassals into the war as well.
+								cm:force_declare_war(faction:name(), main_or_master_faction:name(), false, false)
+							else
+								cm:force_declare_war(faction:name(), known_faction:name(), false, false)
+							end
+						end
 					end
 				end
 			

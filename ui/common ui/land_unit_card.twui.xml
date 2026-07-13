@@ -202,6 +202,9 @@
 					<exchange_arrow this="1794E05A-E2B2-4353-B03E9586075AE18B"/>
 					<scrap_upgrades_frame this="E97A96F9-3E36-4194-A5297B57BE07F77D"/>
 					<cp1_cth_banners_frame this="2D3DF397-17B4-4B87-99B5179390549C30"/>
+					<twitch_components this="6656CD1C-B61F-4EFF-BB86F4C99A6D4959">
+						<dy_counter this="C829BD8C-3563-4B49-A56CCCD7F2110810"/>
+					</twitch_components>
 				</card_image_holder>
 				<dev_heal_holder this="027095B6-8E88-42A5-B2257787C3CF5521">
 					<dev_heal_unit this="B13F297A-731B-473B-ABE6B16C3320B296">
@@ -4033,6 +4036,70 @@
 				</newstate>
 			</states>
 		</dlc27_sla_daemonic_attraction_marker>
+		<dy_counter
+			this="C829BD8C-3563-4B49-A56CCCD7F2110810"
+			id="dy_counter"
+			offset="10.00,22.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Bottom Center"
+			dock_offset="0.00,2.00"
+			component_anchor_point="0.50,1.00"
+			uniqueguid="C829BD8C-3563-4B49-A56CCCD7F2110810"
+			currentstate="04BCC2D2-51A8-4839-9DED933C8FEABFE7"
+			defaultstate="04BCC2D2-51A8-4839-9DED933C8FEABFE7">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoServiceManager manager, CcoCampaignUnit unit"
+					context_function_id="manager.GetRaffleUnitIndex(unit) + 1">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="UnitNameRaffleUnitsChange"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="CA998785-A019-4BAC-B34B3C18D4C2BB8B"
+					uniqueguid="CA998785-A019-4BAC-B34B3C18D4C2BB8B"
+					imagepath="ui/skins/default/unit_cat_holder_round.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="04BCC2D2-51A8-4839-9DED933C8FEABFE7"
+					name="default"
+					width="24"
+					height="24"
+					tooltip="{{tr:uied_component_texts_localised_string_wh3_cp1_twitch_integration_selected_unit_raffle_position}}"
+					tooltiplabel="StateTooltip_7fd51c81"
+					interactive="true"
+					disabled="true"
+					uniqueguid="04BCC2D2-51A8-4839-9DED933C8FEABFE7">
+					<imagemetrics>
+						<image
+							this="D8CAA6F9-FA87-4805-A4F62A68121256D4"
+							uniqueguid="D8CAA6F9-FA87-4805-A4F62A68121256D4"
+							componentimage="CA998785-A019-4BAC-B34B3C18D4C2BB8B"
+							width="24"
+							height="24"
+							dockpoint="Center"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<component_text
+						text="99"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Never split"
+						textlabel="StateText_7fd51c81"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_10"/>
+				</default>
+			</states>
+		</dy_counter>
 		<dy_icon
 			this="5E4FE953-8D04-4105-B4D1617B7FD38E11"
 			id="dy_icon"
@@ -6764,7 +6831,7 @@
 							value=""/>
 						<property
 							name="condition_func"
-							value="self.CurrentState != &quot;unknown&quot; "/>
+							value="self.CurrentState != &quot;unknown&quot;  &amp;&amp; Component(&quot;twitch_unit_name_raffle_panel&quot;).IsVisibleFromRoot == false"/>
 						<property
 							name="pin_parent_id"
 							value="unit_info_panel_holder"/>
@@ -6814,6 +6881,11 @@
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context callback_id="TopmostWhenDraggingCallback"/>
+				<callback_with_context callback_id="ContextInitGameCore"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoGameCore"
+					context_function_id="ServiceManagerContext"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -11871,6 +11943,59 @@
 				</queued_local>
 			</states>
 		</turns>
+		<twitch_components
+			this="6656CD1C-B61F-4EFF-BB86F4C99A6D4959"
+			id="twitch_components"
+			offset="8.00,66.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			docking="Bottom Center"
+			dock_offset="0.00,-20.00"
+			component_anchor_point="0.50,1.00"
+			tooltipslocalised="true"
+			uniqueguid="6656CD1C-B61F-4EFF-BB86F4C99A6D4959"
+			currentstate="ECF1E023-07D2-4FE0-A1267E1ED9B408D6"
+			defaultstate="ECF1E023-07D2-4FE0-A1267E1ED9B408D6">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoServiceManager manager, CcoCampaignUnit unit"
+					context_function_id="manager.GetRaffleUnitIndex(unit) &gt;= 0">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="UnitNameRaffleUnitsChange"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="1BEA1C5E-ADB6-4A0D-9DDB25CFDD208E08"
+					uniqueguid="1BEA1C5E-ADB6-4A0D-9DDB25CFDD208E08"
+					imagepath="ui/skins/default/twitch_integration/icon_twitch_logo.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="ECF1E023-07D2-4FE0-A1267E1ED9B408D6"
+					name="default"
+					width="44"
+					height="44"
+					uniqueguid="ECF1E023-07D2-4FE0-A1267E1ED9B408D6">
+					<imagemetrics>
+						<image
+							this="74C5F774-A04F-466B-93C2D374F11786DE"
+							uniqueguid="74C5F774-A04F-466B-93C2D374F11786DE"
+							componentimage="1BEA1C5E-ADB6-4A0D-9DDB25CFDD208E08"
+							offset="0.00,-6.00"
+							width="44"
+							height="44"
+							dockpoint="Center"
+							dock_offset="0.00,-6.00"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</twitch_components>
 		<unit_category_icon
 			this="3F75D187-8A5A-4F95-AD3E17E14E991F01"
 			id="unit_category_icon"

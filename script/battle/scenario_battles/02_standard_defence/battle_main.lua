@@ -273,7 +273,7 @@ function notify_player_of_enemy_cavalry_advance()
 	cutscene_cavalry_advance:action(function() cutscene_cavalry_advance:show_esc_prompt(true) end, 1000);
 
 	-- failsafe skip
-	cutscene_cavalry_advance:action(function() cutscene_cavalry_advance:skip() end, cutscene_length);
+	cutscene_cavalry_advance:action(function() cutscene_cavalry_advance:skip() end, 1000);
 
 	cutscene_cavalry_advance:start();
 

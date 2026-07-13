@@ -38,14 +38,19 @@ nurgle_plagues = {
 		"wh3_dlc25_nur_random_plague_2_settlement_negative",
 		"wh3_dlc25_nur_random_plague_3_settlement_negative",
 		"wh3_dlc25_nur_random_plague_4_settlement_negative",
-		"wh3_dlc25_nur_random_plague_5_settlement_negative"
+		"wh3_dlc25_nur_random_plague_5_settlement_negative",
+		"wh3_dlc25_nur_settlement_1_negative",
+		"wh3_dlc25_nur_settlement_2_negative",
+		"wh3_dlc25_nur_settlement_3_negative",
+		"wh3_dlc25_nur_settlement_4_negative",
+		"wh3_dlc25_nur_settlement_5_negative"
 	},
 
 	force_bundle_list = {
 		"wh3_dlc25_epidemius_plague_bundle_1_scripted",
 		"wh3_dlc25_epidemius_plague_bundle_2_scripted",
 		"wh3_dlc25_epidemius_plague_bundle_3_scripted",
-		"wh3_dlc25_epidemius_plague_bundle_4_scripted",
+		"wh3_dlc25_epidemius_plague_bundle_4_scripted"
 	},
 
 	

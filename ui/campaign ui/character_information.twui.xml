@@ -6072,10 +6072,10 @@
 							value="CampaignTurnStart"/>
 						<property
 							name="event4"
-							value="CharacterMoveStart"/>
+							value="CharacterMoveStartAny"/>
 						<property
 							name="event5"
-							value="CharacterMoveEnd"/>
+							value="CharacterMoveEndAny"/>
 						<property
 							name="event6"
 							value="CampaignSelectionChanged"/>
@@ -6090,7 +6090,7 @@
 				<callback_with_context
 					callback_id="ContextCommandLeftClick"
 					context_object_id="CcoCampaignRitual"
-					context_function_id="DoIfElse(TargettingContext.IsTargettingActive &amp;&amp; TargettingContext.RitualContext == this, Do(TargettingContext.ClearTarget, TargettingContext.EnableTargetting(false)), RitualInteractionContext.EnableTargetting(true))"/>
+					context_function_id="DoIfElse(TargettingContext.IsTargettingActive &amp;&amp; TargettingContext.RitualContext == this, Do(TargettingContext.ClearTarget, RitualInteractionContext(SelectedCharacter).EnableTargetting(false)), RitualInteractionContext(SelectedCharacter).EnableTargetting(true))"/>
 				<callback_with_context
 					callback_id="ContextCommandEvent"
 					context_object_id="CcoCampaignRitual"
@@ -14719,7 +14719,7 @@
 		<holder_2
 			this="4F5EF4D2-2D8C-4ADB-AD40F889E5E97DC9"
 			id="holder_2"
-			offset="62.00,-15.00"
+			offset="62.00,-16.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			tooltipslocalised="true"
@@ -14736,11 +14736,11 @@
 		<holder_3
 			this="4E0187E6-A712-4A2A-A16D1E4A6C9A4F2C"
 			id="holder_3"
-			offset="112.00,-10.00"
+			offset="112.00,-22.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			docking="Center"
-			dock_offset="112.00,-10.00"
+			dock_offset="112.00,-22.00"
 			component_anchor_point="0.50,0.50"
 			tooltipslocalised="true"
 			uniqueguid="4E0187E6-A712-4A2A-A16D1E4A6C9A4F2C"
