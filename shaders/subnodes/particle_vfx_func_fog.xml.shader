@@ -1,0 +1,5 @@
+<TECHNIQUE_COLLECTION>
+	<serialise_version>3</serialise_version>
+	<TECHNIQUES/>
+	<PARAM_COMMENTS/>
+</TECHNIQUE_COLLECTION>
